@@ -57,7 +57,6 @@ gem "observer", "~> 0.1.2"
 gem "octokit"
 gem "omniauth-rails_csrf_protection", "~> 1"
 gem "omniauth-saml", "~> 2"
-gem "orthotypo"#, path: '../../noesya/orthotypo'
 gem "pexels", "~> 0"
 gem "pg", "~> 1"
 gem "pghero"

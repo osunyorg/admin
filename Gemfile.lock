@@ -445,9 +445,6 @@ GEM
       time
       uri
     orm_adapter (0.5.0)
-    orthotypo (1.0.4)
-      htmlentities
-      nokogiri
     parser (3.3.2.0)
       ast (~> 2.4.1)
       racc
@@ -708,7 +705,6 @@ DEPENDENCIES
   octokit
   omniauth-rails_csrf_protection (~> 1)
   omniauth-saml (~> 2)
-  orthotypo
   pexels (~> 0)
   pg (~> 1)
   pg_query

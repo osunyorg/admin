@@ -7,7 +7,6 @@ class Static::Html < Static::Default
       # if no whitespace in the next line html in static won't be on one line
       @prepared.gsub! "\n", ' '
       @prepared = clean_empty_paragraphs_at_beginning_and_end @prepared
-      @prepared = @prepared.ortho(locale: locale)
       # TODO ça ne doit plus être utile depuis un siècle
       @prepared.gsub! "/rails/active_storage", "#{@university.url}/rails/active_storage"  
       # clean_empty_paragraphs_at_beginning_and_end re-send \n, because of Nokogiri. 
