@@ -7,7 +7,6 @@ class Static::Text < Static::Default
       @prepared = @text.to_s.strip.dup
       @prepared = strip_tags @prepared
       @prepared = CGI.unescapeHTML @prepared
-      @prepared = @prepared.ortho(locale: locale)
       @prepared = indent @prepared
       @prepared = sanitize @prepared
     end
