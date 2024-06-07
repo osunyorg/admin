@@ -98,10 +98,6 @@ class Git::Providers::Github < Git::Providers::Abstract
     client.create_commit repository, sub_commit_message, new_tree[:sha], base_commit_sha
   end
 
-  def previous_sha(git_file)
-    git_sha(git_file.previous_path)
-  end
-
   def computed_sha(string)
     # Git SHA-1 is calculated from the String "blob <length>\x00<contents>"
     # Source: https://alblue.bandlem.com/2011/08/git-tip-of-week-objects.html

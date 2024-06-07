@@ -38,7 +38,7 @@ class Git::Providers::Abstract
   end
 
   def previous_sha(git_file)
-    raise NotImplemetedError
+    git_sha(git_file.previous_path)
   end
 
   def computed_sha(string)
