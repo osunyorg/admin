@@ -34,6 +34,7 @@ class Static::Default
   end
 
   def turn_linebreak_to_br(text)
+    text.gsub! "\r", "\n"
     text.gsub! "\r\n", "\n"
     text.gsub! "\n", "<br>"
     text
