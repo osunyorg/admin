@@ -34,8 +34,12 @@ class Static::Default
   end
 
   def turn_linebreak_to_br(text)
+    # Order matters!
+    # First, replace the 2 signs
     text.gsub! "\r\n", "\n"
+    # The, the isolated \r (if you do it first you get \n\n)
     text.gsub! "\r", "\n"
+    # Then the \n are turned
     text.gsub! "\n", "<br>"
     text
   end
