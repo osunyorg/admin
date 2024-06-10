@@ -21,7 +21,7 @@
         <% unless @university.contribution_amount.to_i.zero? %>
           <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
             <td><%= University.human_attribute_name('invoice_date') %></td>
-            <td class="text-end"><%= l(@university.invoice_date, format: "%d %B") %></td>
+            <td class="text-end"><%= l(@university.invoice_date, format: "%d %B") if @university.invoice_date %></td>
           </tr>
           <tr class="<%= @university.invoice_proximity.blank? ? '' : "table-#{@university.invoice_proximity}" %>">
             <td><%= University.human_attribute_name('contribution_amount') %></td>
