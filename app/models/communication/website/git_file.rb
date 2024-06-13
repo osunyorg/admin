@@ -75,7 +75,12 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def self.analyze_if_blob(object)
     return unless object.is_a? ActiveStorage::Blob
-    object.analyze unless object.analyzed?
+    begin
+      object.analyze unless object.analyzed?
+    rescue
+      # https://github.com/osunyorg/admin/issues/1669
+      puts "Blob #{object} crashed during analysis"
+    end
   end
 
   def template_static
