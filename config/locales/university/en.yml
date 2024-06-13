@@ -11,6 +11,7 @@ en:
         is_really_a_university: Is really a university
         identifier: Identifier
         invoice_date: Contribution date
+        languages: Languages
         logo: Logo
         name: Name
         private: Private
@@ -181,6 +182,7 @@ en:
     hints:
       university:
         is_really_a_university: Uncheck this to hide the 5 realms.
+        languages: "Those languages are currently used on websites: %{used_languages}"
         sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
         sso_button_label: "Default: Sign in via SSO"
       university_organization:

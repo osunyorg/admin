@@ -114,4 +114,5 @@ class University < ApplicationRecord
   def destroy_remaining_blobs
     active_storage_blobs.delete_all
   end
+
 end
