@@ -1,10 +1,7 @@
 <% if about.available_languages.many? %>
   <%= t('admin.i18n.in', lang: language_name(about.language.iso_code).downcase) %>
 
-  <%
-    route_args = about.is_direct_object?  ? [:admin, about.becomes(about.class.base_class)]
-                                          : [:show_in_language, :admin, about.becomes(about.class.base_class)]
-  %>
+  <% route_args = [:admin, about.becomes(about.class.base_class)] %>
   <%
     links = about.available_languages.map { |language|
       next if language.id == about.language_id

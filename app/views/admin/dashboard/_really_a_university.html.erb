@@ -32,7 +32,7 @@
         <%
         next unless can? :read, part.first
         class_name = part.first
-        path = send part.last
+        path = send part.last, lang: current_language.iso_code
         title = class_name.model_name.human(count: 2)
         %>
         <li>

@@ -29,7 +29,7 @@ module Admin::Categorizable
 
   def categories
     categories_class.where(communication_website_id: @website.id)
-                   .for_language(current_website_language)
+                   .for_language(current_language)
                    .ordered
   end
 

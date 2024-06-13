@@ -26,13 +26,13 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def show
-    @all_pages = @website.pages.accessible_by(current_ability).for_language(current_website_language)
+    @all_pages = @website.pages.accessible_by(current_ability).for_language(current_language)
     @pages = @all_pages.latest
-    @all_posts = @website.posts.accessible_by(current_ability).for_language(current_website_language)
+    @all_posts = @website.posts.accessible_by(current_ability).for_language(current_language)
     @posts = @all_posts.latest
-    @all_events = @website.events.accessible_by(current_ability).for_language(current_website_language)
+    @all_events = @website.events.accessible_by(current_ability).for_language(current_language)
     @events = @all_events.latest
-    @all_projects = @website.projects.accessible_by(current_ability).for_language(current_website_language)
+    @all_projects = @website.projects.accessible_by(current_ability).for_language(current_language)
     @projects = @all_projects.latest
     breadcrumb
   end
@@ -103,7 +103,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def default_url_options
     options = {}
-    options[:lang] = current_website_language.iso_code if @website&.persisted?
+    options[:lang] = current_language.iso_code if @website&.persisted?
     options
   end
 end

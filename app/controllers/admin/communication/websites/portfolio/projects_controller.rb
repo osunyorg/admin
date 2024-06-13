@@ -11,7 +11,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   has_scope :for_category
 
   def index
-    @projects = apply_scopes(@projects).for_language(current_website_language)
+    @projects = apply_scopes(@projects).for_language(current_language)
                                      .ordered
                                      .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/portfolio'
@@ -90,7 +90,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   def categories
     @website.portfolio_categories
-            .for_language(current_website_language)
+            .for_language(current_language)
             .ordered
   end
 
@@ -98,7 +98,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     @filters = ::Filters::Admin::Communication::Websites::Portfolio::Projects.new(
         current_user, 
         @website, 
-        current_website_language
+        current_language
       ).list
   end
 
@@ -112,7 +112,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     )
     .merge(
       university_id: current_university.id,
-      language_id: current_website_language.id
+      language_id: current_language.id
     )
   end
 end

@@ -6,10 +6,10 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
 
   protected
 
-  def current_website_language
-    @current_website_language ||= @website.best_language_for(params[:lang])
+  def current_language
+    @current_language ||= @website.best_language_for(params[:lang])
   end
-  helper_method :current_website_language
+  helper_method :current_language
 
   def current_subnav_context
     'navigation/admin/communication/website' if @website && @website.persisted?
@@ -25,7 +25,7 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
     options = {}
     if @website.present?
       options[:website_id] = @website.id
-      options[:lang] = current_website_language.iso_code
+      options[:lang] = current_language.iso_code
     end
     options
   end

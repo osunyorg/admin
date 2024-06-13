@@ -35,7 +35,6 @@ namespace :university do
     end
     member do
       get :static
-      get "/translations/:lang" => "people#in_language", as: :show_in_language
       get 'experiences' => 'people/experiences#edit'
       patch 'experiences' => 'people/experiences#update'
     end

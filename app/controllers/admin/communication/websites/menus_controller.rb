@@ -4,7 +4,7 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
   include Admin::Translatable
 
   def index
-    @menus = @menus.for_language(current_website_language).ordered
+    @menus = @menus.for_language(current_language).ordered
     breadcrumb
   end
 
@@ -68,7 +68,7 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
           .permit(:title, :identifier)
           .merge(
             university_id: current_university.id,
-            language_id: current_website_language.id
+            language_id: current_language.id
           )
   end
 end
