@@ -14,6 +14,10 @@
           </tr>
         <% end %>
         <tr>
+          <td><%= Language.model_name.human(count: @university.languages.count) %></td>
+          <td class="text-end"><%= @university.languages.ordered.join(', ') %></td>
+        </tr>
+        <tr>
           <td><%= t('server_admin.universities.users_count') %></td>
           <td class="text-end"><%= link_to @university.users.not_server_admin.count, "#{@university.url}/admin/users", target: :_blank %></td>
         </tr>
