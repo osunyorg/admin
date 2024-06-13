@@ -60,6 +60,7 @@ class University < ApplicationRecord
   has_many :imports, dependent: :destroy
   has_many :apps, dependent: :destroy
   belongs_to :default_language, class_name: "Language"
+  has_and_belongs_to_many :languages
 
   validates_presence_of :name
   validates :sms_sender_name, presence: true, length: { maximum: 11 }
