@@ -12,6 +12,8 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
                       .for_language_id(current_university.default_language_id)
                       .ordered
 
+    @feature_nav = 'navigation/admin/university/organizations'
+
     respond_to do |format|
       format.html {
         @organizations = @organizations.page(params[:page]).per(24)

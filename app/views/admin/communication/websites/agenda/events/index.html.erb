@@ -1,18 +1,16 @@
 <% content_for :title, Communication::Website::Agenda::Event.model_name.human(count: 2) %>
 
-<% content_for :title_right do %>
+<p>
   <%= @events.total_count %>
   <%= Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase %>
-<% end %>
+</p>
 
-<% 
-title = Communication::Website::Agenda::Event.model_name.human(count: 2)
-action = create_link Communication::Website::Agenda::Event 
-%>
-<%= osuny_panel title, action: action do %>
-  <%= render 'filters', current_path: admin_communication_website_agenda_events_path, filters: @filters %>
-  <%= render 'admin/communication/websites/agenda/events/list', events: @events %>
-  <%= paginate @events %>
-<% end %>
+<%= render 'filters', current_path: admin_communication_website_agenda_events_path, filters: @filters %>
+<%= render 'admin/communication/websites/agenda/events/list', events: @events %>
+<%= paginate @events %>
 
 <%= render 'admin/communication/websites/language_switcher' %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Website::Agenda::Event %>
+<% end %>
