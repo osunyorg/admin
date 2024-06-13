@@ -17,10 +17,6 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     respond_to do |format|
       format.html {
         @organizations = @organizations.page(params[:page]).per(24)
-        @categories = current_university.organization_categories
-                                        .for_language_id(current_university.default_language_id)
-                                        .ordered
-                                        .page(params[:categories_page])
         breadcrumb
       }
       format.xlsx {
