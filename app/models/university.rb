@@ -60,6 +60,7 @@ class University < ApplicationRecord
   has_many :imports, dependent: :destroy
   has_many :apps, dependent: :destroy
   belongs_to :default_language, class_name: "Language"
+  has_and_belongs_to_many :languages
 
   validates_presence_of :name
   validates :sms_sender_name, presence: true, length: { maximum: 11 }
@@ -73,7 +74,7 @@ class University < ApplicationRecord
   scope :for_real_university, -> (status) { where(is_really_a_university: status) }
   scope :for_contribution, -> (status) { status == 'true' ? contributing : not_contributing }
   scope :for_university_kind, -> (status) { where(private: status == 'private') }
-
+  scope :for_language, -> (language) { joins(:languages).where(languages: { id: language } ) }
 
   def self.parts
     [

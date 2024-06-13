@@ -1,4 +1,4 @@
-window.osuny.communication.websites.form = {
+window.osuny.defaultLanguageSelector = {
     init: function () {
         'use strict';
         this.languagesCheckboxes = document.querySelectorAll('.js-languages input[type="checkbox"]');
@@ -47,7 +47,5 @@ window.osuny.communication.websites.form = {
 
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
-    if (window.osuny.isInControllerForm('websites')) {
-        window.osuny.communication.websites.form.init();
-    }
+    window.osuny.defaultLanguageSelector.init();
 });
