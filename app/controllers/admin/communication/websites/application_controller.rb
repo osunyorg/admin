@@ -7,7 +7,11 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
   protected
 
   def current_language
-    @current_language ||= @website.best_language_for(params[:lang])
+    if @website
+      @current_language ||= @website.best_language_for(params[:lang])
+    else
+      super
+    end
   end
   helper_method :current_language
 

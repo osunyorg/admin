@@ -29,6 +29,7 @@
             <div class="col-lg-6">
               <%= f.association :languages,
                                 as: :check_boxes,
+                                collection: current_university.languages,
                                 required: true,
                                 wrapper_html: { class: "js-languages" },
                                 label_method: lambda { |l| language_name(l.iso_code) } %>
