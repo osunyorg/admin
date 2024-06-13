@@ -9,8 +9,7 @@ module WithDependencies
     attr_accessor :previous_dependencies
 
     if self < ActiveRecord::Base
-      before_save :snapshot_dependencies
-      after_save :clean_websites_if_necessary
+      after_save :clean_all_websites
     end
   end
 
@@ -27,12 +26,12 @@ module WithDependencies
     # 3. PUIS on demande aux websites stockés de nettoyer leurs connexions et leurs git files (et on synchronise les potentielles sources directes)
     self.transaction do
       snapshot_direct_sources = try(:direct_sources).to_a || []
-      website_ids = websites_to_clean.pluck(:id)
+      website_ids_before_destroy = websites_to_clean_ids
       super
       snapshot_direct_sources.each do |direct_source|
         direct_source.sync_with_git
       end
-      clean_websites(website_ids)
+      clean_websites(website_ids_before_destroy)
       # TODO: Actuellement, on ne nettoie pas les références
       # Exemple : Quand on supprime un auteur, il n'est pas nettoyé dans le static de ses anciens posts.
       # Un save du website le fera en nocturne pour l'instant.
@@ -106,16 +105,8 @@ module WithDependencies
     @previous_dependencies = persisted? ? reloaded_recursive_dependencies_syncable_filtered : []
   end
 
-  def clean_websites_if_necessary
-    # Debug :)
-    # puts self
-    # puts "  previous_dependencies           #{ @previous_dependencies }"
-    # puts "  recursive_dependencies_syncable #{ reloaded_recursive_dependencies_syncable_filtered }"
-    # puts "  missing_dependencies_after_save #{ missing_dependencies_after_save }"
-    # puts
-    if missing_dependencies_after_save.any? || unpublished_by_last_save?
-      clean_websites(websites_to_clean.pluck(:id))
-    end
+  def clean_all_websites
+    clean_websites(websites_to_clean_ids)
   end
 
   def clean_websites(websites_ids)
@@ -128,6 +119,10 @@ module WithDependencies
 
   def websites_to_clean
     is_direct_object? ? [website] : websites
+  end
+
+  def websites_to_clean_ids
+    websites_to_clean.pluck(:id)
   end
 
   def missing_dependencies_after_save
