@@ -4,7 +4,7 @@ subtitle: >-
   <%= prepare_text_for_static @about.subtitle %>
 <% 
 # https://github.com/osunyorg/admin/issues/1880
-if @about.archive? %>
+if @about.archive? || @about.current? %>
 date: "<%= @about.from_day&.iso8601 %>"
 <% else %>
 weight: <%= @about.distance_in_days %>
