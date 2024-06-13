@@ -34,6 +34,7 @@ class University::Person::Category < ApplicationRecord
   include Sluggable
   include Translatable
   include WithGitFiles
+  include WithPosition
   include WithTree
   include WithUniversity
 
@@ -49,8 +50,6 @@ class University::Person::Category < ApplicationRecord
                           join_table: :university_people_categories
 
   validates :name, presence: true
-
-  scope :ordered, -> { order(:name) }
 
   def git_path(website)
     git_path_content_prefix(website) + git_path_relative
