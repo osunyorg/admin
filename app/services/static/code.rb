@@ -4,7 +4,7 @@ class Static::Code < Static::Default
     unless @prepared
       @prepared = @text.to_s.dup
       @prepared = lazy_load_iframes @prepared
-      @prepared = indent @prepared
+      @prepared = turn_linebreak_to_br @prepared
       @prepared = raw @prepared
     end
     @prepared
