@@ -15,6 +15,22 @@ module Translatable
     # has to be before_destroy because of the foreign key constraints
     before_destroy :destroy_or_nullify_translations
 
+
+
+    # on cherche les objets pour cette langue (original ou pas) + les objets originaux dans une autre langue s'il n'en existe pas de traduction
+    scope :in_closest_language_id, -> (language_id) {
+      # Records with correct language (Original or Translation)
+      # OR Records originals which does not have any translation matching the language
+      for_language_id(language_id).or(
+        where(original_id: nil)
+          .where.not(language_id: language_id)
+          .where(
+            "NOT EXISTS (SELECT 1 FROM #{table_name} AS translations WHERE translations.original_id = #{table_name}.id AND translations.language_id = ?)",
+            language_id
+          )
+      )
+    }
+
     scope :for_language, -> (language) { for_language_id(language.id) }
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself
     scope :for_language_id, -> (language_id) { where(language_id: language_id) }
@@ -23,7 +39,7 @@ module Translatable
 
   def available_languages
     @available_languages ||= begin
-      languages = is_direct_object? ? website.languages : Language.all
+      languages = is_direct_object? ? website.languages : university.languages
       languages.ordered
     end
   end

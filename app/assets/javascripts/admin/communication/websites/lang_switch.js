@@ -1,7 +1,7 @@
 window.osuny.communication.websites.langSwitch = {
     init: function () {
         'use strict';
-        this.select = document.querySelector('#js-website-lang-switch');
+        this.select = document.querySelector('#js-lang-switch');
         if (this.select) {
             this.select.addEventListener('change', this.onChange.bind(this));
         }

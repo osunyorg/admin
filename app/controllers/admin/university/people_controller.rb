@@ -3,6 +3,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
                               through: :current_university,
                               through_association: :people
 
+  include Admin::Translatable
 
   has_scope :for_search_term
   has_scope :for_category
@@ -10,14 +11,14 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def index
     @people = apply_scopes(@people)
-                .for_language_id(current_university.default_language_id)
+                .in_closest_language_id(current_language.id)
                 .ordered
 
     respond_to do |format|
       format.html {
         @people = @people.page(params[:page]).per(24)
         @categories = current_university.person_categories
-                                        .for_language_id(current_university.default_language_id)
+                                        .in_closest_language_id(current_language.id)
                                         .ordered
                                         .page(params[:categories_page])
         breadcrumb

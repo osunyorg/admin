@@ -7,13 +7,11 @@ module Admin::Translatable
 
   protected
 
-  # If we don't have a website, it will not work
-
   def check_or_redirect_translatable_resource
     # Early return if language is correct
-    return if resource.language_id == current_website_language.id
+    return if resource.language_id == current_language.id
     # Look up for translation or translate (with blocks and all) from resource
-    translation = resource.find_or_translate!(current_website_language)
+    translation = resource.find_or_translate!(current_language)
     # Redirect to the translation
     redirect_to_translation(translation)
   end

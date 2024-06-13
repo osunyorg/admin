@@ -37,3 +37,7 @@ subtitle = t('admin.elements', count: @categories.total_count)
               request.params.merge(format: "xlsx"),
               class: button_classes %>
 <% end %>
+
+<% content_for :action_bar_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
