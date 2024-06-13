@@ -6,6 +6,7 @@ module Filters
       add_for_real_university
       add_for_contribution
       add_for_university_kind
+      add_for_language
     end
 
     private
@@ -41,6 +42,16 @@ module Filters
             'filters.attributes.element',
             element: I18n.t('server_admin.universities.university_kind_filter.title').downcase
           )
+    end
+
+    def add_for_language
+      add :for_language,
+          Language.ordered,
+          I18n.t(
+            'filters.attributes.element',
+            element: Language.model_name.human.downcase
+          )
+          
     end
 
 

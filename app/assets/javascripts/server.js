@@ -10,6 +10,7 @@
 //= require_self
 //= require ./admin/commons/nav
 //= require ./admin/commons/conditional
+//= require ./admin/commons/default_language_selector
 //= require_tree ./application/plugins
 //= require ./admin/plugins/sortable
 //= require_tree ./server
