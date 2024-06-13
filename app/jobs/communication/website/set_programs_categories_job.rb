@@ -1,4 +1,4 @@
-class Communication::Website::SetProgramsCategoriesJob < ApplicationJob
+class Communication::Website::SetProgramsCategoriesJob < Communication::Website::BaseJob
   queue_as :mice
 
   def execute
