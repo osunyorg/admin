@@ -959,6 +959,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_120944) do
     t.string "summernote_locale"
   end
 
+  create_table "languages_universities", id: false, force: :cascade do |t|
+    t.uuid "language_id", null: false
+    t.uuid "university_id", null: false
+    t.index ["university_id", "language_id"], name: "index_languages_universities_on_university_id_and_language_id"
+  end
+
   create_table "research_hal_authors", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "docid"
     t.string "form_identifier"

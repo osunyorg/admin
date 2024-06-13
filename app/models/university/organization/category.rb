@@ -4,6 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  name          :string
+#  position      :integer          default(0)
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
