@@ -6,6 +6,7 @@ class Server::UniversitiesController < Server::ApplicationController
   has_scope :for_real_university
   has_scope :for_contribution
   has_scope :for_university_kind
+  has_scope :for_language
 
   def index
     @universities = apply_scopes(@universities).ordered.page(params[:page])

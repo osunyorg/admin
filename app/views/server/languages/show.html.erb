@@ -2,20 +2,15 @@
 
 <div class="row">
   <div class="col-md-5">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title"><%= t('admin.infos') %></h2>
-      </div>
-      <div class="table-responsive">
-        <table class="<%= table_classes %>">
-          <% ['iso_code', 'summernote_locale'].each do |attribute| %>
-            <tr>
-              <td><%= Language.human_attribute_name(attribute) %></td>
-              <td class="text-end"><%= @language.public_send attribute %></td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
+    <div class="table-responsive">
+      <table class="<%= table_classes %>">
+        <% ['iso_code', 'summernote_locale'].each do |attribute| %>
+          <tr>
+            <td><%= Language.human_attribute_name(attribute) %></td>
+            <td class="text-end"><%= @language.public_send attribute %></td>
+          </tr>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>
