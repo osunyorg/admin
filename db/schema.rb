@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_095735) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_120944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1214,6 +1214,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_095735) do
     t.uuid "language_id", null: false
     t.uuid "original_id"
     t.uuid "parent_id"
+    t.integer "position", default: 0
     t.index ["language_id"], name: "index_university_organization_categories_on_language_id"
     t.index ["original_id"], name: "index_university_organization_categories_on_original_id"
     t.index ["parent_id"], name: "index_university_organization_categories_on_parent_id"
@@ -1330,6 +1331,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_095735) do
     t.uuid "language_id", null: false
     t.uuid "original_id"
     t.uuid "parent_id"
+    t.integer "position", default: 0
     t.index ["language_id"], name: "index_university_person_categories_on_language_id"
     t.index ["original_id"], name: "index_university_person_categories_on_original_id"
     t.index ["parent_id"], name: "index_university_person_categories_on_parent_id"
