@@ -130,9 +130,18 @@
         <%= render  "admin/application/slug/form",
                   f: f,
                   source: '#university_person_first_name, #university_person_last_name' %>
+        <% unless person.persisted? %>
+          <% if current_university.languages.many? %>
+            <%= f.association :language, 
+                              collection: current_university.languages.ordered,
+                              include_blank: false %>
+          <% else %>
+            <%= f.input :language_id, as: :hidden, wrapper: false %>
+          <% end %>
+        <% end %>
         <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
         <%
-        categories = current_university.person_categories.for_language_id(person.language_id)
+        categories = current_university.person_categories.in_closest_language_id(current_language.id)
         if categories.any?
         %>
           <%= f.association :categories,

@@ -89,6 +89,7 @@ en:
         is_author: Author
         is_researcher: Researcher
         is_teacher: Teacher
+        language: Language
         last_name: Last name
         linkedin: LinkedIn URL
         linkedin_visibility: LinkedIn URL visibility
@@ -203,6 +204,7 @@ en:
         is_author: "Writes posts for websites."
         is_researcher: "Writes papers for journals."
         is_teacher: "Teaches in Schools."
+        language: This is the language used for the different fields, not the language that the person speaks.
         linkedin: "Example: https://www.linkedin.com/in/osuny"
         mastodon: "Example: @osuny"
         personal_data_visibility: "Private: only visible in admin. Restricted: visible in the extranets. Public: visible in the websites."

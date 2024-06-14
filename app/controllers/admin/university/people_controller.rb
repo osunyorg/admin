@@ -54,7 +54,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def new
-    @person.language_id = current_university.default_language_id
+    @person.language_id = current_language.id
     breadcrumb
   end
 
@@ -64,7 +64,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def create
-    @person.language_id = current_university.default_language_id
     if @person.save
       redirect_to admin_university_person_path(@person),
                   notice: t('admin.successfully_created_html', model: @person.to_s)
@@ -102,7 +101,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def person_params
     params.require(:university_person).permit(
-      :slug, :first_name, :last_name, :email, :email_visibility, :gender, :birthdate,
+      :slug, :language_id, :first_name, :last_name, :email, :email_visibility, :gender, :birthdate,
       :phone_mobile, :phone_mobile_visibility, :phone_professional, :phone_professional_visibility, :phone_personal, :phone_personal_visibility,
       :address, :zipcode, :city, :country, :address_visibility,
       :meta_description, :summary,

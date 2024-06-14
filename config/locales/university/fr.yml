@@ -89,6 +89,7 @@ fr:
         is_author: Auteur·rice
         is_researcher: Chercheur·e
         is_teacher: Enseignant·e
+        language: Langue
         last_name: Nom de famille
         linkedin: LinkedIn (URL)
         linkedin_visibility: Visibilité de l'URL LinkedIn
@@ -203,6 +204,7 @@ fr:
         is_author: "Écrit des articles pour les sites."
         is_researcher: "Écrit des papiers dans des revues scientifiques."
         is_teacher: "Enseigne dans des formations."
+        language: Il s'agit de la langue utilisée dans les différents champs, pas de la langue que la personne parle.
         linkedin: "Exemple : https://www.linkedin.com/in/osuny"
         mastodon: "Exemple: @osuny"
         personal_data_visibility: "Privé : visible uniquement en admin. Restreint : visible sur les extranets. Public : visible sur les sites web."
