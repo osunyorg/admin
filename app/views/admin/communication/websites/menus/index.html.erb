@@ -1,13 +1,15 @@
 <% content_for :title, Communication::Website::Menu.model_name.human(count: 2) %>
 
 <% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
+
+<p>
   <%= @menus.count %>
   <%= Communication::Website::Menu.model_name.human(count: @menus.count).downcase %>
-<% end %>
+</p>
+<%= render 'admin/communication/websites/menus/list', menus: @menus %>
 
-<%= osuny_panel  Communication::Website::Menu.model_name.human(count: 2), 
-                action: create_link(Communication::Website::Menu) do %>
-  <%= render 'admin/communication/websites/menus/list', menus: @menus %>
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Website::Menu %>
 <% end %>
-
-<%= render 'admin/communication/websites/language_switcher' %>

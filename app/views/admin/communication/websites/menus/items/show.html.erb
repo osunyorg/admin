@@ -1,15 +1,12 @@
 <% content_for :title, @item %>
 
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
+
 <div class="row">
   <div class="col-xl-8">
-    <%
-    action = link_to  t('create'),
-                      new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id, parent_id: @item.id),
-                      class: button_classes if can?(:create, Communication::Website::Menu::Item)
-    %>
-    <%= osuny_panel Communication::Website::Menu::Item.human_attribute_name('children'), action: action do %>
-      <%= render 'admin/communication/websites/menus/items/list', items: @children, item: @item if @children.any? %>
-    <% end %>
+    <%= render 'admin/communication/websites/menus/items/list', items: @children, item: @item if @children.any? %>
   </div>
   <div class="col-xl-4">
     <%= osuny_panel t('metadata') do %>
@@ -26,8 +23,6 @@
   </div>
 </div>
 
-<%= render 'admin/communication/websites/language_switcher' %>
-
 <% content_for :action_bar_left do %>
   <%= link_to t('delete'),
               admin_communication_website_menu_item_path(website_id: @item.website.id, menu_id: @item.menu.id, id: @item.id),
@@ -40,4 +35,7 @@
   <%= link_to t('edit'),
               edit_admin_communication_website_menu_item_path(@item, website_id: @website, menu_id: @menu.id),
               class: button_classes %>
+  <%= link_to t('create'),
+              new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id, parent_id: @item.id),
+              class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
 <% end %>

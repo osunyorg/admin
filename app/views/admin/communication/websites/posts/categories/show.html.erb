@@ -1,5 +1,9 @@
 <% content_for :title, @category %>
 
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-8">
     <%= render 'admin/application/summary/show', about: @category %>
@@ -42,8 +46,6 @@
     <%= paginate @posts %>
   <% end %>
 <% end %>
-
-<%= render 'admin/communication/websites/language_switcher' %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @category %>

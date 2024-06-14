@@ -1,10 +1,12 @@
 <% content_for :title, "#{t('communication.authors', count: 2)} (#{@authors.total_count})" %>
 
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
+
 <%= render 'filters', current_path: admin_communication_website_post_authors_path, filters: @filters if @filters.any?  %>
 <%= render 'admin/communication/websites/posts/authors/list', authors: @authors %>
 <%= paginate @authors %>
-
-<%= render 'admin/communication/websites/language_switcher' %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('communication.manage_authors'), admin_university_people_path, class: button_classes if can?(:read, University::Person) %>

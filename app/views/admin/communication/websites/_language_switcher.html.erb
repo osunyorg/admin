@@ -8,12 +8,8 @@
   }
   selected_option = url_for(request.params.merge(lang: current_language.iso_code))
   %>
-  <div class="row">
-    <div class="col-lg-4">
-      <%= select_tag  nil,
-                      options_for_select(languages_options, selected_option),
-                      class: "form-control form-select my-5",
-                      id: "js-lang-switch" %>
-    </div>
-  </div>
+  <%= select_tag  nil,
+                  options_for_select(languages_options, selected_option),
+                  class: "form-control form-select my-5",
+                  id: "js-lang-switch" %>
 <% end %>

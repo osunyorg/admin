@@ -1,5 +1,9 @@
 <% content_for :title, Communication::Website::Portfolio::Project.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
+
 <p>
   <%= @projects.total_count %>
   <%= Communication::Website::Portfolio::Project.model_name.human(count: @projects.total_count).downcase %>
@@ -7,8 +11,6 @@
 <%= render 'filters', current_path: admin_communication_website_portfolio_projects_path, filters: @filters %>
 <%= render 'admin/communication/websites/portfolio/projects/list', projects: @projects %>
 <%= paginate @projects %>
-
-<%= render 'admin/communication/websites/language_switcher' %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Portfolio::Project %>
