@@ -1,7 +1,8 @@
-<% content_for :title, "#{University::Organization::Category.model_name.human(count: 2)} (#{@categories.total_count})" %>
+<% content_for :title, University::Organization::Category.model_name.human(count: 2) %>
 
-<%= render 'admin/university/organizations/categories/list', categories: @categories %>
-<%= paginate @categories %>
+<%= render 'admin/application/categories/list', 
+            root_categories: @root_categories, 
+            categories_class: @categories_class %>
 
 <% content_for :action_bar_right do %>
   <%= create_link University::Organization::Category %>

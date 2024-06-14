@@ -3,10 +3,12 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
                               through: :current_university,
                               through_association: :person_categories
 
+  include Admin::Categorizable
+
   def index
-    @categories =  @categories.for_language_id(current_university.default_language_id)
-                              .ordered
-                              .page(params[:page])
+    @root_categories = categories.root
+    @categories_class = categories_class
+    @feature_nav = 'navigation/admin/university/people'
     breadcrumb
   end
 
@@ -71,6 +73,14 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   end
 
   protected
+
+  def categories_class
+    University::Person::Category
+  end
+
+  def categories
+    current_university.person_categories.ordered
+  end
 
   def breadcrumb
     super

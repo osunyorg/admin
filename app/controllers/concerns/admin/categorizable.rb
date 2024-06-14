@@ -27,6 +27,7 @@ module Admin::Categorizable
 
   protected
 
+  # Good for websites, but needs override for other objects
   def categories
     categories_class.where(communication_website_id: @website.id)
                    .for_language(current_language)
@@ -35,6 +36,6 @@ module Admin::Categorizable
 
   # Communication::Website::Agenda::Category
   def categories_class
-    raise NoMethodError.new("categories_class doit être défini dans le controller, par exemple Communication::Website::Agenda::Category")
+    raise NoMethodError.new("categories_class must be implemented in the controller, for example Communication::Website::Agenda::Category")
   end
 end
