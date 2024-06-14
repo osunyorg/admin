@@ -52,7 +52,6 @@ class Research::Journal::Paper < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
-  include Translatable
   include WithBlobs
   include WithCitations
   include WithGitFiles
@@ -64,6 +63,7 @@ class Research::Journal::Paper < ApplicationRecord
   has_summernote :text
   has_one_attached :pdf
 
+  belongs_to  :language
   belongs_to  :journal, 
               foreign_key: :research_journal_id
   belongs_to  :volume, 
@@ -83,6 +83,9 @@ class Research::Journal::Paper < ApplicationRecord
 
   scope :ordered, -> { order(published_at: :desc) }
   scope :ordered_by_position, -> { order(:position) }
+  scope :for_language, -> (language) { for_language_id(language.id) }
+  # The for_language_id scope can be used when you have the ID without needing to load the Language itself
+  scope :for_language_id, -> (language_id) { where(language_id: language_id) }
 
   def git_path(website)
     "#{git_path_content_prefix(website)}papers/#{static_path}.html" if published?
