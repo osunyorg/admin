@@ -1,5 +1,9 @@
 <% content_for :title, University::Organization.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
+
 <p><%= t('admin.elements', count: @organizations.total_count) %></p>
 <%= render 'filters', current_path: admin_university_organizations_path, filters: @filters if @filters.any?  %>
 <%= render 'admin/university/organizations/list', organizations: @organizations %>

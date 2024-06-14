@@ -78,12 +78,15 @@
                     source: '#university_organization_name' %>
         <%= f.input :active %>
         <%
-        categories = current_university.organization_categories.for_language_id(organization.language_id)
+        categories = current_university.organization_categories
+                                       .in_closest_language_id(current_language.id)
+                                       .root
+                                       .ordered
         if categories.any?
         %>
           <%= f.association :categories,
                             as: :check_boxes,
-                            collection: categories %>
+                            collection: collection_tree_for_checkboxes(categories) %>
         <% end %>
       <% end %>
       <%= osuny_panel University::Organization.human_attribute_name('logos') do %>
