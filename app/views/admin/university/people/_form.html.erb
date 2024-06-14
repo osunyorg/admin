@@ -132,12 +132,15 @@
                   source: '#university_person_first_name, #university_person_last_name' %>
         <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
         <%
-        categories = current_university.person_categories.in_closest_language_id(current_language.id)
+        categories = current_university.person_categories
+                                       .in_closest_language_id(current_language.id)
+                                       .root
+                                       .ordered
         if categories.any?
         %>
           <%= f.association :categories,
                             as: :check_boxes,
-                            collection: categories %>
+                            collection: collection_tree_for_checkboxes(categories) %>
         <% end %>
       <% end %>
       <%= osuny_panel University::Person.human_attribute_name('picture') do %>

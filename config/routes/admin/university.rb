@@ -43,7 +43,7 @@ namespace :university do
     end
   end
 
-  resources :organizations do
+  resources :organizations, path: '/:lang/organizations' do
     collection do
       get :search, defaults: { format: 'json' }
       resources :categories, controller: 'organizations/categories', as: 'organization_categories' do
@@ -53,13 +53,11 @@ namespace :university do
         member do
           get :children
           get :static
-          get "/translations/:lang" => "organizations/categories#in_language", as: :show_in_language
         end
       end
     end
     member do
       get :static
-      get "/translations/:lang" => "organizations#in_language", as: :show_in_language
     end
   end
   root to: 'dashboard#index'
