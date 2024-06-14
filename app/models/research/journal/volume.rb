@@ -38,7 +38,6 @@ class Research::Journal::Volume < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
-  include Translatable
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
@@ -47,6 +46,7 @@ class Research::Journal::Volume < ApplicationRecord
 
   has_summernote :text
 
+  belongs_to  :language
   belongs_to  :journal, 
               foreign_key: :research_journal_id
   has_many    :papers, 
@@ -59,6 +59,9 @@ class Research::Journal::Volume < ApplicationRecord
   validates :title, presence: true
 
   scope :ordered, -> { order(published_at: :desc, number: :desc) }
+  scope :for_language, -> (language) { for_language_id(language.id) }
+  # The for_language_id scope can be used when you have the ID without needing to load the Language itself
+  scope :for_language_id, -> (language_id) { where(language_id: language_id) }
 
   def git_path(website)
     "#{git_path_content_prefix(website)}volumes#{path}/_index.html" if published_at

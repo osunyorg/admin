@@ -26,11 +26,11 @@ class Research::Journal < ApplicationRecord
   include AsIndirectObject
   include Favoritable
   include Sanitizable
-  include Translatable
   include WebsitesLinkable
   include WithGitFiles
   include WithUniversity
 
+  belongs_to :language
   has_many  :communication_websites,
             class_name: 'Communication::Website',
             as: :about,
@@ -70,6 +70,9 @@ class Research::Journal < ApplicationRecord
       unaccent(research_journals.title) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
+  scope :for_language, -> (language) { for_language_id(language.id) }
+  # The for_language_id scope can be used when you have the ID without needing to load the Language itself
+  scope :for_language_id, -> (language_id) { where(language_id: language_id) }
 
   def to_s
     "#{title}"
