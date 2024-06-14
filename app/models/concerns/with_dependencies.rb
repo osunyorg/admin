@@ -83,10 +83,12 @@ module WithDependencies
     # La première fois, il n'y a rien en cache, alors on ne trouvera pas de manquants
     previous_dependencies = Rails.cache.read(dependencies_cache_key) || []
     # Les dépendances manquantes sont celles qui étaient dans les dépendances avant la sauvegarde,
-    # stockées dans le cache précédemment, et qui n'y sont plus maintenant. 
+    # stockées dans le cache précédemment, et qui n'y sont plus maintenant
     dependencies_missing = previous_dependencies - current_dependencies
     # S'il y a des dépendances manquantes, on lance le nettoyage
-    clean_all_websites if dependencies_missing.any?
+    # Si l'objet est dépublié, on lance aussi
+    should_clean = dependencies_missing.any? || unpublished_by_last_save?
+    clean_all_websites if should_clean
     # On enregistre les dépendances pour la prochaine sauvegarde
     Rails.cache.write(dependencies_cache_key, current_dependencies)
   end
@@ -115,11 +117,7 @@ module WithDependencies
   end
 
   def clean_websites_if_necessary
-    if unpublished_by_last_save?
-      clean_all_websites
-    else
-      Dependencies::CleanWebsitesIfNecessaryJob.perform_later(self)
-    end
+    Dependencies::CleanWebsitesIfNecessaryJob.perform_later(self)
   end
 
   # "gid://osuny/Education::Program/c537fc50-f7c5-414f-9966-3443bc9fde0e-dependencies"
