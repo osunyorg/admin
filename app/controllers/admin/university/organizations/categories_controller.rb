@@ -1,12 +1,14 @@
 class Admin::University::Organizations::CategoriesController < Admin::University::ApplicationController
-  load_and_authorize_resource class: University::Organization::Category,
+  load_and_authorize_resource class: 'University::Organization::Category',
                               through: :current_university,
                               through_association: :organization_categories
 
+  include Admin::Categorizable
+
   def index
-    @categories =  @categories.for_language_id(current_university.default_language_id)
-                              .ordered
-                              .page(params[:page])
+    @root_categories = categories.root
+    @categories_class = categories_class
+    @feature_nav = 'navigation/admin/university/organizations'
     breadcrumb
   end
 
@@ -72,6 +74,14 @@ class Admin::University::Organizations::CategoriesController < Admin::University
 
   protected
 
+  def categories_class
+    University::Organization::Category
+  end
+
+  def categories
+    current_university.organization_categories.ordered
+  end
+
   def breadcrumb
     super
     add_breadcrumb  University::Organization.model_name.human(count: 2),
@@ -82,7 +92,8 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   end
 
   def category_params
-    params.require(:university_organization_category).permit(
-      :name).merge(university_id: current_university.id)
+    params.require(:university_organization_category)
+          .permit(:name)
+          .merge(university_id: current_university.id)
   end
 end

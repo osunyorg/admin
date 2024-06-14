@@ -40,4 +40,11 @@ class Static::Default
     text
   end
 
+  def remove_linebreak(text)
+    text.gsub! "\r\n", ""
+    text.gsub! "\r", ""
+    text.gsub! "\n", ""
+    text
+  end
+
 end
