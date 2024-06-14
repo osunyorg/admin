@@ -80,14 +80,14 @@ module WithDependencies
   def clean_websites_if_necessary_safely
     # Tableau de global ids des dépendances
     current_dependencies = DependenciesFilter.filtered(recursive_dependencies_syncable)
-    # La première fois, il n'y a rien en cache, alors on ne trouvera pas de manquants
-    previous_dependencies = Rails.cache.read(dependencies_cache_key) || []
+    # La première fois, il n'y a rien en cache, alors on force le nettoyage
+    previous_dependencies = Rails.cache.read(dependencies_cache_key)
     # Les dépendances obsolètes sont celles qui étaient dans les dépendances avant la sauvegarde,
     # stockées dans le cache précédemment, et qui n'y sont plus maintenant
-    obsolete_dependencies = previous_dependencies - current_dependencies
+    obsolete_dependencies = previous_dependencies - current_dependencies if previous_dependencies
     # S'il y a des dépendances obsolètes, on lance le nettoyage
     # Si l'objet est dépublié, on lance aussi
-    should_clean = obsolete_dependencies.any? || unpublished_by_last_save?
+    should_clean = previous_dependencies.nil? || unpublished_by_last_save? || obsolete_dependencies.any?
     clean_all_websites if should_clean
     # On enregistre les dépendances pour la prochaine sauvegarde
     Rails.cache.write(dependencies_cache_key, current_dependencies)
