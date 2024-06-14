@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.3.0-node
+      - image: cimg/ruby:3.3.2-node
         environment:
           RAILS_ENV: test
           RACK_ENV: test
