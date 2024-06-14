@@ -78,11 +78,16 @@ module WithDependencies
   end
 
   def clean_websites_if_necessary_safely
+    # Tableau de global ids des dépendances
     current_dependencies = DependenciesFilter.filtered(recursive_dependencies_syncable)
-    # First run returns nil, so nothing is missing
+    # La première fois, il n'y a rien en cache, alors on ne trouvera pas de manquants
     previous_dependencies = Rails.cache.read(dependencies_cache_key) || []
+    # Les dépendances manquantes sont celles qui étaient dans les dépendances avant la sauvegarde,
+    # stockées dans le cache précédemment, et qui n'y sont plus maintenant. 
     dependencies_missing = previous_dependencies - current_dependencies
+    # S'il y a des dépendances manquantes, on lance le nettoyage
     clean_all_websites if dependencies_missing.any?
+    # On enregistre les dépendances pour la prochaine sauvegarde
     Rails.cache.write(dependencies_cache_key, current_dependencies)
   end
 
