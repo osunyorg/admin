@@ -8,9 +8,16 @@
     padding: 2px
     span
         display: inline-block
-        padding: 8px 14px
+        &.current,
+        &.gap,
+        a
+            border-radius: $border-radius
+            padding: 8px 14px
+            transition: background 0.25s
         a
             color: black
+            display: inline-block
+            &:hover
+                background: $color-bg
     .page.current
         background: $color-bg
-        border-radius: $border-radius
