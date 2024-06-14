@@ -16,7 +16,7 @@
 <%
 number_of_panels = 0
 %>
-<div class="row g-5">
+<div class="row gx-5">
   <% if @website.feature_posts && @posts.any? && can?(:read, Communication::Website::Post) %>
     <% number_of_panels += 1 %>
     <div class="col-lg-6">

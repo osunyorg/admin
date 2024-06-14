@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_07_143940) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_120944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -959,6 +959,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_07_143940) do
     t.string "summernote_locale"
   end
 
+  create_table "languages_universities", id: false, force: :cascade do |t|
+    t.uuid "language_id", null: false
+    t.uuid "university_id", null: false
+    t.index ["university_id", "language_id"], name: "index_languages_universities_on_university_id_and_language_id"
+  end
+
   create_table "research_hal_authors", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "docid"
     t.string "form_identifier"
@@ -1209,8 +1215,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_07_143940) do
     t.string "slug"
     t.uuid "language_id", null: false
     t.uuid "original_id"
+    t.uuid "parent_id"
+    t.integer "position", default: 0
     t.index ["language_id"], name: "index_university_organization_categories_on_language_id"
     t.index ["original_id"], name: "index_university_organization_categories_on_original_id"
+    t.index ["parent_id"], name: "index_university_organization_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_organization_categories_on_university_id"
   end
 
@@ -1323,8 +1332,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_07_143940) do
     t.string "slug"
     t.uuid "language_id", null: false
     t.uuid "original_id"
+    t.uuid "parent_id"
+    t.integer "position", default: 0
     t.index ["language_id"], name: "index_university_person_categories_on_language_id"
     t.index ["original_id"], name: "index_university_person_categories_on_original_id"
+    t.index ["parent_id"], name: "index_university_person_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_person_categories_on_university_id"
   end
 
@@ -1553,6 +1565,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_07_143940) do
   add_foreign_key "university_organization_categories", "languages"
   add_foreign_key "university_organization_categories", "universities"
   add_foreign_key "university_organization_categories", "university_organization_categories", column: "original_id"
+  add_foreign_key "university_organization_categories", "university_organization_categories", column: "parent_id"
   add_foreign_key "university_organizations", "languages"
   add_foreign_key "university_organizations", "universities"
   add_foreign_key "university_organizations", "university_organizations", column: "original_id"
@@ -1567,6 +1580,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_07_143940) do
   add_foreign_key "university_person_categories", "languages"
   add_foreign_key "university_person_categories", "universities"
   add_foreign_key "university_person_categories", "university_person_categories", column: "original_id"
+  add_foreign_key "university_person_categories", "university_person_categories", column: "parent_id"
   add_foreign_key "university_person_experiences", "universities"
   add_foreign_key "university_person_experiences", "university_organizations", column: "organization_id"
   add_foreign_key "university_person_experiences", "university_people", column: "person_id"

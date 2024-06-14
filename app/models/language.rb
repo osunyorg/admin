@@ -20,6 +20,7 @@ class Language < ApplicationRecord
   include Sanitizable
 
   has_many :users
+  has_and_belongs_to_many :universities
   has_and_belongs_to_many :communication_websites,
                           class_name: 'Communication::Website',
                           join_table: :communication_websites_languages,
