@@ -1,0 +1,18 @@
+<%
+# communication_website_agenda_categories
+categories_class_path = categories_class.model_name.route_key
+# reorder_admin_communication_website_post_categories_path
+order_path = "reorder_admin_#{categories_class_path}_path"
+%>
+<ul class=" list-unstyled 
+            treeview 
+            treeview--sortable 
+            js-treeview 
+            js-treeview-sortable 
+            js-treeview-sortable-container"
+    data-id=""
+    data-sort-url="<%= public_send order_path %>">
+  <%= render 'admin/application/categories/treebranch',
+              categories: root_categories,
+              categories_class: categories_class %>
+</ul>
