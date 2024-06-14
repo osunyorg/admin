@@ -15,8 +15,6 @@ module Translatable
     # has to be before_destroy because of the foreign key constraints
     before_destroy :destroy_or_nullify_translations
 
-
-
     # on cherche les objets pour cette langue (original ou pas) + les objets originaux dans une autre langue s'il n'en existe pas de traduction
     scope :in_closest_language_id, -> (language_id) {
       # Records with correct language (Original or Translation)
@@ -70,6 +68,14 @@ module Translatable
 
   def is_a_translation?
     self.original.present?
+  end
+
+  def is_in_language?(l)
+    language.id == l.id
+  end
+
+  def exists_in_language?(l)
+    translation_for(l).present?
   end
 
   def original_with_translations

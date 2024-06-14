@@ -6,14 +6,21 @@ small ||= false
     route_args =[:admin, about.becomes(about.class.base_class)]
   %>
   <%= osuny_panel t('internationalization.label'), small: small do %>
-    <ol class="list-unstyled">
+    <ul class="list-unstyled">
       <% about.available_languages.each do |language| %>
         <%
         label = language_name(language.iso_code)
         current = language.id == about.language_id
         %>
-        <li><%= link_to_unless current, label, [*route_args, lang: language.iso_code] %></li>
+        <li>
+          <%= osuny_published about.exists_in_language?(language) %>
+          <%= link_to_unless current, label, [*route_args, lang: language.iso_code] %>
+          <% if current %>
+            <i class="fas fa-check"></i>
+          <% end %>
+        </li>
       <% end %>
-    </ol>
+      </tbody>
+    </table>
   <% end %>
 <% end %>

@@ -7,7 +7,7 @@ small ||= false
       <div class="card card--horizontal">
         <%= osuny_thumbnail page %>
         <div class="card-body">
-          <%= osuny_published page %>
+          <%= osuny_published page.published? %>
           <%= link_to page,
                       admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                       class: "stretched-link text-black" %>
