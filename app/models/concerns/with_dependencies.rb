@@ -9,7 +9,7 @@ module WithDependencies
     attr_accessor :previous_dependencies
 
     if self < ActiveRecord::Base
-      after_save :clean_all_websites
+      after_save :clean_websites_if_necessary
     end
   end
 
@@ -77,6 +77,15 @@ module WithDependencies
     @recursive_dependencies_syncable_following_direct ||= recursive_dependencies(syncable_only: true, follow_direct: true)
   end
 
+  def clean_websites_if_necessary_safely
+    current_dependencies = DependenciesFilter.filtered(recursive_dependencies_syncable)
+    # First run returns nil, so nothing is missing
+    previous_dependencies = Rails.cache.read(dependencies_cache_key) || []
+    dependencies_missing = previous_dependencies - current_dependencies
+    clean_all_websites if dependencies_missing.any?
+    Rails.cache.write(dependencies_cache_key, current_dependencies)
+  end
+
   protected
 
   def recursive_dependencies_add(array, dependency, syncable_only, follow_direct)
@@ -100,13 +109,17 @@ module WithDependencies
     !syncable_only || (dependency.respond_to?(:syncable?) && dependency.syncable?)
   end
 
-  # Stockage en RAM des dépendances avant enregistrement
-  def snapshot_dependencies
-    @previous_dependencies = persisted? ? reloaded_recursive_dependencies_syncable_filtered : []
+  def clean_websites_if_necessary
+    if unpublished_by_last_save?
+      clean_all_websites
+    else
+      Dependencies::CleanWebsitesIfNecessaryJob.perform_later(self)
+    end
   end
 
-  def clean_all_websites
-    clean_websites(websites_to_clean_ids)
+  # "gid://osuny/Education::Program/c537fc50-f7c5-414f-9966-3443bc9fde0e-dependencies"
+  def dependencies_cache_key
+    "#{to_gid}-dependencies"
   end
 
   def clean_websites(websites_ids)
@@ -117,22 +130,16 @@ module WithDependencies
     end
   end
 
+  def clean_all_websites
+    clean_websites(websites_to_clean_ids)
+  end
+
   def websites_to_clean
     is_direct_object? ? [website] : websites
   end
 
   def websites_to_clean_ids
     websites_to_clean.pluck(:id)
-  end
-
-  def missing_dependencies_after_save
-    @previous_dependencies - reloaded_recursive_dependencies_syncable_filtered
-  end
-
-  def reloaded_recursive_dependencies_syncable_filtered
-    reloaded_object = self.class.unscoped.find(id)
-    reloaded_dependencies = reloaded_object.recursive_dependencies_syncable
-    DependenciesFilter.filtered(reloaded_dependencies)
   end
 
   def unpublished_by_last_save?
