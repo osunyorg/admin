@@ -133,12 +133,12 @@ module WithDependencies
     end
   end
 
-  def clean_all_websites
-    clean_websites(websites_to_clean_ids)
-  end
-
   def websites_to_clean
     is_direct_object? ? [website] : websites
+  end
+
+  def clean_all_websites
+    clean_websites(websites_to_clean_ids)
   end
 
   def websites_to_clean_ids
