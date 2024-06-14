@@ -30,12 +30,17 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     page = page.reload
     assert_equal 3, page.recursive_dependencies.count
 
+    clear_enqueued_jobs
+
     # On modifie le target du block
-    GoodJob::Job.destroy_all
     block.data = "{ \"elements\": [ { \"id\": \"#{olivia.id}\" } ] }"
+    assert_enqueued_with(job: Dependencies::CleanWebsitesIfNecessaryJob) do
+      block.save
+    end
+      
     # On vérifie qu'on enqueue le job qui clean les websites
     assert_enqueued_with(job: Communication::Website::CleanJob) do
-      block.save
+      perform_enqueued_jobs(only: Dependencies::CleanWebsitesIfNecessaryJob)
     end
 
     # On vérifie qu'on enqueue le job qui destroy les obsolete git files
@@ -45,11 +50,23 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
     assert_equal 3, page.recursive_dependencies.count
 
+    clear_enqueued_jobs
+
+    # Vérifie qu'en resauvant immédiatement l'objet on ne relance pas la boucle
+    # On doit lancer un job CleanWebsitesIfNecessaryJob, mais la boucle s'arrête là (comme les dépendances sont rigoureusement les mêmes)
+    assert_enqueued_with(job: Dependencies::CleanWebsitesIfNecessaryJob) do
+      block.save
+    end
+
+    assert_no_enqueued_jobs(only: Communication::Website::CleanJob) do
+      perform_enqueued_jobs(only: Dependencies::CleanWebsitesIfNecessaryJob)
+    end
+
+    clear_enqueued_jobs
+
     # Vérifie qu'on a bien
     # - une tâche pour resynchroniser la page
     # - une tâche de nettoyage des git files (dépendances du bloc supprimé)
-    GoodJob::Job.destroy_all
-
     assert_enqueued_with(job: Communication::Website::DirectObject::SyncWithGitJob, args: [page.communication_website_id, direct_object: page]) do
       assert_enqueued_with(job: Communication::Website::CleanJob) do
         block.destroy
@@ -70,6 +87,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     assert_no_enqueued_jobs only: Communication::Website::DestroyObsoleteGitFilesJob do
       website_with_github.update(about: default_school)
     end
+    perform_enqueued_jobs
     delta = website_with_github.reload.recursive_dependencies.count - dependencies_before_count
     # En ajoutant l'école, on rajoute en dépendances :
     # - L'école, ses formations, diplômes et sites en cascade (4)
@@ -79,7 +97,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # Donc un total de 3 + 2 + 5 = 10 dépendances
     assert_equal 13, delta
 
-    GoodJob::Job.destroy_all
+    clear_enqueued_jobs
 
     # On enlève l'about du website
     # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site

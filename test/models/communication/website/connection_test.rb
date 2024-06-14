@@ -82,6 +82,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       block = pa.blocks.create(position: 1, published: true, template_kind: :organizations)
       block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
+      perform_enqueued_jobs
     end
 
     # Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
@@ -140,12 +141,16 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # Donc un total de 3 + 1 + 2 = 6 connexions
     assert_difference -> { Communication::Website::Connection.count } => 6 do
       website_with_github.update(about: default_school)
+      perform_enqueued_jobs
     end
 
     # En déconnectant l'école du site, on supprime les connexions créées précédemment
     assert_difference -> { Communication::Website::Connection.count } => -6 do
       assert_enqueued_with(job: Communication::Website::CleanJob, args: [website_with_github.id]) do
-        website_with_github.update(about: nil)
+        assert_enqueued_with(job: Dependencies::CleanWebsitesIfNecessaryJob) do
+          website_with_github.update(about: nil)
+        end
+        perform_enqueued_jobs
       end
       perform_enqueued_jobs
     end
@@ -161,6 +166,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       block = page.blocks.new(position: 3, published: true, template_kind: :programs)
       block.data = "{ \"elements\": [ { \"id\": \"#{program.id}\" } ] }"
       block.save
+      perform_enqueued_jobs
     end
     assert_no_difference('Communication::Website::Connection.count') do
       website_with_github.reload.delete_obsolete_connections_for_self_and_direct_sources
@@ -177,6 +183,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # On ajoute un block "Chapitre" : +1
     assert_difference -> { Communication::Website::Connection.count } => 1 do
       page.blocks.create(position: 1, published: true, template_kind: :chapter)
+      perform_enqueued_jobs
     end
 
     # On connecte PA via un block "Personnes" : +2 (bloc, personne)
@@ -184,6 +191,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       block = page.blocks.new(position: 2, published: true, template_kind: :persons)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{pa.id}\" } ] }"
       block.save
+      perform_enqueued_jobs
     end
 
     # On ajoute noesya via un block "Organisations" : +4 parce que noesya a un block "Personnes" avec Olivia
@@ -191,6 +199,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       block = page.blocks.new(position: 3, published: true, template_kind: :organizations)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
+      perform_enqueued_jobs
     end
 
     # On ajoute Arnaud à noesya via un block "Personnes" : +2
@@ -198,6 +207,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       block = noesya.blocks.new(position: 2, published: true, template_kind: :persons)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
       block.save
+      perform_enqueued_jobs
     end
 
     # On tente la boucle infine en ajoutant noesya à Olivia : +1 (le block ajouté à Olivia)
@@ -205,6 +215,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       block = olivia.blocks.new(position: 1, published: true, template_kind: :organizations)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
+      perform_enqueued_jobs
     end
 
     # La page est donc comme ceci

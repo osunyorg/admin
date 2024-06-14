@@ -9,7 +9,6 @@ module WithDependencies
     attr_accessor :previous_dependencies
 
     if self < ActiveRecord::Base
-      before_save :snapshot_dependencies
       after_save :clean_websites_if_necessary
     end
   end
@@ -27,12 +26,12 @@ module WithDependencies
     # 3. PUIS on demande aux websites stockés de nettoyer leurs connexions et leurs git files (et on synchronise les potentielles sources directes)
     self.transaction do
       snapshot_direct_sources = try(:direct_sources).to_a || []
-      website_ids = websites_to_clean.pluck(:id)
+      website_ids_before_destroy = websites_to_clean_ids
       super
       snapshot_direct_sources.each do |direct_source|
         direct_source.sync_with_git
       end
-      clean_websites(website_ids)
+      clean_websites(website_ids_before_destroy)
       # TODO: Actuellement, on ne nettoie pas les références
       # Exemple : Quand on supprime un auteur, il n'est pas nettoyé dans le static de ses anciens posts.
       # Un save du website le fera en nocturne pour l'instant.
@@ -78,6 +77,22 @@ module WithDependencies
     @recursive_dependencies_syncable_following_direct ||= recursive_dependencies(syncable_only: true, follow_direct: true)
   end
 
+  def clean_websites_if_necessary_safely
+    # Tableau de global ids des dépendances
+    current_dependencies = DependenciesFilter.filtered(recursive_dependencies_syncable)
+    # La première fois, il n'y a rien en cache, alors on force le nettoyage
+    previous_dependencies = Rails.cache.read(dependencies_cache_key)
+    # Les dépendances obsolètes sont celles qui étaient dans les dépendances avant la sauvegarde,
+    # stockées dans le cache précédemment, et qui n'y sont plus maintenant
+    obsolete_dependencies = previous_dependencies - current_dependencies if previous_dependencies
+    # S'il y a des dépendances obsolètes, on lance le nettoyage
+    # Si l'objet est dépublié, on lance aussi
+    should_clean = previous_dependencies.nil? || unpublished_by_last_save? || obsolete_dependencies.any?
+    clean_all_websites if should_clean
+    # On enregistre les dépendances pour la prochaine sauvegarde
+    Rails.cache.write(dependencies_cache_key, current_dependencies)
+  end
+
   protected
 
   def recursive_dependencies_add(array, dependency, syncable_only, follow_direct)
@@ -101,21 +116,13 @@ module WithDependencies
     !syncable_only || (dependency.respond_to?(:syncable?) && dependency.syncable?)
   end
 
-  # Stockage en RAM des dépendances avant enregistrement
-  def snapshot_dependencies
-    @previous_dependencies = persisted? ? reloaded_recursive_dependencies_syncable_filtered : []
+  def clean_websites_if_necessary
+    Dependencies::CleanWebsitesIfNecessaryJob.perform_later(self)
   end
 
-  def clean_websites_if_necessary
-    # Debug :)
-    # puts self
-    # puts "  previous_dependencies           #{ @previous_dependencies }"
-    # puts "  recursive_dependencies_syncable #{ reloaded_recursive_dependencies_syncable_filtered }"
-    # puts "  missing_dependencies_after_save #{ missing_dependencies_after_save }"
-    # puts
-    if missing_dependencies_after_save.any? || unpublished_by_last_save?
-      clean_websites(websites_to_clean.pluck(:id))
-    end
+  # "gid://osuny/Education::Program/c537fc50-f7c5-414f-9966-3443bc9fde0e-dependencies"
+  def dependencies_cache_key
+    "#{to_gid}-dependencies"
   end
 
   def clean_websites(websites_ids)
@@ -130,14 +137,12 @@ module WithDependencies
     is_direct_object? ? [website] : websites
   end
 
-  def missing_dependencies_after_save
-    @previous_dependencies - reloaded_recursive_dependencies_syncable_filtered
+  def clean_all_websites
+    clean_websites(websites_to_clean_ids)
   end
 
-  def reloaded_recursive_dependencies_syncable_filtered
-    reloaded_object = self.class.unscoped.find(id)
-    reloaded_dependencies = reloaded_object.recursive_dependencies_syncable
-    DependenciesFilter.filtered(reloaded_dependencies)
+  def websites_to_clean_ids
+    websites_to_clean.pluck(:id)
   end
 
   def unpublished_by_last_save?
