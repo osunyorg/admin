@@ -30,7 +30,7 @@ class Research::Journal < ApplicationRecord
   include WithGitFiles
   include WithUniversity
 
-  belongs_to  :language
+  belongs_to :language
   has_many  :communication_websites,
             class_name: 'Communication::Website',
             as: :about,
