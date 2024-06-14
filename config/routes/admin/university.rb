@@ -33,7 +33,6 @@ namespace :university do
         member do
           get :children
           get :static
-          get "/translations/:lang" => "people/categories#in_language", as: :show_in_language
         end
       end
     end
