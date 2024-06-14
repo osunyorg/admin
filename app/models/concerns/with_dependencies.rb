@@ -82,12 +82,12 @@ module WithDependencies
     current_dependencies = DependenciesFilter.filtered(recursive_dependencies_syncable)
     # La première fois, il n'y a rien en cache, alors on ne trouvera pas de manquants
     previous_dependencies = Rails.cache.read(dependencies_cache_key) || []
-    # Les dépendances manquantes sont celles qui étaient dans les dépendances avant la sauvegarde,
+    # Les dépendances obsolètes sont celles qui étaient dans les dépendances avant la sauvegarde,
     # stockées dans le cache précédemment, et qui n'y sont plus maintenant
-    dependencies_missing = previous_dependencies - current_dependencies
-    # S'il y a des dépendances manquantes, on lance le nettoyage
+    obsolete_dependencies = previous_dependencies - current_dependencies
+    # S'il y a des dépendances obsolètes, on lance le nettoyage
     # Si l'objet est dépublié, on lance aussi
-    should_clean = dependencies_missing.any? || unpublished_by_last_save?
+    should_clean = obsolete_dependencies.any? || unpublished_by_last_save?
     clean_all_websites if should_clean
     # On enregistre les dépendances pour la prochaine sauvegarde
     Rails.cache.write(dependencies_cache_key, current_dependencies)
