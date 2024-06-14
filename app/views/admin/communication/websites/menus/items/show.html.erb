@@ -1,9 +1,5 @@
 <% content_for :title, @item %>
 
-<% content_for :title_right do %>
-  <%= render 'language_switcher' %>
-<% end %>
-
 <div class="row">
   <div class="col-xl-8">
     <%= render 'admin/communication/websites/menus/items/list', items: @children, item: @item if @children.any? %>
