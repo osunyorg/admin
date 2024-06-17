@@ -1,9 +1,9 @@
 <div class="row">
   <% websites.each do |website| %>
-    <div class="col-lg-4 col-xl-3">
+    <div class="col-sm-6 col-lg-4 col-xl-3">
       <div class=" position-relative mb-5">
-        <div class="ratio bg-light" style="--bs-aspect-ratio: 62.5%">
-          <%= kamifusen_tag website.screenshot, width: 500, class:'img-fluid rounded border' if website.screenshot.attached? %>
+        <div class="ratio bg-light rounded" style="--bs-aspect-ratio: 62.5%">
+          <%= kamifusen_tag website.screenshot, width: 500, class:'img-fluid rounded' if website.screenshot.attached? %>
         </div>
         <p class="strong mt-2 mb-0">
           <%= website %>

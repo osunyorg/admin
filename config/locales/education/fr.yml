@@ -117,8 +117,6 @@ fr:
           description: Présentation des enseignants et enseignantes, avec leur biographie et leurs enseignements dans les différentes formations
         school:
           description: Présentation des écoles, de leurs coordonnées, enseignements, équipes et informations administratives
-        alumnus:
-          description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
     manage_programs: Gérer les formations
     manage_roles: Gérer les rôles
     manage_teachers: Gérer les enseignements
