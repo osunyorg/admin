@@ -29,7 +29,11 @@
       <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
         <%= f.association :programs,
                           as: :check_boxes,
-                          collection: collection_tree(current_university.education_programs),
+                          collection: collection_tree(
+                                        current_university.education_programs
+                                                          .in_closest_language_id(current_language.id)
+                                                          .ordered
+                                        ),
                           label_method: ->(p) { sanitize p[:label] },
                           value_method: ->(p) { p[:id] } %>
       <% end %>

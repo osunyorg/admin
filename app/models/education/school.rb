@@ -55,6 +55,8 @@ class Education::School < ApplicationRecord
   validates :name, :address, :city, :zipcode, :country, presence: true
   validates :logo, size: { less_than: 1.megabytes }
 
+  before_validation :ensure_programs_are_in_correct_language
+
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {
     where("
@@ -106,4 +108,18 @@ class Education::School < ApplicationRecord
       logo&.blob_id
     ]
   end
+
+  def ensure_programs_are_in_correct_language
+    correct_program_ids = []
+    programs.each do |program|
+      if program.language_id == language_id
+        program_in_correct_language = program
+      else
+        program_in_correct_language = program.find_or_translate!(language)
+      end
+      correct_program_ids << program_in_correct_language.id
+    end
+    self.program_ids = correct_program_ids
+  end
+  
 end
