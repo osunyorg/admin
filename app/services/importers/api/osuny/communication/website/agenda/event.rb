@@ -24,6 +24,7 @@ class Importers::Api::Osuny::Communication::Website::Agenda::Event < Importers::
     object.summary = Importers::Cleaner.html_to_string params[:summary]
     object.from_day = params[:from_day]
     object.created_at = params[:created_at]
+    object.published = params[:published] || false
     object.save
   end
 
