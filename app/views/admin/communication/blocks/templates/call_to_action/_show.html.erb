@@ -1,17 +1,12 @@
 <%
-class_name = "block block-call_to_action"
-unless block.title.blank?
-  class_name += " block-with-title"
-end
-
-image_class = "call_to_action--with" + (block.template.image.empty? ? "out" : "") + "-image"
-
+call_to_action_class = "call_to_action--with #{block.template.image.empty? ? "out" : ""}-image"
+call_to_action_class += ' call_to_action--with-title' unless block.title.blank?
 %>
 
-<div class="<%= class_name %>">
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <div class="call_to_action <%= image_class %>">
+      <div class="call_to_action <%= call_to_action_class %>">
         <div>
           <% unless block.title.blank? %>
             <p class="block-title"><%= block.title %></p>

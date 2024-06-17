@@ -1,11 +1,9 @@
 <%
-class_name = "block block-chapter"
-class_name += " block-with-title" unless block.title.blank?
+block_class = block_html_class(block)
 #TODO comment vérifier proprement la présence de l'image?
-class_name += " block-chapter--with-image" if block.template.image[:id]
-class_name += " block-chapter--" + block.template.layout
+block_class += " block-chapter--with-image" if block.template.image[:id]
 %>
-<div class="<%= class_name %>">
+<div class="<%= block_class %>">
   <div class="container">
     <div class="block-content">
       <div class="chapter">
