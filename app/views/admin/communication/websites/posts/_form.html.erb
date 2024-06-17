@@ -37,7 +37,7 @@
           <%= f.input :published_at, html5: true, as: :date %>
         <% end %>
         <%= f.association :author,
-                            collection: current_university.people.for_language(current_language).ordered,
+                            collection: current_university.people.in_closest_language_id(current_language.id).ordered,
                             label_method: :to_s_alphabetical %>
         <%= render  "admin/application/slug/form",
                     f: f,
