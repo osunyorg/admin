@@ -25,10 +25,14 @@ class Admin::University::AlumniController < Admin::University::ApplicationContro
 
   protected
 
+  def current_subnav_context
+    'navigation/admin/administration'
+  end
+
   def breadcrumb
-    super
-    add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2),
-                    admin_university_alumni_path
+    add_breadcrumb t('admin.dashboard'), admin_root_path(website_id: nil)
+    add_breadcrumb  Administration.model_name.human, admin_administration_root_path
+    add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2), admin_university_alumni_path
     add_breadcrumb @alumnus, admin_university_alumni_path(@alumnus) if @alumnus
   end
 
