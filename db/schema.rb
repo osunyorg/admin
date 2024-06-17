@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_120944) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_17_124925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -840,6 +840,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_120944) do
     t.datetime "updated_at", null: false
     t.string "phone"
     t.string "url"
+    t.uuid "language_id"
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_education_schools_on_language_id"
+    t.index ["original_id"], name: "index_education_schools_on_original_id"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
@@ -1532,6 +1536,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_120944) do
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "languages"
   add_foreign_key "education_programs", "universities"
+  add_foreign_key "education_schools", "education_schools", column: "original_id"
+  add_foreign_key "education_schools", "languages"
   add_foreign_key "education_schools", "universities"
   add_foreign_key "emergency_messages", "universities"
   add_foreign_key "imports", "universities"
