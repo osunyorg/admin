@@ -1,13 +1,8 @@
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <% unless block.title.blank? %>
-        <div class="top">
-          <% unless block.title.blank? %>
-            <p class="block-title"><%= block.title %></p>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
+
       <ol class="programs">
         <% block.template.elements.each do |element|
           program = element.program

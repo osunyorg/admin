@@ -4,11 +4,8 @@ cc = Licenses::CreativeCommons.create_from_block(block)
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <% unless block.title.blank? %>
-        <div class="top">
-          <p class="block-title"><%= block.title %></p>
-        </div>
-      <% end %>
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
+
       <a href="<%= cc.url %>" target="_blank" rel="noreferrer">
         <%= render 'admin/communication/blocks/templates/license/creative_commons/badge', block: block %>
       </a>
