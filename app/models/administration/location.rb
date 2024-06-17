@@ -71,7 +71,7 @@ class Administration::Location < ApplicationRecord
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
-  before_validation :ensure_programs_are_in_correct_language
+  before_validation :ensure_programs_are_in_correct_language, :ensure_schools_are_in_correct_language
 
   def to_s
     "#{name}"
@@ -147,5 +147,18 @@ class Administration::Location < ApplicationRecord
       correct_program_ids << program_in_correct_language.id
     end
     self.program_ids = correct_program_ids
+  end
+
+  def ensure_schools_are_in_correct_language
+    correct_school_ids = []
+    schools.each do |school|
+      if school.language_id == language_id
+        school_in_correct_language = school
+      else
+        school_in_correct_language = school.find_or_translate!(language)
+      end
+      correct_school_ids << school_in_correct_language.id
+    end
+    self.school_ids = correct_school_ids
   end
 end
