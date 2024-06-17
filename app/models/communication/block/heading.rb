@@ -2,17 +2,18 @@
 #
 # Table name: communication_block_headings
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           not null, indexed => [about_id]
-#  level         :integer          default(2)
-#  position      :integer
-#  slug          :string           indexed
-#  title         :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             not null, indexed => [about_type]
-#  parent_id     :uuid             indexed
-#  university_id :uuid             not null, indexed
+#  id                   :uuid             not null, primary key
+#  about_type           :string           not null, indexed => [about_id]
+#  level                :integer          default(2)
+#  migration_identifier :string
+#  position             :integer
+#  slug                 :string           indexed
+#  title                :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  about_id             :uuid             not null, indexed => [about_type]
+#  parent_id            :uuid             indexed
+#  university_id        :uuid             not null, indexed
 #
 # Indexes
 #
