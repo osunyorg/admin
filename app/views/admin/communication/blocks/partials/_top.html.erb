@@ -1,0 +1,27 @@
+<%
+template = block.template
+title = block.title
+description_key = template.respond_to?(:description)  ? :description 
+                                                      : :text
+description = template.send(description_key)
+heading_level = block.heading_rank_self
+link = local_assigns[:link]
+%>
+<% if title.present? || description.present? %>
+  <div class="top">
+    <% if title.present? %>
+      <h<%= heading_level %> class="block-title">
+        <% if link %>
+          <a href="<%= link %>"><%= title %></a>
+        <% else %>
+          <%= title %>
+        <% end %>
+      </h<%= heading_level %>>
+    <% end %>
+    <% if description.present? %>
+      <div class="description">
+        <p><%= block_component_show block, description_key %></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>

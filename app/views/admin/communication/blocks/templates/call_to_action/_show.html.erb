@@ -13,14 +13,9 @@ image_class = "call_to_action--with" + (block.template.image.empty? ? "out" : ""
     <div class="block-content">
       <div class="call_to_action <%= image_class %>">
         <div>
-          <% unless block.title.blank? %>
-            <p class="block-title"><%= block.title %></p>
-          <% end %>
-          <% if block.template.text %>
-            <div class="description">
-              <%= block_component_show block, :text %>
-            </div>
-          <% end %>
+
+          <%= render 'admin/communication/blocks/partials/top', block: block %>
+
           <% if block.template.elements %>
             <div class="actions" <% if block.template.elements.count > 1 %>role="group"<% end %>>
               <% block.template.elements.each do |element| %>
