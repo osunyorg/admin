@@ -33,4 +33,15 @@ module Admin::BlocksHelper
             block: block,
             label: label
   end
+
+  def block_html_class(block)
+    html_class = "block block-#{block.template_kind}"
+    if block.template.respond_to? 'layout'
+      html_class << " block-#{block.template_kind}--#{block.template.layout}"
+    end
+    if block.template.heading_title
+      html_class << " block-titled"
+    end
+    return html_class
+  end
 end

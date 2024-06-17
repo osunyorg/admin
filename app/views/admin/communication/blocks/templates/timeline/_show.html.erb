@@ -1,12 +1,4 @@
-<%
-  class_name = "block block-timeline"
-  unless block.title.blank?
-    class_name += " block-with-title"
-  end
-  class_name += " block-timeline--" + block.template.layout
-%>
-
-<div class="<%= class_name %>">
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <% if block.template.layout == "vertical" %>
       <div class="block-content">

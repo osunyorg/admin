@@ -1,11 +1,7 @@
 <%
-class_name = "block block-license"
-unless block.title.blank?
-  class_name += " block-with-title"
-end
 cc = Licenses::CreativeCommons.create_from_block(block) 
 %>
-<div class="<%= class_name %>">
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
       <% unless block.title.blank? %>
