@@ -117,8 +117,6 @@ en:
           description: Presentation of the teachers, with their biographies and their teaching in the various courses
         school:
           description: Presentation of the schools, their contact details, courses, teams and administrative information
-        alumnus:
-          description: Presentation of the students who have studied in the various courses.
     manage_programs: Manage programs
     manage_roles: Manage roles
     manage_teachers: Manage teachers

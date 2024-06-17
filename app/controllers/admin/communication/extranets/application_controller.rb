@@ -7,7 +7,8 @@ class Admin::Communication::Extranets::ApplicationController < Admin::Communicat
   protected
 
   def current_subnav_context
-    'navigation/admin/communication/extranet' if @extranet && @extranet.persisted?
+    @extranet && @extranet.persisted? ? 'navigation/admin/communication/extranet'
+                                      : super
   end
 
   def breadcrumb

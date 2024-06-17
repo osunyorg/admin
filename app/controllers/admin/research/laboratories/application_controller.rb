@@ -6,6 +6,10 @@ class Admin::Research::Laboratories::ApplicationController < Admin::Research::Ap
 
   protected
 
+  def current_subnav_context
+    super
+  end
+
   def breadcrumb
     super
     add_breadcrumb Research::Laboratory.model_name.human(count: 2), admin_research_laboratories_path
