@@ -31,7 +31,6 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   end
 
   def create
-    @school.university = current_university
     @school.language_id = current_language.id
     if @school.save
       redirect_to [:admin, @school], notice: t('admin.successfully_created_html', model: @school.to_s)
@@ -67,5 +66,8 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   def school_params
     params.require(:education_school)
           .permit(:university_id, :name, :address, :zipcode, :city, :country, :url, :phone, :logo, :logo_delete, program_ids: [])
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

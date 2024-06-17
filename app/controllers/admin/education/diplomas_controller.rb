@@ -31,7 +31,6 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   end
 
   def create
-    @diploma.university = current_university
     @diploma.language_id = current_language.id
     if @diploma.save
       redirect_to [:admin, @diploma],
@@ -70,5 +69,8 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def diploma_params
     params.require(:education_diploma)
           .permit(:name, :slug, :short_name, :summary, :level, :ects, :duration)
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

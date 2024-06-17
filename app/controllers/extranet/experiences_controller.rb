@@ -11,7 +11,6 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
 
   def create
     @experience = current_user.experiences.new(experience_params)
-    @experience.university = current_university
     if @experience.save
       redirect_to account_path,
                   notice: t('admin.successfully_created_html', model: @experience.organization.to_s)
@@ -46,6 +45,9 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
   def experience_params
     params.require(:university_person_experience)
           .permit(:description, :from_year, :to_year, :organization_id, :organization_name)
+          .merge(
+            university_id: current_university.id
+          )
   end
 
   def breadcrumb

@@ -38,7 +38,7 @@ class University::Person::Involvement < ApplicationRecord
   validates :target_id, uniqueness: { scope: [:person_id, :target_type] }
 
   before_validation :set_kind, :set_university_id, on: :create
-  before_validation :ensure_person_is_in_correct_language
+  before_validation :ensure_connexion_is_in_correct_language
 
   after_commit :sync_with_git
 
@@ -77,9 +77,16 @@ class University::Person::Involvement < ApplicationRecord
     self.university_id = self.person.university_id
   end
 
-  def ensure_person_is_in_correct_language
+  def ensure_connexion_is_in_correct_language
+    # Si on passe par un rôle, on veut s'assurer que la personne connectée soit de la même langue que le target
+    # Si on passe par autre chose (connexion directe) on veut au contraire s'assurer que c'est le target qui a la même langue que la personne
     return unless person.language_id != target.language_id
-    person_in_correct_language = person.find_or_translate!(target.language)
-    self.person_id = person_in_correct_language.id
+    if target.is_a?(University::Role)
+      person_in_correct_language = person.find_or_translate!(target.language)
+      self.person_id = person_in_correct_language.id
+    else
+      target_in_correct_language = target.find_or_translate!(person.language)
+      self.target_id = target_in_correct_language.id
+    end
   end
 end

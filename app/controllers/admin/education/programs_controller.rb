@@ -80,7 +80,6 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def create
-    @program.university = current_university
     @program.language_id = current_language.id
     @program.add_photo_import params[:photo_import]
     if @program.save
@@ -116,21 +115,25 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def program_params
-    params.require(:education_program).permit(
-      :name, :short_name, :slug, :url, :bodyclass,
-      :meta_description, :summary, :published,
-      :capacity, :continuing, :initial, :apprenticeship, 
-      :qualiopi_certified, :qualiopi_text,
-      :logo, :logo_delete, 
-      :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :shared_image, :shared_image_delete,
-      :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
-      :evaluation, :accessibility, :contacts, :opportunities, :results, :other, :main_information,
-      :pricing, :pricing_apprenticeship, :pricing_continuing, :pricing_initial, :duration,
-      :downloadable_summary, :downloadable_summary_delete,
-      :parent_id, :diploma_id, school_ids: [],
-      university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]
-    )
+    params.require(:education_program)
+          .permit(
+            :name, :short_name, :slug, :url, :bodyclass,
+            :meta_description, :summary, :published,
+            :capacity, :continuing, :initial, :apprenticeship, 
+            :qualiopi_certified, :qualiopi_text,
+            :logo, :logo_delete, 
+            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+            :shared_image, :shared_image_delete,
+            :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
+            :evaluation, :accessibility, :contacts, :opportunities, :results, :other, :main_information,
+            :pricing, :pricing_apprenticeship, :pricing_continuing, :pricing_initial, :duration,
+            :downloadable_summary, :downloadable_summary_delete,
+            :parent_id, :diploma_id, school_ids: [],
+            university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]
+          )
+          .merge(
+            university_id: current_university.id
+          )
   end
 
   def load_teacher_people
