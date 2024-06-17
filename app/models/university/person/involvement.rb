@@ -37,8 +37,9 @@ class University::Person::Involvement < ApplicationRecord
   validates :person_id, uniqueness: { scope: [:target_id, :target_type] }
   validates :target_id, uniqueness: { scope: [:person_id, :target_type] }
 
-  before_validation :set_kind, on: :create
-  before_validation :set_university_id, on: :create
+  before_validation :set_kind, :set_university_id, on: :create
+  before_validation :ensure_target_is_in_correct_language
+
   after_commit :sync_with_git
 
   scope :ordered_by_name, -> {
@@ -74,5 +75,11 @@ class University::Person::Involvement < ApplicationRecord
 
   def set_university_id
     self.university_id = self.person.university_id
+  end
+
+  def ensure_target_is_in_correct_language
+    return unless target.language_id != person.language_id
+    target_in_correct_language = target.find_or_translate!(person.language)
+    self.target_id = target_in_correct_language.id
   end
 end

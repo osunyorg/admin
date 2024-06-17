@@ -34,14 +34,18 @@
     <div class="col-md-8">
       <%= f.association :programs,
                         as: :check_boxes,
-                        collection: collection_tree(current_university.education_programs),
+                        collection: collection_tree(
+                                      current_university.education_programs
+                                                        .in_closest_language_id(location.language_id)
+                                    ),
                         label_method: ->(p) { sanitize p[:label] },
                         value_method: ->(p) { p[:id] } %>
     </div>
     <div class="col-md-4">
       <%= f.association :schools,
                         as: :check_boxes,
-                        collection: current_university.education_schools.ordered %>
+                        collection: current_university.education_schools
+                                                      .ordered %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

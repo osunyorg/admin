@@ -38,6 +38,17 @@ class Admin::ApplicationController < ApplicationController
     # If the block doesn't exist anymore
   end
 
+  def default_url_options
+    options = {}
+    options[:lang] = current_language.iso_code
+    options
+  end
+
+  def current_language
+    @current_language ||= current_university.best_language_for(params[:lang])
+  end
+  helper_method :current_language
+
   private
 
   def redirect_if_context_is_not_an_university!

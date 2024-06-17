@@ -1,5 +1,9 @@
 <% content_for :title, Education::Diploma.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
+
 <%= render 'admin/education/diplomas/list', diplomas: @diplomas %>
 
 <% content_for :action_bar_right do %>

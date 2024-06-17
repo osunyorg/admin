@@ -2,7 +2,11 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   load_and_authorize_resource class: Education::Diploma,
                               through: :current_university
 
+  include Admin::Translatable
+
   def index
+    @diplomas = @diplomas.in_closest_language_id(current_language.id)
+                         .ordered
     breadcrumb
   end
 
@@ -28,7 +32,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
 
   def create
     @diploma.university = current_university
-    @diploma.language_id = current_university.default_language_id
+    @diploma.language_id = current_language.id
     if @diploma.save
       redirect_to [:admin, @diploma],
                   notice: t('admin.successfully_created_html', model: @diploma.to_s)

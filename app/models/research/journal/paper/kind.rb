@@ -31,16 +31,19 @@ class Research::Journal::Paper::Kind < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
   include Sluggable
-  include Translatable
   include WithGitFiles
   include WithUniversity
 
+  belongs_to :language
   belongs_to :journal, class_name: 'Research::Journal'
   has_many :papers
-
+  
   validates :title, presence: true
-
+  
   scope :ordered, -> { order(:title) }
+  scope :for_language, -> (language) { for_language_id(language.id) }
+  # The for_language_id scope can be used when you have the ID without needing to load the Language itself
+  scope :for_language_id, -> (language_id) { where(language_id: language_id) }
 
   def to_s
     "#{title}"
