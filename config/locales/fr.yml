@@ -301,6 +301,7 @@ fr:
         text_line_1_html: Le jeton d'accès utilisé pour le site « %{website} » a expiré et ne permet plus la mise à jour du site.
         text_line_2_html: "Pour résoudre ce problème, veuillez renseigner un nouveau jeton d'accès en cliquant <a href=\"%{url}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a>."
     yours: Cordialement.
+  manage: Gérer
   menu:
     admin: Admin
     profile: Profil

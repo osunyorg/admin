@@ -1,10 +1,4 @@
-<%
-class_name = "block block-features"
-unless block.title.blank?
-  class_name += " block-with-title"
-end
-%>
-<div class="<%= class_name %>">
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
       <div class="top">
