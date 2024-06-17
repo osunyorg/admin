@@ -7,7 +7,8 @@ class Admin::Research::Journals::ApplicationController < Admin::Research::Applic
   protected
 
   def current_subnav_context
-    'navigation/admin/research/journal' if @journal && @journal.persisted?
+    @journal && @journal.persisted? ? 'navigation/admin/research/journal' 
+                                    : super
   end
 
   def breadcrumb

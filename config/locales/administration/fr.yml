@@ -46,6 +46,8 @@ fr:
       text: L'administration, sous ses multiples formes, se définit principalement par ses activités au service de l'intérêt général. L'administration agit dans l'intérêt général et respecte le principe de légalité. Elle est tenue à l'obligation de neutralité et au respect du principe de laïcité. Elle se conforme au principe d'égalité et garantit à chacun un traitement impartial.
       source: Code des relations entre le public et l'administration
       parts:
+        alumnus:
+          description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
         location: 
           description: Gestion des différents sites (physiques) de formation et de recherche
         qualiopi:

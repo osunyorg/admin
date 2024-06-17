@@ -1,0 +1,23 @@
+.realm
+    background: $gray-900
+    &__quote
+        color: $white
+        margin-top: pxToRem(50)
+    &__author
+        color: $gray-300
+        &::before
+            content: "— "
+    &__credit
+        &, a
+            color: $gray-500
+        a
+            text-decoration-color: $gray-500
+            text-decoration-line: underline
+            &[target="_blank"]::after
+                filter: invert(1)
+    &__image
+        @include media-breakpoint-up(lg)
+            max-width: calc(100% + 4rem)
+        @include media-breakpoint-down(lg)
+            margin-bottom: 2rem
+    
