@@ -10,8 +10,10 @@ module Translatable
                 optional: true
     has_many    :translations,
                 class_name: base_class.to_s,
-                foreign_key: :original_id,
-                dependent: :nullify
+                foreign_key: :original_id
+
+    # has to be before_destroy because of the foreign key constraints
+    before_destroy :destroy_or_nullify_translations
 
     scope :for_language, -> (language) { for_language_id(language.id) }
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself
@@ -118,4 +120,16 @@ module Translatable
   def translate_additional_data!(translation)
     # Overridable method to handle custom cases
   end
+
+  def destroy_or_nullify_translations
+    # Translatable is included in either Direct or Indirect Objects
+    # If object is direct we do not want to remove the translations
+    # If object is indirect we remove the translations
+    if is_direct_object?
+      translations.update_all(original_id: nil)
+    else
+      translations.destroy_all
+    end
+  end
+
 end

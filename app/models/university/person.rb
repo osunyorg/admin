@@ -195,6 +195,10 @@ class University::Person < ApplicationRecord
     "#{last_name} #{first_name}"
   end
 
+  def initials
+    "#{first_name.to_s.first}#{last_name.to_s.first}"
+  end
+
   def roles
     LIST_OF_ROLES.reject do |role|
       ! send "is_#{role}"

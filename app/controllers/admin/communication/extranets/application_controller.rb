@@ -6,6 +6,11 @@ class Admin::Communication::Extranets::ApplicationController < Admin::Communicat
 
   protected
 
+  def current_subnav_context
+    @extranet && @extranet.persisted? ? 'navigation/admin/communication/extranet'
+                                      : super
+  end
+
   def breadcrumb
     super
     add_breadcrumb Communication::Extranet.model_name.human(count: 2), admin_communication_extranets_path

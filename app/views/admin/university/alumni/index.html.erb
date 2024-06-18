@@ -4,7 +4,7 @@
 
 <%= render 'admin/university/alumni/list', alumni: @alumni %>
 
-<%= paginate @alumni, theme: 'bootstrap-5' %>
+<%= paginate @alumni %>
 
 <% content_for :action_bar_left do %>
   <%= link_to t('university.alumni.cohorts.import_btn'),

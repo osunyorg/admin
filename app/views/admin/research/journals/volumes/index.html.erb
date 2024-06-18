@@ -1,9 +1,7 @@
 <% content_for :title, Research::Journal::Volume.model_name.human(count: 2) %>
 
-<%= render 'admin/research/journals/sidebar' do %>
-  <%= render 'admin/research/journals/volumes/list', volumes: @volumes %>
-  <%= paginate @volumes, theme: 'bootstrap-5' %>
-<% end %>
+<%= render 'admin/research/journals/volumes/list', volumes: @volumes %>
+<%= paginate @volumes %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Research::Journal::Volume %>

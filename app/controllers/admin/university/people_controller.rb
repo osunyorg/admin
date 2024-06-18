@@ -13,13 +13,11 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
                 .for_language_id(current_university.default_language_id)
                 .ordered
 
+    @feature_nav = 'navigation/admin/university/people'
+
     respond_to do |format|
       format.html {
-        @people = @people.page params[:page]
-        @categories = current_university.person_categories
-                                        .for_language_id(current_university.default_language_id)
-                                        .ordered
-                                        .page(params[:categories_page])
+        @people = @people.page(params[:page]).per(24)
         breadcrumb
       }
       format.xlsx {

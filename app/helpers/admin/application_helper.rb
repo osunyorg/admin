@@ -68,38 +68,6 @@ module Admin::ApplicationHelper
     raw "<a href=\"#{path}\" class=\"btn btn-light btn-xs\">#{t 'static' }</a>"
   end
 
-  def osuny_panel(title = nil, subtitle: nil, action: nil, image: nil, small: false, classes: '', &block)
-    render  layout: "admin/layouts/themes/#{current_admin_theme}/panel",
-            locals: {
-              title: title,
-              subtitle: subtitle,
-              action: action,
-              image: image,
-              small: small,
-              classes: classes
-            } do
-      capture(&block)
-    end
-  end
-
-  def osuny_label(title, classes: '')
-    raw "<label class=\"form-label #{classes}\">#{title}</label>"
-  end
-
-  def osuny_separator
-    raw '<hr class="my-5">'
-  end
-
-  def if_appstack(string)
-    return '' if current_admin_theme != 'appstack'
-    " #{string}"
-  end
-
-  def if_pure(string)
-    return '' if current_admin_theme != 'pure'
-    " #{string}"
-  end
-
   def button_classes(additional = '', **options)
     classes = "btn btn-primary btn-xs #{additional}"
     classes += ' disabled' if options[:disabled]

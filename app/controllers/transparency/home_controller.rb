@@ -7,9 +7,10 @@ class Transparency::HomeController < Transparency::ApplicationController
       ['CodeClimate', 'Qualité de code (gratuit pour l\'open source)', 0],
       ['Deuxfleurs', 'Hébergement sans data center', 100],
       ['KeyCDN', 'Redimensionnement des images', 600],
+      ['LanguageTool', 'Aide à la qualité des contenus', 348],
       ['LibreTranslate', 'Aide à  la traduction', 696],
       ['MicroLink', 'Captures d\'écran', 144],
-      ['noesya', 'Tierce maintenance applicative (pro bono)', 0],
+      ['noesya', 'Tierce maintenance applicative (pro bono, estimée à 60k€)', 0],
       ['Plausible', 'Mesure d\'audience', 100],
       ['Scalingo', 'Hébergement de l\'admin', 3000],
       ['Scaleway', 'Stockage des fichiers', 100]

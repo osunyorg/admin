@@ -2,12 +2,16 @@ module Communication::Website::WithProgramCategories
   extend ActiveSupport::Concern
 
   included do
-    after_save_commit :set_programs_categories!, if: -> (website) { website.has_education_programs? }
+    after_save_commit :set_programs_categories, if: -> (website) { website.has_education_programs? }
+  end
+
+  def set_programs_categories
+    Communication::Website::SetProgramsCategoriesJob.perform_later(id)
   end
 
   # TODO : I18n
   # Actuellement, on ne crée que dans la langue par défaut du website, on ne gère pas les autres langues
-  def set_programs_categories!
+  def set_programs_categories_safely
     [post_categories, agenda_categories].each do |objects|
       programs_root_category = set_root_programs_categories_for!(objects)
       set_programs_categories_at_level_for! objects, programs_root_category, education_programs.root.ordered

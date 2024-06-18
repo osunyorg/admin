@@ -9,15 +9,27 @@ class Communication::Website::BaseJob < ApplicationJob
 
   # Retry the job after 1 minute if it is interrupted, to prevent queue from being blocked
   retry_on GoodJob::InterruptError, wait: 1.minute, attempts: Float::INFINITY
+  # Retry the job after 30 seconds when the website was locked.
+  retry_on Communication::Website::LockError, wait: 30.seconds, attempts: Float::INFINITY
 
-  attr_accessor :website_id
+  attr_accessor :website_id, :options
 
-  def perform(website_id)
+  def perform(website_id, options = {})
     @website_id = website_id
+    @options = options
     # Website might be deleted in between
     return unless website.present?
-    # TODO manage lock / unlock
-    execute
+    # Raise if website is locked to retry later
+    raise Communication::Website::LockError.new("Interrupted because of website lock.") if website.locked_for_background_jobs?(job_id)
+    # We lock the website to prevent race conditions
+    website.lock_for_background_jobs!(job_id)
+    begin
+      # We execute the job
+      execute
+    ensure
+      # We make sure to unlock the website to allow the other jobs to run
+      website.unlock_for_background_jobs!
+    end
   end
 
   protected

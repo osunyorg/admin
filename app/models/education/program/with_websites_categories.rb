@@ -14,6 +14,6 @@ module Education::Program::WithWebsitesCategories
   end
 
   def set_websites_categories
-    websites.each { |website| website.set_programs_categories! }
+    websites.each { |website| website.set_programs_categories }
   end
 end

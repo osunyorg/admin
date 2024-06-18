@@ -4,47 +4,68 @@ categories_class_path = categories_class.to_s.parameterize.underscore
 %>
 <% categories.each do |category| %>
   <%
-  # children_admin_communication_website_post_category_path
-  children_path = send  "children_admin_#{categories_class_path}_path", 
-                        website_id: category.website.id, 
-                        id: category.id
-  # admin_communication_website_post_category_path
-  show_path = send  "admin_#{categories_class_path}_path", 
-                    website_id: @website.id, 
-                    id: category.id
-  # edit_admin_communication_website_post_category_path
-  edit_path = send  "edit_admin_#{categories_class_path}_path", 
-                    website_id: @website.id, 
-                    id: category.id
+  if category.respond_to?(:website)
+    # children_admin_communication_website_post_category_path
+    children_path = send  "children_admin_#{categories_class_path}_path", 
+                          website_id: category.website.id, 
+                          id: category.id
+    # admin_communication_website_post_category_path
+    show_path = send  "admin_#{categories_class_path}_path", 
+                      website_id: @website.id, 
+                      id: category.id
+    # edit_admin_communication_website_post_category_path
+    edit_path = send  "edit_admin_#{categories_class_path}_path", 
+                      website_id: @website.id, 
+                      id: category.id
+  else
+    children_path = send "children_admin_#{categories_class_path}_path", id: category.id
+    show_path     = send "admin_#{categories_class_path}_path", id: category.id
+    edit_path     = send "edit_admin_#{categories_class_path}_path", id: category.id
+  end
   %>
-  <li class="treeview__element js-treeview-element <%= 'treeview__element--empty' unless category.has_children? %>"
+  <li class=" treeview__element 
+              js-treeview-element 
+              mb-2
+              <%= 'treeview__element--empty' unless category.has_children? %>"
       data-id="<%= category.id %>"
       data-parent="<%= category.parent_id %>">
-    <div class="d-flex align-items-center treeview__label border-bottom py-1">
+    <div class="card card--horizontal treeview__label">
       <%= link_to children_path,
-                  class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
-        <%= render 'admin/application/tree/folder' %>
+                  class: 'js-treeview-openzone d-inline-block', 
+                  remote: true do %>
+        <%= osuny_thumbnail category %>
       <% end %>
-      <%= link_to category, show_path %>
-      <%= render 'admin/application/tree/sort' %>
-      <%= link_to children_path,
-                  class: 'js-treeview-openzone small ps-2', remote: true do %>
-        <span class="open_text"><%= t 'folder.open' %></span>
-        <span class="close_text"><%= t 'folder.close' %></span>
-      <% end %>
-      <div class="btn-group ms-auto" role="group">
+      <div class="card-body">
+        <%= link_to category, show_path, class: 'text-black' %>
+        <% if category.children.any? %>
+          <span class="text-muted">(<%= category.children.count %>)</span>
+        <% end %>
+        <span class="show-on-hover">
+          <%= render 'admin/application/tree/sort' %>
+          <%= link_to children_path,
+                      class: 'js-treeview-openzone small ps-2', remote: true do %>
+            <span class="open_text"><%= t 'folder.open' %></span>
+            <span class="close_text"><%= t 'folder.close' %></span>
+          <% end %>
+        </span>
+      </div>
+      <div class="card-footer">
         <%= link_to t('show'), show_path, class: 'action ps-3' %>
         <%= link_to t('edit'), edit_path, class: 'action ps-3' %>
         <%= link_to t('delete'), show_path, method: :delete, data: { confirm: t('please_confirm') }, class: 'action text-danger ps-3' %>
       </div>
     </div>
-    <ul class="list-unstyled treeview__children js-treeview-children js-treeview-sortable-container ms-4" data-id="<%= category.id %>">
+    <ul class=" list-unstyled 
+                treeview__children 
+                js-treeview-children 
+                js-treeview-sortable-container" 
+        data-id="<%= category.id %>">
       <li class="treeview__empty">
-        <div class="d-flex align-items-center treeview__label border-bottom p-1">
+        <div class="d-flex align-items-center treeview__label p-1">
           <span class="p-2 ps-0"><%= t('folder.empty') %></span>
         </div>
       </li>
-      <li class="treeview__loading border-bottom p-1"><%= t('loading') %></li>
+      <li class="treeview__loading p-1"><%= t('loading') %></li>
     </ul>
   </li>
 <% end %>

@@ -1,7 +1,11 @@
 <% content_for :title, "#{Communication::Website::Portfolio::Category.model_name.human(count: 2)} (#{@categories.count})" %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <%= render 'admin/application/categories/panel', 
-              root_categories: @root_categories, 
-              categories_class: @categories_class %>
+<%= render 'admin/application/categories/list', 
+            root_categories: @root_categories, 
+            categories_class: @categories_class %>
+
+<%= render 'admin/communication/websites/language_switcher' %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Website::Portfolio::Category %>
 <% end %>

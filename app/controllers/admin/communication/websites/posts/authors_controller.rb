@@ -6,6 +6,7 @@ class Admin::Communication::Websites::Posts::AuthorsController < Admin::Communic
     @authors =  apply_scopes(@website.authors.accessible_by(current_ability))
                                 .ordered
                                 .page(params[:page])
+    @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end
 

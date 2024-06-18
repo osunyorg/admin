@@ -1,5 +1,6 @@
 class Admin::Communication::Websites::LocalizationsController < Admin::Communication::Websites::ApplicationController
   before_action :load_localization
+  before_action :set_feature_nav, only: [:show, :update]
 
   def show
     breadcrumb
@@ -16,6 +17,10 @@ class Admin::Communication::Websites::LocalizationsController < Admin::Communica
 
   protected
 
+  def set_feature_nav
+    @feature_nav = 'navigation/admin/communication/website/settings'
+  end
+
   def load_localization
     @localization = @website.find_or_create_localization_for(current_website_language)
     authorize! :update, @localization
@@ -23,7 +28,7 @@ class Admin::Communication::Websites::LocalizationsController < Admin::Communica
 
   def breadcrumb
     super
-    add_breadcrumb  helpers.language_name(current_website_language.iso_code)
+    add_breadcrumb t('admin.subnav.settings')
     add_breadcrumb  t('admin.communication.website.localizations.title')
   end
 

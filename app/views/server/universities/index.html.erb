@@ -15,6 +15,7 @@
         <th><%= University.human_attribute_name('name') %></th>
         <th><%= University.human_attribute_name('url') %></th>
         <th><%= University.human_attribute_name('public_or_private') %></th>
+        <th><%= Language.model_name.human(count: 2) %></th>
         <th><%= User.model_name.human(count: 2) %></th>
         <th><%= University.human_attribute_name('invoice_date') %></th>
         <th><%= University.human_attribute_name('contribution_amount') %></th>
@@ -30,6 +31,7 @@
             <%= university.private ? University.human_attribute_name('private') : 
                                      University.human_attribute_name('public') %>
           </td>
+          <td><%= university.languages.count %></td>
           <td><%= link_to university.users.not_server_admin.count, "#{university.url}/admin/users", target: :_blank %></td>
           <% if university.contribution_amount.to_i.zero? %>
             <td></td>
@@ -59,14 +61,14 @@
     </tbody>
     <tfoot>
       <tr>
-        <th class="text-start" colspan="5"><%= t('server_admin.universities.contributions_total') %></th>
+        <th class="text-start" colspan="6"><%= t('server_admin.universities.contributions_total') %></th>
         <td class="text-start" colspan="2"><%= number_to_currency University.sum(:contribution_amount), precision: 0, locale: :fr %></td>
       </tr>
     </tfoot>
   </table>
 </div>
 
-<%= paginate @universities, theme: 'bootstrap-5' %>
+<%= paginate @universities %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('create'), new_server_university_path, class: button_classes %>

@@ -5,6 +5,8 @@ module University::Person::WithPicture
     has_one_attached_deletable :picture
 
     validates :picture, size: { less_than: 5.megabytes }
+
+    alias :featured_image :best_picture
   end
 
   def best_picture

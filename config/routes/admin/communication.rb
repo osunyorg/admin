@@ -82,6 +82,7 @@ namespace :communication do
           get :static
         end
       end
+      root to: '/admin/communication/websites/agenda/events#index'
     end
     namespace :portfolio, path: '/:lang/portfolio' do
       resources :projects, controller: '/admin/communication/websites/portfolio/projects' do

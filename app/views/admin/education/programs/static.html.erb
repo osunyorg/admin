@@ -21,24 +21,25 @@ registration_url: >-
   <%= @about.registration_url %>
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
-presentation: >
+presentation: >-
   <%= prepare_text_for_static @about.presentation %>
 position: <%= @about.position %>
 <% if @about.parent %>
 parent:
-  title: >
+  title: >-
     <%= @about.parent.name %>
   url: <%= @about.parent.current_permalink_in_website(@website)&.path %>
 <% end %>
 <%= render 'admin/application/i18n/static' %>
 <%= render 'admin/application/featured_image/static' %>
+<%= render 'admin/application/shared_image/static' %>
 <% if @about.logo.attached? %>
 logo:
   id: "<%= @about.logo.blob.id %>"
 <% end %>
 related_category: "<%= @website.post_categories.find_by(program_id: @about.id)&.slug_with_ancestors_slugs %>"
 diplomas: "<%= @about.diploma&.slug %>"
-duration: >
+duration: >-
   <%= prepare_text_for_static @about.duration %>
 teachers:
 <% teacher_involvements.each do |involvement| %>
@@ -46,7 +47,7 @@ teachers:
 <% end %>
 teachers_description:
 <% teacher_involvements.each do |involvement| %>
-  "<%= involvement.person.slug %>": >
+  "<%= involvement.person.slug %>": >-
     <%= involvement.description %>
 <% end %>
 <% if administrator_involvements.any? %>
@@ -56,12 +57,12 @@ administrators:
 <% end %>
 administrators_description:
 <% administrator_involvements.each do |involvement| %>
-  "<%= involvement.person.slug %>": >
+  "<%= involvement.person.slug %>": >-
     <%= involvement.target.to_s %>
 <% end %>
 roles:
 <% @about.university_roles.ordered.each do |role| %>
-  - title: >
+  - title: >-
       <%= role.to_s %>
     persons:
     <% role.involvements.includes(:person).ordered.each do |involvement| %>

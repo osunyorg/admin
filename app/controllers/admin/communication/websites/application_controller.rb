@@ -11,6 +11,11 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
   end
   helper_method :current_website_language
 
+  def current_subnav_context
+    @website && @website.persisted? ? 'navigation/admin/communication/website'
+                                    : super
+  end
+
   def breadcrumb
     super
     add_breadcrumb Communication::Website.model_name.human(count: 2), admin_communication_websites_path

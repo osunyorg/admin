@@ -56,11 +56,11 @@ module Importers
     def build_person
       if @email.present?
         person = @university.people
-                           .where(email: @email)
+                           .where(language_id: @university.default_language_id, email: @email)
                            .first_or_initialize
       elsif @first_name.present? && @last_name.present?
         person = @university.people
-                           .where(first_name: @first_name, last_name: @last_name)
+                           .where(language_id: @university.default_language_id, first_name: @first_name, last_name: @last_name)
                            .first_or_initialize
       else
         # No mail, no name, nothing

@@ -21,6 +21,7 @@ weight: <%= @about.position %>
 bodyclass: >-
   <%= @about.best_bodyclass %>
 <%= render 'admin/application/featured_image/static' %>
+<%= render 'admin/application/shared_image/static' %>
 <% if @about.children.published.any? %>
 children:
 <%
@@ -36,7 +37,8 @@ header_text: >-
   <%= prepare_html_for_static @about.header_text %>
 header_cta:
   display: <%= @about.header_cta %>
-  label: <%= prepare_text_for_static @about.header_cta_label %>
-  target: <%= @about.header_cta_url %>
+  label: >-
+    <%= prepare_text_for_static @about.header_cta_label %>
+  target: "<%= @about.header_cta_url %>"
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---

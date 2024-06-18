@@ -16,12 +16,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     @posts = apply_scopes(@posts).for_language(current_website_language)
                                  .ordered
                                  .page(params[:page])
-    @authors =  @website.authors.for_language(current_website_language)
-                                .accessible_by(current_ability)
-                                .ordered
-                                .page(params[:authors_page])
-    @root_categories = categories.root
-    @categories_class = Communication::Website::Post::Category
+    @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end
 
@@ -122,6 +117,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
       :title, :meta_description, :summary, :text,
       :published, :published_at, :slug, :pinned,
       :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+      :shared_image, :shared_image_delete,
       :author_id, category_ids: []
     )
     .merge(

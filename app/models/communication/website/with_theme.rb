@@ -1,6 +1,6 @@
 module Communication::Website::WithTheme
   extend ActiveSupport::Concern
-  
+
   included do
     scope :with_automatic_update, -> { where(autoupdate_theme: true) }
     scope :with_manual_update, -> { where(autoupdate_theme: false) }
@@ -33,7 +33,8 @@ module Communication::Website::WithTheme
   protected
 
   def current_theme_version
-    URI(theme_version_url).read
+    response = Faraday.get(theme_version_url)
+    response.status == 200 ? response.body : 'NA'
   rescue
     'NA'
   end

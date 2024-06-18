@@ -6,6 +6,9 @@ subtitle: >-
 # https://github.com/osunyorg/admin/issues/1880
 if @about.archive? %>
 date: "<%= @about.from_day&.iso8601 %>"
+<% elsif @about.current? %>
+weight: -1
+date: "<%= @about.from_day&.iso8601 %>"
 <% else %>
 weight: <%= @about.distance_in_days %>
 <% end %>
@@ -15,6 +18,7 @@ weight: <%= @about.distance_in_days %>
 <%= render 'admin/communication/websites/agenda/events/dates_static', event: @about %>
 <%= render 'admin/application/i18n/static' %>
 <%= render 'admin/application/featured_image/static' %>
+<%= render 'admin/application/shared_image/static' %>
 <%= render 'admin/application/meta_description/static' %>
 <%= render 'admin/application/summary/static' %>
 <% if @about.categories.any? %>

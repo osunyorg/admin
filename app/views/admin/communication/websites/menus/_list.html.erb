@@ -1,26 +1,24 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= Communication::Website::Menu.human_attribute_name('title') %></th>
-        <th></th>
-        <th><%= Communication::Website::Menu.human_attribute_name('items') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% menus.each do |menu| %>
-        <tr>
-          <td><%= link_to menu, admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id) %></td>
-          <td>
-            <% if menu.automatic %>
-              <span class="badge bg-success">
-                <%= Communication::Website::Menu.human_attribute_name('automatic') %>
-              </span>
-            <% end %>
-          </td>
-          <td><%= menu.items.count %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2">
+  <% menus.each do |menu| %>
+    <div class="col-lg-6 col-xxl-4">
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail menu %>
+        <div class="card-body">
+          <%= link_to menu, 
+                      admin_communication_website_menu_path(website_id: menu.website.id, id: menu.id),
+                      class: 'stretched-link text-black' %>
+          <% if menu.items.any? %>
+            <span class="text-muted">(<%= menu.items.count %>)</span>
+          <% end %>
+        </div>
+        <div class="card-footer text-muted">
+          <% if menu.automatic %>
+            <span class="badge bg-success">
+              <%= Communication::Website::Menu.human_attribute_name('automatic') %>
+            </span>
+          <% end %>          
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

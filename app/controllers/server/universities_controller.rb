@@ -6,6 +6,7 @@ class Server::UniversitiesController < Server::ApplicationController
   has_scope :for_real_university
   has_scope :for_contribution
   has_scope :for_university_kind
+  has_scope :for_language
 
   def index
     @universities = apply_scopes(@universities).ordered.page(params[:page])
@@ -65,13 +66,14 @@ class Server::UniversitiesController < Server::ApplicationController
   end
 
   def university_params
-    params.require(:university).permit(:name, :default_language_id,
+    params.require(:university).permit(:name,
       :address, :zipcode, :city, :country,
       :private, :identifier, :logo, :logo_delete, :sms_sender_name,
       :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping, :sso_button_label,
-      :invoice_date, :contribution_amount, 
-      :is_really_a_university
+      :invoice_date, :contribution_amount,
+      :is_really_a_university,
+      :default_language_id, language_ids: []
     )
   end
-  
+
 end

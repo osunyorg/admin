@@ -1,5 +1,3 @@
 <% content_for :title, Communication::Website::Post::Category.model_name.human %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <%= render 'form', category: @category %>
-<% end %>
+<%= render 'form', category: @category %>

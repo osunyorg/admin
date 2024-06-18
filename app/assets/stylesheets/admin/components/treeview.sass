@@ -1,0 +1,88 @@
+.treeview
+    ul
+        margin-left: 74px
+        margin-top: 5px
+    &__element
+        a:not(.action)
+            text-decoration: none
+        & > .treeview__children .treeview__empty
+            display: none
+
+        & > .treeview__label
+            .close_text,
+            & > a .close_btn,
+            & > a .close_text
+                display: none
+                .close_btn--with_children
+                    display: inline
+                .close_btn--without_children
+                    display: none
+
+            .open_text,
+            & > a .open_btn,
+            & > a .open_text
+                display: inline
+                .open_btn--with_children
+                    display: inline
+                .open_btn--without_children
+                    display: none
+
+            & > .move_btn,
+            & > div .show-on-hover,
+            & > a .open_text,
+            & > a .close_text
+                opacity: 0
+                transition: opacity 0.1s
+
+        & > .treeview__children
+            display: none
+
+        &--draft
+            > .treeview__label
+                > .leaf-title
+                    opacity: 0.5
+
+        &--opened
+            & > .treeview__label
+                .close_text,
+                & > a .close_btn,
+                & > a .close_text
+                    display: inline
+                .open_text,
+                & > a .open_btn,
+                & > a .open_text
+                    display: none
+            & > .treeview__children
+                display: block
+
+        &--loaded
+            & > .treeview__children .treeview__loading
+                display: none
+
+        &--empty
+            & > .treeview__label
+                & > a .close_btn
+                    .close_btn--with_children
+                        display: none
+                    .close_btn--without_children
+                        display: inline
+
+                & > a .open_btn
+                    .open_btn--with_children
+                        display: none
+                    .open_btn--without_children
+                        display: inline
+
+            &.treeview__element--loaded
+                & > .treeview__children .treeview__empty
+                    display: inline
+
+    &--sortable
+        .treeview__element
+            &:hover
+                & > .treeview__label
+                    & > .move_btn,
+                    & > div .show-on-hover,
+                    & > a .open_text,
+                    & > a .close_text
+                        opacity: 1

@@ -13,13 +13,36 @@
   <%= render 'admin/application/favorites/widget', about: @website %>
 <% end %>
 
-<%= render 'admin/communication/websites/sidebar' do %>
-  <%= render 'admin/communication/websites/show/posts' if @website.feature_posts && can?(:read, Communication::Website::Post) %>
-  <%= render 'admin/communication/websites/show/events' if @website.feature_agenda && can?(:read, Communication::Website::Agenda::Event) %>
-  <%= render 'admin/communication/websites/show/projects' if @website.feature_portfolio && can?(:read, Communication::Website::Portfolio::Project) %>
-  <%= render 'admin/communication/websites/show/pages' if can?(:read, Communication::Website::Page) %>
-  <%= image_tag @website.deployment_status_badge, alt: '' if @website.deployment_status_badge.present? %>
-<% end %>
+<%
+number_of_panels = 0
+%>
+<div class="row gx-5">
+  <% if @website.feature_posts && @posts.any? && can?(:read, Communication::Website::Post) %>
+    <% number_of_panels += 1 %>
+    <div class="col-lg-6">
+    <%= render 'admin/communication/websites/show/posts'  %>
+    </div>
+  <% end %>
+  <% if @website.feature_agenda && @events.any? && can?(:read, Communication::Website::Agenda::Event) %>
+    <% number_of_panels += 1 %>
+    <div class="col-lg-6">
+      <%= render 'admin/communication/websites/show/events' %>
+    </div>
+  <% end %>
+  <% if @website.feature_portfolio && @projects.any? && can?(:read, Communication::Website::Portfolio::Project) %>
+    <% number_of_panels += 1 %>
+    <div class="col-lg-6">
+      <%= render 'admin/communication/websites/show/projects' %>
+    </div>
+  <% end %>
+  <div class="col-lg-<%= number_of_panels.even? ? 12 : 6 %>">
+    <%= render 'admin/communication/websites/show/pages', large: number_of_panels.even? if can?(:read, Communication::Website::Page) %>
+  </div>
+</div>
+
+<%= render 'admin/communication/websites/language_switcher' %>
+
+<%= image_tag @website.deployment_status_badge, alt: '' if @website.deployment_status_badge.present? %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @website %>

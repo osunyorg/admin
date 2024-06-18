@@ -50,8 +50,10 @@ class University::Organization < ApplicationRecord
   include AsIndirectObject
   include Backlinkable
   include Contentful
+  include Initials
   include Permalinkable
   include Sanitizable
+  include Shareable
   include Sluggable
   include Translatable
   include WithBlobs
@@ -73,6 +75,8 @@ class University::Organization < ApplicationRecord
 
   has_one_attached_deletable :logo
   has_one_attached_deletable :logo_on_dark_background
+
+  alias :featured_image :logo
 
   validates_presence_of :name
   validates_uniqueness_of :name, scope: [:university_id, :language_id]
@@ -146,7 +150,8 @@ class University::Organization < ApplicationRecord
   def explicit_blob_ids
     [
       logo&.blob_id,
-      logo_on_dark_background&.blob_id
+      logo_on_dark_background&.blob_id,
+      shared_image&.blob_id
     ]
   end
 end

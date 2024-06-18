@@ -372,6 +372,8 @@ fr:
         social:
           free: Libres
           private: Privatifs
+        subnav:
+          structure: Arborescence
         technical:
           description: Tout ce qui est lié aux réglages techniques
           label: Technique
@@ -388,7 +390,7 @@ fr:
           description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
           description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
-      text: Communiquer, c'est mettre en commun; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
+      text: Communiquer, c'est mettre en commun ; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
     extranet:
       post:
         metadata:
@@ -402,7 +404,7 @@ fr:
     summary:
       none: Il n'y a pas encore de résumé
     website:
-      analytics: Analytics
+      analytics: Audience
       git: Git
       golive:
         button: Mettre en production

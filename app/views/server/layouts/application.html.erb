@@ -9,12 +9,12 @@
     <script nonce="<%= request.content_security_policy_nonce %>">
     // Avoid opening menu on load
     </script>
-    <%= stylesheet_link_tag 'admin/pure', media: 'all' %>
+    <%= stylesheet_link_tag 'admin', media: 'all' %>
     <%= favicon_link_tag 'favicon.png' %>
   </head>
   <body class="<%= body_classes %>">
-    <%= render "admin/layouts/themes/pure/nav", context: :server %>
-    <%= render "admin/layouts/themes/pure/hero" %>
+    <%= render "admin/application/components/nav", context: 'navigation/server' %>
+    <%= render "admin/application/components/hero" %>
     <%= render 'application/notice' %>
     <main class="container-fluid">
       <% unless current_user.confirmed? %>
@@ -30,8 +30,8 @@
         <%= yield %>
       </div>
     </main>
-    <%= render "admin/layouts/themes/pure/commands" %>
-    <%= render "admin/layouts/themes/pure/footer" %>
+    <%= render "admin/application/components/commands" %>
+    <%= render "server/application/footer" %>
     <%= javascript_include_tag 'server' %>
     <%= render 'bugsnag' %>
   </body>

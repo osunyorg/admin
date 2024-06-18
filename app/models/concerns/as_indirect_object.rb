@@ -60,6 +60,15 @@ module AsIndirectObject
     dependencies
   end
 
+  def connect_and_sync_direct_sources_safely
+    direct_sources.each do |direct_source|
+      direct_source.website.connect self, direct_source
+    end
+    websites.each do |website|
+      Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website.id, indirect_object: self)
+    end
+  end
+
   protected
 
   def direct_sources_from_reference(reference)
@@ -70,12 +79,7 @@ module AsIndirectObject
   end
 
   def connect_and_sync_direct_sources
-    direct_sources.each do |direct_source|
-      direct_source.website.connect self, direct_source
-    end
-    websites.each do |website|
-      Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website, self)
-    end
+    Communication::Website::IndirectObject::ConnectAndSyncDirectSourcesJob.perform_later self
   end
 
   def add_direct_source_to_dependencies(direct_source, website, array: [])

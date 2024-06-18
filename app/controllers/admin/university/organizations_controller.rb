@@ -12,13 +12,11 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
                       .for_language_id(current_university.default_language_id)
                       .ordered
 
+    @feature_nav = 'navigation/admin/university/organizations'
+
     respond_to do |format|
       format.html {
-        @organizations = @organizations.page params[:page]
-        @categories = current_university.organization_categories
-                                        .for_language_id(current_university.default_language_id)
-                                        .ordered
-                                        .page(params[:categories_page])
+        @organizations = @organizations.page(params[:page]).per(24)
         breadcrumb
       }
       format.xlsx {
@@ -116,6 +114,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
             :url, :phone, :email, :linkedin, :twitter, :mastodon,
             :logo, :logo_delete, :logo_infos,
             :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
+            :shared_image, :shared_image_delete,
             category_ids: []
           )
   end

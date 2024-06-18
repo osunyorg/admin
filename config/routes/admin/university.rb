@@ -27,7 +27,11 @@ namespace :university do
     collection do
       get :search, defaults: { format: 'json' }
       resources :categories, controller: 'people/categories', as: 'person_categories' do
+        collection do
+          post :reorder
+        end  
         member do
+          get :children
           get :static
           get "/translations/:lang" => "people/categories#in_language", as: :show_in_language
         end
@@ -45,7 +49,11 @@ namespace :university do
     collection do
       get :search, defaults: { format: 'json' }
       resources :categories, controller: 'organizations/categories', as: 'organization_categories' do
+        collection do
+          post :reorder
+        end  
         member do
+          get :children
           get :static
           get "/translations/:lang" => "organizations/categories#in_language", as: :show_in_language
         end

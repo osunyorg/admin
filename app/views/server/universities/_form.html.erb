@@ -6,7 +6,6 @@
     <div class="col-md-4">
       <%= f.input :name %>
       <%= f.input :identifier %>
-      <%= f.association :default_language, include_blank: false %>
       <%= f.input :is_really_a_university %>
       <%= f.input :private %>
       <%= f.input :sms_sender_name,
@@ -32,6 +31,25 @@
                   direct_upload: true %>
     </div>
   </div>
+
+  <h3 class="mt-5"><%= Language.model_name.human(count: 2) %></h3>
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.association :languages,
+                        as: :check_boxes,
+                        required: true,
+                        wrapper_html: { class: "js-languages" },
+                        label_method: lambda { |l| language_name(l.iso_code) } %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.association :default_language,
+                        include_blank: t('simple_form.include_blanks.defaults.language'),
+                        label_method: lambda { |l| language_name(l.iso_code) },
+                        input_html: { class: "js-default-language" },
+                        required: true %>
+    </div>
+  </div>
+
 
   <h3 class="mt-5"><%= t('university.sso') %></h3>
   <div class="row">
