@@ -49,6 +49,8 @@ class Static
     # /u008d
     # https://github.com/osunyorg/lacriee-site/actions/runs/9242403369
     code = code.remove("\u008d".encode('utf-8'))
+    # /u009D
+    code = code.remove("\u009D".encode('utf-8'))
     code
   end
 end
