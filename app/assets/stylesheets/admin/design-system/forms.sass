@@ -6,18 +6,26 @@ input.form-control[type=tel],
 input.form-control[type=password],
 input.form-control[type=url],
 input.form-control[type=file],
-input.form-check-input[type=checkbox],
+label.form-check-label,
 textarea.form-control
-    background-color: $color-white
     font-family: $font-family-serif
+    font-size: pxToRem(20)
     font-variant-ligatures: common-ligatures no-discretionary-ligatures no-historical-ligatures
 
-.form-control:valid,
-.form-control.is-valid,
-.form-select:valid,
-.form-select.is-valid
+select.form-select,
+input.form-select[type=date],
+input.form-control[type=text],
+input.form-control[type=email],
+input.form-control[type=tel],
+input.form-control[type=password],
+input.form-control[type=url],
+input.form-control[type=file],
+textarea.form-control
     background-color: $color-white
-    background-image: none
-    border-color: $color-valid
+
 .form-label
     color: $color-text-alt
+
+.form-check
+    .form-check-input
+        margin-top: 7px
