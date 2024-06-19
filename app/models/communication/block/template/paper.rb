@@ -7,10 +7,6 @@ class Communication::Block::Template::Paper < Communication::Block::Template::Ba
   ]
   has_component :quantity, :number, options: 3
 
-  def category
-    category_id_component.category
-  end
-
   def dependencies
     selected_papers
   end

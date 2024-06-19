@@ -7,10 +7,6 @@ class Communication::Block::Template::Volume < Communication::Block::Template::B
   ]
   has_component :quantity, :number, options: 3
 
-  def category
-    category_id_component.category
-  end
-
   def dependencies
     selected_volumes
   end
