@@ -3,6 +3,10 @@ class Communication::Block::Template::Program < Communication::Block::Template::
   has_elements
   has_layouts [:list, :grid]
 
+  has_component :option_diploma,      :boolean, default: true
+  has_component :option_image,        :boolean, default: false
+  has_component :option_summary,      :boolean, default: false
+
   def dependencies
     selected_programs
   end
