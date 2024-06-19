@@ -64,7 +64,15 @@ class Research::Journal::Volume < ApplicationRecord
   scope :for_language_id, -> (language_id) { where(language_id: language_id) }
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}volumes#{path}/_index.html" if published_at
+    "#{git_path_content_prefix(website)}#{git_path_relative}" if published_at
+  end
+
+  def git_path_relative
+    "volumes/#{path}/_index.html"
+  end
+
+  def path
+    "#{published_at&.year}-#{slug}" if published_at
   end
 
   def template_static
@@ -79,10 +87,6 @@ class Research::Journal::Volume < ApplicationRecord
 
   def references
     [journal]
-  end
-
-  def path
-    "/#{published_at&.year}-#{slug}" if published_at
   end
 
   def to_s

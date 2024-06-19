@@ -455,7 +455,7 @@ fr:
                 description: Le chapô de la page principale sert d'édito en gros et les pages sont présentées sous forme de liste à droite.
                 label: Liste
           papers:
-            description: Une sélection de papiers de recherche. 
+            description: Une sélection de papiers de recherche publiés dans la revue scientifique.
             edit:
               mode:
                 label: Quels papiers afficher ?
@@ -656,6 +656,22 @@ fr:
               video_title:
                 label: Titre de la vidéo
                 placeholder: Entrer le titre de la vidéo
+          volumes:
+            description: Une sélection de volumes publiés dans la revue scientifique.
+            edit:
+              mode:
+                label: Quels volumes afficher ?
+                options:
+                  all: Les volumes les plus récents
+                  selection: Une sélection de volumes
+              quantity:
+                label: Quantité de volumes
+                placeholder: Entrer la quantité
+              selection:
+                add: Ajouter un volume
+                label: Volume
+                none: Aucun volume
+                title: Volumes sélectionnés
       contents:
         blocks:
           copy: Copier le bloc
