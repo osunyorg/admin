@@ -1,5 +1,5 @@
 <%
-volumes = component.website.research_volumes.ordered
+elements = component.website.research_volumes.ordered
 %>
 <% unless label.blank? %>
   <label  class="form-label"
@@ -13,9 +13,9 @@ volumes = component.website.research_volumes.ordered
   <% unless none.blank? %>
     <option value="" :selected="true"><%= none %></option>
   <% end %>
-  <% volumes.each do |volume| %>
-    <option value="<%= volume.id %>">
-      <%= volume.to_s.html_safe %>
+  <% elements.each do |element| %>
+    <option value="<%= element.id %>">
+      <%= element.to_s.html_safe %>
     </option>
   <% end %>
 </select>

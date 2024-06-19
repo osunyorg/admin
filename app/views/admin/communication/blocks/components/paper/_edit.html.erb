@@ -1,5 +1,5 @@
 <%
-papers = component.website.research_papers.ordered
+elements = component.website.research_papers.ordered
 %>
 <% unless label.blank? %>
   <label  class="form-label"
@@ -13,9 +13,9 @@ papers = component.website.research_papers.ordered
   <% unless none.blank? %>
     <option value="" :selected="true"><%= none %></option>
   <% end %>
-  <% papers.each do |paper| %>
-    <option value="<%= paper.id %>">
-      <%= paper.to_s.html_safe %>
+  <% elements.each do |element| %>
+    <option value="<%= element.id %>">
+      <%= element.to_s.html_safe %>
     </option>
   <% end %>
 </select>
