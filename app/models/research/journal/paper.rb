@@ -88,14 +88,14 @@ class Research::Journal::Paper < ApplicationRecord
   scope :for_language_id, -> (language_id) { where(language_id: language_id) }
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}papers/#{static_path}.html" if published?
+    "#{git_path_content_prefix(website)}#{git_path_relative}" if published?
   end
 
   def git_path_relative
-    "papers/#{static_path}.html"
+    "papers/#{path}.html"
   end
 
-  def static_path
+  def path
     "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
   end
 
