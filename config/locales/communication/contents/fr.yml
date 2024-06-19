@@ -454,6 +454,22 @@ fr:
               list:
                 description: Le chapô de la page principale sert d'édito en gros et les pages sont présentées sous forme de liste à droite.
                 label: Liste
+          papers:
+            description: Une sélection de papiers de recherche. 
+            edit:
+              mode:
+                label: Quels papiers afficher ?
+                options:
+                  all: Les papiers les plus récents
+                  selection: Une sélection de papiers
+              quantity:
+                label: Quantité de papiers
+                placeholder: Entrer la quantité
+              selection:
+                add: Ajouter un papier
+                label: Papier
+                none: Aucun papier
+                title: Papiers sélectionnés
           persons:
             description: Une liste de personnes, avec photo, fonction et lien vers la page de la personne.
             edit:
@@ -676,6 +692,7 @@ fr:
           locations: Campus
           organizations: Organisations
           pages: Pages
+          papers: Papiers
           persons: Personnes
           posts: Actualités
           programs: Formations
@@ -684,3 +701,4 @@ fr:
           testimonials: Témoignages
           timeline: Frise chronologique
           video: Vidéo
+          volumes: Volumes

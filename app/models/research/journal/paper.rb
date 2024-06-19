@@ -91,6 +91,10 @@ class Research::Journal::Paper < ApplicationRecord
     "#{git_path_content_prefix(website)}papers/#{static_path}.html" if published?
   end
 
+  def git_path_relative
+    "papers/#{static_path}.html"
+  end
+
   def static_path
     "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
   end
