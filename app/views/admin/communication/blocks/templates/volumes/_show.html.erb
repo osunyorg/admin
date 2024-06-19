@@ -1,0 +1,28 @@
+<%
+class_name = "block block-volumes"
+unless block.title.blank?
+  class_name += " block-with-title"
+end
+%>
+<div class="<%= class_name %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless block.title.blank? %>
+        <div class="top">
+          <% unless block.title.blank? %>
+            <p class="block-title"><%= block.title %></p>
+          <% end %>
+        </div>
+      <% end %>
+      <% if block.data %>
+        <ul>
+          <% block.template.selected_volumes.each do |volume|
+            next if volume.nil?
+          %>
+          <li><%= link_to volume, '#' %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
