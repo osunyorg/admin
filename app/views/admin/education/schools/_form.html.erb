@@ -18,7 +18,7 @@
         </div>
         <%= f.input :country, input_html: { class: 'form-select' } %>
         <%= f.input :url %>
-        <%= f.input :logo, 
+        <%= f.input :logo,
                     as: :single_deletable_file,
                     input_html: { accept: default_images_formats_accepted },
                     preview: 200,
@@ -29,7 +29,7 @@
       <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
         <%= f.association :programs,
                           as: :check_boxes,
-                          collection: collection_tree(current_university.education_programs),
+                          collection: translatable_collection_tree(current_university.education_programs, current_language),
                           label_method: ->(p) { sanitize p[:label] },
                           value_method: ->(p) { p[:id] } %>
       <% end %>

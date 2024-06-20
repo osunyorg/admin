@@ -45,6 +45,22 @@ module WithTree
       elements
     end
 
+    def self_and_translatable_children(language, level, parent_id = nil)
+      elements = []
+      label = "&nbsp;&nbsp;&nbsp;" * level + self.to_s
+      elements << { label: label, id: self.id, parent_id: parent_id }
+      parent_ids = [original_object.id] + original_object.translation_ids - [id]
+       # We query other translations' children which are originals, meaning created in their language first, and then in the closest language
+      indirect_children = self.class.unscoped
+                                    .where(parent_id: parent_ids, original_id: nil)
+                                    .in_closest_language_id(language.id)
+      children_in_closest_language = children.or(indirect_children)
+      children_in_closest_language.ordered.each do |child|
+        elements.concat(child.self_and_translatable_children(language, level + 1, child.id))
+      end
+      elements
+    end
+
   end
 
 
