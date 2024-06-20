@@ -118,6 +118,8 @@ class Education::Program < ApplicationRecord
   has_one_attached_deletable :downloadable_summary
   has_one_attached_deletable :logo
 
+  before_validation :ensure_connected_elements_are_in_correct_language
+
   before_destroy :move_children
 
   validates_presence_of :name
@@ -242,4 +244,12 @@ class Education::Program < ApplicationRecord
   def move_children
     children.update(parent_id: parent_id)
   end
+
+  def ensure_connected_elements_are_in_correct_language
+    ensure_single_connection_is_in_correct_language(parent, :parent_id)
+    ensure_single_connection_is_in_correct_language(diploma, :diploma_id)
+    ensure_multiple_connections_are_in_correct_language(schools, :school_ids)
+  end
+
+  
 end

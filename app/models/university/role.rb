@@ -21,6 +21,7 @@
 #  fk_rails_8e52293a38  (university_id => universities.id)
 #
 class University::Role < ApplicationRecord
+  include RelationsLanguageIntegrity
   include Sanitizable
   include WithUniversity
   include WithPosition
@@ -33,7 +34,7 @@ class University::Role < ApplicationRecord
 
   accepts_nested_attributes_for :involvements, reject_if: :all_blank, allow_destroy: true
 
-  before_validation :ensure_people_are_in_correct_language
+  before_validation :ensure_connected_elements_are_in_correct_language
 
   def to_s
     "#{description}"
@@ -49,16 +50,8 @@ class University::Role < ApplicationRecord
     self.class.unscoped.where(university_id: university_id, target: target).ordered.last
   end
 
-  def ensure_people_are_in_correct_language
-    correct_people_ids = []
-    people.each do |person|
-      if person.language_id == target.language_id
-        person_in_correct_language = person
-      else
-        person_in_correct_language = person.find_or_translate!(target.language)
-      end
-      correct_people_ids << person_in_correct_language.id
-    end
-    self.person_ids = correct_people_ids
+  def ensure_connected_elements_are_in_correct_language
+    ensure_multiple_connections_are_in_correct_language(people, :person_ids, target.language)
   end
+  
 end

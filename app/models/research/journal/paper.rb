@@ -47,6 +47,7 @@ class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
   include Contentful
   include Permalinkable
+  include RelationsLanguageIntegrity
   include Sanitizable
   include Sluggable
   include WithBlobs
@@ -77,7 +78,7 @@ class Research::Journal::Paper < ApplicationRecord
 
   validates :title, presence: true
 
-  before_validation :ensure_people_are_in_correct_language
+  before_validation :ensure_connected_elements_are_in_correct_language
 
   scope :ordered, -> { order(published_at: :desc) }
   scope :ordered_by_position, -> { order(:position) }
@@ -153,16 +154,7 @@ class Research::Journal::Paper < ApplicationRecord
     super.concat [pdf&.blob_id]
   end
 
-  def ensure_people_are_in_correct_language
-    correct_person_ids = []
-    people.each do |person|
-      if person.language_id == journal.language_id
-        person_in_correct_language = person
-      else
-        person_in_correct_language = person.find_or_translate!(journal.language)
-      end
-      correct_person_ids << person_in_correct_language.id
-    end
-    self.person_ids = correct_person_ids
+  def ensure_connected_elements_are_in_correct_language
+    ensure_multiple_connections_are_in_correct_language(people, :person_ids, journal.language)
   end
 end

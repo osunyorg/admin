@@ -68,7 +68,7 @@ class Communication::Website::Post < ApplicationRecord
 
   validates :title, presence: true
 
-  before_validation :set_published_at, :ensure_author_is_in_correct_language
+  before_validation :set_published_at, :ensure_connected_elements_are_in_correct_language
   after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
   scope :published, -> {
@@ -175,10 +175,8 @@ class Communication::Website::Post < ApplicationRecord
     [best_featured_image&.blob_id]
   end
 
-  def ensure_author_is_in_correct_language
-    return unless author.present? && author.language_id != language_id
-    author_in_correct_language = author.find_or_translate!(language)
-    self.author_id = author_in_correct_language.id
+  def ensure_connected_elements_are_in_correct_language
+    ensure_single_connection_is_in_correct_language(author, :author_id)
   end
 
   def update_authors_statuses!
