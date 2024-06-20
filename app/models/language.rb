@@ -39,4 +39,8 @@ class Language < ApplicationRecord
   def to_s
     "#{name}"
   end
+
+  def to_param
+    iso_code
+  end
 end

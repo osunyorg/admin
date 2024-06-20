@@ -3,9 +3,9 @@ source_name = source.to_s
 begin
   case type
   when 'Communication::Website::Page'
-    source_link = admin_communication_website_page_path(website_id: source.website.id, id: source.id, lang: current_language)
+    source_link = admin_communication_website_page_path(website_id: source.website.id, id: source.id, lang: source.language)
   when 'Communication::Website::Post'
-    source_link = admin_communication_website_post_path(website_id: source.website.id, id: source.id, lang: current_language)
+    source_link = admin_communication_website_post_path(website_id: source.website.id, id: source.id, lang: source.language)
   else
     source_link = url_for [:admin, source]
   end

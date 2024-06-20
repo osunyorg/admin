@@ -4,12 +4,12 @@ module ApplicationController::WithLocale
   included do
     around_action :switch_locale
 
-    helper_method :current_language
+    helper_method :current_interface_language
 
   end
 
-  def current_language
-    @current_language ||= Language.find_by(iso_code: I18n.locale.to_s)
+  def current_interface_language
+    @current_interface_language ||= Language.find_by(iso_code: I18n.locale.to_s)
   end
 
   protected
