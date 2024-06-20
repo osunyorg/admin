@@ -136,6 +136,17 @@ class Administration::Location < ApplicationRecord
 
   private
 
+  def translate_additional_data!(translation)
+    programs.each do |program|
+      translated_program = program.find_or_translate!(translation.language)
+      translation.programs << translated_program
+    end
+    schools.each do |school|
+      translated_school = school.find_or_translate!(translation.language)
+      translation.schools << translated_school
+    end
+  end
+
   def ensure_connected_elements_are_in_correct_language
     ensure_multiple_connections_are_in_correct_language(programs, :program_ids)
     ensure_multiple_connections_are_in_correct_language(schools, :school_ids)

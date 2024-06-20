@@ -245,6 +245,15 @@ class Education::Program < ApplicationRecord
     children.update(parent_id: parent_id)
   end
 
+  def translate_additional_data!(translation)
+    translation.update(parent_id: parent.find_or_translate!(translation.language).id) if parent_id.present?
+    translation.update(diploma_id: diploma.find_or_translate!(translation.language).id) if diploma_id.present?
+    schools.each do |school|
+      translated_school = school.find_or_translate!(translation.language)
+      translation.schools << translated_school
+    end
+  end
+
   def ensure_connected_elements_are_in_correct_language
     ensure_single_connection_is_in_correct_language(parent, :parent_id)
     ensure_single_connection_is_in_correct_language(diploma, :diploma_id)
