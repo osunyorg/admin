@@ -21,7 +21,6 @@ class Admin::University::Organizations::ImportsController < Admin::University::A
 
   def create
     @import.kind = :organizations
-    @import.university = current_university
     @import.user = current_user
     if @import.save
       redirect_to admin_university_organizations_import_path(@import),
@@ -48,5 +47,8 @@ class Admin::University::Organizations::ImportsController < Admin::University::A
   def import_params
     params.require(:import)
           .permit(:file)
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

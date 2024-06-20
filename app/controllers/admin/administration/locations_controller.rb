@@ -30,7 +30,6 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   end
 
   def create
-    @location.university = current_university
     @location.language_id = current_language.id
     if @location.save
       redirect_to [:admin, @location],
@@ -73,6 +72,9 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
             :url, :phone, :summary, :slug, 
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
             school_ids: [], program_ids: []
+          )
+          .merge(
+            university_id: current_university.id
           )
   end
 end

@@ -21,6 +21,7 @@
 #  fk_rails_8e52293a38  (university_id => universities.id)
 #
 class University::Role < ApplicationRecord
+  include RelationsLanguageIntegrity
   include Sanitizable
   include WithUniversity
   include WithPosition
@@ -29,7 +30,11 @@ class University::Role < ApplicationRecord
   has_many :involvements, class_name: 'University::Person::Involvement', as: :target, dependent: :destroy, inverse_of: :target
   has_many :people, through: :involvements
 
+  delegate :language_id, :language, to: :target
+
   accepts_nested_attributes_for :involvements, reject_if: :all_blank, allow_destroy: true
+
+  before_validation :ensure_connected_elements_are_in_correct_language
 
   def to_s
     "#{description}"
@@ -44,4 +49,9 @@ class University::Role < ApplicationRecord
   def last_ordered_element
     self.class.unscoped.where(university_id: university_id, target: target).ordered.last
   end
+
+  def ensure_connected_elements_are_in_correct_language
+    ensure_multiple_connections_are_in_correct_language(people, :person_ids, target.language)
+  end
+  
 end

@@ -7,38 +7,42 @@
   <% @websites.each do |website| %>
     <div class="col-lg-6 mb-5 pb-5">
       <% if website.screenshot.attached? %>
-        <%= link_to website.url, target: :_blank do %>
+        <%= link_to website.url, target: :_blank, class: 'no-icon' do %>
           <%= kamifusen_tag website.screenshot, 
-                            class: 'img-fluid border-dark mb-1' %>
+                            class: 'img-fluid rounded mb-3' %>
         <% end %>
       <% end %>
       <div class="row">
         <div class="col-lg-10">
-          <h2 class="h6"><%= website %></h2>
-          <p class="small mb-1">
-            <i class="bi bi-compass-fill me-2"></i>
-            <%= link_to social_website_to_s(website.url), 
-                        website.url, 
+          <h2 class="h4"><%= website %></h2>
+          <div class="small mb-1">
+            <%= link_to website.url, 
                         target: :_blank, 
-                        class: 'text-white' %>
-          </p>
-          <p class="small mb-2">
-            <i class="bi bi-github me-2"></i>
-            <%= link_to social_website_to_s(website.repository_url), 
-                        website.repository_url, 
+                        class: 'text-dark' do %>
+              <i class="bi bi-compass-fill me-1"></i>
+              <%= social_website_to_s(website.url) %>
+            <% end %>
+          </div>
+          <div class="small mb-1">
+            <%= link_to website.repository_url, 
                         target: :_blank, 
-                        class: 'text-white' %>
-          </p>
+                        class: 'text-dark' do %>
+              <i class="bi bi-github me-1"></i>
+              <%= social_website_to_s(website.repository_url) %>
+            <% end %>
+          </div>
           <% website.showcase_tags.each do |tag| %>
-            <%= link_to tag, showcase_tag_path(tag.slug), class: 'btn btn-sm btn-outline-light rounded-pill' %>
+            <%= link_to tag, 
+                        showcase_tag_path(tag.slug), 
+                        class: 'btn btn-sm btn-outline-light text-dark rounded-pill' %>
           <% end %>  
         </div>
         <% if website.university.logo.attached? %>
           <div class="col-3 col-lg-2">
-            <div class="bg-dark ratio ratio-1x1 mb-3">
+            <div class="ratio ratio-1x1 mb-3">
               <%= image_tag website.university.logo, 
                             class: 'img-fluid p-3',
-                            style: 'filter: saturate(0) invert(1)' %>
+                            style: 'filter: saturate(0)' %>
             </div>
           </div>
         <% end %>
@@ -46,4 +50,4 @@
     </div>
   <% end %>
 </div>
-<%= paginate @websites, theme: 'bootstrap-5' %>
+<%= paginate @websites %>

@@ -14,19 +14,26 @@
 #  zipcode       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  language_id   :uuid             indexed
+#  original_id   :uuid             indexed
 #  university_id :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_education_schools_on_language_id    (language_id)
+#  index_education_schools_on_original_id    (original_id)
 #  index_education_schools_on_university_id  (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_84e48509e8  (language_id => languages.id)
+#  fk_rails_cba5631cc9  (original_id => education_schools.id)
 #  fk_rails_e01b37a3ad  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
+  include Translatable
   include WebsitesLinkable
   include WithAlumni
   include WithBlobs
@@ -47,6 +54,8 @@ class Education::School < ApplicationRecord
 
   validates :name, :address, :city, :zipcode, :country, presence: true
   validates :logo, size: { less_than: 1.megabytes }
+
+  before_validation :ensure_connected_elements_are_in_correct_language
 
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {
@@ -99,4 +108,9 @@ class Education::School < ApplicationRecord
       logo&.blob_id
     ]
   end
+
+  def ensure_connected_elements_are_in_correct_language
+    ensure_multiple_connections_are_in_correct_language(programs, :program_ids)
+  end
+  
 end

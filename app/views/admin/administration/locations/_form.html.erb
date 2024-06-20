@@ -37,6 +37,7 @@
                         collection: collection_tree(
                                       current_university.education_programs
                                                         .in_closest_language_id(location.language_id)
+                                                        .ordered
                                     ),
                         label_method: ->(p) { sanitize p[:label] },
                         value_method: ->(p) { p[:id] } %>
@@ -45,6 +46,7 @@
       <%= f.association :schools,
                         as: :check_boxes,
                         collection: current_university.education_schools
+                                                      .in_closest_language_id(location.language_id)
                                                       .ordered %>
     </div>
   </div>

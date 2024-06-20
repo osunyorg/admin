@@ -9,6 +9,7 @@
 #  from_day                 :date
 #  from_hour                :time
 #  meta_description         :text
+#  migration_identifier     :string
 #  published                :boolean          default(FALSE)
 #  slug                     :string           indexed
 #  subtitle                 :string
