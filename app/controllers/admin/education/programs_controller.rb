@@ -138,7 +138,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def load_teacher_people
     @teacher_people = current_university.people
-                                        .for_language_id(current_university.default_language_id)
+                                        .in_closest_language_id(current_language.id)
                                         .teachers
                                         .accessible_by(current_ability)
                                         .ordered

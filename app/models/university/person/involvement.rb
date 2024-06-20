@@ -81,7 +81,7 @@ class University::Person::Involvement < ApplicationRecord
     # Si on passe par un rôle, on veut s'assurer que la personne connectée soit de la même langue que le target
     # Si on passe par autre chose (connexion directe) on veut au contraire s'assurer que c'est le target qui a la même langue que la personne
     return unless person.language_id != target.language_id
-    if target.is_a?(University::Role)
+    if target.is_a?(University::Role) || target.is_a?(Education::Program)
       person_in_correct_language = person.find_or_translate!(target.language)
       self.person_id = person_in_correct_language.id
     else
