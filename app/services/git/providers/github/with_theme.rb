@@ -2,7 +2,6 @@ module Git::Providers::Github::WithTheme
   extend ActiveSupport::Concern
 
   def update_theme
-    previous_theme_sha = git_sha(ENV["GITHUB_WEBSITE_THEME_PATH"])
     batch << {
       path: ENV["GITHUB_WEBSITE_THEME_PATH"],
       mode: '160000',
@@ -17,4 +16,7 @@ module Git::Providers::Github::WithTheme
     @current_theme_sha ||= Osuny::ThemeInfo.get_current_sha
   end
 
+  def previous_theme_sha
+    @previous_theme_sha ||= git_sha(ENV["GITHUB_WEBSITE_THEME_PATH"])
+  end
 end
