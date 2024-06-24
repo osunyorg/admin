@@ -1,9 +1,19 @@
 <%
 template = block.template
 title = block.title
-description_key = template.respond_to?(:description)  ? :description 
-                                                      : :text
-description = template.send(description_key)
+# description_key = template.respond_to?(:description)  ? :description 
+#                                                       : :text
+
+description = nil
+description_key = nil
+if template.respond_to?(:description)
+  description_key = :description
+  description = template.send(description_key)
+elsif template.respond_to?(:text)
+  description_key = :text
+  description = template.send(description_key)
+end
+
 heading_level = block.heading_rank_self
 link = local_assigns[:link]
 %>
@@ -18,7 +28,7 @@ link = local_assigns[:link]
         <% end %>
       </h<%= heading_level %>>
     <% end %>
-    <% if description.present? %>
+    <% if description_key && description.present? %>
       <div class="description">
         <p><%= block_component_show block, description_key %></p>
       </div>
