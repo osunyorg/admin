@@ -1,5 +1,12 @@
-module Git::Providers::Github::WithEncryption
+module Git::Providers::Github::WithActionsSecrets
   extend ActiveSupport::Concern
+
+  def update_secrets(secrets)
+    secrets.each do |secret_key, secret_value|
+      encrypted_secret_options = encrypt_secret_value(secret_value)
+      client.create_or_update_actions_secret(repository, secret_key, encrypted_secret_options)
+    end
+  end
 
   protected
 

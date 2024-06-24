@@ -2,7 +2,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   BASE_URL = "https://github.com".freeze
   COMMIT_BATCH_SIZE = 250
 
-  include WithEncryption
+  include WithActionsSecrets
 
   def url
     "#{BASE_URL}/#{repository}"
@@ -66,13 +66,6 @@ class Git::Providers::Github < Git::Providers::Abstract
         private: false
       }
     )
-  end
-
-  def update_secrets(secrets)
-    secrets.each do |secret_key, secret_value|
-      encrypted_secret_options = encrypt_secret_value(secret_value)
-      client.create_or_update_actions_secret(repository, secret_key, encrypted_secret_options)
-    end
   end
 
   def push(commit_message)
