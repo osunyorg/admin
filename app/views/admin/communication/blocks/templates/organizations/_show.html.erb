@@ -13,7 +13,7 @@
           <article  class="organization"
                     data-latitude="<%= element.organization&.latitude %>"
                     data-longitude="<%= element.organization&.longitude %>">
-            <h3>
+            <p class="organization-title">
               <% if element.best_url %>
                 <a href="<%= element.best_url %>" target="_blank">
               <% end %>
@@ -21,12 +21,12 @@
               <% if element.best_url%>
                 </a>
               <% end %>
-            </h3>
-            <% if element.best_logo_blob %>
-              <div class="media">
+            </p>
+            <div class="media">
+              <% if element.best_logo_blob %>
                 <%= kamifusen_tag element.best_logo_blob, width: 600 %>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </article>
         <% end %>
       </div>
