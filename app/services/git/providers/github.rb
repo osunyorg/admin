@@ -176,16 +176,19 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def encrypt_secret_value(value)
     encrypted_secret_value = libsodium_box.encrypt(value)
+    base64_encrypted_secret_value = Base64.strict_encode64(encrypted_secret_value)
     {
       key_id: public_key_id,
-      encrypted_value: encrypted_secret_value
+      encrypted_value: base64_encrypted_secret_value
     }
   end
 
   def libsodium_box
-    @libsodium_box ||= RbNaCl::Boxes::Sealed.from_public_key(
-      RbNaCl::PublicKey.new(public_key_hash[:key])
-    )
+    @libsodium_box ||= begin
+      key = Base64.decode64(public_key_hash[:key])
+      public_key = RbNaCl::PublicKey.new(key)
+      RbNaCl::Boxes::Sealed.from_public_key(public_key)
+    end
   end
 
   def public_key_id
