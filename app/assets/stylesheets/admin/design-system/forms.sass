@@ -8,9 +8,8 @@ input.form-control[type=url],
 input.form-control[type=file],
 label.form-check-label,
 textarea.form-control
-    font-family: $font-family-serif
-    font-size: pxToRem(20)
-    font-variant-ligatures: common-ligatures no-discretionary-ligatures no-historical-ligatures
+    font-size: pxToRem(16)
+    font-family: $font-family-sans-serif
 
 select.form-select,
 input.form-select[type=date],
@@ -26,6 +25,6 @@ textarea.form-control
 .form-label
     color: $color-text-alt
 
-.form-check
-    .form-check-input
-        margin-top: 7px
+.form-control
+    &:focus 
+        background: white
