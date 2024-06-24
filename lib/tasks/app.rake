@@ -11,14 +11,18 @@ namespace :app do
     # Set Deuxfleurs credentials, on database, then in GitHub repository's secrets
     deuxfleurs = Deuxfleurs.new
     Communication::Website.hosted_on_deuxfleurs.each do |website|
-      bucket_info = deuxfleurs.get_bucket(website.deuxfleurs_default_identifier)
-      # Set credentials on database
-      website.update_columns(
-        deuxfleurs_access_key_id: bucket_info[:access_key_id],
-        deuxfleurs_secret_access_key: bucket_info[:secret_access_key]
-      )
-      # Set credentials on GitHub repository's secrets
-      website.send(:deuxfleurs_update_github_secrets)
+      begin
+        bucket_info = deuxfleurs.get_bucket(website.deuxfleurs_default_identifier)
+        # Set credentials on database
+        website.update_columns(
+          deuxfleurs_access_key_id: bucket_info[:access_key_id],
+          deuxfleurs_secret_access_key: bucket_info[:secret_access_key]
+        )
+        # Set credentials on GitHub repository's secrets
+        website.send(:deuxfleurs_update_github_secrets)
+      rescue
+        puts "Error while fixing « #{website} »"
+      end
     end
   end
 
