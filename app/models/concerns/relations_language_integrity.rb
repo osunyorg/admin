@@ -1,6 +1,11 @@
 module RelationsLanguageIntegrity
   extend ActiveSupport::Concern
 
+  included do
+    before_validation :ensure_connected_elements_are_in_correct_language
+  end
+
+
   protected
 
   def ensure_connected_elements_are_in_correct_language

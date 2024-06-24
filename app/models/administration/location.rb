@@ -71,8 +71,6 @@ class Administration::Location < ApplicationRecord
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
-  before_validation :ensure_connected_elements_are_in_correct_language
-
   def to_s
     "#{name}"
   end
@@ -84,8 +82,14 @@ class Administration::Location < ApplicationRecord
   def dependencies
     active_storage_blobs +
     contents_dependencies +
-    programs +
-    schools
+    translatable_dependencies
+  end
+
+  def translatable_dependencies_with_relations
+    [
+      { relation: :programs, list: programs },
+      { relation: :schools, list: schools }
+    ]
   end
 
   def references
@@ -132,23 +136,5 @@ class Administration::Location < ApplicationRecord
   def has_administration_locations?
     # Un site (location) n'a pas de site (location) dépendant
     false
-  end
-
-  private
-
-  def translate_additional_data!(translation)
-    programs.each do |program|
-      translated_program = program.find_or_translate!(translation.language)
-      translation.programs << translated_program
-    end
-    schools.each do |school|
-      translated_school = school.find_or_translate!(translation.language)
-      translation.schools << translated_school
-    end
-  end
-
-  def ensure_connected_elements_are_in_correct_language
-    ensure_multiple_connections_are_in_correct_language(programs, :program_ids)
-    ensure_multiple_connections_are_in_correct_language(schools, :school_ids)
   end
 end
