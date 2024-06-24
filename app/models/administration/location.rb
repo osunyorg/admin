@@ -82,10 +82,11 @@ class Administration::Location < ApplicationRecord
   def dependencies
     active_storage_blobs +
     contents_dependencies +
-    translatable_dependencies
+    programs +
+    schools
   end
 
-  def translatable_dependencies_with_relations
+  def translatable_relations
     [
       { relation: :programs, list: programs },
       { relation: :schools, list: schools }

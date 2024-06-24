@@ -57,7 +57,8 @@ class Communication::Website::Menu < ApplicationRecord
     "admin/communication/websites/menus/static"
   end
 
-  def translate_additional_data!(translation)
+  # Override from Translatable
+  def translate_relations!(translation)
     items.root.ordered.each { |item| translate_menu_item!(item, translation) }
   end
 
@@ -66,9 +67,6 @@ class Communication::Website::Menu < ApplicationRecord
     item_translation.menu = menu_translation
     item_translation.parent = parent_translation
 
-    # TODO : I18n
-    # For now, only pages, posts, categories are handled.
-    # We need to translate programs, diplomas, volumes and papers
     set_item_translation_attributes(item_translation, item, menu_translation)
 
     # If no translation and no children to translate, translation won't be save, as about is nil and kind requires one.

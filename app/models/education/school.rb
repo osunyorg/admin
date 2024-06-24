@@ -55,8 +55,6 @@ class Education::School < ApplicationRecord
   validates :name, :address, :city, :zipcode, :country, presence: true
   validates :logo, size: { less_than: 1.megabytes }
 
-  before_validation :ensure_connected_elements_are_in_correct_language
-
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {
     where("
@@ -83,10 +81,17 @@ class Education::School < ApplicationRecord
   def dependencies
     active_storage_blobs +
     programs +
+    # As diplomas are here through programs, and diploma being a program's dependency, it this necessary?
     diplomas +
     locations +
     administrators.map(&:administrator) +
     researchers.map(&:researcher)
+  end
+
+  def translatable_relations
+    [
+      { relation: :programs, list: programs }
+    ]
   end
 
   #####################
@@ -107,10 +112,6 @@ class Education::School < ApplicationRecord
     [
       logo&.blob_id
     ]
-  end
-
-  def ensure_connected_elements_are_in_correct_language
-    ensure_multiple_connections_are_in_correct_language(programs, :program_ids)
   end
   
 end

@@ -118,8 +118,6 @@ class Education::Program < ApplicationRecord
   has_one_attached_deletable :downloadable_summary
   has_one_attached_deletable :logo
 
-  before_validation :ensure_connected_elements_are_in_correct_language
-
   before_destroy :move_children
 
   validates_presence_of :name
@@ -173,6 +171,14 @@ class Education::Program < ApplicationRecord
     university_people_through_involvements.map(&:teacher) +
     university_people_through_role_involvements.map(&:administrator) +
     [diploma]
+  end
+
+  def translatable_relations
+    [
+      { relation: :parent, object: parent },
+      { relation: :diploma, object: diploma },
+      { relation: :schools, list: schools }
+    ]
   end
 
   def references
@@ -244,21 +250,5 @@ class Education::Program < ApplicationRecord
   def move_children
     children.update(parent_id: parent_id)
   end
-
-  def translate_additional_data!(translation)
-    translation.update(parent_id: parent.find_or_translate!(translation.language).id) if parent_id.present?
-    translation.update(diploma_id: diploma.find_or_translate!(translation.language).id) if diploma_id.present?
-    schools.each do |school|
-      translated_school = school.find_or_translate!(translation.language)
-      translation.schools << translated_school
-    end
-  end
-
-  def ensure_connected_elements_are_in_correct_language
-    ensure_single_connection_is_in_correct_language(parent, :parent_id)
-    ensure_single_connection_is_in_correct_language(diploma, :diploma_id)
-    ensure_multiple_connections_are_in_correct_language(schools, :school_ids)
-  end
-
   
 end

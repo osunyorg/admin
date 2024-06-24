@@ -124,6 +124,12 @@ class University::Organization < ApplicationRecord
     blocks
   end
 
+  def translatable_relations
+    [
+      { relation: :categories, list: categories }
+    ]
+  end
+
   def git_path(website)
     "#{git_path_content_prefix(website)}organizations/#{slug}.html" if for_website?(website)
   end
@@ -134,13 +140,9 @@ class University::Organization < ApplicationRecord
 
   protected
 
-  def translate_additional_data!(translation)
+  def translate_other_attachments(translation)
     translate_attachment(translation, :logo) if logo.attached?
     translate_attachment(translation, :logo_on_dark_background) if logo_on_dark_background.attached?
-    categories.each do |category|
-      translated_category = category.find_or_translate!(translation.language)
-      translation.categories << translated_category
-    end
   end
 
   def backlinks_blocks(website)

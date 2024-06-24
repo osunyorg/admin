@@ -12,7 +12,7 @@ module Translatable
                 class_name: base_class.to_s,
                 foreign_key: :original_id
 
-    before_validation :ensure_translatable_dependencies_are_in_correct_language
+    before_validation :ensure_translatable_relations_are_in_correct_language
 
     # has to be before_destroy because of the foreign key constraints
     before_destroy :destroy_or_nullify_translations
@@ -43,7 +43,7 @@ module Translatable
   #   { relation: :programs, list: programs },
   #   { relation: :author, object: author }
   # ]
-  def translatable_dependencies_with_relations
+  def translatable_relations
     []
   end
 
@@ -115,23 +115,17 @@ module Translatable
     translation.parent_id = translate_parent!(language)&.id if respond_to?(:parent_id)
     # Handle featured image if object has one
     translate_attachment(translation, :featured_image) if respond_to?(:featured_image) && featured_image.attached?
+    translate_other_attachments(translation)
+    # Handle relations (programs, author, schools...)
+    translate_relations!(translation)
     translation.save
     # Handle headings & blocks if object has any
     translate_contents!(translation) if respond_to?(:contents)
-    # Handle dependencies (programs, author, schools...)
-    translate_dependencies!(translation)
 
     translation
   end
 
   protected
-
-  def translatable_dependencies
-    translatable_dependencies_with_relations.map { |hash|
-      hash.has_key?(:list)  ? hash[:list] 
-                            : [hash[:object]]
-    }.flatten
-  end
 
   def translate_parent!(language)
     return nil if parent_id.nil?
@@ -159,8 +153,12 @@ module Translatable
     # Missing attachment
   end
 
-  def translate_dependencies!(translation)
-    translatable_dependencies_with_relations.each do |hash|
+  # can be overwritten in model
+  def translate_other_attachments(translation)
+  end
+
+  def translate_relations!(translation)
+    translatable_relations.each do |hash|
       # Single or multiple: programs, author
       relation_name = hash[:relation]
       # Array of objects or single object
@@ -169,8 +167,8 @@ module Translatable
     end
   end
 
-  def ensure_translatable_dependencies_are_in_correct_language
-    translate_dependencies!(self)
+  def ensure_translatable_relations_are_in_correct_language
+    translate_relations!(self)
   end
 
   def association_in_correct_language(hash, language)

@@ -215,6 +215,12 @@ class University::Person < ApplicationRecord
     active_storage_blobs
   end
 
+  def translatable_relations
+    [
+      { relation: :categories, list: categories }
+    ]
+  end
+
   def references
     [administrator, author, researcher, teacher]
   end
@@ -266,11 +272,7 @@ class University::Person < ApplicationRecord
     self.name = to_s
   end
 
-  def translate_additional_data!(translation)
+  def translate_other_attachments(translation)
     translate_attachment(translation, :picture) if picture.attached?
-    categories.each do |category|
-      translated_category = category.find_or_translate!(translation.language)
-      translation.categories << translated_category
-    end
   end
 end

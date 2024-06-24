@@ -32,6 +32,7 @@ class University::Person::Involvement < ApplicationRecord
   enum kind: { administrator: 10, researcher: 20, teacher: 30 }
 
   belongs_to :person, class_name: 'University::Person'
+  # Can be an Education::Program, a Research::Laboratory, or a University::Role (attached to Programs or Schools)
   belongs_to :target, polymorphic: true
 
   validates :person_id, uniqueness: { scope: [:target_id, :target_type] }
@@ -68,7 +69,7 @@ class University::Person::Involvement < ApplicationRecord
       self.kind = :teacher
     when "Research::Laboratory"
       self.kind = :researcher
-    else
+    else # University::Role (attached to Programs or Schools)
       self.kind = :administrator
     end
   end
@@ -81,12 +82,8 @@ class University::Person::Involvement < ApplicationRecord
     # Si on passe par un rôle, on veut s'assurer que la personne connectée soit de la même langue que le target
     # Si on passe par autre chose (connexion directe) on veut au contraire s'assurer que c'est le target qui a la même langue que la personne
     return unless person.language_id != target.language_id
-    if target.is_a?(University::Role) || target.is_a?(Education::Program)
-      person_in_correct_language = person.find_or_translate!(target.language)
-      self.person_id = person_in_correct_language.id
-    else
-      target_in_correct_language = target.find_or_translate!(person.language)
-      self.target_id = target_in_correct_language.id
-    end
+    person_in_correct_language = person.find_or_translate!(target.language)
+    self.person_id = person_in_correct_language.id
+    
   end
 end

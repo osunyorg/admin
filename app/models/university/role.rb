@@ -26,6 +26,7 @@ class University::Role < ApplicationRecord
   include WithUniversity
   include WithPosition
 
+  # Can be an Education::School or an Education::Program
   belongs_to :target, polymorphic: true, optional: true
   has_many :involvements, class_name: 'University::Person::Involvement', as: :target, dependent: :destroy, inverse_of: :target
   has_many :people, through: :involvements
