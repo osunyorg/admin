@@ -4,6 +4,8 @@ module Communication::Website::WithDeuxfleurs
   included do
     before_save :deuxfleurs_golive, if: :deuxfleurs_hosting
     after_save :deuxfleurs_setup, if: :deuxfleurs_hosting
+
+    scope :hosted_on_deuxfleurs, -> { where(deuxfleurs_hosting: true) }
   end
 
   # 4 options:

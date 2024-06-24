@@ -1,5 +1,15 @@
 class Deuxfleurs
 
+  def get_bucket(host)
+    response = client.get("website/#{host}")
+    data = JSON.parse response.body
+    {
+      identifier: data.dig('vhost', 'name'),
+      access_key_id: data.dig('access_key_id'),
+      secret_access_key: data.dig('secret_access_key')
+    }
+  end
+
   def create_bucket(host)
     response = client.post("website/#{host}")
     data = JSON.parse response.body
