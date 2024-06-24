@@ -667,6 +667,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_190729) do
     t.datetime "git_files_analysed_at"
     t.boolean "highlighted_in_showcase", default: false
     t.uuid "locked_by_job_id"
+    t.string "deuxfleurs_access_key_id"
+    t.string "deuxfleurs_secret_access_key"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["name"], name: "index_communication_websites_on_name", opclass: :gin_trgm_ops, using: :gin

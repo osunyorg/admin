@@ -2,49 +2,51 @@
 #
 # Table name: communication_websites
 #
-#  id                      :uuid             not null, primary key
-#  about_type              :string           indexed => [about_id]
-#  access_token            :string
-#  autoupdate_theme        :boolean          default(TRUE)
-#  default_time_zone       :string
-#  deployment_status_badge :text
-#  deuxfleurs_hosting      :boolean          default(TRUE)
-#  deuxfleurs_identifier   :string
-#  feature_agenda          :boolean          default(FALSE)
-#  feature_portfolio       :boolean          default(FALSE)
-#  feature_posts           :boolean          default(TRUE)
-#  git_branch              :string
-#  git_endpoint            :string
-#  git_files_analysed_at   :datetime
-#  git_provider            :integer          default("github")
-#  highlighted_in_showcase :boolean          default(FALSE)
-#  in_production           :boolean          default(FALSE)
-#  in_showcase             :boolean          default(TRUE)
-#  locked_at               :datetime
-#  name                    :string           indexed
-#  plausible_url           :string
-#  repository              :string
-#  social_email            :string
-#  social_facebook         :string
-#  social_github           :string
-#  social_instagram        :string
-#  social_linkedin         :string
-#  social_mastodon         :string
-#  social_peertube         :string
-#  social_tiktok           :string
-#  social_vimeo            :string
-#  social_x                :string
-#  social_youtube          :string
-#  style                   :text
-#  style_updated_at        :date
-#  theme_version           :string           default("NA")
-#  url                     :string
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  about_id                :uuid             indexed => [about_type]
-#  default_language_id     :uuid             not null, indexed
-#  locked_by_job_id        :uuid
-#  university_id           :uuid             not null, indexed
+#  id                           :uuid             not null, primary key
+#  about_type                   :string           indexed => [about_id]
+#  access_token                 :string
+#  autoupdate_theme             :boolean          default(TRUE)
+#  default_time_zone            :string
+#  deployment_status_badge      :text
+#  deuxfleurs_hosting           :boolean          default(TRUE)
+#  deuxfleurs_identifier        :string
+#  deuxfleurs_secret_access_key :string
+#  feature_agenda               :boolean          default(FALSE)
+#  feature_portfolio            :boolean          default(FALSE)
+#  feature_posts                :boolean          default(TRUE)
+#  git_branch                   :string
+#  git_endpoint                 :string
+#  git_files_analysed_at        :datetime
+#  git_provider                 :integer          default("github")
+#  highlighted_in_showcase      :boolean          default(FALSE)
+#  in_production                :boolean          default(FALSE)
+#  in_showcase                  :boolean          default(TRUE)
+#  locked_at                    :datetime
+#  name                         :string           indexed
+#  plausible_url                :string
+#  repository                   :string
+#  social_email                 :string
+#  social_facebook              :string
+#  social_github                :string
+#  social_instagram             :string
+#  social_linkedin              :string
+#  social_mastodon              :string
+#  social_peertube              :string
+#  social_tiktok                :string
+#  social_vimeo                 :string
+#  social_x                     :string
+#  social_youtube               :string
+#  style                        :text
+#  style_updated_at             :date
+#  theme_version                :string           default("NA")
+#  url                          :string
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  about_id                     :uuid             indexed => [about_type]
+#  default_language_id          :uuid             not null, indexed
+#  deuxfleurs_access_key_id     :string
+#  locked_by_job_id             :uuid
+#  university_id                :uuid             not null, indexed
 #
 # Indexes
 #

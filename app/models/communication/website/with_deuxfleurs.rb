@@ -26,6 +26,7 @@ module Communication::Website::WithDeuxfleurs
     end
     if deuxfleurs_identifier.blank?
       deuxfleurs_create_bucket
+      deuxfleurs_update_github_secrets
       sleep 10
       deuxfleurs_generate_certificate
       sleep 10
@@ -51,8 +52,10 @@ module Communication::Website::WithDeuxfleurs
   end
 
   def deuxfleurs_create_bucket
-    deuxfleurs_identifier = deuxfleurs.create_bucket(deuxfleurs_default_identifier)
-    update_columns  deuxfleurs_identifier: deuxfleurs_identifier,
+    bucket_info = deuxfleurs.create_bucket(deuxfleurs_default_identifier)
+    update_columns  deuxfleurs_identifier: bucket_info[:identifier],
+                    deuxfleurs_access_key_id: bucket_info[:access_key_id],
+                    deuxfleurs_secret_access_key: bucket_info[:secret_access_key],
                     url: deuxfleurs_default_url
   end
 
@@ -61,6 +64,13 @@ module Communication::Website::WithDeuxfleurs
                     repository: deuxfleurs_default_github_repository,
                     deployment_status_badge: deuxfleurs_default_badge_url
     git_repository.init_from_template(deuxfleurs_default_github_repository_name)
+  end
+
+  def deuxfleurs_update_github_secrets
+    git_repository.update_secrets({
+      "DEUXFLEURS_ACCESS_KEY" => deuxfleurs_access_key_id,
+      "DEUXFLEURS_SECRET" => deuxfleurs_secret_access_key
+    })
   end
 
   # cartographie.agit.osuny.site

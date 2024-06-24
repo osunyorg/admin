@@ -66,6 +66,13 @@ class Git::Providers::Github < Git::Providers::Abstract
     )
   end
 
+  def update_secrets(secrets)
+    secrets.each do |secret_key, secret_value|
+      encrypted_secret_options = encrypt_secret_value(secret_value)
+      client.create_or_update_actions_secret(repository, secret_key, encrypted_secret_options)
+    end
+  end
+
   def push(commit_message)
     return if !valid? || batch.empty?
     commit = create_commit_from_batch(batch, commit_message)
@@ -165,6 +172,29 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def tree
     @tree ||= client.tree repository, branch_sha, recursive: true
+  end
+
+  def encrypt_secret_value(value)
+    encrypted_secret_value = libsodium_box.encrypt(value)
+    {
+      key_id: public_key_id,
+      encrypted_value: encrypted_secret_value
+    }
+  end
+
+  def libsodium_box
+    @libsodium_box ||= RbNaCl::Boxes::Sealed.from_public_key(
+      RbNaCl::PublicKey.new(public_key_hash[:key])
+    )
+  end
+
+  def public_key_id
+    public_key_hash[:key_id]
+  end
+
+  def public_key_hash
+    # { key_id: "...", key: "..." }
+    @public_key_hash ||= client.get_actions_public_key(repository)
   end
 
 end
