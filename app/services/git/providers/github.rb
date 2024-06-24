@@ -2,7 +2,8 @@ class Git::Providers::Github < Git::Providers::Abstract
   BASE_URL = "https://github.com".freeze
   COMMIT_BATCH_SIZE = 250
 
-  include WithEncryption
+  include WithSecrets
+  include WithTheme
 
   def url
     "#{BASE_URL}/#{repository}"
@@ -47,16 +48,6 @@ class Git::Providers::Github < Git::Providers::Abstract
     }
   end
 
-  def update_theme
-    previous_theme_sha = git_sha(ENV["GITHUB_WEBSITE_THEME_PATH"])
-    batch << {
-      path: ENV["GITHUB_WEBSITE_THEME_PATH"],
-      mode: '160000',
-      type: 'commit',
-      sha: current_theme_sha
-    } if previous_theme_sha != current_theme_sha
-  end
-
   def init_from_template(name)
     client.create_repository_from_template(
       'osunyorg/template',
@@ -66,13 +57,6 @@ class Git::Providers::Github < Git::Providers::Abstract
         private: false
       }
     )
-  end
-
-  def update_secrets(secrets)
-    secrets.each do |secret_key, secret_value|
-      encrypted_secret_options = encrypt_secret_value(secret_value)
-      client.create_or_update_actions_secret(repository, secret_key, encrypted_secret_options)
-    end
   end
 
   def push(commit_message)
@@ -147,10 +131,6 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def branch_sha
     @branch_sha ||= client.branch(repository, default_branch)[:commit][:sha]
-  end
-
-  def current_theme_sha
-    @current_theme_sha ||= Osuny::ThemeInfo.get_current_sha
   end
 
   def tree_item_at_path(path)
