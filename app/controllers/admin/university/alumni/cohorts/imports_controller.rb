@@ -21,7 +21,6 @@ class Admin::University::Alumni::Cohorts::ImportsController < Admin::University:
 
   def create
     @import.kind = :alumni_cohorts
-    @import.university = current_university
     @import.user = current_user
     if @import.save
       redirect_to admin_university_alumni_cohorts_import_path(@import),
@@ -48,5 +47,8 @@ class Admin::University::Alumni::Cohorts::ImportsController < Admin::University:
   def import_params
     params.require(:import)
           .permit(:file)
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

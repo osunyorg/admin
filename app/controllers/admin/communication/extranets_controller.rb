@@ -25,7 +25,6 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
   end
 
   def create
-    @extranet.university = current_university
     if @extranet.save
       redirect_to [:admin, @extranet], notice: t('admin.successfully_created_html', model: @extranet.to_s)
     else
@@ -68,5 +67,8 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     end
     params.require(:communication_extranet)
           .permit(allowed_params)
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

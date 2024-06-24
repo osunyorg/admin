@@ -12,8 +12,24 @@ module Translatable
                 class_name: base_class.to_s,
                 foreign_key: :original_id
 
+    before_validation :ensure_translatable_relations_are_in_correct_language
+
     # has to be before_destroy because of the foreign key constraints
     before_destroy :destroy_or_nullify_translations
+
+    # on cherche les objets pour cette langue (original ou pas) + les objets originaux dans une autre langue s'il n'en existe pas de traduction
+    scope :in_closest_language_id, -> (language_id) {
+      # Records with correct language (Original or Translation)
+      # OR Records originals which does not have any translation matching the language
+      for_language_id(language_id).or(
+        where(original_id: nil)
+          .where.not(language_id: language_id)
+          .where(
+            "NOT EXISTS (SELECT 1 FROM #{table_name} AS translations WHERE translations.original_id = #{table_name}.id AND translations.language_id = ?)",
+            language_id
+          )
+      )
+    }
 
     scope :for_language, -> (language) { for_language_id(language.id) }
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself
@@ -21,9 +37,19 @@ module Translatable
 
   end
 
+  # This is supposed to be overwritten in model
+  # Declare dependencies and their relations with the object
+  # [
+  #   { relation: :programs, list: programs },
+  #   { relation: :author, object: author }
+  # ]
+  def translatable_relations
+    []
+  end
+
   def available_languages
     @available_languages ||= begin
-      languages = is_direct_object? ? website.languages : Language.all
+      languages = is_direct_object? ? website.languages : university.languages
       languages.ordered
     end
   end
@@ -56,6 +82,14 @@ module Translatable
     self.original.present?
   end
 
+  def is_in_language?(l)
+    language.id == l.id
+  end
+
+  def exists_in_language?(l)
+    translation_for(l).present?
+  end
+
   def original_with_translations
     original_object.translations + [original_object]
   end
@@ -81,10 +115,12 @@ module Translatable
     translation.parent_id = translate_parent!(language)&.id if respond_to?(:parent_id)
     # Handle featured image if object has one
     translate_attachment(translation, :featured_image) if respond_to?(:featured_image) && featured_image.attached?
+    translate_other_attachments(translation)
+    # Handle relations (programs, author, schools...)
+    translate_relations!(translation)
     translation.save
     # Handle headings & blocks if object has any
     translate_contents!(translation) if respond_to?(:contents)
-    translate_additional_data!(translation)
 
     translation
   end
@@ -117,19 +153,40 @@ module Translatable
     # Missing attachment
   end
 
-  def translate_additional_data!(translation)
-    # Overridable method to handle custom cases
+  # can be overwritten in model
+  def translate_other_attachments(translation)
   end
 
-  def destroy_or_nullify_translations
-    # Translatable is included in either Direct or Indirect Objects
-    # If object is direct we do not want to remove the translations
-    # If object is indirect we remove the translations
-    if is_direct_object?
-      translations.update_all(original_id: nil)
-    else
-      translations.destroy_all
+  def translate_relations!(translation)
+    translatable_relations.each do |hash|
+      # Single or multiple: programs, author
+      relation_name = hash[:relation]
+      # Array of objects or single object
+      association = association_in_correct_language(hash, translation.language)
+      translation.public_send("#{relation_name}=", association)
     end
+  end
+
+  def ensure_translatable_relations_are_in_correct_language
+    translate_relations!(self)
+  end
+
+  def association_in_correct_language(hash, language)
+    if hash.has_key?(:list)
+      # association is an array (has_many, habtm, ...)
+      hash[:list].map { |object| object.find_or_translate!(language) }
+    else
+      # association is an object (has_one, belongs_to)
+      hash[:object].find_or_translate!(language)
+    end
+  end
+
+  # Translatable is included in either Direct or Indirect Objects
+  # If object is direct we do not want to remove the translations
+  # If object is indirect we remove the translations
+  def destroy_or_nullify_translations
+    is_direct_object? ? translations.update_all(original_id: nil)
+                      : translations.destroy_all
   end
 
 end

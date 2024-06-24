@@ -80,7 +80,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
           )
           .merge(
             university_id: current_university.id,
-            language_id: current_website_language.id
+            language_id: current_language.id
           )
   end
 end

@@ -34,8 +34,8 @@ module Admin::OsunyHelper
             }
   end
 
-  def osuny_published(object)
-    raw "<span class=\"osuny__published osuny__published--#{ object.published? }\"></span>"
+  def osuny_published(state)
+    raw "<span class=\"osuny__published osuny__published--#{ state }\"></span>"
   end
 
 end

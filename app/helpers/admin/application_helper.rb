@@ -153,6 +153,15 @@ module Admin::ApplicationHelper
     collection
   end
 
+  def translatable_collection_tree(list, language, except = nil)
+    collection = []
+    list.in_closest_language_id(language.id).root.ordered.each do |object|
+      collection.concat(object.self_and_translatable_children(language, 0))
+    end
+    collection = collection.reject { |o| o[:id] == except.id } unless except.nil?
+    collection
+  end
+
   def collection_tree_for_checkboxes(list, except = nil)
     collection = collection_tree(list, except)
     collection.map { |object|

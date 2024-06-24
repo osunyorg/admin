@@ -11,7 +11,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   has_scope :for_category
 
   def index
-    @events = apply_scopes(@events).for_language(current_website_language)
+    @events = apply_scopes(@events).for_language(current_language)
                                   .ordered_desc
                                   .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
@@ -92,7 +92,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def categories
     @website.agenda_categories
-            .for_language(current_website_language)
+            .for_language(current_language)
             .ordered
   end
 
@@ -100,7 +100,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     @filters = ::Filters::Admin::Communication::Websites::Agenda::Events.new(
         current_user, 
         @website, 
-        current_website_language
+        current_language
       ).list
   end
 
@@ -115,7 +115,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     )
     .merge(
       university_id: current_university.id,
-      language_id: current_website_language.id
+      language_id: current_language.id
     )
   end
 end

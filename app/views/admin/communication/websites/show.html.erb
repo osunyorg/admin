@@ -1,16 +1,20 @@
 <% content_for :title, @website %>
 
-<% content_for :title_right do %>
-  <% unless @website.url.blank? %>
-    <%= link_to @website.url, @website.url, target: :_blank %><br>
-  <% end %>
-  <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
-  <% if @website.about %>
-    (<%= link_to_if can?(:read, @website.about),
-                    @website.about,
-                    [:admin, @website.about] unless @website.about.nil? %>)
-  <% end %>
+<% content_for :title_left do %>
   <%= render 'admin/application/favorites/widget', about: @website %>
+  <%= link_to @website.url, @website.url, target: :_blank unless @website.url.blank? %>
+  <div class="small">
+    <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
+    <% if @website.about %>
+      (<%= link_to_if can?(:read, @website.about),
+                      @website.about,
+                      [:admin, @website.about] unless @website.about.nil? %>)
+    <% end %>
+  </div>
+<% end %>
+
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
 <% end %>
 
 <%
@@ -39,8 +43,6 @@ number_of_panels = 0
     <%= render 'admin/communication/websites/show/pages', large: number_of_panels.even? if can?(:read, Communication::Website::Page) %>
   </div>
 </div>
-
-<%= render 'admin/communication/websites/language_switcher' %>
 
 <%= image_tag @website.deployment_status_badge, alt: '' if @website.deployment_status_badge.present? %>
 

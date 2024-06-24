@@ -1,6 +1,6 @@
 <% organizations = current_university.organizations
-                                      .for_language(block.language)
-                                      .ordered %>
+                                     .in_closest_language_id(block.language.id)
+                                     .ordered %>
 <% unless label.blank? %>
   <label  class="form-label"
           :for="<%= dom_id.html_safe %>">

@@ -9,15 +9,15 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   has_scope :for_full_width
 
   def index
-    @homepage = @website.special_page(Communication::Website::Page::Home, language: current_website_language)
+    @homepage = @website.special_page(Communication::Website::Page::Home, language: current_language)
     @first_level_pages = @homepage.children.ordered
-    @pages = @website.pages.for_language(current_website_language)
+    @pages = @website.pages.for_language(current_language)
     breadcrumb
   end
 
   def index_list
     @filters = ::Filters::Admin::Communication::Websites::Pages.new(current_user).list
-    @pages = apply_scopes(@pages).for_language(current_website_language)
+    @pages = apply_scopes(@pages).for_language(current_language)
                                  .ordered_by_title
                                  .page(params[:page])
     breadcrumb
@@ -159,7 +159,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
           )
           .merge(
             university_id: current_university.id,
-            language_id: current_website_language.id
+            language_id: current_language.id
           )
   end
 

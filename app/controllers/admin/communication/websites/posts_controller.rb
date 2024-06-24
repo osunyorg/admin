@@ -13,7 +13,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   has_scope :for_pinned
 
   def index
-    @posts = apply_scopes(@posts).for_language(current_website_language)
+    @posts = apply_scopes(@posts).for_language(current_language)
                                  .ordered
                                  .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
@@ -57,7 +57,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     @categories = categories
     @post.website = @website
     if current_user.person.present?
-      @post.author_id = current_user.person.find_or_translate!(current_website_language).id
+      @post.author_id = current_user.person.find_or_translate!(current_language).id
     end
     breadcrumb
   end
@@ -122,7 +122,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     )
     .merge(
       university_id: current_university.id,
-      language_id: current_website_language.id
+      language_id: current_language.id
     )
   end
 
@@ -130,13 +130,13 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     @filters = ::Filters::Admin::Communication::Website::Posts.new(
         current_user, 
         @website, 
-        current_website_language
+        current_language
       ).list
   end
 
   def categories
     @website.post_categories
-            .for_language(current_website_language)
+            .for_language(current_language)
             .ordered
   end
 end

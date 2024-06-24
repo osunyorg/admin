@@ -32,13 +32,15 @@ class University::Person::Involvement < ApplicationRecord
   enum kind: { administrator: 10, researcher: 20, teacher: 30 }
 
   belongs_to :person, class_name: 'University::Person'
+  # Can be an Education::Program, a Research::Laboratory, or a University::Role (attached to Programs or Schools)
   belongs_to :target, polymorphic: true
 
   validates :person_id, uniqueness: { scope: [:target_id, :target_type] }
   validates :target_id, uniqueness: { scope: [:person_id, :target_type] }
 
-  before_validation :set_kind, on: :create
-  before_validation :set_university_id, on: :create
+  before_validation :set_kind, :set_university_id, on: :create
+  before_validation :ensure_connected_elements_are_in_correct_language
+
   after_commit :sync_with_git
 
   scope :ordered_by_name, -> {
@@ -67,12 +69,21 @@ class University::Person::Involvement < ApplicationRecord
       self.kind = :teacher
     when "Research::Laboratory"
       self.kind = :researcher
-    else
+    else # University::Role (attached to Programs or Schools)
       self.kind = :administrator
     end
   end
 
   def set_university_id
     self.university_id = self.person.university_id
+  end
+
+  def ensure_connected_elements_are_in_correct_language
+    # Si on passe par un rôle, on veut s'assurer que la personne connectée soit de la même langue que le target
+    # Si on passe par autre chose (connexion directe) on veut au contraire s'assurer que c'est le target qui a la même langue que la personne
+    return unless person.language_id != target.language_id
+    person_in_correct_language = person.find_or_translate!(target.language)
+    self.person_id = person_in_correct_language.id
+    
   end
 end

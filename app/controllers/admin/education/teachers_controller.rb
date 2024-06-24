@@ -9,7 +9,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   def index
     @teachers = apply_scopes(
       current_university.people
-                        .for_language_id(current_university.default_language_id)
+                        .in_closest_language_id(current_language.id)
                         .teachers
                         .accessible_by(current_ability)
     ).ordered.page(params[:page])

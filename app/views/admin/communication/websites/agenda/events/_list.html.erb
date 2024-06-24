@@ -10,7 +10,7 @@ small ||= false
         <div class="card card--horizontal">
           <%= osuny_thumbnail event %>
           <div class="card-body">
-            <%= osuny_published event unless small %>
+            <%= osuny_published event.published? unless small %>
             <%= link_to event,
                         admin_communication_website_agenda_event_path(website_id: event.website.id, id: event.id),
                         class: "stretched-link text-black" %>

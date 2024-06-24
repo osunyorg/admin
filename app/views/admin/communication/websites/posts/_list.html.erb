@@ -36,7 +36,7 @@ end
               <div class="card card--horizontal">
                 <%= osuny_thumbnail post %>
                 <div class="card-body">
-                  <%= osuny_published post unless small %>
+                  <%= osuny_published post.published? unless small %>
                   <%= link_to post,
                               admin_communication_website_post_path(website_id: post.website.id, id: post.id),
                               class: "stretched-link #{ post.published? ? 'text-black' : 'text-muted' }" %>

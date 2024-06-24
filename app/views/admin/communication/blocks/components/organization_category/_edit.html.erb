@@ -1,4 +1,7 @@
-<% categories = collection(current_university.organization_categories.for_language(block.language)) %>
+<% categories = collection_tree(
+                  current_university.organization_categories
+                                    .in_closest_language_id(block.language.id)
+                ) %>
 <label  class="form-label"
         :for="<%= dom_id.html_safe %>">
   <%= label %>

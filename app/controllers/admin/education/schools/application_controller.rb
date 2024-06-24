@@ -12,9 +12,9 @@ class Admin::Education::Schools::ApplicationController < Admin::Education::Appli
   end
 
   def default_url_options
-    return {} unless params.has_key? :school_id
-    {
-      school_id: params[:school_id]
-    }
+    options = {}
+    options[:lang] = current_language.iso_code
+    options[:school_id] = params[:school_id] if params.has_key? :school_id
+    options
   end
 end

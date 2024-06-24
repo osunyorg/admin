@@ -36,6 +36,7 @@ categories_class_path = categories_class.to_s.parameterize.underscore
         <%= osuny_thumbnail category %>
       <% end %>
       <div class="card-body">
+        <%= osuny_published category.is_in_language?(current_language) %>
         <%= link_to category, show_path, class: 'text-black' %>
         <% if category.children.any? %>
           <span class="text-muted">(<%= category.children.count %>)</span>

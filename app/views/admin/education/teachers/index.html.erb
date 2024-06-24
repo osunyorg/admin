@@ -1,5 +1,9 @@
 <% content_for :title, University::Person::Teacher.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
+
 <%= render 'filters', current_path: admin_education_teachers_path, filters: @filters if @filters.any?  %>
 
 <%= render 'admin/education/teachers/list', teachers: @teachers %>

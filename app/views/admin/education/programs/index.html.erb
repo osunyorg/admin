@@ -4,6 +4,10 @@
             current_path: admin_education_programs_path,
             filters: @filters if @filters.any?  %>
 
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
+
 <%= render 'admin/education/programs/list', programs: @programs %>
 <%= paginate @programs %>
 

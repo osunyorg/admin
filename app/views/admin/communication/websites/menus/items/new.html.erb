@@ -1,3 +1,7 @@
 <% content_for :title, Communication::Website::Menu::Item.model_name.human %>
 
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
+
 <%= render 'form', item: @item %>

@@ -26,13 +26,13 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def show
-    @all_pages = @website.pages.accessible_by(current_ability).for_language(current_website_language)
+    @all_pages = @website.pages.accessible_by(current_ability).for_language(current_language)
     @pages = @all_pages.latest
-    @all_posts = @website.posts.accessible_by(current_ability).for_language(current_website_language)
+    @all_posts = @website.posts.accessible_by(current_ability).for_language(current_language)
     @posts = @all_posts.latest
-    @all_events = @website.events.accessible_by(current_ability).for_language(current_website_language)
+    @all_events = @website.events.accessible_by(current_ability).for_language(current_language)
     @events = @all_events.latest
-    @all_projects = @website.projects.accessible_by(current_ability).for_language(current_website_language)
+    @all_projects = @website.projects.accessible_by(current_ability).for_language(current_language)
     @projects = @all_projects.latest
     breadcrumb
   end
@@ -52,7 +52,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def create
-    @website.university = current_university
     if @website.save_and_sync
       redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s)
     else
@@ -98,12 +97,16 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?
     # For now, default language can't be changed, too many implications, especially around special pages.
     attribute_names << :default_language_id unless @website&.persisted?
-    params.require(:communication_website).permit(*attribute_names)
+    params.require(:communication_website)
+          .permit(*attribute_names)
+          .merge(
+            university_id: current_university.id
+          )
   end
 
   def default_url_options
     options = {}
-    options[:lang] = current_website_language.iso_code if @website&.persisted?
+    options[:lang] = current_language.iso_code if @website&.persisted?
     options
   end
 end

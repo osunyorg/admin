@@ -86,6 +86,13 @@ class Administration::Location < ApplicationRecord
     schools
   end
 
+  def translatable_relations
+    [
+      { relation: :programs, list: programs },
+      { relation: :schools, list: schools }
+    ]
+  end
+
   def references
     []
   end

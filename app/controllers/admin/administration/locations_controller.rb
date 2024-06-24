@@ -2,7 +2,11 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   load_and_authorize_resource class: Administration::Location,
                               through: :current_university
 
+  include Admin::Translatable
+
   def index
+    @locations = @locations.in_closest_language_id(current_language.id)
+                           .ordered
     breadcrumb
   end
 
@@ -26,8 +30,7 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   end
 
   def create
-    @location.university = current_university
-    @location.language_id = current_university.default_language_id
+    @location.language_id = current_language.id
     if @location.save
       redirect_to [:admin, @location],
                   notice: t('admin.successfully_created_html', model: @location.to_s)
@@ -69,6 +72,9 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
             :url, :phone, :summary, :slug, 
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
             school_ids: [], program_ids: []
+          )
+          .merge(
+            university_id: current_university.id
           )
   end
 end

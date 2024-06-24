@@ -3,13 +3,15 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
                               through: :current_university,
                               through_association: :organizations
 
+  include Admin::Translatable
+
   has_scope :for_search_term
   has_scope :for_category
   has_scope :for_kind
 
   def index
     @organizations = apply_scopes(@organizations)
-                      .for_language_id(current_university.default_language_id)
+                      .in_closest_language_id(current_language.id)
                       .ordered
 
     @feature_nav = 'navigation/admin/university/organizations'
@@ -28,30 +30,14 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def search
     @term = params[:term].to_s
-    language = Language.find_by(iso_code: params[:lang])
     @organizations = current_university.organizations
-                                        .search_by_siren_or_name(@term)
-                                        .ordered
-    @organizations = @organizations.joins(:language)
-                                    .where(languages: {
-                                      iso_code: language.iso_code
-                                    }) if language.present?
+                                       .in_closest_language_id(current_language.id)
+                                       .search_by_siren_or_name(@term)
+                                       .ordered
   end
 
   def show
     breadcrumb
-  end
-
-  def in_language
-    language = Language.find_by!(iso_code: params[:lang])
-    translation = @organization.find_or_translate!(language)
-    if translation.newly_translated
-      # There's an attribute accessor named "newly_translated" that we set to true
-      # when we just created the translation. We use it to redirect to the form instead of the show.
-      redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
-    else
-      redirect_to [:admin, translation.becomes(translation.class.base_class)]
-    end
   end
 
   def static
@@ -61,7 +47,6 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def new
-    @organization.language_id = current_university.default_language_id
     breadcrumb
   end
 
@@ -71,7 +56,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def create
-    @organization.language_id = current_university.default_language_id
+    @organization.language_id = current_language.id
     if @organization.save
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_created_html', model: @organization.to_s)

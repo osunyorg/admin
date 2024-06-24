@@ -4,8 +4,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
   include Admin::Reorderable
 
   def index
-    @papers = @papers.for_language_id(@journal.language_id)
-                     .ordered
+    @papers = @papers.ordered
                      .page(params[:page])
     breadcrumb
   end
@@ -36,8 +35,6 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
   def create
     @paper.assign_attributes(
       journal: @journal,
-      university: current_university,
-      language_id: @journal.language_id,
       updated_by: current_user
     )
     if @paper.save

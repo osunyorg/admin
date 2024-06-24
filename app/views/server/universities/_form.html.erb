@@ -39,7 +39,8 @@
                         as: :check_boxes,
                         required: true,
                         wrapper_html: { class: "js-languages" },
-                        label_method: lambda { |l| language_name(l.iso_code) } %>
+                        label_method: lambda { |l| language_name(l.iso_code) },
+                        hint: t('simple_form.hints.university.languages', used_languages: Language.where(id: university.websites.map(&:language_ids).flatten.uniq).ordered.map(&:name).join(', ')) %>
     </div>
     <div class="col-lg-6">
       <%= f.association :default_language,

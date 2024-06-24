@@ -1,6 +1,8 @@
 <% content_for :title, "#{t('admin.communication.website.localizations.title')}" %>
 
-<%= render 'admin/communication/websites/language_switcher' %>
+<% content_for :title_right do %>
+  <%= render 'language_switcher' %>
+<% end %>
 
 <%= simple_form_for [:admin, @localization], as: :communication_website_localization, url: admin_communication_website_localization_path do |f| %>
   <%= f.error_notification %>

@@ -126,6 +126,13 @@ class Communication::Website::Post < ApplicationRecord
     [website.config_default_content_security_policy]
   end
 
+  def translatable_relations
+    [
+      { relation: :categories, list: categories },
+      { relation: :author, object: author }
+    ]
+  end
+
   def references
     menus +
     abouts_with_post_block
@@ -139,6 +146,7 @@ class Communication::Website::Post < ApplicationRecord
     "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
   end
 
+  # FIXME : Should disappear after language check in before_validation
   def translated_author
     @translated_author ||= author.find_or_translate!(language)
   end
@@ -181,14 +189,6 @@ class Communication::Website::Post < ApplicationRecord
       old_author.update(is_author: false)
     end
     author.update(is_author: true) if author_id
-  end
-
-  def translate_additional_data!(translation)
-    categories.each do |category|
-      translated_category = category.find_or_translate!(translation.language)
-      translation.categories << translated_category
-    end
-    translation.update(author_id: author.find_or_translate!(translation.language).id) if author_id.present?
   end
 
   def abouts_with_post_block
