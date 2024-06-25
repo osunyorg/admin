@@ -20,7 +20,7 @@ block_class += " block-chapter--with-image" if block.template.image[:id]
             </div>
           <% end %>
         </div>
-        <%= block_component_show block, :image %>
+        <%= block_component_show block, :image, without_text: true %>
       </div>
     </div>
   </div>
