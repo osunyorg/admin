@@ -1,23 +1,11 @@
 class Deuxfleurs
 
   def get_bucket(host)
-    response = client.get("website/#{host}")
-    data = JSON.parse response.body
-    {
-      identifier: data.dig('vhost', 'name'),
-      access_key_id: data.dig('access_key_id'),
-      secret_access_key: data.dig('secret_access_key')
-    }
+    call_bucket_endpoint(host, method: :get)
   end
 
   def create_bucket(host)
-    response = client.post("website/#{host}")
-    data = JSON.parse response.body
-    {
-      identifier: data.dig('vhost', 'name'),
-      access_key_id: data.dig('access_key_id'),
-      secret_access_key: data.dig('secret_access_key')
-    }
+    call_bucket_endpoint(host, method: :post)
   end
 
   def rename_bucket(host, new_identifier)
@@ -27,6 +15,16 @@ class Deuxfleurs
   end
 
   protected
+
+  def call_bucket_endpoint(host, method:)
+    response = client.public_send(method, "website/#{host}")
+    data = JSON.parse response.body
+    {
+      identifier: data.dig('vhost', 'name'),
+      access_key_id: data.dig('access_key_id'),
+      secret_access_key: data.dig('secret_access_key')
+    }
+  end
 
   def client
     unless @client
