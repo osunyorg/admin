@@ -1,13 +1,16 @@
+<% heading_level = block.heading_rank_children %>
+
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-
       <ul>
         <% block.template.elements.each do |element| %>
           <li>
             <div>
-              <h3><%= element.title %></h3>
+              <h<%= heading_level %> class="name" itemprop="name">
+                <%= element.title %>
+              </h<%= heading_level %>>
               <p><%= element.description %></p>
             </div>
             <%= block_component_show block, :image, template: element %>
