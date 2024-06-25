@@ -47,6 +47,10 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
     raise NotImplementedError
   end
 
+  def update_secrets(secrets)
+    raise NotImplementedError
+  end
+
   def push(commit_message)
     return if !valid? || batch.empty?
     client.create_commit  repository,

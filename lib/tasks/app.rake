@@ -8,13 +8,22 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    Communication::Block::Heading.where(slug: nil).find_each do |heading|
-      heading.set_slug
-      heading.update_column :slug, heading.slug
+    # Set Deuxfleurs credentials, on database, then in GitHub repository's secrets
+    deuxfleurs = Deuxfleurs.new
+    Communication::Website.hosted_on_deuxfleurs.each do |website|
+      begin
+        bucket_info = deuxfleurs.get_bucket(website.deuxfleurs_default_identifier)
+        # Set credentials on database
+        website.update_columns(
+          deuxfleurs_access_key_id: bucket_info[:access_key_id],
+          deuxfleurs_secret_access_key: bucket_info[:secret_access_key]
+        )
+        # Set credentials on GitHub repository's secrets
+        website.send(:deuxfleurs_update_github_secrets)
+      rescue
+        puts "Error while fixing « #{website} »"
+      end
     end
-    # Les blobs ne sont plus connectés
-    # https://github.com/osunyorg/admin/pull/1979
-    Communication::Website::Connection.where(indirect_object_type: "ActiveStorage::Blob").delete_all
   end
 
   namespace :websites do
