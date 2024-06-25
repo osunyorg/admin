@@ -844,10 +844,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_105443) do
     t.datetime "updated_at", null: false
     t.string "phone"
     t.string "url"
-    t.uuid "language_id"
-    t.uuid "original_id"
-    t.index ["language_id"], name: "index_education_schools_on_language_id"
-    t.index ["original_id"], name: "index_education_schools_on_original_id"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
@@ -1006,7 +1002,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_105443) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "language_id", null: false
+    t.uuid "original_id"
     t.index ["journal_id"], name: "index_research_journal_paper_kinds_on_journal_id"
+    t.index ["language_id"], name: "index_research_journal_paper_kinds_on_language_id"
+    t.index ["original_id"], name: "index_research_journal_paper_kinds_on_original_id"
     t.index ["slug"], name: "index_research_journal_paper_kinds_on_slug"
     t.index ["university_id"], name: "index_research_journal_paper_kinds_on_university_id"
   end
@@ -1034,7 +1034,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_105443) do
     t.date "accepted_at"
     t.string "doi"
     t.text "authors_list"
+    t.uuid "language_id", null: false
     t.index ["kind_id"], name: "index_research_journal_papers_on_kind_id"
+    t.index ["language_id"], name: "index_research_journal_papers_on_language_id"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"
     t.index ["slug"], name: "index_research_journal_papers_on_slug"
@@ -1065,6 +1067,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_105443) do
     t.text "text"
     t.text "featured_image_credit"
     t.text "summary"
+    t.uuid "language_id", null: false
+    t.index ["language_id"], name: "index_research_journal_volumes_on_language_id"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["slug"], name: "index_research_journal_volumes_on_slug"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
@@ -1532,14 +1536,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_105443) do
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "languages"
   add_foreign_key "education_programs", "universities"
-  add_foreign_key "education_schools", "education_schools", column: "original_id"
-  add_foreign_key "education_schools", "languages"
   add_foreign_key "education_schools", "universities"
   add_foreign_key "emergency_messages", "universities"
   add_foreign_key "imports", "universities"
   add_foreign_key "imports", "users"
+  add_foreign_key "research_journal_paper_kinds", "languages"
+  add_foreign_key "research_journal_paper_kinds", "research_journal_paper_kinds", column: "original_id"
   add_foreign_key "research_journal_paper_kinds", "research_journals", column: "journal_id"
   add_foreign_key "research_journal_paper_kinds", "universities"
+  add_foreign_key "research_journal_papers", "languages"
   add_foreign_key "research_journal_papers", "research_journal_paper_kinds", column: "kind_id"
   add_foreign_key "research_journal_papers", "research_journal_volumes"
   add_foreign_key "research_journal_papers", "research_journals"
@@ -1547,6 +1552,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_105443) do
   add_foreign_key "research_journal_papers", "users", column: "updated_by_id"
   add_foreign_key "research_journal_papers_researchers", "research_journal_papers", column: "paper_id"
   add_foreign_key "research_journal_papers_researchers", "university_people", column: "researcher_id"
+  add_foreign_key "research_journal_volumes", "languages"
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "languages"
