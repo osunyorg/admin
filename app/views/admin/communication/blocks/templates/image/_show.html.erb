@@ -1,10 +1,21 @@
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <%= render 'admin/communication/blocks/partials/top', block: block %>
-
-      <% if block.template.image %>
-        <%= block_component_show block, :image %>
+      <%= render 'admin/communication/blocks/partials/top', block: block, without_description: true %>
+      <% if block.template.image.present? %>
+        <figure>
+          <%= block_component_show block, :image, only_image: true %>
+          <% if block.template.text.present? || block.template.credit.present? %>
+            <figcaption>
+              <% if block.template.text.present? %>
+                <%= block_component_show block, :text %>
+              <% end %>
+              <% if block.template.credit.present? %>
+                <div class="credit"><%= block_component_show block, :credit %></div>
+              <% end %>
+            </figcaption>
+          <% end %>
+        </figure>
       <% end %>
     </div>
   </div>
