@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_120944) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_17_190729) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -131,6 +131,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_120944) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "migration_identifier"
     t.index ["about_type", "about_id"], name: "index_communication_block_headings_on_about"
     t.index ["parent_id"], name: "index_communication_block_headings_on_parent_id"
     t.index ["slug"], name: "index_communication_block_headings_on_slug"
@@ -323,6 +324,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_120944) do
     t.string "subtitle"
     t.string "time_zone"
     t.jsonb "add_to_calendar_urls"
+    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_agenda_events_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_events_on_original_id"
