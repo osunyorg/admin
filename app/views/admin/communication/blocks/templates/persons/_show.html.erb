@@ -1,3 +1,5 @@
+<% heading_level = block.heading_rank_children %>
+
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
@@ -10,14 +12,16 @@
           %>
           <article class="person" itemscope itemtype="https://schema.org/Person">
             <div class="description">
-              <h3 class="name" itemprop="name">
+              <h<%= heading_level %>>
                 <% if block.template.with_link %>
                   <%= link_to person, [:admin, person] %>
                 <% else %>
                   <%= element.person %>
                 <% end %>
-              </h3>
-              <p itemprop="jobTitle"><%= element.role %></p>
+              </h<%= heading_level %>>
+              <p itemprop="jobTitle">
+                <%= element.role %>
+              </p>
             </div>
             <% if block.template.with_photo %>
               <div class="avatar" itemprop="image">

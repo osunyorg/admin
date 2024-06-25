@@ -2,17 +2,23 @@
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-
-      <ul class="files">
+      <ul class="links">
         <% block.template.elements.each do |element| %>
-          <li>
-            <%= block_component_show block, :image, template: element %>
-            <h3>
-              <a href="<%= element.url %>" target="_blank" title="<%= element.title %>">
+          <li itemscope itemtype="https://schema.org/WebPage">
+            <div class="link-content">
+                <% isExternal = true %>
+              <% if (element.url.start_with?('/')) %>
+                <% isExternal = false %>
+              <% end %>
+              <link itemprop="url" href="<%= element.url %>">
+              <a href="<%= element.url %>"<% if isExternal %> rel="noopener" target="_blank"<% end %> title="<%= element.title %>">
                 <%= element.title %>
               </a>
-            </h3>
-            <p><%= element.description %></p>
+              <p><%= element.description %></p>
+            </div>
+            <div class="media">
+              <%= block_component_show block, :image, template: element %>
+            </div>
           </li>
         <% end %>
       </ul>
