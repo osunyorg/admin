@@ -1,17 +1,17 @@
 <%
 template = block.template
 title = block.title
-# description_key = template.respond_to?(:description)  ? :description 
-#                                                       : :text
-
 description = nil
 description_key = nil
-if template.respond_to?(:description)
-  description_key = :description
-  description = template.send(description_key)
-elsif template.respond_to?(:text)
-  description_key = :text
-  description = template.send(description_key)
+without_description = local_assigns[:without_description]
+unless without_description
+  if template.respond_to?(:description)
+    description_key = :description
+    description = template.send(description_key)
+  elsif template.respond_to?(:text)
+    description_key = :text
+    description = template.send(description_key)
+  end
 end
 
 heading_level = block.heading_rank_self

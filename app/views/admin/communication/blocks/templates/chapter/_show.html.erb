@@ -8,7 +8,7 @@ block_class += " block-chapter--with-image" if block.template.image[:id]
     <div class="block-content">
       <div class="chapter">
         <div class="text">
-          <%= render 'admin/communication/blocks/partials/top', block: block %>
+          <%= render 'admin/communication/blocks/partials/top', block: block, without_description: true %>
           <% if block.template.text.present? %>
             <div class="rich-text">
               <%= block_component_show block, :text %>
