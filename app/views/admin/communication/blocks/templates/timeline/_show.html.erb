@@ -1,16 +1,17 @@
+<% heading_level = block.heading_rank_children %>
+
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <% if block.template.layout == "vertical" %>
       <div class="block-content">
         <%= render 'admin/communication/blocks/partials/top', block: block %>
 
-        <div class="events">
+        <div class="timeline-events">
           <% block.template.elements.each do |element| %>
-            <article class="event">
-              <h3 class="event-title">
+            <article class="timeline-event">
+              <h<%= heading_level %> class="title">
                 <%= block_component_show block, :title, template: element %>
-              </h3>
-
+              </h<%= heading_level %>>
               <%# TODO: gérer les sauts de ligne %>
               <p><%= element.text %></p>
             </article>
@@ -18,17 +19,21 @@
         </div>
       </div>
     <% else %>
-      <div class="timeline">
+      <div class="timeline draggable-container">
         <% unless block.title.blank? %>
           <p class="block-title"><%= block.title %></p>
         <% end %>
-        <div class="events">
+        <div class="timeline-events draggable-content">
           <ol>
             <% block.template.elements.each do |element| %>
-              <li class="event">
-                <p class="title"><%= block_component_show block, :title, template: element %><p>
+              <li class="timeline-event draggable-item">
+                <h<%= heading_level %>>
+                  <%= block_component_show block, :title, template: element %>
+                </h<%= heading_level %>>
                 <div class="line"></div>
-                <div class="description"><%= block_component_show block, :text, template: element %></div>
+                <div class="description text">
+                  <%= block_component_show block, :text, template: element %>
+                </div>
               </li>
             <% end %>
           </ol>
