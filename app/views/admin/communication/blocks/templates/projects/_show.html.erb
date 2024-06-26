@@ -1,8 +1,47 @@
+<% heading_level = block.heading_rank_children %>
+
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-      <%# TODO: show projects %>
+      
+      <% if block.template.layout ===  "list" %>
+      <% elsif block.template.layout ===  "large" %>
+      <% elsif block.template.layout ===  "alternate" %>
+      <% else %>
+        <div class="grid">
+          <% block.template.selected_projects.each do |project|
+              next if project.nil?
+            %>
+            <article class="project">
+              <div class="project-content">
+                <div class="project-description">
+                  <h<%= heading_level %>>
+                    <%= link_to project, project.url %>
+                  </h<%= heading_level %>>
+                  <% if project.summary.present? %>
+                    <p itemprop="abstract"><%= project.summary %></p>
+                  <% end %>
+                  <% if project.categories.present? %>
+                    <ul class="project-categories">
+                      <% project.categories.each do |category| %>
+                        <li>
+                          <%= link_to category, category.url %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </div>
+              </div>
+              <div class="media">
+                <% if project.featured_image.attached? %>
+                  <%= kamifusen_tag project.featured_image %>
+                <% end %>
+              </div>
+            </article>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

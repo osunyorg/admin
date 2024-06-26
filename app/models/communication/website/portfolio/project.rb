@@ -105,6 +105,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   def url
     return unless published
     return if website.url.blank?
+    # FIXME: Sebou mauvaise page
     return if website.special_page(Communication::Website::Page::CommunicationAgenda)&.path.blank?
     return if current_permalink_in_website(website).blank?
     "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
