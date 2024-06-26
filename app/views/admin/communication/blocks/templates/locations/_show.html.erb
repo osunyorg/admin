@@ -1,18 +1,36 @@
+<% heading_level = block.heading_rank_children %>
+
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
 
-      <ol class="locations">
+      <div class="locations locations--<%= block.template.layout %>">
         <% block.template.elements.each do |element|
           location = element.location
           next if location.nil?
         %>
-          <li>
-            <%= link_to location, [:admin, location] %>
-          </li>
+          <article class="location" itemscope itemtype="https://schema.org/EducationalOrganization">
+            <div class="location-content">
+              <h<%= heading_level %>  itemprop='headline' class='location-title'>
+                <%= link_to location, location.front_url %>
+              </h<%= heading_level %>>
+              <% if location.summary.present? %>
+                <div class="location-description">
+                  <p itemprop="description">
+                    <%= location.summary %>
+                  </p>
+                </div>
+              <% end %>
+            </div>
+            <div class="media">
+              <% if location.featured_image.attached? %>
+                <%= kamifusen_tag location.featured_image %>
+              <% end %>
+            </div>
+          </article>
         <% end %>
-      </ol>
+      </div>
     </div>
   </div>
 </div>
