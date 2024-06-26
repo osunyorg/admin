@@ -15,7 +15,7 @@
     */
     .hero {
       margin-top: 0;
-      padding-top: 0;
+      padding-top: 1px;
     }
     .note {
       position: relative;
@@ -71,7 +71,7 @@
     if @image.present? && @image.attached?
       classes += ' hero--with-image'
       # TODO ratio
-      classes += ' hero--image-square'
+      classes += ' hero--image-landscape'
     end
     %>
     <header class="<%= classes %>">
@@ -82,7 +82,7 @@
               <hgroup>
                 <h1><%= @title %></h1>
                 <p class="lead"><%= sanitize @summary %></p>
-              </hgroup>          
+              </hgroup>
             <% else %>
               <h1><%= @title %></h1>
             <% end %>
