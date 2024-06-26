@@ -1,29 +1,54 @@
+<% heading_level = block.heading_rank_children %>
+
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-      <div>
-        <% if block.data %>
-          <% block.template.selected_events.each do |event|
-            next if event.nil?
-          %>
-            <article class="event">
-                <h3><%= link_to event, '#' %></h3>
-                <p><%= event.summary %></p>
-                <div class="event-meta">
-                  <%= date_range_i18n(event.from_day, event.to_day, locale: block.about.language.iso_code) %>
+
+      <div class="events events--<%= block.template.layout %>">
+        <% block.template.selected_events.each do |event|
+          next if event.nil?
+        %>
+          <article class="event <% if event.featured_image.attached? %>event--with-image<% end %>" itemscope itemtype="https://schema.org/Event">
+            <div class="event-content">
+              <% if event.subtitle %>
+                <hgroup>
+              <% end %>
+              <h<%= heading_level %>  itemprop='headline' class='location-title'>
+                <%= link_to event, event.url %>
+              </h<%= heading_level %>>
+              <% if event.subtitle %>
+                <p class="event-subtitle"><%= event.subtitle %></p>
+                </hgroup>
+              <% end %>
+              <%# FIXME: Sebou %>
+              <%# themes/osuny/layouts/partials/events/event.html:29-60 %>
+
+              <% if block.template.show_summary && event.summary.present? %>
+                <div class="event-description">
+                  <p itemprop="description">
+                    <%= event.summary %>
+                  </p>
+                  <% if block.template.layout == "large" %>
+                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.pages.layouts.cards.more' %></p>
+                  <% end %>
                 </div>
-              </div>
-              <div class="media">
-                <% if event.best_featured_image.attached? %>
-                  <%= kamifusen_tag event.best_featured_image %>
-                <% end %>
-              </div>
-            </article>
-          <% end %>
-          <% if block.template.selected_events.empty? %>
-            <p><%= block.template.no_event_message %></p>
-          <% end %>
+              <% end %>
+
+              <% if event.categories.present? && block.template.show_category%>
+                <p class="event-categories">
+                  <% event.categories.each do |category| %>
+                    <span><%= link_to category, category.url %></span>
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+            <div class="media">
+              <% if event.featured_image.attached? %>
+                <%= kamifusen_tag event.featured_image %>
+              <% end %>
+            </div>
+          </article>
         <% end %>
       </div>
     </div>

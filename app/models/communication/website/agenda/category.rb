@@ -100,6 +100,11 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   def siblings
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
+  
+  # FIXME: Sebou à faire
+  def url
+    "#"
+  end
 
   protected
 

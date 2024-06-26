@@ -1,3 +1,5 @@
+<% heading_level = block.heading_rank_children %>
+
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
@@ -32,12 +34,35 @@
       <% if block.data %>
 
         <% if block.template.layout ===  "list" %>
-          <ul>
+          <ul class="list">
             <% block.template.selected_pages.each do |page|
               next if page.nil?
             %>
-            <li><%= link_to page, page.url %></li>
+              <li>
+                <% if block.template.show_description || block.template.show_image %>
+                  <article>
+                    <div class="page-content">
+                      <h<%= heading_level %>>
+                        <%= link_to page, page.url %>
+                      </h<%= heading_level %>>
+                      <% if block.template.show_description %>
+                        <p><%= page.summary %></p>
+                      <% end %>
+                    </div>
+                    <% if block.template.show_image %>
+                      <div class="media" itemprop="image">
+                        <% if page.featured_image.attached? %>
+                          <%= kamifusen_tag page.featured_image %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </article>
+                <% else %>
+                  <%= link_to page, page.url %>
+                <% end %>
+              </li>
             <% end %>
+            
           </ul>
 
         <% elsif block.template.layout ===  "cards" %>
@@ -46,9 +71,9 @@
               next if page.nil?
             %>
               <article class="card">
-                <h3>
+                <h<%= heading_level %>>
                   <%= link_to page, page.url %>
-                </h3>
+                </h<%= heading_level %>>
                 <% if block.template.show_description %>
                   <p><%= page.summary %></p>
                 <% end %>
@@ -66,15 +91,66 @@
             <% end %>
           </div>
 
+        <% elsif block.template.layout ===  "alternate" %>
+          <div class="alternate">
+            <% block.template.selected_pages.each do |page|
+              next if page.nil?
+            %>
+              <article <% if !block.template.show_image %>class="without-image"<% end %>>
+                <h<%= heading_level %>>
+                  <%= link_to page, page.url %>
+                </h<%= heading_level %>>
+                <% if block.template.show_description %>
+                  <p><%= page.summary %></p>
+                <% end %>
+
+                <% if block.template.show_image %>
+                  <div class="media" itemprop="image">
+                    <% if page.featured_image.attached? %>
+                      <%= kamifusen_tag page.featured_image %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </article>
+            <% end %>
+          </div>
+
+        <% elsif block.template.layout ===  "large" %>
+          <div class="large">
+            <% block.template.selected_pages.each do |page|
+              next if page.nil?
+            %>
+              <article class="page">
+                <div class="page-content">
+                  <h<%= heading_level %>>
+                    <%= link_to page, page.url %>
+                  </h<%= heading_level %>>
+                  <% if block.template.show_description %>
+                    <p><%= page.summary %></p>
+                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.pages.layouts.cards.more' %></p>
+                  <% end %>
+                </div>
+
+                <% if block.template.show_image %>
+                  <div class="media" itemprop="image">
+                    <% if page.featured_image.attached? %>
+                      <%= kamifusen_tag page.featured_image %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </article>
+            <% end %>
+          </div>
+          
         <% else %>
           <div class="grid">
             <% block.template.selected_pages.each do |page|
               next if page.nil?
             %>
               <article>
-                <h3>
-                  <%= link_to page, page.url %>  
-                </h3>
+                <h<%= heading_level %>>
+                  <%= link_to page, page.url %>
+                </h<%= heading_level %>>
                 <% if block.template.show_description %>
                   <p><%= page.summary %></p>
                 <% end %>

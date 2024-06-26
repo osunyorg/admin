@@ -21,13 +21,13 @@
     <% else %>
       <div class="timeline draggable-container">
         <% unless block.title.blank? %>
-          <p class="block-title"><%= block.title %></p>
+          <%= render 'admin/communication/blocks/partials/top', block: block %>
         <% end %>
         <div class="timeline-events draggable-content">
           <ol>
             <% block.template.elements.each do |element| %>
               <li class="timeline-event draggable-item">
-                <h<%= heading_level %>>
+                <h<%= heading_level %> class="title">
                   <%= block_component_show block, :title, template: element %>
                 </h<%= heading_level %>>
                 <div class="line"></div>
