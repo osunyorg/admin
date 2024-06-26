@@ -12,7 +12,7 @@ namespace :app do
     deuxfleurs = Deuxfleurs.new
     Communication::Website.hosted_on_deuxfleurs.each do |website|
       begin
-        bucket_info = deuxfleurs.get_bucket(website.deuxfleurs_default_identifier)
+        bucket_info = deuxfleurs.get_bucket(website.deuxfleurs_identifier)
         # Set credentials on database
         website.update_columns(
           deuxfleurs_access_key_id: bucket_info[:access_key_id],
