@@ -4,7 +4,8 @@
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-
+      
+      <% if block.template.layout ===  "grid" %>
         <div class="programs-grid">
           <% block.template.selected_programs.each do |program|
               next if program.nil?
@@ -27,8 +28,6 @@
             </article>
           <% end %>
         </div>
-
-      <% if block.template.layout ===  "list" %>
       <% else %>
         <ol class="programs">
           <% block.template.elements.each do |element|
