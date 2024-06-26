@@ -216,6 +216,11 @@ class Education::Program < ApplicationRecord
     Education::Program.where(id: id)
   end
 
+  # FIXME: Sebou
+  def front_url
+    "#"
+  end
+
   protected
 
   def check_accessibility
