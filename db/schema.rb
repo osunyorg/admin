@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_27_082422) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_27_095534) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -1362,6 +1362,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_082422) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "language_id"
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_university_person_involvements_on_language_id"
+    t.index ["original_id"], name: "index_university_person_involvements_on_original_id"
     t.index ["person_id"], name: "index_university_person_involvements_on_person_id"
     t.index ["target_type", "target_id"], name: "index_university_person_involvements_on_target"
     t.index ["university_id"], name: "index_university_person_involvements_on_university_id"
@@ -1584,8 +1588,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_082422) do
   add_foreign_key "university_person_experiences", "universities"
   add_foreign_key "university_person_experiences", "university_organizations", column: "organization_id"
   add_foreign_key "university_person_experiences", "university_people", column: "person_id"
+  add_foreign_key "university_person_involvements", "languages"
   add_foreign_key "university_person_involvements", "universities"
   add_foreign_key "university_person_involvements", "university_people", column: "person_id"
+  add_foreign_key "university_person_involvements", "university_person_involvements", column: "original_id"
   add_foreign_key "university_roles", "languages"
   add_foreign_key "university_roles", "universities"
   add_foreign_key "university_roles", "university_roles", column: "original_id"

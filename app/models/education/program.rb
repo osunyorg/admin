@@ -178,8 +178,8 @@ class Education::Program < ApplicationRecord
       { relation: :parent, object: parent },
       { relation: :diploma, object: diploma },
       { relation: :schools, list: schools },
-      { relation: :university_roles, list: university_roles }
-      # TODO: Add direct involvements when translatable
+      { relation: :university_roles, list: university_roles },
+      { relation: :university_person_involvements, list: university_person_involvements }
     ]
   end
 

@@ -185,8 +185,9 @@ module Translatable
   # If object is direct we do not want to remove the translations
   # If object is indirect we remove the translations
   def destroy_or_nullify_translations
-    is_direct_object? ? translations.update_all(original_id: nil)
-                      : translations.destroy_all
+    # TODO: remove ?
+    # is_direct_object? ? translations.update_all(original_id: nil)
+    #                   : translations.destroy_all
   end
 
 end

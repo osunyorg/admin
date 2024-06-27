@@ -5,7 +5,7 @@ class AddI18nInfosToRoles < ActiveRecord::Migration[7.1]
 
     University::Role.reset_column_information
     University::Role.all.each do |role|
-      role.update(language_id: role.target.language_id)
+      role.update_column(:language_id, role.target.language_id)
     end
   end
 

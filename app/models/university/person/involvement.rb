@@ -9,23 +9,30 @@
 #  target_type   :string           not null, indexed => [target_id]
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  language_id   :uuid             indexed
+#  original_id   :uuid             indexed
 #  person_id     :uuid             not null, indexed
 #  target_id     :uuid             not null, indexed => [target_type]
 #  university_id :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_university_person_involvements_on_language_id    (language_id)
+#  index_university_person_involvements_on_original_id    (original_id)
 #  index_university_person_involvements_on_person_id      (person_id)
 #  index_university_person_involvements_on_target         (target_type,target_id)
 #  index_university_person_involvements_on_university_id  (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_0e1e65ddb0  (original_id => university_person_involvements.id)
+#  fk_rails_3df2a6f2d9  (language_id => languages.id)
 #  fk_rails_407e2a671c  (person_id => university_people.id)
 #  fk_rails_5c704f6338  (university_id => universities.id)
 #
 class University::Person::Involvement < ApplicationRecord
   include Sanitizable
+  include Translatable
   include WithUniversity
   include WithPosition
 
@@ -38,8 +45,7 @@ class University::Person::Involvement < ApplicationRecord
   validates :person_id, uniqueness: { scope: [:target_id, :target_type] }
   validates :target_id, uniqueness: { scope: [:person_id, :target_type] }
 
-  before_validation :set_kind, :set_university_id, on: :create
-  before_validation :ensure_connected_elements_are_in_correct_language
+  before_validation :set_kind, on: :create
 
   after_commit :sync_with_git
 
@@ -48,6 +54,12 @@ class University::Person::Involvement < ApplicationRecord
                   .order('university_people.last_name', 'university_people.first_name')
   }
   scope :ordered_by_date, -> { order(:created_at) }
+
+  def translatable_relations
+    [
+      { relation: :person, object: person }
+    ]
+  end
 
   def to_s
     "#{person}"
@@ -74,16 +86,4 @@ class University::Person::Involvement < ApplicationRecord
     end
   end
 
-  def set_university_id
-    self.university_id = self.person.university_id
-  end
-
-  def ensure_connected_elements_are_in_correct_language
-    # Si on passe par un rôle, on veut s'assurer que la personne connectée soit de la même langue que le target
-    # Si on passe par autre chose (connexion directe) on veut au contraire s'assurer que c'est le target qui a la même langue que la personne
-    return unless person.language_id != target.language_id
-    person_in_correct_language = person.find_or_translate!(target.language)
-    self.person_id = person_in_correct_language.id
-    
-  end
 end

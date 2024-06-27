@@ -90,7 +90,8 @@ class Education::School < ApplicationRecord
 
   def translatable_relations
     [
-      { relation: :programs, list: programs }
+      { relation: :programs, list: programs },
+      { relation: :university_roles, list: university_roles }
     ]
   end
 

@@ -11,10 +11,9 @@
     <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
                                     f,
                                     class: 'btn btn-sm text-danger' %>
-  </div>
-  <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE } p-2\"></i>".html_safe,
-                                  f,
-                                  class: 'text-danger' %>
   <%= f.hidden_field :position, data: { 'sortable-input': '' } %>
+  <%= f.hidden_field :university_id, value: current_university.id %>
+  <%= f.hidden_field :language_id, value: current_language.id %>
   <%= f.hidden_field :id if include_id %>
+  </div>
 </div>

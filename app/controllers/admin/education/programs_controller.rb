@@ -129,7 +129,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
             :pricing, :pricing_apprenticeship, :pricing_continuing, :pricing_initial, :duration,
             :downloadable_summary, :downloadable_summary_delete,
             :parent_id, :diploma_id, school_ids: [],
-            university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]
+            university_person_involvements_attributes: [:id, :person_id, :language_id, :university_id, :description, :position, :_destroy]
           )
           .merge(
             university_id: current_university.id

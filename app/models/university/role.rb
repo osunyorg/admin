@@ -39,11 +39,11 @@ class University::Role < ApplicationRecord
 
   accepts_nested_attributes_for :involvements, reject_if: :all_blank, allow_destroy: true
   
-  # def translatable_relations
-  #   [
-  #     { relation: :programs, list: programs }
-  #   ]
-  # end
+  def translatable_relations
+    [
+      { relation: :involvements, list: involvements }
+    ]
+  end
 
   def to_s
     "#{description}"
