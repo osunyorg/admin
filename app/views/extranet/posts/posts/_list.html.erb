@@ -1,7 +1,7 @@
-<div class="row posts-list">
+<div class="row posts-list row-gap-5">
   <% posts.each do |post| %>
     <article class="col-lg-4">
-      <div class="position-relative mt-5">
+      <div class="position-relative">
         <% if post.featured_image.attached? %>
           <%= kamifusen_tag post.featured_image, width: 800, height: 500, class: 'img-fluid' %>
         <% end %>
