@@ -54,6 +54,10 @@ class Git::Repository
     provider.init_from_template(name)
   end
 
+  def update_secrets(secrets)
+    provider.update_secrets(secrets)
+  end
+
   def files_in_the_repository
     provider.files_in_the_repository
   end
