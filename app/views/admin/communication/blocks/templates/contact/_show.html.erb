@@ -6,53 +6,74 @@
       <div class="informations">
         <address itemscope itemtype="https://schema.org/Organization">
           <% unless block.template.name.blank? %>
-            <p><%= block_component_show block, :name %></p>
+            <p itemprop="name"><%= block_component_show block, :name %></p>
           <% end %>
           <% if block.template.information.present? %>
             <%= block_component_show block, :information %>
           <% end %>
-          <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-            <span itemprop="streetAddress">
-              <%= block_component_show block, :address %>
-            </span>
-            <span itemprop="addressLocality">
-              <%= block_component_show block, :city %>
-            </span>
-            <span itemprop="postalCode">
-              <%= block_component_show block, :zipcode %>
-            </span>
-            <span itemprop="addressCountry">
-              <%= block_component_show block, :country %>
-            </span>
-          </div>
-
-          <% if block.template.url.present? %>
-            <% url = block.template.url %>
-            <a href="<%= social_website_to_url url %>" target="_blank" rel="noreferrer">
-              <%= social_website_to_s url %>
-            </a>
-          <% end %>
-
-          <p>
-            <% block.template.phone_numbers.each do |phone_number| %>
-              <a itemprop="telephone" href="tel:<%= phone_number %>%>"><%= phone_number %></a><br>
+          <div class="contacts">
+            <% if block.template.address.present? %>
+              <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                <span itemprop="streetAddress">
+                  <%= block_component_show block, :address %>
+                </span>
+                <span itemprop="addressLocality">
+                  <%= block_component_show block, :city %>
+                </span>
+                <span itemprop="postalCode">
+                  <%= block_component_show block, :zipcode %>
+                </span>
+                <span itemprop="addressCountry">
+                  <%= block_component_show block, :country %>
+                </span>
+              </div>
             <% end %>
-            <% block.template.emails.each do |email| %>
-              <a itemprop="email" href="mailto:<%= email %>%>"><%= email %></a><br>
+            <% if block.template.url.present? || block.template.emails.present? %>
+              <div>
+                <p class="meta">
+                  <% if block.template.url.present? %>
+                    <%= t('admin.communication.blocks.templates.contact.edit.phones.label') %>
+                  <% else %>
+                    <%= t('admin.communication.blocks.templates.contact.edit.phones.label') %>
+                  <% end %>
+                </p>
+                <% block.template.emails.each do |email| %>
+                  <p><a itemprop="email" href="mailto:<%= email %>%>"><%= email %></a></p>
+                <% end %>
+                <% if block.template.url.present? %>
+                  <% url = block.template.url %>
+                  <a href="<%= social_website_to_url url %>" target="_blank" rel="noreferrer">
+                    <%= social_website_to_s url %>
+                  </a>
+                <% end %>
+              </div>
             <% end %>
-          </p>
-        </address>
-        <ul>
-          <% block.template.elements.each do |element| %>
-            <li>
-              <span><%= block_component_show block, :title, template: element %></span>
-              <% if element.time_slot_morning['to'].present? %>
-                <span><time datetime="<%= block_component_show block, :time_slot_morning, template: element %>"><%= block_component_show block, :time_slot_morning, template: element %></time></span>
+            <% if block.template.phone_numbers.present? %>
+              <div>
+                <p class="meta">
+                  <%= t('admin.communication.blocks.templates.contact.edit.phones.label') %>
+                </p>
+                <% block.template.phone_numbers.each do |phone_number| %>
+                  <p><a itemprop="telephone" href="tel:<%= phone_number %>%>"><%= phone_number %></a></p>
+                <% end %>
+              </div>
+            <% end %>
+            <ul class="schedule-table full-size">
+              <li class="meta">
+                <%= t('admin.communication.blocks.templates.contact.edit.slots') %>
+              </li>
+              <% block.template.elements.each do |element| %>
+                <li>
+                  <span><%= block_component_show block, :title, template: element %></span>
+                  <% if element.time_slot_morning['to'].present? %>
+                    <span><time datetime="<%= block_component_show block, :time_slot_morning, template: element %>"><%= block_component_show block, :time_slot_morning, template: element %></time></span>
+                  <% end %>
+                  <span><time datetime="<%= block_component_show block, :time_slot_afternoon, template: element %>"><%= block_component_show block, :time_slot_afternoon, template: element %></time></span>
+                </li>
               <% end %>
-              <span><time datetime="<%= block_component_show block, :time_slot_afternoon, template: element %>"><%= block_component_show block, :time_slot_afternoon, template: element %></time></span>
-            </li>
-          <% end %>
-        </ul>
+            </ul>
+          </div>
+        </address>
       </div>
     </div>
   </div>
