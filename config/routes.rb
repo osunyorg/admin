@@ -33,19 +33,23 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users, except: [:new, :create] do
-      post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
-      patch 'unlock' => 'users#unlock', on: :member
+    scope "/:lang" do
+      resources :users, except: [:new, :create] do
+        post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
+        patch 'unlock' => 'users#unlock', on: :member
+      end
+      # libre_translate route
+      post 'translate/:target' => 'translation#translate', as: :translate
+      put 'theme' => 'application#set_theme', as: :set_theme
+      put 'favorite' => 'users#favorite', as: :favorite
+      draw 'admin/administration'
+      draw 'admin/communication'
+      draw 'admin/education'
+      draw 'admin/research'
+      draw 'admin/university'
+      root to: 'dashboard#index'
     end
-    post 'translate/:target' => 'translation#translate', as: :translate
-    put 'theme' => 'application#set_theme', as: :set_theme
-    put 'favorite' => 'users#favorite', as: :favorite
-    draw 'admin/administration'
-    draw 'admin/communication'
-    draw 'admin/education'
-    draw 'admin/research'
-    draw 'admin/university'
-    root to: 'dashboard#index'
+    get "/" => 'dashboard#redirect_to_default_language'
   end
 
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium

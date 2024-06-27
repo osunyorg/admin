@@ -23,7 +23,7 @@ namespace :university do
       resources :imports, only: [:index, :show, :new, :create]
     end
   end
-  resources :people, path: '/:lang/people' do
+  resources :people do
     collection do
       get :search, defaults: { format: 'json' }
       resources :categories, controller: 'people/categories', as: 'person_categories' do
@@ -43,7 +43,7 @@ namespace :university do
     end
   end
 
-  resources :organizations, path: '/:lang/organizations' do
+  resources :organizations do
     collection do
       get :search, defaults: { format: 'json' }
       resources :categories, controller: 'organizations/categories', as: 'organization_categories' do

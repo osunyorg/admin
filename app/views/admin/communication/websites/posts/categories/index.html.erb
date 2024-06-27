@@ -1,9 +1,5 @@
 <% content_for :title, "#{Communication::Website::Post::Category.model_name.human(count: 2)} (#{@categories.count})" %>
 
-<% content_for :title_right do %>
-  <%= render 'language_switcher' %>
-<% end %>
-
 <%= render 'admin/application/categories/list', 
             root_categories: @root_categories, 
             categories_class: @categories_class %>

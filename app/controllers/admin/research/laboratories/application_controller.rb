@@ -17,9 +17,8 @@ class Admin::Research::Laboratories::ApplicationController < Admin::Research::Ap
   end
 
   def default_url_options
-    return {} unless params.has_key? :laboratory_id
-    {
-      laboratory_id: params[:laboratory_id]
-    }
+    options = super
+    options[:laboratory_id] = params[:laboratory_id] if params.has_key? :laboratory_id
+    options
   end
 end

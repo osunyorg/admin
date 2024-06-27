@@ -12,8 +12,7 @@ class Admin::Education::Programs::ApplicationController < Admin::Education::Appl
   end
 
   def default_url_options
-    options = {}
-    options[:lang] = current_language.iso_code
+    options = super
     options[:program_id] = params[:program_id] if params.has_key? :program_id
     options
   end

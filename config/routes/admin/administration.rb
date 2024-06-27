@@ -1,5 +1,5 @@
 namespace :administration do
-  resources :locations, path: '/:lang/locations' do
+  resources :locations do
     member do
       get :static
     end

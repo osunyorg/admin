@@ -104,9 +104,4 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
           )
   end
 
-  def default_url_options
-    options = {}
-    options[:lang] = current_language.iso_code if @website&.persisted?
-    options
-  end
 end

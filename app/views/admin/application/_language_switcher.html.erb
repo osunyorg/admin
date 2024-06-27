@@ -1,6 +1,8 @@
-<% if current_university.languages.many? %>
+<% languages = (@website && @website.persisted?) ? @website.languages : current_university.languages %>
+
+<% if languages.many? %>
   <%
-  languages_options = current_university.languages.ordered.map { |language|
+  languages_options = languages.ordered.map { |language|
     [
       language_name(language.iso_code),
       url_for(request.params.merge(lang: language.iso_code))

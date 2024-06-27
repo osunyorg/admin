@@ -1,9 +1,5 @@
 <% content_for :title, t('admin.communication.website.pages.structure') %>
 
-<% content_for :title_right do %>
-  <%= render 'language_switcher' %>
-<% end %>
-
 <p>
   <%= @pages.total_count %>
   <%= Communication::Website::Page.model_name.human(count: @pages.total_count).downcase %>

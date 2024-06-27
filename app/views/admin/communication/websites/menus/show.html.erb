@@ -1,9 +1,5 @@
 <% content_for :title, @menu %>
 
-<% content_for :title_right do %>
-  <%= render 'language_switcher' %>
-<% end %>
-
 <% if @menu.automatic %>
   <div class="p-3 mb-2 border border-success">
     <span class="badge bg-success">

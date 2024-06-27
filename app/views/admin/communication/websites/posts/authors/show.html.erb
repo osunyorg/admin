@@ -1,9 +1,5 @@
 <% content_for :title, @author %>
 
-<% content_for :title_right do %>
-  <%= render 'language_switcher' %>
-<% end %>
-
 <%= render 'admin/university/people/main_infos', person: @author %>
 
 <% if @posts.any? %>

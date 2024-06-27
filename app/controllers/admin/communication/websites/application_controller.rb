@@ -27,11 +27,8 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
   end
 
   def default_url_options
-    options = {}
-    if @website.present?
-      options[:website_id] = @website.id
-      options[:lang] = current_language.iso_code
-    end
+    options = super
+    options[:website_id] = @website.id if @website&.persisted?
     options
   end
 end

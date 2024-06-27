@@ -1,11 +1,15 @@
 <%
 context ||= 'navigation/admin'
 %>
+
 <nav class="navbar navbar-main navbar-dark bg-black" aria-label="Navigation">
   <div class="container-fluid py-2">
     <%= link_to admin_root_path, class: 'navbar-brand' do %>
       <%= image_tag 'osuny-white.svg', class: 'img-fluid' %>
     <% end %>
+    
+    <%= render 'language_switcher' %>
+
     <button class="btn-open bg-transparent border-0"
             type="button"
             data-bs-toggle="collapse"

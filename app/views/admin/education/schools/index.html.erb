@@ -1,9 +1,5 @@
 <% content_for :title, Education::School.model_name.human(count: 2) %>
 
-<% content_for :title_right do %>
-  <%= render 'language_switcher' %>
-<% end %>
-
 <%= render 'filters', current_path: admin_education_schools_path, filters: @filters if @filters.any?  %>
 
 <div class="table-responsive">

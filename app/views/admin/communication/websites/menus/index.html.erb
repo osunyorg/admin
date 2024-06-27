@@ -1,9 +1,5 @@
 <% content_for :title, Communication::Website::Menu.model_name.human(count: 2) %>
 
-<% content_for :title_right do %>
-  <%= render 'language_switcher' %>
-<% end %>
-
 <p>
   <%= @menus.count %>
   <%= Communication::Website::Menu.model_name.human(count: @menus.count).downcase %>

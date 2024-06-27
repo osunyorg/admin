@@ -40,7 +40,7 @@ class Admin::ApplicationController < ApplicationController
 
   def default_url_options
     options = {}
-    options[:lang] = current_language.iso_code
+    options[:lang] = current_language
     options
   end
 
