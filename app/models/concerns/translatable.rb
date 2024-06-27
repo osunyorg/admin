@@ -176,8 +176,8 @@ module Translatable
       # association is an array (has_many, habtm, ...)
       hash[:list].map { |object| object.find_or_translate!(language) }
     else
-      # association is an object (has_one, belongs_to)
-      hash[:object].find_or_translate!(language)
+      # association can be an object (has_one, belongs_to)
+      hash[:object].find_or_translate!(language) if hash[:object].present?
     end
   end
 

@@ -62,7 +62,7 @@ class Admin::Education::Programs::RolesController < Admin::Education::Programs::
   def role_params
     params.require(:university_role)
           .permit(:description, involvements_attributes: [:id, :person_id, :position, :_destroy])
-          .merge(target: @program, university_id: current_university.id)
+          .merge(target: @program, language_id: @program.language_id, university_id: current_university.id)
   end
 
   def model
