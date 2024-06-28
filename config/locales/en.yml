@@ -305,6 +305,7 @@ en:
   menu:
     admin: Admin
     profile: Profile
+    edit_profile: Edit my profile
     server_admin: Server administration
     sign_out: Log out
   metadata: Metadata

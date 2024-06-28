@@ -304,6 +304,7 @@ fr:
   manage: Gérer
   menu:
     admin: Admin
+    edit_profile: Modifier mon profil
     profile: Profil
     server_admin: Administration du serveur
     sign_out: Déconnexion

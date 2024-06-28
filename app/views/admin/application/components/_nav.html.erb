@@ -75,8 +75,8 @@ languages = (@website && @website.persisted?) ? @website.languages.ordered
       <% end %>
     <% end %>
     <p class="profile__name"><%= link_to current_user.to_s, admin_user_path(current_user) %></h2>
-    <p class="profile__email"><%= current_user.email %></p>
-    <%= link_to t('menu.profile'), edit_user_registration_path %>
+    <p class="profile__email mb-0"><%= current_user.email %></p>
+    <%= link_to t('menu.edit_profile'), edit_user_registration_path, class: 'btn btn-sm' %>
   </div>
   <hr>
   <p class="section">Annuaire</p>
