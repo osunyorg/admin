@@ -101,11 +101,6 @@ class Communication::Website::Agenda::Category < ApplicationRecord
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
-  # FIXME Sebou
-  def url
-    "#"
-  end
-
   protected
 
   def last_ordered_element

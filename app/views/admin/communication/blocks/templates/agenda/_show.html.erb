@@ -15,8 +15,7 @@
                 <hgroup>
               <% end %>
               <h<%= heading_level %>  itemprop='headline' class='location-title'>
-                <%# FIXME Sebou %>
-                <%= link_to event, event.url %>
+                <%= link_to event, event.current_permalink_url_in_website(@website) %>
               </h<%= heading_level %>>
               <% if event.subtitle %>
                 <p class="event-subtitle"><%= event.subtitle %></p>
@@ -39,8 +38,7 @@
               <% if event.categories.present? && block.template.show_category%>
                 <p class="event-categories">
                   <% event.categories.each do |category| %>
-                    <%# FIXME Sebou %>
-                    <span><%= link_to category, category.url %></span>
+                    <span><%= link_to category, category.current_permalink_url_in_website(@website) %></span>
                   <% end %>
                 </p>
               <% end %>

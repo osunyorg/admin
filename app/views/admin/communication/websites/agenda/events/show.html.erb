@@ -35,11 +35,11 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
-  <%# FIXME Sebou %>
+  <% event_url = @event.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
-              @event.url,
+              event_url,
               target: :_blank,
-              class: 'btn btn-light btn-xs' if @event.url %>
+              class: 'btn btn-light btn-xs' if event_url %>
   <%= edit_link @event %>
   <%= publish_link @event %>
 <% end %>
