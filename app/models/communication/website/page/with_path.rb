@@ -26,6 +26,7 @@ module Communication::Website::Page::WithPath
     ['pages', slug_with_ancestors, '_index.html'].compact_blank.join('/')
   end
 
+  # FIXME Sebou
   def url
     return unless published
     return if website.url.blank?

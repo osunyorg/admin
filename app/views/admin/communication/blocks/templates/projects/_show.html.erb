@@ -4,7 +4,7 @@
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-      
+
       <% if block.template.layout ===  "list" %>
         <div class="list">
           <% block.template.selected_projects.each do |project|
@@ -12,12 +12,13 @@
           %>
             <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
               <h<%= heading_level %> class='project-title' itemprop='name'>
+                <%# FIXME Sebou %>
                 <%= link_to project, project.url %>
               </h<%= heading_level %>>
             </article>
           <% end %>
         </div>
-  
+
       <% elsif block.template.layout ===  "large" %>
         <div class="large">
           <% block.template.selected_projects.each do |project|
@@ -27,6 +28,7 @@
               <div class="project-content">
                 <div class="project-description">
                   <h<%= heading_level %> class='project-title' itemprop='name'>
+                    <%# FIXME Sebou %>
                     <%= link_to project, project.url %>
                   </h<%= heading_level %>>
                   <% if project.summary.present? %>
@@ -40,6 +42,7 @@
                       <ul class="project-categories">
                         <% project.categories.each do |category| %>
                           <li>
+                            <%# FIXME Sebou %>
                             <%= link_to category, category.url %>
                           </li>
                         <% end %>
@@ -67,6 +70,7 @@
               <div class="project-content">
                 <div class="project-description">
                   <h<%= heading_level %> class='project-title' itemprop='name'>
+                    <%# FIXME Sebou %>
                     <%= link_to project, project.url %>
                   </h<%= heading_level %>>
                   <% if project.summary.present? %>
@@ -76,6 +80,7 @@
                     <ul class="project-categories">
                       <% project.categories.each do |category| %>
                         <li>
+                          <%# FIXME Sebou %>
                           <%= link_to category, category.url %>
                         </li>
                       <% end %>
@@ -101,6 +106,7 @@
               <div class="project-content">
                 <div class="project-description">
                   <h<%= heading_level %> class='project-title' itemprop='name'>
+                    <%# FIXME Sebou %>
                     <%= link_to project, project.url %>
                   </h<%= heading_level %>>
                   <% if project.summary.present? %>
@@ -110,6 +116,7 @@
                     <ul class="project-categories">
                       <% project.categories.each do |category| %>
                         <li>
+                          <%# FIXME Sebou %>
                           <%= link_to category, category.url %>
                         </li>
                       <% end %>

@@ -131,6 +131,7 @@ class Communication::Website::Post < ApplicationRecord
     abouts_with_post_block
   end
 
+  # FIXME Sebou
   def url
     return unless published
     return if website.url.blank?

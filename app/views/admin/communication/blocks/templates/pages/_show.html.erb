@@ -9,10 +9,12 @@
 
             <% if block.template.layout === "cards" || block.template.layout === "list" %>
               <% if block.template.page %>
+                <%# FIXME Sebou %>
                 <p class="block-title"><%= link_to block.template.page, block.template.page.url %></p>
               <% end %>
-            
+
             <% elsif block.template.layout === "grid" && block.template.page && block.template.show_main_description %>
+              <%# FIXME Sebou %>
               <p class="block-title"><%= link_to block.title, block.template.page.url %></p>
               <p class="description"><%= block.template.page&.summary %></p>
 
@@ -27,7 +29,7 @@
             </div>
           <% end %>
         </div>
-        <% if block.template.layout === "list" && block.template.show_main_description && block.data %> 
+        <% if block.template.layout === "list" && block.template.show_main_description && block.data %>
           <p class="description"><%= block.template.page&.summary %></p>
         <% end %>
       <% end %>
@@ -43,6 +45,7 @@
                   <article>
                     <div class="page-content">
                       <h<%= heading_level %>>
+                        <%# FIXME Sebou %>
                         <%= link_to page, page.url %>
                       </h<%= heading_level %>>
                       <% if block.template.show_description %>
@@ -58,11 +61,12 @@
                     <% end %>
                   </article>
                 <% else %>
+                  <%# FIXME Sebou %>
                   <%= link_to page, page.url %>
                 <% end %>
               </li>
             <% end %>
-            
+
           </ul>
 
         <% elsif block.template.layout ===  "cards" %>
@@ -72,6 +76,7 @@
             %>
               <article class="card">
                 <h<%= heading_level %>>
+                  <%# FIXME Sebou %>
                   <%= link_to page, page.url %>
                 </h<%= heading_level %>>
                 <% if block.template.show_description %>
@@ -98,6 +103,7 @@
             %>
               <article <% if !block.template.show_image %>class="without-image"<% end %>>
                 <h<%= heading_level %>>
+                  <%# FIXME Sebou %>
                   <%= link_to page, page.url %>
                 </h<%= heading_level %>>
                 <% if block.template.show_description %>
@@ -123,6 +129,7 @@
               <article class="page">
                 <div class="page-content">
                   <h<%= heading_level %>>
+                    <%# FIXME Sebou %>
                     <%= link_to page, page.url %>
                   </h<%= heading_level %>>
                   <% if block.template.show_description %>
@@ -141,7 +148,7 @@
               </article>
             <% end %>
           </div>
-          
+
         <% else %>
           <div class="grid">
             <% block.template.selected_pages.each do |page|
@@ -149,6 +156,7 @@
             %>
               <article>
                 <h<%= heading_level %>>
+                  <%# FIXME Sebou %>
                   <%= link_to page, page.url %>
                 </h<%= heading_level %>>
                 <% if block.template.show_description %>

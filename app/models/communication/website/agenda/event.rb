@@ -123,6 +123,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     abouts_with_agenda_block
   end
 
+  # FIXME Sebou
   def url
     return unless published
     return if website.url.blank?

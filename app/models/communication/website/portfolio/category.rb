@@ -98,7 +98,7 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
-  # FIXME: Sebou à faire
+  # FIXME Sebou
   def url
     "#"
   end

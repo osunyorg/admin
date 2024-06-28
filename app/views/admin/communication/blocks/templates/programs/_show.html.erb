@@ -4,7 +4,7 @@
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-      
+
       <% if block.template.layout ===  "grid" %>
         <div class="programs-grid">
           <% block.template.selected_programs.each do |program|
@@ -13,6 +13,7 @@
             <article itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
               <div class="program-content">
                 <h<%= heading_level %> itemprop='name'>
+                  <%# FIXME Sebou %>
                   <%= link_to program, program.front_url, itemprop: "url" %>
                 </h<%= heading_level %>>
                   <% if program.summary.present? %>
@@ -23,7 +24,7 @@
               <% if program.featured_image.attached? %>
                 <div class="media">
                   <%= kamifusen_tag program.featured_image %>
-                </div>  
+                </div>
               <% end %>
             </article>
           <% end %>
@@ -35,6 +36,7 @@
             next if program.nil?
           %>
             <li>
+              <%# FIXME Sebou %>
               <%= link_to program, program.front_url %>
             </li>
           <% end %>
