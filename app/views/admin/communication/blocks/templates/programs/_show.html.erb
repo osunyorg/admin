@@ -13,8 +13,7 @@
             <article itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
               <div class="program-content">
                 <h<%= heading_level %> itemprop='name'>
-                  <%# FIXME Sebou %>
-                  <%= link_to program, program.front_url, itemprop: "url" %>
+                  <%= link_to program, program.current_permalink_url_in_website(@website), itemprop: "url" %>
                 </h<%= heading_level %>>
                   <% if program.summary.present? %>
                     <p itemprop="abstract"><%= program.summary %></p>
@@ -36,8 +35,7 @@
             next if program.nil?
           %>
             <li>
-              <%# FIXME Sebou %>
-              <%= link_to program, program.front_url %>
+              <%= link_to program, program.current_permalink_url_in_website(@website) %>
             </li>
           <% end %>
         </ol>
