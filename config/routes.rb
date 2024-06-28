@@ -38,9 +38,11 @@ Rails.application.routes.draw do
         post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
         patch 'unlock' => 'users#unlock', on: :member
       end
+      get 'profile' => 'profile#edit'
+      patch 'profile' => 'profile#update'
+      delete 'profile' => 'profile#destroy'
       # libre_translate route
       post 'translate/:target' => 'translation#translate', as: :translate
-      put 'theme' => 'application#set_theme', as: :set_theme
       put 'favorite' => 'users#favorite', as: :favorite
       draw 'admin/administration'
       draw 'admin/communication'
