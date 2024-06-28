@@ -6,11 +6,6 @@ class Admin::ApplicationController < ApplicationController
 
   include Admin::Filterable
 
-  def set_theme
-    current_user.update_column :admin_theme, params[:theme]
-    redirect_to admin_root_path
-  end
-
   protected
 
   def breadcrumb

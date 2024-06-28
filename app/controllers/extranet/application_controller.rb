@@ -15,7 +15,7 @@ class Extranet::ApplicationController < ApplicationController
   private
 
   def redirect_if_no_extranet!
-    redirect_to admin_root_path unless current_extranet
+    redirect_to admin_root_path(lang: current_university.default_language) unless current_extranet
   end
 
   def authorize_extranet_access!
