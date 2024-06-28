@@ -13,8 +13,7 @@
           <article class="location" itemscope itemtype="https://schema.org/EducationalOrganization">
             <div class="location-content">
               <h<%= heading_level %>  itemprop='headline' class='location-title'>
-                <%# FIXME Sebou %>
-                <%= link_to location, location.front_url %>
+                <%= link_to location, location.current_permalink_url_in_website(@website) %>
               </h<%= heading_level %>>
               <% if location.summary.present? %>
                 <div class="location-description">
