@@ -131,15 +131,6 @@ class Communication::Website::Post < ApplicationRecord
     abouts_with_post_block
   end
 
-  # FIXME Sebou
-  def url
-    return unless published
-    return if website.url.blank?
-    return if website.special_page(Communication::Website::Page::CommunicationPost)&.path.blank?
-    return if current_permalink_in_website(website).blank?
-    "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
-  end
-
   def translated_author
     @translated_author ||= author.find_or_translate!(language)
   end

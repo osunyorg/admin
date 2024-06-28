@@ -6,17 +6,17 @@ date_format = "%e %B %Y"
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-      <% if block.template.mode ===  "categories" %>
+      <% if block.template.mode === "categories" %>
         <ul class="categories categories--grid">
           <% @website.post_categories.ordered.each do |category| %>
             <li data-title="<%= category %>">
-              <a href="<%= category.path %>" class="title"><%= category %></a>
+              <%= link_to category, category.current_permalink_url_in_website(@website), class: "title" %>
               <p><%= category.posts.count %> <%= Communication::Website::Post.model_name.human(count: category.posts.count) %></p>
             </li>
           <% end %>
         </ul>
       <% else %>
-        <% if block.template.layout ===  "list" %>
+        <% if block.template.layout === "list" %>
           <div class="list">
             <% if block.data %>
               <% block.template.selected_posts.each do |post|
@@ -25,8 +25,7 @@ date_format = "%e %B %Y"
                 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
-                      <%# FIXME Sebou %>
-                      <%= link_to post, post.url %>
+                      <%= link_to post, post.current_permalink_url_in_website(@website) %>
                     </h<%= heading_level %>>
                     <% if post.summary.present? && !block.template.hide_summary %>
                       <p itemprop="articleBody"><%= post.summary %></p>
@@ -46,7 +45,7 @@ date_format = "%e %B %Y"
                     <% if !post.categories.empty? && !block.template.hide_category %>
                       <ul class="post-categories">
                         <% post.categories.each do |category| %>
-                          <%= link_to category, category.path %>
+                          <%= link_to category, category.current_permalink_url_in_website(@website) %>
                         <% end %>
                       </ul>
                     <% end %>
@@ -63,7 +62,7 @@ date_format = "%e %B %Y"
             <% end %>
           </div>
 
-        <% elsif block.template.layout ===  "highlight"%>
+        <% elsif block.template.layout === "highlight" %>
           <% if block.data
             highlight_post = block.template.selected_posts.first
           %>
@@ -72,8 +71,7 @@ date_format = "%e %B %Y"
                 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
-                      <%# FIXME Sebou %>
-                      <%= link_to highlight_post, highlight_post.url %>
+                      <%= link_to highlight_post, highlight_post.current_permalink_url_in_website(@website) %>
                     </h<%= heading_level %>>
                     <% if highlight_post.summary.present? && !block.template.hide_summary %>
                       <p itemprop="articleBody"><%= highlight_post.summary %></p>
@@ -93,7 +91,7 @@ date_format = "%e %B %Y"
                     <% if !highlight_post.categories.empty? && !block.template.hide_category %>
                       <ul class="post-categories">
                         <% highlight_post.categories.each do |category| %>
-                          <%= link_to category, category.path %>
+                          <%= link_to category, category.current_permalink_url_in_website(@website) %>
                         <% end %>
                       </ul>
                     <% end %>
@@ -115,8 +113,7 @@ date_format = "%e %B %Y"
                   <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                     <div class="post-content">
                       <h<%= heading_level %> class='post-title' itemprop='headline'>
-                        <%# FIXME Sebou %>
-                        <%= link_to post, post.url %>
+                        <%= link_to post, post.current_permalink_url_in_website(@website) %>
                       </h<%= heading_level %>>
                       <% if post.summary.present? && block.template.hide_summary %>
                         <p itemprop="articleBody"><%= post.summary %></p>
@@ -136,7 +133,7 @@ date_format = "%e %B %Y"
                       <% if !post.categories.empty? && !block.template.hide_category %>
                         <ul class="post-categories">
                           <% post.categories.each do |category| %>
-                            <%= link_to category, category.path %>
+                            <%= link_to category, category.current_permalink_url_in_website(@website) %>
                           <% end %>
                         </ul>
                       <% end %>
@@ -154,7 +151,7 @@ date_format = "%e %B %Y"
             </div>
           <% end %>
 
-        <% elsif block.template.layout ===  "large"%>
+        <% elsif block.template.layout === "large" %>
           <div class="large <% if block.template.hide_image %> without-image<% end %>">
             <% block.template.selected_posts.each do |post|
               next if post.nil?
@@ -162,8 +159,7 @@ date_format = "%e %B %Y"
               <article class='post' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                 <div class="post-content">
                   <h<%= heading_level %> class='post-title' itemprop='headline'>
-                    <%# FIXME Sebou %>
-                    <%= link_to post, post.url %>
+                    <%= link_to post, post.current_permalink_url_in_website(@website) %>
                   </h<%= heading_level %>>
 
                   <div class="post-meta">
@@ -178,7 +174,7 @@ date_format = "%e %B %Y"
                     <% if !post.categories.empty? && !block.template.hide_category %>
                       <ul class="post-categories">
                         <% post.categories.each do |category| %>
-                          <%= link_to category, category.path %>
+                          <%= link_to category, category.current_permalink_url_in_website(@website) %>
                         <% end %>
                       </ul>
                     <% end %>
@@ -199,7 +195,7 @@ date_format = "%e %B %Y"
             <% end %>
           </div>
 
-        <% elsif block.template.layout ===  "carousel"%>
+        <% elsif block.template.layout === "carousel" %>
           <div class="carousel draggable-container">
             <div class="carousel-posts draggable-content">
               <ul class="posts">
@@ -210,13 +206,12 @@ date_format = "%e %B %Y"
                     <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                       <div class="post-content">
                         <h<%= heading_level %> class='post-title' itemprop='headline'>
-                          <%# FIXME Sebou %>
-                          <%= link_to post, post.url %>
+                          <%= link_to post, post.current_permalink_url_in_website(@website) %>
                         </h<%= heading_level %>>
                         <% if !post.categories.empty? && !block.template.hide_category %>
                           <ul class="post-categories">
                             <% post.categories.each do |category| %>
-                              <%= link_to category, category.path %>
+                              <%= link_to category, category.current_permalink_url_in_website(@website) %>
                             <% end %>
                           </ul>
                         <% end %>
@@ -254,7 +249,7 @@ date_format = "%e %B %Y"
             </div>
           </div>
 
-        <% elsif block.template.layout ===  "alternate"%>
+        <% elsif block.template.layout === "alternate" %>
           <div class="alternate <% if block.template.hide_image %> without-image<% end %>">
             <% if block.data %>
               <% block.template.selected_posts.each_with_index do |post, index|
@@ -263,8 +258,7 @@ date_format = "%e %B %Y"
                 <article class="post<% if block.template.hide_image || !post.best_featured_image.attached?%> without-image<% end %><% if (index %2 ==0) %> left<% else %> right<% end %>" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
-                      <%# FIXME Sebou %>
-                      <%= link_to post, post.url %>
+                      <%= link_to post, post.current_permalink_url_in_website(@website) %>
                     </h<%= heading_level %>>
                     <% if post.summary.present? && !block.template.hide_summary %>
                       <p itemprop="articleBody"><%= post.summary %></p>
@@ -284,7 +278,7 @@ date_format = "%e %B %Y"
                     <% if !post.categories.empty? && !block.template.hide_category %>
                       <ul class="post-categories">
                         <% post.categories.each do |category| %>
-                          <%= link_to category, category.path %>
+                          <%= link_to category, category.current_permalink_url_in_website(@website) %>
                         <% end %>
                       </ul>
                     <% end %>
@@ -310,8 +304,7 @@ date_format = "%e %B %Y"
                 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
-                      <%# FIXME Sebou %>
-                      <%= link_to post, post.url %>
+                      <%= link_to post, post.current_permalink_url_in_website(@website) %>
                     </h<%= heading_level %>>
                     <% if post.summary.present? && !block.template.hide_summary %>
                       <p itemprop="articleBody"><%= post.summary %></p>
@@ -331,7 +324,7 @@ date_format = "%e %B %Y"
                     <% if !post.categories.empty? && !block.template.hide_category %>
                       <ul class="post-categories">
                         <% post.categories.each do |category| %>
-                          <%= link_to category, category.path %>
+                          <%= link_to category, category.current_permalink_url_in_website(@website) %>
                         <% end %>
                       </ul>
                     <% end %>

@@ -34,11 +34,11 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
-  <%# FIXME Sebou %>
+  <% post_url = @post.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
-              @post.url,
+              post_url,
               target: :_blank,
-              class: 'btn btn-light btn-xs' if @post.url %>
+              class: 'btn btn-light btn-xs' if post_url %>
   <%= preview_link %>
   <%= edit_link @post %>
   <%= publish_link @post %>
