@@ -12,8 +12,7 @@
           %>
             <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
               <h<%= heading_level %> class='project-title' itemprop='name'>
-                <%# FIXME Sebou %>
-                <%= link_to project, project.url %>
+                <%= link_to project, project.current_permalink_url_in_website(@website) %>
               </h<%= heading_level %>>
             </article>
           <% end %>
@@ -28,8 +27,7 @@
               <div class="project-content">
                 <div class="project-description">
                   <h<%= heading_level %> class='project-title' itemprop='name'>
-                    <%# FIXME Sebou %>
-                    <%= link_to project, project.url %>
+                    <%= link_to project, project.current_permalink_url_in_website(@website) %>
                   </h<%= heading_level %>>
                   <% if project.summary.present? %>
                     <p itemprop="abstract"><%= project.summary %></p>
@@ -42,8 +40,7 @@
                       <ul class="project-categories">
                         <% project.categories.each do |category| %>
                           <li>
-                            <%# FIXME Sebou %>
-                            <%= link_to category, category.url %>
+                            <%= link_to category, category.current_permalink_url_in_website(@website) %>
                           </li>
                         <% end %>
                       </ul>
@@ -70,8 +67,7 @@
               <div class="project-content">
                 <div class="project-description">
                   <h<%= heading_level %> class='project-title' itemprop='name'>
-                    <%# FIXME Sebou %>
-                    <%= link_to project, project.url %>
+                    <%= link_to project, project.current_permalink_url_in_website(@website) %>
                   </h<%= heading_level %>>
                   <% if project.summary.present? %>
                     <p itemprop="abstract"><%= project.summary %></p>
@@ -80,8 +76,7 @@
                     <ul class="project-categories">
                       <% project.categories.each do |category| %>
                         <li>
-                          <%# FIXME Sebou %>
-                          <%= link_to category, category.url %>
+                          <%= link_to category, category.current_permalink_url_in_website(@website) %>
                         </li>
                       <% end %>
                     </ul>
@@ -106,8 +101,7 @@
               <div class="project-content">
                 <div class="project-description">
                   <h<%= heading_level %> class='project-title' itemprop='name'>
-                    <%# FIXME Sebou %>
-                    <%= link_to project, project.url %>
+                    <%= link_to project, project.current_permalink_url_in_website(@website) %>
                   </h<%= heading_level %>>
                   <% if project.summary.present? %>
                     <p itemprop="abstract"><%= project.summary %></p>
@@ -116,8 +110,7 @@
                     <ul class="project-categories">
                       <% project.categories.each do |category| %>
                         <li>
-                          <%# FIXME Sebou %>
-                          <%= link_to category, category.url %>
+                          <%= link_to category, category.current_permalink_url_in_website(@website) %>
                         </li>
                       <% end %>
                     </ul>
