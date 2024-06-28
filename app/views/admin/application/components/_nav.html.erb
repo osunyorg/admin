@@ -1,67 +1,90 @@
 <%
 context ||= 'navigation/admin'
+languages = (@website && @website.persisted?) ? @website.languages.ordered
+                                              : current_university.languages.ordered
 %>
 
-<nav class="navbar navbar-main navbar-dark bg-black" aria-label="Navigation">
-  <div class="container-fluid py-2">
-    <%= link_to admin_root_path, class: 'navbar-brand' do %>
-      <%= image_tag 'osuny-white.svg', class: 'img-fluid' %>
+<nav class="navbar navbar-main navbar-dark bg-black p-2" aria-label="Navigation">
+  <button class="btn btn--main"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#menu-main"
+          aria-expanded="false"
+          aria-label="Afficher la navigation">
+    <%= lucide_icon('chevrons-up-down') %>
+    Osuny
+  </button>
+  <div class="d-flex">
+    <% if languages.many? %>
+      <button class="btn btn--language"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#menu-language"
+              aria-expanded="fa‡se"
+              aria-label="Afficher le choix de langues">
+        <%= lucide_icon('languages') %>
+        <span class="px-2">
+          <%= current_language.iso_code.upcase %>
+        </span>
+        <%= lucide_icon('chevron-down') %>
+      </button>
     <% end %>
-    
-    <%= render 'language_switcher' %>
-
-    <button class="btn-open bg-transparent border-0"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#menu"
-            data-bs-animation=""
-            aria-controls="navbar-brand"
-            aria-expanded="false"
-            aria-label="Afficher la navigation">
-      Osuny
-      <i class="bi bi-list"></i>
+    <button class="btn btn--profile"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu-profile"
+        aria-expanded="false"
+        aria-label="Afficher le profil">
+      <%= lucide_icon('user') %>
     </button>
   </div>
 </nav>
-<div class="collapse" id="menu">
-  <div class="navbar">
-    <div class="container-fluid py-2">
-      <%= link_to admin_root_path, class: 'navbar-brand' do %>
-        <%= image_tag 'osuny-white.svg', class: 'img-fluid', width: 100 %>
-      <% end %>
-      <button class="btn-open bg-transparent border-0 text-white"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#menu"
-              data-bs-animation=""
-              aria-controls="navbar-brand"
-              aria-expanded="false"
-              aria-label="Masquer la navigation">
-        Fermer
-        <i class="bi bi-x-lg"></i>
-      </button>
-   </div>
-  </div>
+
+<div class="collapse popin-menu" id="menu-main">
   <div class="menu-content">
-    <div class="container-fluid py-2">
-      <div class="row">
-        <%= render_navigation context: context %>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-          <%= link_to admin_user_path(current_user) do %>
-            <% if current_user.picture.attached? %>
-              <%= kamifusen_tag current_user.picture, width: 100, height: 100, class: 'image' %>
-            <% else %>
-              <%= image_tag 'avatar.jpg', class: 'image', loading: :lazy %>
-            <% end %>
-          <% end %>
-          <h2><%= link_to current_user.to_s, admin_user_path(current_user) %></h2>
-          <ul>
-            <li><%= link_to t('menu.profile'), edit_user_registration_path %></li>
-            <li><%= link_to t('menu.server_admin'), server_root_path if current_user.server_admin? %></li>
-            <li><%= link_to t('menu.sign_out'), destroy_user_session_path, method: :delete %></li>
-          </ul>
-        </div>
-      </div>
+    <div class="row">
+      <%= render_navigation context: context %>
     </div>
   </div>
+</div>
+
+<% if languages.many? %>
+  <div class="collapse popin-menu" id="menu-language">
+    <ul class="list-unstyled">
+      <% languages.each do |language| %>
+        <%
+        name = language_name(language.iso_code)
+        url = url_for(request.params.merge(lang: language.iso_code))
+        current = language == current_language
+        %>
+        <li<% if current %> class="active"<% end %>>
+          <%= link_to_if !current, name, url %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="collapse popin-menu" id="menu-profile">
+  <div class="text-center mb-2">
+    <%= link_to admin_user_path(current_user) do %>
+      <% if current_user.picture.attached? %>
+        <%= kamifusen_tag current_user.picture, width: 100, height: 100, class: 'image' %>
+      <% else %>
+        <%= image_tag 'avatar.jpg', class: 'image', loading: :lazy %>
+      <% end %>
+    <% end %>
+    <p class="profile__name"><%= link_to current_user.to_s, admin_user_path(current_user) %></h2>
+    <p class="profile__email"><%= current_user.email %></p>
+    <%= link_to t('menu.profile'), edit_user_registration_path %>
+  </div>
+  <hr>
+  <p class="section">Annuaire</p>
+  <%= render_navigation context: 'navigation/admin_directory' %>
+  <hr>
+  <% if current_user.server_admin?  %>
+  <%= link_to t('menu.server_admin'), server_root_path %>
+  <hr>
+  <% end %>
+  <%= link_to t('menu.sign_out'), destroy_user_session_path, method: :delete %>
 </div>

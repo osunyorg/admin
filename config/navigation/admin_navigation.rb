@@ -43,12 +43,6 @@ SimpleNavigation::Configuration.run do |navigation|
         primary.item :administration_internship, 'Stages', nil, { icon: Icon::ADMINISTRATION_INTERNSHIPS }
         primary.item :administration_statistics, 'Statistiques', nil, { icon: Icon::ADMINISTRATION_STATISTICS }
       end
-
-      if can?(:read, University::Person) || can?(:read, University::Organization)
-        primary.item :university, University.model_name.human, admin_university_root_path, { kind: :header, image: 'admin/university-thumb.jpg' }
-        load_from_parts University, primary
-      end
-
     end
   else
     navigation.items do |primary|

@@ -1,42 +1,66 @@
 .navbar
-    button
-        color: white
-    .bi
-        font-size: 26px
-        vertical-align: middle
-    .navbar-brand
-        img
-            width: 100px
-    .btn-open
-        margin-right: -10px
-#menu
+    .btn
+        color: $gray-300
+        &:hover
+            background: $gray-800
+
+.popin-menu
     background: black
-    bottom: 0
-    color: white
-    left: 0
+    border-radius: var(--bs-border-radius)
+    color: $color-white
+    font-family: $font-family-sans-serif !important
+    margin: 0.5rem
     overflow-y: scroll
-    padding-bottom: 30px
-    position: fixed
-    right: 0
-    top: 0
+    padding: 1rem
+    position: absolute
     z-index: 1000
+    a
+        color: $color-white
+        &:hover
+            color: $gray-100
+    hr
+        color: $gray-500
+        margin-left: -1rem
+        margin-right: -1rem
     .image
         border-radius: 100%
         margin-bottom: 20px
         width: 100px
+    ul
+        list-style-type: none
+        padding: 0
+        li
+            padding-bottom: 5px
+            span
+                opacity: 0.2
     .menu-content
-        margin-top: 50px
         position: relative
+    .section
+        color: $gray-500
+        font-size: pxToRem(16)
+        margin-bottom: 0.5rem
+        text-transform: uppercase
+    &#menu-main
+        min-width: 90%
+    &#menu-profile,
+    &#menu-language
+        right: 0
+    &#menu-language
         ul
-            list-style-type: none
-            padding: 0
+            margin-bottom: 0
             li
-                padding-bottom: 5px
-                span
-                    opacity: 0.2
-        a
-            color: white
-            text-decoration: none
+                list-style: none
+                a
+                    color: $color-white
+                &.active
+                    color: $gray-500
+    &#menu-profile
+        min-width: 300px
+        .profile
+            &__name
+                margin-bottom: 0
+            &__email
+                color: $gray-500
 
 .commands
     backdrop-filter: blur(6px)
