@@ -257,6 +257,7 @@ GEM
     faraday-retry (2.2.1)
       faraday (~> 2.0)
     fastimage (2.3.1)
+    ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-darwin)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
@@ -288,6 +289,9 @@ GEM
       terminal-table (>= 1.5.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    google-protobuf (4.27.2-arm64-darwin)
+      bigdecimal
+      rake (>= 13)
     google-protobuf (4.27.2-x86_64-darwin)
       bigdecimal
       rake (>= 13)
@@ -405,6 +409,8 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
+    nokogiri (1.16.6-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.16.6-x86_64-darwin)
       racc (~> 1.4)
     oauth2 (2.0.9)
@@ -633,6 +639,7 @@ GEM
     zlib (2.1.1)
 
 PLATFORMS
+  arm64-darwin-23
   x86_64-darwin-23
 
 DEPENDENCIES
