@@ -8,7 +8,7 @@ context ||= 'navigation/admin'
       <%= image_tag 'osuny-white.svg', class: 'img-fluid' %>
     <% end %>
     
-    <%= render 'language_switcher' %>
+    <%= render 'language_switcher' if context == 'navigation/admin' %>
 
     <button class="btn-open bg-transparent border-0"
             type="button"

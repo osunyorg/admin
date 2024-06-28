@@ -14,4 +14,10 @@ class Server::ApplicationController < ApplicationController
   def ensure_user_if_server_admin
     raise CanCan::AccessDenied unless current_user.server_admin?
   end
+
+  def default_url_options
+    options = {}
+    options[:lang] = current_university.default_language
+    options
+  end
 end

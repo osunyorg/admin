@@ -10,7 +10,7 @@ class Admin::DashboardController < Admin::ApplicationController
 
   # called from /admin without any language specified
   def redirect_to_default_language
-    redirect_to admin_root_path(lang: current_university.default_language)
+    redirect_to admin_root_with_lang_path(lang: current_university.default_language)
   end
 
 end
