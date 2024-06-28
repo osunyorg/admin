@@ -1,5 +1,4 @@
 <%
-context ||= 'navigation/admin'
 languages = (@website && @website.persisted?) ? @website.languages.ordered
                                               : current_university.languages.ordered
 %>
@@ -41,11 +40,15 @@ languages = (@website && @website.persisted?) ? @website.languages.ordered
 </nav>
 
 <div class="collapse popin-menu" id="menu-main">
-  <div class="menu-content">
-    <div class="row">
-      <%= render_navigation context: context %>
+  <% if current_university.is_really_a_university %>
+    <div class="menu-content">
+      <div class="row">
+        <%= render_navigation context: 'navigation/admin_university' %>
+      </div>
     </div>
-  </div>
+  <% else %>
+    <%= render_navigation context: 'navigation/admin' %>
+  <% end %>
 </div>
 
 <% if languages.many? %>

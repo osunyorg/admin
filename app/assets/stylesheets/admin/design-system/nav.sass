@@ -28,20 +28,25 @@
         width: 100px
     ul
         list-style-type: none
+        margin-bottom: 0
         padding: 0
         li
             padding-bottom: 5px
-            span
+            &.section
+                margin-top: 2rem
+            &.disabled
                 opacity: 0.2
+        > li.section:first-of-type
+            margin-top: 0
     .menu-content
-        position: relative
+        .row
+            > div
+                min-width: 250px
     .section
         color: $gray-500
         font-size: pxToRem(15)
         margin-bottom: 0.5rem
         text-transform: uppercase
-    &#menu-main
-        min-width: 90%
     &#menu-profile,
     &#menu-language
         right: 0
