@@ -25,6 +25,7 @@ date_format = "%e %B %Y"
                 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
+                      <%# FIXME Sebou %>
                       <%= link_to post, post.url %>
                     </h<%= heading_level %>>
                     <% if post.summary.present? && !block.template.hide_summary %>
@@ -64,33 +65,34 @@ date_format = "%e %B %Y"
 
         <% elsif block.template.layout ===  "highlight"%>
           <% if block.data
-            $highlight_post = block.template.selected_posts.first
+            highlight_post = block.template.selected_posts.first
           %>
             <div class="highlight">
               <div class="highlight-post">
                 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
-                      <%= link_to $highlight_post, $highlight_post.url %>
+                      <%# FIXME Sebou %>
+                      <%= link_to highlight_post, highlight_post.url %>
                     </h<%= heading_level %>>
-                    <% if $highlight_post.summary.present? && !block.template.hide_summary %>
-                      <p itemprop="articleBody"><%= $highlight_post.summary %></p>
+                    <% if highlight_post.summary.present? && !block.template.hide_summary %>
+                      <p itemprop="articleBody"><%= highlight_post.summary %></p>
                     <% end %>
                     <% if !block.template.hide_author || !block.template.hide_date %>
                       <div class="post-meta">
                         <% if !block.template.hide_date %>
-                          <time itemprop="datePublished" datetime="<%= $highlight_post.published_at %>"><%= l($highlight_post.published_at, format: date_format) %></time>
+                          <time itemprop="datePublished" datetime="<%= highlight_post.published_at %>"><%= l(highlight_post.published_at, format: date_format) %></time>
                         <% end %>
                         <% if !block.template.hide_author %>
                           <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
-                            <p itemprop="name"><%= $highlight_post.author %></p>
+                            <p itemprop="name"><%= highlight_post.author %></p>
                           </div>
                         <% end %>
                       </div>
                     <% end %>
-                    <% if !$highlight_post.categories.empty? && !block.template.hide_category %>
+                    <% if !highlight_post.categories.empty? && !block.template.hide_category %>
                       <ul class="post-categories">
-                        <% $highlight_post.categories.each do |category| %>
+                        <% highlight_post.categories.each do |category| %>
                           <%= link_to category, category.path %>
                         <% end %>
                       </ul>
@@ -98,8 +100,8 @@ date_format = "%e %B %Y"
                   </div>
                   <% if !block.template.hide_image %>
                     <div class="media">
-                      <% if $highlight_post.best_featured_image.attached? %>
-                        <%= kamifusen_tag $highlight_post.best_featured_image %>
+                      <% if highlight_post.best_featured_image.attached? %>
+                        <%= kamifusen_tag highlight_post.best_featured_image %>
                       <% end %>
                     </div>
                   <% end %>
@@ -113,6 +115,7 @@ date_format = "%e %B %Y"
                   <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                     <div class="post-content">
                       <h<%= heading_level %> class='post-title' itemprop='headline'>
+                        <%# FIXME Sebou %>
                         <%= link_to post, post.url %>
                       </h<%= heading_level %>>
                       <% if post.summary.present? && block.template.hide_summary %>
@@ -150,7 +153,7 @@ date_format = "%e %B %Y"
               </div>
             </div>
           <% end %>
-          
+
         <% elsif block.template.layout ===  "large"%>
           <div class="large <% if block.template.hide_image %> without-image<% end %>">
             <% block.template.selected_posts.each do |post|
@@ -159,9 +162,10 @@ date_format = "%e %B %Y"
               <article class='post' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                 <div class="post-content">
                   <h<%= heading_level %> class='post-title' itemprop='headline'>
+                    <%# FIXME Sebou %>
                     <%= link_to post, post.url %>
                   </h<%= heading_level %>>
-                  
+
                   <div class="post-meta">
                     <% if !block.template.hide_author %>
                       <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
@@ -206,6 +210,7 @@ date_format = "%e %B %Y"
                     <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                       <div class="post-content">
                         <h<%= heading_level %> class='post-title' itemprop='headline'>
+                          <%# FIXME Sebou %>
                           <%= link_to post, post.url %>
                         </h<%= heading_level %>>
                         <% if !post.categories.empty? && !block.template.hide_category %>
@@ -258,6 +263,7 @@ date_format = "%e %B %Y"
                 <article class="post<% if block.template.hide_image || !post.best_featured_image.attached?%> without-image<% end %><% if (index %2 ==0) %> left<% else %> right<% end %>" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
+                      <%# FIXME Sebou %>
                       <%= link_to post, post.url %>
                     </h<%= heading_level %>>
                     <% if post.summary.present? && !block.template.hide_summary %>
@@ -304,6 +310,7 @@ date_format = "%e %B %Y"
                 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
+                      <%# FIXME Sebou %>
                       <%= link_to post, post.url %>
                     </h<%= heading_level %>>
                     <% if post.summary.present? && !block.template.hide_summary %>
