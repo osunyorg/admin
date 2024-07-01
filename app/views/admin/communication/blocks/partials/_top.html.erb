@@ -7,11 +7,10 @@ without_description = local_assigns[:without_description]
 unless without_description
   if template.respond_to?(:description)
     description_key = :description
-    description = template.send(description_key)
   elsif template.respond_to?(:text)
     description_key = :text
-    description = template.send(description_key)
   end
+  description = template.send(description_key)
 end
 
 heading_level = block.heading_rank_self
