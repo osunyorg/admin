@@ -10,28 +10,17 @@
       <%= stylesheet_link_tag 'admin', media: 'all' %>
     <% end %>
     <style>
-    /*
-    En prévisualisation il n'y a pas de menu, donc pas besoin de laisser de la place au-dessus du hero
-    */
-    .hero {
-      margin-top: 0;
-      padding-top: 1px;
-    }
-    a {
-      pointer-events: none !important;
-    }
-    </style>
-    <script nonce="<%= request.content_security_policy_nonce %>">
-      var notes = document.getElementsByClassName("note"),
-          note,
-          i;
-      for (i = 0; i < notes.length; i += 1) {
-        note = notes[i];
-        note.addEventListener('click', function () {
-          note.classList.add('note--visible');
-        });
+      /*
+      En prévisualisation il n'y a pas de menu, donc pas besoin de laisser de la place au-dessus du hero
+      */
+      .hero {
+        margin-top: 0;
+        padding-top: 1px;
       }
-    </script>
+      a {
+        pointer-events: none !important;
+      }
+    </style>
     <% if content_for?(:leaflet_required) %>
       <%= stylesheet_link_tag 'leaflet', media: 'all' %>
       <%= javascript_include_tag 'leaflet' %>
