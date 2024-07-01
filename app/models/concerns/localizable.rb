@@ -14,12 +14,13 @@ module Localizable
                 foreign_key: :original_id
     has_many    :localizations,
                 foreign_key: :about_id
+    accepts_nested_attributes_for :localizations
 
     before_validation :ensure_translatable_relations_are_in_correct_language
 
     # has to be before_destroy because of the foreign key constraints
     before_destroy :destroy_or_nullify_translations
-    
+
     # on cherche les objets pour cette langue (original ou pas) + les objets originaux dans une autre langue s'il n'en existe pas de traduction
     # scope :in_closest_language_id, -> (language_id) {
     #   # Records with correct language (Original or Translation)

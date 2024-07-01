@@ -94,13 +94,15 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def organization_params
     params.require(:university_organization)
           .permit(
-            :name, :long_name, :slug, :meta_description, :summary, :active, :siren, :kind,
-            :address, :address_name, :address_additional, :zipcode, :city, :country, :text,
-            :url, :phone, :email, :linkedin, :twitter, :mastodon,
-            :logo, :logo_delete, :logo_infos,
-            :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
-            :shared_image, :shared_image_delete,
-            category_ids: []
+            :active, :siren, :kind, :address, :zipcode, :city, :country, :phone, :email, category_ids: [],
+            localizations_attributes: [
+              :id, :name, :long_name, :slug, :meta_description, :summary, :text,
+              :address_name, :address_additional,
+              :url, :linkedin, :twitter, :mastodon,
+              :logo, :logo_delete, :logo_infos,
+              :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
+              :shared_image, :shared_image_delete
+            ]
           )
   end
 end

@@ -53,7 +53,7 @@ module WithTree
        # We query other translations' children which are originals, meaning created in their language first, and then in the closest language
       indirect_children = self.class.unscoped
                                     .where(parent_id: parent_ids, original_id: nil)
-                                    .in_closest_language_id(language.id)
+                                    .tmp_original
       children_in_closest_language = children.or(indirect_children)
       children_in_closest_language.ordered.each do |child|
         elements.concat(child.self_and_translatable_children(language, level + 1, child.id))

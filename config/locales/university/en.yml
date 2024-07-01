@@ -30,8 +30,6 @@ en:
         token: Secret token
       university/organization:
         address: Address
-        address_additional: Additional address
-        address_name: Address name
         categories: Categories
         city: City
         country: Country
@@ -40,22 +38,25 @@ en:
         geolocation: Geographical coordinates
         kind: Kind
         legal: Legal information
-        linkedin: LinkedIn
-        logo: Logo for light backgrounds (default)
-        logo_on_dark_background: Logo for dark backgrounds (optional)
-        long_name: Long name
         map: Map
-        name: Name
         phone: Telephone
         physical: Contact information
         siren: Legal identification number
-        text: Text
-        twitter: Twitter
-        url: Website
         zipcode: Zipcode
       university/organization/category:
         language: Language
         name: Name
+      university/organization/localization:
+        address_additional: Additional address
+        address_name: Address name
+        linkedin: LinkedIn
+        logo: Logo for light backgrounds (default)
+        logo_on_dark_background: Logo for dark backgrounds (optional)
+        long_name: Long name
+        name: Name
+        text: Text
+        twitter: Twitter
+        url: Website
       university/person:
         abilities: Abilities
         address: Address

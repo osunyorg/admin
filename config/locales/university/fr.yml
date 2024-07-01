@@ -30,32 +30,33 @@ fr:
         token: Jeton secret
       university/organization:
         address: Adresse
-        address_additional: Complément d'adresse
-        address_name: Nom de l'adresse
         categories: Catégories
         city: Ville
         country: Pays
         digital: Coordonnées numériques
         email: Email
-        kind: Type
         geolocation: Coordonnées géographiques
+        kind: Type
         legal: Informations légales
-        linkedin: LinkedIn
-        logo: Logo sur fond clair (par défaut)
-        logo_on_dark_background: Logo sur fond sombre (optionnel)
-        long_name: Nom complet
         map: Carte
-        name: Nom
         phone: Téléphone
         physical: Coordonnées physiques
         siren: Numéro de SIREN
-        text: Texte
-        twitter: Twitter
-        url: Site Web
         zipcode: Code postal
       university/organization/category:
         language: Langue
         name: Nom
+      university/organization/localization:
+        address_additional: Complément d'adresse
+        address_name: Nom de l'adresse
+        linkedin: LinkedIn
+        logo: Logo sur fond clair (par défaut)
+        logo_on_dark_background: Logo sur fond sombre (optionnel)
+        long_name: Nom complet
+        name: Nom
+        text: Texte
+        twitter: Twitter
+        url: Site Web
       university/person:
         abilities: Responsabilités
         address: Adresse
