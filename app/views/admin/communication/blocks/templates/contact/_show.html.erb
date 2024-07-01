@@ -32,9 +32,9 @@
               <div>
                 <p class="meta">
                   <% if block.template.url.present? %>
-                    <%= t('admin.communication.blocks.templates.contact.edit.website') %>
+                    <%= t 'admin.communication.blocks.templates.contact.show.website' %>
                   <% else %>
-                    <%= t('admin.communication.blocks.templates.contact.edit.mails.label') %>
+                    <%= t 'admin.communication.blocks.templates.contact.show.mail', count: block.template.emails.count %>
                   <% end %>
                 </p>
                 <% block.template.emails.each do |email| %>
@@ -51,7 +51,7 @@
             <% if block.template.phone_numbers.present? %>
               <div>
                 <p class="meta">
-                  <%= t('admin.communication.blocks.templates.contact.edit.phones.label') %>
+                  <%= t 'admin.communication.blocks.templates.contact.show.phone', count: block.template.phone_numbers.count %>
                 </p>
                 <% block.template.phone_numbers.each do |phone_number| %>
                   <p><a itemprop="telephone" href="tel:<%= phone_number %>%>"><%= phone_number %></a></p>
@@ -60,7 +60,7 @@
             <% end %>
             <ul class="schedule-table full-size">
               <li class="meta">
-                <%= t('admin.communication.blocks.templates.contact.edit.slots') %>
+                <%= t 'admin.communication.blocks.templates.contact.show.slots' %>
               </li>
               <% block.template.elements.each do |element| %>
                 <li>

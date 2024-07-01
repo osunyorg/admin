@@ -8,7 +8,7 @@
       <% unless block.template.transcription.blank? %>
         <div class="transcription">
           <details>
-            <summary>Transcription</summary>
+            <summary><%= t 'accessibility.transcription' %></summary>
             <p>
               <%= block_component_show block, :transcription %>
             </p>

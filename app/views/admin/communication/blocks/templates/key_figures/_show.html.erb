@@ -3,7 +3,7 @@
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
 
-      <ul class="<%= block.template.elements.count.even? ? "even-items" : "odd-items" %>">
+      <ul class="<%= block.template.elements.count.even? ? 'even-items' : 'odd-items' %>">
         <% block.template.elements.each do |element| %>
           <li>
             <dl>

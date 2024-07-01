@@ -196,6 +196,17 @@ fr:
               zipcode:
                 label: Code postal
                 placeholder: Entrer le code postal
+            show:
+              mail: 
+                one: Email
+                other: Emails
+              phone: 
+                one: Téléphone
+                other: Téléphones
+              slots: Horaires
+              website: Site
+
+
           datatable:
             description: Un tableau de données, aussi responsive et accessible que possible.
             edit:
