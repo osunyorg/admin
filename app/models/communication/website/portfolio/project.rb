@@ -61,14 +61,14 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   scope :draft, -> { where(published: false) }
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }
 
-  scope :for_category, -> (category_id) { 
+  scope :for_category, -> (category_id) {
     joins(:categories)
     .where(
-      communication_website_portfolio_categories: { 
+      communication_website_portfolio_categories: {
         id: category_id
       }
     )
-    .distinct 
+    .distinct
   }
   scope :for_search_term, -> (term) {
     where("
@@ -100,15 +100,6 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   def references
     menus +
     abouts_with_projects_block
-  end
-
-  def url
-    return unless published
-    return if website.url.blank?
-    # FIXME: Sebou mauvaise page
-    return if website.special_page(Communication::Website::Page::CommunicationAgenda)&.path.blank?
-    return if current_permalink_in_website(website).blank?
-    "#{Static.remove_trailing_slash website.url}#{Static.clean_path current_permalink_in_website(website).path}"
   end
 
   def to_s

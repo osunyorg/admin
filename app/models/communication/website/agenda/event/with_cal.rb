@@ -12,7 +12,7 @@ module Communication::Website::Agenda::Event::WithCal
       timezone: time_zone,
       all_day: cal_all_day,
       title: "#{title} #{subtitle}",
-      url: url,
+      url: current_permalink_url_in_website(website),
       description: summary
     )
   end
