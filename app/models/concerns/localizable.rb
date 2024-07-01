@@ -8,12 +8,16 @@ module Localizable
     belongs_to  :original,
                 class_name: base_class.to_s,
                 optional: true
+    has_many    :localizations,
+                foreign_key: :about_id,
+                inverse_of: :about,
+                dependent: :destroy
     # Deprecated
     has_many    :translations,
                 class_name: base_class.to_s,
                 foreign_key: :original_id
-    has_many    :localizations,
-                foreign_key: :about_id
+
+
     accepts_nested_attributes_for :localizations
 
     before_validation :ensure_translatable_relations_are_in_correct_language

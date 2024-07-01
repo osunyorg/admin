@@ -61,6 +61,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_created_html', model: @organization.to_s)
     else
+      byebug
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -101,7 +102,8 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
               :url, :linkedin, :twitter, :mastodon,
               :logo, :logo_delete, :logo_infos,
               :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
-              :shared_image, :shared_image_delete
+              :shared_image, :shared_image_delete,
+              :language_id
             ]
           )
   end
