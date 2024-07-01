@@ -106,6 +106,7 @@ fr:
               large:
                 description: Chaque événement est présenté en majesté, sur toute la largeur disponible avec une grande image.
                 label: Grand
+                more: En savoir plus
               list:
                 description: Une liste d'événements avec de petites images à la même largeur.
                 label: Liste
@@ -451,6 +452,7 @@ fr:
               large:
                 description: Chaque page est présentée en majesté, sur toute la largeur disponible avec une grande image.
                 label: Grand
+                more: En savoir plus
               list:
                 description: Le chapô de la page principale sert d'édito en gros et les pages sont présentées sous forme de liste à droite.
                 label: Liste
@@ -532,6 +534,7 @@ fr:
               large:
                 description: Chaque actualité est présentée en majesté, sur toute la largeur disponible avec une grande image.
                 label: Grand
+                more: En savoir plus
               list:
                 description: Une liste d'articles avec de petites images à la même largeur.
                 label: Liste
@@ -543,6 +546,7 @@ fr:
               grid:
                 description: Les formations sont présentées en grille, avec les images toutes de la même taille.
                 label: Grille
+                more: En savoir plus
               list:
                 description: Une liste de formations, les unes au dessus des autres.
                 label: Liste
@@ -577,6 +581,7 @@ fr:
               large:
                 description: Chaque projet est présenté en majesté, sur toute la largeur disponible avec une grande image.
                 label: Grand
+                more: En savoir plus
               list:
                 description: Une liste de projets, les uns au-dessous des autres.
                 label: Liste
