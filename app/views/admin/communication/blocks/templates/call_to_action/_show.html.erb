@@ -1,5 +1,5 @@
 <%
-call_to_action_class = "call_to_action--with#{block.template.image.empty? ? "out" : ""}-image"
+call_to_action_class = "call_to_action--with#{ "out" if block.template.image.empty? }-image"
 call_to_action_class += ' call_to_action--with-title' unless block.title.blank?
 %>
 

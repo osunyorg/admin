@@ -324,7 +324,7 @@ date_format = "%e %B %Y"
                     <% if !post.categories.empty? && !block.template.hide_category %>
                       <ul class="post-categories">
                         <% post.categories.each do |category| %>
-                          <%= link_to category, category.current_permalink_url_in_website(@website) %>
+                          <%#= link_to category, category.current_permalink_url_in_website(@website) %>
                         <% end %>
                       </ul>
                     <% end %>

@@ -10,7 +10,8 @@ unless without_description
   elsif template.respond_to?(:text)
     description_key = :text
   end
-  description = template.send(description_key)
+
+  description = template.send(description_key) if description_key
 end
 
 heading_level = block.heading_rank_self
