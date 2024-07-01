@@ -131,9 +131,4 @@ class Administration::Location < ApplicationRecord
     # Un site (location) n'a pas de site (location) dépendant
     false
   end
-  
-  # FIXME: Sebou
-  def front_url
-    "#"
-  end
 end
