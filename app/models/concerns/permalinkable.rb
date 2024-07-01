@@ -21,6 +21,13 @@ module Permalinkable
     permalinks.for_website(website).current.first
   end
 
+  def current_permalink_url_in_website(website)
+    return if website.url.blank?
+    path = current_permalink_in_website(website)&.path
+    return if path.blank?
+    "#{Static.remove_trailing_slash(website.url)}#{Static.clean_path(path)}"
+  end
+
   # Not persisted yet
   def new_permalink_in_website(website)
     Communication::Website::Permalink.for_object(self, website)

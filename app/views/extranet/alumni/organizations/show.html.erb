@@ -51,7 +51,7 @@
     <% end %>
   </div>
   <div class="offset-md-1 col-md-3 order-1 order-md-2">
-    <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid organization__logo' if @organization.logo.attached? %>
+    <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid organization__logo mb-5' if @organization.logo.attached? %>
 
     <dl>
         <dt><%= University::Organization.human_attribute_name(:kind) %></dt>

@@ -1,46 +1,90 @@
-<%
-class_name = "block block-agenda"
-unless block.title.blank?
-  class_name += " block-with-title"
-end
-%>
-<div class="<%= class_name %>">
+<% heading_level = block.heading_rank_children %>
+
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <% unless block.title.blank? && block.template.description.blank? %>
-        <div class="top">
-          <% unless block.title.blank? %>
-            <p class="block-title"><%= block.title %></p>
-          <% end %>
-          <% unless block.template.description.blank? %>
-            <div class="description">
-              <p><%= block_component_show block, :description %></p>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-      <div>
-        <% if block.data %>
-          <% block.template.selected_events.each do |event|
-            next if event.nil?
-          %>
-            <article class="event">
-                <h3><%= link_to event, '#' %></h3>
-                <p><%= event.summary %></p>
-                <div class="event-meta">
-                  <%= date_range_i18n(event.from_day, event.to_day, locale: block.about.language.iso_code) %>
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
+
+      <div class="events events--<%= block.template.layout %>">
+        <% block.template.selected_events.each do |event|
+          next if event.nil?
+        %>
+          <article class="event <% if event.featured_image.attached? %>event--with-image<% end %>" itemscope itemtype="https://schema.org/Event">
+            <div class="event-content">
+              <% if event.subtitle %>
+                <hgroup>
+              <% end %>
+              <h<%= heading_level %>  itemprop='headline' class='location-title'>
+                <%= link_to event, event.current_permalink_url_in_website(@website) %>
+              </h<%= heading_level %>>
+              <% if event.subtitle %>
+                <p class="event-subtitle"><%= event.subtitle %></p>
+                </hgroup>
+              <% end %>
+              <%
+                computed_short_date = date_range_i18n(event.from_day, event.to_day, format: :short, locale: event.language.iso_code)
+                computed_short_two_lines_date = date_range_i18n(event.from_day, event.to_day, format: :short, layout: :two_lines, locale: event.language.iso_code)
+                from_hour = event.from_hour ? event.from_hour.strftime("%H:%M") : nil
+                to_hour = event.to_hour ? event.to_hour.strftime("%H:%M") : nil
+              %>
+              <% if computed_short_date || computed_short_two_lines_date || from_hour || to_hour %>
+                <div class="event-dates" itemprop="startDate" content="<%= "#{event.from_day}#{from_hour}" %>">
+                  <span>
+                    <% date_format = computed_short_two_lines_date %>
+                    <% if block.template.layout != "list" %>
+                      <% date_format = computed_short_date %>
+                    <% end %>
+                    <span><%= date_format %></span>
+                  </span>
+                  <% if from_hour || to_hour %>
+                    <div class="event-time">
+                      <% if from_hour %>
+                        <span><%= from_hour %></span>
+                      <% end %>
+                      <% if to_hour %>
+                        <span><%= to_hour %></span>
+                      <% end %>
+                    </div>
+                  <% end %>
                 </div>
-              </div>
-              <div class="media">
-                <% if event.best_featured_image.attached? %>
-                  <%= kamifusen_tag event.best_featured_image %>
-                <% end %>
-              </div>
-            </article>
-          <% end %>
-          <% if block.template.selected_events.empty? %>
-            <p><%= block.template.no_event_message %></p>
-          <% end %>
+              <% end %>
+              <% if event.status.present? && block.template.show_status %>
+                <p class="event-status">
+                  <% if event.status == "current" %>
+                    <%= t 'admin.communication.blocks.templates.agenda.time.options.current' %>
+                  <% elsif event.status == "future" %>
+                    <%= t 'admin.communication.blocks.templates.agenda.time.options.future' %>
+                  <% elsif event.status == "archive" %>
+                    <%= t 'admin.communication.blocks.templates.agenda.time.options.archive' %>
+                  <% end %>
+                </p>
+              <% end %>
+
+              <% if block.template.show_summary && event.summary.present? %>
+                <div class="event-description">
+                  <p itemprop="description">
+                    <%= event.summary %>
+                  </p>
+                  <% if block.template.layout == "large" %>
+                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.agenda.layouts.large.more' %></p>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <% if event.categories.present? && block.template.show_category%>
+                <p class="event-categories">
+                  <% event.categories.each do |category| %>
+                    <span><%= link_to category, category.current_permalink_url_in_website(@website) %></span>
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+            <div class="media">
+              <% if event.featured_image.attached? %>
+                <%= kamifusen_tag event.featured_image %>
+              <% end %>
+            </div>
+          </article>
         <% end %>
       </div>
     </div>

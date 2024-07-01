@@ -1,36 +1,24 @@
-<%
-class_name = "block block-links"
-unless block.title.blank?
-  class_name += " block-with-title"
-end
-%>
-
-<div class="<%= class_name %>">
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <% unless block.title.blank? && block.template.description.blank? %>
-        <div class="top">
-          <% unless block.title.blank? %>
-            <p class="block-title"><%= block.title %></p>
-          <% end %>
-          <% unless block.template.description.blank? %>
-            <div class="description">
-              <p><%= block_component_show block, :description %></p>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-
-      <ul class="files">
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
+      <ul class="links">
         <% block.template.elements.each do |element| %>
-          <li>
-            <%= block_component_show block, :image, template: element %>
-            <h3>
-              <a href="<%= element.url %>" target="_blank" title="<%= element.title %>">
+          <li itemscope itemtype="https://schema.org/WebPage">
+            <div class="link-content">
+                <% isExternal = true %>
+              <% if (element.url.start_with?('/')) %>
+                <% isExternal = false %>
+              <% end %>
+              <link itemprop="url" href="<%= element.url %>">
+              <a href="<%= element.url %>"<% if isExternal %> rel="noopener" target="_blank"<% end %> title="<%= element.title %>">
                 <%= element.title %>
               </a>
-            </h3>
-            <p><%= element.description %></p>
+              <p><%= element.description %></p>
+            </div>
+            <div class="media">
+              <%= block_component_show block, :image, template: element %>
+            </div>
           </li>
         <% end %>
       </ul>

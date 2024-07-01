@@ -11,10 +11,10 @@
         <% end %>
         <% if @current_experiences.any? %>
           <div class="experiences mb-5">
-            <h3><%= t('extranet.contacts.organizations.experiences', count: @current_experiences.pluck(:person_id).uniq.size) %></h3>
+            <h3 class="mb-5"><%= t('extranet.contacts.organizations.experiences', count: @current_experiences.pluck(:person_id).uniq.size) %></h3>
 
             <% @current_experiences.each do |experience| %>
-              <article class="experience mb-4">
+              <article class="experience mb-5 mb-md-4">
                 <div class="row gx-3">
                   <div class="col-md-3">
                     <% if experience.person.best_picture.attached? %>
@@ -27,7 +27,7 @@
                       <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
                     <% end %>
                   </div>
-                  <div class="col-md-9">
+                  <div class="col-md-9 mt-4 mt-md-0">
                     <%= link_to [:contacts, experience.person], class: 'stretched-link' do %>
                       <p>
                         <b><%= experience.person.first_name %> <%= experience.person.last_name %></b><br>
@@ -43,7 +43,7 @@
     </div>
   </div>
   <div class="offset-md-1 col-md-3 order-1 order-md-2">
-    <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid organization__logo' if @organization.logo.attached? %>
+    <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid organization__logo mb-5' if @organization.logo.attached? %>
     <dl>
       <dt><%= University::Organization.human_attribute_name(:address) %></dt>
       <dd><%= sanitize @organization.full_address %></dd>

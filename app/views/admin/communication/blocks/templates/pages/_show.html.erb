@@ -1,11 +1,6 @@
-<%
-class_name = "block block-pages"
-unless block.title.blank?
-  class_name += " block-with-title"
-end
-class_name += " block-pages--" + block.template.layout
-%>
-<div class="<%= class_name %>">
+<% heading_level = block.heading_rank_children %>
+
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
       <% unless block.title.blank? %>
@@ -14,11 +9,11 @@ class_name += " block-pages--" + block.template.layout
 
             <% if block.template.layout === "cards" || block.template.layout === "list" %>
               <% if block.template.page %>
-                <p class="block-title"><%= link_to block.template.page, block.template.page.url %></p>
+                <p class="block-title"><%= link_to block.template.page, block.template.page.current_permalink_url_in_website(@website) %></p>
               <% end %>
-            
+
             <% elsif block.template.layout === "grid" && block.template.page && block.template.show_main_description %>
-              <p class="block-title"><%= link_to block.title, block.template.page.url %></p>
+              <p class="block-title"><%= link_to block.title, block.template.page.current_permalink_url_in_website(@website) %></p>
               <p class="description"><%= block.template.page&.summary %></p>
 
             <% else %>
@@ -32,19 +27,42 @@ class_name += " block-pages--" + block.template.layout
             </div>
           <% end %>
         </div>
-        <% if block.template.layout === "list" && block.template.show_main_description && block.data %> 
+        <% if block.template.layout === "list" && block.template.show_main_description && block.data %>
           <p class="description"><%= block.template.page&.summary %></p>
         <% end %>
       <% end %>
       <% if block.data %>
 
         <% if block.template.layout ===  "list" %>
-          <ul>
+          <ul class="list">
             <% block.template.selected_pages.each do |page|
               next if page.nil?
             %>
-            <li><%= link_to page, page.url %></li>
+              <li>
+                <% if block.template.show_description || block.template.show_image %>
+                  <article>
+                    <div class="page-content">
+                      <h<%= heading_level %>>
+                        <%= link_to page, page.current_permalink_url_in_website(@website) %>
+                      </h<%= heading_level %>>
+                      <% if block.template.show_description %>
+                        <p><%= page.summary %></p>
+                      <% end %>
+                    </div>
+                    <% if block.template.show_image %>
+                      <div class="media" itemprop="image">
+                        <% if page.featured_image.attached? %>
+                          <%= kamifusen_tag page.featured_image %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </article>
+                <% else %>
+                  <%= link_to page, page.current_permalink_url_in_website(@website) %>
+                <% end %>
+              </li>
             <% end %>
+
           </ul>
 
         <% elsif block.template.layout ===  "cards" %>
@@ -53,14 +71,65 @@ class_name += " block-pages--" + block.template.layout
               next if page.nil?
             %>
               <article class="card">
-                <h3>
-                  <%= link_to page, page.url %>
-                </h3>
+                <h<%= heading_level %>>
+                  <%= link_to page, page.current_permalink_url_in_website(@website) %>
+                </h<%= heading_level %>>
                 <% if block.template.show_description %>
                   <p><%= page.summary %></p>
                 <% end %>
 
                 <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.pages.layouts.cards.more' %></p>
+
+                <% if block.template.show_image %>
+                  <div class="media" itemprop="image">
+                    <% if page.featured_image.attached? %>
+                      <%= kamifusen_tag page.featured_image %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </article>
+            <% end %>
+          </div>
+
+        <% elsif block.template.layout ===  "alternate" %>
+          <div class="alternate">
+            <% block.template.selected_pages.each do |page|
+              next if page.nil?
+            %>
+              <article <% if !block.template.show_image %>class="without-image"<% end %>>
+                <h<%= heading_level %>>
+                  <%= link_to page, page.current_permalink_url_in_website(@website) %>
+                </h<%= heading_level %>>
+                <% if block.template.show_description %>
+                  <p><%= page.summary %></p>
+                <% end %>
+
+                <% if block.template.show_image %>
+                  <div class="media" itemprop="image">
+                    <% if page.featured_image.attached? %>
+                      <%= kamifusen_tag page.featured_image %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </article>
+            <% end %>
+          </div>
+
+        <% elsif block.template.layout ===  "large" %>
+          <div class="large">
+            <% block.template.selected_pages.each do |page|
+              next if page.nil?
+            %>
+              <article class="page">
+                <div class="page-content">
+                  <h<%= heading_level %>>
+                    <%= link_to page, page.current_permalink_url_in_website(@website) %>
+                  </h<%= heading_level %>>
+                  <% if block.template.show_description %>
+                    <p><%= page.summary %></p>
+                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.pages.layouts.large.more' %></p>
+                  <% end %>
+                </div>
 
                 <% if block.template.show_image %>
                   <div class="media" itemprop="image">
@@ -79,9 +148,9 @@ class_name += " block-pages--" + block.template.layout
               next if page.nil?
             %>
               <article>
-                <h3>
-                  <%= link_to page, page.url %>  
-                </h3>
+                <h<%= heading_level %>>
+                  <%= link_to page, page.current_permalink_url_in_website(@website) %>
+                </h<%= heading_level %>>
                 <% if block.template.show_description %>
                   <p><%= page.summary %></p>
                 <% end %>

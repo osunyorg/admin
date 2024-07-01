@@ -1,27 +1,7 @@
-<%
-class_name = "block block-gallery"
-if block.title.present?
-  class_name += " block-with-title"
-end
-
-class_name += " block-gallery--" + block.template.layout
-%>
-
-<div class="<%= class_name %>">
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <% if block.title.present? || block.template.description.present? %>
-        <div class="top">
-          <% if block.title.present? %>
-            <p class="block-title"><%= block.title %></p>
-          <% end %>
-          <% if block.template.description.present? %>
-            <div class="description">
-              <p><%= block_component_show block, :description %></p>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
 
       <% if block.template.layout ===  "carousel" %>
         <% if !block.template.elements.one? %>

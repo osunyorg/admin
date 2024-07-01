@@ -5,7 +5,7 @@
     <%= render 'faceted_search/facets', facets: @facets, reset: t('extranet.library.reset') %>
   </div>
   <div class="col-lg-9">
-    <div class="row mt-n5 documents-list">
+    <div class="row documents-list">
       <% @documents.each do |document| %>
         <div class="col-sm-6 col-xxl-4">
           <article class="position-relative mt-5">

@@ -1,30 +1,36 @@
-<%
-class_name = "block block-locations"
-unless block.title.blank?
-  class_name += " block-with-title"
-end
-%>
+<% heading_level = block.heading_rank_children %>
 
-<div class="<%= class_name %>">
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <% unless block.title.blank? %>
-        <div class="top">
-          <% unless block.title.blank? %>
-            <p class="block-title"><%= block.title %></p>
-          <% end %>
-        </div>
-      <% end %>
-      <ol class="locations">
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
+
+      <div class="locations locations--<%= block.template.layout %>">
         <% block.template.elements.each do |element|
           location = element.location
           next if location.nil?
         %>
-          <li>
-            <%= link_to location, [:admin, location] %>
-          </li>
+          <article class="location" itemscope itemtype="https://schema.org/EducationalOrganization">
+            <div class="location-content">
+              <h<%= heading_level %>  itemprop='headline' class='location-title'>
+                <%= link_to location, location.current_permalink_url_in_website(@website) %>
+              </h<%= heading_level %>>
+              <% if location.summary.present? %>
+                <div class="location-description">
+                  <p itemprop="description">
+                    <%= location.summary %>
+                  </p>
+                </div>
+              <% end %>
+            </div>
+            <div class="media">
+              <% if location.featured_image.attached? %>
+                <%= kamifusen_tag location.featured_image %>
+              <% end %>
+            </div>
+          </article>
         <% end %>
-      </ol>
+      </div>
     </div>
   </div>
 </div>

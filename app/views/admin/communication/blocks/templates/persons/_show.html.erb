@@ -1,24 +1,9 @@
-<%
-class_name = "block block-persons"
-unless block.title.blank?
-  class_name += " block-with-title"
-end
-%>
-<div class="<%= class_name %>">
+<% heading_level = block.heading_rank_children %>
+
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <% unless block.title.blank? && block.template.description.blank? %>
-        <div class="top">
-          <% unless block.title.blank? %>
-            <p class="block-title"><%= block.title %></p>
-          <% end %>
-          <% unless block.template.description.blank? %>
-            <div class="description">
-              <p><%= block_component_show block, :description %></p>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
 
       <div class="persons">
         <% block.template.selected_elements.each do |element|
@@ -27,14 +12,16 @@ end
           %>
           <article class="person" itemscope itemtype="https://schema.org/Person">
             <div class="description">
-              <h3 class="name" itemprop="name">
+              <h<%= heading_level %>>
                 <% if block.template.with_link %>
                   <%= link_to person, [:admin, person] %>
                 <% else %>
                   <%= element.person %>
                 <% end %>
-              </h3>
-              <p itemprop="jobTitle"><%= element.role %></p>
+              </h<%= heading_level %>>
+              <p itemprop="jobTitle">
+                <%= element.role %>
+              </p>
             </div>
             <% if block.template.with_photo %>
               <div class="avatar" itemprop="image">

@@ -1,25 +1,14 @@
-<%
-  class_name = "block block-embed"
-  unless block.title.blank?
-    class_name += " block-with-title"
-  end
-%>
-
-<div class="<%= class_name %>">
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <% unless block.title.blank? %>
-        <div class="top">
-          <p class="block-title"><%= block.title %></p>
-        </div>
-      <% end %>
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
 
       <%= block_component_show block, :code, strip_javascript: strip_javascript %>
 
       <% unless block.template.transcription.blank? %>
         <div class="transcription">
           <details>
-            <summary>Transcription</summary>
+            <summary><%= t 'accessibility.transcription' %></summary>
             <p>
               <%= block_component_show block, :transcription %>
             </p>
