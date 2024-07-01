@@ -20,9 +20,9 @@ class Admin::ApplicationController < ApplicationController
 
   def breadcrumb_for(object, **options)
     return unless object
-    title = object.to_s.truncate(50)
-    object.persisted? ? add_breadcrumb(title, [:admin, object, options])
-                      : add_breadcrumb(t('create'))
+    title = object_title(object)
+    title = title.truncate(50)
+    object.persisted? ? add_breadcrumb(title, [:admin, object, options]) : add_breadcrumb(t('create'))
   end
 
   def load_block_copy_cookie
@@ -49,6 +49,16 @@ class Admin::ApplicationController < ApplicationController
   def redirect_if_context_is_not_an_university!
     # Currently (Nov 2023), context can be: an extranet, an university (admin) or none.
     redirect_to root_path unless current_context.is_a?(University)
+  end
+
+  def object_title(object)
+    # TODO: @seb t'as plus élégant ?
+    if object.respond_to?(:localizable?)
+      l10n = object.best_localization_for(current_language)
+      l10n.to_s
+    else
+      object.to_s
+    end
   end
 
 end

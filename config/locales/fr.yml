@@ -269,6 +269,8 @@ fr:
     fr: Français
   legal: Légal
   loading: Chargement...
+  localization:
+    creation_alert: Cet élément n'existe pas dans votre langue d'affichage actuelle. Souhaitez-vous en créer une traduction ?
   login:
     already_registered: Déjà inscrit ?
     not_registered_yet: Pas encore inscrit ?

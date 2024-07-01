@@ -51,7 +51,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Sanitizable
   include Shareable
   include Sluggable
-  include Translatable
+  include Localizable
   include WithAccessibility
   include WithBlobs
   include WithCal

@@ -4,7 +4,7 @@ if object.respond_to? "best_#{property}"
   value = object.public_send("best_#{property}").to_s
   source = object.public_send("best_#{property}_source")
 end
-is_blank = Static.blank?(value)
+is_blank = value.blank?
 hide_blank ||= false
 title = object.class.human_attribute_name(property)
 if source
@@ -20,7 +20,7 @@ end
       <i class="<%= Icon::WARNING %> text-danger"></i>
       <%= t 'properties.text.missing' %>
     <% else %>
-      <%= strip_tags(value).truncate(200).html_safe %>
+      <%= link_to value, value, target: :_blank %>
     <% end %>
   </p>
 <% end %>

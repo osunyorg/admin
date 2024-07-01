@@ -1,0 +1,76 @@
+# == Schema Information
+#
+# Table name: university_organization_localizations
+#
+#  id                 :uuid             not null, primary key
+#  address_additional :string
+#  address_name       :string
+#  linkedin           :string
+#  long_name          :string
+#  mastodon           :string
+#  meta_description   :text
+#  name               :string
+#  slug               :string
+#  summary            :text
+#  text               :text
+#  twitter            :string
+#  url                :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  about_id           :uuid             indexed
+#  language_id        :uuid             indexed
+#  university_id      :uuid             indexed
+#
+# Indexes
+#
+#  index_university_organization_localizations_on_about_id       (about_id)
+#  index_university_organization_localizations_on_language_id    (language_id)
+#  index_university_organization_localizations_on_university_id  (university_id)
+#
+# Foreign Keys
+#
+#  fk_rails_19fb4f0718  (about_id => university_organizations.id)
+#  fk_rails_4b46ee9073  (language_id => languages.id)
+#  fk_rails_ba221edb00  (university_id => universities.id)
+#
+class University::Organization::Localization < ApplicationRecord
+  include AsTranslation
+  include Contentful
+  include Initials
+  include Permalinkable
+  include Sanitizable
+  include Shareable
+  include Sluggable
+  include WithBlobs
+  include WithGitFiles
+  include WithUniversity
+
+  has_summernote :text
+
+  has_one_attached_deletable :logo
+  has_one_attached_deletable :logo_on_dark_background
+
+  alias :featured_image :logo
+
+  validates_presence_of :name
+  validates_uniqueness_of :name, scope: [:university_id, :language_id]
+  validates :logo, size: { less_than: 1.megabytes }
+  validates :logo_on_dark_background, size: { less_than: 1.megabytes }
+
+  def git_path(website)
+    "#{git_path_content_prefix(website)}organizations/#{slug}.html" if for_website?(website)
+  end
+
+  def to_s
+    "#{name}"
+  end
+
+  def explicit_blob_ids
+    [
+      logo&.blob_id,
+      logo_on_dark_background&.blob_id,
+      shared_image&.blob_id
+    ]
+  end
+
+end

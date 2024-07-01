@@ -69,7 +69,7 @@ class University::Person < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
-  include Translatable
+  include Localizable
   include WithBlobs
   include WithCountry
   # WithRoles included before WithEducation because needed for the latter

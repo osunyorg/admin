@@ -5,7 +5,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   before_action :load_teacher_people, only: [:new, :edit, :create, :update]
 
-  include Admin::Translatable
+  include Admin::Localizable
 
   has_scope :for_search_term
   has_scope :for_diploma

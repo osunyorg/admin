@@ -269,6 +269,8 @@ en:
     fr: French
   legal: Legal
   loading: Loading...
+  localization:
+    creation_alert: This element doesn't existin the requested language. Do you want to create a translation?
   login:
     already_registered: Already registered?
     not_registered_yet: Not registered yet?

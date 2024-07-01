@@ -2,7 +2,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   load_and_authorize_resource class: Communication::Website::Page,
                               through: :website
 
-  include Admin::Translatable
+  include Admin::Localizable
 
   has_scope :for_search_term
   has_scope :for_published

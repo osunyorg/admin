@@ -2,7 +2,7 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   load_and_authorize_resource class: Administration::Location,
                               through: :current_university
 
-  include Admin::Translatable
+  include Admin::Localizable
 
   def index
     @locations = @locations.in_closest_language_id(current_language.id)

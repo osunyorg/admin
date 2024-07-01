@@ -33,7 +33,7 @@
 class Education::School < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
-  include Translatable
+  include Localizable
   include WebsitesLinkable
   include WithAlumni
   include WithBlobs

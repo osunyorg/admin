@@ -40,7 +40,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include Sanitizable
   include Shareable
   include Sluggable
-  include Translatable
+  include Localizable
   include WithAccessibility
   include WithBlobs
   include WithDuplication

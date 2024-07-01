@@ -3,7 +3,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
                               through: :website,
                               through_association: :post_categories
 
-  include Admin::Translatable
+  include Admin::Localizable
   include Admin::Categorizable
 
   def index

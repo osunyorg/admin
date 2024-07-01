@@ -37,5 +37,26 @@ module Admin::OsunyHelper
   def osuny_published(state)
     raw "<span class=\"osuny__published osuny__published--#{ state }\"></span>"
   end
+  
+  def osuny_property_show(object, property, kind, hide_blank: false)
+    render  partial: "admin/application/property/#{kind}",
+            locals: {
+              object: object,
+              property: property,
+              hide_blank: hide_blank
+            }
+  end
+
+  def osuny_property_show_text(object, property, hide_blank: false)
+    osuny_property_show(object, property, 'text', hide_blank: hide_blank)
+  end
+
+  def osuny_property_show_url(object, property, hide_blank: false)
+    osuny_property_show(object, property, 'url', hide_blank: hide_blank)
+  end
+  
+  def osuny_property_show_boolean(object, property)
+    osuny_property_show(object, property, 'boolean')
+  end
 
 end

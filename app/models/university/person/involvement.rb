@@ -32,7 +32,7 @@
 #
 class University::Person::Involvement < ApplicationRecord
   include Sanitizable
-  include Translatable
+  include Localizable
   include WithUniversity
   include WithPosition
 

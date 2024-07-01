@@ -3,7 +3,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
                               through: :website,
                               through_association: :agenda_categories
 
-  include Admin::Translatable
+  include Admin::Localizable
   include Admin::Categorizable
 
   def index

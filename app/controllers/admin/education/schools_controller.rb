@@ -3,7 +3,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
                               through: :current_university,
                               through_association: :education_schools
 
-  include Admin::Translatable
+  include Admin::Localizable
 
   has_scope :for_search_term
   has_scope :for_program

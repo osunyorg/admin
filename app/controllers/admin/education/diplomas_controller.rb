@@ -2,7 +2,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   load_and_authorize_resource class: Education::Diploma,
                               through: :current_university
 
-  include Admin::Translatable
+  include Admin::Localizable
 
   def index
     @diplomas = @diplomas.in_closest_language_id(current_language.id)

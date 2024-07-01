@@ -3,7 +3,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
                               through: :website,
                               through_association: :portfolio_categories
 
-  include Admin::Translatable
+  include Admin::Localizable
   include Admin::Categorizable
 
   def index

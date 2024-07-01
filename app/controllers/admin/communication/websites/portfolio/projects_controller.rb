@@ -2,7 +2,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   load_and_authorize_resource class: Communication::Website::Portfolio::Project,
                               through: :website
 
-  include Admin::Translatable
+  include Admin::Localizable
 
   # Allow to override the default load_filters from Admin::Filterable
   before_action :load_filters, only: :index

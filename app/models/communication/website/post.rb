@@ -46,7 +46,7 @@ class Communication::Website::Post < ApplicationRecord
   include Sanitizable
   include Shareable
   include Sluggable # We override slug_unavailable? method
-  include Translatable
+  include Localizable
   include WithAccessibility
   include WithBlobs
   include WithDuplication

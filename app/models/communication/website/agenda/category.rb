@@ -45,7 +45,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   include Initials
   include Permalinkable
   include Sanitizable
-  include Translatable
+  include Localizable
   include Sluggable # We override slug_unavailable? method
   include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WithBlobs

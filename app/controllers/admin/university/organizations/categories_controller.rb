@@ -4,7 +4,7 @@ class Admin::University::Organizations::CategoriesController < Admin::University
                               through_association: :organization_categories
 
   include Admin::Categorizable
-  include Admin::Translatable
+  include Admin::Localizable
 
   def index
     @root_categories = categories.root

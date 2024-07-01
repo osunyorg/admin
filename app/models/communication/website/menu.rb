@@ -33,7 +33,7 @@ class Communication::Website::Menu < ApplicationRecord
   include AsDirectObject
   include Initials
   include Sanitizable
-  include Translatable
+  include Localizable
   include WithAutomatism
   include WithUniversity
 

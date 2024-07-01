@@ -59,7 +59,7 @@ class Communication::Website::Page < ApplicationRecord
   include Sanitizable
   include Shareable
   include Sluggable # We override slug_unavailable? method (and set_slug and skip_slug_validation? in Page::Home)
-  include Translatable
+  include Localizable
   include WithAccessibility
   include WithAutomaticMenus
   include WithBlobs

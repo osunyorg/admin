@@ -70,7 +70,7 @@ class Education::Program < ApplicationRecord
   include Sanitizable
   include Shareable
   include Sluggable
-  include Translatable
+  include Localizable
   include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WebsitesLinkable
   include WithAccessibility

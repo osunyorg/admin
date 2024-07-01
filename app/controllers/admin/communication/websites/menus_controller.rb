@@ -1,7 +1,7 @@
 class Admin::Communication::Websites::MenusController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource class: Communication::Website::Menu, through: :website
 
-  include Admin::Translatable
+  include Admin::Localizable
 
   def index
     @menus = @menus.for_language(current_language).ordered

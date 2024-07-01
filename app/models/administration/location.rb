@@ -42,7 +42,7 @@ class Administration::Location < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Sluggable
-  include Translatable
+  include Localizable
   include WebsitesLinkable
   include WithBlobs
   include WithCountry

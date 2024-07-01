@@ -3,7 +3,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
                               through: :current_university,
                               through_association: :organizations
 
-  include Admin::Translatable
+  include Admin::Localizable
 
   has_scope :for_search_term
   has_scope :for_category
@@ -11,7 +11,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def index
     @organizations = apply_scopes(@organizations)
-                      .in_closest_language_id(current_language.id)
+                      .tmp_original # TODO remove me after l10n migration
                       .ordered
 
     @feature_nav = 'navigation/admin/university/organizations'

@@ -33,7 +33,7 @@ class University::Organization::Category < ApplicationRecord
   include Initials
   include Permalinkable
   include Sluggable
-  include Translatable
+  include Localizable
   include WithGitFiles
   include WithPosition
   include WithTree

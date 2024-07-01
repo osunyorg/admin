@@ -61,6 +61,10 @@ module ApplicationHelper
     I18nData.languages(I18n.locale)[iso_code.to_s.upcase].titleize
   end
 
+  def best_value(object, key)
+    object.best_value(:key, current_language)
+  end
+
   def default_images_formats_accepted
     Rails.application.config.default_images_formats.join(', ')
   end

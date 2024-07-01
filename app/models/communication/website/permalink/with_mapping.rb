@@ -17,6 +17,7 @@ module Communication::Website::Permalink::WithMapping
       "Research::Journal::Volume" => Communication::Website::Permalink::Volume,
       "Research::Publication" => Communication::Website::Permalink::Publication,
       "University::Organization" => Communication::Website::Permalink::Organization,
+      "University::Organization::Localization" => Communication::Website::Permalink::Organization,
       "University::Organization::Category" => Communication::Website::Permalink::Organization::Category,
       "University::Person" => Communication::Website::Permalink::Person,
       "University::Person::Category" => Communication::Website::Permalink::Person::Category,

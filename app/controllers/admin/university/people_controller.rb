@@ -3,7 +3,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
                               through: :current_university,
                               through_association: :people
 
-  include Admin::Translatable
+  include Admin::Localizable
 
   has_scope :for_search_term
   has_scope :for_category
