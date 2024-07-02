@@ -11,7 +11,8 @@
                 <% if element.image %>
                   <%= block_component_show block, :image, template: element %>
                 <% end %>
-                <strong><%= block_component_show block, :number, template: element %></strong><%= block_component_show block, :unit, template: element %>
+                <strong><%= block_component_show block, :number, template: element %></strong><%#
+                %><%= block_component_show block, :unit, template: element %>
               </dt>
               <dd><%= block_component_show block, :description, template: element %></dd>
             </dl>
