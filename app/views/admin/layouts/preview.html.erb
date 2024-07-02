@@ -28,19 +28,22 @@
   </head>
   <body class="full-width">
     <%
+    # Il faudrait tester le ratio de l'image, comme c'est pour le hero de la preview, on met de côté car cela nécessite de tester l'image avant
     classes = 'hero'
-    if @image.present? && @image.attached?
-      classes += ' hero--with-image'
-      # TODO réparer ça :
-      width, height = @image.metadata.values_at('width', 'height')
-      ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
-      format = 'square'
-      if ratio.present?
-        format = 'landscape' if ratio > 1
-        format = 'portrait' if ratio < 1
-      end
-      classes += " hero--image-#{format}"
-    end
+    classes += " hero--image-square"
+
+    # if @image.present? && @image.attached?
+    #   classes += ' hero--with-image'
+    #   # TODO réparer ça :
+    #   width, height = @image.metadata.values_at('width', 'height')
+    #   ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
+    #   format = 'square'
+    #   if ratio.present?
+    #     format = 'landscape' if ratio > 1
+    #     format = 'portrait' if ratio < 1
+    #   end
+    #   classes += " hero--image-#{format}"
+    # end
     %>
     <header class="<%= classes %>">
       <div class="container">
