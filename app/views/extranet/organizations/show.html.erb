@@ -5,7 +5,7 @@
 
     <% if strip_tags(@organization.text.to_s).present? %>
       <h2 class="mt-4"><%= University::Organization.human_attribute_name('text') %></h2>
-      <%= @organization.text.to_s.html_safe %>
+      <%= sanitize @organization.text.to_s %>
     <% end %>
 
     <h2><%= University::Organization.human_attribute_name('legal') %></h2>
