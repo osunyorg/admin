@@ -35,20 +35,21 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
+  <% page_url = @page.current_permalink_url_in_website(@website) %>
   <%= link_to  t('open'),
-              @page.url,
+              page_url,
               target: :_blank,
-              class: 'btn btn-light btn-xs' if @page.published %>
+              class: 'btn btn-light btn-xs' if page_url %>
   <%= preview_link %>
-  <%= link_to t('edit'), 
-              edit_admin_communication_website_page_path(@page), 
-              class: button_classes 
-              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path 
+  <%= link_to t('edit'),
+              edit_admin_communication_website_page_path(@page),
+              class: button_classes
+              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path
               %>
-  <%= link_to t('admin.communication.website.publish.button'), 
-              publish_admin_communication_website_page_path(@page), 
+  <%= link_to t('admin.communication.website.publish.button'),
+              publish_admin_communication_website_page_path(@page),
               class: button_classes,
               method: :post if !@page.published && can?(:publish, @page)
-              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path               
+              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path
               %>
 <% end %>
