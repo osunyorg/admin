@@ -1,26 +1,27 @@
-.organization
-    border-top: 1px solid $light-border-color
-    padding-bottom: 25px
-    padding-top: 25px
-    &:last-child
-        border-bottom: 1px solid $light-border-color
-    p:last-child
-        margin-bottom: 0
-    &__logo
-        border: 1px solid $light-border-color
-        background: white
-        padding: 60px
-        aspect-ratio: 1 / 1
-        object-fit: contain
+.controller-organizations
+    .organization
+        border-top: 1px solid $light-border-color
+        padding-bottom: 25px
+        padding-top: 25px
+        &:last-child
+            border-bottom: 1px solid $light-border-color
+        p:last-child
+            margin-bottom: 0
+        &__logo
+            border: 1px solid $light-border-color
+            background: white
+            padding: 60px
+            aspect-ratio: 1 / 1
+            object-fit: contain
 
-    @include media-breakpoint-up(md)
-        align-items: center
-        display: flex
-        justify-content: space-between
-
-.organizations-show
-    .organization__logo
-        margin-top: -130px
-        margin-bottom: 50px
         @include media-breakpoint-up(md)
-            margin-top: -200px
+            align-items: center
+            display: flex
+            justify-content: space-between
+
+    .organizations-show
+        .organization__logo
+            margin-top: -130px
+            margin-bottom: 50px
+            @include media-breakpoint-up(md)
+                margin-top: -200px

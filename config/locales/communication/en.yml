@@ -397,7 +397,7 @@ en:
           planned_on: Publication planned on %{date}
           published_on: Published on %{date}
     manage_authors: Manage authors
-    number_of_posts: Nunber of posts
+    number_of_posts: Number of posts
     summary:
       none: No summary yet
     website:

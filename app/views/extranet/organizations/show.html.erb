@@ -4,8 +4,8 @@
     <%= render 'admin/application/summary/show', about: @organization %>
 
     <% if strip_tags(@organization.text.to_s).present? %>
-    <h2><%= University::Organization.human_attribute_name('text') %></h2>
-    <%= @organization.text.to_s.html_safe %>
+      <h2 class="mt-4"><%= University::Organization.human_attribute_name('text') %></h2>
+      <%= sanitize @organization.text.to_s %>
     <% end %>
 
     <h2><%= University::Organization.human_attribute_name('legal') %></h2>
@@ -37,8 +37,8 @@
           @organization.city.present? ||
           @organization.country.present? ||
           @organization.geolocated? %>
-      <h2><%= University::Organization.human_attribute_name('physical') %>
-      <div class="row">
+      <h2><%= University::Organization.human_attribute_name('physical') %></h2>
+      <div class="row mb-4">
         <% [
             :address_name,
             :address,
@@ -74,7 +74,7 @@
           @organization.twitter.present? ||
           @organization.mastodon.present? %>
       <h2><%= University::Organization.human_attribute_name('digital') %></h2>
-      <div class="row">
+      <div class="row mb-4">
         <% unless @organization.url.blank? %>
           <div class="col-xxl-6">
             <%= osuny_label University::Organization.human_attribute_name('url') %>
@@ -103,12 +103,16 @@
     <% if @organization.logo.attached? || @organization.logo_on_dark_background.attached? %>
       <h2><%= t('university.organization.logos') %></h2>
       <% if @organization.logo.attached? %>
-        <%= osuny_label University::Organization.human_attribute_name('logo') %><br>
-        <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill bg-light img-thumbnail mb-3' %>
+        <div>
+          <%= osuny_label University::Organization.human_attribute_name('logo') %><br>
+          <%= kamifusen_tag @organization.logo, class: 'img-fluid img-fill bg-light img-thumbnail mb-3' %>
+        </div>
       <% end %>
       <% if @organization.logo_on_dark_background.attached? %>
-        <%= osuny_label University::Organization.human_attribute_name('logo_on_dark_background') %><br>
-        <%= kamifusen_tag @organization.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail' %>
+        <div>
+          <%= osuny_label University::Organization.human_attribute_name('logo_on_dark_background') %><br>
+          <%= kamifusen_tag @organization.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail' %>
+        </div>
       <% end %>
     <% end %>
   </div>
