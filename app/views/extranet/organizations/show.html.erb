@@ -37,7 +37,7 @@
           @organization.city.present? ||
           @organization.country.present? ||
           @organization.geolocated? %>
-      <h2><%= University::Organization.human_attribute_name('physical') %>
+      <h2><%= University::Organization.human_attribute_name('physical') %></h2>
       <div class="row">
         <% [
             :address_name,
