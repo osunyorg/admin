@@ -25,6 +25,7 @@ namespace :app do
       template = block.template
       template.option_image         = template.show_image
       template.option_summary       = template.show_description
+      template.option_main_summary  = template.show_main_description
       block.save
     end
     Communication::Block.persons.find_each do |block|
