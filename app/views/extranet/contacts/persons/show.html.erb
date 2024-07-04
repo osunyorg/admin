@@ -16,10 +16,10 @@
         <% end %>
         <% if @current_experiences.any? %>
           <div class="experiences mb-5">
-            <h3><%= t('extranet.contacts.persons.experiences', count: @current_experiences.pluck(:organization_id).uniq.size) %></h3>
+            <h3 class="mb-5"><%= t('extranet.contacts.persons.experiences', count: @current_experiences.pluck(:organization_id).uniq.size) %></h3>
 
             <% @current_experiences.each do |experience| %>
-              <article class="experience mb-4">
+              <article class="experience mb-5 mb-md-4">
                 <div class="row gx-3">
                   <div class="col-md-3">
                     <% if experience.organization.logo.attached? %>
@@ -30,7 +30,7 @@
                         } %>
                     <% end %>
                   </div>
-                  <div class="col-md-9">
+                  <div class="col-md-9 mt-4 mt-md-0">
                     <%= link_to [:contacts, experience.organization], class: 'stretched-link' do %>
                       <p>
                         <b><%= experience.organization %></b><br>

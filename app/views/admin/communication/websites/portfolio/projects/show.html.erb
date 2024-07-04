@@ -31,10 +31,11 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
+  <% project_url = @project.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
-              @project.url,
+              project_url,
               target: :_blank,
-              class: 'btn btn-light btn-xs' if @project.url %>
+              class: 'btn btn-light btn-xs' if project_url %>
   <%= edit_link @project %>
   <%= publish_link @project %>
 <% end %>
