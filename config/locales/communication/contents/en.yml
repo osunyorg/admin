@@ -131,6 +131,13 @@ en:
               text:
                 label: Text
                 placeholder: Enter text here
+            layouts:
+              accent_background:
+                description: A block with a strong background.
+                label: Strong highlight
+              no_background:
+                description: A much more discrete block layout.
+                label: Simple
           chapter:
             description: A section of a document, with a title, a text, footnotes and an image.
             edit:

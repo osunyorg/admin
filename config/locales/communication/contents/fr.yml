@@ -131,6 +131,13 @@ fr:
               text:
                 label: Texte
                 placeholder: Entrer le texte ici
+            layouts:
+              accent_background:
+                description: Un bloc sur un fond très fort.
+                label: Forte mise en avant
+              no_background:
+                description: Un bloc beaucoup plus discret.
+                label: Simple
           chapter:
             description: Une section de document avec un titre, un texte, des notes de bas de page et une image.
             edit:

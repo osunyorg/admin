@@ -1,5 +1,10 @@
 class Communication::Block::Template::CallToAction < Communication::Block::Template::Base
 
+  has_layouts [
+    :accent_background,
+    :no_background
+  ]
+
   has_elements
   has_component :text, :rich_text
   has_component :image, :image
