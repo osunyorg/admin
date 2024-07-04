@@ -22,7 +22,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       params,
       key: :about,
       university: current_university,
-      only: Communication::Block.permitted_about_types
+      mandatory_module: Contentful
     )
     breadcrumb
   end
@@ -75,7 +75,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       params,
       key: :about,
       university: current_university,
-      only: Communication::Block.permitted_about_types
+      mandatory_module: Contentful
     )
     # On réattribue à @block pour bénéficier du calcul dans about_path
     @block = @block.paste(about)
@@ -135,15 +135,19 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def about_path
+    # Les headings sont toujours affectés à des localisations
+    l10n = @block.about
+    # La localisation porte sur un objet, par exemple une University::Person ou un Communication::Website::Post
+    object_edited = l10n.about
     # La formation ou la page concernée
-    path_method = "admin_#{@block.about.class.base_class.to_s.parameterize.underscore}_path"
+    path_method = "admin_#{object_edited.class.base_class.to_s.parameterize.underscore}_path"
     path_method_options = {
-      id: @block.about_id,
+      id: object_edited.id,
+      lang: l10n.language,
       website_id: website_id,
       extranet_id: extranet_id,
       journal_id: journal_id
     }
-    path_method_options[:lang] = @block.about.language.iso_code if @block.about.respond_to?(:language)
     public_send path_method, **path_method_options
   end
 

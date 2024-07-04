@@ -138,7 +138,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       params,
       key: :object,
       university: current_university,
-      only: [@page.class.direct_connection_permitted_about_type]
+      permitted_classes: [@page.class.direct_connection_permitted_about_class]
     )
   end
 
