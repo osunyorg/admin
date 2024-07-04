@@ -54,10 +54,6 @@ class Communication::Block::Heading < ApplicationRecord
   before_validation :compute_level
   after_save :touch_about
 
-  def self.permitted_about_types
-    ApplicationRecord.model_names_with_concern(Contentful)
-  end
-
   def references
     [about]
   end

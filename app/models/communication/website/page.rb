@@ -160,7 +160,7 @@ class Communication::Website::Page < ApplicationRecord
 
   # Some special pages can override this method to allow explicit direct connections
   # Example: The Communication::Website::Page::Person special page allows to connect University::Person records directly.
-  def self.direct_connection_permitted_about_type
+  def self.direct_connection_permitted_about_class
     nil
   end
 

@@ -77,10 +77,6 @@ class Communication::Website::Permalink < ApplicationRecord
     nil
   end
 
-  def self.permitted_about_types
-    ApplicationRecord.model_names_with_concern(Permalinkable)
-  end
-
   # Méthode pour accéder facilement à la page spéciale,
   # qui s'appuie sur le `special_page_type` de chaque Permalink
   def self.special_page(website, language)

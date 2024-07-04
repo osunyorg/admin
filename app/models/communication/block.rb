@@ -97,10 +97,6 @@ class Communication::Block < ApplicationRecord
 
   before_validation :set_university_and_website_from_about, on: :create
 
-  def self.permitted_about_types
-    ApplicationRecord.model_names_with_concern(Contentful)
-  end
-
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.
   def data=(value)
