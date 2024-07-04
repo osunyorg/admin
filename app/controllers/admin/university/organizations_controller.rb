@@ -59,7 +59,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     @organization.language_id = current_language.id
     if @organization.save
       redirect_to admin_university_organization_path(@organization),
-                  notice: t('admin.successfully_created_html', model: @organization.to_s)
+                  notice: t('admin.successfully_created_html', model: @organization.to_s_in(current_language))
     else
       byebug
       breadcrumb
@@ -70,7 +70,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def update
     if @organization.update(organization_params)
       redirect_to admin_university_organization_path(@organization),
-                  notice: t('admin.successfully_updated_html', model: @organization.to_s)
+                  notice: t('admin.successfully_updated_html', model: @organization.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -80,7 +80,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def destroy
     @organization.destroy
     redirect_to admin_university_organizations_url,
-                notice: t('admin.successfully_destroyed_html', model: @organization.to_s)
+                notice: t('admin.successfully_destroyed_html', model: @organization.to_s_in(current_language))
   end
 
   protected

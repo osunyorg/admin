@@ -74,6 +74,10 @@ module Localizable
     # TODO gérer les blocs et le reste
   end
 
+  def to_s_in(language)
+    best_localization_for(language).to_s
+  end
+
   # This is supposed to be overwritten in model
   # Declare dependencies and their relations with the object
   # [

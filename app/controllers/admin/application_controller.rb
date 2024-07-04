@@ -54,8 +54,7 @@ class Admin::ApplicationController < ApplicationController
   def object_title(object)
     # TODO: @seb t'as plus élégant ?
     if object.respond_to?(:localizable?)
-      l10n = object.best_localization_for(current_language)
-      l10n.to_s
+      l10n = object.to_s_in(current_language)
     else
       object.to_s
     end
