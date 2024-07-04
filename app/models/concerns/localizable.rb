@@ -137,7 +137,7 @@ module Localizable
 
   # Used by Hugo to link translations with themselves
   def static_translation_key
-    "#{self.class.polymorphic_name.parameterize}-#{self.original_object.id}"
+    "#{self.class.polymorphic_name.parameterize}-#{self.id}"
   end
 
   def translate!(language)

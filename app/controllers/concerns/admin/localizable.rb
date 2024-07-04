@@ -7,7 +7,7 @@ module Admin::Localizable
 
     before_action :load_localization,
                   :redirect_if_not_localized,
-                  only: [:show, :edit, :update]
+                  only: [:show, :edit, :update, :static]
   end
 
   protected

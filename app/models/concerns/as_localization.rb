@@ -1,4 +1,4 @@
-module AsTranslation
+module AsLocalization
   extend ActiveSupport::Concern
 
   included do
@@ -21,4 +21,8 @@ module AsTranslation
     self.university_id = about.university_id
   end
 
+  def for_website?(website)
+    website.language_ids.include?(language_id) && 
+    about.for_website?(website)
+  end
 end

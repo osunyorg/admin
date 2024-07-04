@@ -34,7 +34,7 @@
 #  fk_rails_ba221edb00  (university_id => universities.id)
 #
 class University::Organization::Localization < ApplicationRecord
-  include AsTranslation
+  include AsLocalization
   include Contentful
   include Initials
   include Permalinkable

@@ -1,71 +1,80 @@
-<% version = 1 %>
----
-<% cache [@about, @website.id, version] do %>
+<% 
+version = 2
+cache [@l10n, @about, @website.id, version] do 
+%>---
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/breadcrumbs' %>
 <%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
 <%= render 'admin/application/i18n/static' %>
+<%= render 'admin/application/meta_description/static' %>
+<%= render 'admin/application/shared_image/static' %>
+<%= render 'admin/application/summary/static' %>
+<%= render 'admin/application/connections/backlinks' %>
 kind:
   code: "<%= @about.kind %>"
   label: "<%= @about.kind_i18n %>"
-<%
-[
-  :long_name,
-  :siren,
-  :address_name,
-  :address,
-  :address_additional,
-  :zipcode,
-  :city,
-  :country,
-  :phone,
-  :email,
-  :twitter,
-  :linkedin
-].each do |key|
-  value = @about.public_send key
-%>
-<%= key %>: >-
-  <%= prepare_text_for_static value %>
-<% end %>
-<% # url is a reserved keyword for Hugo %>
+<%= render 'admin/application/static/attribute/text', object: @l10n, key: :long_name %>
+<%= render 'admin/application/static/attribute/text', object: @about, key: :siren %>
+<%# TODO Probably legacy %>
+<%= render 'admin/application/static/attribute/text', object: @l10n, key: :address_name %>
+<%= render 'admin/application/static/attribute/text', object: @about, key: :address %>
+<%= render 'admin/application/static/attribute/text', object: @l10n, key: :address_additional %>
+<%= render 'admin/application/static/attribute/text', object: @about, key: :zipcode %>
+<%= render 'admin/application/static/attribute/text', object: @about, key: :city %>
+<%= render 'admin/application/static/attribute/text', object: @about, key: :country %>
+<%= render 'admin/application/static/attribute/text', object: @about, key: :phone %>
+<%= render 'admin/application/static/attribute/text', object: @about, key: :email %>
+<%= render 'admin/application/static/attribute/text', object: @l10n, key: :twitter %>
+<%= render 'admin/application/static/attribute/text', object: @l10n, key: :linkedin %>
+<%= render 'admin/application/static/attribute/text', object: @l10n, key: :mastodon %>
+<%# TODO END: Probably legacy %>
+<%# url is a reserved keyword for Hugo %>
 website: >-
-  <%= prepare_text_for_static @about.url %>
+  <%= prepare_text_for_static @l10n.url %>
 contact_details:
-<%= render 'admin/application/static/contact_detail', variable: :address_name, data: @about.address_name, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :address_name, data: @l10n.address_name, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @about.address_additional, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @l10n.address_additional, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :zipcode, data: @about.zipcode, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :city, data: @about.city, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :country, data: @about.country, kind: ContactDetails::Country %>
-<%= render 'admin/application/static/contact_detail', variable: :website, data: @about.url, kind: ContactDetails::Website %>
-<%= render 'admin/application/static/contact_detail', variable: :linkedin, data: @about.linkedin, kind: ContactDetails::Linkedin %>
-<%= render 'admin/application/static/contact_detail', variable: :twitter, data: @about.twitter, kind: ContactDetails::Twitter %>
-<%= render 'admin/application/static/contact_detail', variable: :mastodon, data: @about.mastodon, kind: ContactDetails::Mastodon %>
+<%= render 'admin/application/static/contact_detail', variable: :website, data: @l10n.url, kind: ContactDetails::Website %>
+<%= render 'admin/application/static/contact_detail', variable: :linkedin, data: @l10n.linkedin, kind: ContactDetails::Linkedin %>
+<%= render 'admin/application/static/contact_detail', variable: :twitter, data: @l10n.twitter, kind: ContactDetails::Twitter %>
+<%= render 'admin/application/static/contact_detail', variable: :mastodon, data: @l10n.mastodon, kind: ContactDetails::Mastodon %>
 <%= render 'admin/application/static/contact_detail', variable: :phone, data: @about.phone, kind: ContactDetails::Phone %>
 <%= render 'admin/application/static/contact_detail', variable: :email, data: @about.email, kind: ContactDetails::Email %>
   geolocation:
     latitude: <%= @about.latitude %>
     longitude: <%= @about.longitude %>
-<% if @about.logo.attached? %>
-logo: "<%= @about.logo.blob.id %>"
+<% if @l10n.logo.attached? %>
+logo: "<%= @l10n.logo.blob.id %>"
 <% end %>
-<% if @about.logo_on_dark_background.attached? %>
-logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
+<% if @l10n.logo_on_dark_background.attached? %>
+logo_on_dark_background: "<%= @l10n.logo_on_dark_background.blob.id %>"
 <% end %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/shared_image/static' %>
-<%= render 'admin/application/summary/static' %>
-<%= render 'admin/application/connections/backlinks' %>
 <% if @about.categories.any? %>
 organizations_categories:
-<% @about.categories.each do |category| %>
-  - slug: "<%= category.slug %>"
-    path: "<%= category.current_permalink_in_website(@website)&.path %>"
+<% @about.categories.each do |category| 
+  category_l10n = category.localization_for(@l10n.language)
+  if category_l10n.nil?
+    category_slug = nil
+    category_path = nil
+    category_name = category.original_localization&.name
+  else
+    category_slug = category_l10n.slug
+    category_path = category_l10n.current_permalink_in_website(@website)&.path
+    category_name = category.name
+  end
+%>
+  - slug: "<%= category_slug %>"
+    path: "<%= category_path %>"
+    name: >-
+      <%= prepare_text_for_static category_name %>
 <% end %>
 <% end %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---
-<%= prepare_html_for_static @about.text %>
+<%= prepare_html_for_static @l10n.text %>
 <% end %>
