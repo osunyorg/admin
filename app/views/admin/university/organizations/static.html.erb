@@ -11,27 +11,11 @@ cache [@l10n, @about, @website.id, version] do
 <%= render 'admin/application/shared_image/static' %>
 <%= render 'admin/application/summary/static' %>
 <%= render 'admin/application/connections/backlinks' %>
+<%= render 'admin/application/static/attribute/text', object: @l10n, key: :long_name %>
+<%= render 'admin/application/static/attribute/text', object: @about, key: :siren %>
 kind:
   code: "<%= @about.kind %>"
   label: "<%= @about.kind_i18n %>"
-<%= render 'admin/application/static/attribute/text', object: @l10n, key: :long_name %>
-<%= render 'admin/application/static/attribute/text', object: @about, key: :siren %>
-<%# TODO Probably legacy %>
-<%= render 'admin/application/static/attribute/text', object: @l10n, key: :address_name %>
-<%= render 'admin/application/static/attribute/text', object: @about, key: :address %>
-<%= render 'admin/application/static/attribute/text', object: @l10n, key: :address_additional %>
-<%= render 'admin/application/static/attribute/text', object: @about, key: :zipcode %>
-<%= render 'admin/application/static/attribute/text', object: @about, key: :city %>
-<%= render 'admin/application/static/attribute/text', object: @about, key: :country %>
-<%= render 'admin/application/static/attribute/text', object: @about, key: :phone %>
-<%= render 'admin/application/static/attribute/text', object: @about, key: :email %>
-<%= render 'admin/application/static/attribute/text', object: @l10n, key: :twitter %>
-<%= render 'admin/application/static/attribute/text', object: @l10n, key: :linkedin %>
-<%= render 'admin/application/static/attribute/text', object: @l10n, key: :mastodon %>
-<%# TODO END: Probably legacy %>
-<%# url is a reserved keyword for Hugo %>
-website: >-
-  <%= prepare_text_for_static @l10n.url %>
 contact_details:
 <%= render 'admin/application/static/contact_detail', variable: :address_name, data: @l10n.address_name, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
