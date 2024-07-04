@@ -3,6 +3,8 @@
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
     <div class="row">
       <div class="col-xl-8">
         <%= osuny_panel t('content') do %>

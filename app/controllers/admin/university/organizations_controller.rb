@@ -56,13 +56,10 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def create
-    @organization.language_id = current_language.id
-    @organization.localizations.first.language_id = current_language.id
     if @organization.save
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_created_html', model: @organization.to_s_in(current_language))
     else
-      byebug
       breadcrumb
       render :new, status: :unprocessable_entity
     end

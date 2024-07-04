@@ -3,20 +3,20 @@ module Localizable
 
   included do
     attr_accessor :newly_translated
-
-    belongs_to  :language
-    belongs_to  :original,
-                class_name: base_class.to_s,
-                optional: true
+    
     has_many    :localizations,
                 foreign_key: :about_id,
                 inverse_of: :about,
                 dependent: :destroy
     # Deprecated
+    belongs_to  :language, 
+                optional: true
+    belongs_to  :original,
+                class_name: base_class.to_s,
+                optional: true
     has_many    :translations,
                 class_name: base_class.to_s,
                 foreign_key: :original_id
-
 
     accepts_nested_attributes_for :localizations
 
