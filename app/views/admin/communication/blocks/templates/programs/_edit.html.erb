@@ -1,11 +1,13 @@
 <%= block_component_edit block, :layout %>
 
+<!--
 <div class="mb-5">
   <%= osuny_label t('admin.communication.blocks.display_options.title') %>
   <%= block_component_edit block, :option_image, label: Education::Program.human_attribute_name(:image) %>
   <%= block_component_edit block, :option_summary, label: t('admin.summary.label')%>
   <%= block_component_edit block, :option_diploma, label: Education::Program.human_attribute_name(:diploma) %>
 </div>
+-->
 
 <%= block_component_add_element block, t('.add') %>
 <draggable :list="data.elements" handle=".dragHandle" class="mb-3">
