@@ -128,7 +128,7 @@ module Localizable
   end
 
   def exists_in_language?(l)
-    translation_for(l).present?
+    localization_for(l).present?
   end
 
   def original_with_translations

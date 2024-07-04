@@ -271,6 +271,7 @@ fr:
   loading: Chargement...
   localization:
     creation_alert: Cet élément n'existe pas dans votre langue d'affichage actuelle. Souhaitez-vous en créer une traduction ?
+    label: Localisation
   login:
     already_registered: Déjà inscrit ?
     not_registered_yet: Pas encore inscrit ?

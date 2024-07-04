@@ -67,7 +67,7 @@
       <%= osuny_property_show_boolean @organization, :active %>
     <% end %>
 
-    <%= render 'admin/application/i18n/widget', about: @organization %>
+    <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
 
     <% if @organization.categories.any? %>
       <%= osuny_panel University::Organization.human_attribute_name('categories') do %>
