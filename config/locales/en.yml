@@ -116,6 +116,7 @@ en:
   admin:
     attachment_not_available: Attachment not available
     dashboard: Dashboard
+    directory: Directory
     duplicate: Duplicate
     elements:
       zero: No element

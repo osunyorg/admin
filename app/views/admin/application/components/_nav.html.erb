@@ -81,7 +81,7 @@ languages = (@website && @website.persisted?) ? @website.languages.ordered
     <p class="profile__email"><%= current_user.email %></p>
   </div>
   <hr>
-  <p class="section">Annuaire</p>
+  <p class="section"><%= t('admin.directory') %></p>
   <%= render_navigation context: 'navigation/admin_directory' %>
   <hr>
   <% if current_user.server_admin?  %>
