@@ -18,7 +18,7 @@
     <%= osuny_label Administration::Location.human_attribute_name('address') %>
     <p>
       <% if @location.address_name.present? %>
-      <%= @location.address_name %><br>
+        <%= @location.address_name %><br>
       <% end %>
       <% if @location.address.present? %>
         <%= @location.address %><br>

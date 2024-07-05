@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   constraints host: ENV['OSUNY_TRANSPARENCY'] do
     get '/' => 'transparency/home#index'
   end
+  constraints host: ENV['OSUNY_DESIGN'] do
+    get '/' => 'design/home#index'
+  end
 
   authenticated :user, -> user { user.server_admin? } do
     mount GoodJob::Engine => 'background'

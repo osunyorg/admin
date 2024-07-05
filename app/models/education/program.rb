@@ -239,8 +239,8 @@ class Education::Program < ApplicationRecord
   def explicit_blob_ids
     super.concat [
       featured_image&.blob_id,
-      shared_image&.blob_id, 
-      downloadable_summary&.blob_id, 
+      shared_image&.blob_id,
+      downloadable_summary&.blob_id,
       logo&.blob_id
     ]
   end

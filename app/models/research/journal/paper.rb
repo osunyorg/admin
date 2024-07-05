@@ -61,15 +61,16 @@ class Research::Journal::Paper < ApplicationRecord
   has_summernote :text
   has_one_attached :pdf
 
-  belongs_to  :journal, 
+  belongs_to  :language
+  belongs_to  :journal,
               foreign_key: :research_journal_id
-  belongs_to  :volume, 
-              foreign_key: :research_journal_volume_id, 
+  belongs_to  :volume,
+              foreign_key: :research_journal_volume_id,
               optional: true
-  belongs_to  :kind, 
-              class_name: 'Research::Journal::Paper::Kind', 
+  belongs_to  :kind,
+              class_name: 'Research::Journal::Paper::Kind',
               optional: true
-  belongs_to  :updated_by, 
+  belongs_to  :updated_by,
               class_name: 'User'
   has_and_belongs_to_many :people,
                           class_name: 'University::Person',
@@ -123,7 +124,7 @@ class Research::Journal::Paper < ApplicationRecord
       "author" => people.map { |person|
         { "family" => person.last_name, "given" => person.first_name }
       },
-      "URL" => website.url + Communication::Website::Permalink.for_object(self, website).computed_path,
+      "URL" => current_permalink_url_in_website(website),
       "container-title" => journal.title,
       "volume" => volume&.number,
       "keywords" => keywords,

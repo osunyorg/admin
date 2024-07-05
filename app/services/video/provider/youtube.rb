@@ -7,8 +7,13 @@ class Video::Provider::Youtube < Video::Provider::Default
   ]
 
   def identifier
-    short_url?  ? param_from_short_url
-                : param_from_regular_url
+    if short_url?
+      param_from_short_url
+    elsif live_url?
+      param_from_live_url
+    else
+      param_from_regular_url
+    end
   end
 
   def csp_domains
@@ -35,17 +40,27 @@ class Video::Provider::Youtube < Video::Provider::Default
   def short_url?
     video_url.include?('youtu.be')
   end
+
+  # youtu.be
+  def param_from_short_url
+    video_url.split('youtu.be/').last
+             .split('?').first
+  end
+
+  def live_url?
+    video_url.include?('/live/')
+  end
+
+  # https://www.youtube.com/live/n4jqeyBnuHM?si=RkjPzgQ_lJm7YlTh
+  def param_from_live_url
+    video_url.split('/live/').last
+             .split('?').first
+  end
   
   # youtube.com, www.youtube.com
   def param_from_regular_url
     uri = URI(video_url)
     params = CGI::parse(uri.query)
     params['v'].first
-  end
-
-  # youtu.be
-  def param_from_short_url
-    video_url.split('youtu.be/').last
-             .split('?').first
   end
 end

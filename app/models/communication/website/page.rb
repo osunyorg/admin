@@ -136,12 +136,6 @@ class Communication::Website::Page < ApplicationRecord
     "#{title}"
   end
 
-  def best_featured_image_source(fallback: true)
-    # we don't want to fallback on homepage featured_image
-    return self if featured_image.attached? || is_home? || parent&.is_home?
-    parent&.best_featured_image_source
-  end
-
   # La page actuelle a les bodyclass classe1 et classe2 ("classe1 classe2")
   # Les différents ancêtres ont les classes home, bodyclass et secondclass
   # -> "page-classe1 page-classe2 ancestor-home ancestor-bodyclass ancestor-secondclass"
