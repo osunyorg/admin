@@ -596,10 +596,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_061856) do
     t.string "title"
     t.uuid "about_id"
     t.uuid "language_id"
+    t.uuid "communication_website_id"
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["about_id"], name: "index_communication_website_post_localizations_on_about_id"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_f6354f61f0"
     t.index ["language_id"], name: "index_communication_website_post_localizations_on_language_id"
     t.index ["university_id"], name: "idx_on_university_id_a3a3f1e954"
   end
@@ -1568,6 +1570,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_061856) do
   add_foreign_key "communication_website_post_categories", "languages"
   add_foreign_key "communication_website_post_categories", "universities"
   add_foreign_key "communication_website_post_localizations", "communication_website_posts", column: "about_id"
+  add_foreign_key "communication_website_post_localizations", "communication_websites"
   add_foreign_key "communication_website_post_localizations", "languages"
   add_foreign_key "communication_website_post_localizations", "universities"
   add_foreign_key "communication_website_posts", "communication_website_posts", column: "original_id"

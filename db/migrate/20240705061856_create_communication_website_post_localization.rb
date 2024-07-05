@@ -15,6 +15,7 @@ class CreateCommunicationWebsitePostLocalization < ActiveRecord::Migration[7.1]
 
       t.references :about, foreign_key: { to_table: :communication_website_posts }, type: :uuid
       t.references :language, foreign_key: true, type: :uuid
+      t.references :communication_website, foreign_key: true, type: :uuid
       t.references :university, foreign_key: true, type: :uuid
 
       t.timestamps
@@ -39,6 +40,7 @@ class CreateCommunicationWebsitePostLocalization < ActiveRecord::Migration[7.1]
         title: post.title,
         about_id: about_id,
         language_id: post.language_id,
+        communication_website_id: post.communication_website_id,
         university_id: post.university_id,
         created_at: post.created_at
       )
