@@ -122,32 +122,15 @@ class University::Organization < ApplicationRecord
   }
 
   def dependencies
-    # + localizations ?
-    active_storage_blobs +
-    categories +
-    blocks
+    localizations +
+    categories
   end
 
-  # def translatable_relations
-  #   [
-  #     { relation: :categories, list: categories }
-  #   ]
-  # end
-
-  # def git_path(website)
-  #   "#{git_path_content_prefix(website)}organizations/#{slug}.html" if for_website?(website)
-  # end
-
-  # def to_s
-  #   "#{name}"
-  # end
-
-  
   def translate_other_attachments(translation)
     translate_attachment(translation, :logo) if logo.attached?
     translate_attachment(translation, :logo_on_dark_background) if logo_on_dark_background.attached?
   end
-  
+
   protected
 
   def backlinks_blocks(website)

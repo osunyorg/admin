@@ -1,12 +1,12 @@
-<% 
+<%
 if @website
-  webpages = @l10n.hugo_ancestors_and_self(@website)
+  webpages = @about.hugo_ancestors_and_self(@website)
 %>
 breadcrumbs:
 <%
-webpages.each do |webpage| 
+webpages.each do |webpage|
   title = webpage.to_s
-  # Les pages (Communication::Website::Page) ont une gymnastique un peu spéciale, 
+  # Les pages (Communication::Website::Page) ont une gymnastique un peu spéciale,
   # parce qu'il faut prendre le titre dédié au breadcrumb.
   title = webpage.best_title if webpage.respond_to?(:best_title)
   hugo = webpage.hugo(@website)

@@ -52,7 +52,7 @@ class Admin::ApplicationController < ApplicationController
   end
 
   def object_title(object)
-    if object.respond_to?(:localizable?)
+    if object.try(:localizable?)
       l10n = object.to_s_in(current_language)
     else
       object.to_s

@@ -3,13 +3,13 @@ module Localizable
 
   included do
     attr_accessor :newly_translated
-    
+
     has_many    :localizations,
                 foreign_key: :about_id,
                 inverse_of: :about,
                 dependent: :destroy
     # Deprecated
-    belongs_to  :language, 
+    belongs_to  :language,
                 optional: true
     belongs_to  :original,
                 class_name: base_class.to_s,
@@ -133,11 +133,6 @@ module Localizable
 
   def original_with_translations
     original_object.translations + [original_object]
-  end
-
-  # Used by Hugo to link translations with themselves
-  def static_translation_key
-    "#{self.class.polymorphic_name.parameterize}-#{self.id}"
   end
 
   def translate!(language)

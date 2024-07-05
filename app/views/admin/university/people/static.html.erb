@@ -94,7 +94,7 @@ administrative_missions:
         <%= target.current_permalink_in_website(@website)&.path if target.respond_to? :current_permalink_in_website %>
 <% end %>
 <% end %>
-<%= render 'admin/application/connections/backlinks' %>
+<%= render 'admin/application/connections/backlinks', object: @about %>
 <% if @about.categories.any? %>
 persons_categories:
 <% @about.categories.each do |category| %>

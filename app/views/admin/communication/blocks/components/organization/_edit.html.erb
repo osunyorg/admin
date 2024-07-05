@@ -1,5 +1,5 @@
 <% organizations = current_university.organizations
-                                     .in_closest_language_id(block.language.id)
+                                     .tmp_original
                                      .ordered %>
 <% unless label.blank? %>
   <label  class="form-label"

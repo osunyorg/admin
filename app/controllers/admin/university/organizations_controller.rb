@@ -41,9 +41,9 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def static
-    @about = @organization
+    @about = @l10n
     @website = @organization.websites&.first
-    render_as_plain_text
+    render_as_plain_text partial: "admin/university/organization/localizations/static"
   end
 
   def new

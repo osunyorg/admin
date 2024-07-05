@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def render_as_plain_text
-    render layout: false, content_type: "text/plain; charset=utf-8"
+  def render_as_plain_text(partial: nil)
+    render partial, layout: false, content_type: "text/plain; charset=utf-8"
   end
 
   private

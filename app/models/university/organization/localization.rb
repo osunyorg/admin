@@ -57,6 +57,11 @@ class University::Organization::Localization < ApplicationRecord
   validates :logo, size: { less_than: 1.megabytes }
   validates :logo_on_dark_background, size: { less_than: 1.megabytes }
 
+  def dependencies
+    contents_dependencies +
+    active_storage_blobs
+  end
+
   def git_path(website)
     "#{git_path_content_prefix(website)}organizations/#{slug}.html" if for_website?(website)
   end
