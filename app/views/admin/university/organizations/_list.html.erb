@@ -2,7 +2,7 @@
   <% organizations.each do |organization| %>
     <%
     # Soit la loca dans la bonne langue, soit l'originale
-    l10n = organization.best_localization_for(current_language)
+    l10n = organization.localization_for(current_language)
     if l10n.present?
       published = true
       alert = ''
