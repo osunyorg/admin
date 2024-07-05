@@ -1,5 +1,5 @@
 class CreateCommunicationWebsitePostLocalization < ActiveRecord::Migration[7.1]
-  def change
+  def up
     create_table :communication_website_post_localizations, id: :uuid do |t|
       t.string :featured_image_alt
       t.text :featured_image_credit
@@ -43,7 +43,7 @@ class CreateCommunicationWebsitePostLocalization < ActiveRecord::Migration[7.1]
         created_at: post.created_at
       )
 
-      post.translate_contents!(post)
+      post.translate_contents!(l10n)
       post.translate_other_attachments(l10n)
 
       post.permalinks.each do |permalink|
@@ -54,5 +54,9 @@ class CreateCommunicationWebsitePostLocalization < ActiveRecord::Migration[7.1]
 
       l10n.save
     end
+  end
+
+  def down
+    drop_table :communication_website_post_localizations
   end
 end

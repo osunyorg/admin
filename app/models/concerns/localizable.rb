@@ -43,7 +43,11 @@ module Localizable
 
     scope :for_language, -> (language) { for_language_id(language.id) }
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself
-    scope :for_language_id, -> (language_id) { where(language_id: language_id) }
+    scope :for_language_id, -> (language_id) {
+      # We get the table name of the localizations association to filter the language correctly
+      localizations_table_name = _reflect_on_association(:localizations).klass.table_name
+      joins(:localizations).where(localizations_table_name => { language_id: language_id })
+    }
 
   end
 

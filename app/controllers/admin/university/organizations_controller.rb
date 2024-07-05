@@ -11,7 +11,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def index
     @organizations = apply_scopes(@organizations)
-                      .tmp_original # TODO remove me after l10n migration
+                      .tmp_original # TODO L10N : To remove
                       .ordered
 
     @feature_nav = 'navigation/admin/university/organizations'
@@ -31,7 +31,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def search
     @term = params[:term].to_s
     @organizations = current_university.organizations
-                                       .in_closest_language_id(current_language.id)
+                                       .tmp_original # TODO L10N : To remove
                                        .search_by_siren_or_name(@term)
                                        .ordered
   end

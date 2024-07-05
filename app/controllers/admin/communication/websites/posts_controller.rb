@@ -13,7 +13,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   has_scope :for_pinned
 
   def index
-    @posts = apply_scopes(@posts).for_language(current_language)
+    @posts = apply_scopes(@posts).tmp_original # TODO L10N : To remove
                                  .ordered
                                  .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
@@ -56,9 +56,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def new
     @categories = categories
     @post.website = @website
-    if current_user.person.present?
-      @post.author_id = current_user.person.find_or_translate!(current_language).id
-    end
+    @post.author_id = current_user.person_id
     breadcrumb
   end
 
@@ -128,15 +126,15 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def load_filters
     @filters = ::Filters::Admin::Communication::Website::Posts.new(
-        current_user, 
-        @website, 
+        current_user,
+        @website,
         current_language
       ).list
   end
 
   def categories
     @website.post_categories
-            .for_language(current_language)
+            .tmp_original # TODO L10N : To remove
             .ordered
   end
 end

@@ -40,13 +40,48 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include Sanitizable
   include Shareable
   include Sluggable
+  include WithAccessibility
   include WithBlobs
+  include WithFeaturedImage
   include WithGitFiles
+  include WithPublication
   include WithUniversity
 
-  has_summernote :text
+  has_summernote :text # TODO: Remove text attribute
+
+  validates :title, presence: true
+
+  before_validation :set_published_at
 
   def to_s
     "#{title}"
+  end
+
+  protected
+
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
+
+  def slug_unavailable?(slug)
+    self.class.unscoped
+              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
+              .where.not(id: self.id)
+              .exists?
+  end
+
+  def set_published_at
+    self.published_at = Time.zone.now if published && published_at.nil?
+  end
+
+  def explicit_blob_ids
+    super.concat [
+      featured_image&.blob_id,
+      shared_image&.blob_id
+    ]
+  end
+
+  def inherited_blob_ids
+    [best_featured_image&.blob_id]
   end
 end

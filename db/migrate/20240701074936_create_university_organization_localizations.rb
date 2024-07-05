@@ -1,5 +1,5 @@
 class CreateUniversityOrganizationLocalizations < ActiveRecord::Migration[7.1]
-  def change
+  def up
     create_table :university_organization_localizations, id: :uuid do |t|
       t.string  :address_additional
       t.string  :address_name
@@ -58,5 +58,9 @@ class CreateUniversityOrganizationLocalizations < ActiveRecord::Migration[7.1]
 
     end
 
+  end
+
+  def down
+    drop_table :university_organization_localizations
   end
 end

@@ -38,7 +38,7 @@
         <% end %>
         <%= f.association :author,
                             collection: current_university.people
-                                                          .in_closest_language_id(current_language.id)
+                                                          .tmp_original
                                                           .ordered,
                             label_method: :to_s_alphabetical %>
         <%= render  "admin/application/slug/form",

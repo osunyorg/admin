@@ -129,7 +129,6 @@ class Communication::Website::Permalink < ApplicationRecord
 
   # Can be overwritten (Page for example)
   def published_path
-    # TODO I18n doit prendre la langue du about
     language = about.respond_to?(:language) ? about.language : website.default_language
     p = ""
     p += "/#{language.iso_code}" if website.languages.many?

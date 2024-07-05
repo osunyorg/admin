@@ -20,12 +20,12 @@
     <div class="col-6 col-lg-3 col-xxl-2">
       <div class="card mb-0">
         <%= osuny_published published %>
-        <%= osuny_thumbnail l10n, 
+        <%= osuny_thumbnail l10n,
                             large: true,
                             cropped: false %>
         <div class="card-body">
-          <p class="mb-0"><%= link_to l10n, 
-                                      admin_university_organization_path(organization), 
+          <p class="mb-0"><%= link_to l10n,
+                                      admin_university_organization_path(organization),
                                       class: "text-black stretched-link #{classes}",
                                       data: { confirm: alert } %></p>
           <p class="small text-muted mb-0"><%= sanitize l10n.summary %></p>

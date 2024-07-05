@@ -28,13 +28,14 @@ end
       </thead>
       <tbody>
         <% posts.each do |post| %>
+          <% l10n = post.localization_for(current_language) %>
           <tr>
             <% if selectable %>
               <td class="border-0"><%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %></td>
             <% end %>
             <td>
               <div class="card card--horizontal">
-                <%= osuny_thumbnail post %>
+                <%= osuny_thumbnail l10n %>
                 <div class="card-body">
                   <%= osuny_published post.published? unless small %>
                   <%= link_to post,

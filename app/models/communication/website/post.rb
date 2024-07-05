@@ -40,19 +40,17 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
-  include Contentful
-  include Initials
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
+  # include Initials
+  include Permalinkable # TODO L10N : To remove
   include Sanitizable
-  include Shareable
-  include Sluggable # We override slug_unavailable? method
-  include Localizable
-  include WithAccessibility
-  include WithBlobs
+  # include Shareable
+  # include Sluggable # We override slug_unavailable? method
+  include Localizable  # TODO L10N : To adapt
+  include WithBlobs # TODO L10N : To remove
   include WithDuplication
-  include WithFeaturedImage
+  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
-  include WithPublication
   include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
@@ -68,9 +66,9 @@ class Communication::Website::Post < ApplicationRecord
 
   validates :title, presence: true
 
-  before_validation :set_published_at
   after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
+  # TODO L10N : To rewrite
   scope :published, -> {
     where("
       communication_website_posts.published = true AND
@@ -119,8 +117,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def dependencies
-    active_storage_blobs +
-    contents_dependencies +
+    localizations +
     categories +
     [author&.author] +
     [website.config_default_content_security_policy]
@@ -138,41 +135,7 @@ class Communication::Website::Post < ApplicationRecord
     abouts_with_post_block
   end
 
-  def translated_author
-    @translated_author ||= author.find_or_translate!(language)
-  end
-
-  def to_s
-    "#{title}"
-  end
-
   protected
-
-  def check_accessibility
-    accessibility_merge_array blocks
-  end
-
-  def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
-              .where.not(id: self.id)
-              .exists?
-  end
-
-  def set_published_at
-    self.published_at = Time.zone.now if published && published_at.nil?
-  end
-
-  def explicit_blob_ids
-    super.concat [
-      featured_image&.blob_id,
-      shared_image&.blob_id
-    ]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
-  end
 
   def update_authors_statuses!
     old_author = University::Person.find_by(id: author_id_before_last_save)

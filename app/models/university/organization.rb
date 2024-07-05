@@ -49,14 +49,14 @@
 class University::Organization < ApplicationRecord
   include AsIndirectObject
   include Backlinkable
-  include Contentful # TODO: remove afterwards
+  include Contentful # TODO L10N : To remove
   # include Initials
-  include Permalinkable # TODO: remove afterwards
+  include Permalinkable # TODO L10N : To remove
   include Sanitizable
   # include Shareable
   # include Sluggable
-  include Localizable # TODO: à adapter
-  include WithBlobs
+  include Localizable # TODO L10N : To adapt
+  include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithGeolocation
   # include WithGitFiles
@@ -73,23 +73,16 @@ class University::Organization < ApplicationRecord
            class_name: 'University::Person::Experience',
            dependent: :destroy
 
-  has_one_attached_deletable :logo # TODO: remove afterwards
-  has_one_attached_deletable :logo_on_dark_background # TODO: remove afterwards
+  has_one_attached_deletable :logo # TODO L10N : To remove
+  has_one_attached_deletable :logo_on_dark_background # TODO L10N : To remove
 
-  alias :featured_image :logo # TODO: remove afterwards
+  alias :featured_image :logo # TODO L10N : To remove
 
-  # validates_presence_of :name # TODO: remove afterwards
-  # validates_uniqueness_of :name, scope: [:university_id, :language_id] # TODO: remove afterwards
-  # validates :logo, size: { less_than: 1.megabytes } # TODO: remove afterwards
-  # validates :logo_on_dark_background, size: { less_than: 1.megabytes } # TODO: remove afterwards
-  # Organization can be created from extranet with only their name. Be careful for future validators. # TODO: remove afterwards
-  # There is an attribute accessor above : `created_from_extranet` # TODO: remove afterwards
-
-  # TODO: à ré-écrire
+  # TODO L10N : To rewrite
   scope :ordered, -> { order(:name) }
   scope :for_kind, -> (kind) { where(kind: kind) }
   scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
-  # TODO: à ré-écrire
+  # TODO L10N : To rewrite
   scope :for_search_term, -> (term) {
     where("
       unaccent(university_organizations.address) ILIKE unaccent(:term) OR
@@ -107,7 +100,7 @@ class University::Organization < ApplicationRecord
       unaccent(university_organizations.url) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
-  # TODO: à ré-écrire
+  # TODO L10N : To rewrite
   scope :search_by_siren_or_name, -> (term) {
     where("
       unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
@@ -136,12 +129,4 @@ class University::Organization < ApplicationRecord
   def backlinks_blocks(website)
     website.blocks.organizations
   end
-
-  # def explicit_blob_ids
-  #   [
-  #     logo&.blob_id,
-  #     logo_on_dark_background&.blob_id,
-  #     shared_image&.blob_id
-  #   ]
-  # end
 end

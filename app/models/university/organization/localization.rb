@@ -56,6 +56,8 @@ class University::Organization::Localization < ApplicationRecord
   validates_uniqueness_of :name, scope: [:university_id, :language_id]
   validates :logo, size: { less_than: 1.megabytes }
   validates :logo_on_dark_background, size: { less_than: 1.megabytes }
+  # Organization can be created from extranet with only their name. Be careful for future validators.
+  # There is an attribute accessor above : `created_from_extranet`
 
   def dependencies
     contents_dependencies +
