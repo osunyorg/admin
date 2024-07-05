@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_01_074936) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_05_061856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -581,6 +581,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_074936) do
     t.index ["program_id"], name: "index_communication_website_post_categories_on_program_id"
     t.index ["slug"], name: "index_communication_website_post_categories_on_slug"
     t.index ["university_id"], name: "index_communication_website_post_categories_on_university_id"
+  end
+
+  create_table "communication_website_post_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.string "migration_identifier"
+    t.boolean "pinned"
+    t.boolean "published"
+    t.datetime "published_at"
+    t.string "slug"
+    t.text "summary"
+    t.text "text"
+    t.string "title"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_website_post_localizations_on_about_id"
+    t.index ["language_id"], name: "index_communication_website_post_localizations_on_language_id"
+    t.index ["university_id"], name: "idx_on_university_id_a3a3f1e954"
   end
 
   create_table "communication_website_posts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -1545,6 +1567,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_074936) do
   add_foreign_key "communication_website_post_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_post_categories", "languages"
   add_foreign_key "communication_website_post_categories", "universities"
+  add_foreign_key "communication_website_post_localizations", "communication_website_posts", column: "about_id"
+  add_foreign_key "communication_website_post_localizations", "languages"
+  add_foreign_key "communication_website_post_localizations", "universities"
   add_foreign_key "communication_website_posts", "communication_website_posts", column: "original_id"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
