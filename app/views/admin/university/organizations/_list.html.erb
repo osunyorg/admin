@@ -1,14 +1,19 @@
 <div class="row g-3">
   <% organizations.each do |organization| %>
     <%
-    # Soit la loca dans la bonne langue, soit l'originale
     l10n = organization.localization_for(current_language)
     if l10n.present?
+      # On a la loca dans la bonne langue
       published = true
+      name = l10n.to_s
+      classes = ''
       alert = ''
     else
+      # On n'a pas la loca, on se rabat sur l'original
       published = false
       l10n = organization.original_localization
+      name = l10n.to_s
+      classes = 'fst-italic'
       alert = t('localization.creation_alert')
     end
     %>
@@ -21,7 +26,7 @@
         <div class="card-body">
           <p class="mb-0"><%= link_to l10n, 
                                       admin_university_organization_path(organization), 
-                                      class: 'text-black stretched-link',
+                                      class: "text-black stretched-link #{classes}",
                                       data: { confirm: alert } %></p>
           <p class="small text-muted mb-0"><%= sanitize l10n.summary %></p>
         </div>
