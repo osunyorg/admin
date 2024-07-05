@@ -1,5 +1,6 @@
 class CreateCommunicationWebsitePostLocalization < ActiveRecord::Migration[7.1]
   def up
+    change_column_null :communication_website_posts, :language_id, true
     create_table :communication_website_post_localizations, id: :uuid do |t|
       t.string :featured_image_alt
       t.text :featured_image_credit
