@@ -1,6 +1,7 @@
 <div class="row g-3">
   <% organizations.each do |organization| %>
     <%
+    # TODO L10N : refactor
     l10n = organization.localization_for(current_language)
     if l10n.present?
       # On a la loca dans la bonne langue

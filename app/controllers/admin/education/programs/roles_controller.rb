@@ -37,7 +37,6 @@ class Admin::Education::Programs::RolesController < Admin::Education::Programs::
     if @role.update(role_params)
       redirect_to admin_education_program_role_path(@role), notice: t('admin.successfully_updated_html', model: @role.to_s)
     else
-      byebug
       breadcrumb
       render :edit, status: :unprocessable_entity
       add_breadcrumb t('edit')

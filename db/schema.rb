@@ -621,7 +621,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_061856) do
     t.string "featured_image_alt"
     t.text "text"
     t.text "summary"
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.text "featured_image_credit"
     t.uuid "original_id"
     t.string "migration_identifier"

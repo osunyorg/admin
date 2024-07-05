@@ -28,7 +28,26 @@ end
       </thead>
       <tbody>
         <% posts.each do |post| %>
-          <% l10n = post.localization_for(current_language) %>
+          <%
+          # TODO L10N : refactor
+          l10n = post.localization_for(current_language)
+          if l10n.present?
+            # On a la loca dans la bonne langue
+            published = l10n.published?
+            published_at = l10n.published_at
+            name = l10n.to_s
+            classes = ''
+            alert = ''
+          else
+            # On n'a pas la loca, on se rabat sur l'original
+            published = false
+            published_at = nil
+            l10n = post.original_localization
+            name = l10n.to_s
+            classes = 'fst-italic'
+            alert = t('localization.creation_alert')
+          end
+          %>
           <tr>
             <% if selectable %>
               <td class="border-0"><%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %></td>
@@ -37,13 +56,13 @@ end
               <div class="card card--horizontal">
                 <%= osuny_thumbnail l10n %>
                 <div class="card-body">
-                  <%= osuny_published post.published? unless small %>
-                  <%= link_to post,
+                  <%= osuny_published published unless small %>
+                  <%= link_to l10n,
                               admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                              class: "stretched-link #{ post.published? ? 'text-black' : 'text-muted' }" %>
+                              class: "stretched-link #{ published ? 'text-black' : 'text-muted' } #{classes}" %>
                 </div>
                 <div class="card-footer d-none d-lg-block">
-                  <% if !hide_buttons && post.pinned %>
+                  <% if !hide_buttons && l10n.pinned %>
                     <%= Communication::Website::Post.human_attribute_name('pinned') %>
                   <% end %>
                   <% if !hide_author && post.author %>
@@ -51,10 +70,10 @@ end
                       <%= post.author %>
                     </span>
                   <% end %>
-                  <% if post.published_at %>
+                  <% if published_at %>
                     <span class="ms-3">
-                      <%= small ? l(post.published_at.to_date, format: :short)
-                                : l(post.published_at, format: :date_with_explicit_month) %>
+                      <%= small ? l(published_at.to_date, format: :short)
+                                : l(published_at, format: :date_with_explicit_month) %>
                     </span>
                   <% end %>
                 </div>

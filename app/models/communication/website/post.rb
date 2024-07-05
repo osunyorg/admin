@@ -18,7 +18,7 @@
 #  updated_at               :datetime         not null
 #  author_id                :uuid             indexed
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             indexed
 #  original_id              :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
@@ -64,8 +64,6 @@ class Communication::Website::Post < ApplicationRecord
                           foreign_key: :communication_website_post_id,
                           association_foreign_key: :communication_website_category_id
 
-  validates :title, presence: true
-
   after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
   # TODO L10N : To rewrite
@@ -81,7 +79,7 @@ class Communication::Website::Post < ApplicationRecord
       DATE(communication_website_posts.published_at) > now()
     ")
   }
-  scope :ordered, -> { order(pinned: :desc, published_at: :desc, created_at: :desc) }
+  scope :ordered, -> (language) { order(pinned: :desc, published_at: :desc, created_at: :desc) }
   scope :latest, -> { published.order(published_at: :desc).limit(5) }
   scope :for_author, -> (author_id) { where(author_id: author_id) }
   scope :for_category, -> (category_id) { joins(:categories).where(communication_website_post_categories: { id: category_id }).distinct }

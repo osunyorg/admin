@@ -20,24 +20,25 @@ module Localizable
 
     accepts_nested_attributes_for :localizations
 
-    before_validation :ensure_translatable_relations_are_in_correct_language
+    # TODO L10N : Revoir les logiques de "quand créer les localisations"
+    # before_validation :ensure_translatable_relations_are_in_correct_language
 
     # has to be before_destroy because of the foreign key constraints
     before_destroy :destroy_or_nullify_translations
 
     # on cherche les objets pour cette langue (original ou pas) + les objets originaux dans une autre langue s'il n'en existe pas de traduction
-    # scope :in_closest_language_id, -> (language_id) {
-    #   # Records with correct language (Original or Translation)
-    #   # OR Records originals which does not have any translation matching the language
-    #   for_language_id(language_id).or(
-    #     where(original_id: nil)
-    #       .where.not(language_id: language_id)
-    #       .where(
-    #         "NOT EXISTS (SELECT 1 FROM #{table_name} AS translations WHERE translations.original_id = #{table_name}.id AND translations.language_id = ?)",
-    #         language_id
-    #       )
-    #   )
-    # }
+    scope :in_closest_language_id, -> (language_id) {
+      # Records with correct language (Original or Translation)
+      # OR Records originals which does not have any translation matching the language
+      for_language_id(language_id).or(
+        where(original_id: nil)
+          .where.not(language_id: language_id)
+          .where(
+            "NOT EXISTS (SELECT 1 FROM #{table_name} AS translations WHERE translations.original_id = #{table_name}.id AND translations.language_id = ?)",
+            language_id
+          )
+      )
+    }
 
     scope :tmp_original, -> { where(original_id: nil) }
 

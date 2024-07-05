@@ -204,6 +204,8 @@ fr:
         author: Auteur·rice
         category: Catégorie
         categories: Catégories
+        website: Site Web
+      communication/website/post/localization:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         featured_image_credit: Crédit

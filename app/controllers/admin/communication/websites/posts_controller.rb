@@ -14,7 +14,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def index
     @posts = apply_scopes(@posts).tmp_original # TODO L10N : To remove
-                                 .ordered
+                                 .ordered(current_language)
                                  .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
@@ -55,8 +55,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def new
     @categories = categories
-    @post.website = @website
-    @post.author_id = current_user.person_id
+    @post.author_id = current_user.person&.id
     breadcrumb
   end
 
@@ -112,16 +111,16 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def post_params
     params.require(:communication_website_post)
     .permit(
-      :title, :meta_description, :summary, :text,
-      :published, :published_at, :slug, :pinned,
-      :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :shared_image, :shared_image_delete,
-      :author_id, category_ids: []
+      :author_id, category_ids: [],
+      localizations_attributes: [
+        :id, :title, :meta_description, :summary, :text,
+        :published, :published_at, :slug, :pinned,
+        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+        :shared_image, :shared_image_delete, :shared_image_infos
+        :language_id
+      ]
     )
-    .merge(
-      university_id: current_university.id,
-      language_id: current_language.id
-    )
+    .merge(university_id: current_university.id)
   end
 
   def load_filters
