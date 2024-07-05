@@ -2,12 +2,14 @@ module Localizable
   extend ActiveSupport::Concern
 
   included do
+    # Depracted ?
     attr_accessor :newly_translated
 
     has_many    :localizations,
                 foreign_key: :about_id,
                 inverse_of: :about,
                 dependent: :destroy
+
     # Deprecated
     belongs_to  :language,
                 optional: true
@@ -17,29 +19,26 @@ module Localizable
     has_many    :translations,
                 class_name: base_class.to_s,
                 foreign_key: :original_id
+    # /Deprecated
 
     accepts_nested_attributes_for :localizations
 
-    # TODO L10N : Revoir les logiques de "quand créer les localisations"
-    # before_validation :ensure_translatable_relations_are_in_correct_language
-
-    # has to be before_destroy because of the foreign key constraints
-    before_destroy :destroy_or_nullify_translations
-
+    # TODO L10N : remove
     # on cherche les objets pour cette langue (original ou pas) + les objets originaux dans une autre langue s'il n'en existe pas de traduction
-    scope :in_closest_language_id, -> (language_id) {
-      # Records with correct language (Original or Translation)
-      # OR Records originals which does not have any translation matching the language
-      for_language_id(language_id).or(
-        where(original_id: nil)
-          .where.not(language_id: language_id)
-          .where(
-            "NOT EXISTS (SELECT 1 FROM #{table_name} AS translations WHERE translations.original_id = #{table_name}.id AND translations.language_id = ?)",
-            language_id
-          )
-      )
-    }
+    # scope :in_closest_language_id, -> (language_id) {
+    #   # Records with correct language (Original or Translation)
+    #   # OR Records originals which does not have any translation matching the language
+    #   for_language_id(language_id).or(
+    #     where(original_id: nil)
+    #       .where.not(language_id: language_id)
+    #       .where(
+    #         "NOT EXISTS (SELECT 1 FROM #{table_name} AS translations WHERE translations.original_id = #{table_name}.id AND translations.language_id = ?)",
+    #         language_id
+    #       )
+    #   )
+    # }
 
+    # TODO L10N : remove after data cleanup
     scope :tmp_original, -> { where(original_id: nil) }
 
     scope :for_language, -> (language) { for_language_id(language.id) }
@@ -56,6 +55,13 @@ module Localizable
     true
   end
 
+  def available_languages
+    @available_languages ||= begin
+      languages = is_direct_object? ? website.languages : university.languages
+      languages.ordered
+    end
+  end
+
   def localization_for(language)
     localizations.find_by(language_id: language.id)
   end
@@ -68,20 +74,20 @@ module Localizable
     localization_for(language) || original_localization
   end
 
-  def localized_in?(language)
-    localization_for(language).present?
+  def localize_in!(language)
+    original_localization.localize_in!(language)
   end
 
-  def localize_in!(language)
-    l10n = original_localization.dup
-    l10n.language = language
-    l10n.save
-    # TODO gérer les blocs et le reste
+  def exists_in_language?(l)
+    localization_for(l).present?
   end
 
   def to_s_in(language)
     best_localization_for(language).to_s
   end
+
+
+  ### DEPRECATED METHODS - has to be removed when cleaning L10N
 
   # This is supposed to be overwritten in model
   # Declare dependencies and their relations with the object
@@ -91,13 +97,6 @@ module Localizable
   # ]
   def translatable_relations
     []
-  end
-
-  def available_languages
-    @available_languages ||= begin
-      languages = is_direct_object? ? website.languages : university.languages
-      languages.ordered
-    end
   end
 
   def find_or_translate!(language)
@@ -132,14 +131,7 @@ module Localizable
     language.id == l.id
   end
 
-  def exists_in_language?(l)
-    localization_for(l).present?
-  end
-
-  def original_with_translations
-    original_object.translations + [original_object]
-  end
-
+  # deprecated for localize_in(language)
   def translate!(language)
     translation = self.dup
 
@@ -166,13 +158,14 @@ module Localizable
     translation
   end
 
-  # protected
 
+  # deprecated
   def translate_parent!(language)
     return nil if parent_id.nil?
     parent.find_or_translate!(language)
   end
 
+  # deprecated
   def translate_contents!(translation)
     blocks.without_heading.ordered.each do |block|
       block.translate!(translation)
@@ -183,6 +176,7 @@ module Localizable
     end
   end
 
+  # deprecated
   # Utility method to duplicate attachments
   def translate_attachment(translation, attachment_name)
     translation.public_send(attachment_name).attach(
@@ -194,10 +188,12 @@ module Localizable
     # Missing attachment
   end
 
+  # deprecated
   # can be overwritten in model
   def translate_other_attachments(translation)
   end
 
+  # deprecated
   def translate_relations!(translation)
     translatable_relations.each do |hash|
       # Single or multiple: programs, author
@@ -208,10 +204,12 @@ module Localizable
     end
   end
 
+  # deprecated
   def ensure_translatable_relations_are_in_correct_language
     translate_relations!(self)
   end
 
+  # deprecated
   def association_in_correct_language(hash, language)
     if hash.has_key?(:list)
       # association is an array (has_many, habtm, ...)
@@ -222,13 +220,5 @@ module Localizable
     end
   end
 
-  # Translatable is included in either Direct or Indirect Objects
-  # If object is direct we do not want to remove the translations
-  # If object is indirect we remove the translations
-  def destroy_or_nullify_translations
-    # TODO: remove ?
-    # is_direct_object? ? translations.update_all(original_id: nil)
-    #                   : translations.destroy_all
-  end
 
 end
