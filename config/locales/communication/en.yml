@@ -348,14 +348,16 @@ en:
         portfolio:
           projects:
             none: No project yet
+        post:
+          localizations:
+            and_pinned: and pinned
+            draft: Draft
+            pinned_status: Pinned status
+            planned_on: Publication planned on %{date}
+            published_on: Published on %{date}
         posts:
-          and_pinned: and pinned
           by: by %{author}
-          draft: Draft
           in: in %{categories}
-          pinned_status: Pinned status
-          planned_on: Publication planned on %{date}
-          published_on: Published on %{date}
         publish:
           button: Publish
           notice: Publication in progress, it should take a few minutes to be online.

@@ -69,7 +69,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     @post.website = @website
     @post.add_photo_import params[:photo_import]
     if @post.save_and_sync
-      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
+      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -80,7 +80,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def update
     @post.add_photo_import params[:photo_import]
     if @post.update_and_sync(post_params)
-      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
+      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -91,12 +91,12 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def duplicate
     redirect_to [:admin, @post.duplicate],
-                notice: t('admin.successfully_duplicated_html', model: @post.to_s)
+                notice: t('admin.successfully_duplicated_html', model: @post.to_s_in(current_language))
   end
 
   def destroy
     @post.destroy
-    redirect_to admin_communication_website_posts_url, notice: t('admin.successfully_destroyed_html', model: @post.to_s)
+    redirect_to admin_communication_website_posts_url, notice: t('admin.successfully_destroyed_html', model: @post.to_s_in(current_language))
   end
 
   protected
@@ -116,7 +116,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
         :id, :title, :meta_description, :summary, :text,
         :published, :published_at, :slug, :pinned,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-        :shared_image, :shared_image_delete, :shared_image_infos
+        :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id
       ]
     )

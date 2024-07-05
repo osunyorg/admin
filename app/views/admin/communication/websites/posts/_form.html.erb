@@ -9,7 +9,7 @@
       <div class="col-md-8">
         <%= osuny_panel t('content') do %>
           <%= lf.input :title, input_html: { data: { translatable: true } } %>
-          <%= render 'admin/application/summary/form', f: f, about: post %>
+          <%= render 'admin/application/summary/form', f: lf, about: l10n %>
           <%= lf.input :text, as: :summernote if strip_tags(post.text).present? %>
         <% end %>
         <div class="row pure__row--small">

@@ -350,14 +350,16 @@ fr:
         portfolio:
           projects:
             none: Pas encore de projet
+        post:
+          localizations:
+            and_pinned: et mis en avant
+            draft: Brouillon
+            pinned_status: Mise en avant
+            planned_on: Publication prévue le %{date}
+            published_on: Publiée le %{date}
         posts:
-          and_pinned: et mis en avant
           by: par %{author}
-          draft: Brouillon
           in: dans %{categories}
-          pinned_status: Mise en avant
-          planned_on: Publication prévue le %{date}
-          published_on: Publiée le %{date}
         publish:
           button: Publier
           notice: Publication en cours, cela devrait prendre quelques minutes pour arriver en ligne.
