@@ -78,27 +78,57 @@ class University::Organization < ApplicationRecord
 
   alias :featured_image :logo # TODO L10N : To remove
 
-  # TODO L10N : To rewrite
-  scope :ordered, -> { order(:name) }
+  # TODO L10N : To understand
+  scope :ordered, ->(language) {
+    # Define a raw SQL snippet for the conditional aggregation
+    # This selects the name of the localization in the specified language,
+    # or falls back to the first localization name if the specified language is not present.
+    localization_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.name END),
+        MAX(localizations.name) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_name
+    SQL
+
+    # Join the organizations table with a subquery that ranks localizations
+    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          university_organization_localizations as localizations
+      ) localizations ON university_organizations.id = localizations.about_id
+    SQL
+    ]))
+    .select("university_organizations.*", localization_name_select)
+    .group("university_organizations.id")
+    .order("localization_name ASC")
+  }
+
   scope :for_kind, -> (kind) { where(kind: kind) }
   scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
-  # TODO L10N : To rewrite
+  # TODO L10N : To rewrite (should add a parameter language and filter to localizations only for this language)
   scope :for_search_term, -> (term) {
-    where("
-      unaccent(university_organizations.address) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.city) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.country) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.meta_description) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.email) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.long_name) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.name) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.nic) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.phone) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.text) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.zipcode) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.url) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+    joins(:localizations)
+      # TODO L10N : To add after filters rework @pabois
+      # .where(university_organization_localizations: { language_id: language.id })
+      .where("
+        unaccent(university_organizations.address) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.city) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.country) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.meta_description) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.email) ILIKE unaccent(:term) OR
+        unaccent(university_organization_localizations.long_name) ILIKE unaccent(:term) OR
+        unaccent(university_organization_localizations.name) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.nic) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.phone) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
+        unaccent(university_organization_localizations.text) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.zipcode) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.url) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
   # TODO L10N : To rewrite
   scope :search_by_siren_or_name, -> (term) {

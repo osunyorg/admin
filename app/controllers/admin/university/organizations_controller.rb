@@ -12,7 +12,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def index
     @organizations = apply_scopes(@organizations)
                       .tmp_original # TODO L10N : To remove
-                      .ordered
+                      .ordered(current_language)
 
     @feature_nav = 'navigation/admin/university/organizations'
 
