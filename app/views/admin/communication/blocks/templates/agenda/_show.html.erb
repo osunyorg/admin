@@ -48,7 +48,7 @@
                   <% end %>
                 </div>
               <% end %>
-              <% if event.status.present? && block.template.show_status %>
+              <% if event.status.present? && block.template.option_status %>
                 <p class="event-status">
                   <% if event.status == "current" %>
                     <%= t 'admin.communication.blocks.templates.agenda.time.options.current' %>
@@ -60,7 +60,7 @@
                 </p>
               <% end %>
 
-              <% if block.template.show_summary && event.summary.present? %>
+              <% if block.template.option_summary && event.summary.present? %>
                 <div class="event-description">
                   <p itemprop="description">
                     <%= event.summary %>
@@ -71,7 +71,7 @@
                 </div>
               <% end %>
 
-              <% if event.categories.present? && block.template.show_category%>
+              <% if event.categories.present? && block.template.option_category %>
                 <p class="event-categories">
                   <% event.categories.each do |category| %>
                     <span><%= link_to category, category.current_permalink_url_in_website(@website) %></span>

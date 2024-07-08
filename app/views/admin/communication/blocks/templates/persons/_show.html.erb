@@ -13,7 +13,7 @@
           <article class="person" itemscope itemtype="https://schema.org/Person">
             <div class="description">
               <h<%= heading_level %>>
-                <% if block.template.with_link %>
+                <% if block.template.option_link %>
                   <%= link_to person, [:admin, person] %>
                 <% else %>
                   <%= element.person %>
@@ -23,7 +23,7 @@
                 <%= element.role %>
               </p>
             </div>
-            <% if block.template.with_photo %>
+            <% if block.template.option_image %>
               <div class="avatar" itemprop="image">
                 <% if person.best_picture.attached? %>
                   <%= kamifusen_tag person.best_picture, class: 'img-fluid rounded-circle' %>
