@@ -9,6 +9,7 @@ class CreateCommunicationWebsitePostCategoryLocalizations < ActiveRecord::Migrat
       t.string :path
       t.text :summary
       
+      t.references :about, foreign_key: { to_table: :communication_website_post_categories }, type: :uuid
       t.references :university, null: false, foreign_key: true, type: :uuid
       t.references :language, null: false, foreign_key: true, type: :uuid
       t.references :communication_website, null: false, foreign_key: true, type: :uuid

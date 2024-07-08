@@ -84,7 +84,7 @@ module Admin::OsunyHelper
     link_to name, path, class: classes, data: { confirm: alert }
   end
 
-  def osuny_checkboxes(list, except: nil, tree: false, localized: false)
+  def osuny_collection(list, except: nil, tree: false, localized: false)
     collection = []
     list.root.ordered.each do |object|
       collection.concat(object.self_and_children(0))
