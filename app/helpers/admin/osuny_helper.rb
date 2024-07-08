@@ -85,28 +85,29 @@ module Admin::OsunyHelper
   end
 
   def osuny_collection_tree(list, except: nil, localized: false)
-    collection = []
-    list.root.ordered.each do |object|
-      array = osuny_self_and_children(object, 0, localized)
-      collection.concat(array)
-    end
+    collection = osuny_collection_recursive(list.root, 0, localized)
     collection = collection.reject { |o| o[:id] == except.id } unless except.nil?
     collection
   end
 
   private
 
-  def osuny_self_and_children(object, level, localized)
-    array = []
-    id = object.id
-    name = localized ? object.best_localization_for(current_language).try(:to_s) : object.to_s
-    label = sanitize("&nbsp;&nbsp;&nbsp;&nbsp;" * level + name)
-    array << [label, id]
-    object.children.ordered.each do |child|
-      array_of_children = osuny_self_and_children(child, level + 1, localized)
-      array.concat(array_of_children)
+  def osuny_collection_recursive(list, level, localized)
+    collection = []
+    list.ordered.each do |object|
+      name = localized ? object.best_localization_for(current_language).try(:to_s) : object.to_s
+      label = sanitize("&nbsp;&nbsp;&nbsp;&nbsp;" * level + name)
+      id = object.id
+      collection << [label, id]
+      collection.concat(
+        osuny_collection_recursive(
+          object.children, 
+          level + 1,
+          localized
+        )
+      )
     end
-    array
+    collection
   end
 
 end
