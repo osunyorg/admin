@@ -1,5 +1,6 @@
 <%
 version = 2
+# Pas dans le controller parce que ça se fait dans les background jobs, à partir du @about
 organization = @about.about
 cache [@about, organization, @website.id, version] do
 %>---

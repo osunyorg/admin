@@ -42,7 +42,12 @@ module Admin::OsunyHelper
   def osuny_published(state)
     raw "<span class=\"osuny__published osuny__published--#{ state }\"></span>"
   end
-  
+
+  def osuny_published_localized(object)
+    state = object.published_in?(current_language)
+    osuny_published(state)
+  end
+    
   def osuny_property_show(object, property, kind, hide_blank: false)
     render  partial: "admin/application/property/#{kind}",
             locals: {
@@ -77,6 +82,28 @@ module Admin::OsunyHelper
       alert = t('localization.creation_alert')
     end
     link_to name, path, class: classes, data: { confirm: alert }
+  end
+
+  def osuny_checkboxes(list, except: nil, tree: false, localized: false)
+    collection = []
+    list.root.ordered.each do |object|
+      collection.concat(object.self_and_children(0))
+    end
+    collection = collection.reject { |o| o[:id] == except.id } unless except.nil?
+    collection
+    #
+    collection = collection_tree_localized(list, except)
+    collection.map { |object|
+      [
+        sanitize(object[:label]),
+        object[:id],
+        {
+          data: {
+            parent: object[:parent_id]
+          }
+        }
+      ]
+    }
   end
 
 end

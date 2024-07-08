@@ -49,8 +49,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def static
-    @about = @post
-    render_as_plain_text
+    @about = @l10n
+    render_as_plain_text partial: "admin/communication/websites/posts/localizations/static"
   end
 
   def new

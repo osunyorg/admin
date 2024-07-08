@@ -109,7 +109,7 @@ class Communication::Website::Post < ApplicationRecord
     localization_for(language).try(:pinned)
   end
 
-  def published_at_in?(language)
+  def published_at_in(language)
     localization_for(language).try(:published_at)
   end
 

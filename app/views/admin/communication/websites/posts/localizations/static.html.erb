@@ -9,14 +9,14 @@ date: "<%= @about.published_at&.iso8601 %>"
 <% if @about.pinned %>
 weight: 1
 <% end %>
-<% if post.author %>
+<%# if (author = post.author) && author.localized_in?(current_language) %>
 authors:
-  - "<%= post.translated_author&.slug %>"
-<% end %>
-<% if @about.categories.any? %>
+  - "<%#= author.localization_for(current_language).try(:slug) %>"
+<%# end %>
+<% if post.categories.any? %>
 posts_categories:
 <% post.categories.ordered.each do |category| %>
-  - "<%= category.slug_with_ancestors_slugs %>"
+  - "<%= category.localization_for(current_language).try(:slug_with_ancestors_slugs) %>"
 <% end %>
 <% end %>
 <%= render 'admin/application/i18n/static' %>

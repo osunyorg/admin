@@ -43,7 +43,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def static
     @about = @l10n
     @website = @organization.websites&.first
-    render_as_plain_text partial: "admin/university/organization/localizations/static"
+    render_as_plain_text partial: "admin/university/organizations/localizations/static"
   end
 
   def new

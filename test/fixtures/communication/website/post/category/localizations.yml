@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  university: one
+  language: one
+  communication_website: one
+  name: MyString
+  meta_description: MyText
+  slug: MyString
+  path: MyString
+  summary: MyText
+
+two:
+  university: two
+  language: two
+  communication_website: two
+  name: MyString
+  meta_description: MyText
+  slug: MyString
+  path: MyString
+  summary: MyText

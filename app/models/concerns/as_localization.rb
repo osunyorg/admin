@@ -6,7 +6,8 @@ module AsLocalization
 
     belongs_to  :language
     belongs_to  :about,
-                class_name: "#{self.module_parent.name}"
+                class_name: "#{self.module_parent.name}",
+                touch: true # FIXME twice on nested form
 
     before_validation :set_university
   end

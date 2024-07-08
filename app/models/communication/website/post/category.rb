@@ -42,15 +42,15 @@
 #
 class Communication::Website::Post::Category < ApplicationRecord
   include AsDirectObject
-  include Contentful
-  include Initials
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
+  # include Initials
+  include Permalinkable # TODO L10N : To remove
   include Sanitizable
-  include Sluggable # We override slug_unavailable? method
-  include Localizable
+  # include Sluggable
+  include Localizable # TODO L10N : To adapt
   include Pathable # Included after Sluggable to make sure slug is correct before anything
-  include WithBlobs
-  include WithFeaturedImage
+  include WithBlobs # TODO L10N : To remove
+  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithPosition
   include WithTree
@@ -72,23 +72,8 @@ class Communication::Website::Post::Category < ApplicationRecord
                           foreign_key: :communication_website_category_id,
                           association_foreign_key: :communication_website_post_id
 
-  validates :name, presence: true
-
-  def to_s
-    "#{name}"
-  end
-
-  def git_path(website)
-    "#{git_path_content_prefix(website)}posts_categories/#{slug_with_ancestors_slugs}/_index.html"
-  end
-
-  def template_static
-    "admin/communication/websites/posts/categories/static"
-  end
-
   def dependencies
-    active_storage_blobs +
-    contents_dependencies +
+    localizations +
     children +
     [website.config_default_content_security_policy]
   end
@@ -105,33 +90,10 @@ class Communication::Website::Post::Category < ApplicationRecord
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
-  def slug_with_ancestors_slugs
-    (ancestors.map(&:slug) << slug).join('-')
-  end
-
-  def best_featured_image_source(fallback: true)
-    return self if featured_image.attached?
-    best_source = parent&.best_featured_image_source(fallback: false)
-    best_source ||= self if fallback
-    best_source
-  end
-
   protected
 
   def last_ordered_element
     website.post_categories.where(parent_id: parent_id, language_id: language_id).ordered.last
-  end
-
-  def slug_unavailable?(slug)
-    self.class.unscoped.where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug).where.not(id: self.id).exists?
-  end
-
-  def explicit_blob_ids
-    super.concat [best_featured_image&.blob_id]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
   end
 
   # Same as the Post object

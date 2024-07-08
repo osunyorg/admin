@@ -46,7 +46,7 @@ end
               <div class="card card--horizontal">
                 <%= osuny_thumbnail_localized post %>
                 <div class="card-body">
-                  <%= osuny_published post.published_in?(current_language) unless small %>
+                  <%= osuny_published_localized post unless small %>
                   <%= osuny_link_localized  post,
                                             admin_communication_website_post_path(
                                               website_id: post.website.id, 
@@ -62,7 +62,7 @@ end
                       <%= post.author %>
                     </span>
                   <% end %>
-                  <% if published_at = post.published_at_in?(current_language) %>
+                  <% if published_at = post.published_at_in(current_language) %>
                     <span class="ms-3">
                       <%= small ? l(published_at.to_date, format: :short)
                                 : l(published_at, format: :date_with_explicit_month) %>

@@ -19,7 +19,7 @@
                 <%= f.association :categories,
                                   label_text: false,
                                   as: :check_boxes,
-                                  collection: collection_tree_for_checkboxes(@categories) %>
+                                  collection: osuny_checkboxes_localized(@categories) %>
               <% end %>
             </div>
           <% end %>
