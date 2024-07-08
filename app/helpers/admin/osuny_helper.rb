@@ -84,26 +84,29 @@ module Admin::OsunyHelper
     link_to name, path, class: classes, data: { confirm: alert }
   end
 
-  def osuny_collection(list, except: nil, tree: false, localized: false)
+  def osuny_collection_tree(list, except: nil, localized: false)
     collection = []
     list.root.ordered.each do |object|
-      collection.concat(object.self_and_children(0))
+      array = osuny_self_and_children(object, 0, localized)
+      collection.concat(array)
     end
     collection = collection.reject { |o| o[:id] == except.id } unless except.nil?
     collection
-    #
-    collection = collection_tree_localized(list, except)
-    collection.map { |object|
-      [
-        sanitize(object[:label]),
-        object[:id],
-        {
-          data: {
-            parent: object[:parent_id]
-          }
-        }
-      ]
-    }
+  end
+
+  private
+
+  def osuny_self_and_children(object, level, localized)
+    array = []
+    id = object.id
+    name = localized ? object.best_localization_for(current_language).try(:to_s) : object.to_s
+    label = sanitize("&nbsp;&nbsp;&nbsp;&nbsp;" * level + name)
+    array << [label, id]
+    object.children.ordered.each do |child|
+      array_of_children = osuny_self_and_children(child, level + 1, localized)
+      array.concat(array_of_children)
+    end
+    array
   end
 
 end
