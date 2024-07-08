@@ -81,11 +81,15 @@ module Localizable
   def exists_in_language?(l)
     localization_for(l).present?
   end
+  alias :localized_in? :exists_in_language?
+
+  def published_in?(language)
+    localization_for(language).try(:published?)
+  end
 
   def to_s_in(language)
     best_localization_for(language).to_s
   end
-
 
   ### DEPRECATED METHODS - has to be removed when cleaning L10N
 

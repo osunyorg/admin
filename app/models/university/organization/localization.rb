@@ -72,6 +72,10 @@ class University::Organization::Localization < ApplicationRecord
     "admin/university/organizations/localizations/static"
   end
 
+  def published?
+    persisted?
+  end
+
   def to_s
     "#{name}"
   end

@@ -34,6 +34,11 @@ module Admin::OsunyHelper
             }
   end
 
+  def osuny_thumbnail_localized(object, large: false, cropped: true)
+    l10n = object.best_localization_for(current_language)
+    osuny_thumbnail(l10n, large: large, cropped: cropped)
+  end
+
   def osuny_published(state)
     raw "<span class=\"osuny__published osuny__published--#{ state }\"></span>"
   end
@@ -57,6 +62,21 @@ module Admin::OsunyHelper
   
   def osuny_property_show_boolean(object, property)
     osuny_property_show(object, property, 'boolean')
+  end
+
+  def osuny_link_localized(object, path)
+    l10n = object.localization_for(current_language)
+    classes = 'stretched-link '
+    if l10n.present?
+      name = l10n.to_s
+      classes += 'text-black'
+      alert = ''
+    else
+      name = object.original_localization.to_s
+      classes += 'text-muted fst-italic'
+      alert = t('localization.creation_alert')
+    end
+    link_to name, path, class: classes, data: { confirm: alert }
   end
 
 end

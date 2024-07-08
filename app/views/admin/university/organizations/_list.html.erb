@@ -1,35 +1,14 @@
 <div class="row g-3">
   <% organizations.each do |organization| %>
-    <%
-    # TODO L10N : refactor
-    l10n = organization.localization_for(current_language)
-    if l10n.present?
-      # On a la loca dans la bonne langue
-      published = true
-      name = l10n.to_s
-      classes = ''
-      alert = ''
-    else
-      # On n'a pas la loca, on se rabat sur l'original
-      published = false
-      l10n = organization.original_localization
-      name = l10n.to_s
-      classes = 'fst-italic'
-      alert = t('localization.creation_alert')
-    end
-    %>
     <div class="col-6 col-lg-3 col-xxl-2">
       <div class="card mb-0">
-        <%= osuny_published published %>
-        <%= osuny_thumbnail l10n,
-                            large: true,
-                            cropped: false %>
+        <%= osuny_thumbnail_localized organization, large: true, cropped: false %>
         <div class="card-body">
-          <p class="mb-0"><%= link_to l10n,
-                                      admin_university_organization_path(organization),
-                                      class: "text-black stretched-link #{classes}",
-                                      data: { confirm: alert } %></p>
-          <p class="small text-muted mb-0"><%= sanitize l10n.summary %></p>
+          <p class="mb-1">
+            <%= osuny_link_localized  organization,
+                                      admin_university_organization_path(organization) %>
+          </p>
+          <%= osuny_published organization.published_in?(current_language) %>
         </div>
       </div>
     </div>

@@ -105,6 +105,14 @@ class Communication::Website::Post < ApplicationRecord
     abouts_with_post_block
   end
 
+  def pinned_in?(language)
+    localization_for(language).try(:pinned)
+  end
+
+  def published_at_in?(language)
+    localization_for(language).try(:published_at)
+  end
+
   protected
 
   def update_authors_statuses!

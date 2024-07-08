@@ -21,48 +21,40 @@ end
         <tr>
           <% if selectable %>
             <th class="border-0">
-              <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } if selectable %>
+              <%= check_box_tag nil, 
+                                nil, 
+                                false, 
+                                class: 'form-check-input',
+                                data: { batch_selectable_role: "select-all" } if selectable %>
             </th>
           <% end %>
         </tr>
       </thead>
       <tbody>
         <% posts.each do |post| %>
-          <%
-          # TODO L10N : refactor
-          l10n = post.localization_for(current_language)
-          if l10n.present?
-            # On a la loca dans la bonne langue
-            published = l10n.published?
-            published_at = l10n.published_at
-            name = l10n.to_s
-            classes = ''
-            alert = ''
-          else
-            # On n'a pas la loca, on se rabat sur l'original
-            published = false
-            published_at = nil
-            l10n = post.original_localization
-            name = l10n.to_s
-            classes = 'fst-italic'
-            alert = t('localization.creation_alert')
-          end
-          %>
           <tr>
             <% if selectable %>
-              <td class="border-0"><%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %></td>
+              <td class="border-0">
+                <%= check_box_tag "ids[]", 
+                                  post.id, 
+                                  false,
+                                  class: 'form-check-input', 
+                                  data: { batch_selectable_role: "select-single" } %>
+              </td>
             <% end %>
             <td>
               <div class="card card--horizontal">
-                <%= osuny_thumbnail l10n %>
+                <%= osuny_thumbnail_localized post %>
                 <div class="card-body">
-                  <%= osuny_published published unless small %>
-                  <%= link_to l10n,
-                              admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                              class: "stretched-link #{ published ? 'text-black' : 'text-muted' } #{classes}" %>
+                  <%= osuny_published post.published_in?(current_language) unless small %>
+                  <%= osuny_link_localized  post,
+                                            admin_communication_website_post_path(
+                                              website_id: post.website.id, 
+                                              id: post.id
+                                            ) %>
                 </div>
                 <div class="card-footer d-none d-lg-block">
-                  <% if !hide_buttons && l10n.pinned %>
+                  <% if !hide_buttons && post.pinned_in?(current_language) %>
                     <%= Communication::Website::Post.human_attribute_name('pinned') %>
                   <% end %>
                   <% if !hide_author && post.author %>
@@ -70,7 +62,7 @@ end
                       <%= post.author %>
                     </span>
                   <% end %>
-                  <% if published_at %>
+                  <% if published_at = post.published_at_in?(current_language) %>
                     <span class="ms-3">
                       <%= small ? l(published_at.to_date, format: :short)
                                 : l(published_at, format: :date_with_explicit_month) %>

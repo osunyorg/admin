@@ -12,6 +12,10 @@ module WithPublication
     before_validation :set_published_at
   end
 
+  def published?
+    published_now?
+  end
+
   def draft?
     !published
   end
