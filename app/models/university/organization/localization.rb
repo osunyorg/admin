@@ -68,6 +68,10 @@ class University::Organization::Localization < ApplicationRecord
     "#{git_path_content_prefix(website)}organizations/#{slug}.html" if for_website?(website)
   end
 
+  def template_static
+    "admin/university/organizations/localizations/static"
+  end
+
   def to_s
     "#{name}"
   end

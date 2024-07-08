@@ -61,6 +61,23 @@ class Communication::Website::Post::Localization < ApplicationRecord
   before_validation :set_communication_website_id,
                     :set_published_at
 
+  def published?
+    published && published_at && published_at.to_date <= Date.today
+  end
+
+  def git_path(website)
+    return unless website.id == communication_website_id && published && published_at
+    git_path_content_prefix(website) + git_path_relative
+  end
+
+  def git_path_relative
+    "posts/#{static_path}.html"
+  end
+
+  def template_static
+    "admin/communication/websites/posts/localizations/static"
+  end
+
   def to_s
     "#{title}"
   end

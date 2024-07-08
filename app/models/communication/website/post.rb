@@ -93,39 +93,11 @@ class Communication::Website::Post < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
-  def published?
-    published && published_at && published_at.to_date <= Date.today
-  end
-
-  def git_path(website)
-    return unless website.id == communication_website_id && published && published_at
-    git_path_content_prefix(website) + git_path_relative
-  end
-
-  def git_path_relative
-    "posts/#{static_path}.html"
-  end
-
-  def static_path
-    "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
-  end
-
-  def template_static
-    "admin/communication/websites/posts/static"
-  end
-
   def dependencies
     localizations +
     categories +
     [author&.author] +
     [website.config_default_content_security_policy]
-  end
-
-  def translatable_relations
-    [
-      { relation: :categories, list: categories },
-      { relation: :author, object: author }
-    ]
   end
 
   def references

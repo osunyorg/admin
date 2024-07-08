@@ -41,11 +41,11 @@ module AsDirectObject
   end
 
   # L'objet fait son ménage
-  # TODO Cette méthode devrait être appelée dès qu'on enregistre un objet indirect, 
+  # TODO Cette méthode devrait être appelée dès qu'on enregistre un objet indirect,
   # sur chaque `direct_source` connectée (via les connexions).
   def delete_obsolete_connections
     Communication::Website::Connection.delete_useless_connections(
-      connections, 
+      connections,
       recursive_dependencies
     )
   end

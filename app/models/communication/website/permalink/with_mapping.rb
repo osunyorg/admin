@@ -4,7 +4,8 @@ module Communication::Website::Permalink::WithMapping
   included do
     MAPPING = {
       "Communication::Website::Page" => Communication::Website::Permalink::Page,
-      "Communication::Website::Post" => Communication::Website::Permalink::Post,
+      "Communication::Website::Post" => Communication::Website::Permalink::Post, # TODO L10N : To remove
+      "Communication::Website::Post::Localization" => Communication::Website::Permalink::Post,
       "Communication::Website::Post::Category" => Communication::Website::Permalink::Category,
       "Communication::Website::Agenda::Event" => Communication::Website::Permalink::Agenda::Event,
       "Communication::Website::Agenda::Category" => Communication::Website::Permalink::Agenda::Category,
@@ -16,7 +17,7 @@ module Communication::Website::Permalink::WithMapping
       "Research::Journal::Paper" => Communication::Website::Permalink::Paper,
       "Research::Journal::Volume" => Communication::Website::Permalink::Volume,
       "Research::Publication" => Communication::Website::Permalink::Publication,
-      "University::Organization" => Communication::Website::Permalink::Organization,
+      "University::Organization" => Communication::Website::Permalink::Organization, # TODO L10N : To remove
       "University::Organization::Localization" => Communication::Website::Permalink::Organization,
       "University::Organization::Category" => Communication::Website::Permalink::Organization::Category,
       "University::Person" => Communication::Website::Permalink::Person,
@@ -26,7 +27,7 @@ module Communication::Website::Permalink::WithMapping
       "University::Person::Researcher" => Communication::Website::Permalink::Researcher,
       "University::Person::Teacher" => Communication::Website::Permalink::Teacher
     }
-  
+
     def self.for_object(object, website)
       lookup_key = self.lookup_key_for_object(object)
       permalink_class = MAPPING[lookup_key]

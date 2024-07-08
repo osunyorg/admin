@@ -1,4 +1,6 @@
----
+<%
+post = @about.about
+%>---
 <%= render 'admin/application/static/title' %>
 date: "<%= @about.published_at&.iso8601 %>"
 <%= render 'admin/application/static/permalink' %>
@@ -7,13 +9,13 @@ date: "<%= @about.published_at&.iso8601 %>"
 <% if @about.pinned %>
 weight: 1
 <% end %>
-<% if @about.author %>
+<% if post.author %>
 authors:
-  - "<%= @about.translated_author.slug %>"
+  - "<%= post.translated_author&.slug %>"
 <% end %>
 <% if @about.categories.any? %>
 posts_categories:
-<% @about.categories.ordered.each do |category| %>
+<% post.categories.ordered.each do |category| %>
   - "<%= category.slug_with_ancestors_slugs %>"
 <% end %>
 <% end %>
