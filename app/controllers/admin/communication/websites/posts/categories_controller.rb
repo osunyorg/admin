@@ -14,7 +14,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   end
 
   def show
-    @posts = @category.posts.ordered.page(params[:page])
+    @posts = @category.posts.ordered(current_language).page(params[:page])
     breadcrumb
   end
 
@@ -80,8 +80,11 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   def category_params
     params.require(:communication_website_post_category)
           .permit(
-            :name, :meta_description, :summary, :slug, :parent_id,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+            :parent_id,
+            localizations_attributes: [
+              :id, :name, :meta_description, :summary, :slug,
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+            ]
           )
           .merge(
             university_id: current_university.id,

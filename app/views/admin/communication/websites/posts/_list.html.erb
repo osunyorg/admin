@@ -21,9 +21,9 @@ end
         <tr>
           <% if selectable %>
             <th class="border-0">
-              <%= check_box_tag nil, 
-                                nil, 
-                                false, 
+              <%= check_box_tag nil,
+                                nil,
+                                false,
                                 class: 'form-check-input',
                                 data: { batch_selectable_role: "select-all" } if selectable %>
             </th>
@@ -35,10 +35,10 @@ end
           <tr>
             <% if selectable %>
               <td class="border-0">
-                <%= check_box_tag "ids[]", 
-                                  post.id, 
+                <%= check_box_tag "ids[]",
+                                  post.id,
                                   false,
-                                  class: 'form-check-input', 
+                                  class: 'form-check-input',
                                   data: { batch_selectable_role: "select-single" } %>
               </td>
             <% end %>
@@ -49,9 +49,10 @@ end
                   <%= osuny_published_localized post unless small %>
                   <%= osuny_link_localized  post,
                                             admin_communication_website_post_path(
-                                              website_id: post.website.id, 
+                                              website_id: post.website.id,
                                               id: post.id
-                                            ) %>
+                                            ),
+                                            classes: 'stretched-link' %>
                 </div>
                 <div class="card-footer d-none d-lg-block">
                   <% if !hide_buttons && post.pinned_in?(current_language) %>

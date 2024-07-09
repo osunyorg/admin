@@ -6,16 +6,16 @@ categories_class_path = categories_class.to_s.parameterize.underscore
   <%
   if category.respond_to?(:website)
     # children_admin_communication_website_post_category_path
-    children_path = send  "children_admin_#{categories_class_path}_path", 
-                          website_id: category.website.id, 
+    children_path = send  "children_admin_#{categories_class_path}_path",
+                          website_id: category.website.id,
                           id: category.id
     # admin_communication_website_post_category_path
-    show_path = send  "admin_#{categories_class_path}_path", 
-                      website_id: @website.id, 
+    show_path = send  "admin_#{categories_class_path}_path",
+                      website_id: @website.id,
                       id: category.id
     # edit_admin_communication_website_post_category_path
-    edit_path = send  "edit_admin_#{categories_class_path}_path", 
-                      website_id: @website.id, 
+    edit_path = send  "edit_admin_#{categories_class_path}_path",
+                      website_id: @website.id,
                       id: category.id
   else
     children_path = send "children_admin_#{categories_class_path}_path", id: category.id
@@ -23,21 +23,21 @@ categories_class_path = categories_class.to_s.parameterize.underscore
     edit_path     = send "edit_admin_#{categories_class_path}_path", id: category.id
   end
   %>
-  <li class=" treeview__element 
-              js-treeview-element 
+  <li class=" treeview__element
+              js-treeview-element
               mb-2
               <%= 'treeview__element--empty' unless category.has_children? %>"
       data-id="<%= category.id %>"
       data-parent="<%= category.parent_id %>">
     <div class="card card--horizontal treeview__label">
       <%= link_to children_path,
-                  class: 'js-treeview-openzone d-inline-block', 
+                  class: 'js-treeview-openzone d-inline-block',
                   remote: true do %>
-        <%= osuny_thumbnail category %>
+        <%= osuny_thumbnail_localized category %>
       <% end %>
       <div class="card-body">
-        <%= osuny_published category.is_in_language?(current_language) %>
-        <%= link_to category, show_path, class: 'text-black' %>
+        <%= osuny_published_localized category %>
+        <%= osuny_link_localized category, show_path %>
         <% if category.children.any? %>
           <span class="text-muted">(<%= category.children.count %>)</span>
         <% end %>
@@ -56,10 +56,10 @@ categories_class_path = categories_class.to_s.parameterize.underscore
         <%= link_to t('delete'), show_path, method: :delete, data: { confirm: t('please_confirm') }, class: 'action text-danger ps-3' %>
       </div>
     </div>
-    <ul class=" list-unstyled 
-                treeview__children 
-                js-treeview-children 
-                js-treeview-sortable-container" 
+    <ul class=" list-unstyled
+                treeview__children
+                js-treeview-children
+                js-treeview-sortable-container"
         data-id="<%= category.id %>">
       <li class="treeview__empty">
         <div class="d-flex align-items-center treeview__label p-1">
