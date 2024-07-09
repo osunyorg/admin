@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_08_120957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -583,6 +583,50 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
     t.index ["university_id"], name: "index_communication_website_post_categories_on_university_id"
   end
 
+  create_table "communication_website_post_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.string "name"
+    t.text "meta_description"
+    t.string "slug"
+    t.string "path"
+    t.text "summary"
+    t.uuid "about_id"
+    t.uuid "university_id", null: false
+    t.uuid "language_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_6e430d4efc"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_0c06c1ae6f"
+    t.index ["language_id"], name: "idx_on_language_id_cc5f73e306"
+    t.index ["university_id"], name: "idx_on_university_id_fb03a6e3c0"
+  end
+
+  create_table "communication_website_post_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.string "migration_identifier"
+    t.boolean "pinned"
+    t.boolean "published"
+    t.datetime "published_at"
+    t.string "slug"
+    t.text "summary"
+    t.text "text"
+    t.string "title"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "communication_website_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_website_post_localizations_on_about_id"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_f6354f61f0"
+    t.index ["language_id"], name: "index_communication_website_post_localizations_on_language_id"
+    t.index ["university_id"], name: "idx_on_university_id_a3a3f1e954"
+  end
+
   create_table "communication_website_posts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
@@ -598,7 +642,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
     t.string "featured_image_alt"
     t.text "text"
     t.text "summary"
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.text "featured_image_credit"
     t.uuid "original_id"
     t.string "migration_identifier"
@@ -1231,6 +1275,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
     t.index ["university_id"], name: "index_university_organization_categories_on_university_id"
   end
 
+  create_table "university_organization_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "address_additional"
+    t.string "address_name"
+    t.string "linkedin"
+    t.string "long_name"
+    t.string "mastodon"
+    t.text "meta_description"
+    t.string "name"
+    t.string "slug"
+    t.text "summary"
+    t.text "text"
+    t.string "twitter"
+    t.string "url"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_university_organization_localizations_on_about_id"
+    t.index ["language_id"], name: "index_university_organization_localizations_on_language_id"
+    t.index ["university_id"], name: "index_university_organization_localizations_on_university_id"
+  end
+
   create_table "university_organizations", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
@@ -1372,6 +1439,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "language_id"
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_university_person_involvements_on_language_id"
+    t.index ["original_id"], name: "index_university_person_involvements_on_original_id"
     t.index ["person_id"], name: "index_university_person_involvements_on_person_id"
     t.index ["target_type", "target_id"], name: "index_university_person_involvements_on_target"
     t.index ["university_id"], name: "index_university_person_involvements_on_university_id"
@@ -1385,6 +1456,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "language_id"
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_university_roles_on_language_id"
+    t.index ["original_id"], name: "index_university_roles_on_original_id"
     t.index ["target_type", "target_id"], name: "index_university_roles_on_target"
     t.index ["university_id"], name: "index_university_roles_on_university_id"
   end
@@ -1522,6 +1597,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
   add_foreign_key "communication_website_post_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_post_categories", "languages"
   add_foreign_key "communication_website_post_categories", "universities"
+  add_foreign_key "communication_website_post_category_localizations", "communication_website_post_categories", column: "about_id"
+  add_foreign_key "communication_website_post_category_localizations", "communication_websites"
+  add_foreign_key "communication_website_post_category_localizations", "languages"
+  add_foreign_key "communication_website_post_category_localizations", "universities"
+  add_foreign_key "communication_website_post_localizations", "communication_website_posts", column: "about_id"
+  add_foreign_key "communication_website_post_localizations", "communication_websites"
+  add_foreign_key "communication_website_post_localizations", "languages"
+  add_foreign_key "communication_website_post_localizations", "universities"
   add_foreign_key "communication_website_posts", "communication_website_posts", column: "original_id"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
@@ -1572,6 +1655,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
   add_foreign_key "university_organization_categories", "universities"
   add_foreign_key "university_organization_categories", "university_organization_categories", column: "original_id"
   add_foreign_key "university_organization_categories", "university_organization_categories", column: "parent_id"
+  add_foreign_key "university_organization_localizations", "languages"
+  add_foreign_key "university_organization_localizations", "universities"
+  add_foreign_key "university_organization_localizations", "university_organizations", column: "about_id"
   add_foreign_key "university_organizations", "languages"
   add_foreign_key "university_organizations", "universities"
   add_foreign_key "university_organizations", "university_organizations", column: "original_id"
@@ -1590,9 +1676,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
   add_foreign_key "university_person_experiences", "universities"
   add_foreign_key "university_person_experiences", "university_organizations", column: "organization_id"
   add_foreign_key "university_person_experiences", "university_people", column: "person_id"
+  add_foreign_key "university_person_involvements", "languages"
   add_foreign_key "university_person_involvements", "universities"
   add_foreign_key "university_person_involvements", "university_people", column: "person_id"
+  add_foreign_key "university_person_involvements", "university_person_involvements", column: "original_id"
+  add_foreign_key "university_roles", "languages"
   add_foreign_key "university_roles", "universities"
+  add_foreign_key "university_roles", "university_roles", column: "original_id"
   add_foreign_key "user_favorites", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
