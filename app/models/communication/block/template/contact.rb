@@ -10,7 +10,7 @@ class Communication::Block::Template::Contact < Communication::Block::Template::
   has_component :url, :string
   has_component :phone_numbers, :array
   has_component :emails, :array
-  
+
   has_component :social_mastodon, :string
   has_component :social_x, :string
   has_component :social_linkedin, :string
@@ -23,5 +23,28 @@ class Communication::Block::Template::Contact < Communication::Block::Template::
   has_component :social_github, :string
 
   has_elements
+
+  def has_emails?
+    emails.any?(&:present?)
+  end
+
+  def has_phone_numbers?
+    phone_numbers.any?(&:present?)
+  end
+
+  def has_socials?
+    [
+      social_mastodon,
+      social_x,
+      social_linkedin,
+      social_youtube,
+      social_vimeo,
+      social_peertube,
+      social_instagram,
+      social_facebook,
+      social_tiktok,
+      social_github
+    ].any?(&:present?)
+  end
 
 end

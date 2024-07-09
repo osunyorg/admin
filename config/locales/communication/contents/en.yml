@@ -204,6 +204,16 @@ en:
               zipcode:
                 label: Zipcode
                 placeholder: Enter the zipcode
+            show:
+              mail:
+                one: Email
+                other: Emails
+              phone:
+                one: Phone
+                other: Phones
+              slots: Hours
+              socials: Social Media
+              website: Webite
           datatable:
             description: A table of data, as responsive and accessible as possible.
             edit:

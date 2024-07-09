@@ -205,16 +205,15 @@ fr:
                 label: Code postal
                 placeholder: Entrer le code postal
             show:
-              mail: 
+              mail:
                 one: Email
                 other: Emails
-              phone: 
+              phone:
                 one: Téléphone
                 other: Téléphones
               slots: Horaires
+              socials: Réseaux sociaux
               website: Site
-
-
           datatable:
             description: Un tableau de données, aussi responsive et accessible que possible.
             edit:

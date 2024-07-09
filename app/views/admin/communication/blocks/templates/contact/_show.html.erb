@@ -58,7 +58,70 @@
                 <% end %>
               </div>
             <% end %>
-            <ul class="schedule-table full-size">
+            <% if block.template.has_socials? %>
+              <div>
+                <p class="meta"><%= t 'admin.communication.blocks.templates.contact.show.socials' %></p>
+                <ul class="socials-list">
+                  <% if block.template.social_mastodon.present? %>
+                    <li class="mastodon">
+                      <%= link_to "Mastodon", block.template.social_mastodon, target: :_blank, title: "Mastodon", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_peertube.present? %>
+                    <li class="peertube">
+                      <%= link_to "Peertube", block.template.social_peertube, target: :_blank, title: "Peertube", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_github.present? %>
+                    <li class="github">
+                      <%= link_to "GitHub", block.template.social_github, target: :_blank, title: "GitHub", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_linkedin.present? %>
+                    <li class="linkedin">
+                      <%= link_to "LinkedIn", block.template.social_linkedin, target: :_blank, title: "LinkedIn", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_youtube.present? %>
+                    <li class="youtube">
+                      <%= link_to "YouTube", block.template.social_youtube, target: :_blank, title: "YouTube", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_vimeo.present? %>
+                    <li class="vimeo">
+                      <%= link_to "Vimeo", block.template.social_vimeo, target: :_blank, title: "Vimeo", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_instagram.present? %>
+                    <li class="instagram">
+                      <%= link_to "Instagram", block.template.social_instagram, target: :_blank, title: "Instagram", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_facebook.present? %>
+                    <li class="facebook">
+                      <%= link_to "Facebook", block.template.social_facebook, target: :_blank, title: "Facebook", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_tiktok.present? %>
+                    <li class="tiktok">
+                      <%= link_to "TikTok", block.template.social_tiktok, target: :_blank, title: "TikTok", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_x.present? %>
+                    <li class="x">
+                      <%= link_to "X (ex-Twitter)", block.template.social_x, target: :_blank, title: "X (ex-Twitter)", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <%
+            schedule_table_class = "full-size"
+            if block.template.has_socials? && block.template.has_phone_numbers? && (block.template.has_emails? || block.template.url.present?)
+              schedule_table_class = "reduced"
+            end
+            %>
+            <ul class="schedule-table <%= schedule_table_class %>">
               <li class="meta">
                 <%= t 'admin.communication.blocks.templates.contact.show.slots' %>
               </li>
