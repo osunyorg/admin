@@ -38,5 +38,5 @@ Citations::FORMATS.each do |format|
     format: "<%= format %>"
     content: >-
       <%= prepare_html_for_static citation %>
-<% end %>
+<% end if @publication.hal? %>
 ---
