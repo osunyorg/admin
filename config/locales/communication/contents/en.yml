@@ -106,6 +106,7 @@ en:
               large:
                 description: Each event is presented in majesty, across the full width available, with a large image.
                 label: Large
+                more: Show more
               list:
                 description: A list of events with dates, small images, all the same width.
                 label: List
@@ -130,6 +131,13 @@ en:
               text:
                 label: Text
                 placeholder: Enter text here
+            layouts:
+              accent_background:
+                description: A block with a strong background.
+                label: Strong highlight
+              no_background:
+                description: A much more discrete block layout.
+                label: Simple
           chapter:
             description: A section of a document, with a title, a text, footnotes and an image.
             edit:
@@ -196,6 +204,16 @@ en:
               zipcode:
                 label: Zipcode
                 placeholder: Enter the zipcode
+            show:
+              mail:
+                one: Email
+                other: Emails
+              phone:
+                one: Phone
+                other: Phones
+              slots: Hours
+              socials: Social Media
+              website: Webite
           datatable:
             description: A table of data, as responsive and accessible as possible.
             edit:
@@ -449,7 +467,8 @@ en:
                 label: Grid
               large:
                 description: Each page is presented in majesty, across the full width available, with a large image.
-                label: Grand
+                label: Large
+                more: Show more
               list:
                 description: The main page's short description is used as a big text, and the pages are listed on the right.
                 label: List
@@ -546,7 +565,8 @@ en:
                 label: Highlighted
               large:
                 description: Each post is presented in majesty, across the full width available, with a large image.
-                label: Grand
+                label: Large
+                more: Show more
               list:
                 description: A list of posts with small images the same width.
                 label: List
@@ -558,6 +578,7 @@ en:
               grid:
                 description: Programs are presented as a grid, from left to right and top to bottom, with constant size cropped images.
                 label: Grid
+                more: Show more
               list:
                 description: A list of programs, one above the other.
                 label: List
@@ -591,7 +612,8 @@ en:
                 label: Grid
               large:
                 description: Each project is presented in its full glory, using the full available width and a large image.
-                label: Grand
+                label: Large
+                more: Show more
               list:
                 description: A list of projects, one below the other.
                 label: List

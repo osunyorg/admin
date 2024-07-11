@@ -1,76 +1,142 @@
-<%
-class_name = "block block-contact"
-unless block.title.blank?
-  class_name += " block-with-title"
-end
-%>
-
-<div class="<%= class_name %>">
+<div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
-      <% unless block.title.blank? && block.template.description.blank? %>
-        <div class="top">
-          <% unless block.title.blank? %>
-            <p class="block-title"><%= block.title %></p>
-          <% end %>
-          <% unless block.template.description.blank? %>
-            <div class="description">
-              <p><%= block_component_show block, :description %></p>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
 
       <div class="informations">
         <address itemscope itemtype="https://schema.org/Organization">
           <% unless block.template.name.blank? %>
-            <p><%= block_component_show block, :name %></p>
+            <p itemprop="name"><%= block_component_show block, :name %></p>
           <% end %>
           <% if block.template.information.present? %>
             <%= block_component_show block, :information %>
           <% end %>
-          <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-            <span itemprop="streetAddress">
-              <%= block_component_show block, :address %>
-            </span>
-            <span itemprop="addressLocality">
-              <%= block_component_show block, :city %>
-            </span>
-            <span itemprop="postalCode">
-              <%= block_component_show block, :zipcode %>
-            </span>
-            <span itemprop="addressCountry">
-              <%= block_component_show block, :country %>
-            </span>
-          </div>
-
-          <% if block.template.url.present? %>
-            <% url = block.template.url %>
-            <a href="<%= social_website_to_url url %>" target="_blank" rel="noreferrer">
-              <%= social_website_to_s url %>
-            </a>
-          <% end %>
-
-          <p>
-            <% block.template.phone_numbers.each do |phone_number| %>
-              <a itemprop="telephone" href="tel:<%= phone_number %>%>"><%= phone_number %></a><br>
+          <div class="contacts">
+            <% if block.template.address.present? %>
+              <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                <span itemprop="streetAddress">
+                  <%= block_component_show block, :address %>
+                </span>
+                <span itemprop="addressLocality">
+                  <%= block_component_show block, :city %>
+                </span>
+                <span itemprop="postalCode">
+                  <%= block_component_show block, :zipcode %>
+                </span>
+                <span itemprop="addressCountry">
+                  <%= block_component_show block, :country %>
+                </span>
+              </div>
             <% end %>
-            <% block.template.emails.each do |email| %>
-              <a itemprop="email" href="mailto:<%= email %>%>"><%= email %></a><br>
+            <% if block.template.url.present? || block.template.emails.present? %>
+              <div>
+                <p class="meta">
+                  <% if block.template.url.present? %>
+                    <%= t 'admin.communication.blocks.templates.contact.show.website' %>
+                  <% else %>
+                    <%= t 'admin.communication.blocks.templates.contact.show.mail', count: block.template.emails.count %>
+                  <% end %>
+                </p>
+                <% block.template.emails.each do |email| %>
+                  <p><a itemprop="email" href="mailto:<%= email %>%>"><%= email %></a></p>
+                <% end %>
+                <% if block.template.url.present? %>
+                  <% url = block.template.url %>
+                  <a href="<%= social_website_to_url url %>" target="_blank" rel="noreferrer">
+                    <%= social_website_to_s url %>
+                  </a>
+                <% end %>
+              </div>
             <% end %>
-          </p>
-        </address>
-        <ul>
-          <% block.template.elements.each do |element| %>
-            <li>
-              <span><%= block_component_show block, :title, template: element %></span>
-              <% if element.time_slot_morning['to'].present? %>
-                <span><time datetime="<%= block_component_show block, :time_slot_morning, template: element %>"><%= block_component_show block, :time_slot_morning, template: element %></time></span>
+            <% if block.template.phone_numbers.present? %>
+              <div>
+                <p class="meta">
+                  <%= t 'admin.communication.blocks.templates.contact.show.phone', count: block.template.phone_numbers.count %>
+                </p>
+                <% block.template.phone_numbers.each do |phone_number| %>
+                  <p><a itemprop="telephone" href="tel:<%= phone_number %>%>"><%= phone_number %></a></p>
+                <% end %>
+              </div>
+            <% end %>
+            <% if block.template.has_socials? %>
+              <div>
+                <p class="meta"><%= t 'admin.communication.blocks.templates.contact.show.socials' %></p>
+                <ul class="socials-list">
+                  <% if block.template.social_mastodon.present? %>
+                    <li class="mastodon">
+                      <%= link_to "Mastodon", block.template.social_mastodon, target: :_blank, title: "Mastodon", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_peertube.present? %>
+                    <li class="peertube">
+                      <%= link_to "Peertube", block.template.social_peertube, target: :_blank, title: "Peertube", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_github.present? %>
+                    <li class="github">
+                      <%= link_to "GitHub", block.template.social_github, target: :_blank, title: "GitHub", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_linkedin.present? %>
+                    <li class="linkedin">
+                      <%= link_to "LinkedIn", block.template.social_linkedin, target: :_blank, title: "LinkedIn", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_youtube.present? %>
+                    <li class="youtube">
+                      <%= link_to "YouTube", block.template.social_youtube, target: :_blank, title: "YouTube", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_vimeo.present? %>
+                    <li class="vimeo">
+                      <%= link_to "Vimeo", block.template.social_vimeo, target: :_blank, title: "Vimeo", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_instagram.present? %>
+                    <li class="instagram">
+                      <%= link_to "Instagram", block.template.social_instagram, target: :_blank, title: "Instagram", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_facebook.present? %>
+                    <li class="facebook">
+                      <%= link_to "Facebook", block.template.social_facebook, target: :_blank, title: "Facebook", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_tiktok.present? %>
+                    <li class="tiktok">
+                      <%= link_to "TikTok", block.template.social_tiktok, target: :_blank, title: "TikTok", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                  <% if block.template.social_x.present? %>
+                    <li class="x">
+                      <%= link_to "X (ex-Twitter)", block.template.social_x, target: :_blank, title: "X (ex-Twitter)", rel: :noreferrer %>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+            <%
+            schedule_table_class = "full-size"
+            if block.template.has_socials? && block.template.has_phone_numbers? && (block.template.has_emails? || block.template.url.present?)
+              schedule_table_class = "reduced"
+            end
+            %>
+            <ul class="schedule-table <%= schedule_table_class %>">
+              <li class="meta">
+                <%= t 'admin.communication.blocks.templates.contact.show.slots' %>
+              </li>
+              <% block.template.elements.each do |element| %>
+                <li>
+                  <span><%= block_component_show block, :title, template: element %></span>
+                  <% if element.time_slot_morning['to'].present? %>
+                    <span><time datetime="<%= block_component_show block, :time_slot_morning, template: element %>"><%= block_component_show block, :time_slot_morning, template: element %></time></span>
+                  <% end %>
+                  <span><time datetime="<%= block_component_show block, :time_slot_afternoon, template: element %>"><%= block_component_show block, :time_slot_afternoon, template: element %></time></span>
+                </li>
               <% end %>
-              <span><time datetime="<%= block_component_show block, :time_slot_afternoon, template: element %>"><%= block_component_show block, :time_slot_afternoon, template: element %></time></span>
-            </li>
-          <% end %>
-        </ul>
+            </ul>
+          </div>
+        </address>
       </div>
     </div>
   </div>
