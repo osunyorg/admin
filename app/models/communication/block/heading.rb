@@ -93,6 +93,12 @@ class Communication::Block::Heading < ApplicationRecord
 
   protected
 
+  def set_slug
+    # Force slug regeneration if title changed
+    self.slug = nil if title_changed?
+    super
+  end
+
   def slug_unavailable?(slug)
     self.class.unscoped
               .where(slug: slug, about_type: about_type, about_id: about_id)
