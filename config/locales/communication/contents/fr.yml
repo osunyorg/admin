@@ -417,12 +417,12 @@ fr:
                 options:
                   category: Une catégorie spécifique
                   selection: Une sélection d'organisations
+              option_link:
+                label: Avec des liens cliquables vers les pages des organisations?
               option_logo:
                 label: Logo
               options: Options d'affichage
               remove_organization: Enlever l'organisation
-              with_link:
-                label: Avec des liens cliquables vers les pages des organisations?
             layouts:
               grid:
                 description: Une série de logos carrés, avec le nom de chaque organisation.

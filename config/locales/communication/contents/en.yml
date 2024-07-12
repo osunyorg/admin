@@ -416,12 +416,12 @@ en:
                 options:
                   category: A specific category
                   selection: Selected organizations
+              option_link:
+                label: With clickable link to each organization's page?
               option_logo:
                 label: Logo
               options: Display options
               remove_organization: Remove organization
-              with_link:
-                label: With clickable link to each organization's page?
             layouts:
               grid:
                 description: Square logos and a simple text below.
