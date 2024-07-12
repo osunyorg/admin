@@ -25,7 +25,7 @@ module Communication::Block::WithTemplate
       property = desc[:property].to_s
       next unless property.start_with?(OPTION_PREFIX)
       property_without_prefix = property.remove(OPTION_PREFIX)
-      options[property_without_prefix] = template.send(property)
+      options[property_without_prefix] = template.public_send(property)
     end
     options
   end
