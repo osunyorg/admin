@@ -12,7 +12,7 @@ abstract: >-
 citation_full: >-
   <%= prepare_html_for_static @about.citation_full %>
 authors_list: >-
-  <%= @about.authors_list %>
+  <%= prepare_html_for_static @about.authors_list %>
 ref: >-
   <%= sanitize @about.ref %>
 links:
@@ -38,5 +38,5 @@ Citations::FORMATS.each do |format|
     format: "<%= format %>"
     content: >-
       <%= prepare_html_for_static citation %>
-<% end %>
+<% end if @about.hal? %>
 ---

@@ -9,6 +9,26 @@
 <%= block_component_static block, :phone_numbers %>
 <%= block_component_static block, :url %>
 <%= block_component_static block, :emails %>
+      socials:
+<% 
+[
+  :social_mastodon, 
+  :social_x, 
+  :social_linkedin, 
+  :social_youtube, 
+  :social_vimeo, 
+  :social_peertube, 
+  :social_instagram, 
+  :social_facebook, 
+  :social_tiktok, 
+  :social_github,
+].each do |network| 
+  value = block.template.public_send network
+  next if value.blank?
+%>
+        <%= network.to_s.remove('social_') %>: >-
+          <%= prepare_text_for_static value %>
+<% end %>
       timetable:
 <% block.template.elements.each do |element| %>
 <%= block_component_static block, :title, template: element, list: true, depth: 4 %>

@@ -1,4 +1,4 @@
-<div class="row pure__row--small">
+<div class="row pure__row--small mb-4">
   <div class="col-xxl-6">
     <%= block_component_edit block, :description %>
   </div>
@@ -60,6 +60,28 @@
     <% end %>
   </div>
 </div>
+
+<%= osuny_panel t('.social') do %>
+  <div class="row pure__row--small mb-4">
+    <% 
+    [
+      :social_mastodon, 
+      :social_x, 
+      :social_linkedin, 
+      :social_youtube, 
+      :social_vimeo, 
+      :social_peertube, 
+      :social_instagram, 
+      :social_facebook, 
+      :social_tiktok, 
+      :social_github,
+    ].each do |network| %>
+    <div class="col-xxl-6">
+      <%= block_component_edit block, network, label: Communication::Website.human_attribute_name(network) %>
+    </div>
+    <% end %>
+  </div>
+<% end %>
 
 <h3 class="h4"><%= t '.slots' %></h3>
 <%= block_component_add_element block, t('.add_slot') %>
