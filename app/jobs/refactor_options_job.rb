@@ -49,6 +49,7 @@ class RefactorOptionsJob < ApplicationJob
         heading.update_column :slug, heading.slug
       end
     ensure
+      # Re-set callbacks
       Communication::Block.set_callback :save, :after, :clean_websites_if_necessary
       Communication::Block.set_callback :save, :after, :connect_and_sync_direct_sources
       Communication::Block.set_callback :save, :after, :touch_about
