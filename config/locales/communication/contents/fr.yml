@@ -54,6 +54,8 @@ fr:
           time_slot:
             from: De
             to: à
+        display_options:
+          title: Options d'affichage
         empty: Ce bloc est vide et n'apparaitra pas
         headings:
           add: Ajouter un titre
@@ -84,18 +86,10 @@ fr:
               quantity:
                 label: Quantité d'événements à afficher
                 placeholder: Entrer la quantité
-              show:
-                label: Paramètres d'affichage
-              show_category:
-                label: Afficher les catégories des événements
-              show_status:
-                label: Afficher le statut des événements (en cours, à venir...)
-              show_summary:
-                label: Afficher le résumé des événements
               time:
-                label: Quelles dates d'événements afficher ?
+                label: Quels statuts d'événements afficher ?
                 options:
-                  archive: Terminés, archivés
+                  archive: Terminés (archivés)
                   current: En cours en ce moment
                   future: À venir, pas encore en cours
                   future_or_current: En cours et à venir
@@ -391,7 +385,7 @@ fr:
           organizations:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             edit:
-              add_partner: Ajouter une organisation
+              add_organization: Ajouter une organisation
               alphabetical:
                 label: Ordre alphabétique
               category_id:
@@ -408,7 +402,7 @@ fr:
                   remove_logo: Enlever le logo
                 name:
                   label: Nom
-                  placeholder: Entrer le nom du partenaire
+                  placeholder: Entrer le nom de l'organisation
                 url:
                   label: Site Web
                   placeholder: https://
@@ -417,10 +411,12 @@ fr:
                 options:
                   category: Une catégorie spécifique
                   selection: Une sélection d'organisations
-              options: Options d'affichage
-              remove_partner: Enlever le partenaire
-              with_link:
+              option_link:
                 label: Avec des liens cliquables vers les pages des organisations?
+              option_logo:
+                label: Logo
+              options: Options d'affichage
+              remove_organization: Enlever l'organisation
             layouts:
               grid:
                 description: Une série de logos carrés, avec le nom de chaque organisation.
@@ -431,8 +427,6 @@ fr:
           pages:
             description: Une mise en avant d'une sélection de pages, avec plusieurs options d'affichage.
             edit:
-              display:
-                title: Options d'affichage
               main_page:
                 title: Page principale
               mode:
@@ -440,21 +434,21 @@ fr:
                 options:
                   children: La page principale et ses enfants
                   selection: Une sélection spécifique de pages
+              option_image:
+                label: Afficher les images des pages
+              option_main_summary:
+                label: Afficher le résumé de la page principale
+              option_summary:
+                label: Afficher les descriptions courtes des pages
               page_id:
                 hint: Cette page principale définira le titre et le lien du bloc. Si vous choisissez une page sans remplir le titre ci-dessus, le titre de la page sera utilisé. Si le titre est rempli, il remplacera le titre de la page sélectionnée, en utilisant le lien de la page.
                 label: Sélectionnez une page principale
                 none: Aucune page sélectionnée
               selection:
-                add: Sélectionner une page
+                add: Ajouter une page
                 label: Page
                 none: Aucune page
                 title: Pages sélectionnées
-              show_description:
-                label: Afficher les descriptions courtes des pages
-              show_image:
-                label: Afficher les images des pages
-              show_main_description:
-                label: Afficher la description courte de la page principale
             layouts:
               alternate:
                 description: Une alternance très légère graphiquement de pages, rythmée entre la gauche et la droite.
@@ -497,11 +491,11 @@ fr:
                 options:
                   category: Une catégorie spécifique
                   selection: Une sélection de personnes
-              options: Options d'affichage
-              with_link:
-                label: "Avec des liens cliquables vers les pages des personnes\_?"
-              with_photo:
+              option_image:
                 label: "Avec un portrait de chaque personne\_?"
+              option_link:
+                label: Lien cliquable vers la page de la personne
+              options: Options d'affichage
           posts:
             description: Une liste d'actualités mises en avant.
             edit:
@@ -509,8 +503,6 @@ fr:
               category_id:
                 label: Catégorie
                 placeholder: Sélectionner une catégorie
-              display:
-                title: Options d'affichage
               element:
                 id:
                   label: ''
@@ -522,19 +514,9 @@ fr:
                   categories: La liste des catégories d'actualités
                   category: Une catégorie spécifique
                   selection: Une sélection d'actualités
+                placeholder: Entrer la quantité
               posts_quantity:
                 label: Quantité d'articles
-                placeholder: Entrer la quantité
-              hide_author:
-                label: Masquer l'auteur ou l'autrice
-              hide_category:
-                label: Masquer les catégories
-              hide_date:
-                label: Masquer la date
-              hide_image:
-                label: Masquer l'image
-              hide_summary:
-                label: Masquer le résumé
             layouts:
               alternate:
                 description: Une alternance très légère graphiquement d'articles entre la gauche et la droite de la page.

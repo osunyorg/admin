@@ -34,6 +34,11 @@ module Admin::BlocksHelper
             label: label
   end
 
+  def block_options_static(block)
+    render 'admin/communication/blocks/options/static',
+            block: block
+  end
+
   def block_html_class(block)
     html_class = "block block-#{block.template_kind}"
     html_class += " block-#{block.template_kind}--#{block.template.layout}" if block.template.respond_to?(:layout)

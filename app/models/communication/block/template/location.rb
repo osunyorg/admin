@@ -6,6 +6,9 @@ class Communication::Block::Template::Location < Communication::Block::Template:
     :list
   ]
 
+  has_component :option_image,        :boolean, default: true
+  has_component :option_summary,      :boolean, default: true
+
   def dependencies
     selected_locations
   end

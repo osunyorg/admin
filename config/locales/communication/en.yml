@@ -49,11 +49,11 @@ en:
       communication/extranet/connection:
         connected: Connected
       communication/extranet/document:
+        category: Category
+        kind: Type
         name: Name
         published: Published?
         published_at: Publication date
-        category: Category
-        kind: Type
       communication/extranet/document/category:
         name: Name
         quantity: Quantity of documents
@@ -135,6 +135,7 @@ en:
         from_day: From day
         from_hour: From hour
         published: Published
+        status: Status
         status_archive: Archive
         status_current: Running now
         status_future: In the future
@@ -164,17 +165,6 @@ en:
         parent: Parent item
         title: Title
         url: URL
-      communication/website/portfolio/category:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        slug: Slug
-      communication/website/portfolio/project:
-        categories: Categories
-        featured_image: Featured image
-        published: Published
-        title: Title
-        year: Year
       communication/website/page:
         bodyclass: Specific CSS class
         breadcrumb_title: Title in breadcrumbs
@@ -197,16 +187,29 @@ en:
         website: Website
       communication/website/permalink:
         path: Path
+      communication/website/portfolio/category:
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        name: Name
+        slug: Slug
+      communication/website/portfolio/project:
+        categories: Categories
+        featured_image: Featured image
+        published: Published
+        title: Title
+        year: Year
       communication/website/post:
         author: Author
         categories: Categories
         category: Category
+        date: Date
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit
         pinned: Pinned
         published: Published?
         published_at: Publication date
+        reading_time: Reading time
         slug: Slug
         text: Text
         title: Title
@@ -320,8 +323,8 @@ en:
         default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases."
         default_shared_image: "The default sharing image, 1200 pixels wide, is a good base because the networks have different standards."
         editorial:
-          label: Editorial
           description: Everything related to content
+          label: Editorial
         git_file:
           analysis:
             launch: Launch analysis

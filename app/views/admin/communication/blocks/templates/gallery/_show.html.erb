@@ -3,7 +3,7 @@
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
 
-      <% if block.template.layout ===  "carousel" %>
+      <% if block.template.layout == "carousel" %>
         <% if !block.template.elements.one? %>
           <div class="splide" role="group" data-splide='{"arrows":true,"pagination":false,"autoWidth":true,"autoplay":false}'>
             <div class="splide__track">
