@@ -7,12 +7,12 @@
         <div class="top">
           <% unless block.title.blank? %>
 
-            <% if block.template.layout === "cards" || block.template.layout === "list" %>
+            <% if block.template.layout == "cards" || block.template.layout == "list" %>
               <% if block.template.page %>
                 <p class="block-title"><%= link_to block.template.page, block.template.page.current_permalink_url_in_website(@website) %></p>
               <% end %>
 
-            <% elsif block.template.layout === "grid" && block.template.page && block.template.option_main_summary %>
+            <% elsif block.template.layout == "grid" && block.template.page && block.template.option_main_summary %>
               <p class="block-title"><%= link_to block.title, block.template.page.current_permalink_url_in_website(@website) %></p>
               <p class="description"><%= block.template.page&.summary %></p>
 
@@ -21,19 +21,19 @@
             <% end %>
 
           <% end %>
-          <% if block.template.layout === "cards" && block.template.option_main_summary && block.data %>
+          <% if block.template.layout == "cards" && block.template.option_main_summary && block.data %>
             <div class="description">
               <p><%= block.template.page&.summary %></p>
             </div>
           <% end %>
         </div>
-        <% if block.template.layout === "list" && block.template.option_main_summary && block.data %>
+        <% if block.template.layout == "list" && block.template.option_main_summary && block.data %>
           <p class="description"><%= block.template.page&.summary %></p>
         <% end %>
       <% end %>
       <% if block.data %>
 
-        <% if block.template.layout ===  "list" %>
+        <% if block.template.layout == "list" %>
           <ul class="list">
             <% block.template.selected_pages.each do |page|
               next if page.nil?
@@ -65,7 +65,7 @@
 
           </ul>
 
-        <% elsif block.template.layout ===  "cards" %>
+        <% elsif block.template.layout == "cards" %>
           <div class="cards">
             <% block.template.selected_pages.each do |page|
               next if page.nil?
@@ -91,7 +91,7 @@
             <% end %>
           </div>
 
-        <% elsif block.template.layout ===  "alternate" %>
+        <% elsif block.template.layout == "alternate" %>
           <div class="alternate">
             <% block.template.selected_pages.each do |page|
               next if page.nil?
@@ -115,7 +115,7 @@
             <% end %>
           </div>
 
-        <% elsif block.template.layout ===  "large" %>
+        <% elsif block.template.layout == "large" %>
           <div class="large">
             <% block.template.selected_pages.each do |page|
               next if page.nil?

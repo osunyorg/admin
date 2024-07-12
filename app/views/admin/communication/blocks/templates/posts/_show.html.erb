@@ -6,7 +6,7 @@ date_format = "%e %B %Y"
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-      <% if block.template.mode === "categories" %>
+      <% if block.template.mode == "categories" %>
         <ul class="categories categories--grid">
           <% @website.post_categories.ordered.each do |category| %>
             <li data-title="<%= category %>">
@@ -16,7 +16,7 @@ date_format = "%e %B %Y"
           <% end %>
         </ul>
       <% else %>
-        <% if block.template.layout === "list" %>
+        <% if block.template.layout == "list" %>
           <div class="list">
             <% if block.data %>
               <% block.template.selected_posts.each do |post|
@@ -62,7 +62,7 @@ date_format = "%e %B %Y"
             <% end %>
           </div>
 
-        <% elsif block.template.layout === "highlight" %>
+        <% elsif block.template.layout == "highlight" %>
           <% if block.data
             highlight_post = block.template.selected_posts.first
           %>
@@ -151,7 +151,7 @@ date_format = "%e %B %Y"
             </div>
           <% end %>
 
-        <% elsif block.template.layout === "large" %>
+        <% elsif block.template.layout == "large" %>
           <div class="large <% unless block.template.option_image %> without-image<% end %>">
             <% block.template.selected_posts.each do |post|
               next if post.nil?
@@ -195,7 +195,7 @@ date_format = "%e %B %Y"
             <% end %>
           </div>
 
-        <% elsif block.template.layout === "carousel" %>
+        <% elsif block.template.layout == "carousel" %>
           <div class="carousel draggable-container">
             <div class="carousel-posts draggable-content">
               <ul class="posts">
@@ -249,7 +249,7 @@ date_format = "%e %B %Y"
             </div>
           </div>
 
-        <% elsif block.template.layout === "alternate" %>
+        <% elsif block.template.layout == "alternate" %>
           <div class="alternate <% unless block.template.option_image %> without-image<% end %>">
             <% if block.data %>
               <% block.template.selected_posts.each_with_index do |post, index|

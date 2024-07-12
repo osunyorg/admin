@@ -5,7 +5,7 @@
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
 
-      <% if block.template.layout ===  "list" %>
+      <% if block.template.layout == "list" %>
         <div class="list">
           <% block.template.selected_projects.each do |project|
               next if project.nil?
@@ -18,7 +18,7 @@
           <% end %>
         </div>
 
-      <% elsif block.template.layout ===  "large" %>
+      <% elsif block.template.layout == "large" %>
         <div class="large">
           <% block.template.selected_projects.each do |project|
               next if project.nil?
@@ -58,7 +58,7 @@
           <% end %>
         </div>
 
-      <% elsif block.template.layout ===  "alternate" %>
+      <% elsif block.template.layout == "alternate" %>
         <div class="alternate">
           <% block.template.selected_projects.each_with_index do |project, index|
               next if project.nil?
