@@ -8,8 +8,8 @@
     <%= block_component_edit block, :option_image, label: Communication::Website::Portfolio::Project.human_attribute_name(:image) %>
     <%= block_component_edit block, :option_summary, label: t('admin.summary.label')%>
     <%= block_component_edit block, :option_categories, label: Communication::Website::Portfolio::Project.human_attribute_name(:categories) %>
+    <%= block_component_edit block, :option_year, label: Communication::Website::Portfolio::Project.human_attribute_name(:year) %>
     -->
-  </div>
   </div>
 </div>
 <div v-if="data.mode !== 'categories'">
@@ -41,5 +41,3 @@
     </div>
   </draggable>
 </div>
-
-

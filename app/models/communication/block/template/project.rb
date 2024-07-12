@@ -8,8 +8,8 @@ class Communication::Block::Template::Project < Communication::Block::Template::
     :large
   ]
   has_component :mode, :option, options: [
-    :all, 
-    :category, 
+    :all,
+    :category,
     :selection,
     :categories
   ]
@@ -19,6 +19,7 @@ class Communication::Block::Template::Project < Communication::Block::Template::
   has_component :option_categories,   :boolean, default: true
   has_component :option_image,        :boolean, default: true
   has_component :option_summary,      :boolean, default: false
+  has_component :option_year,         :boolean, default: true
 
   def category
     category_id_component.category
