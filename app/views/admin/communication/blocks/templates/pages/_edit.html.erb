@@ -6,9 +6,9 @@
   </div>
   <div class="col-lg-6">
     <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-    <%= block_component_edit block, :show_main_description %>
-    <%= block_component_edit block, :option_image, label: t('.show_image.label') %>
-    <%= block_component_edit block, :option_summary, label: t('.show_description.label') %>
+    <%= block_component_edit block, :option_main_summary %>
+    <%= block_component_edit block, :option_image %>
+    <%= block_component_edit block, :option_summary %>
   </div>
 </div>
 
