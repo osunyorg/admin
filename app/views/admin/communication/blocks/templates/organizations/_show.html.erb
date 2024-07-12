@@ -14,11 +14,11 @@
                     data-latitude="<%= element.organization&.latitude %>"
                     data-longitude="<%= element.organization&.longitude %>">
             <p class="organization-title">
-              <% if element.best_url %>
+              <% if block.template.option_link && element.best_url %>
                 <a href="<%= element.best_url %>" target="_blank">
               <% end %>
               <%= element.best_name %>
-              <% if element.best_url%>
+              <% if block.template.option_link && element.best_url %>
                 </a>
               <% end %>
             </p>
