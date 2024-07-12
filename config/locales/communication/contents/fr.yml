@@ -497,11 +497,11 @@ fr:
                 options:
                   category: Une catégorie spécifique
                   selection: Une sélection de personnes
-              options: Options d'affichage
-              with_link:
-                label: Lien cliquable vers la page de la personne
-              with_photo:
+              option_image:
                 label: "Avec un portrait de chaque personne\_?"
+              option_link:
+                label: Lien cliquable vers la page de la personne
+              options: Options d'affichage
           posts:
             description: Une liste d'actualités mises en avant.
             edit:

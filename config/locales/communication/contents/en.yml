@@ -376,6 +376,7 @@ en:
                 title:
                   label: Title
                   placeholder: Enter link title
+              remove: Remove the link
           locations:
             description: A selection of locations on a campus.
             edit:
@@ -496,11 +497,11 @@ en:
                 options:
                   category: A specific category
                   selection: A selection of persons
-              options: Display options
-              with_link:
-                label: Clickable link to person's page
-              with_photo:
+              option_image:
                 label: With a portrait for each person?
+              option_link:
+                label: Clickable link to person's page
+              options: Display options
           posts:
             description: A list of highlighted news.
             edit:
