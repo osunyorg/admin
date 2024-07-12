@@ -71,7 +71,7 @@
                 </div>
               <% end %>
 
-              <% if event.categories.present? && block.template.option_category %>
+              <% if event.categories.present? && block.template.option_categories %>
                 <p class="event-categories">
                   <% event.categories.each do |category| %>
                     <span><%= link_to category, category.current_permalink_url_in_website(@website) %></span>
