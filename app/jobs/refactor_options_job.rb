@@ -14,11 +14,13 @@ class RefactorOptionsJob < ApplicationJob
         template.option_categories    = template.show_category
         template.option_summary       = template.show_summary
         template.option_status        = template.show_status
+        block.data = template.data
         block.save
       end
       Communication::Block.organizations.find_each do |block|
         template = block.template
         template.option_link          = template.with_link
+        block.data = template.data
         block.save
       end
       Communication::Block.pages.find_each do |block|
@@ -26,12 +28,14 @@ class RefactorOptionsJob < ApplicationJob
         template.option_image         = template.show_image
         template.option_summary       = template.show_description
         template.option_main_summary  = template.show_main_description
+        block.data = template.data
         block.save
       end
       Communication::Block.persons.find_each do |block|
         template = block.template
         template.option_image         = template.with_photo
         template.option_link          = template.with_link
+        block.data = template.data
         block.save
       end
       Communication::Block.posts.find_each do |block|
@@ -41,6 +45,7 @@ class RefactorOptionsJob < ApplicationJob
         template.option_date          = !template.hide_date
         template.option_image         = !template.hide_image
         template.option_summary       = !template.hide_summary
+        block.data = template.data
         block.save
       end
       # Headings (pas de lien avec les options)
