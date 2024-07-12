@@ -86,12 +86,6 @@ fr:
               quantity:
                 label: Quantité d'événements à afficher
                 placeholder: Entrer la quantité
-              show_category:
-                label: Afficher les catégories des événements
-              show_status:
-                label: Afficher le statut des événements (en cours, à venir...)
-              show_summary:
-                label: Afficher le résumé des événements
               time:
                 label: Quels statuts d'événements afficher ?
                 options:
@@ -513,16 +507,6 @@ fr:
                 id:
                   label: ''
                   placeholder: Choisir l'article
-              hide_author:
-                label: Masquer l'auteur ou l'autrice
-              hide_category:
-                label: Masquer les catégories
-              hide_date:
-                label: Masquer la date
-              hide_image:
-                label: Masquer l'image
-              hide_summary:
-                label: Masquer le résumé
               mode:
                 label: Quelles actualités afficher ?
                 options:

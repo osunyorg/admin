@@ -86,12 +86,6 @@ en:
               quantity:
                 label: Quantity of events to show
                 placeholder: Enter quantity
-              show_category:
-                label: Show events' categories
-              show_status:
-                label: Show events' status (current, future...)
-              show_summary:
-                label: Show events' summaries
               time:
                 label: What event dates should be displayed?
                 options:
@@ -513,16 +507,6 @@ en:
                 id:
                   label: ''
                   placeholder: Choose post
-              hide_author:
-                label: Hide author
-              hide_category:
-                label: Hide categories
-              hide_date:
-                label: Hide date
-              hide_image:
-                label: Hide image
-              hide_summary:
-                label: Hide summary
               mode:
                 label: Which posts shall we show?
                 options:
