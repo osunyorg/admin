@@ -179,7 +179,7 @@ date_format = "%e %B %Y"
                       </ul>
                     <% end %>
                   </div>
-                  <% if post.summary.present? && block.template.option_summary%>
+                  <% if post.summary.present? && block.template.option_summary %>
                     <p itemprop="articleBody"><%= post.summary %></p>
                   <% end %>
                   <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.posts.layouts.large.more' %></p>
