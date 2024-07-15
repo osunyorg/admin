@@ -88,4 +88,12 @@ class University::Organization::Localization < ApplicationRecord
     ]
   end
 
+  protected
+
+  def localize_other_attachments(localization)
+    localize_attachment(localization, :logo) if logo.attached?
+    localize_attachment(localization, :logo_on_dark_background) if logo_on_dark_background.attached?
+    localize_attachment(localization, :shared_image) if shared_image.attached?
+  end
+
 end

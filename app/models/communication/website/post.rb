@@ -44,9 +44,9 @@ class Communication::Website::Post < ApplicationRecord
   # include Initials
   include Permalinkable # TODO L10N : To remove
   include Sanitizable
-  # include Shareable
+  include Shareable # TODO L10N : To remove
   # include Sluggable # We override slug_unavailable? method
-  include Localizable  # TODO L10N : To adapt
+  include Localizable
   include WithBlobs # TODO L10N : To remove
   include WithDuplication
   include WithFeaturedImage # TODO L10N : To remove
@@ -111,6 +111,11 @@ class Communication::Website::Post < ApplicationRecord
 
   def published_at_in(language)
     localization_for(language).try(:published_at)
+  end
+
+  # TODO L10N : to remove
+  def translate_other_attachments(translation)
+    translate_attachment(translation, :shared_image) if shared_image.attached?
   end
 
   protected

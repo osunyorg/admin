@@ -6,13 +6,13 @@
       <% if person.best_picture_inherits_from_user? %>
         <p>
           <span class="small text-muted">
-            <%= t 'admin.inheritance.sentence_html', link: link_to_if(can?(:read, person.user), person.user, [:admin, person.user]) %>
+            <%= t 'admin.inheritance.sentence_html', link: link_to_if(can?(:read, person.user), l10n.to_s, [:admin, person.user]) %>
           </span>
         </p>
       <% end %>
-      <% if person.picture_credit.present? %>
+      <% if l10n.picture_credit.present? %>
         <div class="small mb-0">
-          <%= sanitize person.picture_credit %>
+          <%= sanitize l10n.picture_credit %>
         </div>
       <% end %>
     <% end if person.best_picture.attached? %>
@@ -21,23 +21,24 @@
       <%= osuny_panel University::Person.human_attribute_name('categories'), small: true do %>
         <ul class="list-unstyled">
           <% person.categories.ordered.each do |category| %>
+            <%# TODO changer le label quand les catégories sont localized %>
             <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
           <% end %>
         </ul>
       <% end %>
     <% end %>
 
-    <%= render 'admin/application/i18n/widget', about: person, small: true %>
+    <%= render 'admin/application/i18n/widget', about: person, l10n: l10n, small: true %>
 
-    <%= render 'admin/application/meta_description/show', about: person %>
+    <%= render 'admin/application/meta_description/show', about: l10n %>
   </div>
   <div class="col-md-8">
 
-    <%= render 'admin/application/summary/show', about: person, small: true %>
+    <%= render 'admin/application/summary/show', about: l10n, small: true %>
 
-    <% unless person.biography.blank? %>
-      <%= osuny_panel University::Person.human_attribute_name('biography'), small: true do %>
-        <%= sanitize person.biography %>
+    <% unless l10n.biography.blank? %>
+      <%= osuny_panel University::Person::Localization.human_attribute_name('biography'), small: true do %>
+        <%= sanitize l10n.biography %>
       <% end %>
     <% end %>
 
@@ -97,37 +98,37 @@
 
     <%= osuny_panel University::Person.human_attribute_name('socials'), small: true do %>
       <div class="row">
-        <% unless person.url.blank? %>
+        <% unless l10n.url.blank? %>
           <div class="col-md-6">
-            <%= osuny_label University::Person.human_attribute_name('url') %>
-            <p><%= link_to person.url, person.url, target: '_blank' %></p>
+            <%= osuny_label University::Person::Localization.human_attribute_name('url') %>
+            <p><%= link_to l10n.url, l10n.url, target: '_blank' %></p>
           </div>
         <% end %>
-        <% unless person.linkedin.blank? %>
+        <% unless l10n.linkedin.blank? %>
           <div class="col-md-6">
-            <%= osuny_label University::Person.human_attribute_name('linkedin') %>
+            <%= osuny_label University::Person::Localization.human_attribute_name('linkedin') %>
             <%= personal_attribute_visibility_tag(person.linkedin_visibility) %>
-            <p><%= link_to person.linkedin, person.linkedin, target: '_blank' %></p>
+            <p><%= link_to l10n.linkedin, l10n.linkedin, target: '_blank' %></p>
           </div>
         <% end %>
-        <% unless person.twitter.blank? %>
+        <% unless l10n.twitter.blank? %>
           <div class="col-md-6">
-            <%= osuny_label University::Person.human_attribute_name('twitter') %>
+            <%= osuny_label University::Person::Localization.human_attribute_name('twitter') %>
             <%= personal_attribute_visibility_tag(person.twitter_visibility) %>
-            <p><%= link_to person.twitter, "https://twitter.com/#{person.twitter}", target: '_blank' %></p>
+            <p><%= link_to l10n.twitter, "https://twitter.com/#{l10n.twitter}", target: '_blank' %></p>
           </div>
         <% end %>
-        <% unless person.mastodon.blank? %>
+        <% unless l10n.mastodon.blank? %>
           <div class="col-md-6">
-            <%= osuny_label University::Person.human_attribute_name('mastodon') %>
+            <%= osuny_label University::Person::Localization.human_attribute_name('mastodon') %>
             <%= personal_attribute_visibility_tag(person.mastodon_visibility) %>
-            <p><%= link_to person.mastodon, person.mastodon, target: '_blank' %></p>
+            <p><%= link_to l10n.mastodon, l10n.mastodon, target: '_blank' %></p>
           </div>
         <% end %>
       </div>
-    <% end unless person.url.blank? && person.linkedin.blank? && person.twitter.blank? && person.mastodon.blank? %>
+    <% end unless l10n.url.blank? && l10n.linkedin.blank? && l10n.twitter.blank? && l10n.mastodon.blank? %>
 
   </div>
 </div>
 
-<%= render 'admin/communication/blocks/content/editor', about: person %>
+<%= render 'admin/communication/blocks/content/editor', about: l10n %>

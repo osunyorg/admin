@@ -381,7 +381,7 @@ GEM
       fastimage (~> 2.2)
       nesty (~> 1.0)
       nokogiri (~> 1.13)
-    mini_magick (5.0.0)
+    mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.24.1)
     msgpack (1.7.2)
@@ -686,7 +686,7 @@ DEPENDENCIES
   libretranslate
   listen (~> 3.3)
   lucide-rails
-  mini_magick
+  mini_magick (~> 4.0)
   observer (~> 0.1.2)
   octokit
   omniauth-rails_csrf_protection (~> 1)

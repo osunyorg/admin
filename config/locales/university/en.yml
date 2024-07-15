@@ -64,7 +64,6 @@ en:
         administration: Administrative staff
         alumnus: Alumnus
         author: Author
-        biography: Biography
         birthdate: Birthdate
         categories: Categories
         city: City
@@ -75,7 +74,6 @@ en:
         email: Email
         email_visibility: Email visibility
         essentials: Essentials
-        first_name: First name
         gender: Gender
         genders:
           female: Female
@@ -90,12 +88,8 @@ en:
         is_author: Author
         is_researcher: Researcher
         is_teacher: Teacher
-        last_name: Last name
-        linkedin: LinkedIn URL
         linkedin_visibility: LinkedIn URL visibility
-        mastodon: Mastodon username
         mastodon_visibility: Mastodon username visibility
-        name: Name
         phone_mobile: Mobile phone
         phone_mobile_visibility: Mobile phone visibility
         phone_personal: Personal phone
@@ -103,18 +97,14 @@ en:
         phone_professional: Professional phone
         phone_professional_visibility: Professional phone visibility
         picture: Profile picture
-        picture_credit: Credit
         research_journal_papers: Papiers
         research_laboratories: Research laboratories
         researcher: Researcher
         roles: Roles
-        slug: Slug
         socials: Socials
         teacher: Teacher
         tenure: Has tenure?
-        twitter: Twitter username
         twitter_visibility: Twitter username visibility
-        url: Website
         user: User
         zipcode: Zipcode
       university/person/category:
@@ -132,6 +122,17 @@ en:
         description: Mission (in this context)
         person: Person
         target_id: ''
+      university/person/localization:
+        biography: Biography
+        first_name: First name
+        last_name: Last name
+        linkedin: LinkedIn URL
+        mastodon: Mastodon username
+        name: Name
+        picture_credit: Credit
+        slug: Slug
+        twitter: Twitter username
+        url: Website
       university/role:
         description: Description
         people: People

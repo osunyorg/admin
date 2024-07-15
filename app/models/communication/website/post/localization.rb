@@ -129,4 +129,8 @@ class Communication::Website::Post::Localization < ApplicationRecord
   def inherited_blob_ids
     [best_featured_image&.blob_id]
   end
+
+  def localize_other_attachments(localization)
+    localize_attachment(localization, :shared_image) if shared_image.attached?
+  end
 end

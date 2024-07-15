@@ -1,6 +1,6 @@
-<% content_for :title, @person %>
+<% content_for :title, @l10n %>
 
-<%= render 'main_infos', person: @person %>
+<%= render 'main_infos', person: @person, l10n: @l10n %>
 
 <% if @teacher_involvements.total_count > 0 || @administrator_involvements.total_count > 0 %>
   <h2 class="category"><%= University::Person::Involvement.model_name.human(count: 2) %></h2>

@@ -53,18 +53,15 @@ class University::Organization < ApplicationRecord
   # include Initials
   include Permalinkable # TODO L10N : To remove
   include Sanitizable
-  # include Shareable
-  # include Sluggable
-  include Localizable # TODO L10N : To adapt
+  include Shareable # TODO L10N : To remove
+  include Localizable
   include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithGeolocation
-  # include WithGitFiles
+  # include WithGitFiles # TODO L10N : To remove
   include WithUniversity
 
   attr_accessor :created_from_extranet
-
-  # has_summernote :text
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Organization::Category',
@@ -79,7 +76,7 @@ class University::Organization < ApplicationRecord
   alias :featured_image :logo # TODO L10N : To remove
 
   # TODO L10N : To understand
-  scope :ordered, ->(language) {
+  scope :ordered, -> (language) {
     # Define a raw SQL snippet for the conditional aggregation
     # This selects the name of the localization in the specified language,
     # or falls back to the first localization name if the specified language is not present.
@@ -113,7 +110,6 @@ class University::Organization < ApplicationRecord
   scope :for_search_term, -> (term) {
     joins(:localizations)
       # TODO L10N : To add after filters rework @pabois
-      # .where(university_organization_localizations: { language_id: language.id })
       .where("
         unaccent(university_organizations.address) ILIKE unaccent(:term) OR
         unaccent(university_organizations.city) ILIKE unaccent(:term) OR
@@ -149,14 +145,17 @@ class University::Organization < ApplicationRecord
     categories
   end
 
+  # TODO L10N : to remove
   def translate_other_attachments(translation)
     translate_attachment(translation, :logo) if logo.attached?
     translate_attachment(translation, :logo_on_dark_background) if logo_on_dark_background.attached?
+    translate_attachment(translation, :shared_image) if shared_image.attached?
   end
-
+  
   protected
-
+  
   def backlinks_blocks(website)
     website.blocks.organizations
   end
+
 end

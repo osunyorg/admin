@@ -91,6 +91,7 @@ module Localizable
     best_localization_for(language).to_s
   end
 
+  # TODO L10N : to remove
   ### DEPRECATED METHODS - has to be removed when cleaning L10N
 
   # This is supposed to be overwritten in model

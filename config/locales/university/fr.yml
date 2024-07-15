@@ -64,7 +64,6 @@ fr:
         administration: Personnel administratif
         alumnus: Alumnus
         author: Auteur·rice
-        biography: Biographie
         birthdate: Anniversaire
         categories: Catégories
         city: Ville
@@ -75,7 +74,6 @@ fr:
         email: Email
         email_visibility: Visibilité de l'email
         essentials: Informations essentielles
-        first_name: Prénom
         gender: Genre
         genders:
           female: Féminin
@@ -90,12 +88,8 @@ fr:
         is_author: Auteur·rice
         is_researcher: Chercheur·e
         is_teacher: Enseignant·e
-        last_name: Nom de famille
-        linkedin: LinkedIn (URL)
         linkedin_visibility: Visibilité de l'URL LinkedIn
-        mastodon: Mastodon (nom d'utilisateur)
         mastodon_visibility: Visibilité du nom d'utilisateur Mastodon
-        name: Nom
         phone_mobile: Téléphone mobile
         phone_mobile_visibility: Visibilité du téléphone mobile
         phone_personal: Téléphone personnel
@@ -103,18 +97,14 @@ fr:
         phone_professional: Téléphone professionnel
         phone_professional_visibility: Visibilité du téléphone professionnel
         picture: Photo de profil
-        picture_credit: Crédit
         research_journal_papers: Papiers
         research_laboratories: Laboratoires de recherche
         researcher: Chercheur·e
         roles: Rôles
-        slug: Slug
         socials: Réseaux sociaux
         teacher: Enseignant·e
         tenure: Titulaire ?
-        twitter: Twitter (nom d'utilisateur)
         twitter_visibility: Visibilité du nom d'utilisateur Twitter
-        url: Site web
         user: Utilisateur
         zipcode: Code postal
       university/person/category:
@@ -132,6 +122,17 @@ fr:
         description: Mission (dans ce contexte)
         person: Personne
         target_id: ''
+      university/person/localization:
+        biography: Biographie
+        first_name: Prénom
+        last_name: Nom de famille
+        linkedin: LinkedIn (URL)
+        mastodon: Mastodon (nom d'utilisateur)
+        name: Nom
+        picture_credit: Crédit
+        slug: Slug
+        twitter: Twitter (nom d'utilisateur)
+        url: Site web
       university/role:
         description: Description
         people: Personnes

@@ -47,6 +47,7 @@ class CreateCommunicationWebsitePostLocalization < ActiveRecord::Migration[7.1]
       )
 
       post.translate_contents!(l10n)
+      post.translate_attachment(l10n, :featured_image)
       post.translate_other_attachments(l10n)
 
       post.permalinks.each do |permalink|
