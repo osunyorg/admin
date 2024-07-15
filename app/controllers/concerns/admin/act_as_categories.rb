@@ -1,4 +1,4 @@
-module Admin::Categorizable
+module Admin::ActAsCategories
   extend ActiveSupport::Concern
 
   def reorder

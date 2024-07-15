@@ -12,8 +12,8 @@
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
           <%= lf.input :text, as: :summernote if strip_tags(post.text).present? %>
         <% end %>
-        <div class="row pure__row--small">
-          <% if @categories.any? %>
+        <% if @categories.any? %>
+          <div class="row pure__row--small">
             <div class="col-md-6">
               <%= osuny_panel t('activerecord.attributes.communication/website/post.categories') do %>
                 <%= f.association :categories,
@@ -22,8 +22,8 @@
                                   collection: osuny_collection_tree(@categories, localized: true) %>
               <% end %>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
       <div class="col-md-4">
@@ -41,16 +41,16 @@
             <%= lf.input :published_at, html5: true, as: :date %>
           <% end %>
           <%= f.association :author,
-                              collection: current_university.people
-                                                            .tmp_original
-                                                            .ordered,
-                              label_method: :to_s_alphabetical %>
+                            collection: current_university.people
+                                                          .tmp_original
+                                                          .ordered,
+                            label_method: :to_s_alphabetical %>
           <%= render  "admin/application/slug/form",
                       f: lf,
                       source: '#communication_website_post_localizations_attributes_0_title' %>
         <% end %>
-        <%= render 'admin/application/featured_image/edit', about: @l10n, f: lf %>
-        <%= render 'admin/application/shared_image/edit', about: @l10n, f: lf %>
+        <%= render 'admin/application/featured_image/edit', f: lf, about: @l10n %>
+        <%= render 'admin/application/shared_image/edit', f: lf, about: @l10n %>
       </div>
     </div>
 

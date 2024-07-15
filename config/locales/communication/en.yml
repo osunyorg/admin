@@ -216,10 +216,11 @@ en:
         website: Website
       communication/website/post/category:
         children: Children categories
+        parent: Parent category
+      communication/website/post/category/localization:
         featured_image: Featured image
         featured_image_alt: Alt text
         name: Name
-        parent: Parent category
         slug: Slug
       communication/website/showcase/tag:
         name: Name

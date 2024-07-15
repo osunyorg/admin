@@ -1,21 +1,14 @@
----
-<%= render 'admin/application/static/title' %>
-<%= render 'admin/application/static/permalink', forced_slug: @about.slug_with_ancestors_slugs %>
-<%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
-<% if @about.parent %>
-parent: "<%= @about.parent.path %>"
-<% end %>
-<% if @about.children.any? %>
-children:
-<% @about.children.ordered.each do |child| %>
-  - <%= child.path %>
-<% end %>
-<% end %>
-position: <%= @about.position %>
-<%= render 'admin/application/i18n/static' %>
-<%= render 'admin/application/featured_image/static' %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/summary/static' %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+<%
+category = @l10n.about
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
+<%= render 'admin/application/static/permalink', about: @l10n, forced_slug: @l10n.slug_with_ancestors_slugs(separator: '-') %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design', about: @l10n, full_width: true, toc_offcanvas: true %>
+position: <%= category.position %>
+<%= render 'admin/application/i18n/static', about: @l10n %>
+<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---

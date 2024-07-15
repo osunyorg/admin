@@ -13,8 +13,9 @@ module AsLocalization
   end
 
   # Used by Hugo to link translations with themselves
+  # communication-website-post-25bf629a-27ef-40b6-bb61-4fd0a984e08d
   def static_translation_key
-    "#{self.class.polymorphic_name.parameterize}-#{self.about_id}"
+    "#{about.class.polymorphic_name.parameterize}-#{self.about_id}"
   end
 
   def original
@@ -25,13 +26,9 @@ module AsLocalization
     self == original
   end
 
-  def set_university
-    self.university_id = about.university_id
-  end
-
   def for_website?(website)
     website.language_ids.include?(language_id) &&
-    about.for_website?(website)
+      about.for_website?(website)
   end
 
   def localize_in!(language)
@@ -53,7 +50,20 @@ module AsLocalization
 
   end
 
+  # standalone-category
+  # parent-category/child-category
+  def slug_with_ancestors_slugs(separator: '/')
+    slugs = about.ancestors_and_self.map do |ancestor|
+      ancestor.best_localization_for(language).slug
+    end
+    slugs.join(separator)
+  end
+
   protected
+
+  def set_university
+    self.university_id = about.university_id
+  end
 
   def localize_contents!(localization)
     blocks.without_heading.ordered.each do |block|

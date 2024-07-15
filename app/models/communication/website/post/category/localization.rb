@@ -49,8 +49,12 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
   
   validates :name, presence: true
 
+  before_validation :set_communication_website_id
+
   def git_path(website)
-    "#{git_path_content_prefix(website)}posts_categories/#{slug_with_ancestors_slugs}/_index.html"
+    prefix = git_path_content_prefix(website)
+    slugs = slug_with_ancestors_slugs(separator: '-')
+    "#{prefix}posts_categories/#{slugs}/_index.html"
   end
 
   def template_static
@@ -60,10 +64,6 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
   def dependencies
     active_storage_blobs +
     contents_dependencies
-  end
-
-  def slug_with_ancestors_slugs
-    (ancestors.map(&:slug) << slug).join('-')
   end
 
   def best_featured_image_source(fallback: true)
@@ -93,5 +93,9 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  def set_communication_website_id
+    self.communication_website_id ||= about.communication_website_id
   end
 end

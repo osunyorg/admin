@@ -6,7 +6,8 @@ module Communication::Website::Permalink::WithMapping
       "Communication::Website::Page" => Communication::Website::Permalink::Page,
       "Communication::Website::Post" => Communication::Website::Permalink::Post, # TODO L10N : To remove
       "Communication::Website::Post::Localization" => Communication::Website::Permalink::Post,
-      "Communication::Website::Post::Category" => Communication::Website::Permalink::Category,
+      "Communication::Website::Post::Category" => Communication::Website::Permalink::Category, # TODO L10N : To remove
+      "Communication::Website::Post::Category::Localization" => Communication::Website::Permalink::Category,
       "Communication::Website::Agenda::Event" => Communication::Website::Permalink::Agenda::Event,
       "Communication::Website::Agenda::Category" => Communication::Website::Permalink::Agenda::Category,
       "Communication::Website::Portfolio::Project" => Communication::Website::Permalink::Portfolio::Project,

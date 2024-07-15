@@ -4,7 +4,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
                               through_association: :portfolio_categories
 
   include Admin::Localizable
-  include Admin::Categorizable
+  include Admin::ActAsCategories
 
   def index
     @root_categories = categories.root

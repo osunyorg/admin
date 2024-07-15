@@ -3,7 +3,7 @@ class Admin::University::Organizations::CategoriesController < Admin::University
                               through: :current_university,
                               through_association: :organization_categories
 
-  include Admin::Categorizable
+  include Admin::ActAsCategories
   include Admin::Localizable
 
   def index

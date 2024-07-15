@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # Deprecated
   def render_as_plain_text(partial: nil)
     render partial, layout: false, content_type: "text/plain; charset=utf-8"
   end

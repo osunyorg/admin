@@ -4,17 +4,17 @@ version = 2
 organization = @about.about
 cache [@about, organization, @website.id, version] do
 %>---
-<%= render 'admin/application/static/title' %>
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
-<%= render 'admin/application/i18n/static' %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/shared_image/static' %>
-<%= render 'admin/application/summary/static' %>
-<%= render 'admin/application/connections/backlinks', object: organization %>
-<%= render 'admin/application/static/attribute/text', object: @about, key: :long_name %>
-<%= render 'admin/application/static/attribute/text', object: organization, key: :siren %>
+<%= render 'admin/application/static/title', about: @l10n %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design', about: @l10n, full_width: true, toc_offcanvas: true %>
+<%= render 'admin/application/i18n/static', about: @l10n %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/shared_image/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
+<%= render 'admin/application/connections/backlinks', about: organization %>
+<%= render 'admin/application/static/attribute/text', about: @about, key: :long_name %>
+<%= render 'admin/application/static/attribute/text', about: organization, key: :siren %>
 kind:
   code: "<%= organization.kind %>"
   label: "<%= organization.kind_i18n %>"

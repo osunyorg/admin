@@ -3,11 +3,12 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
                               through: :website,
                               through_association: :post_categories
 
+  include Admin::ActAsCategories
   include Admin::Localizable
-  include Admin::Categorizable
+  include Admin::HasStaticAction
 
   def index
-    @root_categories = categories.root
+    @root_categories = categories.root.tmp_original # TODO L10N : To remove
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
@@ -16,11 +17,6 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   def show
     @posts = @category.posts.ordered(current_language).page(params[:page])
     breadcrumb
-  end
-
-  def static
-    @about = @category
-    render_as_plain_text
   end
 
   def new
@@ -83,7 +79,8 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
             :parent_id,
             localizations_attributes: [
               :id, :name, :meta_description, :summary, :slug,
-              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+              :language_id
             ]
           )
           .merge(

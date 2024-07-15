@@ -9,7 +9,7 @@ class Communication::Website::Permalink::Portfolio::Project < Communication::Web
 
   # /projets/2022-lac-project/
   def self.pattern_in_website(website, language)
-    "/#{slug_with_ancestors(website, language)}/:year-:slug/"
+    "/#{special_page_path(website, language)}/:year-:slug/"
   end
 
   def self.special_page_type

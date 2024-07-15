@@ -4,7 +4,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
                               through_association: :agenda_categories
 
   include Admin::Localizable
-  include Admin::Categorizable
+  include Admin::ActAsCategories
 
   def index
     @root_categories = categories.root

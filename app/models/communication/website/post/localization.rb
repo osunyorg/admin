@@ -71,7 +71,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/communication/websites/posts/localizations/static"
+    "admin/communication/websites/posts/static"
   end
 
   def static_path
@@ -81,6 +81,17 @@ class Communication::Website::Post::Localization < ApplicationRecord
   def dependencies
     active_storage_blobs +
     contents_dependencies
+  end
+
+  def author
+    # TODO L10N : Localize Person
+    return nil
+    return if about.author.nil?
+    about.author.localization_for(language)
+  end
+
+  def categories
+    about.categories.ordered.map { |category| category.localization_for(language) }.compact
   end
 
   def to_s

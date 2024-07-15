@@ -10,7 +10,7 @@ class Communication::Website::Permalink::Author < Communication::Website::Permal
 
   # /equipe/:slug/actualites/
   def self.pattern_in_website(website, language)
-    "/#{slug_with_ancestors(website, language)}/:slug/#{website.special_page(Communication::Website::Page::CommunicationPost, language: language).slug}/"
+    "/#{special_page_path(website, language)}/:slug/#{website.special_page(Communication::Website::Page::CommunicationPost, language: language).slug}/"
   end
 
   def self.special_page_type

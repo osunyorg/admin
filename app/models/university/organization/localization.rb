@@ -69,7 +69,7 @@ class University::Organization::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/university/organizations/localizations/static"
+    "admin/university/organizations/static"
   end
 
   def published?

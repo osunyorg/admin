@@ -48,7 +48,7 @@ class Communication::Website::Post::Category < ApplicationRecord
   include Sanitizable
   # include Sluggable
   include Localizable # TODO L10N : To adapt
-  include Pathable # Included after Sluggable to make sure slug is correct before anything
+  include Pathable # Included after Sluggable to make sure slug is correct before anything # TODO L10N : To remove
   include WithBlobs # TODO L10N : To remove
   include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
@@ -88,6 +88,10 @@ class Communication::Website::Post::Category < ApplicationRecord
 
   def siblings
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
+  end
+  
+  def exportable_to_git?
+    false
   end
 
   protected

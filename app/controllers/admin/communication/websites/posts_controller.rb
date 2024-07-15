@@ -2,6 +2,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   load_and_authorize_resource class: Communication::Website::Post,
                               through: :website
 
+  include Admin::HasStaticAction
   include Admin::Localizable
 
   # Allow to override the default load_filters from Admin::Filterable
@@ -46,11 +47,6 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def preview
     render layout: 'admin/layouts/preview'
-  end
-
-  def static
-    @about = @l10n
-    render_as_plain_text partial: "admin/communication/websites/posts/localizations/static"
   end
 
   def new

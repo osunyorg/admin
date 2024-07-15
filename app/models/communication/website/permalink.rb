@@ -84,7 +84,7 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   # Méthode d'utilité pour récupérer le slug
-  def self.slug_with_ancestors(website, language)
+  def self.special_page_path(website, language)
     self.special_page(website, language).slug_with_ancestors
   end
 

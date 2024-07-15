@@ -5,6 +5,9 @@ module Admin::Localizable
     before_action :build_localization,
                   only: :new
 
+    before_action :load_invalid_localization,
+                  only: :create
+
     before_action :load_localization,
                   :redirect_if_not_localized,
                   only: [:show, :edit, :update, :static]
@@ -12,10 +15,17 @@ module Admin::Localizable
 
   protected
 
+  # On new, we need to init the localization
   def build_localization
     @l10n = resource.localizations.build(language: current_language)
   end
 
+  # On create, when there's an error, we need to get unsaved localization from association
+  def load_invalid_localization
+    @l10n = resource.localizations.first
+  end
+
+  # On every other action, we need to load the localization
   def load_localization
     @l10n = resource.localization_for(current_language)
   end

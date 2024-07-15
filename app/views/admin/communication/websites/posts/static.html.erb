@@ -1,0 +1,30 @@
+<%
+post = @l10n.about
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
+date: "<%= @l10n.published_at&.iso8601 %>"
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design', about: @l10n, full_width: false, toc_offcanvas: false %>
+<% if @l10n.pinned %>
+weight: 1
+<% end %>
+<% if @l10n.author %>
+authors:
+  - "<%= @l10n.author.slug %>"
+<% end %>
+<% if @l10n.categories.any? %>
+posts_categories:
+<% @l10n.categories.each do |category| %>
+  - "<%= category.try(:slug_with_ancestors_slugs) %>"
+<% end %>
+<% end %>
+<%= render 'admin/application/i18n/static', about: @l10n %>
+<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/shared_image/static', about: @l10n %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
+<%= render 'admin/communication/blocks/content/static', about: @about %>
+---
+<%= prepare_html_for_static @about.text %>
