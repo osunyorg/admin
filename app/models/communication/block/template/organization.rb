@@ -8,8 +8,15 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   ]
   has_component :category_id, :organization_category
   has_component :description, :rich_text
-  has_component :with_link, :boolean
   has_component :alphabetical, :boolean
+  
+  # Deprecated
+  has_component :with_link, :boolean
+  # end
+
+  has_component :option_link,         :boolean, default: true
+  has_component :option_logo,         :boolean, default: true
+  has_component :option_summary,      :boolean, default: false
 
   def elements
     if alphabetical

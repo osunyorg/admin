@@ -5,7 +5,7 @@
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
 
-      <% if block.template.layout ===  "grid" %>
+      <% if block.template.layout == "grid" %>
         <div class="programs-grid">
           <% block.template.selected_programs.each do |program|
               next if program.nil?

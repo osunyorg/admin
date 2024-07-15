@@ -7,12 +7,12 @@
         <div class="top">
           <% unless block.title.blank? %>
 
-            <% if block.template.layout === "cards" || block.template.layout === "list" %>
+            <% if block.template.layout == "cards" || block.template.layout == "list" %>
               <% if block.template.page %>
                 <p class="block-title"><%= link_to block.template.page, block.template.page.current_permalink_url_in_website(@website) %></p>
               <% end %>
 
-            <% elsif block.template.layout === "grid" && block.template.page && block.template.show_main_description %>
+            <% elsif block.template.layout == "grid" && block.template.page && block.template.option_main_summary %>
               <p class="block-title"><%= link_to block.title, block.template.page.current_permalink_url_in_website(@website) %></p>
               <p class="description"><%= block.template.page&.summary %></p>
 
@@ -21,35 +21,35 @@
             <% end %>
 
           <% end %>
-          <% if block.template.layout === "cards" && block.template.show_main_description && block.data %>
+          <% if block.template.layout == "cards" && block.template.option_main_summary && block.data %>
             <div class="description">
               <p><%= block.template.page&.summary %></p>
             </div>
           <% end %>
         </div>
-        <% if block.template.layout === "list" && block.template.show_main_description && block.data %>
+        <% if block.template.layout == "list" && block.template.option_main_summary && block.data %>
           <p class="description"><%= block.template.page&.summary %></p>
         <% end %>
       <% end %>
       <% if block.data %>
 
-        <% if block.template.layout ===  "list" %>
+        <% if block.template.layout == "list" %>
           <ul class="list">
             <% block.template.selected_pages.each do |page|
               next if page.nil?
             %>
               <li>
-                <% if block.template.show_description || block.template.show_image %>
+                <% if block.template.option_summary || block.template.option_image %>
                   <article>
                     <div class="page-content">
                       <h<%= heading_level %>>
                         <%= link_to page, page.current_permalink_url_in_website(@website) %>
                       </h<%= heading_level %>>
-                      <% if block.template.show_description %>
+                      <% if block.template.option_summary %>
                         <p><%= page.summary %></p>
                       <% end %>
                     </div>
-                    <% if block.template.show_image %>
+                    <% if block.template.option_image %>
                       <div class="media" itemprop="image">
                         <% if page.featured_image.attached? %>
                           <%= kamifusen_tag page.featured_image %>
@@ -65,7 +65,7 @@
 
           </ul>
 
-        <% elsif block.template.layout ===  "cards" %>
+        <% elsif block.template.layout == "cards" %>
           <div class="cards">
             <% block.template.selected_pages.each do |page|
               next if page.nil?
@@ -74,13 +74,13 @@
                 <h<%= heading_level %>>
                   <%= link_to page, page.current_permalink_url_in_website(@website) %>
                 </h<%= heading_level %>>
-                <% if block.template.show_description %>
+                <% if block.template.option_summary %>
                   <p><%= page.summary %></p>
                 <% end %>
 
                 <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.pages.layouts.cards.more' %></p>
 
-                <% if block.template.show_image %>
+                <% if block.template.option_image %>
                   <div class="media" itemprop="image">
                     <% if page.featured_image.attached? %>
                       <%= kamifusen_tag page.featured_image %>
@@ -91,20 +91,20 @@
             <% end %>
           </div>
 
-        <% elsif block.template.layout ===  "alternate" %>
+        <% elsif block.template.layout == "alternate" %>
           <div class="alternate">
             <% block.template.selected_pages.each do |page|
               next if page.nil?
             %>
-              <article <% if !block.template.show_image %>class="without-image"<% end %>>
+              <article <% if !block.template.option_image %>class="without-image"<% end %>>
                 <h<%= heading_level %>>
                   <%= link_to page, page.current_permalink_url_in_website(@website) %>
                 </h<%= heading_level %>>
-                <% if block.template.show_description %>
+                <% if block.template.option_summary %>
                   <p><%= page.summary %></p>
                 <% end %>
 
-                <% if block.template.show_image %>
+                <% if block.template.option_image %>
                   <div class="media" itemprop="image">
                     <% if page.featured_image.attached? %>
                       <%= kamifusen_tag page.featured_image %>
@@ -115,7 +115,7 @@
             <% end %>
           </div>
 
-        <% elsif block.template.layout ===  "large" %>
+        <% elsif block.template.layout == "large" %>
           <div class="large">
             <% block.template.selected_pages.each do |page|
               next if page.nil?
@@ -125,13 +125,13 @@
                   <h<%= heading_level %>>
                     <%= link_to page, page.current_permalink_url_in_website(@website) %>
                   </h<%= heading_level %>>
-                  <% if block.template.show_description %>
+                  <% if block.template.option_summary %>
                     <p><%= page.summary %></p>
                     <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.pages.layouts.large.more' %></p>
                   <% end %>
                 </div>
 
-                <% if block.template.show_image %>
+                <% if block.template.option_image %>
                   <div class="media" itemprop="image">
                     <% if page.featured_image.attached? %>
                       <%= kamifusen_tag page.featured_image %>
@@ -151,10 +151,10 @@
                 <h<%= heading_level %>>
                   <%= link_to page, page.current_permalink_url_in_website(@website) %>
                 </h<%= heading_level %>>
-                <% if block.template.show_description %>
+                <% if block.template.option_summary %>
                   <p><%= page.summary %></p>
                 <% end %>
-                <% if block.template.show_image %>
+                <% if block.template.option_image %>
                   <div class="media" itemprop="image">
                     <% if page.featured_image.attached? %>
                       <%= kamifusen_tag page.featured_image %>

@@ -11,9 +11,16 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
   has_component :mode, :option, options: [:selection, :children]
   has_component :text, :rich_text
   has_component :page_id, :page
+  
+  # Deprecated
   has_component :show_main_description, :boolean
   has_component :show_description, :boolean
   has_component :show_image, :boolean
+  # end
+
+  has_component :option_image,        :boolean, default: true
+  has_component :option_main_summary, :boolean, default: true
+  has_component :option_summary,      :boolean, default: true
 
   def page
     page_id_component.page

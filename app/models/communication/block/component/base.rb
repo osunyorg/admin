@@ -4,10 +4,11 @@ class Communication::Block::Component::Base
 
   attr_reader :property, :template
 
-  def initialize(property, template, options = nil)
+  def initialize(property, template, options: nil, default: nil)
     @property = property.to_s
     @template = template
     @options = options
+    @default = default
   end
 
   def default_data

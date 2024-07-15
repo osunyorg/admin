@@ -5,6 +5,7 @@
       category: "<%= block.template.category.path %>"
 <% end %>
       layout: <%= block.template.layout %>
+<%= block_options_static block %>
       projects:
 <% block.template.selected_projects.each do |project| %>
         - slug: "<%= project.slug %>"
