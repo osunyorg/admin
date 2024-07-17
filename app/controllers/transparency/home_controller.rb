@@ -6,7 +6,7 @@ class Transparency::HomeController < Transparency::ApplicationController
       ['Bugsnag', 'Interception d\'erreur (gratuit pour l\'open source)', 0],
       ['CodeClimate', 'Qualité de code (gratuit pour l\'open source)', 0],
       ['Deuxfleurs', 'Hébergement sans data center', 100],
-      ['KeyCDN', 'Redimensionnement des images', 600],
+      ['KeyCDN', 'Redimensionnement des images', 2400],
       ['LanguageTool', 'Aide à la qualité des contenus', 348],
       ['LibreTranslate', 'Aide à  la traduction', 696],
       ['MicroLink', 'Captures d\'écran', 144],
