@@ -14,7 +14,7 @@
   <div class="row">
     <div class="header__info col-md-7">
       <h1><%= @post %></h1>
-      <p class="small">
+      <p class="small mt-2">
         <% if @post.published_at %>
           Publié le <%= l @post.published_at, format: :date_with_explicit_month %>
         <% end %>
