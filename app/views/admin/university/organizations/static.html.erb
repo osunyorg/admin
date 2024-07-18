@@ -13,7 +13,7 @@ cache [@about, organization, @website.id, version] do
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/shared_image/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
-<%= render 'admin/application/connections/backlinks', about: organization %>
+<%= render 'admin/application/connections/backlinks', about: @l10n %>
 <%= render 'admin/application/static/attribute/text', about: @about, key: :long_name %>
 <%= render 'admin/application/static/attribute/text', about: organization, key: :siren %>
 kind:

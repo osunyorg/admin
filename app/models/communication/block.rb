@@ -144,6 +144,7 @@ class Communication::Block < ApplicationRecord
     block
   end
 
+  # TODO L10N: deprecated
   def translate!(about_translation, heading_id = nil)
     translation = self.dup
     translation.about = about_translation

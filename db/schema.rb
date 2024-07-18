@@ -466,10 +466,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_074740) do
     t.boolean "published", default: false
     t.string "featured_image_alt"
     t.text "text"
-    t.text "summary"
     t.string "breadcrumb_title"
     t.text "header_text"
     t.integer "kind"
+    t.text "summary"
     t.string "bodyclass"
     t.uuid "language_id", null: false
     t.text "featured_image_credit"

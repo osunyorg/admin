@@ -42,9 +42,9 @@
           <% end %>
           <%= f.association :author,
                             collection: current_university.people
-                                                          .tmp_original
-                                                          .ordered,
-                            label_method: :to_s_alphabetical %>
+                                                          .tmp_original # TODO L10N: remove
+                                                          .ordered(current_language),
+                            label_method: -> (person) { person.to_s_alphabetical_in(current_language) } %>
           <%= render  "admin/application/slug/form",
                       f: lf,
                       source: '#communication_website_post_localizations_attributes_0_title' %>

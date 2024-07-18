@@ -4,7 +4,7 @@ module Filters
       super(user)
       add_search
       add :for_author,
-          website.authors.ordered,
+          website.authors.ordered(language),
           I18n.t(
             'filters.attributes.element',
             element: I18n.t('activerecord.attributes.communication/website/post.author').downcase

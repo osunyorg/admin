@@ -64,7 +64,6 @@
 #
 class University::Person < ApplicationRecord
   include AsIndirectObject
-  include Backlinkable
   include Contentful # TODO L10N : To remove
   include Permalinkable # TODO L10N : To remove
   include Sanitizable
@@ -270,6 +269,14 @@ class University::Person < ApplicationRecord
     translate_attachment(translation, :picture) if picture.attached?
   end
 
+  def to_s_with_mail_in(language)
+    best_localization_for(language).to_s_with_mail
+  end
+
+  def to_s_alphabetical_in(language)
+    best_localization_for(language).to_s_alphabetical
+  end
+
   protected
 
   def explicit_blob_ids
@@ -280,12 +287,8 @@ class University::Person < ApplicationRecord
     [best_picture&.blob_id]
   end
 
-  def backlinks_blocks(website)
-    website.blocks.persons
-  end
-
   def sanitize_email
     self.email = self.email.to_s.downcase.strip
   end
-  
+
 end

@@ -48,7 +48,6 @@
 #
 class University::Organization < ApplicationRecord
   include AsIndirectObject
-  include Backlinkable
   include Contentful # TODO L10N : To remove
   # include Initials
   include Permalinkable # TODO L10N : To remove
@@ -150,12 +149,6 @@ class University::Organization < ApplicationRecord
     translate_attachment(translation, :logo) if logo.attached?
     translate_attachment(translation, :logo_on_dark_background) if logo_on_dark_background.attached?
     translate_attachment(translation, :shared_image) if shared_image.attached?
-  end
-  
-  protected
-  
-  def backlinks_blocks(website)
-    website.blocks.organizations
   end
 
 end

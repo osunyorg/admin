@@ -36,6 +36,7 @@
 #
 class University::Person::Localization < ApplicationRecord
   include AsLocalization
+  include Backlinkable
   include Contentful
   include Permalinkable
   include Sanitizable
@@ -46,9 +47,9 @@ class University::Person::Localization < ApplicationRecord
   has_summernote :biography
 
   delegate :featured_image, to: :about
-  
+
   validates :first_name, :last_name, presence: true
-  
+
   before_validation :prepare_name
 
   def dependencies
@@ -89,7 +90,11 @@ class University::Person::Localization < ApplicationRecord
   end
 
   protected
-  
+
+  def backlinks_blocks(website)
+    website.blocks.persons
+  end
+
   def prepare_name
     self.name = to_s
   end

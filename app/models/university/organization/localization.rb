@@ -35,6 +35,7 @@
 #
 class University::Organization::Localization < ApplicationRecord
   include AsLocalization
+  include Backlinkable
   include Contentful
   include Initials
   include Permalinkable
@@ -94,6 +95,10 @@ class University::Organization::Localization < ApplicationRecord
     localize_attachment(localization, :logo) if logo.attached?
     localize_attachment(localization, :logo_on_dark_background) if logo_on_dark_background.attached?
     localize_attachment(localization, :shared_image) if shared_image.attached?
+  end
+
+  def backlinks_blocks(website)
+    website.blocks.organizations
   end
 
 end
