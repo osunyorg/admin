@@ -1,4 +1,4 @@
-<% content_for :title, @category %>
+<% content_for :title, @l10n %>
 
 <div class="row">
   <div class="col-lg-8">
@@ -11,7 +11,7 @@
     <% end %>
   </div>
   <div class="col-lg-4">
-    <%= render 'admin/application/i18n/widget', about: @category %>
+    <%= render 'admin/application/i18n/widget', about: @category, l10n: @l10n, small: true %>
   </div>
 </div>
 

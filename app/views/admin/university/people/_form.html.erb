@@ -135,10 +135,9 @@
                     source: '#university_person_localizations_attributes_0_first_name, #university_person_localizations_attributes_0_last_name' %>
           <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
           <% if @categories.any? %>
-          <%# TODO changer le osuny_collection_tree quand les catégories sont localized %>
             <%= f.association :categories,
                               as: :check_boxes,
-                              collection: osuny_collection_tree(@categories, localized: false) %>
+                              collection: osuny_collection_tree(@categories, localized: true) %>
           <% end %>
         <% end %>
         <%= osuny_panel University::Person.human_attribute_name('picture') do %>

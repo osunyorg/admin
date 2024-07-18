@@ -4,11 +4,12 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
                               through_association: :person_categories
 
   include Admin::ActAsCategories
+  include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @root_categories = categories.root
-                                 .in_closest_language_id(current_language.id)
+    @root_categories = @categories.root
+                                 .tmp_original # TODO L10N : To remove
                                  .ordered
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/university/people'
@@ -16,14 +17,8 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   end
 
   def show
-    @people = @category.people.ordered.page(params[:page])
+    @people = @category.people.ordered(current_language).page(params[:page])
     breadcrumb
-  end
-
-  def static
-    @about = @category
-    @website = @category.websites&.first
-    render_as_plain_text
   end
 
   def new
@@ -36,7 +31,6 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   end
 
   def create
-    @category.language_id = current_language.id
     if @category.save
       redirect_to admin_university_person_category_path(@category),
                   notice: t('admin.successfully_created_html', model: @category.to_s)
@@ -84,6 +78,9 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
 
   def category_params
     params.require(:university_person_category).permit(
-      :name).merge(university_id: current_university.id)
+      :parent_id,
+      localizations_attributes: [
+        :id, :name, :slug, :language_id
+      ]).merge(university_id: current_university.id)
   end
 end

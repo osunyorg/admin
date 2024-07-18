@@ -108,8 +108,11 @@ en:
         user: User
         zipcode: Zipcode
       university/person/category:
+        parent: Parent category
+      university/person/category/localization:
         language: Language
         name: Name
+        slug: Slug
       university/person/experience:
         description: Description
         edit: Edit experience

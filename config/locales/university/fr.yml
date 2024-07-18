@@ -108,8 +108,11 @@ fr:
         user: Utilisateur
         zipcode: Code postal
       university/person/category:
+        parent: Catégorie parente
+      university/person/category/localization:
         language: Langue
         name: Nom
+        slug: Slug
       university/person/experience:
         description: Description
         edit: Modifier l'expérience

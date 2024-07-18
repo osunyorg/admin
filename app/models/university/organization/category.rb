@@ -8,7 +8,7 @@
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  language_id   :uuid             not null, indexed
+#  language_id   :uuid             indexed
 #  original_id   :uuid             indexed
 #  parent_id     :uuid             indexed
 #  university_id :uuid             not null, indexed

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_15_131955) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_18_074740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -466,10 +466,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_131955) do
     t.boolean "published", default: false
     t.string "featured_image_alt"
     t.text "text"
+    t.text "summary"
     t.string "breadcrumb_title"
     t.text "header_text"
     t.integer "kind"
-    t.text "summary"
     t.string "bodyclass"
     t.uuid "language_id", null: false
     t.text "featured_image_credit"
@@ -1265,7 +1265,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_131955) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.uuid "original_id"
     t.uuid "parent_id"
     t.integer "position", default: 0
@@ -1273,6 +1273,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_131955) do
     t.index ["original_id"], name: "index_university_organization_categories_on_original_id"
     t.index ["parent_id"], name: "index_university_organization_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_organization_categories_on_university_id"
+  end
+
+  create_table "university_organization_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_f5fce0a0b7"
+    t.index ["language_id"], name: "idx_on_language_id_8e479f2339"
+    t.index ["slug"], name: "index_university_organization_category_localizations_on_slug"
+    t.index ["university_id"], name: "idx_on_university_id_2aaf668550"
   end
 
   create_table "university_organization_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1405,7 +1419,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_131955) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.uuid "original_id"
     t.uuid "parent_id"
     t.integer "position", default: 0
@@ -1413,6 +1427,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_131955) do
     t.index ["original_id"], name: "index_university_person_categories_on_original_id"
     t.index ["parent_id"], name: "index_university_person_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_person_categories_on_university_id"
+  end
+
+  create_table "university_person_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_university_person_category_localizations_on_about_id"
+    t.index ["language_id"], name: "index_university_person_category_localizations_on_language_id"
+    t.index ["slug"], name: "index_university_person_category_localizations_on_slug"
+    t.index ["university_id"], name: "idx_on_university_id_1d7978113b"
   end
 
   create_table "university_person_experiences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1679,6 +1707,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_131955) do
   add_foreign_key "university_organization_categories", "universities"
   add_foreign_key "university_organization_categories", "university_organization_categories", column: "original_id"
   add_foreign_key "university_organization_categories", "university_organization_categories", column: "parent_id"
+  add_foreign_key "university_organization_category_localizations", "languages"
+  add_foreign_key "university_organization_category_localizations", "universities"
+  add_foreign_key "university_organization_category_localizations", "university_organization_categories", column: "about_id"
   add_foreign_key "university_organization_localizations", "languages"
   add_foreign_key "university_organization_localizations", "universities"
   add_foreign_key "university_organization_localizations", "university_organizations", column: "about_id"
@@ -1697,6 +1728,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_131955) do
   add_foreign_key "university_person_categories", "universities"
   add_foreign_key "university_person_categories", "university_person_categories", column: "original_id"
   add_foreign_key "university_person_categories", "university_person_categories", column: "parent_id"
+  add_foreign_key "university_person_category_localizations", "languages"
+  add_foreign_key "university_person_category_localizations", "universities"
+  add_foreign_key "university_person_category_localizations", "university_person_categories", column: "about_id"
   add_foreign_key "university_person_experiences", "universities"
   add_foreign_key "university_person_experiences", "university_organizations", column: "organization_id"
   add_foreign_key "university_person_experiences", "university_people", column: "person_id"

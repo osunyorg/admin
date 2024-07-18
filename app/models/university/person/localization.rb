@@ -47,7 +47,7 @@ class University::Person::Localization < ApplicationRecord
 
   delegate :featured_image, to: :about
   
-  validates_presence_of :first_name, :last_name
+  validates :first_name, :last_name, presence: true
   
   before_validation :prepare_name
 
@@ -83,10 +83,9 @@ class University::Person::Localization < ApplicationRecord
     persisted?
   end
 
+  # user in statics where we don't need the cateogries not localized
   def categories
-    about.categories.ordered
-    # TODO: remettre quand les categories sont localized
-    # about.categories.ordered.map { |category| category.localization_for(language) }.compact
+    about.categories.ordered.map { |category| category.localization_for(language) }.compact
   end
 
   protected

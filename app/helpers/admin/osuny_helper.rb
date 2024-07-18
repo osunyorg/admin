@@ -73,7 +73,6 @@ module Admin::OsunyHelper
     l10n = object.localization_for(current_language)
     if l10n.present?
       name = l10n.to_s
-      classes += ' text-black'
       alert = ''
     else
       name = object.original_localization.to_s
@@ -88,7 +87,6 @@ module Admin::OsunyHelper
     classes = stretched ? 'stretched-link ' : ''
     if l10n.present?
       name = l10n.to_s
-      classes += 'text-black'
       alert = ''
     else
       name = object.original_localization.to_s

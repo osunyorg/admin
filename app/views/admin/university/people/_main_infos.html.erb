@@ -21,8 +21,11 @@
       <%= osuny_panel University::Person.human_attribute_name('categories'), small: true do %>
         <ul class="list-unstyled">
           <% person.categories.ordered.each do |category| %>
-            <%# TODO changer le label quand les catégories sont localized %>
-            <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
+            <li>
+              <%= osuny_link_localized_if can?(:read, category),
+                                          category,
+                                          [:admin, category] %>
+            </li>
           <% end %>
         </ul>
       <% end %>
