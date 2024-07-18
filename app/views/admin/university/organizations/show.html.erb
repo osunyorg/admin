@@ -67,17 +67,21 @@
       <%= osuny_property_show_boolean @organization, :active %>
     <% end %>
 
-    <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
-
-    <% if @organization.categories.any? %>
-      <%= osuny_panel University::Organization.human_attribute_name('categories') do %>
+     <% if @organization.categories.any? %>
+      <%= osuny_panel University::Organization.human_attribute_name('categories'), small: true do %>
         <ul class="list-unstyled">
           <% @organization.categories.ordered.each do |category| %>
-            <li><%= link_to_if can?(:read, category), category, [:admin, category] %></li>
+            <li>
+              <%= osuny_link_localized_if can?(:read, category),
+                                          category,
+                                          [:admin, category] %>
+            </li>
           <% end %>
         </ul>
       <% end %>
     <% end %>
+
+    <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
 
     <%= osuny_panel t('university.organization.logo') do %>
       <% if @l10n.logo.attached? %>

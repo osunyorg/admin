@@ -18,9 +18,7 @@
                       source: '#university_person_category_localizations_attributes_0_name' %>
           <%= f.association :parent,
                             collection: osuny_collection_tree(
-                              current_university.university_person_categories
-                                                .tmp_original # TODO L10N : To remove
-                                                .ordered,
+                              @categories,
                               except: category,
                               localized: true
                             ) %>

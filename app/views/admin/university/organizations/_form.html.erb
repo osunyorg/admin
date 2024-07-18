@@ -80,16 +80,10 @@
                       f: lf,
                       source: '#university_organization_localizations_attributes_0_name' %>
           <%= f.input :active %>
-          <%
-          categories = current_university.organization_categories
-                                        .tmp_original
-                                        .root
-                                        .ordered
-          if categories.any?
-          %>
+          <% if @categories.any? %>
             <%= f.association :categories,
                               as: :check_boxes,
-                              collection: collection_tree_for_checkboxes(categories) %>
+                              collection: osuny_collection_tree(@categories, localized: true) %>
           <% end %>
         <% end %>
         <%= osuny_panel University::Organization.human_attribute_name('logos') do %>

@@ -119,7 +119,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def categories
-    current_university.university_person_categories
+    current_university.person_categories
                       .tmp_original # TODO L10N : To remove
                       .ordered
   end

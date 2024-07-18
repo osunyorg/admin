@@ -42,10 +42,12 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def new
+    @categories = categories
     breadcrumb
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb t('edit')
   end
@@ -55,6 +57,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_created_html', model: @organization.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -65,6 +68,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_updated_html', model: @organization.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
     end
@@ -99,5 +103,11 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
               :language_id
             ]
           )
+  end
+
+  def categories
+    current_university.organization_categories
+                      .tmp_original # TODO L10N : To remove
+                      .ordered
   end
 end

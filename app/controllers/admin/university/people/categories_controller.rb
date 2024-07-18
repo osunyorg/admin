@@ -22,10 +22,12 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   end
 
   def new
+    @categories = categories
     breadcrumb
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb t('edit')
   end
@@ -35,6 +37,7 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
       redirect_to admin_university_person_category_path(@category),
                   notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -45,6 +48,7 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
       redirect_to admin_university_person_category_path(@category),
                   notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -64,7 +68,9 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   end
 
   def categories
-    current_university.person_categories.ordered
+    current_university.person_categories
+                      .tmp_original # TODO L10N : To remove
+                      .ordered
   end
 
   def breadcrumb
