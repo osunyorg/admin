@@ -4,11 +4,12 @@ class Admin::University::Organizations::CategoriesController < Admin::University
                               through_association: :organization_categories
 
   include Admin::ActAsCategories
+  include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
     @root_categories = categories.root
-                                 .in_closest_language_id(current_language.id)
+                                 .tmp_original # TODO L10N : To remove
                                  .ordered
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/university/organizations'
@@ -16,14 +17,8 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   end
 
   def show
-    @organizations = @category.organizations.ordered.page(params[:page])
+    @organizations = @category.organizations.ordered(current_language).page(params[:page])
     breadcrumb
-  end
-
-  def static
-    @about = @category
-    @website = @category.websites&.first
-    render_as_plain_text
   end
 
   def new
@@ -36,10 +31,9 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   end
 
   def create
-    @category.language_id = current_language.id
     if @category.save
       redirect_to admin_university_organization_category_path(@category),
-                  notice: t('admin.successfully_created_html', model: @category.to_s)
+                  notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -49,7 +43,7 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   def update
     if @category.update(category_params)
       redirect_to admin_university_organization_category_path(@category),
-                  notice: t('admin.successfully_updated_html', model: @category.to_s)
+                  notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -60,7 +54,7 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   def destroy
     @category.destroy
     redirect_to admin_university_organization_categories_path,
-                notice: t('admin.successfully_destroyed_html', model: @category.to_s)
+                notice: t('admin.successfully_destroyed_html', model: @category.to_s_in(current_language))
   end
 
   protected
@@ -83,8 +77,10 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   end
 
   def category_params
-    params.require(:university_organization_category)
-          .permit(:name)
-          .merge(university_id: current_university.id)
+    params.require(:university_organization_category).permit(
+      :parent_id,
+      localizations_attributes: [
+        :id, :name, :slug, :language_id
+      ]).merge(university_id: current_university.id)
   end
 end

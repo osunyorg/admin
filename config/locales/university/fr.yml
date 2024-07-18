@@ -44,8 +44,12 @@ fr:
         siren: Numéro de SIREN
         zipcode: Code postal
       university/organization/category:
+        children: Catégories enfantes
+        parent: Catégorie parente
+      university/organization/category/localization:
         language: Langue
         name: Nom
+        slug: Slug
       university/organization/localization:
         address_additional: Complément d'adresse
         address_name: Nom de l'adresse
@@ -108,6 +112,7 @@ fr:
         user: Utilisateur
         zipcode: Code postal
       university/person/category:
+        children: Catégories enfantes
         parent: Catégorie parente
       university/person/category/localization:
         language: Langue

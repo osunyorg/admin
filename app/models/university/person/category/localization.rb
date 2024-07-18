@@ -42,7 +42,6 @@ class University::Person::Category::Localization < ApplicationRecord
 
   def git_path(website)
     "#{git_path_content_prefix(website)}persons_categories/#{slug}/_index.html" if for_website?(website)
-    git_path_content_prefix(website) + git_path_relative
   end
 
   def template_static

@@ -29,12 +29,9 @@
 #
 class University::Organization::Category < ApplicationRecord
   include AsIndirectObject
-  include Contentful
-  include Initials
-  include Permalinkable
-  include Sluggable
+  include Contentful # TODO L10N : To remove
+  include Permalinkable # TODO L10N : To remove
   include Localizable
-  include WithGitFiles
   include WithPosition
   include WithTree
   include WithUniversity
@@ -50,26 +47,8 @@ class University::Organization::Category < ApplicationRecord
                           class_name: 'University::Organization',
                           join_table: :university_organizations_categories
 
-  validates :name, presence: true
-
-  def git_path(website)
-    git_path_content_prefix(website) + git_path_relative
-  end
-
-  def git_path_relative
-    "organizations_categories/#{slug}/_index.html"
-  end
-
-  def template_static
-    "admin/university/organizations/categories/static"
-  end
-
-  def to_s
-    "#{name}"
-  end
-
   def dependencies
-    contents_dependencies
+    localizations
   end
 
   def references

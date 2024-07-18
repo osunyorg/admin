@@ -25,6 +25,35 @@
 #  fk_rails_dca0802d2f  (language_id => languages.id)
 #
 class University::Organization::Category::Localization < ApplicationRecord
-  
+  include AsLocalization
+  include Contentful
+  include Initials
+  include Permalinkable
+  include Sanitizable
+  include Sluggable
+  include WithGitFiles
+  include WithUniversity
+
+  validates :name, presence: true
+
+  def dependencies
+    contents_dependencies
+  end
+
+  def git_path(website)
+    "#{git_path_content_prefix(website)}organizations_categories/#{slug}/_index.html" if for_website?(website)
+  end
+
+  def template_static
+    "admin/university/organizations/categories/static"
+  end
+
+  def to_s
+    "#{name}"
+  end
+
+  def published?
+    persisted?
+  end
 
 end

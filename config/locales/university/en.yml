@@ -44,8 +44,12 @@ en:
         siren: Legal identification number
         zipcode: Zipcode
       university/organization/category:
+        children: Children categories
+        parent: Parent category
+      university/organization/category/localization:
         language: Language
         name: Name
+        slug: Slug
       university/organization/localization:
         address_additional: Additional address
         address_name: Address name
@@ -108,6 +112,7 @@ en:
         user: User
         zipcode: Zipcode
       university/person/category:
+        children: Children categories
         parent: Parent category
       university/person/category/localization:
         language: Language

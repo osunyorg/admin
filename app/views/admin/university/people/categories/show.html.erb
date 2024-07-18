@@ -2,6 +2,29 @@
 
 <div class="row">
   <div class="col-lg-8">
+    <%= osuny_panel t('metadata') do %>
+      <% if @category.parent %>
+        <%= osuny_label University::Person::Category.human_attribute_name('parent') %>
+        <p>
+          <%= osuny_link_localized_if can?(:read, @category.parent),
+                                      @category.parent,
+                                      admin_university_person_category_path(@category.parent.id) %>
+        </p>
+      <% end %>
+      <% if @category.children.any? %>
+        <%= osuny_label University::Person::Category.human_attribute_name('children') %>
+        <ul class="list-unstyled mb-0">
+          <% @category.children.each do |child| %>
+            <li>
+              <%= osuny_link_localized_if can?(:read, child),
+                                          child,
+                                          admin_university_person_category_path(child.id) %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end if @category.parent.present? || @category.children.any? %>
+
     <% if @people.total_count > 0 %>
       <%= osuny_panel University::Person.model_name.human(count: 2),
                       subtitle: "#{@people.total_count} #{University::Person.model_name.human(count: @people.total_count).downcase }" do %>

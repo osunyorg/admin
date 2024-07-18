@@ -7,23 +7,27 @@
     <%= osuny_panel t('metadata') do %>
       <% if @category.parent %>
         <%= osuny_label Communication::Website::Post::Category.human_attribute_name('parent') %>
-        <p><%= osuny_link_localized_if  can?(:read, @category.parent),
-                                        @category.parent,
-                                        admin_communication_website_post_category_path(
-                                          website_id: @website.id,
-                                          id: @category.parent.id
-                                        ) %></p>
+        <p>
+          <%= osuny_link_localized_if can?(:read, @category.parent),
+                                      @category.parent,
+                                      admin_communication_website_post_category_path(
+                                        website_id: @website.id,
+                                        id: @category.parent.id
+                                      ) %>
+        </p>
       <% end %>
       <% if @category.children.any? %>
         <%= osuny_label Communication::Website::Post::Category.human_attribute_name('children') %>
         <ul class="list-unstyled mb-0">
           <% @category.children.each do |child| %>
-            <li><%= osuny_link_localized_if can?(:read, child),
-                                            child,
-                                            admin_communication_website_post_category_path(
-                                              website_id: @website.id,
-                                              id: child.id
-                                            ) %></li>
+            <li>
+              <%= osuny_link_localized_if can?(:read, child),
+                                          child,
+                                          admin_communication_website_post_category_path(
+                                            website_id: @website.id,
+                                            id: child.id
+                                          ) %>
+            </li>
           <% end %>
         </ul>
       <% end %>

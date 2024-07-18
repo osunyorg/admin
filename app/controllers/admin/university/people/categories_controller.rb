@@ -8,7 +8,7 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   include Admin::Localizable
 
   def index
-    @root_categories = @categories.root
+    @root_categories = categories.root
                                  .tmp_original # TODO L10N : To remove
                                  .ordered
     @categories_class = categories_class
@@ -33,7 +33,7 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   def create
     if @category.save
       redirect_to admin_university_person_category_path(@category),
-                  notice: t('admin.successfully_created_html', model: @category.to_s)
+                  notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -43,7 +43,7 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   def update
     if @category.update(category_params)
       redirect_to admin_university_person_category_path(@category),
-                  notice: t('admin.successfully_updated_html', model: @category.to_s)
+                  notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -54,7 +54,7 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   def destroy
     @category.destroy
     redirect_to admin_university_person_categories_path,
-                notice: t('admin.successfully_destroyed_html', model: @category.to_s)
+                notice: t('admin.successfully_destroyed_html', model: @category.to_s_in(current_language))
   end
 
   protected
