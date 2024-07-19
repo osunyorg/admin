@@ -9,10 +9,4 @@ class Communication::Block::Component::Event < Communication::Block::Component::
     [event]
   end
 
-  def translate!
-    return unless website && data.present?
-    source_event = website.pages.find_by(id: data)
-    @data = source_event.find_or_translate!(template.language).id if source_event.present?
-  end
-
 end

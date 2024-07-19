@@ -8,7 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    RefactorOptionsJob.perform_later
+    MigrateBlocksTargetJob.perform_later
   end
 
   namespace :websites do
