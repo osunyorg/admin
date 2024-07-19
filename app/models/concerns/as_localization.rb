@@ -12,9 +12,9 @@ module AsLocalization
     before_validation :set_university
   end
 
-  # Used by Hugo to link translations with themselves
+  # Used by Hugo to link localizations with themselves
   # communication-website-post-25bf629a-27ef-40b6-bb61-4fd0a984e08d
-  def static_translation_key
+  def static_localization_key
     "#{about.class.polymorphic_name.parameterize}-#{self.about_id}"
   end
 
@@ -42,7 +42,7 @@ module AsLocalization
     localize_attachment(l10n, :featured_image) if try(:featured_image)&.attached?
     localize_other_attachments(l10n)
 
-    # Blocks need an about, so we save before translating blocks
+    # Blocks need an about, so we save before localizing blocks
     l10n.save
 
     # Handle headings & blocks if object has any
@@ -67,11 +67,11 @@ module AsLocalization
 
   def localize_contents!(localization)
     blocks.without_heading.ordered.each do |block|
-      block.translate!(localization)
+      block.localize_for!(localization)
     end
 
     headings.root.ordered.each do |heading|
-      heading.translate!(localization)
+      heading.localize_for!(localization)
     end
   end
 

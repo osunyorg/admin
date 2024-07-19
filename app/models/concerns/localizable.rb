@@ -94,95 +94,20 @@ module Localizable
   # TODO L10N : to remove
   ### DEPRECATED METHODS - has to be removed when cleaning L10N
 
-  # This is supposed to be overwritten in model
-  # Declare dependencies and their relations with the object
-  # [
-  #   { relation: :programs, list: programs },
-  #   { relation: :author, object: author }
-  # ]
-  def translatable_relations
-    []
-  end
-
-  def find_or_translate!(language)
-    translation = translation_for(language)
-    translation ||= translate!(language)
-    translation
-  end
-
-  def translation_for(language)
-    # If the requested language is the object language, we return itself
-    return self if language_id == language.id
-    # All translations share the same original.
-    # If the current object is a translation, we call translation_for on the original.
-    # Else, if the current object is the original, we search the translation with the language.
-    original_id.present?  ? original.translation_for(language)
-                          : translations.find_by(language_id: language.id)
-  end
-
-  def original_object
-    @original_object ||= (self.original || self)
-  end
-
-  def original_language
-    @original_language ||= original_object.language
-  end
-
-  def is_a_translation?
-    self.original.present?
-  end
-
-  def is_in_language?(l)
-    language.id == l.id
-  end
-
-  # deprecated for localize_in(language)
-  def translate!(language)
-    translation = self.dup
-
-    # Inherits from original_id or set it to itself
-    translation.assign_attributes(
-      original_id: original_object.id,
-      language_id: language.id,
-      newly_translated: true
-    )
-
-    # Handle publication
-    translation.published = false if respond_to?(:published)
-    # Translate parent if needed
-    translation.parent_id = translate_parent!(language)&.id if respond_to?(:parent_id)
-    # Handle featured image if object has one
-    translate_attachment(translation, :featured_image) if respond_to?(:featured_image) && featured_image.attached?
-    translate_other_attachments(translation)
-    # Handle relations (programs, author, schools...)
-    translate_relations!(translation)
-    translation.save
-    # Handle headings & blocks if object has any
-    translate_contents!(translation) if respond_to?(:contents)
-
-    translation
-  end
-
-
-  # deprecated
-  def translate_parent!(language)
-    return nil if parent_id.nil?
-    parent.find_or_translate!(language)
-  end
-
-  # deprecated
+  # TODO L10N : Used in migration, to remove
   def translate_contents!(translation)
     blocks.without_heading.ordered.each do |block|
-      block.translate!(translation)
+      block.localize_for!(translation)
     end
 
     headings.root.ordered.each do |heading|
-      heading.translate!(translation)
+      heading.localize_for!(translation)
     end
   end
 
   # deprecated
   # Utility method to duplicate attachments
+  # TODO L10N : Used in migration (via translate_other_attachments), to remove
   def translate_attachment(translation, attachment_name)
     translation.public_send(attachment_name).attach(
       io: URI.open(public_send(attachment_name).url),
@@ -195,35 +120,8 @@ module Localizable
 
   # deprecated
   # can be overwritten in model
+  # TODO L10N : Used in migration, to remove
   def translate_other_attachments(translation)
   end
-
-  # deprecated
-  def translate_relations!(translation)
-    translatable_relations.each do |hash|
-      # Single or multiple: programs, author
-      relation_name = hash[:relation]
-      # Array of objects or single object
-      association = association_in_correct_language(hash, translation.language)
-      translation.public_send("#{relation_name}=", association)
-    end
-  end
-
-  # deprecated
-  def ensure_translatable_relations_are_in_correct_language
-    translate_relations!(self)
-  end
-
-  # deprecated
-  def association_in_correct_language(hash, language)
-    if hash.has_key?(:list)
-      # association is an array (has_many, habtm, ...)
-      hash[:list].map { |object| object.find_or_translate!(language) }
-    else
-      # association can be an object (has_one, belongs_to)
-      hash[:object].find_or_translate!(language) if hash[:object].present?
-    end
-  end
-
 
 end

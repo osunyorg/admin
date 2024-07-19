@@ -173,16 +173,6 @@ class Education::Program < ApplicationRecord
     [diploma]
   end
 
-  def translatable_relations
-    [
-      { relation: :parent, object: parent },
-      { relation: :diploma, object: diploma },
-      { relation: :schools, list: schools },
-      { relation: :university_roles, list: university_roles },
-      { relation: :university_person_involvements, list: university_person_involvements }
-    ]
-  end
-
   def references
     references = schools + siblings + descendants
     references << parent if parent.present?
@@ -252,5 +242,5 @@ class Education::Program < ApplicationRecord
   def move_children
     children.update(parent_id: parent_id)
   end
-  
+
 end

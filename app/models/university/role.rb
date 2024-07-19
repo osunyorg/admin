@@ -38,12 +38,6 @@ class University::Role < ApplicationRecord
   has_many :people, through: :involvements
 
   accepts_nested_attributes_for :involvements, reject_if: :all_blank, allow_destroy: true
-  
-  def translatable_relations
-    [
-      { relation: :involvements, list: involvements }
-    ]
-  end
 
   def to_s
     "#{description}"
@@ -58,5 +52,5 @@ class University::Role < ApplicationRecord
   def last_ordered_element
     self.class.unscoped.where(university_id: university_id, target: target).ordered.last
   end
-  
+
 end

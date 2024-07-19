@@ -229,12 +229,6 @@ class University::Person < ApplicationRecord
     active_storage_blobs
   end
 
-  def translatable_relations
-    [
-      { relation: :categories, list: categories }
-    ]
-  end
-
   def references
     [administrator, author, researcher, teacher]
   end

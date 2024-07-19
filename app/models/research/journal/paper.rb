@@ -47,7 +47,6 @@ class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
   include Contentful
   include Permalinkable
-  include RelationsLanguageIntegrity
   include Sanitizable
   include Sluggable
   include WithBlobs

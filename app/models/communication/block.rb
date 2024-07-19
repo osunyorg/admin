@@ -122,14 +122,6 @@ class Communication::Block < ApplicationRecord
     @language ||= about.respond_to?(:language) ? about.language : about.university.default_language
   end
 
-  def is_a_translation?
-    about.respond_to?(:is_a_translation?) && about.is_a_translation?
-  end
-
-  def original_language
-    about.try(:original_language)
-  end
-
   def duplicate
     block = self.dup
     block.save
@@ -144,13 +136,10 @@ class Communication::Block < ApplicationRecord
     block
   end
 
-  # TODO L10N: deprecated
-  def translate!(about_translation, heading_id = nil)
+  def localize_in!(new_localization, localized_heading_id = nil)
     translation = self.dup
-    translation.about = about_translation
-    translation.template.translate!
-    translation.data = translation.template.data
-    translation.heading_id = heading_id
+    translation.about = new_localization
+    translation.heading_id = localized_heading_id
     translation.save
   end
 

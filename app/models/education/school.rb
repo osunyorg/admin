@@ -88,13 +88,6 @@ class Education::School < ApplicationRecord
     researchers.map(&:researcher)
   end
 
-  def translatable_relations
-    [
-      { relation: :programs, list: programs },
-      { relation: :university_roles, list: university_roles }
-    ]
-  end
-
   #####################
   # WebsitesLinkable methods
   #####################
@@ -114,5 +107,5 @@ class Education::School < ApplicationRecord
       logo&.blob_id
     ]
   end
-  
+
 end

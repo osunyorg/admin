@@ -55,12 +55,6 @@ class University::Person::Involvement < ApplicationRecord
   }
   scope :ordered_by_date, -> { order(:created_at) }
 
-  def translatable_relations
-    [
-      { relation: :person, object: person }
-    ]
-  end
-
   def to_s
     "#{person}"
   end
