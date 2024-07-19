@@ -44,10 +44,10 @@ module Communication::Website::Permalink::WithMapping
       "University::Organization::Category::Localization" => Communication::Website::Permalink::Organization::Category,
       "University::Person::Localization" => Communication::Website::Permalink::Person,
       "University::Person::Category::Localization" => Communication::Website::Permalink::Person::Category,
-      # "University::Person::Administrator::Localization" => Communication::Website::Permalink::Administrator,
-      # "University::Person::Author::Localization" => Communication::Website::Permalink::Author,
-      # "University::Person::Researcher::Localization" => Communication::Website::Permalink::Researcher,
-      # "University::Person::Teacher::Localization" => Communication::Website::Permalink::Teacher
+      "University::Person::Administrator::Localization" => Communication::Website::Permalink::Administrator,
+      "University::Person::Author::Localization" => Communication::Website::Permalink::Author,
+      "University::Person::Researcher::Localization" => Communication::Website::Permalink::Researcher,
+      "University::Person::Teacher::Localization" => Communication::Website::Permalink::Teacher
     }
 
     def self.for_object(object, website)

@@ -219,48 +219,35 @@ class University::Person < ApplicationRecord
 
   def roles
     LIST_OF_ROLES.reject do |role|
-      ! send "is_#{role}"
+      !public_send("is_#{role}")
     end
   end
 
   def dependencies
-    contents_dependencies +
+    localizations +
     categories +
     active_storage_blobs
   end
 
-  def references
-    [administrator, author, researcher, teacher]
+  def administrator_facets
+    @administrator_facets ||= University::Person::Localization::Administrator.where(id: localization_ids)
   end
 
-  def person
-    @person ||= University::Person.find(id)
+  def author_facets
+    @author_facets ||= University::Person::Localization::Author.where(id: localization_ids)
   end
 
-  def administrator
-    @administrator ||= University::Person::Administrator.find(id)
+  def researcher_facets
+    @researcher_facets ||= University::Person::Localization::Researcher.where(id: localization_ids)
   end
 
-  def author
-    @author ||= University::Person::Author.find(id)
-  end
-
-  def researcher
-    @researcher ||= University::Person::Researcher.find(id)
-  end
-
-  def teacher
-    @teacher ||= University::Person::Teacher.find(id)
+  def teacher_facets
+    @teacher_facets ||= University::Person::Localization::Teacher.where(id: localization_ids)
   end
 
   def full_street_address
     return nil if [address, zipcode, city].all?(&:blank?)
     [address, "#{zipcode} #{city} #{country}".strip].join(', ')
-  end
-
-  # TODO L10N : to remove
-  def translate_other_attachments(translation)
-    translate_attachment(translation, :picture) if picture.attached?
   end
 
   def to_s_with_mail_in(language)
@@ -269,6 +256,11 @@ class University::Person < ApplicationRecord
 
   def to_s_alphabetical_in(language)
     best_localization_for(language).to_s_alphabetical
+  end
+
+  # TODO L10N : to remove
+  def translate_other_attachments(translation)
+    translate_attachment(translation, :picture) if picture.attached?
   end
 
   protected

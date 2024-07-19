@@ -94,10 +94,13 @@ class Communication::Website::Post < ApplicationRecord
   }
 
   def dependencies
-    localizations +
-    categories +
-    [author&.author] +
-    [website.config_default_content_security_policy]
+    calculated_dependencies = (
+      localizations +
+      categories +
+      [website.config_default_content_security_policy]
+    )
+    calculated_dependencies += author.author_facets if author.present?
+    calculated_dependencies
   end
 
   def references

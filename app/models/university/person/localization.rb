@@ -52,8 +52,32 @@ class University::Person::Localization < ApplicationRecord
 
   before_validation :prepare_name
 
+  def localization
+    @localization ||= University::Person::Localization.find(id)
+  end
+
+  def administrator
+    @administrator ||= University::Person::Localization::Administrator.find(id)
+  end
+
+  def author
+    @author ||= University::Person::Localization::Author.find(id)
+  end
+
+  def researcher
+    @researcher ||= University::Person::Localization::Researcher.find(id)
+  end
+
+  def teacher
+    @teacher ||= University::Person::Localization::Teacher.find(id)
+  end
+
   def dependencies
     contents_dependencies
+  end
+
+  def references
+    [administrator, author, researcher, teacher]
   end
 
   def git_path(website)
