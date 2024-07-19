@@ -60,7 +60,7 @@ end
                   <% end %>
                   <% if !hide_author && post.author %>
                     <span class="ms-3">
-                      <%= post.author %>
+                      <%= post.author.to_s_in(current_language) %>
                     </span>
                   <% end %>
                   <% if published_at = post.published_at_in(current_language) %>
