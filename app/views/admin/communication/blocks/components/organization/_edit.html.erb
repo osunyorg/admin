@@ -1,6 +1,6 @@
 <% organizations = current_university.organizations
-                                     .tmp_original
-                                     .ordered %>
+                                     .tmp_original # TODO L10N : remove
+                                     .ordered(block.language) %>
 <% unless label.blank? %>
   <label  class="form-label"
           :for="<%= dom_id.html_safe %>">
@@ -15,7 +15,7 @@
   </option>
   <% organizations.each do |organization| %>
     <option value="<%= organization.id %>">
-      <%= organization.name %>
+      <%= organization.to_s_in(block.language) %>
     </option>
   <% end %>
 </select>

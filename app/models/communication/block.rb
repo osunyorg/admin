@@ -136,11 +136,11 @@ class Communication::Block < ApplicationRecord
     block
   end
 
-  def localize_in!(new_localization, localized_heading_id = nil)
-    translation = self.dup
-    translation.about = new_localization
-    translation.heading_id = localized_heading_id
-    translation.save
+  def localize_for!(new_localization, localized_heading_id = nil)
+    localized_block = self.dup
+    localized_block.about = new_localization
+    localized_block.heading_id = localized_heading_id
+    localized_block.save
   end
 
   def empty?

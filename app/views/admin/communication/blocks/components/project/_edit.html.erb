@@ -1,4 +1,8 @@
-<% projects = block.about&.website.projects.for_language(block.language).ordered %>
+<% projects = block.about
+                   .website
+                   .projects
+                   .tmp_original # TODO L10N : remove
+                   .ordered %>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>
@@ -10,6 +14,7 @@
     <option value="" disabled><%= placeholder %></option>
   <% end %>
   <% projects.each do |project| %>
+    <%# TODO L10N : doit devenir to_s_in(block.language) %>
     <option value="<%= project.id %>"><%= project.title %></option>
   <% end %>
 </select>

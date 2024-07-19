@@ -1,4 +1,7 @@
-<% events = block.about&.website.events.for_language(block.language).ordered %>
+<% events = block.about&
+                 .website.events
+                 .tmp_original # TODO L10N : remove
+                 .ordered %>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>
@@ -11,6 +14,7 @@
   <% end %>
   <% events.each do |event| %>
     <option value="<%= event.id %>">
+      <%# TODO L10N : doit devenir to_s_in(block.language) %>
       <%= event.title %>
       <% if event.subtitle.present? %>
         - <%= event.subtitle %>

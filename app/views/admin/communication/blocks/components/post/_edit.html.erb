@@ -1,4 +1,8 @@
-<% posts = block.about&.website.posts.for_language(block.language).ordered %>
+<% posts = block.about&
+                .website
+                .posts
+                .tmp_original # TODO L10N : remove
+                .ordered(block.language) %>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>
@@ -10,6 +14,6 @@
     <option value="" disabled><%= placeholder %></option>
   <% end %>
   <% posts.each do |post| %>
-    <option value="<%= post.id %>"><%= post.title %></option>
+    <option value="<%= post.id %>"><%= post.to_s_in(block.language) %></option>
   <% end %>
 </select>
