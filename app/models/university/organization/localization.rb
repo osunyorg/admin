@@ -41,7 +41,6 @@ class University::Organization::Localization < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Shareable
-  include Sluggable
   include WithBlobs
   include WithGitFiles
   include WithUniversity

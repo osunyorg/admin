@@ -55,10 +55,9 @@ class Communication::Website::Page < ApplicationRecord
   include AsDirectObject
   include Contentful
   include Initials
-  include Permalinkable
+  include Permalinkable # We override slug_unavailable? method (and set_slug and skip_slug_validation? in Page::Home)
   include Sanitizable
   include Shareable
-  include Sluggable # We override slug_unavailable? method (and set_slug and skip_slug_validation? in Page::Home)
   include Localizable
   include WithAccessibility
   include WithAutomaticMenus

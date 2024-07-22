@@ -1,4 +1,4 @@
-<% content_for :title, @website %>
+<% content_for :title, @l10n %>
 
 <% content_for :title_left do %>
   <%= render 'admin/application/favorites/widget', about: @website %>
@@ -6,6 +6,7 @@
   <div class="small">
     <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
     <% if @website.about %>
+      <%# TODO L10N : To adapt with osuny_link_localized when about is localizable %>
       (<%= link_to_if can?(:read, @website.about),
                       @website.about,
                       [:admin, @website.about] unless @website.about.nil? %>)
@@ -44,7 +45,7 @@ number_of_panels = 0
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @website %>
-  <%= static_link static_admin_communication_website_path(@website) %>
+  <%= static_link static_admin_communication_website_path(@website, website_id: nil) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

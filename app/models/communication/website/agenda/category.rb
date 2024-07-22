@@ -43,10 +43,10 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   include AsDirectObject
   include Contentful
   include Initials
-  include Permalinkable
+  include Permalinkable # We override slug_unavailable? method
   include Sanitizable
   include Localizable
-  include Sluggable # We override slug_unavailable? method
+  # Deprecated
   include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WithBlobs
   include WithFeaturedImage

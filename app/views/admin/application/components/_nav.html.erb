@@ -1,8 +1,6 @@
 <%
-languages = (@website && @website.persisted?) ? @website.languages.ordered
-                                              : current_university.languages.ordered
+languages = current_university.languages.ordered
 %>
-
 <nav class="navbar navbar-main navbar-dark bg-black p-2" aria-label="Navigation">
   <button class="btn btn--main"
           type="button"

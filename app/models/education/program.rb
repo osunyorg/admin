@@ -69,7 +69,6 @@ class Education::Program < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Shareable
-  include Sluggable
   include Localizable
   include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WebsitesLinkable

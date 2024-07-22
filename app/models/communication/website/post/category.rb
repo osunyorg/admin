@@ -43,10 +43,8 @@
 class Communication::Website::Post::Category < ApplicationRecord
   include AsDirectObject
   include Contentful # TODO L10N : To remove
-  # include Initials
   include Permalinkable # TODO L10N : To remove
   include Sanitizable
-  # include Sluggable
   include Localizable
   include Pathable # Included after Sluggable to make sure slug is correct before anything # TODO L10N : To remove
   include WithBlobs # TODO L10N : To remove

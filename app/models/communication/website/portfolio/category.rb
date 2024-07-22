@@ -40,9 +40,8 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
   include AsDirectObject
   include Contentful
   include Initials
-  include Permalinkable
+  include Permalinkable # We override slug_unavailable? method
   include Sanitizable
-  include Sluggable # We override slug_unavailable? method
   include Localizable
   include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WithBlobs

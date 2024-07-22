@@ -40,7 +40,6 @@ class University::Person::Localization < ApplicationRecord
   include Contentful
   include Permalinkable
   include Sanitizable
-  include Sluggable
   include WithGitFiles
   include WithUniversity
 

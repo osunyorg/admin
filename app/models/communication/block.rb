@@ -49,6 +49,7 @@ class Communication::Block < ApplicationRecord
 
   # We do not use the :touch option of the belongs_to association
   # because we do not want to touch the about when destroying the block.
+  # TODO L10N : now the about.about should be touch to invalidate cache
   after_save :touch_about#, :touch_targets # FIXME
 
   # Les numéros sont un peu en vrac

@@ -10,7 +10,6 @@ module AsDirectObject
   included do
     include WithDependencies
     include WithGit
-    include WithGitFiles
     include WithReferences
 
     belongs_to :website,

@@ -74,7 +74,6 @@ class University::Person < ApplicationRecord
   include WithRoles
   include WithEducation
   include WithExperiences
-  # include WithGitFiles # TODO L10N : To remove
   include WithPersonalData
   include WithPicture
   include WithResearch

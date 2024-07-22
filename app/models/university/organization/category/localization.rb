@@ -30,7 +30,6 @@ class University::Organization::Category::Localization < ApplicationRecord
   include Initials
   include Permalinkable
   include Sanitizable
-  include Sluggable
   include WithGitFiles
   include WithUniversity
 

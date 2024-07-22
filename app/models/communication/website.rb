@@ -64,6 +64,7 @@ class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
   include Favoritable
+  include Localizable
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs
@@ -75,13 +76,12 @@ class Communication::Website < ApplicationRecord
   include WithFeaturePortfolio
   include WithGit
   include WithGitRepository
-  include WithLanguages
   include WithLock
   include WithManagers
   include WithProgramCategories
   include WithReferences
-  include WithSpecialPages
-  include WithMenus # Menus must be created after special pages, so we can fill legal menu
+  # include WithSpecialPages
+  # include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithScreenshot
   include WithSecurity
   include WithShowcase
@@ -94,13 +94,16 @@ class Communication::Website < ApplicationRecord
     gitlab: 1
   }
 
-  has_one_attached_deletable :default_image
-  validates :default_image, size: { less_than: 5.megabytes }
+  belongs_to :default_language, class_name: "Language"
 
+  has_one_attached_deletable :default_image
   has_one_attached_deletable :default_shared_image
+  
+  validates :default_image, size: { less_than: 5.megabytes }
   validates :default_shared_image, size: { less_than: 5.megabytes }
 
   before_validation :sanitize_fields
+  before_validation :set_default_language, on: :create
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
@@ -150,6 +153,10 @@ class Communication::Website < ApplicationRecord
     id
   end
 
+  def languages
+    Language.where(id: localizations.pluck(:language_id)).ordered
+  end
+
   # Override to follow direct objects
   def sync_with_git
     Communication::Website::SyncWithGitJob.perform_later(id)
@@ -182,6 +189,10 @@ class Communication::Website < ApplicationRecord
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
+  end
+
+  def set_default_language
+    self.default_language_id = self.localizations.first.language_id
   end
 
   def reconnect_dependency(dependency, new_university_id)

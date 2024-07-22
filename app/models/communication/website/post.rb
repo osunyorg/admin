@@ -45,7 +45,6 @@ class Communication::Website::Post < ApplicationRecord
   include Permalinkable # TODO L10N : To remove
   include Sanitizable
   include Shareable # TODO L10N : To remove
-  # include Sluggable # We override slug_unavailable? method
   include Localizable
   include WithBlobs # TODO L10N : To remove
   include WithDuplication

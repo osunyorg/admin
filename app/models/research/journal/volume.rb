@@ -34,7 +34,6 @@ class Research::Journal::Volume < ApplicationRecord
   include AsIndirectObject
   include Permalinkable
   include Sanitizable
-  include Sluggable
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles

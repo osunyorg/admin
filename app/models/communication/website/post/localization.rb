@@ -42,7 +42,6 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Shareable
-  include Sluggable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage

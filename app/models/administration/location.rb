@@ -41,7 +41,6 @@ class Administration::Location < ApplicationRecord
   include Contentful
   include Permalinkable
   include Sanitizable
-  include Sluggable
   include Localizable
   include WebsitesLinkable
   include WithBlobs

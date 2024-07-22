@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_19_125344) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_22_094332) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -395,7 +395,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_125344) do
   end
 
   create_table "communication_website_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "communication_website_id", null: false
+    t.uuid "about_id", null: false
     t.uuid "language_id", null: false
     t.uuid "university_id", null: false
     t.string "name"
@@ -412,7 +412,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_125344) do
     t.string "social_tiktok"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["communication_website_id"], name: "idx_on_communication_website_id_ed4630e334"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.index ["about_id"], name: "index_communication_website_localizations_on_about_id"
     t.index ["language_id"], name: "index_communication_website_localizations_on_language_id"
     t.index ["university_id"], name: "index_communication_website_localizations_on_university_id"
   end
@@ -1617,7 +1619,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_19_125344) do
   add_foreign_key "communication_website_git_file_orphans", "communication_websites"
   add_foreign_key "communication_website_git_file_orphans", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
-  add_foreign_key "communication_website_localizations", "communication_websites"
+  add_foreign_key "communication_website_localizations", "communication_websites", column: "about_id"
   add_foreign_key "communication_website_localizations", "languages"
   add_foreign_key "communication_website_localizations", "universities"
   add_foreign_key "communication_website_menu_items", "communication_website_menu_items", column: "parent_id"

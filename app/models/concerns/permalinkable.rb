@@ -2,6 +2,7 @@ module Permalinkable
   extend ActiveSupport::Concern
 
   included do
+    include Sluggable
     include Staticable
 
     has_many  :permalinks,

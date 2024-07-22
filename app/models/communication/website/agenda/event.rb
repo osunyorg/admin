@@ -50,7 +50,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Shareable
-  include Sluggable
   include Localizable
   include WithAccessibility
   include WithBlobs

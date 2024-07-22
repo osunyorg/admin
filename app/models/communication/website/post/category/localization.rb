@@ -37,7 +37,6 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
   include Initials
   include Permalinkable
   include Sanitizable
-  include Sluggable
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles

@@ -49,7 +49,6 @@
 class University::Organization < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : To remove
-  # include Initials
   include Permalinkable # TODO L10N : To remove
   include Sanitizable
   include Shareable # TODO L10N : To remove

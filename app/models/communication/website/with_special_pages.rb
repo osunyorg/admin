@@ -2,8 +2,9 @@ module Communication::Website::WithSpecialPages
   extend ActiveSupport::Concern
 
   included do
-    after_save :create_missing_special_pages
-    after_touch :create_missing_special_pages
+    # TODO L10N : Re-enable once pages and menus are localizable
+    # after_save :create_missing_special_pages
+    # after_touch :create_missing_special_pages
   end
 
   def special_page(type, language: default_language)

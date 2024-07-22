@@ -6,15 +6,6 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
 
   protected
 
-  def current_language
-    if @website
-      @current_language ||= @website.best_language_for(params[:lang])
-    else
-      super
-    end
-  end
-  helper_method :current_language
-
   def current_subnav_context
     @website && @website.persisted? ? 'navigation/admin/communication/website'
                                     : super

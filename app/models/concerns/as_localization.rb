@@ -9,6 +9,8 @@ module AsLocalization
                 class_name: "#{self.module_parent.name}",
                 touch: true # FIXME twice on nested form
 
+    validates :language_id, uniqueness: { scope: :about_id }
+
     before_validation :set_university
   end
 

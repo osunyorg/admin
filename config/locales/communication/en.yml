@@ -105,22 +105,10 @@ en:
         in_showcase: List website in showcase
         languages: Languages
         locked_at: Locked for background jobs at
-        name: Name
         plausible_url: Plausible dashboard URL
         repository: Repository
         showcase_tags: Tags
         social: Social media
-        social_email: "Email"
-        social_facebook: "Facebook (private, belongs to Meta)"
-        social_github: "Github (private, belongs to Microsoft)"
-        social_instagram: "Instagram (private, belongs to Meta)"
-        social_linkedin: "LinkedIn (private, belongs to Microsoft)"
-        social_mastodon: Mastodon (free)
-        social_peertube: Peertube (free)
-        social_tiktok: "TikTok (private)"
-        social_vimeo: "Vimeo (private)"
-        social_x: "X, ex-Twitter (private)"
-        social_youtube: "Youtube (private, belongs to Google)"
         university: University
         url: URL
       communication/website/agenda/category:
@@ -153,6 +141,19 @@ en:
         indirect_object_id: Indirect object identifier
         indirect_object_type: Indirect object type
         updated_at: Updated at
+      communication/website/localization:
+        name: Name
+        social_email: "Email"
+        social_facebook: "Facebook (private, belongs to Meta)"
+        social_github: "Github (private, belongs to Microsoft)"
+        social_instagram: "Instagram (private, belongs to Meta)"
+        social_linkedin: "LinkedIn (private, belongs to Microsoft)"
+        social_mastodon: Mastodon (free)
+        social_peertube: Peertube (free)
+        social_tiktok: "TikTok (private)"
+        social_vimeo: "Vimeo (private)"
+        social_x: "X, ex-Twitter (private)"
+        social_youtube: "Youtube (private, belongs to Google)"
       communication/website/menu:
         automatic: Automatic
         identifier: Identifier

@@ -1,4 +1,6 @@
 class Admin::Communication::WebsitesController < Admin::Communication::Websites::ApplicationController
+  include Admin::Localizable
+
   has_scope :for_search_term
   has_scope :for_about_type
 
@@ -39,7 +41,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def static
     @about = @website
-    render_as_plain_text
+    render layout: false, content_type: "text/plain; charset=utf-8"
   end
 
   def new
@@ -83,16 +85,20 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def website_params
     attribute_names = [
-      :name, :url, :repository, :about_type, :about_id, :in_production, 
+      :url, :repository, :about_type, :about_id, :in_production, 
       :in_showcase, 
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda, :feature_portfolio,
       :default_time_zone,
       :deuxfleurs_hosting, :default_image, :default_image_delete, :default_image_infos, :default_shared_image, :default_shared_image_delete, :default_shared_image_infos,
-      :social_mastodon, :social_x, :social_linkedin, :social_youtube, :social_vimeo, :social_peertube, :social_instagram, :social_facebook, :social_tiktok, :social_email, :social_github,
-      :deployment_status_badge, :autoupdate_theme, 
+      :deployment_status_badge, :autoupdate_theme,
       showcase_tag_ids: [],
-      language_ids: []
+      localizations_attributes: [
+        :id, :language_id, :name, 
+        :social_mastodon, :social_x, :social_linkedin, :social_youtube,
+        :social_vimeo, :social_peertube, :social_instagram, :social_facebook,
+        :social_tiktok, :social_email, :social_github
+      ]
     ]
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?
     # For now, default language can't be changed, too many implications, especially around special pages.
