@@ -3,6 +3,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
                               through: :current_university,
                               through_association: :communication_blocks
 
+  before_action :redirect_if_block_language_is_incorrect, only: [:edit, :update]
+
   def reorder
     # Cette action est très étrange, elle ne met pas en ordre les blocs seuls.
     # En fait, elle met en ordre dans le mode "Ecrire le contenu", à la fois les headings et les blocks.
@@ -92,6 +94,11 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   protected
+
+  def redirect_if_block_language_is_incorrect
+    return if @block.language == current_language
+    redirect_to about_path, alert: t('admin.communication.block.language_mismatch_alert')
+  end
 
   def reorder_object
     @id = @object[:id]
