@@ -1,5 +1,13 @@
 class MigratePermalinksForPeopleFacets < ActiveRecord::Migration[7.1]
   def up
+    # Before, we had
+    # - A1 : John Doe (Uni::Person FR) with his facets
+    # - A2 : John Doe (Uni::Person EN, original: FR) with his facets
+    # Now we have
+    # - B1 : John Doe (Uni::Person)
+    # - B2 : John Doe (Uni::Person::Loca FR) with his facets
+    # - B3 : John Doe (Uni::Person::Loca EN) with his facets
+    # For the English version, we can't migrate facets permalinks from B1, we need to query A2
     University::Person.find_each do |person|
       # If "old way" translation, we set the about to the original, else if "old way" master, we take its ID.
       about_id = person.original_id || person.id
