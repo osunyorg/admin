@@ -32,10 +32,14 @@ module Admin::Localizable
 
   def redirect_if_not_localized
     return if @l10n.present?
-    @l10n = resource.localize_in!(current_language)
-    redirect_to [:edit, :admin, resource]
+    # If this is a DirectObject and the website is not yet localized in the requested language, we have to confirm we want to localize the website itself before localizing the object
+    if resource.is_direct_object? && !resource.is_a?(Communication::Website) && !resource.website.localized_in?(current_language)
+      redirect_to [:confirm_localization, :admin, resource.website, { about: resource.to_gid.to_s }]
+    else
+      @l10n = resource.localize_in!(current_language)
+      redirect_to [:edit, :admin, resource]
+    end
   end
-
 
   def resource_name
     self.class.to_s.remove("Controller").demodulize.singularize.underscore

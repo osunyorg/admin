@@ -325,6 +325,9 @@ fr:
             draft: Brouillon
             formatted_time_zone: "Fuseau horaire : %{time_zone}"
             none: Pas encore d'événements
+        confirm_localization:
+          text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction du site web <i>%{website}</i> en %{language}."
+          title: Confirmation de traduction
         default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas."
         default_shared_image: "Image de partage par défaut, 1200 pixels de large est une bonne base car les réseaux ont des standards différents."
         editorial:

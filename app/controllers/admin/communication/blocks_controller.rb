@@ -141,22 +141,22 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   rescue
   end
 
-  def about_path
-    # Les headings sont toujours affectés à des localisations
-    l10n = @block.about
-    # La localisation porte sur un objet, par exemple une University::Person ou un Communication::Website::Post
-    object_edited = l10n.about
-    # La formation ou la page concernée
-    path_method = "admin_#{object_edited.class.base_class.to_s.parameterize.underscore}_path"
-    path_method_options = {
-      id: object_edited.id,
-      lang: l10n.language,
-      website_id: website_id,
-      extranet_id: extranet_id,
-      journal_id: journal_id
-    }
-    public_send path_method, **path_method_options
-  end
+    def about_path
+      # Les headings sont toujours affectés à des localisations
+      l10n = @block.about
+      # La localisation porte sur un objet, par exemple une University::Person ou un Communication::Website::Post
+      object_edited = l10n.about
+      # La formation ou la page concernée
+      path_method = "admin_#{object_edited.class.base_class.to_s.parameterize.underscore}_path"
+      path_method_options = {
+        id: object_edited.id,
+        lang: l10n.language,
+        website_id: website_id,
+        extranet_id: extranet_id,
+        journal_id: journal_id
+      }
+      public_send path_method, **path_method_options
+    end
 
   def breadcrumb
     short_breadcrumb

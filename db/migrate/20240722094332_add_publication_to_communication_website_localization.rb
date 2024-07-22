@@ -2,13 +2,13 @@ class AddPublicationToCommunicationWebsiteLocalization < ActiveRecord::Migration
   def up
     add_column :communication_website_localizations, :published, :boolean, default: false
     add_column :communication_website_localizations, :published_at, :datetime
-    
+
     # 1. créer les locas principales
     # 2. créer les locas manquantes avec les données du website par défaut (name, socials)
     # 3. ajouter la publication aux locas existantes
     Communication::Website::Localization.reset_column_information
-    Communication::Website.includes(:languages).find_each do |website|
-      languages = website.languages.each do |language|
+    Communication::Website.includes(:legacy_languages).find_each do |website|
+      website.legacy_languages.each do |language|
         l10n = website.localization_for(language)
         if l10n
           # Loca existante, on la publie

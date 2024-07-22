@@ -57,7 +57,7 @@ module Localizable
 
   def available_languages
     @available_languages ||= begin
-      languages = is_direct_object? ? website.languages : university.languages
+      languages = is_direct_object? && !is_a?(Communication::Website) ? website.languages : university.languages
       languages.ordered
     end
   end
@@ -78,8 +78,8 @@ module Localizable
     original_localization.localize_in!(language)
   end
 
-  def exists_in_language?(l)
-    localization_for(l).present?
+  def exists_in_language?(language)
+    localization_for(language).present?
   end
   alias :localized_in? :exists_in_language?
 
