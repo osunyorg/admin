@@ -1,6 +1,6 @@
 <%
 size = large ? 300 : 100
-fit = fit ? true : false
+cropped = cropped ? true : false
 image_class = 'img-fluid'
 %>
 <div class="osuny__thumbnail 
@@ -9,8 +9,8 @@ image_class = 'img-fluid'
 
   <% if image && image.attached? %>
     <% if image.variable? %>
-      <% image_format = fit ? image.variant(resize_to_fit: [size, size]) : image.variant(resize_to_fill: [size, size, gravity: 'center']) %>
-      <% image_class = fit ? ' img-fluid h-100 w-100 object-fit-contain' : image_class %>
+      <% image_format = !cropped ? image.variant(resize_to_fit: [size, size]) : image.variant(resize_to_fill: [size, size, gravity: 'center']) %>
+      <% image_class = !cropped ? ' img-fluid h-100 w-100 object-fit-contain' : image_class %>
     <% else %>
       <% image_format = image %>
     <% end %>

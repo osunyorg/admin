@@ -22,7 +22,7 @@ module Admin::OsunyHelper
     raw '<hr class="my-5">'
   end
 
-  def osuny_thumbnail(object, large: false, cropped: true, fit: false)
+  def osuny_thumbnail(object, large: false, cropped: true)
     image = object.respond_to?(:featured_image) ? object.featured_image
                                                 : nil
     render  partial: "admin/application/components/thumbnail",
@@ -30,8 +30,7 @@ module Admin::OsunyHelper
               image: image,
               initials: object.initials,
               large: large,
-              cropped: cropped,
-              fit: fit
+              cropped: cropped
             }
   end
 
