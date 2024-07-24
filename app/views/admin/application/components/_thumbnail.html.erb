@@ -1,13 +1,25 @@
 <%
 size = large ? 300 : 100
+image_class = 'img-fluid'
+image_variant = nil
+if image && image.attached?
+  image_variant = image
+  if image.variable?
+    if cropped
+      image_variant = image.variant(resize_to_fill: [size, size, gravity: 'center'])
+    else
+      image_variant = image.variant(resize_to_fit: [size, size])
+      image_class += ' h-100 w-100 object-fit-contain'
+    end
+  end
+end
 %>
 <div class="osuny__thumbnail 
             osuny__thumbnail--<%= large ? 'large' : 'small' %>
             osuny__thumbnail--<%= cropped ? 'cropped' : 'uncropped' %>">
-  <% if image && image.attached? %>
-    <% image_square = image.variable? ? image.variant(resize_to_fill: [size, size, gravity: 'center'])
-                                      : image %>
-    <%= image_tag image_square, class: 'img-fluid', loading: 'lazy' %>
+
+  <% if image_variant %>
+    <%= image_tag image_variant, class: image_class, loading: 'lazy' %>
   <% else %>
     <span class="osuny__thumbnail__initials">
       <%= initials %>
