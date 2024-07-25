@@ -80,7 +80,7 @@ class Communication::Website < ApplicationRecord
   include WithManagers
   include WithProgramCategories
   include WithReferences
-  # include WithSpecialPages
+  include WithSpecialPages
   # include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithScreenshot
   include WithSecurity

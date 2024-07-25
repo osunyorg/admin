@@ -50,54 +50,49 @@
 
 class Communication::Website::Page < ApplicationRecord
   # FIXME: Remove legacy column from db
-  self.ignored_columns = %w(path)
+  # kind was replaced by type in January 2023
+  self.ignored_columns = %w(path kind)
 
   include AsDirectObject
-  include Contentful
-  include Initials
-  include Permalinkable # We override slug_unavailable? method (and set_slug and skip_slug_validation? in Page::Home)
+  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Shareable
+  include Shareable # TODO L10N : To remove
   include Localizable
-  include WithAccessibility
-  include WithAutomaticMenus
-  include WithBlobs
-  include WithDuplication
-  include WithFeaturedImage
+  # include WithAutomaticMenus # TODO L10N : To restore
+  include WithBlobs # TODO L10N : To remove
+  include WithDuplication # TODO L10N : To adjust
+  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
+  # TODO L10N : To adjust (WithType)
   include WithType # WithType can set default publication status, so must be included before WithPublication
-  include WithPublication
   include WithPosition # Scope :ordered must override WithPublication
   include WithTree
-  include WithPath # Must be included after Sluggable. WithPath overwrites the git_path method defined in WithWebsites
   include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
 
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
+
   belongs_to :parent,
              class_name: 'Communication::Website::Page',
              optional: true
-  belongs_to :original,
-             class_name: 'Communication::Website::Page',
-             optional: true
-  belongs_to :language
   has_many   :children,
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id,
              dependent: :destroy
-  has_many   :translations,
-             class_name: 'Communication::Website::Page',
-             foreign_key: :original_id
 
   after_save :touch_elements_if_special_page_in_hierarchy
 
-  validates :title, presence: true
-  validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
-
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }
-  scope :published, -> { where(published: true) }
+
+  # TODO L10N : to adjust
   scope :ordered_by_title, -> { order(:title) }
 
+  # TODO L10N : to adjust
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_website_pages.meta_description) ILIKE unaccent(:term) OR
@@ -105,19 +100,13 @@ class Communication::Website::Page < ApplicationRecord
       unaccent(communication_website_pages.title) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
+  # TODO L10N : to adjust
   scope :for_published, -> (published) { where(published: published == 'true') }
+  # TODO L10N : to adjust
   scope :for_full_width, -> (full_width) { where(full_width: full_width == 'true') }
 
-  def template_static
-    "admin/communication/websites/pages/static"
-  end
-
   def dependencies
-    calculated_dependencies = active_storage_blobs + contents_dependencies
-    calculated_dependencies += [website.config_default_content_security_policy]
-    # children are used only if there is no block to display
-    calculated_dependencies += children unless blocks.published.any?
-    calculated_dependencies
+    [localizations]
   end
 
   def references
@@ -127,12 +116,8 @@ class Communication::Website::Page < ApplicationRecord
     abouts_with_page_block
   end
 
-  def best_title
-    breadcrumb_title.blank? ? title : breadcrumb_title
-  end
-
-  def to_s
-    "#{title}"
+  def best_breadcrumb_title_in(language)
+    best_localization_for(language).best_breadcrumb_title
   end
 
   # La page actuelle a les bodyclass classe1 et classe2 ("classe1 classe2")
@@ -157,6 +142,11 @@ class Communication::Website::Page < ApplicationRecord
     nil
   end
 
+  # TODO L10N : to remove
+  def translate_other_attachments(translation)
+    translate_attachment(translation, :shared_image) if shared_image.attached?
+  end
+
   protected
 
   # ["class1", "class2"], "page" -> ["page-class1", "page-class2"]
@@ -173,30 +163,8 @@ class Communication::Website::Page < ApplicationRecord
                                    .compact_blank
   end
 
-  def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
-              .where.not(id: self.id)
-              .exists?
-  end
-
-  def check_accessibility
-    accessibility_merge_array blocks
-  end
-
   def last_ordered_element
-    website.pages.where(parent_id: parent_id, language_id: language_id).ordered.last
-  end
-
-  def explicit_blob_ids
-    super.concat [
-      featured_image&.blob_id,
-      shared_image&.blob_id
-    ]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
+    website.pages.where(parent_id: parent_id).ordered.last
   end
 
   def abouts_with_page_block

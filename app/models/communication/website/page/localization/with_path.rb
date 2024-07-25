@@ -1,4 +1,4 @@
-module Communication::Website::Page::WithPath
+module Communication::Website::Page::Localization::WithPath
   extend ActiveSupport::Concern
 
   def path

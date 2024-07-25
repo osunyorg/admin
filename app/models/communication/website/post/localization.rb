@@ -57,8 +57,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  before_validation :set_communication_website_id,
-                    :set_published_at
+  before_validation :set_communication_website_id
 
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
@@ -83,8 +82,6 @@ class Communication::Website::Post::Localization < ApplicationRecord
   end
 
   def author
-    # TODO L10N : Localize Person
-    return nil
     return if about.author.nil?
     about.author.localization_for(language)
   end
@@ -114,19 +111,11 @@ class Communication::Website::Post::Localization < ApplicationRecord
     self.communication_website_id ||= about.communication_website_id
   end
 
-  def set_published_at
-    self.published_at = Time.zone.now if published && published_at.nil?
-  end
-
   def explicit_blob_ids
     super.concat [
       featured_image&.blob_id,
       shared_image&.blob_id
     ]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
   end
 
   def localize_other_attachments(localization)

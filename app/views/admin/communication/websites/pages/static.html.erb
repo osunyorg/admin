@@ -1,7 +1,7 @@
 ---
 <%= render 'admin/application/static/title' %>
 breadcrumb_title: >-
-  <%= prepare_text_for_static @about.best_title %>
+  <%= prepare_text_for_static @about.best_breadcrumb_title_in(@l10n.language) %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/breadcrumbs' %>
 <%= render 'admin/application/static/design' %>
