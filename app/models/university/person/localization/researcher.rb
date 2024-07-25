@@ -22,4 +22,9 @@ class University::Person::Localization::Researcher < University::Person::Localiz
   def references
     research_journal_papers
   end
+
+  def static_localization_key
+    # so we don't mess with the University::Person::Localization static_localization_key
+    "#{about.class.polymorphic_name.parameterize}-researcher-#{self.about_id}"
+  end
 end

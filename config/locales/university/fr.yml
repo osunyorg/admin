@@ -269,6 +269,19 @@ fr:
         import_btn: Importer des expériences
         import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
         title: Imports d'expériences
+      facets:
+        administrator:
+          responsabilities: Responsabilités
+          responsabilities_of: Responsabilités de %{name}
+        author:
+          posts: Actualités
+          posts_of: Actualités de %{name}
+        researcher:
+          publications: Publications
+          publications_of: Publications de %{name}
+        teacher:
+          programs: Enseignements
+          programs_of: Enseignements de %{name}
       import_btn: Importer des personnes
       import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
       personal_data_visibilities:

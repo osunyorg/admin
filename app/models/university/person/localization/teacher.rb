@@ -22,4 +22,9 @@ class University::Person::Localization::Teacher < University::Person::Localizati
   def references
     education_programs_as_teacher
   end
+
+  def static_localization_key
+    # so we don't mess with the University::Person::Localization static_localization_key
+    "#{about.class.polymorphic_name.parameterize}-teacher-#{self.about_id}"
+  end
 end

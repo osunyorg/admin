@@ -51,8 +51,8 @@ class University::Person::Localization < ApplicationRecord
 
   before_validation :prepare_name
 
-  def localization
-    @localization ||= University::Person::Localization.find(id)
+  def person_localization
+    @person_localization ||= University::Person::Localization.find(id)
   end
 
   def administrator
