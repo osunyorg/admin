@@ -79,13 +79,14 @@ class Communication::Website::Permalink < ApplicationRecord
 
   # Méthode pour accéder facilement à la page spéciale,
   # qui s'appuie sur le `special_page_type` de chaque Permalink
-  def self.special_page(website, language)
-    website.special_page(self.special_page_type, language: language)
+  def self.special_page(website)
+    website.special_page(self.special_page_type)
   end
 
   # Méthode d'utilité pour récupérer le slug
-  def self.special_page_path(website, language)
-    self.special_page(website, language).slug_with_ancestors
+  # TODO L10N : To adjust
+  def self.special_page_path(website)
+    self.special_page(website).slug_with_ancestors
   end
 
   # Doit être surchargé dans les classes par type, comme `Communication::Website::Permalink::Post`
@@ -117,8 +118,8 @@ class Communication::Website::Permalink < ApplicationRecord
     end
   end
 
-  def special_page(website, language)
-    self.class.special_page(website, language)
+  def special_page(website)
+    self.class.special_page(website)
   end
 
   def to_s

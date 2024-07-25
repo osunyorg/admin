@@ -13,8 +13,8 @@ class University::Person::Localization::Administrator < University::Person::Loca
 
   def dependencies
     [
-      localization,
-      localization.about
+      person_localization,
+      person_localization.about
     ]
   end
 

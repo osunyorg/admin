@@ -168,24 +168,25 @@ fr:
         url: URL
       communication/website/page:
         bodyclass: Classe CSS spécifique
-        breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
+        full_width: Pleine largeur
+        parent: Page parente
+        related_category: Catégorie liée
+        special_page: Page spéciale
+        website: Site Web
+      communication/website/page/localization:
+        breadcrumb_title: Nom affiché dans le fil d'ariane
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
-        full_width: Pleine largeur
         header_cta: Afficher un bouton d'action dans le header
         header_cta_label: Texte du bouton d'action
         header_cta_url: URL du bouton d'action
         header_text: Titre affiché en haut de page
-        parent: Page parente
         path: Chemin
         published: Publié ?
-        related_category: Catégorie liée
         slug: Identifiant
-        special_page: Page spéciale
         text: Texte principal de la page
         title: Titre
-        website: Site Web
       communication/website/permalink:
         path: Chemin
       communication/website/portfolio/category:
@@ -352,6 +353,11 @@ fr:
           published: Publiée
           published_status: État de publication
           show: Voir la page
+          special_pages:
+            organization:
+              disconnect: Déconnecter
+            person:
+              disconnect: Déconnecter
           structure: Pages
           with_children: "avec comme pages enfants :"
         permalinks:

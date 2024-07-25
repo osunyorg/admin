@@ -18,6 +18,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb
   end
 
+  # TODO L10N : To adjust
   def publish
     @event.published = true
     @event.save_and_sync
@@ -98,8 +99,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def load_filters
     @filters = ::Filters::Admin::Communication::Websites::Agenda::Events.new(
-        current_user, 
-        @website, 
+        current_user,
+        @website,
         current_language
       ).list
   end

@@ -21,6 +21,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     breadcrumb
   end
 
+  # TODO L10N : To adjust
   def publish_batch
     ids = params[:ids] || []
     target_posts = @website.posts.where(id: ids)
@@ -33,6 +34,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
                   notice: t('communication.website.posts.successful_batch_update')
   end
 
+  # TODO L10N : To adjust
   def publish
     @post.published = true
     @post.save_and_sync

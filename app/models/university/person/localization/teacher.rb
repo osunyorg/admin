@@ -14,8 +14,8 @@ class University::Person::Localization::Teacher < University::Person::Localizati
 
   def dependencies
     [
-      localization,
-      localization.about
+      person_localization,
+      person_localization.about
     ]
   end
 

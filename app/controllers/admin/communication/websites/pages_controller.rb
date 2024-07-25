@@ -2,6 +2,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   load_and_authorize_resource class: Communication::Website::Page,
                               through: :website
 
+  include Admin::HasStaticAction
   include Admin::Localizable
 
   has_scope :for_search_term
@@ -9,16 +10,16 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   has_scope :for_full_width
 
   def index
-    @homepage = @website.special_page(Communication::Website::Page::Home, language: current_language)
+    @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
-    @pages = @website.pages.for_language(current_language)
+    @pages = @website.pages.tmp_original # TODO L10N : To remove
     breadcrumb
   end
 
   def index_list
     @filters = ::Filters::Admin::Communication::Websites::Pages.new(current_user).list
-    @pages = apply_scopes(@pages).for_language(current_language)
-                                 .ordered_by_title
+    @pages = apply_scopes(@pages).tmp_original # TODO L10N : To remove
+                                 .ordered_by_title(current_language)
                                  .page(params[:page])
     breadcrumb
   end
@@ -45,19 +46,15 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def show
     @preview = true
     breadcrumb
-    add_breadcrumb(@page, admin_communication_website_page_path(@page))
+    add_breadcrumb(@l10n, admin_communication_website_page_path(@page))
   end
 
+  # TODO L10N : To adjust
   def publish
     @page.published = true
     @page.save_and_sync
     redirect_back fallback_location: admin_communication_website_page_path(@page),
                   notice: t('admin.communication.website.publish.notice')
-  end
-
-  def static
-    @about = @page
-    render_as_plain_text
   end
 
   def preview
@@ -76,6 +73,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     redirect_back(fallback_location: [:admin, @object])
   end
 
+  # TODO L10N : To adjust
   def generate_from_template
     @page.generate_from_template
     redirect_back(fallback_location: [:admin, @page])
@@ -89,7 +87,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def edit
     breadcrumb
-    add_breadcrumb(@page, admin_communication_website_page_path(@page))
+    add_breadcrumb(@l10n, admin_communication_website_page_path(@page))
     add_breadcrumb t('edit')
   end
 
@@ -97,7 +95,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     @page.website = @website
     @page.add_photo_import params[:photo_import]
     if @page.save_and_sync
-      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s)
+      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb(t('create'))
@@ -108,7 +106,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def update
     @page.add_photo_import params[:photo_import]
     if @page.update_and_sync(page_params)
-      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s)
+      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb(@page, admin_communication_website_page_path(@page))
@@ -127,7 +125,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       redirect_back(fallback_location: admin_communication_website_page_path(@page), alert: t('admin.communication.website.pages.delete_special_page_notice'))
     else
       @page.destroy
-      redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s)
+      redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s_in(current_language))
     end
   end
 
@@ -151,15 +149,16 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def page_params
     params.require(:communication_website_page)
           .permit(
-            :communication_website_id, :title, :breadcrumb_title, :bodyclass,
-            :meta_description, :summary, :header_text, :header_cta, :header_cta_label, :header_cta_url, :text, :slug, :published, :full_width,
-            :shared_image, :shared_image_delete,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-            :parent_id
+            :communication_website_id, :bodyclass, :full_width, :parent_id,
+            localizations_attributes: [
+              :id, :title, :breadcrumb_title, :meta_description, :summary, :header_text, :header_cta, :header_cta_label, :header_cta_url, :text, :slug, :published,
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+              :shared_image, :shared_image_delete, :shared_image_infos,
+              :language_id
+            ]
           )
           .merge(
-            university_id: current_university.id,
-            language_id: current_language.id
+            university_id: current_university.id
           )
   end
 

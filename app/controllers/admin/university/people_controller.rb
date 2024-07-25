@@ -34,7 +34,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
     @people = current_university.people
                                 .tmp_original # TODO L10N : To remove
                                 .for_search_term(@term)
-                                .ordered
+                                .ordered(current_language)
   end
 
   def show
@@ -110,9 +110,9 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       research_laboratory_ids: [], category_ids: [],
       localizations_attributes: [
         :id, :slug, :first_name, :last_name,
-        :meta_description, :summary, :biography, 
+        :meta_description, :summary, :biography,
         :picture_credit,
-        :url, :linkedin, :twitter, :mastodon, 
+        :url, :linkedin, :twitter, :mastodon,
         :language_id
       ]
     ).merge(university_id: current_university.id)

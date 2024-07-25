@@ -14,8 +14,8 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     :large
   ]
   has_component :mode, :option, options: [
-    :all, 
-    :category, 
+    :all,
+    :category,
     :selection,
     :categories
   ]
@@ -24,7 +24,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :quantity, :number, options: 3
   has_component :time, :option, options: AUTHORIZED_SCOPES
   has_component :no_event_message, :string
-  
+
   # Deprecated
   has_component :show_category, :boolean
   has_component :show_summary, :boolean
@@ -59,23 +59,25 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def empty?
-    selected_events.none? && 
-    no_event_message.blank? && 
+    selected_events.none? &&
+    no_event_message.blank? &&
     mode != 'categories'
   end
 
   def title_link
     return link_to_events_archive if time == 'archive'
-    return link_to_category if mode == 'category' && category.present?  
+    return link_to_category if mode == 'category' && category.present?
     link_to_events
   end
 
   protected
 
+  # TODO L10N : To adjust
   def link_to_events
     website.special_page(Communication::Website::Page::CommunicationAgenda, language: block.language).path
   end
 
+  # TODO L10N : To adjust
   def link_to_events_archive
     website.special_page(Communication::Website::Page::CommunicationAgendaArchive, language: block.language).path
   end

@@ -1,5 +1,8 @@
 <%
-@organizations = @page.explicitly_connected_organizations.ordered.page params[:page]
+@organizations = @page.explicitly_connected_organizations
+                      .tmp_original # TODO L10N : To adjust
+                      .ordered(current_language)
+                      .page(params[:page])
 %>
 <%= osuny_panel University::Organization.model_name.human(count: 2) do %>
   <%= simple_form_for :association, class_name: 'association' do |f| %>
@@ -20,8 +23,8 @@
     <tbody>
       <% @organizations.each do |organization| %>
         <tr>
-          <td><%= link_to organization, [:admin, organization] %></td>
-          <td><%= link_to 'Déconnecter',
+          <td><%= osuny_link_localized organization, [:admin, organization] %></td>
+          <td><%= link_to t('admin.communication.website.pages.special_pages.organization.disconnect'),
                           disconnect_admin_communication_website_page_path(@page, object_id: organization.id, object_type: organization.class),
                           class: button_classes_danger,
                           method: :post %></td>

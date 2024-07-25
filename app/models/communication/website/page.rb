@@ -87,10 +87,43 @@ class Communication::Website::Page < ApplicationRecord
 
   after_save :touch_elements_if_special_page_in_hierarchy
 
+  # TODO L10N : to rewrite
+  scope :published, -> {
+    where("
+      communication_website_pages.published = true AND
+      DATE(communication_website_pages.published_at) <= now()
+    ")
+  }
+
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }
 
-  # TODO L10N : to adjust
-  scope :ordered_by_title, -> { order(:title) }
+  scope :ordered_by_title, -> (language) {
+    # Define a raw SQL snippet for the conditional aggregation
+    # This selects the name of the localization in the specified language,
+    # or falls back to the first localization name if the specified language is not present.
+    localization_title_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.title END),
+        MAX(localizations.title) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_title
+    SQL
+
+    # Join the organizations table with a subquery that ranks localizations
+    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          communication_website_page_localizations as localizations
+      ) localizations ON communication_website_pages.id = localizations.about_id
+    SQL
+    ]))
+    .select("communication_website_pages.*", localization_title_select)
+    .group("communication_website_pages.id")
+    .order("localization_title ASC")
+  }
 
   # TODO L10N : to adjust
   scope :for_search_term, -> (term) {

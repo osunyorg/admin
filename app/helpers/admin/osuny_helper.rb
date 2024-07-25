@@ -82,9 +82,8 @@ module Admin::OsunyHelper
     link_to name, path, class: classes.strip, data: { confirm: alert }
   end
 
-  def osuny_link_localized_if(condition, object, path, stretched: true)
+  def osuny_link_localized_if(condition, object, path, classes: '')
     l10n = object.localization_for(current_language)
-    classes = stretched ? 'stretched-link ' : ''
     if l10n.present?
       name = l10n.to_s
       alert = ''
@@ -93,7 +92,7 @@ module Admin::OsunyHelper
       classes += 'text-muted fst-italic'
       alert = t('localization.creation_alert')
     end
-    link_to_if condition, name, path, class: classes, data: { confirm: alert }
+    link_to_if condition, name, path, class: classes.strip, data: { confirm: alert }
   end
 
   def osuny_collection_tree(list, except: nil, localized: false)

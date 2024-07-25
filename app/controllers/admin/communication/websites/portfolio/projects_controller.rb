@@ -18,6 +18,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     breadcrumb
   end
 
+  # TODO L10N : To adjust
   def publish
     @project.published = true
     @project.save_and_sync
@@ -96,8 +97,8 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   def load_filters
     @filters = ::Filters::Admin::Communication::Websites::Portfolio::Projects.new(
-        current_user, 
-        @website, 
+        current_user,
+        @website,
         current_language
       ).list
   end

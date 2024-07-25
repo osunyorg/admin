@@ -20,12 +20,12 @@
 </ul>
 <ul class="list-unstyled treeview mt-2">
   <li class="treeview__element treeview__element--opened treeview__element--loaded"
-      data-id="<%= @homepage.id %>" 
+      data-id="<%= @homepage.id %>"
       data-parent="">
     <div class="card card--horizontal treeview__label">
-      <%= osuny_thumbnail @homepage %>
+      <%= osuny_thumbnail_localized @homepage %>
       <div class="card-body">
-        <%= link_to @homepage, admin_communication_website_page_path(@homepage), class: 'text-black' %>
+        <%= osuny_link_localized @homepage, admin_communication_website_page_path(@homepage) %>
       </div>
     </div>
     <ul class="list-unstyled treeview__children js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @homepage) %>"

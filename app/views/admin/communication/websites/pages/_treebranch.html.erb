@@ -1,20 +1,20 @@
 <% pages.each do |page| %>
-  <li class=" treeview__element 
+  <li class=" treeview__element
               js-treeview-element
-              mb-2 
-              <%= 'treeview__element--draft' unless page.published %>
+              mb-2
+              <%= 'treeview__element--draft' unless page.published_in?(current_language) %>
               <%= 'treeview__element--empty' unless page.has_children? %>"
       data-id="<%= page.id %>"
       data-parent="<%= page.parent_id %>">
     <div class="card card--horizontal treeview__label">
       <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                   class: 'js-treeview-openzone d-inline-block', remote: true do %>
-        <%= osuny_thumbnail page %>
+        <%= osuny_thumbnail_localized page %>
       <% end %>
       <div class="card-body">
         <span class="leaf-title">
-          <%= osuny_published page.published? %>
-          <%= link_to page, admin_communication_website_page_path(page), class: 'text-black' %>
+          <%= osuny_published_localized page %>
+          <%= osuny_link_localized page, admin_communication_website_page_path(page) %>
           <% if page.children.any? %>
             <span class="text-muted">(<%= page.children.count %>)</span>
           <% end %>
@@ -34,9 +34,9 @@
         <% end %>
       </div>
     </div>
-    <ul class=" list-unstyled 
-                treeview__children 
-                js-treeview-children 
+    <ul class=" list-unstyled
+                treeview__children
+                js-treeview-children
                 mt-2
                 <%= 'js-treeview-sortable-container' if can?(:reorder, page) %>" data-id="<%= page.id %>">
       <li class="treeview__empty">

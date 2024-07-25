@@ -101,23 +101,29 @@ module Communication::Website::Page::WithType
   protected
 
   def default_parent
-    website.special_page(Communication::Website::Page::Home, language: language)
+    website.special_page(Communication::Website::Page::Home)
   end
 
   def initialize_special_page
-    i18n_key = "communication.website.pages.defaults.#{type_key}"
-    self.title = I18n.t("#{i18n_key}.title", locale: language.iso_code)
-    self.slug = I18n.t("#{i18n_key}.slug", locale: language.iso_code)
-    self.parent = default_parent
-    self.full_width = full_width_by_default?
-    self.published = published_by_default?
+  i18n_key = "communication.website.pages.defaults.#{type_key}"
+  language = website.default_language
+  localizations.build(
+    language_id: language.id,
+    title: I18n.t("#{i18n_key}.title", locale: language.iso_code),
+    slug: I18n.t("#{i18n_key}.slug", locale: language.iso_code),
+    parent: default_parent,
+    full_width: full_width_by_default?,
+    published: published_by_default?
     # note: published_at will be set by WithPublication concern
+  )
   end
 
+  # TODO L10N : adjust
   def generate_heading(title)
     headings.create(university: university, title: title)
   end
 
+  # TODO L10N : adjust
   def generate_block(heading, kind, data)
     blocks.create(university: university, heading: heading, template_kind: kind, data: data.to_json)
   end

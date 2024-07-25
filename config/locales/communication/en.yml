@@ -168,24 +168,25 @@ en:
         url: URL
       communication/website/page:
         bodyclass: Specific CSS class
-        breadcrumb_title: Title in breadcrumbs
         children: Children pages
+        full_width: Full width
+        parent: Parent page
+        related_category: Related category
+        special_page: Special page
+        website: Website
+      communication/website/page/localization:
+        breadcrumb_title: Title in breadcrumbs
         featured_image: Featured image
         featured_image_alt: Alt text
-        full_width: Full width
         header_cta: Display call to action into header
         header_cta_label: Call to action label
         header_cta_url: Call to cation target
         header_text: Title displayed in header
-        parent: Parent page
         path: Path
         published: Published?
-        related_category: Related category
         slug: Slug
-        special_page: Special page
         text: Main page text
         title: Title
-        website: Website
       communication/website/permalink:
         path: Path
       communication/website/portfolio/category:
@@ -352,6 +353,11 @@ en:
           published: Published
           published_status: Publication status
           show: Show page
+          special_pages:
+            organization:
+              disconnect: Disconnect
+            person:
+              disconnect: Disconnect
           structure: Pages
           with_children: "with children:"
         permalinks:

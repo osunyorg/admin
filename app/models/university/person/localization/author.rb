@@ -13,8 +13,8 @@ class University::Person::Localization::Author < University::Person::Localizatio
 
   def dependencies
     [
-      localization,
-      localization.about
+      person_localization,
+      person_localization.about
     ]
   end
 

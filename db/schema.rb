@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_22_094332) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_25_090040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -454,6 +454,34 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_094332) do
     t.index ["university_id"], name: "index_communication_website_menus_on_university_id"
   end
 
+  create_table "communication_website_page_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "breadcrumb_title"
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.boolean "header_cta"
+    t.string "header_cta_label"
+    t.string "header_cta_url"
+    t.string "header_text"
+    t.string "meta_description"
+    t.string "migration_identifier"
+    t.boolean "published"
+    t.datetime "published_at"
+    t.string "slug"
+    t.text "summary"
+    t.text "text"
+    t.string "title"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "communication_website_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_website_page_localizations_on_about_id"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_64c4831480"
+    t.index ["language_id"], name: "index_communication_website_page_localizations_on_language_id"
+    t.index ["university_id"], name: "idx_on_university_id_e62b2aba53"
+  end
+
   create_table "communication_website_pages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
@@ -473,7 +501,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_094332) do
     t.integer "kind"
     t.text "summary"
     t.string "bodyclass"
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.text "featured_image_credit"
     t.boolean "full_width", default: false
     t.string "type"
@@ -1630,6 +1658,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_22_094332) do
   add_foreign_key "communication_website_menus", "communication_websites"
   add_foreign_key "communication_website_menus", "languages"
   add_foreign_key "communication_website_menus", "universities"
+  add_foreign_key "communication_website_page_localizations", "communication_website_pages", column: "about_id"
+  add_foreign_key "communication_website_page_localizations", "communication_websites"
+  add_foreign_key "communication_website_page_localizations", "languages"
+  add_foreign_key "communication_website_page_localizations", "universities"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "original_id"
   add_foreign_key "communication_website_pages", "communication_website_pages", column: "parent_id"
   add_foreign_key "communication_website_pages", "communication_websites"
