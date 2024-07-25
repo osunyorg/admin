@@ -166,6 +166,8 @@ fr:
     will_be_published_html: "<i>%{model}</i> va bientôt être publié(e)."
   batch_selectable:
     title: Modifier la sélection
+  cancel: Annuler
+  confirm: Confirmer
   content: Contenu
   cookies_consent_choice: Choix en matière de cookies
   cookies_policy: Politique de cookies

@@ -77,6 +77,19 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @website.to_s)
   end
 
+  def confirm_localization
+    @about_gid = params[:about]
+    @about = GlobalID::Locator.locate(@about_gid)
+  end
+
+  def do_confirm_localization
+    @about_gid = params[:about]
+    @about = GlobalID::Locator.locate(@about_gid)
+    @website.localize_in!(current_language)
+    @about.localize_in!(current_language)
+    redirect_to [:edit, :admin, @about]
+  end
+
   protected
 
   def set_feature_nav
@@ -85,8 +98,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def website_params
     attribute_names = [
-      :url, :repository, :about_type, :about_id, :in_production, 
-      :in_showcase, 
+      :url, :repository, :about_type, :about_id, :in_production,
+      :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda, :feature_portfolio,
       :default_time_zone,
@@ -94,7 +107,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :deployment_status_badge, :autoupdate_theme,
       showcase_tag_ids: [],
       localizations_attributes: [
-        :id, :language_id, :name, 
+        :id, :language_id, :name,
         :social_mastodon, :social_x, :social_linkedin, :social_youtube,
         :social_vimeo, :social_peertube, :social_instagram, :social_facebook,
         :social_tiktok, :social_email, :social_github

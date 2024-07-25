@@ -96,14 +96,28 @@ class Communication::Website < ApplicationRecord
 
   belongs_to :default_language, class_name: "Language"
 
+  # TODO L10N : remove after migrations
+  has_and_belongs_to_many :legacy_languages,
+                          class_name: "Language",
+                          join_table: :communication_websites_languages,
+                          foreign_key: :communication_website_id,
+                          association_foreign_key: :language_id
+  has_many :languages, through: :localizations
+  has_many  :active_languages,
+            -> { where(communication_website_localizations: { published: true }) },
+            through: :localizations,
+            source: :language
+
   has_one_attached_deletable :default_image
   has_one_attached_deletable :default_shared_image
-  
+
   validates :default_image, size: { less_than: 5.megabytes }
   validates :default_shared_image, size: { less_than: 5.megabytes }
 
   before_validation :sanitize_fields
-  before_validation :set_default_language, on: :create
+  before_validation :set_default_language,
+                    :set_first_localization_as_published,
+                    on: :create
 
   scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
@@ -132,14 +146,14 @@ class Communication::Website < ApplicationRecord
     # Le website est le SEUL cas d'auto-dépendance
     [self] +
     configs +
-    pages.where(language_id: language_ids) +
-    posts.where(language_id: language_ids) +
-    post_categories.where(language_id: language_ids) +
-    events.where(language_id: language_ids) +
-    agenda_categories.where(language_id: language_ids) +
-    projects.where(language_id: language_ids) +
-    portfolio_categories.where(language_id: language_ids) +
-    menus.where(language_id: language_ids) +
+    # pages.where(language_id: active_language_ids) +
+    posts.where(language_id: active_language_ids) +
+    post_categories.where(language_id: active_language_ids) +
+    events.where(language_id: active_language_ids) +
+    agenda_categories.where(language_id: active_language_ids) +
+    projects.where(language_id: active_language_ids) +
+    portfolio_categories.where(language_id: active_language_ids) +
+    # menus.where(language_id: active_language_ids) +
     [about] +
     [default_image&.blob] +
     [default_shared_image&.blob]
@@ -151,10 +165,6 @@ class Communication::Website < ApplicationRecord
 
   def website_id
     id
-  end
-
-  def languages
-    Language.where(id: localizations.pluck(:language_id)).ordered
   end
 
   # Override to follow direct objects
@@ -193,6 +203,13 @@ class Communication::Website < ApplicationRecord
 
   def set_default_language
     self.default_language_id = self.localizations.first.language_id
+  end
+
+  def set_first_localization_as_published
+    localizations.first.assign_attributes(
+      published: true,
+      published_at: Time.zone.now
+    )
   end
 
   def reconnect_dependency(dependency, new_university_id)

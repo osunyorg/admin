@@ -166,6 +166,8 @@ en:
     will_be_published_html: "<i>%{model}</i> will soon be published."
   batch_selectable:
     title: Edit the selection
+  cancel: Cancel
+  confirm: Confirm
   content: Content
   cookies_consent_choice: Cookies consent choice
   cookies_policy: Cookies policy

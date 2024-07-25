@@ -4,6 +4,8 @@
 #
 #  id               :uuid             not null, primary key
 #  name             :string
+#  published        :boolean          default(FALSE)
+#  published_at     :datetime
 #  social_email     :string
 #  social_facebook  :string
 #  social_github    :string
@@ -35,6 +37,7 @@
 #
 class Communication::Website::Localization < ApplicationRecord
   include AsLocalization
+  include WithPublication
   include WithUniversity
 
   # Localization is not directly exportable to git

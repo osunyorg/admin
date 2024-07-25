@@ -9,7 +9,9 @@ namespace :communication do
       get :security
       get :static
       get :production
-      scope 'git-analysis' do 
+      get :confirm_localization
+      post :do_confirm_localization
+      scope 'git-analysis' do
         get '' => 'websites/git_analysis#index', as: :git_analysis
         post '' => 'websites/git_analysis#launch'
       end
@@ -116,7 +118,6 @@ namespace :communication do
         end
       end
     end
-    resource :localization, controller: 'websites/localizations', only: [:show, :update]
   end
   scope "/contents/:about_type/:about_id", as: :contents, controller: 'contents' do
     get :write

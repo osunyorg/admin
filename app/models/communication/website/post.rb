@@ -41,8 +41,6 @@
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
   include Contentful # TODO L10N : To remove
-  # include Initials
-  include Permalinkable # TODO L10N : To remove
   include Sanitizable
   include Shareable # TODO L10N : To remove
   include Localizable
@@ -53,6 +51,13 @@ class Communication::Website::Post < ApplicationRecord
   include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+              class_name: "Communication::Website::Permalink",
+              as: :about,
+              dependent: :destroy
+
 
   belongs_to :author,
              class_name: 'University::Person',

@@ -13,10 +13,10 @@
       <%= f.input :last_name,
                   required: true,
                   input_html: { autocomplete: "last_name" } %>
-      <%= render 'admin/application/i18n/form', f: f %>
+      <%= render 'admin/application/l10n/form', f: f %>
     </div>
     <div class="col-lg-6">
-     
+
       <%= f.input :mobile_phone %>
       <%= f.input :picture,
                   as: :single_deletable_file,
@@ -29,7 +29,7 @@
       <% end %>
     </div>
   </div>
-  
+
 
   <h3 class="mt-5 mb-4"><%= t("devise.passwords.edit.new") %></h3>
 

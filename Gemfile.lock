@@ -452,7 +452,7 @@ GEM
     raabro (1.4.0)
     racc (1.8.0)
     rack (3.1.7)
-    rack-mini-profiler (2.3.4)
+    rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
     rack-protection (4.0.0)
       base64 (>= 0.1.0)
@@ -701,7 +701,7 @@ DEPENDENCIES
   pg_query
   pghero
   puma
-  rack-mini-profiler (~> 2.0)
+  rack-mini-profiler (~> 3.0)
   rails (~> 7.1.0)
   rails-autocomplete (~> 2)
   rails-i18n

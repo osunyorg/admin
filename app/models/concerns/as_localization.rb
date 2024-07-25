@@ -3,6 +3,7 @@ module AsLocalization
 
   included do
     include WithDependencies
+    include LibreTranslatable
 
     belongs_to  :language
     belongs_to  :about,
