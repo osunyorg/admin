@@ -37,9 +37,33 @@ action += link_to t('university.manage_experiences'),
 
 <%= render 'admin/application/connections/list', about: @person %>
 
+<% if current_user.server_admin? %>
+  <%= osuny_panel t('static') do  %>
+    <%= link_to 'Person',
+                static_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
+    <%= link_to 'Person::Administrator', 
+                static_administrator_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
+    <%= link_to 'Person::Author', 
+                static_author_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
+    <%= link_to 'Person::Researcher', 
+                static_researcher_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
+    <%= link_to 'Person::Teacher', 
+                static_teacher_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %>
+  <% end %>
+<% end %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @person %>
-  <%= static_link static_admin_university_person_path(@person) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

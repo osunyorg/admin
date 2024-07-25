@@ -38,6 +38,10 @@ namespace :university do
     end
     member do
       get :static
+      get 'administrator/static' => 'people/administrators#static', as: 'static_administrator' 
+      get 'author/static' => 'people/authors#static', as: 'static_author' 
+      get 'researcher/static' => 'people/researchers#static', as: 'static_researcher' 
+      get 'teacher/static' => 'people/teachers#static', as: 'static_teacher' 
       get 'experiences' => 'people/experiences#edit'
       patch 'experiences' => 'people/experiences#update'
     end
