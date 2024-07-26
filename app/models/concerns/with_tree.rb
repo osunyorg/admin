@@ -2,7 +2,6 @@ module WithTree
   extend ActiveSupport::Concern
 
   included do
-
     scope :root, -> { where(parent_id: nil) }
 
     def has_children?
@@ -44,8 +43,6 @@ module WithTree
       end
       elements
     end
-
   end
-
 
 end

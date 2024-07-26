@@ -95,6 +95,16 @@ module Admin::OsunyHelper
     link_to_if condition, name, path, class: classes.strip, data: { confirm: alert }
   end
 
+  def osuny_collection(list, except: nil, localized: false)
+    collection = list.ordered(current_language).map do |object|
+      label = localized ? object.best_localization_for(current_language).try(:to_s) : object.to_s
+      id = object.id
+      collection << [label, id]
+    end
+    collection = collection.reject { |o| o.last == except.id } unless except.nil?
+    collection
+  end
+
   def osuny_collection_tree(list, except: nil, localized: false)
     collection = osuny_collection_recursive(list.root, 0, localized)
     collection = collection.reject { |o| o.last == except.id } unless except.nil?

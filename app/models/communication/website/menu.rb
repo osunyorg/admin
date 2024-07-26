@@ -29,6 +29,7 @@
 #
 class Communication::Website::Menu < ApplicationRecord
   IDENTIFIER_MAX_LENGTH = 100
+  DEFAULT_MENUS_IDENTIFIERS = ['primary', 'legal', 'social'].freeze
 
   include AsDirectObject
   include Initials
@@ -46,6 +47,8 @@ class Communication::Website::Menu < ApplicationRecord
   after_create :sync_in_all_website_languages
 
   scope :ordered, -> { order(created_at: :asc) }
+  scope :for_identifier, -> (identifier) { where(identifier: identifier) }
+  scope :for_language, -> (language) { where(language_id: language.id) }
 
   def self.menu_title_from_locales(identifier, language)
     key = "communication.website.menus.default_title.#{identifier}"
@@ -100,11 +103,11 @@ class Communication::Website::Menu < ApplicationRecord
   private
 
   def sync_in_all_website_languages
+    # Default menus are handled in Communication::Website::WithMenus
+    return if DEFAULT_MENUS_IDENTIFIERS.include?(identifier)
     website.languages.where.not(id: language_id).each do |new_language|
       new_menu = self.dup
       new_menu.language = new_language
-      title_from_locales = self.class.menu_title_from_locales(new_menu.identifier, new_language)
-      new_menu.title = title_from_locales unless title_from_locales.blank?
       new_menu.save
     end
   end

@@ -84,6 +84,28 @@ class Communication::Website::Menu::Item < ApplicationRecord
     ICONS[kind] if ICONS.has_key? kind
   end
 
+  def self.collection_for(kind, website)
+    # TODO L10N : remove every tmp_orginal below
+    case kind
+    when 'page'
+      website.pages.tmp_original
+    when 'diploma'
+      website.education_diplomas.tmp_original
+    when 'program'
+      website.education_programs.tmp_original
+    when 'category'
+      website.post_categories.tmp_original
+    when 'post'
+      website.posts.tmp_original
+    when 'volume'
+      website.research_volumes.tmp_original
+    when 'paper'
+      website.research_papers.tmp_original
+    when 'location'
+      website.administration_locations.tmp_original
+    end
+  end
+
   def to_s
     "#{title}"
   end

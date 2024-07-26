@@ -54,11 +54,19 @@ module Communication::Website::WithMenus
   end
 
   def initialize_menus
-    # As menu are duplicated in other languages whencreated we just have to create the menu in the default language
-    create_default_menus(default_language)
+    languages.each do |language|
+      create_default_menus(language)
+      generate_automatic_menus_for_language(language)
+    end
   end
 
-  def generate_automatic_menus(language)
+  def generate_automatic_menus_for_identifier(identifier)
+    menus.automatic.for_identifier(identifier).find_each do |menu|
+      menu.generate_automatically
+    end
+  end
+
+  def generate_automatic_menus_for_language(language)
     menus.automatic.for_language(language).find_each do |menu|
       menu.generate_automatically
     end
@@ -67,9 +75,9 @@ module Communication::Website::WithMenus
   protected
 
   def create_default_menus(language)
-    create_default_menu 'primary', language
-    create_default_menu 'social', language
-    create_default_menu 'legal', language
+    Communication::Website::Menu::DEFAULT_MENUS_IDENTIFIERS.each do |identifier|
+      create_default_menu identifier, language
+    end
   end
 
   def create_default_menu(identifier, language)

@@ -58,7 +58,7 @@ class Communication::Website::Page < ApplicationRecord
   include Sanitizable
   include Shareable # TODO L10N : To remove
   include Localizable
-  # include WithAutomaticMenus # TODO L10N : To restore
+  include WithAutomaticMenus
   include WithBlobs # TODO L10N : To remove
   include WithDuplication # TODO L10N : To adjust
   include WithFeaturedImage # TODO L10N : To remove
@@ -145,7 +145,7 @@ class Communication::Website::Page < ApplicationRecord
   def references
     [parent] +
     siblings +
-    # website.menus +
+    website.menus +
     abouts_with_page_block
   end
 
