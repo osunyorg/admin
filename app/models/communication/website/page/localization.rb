@@ -41,6 +41,7 @@
 #
 class Communication::Website::Page::Localization < ApplicationRecord
   include AsLocalization
+  include AsLocalizedTree
   include Contentful
   include Initials
   include Permalinkable
@@ -50,7 +51,6 @@ class Communication::Website::Page::Localization < ApplicationRecord
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
-  include WithPath # Must be included after Sluggable. WithPath overwrites the git_path method defined in WithWebsites
   include WithPublication
   include WithUniversity
 
@@ -62,6 +62,8 @@ class Communication::Website::Page::Localization < ApplicationRecord
   validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
 
   before_validation :set_communication_website_id
+
+  delegate :is_home?, to: :about
 
   def template_static
     "admin/communication/websites/pages/static"
@@ -83,6 +85,17 @@ class Communication::Website::Page::Localization < ApplicationRecord
     breadcrumb_title.presence || title
   end
 
+  def git_path(website)
+    return unless website.id == communication_website_id && published
+    current_git_path
+  end
+
+  # pages/_index.html
+  # pages/page-de-test/_index.html
+  def git_path_relative
+    ['pages', slug_with_ancestors_slugs, '_index.html'].compact_blank.join('/')
+  end
+
   def to_s
     "#{title}"
   end
@@ -93,11 +106,32 @@ class Communication::Website::Page::Localization < ApplicationRecord
     accessibility_merge_array blocks
   end
 
+  # La page d'accueil n'a jamais de slug
+  def set_slug
+    if is_home?
+      self.slug = ''
+    else
+      super
+    end
+  end
+
+  def skip_slug_validation?
+    is_home?
+  end
+
   def slug_unavailable?(slug)
     self.class.unscoped
               .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
               .where.not(id: self.id)
               .exists?
+  end
+
+  def current_git_path
+    @current_git_path ||= git_path_prefix + git_path_relative
+  end
+
+  def git_path_prefix
+    @git_path_prefix ||= git_path_content_prefix(website)
   end
 
   def set_communication_website_id

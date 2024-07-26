@@ -7,7 +7,7 @@ module WithPublication
   included do
     scope :published, -> { where(published: true) }
     scope :draft, -> { where(published: false) }
-    scope :ordered, -> { order(published_at: :desc) }
+    scope :ordered_by_published_at, -> { order(published_at: :desc) }
 
     before_validation :set_published_at
   end

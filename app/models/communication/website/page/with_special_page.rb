@@ -1,4 +1,4 @@
-module Communication::Website::Page::WithType
+module Communication::Website::Page::WithSpecialPage
   extend ActiveSupport::Concern
 
   included do
@@ -105,14 +105,17 @@ module Communication::Website::Page::WithType
   end
 
   def initialize_special_page
+  # Set default attributes for special page
+  self.parent = default_parent
+  self.full_width = full_width_by_default?
+
+  # Set default attributes for special page's localization
   i18n_key = "communication.website.pages.defaults.#{type_key}"
   language = website.default_language
   localizations.build(
     language_id: language.id,
     title: I18n.t("#{i18n_key}.title", locale: language.iso_code),
     slug: I18n.t("#{i18n_key}.slug", locale: language.iso_code),
-    parent: default_parent,
-    full_width: full_width_by_default?,
     published: published_by_default?
     # note: published_at will be set by WithPublication concern
   )

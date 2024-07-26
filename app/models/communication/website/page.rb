@@ -64,7 +64,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   # TODO L10N : To adjust (WithType)
-  include WithType # WithType can set default publication status, so must be included before WithPublication
+  include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before WithPublication
   include WithPosition # Scope :ordered must override WithPublication
   include WithTree
   include WithUniversity
@@ -139,18 +139,14 @@ class Communication::Website::Page < ApplicationRecord
   scope :for_full_width, -> (full_width) { where(full_width: full_width == 'true') }
 
   def dependencies
-    [localizations]
+    localizations.in_languages(website.active_language_ids)
   end
 
   def references
     [parent] +
     siblings +
-    website.menus +
+    # website.menus +
     abouts_with_page_block
-  end
-
-  def best_breadcrumb_title_in(language)
-    best_localization_for(language).best_breadcrumb_title
   end
 
   # La page actuelle a les bodyclass classe1 et classe2 ("classe1 classe2")

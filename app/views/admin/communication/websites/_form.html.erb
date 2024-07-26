@@ -8,6 +8,7 @@
     <div class="row">
       <div class="col-lg-4">
         <%= lf.input :name %>
+        <%= lf.input :published, wrapper: :custom_boolean_switch %>
         <% if website.localizations.many? %>
           <%= f.association :default_language,
                             include_blank: false,

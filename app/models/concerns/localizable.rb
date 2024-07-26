@@ -94,6 +94,13 @@ module Localizable
   # TODO L10N : to remove
   ### DEPRECATED METHODS - has to be removed when cleaning L10N
 
+  # On déclare l'objet syncable pour que l'analyse puisse se poursuivre jusqu'aux localisations.
+  # Il n'y aura pas d'effet lié à la page elle-même.
+  # Peut-être faudrait-il travailler directement sur les localisations, mais c'est une grosse refonte.
+  def syncable?
+    true
+  end
+
   # TODO L10N : Used in migration, to remove
   def translate_contents!(translation)
     blocks.without_heading.ordered.each do |block|

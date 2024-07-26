@@ -71,7 +71,7 @@ class Communication::Website::Post::Category < ApplicationRecord
                           association_foreign_key: :communication_website_post_id
 
   def dependencies
-    localizations +
+    localizations.in_languages(website.active_language_ids) +
     children +
     [website.config_default_content_security_policy]
   end
@@ -87,7 +87,7 @@ class Communication::Website::Post::Category < ApplicationRecord
   def siblings
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
-  
+
   def exportable_to_git?
     false
   end

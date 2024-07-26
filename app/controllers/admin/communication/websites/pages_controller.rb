@@ -49,9 +49,8 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     add_breadcrumb(@l10n, admin_communication_website_page_path(@page))
   end
 
-  # TODO L10N : To adjust
   def publish
-    @page.published = true
+    @l10.update(published: true)
     @page.save_and_sync
     redirect_back fallback_location: admin_communication_website_page_path(@page),
                   notice: t('admin.communication.website.publish.notice')

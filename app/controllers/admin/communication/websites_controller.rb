@@ -107,7 +107,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :deployment_status_badge, :autoupdate_theme,
       showcase_tag_ids: [],
       localizations_attributes: [
-        :id, :language_id, :name,
+        :id, :language_id, :name, :published,
         :social_mastodon, :social_x, :social_linkedin, :social_youtube,
         :social_vimeo, :social_peertube, :social_instagram, :social_facebook,
         :social_tiktok, :social_email, :social_github

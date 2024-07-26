@@ -33,7 +33,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
           <%= lf.input :published if page.draftable? %>
           <%= render  "admin/application/slug/form",
                       f: lf,
-                      source: '#communication_website_page_localization_title' unless page.is_home? %>
+                      source: '#communication_website_page_localizations_attributes_0_title' unless page.is_home? %>
           <%= f.association :parent,
                             collection: osuny_collection_tree(@website.pages, except: page, localized: true),
                             include_blank: false unless page.is_home? %>

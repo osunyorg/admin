@@ -1,20 +1,20 @@
 <%
 if @website
-  webpages = about.hugo_ancestors_and_self(@website)
+  localizations = about.hugo_ancestors_and_self(@website)
 %>
 breadcrumbs:
 <%
-webpages.each do |webpage|
-  # Les pages (Communication::Website::Page) ont une gymnastique un peu spéciale,
+localizations.each do |l10n|
+  # Les pages (Communication::Website::Page::Localization) ont une gymnastique un peu spéciale,
   # parce qu'il faut prendre le titre dédié au breadcrumb.
-  if webpage.respond_to?(:best_breadcrumb_title_in)
-    title = webpage.best_breadcrumb_title_in(about.language)
+  if l10n.respond_to?(:best_breadcrumb_title)
+    title = l10n.best_breadcrumb_title
   else
-    title = webpage.to_s_in(about.language)
+    title = l10n.to_s
   end
-  hugo = webpage.hugo(@website)
+  hugo = l10n.hugo(@website)
   permalink = hugo.permalink
-  last = webpage == webpages.last
+  last = l10n == localizations.last
 %>
   - title: >-
       <%= title %>

@@ -143,6 +143,7 @@ en:
         updated_at: Updated at
       communication/website/localization:
         name: Name
+        published: Language published
         social_email: "Email"
         social_facebook: "Facebook (private, belongs to Meta)"
         social_github: "Github (private, belongs to Microsoft)"

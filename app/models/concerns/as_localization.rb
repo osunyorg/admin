@@ -13,6 +13,18 @@ module AsLocalization
     validates :language_id, uniqueness: { scope: :about_id }
 
     before_validation :set_university
+
+    scope :in_languages, -> (language_ids) {
+      where(language_id: language_ids)
+    }
+
+    delegate  :is_direct_object?,
+              :is_indirect_object?,
+              to: :about
+  end
+
+  def delete_obsolete_connections
+    about.try(:delete_obsolete_connections)
   end
 
   # Used by Hugo to link localizations with themselves
@@ -25,12 +37,14 @@ module AsLocalization
     @original ||= about.localizations.order(:created_at).first
   end
 
+  # If we're creating an object, there is no original yet, but it will be original.
+  # Otherwise, comparison is ok.
   def original?
-    self == original
+    original.nil? || (self == original)
   end
 
   def for_website?(website)
-    website.language_ids.include?(language_id) &&
+    website.active_language_ids.include?(language_id) &&
       about.for_website?(website)
   end
 
@@ -59,7 +73,7 @@ module AsLocalization
     slugs = about.ancestors_and_self.map do |ancestor|
       ancestor.best_localization_for(language).slug
     end
-    slugs.join(separator)
+    slugs.compact_blank.join(separator)
   end
 
   protected

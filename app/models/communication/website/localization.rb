@@ -51,6 +51,10 @@ class Communication::Website::Localization < ApplicationRecord
     [website.config_default_languages]
   end
 
+  def website
+    about
+  end
+
   def to_s
     name
   end

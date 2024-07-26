@@ -60,6 +60,8 @@ class Communication::Website::Permalink < ApplicationRecord
     false
   end
 
+  # Can be overwritten
+  # Not protected because it is used in the website config "DefaultLanguages"
   def self.pattern_in_website(website, language)
     raise NotImplementedError
   end

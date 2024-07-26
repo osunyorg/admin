@@ -6,7 +6,7 @@ language = @l10n.language
 date: "<%= @l10n.published_at&.iso8601 %>"
 <%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
-<%= render 'admin/application/static/design', about: @l10n, full_width: false, toc_offcanvas: false %>
+<%= render 'admin/application/static/design', about: post, full_width: false, toc_offcanvas: false %>
 <% if @l10n.pinned %>
 weight: 1
 <% end %>

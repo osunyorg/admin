@@ -98,13 +98,11 @@ class Communication::Website::Post < ApplicationRecord
   }
 
   def dependencies
-    calculated_dependencies = (
-      localizations +
-      categories +
-      [website.config_default_content_security_policy]
-    )
-    calculated_dependencies += author.author_facets if author.present?
-    calculated_dependencies
+    [website.config_default_content_security_policy] +
+    localizations.in_languages(website.active_language_ids) +
+    categories +
+    # Si author est nil, rien, qui s  era compacté automatiquement
+    author.try(:author_facets)
   end
 
   def references

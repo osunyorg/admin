@@ -145,15 +145,16 @@ class Communication::Website < ApplicationRecord
   def dependencies
     # Le website est le SEUL cas d'auto-dépendance
     [self] +
+    localizations.in_languages(active_language_ids) +
     configs +
-    # pages.where(language_id: active_language_ids) +
-    posts.where(language_id: active_language_ids) +
-    post_categories.where(language_id: active_language_ids) +
-    events.where(language_id: active_language_ids) +
-    agenda_categories.where(language_id: active_language_ids) +
-    projects.where(language_id: active_language_ids) +
-    portfolio_categories.where(language_id: active_language_ids) +
-    # menus.where(language_id: active_language_ids) +
+    pages +
+    posts +
+    post_categories +
+    events +
+    agenda_categories +
+    projects +
+    portfolio_categories +
+    # menus +
     [about] +
     [default_image&.blob] +
     [default_shared_image&.blob]
