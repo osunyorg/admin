@@ -54,14 +54,8 @@ module Communication::Website::WithMenus
   end
 
   def initialize_menus
-    # default_language menu has to be created first, to be a reference for other languages
+    # As menu are duplicated in other languages whencreated we just have to create the menu in the default language
     create_default_menus(default_language)
-    languages_except_default.each do |language|
-      create_default_menus(language)
-    end
-    languages.each do |language|
-      generate_automatic_menus(language)
-    end
   end
 
   def generate_automatic_menus(language)
@@ -80,30 +74,13 @@ module Communication::Website::WithMenus
 
   def create_default_menu(identifier, language)
     menus.where(
-            university: university, 
-            identifier: identifier, 
+            university: university,
+            identifier: identifier,
             language: language
           )
           .first_or_create do |menu|
-      menu.title = menu_title(identifier, language)
-      menu.original_id = menu_original_id(identifier, language)
+      menu.title = Communication::Website::Menu.menu_title_from_locales(identifier, language)
     end
-  end
-
-  def menu_title(identifier, language)
-    I18n.t(
-      "communication.website.menus.default_title.#{identifier}", 
-      locale: language.iso_code
-    )
-  end
-
-  def menu_original_id(identifier, language)
-    return nil if language.id == default_language_id
-    menus.where(
-            identifier: identifier, 
-            language_id: default_language_id
-          )
-          .first.id
   end
 
 end

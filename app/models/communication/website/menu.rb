@@ -33,17 +33,25 @@ class Communication::Website::Menu < ApplicationRecord
   include AsDirectObject
   include Initials
   include Sanitizable
-  include Localizable
   include WithAutomatism
   include WithUniversity
 
+  belongs_to :language
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy
 
   validates :title, :identifier, presence: true
   validates :identifier,  length: { maximum: IDENTIFIER_MAX_LENGTH },
                           uniqueness: { scope: [:communication_website_id, :language_id] }
 
+  after_create :sync_in_all_website_languages
+
   scope :ordered, -> { order(created_at: :asc) }
+
+  def self.menu_title_from_locales(identifier, language)
+    key = "communication.website.menus.default_title.#{identifier}"
+    locale = language.iso_code
+    I18n.exists?(key, locale) ? I18n.t(key, locale: locale) : ''
+  end
 
   def to_s
     "#{title}"
@@ -57,6 +65,7 @@ class Communication::Website::Menu < ApplicationRecord
     "admin/communication/websites/menus/static"
   end
 
+  # TODO L10N : remove
   # Override from Translatable
   def translate_relations!(translation)
     items.root.ordered.each { |item| translate_menu_item!(item, translation) }
@@ -84,4 +93,21 @@ class Communication::Website::Menu < ApplicationRecord
     # If no target translation found, convert to a blank menu item if item has children.
     item_translation.kind = 'blank' if item_translation.about.nil? && item.children.any?
   end
+  # END TODO L10N
+
+
+
+  private
+
+  def sync_in_all_website_languages
+    website.languages.where.not(id: language_id).each do |new_language|
+      new_menu = self.dup
+      new_menu.language = new_language
+      title_from_locales = self.class.menu_title_from_locales(new_menu.identifier, new_language)
+      new_menu.title = title_from_locales unless title_from_locales.blank?
+      new_menu.save
+    end
+  end
+
+
 end
