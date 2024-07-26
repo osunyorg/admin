@@ -11,8 +11,7 @@ class Communication::Website::Permalink::Author < Communication::Website::Permal
   # /equipe/:slug/actualites/
   def self.pattern_in_website(website, language)
     posts_page = website.special_page(Communication::Website::Page::CommunicationPost)
-    posts_page_l10n = posts_page.localization_for(language)
-    # TODO L10N : Comment être sûr que la localisation existe ?
+    posts_page_l10n = posts_page.best_localization_for(language)
     "/#{special_page_path(website, language)}/:slug/#{posts_page_l10n.slug}/"
   end
 
