@@ -83,10 +83,11 @@ class Communication::Website::Permalink < ApplicationRecord
     website.special_page(self.special_page_type)
   end
 
-  # Méthode d'utilité pour récupérer le slug
-  # TODO L10N : To adjust
-  def self.special_page_path(website)
-    self.special_page(website).slug_with_ancestors
+  # Méthode d'utilité pour récupérer le slug d'une page spéciale avec ses ancêtres
+  def self.special_page_path(website, language)
+    page_l10n = self.special_page(website).localization_for(language)
+    return if page_l10n.nil?
+    page_l10n.slug_with_ancestors_slugs
   end
 
   # Doit être surchargé dans les classes par type, comme `Communication::Website::Permalink::Post`

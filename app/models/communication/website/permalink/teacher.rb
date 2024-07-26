@@ -8,7 +8,7 @@ class Communication::Website::Permalink::Teacher < Communication::Website::Perma
   end
 
   # /equipe/:slug/programs/
-  # FIXME
+  # FIXME : Remplacer le programs comme dans Permalink::Author ?
   def self.pattern_in_website(website, language)
     "/#{special_page_path(website, language)}/:slug/programs/"
   end
