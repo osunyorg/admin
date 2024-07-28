@@ -12,7 +12,7 @@ breadcrumbs:
   page_l10n = page.localization_for(@l10n.language)
 %>
   - title: "<%= page_l10n.to_s %>"
-    path: "<%= page_l10n.path %>"
+    path: "<%= page_l10n.current_permalink_in_website(@website)&.path %>"
 <% end %>
   - title: "<%= person_localization.to_s %>"
     path: "<%= person_localization.current_permalink_in_website(@website)&.path %>"

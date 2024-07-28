@@ -59,16 +59,16 @@ image:
     <%= prepare_html_for_static @l10n.picture_credit %>
 <% end %>
 roles:
-<% if person.author.for_website?(@website) %>
+<% if @l10n.author.for_website?(@website) %>
   - author
 <% end %>
-<% if person.teacher.for_website?(@website) %>
+<% if @l10n.teacher.for_website?(@website) %>
   - teacher
 <% end %>
-<% if person.researcher.for_website?(@website) %>
+<% if @l10n.researcher.for_website?(@website) %>
   - researcher
 <% end %>
-<% if person.administrator.for_website?(@website) %>
+<% if @l10n.administrator.for_website?(@website) %>
   - administrator
 <% end %>
 <% if person.involvements_as_teacher.any? %>
