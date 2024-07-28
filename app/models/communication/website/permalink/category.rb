@@ -5,7 +5,7 @@
 # Et il faudrait migrer en conséquence
 class Communication::Website::Permalink::Category < Communication::Website::Permalink
   def self.required_in_config?(website)
-    website.has_blog_posts? && website.has_blog_categories?
+    website.feature_posts
   end
 
   def self.static_config_key

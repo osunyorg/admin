@@ -1,6 +1,6 @@
 class Communication::Website::Permalink::Post < Communication::Website::Permalink
   def self.required_in_config?(website)
-    website.has_blog_posts?
+    website.feature_posts
   end
 
   def self.static_config_key
