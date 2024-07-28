@@ -43,6 +43,16 @@ module AsLocalization
     original.nil? || (self == original)
   end
 
+  # TODO L10N : To handle
+  # Used to fix Dependencies::CleanWebsitesIfNecessaryJob on Organization::Localization
+  def websites
+    if about.respond_to?(:websites)
+      about.websites
+    else
+      raise NameError, "No method 'websites' for #{about.class}"
+    end
+  end
+
   def for_website?(website)
     website.active_language_ids.include?(language_id) &&
       about.for_website?(website)
