@@ -3,5 +3,6 @@
       programs:
 <% block.template.elements.each do |element| %>
 <% next unless element.program %>
+        <%# TODO L10N : Handle Program::Localization here %>
         - path: "<%= element.program.path %>"
 <% end %>

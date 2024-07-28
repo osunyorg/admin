@@ -7,11 +7,13 @@
 <% if block.template.mode == 'all' %>
       all: true
 <% elsif block.template.mode == 'category' && block.template.category %>
+      <%# TODO L10N : Handle Post::Category::Localization here %>
       category: "<%= block.template.category.path %>"
 <% end %>
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
       posts:
 <% block.template.selected_posts.each do |post| %>
+        <%# TODO L10N : Handle Post::Localization here %>
         - "<%= post.static_path %>"
 <% end %>

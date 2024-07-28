@@ -1,8 +1,8 @@
-<% 
-if block.template.page 
+<%
+if block.template.page
   page = block.template.page
 %>
-      page: 
+      page:
         path: "<%= page.path %>"
         slug: "<%= page.slug %>"
         file: "<%= page.git_path_relative %>"
@@ -14,6 +14,7 @@ if block.template.page
       layout: <%= block.template.layout %>
       pages:
 <% block.template.selected_pages.each do |element| %>
+        <%# TODO L10N : Handle Page::Localization here %>
         - path: "<%= element.path %>"
           slug: "<%= element.slug %>"
           file: "<%= element.git_path_relative %>"

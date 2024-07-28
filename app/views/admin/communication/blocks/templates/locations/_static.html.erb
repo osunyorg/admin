@@ -2,5 +2,6 @@
       locations:
 <% block.template.elements.each do |element| %>
 <% next unless element.location %>
+        <%# TODO L10N : Handle Location::Localization here %>
         - slug: "<%= element.location.slug %>"
 <% end %>
