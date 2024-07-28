@@ -154,7 +154,7 @@ class Communication::Website < ApplicationRecord
     agenda_categories +
     projects +
     portfolio_categories +
-    # menus +
+    menus +
     [about] +
     [default_image&.blob] +
     [default_shared_image&.blob]

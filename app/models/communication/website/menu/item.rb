@@ -80,6 +80,8 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   after_commit :sync_menu
 
+  delegate :language, to: :menu
+
   def self.icon_for(kind)
     ICONS[kind] if ICONS.has_key? kind
   end
@@ -120,7 +122,13 @@ class Communication::Website::Menu::Item < ApplicationRecord
     when "url"
       url
     else
-      about.new_permalink_in_website(website).computed_path
+      about_l10n = about.localization_for(language)
+      if about_l10n.present?
+        about_l10n_permalink = about_l10n.new_permalink_in_website(website)
+        about_l10n_permalink.computed_path
+      else
+        nil
+      end
     end
   end
 

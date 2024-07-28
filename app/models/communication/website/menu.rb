@@ -35,6 +35,7 @@ class Communication::Website::Menu < ApplicationRecord
   include Initials
   include Sanitizable
   include WithAutomatism
+  include WithGitFiles
   include WithUniversity
 
   belongs_to :language
