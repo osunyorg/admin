@@ -30,11 +30,16 @@
 class University::Organization::Category < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : To remove
-  include Permalinkable # TODO L10N : To remove
   include Localizable
   include WithPosition
   include WithTree
   include WithUniversity
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   belongs_to :parent,
              class_name: 'University::Organization::Category',

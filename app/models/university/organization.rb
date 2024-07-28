@@ -49,7 +49,6 @@
 class University::Organization < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : To remove
-  include Permalinkable # TODO L10N : To remove
   include Sanitizable
   include Shareable # TODO L10N : To remove
   include Localizable
@@ -67,6 +66,12 @@ class University::Organization < ApplicationRecord
   has_many :experiences,
            class_name: 'University::Person::Experience',
            dependent: :destroy
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   has_one_attached_deletable :logo # TODO L10N : To remove
   has_one_attached_deletable :logo_on_dark_background # TODO L10N : To remove

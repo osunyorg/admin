@@ -43,7 +43,6 @@
 class Communication::Website::Post::Category < ApplicationRecord
   include AsDirectObject
   include Contentful # TODO L10N : To remove
-  include Permalinkable # TODO L10N : To remove
   include Sanitizable
   include Localizable
   include Pathable # Included after Sluggable to make sure slug is correct before anything # TODO L10N : To remove
@@ -53,6 +52,12 @@ class Communication::Website::Post::Category < ApplicationRecord
   include WithPosition
   include WithTree
   include WithUniversity
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+              class_name: "Communication::Website::Permalink",
+              as: :about,
+              dependent: :destroy
 
   belongs_to              :parent,
                           class_name: 'Communication::Website::Post::Category',

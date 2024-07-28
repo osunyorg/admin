@@ -65,7 +65,6 @@
 class University::Person < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : To remove
-  include Permalinkable # TODO L10N : To remove
   include Sanitizable
   include Localizable
   include WithBlobs
@@ -90,6 +89,12 @@ class University::Person < ApplicationRecord
   enum gender: { male: 0, female: 1, non_binary: 2 }
 
   belongs_to :user, optional: true
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Person::Category',
