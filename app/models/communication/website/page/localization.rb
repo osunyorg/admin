@@ -93,7 +93,12 @@ class Communication::Website::Page::Localization < ApplicationRecord
   # pages/_index.html
   # pages/page-de-test/_index.html
   def git_path_relative
-    ['pages', slug_with_ancestors_slugs, '_index.html'].compact_blank.join('/')
+    # TODO L10N : A better solution might be possible
+    if about.is_special_page? && about.respond_to?(:git_path_relative)
+      about.git_path_relative
+    else
+      ['pages', slug_with_ancestors_slugs, '_index.html'].compact_blank.join('/')
+    end
   end
 
   def to_s
