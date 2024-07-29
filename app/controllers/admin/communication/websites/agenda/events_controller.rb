@@ -2,6 +2,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   load_and_authorize_resource class: Communication::Website::Agenda::Event,
                               through: :website
 
+  include Admin::HasStaticAction
   include Admin::Localizable
 
   # Allow to override the default load_filters from Admin::Filterable
@@ -11,7 +12,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   has_scope :for_category
 
   def index
-    @events = apply_scopes(@events).for_language(current_language)
+    @events = apply_scopes(@events).tmp_original # TODO L10N : To remove
                                   .ordered_desc
                                   .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
@@ -27,11 +28,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def show
     breadcrumb
-  end
-
-  def static
-    @about = @event
-    render_as_plain_text
   end
 
   def new
@@ -50,7 +46,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     @event.add_photo_import params[:photo_import]
     if @event.save_and_sync
       redirect_to admin_communication_website_agenda_event_path(@event),
-                  notice: t('admin.successfully_created_html', model: @event.to_s)
+                  notice: t('admin.successfully_created_html', model: @event.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -62,7 +58,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     @event.add_photo_import params[:photo_import]
     if @event.update_and_sync(event_params)
       redirect_to admin_communication_website_agenda_event_path(@event),
-                  notice: t('admin.successfully_updated_html', model: @event.to_s)
+                  notice: t('admin.successfully_updated_html', model: @event.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -73,13 +69,13 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def duplicate
     redirect_to [:admin, @event.duplicate],
-                notice: t('admin.successfully_duplicated_html', model: @event.to_s)
+                notice: t('admin.successfully_duplicated_html', model: @event.to_s_in(current_language))
   end
 
   def destroy
     @event.destroy
     redirect_to admin_communication_website_agenda_events_url,
-                notice: t('admin.successfully_destroyed_html', model: @event.to_s)
+                notice: t('admin.successfully_destroyed_html', model: @event.to_s_in(current_language))
   end
   protected
 
@@ -107,11 +103,15 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def event_params
     params.require(:communication_website_agenda_event)
     .permit(
-      :title, :subtitle, :meta_description, :summary, :published, :slug,
-      :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :shared_image, :shared_image_delete,
       :from_day, :from_hour, :to_day, :to_hour, :time_zone,
-      category_ids: []
+      category_ids: [],
+      localizations_attributes: [
+        :id, :title, :subtitle, :meta_description, :summary, :text,
+        :published, :published_at, :slug, 
+        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+        :shared_image, :shared_image_delete, :shared_image_infos,
+        :language_id
+      ]
     )
     .merge(
       university_id: current_university.id,

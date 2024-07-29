@@ -1,16 +1,17 @@
 # == Schema Information
 #
-# Table name: communication_website_post_localizations
+# Table name: communication_website_agenda_event_localizations
 #
 #  id                       :uuid             not null, primary key
+#  add_to_calendar_urls     :jsonb
 #  featured_image_alt       :string
 #  featured_image_credit    :text
-#  meta_description         :text
+#  meta_description         :string
 #  migration_identifier     :string
-#  pinned                   :boolean
-#  published                :boolean
+#  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :string
+#  subtitle                 :string
 #  summary                  :text
 #  text                     :text
 #  title                    :string
@@ -23,19 +24,19 @@
 #
 # Indexes
 #
-#  idx_on_communication_website_id_f6354f61f0                     (communication_website_id)
-#  idx_on_university_id_a3a3f1e954                                (university_id)
-#  index_communication_website_post_localizations_on_about_id     (about_id)
-#  index_communication_website_post_localizations_on_language_id  (language_id)
+#  idx_on_about_id_db6323806a                  (about_id)
+#  idx_on_communication_website_id_87f393a516  (communication_website_id)
+#  idx_on_language_id_c00e1d0218               (language_id)
+#  idx_on_university_id_eaf79b0514             (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_20680ef99a  (language_id => languages.id)
-#  fk_rails_4a9d8c6ad1  (communication_website_id => communication_websites.id)
-#  fk_rails_b4db91ebe4  (about_id => communication_website_posts.id)
-#  fk_rails_db7d7c515c  (university_id => universities.id)
+#  fk_rails_5b3e0f2f0c  (language_id => languages.id)
+#  fk_rails_945cb27530  (about_id => communication_website_agenda_events.id)
+#  fk_rails_991b1838ec  (university_id => universities.id)
+#  fk_rails_bb85c47fb8  (communication_website_id => communication_websites.id)
 #
-class Communication::Website::Post::Localization < ApplicationRecord
+class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
   include Initials
@@ -44,6 +45,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include Shareable
   include WithAccessibility
   include WithBlobs
+  include WithCal
   include WithFeaturedImage
   include WithGitFiles
   include WithPublication
@@ -53,8 +55,16 @@ class Communication::Website::Post::Localization < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  has_summernote :text # TODO: Remove text attribute
+  alias :event :about
 
+  delegate  :archive?, 
+            :from_day, :from_hour,
+            :to_day, :to_hour,
+            :time_zone,
+            to: :event
+
+  has_summernote :text
+  
   validates :title, presence: true
 
   before_validation :set_communication_website_id
@@ -65,25 +75,23 @@ class Communication::Website::Post::Localization < ApplicationRecord
   end
 
   def git_path_relative
-    "posts/#{static_path}.html"
+    path = "events/"
+    path += "archives/#{from_day.year}/" if archive?
+    path += "#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
+    path
+  end
+
+  def template_static
+    "admin/communication/websites/agenda/events/static"
   end
 
   def static_path
     "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
   end
 
-  def template_static
-    "admin/communication/websites/posts/static"
-  end
-
   def dependencies
     active_storage_blobs +
     contents_dependencies
-  end
-
-  def author
-    return if about.author.nil?
-    about.author.localization_for(language)
   end
 
   def categories
