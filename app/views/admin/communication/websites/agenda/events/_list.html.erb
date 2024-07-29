@@ -5,7 +5,10 @@ small ||= false
   <p><%= t('admin.communication.website.agenda.events.none') %></p>
 <% else %>
   <div class="row g-2 mb-3">
-    <% events.each do |event| %>
+    <% 
+    events.each do |event| 
+      event_l10n = event.best_localization_for(current_language)
+      %>
       <div>
         <div class="card card--horizontal">
           <%= osuny_thumbnail_localized event %>
@@ -17,10 +20,10 @@ small ||= false
                                         id: event.id
                                       ),
                                       classes: "stretched-link" %>
-            <% if event.subtitle.present? %>
+            <% if event_l10n.subtitle.present? %>
               <br>
               <span class="text-muted">
-                <%= event.best_localization_for(current_language).subtitle %>
+                <%= event_l10n.subtitle %>
               </span>
             <% end %>
           </div>
