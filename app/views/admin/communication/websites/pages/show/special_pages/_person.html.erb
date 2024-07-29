@@ -6,7 +6,7 @@
     <%= f.input :name,
                 label: false,
                 as: :autocomplete,
-                url: search_admin_university_people_path(lang: @page.language.iso_code, website_id: nil),
+                url: search_admin_university_people_path(website_id: nil),
                 placeholder: t("university.person.search"),
                 input_html: {
                   data: {

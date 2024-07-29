@@ -34,7 +34,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     @organizations = current_university.organizations
                                        .tmp_original # TODO L10N : To remove
                                        .search_by_siren_or_name(@term)
-                                       .ordered
+                                       .ordered(current_language)
   end
 
   def show
