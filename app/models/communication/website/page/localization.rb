@@ -61,7 +61,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
   validates :title, presence: true
   validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
 
-  before_validation :set_communication_website_id
+  before_validation :set_communication_website_id, :set_published_unless_draftable
 
   delegate :is_home?, to: :about
 
@@ -156,6 +156,12 @@ class Communication::Website::Page::Localization < ApplicationRecord
 
   def localize_other_attachments(localization)
     localize_attachment(localization, :shared_image) if shared_image.attached?
+  end
+
+  # Force publication state if the page is not draftable
+  def set_published_unless_draftable
+    return if about.draftable?
+    self.published = true
   end
 
 end
