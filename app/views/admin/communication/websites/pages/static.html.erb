@@ -7,7 +7,7 @@ breadcrumb_title: >-
   <%= prepare_text_for_static @l10n.best_breadcrumb_title %>
 <%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
-<%= render 'admin/application/static/design', about: page %>
+<%= render 'admin/application/static/design', about: page, l10n: @l10n %>
 <% if page.static_layout %>
 layout: <%= page.static_layout %>
 <% end %>
