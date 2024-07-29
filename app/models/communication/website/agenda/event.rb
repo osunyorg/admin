@@ -102,8 +102,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def dependencies
     [website.config_default_content_security_policy] +
-    localizations.in_languages(website.active_language_ids) +
-    active_storage_blobs
+    localizations.in_languages(website.active_language_ids)
   end
 
   def references
