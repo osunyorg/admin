@@ -11,5 +11,7 @@ class MigrateExperiences < ActiveRecord::Migration[7.1]
       experience_is_original = organization.original_id.blank? && person.original_id.blank?
       experience.destroy unless experience_is_original
     end
+
+    # En réalité cette migration est inutile, la notion de langue dans les expériences a été ajoutée dans la PR 2025
   end
 end
