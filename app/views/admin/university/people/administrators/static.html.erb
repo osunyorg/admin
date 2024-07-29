@@ -1,7 +1,7 @@
 <%
 # @l10n is a localization facet University::Person::Localization::Administrator
 person = @l10n.about
-person_localization = @l10n.person_localization
+person_l10n = @l10n.person_l10n
 %>
 ---
 title: >-
@@ -14,18 +14,18 @@ breadcrumbs:
   - title: "<%= page_l10n.to_s %>"
     path: "<%= page_l10n.path %>"
 <% end %>
-  - title: "<%= person_localization.to_s %>"
-    path: "<%= person_localization.current_permalink_in_website(@website)&.path %>"
+  - title: "<%= person_l10n.to_s %>"
+    path: "<%= person_l10n.current_permalink_in_website(@website)&.path %>"
   - title: "<%= t('university.person.facets.administrator.responsabilities', locale: @l10n.language.iso_code) %>"
 <%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/design', about: person, full_width: true, toc_offcanvas: true %>
 person: >-
-  <%= person_localization.to_s %>
+  <%= person_l10n.to_s %>
 first_name: >-
-  <%= person_localization.first_name %>
+  <%= person_l10n.first_name %>
 last_name: >-
-  <%= person_localization.last_name %>
+  <%= person_l10n.last_name %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= render 'admin/application/meta_description/static', about: person_localization %>
-<%= render 'admin/application/summary/static', about: person_localization %>
+<%= render 'admin/application/meta_description/static', about: person_l10n %>
+<%= render 'admin/application/summary/static', about: person_l10n %>
 ---
