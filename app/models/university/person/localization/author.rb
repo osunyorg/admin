@@ -19,7 +19,7 @@ class University::Person::Localization::Author < University::Person::Localizatio
   end
 
   def references
-    communication_website_posts
+    person_localization.about.communication_website_posts
   end
 
   def static_localization_key

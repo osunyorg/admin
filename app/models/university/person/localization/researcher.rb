@@ -16,7 +16,7 @@ class University::Person::Localization::Researcher < University::Person::Localiz
       person_localization,
       person_localization.about
     ] +
-    research_publications
+    person_localization.about.research_publications
   end
 
   def references

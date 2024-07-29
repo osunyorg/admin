@@ -19,7 +19,7 @@ class University::Person::Localization::Administrator < University::Person::Loca
   end
 
   def references
-    education_programs_as_administrator
+    person_localization.about.education_programs_as_administrator
   end
 
   def static_localization_key

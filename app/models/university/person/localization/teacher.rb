@@ -20,7 +20,7 @@ class University::Person::Localization::Teacher < University::Person::Localizati
   end
 
   def references
-    education_programs_as_teacher
+    person_localization.about.education_programs_as_teacher
   end
 
   def static_localization_key
