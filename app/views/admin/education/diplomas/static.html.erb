@@ -2,7 +2,9 @@
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' if @website %>
 <%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
+<%= render 'admin/application/static/design', 
+            full_width: true, 
+            toc_offcanvas: true %>
 <%= render 'admin/application/i18n/static' %>
 <% if @website
   @programs = @website.education_programs.where(diploma: @about).root.ordered %>

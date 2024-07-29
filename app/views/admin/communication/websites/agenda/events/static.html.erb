@@ -17,7 +17,10 @@ weight: <%= event.distance_in_days %>
 <% end %>
 <%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
-<%= render 'admin/application/static/design', about: event, full_width: false, toc_offcanvas: false %>
+<%= render 'admin/application/static/design', 
+            about: event, 
+            full_width: false, 
+            toc_offcanvas: false %>
 <%= render 'admin/communication/websites/agenda/events/static/dates', 
             event: event, 
             l10n: @l10n,
