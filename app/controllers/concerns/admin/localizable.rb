@@ -37,7 +37,8 @@ module Admin::Localizable
       redirect_to [:confirm_localization, :admin, resource.website, { about: resource.to_gid.to_s }]
     else
       @l10n = resource.localize_in!(current_language)
-      redirect_to [:edit, :admin, resource]
+      edit_path_method = "edit_admin_#{resource.class.base_class.to_s.parameterize.underscore}_path"
+      redirect_to public_send(edit_path_method, id: resource.id)
     end
   end
 
