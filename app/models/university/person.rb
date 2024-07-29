@@ -233,6 +233,28 @@ class University::Person < ApplicationRecord
     active_storage_blobs
   end
 
+  # TODO L10N : To remove
+  def person
+    @person ||= University::Person.find(id)
+  end
+
+  def administrator
+    @administrator ||= University::Person::Administrator.find(id)
+  end
+
+  def author
+    @author ||= University::Person::Author.find(id)
+  end
+
+  def researcher
+    @researcher ||= University::Person::Researcher.find(id)
+  end
+
+  def teacher
+    @teacher ||= University::Person::Teacher.find(id)
+  end
+  # TODO L10N : /To remove
+
   def administrator_facets
     @administrator_facets ||= University::Person::Localization::Administrator.where(id: localization_ids)
   end
