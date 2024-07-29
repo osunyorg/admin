@@ -12,7 +12,6 @@
 #  header_cta_label         :string
 #  header_cta_url           :string
 #  header_text              :text
-#  kind                     :integer
 #  meta_description         :text
 #  migration_identifier     :string
 #  position                 :integer          default(0), not null
@@ -26,7 +25,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             indexed
 #  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
 #  university_id            :uuid             not null, indexed
