@@ -8,11 +8,6 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   has_component :category_id, :person_category
   has_component :description, :rich_text
   has_component :alphabetical, :boolean
-  
-  # Deprecated
-  has_component :with_link, :boolean
-  has_component :with_photo, :boolean
-  # end
 
   has_component :option_image,        :boolean, default: true
   has_component :option_summary,      :boolean, default: true

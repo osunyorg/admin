@@ -25,12 +25,6 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :time, :option, options: AUTHORIZED_SCOPES
   has_component :no_event_message, :string
   
-  # Deprecated
-  has_component :show_category, :boolean
-  has_component :show_summary, :boolean
-  has_component :show_status, :boolean
-  # end
-
   has_component :option_categories,   :boolean, default: false
   has_component :option_dates,        :boolean, default: true
   has_component :option_image,        :boolean, default: true

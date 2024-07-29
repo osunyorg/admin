@@ -9,7 +9,7 @@
     <%= block_component_edit block, :option_author, label: Communication::Website::Post.human_attribute_name(:author) %>
     <%= block_component_edit block, :option_date, label: Communication::Website::Post.human_attribute_name(:date) %>
     <%= block_component_edit block, :option_categories, label: Communication::Website::Post.human_attribute_name(:categories) %>
-    <%#= block_component_edit block, :option_reading_time, label: Communication::Website::Post.human_attribute_name(:reading_time) %>
+    <%= block_component_edit block, :option_reading_time, label: Communication::Website::Post.human_attribute_name(:reading_time) %>
   </div>
 </div>
 <div v-if="data.mode !== 'categories'">
