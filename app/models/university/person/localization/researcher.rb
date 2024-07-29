@@ -13,10 +13,10 @@ class University::Person::Localization::Researcher < University::Person::Localiz
 
   def dependencies
     [
-      person_localization,
-      person_localization.about
+      person_l10n,
+      person
     ] +
-    person_localization.about.research_publications
+    person.research_publications
   end
 
   def references

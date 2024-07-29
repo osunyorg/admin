@@ -46,13 +46,14 @@ class University::Person::Localization < ApplicationRecord
   has_summernote :biography
 
   delegate :featured_image, to: :about
+  alias person about
 
   validates :first_name, :last_name, presence: true
 
   before_validation :prepare_name
 
-  def person_localization
-    @person_localization ||= University::Person::Localization.find(id)
+  def person_l10n
+    @person_l10n ||= University::Person::Localization.find(id)
   end
 
   def administrator
