@@ -1,7 +1,7 @@
 <div class="row pure__row--small">
-<div class="col-xl-6">
-<%= block_component_edit block, :description %>
-</div>
+  <div class="col-xl-6">
+    <%= block_component_edit block, :description %>
+  </div>
 </div>
 <div class="row pure__row--small">
   <div class="col-xl-6">
@@ -11,9 +11,10 @@
     </div>
   </div>
   <div class="col-xl-6">
-    <label class="form-label"><%= t('.options') %></label>
-    <%= block_component_edit block, :with_link %>
-    <%= block_component_edit block, :with_photo %>
+    <%= osuny_label t('admin.communication.blocks.display_options.title') %>
+    <%= block_component_edit block, :option_image %>
+    <%#= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
+    <%= block_component_edit block, :option_link %>
     <div v-if="data.mode === 'selection'">
       <%= block_component_edit block, :alphabetical %>
     </div>
@@ -21,12 +22,13 @@
 </div>
 
 <div v-if="data.mode === 'selection'">
-  <%= osuny_label University::Person.model_name.human(count: 2) %>
+  <div><%= osuny_label University::Person.model_name.human(count: 2) %></div>
+  <%= block_component_add_element block, t('.add_person') %>
   <draggable :list="data.elements" class="mb-3" handle=".dragHandle">
     <div v-for="(element, index) in data.elements" class="draggable-item">
       <div class="d-flex">
         <div>
-          <a class="btn ps-0 pt-0 dragHandle" title="<%= t '.drag_title' %>">
+          <a class="btn ps-0 dragHandle" title="<%= t '.drag_title' %>">
             <i class="<%= Icon::DRAG %> handle"></i>
           </a>
         </div>
@@ -50,5 +52,7 @@
       </div>
     </div>
   </draggable>
-  <%= block_component_add_element block, t('.add_person') %>
+  <div v-show="data.elements.length > 2">
+    <%= block_component_add_element block, t('.add_person') %>
+  </div>
 </div>

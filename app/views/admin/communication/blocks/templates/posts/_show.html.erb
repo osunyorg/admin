@@ -6,7 +6,7 @@ date_format = "%e %B %Y"
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-      <% if block.template.mode === "categories" %>
+      <% if block.template.mode == "categories" %>
         <ul class="categories categories--grid">
           <% @website.post_categories.ordered.each do |category| %>
             <li data-title="<%= category %>">
@@ -16,7 +16,7 @@ date_format = "%e %B %Y"
           <% end %>
         </ul>
       <% else %>
-        <% if block.template.layout === "list" %>
+        <% if block.template.layout == "list" %>
           <div class="list">
             <% if block.data %>
               <% block.template.selected_posts.each do |post|
@@ -27,22 +27,22 @@ date_format = "%e %B %Y"
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
                       <%= link_to post, post.current_permalink_url_in_website(@website) %>
                     </h<%= heading_level %>>
-                    <% if post.summary.present? && !block.template.hide_summary %>
+                    <% if post.summary.present? && block.template.option_summary %>
                       <p itemprop="articleBody"><%= post.summary %></p>
                     <% end %>
-                    <% if !block.template.hide_author || !block.template.hide_date %>
+                    <% if block.template.option_author || block.template.option_date %>
                       <div class="post-meta">
-                        <% if !block.template.hide_date %>
+                        <% if block.template.option_date %>
                           <time itemprop="datePublished" datetime="<%= post.published_at %>"><%= l(post.published_at, format: date_format) %></time>
                         <% end %>
-                        <% if !block.template.hide_author %>
+                        <% if block.template.option_author %>
                           <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
                             <p itemprop="name"><%= post.author %></p>
                           </div>
                         <% end %>
                       </div>
                     <% end %>
-                    <% if !post.categories.empty? && !block.template.hide_category %>
+                    <% if !post.categories.empty? && block.template.option_categories %>
                       <ul class="post-categories">
                         <% post.categories.each do |category| %>
                           <%= link_to category, category.current_permalink_url_in_website(@website) %>
@@ -50,7 +50,7 @@ date_format = "%e %B %Y"
                       </ul>
                     <% end %>
                   </div>
-                  <% if !block.template.hide_image %>
+                  <% if block.template.option_image %>
                     <div class="media">
                       <% if post.best_featured_image.attached? %>
                         <%= kamifusen_tag post.best_featured_image %>
@@ -62,7 +62,7 @@ date_format = "%e %B %Y"
             <% end %>
           </div>
 
-        <% elsif block.template.layout === "highlight" %>
+        <% elsif block.template.layout == "highlight" %>
           <% if block.data
             highlight_post = block.template.selected_posts.first
           %>
@@ -73,22 +73,22 @@ date_format = "%e %B %Y"
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
                       <%= link_to highlight_post, highlight_post.current_permalink_url_in_website(@website) %>
                     </h<%= heading_level %>>
-                    <% if highlight_post.summary.present? && !block.template.hide_summary %>
+                    <% if highlight_post.summary.present? && block.template.option_summary %>
                       <p itemprop="articleBody"><%= highlight_post.summary %></p>
                     <% end %>
-                    <% if !block.template.hide_author || !block.template.hide_date %>
+                    <% if block.template.option_author || block.template.option_date %>
                       <div class="post-meta">
-                        <% if !block.template.hide_date %>
+                        <% if block.template.option_date %>
                           <time itemprop="datePublished" datetime="<%= highlight_post.published_at %>"><%= l(highlight_post.published_at, format: date_format) %></time>
                         <% end %>
-                        <% if !block.template.hide_author %>
+                        <% if block.template.option_author %>
                           <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
                             <p itemprop="name"><%= highlight_post.author %></p>
                           </div>
                         <% end %>
                       </div>
                     <% end %>
-                    <% if !highlight_post.categories.empty? && !block.template.hide_category %>
+                    <% if !highlight_post.categories.empty? && block.template.option_categories %>
                       <ul class="post-categories">
                         <% highlight_post.categories.each do |category| %>
                           <%= link_to category, category.current_permalink_url_in_website(@website) %>
@@ -96,7 +96,7 @@ date_format = "%e %B %Y"
                       </ul>
                     <% end %>
                   </div>
-                  <% if !block.template.hide_image %>
+                  <% if block.template.option_image %>
                     <div class="media">
                       <% if highlight_post.best_featured_image.attached? %>
                         <%= kamifusen_tag highlight_post.best_featured_image %>
@@ -115,22 +115,22 @@ date_format = "%e %B %Y"
                       <h<%= heading_level %> class='post-title' itemprop='headline'>
                         <%= link_to post, post.current_permalink_url_in_website(@website) %>
                       </h<%= heading_level %>>
-                      <% if post.summary.present? && block.template.hide_summary %>
+                      <% if post.summary.present? && block.template.option_summary %>
                         <p itemprop="articleBody"><%= post.summary %></p>
                       <% end %>
-                      <% if !block.template.hide_author || !block.template.hide_date %>
+                      <% if block.template.option_author || block.template.option_date %>
                         <div class="post-meta">
-                          <% if !block.template.hide_date %>
+                          <% if block.template.option_date %>
                             <time itemprop="datePublished" datetime="<%= post.published_at %>"><%= l(post.published_at, format: date_format) %></time>
                           <% end %>
-                          <% if !block.template.hide_author %>
+                          <% if block.template.option_author %>
                             <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
                               <p itemprop="name"><%= post.author %></p>
                             </div>
                           <% end %>
                         </div>
                       <% end %>
-                      <% if !post.categories.empty? && !block.template.hide_category %>
+                      <% if !post.categories.empty? && block.template.option_categories %>
                         <ul class="post-categories">
                           <% post.categories.each do |category| %>
                             <%= link_to category, category.current_permalink_url_in_website(@website) %>
@@ -138,7 +138,7 @@ date_format = "%e %B %Y"
                         </ul>
                       <% end %>
                     </div>
-                    <% if !block.template.hide_image %>
+                    <% if block.template.option_image %>
                       <div class="media">
                         <% if post.best_featured_image.attached? %>
                           <%= kamifusen_tag post.best_featured_image %>
@@ -151,8 +151,8 @@ date_format = "%e %B %Y"
             </div>
           <% end %>
 
-        <% elsif block.template.layout === "large" %>
-          <div class="large <% if block.template.hide_image %> without-image<% end %>">
+        <% elsif block.template.layout == "large" %>
+          <div class="large <% unless block.template.option_image %> without-image<% end %>">
             <% block.template.selected_posts.each do |post|
               next if post.nil?
             %>
@@ -163,15 +163,15 @@ date_format = "%e %B %Y"
                   </h<%= heading_level %>>
 
                   <div class="post-meta">
-                    <% if !block.template.hide_author %>
+                    <% if block.template.option_author %>
                       <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
                         <p itemprop="name"><%= post.author %></p>
                       </div>
                     <% end %>
-                    <% if !block.template.hide_date %>
+                    <% if block.template.option_date %>
                       <time itemprop="datePublished" datetime="<%= post.published_at %>"><%= l(post.published_at, format: date_format) %></time>
                     <% end %>
-                    <% if !post.categories.empty? && !block.template.hide_category %>
+                    <% if !post.categories.empty? && block.template.option_categories %>
                       <ul class="post-categories">
                         <% post.categories.each do |category| %>
                           <%= link_to category, category.current_permalink_url_in_website(@website) %>
@@ -179,12 +179,12 @@ date_format = "%e %B %Y"
                       </ul>
                     <% end %>
                   </div>
-                  <% if post.summary.present? && !block.template.hide_summary%>
+                  <% if post.summary.present? && block.template.option_summary %>
                     <p itemprop="articleBody"><%= post.summary %></p>
                   <% end %>
                   <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.posts.layouts.large.more' %></p>
                 </div>
-                <% if !block.template.hide_image %>
+                <% if block.template.option_image %>
                   <div class="media">
                     <% if post.best_featured_image.attached? %>
                       <%= kamifusen_tag post.best_featured_image %>
@@ -195,7 +195,7 @@ date_format = "%e %B %Y"
             <% end %>
           </div>
 
-        <% elsif block.template.layout === "carousel" %>
+        <% elsif block.template.layout == "carousel" %>
           <div class="carousel draggable-container">
             <div class="carousel-posts draggable-content">
               <ul class="posts">
@@ -208,22 +208,22 @@ date_format = "%e %B %Y"
                         <h<%= heading_level %> class='post-title' itemprop='headline'>
                           <%= link_to post, post.current_permalink_url_in_website(@website) %>
                         </h<%= heading_level %>>
-                        <% if !post.categories.empty? && !block.template.hide_category %>
+                        <% if !post.categories.empty? && block.template.option_categories %>
                           <ul class="post-categories">
                             <% post.categories.each do |category| %>
                               <%= link_to category, category.current_permalink_url_in_website(@website) %>
                             <% end %>
                           </ul>
                         <% end %>
-                        <% if post.summary.present? && !block.template.hide_summary %>
+                        <% if post.summary.present? && block.template.option_summary %>
                           <p itemprop="articleBody"><%= post.summary %></p>
                         <% end %>
-                        <% if !block.template.hide_author || !block.template.hide_date %>
+                        <% if block.template.option_author || block.template.option_date %>
                           <div class="post-meta">
-                            <% if !block.template.hide_date %>
+                            <% if block.template.option_date %>
                               <time itemprop="datePublished" datetime="<%= post.published_at %>"><%= l(post.published_at, format: date_format) %></time>
                             <% end %>
-                            <% if !block.template.hide_author %>
+                            <% if block.template.option_author %>
                               <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
                                 <p itemprop="name"><%= post.author %></p>
                               </div>
@@ -231,7 +231,7 @@ date_format = "%e %B %Y"
                           </div>
                         <% end %>
                       </div>
-                      <% if !block.template.hide_image %>
+                      <% if block.template.option_image %>
                         <div class="media">
                           <% if post.best_featured_image.attached? %>
                             <%= kamifusen_tag post.best_featured_image %>
@@ -249,33 +249,33 @@ date_format = "%e %B %Y"
             </div>
           </div>
 
-        <% elsif block.template.layout === "alternate" %>
-          <div class="alternate <% if block.template.hide_image %> without-image<% end %>">
+        <% elsif block.template.layout == "alternate" %>
+          <div class="alternate <% unless block.template.option_image %> without-image<% end %>">
             <% if block.data %>
               <% block.template.selected_posts.each_with_index do |post, index|
                 next if post.nil?
               %>
-                <article class="post<% if block.template.hide_image || !post.best_featured_image.attached?%> without-image<% end %><% if (index %2 ==0) %> left<% else %> right<% end %>" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+                <article class="post<% if !block.template.option_image || !post.best_featured_image.attached? %> without-image<% end %>" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
                       <%= link_to post, post.current_permalink_url_in_website(@website) %>
                     </h<%= heading_level %>>
-                    <% if post.summary.present? && !block.template.hide_summary %>
+                    <% if post.summary.present? && block.template.option_summary %>
                       <p itemprop="articleBody"><%= post.summary %></p>
                     <% end %>
-                    <% if !block.template.hide_author || !block.template.hide_date %>
+                    <% if block.template.option_author || block.template.option_date %>
                       <div class="post-meta">
-                        <% if !block.template.hide_date %>
+                        <% if block.template.option_date %>
                           <time itemprop="datePublished" datetime="<%= post.published_at %>"><%= l(post.published_at, format: date_format) %></time>
                         <% end %>
-                        <% if !block.template.hide_author %>
+                        <% if block.template.option_author %>
                           <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
                             <p itemprop="name"><%= post.author %></p>
                           </div>
                         <% end %>
                       </div>
                     <% end %>
-                    <% if !post.categories.empty? && !block.template.hide_category %>
+                    <% if !post.categories.empty? && block.template.option_categories %>
                       <ul class="post-categories">
                         <% post.categories.each do |category| %>
                           <%= link_to category, category.current_permalink_url_in_website(@website) %>
@@ -283,7 +283,7 @@ date_format = "%e %B %Y"
                       </ul>
                     <% end %>
                   </div>
-                  <% if !block.template.hide_image %>
+                  <% if block.template.option_image %>
                     <div class="media">
                       <% if post.best_featured_image.attached? %>
                         <%= kamifusen_tag post.best_featured_image %>
@@ -306,22 +306,22 @@ date_format = "%e %B %Y"
                     <h<%= heading_level %> class='post-title' itemprop='headline'>
                       <%= link_to post, post.current_permalink_url_in_website(@website) %>
                     </h<%= heading_level %>>
-                    <% if post.summary.present? && !block.template.hide_summary %>
+                    <% if post.summary.present? && block.template.option_summary %>
                       <p itemprop="articleBody"><%= post.summary %></p>
                     <% end %>
-                    <% if !block.template.hide_author || !block.template.hide_date %>
+                    <% if block.template.option_author || block.template.option_date %>
                       <div class="post-meta">
-                        <% if !block.template.hide_date %>
+                        <% if block.template.option_date %>
                           <time itemprop="datePublished" datetime="<%= post.published_at %>"><%= l(post.published_at, format: date_format) %></time>
                         <% end %>
-                        <% if !block.template.hide_author %>
+                        <% if block.template.option_author %>
                           <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
                             <p itemprop="name"><%= post.author %></p>
                           </div>
                         <% end %>
                       </div>
                     <% end %>
-                    <% if !post.categories.empty? && !block.template.hide_category %>
+                    <% if !post.categories.empty? && block.template.option_categories %>
                       <ul class="post-categories">
                         <% post.categories.each do |category| %>
                           <%#= link_to category, category.current_permalink_url_in_website(@website) %>
@@ -329,7 +329,7 @@ date_format = "%e %B %Y"
                       </ul>
                     <% end %>
                   </div>
-                  <% if !block.template.hide_image %>
+                  <% if block.template.option_image %>
                     <div class="media">
                       <% if post.best_featured_image.attached? %>
                         <%= kamifusen_tag post.best_featured_image %>

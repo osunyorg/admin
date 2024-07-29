@@ -27,7 +27,7 @@
               <%= t("activerecord.attributes.user.roles.#{user.role}") %>
             </span>
           </td>
-          <td><%= l(user.current_sign_in_at, format: :date_with_explicit_month) %></td>
+          <td><%= l(user.current_sign_in_at, format: :date_with_explicit_month) if user.current_sign_in_at.present? %></td>
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= edit_link user %>
@@ -41,4 +41,3 @@
 </div>
 
 <%= paginate @users %>
-

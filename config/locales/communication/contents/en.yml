@@ -54,6 +54,8 @@ en:
           time_slot:
             from: From
             to: to
+        display_options:
+          title: Display options
         empty: This block is empty and will not appear
         headings:
           add: Add a title
@@ -84,18 +86,10 @@ en:
               quantity:
                 label: Quantity of events to show
                 placeholder: Enter quantity
-              show:
-                label: Display settings
-              show_category:
-                label: Show events' categories
-              show_status:
-                label: Show events' status (current, future...)
-              show_summary:
-                label: Show events' summaries
               time:
                 label: What event dates should be displayed?
                 options:
-                  archive: Past, archives
+                  archive: Past (archives)
                   current: Running now
                   future: In the future, not started yet
                   future_or_current: Now and in the future
@@ -376,6 +370,7 @@ en:
                 title:
                   label: Title
                   placeholder: Enter link title
+              remove: Remove the link
           locations:
             description: A selection of locations on a campus.
             edit:
@@ -390,7 +385,7 @@ en:
           organizations:
             description: A list of organizations with logo, name and website.
             edit:
-              add_partner: Add organization
+              add_organization: Add organization
               alphabetical:
                 label: Alphabetical order
               category_id:
@@ -416,10 +411,12 @@ en:
                 options:
                   category: A specific category
                   selection: Selected organizations
-              options: Display options
-              remove_partner: Remove organization
-              with_link:
+              option_link:
                 label: With clickable link to each organization's page?
+              option_logo:
+                label: Logo
+              options: Display options
+              remove_organization: Remove organization
             layouts:
               grid:
                 description: Square logos and a simple text below.
@@ -430,8 +427,6 @@ en:
           pages:
             description: A highlight of some pages, with multiple layout options.
             edit:
-              display:
-                title: Layout options
               main_page:
                 title: Main page
               mode:
@@ -439,21 +434,21 @@ en:
                 options:
                   children: Main page and children
                   selection: A specific selection of pages
+              option_image:
+                label: Show pages images
+              option_main_summary:
+                label: Show main page summary
+              option_summary:
+                label: Show pages short descriptions
               page_id:
                 hint: This page will set the title and main link of the block on the website. If you select a page and fill no title above, the page title will be used. If you set a title, it will replace the main page's title.
                 label: Select the main page
                 none: No page selected
               selection:
-                add: Select a page
+                add: Add a page
                 label: Page
                 none: No page
                 title: Selected pages
-              show_description:
-                label: Show pages short descriptions
-              show_image:
-                label: Show pages images
-              show_main_description:
-                label: Show main page short description
             layouts:
               alternate:
                 description: Pages either on the left or on the right, composing a graphically light layout.
@@ -512,11 +507,11 @@ en:
                 options:
                   category: A specific category
                   selection: A selection of persons
-              options: Display options
-              with_link:
-                label: With clickable link to each person's page?
-              with_photo:
+              option_image:
                 label: With a portrait for each person?
+              option_link:
+                label: Clickable link to person's page
+              options: Display options
           posts:
             description: A list of highlighted news.
             edit:
@@ -524,8 +519,6 @@ en:
               category_id:
                 label: Category
                 placeholder: Select category
-              display:
-                title: Layout options
               element:
                 id:
                   label: ''
@@ -540,16 +533,6 @@ en:
               posts_quantity:
                 label: Quantity
                 placeholder: Enter quantity
-              hide_author:
-                label: Hide author
-              hide_category:
-                label: Hide categories
-              hide_date:
-                label: Hide date
-              hide_image:
-                label: Hide image
-              hide_summary:
-                label: Hide summary
             layouts:
               alternate:
                 description: Posts either on the left or on the right, composing a graphically light page.
