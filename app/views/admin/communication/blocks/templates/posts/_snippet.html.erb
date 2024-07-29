@@ -1,7 +1,12 @@
+<%
+if block.template.mode == 'categories'
+  objects = @website.post_categories.ordered(current_language)
+else
+  objects = block.template.selected_posts
+end
+objects = objects.first(2)
+object_names = objects.collect { |object| object.to_s_in(current_language) }
+%>
 <p class="mb-0">
-  <% if block.template.mode == 'categories' %>
-    <%= @website.post_categories.ordered.first(2).collect(&:to_s).join(', ') %>...
-  <% else %>
-    <%= block.template.selected_posts.first(2).collect(&:to_s).join(', ') %>...
-  <% end %>
+  <%= object_names.join(', ') %>...
 </p>

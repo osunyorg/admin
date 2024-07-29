@@ -10,8 +10,8 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     :carousel
   ]
   has_component :mode, :option, options: [
-    :all, 
-    :category, 
+    :all,
+    :category,
     :selection,
     :categories
   ]
@@ -48,7 +48,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   def allowed_for_about?
     !website.nil?
   end
-  
+
   def children
     selected_posts
   end
@@ -58,21 +58,21 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   def selected_posts_all
     block.about&.website
                 .posts
-                .for_language(block.language)
+                .tmp_original # TODO L10N : To remove
                 .published
-                .ordered
+                .ordered(block.language)
                 .limit(posts_quantity)
   end
 
   def selected_posts_category
     return [] if category.nil?
     category_ids = [category.id, category.descendants.map(&:id)].flatten
-    university.communication_website_posts.for_language(block.language)
+    university.communication_website_posts.tmp_original # TODO L10N : To remove
                                           .joins(:categories)
                                           .where(categories: { id: category_ids })
                                           .distinct
                                           .published
-                                          .ordered
+                                          .ordered(block.language)
                                           .limit(posts_quantity)
   end
 
@@ -90,7 +90,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     return if id.blank?
     block.about&.website
                 .posts
-                .for_language(block.language)
+                .tmp_original # TODO L10N : To remove
                 .published
                 .find_by(id: id)
   end
