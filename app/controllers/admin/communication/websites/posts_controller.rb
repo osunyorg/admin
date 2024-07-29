@@ -27,17 +27,17 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     target_posts = @website.posts.where(id: ids)
     is_published = params[:published] == "true"
     target_posts.each do |post|
-      post.published = is_published
+      l10n = post.localization_for(current_language)
+      l10n.publish!
       post.save_and_sync
     end
     redirect_back fallback_location: admin_communication_website_posts_path,
                   notice: t('communication.website.posts.successful_batch_update')
   end
 
-  # TODO L10N : To adjust
   def publish
-    @post.published = true
-    @post.save_and_sync
+    @l10n.publish!
+    @post.sync_with_git
     redirect_back fallback_location: admin_communication_website_post_path(@post),
                   notice: t('admin.communication.website.publish.notice')
   end

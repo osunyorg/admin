@@ -12,6 +12,11 @@ module WithPublication
     before_validation :set_published_at
   end
 
+  def publish!
+    self.published = true
+    save
+  end
+
   def published?
     published_now?
   end

@@ -13,13 +13,13 @@ class University::Person::Localization::Administrator < University::Person::Loca
 
   def dependencies
     [
-      person_localization,
-      person_localization.about
+      person_l10n,
+      person
     ]
   end
 
   def references
-    person_localization.about.education_programs_as_administrator
+    person.education_programs_as_administrator
   end
 
   def static_localization_key

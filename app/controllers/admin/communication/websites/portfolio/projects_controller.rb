@@ -18,10 +18,9 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     breadcrumb
   end
 
-  # TODO L10N : To adjust
   def publish
-    @project.published = true
-    @project.save_and_sync
+    @l10n.publish!
+    @project.sync_with_git
     redirect_back fallback_location: admin_communication_website_portfolio_project_path(@project),
                   notice: t('admin.communication.website.publish.notice')
   end

@@ -13,13 +13,13 @@ class University::Person::Localization::Author < University::Person::Localizatio
 
   def dependencies
     [
-      person_localization,
-      person_localization.about
+      person_l10n,
+      person
     ]
   end
 
   def references
-    person_localization.about.communication_website_posts
+    person.communication_website_posts
   end
 
   def static_localization_key

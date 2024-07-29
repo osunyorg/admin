@@ -18,10 +18,9 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb
   end
 
-  # TODO L10N : To adjust
   def publish
-    @event.published = true
-    @event.save_and_sync
+    @l10n.publish!
+    @event.sync_with_git
     redirect_back fallback_location: admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.communication.website.publish.notice')
   end

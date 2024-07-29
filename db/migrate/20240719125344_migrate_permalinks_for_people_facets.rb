@@ -43,10 +43,7 @@ class MigratePermalinksForPeopleFacets < ActiveRecord::Migration[7.1]
         new_permalink.about = l10n.teacher
         new_permalink.save
       end
-
     end
-
-
   end
 
   def down

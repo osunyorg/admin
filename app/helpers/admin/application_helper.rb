@@ -56,7 +56,8 @@ module Admin::ApplicationHelper
   end
 
   def publish_link(object)
-    return if object.published || cannot?(:publish, object)
+    l10n = object.localization_for(current_language)
+    return if l10n.published || cannot?(:publish, object)
     link_to t('admin.communication.website.publish.button'),
             [:publish, :admin, object],
             method: :post,
