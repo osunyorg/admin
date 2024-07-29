@@ -10,6 +10,7 @@ en:
   activerecord:
     attributes:
       communication/block:
+        html_class: HTML class
         published: Published?
         template: Kind of block
         title: Name (optional)
@@ -532,6 +533,8 @@ en:
       websites: Websites
   simple_form:
     hints:
+      communication_block:
+        html_class: This setting is used by coders
       communication_extranet:
         favicon: '.png file only'
         host: Sans le protocole

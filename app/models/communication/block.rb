@@ -166,6 +166,12 @@ class Communication::Block < ApplicationRecord
     template.full_text
   end
 
+  def html_class_prepared
+    html_class.split(' ')
+              .map { |klass| "block-class-#{klass.parameterize}" }
+              .join(' ')
+  end
+
   def to_s
     title.blank?  ? "#{Communication::Block.model_name.human} #{position}"
                   : "#{title}"
