@@ -13,7 +13,7 @@ osuny_categories:
 <% facets.each do |facet| %>
     - name: "<%= prepare_text_for_static facet.to_s %>"
       categories:
-<% about_categories.where(parent: facet).each do |category| %>
+<% about_categories.where(id: facet.descendants).each do |category| %>
         - name: "<%= prepare_text_for_static category.to_s %>"
           slug: "<%= category.slug %>"
 <% end %>
