@@ -3,9 +3,6 @@
 <%= block_component_static block, :layout %>
 <%= block_component_static block, :description %>
 <%= block_component_static block, :no_event_message %>
-<%= block_component_static block, :show_summary %>
-<%= block_component_static block, :show_category %>
-<%= block_component_static block, :show_status %>
       title_link: "<%= block.template.title_link %>"
 <% if block.template.mode == 'category' && block.template.category %>
       <%# TODO L10N : Handle Agenda::Category::Localization here %>

@@ -10,6 +10,7 @@ fr:
   activerecord:
     attributes:
       communication/block:
+        html_class: Classe HTML
         published: Publié ?
         template: Type de bloc
         title: Nom (facultatif)
@@ -550,6 +551,8 @@ fr:
       websites: Nombre de sites
   simple_form:
     hints:
+      communication_block:
+        html_class: Ce paramètre est utile pour coder le site. Les valeurs entrées sont transformées en paramètres (sans accents ni capitales), et les classes générées sont visibles ci-dessous.
       communication_extranet:
         favicon: 'Fichier .png uniquement'
         host: Sans le protocole
