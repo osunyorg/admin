@@ -1,0 +1,24 @@
+<% if categories.any? %>
+  <%= osuny_panel t('admin.categories.title') do %>
+    <div class="row">
+      <% categories.facets.each do |facet| %>
+        <div class="col-lg-6 col-xxl-4">
+          <%= osuny_label facet %>
+          <%= f.association :categories,
+                            label_text: false,
+                            as: :check_boxes,
+                            collection: facet.descendants %>
+        </div>
+      <% end %>
+      <% if categories.non_facets.any? %>
+        <div class="col-lg-6 col-xxl-4">
+          <%= osuny_label t('admin.categories.other') %>
+          <%= f.association :categories,
+                            label_text: false,
+                            as: :check_boxes,
+                            collection: categories.non_facets %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

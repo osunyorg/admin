@@ -75,7 +75,8 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
   def category_params
     params.require(:communication_website_portfolio_category)
           .permit(
-            :name, :meta_description, :summary, :slug, 
+            :name, :meta_description, :summary, :slug,
+            :facet,
             :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
           )
           .merge(
