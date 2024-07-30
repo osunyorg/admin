@@ -21,4 +21,8 @@ module AsCategory
   def possible_facet?
     persisted? && parent_id.blank?
   end
+
+  def in_facet?
+    ancestors.detect { |category| category.is_facet }
+  end
 end

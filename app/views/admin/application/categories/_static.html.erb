@@ -1,0 +1,30 @@
+<%
+about_categories = about.categories
+all_categories = categories.all
+facets = all_categories.facets
+non_facets = all_categories.non_facets
+%>
+<% if about_categories.any? %>
+<%= key %>:
+<% about_categories.ordered.each do |category| %>
+  - "<%= category.slug %>"
+<% end %>
+categories:
+  with_facets:
+<% facets.each do |facet| %>
+    - name: "<%= prepare_text_for_static facet.to_s %>"
+      categories:
+<% about_categories.where(parent: facet).each do |category| %>
+        - name: "<%= prepare_text_for_static category.to_s %>"
+          slug: "<%= category.slug %>"
+<% end %>
+<% end %>
+  without_facets:
+<% 
+about_categories.each do |category| 
+  next if category.in_facet?
+%>
+    - name: "<%= prepare_text_for_static category.to_s %>"
+      slug: "<%= category.slug %>"
+<% end %>
+<% end %>

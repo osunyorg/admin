@@ -10,11 +10,9 @@
 <%= render 'admin/application/summary/static' %>
 year: <%= @about.year %>
 date: <%= @about.year %>
-<% if @about.categories.any? %>
-projects_categories:
-<% @about.categories.ordered.each do |category| %>
-  - "<%= category.slug %>"
-<% end %>
-<% end %>
+<%= render 'admin/application/categories/static', 
+            about: @about, 
+            categories: Communication::Website::Portfolio::Category,
+            key: :project_categories %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---
