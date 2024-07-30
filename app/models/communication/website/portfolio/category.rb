@@ -3,9 +3,9 @@
 # Table name: communication_website_portfolio_categories
 #
 #  id                       :uuid             not null, primary key
-#  facet                    :boolean          default(FALSE)
 #  featured_image_alt       :text
 #  featured_image_credit    :text
+#  is_facet                 :boolean          default(FALSE)
 #  is_programs_root         :boolean          default(FALSE)
 #  meta_description         :text
 #  name                     :string
