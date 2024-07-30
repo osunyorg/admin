@@ -16,7 +16,7 @@
           <%= f.association :categories,
                             label_text: false,
                             as: :check_boxes,
-                            collection: categories.non_facets %>
+                            collection: collection_tree_for_checkboxes(categories.non_facets) %>
         </div>
       <% end %>
     </div>
