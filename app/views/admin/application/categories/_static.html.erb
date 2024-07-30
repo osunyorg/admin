@@ -1,15 +1,14 @@
 <%
 about_categories = about.categories
-all_categories = categories_model.all
-facets = all_categories.facets
-non_facets = all_categories.non_facets
+facets = categories_model.facets
+non_facets = categories_model.non_facets
 %>
 <% if about_categories.any? %>
 <%= key %>:
 <% about_categories.ordered.each do |category| %>
   - "<%= category.slug %>"
 <% end %>
-categories:
+osuny_categories:
   with_facets:
 <% facets.each do |facet| %>
     - name: "<%= prepare_text_for_static facet.to_s %>"
