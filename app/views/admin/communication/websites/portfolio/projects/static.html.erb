@@ -12,7 +12,7 @@ year: <%= @about.year %>
 date: <%= @about.year %>
 <%= render 'admin/application/categories/static', 
             about: @about, 
-            categories_model: Communication::Website::Portfolio::Category,
+            categories: @website.portfolio_categories,
             key: :projects_categories %>
 <%= render 'admin/communication/blocks/content/static', about: @about %>
 ---

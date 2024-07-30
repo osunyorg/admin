@@ -1,26 +1,34 @@
 <%
 about_categories = about.categories
-taxonomies = categories_model.taxonomies.ordered
+taxonomies = categories.taxonomies.ordered
 %>
 <% if about_categories.any? %>
 <%= key %>:
 <% about_categories.ordered.each do |category| %>
   - "<%= category.slug %>"
 <% end %>
+<% 
+  if taxonomies.any? 
+%>
 taxonomies:
-<% taxonomies.each do |taxonomy| %>
+<% 
+    taxonomies.each do |taxonomy| 
+%>
   - name: "<%= prepare_text_for_static taxonomy.to_s %>"
     slug: "<%= taxonomy.slug %>"
     categories:
-<% 
-about_categories.in_taxonomy(taxonomy).each do |category| 
-  hugo = category.hugo(@website)  
+<%
+      about_categories.in_taxonomy(taxonomy).each do |category| 
+        hugo = category.hugo(@website)  
 %>
       - name: "<%= prepare_text_for_static category.to_s %>"
         permalink: "<%= hugo.permalink %>"
         file: "<%= hugo.file %>"
         path: "<%= hugo.path %>"
         slug: "<%= hugo.slug %>"
-<% end %>
-<% end %>
-<% end %>
+<% 
+      end
+    end
+  end
+end 
+%>
