@@ -534,7 +534,7 @@ en:
   simple_form:
     hints:
       communication_block:
-        html_class: This setting is used by coders
+        html_class: This parameter is useful to code the website. The values entered are transformed into parameters (without accents or capitals), and the classes generated can be seen below.
       communication_extranet:
         favicon: '.png file only'
         host: Sans le protocole

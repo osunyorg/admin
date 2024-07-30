@@ -35,6 +35,7 @@ class Communication::Block < ApplicationRecord
   include AsIndirectObject
   include WithAccessibility
   include WithHeadingRanks
+  include WithHtmlClass
   include WithPosition
   include WithTemplate
   include WithUniversity
@@ -164,12 +165,6 @@ class Communication::Block < ApplicationRecord
 
   def full_text
     template.full_text
-  end
-
-  def html_class_prepared
-    html_class.split(' ')
-              .map { |klass| "block-class-#{klass.parameterize}" }
-              .join(' ')
   end
 
   def to_s

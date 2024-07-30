@@ -42,6 +42,9 @@
           </a>
           <div class="collapse mt-3" id="htmlClass">
             <%= f.input :html_class %>
+            <% if @block.html_class.present? %>
+              <pre><%= @block.html_class_prepared %></pre>
+            <% end %>
           </div>
         </div>
       </div>
