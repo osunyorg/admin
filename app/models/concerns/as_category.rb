@@ -15,7 +15,7 @@ module AsCategory
                 dependent: :destroy
 
     scope :facets, -> { root.where(is_facet: true) }
-    scope :non_facets, -> { root.where(facet: false) }
+    scope :non_facets, -> { where(is_facet: false) }
   end
 
   def possible_facet?
