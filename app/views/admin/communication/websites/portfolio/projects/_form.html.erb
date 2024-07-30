@@ -8,17 +8,8 @@
         <%= f.input :title %>
         <%= render 'admin/application/summary/form', f: f, about: project %>
       <% end %>
-      <% if @categories.any? %>
-        <%= osuny_panel t('activerecord.attributes.communication/website/portfolio/project.categories') do %>
-          <%= f.association :categories,
-                            label_text: false,
-                            as: :check_boxes,
-                            collection: collection_tree_for_checkboxes(@categories) %>
-        <% end %>
-      <% end %>
-
+      <%= render 'admin/application/categories/form', f: f, categories: @categories %>
       <%= render 'admin/application/meta_description/form', f: f, about: project %>
-
     </div>
     <div class="col-md-4">
       <%= osuny_panel t('metadata') do %>
