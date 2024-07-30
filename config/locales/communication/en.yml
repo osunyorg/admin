@@ -313,7 +313,7 @@ en:
         other: Tags
   admin:
     categories:
-      facet: Is a facet (a kind of categories)
+      is_facet: Is a facet (a kind of categories)
       other: Other
       title: Categories
     communication:
