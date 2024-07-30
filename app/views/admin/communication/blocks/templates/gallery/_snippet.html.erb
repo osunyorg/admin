@@ -1,4 +1,7 @@
-<% block.template.elements.first(4).each do |element| %>
-  <% blob = element.image_component.blob %>
-  <%= kamifusen_tag blob, height: 90, alt: '', class: 'me-2' if blob %>
+<% 
+block.template.elements.each do |element| 
+  blob = element.image_component.blob
+  next if blob.nil?
+%>
+  <%= kamifusen_tag blob, height: 90, alt: '', class: 'me-2 mb-2' %>
 <% end %>

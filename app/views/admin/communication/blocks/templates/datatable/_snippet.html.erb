@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <% block.template.elements.first(1).each do |row| %>
+      <% block.template.elements.each do |row| %>
         <tr>
           <%= block_component_snippet block, :cells, template: row %>
         </tr>
