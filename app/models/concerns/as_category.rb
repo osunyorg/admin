@@ -14,7 +14,7 @@ module AsCategory
                 foreign_key: :parent_id,
                 dependent: :destroy
 
-    scope :facets, -> { root.where(facet: true) }
+    scope :facets, -> { root.where(is_facet: true) }
     scope :non_facets, -> { root.where(facet: false) }
   end
 
