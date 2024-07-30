@@ -170,7 +170,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def block_params
     params.require(:communication_block)
-          .permit(:about_id, :about_type, :template_kind, :title, :data, :published)
+          .permit(:about_id, :about_type, :template_kind, :title, :data, :published, :html_class)
           .merge(university_id: current_university.id)
   end
 end

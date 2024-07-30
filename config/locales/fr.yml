@@ -114,6 +114,7 @@ fr:
   add: Ajouter
   add_field: Ajouter un champ
   admin:
+    advanced_settings: Réglages avancés
     attachment_not_available: Impossible d'accéder à l'élément
     dashboard: Tableau de bord
     directory: Annuaire

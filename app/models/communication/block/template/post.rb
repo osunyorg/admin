@@ -18,14 +18,6 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   has_component :posts_quantity, :number, options: 3
   has_component :category_id, :post_category
 
-  # Deprecated
-  has_component :hide_image, :boolean
-  has_component :hide_summary, :boolean
-  has_component :hide_category, :boolean
-  has_component :hide_author, :boolean
-  has_component :hide_date, :boolean
-  # end
-
   has_component :option_author,       :boolean, default: false
   has_component :option_categories,   :boolean, default: false
   has_component :option_date,         :boolean, default: false

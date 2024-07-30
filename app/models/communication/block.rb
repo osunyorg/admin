@@ -35,6 +35,7 @@ class Communication::Block < ApplicationRecord
   include AsIndirectObject
   include WithAccessibility
   include WithHeadingRanks
+  include WithHtmlClass
   include WithPosition
   include WithTemplate
   include WithUniversity

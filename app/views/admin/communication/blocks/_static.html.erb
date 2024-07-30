@@ -11,6 +11,9 @@ should_render_data = block.data && block.data.present?
 <% if block.heading_children? %>
       children: <%= block.heading_rank_children %>
 <% end %>
+<% if block.html_class.present? %>
+    html_class: "<%= block.html_class_prepared %>"
+<% end %>
     data:
 <%= render  template_path, 
             block: block, 
