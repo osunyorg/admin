@@ -14,15 +14,17 @@ module AsCategory
                 foreign_key: :parent_id,
                 dependent: :destroy
 
-    scope :facets, -> { root.where(is_facet: true) }
-    scope :non_facets, -> { where(is_facet: false) }
+    scope :taxonomies, -> { root.where(is_taxonomy: true) }
+    scope :free, -> { where(is_taxonomy: false) }
+
+    scope :in_taxonomy, -> (category) { where(id: category.descendants.pluck(:id)) }
   end
 
-  def possible_facet?
+  def possible_taxonomy?
     persisted? && parent_id.blank?
   end
 
-  def in_facet?
-    ancestors.detect { |category| category.is_facet }
+  def in_taxonomy?
+    ancestors.detect { |category| category.is_taxonomy }
   end
 end

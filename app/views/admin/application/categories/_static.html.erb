@@ -1,7 +1,6 @@
 <%
 about_categories = about.categories
-facets = categories_model.facets
-non_facets = categories_model.non_facets
+taxonomies = categories_model.taxonomies.ordered
 %>
 <% if about_categories.any? %>
 <%= key %>:
@@ -9,10 +8,11 @@ non_facets = categories_model.non_facets
   - "<%= category.slug %>"
 <% end %>
 taxonomies:
-<% facets.each do |facet| %>
-  - name: "<%= prepare_text_for_static facet.to_s %>"
+<% taxonomies.each do |taxonomy| %>
+  - name: "<%= prepare_text_for_static taxonomy.to_s %>"
+    slug: "<%= taxonomy.slug %>"
     categories:
-<% about_categories.where(id: facet.descendants).each do |category| %>
+<% about_categories.in_taxonomy(taxonomy).each do |category| %>
       - name: "<%= prepare_text_for_static category.to_s %>"
         slug: "<%= category.slug %>"
 <% end %>

@@ -313,7 +313,7 @@ fr:
         other: Mot-clés
   admin:
     categories:
-      is_facet: Est une taxonomie (une famille de catégories)
+      is_taxonomy: Est une taxonomie (une famille de catégories)
       other: Autres
       title: Catégories
     communication:

@@ -1,22 +1,22 @@
 <% if categories.any? %>
   <%= osuny_panel t('admin.categories.title') do %>
     <div class="row">
-      <% categories.facets.each do |facet| %>
+      <% categories.taxonomies.each do |taxonomy| %>
         <div class="col-lg-6 col-xxl-4">
-          <%= osuny_label facet %>
+          <%= osuny_label taxonomy %>
           <%= f.association :categories,
                             label_text: false,
                             as: :check_boxes,
-                            collection: facet.descendants %>
+                            collection: taxonomy.descendants %>
         </div>
       <% end %>
-      <% if categories.non_facets.any? %>
+      <% if categories.root.free.any? %>
         <div class="col-lg-6 col-xxl-4">
           <%= osuny_label t('admin.categories.other') %>
           <%= f.association :categories,
                             label_text: false,
                             as: :check_boxes,
-                            collection: collection_tree_for_checkboxes(categories.non_facets) %>
+                            collection: collection_tree_for_checkboxes(categories.free) %>
         </div>
       <% end %>
     </div>
