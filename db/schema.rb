@@ -1012,8 +1012,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "language_id", null: false
     t.uuid "original_id"
+    t.uuid "language_id"
     t.index ["journal_id"], name: "index_research_journal_paper_kinds_on_journal_id"
     t.index ["language_id"], name: "index_research_journal_paper_kinds_on_language_id"
     t.index ["original_id"], name: "index_research_journal_paper_kinds_on_original_id"
@@ -1044,7 +1044,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
     t.date "accepted_at"
     t.string "doi"
     t.text "authors_list"
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.index ["kind_id"], name: "index_research_journal_papers_on_kind_id"
     t.index ["language_id"], name: "index_research_journal_papers_on_language_id"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
@@ -1077,8 +1077,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
     t.text "text"
     t.text "featured_image_credit"
     t.text "summary"
-    t.uuid "language_id", null: false
-    t.index ["language_id"], name: "index_research_journal_volumes_on_language_id"
+    t.uuid "language_id"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["slug"], name: "index_research_journal_volumes_on_slug"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"

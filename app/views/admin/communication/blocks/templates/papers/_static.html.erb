@@ -1,0 +1,6 @@
+      papers:
+<% block.template.selected_papers.each do |element| %>
+        - path: "<%= element.path %>"
+          slug: "<%= element.slug %>"
+          file: "<%= element.git_path_relative %>"
+<% end %>
