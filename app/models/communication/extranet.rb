@@ -116,7 +116,7 @@ class Communication::Extranet < ApplicationRecord
   def years
     about&.academic_years
   end
-  alias academic_years years
+  alias :academic_years :years
 
   def organizations
     if about.present? && about.respond_to?(:alumni_organizations)
