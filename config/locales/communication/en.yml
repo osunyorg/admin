@@ -313,7 +313,7 @@ en:
         other: Tags
   admin:
     categories:
-      is_facet: Is a facet (a kind of categories)
+      is_facet: Is a taxonomy (a family of categories)
       other: Other
       title: Categories
     communication:

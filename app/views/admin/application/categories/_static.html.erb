@@ -8,22 +8,13 @@ non_facets = categories_model.non_facets
 <% about_categories.ordered.each do |category| %>
   - "<%= category.slug %>"
 <% end %>
-osuny_categories:
-  with_facets:
+taxonomies:
 <% facets.each do |facet| %>
-    - name: "<%= prepare_text_for_static facet.to_s %>"
-      categories:
+  - name: "<%= prepare_text_for_static facet.to_s %>"
+    categories:
 <% about_categories.where(id: facet.descendants).each do |category| %>
-        - name: "<%= prepare_text_for_static category.to_s %>"
-          slug: "<%= category.slug %>"
+      - name: "<%= prepare_text_for_static category.to_s %>"
+        slug: "<%= category.slug %>"
 <% end %>
-<% end %>
-  without_facets:
-<% 
-about_categories.each do |category| 
-  next if category.in_facet?
-%>
-    - name: "<%= prepare_text_for_static category.to_s %>"
-      slug: "<%= category.slug %>"
 <% end %>
 <% end %>
