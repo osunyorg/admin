@@ -12,9 +12,15 @@ taxonomies:
   - name: "<%= prepare_text_for_static taxonomy.to_s %>"
     slug: "<%= taxonomy.slug %>"
     categories:
-<% about_categories.in_taxonomy(taxonomy).each do |category| %>
+<% 
+about_categories.in_taxonomy(taxonomy).each do |category| 
+  hugo = category.hugo(@website)  
+%>
       - name: "<%= prepare_text_for_static category.to_s %>"
-        slug: "<%= category.slug %>"
+        permalink: "<%= hugo.permalink %>"
+        file: "<%= hugo.file %>"
+        path: "<%= hugo.path %>"
+        slug: "<%= hugo.slug %>"
 <% end %>
 <% end %>
 <% end %>
