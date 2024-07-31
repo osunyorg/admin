@@ -18,10 +18,10 @@ breadcrumbs:
     path: "<%= person_l10n.current_permalink_in_website(@website)&.path %>"
   - title: "<%= t('university.person.facets.author.posts', locale: @l10n.language.iso_code) %>"
 <%= render 'admin/application/static/permalink', about: @l10n %>
-<%= render 'admin/application/static/design', 
-            about: person, 
-            l10n: @l10n, 
-            full_width: true, 
+<%= render 'admin/application/static/design',
+            about: person,
+            l10n: @l10n,
+            full_width: true,
             toc_offcanvas: true %>
 person: >-
   <%= person_l10n.to_s %>

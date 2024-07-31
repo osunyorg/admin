@@ -6,10 +6,10 @@ language = @l10n.language
 date: "<%= @l10n.published_at&.iso8601 %>"
 <%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
-<%= render 'admin/application/static/design', 
-            about: post, 
-            l10n: @l10n, 
-            full_width: false, 
+<%= render 'admin/application/static/design',
+            about: post,
+            l10n: @l10n,
+            full_width: false,
             toc_offcanvas: false %>
 <% if @l10n.pinned %>
 weight: 1
@@ -31,4 +31,3 @@ posts_categories:
 <%= render 'admin/application/summary/static', about: @l10n %>
 <%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---
-<%= prepare_html_for_static @about.text %>
