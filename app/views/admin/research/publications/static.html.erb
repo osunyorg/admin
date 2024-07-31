@@ -3,7 +3,10 @@
 date: "<%= @about.publication_date&.iso8601 %>"
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: false, toc_present: false %>
+<%= render 'admin/application/static/design',
+            full_width: true,
+            toc_offcanvas: false,
+            toc_present: false %>
 hal:
   docid: "<%= @about.hal_docid %>"
   url: "<%= @about.hal_url %>"

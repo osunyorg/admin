@@ -7,7 +7,9 @@
 <% if @website
   @programs = @website.education_programs.where(diploma: @about).root.ordered %>
 programs:
-<%= render 'admin/education/programs/static_list', diploma: @about, programs: @programs %>
+<%= render 'admin/education/programs/static_list',
+            diploma: @about,
+            programs: @programs %>
 <% end %>
 short_name: >-
   <%= prepare_text_for_static @about.short_name %>

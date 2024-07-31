@@ -68,12 +68,12 @@ class Communication::Website::Post::Localization < ApplicationRecord
     "posts/#{static_path}.html"
   end
 
-  def template_static
-    "admin/communication/websites/posts/static"
-  end
-
   def static_path
     "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
+  end
+
+  def template_static
+    "admin/communication/websites/posts/static"
   end
 
   def dependencies

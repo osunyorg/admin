@@ -10,7 +10,10 @@ administrator_involvements = @about.involvements_through_roles
 <%= render 'admin/application/static/title' %>
 <%= render 'admin/application/static/permalink' %>
 <%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: false, toc_offcanvas: true, toc_present: true %>
+<%= render 'admin/application/static/design',
+            full_width: false,
+            toc_offcanvas: true,
+            toc_present: true %>
 <% if @about.downloadable_summary.attached? %>
 downloadable_summary: <%= @about.downloadable_summary.blob_id %>
 <% end %>
@@ -37,7 +40,9 @@ parent:
 logo:
   id: "<%= @about.logo.blob.id %>"
 <% end %>
-related_category: "<%= @website.post_categories.find_by(program_id: @about.id)&.slug_with_ancestors_slugs %>"
+related_category: "<%= @website.post_categories
+                               .find_by(program_id: @about.id)
+                               &.slug_with_ancestors_slugs %>"
 diplomas: "<%= @about.diploma&.slug %>"
 duration: >-
   <%= prepare_text_for_static @about.duration %>
