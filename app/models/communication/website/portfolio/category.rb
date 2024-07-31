@@ -6,6 +6,7 @@
 #  featured_image_alt       :text
 #  featured_image_credit    :text
 #  is_programs_root         :boolean          default(FALSE)
+#  is_taxonomy              :boolean          default(FALSE)
 #  meta_description         :text
 #  name                     :string
 #  path                     :string
