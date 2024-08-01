@@ -39,6 +39,7 @@ class CreateCommunicationWebsiteAgendaCategoryLocalizations < ActiveRecord::Migr
       )
 
       category.translate_contents!(l10n)
+      category.translate_attachment(l10n, :featured_image)
 
       category.permalinks.each do |permalink|
         new_permalink = permalink.dup
