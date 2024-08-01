@@ -39,7 +39,10 @@
             <%= f.association :categories,
                               label_text: false,
                               as: :check_boxes,
-                              collection: collection_tree_for_checkboxes(@categories) %>
+                              collection: osuny_collection_tree(
+                                @website.agenda_categories.tmp_original.ordered, # TODO L10N : Remove tmp_original
+                                localized: true
+                              ) %>
           <% end %>
         <% end %>
 

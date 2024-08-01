@@ -116,6 +116,7 @@ fr:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         name: Nom
+        parent: Catégorie parente
         slug: Slug
       communication/website/agenda/event:
         categories: Catégories
