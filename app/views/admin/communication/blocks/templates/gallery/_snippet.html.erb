@@ -1,8 +1,8 @@
-<% 
-block.template.elements.each do |element| 
+<%
+block.template.elements.each do |element|
   blob = element.image_component.blob
   next if blob.nil?
-%><span class="d-inline-block me-2 mb-2"><%= 
+%><div class="d-inline-block me-2 mb-2"><%=
   # Strange indent to let no whitespace mess with the spacing
   kamifusen_tag blob, height: 90, alt: ''
-%></span><% end %>
+%></div><% end %>
