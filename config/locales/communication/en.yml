@@ -318,6 +318,10 @@ en:
         one: Tag
         other: Tags
   admin:
+    categories:
+      is_taxonomy: Is a taxonomy (a family of categories)
+      other: Other
+      title: Categories
     communication:
       block:
         copied: The block has been copied to clipboard!

@@ -6,6 +6,7 @@
 #  featured_image_alt       :text
 #  featured_image_credit    :text
 #  is_programs_root         :boolean          default(FALSE)
+#  is_taxonomy              :boolean          default(FALSE)
 #  meta_description         :text
 #  name                     :string
 #  path                     :string
@@ -37,6 +38,7 @@
 #  fk_rails_eed5f4b819  (university_id => universities.id)
 #
 class Communication::Website::Portfolio::Category < ApplicationRecord
+  include AsCategory
   include AsDirectObject
   include Contentful
   include Initials
@@ -47,20 +49,11 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
   include WithBlobs
   include WithFeaturedImage
   include WithMenuItemTarget
-  include WithPosition
-  include WithTree
   include WithUniversity
 
-  belongs_to              :parent,
-                          class_name: 'Communication::Website::Portfolio::Category',
-                          optional: true
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_many                :children,
-                          class_name: 'Communication::Website::Portfolio::Category',
-                          foreign_key: :parent_id,
-                          dependent: :destroy
   has_and_belongs_to_many :projects,
                           class_name: 'Communication::Website::Portfolio::Project',
                           join_table: :communication_website_portfolio_categories_projects,

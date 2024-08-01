@@ -1,48 +1,50 @@
 <%= content_for :title, t('.title') %>
 
-<h4 class="mb-5"><%= t('.title') %></h4>
+<div class="text-lg-center">
+  <h1 class="h4 mb-5"><%= t('.title') %></h1>
 
-<p>
-  <% if resource.direct_otp %>
-    <% if resource.direct_otp_delivery_method == 'mobile_phone' %>
-      <%= t('devise.two_factor_authentication.enter_code_direct_otp_mobile_phone', phone: masked_phone(resource.mobile_phone)) %>
+  <p>
+    <% if resource.direct_otp %>
+      <% if resource.direct_otp_delivery_method == 'mobile_phone' %>
+        <%= t('devise.two_factor_authentication.enter_code_direct_otp_mobile_phone', phone: masked_phone(resource.mobile_phone)) %>
+      <% else %>
+      <%= t('devise.two_factor_authentication.enter_code_direct_otp_email', mail: masked_email(resource.email)) %>
+      <% end %>
     <% else %>
-    <%= t('devise.two_factor_authentication.enter_code_direct_otp_email', mail: masked_email(resource.email)) %>
+      <%= t('devise.two_factor_authentication.enter_code_totp') %>
     <% end %>
-  <% else %>
-    <%= t('devise.two_factor_authentication.enter_code_totp') %>
-  <% end %>
-</p>
+  </p>
 
-<%= simple_form_for(resource, url: user_two_factor_authentication_path, html: { method: :put, class: 'my-3' }) do |f| %>
-  <div class="form-inputs">
-    <div class="input-group required mt-0" style="max-width: 400px">
-      <%= text_field_tag :code,
-                          '',
-                          type: 'tel',
-                          pattern: '\d*',
-                          required: true,
-                          autofocus: true,
-                          autocomplete: 'off',
-                          class: 'form-control string required'%>
+  <%= simple_form_for(resource, url: user_two_factor_authentication_path, html: { method: :put, class: 'my-3' }) do |f| %>
+    <div class="form-inputs">
+      <div class="input-group required mx-lg-auto mt-0" style="max-width: 220px">
+        <%= text_field_tag :code,
+                            '',
+                            type: 'tel',
+                            pattern: '\d*',
+                            required: true,
+                            autofocus: true,
+                            autocomplete: 'off',
+                            class: 'form-control form-control-lg mfa-code text-lg-center string required'%>
+      </div>
       <%= f.button  :submit,
                     t('devise.two_factor_authentication.validate'),
-                    class: "btn btn-primary" %>
+                    class: "btn btn-primary mt-2" %>
+      <p class="mt-4 mb-5">
+        <% if resource.direct_otp %>
+          <%= link_to t('devise.two_factor_authentication.resend_code'), [:resend_code, resource_name, :two_factor_authentication] %>
+        <% else %>
+          <%= link_to t('devise.two_factor_authentication.send_code_instead'), [:resend_code, resource_name, :two_factor_authentication] %>
+        <% end %>
+        <% unless resource.mobile_phone.blank? # when phone is blank default code method is already :email so we don't need another link %>
+          • <%= link_to t('devise.two_factor_authentication.send_email_code'), [:resend_code, resource_name, :two_factor_authentication, delivery_method: :email] %>
+        <% end %>
+      </p>
     </div>
-    <p class="mt-4 mb-5">
-      <% if resource.direct_otp %>
-        <%= link_to t('devise.two_factor_authentication.resend_code'), [:resend_code, resource_name, :two_factor_authentication] %>
-      <% else %>
-        <%= link_to t('devise.two_factor_authentication.send_code_instead'), [:resend_code, resource_name, :two_factor_authentication] %>
-      <% end %>
-      <% unless resource.mobile_phone.blank? # when phone is blank default code method is already :email so we don't need another link %>
-        • <%= link_to t('devise.two_factor_authentication.send_email_code'), [:resend_code, resource_name, :two_factor_authentication, delivery_method: :email] %>
-      <% end %>
-    </p>
-  </div>
-<% end %>
+  <% end %>
 
-<%= link_to t('devise.shared.links.sign_out'),
-            destroy_user_session_path,
-            method: :delete,
-            class: "btn btn-outline-danger" %>
+  <%= link_to t('devise.shared.links.sign_out'),
+              destroy_user_session_path,
+              method: :delete,
+              class: "btn btn-outline-danger" %>
+</div>

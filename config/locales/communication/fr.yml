@@ -318,6 +318,10 @@ fr:
         one: Mot-clé
         other: Mot-clés
   admin:
+    categories:
+      is_taxonomy: Est une taxonomie (une famille de catégories)
+      other: Autres
+      title: Catégories
     communication:
       block:
         copied: Le bloc a bien été copié dans le presse-papier.
