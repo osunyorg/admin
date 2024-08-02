@@ -21,7 +21,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             indexed
+#  language_id              :uuid             not null, indexed
 #  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
 #  university_id            :uuid             not null, indexed

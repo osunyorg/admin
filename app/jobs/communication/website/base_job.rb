@@ -5,7 +5,8 @@ class Communication::Website::BaseJob < ApplicationJob
 
   queue_as :elephant
 
-  discard_on ActiveJob::DeserializationError
+  discard_on  ActiveJob::DeserializationError, # Discard if object does not exist anymore
+              Octokit::InvalidRepository # Discard if repository is invalid to prevent useless API calls
 
   # Retry the job after 1 minute if it is interrupted, to prevent queue from being blocked
   retry_on GoodJob::InterruptError, wait: 1.minute, attempts: Float::INFINITY
