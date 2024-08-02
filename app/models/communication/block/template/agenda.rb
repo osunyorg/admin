@@ -24,7 +24,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :quantity, :number, options: 3
   has_component :time, :option, options: AUTHORIZED_SCOPES
   has_component :no_event_message, :string
-  
+
   has_component :option_categories,   :boolean, default: false
   has_component :option_dates,        :boolean, default: true
   has_component :option_image,        :boolean, default: true
@@ -81,7 +81,8 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def base_events
-    events = website.events.for_language(block.language).published
+    # TODO L10N : Handle publication state
+    events = website.events.for_language(block.language)
     events = events.send(time) if time.in? AUTHORIZED_SCOPES
     events
   end
