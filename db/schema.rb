@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_31_152544) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -286,7 +286,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
     t.string "slug"
     t.text "summary"
     t.uuid "communication_website_id", null: false
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.uuid "original_id"
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
@@ -302,12 +302,58 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
     t.index ["university_id"], name: "index_communication_website_agenda_categories_on_university_id"
   end
 
+  create_table "communication_website_agenda_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.string "name"
+    t.string "path"
+    t.string "slug"
+    t.text "summary"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.uuid "communication_website_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_012efb471f"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_2eaea4d96e"
+    t.index ["language_id"], name: "idx_on_language_id_8542c3d2f9"
+    t.index ["slug"], name: "idx_on_slug_55ae2c29d7"
+    t.index ["university_id"], name: "idx_on_university_id_934ff72e5e"
+  end
+
+  create_table "communication_website_agenda_event_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.jsonb "add_to_calendar_urls"
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.string "meta_description"
+    t.string "migration_identifier"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.string "slug"
+    t.string "subtitle"
+    t.text "summary"
+    t.text "text"
+    t.string "title"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "communication_website_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_db6323806a"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_87f393a516"
+    t.index ["language_id"], name: "idx_on_language_id_c00e1d0218"
+    t.index ["university_id"], name: "idx_on_university_id_eaf79b0514"
+  end
+
   create_table "communication_website_agenda_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "summary"
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.uuid "original_id"
     t.boolean "published", default: false
     t.date "from_day"
@@ -1637,6 +1683,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
   add_foreign_key "communication_website_agenda_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_agenda_categories", "languages"
   add_foreign_key "communication_website_agenda_categories", "universities"
+  add_foreign_key "communication_website_agenda_category_localizations", "communication_website_agenda_categories", column: "about_id"
+  add_foreign_key "communication_website_agenda_category_localizations", "communication_websites"
+  add_foreign_key "communication_website_agenda_category_localizations", "languages"
+  add_foreign_key "communication_website_agenda_category_localizations", "universities"
+  add_foreign_key "communication_website_agenda_event_localizations", "communication_website_agenda_events", column: "about_id"
+  add_foreign_key "communication_website_agenda_event_localizations", "communication_websites"
+  add_foreign_key "communication_website_agenda_event_localizations", "languages"
+  add_foreign_key "communication_website_agenda_event_localizations", "universities"
   add_foreign_key "communication_website_agenda_events", "communication_website_agenda_events", column: "original_id"
   add_foreign_key "communication_website_agenda_events", "communication_website_agenda_events", column: "parent_id"
   add_foreign_key "communication_website_agenda_events", "communication_websites"

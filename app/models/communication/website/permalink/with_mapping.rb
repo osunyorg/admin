@@ -30,8 +30,8 @@ module Communication::Website::Permalink::WithMapping
       # Les lignes commentées nous servent à ne rien oublier pendant la migration.
       # Quand la migration l10n sera terminée, tout sera décommenté.
       # "Administration::Location::Localization" => Communication::Website::Permalink::Location,
-      # "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
-      # "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
+      "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
+      "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
       "Communication::Website::Page::Localization" => Communication::Website::Permalink::Page,
       # "Communication::Website::Portfolio::Project::Localization" => Communication::Website::Permalink::Portfolio::Project,
       # "Communication::Website::Portfolio::Category::Localization" => Communication::Website::Permalink::Portfolio::Category,

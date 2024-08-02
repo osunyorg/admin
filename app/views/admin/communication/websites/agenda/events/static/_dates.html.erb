@@ -1,8 +1,6 @@
 <%
 depth ||= 0
 indentation = '  ' * depth
-event = @about || @event
-locale = event.language.iso_code
 %>
 <%= indentation %>dates:
 <%= indentation %>  status: "<%= event.status %>"
@@ -28,8 +26,8 @@ locale = event.language.iso_code
 <%= indentation %>    hour: <%= event.to_hour.strftime "%H:%M" %>
 <% end %>
 <%= indentation %>  add_to_calendar:
-<%= indentation %>    google: "<%= event.cal_google_url.html_safe %>"
-<%= indentation %>    yahoo: "<%= event.cal_yahoo_url.html_safe %>"
-<%= indentation %>    office: "<%= event.cal_office_url.html_safe %>"
-<%= indentation %>    outlook: "<%= event.cal_outlook_url.html_safe %>"
-<%= indentation %>    ical: "<%= event.cal_ical_url.html_safe %>"
+<%= indentation %>    google: "<%= l10n.cal_google_url.html_safe %>"
+<%= indentation %>    yahoo: "<%= l10n.cal_yahoo_url.html_safe %>"
+<%= indentation %>    office: "<%= l10n.cal_office_url.html_safe %>"
+<%= indentation %>    outlook: "<%= l10n.cal_outlook_url.html_safe %>"
+<%= indentation %>    ical: "<%= l10n.cal_ical_url.html_safe %>"

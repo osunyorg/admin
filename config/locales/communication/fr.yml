@@ -116,23 +116,25 @@ fr:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         name: Nom
+        parent: Catégorie parente
         slug: Slug
       communication/website/agenda/event:
         categories: Catégories
         dates: Dates
-        featured_image: Image à la une
         from_day: Jour de début
         from_hour: Heure de début
-        published: Publié
         status: Statut
         status_archive: Archive
         status_current: En cours
         status_future: À venir
-        subtitle: Sous-titre
         time_zone: Fuseau horaire
-        title: Titre
         to_day: Jour de fin
         to_hour: Heure de fin
+      communication/website/agenda/event/localization:
+        featured_image: Image à la une
+        published: Publié
+        subtitle: Sous-titre
+        title: Titre
       communication/website/connection:
         direct_source: Source directe
         direct_source_id: Identifiant de la source
