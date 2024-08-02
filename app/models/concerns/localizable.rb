@@ -84,7 +84,13 @@ module Localizable
   alias :localized_in? :exists_in_language?
 
   def published_in?(language)
-    localization_for(language).try(:published?)
+    l10n = localization_for(language)
+    if l10n.respond_to?(:published?)
+      l10n.published?
+    else
+      # La localisation n'a pas de statut de publication, on vérifie seulement son existence
+      l10n.present?
+    end
   end
 
   def to_s_in(language)
