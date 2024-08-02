@@ -9,7 +9,7 @@ class Communication::Website::Permalink::Paper < Communication::Website::Permali
 
   # /papiers/:slug/
   def self.pattern_in_website(website, language)
-    "/#{special_page_path(website, language)}/:year-:month-:day-:slug/"
+    special_page_path(website, language) + '/:year-:month-:day-:slug/'
   end
 
   def self.special_page_type

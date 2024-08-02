@@ -11,7 +11,7 @@ class Communication::Website::Permalink::Author < Communication::Website::Permal
   def self.pattern_in_website(website, language)
     posts_page = website.special_page(Communication::Website::Page::CommunicationPost)
     posts_page_l10n = posts_page.best_localization_for(language)
-    "/#{special_page_path(website, language)}/:slug/#{posts_page_l10n.slug}/"
+    special_page_path(website, language) + "/:slug/#{posts_page_l10n.slug}/"
   end
 
   def self.special_page_type

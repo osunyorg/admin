@@ -10,7 +10,7 @@ class Communication::Website::Permalink::Administrator < Communication::Website:
   # /equipe/:slug/roles/
   # FIXME : Remplacer le roles comme dans Permalink::Author ? (Pas sûr)
   def self.pattern_in_website(website, language)
-    "/#{special_page_path(website, language)}/:slug/roles/"
+    special_page_path(website, language) + '/:slug/roles/'
   end
 
   def self.special_page_type

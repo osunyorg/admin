@@ -16,7 +16,7 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
   # Le slug est en fait un assemblage des ancêtres, comme :
   # /actualites/categorie-parente-categorie-enfant/
   def self.pattern_in_website(website, language)
-    "/#{special_page_path(website, language)}/:slug/"
+    special_page_path(website, language) + '/:slug/'
   end
 
   def self.special_page_type
