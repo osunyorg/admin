@@ -57,7 +57,7 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
       params,
       key: :object,
       university: current_university,
-      only: Communication::Extranet::Connection.permitted_about_types
+      permitted_classes: Communication::Extranet::Connection.permitted_about_classes
     )
   end
 end

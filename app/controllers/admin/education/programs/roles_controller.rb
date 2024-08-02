@@ -61,8 +61,8 @@ class Admin::Education::Programs::RolesController < Admin::Education::Programs::
 
   def role_params
     params.require(:university_role)
-          .permit(:description, involvements_attributes: [:id, :person_id, :position, :_destroy])
-          .merge(target: @program, university_id: current_university.id)
+          .permit(:description, involvements_attributes: [:id, :person_id, :language_id, :university_id, :position, :_destroy])
+          .merge(target: @program, language_id: @program.language_id, university_id: current_university.id)
   end
 
   def model
@@ -71,7 +71,7 @@ class Admin::Education::Programs::RolesController < Admin::Education::Programs::
 
   def load_administration_people
     @administration_people =  current_university.people
-                                                .for_language_id(current_university.default_language_id)
+                                                .in_closest_language_id(current_language.id)
                                                 .administration
                                                 .accessible_by(current_ability)
                                                 .ordered

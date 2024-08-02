@@ -1,0 +1,8 @@
+<%
+value = object.send(property)
+title = object.class.human_attribute_name(property)
+%>
+<%= osuny_label title %>
+<p>
+  <%= t(value) %>
+</p>

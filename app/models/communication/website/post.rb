@@ -18,7 +18,7 @@
 #  updated_at               :datetime         not null
 #  author_id                :uuid             indexed
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             indexed
 #  original_id              :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
@@ -40,22 +40,24 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
-  include Contentful
-  include Initials
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Shareable
-  include Sluggable # We override slug_unavailable? method
-  include Translatable
-  include WithAccessibility
-  include WithBlobs
+  include Shareable # TODO L10N : To remove
+  include Localizable
+  include WithBlobs # TODO L10N : To remove
   include WithDuplication
-  include WithFeaturedImage
+  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
-  include WithPublication
   include WithUniversity
 
   has_summernote :text # TODO: Remove text attribute
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+              class_name: "Communication::Website::Permalink",
+              as: :about,
+              dependent: :destroy
+
 
   belongs_to :author,
              class_name: 'University::Person',
@@ -66,11 +68,9 @@ class Communication::Website::Post < ApplicationRecord
                           foreign_key: :communication_website_post_id,
                           association_foreign_key: :communication_website_category_id
 
-  validates :title, presence: true
-
-  before_validation :set_published_at
   after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
+  # TODO L10N : To rewrite
   scope :published, -> {
     where("
       communication_website_posts.published = true AND
@@ -83,7 +83,7 @@ class Communication::Website::Post < ApplicationRecord
       DATE(communication_website_posts.published_at) > now()
     ")
   }
-  scope :ordered, -> { order(pinned: :desc, published_at: :desc, created_at: :desc) }
+  scope :ordered, -> (language) { order(pinned: :desc, published_at: :desc, created_at: :desc) }
   scope :latest, -> { published.order(published_at: :desc).limit(5) }
   scope :for_author, -> (author_id) { where(author_id: author_id) }
   scope :for_category, -> (category_id) { joins(:categories).where(communication_website_post_categories: { id: category_id }).distinct }
@@ -97,33 +97,11 @@ class Communication::Website::Post < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
-  def published?
-    published && published_at && published_at.to_date <= Date.today
-  end
-
-  def git_path(website)
-    return unless website.id == communication_website_id && published && published_at
-    git_path_content_prefix(website) + git_path_relative
-  end
-
-  def git_path_relative
-    "posts/#{static_path}.html"
-  end
-
-  def static_path
-    "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
-  end
-
-  def template_static
-    "admin/communication/websites/posts/static"
-  end
-
   def dependencies
-    active_storage_blobs +
-    contents_dependencies +
+    [website.config_default_content_security_policy] +
+    localizations.in_languages(website.active_language_ids) +
     categories +
-    [author&.author] +
-    [website.config_default_content_security_policy]
+    (author.present? ? author.author_facets : [])
   end
 
   def references
@@ -131,41 +109,20 @@ class Communication::Website::Post < ApplicationRecord
     abouts_with_post_block
   end
 
-  def translated_author
-    @translated_author ||= author.find_or_translate!(language)
+  def pinned_in?(language)
+    localization_for(language).try(:pinned)
   end
 
-  def to_s
-    "#{title}"
+  def published_at_in(language)
+    localization_for(language).try(:published_at)
+  end
+
+  # TODO L10N : to remove
+  def translate_other_attachments(translation)
+    translate_attachment(translation, :shared_image) if shared_image.attached?
   end
 
   protected
-
-  def check_accessibility
-    accessibility_merge_array blocks
-  end
-
-  def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
-              .where.not(id: self.id)
-              .exists?
-  end
-
-  def set_published_at
-    self.published_at = Time.zone.now if published && published_at.nil?
-  end
-
-  def explicit_blob_ids
-    super.concat [
-      featured_image&.blob_id,
-      shared_image&.blob_id
-    ]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
-  end
 
   def update_authors_statuses!
     old_author = University::Person.find_by(id: author_id_before_last_save)
@@ -173,14 +130,6 @@ class Communication::Website::Post < ApplicationRecord
       old_author.update(is_author: false)
     end
     author.update(is_author: true) if author_id
-  end
-
-  def translate_additional_data!(translation)
-    categories.each do |category|
-      translated_category = category.find_or_translate!(translation.language)
-      translation.categories << translated_category
-    end
-    translation.update(author_id: author.find_or_translate!(translation.language).id) if author_id.present?
   end
 
   def abouts_with_post_block

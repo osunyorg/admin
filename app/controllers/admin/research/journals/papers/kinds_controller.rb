@@ -34,9 +34,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
 
   def create
     @kind.assign_attributes(
-      journal: @journal,
-      university: current_university,
-      language_id: @journal.language_id
+      journal: @journal
     )
     if @kind.save
       redirect_to admin_research_journal_kind_path(@kind), notice: t('admin.successfully_created_html', model: @paper_kind.to_s)
@@ -71,6 +69,8 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
   end
 
   def kind_params
-    params.require(:research_journal_paper_kind).permit(:title, :slug)
+    params.require(:research_journal_paper_kind)
+          .permit(:title, :slug)
+          .merge(university_id: current_university.id)
   end
 end

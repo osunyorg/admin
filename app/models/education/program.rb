@@ -69,8 +69,7 @@ class Education::Program < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Shareable
-  include Sluggable
-  include Translatable
+  include Localizable
   include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WebsitesLinkable
   include WithAccessibility
@@ -242,4 +241,5 @@ class Education::Program < ApplicationRecord
   def move_children
     children.update(parent_id: parent_id)
   end
+
 end

@@ -7,7 +7,7 @@ class Communication::Website::Page::ResearchVolume < Communication::Website::Pag
   def dependencies
     super +
     [website.config_default_languages] +
-    website.research_volumes.where(language_id: language_id)
+    website.research_volumes
   end
 
   def git_path_relative

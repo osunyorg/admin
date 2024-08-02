@@ -32,7 +32,6 @@ class Research::Publication < ApplicationRecord
   include AsIndirectObject
   include Permalinkable
   include Sanitizable
-  include Sluggable
   include WithCitations
   include WithGitFiles
 

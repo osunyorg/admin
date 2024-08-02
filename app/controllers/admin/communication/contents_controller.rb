@@ -17,7 +17,7 @@ class Admin::Communication::ContentsController < Admin::Communication::Applicati
       params,
       key: :about,
       university: current_university,
-      only: Communication::Block.permitted_about_types
+      mandatory_module: Contentful
     )
     raise_403_unless can?(:edit, @about)
   end

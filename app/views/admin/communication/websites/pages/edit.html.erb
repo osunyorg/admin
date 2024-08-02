@@ -1,3 +1,5 @@
-<% content_for :title, @page %>
+<% content_for :title, @l10n %>
 
-<%= render 'form', page: @page %>
+<%= render 'form',
+            page: @page,
+            l10n: @l10n %>

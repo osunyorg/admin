@@ -1,4 +1,6 @@
-<% people = current_university.people.for_language(block.language).ordered %>
+<% people = current_university.people
+                              .tmp_original # TODO L10N : remove
+                              .ordered(block.language) %>
 <% unless label.blank? %>
   <label  class="form-label"
           :for="<%= dom_id.html_safe %>">
@@ -13,7 +15,7 @@
   <% end %>
   <% people.each do |person| %>
     <option value="<%= person.id %>">
-      <%= person.last_name %>, <%= person.first_name %>
+      <%= person.to_s_alphabetical_in(block.language) %>
     </option>
   <% end %>
 </select>

@@ -4,6 +4,14 @@
     margin-bottom: $spacing1
     overflow: hidden
     transition: box-shadow 0.3s ease-in-out
+    // In the people and organizations
+    > .osuny__published
+        margin-right: 0
+        position: absolute
+        right: pxToRem(10)
+        top: pxToRem(10)
+        &--false
+            border: 1px solid $color-border
     &--horizontal
         align-items: center
         flex-direction: row

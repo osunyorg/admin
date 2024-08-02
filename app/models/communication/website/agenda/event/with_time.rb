@@ -27,7 +27,7 @@ module Communication::Website::Agenda::Event::WithTime
     before_validation :set_time_zone
     before_validation :set_to_day
 
-    validates_presence_of :from_day, :title
+    validates_presence_of :from_day
     validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
   end
 

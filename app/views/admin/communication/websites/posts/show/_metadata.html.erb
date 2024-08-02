@@ -1,21 +1,22 @@
 <%= osuny_panel t('metadata'), small: true do %>
   <p>
-    <% if @post.published %>
-      <%= t('admin.communication.website.posts.published_on', date: l(@post.published_at.to_date)) %>
-      <%= t('admin.communication.website.posts.and_pinned') if @post.pinned %>
+    <% if @l10n.published %>
+      <%= t('admin.communication.website.post.localizations.published_on', date: l(@l10n.published_at.to_date)) %>
+      <%= t('admin.communication.website.post.localizations.and_pinned') if @l10n.pinned %>
     <% else %>
-      <%= t('admin.communication.website.posts.draft') %>
+      <%= t('admin.communication.website.post.localizations.draft') %>
     <% end %>
-      
-    <%= t('admin.communication.website.posts.by', author: @post.author) if @post.author %>
 
-    <%= render 'admin/application/i18n/inline', about: @post %>
-      
+    <%= t('admin.communication.website.posts.by', author: @post.author.to_s_in(@l10n.language)) if @post.author %>
+
     <% if @post.categories.any? %>
-      <% categories =  @post.categories.collect(&:to_s).join(', ') %>
-      <%= t('admin.communication.website.posts.in', categories: categories) %>
+      <%
+      categories = @post.categories
+      category_names = categories.collect { |category| category.to_s_in(@l10n.language) }
+      %>
+      <%= t('admin.communication.website.posts.in', categories: category_names.join(', ')) %>
     <% end %>
   </p>
-
-  <%= render 'admin/application/permalinks/redirects', about: @post %>
+  <%= render 'admin/application/permalinks/redirects', about: @l10n %>
 <% end %>
+<%= render 'admin/application/l10n/widget', about: @post, l10n: @l10n, small: true %>

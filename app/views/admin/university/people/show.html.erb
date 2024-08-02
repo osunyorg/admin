@@ -1,6 +1,6 @@
-<% content_for :title, @person %>
+<% content_for :title, @l10n %>
 
-<%= render 'main_infos', person: @person %>
+<%= render 'main_infos', person: @person, l10n: @l10n %>
 
 <% if @teacher_involvements.total_count > 0 || @administrator_involvements.total_count > 0 %>
   <h2 class="category"><%= University::Person::Involvement.model_name.human(count: 2) %></h2>
@@ -37,9 +37,33 @@ action += link_to t('university.manage_experiences'),
 
 <%= render 'admin/application/connections/list', about: @person %>
 
+<% if current_user.server_admin? %>
+  <%= osuny_panel t('static') do  %>
+    <%= link_to 'Person',
+                static_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
+    <%= link_to 'Administrator', 
+                static_administrator_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
+    <%= link_to 'Author', 
+                static_author_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
+    <%= link_to 'Researcher', 
+                static_researcher_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
+    <%= link_to 'Teacher', 
+                static_teacher_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %>
+  <% end %>
+<% end %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @person %>
-  <%= static_link static_admin_university_person_path(@person) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

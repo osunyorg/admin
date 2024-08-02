@@ -35,10 +35,6 @@ class Communication::Block::Component::Base
     template.block.about&.website
   end
 
-  def translate!
-    # By default, does nothing. Specific cases are handled in their own definitions. (example: post)
-  end
-
   def full_text
     ''
   end
@@ -46,4 +42,5 @@ class Communication::Block::Component::Base
   def to_s
     self.class.to_s.demodulize
   end
+
 end

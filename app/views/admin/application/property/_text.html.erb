@@ -4,6 +4,8 @@ if object.respond_to? "best_#{property}"
   value = object.public_send("best_#{property}").to_s
   source = object.public_send("best_#{property}_source")
 end
+is_blank = Static.blank?(value)
+hide_blank ||= false
 title = object.class.human_attribute_name(property)
 if source
   title += ' <span class="small">'
@@ -11,12 +13,14 @@ if source
   title += '</span>'
 end
 %>
-<%= osuny_label title %>
-<p>
-  <% if Static.blank?(value) %>
-    <i class="<%= Icon::WARNING %> text-danger"></i>
-    <%= t 'properties.text.missing' %>
-  <% else %>
-    <%= strip_tags(value).truncate(200).html_safe %>
-  <% end %>
-</p>
+<% unless hide_blank && is_blank %>
+  <%= osuny_label title %>
+  <p>
+    <% if is_blank %>
+      <i class="<%= Icon::WARNING %> text-danger"></i>
+      <%= t 'properties.text.missing' %>
+    <% else %>
+      <%= strip_tags(value).truncate(200).html_safe %>
+    <% end %>
+  </p>
+<% end %>

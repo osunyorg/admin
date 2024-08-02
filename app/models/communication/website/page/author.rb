@@ -3,7 +3,7 @@ class Communication::Website::Page::Author < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    website.authors.where(language_id: language_id).map(&:author)
+    dependencies_authors
   end
 
   # Not listed in any menu because it makes "Équipe" unclickable (opens submenu)
@@ -17,7 +17,14 @@ class Communication::Website::Page::Author < Communication::Website::Page
 
   protected
 
+  def dependencies_authors
+    University::Person::Localization::Author.where(
+      about_id: website.authors.pluck(:id),
+      language_id: website.active_language_ids
+    )
+  end
+
   def default_parent
-    website.special_page(Communication::Website::Page::Person, language: language)
+    website.special_page(Communication::Website::Page::Person)
   end
 end

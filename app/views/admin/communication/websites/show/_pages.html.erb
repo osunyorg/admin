@@ -10,11 +10,9 @@ action += link_to t('create'),
     <% @pages.each do |page| %>
       <div class="<%= 'col-lg-6 col-xxl-4' if large %>">
         <div class="card card--horizontal">
-          <%= osuny_thumbnail page %>
+          <%= osuny_thumbnail_localized page %>
           <div class="card-body">
-            <%= link_to page,
-                        admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                        class: "stretched-link text-black" %>
+            <%= osuny_link_localized page, admin_communication_website_page_path(website_id: page.website.id, id: page.id), classes: "stretched-link" %>
           </div>
           <div class="card-footer text-muted">
             <%= l page.updated_at.to_date, format: :short %>

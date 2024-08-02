@@ -24,9 +24,11 @@ module User::WithPerson
   end
 
   def sync_person
-    person.first_name = first_name
-    person.last_name = last_name
-    person.slug = person.to_s.parameterize
+    person_l10n = person.original_localization
+    person_l10n.first_name = first_name
+    person_l10n.last_name = last_name
+    person_l10n.slug =person_l10n.to_s.parameterize
+    person_l10n.save
     person.picture.purge if picture_infos.present? && person.picture&.attached?
     person.save
   end

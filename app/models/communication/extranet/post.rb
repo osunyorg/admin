@@ -37,7 +37,6 @@ class Communication::Extranet::Post < ApplicationRecord
   include Contentful
   include Permalinkable
   include Sanitizable
-  include Sluggable
   include WithAccessibility
   include WithFeaturedImage
   include WithPublication

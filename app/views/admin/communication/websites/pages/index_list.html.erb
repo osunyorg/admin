@@ -1,32 +1,31 @@
 <% content_for :title, t('admin.communication.website.pages.structure') %>
 
-<% content_for :title_right do %>
+<p>
   <%= @pages.total_count %>
   <%= Communication::Website::Page.model_name.human(count: @pages.total_count).downcase %>
-<% end %>
+</p>
 
-<%= osuny_panel  t('admin.communication.website.pages.structure'),
-                action: create_link(Communication::Website::Page) do %>
-  <ul class="nav nav-tabs justify-content-md-end mt-0 mt-md-n4">
-    <li class="nav-item">
-      <a class="nav-link" href="<%= admin_communication_website_pages_path %>">
-        <i class="fas fa-sitemap"></i>
-        <%= t('admin.communication.website.pages.as_tree') %>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page">
-        <i class="fas fa-list"></i>
-        <%= t('admin.communication.website.pages.as_list') %>
-      </a>
-    </li>
-  </ul>
-  <div class="position-relative mt-2">
-    <p>&nbsp;</p><%# Hack idiot pour le bon affichage des filtres %>
-    <%= render 'filters', current_path: list_admin_communication_website_pages_path, filters: @filters %>
-    <%= render 'admin/communication/websites/pages/list', pages: @pages %>
-    <%= paginate @pages %>
-  </div>
-<% end %>
+<ul class="nav nav-tabs justify-content-md-end mt-0 mt-md-n4">
+  <li class="nav-item">
+    <a class="nav-link" href="<%= admin_communication_website_pages_path %>">
+      <i class="fas fa-sitemap"></i>
+      <%= t('admin.communication.website.pages.as_tree') %>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page">
+      <i class="fas fa-list"></i>
+      <%= t('admin.communication.website.pages.as_list') %>
+    </a>
+  </li>
+</ul>
+<div class="position-relative mt-2">
+  <p>&nbsp;</p><%# Hack idiot pour le bon affichage des filtres %>
+  <%= render 'filters', current_path: list_admin_communication_website_pages_path, filters: @filters %>
+  <%= render 'admin/communication/websites/pages/list', pages: @pages %>
+  <%= paginate @pages %>
+</div>
 
-<%= render 'admin/communication/websites/language_switcher' %>
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Website::Page %>
+<% end %>

@@ -1,0 +1,4 @@
+<%= f.association :language,
+                  include_blank: false,
+                  collection: current_university.languages.ordered,
+                  label_method: lambda { |l| t("languages.#{l.iso_code.to_s}") } %>

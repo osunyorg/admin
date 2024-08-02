@@ -1,4 +1,4 @@
-<%= render 'admin/application/static/title' %>
+<%= render 'admin/application/static/title', about: @l10n %>
 default:
 <% if @website.default_image.attached? %>
   image:
@@ -7,25 +7,4 @@ default:
 <% if @website.default_shared_image.attached? %>
   shared_image:
     id: <%= @website.default_shared_image.blob&.id %>
-<% end %>
-social:
-<%
-[
-  :email,
-  :mastodon,
-  :peertube,
-  :x,
-  :github,
-  :linkedin,
-  :youtube,
-  :vimeo,
-  :instagram,
-  :facebook,
-  :tiktok
-].each do |social_element|
-  value = @website.send "social_#{social_element}"
-  next if value.blank?
-%>
-  <%= social_element %>: >-
-    <%= value %>
 <% end %>

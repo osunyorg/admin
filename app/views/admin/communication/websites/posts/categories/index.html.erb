@@ -4,8 +4,6 @@
             root_categories: @root_categories, 
             categories_class: @categories_class %>
 
-<%= render 'admin/communication/websites/language_switcher' %>
-
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Post::Category %>
 <% end %>

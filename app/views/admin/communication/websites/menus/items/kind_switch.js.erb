@@ -15,16 +15,16 @@ function hideAbout() {
 <% elsif @kind == 'page' %>
     <%
     options = ['<option value="" label=" "></option>']
-    collection_tree(@website.pages.for_language(current_website_language)).each do |page|
-        options << "<option value=\"#{page[:id]}\">#{page[:label]}</option>"
+    osuny_collection_tree(@collection, localized: true).each do |object|
+        options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
     displayAbout('Communication::Website::Page', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'diploma' %>
     <%
     options = ['<option value="" label=" "></option>']
-    @website.education_diplomas.ordered.each do |diploma|
-        options << "<option value=\"#{diploma.id}\">#{diploma.to_s}</option>"
+    osuny_collection_tree(@collection, localized: false).each do |object|
+        options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
     displayAbout('Education::Diploma', "<%= j(raw(options.join(''))) %>");
@@ -32,48 +32,48 @@ function hideAbout() {
 <% elsif @kind == 'program' %>
     <%
     options = ['<option value="" label=" "></option>']
-    collection_tree(@website.education_programs).each do |page|
-        options << "<option value=\"#{page[:id]}\">#{page[:label]}</option>"
+    osuny_collection_tree(@collection, localized: false).each do |object|
+        options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
     displayAbout('Education::Program', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'category' %>
     <%
-        options = ['<option value="" label=" "></option>']
-        collection_tree(@website.post_categories.for_language(current_website_language)).each do |category|
-            options << "<option value=\"#{category[:id]}\">#{category[:label]}</option>"
-        end
+    options = ['<option value="" label=" "></option>']
+    osuny_collection_tree(@collection, localized: true).each do |object|
+        options << "<option value=\"#{object.last}\">#{object.first}</option>"
+    end
     %>
     displayAbout('Communication::Website::Post::Category', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'post' %>
     <%
     options = ['<option value="" label=" "></option>']
-    @website.posts.for_language(current_website_language).ordered.each do |post|
-        options << "<option value=\"#{post.id}\">#{post.to_s}</option>"
+    osuny_collection(@collection, localized: true).each do |object|
+        options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
     displayAbout('Communication::Website::Post', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'volume' %>
     <%
     options = ['<option value="" label=" "></option>']
-    @website.research_volumes.ordered.each do |volume|
-        options << "<option value=\"#{volume.id}\">#{volume.to_s}</option>"
+    osuny_collection(@collection, localized: false).each do |object|
+        options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
     displayAbout('Research::Journal::Volume', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'paper' %>
     <%
     options = ['<option value="" label=" "></option>']
-    @website.research_papers.ordered.each do |paper|
-        options << "<option value=\"#{paper.id}\">#{paper.to_s}</option>"
+    osuny_collection(@collection, localized: false).each do |object|
+        options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
     displayAbout('Research::Journal::Paper', "<%= j(raw(options.join(''))) %>");
 <% elsif @kind == 'location' %>
     <%
     options = ['<option value="" label=" "></option>']
-    @website.administration_locations.ordered.each do |location|
-        options << "<option value=\"#{location.id}\">#{location.to_s}</option>"
+    osuny_collection(@collection, localized: false).each do |object|
+        options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
     displayAbout('Administration::Location', "<%= j(raw(options.join(''))) %>");

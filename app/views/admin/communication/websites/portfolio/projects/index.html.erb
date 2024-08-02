@@ -8,8 +8,6 @@
 <%= render 'admin/communication/websites/portfolio/projects/list', projects: @projects %>
 <%= paginate @projects %>
 
-<%= render 'admin/communication/websites/language_switcher' %>
-
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Portfolio::Project %>
 <% end %>

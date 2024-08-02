@@ -1,4 +1,10 @@
-<% categories = collection(block.about&.website.agenda_categories.for_language(block.language)) %>
+<%
+categories = osuny_collection_tree(
+  block.about.website.agenda_categories
+    .tmp_original, # TODO L10N : remove
+    localized: true
+)
+%>
 <label  class="form-label"
         :for="<%= dom_id.html_safe %>">
   <%= label %>
@@ -7,8 +13,8 @@
         class="form-select select mb-3"
         v-model="<%= model %>.<%= property %>">
   <% categories.each_with_index do |category, index| %>
-    <option value="<%= category[:id] %>">
-      <%= category[:label].html_safe %>
+    <option value="<%= category.last %>">
+      <%= category.first.html_safe %>
     </option>
   <% end %>
 </select>

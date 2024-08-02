@@ -12,9 +12,4 @@ class Communication::Block::Component::PersonCategory < Communication::Block::Co
     [category]
   end
 
-  def translate!
-    return unless category.present?
-    @data = category.find_or_translate!(template.language).id
-  end
-
 end

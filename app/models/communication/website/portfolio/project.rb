@@ -39,8 +39,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Shareable
-  include Sluggable
-  include Translatable
+  include Localizable
   include WithAccessibility
   include WithBlobs
   include WithDuplication

@@ -1,1 +1,0 @@
-json.translation_key @about.static_translation_key

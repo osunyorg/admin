@@ -9,7 +9,10 @@
     <tbody>
       <% categories.each do |category| %>
         <tr>
-          <td><%= link_to category, admin_university_organization_category_path(category) %></td>
+          <td>
+            <%= osuny_link_localized  category,
+                                      admin_university_organization_category_path(category) %>
+          </td>
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= edit_link category %>

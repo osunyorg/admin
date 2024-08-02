@@ -2,8 +2,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   load_and_authorize_resource class: Research::Journal::Volume, through: :journal
 
   def index
-    @volumes = @volumes.for_language_id(@journal.language_id)
-                       .ordered
+    @volumes = @volumes.ordered
                        .page(params[:page])
     breadcrumb
   end
@@ -35,9 +34,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   def create
     @volume.add_photo_import params[:photo_import]
     @volume.assign_attributes(
-      journal: @journal, 
-      university: current_university,
-      language_id: @journal.language_id
+      journal: @journal
     )
     if @volume.save
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s)

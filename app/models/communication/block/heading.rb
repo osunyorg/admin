@@ -54,10 +54,6 @@ class Communication::Block::Heading < ApplicationRecord
   before_validation :compute_level
   after_save :touch_about
 
-  def self.permitted_about_types
-    ApplicationRecord.model_names_with_concern(Contentful)
-  end
-
   def references
     [about]
   end
@@ -68,18 +64,18 @@ class Communication::Block::Heading < ApplicationRecord
     heading
   end
 
-  def translate!(about_translation, parent_id = nil)
-    translation = self.dup
-    translation.about = about_translation
-    translation.parent_id = parent_id
-    translation.save
+  def localize_for!(new_localization, parent_id = nil)
+    localized_heading = self.dup
+    localized_heading.about = new_localization
+    localized_heading.parent_id = parent_id
+    localized_heading.save
     # then translate blocks
     blocks.ordered.each do |block|
-      block.translate!(about_translation, translation.id)
+      block.localize_for!(new_localization, localized_heading.id)
     end
     # and then children
     children.ordered.each do |child|
-      child.translate!(about_translation, translation.id)
+      child.localize_for!(new_localization, localized_heading.id)
     end
   end
 

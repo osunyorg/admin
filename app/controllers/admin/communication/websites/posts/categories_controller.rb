@@ -3,24 +3,20 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
                               through: :website,
                               through_association: :post_categories
 
-  include Admin::Translatable
-  include Admin::Categorizable
+  include Admin::ActAsCategories
+  include Admin::Localizable
+  include Admin::HasStaticAction
 
   def index
-    @root_categories = categories.root
+    @root_categories = categories.root.tmp_original # TODO L10N : To remove
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end
 
   def show
-    @posts = @category.posts.ordered.page(params[:page])
+    @posts = @category.posts.ordered(current_language).page(params[:page])
     breadcrumb
-  end
-
-  def static
-    @about = @category
-    render_as_plain_text
   end
 
   def new
@@ -80,12 +76,16 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   def category_params
     params.require(:communication_website_post_category)
           .permit(
-            :name, :meta_description, :summary, :slug, :parent_id,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+            :parent_id,
+            localizations_attributes: [
+              :id, :name, :meta_description, :summary, :slug,
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+              :language_id
+            ]
           )
           .merge(
             university_id: current_university.id,
-            language_id: current_website_language.id
+            language_id: current_language.id
           )
   end
 end

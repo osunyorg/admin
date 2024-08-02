@@ -18,9 +18,8 @@ class Admin::Research::Journals::ApplicationController < Admin::Research::Applic
   end
 
   def default_url_options
-    return {} unless params.has_key? :journal_id
-    {
-      journal_id: params[:journal_id]
-    }
+    options = super
+    options[:journal_id] = params[:journal_id] if params.has_key? :journal_id
+    options
   end
 end

@@ -1,5 +1,9 @@
-<%# TODO: Traduire les locations %>
-<% locations = @block.template.available_locations.ordered %>
+<%
+  locations = @block.template
+                    .available_locations
+                    .tmp_original # TODO L10N : remove
+                    .ordered
+%>
 <% if label.present? %>
 <label  class="form-label"
         :for="<%= dom_id.html_safe %>">

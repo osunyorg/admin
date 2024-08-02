@@ -48,23 +48,17 @@
 #
 class University::Organization < ApplicationRecord
   include AsIndirectObject
-  include Backlinkable
-  include Contentful
-  include Initials
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Shareable
-  include Sluggable
-  include Translatable
-  include WithBlobs
+  include Shareable # TODO L10N : To remove
+  include Localizable
+  include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithGeolocation
-  include WithGitFiles
+  # include WithGitFiles # TODO L10N : To remove
   include WithUniversity
 
   attr_accessor :created_from_extranet
-
-  has_summernote :text
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Organization::Category',
@@ -73,38 +67,69 @@ class University::Organization < ApplicationRecord
            class_name: 'University::Person::Experience',
            dependent: :destroy
 
-  has_one_attached_deletable :logo
-  has_one_attached_deletable :logo_on_dark_background
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
-  alias :featured_image :logo
+  has_one_attached_deletable :logo # TODO L10N : To remove
+  has_one_attached_deletable :logo_on_dark_background # TODO L10N : To remove
 
-  validates_presence_of :name
-  validates_uniqueness_of :name, scope: [:university_id, :language_id]
-  validates :logo, size: { less_than: 1.megabytes }
-  validates :logo_on_dark_background, size: { less_than: 1.megabytes }
-  # Organization can be created from extranet with only their name. Be careful for future validators.
-  # There is an attribute accessor above : `created_from_extranet`
+  alias :featured_image :logo # TODO L10N : To remove
 
-  scope :ordered, -> { order(:name) }
+  # TODO L10N : To understand
+  scope :ordered, -> (language) {
+    # Define a raw SQL snippet for the conditional aggregation
+    # This selects the name of the localization in the specified language,
+    # or falls back to the first localization name if the specified language is not present.
+    localization_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.name END),
+        MAX(localizations.name) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_name
+    SQL
+
+    # Join the organizations table with a subquery that ranks localizations
+    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          university_organization_localizations as localizations
+      ) localizations ON university_organizations.id = localizations.about_id
+    SQL
+    ]))
+    .select("university_organizations.*", localization_name_select)
+    .group("university_organizations.id")
+    .order("localization_name ASC")
+  }
+
   scope :for_kind, -> (kind) { where(kind: kind) }
   scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
+  # TODO L10N : To rewrite (should add a parameter language and filter to localizations only for this language)
   scope :for_search_term, -> (term) {
-    where("
-      unaccent(university_organizations.address) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.city) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.country) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.meta_description) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.email) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.long_name) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.name) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.nic) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.phone) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.text) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.zipcode) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.url) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+    joins(:localizations)
+      # TODO L10N : To add after filters rework @pabois
+      .where("
+        unaccent(university_organizations.address) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.city) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.country) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.meta_description) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.email) ILIKE unaccent(:term) OR
+        unaccent(university_organization_localizations.long_name) ILIKE unaccent(:term) OR
+        unaccent(university_organization_localizations.name) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.nic) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.phone) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
+        unaccent(university_organization_localizations.text) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.zipcode) ILIKE unaccent(:term) OR
+        unaccent(university_organizations.url) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
+  # TODO L10N : To rewrite
   scope :search_by_siren_or_name, -> (term) {
     where("
       unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
@@ -119,39 +144,15 @@ class University::Organization < ApplicationRecord
   }
 
   def dependencies
-    active_storage_blobs +
-    categories +
-    blocks
+    localizations +
+    categories
   end
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}organizations/#{slug}.html" if for_website?(website)
-  end
-
-  def to_s
-    "#{name}"
-  end
-
-  protected
-
-  def translate_additional_data!(translation)
+  # TODO L10N : to remove
+  def translate_other_attachments(translation)
     translate_attachment(translation, :logo) if logo.attached?
     translate_attachment(translation, :logo_on_dark_background) if logo_on_dark_background.attached?
-    categories.each do |category|
-      translated_category = category.find_or_translate!(translation.language)
-      translation.categories << translated_category
-    end
+    translate_attachment(translation, :shared_image) if shared_image.attached?
   end
 
-  def backlinks_blocks(website)
-    website.blocks.organizations
-  end
-
-  def explicit_blob_ids
-    [
-      logo&.blob_id,
-      logo_on_dark_background&.blob_id,
-      shared_image&.blob_id
-    ]
-  end
 end

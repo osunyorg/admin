@@ -9,8 +9,6 @@
 <%= render 'admin/communication/websites/agenda/events/list', events: @events %>
 <%= paginate @events %>
 
-<%= render 'admin/communication/websites/language_switcher' %>
-
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Agenda::Event %>
 <% end %>

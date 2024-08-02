@@ -34,8 +34,7 @@ class Education::Diploma < ApplicationRecord
   include Contentful
   include Permalinkable
   include Sanitizable
-  include Sluggable
-  include Translatable
+  include Localizable
   include WithGitFiles
   include WithUniversity
 

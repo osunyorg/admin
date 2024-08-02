@@ -6,11 +6,6 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
 
   protected
 
-  def current_website_language
-    @current_website_language ||= @website.best_language_for(params[:lang])
-  end
-  helper_method :current_website_language
-
   def current_subnav_context
     @website && @website.persisted? ? 'navigation/admin/communication/website'
                                     : super
@@ -23,11 +18,8 @@ class Admin::Communication::Websites::ApplicationController < Admin::Communicati
   end
 
   def default_url_options
-    options = {}
-    if @website.present?
-      options[:website_id] = @website.id
-      options[:lang] = current_website_language.iso_code
-    end
+    options = super
+    options[:website_id] = @website.id if @website&.persisted?
     options
   end
 end

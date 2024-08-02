@@ -14,7 +14,7 @@ class Communication::Block::Template::Organization::Element < Communication::Blo
   end
 
   def best_name
-    organization ? organization.name : name
+    organization ? organization.to_s_in(block.language) : name
   end
 
   def best_url

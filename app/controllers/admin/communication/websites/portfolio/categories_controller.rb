@@ -3,8 +3,8 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
                               through: :website,
                               through_association: :portfolio_categories
 
-  include Admin::Translatable
-  include Admin::Categorizable
+  include Admin::Localizable
+  include Admin::ActAsCategories
 
   def index
     @root_categories = categories.root
@@ -81,7 +81,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
           )
           .merge(
             university_id: current_university.id,
-            language_id: current_website_language.id
+            language_id: current_language.id
           )
   end
 end

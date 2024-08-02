@@ -63,7 +63,7 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
                               .joins(:categories)
                               .where(categories: {id: category.id } )
                               .distinct
-                              .ordered
+                              .ordered(block.language)
     organizations.map do |organization|
       # On simule un élément pour l'organisation, afin d'unifier les accès
       Communication::Block::Template::Organization::Element.new(block, {

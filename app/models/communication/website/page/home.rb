@@ -18,12 +18,4 @@ class Communication::Website::Page::Home < Communication::Website::Page
     nil
   end
 
-  def set_slug
-    self.slug = ''
-  end
-
-  def skip_slug_validation?
-    true
-  end
-
 end

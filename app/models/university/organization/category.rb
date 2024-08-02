@@ -8,7 +8,7 @@
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  language_id   :uuid             not null, indexed
+#  language_id   :uuid             indexed
 #  original_id   :uuid             indexed
 #  parent_id     :uuid             indexed
 #  university_id :uuid             not null, indexed
@@ -29,15 +29,17 @@
 #
 class University::Organization::Category < ApplicationRecord
   include AsIndirectObject
-  include Contentful
-  include Initials
-  include Permalinkable
-  include Sluggable
-  include Translatable
-  include WithGitFiles
+  include Contentful # TODO L10N : To remove
+  include Localizable
   include WithPosition
   include WithTree
   include WithUniversity
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   belongs_to :parent,
              class_name: 'University::Organization::Category',
@@ -50,26 +52,8 @@ class University::Organization::Category < ApplicationRecord
                           class_name: 'University::Organization',
                           join_table: :university_organizations_categories
 
-  validates :name, presence: true
-
-  def git_path(website)
-    git_path_content_prefix(website) + git_path_relative
-  end
-
-  def git_path_relative
-    "organizations_categories/#{slug}/_index.html"
-  end
-
-  def template_static
-    "admin/university/organizations/categories/static"
-  end
-
-  def to_s
-    "#{name}"
-  end
-
   def dependencies
-    contents_dependencies
+    localizations
   end
 
   def references

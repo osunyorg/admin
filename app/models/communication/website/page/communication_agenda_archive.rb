@@ -19,11 +19,11 @@ class Communication::Website::Page::CommunicationAgendaArchive < Communication::
   def dependencies
     super +
     [website.config_default_languages] +
-    website.events.where(language_id: language_id)
+    website.events
   end
 
   def default_parent
-    website.special_page(Communication::Website::Page::CommunicationAgenda, language: language)
+    website.special_page(Communication::Website::Page::CommunicationAgenda)
   end
 
   def git_path_relative

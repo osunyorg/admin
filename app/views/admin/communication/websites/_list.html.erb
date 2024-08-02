@@ -6,8 +6,11 @@
           <%= kamifusen_tag website.screenshot, width: 500, class:'img-fluid rounded' if website.screenshot.attached? %>
         </div>
         <p class="strong mt-2 mb-0">
-          <%= website %>
-          <%= link_to t('show'), [:admin, website], class: 'float-end action stretched-link' %>
+          <%= osuny_link_localized  website,
+                                    admin_communication_website_path(
+                                      id: website.id
+                                    ),
+                                    classes: 'stretched-link' %>
         </p>
       </div>
     </div>

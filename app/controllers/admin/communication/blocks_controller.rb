@@ -3,6 +3,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
                               through: :current_university,
                               through_association: :communication_blocks
 
+  before_action :redirect_if_block_language_is_incorrect, only: [:edit, :update]
+
   def reorder
     # Cette action est très étrange, elle ne met pas en ordre les blocs seuls.
     # En fait, elle met en ordre dans le mode "Ecrire le contenu", à la fois les headings et les blocks.
@@ -22,7 +24,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       params,
       key: :about,
       university: current_university,
-      only: Communication::Block.permitted_about_types
+      mandatory_module: Contentful
     )
     breadcrumb
   end
@@ -75,7 +77,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       params,
       key: :about,
       university: current_university,
-      only: Communication::Block.permitted_about_types
+      mandatory_module: Contentful
     )
     # On réattribue à @block pour bénéficier du calcul dans about_path
     @block = @block.paste(about)
@@ -92,6 +94,11 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   protected
+
+  def redirect_if_block_language_is_incorrect
+    return if @block.language == current_language
+    redirect_to about_path, alert: t('admin.communication.block.language_mismatch_alert')
+  end
 
   def reorder_object
     @id = @object[:id]
@@ -134,18 +141,22 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   rescue
   end
 
-  def about_path
-    # La formation ou la page concernée
-    path_method = "admin_#{@block.about.class.base_class.to_s.parameterize.underscore}_path"
-    path_method_options = {
-      id: @block.about_id,
-      website_id: website_id,
-      extranet_id: extranet_id,
-      journal_id: journal_id
-    }
-    path_method_options[:lang] = @block.about.language.iso_code if @block.about.respond_to?(:language)
-    public_send path_method, **path_method_options
-  end
+    def about_path
+      # Les headings sont toujours affectés à des localisations
+      l10n = @block.about
+      # La localisation porte sur un objet, par exemple une University::Person ou un Communication::Website::Post
+      object_edited = l10n.about
+      # La formation ou la page concernée
+      path_method = "admin_#{object_edited.class.base_class.to_s.parameterize.underscore}_path"
+      path_method_options = {
+        id: object_edited.id,
+        lang: l10n.language,
+        website_id: website_id,
+        extranet_id: extranet_id,
+        journal_id: journal_id
+      }
+      public_send path_method, **path_method_options
+    end
 
   def breadcrumb
     short_breadcrumb

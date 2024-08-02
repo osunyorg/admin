@@ -1,31 +1,41 @@
----
-<%= render 'admin/application/static/title' %>
+<%
+event = @l10n.about
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
 subtitle: >-
-  <%= prepare_text_for_static @about.subtitle %>
-<% 
+  <%= prepare_text_for_static @l10n.subtitle %>
+<%
 # https://github.com/osunyorg/admin/issues/1880
-if @about.archive? %>
-date: "<%= @about.from_day&.iso8601 %>"
-<% elsif @about.current? %>
+if event.archive? %>
+date: "<%= event.from_day&.iso8601 %>"
+<% elsif event.current? %>
 weight: -1
-date: "<%= @about.from_day&.iso8601 %>"
+date: "<%= event.from_day&.iso8601 %>"
 <% else %>
-weight: <%= @about.distance_in_days %>
+weight: <%= event.distance_in_days %>
 <% end %>
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false %>
-<%= render 'admin/communication/websites/agenda/events/dates_static', event: @about %>
-<%= render 'admin/application/i18n/static' %>
-<%= render 'admin/application/featured_image/static' %>
-<%= render 'admin/application/shared_image/static' %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/summary/static' %>
-<% if @about.categories.any? %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            about: event,
+            l10n: @l10n,
+            full_width: false,
+            toc_offcanvas: false %>
+<%= render 'admin/communication/websites/agenda/events/static/dates',
+            event: event,
+            l10n: @l10n,
+            locale: language.iso_code %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
+<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/shared_image/static', about: @l10n %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
+<% if @l10n.categories.any? %>
 events_categories:
-<% @about.categories.ordered.each do |category| %>
+<% @l10n.categories.each do |category| %>
   - "<%= category.slug %>"
 <% end %>
 <% end %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---

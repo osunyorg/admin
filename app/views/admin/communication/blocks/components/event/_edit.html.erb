@@ -1,4 +1,7 @@
-<% events = block.about&.website.events.for_language(block.language).ordered %>
+<% events = block.about
+                 .website.events
+                 .tmp_original # TODO L10N : remove
+                 .ordered %>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>
@@ -10,10 +13,12 @@
     <option value="" disabled><%= placeholder %></option>
   <% end %>
   <% events.each do |event| %>
+    <% event_l10n = event.best_localization_for(block.language) %>
     <option value="<%= event.id %>">
-      <%= event.title %>
-      <% if event.subtitle.present? %>
-        - <%= event.subtitle %>
+      <%# TODO L10N : doit devenir  %>
+      <%= event_l10n.to_s %>
+      <% if event_l10n.subtitle.present? %>
+        - <%= event_l10n.subtitle %>
       <% end %>
     </option>
   <% end %>

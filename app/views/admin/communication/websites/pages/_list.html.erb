@@ -5,12 +5,12 @@ small ||= false
   <% pages.each do |page| %>
     <div>
       <div class="card card--horizontal">
-        <%= osuny_thumbnail page %>
+        <%= osuny_thumbnail_localized page %>
         <div class="card-body">
-          <%= osuny_published page %>
-          <%= link_to page,
-                      admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                      class: "stretched-link text-black" %>
+          <%= osuny_published_localized page %>
+          <%= osuny_link_localized  page,
+                                    admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                                    classes: "stretched-link" %>
         </div>
         <div class="card-footer text-muted">
           <% if small %>

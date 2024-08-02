@@ -23,7 +23,7 @@
                           [:server, website.university] %></td>
           <td>
             <%= link_to t('server_admin.websites.admin'),
-                        admin_communication_website_url(website, host: website.university.url),
+                        admin_communication_website_url(website, host: website.university.url, lang: website.default_language),
                         target: :_blank,
                         class: 'action' %>
             <%= link_to Communication::Website.human_attribute_name('url'),

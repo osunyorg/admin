@@ -7,7 +7,7 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    website.researchers.where(language_id: language_id).map(&:researcher)
+    dependencies_researchers
   end
 
   # Not listed in any menu because it makes "Équipe" unclickable (opens submenu)
@@ -21,7 +21,14 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
 
   protected
 
+  def dependencies_researchers
+    University::Person::Localization::Researcher.where(
+      about_id: website.researchers.pluck(:id),
+      language_id: website.active_language_ids
+    )
+  end
+
   def default_parent
-    website.special_page(Communication::Website::Page::Person, language: language)
+    website.special_page(Communication::Website::Page::Person)
   end
 end

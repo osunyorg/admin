@@ -1,31 +1,29 @@
-<% content_for :title, @post %>
+<% content_for :title, @l10n %>
 
 <div class="row">
   <div class="col-lg-7">
-    <%= osuny_panel Communication::Website::Post.human_attribute_name(:title), small: true do %>
-      <p class="lead mb-1"><%= @post.title %></p>
-      <%= render 'admin/application/property/publication', about: @post %>
+    <%= osuny_panel Communication::Website::Post::Localization.human_attribute_name(:title), small: true do %>
+      <p class="lead mb-1"><%= @l10n.title %></p>
+      <%= render 'admin/application/property/publication', about: @l10n %>
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/featured_image/show', about: @post, small: true %>
+    <%= render 'admin/application/featured_image/show', about: @l10n, small: true %>
   </div>
 </div>
 <hr class="mb-5">
-<%= render 'admin/application/a11y/widget', about: @post, horizontal: true %>
+<%= render 'admin/application/a11y/widget', about: @l10n, horizontal: true %>
 <hr class="mb-5">
 <div class="row">
   <div class="col-lg-4">
     <%= render 'admin/communication/websites/posts/show/metadata' %>
   </div>
   <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @post, small: true %>
-    <%= render 'admin/application/meta_description/show', about: @post %>
+    <%= render 'admin/application/summary/show', about: @l10n, small: true %>
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
-<%= render 'admin/communication/blocks/content/editor', about: @post %>
-
-<%= render 'admin/communication/websites/language_switcher' %>
+<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @post %>
@@ -34,7 +32,7 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
-  <% post_url = @post.current_permalink_url_in_website(@website) %>
+  <% post_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
               post_url,
               target: :_blank,

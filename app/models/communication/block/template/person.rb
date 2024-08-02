@@ -33,7 +33,7 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   def persons
     @persons ||= selected_elements.collect(&:person).compact.uniq
   end
-  alias people persons
+  alias :people :persons
 
   def person_ids
     @person_ids ||= persons.collect(&:id)
@@ -59,7 +59,7 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
                         .joins(:categories)
                         .where(categories: {id: category.id } )
                         .distinct
-                        .ordered
+                        .ordered(language)
     persons.map do |person|
       # On simule un élément pour l'organisation, afin d'unifier les accès
       Communication::Block::Template::Person::Element.new(block, {

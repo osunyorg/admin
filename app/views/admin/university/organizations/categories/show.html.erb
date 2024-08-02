@@ -1,7 +1,30 @@
-<% content_for :title, @category %>
+<% content_for :title, @l10n %>
 
 <div class="row">
   <div class="col-lg-8">
+    <%= osuny_panel t('metadata') do %>
+      <% if @category.parent %>
+        <%= osuny_label University::Organization::Category.human_attribute_name('parent') %>
+        <p>
+          <%= osuny_link_localized_if can?(:read, @category.parent),
+                                      @category.parent,
+                                      admin_university_organization_category_path(@category.parent.id) %>
+        </p>
+      <% end %>
+      <% if @category.children.any? %>
+        <%= osuny_label University::Organization::Category.human_attribute_name('children') %>
+        <ul class="list-unstyled mb-0">
+          <% @category.children.each do |child| %>
+            <li>
+              <%= osuny_link_localized_if can?(:read, child),
+                                          child,
+                                          admin_university_organization_category_path(child.id) %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end if @category.parent.present? || @category.children.any? %>
+
     <% if @organizations.total_count > 0 %>
       <%= osuny_panel University::Organization.model_name.human(count: 2),
                       subtitle: "#{@organizations.total_count} #{University::Organization.model_name.human(count: @organizations.total_count).downcase }" do %>
@@ -11,7 +34,7 @@
     <% end %>
   </div>
   <div class="col-lg-4">
-    <%= render 'admin/application/i18n/widget', about: @category %>
+    <%= render 'admin/application/l10n/widget', about: @category, l10n: @l10n, small: true %>
   </div>
 </div>
 

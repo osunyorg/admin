@@ -50,6 +50,8 @@
   </div>
 </div>
 
+<%= render 'admin/application/i18n/widget', about: @diploma, small: true %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @diploma %>
   <%= static_link static_admin_education_diploma_path(@diploma) %>

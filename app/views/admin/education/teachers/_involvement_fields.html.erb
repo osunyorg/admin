@@ -6,7 +6,11 @@
         <div class="col-md-5">
           <%= f.hidden_field :target_type, value: "Education::Program" %>
           <%= f.association :target,
-                            collection: collection_tree(current_university.education_programs),
+                            collection: collection_tree(
+                              current_university.education_programs
+                                                .in_closest_language_id(current_language.id)
+                                                .ordered
+                            ),
                             label_method: ->(p) { sanitize p[:label] },
                             value_method: ->(p) { p[:id] },
                             label: false,

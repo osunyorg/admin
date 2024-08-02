@@ -1,7 +1,6 @@
 class Communication::Website::Permalink::Author < Communication::Website::Permalink
   def self.required_in_config?(website)
-    # website might have authors but no posts (if a post unpublished exists)
-    website.has_authors? && website.has_blog_posts?
+    website.has_authors? && website.feature_posts
   end
 
   def self.static_config_key
@@ -10,7 +9,9 @@ class Communication::Website::Permalink::Author < Communication::Website::Permal
 
   # /equipe/:slug/actualites/
   def self.pattern_in_website(website, language)
-    "/#{slug_with_ancestors(website, language)}/:slug/#{website.special_page(Communication::Website::Page::CommunicationPost, language: language).slug}/"
+    posts_page = website.special_page(Communication::Website::Page::CommunicationPost)
+    posts_page_l10n = posts_page.best_localization_for(language)
+    special_page_path(website, language) + "/:slug/#{posts_page_l10n.slug}/"
   end
 
   def self.special_page_type

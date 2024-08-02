@@ -1,15 +1,15 @@
 class Communication::Website::Permalink::Volume < Communication::Website::Permalink
   def self.required_in_config?(website)
-    website.about.is_a? Research::Journal
+    website.about.is_a?(Research::Journal)
   end
 
   def self.static_config_key
     :volumes
   end
 
-  # /volumes/:slug/
+  # /volumes/2023-volume-1/
   def self.pattern_in_website(website, language)
-    "/#{slug_with_ancestors(website, language)}/:year-:slug/"
+    special_page_path(website, language) + '/:year-:slug/'
   end
 
   def self.special_page_type
