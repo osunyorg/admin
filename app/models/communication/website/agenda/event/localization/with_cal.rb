@@ -1,4 +1,4 @@
-module Communication::Website::Agenda::Event::WithCal
+module Communication::Website::Agenda::Event::Localization::WithCal
   extend ActiveSupport::Concern
 
   included do

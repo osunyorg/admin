@@ -116,23 +116,25 @@ en:
         featured_image: Featured image
         featured_image_alt: Alt text
         name: Name
+        parent: Parent category
         slug: Slug
       communication/website/agenda/event:
         categories: Categories
         dates: Dates
-        featured_image: Featured image
         from_day: From day
         from_hour: From hour
-        published: Published
         status: Status
         status_archive: Archive
         status_current: Running now
         status_future: In the future
-        subtitle: Subtitle
         time_zone: Time zone
-        title: Title
         to_day: To day
         to_hour: To hour
+      communication/website/agenda/event/localization:
+        featured_image: Featured image
+        published: Published
+        subtitle: Subtitle
+        title: Title
       communication/website/connection:
         direct_source: Direct source
         direct_source_id: Direct source identifier
