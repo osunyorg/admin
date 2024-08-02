@@ -105,6 +105,11 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
     "#{title}"
   end
 
+  # TODO L10N : to remove
+  def translate_other_attachments(translation)
+    translate_attachment(translation, :shared_image) if shared_image.attached?
+  end
+
   protected
 
   def check_accessibility

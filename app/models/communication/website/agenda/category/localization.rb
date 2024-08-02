@@ -46,7 +46,7 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
   belongs_to :website,
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
-  
+
   validates :name, presence: true
 
   before_validation :set_communication_website_id
@@ -67,15 +67,15 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
   def to_s
     "#{name}"
   end
-  
+
   protected
 
   def slug_unavailable?(slug)
     self.class
         .unscoped
         .where(
-          communication_website_id: self.communication_website_id, 
-          language_id: language_id, 
+          communication_website_id: self.communication_website_id,
+          language_id: language_id,
           slug: slug
         )
         .where.not(id: self.id)

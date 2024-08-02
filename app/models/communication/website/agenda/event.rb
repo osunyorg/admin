@@ -110,6 +110,11 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     abouts_with_agenda_block
   end
 
+  # TODO L10N : to remove
+  def translate_other_attachments(translation)
+    translate_attachment(translation, :shared_image) if shared_image.attached?
+  end
+
   protected
 
   def abouts_with_agenda_block
