@@ -7,9 +7,9 @@ class Communication::Website::Permalink::Volume < Communication::Website::Permal
     :volumes
   end
 
-  # /volumes/:slug/
+  # /volumes/2023-volume-1/
   def self.pattern_in_website(website, language)
-    "/#{special_page_path(website, language)}/:year-:slug/"
+    special_page_path(website, language) + '/:year-:slug/'
   end
 
   def self.special_page_type

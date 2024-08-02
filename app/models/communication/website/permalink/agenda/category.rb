@@ -9,7 +9,7 @@ class Communication::Website::Permalink::Agenda::Category < Communication::Websi
 
   # /agenda/:slug/
   def self.pattern_in_website(website, language)
-    "/#{special_page_path(website, language)}/:slug/"
+    special_page_path(website, language) + '/:slug/'
   end
 
   def self.special_page_type

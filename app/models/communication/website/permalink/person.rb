@@ -9,7 +9,7 @@ class Communication::Website::Permalink::Person < Communication::Website::Permal
 
   # /equipe/:slug/
   def self.pattern_in_website(website, language)
-    "/#{special_page_path(website, language)}/:slug/"
+    special_page_path(website, language) + '/:slug/'
   end
 
   def self.special_page_type

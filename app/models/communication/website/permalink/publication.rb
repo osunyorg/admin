@@ -8,7 +8,7 @@ class Communication::Website::Permalink::Publication < Communication::Website::P
   end
 
   def self.pattern_in_website(website, language)
-    "/#{special_page_path(website, language)}/:year-:slug/"
+    special_page_path(website, language) + '/:year-:slug/'
   end
 
   def self.special_page_type

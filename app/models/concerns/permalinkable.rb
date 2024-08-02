@@ -36,7 +36,8 @@ module Permalinkable
 
   # Called from git_file.sync
   def manage_permalink_in_website(website)
-    new_permalink_in_website(website).save_if_needed
+    permalink = new_permalink_in_website(website)
+    permalink.save_if_needed
   end
 
   def add_redirection(path)
