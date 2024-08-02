@@ -101,8 +101,7 @@ class Communication::Website::Post < ApplicationRecord
     [website.config_default_content_security_policy] +
     localizations.in_languages(website.active_language_ids) +
     categories +
-    # Si author est nil, rien, qui s  era compacté automatiquement
-    author.try(:author_facets)
+    (author.present? ? author.author_facets : [])
   end
 
   def references
