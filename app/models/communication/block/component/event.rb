@@ -2,7 +2,8 @@ class Communication::Block::Component::Event < Communication::Block::Component::
 
   def event
     return unless website
-    website.events.published.find_by(id: data)
+    # TODO L10N : Handle publication state
+    website.events.find_by(id: data)
   end
 
   def dependencies
