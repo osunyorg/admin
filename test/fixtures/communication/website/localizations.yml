@@ -2,6 +2,6 @@
 
 website_with_gitlab_en:
   university: default_university
-  website: website_with_gitlab
+  about: website_with_gitlab
   language: en
   name: Site with gitlab english
