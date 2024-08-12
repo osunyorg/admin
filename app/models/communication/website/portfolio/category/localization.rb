@@ -1,3 +1,38 @@
+# == Schema Information
+#
+# Table name: communication_website_portfolio_category_localizations
+#
+#  id                       :uuid             not null, primary key
+#  featured_image_alt       :text
+#  featured_image_credit    :text
+#  meta_description         :text
+#  name                     :string
+#  path                     :string
+#  published                :string           default("f")
+#  published_at             :datetime
+#  slug                     :string
+#  summary                  :text
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  about_id                 :uuid             indexed
+#  communication_website_id :uuid             indexed
+#  language_id              :uuid             indexed
+#  university_id            :uuid             indexed
+#
+# Indexes
+#
+#  idx_on_about_id_e184bfe637                  (about_id)
+#  idx_on_communication_website_id_9d28ee55e4  (communication_website_id)
+#  idx_on_language_id_70b50689c4               (language_id)
+#  idx_on_university_id_66e101bf70             (university_id)
+#
+# Foreign Keys
+#
+#  fk_rails_6dd917d73a  (language_id => languages.id)
+#  fk_rails_b75b5471d3  (about_id => communication_website_portfolio_categories.id)
+#  fk_rails_c8c00a26df  (communication_website_id => communication_websites.id)
+#  fk_rails_e84628b736  (university_id => universities.id)
+#
 class Communication::Website::Portfolio::Category::Localization < ApplicationRecord
   include AsLocalization
   include Contentful

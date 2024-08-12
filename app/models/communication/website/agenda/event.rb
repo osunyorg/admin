@@ -46,11 +46,9 @@
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
   include Contentful # TODO L10N : To remove
-  include Initials
   include Sanitizable
   include Shareable # TODO L10N : To remove
   include Localizable
-  include WithAccessibility
   include WithBlobs # TODO L10N : To remove
   include WithDuplication
   include WithFeaturedImage # TODO L10N : To remove
@@ -91,6 +89,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     )
     .distinct
   }
+  # TODO L10N : To adapt
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_website_agenda_events.meta_description) ILIKE unaccent(:term) OR

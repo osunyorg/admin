@@ -16,7 +16,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             indexed
 #  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
 #  university_id            :uuid             not null, indexed
@@ -40,16 +40,19 @@
 class Communication::Website::Portfolio::Category < ApplicationRecord
   include AsCategory
   include AsDirectObject
-  include Contentful
-  include Initials
-  include Permalinkable # We override slug_unavailable? method
+  include Contentful # TODO L10N : To removes
   include Sanitizable
   include Localizable
-  include Pathable # Included after Sluggable to make sure slug is correct before anything
-  include WithBlobs
-  include WithFeaturedImage
+  include WithBlobs # TODO L10N : To removes
+  include WithFeaturedImage # TODO L10N : To removes
   include WithMenuItemTarget
   include WithUniversity
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   belongs_to              :program,
                           class_name: 'Education::Program',
@@ -60,24 +63,9 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
                           foreign_key: :communication_website_portfolio_category_id,
                           association_foreign_key: :communication_website_portfolio_project_id
 
-  validates :name, presence: true
-
-  def to_s
-    "#{name}"
-  end
-
-  def git_path(website)
-    "#{git_path_content_prefix(website)}projects_categories/#{slug}/_index.html"
-  end
-
-  def template_static
-    "admin/communication/websites/portfolio/categories/static"
-  end
-
   def dependencies
-    active_storage_blobs +
-    contents_dependencies +
-    [website.config_default_content_security_policy]
+    [website.config_default_content_security_policy] +
+    localizations.in_languages(website.active_language_ids)
   end
 
   def references
@@ -86,17 +74,9 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
     references
   end
 
-  def siblings
-    self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
-  end
-
   protected
 
   def last_ordered_element
     website.portfolio_categories.where(parent_id: parent_id, language_id: language_id).ordered.last
-  end
-
-  def slug_unavailable?(slug)
-    self.class.unscoped.where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug).where.not(id: self.id).exists?
   end
 end

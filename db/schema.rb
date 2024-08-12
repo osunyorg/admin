@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_31_152544) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_02_132626) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -591,7 +591,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_152544) do
     t.integer "position"
     t.text "summary"
     t.uuid "communication_website_id", null: false
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.uuid "original_id"
     t.uuid "parent_id"
     t.uuid "university_id", null: false
@@ -612,6 +612,50 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_152544) do
     t.index ["communication_website_portfolio_project_id", "communication_website_portfolio_category_id"], name: "idx_on_communication_website_portfolio_project_id_c_8ffd53123b"
   end
 
+  create_table "communication_website_portfolio_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.string "name"
+    t.string "path"
+    t.string "published", default: "f"
+    t.datetime "published_at"
+    t.string "slug"
+    t.text "summary"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "communication_website_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_e184bfe637"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_9d28ee55e4"
+    t.index ["language_id"], name: "idx_on_language_id_70b50689c4"
+    t.index ["university_id"], name: "idx_on_university_id_66e101bf70"
+  end
+
+  create_table "communication_website_portfolio_project_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.string "meta_description"
+    t.string "migration_identifier"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.string "slug"
+    t.text "summary"
+    t.string "title"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "communication_website_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_a668ef6090"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_e653b6273a"
+    t.index ["language_id"], name: "idx_on_language_id_25a0c1e472"
+    t.index ["university_id"], name: "idx_on_university_id_f01fc2c686"
+  end
+
   create_table "communication_website_portfolio_projects", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.string "slug"
@@ -622,7 +666,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_152544) do
     t.boolean "published", default: false
     t.text "summary"
     t.uuid "communication_website_id", null: false
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.uuid "original_id"
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
@@ -1729,6 +1773,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_31_152544) do
   add_foreign_key "communication_website_portfolio_categories", "communication_websites"
   add_foreign_key "communication_website_portfolio_categories", "languages"
   add_foreign_key "communication_website_portfolio_categories", "universities"
+  add_foreign_key "communication_website_portfolio_category_localizations", "communication_website_portfolio_categories", column: "about_id"
+  add_foreign_key "communication_website_portfolio_category_localizations", "communication_websites"
+  add_foreign_key "communication_website_portfolio_category_localizations", "languages"
+  add_foreign_key "communication_website_portfolio_category_localizations", "universities"
+  add_foreign_key "communication_website_portfolio_project_localizations", "communication_website_portfolio_projects", column: "about_id"
+  add_foreign_key "communication_website_portfolio_project_localizations", "communication_websites"
+  add_foreign_key "communication_website_portfolio_project_localizations", "languages"
+  add_foreign_key "communication_website_portfolio_project_localizations", "universities"
   add_foreign_key "communication_website_portfolio_projects", "communication_website_portfolio_projects", column: "original_id"
   add_foreign_key "communication_website_portfolio_projects", "communication_websites"
   add_foreign_key "communication_website_portfolio_projects", "languages"
