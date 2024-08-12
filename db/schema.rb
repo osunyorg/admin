@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_02_132626) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_12_134035) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -598,10 +598,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_132626) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_taxonomy", default: false
+    t.uuid "program_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_8f309901d4"
     t.index ["language_id"], name: "idx_on_language_id_6e6ffc92a8"
     t.index ["original_id"], name: "idx_on_original_id_4cbc9f1290"
     t.index ["parent_id"], name: "index_communication_website_portfolio_categories_on_parent_id"
+    t.index ["program_id"], name: "index_communication_website_portfolio_categories_on_program_id"
     t.index ["university_id"], name: "idx_on_university_id_a07cc0a296"
   end
 
@@ -1771,6 +1773,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_132626) do
   add_foreign_key "communication_website_portfolio_categories", "communication_website_portfolio_categories", column: "original_id"
   add_foreign_key "communication_website_portfolio_categories", "communication_website_portfolio_categories", column: "parent_id"
   add_foreign_key "communication_website_portfolio_categories", "communication_websites"
+  add_foreign_key "communication_website_portfolio_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_portfolio_categories", "languages"
   add_foreign_key "communication_website_portfolio_categories", "universities"
   add_foreign_key "communication_website_portfolio_category_localizations", "communication_website_portfolio_categories", column: "about_id"

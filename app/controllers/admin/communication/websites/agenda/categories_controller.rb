@@ -1,5 +1,5 @@
 class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Communication::Websites::Agenda::ApplicationController
-  load_and_authorize_resource class: 'Communication::Website::Agenda::Category', 
+  load_and_authorize_resource class: 'Communication::Website::Agenda::Category',
                               through: :website,
                               through_association: :agenda_categories
 
@@ -17,11 +17,6 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   def show
     @events = @category.events.ordered.page(params[:page])
     breadcrumb
-  end
-
-  def static
-    @about = @category
-    render_as_plain_text
   end
 
   def new
@@ -68,7 +63,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Website::Agenda::Category.model_name.human(count: 2),
+    add_breadcrumb  categories_class.model_name.human(count: 2),
                     admin_communication_website_agenda_categories_path
     breadcrumb_for @category
   end
@@ -80,7 +75,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
             localizations_attributes: [
               :id, :language_id,
               :name, :meta_description, :summary, :slug,
-              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit              
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
             ]
           )
           .merge(

@@ -22,11 +22,11 @@
     <%= render 'admin/communication/websites/agenda/events/show/metadata' %>
   </div>
   <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @event, small: true %>
-    <%= render 'admin/application/meta_description/show', about: @event %>
+    <%= render 'admin/application/summary/show', about: @l10n, small: true %>
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
-<%= render 'admin/communication/blocks/content/editor', about: @event %>
+<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @event %>

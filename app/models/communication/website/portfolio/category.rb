@@ -19,20 +19,23 @@
 #  language_id              :uuid             indexed
 #  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
+#  program_id               :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
-#  idx_on_communication_website_id_8f309901d4                     (communication_website_id)
-#  idx_on_language_id_6e6ffc92a8                                  (language_id)
-#  idx_on_original_id_4cbc9f1290                                  (original_id)
-#  idx_on_university_id_a07cc0a296                                (university_id)
-#  index_communication_website_portfolio_categories_on_parent_id  (parent_id)
+#  idx_on_communication_website_id_8f309901d4                      (communication_website_id)
+#  idx_on_language_id_6e6ffc92a8                                   (language_id)
+#  idx_on_original_id_4cbc9f1290                                   (original_id)
+#  idx_on_university_id_a07cc0a296                                 (university_id)
+#  index_communication_website_portfolio_categories_on_parent_id   (parent_id)
+#  index_communication_website_portfolio_categories_on_program_id  (program_id)
 #
 # Foreign Keys
 #
 #  fk_rails_0f0db1988d  (communication_website_id => communication_websites.id)
 #  fk_rails_35d652a63c  (parent_id => communication_website_portfolio_categories.id)
+#  fk_rails_833ff43b27  (program_id => education_programs.id)
 #  fk_rails_c82d8a59f0  (language_id => languages.id)
 #  fk_rails_d21380c33e  (original_id => communication_website_portfolio_categories.id)
 #  fk_rails_eed5f4b819  (university_id => universities.id)

@@ -193,21 +193,30 @@ en:
         title: Title
       communication/website/permalink:
         path: Path
-      communication/website/portfolio/category:
+      communication/website/portfolio/category/localization:
         featured_image: Featured image
         featured_image_alt: Alt text
         name: Name
         slug: Slug
       communication/website/portfolio/project:
         categories: Categories
+        year: Year
+      communication/website/portfolio/project/localization:
         featured_image: Featured image
         published: Published
         title: Title
-        year: Year
       communication/website/post:
         author: Author
         categories: Categories
         website: Website
+      communication/website/post/category:
+        children: Children categories
+        parent: Parent category
+      communication/website/post/category/localization:
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        name: Name
+        slug: Slug
       communication/website/post/localization:
         category: Category
         date: Date
@@ -222,14 +231,6 @@ en:
         text: Text
         title: Title
         website: Website
-      communication/website/post/category:
-        children: Children categories
-        parent: Parent category
-      communication/website/post/category/localization:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        slug: Slug
       communication/website/showcase/tag:
         name: Name
         websites: Websites
@@ -372,6 +373,7 @@ en:
           creation_error: "Error during the creation. Does the given path have the correct format?"
         portfolio:
           projects:
+            draft: Draft
             none: No project yet
         post:
           localizations:
