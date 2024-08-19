@@ -38,7 +38,7 @@
             <div>
               <a  class="btn btn-sm text-danger ms-3"
                   v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-                  title="Supprimer">
+                  title="<%= t('delete') %>">
                   <i class="<%= Icon::DELETE %>"></i>
               </a>
             </div>

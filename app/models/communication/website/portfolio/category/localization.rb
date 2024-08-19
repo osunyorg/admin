@@ -42,6 +42,7 @@ class Communication::Website::Portfolio::Category::Localization < ApplicationRec
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
+  include WithPublication
   include WithUniversity
 
   belongs_to :website,
