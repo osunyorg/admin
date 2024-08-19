@@ -46,6 +46,10 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   include WithGitFiles
   include WithUniversity
 
+  belongs_to :website,
+              class_name: 'Communication::Website',
+              foreign_key: :communication_website_id
+
   validates :title, presence: true
 
   scope :ordered, -> { order(year: :desc, title: :asc) }
