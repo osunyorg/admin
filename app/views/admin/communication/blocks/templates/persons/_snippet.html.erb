@@ -1,12 +1,11 @@
-<% block.template.selected_elements.each do |element|
-  person = element.person
-  next if person.nil?
-  %>
-  <span class="me-2">
-    <% if person.best_picture.attached? %>
-      <%= kamifusen_tag person.best_picture, width: 90, height: 90, class: 'img-fluid rounded-circle' %>
-    <% else %>
-      <%= element.person.to_s_in(current_language) %>
-    <% end %>
-  </span>
-<% end %>
+<div class="row">
+  <% block.template.selected_elements.each do |element|
+    person = element.person
+    next if person.nil?
+    l10n = person.best_localization_for(person)
+    %>
+    <div class="col-6 col-xxl-2 col-lg-3">
+      <%= osuny_thumbnail l10n, classes: 'rounded-circle' %>
+    </div>
+  <% end %>
+</div>

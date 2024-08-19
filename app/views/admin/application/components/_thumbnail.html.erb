@@ -1,5 +1,6 @@
 <%
 size = large ? 300 : 100
+classes ||= ''
 image_class = 'img-fluid'
 image_variant = nil
 if image && image.attached?
@@ -16,7 +17,8 @@ end
 %>
 <div class="osuny__thumbnail 
             osuny__thumbnail--<%= large ? 'large' : 'small' %>
-            osuny__thumbnail--<%= cropped ? 'cropped' : 'uncropped' %>">
+            osuny__thumbnail--<%= cropped ? 'cropped' : 'uncropped' %>
+            <%= classes %>">
 
   <% if image_variant %>
     <%= image_tag image_variant, class: image_class, loading: 'lazy' %>
