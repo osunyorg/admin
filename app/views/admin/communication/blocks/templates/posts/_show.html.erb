@@ -26,7 +26,6 @@ date_format = "%e %B %Y"
               <% block.template.selected_posts.each do |post|
                 next if post.nil?
                 post_l10n =  post.localization_for(block.language)
-                next if post_l10n.nil?
               %>
                 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
@@ -125,7 +124,6 @@ date_format = "%e %B %Y"
                 <% block.template.selected_posts.each do |post|
                   next if post.nil?
                   post_l10n = post.localization_for(block.language)
-                  next if post_l10n.nil?
                 %>
                   <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                     <div class="post-content">
@@ -177,7 +175,6 @@ date_format = "%e %B %Y"
             <% block.template.selected_posts.each do |post|
               next if post.nil?
               post_l10n = post.localization_for(block.language)
-              next if post_l10n.nil?
             %>
               <article class='post' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                 <div class="post-content">
@@ -229,7 +226,6 @@ date_format = "%e %B %Y"
                 <% block.template.selected_posts.each do |post|
                   next if post.nil?
                   post_l10n = post.localization_for(block.language)
-                  next if post_l10n.nil?
                 %>
                   <li class="draggable-item">
                     <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
@@ -288,7 +284,6 @@ date_format = "%e %B %Y"
               <% block.template.selected_posts.each_with_index do |post, index|
                 next if post.nil?
                 post_l10n = post.localization_for(block.language)
-                next if post_l10n.nil?
               %>
                 <article class="post<% if !block.template.option_image || !post_l10n.best_featured_image.attached? %> without-image<% end %>" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
@@ -340,7 +335,6 @@ date_format = "%e %B %Y"
               <% block.template.selected_posts.each do |post|
                 next if post.nil?
                 post_l10n = post.localization_for(block.language)
-                next if post_l10n.nil?
               %>
                 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
                   <div class="post-content">
