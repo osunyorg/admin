@@ -88,7 +88,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def categories
     @website.agenda_categories
-            .for_language(current_language)
+            .tmp_original # TODO L10N : Remove tmp_original
             .ordered
   end
 
@@ -107,7 +107,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
       category_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text,
-        :published, :published_at, :slug, 
+        :published, :published_at, :slug,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id

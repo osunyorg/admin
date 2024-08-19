@@ -1,20 +1,26 @@
+<%
+project = @l10n.about
+%>
 ---
-<%= render 'admin/application/static/title' %>
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
+<%= render 'admin/application/static/title', about: @l10n %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             full_width: true,
-            toc_offcanvas: false %>
-<%= render 'admin/application/i18n/static' %>
-<%= render 'admin/application/featured_image/static' %>
-<%= render 'admin/application/shared_image/static' %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/summary/static' %>
-year: <%= @about.year %>
-date: <%= @about.year %>
-<%= render 'admin/application/categories/static', 
-            about: @about, 
-            categories: @website.portfolio_categories,
+            toc_offcanvas: false,
+            about: project,
+            l10n: @l10n %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
+<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/shared_image/static', about: @l10n %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
+year: <%= project.year %>
+date: <%= project.year %>
+<%= render 'admin/application/categories/static',
+            about: project,
+            l10n: @l10n,
+            categories: @website.portfolio_categories.tmp_original, # TODO L10N : remove tmp_original
             key: :projects_categories %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---

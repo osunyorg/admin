@@ -56,13 +56,13 @@
                       f: lf,
                       source: '#communication_website_agenda_event_localizations_attributes_0_title' %>
         <% end %>
-        <%= render 'admin/application/featured_image/edit', f: lf, about: @l10n %>
-        <%= render 'admin/application/shared_image/edit', f: lf, about: @l10n %>
+        <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
+        <%= render 'admin/application/shared_image/edit', f: lf, about: l10n %>
       </div>
     </div>
 
     <% content_for :action_bar_left do %>
-      <%= render 'admin/application/l10n/libre_translate_button', l10n: @l10n %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: l10n %>
     <% end %>
 
     <% content_for :action_bar_right do %>

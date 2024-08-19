@@ -8,12 +8,15 @@ small ||= false
     <% projects.each do |project| %>
       <div>
         <div class="card card--horizontal">
-          <%= osuny_thumbnail project %>
+          <%= osuny_thumbnail_localized project %>
           <div class="card-body">
-            <%= osuny_published project.published? unless small %>
-            <%= link_to project,
-                        admin_communication_website_portfolio_project_path(website_id: project.website.id, id: project.id),
-                        class: 'stretched-link text-black' %>
+            <%= osuny_published_localized project unless small %>
+            <%= osuny_link_localized  project,
+                                      admin_communication_website_portfolio_project_path(
+                                        website_id: project.website.id,
+                                        id: project.id
+                                      ),
+                                      classes: "stretched-link" %>
           </div>
           <div class="card-footer">
             <%= project.year %>

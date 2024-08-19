@@ -1,42 +1,43 @@
 # == Schema Information
 #
-# Table name: communication_website_agenda_category_localizations
+# Table name: communication_website_portfolio_category_localizations
 #
 #  id                       :uuid             not null, primary key
-#  featured_image_alt       :string
+#  featured_image_alt       :text
 #  featured_image_credit    :text
 #  meta_description         :text
 #  name                     :string
 #  path                     :string
-#  slug                     :string           indexed
+#  published                :string           default("f")
+#  published_at             :datetime
+#  slug                     :string
 #  summary                  :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed
-#  communication_website_id :uuid             not null, indexed
+#  communication_website_id :uuid             indexed
 #  language_id              :uuid             indexed
 #  university_id            :uuid             indexed
 #
 # Indexes
 #
-#  idx_on_about_id_012efb471f                  (about_id)
-#  idx_on_communication_website_id_2eaea4d96e  (communication_website_id)
-#  idx_on_language_id_8542c3d2f9               (language_id)
-#  idx_on_slug_55ae2c29d7                      (slug)
-#  idx_on_university_id_934ff72e5e             (university_id)
+#  idx_on_about_id_e184bfe637                  (about_id)
+#  idx_on_communication_website_id_9d28ee55e4  (communication_website_id)
+#  idx_on_language_id_70b50689c4               (language_id)
+#  idx_on_university_id_66e101bf70             (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_238c80122e  (language_id => languages.id)
-#  fk_rails_4adca7760a  (communication_website_id => communication_websites.id)
-#  fk_rails_622a67bc3b  (university_id => universities.id)
-#  fk_rails_b8a90413e8  (about_id => communication_website_agenda_categories.id)
+#  fk_rails_6dd917d73a  (language_id => languages.id)
+#  fk_rails_b75b5471d3  (about_id => communication_website_portfolio_categories.id)
+#  fk_rails_c8c00a26df  (communication_website_id => communication_websites.id)
+#  fk_rails_e84628b736  (university_id => universities.id)
 #
-class Communication::Website::Agenda::Category::Localization < ApplicationRecord
+class Communication::Website::Portfolio::Category::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
   include Initials
-  include Permalinkable
+  include Permalinkable # We override slug_unavailable? method
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage
@@ -52,11 +53,11 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
   before_validation :set_communication_website_id
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}events_categories/#{slug}/_index.html"
+    "#{git_path_content_prefix(website)}projects_categories/#{slug}/_index.html"
   end
 
   def template_static
-    "admin/communication/websites/agenda/categories/static"
+    "admin/communication/websites/portfolio/categories/static"
   end
 
   def dependencies
@@ -80,14 +81,6 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
         )
         .where.not(id: self.id)
         .exists?
-  end
-
-  def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
-  end
-
-  def inherited_blob_ids
-    [featured_image&.blob_id]
   end
 
   def set_communication_website_id

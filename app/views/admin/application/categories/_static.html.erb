@@ -1,34 +1,42 @@
 <%
-about_categories = about.categories
-taxonomies = categories.taxonomies.ordered
+about_categories = about.categories.tmp_original # TODO L10N : remove tmp_original
+taxonomies = categories.taxonomies.tmp_original.ordered # TODO L10N : remove tmp_original
 %>
 <% if about_categories.any? %>
 <%= key %>:
-<% about_categories.ordered.each do |category| %>
-  - "<%= category.slug %>"
+<%
+about_categories.ordered.each do |category|
+  category_l10n = category.localization_for(l10n.language)
+  next if category_l10n.nil?
+%>
+  - "<%= category_l10n.slug %>"
 <% end %>
-<% 
-  if taxonomies.any? 
+<%
+  if taxonomies.any?
 %>
 taxonomies:
-<% 
-    taxonomies.each do |taxonomy| 
+<%
+    taxonomies.each do |taxonomy|
+      taxonomy_l10n = taxonomy.localization_for(l10n.language)
+      next if taxonomy_l10n.nil?
 %>
-  - name: "<%= prepare_text_for_static taxonomy.to_s %>"
-    slug: "<%= taxonomy.slug %>"
+  - name: "<%= prepare_text_for_static taxonomy_l10n.to_s %>"
+    slug: "<%= taxonomy_l10n.slug %>"
     categories:
 <%
-      about_categories.in_taxonomy(taxonomy).each do |category| 
-        hugo = category.hugo(@website)  
+      about_categories.in_taxonomy(taxonomy).each do |category|
+        category_l10n = category.localization_for(l10n.language)
+        next if category_l10n.nil?
+        hugo = category_l10n.hugo(@website)
 %>
-      - name: "<%= prepare_text_for_static category.to_s %>"
+      - name: "<%= prepare_text_for_static category_l10n.to_s %>"
         permalink: "<%= hugo.permalink %>"
         file: "<%= hugo.file %>"
         path: "<%= hugo.path %>"
         slug: "<%= hugo.slug %>"
-<% 
+<%
       end
     end
   end
-end 
+end
 %>

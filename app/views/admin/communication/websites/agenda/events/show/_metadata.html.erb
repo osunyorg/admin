@@ -2,9 +2,10 @@
   <%= @l10n.published ? Communication::Website::Agenda::Event.human_attribute_name(:published)
                       : t('admin.communication.website.agenda.events.draft') %>
   <% if @event.categories.any? %>
+    <% category_names = @event.categories.map { |category| category.to_s_in(current_language) } %>
     <%= t(
-          'admin.communication.website.posts.in', 
-          categories: @event.categories.collect(&:to_s).join(', ')
+          'admin.communication.website.posts.in',
+          categories: category_names.join(', ')
         ) %>
   <% end %>
   <%= render 'admin/application/permalinks/redirects', about: @l10n %>
