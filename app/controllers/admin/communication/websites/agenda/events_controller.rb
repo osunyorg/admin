@@ -43,7 +43,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def create
     @event.website = @website
-    @event.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @event.save_and_sync
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_created_html', model: @event.to_s_in(current_language))
@@ -55,7 +55,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def update
-    @event.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @event.update_and_sync(event_params)
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_updated_html', model: @event.to_s_in(current_language))

@@ -32,7 +32,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   end
 
   def create
-    @volume.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     @volume.assign_attributes(
       journal: @journal
     )
@@ -45,7 +45,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   end
 
   def update
-    @volume.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @volume.update(volume_params)
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_updated_html', model: @volume.to_s)
     else
