@@ -52,6 +52,8 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
 
   validates :title, presence: true
 
+  before_validation :set_communication_website_id
+
   scope :ordered, -> { order(year: :desc, title: :asc) }
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
@@ -99,6 +101,10 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
       featured_image&.blob_id,
       shared_image&.blob_id
     ]
+  end
+
+  def set_communication_website_id
+    self.communication_website_id ||= about.communication_website_id
   end
 
 end
