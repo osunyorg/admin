@@ -8,5 +8,9 @@ objects = objects.first(2)
 object_names = objects.collect { |object| object.to_s_in(current_language) }
 %>
 <p class="mb-0">
-  <%= object_names.join(', ') %>...
+  <% if block.template.mode == 'categories' %>
+    <%= @website.post_categories.ordered.collect(&:to_s).join(', ') %>
+  <% else %>
+    <%= block.template.selected_posts.collect(&:to_s).join(', ') %>
+  <% end %>
 </p>
