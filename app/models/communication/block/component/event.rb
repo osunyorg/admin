@@ -2,8 +2,7 @@ class Communication::Block::Component::Event < Communication::Block::Component::
 
   def event
     return unless website
-    # TODO L10N : Handle publication state
-    website.events.find_by(id: data)
+    website.events.published_now_in(template.block.language).find_by(id: data)
   end
 
   def dependencies

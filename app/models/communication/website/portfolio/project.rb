@@ -58,10 +58,9 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
 
   validates :year, presence: true
 
+  # TODO L10N : To adapt
   scope :ordered, -> { order(year: :desc, title: :asc) }
-  scope :published, -> { where(published: true) }
-  scope :draft, -> { where(published: false) }
-  scope :latest, -> { published.order(updated_at: :desc).limit(5) }
+  scope :latest_in, -> (language) { published_now_in(language).order("communication_website_portfolio_project_localizations.updated_at DESC").limit(5) }
 
   scope :for_category, -> (category_id) {
     joins(:categories)

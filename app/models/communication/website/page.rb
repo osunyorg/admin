@@ -86,7 +86,7 @@ class Communication::Website::Page < ApplicationRecord
 
   after_save :touch_elements_if_special_page_in_hierarchy
 
-  scope :latest, -> { published.order(updated_at: :desc).limit(5) }
+  scope :latest_in, -> (language) { published_now_in(language).order("communication_website_page_localizations.updated_at DESC").limit(5) }
 
   scope :ordered_by_title, -> (language) {
     # Define a raw SQL snippet for the conditional aggregation
