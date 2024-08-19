@@ -43,11 +43,11 @@
 class Communication::Website::Portfolio::Category < ApplicationRecord
   include AsCategory
   include AsDirectObject
-  include Contentful # TODO L10N : To removes
+  include Contentful # TODO L10N : To remove
   include Sanitizable
   include Localizable
-  include WithBlobs # TODO L10N : To removes
-  include WithFeaturedImage # TODO L10N : To removes
+  include WithBlobs # TODO L10N : To remove
+  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithUniversity
 
