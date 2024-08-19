@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   before_action :configure_sign_up_params, only: :create
   before_action :configure_account_update_params, only: :update
+  before_action :confirm_two_factor_authenticated, except: [:new, :create, :cancel]
 
   def edit
     add_breadcrumb t('admin.dashboard'), :admin_root_path
@@ -48,5 +49,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def sign_up_params
     devise_parameter_sanitized = devise_parameter_sanitizer.sanitize(:sign_up).merge(registration_context: current_context)
+  end
+
+  def confirm_two_factor_authenticated
+    return if is_fully_authenticated?
+    flash[:alert] = t('devise.failure.unauthenticated')
+    redirect_to user_two_factor_authentication_url
   end
 end
