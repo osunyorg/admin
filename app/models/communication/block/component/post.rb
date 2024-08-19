@@ -2,7 +2,7 @@ class Communication::Block::Component::Post < Communication::Block::Component::B
 
   def post
     return unless website
-    website.posts.published.find_by(id: data)
+    website.posts.published_now_in(template.block.language).find_by(id: data)
   end
 
   def dependencies

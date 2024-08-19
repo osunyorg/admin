@@ -86,14 +86,6 @@ class Communication::Website::Page < ApplicationRecord
 
   after_save :touch_elements_if_special_page_in_hierarchy
 
-  # TODO L10N : to rewrite
-  scope :published, -> {
-    where("
-      communication_website_pages.published = true AND
-      DATE(communication_website_pages.published_at) <= now()
-    ")
-  }
-
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }
 
   scope :ordered_by_title, -> (language) {

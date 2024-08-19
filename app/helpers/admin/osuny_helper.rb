@@ -99,7 +99,7 @@ module Admin::OsunyHelper
     collection = list.ordered(current_language).map do |object|
       label = localized ? object.best_localization_for(current_language).try(:to_s) : object.to_s
       id = object.id
-      collection << [label, id]
+      [label, id]
     end
     collection = collection.reject { |o| o.last == except.id } unless except.nil?
     collection

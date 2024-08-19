@@ -70,24 +70,43 @@ class Communication::Website::Post < ApplicationRecord
 
   after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
-  # TODO L10N : To rewrite
-  scope :published, -> {
-    where("
-      communication_website_posts.published = true AND
-      DATE(communication_website_posts.published_at) <= now()
-    ")
+  scope :ordered, -> (language) {
+    # Define a raw SQL snippet for the conditional aggregation
+    # This selects the name of the localization in the specified language,
+    # or falls back to the first localization pinned and publication if the specified language is not present.
+    localization_published_at_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.published_at END),
+        MAX(localizations.published_at) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_published_at
+    SQL
+    localization_pinned_select = <<-SQL
+      COALESCE(
+        BOOL_OR(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.pinned END),
+        BOOL_OR(localizations.pinned) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_pinned
+    SQL
+
+    # Join the organizations table with a subquery that ranks localizations
+    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          communication_website_post_localizations as localizations
+      ) localizations ON communication_website_posts.id = localizations.about_id
+    SQL
+    ]))
+    .select("communication_website_posts.*", localization_pinned_select, localization_published_at_select)
+    .group("communication_website_posts.id")
+    .order("localization_pinned DESC, localization_published_at DESC, communication_website_posts.created_at DESC")
   }
-  scope :published_in_the_future, -> {
-    where("
-      communication_website_posts.published = true AND
-      DATE(communication_website_posts.published_at) > now()
-    ")
-  }
-  scope :ordered, -> (language) { order(pinned: :desc, published_at: :desc, created_at: :desc) }
+
   scope :latest, -> { published.order(published_at: :desc).limit(5) }
   scope :for_author, -> (author_id) { where(author_id: author_id) }
   scope :for_category, -> (category_id) { joins(:categories).where(communication_website_post_categories: { id: category_id }).distinct }
-  scope :for_pinned, -> (pinned) { where(pinned: pinned == 'true') }
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_website_posts.meta_description) ILIKE unaccent(:term) OR

@@ -51,7 +51,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     block.about&.website
                 .posts
                 .tmp_original # TODO L10N : To remove
-                .published
+                .published_now_in(block.language)
                 .ordered(block.language)
                 .limit(posts_quantity)
   end
@@ -63,7 +63,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
                                           .joins(:categories)
                                           .where(categories: { id: category_ids })
                                           .distinct
-                                          .published
+                                          .published_now_in(block.language)
                                           .ordered(block.language)
                                           .limit(posts_quantity)
   end
@@ -83,7 +83,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     block.about&.website
                 .posts
                 .tmp_original # TODO L10N : To remove
-                .published
+                .published_now_in(block.language)
                 .find_by(id: id)
   end
 end
