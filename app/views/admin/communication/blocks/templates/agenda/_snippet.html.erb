@@ -1,10 +1,9 @@
 <p class="mb-0">
   <% if block.template.mode == 'categories' %>
-    <%= @website.agenda_categories.first(2).collect(&:to_s).join(', ') %>...
+    <%= @website.agenda_categories.collect(&:to_s).join(', ') %>
   <% else %>
     <% if block.template.selected_events.any? %>
-      <%= block.template.selected_events.first(2).collect(&:to_s).join(', ') %>
-      <%= '...' if block.template.selected_events.count > 2 %>
+      <%= block.template.selected_events.collect(&:to_s).join(', ') %>
     <% else %>
       <%= block.template.no_event_message %>
     <% end %>
