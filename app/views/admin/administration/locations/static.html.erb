@@ -23,14 +23,18 @@ programs:
   - <%= program.path %>
 <% end %>
 diplomas:
-<% @about.diplomas.each do |diploma| %>
+<%
+@about.diplomas.each do |diploma|
+  programs = @about.education_programs.where(diploma: diploma).root.ordered
+  next if programs.empty?
+%>
   - name: >-
       <%= diploma.to_s %>
     path: <%= diploma.slug %>
-    programs: <% @programs = @about.education_programs.where(diploma: diploma).root.ordered %>
+    programs:
 <%= render 'admin/education/programs/static_list',
             diploma: diploma,
-            programs: @programs,
+            programs: programs,
             all_programs: @about.programs,
             depth: 4 %>
 <% end %>
