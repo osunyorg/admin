@@ -636,6 +636,9 @@ en:
           video:
             description: An embedded video from most platforms, with the text transcription for accessibility, and no autoplay.
             edit:
+              description:
+                label: Description
+                placeholder: Enter description
               url:
                 hint: |
                   Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=lAYhfCPelO0

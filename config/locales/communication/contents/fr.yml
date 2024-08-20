@@ -636,6 +636,9 @@ fr:
           video:
             description: Une vidéo intégrée dans la page depuis diverses plateformes, avec la transcription et sans lecture automatique.
             edit:
+              description:
+                label: Description
+                placeholder: Entrer la description
               url:
                 hint: |
                   Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=lAYhfCPelO0

@@ -2,10 +2,13 @@
   <div class="col-md-6">
     <%= block_component_edit block, :url %>
     <%= block_component_edit block, :video_title %>
+    <%= block_component_edit block, :description, summernote_config: 'mini' %>
   </div>
   <div class="col-md-6">
-    <%= block_component_edit block, :transcription,
-            label: t('admin.communication.blocks.components.text.transcription.label'),
-            placeholder: t('admin.communication.blocks.components.text.transcription.placeholder'), rows: 10 %>
+    <%= block_component_edit  block, 
+                              :transcription,
+                              label: t('admin.communication.blocks.components.text.transcription.label'),
+                              placeholder: t('admin.communication.blocks.components.text.transcription.placeholder'), 
+                              summernote_config: 'nothing' %>
   </div>
 </div>
