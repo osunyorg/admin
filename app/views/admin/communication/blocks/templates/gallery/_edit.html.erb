@@ -1,28 +1,32 @@
-<div class="row pure__row--small">
+<div class="row">
   <div class="col-xl-6">
-    <%= block_component_edit block, :description %>
+    <%= block_component_edit block, :description, summernote_config: 'mini' %>
   </div>
 </div>
 
 <%= block_component_edit block, :layout %>
 
-<p><%= t('.send_multiple_images') %></p>
+<div class="row">
+  <div class="col-xl-6">
+    <p><%= t('.send_multiple_images') %></p>
 
-<input  class="form-control"
-        type="file"
-        accept="<%= default_images_formats_accepted %>"
-        @change="onMultipleFileImageChange( $event, 'image' )"
-        data-size-limit="<%= Rails.application.config.default_image_max_size %>"
-        multiple>
+    <input  class="form-control"
+            type="file"
+            accept="<%= default_images_formats_accepted %>"
+            @change="onMultipleFileImageChange( $event, 'image' )"
+            data-size-limit="<%= Rails.application.config.default_image_max_size %>"
+            multiple>
 
-<div class="form-text mb-2">
-  <%= images_formats_accepted_hint %>
+    <div class="form-text mb-2">
+      <%= images_formats_accepted_hint %>
+    </div>
+  </div>
 </div>
 
 <hr class="my-5">
 
 <p><%= t('.move_images') %></p>
-<draggable :list="data.elements" class="row pure__row--small">
+<draggable :list="data.elements" class="row">
   <div v-for="(element, index) in data.elements" class="col-xxl-1 col-lg-2 col-4">
     <div class="card">
       <div class="card-header p-1 text-center">
@@ -66,7 +70,8 @@
               placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
               summernote_config: 'link' %>
         <%= block_component_edit block, :text,
-            template: @element %>
+              template: @element,
+              summernote_config: 'mini' %>
       </div>
     </div>
   <% end %>

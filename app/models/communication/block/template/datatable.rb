@@ -1,10 +1,10 @@
 class Communication::Block::Template::Datatable < Communication::Block::Template::Base
 
   has_elements
-  has_component :columns, :array
-  has_component :caption, :text
-  has_component :description, :rich_text
   has_component :alphabetical, :boolean
+  has_component :caption, :rich_text
+  has_component :columns, :array
+  has_component :description, :rich_text
 
   def elements
     if alphabetical

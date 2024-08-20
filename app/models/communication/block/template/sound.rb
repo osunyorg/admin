@@ -2,7 +2,7 @@ class Communication::Block::Template::Sound < Communication::Block::Template::Ba
 
   has_component :file, :file
   has_component :title, :string
-  has_component :transcription, :text
+  has_component :transcription, :rich_text
 
   protected
 
