@@ -328,6 +328,7 @@ en:
     communication:
       block:
         copied: The block has been copied to clipboard!
+        drag_and_drop: Drag and drop
         language_mismatch_alert: This block does not exist in this language.
       website:
         agenda:
@@ -374,6 +375,7 @@ en:
         portfolio:
           projects:
             draft: Draft
+            in: in %{categories}
             none: No project yet
         post:
           localizations:

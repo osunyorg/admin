@@ -75,7 +75,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   end
 
   def git_path_relative
-    "projects/#{year}-#{slug}.html"
+    "projects/#{about.year}-#{slug}.html"
   end
 
   def template_static

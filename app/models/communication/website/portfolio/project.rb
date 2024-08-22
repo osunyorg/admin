@@ -58,8 +58,33 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
 
   validates :year, presence: true
 
-  # TODO L10N : To adapt
-  scope :ordered, -> { order(year: :desc, title: :asc) }
+  scope :ordered, -> (language) {
+    # Define a raw SQL snippet for the conditional aggregation
+    # This selects the name of the localization in the specified language,
+    # or falls back to the first localization name if the specified language is not present.
+    localization_title_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.title END),
+        MAX(localizations.title) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_title
+    SQL
+
+    # Join the projects table with a subquery that ranks localizations
+    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          communication_website_portfolio_project_localizations as localizations
+      ) localizations ON communication_website_portfolio_projects.id = localizations.about_id
+    SQL
+    ]))
+    .select("communication_website_portfolio_projects.*", localization_title_select)
+    .group("communication_website_portfolio_projects.id")
+    .order("communication_website_portfolio_projects.year DESC, localization_title ASC")
+  }
   scope :latest_in, -> (language) { published_now_in(language).order("communication_website_portfolio_project_localizations.updated_at DESC").limit(5) }
 
   scope :for_category, -> (category_id) {
