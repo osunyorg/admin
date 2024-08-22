@@ -12,8 +12,11 @@
 </div>
 <%= render 'admin/communication/blocks/content/editor', about: @l10n %>
 <% if @events.total_count > 0 %>
-  <%= osuny_panel Communication::Website::Agenda::Event.model_name.human(count: 2),
-                  subtitle: "#{@events.total_count} #{Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase }" do %>
+  <%
+  title = Communication::Website::Agenda::Event.model_name.human(count: 2)
+  subtitle = "#{@projects.total_count} #{Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase }"
+  %>
+  <%= osuny_panel title, subtitle: subtitle do %>
     <%= render 'admin/communication/websites/agenda/events/list', events: @events, hide_category: true %>
     <%= paginate @events %>
   <% end %>

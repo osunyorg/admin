@@ -43,7 +43,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def create
     @event.website = @website
-    @event.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @event.save_and_sync
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_created_html', model: @event.to_s_in(current_language))
@@ -55,7 +55,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def update
-    @event.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @event.update_and_sync(event_params)
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_updated_html', model: @event.to_s_in(current_language))
@@ -88,7 +88,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def categories
     @website.agenda_categories
-            .for_language(current_language)
+            .tmp_original # TODO L10N : Remove tmp_original
             .ordered
   end
 
@@ -107,7 +107,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
       category_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text,
-        :published, :published_at, :slug, 
+        :published, :published_at, :slug,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id

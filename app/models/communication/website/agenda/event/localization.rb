@@ -57,14 +57,14 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   alias :event :about
 
-  delegate  :archive?, 
+  delegate  :archive?,
             :from_day, :from_hour,
             :to_day, :to_hour,
             :time_zone,
             to: :event
 
   has_summernote :text
-  
+
   validates :title, presence: true
 
   before_validation :set_communication_website_id

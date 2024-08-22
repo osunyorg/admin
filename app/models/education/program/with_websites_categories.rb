@@ -11,6 +11,8 @@ module Education::Program::WithWebsitesCategories
     has_many   :website_agenda_categories,
                class_name: 'Communication::Website::Agenda::Category',
                dependent: :destroy
+
+    # TODO : Ajouter les catégories de portfolio
   end
 
   def set_websites_categories

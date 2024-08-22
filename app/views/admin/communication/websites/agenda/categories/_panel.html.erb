@@ -1,6 +1,9 @@
 <% if can?(:create, Communication::Website::Agenda::Category)  %>
-  <% action = create_link Communication::Website::Agenda::Category %>
-  <%= osuny_panel Communication::Website::Agenda::Category.model_name.human(count: 2), action: action do %>
+  <%
+  title = Communication::Website::Agenda::Category.model_name.human(count: 2)
+  action = create_link Communication::Website::Agenda::Category
+  %>
+  <%= osuny_panel title, action: action do %>
     <%= render 'admin/communication/websites/agenda/categories/list', categories: categories %>
   <% end %>
 <% end %>

@@ -193,21 +193,30 @@ fr:
         title: Titre
       communication/website/permalink:
         path: Chemin
-      communication/website/portfolio/category:
+      communication/website/portfolio/category/localization:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         name: Nom
         slug: Slug
       communication/website/portfolio/project:
         categories: Catégories
+        year: Année
+      communication/website/portfolio/project/localization:
         featured_image: Image à la une
         published: Publié
         title: Titre
-        year: Année
       communication/website/post:
         author: Auteur·rice
         categories: Catégories
         website: Site Web
+      communication/website/post/category:
+        children: Catégories enfants
+        parent: Catégorie parente
+      communication/website/post/category/localization:
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        name: Nom
+        slug: Slug
       communication/website/post/localization:
         category: Catégorie
         date: Date
@@ -222,14 +231,6 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
-      communication/website/post/category:
-        children: Catégories enfants
-        parent: Catégorie parente
-      communication/website/post/category/localization:
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        slug: Slug
       communication/website/showcase/tag:
         name: Nom
         websites: Sites Web
@@ -372,6 +373,7 @@ fr:
           creation_error: "Erreur lors de la création. Le chemin renseigné est-il au bon format ?"
         portfolio:
           projects:
+            draft: Brouillon
             none: Pas encore de projet
         post:
           localizations:
