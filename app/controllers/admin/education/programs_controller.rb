@@ -81,7 +81,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def create
     @program.language_id = current_language.id
-    @program.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @program.save
       redirect_to [:admin, @program], notice: t('admin.successfully_created_html', model: @program.to_s)
     else
@@ -91,7 +91,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def update
-    @program.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @program.update(program_params)
       redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s)
     else

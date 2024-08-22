@@ -1,20 +1,26 @@
 <%
 # L'Escale du livre 2022
 search = about.to_s
-# communication_website_page
-about_identifier = about.class.base_class.to_s.parameterize.underscore
-# input[name="communication_website_post[featured_image]"]
-about_featured_image_file = "input[name=\"#{about_identifier}[featured_image]\"]".html_safe
-# input[name="communication_website_post[featured_image_delete]"]
-about_featured_image_file_delete = "input[name=\"#{about_identifier}[featured_image_delete]\"]".html_safe
-# input[name="communication_website_post[featured_image_infos]"]
-about_featured_image_file_infos = "input[name=\"#{about_identifier}[featured_image_infos]\"]".html_safe
-# .communication_website_post_featured_image
-about_featured_image_image = ".#{about_identifier}_featured_image"
-# #communication_website_page_featured_image_alt
-about_featured_image_alt = "##{about_identifier}_featured_image_alt"
-# #communication_website_page_featured_image_credit
-about_featured_image_credit = "##{about_identifier}_featured_image_credit"
+# communication_website_post_localization
+l10n_identifier =  about.class
+                        .base_class
+                        .to_s
+                        .parameterize
+                        .underscore
+# communication_website_post
+about_identifier = l10n_identifier.remove('_localization')
+# input[name="communication_website_post[localizations_attributes][0][featured_image]"]
+about_featured_image_file = "input[name=\"#{about_identifier}[localizations_attributes][0][featured_image]\"]".html_safe
+# input[name="communication_website_post[localizations_attributes][0][featured_image_delete]"]
+about_featured_image_file_delete = "input[name=\"#{about_identifier}[localizations_attributes][0][featured_image_delete]\"]".html_safe
+# input[name="communication_website_post[localizations_attributes][0][featured_image_infos]"]
+about_featured_image_file_infos = "input[name=\"#{about_identifier}[localizations_attributes][0][featured_image_infos]\"]".html_safe
+# .communication_website_post_localizations_featured_image
+about_featured_image_image = ".#{about_identifier}_localizations_featured_image"
+# #communication_website_post_localizations_attributes_0_featured_image_alt
+about_featured_image_alt = "##{about_identifier}_localizations_attributes_0_featured_image_alt"
+# #communication_website_post_localizations_featured_image_credit
+about_featured_image_credit = "##{about_identifier}_localizations_attributes_0_featured_image_credit"
 # fr, en...
 lang = about&.language&.iso_code if about.respond_to? :language
 # /admin/communication/photo_import.json?query=Page%20de%20test&per_page=12&page=1&lang=fr
@@ -53,17 +59,19 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
               <h5 class="modal-title"><%= t 'photo_import.title' %></h5>
             </div>
             <div class="col-auto d-flex flex-fill mx-lg-5">
-              <input  type="text"
-                      name="search"
-                      placeholder="<%= t 'photo_import.placeholder' %>"
-                      v-model="query"
-                      class="form-control ms-auto">
-              <button type="button"
-                      class="btn btn-primary me-auto"
-                      v-on:click="research"
-                      aria-label="<%= t 'photo_import.search' %>">
-                <%= t 'photo_import.search' %>
-              </button>
+              <div class="input-group">
+                <input  type="text"
+                        name="search"
+                        placeholder="<%= t 'photo_import.placeholder' %>"
+                        v-model="query"
+                        class="form-control ms-auto">
+                <button type="button"
+                        class="btn btn-primary me-auto"
+                        v-on:click="research"
+                        aria-label="<%= t 'photo_import.search' %>">
+                  <%= t 'photo_import.search' %>
+                </button>
+              </div>
             </div>
             <div class="col-auto">
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
