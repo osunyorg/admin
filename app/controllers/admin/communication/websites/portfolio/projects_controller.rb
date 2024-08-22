@@ -43,7 +43,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   def create
     @project.website = @website
-    @project.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @project.save_and_sync
       redirect_to admin_communication_website_portfolio_project_path(@project),
                   notice: t('admin.successfully_created_html', model: @project.to_s_in(current_language))
@@ -55,7 +55,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   end
 
   def update
-    @project.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @project.update_and_sync(project_params)
       redirect_to admin_communication_website_portfolio_project_path(@project),
                   notice: t('admin.successfully_updated_html', model: @project.to_s_in(current_language))
