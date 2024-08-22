@@ -1,8 +1,7 @@
 <%
 people = osuny_collection(
   current_university.people
-                    .tmp_original # TODO L10N : remove
-                    .ordered(block.language),
+                    .tmp_original # TODO L10N : remove,
   localized: true,
   label_method: :to_s_alphabetical
 )

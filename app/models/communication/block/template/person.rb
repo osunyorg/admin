@@ -58,7 +58,7 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
     persons = university.university_people
                         .tmp_original # TODO L10N : To remove
                         .for_category(category.id)
-                        .ordered(language)
+                        .ordered(block.language)
     persons.map do |person|
       # On simule un élément pour la personne, afin d'unifier les accès
       Communication::Block::Template::Person::Element.new(block, {

@@ -416,7 +416,6 @@ fr:
               option_logo:
                 label: Logo
               options: Options d'affichage
-              remove_organization: Enlever l'organisation
             layouts:
               grid:
                 description: Une série de logos carrés, avec le nom de chaque organisation.
