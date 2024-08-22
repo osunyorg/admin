@@ -475,10 +475,8 @@ fr:
                 label: Ordre alphabétique
               category_id:
                 label: Catégorie
-              delete_title: Enlever la personne
               description:
                 label: Description
-              drag_title: Glisser-déposer pour organiser les personnes
               element:
                 id:
                   label: Personne

@@ -6,7 +6,7 @@
     <% if person.best_picture.attached? %>
       <%= kamifusen_tag person.best_picture, width: 90, height: 90, class: 'img-fluid rounded-circle' %>
     <% else %>
-      <%= element.person.to_s_in(current_language) %>
+      <%= element.person.to_s_in(block.language) %>
     <% end %>
   </span>
 <% end %>

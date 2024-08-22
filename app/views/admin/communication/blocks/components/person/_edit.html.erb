@@ -1,21 +1,25 @@
-<% people = current_university.people
-                              .tmp_original # TODO L10N : remove
-                              .ordered(block.language) %>
-<% unless label.blank? %>
-  <label  class="form-label"
-          :for="<%= dom_id.html_safe %>">
-    <%= label %>
-  </label>
-<% end %>
+<%
+people = osuny_collection(
+  current_university.people
+                    .tmp_original # TODO L10N : remove
+                    .ordered(block.language),
+  localized: true,
+  label_method: :to_s_alphabetical
+)
+%>
+<label  class="form-label <%= 'visually-hidden' if label.blank? %>"
+        :for="<%= dom_id.html_safe %>">
+  <%= label %>
+</label>
 <select :id="<%= dom_id.html_safe %>"
-        class="form-select select mb-3"
+        class="form-select select"
         v-model="<%= model %>.<%= property %>">
   <% if placeholder %>
     <option value="" disabled><%= placeholder %></option>
   <% end %>
   <% people.each do |person| %>
-    <option value="<%= person.id %>">
-      <%= person.to_s_alphabetical_in(block.language) %>
+    <option value="<%= person.last %>">
+      <%= person.first %>
     </option>
   <% end %>
 </select>

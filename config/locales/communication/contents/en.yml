@@ -475,10 +475,8 @@ en:
                 label: Alphabetical order
               category_id:
                 label: Category
-              delete_title: Remove person
               description:
                 label: Description
-              drag_title: Drag and drop to organize persons
               element:
                 person:
                   label: Person

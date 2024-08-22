@@ -97,7 +97,9 @@ module Admin::OsunyHelper
 
   def osuny_collection(list, except: nil, localized: false, label_method: :to_s)
     collection = list.ordered(current_language).map do |object|
-      label = localized ? object.best_localization_for(current_language).public_send(label_method) : object.public_send(label_method)
+      object_for_label = localized ? object.best_localization_for(current_language) : object
+      label = label_method.respond_to?(:call) ? label_method.call(object_for_label)
+                                              : object_for_label.public_send(label_method)
       id = object.id
       [label, id]
     end
@@ -116,7 +118,9 @@ module Admin::OsunyHelper
   def osuny_collection_recursive(list, level, localized, label_method)
     collection = []
     list.ordered.each do |object|
-      name = localized ? object.best_localization_for(current_language).public_send(label_method) : object.public_send(label_method)
+      object_for_name = localized ? object.best_localization_for(current_language) : object
+      name = label_method.respond_to?(:call) ? label_method.call(object_for_name)
+                                             : object_for_name.public_send(label_method)
       label = sanitize("&nbsp;&nbsp;&nbsp;&nbsp;" * level + name)
       id = object.id
       collection << [label, id]
