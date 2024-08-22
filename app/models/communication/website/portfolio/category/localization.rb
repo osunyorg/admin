@@ -8,8 +8,6 @@
 #  meta_description         :text
 #  name                     :string
 #  path                     :string
-#  published                :string           default("f")
-#  published_at             :datetime
 #  slug                     :string
 #  summary                  :text
 #  created_at               :datetime         not null
@@ -42,7 +40,6 @@ class Communication::Website::Portfolio::Category::Localization < ApplicationRec
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
-  include WithPublication
   include WithUniversity
 
   belongs_to :website,
