@@ -11,19 +11,21 @@
     <%= favicon_link_tag 'favicon.png' %>
   </head>
   <body class="<%= body_classes %>">
-    <div class="container">
-      <h1 class="my-5 py-5 text-center">
+    <div class="container-fluid min-vh-80">
+      <div class="my-5 py-5 text-center">
         <%= link_to root_path do %>
           <%= render 'logo' %>
         <% end %>
-      </h1>
+      </div>
       <% unless notice.blank? %>
         <div class="alert alert-success mt-2" role="alert"><%= notice.html_safe %></div>
       <% end %>
       <% unless alert.blank? %>
         <div class="alert alert-danger mt-2" role="alert"><%= alert.html_safe %></div>
       <% end %>
-      <%= yield %>
+      <div class="py-5">
+        <%= yield %>
+      </div>
     </div>
     <%= render 'footer' %>
     <%= render 'bugsnag' %>

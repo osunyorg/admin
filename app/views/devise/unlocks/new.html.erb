@@ -1,20 +1,19 @@
 <%= content_for :title, t('.title') %>
 
-<h2 class="mb-4"><%= t(".resend_unlock_instructions") %></h2>
+<div class="row">
+  <div class="offset-lg-3 col-lg-6">
+    <h1 class="h4 mb-4"><%= t(".resend_unlock_instructions") %></h1>
 
-<%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.full_error :unlock_token %>
-  <div class="row">
-    <div class="col-md-6">
+    <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.full_error :unlock_token %>
       <%= f.input :email,
+                  placeholder: User.human_attribute_name(:email),
+                  label: false,
                   required: true,
                   autofocus: true,
                   input_html: { autocomplete: "email" } %>
-    </div>
-    <div class="col-md-6">
-      <label class="form-label">&nbsp;</label><br>
       <%= f.button :submit, t(".resend_unlock_instructions"), class: 'btn btn-primary' %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
+</div>
