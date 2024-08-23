@@ -9,6 +9,15 @@
       "url": "/api/osuny/v1"
     }
   ],
+  "components": {
+    "securitySchemes": {
+      "secret_token": {
+        "type": "apiKey",
+        "name": "X-Osuny-Token",
+        "in": "header"
+      }
+    }
+  },
   "paths": {
     "/communication/websites/{websiteId}/posts/{locale}": {
       "get": {

@@ -24,7 +24,16 @@ RSpec.configure do |config|
       servers: [
         # initializer rswag_api prefixes with the instance
         url: '/api/osuny/v1'
-      ]
+      ],
+      components: {
+        securitySchemes: {
+          secret_token: {
+            type: :apiKey,
+            name: 'X-Osuny-Token',
+            in: :header
+          }
+        }
+      }
     }
   }
 
