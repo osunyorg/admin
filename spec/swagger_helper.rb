@@ -23,6 +23,7 @@ RSpec.configure do |config|
         version: 'v1'
       },
       servers: [
+        # initializer rswag_api prefixes with the instance
         url: '/api/osuny/v1'
       ]
     }
