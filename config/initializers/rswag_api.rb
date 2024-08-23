@@ -11,7 +11,9 @@ Rswag::Api.configure do |c|
   # For example, you could leverage this to dynamically assign the "host" property
   #
   c.swagger_filter = lambda do |swagger, env|
-    current = swagger['servers'].first['url']
-    swagger['servers'].first['url'] = "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}#{current}"
+    swagger['servers'].each do |server|
+      url = server['url']
+      server['url'] = "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}#{url}"
+    end
   end
 end

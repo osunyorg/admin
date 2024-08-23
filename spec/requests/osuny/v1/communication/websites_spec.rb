@@ -1,11 +1,11 @@
 require 'swagger_helper'
 
-RSpec.describe 'Blogs API' do
+RSpec.describe 'Osuny API' do
 
   path '/communication/websites' do
 
     get 'Lists websites' do
-      tags 'Websites'
+      tags 'Communication::Website'
       consumes 'application/json'
 
       response '200', 'successful operation' do

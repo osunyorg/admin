@@ -10,12 +10,71 @@
     }
   ],
   "paths": {
+    "/communication/websites/{websiteId}/posts/{locale}": {
+      "get": {
+        "summary": "Lists the posts in a website",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "parameters": [
+          {
+            "name": "websiteId",
+            "in": "path",
+            "description": "Website identifier",
+            "example": "c8a4bed5-2e05-47e4-90e3-cf334c16453f",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "path",
+            "description": "Language of the post",
+            "example": "fr",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "response": {
+                    "value": [
+                      {
+                        "id": "c8a4bed5-2e05-47e4-90e3-cf334c16453f",
+                        "title": "Référentiel général d'écoconception de services numériques (RGESN)"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/communication/websites": {
       "get": {
         "summary": "Lists websites",
         "tags": [
-          "Websites"
+          "Communication::Website"
         ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Lists endpoints",
         "responses": {
           "200": {
             "description": "successful operation"
