@@ -205,9 +205,10 @@ en:
       admin_unlock: Unlock it now!
       attempt_failed: "Invalid Code"
       code_has_been_sent: "Your authentication code has been sent."
-      enter_code_direct_otp_email: "Enter the code that was sent to you on your email %{mail}"
-      enter_code_direct_otp_mobile_phone: "Enter the code that was sent to you on your mobile phone %{phone}"
+      enter_code_direct_otp_email_html: "To ensure a secure connection, we will send you a 6-digit, one-time code to your e-mail address %{mail}. Enter the code below."
+      enter_code_direct_otp_mobile_phone_html: "To ensure a secure connection, we will send you a 6-digit, one-time code to your mobile phone %{phone}. Enter the code below."
       enter_code_totp: "Enter the code from your authentication application"
+      help: "If you have a problem, you can..."
       max_login_attempts_reached: "You're account has been locked for security reasons.<br />Please contact an administrator."
       resend_code: "Resend Code"
       send_code_instead: "Send me a code instead"
@@ -272,6 +273,7 @@ en:
   loading: Loading...
   login:
     already_registered: Already registered?
+    already_registered_details: Sign in if you already have an account.
     not_registered_yet: Not registered yet?
     not_registered_yet_details: Register if you have no account yet.
     or: or

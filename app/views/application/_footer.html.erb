@@ -1,24 +1,22 @@
-<footer class="mt-5 pt-5">
-  <div class="container">
-    <div class="mb-5 text-lg-center">
-      <%= image_tag 'osuny-black.svg', width: 80 %>
+<footer class="bg-black text-white py-5">
+  <div class="container-fluid">
+    <div class="d-md-flex justify-content-between mt-5 pt-5">
+      <%= link_to 'https://www.osuny.org', target: :_blank, class: 'text-white-50' do %>
+        <%= t('admin.footer.signature') %>
+      <% end %>
+      <ul class="list-unstyled d-md-flex">
+        <%
+          [
+            ['Aide à la contribution', 'https://support.osuny.org'],
+            [t('terms_of_service'), t('terms_of_service_url')],
+            ['Statut', 'https://status.osuny.org'],
+          ].each do |item| 
+        %>
+          <li>
+            <%= link_to item.first, item.last, target: :_blank, class: 'text-white-50' %>
+          </li>
+        <% end %>
+      </ul>
     </div>
-    <nav class="nav small d-block d-lg-flex justify-content-lg-center">
-      <%= link_to t('terms_of_service'),
-                  t('terms_of_service_url'),
-                  class: 'nav-link ps-0',
-                  target: '_blank',
-                  rel: 'noreferrer' %>
-      <%= link_to t('privacy_policy'),
-                  t('privacy_policy_url'),
-                  class: 'nav-link ps-0',
-                  target: '_blank',
-                  rel: 'noreferrer' %>
-      <%= link_to t('cookies_policy'),
-                  t('cookies_policy_url'),
-                  class: 'nav-link ps-0',
-                  target: '_blank',
-                  rel: 'noreferrer' %>
-    </nav>
   </div>
 </footer>
