@@ -273,6 +273,7 @@ fr:
   loading: Chargement...
   login:
     already_registered: Déjà inscrit ?
+    already_registered_details: Connectez-vous si vous avez déjà un compte.
     not_registered_yet: Pas encore inscrit ?
     not_registered_yet_details: Inscrivez-vous si vous n'avez pas encore de compte.
     or: ou bien

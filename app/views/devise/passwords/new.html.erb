@@ -1,18 +1,15 @@
 <%= content_for :title, t('.title') %>
+<% @small_content = true %>
 
-<div class="row">
-  <div class="offset-lg-3 col-lg-6">
-    <h1 class="h4 mb-4"><%= t(".forgot_your_password") %></h1>
+<h1 class="h4 mb-4"><%= t(".forgot_your_password") %></h1>
 
-    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-      <%= f.error_notification %>
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  placeholder: User.human_attribute_name(:email),
-                  label: false,
-                  input_html: { autocomplete: "email" } %>
-      <%= f.button :submit, t(".send_me_reset_password_instructions"), class: 'btn btn-primary' %>
-    <% end %>
-  </div>
-</div>
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :email,
+              required: true,
+              autofocus: true,
+              placeholder: User.human_attribute_name(:email),
+              label: false,
+              input_html: { autocomplete: "email" } %>
+  <%= f.button :submit, t(".send_me_reset_password_instructions"), class: 'btn btn-primary' %>
+<% end %>

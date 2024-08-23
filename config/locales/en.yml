@@ -273,6 +273,7 @@ en:
   loading: Loading...
   login:
     already_registered: Already registered?
+    already_registered_details: Sign in if you already have an account.
     not_registered_yet: Not registered yet?
     not_registered_yet_details: Register if you have no account yet.
     or: or

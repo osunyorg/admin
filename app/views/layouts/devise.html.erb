@@ -10,23 +10,24 @@
     <%= javascript_include_tag 'devise' %>
     <%= favicon_link_tag 'favicon.png' %>
   </head>
-  <body class="<%= body_classes %>">
-    <div class="container-fluid min-vh-80">
-      <div class="my-5 py-5 text-center">
-        <%= link_to root_path do %>
-          <%= render 'logo' %>
-        <% end %>
-      </div>
-      <% unless notice.blank? %>
-        <div class="alert alert-success mt-2" role="alert"><%= notice.html_safe %></div>
+  <body class="layout-devise <%= body_classes %>">
+    <header>
+      <%= link_to root_path do %>
+        <%= render 'logo' %>
       <% end %>
-      <% unless alert.blank? %>
-        <div class="alert alert-danger mt-2" role="alert"><%= alert.html_safe %></div>
+    </header>
+    <main class="container-fluid">
+      <% if @small_content %>
+        <div class="row">
+          <div class="offset-md-2 col-md-8 offset-lg-3 col-lg-6 offset-xxl-4 col-xxl-4">
       <% end %>
-      <div class="py-5">
-        <%= yield %>
-      </div>
-    </div>
+      <%= render 'notice' %>
+      <%= yield %>
+      <% if @small_content %>
+          </div>
+        </div>
+      <% end %>
+    </main>
     <%= render 'footer' %>
     <%= render 'bugsnag' %>
   </body>
