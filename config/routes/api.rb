@@ -1,7 +1,7 @@
 namespace :api do
   get 'lheo' => 'lheo#index', defaults: { format: :xml }
-  get 'osuny' => 'osuny#index', defaults: { format: :json }
-  namespace :osuny, defaults: { format: :json } do 
+  get 'osuny/v1' => 'osuny#index', defaults: { format: :json }, as: :osuny
+  namespace :osuny, path: 'osuny/v1', defaults: { format: :json } do 
     get 'communication' => 'communication#index'
     namespace :communication do
       get 'websites' => 'websites#index'

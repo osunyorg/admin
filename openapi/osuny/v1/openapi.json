@@ -1,0 +1,27 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Osuny",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "/api/osuny/v1"
+    }
+  ],
+  "paths": {
+    "/communication/websites": {
+      "get": {
+        "summary": "Lists websites",
+        "tags": [
+          "Websites"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  }
+}
