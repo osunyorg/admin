@@ -14,3 +14,24 @@ Rswag::Ui.configure do |c|
   # c.basic_auth_enabled = true
   # c.basic_auth_credentials 'username', 'password'
 end
+
+# TODO: Waiting for a fix in rswag-ui gem, using this workaround
+module Rswag
+  module Ui
+    class Middleware
+      # Redefine the call method
+      def call(env)
+        if base_path?(env)
+          redirect_uri = env['SCRIPT_NAME'].chomp('/') + '/index.html'
+          return [ 301, { 'Location' => redirect_uri }, [ ] ]
+        end
+
+        if index_path?(env)
+          return [ 200, { 'Content-Type' => 'text/html', 'content-security-policy' => csp }, [ render_template ] ]
+        end
+
+        super
+      end
+    end
+  end
+end
