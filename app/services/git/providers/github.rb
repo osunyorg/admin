@@ -50,10 +50,10 @@ class Git::Providers::Github < Git::Providers::Abstract
 
   def init_from_template(name)
     client.create_repository_from_template(
-      'osunyorg/template',
+      ENV['GITHUB_WEBSITE_TEMPLATE_REPOSITORY'],
       name,
       {
-        owner: 'osunyorg',
+        owner: ENV['GITHUB_WEBSITE_OWNER'],
         private: false
       }
     )
