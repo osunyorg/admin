@@ -8,14 +8,11 @@ class Communication::Website::Page::Home < Communication::Website::Page
     false
   end
 
-  protected
-
-  def current_git_path
-    @current_git_path ||= "#{git_path_prefix}_index.html"
+  def git_path_relative
+    '_index.html'
   end
 
   def default_parent
     nil
   end
-
 end

@@ -22,7 +22,7 @@ class Communication::Website::Permalink::Page < Communication::Website::Permalin
   # def published_path
   #   language = about.respond_to?(:language) ? about.language : website.default_language
   #   p = ""
-  #   p += "/#{language.iso_code}" if website.languages.many?
+  #   p += "/#{language.iso_code}" if website.active_languages.many?
   #   p += pattern
   #   substitutions.each do |key, value|
   #     p.gsub! ":#{key}", "#{value}"
@@ -40,7 +40,7 @@ class Communication::Website::Permalink::Page < Communication::Website::Permalin
   # ##### PAGE LOC WITH PATH ######
   # def path
   #   path = ''
-  #   if website.languages.many?
+  #   if website.active_languages.many?
   #     path += "/#{language.iso_code}"
   #   end
   #   path += "/#{slug_with_ancestors}/"

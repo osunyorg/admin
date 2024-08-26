@@ -134,16 +134,12 @@ module WithDependencies
     end
   end
 
-  def websites_to_clean
-    is_direct_object? ? [website] : websites
-  end
-
   def clean_all_websites
     clean_websites(websites_to_clean_ids)
   end
 
   def websites_to_clean_ids
-    websites_to_clean.pluck(:id)
+    websites.pluck(:id)
   end
 
   def unpublished_by_last_save?

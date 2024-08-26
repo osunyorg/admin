@@ -75,6 +75,10 @@ class Communication::Website::Post::Category < ApplicationRecord
                           foreign_key: :communication_website_category_id,
                           association_foreign_key: :communication_website_post_id
 
+  def post_localizations
+    Communication::Website::Post::Localization.where(about_id: post_ids)
+  end
+
   def dependencies
     localizations.in_languages(website.active_language_ids) +
     children +
@@ -83,9 +87,10 @@ class Communication::Website::Post::Category < ApplicationRecord
 
   def references
     posts +
+    post_localizations +
     [parent] +
     siblings +
-    website.menus +
+    website.menus.in_languages(website.active_language_ids) +
     abouts_with_post_block
   end
 

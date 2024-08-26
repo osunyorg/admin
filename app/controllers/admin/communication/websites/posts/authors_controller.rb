@@ -4,7 +4,7 @@ class Admin::Communication::Websites::Posts::AuthorsController < Admin::Communic
 
   def index
     @authors =  apply_scopes(@website.authors.accessible_by(current_ability))
-                                .ordered
+                                .ordered(current_language)
                                 .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
@@ -12,9 +12,13 @@ class Admin::Communication::Websites::Posts::AuthorsController < Admin::Communic
 
   def show
     @author = @website.authors.accessible_by(current_ability).find(params[:id])
-    @posts = @author.communication_website_posts.where(communication_website_id: @website.id).ordered.page(params[:page])
+    @author_l10n = @author.localization_for(current_language)
+    @posts = @author.communication_website_posts
+                    .where(communication_website_id: @website.id)
+                    .ordered(current_language)
+                    .page(params[:page])
     breadcrumb
-    add_breadcrumb @author
+    add_breadcrumb @author_l10n
   end
 
   protected

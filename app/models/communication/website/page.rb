@@ -144,7 +144,7 @@ class Communication::Website::Page < ApplicationRecord
   def references
     [parent] +
     siblings +
-    website.menus +
+    website.menus.in_languages(website.active_language_ids) +
     abouts_with_page_block
   end
 

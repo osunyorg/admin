@@ -73,6 +73,10 @@ class Communication::Website::Agenda::Category < ApplicationRecord
                           foreign_key: :communication_website_agenda_category_id,
                           association_foreign_key: :communication_website_agenda_event_id
 
+  def event_localizations
+    Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)
+  end
+  
   def dependencies
     localizations.in_languages(website.active_language_ids) +
     children +
@@ -80,9 +84,10 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   end
 
   def references
-    references = events + website.menus
-    references << parent if parent.present?
-    references
+    events +
+    event_localizations +
+    website.menus.in_languages(website.active_language_ids) +
+    [parent]
   end
 
   def siblings

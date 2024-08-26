@@ -66,15 +66,20 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
                           foreign_key: :communication_website_portfolio_category_id,
                           association_foreign_key: :communication_website_portfolio_project_id
 
+  def project_localizations
+    Communication::Website::Portfolio::Project::Localization.where(about_id: project_ids)
+  end
+
   def dependencies
     [website.config_default_content_security_policy] +
     localizations.in_languages(website.active_language_ids)
   end
 
   def references
-    references = projects + website.menus
-    references << parent if parent.present?
-    references
+    projects +
+    project_localizations +
+    website.menus.in_languages(website.active_language_ids) +
+    [parent]
   end
 
   protected

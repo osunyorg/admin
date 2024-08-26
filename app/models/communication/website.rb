@@ -154,7 +154,7 @@ class Communication::Website < ApplicationRecord
     agenda_categories +
     projects +
     portfolio_categories +
-    menus +
+    menus.in_languages(active_language_ids) +
     [about] +
     [default_image&.blob] +
     [default_shared_image&.blob]
@@ -162,6 +162,10 @@ class Communication::Website < ApplicationRecord
 
   def website
     self
+  end
+
+  def websites
+    [self]
   end
 
   def website_id

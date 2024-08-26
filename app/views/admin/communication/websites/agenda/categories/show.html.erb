@@ -14,7 +14,7 @@
 <% if @events.total_count > 0 %>
   <%
   title = Communication::Website::Agenda::Event.model_name.human(count: 2)
-  subtitle = "#{@projects.total_count} #{Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase }"
+  subtitle = "#{@events.total_count} #{Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase }"
   %>
   <%= osuny_panel title, subtitle: subtitle do %>
     <%= render 'admin/communication/websites/agenda/events/list', events: @events, hide_category: true %>

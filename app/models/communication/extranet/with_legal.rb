@@ -1,9 +1,7 @@
 module Communication::Extranet::WithLegal
   extend ActiveSupport::Concern
 
-  included do
-    include ActionView::Helpers::SanitizeHelper
-  end
+  include ActionView::Helpers::SanitizeHelper
 
   def has_terms?
     strip_tags(terms).to_s.strip.present?

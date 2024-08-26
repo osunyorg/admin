@@ -7,11 +7,11 @@
 module AsDirectObject
   extend ActiveSupport::Concern
 
-  included do
-    include WithDependencies
-    include WithGit
-    include WithReferences
+  include WithDependencies
+  include WithGit
+  include WithReferences
 
+  included do
     belongs_to :website,
                class_name: 'Communication::Website',
                foreign_key: :communication_website_id
@@ -23,6 +23,10 @@ module AsDirectObject
 
     after_save  :connect_dependencies
     after_touch :connect_dependencies
+  end
+
+  def websites
+    [website]
   end
 
   def is_direct_object?
