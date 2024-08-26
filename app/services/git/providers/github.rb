@@ -53,7 +53,7 @@ class Git::Providers::Github < Git::Providers::Abstract
       ENV['GITHUB_WEBSITE_TEMPLATE_REPOSITORY'],
       name,
       {
-        owner: ENV['GITHUB_ORGANIZATION'],
+        owner: ENV['GITHUB_WEBSITE_OWNER'],
         private: false
       }
     )

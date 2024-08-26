@@ -92,7 +92,7 @@ module Communication::Website::WithDeuxfleurs
 
   # osunyorg/agit-cartographie
   def deuxfleurs_default_github_repository
-    "#{ENV['GITHUB_ORGANIZATION']}/#{deuxfleurs_default_github_repository_name}"
+    "#{ENV['GITHUB_WEBSITE_OWNER']}/#{deuxfleurs_default_github_repository_name}"
   end
 
   def deuxfleurs_default_badge_url
