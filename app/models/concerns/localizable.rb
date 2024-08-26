@@ -10,7 +10,7 @@ module Localizable
                 inverse_of: :about,
                 dependent: :destroy
 
-    # Deprecated
+    # TODO L10N : Deprecated
     belongs_to  :language,
                 optional: true
     belongs_to  :original,
@@ -18,7 +18,8 @@ module Localizable
                 optional: true
     has_many    :translations,
                 class_name: base_class.to_s,
-                foreign_key: :original_id
+                foreign_key: :original_id,
+                dependent: :destroy if connection.column_exists?(table_name, :original_id)
     # /Deprecated
 
     accepts_nested_attributes_for :localizations

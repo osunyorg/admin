@@ -41,6 +41,16 @@ class Communication::Website::Menu < ApplicationRecord
   belongs_to :language
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy
 
+  # TODO L10N : Deprecated
+  belongs_to  :original,
+              class_name: "Communication::Website::Menu",
+              optional: true
+  has_many    :translations,
+              class_name: "Communication::Website::Menu",
+              foreign_key: :original_id,
+              dependent: :destroy
+  # /Deprecated
+
   validates :title, :identifier, presence: true
   validates :identifier,  length: { maximum: IDENTIFIER_MAX_LENGTH },
                           uniqueness: { scope: [:communication_website_id, :language_id] }

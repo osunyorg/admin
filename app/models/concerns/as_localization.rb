@@ -18,9 +18,16 @@ module AsLocalization
       where(language_id: language_ids)
     }
 
-    delegate  :is_direct_object?,
-              :is_indirect_object?,
-              to: :about
+  end
+
+  # localizations are not connected directly to websites, they might be connected through about.
+  # so they are indirect objects
+  def is_direct_object?
+    false
+  end
+
+  def is_indirect_object?
+    true
   end
 
   def delete_obsolete_connections

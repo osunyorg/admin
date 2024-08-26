@@ -20,45 +20,6 @@ class CreateUniversityPeopleLocalizations < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-
-    University::Person.find_each do |person|
-      # If "old way" translation, we set the about to the original, else if "old way" master, we take its ID.
-      about_id = person.original_id || person.id
-
-      l10n = University::Person::Localization.create(
-        biography: person.biography,
-        first_name: person.first_name,
-        last_name: person.last_name,
-        linkedin: person.linkedin,
-        mastodon: person.mastodon,
-        meta_description: person.meta_description,
-        name: person.name,
-        picture_credit: person.picture_credit,
-        slug: person.slug,
-        summary: person.summary,
-        twitter: person.twitter,
-        url: person.url,
-        about_id: about_id,
-        language_id: person.language_id,
-        university_id: person.university_id,
-        created_at: person.created_at
-      )
-
-      # Copy from person (old) to localization (new)
-      person.translate_contents!(l10n)
-      person.translate_other_attachments(l10n)
-
-      # Get permalinks (for aliases)
-      person.permalinks.each do |permalink|
-        new_permalink = permalink.dup
-        new_permalink.about = l10n
-        new_permalink.save
-      end
-
-      l10n.save
-
-    end
-
   end
 
   def down

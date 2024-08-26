@@ -20,44 +20,6 @@ class CreateUniversityOrganizationLocalizations < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-
-    University::Organization.find_each do |orga|
-      # If "old way" translation, we set the about to the original, else if "old way" master, we take its ID.
-      about_id = orga.original_id || orga.id
-
-      l10n = University::Organization::Localization.create(
-        address_additional: orga.address_additional,
-        address_name: orga.address_name,
-        linkedin: orga.linkedin,
-        long_name: orga.long_name,
-        mastodon: orga.mastodon,
-        meta_description: orga.meta_description,
-        name: orga.name,
-        summary: orga.summary,
-        text: orga.text,
-        twitter: orga.twitter,
-        url: orga.url,
-        about_id: about_id,
-        language_id: orga.language_id,
-        university_id: orga.university_id,
-        created_at: orga.created_at
-      )
-
-      # Copy from orga (old) to localization (new)
-      orga.translate_contents!(l10n)
-      orga.translate_other_attachments(l10n)
-
-      # Get permalinks (for aliases)
-      orga.permalinks.each do |permalink|
-        new_permalink = permalink.dup
-        new_permalink.about = l10n
-        new_permalink.save
-      end
-
-      l10n.save
-
-    end
-
   end
 
   def down

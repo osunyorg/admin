@@ -12,29 +12,6 @@ class CreateUniversityPersonCategoryLocalizations < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-
-    University::Person::Category.find_each do |category|
-      about_id = category.original_id || category.id
-
-      l10n = University::Person::Category::Localization.create(
-        name: category.name,
-        slug: category.slug,
-        about_id: about_id,
-        language_id: category.language_id,
-        university_id: category.university_id,
-        created_at: category.created_at
-      )
-
-      category.translate_contents!(l10n)
-
-      category.permalinks.each do |permalink|
-        new_permalink = permalink.dup
-        new_permalink.about = l10n
-        new_permalink.save
-      end
-
-      l10n.save
-    end
   end
 
   def down
