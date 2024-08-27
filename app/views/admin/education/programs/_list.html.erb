@@ -2,50 +2,29 @@
   hide_diploma ||= false
   hide_parent ||= false
 %>
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= Education::Program.human_attribute_name('name') %></th>
-        <% unless hide_diploma %>
-          <th><%= Education::Program.human_attribute_name('diploma') %></th>
-        <% end %>
-        <% unless hide_parent %>
-          <th><%= Education::Program.human_attribute_name('parent') %></th>
-        <% end %>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% programs.each do |program| %>
-        <%
-        parent = program.parent
-        diploma = program.diploma
-        %>
-        <tr <% unless program.published? %> class="draft"<% end %>>
-          <td><%= link_to_if  can?(:read, program),
-                              program,
-                              [:admin, program] %></td>
-          <% unless hide_diploma %>
-            <td><%= link_to_if can?(:read, diploma), diploma, [:admin, diploma] if diploma %></td>
+<div class="row pt-4 g-2 mb-3">
+  <% programs.each do |program| %>
+    <%
+    parent = program.parent
+    diploma = program.diploma
+    %>
+    <div>
+      <div class="card card--horizontal <%= 'draft' unless program.published? %>">
+        <%= osuny_thumbnail_localized program %>
+        <div class="card-body">
+          <%= osuny_published_localized program %>
+          <%= osuny_link_localized program, [:admin, program], classes: 'stretched-link' %>
+          <% if !hide_parent && parent.present? %>
+            <br>
+            <span class="small text-muted">
+              <%= parent.best_localization_for(current_language) %>
+            </span>
           <% end %>
-          <% unless hide_parent %>
-            <td><%= link_to_if can?(:read, parent), parent, [:admin, parent] if parent %></td>
-          <% end %>
-          <td class="text-end">
-            <div class="btn-group" role="group">
-              <%= link_to t('edit'),
-                          edit_admin_education_program_path(program),
-                          class: button_classes if can?(:update, program) %>
-              <%= link_to t('delete'),
-                          admin_education_program_path(program),
-                          method: :delete,
-                          data: { confirm: t('please_confirm') },
-                          class: button_classes_danger if can?(:destroy, program) %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        </div>
+        <div class="card-footer">
+          <%= diploma.best_localization_for(current_language) if !hide_diploma && diploma.present? %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

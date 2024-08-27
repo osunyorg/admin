@@ -5,6 +5,8 @@
 #  id            :uuid             not null, primary key
 #  duration      :text
 #  name          :string
+#  published     :boolean          default(FALSE)
+#  published_at  :datetime
 #  short_name    :string
 #  slug          :string
 #  summary       :text
@@ -35,6 +37,7 @@ class Education::Diploma::Localization < ApplicationRecord
   include Sanitizable
   include Shareable
   include WithGitFiles
+  include WithPublication
   include WithUniversity
 
   validates_presence_of :name

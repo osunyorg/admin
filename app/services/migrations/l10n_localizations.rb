@@ -2,6 +2,8 @@ module Migrations
   class L10nLocalizations
 
     def self.execute
+      migrate_education_diploma_localizations
+      migrate_education_program_localizations
       migrate_communication_website_localizations
       migrate_communication_website_agenda_event_localizations
       migrate_communication_website_agenda_category_localizations
@@ -14,7 +16,6 @@ module Migrations
       reconnect_objects_to_categories Communication::Website::Post
       reconnect_objects_to_categories Communication::Website::Agenda::Event
       reconnect_objects_to_categories Communication::Website::Portfolio::Project
-      migrate_education_diploma_localizations
       migrate_university_organization_localizations
       migrate_university_organization_category_localizations
       migrate_university_person_localizations
@@ -23,7 +24,83 @@ module Migrations
       migrate_university_person_experiences
     end
 
-    private
+    def self.migrate_education_diploma_localizations
+      Education::Diploma.find_each do |diploma|
+        about_id = diploma.original_id || diploma.id
+
+        l10n = Education::Diploma::Localization.create(
+          duration: diploma.duration,
+          name: diploma.name,
+          short_name: diploma.short_name,
+          slug: diploma.slug,
+          summary: diploma.summary,
+          about_id: about_id,
+          language_id: diploma.language_id,
+          university_id: diploma.university_id,
+          created_at: diploma.created_at
+        )
+
+        diploma.translate_contents!(l10n)
+
+        duplicate_permalinks(diploma, l10n)
+
+        l10n.save
+      end
+    end
+
+    def self.migrate_education_program_localizations
+      Education::Program.find_each do |program|
+        about_id = program.original_id || program.id
+
+        l10n = Education::Program::Localization.create(
+          accessibility: program.accessibility,
+          contacts: program.contacts,
+          content: program.content,
+          duration: program.duration,
+          evaluation: program.evaluation,
+          featured_image_alt: program.featured_image_alt,
+          featured_image_credit: program.featured_image_credit,
+          meta_description: program.meta_description,
+          name: program.name,
+          objectives: program.objectives,
+          opportunities: program.opportunities,
+          other: program.other,
+          path: program.path,
+          pedagogy: program.pedagogy,
+          prerequisites: program.prerequisites,
+          presentation: program.presentation,
+          pricing: program.pricing,
+          pricing_apprenticeship: program.pricing_apprenticeship,
+          pricing_continuing: program.pricing_continuing,
+          pricing_initial: program.pricing_initial,
+          published: program.published,
+          published_at: program.created_at,
+          qualiopi_text: program.qualiopi_text,
+          registration: program.registration,
+          registration_url: program.registration_url,
+          results: program.results,
+          short_name: program.short_name,
+          slug: program.slug,
+          summary: program.summary,
+          url: program.url,
+
+          about_id: about_id,
+          language_id: program.language_id,
+          university_id: program.university_id,
+          created_at: program.created_at
+        )
+
+        program.translate_contents!(l10n)
+        program.translate_attachment(l10n, :featured_image)
+        program.translate_attachment(l10n, :shared_image)
+        program.translate_attachment(l10n, :downloadable_summary)
+        program.translate_attachment(l10n, :logo)
+
+        duplicate_permalinks(program, l10n)
+
+        l10n.save
+      end
+    end
 
     def self.migrate_communication_website_localizations
       # 1. créer les locas principales
@@ -512,30 +589,7 @@ module Migrations
       end
     end
 
-    def self.migrate_education_diploma_localizations
-      Education::Diploma.find_each do |diploma|
-        about_id = diploma.original_id || diploma.id
-
-        l10n = Education::Diploma::Localization.create(
-          duration: diploma.duration,
-          name: diploma.name,
-          short_name: diploma.short_name,
-          slug: diploma.slug,
-          summary: diploma.summary,
-          about_id: about_id,
-          language_id: diploma.language_id,
-          university_id: diploma.university_id,
-          created_at: diploma.created_at
-        )
-
-        diploma.translate_contents!(l10n)
-
-        duplicate_permalinks(diploma, l10n)
-
-        l10n.save
-      end
-    end
-
+    protected
 
     # Get permalinks (for aliases)
     def self.duplicate_permalinks(object, l10n)

@@ -40,21 +40,27 @@ fr:
         short_name: Nom abrégé
         slug: Identifiant
       education/program:
-        accessibility: Accessibilité
         apprenticeship: Apprentissage
         bodyclass: Classe CSS spécifique
         capacity: Capacité
-        contacts: Contacts
-        content: Contenus de la formation
         continuing: Formation continue
         diploma: Diplôme
+        ects: Crédits ECTS
+        featured_image: Image à la une
+        initial: Formation initiale
+        qualiopi_certified: Formation certifiée Qualiopi
+        roles: Rôles
+        schools: Écoles proposant cette formation
+        teachers: Enseignant·e·s
+        team: Équipe
+      education/program/localization:
+        accessibility: Accessibilité
+        contacts: Contacts
+        content: Contenus de la formation
         duration: Durée
         downloadable_summary: Document de synthèse téléchargeable
-        ects: Crédits ECTS
         evaluation: Modalités d’évaluation
-        featured_image: Image à la une
         featured_image_alt: Texte alternatif
-        initial: Formation initiale
         is_published: Publiée
         is_draft: Brouillon
         locations: Campus
@@ -72,17 +78,12 @@ fr:
         pricing_continuing: Coûts de la formation continue
         pricing_apprenticeship: Coûts de l'apprentissage
         published: Publiée ?
-        qualiopi_certified: Formation certifiée Qualiopi
         qualiopi_text: Détails de la certification
         registration: Modalités et délais d’accès
         registration_url: Lien d'inscription (URL)
         results: Indicateurs de résultats
-        roles: Rôles
-        schools: Écoles proposant cette formation
         short_name: Nom abrégé
         slug: Identifiant
-        teachers: Enseignant·e·s
-        team: Équipe
         url: Site Web
       education/school:
         address: Adresse

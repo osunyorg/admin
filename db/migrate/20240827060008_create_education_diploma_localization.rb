@@ -5,6 +5,8 @@ class CreateEducationDiplomaLocalization < ActiveRecord::Migration[7.1]
     create_table :education_diploma_localizations, id: :uuid do |t|
       t.text :duration
       t.string :name
+      t.boolean :published, default: false
+      t.datetime :published_at
       t.string :short_name
       t.string :slug
       t.text :summary

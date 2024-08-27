@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_27_060008) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_27_115715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -911,6 +911,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_060008) do
   create_table "education_diploma_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "duration"
     t.string "name"
+    t.boolean "published", default: false
+    t.datetime "published_at"
     t.string "short_name"
     t.string "slug"
     t.text "summary"
@@ -941,6 +943,47 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_060008) do
     t.index ["original_id"], name: "index_education_diplomas_on_original_id"
     t.index ["slug"], name: "index_education_diplomas_on_slug"
     t.index ["university_id"], name: "index_education_diplomas_on_university_id"
+  end
+
+  create_table "education_program_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "accessibility"
+    t.text "contacts"
+    t.text "content"
+    t.string "duration"
+    t.text "evaluation"
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.string "name"
+    t.text "objectives"
+    t.text "opportunities"
+    t.text "other"
+    t.string "path"
+    t.text "pedagogy"
+    t.text "prerequisites"
+    t.text "presentation"
+    t.text "pricing"
+    t.text "pricing_apprenticeship"
+    t.text "pricing_continuing"
+    t.text "pricing_initial"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.text "qualiopi_text"
+    t.text "registration"
+    t.string "registration_url"
+    t.text "results"
+    t.string "short_name"
+    t.string "slug"
+    t.text "summary"
+    t.string "url"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_education_program_localizations_on_about_id"
+    t.index ["language_id"], name: "index_education_program_localizations_on_language_id"
+    t.index ["university_id"], name: "index_education_program_localizations_on_university_id"
   end
 
   create_table "education_programs", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -985,7 +1028,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_060008) do
     t.string "url"
     t.boolean "qualiopi_certified", default: false
     t.text "qualiopi_text"
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.uuid "original_id"
     t.index ["diploma_id"], name: "index_education_programs_on_diploma_id"
     t.index ["language_id"], name: "index_education_programs_on_language_id"
@@ -1835,6 +1878,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_060008) do
   add_foreign_key "education_diplomas", "education_diplomas", column: "original_id"
   add_foreign_key "education_diplomas", "languages"
   add_foreign_key "education_diplomas", "universities"
+  add_foreign_key "education_program_localizations", "education_programs", column: "about_id"
+  add_foreign_key "education_program_localizations", "languages"
+  add_foreign_key "education_program_localizations", "universities"
   add_foreign_key "education_programs", "education_programs", column: "original_id"
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "languages"

@@ -41,15 +41,8 @@
 
 <%= render 'admin/communication/blocks/content/editor', about: @l10n %>
 
-<div class="row">
-  <div class="col-lg-4">
-    <h2 class="h4"><%= Education::Program.model_name.human(count: 2) %></h2>
-  </div>
-  <div class="col-lg-8">
-    <%= render 'admin/education/programs/list', programs: @programs, hide_diploma: true %>
-  </div>
-</div>
-
+<h2 class="h4"><%= Education::Program.model_name.human(count: 2) %></h2>
+<%= render 'admin/education/programs/list', programs: @programs, hide_diploma: true %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @diploma %>
