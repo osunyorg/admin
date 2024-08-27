@@ -208,9 +208,10 @@ fr:
       admin_unlock: Le débloquer !
       attempt_failed: "Code invalide"
       code_has_been_sent: "Un code d'authentification vient de vous être envoyé."
-      enter_code_direct_otp_email: "Entrez le code qui vous a été envoyé sur votre mail %{mail}"
-      enter_code_direct_otp_mobile_phone: "Entrez le code qui vous a été envoyé sur votre mobile %{phone}"
+      enter_code_direct_otp_email_html: "Pour assurer la sécurité de votre connexion, nous vous envoyons un code à 6 chiffres, à usage unique, sur votre mail %{mail}. Entrez ce code ci-dessous."
+      enter_code_direct_otp_mobile_phone_html: "Pour assurer la sécurité de votre connexion, nous vous envoyons un code à 6 chiffres, à usage unique, sur votre mobile %{phone}. Entrez ce code ci-dessous."
       enter_code_totp: "Entrez le code de votre application d'authentification"
+      help: "Si vous rencontrez un problème, vous pouvez..."
       max_login_attempts_reached: "Votre compte a été bloqué pour des raisons de sécurité.<br />Veuillez contacter un administrateur."
       resend_code: "Renvoyer le code"
       send_code_instead: "Envoyez-moi plutôt un code"
@@ -278,6 +279,7 @@ fr:
     label: Localisation
   login:
     already_registered: Déjà inscrit ?
+    already_registered_details: Connectez-vous si vous avez déjà un compte.
     not_registered_yet: Pas encore inscrit ?
     not_registered_yet_details: Inscrivez-vous si vous n'avez pas encore de compte.
     or: ou bien
