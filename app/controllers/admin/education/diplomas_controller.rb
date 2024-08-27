@@ -27,7 +27,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def create
     if @diploma.save
       redirect_to [:admin, @diploma],
-                  notice: t('admin.successfully_created_html', model: @l10n.to_s)
+                  notice: t('admin.successfully_created_html', model: @diploma.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -37,7 +37,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def update
     if @diploma.update(diploma_params)
       redirect_to [:admin, @diploma],
-                  notice: t('admin.successfully_updated_html', model: @l10n.to_s)
+                  notice: t('admin.successfully_updated_html', model: @diploma.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -48,7 +48,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def destroy
     @diploma.destroy
     redirect_to admin_education_diplomas_url,
-                notice: t('admin.successfully_destroyed_html', model: @l10n.to_s)
+                notice: t('admin.successfully_destroyed_html', model: @diploma.to_s_in(current_language))
   end
 
   private

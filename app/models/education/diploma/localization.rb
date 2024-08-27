@@ -61,9 +61,16 @@ class Education::Diploma::Localization < ApplicationRecord
     blocks
   end
 
-  # def references
-  #   programs
-  # end
+  def references
+    programs
+  end
+
+  def programs
+    @programs ||=  about.programs
+                        .ordered
+                        .map { |program| program.localization_for(language) }
+                        .compact
+  end
 
   protected
 
