@@ -31,11 +31,12 @@ fr:
         school: École
         year: Année
       education/diploma:
-        duration: Durée
         ects: Crédits ECTS
         level: Niveau
-        name: Nom
         programs: Formations
+      education/diploma/localization:
+        duration: Durée
+        name: Nom
         short_name: Nom abrégé
         slug: Identifiant
       education/program:

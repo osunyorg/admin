@@ -3,23 +3,24 @@ module Migrations
 
     def self.execute
       migrate_communication_website_localizations
-      migrate_university_organization_localizations
-      migrate_communication_website_post_localizations
-      migrate_communication_website_post_category_localizations
-      migrate_university_person_localizations
-      migrate_university_person_category_localizations
-      migrate_university_organization_category_localizations
-      migrate_people_facets
-      migrate_communication_website_page_localizations
-      migrate_experiences
       migrate_communication_website_agenda_event_localizations
       migrate_communication_website_agenda_category_localizations
       migrate_communication_website_menu_items_abouts
+      migrate_communication_website_page_localizations
+      migrate_communication_website_post_localizations
+      migrate_communication_website_post_category_localizations
+      migrate_communication_website_post_authors
       migrate_communication_website_portfolio_category_localizations
-      migrate_post_authors
-      migrate_categories Communication::Website::Post
-      migrate_categories Communication::Website::Agenda::Event
-      migrate_categories Communication::Website::Portfolio::Project
+      reconnect_objects_to_categories Communication::Website::Post
+      reconnect_objects_to_categories Communication::Website::Agenda::Event
+      reconnect_objects_to_categories Communication::Website::Portfolio::Project
+      migrate_education_diploma_localizations
+      migrate_university_organization_localizations
+      migrate_university_organization_category_localizations
+      migrate_university_person_localizations
+      migrate_university_person_category_localizations
+      migrate_university_person_facets
+      migrate_university_person_experiences
     end
 
     private
@@ -90,12 +91,7 @@ module Migrations
         orga.translate_contents!(l10n)
         orga.translate_other_attachments(l10n)
 
-        # Get permalinks (for aliases)
-        orga.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(orga, l10n)
 
         l10n.save
 
@@ -131,11 +127,7 @@ module Migrations
         post.translate_attachment(l10n, :featured_image)
         post.translate_other_attachments(l10n)
 
-        post.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(post, l10n)
 
         l10n.save
       end
@@ -165,11 +157,7 @@ module Migrations
         object.translate_contents!(l10n)
         object.translate_other_attachments(l10n)
 
-        object.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(object, l10n)
 
         l10n.save
 
@@ -204,15 +192,9 @@ module Migrations
         person.translate_contents!(l10n)
         person.translate_other_attachments(l10n)
 
-        # Get permalinks (for aliases)
-        person.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(person, l10n)
 
         l10n.save
-
       end
     end
 
@@ -231,11 +213,7 @@ module Migrations
 
         category.translate_contents!(l10n)
 
-        category.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(category, l10n)
 
         l10n.save
       end
@@ -256,17 +234,13 @@ module Migrations
 
         category.translate_contents!(l10n)
 
-        category.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(category, l10n)
 
         l10n.save
       end
     end
 
-    def self.migrate_people_facets
+    def self.migrate_university_person_facets
       # Before, we had
       # - A1 : John Doe (Uni::Person FR) with his facets
       # - A2 : John Doe (Uni::Person EN, original: FR) with his facets
@@ -346,17 +320,13 @@ module Migrations
         page.translate_attachment(l10n, :featured_image)
         page.translate_other_attachments(l10n)
 
-        page.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(page, l10n)
 
         l10n.save
       end
     end
 
-    def self.migrate_experiences
+    def self.migrate_university_person_experiences
       University::Person::Experience.find_each do |experience|
         # En théorie, il faut : 
         # 1. vérifier que l'expérience originale existe,
@@ -400,11 +370,7 @@ module Migrations
         event.translate_attachment(l10n, :featured_image)
         event.translate_other_attachments(l10n)
 
-        event.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(event, l10n)
 
         l10n.save
       end
@@ -433,11 +399,7 @@ module Migrations
         category.translate_contents!(l10n)
         category.translate_attachment(l10n, :featured_image)
 
-        category.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(category, l10n)
 
         l10n.save
       end
@@ -481,11 +443,7 @@ module Migrations
         project.translate_attachment(l10n, :featured_image)
         project.translate_other_attachments(l10n)
 
-        project.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(project, l10n)
 
         l10n.save
       end
@@ -518,17 +476,13 @@ module Migrations
         category.translate_contents!(l10n)
         category.translate_attachment(l10n, :featured_image)
 
-        category.permalinks.each do |permalink|
-          new_permalink = permalink.dup
-          new_permalink.about = l10n
-          new_permalink.save
-        end
+        duplicate_permalinks(category, l10n)
 
         l10n.save
       end
     end
 
-    def self.migrate_post_authors
+    def self.migrate_communication_website_post_authors
       puts Communication::Website::Post.model_name.human(count: 2)
       puts "Authors"
       Communication::Website::Post.find_each do |post|
@@ -540,7 +494,7 @@ module Migrations
       end
     end
     
-    def self.migrate_categories(model)
+    def self.reconnect_objects_to_categories(model)
       puts
       puts model.model_name.human(count: 2)
       puts "Categories"
@@ -555,6 +509,40 @@ module Migrations
             end
           end
         end
+      end
+    end
+
+    def self.migrate_education_diploma_localizations
+      Education::Diploma.find_each do |diploma|
+        about_id = diploma.original_id || diploma.id
+
+        l10n = Education::Diploma::Localization.create(
+          duration: diploma.duration,
+          name: diploma.name,
+          short_name: diploma.short_name,
+          slug: diploma.slug,
+          summary: diploma.summary,
+          about_id: about_id,
+          language_id: diploma.language_id,
+          university_id: diploma.university_id,
+          created_at: diploma.created_at
+        )
+
+        diploma.translate_contents!(l10n)
+
+        duplicate_permalinks(diploma, l10n)
+
+        l10n.save
+      end
+    end
+
+
+    # Get permalinks (for aliases)
+    def self.duplicate_permalinks(object, l10n)
+      object.permalinks.each do |permalink|
+        new_permalink = permalink.dup
+        new_permalink.about = l10n
+        new_permalink.save
       end
     end
     

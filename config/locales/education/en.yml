@@ -31,11 +31,12 @@ en:
         school: School
         year: Year
       education/diploma:
-        duration: Duration
         ects: ECTS
         level: Level
-        name: Name
         programs: Programs
+      education/diploma/localization:
+        duration: Duration
+        name: Name
         short_name: Short name
         slug: Slug
       education/program:
