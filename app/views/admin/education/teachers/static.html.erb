@@ -2,6 +2,7 @@
 # @l10n is a localization facet University::Person::Localization::Teacher
 person = @l10n.about
 person_l10n = @l10n.person_l10n
+language = @l10n.language
 %>
 ---
 title: >-
@@ -9,7 +10,7 @@ title: >-
 breadcrumbs:
 <%
 @website.special_page(Communication::Website::Page::Person).ancestors_and_self.each do |page|
-  page_l10n = page.localization_for(@l10n.language)
+  page_l10n = page.localization_for(language)
 %>
   - title: "<%= page_l10n.to_s %>"
     path: "<%= page_l10n.path %>"

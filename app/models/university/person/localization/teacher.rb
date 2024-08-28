@@ -9,7 +9,7 @@ class University::Person::Localization::Teacher < University::Person::Localizati
   end
 
   def template_static
-    "admin/university/people/teachers/static"
+    "admin/education/teachers/static"
   end
 
   def dependencies

@@ -3,6 +3,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
                               through: :current_university,
                               through_association: :people
 
+  include Admin::HasStaticAction
   include Admin::Localizable
 
   has_scope :for_search_term

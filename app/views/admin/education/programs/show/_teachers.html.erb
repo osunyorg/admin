@@ -15,7 +15,7 @@
               <td class="ps-0">
                 <%= link_to_if can?(:read, person), 
                           person.best_localization_for(current_language), 
-                          admin_university_person_path(person) %>
+                          admin_education_teacher_path(person) %>
               </td>
               <td><%= involvement.description %></td>
             </tr>

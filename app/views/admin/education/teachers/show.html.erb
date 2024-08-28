@@ -32,6 +32,10 @@
   <%= link_to t('show'), admin_university_person_path(@teacher) %>
 </div>
 
+<% content_for :action_bar_left do %>
+  <%= static_link static_admin_education_teacher_path(@teacher) %>
+<% end %>
+
 <% content_for :action_bar_right do %>
   <%= link_to t('education.manage_programs'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:update, @teacher) %>
 <% end %>

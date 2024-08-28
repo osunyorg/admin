@@ -1,7 +1,8 @@
 <%
-# this version has to incremented every time you change something in the file, to invalidate the cache
-version = 2
+# this version has to be incremented every time you change something in the file, to invalidate the cache
+version = 3
 person = @l10n.about
+language = @l10n.language
 cache_key = [person, @l10n, @website.id, version]
 cache cache_key do
 %>---
@@ -78,28 +79,31 @@ roles:
 <% if person.involvements_as_teacher.any? %>
 teachings:
 <% person.involvements_as_teacher.each do |involvement|
-    target = involvement.target
+    program = involvement.target
+    program_l10n = program.best_localization_for(language)
     %>
   - description: >-
       <%= involvement.description %>
     program:
       title: >-
-        <%= target.to_s %>
+        <%= program_l10n.to_s %>
       url: >-
-        <%= target.current_permalink_in_website(@website)&.path %>
+        <%= program_l10n.current_permalink_in_website(@website)&.path %>
 <% end %>
 <% end %>
 <% if person.roles_as_administrator.any? %>
 administrative_missions:
 <% person.roles_as_administrator.each do |role|
-    target = role.target %>
+    target = role.target
+    target_l10n = target.best_localization_for(language)
+    %>
   - description: >-
       <%= role.to_s %>
     target:
       title: >-
-        <%= target.to_s %>
+        <%= target_l10n.to_s %>
       url: >-
-        <%= target.current_permalink_in_website(@website)&.path if target.respond_to? :current_permalink_in_website %>
+        <%= target_l10n.current_permalink_in_website(@website)&.path if target_l10n.respond_to? :current_permalink_in_website %>
 <% end %>
 <% end %>
 <%= render 'admin/application/connections/backlinks', about: @l10n %>

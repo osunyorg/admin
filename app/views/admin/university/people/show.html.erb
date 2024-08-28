@@ -8,7 +8,7 @@
   <div class="row">
     <% if @person.is_teacher? && @teacher_involvements.any? %>
       <div class="col-md-6">
-        <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
+        <%= osuny_panel t('education.teachings') do %>
           <p><%= "#{@teacher_involvements.count} #{Education::Program.model_name.human(count: @teacher_involvements.count).downcase}" %></p>
           <%= link_to t('show'), admin_education_teacher_path(@person) %>
         <% end %>
@@ -40,10 +40,6 @@ action += link_to t('university.manage_experiences'),
 
 <% if current_user.server_admin? %>
   <%= osuny_panel t('static') do  %>
-    <%= link_to 'Person',
-                static_admin_university_person_path(@person),
-                classes: button_classes,
-                target: :_blank %><br>
     <%= link_to 'Administrator', 
                 static_administrator_admin_university_person_path(@person),
                 classes: button_classes,
@@ -56,15 +52,12 @@ action += link_to t('university.manage_experiences'),
                 static_researcher_admin_university_person_path(@person),
                 classes: button_classes,
                 target: :_blank %><br>
-    <%= link_to 'Teacher', 
-                static_teacher_admin_university_person_path(@person),
-                classes: button_classes,
-                target: :_blank %>
   <% end %>
 <% end %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @person %>
+  <%= static_link static_admin_university_person_path(@person) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

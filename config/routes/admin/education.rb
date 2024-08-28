@@ -43,6 +43,10 @@ namespace :education do
       get :static
     end
   end
-  resources :teachers, only: [:index, :show, :edit, :update]
+  resources :teachers, only: [:index, :show, :edit, :update] do
+    member do
+      get :static
+    end
+  end
   root to: 'dashboard#index'
 end
