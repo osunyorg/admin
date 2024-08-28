@@ -102,11 +102,14 @@ en:
   admin:
     education:
       programs:
-        view_as_list: Listview
-        view_as_tree: Treeview
         publication: Publication
+        teacher:
+          no_teaching: No teaching
+          show_person_html: This page only shows teaching assignments.<br>If you wish to view or modify the person's details, click on the link below.
         tree:
           title: Programs treeview
+        view_as_list: Listview
+        view_as_tree: Treeview
   education:
     description:
       text: Education is the set of processes and procedures that enable every human child to gradually gain access to culture, access to culture being what distinguishes man from animals.

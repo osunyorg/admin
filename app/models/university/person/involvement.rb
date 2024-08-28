@@ -36,7 +36,11 @@ class University::Person::Involvement < ApplicationRecord
   include WithUniversity
   include WithPosition
 
-  enum kind: { administrator: 10, researcher: 20, teacher: 30 }
+  enum kind: { 
+    administrator: 10, 
+    researcher: 20, 
+    teacher: 30 
+  }
 
   belongs_to :person, class_name: 'University::Person'
   # Can be an Education::Program, a Research::Laboratory, or a University::Role (attached to Programs or Schools)

@@ -8,9 +8,10 @@
   <div class="row">
     <% if @person.is_teacher? && @teacher_involvements.any? %>
       <div class="col-md-6">
-        <%= render  'admin/education/teachers/show/programs',
-                    involvements: @teacher_involvements,
-                    param_name: :programs_page %>
+        <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
+          <p><%= "#{@teacher_involvements.count} #{Education::Program.model_name.human(count: @teacher_involvements.count).downcase}" %></p>
+          <%= link_to t('show'), admin_education_teacher_path(@person) %>
+        <% end %>
       </div>
     <% end %>
     <div class="col-md-6">
