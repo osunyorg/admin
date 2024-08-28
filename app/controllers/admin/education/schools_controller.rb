@@ -67,11 +67,12 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   def school_params
     params.require(:education_school)
           .permit(
-            :name, :address, :zipcode, :city, :country, :url, :phone, 
-            :logo, :logo_delete, 
+            :address, :zipcode, :city, :country, :phone,
             program_ids: [],
             localizations_attributes: [
-              :id, :language_id
+              :id, :language_id,
+              :name, :url,
+              :logo, :logo_delete,
             ]
           )
           .merge(

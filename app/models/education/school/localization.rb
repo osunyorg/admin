@@ -48,6 +48,10 @@ class Education::School::Localization < ApplicationRecord
     "data/school.yml"
   end
 
+  def template_static
+    "admin/education/schools/static"
+  end
+
   def dependencies
     active_storage_blobs +
     contents_dependencies

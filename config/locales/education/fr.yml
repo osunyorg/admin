@@ -46,7 +46,6 @@ fr:
         continuing: Formation continue
         diploma: Diplôme
         ects: Crédits ECTS
-        featured_image: Image à la une
         initial: Formation initiale
         qualiopi_certified: Formation certifiée Qualiopi
         roles: Rôles
@@ -60,6 +59,7 @@ fr:
         duration: Durée
         downloadable_summary: Document de synthèse téléchargeable
         evaluation: Modalités d’évaluation
+        featured_image: Image à la une
         featured_image_alt: Texte alternatif
         is_published: Publiée
         is_draft: Brouillon
@@ -91,13 +91,14 @@ fr:
         city: Ville
         country: Pays
         locations: Campus
-        name: Nom
         phone: Téléphone
         programs: Formations dispensées
         roles: Membres de l'équipe
-        url: Site Web
         websites: Sites Web associés
         zipcode: Code postal
+      education/school/localization:
+        name: Nom
+        url: Site Web
   admin:
     education:
       programs:

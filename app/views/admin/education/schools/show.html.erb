@@ -16,13 +16,20 @@
         <%= osuny_label Education::School.human_attribute_name('phone') %>
         <p><%= @school.phone %></p>
       <% end %>
-      <% if @school.url.present? %>
-        <%= osuny_label Education::School.human_attribute_name('url') %>
-        <p><%= link_to @school.url, @school.url, target: :_blank %></p>
+      <% if @l10n.url.present? %>
+        <%= osuny_label Education::School::Localization.human_attribute_name('url') %>
+        <p><%= link_to @l10n.url, @l10n.url, target: :_blank %></p>
       <% end %>
     <% end %>
   </div>
-    
+  <% if @l10n.logo.attached? %>
+    <div class="col-xxl-4">
+      <%= osuny_panel Education::School::Localization.human_attribute_name('logo') do %>
+        <%= image_tag @l10n.logo, class: 'img-fluid' %>
+      <% end %>
+    </div>
+  <% end %>
+
   <% if @school.locations.any? %>
     <div class="col-xxl-4">
       <%= osuny_panel Education::School.human_attribute_name('locations') do %>
@@ -73,6 +80,7 @@ action += link_to t('education.schools.manage_roles'),
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @school %>
+  <%= static_link static_admin_education_school_path(@school) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

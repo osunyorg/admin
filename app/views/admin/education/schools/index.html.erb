@@ -9,7 +9,7 @@
       <div class="card card--horizontal">
         <%= osuny_thumbnail_localized school %>
         <div class="card-body">
-          <%= osuny_link_localized school, [:admin, school] %>
+          <%= osuny_link_localized school, [:admin, school], classes: 'stretched-link' %>
         </div>
         <div class="card-footer small text-muted">
           <%= school.programs.count %>
@@ -21,7 +21,6 @@
 </div>
 
 <%= paginate @schools %>
-
 
 <% content_for :action_bar_right do %>
   <%= create_link Education::School %>
