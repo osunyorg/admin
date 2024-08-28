@@ -77,6 +77,10 @@ class Education::Diploma::Localization < ApplicationRecord
 
   protected
 
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
+
   def backlinks_blocks(website)
     website.blocks.diplomas
   end

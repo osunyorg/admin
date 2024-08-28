@@ -1,4 +1,4 @@
-<% content_for :title, @school %>
+<% content_for :title, @l10n %>
 
 <div class="row">
 
@@ -7,8 +7,10 @@
       <%= osuny_label Education::School.human_attribute_name('address') %>
       <p>
         <%= @school.address %><br>
-        <%= @school.zipcode %> <%= @school.city %><br>
-        <%= @school.country %>
+        <%= @school.zipcode %> <%= @school.city %>
+        <% if @school.country.present? %>
+          <br><%= @school.country_name %>
+        <% end %>
       </p>
       <% if @school.phone.present? %>
         <%= osuny_label Education::School.human_attribute_name('phone') %>
@@ -20,23 +22,9 @@
       <% end %>
     <% end %>
   </div>
-
-  <% if @school.programs.any? %>
-    <div class="col-xxl-4">
-      <%= osuny_panel Education::School.human_attribute_name('programs') do %>
-        <ul class="list-unstyled">
-          <% @school.programs.ordered.each do |program| %>
-            <li><%= link_to_if can?(:read, program), program, [:admin, program] %></li>
-          <% end %>
-        </ul>
-        <%= @school.alumni.count %>
-        <%= University::Person::Alumnus.model_name.human(count: 2).downcase %>
-      <% end %>
-    </div>
-  <% end %>
-
+    
   <% if @school.locations.any? %>
-    <div class="col-lg-4">
+    <div class="col-xxl-4">
       <%= osuny_panel Education::School.human_attribute_name('locations') do %>
         <ul class="list-unstyled">
           <% @school.locations.ordered.each do |location| %>
@@ -52,7 +40,7 @@
       <%= osuny_panel Education::School.human_attribute_name('websites') do %>
         <ul class="list-unstyled">
           <% @school.websites.each do |website| %>
-            <li><%= link_to website, [:admin, website] %></li>
+            <li><%= osuny_link_localized website, [:admin, website] %></li>
           <% end %>
         </ul>
       <% end %>
@@ -61,9 +49,27 @@
 
 </div>
 
-<%= render 'admin/application/i18n/widget', about: @school, small: true %>
+<%
+action = ''
+action += link_to t('education.schools.manage_roles'),
+                  admin_education_school_roles_path(school_id: @school.id),
+                  class: button_classes if can?(:update, University::Role)
+%>
+<%= osuny_panel Education::School.human_attribute_name('roles'), action: action do %>
+  <% if @roles.any? %>
+    <%= render 'admin/education/schools/roles/list', roles: @roles %>
+  <% end %>
+<% end %>
 
-<%= render 'admin/education/schools/show/roles', roles: @roles %>
+<% if @school.programs.any? %>
+  <%= osuny_panel Education::School.human_attribute_name('programs') do %>
+    <%= render 'admin/education/programs/list', programs: @school.programs.ordered %>
+    <div>
+      <%= @school.alumni.count %>
+      <%= University::Person::Alumnus.model_name.human(count: 2).downcase %>
+    </div>
+  <% end %>
+<% end %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @school %>

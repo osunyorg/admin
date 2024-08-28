@@ -1,35 +1,23 @@
 <% content_for :title, Education::School.model_name.human(count: 2) %>
 
+<p>&nbsp;</p><%# Filtres %>
 <%= render 'filters', current_path: admin_education_schools_path, filters: @filters if @filters.any?  %>
 
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= Education::School.human_attribute_name('name') %></th>
-        <th><%= Education::School.human_attribute_name('address') %></th>
-        <th><%= Education::School.human_attribute_name('zipcode') %></th>
-        <th><%= Education::School.human_attribute_name('city') %></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @schools.each do |school| %>
-        <tr>
-          <td><%= link_to school.name, [:admin, school] %></td>
-          <td><%= school.address %></td>
-          <td><%= school.zipcode %></td>
-          <td><%= school.city %></td>
-          <td class="text-end">
-            <div class="btn-group" role="group">
-              <%= edit_link school %>
-              <%= destroy_link school %>
-            </div>
-          </td>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2">
+  <% @schools.each do |school| %>
+    <div>
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail_localized school %>
+        <div class="card-body">
+          <%= osuny_link_localized school, [:admin, school] %>
+        </div>
+        <div class="card-footer small text-muted">
+          <%= school.programs.count %>
+          <%= Education::Program.model_name.human(count: school.programs.count).downcase %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <%= paginate @schools %>

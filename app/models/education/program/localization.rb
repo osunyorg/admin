@@ -152,4 +152,10 @@ class Education::Program::Localization < ApplicationRecord
   def to_s
     "#{name}"
   end
+
+  protected
+
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
 end

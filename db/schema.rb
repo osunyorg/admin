@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_27_115715) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_28_074656) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1058,6 +1058,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_115715) do
     t.index ["education_program_id", "user_id"], name: "index_education_programs_users_on_program_id_and_user_id"
   end
 
+  create_table "education_school_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "meta_description"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.string "slug"
+    t.text "summary"
+    t.string "name"
+    t.string "url"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_education_school_localizations_on_about_id"
+    t.index ["language_id"], name: "index_education_school_localizations_on_language_id"
+    t.index ["university_id"], name: "index_education_school_localizations_on_university_id"
+  end
+
   create_table "education_schools", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "name"
@@ -1885,6 +1903,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_115715) do
   add_foreign_key "education_programs", "education_programs", column: "parent_id"
   add_foreign_key "education_programs", "languages"
   add_foreign_key "education_programs", "universities"
+  add_foreign_key "education_school_localizations", "education_schools", column: "about_id"
+  add_foreign_key "education_school_localizations", "languages"
+  add_foreign_key "education_school_localizations", "universities"
   add_foreign_key "education_schools", "education_schools", column: "original_id"
   add_foreign_key "education_schools", "languages"
   add_foreign_key "education_schools", "universities"
