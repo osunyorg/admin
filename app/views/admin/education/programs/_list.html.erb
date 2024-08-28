@@ -3,8 +3,8 @@
   hide_parent ||= false
 %>
 <div class="row pt-4 g-2 mb-3">
-  <% programs.each do |program| %>
-    <%
+  <% 
+  programs.each do |program| 
     parent = program.parent
     diploma = program.diploma
     %>
@@ -21,9 +21,11 @@
             </span>
           <% end %>
         </div>
-        <div class="card-footer">
-          <%= diploma.best_localization_for(current_language) if !hide_diploma && diploma.present? %>
-        </div>
+        <% if !hide_diploma && diploma.present? %>
+          <div class="card-footer">
+            <%= diploma.best_localization_for(current_language).short_name %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>
