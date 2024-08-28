@@ -61,8 +61,17 @@ class Admin::Education::Schools::RolesController < Admin::Education::Schools::Ap
 
   def role_params
     params.require(:university_role)
-          .permit(:description, involvements_attributes: [:id, :person_id, :position, :_destroy])
-          .merge(target: @school, language_id: @school.language_id, university_id: @school.university_id)
+          .permit(
+            :description, 
+            involvements_attributes: [
+              :id, :person_id, :position, :_destroy
+            ]
+          )
+          .merge(
+            target: @school, 
+            language_id: @school.language_id, 
+            university_id: @school.university_id
+          )
   end
 
   def model
@@ -71,9 +80,9 @@ class Admin::Education::Schools::RolesController < Admin::Education::Schools::Ap
 
   def load_administration_people
     @administration_people =  current_university.people
-                                                .in_closest_language_id(current_language.id)
+                                                .tmp_original # TODO L10N : To remove
                                                 .administration
                                                 .accessible_by(current_ability)
-                                                .ordered
+                                                .ordered(current_language)
   end
 end

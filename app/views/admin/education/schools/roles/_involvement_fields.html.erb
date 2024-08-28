@@ -5,9 +5,14 @@
       <i class="<%= Icon::DRAG %> handle"></i>
     </div>
     <div class="col-9">
-      <%= f.association :person, collection: @administration_people, label: false, include_blank: :translate, wrapper: false, required: true %>
+      <%= f.association :person, 
+                        collection: @administration_people, 
+                        label: false, 
+                        include_blank: :translate, 
+                        wrapper: false, 
+                        required: true %>
     </div>
-    <div class="col-2">
+    <div class="col-2 text-end">
       <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
                                       f,
                                       class: 'btn btn-sm btn-danger' %>

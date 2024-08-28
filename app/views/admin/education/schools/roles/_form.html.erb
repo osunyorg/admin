@@ -4,13 +4,10 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
+
   <div class="row">
-    <div class="col-md-8">
-      <%= osuny_panel t('admin.infos') do %>
-        <%= f.input :description, as: :string %>
-      <% end %>
-    </div>
-    <div class="col-md-4">
+    <div class="col-lg-6">
+      <%= f.input :description, as: :string %>
       <%
       action = link_to_add_association  t('add'), 
                                         f, 

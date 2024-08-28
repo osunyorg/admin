@@ -8,7 +8,8 @@ class Admin::Education::Schools::ApplicationController < Admin::Education::Appli
 
   def breadcrumb
     super
-    add_breadcrumb @school, [:admin, @school]
+    add_breadcrumb Education::School.model_name.human(count: 2), admin_education_schools_path
+    breadcrumb_for @school
   end
 
   def default_url_options

@@ -110,6 +110,9 @@ fr:
           title: Arborescence des formations
         view_as_list: Vue en liste
         view_as_tree: Vue en arbre
+      schools:
+        roles:
+          none: Aucun rôle défini
   education:
     description:
       text: L’éducation est l’ensemble des processus et des procédés qui permettent à tout enfant humain d’accéder progressivement à la culture, l’accès à la culture étant ce qui distingue l’homme de l’animal.
