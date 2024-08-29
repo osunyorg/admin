@@ -50,6 +50,16 @@ class Migrations::L10n::Education::Program < Migrations::L10n::Base
       duplicate_permalinks(program, l10n)
 
       l10n.save
+
+      if program.original_id.nil?
+        # This program will still exist as master.
+
+        # We need to make sure the diploma is the original.
+        if program.diploma.present?
+          diploma_id = program.diploma.original_id || program.diploma.id
+          program.update_column(:diploma_id, diploma_id)
+        end
+      end
     end
   end
 end

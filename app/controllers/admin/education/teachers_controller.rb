@@ -53,7 +53,10 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   def teacher_params
     params.require(:university_person)
           .permit(
-            involvements_attributes: [:id, :target_id, :target_type, :description, :_destroy]
+            involvements_attributes: [
+              :id, :target_id, :target_type, :_destroy,
+              localizations_attributes: [:id, :description, :language_id]
+            ]
           )
   end
 end

@@ -92,7 +92,7 @@
             <%
             sorted_involvements =  program.university_person_involvements
                                           .sort_by { |involvement|
-              [involvement.person&.last_name, involvement.person&.first_name]
+              involvement.person.to_s_alphabetical_in(current_language)
             }
             %>
             <%= f.simple_fields_for :university_person_involvements,
@@ -171,13 +171,13 @@
                       f: lf,
                       source: '#education_program_localizations_attributes_0_name' %>
           <%= f.association :parent,
-                            collection: 
+                            collection:
                               current_university.education_programs
                                                 .where.not(id: program)
                                                 .tmp_original # TODO L10N : To remove.
                                                 .ordered
-                                                .map { |program| 
-                                                  [program.to_s_in(current_language), program.id] 
+                                                .map { |program|
+                                                  [program.to_s_in(current_language), program.id]
                                                 } %>
           <%= f.input :bodyclass %>
           <%= lf.input :logo,

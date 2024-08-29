@@ -50,7 +50,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def children
     return unless request.xhr?
-    @children = @program.children.ordered
+    @children = @program.children.tmp_original.ordered  # TODO L10N : To remove.
   end
 
   def show
@@ -113,7 +113,10 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
           .permit(
             :bodyclass, :capacity, :continuing, :initial, :apprenticeship, :qualiopi_certified,
             :parent_id, :diploma_id, school_ids: [],
-            university_person_involvements_attributes: [:id, :person_id, :language_id, :university_id, :description, :position, :_destroy],
+            university_person_involvements_attributes: [
+              :id, :person_id, :university_id, :position, :_destroy,
+              localizations_attributes: [:id, :description, :language_id]
+            ],
             localizations_attributes: [
               :id, :language_id,
               :name, :short_name, :slug, :url,
@@ -125,7 +128,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
               :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
               :evaluation, :accessibility, :contacts, :opportunities, :results, :other, :main_information,
               :pricing, :pricing_apprenticeship, :pricing_continuing, :pricing_initial, :duration,
-              :downloadable_summary, :downloadable_summary_delete,  
+              :downloadable_summary, :downloadable_summary_delete,
             ]
           )
           .merge(
