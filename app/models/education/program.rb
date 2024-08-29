@@ -42,7 +42,7 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  diploma_id             :uuid             indexed
-#  language_id            :uuid             not null, indexed
+#  language_id            :uuid             indexed
 #  original_id            :uuid             indexed
 #  parent_id              :uuid             indexed
 #  university_id          :uuid             not null, indexed
@@ -65,20 +65,15 @@
 #
 class Education::Program < ApplicationRecord
   include AsIndirectObject
-  include Contentful
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Shareable
+  include Shareable # TODO L10N : To remove
   include Localizable
-  include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WebsitesLinkable
-  include WithAccessibility
   include WithAlumni
-  include WithBlobs
+  include WithBlobs # TODO L10N : To remove
   include WithDiploma
-  include WithFeaturedImage
-  include WithGitFiles
-  include WithInheritance
+  include WithFeaturedImage # TODO L10N : To remove
   include WithLocations
   include WithMenuItemTarget
   include WithPosition
@@ -88,23 +83,11 @@ class Education::Program < ApplicationRecord
   include WithUniversity
   include WithWebsitesCategories
 
-  rich_text_areas_with_inheritance  :accessibility,
-                                    :contacts,
-                                    :evaluation,
-                                    :objectives,
-                                    :opportunities,
-                                    :other,
-                                    :pedagogy,
-                                    :prerequisites,
-                                    :pricing,
-                                    :pricing_apprenticeship,
-                                    :pricing_continuing,
-                                    :pricing_initial,
-                                    :registration,
-                                    :content,
-                                    :results
-
-  has_summernote :presentation
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   belongs_to :parent,
              class_name: 'Education::Program',
@@ -114,17 +97,13 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id
 
-  has_one_attached_deletable :downloadable_summary
-  has_one_attached_deletable :logo
 
+  has_one_attached_deletable :downloadable_summary # TODO L10N : To remove
+  has_one_attached_deletable :logo # TODO L10N : To remove
+  
   before_destroy :move_children
 
-  validates_presence_of :name
-  validates :downloadable_summary, size: { less_than: 50.megabytes }
-  validates :logo, size: { less_than: 5.megabytes }
-
-  scope :published, -> { where(published: true) }
-  scope :ordered_by_name, -> { order(:name) }
+  scope :ordered_by_name, -> (language) { order(:name) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(education_programs.name) ILIKE unaccent(:term)
@@ -142,30 +121,8 @@ class Education::Program < ApplicationRecord
     where(published: publication)
   }
 
-  def to_short_s
-    short_name.blank? ? to_s : short_name
-  end
-
-  def to_s
-    "#{name}"
-  end
-
-  def best_featured_image_source(fallback: true)
-    return self if featured_image.attached?
-    best_source = parent&.best_featured_image_source(fallback: false)
-    best_source ||= self if fallback
-    best_source
-  end
-
-  def git_path(website)
-    return unless published? && for_website?(website)
-    clean_path = Static.clean_path "#{git_path_content_prefix(website)}programs/#{path}/"
-    "#{clean_path}_index.html"
-  end
-
   def dependencies
     active_storage_blobs +
-    contents_dependencies +
     locations +
     university_people_through_involvements.map(&:teacher) +
     university_people_through_role_involvements.map(&:administrator) +
@@ -173,14 +130,16 @@ class Education::Program < ApplicationRecord
   end
 
   def references
-    references = schools + siblings + descendants
-    references << parent if parent.present?
-    references
+    schools + 
+    siblings + 
+    descendants +
+    [parent]
   end
 
   #####################
-  # WebsitesLinkable methods #
+  # WebsitesLinkable methods
   #####################
+
   def has_administrators?
     university_people_through_role_involvements.any? ||
     descendants.any? { |descendant| descendant.university_people_through_role_involvements.any? }
@@ -223,19 +182,6 @@ class Education::Program < ApplicationRecord
 
   def last_ordered_element
     university.education_programs.where(parent_id: parent_id).ordered.last
-  end
-
-  def explicit_blob_ids
-    super.concat [
-      featured_image&.blob_id,
-      shared_image&.blob_id,
-      downloadable_summary&.blob_id,
-      logo&.blob_id
-    ]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
   end
 
   def move_children

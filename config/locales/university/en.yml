@@ -127,9 +127,10 @@ en:
         to_year: End year
         new: Add experience
       university/person/involvement:
-        description: Mission (in this context)
         person: Person
         target_id: ''
+      university/person/involvement/localization:
+        description: Mission (in this context)
       university/person/localization:
         biography: Biography
         first_name: First name
@@ -142,8 +143,9 @@ en:
         twitter: Twitter username
         url: Website
       university/role:
-        description: Description
         people: People
+      university/role/localization:
+        description: Role description
     errors:
       models:
         university:

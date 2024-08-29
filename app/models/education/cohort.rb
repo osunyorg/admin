@@ -54,7 +54,7 @@ class Education::Cohort < ApplicationRecord
   }
 
   def to_s
-    "#{program.to_short_s} #{academic_year}"
+    "#{program.to_s_in(university.default_language)} #{academic_year}"
   end
 
   def year

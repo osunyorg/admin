@@ -29,7 +29,7 @@ module Communication::Website::Permalink::WithMapping
 
       # Les lignes commentées nous servent à ne rien oublier pendant la migration.
       # Quand la migration l10n sera terminée, tout sera décommenté.
-      # "Administration::Location::Localization" => Communication::Website::Permalink::Location,
+      "Administration::Location::Localization" => Communication::Website::Permalink::Location,
       "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
       "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
       "Communication::Website::Page::Localization" => Communication::Website::Permalink::Page,
@@ -37,8 +37,8 @@ module Communication::Website::Permalink::WithMapping
       "Communication::Website::Portfolio::Category::Localization" => Communication::Website::Permalink::Portfolio::Category,
       "Communication::Website::Post::Localization" => Communication::Website::Permalink::Post,
       "Communication::Website::Post::Category::Localization" => Communication::Website::Permalink::Category,
-      # "Education::Diploma::Localization" => Communication::Website::Permalink::Diploma,
-      # "Education::Program::Localization" => Communication::Website::Permalink::Program,
+      "Education::Diploma::Localization" => Communication::Website::Permalink::Diploma,
+      "Education::Program::Localization" => Communication::Website::Permalink::Program,
       # "Research::Journal::Paper::Localization" => Communication::Website::Permalink::Paper,
       # "Research::Journal::Volume::Localization" => Communication::Website::Permalink::Volume,
       # "Research::Publication::Localization" => Communication::Website::Permalink::Publication,

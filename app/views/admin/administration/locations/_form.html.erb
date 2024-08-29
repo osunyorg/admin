@@ -1,56 +1,51 @@
 <%= simple_form_for [:admin, location] do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
 
-  <div class="row mb-5">
-    <div class="col-md-8">
-      <%= f.input :name %>
-      <%= render 'admin/application/summary/form', f: f, about: location %>
-      <div class="row">
-        <div class="col-md-6">
-          <%= f.input :address_name %>
-          <%= f.input :address %>
-          <%= f.input :address_additional %>
-          <%= f.input :zipcode %>
-          <%= f.input :city %>
-          <%= f.input :country, input_html: { class: 'form-select' } %>
+    <div class="row mb-5">
+      <div class="col-lg-4">
+        <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
+        <%= render  "admin/application/slug/form",
+                    f: lf,
+                    source: '#administration_location_localizations_attributes_0_name' %>
+      </div>
+      <div class="col-lg-8">
+        <%= lf.input :name %>
+        <%= render 'admin/application/summary/form', f: lf, about: location %>
+        <%= lf.input :address_name %>
+        <%= f.input :address %>
+        <%= lf.input :address_additional %>
+        <div class="row">
+          <div class="col-lg-4">
+            <%= f.input :zipcode %>
+          </div>
+          <div class="col-lg-8">
+            <%= f.input :city %>
+          </div>
         </div>
-        <div class="col-md-6">
-          <%= f.input :phone %>
-          <%= f.input :url %>
-        </div>
+        <%= f.input :country, input_html: { class: 'form-select' } %>
+        <%= f.input :phone %>
+        <%= lf.input :url %>
+        <%= f.association :programs,
+                          as: :check_boxes,
+                          collection: collection_tree(
+                                        current_university.education_programs
+                                                          .tmp_original # TODO L10N : To remove
+                                                          .ordered
+                                      ),
+                          label_method: ->(p) { sanitize p[:label] },
+                          value_method: ->(p) { p[:id] } %>
+        <%= f.association :schools,
+                          as: :check_boxes,
+                          collection: current_university.education_schools
+                                                        .tmp_original # TODO L10N : To remove
+                                                        .ordered %>
       </div>
     </div>
-    <div class="col-md-4">
-      <%= osuny_panel t('metadata') do %>
-        <%= render  "admin/application/slug/form",
-                    f: f,
-                    source: '#administration_location_name' %>
-      <% end %>
-      <%= render 'admin/application/featured_image/edit', f: f, about: location %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-8">
-      <%= f.association :programs,
-                        as: :check_boxes,
-                        collection: collection_tree(
-                                      current_university.education_programs
-                                                        .in_closest_language_id(location.language_id)
-                                                        .ordered
-                                    ),
-                        label_method: ->(p) { sanitize p[:label] },
-                        value_method: ->(p) { p[:id] } %>
-    </div>
-    <div class="col-md-4">
-      <%= f.association :schools,
-                        as: :check_boxes,
-                        collection: current_university.education_schools
-                                                      .in_closest_language_id(location.language_id)
-                                                      .ordered %>
-    </div>
-  </div>
-  <% content_for :action_bar_right do %>
-    <%= submit f %>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
   <% end %>
 <% end %>

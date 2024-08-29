@@ -8,7 +8,7 @@ class Admin::Education::Programs::ApplicationController < Admin::Education::Appl
 
   def breadcrumb
     super
-    add_breadcrumb @program, [:admin, @program]
+    breadcrumb_for @program
   end
 
   def default_url_options

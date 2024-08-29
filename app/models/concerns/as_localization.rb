@@ -93,7 +93,7 @@ module AsLocalization
 
     # Handle headings & blocks if object has any
     localize_contents!(l10n) if respond_to?(:contents)
-
+    l10n
   end
 
   # standalone-category

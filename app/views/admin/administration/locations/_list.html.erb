@@ -1,25 +1,15 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= Administration::Location.human_attribute_name('name') %></th>
-        <th><%= Administration::Location.human_attribute_name('address') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% locations.ordered.each do |location| %>
-        <tr>
-          <td><%= link_to location, [:admin, location] %></td>
-          <td><%= location.full_street_address %></td>
-          <td class="text-end">
-            <div class="btn-group" role="group">
-              <%= edit_link location %>
-              <%= destroy_link location %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2 mb-3">
+  <% locations.ordered.each do |location| %>
+    <div>
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail_localized location %>
+        <div class="card-body">
+        <%= osuny_link_localized location, [:admin, location] %>
+        </div>
+        <div class="card-footer small text-muted">
+          <%= location.full_street_address %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

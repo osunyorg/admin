@@ -1,51 +1,55 @@
----
 <%
-teacher_involvements = @about.university_person_involvements
-                             .includes(:person)
-                             .ordered_by_name
-administrator_involvements = @about.involvements_through_roles
+program = @l10n.about
+language = @l10n.language
+teacher_involvements = program.university_person_involvements
+                              .includes(:person)
+                              .ordered_by_name
+administrator_involvements = program.involvements_through_roles
                                    .includes(:person)
                                    .ordered_by_name
-%>
-<%= render 'admin/application/static/title' %>
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
+
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
+            about: program,
             full_width: false,
             toc_offcanvas: true,
             toc_present: true %>
-<% if @about.downloadable_summary.attached? %>
-downloadable_summary: <%= @about.downloadable_summary.blob_id %>
+<% if @l10n.downloadable_summary.attached? %>
+downloadable_summary: <%= @l10n.downloadable_summary.blob_id %>
 <% end %>
-bodyclass: <%= @about.bodyclass %>
+bodyclass: <%= program.bodyclass %>
 website_url: >-
-  <%= @about.url %>
+  <%= @l10n.url %>
 registration_url: >-
-  <%= @about.registration_url %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/summary/static' %>
+  <%= @l10n.registration_url %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
 presentation: >-
-  <%= prepare_text_for_static @about.presentation %>
-position: <%= @about.position %>
-<% if @about.parent %>
+  <%= prepare_text_for_static @l10n.presentation %>
+position: <%= program.position %>
+<% if @l10n.parent %>
 parent:
   title: >-
-    <%= @about.parent.name %>
-  url: <%= @about.parent.current_permalink_in_website(@website)&.path %>
+    <%= @l10n.parent.name %>
+  url: <%= @l10n.parent.current_permalink_in_website(@website)&.path %>
 <% end %>
-<%= render 'admin/application/i18n/static' %>
-<%= render 'admin/application/featured_image/static' %>
-<%= render 'admin/application/shared_image/static' %>
-<% if @about.logo.attached? %>
+<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/shared_image/static', about: @l10n %>
+<% if @l10n.logo.attached? %>
 logo:
-  id: "<%= @about.logo.blob.id %>"
+  id: "<%= @l10n.logo.blob.id %>"
 <% end %>
+<% if @website %>
 related_category: "<%= @website.post_categories
-                               .find_by(program_id: @about.id)
+                               .find_by(program_id: program.id)
                                &.slug_with_ancestors_slugs %>"
-diplomas: "<%= @about.diploma&.slug %>"
+<% end %>
+diplomas: "<%= @l10n.diploma&.slug %>"
 duration: >-
-  <%= prepare_text_for_static @about.duration %>
+  <%= prepare_text_for_static @l10n.duration %>
 teachers:
 <% teacher_involvements.each do |involvement| %>
   - "<%= involvement.person.slug %>"
@@ -78,19 +82,19 @@ roles:
 roles: []
 <% end %>
 locations:
-<% @about.locations.each do |location| %>
+<% program.locations.each do |location| %>
   - path: <%= location.current_permalink_in_website(@website)&.path %>
     slug: <%= location.slug %>
 <% end %>
-apprenticeship: <%= @about.apprenticeship %>
-capacity: <%= @about.capacity %>
-continuing: <%= @about.continuing %>
-initial: <%= @about.initial %>
+apprenticeship: <%= program.apprenticeship %>
+capacity: <%= program.capacity %>
+continuing: <%= program.continuing %>
+initial: <%= program.initial %>
 certifications:
   qualiopi:
-    certified: <%= @about.qualiopi_certified %>
+    certified: <%= program.qualiopi_certified %>
     text: >-
-      <%= prepare_html_for_static @about.qualiopi_text %>
+      <%= prepare_html_for_static @l10n.qualiopi_text %>
 <%
 [
   :accessibility,
@@ -110,7 +114,7 @@ certifications:
   :results
 ].each do |property| %>
 <%= property.to_s %>: >-
-  <%= prepare_html_for_static @about.send("best_#{property}") %>
+  <%= prepare_html_for_static @l10n.send("best_#{property}") %>
 <% end %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---

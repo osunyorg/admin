@@ -127,9 +127,10 @@ fr:
         organization_name: Organisation
         to_year: Année de fin
       university/person/involvement:
-        description: Mission (dans ce contexte)
         person: Personne
         target_id: ''
+      university/person/involvement/localization:
+        description: Mission (dans ce contexte)
       university/person/localization:
         biography: Biographie
         first_name: Prénom
@@ -142,8 +143,9 @@ fr:
         twitter: Twitter (nom d'utilisateur)
         url: Site web
       university/role:
-        description: Description
         people: Personnes
+      university/role/localization:
+        description: Description du rôle
     errors:
       models:
         university:

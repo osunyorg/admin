@@ -1,10 +1,44 @@
-<% content_for :title, @teacher %>
+<% content_for :title, @l10n %>
 
-<%= render 'admin/university/people/main_infos', person: @teacher %>
+<% if @involvements.any? %>
+  <p><%= "#{@involvements.count} #{Education::Program.model_name.human(count: @involvements.count).downcase}" %></p>
+  <div class="row g-2 mb-3">
+    <% @involvements.each do |involvement| %>
+      <%
+        program = involvement.target
+        involvement_l10n = involvement.best_localization_for(current_language)
+      %>
+      <div>
+        <div class="card card--horizontal">
+          <%= osuny_thumbnail_localized program %>
+          <div class="card-body">
+            <%= osuny_link_localized program, [:admin, program] %>
+          </div>
+          <div class="card-footer">
+            <span class="me-4 <%= 'text-muted fst-italic' if involvement_l10n.language_id != current_language.id %>"><%= involvement_l10n.description %></span>
+            <%= link_to t('quit'),
+                        admin_education_program_teacher_path(involvement, { program_id: program.id }),
+                        method: :delete,
+                        data: { confirm: t('please_confirm') },
+                        class: button_classes_danger if can?(:destroy, involvement) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p><%= t('admin.education.programs.teacher.no_teaching') %></p>
+<% end %>
 
-<%= render 'admin/education/teachers/show/programs', involvements: @involvements %>
+<div class="mt-5 small">
+  <p><%= t('admin.education.programs.teacher.show_person_html') %></p>
+  <%= link_to t('show'), admin_university_person_path(@teacher) %>
+</div>
+
+<% content_for :action_bar_left do %>
+  <%= static_link static_admin_education_teacher_path(@teacher) %>
+<% end %>
 
 <% content_for :action_bar_right do %>
-  <%= edit_link @teacher %>
   <%= link_to t('education.manage_programs'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:update, @teacher) %>
 <% end %>
