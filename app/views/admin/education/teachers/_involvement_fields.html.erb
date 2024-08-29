@@ -6,7 +6,11 @@
         <div class="col-md-5">
           <%= f.hidden_field :target_type, value: "Education::Program" %>
           <%= f.association :target,
-                            collection: osuny_collection_tree(current_university.education_programs, localized: true),
+                            collection: osuny_collection_tree(
+                              current_university.education_programs
+                                                .tmp_original, # TODO L10N: REMOVE
+                              localized: true
+                            ),
                             label: false,
                             include_blank: t('simple_form.include_blanks.defaults.program'),
                             required: true,
