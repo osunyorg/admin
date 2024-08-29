@@ -1,11 +1,11 @@
-<% content_for :title, @role %>
+<% content_for :title, @l10n %>
 
 <% if @involvements.any? %>
   <div class="table-responsive">
     <table class="<%= table_classes %>">
       <thead>
         <tr>
-          <% if can? :reorder, University::Role %>
+          <% if can? :reorder, University::Person::Involvement %>
             <th width="20" class="ps-0">&nbsp;</th>
           <% end %>
           <th class="ps-0"><%= University::Person.model_name.human %></th>
@@ -15,13 +15,13 @@
       <tbody data-sortable data-sort-url="<%= reorder_admin_education_program_role_people_path(@role, { program_id: @program.id }) %>">
         <% @involvements.each do |involvement| %>
           <tr data-id="<%= involvement.id %>">
-            <% if can? :reorder, University::Role %>
+            <% if can? :reorder, University::Person::Involvement %>
               <td><i class="<%= Icon::DRAG %> handle"></i></td>
             <% end %>
             <td class="ps-0">
-              <%= link_to_if  can?(:read, involvement.person),
-                              involvement.person,
-                              [:admin, involvement.person] %>
+              <%= osuny_link_localized_if can?(:read, involvement.person),
+                                          involvement.person,
+                                          [:admin, involvement.person] %>
             </td>
             <td class="text-end pe-0">
               <%= link_to t('remove'),

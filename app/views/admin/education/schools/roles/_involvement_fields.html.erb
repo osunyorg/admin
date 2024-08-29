@@ -7,14 +7,14 @@ end
 l10n ||= f.object.localizations.build(language_id: current_language.id)
 %>
 <%= f.simple_fields_for :localizations, l10n do |lf| %>
-  <%= lf.hidden_field :id %>
-  <%= lf.hidden_field :language_id, value: current_language.id %>
   <div class="nested-fields mb-2">
     <div class="row pure__row--small align-items-center">
       <div class="col-1">
         <i class="<%= Icon::DRAG %> handle"></i>
       </div>
       <div class="col-9">
+        <%= lf.hidden_field :id %>
+        <%= lf.hidden_field :language_id, value: current_language.id %>
         <%= f.association :person,
                           collection: osuny_collection(@administration_people, localized: true, label_method: :to_s_alphabetical),
                           label: false,

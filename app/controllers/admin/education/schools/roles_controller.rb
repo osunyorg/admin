@@ -75,7 +75,6 @@ class Admin::Education::Schools::RolesController < Admin::Education::Schools::Ap
           )
           .merge(
             target: @school,
-            language_id: @school.language_id,
             university_id: @school.university_id
           )
   end
