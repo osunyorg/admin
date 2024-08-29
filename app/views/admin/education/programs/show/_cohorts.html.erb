@@ -3,10 +3,14 @@
     <div>
       <div class="card card--horizontal">
         <div class="card-body">
-          <%= link_to cohort.academic_year, [:admin, cohort], class: 'stretched-link' %>
-          <span class="small text-muted">
-            <%= cohort.school.to_s_in(current_language) %>
-          </span>
+          <div class="row">
+            <div class="col-lg-6">
+              <%= link_to cohort.academic_year, [:admin, cohort], class: 'stretched-link' %>
+            </div>
+            <div class="col-lg-6">
+              <%= cohort.school.to_s_in(current_language) %>
+            </div>
+          </div>
         </div>
         <div class="card-footer small text-muted">
           <%= cohort.people.count %>
