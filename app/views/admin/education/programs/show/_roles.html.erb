@@ -20,16 +20,16 @@ end
           <% @roles.each do |role| %>
             <tr>
               <td class="ps-0">
-                <%= link_to_if  can?(:update, role),
-                                role,
-                                edit_admin_education_program_role_path(role, { program_id: @program.id }) %>
+                <%= osuny_link_localized_if can?(:update, role),
+                                            role,
+                                            edit_admin_education_program_role_path(role, { program_id: @program.id }) %>
               </td>
               <td>
                 <%= role.involvements.includes(:person).ordered.map { |involvement|
                   person = involvement.person
-                  link_to_if  can?(:read, person), 
-                              person.best_localization_for(current_language).to_s, 
-                              admin_university_person_path(person) 
+                  link_to_if  can?(:read, person),
+                              person.best_localization_for(current_language).to_s,
+                              admin_university_person_path(person)
                 }.to_sentence.html_safe %>
               </td>
             </tr>

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: university_person_involvement_localizations
+# Table name: university_role_localizations
 #
 #  id            :uuid             not null, primary key
 #  description   :string
@@ -12,17 +12,17 @@
 #
 # Indexes
 #
-#  idx_on_language_id_75d7367448                                  (language_id)
-#  idx_on_university_id_0b815cf13a                                (university_id)
-#  index_university_person_involvement_localizations_on_about_id  (about_id)
+#  index_university_role_localizations_on_about_id       (about_id)
+#  index_university_role_localizations_on_language_id    (language_id)
+#  index_university_role_localizations_on_university_id  (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_69c929cdec  (university_id => universities.id)
-#  fk_rails_69e7defd73  (language_id => languages.id)
-#  fk_rails_ec0c3f2630  (about_id => university_person_involvements.id)
+#  fk_rails_5533803f3b  (about_id => university_roles.id)
+#  fk_rails_922921fab8  (university_id => universities.id)
+#  fk_rails_c269f41345  (language_id => languages.id)
 #
-class University::Person::Involvement::Localization < ApplicationRecord
+class University::Role::Localization < ApplicationRecord
   include AsLocalization
   include Sanitizable
   include WithUniversity
@@ -33,6 +33,10 @@ class University::Person::Involvement::Localization < ApplicationRecord
     target_l10n = about.target.localization_for(language)
     return unless target_l10n.present?
     target_l10n.try(:sync_with_git)
+  end
+
+  def to_s
+    "#{description}"
   end
 
 end

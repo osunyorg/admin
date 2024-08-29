@@ -8,7 +8,7 @@ namespace :education do
   end
   resources :programs do
     resources :roles, controller: 'programs/roles' do
-      resources :people, controller: 'programs/role/people', only: [:destroy] do
+      resources :people, controller: 'programs/roles/people', only: [:destroy] do
         post :reorder, on: :collection
       end
       collection do

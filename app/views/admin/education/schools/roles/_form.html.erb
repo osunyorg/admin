@@ -1,34 +1,39 @@
-<%= simple_form_for [:admin, role],
-                    url: role.new_record? ? admin_education_school_roles_path(@school)
-                                          : admin_education_school_role_path(role, { school_id: @school.id }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%
+url = role.new_record?  ? admin_education_school_roles_path(@school)
+                        : admin_education_school_role_path(role, { school_id: @school.id })
+%>
+<%= simple_form_for role, url: url do |f| %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
+    <%= lf.hidden_field :language_id, value: current_language.id %>
 
-  <div class="row">
-    <div class="col-lg-6">
-      <%= f.input :description, as: :string %>
-      <%
-      action = link_to_add_association  t('add'), 
-                                        f, 
-                                        :involvements, 
-                                        class: button_classes, 
-                                        data: {
-                                          'association-insertion-method': 'append',
-                                          'association-insertion-node':   '#involvements'
-                                        }
-      %>
-      <%= osuny_panel University::Person.model_name.human(count: 2), action: action do %>
-        <div class="pt-2" id="involvements" data-sortable="inputs">
-          <%= f.simple_fields_for :involvements, role.involvements.sort_by(&:position), include_id: false do |involvement_f| %>
-            <%= render 'admin/education/schools/roles/involvement_fields', f: involvement_f, include_id: true %>
-          <% end %>
-        </div>
-      <% end %>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= lf.input :description %>
+        <%
+        action = link_to_add_association  t('add'),
+                                          f,
+                                          :involvements,
+                                          class: button_classes,
+                                          data: {
+                                            'association-insertion-method': 'append',
+                                            'association-insertion-node':   '#involvements'
+                                          }
+        %>
+        <%= osuny_panel University::Person.model_name.human(count: 2), action: action do %>
+          <div class="pt-2" id="involvements" data-sortable="inputs">
+            <%= f.simple_fields_for :involvements, role.involvements.sort_by(&:position), include_id: false do |involvement_f| %>
+              <%= render 'admin/education/schools/roles/involvement_fields', f: involvement_f, include_id: true %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-  <% content_for :action_bar_right do %>
-    <%= submit f %>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
   <% end %>
 <% end %>

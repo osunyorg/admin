@@ -18,9 +18,9 @@
               <td><i class="<%= Icon::DRAG %> handle"></i></td>
             <% end %>
             <td class="ps-0">
-              <%= link_to_if  can?(:read, role),
-                              role,
-                              admin_education_school_role_path(role, { school_id: @school.id }) %>
+              <%= osuny_link_localized_if can?(:read, role),
+                                          role,
+                                          admin_education_school_role_path(role, { school_id: @school.id }) %>
             </td>
             <td>
               <% role.involvements.includes(:person).ordered.map do |involvement| %>
