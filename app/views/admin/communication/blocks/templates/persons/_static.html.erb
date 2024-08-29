@@ -8,7 +8,6 @@ block.template.selected_elements.each do |element|
   person_l10n = person.localization_for(block.language)
   next if person_l10n.nil?
 %>
-        <%# TODO L10N : Handle Person::Localization here %>
         - slug: "<%= person_l10n.slug %>"
 <%= block_component_static block, :role, template: element, depth: 5 %>
 <% end %>

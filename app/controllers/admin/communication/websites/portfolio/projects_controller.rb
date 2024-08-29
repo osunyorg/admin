@@ -13,7 +13,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   def index
     @projects = apply_scopes(@projects).tmp_original # TODO L10N : To remove
-                                     .ordered
+                                     .ordered(current_language)
                                      .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/portfolio'
     breadcrumb

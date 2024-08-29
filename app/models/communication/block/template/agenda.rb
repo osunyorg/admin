@@ -66,14 +66,16 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
 
   protected
 
-  # TODO L10N : To adjust
   def link_to_events
-    website.special_page(Communication::Website::Page::CommunicationAgenda, language: block.language).path
+    special_page = website.special_page(Communication::Website::Page::CommunicationAgenda)
+    special_page_l10n = special_page.localization_for(block.language)
+    special_page_l10n.current_permalink_in_website(website)&.path
   end
 
-  # TODO L10N : To adjust
   def link_to_events_archive
-    website.special_page(Communication::Website::Page::CommunicationAgendaArchive, language: block.language).path
+    special_page = website.special_page(Communication::Website::Page::CommunicationAgendaArchive)
+    special_page_l10n = special_page.localization_for(block.language)
+    special_page_l10n.current_permalink_in_website(website)&.path
   end
 
   def link_to_category
@@ -81,8 +83,9 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def base_events
-    # TODO L10N : Handle publication state
-    events = website.events.for_language(block.language)
+    events = website.events
+                    .tmp_original # TODO L10N: to remove
+                    .published_now_in(block.language)
     events = events.send(time) if time.in? AUTHORIZED_SCOPES
     events
   end

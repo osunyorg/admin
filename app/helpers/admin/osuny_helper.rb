@@ -96,28 +96,32 @@ module Admin::OsunyHelper
     link_to_if condition, name, path, class: classes.strip, data: { confirm: alert }
   end
 
-  def osuny_collection(list, except: nil, localized: false)
+  def osuny_collection(list, except: nil, localized: false, label_method: :to_s)
     collection = list.ordered(current_language).map do |object|
-      label = localized ? object.best_localization_for(current_language).try(:to_s) : object.to_s
+      object_for_label = localized ? object.best_localization_for(current_language) : object
+      label = label_method.respond_to?(:call) ? label_method.call(object_for_label)
+                                              : object_for_label.public_send(label_method)
       id = object.id
-      collection << [label, id]
+      [label, id]
     end
     collection = collection.reject { |o| o.last == except.id } unless except.nil?
     collection
   end
 
-  def osuny_collection_tree(list, except: nil, localized: false)
-    collection = osuny_collection_recursive(list.root, 0, localized)
+  def osuny_collection_tree(list, except: nil, localized: false, label_method: :to_s)
+    collection = osuny_collection_recursive(list.root, 0, localized, label_method)
     collection = collection.reject { |o| o.last == except.id } unless except.nil?
     collection
   end
 
   private
 
-  def osuny_collection_recursive(list, level, localized)
+  def osuny_collection_recursive(list, level, localized, label_method)
     collection = []
     list.ordered.each do |object|
-      name = localized ? object.best_localization_for(current_language).try(:to_s) : object.to_s
+      object_for_name = localized ? object.best_localization_for(current_language) : object
+      name = label_method.respond_to?(:call) ? label_method.call(object_for_name)
+                                             : object_for_name.public_send(label_method)
       label = sanitize("&nbsp;&nbsp;&nbsp;&nbsp;" * level + name)
       id = object.id
       collection << [label, id]
@@ -125,7 +129,8 @@ module Admin::OsunyHelper
         osuny_collection_recursive(
           object.children,
           level + 1,
-          localized
+          localized,
+          label_method
         )
       )
     end

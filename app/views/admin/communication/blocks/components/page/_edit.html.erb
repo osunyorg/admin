@@ -1,7 +1,8 @@
 <%
 pages = osuny_collection_tree(
   block.about.website.pages
-    .tmp_original # TODO L10N : remove
+    .tmp_original, # TODO L10N : remove
+  localized: true
 )
 %>
 <% unless label.blank? %>

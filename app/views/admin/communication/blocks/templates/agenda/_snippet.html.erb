@@ -1,9 +1,13 @@
 <p class="mb-0">
   <% if block.template.mode == 'categories' %>
-    <%= @website.agenda_categories.collect(&:to_s).join(', ') %>
+    <%= @website.agenda_categories
+                .map { |category| category.to_s_in(block.language) }
+                .join(', ') %>
   <% else %>
     <% if block.template.selected_events.any? %>
-      <%= block.template.selected_events.collect(&:to_s).join(', ') %>
+      <%= block.template.selected_events
+                        .map { |event| event.to_s_in(block.language) }
+                        .join(', ') %>
     <% else %>
       <%= block.template.no_event_message %>
     <% end %>

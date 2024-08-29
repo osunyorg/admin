@@ -328,6 +328,7 @@ fr:
     communication:
       block:
         copied: Le bloc a bien été copié dans le presse-papier.
+        drag_and_drop: Drag and drop
         language_mismatch_alert: Le bloc n'existe pas dans cette langue.
       website:
         agenda:
@@ -374,6 +375,7 @@ fr:
         portfolio:
           projects:
             draft: Brouillon
+            in: dans %{categories}
             none: Pas encore de projet
         post:
           localizations:

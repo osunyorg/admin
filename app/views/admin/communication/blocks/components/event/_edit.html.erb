@@ -1,7 +1,9 @@
-<% events = block.about
-                 .website.events
-                 .tmp_original # TODO L10N : remove
-                 .ordered %>
+<% events = osuny_collection(
+  block.about.website.events
+       .tmp_original, # TODO L10N : remove
+  localized: true,
+  label_method: :to_s_with_subtitle
+ ) %>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>
@@ -13,13 +15,6 @@
     <option value="" disabled><%= placeholder %></option>
   <% end %>
   <% events.each do |event| %>
-    <% event_l10n = event.best_localization_for(block.language) %>
-    <option value="<%= event.id %>">
-      <%# TODO L10N : doit devenir  %>
-      <%= event_l10n.to_s %>
-      <% if event_l10n.subtitle.present? %>
-        - <%= event_l10n.subtitle %>
-      <% end %>
-    </option>
+    <option value="<%= event.last %>"><%= event.first %></option>
   <% end %>
 </select>
