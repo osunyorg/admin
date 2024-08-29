@@ -4,7 +4,7 @@ module Admin::HasStaticAction
   def static
     @about = @l10n
     object = @l10n.about
-    @website = object.try(:website) || object.try(:websites)&.first 
+    @website = object.try(:website) || object.try(:websites)&.first
     partial = @about.template_static
     render  partial, 
             layout: false, 

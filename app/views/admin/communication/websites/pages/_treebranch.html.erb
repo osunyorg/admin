@@ -38,7 +38,8 @@
                 treeview__children
                 js-treeview-children
                 mt-2
-                <%= 'js-treeview-sortable-container' if can?(:reorder, page) %>" data-id="<%= page.id %>">
+                <%= 'js-treeview-sortable-container' if can?(:reorder, page) %>"
+        data-id="<%= page.id %>">
       <li class="treeview__empty">
         <div class="d-flex align-items-center treeview__label py-1">
           <span class="p-2 ps-0"><%= t('folder.empty') %></span>

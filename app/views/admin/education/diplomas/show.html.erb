@@ -1,13 +1,13 @@
-<% content_for :title, @diploma %>
+<% content_for :title, @l10n %>
 
 <div class="row">
   <div class="col-lg-4">
-    <%= osuny_panel Education::Diploma.human_attribute_name('name'), small: true do %>
-      <p class="lead"><%= @diploma.name %></p>
+    <%= osuny_panel Education::Diploma::Localization.human_attribute_name('name'), small: true do %>
+      <p class="lead"><%= @l10n.name %></p>
     <% end %>
   </div>
   <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @diploma, small: true %>
+    <%= render 'admin/application/summary/show', about: @l10n, small: true %>
   </div>
 </div>
 
@@ -27,30 +27,22 @@
           <td class="text-end"><%= @diploma.ects %></td>
         </tr>
         <tr>
-          <th><%= osuny_label Education::Diploma.human_attribute_name('duration') %></th>
-          <td class="text-end"><%= @diploma.duration %></td>
+          <th><%= osuny_label Education::Diploma::Localization.human_attribute_name('duration') %></th>
+          <td class="text-end"><%= @l10n.duration %></td>
         </tr>
         <tr>
-          <th><%= osuny_label Education::Diploma.human_attribute_name('short_name') %></th>
-          <td class="text-end"><%= @diploma.short_name %></td>
+          <th><%= osuny_label Education::Diploma::Localization.human_attribute_name('short_name') %></th>
+          <td class="text-end"><%= @l10n.short_name %></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 
-<%= render 'admin/communication/blocks/content/editor', about: @diploma %>
+<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
 
-<div class="row">
-  <div class="col-lg-4">
-    <h2 class="h4"><%= Education::Program.model_name.human(count: 2) %></h2>
-  </div>
-  <div class="col-lg-8">
-    <%= render 'admin/education/programs/list', programs: @programs, hide_diploma: true %>
-  </div>
-</div>
-
-<%= render 'admin/application/i18n/widget', about: @diploma, small: true %>
+<h2 class="h4"><%= Education::Program.model_name.human(count: 2) %></h2>
+<%= render 'admin/education/programs/list', programs: @programs, hide_diploma: true %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @diploma %>

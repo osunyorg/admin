@@ -1,5 +1,6 @@
 <% content_for :title, Education::Program.model_name.human(count: 2) %>
 
+<p>&nbsp;</p><%# Filtres %>
 <%= render 'filters',
             current_path: admin_education_programs_path,
             filters: @filters if @filters.any?  %>

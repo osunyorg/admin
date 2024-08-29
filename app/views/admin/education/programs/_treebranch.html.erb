@@ -1,31 +1,47 @@
 <% programs.each do |program| %>
-  <li class="treeview__element js-treeview-element <%= 'treeview__element--draft' unless program.published %> <%= 'treeview__element--empty' unless program.has_children? %>" data-id="<%= program.id %>" data-parent="<%= program.parent_id %>">
-    <div class="d-flex align-items-center treeview__label border-bottom p-1">
+  <li class=" treeview__element 
+              js-treeview-element
+              mb-2
+              <%= 'treeview__element--draft' unless program.published %>
+              <%= 'treeview__element--empty' unless program.has_children? %>"
+      data-id="<%= program.id %>"
+      data-parent="<%= program.parent_id %>">
+    <div class="card card--horizontal treeview__label">
       <%= link_to children_admin_education_program_path(id: program.id),
-                  class: 'js-treeview-openzone d-inline-block p-2 ps-0', style: 'width: 22px', remote: true do %>
-        <%= render 'admin/application/tree/folder' %>
+                  class: 'js-treeview-openzone d-inline-block', remote: true do %>
+        <%= osuny_thumbnail_localized program %>
       <% end %>
-      <%= link_to program,
-                  admin_education_program_path(id: program.id),
-                  class: 'leaf-title'  %>
-      <%= render 'admin/application/tree/sort' %>
-      <%= link_to children_admin_education_program_path(id: program.id),
-                  class: 'js-treeview-openzone small ps-2', remote: true do %>
-        <span class="open_text"><%= t 'folder.open' %></span>
-        <span class="close_text"><%= t 'folder.close' %></span>
-      <% end %>
-      <div class="btn-group ms-auto" role="group">
-        <%= edit_link program %>
-        <%= destroy_link program, confirm_message: t('please_confirm') %>
+      <div class="card-body">
+        <span class="leaf-title">
+          <%= osuny_published_localized program %>
+          <%= osuny_link_localized  program,
+                                    admin_education_program_path(id: program.id) %>
+          <% if program.children.any? %>
+            <span class="text-muted">(<%= program.children.count %>)</span>
+          <% end %>
+        </span>
+        <span class="show-on-hover">
+          <%= render 'admin/application/tree/sort' %>
+          <%= link_to children_admin_education_program_path(id: program.id),
+                      class: 'js-treeview-openzone small ps-2', remote: true do %>
+            <span class="open_text"><%= t 'folder.open' %></span>
+            <span class="close_text"><%= t 'folder.close' %></span>
+          <% end %>
+        </span>
       </div>
     </div>
-    <ul class="list-unstyled treeview__children js-treeview-children <%= 'js-treeview-sortable-container' if can?(:reorder, program) %> ms-4" data-id="<%= program.id %>">
+    <ul class=" list-unstyled
+                treeview__children
+                js-treeview-children 
+                mt-2
+                <%= 'js-treeview-sortable-container' if can?(:reorder, program) %>"
+        data-id="<%= program.id %>">
       <li class="treeview__empty">
-        <div class="d-flex align-items-center treeview__label border-bottom p-1">
+        <div class="d-flex align-items-center treeview__label py-1">
           <span class="p-2 ps-0"><%= t('folder.empty') %></span>
         </div>
       </li>
-      <li class="treeview__loading border-bottom p-1"><%= t('loading') %></li>
+      <li class="treeview__loading p-2"><%= t('loading') %></li>
     </ul>
   </li>
 <% end %>

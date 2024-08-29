@@ -31,12 +31,15 @@
 #  fk_rails_5c704f6338  (university_id => universities.id)
 #
 class University::Person::Involvement < ApplicationRecord
-  include Sanitizable
   include Localizable
-  include WithUniversity
   include WithPosition
+  include WithUniversity
 
-  enum kind: { administrator: 10, researcher: 20, teacher: 30 }
+  enum kind: { 
+    administrator: 10, 
+    researcher: 20, 
+    teacher: 30 
+  }
 
   belongs_to :person, class_name: 'University::Person'
   # Can be an Education::Program, a Research::Laboratory, or a University::Role (attached to Programs or Schools)
@@ -45,9 +48,9 @@ class University::Person::Involvement < ApplicationRecord
   validates :person_id, uniqueness: { scope: [:target_id, :target_type] }
   validates :target_id, uniqueness: { scope: [:person_id, :target_type] }
 
-  before_validation :set_kind, on: :create
-
-  after_commit :sync_with_git
+  before_validation :set_kind,
+                    :set_university_id,
+                    on: :create
 
   scope :ordered_by_name, -> {
     joins(:person).select('university_person_involvements.*')
@@ -55,12 +58,8 @@ class University::Person::Involvement < ApplicationRecord
   }
   scope :ordered_by_date, -> { order(:created_at) }
 
-  def to_s
-    "#{person}"
-  end
-
-  def sync_with_git
-    target.sync_with_git if target.respond_to? :sync_with_git
+  def to_s_in(language)
+    "#{person.to_s_in(language)}"
   end
 
   protected
@@ -78,6 +77,10 @@ class University::Person::Involvement < ApplicationRecord
     else # University::Role (attached to Programs or Schools)
       self.kind = :administrator
     end
+  end
+
+  def set_university_id
+    self.university_id = person.university_id
   end
 
 end

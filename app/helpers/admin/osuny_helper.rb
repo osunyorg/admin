@@ -127,7 +127,7 @@ module Admin::OsunyHelper
       collection << [label, id]
       collection.concat(
         osuny_collection_recursive(
-          object.children,
+          object.children.tmp_original, # TODO L10N : To remove
           level + 1,
           localized,
           label_method

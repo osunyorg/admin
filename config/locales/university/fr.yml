@@ -142,7 +142,7 @@ fr:
         twitter: Twitter (nom d'utilisateur)
         url: Site web
       university/role:
-        description: Description
+        description: Description du rôle
         people: Personnes
     errors:
       models:

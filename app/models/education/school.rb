@@ -35,14 +35,20 @@ class Education::School < ApplicationRecord
   include Sanitizable
   include Localizable
   include WebsitesLinkable
-  include WithAlumni
-  include WithBlobs
+  include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithGitFiles
   include WithLocations
   include WithPrograms # must come before WithAlumni and WithTeam
+  include WithAlumni
   include WithTeam
   include WithUniversity
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   # 'websites' might override the same method defined in WithWebsites, so we use the full name
   has_many    :communication_websites,
@@ -50,10 +56,9 @@ class Education::School < ApplicationRecord
               as: :about,
               dependent: :nullify
 
-  has_one_attached_deletable :logo
+  has_one_attached_deletable :logo # TODO L10N : To remove
 
-  validates :name, :address, :city, :zipcode, :country, presence: true
-  validates :logo, size: { less_than: 1.megabytes }
+  validates :address, :city, :zipcode, :country, presence: true
 
   scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {
@@ -70,16 +75,7 @@ class Education::School < ApplicationRecord
     joins(:programs).where(education_programs: { id: program_id })
   }
 
-  def to_s
-    "#{name}"
-  end
-
-  def git_path(website)
-    "data/school.yml"
-  end
-
   def dependencies
-    active_storage_blobs +
     programs +
     # As diplomas are here through programs, and diploma being a program's dependency, it this necessary?
     diplomas +
@@ -98,14 +94,6 @@ class Education::School < ApplicationRecord
 
   def has_research_volumes?
     false
-  end
-
-  protected
-
-  def explicit_blob_ids
-    [
-      logo&.blob_id
-    ]
   end
 
 end

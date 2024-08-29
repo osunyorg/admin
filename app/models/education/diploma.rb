@@ -31,16 +31,20 @@
 #
 class Education::Diploma < ApplicationRecord
   include AsIndirectObject
-  include Contentful
-  include Permalinkable
+  include Contentful # TODO L10N : remove after migrations
   include Sanitizable
   include Localizable
-  include WithGitFiles
   include WithUniversity
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   has_many :programs, dependent: :nullify
 
-  scope :ordered, -> { order(:level, :name) }
+  scope :ordered, -> { order(:level) }
 
   enum level: {
     not_applicable: 0,
@@ -55,19 +59,7 @@ class Education::Diploma < ApplicationRecord
     doctor: 800
   }
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}diplomas/#{slug}/_index.html" if for_website?(website)
-  end
-
   def dependencies
-    blocks
-  end
-
-  def references
-    programs
-  end
-
-  def to_s
-    "#{name}"
+    localizations
   end
 end

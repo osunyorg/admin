@@ -22,9 +22,7 @@
                   <br>
                   <small>
                     <%= role_target.class.model_name.human %> :
-                    <%= link_to_if  can?(:read, role_target),
-                                    role_target,
-                                    [:admin, role_target] if role_target.present? %>
+                    <%= osuny_link_localized role_target, [:admin, role_target] %>
                   </small>
                 <% end %>
               </td>

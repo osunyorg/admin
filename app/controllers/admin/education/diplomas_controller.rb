@@ -2,23 +2,17 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   load_and_authorize_resource class: Education::Diploma,
                               through: :current_university
 
+  include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @diplomas = @diplomas.in_closest_language_id(current_language.id)
-                         .ordered
+    @diplomas = @diplomas.tmp_original.ordered # TODO L10N: remove
     breadcrumb
   end
 
   def show
-    @programs = @diploma.programs.ordered.page params[:page]
+    @programs = @diploma.programs.tmp_original.ordered.page params[:page]
     breadcrumb
-  end
-
-  def static
-    @about = @diploma
-    @website = @diploma.websites&.first
-    render_as_plain_text
   end
 
   def new
@@ -31,10 +25,9 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   end
 
   def create
-    @diploma.language_id = current_language.id
     if @diploma.save
       redirect_to [:admin, @diploma],
-                  notice: t('admin.successfully_created_html', model: @diploma.to_s)
+                  notice: t('admin.successfully_created_html', model: @diploma.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -44,7 +37,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def update
     if @diploma.update(diploma_params)
       redirect_to [:admin, @diploma],
-                  notice: t('admin.successfully_updated_html', model: @diploma.to_s)
+                  notice: t('admin.successfully_updated_html', model: @diploma.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -55,7 +48,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def destroy
     @diploma.destroy
     redirect_to admin_education_diplomas_url,
-                notice: t('admin.successfully_destroyed_html', model: @diploma.to_s)
+                notice: t('admin.successfully_destroyed_html', model: @diploma.to_s_in(current_language))
   end
 
   private
@@ -68,7 +61,13 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
 
   def diploma_params
     params.require(:education_diploma)
-          .permit(:name, :slug, :short_name, :summary, :level, :ects, :duration)
+          .permit(
+            :level, :ects,
+            localizations_attributes: [
+              :id, :name, :slug, :short_name, :summary, :duration,
+              :language_id
+            ]
+          )
           .merge(
             university_id: current_university.id
           )
