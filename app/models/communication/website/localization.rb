@@ -37,6 +37,7 @@
 #
 class Communication::Website::Localization < ApplicationRecord
   include AsLocalization
+  include Initials
   include WithPublication
   include WithUniversity
 
