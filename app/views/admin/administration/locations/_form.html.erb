@@ -14,20 +14,20 @@
       <div class="col-lg-8">
         <%= lf.input :name %>
         <%= render 'admin/application/summary/form', f: lf, about: location %>
+        <%= lf.input :address_name %>
+        <%= f.input :address %>
+        <%= lf.input :address_additional %>
         <div class="row">
-          <div class="col-md-6">
-            <%= lf.input :address_name %>
-            <%= f.input :address %>
-            <%= lf.input :address_additional %>
+          <div class="col-lg-4">
             <%= f.input :zipcode %>
-            <%= f.input :city %>
-            <%= f.input :country, input_html: { class: 'form-select' } %>
           </div>
-          <div class="col-md-6">
-            <%= f.input :phone %>
-            <%= lf.input :url %>
+          <div class="col-lg-8">
+            <%= f.input :city %>
           </div>
         </div>
+        <%= f.input :country, input_html: { class: 'form-select' } %>
+        <%= f.input :phone %>
+        <%= lf.input :url %>
         <%= f.association :programs,
                           as: :check_boxes,
                           collection: collection_tree(
