@@ -16,17 +16,18 @@ en:
     attributes:
       administration/location:
         address: Address
-        address_additional: Additional address
-        address_name: Address name
         city: City
         country: Country
-        name: Name
         phone: Telephone
         programs: Programs
         schools: Schools
-        url: Website
         websites: Linked websites
         zipcode: Zipcode
+      administration/location/localization:
+        address_additional: Additional address
+        address_name: Address name
+        name: Name
+        url: Website
       administration/qualiopi/criterion:
         number: Number
         name: Name

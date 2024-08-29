@@ -19,6 +19,9 @@ SimpleNavigation::Configuration.run do |navigation|
                   admin_administration_locations_path
     primary.item  :subnav_qualiopi,
                   Administration::Qualiopi.model_name.human(count: 2),
-                  admin_administration_qualiopi_criterions_path
+                  admin_administration_qualiopi_criterions_path,
+                  highlights_on: lambda { 
+                    controller_name.in?(["indicators", "criterions"])
+                  }
   end
 end
