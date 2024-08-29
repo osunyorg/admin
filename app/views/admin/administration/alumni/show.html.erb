@@ -11,13 +11,13 @@
         <div class="card card--horizontal">
           <%= osuny_thumbnail_localized cohort.program %>
           <div class="card-body">
-            <%= osuny_link_localized cohort.program, [:admin, cohort.program], classes: 'stretched-link' %>
-            <p class="small text-muted mb-0">
-              <%= cohort.school.to_s_in(current_language) %>
-            </p>
+            <%= link_to cohort.academic_year, [:admin, cohort], class: 'stretched-link' %>
+            <span class="small">
+              <%= cohort.program.to_s_in(current_language) %>
+            </span>
           </div>
-          <div class="card-footer">
-            <%= cohort.academic_year %>
+          <div class="card-footer small text-muted">
+            <%= cohort.school.to_s_in(current_language) %>
           </div>
         </div>
       </div>

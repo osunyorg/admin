@@ -1,25 +1,18 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= Education::Cohort.human_attribute_name('year') %></th>
-        <th><%= Education::Cohort.human_attribute_name('school') %></th>
-        <th><%= Education::Cohort.human_attribute_name('alumni') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @program.cohorts.ordered.each do |cohort| %>
-        <tr>
-          <td>
-            <%= link_to [:admin, cohort] do %>
-              <%= cohort.academic_year %>
-              <%= cohort.name %>
-            <% end %>
-          </td>
-          <td><%= link_to_if can?(:read, cohort.school), cohort.school, [:admin, cohort.school] %></td>
-          <td><%= cohort.people.count %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2">
+  <% @program.cohorts.ordered.each do |cohort| %>
+    <div>
+      <div class="card card--horizontal">
+        <div class="card-body">
+          <%= link_to cohort.academic_year, [:admin, cohort], class: 'stretched-link' %>
+          <span class="small text-muted">
+            <%= cohort.school.to_s_in(current_language) %>
+          </span>
+        </div>
+        <div class="card-footer small text-muted">
+          <%= cohort.people.count %>
+          <%= University::Person::Alumnus.model_name.human(count: cohort.people.count).downcase %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
