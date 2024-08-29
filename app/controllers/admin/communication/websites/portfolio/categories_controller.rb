@@ -15,7 +15,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
   end
 
   def show
-    @projects = @category.projects.ordered.page(params[:page])
+    @projects = @category.projects.ordered(current_language).page(params[:page])
     breadcrumb
   end
 

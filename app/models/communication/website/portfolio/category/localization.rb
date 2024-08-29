@@ -8,8 +8,6 @@
 #  meta_description         :text
 #  name                     :string
 #  path                     :string
-#  published                :string           default("f")
-#  published_at             :datetime
 #  slug                     :string
 #  summary                  :text
 #  created_at               :datetime         not null

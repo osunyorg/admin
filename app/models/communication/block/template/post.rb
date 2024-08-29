@@ -47,25 +47,25 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
 
   protected
 
-  def selected_posts_all
+  def base_posts
     block.about&.website
                 .posts
                 .tmp_original # TODO L10N : To remove
-                .published
-                .ordered(block.language)
-                .limit(posts_quantity)
+                .published_now_in(block.language)
+  end
+
+  def selected_posts_all
+    base_posts.ordered(block.language)
+              .limit(posts_quantity)
   end
 
   def selected_posts_category
     return [] if category.nil?
     category_ids = [category.id, category.descendants.map(&:id)].flatten
-    university.communication_website_posts.tmp_original # TODO L10N : To remove
-                                          .joins(:categories)
-                                          .where(categories: { id: category_ids })
-                                          .distinct
-                                          .published
-                                          .ordered(block.language)
-                                          .limit(posts_quantity)
+
+    base_posts.for_category(category_ids)
+              .ordered(block.language)
+              .limit(posts_quantity)
   end
 
   def selected_posts_selection
@@ -80,10 +80,6 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
 
   def post(id)
     return if id.blank?
-    block.about&.website
-                .posts
-                .tmp_original # TODO L10N : To remove
-                .published
-                .find_by(id: id)
+    base_posts.find_by(id: id)
   end
 end

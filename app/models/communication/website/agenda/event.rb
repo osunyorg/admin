@@ -75,10 +75,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
   scope :ordered_asc, -> { order(:from_day, :from_hour) }
-  scope :ordered, -> { ordered_asc }
-  scope :published, -> { where(published: true) }
-  scope :draft, -> { where(published: false) }
-  scope :latest, -> { published.future_or_current.order(:updated_at).limit(5) }
+  scope :ordered, -> (language) { ordered_asc }
+  scope :latest_in, -> (language) { published_now_in(language).future_or_current.order("communication_website_agenda_event_localizations.updated_at").limit(5) }
 
   scope :for_category, -> (category_id) {
     joins(:categories)

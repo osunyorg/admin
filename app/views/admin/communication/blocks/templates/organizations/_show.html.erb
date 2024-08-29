@@ -10,6 +10,7 @@
         <div class="map" data-marker-icon="<%= image_path 'map-marker.svg' %>">
       <% end %>
         <% block.template.selected_elements.each do |element| %>
+          <% next if element.best_name.blank? %>
           <article  class="organization"
                     data-latitude="<%= element.organization&.latitude %>"
                     data-longitude="<%= element.organization&.longitude %>">
