@@ -50,7 +50,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def children
     return unless request.xhr?
-    @children = @program.children.ordered
+    @children = @program.children.tmp_original.ordered  # TODO L10N : To remove.
   end
 
   def show
@@ -125,7 +125,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
               :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
               :evaluation, :accessibility, :contacts, :opportunities, :results, :other, :main_information,
               :pricing, :pricing_apprenticeship, :pricing_continuing, :pricing_initial, :duration,
-              :downloadable_summary, :downloadable_summary_delete,  
+              :downloadable_summary, :downloadable_summary_delete,
             ]
           )
           .merge(
