@@ -16,17 +16,18 @@ fr:
     attributes:
       administration/location:
         address: Adresse
-        address_additional: Complément d'adresse
-        address_name: Nom de l'adresse
         city: Ville
         country: Pays
-        name: Nom
         phone: Téléphone
         programs: Formations dispensées
         schools: Écoles
-        url: Site Web
         websites: Sites Web associés
         zipcode: Code postal
+      administration/location/localization:
+        address_additional: Complément d'adresse
+        address_name: Nom de l'adresse
+        name: Nom
+        url: Site Web
       administration/qualiopi/criterion:
         number: Numéro
         name: Nom
