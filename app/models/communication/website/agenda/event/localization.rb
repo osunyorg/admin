@@ -102,6 +102,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     "#{title}"
   end
 
+  def to_s_with_subtitle
+    [title, subtitle].compact_blank.join(' - ')
+  end
+
   protected
 
   def check_accessibility

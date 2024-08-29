@@ -2,13 +2,17 @@
 <% if block.template.mode == 'all' %>
       all: true
 <% elsif block.template.mode == 'category' && block.template.category %>
-      <%# TODO L10N : Handle Post::Category::Localization here %>
-      category: "<%= block.template.category.path %>"
+  <%
+  category_l10n = block.template.category.localization_for(block.language)
+  if category_l10n.present?
+  %>
+      category: "<%= category_l10n.current_permalink_in_website(@website)&.path %>"
+  <% end %>
 <% end %>
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
       posts:
 <% block.template.selected_posts.each do |post| %>
-        <%# TODO L10N : Handle Post::Localization here %>
-        - "<%= post.static_path %>"
+  <% post_l10n = post.localization_for(block.language) %>
+        - "<%= post_l10n.static_path %>"
 <% end %>

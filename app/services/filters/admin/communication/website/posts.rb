@@ -17,12 +17,6 @@ module Filters
           ),
           false,
           true
-      add :for_pinned,
-          [{ to_s: I18n.t('true'), id: 'true' }, { to_s: I18n.t('false'), id: 'false' }],
-          I18n.t(
-            'filters.attributes.element',
-            element: I18n.t('admin.communication.website.post.localizations.pinned_status').downcase
-          )
     end
   end
 end

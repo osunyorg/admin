@@ -11,7 +11,6 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   has_scope :for_search_term
   has_scope :for_author
   has_scope :for_category
-  has_scope :for_pinned
 
   def index
     @posts = apply_scopes(@posts).tmp_original # TODO L10N : To remove

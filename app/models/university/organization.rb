@@ -108,7 +108,7 @@ class University::Organization < ApplicationRecord
   }
 
   scope :for_kind, -> (kind) { where(kind: kind) }
-  scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
+  scope :for_category, -> (category_id) { joins(:categories).where(university_organization_categories: { id: category_id }).distinct }
   # TODO L10N : To rewrite (should add a parameter language and filter to localizations only for this language)
   scope :for_search_term, -> (term) {
     joins(:localizations)

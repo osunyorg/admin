@@ -9,7 +9,7 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   has_component :category_id, :organization_category
   has_component :description, :rich_text
   has_component :alphabetical, :boolean
-  
+
   has_component :option_link,         :boolean, default: true
   has_component :option_logo,         :boolean, default: true
   has_component :option_summary,      :boolean, default: false
@@ -60,10 +60,11 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   def selected_elements_category
     return [] unless category
     organizations = university.organizations
-                              .joins(:categories)
-                              .where(categories: {id: category.id } )
-                              .distinct
+                              .tmp_original # TODO L10N : To remove
+                              .for_language(block.language)
+                              .for_category(category.id)
                               .ordered(block.language)
+
     organizations.map do |organization|
       # On simule un élément pour l'organisation, afin d'unifier les accès
       Communication::Block::Template::Organization::Element.new(block, {
