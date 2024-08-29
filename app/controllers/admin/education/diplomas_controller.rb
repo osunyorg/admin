@@ -6,7 +6,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   include Admin::Localizable
 
   def index
-    @diplomas = @diplomas.ordered
+    @diplomas = @diplomas.tmp_original.ordered
     breadcrumb
   end
 

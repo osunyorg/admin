@@ -46,8 +46,20 @@ module Localizable
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself
     scope :for_language_id, -> (language_id) {
       # We get the table name of the localizations association to filter the language correctly
-      localizations_table_name = _reflect_on_association(:localizations).klass.table_name
-      joins(:localizations).where(localizations_table_name => { language_id: language_id })
+      l10n_table_name = _reflect_on_association(:localizations).klass.table_name
+      joins(:localizations).where(l10n_table_name => { language_id: language_id })
+    }
+
+    scope :published_now_in, -> (language) {
+      l10n_klass = _reflect_on_association(:localizations).klass
+      return for_language(language) unless l10n_klass.respond_to?(:published_now)
+      # TODO L10N : Use this when base models are cleaned from publication attributes (published && published_at)
+      # for_language(language).merge(l10n_klass.published_now)
+      # instead of big joins below
+      l10n_table_name = l10n_klass.table_name
+      for_language(language)
+        .where(l10n_table_name => { published: true })
+        .where("#{l10n_table_name}.published_at <= ?", Time.zone.now)
     }
 
   end

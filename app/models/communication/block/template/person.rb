@@ -16,7 +16,7 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   def elements
     if alphabetical
       @elements.sort_by! do |element|
-        "#{element.person&.last_name&.parameterize&.downcase}"
+        "#{element.person&.to_s_alphabetical_in(block.language)}"
       end
     end
     @elements
@@ -56,12 +56,11 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   def selected_elements_category
     return [] if category.nil?
     persons = university.university_people
-                        .joins(:categories)
-                        .where(categories: {id: category.id } )
-                        .distinct
-                        .ordered(language)
+                        .tmp_original # TODO L10N : To remove
+                        .for_category(category.id)
+                        .ordered(block.language)
     persons.map do |person|
-      # On simule un élément pour l'organisation, afin d'unifier les accès
+      # On simule un élément pour la personne, afin d'unifier les accès
       Communication::Block::Template::Person::Element.new(block, {
         'id' => person.id
       })

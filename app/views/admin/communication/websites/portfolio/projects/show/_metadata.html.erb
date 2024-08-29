@@ -1,11 +1,11 @@
 <%= osuny_panel t('metadata'), small: true do %>
-  <%= @l10n.published ? Communication::Website::Agenda::Event.human_attribute_name(:published)
+  <%= @l10n.published ? Communication::Website::Portfolio::Project::Localization.human_attribute_name(:published)
                       : t('admin.communication.website.portfolio.projects.draft') %>
 
   <% if @project.categories.any? %>
     <% category_names = @project.categories.map { |category| category.to_s_in(current_language) } %>
     <%= t(
-          'admin.communication.website.posts.in',
+        'admin.communication.website.portfolio.projects.in',
           categories: category_names.join(', ')
         ) %>
   <% end %>
