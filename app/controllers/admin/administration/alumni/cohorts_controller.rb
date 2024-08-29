@@ -1,4 +1,4 @@
-class Admin::University::Alumni::CohortsController < Admin::University::ApplicationController
+class Admin::Administration::Alumni::CohortsController < Admin::Administration::ApplicationController
   load_and_authorize_resource :alumnus,
                               class: University::Person,
                               through: :current_university,
@@ -10,7 +10,7 @@ class Admin::University::Alumni::CohortsController < Admin::University::Applicat
 
   def update
     if @alumnus.update(cohorts_params)
-      redirect_to admin_university_alumnus_path(@alumnus),
+      redirect_to admin_administration_alumnus_path(@alumnus),
                   notice: t('admin.successfully_updated_html', model: @alumnus.to_s)
     else
       render :edit
@@ -22,9 +22,8 @@ class Admin::University::Alumni::CohortsController < Admin::University::Applicat
 
   def breadcrumb
     super
-    add_breadcrumb  University::Person::Alumnus.model_name.human(count: 2),
-                    admin_university_alumni_path
-    add_breadcrumb @alumnus, admin_university_alumnus_path(@alumnus)
+    add_breadcrumb University::Person::Alumnus.model_name.human(count: 2), admin_administration_alumni_path
+    add_breadcrumb @alumnus.to_s_in(current_language), admin_administration_alumnus_path(@alumnus)
     add_breadcrumb Education::Cohort.model_name.human(count: 2)
   end
 

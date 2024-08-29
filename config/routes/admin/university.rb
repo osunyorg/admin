@@ -3,19 +3,8 @@ namespace :university do
   namespace :organizations do
     resources :imports, only: [:index, :show, :new, :create]
   end
-  namespace :alumni do
-    namespace :cohorts do
-      resources :imports, only: [:index, :show, :new, :create]
-    end
-  end
   resources :apps do
     post :regenerate_token, on: :member
-  end
-  resources :alumni, only: [:index, :show] do
-    member do
-      get 'cohorts' => 'alumni/cohorts#edit'
-      patch 'cohorts' => 'alumni/cohorts#update'
-    end
   end
   namespace :people do
     resources :imports, only: [:index, :show, :new, :create]

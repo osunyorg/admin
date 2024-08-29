@@ -13,7 +13,7 @@ SimpleNavigation::Configuration.run do |navigation|
                   }
     primary.item  :subnav_alumni,
                   University::Person::Alumnus.model_name.human(count: 2),
-                  admin_university_alumni_path
+                  admin_administration_alumni_path
     primary.item  :subnav_locations,
                   Administration::Location.model_name.human(count: 2),
                   admin_administration_locations_path
