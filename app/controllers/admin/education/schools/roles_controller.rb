@@ -2,6 +2,7 @@ class Admin::Education::Schools::RolesController < Admin::Education::Schools::Ap
   load_and_authorize_resource class: University::Role, through: :school, through_association: :university_roles
 
   include Admin::Reorderable
+  include Admin::Localizable
 
   before_action :load_administration_people, only: [:new, :edit, :create, :update]
 
@@ -38,8 +39,8 @@ class Admin::Education::Schools::RolesController < Admin::Education::Schools::Ap
       redirect_to admin_education_school_role_path(@role), notice: t('admin.successfully_updated_html', model: @role.to_s)
     else
       breadcrumb
-      render :edit, status: :unprocessable_entity
       add_breadcrumb t('edit')
+      render :edit, status: :unprocessable_entity
     end
   end
 
