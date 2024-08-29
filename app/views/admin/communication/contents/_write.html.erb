@@ -12,7 +12,7 @@
 </div>
 <%= render "admin/communication/blocks/paste_block", about: about %>
 <div class="content-editor__actions row mt-4">
-  <div class="offset-lg-4 col-lg-8 col-xxl-6 text-end">
+  <div class="offset-lg-4 col-lg-8 col-xxl-6">
     <%= link_to t('admin.communication.blocks.headings.add'),
                 new_admin_communication_heading_path(about_id: about.id, about_type: about.class.name),
                 class: 'btn btn-lg btn-dark' if can? :create, Communication::Block::Heading %>
