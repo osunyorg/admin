@@ -90,10 +90,9 @@ class Communication::Website::Page::Localization < ApplicationRecord
     current_git_path
   end
 
-  # pages/_index.html
-  # pages/page-de-test/_index.html
+  # Home        _index.html
+  # Page        pages/page-de-test/_index.html
   def git_path_relative
-    # TODO L10N : A better solution might be possible
     if about.is_special_page? && about.respond_to?(:git_path_relative)
       about.git_path_relative
     else

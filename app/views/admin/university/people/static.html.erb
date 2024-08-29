@@ -24,7 +24,7 @@ last_name: >-
   <%= prepare_text_for_static @l10n.last_name %>
 <% if person.phone_mobile_is_public? %>
 phone: >-
-  <%= prepare_text_for_static @l10n.phone_mobile %>
+  <%= prepare_text_for_static person.phone_mobile %>
 <% end %>
 <% if person.email_is_public? %>
 email: >-
@@ -32,11 +32,11 @@ email: >-
 <% end %>
 <% if person.twitter_is_public? %>
 twitter: >-
-  <%= prepare_text_for_static person.twitter %>
+  <%= prepare_text_for_static @l10n.twitter %>
 <% end %>
 <% if person.linkedin_is_public? %>
 linkedin: >-
-  <%= prepare_text_for_static person.linkedin %>
+  <%= prepare_text_for_static @l10n.linkedin %>
 <% end %>
 website: >-
   <%= prepare_text_for_static person.url %>

@@ -30,7 +30,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
 
   def create
     @category.website = @website
-    @category.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @category.save_and_sync
       redirect_to admin_communication_website_agenda_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
@@ -40,7 +40,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   end
 
   def update
-    @category.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @category.update_and_sync(category_params)
       redirect_to admin_communication_website_agenda_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else

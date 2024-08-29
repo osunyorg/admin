@@ -98,6 +98,16 @@ module Communication::Website::Page::WithSpecialPage
   def generate_from_template
   end
 
+  def create_missing_localizations!
+    l10n_created = false
+    website.languages.each do |language|
+      next if localized_in?(language)
+      build_localization_for(language)
+      l10n_created = true
+    end
+    save_and_sync if l10n_created
+  end
+
   protected
 
   def default_parent
@@ -105,20 +115,24 @@ module Communication::Website::Page::WithSpecialPage
   end
 
   def initialize_special_page
-  # Set default attributes for special page
-  self.parent = default_parent
-  self.full_width = full_width_by_default?
+    # Set default attributes for special page
+    self.parent = default_parent
+    self.full_width = full_width_by_default?
+    # Build the first localization of the page
+    build_localization_for(website.default_language)
+  
+  end
 
-  # Set default attributes for special page's localization
-  i18n_key = "communication.website.pages.defaults.#{type_key}"
-  language = website.default_language
-  localizations.build(
-    language_id: language.id,
-    title: I18n.t("#{i18n_key}.title", locale: language.iso_code),
-    slug: I18n.t("#{i18n_key}.slug", locale: language.iso_code),
-    published: published_by_default?
-    # note: published_at will be set by WithPublication concern
-  )
+  def build_localization_for(language)
+    # Set default attributes for special page's localization
+    i18n_key = "communication.website.pages.defaults.#{type_key}"
+    localizations.build(
+      language_id: language.id,
+      title: I18n.t("#{i18n_key}.title", locale: language.iso_code),
+      slug: I18n.t("#{i18n_key}.slug", locale: language.iso_code),
+      published: published_by_default?
+      # note: published_at will be set by WithPublication concern
+    )
   end
 
   # TODO L10N : adjust

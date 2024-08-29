@@ -77,7 +77,7 @@ module Communication::Website::WithDeuxfleurs
 
   # cartographie.agit.osuny.site
   def deuxfleurs_default_identifier
-    "#{to_s.parameterize}.#{university.identifier}.osuny.site"
+    "#{original_localization.to_s.parameterize}.#{university.identifier}.osuny.site"
   end
 
   # https://cartographie.agit.osuny.site
@@ -87,12 +87,12 @@ module Communication::Website::WithDeuxfleurs
 
   # agit-cartographie
   def deuxfleurs_default_github_repository_name
-    "#{university.identifier}-#{to_s.parameterize}"
+    "#{university.identifier}-#{original_localization.to_s.parameterize}"
   end
 
-  # noesya/agit-cartographie
+  # osunyorg/agit-cartographie
   def deuxfleurs_default_github_repository
-    "osunyorg/#{deuxfleurs_default_github_repository_name}"
+    "#{ENV['GITHUB_WEBSITE_OWNER']}/#{deuxfleurs_default_github_repository_name}"
   end
 
   def deuxfleurs_default_badge_url

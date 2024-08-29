@@ -32,7 +32,7 @@ module Osuny
       note, text_after_note = part.split('</note>')
       label = I18n.t('notes.label', index: @index)
       html = '<span class="note" role="note">'
-      html += "<span class=\"note__call\" role=\"button\" tabindex=\"0\" aria-label=\"#{label}\">#{@index}</span>"
+      html += "<span class=\"note__call\" role=\"button\" tabindex=\"0\" aria-expanded=\"false\" aria-label=\"#{label}\">#{@index}</span>"
       html += "<span class=\"note__content\" aria-hidden=\"true\" aria-live=\"polite\">#{note}</span>"
       html += "</span>"
       html += text_after_note

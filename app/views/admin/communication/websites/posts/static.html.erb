@@ -21,7 +21,7 @@ authors:
 <% if @l10n.categories.any? %>
 posts_categories:
 <% @l10n.categories.each do |category| %>
-  - "<%= category.try(:slug_with_ancestors_slugs) %>"
+  - "<%= category.slug_with_ancestors_slugs(separator: '-') %>"
 <% end %>
 <% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>

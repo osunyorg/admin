@@ -135,7 +135,7 @@ class Communication::Website::Permalink < ApplicationRecord
   def published_path
     language = about.respond_to?(:language) ? about.language : website.default_language
     p = ""
-    p += "/#{language.iso_code}" if website.languages.many?
+    p += "/#{language.iso_code}" if website.active_languages.many?
     p += pattern
     substitutions.each do |key, value|
       p.gsub! ":#{key}", "#{value}"

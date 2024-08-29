@@ -1,10 +1,11 @@
 module AsLocalization
   extend ActiveSupport::Concern
 
-  included do
-    include WithDependencies
-    include LibreTranslatable
+  include AsIndirectObject
+  include LibreTranslatable
+  include WithDependencies
 
+  included do
     belongs_to  :language
     belongs_to  :about,
                 class_name: "#{self.module_parent.name}",
@@ -14,18 +15,26 @@ module AsLocalization
 
     before_validation :set_university
 
+    # delegate :websites, to: :about
+
     scope :in_languages, -> (language_ids) {
       where(language_id: language_ids)
     }
-
-    delegate  :is_direct_object?,
-              :is_indirect_object?,
-              to: :about
   end
 
-  def delete_obsolete_connections
-    about.try(:delete_obsolete_connections)
-  end
+  # localizations are not connected directly to websites, they might be connected through about.
+  # so they are indirect objects
+  # def is_direct_object?
+  #   false
+  # end
+
+  # def is_indirect_object?
+  #   false
+  # end
+
+  # def delete_obsolete_connections
+  #   about.try(:delete_obsolete_connections)
+  # end
 
   # Used by Hugo to link localizations with themselves
   # communication-website-post-25bf629a-27ef-40b6-bb61-4fd0a984e08d
@@ -43,25 +52,25 @@ module AsLocalization
     original.nil? || (self == original)
   end
 
-  # TODO L10N : To handle
-  # Used to fix Dependencies::CleanWebsitesIfNecessaryJob on Organization::Localization
-  def websites
-    if about.respond_to?(:websites)
-      about.websites
-    else
-      raise NameError, "No method 'websites' for #{about.class}"
-    end
-  end
+  # def direct_sources
+  #   @direct_sources ||= begin
+  #    if about.is_direct_object?
+  #     [about]
+  #    else
+  #     about.direct_sources
+  #    end
+  #   end
+  # end
 
   # TODO L10N : To handle
   # Used to fix Communication::Website::IndirectObject::SyncWithGitJob on Communication::Block
-  def direct_sources_from_existing_connections
-    if about.respond_to?(:direct_sources_from_existing_connections)
-      about.direct_sources_from_existing_connections
-    else
-      raise NameError, "No method 'direct_sources_from_existing_connections' for #{about.class}"
-    end
-  end
+  # def direct_sources_from_existing_connections
+  #   if about.respond_to?(:direct_sources_from_existing_connections)
+  #     about.direct_sources_from_existing_connections
+  #   else
+  #     raise NameError, "No method 'direct_sources_from_existing_connections' for #{about.class}"
+  #   end
+  # end
 
   def for_website?(website)
     website.active_language_ids.include?(language_id) &&

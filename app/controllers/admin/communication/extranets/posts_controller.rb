@@ -30,7 +30,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   end
 
   def create
-    @post.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @post.save
       redirect_to admin_communication_extranet_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
     else
@@ -40,7 +40,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   end
 
   def update
-    @post.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @post.update(post_params)
       redirect_to admin_communication_extranet_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
     else

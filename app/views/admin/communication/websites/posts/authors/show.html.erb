@@ -1,6 +1,6 @@
-<% content_for :title, @author %>
+<% content_for :title, @author_l10n %>
 
-<%= render 'admin/university/people/main_infos', person: @author %>
+<%= render 'admin/university/people/main_infos', person: @author, l10n: @author_l10n %>
 
 <% if @posts.any? %>
   <%= osuny_panel Communication::Website::Post.model_name.human(count: 2),
