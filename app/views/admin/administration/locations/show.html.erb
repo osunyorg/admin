@@ -44,10 +44,9 @@
           <% @location.schools.ordered.each do |school| %>
             <div>
               <div class="card card--horizontal">
-                <%#= osuny_thumbnail_localized school %>
+                <%= osuny_thumbnail_localized school %>
                 <div class="card-body">
-                  <%= school %>
-                  <%#= osuny_link_localized school, [:admin, school], classes: 'stretched-link' %>
+                  <%= osuny_link_localized school, [:admin, school], classes: 'stretched-link' %>
                 </div>
               </div>
             </div>
@@ -61,10 +60,9 @@
           <% @location.programs.ordered.each do |program| %>
             <div>
               <div class="card card--horizontal">
-                <%#= osuny_thumbnail_localized program %>
+                <%= osuny_thumbnail_localized program %>
                 <div class="card-body">
-                  <%= program %>
-                  <%#= osuny_link_localized program, [:admin, program], classes: 'stretched-link' %>
+                  <%= osuny_link_localized program, [:admin, program], classes: 'stretched-link' %>
                 </div>
               </div>
             </div>

@@ -9,11 +9,11 @@
     <% @cohorts.ordered.each do |cohort| %>
       <div>
         <div class="card card--horizontal">
-          <%#= osuny_thumbnail_localized cohort.program %>
+          <%= osuny_thumbnail_localized cohort.program %>
           <div class="card-body">
-            <%= cohort.program %>
+            <%= osuny_link_localized cohort.program, [:admin, cohort.program], classes: 'stretched-link' %>
             <p class="small text-muted mb-0">
-              <%= cohort.school %>
+              <%= cohort.school.to_s_in(current_language) %>
             </p>
           </div>
           <div class="card-footer">
