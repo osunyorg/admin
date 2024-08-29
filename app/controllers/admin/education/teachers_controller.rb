@@ -55,7 +55,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
           .permit(
             involvements_attributes: [
               :id, :target_id, :target_type, :_destroy,
-              localizations_attributes: [:id, :description]
+              localizations_attributes: [:id, :description, :language_id]
             ]
           )
   end

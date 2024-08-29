@@ -4,9 +4,9 @@
   <p><%= "#{@involvements.count} #{Education::Program.model_name.human(count: @involvements.count).downcase}" %></p>
   <div class="row g-2 mb-3">
     <% @involvements.each do |involvement| %>
-      <% 
+      <%
         program = involvement.target
-        involvement_l10n = involvement.localization_for(current_language)
+        involvement_l10n = involvement.best_localization_for(current_language)
       %>
       <div>
         <div class="card card--horizontal">
@@ -15,7 +15,7 @@
             <%= osuny_link_localized program, [:admin, program] %>
           </div>
           <div class="card-footer">
-            <span class="me-4"><%= involvement_l10n.description %></span>
+            <span class="me-4 <%= 'text-muted fst-italic' if involvement_l10n.language_id != current_language.id %>"><%= involvement_l10n.description %></span>
             <%= link_to t('quit'),
                         admin_education_program_teacher_path(involvement, { program_id: program.id }),
                         method: :delete,
