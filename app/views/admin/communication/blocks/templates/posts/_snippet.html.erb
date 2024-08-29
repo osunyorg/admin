@@ -5,12 +5,8 @@ else
   objects = block.template.selected_posts
 end
 objects = objects.first(2)
-object_names = objects.collect { |object| object.to_s_in(current_language) }
+object_names = objects.map { |object| object.to_s_in(current_language) }
 %>
 <p class="mb-0">
-  <% if block.template.mode == 'categories' %>
-    <%= @website.post_categories.ordered.collect(&:to_s).join(', ') %>
-  <% else %>
-    <%= block.template.selected_posts.collect(&:to_s).join(', ') %>
-  <% end %>
+  <%= object_names.collect(&:to_s).join(', ') %>
 </p>
