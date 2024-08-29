@@ -18,7 +18,8 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   end
 
   def show
-    @roles = @school.university_roles.ordered
+    @programs = @school.programs.tmp_original.ordered
+    @roles = @school.university_roles.tmp_original.ordered
     breadcrumb
   end
 
