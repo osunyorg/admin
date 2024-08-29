@@ -1,0 +1,33 @@
+<% content_for :title, @l10n %>
+
+<%= link_to t('university.manage_cohorts'),
+            cohorts_admin_administration_alumnus_path(@alumnus),
+            class: button_classes if can?(:update, @alumnus) %>
+
+<% if @cohorts.any? %>
+  <div class="row g-2 my-3">
+    <% @cohorts.ordered.each do |cohort| %>
+      <div>
+        <div class="card card--horizontal">
+          <%= osuny_thumbnail_localized cohort.program %>
+          <div class="card-body">
+            <%= link_to cohort.academic_year, [:admin, cohort], class: 'stretched-link' %>
+            <span class="small">
+              <%= cohort.program.to_s_in(current_language) %>
+            </span>
+          </div>
+          <div class="card-footer small text-muted">
+            <%= cohort.school.to_s_in(current_language) %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p><%= t('admin.administration.alumnus.no_cohort') %></p>
+<% end %>
+
+<div class="mt-5 small">
+  <p><%= t('admin.administration.alumnus.show_person_html') %></p>
+  <%= link_to t('show'), admin_university_person_path(@alumnus) %>
+</div>

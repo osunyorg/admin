@@ -8,7 +8,7 @@
       <%= t('university.alumni.cohorts.import_hint_html') %>
     </p>
     <%= simple_form_for @import,
-                        url: admin_university_alumni_cohorts_imports_path do |f| %>
+                        url: admin_administration_alumni_cohorts_imports_path do |f| %>
 
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -30,7 +30,7 @@
   </div>
   <div class="col-md-6">
     <div class="table-responsive">
-      <table class="<%= table_classes %>">
+      <table class="<%= table_classes(with_actions: false) %>">
         <tbody>
           <tr>
             <th>first_name*</th>
