@@ -5,8 +5,12 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
 
   has_scope :for_search_term
 
+  include Admin::Localizable
+
   def index
-    @theses = apply_scopes(@theses).ordered.page(params[:page])
+    @theses = apply_scopes(@theses)
+                .ordered(current_language)
+                .page(params[:page])
     breadcrumb
   end
 
@@ -50,10 +54,18 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
   protected
 
   def thesis_params
-    params.require(:research_thesis).permit(
-      :title, :abstract, :started_at, :completed, :completed_at,
-      :research_laboratory_id, :author_id, :director_id
-    ).merge(university_id: current_university.id)
+    params.require(:research_thesis)
+          .permit(
+            :started_at, :completed, :completed_at,
+            :research_laboratory_id, :author_id, :director_id,
+            localizations_attributes: [
+              :id, :language_id, 
+              :title, :abstract
+            ]
+          )
+          .merge(
+            university_id: current_university.id
+          )
   end
 
   def breadcrumb

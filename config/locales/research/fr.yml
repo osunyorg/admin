@@ -101,14 +101,15 @@ fr:
         url: URL
         urls: Adresses Web
       research/thesis:
-        abstract: Résumé
         author: Auteur·e
         completed: Complétée ?
         completed_at: Complétée le
         director: Directeur·rice
         laboratory: Laboratoire
         started_at: Commencée le
+      research/thesis/localization:
         title: Titre
+        abstract: Résumé
   admin:
     research:
       researcher:

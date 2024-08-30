@@ -53,6 +53,7 @@ class Research::Laboratory < ApplicationRecord
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
+  scope :ordered, -> (language) { }
   scope :for_search_term, -> (term) {
     where("
       unaccent(research_laboratories.address) ILIKE unaccent(:term) OR

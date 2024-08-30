@@ -101,13 +101,14 @@ en:
         url: URL
         urls: Web URLs
       research/thesis:
-        abstract: Abstract
         author: Author
         completed_at: Completed at
         completed: Completed?
         director: Director
         laboratory: Laboratory
         started_at: Started at
+      research/thesis/localization:
+        abstract: Abstract
         title: Title
   admin:
     research:

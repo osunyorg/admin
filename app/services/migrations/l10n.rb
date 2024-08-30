@@ -12,6 +12,9 @@ module Migrations
       Communication::Website::Portfolio.execute
       University::Organization.execute
       University::Person.execute
+      Research::Laboratory.execute
+      Research::Laboratory::Axis.execute
+      Research::Thesis.execute
     end
   end
 end

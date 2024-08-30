@@ -3,7 +3,7 @@
 # Table name: research_laboratory_axis_localizations
 #
 #  id               :uuid             not null, primary key
-#  meta_description :string
+#  meta_description :text
 #  name             :string
 #  short_name       :string
 #  summary          :text
