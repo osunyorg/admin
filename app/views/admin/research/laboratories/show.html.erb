@@ -2,13 +2,11 @@
 
 <div class="row">
   <div class="col-lg-6">
-    <%
-    action = link_to    t('create'),
-                        new_admin_research_laboratory_axis_path(laboratory_id: @laboratory),
-                        class: button_classes
-    %>
-    <%= osuny_panel Research::Laboratory::Axis.model_name.human(count: 2), action: action do %>
+    <%= osuny_panel Research::Laboratory::Axis.model_name.human(count: 2) do %>
       <%= render 'admin/research/laboratories/axes/list', axes: @axes %>
+      <%= link_to t('create'),
+                  new_admin_research_laboratory_axis_path(laboratory_id: @laboratory),
+                  class: button_classes %>
     <% end %>
   </div>
   <div class="col-lg-6">

@@ -2,6 +2,7 @@ class Admin::Research::Laboratories::AxesController < Admin::Research::Laborator
   load_and_authorize_resource class: Research::Laboratory::Axis, through: :laboratory
 
   include Admin::Reorderable
+  include Admin::Localizable
 
   def index
     breadcrumb
@@ -55,7 +56,14 @@ class Admin::Research::Laboratories::AxesController < Admin::Research::Laborator
 
   def axis_params
     params.require(:research_laboratory_axis)
-          .permit(:name, :short_name, :meta_description, :text)
-          .merge(university_id: current_university.id)
+          .permit(
+            localizations_attributes: [
+              :id, :language_id,
+              :name, :short_name, :meta_description, :summary
+            ]
+          )
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

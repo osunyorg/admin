@@ -13,7 +13,7 @@ class Admin::Research::Laboratories::ApplicationController < Admin::Research::Ap
   def breadcrumb
     super
     add_breadcrumb Research::Laboratory.model_name.human(count: 2), admin_research_laboratories_path
-    add_breadcrumb @laboratory, [:admin, @laboratory]
+    add_breadcrumb @laboratory.to_s_in(current_language), [:admin, @laboratory]
   end
 
   def default_url_options
