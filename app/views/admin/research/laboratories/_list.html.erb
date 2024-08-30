@@ -1,18 +1,17 @@
-<div class="table-responsive">
-  <table class="<%= table_classes(with_actions: false) %>">
-    <thead>
-      <tr>
-        <th><%= Research::Laboratory.human_attribute_name('name') %></th>
-        <th><%= Research::Laboratory.human_attribute_name('address') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% laboratories.each do |laboratory| %>
-        <tr>
-          <td><%= link_to laboratory, admin_research_laboratory_path(laboratory) %></td>
-          <td><%= laboratory.full_address %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2">
+  <% laboratories.each do |laboratory| %>
+    <div>
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail_localized laboratory %>
+        <div class="card-body">
+          <%= osuny_link_localized  laboratory,
+                                    admin_research_laboratory_path(laboratory),
+                                    classes: 'stretched-link' %>
+        </div>
+        <div class="card-footer small text-muted">
+          <%= laboratory.full_address %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

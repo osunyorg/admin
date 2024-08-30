@@ -1,18 +1,5 @@
-<div class="table-responsive">
-  <table class="<%= table_classes(with_actions: false) %>">
-    <thead>
-      <tr>
-        <th><%= University::Person.human_attribute_name('first_name') %></th>
-        <th><%= University::Person.human_attribute_name('last_name') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% researchers.each do |researcher| %>
-        <tr>
-          <td><%= link_to researcher.first_name, admin_university_person_path(researcher) %></td>
-          <td><%= link_to researcher.last_name, admin_university_person_path(researcher) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2">
+  <% researchers.each do |researcher| %>
+    <%= render 'admin/research/researchers/researcher', researcher: researcher %>
+  <% end %>
 </div>

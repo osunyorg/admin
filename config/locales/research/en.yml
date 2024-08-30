@@ -75,12 +75,13 @@ en:
         title: Title
       research/laboratory:
         address: Address
-        address_additional: Additional address
-        address_name: Address name
         city: City
         country: Country
-        name: Name
         zipcode: Zipcode
+      research/laboratory/localization:
+        address_additional: Additional address
+        address_name: Address name
+        name: Name
       research/laboratory/axis:
         name: Name
         short_name: Short name
@@ -168,8 +169,9 @@ en:
         doi: "You can type the DOI identifier without https://, for example “10.19182/perspective/31918”"
       research_laboratory:
         address: 'This field is used for geolocation. Ex: 3 rue de la Poste'
-        address_additional: 'This field is not used for geolocation. Ex: Bureau 508'
-        address_name: 'This field is not used for geolocation. Ex: Hôtel du Département'
         city: 'This field is used for geolocation. Ex: Cenon'
         country: 'This field is used for geolocation. Ex: France'
         zipcode: 'This field is used for geolocation. Ex: 33150'
+        localizations:
+          address_additional: 'This field is not used for geolocation. Ex: Bureau 508'
+          address_name: 'This field is not used for geolocation. Ex: Hôtel du Département'

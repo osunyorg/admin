@@ -24,10 +24,17 @@
 #
 class Research::Laboratory < ApplicationRecord
   include AsIndirectObject
+  include Localizable
   include Sanitizable
   include WebsitesLinkable
   include WithCountry
   include WithGitFiles
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   belongs_to  :university
   has_many    :communication_websites,
@@ -46,7 +53,6 @@ class Research::Laboratory < ApplicationRecord
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
-  scope :ordered, -> { order(:name) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
@@ -57,19 +63,12 @@ class Research::Laboratory < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
-  def to_s
-    "#{name}"
-  end
-
   def full_address
     [address, zipcode, city].compact.join ' '
   end
 
-  def git_path(website)
-    "data/laboratory.yml"
-  end
-
   def dependencies
+    localizations +
     axes +
     researchers.map(&:researcher)
   end

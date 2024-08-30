@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_29_132348) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_30_083235) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1389,6 +1389,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_132348) do
     t.index ["university_id"], name: "index_research_laboratory_axes_on_university_id"
   end
 
+  create_table "research_laboratory_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "address_additional"
+    t.string "address_name"
+    t.string "name"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_research_laboratory_localizations_on_about_id"
+    t.index ["language_id"], name: "index_research_laboratory_localizations_on_language_id"
+    t.index ["university_id"], name: "index_research_laboratory_localizations_on_university_id"
+  end
+
   create_table "research_publications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "hal_docid"
     t.jsonb "data"
@@ -1973,6 +1987,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_132348) do
   add_foreign_key "research_laboratories", "universities"
   add_foreign_key "research_laboratory_axes", "research_laboratories"
   add_foreign_key "research_laboratory_axes", "universities"
+  add_foreign_key "research_laboratory_localizations", "languages"
+  add_foreign_key "research_laboratory_localizations", "research_laboratories", column: "about_id"
+  add_foreign_key "research_laboratory_localizations", "universities"
   add_foreign_key "research_theses", "research_laboratories"
   add_foreign_key "research_theses", "universities"
   add_foreign_key "research_theses", "university_people", column: "author_id"

@@ -1,8 +1,18 @@
 <% content_for :title, @l10n %>
 
-<div class="mb-5 small">
-  <p><%= t('admin.research.researcher.show_person_html') %></p>
-  <%= link_to t('show'), admin_university_person_path(@researcher) %>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="mb-5 small">
+      <p><%= t('admin.research.researcher.show_person_html') %></p>
+      <%= link_to t('show'), admin_university_person_path(@researcher) %>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <%= osuny_panel Research::Laboratory.model_name.human(count: @researcher.laboratories.count) do %>
+      <%= render 'admin/research/laboratories/list', laboratories: @researcher.laboratories %>
+    <% end %>
+  </div>
 </div>
 
 <% if @papers.total_count > 0 %>

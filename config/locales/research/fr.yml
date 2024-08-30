@@ -75,12 +75,13 @@ fr:
         title: Titre
       research/laboratory:
         address: Adresse
-        address_additional: Complément d'adresse
-        address_name: Nom de l'adresse
         city: Ville
         country: Pays
-        name: Nom
         zipcode: Code postal
+      research/laboratory/localization:
+        address_additional: Complément d'adresse
+        address_name: Nom de l'adresse
+        name: Nom
       research/laboratory/axis:
         name: Nom
         short_name: Nom court
@@ -167,8 +168,10 @@ fr:
         doi: "Vous pouvez saisir l'identifiant DOI sans https://, par exemple “10.19182/perspective/31918”"
       research_laboratory:
         address: 'Ce champ est utilisé pour géolocaliser. Ex: 3 rue de la Poste'
-        address_additional: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
-        address_name: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
         city: 'Ce champ est utilisé pour géolocaliser. Ex: Cenon'
         country: 'Ce champ est utilisé pour géolocaliser. Ex: France'
         zipcode: 'Ce champ est utilisé pour géolocaliser. Ex: 33150'
+        localizations:
+          address_additional: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
+          address_name: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
+
