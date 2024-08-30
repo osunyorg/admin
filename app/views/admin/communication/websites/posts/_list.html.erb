@@ -56,7 +56,7 @@ end
                 </div>
                 <div class="card-footer d-none d-lg-block">
                   <% if !hide_buttons && post.pinned_in?(current_language) %>
-                    <%= Communication::Website::Post.human_attribute_name('pinned') %>
+                    <%= Communication::Website::Post::Localization.human_attribute_name('pinned') %>
                   <% end %>
                   <% if !hide_author && post.author %>
                     <span class="ms-3">

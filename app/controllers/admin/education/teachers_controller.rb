@@ -1,5 +1,5 @@
 class Admin::Education::TeachersController < Admin::Education::ApplicationController
-  load_and_authorize_resource class: University::Person::Teacher,
+  load_and_authorize_resource class: "University::Person",
                               through: :current_university,
                               through_association: :people
 
@@ -23,6 +23,11 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
                             .includes(:target)
                             .ordered_by_date
     breadcrumb
+  end
+
+  def static
+    @l10n = University::Person::Localization::Teacher.find(@l10n.id)
+    super
   end
 
   def edit

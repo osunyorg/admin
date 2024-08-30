@@ -21,10 +21,13 @@
       <%# TODO: ce devrait être la current_language, pas l'interface_language %>
       <%= f.association :researchers,
                         as: :check_boxes,
-                        collection: current_university.university_people
-                                                      .researchers
-                                                      .for_language(current_interface_language)
-                                                      .ordered %>
+                        collection: osuny_collection(
+                          current_university.university_people
+                          .researchers
+                          .tmp_original # TODO L10N : To remove
+                          .ordered(current_language),
+                          localized: true
+                        ) %>
     </div>
   </div>
 

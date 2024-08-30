@@ -8,7 +8,7 @@ class University::Person::Localization::Researcher < University::Person::Localiz
   end
 
   def template_static
-    "admin/university/people/researchers/static"
+    "admin/research/researchers/static"
   end
 
   def dependencies

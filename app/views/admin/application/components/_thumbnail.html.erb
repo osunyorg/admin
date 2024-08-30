@@ -1,15 +1,16 @@
 <%
-size = large ? 300 : 100
+size = large ? 600 : 140
 classes ||= ''
 image_class = 'img-fluid'
 image_variant = nil
+quality = 50
 if image && image.attached?
   image_variant = image
   if image.variable?
     if cropped
-      image_variant = image.variant(resize_to_fill: [size, size, gravity: 'center'])
+      image_variant = image.variant(resize_to_fill: [size, size, gravity: 'center'], quality: quality)
     else
-      image_variant = image.variant(resize_to_fit: [size, size])
+      image_variant = image.variant(resize_to_fit: [size, size], quality: quality)
       image_class += ' h-100 w-100 object-fit-contain'
     end
   end
@@ -19,7 +20,6 @@ end
             osuny__thumbnail--<%= large ? 'large' : 'small' %>
             osuny__thumbnail--<%= cropped ? 'cropped' : 'uncropped' %>
             <%= classes %>">
-
   <% if image_variant %>
     <%= image_tag image_variant, class: image_class, loading: 'lazy' %>
   <% else %>

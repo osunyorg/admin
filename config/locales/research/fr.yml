@@ -108,6 +108,10 @@ fr:
         laboratory: Laboratoire
         started_at: Commencée le
         title: Titre
+  admin:
+    research:
+      researcher:
+        show_person_html: Cette page montre uniquement les publications scientifiques de la personne. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien     
   enums:
     research:
       publication:
@@ -153,8 +157,9 @@ fr:
             description: Profils des chercheur·e·s dans la base de données HAL
           publication:
             description: Publications scientifiques importées automatiquement de HAL
-      select_identifier: Choisissez tou·te·s les auteur·e·s HAL correspondant à cette personne. Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
+      select_identifier_html: Choisissez tou·te·s les auteur·e·s HAL correspondant à cette personne. <br>Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
       sync: Synchroniser les publications HAL
+      synchronization_done: Synchronisation effectuée
   simple_form:
     hints:
       research_journal_paper:

@@ -108,6 +108,10 @@ en:
         laboratory: Laboratory
         started_at: Started at
         title: Title
+  admin:
+    research:
+      researcher:
+        show_person_html: This page only shows the person's scienfific papers.<br>If you wish to view or modify the person's details, click on the link below.
   enums:
     research:
       publication:
@@ -154,8 +158,9 @@ en:
           publication:
             description: Scientific publications automatically imported from HAL
       title: HAL
-      select_identifier: Select all the HAL authors that correspond to this researcher. Use the publications to be sure it's the same person.
+      select_identifier_html: Select all the HAL authors that correspond to this researcher. <br>Use the publications to be sure it's the same person.
       sync: Synchronize HAL publications
+      synchronization_done: Synchronization done
   simple_form:
     hints:
       research_journal_paper:
