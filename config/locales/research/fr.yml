@@ -65,10 +65,11 @@ fr:
       research/journal/paper/kind:
         title: Titre
       research/journal/volume:
+        number: Numéro
+      research/journal/volume/localization:
         featured_image_alt: Texte alternatif
         featured_image: Couverture
         keywords: Mots clés
-        number: Numéro
         published_at: Publié le
         published: Publié ?
         text: Texte

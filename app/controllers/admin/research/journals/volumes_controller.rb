@@ -1,6 +1,9 @@
 class Admin::Research::Journals::VolumesController < Admin::Research::Journals::ApplicationController
   load_and_authorize_resource class: Research::Journal::Volume, through: :journal
 
+  include Admin::HasStaticAction
+  include Admin::Localizable
+
   def index
     @volumes = @volumes.ordered
                        .page(params[:page])
@@ -37,7 +40,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
       journal: @journal
     )
     if @volume.save
-      redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s)
+      redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -47,7 +50,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   def update
     @l10n.add_photo_import params[:photo_import]
     if @volume.update(volume_params)
-      redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_updated_html', model: @volume.to_s)
+      redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_updated_html', model: @volume.to_s_in(current_language))
     else
       breadcrumb
       render :edit, status: :unprocessable_entity
@@ -57,7 +60,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
 
   def destroy
     @volume.destroy
-    redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @volume.to_s)
+    redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @volume.to_s_in(current_language))
   end
 
   private
@@ -71,8 +74,12 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   def volume_params
     params.require(:research_journal_volume)
           .permit(
-            :title, :slug, :number, :keywords, :published, :published_at, :meta_description, :summary, :text,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+            :number, 
+            localizations_attributes: [
+              :id, :language_id,
+              :title, :slug, :keywords, :published, :published_at, :meta_description, :summary, :text,
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+            ]
           )
           .merge(university_id: current_university.id)
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_02_073950) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_02_083741) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1335,6 +1335,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_073950) do
     t.index ["researcher_id"], name: "index_research_journal_papers_researchers_on_researcher_id"
   end
 
+  create_table "research_journal_volume_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "keywords"
+    t.text "meta_description"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.string "slug"
+    t.text "summary"
+    t.text "text"
+    t.string "title"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_research_journal_volume_localizations_on_about_id"
+    t.index ["language_id"], name: "index_research_journal_volume_localizations_on_language_id"
+    t.index ["university_id"], name: "index_research_journal_volume_localizations_on_university_id"
+  end
+
   create_table "research_journal_volumes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
@@ -2026,6 +2047,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_073950) do
   add_foreign_key "research_journal_papers", "users", column: "updated_by_id"
   add_foreign_key "research_journal_papers_researchers", "research_journal_papers", column: "paper_id"
   add_foreign_key "research_journal_papers_researchers", "university_people", column: "researcher_id"
+  add_foreign_key "research_journal_volume_localizations", "languages"
+  add_foreign_key "research_journal_volume_localizations", "research_journal_volumes", column: "about_id"
+  add_foreign_key "research_journal_volume_localizations", "universities"
   add_foreign_key "research_journal_volumes", "research_journals"
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "languages"

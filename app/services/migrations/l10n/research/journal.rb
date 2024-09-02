@@ -1,6 +1,7 @@
 class Migrations::L10n::Research::Journal < Migrations::L10n::Base
   def self.execute
     migrate_journals
+    Volume.execute
   end
 
   def self.migrate_journals
