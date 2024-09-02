@@ -30,20 +30,7 @@ action = link_to    t('create'),
                     class: button_classes
 %>
 <%= osuny_panel Research::Journal::Volume.model_name.human(count: 2), action: action do %>
-  <div class="row">
-    <% @volumes.limit(4).each do |volume| %>
-      <div class="col-md-6 col-xl-3">
-        <div class="card">
-          <%= kamifusen_tag volume.featured_image, width: 600, class: 'img-fluid' if volume.featured_image.attached? %>
-          <div class="card-body">
-            <%= link_to volume,
-                        admin_research_journal_volume_path(journal_id: @journal, id: volume),
-                        class: "stretched-link #{'draft' unless volume.published?}" %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
+  <%= render 'admin/research/journals/volumes/list', volumes: @volumes %>
 <% end %>
 
 <%
