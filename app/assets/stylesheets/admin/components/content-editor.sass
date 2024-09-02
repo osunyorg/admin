@@ -16,8 +16,10 @@
     &__elements
         &__element
             .draft
-                // background: $color-flexoki-100
                 opacity: 0.5
+                transition: opacity 0.5s ease
+                &:hover
+                    opacity: 1
             &--heading
                 &.sortable-chosen
                     .content-editor__elements
