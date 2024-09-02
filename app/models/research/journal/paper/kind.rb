@@ -33,7 +33,7 @@ class Research::Journal::Paper::Kind < ApplicationRecord
   
   validates :title, presence: true
   
-  scope :ordered, -> { order(:title) }
+  scope :ordered, -> (language) { order(:title) }
 
   def to_s
     "#{title}"

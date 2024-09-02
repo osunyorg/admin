@@ -1,51 +1,55 @@
 <%= simple_form_for [:admin, paper] do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
 
-  <div class="row">
-    <div class="col-md-8">
-      <%= osuny_panel t('content') do %>
-        <%= f.input :title, as: :text, input_html: { rows: 3 } %>
-        <%= f.input :summary %>
-        <%= f.input :abstract, as: :text, input_html: { rows: 8 } %>
-        <%= f.input :pdf %>
-        <%= f.input :doi %>
-        <%= f.input :text,
-                    as: :summernote,
-                    input_html: {
-                      data: { 'summernote-config' => 'mini' }
-                    } if has_content?(paper.text) %>
-        <%= f.input :bibliography,
-                    as: :summernote,
-                    input_html: {
-                      data: { 'summernote-config' => 'mini' }
-                    } if has_content?(paper.references) %>
-      <% end %>
+    <div class="row">
+      <div class="col-md-8">
+        <%= osuny_panel t('content') do %>
+          <%= lf.input :title, as: :text, input_html: { rows: 3 } %>
+          <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+          <%= lf.input :abstract, as: :text, input_html: { rows: 8 } %>
+          <%= lf.input :pdf %>
+          <%= f.input :doi %>
+          <%= lf.input :text,
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'mini' }
+                      } if has_content?(paper.text) %>
+          <%= lf.input :bibliography,
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'mini' }
+                      } if has_content?(paper.bibliography) %>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <%= osuny_panel t('metadata') do %>
+          <%= render  "admin/application/slug/form",
+                      f: lf,
+                      source: '#research_journal_paper_localizations_attributes_0_title' %>
+          <%= f.association :volume, 
+                            collection: osuny_collection(@journal.volumes, localized: true) %>
+          <%= lf.input :published %>
+          <%= lf.input :published_at, html5: true, as: :date %>
+          <%= f.input :accepted_at, html5: true, as: :date %>
+          <%= f.input :received_at, html5: true, as: :date %>
+          <%= lf.input :keywords, as: :text, input_html: { rows: 2 } %>
+          <%#= f.association :people,
+                            collection: current_university.people
+                                                          .in_closest_language_id(@journal.language_id)
+                                                          .researchers
+                                                          .ordered,
+                            as: :check_boxes %>
+          <%= lf.input :authors_list %>
+          <%= f.association :kind, collection: @journal.kinds.ordered(current_language) if @journal.kinds.any? %>
+        <% end %>
+        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+      </div>
     </div>
-    <div class="col-md-4">
-      <%= osuny_panel t('metadata') do %>
-        <%= render  "admin/application/slug/form",
-                    f: f,
-                    source: '#research_journal_paper_title' %>
-        <%= f.association :volume, collection: @journal.volumes.ordered, label: Research::Journal::Volume.model_name.human %>
-        <%= f.input :published %>
-        <%= f.input :published_at, html5: true, as: :date %>
-        <%= f.input :accepted_at, html5: true, as: :date %>
-        <%= f.input :received_at, html5: true, as: :date %>
-        <%= f.input :keywords, as: :text, input_html: { rows: 2 } %>
-        <%= f.association :people,
-                          collection: current_university.people
-                                                        .in_closest_language_id(@journal.language_id)
-                                                        .researchers
-                                                        .ordered,
-                          as: :check_boxes %>
-        <%= f.input :authors_list %>
-        <%= f.association :kind, collection: @journal.kinds.ordered if @journal.kinds.any? %>
-      <% end %>
-      <%= render 'admin/application/meta_description/form', f: f, about: paper %>
-    </div>
-  </div>
-  <% content_for :action_bar_right do %>
-    <%= submit f %>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
   <% end %>
 <% end %>

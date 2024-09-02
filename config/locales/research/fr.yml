@@ -48,18 +48,19 @@ fr:
         language: Langue
         title: Titre
       research/journal/paper:
-        abstract: Extrait
         accepted_at: Accepté le
+        doi: DOI
+        kind: Type de papier
+        people: Auteur·e·s
+        received_at: Reçu le
+      research/journal/paper/localization:
+        abstract: Extrait
         authors_list: Liste des auteur·e·s
         bibliography: Bibliographie
-        doi: DOI
         keywords: Mots clés
-        kind: Type de papier
         pdf: PDF
-        people: Auteur·e·s
         published_at: Publié le
         published: Publié ?
-        received_at: Reçu le
         text: Texte
         title: Titre
       research/journal/paper/kind:

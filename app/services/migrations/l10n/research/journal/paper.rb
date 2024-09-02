@@ -1,0 +1,32 @@
+class Migrations::L10n::Research::Journal::Paper < Migrations::L10n::Base
+  def self.execute
+    Research::Journal::Paper.find_each do |object|
+      # Les papiers ne sont pas localisés du tout
+      about_id = object.id
+
+      l10n = Research::Journal::Paper::Localization.create(
+        abstract: object.abstract,
+        authors_list: object.authors_list,
+        bibliography: object.bibliography,
+        keywords: object.keywords,
+        meta_description: object.meta_description,
+        published: object.published,
+        published_at: object.published_at,
+        slug: object.slug,
+        summary: object.summary,
+        text: object.text,
+        title: object.title,
+
+        about_id: about_id,
+        language_id: object.journal.language_id,
+        university_id: object.university_id,
+        created_at: object.created_at
+      )
+
+      object.translate_contents!(l10n)
+      object.translate_attachment(l10n, :pdf)
+
+      l10n.save
+    end
+  end
+end

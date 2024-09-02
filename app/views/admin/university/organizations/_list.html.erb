@@ -4,12 +4,10 @@
       <div class="card mb-0">
         <%= osuny_thumbnail_localized organization, large: true, cropped: false %>
         <div class="card-body">
-          <p class="mb-1">
-            <%= osuny_link_localized  organization,
-                                      admin_university_organization_path(organization),
-                                      classes: 'stretched-link' %>
-          </p>
           <%= osuny_published_localized organization %>
+          <%= osuny_link_localized  organization,
+                                    admin_university_organization_path(organization),
+                                    classes: 'stretched-link' %>
         </div>
       </div>
     </div>

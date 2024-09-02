@@ -36,12 +36,15 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   include Initials
   include Permalinkable
   include Sanitizable
-  include Sluggable
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
   include WithPublication
   include WithUniversity
+
+  alias :volume :about
+
+  delegate :number, to: :volume
 
   validates_presence_of :title
 

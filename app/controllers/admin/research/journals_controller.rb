@@ -16,9 +16,9 @@ class Admin::Research::JournalsController < Admin::Research::Journals::Applicati
   end
 
   def show
-    @papers = @journal.papers.ordered.limit(10)
-    @kinds = @journal.kinds.ordered
-    @volumes = @journal.volumes.ordered
+    @papers = @journal.papers.ordered(current_language).limit(10)
+    @kinds = @journal.kinds.ordered(current_language)
+    @volumes = @journal.volumes.ordered(current_language).limit(6)
     breadcrumb
   end
 
@@ -28,14 +28,13 @@ class Admin::Research::JournalsController < Admin::Research::Journals::Applicati
 
   def edit
     breadcrumb
-    add_breadcrumb t('edit')
+    add_breadcrumb t('admin.subnav.settings')
   end
 
   def create
     if @journal.save
       redirect_to [:admin, @journal], notice: t('admin.successfully_created_html', model: @journal.to_s_in(current_language))
     else
-      byebug
       breadcrumb
       render :new, status: :unprocessable_entity
     end

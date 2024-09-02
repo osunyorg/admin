@@ -1,12 +1,71 @@
-<% content_for :title, @paper %>
+<% content_for :title, @l10n %>
 
 <div class="row">
-  <div class="col-md-8">
-    <%= render 'admin/application/summary/show', about: @paper %>
+  <div class="col-lg-4">
+    <%= osuny_label Research::Journal::Paper.human_attribute_name('received_at') %>
+    <p>
+    <% if @paper.received_at %>
+      <%= l @paper.received_at.to_time, format: :date_with_explicit_month %>
+      <% else %>
+        -
+    <% end %>
+    </p>
+  </div>
+  <div class="col-lg-4">
+    <%= osuny_label Research::Journal::Paper.human_attribute_name('accepted_at') %>
+    <p>
+      <% if @paper.accepted_at %>
+        <%= l @paper.accepted_at.to_time, format: :date_with_explicit_month %>
+      <% else %>
+        -
+      <% end %>
+    </p>
+  </div>
+  <div class="col-lg-4">
+    <%= osuny_label Research::Journal::Paper::Localization.human_attribute_name('published_at') %>
+    <p>
+      <% if @l10n.published? && @l10n.published_at.present? %>
+        <%= l @l10n.published_at.to_time, format: :date_with_explicit_month %>
+      <% else %>
+        -
+      <% end %>
+    </p>
+  </div>
+</div>
+<%= osuny_separator %>
+<div class="row">
+  <div class="col-lg-4">
+    <%= osuny_panel t('metadata') do %>
+        <% if @paper.volume %>
+          <%= osuny_label Research::Journal::Paper.human_attribute_name('volume') %>
+          <p><%= osuny_link_localized @paper.volume,
+                                      [:admin, @paper.volume] %></p>
+        <% end %>
+        <% unless @paper.keywords.blank? %>
+          <%= osuny_label Research::Journal::Paper.human_attribute_name('keywords') %>
+          <p><%= @paper.keywords %></p>
+        <% end %>
+        <% if @paper.kind %>
+          <%= osuny_label Research::Journal::Paper.human_attribute_name('kind') %>
+          <p><%= link_to @paper.kind, admin_research_journal_kind_path(@paper.kind) %></p>
+        <% end %>
+        <% if @paper.people.any? %>
+          <%= osuny_label Research::Journal::Paper.human_attribute_name('people') %>
+          <%= render 'admin/research/researchers/list', researchers: @paper.people %>
+        <% end %>
+        <% if @paper.authors_list.present? %>
+          <%= osuny_label Research::Journal::Paper::Localization.human_attribute_name('authors_list') %>
+          <p><%= @paper.authors_list %></p>
+        <% end %>
+    <% end %>
+    <%= render 'admin/application/meta_description/show', about: @paper %>
+  </div>
+  <div class="col-lg-8">
+    <%= render 'admin/application/summary/show', about: @l10n %>
     <%= osuny_panel t('content') do %>
-      <% if @paper.pdf.attached? %>
-        <%= osuny_label Research::Journal::Paper.human_attribute_name('pdf') %>
-        <p><%= link_to @paper.pdf.filename, url_for(@paper.pdf) %></p>
+      <% if @l10n.pdf.attached? %>
+        <%= osuny_label Research::Journal::Paper::Localization.human_attribute_name('pdf') %>
+        <p><%= link_to @l10n.pdf.filename, url_for(@l10n.pdf) %></p>
       <% end %>
       <% if @paper.doi.present?%>
         <%= osuny_label Research::Journal::Paper.human_attribute_name('doi') %>
@@ -21,55 +80,11 @@
         <%= sanitize @paper.bibliography %>
       <% end %>
     <% end %>
-    <%= render 'admin/communication/blocks/content/editor', about: @paper %>
-    <%= render 'admin/application/dependencies', about: @paper %>
-  </div>
-  <div class="col-md-4">
-    <%= osuny_panel t('metadata') do %>
-        <% if @paper.volume %>
-          <%= osuny_label Research::Journal::Paper.human_attribute_name('volume') %>
-          <p><%= link_to  @paper.volume,
-                          [:admin, @paper.volume],
-                          class: "#{'draft' unless @paper.volume.published?}" %></p>
-        <% end %>
-        <%= osuny_label Research::Journal::Paper.human_attribute_name('published') %>
-        <p><%= t @paper.published %></p>
-        <% if @paper.published? && @paper.published_at.present? %>
-          <%= osuny_label Research::Journal::Paper.human_attribute_name('published_at') %>
-          <p><%= l @paper.published_at.to_time, format: :date_with_explicit_month %></p>
-        <% end %>
-        <% if @paper.accepted_at.present? %>
-          <%= osuny_label Research::Journal::Paper.human_attribute_name('accepted_at') %>
-          <p><%= l @paper.accepted_at.to_time, format: :date_with_explicit_month %></p>
-        <% end %>
-        <% if @paper.received_at.present? %>
-          <%= osuny_label Research::Journal::Paper.human_attribute_name('received_at') %>
-          <p><%= l @paper.received_at.to_time, format: :date_with_explicit_month %></p>
-        <% end %>
-        <% unless @paper.keywords.blank? %>
-          <%= osuny_label Research::Journal::Paper.human_attribute_name('keywords') %>
-          <p><%= @paper.keywords %></p>
-        <% end %>
-        <% if @paper.kind %>
-          <%= osuny_label Research::Journal::Paper.human_attribute_name('kind') %>
-          <p><%= link_to @paper.kind, admin_research_journal_kind_path(@paper.kind) %></p>
-        <% end %>
-        <% if @paper.people.any? %>
-          <%= osuny_label Research::Journal::Paper.human_attribute_name('people') %>
-          <ul class="list-unstyled">
-            <% @paper.people.each do |person| %>
-              <li><%= link_to person, admin_research_researcher_path(person) %></li>
-            <% end %>
-          </ul>
-        <% end %>
-        <% if @paper.authors_list.present? %>
-          <%= osuny_label Research::Journal::Paper.human_attribute_name('authors_list') %>
-          <p><%= @paper.authors_list %></p>
-        <% end %>
-    <% end %>
-    <%= render 'admin/application/meta_description/show', about: @paper %>
   </div>
 </div>
+<%= osuny_separator %>
+<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
+<%= render 'admin/application/dependencies', about: @paper %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @paper %>

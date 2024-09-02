@@ -5,7 +5,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   include Admin::Localizable
 
   def index
-    @volumes = @volumes.ordered
+    @volumes = @volumes.ordered(current_language)
                        .page(params[:page])
     breadcrumb
   end

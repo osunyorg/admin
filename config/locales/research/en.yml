@@ -48,18 +48,19 @@ en:
         language: Language
         title: Title
       research/journal/paper:
-        abstract: Abstract
         accepted_at: Accepted at
-        authors_list: Authors list
-        bibliography: Bibliography
         doi: DOI
-        keywords: Keywords
-        kind: Kind of paper
         pdf: PDF
         people: Authors
+        received_at: Received at
+      research/journal/paper/localization:
+        abstract: Abstract
+        authors_list: Authors list
+        bibliography: Bibliography
+        keywords: Keywords
+        kind: Kind of paper
         published_at: Published at
         published: Published?
-        received_at: Received at
         text: Text
         title: Title
       research/journal/paper/kind:
