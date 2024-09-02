@@ -4,6 +4,10 @@ class Migrations::L10n::Communication::Website::Portfolio::Project < Migrations:
       puts "Migration project #{project.id}"
 
       about_id = project.original_id || project.id
+      next if Communication::Website::Portfolio::Project::Localization.where(
+        about_id: about_id,
+        language_id: project.language_id
+      ).exists?
 
       l10n = Communication::Website::Portfolio::Project::Localization.create(
         featured_image_alt: project.featured_image_alt,

@@ -38,26 +38,12 @@ class Research::Journal < ApplicationRecord
   has_many  :volumes,
             foreign_key: :research_journal_id,
             dependent: :destroy
-  has_many  :published_volumes,
-            -> { published },
-            class_name: 'Research::Journal::Volume',
-            foreign_key: :research_journal_id,
-            dependent: :destroy
   has_many  :papers,
-            foreign_key: :research_journal_id,
-            dependent: :destroy
-  has_many  :published_papers,
-            -> { published },
-            class_name: 'Research::Journal::Paper',
             foreign_key: :research_journal_id,
             dependent: :destroy
   has_many  :people,
             -> { distinct },
             through: :papers
-  has_many  :people_through_published_papers,
-            -> { distinct },
-            through: :published_papers,
-            source: :people
   has_many  :kinds,
             class_name: 'Research::Journal::Paper::Kind'
 
@@ -79,7 +65,7 @@ class Research::Journal < ApplicationRecord
   end
 
   def researchers
-    university.people.where(id: people_through_published_papers.pluck(:id), is_researcher: true)
+    university.people.where(id: people.pluck(:id), is_researcher: true)
   end
 
   def git_path(website)
@@ -114,16 +100,16 @@ class Research::Journal < ApplicationRecord
   def has_education_diplomas?
     false
   end
-  
+
   def has_administration_locations?
     false
   end
 
   def has_research_papers?
-    published_papers.published.any?
+    papers.any?
   end
 
   def has_research_volumes?
-    published_volumes.published.any?
+    volumes.any?
   end
 end

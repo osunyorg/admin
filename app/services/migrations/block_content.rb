@@ -51,7 +51,7 @@ module Migrations
     protected
 
     def should_add_heading?(block)
-      block.title.present? && 
+      block.title.present? &&
       # these blocks keep their title
       !block.call_to_action? &&
       !block.posts? &&

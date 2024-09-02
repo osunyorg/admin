@@ -4,6 +4,10 @@ class Migrations::L10n::Communication::Website::Page < Migrations::L10n::Base
       puts "Migration page #{page.id}"
 
       about_id = page.original_id || page.id
+      next if Communication::Website::Page::Localization.where(
+        about_id: about_id,
+        language_id: page.language_id
+      ).exists?
 
       l10n = Communication::Website::Page::Localization.create(
         breadcrumb_title: page.breadcrumb_title,

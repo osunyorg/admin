@@ -2,6 +2,10 @@ class Migrations::L10n::Education::Program < Migrations::L10n::Base
   def self.execute
     Education::Program.find_each do |program|
       about_id = program.original_id || program.id
+      next if Education::Program::Localization.where(
+        about_id: about_id,
+        language_id: program.language_id
+      ).exists?
 
       l10n = Education::Program::Localization.create(
         accessibility: program.accessibility,

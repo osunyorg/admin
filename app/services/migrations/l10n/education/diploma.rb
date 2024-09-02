@@ -2,6 +2,10 @@ class Migrations::L10n::Education::Diploma < Migrations::L10n::Base
   def self.execute
     Education::Diploma.find_each do |object|
       about_id = object.original_id || object.id
+      next if Education::Diploma::Localization.where(
+        about_id: about_id,
+        language_id: object.language_id
+      ).exists?
 
       l10n = Education::Diploma::Localization.create(
         duration: object.duration,

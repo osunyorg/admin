@@ -1,7 +1,5 @@
-class MigrateBlocksTargetJob < ApplicationJob
-  queue_as :default
-
-  def perform
+class Migrations::L10n::Communication::Block < Migrations::L10n::Base
+  def self.execute
     # Le but est de rebrancher tous les éléments targetés dans les blocs aux "originaux" puisqu'avec
     # la refonte, les objets non originaux sont voués à disparaitre.
     begin

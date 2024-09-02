@@ -2,6 +2,10 @@ class Migrations::L10n::Communication::Website::Agenda::Category < Migrations::L
   def self.execute
     Communication::Website::Agenda::Category.find_each do |category|
       about_id = category.original_id || category.id
+      next if Communication::Website::Agenda::Category::Localization.where(
+        about_id: about_id,
+        language_id: category.language_id
+      ).exists?
 
       l10n = Communication::Website::Agenda::Category::Localization.create(
         featured_image_alt: category.featured_image_alt,

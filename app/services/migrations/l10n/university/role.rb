@@ -8,6 +8,11 @@ class Migrations::L10n::University::Role < Migrations::L10n::Base
       # If "old way" translation, we set the about to the original, else if "old way" master, we take its ID.
       about_id = role.original_id || role.id
 
+      next if University::Role::Localization.where(
+        about_id: about_id,
+        language_id: role.language_id
+      ).exists?
+
       l10n = University::Role::Localization.create(
         description: role.description,
         about_id: about_id,

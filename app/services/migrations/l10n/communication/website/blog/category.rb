@@ -4,6 +4,10 @@ class Migrations::L10n::Communication::Website::Blog::Category < Migrations::L10
       puts "Migration category #{object.id}"
 
       about_id = object.original_id || object.id
+      next if Communication::Website::Post::Category::Localization.where(
+        about_id: about_id,
+        language_id: object.language_id
+      ).exists?
 
       l10n = Communication::Website::Post::Category::Localization.create(
         featured_image_alt: object.featured_image_alt,

@@ -4,6 +4,10 @@ class Migrations::L10n::Communication::Website::Agenda::Event < Migrations::L10n
       puts "Migration event #{event.id}"
 
       about_id = event.original_id || event.id
+      next if Communication::Website::Agenda::Event::Localization.where(
+        about_id: about_id,
+        language_id: event.language_id
+      ).exists?
 
       l10n = Communication::Website::Agenda::Event::Localization.create(
         add_to_calendar_urls: event.add_to_calendar_urls,

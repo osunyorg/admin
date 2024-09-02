@@ -2,6 +2,10 @@ class Migrations::L10n::Administration::Location < Migrations::L10n::Base
   def self.execute
     Administration::Location.find_each do |object|
       about_id = object.original_id || object.id
+      next if Administration::Location::Localization.where(
+        about_id: about_id,
+        language_id: object.language_id
+      ).exists?
 
       l10n = Administration::Location::Localization.create(
         address_additional: object.address_additional,
