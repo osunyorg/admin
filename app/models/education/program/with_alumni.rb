@@ -21,6 +21,7 @@ module Education::Program::WithAlumni
                source: :organization
                alias_method :university_person_alumni_organizations, :alumni_organizations
 
+    # education_programs_university_people
     # Dénormalisation des alumni pour le faceted search
     has_and_belongs_to_many :university_people,
                class_name: 'University::Person',
