@@ -31,7 +31,6 @@ l10n ||= f.object.localizations.build(language_id: current_language.id)
                                         class: 'btn btn-sm btn-danger' %>
       </div>
     </div>
-    <%= f.hidden_field :language_id, value: current_language.id %>
     <%= f.hidden_field :id if include_id %>
   </div>
 <% end %>

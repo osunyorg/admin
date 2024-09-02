@@ -13,11 +13,16 @@
           <% involvements.each do |involvement| %>
             <%
             role = involvement.target
+            role_l10n = role.best_localization_for(current_language)
             role_target = role.target
             %>
             <tr>
               <td>
-                <%= role.to_s %>
+                <% if role_l10n.language != current_language %>
+                  <span class="fst-italic"><%= role_l10n %></span>
+                <% else %>
+                  <%= role_l10n %>
+                <% end %>
                 <% if role_target.present? %>
                   <br>
                   <small>

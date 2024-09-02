@@ -21,8 +21,8 @@ class Migrations::L10n::University::Role < Migrations::L10n::Base
         # We need to make sure the target is the original.
         # Can be an Education::School or an Education::Program
         if role.target.present?
-          target_id = program.target.original_id || program.target.id
-          program.update_column(:target_id, target_id)
+          target_id = role.target.original_id || role.target.id
+          role.update_column(:target_id, target_id)
         end
       end
     end

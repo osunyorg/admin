@@ -10,9 +10,14 @@
     </thead>
     <tbody>
       <% experiences.each do |experience| %>
-        <% organization = experience.organization %>
+        <%
+        experience_l10n = experience.best_localization_for(current_language)
+        organization = experience.organization
+        %>
         <tr>
-          <td><%= experience.description %></td>
+          <td class="<%= 'fst-italic' if experience_l10n.language != current_language %>">
+            <%= experience_l10n.description %>
+          </td>
           <td><%= osuny_link_localized organization, [:admin, organization] %></td>
           <td><%= experience.from_year %></td>
           <td><%= experience.to_year %></td>
