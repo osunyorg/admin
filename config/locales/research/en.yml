@@ -43,7 +43,7 @@ en:
         last_name: Last name
         publications: Publications imported from HAL
         researcher: Researchers in Osuny
-      research/journal:
+      research/journal/localization:
         issn: ISSN
         language: Language
         title: Title

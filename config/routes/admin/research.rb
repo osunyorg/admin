@@ -20,6 +20,9 @@ namespace :research do
     root to: 'dashboard#index'
   end
   resources :journals do
+    member do
+      get :static
+    end
     resources :volumes, controller: 'journals/volumes' do
       member do
         get :static

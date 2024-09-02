@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_30_121056) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_02_073950) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1270,6 +1270,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_30_121056) do
     t.index ["university_person_id", "research_hal_author_id"], name: "hal_author_person"
   end
 
+  create_table "research_journal_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "issn"
+    t.text "meta_description"
+    t.text "summary"
+    t.string "title"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_research_journal_localizations_on_about_id"
+    t.index ["language_id"], name: "index_research_journal_localizations_on_language_id"
+    t.index ["university_id"], name: "index_research_journal_localizations_on_university_id"
+  end
+
   create_table "research_journal_paper_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "journal_id", null: false
@@ -1349,7 +1364,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_30_121056) do
     t.datetime "updated_at", null: false
     t.string "issn"
     t.text "summary"
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.index ["language_id"], name: "index_research_journals_on_language_id"
     t.index ["university_id"], name: "index_research_journals_on_university_id"
   end
@@ -1999,6 +2014,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_30_121056) do
   add_foreign_key "emergency_messages", "universities"
   add_foreign_key "imports", "universities"
   add_foreign_key "imports", "users"
+  add_foreign_key "research_journal_localizations", "languages"
+  add_foreign_key "research_journal_localizations", "research_journals", column: "about_id"
+  add_foreign_key "research_journal_localizations", "universities"
   add_foreign_key "research_journal_paper_kinds", "research_journals", column: "journal_id"
   add_foreign_key "research_journal_paper_kinds", "universities"
   add_foreign_key "research_journal_papers", "research_journal_paper_kinds", column: "kind_id"

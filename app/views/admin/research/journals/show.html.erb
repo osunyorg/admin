@@ -1,4 +1,4 @@
-<% content_for :title, @journal %>
+<% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
   <% if @journal.websites.any? %>
@@ -8,19 +8,19 @@
       <%= link_to website, [:admin, website] %><br>
     <% end %>
   <% end %>
-  <% if @journal.issn.present? %>
-    <%= Research::Journal.human_attribute_name('issn') %>
-    <%= @journal.issn %>
+  <% if @l10n.issn.present? %>
+    <%= Research::Journal::Localization.human_attribute_name('issn') %>
+    <%= @l10n.issn %>
   <% end %>
   <%= render 'admin/application/favorites/widget', about: @journal %>
 <% end %>
 
 <div class="row">
   <div class="col-md-8">
-    <%= render 'admin/application/summary/show', about: @journal %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
   </div>
   <div class="col-md-4">
-    <%= render 'admin/application/meta_description/show', about: @journal %>
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
 
@@ -66,6 +66,7 @@ action = link_to    t('create'),
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @journal %>
+  <%= static_link static_admin_research_journal_path(@journal) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

@@ -43,7 +43,7 @@ fr:
         last_name: Nom
         publications: Publications importées de HAL
         researcher: Chercheur·e dans Osuny
-      research/journal:
+      research/journal/localization:
         issn: ISSN
         language: Langue
         title: Titre
