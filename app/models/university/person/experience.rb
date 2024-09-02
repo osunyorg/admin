@@ -25,7 +25,7 @@
 #  fk_rails_923d0b71fd  (university_id => universities.id)
 #
 class University::Person::Experience < ApplicationRecord
-  include Sanitizable
+  include Localizable
   include WithUniversity
 
   attr_accessor :organization_name
@@ -45,15 +45,6 @@ class University::Person::Experience < ApplicationRecord
     .order(from_year: :desc, created_at: :desc)
     .limit(10)
   }
-
-  def to_s
-    persisted?  ? "#{description}"
-                : self.class.human_attribute_name('new')
-  end
-
-  def organization_name
-    @organization_name || organization&.name
-  end
 
   private
 
