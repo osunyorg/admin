@@ -4,6 +4,10 @@ class Migrations::L10n::Communication::Website::Portfolio::Category < Migrations
       puts "Migration category #{category.id}"
 
       about_id = category.original_id || category.id
+      next if Communication::Website::Portfolio::Category::Localization.where(
+        about_id: about_id,
+        language_id: category.language_id
+      ).exists?
 
       l10n = Communication::Website::Portfolio::Category::Localization.create(
         featured_image_alt: category.featured_image_alt,
@@ -11,8 +15,6 @@ class Migrations::L10n::Communication::Website::Portfolio::Category < Migrations
         meta_description: category.meta_description,
         name: category.name,
         path: category.path,
-        published: true, # No published yet
-        published_at: category.updated_at, # No published_at yet
         slug: category.slug,
         summary: category.summary,
         about_id: about_id,

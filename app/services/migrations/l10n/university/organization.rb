@@ -9,6 +9,11 @@ class Migrations::L10n::University::Organization < Migrations::L10n::Base
       # If "old way" translation, we set the about to the original, else if "old way" master, we take its ID.
       about_id = orga.original_id || orga.id
 
+      next if University::Organization::Localization.where(
+        about_id: about_id,
+        language_id: orga.language_id
+      ).exists?
+
       l10n = University::Organization::Localization.create(
         address_additional: orga.address_additional,
         address_name: orga.address_name,
@@ -38,10 +43,15 @@ class Migrations::L10n::University::Organization < Migrations::L10n::Base
   end
 
   def self.migrate_category_localizations
-    University::Person::Category.find_each do |category|
+    University::Organization::Category.find_each do |category|
       about_id = category.original_id || category.id
 
-      l10n = University::Person::Category::Localization.create(
+      next if University::Organization::Category::Localization.where(
+        about_id: about_id,
+        language_id: category.language_id
+      ).exists?
+
+      l10n = University::Organization::Category::Localization.create(
         name: category.name,
         slug: category.slug,
         about_id: about_id,

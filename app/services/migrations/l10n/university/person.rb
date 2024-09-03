@@ -3,13 +3,17 @@ class Migrations::L10n::University::Person < Migrations::L10n::Base
     migrate_localizations
     migrate_category_localizations
     migrate_facets
-    migrate_experiences
   end
 
   def self.migrate_localizations
     University::Person.find_each do |person|
       # If "old way" translation, we set the about to the original, else if "old way" master, we take its ID.
       about_id = person.original_id || person.id
+
+      next if University::Person::Localization.where(
+        about_id: about_id,
+        language_id: person.language_id
+      ).exists?
 
       l10n = University::Person::Localization.create(
         biography: person.biography,
@@ -40,11 +44,16 @@ class Migrations::L10n::University::Person < Migrations::L10n::Base
     end
   end
 
-  def self.migrate_university_organization_category_localizations
-    University::Organization::Category.find_each do |category|
+  def self.migrate_category_localizations
+    University::Person::Category.find_each do |category|
       about_id = category.original_id || category.id
 
-      l10n = University::Organization::Category::Localization.create(
+      next if University::Person::Category::Localization.where(
+        about_id: about_id,
+        language_id: category.language_id
+      ).exists?
+
+      l10n = University::Person::Category::Localization.create(
         name: category.name,
         slug: category.slug,
         about_id: about_id,
@@ -108,17 +117,4 @@ class Migrations::L10n::University::Person < Migrations::L10n::Base
     end
   end
 
-  def self.migrate_experiences
-    University::Person::Experience.find_each do |experience|
-      # En théorie, il faut : 
-      # 1. vérifier que l'expérience originale existe,
-      # 2. sinon la créer
-      # 3. puis supprimer l'expérience
-      # En pratique, les expériences concernent uniquement MMI et IJBA, qui sont monolingues, donc on saute au 3.
-      organization = experience.organization
-      person = experience.person
-      experience_is_original = organization.original_id.blank? && person.original_id.blank?
-      experience.destroy unless experience_is_original
-    end
-  end
 end

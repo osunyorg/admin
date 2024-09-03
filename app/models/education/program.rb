@@ -100,7 +100,7 @@ class Education::Program < ApplicationRecord
 
   has_one_attached_deletable :downloadable_summary # TODO L10N : To remove
   has_one_attached_deletable :logo # TODO L10N : To remove
-  
+
   before_destroy :move_children
 
   scope :ordered_by_name, -> (language) { order(:name) }
@@ -130,8 +130,8 @@ class Education::Program < ApplicationRecord
   end
 
   def references
-    schools + 
-    siblings + 
+    schools +
+    siblings +
     descendants +
     [parent]
   end
@@ -170,7 +170,7 @@ class Education::Program < ApplicationRecord
     false
   end
 
-  def published_programs
+  def programs
     Education::Program.where(id: id)
   end
 

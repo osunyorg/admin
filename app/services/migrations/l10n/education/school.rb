@@ -3,6 +3,11 @@ class Migrations::L10n::Education::School < Migrations::L10n::Base
     Education::School.find_each do |object|
       about_id = object.original_id || object.id
 
+      next if Education::School::Localization.where(
+        about_id: about_id,
+        language_id: object.language_id
+      ).exists?
+
       l10n = Education::School::Localization.create(
         name: object.name,
         published: true,

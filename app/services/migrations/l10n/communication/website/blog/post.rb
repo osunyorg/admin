@@ -4,6 +4,10 @@ class Migrations::L10n::Communication::Website::Blog::Post < Migrations::L10n::B
       puts "Migration post #{post.id}"
 
       about_id = post.original_id || post.id
+      next if Communication::Website::Post::Localization.where(
+        about_id: about_id,
+        language_id: post.language_id
+      ).exists?
 
       l10n = Communication::Website::Post::Localization.create(
         featured_image_alt: post.featured_image_alt,
