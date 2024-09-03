@@ -231,6 +231,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_074700) do
     t.index ["university_id"], name: "index_communication_extranet_documents_on_university_id"
   end
 
+  create_table "communication_extranet_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "cookies_policy"
+    t.text "home_sentence"
+    t.string "name"
+    t.text "privacy_policy"
+    t.string "registration_contact"
+    t.string "sso_button_label"
+    t.text "terms"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_extranet_localizations_on_about_id"
+    t.index ["language_id"], name: "index_communication_extranet_localizations_on_language_id"
+    t.index ["university_id"], name: "index_communication_extranet_localizations_on_university_id"
+  end
+
   create_table "communication_extranet_post_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "slug"
@@ -1963,6 +1981,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_074700) do
   add_foreign_key "communication_extranet_documents", "communication_extranet_document_kinds", column: "kind_id"
   add_foreign_key "communication_extranet_documents", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_documents", "universities"
+  add_foreign_key "communication_extranet_localizations", "communication_extranets", column: "about_id"
+  add_foreign_key "communication_extranet_localizations", "languages"
+  add_foreign_key "communication_extranet_localizations", "universities"
   add_foreign_key "communication_extranet_post_categories", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_post_categories", "universities"
   add_foreign_key "communication_extranet_posts", "communication_extranet_post_categories", column: "category_id"
