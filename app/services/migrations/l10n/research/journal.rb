@@ -3,6 +3,7 @@ class Migrations::L10n::Research::Journal < Migrations::L10n::Base
     migrate_journals
     Volume.execute
     Paper.execute
+    Paper::Kind.execute
   end
 
   def self.migrate_journals

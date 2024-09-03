@@ -63,7 +63,7 @@ fr:
         published: Publié ?
         text: Texte
         title: Titre
-      research/journal/paper/kind:
+      research/journal/paper/kind/localization:
         title: Titre
       research/journal/volume:
         number: Numéro

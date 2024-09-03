@@ -23,19 +23,12 @@
 #
 class Research::Journal::Paper::Kind < ApplicationRecord
   include AsIndirectObject
+  include Localizable
   include Sanitizable
-  include Sluggable
-  include WithGitFiles
   include WithUniversity
 
   belongs_to :journal, class_name: 'Research::Journal'
   has_many :papers
   
-  validates :title, presence: true
-  
   scope :ordered, -> (language) { order(:title) }
-
-  def to_s
-    "#{title}"
-  end
 end

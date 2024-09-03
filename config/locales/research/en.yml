@@ -63,7 +63,7 @@ en:
         published: Published?
         text: Text
         title: Title
-      research/journal/paper/kind:
+      research/journal/paper/kind/localization:
         title: Title
       research/journal/volume:
         number: Number

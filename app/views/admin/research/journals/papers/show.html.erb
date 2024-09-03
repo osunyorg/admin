@@ -47,7 +47,7 @@
         <% end %>
         <% if @paper.kind %>
           <%= osuny_label Research::Journal::Paper.human_attribute_name('kind') %>
-          <p><%= link_to @paper.kind, admin_research_journal_kind_path(@paper.kind) %></p>
+          <p><%= osuny_link_localized @paper.kind, admin_research_journal_kind_path(@paper.kind) %></p>
         <% end %>
         <% if @paper.people.any? %>
           <%= osuny_label Research::Journal::Paper.human_attribute_name('people') %>
