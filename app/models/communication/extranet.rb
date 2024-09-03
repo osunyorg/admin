@@ -65,6 +65,9 @@ class Communication::Extranet < ApplicationRecord
 
   before_validation :sanitize_fields
 
+  delegate  :logo, :favicon, :to_s,
+            to: :original_localization
+
   scope :ordered, -> (language) { order(:name) }
   scope :for_search_term, -> (term) {
     where("

@@ -30,7 +30,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
 
   def create
     if @extranet.save
-      redirect_to [:admin, @extranet], notice: t('admin.successfully_created_html', model: @extranet.to_s)
+      redirect_to [:admin, @extranet], notice: t('admin.successfully_created_html', model: @extranet.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -39,7 +39,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
 
   def update
     if @extranet.update(extranet_params)
-      redirect_to [:admin, @extranet], notice: t('admin.successfully_updated_html', model: @extranet.to_s)
+      redirect_to [:admin, @extranet], notice: t('admin.successfully_updated_html', model: @extranet.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -49,24 +49,32 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
 
   def destroy
     @extranet.destroy
-    redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @extranet.to_s)
+    redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @extranet.to_s_in(current_language))
   end
 
   protected
 
   def extranet_params
     allowed_params = [
-      :name,
-      :registration_contact,
-      :logo, :logo_delete, :favicon, :favicon_delete, :color,
-      :home_sentence,
-      :terms, :privacy_policy, :cookies_policy
+      :color,
+      localizations_attributes: [
+        :id, :language_id,
+        :name,
+        :registration_contact,
+        :logo, :logo_delete, 
+        :favicon, :favicon_delete, 
+        :home_sentence,
+        :terms, :privacy_policy, :cookies_policy
+      ]  
     ]
     if can?(:create, Communication::Extranet)
       allowed_params += [
         :host, :about_id, :about_type, :sass,
         :feature_alumni, :feature_library, :feature_contacts, :feature_jobs, :feature_posts,
-        :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping, :sso_button_label
+        :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping
+      ]
+      allowed_params[:localizations_attributes] += [
+        :sso_button_label
       ]
     end
     params.require(:communication_extranet)
