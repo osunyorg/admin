@@ -45,4 +45,5 @@ get 'terms' => 'pages#terms', as: :terms
 get 'privacy-policy' => 'pages#privacy_policy', as: :privacy_policy
 get 'cookies-policy' => 'pages#cookies_policy', as: :cookies_policy
 get 'data' => 'pages#data', as: :data
-get 'style' => 'style#index', as: :style, constraints: { format: 'css' }
+
+root to: 'home#index'

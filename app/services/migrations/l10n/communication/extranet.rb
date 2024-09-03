@@ -23,7 +23,8 @@ class Migrations::L10n::Communication::Extranet < Migrations::L10n::Base
         created_at: object.created_at
       )
 
-      object.translate_attachment(l10n, :featured_image)
+      object.translate_attachment(l10n, :logo)
+      object.translate_attachment(l10n, :favicon)
 
       l10n.save
     end

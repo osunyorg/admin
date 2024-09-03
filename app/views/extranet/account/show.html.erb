@@ -1,10 +1,10 @@
-<% content_for :title, @person %>
+<% content_for :title, @l10n %>
 
 <div class="row">
   <div class="col-md-9">
-    <% unless @person&.biography.blank? %>
+    <% unless @l10n&.biography.blank? %>
       <div class="biography mb-5">
-        <%= sanitize @person.biography %>
+        <%= sanitize @l10n.biography %>
       </div>
     <% end %>
     <% if @person %>

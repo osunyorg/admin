@@ -15,12 +15,6 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
     breadcrumb
   end
 
-  def static
-    @about = @location
-    @website = @location.websites&.first
-    render_as_plain_text
-  end
-
   def new
     breadcrumb
   end

@@ -21,6 +21,7 @@ class Extranet::PersonalDataController < Extranet::ApplicationController
   def load_person
     @person = current_user.person
     raise CanCan::AccessDenied if @person.nil?
+    @l10n = @person.best_localization_for(current_language)
   end
 
   def person_params
