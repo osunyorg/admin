@@ -45,6 +45,7 @@ class Communication::Extranet < ApplicationRecord
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Favoritable
+  include Localizable
   include WithAbouts
   include WithConnectedObjects
   include WithFeatures
@@ -52,16 +53,6 @@ class Communication::Extranet < ApplicationRecord
   include WithSso
   include WithStyle
   include WithUniversity
-
-  has_summernote :home_sentence
-  has_summernote :terms
-  has_summernote :privacy_policy
-  has_summernote :cookies_policy
-
-  has_one_attached_deletable :logo
-  has_one_attached_deletable :favicon do |attachable|
-    attachable.variant :thumb, resize_to_limit: [228, 228]
-  end
 
   has_many :posts
   has_many :post_categories, class_name: 'Communication::Extranet::Post::Category'
@@ -76,7 +67,7 @@ class Communication::Extranet < ApplicationRecord
 
   before_validation :sanitize_fields
 
-  scope :ordered, -> { order(:name) }
+  scope :ordered, -> (language) { order(:name) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_extranets.host) ILIKE unaccent(:term) OR
@@ -138,19 +129,10 @@ class Communication::Extranet < ApplicationRecord
     @url ||= Rails.env.development? ? "http://#{host}:3000" : "https://#{host}"
   end
 
-  def to_s
-    "#{name}"
-  end
-
-  private
+  protected
 
   def sanitize_fields
     self.color = Osuny::Sanitizer.sanitize(self.color, 'string')
-    self.cookies_policy = Osuny::Sanitizer.sanitize(self.cookies_policy, 'text')
     self.host = Osuny::Sanitizer.sanitize(self.host, 'string')
-    self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
-    self.privacy_policy = Osuny::Sanitizer.sanitize(self.privacy_policy, 'text')
-    self.registration_contact = Osuny::Sanitizer.sanitize(self.registration_contact, 'string')
-    self.terms = Osuny::Sanitizer.sanitize(self.terms, 'text')
   end
 end
