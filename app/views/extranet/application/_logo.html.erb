@@ -1,5 +1,9 @@
-<% if current_context.logo.attached? %>
-  <%= kamifusen_tag current_context.logo, width: 200, alt: current_context.to_s, class: 'logo' %>
+<% current_extranet_l10n = current_extranet.original_localization %>
+<% if current_extranet_l10n.logo.attached? %>
+  <%= kamifusen_tag current_extranet_l10n.logo, 
+                    width: 200, 
+                    alt: current_extranet_l10n.to_s, 
+                    class: 'logo' %>
 <% else %>
-  <%= current_context %>
+  <%= current_extranet_l10n %>
 <% end %>
