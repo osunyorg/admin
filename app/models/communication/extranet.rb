@@ -65,8 +65,8 @@ class Communication::Extranet < ApplicationRecord
 
   before_validation :sanitize_fields
 
-  delegate  :logo, :favicon, :to_s,
-            to: :original_localization
+  has_one_attached_deletable :logo # TODO L10N : To remove
+  has_one_attached_deletable :favicon # TODO L10N : To remove
 
   scope :ordered, -> (language) { order(:name) }
   scope :for_search_term, -> (term) {

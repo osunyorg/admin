@@ -25,7 +25,7 @@
                     <br>
                     <%= experience.description %>
                     <%= '—' if experience.description.present? && experience.organization.present? %>
-                    <%= experience.organization %>
+                    <%= experience.organization.to_s_in(current_language) %>
                   </p>
                   <small><%= l experience.created_at, format: :date_with_explicit_month %></small>
                 </div>
@@ -45,9 +45,11 @@
     <div class="col-md-4 mt-5 mt-md-0">
       <h2 class="mb-4"><%= t('extranet.home.recent_cohorts') %></h2>
       <ul class="promotions">
-        <% @cohorts.each do |cohort| %>
+        <% @cohorts.each do |cohort| 
+          program_l10n = cohort.program.localization_for(current_language)
+          %>
           <li>
-            <%= link_to cohort.program.to_short_s, [:alumni, cohort] %>
+            <%= link_to program_l10n.to_short_s, [:alumni, cohort] %>
             <b><%= cohort.academic_year %></b>
           </li>
         <% end %>
