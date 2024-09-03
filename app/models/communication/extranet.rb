@@ -60,9 +60,7 @@ class Communication::Extranet < ApplicationRecord
   has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
 
-  validates_presence_of :name, :host
-  validates :logo, size: { less_than: 1.megabytes }
-  validates :favicon, size: { less_than: 1.megabytes }
+  validates_presence_of :host
   validates_presence_of :about_type, :about_id, if: :feature_alumni
 
   before_validation :sanitize_fields

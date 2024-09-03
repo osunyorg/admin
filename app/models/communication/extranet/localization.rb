@@ -45,6 +45,10 @@ class Communication::Extranet::Localization < ApplicationRecord
 
   before_validation :sanitize_fields
 
+  validates_presence_of :name
+  validates :logo, size: { less_than: 1.megabytes }
+  validates :favicon, size: { less_than: 1.megabytes }
+
   def to_s
     "#{name}"
   end
