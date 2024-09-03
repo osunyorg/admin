@@ -1,35 +1,24 @@
-<% content_for :title, "#{Communication::Extranet.model_name.human(count: 2)} (#{@extranets.total_count})" %>
+<% content_for :title, Communication::Extranet.model_name.human(count: 2) %>
 
+<p>
+  <%= @extranets.total_count %>
+  <%= Communication::Extranet.model_name.human(count: @extranets.total_count).downcase %>
+</p>
 <%= render 'filters', current_path: admin_communication_extranets_path, filters: @filters if @filters.any?  %>
 
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= Communication::Extranet.human_attribute_name('name') %></th>
-        <th><%= Communication::Extranet.human_attribute_name('host') %></th>
-        <th><%= Communication::Extranet.human_attribute_name('about_type') %></th>
-        <th><%= Communication::Extranet.human_attribute_name('about') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @extranets.each do |extranet| %>
-        <tr>
-          <td><%= link_to extranet, [:admin, extranet] %></td>
-          <td><%= link_to extranet.url, extranet.url, target: :_blank unless extranet.url.blank? %></td>
-          <td><%= I18n.t("activerecord.attributes.communication/extranet.about_#{extranet.about_type}") %></td>
-          <td><%= link_to extranet.about, [:admin, extranet.about] if extranet.about %></td>
-          <td class="text-end">
-            <div class="btn-group" role="group">
-              <%= edit_link extranet %>
-              <%= destroy_link extranet %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2 mb-3">
+  <% @extranets.each do |extranet| %>
+    <div>
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail_localized extranet %>
+        <div class="card-body">
+          <%= osuny_link_localized extranet, [:admin, extranet], classes: 'stretched-link' %>
+        </div>
+        <div class="card-footer small text-muted">
+          <%= extranet.about.to_s_in(current_language) if extranet.about %>
+        </div>
+    </div>
+  <% end %>
 </div>
 
 <%= paginate @extranets %>

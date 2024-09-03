@@ -1,4 +1,4 @@
-<% content_for :title, @extranet %>
+<% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
   <% unless @extranet.url.blank? %>
@@ -6,7 +6,7 @@
   <% end %>
   <%= I18n.t("activerecord.attributes.communication/extranet.about_#{@extranet.about_type}") %>
   <% if @extranet.about %>
-    (<%= link_to @extranet.about, [:admin, @extranet.about] unless @extranet.about.nil? %>)
+    — <%= osuny_link_localized @extranet.about, [:admin, @extranet.about] unless @extranet.about.nil? %>
   <% end %>
   <%= render 'admin/application/favorites/widget', about: @extranet %>
 <% end %>

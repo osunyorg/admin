@@ -3,11 +3,15 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
                               through: :current_university,
                               through_association: :communication_extranets
 
+  include Admin::Localizable
+
   has_scope :for_search_term
   has_scope :for_about_type
 
   def index
-    @extranets = apply_scopes(@extranets).ordered.page(params[:page])
+    @extranets = apply_scopes(@extranets)
+                    .ordered(current_language)
+                    .page(params[:page])
     breadcrumb
   end
 
