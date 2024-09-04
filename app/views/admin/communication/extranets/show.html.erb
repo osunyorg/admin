@@ -17,10 +17,11 @@
     property = "feature_#{feature}"
     active = @extranet.has_feature? feature
     next unless active
+    path = send "admin_communication_extranet_#{feature}_path"
     %>
     <div class="col-lg-3">
       <%= osuny_panel Communication::Extranet.human_attribute_name property do %>
-        <%= link_to t('show'), [:admin, @extranet, feature], class: 'stretched-link' %>
+        <%= link_to t('show'), path, class: 'stretched-link' %>
       <% end %>
     </div>
   <% end %>

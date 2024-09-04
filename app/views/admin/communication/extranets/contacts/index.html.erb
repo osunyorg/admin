@@ -9,7 +9,7 @@
       <tbody>
         <% @people.each do |person| %>
           <tr>
-            <td><%= link_to person, [:admin, person] %></td>
+            <td><%= link_to person.to_s_in(current_language), [:admin, person] %></td>
             <td><%= person.email %></td>
             <td><%= render 'toggle', about: person %></td>
           </tr>
@@ -28,7 +28,7 @@
       <tbody>
         <% @organizations.each do |organization| %>
           <tr>
-            <td><%= link_to organization, [:admin, organization] %></td>
+            <td><%= link_to organization.to_s_in(current_language), [:admin, organization] %></td>
             <td><%= render 'toggle', about: organization %></td>
           </tr>
         <% end %>

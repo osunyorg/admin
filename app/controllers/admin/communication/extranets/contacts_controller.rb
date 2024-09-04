@@ -2,11 +2,11 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
   def index
     @people = current_university.people
                                 .for_language_id(current_university.default_language_id)
-                                .ordered
+                                .ordered(current_language)
                                 .page(params[:persons_page])
     @organizations = current_university.organizations
                                         .for_language_id(current_university.default_language_id)
-                                        .ordered
+                                        .ordered(current_language)
                                         .page(params[:organizations_page])
     breadcrumb
     add_breadcrumb Communication::Extranet.human_attribute_name(:feature_contacts)
