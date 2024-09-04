@@ -1,28 +1,33 @@
 <%= simple_form_for [:admin, document] do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= lf.error_notification %>
+    <%= lf.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
 
-  <div class="row">
-    <div class="col-md-8">
-      <%= osuny_panel t('content') do %>
-        <%= f.input :name %>
-        <%= f.input :file,
-                    as: :single_deletable_file,
-                    direct_upload: true %>
-      <% end %>
-    </div>
-    <div class="col-md-4">
-      <%= osuny_panel t('metadata') do %>
-        <% if can? :publish, document %>
-          <%= f.input :published %>
-          <%= f.input :published_at, html5: true, as: :date %>
+    <div class="row">
+      <div class="col-md-8">
+        <%= osuny_panel t('content') do %>
+          <%= lf.input  :name %>
+          <%= lf.input  :file,
+                        as: :single_deletable_file,
+                        direct_upload: true %>
         <% end %>
-        <%= f.association :kind, collection: @extranet.document_kinds.ordered, include_blank: false %>
-        <%= f.association :category, collection: @extranet.document_categories.ordered, include_blank: false %>
-      <% end %>
+      </div>
+      <div class="col-md-4">
+        <%= osuny_panel t('metadata') do %>
+          <% if can? :publish, document %>
+            <%= lf.input :published %>
+            <%= lf.input :published_at, html5: true, as: :date %>
+          <% end %>
+          <%= f.association :kind, collection: @extranet.document_kinds.ordered, include_blank: false %>
+          <%= f.association :category, collection: @extranet.document_categories.ordered, include_blank: false %>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <% content_for :action_bar_right do %>
-    <%= submit f %>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
   <% end %>
 <% end %>

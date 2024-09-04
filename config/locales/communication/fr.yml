@@ -25,33 +25,35 @@ fr:
         about_Research::Laboratory: Extranet d'un laboratoire
         about_type: Type d'extranet
         color: Couleur
-        cookies_policy: Politique de cookies
-        favicon: Favicon
         feature_alumni: Alumni
         feature_contacts: Annuaire
         feature_jobs: Offres d'emploi
         feature_library: Documents
         feature_posts: Actualités
         has_sso: A un SSO ?
-        home_sentence: Phrase affichée sur la home
         host: Domaine
-        logo: Logo
-        name: Nom
-        privacy_policy: Politique de confidentialité
-        registration_contact: Mail de contact pour les problèmes d'inscription
-        sass: Style custom
-        sso_button_label: Libellé du bouton de connexion
+        sass: Style personnalisé (en SASS)
         sso_cert: Certificat
         sso_inherit_from_university: SSO hérité de l'Université
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
+      communication/extranet/localization:
+        cookies_policy: Politique de cookies
+        favicon: Icône de navigateur (favicon)
+        home_sentence: Phrase affichée sur la home
+        logo: Logo
+        name: Nom
+        privacy_policy: Politique de confidentialité
+        registration_contact: Mail de contact pour les problèmes d'inscription
+        sso_button_label: Libellé du bouton de connexion
         terms: Conditions d'utilisation
       communication/extranet/connection:
         connected: Connecté
       communication/extranet/document:
         category: Catégorie
         kind: Type
+      communication/extranet/document/localization:
         name: Nom
         published: Publié ?
         published_at: Date de publication

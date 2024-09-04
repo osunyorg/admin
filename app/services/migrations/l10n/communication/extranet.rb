@@ -1,6 +1,7 @@
 class Migrations::L10n::Communication::Extranet < Migrations::L10n::Base
   def self.execute
     migrate_extranet
+    Library.execute
   end
 
   def self.migrate_extranet

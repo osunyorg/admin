@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_03_074700) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_04_123349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -213,6 +213,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_074700) do
     t.index ["extranet_id"], name: "index_communication_extranet_document_kinds_on_extranet_id"
     t.index ["slug"], name: "index_communication_extranet_document_kinds_on_slug"
     t.index ["university_id"], name: "extranet_document_kinds_universities"
+  end
+
+  create_table "communication_extranet_document_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "communication_extranet_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_48b91d67ca"
+    t.index ["communication_extranet_id"], name: "idx_on_communication_extranet_id_ae7912027a"
+    t.index ["language_id"], name: "idx_on_language_id_c5a1e8c320"
+    t.index ["university_id"], name: "idx_on_university_id_95419f1df4"
   end
 
   create_table "communication_extranet_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1977,6 +1993,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_074700) do
   add_foreign_key "communication_extranet_document_categories", "universities"
   add_foreign_key "communication_extranet_document_kinds", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_document_kinds", "universities"
+  add_foreign_key "communication_extranet_document_localizations", "communication_extranet_documents", column: "about_id"
+  add_foreign_key "communication_extranet_document_localizations", "communication_extranets"
+  add_foreign_key "communication_extranet_document_localizations", "languages"
+  add_foreign_key "communication_extranet_document_localizations", "universities"
   add_foreign_key "communication_extranet_documents", "communication_extranet_document_categories", column: "category_id"
   add_foreign_key "communication_extranet_documents", "communication_extranet_document_kinds", column: "kind_id"
   add_foreign_key "communication_extranet_documents", "communication_extranets", column: "extranet_id"

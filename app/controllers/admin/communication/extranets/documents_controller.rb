@@ -1,10 +1,15 @@
 class Admin::Communication::Extranets::DocumentsController < Admin::Communication::Extranets::ApplicationController
   load_and_authorize_resource class: Communication::Extranet::Document, through: :extranet
 
+  include Admin::Localizable
+
   def index
-    @documents = @documents.ordered.page params[:page]
-    @categories = @extranet.document_categories.ordered
-    @kinds = @extranet.document_kinds.ordered
+    @documents =  @documents.ordered(current_language)
+                            .page(params[:page])
+    @categories =  @extranet.document_categories
+                            .ordered
+    @kinds = @extranet.document_kinds
+                      .ordered
     breadcrumb
   end
 
@@ -23,7 +28,9 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
 
   def create
     if @document.save
-      redirect_to admin_communication_extranet_document_path(@document), notice: t('admin.successfully_created_html', model: @document.to_s)
+      redirect_to admin_communication_extranet_document_path(@document), 
+                  notice: t('admin.successfully_created_html', 
+                            model: @document.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -32,7 +39,9 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
 
   def update
     if @document.update(document_params)
-      redirect_to admin_communication_extranet_document_path(@document), notice: t('admin.successfully_updated_html', model: @document.to_s)
+      redirect_to admin_communication_extranet_document_path(@document), 
+                  notice: t('admin.successfully_updated_html', 
+                            model: @document.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -42,7 +51,9 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
 
   def destroy
     @document.destroy
-    redirect_to admin_communication_extranet_documents_url, notice: t('admin.successfully_destroyed_html', model: @document.to_s)
+    redirect_to admin_communication_extranet_documents_url, 
+                notice: t('admin.successfully_destroyed_html', 
+                          model: @document.to_s_in(current_language))
   end
 
   protected
@@ -56,9 +67,13 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
   def document_params
     params.require(:communication_extranet_document)
     .permit(
-      :name, :published, :published_at, :slug,
-      :file, :file_delete,
-      :category_id, :kind_id
+      :category_id, :kind_id,
+      localizations_attributes: [
+        :id, :language_id,
+        :name, :published, :published_at, :slug,
+        :file, :file_delete,
+
+      ]
     )
     .merge(
       university_id: current_university.id

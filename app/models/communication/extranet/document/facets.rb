@@ -1,9 +1,9 @@
 class Communication::Extranet::Document::Facets < FacetedSearch::Facets
   def initialize(params, extranet)
     super(params)
-    @model = extranet.documents.published
+    @model = extranet.documents
     filter_with_text :name, {
-      title: Communication::Extranet::Document.human_attribute_name('name')
+      title: Communication::Extranet::Document::Localization.human_attribute_name('name')
     }
     filter_with_list :category, {
       title: Communication::Extranet::Document::Category.model_name.human(count: 2),

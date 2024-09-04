@@ -3,9 +3,8 @@ class Extranet::Library::DocumentsController < Extranet::Library::ApplicationCon
   def index
     @facets = Communication::Extranet::Document::Facets.new params[:facets], current_extranet
     @documents = @facets.results
-                        .published
-                        .ordered
-                        .page params[:page]
+                        .ordered(current_language)
+                        .page(params[:page])
     breadcrumb
   end
 
