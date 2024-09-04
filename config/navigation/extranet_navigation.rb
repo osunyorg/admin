@@ -8,9 +8,9 @@ SimpleNavigation::Configuration.run do |navigation|
                       Communication::Extranet.human_attribute_name(:feature_posts),
                       posts_root_path if current_extranet.feature_posts?
 
-    primary.item      :library,
-                      Communication::Extranet.human_attribute_name(:feature_library),
-                      library_root_path if current_extranet.feature_library?
+    primary.item      :documents,
+                      Communication::Extranet.human_attribute_name(:feature_documents),
+                      documents_root_path if current_extranet.feature_documents?
 
     primary.item      :contacts, 
                       Communication::Extranet.human_attribute_name(:feature_contacts) do |secondary|

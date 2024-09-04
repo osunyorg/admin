@@ -27,8 +27,8 @@ fr:
         color: Couleur
         feature_alumni: Alumni
         feature_contacts: Annuaire
+        feature_documents: Documents
         feature_jobs: Offres d'emploi
-        feature_library: Documents
         feature_posts: Actualités
         has_sso: A un SSO ?
         host: Domaine

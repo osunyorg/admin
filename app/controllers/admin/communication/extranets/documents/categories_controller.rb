@@ -53,7 +53,7 @@ class Admin::Communication::Extranets::Documents::CategoriesController < Admin::
 
   def breadcrumb
     super
-    add_breadcrumb Communication::Extranet.human_attribute_name(:feature_library), admin_communication_extranet_documents_path
+    add_breadcrumb Communication::Extranet.human_attribute_name(:feature_documents), admin_communication_extranet_documents_path
     add_breadcrumb Communication::Extranet::Document::Category.model_name.human(count: 2), admin_communication_extranet_document_categories_path
     breadcrumb_for @category
   end

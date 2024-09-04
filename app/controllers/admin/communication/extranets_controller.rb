@@ -70,7 +70,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     if can?(:create, Communication::Extranet)
       allowed_params += [
         :host, :about_id, :about_type, :sass,
-        :feature_alumni, :feature_library, :feature_contacts, :feature_jobs, :feature_posts,
+        :feature_alumni, :feature_documents, :feature_contacts, :feature_jobs, :feature_posts,
         :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping
       ]
       localizations_attributes += [

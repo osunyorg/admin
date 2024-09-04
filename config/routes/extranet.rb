@@ -30,7 +30,7 @@ namespace :posts do
   get ':date/:slug' => 'posts#show', as: :post
   root to: 'posts#index'
 end
-namespace :library do
+namespace :documents do
   root to: 'documents#index'
 end
 get 'account' => 'account#show', as: :account

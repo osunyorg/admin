@@ -27,8 +27,8 @@ en:
         color: Couleur
         feature_alumni: Alumni
         feature_contacts: Directory
+        feature_documents: Documents
         feature_jobs: Job board
-        feature_library: Documents
         feature_posts: News
         has_sso: Has SSO?
         host: Domain

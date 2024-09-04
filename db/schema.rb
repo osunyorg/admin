@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_04_162934) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_04_195818) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -351,7 +351,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_162934) do
     t.string "sso_button_label"
     t.boolean "feature_alumni", default: false
     t.boolean "feature_contacts", default: false
-    t.boolean "feature_library", default: false
+    t.boolean "feature_documents", default: false
     t.boolean "feature_posts", default: false
     t.boolean "feature_jobs", default: false
     t.text "home_sentence"
