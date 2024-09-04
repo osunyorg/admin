@@ -54,6 +54,7 @@ fr:
         category: Catégorie
         kind: Type
       communication/extranet/document/localization:
+        file: Fichier téléchargeable
         name: Nom
         published: Publié ?
         published_at: Date de publication

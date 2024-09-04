@@ -1,4 +1,5 @@
 class Admin::Communication::Extranets::Documents::ApplicationController < Admin::Communication::Extranets::ApplicationController
+
   protected
 
   def breadcrumb

@@ -3,6 +3,10 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
 
   include Admin::Localizable
 
+  def library
+    redirect_to admin_communication_extranet_documents_path(extranet_id: @extranet.id)
+  end
+
   def index
     @documents =  @documents.ordered(current_language)
                             .page(params[:page])
@@ -11,6 +15,7 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
     @kinds = @extranet.document_kinds
                       .ordered
     breadcrumb
+    @feature_nav = 'navigation/admin/communication/extranet/library'
   end
 
   def show

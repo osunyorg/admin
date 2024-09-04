@@ -4,10 +4,13 @@ class Admin::Communication::Extranets::Documents::CategoriesController < Admin::
   def index
     @categories = @categories.ordered
     breadcrumb
+    @feature_nav = 'navigation/admin/communication/extranet/library'
   end
 
   def show
-    @documents = @category.documents.ordered.page params[:page]
+    @documents = @category.documents
+                          .ordered(current_language)
+                          .page(params[:page])
     breadcrumb
   end
 

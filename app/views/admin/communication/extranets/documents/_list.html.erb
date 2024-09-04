@@ -4,10 +4,20 @@
       <div class="card card--horizontal">
         <%= osuny_thumbnail_localized document %>
         <div class="card-body">
-          <%= osuny_published_localized document %>
-          <%= osuny_link_localized document,
-                      admin_communication_extranet_document_path(extranet_id: document.extranet.id, id: document.id),
-                      classes: "stretched-link" %>
+          <div class="row">
+            <div class="col-lg-6">
+              <%= osuny_published_localized document %>
+              <%= osuny_link_localized document,
+                          admin_communication_extranet_document_path(extranet_id: document.extranet.id, id: document.id),
+                          classes: "stretched-link" %>
+            </div>
+            <div class="col-lg-3">
+              <%= document.category.to_s %>
+            </div>
+            <div class="col-lg-3">
+              <%= document.kind.to_s %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
