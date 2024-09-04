@@ -1,9 +1,5 @@
 class Migrations::L10n::University::Person::Experience < Migrations::L10n::Base
   def self.execute
-    migrate_experiences
-  end
-
-  def self.migrate_experiences
     University::Person::Experience.find_each do |experience|
       language_id = experience.person.language_id
       next if University::Person::Experience::Localization.where(

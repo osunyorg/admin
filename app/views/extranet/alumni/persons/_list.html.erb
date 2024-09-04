@@ -1,4 +1,8 @@
-<% people_paged = people.ordered.page(params[:page]).per(60) %>
+<% 
+people_paged =  people.ordered(current_language)
+                      .page(params[:page])
+                      .per(60)
+%>
 <div class="row">
   <% people_paged.each do |person| %>
     <div class="col-md-2">

@@ -47,6 +47,6 @@
   </div>
   <div class="offset-md-1 col-md-3 order-1 order-md-2">
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person.best_picture.attached? %>
-    <%= render 'extranet/contacts/persons/details', person: @person %>
+    <%= render 'extranet/contacts/persons/details', person: @person, l10n: @l10n %>
   </div>
 </div>

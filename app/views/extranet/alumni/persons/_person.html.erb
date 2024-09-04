@@ -1,3 +1,6 @@
+<%
+l10n = person.best_localization_for(person)
+%>
 <article class="person mb-4">
   <div class="row gx-3">
     <div class="col-3 col-md-12 mb-md-2">
@@ -13,7 +16,7 @@
     </div>
     <div class="col-9 col-md-12">
       <%= link_to [:alumni, person], class: 'stretched-link' do %>
-        <%= person.first_name %> <%= person.last_name %>
+        <%= l10n.first_name %> <%= l10n.last_name %>
       <% end %>
     </div>
 </article>

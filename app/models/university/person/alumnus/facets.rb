@@ -6,7 +6,7 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
     @about = options[:about]
 
     filter_with_text :name, {
-      title: University::Person.human_attribute_name('name')
+      title: University::Person::Localization.human_attribute_name('name')
     }
 
     filter_with_list :diploma_years, {

@@ -5,7 +5,7 @@ class Extranet::Alumni::PersonsController < Extranet::Alumni::ApplicationControl
       about: about
     }
     @people = @facets.results
-                     .ordered
+                     .ordered(current_language)
                      .page(params[:page])
                      .per(60)
     @count = @people.total_count
@@ -14,7 +14,9 @@ class Extranet::Alumni::PersonsController < Extranet::Alumni::ApplicationControl
 
   def show
     @person = about.university_person_alumni.find(params[:id])
+    @l10n = @person.best_localization_for(current_language)
     breadcrumb
+    add_breadcrumb @l10n
   end
 
   protected
@@ -22,6 +24,5 @@ class Extranet::Alumni::PersonsController < Extranet::Alumni::ApplicationControl
   def breadcrumb
     super
     add_breadcrumb University::Person.model_name.human(count: 2), alumni_university_persons_path
-    add_breadcrumb @person if @person
   end
 end

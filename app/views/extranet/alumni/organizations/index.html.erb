@@ -12,7 +12,7 @@
   </div>
   <div class="offset-lg-1 col-lg-8">
     <div class="organizations">
-      <%= render "extranet/alumni/organizations/list" %>
+      <%= render "extranet/alumni/organizations/list", organizations: @organizations %>
     </div>
     <%= paginate @organizations, theme: 'bootstrap-5' %>
   </div>

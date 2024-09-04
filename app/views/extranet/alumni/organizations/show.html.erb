@@ -1,12 +1,12 @@
-<% content_for :title, @organization %>
+<% content_for :title, @l10n %>
 
 <div class="row">
   <div class="col-md-8 order-2 order-md-1">
     <div class="row">
       <div class="col-md-9">
-        <% unless @organization.text.blank? %>
+        <% unless @l10n.text.blank? %>
           <div class="biography mb-5">
-            <%= sanitize @organization.text %>
+            <%= sanitize @l10n.text %>
           </div>
         <% end %>
       </div>
@@ -16,6 +16,9 @@
         <p class="mb-4"><%= t('extranet.organization.experiences', count: @organization.experiences.count) %></p>
         <ul class="list-unstyled">
           <% @organization.experiences.ordered.each do |experience| %>
+            <%
+            experience_l10n = experience.best_localization_for(current_language)
+            %>
             <li class="mb-4">
               <article class="row position-relative">
                 <div class="col-md-3">
@@ -29,12 +32,16 @@
                   <div class="border-top">
                     <div class="row pt-4">
                       <div class="col-md-6">
-                        <p><b><%= link_to experience.person.name, [:alumni, experience.person], class: "stretched-link" %></b></p>
+                        <p><b>
+                          <%= link_to experience.person.to_s_in(current_language), 
+                                      [:alumni, experience.person],
+                                      class: "stretched-link" %>
+                        </b></p>
                       </div>
                       <div class="col-md-6">
                         <p class="text-end">
-                          <% if experience.description.present? %>
-                            <%= experience.description %><br>
+                          <% if experience_l10n.description.present? %>
+                            <%= experience_l10n.description %><br>
                           <% end %>
                           <%= "#{experience.from_year} —" if experience.from_year %>
                           <%= experience.to_year || t('today') %>
@@ -51,27 +58,36 @@
     <% end %>
   </div>
   <div class="offset-md-1 col-md-3 order-1 order-md-2">
-    <%= kamifusen_tag @organization.logo, width: 400, class: 'img-fluid organization__logo mb-5' if @organization.logo.attached? %>
-
+    <%= kamifusen_tag @l10n.logo, 
+                      width: 400,
+                      class: 'img-fluid organization__logo mb-5' if @l10n.logo.attached? %>
     <dl>
         <dt><%= University::Organization.human_attribute_name(:kind) %></dt>
         <dd><%= @organization.kind_i18n %></dd>
-      <% if @organization.phone.present? %>
-        <dt><%= University::Organization.human_attribute_name(:phone) %></dt>
-        <dd><a href="tel:<%= @organization.phone %>" target="_blank" rel="noreferrer"><%= @organization.phone %></a></dd>
-      <% end %>
-      <% if @organization.email.present? %>
-        <dt><%= University::Organization.human_attribute_name(:email) %></dt>
-        <dd><a href="mailto:<%= @organization.email %>" target="_blank" rel="noreferrer"><%= @organization.email %></a></dd>
-      <% end %>
-      <% if @organization.url.present? %>
-        <dt><%= University::Organization.human_attribute_name(:url) %></dt>
-        <dd>
-          <a href="<%= social_website_to_url @organization.url %>" target="_blank" rel="noreferrer">
-            <%= social_website_to_s @organization.url %>
-          </a>
-        </dd>
-      <% end %>
+        <% if @organization.phone.present? %>
+          <dt><%= University::Organization.human_attribute_name(:phone) %></dt>
+          <dd>
+            <a href="tel:<%= @organization.phone %>" target="_blank" rel="noreferrer">
+              <%= @organization.phone %>
+            </a>
+          </dd>
+        <% end %>
+        <% if @organization.email.present? %>
+          <dt><%= University::Organization.human_attribute_name(:email) %></dt>
+          <dd>
+            <a href="mailto:<%= @organization.email %>" target="_blank" rel="noreferrer">
+              <%= @organization.email %>
+            </a>
+          </dd>
+        <% end %>
+        <% if @l10n.url.present? %>
+          <dt><%= University::Organization::Localization.human_attribute_name(:url) %></dt>
+          <dd>
+            <a href="<%= social_website_to_url @l10n.url %>" target="_blank" rel="noreferrer">
+              <%= social_website_to_s @l10n.url %>
+            </a>
+          </dd>
+        <% end %>
     </dl>
   </div>
 </div>
