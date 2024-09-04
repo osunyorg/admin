@@ -521,7 +521,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_facet", default: false
+    t.boolean "is_taxonomy", default: false
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_8f309901d4"
     t.index ["language_id"], name: "idx_on_language_id_6e6ffc92a8"
     t.index ["original_id"], name: "idx_on_original_id_4cbc9f1290"
