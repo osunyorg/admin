@@ -7,7 +7,7 @@ class CreateCommunicationExtranetDocumentLocalizations < ActiveRecord::Migration
 
       t.references :about, foreign_key: { to_table: :communication_extranet_documents }, type: :uuid
       t.references :language, foreign_key: true, type: :uuid
-      t.references :communication_extranet, foreign_key: true, type: :uuid
+      t.references :extranet, foreign_key: { to_table: :communication_extranets }, type: :uuid
       t.references :university, foreign_key: true, type: :uuid
 
       t.timestamps

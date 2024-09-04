@@ -12,10 +12,10 @@
                           classes: "stretched-link" %>
             </div>
             <div class="col-lg-3">
-              <%= document.category.to_s %>
+              <%= document.category.to_s_in(current_language) %>
             </div>
             <div class="col-lg-3">
-              <%= document.kind.to_s %>
+              <%= document.kind.to_s_in(current_language) %>
             </div>
           </div>
         </div>

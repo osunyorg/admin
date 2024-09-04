@@ -1,6 +1,8 @@
 class Admin::Communication::Extranets::Documents::CategoriesController < Admin::Communication::Extranets::ApplicationController
   load_and_authorize_resource class: Communication::Extranet::Document::Category, through: :extranet, through_association: :document_categories
 
+  include Admin::Localizable
+
   def index
     @categories = @categories.ordered
     breadcrumb
@@ -59,8 +61,10 @@ class Admin::Communication::Extranets::Documents::CategoriesController < Admin::
   def category_params
     params.require(:communication_extranet_document_category)
     .permit(
-      :name,
-      :slug,
+      localizations_attributes: [
+        :id, :language_id,
+        :name, :slug
+      ]
     )
     .merge(
       university_id: current_university.id

@@ -59,11 +59,13 @@ en:
         published: Published?
         published_at: Publication date
       communication/extranet/document/category:
-        name: Name
         quantity: Quantity of documents
+      communication/extranet/document/category/localization:
+        name: Name
       communication/extranet/document/kind:
-        name: Name
         quantity: Quantity of documents
+      communication/extranet/document/kind/localization:
+        name: Name
       communication/extranet/post:
         author: Author
         category: Category

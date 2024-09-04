@@ -32,6 +32,7 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
   end
 
   def create
+    @document.extranet = @extranet
     if @document.save
       redirect_to admin_communication_extranet_document_path(@document), 
                   notice: t('admin.successfully_created_html', 
@@ -76,8 +77,7 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
       localizations_attributes: [
         :id, :language_id,
         :name, :published, :published_at, :slug,
-        :file, :file_delete,
-
+        :file, :file_delete, :file_infos
       ]
     )
     .merge(

@@ -17,11 +17,11 @@
   </div>
   <div class="col-xl-3">
     <%= osuny_label Communication::Extranet::Document::Category.model_name.human %>
-    <p><%= link_to @document.category, [:admin, @document.category] %></p>
+    <p><%= osuny_link_localized @document.category, [:admin, @document.category] %></p>
   </div>
   <div class="col-xl-3">
     <%= osuny_label Communication::Extranet::Document::Kind.model_name.human %>
-    <p><%= link_to @document.kind, [:admin, @document.kind] %></p>
+    <p><%= osuny_link_localized @document.kind, [:admin, @document.kind] %></p>
   </div>
 </div>
 

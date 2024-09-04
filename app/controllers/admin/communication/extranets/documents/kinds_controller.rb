@@ -1,6 +1,8 @@
 class Admin::Communication::Extranets::Documents::KindsController < Admin::Communication::Extranets::Documents::ApplicationController
   load_and_authorize_resource class: Communication::Extranet::Document::Kind, through: :extranet, through_association: :document_kinds
 
+  include Admin::Localizable
+
   def index
     @kinds = @kinds.ordered
     breadcrumb
@@ -58,8 +60,10 @@ class Admin::Communication::Extranets::Documents::KindsController < Admin::Commu
   def kind_params
     params.require(:communication_extranet_document_kind)
     .permit(
-      :name,
-      :slug,
+      localizations_attributes: [
+        :id, :language_id,
+        :name, :slug
+      ]
     )
     .merge(
       university_id: current_university.id

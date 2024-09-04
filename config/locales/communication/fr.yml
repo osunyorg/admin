@@ -59,11 +59,13 @@ fr:
         published: Publié ?
         published_at: Date de publication
       communication/extranet/document/category:
-        name: Nom
         quantity: Quantité de documents
+      communication/extranet/document/category/localization:
+        name: Nom
       communication/extranet/document/kind:
-        name: Nom
         quantity: Quantité de documents
+      communication/extranet/document/kind/localization:
+        name: Nom
       communication/extranet/post:
         author: Auteur·rice
         category: Catégorie
