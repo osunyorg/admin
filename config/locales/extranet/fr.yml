@@ -11,9 +11,9 @@ fr:
       logout: Déconnexion
     contacts:
       organizations:
-        experiences: Membres de cette organisation (%{count})
+        people: Membres de cette organisation
       persons:
-        experiences: Organisations dont iel fait partie (%{count})
+        experiences: Organisations dont la personne fait partie (%{count})
       search:
         home: Chercher dans l'annuaire
         title: Recherche

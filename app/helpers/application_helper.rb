@@ -19,6 +19,7 @@ module ApplicationHelper
   def social_website_to_s(string)
     string.gsub('http://', '')
           .gsub('https://', '')
+          .delete_suffix('/')
   end
 
   def social_linkedin_to_url(string)
@@ -27,7 +28,8 @@ module ApplicationHelper
 
   def social_linkedin_to_s(string)
     string.gsub('http://', 'https://')
-          .gsub('https://www.linkedin.com/in/', '')
+          .delete_prefix('https://www.linkedin.com/in/')
+          .delete_suffix('/')
   end
 
   def social_twitter_to_url(string)
@@ -40,6 +42,15 @@ module ApplicationHelper
     string.gsub('http://', 'https://')
           .gsub('https://www.twitter.com/', 'https://twitter.com/')
           .gsub('https://twitter.com/', '')
+  end
+
+  def social_mastodon_to_url(string)
+    string.gsub('http://', 'https://')
+  end
+
+  def social_mastodon_to_s(string)
+    string.gsub('http://', 'https://')
+          .remove('https://')
   end
 
   def masked_email(string)

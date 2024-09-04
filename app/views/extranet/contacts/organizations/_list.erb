@@ -4,13 +4,13 @@
       <%
       l10n = organization.best_localization_for(current_language)
       %>
-      <div class="col-md-3">
-        <div class="position-relative mb-5">test
+      <div class="col-6 col-lg-3 col-xxl-2">
+        <div class="position-relative mb-5">
           <%= kamifusen_tag l10n.logo, 
                             width: 400, 
                             class: 'img-fluid organization__logo mb-2' if l10n.logo.attached? %>
           <%= link_to l10n, 
-                      [:contacts, organization], 
+                      contacts_organization_path(organization), 
                       class: 'stretched-link' %>
         </div>
       </div>

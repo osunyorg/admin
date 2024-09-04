@@ -1,7 +1,7 @@
 <dl>
   <% [:phone_mobile, :phone_personal, :phone_professional].each do |attribute_name| %>
     <% next if person.public_send(attribute_name).blank? || person.public_send("#{attribute_name}_is_private?") %>
-    <dt><%= University::Person.human_attribute_name(attribute_name) %></dt>
+    <dt class="fw-normal small"><%= University::Person.human_attribute_name(attribute_name) %></dt>
     <dd>
       <a href="tel:<%= person.public_send(attribute_name) %>" target="_blank" rel="noreferrer">
         <%= person.public_send(attribute_name) %>
@@ -9,7 +9,7 @@
     </dd>
   <% end %>
   <% if person.email.present? && !person.email_is_private? %>
-    <dt><%= University::Person.human_attribute_name(:email) %></dt>
+    <dt class="fw-normal small"><%= University::Person.human_attribute_name(:email) %></dt>
     <dd>
       <a href="mailto:<%= person.email %>" target="_blank" rel="noreferrer">
         <%= person.email %>
@@ -17,7 +17,7 @@
     </dd>
   <% end %>
   <% if person.full_street_address.present? && !person.address_is_private? %>
-    <dt><%= University::Person.human_attribute_name("address") %></dt>
+    <dt class="fw-normal small"><%= University::Person.human_attribute_name("address") %></dt>
     <dd>
       <%= person.address %>
       <% if person.address.present? && (person.city.present? || person.zipcode.present?) %><br><% end %>
@@ -26,7 +26,7 @@
     </dd>
   <% end %>
   <% if l10n.url.present? %>
-    <dt><%= University::Person::Localization.human_attribute_name(:url) %></dt>
+    <dt class="fw-normal small"><%= University::Person::Localization.human_attribute_name(:url) %></dt>
     <dd>
       <a href="<%= social_website_to_url l10n.url %>" target="_blank" rel="noreferrer">
         <%= social_website_to_s l10n.url %>
@@ -34,7 +34,7 @@
     </dd>
   <% end %>
   <% if l10n.linkedin.present? && !person.linkedin_is_private? %>
-    <dt><%= University::Person::Localization.human_attribute_name(:linkedin) %></dt>
+    <dt class="fw-normal small"><%= University::Person::Localization.human_attribute_name(:linkedin) %></dt>
     <dd>
       <a href="<%= social_linkedin_to_url l10n.linkedin %>" target="_blank" rel="noreferrer">
         <%= social_linkedin_to_s l10n.linkedin %>
@@ -42,7 +42,7 @@
     </dd>
   <% end %>
   <% if l10n.twitter.present? && !person.twitter_is_private? %>
-    <dt><%= University::Person::Localization.human_attribute_name(:twitter) %></dt>
+    <dt class="fw-normal small"><%= University::Person::Localization.human_attribute_name(:twitter) %></dt>
     <dd>
       <a href="<%= social_twitter_to_url l10n.twitter %>" target="_blank" rel="noreferrer">
         <%= social_twitter_to_s l10n.twitter %>

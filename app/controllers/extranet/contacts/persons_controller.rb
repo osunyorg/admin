@@ -13,13 +13,13 @@ class Extranet::Contacts::PersonsController < Extranet::Contacts::ApplicationCon
     @l10n = @person.best_localization_for(@person)
     @current_experiences = @person.experiences.includes(:organization).current.ordered
     breadcrumb
-    add_breadcrumb @person
+    add_breadcrumb @l10n
   end
 
   protected
 
   def breadcrumb
     super
-    add_breadcrumb University::Person.model_name.human(count: 2), contacts_university_persons_path
+    add_breadcrumb University::Person.model_name.human(count: 2), contacts_persons_path
   end
 end

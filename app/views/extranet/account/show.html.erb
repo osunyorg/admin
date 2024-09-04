@@ -21,6 +21,8 @@
       <%= link_to t('extranet.account.edit'), edit_account_path, class: 'btn btn-primary mb-2' %>
       <%= link_to t('extranet.account.edit_personal_data'), edit_personal_data_path, class: 'btn btn-primary mb-2' %>
     </div>
-    <%= render 'extranet/personal_data/details', person: @person unless @person.nil? %>
+    <%= render 'extranet/personal_data/details', 
+                person: @person,
+                l10n: @l10n unless @person.nil? %>
   </div>
 </div>

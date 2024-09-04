@@ -136,7 +136,7 @@ en:
         first_name: First name
         last_name: Last name
         linkedin: LinkedIn URL
-        mastodon: Mastodon username
+        mastodon: Mastodon URL
         name: Name
         picture_credit: Credit
         slug: Slug
