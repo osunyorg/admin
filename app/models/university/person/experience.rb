@@ -46,6 +46,12 @@ class University::Person::Experience < ApplicationRecord
     .limit(10)
   }
 
+  # FIXME utilisé dans app/views/extranet/experiences/_form.html.erb
+  # Vraiment moche
+  def organization_name
+    organization.original_localization.to_s
+  end
+
   private
 
   def not_before_from_year

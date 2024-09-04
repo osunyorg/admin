@@ -2,10 +2,13 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
   before_action :load_experience, only: [:edit, :update, :destroy]
   def new
     @experience = current_user.experiences.new
+    @l10n = @experience.localizations.build(language: current_language)
     breadcrumb
+    add_breadcrumb University::Person::Experience.human_attribute_name('new')
   end
 
   def edit
+    @l10n = @experience.localization_for(current_language)
     breadcrumb
   end
 
@@ -15,7 +18,9 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
       redirect_to account_path,
                   notice: t('admin.successfully_created_html', model: @experience.organization.to_s)
     else
+      @l10n = @experience.localizations.build(language: current_language)
       breadcrumb
+      add_breadcrumb University::Person::Experience.human_attribute_name('new')
       render :new
     end
   end
@@ -44,7 +49,13 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
 
   def experience_params
     params.require(:university_person_experience)
-          .permit(:description, :from_year, :to_year, :organization_id, :organization_name)
+          .permit(
+            :from_year, :to_year, :organization_id, :organization_name,
+            localizations_attributes: [
+              :id, :language_id,
+              :description
+            ]  
+          )
           .merge(
             university_id: current_university.id
           )
@@ -53,6 +64,5 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
   def breadcrumb
     super
     add_breadcrumb t('extranet.account.my'), account_path
-    add_breadcrumb @experience
   end
 end

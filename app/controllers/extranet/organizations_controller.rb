@@ -6,7 +6,7 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
     @organizations = current_university.organizations
                                        .for_language_id(current_user.language_id)
                                        .search_by_siren_or_name(@term)
-                                       .ordered
+                                       .ordered(current_language)
   end
 
   def show

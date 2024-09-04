@@ -221,7 +221,7 @@ fr:
         tenure: "À différencier d'une personne vacataire."
         twitter: "Exemple : osuny"
       university_person_experience:
-        organization_name: "Choisissez l'organisation si elle existe, en la cherchant par nom ou SIREN.<br>Si elle n'existe pas encore, créez-là en entrant simplement son nom."
+        organization_name: "Choisissez l'organisation si elle existe, en la cherchant par nom ou SIREN. Si elle n'existe pas encore, créez-là en entrant simplement son nom."
         description: "Ex: Chargée de projet, Assistant communication, Journaliste..."
         from_year: "En poste depuis..."
         to_year: "Si vous êtes toujours à ce poste, laissez vide"
