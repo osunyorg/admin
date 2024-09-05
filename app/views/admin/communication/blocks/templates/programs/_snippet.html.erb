@@ -1,3 +1,13 @@
-<p class="mb-0">
-  <%= block.template.selected_programs.collect(&:to_s).join(', ') %>
-</p>
+<% block.template.selected_programs.each do |program|
+    l10n = program.localization_for(block.language)
+    next if l10n.nil?
+    %>
+  <div class="row mb-3">
+    <div class="col-10">
+      <p><%= program.to_s_in(block.language) %></p>
+    </div>
+    <div class="col-2">
+      <%= image_tag l10n.featured_image, width: 400, class: 'img-fluid mb-2' if l10n.featured_image.attached? %>
+    </div>
+  </div>
+<% end %>
