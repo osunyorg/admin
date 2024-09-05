@@ -79,11 +79,12 @@ roles:
 <% if person.involvements_as_teacher.any? %>
 teachings:
 <% person.involvements_as_teacher.each do |involvement|
+    involvement_l10n = involvement.best_localization_for(language)
     program = involvement.target
     program_l10n = program.best_localization_for(language)
     %>
   - description: >-
-      <%= involvement.description %>
+      <%= involvement_l10n.description %>
     program:
       title: >-
         <%= program_l10n.to_s %>
@@ -94,11 +95,12 @@ teachings:
 <% if person.roles_as_administrator.any? %>
 administrative_missions:
 <% person.roles_as_administrator.each do |role|
+    role_l10n = role.best_localization_for(language)
     target = role.target
     target_l10n = target.best_localization_for(language)
     %>
   - description: >-
-      <%= role.to_s %>
+      <%= role_l10n.to_s %>
     target:
       title: >-
         <%= target_l10n.to_s %>

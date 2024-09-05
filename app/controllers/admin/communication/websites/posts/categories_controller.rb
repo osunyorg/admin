@@ -33,7 +33,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
     @category.website = @website
     @l10n.add_photo_import params[:photo_import]
     if @category.save_and_sync
-      redirect_to admin_communication_website_post_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s)
+      redirect_to admin_communication_website_post_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -43,7 +43,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   def update
     @l10n.add_photo_import params[:photo_import]
     if @category.update_and_sync(category_params)
-      redirect_to admin_communication_website_post_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s)
+      redirect_to admin_communication_website_post_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -53,7 +53,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
 
   def destroy
     @category.destroy
-    redirect_to admin_communication_website_post_categories_url, notice: t('admin.successfully_destroyed_html', model: @category.to_s)
+    redirect_to admin_communication_website_post_categories_url, notice: t('admin.successfully_destroyed_html', model: @category.to_s_in(current_language))
   end
 
   protected

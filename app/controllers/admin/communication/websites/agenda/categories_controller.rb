@@ -15,7 +15,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   end
 
   def show
-    @events = @category.events.ordered.page(params[:page])
+    @events = @category.events.ordered(current_language).page(params[:page])
     breadcrumb
   end
 
