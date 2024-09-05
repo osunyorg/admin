@@ -1,11 +1,11 @@
 class Admin::Communication::Extranets::ContactsController < Admin::Communication::Extranets::ApplicationController
   def index
     @people = current_university.people
-                                .for_language_id(current_university.default_language_id)
+                                .tmp_original # TODO L10N : To remove
                                 .ordered(current_language)
                                 .page(params[:persons_page])
     @organizations = current_university.organizations
-                                        .for_language_id(current_university.default_language_id)
+                                        .tmp_original # TODO L10N : To remove
                                         .ordered(current_language)
                                         .page(params[:organizations_page])
     breadcrumb
@@ -14,8 +14,8 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
 
   def export_people
     @people = @extranet.connected_people
-                       .for_language_id(current_university.default_language_id)
-                       .ordered
+                       .tmp_original # TODO L10N : To remove
+                       .ordered(current_language)
     filename = "people-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
     response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
     render "admin/university/people/index"
@@ -23,8 +23,8 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
 
   def export_organizations
     @organizations = @extranet.connected_organizations
-                              .for_language_id(current_university.default_language_id)
-                              .ordered
+                              .tmp_original # TODO L10N : To remove
+                              .ordered(current_language)
     filename = "organizations-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
     response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
     render "admin/university/organizations/index"
