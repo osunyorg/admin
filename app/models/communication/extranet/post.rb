@@ -34,36 +34,14 @@
 #  fk_rails_86cc935add  (author_id => university_people.id)
 #
 class Communication::Extranet::Post < ApplicationRecord
-  include Contentful
-  include Permalinkable
-  include Sanitizable
-  include WithAccessibility
-  include WithFeaturedImage
-  include WithPublication
+  include Contentful # TODO L10N : To remove
+  include Localizable
+  include WithFeaturedImage # TODO L10N : To remove
   include WithUniversity
 
   belongs_to :author, class_name: 'University::Person', optional: true
   belongs_to :category, class_name: 'Communication::Extranet::Post::Category', optional: true
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
-  validates :title, presence: true
-
-  scope :ordered, -> { order(pinned: :desc, published_at: :desc, created_at: :desc) }
-
-  def to_s
-    "#{title}"
-  end
-
-  protected
-
-  def check_accessibility
-    accessibility_merge_array blocks
-  end
-
-  def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(extranet_id: self.extranet_id, slug: slug)
-              .where.not(id: self.id)
-              .exists?
-  end
+  scope :ordered, -> (language) { order(pinned: :desc, published_at: :desc, created_at: :desc) }
 end

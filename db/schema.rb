@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_04_195818) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_05_135443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -305,6 +305,42 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_195818) do
     t.index ["extranet_id"], name: "index_communication_extranet_post_categories_on_extranet_id"
     t.index ["slug"], name: "index_communication_extranet_post_categories_on_slug"
     t.index ["university_id"], name: "index_communication_extranet_post_categories_on_university_id"
+  end
+
+  create_table "communication_extranet_post_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug"
+    t.string "name"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "extranet_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_ff80179dbe"
+    t.index ["extranet_id"], name: "idx_on_extranet_id_aeb5898555"
+    t.index ["language_id"], name: "idx_on_language_id_87a464170d"
+    t.index ["university_id"], name: "idx_on_university_id_1b84e09ad5"
+  end
+
+  create_table "communication_extranet_post_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.boolean "published", default: false
+    t.boolean "pinned", default: false
+    t.datetime "published_at"
+    t.string "slug"
+    t.text "summary"
+    t.string "title"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "extranet_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_extranet_post_localizations_on_about_id"
+    t.index ["extranet_id"], name: "index_communication_extranet_post_localizations_on_extranet_id"
+    t.index ["language_id"], name: "index_communication_extranet_post_localizations_on_language_id"
+    t.index ["university_id"], name: "idx_on_university_id_28188e2217"
   end
 
   create_table "communication_extranet_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -2044,6 +2080,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_195818) do
   add_foreign_key "communication_extranet_localizations", "universities"
   add_foreign_key "communication_extranet_post_categories", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_post_categories", "universities"
+  add_foreign_key "communication_extranet_post_category_localizations", "communication_extranet_post_categories", column: "about_id"
+  add_foreign_key "communication_extranet_post_category_localizations", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_post_category_localizations", "languages"
+  add_foreign_key "communication_extranet_post_category_localizations", "universities"
+  add_foreign_key "communication_extranet_post_localizations", "communication_extranet_posts", column: "about_id"
+  add_foreign_key "communication_extranet_post_localizations", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_post_localizations", "languages"
+  add_foreign_key "communication_extranet_post_localizations", "universities"
   add_foreign_key "communication_extranet_posts", "communication_extranet_post_categories", column: "category_id"
   add_foreign_key "communication_extranet_posts", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_posts", "universities"

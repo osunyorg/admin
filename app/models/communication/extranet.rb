@@ -55,7 +55,9 @@ class Communication::Extranet < ApplicationRecord
   include WithUniversity
 
   has_many :posts
+  has_many :post_localizations, class_name: 'Communication::Extranet::Post::Localization'
   has_many :post_categories, class_name: 'Communication::Extranet::Post::Category'
+  has_many :post_category_localizations, class_name: 'Communication::Extranet::Post::Category::Localization'
   has_many :documents
   has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'

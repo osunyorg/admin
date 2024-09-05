@@ -1,9 +1,9 @@
 <div class="mb-4">
   <%= osuny_label t('metadata') %><br>
 
-  <% if @post.published %>
+  <% if @l10n.published %>
     <%= t('communication.extranet.post.metadata.published_on', date: l(@post.published_at, format: :date_with_explicit_month)) %>
-    <% if @post.pinned %>
+    <% if @l10n.pinned %>
       <%= t('communication.extranet.post.metadata.and_pinned') %>
     <% end %>
   <% else %>
@@ -12,6 +12,6 @@
 
   <% if @post.author %>
     <br>
-    <%= t('communication.extranet.post.metadata.by', author: @post.author) %>
+    <%= t('communication.extranet.post.metadata.by', author: @post.author.to_s_in(current_language)) %>
   <% end %>
 </div>

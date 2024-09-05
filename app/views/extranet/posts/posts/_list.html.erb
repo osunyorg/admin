@@ -1,16 +1,23 @@
 <div class="row posts-list row-gap-5">
-  <% posts.each do |post| %>
+  <% posts.each do |post| 
+      l10n = post.localization_for(current_language)
+      next if l10n.nil?
+      next if l10n.draft?
+      %>
     <article class="col-lg-4">
       <div class="position-relative">
-        <% if post.featured_image.attached? %>
-          <%= kamifusen_tag post.featured_image, width: 800, height: 500, class: 'img-fluid' %>
+        <% if l10n.featured_image.attached? %>
+          <%= kamifusen_tag l10n.featured_image, 
+                            width: 800, 
+                            height: 500, 
+                            class: 'img-fluid' %>
         <% end %>
         <p class="my-2">
-          <b><%= post %></b>
-          <span class="text-muted"><%= l post.published_at.to_date %><span>
+          <b><%= l10n %></b>
+          <span class="text-muted"><%= l l10n.published_at.to_date %><span>
         </p>
         <%= link_to t('extranet.posts.read_post'), 
-                    posts_post_path(date: post.published_at.strftime('%Y-%m-%d'), slug: post.slug), 
+                    posts_post_path(date: l10n.published_at.strftime('%Y-%m-%d'), slug: post.slug), 
                     class: ' btn btn-outline-primary stretched-link' %>
       </div>
     </article>

@@ -1,9 +1,9 @@
 <% content_for :header do %>
   <%
-  if @post.featured_image.attached?
+  if @l10n.featured_image.attached?
     image_classes = 'col-md-3 offset-2'
     image_width = 400
-    width, height = @post.featured_image.metadata.values_at('width', 'height')
+    width, height = @l10n.featured_image.metadata.values_at('width', 'height')
     ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
     if ratio && ratio > 1
       image_classes = 'col-md-5'
@@ -13,24 +13,26 @@
   %>
   <div class="row">
     <div class="header__info col-md-7">
-      <h1><%= @post %></h1>
+      <h1><%= @l10n %></h1>
       <p class="small mt-2">
-        <% if @post.published_at %>
-          Publié le <%= l @post.published_at, format: :date_with_explicit_month %>
+        <% if @l10n.published_at %>
+          Publié le <%= l @l10n.published_at, format: :date_with_explicit_month %>
         <% end %>
-        <% if @post.category %>
+        <% if @post.category 
+            category_l10n = @post.category.localization_for(current_language)
+            next if category_l10n.nil? %>
           <br>
-          Dans : <%= link_to @post.category, posts_category_path(slug: @post.category.slug), class: "link" %>
+          Dans : <%= link_to category_l10n, posts_category_path(slug: category_l10n.slug), class: "link" %>
         <% end %>
       </p>
     </div>
-    <% if @post.featured_image.attached? %>
+    <% if @l10n.featured_image.attached? %>
       <div class="<%= image_classes %>">
-        <figure class="<% if @post.featured_image_credit.present? %>with-credit<% end %>">
-          <%= kamifusen_tag @post.featured_image, class: 'img-fluid', width: image_width %>
-          <% if @post.featured_image_credit.present? %>
+        <figure class="<% if @l10n.featured_image_credit.present? %>with-credit<% end %>">
+          <%= kamifusen_tag @l10n.featured_image, class: 'img-fluid', width: image_width %>
+          <% if @l10n.featured_image_credit.present? %>
             <figcaption tabindex="0">
-                <%= sanitize @post.featured_image_credit %>
+                <%= sanitize @l10n.featured_image_credit %>
             </figcaption>
           <% end %>
         </figure>
@@ -39,4 +41,4 @@
   </div>
 <% end %>
 
-<%= render 'admin/communication/blocks/content/show', about: @post %>
+<%= render 'admin/communication/blocks/content/show', about: @l10n %>

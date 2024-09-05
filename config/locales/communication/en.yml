@@ -69,6 +69,7 @@ en:
       communication/extranet/post:
         author: Author
         category: Category
+      communication/extranet/post/localization:
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit
@@ -78,8 +79,9 @@ en:
         slug: Slug
         title: Title
       communication/extranet/post/category:
-        name: Name
         quantity: Quantity of posts
+      communication/extranet/post/category/localization:
+        name: Name
       communication/website:
         about: About
         about_: Independent website

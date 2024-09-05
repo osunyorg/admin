@@ -1,23 +1,19 @@
 class Extranet::Posts::PostsController < Extranet::Posts::ApplicationController
 
   def index
-    @posts = current_extranet.posts
-                             .published
-                             .ordered
-                             .page(params[:page])
+    @posts =  current_extranet.posts
+                              # .published TODO L10N
+                              .ordered(current_language)
+                              .page(params[:page])
     breadcrumb
   end
 
   def show
-    @post = current_extranet.posts.find_by! slug: params[:slug]
+    @l10n = current_extranet.post_localizations
+                            .find_by!(slug: params[:slug])
+    @post = @l10n.about
     @disable_container = true
     breadcrumb
-  end
-
-  protected
-
-  def breadcrumb
-    super
-    add_breadcrumb @post if @post
+    add_breadcrumb @l10n
   end
 end

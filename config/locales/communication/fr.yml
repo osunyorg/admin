@@ -69,6 +69,7 @@ fr:
       communication/extranet/post:
         author: Auteur·rice
         category: Catégorie
+      communication/extranet/post/localization:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         featured_image_credit: Crédit
@@ -78,8 +79,9 @@ fr:
         slug: Identifiant
         title: Titre
       communication/extranet/post/category:
-        name: Nom
         quantity: Quantité d'actualités
+      communication/extranet/post/category/localization:
+        name: Nom
       communication/website:
         about: Sujet du site
         about_: Site indépendant

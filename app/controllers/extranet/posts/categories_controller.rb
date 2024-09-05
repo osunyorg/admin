@@ -1,15 +1,21 @@
 class Extranet::Posts::CategoriesController < Extranet::Posts::ApplicationController
 
   def index
-    @categories = current_extranet.post_categories.ordered
+    @categories = current_extranet.post_categories
+                                  .ordered(current_language)
     breadcrumb
     add_breadcrumb Communication::Extranet::Post::Category.model_name.human(count: 2)
   end
 
   def show
-    @category = current_extranet.post_categories.find_by slug: params[:slug]
-    @posts = @category.posts.ordered.page params[:page]
+    @l10n = current_extranet.post_category_localizations
+                            .find_by(slug: params[:slug])
+    @category = @l10n.about
+    @posts = @category.posts
+                      # .published TODO L10N
+                      .ordered(current_language)
+                      .page(params[:page])
     breadcrumb
-    add_breadcrumb @category
+    add_breadcrumb @l10n
   end
 end
