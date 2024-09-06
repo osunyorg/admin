@@ -74,7 +74,7 @@ module AsLocalization
 
   def for_website?(website)
     website.active_language_ids.include?(language_id) &&
-      about.for_website?(website)
+      website.has_connected_object?(self)
   end
 
   def localize_in!(language)
