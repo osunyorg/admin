@@ -45,7 +45,6 @@ class University::Person::Localization < ApplicationRecord
 
   has_summernote :biography
 
-  delegate :featured_image, to: :about
   alias :person :about
 
   validates :first_name, :last_name, presence: true
