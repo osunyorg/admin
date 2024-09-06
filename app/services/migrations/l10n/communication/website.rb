@@ -8,8 +8,20 @@ class Migrations::L10n::Communication::Website < Migrations::L10n::Base
       website.legacy_languages.each do |language|
         l10n = website.localization_for(language)
         if l10n
-          # Loca existante, on la publie
+          # Loca existante, on la publie et on gère l'ancien fallback qui prenait l'info au niveau du website
           l10n.update(
+            name: l10n.name.presence || website.name,
+            social_email: l10n.social_email.presence || website.social_email,
+            social_facebook: l10n.social_facebook.presence || website.social_facebook,
+            social_github: l10n.social_github.presence || website.social_github,
+            social_instagram: l10n.social_instagram.presence || website.social_instagram,
+            social_linkedin: l10n.social_linkedin.presence || website.social_linkedin,
+            social_mastodon: l10n.social_mastodon.presence || website.social_mastodon,
+            social_peertube: l10n.social_peertube.presence || website.social_peertube,
+            social_tiktok: l10n.social_tiktok.presence || website.social_tiktok,
+            social_vimeo: l10n.social_vimeo.presence || website.social_vimeo,
+            social_x: l10n.social_x.presence || website.social_x,
+            social_youtube: l10n.social_youtube.presence || website.social_youtube,
             published: true,
             published_at: Time.now
           )
