@@ -1,12 +1,14 @@
 module Backlinkable
   extend ActiveSupport::Concern
 
+  # TODO: Optimize this method
   def backlinks_pages(website)
+    special_page_ids = website.pages.where.not(type: nil).pluck(:id)
     backlinks(
       "Communication::Website::Page::Localization",
       website
     )
-    .reject { |page| page.is_special_page? }
+    .reject { |page_l10n| special_page_ids.include?(page_l10n.about_id) }
   end
 
   def backlinks_posts(website)
