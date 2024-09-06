@@ -20,19 +20,7 @@ date_format = "%e %B %Y"
           <% end %>
         </ul>
       <% elsif block.data %>
-        <% if block.template.layout == "list" %>
-          <%= render "admin/communication/blocks/templates/posts/layouts/list", block: block %>
-        <% elsif block.template.layout == "highlight" %>
-          <%= render "admin/communication/blocks/templates/posts/layouts/highlight", block: block %>
-        <% elsif block.template.layout == "large" %>
-          <%= render "admin/communication/blocks/templates/posts/layouts/large", block: block %>
-        <% elsif block.template.layout == "carousel" %>
-          <%= render "admin/communication/blocks/templates/posts/layouts/carousel", block: block %>
-        <% elsif block.template.layout == "alternate" %>
-          <%= render "admin/communication/blocks/templates/posts/layouts/alternate", block: block %>
-        <% else # This is why we don't interpolate %>
-          <%= render "admin/communication/blocks/templates/posts/layouts/grid", block: block %>
-        <% end %>
+        <%= render 'admin/communication/blocks/partials/layout', block: block, file: __FILE__ %>
       <% end %>
     </div>
   </div>

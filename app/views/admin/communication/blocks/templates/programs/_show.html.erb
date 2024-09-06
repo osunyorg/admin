@@ -2,11 +2,7 @@
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-      <% if block.template.layout == "grid" %>
-        <%= render "admin/communication/blocks/templates/programs/layouts/grid", block: block %>
-        <% else %>
-        <%= render "admin/communication/blocks/templates/programs/layouts/list", block: block %>
-      <% end %>
+      <%= render 'admin/communication/blocks/partials/layout', block: block, file: __FILE__ %>
     </div>
   </div>
 </div>

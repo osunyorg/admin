@@ -1,0 +1,22 @@
+<div class="alternate">
+  <% block.template.selected_pages.each do |page|
+    next if page.nil?
+    page_l10n = page.localization_for(block.language)
+    %>
+    <article <% if !block.template.option_image %>class="without-image"<% end %>>
+      <h<%= block.heading_rank_children %>>
+        <%= link_to page_l10n, page_l10n.current_permalink_url_in_website(@website) %>
+      </h<%= block.heading_rank_children %>>
+      <% if block.template.option_summary %>
+        <p><%= page_l10n.summary %></p>
+      <% end %>
+      <% if block.template.option_image %>
+        <div class="media" itemprop="image">
+          <% if page_l10n.featured_image.attached? %>
+            <%= kamifusen_tag page_l10n.featured_image %>
+          <% end %>
+        </div>
+      <% end %>
+    </article>
+  <% end %>
+</div>

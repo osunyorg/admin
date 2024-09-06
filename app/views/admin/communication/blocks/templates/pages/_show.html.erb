@@ -1,9 +1,7 @@
 <%
-heading_level = block.heading_rank_children
 block_page = block.template.page
 block_page_l10n = block_page&.localization_for(block.language)
 %>
-
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
@@ -33,145 +31,7 @@ block_page_l10n = block_page&.localization_for(block.language)
         <% end %>
       <% end %>
       <% if block.data %>
-
-        <% if block.template.layout == "list" %>
-          <ul class="list">
-            <% block.template.selected_pages.each do |page|
-              next if page.nil?
-              page_l10n = page.localization_for(block.language)
-            %>
-              <li>
-                <% if block.template.option_summary || block.template.option_image %>
-                  <article>
-                    <div class="page-content">
-                      <h<%= heading_level %>>
-                        <%= link_to page_l10n, page_l10n.current_permalink_url_in_website(@website) %>
-                      </h<%= heading_level %>>
-                      <% if block.template.option_summary %>
-                        <p><%= page_l10n.summary %></p>
-                      <% end %>
-                    </div>
-                    <% if block.template.option_image %>
-                      <div class="media" itemprop="image">
-                        <% if page_l10n.featured_image.attached? %>
-                          <%= kamifusen_tag page_l10n.featured_image %>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </article>
-                <% else %>
-                  <%= link_to page_l10n, page_l10n.current_permalink_url_in_website(@website) %>
-                <% end %>
-              </li>
-            <% end %>
-
-          </ul>
-
-        <% elsif block.template.layout == "cards" %>
-          <div class="cards">
-            <% block.template.selected_pages.each do |page|
-              next if page.nil?
-              page_l10n = page.localization_for(block.language)
-            %>
-              <article class="card">
-                <h<%= heading_level %>>
-                  <%= link_to page, page_l10n.current_permalink_url_in_website(@website) %>
-                </h<%= heading_level %>>
-                <% if block.template.option_summary %>
-                  <p><%= page_l10n.summary %></p>
-                <% end %>
-
-                <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.pages.layouts.cards.more' %></p>
-
-                <% if block.template.option_image %>
-                  <div class="media" itemprop="image">
-                    <% if page_l10n.featured_image.attached? %>
-                      <%= kamifusen_tag page_l10n.featured_image %>
-                    <% end %>
-                  </div>
-                <% end %>
-              </article>
-            <% end %>
-          </div>
-
-        <% elsif block.template.layout == "alternate" %>
-          <div class="alternate">
-            <% block.template.selected_pages.each do |page|
-              next if page.nil?
-              page_l10n = page.localization_for(block.language)
-            %>
-              <article <% if !block.template.option_image %>class="without-image"<% end %>>
-                <h<%= heading_level %>>
-                  <%= link_to page_l10n, page_l10n.current_permalink_url_in_website(@website) %>
-                </h<%= heading_level %>>
-                <% if block.template.option_summary %>
-                  <p><%= page_l10n.summary %></p>
-                <% end %>
-
-                <% if block.template.option_image %>
-                  <div class="media" itemprop="image">
-                    <% if page_l10n.featured_image.attached? %>
-                      <%= kamifusen_tag page_l10n.featured_image %>
-                    <% end %>
-                  </div>
-                <% end %>
-              </article>
-            <% end %>
-          </div>
-
-        <% elsif block.template.layout == "large" %>
-          <div class="large">
-            <% block.template.selected_pages.each do |page|
-              next if page.nil?
-              page_l10n = page.localization_for(block.language)
-            %>
-              <article class="page">
-                <div class="page-content">
-                  <h<%= heading_level %>>
-                    <%= link_to page_l10n, page_l10n.current_permalink_url_in_website(@website) %>
-                  </h<%= heading_level %>>
-                  <% if block.template.option_summary %>
-                    <p><%= page_l10n.summary %></p>
-                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.pages.layouts.large.more' %></p>
-                  <% end %>
-                </div>
-
-                <% if block.template.option_image %>
-                  <div class="media" itemprop="image">
-                    <% if page_l10n.featured_image.attached? %>
-                      <%= kamifusen_tag page_l10n.featured_image %>
-                    <% end %>
-                  </div>
-                <% end %>
-              </article>
-            <% end %>
-          </div>
-
-        <% else %>
-          <div class="grid">
-            <% block.template.selected_pages.each do |page|
-              next if page.nil?
-              page_l10n = page.localization_for(block.language)
-            %>
-              <article>
-                <h<%= heading_level %>>
-                  <%= link_to page_l10n, page_l10n.current_permalink_url_in_website(@website) %>
-                </h<%= heading_level %>>
-                <% if block.template.option_summary %>
-                  <p><%= page_l10n.summary %></p>
-                <% end %>
-                <% if block.template.option_image %>
-                  <div class="media" itemprop="image">
-                    <% if page_l10n.featured_image.attached? %>
-                      <%= kamifusen_tag page_l10n.featured_image %>
-                    <% end %>
-                  </div>
-                <% end %>
-              </article>
-            <% end %>
-          </div>
-        <% end %>
-
+        <%= render 'admin/communication/blocks/partials/layout', block: block, file: __FILE__ %>
       <% end %>
     </div>
   </div>
