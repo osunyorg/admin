@@ -14,6 +14,7 @@ class Migrations::L10n::Communication::Website::Agenda::Category < Migrations::L
         name: category.name,
         slug: category.slug,
         path: category.path,
+        summary: category.summary,
 
         about_id: about_id,
         language_id: category.language_id,
