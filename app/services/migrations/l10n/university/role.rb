@@ -4,7 +4,7 @@ class Migrations::L10n::University::Role < Migrations::L10n::Base
   end
 
   def self.migrate_localizations
-    University::Role.find_each do |role|
+    University::Role.where(self.constraint).find_each do |role|
       # If "old way" translation, we set the about to the original, else if "old way" master, we take its ID.
       about_id = role.original_id || role.id
 

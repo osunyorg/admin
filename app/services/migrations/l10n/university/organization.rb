@@ -5,7 +5,7 @@ class Migrations::L10n::University::Organization < Migrations::L10n::Base
   end
 
   def self.migrate_localizations
-    University::Organization.find_each do |orga|
+    University::Organization.where(self.constraint).find_each do |orga|
       # If "old way" translation, we set the about to the original, else if "old way" master, we take its ID.
       about_id = orga.original_id || orga.id
 
@@ -38,12 +38,14 @@ class Migrations::L10n::University::Organization < Migrations::L10n::Base
 
       duplicate_permalinks(orga, l10n)
 
+      reconnect_git_files(orga, l10n)
+
       l10n.save
     end
   end
 
   def self.migrate_category_localizations
-    University::Organization::Category.find_each do |category|
+    University::Organization::Category.where(self.constraint).find_each do |category|
       about_id = category.original_id || category.id
 
       next if University::Organization::Category::Localization.where(
@@ -63,6 +65,7 @@ class Migrations::L10n::University::Organization < Migrations::L10n::Base
       category.translate_contents!(l10n)
 
       duplicate_permalinks(category, l10n)
+      reconnect_git_files(category, l10n)
 
       l10n.save
     end

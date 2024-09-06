@@ -4,7 +4,7 @@ class Migrations::L10n::Communication::Website < Migrations::L10n::Base
     # 2. créer les locas manquantes avec les données du website par défaut (name, socials)
     # 3. ajouter la publication aux locas existantes
     Communication::Website::Localization.reset_column_information
-    Communication::Website.includes(:legacy_languages).find_each do |website|
+    Communication::Website.where(self.constraint).includes(:legacy_languages).find_each do |website|
       website.legacy_languages.each do |language|
         l10n = website.localization_for(language)
         if l10n

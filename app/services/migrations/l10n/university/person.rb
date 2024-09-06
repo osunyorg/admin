@@ -6,7 +6,7 @@ class Migrations::L10n::University::Person < Migrations::L10n::Base
   end
 
   def self.migrate_localizations
-    University::Person.find_each do |person|
+    University::Person.where(self.constraint).find_each do |person|
       # If "old way" translation, we set the about to the original, else if "old way" master, we take its ID.
       about_id = person.original_id || person.id
 
@@ -40,12 +40,14 @@ class Migrations::L10n::University::Person < Migrations::L10n::Base
 
       duplicate_permalinks(person, l10n)
 
+      reconnect_git_files(person, l10n)
+
       l10n.save
     end
   end
 
   def self.migrate_category_localizations
-    University::Person::Category.find_each do |category|
+    University::Person::Category.where(self.constraint).find_each do |category|
       about_id = category.original_id || category.id
 
       next if University::Person::Category::Localization.where(
@@ -65,6 +67,7 @@ class Migrations::L10n::University::Person < Migrations::L10n::Base
       category.translate_contents!(l10n)
 
       duplicate_permalinks(category, l10n)
+      reconnect_git_files(category, l10n)
 
       l10n.save
     end
@@ -79,7 +82,7 @@ class Migrations::L10n::University::Person < Migrations::L10n::Base
     # - B2 : John Doe (Uni::Person::Loca FR) with his facets
     # - B3 : John Doe (Uni::Person::Loca EN) with his facets
     # For the English version, we can't migrate facets permalinks from B1, we need to query A2
-    University::Person.find_each do |person|
+    University::Person.where(self.constraint).find_each do |person|
       # If "old way" translation, we set the about to the original, else if "old way" master, we take its ID.
       about_id = person.original_id || person.id
 
@@ -96,24 +99,31 @@ class Migrations::L10n::University::Person < Migrations::L10n::Base
         new_permalink.about = l10n.administrator
         new_permalink.save
       end
+      reconnect_git_files(administrator, l10n.administrator)
+
       author = University::Person::Author.find(person.id)
       author.permalinks.each do |permalink|
         new_permalink = permalink.dup
         new_permalink.about = l10n.author
         new_permalink.save
       end
+      reconnect_git_files(author, l10n.author)
+
       researcher = University::Person::Researcher.find(person.id)
       researcher.permalinks.each do |permalink|
         new_permalink = permalink.dup
         new_permalink.about = l10n.researcher
         new_permalink.save
       end
+      reconnect_git_files(researcher, l10n.researcher)
+
       teacher = University::Person::Teacher.find(person.id)
       teacher.permalinks.each do |permalink|
         new_permalink = permalink.dup
         new_permalink.about = l10n.teacher
         new_permalink.save
       end
+      reconnect_git_files(teacher, l10n.teacher)
     end
   end
 

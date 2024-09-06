@@ -1,6 +1,6 @@
 class Migrations::L10n::Communication::Website::Blog::Category < Migrations::L10n::Base
   def self.execute
-    Communication::Website::Post::Category.find_each do |object|
+    Communication::Website::Post::Category.where(self.constraint).find_each do |object|
       puts "Migration category #{object.id}"
 
       about_id = object.original_id || object.id
@@ -28,6 +28,7 @@ class Migrations::L10n::Communication::Website::Blog::Category < Migrations::L10
       object.translate_other_attachments(l10n)
 
       duplicate_permalinks(object, l10n)
+      reconnect_git_files(object, l10n)
 
       l10n.save
     end

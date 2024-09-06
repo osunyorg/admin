@@ -1,6 +1,6 @@
 class Migrations::L10n::Communication::Website::Agenda::Category < Migrations::L10n::Base
   def self.execute
-    Communication::Website::Agenda::Category.find_each do |category|
+    Communication::Website::Agenda::Category.where(self.constraint).find_each do |category|
       about_id = category.original_id || category.id
       next if Communication::Website::Agenda::Category::Localization.where(
         about_id: about_id,
@@ -26,6 +26,7 @@ class Migrations::L10n::Communication::Website::Agenda::Category < Migrations::L
       category.translate_attachment(l10n, :featured_image)
 
       duplicate_permalinks(category, l10n)
+      reconnect_git_files(category, l10n)
 
       l10n.save
     end

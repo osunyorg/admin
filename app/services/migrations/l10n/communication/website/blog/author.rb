@@ -2,7 +2,7 @@ class Migrations::L10n::Communication::Website::Blog::Author < Migrations::L10n:
   def self.execute
     puts Communication::Website::Post.model_name.human(count: 2)
     puts "Authors"
-    Communication::Website::Post.find_each do |post|
+    Communication::Website::Post.where(self.constraint).find_each do |post|
       puts "#{post.id}"
       if post.author && post.author.original_id.present?
         puts "Fixing author (#{post.author.id} > #{post.author.original_id})"

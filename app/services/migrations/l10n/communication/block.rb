@@ -8,7 +8,7 @@ class Migrations::L10n::Communication::Block < Migrations::L10n::Base
       Communication::Block.skip_callback :save, :after, :connect_and_sync_direct_sources
       Communication::Block.skip_callback :save, :after, :clean_websites_if_necessary
 
-      Communication::Block.pages.find_each do |block|
+      Communication::Block.where(self.constraint).pages.find_each do |block|
         template = block.template
         if (main_page = Communication::Website::Page.find_by(id: template.page_id)).present?
           new_main_page_id = main_page.original_id || main_page.id
@@ -24,7 +24,7 @@ class Migrations::L10n::Communication::Block < Migrations::L10n::Base
         block.save
       end
 
-      Communication::Block.posts.find_each do |block|
+      Communication::Block.where(self.constraint).posts.find_each do |block|
         template = block.template
         if (category = Communication::Website::Post::Category.find_by(id: template.category_id)).present?
           new_category_id = category.original_id || category.id
@@ -40,7 +40,7 @@ class Migrations::L10n::Communication::Block < Migrations::L10n::Base
         block.save
       end
 
-      Communication::Block.persons.find_each do |block|
+      Communication::Block.where(self.constraint).persons.find_each do |block|
         template = block.template
         if (category = University::Person::Category.find_by(id: template.category_id)).present?
           new_category_id = category.original_id || category.id
@@ -56,7 +56,7 @@ class Migrations::L10n::Communication::Block < Migrations::L10n::Base
         block.save
       end
 
-      Communication::Block.organizations.find_each do |block|
+      Communication::Block.where(self.constraint).organizations.find_each do |block|
         template = block.template
         if (category = University::Organization::Category.find_by(id: template.category_id)).present?
           new_category_id = category.original_id || category.id
@@ -72,7 +72,7 @@ class Migrations::L10n::Communication::Block < Migrations::L10n::Base
         block.save
       end
 
-      Communication::Block.agenda.find_each do |block|
+      Communication::Block.where(self.constraint).agenda.find_each do |block|
         template = block.template
         if (category = Communication::Website::Agenda::Category.find_by(id: template.category_id)).present?
           new_category_id = category.original_id || category.id
@@ -88,7 +88,7 @@ class Migrations::L10n::Communication::Block < Migrations::L10n::Base
         block.save
       end
 
-      Communication::Block.programs.find_each do |block|
+      Communication::Block.where(self.constraint).programs.find_each do |block|
         template = block.template
         template.elements.each do |element|
           if (program = Education::Program.find_by(id: element.id)).present?
@@ -100,7 +100,7 @@ class Migrations::L10n::Communication::Block < Migrations::L10n::Base
         block.save
       end
 
-      Communication::Block.locations.find_each do |block|
+      Communication::Block.where(self.constraint).locations.find_each do |block|
         template = block.template
         template.elements.each do |element|
           if (location = Administration::Location.find_by(id: element.id)).present?
@@ -112,7 +112,7 @@ class Migrations::L10n::Communication::Block < Migrations::L10n::Base
         block.save
       end
 
-      Communication::Block.projects.find_each do |block|
+      Communication::Block.where(self.constraint).projects.find_each do |block|
         template = block.template
         if (category = Communication::Website::Portfolio::Category.find_by(id: template.category_id)).present?
           new_category_id = category.original_id || category.id

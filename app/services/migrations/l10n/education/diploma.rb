@@ -1,6 +1,6 @@
 class Migrations::L10n::Education::Diploma < Migrations::L10n::Base
   def self.execute
-    Education::Diploma.find_each do |object|
+    Education::Diploma.where(self.constraint).find_each do |object|
       about_id = object.original_id || object.id
       next if Education::Diploma::Localization.where(
         about_id: about_id,
@@ -22,6 +22,7 @@ class Migrations::L10n::Education::Diploma < Migrations::L10n::Base
       object.translate_contents!(l10n)
 
       duplicate_permalinks(object, l10n)
+      reconnect_git_files(object, l10n)
 
       l10n.save
     end

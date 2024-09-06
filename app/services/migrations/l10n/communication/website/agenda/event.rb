@@ -1,6 +1,6 @@
 class Migrations::L10n::Communication::Website::Agenda::Event < Migrations::L10n::Base
   def self.execute
-    Communication::Website::Agenda::Event.find_each do |event|
+    Communication::Website::Agenda::Event.where(self.constraint).find_each do |event|
       puts "Migration event #{event.id}"
 
       about_id = event.original_id || event.id
@@ -34,6 +34,7 @@ class Migrations::L10n::Communication::Website::Agenda::Event < Migrations::L10n
       event.translate_other_attachments(l10n)
 
       duplicate_permalinks(event, l10n)
+      reconnect_git_files(event, l10n)
 
       l10n.save
     end
