@@ -103,6 +103,7 @@ namespace :communication do
           get :static
         end
       end
+      root to: '/admin/communication/websites/portfolio/projects#index'
     end
     resources :menus, controller: 'websites/menus' do
       member do

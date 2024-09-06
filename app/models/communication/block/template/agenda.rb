@@ -79,7 +79,10 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def link_to_category
-    category.current_permalink_in_website(website)&.path
+    return if category.nil?
+    category_l10n = category.localization_for(block.language)
+    return if category_l10n.nil?
+    category_l10n.current_permalink_in_website(website)&.path
   end
 
   def base_events
