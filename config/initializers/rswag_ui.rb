@@ -10,6 +10,9 @@ Rswag::Ui.configure do |c|
 
   c.openapi_endpoint 'osuny/v1/openapi.json', 'Osuny API V1 Docs'
 
+  c.config_object[:deepLinking] = true
+  c.config_object[:persistAuthorization] = true
+
   # Add Basic Auth in case your API is private
   # c.basic_auth_enabled = true
   # c.basic_auth_credentials 'username', 'password'

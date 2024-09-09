@@ -1,12 +1,17 @@
 class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communication::Websites::ApplicationController
-  skip_before_action :verify_authenticity_token, only: :import
-  before_action :verify_app_token, only: :import
+  def index
+    @posts = website.posts.published
+  end
 
+  def show
+    @post = website.posts.find params[:id]
+  end
+
+  # TODO create
   def import
     Importers::Api::Osuny::Communication::Website::Post.new university: current_university,
                                                             website: website,
                                                             params: params[:post]
     render json: :ok
   end
-
 end
