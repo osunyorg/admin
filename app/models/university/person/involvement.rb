@@ -52,6 +52,7 @@ class University::Person::Involvement < ApplicationRecord
                     :set_university_id,
                     on: :create
 
+  # TODO L10N : correct this scope
   scope :ordered_by_name, -> {
     joins(:person).select('university_person_involvements.*')
                   .order('university_people.last_name', 'university_people.first_name')

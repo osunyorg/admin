@@ -71,7 +71,34 @@ class Administration::Location < ApplicationRecord
                           source: :diploma
                           alias_method :education_diplomas, :diplomas
 
-  scope :ordered, -> { order(:name) }
+  scope :ordered, -> (language) {
+    # Define a raw SQL snippet for the conditional aggregation
+    # This selects the name of the localization in the specified language,
+    # or falls back to the first localization name if the specified language is not present.
+    localization_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.name)))) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_name
+    SQL
+
+    # Join the locations table with a subquery that ranks localizations
+    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          administration_location_localizations as localizations
+      ) localizations ON administration_locations.id = localizations.about_id
+    SQL
+    ]))
+    .select("administration_locations.*", localization_name_select)
+    .group("administration_locations.id")
+    .order("localization_name ASC")
+  }
+
 
   validates :address, :city, :zipcode, :country, presence: true
 
