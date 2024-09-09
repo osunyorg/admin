@@ -529,7 +529,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_141421) do
     t.boolean "header_cta"
     t.string "header_cta_label"
     t.string "header_cta_url"
-    t.string "header_text"
+    t.text "header_text"
     t.string "meta_description"
     t.string "migration_identifier"
     t.boolean "published"
