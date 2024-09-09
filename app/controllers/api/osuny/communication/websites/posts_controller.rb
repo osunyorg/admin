@@ -1,4 +1,6 @@
 class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communication::Websites::ApplicationController
+  before_action :load_post, only: [:create, :update]
+
   def index
     @posts = website.posts.published
   end
@@ -7,11 +9,48 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
     @post = website.posts.find params[:id]
   end
 
-  # TODO create
-  def import
-    Importers::Api::Osuny::Communication::Website::Post.new university: current_university,
-                                                            website: website,
-                                                            params: params[:post]
-    render json: :ok
+  def create
+    @post.assign_attributes post_params
+    if @post.save
+      render json: @post
+    else
+      render json: @post.errors
+    end
+  end
+
+  def update
+    if @post.update post_params
+      render json: @post
+    else
+      render json: @post.errors
+    end
+  end
+
+  # def import
+  #   Importers::Api::Osuny::Communication::Website::Post.new university: current_university,
+  #                                                           website: website,
+  #                                                           params: params[:post]
+  #   render json: :ok
+  # end
+
+  protected
+
+  def load_post
+    @migration_identifier = params[:post][:migration_identifier]
+    @language = Language.find_by(iso_code: params[:post][:locale])
+    @post = website.posts.where(
+        migration_identifier: @migration_identifier,
+        language: @language
+      ).first_or_initialize
+  end
+
+  def post_params
+    params.require(:post)
+          .permit(
+            :title, :summary, :published
+          ).merge(
+            university_id: current_university.id,
+            communication_website_id: website.id
+          )
   end
 end

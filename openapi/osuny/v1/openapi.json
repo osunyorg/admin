@@ -75,7 +75,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
+                  "equired": [
                     "name",
                     "url"
                   ]
@@ -130,10 +130,45 @@
                     }
                   },
                   "required": [
-                    "name",
-                    "url"
+                    "id",
+                    "title"
                   ]
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "Title",
+                    "example": "This is a post"
+                  },
+                  "summary": {
+                    "type": "string",
+                    "description": "Summary",
+                    "example": "This is a summary"
+                  },
+                  "migration_identifier": {
+                    "type": "string",
+                    "description": "Unique migration identifier"
+                  },
+                  "published": {
+                    "type": "boolean",
+                    "example": false
+                  },
+                  "locale": {
+                    "type": "string",
+                    "description": "Locale",
+                    "example": "fr"
+                  }
+                },
+                "required": "title migration_identifier"
               }
             }
           }
