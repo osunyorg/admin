@@ -11,7 +11,7 @@
     <%= favicon_link_tag 'favicon.png' %>
   </head>
   <body class="layout-devise <%= body_classes %>">
-    <header>
+    <header class="h1">
       <%= link_to root_path do %>
         <%= render 'logo' %>
       <% end %>
@@ -21,7 +21,7 @@
         <div class="row">
           <div class="offset-md-2 col-md-8 offset-lg-3 col-lg-6 offset-xxl-4 col-xxl-4">
       <% end %>
-      <%= render 'notice' %>
+      <%= render 'simple_notice' %>
       <%= yield %>
       <% if @small_content %>
           </div>
