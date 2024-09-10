@@ -46,7 +46,7 @@
                             ),
                             as: :check_boxes %>
           <%= lf.input :authors_list %>
-          <%= f.association :kind, collection: @journal.kinds.ordered(current_language) if @journal.kinds.any? %>
+          <%= f.association :kind, collection: osuny_collection(@journal.kinds, localized: true) if @journal.kinds.any? %>
         <% end %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
