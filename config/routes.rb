@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     mount GoodJob::Engine => 'background'
     mount PgHero::Engine => 'database'
   end
+  mount Rswag::Ui::Engine => '/api/docs'
+  mount Rswag::Api::Engine => '/api/docs'
 
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
