@@ -18,6 +18,7 @@ Rswag::Ui.configure do |c|
   # c.basic_auth_credentials 'username', 'password'
 end
 
+# Fix Content-Security-Policy header for Rack 3
 # TODO: Waiting for a fix in rswag-ui gem, using this workaround
 module Rswag
   module Ui
