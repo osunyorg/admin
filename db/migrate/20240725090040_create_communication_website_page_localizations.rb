@@ -12,7 +12,7 @@ class CreateCommunicationWebsitePageLocalizations < ActiveRecord::Migration[7.1]
       t.boolean :header_cta
       t.string :header_cta_label
       t.string :header_cta_url
-      t.string :header_text
+      t.text :header_text
       t.string :meta_description
       t.string :migration_identifier
       t.boolean :published

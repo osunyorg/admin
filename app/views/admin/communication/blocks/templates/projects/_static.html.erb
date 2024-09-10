@@ -4,7 +4,7 @@
 <% elsif block.template.mode == 'category' && block.template.category %>
   <% category_l10n = block.template.category.localization_for(block.language) %>
   <% if category_l10n %>
-      category: "<%= category_l10n.current_permalink_in_website(@website)&.path %>"
+      category: "/<%= category_l10n.slug_with_ancestors_slugs(separator: '-') %>/"
   <% end %>
 <% end %>
       layout: <%= block.template.layout %>

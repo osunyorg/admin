@@ -1,8 +1,23 @@
 backlinks:
   current_website:
-    name: "<%= @website %>"
+    name: "<%= @website.to_s_in(about.language) %>"
+    pages:
+<% about.backlinks_pages(@website).each do |element| %>
+      - path: "<%= element.current_permalink_in_website(@website)&.path %>"
+        file: "<%= element.git_path_relative %>"
+<% end %>
     posts:
 <% about.backlinks_posts(@website).each do |element| %>
       - path: "<%= element.static_path %>"
+        file: "<%= element.git_path_relative %>"
+<% end %>
+    events:
+<% about.backlinks_agenda_events(@website).each do |element| %>
+      - path: "<%= element.current_permalink_in_website(@website)&.path %>"
+        file: "<%= element.git_path_relative %>"
+<% end %>
+    projects:
+<% about.backlinks_portfolio_projects(@website).each do |element| %>
+      - path: "<%= element.current_permalink_in_website(@website)&.path %>"
         file: "<%= element.git_path_relative %>"
 <% end %>

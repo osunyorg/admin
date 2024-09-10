@@ -1,6 +1,6 @@
 class Migrations::L10n::Communication::Website::Page < Migrations::L10n::Base
   def self.execute
-    Communication::Website::Page.find_each do |page|
+    Communication::Website::Page.where(self.constraint).find_each do |page|
       puts "Migration page #{page.id}"
 
       about_id = page.original_id || page.id
@@ -37,6 +37,7 @@ class Migrations::L10n::Communication::Website::Page < Migrations::L10n::Base
       page.translate_other_attachments(l10n)
 
       duplicate_permalinks(page, l10n)
+      reconnect_git_files(page, l10n)
 
       l10n.save
     end

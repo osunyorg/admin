@@ -1,14 +1,15 @@
 module Backlinkable
   extend ActiveSupport::Concern
 
-  # TODO L10N: rétablir
-  # def backlinks_pages(website)
-  #   backlinks(
-  #     "Communication::Website::Page",
-  #     website
-  #   )
-  #   .reject { |page| page.is_special_page? }
-  # end
+  # TODO: Optimize this method
+  def backlinks_pages(website)
+    special_page_ids = website.pages.where.not(type: nil).pluck(:id)
+    backlinks(
+      "Communication::Website::Page::Localization",
+      website
+    )
+    .reject { |page_l10n| special_page_ids.include?(page_l10n.about_id) }
+  end
 
   def backlinks_posts(website)
     backlinks(
@@ -17,19 +18,19 @@ module Backlinkable
     )
   end
 
-  # def backlinks_agenda_events(website)
-  #   backlinks(
-  #     "Communication::Website::Agenda::Event",
-  #     website
-  #   )
-  # end
+  def backlinks_agenda_events(website)
+    backlinks(
+      "Communication::Website::Agenda::Event::Localization",
+      website
+    )
+  end
 
-  # def backlinks_portfolio_projects(website)
-  #   backlinks(
-  #     "Communication::Website::Portfolio::Project",
-  #     website
-  #   )
-  # end
+  def backlinks_portfolio_projects(website)
+    backlinks(
+      "Communication::Website::Portfolio::Project::Localization",
+      website
+    )
+  end
 
   protected
 

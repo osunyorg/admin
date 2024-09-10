@@ -78,15 +78,14 @@ class University::Organization < ApplicationRecord
 
   alias :featured_image :logo # TODO L10N : To remove
 
-  # TODO L10N : To understand
   scope :ordered, -> (language) {
     # Define a raw SQL snippet for the conditional aggregation
     # This selects the name of the localization in the specified language,
     # or falls back to the first localization name if the specified language is not present.
     localization_name_select = <<-SQL
       COALESCE(
-        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.name END),
-        MAX(localizations.name) FILTER (WHERE localizations.rank = 1)
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.name)))) FILTER (WHERE localizations.rank = 1)
       ) AS localization_name
     SQL
 

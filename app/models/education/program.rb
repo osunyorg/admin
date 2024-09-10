@@ -103,7 +103,34 @@ class Education::Program < ApplicationRecord
 
   before_destroy :move_children
 
-  scope :ordered_by_name, -> (language) { order(:name) }
+  scope :ordered_by_name, -> (language) {
+    # Define a raw SQL snippet for the conditional aggregation
+    # This selects the name of the localization in the specified language,
+    # or falls back to the first localization name if the specified language is not present.
+    localization_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.name)))) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_name
+    SQL
+
+    # Join the programs table with a subquery that ranks localizations
+    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          education_program_localizations as localizations
+      ) localizations ON education_programs.id = localizations.about_id
+    SQL
+    ]))
+    .select("education_programs.*", localization_name_select)
+    .group("education_programs.id")
+    .order("localization_name ASC")
+  }
+  # TODO L10N : adjust
   scope :for_search_term, -> (term) {
     where("
       unaccent(education_programs.name) ILIKE unaccent(:term)

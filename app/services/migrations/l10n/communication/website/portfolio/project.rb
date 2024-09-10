@@ -1,6 +1,6 @@
 class Migrations::L10n::Communication::Website::Portfolio::Project < Migrations::L10n::Base
   def self.execute
-    Communication::Website::Portfolio::Project.find_each do |project|
+    Communication::Website::Portfolio::Project.where(self.constraint).find_each do |project|
       puts "Migration project #{project.id}"
 
       about_id = project.original_id || project.id
@@ -31,6 +31,7 @@ class Migrations::L10n::Communication::Website::Portfolio::Project < Migrations:
       project.translate_other_attachments(l10n)
 
       duplicate_permalinks(project, l10n)
+      reconnect_git_files(project, l10n)
 
       l10n.save
     end

@@ -119,7 +119,35 @@ class Communication::Website < ApplicationRecord
                     :set_first_localization_as_published,
                     on: :create
 
-  scope :ordered, -> { order(:name) }
+  scope :ordered, -> (language) {
+    # Define a raw SQL snippet for the conditional aggregation
+    # This selects the name of the localization in the specified language,
+    # or falls back to the first localization name if the specified language is not present.
+    localization_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.name)))) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_name
+    SQL
+
+    # Join the websites table with a subquery that ranks localizations
+    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          communication_website_localizations as localizations
+      ) localizations ON communication_websites.id = localizations.about_id
+    SQL
+    ]))
+    .select("communication_websites.*", localization_name_select)
+    .group("communication_websites.id")
+    .order("localization_name ASC")
+  }
+
+
   scope :in_production, -> { where(in_production: true) }
   scope :for_production, -> (production) { where(in_production: production) }
   scope :for_search_term, -> (term) {

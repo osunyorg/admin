@@ -1,6 +1,6 @@
 class Migrations::L10n::Education::Program < Migrations::L10n::Base
   def self.execute
-    Education::Program.find_each do |program|
+    Education::Program.where(self.constraint).find_each do |program|
       about_id = program.original_id || program.id
       next if Education::Program::Localization.where(
         about_id: about_id,
@@ -52,6 +52,7 @@ class Migrations::L10n::Education::Program < Migrations::L10n::Base
       program.translate_attachment(l10n, :logo)
 
       duplicate_permalinks(program, l10n)
+      reconnect_git_files(program, l10n)
 
       l10n.save
 
