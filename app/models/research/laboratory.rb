@@ -28,7 +28,6 @@ class Research::Laboratory < ApplicationRecord
   include Sanitizable
   include WebsitesLinkable
   include WithCountry
-  include WithGitFiles
 
   belongs_to  :university
   has_many    :communication_websites,
