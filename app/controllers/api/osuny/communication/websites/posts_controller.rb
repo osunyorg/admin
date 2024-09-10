@@ -37,7 +37,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
 
   def load_post
     @migration_identifier = params.dig(:post, :migration_identifier)
-    @language = Language.find_by(iso_code: params[:post][:locale])
+    @language = Language.find_by(iso_code: params.dig(:post, :locale))
     @post = website.posts.where(
         migration_identifier: @migration_identifier,
         language: @language
