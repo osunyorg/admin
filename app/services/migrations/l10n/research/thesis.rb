@@ -13,7 +13,6 @@ class Migrations::L10n::Research::Thesis < Migrations::L10n::Base
         created_at: object.created_at
       )
 
-      l10n.save
     end
   end
 end
