@@ -58,8 +58,7 @@ class Research::Journal::Volume < ApplicationRecord
   def dependencies
     localizations +
     papers +
-    people.map(&:researcher) +
-    active_storage_blobs
+    people.map(&:researcher)
   end
 
   def references
