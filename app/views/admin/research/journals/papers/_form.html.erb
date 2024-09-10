@@ -36,11 +36,14 @@
           <%= f.input :accepted_at, html5: true, as: :date %>
           <%= f.input :received_at, html5: true, as: :date %>
           <%= lf.input :keywords, as: :text, input_html: { rows: 2 } %>
-          <%#= f.association :people,
-                            collection: current_university.people
-                                                          .in_closest_language_id(@journal.language_id)
-                                                          .researchers
-                                                          .ordered,
+          <%= f.association :people,
+                            collection: osuny_collection(
+                              current_university.people
+                                                .tmp_original # TODO L10N : To remove
+                                                .researchers
+                                                .ordered(current_language), 
+                              localized: true
+                            ),
                             as: :check_boxes %>
           <%= lf.input :authors_list %>
           <%= f.association :kind, collection: @journal.kinds.ordered(current_language) if @journal.kinds.any? %>
