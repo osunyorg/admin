@@ -6,7 +6,7 @@
   <div class="small">
     <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
     <% if @website.about.present? %>
-      — <%= osuny_link_localized @website.about, [:admin, @website.about] unless @website.about.nil? %>
+      — <%= osuny_link_localized_if can?(:read, @website.about), @website.about, [:admin, @website.about] %>
     <% end %>
   </div>
 <% end %>
