@@ -6,7 +6,7 @@
       <%= render 'admin/research/laboratories/axes/list', axes: @axes %>
       <%= link_to t('create'),
                   new_admin_research_laboratory_axis_path(laboratory_id: @laboratory),
-                  class: button_classes %>
+                  class: button_classes if can?(:create, Research::Laboratory::Axis) %>
     <% end %>
   </div>
   <div class="col-lg-6">
