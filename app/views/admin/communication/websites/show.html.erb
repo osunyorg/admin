@@ -5,7 +5,7 @@
   <%= link_to @website.url, @website.url, target: :_blank unless @website.url.blank? %>
   <div class="small">
     <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
-    <% if @website.about %>
+    <% if @website.about.present? %>
       — <%= osuny_link_localized @website.about, [:admin, @website.about] unless @website.about.nil? %>
     <% end %>
   </div>
