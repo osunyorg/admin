@@ -94,11 +94,11 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   def to_citeproc(website: nil)
     citeproc = {
       "title" => title,
-      "author" => people.map { |person|
+      "author" => people_l10n.map { |person|
         { "family" => person.last_name, "given" => person.first_name }
       },
       "URL" => current_permalink_url_in_website(website),
-      "container-title" => journal.title,
+      "container-title" => journal_l10n.title,
       "volume" => volume&.number,
       "keywords" => keywords,
       "pdf" => pdf.attached? ? pdf.url : nil,

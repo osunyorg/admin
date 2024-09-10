@@ -30,7 +30,6 @@
 #  fk_rails_b3380066dc  (research_laboratory_id => research_laboratories.id)
 #
 class Research::Thesis < ApplicationRecord
-  include AsIndirectObject
   include Localizable
   include Sanitizable
   include WithUniversity

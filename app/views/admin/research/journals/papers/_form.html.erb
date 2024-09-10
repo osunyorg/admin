@@ -10,18 +10,18 @@
           <%= lf.input :title, as: :text, input_html: { rows: 3 } %>
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
           <%= lf.input :abstract, as: :text, input_html: { rows: 8 } %>
-          <%= lf.input :pdf %>
+          <%= lf.input :pdf, as: :single_deletable_file %>
           <%= f.input :doi %>
           <%= lf.input :text,
                       as: :summernote,
                       input_html: {
                         data: { 'summernote-config' => 'mini' }
-                      } if has_content?(paper.text) %>
+                      } if has_content?(l10n.text) %>
           <%= lf.input :bibliography,
                       as: :summernote,
                       input_html: {
                         data: { 'summernote-config' => 'mini' }
-                      } if has_content?(paper.bibliography) %>
+                      } if has_content?(l10n.bibliography) %>
         <% end %>
       </div>
       <div class="col-md-4">
@@ -36,14 +36,17 @@
           <%= f.input :accepted_at, html5: true, as: :date %>
           <%= f.input :received_at, html5: true, as: :date %>
           <%= lf.input :keywords, as: :text, input_html: { rows: 2 } %>
-          <%#= f.association :people,
-                            collection: current_university.people
-                                                          .in_closest_language_id(@journal.language_id)
-                                                          .researchers
-                                                          .ordered,
+          <%= f.association :people,
+                            collection: osuny_collection(
+                              current_university.people
+                                                .tmp_original # TODO L10N : To remove
+                                                .researchers
+                                                .ordered(current_language), 
+                              localized: true
+                            ),
                             as: :check_boxes %>
           <%= lf.input :authors_list %>
-          <%= f.association :kind, collection: @journal.kinds.ordered(current_language) if @journal.kinds.any? %>
+          <%= f.association :kind, collection: osuny_collection(@journal.kinds, localized: true) if @journal.kinds.any? %>
         <% end %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>

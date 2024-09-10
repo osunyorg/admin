@@ -16,13 +16,16 @@
       <p><%= l @thesis.completed_at %></p>
     <% end %>
     <%= osuny_label Research::Thesis.human_attribute_name('author') %>
-    <p><%= osuny_link_localized @thesis.author, 
+    <p><%= osuny_link_localized_if can?(:read, @thesis.author),
+                                   @thesis.author, 
                                 admin_research_researcher_path(@thesis.author) %></p>
     <%= osuny_label Research::Thesis.human_attribute_name('laboratory') %>
-    <p><%= osuny_link_localized @thesis.laboratory, 
+    <p><%= osuny_link_localized_if can?(:read, @thesis.laboratory),
+                                   @thesis.laboratory, 
                                 [:admin, @thesis.laboratory] %></p>
     <%= osuny_label Research::Thesis.human_attribute_name('director') %>
-    <p><%= osuny_link_localized @thesis.director,
+    <p><%= osuny_link_localized_if can?(:read, @thesis.director),
+                                   @thesis.director, 
                                 admin_research_researcher_path(@thesis.director) %></p>
   </div>
 </div>

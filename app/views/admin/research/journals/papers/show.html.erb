@@ -41,9 +41,9 @@
           <p><%= osuny_link_localized @paper.volume,
                                       [:admin, @paper.volume] %></p>
         <% end %>
-        <% unless @paper.keywords.blank? %>
-          <%= osuny_label Research::Journal::Paper.human_attribute_name('keywords') %>
-          <p><%= @paper.keywords %></p>
+        <% unless @l10n.keywords.blank? %>
+          <%= osuny_label Research::Journal::Paper::Localization.human_attribute_name('keywords') %>
+          <p><%= @l10n.keywords %></p>
         <% end %>
         <% if @paper.kind %>
           <%= osuny_label Research::Journal::Paper.human_attribute_name('kind') %>
@@ -53,12 +53,12 @@
           <%= osuny_label Research::Journal::Paper.human_attribute_name('people') %>
           <%= render 'admin/research/researchers/list', researchers: @paper.people %>
         <% end %>
-        <% if @paper.authors_list.present? %>
+        <% if @l10n.authors_list.present? %>
           <%= osuny_label Research::Journal::Paper::Localization.human_attribute_name('authors_list') %>
-          <p><%= @paper.authors_list %></p>
+          <p><%= @l10n.authors_list %></p>
         <% end %>
     <% end %>
-    <%= render 'admin/application/meta_description/show', about: @paper %>
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
   <div class="col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n %>
@@ -71,13 +71,13 @@
         <%= osuny_label Research::Journal::Paper.human_attribute_name('doi') %>
         <p><%= link_to @paper.doi_url, @paper.doi_url, target: :_blank %></p>
       <% end %>
-      <% if has_content?(@paper.text)%>
-        <%= osuny_label Research::Journal::Paper.human_attribute_name('text') %>
-        <%= sanitize @paper.text %>
+      <% if has_content?(@l10n.text)%>
+        <%= osuny_label Research::Journal::Paper::Localization.human_attribute_name('text') %>
+        <%= sanitize @l10n.text %>
       <% end %>
-      <% if has_content?(@paper.bibliography)%>
-        <%= osuny_label Research::Journal::Paper.human_attribute_name('bibliography') %>
-        <%= sanitize @paper.bibliography %>
+      <% if has_content?(@l10n.bibliography)%>
+        <%= osuny_label Research::Journal::Paper::Localization.human_attribute_name('bibliography') %>
+        <%= sanitize @l10n.bibliography %>
       <% end %>
     <% end %>
   </div>

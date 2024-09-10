@@ -1,6 +1,9 @@
 <div  class="row g-2 mb-3"
-      data-sortable
-      data-sort-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>">
+      <% if can?(:reorder, axes.first) %>
+        data-sortable
+        data-sort-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>"
+      <% end %>
+      >
   <% axes.each do |axis| %>
     <div data-id="<%= axis.id %>">
       <div class="card card--horizontal">

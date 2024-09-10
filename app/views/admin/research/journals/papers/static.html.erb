@@ -12,8 +12,6 @@ language = @l10n.language
             toc_offcanvas: false %>
 <% if paper.kind %>
 paper_kind: "<%= prepare_text_for_static paper.kind %>"
-paper_kinds:
-  - "<%= paper.kind.slug %>"
 <% end %>
 <% if @l10n.volume_l10n %>
 volumes:
@@ -25,15 +23,15 @@ dates:
   published: "<%= @l10n.published_at&.to_date&.iso8601 %>"
   accepted: "<%= paper.accepted_at&.to_date&.iso8601 %>"
   received: "<%= paper.received_at&.to_date&.iso8601 %>"
-<% if @about.pdf.attached? %>
+<% if @l10n.pdf.attached? %>
 pdf: "<%= @l10n.pdf.blob_id %>"
 <% end %>
 <% if @about.bibliography %>
 bibliography: >-
-  <%= prepare_html_for_static @about.bibliography %>
+  <%= prepare_html_for_static @l10n.bibliography %>
 <% end %>
 keywords: >-
-  <%= prepare_text_for_static @about.keywords %>
+  <%= prepare_text_for_static @l10n.keywords %>
 researchers:
 <% @l10n.people_l10n.each do |person_l10n| %>
   - "<%= person_l10n.slug %>"

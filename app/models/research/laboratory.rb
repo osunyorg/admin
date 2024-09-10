@@ -28,13 +28,6 @@ class Research::Laboratory < ApplicationRecord
   include Sanitizable
   include WebsitesLinkable
   include WithCountry
-  include WithGitFiles
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   belongs_to  :university
   has_many    :communication_websites,

@@ -56,9 +56,6 @@ class Research::Journal < ApplicationRecord
       unaccent(research_journals.title) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_language, -> (language) { for_language_id(language.id) }
-  # The for_language_id scope can be used when you have the ID without needing to load the Language itself
-  scope :for_language_id, -> (language_id) { where(language_id: language_id) }
 
   def researchers
     university.people.where(id: people.pluck(:id), is_researcher: true)

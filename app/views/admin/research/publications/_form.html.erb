@@ -18,7 +18,6 @@
       <%= f.input :doi %>
       <%= f.input :journal_title %>
       <%= f.input :open_access %>
-      <%# TODO: ce devrait être la current_language, pas l'interface_language %>
       <%= f.association :researchers,
                         as: :check_boxes,
                         collection: osuny_collection(

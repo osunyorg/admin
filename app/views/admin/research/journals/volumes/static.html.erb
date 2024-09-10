@@ -12,7 +12,7 @@ language = @l10n.language
             toc_offcanvas: false,
             toc_present: false %>
 number: <%= volume.number %>
-issn: "<%= volume.journal.issn %>"
+issn: "<%= volume.journal.best_localization_for(language).issn %>"
 keywords: >-
   <%= @l10n.keywords %>
 date: "<%= @l10n.published_at.iso8601 %>"

@@ -22,7 +22,8 @@ class Migrations::L10n::Research::Journal::Volume < Migrations::L10n::Base
         created_at: object.created_at
       )
 
-      l10n.save
+      duplicate_permalinks(object, l10n)
+      reconnect_git_files(object, l10n)
     end
   end
 end

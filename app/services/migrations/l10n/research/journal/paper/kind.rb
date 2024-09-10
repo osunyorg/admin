@@ -13,8 +13,6 @@ class Migrations::L10n::Research::Journal::Paper::Kind < Migrations::L10n::Base
         university_id: object.university_id,
         created_at: object.created_at
       )
-
-      l10n.save
     end
   end
 end

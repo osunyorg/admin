@@ -25,6 +25,8 @@ class Migrations::L10n::Research::Journal::Paper < Migrations::L10n::Base
 
       object.translate_contents!(l10n)
       object.translate_attachment(l10n, :pdf)
+      duplicate_permalinks(object, l10n)
+      reconnect_git_files(object, l10n)
 
       l10n.save
     end

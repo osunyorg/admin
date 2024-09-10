@@ -9,7 +9,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
   include Admin::Localizable
 
   def index
-    @laboratories = apply_scopes(@laboratories).page(params[:page])
+    @laboratories = apply_scopes(@laboratories).ordered(current_language).page(params[:page])
     breadcrumb
   end
 
