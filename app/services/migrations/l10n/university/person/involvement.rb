@@ -4,7 +4,7 @@ class Migrations::L10n::University::Person::Involvement < Migrations::L10n::Base
   end
 
   def self.migrate_localizations
-    University::Person::Involvement.find_each do |involvement|
+    University::Person::Involvement.where(self.constraint).find_each do |involvement|
       language_id = involvement.person.language_id
       l10n = University::Person::Involvement::Localization.create(
         description: involvement.description,

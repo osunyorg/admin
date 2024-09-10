@@ -2,19 +2,17 @@
 #
 # Table name: education_school_localizations
 #
-#  id               :uuid             not null, primary key
-#  meta_description :string
-#  name             :string
-#  published        :boolean          default(FALSE)
-#  published_at     :datetime
-#  slug             :string
-#  summary          :text
-#  url              :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  about_id         :uuid             indexed
-#  language_id      :uuid             indexed
-#  university_id    :uuid             indexed
+#  id            :uuid             not null, primary key
+#  name          :string
+#  published     :boolean          default(FALSE)
+#  published_at  :datetime
+#  slug          :string
+#  url           :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  about_id      :uuid             indexed
+#  language_id   :uuid             indexed
+#  university_id :uuid             indexed
 #
 # Indexes
 #

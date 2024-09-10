@@ -1,6 +1,6 @@
 class Migrations::L10n::Communication::Website::Menu < Migrations::L10n::Base
   def self.execute
-    Communication::Website::Menu::Item.where.not(kind: [:blank, :url]).find_each do |menu_item|
+    Communication::Website::Menu::Item.where(self.constraint).where.not(kind: [:blank, :url]).find_each do |menu_item|
       about = menu_item.about
       next if about.nil?
       puts "Migration menu item #{menu_item.id}"

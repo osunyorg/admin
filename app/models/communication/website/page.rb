@@ -94,12 +94,12 @@ class Communication::Website::Page < ApplicationRecord
     # or falls back to the first localization name if the specified language is not present.
     localization_title_select = <<-SQL
       COALESCE(
-        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.title END),
-        MAX(localizations.title) FILTER (WHERE localizations.rank = 1)
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.title))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.title)))) FILTER (WHERE localizations.rank = 1)
       ) AS localization_title
     SQL
 
-    # Join the organizations table with a subquery that ranks localizations
+    # Join the pages table with a subquery that ranks localizations
     # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
     joins(sanitize_sql_array([<<-SQL
       LEFT JOIN (

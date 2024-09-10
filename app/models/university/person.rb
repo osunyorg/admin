@@ -149,14 +149,14 @@ class University::Person < ApplicationRecord
     # or falls back to the first localization name if the specified language is not present.
     localization_first_name_select = <<-SQL
       COALESCE(
-        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.first_name END),
-        MAX(localizations.first_name) FILTER (WHERE localizations.rank = 1)
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.first_name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.first_name)))) FILTER (WHERE localizations.rank = 1)
       ) AS localization_first_name
     SQL
     localization_last_name_select = <<-SQL
       COALESCE(
-        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.last_name END),
-        MAX(localizations.last_name) FILTER (WHERE localizations.rank = 1)
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.last_name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.last_name)))) FILTER (WHERE localizations.rank = 1)
       ) AS localization_last_name
     SQL
 

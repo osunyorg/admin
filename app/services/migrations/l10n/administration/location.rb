@@ -1,6 +1,6 @@
 class Migrations::L10n::Administration::Location < Migrations::L10n::Base
   def self.execute
-    Administration::Location.find_each do |object|
+    Administration::Location.where(self.constraint).find_each do |object|
       about_id = object.original_id || object.id
       next if Administration::Location::Localization.where(
         about_id: about_id,
@@ -26,6 +26,7 @@ class Migrations::L10n::Administration::Location < Migrations::L10n::Base
       object.translate_attachment(l10n, :featured_image)
 
       duplicate_permalinks(object, l10n)
+      reconnect_git_files(object, l10n)
 
       l10n.save
     end
