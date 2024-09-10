@@ -80,7 +80,6 @@ class Research::Journal::Paper < ApplicationRecord
 
   def dependencies
     localizations +
-    active_storage_blobs +
     contents_dependencies +
     people.map(&:researcher)
   end
@@ -97,6 +96,7 @@ class Research::Journal::Paper < ApplicationRecord
 
   protected
 
+  # TODO: Maybe removable, no use
   def other_papers_in_the_volume
     return [] if volume.nil?
     volume.papers.where.not(id: self)

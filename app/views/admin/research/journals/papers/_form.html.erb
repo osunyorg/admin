@@ -10,18 +10,18 @@
           <%= lf.input :title, as: :text, input_html: { rows: 3 } %>
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
           <%= lf.input :abstract, as: :text, input_html: { rows: 8 } %>
-          <%= lf.input :pdf %>
+          <%= lf.input :pdf, as: :single_deletable_file %>
           <%= f.input :doi %>
           <%= lf.input :text,
                       as: :summernote,
                       input_html: {
                         data: { 'summernote-config' => 'mini' }
-                      } if has_content?(paper.text) %>
+                      } if has_content?(l10n.text) %>
           <%= lf.input :bibliography,
                       as: :summernote,
                       input_html: {
                         data: { 'summernote-config' => 'mini' }
-                      } if has_content?(paper.bibliography) %>
+                      } if has_content?(l10n.bibliography) %>
         <% end %>
       </div>
       <div class="col-md-4">

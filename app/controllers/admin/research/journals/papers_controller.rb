@@ -74,7 +74,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
             localizations_attributes: [
               :id, :language_id,
               :title, :slug, :text, :published, :published_at, :summary, :abstract, 
-              :meta_description, :authors_list, :pdf, :bibliography, :keywords, 
+              :meta_description, :authors_list, :pdf, :pdf_delete, :bibliography, :keywords, 
             ])
           .merge(university_id: current_university.id)
   end
