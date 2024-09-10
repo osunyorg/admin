@@ -48,6 +48,11 @@ class Admin::Research::Laboratories::AxesController < Admin::Research::Laborator
 
   private
 
+  # For Admin::Reorderable
+  def model
+    Research::Laboratory::Axis
+  end
+
   def breadcrumb
     super
     add_breadcrumb Research::Laboratory::Axis.model_name.human(count: 2), admin_research_laboratory_axes_path
