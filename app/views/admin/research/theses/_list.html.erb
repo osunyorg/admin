@@ -5,7 +5,7 @@
         <%= osuny_thumbnail_localized thesis %>
         <div class="card-body">
           <%= osuny_link_localized thesis, [:admin, thesis] %><br>
-          <%= thesis.author.to_s_in(current_language) %>
+          <%= thesis.author.to_s_in(current_language) if thesis.author.present? %>
         </div>
         <div class="card-footer">
           <%= thesis.laboratory.to_s_in(current_language) %>
