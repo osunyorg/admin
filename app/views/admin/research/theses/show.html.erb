@@ -24,7 +24,8 @@
                                    @thesis.laboratory, 
                                 [:admin, @thesis.laboratory] %></p>
     <%= osuny_label Research::Thesis.human_attribute_name('director') %>
-    <p><%= osuny_link_localized @thesis.director,
+    <p><%= osuny_link_localized_if can?(:read, @thesis.director),
+                                   @thesis.director, 
                                 admin_research_researcher_path(@thesis.director) %></p>
   </div>
 </div>
