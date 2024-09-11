@@ -27,7 +27,7 @@ class Education::Program::Category::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
   include Initials
-  include Sluggable
+  include Permalinkable
   include Sanitizable
   include WithGitFiles
   include WithUniversity
