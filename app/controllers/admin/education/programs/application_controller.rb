@@ -6,8 +6,14 @@ class Admin::Education::Programs::ApplicationController < Admin::Education::Appl
 
   protected
 
+  def current_subnav_context
+    @program && @program.persisted? ? 'navigation/admin/education/program'
+                                    : super
+  end
+
   def breadcrumb
     super
+    add_breadcrumb Education::Program.model_name.human(count: 2), admin_education_programs_path
     breadcrumb_for @program
   end
 

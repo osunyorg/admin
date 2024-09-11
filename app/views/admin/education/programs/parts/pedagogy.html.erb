@@ -1,0 +1,41 @@
+<% content_for :title, @l10n %>
+
+<div class="row">
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :content %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :pedagogy %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :evaluation %>
+  </div>
+</div>
+
+<% if @teacher_involvements.any? %>
+  <%= osuny_panel t('education.teachings'), classes: 'mt-5' do %>
+    <div class="row g-2 mb-3">
+      <% @teacher_involvements.each do |involvement|
+          person = involvement.person
+          involvement_l10n = involvement.best_localization_for(current_language) %>
+        <div>
+          <div class="card card--horizontal">
+            <%= osuny_thumbnail_localized person %>
+            <div class="card-body">
+              <%= link_to_if  can?(:read, person),
+                              person.best_localization_for(current_language),
+                              admin_education_teacher_path(person) %>
+            </div>
+            <div class="card-footer">
+              <%= involvement_l10n.description %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @program %>
+<% end %>
