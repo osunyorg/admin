@@ -47,6 +47,7 @@ en:
         diploma: Diploma
         ects: Crédits ECTS
         initial: Initial training
+        locations: Campus
         qualiopi_certified: Qualiopi certified program
         roles: Roles
         schools: Schools with this formation
@@ -63,7 +64,6 @@ en:
         featured_image_alt: Alt text
         is_published: Published
         is_draft: Draft
-        locations: Campus
         logo: Program logo
         main_information: Main information
         name: Name
