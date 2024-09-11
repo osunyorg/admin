@@ -16,7 +16,7 @@
       <%= osuny_label Education::Program.human_attribute_name('locations') %>
       <ul class="list-unstyled">
         <% program.locations.ordered(current_language).each do |location| %>
-          <li><%= link_to_if can?(:read, location), location, [:admin, location] %></li>
+          <li><%= osuny_link_localized_if can?(:read, location), location, [:admin, location] %></li>
         <% end %>
       </ul>
     <% end %>

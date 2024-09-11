@@ -50,6 +50,7 @@ fr:
         diploma: Diplôme
         ects: Crédits ECTS
         initial: Formation initiale
+        locations: Campus
         qualiopi_certified: Formation certifiée Qualiopi
         roles: Rôles
         schools: Écoles proposant cette formation
@@ -66,7 +67,6 @@ fr:
         featured_image_alt: Texte alternatif
         is_published: Publiée
         is_draft: Brouillon
-        locations: Campus
         logo: Logo de la formation
         main_information: Informations essentielles
         name: Nom
