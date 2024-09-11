@@ -9,7 +9,7 @@
 #  header_cta               :boolean
 #  header_cta_label         :string
 #  header_cta_url           :string
-#  header_text              :text
+#  header_text              :string
 #  meta_description         :string
 #  migration_identifier     :string
 #  published                :boolean

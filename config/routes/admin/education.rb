@@ -7,6 +7,17 @@ namespace :education do
     end
   end
   resources :programs do
+    collection do
+      resources :categories, controller: 'programs/categories', as: 'program_categories' do
+        collection do
+          post :reorder
+        end  
+        member do
+          get :children
+          get :static
+        end
+      end
+    end
     resources :roles, controller: 'programs/roles' do
       resources :people, controller: 'programs/roles/people', only: [:destroy] do
         post :reorder, on: :collection

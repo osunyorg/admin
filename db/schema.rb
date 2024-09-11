@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_05_135443) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_11_070715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
@@ -1061,6 +1061,39 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_05_135443) do
     t.index ["original_id"], name: "index_education_diplomas_on_original_id"
     t.index ["slug"], name: "index_education_diplomas_on_slug"
     t.index ["university_id"], name: "index_education_diplomas_on_university_id"
+  end
+
+  create_table "education_program_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "is_taxonomy", default: false
+    t.integer "position"
+    t.uuid "parent_id"
+    t.uuid "original_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["original_id"], name: "index_education_program_categories_on_original_id"
+    t.index ["parent_id"], name: "index_education_program_categories_on_parent_id"
+    t.index ["university_id"], name: "index_education_program_categories_on_university_id"
+  end
+
+  create_table "education_program_categories_programs", id: false, force: :cascade do |t|
+    t.uuid "education_program_id", null: false
+    t.uuid "education_program_category_id", null: false
+    t.index ["education_program_category_id", "education_program_id"], name: "category_program"
+    t.index ["education_program_id", "education_program_category_id"], name: "program_category"
+  end
+
+  create_table "education_program_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug"
+    t.string "name"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_education_program_category_localizations_on_about_id"
+    t.index ["language_id"], name: "index_education_program_category_localizations_on_language_id"
+    t.index ["university_id"], name: "idx_on_university_id_833fd3c673"
   end
 
   create_table "education_program_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -2187,6 +2220,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_05_135443) do
   add_foreign_key "education_diplomas", "education_diplomas", column: "original_id"
   add_foreign_key "education_diplomas", "languages"
   add_foreign_key "education_diplomas", "universities"
+  add_foreign_key "education_program_categories", "education_program_categories", column: "original_id"
+  add_foreign_key "education_program_categories", "education_program_categories", column: "parent_id"
+  add_foreign_key "education_program_categories", "universities"
+  add_foreign_key "education_program_category_localizations", "education_program_categories", column: "about_id"
+  add_foreign_key "education_program_category_localizations", "languages"
+  add_foreign_key "education_program_category_localizations", "universities"
   add_foreign_key "education_program_localizations", "education_programs", column: "about_id"
   add_foreign_key "education_program_localizations", "languages"
   add_foreign_key "education_program_localizations", "universities"

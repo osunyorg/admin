@@ -18,6 +18,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
                   .tmp_original # TODO L10N : To remove.
                   .ordered_by_name(current_language)
                   .page(params[:page])
+    @feature_nav = 'navigation/admin/education/programs'
     breadcrumb
   end
 
@@ -66,10 +67,12 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def new
+    @categories = categories
     breadcrumb
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb t('edit')
   end
@@ -79,6 +82,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     if @program.save
       redirect_to [:admin, @program], notice: t('admin.successfully_created_html', model: @program.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -89,6 +93,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     if @program.update(program_params)
       redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -102,6 +107,11 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   protected
 
+  def categories
+    current_university.program_categories
+                      .ordered
+  end
+
   def breadcrumb
     super
     add_breadcrumb Education::Program.model_name.human(count: 2), admin_education_programs_path
@@ -112,7 +122,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     params.require(:education_program)
           .permit(
             :bodyclass, :capacity, :continuing, :initial, :apprenticeship, :qualiopi_certified,
-            :parent_id, :diploma_id, school_ids: [],
+            :parent_id, :diploma_id, school_ids: [], category_ids: [],
             university_person_involvements_attributes: [
               :id, :person_id, :university_id, :position, :_destroy,
               localizations_attributes: [:id, :description, :language_id]
