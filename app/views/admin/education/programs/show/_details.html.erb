@@ -20,6 +20,14 @@
         <% end %>
       </ul>
     <% end %>
+    <% if @program.categories.any? %>
+      <%= osuny_label Education::Program::Category.model_name.human(count: 2) %>
+      <ul class="list-unstyled">
+        <% @program.categories.each do |category| %>
+          <li><%= osuny_link_localized_if can?(:read, category), category, [:admin, category] %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
   <div class="col-lg-8">
     <%= osuny_label Education::Program::Localization.human_attribute_name('short_name') %>
