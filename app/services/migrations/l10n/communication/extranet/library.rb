@@ -6,7 +6,7 @@ class Migrations::L10n::Communication::Extranet::Library < Migrations::L10n::Bas
   end
 
   def self.migrate_documents
-    Communication::Extranet::Document.find_each do |object|
+    Communication::Extranet::Document.where(self.constraint).find_each do |object|
       # Les documents ne sont pas localisés
       about_id = object.id
 
@@ -29,7 +29,7 @@ class Migrations::L10n::Communication::Extranet::Library < Migrations::L10n::Bas
   end
 
   def self.migrate_categories
-    Communication::Extranet::Document::Category.find_each do |object|
+    Communication::Extranet::Document::Category.where(self.constraint).find_each do |object|
       about_id = object.id
 
       l10n = Communication::Extranet::Document::Category::Localization.create(
@@ -48,7 +48,7 @@ class Migrations::L10n::Communication::Extranet::Library < Migrations::L10n::Bas
   end
 
   def self.migrate_kinds
-    Communication::Extranet::Document::Kind.find_each do |object|
+    Communication::Extranet::Document::Kind.where(self.constraint).find_each do |object|
       about_id = object.id
 
       l10n = Communication::Extranet::Document::Kind::Localization.create(

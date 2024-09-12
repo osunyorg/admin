@@ -33,9 +33,9 @@
                     <div class="row pt-4">
                       <div class="col-md-6">
                         <p><b>
-                          <%= link_to experience.person.to_s_in(current_language), 
-                                      [:alumni, experience.person],
-                                      class: "stretched-link" %>
+                          <%= osuny_link_localized experience.person, 
+                                                  [:alumni, experience.person],
+                                                  classes: "stretched-link" %>
                         </b></p>
                       </div>
                       <div class="col-md-6">

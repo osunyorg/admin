@@ -53,7 +53,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
 
   validates :title, presence: true
 
-  before_validation :set_communication_website_id
+  before_validation :set_communication_website_id, on: :create
 
   scope :ordered, -> { order(year: :desc, title: :asc) }
   scope :published, -> { where(published: true) }

@@ -15,8 +15,6 @@ l10n = person.best_localization_for(person)
       <% end %>
     </div>
     <div class="col-9 col-md-12">
-      <%= link_to [:alumni, person], class: 'stretched-link' do %>
-        <%= l10n.first_name %> <%= l10n.last_name %>
-      <% end %>
+      <%= link_to l10n, [:alumni, person], class: 'stretched-link' %>
     </div>
 </article>

@@ -36,7 +36,7 @@ class Communication::Extranet::Document::Category::Localization < ApplicationRec
   belongs_to  :extranet, 
               class_name: 'Communication::Extranet'
 
-  before_validation :set_extranet_id
+  before_validation :set_extranet_id, on: :create
 
   def to_s
     "#{name}"

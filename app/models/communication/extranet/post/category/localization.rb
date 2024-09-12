@@ -37,7 +37,7 @@ class Communication::Extranet::Post::Category::Localization < ApplicationRecord
 
   validates_presence_of :name
 
-  before_validation :set_extranet_id
+  before_validation :set_extranet_id, on: :create
 
   def to_s
     "#{name}"

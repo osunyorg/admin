@@ -25,18 +25,14 @@
                   <p class="mb-md-0">
                     <%= experience.person.best_localization_for(current_language) %>
                     <br>
-                    <%= l10n.description %>
-                    <%= '—' if experience.description.present? && experience.organization.present? %>
-                    <%= experience.organization.to_s_in(current_language) %>
+                    <%= [l10n.description, organization_l10n&.to_s].compact_blank.join('-') %>
                   </p>
                   <small><%= l experience.created_at, format: :date_with_explicit_month %></small>
                 </div>
-                <% if experience.organization.present? %>
-                  <% if experience.organization.logo.attached? %>
-                      <%= link_to [:alumni, experience.organization] do %>
-                        <%= kamifusen_tag experience.organization.logo, height: 80, class: 'img-fluid' %>
-                      <% end %>
-                  <% end %>
+                <% if organization_l10n && organization_l10n.logo.attached? %>
+                    <%= link_to [:alumni, experience.organization] do %>
+                      <%= kamifusen_tag organization_l10n.logo, height: 80, class: 'img-fluid' %>
+                    <% end %>
                 <% end %>
               </div>
             </li>

@@ -6,7 +6,7 @@ class Migrations::L10n::Communication::Extranet < Migrations::L10n::Base
   end
 
   def self.migrate_extranet
-    Communication::Extranet.find_each do |object|
+    Communication::Extranet.where(self.constraint).find_each do |object|
       # Les extranets ne sont pas localisés
       about_id = object.id
 
