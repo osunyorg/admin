@@ -65,7 +65,7 @@ class Research::Journal < ApplicationRecord
     localizations +
     volumes +
     papers +
-    researchers.map(&:researcher)
+    researchers.map(&:researcher_facets)
   end
 
   #####################

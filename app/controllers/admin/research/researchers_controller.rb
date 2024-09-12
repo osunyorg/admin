@@ -23,9 +23,6 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
                           .ordered(current_language)
                           .page(params[:page])
     @hal_authors_with_same_name = Research::Hal::Author.import_from_hal @l10n.to_s
-    @papers =  @researcher.research_journal_papers
-                          .ordered(current_language)
-                          .page(params[:page])
     breadcrumb
     add_breadcrumb @l10n
   end
