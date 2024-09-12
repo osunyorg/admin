@@ -4,7 +4,7 @@ class Admin::Communication::Extranets::Documents::CategoriesController < Admin::
   include Admin::Localizable
 
   def index
-    @categories = @categories.ordered
+    @categories = @categories.ordered(current_language)
     breadcrumb
     @feature_nav = 'navigation/admin/communication/extranet/library'
   end

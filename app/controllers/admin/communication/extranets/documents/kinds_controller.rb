@@ -4,7 +4,7 @@ class Admin::Communication::Extranets::Documents::KindsController < Admin::Commu
   include Admin::Localizable
 
   def index
-    @kinds = @kinds.ordered
+    @kinds = @kinds.ordered(current_language)
     breadcrumb
     @feature_nav = 'navigation/admin/communication/extranet/library'
   end
