@@ -81,7 +81,7 @@ class Research::Journal::Paper < ApplicationRecord
   def dependencies
     localizations +
     contents_dependencies +
-    people.map(&:researcher)
+    people.map(&:researcher_facets)
   end
 
   def references

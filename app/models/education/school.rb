@@ -107,8 +107,8 @@ class Education::School < ApplicationRecord
     # As diplomas are here through programs, and diploma being a program's dependency, it this necessary?
     diplomas +
     locations +
-    administrators.map(&:administrator) +
-    researchers.map(&:researcher)
+    administrators.map(&:administrator_facets) +
+    researchers.map(&:researcher_facets)
   end
 
   #####################

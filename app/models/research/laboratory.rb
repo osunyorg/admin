@@ -64,7 +64,7 @@ class Research::Laboratory < ApplicationRecord
   def dependencies
     localizations +
     axes +
-    researchers.map(&:researcher)
+    researchers.map(&:researcher_facets)
   end
 
   def has_administrators?
