@@ -12,10 +12,11 @@ class Extranet::Contacts::OrganizationsController < Extranet::Contacts::Applicat
   def show
     @organization = current_extranet.connected_organizations.find(params[:id])
     @l10n = @organization.best_localization_for(current_language)
-    @people =  @organization.experiences
-                            .includes(:person)
-                            .collect(&:person)
-                            .uniq
+    person_ids = @organization.experiences
+                              .pluck(:person_id)
+    @people = current_university.people
+                                .where(id: person_ids)
+                                .tmp_original
     breadcrumb
     add_breadcrumb @l10n
   end

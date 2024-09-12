@@ -10,6 +10,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
   def edit
     @l10n = @experience.localization_for(current_language)
     breadcrumb
+    add_breadcrumb @l10n
   end
 
   def create
@@ -31,6 +32,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
                   notice: t('admin.successfully_updated_html', model: @experience.organization.to_s)
     else
       breadcrumb
+      add_breadcrumb @l10n
       render :edit
     end
   end
