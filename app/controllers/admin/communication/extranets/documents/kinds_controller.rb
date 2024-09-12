@@ -27,7 +27,8 @@ class Admin::Communication::Extranets::Documents::KindsController < Admin::Commu
 
   def create
     if @kind.save
-      redirect_to admin_communication_extranet_document_kind_path(@kind), notice: t('admin.successfully_created_html', model: @kind.to_s)
+      redirect_to admin_communication_extranet_document_kind_path(@kind),
+                  notice: t('admin.successfully_created_html', model: @kind.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -36,7 +37,8 @@ class Admin::Communication::Extranets::Documents::KindsController < Admin::Commu
 
   def update
     if @kind.update(kind_params)
-      redirect_to admin_communication_extranet_document_kind_path(@kind), notice: t('admin.successfully_updated_html', model: @kind.to_s)
+      redirect_to admin_communication_extranet_document_kind_path(@kind),
+                  notice: t('admin.successfully_updated_html', model: @kind.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -46,7 +48,8 @@ class Admin::Communication::Extranets::Documents::KindsController < Admin::Commu
 
   def destroy
     @kind.destroy
-    redirect_to admin_communication_extranet_document_kinds_url, notice: t('admin.successfully_destroyed_html', model: @kind.to_s)
+    redirect_to admin_communication_extranet_document_kinds_url,
+                notice: t('admin.successfully_destroyed_html', model: @kind.to_s_in(current_language))
   end
 
   protected
