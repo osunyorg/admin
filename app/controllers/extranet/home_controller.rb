@@ -3,7 +3,7 @@ class Extranet::HomeController < Extranet::ApplicationController
     @cohorts = about&.education_cohorts.ordered.limit(5)
     @experiences = about&.university_person_experiences.latest
     @posts =  current_extranet.posts
-                              # .published TODO L10N
+                              .published(current_language)
                               .ordered(current_language)
                               .limit(3) if current_extranet.feature_posts
   end

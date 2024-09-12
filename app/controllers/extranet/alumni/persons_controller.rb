@@ -5,10 +5,11 @@ class Extranet::Alumni::PersonsController < Extranet::Alumni::ApplicationControl
       about: about,
       language: current_language
     }
-    @people = @facets.results
-                     .ordered(current_language)
-                     .page(params[:page])
-                     .per(60)
+    @people =  @facets.results
+                      .tmp_original
+                      .ordered(current_language)
+                      .page(params[:page])
+                      .per(60)
     @count = @people.total_count
     breadcrumb
   end

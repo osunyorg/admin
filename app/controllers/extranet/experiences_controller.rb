@@ -18,7 +18,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
       redirect_to account_path,
                   notice: t('admin.successfully_created_html', model: @experience.organization.to_s)
     else
-      @l10n = @experience.localizations.build(language: current_language)
+      @l10n = @experience.localizations.first
       breadcrumb
       add_breadcrumb University::Person::Experience.human_attribute_name('new')
       render :new

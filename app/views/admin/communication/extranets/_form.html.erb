@@ -2,8 +2,6 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
   <%= f.simple_fields_for :localizations, l10n do |lf| %>
-    <%= lf.error_notification %>
-    <%= lf.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
     <div class="row">

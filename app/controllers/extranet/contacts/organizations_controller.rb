@@ -1,9 +1,10 @@
 class Extranet::Contacts::OrganizationsController < Extranet::Contacts::ApplicationController
   def index
-    @organizations = current_extranet.connected_organizations
-                                     .ordered(current_language)
-                                     .page(params[:page])
-                                     .per(60)
+    @organizations =  current_extranet.connected_organizations
+                                      .tmp_original
+                                      .ordered(current_language)
+                                      .page(params[:page])
+                                      .per(60)
     @count = @organizations.total_count
     breadcrumb
   end

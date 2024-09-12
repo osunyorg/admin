@@ -4,13 +4,15 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
   def search
     @term = params[:term].to_s
     @organizations = current_university.organizations
-                                       .for_language_id(current_user.language_id)
+                                       .tmp_original
                                        .search_by_siren_or_name(@term)
                                        .ordered(current_language)
   end
 
   def show
+    @l10n = @organization.best_localization_for(current_language)
     breadcrumb
+    add_breadcrumb @l10n
   end
 
   def new
@@ -33,7 +35,9 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
   end
 
   def edit
+    @l10n = @organization.best_localization_for(current_language)
     breadcrumb
+    add_breadcrumb @l10n, organization_path(@organization)
     add_breadcrumb t('edit')
   end
 
@@ -42,6 +46,7 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
       redirect_to organization_path(@organization),
                   notice: t('admin.successfully_updated_html', model: @organization.to_s)
     else
+      @l10n = @organization.best_localization_for(current_language)
       breadcrumb
       add_breadcrumb t('edit')
       render :new, status: :unprocessable_entity
@@ -53,7 +58,6 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
   def breadcrumb
     super
     add_breadcrumb  University::Organization.model_name.human(count: 2)
-    add_breadcrumb @organization, organization_path(@organization) if @organization.persisted?
   end
 
   def load_organization

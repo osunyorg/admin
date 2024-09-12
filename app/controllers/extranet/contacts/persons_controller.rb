@@ -1,6 +1,7 @@
 class Extranet::Contacts::PersonsController < Extranet::Contacts::ApplicationController
   def index
     @people = current_extranet.connected_people
+                              .tmp_original
                               .ordered(current_language)
                               .page(params[:page])
                               .per(60)
