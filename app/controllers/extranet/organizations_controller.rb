@@ -26,7 +26,7 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
     @organization = current_university.organizations.new(organization_params)
     if @organization.save
       redirect_to organization_path(@organization),
-                  notice: t('admin.successfully_created_html', model: @organization.to_s)
+                  notice: t('admin.successfully_created_html', model: @organization.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('create')
@@ -44,7 +44,7 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
   def update
     if @organization.update(organization_params)
       redirect_to organization_path(@organization),
-                  notice: t('admin.successfully_updated_html', model: @organization.to_s)
+                  notice: t('admin.successfully_updated_html', model: @organization.to_s_in(current_language))
     else
       @l10n = @organization.best_localization_for(current_language)
       breadcrumb
