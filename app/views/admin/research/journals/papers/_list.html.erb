@@ -4,6 +4,7 @@
       <div class="card card--horizontal">
         <%= osuny_thumbnail_localized paper %>
         <div class="card-body">
+          <%= osuny_published_localized paper %>
           <%= osuny_link_localized  paper,
                                     admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
                                     classes: 'stretched-link' %>
@@ -11,11 +12,6 @@
         </div>
         <div class="card-footer small text-muted">
           <%= paper.volume.to_s_in(current_language) if paper.volume %>
-          <% if paper.published_at.present? %>
-            <span class="ms-4">
-              <%= l(paper.published_at.to_time, format: :date_with_explicit_month) %>
-            </span>
-          <% end %>
         </div>
       </div>
     </div>
