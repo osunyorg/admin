@@ -5,11 +5,8 @@
   <%= link_to @website.url, @website.url, target: :_blank unless @website.url.blank? %>
   <div class="small">
     <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
-    <% if @website.about %>
-      <%# TODO L10N : To adapt with osuny_link_localized when about is localizable %>
-      (<%= link_to_if can?(:read, @website.about),
-                      @website.about,
-                      [:admin, @website.about] unless @website.about.nil? %>)
+    <% if @website.about.present? %>
+      — <%= osuny_link_localized_if can?(:read, @website.about), @website.about, [:admin, @website.about] %>
     <% end %>
   </div>
 <% end %>

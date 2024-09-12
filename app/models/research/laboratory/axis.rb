@@ -24,18 +24,16 @@
 #  fk_rails_d334f832b4  (university_id => universities.id)
 #
 class Research::Laboratory::Axis < ApplicationRecord
+  include Localizable
   include Sanitizable
   include WithUniversity
   include WithPosition
 
+  # TODO L10N : To remove
   has_summernote :text
 
   belongs_to  :laboratory, 
               foreign_key: :research_laboratory_id
-
-  def to_s
-    "#{name}"
-  end
 
   protected
 

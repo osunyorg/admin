@@ -1,6 +1,9 @@
 class Admin::Research::Journals::Papers::KindsController < Admin::Research::Journals::ApplicationController
   load_and_authorize_resource class: Research::Journal::Paper::Kind, through: :journal
 
+  include Admin::HasStaticAction
+  include Admin::Localizable
+
   def index
     breadcrumb
   end
@@ -8,17 +11,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
   def show
     @papers = @kind.papers.page params[:page]
     breadcrumb
-    add_breadcrumb @kind
-  end
-
-  def static
-    @about = @kind
-    @website = @journal.websites.first
-    if @website.nil?
-      render plain: "Pas de site Web lié au journal"
-    else
-      render_as_plain_text
-    end
+    add_breadcrumb @l10n
   end
 
   def new
@@ -28,7 +21,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
 
   def edit
     breadcrumb
-    add_breadcrumb @kind, admin_research_journal_kind_path(@kind)
+    add_breadcrumb @l10n, admin_research_journal_kind_path(@kind)
     add_breadcrumb t('edit')
   end
 
@@ -37,7 +30,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
       journal: @journal
     )
     if @kind.save
-      redirect_to admin_research_journal_kind_path(@kind), notice: t('admin.successfully_created_html', model: @paper_kind.to_s)
+      redirect_to admin_research_journal_kind_path(@kind), notice: t('admin.successfully_created_html', model: @kind.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('create')
@@ -47,10 +40,10 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
 
   def update
     if @kind.update(kind_params)
-      redirect_to admin_research_journal_kind_path(@kind), notice: t('admin.successfully_updated_html', model: @paper_kind.to_s)
+      redirect_to admin_research_journal_kind_path(@kind), notice: t('admin.successfully_updated_html', model: @kind.to_s_in(current_language))
     else
       breadcrumb
-      add_breadcrumb @kind, admin_research_journal_kind_path(@kind)
+      add_breadcrumb @l10n, admin_research_journal_kind_path(@kind)
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
     end
@@ -58,7 +51,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
 
   def destroy
     @kind.destroy
-    redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @paper_kind.to_s)
+    redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @kind.to_s_in(current_language))
   end
 
   private
@@ -70,7 +63,12 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
 
   def kind_params
     params.require(:research_journal_paper_kind)
-          .permit(:title, :slug)
+          .permit(
+            localizations_attributes: [
+              :id, :language_id,
+              :title, :slug
+            ]
+          )
           .merge(university_id: current_university.id)
   end
 end

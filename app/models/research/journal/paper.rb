@@ -45,21 +45,21 @@
 #
 class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
-  include Contentful
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
+  include Localizable
   include Sanitizable
-  include WithBlobs
-  include WithCitations
-  include WithGitFiles
+  include WithBlobs # TODO L10N : To remove
   include WithPosition
-  include WithPublication
   include WithUniversity
 
-  has_summernote :bibliography
-  has_summernote :text
-  has_one_attached :pdf
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
-  belongs_to  :language
+  has_one_attached :pdf # TODO L10N : To remove
+
   belongs_to  :journal,
               foreign_key: :research_journal_id
   belongs_to  :volume,
@@ -75,29 +75,13 @@ class Research::Journal::Paper < ApplicationRecord
                           join_table: :research_journal_papers_researchers,
                           association_foreign_key: :researcher_id
 
-  validates :title, presence: true
-
-  before_validation :ensure_connected_elements_are_in_correct_language
-
-  scope :ordered, -> { order(published_at: :desc) }
+  scope :ordered, -> (language) { order(published_at: :desc) }
   scope :ordered_by_position, -> { order(:position) }
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}papers/#{static_path}.html" if published?
-  end
-
-  def static_path
-    "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
-  end
-
-  def template_static
-    "admin/research/journals/papers/static"
-  end
-
   def dependencies
-    active_storage_blobs +
+    localizations +
     contents_dependencies +
-    people.map(&:researcher)
+    people.map(&:researcher_facets)
   end
 
   def references
@@ -110,33 +94,9 @@ class Research::Journal::Paper < ApplicationRecord
     Doi.url doi
   end
 
-  def to_s
-    "#{ title }"
-  end
-
   protected
 
-  def to_citeproc(website: nil)
-    citeproc = {
-      "title" => title,
-      "author" => people.map { |person|
-        { "family" => person.last_name, "given" => person.first_name }
-      },
-      "URL" => current_permalink_url_in_website(website),
-      "container-title" => journal.title,
-      "volume" => volume&.number,
-      "keywords" => keywords,
-      "pdf" => pdf.attached? ? pdf.url : nil,
-      "id" => id
-    }
-    citeproc["DOI"] = doi if doi.present?
-    if published_at.present?
-      citeproc["month-numeric"] = published_at.month.to_s
-      citeproc["issued"] = { "date-parts" => [[published_at.year, published_at.month]] }
-    end
-    citeproc
-  end
-
+  # TODO: Maybe removable, no use
   def other_papers_in_the_volume
     return [] if volume.nil?
     volume.papers.where.not(id: self)
@@ -147,13 +107,5 @@ class Research::Journal::Paper < ApplicationRecord
       university_id: university_id,
       research_journal_volume_id: research_journal_volume_id
     ).ordered.last
-  end
-
-  def explicit_blob_ids
-    super.concat [pdf&.blob_id]
-  end
-
-  def ensure_connected_elements_are_in_correct_language
-    ensure_multiple_connections_are_in_correct_language(people, :person_ids, journal.language)
   end
 end

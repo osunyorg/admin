@@ -1,34 +1,28 @@
 <% content_for :title, Research::Journal.model_name.human(count: 2) %>
 
+<p>&nbsp;</p>
 <%= render 'filters', current_path: admin_research_journals_path, filters: @filters if @filters.any?  %>
-
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= Research::Journal.human_attribute_name('title') %></th>
-        <th><%= Research::Journal::Volume.model_name.human(count: 2) %></th>
-        <th><%= Research::Journal::Paper.model_name.human(count: 2) %></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @journals.each do |journal| %>
-        <tr>
-          <td><%= link_to journal, [:admin, journal] %></td>
-          <td><%= link_to "#{journal.volumes.count}", admin_research_journal_volumes_path(journal_id: journal) %></td>
-          <td><%= link_to "#{journal.papers.count}", admin_research_journal_papers_path(journal_id: journal) %></td>
-          <td class="text-end">
-            <div class="btn-group" role="group">
-              <%= edit_link journal %>
-              <%= destroy_link journal %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2 mb-3">
+  <% @journals.each do |journal| %>
+    <div>
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail_localized journal %>
+        <div class="card-body">
+          <%= osuny_link_localized journal, [:admin, journal], classes: 'stretched-link' %>
+        </div>
+        <div class="card-footer small text-muted">
+          <span>
+            <%= journal.volumes.count %>
+            <%= Research::Journal::Volume.model_name.human(count: journal.volumes.count).downcase %>
+          </span>
+          <span class="ms-4">
+            <%= journal.papers.count %>
+            <%= Research::Journal::Paper.model_name.human(count: journal.papers.count).downcase %>
+          </span>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <%= paginate @journals %>

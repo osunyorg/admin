@@ -27,8 +27,6 @@ module Communication::Website::Permalink::WithMapping
       "University::Person::Teacher" => Communication::Website::Permalink::Teacher,
       # END TODO L10N
 
-      # Les lignes commentées nous servent à ne rien oublier pendant la migration.
-      # Quand la migration l10n sera terminée, tout sera décommenté.
       "Administration::Location::Localization" => Communication::Website::Permalink::Location,
       "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
       "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
@@ -39,9 +37,9 @@ module Communication::Website::Permalink::WithMapping
       "Communication::Website::Post::Category::Localization" => Communication::Website::Permalink::Category,
       "Education::Diploma::Localization" => Communication::Website::Permalink::Diploma,
       "Education::Program::Localization" => Communication::Website::Permalink::Program,
-      # "Research::Journal::Paper::Localization" => Communication::Website::Permalink::Paper,
-      # "Research::Journal::Volume::Localization" => Communication::Website::Permalink::Volume,
-      # "Research::Publication::Localization" => Communication::Website::Permalink::Publication,
+      "Research::Journal::Paper::Localization" => Communication::Website::Permalink::Paper,
+      "Research::Journal::Volume::Localization" => Communication::Website::Permalink::Volume,
+      "Research::Publication" => Communication::Website::Permalink::Publication,
       "University::Organization::Localization" => Communication::Website::Permalink::Organization,
       "University::Organization::Category::Localization" => Communication::Website::Permalink::Organization::Category,
       "University::Person::Localization" => Communication::Website::Permalink::Person,

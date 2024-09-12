@@ -32,15 +32,17 @@
 #
 class Research::Journal::Volume < ApplicationRecord
   include AsIndirectObject
-  include Permalinkable
+  include Localizable
   include Sanitizable
-  include WithBlobs
-  include WithFeaturedImage
-  include WithGitFiles
-  include WithPublication
+  include WithBlobs # TODO L10N : To remove
+  include WithFeaturedImage # TODO L10N : To remove
   include WithUniversity
 
-  has_summernote :text
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   belongs_to  :journal, 
               foreign_key: :research_journal_id
@@ -51,43 +53,15 @@ class Research::Journal::Volume < ApplicationRecord
               -> { distinct }, 
               through: :papers
 
-  validates :title, presence: true
-
-  scope :ordered, -> { order(published_at: :desc, number: :desc) }
-
-  def git_path(website)
-    "#{git_path_content_prefix(website)}volumes#{path}/_index.html" if published_at
-  end
-
-  def template_static
-    "admin/research/journals/volumes/static"
-  end
+  scope :ordered, -> (language) { order(published_at: :desc, number: :desc) }
 
   def dependencies
+    localizations +
     papers +
-    people.map(&:researcher) +
-    active_storage_blobs
+    people.map(&:researcher_facets)
   end
 
   def references
     [journal]
-  end
-
-  def path
-    "/#{published_at&.year}-#{slug}" if published_at
-  end
-
-  def to_s
-    "#{ title }"
-  end
-
-  protected
-
-  def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
   end
 end

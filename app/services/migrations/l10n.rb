@@ -19,6 +19,10 @@ module Migrations
       Communication::Website::Blog.execute
       Communication::Website::Portfolio.execute
       Communication::Website::Menu.execute
+      Research::Journal.execute
+      Research::Laboratory.execute
+      Research::Laboratory::Axis.execute
+      Research::Thesis.execute
     ensure
       ::Communication::Website.set_callback :touch, :after, :create_missing_special_page
       ::Communication::Website.set_callback :save, :after, :create_missing_special_pages

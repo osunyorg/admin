@@ -23,6 +23,7 @@ module Admin::OsunyHelper
   end
 
   def osuny_thumbnail(object, large: false, cropped: true, classes: '')
+    return if object.nil?
     image = object.respond_to?(:featured_image) ? object.featured_image
                                                 : nil
     render  partial: "admin/application/components/thumbnail",
@@ -35,9 +36,12 @@ module Admin::OsunyHelper
             }
   end
 
-  def osuny_thumbnail_localized(object, large: false, cropped: true)
+  def osuny_thumbnail_localized(object, large: false, cropped: true, classes: '')
     l10n = object.best_localization_for(current_language)
-    osuny_thumbnail(l10n, large: large, cropped: cropped)
+    osuny_thumbnail l10n, 
+                    large: large, 
+                    cropped: cropped, 
+                    classes: classes
   end
 
   def osuny_published(state)

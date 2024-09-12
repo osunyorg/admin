@@ -1,60 +1,59 @@
----
-<%= render 'admin/application/static/title' %>
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
+<%
+paper = @l10n.about
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
+            about: paper,
+            l10n: @l10n, 
             full_width: false,
             toc_offcanvas: false %>
-<% if @about.kind %>
-paper_kind: "<%= prepare_text_for_static @about.kind %>"
-paper_kinds:
-  - "<%= @about.kind.slug %>"
+<% if paper.kind %>
+paper_kind: "<%= prepare_text_for_static paper.kind %>"
 <% end %>
-<% if @about.volume && @about.volume.path %>
+<% if @l10n.volume_l10n %>
 volumes:
-  - "<%= @about.volume.path.delete_prefix('/') %>"
+  - "<%= @l10n.volume_l10n.current_permalink_in_website(@website)&.path %>"
 <% end %>
-weight: <%= @about.position %>
-date: "<%= @about.published_at&.to_date&.iso8601 %>"
+weight: <%= paper.position %>
+date: "<%= @l10n.published_at&.to_date&.iso8601 %>"
 dates:
-  published: "<%= @about.published_at&.to_date&.iso8601 %>"
-  accepted: "<%= @about.accepted_at&.to_date&.iso8601 %>"
-  received: "<%= @about.received_at&.to_date&.iso8601 %>"
-<% if @about.pdf.attached? %>
-pdf: "<%= @about.pdf.blob_id %>"
-<% end %>
-<% if @about.bibliography %>
-bibliography: >-
-  <%= prepare_html_for_static @about.bibliography %>
+  published: "<%= @l10n.published_at&.to_date&.iso8601 %>"
+  accepted: "<%= paper.accepted_at&.to_date&.iso8601 %>"
+  received: "<%= paper.received_at&.to_date&.iso8601 %>"
+<% if @l10n.pdf.attached? %>
+pdf: "<%= @l10n.pdf.blob_id %>"
 <% end %>
 keywords: >-
-  <%= prepare_text_for_static @about.keywords %>
+  <%= prepare_text_for_static @l10n.keywords %>
 researchers:
-<% @about.people.each do |person| %>
-  - "<%= person.slug %>"
+<% @l10n.people_l10n.each do |person_l10n| %>
+  - "<%= person_l10n.slug %>"
 <% end %>
-authors_list: "<%= prepare_text_for_static @about.authors_list %>"
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/summary/static' %>
+authors_list: "<%= prepare_text_for_static @l10n.authors_list %>"
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
 abstract: >-
-  <%= prepare_text_for_static @about.abstract %>
+  <%= prepare_text_for_static @l10n.abstract %>
 citations:
   - label: "APA"
     content: >-
-      <%= prepare_html_for_static @about.citation_apa(website: @website) %>
+      <%= prepare_html_for_static @l10n.citation_apa(website: @website) %>
   - label: "MLA"
     content: >-
-      <%= prepare_html_for_static @about.citation_mla(website: @website) %>
+      <%= prepare_html_for_static @l10n.citation_mla(website: @website) %>
   - label: "Chicago"
     content: >-
-      <%= prepare_html_for_static @about.citation_chicago(website: @website) %>
+      <%= prepare_html_for_static @l10n.citation_chicago(website: @website) %>
   - label: "Harvard"
     content: >-
-      <%= prepare_html_for_static @about.citation_harvard(website: @website) %>
-  <% if @website.default_language.iso_code == "fr" %>
+      <%= prepare_html_for_static @l10n.citation_harvard(website: @website) %>
+<% if language.iso_code == "fr" %>
   - label: "ISO 690"
     content: >-
-      <%= prepare_html_for_static @about.citation_iso690(website: @website) %>
-  <% end %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+      <%= prepare_html_for_static @l10n.citation_iso690(website: @website) %>
+<% end %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---

@@ -18,11 +18,7 @@
             %>
             <tr>
               <td>
-                <% if role_l10n.language != current_language %>
-                  <span class="fst-italic"><%= role_l10n %></span>
-                <% else %>
-                  <%= role_l10n %>
-                <% end %>
+                <%= role.to_s_in(current_language) %>
                 <% if role_target.present? %>
                   <br>
                   <small>

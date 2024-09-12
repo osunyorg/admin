@@ -24,10 +24,10 @@
 #
 class Research::Laboratory < ApplicationRecord
   include AsIndirectObject
+  include Localizable
   include Sanitizable
   include WebsitesLinkable
   include WithCountry
-  include WithGitFiles
 
   belongs_to  :university
   has_many    :communication_websites,
@@ -46,7 +46,7 @@ class Research::Laboratory < ApplicationRecord
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
-  scope :ordered, -> { order(:name) }
+  scope :ordered, -> (language) { }
   scope :for_search_term, -> (term) {
     where("
       unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
@@ -57,21 +57,14 @@ class Research::Laboratory < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
-  def to_s
-    "#{name}"
-  end
-
   def full_address
     [address, zipcode, city].compact.join ' '
   end
 
-  def git_path(website)
-    "data/laboratory.yml"
-  end
-
   def dependencies
+    localizations +
     axes +
-    researchers.map(&:researcher)
+    researchers.map(&:researcher_facets)
   end
 
   def has_administrators?

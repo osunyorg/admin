@@ -9,7 +9,7 @@
 #  title            :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  language_id      :uuid             not null, indexed
+#  language_id      :uuid             indexed
 #  university_id    :uuid             not null, indexed
 #
 # Indexes
@@ -25,12 +25,12 @@
 class Research::Journal < ApplicationRecord
   include AsIndirectObject
   include Favoritable
+  include Localizable
   include Sanitizable
   include WebsitesLinkable
-  include WithGitFiles
   include WithUniversity
 
-  belongs_to :language
+  belongs_to :language, optional: true # TODO L10N : To remove
   has_many  :communication_websites,
             class_name: 'Communication::Website',
             as: :about,
@@ -56,26 +56,16 @@ class Research::Journal < ApplicationRecord
       unaccent(research_journals.title) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_language, -> (language) { for_language_id(language.id) }
-  # The for_language_id scope can be used when you have the ID without needing to load the Language itself
-  scope :for_language_id, -> (language_id) { where(language_id: language_id) }
-
-  def to_s
-    "#{title}"
-  end
 
   def researchers
     university.people.where(id: people.pluck(:id), is_researcher: true)
   end
 
-  def git_path(website)
-    "data/journal.yml"
-  end
-
   def dependencies
+    localizations +
     volumes +
     papers +
-    researchers.map(&:researcher)
+    researchers.map(&:researcher_facets)
   end
 
   #####################
