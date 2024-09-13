@@ -35,8 +35,7 @@
           <% if can?(:update, block) %>
             <%= link_to t('edit'), 
                         edit_admin_communication_block_path(block),
-                        class: 'action ms-2',
-                        target: :editor %>
+                        class: 'action ms-2 js-content-editor__element__edit' %>
           <% end %>
         </div>
         <% if block.empty? %>

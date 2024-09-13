@@ -12,8 +12,11 @@ window.osuny.contentEditor = {
         this.sortBlocksUrl = this.container.getAttribute('data-sort-blocks-url');
         this.modeWriteContainer = this.container.querySelector('#mode-write-container');
         this.modeStructureContainer = this.container.querySelector('#mode-structure-container');
+        this.offcanvasEditor = document.getElementById('offcanvasEditor');
+        this.offcanvasEditorBootstrap = new bootstrap.Offcanvas(this.offcanvasEditor);
         this.addListeners('[data-bs-toggle="tab"]', 'shown.bs.tab', this.tabChanged);
         this.initSortable();
+        this.initButtons();
     },
 
     initSortable: function () {
@@ -28,6 +31,30 @@ window.osuny.contentEditor = {
                 onEnd: this.onSortableEnd.bind(this)
             });
         }
+    },
+
+    initButtons: function () {
+        'use strict';
+        var editButtons = document.querySelectorAll('.js-content-editor__element__edit'),
+            i,
+            button;
+        for (i = 0; i < editButtons.length; i += 1) {
+            button = editButtons[i];
+            button.addEventListener('click', this.onEditButtonClick.bind(this));
+        }
+    },
+
+    onEditButtonClick: function (event) {
+        'use strict';
+        var button = event.target,
+            url = button.href;
+        event.preventDefault();
+        open(url, 'editor');
+        this.offcanvasEditorBootstrap.show()
+    },
+
+    onBlockSave: function (event) {
+        this.offcanvasEditorBootstrap.hide()
     },
 
     tabChanged: function (event) {
@@ -107,7 +134,8 @@ window.osuny.contentEditor = {
     invoke: function () {
         'use strict';
         return {
-            init: this.init.bind(this)
+            init: this.init.bind(this),
+            onBlockSave: this.onBlockSave.bind(this)
         };
     }
 }.invoke();

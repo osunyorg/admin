@@ -36,6 +36,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def edit
     @element = @block.template.default_element
     breadcrumb
+    render layout: 'admin/layouts/raw'
   end
 
   def create

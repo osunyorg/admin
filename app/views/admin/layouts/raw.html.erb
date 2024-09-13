@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><%= content_for?(:title) ? raw("#{yield(:title)} ∙ Osuny") : 'Osuny' %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "admin", media: 'all' %>
+    <%= favicon_link_tag 'favicon.png' %>
+  </head>
+  <body class="<%= body_classes %>">
+  <main class="container-fluid py-5">
+    <%= yield %>
+  </main>
+  <%= render "admin/application/components/commands" %>
+  <%= javascript_include_tag 'admin' %>
+  <%= render 'bugsnag' %>
+  <%= render 'summernote_localization' %>
+</body>
+</html>
