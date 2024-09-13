@@ -67,7 +67,6 @@ class Education::Program < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : To remove
   include Localizable
-  include LocalizableOrderByNameScope
   include Sanitizable
   include Shareable # TODO L10N : To remove
   include WebsitesLinkable
@@ -103,6 +102,32 @@ class Education::Program < ApplicationRecord
   has_one_attached_deletable :logo # TODO L10N : To remove
 
   before_destroy :move_children
+
+  # can't use LocalizableOrderByNameScope because scope ordered is already defined by WithPosition
+  scope :ordered_by_name, -> (language) {
+    localization_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.name)))) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_name
+    SQL
+
+    # Join the table with a subquery that ranks localizations
+    # The subquery assigns a rank to each localization, with 1 being the first localization for each object
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          #{table_name.singularize}_localizations as localizations
+      ) localizations ON #{table_name}.id = localizations.about_id
+    SQL
+    ]))
+    .select("#{table_name}.*", localization_name_select)
+    .group("#{table_name}.id")
+    .order("localization_name ASC")
+  }
 
   # TODO L10N : adjust
   scope :for_search_term, -> (term) {

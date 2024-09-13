@@ -101,11 +101,12 @@ class University::Organization < ApplicationRecord
         unaccent(university_organizations.url) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
-  # TODO L10N : To rewrite
-  scope :search_by_siren_or_name, -> (term) {
-    where("
+  scope :search_by_siren_or_name, -> (term, language) {
+    joins(:localizations)
+    .where(university_organization_localizations: { language_id: language.id })
+    .where("
       unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
-      unaccent(university_organizations.name) ILIKE unaccent(:term)
+      unaccent(university_organization_localizations.name) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
