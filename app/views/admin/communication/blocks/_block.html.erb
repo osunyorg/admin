@@ -45,9 +45,8 @@
         <% end %>
         <div class="content-editor__elements__preview
                     content-editor__elements__preview--<%= block.template_kind %>">
-          <%# TODO Arnaud : Sûrement utiliser le block.heading_rank_self %>
-          <div><%= osuny_label block.title if block.title.present? %></div>
           <div id="snippet-<%= block.id %>">
+            <%= render "admin/communication/blocks/title", block: block %>
             <%= render "admin/communication/blocks/templates/#{block.template_kind}/snippet", block: block %>
           </div>
         </div>

@@ -56,13 +56,14 @@ window.osuny.contentEditor = {
     onBlockSave: function (blockIdentifier, blockPath) {
         'use strict';
         var target = document.querySelector('#snippet-' + blockIdentifier),
-            response = fetch(blockPath);
-        // var block = document.querySelector('#block-' + blockIdentifier),
-        //     preview = block.querySelector('.content-editor__elements__preview');
-        console.log(target, blockPath);
-        // var response = fetch(blockPath);
-        preview.innerHTML = response.text();
-        // open(blockPath, '#snippet-' + blockIdentifier);
+            request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (request.status == 200) {
+                target.innerHTML = request.responseText;
+            }
+        };
+        request.open("GET", blockPath);
+        request.send();
         this.offcanvasEditorBootstrap.hide()
     },
 
