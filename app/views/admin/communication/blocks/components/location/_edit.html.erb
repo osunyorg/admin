@@ -2,7 +2,7 @@
   locations = @block.template
                     .available_locations
                     .tmp_original # TODO L10N : remove
-                    .ordered
+                    .ordered(current_language)
 %>
 <% if label.present? %>
 <label  class="form-label"
