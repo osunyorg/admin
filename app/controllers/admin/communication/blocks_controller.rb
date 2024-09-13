@@ -27,6 +27,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       mandatory_module: Contentful
     )
     breadcrumb
+    render layout: 'admin/layouts/raw'
   end
 
   def show

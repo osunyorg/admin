@@ -18,6 +18,6 @@
                 class: 'btn btn-lg btn-dark' if can? :create, Communication::Block::Heading %>
     <%= link_to t('admin.communication.blocks.add'),
                 new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
-                class: 'btn btn-lg btn-dark' if can? :create, Communication::Block %>
+                class: 'btn btn-lg btn-dark js-content-editor__add-block' if can? :create, Communication::Block %>
   </div>
 </div>

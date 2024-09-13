@@ -37,16 +37,26 @@ window.osuny.contentEditor = {
     initButtons: function () {
         'use strict';
         var editButtons = document.querySelectorAll('.js-content-editor__element__edit'),
+            addBlockButton = document.querySelector('.js-content-editor__add-block'),
             i,
             button;
         for (i = 0; i < editButtons.length; i += 1) {
             button = editButtons[i];
             button.addEventListener('click', this.onEditButtonClick.bind(this));
         }
+        addBlockButton.addEventListener('click', this.onAddBlockButtonClick.bind(this));
     },
 
     onEditButtonClick: function (event) {
         'use strict';
+        var button = event.target,
+            url = button.href;
+        event.preventDefault();
+        open(url, 'editor');
+        this.offcanvasEditorBootstrap.show()
+    },
+
+    onAddBlockButtonClick: function (event) {
         var button = event.target,
             url = button.href;
         event.preventDefault();
