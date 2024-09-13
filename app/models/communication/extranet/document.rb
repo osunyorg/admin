@@ -39,5 +39,5 @@ class Communication::Extranet::Document < ApplicationRecord
   # TODO L10N : To remove
   has_one_attached_deletable :file
 
-  scope :ordered, -> (language) {}
+  scope :ordered, -> (language = nil) {}
 end

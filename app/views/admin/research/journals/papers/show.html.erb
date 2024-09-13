@@ -71,14 +71,6 @@
         <%= osuny_label Research::Journal::Paper.human_attribute_name('doi') %>
         <p><%= link_to @paper.doi_url, @paper.doi_url, target: :_blank %></p>
       <% end %>
-      <% if has_content?(@l10n.text)%>
-        <%= osuny_label Research::Journal::Paper::Localization.human_attribute_name('text') %>
-        <%= sanitize @l10n.text %>
-      <% end %>
-      <% if has_content?(@l10n.bibliography)%>
-        <%= osuny_label Research::Journal::Paper::Localization.human_attribute_name('bibliography') %>
-        <%= sanitize @l10n.bibliography %>
-      <% end %>
     <% end %>
   </div>
 </div>

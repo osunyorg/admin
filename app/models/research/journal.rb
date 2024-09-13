@@ -47,7 +47,7 @@ class Research::Journal < ApplicationRecord
   has_many  :kinds,
             class_name: 'Research::Journal::Paper::Kind'
 
-  scope :ordered, -> { order(:title) }
+  scope :ordered, -> (language = nil) { order(:title) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(research_journals.meta_description) ILIKE unaccent(:term) OR
@@ -65,7 +65,7 @@ class Research::Journal < ApplicationRecord
     localizations +
     volumes +
     papers +
-    researchers.map(&:researcher)
+    researchers.map(&:researcher_facets)
   end
 
   #####################

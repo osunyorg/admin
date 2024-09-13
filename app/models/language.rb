@@ -30,7 +30,7 @@ class Language < ApplicationRecord
   validates_uniqueness_of :iso_code
 
   scope :available_for_interface, -> { where(iso_code: I18n.available_locales) }
-  scope :ordered, -> { order(name: :asc) }
+  scope :ordered, -> (language = nil) { order(name: :asc) }
 
   def supported_by_libretranslate?
     AVAILABLE_IN_LIBRETRANSLATE.include?(iso_code)

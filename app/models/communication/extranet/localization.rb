@@ -31,6 +31,7 @@
 class Communication::Extranet::Localization < ApplicationRecord
   include AsLocalization
   include Initials
+  include Sanitizable
   include WithUniversity
 
   has_summernote :home_sentence
@@ -43,8 +44,6 @@ class Communication::Extranet::Localization < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [228, 228]
   end
 
-  before_validation :sanitize_fields
-
   validates_presence_of :name
   validates :logo, size: { less_than: 1.megabytes }
   validates :favicon, size: { less_than: 1.megabytes }
@@ -53,13 +52,4 @@ class Communication::Extranet::Localization < ApplicationRecord
     "#{name}"
   end
 
-  protected
-
-  def sanitize_fields
-    self.cookies_policy = Osuny::Sanitizer.sanitize(self.cookies_policy, 'text')
-    self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
-    self.privacy_policy = Osuny::Sanitizer.sanitize(self.privacy_policy, 'text')
-    self.registration_contact = Osuny::Sanitizer.sanitize(self.registration_contact, 'string')
-    self.terms = Osuny::Sanitizer.sanitize(self.terms, 'text')
-  end
 end

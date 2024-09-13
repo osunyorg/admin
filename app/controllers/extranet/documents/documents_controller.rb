@@ -2,8 +2,8 @@ class Extranet::Documents::DocumentsController < Extranet::Documents::Applicatio
 
   def index
     @facets = Communication::Extranet::Document::Facets.new params[:facets], 
-                                                              current_extranet, 
-                                                              current_language
+                                                            current_extranet, 
+                                                            current_language
     @documents = @facets.results
                         .ordered(current_language)
                         .page(params[:page])

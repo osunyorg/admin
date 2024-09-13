@@ -49,7 +49,7 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
 
   validates :name, presence: true
 
-  before_validation :set_communication_website_id
+  before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     "#{git_path_content_prefix(website)}events_categories/#{slug}/_index.html"

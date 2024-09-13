@@ -156,8 +156,8 @@ class Education::Program < ApplicationRecord
   def dependencies
     active_storage_blobs +
     locations +
-    university_people_through_involvements.map(&:teacher) +
-    university_people_through_role_involvements.map(&:administrator) +
+    university_people_through_involvements.map(&:teacher_facets) +
+    university_people_through_role_involvements.map(&:administrator_facets) +
     [diploma]
   end
 

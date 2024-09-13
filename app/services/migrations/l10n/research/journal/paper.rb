@@ -7,14 +7,12 @@ class Migrations::L10n::Research::Journal::Paper < Migrations::L10n::Base
       l10n = Research::Journal::Paper::Localization.create(
         abstract: object.abstract,
         authors_list: object.authors_list,
-        bibliography: object.bibliography,
         keywords: object.keywords,
         meta_description: object.meta_description,
         published: object.published,
         published_at: object.published_at,
         slug: object.slug,
         summary: object.summary,
-        text: object.text,
         title: object.title,
 
         about_id: about_id,

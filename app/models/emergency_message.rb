@@ -28,7 +28,7 @@ class EmergencyMessage < ApplicationRecord
 
   validates :name, :subject_fr, :subject_en, :content_fr, :content_en, presence: true
 
-  scope :ordered, -> { order(created_at: :desc) }
+  scope :ordered, -> (language = nil) { order(created_at: :desc) }
 
   def deliver!
     users_fr = target.where(language_id: Language.find_by(iso_code: 'fr').id)

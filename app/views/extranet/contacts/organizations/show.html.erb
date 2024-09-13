@@ -1,12 +1,10 @@
 <% content_for :title, @l10n %>
 
 <div class="row">
-  <div class="col-md-8 order-2 order-md-1">
-    <% unless @l10n.text.blank? %>
-      <div class="biography mb-5">
-        <%= sanitize @l10n.text %>
-      </div>
-    <% end %>
+  <div class="col-lg-8 order-2 order-lg-1">
+    <%= render 'extranet/organizations/show/description',
+                organization: @organization,
+                l10n: @l10n %>
     <% if @people.any? %>
       <div class="experiences mb-5">
         <h3 class="mb-5"><%= t('extranet.contacts.organizations.people') %></h3>
@@ -14,11 +12,8 @@
       </div>
     <% end %>
   </div>
-  <div class="offset-md-1 col-md-3 order-1 order-md-2">
-    <%= kamifusen_tag @organization.logo, 
-                      width: 400, 
-                      class: 'img-fluid organization__logo mb-5' if @organization.logo.attached? %>
-    <%= render 'extranet/contacts/organizations/details',
+  <div class="offset-lg-1 col-lg-3 order-1 order-lg-2">
+    <%= render 'extranet/organizations/show/details',
                 organization: @organization,
                 l10n: @l10n %>
   </div>

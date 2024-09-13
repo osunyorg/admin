@@ -1,8 +1,7 @@
 class Extranet::Posts::PostsController < Extranet::Posts::ApplicationController
-
   def index
     @posts =  current_extranet.posts
-                              # .published TODO L10N
+                              .published(current_language)
                               .ordered(current_language)
                               .page(params[:page])
     breadcrumb
@@ -10,6 +9,7 @@ class Extranet::Posts::PostsController < Extranet::Posts::ApplicationController
 
   def show
     @l10n = current_extranet.post_localizations
+                            .published
                             .find_by!(slug: params[:slug])
     @post = @l10n.about
     @disable_container = true

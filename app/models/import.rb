@@ -37,7 +37,7 @@ class Import < ApplicationRecord
   after_commit :send_mail_to_creator, on: :update, if: :status_changed_from_pending?
 
   scope :for_status, -> (status) { where(status: status) }
-  scope :ordered, -> { order('created_at DESC') }
+  scope :ordered, -> (language = nil) { order('created_at DESC') }
 
   def to_s
     I18n.l created_at, format: :date_with_hour

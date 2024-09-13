@@ -6,7 +6,7 @@ class Extranet::Alumni::CohortsController < Extranet::Alumni::ApplicationControl
       language: current_language
     }
     @cohorts = @facets.results
-                      .ordered
+                      .ordered(current_language)
                       .page(params[:page])
                       .per(60)
     @count = @cohorts.total_count
