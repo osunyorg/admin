@@ -19,7 +19,7 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
     filter_with_checkboxes :diploma_programs, {
       source: @about.programs.ordered_by_name(@language),
       title: Education::Program.model_name.human(count: 2),
-      display_method: Proc.new { |program| program.to_s_in(@language) }
+      display_method: Proc.new { |program| program.to_s_in(@language) },
       habtm: true
     } unless @about.is_a? Education::Program
   end

@@ -6,6 +6,7 @@ fr:
     passwords:
       edit:
         new: Changement de mot de passe
+        title: Changement de mot de passe
       new:
         title: Mot de passe oublié
     registrations:
