@@ -248,7 +248,9 @@
       app.mount('#app');
       
       $("#block-form").on("ajax:success", function(e) {
-        parent.window.osuny.contentEditor.onBlockSave();
+        var blockIdentifier = "<%= @block.id %>", 
+            blockPath = "<%= admin_communication_block_path(@block) %>";
+        parent.window.osuny.contentEditor.onBlockSave(blockIdentifier, blockPath);
       });
     }, 1000);
   });

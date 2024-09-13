@@ -1,7 +1,1 @@
-<% content_for :title, @block %>
-
-<%= render 'admin/application/dependencies', about: @block, expanded: true %>
-
-<% content_for :action_bar_right do %>
-    <%= edit_link @block %>
-<% end %>
+<%= render "admin/communication/blocks/templates/#{@block.template_kind}/snippet", block: @block %>

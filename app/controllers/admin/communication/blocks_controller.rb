@@ -30,7 +30,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def show
-    breadcrumb
+    render layout: false
   end
 
   def edit

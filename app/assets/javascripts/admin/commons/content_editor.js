@@ -53,7 +53,16 @@ window.osuny.contentEditor = {
         this.offcanvasEditorBootstrap.show()
     },
 
-    onBlockSave: function (event) {
+    onBlockSave: function (blockIdentifier, blockPath) {
+        'use strict';
+        var target = document.querySelector('#snippet-' + blockIdentifier),
+            response = fetch(blockPath);
+        // var block = document.querySelector('#block-' + blockIdentifier),
+        //     preview = block.querySelector('.content-editor__elements__preview');
+        console.log(target, blockPath);
+        // var response = fetch(blockPath);
+        preview.innerHTML = response.text();
+        // open(blockPath, '#snippet-' + blockIdentifier);
         this.offcanvasEditorBootstrap.hide()
     },
 
