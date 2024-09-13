@@ -4,7 +4,7 @@ class Admin::Communication::Extranets::Documents::CategoriesController < Admin::
   include Admin::Localizable
 
   def index
-    @categories = @categories.ordered
+    @categories = @categories.ordered(current_language)
     breadcrumb
     @feature_nav = 'navigation/admin/communication/extranet/library'
   end
@@ -27,7 +27,8 @@ class Admin::Communication::Extranets::Documents::CategoriesController < Admin::
 
   def create
     if @category.save
-      redirect_to admin_communication_extranet_document_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s)
+      redirect_to admin_communication_extranet_document_category_path(@category), 
+                  notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -36,7 +37,8 @@ class Admin::Communication::Extranets::Documents::CategoriesController < Admin::
 
   def update
     if @category.update(category_params)
-      redirect_to admin_communication_extranet_document_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s)
+      redirect_to admin_communication_extranet_document_category_path(@category), 
+                  notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -46,7 +48,8 @@ class Admin::Communication::Extranets::Documents::CategoriesController < Admin::
 
   def destroy
     @category.destroy
-    redirect_to admin_communication_extranet_document_categories_url, notice: t('admin.successfully_destroyed_html', model: @category.to_s)
+    redirect_to admin_communication_extranet_document_categories_url, 
+                notice: t('admin.successfully_destroyed_html', model: @category.to_s_in(current_language))
   end
 
   protected

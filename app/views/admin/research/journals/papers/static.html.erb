@@ -26,10 +26,6 @@ dates:
 <% if @l10n.pdf.attached? %>
 pdf: "<%= @l10n.pdf.blob_id %>"
 <% end %>
-<% if @about.bibliography %>
-bibliography: >-
-  <%= prepare_html_for_static @l10n.bibliography %>
-<% end %>
 keywords: >-
   <%= prepare_text_for_static @l10n.keywords %>
 researchers:

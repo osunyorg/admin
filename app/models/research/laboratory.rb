@@ -46,7 +46,7 @@ class Research::Laboratory < ApplicationRecord
 
   validates :name, :address, :city, :zipcode, :country, presence: true
 
-  scope :ordered, -> (language) { }
+  scope :ordered, -> (language = nil) { }
   scope :for_search_term, -> (term) {
     where("
       unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
@@ -64,7 +64,7 @@ class Research::Laboratory < ApplicationRecord
   def dependencies
     localizations +
     axes +
-    researchers.map(&:researcher)
+    researchers.map(&:researcher_facets)
   end
 
   def has_administrators?

@@ -57,7 +57,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  before_validation :set_communication_website_id
+  before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at

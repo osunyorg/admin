@@ -47,7 +47,7 @@ class Communication::Extranet::Post::Localization < ApplicationRecord
 
   validates_presence_of :title
 
-  before_validation :set_extranet_id
+  before_validation :set_extranet_id, on: :create
 
   def to_s
     "#{title}"

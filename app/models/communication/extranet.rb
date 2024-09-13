@@ -70,7 +70,7 @@ class Communication::Extranet < ApplicationRecord
   has_one_attached_deletable :logo # TODO L10N : To remove
   has_one_attached_deletable :favicon # TODO L10N : To remove
 
-  scope :ordered, -> (language) { order(:name) }
+  scope :ordered, -> (language = nil) { order(:name) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_extranets.host) ILIKE unaccent(:term) OR
@@ -87,6 +87,11 @@ class Communication::Extranet < ApplicationRecord
     return false if about.nil? || about&.is_a?(Education::Program)
     # if a school has a single program, same thing
     about&.programs&.many?
+  end
+
+  # TODO choisir réellement les langues de l'extranet
+  def languages
+    university.languages
   end
 
   def alumni

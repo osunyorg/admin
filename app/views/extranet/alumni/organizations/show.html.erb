@@ -1,19 +1,13 @@
 <% content_for :title, @l10n %>
 
 <div class="row">
-  <div class="col-md-8 order-2 order-md-1">
-    <div class="row">
-      <div class="col-md-9">
-        <% unless @l10n.text.blank? %>
-          <div class="biography mb-5">
-            <%= sanitize @l10n.text %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+  <div class="col-lg-8 order-2 order-lg-1">
+    <%= render 'extranet/organizations/show/description',
+                organization: @organization,
+                l10n: @l10n %>
     <% if @organization.experiences.any? %>
       <div class="experiences">
-        <p class="mb-4"><%= t('extranet.organization.experiences', count: @organization.experiences.count) %></p>
+        <h3 class="mb-5"><%= t('extranet.organization.experiences') %></h3>
         <ul class="list-unstyled">
           <% @organization.experiences.ordered.each do |experience| %>
             <%
@@ -33,9 +27,9 @@
                     <div class="row pt-4">
                       <div class="col-md-6">
                         <p><b>
-                          <%= link_to experience.person.to_s_in(current_language), 
-                                      [:alumni, experience.person],
-                                      class: "stretched-link" %>
+                          <%= osuny_link_localized experience.person, 
+                                                  [:alumni, experience.person],
+                                                  classes: "stretched-link" %>
                         </b></p>
                       </div>
                       <div class="col-md-6">
@@ -57,37 +51,9 @@
       </div>
     <% end %>
   </div>
-  <div class="offset-md-1 col-md-3 order-1 order-md-2">
-    <%= kamifusen_tag @l10n.logo, 
-                      width: 400,
-                      class: 'img-fluid organization__logo mb-5' if @l10n.logo.attached? %>
-    <dl>
-        <dt><%= University::Organization.human_attribute_name(:kind) %></dt>
-        <dd><%= @organization.kind_i18n %></dd>
-        <% if @organization.phone.present? %>
-          <dt><%= University::Organization.human_attribute_name(:phone) %></dt>
-          <dd>
-            <a href="tel:<%= @organization.phone %>" target="_blank" rel="noreferrer">
-              <%= @organization.phone %>
-            </a>
-          </dd>
-        <% end %>
-        <% if @organization.email.present? %>
-          <dt><%= University::Organization.human_attribute_name(:email) %></dt>
-          <dd>
-            <a href="mailto:<%= @organization.email %>" target="_blank" rel="noreferrer">
-              <%= @organization.email %>
-            </a>
-          </dd>
-        <% end %>
-        <% if @l10n.url.present? %>
-          <dt><%= University::Organization::Localization.human_attribute_name(:url) %></dt>
-          <dd>
-            <a href="<%= social_website_to_url @l10n.url %>" target="_blank" rel="noreferrer">
-              <%= social_website_to_s @l10n.url %>
-            </a>
-          </dd>
-        <% end %>
-    </dl>
+  <div class="offset-lg-1 col-lg-3 order-1 order-lg-2">
+    <%= render 'extranet/organizations/show/details',
+                organization: @organization,
+                l10n: @l10n %>
   </div>
 </div>

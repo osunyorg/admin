@@ -16,7 +16,7 @@
         <% end %>
         <% if @current_experiences.any? %>
           <div class="experiences mb-5">
-            <h3 class="mb-5"><%= t('extranet.contacts.persons.experiences', count: @current_experiences.pluck(:organization_id).uniq.size) %></h3>
+            <h3 class="mb-5"><%= t('extranet.contacts.persons.experiences') %></h3>
 
             <% @current_experiences.each do |experience| %>
               <article class="experience mb-5 mb-md-4">

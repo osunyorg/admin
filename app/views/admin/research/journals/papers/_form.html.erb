@@ -12,16 +12,6 @@
           <%= lf.input :abstract, as: :text, input_html: { rows: 8 } %>
           <%= lf.input :pdf, as: :single_deletable_file %>
           <%= f.input :doi %>
-          <%= lf.input :text,
-                      as: :summernote,
-                      input_html: {
-                        data: { 'summernote-config' => 'mini' }
-                      } if has_content?(l10n.text) %>
-          <%= lf.input :bibliography,
-                      as: :summernote,
-                      input_html: {
-                        data: { 'summernote-config' => 'mini' }
-                      } if has_content?(l10n.bibliography) %>
         <% end %>
       </div>
       <div class="col-md-4">

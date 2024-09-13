@@ -12,7 +12,7 @@ class Extranet::Posts::CategoriesController < Extranet::Posts::ApplicationContro
                             .find_by(slug: params[:slug])
     @category = @l10n.about
     @posts = @category.posts
-                      # .published TODO L10N
+                      .published(current_language)
                       .ordered(current_language)
                       .page(params[:page])
     breadcrumb

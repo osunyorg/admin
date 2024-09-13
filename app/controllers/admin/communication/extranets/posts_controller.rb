@@ -6,8 +6,6 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   def index
     @posts =  @posts.ordered(current_language)
                     .page(params[:page])
-    @categories =  @extranet.post_categories
-                            .ordered(current_language)
     breadcrumb
     @feature_nav = 'navigation/admin/communication/extranet/posts'
   end

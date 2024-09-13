@@ -43,5 +43,6 @@ class Communication::Extranet::Post < ApplicationRecord
   belongs_to :category, class_name: 'Communication::Extranet::Post::Category', optional: true
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
-  scope :ordered, -> (language) { order(pinned: :desc, published_at: :desc, created_at: :desc) }
+  scope :published, -> (language) {  }
+  scope :ordered, -> (language = nil) { order(pinned: :desc, published_at: :desc, created_at: :desc) }
 end

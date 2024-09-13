@@ -53,12 +53,12 @@ class Research::Journal::Volume < ApplicationRecord
               -> { distinct }, 
               through: :papers
 
-  scope :ordered, -> (language) { order(published_at: :desc, number: :desc) }
+  scope :ordered, -> (language = nil) { order(published_at: :desc, number: :desc) }
 
   def dependencies
     localizations +
     papers +
-    people.map(&:researcher)
+    people.map(&:researcher_facets)
   end
 
   def references

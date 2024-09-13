@@ -30,5 +30,6 @@ class Communication::Extranet::Document::Category < ApplicationRecord
   has_many :communication_extranet_documents, class_name: "Communication::Extranet::Document"
   alias_method :documents, :communication_extranet_documents
 
-  scope :ordered, -> { order(:name) }
+  # TODO
+  scope :ordered, -> (language = nil) { }
 end

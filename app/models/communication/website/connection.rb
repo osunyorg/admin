@@ -32,7 +32,7 @@ class Communication::Website::Connection < ApplicationRecord
 
   scope :for_object, -> (object) { where(indirect_object: object) }
   scope :in_website, -> (website) { where(website: website) }
-  scope :ordered, -> { order(updated_at: :desc) }
+  scope :ordered, -> (language = nil) { order(updated_at: :desc) }
 
   def self.websites_for(object)
     for_object(object).distinct(:website).collect(&:website).uniq

@@ -1,6 +1,6 @@
 class Migrations::L10n::University::Person::Experience < Migrations::L10n::Base
   def self.execute
-    University::Person::Experience.find_each do |experience|
+    University::Person::Experience.where(self.constraint).find_each do |experience|
       language_id = experience.person.language_id
       next if University::Person::Experience::Localization.where(
         about_id: experience.id,
