@@ -1,9 +1,9 @@
 <% events = osuny_collection(
-  block.about.website.events
-       .tmp_original, # TODO L10N : remove
-  localized: true,
-  label_method: :to_s_with_subtitle
- ) %>
+              block.about.website.events
+                  .tmp_original, # TODO L10N : remove
+              localized: true,
+              label_method: :to_s_with_subtitle
+            ) %>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>

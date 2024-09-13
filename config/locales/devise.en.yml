@@ -6,6 +6,7 @@ en:
     passwords:
       edit:
         new: Password change
+        title: Password change
       new:
         title: Password forgotton
     registrations:
