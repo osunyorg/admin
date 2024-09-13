@@ -15,14 +15,11 @@
     <div class="header__info col-md-7">
       <h1><%= @l10n %></h1>
       <p class="small mt-2">
-        <% if @l10n.published_at %>
-          Publié le <%= l @l10n.published_at, format: :date_with_explicit_month %>
-        <% end %>
+        <%= l @l10n.published_at, format: :date_with_explicit_month if @l10n.published_at %>
         <% if @post.category 
             category_l10n = @post.category.localization_for(current_language)
             next if category_l10n.nil? %>
-          <br>
-          Dans : <%= link_to category_l10n, posts_category_path(slug: category_l10n.slug), class: "link" %>
+          — <%= link_to category_l10n, posts_category_path(slug: category_l10n.slug), class: "link" %>
         <% end %>
       </p>
     </div>
