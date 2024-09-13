@@ -7,7 +7,10 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   before_action :set_feature_nav, only: [:edit, :update]
 
   def index
-    @websites = apply_scopes(@websites).ordered.page(params[:page]).per(24)
+    @websites = apply_scopes(@websites)
+                  .ordered(current_language)
+                  .page(params[:page])
+                  .per(30)
     breadcrumb
   end
 
