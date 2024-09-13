@@ -31,7 +31,7 @@ class Research::Laboratory::Axis::Localization < ApplicationRecord
   include Sanitizable
   include WithUniversity
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   def to_s
     "#{name}"

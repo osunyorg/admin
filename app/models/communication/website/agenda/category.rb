@@ -97,11 +97,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   protected
 
   def last_ordered_element
-    website.agenda_categories.where(parent_id: parent_id, language_id: language_id).ordered.last
-  end
-
-  def slug_unavailable?(slug)
-    self.class.unscoped.where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug).where.not(id: self.id).exists?
+    website.agenda_categories.where(parent_id: parent_id).ordered.last
   end
 
 end

@@ -31,6 +31,7 @@
 #
 class Research::Laboratory::Axis < ApplicationRecord
   include Localizable
+  include LocalizableOrderByNameScope
   include Sanitizable
   include WithUniversity
   include WithPosition

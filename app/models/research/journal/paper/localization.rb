@@ -47,7 +47,7 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   delegate  :journal, :volume, :people, :doi, 
             to: :paper
 
-  validates_presence_of :title
+  validates :title, presence: true
 
   has_summernote :text
   has_summernote :bibliography

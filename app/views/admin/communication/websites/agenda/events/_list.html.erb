@@ -20,7 +20,7 @@ small ||= false
                                         id: event.id
                                       ),
                                       classes: "stretched-link" %>
-            <% if event_l10n.subtitle.present? %>
+            <% if event_l10n&.subtitle.present? %>
               <br>
               <span class="text-muted">
                 <%= event_l10n.subtitle %>

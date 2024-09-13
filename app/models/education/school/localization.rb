@@ -39,7 +39,7 @@ class Education::School::Localization < ApplicationRecord
 
   has_one_attached_deletable :logo
 
-  validates_presence_of :name
+  validates :name, presence: true
   validates :logo, size: { less_than: 1.megabytes }
 
   def git_path(website)

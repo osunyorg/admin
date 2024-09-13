@@ -44,7 +44,7 @@ class Communication::Extranet::Localization < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [228, 228]
   end
 
-  validates_presence_of :name
+  validates :name, presence: true
   validates :logo, size: { less_than: 1.megabytes }
   validates :favicon, size: { less_than: 1.megabytes }
 
