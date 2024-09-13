@@ -42,7 +42,7 @@ class Research::Thesis < ApplicationRecord
   belongs_to  :director, 
               class_name: 'University::Person'
 
-  validates_presence_of :laboratory, :author, :director
+  validates :laboratory, :author, :director, presence: true
 
   scope :for_search_term, -> (term) {
     where("

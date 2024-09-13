@@ -8,9 +8,8 @@ module User::WithAuthentication
 
     has_one_time_password(encrypted: true)
 
-    validates :role, presence: true
+    validates :role, :first_name, :last_name, :email, presence: true
 
-    validates_presence_of :first_name, :last_name, :email
     validates_uniqueness_of :email, scope: :university_id, allow_blank: true, if: :will_save_change_to_email?
     validates_format_of :email, with: Devise::email_regexp, allow_blank: true, if: :will_save_change_to_email?
     validates_presence_of :password, if: :password_required?

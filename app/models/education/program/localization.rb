@@ -88,7 +88,7 @@ class Education::Program::Localization < ApplicationRecord
 
   has_summernote :presentation
 
-  validates_presence_of :name
+  validates :name, presence: true
   validates :downloadable_summary, size: { less_than: 50.megabytes }
   validates :logo, size: { less_than: 5.megabytes }
 

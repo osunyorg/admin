@@ -64,8 +64,8 @@ class Communication::Extranet < ApplicationRecord
   has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
 
-  validates_presence_of :host
-  validates_presence_of :about_type, :about_id, if: :feature_alumni
+  validates :host, presence: true
+  validates :about_type, :about_id, presence: true, if: :feature_alumni
 
   before_validation :sanitize_fields
 

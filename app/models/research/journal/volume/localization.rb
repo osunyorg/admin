@@ -46,7 +46,7 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   delegate :number, to: :volume
 
-  validates_presence_of :title
+  validates :title, presence: true
 
   has_summernote :text
 

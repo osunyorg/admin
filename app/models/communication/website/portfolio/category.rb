@@ -85,6 +85,6 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
   protected
 
   def last_ordered_element
-    website.portfolio_categories.where(parent_id: parent_id, language_id: language_id).ordered.last
+    website.portfolio_categories.where(parent_id: parent_id).ordered.last
   end
 end
