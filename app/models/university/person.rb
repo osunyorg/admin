@@ -131,14 +131,14 @@ class University::Person < ApplicationRecord
 
   accepts_nested_attributes_for :involvements
 
-  validates_uniqueness_of :email,
-                          scope: [:university_id, :language_id],
-                          allow_blank: true,
-                          if: :will_save_change_to_email?
-  validates_format_of     :email,
-                          with: Devise::email_regexp,
-                          allow_blank: true,
-                          if: :will_save_change_to_email?
+  validates :email, 
+            uniqueness: { scope: [:university_id, :language_id] },
+            allow_blank: true,
+            if: :will_save_change_to_email?
+  validates :email,
+            format: { with: Devise::email_regexp },
+            allow_blank: true,
+            if: :will_save_change_to_email?
 
   before_validation :sanitize_email
 
