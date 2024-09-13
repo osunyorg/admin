@@ -26,6 +26,7 @@ class Research::Journal < ApplicationRecord
   include AsIndirectObject
   include Favoritable
   include Localizable
+  include LocalizableOrderByTitleScope
   include Sanitizable
   include WebsitesLinkable
   include WithUniversity
@@ -47,7 +48,6 @@ class Research::Journal < ApplicationRecord
   has_many  :kinds,
             class_name: 'Research::Journal::Paper::Kind'
 
-  scope :ordered, -> (language = nil) { order(:title) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(research_journals.meta_description) ILIKE unaccent(:term) OR

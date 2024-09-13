@@ -31,6 +31,7 @@
 class Research::Laboratory < ApplicationRecord
   include AsIndirectObject
   include Localizable
+  include LocalizableOrderByNameScope
   include Sanitizable
   include WebsitesLinkable
   include WithCountry
@@ -50,9 +51,8 @@ class Research::Laboratory < ApplicationRecord
                           foreign_key: :research_laboratory_id,
                           association_foreign_key: :university_person_id
 
-  validates :name, :address, :city, :zipcode, :country, presence: true
+  validates :address, :city, :zipcode, :country, presence: true
 
-  scope :ordered, -> (language = nil) { }
   scope :for_search_term, -> (term) {
     where("
       unaccent(research_laboratories.address) ILIKE unaccent(:term) OR

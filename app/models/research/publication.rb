@@ -52,7 +52,7 @@ class Research::Publication < ApplicationRecord
     hal: 1
   }
 
-  validates_presence_of :title, :publication_date
+  validates :title, :publication_date, presence: true
 
   before_validation :generate_authors_citeproc
 

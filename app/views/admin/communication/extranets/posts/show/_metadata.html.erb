@@ -2,7 +2,7 @@
   <%= osuny_label t('metadata') %><br>
 
   <% if @l10n.published %>
-    <%= t('communication.extranet.post.metadata.published_on', date: l(@post.published_at, format: :date_with_explicit_month)) %>
+    <%= t('communication.extranet.post.metadata.published_on', date: l(@l10n.published_at, format: :date_with_explicit_month)) %>
     <% if @l10n.pinned %>
       <%= t('communication.extranet.post.metadata.and_pinned') %>
     <% end %>
@@ -12,6 +12,6 @@
 
   <% if @post.author %>
     <br>
-    <%= t('communication.extranet.post.metadata.by', author: @post.author.to_s_in(current_language)) %>
+    <%= t('communication.extranet.post.metadata.by', author: @post.author.best_localization_for(current_language)) %>
   <% end %>
 </div>

@@ -10,15 +10,20 @@ class Admin::Research::JournalsController < Admin::Research::Journals::Applicati
 
   def index
     @journals = apply_scopes(@journals)
-                  .ordered
+                  .ordered(current_language)
                   .page(params[:page])
     breadcrumb
   end
 
   def show
-    @papers = @journal.papers.ordered(current_language).limit(10)
-    @kinds = @journal.kinds.ordered(current_language)
-    @volumes = @journal.volumes.ordered(current_language).limit(6)
+    @papers = @journal.papers
+                      .ordered(current_language)
+                      .limit(10)
+    @kinds =  @journal.kinds
+                      .ordered(current_language)
+    @volumes =  @journal.volumes
+                        .ordered(current_language)
+                        .limit(6)
     breadcrumb
   end
 

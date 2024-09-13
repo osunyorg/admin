@@ -32,7 +32,7 @@ class Research::Journal::Localization < ApplicationRecord
   include WithGitFiles
   include WithUniversity
 
-  validates_presence_of :title
+  validates :title, presence: true
 
   def git_path(website)
     "data/journal.yml"
