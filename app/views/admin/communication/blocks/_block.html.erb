@@ -32,7 +32,12 @@
                         remote: true %>
             <%= duplicate_link block, html_classes: 'action ms-2' %>
           </span>
-          <%= edit_link block, html_classes: 'action ms-2' %>
+          <% if can?(:update, block) %>
+            <%= link_to t('edit'), 
+                        edit_admin_communication_block_path(block),
+                        class: 'action ms-2',
+                        target: :editor %>
+          <% end %>
         </div>
         <% if block.empty? %>
           <span class="small text-danger mb-2">
