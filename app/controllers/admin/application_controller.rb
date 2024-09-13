@@ -8,6 +8,11 @@ class Admin::ApplicationController < ApplicationController
 
   protected
 
+  def current_subnav_context
+    nil
+  end
+  helper_method :current_subnav_context
+
   def breadcrumb
     add_breadcrumb t('admin.dashboard'), admin_root_path(website_id: nil)
   end
@@ -33,21 +38,10 @@ class Admin::ApplicationController < ApplicationController
     # If the block doesn't exist anymore
   end
 
-  def default_url_options
-    options = {}
-    options[:lang] = current_language
-    options
-  end
-
-  def current_language
-    @current_language ||= current_university.best_language_for(params[:lang])
-  end
-  helper_method :current_language
-
   private
 
   def redirect_if_context_is_not_an_university!
-    # Currently (Nov 2023), context can be: an extranet, an university (admin) or none.
+    # Currently (Nov 2023), context can be: an extranet, a university (admin) or none.
     redirect_to root_path unless current_context.is_a?(University)
   end
 

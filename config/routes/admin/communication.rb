@@ -163,7 +163,7 @@ namespace :communication do
       end
     end
     # Automatic routes based on feature names
-    get 'library' => 'extranets/documents#index', as: :library
+    get 'library' => 'extranets/documents#library', as: :library
     resources :documents, controller: 'extranets/documents' do
       collection do
         resources :categories, controller: 'extranets/documents/categories', as: 'document_categories'

@@ -22,28 +22,12 @@
 #  fk_rails_e53c2a25fc  (extranet_id => communication_extranets.id)
 #
 class Communication::Extranet::Post::Category < ApplicationRecord
-  include Contentful
-  include Initials
-  include Sluggable
+  include Contentful # TODO L10N : To remove
+  include Localizable
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   has_many :posts
 
-  validates :name, presence: true
-
-  scope :ordered, -> { order(:name) }
-
-  def to_s
-    "#{name}"
-  end
-
-  protected
-
-  def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(extranet_id: self.extranet_id, slug: slug)
-              .where.not(id: self.id)
-              .exists?
-  end
+  scope :ordered, -> (language = nil) { order(:name) }
 end

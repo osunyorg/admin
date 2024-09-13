@@ -9,11 +9,9 @@
     <div class="row">
       <% current_user.favorites.except_websites.each do |favorite| 
           about = favorite.about 
-          next unless can?(:read, about)
-          title = about.respond_to?(:to_s_in) ? about.to_s_in(current_language) : about.to_s
-          %>
+          next unless can?(:read, about) %>
         <div class="col-md-6 col-lg-3 d-flex">
-          <%= osuny_panel title do %>
+          <%= osuny_panel about.to_s_in(current_language) do %>
             <p class="small mt-n2 mb-1"><%= about.class.model_name.human %></p>
             <%= link_to t('show'), 
                         [:admin, about], 

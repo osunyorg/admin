@@ -14,8 +14,7 @@
   <% end %>
   <% programs.each do |program| %>
     <option value="<%= program.id %>">
-      <%# TODO L10N : doit devenir to_s_in(block.language) %>
-      <%= program %>
+      <%= program.to_s_in(block.language) %>
     </option>
   <% end %>
 </select>

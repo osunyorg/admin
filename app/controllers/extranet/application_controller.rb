@@ -12,7 +12,7 @@ class Extranet::ApplicationController < ApplicationController
     current_extranet.about || current_university
   end
 
-  private
+  protected
 
   def redirect_if_no_extranet!
     redirect_to admin_root_path(lang: current_university.default_language) unless current_extranet

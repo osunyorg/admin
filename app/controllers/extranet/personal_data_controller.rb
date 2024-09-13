@@ -21,16 +21,21 @@ class Extranet::PersonalDataController < Extranet::ApplicationController
   def load_person
     @person = current_user.person
     raise CanCan::AccessDenied if @person.nil?
+    @l10n = @person.best_localization_for(current_language)
   end
 
   def person_params
     params.require(:university_person)
           .permit(
-            :gender, :birthdate, :summary, :biography,
+            :gender, :birthdate,
             :phone_mobile, :phone_mobile_visibility, :phone_professional, :phone_professional_visibility, :phone_personal, :phone_personal_visibility,
             :address, :zipcode, :city, :country, :address_visibility,
-            :url,
-            :linkedin, :linkedin_visibility, :twitter, :twitter_visibility, :mastodon, :mastodon_visibility
+            :linkedin_visibility, :twitter_visibility, :mastodon_visibility,
+            localizations_attributes: [
+              :id, :language_id,
+              :summary, :biography,
+              :url, :linkedin, :twitter, :mastodon, 
+            ]
           )
   end
 

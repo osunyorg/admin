@@ -5,14 +5,15 @@ module Migrations
       ::Communication::Website.skip_callback :touch, :after, :create_missing_special_pages
       University::Organization.execute
       University::Person.execute
+      University::Person::Experience.execute
+      University::Person::Involvement.execute
+      University::Role.execute
       Communication::Block.execute
       Administration::Location.execute
       Education::Diploma.execute
       Education::Program.execute
       Education::School.execute
-      University::Role.execute
-      University::Person::Experience.execute
-      University::Person::Involvement.execute
+      Communication::Extranet.execute
       Communication::Website.execute
       Communication::Website::Page.execute
       Communication::Website::Agenda.execute

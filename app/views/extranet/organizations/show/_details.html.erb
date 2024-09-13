@@ -1,0 +1,41 @@
+<%= kamifusen_tag @l10n.logo, 
+                  width: 400, 
+                  class: 'img-fluid organization__logo mb-5' if @l10n.logo.attached? %>
+<dl>
+  <% if organization.full_address.present? %>
+    <dt class="fw-normal small"><%= University::Organization.human_attribute_name(:address) %></dt>
+    <dd><%= sanitize organization.full_address %></dd>
+  <% end %>
+  <% if organization.phone.present? %>
+    <dt class="fw-normal small"><%= University::Organization.human_attribute_name(:phone) %></dt>
+    <dd><a href="tel:<%= organization.phone %>" target="_blank" rel="noreferrer"><%= organization.phone %></a></dd>
+  <% end %>
+  <% if organization.email.present? %>
+    <dt class="fw-normal small"><%= University::Organization.human_attribute_name(:email) %></dt>
+    <dd><a href="mailto:<%= organization.email %>" target="_blank" rel="noreferrer"><%= organization.email %></a></dd>
+  <% end %>
+  <% if l10n.url.present? %>
+    <dt class="fw-normal small"><%= University::Organization::Localization.human_attribute_name(:url) %></dt>
+    <dd>
+      <a href="<%= social_website_to_url l10n.url %>" target="_blank" rel="noreferrer">
+        <%= social_website_to_s l10n.url %>
+      </a>
+    </dd>
+  <% end %>
+  <% if organization.geolocated? %>
+    <%# Include map.js before call Leaflet (map helper) %>
+    <%= javascript_include_tag 'map' %>
+    <dt class="fw-normal small"><%= University::Organization.human_attribute_name(:map) %></dt>
+    <dl><%= map(
+          center: {
+            latlng: organization.latlong,
+            zoom: 15
+          },
+          markers: [
+            {
+              latlng: organization.latlong
+            }
+          ]
+      ) %></dl>
+  <% end %>
+</dl>

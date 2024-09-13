@@ -4,9 +4,10 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
 
     @model = options[:model]
     @about = options[:about]
+    @language = options[:language]
 
     filter_with_text :name, {
-      title: University::Person.human_attribute_name('name')
+      title: University::Person::Localization.human_attribute_name('name')
     }
 
     filter_with_list :diploma_years, {
@@ -16,8 +17,9 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
     }
 
     filter_with_checkboxes :diploma_programs, {
-      source: @about.programs.ordered,
+      source: @about.programs.ordered_by_name(@language),
       title: Education::Program.model_name.human(count: 2),
+      display_method: Proc.new { |program| program.to_s_in(@language) }
       habtm: true
     } unless @about.is_a? Education::Program
   end

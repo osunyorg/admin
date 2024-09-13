@@ -6,11 +6,5 @@
   </p>
 <% end %>
 
-<div class="row">
-  <% @people.each do |person| %>
-    <div class="col-xxl-2 col-md-3 col-sm-6">
-      <%= render 'extranet/contacts/persons/person', person: person %>
-    </div>
-  <% end %>
-</div>
+<%= render 'extranet/contacts/persons/list', people: @people %>
 <%= paginate @people, theme: 'bootstrap-5' %>

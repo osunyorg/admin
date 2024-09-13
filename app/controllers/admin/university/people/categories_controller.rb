@@ -10,14 +10,16 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   def index
     @root_categories = categories.root
                                  .tmp_original # TODO L10N : To remove
-                                 .ordered
+                                 .ordered(current_language)
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/university/people'
     breadcrumb
   end
 
   def show
-    @people = @category.people.ordered(current_language).page(params[:page])
+    @people =  @category.people
+                        .ordered(current_language)
+                        .page(params[:page])
     breadcrumb
   end
 
@@ -70,7 +72,7 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   def categories
     current_university.person_categories
                       .tmp_original # TODO L10N : To remove
-                      .ordered
+                      .ordered(current_language)
   end
 
   def breadcrumb

@@ -25,45 +25,51 @@ en:
         about_Research::Laboratory: Laboratory extranet
         about_type: About
         color: Couleur
-        cookies_policy: Cookies policy
-        favicon: Favicon
         feature_alumni: Alumni
         feature_contacts: Directory
+        feature_documents: Documents
         feature_jobs: Job board
-        feature_library: Documents
         feature_posts: News
         has_sso: Has SSO?
-        home_sentence: Sentence displayed on homepage
         host: Domain
-        logo: Logo
-        name: Name
-        privacy_policy: Privacy policy
-        registration_contact: Contact mail for registrations problems
-        sass: Custom style
-        sso_button_label: Sign in button's label
+        sass: Custom style (SASS)
         sso_cert: Certificate
         sso_inherit_from_university: SSO inherited from University
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
+      communication/extranet/localization:
+        cookies_policy: Cookies policy
+        favicon: Browser icon (favicon)
+        home_sentence: Sentence displayed on homepage
+        logo: Logo
+        name: Name
+        privacy_policy: Privacy policy
+        registration_contact: Contact mail for registrations problems
+        sso_button_label: Sign in button's label
         terms: Terms of service
       communication/extranet/connection:
         connected: Connected
       communication/extranet/document:
         category: Category
         kind: Type
+      communication/extranet/document/localization:
+        file: Downloadable file
         name: Name
         published: Published?
         published_at: Publication date
       communication/extranet/document/category:
-        name: Name
         quantity: Quantity of documents
+      communication/extranet/document/category/localization:
+        name: Name
       communication/extranet/document/kind:
-        name: Name
         quantity: Quantity of documents
+      communication/extranet/document/kind/localization:
+        name: Name
       communication/extranet/post:
         author: Author
         category: Category
+      communication/extranet/post/localization:
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit
@@ -73,8 +79,9 @@ en:
         slug: Slug
         title: Title
       communication/extranet/post/category:
-        name: Name
         quantity: Quantity of posts
+      communication/extranet/post/category/localization:
+        name: Name
       communication/website:
         about: About
         about_: Independent website

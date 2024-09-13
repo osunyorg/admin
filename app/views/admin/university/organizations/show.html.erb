@@ -34,7 +34,7 @@
     <% end %>
     <%= osuny_panel University::Organization.human_attribute_name('digital') do %>
       <div class="row pure__row--small">
-        <%= osuny_property_show_url @organization, :url, hide_blank: true %>
+        <%= osuny_property_show_url @l10n, :url, hide_blank: true %>
         <%= osuny_property_show_text @organization, :phone, hide_blank: true %>
         <%= osuny_property_show_text @organization, :email, hide_blank: true %>
         <%= osuny_property_show_text @l10n, :linkedin, hide_blank: true %>

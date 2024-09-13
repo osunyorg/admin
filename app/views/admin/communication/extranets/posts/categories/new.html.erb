@@ -1,3 +1,2 @@
 <% content_for :title, Communication::Extranet::Post::Category.model_name.human %>
-
-<%= render 'form', category: @category %>
+<%= render 'form', category: @category, l10n: @l10n %>

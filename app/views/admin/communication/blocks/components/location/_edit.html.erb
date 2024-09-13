@@ -18,7 +18,7 @@
   <% end %>
   <% locations.each do |location| %>
     <option value="<%= location.id %>">
-      <%= location %>
+      <%= location.to_s_in(current_language) %>
     </option>
   <% end %>
 </select>

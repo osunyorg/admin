@@ -6,5 +6,5 @@
   </p>
 <% end %>
 
-<%= render "extranet/contacts/organizations/list" %>
+<%= render "extranet/contacts/organizations/list", organizations: @organizations %>
 <%= paginate @organizations, theme: 'bootstrap-5' %>

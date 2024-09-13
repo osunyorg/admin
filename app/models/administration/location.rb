@@ -71,7 +71,7 @@ class Administration::Location < ApplicationRecord
                           source: :diploma
                           alias_method :education_diplomas, :diplomas
 
-  scope :ordered, -> (language) {
+  scope :ordered, -> (language = nil) {
     # Define a raw SQL snippet for the conditional aggregation
     # This selects the name of the localization in the specified language,
     # or falls back to the first localization name if the specified language is not present.

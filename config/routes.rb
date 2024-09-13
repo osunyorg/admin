@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    scope "/:lang" do
+    scope '/:lang' do
       resources :users, except: [:new, :create] do
         post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
         patch 'unlock' => 'users#unlock', on: :member
@@ -54,15 +54,19 @@ Rails.application.routes.draw do
       draw 'admin/university'
       root to: 'dashboard#index'
     end
-    get "/" => 'dashboard#redirect_to_default_language'
+    get '/' => 'dashboard#redirect_to_default_language'
   end
 
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
 
   draw 'api'
   draw 'server'
+
   scope module: 'extranet' do
-    draw 'extranet'
+    scope '/:lang' do
+      draw 'extranet'
+    end
+    get 'style' => 'style#index', as: :style, constraints: { format: 'css' }
+    get '/' => 'home#redirect_to_default_language'
   end
-  root to: 'extranet/home#index'
 end

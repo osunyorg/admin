@@ -1,9 +1,7 @@
-<% content_for :title, @category %>
+<% content_for :title, @l10n %>
 
-<%= osuny_panel Communication::Extranet::Document.model_name.human(count: 2) do %>
-  <%= render 'admin/communication/extranets/documents/list', documents: @documents %>
-  <%= paginate @documents %>
-<% end %>
+<%= render 'admin/communication/extranets/documents/list', documents: @documents %>
+<%= paginate @documents %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @category %>

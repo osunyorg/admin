@@ -9,8 +9,8 @@
 #  css                        :text
 #  feature_alumni             :boolean          default(FALSE)
 #  feature_contacts           :boolean          default(FALSE)
+#  feature_documents          :boolean          default(FALSE)
 #  feature_jobs               :boolean          default(FALSE)
-#  feature_library            :boolean          default(FALSE)
 #  feature_posts              :boolean          default(FALSE)
 #  has_sso                    :boolean          default(FALSE)
 #  home_sentence              :text
@@ -45,6 +45,7 @@ class Communication::Extranet < ApplicationRecord
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Favoritable
+  include Localizable
   include WithAbouts
   include WithConnectedObjects
   include WithFeatures
@@ -53,30 +54,23 @@ class Communication::Extranet < ApplicationRecord
   include WithStyle
   include WithUniversity
 
-  has_summernote :home_sentence
-  has_summernote :terms
-  has_summernote :privacy_policy
-  has_summernote :cookies_policy
-
-  has_one_attached_deletable :logo
-  has_one_attached_deletable :favicon do |attachable|
-    attachable.variant :thumb, resize_to_limit: [228, 228]
-  end
-
   has_many :posts
+  has_many :post_localizations, class_name: 'Communication::Extranet::Post::Localization'
   has_many :post_categories, class_name: 'Communication::Extranet::Post::Category'
+  has_many :post_category_localizations, class_name: 'Communication::Extranet::Post::Category::Localization'
   has_many :documents
   has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
 
-  validates_presence_of :name, :host
-  validates :logo, size: { less_than: 1.megabytes }
-  validates :favicon, size: { less_than: 1.megabytes }
+  validates_presence_of :host
   validates_presence_of :about_type, :about_id, if: :feature_alumni
 
   before_validation :sanitize_fields
 
-  scope :ordered, -> { order(:name) }
+  has_one_attached_deletable :logo # TODO L10N : To remove
+  has_one_attached_deletable :favicon # TODO L10N : To remove
+
+  scope :ordered, -> (language = nil) { order(:name) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_extranets.host) ILIKE unaccent(:term) OR
@@ -93,6 +87,11 @@ class Communication::Extranet < ApplicationRecord
     return false if about.nil? || about&.is_a?(Education::Program)
     # if a school has a single program, same thing
     about&.programs&.many?
+  end
+
+  # TODO choisir réellement les langues de l'extranet
+  def languages
+    university.languages
   end
 
   def alumni
@@ -138,19 +137,10 @@ class Communication::Extranet < ApplicationRecord
     @url ||= Rails.env.development? ? "http://#{host}:3000" : "https://#{host}"
   end
 
-  def to_s
-    "#{name}"
-  end
-
-  private
+  protected
 
   def sanitize_fields
     self.color = Osuny::Sanitizer.sanitize(self.color, 'string')
-    self.cookies_policy = Osuny::Sanitizer.sanitize(self.cookies_policy, 'text')
     self.host = Osuny::Sanitizer.sanitize(self.host, 'string')
-    self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
-    self.privacy_policy = Osuny::Sanitizer.sanitize(self.privacy_policy, 'text')
-    self.registration_contact = Osuny::Sanitizer.sanitize(self.registration_contact, 'string')
-    self.terms = Osuny::Sanitizer.sanitize(self.terms, 'text')
   end
 end
