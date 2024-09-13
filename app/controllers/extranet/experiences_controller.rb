@@ -1,5 +1,6 @@
 class Extranet::ExperiencesController < Extranet::ApplicationController
   before_action :load_experience, only: [:edit, :update, :destroy]
+
   def new
     @experience = current_user.experiences.new
     @l10n = @experience.localizations.build(language: current_language)

@@ -17,7 +17,8 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
 
   def new
     @organization = current_university.organizations.new
-    @organization.name = params[:name] if params.has_key?(:name)
+    @l10n = @organization.localizations.build(language: current_language)
+    @l10n.name = params[:name] if params.has_key?(:name)
     breadcrumb
     add_breadcrumb t('create')
   end
@@ -28,6 +29,7 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
       redirect_to organization_path(@organization),
                   notice: t('admin.successfully_created_html', model: @organization.to_s_in(current_language))
     else
+      @l10n = @organization.localizations.first
       breadcrumb
       add_breadcrumb t('create')
       render :new, status: :unprocessable_entity
@@ -68,11 +70,16 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
   def organization_params
     params.require(:university_organization)
           .permit(
-            :name, :long_name, :summary, :siren, :kind,
-            :address, :address_name, :address_additional, :zipcode, :city, :country, :text,
-            :url, :phone, :email, :linkedin, :twitter, :mastodon,
-            :logo, :logo_delete, :logo_infos,
-            :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
+            :siren, :kind, :address, :zipcode, :city, :country, :phone, :email, category_ids: [],
+            localizations_attributes: [
+              :id, :name, :long_name, :slug, :meta_description, :summary, :text,
+              :address_name, :address_additional,
+              :url, :linkedin, :twitter, :mastodon,
+              :logo, :logo_delete, :logo_infos,
+              :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
+              :shared_image, :shared_image_delete,
+              :language_id
+            ]
           )
   end
 
