@@ -28,7 +28,7 @@ class Research::Hal::Author < ApplicationRecord
                           association_foreign_key: :university_person_id
   alias :researchers :university_person_researchers
 
-  scope :ordered, -> { order(:last_name, :first_name, :docid)}
+  scope :ordered, -> (language = nil) { order(:last_name, :first_name, :docid)}
 
   def self.import_from_hal(full_name)
     authors = []

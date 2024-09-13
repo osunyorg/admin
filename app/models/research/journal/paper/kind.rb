@@ -30,5 +30,5 @@ class Research::Journal::Paper::Kind < ApplicationRecord
   belongs_to :journal, class_name: 'Research::Journal'
   has_many :papers
   
-  scope :ordered, -> (language) { order(:title) }
+  scope :ordered, -> (language = nil) { order(:title) }
 end

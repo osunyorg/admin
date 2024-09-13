@@ -57,7 +57,7 @@ class Communication::Website::Menu < ApplicationRecord
 
   after_create :sync_in_all_website_languages
 
-  scope :ordered, -> { order(created_at: :asc) }
+  scope :ordered, -> (language = nil) { order(created_at: :asc) }
   scope :for_identifier, -> (identifier) { where(identifier: identifier) }
   scope :for_language, -> (language) { where(language_id: language.id) }
   scope :in_languages, -> (language_ids) { where(language_id: language_ids) }

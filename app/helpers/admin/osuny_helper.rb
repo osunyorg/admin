@@ -101,7 +101,7 @@ module Admin::OsunyHelper
   end
 
   def osuny_collection(list, except: nil, localized: false, label_method: :to_s)
-    collection = list.map do |object|
+    collection = list.ordered(current_language).map do |object|
       object_for_label = localized ? object.best_localization_for(current_language) : object
       label = label_method.respond_to?(:call) ? label_method.call(object_for_label)
                                               : object_for_label.public_send(label_method)

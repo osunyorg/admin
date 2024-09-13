@@ -45,7 +45,7 @@ class Research::Publication < ApplicationRecord
                           foreign_key: :research_publication_id,
                           association_foreign_key: :research_hal_author_id
 
-  scope :ordered, -> { order(publication_date: :desc)}
+  scope :ordered, -> (language = nil) { order(publication_date: :desc)}
 
   enum source: {
     osuny: 0,

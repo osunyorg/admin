@@ -31,5 +31,5 @@ class Communication::Extranet::Document::Category < ApplicationRecord
   alias_method :documents, :communication_extranet_documents
 
   # TODO
-  scope :ordered, -> (language) { }
+  scope :ordered, -> (language = nil) { }
 end

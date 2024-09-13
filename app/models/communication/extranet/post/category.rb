@@ -29,5 +29,5 @@ class Communication::Extranet::Post::Category < ApplicationRecord
   belongs_to :extranet, class_name: 'Communication::Extranet'
   has_many :posts
 
-  scope :ordered, -> (language) { order(:name) }
+  scope :ordered, -> (language = nil) { order(:name) }
 end

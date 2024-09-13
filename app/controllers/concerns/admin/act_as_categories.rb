@@ -21,7 +21,8 @@ module Admin::ActAsCategories
     return unless request.xhr?
     @categories_class = categories_class
     @category = categories.find(params[:id])
-    @children = @category.children.ordered
+    @children =  @category.children
+                          .ordered(current_language)
     render 'admin/application/categories/children'
   end
 
@@ -30,8 +31,8 @@ module Admin::ActAsCategories
   # Good for websites, but needs override for other objects
   def categories
     categories_class.where(communication_website_id: @website.id)
-                   .tmp_original
-                   .ordered
+                    .tmp_original
+                    .ordered(current_language)
   end
 
   # Communication::Website::Agenda::Category

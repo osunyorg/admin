@@ -35,7 +35,7 @@
       <%= osuny_panel Education::School.human_attribute_name('locations') do %>
         <ul class="list-unstyled">
           <% @school.locations.ordered.each do |location| %>
-            <li><%= osuny_link_localized location, [:admin, location] %></li>
+            <li><%= osuny_link_localized_if can?(:read, location), location, [:admin, location] %></li>
           <% end %>
         </ul>
       <% end %>

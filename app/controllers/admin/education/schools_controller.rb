@@ -12,7 +12,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   def index
     @schools = apply_scopes(@schools)
                   .tmp_original # TODO L10N : To remove
-                  .ordered
+                  .ordered(current_language)
                   .page(params[:page])
     breadcrumb
   end

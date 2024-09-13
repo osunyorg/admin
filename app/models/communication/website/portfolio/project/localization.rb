@@ -55,7 +55,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
 
   before_validation :set_communication_website_id, on: :create
 
-  scope :ordered, -> { order(year: :desc, title: :asc) }
+  scope :ordered, -> (language = nil) { order(year: :desc, title: :asc) }
   scope :published, -> { where(published: true) }
   scope :draft, -> { where(published: false) }
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }

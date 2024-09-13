@@ -75,7 +75,7 @@ class Research::Journal::Paper < ApplicationRecord
                           join_table: :research_journal_papers_researchers,
                           association_foreign_key: :researcher_id
 
-  scope :ordered, -> (language) { order(published_at: :desc) }
+  scope :ordered, -> (language = nil) { order(published_at: :desc) }
   scope :ordered_by_position, -> { order(:position) }
 
   def dependencies

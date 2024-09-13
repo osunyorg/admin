@@ -28,7 +28,7 @@ class University::App < ApplicationRecord
 
   before_validation :generate_token
 
-  scope :ordered, -> { order(:name) }
+  scope :ordered, -> (language = nil) { order(:name) }
 
   def display_token!
     return false if token_was_displayed?

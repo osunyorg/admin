@@ -44,7 +44,7 @@ class Education::Diploma < ApplicationRecord
 
   has_many :programs, dependent: :nullify
 
-  scope :ordered, -> { order(:level) }
+  scope :ordered, -> (language = nil) { order(:level) }
 
   enum level: {
     not_applicable: 0,
