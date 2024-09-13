@@ -3,23 +3,7 @@
 <p>&nbsp;</p><%# Filtres %>
 <%= render 'filters', current_path: admin_education_schools_path, filters: @filters if @filters.any?  %>
 
-<div class="row g-2">
-  <% @schools.each do |school| %>
-    <div>
-      <div class="card card--horizontal">
-        <%= osuny_thumbnail_localized school %>
-        <div class="card-body">
-          <%= osuny_link_localized school, [:admin, school], classes: 'stretched-link' %>
-        </div>
-        <div class="card-footer small text-muted">
-          <%= school.programs.count %>
-          <%= Education::Program.model_name.human(count: school.programs.count).downcase %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
-
+<%= render 'admin/education/schools/list', schools: @schools %>
 <%= paginate @schools %>
 
 <% content_for :action_bar_right do %>

@@ -1,7 +1,7 @@
 <div class="row g-2 mb-3">
   <% papers.each do |paper| %>
     <div>
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized paper %>
         <div class="card-body">
           <%= osuny_published_localized paper %>

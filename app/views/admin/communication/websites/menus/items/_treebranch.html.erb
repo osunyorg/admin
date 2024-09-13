@@ -4,7 +4,7 @@
               <%= 'treeview__element--empty' unless item.has_children? %>"
       data-id="<%= item.id %>"
       data-parent="<%= item.parent_id %>">
-    <div class="card card--horizontal treeview__label mb-2">
+    <div class="<%= osuny_card_classes(horizontal: true) %> treeview__label mb-2">
       <%= link_to children_admin_communication_website_menu_item_path(
                     website_id: item.website.id, 
                     menu_id: item.menu.id, 

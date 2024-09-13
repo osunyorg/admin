@@ -1,0 +1,16 @@
+<div class="row g-2 mb-3">
+  <% schools.each do |school| %>
+    <div>
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
+        <%= osuny_thumbnail_localized school %>
+        <div class="card-body">
+          <%= osuny_link_localized school, [:admin, school], classes: 'stretched-link' %>
+        </div>
+        <div class="card-footer small text-muted">
+          <%= school.programs.count %>
+          <%= Education::Program.model_name.human(count: school.programs.count).downcase %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

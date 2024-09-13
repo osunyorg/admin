@@ -10,7 +10,7 @@ l10n ||= f.object.localizations.build(language_id: current_language.id)
   <%= lf.hidden_field :id %>
   <%= lf.hidden_field :language_id, value: current_language.id %>
   <div class="nested-fields">
-    <div class="card mb-3">
+    <div class="<%= osuny_card_classes %> mb-3">
       <div class="card-body">
         <div class="row">
           <div class="col-md-5">

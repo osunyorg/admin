@@ -6,7 +6,7 @@
       >
   <% axes.each do |axis| %>
     <div data-id="<%= axis.id %>">
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized axis, classes: 'handle m-0' %>
         <div class="card-body">
           <%= osuny_link_localized  axis, 

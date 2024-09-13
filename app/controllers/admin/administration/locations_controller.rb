@@ -12,6 +12,14 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   end
 
   def show
+    @schools =   @location.schools
+                          .tmp_original # TODO L10N : To remove
+                          .ordered(current_language)
+    @programs =  @location.programs
+                          .tmp_original # TODO L10N : To remove
+                          .ordered(current_language)
+    @websites =  @location.websites
+                          .ordered(current_language)
     breadcrumb
   end
 
