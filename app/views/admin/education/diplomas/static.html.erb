@@ -18,7 +18,8 @@ language = @l10n.language
 programs:
 <%= render 'admin/education/programs/static_list',
             diploma: diploma,
-            programs: @programs %>
+            programs: @programs,
+            language: language %>
 <% end %>
 short_name: >-
   <%= prepare_text_for_static @l10n.short_name %>

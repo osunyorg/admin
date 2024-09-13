@@ -7,7 +7,7 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   
   def index
     @locations = @locations.tmp_original # TODO L10N : To remove
-                           .ordered
+                           .ordered(current_language)
     breadcrumb
   end
 

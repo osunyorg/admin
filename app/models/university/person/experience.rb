@@ -33,7 +33,7 @@ class University::Person::Experience < ApplicationRecord
   belongs_to :person
   belongs_to :organization, class_name: "University::Organization"
 
-  validates_presence_of :from_year
+  validates :from_year, presence: true
   validate :to_year, :not_before_from_year
 
   after_validation :deport_error_on_organization

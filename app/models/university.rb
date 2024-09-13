@@ -61,7 +61,7 @@ class University < ApplicationRecord
   has_many :imports, dependent: :destroy
   has_many :apps, dependent: :destroy
 
-  validates_presence_of :name
+  validates :name, presence: true
   validates :sms_sender_name, presence: true, length: { maximum: 11 }
   validates :logo, size: { less_than: 1.megabytes }
 

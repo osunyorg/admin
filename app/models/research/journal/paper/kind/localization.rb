@@ -31,7 +31,7 @@ class Research::Journal::Paper::Kind::Localization < ApplicationRecord
   include WithGitFiles
   include WithUniversity
 
-  validates_presence_of :title
+  validates :title, presence: true
 
   def git_path(website)
     "#{git_path_content_prefix(website)}paper_kinds/#{slug}.html"

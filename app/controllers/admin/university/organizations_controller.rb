@@ -33,7 +33,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     @term = params[:term].to_s
     @organizations = current_university.organizations
                                        .tmp_original # TODO L10N : To remove
-                                       .search_by_siren_or_name(@term)
+                                       .search_by_siren_or_name(@term, current_language)
                                        .ordered(current_language)
   end
 

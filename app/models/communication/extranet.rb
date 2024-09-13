@@ -46,6 +46,7 @@ class Communication::Extranet < ApplicationRecord
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Favoritable
   include Localizable
+  include LocalizableOrderByNameScope
   include WithAbouts
   include WithConnectedObjects
   include WithFeatures
@@ -54,6 +55,7 @@ class Communication::Extranet < ApplicationRecord
   include WithStyle
   include WithUniversity
 
+  has_many :languages, through: :localizations
   has_many :posts
   has_many :post_localizations, class_name: 'Communication::Extranet::Post::Localization'
   has_many :post_categories, class_name: 'Communication::Extranet::Post::Category'
@@ -62,19 +64,19 @@ class Communication::Extranet < ApplicationRecord
   has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
 
-  validates_presence_of :host
-  validates_presence_of :about_type, :about_id, if: :feature_alumni
+  validates :host, presence: true
+  validates :about_type, :about_id, presence: true, if: :feature_alumni
 
   before_validation :sanitize_fields
 
   has_one_attached_deletable :logo # TODO L10N : To remove
   has_one_attached_deletable :favicon # TODO L10N : To remove
 
-  scope :ordered, -> (language = nil) { order(:name) }
   scope :for_search_term, -> (term) {
-    where("
+    joins(:localizations)
+    .where("
       unaccent(communication_extranets.host) ILIKE unaccent(:term) OR
-      unaccent(communication_extranets.name) ILIKE unaccent(:term)
+      unaccent(communication_extranet_localizations.name) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
@@ -87,11 +89,6 @@ class Communication::Extranet < ApplicationRecord
     return false if about.nil? || about&.is_a?(Education::Program)
     # if a school has a single program, same thing
     about&.programs&.many?
-  end
-
-  # TODO choisir réellement les langues de l'extranet
-  def languages
-    university.languages
   end
 
   def alumni

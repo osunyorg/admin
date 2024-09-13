@@ -24,10 +24,10 @@
 class Communication::Extranet::Post::Category < ApplicationRecord
   include Contentful # TODO L10N : To remove
   include Localizable
+  include LocalizableOrderByNameScope
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   has_many :posts
 
-  scope :ordered, -> (language = nil) { order(:name) }
 end
