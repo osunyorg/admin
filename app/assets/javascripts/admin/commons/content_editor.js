@@ -14,6 +14,7 @@ window.osuny.contentEditor = {
         this.modeStructureContainer = this.container.querySelector('#mode-structure-container');
         this.offcanvasEditor = document.getElementById('offcanvasEditor');
         this.offcanvasEditorBootstrap = new bootstrap.Offcanvas(this.offcanvasEditor);
+        this.offcanvasIframe = document.getElementById('offcanvasEditorIframe');
         this.addListeners('[data-bs-toggle="tab"]', 'shown.bs.tab', this.tabChanged);
         this.initSortable();
         this.initButtons();
@@ -64,7 +65,7 @@ window.osuny.contentEditor = {
         };
         request.open("GET", blockPath);
         request.send();
-        this.offcanvasEditorBootstrap.hide()
+        this.offcanvasEditorBootstrap.hide();
     },
 
     tabChanged: function (event) {
