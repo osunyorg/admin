@@ -1,6 +1,5 @@
 class Communication::Website::Page::Organization < Communication::Website::Page
 
-  # TODO: Scope .where(language_id: language_id) when organizations are translatable
   def dependencies
     super +
     [website.config_default_languages] +

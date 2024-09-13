@@ -29,6 +29,8 @@ class Research::Thesis::Localization < ApplicationRecord
   include Sanitizable
   include WithUniversity
 
+  validates :title, presence: true
+
   def to_s
     "#{title}"
   end

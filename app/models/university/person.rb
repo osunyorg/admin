@@ -142,11 +142,7 @@ class University::Person < ApplicationRecord
 
   before_validation :sanitize_email
 
-   # TODO L10N : To adjust
   scope :ordered, -> (language) {
-    # Define a raw SQL snippet for the conditional aggregation
-    # This selects the name of the localization in the specified language,
-    # or falls back to the first localization name if the specified language is not present.
     localization_first_name_select = <<-SQL
       COALESCE(
         MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.first_name))) END),
@@ -160,8 +156,6 @@ class University::Person < ApplicationRecord
       ) AS localization_last_name
     SQL
 
-    # Join the people table with a subquery that ranks localizations
-    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
     joins(sanitize_sql_array([<<-SQL
       LEFT JOIN (
         SELECT

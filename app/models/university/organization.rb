@@ -49,9 +49,10 @@
 class University::Organization < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : To remove
+  include Localizable
+  include LocalizableOrderByNameScope
   include Sanitizable
   include Shareable # TODO L10N : To remove
-  include Localizable
   include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithGeolocation
@@ -77,34 +78,6 @@ class University::Organization < ApplicationRecord
   has_one_attached_deletable :logo_on_dark_background # TODO L10N : To remove
 
   alias :featured_image :logo # TODO L10N : To remove
-
-  scope :ordered, -> (language) {
-    # Define a raw SQL snippet for the conditional aggregation
-    # This selects the name of the localization in the specified language,
-    # or falls back to the first localization name if the specified language is not present.
-    localization_name_select = <<-SQL
-      COALESCE(
-        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.name))) END),
-        MAX(TRIM(LOWER(UNACCENT(localizations.name)))) FILTER (WHERE localizations.rank = 1)
-      ) AS localization_name
-    SQL
-
-    # Join the organizations table with a subquery that ranks localizations
-    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
-    joins(sanitize_sql_array([<<-SQL
-      LEFT JOIN (
-        SELECT
-          localizations.*,
-          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
-        FROM
-          university_organization_localizations as localizations
-      ) localizations ON university_organizations.id = localizations.about_id
-    SQL
-    ]))
-    .select("university_organizations.*", localization_name_select)
-    .group("university_organizations.id")
-    .order("localization_name ASC")
-  }
 
   scope :for_kind, -> (kind) { where(kind: kind) }
   scope :for_category, -> (category_id) { joins(:categories).where(university_organization_categories: { id: category_id }).distinct }

@@ -31,6 +31,7 @@
 #
 class Research::Thesis < ApplicationRecord
   include Localizable
+  include LocalizableOrderByTitleScope
   include Sanitizable
   include WithUniversity
 
@@ -43,7 +44,6 @@ class Research::Thesis < ApplicationRecord
 
   validates_presence_of :laboratory, :author, :director
 
-  scope :ordered, -> (language = nil) { }
   scope :for_search_term, -> (term) {
     where("
       unaccent(research_theses.abstract) ILIKE unaccent(:term) OR
