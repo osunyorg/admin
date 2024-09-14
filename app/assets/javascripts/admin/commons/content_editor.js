@@ -49,18 +49,14 @@ window.osuny.contentEditor = {
 
     onEditButtonClick: function (event) {
         'use strict';
-        var button = event.target,
-            url = button.href;
         event.preventDefault();
-        open(url, 'editor');
+        open(event.target.href, 'editor');
         this.offcanvasEditorBootstrap.show()
     },
 
     onAddBlockButtonClick: function (event) {
-        var button = event.target,
-            url = button.href;
         event.preventDefault();
-        open(url, 'editor');
+        open(event.target.href, 'editor');
         this.offcanvasEditorBootstrap.show()
     },
 
