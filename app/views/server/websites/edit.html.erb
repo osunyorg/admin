@@ -1,4 +1,4 @@
-<% content_for :title, @website %>
+<% content_for :title, @website.to_s_in(current_language) %>
 
 <%= simple_form_for @website, url: server_website_path(@website) do |f| %>
   <%= f.error_notification %>
