@@ -49,8 +49,9 @@
   </div>
 </div>
 
-<h2 class="mt-5 h3"><%= Communication::Website.model_name.human(count: @websites.count) %></h2>
+<h2 class="mt-5 h3"><%= Communication::Website.model_name.human(count: @websites.total_count) %></h2>
 <%= render 'server/websites/list', websites: @websites %>
+<%= paginate @websites %>
 
 <% content_for :action_bar_right do %>
   <%= link_to t('edit'), edit_server_university_path(@university), class: button_classes %>
