@@ -2,9 +2,6 @@ module Localizable
   extend ActiveSupport::Concern
 
   included do
-    # Depracted ?
-    attr_accessor :newly_translated
-
     has_many    :localizations,
                 foreign_key: :about_id,
                 inverse_of: :about,
@@ -23,21 +20,6 @@ module Localizable
     # /Deprecated
 
     accepts_nested_attributes_for :localizations
-
-    # TODO L10N : remove
-    # on cherche les objets pour cette langue (original ou pas) + les objets originaux dans une autre langue s'il n'en existe pas de traduction
-    # scope :in_closest_language_id, -> (language_id) {
-    #   # Records with correct language (Original or Translation)
-    #   # OR Records originals which does not have any translation matching the language
-    #   for_language_id(language_id).or(
-    #     where(original_id: nil)
-    #       .where.not(language_id: language_id)
-    #       .where(
-    #         "NOT EXISTS (SELECT 1 FROM #{table_name} AS translations WHERE translations.original_id = #{table_name}.id AND translations.language_id = ?)",
-    #         language_id
-    #       )
-    #   )
-    # }
 
     # TODO L10N : remove after data cleanup
     scope :tmp_original, -> { where(original_id: nil) }

@@ -44,13 +44,10 @@ class Research::Journal::Paper::Localization < ApplicationRecord
 
   alias :paper :about
 
-  delegate  :journal, :volume, :people, :doi, 
+  delegate  :journal, :volume, :people, :doi,
             to: :paper
 
   validates :title, presence: true
-
-  has_summernote :text
-  has_summernote :bibliography
 
   has_one_attached :pdf
 
