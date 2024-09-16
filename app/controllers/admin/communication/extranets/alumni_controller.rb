@@ -4,7 +4,9 @@ class Admin::Communication::Extranets::AlumniController < Admin::Communication::
     @alumni = @extranet.alumni
     @cohorts = @extranet.cohorts
     @years = @extranet.years
-    @organizations = @extranet.organizations.for_language_id(current_university.default_language_id)
+    @organizations = @extranet.organizations
+                              .tmp_original
+                              .ordered(current_language)
     breadcrumb
     add_breadcrumb Communication::Extranet.human_attribute_name(:feature_alumni)
   end

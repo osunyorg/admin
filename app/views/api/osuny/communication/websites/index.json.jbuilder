@@ -1,4 +1,3 @@
 json.array! @websites.each do |website|
-  json.name website.name
-  json.url website.url
+  json.extract! website, :id, :name, :url
 end

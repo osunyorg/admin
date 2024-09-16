@@ -1,7 +1,9 @@
-class Api::Osuny::Communication::WebsitesController < Api::Osuny::ApplicationController
-
+class Api::Osuny::Communication::WebsitesController < Api::Osuny::Communication::Websites::ApplicationController
   def index
-    @websites = current_university.communication_websites.in_production
+    @websites = websites.ordered
   end
 
+  def show
+    @website = websites.find params[:id]
+  end
 end

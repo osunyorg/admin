@@ -69,6 +69,7 @@ gem "rails-i18n"
 gem "rbnacl", "~> 7.1"
 gem "redis", "~> 5.1"
 gem "roo", "~> 2"
+gem "rswag", "~> 2"
 gem "sanitize"
 gem "sassc-rails"
 gem "skylight"
@@ -87,6 +88,7 @@ gem "unsplash"
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "figaro"
+  gem "rspec-rails"
   gem "vcr"
   gem "webmock"
 end

@@ -61,7 +61,6 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
     return [] unless category
     organizations = university.organizations
                               .tmp_original # TODO L10N : To remove
-                              .for_language(block.language)
                               .for_category(category.id)
                               .ordered(block.language)
 

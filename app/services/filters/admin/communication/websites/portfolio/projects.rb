@@ -4,7 +4,7 @@ module Filters
       super(user)
       add_search
       add :for_category,
-          website.projects_categories.for_language(language),
+          website.projects_categories.tmp_original,
           I18n.t(
             'filters.attributes.element',
             element: Communication::Website::Portfolio::Category.model_name.human.downcase

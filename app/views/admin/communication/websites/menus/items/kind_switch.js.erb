@@ -23,7 +23,7 @@ function hideAbout() {
 <% elsif @kind == 'diploma' %>
     <%
     options = ['<option value="" label=" "></option>']
-    osuny_collection_tree(@collection, localized: false).each do |object|
+    osuny_collection(@collection, localized: true).each do |object|
         options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
@@ -32,7 +32,7 @@ function hideAbout() {
 <% elsif @kind == 'program' %>
     <%
     options = ['<option value="" label=" "></option>']
-    osuny_collection_tree(@collection, localized: false).each do |object|
+    osuny_collection_tree(@collection, localized: true).each do |object|
         options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
@@ -56,7 +56,7 @@ function hideAbout() {
 <% elsif @kind == 'volume' %>
     <%
     options = ['<option value="" label=" "></option>']
-    osuny_collection(@collection, localized: false).each do |object|
+    osuny_collection(@collection, localized: true).each do |object|
         options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
@@ -64,7 +64,7 @@ function hideAbout() {
 <% elsif @kind == 'paper' %>
     <%
     options = ['<option value="" label=" "></option>']
-    osuny_collection(@collection, localized: false).each do |object|
+    osuny_collection(@collection, localized: true).each do |object|
         options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
@@ -72,7 +72,7 @@ function hideAbout() {
 <% elsif @kind == 'location' %>
     <%
     options = ['<option value="" label=" "></option>']
-    osuny_collection(@collection, localized: false).each do |object|
+    osuny_collection(@collection, localized: true).each do |object|
         options << "<option value=\"#{object.last}\">#{object.first}</option>"
     end
     %>
