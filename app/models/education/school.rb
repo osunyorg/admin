@@ -75,6 +75,7 @@ class Education::School < ApplicationRecord
   }
 
   def dependencies
+    localizations +
     programs +
     # As diplomas are here through programs, and diploma being a program's dependency, it this necessary?
     diplomas +
