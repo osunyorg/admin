@@ -38,7 +38,7 @@ languages = current_university.languages.ordered
 </nav>
 
 <div class="collapse popin-menu" id="menu-main">
-  <% if current_university.is_really_a_university %>
+  <% if current_university.is_really_a_university? %>
     <div class="menu-content">
       <div class="row">
         <%= render_navigation context: 'navigation/admin_university' %>
