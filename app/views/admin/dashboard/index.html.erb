@@ -10,7 +10,7 @@
 
 <%= render 'admin/application/favorites/show' %>
 
-<% if current_university.is_really_a_university %>
+<% if current_university.is_really_a_university? %>
   <%= render 'admin/dashboard/really_a_university' %>
 <% else %>
   <%= render 'admin/dashboard/not_a_university' %>

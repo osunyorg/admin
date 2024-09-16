@@ -1,19 +1,20 @@
 namespace :api do
   get 'lheo' => 'lheo#index', defaults: { format: :xml }
-  get 'osuny' => 'osuny#index', defaults: { format: :json }
-  namespace :osuny, defaults: { format: :json } do 
-    get 'communication' => 'communication#index'
+  # v0
+  get 'osuny' => '/api/osuny#redirect_to_v1' # redirect to v1
+  post 'osuny/websites/theme-released' => '/api/osuny/server/websites#theme_released'
+  # v1
+  namespace :osuny, path: 'osuny/v1', defaults: { format: :json } do 
     namespace :communication do
-      get 'websites' => 'websites#index'
-      namespace :websites do
-        post ':website_id/events/import' => 'events#import'
-        post ':website_id/posts/import' => 'posts#import'
-        post ':website_id/pages/import' => 'pages#import'
+      resources :websites, only: [:index, :show] do
+        resources :events, controller: 'websites/events', only: [:index, :show, :create, :update]
+        resources :pages, controller: 'websites/pages', only: [:index, :show, :create, :update]
+        resources :posts, controller: 'websites/posts', only: [:index, :show, :create, :update]
+        resources :projects, controller: 'websites/projects', only: [:index, :show, :create, :update]
       end
+      root to: '/api/osuny/communication#index'#, controller: '/api/osuny/communication'
     end
-    namespace :server do
-      post 'websites/theme-released' => 'websites#theme_released'
-    end
+    root to: '/api/osuny#index'
   end
   root to: 'dashboard#index'
 end
