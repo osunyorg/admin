@@ -7,7 +7,7 @@ class Admin::Education::Programs::PartsController < Admin::Education::Programs::
   end
 
   def pedagogy
-    @teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name
+    @teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name(current_language)
     breadcrumb
     add_breadcrumb t('education.program.parts.pedagogy.label')
   end
