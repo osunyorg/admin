@@ -30,6 +30,23 @@
       </div>
       <div class="col-xxl-3 col-lg-4">
         <%= render 'admin/application/a11y/widget', about: @block %>
+        <div>
+          <a  class="text-muted small"
+              data-bs-toggle="collapse" 
+              href="#htmlClass" 
+              role="button" 
+              aria-expanded="false" 
+              aria-controls="htmlClass">
+            <i class="bi bi-gear-fill"></i>
+            <%= t('admin.advanced_settings') %>
+          </a>
+          <div class="collapse mt-3" id="htmlClass">
+            <%= f.input :html_class %>
+            <% if @block.html_class.present? %>
+              <pre><%= @block.html_class_prepared %></pre>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
     <textarea name="communication_block[data]" rows="20" cols="200" class="d-none">

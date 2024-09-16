@@ -1,7 +1,7 @@
 <p class="mb-0">
   <% if block.template.mode == 'categories' %>
-    <%= @website.post_categories.ordered.first(2).collect(&:to_s).join(', ') %>...
+    <%= @website.post_categories.ordered.collect(&:to_s).join(', ') %>
   <% else %>
-    <%= block.template.selected_posts.first(2).collect(&:to_s).join(', ') %>...
+    <%= block.template.selected_posts.collect(&:to_s).join(', ') %>
   <% end %>
 </p>

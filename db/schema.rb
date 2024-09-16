@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -151,6 +151,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
     t.uuid "heading_id"
     t.uuid "communication_website_id"
     t.string "migration_identifier"
+    t.string "html_class"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
     t.index ["heading_id"], name: "index_communication_blocks_on_heading_id"
@@ -520,6 +521,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_160162) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_facet", default: false
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_8f309901d4"
     t.index ["language_id"], name: "idx_on_language_id_6e6ffc92a8"
     t.index ["original_id"], name: "idx_on_original_id_4cbc9f1290"

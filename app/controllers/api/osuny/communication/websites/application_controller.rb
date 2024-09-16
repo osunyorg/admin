@@ -2,8 +2,11 @@ class Api::Osuny::Communication::Websites::ApplicationController < Api::Osuny::A
 
   protected
 
-  def website
-    @website ||= current_university.websites.find params[:website_id]
+  def websites
+    @websites ||= current_university.websites
   end
 
+  def website
+    @website ||= websites.find params[:website_id]
+  end
 end

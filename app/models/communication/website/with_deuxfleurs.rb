@@ -90,9 +90,9 @@ module Communication::Website::WithDeuxfleurs
     "#{university.identifier}-#{to_s.parameterize}"
   end
 
-  # noesya/agit-cartographie
+  # osunyorg/agit-cartographie
   def deuxfleurs_default_github_repository
-    "osunyorg/#{deuxfleurs_default_github_repository_name}"
+    "#{ENV['GITHUB_WEBSITE_OWNER']}/#{deuxfleurs_default_github_repository_name}"
   end
 
   def deuxfleurs_default_badge_url

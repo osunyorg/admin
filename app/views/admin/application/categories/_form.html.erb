@@ -1,0 +1,24 @@
+<% if categories.any? %>
+  <%= osuny_panel t('admin.categories.title') do %>
+    <div class="row">
+      <% categories.taxonomies.each do |taxonomy| %>
+        <div class="col-lg-6 col-xxl-4">
+          <%= osuny_label taxonomy %>
+          <%= f.association :categories,
+                            label_text: false,
+                            as: :check_boxes,
+                            collection: taxonomy.descendants %>
+        </div>
+      <% end %>
+      <% if categories.root.free.any? %>
+        <div class="col-lg-6 col-xxl-4">
+          <%= osuny_label t('admin.categories.other') %>
+          <%= f.association :categories,
+                            label_text: false,
+                            as: :check_boxes,
+                            collection: collection_tree_for_checkboxes(categories.free) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
