@@ -1,7 +1,5 @@
 class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communication::Websites::ApplicationController
-  skip_before_action :verify_authenticity_token, only: :import
-  before_action :verify_app_token, only: :import
-
+  # TODO create
   def import
     Importers::Api::Osuny::Communication::Website::Page.new university: current_university,
                                                             website: website,
