@@ -112,6 +112,8 @@ fr:
   admin:
     education:
       programs:
+        categories:
+          root_name: Offre de formation
         publication: Publication
         teacher:
           no_teaching: Aucun enseignement
