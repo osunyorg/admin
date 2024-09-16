@@ -6,9 +6,9 @@
 
   <div class="row">
     <div class="col-md-6">
-      <%= f.association :university, 
+      <%= f.association :university,
                         include_blank: false,
-                        collection: University.ordered %>
+                        collection: University.all.ordered %>
     </div>
   </div>
 

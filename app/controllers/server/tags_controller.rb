@@ -7,6 +7,7 @@ class Server::TagsController < Server::ApplicationController
   end
 
   def show
+    @websites = @tag.websites.ordered(current_language)
     breadcrumb
     add_breadcrumb @tag
   end
