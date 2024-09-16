@@ -46,4 +46,4 @@ get 'privacy-policy' => 'pages#privacy_policy', as: :privacy_policy
 get 'cookies-policy' => 'pages#cookies_policy', as: :cookies_policy
 get 'data' => 'pages#data', as: :data
 
-root to: 'home#index'
+get '' => 'home#index', as: :extranet_root

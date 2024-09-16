@@ -38,7 +38,6 @@ class Education::School < ApplicationRecord
   include WebsitesLinkable
   include WithBlobs # TODO L10N : To remove
   include WithCountry
-  include WithGitFiles
   include WithLocations
   include WithPrograms # must come before WithAlumni and WithTeam
   include WithAlumni

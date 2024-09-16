@@ -22,10 +22,4 @@ module ApplicationController::WithLocale
   def current_language
     @current_language ||= current_university.best_language_for(params[:lang])
   end
-
-  def default_url_options
-    options = {}
-    options[:lang] = current_language
-    options
-  end
 end
