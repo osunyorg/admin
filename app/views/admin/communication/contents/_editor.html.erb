@@ -8,7 +8,7 @@ mode_expert = about.headings.many?
   <% if mode_expert %>
     <div class="row">
       <div class="offset-lg-4 col-lg-8 col-xxl-6">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs justify-content-end">
           <li class="nav-item small">
             <a  class="nav-link active" 
                 id="mode-write-tab"
@@ -45,16 +45,7 @@ mode_expert = about.headings.many?
           role="tabpanel" 
           aria-labelledby="mode-write-tab"
           tabindex="0">
-      <% if mode_expert %>
-        <div class="row">
-          <div class="offset-lg-4 col-lg-8 col-xxl-6">
-            <p class="text-muted small mt-2 mb-5">
-              <%= t('admin.communication.contents.modes.write.description') %>
-            </p>
-          </div>
-        </div>
-      <% end %>
-      <div id="mode-write-container">
+      <div id="mode-write-container" class="mt-3">
         <%= render 'admin/communication/contents/write', about: about %>
       </div>
     </div>
