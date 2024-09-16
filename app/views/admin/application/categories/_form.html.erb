@@ -3,11 +3,14 @@
     <div class="row">
       <% categories.taxonomies.each do |taxonomy| %>
         <div class="col-lg-6 col-xxl-4">
-          <%= osuny_label taxonomy %>
+          <%= osuny_label taxonomy.to_s_in(current_language) %>
           <%= f.association :categories,
                             label_text: false,
                             as: :check_boxes,
-                            collection: taxonomy.descendants %>
+                            collection: osuny_collection(
+                              taxonomy.descendants,
+                              localized: true
+                            ) %>
         </div>
       <% end %>
       <% if categories.root.free.any? %>
@@ -16,7 +19,10 @@
           <%= f.association :categories,
                             label_text: false,
                             as: :check_boxes,
-                            collection: collection_tree_for_checkboxes(categories.free) %>
+                            collection: osuny_collection_tree(
+                              categories.root.free,
+                              localized: true
+                            ) %>
         </div>
       <% end %>
     </div>

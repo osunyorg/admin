@@ -31,32 +31,39 @@ fr:
         school: École
         year: Année
       education/diploma:
-        duration: Durée
         ects: Crédits ECTS
         level: Niveau
-        name: Nom
         programs: Formations
+      education/diploma/localization:
+        duration: Durée
+        name: Nom
         short_name: Nom abrégé
         slug: Identifiant
       education/program:
-        accessibility: Accessibilité
         apprenticeship: Apprentissage
         bodyclass: Classe CSS spécifique
         capacity: Capacité
-        contacts: Contacts
-        content: Contenus de la formation
         continuing: Formation continue
         diploma: Diplôme
+        ects: Crédits ECTS
+        initial: Formation initiale
+        locations: Campus
+        qualiopi_certified: Formation certifiée Qualiopi
+        roles: Rôles
+        schools: Écoles proposant cette formation
+        teachers: Enseignant·e·s
+        team: Équipe
+      education/program/localization:
+        accessibility: Accessibilité
+        contacts: Contacts
+        content: Contenus de la formation
         duration: Durée
         downloadable_summary: Document de synthèse téléchargeable
-        ects: Crédits ECTS
         evaluation: Modalités d’évaluation
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
-        initial: Formation initiale
         is_published: Publiée
         is_draft: Brouillon
-        locations: Campus
         logo: Logo de la formation
         main_information: Informations essentielles
         name: Nom
@@ -71,17 +78,12 @@ fr:
         pricing_continuing: Coûts de la formation continue
         pricing_apprenticeship: Coûts de l'apprentissage
         published: Publiée ?
-        qualiopi_certified: Formation certifiée Qualiopi
         qualiopi_text: Détails de la certification
         registration: Modalités et délais d’accès
         registration_url: Lien d'inscription (URL)
         results: Indicateurs de résultats
-        roles: Rôles
-        schools: Écoles proposant cette formation
         short_name: Nom abrégé
         slug: Identifiant
-        teachers: Enseignant·e·s
-        team: Équipe
         url: Site Web
       education/school:
         address: Adresse
@@ -89,21 +91,28 @@ fr:
         city: Ville
         country: Pays
         locations: Campus
-        name: Nom
         phone: Téléphone
         programs: Formations dispensées
         roles: Membres de l'équipe
-        url: Site Web
         websites: Sites Web associés
         zipcode: Code postal
+      education/school/localization:
+        name: Nom
+        url: Site Web
   admin:
     education:
       programs:
-        view_as_list: Vue en liste
-        view_as_tree: Vue en arbre
         publication: Publication
+        teacher:
+          no_teaching: Aucun enseignement
+          show_person_html: Cette page montre uniquement les missions d'enseignement. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien ci-dessous.
         tree:
           title: Arborescence des formations
+        view_as_list: Vue en liste
+        view_as_tree: Vue en arbre
+      schools:
+        roles:
+          none: Aucun rôle défini
   education:
     description:
       text: L’éducation est l’ensemble des processus et des procédés qui permettent à tout enfant humain d’accéder progressivement à la culture, l’accès à la culture étant ce qui distingue l’homme de l’animal.

@@ -47,6 +47,7 @@ class University < ApplicationRecord
   include WithEducation
   include WithIdentifier
   include WithInvoice
+  include WithLanguages
   include WithPeopleAndOrganizations
   include WithResearch
   include WithSso
@@ -59,22 +60,19 @@ class University < ApplicationRecord
   has_many :active_storage_blobs, class_name: 'ActiveStorage::Blob'
   has_many :imports, dependent: :destroy
   has_many :apps, dependent: :destroy
-  belongs_to :default_language, class_name: "Language"
-  has_and_belongs_to_many :languages
 
-  validates_presence_of :name
+  validates :name, presence: true
   validates :sms_sender_name, presence: true, length: { maximum: 11 }
   validates :logo, size: { less_than: 1.megabytes }
 
   before_validation :sanitize_fields
   after_destroy :destroy_remaining_blobs
 
-  scope :ordered, -> { order(:name) }
+  scope :ordered, -> (language = nil) { order(:name) }
   scope :for_search_term, -> (term) { where("unaccent(universities.name) ILIKE unaccent(:term)", term: "%#{sanitize_sql_like(term)}%") }
   scope :for_real_university, -> (status) { where(is_really_a_university: status) }
   scope :for_contribution, -> (status) { status == 'true' ? contributing : not_contributing }
   scope :for_university_kind, -> (status) { where(private: status == 'private') }
-  scope :for_language, -> (language) { joins(:languages).where(languages: { id: language } ) }
 
   def self.parts
     [
@@ -116,4 +114,5 @@ class University < ApplicationRecord
   def destroy_remaining_blobs
     active_storage_blobs.delete_all
   end
+
 end

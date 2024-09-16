@@ -22,7 +22,8 @@
 #  fk_rails_2a55cf899a  (university_id => universities.id)
 #
 class Communication::Extranet::Document::Kind < ApplicationRecord
-  include Sluggable
+  include Localizable
+  include LocalizableOrderByNameScope
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
@@ -30,20 +31,4 @@ class Communication::Extranet::Document::Kind < ApplicationRecord
   has_many :communication_extranet_documents, class_name: "Communication::Extranet::Document"
   alias_method :documents, :communication_extranet_documents
 
-  validates :name, presence: true
-
-  scope :ordered, -> { order(:name) }
-
-  def to_s
-    "#{name}"
-  end
-
-  protected
-
-  def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(extranet_id: self.extranet_id, slug: slug)
-              .where.not(id: self.id)
-              .exists?
-  end
 end

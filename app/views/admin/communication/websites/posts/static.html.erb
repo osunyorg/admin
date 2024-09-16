@@ -1,27 +1,33 @@
----
-<%= render 'admin/application/static/title' %>
-date: "<%= @about.published_at&.iso8601 %>"
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: false, toc_offcanvas: false %>
-<% if @about.pinned %>
+<%
+post = @l10n.about
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
+date: "<%= @l10n.published_at&.iso8601 %>"
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            about: post,
+            l10n: @l10n,
+            full_width: false,
+            toc_offcanvas: false %>
+<% if @l10n.pinned %>
 weight: 1
 <% end %>
-<% if @about.author %>
+<% if @l10n.author %>
 authors:
-  - "<%= @about.translated_author.slug %>"
+  - "<%= @l10n.author.slug %>"
 <% end %>
-<% if @about.categories.any? %>
+<% if @l10n.categories.any? %>
 posts_categories:
-<% @about.categories.ordered.each do |category| %>
-  - "<%= category.slug_with_ancestors_slugs %>"
+<% @l10n.categories.each do |category| %>
+  - "<%= category.slug_with_ancestors_slugs(separator: '-') %>"
 <% end %>
 <% end %>
-<%= render 'admin/application/i18n/static' %>
-<%= render 'admin/application/featured_image/static' %>
-<%= render 'admin/application/shared_image/static' %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/summary/static' %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
+<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/shared_image/static', about: @l10n %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---
-<%= prepare_html_for_static @about.text %>

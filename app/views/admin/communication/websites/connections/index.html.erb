@@ -15,7 +15,7 @@
       <tbody>
         <% @connections.pluck(:indirect_object_type).uniq.each do |type| %>
           <tr>
-            <td><%= link_to type, indirect_object_admin_communication_website_connections_path(type, lang: nil) %></td>
+            <td><%= link_to type, indirect_object_admin_communication_website_connections_path(type) %></td>
             <td><%= @connections.where(indirect_object_type: type).pluck(:indirect_object_id).uniq.count %></td>
             <td><%= @connections.where(indirect_object_type: type).count %></td>
           </tr>
@@ -36,7 +36,7 @@
       <tbody>
         <% @connections.pluck(:direct_source_type).uniq.each do |type| %>
           <tr>
-            <td><%= link_to type, direct_source_admin_communication_website_connections_path(type, lang: nil) if type %></td>
+            <td><%= link_to type, direct_source_admin_communication_website_connections_path(type) if type %></td>
             <td><%= @connections.where(direct_source_type: type).pluck(:direct_source_id).uniq.count %></td>
             <td><%= @connections.where(direct_source_type: type).count %></td>
           </tr>

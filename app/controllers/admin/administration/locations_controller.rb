@@ -2,18 +2,17 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   load_and_authorize_resource class: Administration::Location,
                               through: :current_university
 
+  include Admin::Localizable
+  include Admin::HasStaticAction
+  
   def index
+    @locations = @locations.tmp_original # TODO L10N : To remove
+                           .ordered(current_language)
     breadcrumb
   end
 
   def show
     breadcrumb
-  end
-
-  def static
-    @about = @location
-    @website = @location.websites&.first
-    render_as_plain_text
   end
 
   def new
@@ -26,11 +25,10 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   end
 
   def create
-    @location.university = current_university
-    @location.language_id = current_university.default_language_id
+    @location.language_id = current_language.id
     if @location.save
       redirect_to [:admin, @location],
-                  notice: t('admin.successfully_created_html', model: @location.to_s)
+                  notice: t('admin.successfully_created_html', model: @location.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -40,7 +38,7 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   def update
     if @location.update(location_params)
       redirect_to [:admin, @location],
-                  notice: t('admin.successfully_updated_html', model: @location.to_s)
+                  notice: t('admin.successfully_updated_html', model: @location.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -51,7 +49,7 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   def destroy
     @location.destroy
     redirect_to admin_education_locations_url,
-                notice: t('admin.successfully_destroyed_html', model: @location.to_s)
+                notice: t('admin.successfully_destroyed_html', model: @location.to_s_in(current_language))
   end
 
   private
@@ -65,10 +63,16 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   def location_params
     params.require(:administration_location)
           .permit(
-            :name, :address, :address_additional, :address_name, :zipcode, :city, :country, 
-            :url, :phone, :summary, :slug, 
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-            school_ids: [], program_ids: []
+            :address, :zipcode, :city, :country, :phone, 
+            school_ids: [], program_ids: [],
+            localizations_attributes: [
+              :id, :language_id,
+              :name, :address_additional, :address_name, :url, :summary, :slug, 
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+            ]
+          )
+          .merge(
+            university_id: current_university.id
           )
   end
 end

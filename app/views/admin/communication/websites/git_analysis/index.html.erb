@@ -43,7 +43,7 @@
 
 <% content_for :action_bar_right do %>
   <%= link_to t('admin.communication.website.git_file.analysis.title'), 
-              git_analysis_admin_communication_website_path(lang: nil, website_id: nil), 
+              git_analysis_admin_communication_website_path(website_id: nil), 
               class: button_classes, 
               method: :post %>
 <% end %>

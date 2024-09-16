@@ -9,7 +9,7 @@
 #  title            :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  language_id      :uuid             not null, indexed
+#  language_id      :uuid             indexed
 #  university_id    :uuid             not null, indexed
 #
 # Indexes
@@ -25,12 +25,13 @@
 class Research::Journal < ApplicationRecord
   include AsIndirectObject
   include Favoritable
+  include Localizable
+  include LocalizableOrderByTitleScope
   include Sanitizable
   include WebsitesLinkable
-  include WithGitFiles
   include WithUniversity
 
-  belongs_to :language
+  belongs_to :language, optional: true # TODO L10N : To remove
   has_many  :communication_websites,
             class_name: 'Communication::Website',
             as: :about,
@@ -38,30 +39,15 @@ class Research::Journal < ApplicationRecord
   has_many  :volumes,
             foreign_key: :research_journal_id,
             dependent: :destroy
-  has_many  :published_volumes,
-            -> { published },
-            class_name: 'Research::Journal::Volume',
-            foreign_key: :research_journal_id,
-            dependent: :destroy
   has_many  :papers,
-            foreign_key: :research_journal_id,
-            dependent: :destroy
-  has_many  :published_papers,
-            -> { published },
-            class_name: 'Research::Journal::Paper',
             foreign_key: :research_journal_id,
             dependent: :destroy
   has_many  :people,
             -> { distinct },
             through: :papers
-  has_many  :people_through_published_papers,
-            -> { distinct },
-            through: :published_papers,
-            source: :people
   has_many  :kinds,
             class_name: 'Research::Journal::Paper::Kind'
 
-  scope :ordered, -> { order(:title) }
   scope :for_search_term, -> (term) {
     where("
       unaccent(research_journals.meta_description) ILIKE unaccent(:term) OR
@@ -70,26 +56,16 @@ class Research::Journal < ApplicationRecord
       unaccent(research_journals.title) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_language, -> (language) { for_language_id(language.id) }
-  # The for_language_id scope can be used when you have the ID without needing to load the Language itself
-  scope :for_language_id, -> (language_id) { where(language_id: language_id) }
-
-  def to_s
-    "#{title}"
-  end
 
   def researchers
-    university.people.where(id: people_through_published_papers.pluck(:id), is_researcher: true)
-  end
-
-  def git_path(website)
-    "data/journal.yml"
+    university.people.where(id: people.pluck(:id), is_researcher: true)
   end
 
   def dependencies
+    localizations +
     volumes +
     papers +
-    researchers.map(&:researcher)
+    researchers.map(&:researcher_facets)
   end
 
   #####################
@@ -114,16 +90,16 @@ class Research::Journal < ApplicationRecord
   def has_education_diplomas?
     false
   end
-  
+
   def has_administration_locations?
     false
   end
 
   def has_research_papers?
-    published_papers.published.any?
+    papers.any?
   end
 
   def has_research_volumes?
-    published_volumes.published.any?
+    volumes.any?
   end
 end

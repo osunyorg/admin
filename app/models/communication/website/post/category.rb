@@ -42,19 +42,22 @@
 #
 class Communication::Website::Post::Category < ApplicationRecord
   include AsDirectObject
-  include Contentful
-  include Initials
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Sluggable # We override slug_unavailable? method
-  include Translatable
-  include Pathable # Included after Sluggable to make sure slug is correct before anything
-  include WithBlobs
-  include WithFeaturedImage
+  include Localizable
+  include Pathable # Included after Sluggable to make sure slug is correct before anything # TODO L10N : To remove
+  include WithBlobs # TODO L10N : To remove
+  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithPosition
   include WithTree
   include WithUniversity
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+              class_name: "Communication::Website::Permalink",
+              as: :about,
+              dependent: :destroy
 
   belongs_to              :parent,
                           class_name: 'Communication::Website::Post::Category',
@@ -72,32 +75,22 @@ class Communication::Website::Post::Category < ApplicationRecord
                           foreign_key: :communication_website_category_id,
                           association_foreign_key: :communication_website_post_id
 
-  validates :name, presence: true
-
-  def to_s
-    "#{name}"
-  end
-
-  def git_path(website)
-    "#{git_path_content_prefix(website)}posts_categories/#{slug_with_ancestors_slugs}/_index.html"
-  end
-
-  def template_static
-    "admin/communication/websites/posts/categories/static"
+  def post_localizations
+    Communication::Website::Post::Localization.where(about_id: post_ids)
   end
 
   def dependencies
-    active_storage_blobs +
-    contents_dependencies +
+    localizations.in_languages(website.active_language_ids) +
     children +
     [website.config_default_content_security_policy]
   end
 
   def references
     posts +
+    post_localizations +
     [parent] +
     siblings +
-    website.menus +
+    website.menus.in_languages(website.active_language_ids) +
     abouts_with_post_block
   end
 
@@ -105,33 +98,14 @@ class Communication::Website::Post::Category < ApplicationRecord
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
-  def slug_with_ancestors_slugs
-    (ancestors.map(&:slug) << slug).join('-')
-  end
-
-  def best_featured_image_source(fallback: true)
-    return self if featured_image.attached?
-    best_source = parent&.best_featured_image_source(fallback: false)
-    best_source ||= self if fallback
-    best_source
+  def exportable_to_git?
+    false
   end
 
   protected
 
   def last_ordered_element
-    website.post_categories.where(parent_id: parent_id, language_id: language_id).ordered.last
-  end
-
-  def slug_unavailable?(slug)
-    self.class.unscoped.where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug).where.not(id: self.id).exists?
-  end
-
-  def explicit_blob_ids
-    super.concat [best_featured_image&.blob_id]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
+    website.post_categories.where(parent_id: parent_id).ordered.last
   end
 
   # Same as the Post object

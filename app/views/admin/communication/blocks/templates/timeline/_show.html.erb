@@ -1,50 +1,5 @@
-<% heading_level = block.heading_rank_children %>
-
 <div class="<%= block_html_class(block) %>">
   <div class="container">
-    <% if block.template.layout == "vertical" %>
-      <div class="block-content">
-        <%= render 'admin/communication/blocks/partials/top', block: block %>
-
-        <div class="timeline-events">
-          <% block.template.elements.each do |element| %>
-            <article class="timeline-event">
-              <h<%= heading_level %> class="title">
-                <%= block_component_show block, :title, template: element %>
-              </h<%= heading_level %>>
-              <%# TODO: gérer les sauts de ligne %>
-              <p><%= element.text %></p>
-            </article>
-          <% end %>
-        </div>
-      </div>
-    <% else %>
-      <div class="timeline draggable-container">
-        <% unless block.title.blank? %>
-          <%= render 'admin/communication/blocks/partials/top', block: block %>
-        <% end %>
-        <div class="timeline-events draggable-content">
-          <ol>
-            <% block.template.elements.each do |element| %>
-              <li class="timeline-event draggable-item">
-                <h<%= heading_level %> class="title">
-                  <%= block_component_show block, :title, template: element %>
-                </h<%= heading_level %>>
-                <div class="line"></div>
-                <div class="description text">
-                  <%= block_component_show block, :text, template: element %>
-                </div>
-              </li>
-            <% end %>
-          </ol>
-          <% if !block.template.elements.one? %>
-            <div class="actions-arrows">
-              <button class="previous" disabled></button>
-              <button class="next"></button>
-            </div>
-          <% end %>
-        </div>
-      </div>
-      <% end %>
+    <%= render 'admin/communication/blocks/partials/layout', block: block, file: __FILE__ %>
   </div>
 </div>

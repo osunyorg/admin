@@ -1,31 +1,38 @@
----
-<%= render 'admin/application/static/title' %>
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
-<%= render 'admin/application/i18n/static' %>
-<%= render 'admin/application/featured_image/static' %>
+<%
+location = @l10n.about
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            about: location,
+            l10n: @l10n,
+            full_width: true,
+            toc_offcanvas: true %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
+<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
 contact_details:
-<%= render 'admin/application/static/contact_detail', variable: :address_name, data: @about.address_name, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @about.address_additional, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: @about.zipcode, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :city, data: @about.city, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :country, data: @about.country, kind: ContactDetails::Country %>
-<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :website, data: @about.url, kind: ContactDetails::Website %>
-<%= render 'admin/application/static/contact_detail', variable: :phone, data: @about.phone, kind: ContactDetails::Phone %>
+<%= render 'admin/application/static/contact_detail', variable: :address, data: location.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :address_name, data: @l10n.address_name, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @l10n.address_additional, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: location.zipcode, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :city, data: location.city, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :country, data: location.country, kind: ContactDetails::Country %>
+<%= render 'admin/application/static/contact_detail', variable: :website, data: @l10n.url, kind: ContactDetails::Website %>
+<%= render 'admin/application/static/contact_detail', variable: :phone, data: location.phone, kind: ContactDetails::Phone %>
   geolocation:
-    latitude: <%= @about.latitude %>
-    longitude: <%= @about.longitude %>
+    latitude: <%= location.latitude %>
+    longitude: <%= location.longitude %>
 programs:
-<% @about.programs.each do |program| %>
+<% location.programs.each do |program| %>
   - <%= program.path %>
 <% end %>
 diplomas:
 <%
-@about.diplomas.each do |diploma|
-  programs = @about.education_programs.where(diploma: diploma).root.ordered
+location.diplomas.each do |diploma|
+  programs = location.education_programs.where(diploma: diploma).root.ordered
   next if programs.empty?
 %>
   - name: >-
@@ -35,9 +42,9 @@ diplomas:
 <%= render 'admin/education/programs/static_list',
             diploma: diploma,
             programs: programs,
-            all_programs: @about.programs,
+            all_programs: location.programs,
+            language: language,
             depth: 4 %>
 <% end %>
-<%= render 'admin/application/summary/static' %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---

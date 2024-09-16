@@ -42,7 +42,7 @@
 #  zipcode                       :string
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
-#  language_id                   :uuid             not null, indexed
+#  language_id                   :uuid             indexed
 #  original_id                   :uuid             indexed
 #  university_id                 :uuid             not null, indexed
 #  user_id                       :uuid             indexed
@@ -64,19 +64,15 @@
 #
 class University::Person < ApplicationRecord
   include AsIndirectObject
-  include Backlinkable
-  include Contentful
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Sluggable
-  include Translatable
+  include Localizable
   include WithBlobs
   include WithCountry
   # WithRoles included before WithEducation because needed for the latter
   include WithRoles
   include WithEducation
   include WithExperiences
-  include WithGitFiles
   include WithPersonalData
   include WithPicture
   include WithResearch
@@ -92,9 +88,13 @@ class University::Person < ApplicationRecord
 
   enum gender: { male: 0, female: 1, non_binary: 2 }
 
-  has_summernote :biography
-
   belongs_to :user, optional: true
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Person::Category',
@@ -131,26 +131,53 @@ class University::Person < ApplicationRecord
 
   accepts_nested_attributes_for :involvements
 
-  validates_presence_of   :first_name, :last_name
-  validates_uniqueness_of :email,
-                          scope: [:university_id, :language_id],
-                          allow_blank: true,
-                          if: :will_save_change_to_email?
-  validates_format_of     :email,
-                          with: Devise::email_regexp,
-                          allow_blank: true,
-                          if: :will_save_change_to_email?
+  validates :email, 
+            uniqueness: { scope: [:university_id, :language_id] },
+            allow_blank: true,
+            if: :will_save_change_to_email?
+  validates :email,
+            format: { with: Devise::email_regexp },
+            allow_blank: true,
+            if: :will_save_change_to_email?
 
-  before_validation :sanitize_email, :prepare_name
+  before_validation :sanitize_email
 
-  scope :ordered,           -> { order(:last_name, :first_name) }
+  scope :ordered, -> (language) {
+    localization_first_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.first_name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.first_name)))) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_first_name
+    SQL
+    localization_last_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.last_name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.last_name)))) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_last_name
+    SQL
+
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          university_person_localizations as localizations
+      ) localizations ON university_people.id = localizations.about_id
+    SQL
+    ]))
+    .select("university_people.*", localization_first_name_select, localization_last_name_select)
+    .group("university_people.id")
+    .order("localization_last_name ASC, localization_first_name ASC")
+  }
+
   scope :administration,    -> { where(is_administration: true) }
   scope :teachers,          -> { where(is_teacher: true) }
   scope :researchers,       -> { where(is_researcher: true) }
   scope :alumni,            -> { where(is_alumnus: true) }
   scope :with_habilitation, -> { where(habilitation: true) }
   scope :for_role, -> (role) { where("is_#{role}": true) }
-  scope :for_category, -> (category_id) { includes(:categories).where(categories: { id: category_id })}
+  scope :for_category, -> (category_id) { joins(:categories).where(university_person_categories: { id: category_id }).distinct }
   scope :for_program, -> (program_id) {
     left_joins(:education_programs_as_administrator, :education_programs_as_teacher)
       .where(education_programs: { id: program_id })
@@ -161,64 +188,46 @@ class University::Person < ApplicationRecord
       .select("university_people.*")
       .distinct
   }
+
+   # TODO L10N : To adjust
   scope :for_search_term, -> (term) {
-    where("
-      unaccent(concat(university_people.first_name, ' ', university_people.last_name)) ILIKE unaccent(:term) OR
-      unaccent(concat(university_people.last_name, ' ', university_people.first_name)) ILIKE unaccent(:term) OR
-      unaccent(university_people.first_name) ILIKE unaccent(:term) OR
-      unaccent(university_people.last_name) ILIKE unaccent(:term) OR
-      unaccent(university_people.email) ILIKE unaccent(:term) OR
-      unaccent(university_people.phone_mobile) ILIKE unaccent(:term) OR
-      unaccent(university_people.phone_personal) ILIKE unaccent(:term) OR
-      unaccent(university_people.phone_professional) ILIKE unaccent(:term) OR
-      unaccent(university_people.biography) ILIKE unaccent(:term) OR
-      unaccent(university_people.meta_description) ILIKE unaccent(:term) OR
-      unaccent(university_people.summary) ILIKE unaccent(:term) OR
-      unaccent(university_people.twitter) ILIKE unaccent(:term) OR
-      unaccent(university_people.linkedin) ILIKE unaccent(:term) OR
-      unaccent(university_people.address) ILIKE unaccent(:term) OR
-      unaccent(university_people.zipcode) ILIKE unaccent(:term) OR
-      unaccent(university_people.city) ILIKE unaccent(:term) OR
-      unaccent(university_people.url) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+    joins(:localizations)
+      # TODO L10N : To add after filters rework @pabois
+      .where("
+        unaccent(concat(university_person_localizations.first_name, ' ', university_person_localizations.last_name)) ILIKE unaccent(:term) OR
+        unaccent(concat(university_person_localizations.last_name, ' ', university_person_localizations.first_name)) ILIKE unaccent(:term) OR
+        unaccent(university_person_localizations.first_name) ILIKE unaccent(:term) OR
+        unaccent(university_person_localizations.last_name) ILIKE unaccent(:term) OR
+        unaccent(university_people.email) ILIKE unaccent(:term) OR
+        unaccent(university_people.phone_mobile) ILIKE unaccent(:term) OR
+        unaccent(university_people.phone_personal) ILIKE unaccent(:term) OR
+        unaccent(university_people.phone_professional) ILIKE unaccent(:term) OR
+        unaccent(university_person_localizations.biography) ILIKE unaccent(:term) OR
+        unaccent(university_person_localizations.meta_description) ILIKE unaccent(:term) OR
+        unaccent(university_person_localizations.summary) ILIKE unaccent(:term) OR
+        unaccent(university_person_localizations.twitter) ILIKE unaccent(:term) OR
+        unaccent(university_person_localizations.linkedin) ILIKE unaccent(:term) OR
+        unaccent(university_person_localizations.mastodon) ILIKE unaccent(:term) OR
+        unaccent(university_people.address) ILIKE unaccent(:term) OR
+        unaccent(university_people.zipcode) ILIKE unaccent(:term) OR
+        unaccent(university_people.city) ILIKE unaccent(:term) OR
+        unaccent(university_person_localizations.url) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
-
-  def to_s
-    "#{first_name} #{last_name}"
-  end
-
-  def to_s_with_mail
-    email.present? ? "#{to_s} (#{email})" : to_s
-  end
-
-  def to_s_alphabetical
-    "#{last_name} #{first_name}"
-  end
-
-  def initials
-    "#{first_name.to_s.first}#{last_name.to_s.first}"
-  end
 
   def roles
     LIST_OF_ROLES.reject do |role|
-      ! send "is_#{role}"
+      !public_send("is_#{role}")
     end
   end
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}persons/#{slug}.html" if for_website?(website)
-  end
-
   def dependencies
-    contents_dependencies +
+    localizations +
     categories +
     active_storage_blobs
   end
 
-  def references
-    [administrator, author, researcher, teacher]
-  end
-
+  # TODO L10N : To remove
   def person
     @person ||= University::Person.find(id)
   end
@@ -238,17 +247,43 @@ class University::Person < ApplicationRecord
   def teacher
     @teacher ||= University::Person::Teacher.find(id)
   end
+  # TODO L10N : /To remove
+
+  def administrator_facets
+    @administrator_facets ||= University::Person::Localization::Administrator.where(id: localization_ids)
+  end
+
+  def author_facets
+    @author_facets ||= University::Person::Localization::Author.where(id: localization_ids)
+  end
+
+  def researcher_facets
+    @researcher_facets ||= University::Person::Localization::Researcher.where(id: localization_ids)
+  end
+
+  def teacher_facets
+    @teacher_facets ||= University::Person::Localization::Teacher.where(id: localization_ids)
+  end
 
   def full_street_address
     return nil if [address, zipcode, city].all?(&:blank?)
     [address, "#{zipcode} #{city} #{country}".strip].join(', ')
   end
 
-  protected
-
-  def backlinks_blocks(website)
-    website.blocks.persons
+  def to_s_with_mail_in(language)
+    best_localization_for(language).to_s_with_mail
   end
+
+  def to_s_alphabetical_in(language)
+    best_localization_for(language).to_s_alphabetical
+  end
+
+  # TODO L10N : to remove
+  def translate_other_attachments(translation)
+    translate_attachment(translation, :picture) if picture.attached?
+  end
+
+  protected
 
   def explicit_blob_ids
     [picture&.blob_id]
@@ -262,15 +297,4 @@ class University::Person < ApplicationRecord
     self.email = self.email.to_s.downcase.strip
   end
 
-  def prepare_name
-    self.name = to_s
-  end
-
-  def translate_additional_data!(translation)
-    translate_attachment(translation, :picture) if picture.attached?
-    categories.each do |category|
-      translated_category = category.find_or_translate!(translation.language)
-      translation.categories << translated_category
-    end
-  end
 end

@@ -1,7 +1,11 @@
-<% content_for :title, "#{Communication::Website.model_name.human(count: 2)} (#{@websites.total_count})" %>
+<% content_for :title, Communication::Website.model_name.human(count: 2) %>
 
+<p>
+  <%= @websites.total_count %>
+  <%= Communication::Website.model_name.human(count: @websites.total_count).downcase %>
+</p>
 <%= render 'filters', current_path: admin_communication_websites_path, filters: @filters if @filters.any?  %>
-<div class="pt-5">
+<div>
   <%= render 'admin/communication/websites/list', websites: @websites %>
   <%= paginate @websites %>
 </div>

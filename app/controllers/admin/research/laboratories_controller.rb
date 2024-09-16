@@ -5,8 +5,11 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
 
   has_scope :for_search_term
 
+  include Admin::HasStaticAction
+  include Admin::Localizable
+
   def index
-    @laboratories = apply_scopes(@laboratories).ordered.page(params[:page])
+    @laboratories = apply_scopes(@laboratories).ordered(current_language).page(params[:page])
     breadcrumb
   end
 
@@ -31,7 +34,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
 
   def create
     if @laboratory.save
-      redirect_to [:admin, @laboratory], notice: t('admin.successfully_created_html', model: @laboratory.to_s)
+      redirect_to [:admin, @laboratory], notice: t('admin.successfully_created_html', model: @laboratory.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -40,7 +43,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
 
   def update
     if @laboratory.update(laboratory_params)
-      redirect_to [:admin, @laboratory], notice: t('admin.successfully_updated_html', model: @laboratory.to_s)
+      redirect_to [:admin, @laboratory], notice: t('admin.successfully_updated_html', model: @laboratory.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -50,7 +53,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
 
   def destroy
     @laboratory.destroy
-    redirect_to admin_research_laboratories_url, notice: t('admin.successfully_destroyed_html', model: @laboratory.to_s)
+    redirect_to admin_research_laboratories_url, notice: t('admin.successfully_destroyed_html', model: @laboratory.to_s_in(current_language))
   end
 
   protected
@@ -63,7 +66,15 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
 
   def laboratory_params
     params.require(:research_laboratory)
-          .permit(:name, :address, :address_name, :address_additional, :zipcode, :city, :country)
-          .merge(university_id: current_university.id)
+          .permit(
+            :address, :zipcode, :city, :country,
+            localizations_attributes: [
+              :id, :language_id,
+              :name, :address_name, :address_additional
+            ]
+          )
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

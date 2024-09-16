@@ -1,59 +1,65 @@
 <%= simple_form_for [:admin, post] do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="row">
-    <div class="col-md-8">
-      <%= osuny_panel t('content') do %>
-        <%= f.input :title, input_html: { data: { translatable: true } } %>
-        <%= render 'admin/application/summary/form', f: f, about: post %>
-        <%= f.input :text, as: :summernote if strip_tags(post.text).present? %>
-      <% end %>
-      <div class="row pure__row--small">
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
+    <div class="row">
+      <div class="col-md-8">
+        <%= osuny_panel t('content') do %>
+          <%= lf.input :title, input_html: { data: { translatable: true } } %>
+          <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+          <%= lf.input :text, as: :summernote if strip_tags(post.text).present? %>
+        <% end %>
         <% if @categories.any? %>
-          <div class="col-md-6">
-            <%= osuny_panel t('activerecord.attributes.communication/website/post.categories') do %>
-              <%= f.association :categories,
-                                label_text: false,
-                                as: :check_boxes,
-                                collection: collection_tree_for_checkboxes(@categories) %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <%= render 'admin/application/meta_description/form', f: f, about: post %>
-    </div>
-    <div class="col-md-4">
-      <%= osuny_panel t('metadata') do %>
-        <% if can? :publish, post %>
           <div class="row pure__row--small">
-            <div class="col-6">
-              <%= f.input :published %>
-            </div>
-            <div class="col-6">
-              <%= f.input :pinned %>
+            <div class="col-md-6">
+              <%= osuny_panel t('activerecord.attributes.communication/website/post.categories') do %>
+                <%= f.association :categories,
+                                  label_text: false,
+                                  as: :check_boxes,
+                                  collection: osuny_collection_tree(@categories, localized: true) %>
+              <% end %>
             </div>
           </div>
-          <%= f.input :published_at, html5: true, as: :date %>
         <% end %>
-        <%= f.association :author,
-                            collection: current_university.people.for_language(current_website_language).ordered,
-                            label_method: :to_s_alphabetical %>
-        <%= render  "admin/application/slug/form",
-                    f: f,
-                    source: '#communication_website_post_title' %>
-      <% end %>
-      <%= render 'admin/application/featured_image/edit', about: @post, f: f %>
-      <%= render 'admin/application/shared_image/edit', about: @post, f: f %>
+        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+      </div>
+      <div class="col-md-4">
+        <%= osuny_panel t('metadata') do %>
+          <%# TODO L10N : change this ability %>
+          <% if can? :publish, post %>
+            <div class="row pure__row--small">
+              <div class="col-6">
+                <%= lf.input :published %>
+              </div>
+              <div class="col-6">
+                <%= lf.input :pinned %>
+              </div>
+            </div>
+            <%= lf.input :published_at, html5: true, as: :date %>
+          <% end %>
+          <%= f.association :author,
+                            collection: current_university.people
+                                                          .tmp_original # TODO L10N: remove
+                                                          .ordered(current_language),
+                            label_method: -> (person) { person.to_s_alphabetical_in(current_language) } %>
+          <%= render  "admin/application/slug/form",
+                      f: lf,
+                      source: '#communication_website_post_localizations_attributes_0_title' %>
+        <% end %>
+        <%= render 'admin/application/featured_image/edit', f: lf, about: @l10n %>
+        <%= render 'admin/application/shared_image/edit', f: lf, about: @l10n %>
+      </div>
     </div>
-  </div>
 
+    <% content_for :action_bar_left do %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: @l10n %>
+    <% end %>
 
-  <% content_for :action_bar_left do %>
-    <%= render 'admin/application/i18n/translate_button', about: @post %>
-  <% end %>
-
-  <% content_for :action_bar_right do %>
-    <%= submit f %>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
   <% end %>
 <% end %>

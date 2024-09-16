@@ -1,31 +1,16 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= Education::Diploma.human_attribute_name('name') %></th>
-        <th><%= Education::Diploma.human_attribute_name('short_name') %></th>
-        <th><%= Education::Diploma.human_attribute_name('ects') %></th>
-        <th><%= Education::Diploma.human_attribute_name('level') %></th>
-        <th><%= Education::Diploma.human_attribute_name('programs') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% diplomas.ordered.each do |diploma| %>
-        <tr>
-          <td><%= link_to diploma, [:admin, diploma] %></td>
-          <td><%= diploma.short_name %></td>
-          <td><%= diploma.ects %></td>
-          <td><%= diploma.level_i18n %></td>
-          <td><%= diploma.programs.count %></td>
-          <td class="text-end">
-            <div class="btn-group" role="group">
-              <%= edit_link diploma %>
-              <%= destroy_link diploma %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2">
+  <% diplomas.ordered.each do |diploma| %>
+    <div>
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail_localized diploma %>
+        <div class="card-body">
+          <%= osuny_published_localized diploma %>
+          <%= osuny_link_localized diploma, [:admin, diploma], classes: 'stretched-link' %>
+        </div>
+        <div class="card-footer text-end text-muted">
+          <%= diploma.level_i18n %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

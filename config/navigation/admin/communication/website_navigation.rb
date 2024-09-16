@@ -27,7 +27,10 @@ SimpleNavigation::Configuration.run do |navigation|
                   } if @website.feature_agenda
     primary.item  :subnav_portfolio,
                   Communication::Website::Portfolio.model_name.human(count: 2),
-                  admin_communication_website_portfolio_projects_path(website_id: @website.id) if @website.feature_portfolio
+                  admin_communication_website_portfolio_projects_path(website_id: @website.id),
+                  highlights_on: lambda { 
+                    admin_communication_website_portfolio_root_path(website_id: @website.id).in?(request.path) 
+                  } if @website.feature_portfolio
     primary.item  :subnav_pages,
                   t('admin.communication.website.subnav.structure'),
                   admin_communication_website_pages_path(website_id: @website.id) if can?(:read, Communication::Website::Page)

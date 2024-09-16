@@ -80,8 +80,32 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   after_commit :sync_menu
 
+  delegate :language, to: :menu
+
   def self.icon_for(kind)
     ICONS[kind] if ICONS.has_key? kind
+  end
+
+  def self.collection_for(kind, website)
+    # TODO L10N : remove every tmp_orginal below
+    case kind
+    when 'page'
+      website.pages.tmp_original
+    when 'diploma'
+      website.education_diplomas.tmp_original
+    when 'program'
+      website.education_programs.tmp_original
+    when 'category'
+      website.post_categories.tmp_original
+    when 'post'
+      website.posts.tmp_original
+    when 'volume'
+      website.research_volumes.tmp_original
+    when 'paper'
+      website.research_papers.tmp_original
+    when 'location'
+      website.administration_locations.tmp_original
+    end
   end
 
   def to_s
@@ -98,7 +122,13 @@ class Communication::Website::Menu::Item < ApplicationRecord
     when "url"
       url
     else
-      about.new_permalink_in_website(website).computed_path
+      about_l10n = about.localization_for(language)
+      if about_l10n.present?
+        about_l10n_permalink = about_l10n.new_permalink_in_website(website)
+        about_l10n_permalink.computed_path
+      else
+        nil
+      end
     end
   end
 

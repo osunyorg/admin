@@ -26,11 +26,11 @@ class Language < ApplicationRecord
                           join_table: :communication_websites_languages,
                           association_foreign_key: :communication_website_id
 
-  validates_presence_of :iso_code
-  validates_uniqueness_of :iso_code
+  validates :iso_code, presence: true
+  validates :iso_code, uniqueness: true
 
   scope :available_for_interface, -> { where(iso_code: I18n.available_locales) }
-  scope :ordered, -> { order(name: :asc) }
+  scope :ordered, -> (language = nil) { order(name: :asc) }
 
   def supported_by_libretranslate?
     AVAILABLE_IN_LIBRETRANSLATE.include?(iso_code)
@@ -38,5 +38,9 @@ class Language < ApplicationRecord
 
   def to_s
     "#{name}"
+  end
+
+  def to_param
+    iso_code
   end
 end

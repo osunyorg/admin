@@ -22,8 +22,8 @@ class Communication::Website::Page::Person < Communication::Website::Page
     University::Person.where(id: ids)
   end
 
-  def self.direct_connection_permitted_about_type
-    "University::Person"
+  def self.direct_connection_permitted_about_class
+    University::Person
   end
 
   def git_path_relative

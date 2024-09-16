@@ -10,7 +10,7 @@ class Admin::Education::Programs::TeachersController < Admin::Education::Program
   before_action :get_available_people, except: [:index, :reorder, :destroy]
 
   def index
-    @involvements = @involvements.ordered_by_name
+    @involvements = @involvements.ordered_by_name(current_language)
     breadcrumb
   end
 

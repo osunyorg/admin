@@ -22,34 +22,26 @@ module Education::School::WithTeam
     has_many    :university_people_through_program_role_involvements,
                 through: :programs,
                 source: :university_people_through_role_involvements
-
-    has_many    :university_people_through_published_program_involvements,
-                through: :published_programs,
-                source: :university_people_through_involvements
-
-    has_many    :university_people_through_published_program_role_involvements,
-                through: :published_programs,
-                source: :university_people_through_role_involvements
   end
 
   def researchers
     people_ids = (
-      university_people_through_published_program_involvements +
+      university_people_through_program_involvements +
       university_people_through_role_involvements +
-      university_people_through_published_program_role_involvements
+      university_people_through_program_role_involvements
     ).pluck(:id)
     university.people.where(id: people_ids, is_researcher: true)
   end
 
   def teachers
-    people_ids = university_people_through_published_program_involvements.pluck(:id)
+    people_ids = university_people_through_program_involvements.pluck(:id)
     university.people.where(id: people_ids, is_teacher: true)
   end
 
   def administrators
     people_ids = (
       university_people_through_role_involvements +
-      university_people_through_published_program_role_involvements
+      university_people_through_program_role_involvements
     ).pluck(:id)
     university.people.where(id: people_ids, is_administration: true)
   end

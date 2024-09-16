@@ -1,19 +1,22 @@
-<% content_for :title, @category %>
+<% content_for :title, @l10n %>
 
 <div class="row">
   <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @category %>
-    <%= render 'admin/application/i18n/widget', about: @category %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
+    <%= render 'admin/application/l10n/widget', about: @category, l10n: @l10n %>
   </div>
   <div class="col-lg-4">
-    <%= render 'admin/application/featured_image/show', about: @category %>
-    <%= render 'admin/application/meta_description/show', about: @category %>
+    <%= render 'admin/application/featured_image/show', about: @l10n %>
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
-<%= render 'admin/communication/blocks/content/editor', about: @category %>
+<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
 <% if @events.total_count > 0 %>
-  <%= osuny_panel Communication::Website::Agenda::Event.model_name.human(count: 2),
-                  subtitle: "#{@events.total_count} #{Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase }" do %>
+  <%
+  title = Communication::Website::Agenda::Event.model_name.human(count: 2)
+  subtitle = "#{@events.total_count} #{Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase }"
+  %>
+  <%= osuny_panel title, subtitle: subtitle do %>
     <%= render 'admin/communication/websites/agenda/events/list', events: @events, hide_category: true %>
     <%= paginate @events %>
   <% end %>

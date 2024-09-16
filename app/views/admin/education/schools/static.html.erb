@@ -1,12 +1,20 @@
----
-<% administrator_involvements = @about.involvements_through_roles.includes(:person).ordered_by_name %>
-name: "<%= prepare_text_for_static @about.name %>"
+<%
+school = @l10n.about
+language = @l10n.language
+administrator_involvements = school.involvements_through_roles.includes(:person).ordered_by_name(language)
+%>---
+name: "<%= prepare_text_for_static @l10n.name %>"
 address: >-
-  <%= prepare_text_for_static @about.address %>
-zipcode: "<%= prepare_text_for_static @about.zipcode %>"
-city: "<%= prepare_text_for_static @about.city %>"
-country: "<%= prepare_text_for_static @about.country_common_name %>"
-phone: "<%= prepare_text_for_static @about.phone %>"
+  <%= prepare_text_for_static school.address %>
+zipcode: "<%= prepare_text_for_static school.zipcode %>"
+city: "<%= prepare_text_for_static school.city %>"
+country: "<%= prepare_text_for_static school.country_common_name %>"
+phone: "<%= prepare_text_for_static school.phone %>"
+url: "<%= prepare_text_for_static @l10n.url %>"
+<% if @l10n.logo.attached? %>
+logo:
+  id: "<%= @l10n.logo.blob.id %>"
+<% end %>
 <% if administrator_involvements.any? %>
 administrators:
 <% administrator_involvements.each do |involvement| %>
@@ -18,7 +26,7 @@ administrators_description:
     <%= involvement.target.to_s %>
 <% end %>
 roles:
-<% @about.university_roles.ordered.each do |role| %>
+<% school.university_roles.ordered.each do |role| %>
   - title: >-
       <%= prepare_text_for_static role.to_s %>
     persons:

@@ -9,7 +9,7 @@ class Communication::Website::Permalink::Agenda::Event < Communication::Website:
 
   # /agenda/2022-10-21-un-article/
   def self.pattern_in_website(website, language)
-    "/#{slug_with_ancestors(website, language)}/:year-:month-:day-:slug/"
+    special_page_path(website, language) + '/:year-:month-:day-:slug/'
   end
 
   def self.special_page_type

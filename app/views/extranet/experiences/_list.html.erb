@@ -5,7 +5,38 @@ edit ||= false
   <ul class="list-unstyled">
     <% if person&.experiences&.any? %>
       <% @person.experiences.ordered.each do |experience| %>
-        <%= render 'extranet/experiences/experience', experience: experience, edit: edit %>
+        <%
+        l10n = experience.best_localization_for(current_language)
+        %>
+        <li class="experiences__experience py-4 border-top">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="mb-0">
+                <b><%= l10n&.description %></b><br>
+                <%= "#{experience.from_year} —" if experience.from_year %>
+                <%= experience.to_year || t('today') %>
+              </p>
+              <%= link_to University::Person::Experience.human_attribute_name('edit'),
+                          edit_experience_path(experience),
+                          class: 'btn btn-sm btn-primary mt-2' if edit %>
+            </div>
+            <div class="col-md-6 text-end">
+              <% if experience.organization.present? %>
+                <% if experience.organization.logo.attached? %>
+                  <%= link_to organization_path(experience.organization) do %>
+                    <%= kamifusen_tag experience.organization.logo, width: 100, class: 'img-fluid experience__organization__logo' %>
+                  <% end %>
+                <% else %>
+                  <p class="text-end">
+                    <%= link_to experience.organization.to_s_in(current_language), 
+                                organization_path(experience.organization) %>
+                  </p>
+                <% end %>
+              <div>
+            <% end %>
+          </div>
+        </li>
+
       <% end %>
     <% end %>
   </ul>

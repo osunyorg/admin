@@ -15,7 +15,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             indexed
 #  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
 #  program_id               :uuid             indexed
@@ -41,19 +41,21 @@
 #
 class Communication::Website::Agenda::Category < ApplicationRecord
   include AsDirectObject
-  include Contentful
-  include Initials
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
+  include Localizable
   include Sanitizable
-  include Translatable
-  include Sluggable # We override slug_unavailable? method
-  include Pathable # Included after Sluggable to make sure slug is correct before anything
-  include WithBlobs
-  include WithFeaturedImage
+  include WithBlobs # TODO L10N : To remove
+  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithPosition
   include WithTree
   include WithUniversity
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   belongs_to              :parent,
                           class_name: 'Communication::Website::Agenda::Category',
@@ -71,30 +73,21 @@ class Communication::Website::Agenda::Category < ApplicationRecord
                           foreign_key: :communication_website_agenda_category_id,
                           association_foreign_key: :communication_website_agenda_event_id
 
-  validates :name, presence: true
-
-  def to_s
-    "#{name}"
+  def event_localizations
+    Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)
   end
-
-  def git_path(website)
-    "#{git_path_content_prefix(website)}events_categories/#{slug}/_index.html"
-  end
-
-  def template_static
-    "admin/communication/websites/agenda/categories/static"
-  end
-
+  
   def dependencies
-    active_storage_blobs +
-    contents_dependencies +
+    localizations.in_languages(website.active_language_ids) +
+    children +
     [website.config_default_content_security_policy]
   end
 
   def references
-    references = events + website.menus
-    references << parent if parent.present?
-    references
+    events +
+    event_localizations +
+    website.menus.in_languages(website.active_language_ids) +
+    [parent]
   end
 
   def siblings
@@ -104,11 +97,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   protected
 
   def last_ordered_element
-    website.agenda_categories.where(parent_id: parent_id, language_id: language_id).ordered.last
-  end
-
-  def slug_unavailable?(slug)
-    self.class.unscoped.where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug).where.not(id: self.id).exists?
+    website.agenda_categories.where(parent_id: parent_id).ordered.last
   end
 
 end

@@ -20,7 +20,6 @@ class Admin::Education::AcademicYearsController < Admin::Education::ApplicationC
   end
 
   def create
-    @academic_year.university = current_university
     if @academic_year.save
       redirect_to [:admin, @academic_year],
                   notice: t('admin.successfully_created_html', model: @academic_year.to_s)
@@ -56,5 +55,8 @@ class Admin::Education::AcademicYearsController < Admin::Education::ApplicationC
   def academic_year_params
     params.require(:education_academic_year)
           .permit(:year)
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

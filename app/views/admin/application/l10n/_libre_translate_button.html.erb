@@ -1,0 +1,23 @@
+<% if l10n.libre_translatable? %>
+  <span id="translation-button"
+        data-translation-url="<%= admin_translate_path target: l10n.language.iso_code %>">
+    <a class="btn btn-light btn-xs js-translation-start">
+      <%= t('admin.translation.button') %>
+    </a>
+    <span class="spinner-border spinner-border-sm js-translation-loader"
+          role="status"
+          hidden>
+      <span class="sr-only">
+        <%= t('admin.translation.running') %>
+      </span>
+    </span>
+    <span class="js-translation-done small"
+          hidden>
+      <%= t('admin.translation.done') %>
+    </span>
+  </span>
+<% else %>
+  <a class="btn btn-light btn-xs disabled" disabled>
+    <%= t('admin.translation.unavailable_button') %>
+  </a>
+<% end %>

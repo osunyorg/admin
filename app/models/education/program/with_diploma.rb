@@ -2,9 +2,9 @@ module Education::Program::WithDiploma
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :diploma,
-      class_name: 'Education::Diploma',
-      optional: true
+    belongs_to  :diploma,
+                class_name: 'Education::Diploma',
+                optional: true
   end
 
   # Used by website

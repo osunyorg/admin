@@ -416,7 +416,6 @@ en:
               option_logo:
                 label: Logo
               options: Display options
-              remove_organization: Remove organization
             layouts:
               grid:
                 description: Square logos and a simple text below.
@@ -491,10 +490,8 @@ en:
                 label: Alphabetical order
               category_id:
                 label: Category
-              delete_title: Remove person
               description:
                 label: Description
-              drag_title: Drag and drop to organize persons
               element:
                 person:
                   label: Person

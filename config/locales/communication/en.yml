@@ -25,45 +25,51 @@ en:
         about_Research::Laboratory: Laboratory extranet
         about_type: About
         color: Couleur
-        cookies_policy: Cookies policy
-        favicon: Favicon
         feature_alumni: Alumni
         feature_contacts: Directory
+        feature_documents: Documents
         feature_jobs: Job board
-        feature_library: Documents
         feature_posts: News
         has_sso: Has SSO?
-        home_sentence: Sentence displayed on homepage
         host: Domain
-        logo: Logo
-        name: Name
-        privacy_policy: Privacy policy
-        registration_contact: Contact mail for registrations problems
-        sass: Custom style
-        sso_button_label: Sign in button's label
+        sass: Custom style (SASS)
         sso_cert: Certificate
         sso_inherit_from_university: SSO inherited from University
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
+      communication/extranet/localization:
+        cookies_policy: Cookies policy
+        favicon: Browser icon (favicon)
+        home_sentence: Sentence displayed on homepage
+        logo: Logo
+        name: Name
+        privacy_policy: Privacy policy
+        registration_contact: Contact mail for registrations problems
+        sso_button_label: Sign in button's label
         terms: Terms of service
       communication/extranet/connection:
         connected: Connected
       communication/extranet/document:
         category: Category
         kind: Type
+      communication/extranet/document/localization:
+        file: Downloadable file
         name: Name
         published: Published?
         published_at: Publication date
       communication/extranet/document/category:
-        name: Name
         quantity: Quantity of documents
+      communication/extranet/document/category/localization:
+        name: Name
       communication/extranet/document/kind:
-        name: Name
         quantity: Quantity of documents
+      communication/extranet/document/kind/localization:
+        name: Name
       communication/extranet/post:
         author: Author
         category: Category
+      communication/extranet/post/localization:
         featured_image: Featured image
         featured_image_alt: Alt text
         featured_image_credit: Credit
@@ -73,8 +79,9 @@ en:
         slug: Slug
         title: Title
       communication/extranet/post/category:
-        name: Name
         quantity: Quantity of posts
+      communication/extranet/post/category/localization:
+        name: Name
       communication/website:
         about: About
         about_: Independent website
@@ -106,11 +113,47 @@ en:
         in_showcase: List website in showcase
         languages: Languages
         locked_at: Locked for background jobs at
-        name: Name
         plausible_url: Plausible dashboard URL
         repository: Repository
         showcase_tags: Tags
         social: Social media
+        university: University
+        url: URL
+      communication/website/agenda/category:
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        name: Name
+        parent: Parent category
+        slug: Slug
+      communication/website/agenda/event:
+        categories: Categories
+        dates: Dates
+        from_day: From day
+        from_hour: From hour
+        status: Status
+        status_archive: Archive
+        status_current: Running now
+        status_future: In the future
+        time_zone: Time zone
+        to_day: To day
+        to_hour: To hour
+      communication/website/agenda/event/localization:
+        featured_image: Featured image
+        published: Published
+        subtitle: Subtitle
+        title: Title
+      communication/website/connection:
+        direct_source: Direct source
+        direct_source_id: Direct source identifier
+        direct_source_type: Direct source type
+        id: Identifier
+        indirect_object: Indirect object
+        indirect_object_id: Indirect object identifier
+        indirect_object_type: Indirect object type
+        updated_at: Updated at
+      communication/website/localization:
+        name: Name
+        published: Language published
         social_email: "Email"
         social_facebook: "Facebook (private, belongs to Meta)"
         social_github: "Github (private, belongs to Microsoft)"
@@ -122,38 +165,6 @@ en:
         social_vimeo: "Vimeo (private)"
         social_x: "X, ex-Twitter (private)"
         social_youtube: "Youtube (private, belongs to Google)"
-        university: University
-        url: URL
-      communication/website/agenda/category:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        slug: Slug
-      communication/website/agenda/event:
-        categories: Categories
-        dates: Dates
-        featured_image: Featured image
-        from_day: From day
-        from_hour: From hour
-        published: Published
-        status: Status
-        status_archive: Archive
-        status_current: Running now
-        status_future: In the future
-        subtitle: Subtitle
-        time_zone: Time zone
-        title: Title
-        to_day: To day
-        to_hour: To hour
-      communication/website/connection:
-        direct_source: Direct source
-        direct_source_id: Direct source identifier
-        direct_source_type: Direct source type
-        id: Identifier
-        indirect_object: Indirect object
-        indirect_object_id: Indirect object identifier
-        indirect_object_type: Indirect object type
-        updated_at: Updated at
       communication/website/menu:
         automatic: Automatic
         identifier: Identifier
@@ -168,40 +179,52 @@ en:
         url: URL
       communication/website/page:
         bodyclass: Specific CSS class
-        breadcrumb_title: Title in breadcrumbs
         children: Children pages
+        full_width: Full width
+        parent: Parent page
+        related_category: Related category
+        special_page: Special page
+        website: Website
+      communication/website/page/localization:
+        breadcrumb_title: Title in breadcrumbs
         featured_image: Featured image
         featured_image_alt: Alt text
-        full_width: Full width
         header_cta: Display call to action into header
         header_cta_label: Call to action label
         header_cta_url: Call to cation target
         header_text: Title displayed in header
-        parent: Parent page
         path: Path
         published: Published?
-        related_category: Related category
         slug: Slug
-        special_page: Special page
         text: Main page text
         title: Title
-        website: Website
       communication/website/permalink:
         path: Path
-      communication/website/portfolio/category:
+      communication/website/portfolio/category/localization:
         featured_image: Featured image
         featured_image_alt: Alt text
         name: Name
         slug: Slug
       communication/website/portfolio/project:
         categories: Categories
+        year: Year
+      communication/website/portfolio/project/localization:
         featured_image: Featured image
         published: Published
         title: Title
-        year: Year
       communication/website/post:
         author: Author
         categories: Categories
+        website: Website
+      communication/website/post/category:
+        children: Children categories
+        parent: Parent category
+      communication/website/post/category/localization:
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        name: Name
+        slug: Slug
+      communication/website/post/localization:
         category: Category
         date: Date
         featured_image: Featured image
@@ -215,13 +238,6 @@ en:
         text: Text
         title: Title
         website: Website
-      communication/website/post/category:
-        children: Children categories
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        parent: Parent category
-        slug: Slug
       communication/website/showcase/tag:
         name: Name
         websites: Websites
@@ -319,12 +335,17 @@ en:
     communication:
       block:
         copied: The block has been copied to clipboard!
+        drag_and_drop: Drag and drop
+        language_mismatch_alert: This block does not exist in this language.
       website:
         agenda:
           events:
             draft: Draft
             formatted_time_zone: "Time zone: %{time_zone}"
             none: No event yet
+        confirm_localization:
+          text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the website <i>%{website}</i> in %{language}."
+          title: Localization confirmation
         default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases."
         default_shared_image: "The default sharing image, 1200 pixels wide, is a good base because the networks have different standards."
         editorial:
@@ -349,21 +370,30 @@ en:
           published: Published
           published_status: Publication status
           show: Show page
+          special_pages:
+            organization:
+              disconnect: Disconnect
+            person:
+              disconnect: Disconnect
           structure: Pages
           with_children: "with children:"
         permalinks:
           creation_error: "Error during the creation. Does the given path have the correct format?"
         portfolio:
           projects:
+            draft: Draft
+            in: in %{categories}
             none: No project yet
+        post:
+          localizations:
+            and_pinned: and pinned
+            draft: Draft
+            pinned_status: Pinned status
+            planned_on: Publication planned on %{date}
+            published_on: Published on %{date}
         posts:
-          and_pinned: and pinned
           by: by %{author}
-          draft: Draft
           in: in %{categories}
-          pinned_status: Pinned status
-          planned_on: Publication planned on %{date}
-          published_on: Published on %{date}
         publish:
           button: Publish
           notice: Publication in progress, it should take a few minutes to be online.

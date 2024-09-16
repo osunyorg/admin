@@ -49,12 +49,12 @@ class Education::Cohort < ApplicationRecord
   validates_associated :school, :academic_year, :program
   validates :year, presence: true
 
-  scope :ordered, -> {
+  scope :ordered, -> (language = nil) {
     includes(:academic_year).order('education_academic_years.year DESC')
   }
 
   def to_s
-    "#{program.to_short_s} #{academic_year}"
+    "#{program.best_localization_for(university.default_language)} #{academic_year}"
   end
 
   def year

@@ -1,20 +1,18 @@
-<% heading_level = block.heading_rank_children %>
-
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-
       <div class="locations locations--<%= block.template.layout %>">
-        <% block.template.elements.each do |element|
-          location = element.location
-          next if location.nil?
-        %>
+        <% block.template.selected_locations.each do |location|
+          location_l10n = location.localization_for(block.language)
+          next if location_l10n.nil?
+          path = location_l10n.current_permalink_url_in_website(@website)
+          %>
           <article class="location" itemscope itemtype="https://schema.org/EducationalOrganization">
             <div class="location-content">
-              <h<%= heading_level %>  itemprop='headline' class='location-title'>
-                <%= link_to location, location.current_permalink_url_in_website(@website) %>
-              </h<%= heading_level %>>
+              <h<%= block.heading_rank_children %>  itemprop='headline' class='location-title'>
+                <%= link_to_if path, location_l10n, path %>
+              </h<%= block.heading_rank_children %>>
               <% if location.summary.present? %>
                 <div class="location-description">
                   <p itemprop="description">

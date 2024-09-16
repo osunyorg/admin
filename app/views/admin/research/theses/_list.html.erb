@@ -1,26 +1,16 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= Research::Thesis.human_attribute_name('title') %></th>
-        <th><%= Research::Thesis.human_attribute_name('laboratory') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @theses.each do |thesis| %>
-        <tr>
-          <td><%= link_to thesis, [:admin, thesis] %></td>
-          <td><%= link_to thesis.laboratory, [:admin, thesis.laboratory] %></td>
-          <td class="text-end">
-            <div class="btn-group" role="group">
-              <%= edit_link thesis %>
-              <%= destroy_link thesis %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2 mb-3">
+  <% @theses.each do |thesis| %>
+    <div>
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail_localized thesis %>
+        <div class="card-body">
+          <%= osuny_link_localized thesis, [:admin, thesis] %><br>
+          <%= thesis.author.to_s_in(current_language) if thesis.author.present? %>
+        </div>
+        <div class="card-footer">
+          <%= thesis.laboratory.to_s_in(current_language) if thesis.laboratory.present? %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
-<%= paginate @theses %>

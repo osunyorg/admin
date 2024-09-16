@@ -43,44 +43,47 @@ fr:
         last_name: Nom
         publications: Publications importées de HAL
         researcher: Chercheur·e dans Osuny
-      research/journal:
+      research/journal/localization:
         issn: ISSN
         language: Langue
         title: Titre
       research/journal/paper:
-        abstract: Extrait
         accepted_at: Accepté le
+        doi: DOI
+        kind: Type de papier
+        people: Auteur·e·s
+        received_at: Reçu le
+      research/journal/paper/localization:
+        abstract: Extrait
         authors_list: Liste des auteur·e·s
         bibliography: Bibliographie
-        doi: DOI
         keywords: Mots clés
-        kind: Type de papier
         pdf: PDF
-        people: Auteur·e·s
         published_at: Publié le
         published: Publié ?
-        received_at: Reçu le
         text: Texte
         title: Titre
-      research/journal/paper/kind:
+      research/journal/paper/kind/localization:
         title: Titre
       research/journal/volume:
+        number: Numéro
+      research/journal/volume/localization:
         featured_image_alt: Texte alternatif
         featured_image: Couverture
         keywords: Mots clés
-        number: Numéro
         published_at: Publié le
         published: Publié ?
         text: Texte
         title: Titre
       research/laboratory:
         address: Adresse
-        address_additional: Complément d'adresse
-        address_name: Nom de l'adresse
         city: Ville
         country: Pays
-        name: Nom
         zipcode: Code postal
+      research/laboratory/localization:
+        address_additional: Complément d'adresse
+        address_name: Nom de l'adresse
+        name: Nom
       research/laboratory/axis:
         name: Nom
         short_name: Nom court
@@ -100,14 +103,19 @@ fr:
         url: URL
         urls: Adresses Web
       research/thesis:
-        abstract: Résumé
         author: Auteur·e
         completed: Complétée ?
         completed_at: Complétée le
         director: Directeur·rice
         laboratory: Laboratoire
         started_at: Commencée le
+      research/thesis/localization:
         title: Titre
+        abstract: Résumé
+  admin:
+    research:
+      researcher:
+        show_person_html: Cette page montre uniquement les publications scientifiques de la personne. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien     
   enums:
     research:
       publication:
@@ -153,8 +161,9 @@ fr:
             description: Profils des chercheur·e·s dans la base de données HAL
           publication:
             description: Publications scientifiques importées automatiquement de HAL
-      select_identifier: Choisissez tou·te·s les auteur·e·s HAL correspondant à cette personne. Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
+      select_identifier_html: Choisissez tou·te·s les auteur·e·s HAL correspondant à cette personne. <br>Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
       sync: Synchroniser les publications HAL
+      synchronization_done: Synchronisation effectuée
   simple_form:
     hints:
       research_journal_paper:
@@ -162,8 +171,10 @@ fr:
         doi: "Vous pouvez saisir l'identifiant DOI sans https://, par exemple “10.19182/perspective/31918”"
       research_laboratory:
         address: 'Ce champ est utilisé pour géolocaliser. Ex: 3 rue de la Poste'
-        address_additional: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
-        address_name: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
         city: 'Ce champ est utilisé pour géolocaliser. Ex: Cenon'
         country: 'Ce champ est utilisé pour géolocaliser. Ex: France'
         zipcode: 'Ce champ est utilisé pour géolocaliser. Ex: 33150'
+        localizations:
+          address_additional: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
+          address_name: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
+

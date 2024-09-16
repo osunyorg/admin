@@ -416,7 +416,6 @@ fr:
               option_logo:
                 label: Logo
               options: Options d'affichage
-              remove_organization: Enlever l'organisation
             layouts:
               grid:
                 description: Une série de logos carrés, avec le nom de chaque organisation.
@@ -491,10 +490,8 @@ fr:
                 label: Ordre alphabétique
               category_id:
                 label: Catégorie
-              delete_title: Enlever la personne
               description:
                 label: Description
-              drag_title: Glisser-déposer pour organiser les personnes
               element:
                 id:
                   label: Personne

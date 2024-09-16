@@ -6,7 +6,6 @@ website_with_github:
   git_branch: <%= ENV['TEST_GITHUB_BRANCH'] %>
   access_token: <%= ENV['TEST_GITHUB_TOKEN'] %>
   repository: <%= ENV['TEST_GITHUB_REPOSITORY'] %>
-  languages: [fr]
   default_language: fr
   default_time_zone: Europe/Paris
   deuxfleurs_hosting: false
@@ -19,7 +18,6 @@ website_with_gitlab:
   git_branch: <%= ENV['TEST_GITLAB_BRANCH'] %>
   access_token: <%= ENV['TEST_GITLAB_TOKEN'] %>
   repository: <%= ENV['TEST_GITLAB_REPOSITORY'] %>
-  languages: [fr, en]
   default_language: fr
   default_time_zone: Europe/Paris
   deuxfleurs_hosting: false

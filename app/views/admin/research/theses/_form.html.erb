@@ -1,31 +1,44 @@
 <%= simple_form_for [:admin, thesis] do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
 
-  <div class="row">
-    <div class="col-xl-6">
-      <%= f.input :title %>
-      <%= f.input :abstract, input_html: { rows: 10 } %>
+    <div class="row">
+      <div class="col-xl-6">
+        <%= lf.input :title %>
+        <%= lf.input :abstract, input_html: { rows: 10 } %>
+      </div>
+      <div class="col-xl-6">
+        <%= f.input :started_at, html5: true %>
+        <%= f.input :completed %>
+        <%= f.input :completed_at, html5: true %>
+        <%= f.association :laboratory,
+                          collection: osuny_collection(
+                            current_university.research_laboratories
+                                              .ordered(current_language), 
+                            localized: true
+                          ) %>
+        <%= f.association :author,
+                          collection: osuny_collection(
+                            current_university.people
+                                              .tmp_original # TODO L10N : To remove
+                                              .researchers
+                                              .ordered(current_language), 
+                            localized: true
+                          ) %>
+        <%= f.association :director,
+                          collection: osuny_collection(
+                            current_university.people
+                                              .tmp_original # TODO L10N : To remove
+                                              .with_habilitation
+                                              .ordered(current_language), 
+                            localized: true
+                          ) %>
+      </div>
     </div>
-    <div class="col-xl-6">
-      <%= f.input :started_at, html5: true %>
-      <%= f.input :completed %>
-      <%= f.input :completed_at, html5: true %>
-      <%= f.association :laboratory,
-                        collection: current_university.research_laboratories.ordered %>
-      <%= f.association :author,
-                        collection: current_university.people
-                                                      .for_language_id(current_university.default_language_id)
-                                                      .researchers
-                                                      .ordered %>
-      <%= f.association :director,
-                        collection: current_university.people
-                                                      .for_language_id(current_university.default_language_id)
-                                                      .with_habilitation
-                                                      .ordered %>
-    </div>
-  </div>
-  <% content_for :action_bar_right do %>
-    <%= submit f %>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
   <% end %>
 <% end %>

@@ -7,9 +7,11 @@
   </div>
   <div class="col-lg-4">
     <%= osuny_panel Research::Hal::Author.human_attribute_name(:researcher) do %>
-      <% @author.researchers.in_university(current_university).each do |researcher| %>
-        <%= render 'admin/university/people/researchers/researcher', researcher: researcher %>
-      <% end %>
+      <div class="row g-2">
+        <% @author.researchers.in_university(current_university).each do |researcher| %>
+          <%= render 'admin/research/researchers/researcher', researcher: researcher %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

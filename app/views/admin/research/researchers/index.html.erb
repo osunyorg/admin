@@ -1,36 +1,28 @@
 <% content_for :title, University::Person::Researcher.model_name.human(count: 2) %>
 
+<p>&nbsp;</p>
 <%= render 'filters', current_path: admin_research_researchers_path, filters: @filters if @filters.any?  %>
 
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= University::Person.human_attribute_name('name') %></th>
-        <th><%= University::Person.human_attribute_name('first_name') %></th>
-        <th><%= University::Person.human_attribute_name('picture') %></th>
-        <th><%= Research::Publication.model_name.human(count: 2) %></th>
-        <th><%= Research::Journal::Paper.model_name.human(count: 2) %></th>
-        <th width="160"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @researchers.each do |researcher| %>
-        <tr>
-          <td><%= link_to researcher.last_name, admin_research_researcher_path(researcher) %></td>
-          <td><%= link_to researcher.first_name, admin_research_researcher_path(researcher) %></td>
-          <td>
-            <% if researcher.best_picture.attached? %>
-              <%= kamifusen_tag researcher.best_picture, width: 80 %>
-            <% end %>
-          </td>
-          <td><%= researcher.publications.count %></td>
-          <td><%= researcher.research_journal_papers.count %></td>
-          <td></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-3">
+  <% @researchers.each do |person| %>
+    <div class="col-6 col-lg-3 col-xxl-2">
+      <div class="card mb-0">
+        <%= osuny_thumbnail_localized person, large: true %>
+        <div class="card-body">
+          <p class="mb-1">
+            <%= osuny_link_localized  person,
+                                      admin_research_researcher_path(person),
+                                      classes: 'stretched-link'  %>
+          </p>
+          <% if person.publications.any? %>
+            <p class="small text-muted mb-0">
+              <%= person.publications.size %>
+              <%= Research::Publication.model_name.human(count: person.publications.size).downcase %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 <%= paginate @researchers %>

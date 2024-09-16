@@ -117,6 +117,7 @@ fr:
     advanced_settings: Réglages avancés
     attachment_not_available: Impossible d'accéder à l'élément
     dashboard: Tableau de bord
+    directory: Annuaire
     duplicate: Dupliquer
     elements:
       zero: Aucun élément
@@ -166,6 +167,8 @@ fr:
     will_be_published_html: "<i>%{model}</i> va bientôt être publié(e)."
   batch_selectable:
     title: Modifier la sélection
+  cancel: Annuler
+  confirm: Confirmer
   content: Contenu
   cookies_consent_choice: Choix en matière de cookies
   cookies_policy: Politique de cookies
@@ -271,6 +274,9 @@ fr:
     fr: Français
   legal: Légal
   loading: Chargement...
+  localization:
+    creation_alert: Cet élément n'existe pas dans votre langue d'affichage actuelle. Souhaitez-vous en créer une traduction ?
+    label: Localisation
   login:
     already_registered: Déjà inscrit ?
     already_registered_details: Connectez-vous si vous avez déjà un compte.
@@ -307,6 +313,7 @@ fr:
   manage: Gérer
   menu:
     admin: Admin
+    edit_profile: Modifier mon profil
     profile: Profil
     server_admin: Administration du serveur
     sign_out: Déconnexion

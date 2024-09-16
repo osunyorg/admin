@@ -2,7 +2,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   load_and_authorize_resource class: Communication::Website::Post,
                               through: :website
 
-  include Admin::Translatable
+  include Admin::HasStaticAction
+  include Admin::Localizable
 
   # Allow to override the default load_filters from Admin::Filterable
   before_action :load_filters, only: :index
@@ -10,22 +11,23 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   has_scope :for_search_term
   has_scope :for_author
   has_scope :for_category
-  has_scope :for_pinned
 
   def index
-    @posts = apply_scopes(@posts).for_language(current_website_language)
-                                 .ordered
+    @posts = apply_scopes(@posts).tmp_original # TODO L10N : To remove
+                                 .ordered(current_language)
                                  .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end
 
+  # TODO L10N : To adjust
   def publish_batch
     ids = params[:ids] || []
     target_posts = @website.posts.where(id: ids)
     is_published = params[:published] == "true"
     target_posts.each do |post|
-      post.published = is_published
+      l10n = post.localization_for(current_language)
+      l10n.publish!
       post.save_and_sync
     end
     redirect_back fallback_location: admin_communication_website_posts_path,
@@ -33,8 +35,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def publish
-    @post.published = true
-    @post.save_and_sync
+    @l10n.publish!
+    @post.sync_with_git
     redirect_back fallback_location: admin_communication_website_post_path(@post),
                   notice: t('admin.communication.website.publish.notice')
   end
@@ -48,17 +50,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     render layout: 'admin/layouts/preview'
   end
 
-  def static
-    @about = @post
-    render_as_plain_text
-  end
-
   def new
     @categories = categories
-    @post.website = @website
-    if current_user.person.present?
-      @post.author_id = current_user.person.find_or_translate!(current_website_language).id
-    end
+    @post.author_id = current_user.person&.id
     breadcrumb
   end
 
@@ -70,9 +64,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def create
     @post.website = @website
-    @post.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @post.save_and_sync
-      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s)
+      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -81,9 +75,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def update
-    @post.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @post.update_and_sync(post_params)
-      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s)
+      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -94,12 +88,12 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def duplicate
     redirect_to [:admin, @post.duplicate],
-                notice: t('admin.successfully_duplicated_html', model: @post.to_s)
+                notice: t('admin.successfully_duplicated_html', model: @post.to_s_in(current_language))
   end
 
   def destroy
     @post.destroy
-    redirect_to admin_communication_website_posts_url, notice: t('admin.successfully_destroyed_html', model: @post.to_s)
+    redirect_to admin_communication_website_posts_url, notice: t('admin.successfully_destroyed_html', model: @post.to_s_in(current_language))
   end
 
   protected
@@ -114,29 +108,29 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def post_params
     params.require(:communication_website_post)
     .permit(
-      :title, :meta_description, :summary, :text,
-      :published, :published_at, :slug, :pinned,
-      :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :shared_image, :shared_image_delete,
-      :author_id, category_ids: []
+      :author_id, category_ids: [],
+      localizations_attributes: [
+        :id, :title, :meta_description, :summary, :text,
+        :published, :published_at, :slug, :pinned,
+        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+        :shared_image, :shared_image_delete, :shared_image_infos,
+        :language_id
+      ]
     )
-    .merge(
-      university_id: current_university.id,
-      language_id: current_website_language.id
-    )
+    .merge(university_id: current_university.id)
   end
 
   def load_filters
     @filters = ::Filters::Admin::Communication::Website::Posts.new(
-        current_user, 
-        @website, 
-        current_website_language
+        current_user,
+        @website,
+        current_language
       ).list
   end
 
   def categories
     @website.post_categories
-            .for_language(current_website_language)
+            .tmp_original # TODO L10N : To remove
             .ordered
   end
 end

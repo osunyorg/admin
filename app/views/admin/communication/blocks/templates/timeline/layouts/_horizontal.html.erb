@@ -1,0 +1,24 @@
+<div class="timeline draggable-container">
+  <%= render 'admin/communication/blocks/partials/top', block: block %>
+  <div class="timeline-events draggable-content">
+    <ol>
+      <% block.template.elements.each do |element| %>
+        <li class="timeline-event draggable-item">
+          <h<%= block.heading_rank_children %> class="title">
+            <%= block_component_show block, :title, template: element %>
+          </h<%= block.heading_rank_children %>>
+          <div class="line"></div>
+          <div class="description text">
+            <%= block_component_show block, :text, template: element %>
+          </div>
+        </li>
+      <% end %>
+    </ol>
+    <% if !block.template.elements.one? %>
+      <div class="actions-arrows">
+        <button class="previous" disabled></button>
+        <button class="next"></button>
+      </div>
+    <% end %>
+  </div>
+</div>

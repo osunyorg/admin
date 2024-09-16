@@ -8,7 +8,4 @@ class Communication::Block::Component::Program < Communication::Block::Component
     [program]
   end
 
-  def translate!
-    # TODO: Traduction des Formations à faire
-  end
 end

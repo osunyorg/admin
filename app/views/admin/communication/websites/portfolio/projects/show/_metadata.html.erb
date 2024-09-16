@@ -1,13 +1,14 @@
 <%= osuny_panel t('metadata'), small: true do %>
-  <%= @project.published  ? Communication::Website::Agenda::Event.human_attribute_name(:published)
-                        : t('admin.communication.website.agenda.projects.draft') %>
+  <%= @l10n.published ? Communication::Website::Portfolio::Project::Localization.human_attribute_name(:published)
+                      : t('admin.communication.website.portfolio.projects.draft') %>
 
-  <%= render 'admin/application/i18n/inline', about: @project %>
   <% if @project.categories.any? %>
+    <% category_names = @project.categories.map { |category| category.to_s_in(current_language) } %>
     <%= t(
-          'admin.communication.website.posts.in', 
-          categories: @project.categories.collect(&:to_s).join(', ')
+        'admin.communication.website.portfolio.projects.in',
+          categories: category_names.join(', ')
         ) %>
   <% end %>
-  <%= render 'admin/application/permalinks/redirects', about: @project %>
+  <%= render 'admin/application/permalinks/redirects', about: @l10n %>
 <% end %>
+<%= render 'admin/application/l10n/widget', about: @project, l10n: @l10n, small: true %>
