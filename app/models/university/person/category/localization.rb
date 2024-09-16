@@ -26,6 +26,7 @@
 #
 class University::Person::Category::Localization < ApplicationRecord
   include AsLocalization
+  include AsLocalizedTree
   include Contentful
   include Initials
   include Permalinkable
