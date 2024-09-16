@@ -18,7 +18,7 @@
                       source: '#university_person_category_localizations_attributes_0_name' %>
           <%= f.association :parent,
                             collection: osuny_collection_tree(
-                              @categories,
+                              @categories.root,
                               except: category,
                               localized: true
                             ) %>

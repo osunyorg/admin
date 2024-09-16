@@ -30,7 +30,12 @@
         <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
           <%= f.association :programs,
                             as: :check_boxes,
-                            collection: osuny_collection_tree(current_university.education_programs, localized: true) %>
+                            collection: osuny_collection_tree(
+                              current_university.education_programs
+                                                .tmp_original # TODO L10N : Remove tmp_original
+                                                .root,
+                              localized: true
+                            ) %>
         <% end %>
       </div>
     </div>
