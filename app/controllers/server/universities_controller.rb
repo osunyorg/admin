@@ -14,7 +14,7 @@ class Server::UniversitiesController < Server::ApplicationController
   end
 
   def show
-    @websites = @university.websites.ordered(current_language)
+    @websites = @university.websites.ordered(current_language).page(params[:page])
     breadcrumb
   end
 
