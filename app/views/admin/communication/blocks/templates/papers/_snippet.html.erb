@@ -1,3 +1,6 @@
-<p class="mb-0">
-  <%= block.template.selected_papers.first(2).collect(&:to_s).join(', ') %>...
-</p>
+
+<%= block.template.selected_papers.each do |paper| %>
+  <article>
+    <%= paper.to_s_in(block.language) %>
+  </article>
+<% end %>
