@@ -1,6 +1,5 @@
-
-<%= block.template.selected_papers.each do |paper| %>
-  <article>
+<% block.template.selected_papers.each do |paper| %>
+  <article class="mb-3">
     <%= paper.to_s_in(block.language) %>
   </article>
 <% end %>

@@ -53,6 +53,8 @@ class Research::Journal::Volume < ApplicationRecord
               -> { distinct }, 
               through: :papers
 
+  scope :ordered, -> (language = nil) { order(published_at: :desc) }
+
   def dependencies
     localizations +
     papers +

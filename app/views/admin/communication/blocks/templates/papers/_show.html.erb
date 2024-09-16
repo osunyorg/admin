@@ -15,11 +15,19 @@ end
         </div>
       <% end %>
       <% if block.data %>
-        <ul>
+        <ul class="papers">
           <% block.template.selected_papers.each do |paper|
             next if paper.nil?
           %>
-          <li><%= link_to paper, '#' %></li>
+            <li>
+              <article class="paper" itemscope itemtype="https://schema.org/ScholarlyArticle" {{- if $inside_volume }} itemProp="hasPart" {{- end -}}>
+                <div>
+                  <h<%= block.heading_rank_children %>>
+                    <%= link_to paper.to_s_in(block.language), '#' %>
+                  </h<%= block.heading_rank_children %>>
+                </div>
+              </article>
+            </li>
           <% end %>
         </ul>
       <% end %>

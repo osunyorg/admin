@@ -15,13 +15,25 @@ end
         </div>
       <% end %>
       <% if block.data %>
-        <ul>
-          <% block.template.selected_volumes.each do |volume|
+        <div class="volumes">
+          <% 
+          block.template.selected_volumes.each do |volume|
             next if volume.nil?
-          %>
-          <li><%= link_to volume, '#' %></li>
+            volume_l10n = volume.localization_for(block.language)
+            next if volume_l10n.nil?
+            %>
+          <article class="volume" itemscope itemtype="https://schema.org/Book https://schema.org/PublicationVolume">
+            <hgroup>
+              <h<%= block.heading_rank_children %>>
+                <%= link_to volume_l10n, '#' %>
+              </h<%= block.heading_rank_children %>>
+            </hgroup>
+            <div class="media">
+              <%= kamifusen_tag volume_l10n.featured_image %>
+            </div>
+          </article>
           <% end %>
-        </ul>
+        </div>
       <% end %>
     </div>
   </div>

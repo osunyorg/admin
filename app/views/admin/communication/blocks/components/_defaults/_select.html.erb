@@ -12,7 +12,7 @@
   <% end %>
   <% elements.each do |element| %>
     <option value="<%= element.id %>">
-      <%= element.to_s.html_safe %>
+      <%= element.to_s_in(block.language).html_safe %>
     </option>
   <% end %>
 </select>

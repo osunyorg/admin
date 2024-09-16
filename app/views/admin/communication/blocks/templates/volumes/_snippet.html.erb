@@ -1,3 +1,12 @@
-<p class="mb-0">
-  <%= block.template.selected_volumes.first(2).collect(&:to_s).join(', ') %>...
-</p>
+<div class="row">
+  <% 
+  block.template.selected_volumes.each do |volume| 
+    volume_l10n = volume.localization_for(block.language)
+    next if  volume_l10n.nil?
+    %>
+    <div class="col-lg-4">
+      <%= kamifusen_tag volume_l10n.featured_image, width: 400, class: 'img-fluid mb-2' %>
+      <%= volume_l10n.to_s %>
+    </div>
+  <% end %>
+</div>
