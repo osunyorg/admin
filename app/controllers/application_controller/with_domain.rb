@@ -21,8 +21,7 @@ module ApplicationController::WithDomain
   end
 
   def current_extranet_l10n
-    # TODO L10n best_localization_for(params[:lang])
-    @current_extranet_l10n ||= current_extranet.original_localization
+    @current_extranet_l10n ||= current_extranet.best_localization_for(current_language)
   end
 
 

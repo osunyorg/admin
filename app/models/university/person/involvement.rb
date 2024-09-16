@@ -53,7 +53,8 @@ class University::Person::Involvement < ApplicationRecord
                     on: :create
 
   # TODO L10N : correct this scope
-  scope :ordered_by_name, -> {
+  scope :ordered_by_name, -> (language) {
+    # TODO L10N j'ai besoin de @sebou, plus assez frais
     joins(:person).select('university_person_involvements.*')
                   .order('university_people.last_name', 'university_people.first_name')
   }

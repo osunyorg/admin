@@ -34,7 +34,7 @@ class Education::AcademicYear < ApplicationRecord
 
   validates :year, numericality: { only_integer: true, greater_than: 0 }
 
-  scope :ordered, -> { order(year: :desc) }
+  scope :ordered, -> (language = nil) { order(year: :desc) }
 
   def cohorts_in_context(context)
     return cohorts if context.nil? || !context.respond_to?(:cohorts)

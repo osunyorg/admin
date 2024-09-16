@@ -61,14 +61,14 @@ class University < ApplicationRecord
   has_many :imports, dependent: :destroy
   has_many :apps, dependent: :destroy
 
-  validates_presence_of :name
+  validates :name, presence: true
   validates :sms_sender_name, presence: true, length: { maximum: 11 }
   validates :logo, size: { less_than: 1.megabytes }
 
   before_validation :sanitize_fields
   after_destroy :destroy_remaining_blobs
 
-  scope :ordered, -> { order(:name) }
+  scope :ordered, -> (language = nil) { order(:name) }
   scope :for_search_term, -> (term) { where("unaccent(universities.name) ILIKE unaccent(:term)", term: "%#{sanitize_sql_like(term)}%") }
   scope :for_real_university, -> (status) { where(is_really_a_university: status) }
   scope :for_contribution, -> (status) { status == 'true' ? contributing : not_contributing }

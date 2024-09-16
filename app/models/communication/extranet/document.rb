@@ -30,6 +30,7 @@
 class Communication::Extranet::Document < ApplicationRecord
   include Sanitizable
   include Localizable
+  include LocalizableOrderByNameScope
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
@@ -39,5 +40,4 @@ class Communication::Extranet::Document < ApplicationRecord
   # TODO L10N : To remove
   has_one_attached_deletable :file
 
-  scope :ordered, -> (language) {}
 end

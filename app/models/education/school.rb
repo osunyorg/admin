@@ -34,6 +34,7 @@ class Education::School < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
   include Localizable
+  include LocalizableOrderByNameScope
   include WebsitesLinkable
   include WithBlobs # TODO L10N : To remove
   include WithCountry
@@ -60,34 +61,6 @@ class Education::School < ApplicationRecord
 
   validates :address, :city, :zipcode, :country, presence: true
 
-  scope :ordered, -> (language) {
-    # Define a raw SQL snippet for the conditional aggregation
-    # This selects the name of the localization in the specified language,
-    # or falls back to the first localization name if the specified language is not present.
-    localization_name_select = <<-SQL
-      COALESCE(
-        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.name))) END),
-        MAX(TRIM(LOWER(UNACCENT(localizations.name)))) FILTER (WHERE localizations.rank = 1)
-      ) AS localization_name
-    SQL
-
-    # Join the schools table with a subquery that ranks localizations
-    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
-    joins(sanitize_sql_array([<<-SQL
-      LEFT JOIN (
-        SELECT
-          localizations.*,
-          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
-        FROM
-          education_school_localizations as localizations
-      ) localizations ON education_schools.id = localizations.about_id
-    SQL
-    ]))
-    .select("education_schools.*", localization_name_select)
-    .group("education_schools.id")
-    .order("localization_name ASC")
-  }
-
   scope :for_search_term, -> (term) {
     where("
       unaccent(education_schools.address) ILIKE unaccent(:term) OR
@@ -107,8 +80,8 @@ class Education::School < ApplicationRecord
     # As diplomas are here through programs, and diploma being a program's dependency, it this necessary?
     diplomas +
     locations +
-    administrators.map(&:administrator) +
-    researchers.map(&:researcher)
+    administrators.map(&:administrator_facets) +
+    researchers.map(&:researcher_facets)
   end
 
   #####################

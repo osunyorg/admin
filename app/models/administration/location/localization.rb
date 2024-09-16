@@ -42,8 +42,6 @@ class Administration::Location::Localization < ApplicationRecord
   include WithGitFiles
   include WithUniversity
 
-  validates :name, presence: true
-
   def git_path(website)
     "#{git_path_content_prefix(website)}locations/#{slug}/_index.html" if for_website?(website)
   end

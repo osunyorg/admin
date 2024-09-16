@@ -43,6 +43,7 @@ location.diplomas.each do |diploma|
             diploma: diploma,
             programs: programs,
             all_programs: location.programs,
+            language: language,
             depth: 4 %>
 <% end %>
 <%= render 'admin/communication/blocks/content/static', about: @l10n %>

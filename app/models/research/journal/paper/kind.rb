@@ -24,11 +24,11 @@
 class Research::Journal::Paper::Kind < ApplicationRecord
   include AsIndirectObject
   include Localizable
+  include LocalizableOrderByTitleScope
   include Sanitizable
   include WithUniversity
 
   belongs_to :journal, class_name: 'Research::Journal'
   has_many :papers
-  
-  scope :ordered, -> (language) { order(:title) }
+
 end

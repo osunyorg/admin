@@ -105,7 +105,7 @@ class Communication::Website::Post::Category < ApplicationRecord
   protected
 
   def last_ordered_element
-    website.post_categories.where(parent_id: parent_id, language_id: language_id).ordered.last
+    website.post_categories.where(parent_id: parent_id).ordered.last
   end
 
   # Same as the Post object

@@ -13,9 +13,9 @@
     </div>
     <div class="col-9 col-md-12">
       <p>
-        <%= link_to person.to_s_in(current_language),
-                    contacts_person_path(person), 
-                    class: 'stretched-link' %>
+        <%= osuny_link_localized person,
+                                 contacts_person_path(person), 
+                                 classes: 'stretched-link' %>
       </p>
     </div>
   </div>

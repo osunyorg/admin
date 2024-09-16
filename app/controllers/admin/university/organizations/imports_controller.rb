@@ -6,7 +6,9 @@ class Admin::University::Organizations::ImportsController < Admin::University::A
   has_scope :for_status
 
   def index
-    @imports = apply_scopes(@imports.kind_organizations).ordered.page(params[:page])
+    @imports = apply_scopes(@imports.kind_organizations)
+                  .ordered(current_language)
+                  .page(params[:page])
     breadcrumb
   end
 

@@ -33,13 +33,13 @@ class University::Person::Experience < ApplicationRecord
   belongs_to :person
   belongs_to :organization, class_name: "University::Organization"
 
-  validates_presence_of :from_year
+  validates :from_year, presence: true
   validate :to_year, :not_before_from_year
 
   after_validation :deport_error_on_organization
 
   scope :current, -> { where('from_year <= :current_year AND (to_year IS NULL OR to_year >= :current_year)', current_year: Date.today.year) }
-  scope :ordered, -> { order('university_person_experiences.to_year DESC NULLS FIRST, university_person_experiences.from_year') }
+  scope :ordered, -> (language = nil) { order('university_person_experiences.to_year DESC NULLS FIRST, university_person_experiences.from_year') }
   scope :latest, -> {
     where.not(from_year: nil)
     .order(from_year: :desc, created_at: :desc)

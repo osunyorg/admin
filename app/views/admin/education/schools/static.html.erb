@@ -1,7 +1,7 @@
 <%
 school = @l10n.about
 language = @l10n.language
-administrator_involvements = school.involvements_through_roles.includes(:person).ordered_by_name
+administrator_involvements = school.involvements_through_roles.includes(:person).ordered_by_name(language)
 %>---
 name: "<%= prepare_text_for_static @l10n.name %>"
 address: >-

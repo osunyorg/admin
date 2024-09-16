@@ -45,14 +45,14 @@ class Research::Publication < ApplicationRecord
                           foreign_key: :research_publication_id,
                           association_foreign_key: :research_hal_author_id
 
-  scope :ordered, -> { order(publication_date: :desc)}
+  scope :ordered, -> (language = nil) { order(publication_date: :desc)}
 
   enum source: {
     osuny: 0,
     hal: 1
   }
 
-  validates_presence_of :title, :publication_date
+  validates :title, :publication_date, presence: true
 
   before_validation :generate_authors_citeproc
 

@@ -23,6 +23,7 @@
 #
 class Communication::Extranet::Document::Kind < ApplicationRecord
   include Localizable
+  include LocalizableOrderByNameScope
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
@@ -30,5 +31,4 @@ class Communication::Extranet::Document::Kind < ApplicationRecord
   has_many :communication_extranet_documents, class_name: "Communication::Extranet::Document"
   alias_method :documents, :communication_extranet_documents
 
-  scope :ordered, -> { order(:name) }
 end

@@ -34,7 +34,7 @@ class Communication::Extranet::Document::Kind::Localization < ApplicationRecord
   belongs_to  :extranet, 
               class_name: 'Communication::Extranet'
 
-  before_validation :set_extranet_id
+  before_validation :set_extranet_id, on: :create
 
   validates :name, presence: true
 

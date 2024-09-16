@@ -58,7 +58,6 @@ class Communication::Website::Post < ApplicationRecord
               as: :about,
               dependent: :destroy
 
-
   belongs_to :author,
              class_name: 'University::Person',
              optional: true
@@ -71,24 +70,19 @@ class Communication::Website::Post < ApplicationRecord
   after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
 
   scope :ordered, -> (language) {
-    # Define a raw SQL snippet for the conditional aggregation
-    # This selects the name of the localization in the specified language,
-    # or falls back to the first localization pinned and publication if the specified language is not present.
     localization_published_at_select = <<-SQL
       COALESCE(
         MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.published_at END),
-        MAX(localizations.published_at) FILTER (WHERE localizations.rank = 1)
+        '1970-01-01'
       ) AS localization_published_at
     SQL
     localization_pinned_select = <<-SQL
       COALESCE(
         BOOL_OR(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.pinned END),
-        BOOL_OR(localizations.pinned) FILTER (WHERE localizations.rank = 1)
+        FALSE
       ) AS localization_pinned
     SQL
 
-    # Join the organizations table with a subquery that ranks localizations
-    # The subquery assigns a rank to each localization, with 1 being the first localization for each organization
     joins(sanitize_sql_array([<<-SQL
       LEFT JOIN (
         SELECT

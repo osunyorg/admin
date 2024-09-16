@@ -121,6 +121,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   def categories
     current_university.person_categories
                       .tmp_original # TODO L10N : To remove
-                      .ordered
+                      .ordered(current_language)
   end
 end

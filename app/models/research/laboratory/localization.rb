@@ -31,6 +31,8 @@ class Research::Laboratory::Localization < ApplicationRecord
   include WithGitFiles
   include WithUniversity
 
+  validates :name, presence: true
+
   def git_path(website)
     "data/laboratory.yml"
   end

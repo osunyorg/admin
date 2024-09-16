@@ -5,14 +5,12 @@
 #  id               :uuid             not null, primary key
 #  abstract         :string
 #  authors_list     :text
-#  bibliography     :text
 #  keywords         :text
 #  meta_description :text
 #  published        :boolean          default(FALSE)
 #  published_at     :datetime
 #  slug             :string
 #  summary          :text
-#  text             :text
 #  title            :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -49,7 +47,7 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   delegate  :journal, :volume, :people, :doi, 
             to: :paper
 
-  validates_presence_of :title
+  validates :title, presence: true
 
   has_summernote :text
   has_summernote :bibliography

@@ -5,7 +5,7 @@ class Migrations::L10n::Communication::Extranet::Post < Migrations::L10n::Base
   end
 
   def self.migrate_posts
-    Communication::Extranet::Post.find_each do |object|
+    Communication::Extranet::Post.where(self.constraint).find_each do |object|
       about_id = object.id
 
       l10n = Communication::Extranet::Post::Localization.create(
@@ -33,7 +33,7 @@ class Migrations::L10n::Communication::Extranet::Post < Migrations::L10n::Base
   end
 
   def self.migrate_categories
-    Communication::Extranet::Post::Category.find_each do |object|
+    Communication::Extranet::Post::Category.where(self.constraint).find_each do |object|
       about_id = object.id
 
       l10n = Communication::Extranet::Post::Category::Localization.create(

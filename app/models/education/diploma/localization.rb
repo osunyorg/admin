@@ -40,8 +40,8 @@ class Education::Diploma::Localization < ApplicationRecord
   include WithPublication
   include WithUniversity
 
-  validates_presence_of :name
-  validates_uniqueness_of :name, scope: :university_id
+  validates :name, presence: true
+  validates :name, uniqueness: { scope: :university_id }
 
   def dependencies
     contents_dependencies +

@@ -61,7 +61,8 @@ class Communication::Website::Page::Localization < ApplicationRecord
   validates :title, presence: true
   validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
 
-  before_validation :set_communication_website_id, :set_published_unless_draftable
+  before_validation :set_communication_website_id, on: :create
+  before_validation :set_published_unless_draftable
 
   delegate :is_home?, to: :about
 

@@ -1,5 +1,6 @@
 class Extranet::ExperiencesController < Extranet::ApplicationController
   before_action :load_experience, only: [:edit, :update, :destroy]
+
   def new
     @experience = current_user.experiences.new
     @l10n = @experience.localizations.build(language: current_language)
@@ -10,6 +11,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
   def edit
     @l10n = @experience.localization_for(current_language)
     breadcrumb
+    add_breadcrumb @l10n
   end
 
   def create
@@ -18,7 +20,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
       redirect_to account_path,
                   notice: t('admin.successfully_created_html', model: @experience.organization.to_s)
     else
-      @l10n = @experience.localizations.build(language: current_language)
+      @l10n = @experience.localizations.first
       breadcrumb
       add_breadcrumb University::Person::Experience.human_attribute_name('new')
       render :new
@@ -31,6 +33,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
                   notice: t('admin.successfully_updated_html', model: @experience.organization.to_s)
     else
       breadcrumb
+      add_breadcrumb @l10n
       render :edit
     end
   end

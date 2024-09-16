@@ -43,5 +43,38 @@ class Communication::Extranet::Post < ApplicationRecord
   belongs_to :category, class_name: 'Communication::Extranet::Post::Category', optional: true
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
-  scope :ordered, -> (language) { order(pinned: :desc, published_at: :desc, created_at: :desc) }
+  scope :published, -> (language) { 
+    joins(:localizations)
+    .where(communication_extranet_post_localizations: { language_id: language.id, published: true })
+    .where('communication_extranet_post_localizations.published_at <= ?', Time.zone.now)
+   }
+  
+  scope :ordered, -> (language) {
+    localization_published_at_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.published_at END),
+        '1970-01-01'
+      ) AS localization_published_at
+    SQL
+    localization_pinned_select = <<-SQL
+      COALESCE(
+        BOOL_OR(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.pinned END),
+        FALSE
+      ) AS localization_pinned
+    SQL
+
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          communication_extranet_post_localizations as localizations
+      ) localizations ON communication_extranet_posts.id = localizations.about_id
+    SQL
+    ]))
+    .select("communication_extranet_posts.*", localization_pinned_select, localization_published_at_select)
+    .group("communication_extranet_posts.id")
+    .order("localization_pinned DESC, localization_published_at DESC, created_at DESC")
+  }
 end

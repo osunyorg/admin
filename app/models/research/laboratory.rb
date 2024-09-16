@@ -12,19 +12,26 @@
 #  zipcode            :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  language_id        :uuid             indexed
+#  original_id        :uuid             indexed
 #  university_id      :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_research_laboratories_on_language_id    (language_id)
+#  index_research_laboratories_on_original_id    (original_id)
 #  index_research_laboratories_on_university_id  (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_0bf891c2d7  (original_id => research_laboratories.id)
+#  fk_rails_2dcf393603  (language_id => languages.id)
 #  fk_rails_f61d27545f  (university_id => universities.id)
 #
 class Research::Laboratory < ApplicationRecord
   include AsIndirectObject
   include Localizable
+  include LocalizableOrderByNameScope
   include Sanitizable
   include WebsitesLinkable
   include WithCountry
@@ -44,9 +51,8 @@ class Research::Laboratory < ApplicationRecord
                           foreign_key: :research_laboratory_id,
                           association_foreign_key: :university_person_id
 
-  validates :name, :address, :city, :zipcode, :country, presence: true
+  validates :address, :city, :zipcode, :country, presence: true
 
-  scope :ordered, -> (language) { }
   scope :for_search_term, -> (term) {
     where("
       unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
@@ -64,7 +70,7 @@ class Research::Laboratory < ApplicationRecord
   def dependencies
     localizations +
     axes +
-    researchers.map(&:researcher)
+    researchers.map(&:researcher_facets)
   end
 
   def has_administrators?

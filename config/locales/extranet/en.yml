@@ -13,7 +13,7 @@ en:
       organizations:
         people: Members of this organization
       persons:
-        experiences: Organizations where they belong (%{count})
+        experiences: Organizations where they belong
       search:
         home: Search in directory
         title: Search
@@ -36,7 +36,7 @@ en:
       reset: Reset
     menu: Menu
     organization:
-      experiences: Alumni in this organization (%{count})
+      experiences: Alumni in this organization
     osuny_html:
       <a href="https://www.osuny.org" target="_blank" rel="noreferer">Crafted with ♥ and with Osuny</a>
     personal_data:

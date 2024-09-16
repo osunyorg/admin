@@ -13,7 +13,7 @@ fr:
       organizations:
         people: Membres de cette organisation
       persons:
-        experiences: Organisations dont la personne fait partie (%{count})
+        experiences: Organisations dont la personne fait partie
       search:
         home: Chercher dans l'annuaire
         title: Recherche
@@ -36,7 +36,7 @@ fr:
       reset: Réinitialiser
     menu: Menu
     organization:
-      experiences: Alumni dans cette organisation (%{count})
+      experiences: Alumni dans cette organisation
     osuny_html:
       <a href="https://www.osuny.org" target="_blank" rel="noreferer">Développé avec ♥ et avec Osuny</a>
     personal_data:

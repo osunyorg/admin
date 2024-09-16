@@ -48,7 +48,7 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
   
   validates :name, presence: true
 
-  before_validation :set_communication_website_id
+  before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     prefix = git_path_content_prefix(website)
