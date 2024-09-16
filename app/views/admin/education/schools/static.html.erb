@@ -31,7 +31,7 @@ administrator_involvements.each do |involvement|
   next if person_l10n.nil?
 %>
   "<%= person_l10n.slug %>": >-
-    <%= involvement.target.to_s %>
+    <%= involvement.target.to_s_in(language) %>
 <% end %>
 roles:
 <% school.university_roles.ordered.each do |role| %>

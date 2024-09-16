@@ -10,9 +10,9 @@ indentation = ' ' * depth
 <%= indentation %>- label: >-
 <%= indentation %>    <%= program_l10n.to_s %>
 <%= indentation %>  path: "<%= program_l10n.current_permalink_in_website(@website)&.path %>"
-<%= indentation %>  slug: "<%= program_l10n.slug_with_ancestors_slugs %>"
+<%= indentation %>  slug: "/<%= program_l10n.slug_with_ancestors_slugs %>/"
 <%
-children = program.children.where(diploma: diploma)
+children = program.children.published_now_in(language).where(diploma: diploma)
 # Limit to a global list of programs, for example on a location
 children = children.where(id: all_programs) if local_assigns[:all_programs]
 %>

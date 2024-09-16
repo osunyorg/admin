@@ -36,6 +36,7 @@ parent:
     <%= @l10n.parent.name %>
   url: <%= @l10n.parent.current_permalink_in_website(@website)&.path %>
 <% end %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/featured_image/static', about: @l10n %>
 <%= render 'admin/application/shared_image/static', about: @l10n %>
 <% if @l10n.logo.attached? %>
@@ -48,7 +49,7 @@ if @website
   post_category_l10n = post_category&.localization_for(language)
   if post_category_l10n
 %>
-related_category: "<%= post_category_l10n.slug_with_ancestors_slugs %>"
+related_category: "<%= post_category_l10n.slug_with_ancestors_slugs(separator: '-') %>"
 <%
   end
 end
