@@ -102,6 +102,8 @@ en:
   admin:
     education:
       programs:
+        categories:
+            root_name: Programs
         publication: Publication
         teacher:
           no_teaching: No teaching
