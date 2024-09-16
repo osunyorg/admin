@@ -1,12 +1,12 @@
 <%
-@people = @page.explicitly_connected_people.ordered.page params[:page]
+@people = @page.explicitly_connected_people.tmp_original.ordered(current_language).page params[:page]
 %>
 <%= osuny_panel University::Person.model_name.human(count: 2) do %>
   <%= simple_form_for :association, class_name: 'association' do |f| %>
     <%= f.input :name,
                 label: false,
                 as: :autocomplete,
-                url: search_admin_university_people_path(lang: @page.language.iso_code, website_id: nil),
+                url: search_admin_university_people_path(website_id: nil),
                 placeholder: t("university.person.search"),
                 input_html: {
                   data: {
@@ -20,8 +20,8 @@
     <tbody>
       <% @people.each do |person| %>
         <tr>
-          <td><%= link_to person, [:admin, person] %></td>
-          <td><%= link_to 'Déconnecter',
+          <td><%= osuny_link_localized person, [:admin, person] %></td>
+          <td><%= link_to t('admin.communication.website.pages.special_pages.person.disconnect'),
                           disconnect_admin_communication_website_page_path(@page, object_id: person.id, object_type: person.class),
                           class: button_classes_danger,
                           method: :post %></td>

@@ -1,0 +1,39 @@
+<% content_for :title, Communication::Extranet::Document.model_name.human(count: 2) %>
+
+<div class="row">
+  <div class="col-lg-3">
+    <%= render 'faceted_search/facets', facets: @facets, reset: t('extranet.library.reset') %>
+  </div>
+  <div class="col-lg-9">
+    <div class="row documents-list">
+      <% @documents.each do |document| 
+          l10n = document.localization_for(current_language)
+          next if l10n.nil? || !l10n.published_now?
+          file = l10n.file
+          %>
+        <div class="col-sm-6 col-xxl-4">
+          <article class="position-relative mt-5">
+            <div>
+              <i class="bi bi-file-earmark-text display-1"></i>
+              <% if file.attached? %>
+                <span>
+                  <%= file.filename.extension.upcase %>
+                  - <%= number_to_human_size file.byte_size, precision: 0 %>
+                </span>
+              <% end %>
+            </div>
+            <p class="mb-3">
+              <b><%= l10n %></b><br>
+              <span class="text-muted"><%= l l10n.published_at.to_date %><span>
+            </p>
+            <%= link_to t('extranet.library.download'), 
+                        file.url,
+                        class: 'btn btn-primary stretched-link',
+                        target: :_blank if file.attached? %>
+          </article>
+        </div>
+      <% end %>
+    </div>
+    <%= paginate @documents, theme: 'bootstrap-5' %>
+  </div>
+</div>

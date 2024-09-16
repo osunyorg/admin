@@ -21,7 +21,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             indexed
 #  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
 #  university_id            :uuid             not null, indexed
@@ -45,18 +45,13 @@
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
-  include Contentful
-  include Initials
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Shareable
-  include Sluggable
-  include Translatable
-  include WithAccessibility
-  include WithBlobs
-  include WithCal
+  include Shareable # TODO L10N : To remove
+  include Localizable
+  include WithBlobs # TODO L10N : To remove
   include WithDuplication
-  include WithFeaturedImage
+  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithTime
   include WithTree
@@ -72,12 +67,16 @@ class Communication::Website::Agenda::Event < ApplicationRecord
                           foreign_key: :communication_website_agenda_event_id,
                           association_foreign_key: :communication_website_agenda_category_id
 
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
+
   scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
   scope :ordered_asc, -> { order(:from_day, :from_hour) }
-  scope :ordered, -> { ordered_asc }
-  scope :published, -> { where(published: true) }
-  scope :draft, -> { where(published: false) }
-  scope :latest, -> { published.future_or_current.order(:updated_at).limit(5) }
+  scope :ordered, -> (language = nil) { ordered_asc }
+  scope :latest_in, -> (language) { published_now_in(language).future_or_current.order("communication_website_agenda_event_localizations.updated_at").limit(5) }
 
   scope :for_category, -> (category_id) {
     joins(:categories)
@@ -88,6 +87,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     )
     .distinct
   }
+  # TODO L10N : To adapt
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_website_agenda_events.meta_description) ILIKE unaccent(:term) OR
@@ -96,26 +96,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
       unaccent(communication_website_agenda_events.subtitle) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
-  def git_path(website)
-    return unless website.id == communication_website_id && published
-    git_path_content_prefix(website) + git_path_relative
-  end
-
-  def git_path_relative
-    path = "events/"
-    path += "archives/#{from_day.year}/" if archive?
-    path += "#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
-    path
-  end
-
-  def template_static
-    "admin/communication/websites/agenda/events/static"
-  end
 
   def dependencies
-    active_storage_blobs +
-    contents_dependencies +
-    [website.config_default_content_security_policy]
+    [website.config_default_content_security_policy] +
+    localizations.in_languages(website.active_language_ids)
   end
 
   def references
@@ -123,22 +107,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     abouts_with_agenda_block
   end
 
-  def to_s
-    "#{title}"
+  # TODO L10N : to remove
+  def translate_other_attachments(translation)
+    translate_attachment(translation, :shared_image) if shared_image.attached?
   end
 
   protected
-
-  def check_accessibility
-    accessibility_merge_array blocks
-  end
-
-  def explicit_blob_ids
-    super.concat [
-      featured_image&.blob_id,
-      shared_image&.blob_id
-    ]
-  end
 
   def abouts_with_agenda_block
     website.blocks.agenda.collect(&:about)

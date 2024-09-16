@@ -28,17 +28,14 @@ module Staticable
   # Sinon, les objets ont une "page spéciale", (agenda, actualités, offre de formation...)
   # Cette page a aussi des ancêtres, qu'il faut récupérer avec ancestors_and_self
   def hugo_ancestors_for_special_page(website)
-    return [] if is_a?(Communication::Website::Page)
+    return [] if is_a?(Communication::Website::Page::Localization)
     permalink = Communication::Website::Permalink.for_object(self, website)
     return [] unless permalink
-    special_page = permalink.special_page(website, hugo_language_fallback(website))
+    special_page = permalink.special_page(website)
     return [] unless special_page
-    special_page.ancestors_and_self
-  end
-
-  # Les publications n'ont pas de language, et on ne veut pas de vilain crash ni d'algo moche
-  def hugo_language_fallback(website)
-    respond_to?(:language) ? language : website.default_language
+    special_page_l10n = special_page.localization_for(language)
+    return [] unless special_page_l10n
+    special_page_l10n.ancestors_and_self
   end
 
   def hugo_permalink_in_website(website)

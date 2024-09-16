@@ -7,7 +7,7 @@ module Communication::Website::WithConnectedObjects
       'ActiveStorage::Blob'
     ].freeze
 
-    has_many :connections
+    has_many :connections, dependent: :destroy
 
     after_save :connect_about, if: :saved_change_to_about_id?
   end

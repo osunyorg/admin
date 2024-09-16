@@ -1,39 +1,21 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <% if can? :reorder, Research::Laboratory::Axis %>
-          <th width="20" class="ps-0">&nbsp;</th>
-        <% end %>
-        <th><%= Research::Laboratory::Axis.human_attribute_name('name') %></th>
-        <th><%= Research::Laboratory::Axis.human_attribute_name('short_name') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody data-sortable data-sort-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>">
-      <% axes.each do |axis| %>
-        <tr data-id="<%= axis.id %>">
-          <% if can? :reorder, Research::Laboratory::Axis %>
-            <td><i class="<%= Icon::DRAG %> handle"></i></td>
-          <% end %>
-          <td>
-            <%= link_to axis, admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis) %>
-          </td>
-          <td><%= axis.short_name %></td>
-          <td class="text-end">
-            <div class="btn-group" role="group">
-              <%= link_to t('edit'),
-                          edit_admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis),
-                          class: button_classes %>
-              <%= link_to t('delete'),
-                          admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis),
-                          method: :delete,
-                          data: { confirm: t('please_confirm') },
-                          class: button_classes_danger %>
-            </div>
-          </td>
-        </tr>
+<div  class="row g-2 mb-3"
+      <% if can?(:reorder, axes.first) %>
+        data-sortable
+        data-sort-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>"
       <% end %>
-    </tbody>
-  </table>
+      >
+  <% axes.each do |axis| %>
+    <div data-id="<%= axis.id %>">
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail_localized axis, classes: 'handle m-0' %>
+        <div class="card-body">
+          <%= osuny_link_localized  axis, 
+                                    admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis) %>
+        </div>
+        <div class="card-footer">
+          <%= axis.short_name %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

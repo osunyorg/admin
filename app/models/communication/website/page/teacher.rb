@@ -12,7 +12,7 @@ class Communication::Website::Page::Teacher < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    website.teachers.where(language_id: language_id).map(&:teacher)
+    dependencies_teachers
   end
 
   def git_path_relative
@@ -21,7 +21,14 @@ class Communication::Website::Page::Teacher < Communication::Website::Page
 
   protected
 
+  def dependencies_teachers
+    University::Person::Localization::Teacher.where(
+      about_id: website.teachers.pluck(:id),
+      language_id: website.active_language_ids
+    )
+  end
+
   def default_parent
-    website.special_page(Communication::Website::Page::Person, language: language)
+    website.special_page(Communication::Website::Page::Person)
   end
 end

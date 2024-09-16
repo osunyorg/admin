@@ -8,13 +8,13 @@ class Admin::Education::Schools::ApplicationController < Admin::Education::Appli
 
   def breadcrumb
     super
-    add_breadcrumb @school, [:admin, @school]
+    add_breadcrumb Education::School.model_name.human(count: 2), admin_education_schools_path
+    breadcrumb_for @school
   end
 
   def default_url_options
-    return {} unless params.has_key? :school_id
-    {
-      school_id: params[:school_id]
-    }
+    options = super
+    options[:school_id] = params[:school_id] if params.has_key? :school_id
+    options
   end
 end

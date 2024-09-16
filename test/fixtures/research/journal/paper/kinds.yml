@@ -1,13 +1,11 @@
 one:
   university: default_university
-  language: fr
   journal: default_journal
   title: Articles
   slug: articles
 
 two:
   university: default_university
-  language: fr
   journal: default_journal
   title: Recensions
   slug: recensions

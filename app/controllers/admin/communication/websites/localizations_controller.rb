@@ -22,7 +22,7 @@ class Admin::Communication::Websites::LocalizationsController < Admin::Communica
   end
 
   def load_localization
-    @localization = @website.find_or_create_localization_for(current_website_language)
+    @localization = @website.find_or_create_localization_for(current_language)
     authorize! :update, @localization
   end
 

@@ -5,7 +5,7 @@
 # Et il faudrait migrer en conséquence
 class Communication::Website::Permalink::Category < Communication::Website::Permalink
   def self.required_in_config?(website)
-    website.has_blog_posts? && website.has_blog_categories?
+    website.feature_posts
   end
 
   def self.static_config_key
@@ -13,8 +13,10 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
   end
 
   # /actualites/:slug/
+  # Le slug est en fait un assemblage des ancêtres, comme :
+  # /actualites/categorie-parente-categorie-enfant/
   def self.pattern_in_website(website, language)
-    "/#{slug_with_ancestors(website, language)}/:slug/"
+    special_page_path(website, language) + '/:slug/'
   end
 
   def self.special_page_type
@@ -29,7 +31,8 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
 
   def substitutions
     {
-      slug: about.path
+      slug: about.slug_with_ancestors_slugs
     }
   end
+
 end

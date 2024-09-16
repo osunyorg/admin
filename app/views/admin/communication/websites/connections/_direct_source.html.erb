@@ -1,15 +1,17 @@
-<%
-source_name = source.to_s
-begin
-  case type
-  when 'Communication::Website::Page'
-    source_link = admin_communication_website_page_path(website_id: source.website.id, id: source.id, lang: current_language)
-  when 'Communication::Website::Post'
-    source_link = admin_communication_website_post_path(website_id: source.website.id, id: source.id, lang: current_language)
-  else
-    source_link = url_for [:admin, source]
+<% 
+if source.present?
+  source_name = source&.to_s_in(current_language) || source.to_s
+  begin
+    case type
+    when 'Communication::Website::Page'
+      source_link = admin_communication_website_page_path(website_id: source.website.id, id: source.id, lang: source.language)
+    when 'Communication::Website::Post'
+      source_link = admin_communication_website_post_path(website_id: source.website.id, id: source.id, lang: source.language)
+    else
+      source_link = url_for [:admin, source]
+    end
+  rescue
   end
-rescue
-end
 %>
-<%= link_to_if source_link, source_name, source_link %>
+  <%= link_to_if source_link, source_name, source_link %>
+<% end %>

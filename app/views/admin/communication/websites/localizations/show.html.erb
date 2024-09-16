@@ -1,7 +1,5 @@
 <% content_for :title, "#{t('admin.communication.website.localizations.title')}" %>
 
-<%= render 'admin/communication/websites/language_switcher' %>
-
 <%= simple_form_for [:admin, @localization], as: :communication_website_localization, url: admin_communication_website_localization_path do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>

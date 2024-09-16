@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :confirm_two_factor_authenticated, except: [:new, :create, :cancel]
 
   def edit
-    add_breadcrumb t('admin.dashboard'), :admin_root_path
+    add_breadcrumb t('admin.dashboard'), admin_root_path(lang: current_university.default_language)
     if can? :read, @user
       add_breadcrumb User.model_name.human(count: 2), admin_users_path
       add_breadcrumb @user, [:admin, @user]

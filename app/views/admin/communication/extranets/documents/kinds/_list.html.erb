@@ -1,31 +1,19 @@
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th class="ps-0" width="60%"><%= Communication::Extranet::Document::Kind.human_attribute_name('name') %></th>
-        <th><%= Communication::Extranet::Document::Kind.human_attribute_name('quantity') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% kinds.each do |kind| %>
-        <tr>
-          <td class="ps-0"><%= link_to kind, admin_communication_extranet_document_kind_path(extranet_id: kind.extranet.id, id: kind.id) %></td>
-          <td><%= kind.documents.count %></td>
-          <td>
-            <div class="btn-group" role="group">
-              <%= link_to t('edit'),
-                          edit_admin_communication_extranet_document_kind_path(extranet_id: kind.extranet.id, id: kind.id),
-                          class: button_classes if can?(:update, kind) %>
-              <%= link_to t('delete'),
-                          admin_communication_extranet_document_kind_path(extranet_id: kind.extranet.id, id: kind.id),
-                          method: :delete,
-                          data: { confirm: t('please_confirm') },
-                          class: button_classes_danger if can?(:destroy, kind) %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="row g-2 mb-3">
+  <% kinds.each do |kind| %>
+    <div>
+      <div class="card card--horizontal">
+        <%= osuny_thumbnail_localized kind %>
+        <div class="card-body">
+          <%= osuny_published_localized kind %>
+          <%= osuny_link_localized  kind, 
+                                    admin_communication_extranet_document_kind_path(extranet_id: kind.extranet.id, id: kind.id),
+                                    classes: 'stretched-link' %>
+        </div>
+        <div class="card-footer">
+          <%= kind.documents.count %>
+          <%= Communication::Extranet::Document.model_name.human(count: kind.documents.count).downcase %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

@@ -2,16 +2,13 @@ class Communication::Block::Component::AgendaCategory < Communication::Block::Co
 
   def category
     return unless website
-    website.agenda_categories.find_by(id: data)
+    website.agenda_categories
+           .tmp_original # TODO L10N: to remove
+           .find_by(id: data)
   end
 
   def dependencies
     [category]
-  end
-
-  def translate!
-    return unless category.present?
-    @data = category.find_or_translate!(template.language).id
   end
 
 end

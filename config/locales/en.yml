@@ -117,6 +117,7 @@ en:
     advanced_settings: Advanced settings
     attachment_not_available: Attachment not available
     dashboard: Dashboard
+    directory: Directory
     duplicate: Duplicate
     elements:
       zero: No element
@@ -166,6 +167,8 @@ en:
     will_be_published_html: "<i>%{model}</i> will soon be published."
   batch_selectable:
     title: Edit the selection
+  cancel: Cancel
+  confirm: Confirm
   content: Content
   cookies_consent_choice: Cookies consent choice
   cookies_policy: Cookies policy
@@ -271,6 +274,9 @@ en:
     fr: French
   legal: Legal
   loading: Loading...
+  localization:
+    creation_alert: This element doesn't exist in the requested language. Do you want to create a translation?
+    label: Localization
   login:
     already_registered: Already registered?
     already_registered_details: Sign in if you already have an account.
@@ -308,6 +314,7 @@ en:
   menu:
     admin: Admin
     profile: Profile
+    edit_profile: Edit my profile
     server_admin: Server administration
     sign_out: Log out
   metadata: Metadata

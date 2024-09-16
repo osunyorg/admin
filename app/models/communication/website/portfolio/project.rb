@@ -14,7 +14,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             indexed
 #  original_id              :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
@@ -34,19 +34,21 @@
 #
 class Communication::Website::Portfolio::Project < ApplicationRecord
   include AsDirectObject
-  include Contentful
-  include Initials
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Shareable
-  include Sluggable
-  include Translatable
-  include WithAccessibility
-  include WithBlobs
+  include Shareable # TODO L10N : To remove
+  include Localizable
+  include WithBlobs # TODO L10N : To remove
   include WithDuplication
-  include WithFeaturedImage
+  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithUniversity
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   has_and_belongs_to_many :categories,
                           class_name: 'Communication::Website::Portfolio::Category',
@@ -54,12 +56,31 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
                           foreign_key: :communication_website_portfolio_project_id,
                           association_foreign_key: :communication_website_portfolio_category_id
 
-  validates :title, :year, presence: true
+  validates :year, presence: true
 
-  scope :ordered, -> { order(year: :desc, title: :asc) }
-  scope :published, -> { where(published: true) }
-  scope :draft, -> { where(published: false) }
-  scope :latest, -> { published.order(updated_at: :desc).limit(5) }
+  scope :ordered, -> (language) {
+    localization_title_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.title))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.title)))) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_title
+    SQL
+
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          communication_website_portfolio_project_localizations as localizations
+      ) localizations ON communication_website_portfolio_projects.id = localizations.about_id
+    SQL
+    ]))
+    .select("communication_website_portfolio_projects.*", localization_title_select)
+    .group("communication_website_portfolio_projects.id")
+    .order("communication_website_portfolio_projects.year DESC, localization_title ASC")
+  }
+  scope :latest_in, -> (language) { published_now_in(language).order("communication_website_portfolio_project_localizations.updated_at DESC").limit(5) }
 
   scope :for_category, -> (category_id) {
     joins(:categories)
@@ -70,6 +91,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
     )
     .distinct
   }
+  # TODO L10N : To adapt
   scope :for_search_term, -> (term) {
     where("
       unaccent(communication_website_portfolio_projects.meta_description) ILIKE unaccent(:term) OR
@@ -78,23 +100,9 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
-  def git_path(website)
-    return unless website.id == communication_website_id && published
-    git_path_content_prefix(website) + git_path_relative
-  end
-
-  def git_path_relative
-    "projects/#{year}-#{slug}.html"
-  end
-
-  def template_static
-    "admin/communication/websites/portfolio/projects/static"
-  end
-
   def dependencies
-    active_storage_blobs +
-    contents_dependencies +
-    [website.config_default_content_security_policy]
+    [website.config_default_content_security_policy] +
+    localizations.in_languages(website.active_language_ids)
   end
 
   def references
@@ -102,22 +110,12 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
     abouts_with_projects_block
   end
 
-  def to_s
-    "#{title}"
+  # TODO L10N : to remove
+  def translate_other_attachments(translation)
+    translate_attachment(translation, :shared_image) if shared_image.attached?
   end
 
   protected
-
-  def check_accessibility
-    accessibility_merge_array blocks
-  end
-
-  def explicit_blob_ids
-    super.concat [
-      featured_image&.blob_id,
-      shared_image&.blob_id
-    ]
-  end
 
   def abouts_with_projects_block
     website.blocks.projects.collect(&:about)

@@ -6,7 +6,9 @@ class Admin::University::Organizations::ImportsController < Admin::University::A
   has_scope :for_status
 
   def index
-    @imports = apply_scopes(@imports.kind_organizations).ordered.page(params[:page])
+    @imports = apply_scopes(@imports.kind_organizations)
+                  .ordered(current_language)
+                  .page(params[:page])
     breadcrumb
   end
 
@@ -21,7 +23,6 @@ class Admin::University::Organizations::ImportsController < Admin::University::A
 
   def create
     @import.kind = :organizations
-    @import.university = current_university
     @import.user = current_user
     if @import.save
       redirect_to admin_university_organizations_import_path(@import),
@@ -48,5 +49,8 @@ class Admin::University::Organizations::ImportsController < Admin::University::A
   def import_params
     params.require(:import)
           .permit(:file)
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

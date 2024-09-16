@@ -1,33 +1,46 @@
-<% include_id ||= false %>
-<div class="nested-fields">
-  <div class="card mb-3">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-md-5">
-          <%= f.hidden_field :target_type, value: "Education::Program" %>
-          <%= f.association :target,
-                            collection: collection_tree(current_university.education_programs),
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] },
-                            label: false,
-                            include_blank: t('simple_form.include_blanks.defaults.program'),
-                            required: true,
-                            wrapper: false %>
-        </div>
-        <div class="col-md-6">
-          <%= f.input :description,
-                      as: :string,
-                      label: false,
-                      placeholder: University::Person::Involvement.human_attribute_name('description'),
-                      wrapper: false %>
-        </div>
-        <div class="col-md-1 text-end">
-          <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
-                                          f,
-                                          class: 'btn btn-sm btn-danger' %>
+<%
+include_id ||= false
+l10n = f.object.localization_for(current_language)
+if l10n.nil? && f.object.persisted?
+  l10n = f.object.localize_in!(current_language)
+end
+l10n ||= f.object.localizations.build(language_id: current_language.id)
+%>
+<%= f.simple_fields_for :localizations, l10n do |lf| %>
+  <%= lf.hidden_field :id %>
+  <%= lf.hidden_field :language_id, value: current_language.id %>
+  <div class="nested-fields">
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-5">
+            <%= f.hidden_field :target_type, value: "Education::Program" %>
+            <%= f.association :target,
+                              collection: osuny_collection_tree(
+                                current_university.education_programs
+                                                  .tmp_original, # TODO L10N: REMOVE
+                                localized: true
+                              ),
+                              label: false,
+                              include_blank: t('simple_form.include_blanks.defaults.program'),
+                              required: true,
+                              wrapper: false %>
+          </div>
+          <div class="col-md-6">
+            <%= lf.input :description,
+                        as: :string,
+                        label: false,
+                        placeholder: University::Person::Involvement.human_attribute_name('description'),
+                        wrapper: false %>
+          </div>
+          <div class="col-md-1 text-end">
+            <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
+                                            f,
+                                            class: 'btn btn-sm btn-danger' %>
+          </div>
         </div>
       </div>
+      <%= f.hidden_field :id if include_id %>
     </div>
-    <%= f.hidden_field :id if include_id %>
   </div>
-</div>
+<% end %>

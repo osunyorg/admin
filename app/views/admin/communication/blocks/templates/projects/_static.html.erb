@@ -2,12 +2,16 @@
 <% if block.template.mode == 'all' %>
       all: true
 <% elsif block.template.mode == 'category' && block.template.category %>
-      category: "<%= block.template.category.path %>"
+  <% category_l10n = block.template.category.localization_for(block.language) %>
+  <% if category_l10n %>
+      category: "/<%= category_l10n.slug_with_ancestors_slugs(separator: '-') %>/"
+  <% end %>
 <% end %>
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
       projects:
 <% block.template.selected_projects.each do |project| %>
-        - slug: "<%= project.slug %>"
-          file: "<%= project.git_path_relative %>"
+  <% project_l10n = project.localization_for(block.language) %>
+        - slug: "<%= project_l10n.slug %>"
+          file: "<%= project_l10n.git_path_relative %>"
 <% end %>

@@ -52,7 +52,8 @@ gem "kamifusen"#, path: "../kamifusen"
 gem "kaminari"
 gem "leaflet-rails"
 gem "libretranslate"#, path: "../libretranslate"
-gem "mini_magick"
+gem "lucide-rails"
+gem "mini_magick", "~> 4.0"
 gem "observer", "~> 0.1.2"
 gem "octokit"
 gem "omniauth-rails_csrf_protection", "~> 1"
@@ -95,7 +96,7 @@ end
 group :development do
   gem "annotate"
   gem "listen", "~> 3.3"
-  gem "rack-mini-profiler", "~> 2.0"
+  gem "rack-mini-profiler", "~> 3.0"
   gem "spring"
   gem "web-console", ">= 4.1.0"
 end

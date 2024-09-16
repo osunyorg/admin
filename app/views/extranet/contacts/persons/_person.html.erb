@@ -12,11 +12,11 @@
       <% end %>
     </div>
     <div class="col-9 col-md-12">
-      <%= link_to [:contacts, person], class: 'stretched-link' do %>
-        <p>
-          <b><%= person.first_name %> <%= person.last_name %></b><br>
-          <span class="text-muted"><%= person.summary %></span>
-        </p>
-      <% end %>
+      <p>
+        <%= osuny_link_localized person,
+                                 contacts_person_path(person), 
+                                 classes: 'stretched-link' %>
+      </p>
     </div>
+  </div>
 </article>

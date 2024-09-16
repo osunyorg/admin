@@ -29,18 +29,15 @@
 #
 class Communication::Extranet::Document < ApplicationRecord
   include Sanitizable
-  include WithPublication
+  include Localizable
+  include LocalizableOrderByNameScope
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :category
   belongs_to :kind
 
+  # TODO L10N : To remove
   has_one_attached_deletable :file
 
-  validates :name, presence: true
-
-  def to_s
-    "#{name}"
-  end
 end

@@ -1,0 +1,14 @@
+<% content_for :title, "#{University::Person::Alumnus.model_name.human(count: 2)} (#{@alumni.total_count})" %>
+
+<p>&nbsp;</p>
+<%= render 'filters', current_path: admin_administration_alumni_path, filters: @filters if @filters.any?  %>
+
+<%= render 'admin/administration/alumni/list', alumni: @alumni %>
+
+<%= paginate @alumni %>
+
+<% content_for :action_bar_left do %>
+  <%= link_to t('university.alumni.cohorts.import_btn'),
+              new_admin_administration_alumni_cohorts_import_path,
+              class: button_classes if can? :create, University::Person::Alumnus %>
+<% end %>

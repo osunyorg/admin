@@ -2,14 +2,17 @@
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th><%= University::Person::Category.human_attribute_name('name') %></th>
+        <th><%= University::Person::Category::Localization.human_attribute_name('name') %></th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <% categories.each do |category| %>
         <tr>
-          <td><%= link_to category, admin_university_person_category_path(category) %></td>
+          <td>
+            <%= osuny_link_localized  category,
+                                      admin_university_person_category_path(category) %>
+          </td>
           <td class="text-end">
             <div class="btn-group" role="group">
               <%= edit_link category %>

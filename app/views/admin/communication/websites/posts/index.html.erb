@@ -31,9 +31,6 @@
   <% end %>
 </div>
 
-<%= render 'admin/communication/websites/language_switcher' %>
-
-
 <% content_for :action_bar_left do %>
   <%= link_to t('communication.website.posts.new_curation'),
               new_admin_communication_website_post_curation_path(website_id: @website.id),

@@ -7,12 +7,11 @@
 module AsDirectObject
   extend ActiveSupport::Concern
 
-  included do
-    include WithDependencies
-    include WithGit
-    include WithGitFiles
-    include WithReferences
+  include WithDependencies
+  include WithGit
+  include WithReferences
 
+  included do
     belongs_to :website,
                class_name: 'Communication::Website',
                foreign_key: :communication_website_id
@@ -24,6 +23,10 @@ module AsDirectObject
 
     after_save  :connect_dependencies
     after_touch :connect_dependencies
+  end
+
+  def websites
+    [website]
   end
 
   def is_direct_object?
@@ -41,11 +44,11 @@ module AsDirectObject
   end
 
   # L'objet fait son ménage
-  # TODO Cette méthode devrait être appelée dès qu'on enregistre un objet indirect, 
+  # TODO Cette méthode devrait être appelée dès qu'on enregistre un objet indirect,
   # sur chaque `direct_source` connectée (via les connexions).
   def delete_obsolete_connections
     Communication::Website::Connection.delete_useless_connections(
-      connections, 
+      connections,
       recursive_dependencies
     )
   end

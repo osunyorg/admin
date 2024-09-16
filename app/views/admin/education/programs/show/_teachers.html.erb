@@ -9,12 +9,16 @@
           </tr>
         </thead>
         <tbody>
-          <% @teacher_involvements.each do |involvement| %>
+          <% @teacher_involvements.each do |involvement|
+              person = involvement.person
+              involvement_l10n = involvement.best_localization_for(current_language) %>
             <tr>
               <td class="ps-0">
-                <%= link_to_if can?(:read, involvement.person), involvement.person.to_s, admin_university_person_path(involvement.person) %>
+                <%= link_to_if can?(:read, person),
+                          person.best_localization_for(current_language),
+                          admin_education_teacher_path(person) %>
               </td>
-              <td><%= involvement.description %></td>
+              <td><%= involvement_l10n.description %></td>
             </tr>
           <% end %>
         </tbody>

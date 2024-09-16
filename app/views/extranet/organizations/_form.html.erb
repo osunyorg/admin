@@ -2,91 +2,63 @@
 <%= simple_form_for organization, url: url do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
 
-  <div class="row">
-    <div class="col-xl-6">
-      <%= f.input :name %>
-      <%= render 'admin/application/summary/form', f: f, about: organization %>
-      <%= f.input :text,
-                  as: :summernote,
-                  input_html: {
-                    data: { 'summernote-config' => 'mini-list' }
-                  } %>
+    <div class="row">
+      <div class="col-lg-8">
+        <%= lf.input :name %>
+        <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+        <%= lf.input :text,
+                    as: :summernote,
+                    input_html: {
+                      data: { 'summernote-config' => 'mini-list' }
+                    } %>
+        <h2 class="h5 mt-5 mb-4"><%= University::Organization.human_attribute_name('physical') %></h2>
+        <%= lf.input :address_name %>
+        <%= f.input :address %>
+        <%= lf.input :address_additional %>
+        <div class="row">
+          <div class="col-lg-4">
+            <%= f.input :zipcode %>
+          </div>
+          <div class="col-lg-8">
+            <%= f.input :city %>
+          </div>
+        </div>
+        <%= f.input :country, input_html: { class: 'form-select' } %>
 
-      <h2><%= University::Organization.human_attribute_name('legal') %></h2>
-      <div class="row">
-        <div class="col-xl-6">
-          <%= f.input :long_name %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :kind, include_blank: false %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :siren %>
-        </div>
+        <h2 class="h5 mt-5 mb-4"><%= University::Organization.human_attribute_name('digital') %></h2>
+        <%= lf.input :url %>
+        <%= f.input :phone %>
+        <%= f.input :email %>
+        <%= f.input :linkedin %>
+        <%= f.input :twitter %>
+        <%= f.input :mastodon %>
+
+        <h2 class="h5 mt-5 mb-4"><%= University::Organization.human_attribute_name('legal') %></h2>
+        <%= lf.input :long_name %>
+        <%= f.input :kind, include_blank: false %>
+        <%= f.input :siren %>
+      </div>
+
+      <div class="offset-lg-1 col-lg-3">
+
+        <h2 class="h5 mt-5 mb-4"><%= University::Organization.human_attribute_name('logos') %></h2>
+        <%= f.input :logo,
+                    as: :single_deletable_file,
+                    input_html: { accept: default_images_formats_accepted },
+                    preview: 200,
+                    resize: false,
+                    direct_upload: true %>
+        <%= f.input :logo_on_dark_background,
+                    as: :single_deletable_file,
+                    input_html: { accept: default_images_formats_accepted },
+                    preview: 200,
+                    resize: false,
+                    direct_upload: true %>
+        <%= submit f %>
       </div>
     </div>
-
-    <div class="col-xl-6">
-      <h2><%= University::Organization.human_attribute_name('physical') %></h2>
-      <div class="row">
-        <div class="col-xl-6">
-          <%= f.input :address_name %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :address %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :address_additional %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :zipcode %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :city %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :country, input_html: { class: 'form-select' } %>
-        </div>
-      </div>
-
-      <h2><%= University::Organization.human_attribute_name('digital') %></h2>
-      <div class="row">
-        <div class="col-xl-6">
-          <%= f.input :url %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :phone %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :email %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :linkedin %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :twitter %>
-        </div>
-        <div class="col-xl-6">
-          <%= f.input :mastodon %>
-        </div>
-      </div>
-
-      <h2><%= University::Organization.human_attribute_name('logos') %></h2>
-      <%= f.input :logo,
-                  as: :single_deletable_file,
-                  input_html: { accept: default_images_formats_accepted },
-                  preview: 200,
-                  resize: false,
-                  direct_upload: true %>
-      <%= f.input :logo_on_dark_background,
-                  as: :single_deletable_file,
-                  input_html: { accept: default_images_formats_accepted },
-                  preview: 200,
-                  resize: false,
-                  direct_upload: true %>
-    </div>
-
-  </div>
-  <%= submit f %>
+  <% end %>
 <% end %>

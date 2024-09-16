@@ -2,6 +2,7 @@ namespace :research do
   resources :researchers, only: [:index, :show, :update] do 
     member do
       post 'sync-with-hal' => 'researchers#sync_with_hal', as: :sync_with_hal
+      get :static
     end
   end
   resources :publications do
@@ -19,6 +20,9 @@ namespace :research do
     root to: 'dashboard#index'
   end
   resources :journals do
+    member do
+      get :static
+    end
     resources :volumes, controller: 'journals/volumes' do
       member do
         get :static

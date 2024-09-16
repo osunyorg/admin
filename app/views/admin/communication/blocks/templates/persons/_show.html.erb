@@ -9,15 +9,14 @@
         <% block.template.selected_elements.each do |element|
           person = element.person
           next if person.nil?
+          person_l10n = person.localization_for(block.language)
+          next if person_l10n.nil?
           %>
           <article class="person" itemscope itemtype="https://schema.org/Person">
             <div class="description">
               <h<%= heading_level %>>
-                <% if block.template.option_link %>
-                  <%= link_to person, [:admin, person] %>
-                <% else %>
-                  <%= element.person %>
-                <% end %>
+                <%# TODO L10N : Vérifier les extranets %>
+                <%= link_to_if block.template.option_link, person_l10n, person_l10n.current_permalink_url_in_website(@website) %>
               </h<%= heading_level %>>
               <p itemprop="jobTitle">
                 <%= element.role %>

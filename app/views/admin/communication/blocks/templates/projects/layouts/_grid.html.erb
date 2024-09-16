@@ -1,0 +1,37 @@
+<div class="grid">
+  <% block.template.selected_projects.each do |project|
+      next if project.nil?
+      project_l10n = project.localization_for(block.language)
+      %>
+    <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
+      <div class="project-content">
+        <div class="project-description">
+          <h<%= block.heading_rank_children %> class='project-title' itemprop='name'>
+            <%= link_to project_l10n, project_l10n.current_permalink_url_in_website(@website) %>
+          </h<%= block.heading_rank_children %>>
+          <% if project_l10n.summary.present? %>
+            <p itemprop="abstract"><%= project_l10n.summary %></p>
+          <% end %>
+          <% if project.categories.present? %>
+            <ul class="project-categories">
+              <% project.categories.each do |category| %>
+                <%
+                category_l10n = category.localization_for(block.language)
+                next if category_l10n.nil?
+                %>
+                <li>
+                  <%= link_to category_l10n, category_l10n.current_permalink_url_in_website(@website) %>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </div>
+      <div class="media">
+        <% if project_l10n.featured_image.attached? %>
+          <%= kamifusen_tag project_l10n.featured_image %>
+        <% end %>
+      </div>
+    </article>
+  <% end %>
+</div>

@@ -1,7 +1,17 @@
-<p class="mb-0">
-  <% if block.template.mode == 'categories' %>
-    <%= @website.post_categories.ordered.collect(&:to_s).join(', ') %>
-  <% else %>
-    <%= block.template.selected_posts.collect(&:to_s).join(', ') %>
+<%  if block.template.mode == 'categories' %>
+  <%= @website.post_categories.ordered(current_language).each do |category| %>
+    <p><%= category.to_s_in(current_language) %></p>
   <% end %>
-</p>
+<% else %>
+  <div class="row">
+  <% block.template.selected_posts.each do |post| 
+    l10n = post.localization_for(block.language)
+    next if l10n.nil?
+    %>
+    <div class="col-lg-6 mb-4">
+      <%= kamifusen_tag l10n.featured_image, width: 300, class: 'img-fluid mb-2' if l10n.featured_image.attached? %>
+      <p><%= post.to_s_in(current_language) %></p>
+    </div>
+  <% end %>
+  </div>
+<% end %>

@@ -1,5 +1,9 @@
 <%
-pages = collection_tree(block.about&.website.pages.for_language(block.language))
+pages = osuny_collection_tree(
+  block.about.website.pages
+    .tmp_original, # TODO L10N : remove
+  localized: true
+)
 %>
 <% unless label.blank? %>
   <label  class="form-label"
@@ -14,8 +18,8 @@ pages = collection_tree(block.about&.website.pages.for_language(block.language))
     <option value="" :selected="true"><%= none %></option>
   <% end %>
   <% pages.each do |page| %>
-    <option value="<%= page[:id] %>">
-      <%= page[:label].html_safe %>
+    <option value="<%= page.last %>">
+      <%= page.first.html_safe %>
     </option>
   <% end %>
 </select>

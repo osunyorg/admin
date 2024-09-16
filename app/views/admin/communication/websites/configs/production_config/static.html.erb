@@ -4,7 +4,7 @@ baseURL: <%= @website.url %>
 
 ## LANGUAGE
 defaultContentLanguage: <%= @website.default_language.iso_code %>
-defaultContentLanguageInSubdir: <%= @website.languages.many? %>
+defaultContentLanguageInSubdir: <%= @website.active_languages.many? %>
 
 ## CACHE
 deployment:

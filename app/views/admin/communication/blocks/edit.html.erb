@@ -2,9 +2,9 @@
 <% content_for :title_right do %>
   <%= t "enums.communication.block.template_kind.#{@block.template_kind}" %>
 <% end %>
-<div  id="app" 
-      v-cloak 
-      data-languagetool-locale="<%= I18n.locale %>" 
+<div  id="app"
+      v-cloak
+      data-languagetool-locale="<%= I18n.locale %>"
       data-languagetool-email="<%= ENV['LANGUAGE_TOOL_USERNAME'] %>"
       data-languagetool-token="<%= ENV['LANGUAGE_TOOL_ADD_ON_TOKEN'] %>">
   <div class="spinner-border text-primary" role="status">
@@ -18,7 +18,7 @@
       <div class="col-xxl-9 col-lg-8">
         <div class="row pure__row--small">
           <div class="col-lg-6">
-            <%= f.input :title, 
+            <%= f.input :title,
                         input_html: { data: { translatable: true } } %>
           </div>
           <div class="col-lg-6">
@@ -55,7 +55,7 @@
     <% content_for :action_bar_left do %>
       <%= destroy_link @block %>
       <%= duplicate_link @block %>
-      <%= render 'admin/application/i18n/translate_button', about: @block %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: @block.about %>
     <% end %>
     <% content_for :action_bar_right do %>
       <%= submit f %>
@@ -183,7 +183,7 @@
           };
 
         $(element).summernote({
-          lang: '<%= current_language.summernote_locale unless current_language.summernote_locale.blank? %>',
+          lang: '<%= current_interface_language.summernote_locale unless current_interface_language.summernote_locale.blank? %>',
           toolbar: window.SUMMERNOTE_CONFIGS[config].toolbar, // Dependent of app/assets/javascripts/admin/plugins/summernote.js
           followingToolbar: true,
           disableDragAndDrop: true,

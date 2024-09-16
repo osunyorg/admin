@@ -58,11 +58,6 @@ class Communication::Block::Template::Base
     self.data = json
   end
 
-  def translate!
-    components.each(&:translate!)
-    elements.each(&:translate!) if has_element_class?
-  end
-
   def dependencies
     components + elements
   end

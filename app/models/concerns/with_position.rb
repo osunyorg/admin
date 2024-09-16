@@ -3,7 +3,7 @@ module WithPosition
 
   included do
     before_create :set_position
-    scope :ordered, -> { order(position: :asc) }
+    scope :ordered, -> (language = nil) { order(position: :asc) }
   end
 
   protected

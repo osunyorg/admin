@@ -5,7 +5,7 @@ module Communication::Extranet::WithFeatures
     FEATURES = [
       :posts,
       :contacts,
-      :library,
+      :documents,
       :alumni,
       :jobs,
     ]

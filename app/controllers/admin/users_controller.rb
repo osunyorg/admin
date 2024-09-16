@@ -25,7 +25,7 @@ class Admin::UsersController < Admin::ApplicationController
       params,
       key: :about,
       university: current_university,
-      only: User::Favorite.permitted_about_types
+      mandatory_module: Contentful
     )
     if operation == 'add'
       current_user.add_favorite(about)

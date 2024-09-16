@@ -11,6 +11,7 @@ en:
         is_really_a_university: Is really a university
         identifier: Identifier
         invoice_date: Contribution date
+        languages: Languages
         logo: Logo
         name: Name
         private: Private
@@ -29,8 +30,6 @@ en:
         token: Secret token
       university/organization:
         address: Address
-        address_additional: Additional address
-        address_name: Address name
         categories: Categories
         city: City
         country: Country
@@ -39,22 +38,29 @@ en:
         geolocation: Geographical coordinates
         kind: Kind
         legal: Legal information
+        map: Map
+        phone: Telephone
+        physical: Contact information
+        siren: Legal identification number
+        zipcode: Zipcode
+      university/organization/category:
+        children: Children categories
+        parent: Parent category
+      university/organization/category/localization:
+        language: Language
+        name: Name
+        slug: Slug
+      university/organization/localization:
+        address_additional: Additional address
+        address_name: Address name
         linkedin: LinkedIn
         logo: Logo for light backgrounds (default)
         logo_on_dark_background: Logo for dark backgrounds (optional)
         long_name: Long name
-        map: Map
         name: Name
-        phone: Telephone
-        physical: Contact information
-        siren: Legal identification number
         text: Text
         twitter: Twitter
         url: Website
-        zipcode: Zipcode
-      university/organization/category:
-        language: Language
-        name: Name
       university/person:
         abilities: Abilities
         address: Address
@@ -62,7 +68,6 @@ en:
         administration: Administrative staff
         alumnus: Alumnus
         author: Author
-        biography: Biography
         birthdate: Birthdate
         categories: Categories
         city: City
@@ -73,7 +78,6 @@ en:
         email: Email
         email_visibility: Email visibility
         essentials: Essentials
-        first_name: First name
         gender: Gender
         genders:
           female: Female
@@ -88,12 +92,8 @@ en:
         is_author: Author
         is_researcher: Researcher
         is_teacher: Teacher
-        last_name: Last name
-        linkedin: LinkedIn URL
         linkedin_visibility: LinkedIn URL visibility
-        mastodon: Mastodon username
         mastodon_visibility: Mastodon username visibility
-        name: Name
         phone_mobile: Mobile phone
         phone_mobile_visibility: Mobile phone visibility
         phone_personal: Personal phone
@@ -101,23 +101,23 @@ en:
         phone_professional: Professional phone
         phone_professional_visibility: Professional phone visibility
         picture: Profile picture
-        picture_credit: Credit
         research_journal_papers: Papiers
         research_laboratories: Research laboratories
         researcher: Researcher
         roles: Roles
-        slug: Slug
         socials: Socials
         teacher: Teacher
         tenure: Has tenure?
-        twitter: Twitter username
         twitter_visibility: Twitter username visibility
-        url: Website
         user: User
         zipcode: Zipcode
       university/person/category:
+        children: Children categories
+        parent: Parent category
+      university/person/category/localization:
         language: Language
         name: Name
+        slug: Slug
       university/person/experience:
         description: Description
         edit: Edit experience
@@ -127,12 +127,25 @@ en:
         to_year: End year
         new: Add experience
       university/person/involvement:
-        description: Mission (in this context)
         person: Person
         target_id: ''
+      university/person/involvement/localization:
+        description: Mission (in this context)
+      university/person/localization:
+        biography: Biography
+        first_name: First name
+        last_name: Last name
+        linkedin: LinkedIn URL
+        mastodon: Mastodon URL
+        name: Name
+        picture_credit: Credit
+        slug: Slug
+        twitter: Twitter username
+        url: Website
       university/role:
-        description: Description
         people: People
+      university/role/localization:
+        description: Role description
     errors:
       models:
         university:
@@ -181,6 +194,7 @@ en:
     hints:
       university:
         is_really_a_university: Uncheck this to hide the 5 realms.
+        languages: "Those languages are currently used on websites: %{used_languages}"
         sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
         sso_button_label: "Default: Sign in via SSO"
       university_organization:
@@ -257,6 +271,19 @@ en:
         import_btn: Import experiences
         import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @."
         title: Experiences imports
+      facets:
+        administrator:
+          responsabilities: Responsabilities
+          responsabilities_of: Responsabilities of %{name}
+        author:
+          posts: News
+          posts_of: News of %{name}
+        researcher:
+          publications: Publications
+          publications_of: Publications of %{name}
+        teacher:
+          programs: Teachings
+          programs_of: Teachings of %{name}
       import_btn: Import people
       import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @."
       personal_data_visibilities:

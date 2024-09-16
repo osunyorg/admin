@@ -1,108 +1,122 @@
-<% version = 1 %>
----
-<% cache [@about, @website.id, version] do %>
-<%= render 'admin/application/static/title' %>
+<%
+# this version has to be incremented every time you change something in the file, to invalidate the cache
+version = 3
+person = @l10n.about
+language = @l10n.language
+cache_key = [person, @l10n, @website.id, version]
+cache cache_key do
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
 linkTitle: >-
-  <%= @about.to_s_alphabetical %>
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/summary/static' %>
-<%= render 'admin/application/i18n/static' %>
+  <%= @l10n.to_s_alphabetical %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            about: person,
+            l10n: @l10n,
+            full_width: true,
+            toc_offcanvas: true %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
 first_name: >-
-  <%= @about.first_name %>
+  <%= prepare_text_for_static @l10n.first_name %>
 last_name: >-
-  <%= @about.last_name %>
-<% if @about.phone_mobile_is_public? %>
+  <%= prepare_text_for_static @l10n.last_name %>
+<% if person.phone_mobile_is_public? %>
 phone: >-
-  <%= @about.phone_mobile %>
+  <%= prepare_text_for_static person.phone_mobile %>
 <% end %>
-<% if @about.email_is_public? %>
+<% if person.email_is_public? %>
 email: >-
-  <%= @about.email %>
+  <%= prepare_text_for_static person.email %>
 <% end %>
-<% if @about.twitter_is_public? %>
+<% if person.twitter_is_public? %>
 twitter: >-
-  <%= @about.twitter %>
+  <%= prepare_text_for_static @l10n.twitter %>
 <% end %>
-<% if @about.linkedin_is_public? %>
+<% if person.linkedin_is_public? %>
 linkedin: >-
-  <%= @about.linkedin %>
+  <%= prepare_text_for_static @l10n.linkedin %>
 <% end %>
 website: >-
-  <%= @about.url %>
+  <%= prepare_text_for_static person.url %>
 contact_details:
-<% if @about.address_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: @about.zipcode, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :city, data: @about.city, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :country, data: @about.country, kind: ContactDetails::Country %>
+<% if person.address_is_public? %>
+<%= render 'admin/application/static/contact_detail', variable: :address, data: person.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: person.zipcode, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :city, data: person.city, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :country, data: person.country, kind: ContactDetails::Country %>
 <% end %>
-<%= render 'admin/application/static/contact_detail', variable: :website, data: @about.url, kind: ContactDetails::Website %>
-<%= render 'admin/application/static/contact_detail', variable: :linkedin, data: @about.linkedin, kind: ContactDetails::Linkedin if @about.linkedin_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :twitter, data: @about.twitter, kind: ContactDetails::Twitter if @about.twitter_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :mastodon, data: @about.mastodon, kind: ContactDetails::Mastodon if @about.mastodon_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :phone, data: @about.phone_mobile, kind: ContactDetails::Phone if @about.phone_mobile_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :phone_professional, data: @about.phone_professional, kind: ContactDetails::Phone if @about.phone_professional_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :phone_personal, data: @about.phone_personal, kind: ContactDetails::Phone if @about.phone_personal_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :email, data: @about.email, kind: ContactDetails::Email if @about.email_is_public? %>
-<% if @about.best_picture.attached? %>
+<%= render 'admin/application/static/contact_detail', variable: :website, data: @l10n.url, kind: ContactDetails::Website %>
+<%= render 'admin/application/static/contact_detail', variable: :linkedin, data: @l10n.linkedin, kind: ContactDetails::Linkedin if person.linkedin_is_public? %>
+<%= render 'admin/application/static/contact_detail', variable: :twitter, data: @l10n.twitter, kind: ContactDetails::Twitter if person.twitter_is_public? %>
+<%= render 'admin/application/static/contact_detail', variable: :mastodon, data: @l10n.mastodon, kind: ContactDetails::Mastodon if person.mastodon_is_public? %>
+<%= render 'admin/application/static/contact_detail', variable: :phone, data: person.phone_mobile, kind: ContactDetails::Phone if person.phone_mobile_is_public? %>
+<%= render 'admin/application/static/contact_detail', variable: :phone_professional, data: person.phone_professional, kind: ContactDetails::Phone if person.phone_professional_is_public? %>
+<%= render 'admin/application/static/contact_detail', variable: :phone_personal, data: person.phone_personal, kind: ContactDetails::Phone if person.phone_personal_is_public? %>
+<%= render 'admin/application/static/contact_detail', variable: :email, data: person.email, kind: ContactDetails::Email if person.email_is_public? %>
+<% if person.best_picture.attached? %>
 image:
-  id: "<%= @about.best_picture.blob.id %>"
+  id: "<%= person.best_picture.blob.id %>"
   alt: ""
   credit: >-
-    <%= prepare_html_for_static @about.picture_credit %>
+    <%= prepare_html_for_static @l10n.picture_credit %>
 <% end %>
 roles:
-<% if @about.author.for_website?(@website) %>
+<% if @l10n.author.for_website?(@website) %>
   - author
 <% end %>
-<% if @about.teacher.for_website?(@website) %>
+<% if @l10n.teacher.for_website?(@website) %>
   - teacher
 <% end %>
-<% if @about.researcher.for_website?(@website) %>
+<% if @l10n.researcher.for_website?(@website) %>
   - researcher
 <% end %>
-<% if @about.administrator.for_website?(@website) %>
+<% if @l10n.administrator.for_website?(@website) %>
   - administrator
 <% end %>
-<% if @about.involvements_as_teacher.any? %>
+<% if person.involvements_as_teacher.any? %>
 teachings:
-<% @about.involvements_as_teacher.each do |involvement|
-    target = involvement.target
+<% person.involvements_as_teacher.each do |involvement|
+    involvement_l10n = involvement.best_localization_for(language)
+    program = involvement.target
+    program_l10n = program.best_localization_for(language)
     %>
   - description: >-
-      <%= involvement.description %>
+      <%= involvement_l10n.description %>
     program:
       title: >-
-        <%= target.to_s %>
+        <%= program_l10n.to_s %>
       url: >-
-        <%= target.current_permalink_in_website(@website)&.path %>
+        <%= program_l10n.current_permalink_in_website(@website)&.path %>
 <% end %>
 <% end %>
-<% if @about.roles_as_administrator.any? %>
+<% if person.roles_as_administrator.any? %>
 administrative_missions:
-<% @about.roles_as_administrator.each do |role|
-    target = role.target %>
+<% person.roles_as_administrator.each do |role|
+    role_l10n = role.best_localization_for(language)
+    target = role.target
+    target_l10n = target.best_localization_for(language)
+    %>
   - description: >-
-      <%= role.to_s %>
+      <%= role_l10n.to_s %>
     target:
       title: >-
-        <%= target.to_s %>
+        <%= target_l10n.to_s %>
       url: >-
-        <%= target.current_permalink_in_website(@website)&.path if target.respond_to? :current_permalink_in_website %>
+        <%= target_l10n.current_permalink_in_website(@website)&.path if target_l10n.respond_to? :current_permalink_in_website %>
 <% end %>
 <% end %>
-<%= render 'admin/application/connections/backlinks' %>
-<% if @about.categories.any? %>
+<%= render 'admin/application/connections/backlinks', about: @l10n %>
+<% if @l10n.categories.any? %>
 persons_categories:
-<% @about.categories.each do |category| %>
+<% @l10n.categories.each do |category| %>
   - slug: "<%= category.slug %>"
     path: "<%= category.current_permalink_in_website(@website)&.path %>"
 <% end %>
 <% end %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---
-<%= prepare_html_for_static @about.biography %>
+<%= prepare_html_for_static @l10n.biography %>
 <% end %>

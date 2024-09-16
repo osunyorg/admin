@@ -1,7 +1,7 @@
 <dl>
   <% [:phone_mobile, :phone_personal, :phone_professional].each do |attribute_name| %>
     <% next if person.public_send(attribute_name).blank? %>
-    <dt>
+    <dt class="fw-normal small">
       <%= University::Person.human_attribute_name(attribute_name) %>
       <%= personal_attribute_visibility_tag(person.public_send("#{attribute_name}_visibility")) %>
     </dt>
@@ -12,7 +12,7 @@
     </dd>
   <% end %>
   <% if person.email.present? %>
-    <dt>
+    <dt class="fw-normal small">
       <%= University::Person.human_attribute_name(:email) %>
       <%= personal_attribute_visibility_tag(person.email_visibility) %>
     </dt>
@@ -23,7 +23,7 @@
     </dd>
   <% end %>
   <% if person.full_street_address.present? %>
-    <dt>
+    <dt class="fw-normal small">
       <%= University::Person.human_attribute_name("address") %>
       <%= personal_attribute_visibility_tag(person.address_visibility) %>
     </dt>
@@ -35,32 +35,43 @@
     </dd>
   <% end %>
   <% if person.url.present? %>
-    <dt><%= University::Person.human_attribute_name(:url) %></dt>
+    <dt class="fw-normal small"><%= University::Person::Localization.human_attribute_name(:url) %></dt>
     <dd>
-      <a href="<%= social_website_to_url person.url %>" target="_blank" rel="noreferrer">
-        <%= social_website_to_s person.url %>
+      <a href="<%= social_website_to_url l10n.url %>" target="_blank" rel="noreferrer">
+        <%= social_website_to_s l10n.url %>
       </a>
     </dd>
   <% end %>
   <% if person.linkedin.present? %>
-    <dt>
-      <%= University::Person.human_attribute_name(:linkedin) %>
+    <dt class="fw-normal small">
+      <%= University::Person::Localization.human_attribute_name(:linkedin) %>
       <%= personal_attribute_visibility_tag(person.linkedin_visibility) %>
     </dt>
     <dd>
-      <a href="<%= social_linkedin_to_url person.linkedin %>" target="_blank" rel="noreferrer">
-        <%= social_linkedin_to_s person.linkedin %>
+      <a href="<%= social_linkedin_to_url l10n.linkedin %>" target="_blank" rel="noreferrer">
+        <%= social_linkedin_to_s l10n.linkedin %>
       </a>
     </dd>
   <% end %>
   <% if person.twitter.present? %>
-    <dt>
-      <%= University::Person.human_attribute_name(:twitter) %>
+    <dt class="fw-normal small">
+      <%= University::Person::Localization.human_attribute_name(:twitter) %>
       <%= personal_attribute_visibility_tag(person.twitter_visibility) %>
     </dt>
     <dd>
-      <a href="<%= social_twitter_to_url person.twitter %>" target="_blank" rel="noreferrer">
-        <%= social_twitter_to_s person.twitter %>
+      <a href="<%= social_twitter_to_url l10n.twitter %>" target="_blank" rel="noreferrer">
+        <%= social_twitter_to_s l10n.twitter %>
+      </a>
+    </dd>
+  <% end %>
+  <% if person.mastodon.present? %>
+    <dt class="fw-normal small">
+      <%= University::Person::Localization.human_attribute_name(:mastodon) %>
+      <%= personal_attribute_visibility_tag(person.mastodon_visibility) %>
+    </dt>
+    <dd>
+      <a href="<%= social_mastodon_to_url l10n.mastodon %>" target="_blank" rel="noreferrer">
+        <%= social_mastodon_to_s l10n.mastodon %>
       </a>
     </dd>
   <% end %>

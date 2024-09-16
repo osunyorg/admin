@@ -15,11 +15,11 @@ class Importers::Api::Osuny::Communication::Website::Page < Importers::Api::Osun
   end
 
   def home_page
-    website.special_page(Communication::Website::Page::Home, language: language)
+    website.special_page(Communication::Website::Page::Home)
   end
 
   def parent
-    parent_migration_identifier = params.dig(:parent, :migration_identifier)    
+    parent_migration_identifier = params.dig(:parent, :migration_identifier)
     @parent = page_with parent_migration_identifier if parent_migration_identifier
     @parent = home_page if @parent.nil?
     @parent
