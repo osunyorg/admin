@@ -16,9 +16,10 @@
     &__elements
         &__element
             .draft
-                .kind
-                    opacity: 0.5
-                    text-decoration: line-through
+                opacity: 0.5
+                transition: opacity 0.5s ease
+                &:hover
+                    opacity: 1
             &--heading
                 &.sortable-chosen
                     .content-editor__elements
