@@ -52,11 +52,14 @@ class University::Organization < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
+  include Searchable
   include Shareable # TODO L10N : To remove
   include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithGeolocation
   include WithUniversity
+
+  SEARCH_FIELDS = [:long_name, :summary, :text]
 
   attr_accessor :created_from_extranet
 
