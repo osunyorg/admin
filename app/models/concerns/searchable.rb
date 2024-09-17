@@ -23,10 +23,12 @@ module Searchable
   def build_search_text(l10n)
     text = l10n.to_s
     self.class::SEARCH_FIELDS.each do |property|
-      text += l10n.send property
-      text += ' '
+      value = l10n.send property 
+      text += "#{value} " if value.present?
     end
     text += l10n.contents_full_text
     text
+  rescue
+    byebug
   end
 end

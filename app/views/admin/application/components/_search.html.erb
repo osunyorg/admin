@@ -6,13 +6,14 @@
             data-bs-toggle="modal"
             data-bs-target="#searchModal">
       <%= lucide_icon 'search' %>
-      <span><%= t('admin.search.button') %></span>
+      <span class="me-5"><%= t('admin.search.button') %></span>
     </button>
   </div>
 </div>
 
 <div  class="modal fade collapse" 
       id="searchModal" 
+      data-endpoint="<%= admin_search_path %>"
       tabindex="-1" 
       aria-modal="true" 
       role="dialog">
@@ -21,6 +22,7 @@
       <div class="modal-header bg-transparent border-0 p-0" style="max-width: 400px; margin: 100px auto">
         <div class="d-flex align-items-center">
           <input  class="form-control form-control-lg" 
+                  id="searchField"
                   placeholder="<%= t('admin.search.placeholder') %>"
                   style="min-width: 300px;"
                   name="term" 
@@ -33,8 +35,7 @@
           </span>
         </div>
       </div>
-      <div class="container-fluid">
-      </div>
+      <div class="container-fluid" id="searchResults"></div>
     </div>
   </div>
 </div>

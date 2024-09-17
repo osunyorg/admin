@@ -1,13 +1,24 @@
-<div>
-  <% 
-  @results.each do |result| 
-    object = result.about_object
-    l10n = result.about_localization
-    %>
-    <article>
-      <h2><%= link_to l10n.to_s,
-                      [:admin, object] %></h2>
-      <%= object.class.model_name.human %>
-    </article>
-  <% end %>
-</div>
+<% if @results.none? %>
+  <p class="text-white text-center">Aucun résultat</p>
+<% else %>
+  <div class="row g-2 mb-3">
+    <% 
+    @results.each do |result| 
+      object = result.about_object
+      l10n = result.about_localization
+      cropped = !object.is_a?(University::Organization)
+      %>
+      <div class="col-lg-2 col-md-6">
+        <div>
+          <div class="card">
+            <%= osuny_thumbnail_localized object, large: true, cropped: cropped %>
+            <div class="card-body">
+              <%= osuny_link_localized object, [:admin, object], classes: 'stretched-link' %><br>
+              <span class="small text-muted"><%= object.class.model_name.human %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
