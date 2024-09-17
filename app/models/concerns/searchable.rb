@@ -26,7 +26,7 @@ module Searchable
       text += l10n.send property
       text += ' '
     end
-    # TODO add blocks
+    text += l10n.contents_full_text
     text
   end
 end

@@ -4,5 +4,6 @@ class Admin::SearchController < Admin::ApplicationController
     @results =  current_university.search
                                   .for(@term)
                                   .in(current_language)
+    render layout: false
   end
 end
