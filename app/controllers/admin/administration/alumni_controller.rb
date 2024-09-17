@@ -12,7 +12,6 @@ class Admin::Administration::AlumniController < Admin::Administration::Applicati
 
   def index
     @alumni = apply_scopes(@alumni)
-                .tmp_original # TODO L10N : To remove
                 .alumni
                 .accessible_by(current_ability)
                 .ordered(current_language)
