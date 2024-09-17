@@ -11,6 +11,7 @@ languages = current_university.languages.ordered
     <%= lucide_icon('chevrons-up-down') %>
     Osuny
   </button>
+  <%= render 'admin/application/components/search' %>
   <div class="d-flex">
     <% if languages.many? %>
       <button class="btn btn--language"
@@ -37,54 +38,54 @@ languages = current_university.languages.ordered
   </div>
 </nav>
 
-<div class="collapse popin-menu" id="menu-main">
-  <% if current_university.is_really_a_university? %>
-    <div class="menu-content">
-      <div class="row">
-        <%= render_navigation context: 'navigation/admin_university' %>
+<div id="popins">
+  <div class="collapse popin-menu" id="menu-main" data-bs-parent="#popins">
+    <% if current_university.is_really_a_university? %>
+      <div class="menu-content">
+        <div class="row">
+          <%= render_navigation context: 'navigation/admin_university' %>
+        </div>
       </div>
-    </div>
-  <% else %>
-    <%= render_navigation context: 'navigation/admin' %>
-  <% end %>
-</div>
-
-<% if languages.many? %>
-  <div class="collapse popin-menu" id="menu-language">
-    <ul class="list-unstyled">
-      <% languages.each do |language| %>
-        <%
-        name = language_name(language.iso_code)
-        url = url_for(request.params.merge(lang: language.iso_code))
-        current = language == current_language
-        %>
-        <li<% if current %> class="active"<% end %>>
-          <%= link_to_if !current, name, url %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<div class="collapse popin-menu" id="menu-profile">
-  <div class="text-center pt-3 pb-2">
-    <%= link_to admin_profile_path do %>
-      <% if current_user.picture.attached? %>
-        <%= kamifusen_tag current_user.picture, width: 100, height: 100, class: 'image' %>
-      <% else %>
-        <%= image_tag 'avatar.jpg', class: 'image', loading: :lazy %>
-      <% end %>
+    <% else %>
+      <%= render_navigation context: 'navigation/admin' %>
     <% end %>
-    <p class="profile__name"><%= link_to current_user.to_s, admin_profile_path %></h2>
-    <p class="profile__email"><%= current_user.email %></p>
   </div>
-  <hr>
-  <p class="section"><%= t('admin.directory') %></p>
-  <%= render_navigation context: 'navigation/admin_directory' %>
-  <hr>
-  <% if current_user.server_admin?  %>
-    <%= link_to t('menu.server_admin'), server_root_path %>
-    <hr>
+  <% if languages.many? %>
+    <div class="collapse popin-menu" id="menu-language" data-bs-parent="#popins">
+      <ul class="list-unstyled">
+        <% languages.each do |language| %>
+          <%
+          name = language_name(language.iso_code)
+          url = url_for(request.params.merge(lang: language.iso_code))
+          current = language == current_language
+          %>
+          <li<% if current %> class="active"<% end %>>
+            <%= link_to_if !current, name, url %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-  <%= link_to t('menu.sign_out'), destroy_user_session_path, method: :delete %>
+  <div class="collapse popin-menu" id="menu-profile" data-bs-parent="#popins">
+    <div class="text-center pt-3 pb-2">
+      <%= link_to admin_profile_path do %>
+        <% if current_user.picture.attached? %>
+          <%= kamifusen_tag current_user.picture, width: 100, height: 100, class: 'image' %>
+        <% else %>
+          <%= image_tag 'avatar.jpg', class: 'image', loading: :lazy %>
+        <% end %>
+      <% end %>
+      <p class="profile__name"><%= link_to current_user.to_s, admin_profile_path %></h2>
+      <p class="profile__email"><%= current_user.email %></p>
+    </div>
+    <hr>
+    <p class="section"><%= t('admin.directory') %></p>
+    <%= render_navigation context: 'navigation/admin_directory' %>
+    <hr>
+    <% if current_user.server_admin?  %>
+      <%= link_to t('menu.server_admin'), server_root_path %>
+      <hr>
+    <% end %>
+    <%= link_to t('menu.sign_out'), destroy_user_session_path, method: :delete %>
+  </div>
 </div>
