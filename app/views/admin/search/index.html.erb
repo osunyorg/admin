@@ -1,0 +1,13 @@
+<div>
+  <% 
+  @results.each do |result| 
+    object = result.about_object
+    l10n = result.about_localization
+    %>
+    <article>
+      <h2><%= link_to l10n.to_s,
+                      [:admin, object] %></h2>
+      <%= object.class.model_name.human %>
+    </article>
+  <% end %>
+</div>

@@ -66,6 +66,7 @@ class University::Person < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : To remove
   include Sanitizable
+  include Searchable
   include Localizable
   include WithBlobs
   include WithCountry
@@ -89,6 +90,8 @@ class University::Person < ApplicationRecord
   enum gender: { male: 0, female: 1, non_binary: 2 }
 
   belongs_to :user, optional: true
+
+  SEARCH_FIELDS = [:biography, :summary]
 
   # TODO L10N : remove after migrations
   has_many  :permalinks,

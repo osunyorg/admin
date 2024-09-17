@@ -60,6 +60,7 @@ class University < ApplicationRecord
   has_many :active_storage_blobs, class_name: 'ActiveStorage::Blob'
   has_many :imports, dependent: :destroy
   has_many :apps, dependent: :destroy
+  has_many :search, dependent: :destroy
 
   validates :name, presence: true
   validates :sms_sender_name, presence: true, length: { maximum: 11 }
