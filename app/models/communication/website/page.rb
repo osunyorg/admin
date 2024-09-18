@@ -55,6 +55,7 @@ class Communication::Website::Page < ApplicationRecord
   include AsDirectObject
   include Contentful # TODO L10N : To remove
   include Sanitizable
+  include Searchable
   include Shareable # TODO L10N : To remove
   include Localizable
   include WithAutomaticMenus

@@ -7,13 +7,14 @@
       object = result.about_object
       l10n = result.about_localization
       cropped = !object.is_a?(University::Organization)
+      path = [:admin, object]
       %>
       <div class="col-lg-2 col-md-6">
         <div>
           <div class="card">
             <%= osuny_thumbnail_localized object, large: true, cropped: cropped %>
             <div class="card-body">
-              <%= osuny_link_localized object, [:admin, object], classes: 'stretched-link' %><br>
+              <%= osuny_link_localized object, path, classes: 'stretched-link' %><br>
               <span class="small text-muted"><%= object.class.model_name.human %></span>
             </div>
           </div>

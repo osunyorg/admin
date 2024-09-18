@@ -33,6 +33,7 @@ class Education::Diploma < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : remove after migrations
   include Sanitizable
+  include Searchable
   include Localizable
   include WithUniversity
 

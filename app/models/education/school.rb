@@ -33,6 +33,7 @@
 class Education::School < ApplicationRecord
   include AsIndirectObject
   include Sanitizable
+  include Searchable
   include Localizable
   include LocalizableOrderByNameScope
   include WebsitesLinkable

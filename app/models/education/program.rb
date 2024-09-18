@@ -69,6 +69,7 @@ class Education::Program < ApplicationRecord
   include Localizable
   include Sanitizable
   include Shareable # TODO L10N : To remove
+  include Searchable
   include WebsitesLinkable
   include WithAlumni
   include WithBlobs # TODO L10N : To remove

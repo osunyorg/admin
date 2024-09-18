@@ -27,6 +27,7 @@ class Research::Laboratory < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
+  include Searchable
   include WebsitesLinkable
   include WithCountry
 

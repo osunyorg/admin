@@ -13,4 +13,11 @@ class Admin::SearchController < Admin::ApplicationController
     results = results.where(extranet_id: params[:extranet_id]) if params.has_key?(:extranet_id)
     results
   end
+
+  def default_url_options
+    options = super
+    options[:website_id] = params[:website_id] if params.has_key?(:website_id)
+    options[:extranet_id] = params[:extranet_id] if params.has_key?(:extranet_id)
+    options
+  end
 end

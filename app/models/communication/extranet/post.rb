@@ -36,6 +36,7 @@
 class Communication::Extranet::Post < ApplicationRecord
   include Contentful # TODO L10N : To remove
   include Localizable
+  include Searchable
   include WithFeaturedImage # TODO L10N : To remove
   include WithUniversity
 

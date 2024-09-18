@@ -48,6 +48,7 @@ class Research::Journal::Paper < ApplicationRecord
   include Contentful # TODO L10N : To remove
   include Localizable
   include Sanitizable
+  include Searchable
   include WithBlobs # TODO L10N : To remove
   include WithPosition
   include WithUniversity
