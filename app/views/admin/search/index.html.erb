@@ -7,7 +7,17 @@
       object = result.about_object
       l10n = result.about_localization
       cropped = !object.is_a?(University::Organization)
-      path = [:admin, object]
+      # communication_website_post
+      path_class = object.class.polymorphic_name.parameterize.underscore
+      # admin_communication_website_post_path
+      path_name = "admin_#{path_class}_path"
+      if result.website_id?
+        path = send path_name, { website_id: result.website_id, id: result.about_object_id }
+      elsif result.extranet_id?
+        path = send path_name, { extranet_id: result.extranet_id, id: result.about_object_id }
+      else
+        path = send path_name, { id: result.about_object_id }
+      end
       %>
       <div class="col-lg-2 col-md-6">
         <div>
