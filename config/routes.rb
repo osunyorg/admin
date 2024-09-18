@@ -49,7 +49,7 @@ Rails.application.routes.draw do
       # libre_translate route
       post 'translate/:target' => 'translation#translate', as: :translate
       put 'favorite' => 'users#favorite', as: :favorite
-      get 'search' => 'search#index', as: :search
+      get 'search(/website/:website_id)(/extranet/:extranet_id)' => 'search#index', as: :search
       draw 'admin/administration'
       draw 'admin/communication'
       draw 'admin/education'

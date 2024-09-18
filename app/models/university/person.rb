@@ -91,8 +91,6 @@ class University::Person < ApplicationRecord
 
   belongs_to :user, optional: true
 
-  SEARCH_FIELDS = [:biography, :summary]
-
   # TODO L10N : remove after migrations
   has_many  :permalinks,
             class_name: "Communication::Website::Permalink",

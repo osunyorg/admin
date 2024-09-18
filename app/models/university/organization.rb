@@ -59,8 +59,6 @@ class University::Organization < ApplicationRecord
   include WithGeolocation
   include WithUniversity
 
-  SEARCH_FIELDS = [:long_name, :summary, :text]
-
   attr_accessor :created_from_extranet
 
   has_and_belongs_to_many :categories,

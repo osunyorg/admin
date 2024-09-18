@@ -6,6 +6,7 @@
 #  about_localization_type :string           not null, indexed => [about_localization_id]
 #  about_object_type       :string           not null, indexed => [about_object_id]
 #  text                    :text
+#  title                   :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  about_localization_id   :uuid             not null, indexed => [about_localization_type]
@@ -40,9 +41,15 @@ class Search < ApplicationRecord
   belongs_to :website, optional: true
   belongs_to :extranet, optional: true
 
-  scope :for, -> (term) { 
+  scope :for_text, -> (term) { 
     where(
       "unaccent(text) ILIKE unaccent(:term)", 
+      term: "%#{sanitize_sql_like(term)}%"
+    )
+  }
+  scope :for_title, -> (term) { 
+    where(
+      "unaccent(title) ILIKE unaccent(:term)", 
       term: "%#{sanitize_sql_like(term)}%"
     )
   }

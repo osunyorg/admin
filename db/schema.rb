@@ -1684,6 +1684,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_043058) do
 
   create_table "search", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
+    t.string "title"
     t.text "text"
     t.uuid "language_id", null: false
     t.string "about_object_type", null: false

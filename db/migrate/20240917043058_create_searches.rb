@@ -2,6 +2,7 @@ class CreateSearches < ActiveRecord::Migration[7.1]
   def change
     create_table :search, id: :uuid do |t|
       t.references :university, null: false, foreign_key: true, type: :uuid
+      t.string :title
       t.text :text
       t.references :language, null: false, type: :uuid
       t.references :about_object, polymorphic: true, null: false, type: :uuid
