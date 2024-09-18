@@ -19,10 +19,10 @@
         path = send path_name, { id: result.about_object_id }
       end
       %>
-      <div class="col-lg-2 col-md-6">
+      <div class="col-lg-4 col-md-6">
         <div>
-          <div class="card">
-            <%= osuny_thumbnail_localized object, large: true, cropped: cropped %>
+          <div class="card card--horizontal">
+            <%= osuny_thumbnail_localized object %>
             <div class="card-body">
               <%= osuny_link_localized object, path, classes: 'stretched-link' %><br>
               <span class="small text-muted"><%= object.class.model_name.human %></span>
