@@ -22,6 +22,7 @@ class Admin::Administration::Alumni::Cohorts::ImportsController < Admin::Adminis
   def create
     @import.kind = :alumni_cohorts
     @import.user = current_user
+    @import.language = current_language
     if @import.save
       redirect_to admin_administration_alumni_cohorts_import_path(@import),
                   notice: t('admin.successfully_created_html', model: @import.to_s)

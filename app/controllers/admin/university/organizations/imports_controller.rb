@@ -24,6 +24,7 @@ class Admin::University::Organizations::ImportsController < Admin::University::A
   def create
     @import.kind = :organizations
     @import.user = current_user
+    @import.language = current_language
     if @import.save
       redirect_to admin_university_organizations_import_path(@import),
                   notice: t('admin.successfully_created_html', model: @import.to_s)

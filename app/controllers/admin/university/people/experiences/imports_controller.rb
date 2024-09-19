@@ -24,6 +24,7 @@ class Admin::University::People::Experiences::ImportsController < Admin::Univers
   def create
     @import.kind = :people_experiences
     @import.user = current_user
+    @import.language = current_language
     if @import.save
       redirect_to admin_university_people_experiences_import_path(@import),
                   notice: t('admin.successfully_created_html', model: @import.to_s)
