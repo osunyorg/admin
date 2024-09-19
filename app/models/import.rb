@@ -9,11 +9,13 @@
 #  status            :integer          default("pending")
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  language_id       :uuid             indexed
 #  university_id     :uuid             not null, indexed
 #  user_id           :uuid             indexed
 #
 # Indexes
 #
+#  index_imports_on_language_id    (language_id)
 #  index_imports_on_university_id  (university_id)
 #  index_imports_on_user_id        (user_id)
 #
@@ -21,9 +23,11 @@
 #
 #  fk_rails_42cc64a226  (university_id => universities.id)
 #  fk_rails_b1e2154c26  (user_id => users.id)
+#  fk_rails_b49a015b11  (language_id => languages.id)
 #
 class Import < ApplicationRecord
   belongs_to :university
+  belongs_to :language, optional: true
   belongs_to :user, optional: true
 
   has_one_attached_deletable :file
