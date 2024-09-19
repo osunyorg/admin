@@ -47,6 +47,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def create
     @event.website = @website
+    @event.created_by = current_user
     @event.add_photo_import params[:photo_import]
     if @event.save_and_sync
       redirect_to admin_communication_website_agenda_event_path(@event),

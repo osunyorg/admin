@@ -47,6 +47,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   def create
     @project.website = @website
+    @project.created_by = current_user
     @project.add_photo_import params[:photo_import]
     if @project.save_and_sync
       redirect_to admin_communication_website_portfolio_project_path(@project),

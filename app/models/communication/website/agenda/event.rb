@@ -21,6 +21,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
+#  created_by_id            :uuid             indexed
 #  language_id              :uuid             not null, indexed
 #  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
@@ -29,6 +30,7 @@
 # Indexes
 #
 #  index_agenda_events_on_communication_website_id             (communication_website_id)
+#  index_communication_website_agenda_events_on_created_by_id  (created_by_id)
 #  index_communication_website_agenda_events_on_language_id    (language_id)
 #  index_communication_website_agenda_events_on_original_id    (original_id)
 #  index_communication_website_agenda_events_on_parent_id      (parent_id)
@@ -41,6 +43,7 @@
 #  fk_rails_5fa53206f2  (communication_website_id => communication_websites.id)
 #  fk_rails_67834f0062  (language_id => languages.id)
 #  fk_rails_917095d5ca  (parent_id => communication_website_agenda_events.id)
+#  fk_rails_c9e737a3c1  (created_by_id => users.id)
 #  fk_rails_fc3fea77c2  (original_id => communication_website_agenda_events.id)
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
@@ -61,6 +64,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithTime
   include WithTree
   include WithUniversity
+
+  belongs_to  :created_by,
+              class_name: "User",
+              optional: true
 
   belongs_to  :parent,
               class_name: 'Communication::Website::Agenda::Event',

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_19_082005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -302,12 +302,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
     t.index ["university_id"], name: "index_communication_website_agenda_categories_on_university_id"
   end
 
-  create_table "communication_website_agenda_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_agenda_events", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "summary"
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.uuid "original_id"
     t.boolean "published", default: false
     t.date "from_day"
@@ -325,7 +325,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
     t.string "time_zone"
     t.jsonb "add_to_calendar_urls"
     t.string "migration_identifier"
+    t.uuid "created_by_id"
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
+    t.index ["created_by_id"], name: "index_communication_website_agenda_events_on_created_by_id"
     t.index ["language_id"], name: "index_communication_website_agenda_events_on_language_id"
     t.index ["original_id"], name: "index_communication_website_agenda_events_on_original_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_events_on_parent_id"
@@ -546,12 +548,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
     t.boolean "published", default: false
     t.text "summary"
     t.uuid "communication_website_id", null: false
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.uuid "original_id"
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "created_by_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_aac12e3adb"
+    t.index ["created_by_id"], name: "idx_on_created_by_id_7009ee99c6"
     t.index ["language_id"], name: "index_communication_website_portfolio_projects_on_language_id"
     t.index ["original_id"], name: "index_communication_website_portfolio_projects_on_original_id"
     t.index ["university_id"], name: "idx_on_university_id_ac2f4a0bfc"
@@ -1489,6 +1493,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
   add_foreign_key "communication_website_agenda_events", "communication_websites"
   add_foreign_key "communication_website_agenda_events", "languages"
   add_foreign_key "communication_website_agenda_events", "universities"
+  add_foreign_key "communication_website_agenda_events", "users", column: "created_by_id"
   add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_file_layouts", "communication_websites"
@@ -1522,6 +1527,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_080436) do
   add_foreign_key "communication_website_portfolio_projects", "communication_websites"
   add_foreign_key "communication_website_portfolio_projects", "languages"
   add_foreign_key "communication_website_portfolio_projects", "universities"
+  add_foreign_key "communication_website_portfolio_projects", "users", column: "created_by_id"
   add_foreign_key "communication_website_post_categories", "communication_website_post_categories", column: "original_id"
   add_foreign_key "communication_website_post_categories", "communication_website_post_categories", column: "parent_id"
   add_foreign_key "communication_website_post_categories", "communication_websites"
