@@ -65,15 +65,11 @@
 #
 class Education::Program < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : To remove
   include Localizable
   include Sanitizable
-  include Shareable # TODO L10N : To remove
   include WebsitesLinkable
   include WithAlumni
-  include WithBlobs # TODO L10N : To remove
   include WithDiploma
-  include WithFeaturedImage # TODO L10N : To remove
   include WithLocations
   include WithMenuItemTarget
   include WithPosition
@@ -83,12 +79,6 @@ class Education::Program < ApplicationRecord
   include WithUniversity
   include WithWebsitesCategories
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   belongs_to :parent,
              class_name: 'Education::Program',
              optional: true
@@ -96,10 +86,6 @@ class Education::Program < ApplicationRecord
   has_many   :children,
              class_name: 'Education::Program',
              foreign_key: :parent_id
-
-
-  has_one_attached_deletable :downloadable_summary # TODO L10N : To remove
-  has_one_attached_deletable :logo # TODO L10N : To remove
 
   before_destroy :move_children
 

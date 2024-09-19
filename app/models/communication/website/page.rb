@@ -53,28 +53,15 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path kind)
 
   include AsDirectObject
-  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Shareable # TODO L10N : To remove
   include Localizable
   include WithAutomaticMenus
-  include WithBlobs # TODO L10N : To remove
-  include WithDuplication # TODO L10N : To adjust
-  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   # TODO L10N : To adjust (WithType)
   include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before WithPublication
   include WithPosition # Scope :ordered must override WithPublication
   include WithTree
   include WithUniversity
-
-  has_summernote :text # TODO: Remove text attribute
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   belongs_to :parent,
              class_name: 'Communication::Website::Page',

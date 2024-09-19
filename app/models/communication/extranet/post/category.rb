@@ -22,12 +22,10 @@
 #  fk_rails_e53c2a25fc  (extranet_id => communication_extranets.id)
 #
 class Communication::Extranet::Post::Category < ApplicationRecord
-  include Contentful # TODO L10N : To remove
   include Localizable
   include LocalizableOrderByNameScope
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   has_many :posts
-
 end

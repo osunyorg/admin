@@ -36,8 +36,4 @@ class Communication::Extranet::Document < ApplicationRecord
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :category
   belongs_to :kind
-
-  # TODO L10N : To remove
-  has_one_attached_deletable :file
-
 end

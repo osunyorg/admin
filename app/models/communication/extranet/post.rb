@@ -34,9 +34,7 @@
 #  fk_rails_86cc935add  (author_id => university_people.id)
 #
 class Communication::Extranet::Post < ApplicationRecord
-  include Contentful # TODO L10N : To remove
   include Localizable
-  include WithFeaturedImage # TODO L10N : To remove
   include WithUniversity
 
   belongs_to :author, class_name: 'University::Person', optional: true

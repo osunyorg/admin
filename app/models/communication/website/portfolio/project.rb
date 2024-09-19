@@ -34,21 +34,11 @@
 #
 class Communication::Website::Portfolio::Project < ApplicationRecord
   include AsDirectObject
-  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Shareable # TODO L10N : To remove
   include Localizable
-  include WithBlobs # TODO L10N : To remove
   include WithDuplication
-  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithUniversity
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   has_and_belongs_to_many :categories,
                           class_name: 'Communication::Website::Portfolio::Category',

@@ -41,21 +41,12 @@
 #
 class Communication::Website::Agenda::Category < ApplicationRecord
   include AsDirectObject
-  include Contentful # TODO L10N : To remove
   include Localizable
   include Sanitizable
-  include WithBlobs # TODO L10N : To remove
-  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithPosition
   include WithTree
   include WithUniversity
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   belongs_to              :parent,
                           class_name: 'Communication::Website::Agenda::Category',

@@ -31,16 +31,9 @@
 #
 class Education::Diploma < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : remove after migrations
   include Sanitizable
   include Localizable
   include WithUniversity
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   has_many :programs, dependent: :nullify
 

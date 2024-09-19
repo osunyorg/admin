@@ -97,12 +97,6 @@ class Communication::Website < ApplicationRecord
 
   belongs_to :default_language, class_name: "Language"
 
-  # TODO L10N : remove after migrations
-  has_and_belongs_to_many :legacy_languages,
-                          class_name: "Language",
-                          join_table: :communication_websites_languages,
-                          foreign_key: :communication_website_id,
-                          association_foreign_key: :language_id
   has_many :languages, through: :localizations
   has_many  :active_languages,
             -> { where(communication_website_localizations: { published: true }) },

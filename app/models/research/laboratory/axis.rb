@@ -30,9 +30,6 @@ class Research::Laboratory::Axis < ApplicationRecord
   include WithUniversity
   include WithPosition
 
-  # TODO L10N : To remove
-  has_summernote :text
-
   belongs_to  :laboratory, 
               foreign_key: :research_laboratory_id
 

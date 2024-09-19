@@ -38,22 +38,13 @@
 #
 class Administration::Location < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : To remove
   include Sanitizable
   include Localizable
   include LocalizableOrderByNameScope
   include WebsitesLinkable
-  include WithBlobs # TODO L10N : To remove
   include WithCountry
-  include WithFeaturedImage # TODO L10N : To remove
   include WithGeolocation
   include WithUniversity
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',

@@ -45,13 +45,9 @@
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
-  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Shareable # TODO L10N : To remove
   include Localizable
-  include WithBlobs # TODO L10N : To remove
   include WithDuplication
-  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithTime
   include WithTree
@@ -66,12 +62,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
                           join_table: :communication_website_agenda_events_categories,
                           foreign_key: :communication_website_agenda_event_id,
                           association_foreign_key: :communication_website_agenda_category_id
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
   scope :ordered_asc, -> { order(:from_day, :from_hour) }
@@ -105,11 +95,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   def references
     menus +
     abouts_with_agenda_block
-  end
-
-  # TODO L10N : to remove
-  def translate_other_attachments(translation)
-    translate_attachment(translation, :shared_image) if shared_image.attached?
   end
 
   protected

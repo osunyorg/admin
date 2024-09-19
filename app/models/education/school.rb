@@ -36,7 +36,6 @@ class Education::School < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
   include WebsitesLinkable
-  include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithLocations
   include WithPrograms # must come before WithAlumni and WithTeam
@@ -44,19 +43,11 @@ class Education::School < ApplicationRecord
   include WithTeam
   include WithUniversity
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   # 'websites' might override the same method defined in WithWebsites, so we use the full name
   has_many    :communication_websites,
               class_name: 'Communication::Website',
               as: :about,
               dependent: :nullify
-
-  has_one_attached_deletable :logo # TODO L10N : To remove
 
   validates :address, :city, :zipcode, :country, presence: true
 

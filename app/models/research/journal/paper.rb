@@ -45,20 +45,10 @@
 #
 class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : To remove
   include Localizable
   include Sanitizable
-  include WithBlobs # TODO L10N : To remove
   include WithPosition
   include WithUniversity
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
-  has_one_attached :pdf # TODO L10N : To remove
 
   belongs_to  :journal,
               foreign_key: :research_journal_id

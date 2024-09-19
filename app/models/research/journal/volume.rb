@@ -34,15 +34,7 @@ class Research::Journal::Volume < ApplicationRecord
   include AsIndirectObject
   include Localizable
   include Sanitizable
-  include WithBlobs # TODO L10N : To remove
-  include WithFeaturedImage # TODO L10N : To remove
   include WithUniversity
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   belongs_to  :journal, 
               foreign_key: :research_journal_id

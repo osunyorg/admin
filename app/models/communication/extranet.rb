@@ -69,9 +69,6 @@ class Communication::Extranet < ApplicationRecord
 
   before_validation :sanitize_fields
 
-  has_one_attached_deletable :logo # TODO L10N : To remove
-  has_one_attached_deletable :favicon # TODO L10N : To remove
-
   scope :for_search_term, -> (term) {
     joins(:localizations)
     .where("

@@ -7,22 +7,7 @@ module Localizable
                 inverse_of: :about,
                 dependent: :destroy
 
-    # TODO L10N : Deprecated
-    belongs_to  :language,
-                optional: true
-    belongs_to  :original,
-                class_name: base_class.to_s,
-                optional: true
-    has_many    :translations,
-                class_name: base_class.to_s,
-                foreign_key: :original_id,
-                dependent: :destroy if connection.column_exists?(table_name, :original_id)
-    # /Deprecated
-
     accepts_nested_attributes_for :localizations
-
-    # TODO L10N : remove after data cleanup
-    scope :tmp_original, -> { where(original_id: nil) }
 
     scope :for_language, -> (language) { for_language_id(language.id) }
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself

@@ -40,23 +40,11 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
-  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Shareable # TODO L10N : To remove
   include Localizable
-  include WithBlobs # TODO L10N : To remove
   include WithDuplication
-  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithUniversity
-
-  has_summernote :text # TODO: Remove text attribute
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-              class_name: "Communication::Website::Permalink",
-              as: :about,
-              dependent: :destroy
 
   belongs_to :author,
              class_name: 'University::Person',
@@ -128,11 +116,6 @@ class Communication::Website::Post < ApplicationRecord
 
   def published_at_in(language)
     localization_for(language).try(:published_at)
-  end
-
-  # TODO L10N : to remove
-  def translate_other_attachments(translation)
-    translate_attachment(translation, :shared_image) if shared_image.attached?
   end
 
   protected

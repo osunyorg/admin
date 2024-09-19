@@ -31,7 +31,6 @@ class Research::Journal < ApplicationRecord
   include WebsitesLinkable
   include WithUniversity
 
-  belongs_to :language, optional: true # TODO L10N : To remove
   has_many  :communication_websites,
             class_name: 'Communication::Website',
             as: :about,

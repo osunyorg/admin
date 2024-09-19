@@ -48,12 +48,9 @@
 #
 class University::Organization < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : To remove
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
-  include Shareable # TODO L10N : To remove
-  include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithGeolocation
   include WithUniversity
@@ -66,17 +63,6 @@ class University::Organization < ApplicationRecord
   has_many :experiences,
            class_name: 'University::Person::Experience',
            dependent: :destroy
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
-  has_one_attached_deletable :logo # TODO L10N : To remove
-  has_one_attached_deletable :logo_on_dark_background # TODO L10N : To remove
-
-  alias :featured_image :logo # TODO L10N : To remove
 
   scope :for_kind, -> (kind) { where(kind: kind) }
   scope :for_category, -> (category_id) { joins(:categories).where(university_organization_categories: { id: category_id }).distinct }
@@ -119,12 +105,4 @@ class University::Organization < ApplicationRecord
     localizations +
     categories
   end
-
-  # TODO L10N : to remove
-  def translate_other_attachments(translation)
-    translate_attachment(translation, :logo) if logo.attached?
-    translate_attachment(translation, :logo_on_dark_background) if logo_on_dark_background.attached?
-    translate_attachment(translation, :shared_image) if shared_image.attached?
-  end
-
 end

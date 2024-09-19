@@ -41,16 +41,6 @@ class Communication::Website::Menu < ApplicationRecord
   belongs_to :language
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy
 
-  # TODO L10N : Deprecated
-  belongs_to  :original,
-              class_name: "Communication::Website::Menu",
-              optional: true
-  has_many    :translations,
-              class_name: "Communication::Website::Menu",
-              foreign_key: :original_id,
-              dependent: :destroy
-  # /Deprecated
-
   validates :title, :identifier, presence: true
   validates :identifier,  length: { maximum: IDENTIFIER_MAX_LENGTH },
                           uniqueness: { scope: [:communication_website_id, :language_id] }
@@ -79,38 +69,6 @@ class Communication::Website::Menu < ApplicationRecord
   def template_static
     "admin/communication/websites/menus/static"
   end
-
-  # TODO L10N : remove
-  # Override from Translatable
-  def translate_relations!(translation)
-    items.root.ordered.each { |item| translate_menu_item!(item, translation) }
-  end
-
-  def translate_menu_item!(item, menu_translation, parent_translation = nil)
-    item_translation = item.dup
-    item_translation.menu = menu_translation
-    item_translation.parent = parent_translation
-
-    set_item_translation_attributes(item_translation, item, menu_translation)
-
-    # If no translation and no children to translate, translation won't be save, as about is nil and kind requires one.
-    if item_translation.save
-      item.children.ordered.each do |child|
-        translate_menu_item!(child, menu_translation, item_translation)
-      end
-    end
-  end
-
-  def set_item_translation_attributes(item_translation, item, menu_translation)
-    return unless item.about.present? && item.about.respond_to?(:translation_for)
-    # Search for the target translation based on the given language.
-    item_translation.about = item.about.translation_for(menu_translation.language)
-    # If no target translation found, convert to a blank menu item if item has children.
-    item_translation.kind = 'blank' if item_translation.about.nil? && item.children.any?
-  end
-  # END TODO L10N
-
-
 
   private
 

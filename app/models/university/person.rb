@@ -64,7 +64,6 @@
 #
 class University::Person < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : To remove
   include Sanitizable
   include Localizable
   include WithBlobs
@@ -89,12 +88,6 @@ class University::Person < ApplicationRecord
   enum gender: { male: 0, female: 1, non_binary: 2 }
 
   belongs_to :user, optional: true
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Person::Category',
@@ -227,28 +220,6 @@ class University::Person < ApplicationRecord
     active_storage_blobs
   end
 
-  # TODO L10N : To remove
-  def person
-    @person ||= University::Person.find(id)
-  end
-
-  def administrator
-    @administrator ||= University::Person::Administrator.find(id)
-  end
-
-  def author
-    @author ||= University::Person::Author.find(id)
-  end
-
-  def researcher
-    @researcher ||= University::Person::Researcher.find(id)
-  end
-
-  def teacher
-    @teacher ||= University::Person::Teacher.find(id)
-  end
-  # TODO L10N : /To remove
-
   def administrator_facets
     @administrator_facets ||= University::Person::Localization::Administrator.where(id: localization_ids)
   end
@@ -276,11 +247,6 @@ class University::Person < ApplicationRecord
 
   def to_s_alphabetical_in(language)
     best_localization_for(language).to_s_alphabetical
-  end
-
-  # TODO L10N : to remove
-  def translate_other_attachments(translation)
-    translate_attachment(translation, :picture) if picture.attached?
   end
 
   protected
