@@ -35,7 +35,11 @@ url = page.new_record?  ? admin_communication_website_pages_path
                       f: lf,
                       source: '#communication_website_page_localizations_attributes_0_title' unless page.is_home? %>
           <%= f.association :parent,
-                            collection: osuny_collection_tree(@website.pages, except: page, localized: true),
+                            collection: osuny_collection_tree(
+                              @website.pages.root, 
+                              except: page, 
+                              localized: true
+                            ),
                             include_blank: false unless page.is_home? %>
           <%= f.input :bodyclass if can?(:edit, @website) %>
           <%= f.input :full_width if page.editable_width? %>

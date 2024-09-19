@@ -83,7 +83,10 @@
           <% if @categories.any? %>
             <%= f.association :categories,
                               as: :check_boxes,
-                              collection: osuny_collection_tree(@categories, localized: true) %>
+                              collection: osuny_collection_tree(
+                                @categories.root, 
+                                localized: true
+                              ) %>
           <% end %>
         <% end %>
         <%= osuny_panel University::Organization.human_attribute_name('logos') do %>

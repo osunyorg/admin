@@ -33,6 +33,7 @@
 #
 class Communication::Website::Portfolio::Category::Localization < ApplicationRecord
   include AsLocalization
+  include AsLocalizedTree
   include Contentful
   include Initials
   include Permalinkable # We override slug_unavailable? method

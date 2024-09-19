@@ -112,7 +112,7 @@ module Admin::OsunyHelper
   end
 
   def osuny_collection_tree(list, except: nil, localized: false, label_method: :to_s)
-    collection = osuny_collection_recursive(list.root, 0, localized, label_method)
+    collection = osuny_collection_recursive(list, 0, localized, label_method)
     collection = collection.reject { |o| o.last == except.id } unless except.nil?
     collection
   end

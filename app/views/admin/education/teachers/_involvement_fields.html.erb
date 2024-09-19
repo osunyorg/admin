@@ -18,7 +18,8 @@ l10n ||= f.object.localizations.build(language_id: current_language.id)
             <%= f.association :target,
                               collection: osuny_collection_tree(
                                 current_university.education_programs
-                                                  .tmp_original, # TODO L10N: REMOVE
+                                                  .tmp_original # TODO L10N: REMOVE
+                                                  .root,
                                 localized: true
                               ),
                               label: false,

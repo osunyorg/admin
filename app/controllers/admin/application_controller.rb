@@ -38,6 +38,14 @@ class Admin::ApplicationController < ApplicationController
     # If the block doesn't exist anymore
   end
 
+  protected
+
+  def default_url_options
+    options = {}
+    options[:lang] = current_language
+    options
+  end
+
   private
 
   def redirect_if_context_is_not_an_university!
@@ -47,7 +55,7 @@ class Admin::ApplicationController < ApplicationController
 
   def object_title(object)
     if object.try(:localizable?)
-      l10n = object.to_s_in(current_language)
+      object.to_s_in(current_language).to_s
     else
       object.to_s
     end

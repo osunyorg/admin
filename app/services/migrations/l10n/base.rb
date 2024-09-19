@@ -3,8 +3,7 @@ class Migrations::L10n::Base
   protected
 
   def self.constraint
-    # "university_id IS NOT NULL"
-    "university_id = 'fb356b64-42a8-4056-870b-e2dd9289c0b8'"
+    "university_id IS NOT NULL"
   end
 
   def self.reconnect_objects_to_categories(model)

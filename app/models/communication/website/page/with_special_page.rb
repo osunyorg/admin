@@ -120,7 +120,6 @@ module Communication::Website::Page::WithSpecialPage
     self.full_width = full_width_by_default?
     # Build the first localization of the page
     build_localization_for(website.default_language)
-  
   end
 
   def build_localization_for(language)
