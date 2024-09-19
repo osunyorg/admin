@@ -9,7 +9,7 @@
 #  status            :integer          default("pending")
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  language_id       :uuid             indexed
+#  language_id       :uuid             not null, indexed
 #  university_id     :uuid             not null, indexed
 #  user_id           :uuid             indexed
 #
@@ -27,7 +27,7 @@
 #
 class Import < ApplicationRecord
   belongs_to :university
-  belongs_to :language, optional: true
+  belongs_to :language
   belongs_to :user, optional: true
 
   has_one_attached_deletable :file
@@ -36,6 +36,8 @@ class Import < ApplicationRecord
   enum status: { pending: 0, finished: 1, finished_with_errors: 2 }
 
   validate :file_validation
+
+  before_validation :fallback_language_to_university_default, on: :create, unless: :language_id
 
   after_create :queue_for_processing
   after_commit :send_mail_to_creator, on: :update, if: :status_changed_from_pending?
@@ -86,6 +88,10 @@ class Import < ApplicationRecord
 
   def status_changed_from_pending?
     saved_change_to_status? && status_before_last_save == 'pending'
+  end
+
+  def fallback_language_to_university_default
+    self.language_id ||= university.default_language_id
   end
 
 end
