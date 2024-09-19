@@ -49,15 +49,15 @@ module Importers
 
     def organization
       unless @organization
-        @organization = University::Organization.joins(:localizations)
-                                                .where(
-                                                  university_id: @university.id,
-                                                  localizations: {
-                                                    language_id: @language.id,
-                                                    name: organization_name
-                                                  }
-                                                ).first_or_initialize
-        localization_id = @organization.localizations.where(language_id: @language.id).first&.id
+        if @siren.present? && @nic.present?
+          @organization = find_organization_with_siren_and_nic(@siren, @nic)
+        elsif @siren.present?
+          @organization = find_organization_with_siren(@siren)
+        end
+        @organization ||= find_organization_with_name_in_current_language(organization_name)
+        @organization ||= find_organization_with_name_in_another_language(organization_name)
+        @organization ||= @university.organizations.new
+        localization_id = @organization.localizations.find_by(language_id: @language.id)&.id
         @organization.kind = @kind.to_sym
         @organization.siren = @siren
         @organization.nic = @nic
@@ -76,6 +76,36 @@ module Importers
         ]
       end
       @organization
+    end
+
+    def find_organization_with_siren_and_nic(siren, nic)
+      @university.organizations.tmp_original.find_by(siren: siren, nic: nic)
+    end
+
+    def find_organization_with_siren(siren)
+      @university.organizations.tmp_original.find_by(siren: siren)
+    end
+
+    def find_organization_with_name_in_current_language(name)
+      @university.organizations.tmp_original
+        .joins(:localizations)
+        .where(university_organization_localizations: {
+            language_id: @language.id,
+            name: organization_name
+        })
+        .first
+    end
+
+    def find_organization_with_name_in_another_language(name)
+      @university.organizations.tmp_original
+        .joins(:localizations)
+        .where.not(university_organization_localizations: {
+          language_id: @language.id
+        })
+        .where(university_organization_localizations: {
+          name: organization_name
+        })
+        .first
     end
 
     def save
