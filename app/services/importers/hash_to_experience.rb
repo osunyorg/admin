@@ -1,7 +1,8 @@
 module Importers
   class HashToExperience
-    def initialize(person, hash)
+    def initialize(person, language, hash)
       @person = person
+      @language = language
       @university = person.university
       @hash = hash
       @error = nil

@@ -4,7 +4,7 @@ module Importers
     protected
 
     def analyze_hash(hash, index)
-      hash_to_person = HashToPerson.new(@university, hash)
+      hash_to_person = HashToPerson.new(@university, @language, hash)
       if hash_to_person.valid?
         person = hash_to_person.person
         hash_to_experience = HashToExperience.new(person, hash)

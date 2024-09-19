@@ -1,7 +1,8 @@
 module Importers
   class HashToPerson
-    def initialize(university, hash)
+    def initialize(university, language, hash)
       @university = university
+      @language = language
       @hash = hash
       @error = nil
       extract_person_variables
