@@ -7,7 +7,7 @@ module User::WithAuthorship
               foreign_key: :updated_by_id,
               dependent: :nullify
     has_many  :communication_website_agenda_events,
-              class_name: "Communication::Website::Agenda::Events",
+              class_name: "Communication::Website::Agenda::Event",
               foreign_key: :created_by_id,
               dependent: :nullify
     has_many  :communication_website_portfolio_projects,
