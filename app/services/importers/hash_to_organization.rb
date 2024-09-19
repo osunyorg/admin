@@ -50,12 +50,12 @@ module Importers
     def organization
       unless @organization
         if @siren.present? && @nic.present?
-          @organization = find_organization_with_siren_and_nic(@siren, @nic)
+          @organization = find_organization_with_siren_and_nic
         elsif @siren.present?
-          @organization = find_organization_with_siren(@siren)
+          @organization = find_organization_with_siren
         end
-        @organization ||= find_organization_with_name_in_current_language(organization_name)
-        @organization ||= find_organization_with_name_in_another_language(organization_name)
+        @organization ||= find_organization_with_name_in_current_language
+        @organization ||= find_organization_with_name_in_another_language
         @organization ||= @university.organizations.new
         localization_id = @organization.localizations.find_by(language_id: @language.id)&.id
         @organization.kind = @kind.to_sym
@@ -78,15 +78,15 @@ module Importers
       @organization
     end
 
-    def find_organization_with_siren_and_nic(siren, nic)
-      @university.organizations.tmp_original.find_by(siren: siren, nic: nic)
+    def find_organization_with_siren_and_nic
+      @university.organizations.tmp_original.find_by(siren: @siren, nic: @nic)
     end
 
-    def find_organization_with_siren(siren)
-      @university.organizations.tmp_original.find_by(siren: siren)
+    def find_organization_with_siren
+      @university.organizations.tmp_original.find_by(siren: @siren)
     end
 
-    def find_organization_with_name_in_current_language(name)
+    def find_organization_with_name_in_current_language
       @university.organizations.tmp_original
         .joins(:localizations)
         .where(university_organization_localizations: {
@@ -96,7 +96,7 @@ module Importers
         .first
     end
 
-    def find_organization_with_name_in_another_language(name)
+    def find_organization_with_name_in_another_language
       @university.organizations.tmp_original
         .joins(:localizations)
         .where.not(university_organization_localizations: {
