@@ -31,13 +31,13 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def show
-    @all_pages = @website.pages.accessible_by(current_ability).tmp_original
+    @all_pages = @website.pages.accessible_by(current_ability)
     @pages = @all_pages.latest_in(current_language)
-    @all_posts = @website.posts.accessible_by(current_ability).tmp_original
+    @all_posts = @website.posts.accessible_by(current_ability)
     @posts = @all_posts.latest_in(current_language)
-    @all_events = @website.events.accessible_by(current_ability).tmp_original
+    @all_events = @website.events.accessible_by(current_ability)
     @events = @all_events.latest_in(current_language)
-    @all_projects = @website.projects.accessible_by(current_ability).tmp_original
+    @all_projects = @website.projects.accessible_by(current_ability)
     @projects = @all_projects.latest_in(current_language)
     breadcrumb
   end

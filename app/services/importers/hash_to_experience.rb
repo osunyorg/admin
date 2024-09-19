@@ -51,19 +51,15 @@ module Importers
         # Search by SIREN+NIC, then SIREN, then name, or create it with everything
         if @company_siren.present? && @company_nic.present?
           obj = @university.organizations
-                            .tmp_original
                             .find_by siren: @company_siren,
                                      nic: @company_nic
         elsif @company_siren.present?
           obj = @university.organizations
-                            .tmp_original
                             .find_by siren: @company_siren
         end
         obj ||= @university.organizations
-                            .tmp_original
                             .find_by name: @company_name
         obj ||= @university.organizations
-                            .tmp_original
                             .where( name: @company_name,
                                     siren: @company_siren,
                                     nic: @company_nic)

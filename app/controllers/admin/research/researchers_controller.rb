@@ -10,7 +10,6 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def index
     @researchers = apply_scopes(current_university.people.researchers)
-                    .tmp_original # TODO L10N : To remove
                     .accessible_by(current_ability)
                     .ordered(current_language)
                     .page(params[:page])

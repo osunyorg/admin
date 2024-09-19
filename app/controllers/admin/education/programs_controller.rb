@@ -15,16 +15,13 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def index
     @programs = apply_scopes(@programs)
-                  .tmp_original # TODO L10N : To remove.
                   .ordered_by_name(current_language)
                   .page(params[:page])
     breadcrumb
   end
 
   def tree
-    @programs = @programs.root
-                         .tmp_original # TODO L10N : To remove.
-                         .ordered
+    @programs = @programs.root.ordered
     breadcrumb
     add_breadcrumb t('.title')
   end
@@ -50,7 +47,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def children
     return unless request.xhr?
-    @children = @program.children.tmp_original.ordered  # TODO L10N : To remove.
+    @children = @program.children.ordered
   end
 
   def show
@@ -138,7 +135,6 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def load_teacher_people
     @teacher_people = current_university.people
-                                        .tmp_original # TODO L10N : To remove.
                                         .teachers
                                         .accessible_by(current_ability)
                                         .ordered(current_language)

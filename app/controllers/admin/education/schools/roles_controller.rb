@@ -7,12 +7,12 @@ class Admin::Education::Schools::RolesController < Admin::Education::Schools::Ap
   before_action :load_administration_people, only: [:new, :edit, :create, :update]
 
   def index
-    @roles = @roles.tmp_original.ordered
+    @roles = @roles.ordered
     breadcrumb
   end
 
   def show
-    @involvements = @role.involvements.tmp_original.ordered
+    @involvements = @role.involvements.ordered
     breadcrumb
   end
 
@@ -85,7 +85,6 @@ class Admin::Education::Schools::RolesController < Admin::Education::Schools::Ap
 
   def load_administration_people
     @administration_people =  current_university.people
-                                                .tmp_original # TODO L10N : To remove
                                                 .administration
                                                 .accessible_by(current_ability)
                                                 .ordered(current_language)

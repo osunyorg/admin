@@ -10,7 +10,7 @@ module Filters
             element: I18n.t('activerecord.attributes.communication/website/post.author').downcase
           )
       add :for_category,
-          website.post_categories.tmp_original,
+          website.post_categories,
           I18n.t(
             'filters.attributes.element',
             element: Communication::Website::Post::Category.model_name.human.downcase

@@ -4,7 +4,7 @@ module Filters
       super(user)
       add_search
       add :for_category,
-          website.agenda_categories.tmp_original,
+          website.agenda_categories,
           I18n.t(
             'filters.attributes.element',
             element: Communication::Website::Agenda::Category.model_name.human.downcase

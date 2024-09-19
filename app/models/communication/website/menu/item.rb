@@ -87,24 +87,23 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def self.collection_for(kind, website)
-    # TODO L10N : remove every tmp_orginal below
     case kind
     when 'page'
-      website.pages.tmp_original
+      website.pages
     when 'diploma'
-      website.education_diplomas.tmp_original
+      website.education_diplomas
     when 'program'
-      website.education_programs.tmp_original
+      website.education_programs
     when 'category'
-      website.post_categories.tmp_original
+      website.post_categories
     when 'post'
-      website.posts.tmp_original
+      website.posts
     when 'volume'
-      website.research_volumes.tmp_original
+      website.research_volumes
     when 'paper'
-      website.research_papers.tmp_original
+      website.research_papers
     when 'location'
-      website.administration_locations.tmp_original
+      website.administration_locations
     end
   end
 

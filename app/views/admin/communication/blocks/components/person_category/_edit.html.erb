@@ -1,7 +1,5 @@
 <% categories = osuny_collection_tree(
-                  current_university.person_categories
-                                    .tmp_original # TODO L10N : remove
-                                    .root,
+                  current_university.person_categories.root,
                   localized: true
                 ) %>
 <label  class="form-label"

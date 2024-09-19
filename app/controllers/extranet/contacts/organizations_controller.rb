@@ -1,7 +1,6 @@
 class Extranet::Contacts::OrganizationsController < Extranet::Contacts::ApplicationController
   def index
     @organizations =  current_extranet.connected_organizations
-                                      .tmp_original
                                       .ordered(current_language)
                                       .page(params[:page])
                                       .per(60)
@@ -16,7 +15,6 @@ class Extranet::Contacts::OrganizationsController < Extranet::Contacts::Applicat
                               .pluck(:person_id)
     @people = current_university.people
                                 .where(id: person_ids)
-                                .tmp_original
     breadcrumb
     add_breadcrumb @l10n
   end

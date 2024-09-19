@@ -6,8 +6,7 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   include Admin::HasStaticAction
   
   def index
-    @locations = @locations.tmp_original # TODO L10N : To remove
-                           .ordered(current_language)
+    @locations = @locations.ordered(current_language)
     breadcrumb
   end
 

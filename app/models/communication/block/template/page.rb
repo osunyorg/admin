@@ -50,7 +50,6 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
   def selected_pages_children
     return [] unless page
     page.children
-        .tmp_original # TODO L10N: to remove
         .published_now_in(block.language)
         .ordered
   end

@@ -1,5 +1,4 @@
-<% programs = @block.template.available_programs
-                              .tmp_original # TODO L10N : remove %>
+<% programs = @block.template.available_programs %>
 <% if label.present? %>
 <label  class="form-label"
         :for="<%= dom_id.html_safe %>">

@@ -8,7 +8,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
   include Admin::Localizable
 
   def index
-    @root_categories = categories.root.tmp_original # TODO L10N : To remove
+    @root_categories = categories.root
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/communication/website/portfolio'
     breadcrumb

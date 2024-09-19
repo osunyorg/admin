@@ -1,6 +1,5 @@
 <% 
 people_paged =  people.ordered(current_language)
-                      .tmp_original
                       .page(params[:page])
                       .per(60)
 %>

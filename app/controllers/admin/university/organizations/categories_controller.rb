@@ -8,9 +8,7 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   include Admin::Localizable
 
   def index
-    @root_categories = categories.root
-                                 .tmp_original # TODO L10N : To remove
-                                 .ordered(current_language)
+    @root_categories = categories.root.ordered(current_language)
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/university/organizations'
     breadcrumb
@@ -69,7 +67,6 @@ class Admin::University::Organizations::CategoriesController < Admin::University
 
   def categories
     current_university.organization_categories
-                      .tmp_original # TODO L10N : To remove
                       .ordered(current_language)
   end
 

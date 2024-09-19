@@ -5,10 +5,9 @@ class Extranet::Alumni::OrganizationsController < Extranet::Alumni::ApplicationC
       about: about
     }
     @organizations = @facets.results
-                      .ordered(current_language)
-                      .tmp_original
-                      .page(params[:page])
-                      .per(60)
+                            .ordered(current_language)
+                            .page(params[:page])
+                            .per(60)
     @count = @organizations.total_count
     breadcrumb
   end

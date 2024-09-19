@@ -12,7 +12,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def index
     @people = apply_scopes(@people)
-                .tmp_original # TODO L10N : To remove
                 .ordered(current_language)
 
     @feature_nav = 'navigation/admin/university/people'
@@ -32,7 +31,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   def search
     @term = params[:term].to_s
     @people = current_university.people
-                                .tmp_original # TODO L10N : To remove
                                 .for_search_term(@term)
                                 .ordered(current_language)
   end
@@ -120,7 +118,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def categories
     current_university.person_categories
-                      .tmp_original # TODO L10N : To remove
                       .ordered(current_language)
   end
 end

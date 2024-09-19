@@ -31,17 +31,13 @@
         <%= f.association :programs,
                           as: :check_boxes,
                           collection: collection_tree(
-                                        current_university.education_programs
-                                                          .tmp_original # TODO L10N : To remove
-                                                          .ordered
+                                        current_university.education_programs.ordered
                                       ),
                           label_method: ->(p) { sanitize p[:label] },
                           value_method: ->(p) { p[:id] } %>
         <%= f.association :schools,
                           as: :check_boxes,
-                          collection: current_university.education_schools
-                                                        .tmp_original # TODO L10N : To remove
-                                                        .ordered %>
+                          collection: current_university.education_schools.ordered %>
       </div>
     </div>
     <% content_for :action_bar_right do %>

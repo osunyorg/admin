@@ -8,7 +8,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   include Admin::Localizable
 
   def index
-    @root_categories = categories.root.tmp_original # TODO L10N : To remove
+    @root_categories = categories.root
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
@@ -16,7 +16,6 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
 
   def show
     @events =  @category.events
-                        .tmp_original
                         .ordered(current_language)
                         .page(params[:page])
     breadcrumb

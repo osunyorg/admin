@@ -12,9 +12,9 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   has_scope :for_category
 
   def index
-    @projects = apply_scopes(@projects).tmp_original # TODO L10N : To remove
-                                     .ordered(current_language)
-                                     .page(params[:page])
+    @projects = apply_scopes(@projects)
+                  .ordered(current_language)
+                  .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/portfolio'
     breadcrumb
   end
@@ -85,9 +85,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   end
 
   def categories
-    @website.portfolio_categories
-            .tmp_original # TODO L10N : Remove tmp_original
-            .ordered
+    @website.portfolio_categories.ordered
   end
 
   def load_filters

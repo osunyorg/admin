@@ -13,8 +13,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   has_scope :for_category
 
   def index
-    @posts = apply_scopes(@posts).tmp_original # TODO L10N : To remove
-                                 .ordered(current_language)
+    @posts = apply_scopes(@posts).ordered(current_language)
                                  .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
@@ -130,7 +129,6 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def categories
     @website.post_categories
-            .tmp_original # TODO L10N : To remove
             .ordered
   end
 end

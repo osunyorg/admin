@@ -4,7 +4,7 @@ module Filters
       super
       add_search
       add :for_alumni_organization,
-          user.university.organizations.tmp_original.ordered(user.university.default_language),
+          user.university.organizations.ordered(user.university.default_language),
           I18n.t(
             'filters.attributes.element',
             element: University::Organization.model_name.human.downcase

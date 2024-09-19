@@ -11,7 +11,6 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
 
   def index
     @teachers = apply_scopes(current_university.people.teachers)
-                  .tmp_original # TODO L10N : To remove
                   .accessible_by(current_ability)
                   .ordered(current_language)
                   .page(params[:page])

@@ -12,9 +12,9 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   has_scope :for_category
 
   def index
-    @events = apply_scopes(@events).tmp_original # TODO L10N : To remove
-                                  .ordered_desc
-                                  .page(params[:page])
+    @events = apply_scopes(@events)
+                .ordered_desc
+                .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
   end
@@ -88,7 +88,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def categories
     @website.agenda_categories
-            .tmp_original # TODO L10N : Remove tmp_original
             .ordered
   end
 

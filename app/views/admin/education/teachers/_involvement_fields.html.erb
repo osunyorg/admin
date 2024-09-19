@@ -17,9 +17,7 @@ l10n ||= f.object.localizations.build(language_id: current_language.id)
             <%= f.hidden_field :target_type, value: "Education::Program" %>
             <%= f.association :target,
                               collection: osuny_collection_tree(
-                                current_university.education_programs
-                                                  .tmp_original # TODO L10N: REMOVE
-                                                  .root,
+                                current_university.education_programs.root,
                                 localized: true
                               ),
                               label: false,
