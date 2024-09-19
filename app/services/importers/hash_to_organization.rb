@@ -49,19 +49,31 @@ module Importers
 
     def organization
       unless @organization
-        @organization = University::Organization.where(university_id: @university.id, language_id: @university.default_language_id, name: organization_name).first_or_initialize
-        @organization.long_name = @long_name
+        @organization = University::Organization.joins(:localizations)
+                                                .where(
+                                                  university_id: @university.id,
+                                                  localizations: {
+                                                    language_id: @language.id,
+                                                    name: organization_name
+                                                  }
+                                                ).first_or_initialize
+        localization_id = @organization.localizations.where(language_id: @language.id).first&.id
         @organization.kind = @kind.to_sym
         @organization.siren = @siren
         @organization.nic = @nic
-        @organization.meta_description = @meta_description
         @organization.address = @address
         @organization.zipcode = @zipcode
         @organization.city = @city
         @organization.country = @country
         @organization.email = @email
         @organization.phone = @phone
-        @organization.url = @url
+        @organization.localizations_attributes = [
+          {
+            id: localization_id, language_id: @language.id,
+            long_name: @long_name, meta_description: @meta_description,
+            name: organization_name, url: @url
+          }
+        ]
       end
       @organization
     end
