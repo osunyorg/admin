@@ -1,6 +1,6 @@
 <% content_for :title, University::Person::Teacher.model_name.human(count: 2) %>
 
-<%= render 'filters', current_path: admin_education_teachers_path, filters: @filters if @filters.any?  %>
+<%= render 'filters', current_path: admin_education_teachers_path %>
 
 <%= render 'admin/education/teachers/list', teachers: @teachers %>
 

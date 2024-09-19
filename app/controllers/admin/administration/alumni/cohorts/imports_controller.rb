@@ -3,10 +3,10 @@ class Admin::Administration::Alumni::Cohorts::ImportsController < Admin::Adminis
                               through: :current_university,
                               through_association: :imports
 
-  has_scope :for_status
-
   def index
-    @imports = apply_scopes(@imports.kind_alumni_cohorts).ordered.page(params[:page])
+    @imports = @imports.kind_alumni_cohorts
+                       .filter_by(params[:filters], current_language)
+                       .ordered.page(params[:page])
     breadcrumb
   end
 

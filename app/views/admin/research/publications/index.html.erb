@@ -4,7 +4,7 @@
   <%= @publications.total_count %>
   <%= Research::Publication.model_name.human(count: @publications.total_count).downcase %>
 </p>
-<%= render 'filters', current_path: admin_research_publications_path, filters: @filters if @filters.any?  %>
+<%= render 'filters', current_path: admin_research_publications_path %>
 <%= render 'admin/research/publications/list', publications: @publications %>
 <%= paginate @publications %>
 

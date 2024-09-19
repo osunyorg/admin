@@ -6,15 +6,14 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
   include Admin::Localizable
   include Admin::HasStaticAction
 
-  has_scope :for_search_term
-
   def index
-    @researchers = apply_scopes(current_university.people.researchers)
-                    .tmp_original # TODO L10N : To remove
-                    .accessible_by(current_ability)
-                    .ordered(current_language)
-                    .page(params[:page])
-                    .per(6*5)
+    @researchers = current_university.people
+                                     .researchers
+                                     .filter_by(params[:filters], current_language)
+                                     .tmp_original # TODO L10N : To remove
+                                     .ordered(current_language)
+                                     .page(params[:page])
+                                     .per(6*5)
     breadcrumb
   end
 

@@ -1,7 +1,7 @@
 <% content_for :title, Research::Journal.model_name.human(count: 2) %>
 
-<p>&nbsp;</p>
-<%= render 'filters', current_path: admin_research_journals_path, filters: @filters if @filters.any?  %>
+<%= render 'filters', current_path: admin_research_journals_path %>
+
 <div class="row g-2 mb-3">
   <% @journals.each do |journal| %>
     <div>

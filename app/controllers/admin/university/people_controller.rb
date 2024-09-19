@@ -6,14 +6,10 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_category
-  has_scope :for_role
-
   def index
-    @people = apply_scopes(@people)
-                .tmp_original # TODO L10N : To remove
-                .ordered(current_language)
+    @people = @people.filter_by(params[:filters], current_language)
+                     .tmp_original # TODO L10N : To remove
+                     .ordered(current_language)
 
     @feature_nav = 'navigation/admin/university/people'
 

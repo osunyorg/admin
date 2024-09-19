@@ -1,7 +1,6 @@
 <% content_for :title, Research::Thesis.model_name.human(count: 2) %>
 
-<p>&nbsp;</p>
-<%= render 'filters', current_path: admin_research_theses_path, filters: @filters if @filters.any?  %>
+<%= render 'filters', current_path: admin_research_theses_path %>
 <%= render 'admin/research/theses/list', theses: @theses %>
 <%= paginate @theses %>
 

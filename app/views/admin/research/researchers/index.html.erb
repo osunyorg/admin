@@ -1,7 +1,6 @@
 <% content_for :title, University::Person::Researcher.model_name.human(count: 2) %>
 
-<p>&nbsp;</p>
-<%= render 'filters', current_path: admin_research_researchers_path, filters: @filters if @filters.any?  %>
+<%= render 'filters', current_path: admin_research_researchers_path %>
 
 <div class="row g-3">
   <% @researchers.each do |person| %>

@@ -1,16 +1,13 @@
 class Admin::Communication::WebsitesController < Admin::Communication::Websites::ApplicationController
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_about_type
-
   before_action :set_feature_nav, only: [:edit, :update]
 
   def index
-    @websites = apply_scopes(@websites)
-                  .ordered(current_language)
-                  .page(params[:page])
-                  .per(30)
+    @websites = @websites.filter_by(params[:filters], current_language)
+                         .ordered(current_language)
+                         .page(params[:page])
+                         .per(30)
     breadcrumb
   end
 

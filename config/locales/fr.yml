@@ -247,8 +247,11 @@ fr:
       kind: Filtrer par type
       role: Filtrer par rôle
     buttons:
+      close: Fermer
       expand: Recherche
+      reset: Annuler
       submit: Chercher
+    title: Recherche
   folder:
     empty: Le dossier est vide
     open: Ouvrir le dossier

@@ -65,6 +65,7 @@
 class University::Person < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : To remove
+  include Filterable
   include Sanitizable
   include Localizable
   include WithBlobs
@@ -176,9 +177,9 @@ class University::Person < ApplicationRecord
   scope :researchers,       -> { where(is_researcher: true) }
   scope :alumni,            -> { where(is_alumnus: true) }
   scope :with_habilitation, -> { where(habilitation: true) }
-  scope :for_role, -> (role) { where("is_#{role}": true) }
-  scope :for_category, -> (category_id) { joins(:categories).where(university_person_categories: { id: category_id }).distinct }
-  scope :for_program, -> (program_id) {
+  scope :for_role, -> (role, language = nil) { where("is_#{role}": true) }
+  scope :for_category, -> (category_id, language = nil) { joins(:categories).where(university_person_categories: { id: category_id }).distinct }
+  scope :for_program, -> (program_id, language = nil) {
     left_joins(:education_programs_as_administrator, :education_programs_as_teacher)
       .where(education_programs: { id: program_id })
       .or(
@@ -188,11 +189,9 @@ class University::Person < ApplicationRecord
       .select("university_people.*")
       .distinct
   }
-
-   # TODO L10N : To adjust
-  scope :for_search_term, -> (term) {
+  scope :for_search_term, -> (term, language) {
     joins(:localizations)
-      # TODO L10N : To add after filters rework @pabois
+      .where(university_person_localizations: { language_id: language.id })
       .where("
         unaccent(concat(university_person_localizations.first_name, ' ', university_person_localizations.last_name)) ILIKE unaccent(:term) OR
         unaccent(concat(university_person_localizations.last_name, ' ', university_person_localizations.first_name)) ILIKE unaccent(:term) OR

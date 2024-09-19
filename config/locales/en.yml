@@ -247,7 +247,9 @@ en:
       kind: Filter by kind
       role: Filter by role
     buttons:
+      close: Close
       expand: Search
+      reset: Reset
       submit: Search
   folder:
     empty: Folder is empty

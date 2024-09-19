@@ -24,6 +24,7 @@
 #
 class Research::Laboratory < ApplicationRecord
   include AsIndirectObject
+  include Filterable
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
@@ -47,14 +48,16 @@ class Research::Laboratory < ApplicationRecord
 
   validates :address, :city, :zipcode, :country, presence: true
 
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.city) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.country) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.name) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.zipcode) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+  scope :for_search_term, -> (term, language = nil) {
+    joins(:localizations)
+      .where(research_laboratory_localizations: { language_id: language.id })
+      .where("
+        unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
+        unaccent(research_laboratories.city) ILIKE unaccent(:term) OR
+        unaccent(research_laboratories.country) ILIKE unaccent(:term) OR
+        unaccent(research_laboratory_localizations.name) ILIKE unaccent(:term) OR
+        unaccent(research_laboratories.zipcode) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
 
   def full_address

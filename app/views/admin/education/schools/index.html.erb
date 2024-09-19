@@ -1,7 +1,6 @@
 <% content_for :title, Education::School.model_name.human(count: 2) %>
 
-<p>&nbsp;</p><%# Filtres %>
-<%= render 'filters', current_path: admin_education_schools_path, filters: @filters if @filters.any?  %>
+<%= render 'filters', current_path: admin_education_schools_path %>
 
 <div class="row g-2">
   <% @schools.each do |school| %>
