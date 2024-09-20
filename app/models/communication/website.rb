@@ -126,6 +126,7 @@ class Communication::Website < ApplicationRecord
   scope :for_search_term, -> (term, language) {
     joins(:university)
       .joins(:localizations)
+      .where(communication_website_localizations: { language_id: language.id })
       .where("
         unaccent(universities.name) % unaccent(:term) OR
         unaccent(communication_website_localizations.name) % unaccent(:term) OR

@@ -5,7 +5,7 @@
   <%= Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase %>
 </p>
 
-<%= render 'filters', current_path: admin_communication_website_agenda_events_path, filters: @filters %>
+<%= render 'filters', current_path: admin_communication_website_agenda_events_path, website: @website %>
 <%= render 'admin/communication/websites/agenda/events/list', events: @events %>
 <%= paginate @events %>
 

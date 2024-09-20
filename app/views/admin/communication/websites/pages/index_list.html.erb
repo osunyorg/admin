@@ -5,6 +5,9 @@
   <%= Communication::Website::Page.model_name.human(count: @pages.total_count).downcase %>
 </p>
 
+<%= render 'filters', current_path: list_admin_communication_website_pages_path %>
+<p>&nbsp;</p><%# Hack idiot pour le bon affichage des filtres %>
+
 <ul class="nav nav-tabs justify-content-md-end mt-0 mt-md-n4">
   <li class="nav-item">
     <a class="nav-link" href="<%= admin_communication_website_pages_path %>">
@@ -20,8 +23,6 @@
   </li>
 </ul>
 <div class="position-relative mt-2">
-  <p>&nbsp;</p><%# Hack idiot pour le bon affichage des filtres %>
-  <%= render 'filters', current_path: list_admin_communication_website_pages_path, filters: @filters %>
   <%= render 'admin/communication/websites/pages/list', pages: @pages %>
   <%= paginate @pages %>
 </div>

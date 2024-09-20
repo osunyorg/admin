@@ -6,7 +6,7 @@
 </p>
 
 <div data-batch-selectable class="mb-5">
-  <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters %>
+  <%= render 'filters', current_path: admin_communication_website_posts_path, website: @website %>
   <%= form_tag publish_batch_admin_communication_website_posts_path do %>
     <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
     <%= paginate @posts %>

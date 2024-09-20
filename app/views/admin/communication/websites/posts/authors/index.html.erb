@@ -1,6 +1,6 @@
 <% content_for :title, "#{t('communication.authors', count: 2)} (#{@authors.total_count})" %>
 
-<%= render 'filters', current_path: admin_communication_website_post_authors_path, filters: @filters if @filters.any?  %>
+<%= render 'filters', current_path: admin_communication_website_post_authors_path  %>
 <%= render 'admin/communication/websites/posts/authors/list', authors: @authors %>
 <%= paginate @authors %>
 

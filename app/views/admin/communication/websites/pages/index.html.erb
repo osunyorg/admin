@@ -4,6 +4,10 @@
   <%= @pages.size %>
   <%= Communication::Website::Page.model_name.human(count: @pages.size).downcase %>
 </p>
+
+<%= render 'filters', current_path: list_admin_communication_website_pages_path %>
+<p>&nbsp;</p><%# Hack idiot pour le bon affichage des filtres %>
+
 <ul class="nav nav-tabs justify-content-md-end mt-0 mt-md-n4">
   <li class="nav-item">
     <a class="nav-link active" aria-current="page">

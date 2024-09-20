@@ -4,7 +4,7 @@
   <%= @projects.total_count %>
   <%= Communication::Website::Portfolio::Project.model_name.human(count: @projects.total_count).downcase %>
 </p>
-<%= render 'filters', current_path: admin_communication_website_portfolio_projects_path, filters: @filters %>
+<%= render 'filters', current_path: admin_communication_website_portfolio_projects_path, website: @website %>
 <%= render 'admin/communication/websites/portfolio/projects/list', projects: @projects %>
 <%= paginate @projects %>
 
