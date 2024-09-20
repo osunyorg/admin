@@ -36,7 +36,6 @@ module Importers
     def experience
       @experience ||= begin
         obj =  @person.experiences
-                      .tmp_original
                       .where(university: @university,
                             organization: organization,
                             from_year: @experience_from)
