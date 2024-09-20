@@ -133,7 +133,7 @@ class Communication::Website < ApplicationRecord
         unaccent(communication_websites.url) % unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
+  scope :for_update, -> (autoupdate, language = nil) { where(autoupdate_theme: autoupdate) }
   scope :with_url, -> { where.not(url: [nil, '']) }
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
 

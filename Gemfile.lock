@@ -293,16 +293,10 @@ GEM
     google-protobuf (4.28.0-x86_64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.28.0-x86_64-linux)
-      bigdecimal
-      rake (>= 13)
     hal_openscience (0.1.0)
       json
       net-http
       open-uri
-    has_scope (0.8.2)
-      actionpack (>= 5.2)
-      activesupport (>= 5.2)
     hash_dot (2.5.0)
     hashdiff (1.1.1)
     hashie (5.0.0)
@@ -416,8 +410,6 @@ GEM
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -717,7 +709,6 @@ DEPENDENCIES
   gitlab
   good_job (~> 4)
   hal_openscience (~> 0)
-  has_scope (~> 0)
   hash_dot
   i18n_data (~> 0)
   i18n_date_range

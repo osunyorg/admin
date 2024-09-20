@@ -2,10 +2,7 @@
 
 <p><%= t('server_admin.websites.in_production', count: Communication::Website.in_production.count) %></p>
 
-<%= render  'admin/application/filters',
-            current_path: server_websites_path,
-            filters: @filters,
-            collapsable: false if @filters.any? %>
+<%= render 'filters', current_path: server_websites_path %>
 
 <%= render 'server/websites/list', websites: @websites %>
 

@@ -4,9 +4,7 @@
   <%= t('server_admin.universities.contributing', count: University.contributing.count) %>
 </p>
 
-<%= render  'admin/application/filters',
-            current_path: server_universities_path,
-            filters: @filters if @filters.any? %>
+<%= render  'filters', current_path: server_universities_path %>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">
