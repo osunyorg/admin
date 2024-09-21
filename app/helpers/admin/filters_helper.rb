@@ -1,7 +1,7 @@
 module Admin::FiltersHelper
 
   def filters_panel(current_path: '', active_filters_count: 0, &block)
-    render  layout: "admin/application/filters_panel",
+    render  layout: "admin/application/components/filters",
             locals: {
               current_path: current_path,
               active_filters_count: active_filters_count

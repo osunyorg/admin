@@ -1,6 +1,12 @@
-<% content_for :title, "#{t('communication.authors', count: 2)} (#{@authors.total_count})" %>
+<% content_for :title, t('communication.authors', count: 2) %>
 
-<%= render 'filters', current_path: admin_communication_website_post_authors_path  %>
+<div class="d-flex justify-content-between mb-4">
+  <p class="mt-1">
+    <%= @authors.total_count %>
+    <%= t('communication.authors', count: @authors.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_communication_website_post_authors_path  %>
+</div>
 <%= render 'admin/communication/websites/posts/authors/list', authors: @authors %>
 <%= paginate @authors %>
 

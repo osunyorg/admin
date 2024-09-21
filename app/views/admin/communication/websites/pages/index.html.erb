@@ -1,14 +1,14 @@
 <% content_for :title, t('admin.communication.website.subnav.structure') %>
 
-<p>
-  <%= @pages.size %>
-  <%= Communication::Website::Page.model_name.human(count: @pages.size).downcase %>
-</p>
+<div class="d-flex justify-content-between mb-4">
+  <p class="mt-1">
+    <%= @pages.size %>
+    <%= Communication::Website::Page.model_name.human(count: @pages.size).downcase %>
+  </p>
+  <%= render 'filters', current_path: list_admin_communication_website_pages_path %>
+</div>
 
-<%= render 'filters', current_path: list_admin_communication_website_pages_path %>
-<p>&nbsp;</p><%# Hack idiot pour le bon affichage des filtres %>
-
-<ul class="nav nav-tabs justify-content-md-end mt-0 mt-md-n4">
+<ul class="nav nav-tabs justify-content-md-end small">
   <li class="nav-item">
     <a class="nav-link active" aria-current="page">
       <i class="fas fa-sitemap"></i>

@@ -21,7 +21,7 @@
           <td><%= link_to_if can?(:read, user), user.first_name, [:admin, user] %></td>
           <td><%= mail_to user.email %></td>
           <td>
-            <span class="badge bg-secondary">
+            <span class="badge bg-secondary text-dark">
               <%= t("activerecord.attributes.user.roles.#{user.role}") %>
             </span>
           </td>

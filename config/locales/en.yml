@@ -248,9 +248,9 @@ en:
       role: Filter by role
     buttons:
       close: Close
-      expand: Search
+      expand: Search and filter
       reset: Reset
-      submit: Search
+      submit: Search and filter
   folder:
     empty: Folder is empty
     open: Open folder

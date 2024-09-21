@@ -248,10 +248,10 @@ fr:
       role: Filtrer par rôle
     buttons:
       close: Fermer
-      expand: Recherche
-      reset: Annuler
+      expand: Rechercher et filtrer
+      reset: Réinitialiser la recherche
       submit: Chercher
-    title: Recherche
+    title: Rechercher et filtrer
   folder:
     empty: Le dossier est vide
     open: Ouvrir le dossier
@@ -342,7 +342,7 @@ fr:
   save: Enregistrer
   shared_image:
     title: Image de partage
-  search: Rechercher
+  search: Recherche
   select_language: Sélectionnez une langue
   seo: SEO
   simple_form:
