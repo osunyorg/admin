@@ -1,7 +1,13 @@
-<% content_for :title, "#{University::Person.model_name.human(count: 2)}" %>
+<% content_for :title, University::Person.model_name.human(count: 2) %>
 
-<p><%= t('admin.elements', count: @people.total_count) %></p>
-<%= render 'filters', current_path: admin_university_people_path %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @people.total_count %>
+    <%= University::Person.model_name.human(count: @people.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_university_people_path %>
+</div>
+
 <%= render 'admin/university/people/list', people: @people %>
 <%= paginate @people %>
 

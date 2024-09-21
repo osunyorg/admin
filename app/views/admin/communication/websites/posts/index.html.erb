@@ -1,7 +1,7 @@
 <% content_for :title, "#{Communication::Website::Post.model_name.human(count: 2)}" %>
 
 <div class="d-flex justify-content-between mb-4">
-  <p class="mt-1">
+  <p>
     <%= @posts.total_count %>
     <%= Communication::Website::Post.model_name.human(count: @posts.total_count).downcase %>
   </p>

@@ -1,10 +1,12 @@
 <% content_for :title, Communication::Extranet.model_name.human(count: 2) %>
 
-<p>
-  <%= @extranets.total_count %>
-  <%= Communication::Extranet.model_name.human(count: @extranets.total_count).downcase %>
-</p>
-<%= render 'filters', current_path: admin_communication_extranets_path %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @extranets.total_count %>
+    <%= Communication::Extranet.model_name.human(count: @extranets.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_communication_extranets_path %>
+</div>
 
 <div class="row g-2 mb-3">
   <% @extranets.each do |extranet| %>

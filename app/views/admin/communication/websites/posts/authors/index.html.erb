@@ -1,7 +1,7 @@
 <% content_for :title, t('communication.authors', count: 2) %>
 
 <div class="d-flex justify-content-between mb-4">
-  <p class="mt-1">
+  <p>
     <%= @authors.total_count %>
     <%= t('communication.authors', count: @authors.total_count).downcase %>
   </p>

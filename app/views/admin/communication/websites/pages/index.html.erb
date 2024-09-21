@@ -1,7 +1,7 @@
 <% content_for :title, t('admin.communication.website.subnav.structure') %>
 
 <div class="d-flex justify-content-between mb-4">
-  <p class="mt-1">
+  <p>
     <%= @pages.size %>
     <%= Communication::Website::Page.model_name.human(count: @pages.size).downcase %>
   </p>

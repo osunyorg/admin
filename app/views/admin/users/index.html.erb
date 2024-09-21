@@ -1,6 +1,12 @@
 <% content_for :title, "#{User.model_name.human(count: 2)} (#{@users.total_count})" %>
 
-<%= render 'filters', current_path: admin_users_path %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @users.total_count %>
+    <%= User.model_name.human(count: @users.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_users_path %>
+</div>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">
