@@ -1,4 +1,5 @@
 SimpleNavigation::Configuration.run do |navigation|
+  navigation.renderer = SimpleNavigation::Renderer::List
   navigation.auto_highlight = true
   navigation.highlight_on_subpath = true
   navigation.selected_class = 'active'
