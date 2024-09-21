@@ -15,7 +15,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
     respond_to do |format|
       format.html {
-        @organizations = @organizations.page(params[:page]).per(24)
+        @organizations = @organizations.page(params[:page])
         breadcrumb
       }
       format.xlsx {

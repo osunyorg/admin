@@ -15,7 +15,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
     respond_to do |format|
       format.html {
-        @people = @people.page(params[:page]).per(24)
+        @people = @people.page(params[:page])
         breadcrumb
       }
       format.xlsx {

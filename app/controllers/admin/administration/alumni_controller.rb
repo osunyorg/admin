@@ -11,7 +11,6 @@ class Admin::Administration::AlumniController < Admin::Administration::Applicati
                      .alumni
                      .ordered(current_language)
                      .page(params[:page])
-                     .per(6*5)
     breadcrumb
   end
 

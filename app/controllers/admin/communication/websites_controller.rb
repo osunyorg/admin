@@ -7,7 +7,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @websites = @websites.filter_by(params[:filters], current_language)
                          .ordered(current_language)
                          .page(params[:page])
-                         .per(30)
     breadcrumb
   end
 

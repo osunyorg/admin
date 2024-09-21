@@ -1,6 +1,12 @@
-<% content_for :title, "#{University::Person::Alumnus.model_name.human(count: 2)} (#{@alumni.total_count})" %>
+<% content_for :title, University::Person::Alumnus.model_name.human(count: 2) %>
 
-<%= render 'filters', current_path: admin_administration_alumni_path %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @alumni.total_count %>
+    <%= University::Person::Alumnus.model_name.human(count: @alumni.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_administration_alumni_path %>
+</div>
 
 <%= render 'admin/administration/alumni/list', alumni: @alumni %>
 

@@ -4,7 +4,6 @@ class Extranet::Contacts::OrganizationsController < Extranet::Contacts::Applicat
                                       .tmp_original
                                       .ordered(current_language)
                                       .page(params[:page])
-                                      .per(60)
     @count = @organizations.total_count
     breadcrumb
   end

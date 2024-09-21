@@ -13,7 +13,6 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
                                      .tmp_original # TODO L10N : To remove
                                      .ordered(current_language)
                                      .page(params[:page])
-                                     .per(6*5)
     breadcrumb
   end
 
