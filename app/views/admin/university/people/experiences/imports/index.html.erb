@@ -1,6 +1,12 @@
 <% content_for :title, t('university.person.experiences.title') %>
 
-<%= render 'admin/imports/filters', current_path: admin_university_people_experiences_imports_path %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @imports.total_count %>
+    <%= Import.model_name.human(count: @imports.total_count).downcase %>
+  </p>
+  <%= render 'admin/imports/filters', current_path: admin_university_people_experiences_imports_path %>
+</div>
 
 <%= render 'admin/imports/list', imports: @imports, path_pattern: 'admin_university_people_experiences_import_path' %>
 
