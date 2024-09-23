@@ -4,16 +4,18 @@ language = @l10n.language
 @programs = @website.education_programs
                     .where(diploma: diploma)
                     .root
+                    .published_now_in(language)
                     .ordered if @website.present?
 %>---
 <%= render 'admin/application/static/title', about: @l10n %>
 <%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
-<%= render 'admin/application/static/design', 
+<%= render 'admin/application/static/design',
             about: diploma,
             l10n: @l10n,
-            full_width: true, 
+            full_width: true,
             toc_offcanvas: true %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
 <% if @programs %>
 programs:
 <%= render 'admin/education/programs/static_list',

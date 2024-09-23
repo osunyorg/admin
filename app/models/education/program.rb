@@ -153,6 +153,7 @@ class Education::Program < ApplicationRecord
   }
 
   def dependencies
+    localizations +
     active_storage_blobs +
     locations +
     university_people_through_involvements.map(&:teacher_facets) +
