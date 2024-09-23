@@ -5,7 +5,7 @@ module Sendinblue
     
     def self.send_mfa_code(user, code)
       duration =  ActiveSupport::Duration.build(Rails.application.config.devise.direct_otp_valid_for).inspect
-      message = I18n.t('sms_code', code: code, context: user.registration_context, duration: duration)
+      message = I18n.t('sms_code', code: code, context: user.registration_context.to_s_in(user.language), duration: duration)
       self.send_message(user, message)
     end
 

@@ -25,7 +25,7 @@
                   <p class="mb-md-0">
                     <%= experience.person.best_localization_for(current_language) %>
                     <br>
-                    <%= [l10n.description, organization_l10n&.to_s].compact_blank.join('-') %>
+                    <%= [l10n&.description, organization_l10n&.to_s].compact_blank.join('-') %>
                   </p>
                   <small><%= l experience.created_at, format: :date_with_explicit_month %></small>
                 </div>
