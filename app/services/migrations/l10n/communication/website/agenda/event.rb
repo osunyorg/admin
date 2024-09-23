@@ -37,6 +37,12 @@ class Migrations::L10n::Communication::Website::Agenda::Event < Migrations::L10n
       reconnect_git_files(event, l10n)
 
       l10n.save
+
+      # If original event, we make sure that the parent is an original event
+      if event.original_id.nil? && event.parent.present?
+        parent_id = event.parent.original_id || event.parent.id
+        event.update_column(:parent_id, parent_id)
+      end
     end
   end
 end

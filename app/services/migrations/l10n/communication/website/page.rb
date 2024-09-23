@@ -40,6 +40,12 @@ class Migrations::L10n::Communication::Website::Page < Migrations::L10n::Base
       reconnect_git_files(page, l10n)
 
       l10n.save
+
+      # If original page, we make sure that the parent is an original page
+      if page.original_id.nil? && page.parent.present?
+        parent_id = page.parent.original_id || page.parent.id
+        page.update_column(:parent_id, parent_id)
+      end
     end
   end
 end
