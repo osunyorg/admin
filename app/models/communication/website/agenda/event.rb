@@ -21,6 +21,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
+#  created_by_id            :uuid             indexed
 #  language_id              :uuid             indexed
 #  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
@@ -29,6 +30,7 @@
 # Indexes
 #
 #  index_agenda_events_on_communication_website_id             (communication_website_id)
+#  index_communication_website_agenda_events_on_created_by_id  (created_by_id)
 #  index_communication_website_agenda_events_on_language_id    (language_id)
 #  index_communication_website_agenda_events_on_original_id    (original_id)
 #  index_communication_website_agenda_events_on_parent_id      (parent_id)
@@ -41,11 +43,13 @@
 #  fk_rails_5fa53206f2  (communication_website_id => communication_websites.id)
 #  fk_rails_67834f0062  (language_id => languages.id)
 #  fk_rails_917095d5ca  (parent_id => communication_website_agenda_events.id)
+#  fk_rails_c9e737a3c1  (created_by_id => users.id)
 #  fk_rails_fc3fea77c2  (original_id => communication_website_agenda_events.id)
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
   include Contentful # TODO L10N : To remove
+  include Filterable
   include Sanitizable
   include Shareable # TODO L10N : To remove
   include Localizable
@@ -56,6 +60,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithTime
   include WithTree
   include WithUniversity
+
+  belongs_to  :created_by,
+              class_name: "User",
+              optional: true
 
   belongs_to  :parent,
               class_name: 'Communication::Website::Agenda::Event',
@@ -78,22 +86,19 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :ordered, -> (language = nil) { ordered_asc }
   scope :latest_in, -> (language) { published_now_in(language).future_or_current.order("communication_website_agenda_event_localizations.updated_at").limit(5) }
 
-  scope :for_category, -> (category_id) {
+  scope :for_category, -> (category_id, language = nil) {
     joins(:categories)
-    .where(
-      communication_website_agenda_categories: {
-        id: category_id
-      }
-    )
+    .where(communication_website_agenda_categories: { id: category_id })
     .distinct
   }
-  # TODO L10N : To adapt
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(communication_website_agenda_events.meta_description) ILIKE unaccent(:term) OR
-      unaccent(communication_website_agenda_events.summary) ILIKE unaccent(:term) OR
-      unaccent(communication_website_agenda_events.title) ILIKE unaccent(:term) OR
-      unaccent(communication_website_agenda_events.subtitle) ILIKE unaccent(:term)
+  scope :for_search_term, -> (term, language) {
+    joins(:localizations)
+      .where(communication_website_agenda_event_localizations: { language_id: language.id })
+      . where("
+      unaccent(communication_website_agenda_event_localizations.meta_description) ILIKE unaccent(:term) OR
+      unaccent(communication_website_agenda_event_localizations.summary) ILIKE unaccent(:term) OR
+      unaccent(communication_website_agenda_event_localizations.title) ILIKE unaccent(:term) OR
+      unaccent(communication_website_agenda_event_localizations.subtitle) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 

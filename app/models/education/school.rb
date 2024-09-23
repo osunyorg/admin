@@ -32,13 +32,13 @@
 #
 class Education::School < ApplicationRecord
   include AsIndirectObject
+  include Filterable
   include Sanitizable
   include Localizable
   include LocalizableOrderByNameScope
   include WebsitesLinkable
   include WithBlobs # TODO L10N : To remove
   include WithCountry
-  include WithGitFiles
   include WithLocations
   include WithPrograms # must come before WithAlumni and WithTeam
   include WithAlumni
@@ -61,21 +61,24 @@ class Education::School < ApplicationRecord
 
   validates :address, :city, :zipcode, :country, presence: true
 
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(education_schools.address) ILIKE unaccent(:term) OR
-      unaccent(education_schools.city) ILIKE unaccent(:term) OR
-      unaccent(education_schools.country) ILIKE unaccent(:term) OR
-      unaccent(education_schools.name) ILIKE unaccent(:term) OR
-      unaccent(education_schools.phone) ILIKE unaccent(:term) OR
-      unaccent(education_schools.zipcode) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+  scope :for_search_term, -> (term, language) {
+     joins(:localizations)
+      .where(education_school_localizations: { language_id: language.id })
+      .where("
+        unaccent(education_schools.address) ILIKE unaccent(:term) OR
+        unaccent(education_schools.city) ILIKE unaccent(:term) OR
+        unaccent(education_schools.country) ILIKE unaccent(:term) OR
+        unaccent(education_school_localizations.name) ILIKE unaccent(:term) OR
+        unaccent(education_schools.phone) ILIKE unaccent(:term) OR
+        unaccent(education_schools.zipcode) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_program, -> (program_id) {
+  scope :for_program, -> (program_id, language = nil) {
     joins(:programs).where(education_programs: { id: program_id })
   }
 
   def dependencies
+    localizations +
     programs +
     # As diplomas are here through programs, and diploma being a program's dependency, it this necessary?
     diplomas +

@@ -1,0 +1,27 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_language,
+                      label: t('filters.attributes.element', element: Language.model_name.human.downcase),
+                      collection: Language.available_for_interface,
+                      multiple: true
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_role,
+                      label: t('filters.attributes.element', element: User.human_attribute_name('role').downcase),
+                      collection: User.roles.keys.map { |r| { to_s: t("activerecord.attributes.user.roles.#{r}"), id: r } },
+                      multiple: true
+                      %>
+
+    <% end %>
+<% end %>

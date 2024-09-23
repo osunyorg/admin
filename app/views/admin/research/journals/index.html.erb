@@ -1,7 +1,13 @@
 <% content_for :title, Research::Journal.model_name.human(count: 2) %>
 
-<p>&nbsp;</p>
-<%= render 'filters', current_path: admin_research_journals_path, filters: @filters if @filters.any?  %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @journals.total_count %>
+    <%= Research::Journal.model_name.human(count: @journals.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_research_journals_path %>
+</div>
+
 <div class="row g-2 mb-3">
   <% @journals.each do |journal| %>
     <div>

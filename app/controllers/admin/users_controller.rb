@@ -1,12 +1,10 @@
 class Admin::UsersController < Admin::ApplicationController
   load_and_authorize_resource through: :current_university
 
-  has_scope :for_language
-  has_scope :for_role
-  has_scope :for_search_term
-
   def index
-    @users = apply_scopes(@users).ordered.page(params[:page])
+    @users = @users.filter_by(params[:filters], current_language)
+                   .ordered
+                   .page(params[:page])
     breadcrumb
   end
 

@@ -1,4 +1,4 @@
-class Admin::Education::ProgramsController < Admin::Education::ApplicationController
+class Admin::Education::ProgramsController < Admin::Education::Programs::ApplicationController
   load_and_authorize_resource class: Education::Program,
                               through: :current_university,
                               through_association: :education_programs
@@ -8,16 +8,10 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_diploma
-  has_scope :for_school
-  has_scope :for_publication
-
   def index
-    @programs = apply_scopes(@programs)
-                  .tmp_original # TODO L10N : To remove.
-                  .ordered_by_name(current_language)
-                  .page(params[:page])
+    @programs = @programs.filter_by(params[:filters], current_language)
+                         .ordered_by_name(current_language)
+                         .page(params[:page])
     @feature_nav = 'navigation/admin/education/programs'
     breadcrumb
   end
@@ -55,8 +49,6 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def show
-    @roles = @program.university_roles.ordered
-    @teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name(current_language)
     @preview = true
     breadcrumb
   end
@@ -110,12 +102,6 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   def categories
     current_university.program_categories
                       .ordered
-  end
-
-  def breadcrumb
-    super
-    add_breadcrumb Education::Program.model_name.human(count: 2), admin_education_programs_path
-    breadcrumb_for @program
   end
 
   def program_params

@@ -1,8 +1,6 @@
 class Server::ApplicationController < ApplicationController
   layout 'server/layouts/application'
 
-  include Admin::Filterable
-
   before_action :authenticate_user!, :ensure_user_if_server_admin
 
   protected
@@ -17,9 +15,5 @@ class Server::ApplicationController < ApplicationController
 
   def current_language
     @current_language ||= current_university.default_language
-  end
-
-  def default_url_options
-    {}
   end
 end

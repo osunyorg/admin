@@ -8,7 +8,6 @@ action += link_to t('create'),
 subtitle = t('admin.elements', count: @apps.total_count)
 %>
 <%= osuny_panel University::App.model_name.human(count: 2), subtitle: subtitle, action: action do %>
-  <%= render 'filters', current_path: admin_university_apps_path, filters: @filters if @filters.any?  %>
   <%= render 'admin/university/apps/list', apps: @apps %>
   <%= paginate @apps %>
 <% end %>

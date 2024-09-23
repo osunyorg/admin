@@ -33,6 +33,7 @@ class Education::School::Localization < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include WithAccessibility
+  include WithBlobs
   include WithGitFiles
   include WithPublication
   include WithUniversity

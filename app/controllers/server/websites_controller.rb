@@ -3,12 +3,6 @@ class Server::WebsitesController < Server::ApplicationController
   before_action :load_websites, only: [:index, :clean_and_rebuild_all_websites]
   before_action :load_website, except: [:index, :clean_and_rebuild_all_websites]
 
-  has_scope :for_theme_version
-  has_scope :for_production
-  has_scope :for_update
-  has_scope :for_search_term
-  has_scope :for_updatable_theme
-
   def index
     @websites = @websites.ordered(current_language).page(params[:page]).per(500)
     breadcrumb
@@ -72,7 +66,7 @@ class Server::WebsitesController < Server::ApplicationController
   end
 
   def load_websites
-    @websites = apply_scopes(Communication::Website.all).ordered(current_language)
+    @websites = Communication::Website.filter_by(params[:filters], current_language).ordered(current_language)
   end
 
   def load_website

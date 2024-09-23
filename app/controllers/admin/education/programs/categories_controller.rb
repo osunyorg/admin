@@ -74,8 +74,6 @@ class Admin::Education::Programs::CategoriesController < Admin::Education::Progr
 
   def breadcrumb
     super
-    add_breadcrumb  Education::Program.model_name.human(count: 2),
-                    admin_education_programs_path
     add_breadcrumb  Education::Program::Category.model_name.human(count: 2),
                     admin_education_program_categories_path
     breadcrumb_for @category

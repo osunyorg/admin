@@ -1,4 +1,4 @@
-<% cohorts_paged = cohorts.ordered.page(params[:page]).per(60) %>
+<% cohorts_paged = cohorts.ordered.page(params[:page]) %>
 <ul class="list">
   <% cohorts_paged.each do |cohort| %>
   <li>

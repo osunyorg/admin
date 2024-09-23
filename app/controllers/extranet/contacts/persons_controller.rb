@@ -4,7 +4,6 @@ class Extranet::Contacts::PersonsController < Extranet::Contacts::ApplicationCon
                               .tmp_original
                               .ordered(current_language)
                               .page(params[:page])
-                              .per(60)
     @count = @people.total_count
     breadcrumb
   end

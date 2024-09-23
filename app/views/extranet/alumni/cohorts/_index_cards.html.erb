@@ -1,4 +1,4 @@
-<% cohorts_paged = @cohorts.ordered.page(params[:page]).per(60) %>
+<% cohorts_paged = @cohorts.ordered.page(params[:page]) %>
 <div class="row">
   <% cohorts_paged.each do |cohort| %>
   <div class="col-md-4 col-xl-3">

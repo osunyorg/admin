@@ -64,6 +64,7 @@ class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
   include Favoritable
+  include Filterable
   include Localizable
   include LocalizableOrderByNameScope
   include WithAbouts
@@ -121,17 +122,18 @@ class Communication::Website < ApplicationRecord
                     on: :create
 
   scope :in_production, -> { where(in_production: true) }
-  scope :for_production, -> (production) { where(in_production: production) }
-  scope :for_search_term, -> (term) {
+  scope :for_production, -> (production, language = nil) { where(in_production: production) }
+  scope :for_search_term, -> (term, language) {
     joins(:university)
-    .joins(:localizations)
-    .where("
-      unaccent(universities.name) % unaccent(:term) OR
-      unaccent(communication_website_localizations.name) % unaccent(:term) OR
-      unaccent(communication_websites.url) % unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+      .joins(:localizations)
+      .where(communication_website_localizations: { language_id: language.id })
+      .where("
+        unaccent(universities.name) % unaccent(:term) OR
+        unaccent(communication_website_localizations.name) % unaccent(:term) OR
+        unaccent(communication_websites.url) % unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
+  scope :for_update, -> (autoupdate, language = nil) { where(autoupdate_theme: autoupdate) }
   scope :with_url, -> { where.not(url: [nil, '']) }
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
 

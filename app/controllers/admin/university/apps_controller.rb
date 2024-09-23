@@ -4,7 +4,7 @@ class Admin::University::AppsController < Admin::University::ApplicationControll
                               through_association: :apps
 
   def index
-    @apps = apply_scopes(@apps).ordered.page(params[:page])
+    @apps = @apps.ordered.page(params[:page])
     breadcrumb
   end
 

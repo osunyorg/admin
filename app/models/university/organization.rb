@@ -49,6 +49,7 @@
 class University::Organization < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : To remove
+  include Filterable
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
@@ -56,7 +57,6 @@ class University::Organization < ApplicationRecord
   include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithGeolocation
-  # include WithGitFiles # TODO L10N : To remove
   include WithUniversity
 
   attr_accessor :created_from_extranet
@@ -79,12 +79,11 @@ class University::Organization < ApplicationRecord
 
   alias :featured_image :logo # TODO L10N : To remove
 
-  scope :for_kind, -> (kind) { where(kind: kind) }
-  scope :for_category, -> (category_id) { joins(:categories).where(university_organization_categories: { id: category_id }).distinct }
-  # TODO L10N : To rewrite (should add a parameter language and filter to localizations only for this language)
-  scope :for_search_term, -> (term) {
+  scope :for_kind, -> (kind, language = nil) { where(kind: kind) }
+  scope :for_category, -> (category_id, language = nil) { joins(:categories).where(university_organization_categories: { id: category_id }).distinct }
+  scope :for_search_term, -> (term, language) {
     joins(:localizations)
-      # TODO L10N : To add after filters rework @pabois
+      .where(university_organization_localizations: { language_id: language.id })
       .where("
         unaccent(university_organizations.address) ILIKE unaccent(:term) OR
         unaccent(university_organizations.city) ILIKE unaccent(:term) OR

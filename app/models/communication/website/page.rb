@@ -54,6 +54,7 @@ class Communication::Website::Page < ApplicationRecord
 
   include AsDirectObject
   include Contentful # TODO L10N : To remove
+  include Filterable
   include Sanitizable
   include Shareable # TODO L10N : To remove
   include Localizable
@@ -111,18 +112,20 @@ class Communication::Website::Page < ApplicationRecord
     .order("localization_title ASC")
   }
 
-  # TODO L10N : to adjust
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(communication_website_pages.meta_description) ILIKE unaccent(:term) OR
-      unaccent(communication_website_pages.summary) ILIKE unaccent(:term) OR
-      unaccent(communication_website_pages.title) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+  scope :for_search_term, -> (term, language) {
+     joins(:localizations)
+      .where(communication_website_page_localizations: { language_id: language.id })
+      .where("
+        unaccent(communication_website_page_localizations.meta_description) ILIKE unaccent(:term) OR
+        unaccent(communication_website_page_localizations.summary) ILIKE unaccent(:term) OR
+        unaccent(communication_website_page_localizations.title) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
-  # TODO L10N : to adjust
-  scope :for_published, -> (published) { where(published: published == 'true') }
-  # TODO L10N : to adjust
-  scope :for_full_width, -> (full_width) { where(full_width: full_width == 'true') }
+  scope :for_published, -> (published, language) { 
+    joins(:localizations)
+      .where(communication_website_page_localizations: { language_id: language.id , published: published == 'true'})
+  }
+  scope :for_full_width, -> (full_width, language = nil) { where(full_width: full_width == 'true') }
 
   def dependencies
     localizations.in_languages(website.active_language_ids)
