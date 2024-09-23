@@ -49,18 +49,4 @@ class Education::Program::Category::Localization < ApplicationRecord
   def to_s
     "#{name}"
   end
-
-  protected
-
-  def slug_unavailable?(slug)
-    self.class
-        .unscoped
-        .where(
-          university_id: self.university_id,
-          language_id: language_id,
-          slug: slug
-        )
-        .where.not(id: self.id)
-        .exists?
-  end
 end
