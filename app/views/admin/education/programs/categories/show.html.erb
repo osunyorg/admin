@@ -7,7 +7,7 @@
       <p>
         <%= osuny_link_localized_if can?(:read, @category.parent),
                                     @category.parent,
-                                    admin_education_program_category_path(@category.parent.id) %>
+                                    [:admin, @category.parent] %>
       </p>
     <% end %>
     <% if @category.children.any? %>
