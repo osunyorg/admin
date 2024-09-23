@@ -17,6 +17,7 @@ class Admin::Education::Programs::CategoriesController < Admin::Education::Progr
 
   def show
     @programs =  @category.programs
+                          .ordered_by_name(current_language)
                           .page(params[:page])
     breadcrumb
   end
