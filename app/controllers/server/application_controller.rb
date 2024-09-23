@@ -1,8 +1,6 @@
 class Server::ApplicationController < ApplicationController
   layout 'server/layouts/application'
 
-  include Admin::Filterable
-
   before_action :authenticate_user!, :ensure_user_if_server_admin
 
   protected

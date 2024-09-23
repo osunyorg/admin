@@ -5,10 +5,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_published
-  has_scope :for_full_width
-
   def index
     @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
@@ -17,10 +13,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def index_list
-    @filters = ::Filters::Admin::Communication::Websites::Pages.new(current_user).list
-    @pages = apply_scopes(@pages).tmp_original # TODO L10N : To remove
-                                 .ordered_by_title(current_language)
-                                 .page(params[:page])
+    @pages = @pages.filter_by(params[:filters], current_language)
+                   .tmp_original # TODO L10N : To remove
+                   .ordered_by_title(current_language)
+                   .page(params[:page])
+    # @pages = Communication::Website::Page.none.page(params[:page])
     breadcrumb
   end
 

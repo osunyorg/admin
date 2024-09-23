@@ -4,8 +4,6 @@ class Admin::ApplicationController < ApplicationController
   before_action :redirect_if_context_is_not_an_university!
   before_action :load_block_copy_cookie
 
-  include Admin::Filterable
-
   protected
 
   def current_subnav_context

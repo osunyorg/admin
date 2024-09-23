@@ -41,6 +41,7 @@
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
   include Contentful # TODO L10N : To remove
+  include Filterable
   include Sanitizable
   include Shareable # TODO L10N : To remove
   include Localizable
@@ -99,15 +100,17 @@ class Communication::Website::Post < ApplicationRecord
   }
 
   scope :latest_in, -> (language) { published_now_in(language).order("communication_website_post_localizations.published_at DESC").limit(5) }
-  scope :for_author, -> (author_id) { where(author_id: author_id) }
-  scope :for_category, -> (category_id) { joins(:categories).where(communication_website_post_categories: { id: category_id }).distinct }
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(communication_website_posts.meta_description) ILIKE unaccent(:term) OR
-      unaccent(communication_website_posts.summary) ILIKE unaccent(:term) OR
-      unaccent(communication_website_posts.text) ILIKE unaccent(:term) OR
-      unaccent(communication_website_posts.title) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+  scope :for_author, -> (author_id, language = nil) { where(author_id: author_id) }
+  scope :for_category, -> (category_id, language = nil) { joins(:categories).where(communication_website_post_categories: { id: category_id }).distinct }
+  scope :for_search_term, -> (term, language) {
+     joins(:localizations)
+      .where(communication_website_post_localizations: { language_id: language.id })
+      .where("
+        unaccent(communication_website_post_localizations.meta_description) ILIKE unaccent(:term) OR
+        unaccent(communication_website_post_localizations.summary) ILIKE unaccent(:term) OR
+        unaccent(communication_website_post_localizations.text) ILIKE unaccent(:term) OR
+        unaccent(communication_website_post_localizations.title) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
 
   def dependencies

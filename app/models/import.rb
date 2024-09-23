@@ -23,6 +23,8 @@
 #  fk_rails_b1e2154c26  (user_id => users.id)
 #
 class Import < ApplicationRecord
+  include Filterable
+
   belongs_to :university
   belongs_to :user, optional: true
 
@@ -36,7 +38,7 @@ class Import < ApplicationRecord
   after_create :queue_for_processing
   after_commit :send_mail_to_creator, on: :update, if: :status_changed_from_pending?
 
-  scope :for_status, -> (status) { where(status: status) }
+  scope :for_status, -> (status, language = nil) { where(status: status) }
   scope :ordered, -> (language = nil) { order('created_at DESC') }
 
   def to_s

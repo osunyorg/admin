@@ -6,14 +6,11 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_program
-
   def index
-    @schools = apply_scopes(@schools)
-                  .tmp_original # TODO L10N : To remove
-                  .ordered(current_language)
-                  .page(params[:page])
+    @schools = @schools.filter_by(params[:filters], current_language)
+                       .tmp_original # TODO L10N : To remove
+                       .ordered(current_language)
+                       .page(params[:page])
     breadcrumb
   end
 

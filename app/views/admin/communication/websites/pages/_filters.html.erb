@@ -1,0 +1,25 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_published,
+                      label: t('filters.attributes.element', element: t('admin.communication.website.pages.published_status').downcase),
+                      collection: [{ to_s: t('true'), id: 'true' }, { to_s: t('false'), id: 'false' }]
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_full_width,
+                      label: t('filters.attributes.element', element: t('admin.communication.website.pages.full_width_status').downcase),
+                      collection: [{ to_s: I18n.t('true'), id: 'true' }, { to_s: I18n.t('false'), id: 'false' }]
+                      %>
+
+    <% end %>
+<% end %>

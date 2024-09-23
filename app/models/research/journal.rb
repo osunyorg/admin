@@ -25,6 +25,7 @@
 class Research::Journal < ApplicationRecord
   include AsIndirectObject
   include Favoritable
+  include Filterable
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable
@@ -48,13 +49,14 @@ class Research::Journal < ApplicationRecord
   has_many  :kinds,
             class_name: 'Research::Journal::Paper::Kind'
 
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(research_journals.meta_description) ILIKE unaccent(:term) OR
-      unaccent(research_journals.issn) ILIKE unaccent(:term) OR
-      unaccent(research_journals.repository) ILIKE unaccent(:term) OR
-      unaccent(research_journals.title) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+  scope :for_search_term, -> (term, language = nil) {
+    joins(:localizations)
+      .where(research_journal_localizations: { language_id: language.id })
+      .where("
+        unaccent(research_journal_localizations.meta_description) ILIKE unaccent(:term) OR
+        unaccent(research_journal_localizations.issn) ILIKE unaccent(:term) OR
+        unaccent(research_journal_localizations.title) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
 
   def researchers

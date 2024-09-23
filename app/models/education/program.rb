@@ -66,6 +66,7 @@
 class Education::Program < ApplicationRecord
   include AsIndirectObject
   include Contentful # TODO L10N : To remove
+  include Filterable
   include Localizable
   include Sanitizable
   include Shareable # TODO L10N : To remove
@@ -134,21 +135,22 @@ class Education::Program < ApplicationRecord
     .order("localization_name ASC")
   }
 
-  # TODO L10N : adjust
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(education_programs.name) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+  scope :for_search_term, -> (term, language) {
+    joins(:localizations)
+      .where(education_program_localizations: { language_id: language.id })
+      .where("
+        unaccent(education_program_localizations.name) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_diploma, -> (diploma_id) {
+  scope :for_diploma, -> (diploma_id, language = nil) {
     where(diploma_id: diploma_id)
   }
-  scope :for_school, -> (school_id) {
+  scope :for_school, -> (school_id, language = nil) {
     joins(:schools)
       .where(education_schools: { id: school_id })
       .distinct
   }
-  scope :for_publication, -> (publication) {
+  scope :for_publication, -> (publication, language = nil) {
     where(published: publication)
   }
 

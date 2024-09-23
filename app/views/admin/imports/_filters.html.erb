@@ -1,0 +1,13 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_status,
+                      label: t('filters.attributes.element', element: Import.human_attribute_name('status').downcase),
+                      collection: Import::statuses.keys.map { |r| { to_s: I18n.t("enums.import.status.#{r}"), id: r } },
+                      multiple: true
+                      %>
+
+    <% end %>
+<% end %>
