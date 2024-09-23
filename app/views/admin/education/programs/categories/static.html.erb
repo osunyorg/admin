@@ -1,6 +1,5 @@
 <%
-# Pas dans le controller parce que ça se fait dans les background jobs, à partir du @about
-category = @about.about
+category = @l10n.about
 %>
 <%= render 'admin/application/static/title', about: @l10n %>
 <%= render 'admin/application/static/permalink', about: @l10n %>
