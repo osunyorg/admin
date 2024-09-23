@@ -16,8 +16,8 @@
   <%= link_to t('server_admin.websites.update_all_themes'),
               "#",
               class: "#{button_classes} js-sync-all-theme-versions" %>
-  <%#= link_to t('server_admin.websites.force_clean_and_rebuild'),
-              clean_and_rebuild_all_websites_server_websites_path(current_scopes),
+  <%= link_to t('server_admin.websites.force_clean_and_rebuild'),
+              clean_and_rebuild_all_websites_server_websites_path(params: { filters: params[:filters].to_unsafe_hash }),
               method: :post,
               class: button_classes %>
 <% end %>
