@@ -9,11 +9,13 @@
 #  status            :integer          default("pending")
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#  language_id       :uuid             not null, indexed
 #  university_id     :uuid             not null, indexed
 #  user_id           :uuid             indexed
 #
 # Indexes
 #
+#  index_imports_on_language_id    (language_id)
 #  index_imports_on_university_id  (university_id)
 #  index_imports_on_user_id        (user_id)
 #
@@ -21,11 +23,13 @@
 #
 #  fk_rails_42cc64a226  (university_id => universities.id)
 #  fk_rails_b1e2154c26  (user_id => users.id)
+#  fk_rails_b49a015b11  (language_id => languages.id)
 #
 class Import < ApplicationRecord
   include Filterable
 
   belongs_to :university
+  belongs_to :language
   belongs_to :user, optional: true
 
   has_one_attached_deletable :file
@@ -34,6 +38,8 @@ class Import < ApplicationRecord
   enum status: { pending: 0, finished: 1, finished_with_errors: 2 }
 
   validate :file_validation
+
+  before_validation :fallback_language_to_university_default, on: :create, unless: :language_id
 
   after_create :queue_for_processing
   after_commit :send_mail_to_creator, on: :update, if: :status_changed_from_pending?
@@ -84,6 +90,10 @@ class Import < ApplicationRecord
 
   def status_changed_from_pending?
     saved_change_to_status? && status_before_last_save == 'pending'
+  end
+
+  def fallback_language_to_university_default
+    self.language_id ||= university.default_language_id
   end
 
 end

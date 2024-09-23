@@ -5,7 +5,7 @@ class NotificationMailer < ApplicationMailer
   def import(import)
     merge_with_university_infos(import.university, {})
     @import = import
-    @url = send(import.url_pattern, import)
+    @url = public_send(import.url_pattern, import, { lang: import.language.iso_code })
     I18n.with_locale(import.user.language.iso_code) do
       subject = import.finished_with_errors? ?  t('mailers.notifications.import.subject_with_errors') :
                                                 t('mailers.notifications.import.subject_without_errors')

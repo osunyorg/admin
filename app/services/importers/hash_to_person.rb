@@ -1,7 +1,8 @@
 module Importers
   class HashToPerson
-    def initialize(university, hash)
+    def initialize(university, language, hash)
       @university = university
+      @language = language
       @hash = hash
       @error = nil
       extract_person_variables
@@ -55,23 +56,19 @@ module Importers
 
     def build_person
       if @email.present?
-        person = @university.people
-                           .where(language_id: @university.default_language_id, email: @email)
-                           .first_or_initialize
+        person = find_person_with_email
       elsif @first_name.present? && @last_name.present?
-        person = @university.people
-                           .where(language_id: @university.default_language_id, first_name: @first_name, last_name: @last_name)
-                           .first_or_initialize
+        person = find_person_with_name_in_current_language
+        person ||= find_person_with_name_in_another_language
       else
         # No mail, no name, nothing
         return
       end
-      person.first_name = @first_name
-      person.last_name = @last_name
+      person ||= @university.people.new
+      localization_id = person.localizations.find_by(language_id: @language.id)&.id
       person.gender = gender
       person.birthdate = @birth
       person.email = @email
-      person.url = @url
       person.phone_professional = @phone_professional
       person.phone_personal = @phone_personal
       person.phone_mobile = @mobile
@@ -79,13 +76,41 @@ module Importers
       person.zipcode = @zipcode
       person.city = @city
       person.country = @country
-      person.biography = @biography
-      person.twitter = @social_twitter
-      person.linkedin = @social_linkedin
-      person.mastodon = @social_mastodon
-      person.slug = person.to_s.parameterize.dasherize
-      person.language_id = @university.default_language_id
+      person.localizations_attributes = [
+        {
+          id: localization_id, language_id: @language.id,
+          biography: @biography, first_name: @first_name, last_name: @last_name,
+          linkedin: @social_linkedin, mastodon: @social_mastodon, twitter: @social_twitter,
+          url: @url
+        }
+      ]
       person
+    end
+
+    def find_person_with_email
+      @university.people.tmp_original.find_by(email: @email)
+    end
+
+    def find_person_with_name_in_current_language
+      @university.people.tmp_original
+        .joins(:localizations)
+        .where(university_person_localizations: {
+          language_id: @language.id,
+          first_name: @first_name, last_name: @last_name
+        })
+        .first
+    end
+
+    def find_person_with_name_in_another_language
+      @university.people.tmp_original
+        .joins(:localizations)
+        .where.not(university_person_localizations: {
+          language_id: @language.id
+        })
+        .where(university_person_localizations: {
+          first_name: @first_name, last_name: @last_name
+        })
+        .first
     end
 
     def country_not_found?
@@ -110,8 +135,8 @@ module Importers
       return if @person.picture.attached?
       return unless @photo.end_with?(*Rails.application.config.default_images_formats)
       begin
-        file = URI.open @photo
-        filename = File.basename @photo
+        file = URI.open(@photo)
+        filename = File.basename(@photo)
         person.picture.attach(io: file, filename: filename)
       rescue
       end

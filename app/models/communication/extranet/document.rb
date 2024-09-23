@@ -37,6 +37,8 @@ class Communication::Extranet::Document < ApplicationRecord
   belongs_to :category
   belongs_to :kind
 
+  validates :category, :kind, presence: true
+
   # TODO L10N : To remove
   has_one_attached_deletable :file
 
