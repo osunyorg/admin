@@ -49,7 +49,7 @@
                           url_for(@l10n.downloadable_summary),
                           target: :_blank %></p>
         <% end %>
-        <% if @program.duration.present? %>
+        <% if @l10n.duration.present? %>
           <%= osuny_label Education::Program::Localization.human_attribute_name('duration') %>
           <p><%= @l10n.duration %></p>
         <% end %>
