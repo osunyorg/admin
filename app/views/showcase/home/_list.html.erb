@@ -28,7 +28,7 @@
                         target: :_blank, 
                         class: 'text-dark' do %>
               <i class="bi bi-github me-1"></i>
-              <%= social_website_to_s(website.repository_url) %>
+              <%= website.repository_url.remove('https://github.com/') %>
             <% end %>
           </div>
           <% website.showcase_tags.each do |tag| %>
