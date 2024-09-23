@@ -5,16 +5,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  # Allow to override the default load_filters from Admin::Filterable
-  before_action :load_filters, only: :index
-
-  has_scope :for_search_term
-  has_scope :for_category
-
   def index
-    @events = apply_scopes(@events)
-                .ordered_desc
-                .page(params[:page])
+    @events = @events.filter_by(params[:filters], current_language)
+                     .ordered_desc
+                     .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
   end
@@ -43,6 +37,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def create
     @event.website = @website
+    @event.created_by = current_user
     @l10n.add_photo_import params[:photo_import]
     if @event.save_and_sync
       redirect_to admin_communication_website_agenda_event_path(@event),
@@ -89,14 +84,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def categories
     @website.agenda_categories
             .ordered
-  end
-
-  def load_filters
-    @filters = ::Filters::Admin::Communication::Websites::Agenda::Events.new(
-        current_user,
-        @website,
-        current_language
-      ).list
   end
 
   def event_params

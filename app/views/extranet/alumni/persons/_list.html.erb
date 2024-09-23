@@ -1,7 +1,6 @@
 <% 
 people_paged =  people.ordered(current_language)
                       .page(params[:page])
-                      .per(60)
 %>
 <div class="row">
   <% people_paged.each do |person| %>

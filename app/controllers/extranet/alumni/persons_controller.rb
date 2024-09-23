@@ -8,7 +8,7 @@ class Extranet::Alumni::PersonsController < Extranet::Alumni::ApplicationControl
     @people =  @facets.results
                       .ordered(current_language)
                       .page(params[:page])
-                      .per(60)
+                      .per(72)
     @count = @people.total_count
     breadcrumb
   end

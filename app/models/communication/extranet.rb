@@ -45,6 +45,7 @@ class Communication::Extranet < ApplicationRecord
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Favoritable
+  include Filterable
   include Localizable
   include LocalizableOrderByNameScope
   include WithAbouts
@@ -69,7 +70,7 @@ class Communication::Extranet < ApplicationRecord
 
   before_validation :sanitize_fields
 
-  scope :for_search_term, -> (term) {
+  scope :for_search_term, -> (term, language) {
     joins(:localizations)
     .where("
       unaccent(communication_extranets.host) ILIKE unaccent(:term) OR

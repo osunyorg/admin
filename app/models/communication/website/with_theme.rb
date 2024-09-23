@@ -5,9 +5,9 @@ module Communication::Website::WithTheme
     scope :with_automatic_update, -> { where(autoupdate_theme: true) }
     scope :with_manual_update, -> { where(autoupdate_theme: false) }
 
-    scope :for_theme_version, -> (version) { where(theme_version: version) }
+    scope :for_theme_version, -> (version, language = nil) { where(theme_version: version) }
     scope :for_older_theme_version, -> (version) { where.not(theme_version: version) }
-    scope :for_updatable_theme, -> (status) { updatable_theme if status == 'true' }
+    scope :for_updatable_theme, -> (status, language = nil) { updatable_theme if status == 'true' }
     scope :updatable_theme, -> { with_repository.with_url.with_access_token }
 
     def self.autoupdate_websites

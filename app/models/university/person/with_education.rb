@@ -41,15 +41,15 @@ module University::Person::WithEducation
     before_validation :find_cohorts
     validates_associated :cohorts
 
-    scope :for_alumni_program, -> (program_id) {
+    scope :for_alumni_program, -> (program_ids, language = nil) {
       left_joins(:cohorts)
-        .where(education_cohorts: { program_id: program_id })
+        .where(education_cohorts: { program_id: program_ids })
         .select("university_people.*")
         .distinct
     }
-    scope :for_alumni_year, -> (academic_year_id) {
+    scope :for_alumni_year, -> (academic_year_ids, language = nil) {
       left_joins(:cohorts)
-        .where(education_cohorts: { academic_year_id: academic_year_id })
+        .where(education_cohorts: { academic_year_id: academic_year_ids })
         .select("university_people.*")
         .distinct
     }

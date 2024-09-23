@@ -241,7 +241,7 @@ en:
       token_display_notice: Make sure to store your token somewhere safe. You won’t be able to see it again!
       token_successfully_regenerated: The token was successfully regenerated.
     description:
-      text: A university is an institution of higher education, study and research, made up of various establishments called, depending on the tradition, "colleges", "faculties", "institutes", "departments", "centres", "sections", "units" or specific schools, but also a library or workshop, media library or museum, etc. forming a coherent administrative whole with a defined legal status, whether public, private or possibly mixed.
+      text_html: A university is an institution of higher education, study and research, made up of various establishments called, depending on the tradition, "colleges", "faculties", "institutes", "departments", "centres", "sections", "units" or specific schools, but also a library or workshop, media library or museum, etc. forming a coherent administrative whole with a defined legal status, whether public, private or possibly mixed.
       source: Wikipedia
       parts:
         person:

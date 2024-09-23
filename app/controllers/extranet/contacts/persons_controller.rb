@@ -3,7 +3,6 @@ class Extranet::Contacts::PersonsController < Extranet::Contacts::ApplicationCon
     @people = current_extranet.connected_people
                               .ordered(current_language)
                               .page(params[:page])
-                              .per(60)
     @count = @people.total_count
     breadcrumb
   end

@@ -6,14 +6,12 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_program
-
   def index
-    @teachers = apply_scopes(current_university.people.teachers)
-                  .accessible_by(current_ability)
-                  .ordered(current_language)
-                  .page(params[:page])
+    @teachers = current_university.people
+                                  .teachers
+                                  .filter_by(params[:filters], current_language)
+                                  .ordered(current_language)
+                                  .page(params[:page])
     breadcrumb
   end
 

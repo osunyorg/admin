@@ -1,0 +1,24 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_about_type,
+                      label: t('filters.attributes.kind'),
+                      collection: Communication::Extranet::about_types.map { |r| 
+                                    { 
+                                    to_s: Communication::Extranet.human_attribute_name("about_#{r}"), 
+                                    id: r.present? ? r : "none"
+                                    } 
+                                },
+                      multiple: true
+                      %>
+
+    <% end %>
+<% end %>

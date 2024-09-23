@@ -8,7 +8,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   include Admin::HasStaticAction
 
   def index
-    @root_categories = categories.root
+    @root_categories = categories.root.ordered
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb

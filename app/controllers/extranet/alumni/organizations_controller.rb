@@ -7,7 +7,6 @@ class Extranet::Alumni::OrganizationsController < Extranet::Alumni::ApplicationC
     @organizations = @facets.results
                             .ordered(current_language)
                             .page(params[:page])
-                            .per(60)
     @count = @organizations.total_count
     breadcrumb
   end

@@ -6,19 +6,14 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_category
-  has_scope :for_kind
-
   def index
-    @organizations = apply_scopes(@organizations)
-                      .ordered(current_language)
-
+    @organizations = @organizations.filter_by(params[:filters], current_language)
+                                   .ordered(current_language)
     @feature_nav = 'navigation/admin/university/organizations'
 
     respond_to do |format|
       format.html {
-        @organizations = @organizations.page(params[:page]).per(24)
+        @organizations = @organizations.page(params[:page])
         breadcrumb
       }
       format.xlsx {
