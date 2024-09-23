@@ -30,6 +30,12 @@ class Migrations::L10n::Communication::Website::Agenda::Category < Migrations::L
       reconnect_git_files(category, l10n)
 
       l10n.save
+
+      # If original category, we make sure that the parent is an original category
+      if category.original_id.nil? && category.parent.present?
+        parent_id = category.parent.original_id || category.parent.id
+        category.update_column(:parent_id, parent_id)
+      end
     end
   end
 end

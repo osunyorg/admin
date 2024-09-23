@@ -64,6 +64,12 @@ class Migrations::L10n::Education::Program < Migrations::L10n::Base
           diploma_id = program.diploma.original_id || program.diploma.id
           program.update_column(:diploma_id, diploma_id)
         end
+
+        # We need to make sure the parent is the original.
+        if program.parent.present?
+          parent_id = program.parent.original_id || program.parent.id
+          program.update_column(:parent_id, parent_id)
+        end
       end
     end
   end
