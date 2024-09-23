@@ -15,12 +15,14 @@ end
 %>
 <% unless hide_blank && is_blank %>
   <%= osuny_label title %>
-  <p>
+  <div>
     <% if is_blank %>
-      <i class="<%= Icon::WARNING %> text-danger"></i>
-      <%= t 'properties.text.missing' %>
+      <p>
+        <i class="<%= Icon::WARNING %> text-danger"></i>
+        <%= t 'properties.text.missing' %>
+      </p>
     <% else %>
-      <%= strip_tags(value).truncate(200).html_safe %>
+      <%= sanitize value %>
     <% end %>
-  </p>
+  </div>
 <% end %>
