@@ -13,6 +13,8 @@ class Migrations::L10n::Education::Diploma < Migrations::L10n::Base
         short_name: object.short_name,
         slug: object.slug,
         summary: object.summary,
+        published: true, # No published in original model
+        published_at: object.created_at,
         about_id: about_id,
         language_id: object.language_id,
         university_id: object.university_id,

@@ -46,7 +46,6 @@ class Administration::Location < ApplicationRecord
   include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithFeaturedImage # TODO L10N : To remove
-  include WithGitFiles
   include WithGeolocation
   include WithUniversity
 

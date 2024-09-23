@@ -6,16 +6,7 @@ person_l10n = @l10n.person_l10n
 ---
 title: >-
   <%= t('university.person.facets.author.posts_of', name: @l10n.to_s, locale: @l10n.language.iso_code) %>
-breadcrumbs:
-<%
-@website.special_page(Communication::Website::Page::Person).ancestors_and_self.each do |page|
-  page_l10n = page.localization_for(@l10n.language)
-%>
-  - title: "<%= page_l10n.to_s %>"
-    path: "<%= page_l10n.current_permalink_in_website(@website)&.path %>"
-<% end %>
-  - title: "<%= person_l10n.to_s %>"
-    path: "<%= person_l10n.current_permalink_in_website(@website)&.path %>"
+<%= render 'admin/application/static/breadcrumbs', about: person_l10n, add_link_on_last: true -%>
   - title: "<%= t('university.person.facets.author.posts', locale: @l10n.language.iso_code) %>"
 <%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/design',

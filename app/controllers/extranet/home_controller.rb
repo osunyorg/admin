@@ -11,6 +11,6 @@ class Extranet::HomeController < Extranet::ApplicationController
   def redirect_to_default_language
     default_language = current_university.default_language
     default_language = current_extranet.original_localization.language unless current_extranet.languages.include?(default_language)
-    redirect_to root_path(lang: default_language)
+    redirect_to extranet_root_path(lang: default_language)
   end
 end

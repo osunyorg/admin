@@ -34,6 +34,7 @@
 #
 class Communication::Website::Agenda::Category::Localization < ApplicationRecord
   include AsLocalization
+  include AsLocalizedTree
   include Contentful
   include Initials
   include Permalinkable

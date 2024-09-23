@@ -56,7 +56,6 @@ class University::Organization < ApplicationRecord
   include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithGeolocation
-  # include WithGitFiles # TODO L10N : To remove
   include WithUniversity
 
   attr_accessor :created_from_extranet

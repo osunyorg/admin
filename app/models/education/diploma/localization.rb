@@ -49,7 +49,7 @@ class Education::Diploma::Localization < ApplicationRecord
   end
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}diplomas/#{slug}.html" if for_website?(website)
+    "#{git_path_content_prefix(website)}diplomas/#{slug}/_index.html" if for_website?(website)
   end
 
   def template_static

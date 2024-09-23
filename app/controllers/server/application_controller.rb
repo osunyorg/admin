@@ -18,8 +18,4 @@ class Server::ApplicationController < ApplicationController
   def current_language
     @current_language ||= current_university.default_language
   end
-
-  def default_url_options
-    {}
-  end
 end
