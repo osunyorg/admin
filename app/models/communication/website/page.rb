@@ -147,11 +147,6 @@ class Communication::Website::Page < ApplicationRecord
     nil
   end
 
-  # TODO L10N : to remove
-  def translate_other_attachments(translation)
-    translate_attachment(translation, :shared_image) if shared_image.attached?
-  end
-
   protected
 
   # ["class1", "class2"], "page" -> ["page-class1", "page-class2"]

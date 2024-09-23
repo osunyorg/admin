@@ -3,7 +3,7 @@ module User::WithPerson
 
   included do
     # Original person
-    has_one :person, -> { where(original_id: nil) }, class_name: 'University::Person', dependent: :nullify
+    has_one :person, class_name: 'University::Person', dependent: :nullify
 
     delegate :experiences, to: :person
 

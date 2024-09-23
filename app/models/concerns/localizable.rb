@@ -77,44 +77,4 @@ module Localizable
     best_localization_for(language).to_s
   end
 
-  # TODO L10N : to remove
-  ### DEPRECATED METHODS - has to be removed when cleaning L10N
-
-  # On déclare l'objet syncable pour que l'analyse puisse se poursuivre jusqu'aux localisations.
-  # Il n'y aura pas d'effet lié à la page elle-même.
-  # Peut-être faudrait-il travailler directement sur les localisations, mais c'est une grosse refonte.
-  def syncable?
-    true
-  end
-
-  # TODO L10N : Used in migration, to remove
-  def translate_contents!(translation)
-    blocks.without_heading.ordered.each do |block|
-      block.localize_for!(translation)
-    end
-
-    headings.root.ordered.each do |heading|
-      heading.localize_for!(translation)
-    end
-  end
-
-  # deprecated
-  # Utility method to duplicate attachments
-  # TODO L10N : Used in migration (via translate_other_attachments), to remove
-  def translate_attachment(translation, attachment_name)
-    translation.public_send(attachment_name).attach(
-      io: URI.open(public_send(attachment_name).url),
-      filename: public_send(attachment_name).filename.to_s,
-      content_type: public_send(attachment_name).content_type
-    )
-  rescue
-    # Missing attachment
-  end
-
-  # deprecated
-  # can be overwritten in model
-  # TODO L10N : Used in migration, to remove
-  def translate_other_attachments(translation)
-  end
-
 end
