@@ -3,10 +3,10 @@ class Admin::Administration::Alumni::Cohorts::ImportsController < Admin::Adminis
                               through: :current_university,
                               through_association: :imports
 
-  has_scope :for_status
-
   def index
-    @imports = apply_scopes(@imports.kind_alumni_cohorts).ordered.page(params[:page])
+    @imports = @imports.kind_alumni_cohorts
+                       .filter_by(params[:filters], current_language)
+                       .ordered.page(params[:page])
     breadcrumb
   end
 
@@ -22,6 +22,7 @@ class Admin::Administration::Alumni::Cohorts::ImportsController < Admin::Adminis
   def create
     @import.kind = :alumni_cohorts
     @import.user = current_user
+    @import.language = current_language
     if @import.save
       redirect_to admin_administration_alumni_cohorts_import_path(@import),
                   notice: t('admin.successfully_created_html', model: @import.to_s)

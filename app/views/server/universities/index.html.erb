@@ -1,12 +1,13 @@
-<% content_for :title, "#{@universities.total_count} #{University.model_name.human(count: @universities.total_count).downcase}" %>
+<% content_for :title, University.model_name.human(count: 2) %>
 
-<p>
-  <%= t('server_admin.universities.contributing', count: University.contributing.count) %>
-</p>
-
-<%= render  'admin/application/filters',
-            current_path: server_universities_path,
-            filters: @filters if @filters.any? %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @universities.total_count %>
+    <%= University.model_name.human(count: @universities.total_count).downcase %>, 
+    <%= t('server_admin.universities.contributing', count: University.contributing.count) %>
+  </p>
+  <%= render  'filters', current_path: server_universities_path %>
+</div>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">

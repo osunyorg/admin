@@ -3,7 +3,7 @@
 # Table name: university_person_localizations
 #
 #  id               :uuid             not null, primary key
-#  biography        :text
+#  biography        :string
 #  first_name       :string
 #  last_name        :string
 #  linkedin         :string
@@ -46,6 +46,9 @@ class University::Person::Localization < ApplicationRecord
   has_summernote :biography
 
   alias :person :about
+
+  delegate  :featured_image,
+            to: :person
 
   validates :first_name, :last_name, presence: true
 

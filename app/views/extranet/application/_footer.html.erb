@@ -32,16 +32,17 @@ about = current_extranet.about
       </div>
 
       <nav class="text-md-end col-md-6">
+        <%# language is explicitly given so that it can work with the devise layout which has no default_url option %>
         <%= link_to t('terms_of_service'),
-                    terms_path,
+                    terms_path(lang: current_language),
                     rel: 'noreferrer' if current_extranet.has_terms? %>
         <%= link_to t('privacy_policy'),
-                    privacy_policy_path,
+                    privacy_policy_path(lang: current_language),
                     rel: 'noreferrer' if current_extranet.has_privacy_policy? %>
         <%= link_to t('cookies_policy'),
-                    cookies_policy_path,
+                    cookies_policy_path(lang: current_language),
                     rel: 'noreferrer' if current_extranet.has_cookies_policy? %>
-        <%= link_to t('extranet.data'), data_path %>
+        <%= link_to t('extranet.data'), data_path(lang: current_language) %>
         <%= t 'extranet.osuny_html' %>
       </nav>
     </div>

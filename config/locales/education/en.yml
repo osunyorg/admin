@@ -114,8 +114,6 @@ en:
         view_as_tree: Treeview
   education:
     description:
-      text: Education is the set of processes and procedures that enable every human child to gradually gain access to culture, access to culture being what distinguishes man from animals.
-      source: Olivier Reboul, La philosophie de l'éducation, 2018
       parts:
         diploma:
           description: Presentation of diplomas and their characteristics
@@ -125,6 +123,8 @@ en:
           description: Presentation of the teachers, with their biographies and their teaching in the various courses
         school:
           description: Presentation of the schools, their contact details, courses, teams and administrative information
+      source: Olivier Reboul, La philosophie de l'éducation, 2018
+      text_html: Education is the set of processes and procedures that enable every human child to gradually gain access to culture, access to culture being what distinguishes man from animals.
     manage_programs: Manage programs
     manage_roles: Manage roles
     manage_teachers: Manage teachers

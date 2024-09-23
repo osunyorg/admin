@@ -8,7 +8,7 @@ class Extranet::Alumni::CohortsController < Extranet::Alumni::ApplicationControl
     @cohorts = @facets.results
                       .ordered(current_language)
                       .page(params[:page])
-                      .per(60)
+                      .per(72)
     @count = @cohorts.total_count
     breadcrumb
   end

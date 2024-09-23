@@ -25,7 +25,7 @@ module User::WithRoles
                             join_table: :communication_websites_users,
                             association_foreign_key: :communication_website_id
 
-    scope :for_role, -> (role) { where(role: role) }
+    scope :for_role, -> (role, language = nil) { where(role: role) }
 
     before_validation :set_default_role, on: :create
     before_validation :check_modifier_role
