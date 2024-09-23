@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_19_082005) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_19_093539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -1360,6 +1360,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_082005) do
     t.uuid "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "language_id", null: false
+    t.index ["language_id"], name: "index_imports_on_language_id"
     t.index ["university_id"], name: "index_imports_on_university_id"
     t.index ["user_id"], name: "index_imports_on_user_id"
   end
@@ -2274,6 +2276,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_082005) do
   add_foreign_key "education_schools", "languages"
   add_foreign_key "education_schools", "universities"
   add_foreign_key "emergency_messages", "universities"
+  add_foreign_key "imports", "languages"
   add_foreign_key "imports", "universities"
   add_foreign_key "imports", "users"
   add_foreign_key "research_journal_localizations", "languages"
