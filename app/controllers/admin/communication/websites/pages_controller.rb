@@ -17,7 +17,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
                    .tmp_original # TODO L10N : To remove
                    .ordered_by_title(current_language)
                    .page(params[:page])
-    # @pages = Communication::Website::Page.none.page(params[:page])
     breadcrumb
   end
 
