@@ -302,12 +302,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_082005) do
     t.index ["university_id"], name: "index_communication_website_agenda_categories_on_university_id"
   end
 
-  create_table "communication_website_agenda_events", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_agenda_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.text "summary"
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
-    t.uuid "language_id"
+    t.uuid "language_id", null: false
     t.uuid "original_id"
     t.boolean "published", default: false
     t.date "from_day"
@@ -548,7 +548,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_082005) do
     t.boolean "published", default: false
     t.text "summary"
     t.uuid "communication_website_id", null: false
-    t.uuid "language_id"
+    t.uuid "language_id", null: false
     t.uuid "original_id"
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
