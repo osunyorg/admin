@@ -1,5 +1,10 @@
 class Admin::Education::Programs::PartsController < Admin::Education::Programs::ApplicationController
-  before_action :load_program
+  include Admin::Localizable
+
+  load_resource :program, class: Education::Program, through: :current_university, parent: false
+  before_action :authorize_resource,
+                :load_localization,
+                :redirect_if_not_localized
 
   def presentation
     breadcrumb
@@ -27,7 +32,7 @@ class Admin::Education::Programs::PartsController < Admin::Education::Programs::
     breadcrumb
     add_breadcrumb t('education.program.parts.certification.label')
   end
-  
+
   def alumni
     @cohorts = @program.cohorts.ordered
     breadcrumb
@@ -36,9 +41,11 @@ class Admin::Education::Programs::PartsController < Admin::Education::Programs::
 
   protected
 
-  def load_program
-    @program = current_university.education_programs.find(params[:id])
-    @l10n = @program.localization_for(current_language)
-    authorize! :show, @program
+  def authorize_resource
+    authorize! :read, resource
+  end
+
+  def resource
+    @program
   end
 end

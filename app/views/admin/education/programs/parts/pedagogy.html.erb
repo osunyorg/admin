@@ -22,9 +22,9 @@
           <div class="card card--horizontal">
             <%= osuny_thumbnail_localized person %>
             <div class="card-body">
-              <%= link_to_if  can?(:read, person),
-                              person.best_localization_for(current_language),
-                              admin_education_teacher_path(person) %>
+              <%= osuny_link_localized_if can?(:read, person),
+                                          person,
+                                          admin_education_teacher_path(person) %>
             </div>
             <div class="card-footer">
               <%= involvement_l10n.description %>
