@@ -58,7 +58,6 @@ class Communication::Website::Page < ApplicationRecord
   include Localizable
   include WithAutomaticMenus
   include WithMenuItemTarget
-  # TODO L10N : To adjust (WithType)
   include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before WithPublication
   include WithPosition # Scope :ordered must override WithPublication
   include WithTree

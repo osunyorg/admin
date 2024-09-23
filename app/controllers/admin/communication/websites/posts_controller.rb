@@ -13,7 +13,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     breadcrumb
   end
 
-  # TODO L10N : To adjust
+  # TODO L10N : To test
   def publish_batch
     ids = params[:ids] || []
     target_posts = @website.posts.where(id: ids)
