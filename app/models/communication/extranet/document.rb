@@ -36,4 +36,7 @@ class Communication::Extranet::Document < ApplicationRecord
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :category
   belongs_to :kind
+
+  validates :category, :kind, presence: true
+
 end

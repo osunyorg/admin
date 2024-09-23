@@ -47,6 +47,9 @@ class University::Person::Localization < ApplicationRecord
 
   alias :person :about
 
+  delegate  :featured_image,
+            to: :person
+
   validates :first_name, :last_name, presence: true
 
   before_validation :prepare_name

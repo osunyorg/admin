@@ -19,8 +19,8 @@
             <%= lf.input :published %>
             <%= lf.input :published_at, html5: true, as: :date %>
           <% end %>
-          <%= f.association :kind, collection: @extranet.document_kinds.ordered, include_blank: false %>
-          <%= f.association :category, collection: @extranet.document_categories.ordered, include_blank: false %>
+          <%= f.association :kind, collection: osuny_collection(@extranet.document_kinds, localized: true), include_blank: false %>
+          <%= f.association :category, collection: osuny_collection(@extranet.document_categories, localized: true), include_blank: false %>
         <% end %>
       </div>
     </div>
