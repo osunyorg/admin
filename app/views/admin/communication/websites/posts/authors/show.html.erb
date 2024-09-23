@@ -5,7 +5,7 @@
     <%= @posts.total_count %>
     <%= Communication::Website::Post.model_name.human(count: @posts.total_count).downcase %>
   </p>
-  <%= render 'admin/communication/websites/posts/list', posts: @posts, hide_author: true %>
+  <%= render 'admin/communication/websites/posts/list', posts: @posts %>
   <%= paginate @posts if @posts.total_pages > 1 %>
 <% end %>
 

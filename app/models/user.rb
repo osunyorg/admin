@@ -57,6 +57,7 @@
 class User < ApplicationRecord
   # We don't include Sanitizable because too many complex attributes.
   # The sanitization is handled in User::WithAuthentication's sanitize_fields method.
+  include Filterable
   include WithAuthentication
   include WithAuthorship
   include WithAvatar
@@ -72,9 +73,9 @@ class User < ApplicationRecord
   has_many :university_people, class_name: 'University::Person', dependent: :nullify
   has_many :imports, class_name: 'Import', dependent: :nullify
 
-  scope :ordered, -> (language = nil) { order(:last_name, :first_name) }
-  scope :for_language, -> (language_id) { where(language_id: language_id) }
-  scope :for_search_term, -> (term) {
+  scope :ordered, -> (language = nil) { order("TRIM(LOWER(UNACCENT(last_name))), TRIM(LOWER(UNACCENT(first_name)))") }
+  scope :for_language, -> (language_id, language = nil) { where(language_id: language_id) }
+  scope :for_search_term, -> (term, language = nil) {
     where("
       unaccent(concat(users.first_name, ' ', users.last_name)) ILIKE unaccent(:term) OR
       unaccent(concat(users.last_name, ' ', users.first_name)) ILIKE unaccent(:term) OR

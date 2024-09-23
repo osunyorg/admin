@@ -3,12 +3,11 @@ class Admin::University::Organizations::ImportsController < Admin::University::A
                               through: :current_university,
                               through_association: :imports
 
-  has_scope :for_status
-
   def index
-    @imports = apply_scopes(@imports.kind_organizations)
-                  .ordered(current_language)
-                  .page(params[:page])
+    @imports = @imports.kind_organizations
+                       .filter_by(params[:filters], current_language)
+                       .ordered(current_language)
+                       .page(params[:page])
     breadcrumb
   end
 

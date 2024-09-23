@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_09_19_082005) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -1571,6 +1570,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_082005) do
     t.datetime "updated_at", null: false
     t.string "address_name"
     t.string "address_additional"
+    t.uuid "language_id"
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_research_laboratories_on_language_id"
+    t.index ["original_id"], name: "index_research_laboratories_on_original_id"
     t.index ["university_id"], name: "index_research_laboratories_on_university_id"
   end
 
@@ -1591,6 +1594,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_082005) do
     t.datetime "updated_at", null: false
     t.string "short_name"
     t.text "text"
+    t.uuid "language_id"
+    t.uuid "original_id"
+    t.index ["language_id"], name: "index_research_laboratory_axes_on_language_id"
+    t.index ["original_id"], name: "index_research_laboratory_axes_on_original_id"
     t.index ["research_laboratory_id"], name: "index_research_laboratory_axes_on_research_laboratory_id"
     t.index ["university_id"], name: "index_research_laboratory_axes_on_university_id"
   end
@@ -2294,8 +2301,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_082005) do
   add_foreign_key "research_journal_volumes", "universities"
   add_foreign_key "research_journals", "languages"
   add_foreign_key "research_journals", "universities"
+  add_foreign_key "research_laboratories", "languages"
+  add_foreign_key "research_laboratories", "research_laboratories", column: "original_id"
   add_foreign_key "research_laboratories", "universities"
+  add_foreign_key "research_laboratory_axes", "languages"
   add_foreign_key "research_laboratory_axes", "research_laboratories"
+  add_foreign_key "research_laboratory_axes", "research_laboratory_axes", column: "original_id"
   add_foreign_key "research_laboratory_axes", "universities"
   add_foreign_key "research_laboratory_axis_localizations", "languages"
   add_foreign_key "research_laboratory_axis_localizations", "research_laboratory_axes", column: "about_id"

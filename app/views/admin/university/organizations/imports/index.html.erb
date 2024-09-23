@@ -1,6 +1,13 @@
 <% content_for :title, Import.model_name.human(count: 2) %>
 
-<%= render 'filters', current_path: admin_university_organizations_imports_path, filters: @filters if @filters.any?  %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @imports.total_count %>
+    <%= Import.model_name.human(count: @imports.total_count).downcase %>
+  </p>
+  <%= render 'admin/imports/filters', current_path: admin_university_organizations_imports_path %>
+</div>
+
 
 <%= render 'admin/imports/list', imports: @imports, path_pattern: 'admin_university_organizations_import_path' %>
 
