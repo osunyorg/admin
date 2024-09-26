@@ -7,7 +7,6 @@ class RemoveCommunicationWebsiteAgendaEventOldI18n < ActiveRecord::Migration[7.1
     remove_column :communication_website_agenda_events, :featured_image_credit
     remove_column :communication_website_agenda_events, :meta_description
     remove_column :communication_website_agenda_events, :published
-    remove_column :communication_website_agenda_events, :published_at
     remove_column :communication_website_agenda_events, :slug
     remove_column :communication_website_agenda_events, :subtitle
     remove_column :communication_website_agenda_events, :summary

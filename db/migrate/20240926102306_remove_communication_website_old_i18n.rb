@@ -12,8 +12,6 @@ class RemoveCommunicationWebsiteOldI18n < ActiveRecord::Migration[7.1]
     remove_column :communication_websites, :social_instagram
     remove_column :communication_websites, :social_facebook
     remove_column :communication_websites, :social_tiktok
-    remove_column :communication_websites, :published
-    remove_column :communication_websites, :published_at
 
   end
 end
