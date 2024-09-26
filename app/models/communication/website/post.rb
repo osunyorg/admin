@@ -3,38 +3,22 @@
 # Table name: communication_website_posts
 #
 #  id                       :uuid             not null, primary key
-#  featured_image_alt       :string
-#  featured_image_credit    :text
-#  meta_description         :text
 #  migration_identifier     :string
-#  pinned                   :boolean          default(FALSE)
-#  published                :boolean          default(FALSE)
-#  published_at             :datetime
-#  slug                     :string           indexed
-#  summary                  :text
-#  text                     :text
-#  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  author_id                :uuid             indexed
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             indexed
-#  original_id              :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
 #  index_communication_website_posts_on_author_id                 (author_id)
 #  index_communication_website_posts_on_communication_website_id  (communication_website_id)
-#  index_communication_website_posts_on_language_id               (language_id)
-#  index_communication_website_posts_on_original_id               (original_id)
-#  index_communication_website_posts_on_slug                      (slug)
 #  index_communication_website_posts_on_university_id             (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_1e0d058a25  (university_id => universities.id)
-#  fk_rails_bbbef3b1e9  (original_id => communication_website_posts.id)
 #  fk_rails_d1c1a10946  (communication_website_id => communication_websites.id)
 #  fk_rails_e0eec447b0  (author_id => university_people.id)
 #

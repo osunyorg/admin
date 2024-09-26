@@ -2,27 +2,16 @@
 #
 # Table name: research_journal_volumes
 #
-#  id                    :uuid             not null, primary key
-#  featured_image_alt    :string
-#  featured_image_credit :text
-#  keywords              :text
-#  meta_description      :text
-#  number                :integer
-#  published             :boolean          default(FALSE)
-#  published_at          :datetime
-#  slug                  :string           indexed
-#  summary               :text
-#  text                  :text
-#  title                 :string
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  research_journal_id   :uuid             not null, indexed
-#  university_id         :uuid             not null, indexed
+#  id                  :uuid             not null, primary key
+#  number              :integer
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  research_journal_id :uuid             not null, indexed
+#  university_id       :uuid             not null, indexed
 #
 # Indexes
 #
 #  index_research_journal_volumes_on_research_journal_id  (research_journal_id)
-#  index_research_journal_volumes_on_slug                 (slug)
 #  index_research_journal_volumes_on_university_id        (university_id)
 #
 # Foreign Keys

@@ -2,28 +2,19 @@
 #
 # Table name: communication_extranet_posts
 #
-#  id                    :uuid             not null, primary key
-#  featured_image_alt    :string
-#  featured_image_credit :text
-#  pinned                :boolean          default(FALSE)
-#  published             :boolean          default(FALSE)
-#  published_at          :datetime
-#  slug                  :string           indexed
-#  summary               :text
-#  title                 :string
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  author_id             :uuid             indexed
-#  category_id           :uuid             indexed
-#  extranet_id           :uuid             not null, indexed
-#  university_id         :uuid             not null, indexed
+#  id            :uuid             not null, primary key
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  author_id     :uuid             indexed
+#  category_id   :uuid             indexed
+#  extranet_id   :uuid             not null, indexed
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
 #  index_communication_extranet_posts_on_author_id      (author_id)
 #  index_communication_extranet_posts_on_category_id    (category_id)
 #  index_communication_extranet_posts_on_extranet_id    (extranet_id)
-#  index_communication_extranet_posts_on_slug           (slug)
 #  index_communication_extranet_posts_on_university_id  (university_id)
 #
 # Foreign Keys

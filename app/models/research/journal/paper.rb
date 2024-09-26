@@ -3,21 +3,12 @@
 # Table name: research_journal_papers
 #
 #  id                         :uuid             not null, primary key
-#  abstract                   :text
 #  accepted_at                :date
-#  authors_list               :text
 #  bibliography               :text
 #  doi                        :string
-#  keywords                   :text
-#  meta_description           :text
 #  position                   :integer
-#  published                  :boolean          default(FALSE)
-#  published_at               :datetime
 #  received_at                :date
-#  slug                       :string           indexed
-#  summary                    :text
 #  text                       :text
-#  title                      :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  kind_id                    :uuid             indexed
@@ -31,7 +22,6 @@
 #  index_research_journal_papers_on_kind_id                     (kind_id)
 #  index_research_journal_papers_on_research_journal_id         (research_journal_id)
 #  index_research_journal_papers_on_research_journal_volume_id  (research_journal_volume_id)
-#  index_research_journal_papers_on_slug                        (slug)
 #  index_research_journal_papers_on_university_id               (university_id)
 #  index_research_journal_papers_on_updated_by_id               (updated_by_id)
 #

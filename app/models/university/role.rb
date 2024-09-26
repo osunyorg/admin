@@ -3,28 +3,21 @@
 # Table name: university_roles
 #
 #  id            :uuid             not null, primary key
-#  description   :text
 #  position      :integer
 #  target_type   :string           indexed => [target_id]
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  language_id   :uuid             indexed
-#  original_id   :uuid             indexed
 #  target_id     :uuid             indexed => [target_type]
 #  university_id :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_university_roles_on_language_id    (language_id)
-#  index_university_roles_on_original_id    (original_id)
 #  index_university_roles_on_target         (target_type,target_id)
 #  index_university_roles_on_university_id  (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_8e52293a38  (university_id => universities.id)
-#  fk_rails_961921e9ca  (original_id => university_roles.id)
-#  fk_rails_caf681fd5c  (language_id => languages.id)
 #
 class University::Role < ApplicationRecord
   include Localizable

@@ -2,24 +2,17 @@
 #
 # Table name: research_journals
 #
-#  id               :uuid             not null, primary key
-#  issn             :string
-#  meta_description :text
-#  summary          :text
-#  title            :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  language_id      :uuid             indexed
-#  university_id    :uuid             not null, indexed
+#  id            :uuid             not null, primary key
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_research_journals_on_language_id    (language_id)
 #  index_research_journals_on_university_id  (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_7d3b3f3e79  (language_id => languages.id)
 #  fk_rails_96097d5f10  (university_id => universities.id)
 #
 class Research::Journal < ApplicationRecord
