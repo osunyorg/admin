@@ -1,1 +1,5 @@
-<p><%= t('devise.mailer.two_factor_authentication_code.text_html', context: @resource.registration_context.to_s_in(@resource.language), code: @code, duration: @duration) %></p>
+<%
+context = @resource.registration_context.respond_to?(:to_s_in)  ? @resource.registration_context.to_s_in(@resource.language)
+                                                                : @resource.registration_context.to_s
+%>
+<p><%= t('devise.mailer.two_factor_authentication_code.text_html', context: context, code: @code, duration: @duration) %></p>
