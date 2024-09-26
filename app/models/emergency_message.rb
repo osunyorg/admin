@@ -55,7 +55,9 @@ class EmergencyMessage < ApplicationRecord
     users = User.all
     users = users.where(university_id: university_id) if university_id.present? 
     users = users.where(role: role) if role.present?
-    users
+    # next lines are to prevent to send the message to multiple occurrences of the same email (as for server_admin !)
+    target_user_ids = users.select("DISTINCT ON (users.email) users.email, users.id").map { | u| u.id }
+    User.where(id: target_user_ids)
   end
 
 end
