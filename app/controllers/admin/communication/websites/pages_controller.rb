@@ -13,7 +13,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def index_list
-    @filters = ::Filters::Admin::Communication::Websites::Pages.new(current_user).list
     @pages = @pages.filter_by(params[:filters], current_language)
                    .ordered_by_title(current_language)
                    .page(params[:page])

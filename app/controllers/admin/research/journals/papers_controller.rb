@@ -30,7 +30,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
       updated_by: current_user
     )
     if @paper.save
-      redirect_to admin_research_journal_paper_path(@paper), notice: t('admin.successfully_created_html', model: @paper.to_s)
+      redirect_to admin_research_journal_paper_path(@paper), notice: t('admin.successfully_created_html', model: @paper.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -40,7 +40,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
   def update
     @paper.updated_by = current_user
     if @paper.update(paper_params)
-      redirect_to admin_research_journal_paper_path(@paper), notice: t('admin.successfully_updated_html', model: @paper.to_s)
+      redirect_to admin_research_journal_paper_path(@paper), notice: t('admin.successfully_updated_html', model: @paper.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -50,7 +50,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
 
   def destroy
     @paper.destroy
-    redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @paper.to_s)
+    redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @paper.to_s_in(current_language))
   end
 
   private
@@ -73,8 +73,8 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
             :doi, :research_journal_volume_id, :kind_id, person_ids: [],
             localizations_attributes: [
               :id, :language_id,
-              :title, :slug, :text, :published, :published_at, :summary, :abstract, 
-              :meta_description, :authors_list, :pdf, :pdf_delete, :bibliography, :keywords, 
+              :title, :slug, :text, :published, :published_at, :summary, :abstract,
+              :meta_description, :authors_list, :pdf, :pdf_delete, :bibliography, :keywords,
             ])
           .merge(university_id: current_university.id)
   end

@@ -118,10 +118,6 @@ class Communication::Website < ApplicationRecord
   scope :with_url, -> { where.not(url: [nil, '']) }
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
 
-  def to_s
-    "#{name}"
-  end
-
   def git_path(website)
     "data/website.yml"
   end
@@ -184,7 +180,6 @@ class Communication::Website < ApplicationRecord
   def sanitize_fields
     self.git_branch = Osuny::Sanitizer.sanitize(self.git_branch, 'string')
     self.git_endpoint = Osuny::Sanitizer.sanitize(self.git_endpoint, 'string')
-    self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')

@@ -29,9 +29,9 @@
 
 <% content_for :action_bar_right do %>
   <%= link_to t('open'),
-              posts_post_url(date: @post.published_at.strftime('%Y-%m-%d'), slug: @post.slug, host: @post.extranet.url, extranet_id: nil),
+              posts_post_url(date: @l10n.published_at.strftime('%Y-%m-%d'), slug: @l10n.slug, host: @post.extranet.url, extranet_id: nil),
               target: :_blank,
-              class: 'btn btn-light btn-xs' if @post.published %>
+              class: 'btn btn-light btn-xs' if @l10n.published %>
   <%= preview_link %>
   <%= edit_link @post %>
 <% end %>

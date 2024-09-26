@@ -10,7 +10,7 @@
         <%= osuny_panel t('content') do %>
           <%= lf.input :title, input_html: { data: { translatable: true } } %>
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
-          <%= lf.input :text, as: :summernote if strip_tags(post.text).present? %>
+          <%= lf.input :text, as: :summernote if strip_tags(l10n.text).present? %>
         <% end %>
         <% if @categories.any? %>
           <div class="row pure__row--small">

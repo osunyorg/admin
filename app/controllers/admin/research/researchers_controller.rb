@@ -54,7 +54,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def breadcrumb
     super
-    add_breadcrumb University::Person::Researcher.model_name.human(count: 2), admin_research_researchers_path
+    add_breadcrumb University::Person::Localization::Researcher.model_name.human(count: 2), admin_research_researchers_path
   end
 
 end

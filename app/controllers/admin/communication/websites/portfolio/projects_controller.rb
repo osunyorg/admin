@@ -97,8 +97,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
       ]
     )
     .merge(
-      university_id: current_university.id,
-      language_id: current_language.id
+      university_id: current_university.id
     )
   end
 end

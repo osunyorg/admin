@@ -55,12 +55,32 @@ class Research::Journal::Paper < ApplicationRecord
                           join_table: :research_journal_papers_researchers,
                           association_foreign_key: :researcher_id
 
-  scope :ordered, -> (language = nil) { order(published_at: :desc) }
+  scope :ordered, -> (language) {
+    localization_published_at_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.published_at END),
+        '1970-01-01'
+      ) AS localization_published_at
+    SQL
+
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          research_journal_paper_localizations as localizations
+      ) localizations ON research_journal_papers.id = localizations.about_id
+    SQL
+    ]))
+    .select("research_journal_papers.*", localization_published_at_select)
+    .group("research_journal_papers.id")
+    .order("localization_published_at DESC")
+  }
   scope :ordered_by_position, -> { order(:position) }
 
   def dependencies
     localizations +
-    contents_dependencies +
     people.map(&:researcher_facets)
   end
 

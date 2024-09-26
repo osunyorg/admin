@@ -51,17 +51,12 @@ class Administration::Location < ApplicationRecord
   validates :address, :city, :zipcode, :country, presence: true
 
   def dependencies
-    active_storage_blobs +
     programs +
     schools
   end
 
   def references
     []
-  end
-
-  def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
   end
 
   # WebsitesLinkable

@@ -81,8 +81,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
             ]
           )
           .merge(
-            university_id: current_university.id,
-            language_id: current_language.id
+            university_id: current_university.id
           )
   end
 end

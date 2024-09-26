@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-md-3">
           <%= f.association :school,
-                            collection: current_university.education_schools.ordered,
+                            collection: osuny_collection(current_university.education_schools, localized: true),
                             label: false,
                             include_blank: t('simple_form.include_blanks.defaults.school'),
                             required: true,
@@ -13,9 +13,7 @@
         </div>
         <div class="col-md-4">
           <%= f.association :program,
-                            collection: collection_tree(current_university.education_programs),
-                            label_method: ->(p) { sanitize p[:label] },
-                            value_method: ->(p) { p[:id] },
+                            collection: osuny_collection_tree(current_university.education_programs.root, localized: true),
                             label: false,
                             include_blank: t('simple_form.include_blanks.defaults.program'),
                             required: true,

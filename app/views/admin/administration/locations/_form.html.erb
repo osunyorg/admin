@@ -37,7 +37,7 @@
                           value_method: ->(p) { p[:id] } %>
         <%= f.association :schools,
                           as: :check_boxes,
-                          collection: current_university.education_schools.ordered %>
+                          collection: current_university.education_schools.ordered(current_language) %>
       </div>
     </div>
     <% content_for :action_bar_right do %>

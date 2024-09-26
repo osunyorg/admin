@@ -1,4 +1,4 @@
-<% 
+<%
 hide_logo ||= false
 about = current_extranet.about
 %>
@@ -35,13 +35,13 @@ about = current_extranet.about
         <%# language is explicitly given so that it can work with the devise layout which has no default_url option %>
         <%= link_to t('terms_of_service'),
                     terms_path(lang: current_language),
-                    rel: 'noreferrer' if current_extranet.has_terms? %>
+                    rel: 'noreferrer' if current_extranet.has_terms_in?(current_language) %>
         <%= link_to t('privacy_policy'),
                     privacy_policy_path(lang: current_language),
-                    rel: 'noreferrer' if current_extranet.has_privacy_policy? %>
+                    rel: 'noreferrer' if current_extranet.has_privacy_policy_in?(current_language) %>
         <%= link_to t('cookies_policy'),
                     cookies_policy_path(lang: current_language),
-                    rel: 'noreferrer' if current_extranet.has_cookies_policy? %>
+                    rel: 'noreferrer' if current_extranet.has_cookies_policy_in?(current_language) %>
         <%= link_to t('extranet.data'), data_path(lang: current_language) %>
         <%= t 'extranet.osuny_html' %>
       </nav>

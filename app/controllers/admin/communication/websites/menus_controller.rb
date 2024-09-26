@@ -60,7 +60,11 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
   def redirect_to_correct_language
     if @menu.language != current_language
       correct_menu = @website.menus.find_by(language_id: current_language.id, identifier: @menu.identifier)
-      redirect_to admin_communication_website_menu_path(correct_menu)
+      if correct_menu.nil?
+        redirect_to admin_communication_website_menus_path
+      else
+        redirect_to admin_communication_website_menu_path(correct_menu)
+      end
     end
   end
 

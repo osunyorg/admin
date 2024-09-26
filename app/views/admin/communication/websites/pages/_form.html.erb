@@ -24,7 +24,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
             <%= lf.input :header_cta_label %>
             <%= lf.input :header_cta_url %>
           </div>
-          <%= lf.input :text, as: :summernote if strip_tags(page.text).present? %>
+          <%= lf.input :text, as: :summernote if strip_tags(l10n.text).present? %>
         <% end %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
@@ -36,8 +36,8 @@ url = page.new_record?  ? admin_communication_website_pages_path
                       source: '#communication_website_page_localizations_attributes_0_title' unless page.is_home? %>
           <%= f.association :parent,
                             collection: osuny_collection_tree(
-                              @website.pages.root, 
-                              except: page, 
+                              @website.pages.root,
+                              except: page,
                               localized: true
                             ),
                             include_blank: false unless page.is_home? %>

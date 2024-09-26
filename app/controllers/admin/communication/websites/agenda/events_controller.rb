@@ -100,8 +100,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
       ]
     )
     .merge(
-      university_id: current_university.id,
-      language_id: current_language.id
+      university_id: current_university.id
     )
   end
 end

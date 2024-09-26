@@ -39,7 +39,7 @@ class Research::Laboratory < ApplicationRecord
               dependent: :destroy
 
   has_and_belongs_to_many :researchers,
-                          class_name: 'University::Person::Researcher',
+                          class_name: 'University::Person',
                           foreign_key: :research_laboratory_id,
                           association_foreign_key: :university_person_id
 

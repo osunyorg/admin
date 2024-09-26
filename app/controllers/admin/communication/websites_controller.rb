@@ -54,7 +54,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def create
     if @website.save_and_sync
-      redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s)
+      redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -63,7 +63,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def update
     if @website.update_and_sync(website_params)
-      redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s)
+      redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -73,7 +73,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def destroy
     @website.destroy
-    redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @website.to_s)
+    redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @website.to_s_in(current_language))
   end
 
   def confirm_localization
