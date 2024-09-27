@@ -41,6 +41,10 @@ class Communication::Website::Localization < ApplicationRecord
   include WithPublication
   include WithUniversity
 
+  alias :website :about
+
+  after_create_commit :create_existing_menus_in_language
+
   # Localization is not directly exportable to git
   # Whereas the languages config in the dependencies is exportable to git
   def exportable_to_git?
@@ -52,11 +56,18 @@ class Communication::Website::Localization < ApplicationRecord
     [website.config_default_languages]
   end
 
-  def website
-    about
-  end
-
   def to_s
     name
+  end
+
+  protected
+
+  def create_existing_menus_in_language
+    menus = website.menus.for_language_id(website.default_language_id)
+    menus.each do |menu|
+      new_menu = menu.dup
+      new_menu.language_id = language_id
+      new_menu.save
+    end
   end
 end

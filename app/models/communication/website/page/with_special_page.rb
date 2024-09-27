@@ -95,7 +95,7 @@ module Communication::Website::Page::WithSpecialPage
     'primary'
   end
 
-  def generate_from_template
+  def generate_from_template(l10n)
   end
 
   def create_missing_localizations!
@@ -132,16 +132,6 @@ module Communication::Website::Page::WithSpecialPage
       published: published_by_default?
       # note: published_at will be set by WithPublication concern
     )
-  end
-
-  # TODO L10N : adjust
-  def generate_heading(title)
-    headings.create(university: university, title: title)
-  end
-
-  # TODO L10N : adjust
-  def generate_block(heading, kind, data)
-    blocks.create(university: university, heading: heading, template_kind: kind, data: data.to_json)
   end
 
 end

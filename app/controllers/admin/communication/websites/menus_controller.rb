@@ -56,14 +56,14 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
 
   protected
 
-  # TODO L10N : Handle website missing language
   def redirect_to_correct_language
     if @menu.language != current_language
       correct_menu = @website.menus.find_by(language_id: current_language.id, identifier: @menu.identifier)
-      if correct_menu.nil?
-        redirect_to admin_communication_website_menus_path
-      else
+      if correct_menu.present?
         redirect_to admin_communication_website_menu_path(correct_menu)
+      else
+        # Here, we should redirect to confirm website localization but menus are not localizable so we just redirect to the index page.
+        redirect_to admin_communication_website_menus_path
       end
     end
   end

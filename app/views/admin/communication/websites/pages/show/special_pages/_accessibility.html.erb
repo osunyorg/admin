@@ -1,4 +1,4 @@
-<% if @l10n.blocks.none? && @l10n.headings.none? %>
+<% if @l10n.blocks.none? && @l10n.headings.none? && @l10n.language.iso_code == "fr" %>
   <%= link_to 'Générer le modèle de déclaration',
               generate_admin_communication_website_page_path(@page),
               method: :post,

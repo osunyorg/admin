@@ -13,13 +13,13 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     breadcrumb
   end
 
-  # TODO L10N : To test
   def publish_batch
     ids = params[:ids] || []
     target_posts = @website.posts.where(id: ids)
     is_published = params[:published] == "true"
     target_posts.each do |post|
       l10n = post.localization_for(current_language)
+      next unless l10n.present?
       l10n.publish!
       post.save_and_sync
     end
