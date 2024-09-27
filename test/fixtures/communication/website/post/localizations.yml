@@ -1,0 +1,26 @@
+test_post_fr:
+  title: Test
+  slug: test
+  published: true
+  published_at: 2010-11-28 00:00:00
+  about: test_post
+  language: fr
+  university: default_university
+
+test_post_2_fr:
+  title: Test 2
+  slug: test-2
+  published: true
+  published_at: 2010-11-28 00:00:00
+  about: test_post_2
+  language: fr
+  university: default_university
+
+test_post_3_fr:
+  title: Test 3
+  slug: test-3
+  published: false
+  published_at: 2010-11-28 00:00:00
+  about: test_post_3
+  language: fr
+  university: default_university

@@ -1,0 +1,26 @@
+page_root_fr:
+  title: Accueil
+  slug: ''
+  published: true
+  published_at: 2010-11-28 00:00:00
+  about: page_root
+  language: fr
+  university: default_university
+
+page_test_fr:
+  title: Test
+  slug: 'test'
+  published: true
+  published_at: 2010-11-28 00:00:00
+  about: page_test
+  language: fr
+  university: default_university
+
+page_with_no_dependency_fr:
+  title: Page with no dependency
+  slug: 'page-with-no-dependency'
+  published: true
+  published_at: 2010-11-28 00:00:00
+  about: page_with_no_dependency
+  language: fr
+  university: default_university
