@@ -1,0 +1,5 @@
+default_experience_fr:
+  description: Expérience de test
+  about: default_experience
+  language: fr
+  university: default_university

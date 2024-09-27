@@ -1,0 +1,31 @@
+alumnus_fr:
+  first_name: Alumnus
+  last_name: Osuny
+  name: Alumnus Osuny
+  about: alumnus
+  language: fr
+  university: default_university
+
+olivia_fr:
+  first_name: Olivia
+  last_name: Simonet
+  name: Olivia Simonet
+  about: olivia
+  language: fr
+  university: default_university
+
+pa_fr:
+  first_name: Pierre-André
+  last_name: Boissinot
+  name: Pierre-André Boissinot
+  about: pa
+  language: fr
+  university: default_university
+
+arnaud_fr:
+  first_name: Arnaud
+  last_name: Levy
+  name: Arnaud Levy
+  about: arnaud
+  language: fr
+  university: default_university
