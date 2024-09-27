@@ -3,7 +3,7 @@
     <%= sanitize @l10n.summary %>
   </div>
 <% end %>
-<% if strip_tags(@organization.text.to_s).present? %>
+<% if strip_tags(@l10n.text.to_s).present? %>
   <div class="mb-5">
     <%= sanitize @l10n.text.to_s %>
   </div>
