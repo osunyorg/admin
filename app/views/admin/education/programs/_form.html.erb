@@ -167,13 +167,11 @@
                       f: lf,
                       source: '#education_program_localizations_attributes_0_name' %>
           <%= f.association :parent,
-                            collection:
-                              current_university.education_programs
-                                                .where.not(id: program)
-                                                .ordered
-                                                .map { |program|
-                                                  [program.to_s_in(current_language), program.id]
-                                                } %>
+                            collection: osuny_collection_tree(
+                              current_university.education_programs.root,
+                              localized: true,
+                              except: program
+                            ) %>
           <%= f.input :bodyclass %>
           <%= lf.input :logo,
                       as: :single_deletable_file,

@@ -13,7 +13,7 @@
       </div>
       <div class="col-lg-8">
         <%= lf.input :name %>
-        <%= render 'admin/application/summary/form', f: lf, about: location %>
+        <%= render 'admin/application/summary/form', f: lf, about: l10n %>
         <%= lf.input :address_name %>
         <%= f.input :address %>
         <%= lf.input :address_additional %>
@@ -30,14 +30,13 @@
         <%= lf.input :url %>
         <%= f.association :programs,
                           as: :check_boxes,
-                          collection: collection_tree(
-                                        current_university.education_programs.ordered
-                                      ),
-                          label_method: ->(p) { sanitize p[:label] },
-                          value_method: ->(p) { p[:id] } %>
+                          collection: osuny_collection_tree(
+                                        current_university.education_programs.root,
+                                        localized: true
+                                      ) %>
         <%= f.association :schools,
                           as: :check_boxes,
-                          collection: current_university.education_schools.ordered(current_language) %>
+                          collection: osuny_collection(current_university.education_schools, localized: true) %>
       </div>
     </div>
     <% content_for :action_bar_right do %>

@@ -5,6 +5,11 @@ best_prop_source = program.public_send("best_#{property}_source")
 id = "#{property}Collapse"
 %>
 <% if best_prop_source %>
+  <%
+  # best_prop_source is a l10n
+  best_prop_source_about = best_prop_source.about
+  best_prop_source_language = best_prop_source.language
+  %>
   <div class="accordion mb-3">
     <div class="accordion-item">
       <a  href="#<%= id %>"
@@ -12,7 +17,7 @@ id = "#{property}Collapse"
           data-bs-toggle="collapse"
           aria-expanded="false"
           aria-controls="<%= id %>">
-        <%= Education::Program.human_attribute_name(property) %>
+        <%= Education::Program::Localization.human_attribute_name(property) %>
         (<%= t 'admin.inheritance.status' %>)
       </a>
     </div>
@@ -25,7 +30,14 @@ id = "#{property}Collapse"
                   }
                    %>
       <div class="bg-light p-2 mt-n2">
-        <b><%= t 'admin.inheritance.sentence_html', link: link_to(best_prop_source, [:admin, best_prop_source]) %></b><br>
+        <b>
+          <%= t 'admin.inheritance.sentence_html',
+                link: link_to(
+                  best_prop_source,
+                  [:admin, best_prop_source_about, { lang: best_prop_source_language }],
+                  target: :_blank
+                ) %>
+        </b><br>
         <%= best_prop_value %>
       </div>
     </div>

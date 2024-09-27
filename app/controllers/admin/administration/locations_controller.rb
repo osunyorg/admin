@@ -4,13 +4,16 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
 
   include Admin::Localizable
   include Admin::HasStaticAction
-  
+
   def index
     @locations = @locations.ordered(current_language)
     breadcrumb
   end
 
   def show
+    @schools = @location.schools.ordered(current_language)
+    @programs = @location.programs.ordered(current_language)
+    @websites = @location.websites.ordered(current_language)
     breadcrumb
   end
 
@@ -62,11 +65,11 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   def location_params
     params.require(:administration_location)
           .permit(
-            :address, :zipcode, :city, :country, :phone, 
+            :address, :zipcode, :city, :country, :phone,
             school_ids: [], program_ids: [],
             localizations_attributes: [
               :id, :language_id,
-              :name, :address_additional, :address_name, :url, :summary, :slug, 
+              :name, :address_additional, :address_name, :url, :summary, :slug,
               :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
             ]
           )
