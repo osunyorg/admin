@@ -10,7 +10,7 @@ olivia_fr:
   first_name: Olivia
   last_name: Simonet
   name: Olivia Simonet
-  about: olivia
+  about_id: 53cbac40-e430-585a-965c-a7412a92f35a
   language: fr
   university: default_university
 
