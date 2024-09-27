@@ -44,6 +44,7 @@ class Communication::Website::Localization < ApplicationRecord
   alias :website :about
 
   after_create_commit :create_existing_menus_in_language
+  after_save :destroy_website_obsolete_git_files, if: :should_clean_website_on_git?
 
   # Localization is not directly exportable to git
   # Whereas the languages config in the dependencies is exportable to git
@@ -69,5 +70,14 @@ class Communication::Website::Localization < ApplicationRecord
       new_menu.language_id = language_id
       new_menu.save
     end
+  end
+
+  def should_clean_website_on_git?
+    # Clean website if l10n was unpublished
+    saved_change_to_published? && published_before_last_save
+  end
+
+  def destroy_website_obsolete_git_files
+    website.destroy_obsolete_git_files
   end
 end

@@ -76,8 +76,7 @@ module Communication::Website::WithGitRepository
   end
 
   def should_clean_on_git?
-    # Clean website if about was present and changed OR a language was removed
-    # TODO L10N : déplacer l'ancien language_was_removed dans les locas ?
+    # Clean website if about was present and changed
     saved_change_to_about_id? && about_id_before_last_save.present?
   end
 
