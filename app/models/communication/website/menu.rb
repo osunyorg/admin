@@ -60,6 +60,7 @@ class Communication::Website::Menu < ApplicationRecord
   scope :ordered, -> (language = nil) { order(created_at: :asc) }
   scope :for_identifier, -> (identifier) { where(identifier: identifier) }
   scope :for_language, -> (language) { where(language_id: language.id) }
+  scope :for_language_id, -> (language_id) { where(language_id: language_id) }
   scope :in_languages, -> (language_ids) { where(language_id: language_ids) }
 
   def self.menu_title_from_locales(identifier, language)
