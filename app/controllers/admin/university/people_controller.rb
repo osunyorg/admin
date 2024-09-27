@@ -25,7 +25,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   def search
     @term = params[:term].to_s
     @people = current_university.people
-                                .for_search_term(@term)
+                                .for_search_term(@term, current_language)
                                 .ordered(current_language)
   end
 
