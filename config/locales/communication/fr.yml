@@ -529,6 +529,7 @@ fr:
       security: Sécurité
       see_all: Voir la liste complète (%{number} éléments)
   curation:
+    already_imported: Article déjà importé
     error: Erreur lors de la curation, veillez à utiliser une URL valide
     label: URL de l'article à importer
     placeholder: https://...
