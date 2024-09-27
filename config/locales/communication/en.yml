@@ -529,6 +529,7 @@ en:
       security: Security
       see_all: See the full list (%{number} elements)
   curation:
+    already_imported: Post already imported
     error: Import error, be sure to use a valid URL
     label: URL of the post to import
     placeholder: https://...
