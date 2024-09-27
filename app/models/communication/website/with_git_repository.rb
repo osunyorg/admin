@@ -35,6 +35,7 @@ module Communication::Website::WithGitRepository
 
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
+    return unless should_sync_with_git?
     indirect_object.direct_sources_with_dependencies_for_website(self).each do |dependency|
       Communication::Website::GitFile.sync self, dependency
     end
