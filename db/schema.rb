@@ -819,7 +819,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_19_093539) do
     t.text "summary"
     t.text "featured_image_credit"
     t.uuid "original_id"
-    t.uuid "language_id", null: false
+    t.uuid "language_id"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_post_categories_on_language_id"
     t.index ["original_id"], name: "index_communication_website_post_categories_on_original_id"
