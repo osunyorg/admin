@@ -1,8 +1,8 @@
 <% content_for :title, current_extranet_l10n %>
 <% content_for :header do %>
   <div class="header__title">
-    <% if current_extranet.home_sentence.present? %>
-      <%= sanitize current_extranet.home_sentence %>
+    <% if current_extranet_l10n.home_sentence.present? %>
+      <%= sanitize current_extranet_l10n.home_sentence %>
     <% else %>
       <p><%= t 'extranet.home.welcome' %></p>
     <% end %>

@@ -58,7 +58,7 @@ class Server::LanguagesControllerTest < ActionDispatch::IntegrationTest
 
   def test_update_invalid
     language = languages(:fr)
-    patch server_language_path(language), params: { language: { iso_code: "" } }
+    patch server_language_path(language), params: { language: { name: "" } }
     assert_response(:unprocessable_entity)
   end
 

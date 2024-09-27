@@ -28,7 +28,7 @@ module Communication::Website::WithProgramCategories
     root_category = objects.tmp_original.where(is_programs_root: true).first_or_create(university_id: university_id)
     languages.each do |language|
       root_category.localizations.where(language: language).first_or_create(
-        name: t('admin.education.programs.categories.root_name', locale: language.iso_code)
+        name: I18n.t('admin.education.programs.categories.root_name', locale: language.iso_code)
       )
     end
     root_category

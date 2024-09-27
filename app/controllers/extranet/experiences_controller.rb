@@ -23,7 +23,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
       @l10n = @experience.localizations.first
       breadcrumb
       add_breadcrumb University::Person::Experience.human_attribute_name('new')
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -34,7 +34,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
     else
       breadcrumb
       add_breadcrumb @l10n
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -57,7 +57,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
             localizations_attributes: [
               :id, :language_id,
               :description
-            ]  
+            ]
           )
           .merge(
             university_id: current_university.id
