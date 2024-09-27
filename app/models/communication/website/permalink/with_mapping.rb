@@ -3,30 +3,6 @@ module Communication::Website::Permalink::WithMapping
 
   included do
     MAPPING = {
-      # TODO L10N : Remove after migration
-      "Administration::Location" => Communication::Website::Permalink::Location,
-      "Communication::Website::Agenda::Event" => Communication::Website::Permalink::Agenda::Event,
-      "Communication::Website::Agenda::Category" => Communication::Website::Permalink::Agenda::Category,
-      "Communication::Website::Page" => Communication::Website::Permalink::Page,
-      "Communication::Website::Portfolio::Project" => Communication::Website::Permalink::Portfolio::Project,
-      "Communication::Website::Portfolio::Category" => Communication::Website::Permalink::Portfolio::Category,
-      "Communication::Website::Post" => Communication::Website::Permalink::Post,
-      "Communication::Website::Post::Category" => Communication::Website::Permalink::Category,
-      "Education::Diploma" => Communication::Website::Permalink::Diploma,
-      "Education::Program" => Communication::Website::Permalink::Program,
-      "Research::Journal::Paper" => Communication::Website::Permalink::Paper,
-      "Research::Journal::Volume" => Communication::Website::Permalink::Volume,
-      "Research::Publication" => Communication::Website::Permalink::Publication,
-      "University::Organization" => Communication::Website::Permalink::Organization,
-      "University::Organization::Category" => Communication::Website::Permalink::Organization::Category,
-      "University::Person" => Communication::Website::Permalink::Person,
-      "University::Person::Category" => Communication::Website::Permalink::Person::Category,
-      "University::Person::Administrator" => Communication::Website::Permalink::Administrator,
-      "University::Person::Author" => Communication::Website::Permalink::Author,
-      "University::Person::Researcher" => Communication::Website::Permalink::Researcher,
-      "University::Person::Teacher" => Communication::Website::Permalink::Teacher,
-      # END TODO L10N
-
       "Administration::Location::Localization" => Communication::Website::Permalink::Location,
       "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
       "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,

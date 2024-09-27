@@ -4,6 +4,16 @@ module Migrations
       ::Communication::Website.skip_callback :save, :after, :create_missing_special_pages
       ::Communication::Website.skip_callback :touch, :after, :create_missing_special_pages
 
+      remove_non_original_objects
+      remove_obsolete_permalinks
+    ensure
+      ::Communication::Website.set_callback :touch, :after, :create_missing_special_page
+      ::Communication::Website.set_callback :save, :after, :create_missing_special_pages
+    end
+
+    protected
+
+    def self.remove_non_original_objects
       Administration::Location.where.not(original_id: nil).destroy_all
       Communication::Website::Agenda::Category.where.not(original_id: nil).destroy_all
       Communication::Website::Agenda::Event.where.not(original_id: nil).destroy_all
@@ -21,9 +31,32 @@ module Migrations
       University::Person::Category.where.not(original_id: nil).destroy_all
       University::Person::Involvement.where.not(original_id: nil).destroy_all
       University::Role.where.not(original_id: nil).destroy_all
-    ensure
-      ::Communication::Website.set_callback :touch, :after, :create_missing_special_page
-      ::Communication::Website.set_callback :save, :after, :create_missing_special_pages
+    end
+
+    def self.remove_obsolete_permalinks
+      about_types_to_delete = [
+        "Administration::Location",
+        "Communication::Website::Agenda::Event",
+        "Communication::Website::Agenda::Category",
+        "Communication::Website::Page",
+        "Communication::Website::Portfolio::Project",
+        "Communication::Website::Portfolio::Category",
+        "Communication::Website::Post",
+        "Communication::Website::Post::Category",
+        "Education::Diploma",
+        "Education::Program",
+        "Research::Journal::Paper",
+        "Research::Journal::Volume",
+        "University::Organization",
+        "University::Organization::Category",
+        "University::Person",
+        "University::Person::Category",
+        "University::Person::Administrator",
+        "University::Person::Author",
+        "University::Person::Researcher",
+        "University::Person::Teacher"
+      ]
+      Communication::Website::Permalink.where(about_type: about_types_to_delete).destroy_all
     end
   end
 end
