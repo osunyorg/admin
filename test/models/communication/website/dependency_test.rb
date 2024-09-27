@@ -5,30 +5,34 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
   def test_page_dependencies
-    # Par défaut, 1 dépendance (la configuration CSP du site)
+    # Par défaut, 2 dépendances :
+    # - la localisation FR de la page
+    # - la configuration CSP du site
     page = communication_website_pages(:page_with_no_dependency)
-    assert_equal 1, page.recursive_dependencies.count
-
-    #  On ajoute un block "Chapitre" : +1 dépendance (le block)
-    page.blocks.create(position: 1, published: true, template_kind: :chapter)
     assert_equal 2, page.recursive_dependencies.count
+
+    #  On ajoute un block "Chapitre" à la l10n FR : +1 dépendance (le block)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
+    page_l10n.blocks.create(position: 1, published: true, template_kind: :chapter)
+    assert_equal 3, page.recursive_dependencies.count
   end
 
   def test_change_block_dependencies
     page = communication_website_pages(:page_with_no_dependency)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
 
     # On ajoute un block Personnes lié à Arnaud : 9 dépendances
-    # - le block Personnes (1)
-    # - 4 composants du template du block + 1 élément (5)
-    # - 2 composants de l'élément du template (2)
-    # - la personne en dépendance du composant Person (1)
+    # - la localisation FR de la page
+    # - le block Personnes
+    # - la personne en dépendance du composant Person
+    # - la localisation FR de la personne
     # - La content security policy
-    block = page.blocks.create(position: 1, published: true, template_kind: :persons)
+    block = page_l10n.blocks.create(position: 1, published: true, template_kind: :persons)
     block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
     block.save
 
     page = page.reload
-    assert_equal 3, page.recursive_dependencies.count
+    assert_equal 5, page.recursive_dependencies.count
 
     clear_enqueued_jobs
 
@@ -37,7 +41,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     assert_enqueued_with(job: Dependencies::CleanWebsitesIfNecessaryJob) do
       block.save
     end
-      
+
     # On vérifie qu'on enqueue le job qui clean les websites
     assert_enqueued_with(job: Communication::Website::CleanJob) do
       perform_enqueued_jobs(only: Dependencies::CleanWebsitesIfNecessaryJob)
@@ -48,7 +52,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
       perform_enqueued_jobs(only: Communication::Website::CleanJob)
     end
 
-    assert_equal 3, page.recursive_dependencies.count
+    assert_equal 5, page.recursive_dependencies.count
 
     clear_enqueued_jobs
 
@@ -119,7 +123,6 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies.count
   end
 
-  # TODO : Utile?
   def test_change_menu_item_dependencies
     menu = communication_website_menus(:primary_menu)
 
