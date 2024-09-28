@@ -5,11 +5,27 @@ module WithPublication
   extend ActiveSupport::Concern
 
   included do
-    scope :draft, -> { where(published: false) }
-    scope :published, -> { where(published: true) }
-    scope :published_now, -> { where(published: true).where('published_at <= ?', Time.zone.now) }
-    scope :published_in_the_future, -> { where(published: true).where('published_at > ?', Time.zone.now) }
-    scope :ordered_by_published_at, -> { order(published_at: :desc) }
+    scope :draft, -> { 
+      where(published: false) 
+    }
+    
+    scope :published, -> {
+      where(published: true)
+    }
+    
+    scope :published_now, -> { 
+      where(published: true)
+      .where("#{table_name}.published_at <= ?", Time.zone.now) 
+    }
+
+    scope :published_in_the_future, -> {
+      where(published: true)
+      .where("#{table_name}.published_at > ?", Time.zone.now)
+    }
+
+    scope :ordered_by_published_at, -> {
+      order(published_at: :desc) 
+    }
 
     before_validation :set_published_at
   end
