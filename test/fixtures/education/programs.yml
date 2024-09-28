@@ -1,8 +1,5 @@
 default_program:
-  name: Formation de test
-  published: true
   diploma: default_diploma
   schools:
     - default_school
   university: default_university
-  language: fr

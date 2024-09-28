@@ -1,6 +1,5 @@
 default_extranet:
-  name: Extranet de test
   host: extranet.osuny.test
-  about: default_program (Education::Program)
   feature_alumni: true
+  about: default_program (Education::Program)
   university: default_university

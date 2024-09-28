@@ -1,0 +1,6 @@
+default_diploma_fr:
+  name: Diplôme de test
+  short_name: DT
+  about: default_diploma
+  language: fr
+  university: default_university

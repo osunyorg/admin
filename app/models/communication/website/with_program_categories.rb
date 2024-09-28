@@ -29,15 +29,14 @@ module Communication::Website::WithProgramCategories
       root_category.localizations
                    .where(language: language)
                    .first_or_create(
-                      name: t('admin.education.programs.categories.root_name', 
-                      locale: language.iso_code
-                    )
-      )
+                      name: I18n.t(
+                        'admin.education.programs.categories.root_name',
+                        locale: language.iso_code
+                      )
+                   )
     end
     root_category
   end
-
-
 
   def set_programs_categories_at_level_for!(objects, parent_category, programs)
     programs.map.with_index do |program, index|

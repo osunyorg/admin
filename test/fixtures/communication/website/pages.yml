@@ -1,32 +1,17 @@
 page_root:
-  university: default_university
-  website: website_with_github
-  title: Accueil
   type: Communication::Website::Page::Home
-  slug: ''
-  language: fr
   position: 1
-  published: true
-  published_at: 2010-11-28 00:00:00
-  
-page_test:
-  university: default_university
   website: website_with_github
-  title: Test
-  slug: 'test'
-  language: fr
+  university: default_university
+
+page_test:
   position: 1
-  published: true
-  published_at: 2010-11-28 00:00:00
   parent: page_root
+  website: website_with_github
+  university: default_university
 
 page_with_no_dependency:
-  university: default_university
-  website: website_with_github
-  title: Page with no dependency
-  slug: 'page-with-no-dependency'
-  language: fr
   position: 2
-  published: true
-  published_at: 2010-11-28 00:00:00
   parent: page_root
+  website: website_with_github
+  university: default_university

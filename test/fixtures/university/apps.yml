@@ -1,9 +1,0 @@
-one:
-  name: MyString
-  university: default_university
-  token: MyString
-
-two:
-  name: MyString
-  university: default_university
-  token: MyOtherString
