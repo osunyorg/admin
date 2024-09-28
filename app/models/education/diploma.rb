@@ -3,6 +3,7 @@
 # Table name: education_diplomas
 #
 #  id            :uuid             not null, primary key
+#  certification :string
 #  ects          :integer
 #  level         :integer          default("not_applicable")
 #  created_at    :datetime         not null
@@ -39,6 +40,14 @@ class Education::Diploma < ApplicationRecord
     master: 500,
     doctor: 800
   }
+
+  CERTIFICATIONS_DIRECTORY = "app/assets/images/education/diplomas/certifications"
+
+  def self.certifications
+    Dir.children(CERTIFICATIONS_DIRECTORY).map do |filename| 
+      filename.remove('.svg')
+    end
+  end
 
   def dependencies
     localizations

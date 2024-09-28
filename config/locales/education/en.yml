@@ -31,6 +31,7 @@ en:
         school: School
         year: Year
       education/diploma:
+        certification: Certification
         ects: ECTS
         level: Level
         programs: Programs

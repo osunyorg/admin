@@ -16,6 +16,12 @@
     <h2 class="h4">Informations administratives</h2>
   </div>
   <div class="col-lg-8">
+    <% if @diploma.certification.present? %>
+      <div class="mb-4">
+        <%= image_tag "education/diplomas/certifications/#{@diploma.certification}.svg",
+                      width: 150 %>
+      </div>
+    <% end %>
     <table class="table">
       <tbody>
         <tr>

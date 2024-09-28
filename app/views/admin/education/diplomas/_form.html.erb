@@ -5,33 +5,42 @@
     <%= lf.hidden_field :language_id, value: current_language.id %>
     <div class="row">
       <div class="col-lg-8">
-        <%= osuny_panel t('content') do %>
-          <%= lf.input :name %>
-          <div class="row">
-            <div class="col-lg-6">
-              <%= lf.input :short_name %>
-            </div>
-            <div class="col-lg-6">
-              <%= f.input :level, include_blank: false %>
-            </div>
-            <div class="col-lg-6">
-              <%= f.input :ects %>
-            </div>
-            <div class="col-lg-6">
-              <%= lf.input :duration, as: :string %>
-            </div>
+        <%= lf.input :name %>
+        <div class="row">
+          <div class="col-lg-6">
+            <%= lf.input :short_name %>
           </div>
-          <%= render 'admin/application/summary/form', f: lf, about: l10n %>
-        <% end %>
+          <div class="col-lg-6">
+            <%= f.input :level, include_blank: false %>
+          </div>
+          <div class="col-lg-6">
+            <%= f.input :ects %>
+          </div>
+          <div class="col-lg-6">
+            <%= lf.input :duration, as: :string %>
+          </div>
+        </div>
+        <%= render 'admin/application/summary/form', f: lf, about: l10n %>
       </div>
       <div class="col-lg-4">
-        <%= osuny_panel t('metadata') do %>
-          <%= render  "admin/application/slug/form",
-                      f: lf,
-                      source: '#education_diploma_localizations_attributes_0_name' %>
-        <% end %>
+        <%= render  "admin/application/slug/form",
+                    f: lf,
+                    source: '#education_diploma_localizations_attributes_0_name' %>
       </div>
     </div>
+    <%= f.input :certification, 
+                as: :radio_buttons,
+                collection: Education::Diploma.certifications << '',
+                item_wrapper_class: 'd-inline-block mb-5 me-5',
+                label_method: Proc.new { |certification|
+                  if certification.empty?
+                    raw "<span class=\"ms-2\">#{t('admin.education.diplomas.certification.none')}</span>"
+                  else
+                    image_tag "education/diplomas/certifications/#{certification}.svg",
+                              alt: certification,
+                              width: 150
+                  end
+                } %>
     <% content_for :action_bar_right do %>
       <%= submit f %>
     <% end %>
