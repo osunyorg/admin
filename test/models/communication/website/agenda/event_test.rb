@@ -102,10 +102,9 @@ class Communication::Website::Agenda::EventTest < ActiveSupport::TestCase
   def new_event(**options)
     event = website_with_github.agenda_events.new(
       university_id: website_with_github.university_id,
-      language_id: website_with_github.default_language_id,
       **options
     )
-    event.localizations.build(title: "An event", language: french)
+    event.localizations.build(title: "An event", language: website_with_github.default_language)
     event
   end
 end
