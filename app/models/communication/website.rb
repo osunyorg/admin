@@ -118,6 +118,10 @@ class Communication::Website < ApplicationRecord
   scope :with_url, -> { where.not(url: [nil, '']) }
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
 
+  def to_s
+    original_localization.to_s
+  end
+
   def git_path(website)
     "data/website.yml"
   end
