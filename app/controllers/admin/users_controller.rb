@@ -23,7 +23,7 @@ class Admin::UsersController < Admin::ApplicationController
       params,
       key: :about,
       university: current_university,
-      mandatory_module: Contentful
+      mandatory_module: Favoritable
     )
     if operation == 'add'
       current_user.add_favorite(about)
