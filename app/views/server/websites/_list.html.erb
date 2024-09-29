@@ -11,10 +11,10 @@
       </tr>
     </thead>
     <tbody>
-      <% websites.ordered.each do |website| %>
+      <% websites.each do |website| %>
         <tr id="website-<%= website.id %>">
           <td>
-            <%= link_to website.name, server_website_path(website) %>
+            <%= link_to website.to_s_in(current_language), server_website_path(website) %>
             <% if website.in_production? %>
               <span class="badge bg-success"><%= t('server_admin.websites.production') %></span>
             <% end %>
@@ -23,7 +23,7 @@
                           [:server, website.university] %></td>
           <td>
             <%= link_to t('server_admin.websites.admin'),
-                        admin_communication_website_url(website, host: website.university.url),
+                        admin_communication_website_url(website, host: website.university.url, lang: website.default_language),
                         target: :_blank,
                         class: 'action' %>
             <%= link_to Communication::Website.human_attribute_name('url'),

@@ -1,7 +1,9 @@
----
-<%= render 'admin/application/static/title' %>
+<%
+journal = @l10n.about
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
 issn: >-
-  <%= @about.issn %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/summary/static' %>
+  <%= @l10n.issn %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
 ---

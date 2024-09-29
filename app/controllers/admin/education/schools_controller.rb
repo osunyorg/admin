@@ -3,16 +3,24 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
                               through: :current_university,
                               through_association: :education_schools
 
-  has_scope :for_search_term
-  has_scope :for_program
+  include Admin::HasStaticAction
+  include Admin::Localizable
 
   def index
-    @schools = apply_scopes(@schools).ordered.page(params[:page])
+    @schools = @schools.filter_by(params[:filters], current_language)
+                       .tmp_original # TODO L10N : To remove
+                       .ordered(current_language)
+                       .page(params[:page])
     breadcrumb
   end
 
   def show
-    @roles = @school.university_roles.ordered
+    @programs =  @school.programs
+                        .tmp_original
+                        .ordered(current_language)
+    @roles = @school.university_roles
+                    .tmp_original
+                    .ordered(current_language)
     breadcrumb
   end
 
@@ -26,9 +34,9 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   end
 
   def create
-    @school.university = current_university
+    @school.language_id = current_language.id
     if @school.save
-      redirect_to [:admin, @school], notice: t('admin.successfully_created_html', model: @school.to_s)
+      redirect_to [:admin, @school], notice: t('admin.successfully_created_html', model: @school.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -37,7 +45,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
 
   def update
     if @school.update(school_params)
-      redirect_to [:admin, @school], notice: t('admin.successfully_updated_html', model: @school.to_s)
+      redirect_to [:admin, @school], notice: t('admin.successfully_updated_html', model: @school.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -47,7 +55,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
 
   def destroy
     @school.destroy
-    redirect_to admin_education_schools_url, notice: t('admin.successfully_destroyed_html', model: @school.to_s)
+    redirect_to admin_education_schools_url, notice: t('admin.successfully_destroyed_html', model: @school.to_s_in(current_language))
   end
 
   private
@@ -60,6 +68,17 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
 
   def school_params
     params.require(:education_school)
-          .permit(:university_id, :name, :address, :zipcode, :city, :country, :url, :phone, :logo, :logo_delete, program_ids: [])
+          .permit(
+            :address, :zipcode, :city, :country, :phone,
+            program_ids: [],
+            localizations_attributes: [
+              :id, :language_id,
+              :name, :url,
+              :logo, :logo_delete,
+            ]
+          )
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

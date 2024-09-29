@@ -1,11 +1,13 @@
 <%= block_component_static block, :description %>
 <%= block_options_static block %>
       persons:
-<% 
+<%
 block.template.selected_elements.each do |element|
   person = element.person
   next if person.nil?
+  person_l10n = person.localization_for(block.language)
+  next if person_l10n.nil?
 %>
-        - slug: "<%= person.slug %>"
+        - slug: "<%= person_l10n.slug %>"
 <%= block_component_static block, :role, template: element, depth: 5 %>
 <% end %>

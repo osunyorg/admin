@@ -2,9 +2,9 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
 
   has_elements
   has_layouts [
-    :grid, 
-    :list, 
-    :cards, 
+    :grid,
+    :list,
+    :cards,
     :alternate,
     :large
   ]
@@ -31,7 +31,7 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
   def allowed_for_about?
     !website.nil?
   end
-  
+
   def children
     selected_pages
   end
@@ -49,7 +49,10 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
 
   def selected_pages_children
     return [] unless page
-    page.children.for_language(block.language).published.ordered
+    page.children
+        .tmp_original # TODO L10N: to remove
+        .published_now_in(block.language)
+        .ordered
   end
 
 end

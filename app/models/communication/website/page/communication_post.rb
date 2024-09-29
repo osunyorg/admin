@@ -11,8 +11,8 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
   def dependencies
     super +
     [website.config_default_languages] +
-    website.post_categories.where(language_id: language_id) +
-    website.posts.where(language_id: language_id)
+    website.post_categories +
+    website.posts
   end
 
   def git_path_relative

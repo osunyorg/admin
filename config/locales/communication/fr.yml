@@ -25,45 +25,51 @@ fr:
         about_Research::Laboratory: Extranet d'un laboratoire
         about_type: Type d'extranet
         color: Couleur
-        cookies_policy: Politique de cookies
-        favicon: Favicon
         feature_alumni: Alumni
         feature_contacts: Annuaire
+        feature_documents: Documents
         feature_jobs: Offres d'emploi
-        feature_library: Documents
         feature_posts: Actualités
         has_sso: A un SSO ?
-        home_sentence: Phrase affichée sur la home
         host: Domaine
-        logo: Logo
-        name: Nom
-        privacy_policy: Politique de confidentialité
-        registration_contact: Mail de contact pour les problèmes d'inscription
-        sass: Style custom
-        sso_button_label: Libellé du bouton de connexion
+        sass: Style personnalisé (en SASS)
         sso_cert: Certificat
         sso_inherit_from_university: SSO hérité de l'Université
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
+      communication/extranet/localization:
+        cookies_policy: Politique de cookies
+        favicon: Icône de navigateur (favicon)
+        home_sentence: Phrase affichée sur la home
+        logo: Logo
+        name: Nom
+        privacy_policy: Politique de confidentialité
+        registration_contact: Mail de contact pour les problèmes d'inscription
+        sso_button_label: Libellé du bouton de connexion
         terms: Conditions d'utilisation
       communication/extranet/connection:
         connected: Connecté
       communication/extranet/document:
         category: Catégorie
         kind: Type
+      communication/extranet/document/localization:
+        file: Fichier téléchargeable
         name: Nom
         published: Publié ?
         published_at: Date de publication
       communication/extranet/document/category:
-        name: Nom
         quantity: Quantité de documents
+      communication/extranet/document/category/localization:
+        name: Nom
       communication/extranet/document/kind:
-        name: Nom
         quantity: Quantité de documents
+      communication/extranet/document/kind/localization:
+        name: Nom
       communication/extranet/post:
         author: Auteur·rice
         category: Catégorie
+      communication/extranet/post/localization:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         featured_image_credit: Crédit
@@ -73,8 +79,9 @@ fr:
         slug: Identifiant
         title: Titre
       communication/extranet/post/category:
-        name: Nom
         quantity: Quantité d'actualités
+      communication/extranet/post/category/localization:
+        name: Nom
       communication/website:
         about: Sujet du site
         about_: Site indépendant
@@ -106,11 +113,47 @@ fr:
         in_showcase: Présenter le site dans le showcase
         languages: Langues
         locked_at: Verrouillé pour les background jobs à
-        name: Nom
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
         showcase_tags: Mots-clés
         social: Réseaux sociaux
+        university: Université
+        url: URL
+      communication/website/agenda/category:
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        name: Nom
+        parent: Catégorie parente
+        slug: Slug
+      communication/website/agenda/event:
+        categories: Catégories
+        dates: Dates
+        from_day: Jour de début
+        from_hour: Heure de début
+        status: Statut
+        status_archive: Archive
+        status_current: En cours
+        status_future: À venir
+        time_zone: Fuseau horaire
+        to_day: Jour de fin
+        to_hour: Heure de fin
+      communication/website/agenda/event/localization:
+        featured_image: Image à la une
+        published: Publié
+        subtitle: Sous-titre
+        title: Titre
+      communication/website/connection:
+        direct_source: Source directe
+        direct_source_id: Identifiant de la source
+        direct_source_type: Type de la source
+        id: Identifiant
+        indirect_object: Objet indirect
+        indirect_object_id: Identifiant de l'objet
+        indirect_object_type: Type de l'objet
+        updated_at: Date de mise à jour
+      communication/website/localization:
+        name: Nom
+        published: Langue publiée
         social_email: "Adresse email"
         social_facebook: "Facebook (privatif, appartient à Meta)"
         social_github: "Github (privatif, appartient à Microsoft)"
@@ -122,38 +165,6 @@ fr:
         social_vimeo: "Vimeo (privatif)"
         social_x: "X, ex-Twitter (privatif)"
         social_youtube: "Youtube (privatif, appartient à Google)"
-        university: Université
-        url: URL
-      communication/website/agenda/category:
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        slug: Slug
-      communication/website/agenda/event:
-        categories: Catégories
-        dates: Dates
-        featured_image: Image à la une
-        from_day: Jour de début
-        from_hour: Heure de début
-        published: Publié
-        status: Statut
-        status_archive: Archive
-        status_current: En cours
-        status_future: À venir
-        subtitle: Sous-titre
-        time_zone: Fuseau horaire
-        title: Titre
-        to_day: Jour de fin
-        to_hour: Heure de fin
-      communication/website/connection:
-        direct_source: Source directe
-        direct_source_id: Identifiant de la source
-        direct_source_type: Type de la source
-        id: Identifiant
-        indirect_object: Objet indirect
-        indirect_object_id: Identifiant de l'objet
-        indirect_object_type: Type de l'objet
-        updated_at: Date de mise à jour
       communication/website/menu:
         automatic: Automatique
         identifier: Identifiant
@@ -168,40 +179,52 @@ fr:
         url: URL
       communication/website/page:
         bodyclass: Classe CSS spécifique
-        breadcrumb_title: Nom affiché dans le fil d'ariane
         children: Pages enfants
+        full_width: Pleine largeur
+        parent: Page parente
+        related_category: Catégorie liée
+        special_page: Page spéciale
+        website: Site Web
+      communication/website/page/localization:
+        breadcrumb_title: Nom affiché dans le fil d'ariane
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
-        full_width: Pleine largeur
         header_cta: Afficher un bouton d'action dans le header
         header_cta_label: Texte du bouton d'action
         header_cta_url: URL du bouton d'action
         header_text: Titre affiché en haut de page
-        parent: Page parente
         path: Chemin
         published: Publié ?
-        related_category: Catégorie liée
         slug: Identifiant
-        special_page: Page spéciale
         text: Texte principal de la page
         title: Titre
-        website: Site Web
       communication/website/permalink:
         path: Chemin
-      communication/website/portfolio/category:
+      communication/website/portfolio/category/localization:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
         name: Nom
         slug: Slug
       communication/website/portfolio/project:
         categories: Catégories
+        year: Année
+      communication/website/portfolio/project/localization:
         featured_image: Image à la une
         published: Publié
         title: Titre
-        year: Année
       communication/website/post:
         author: Auteur·rice
         categories: Catégories
+        website: Site Web
+      communication/website/post/category:
+        children: Catégories enfants
+        parent: Catégorie parente
+      communication/website/post/category/localization:
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        name: Nom
+        slug: Slug
+      communication/website/post/localization:
         category: Catégorie
         date: Date
         featured_image: Image à la une
@@ -215,13 +238,6 @@ fr:
         text: Texte
         title: Titre
         website: Site Web
-      communication/website/post/category:
-        children: Catégories enfants
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        parent: Catégorie parente
-        slug: Slug
       communication/website/showcase/tag:
         name: Nom
         websites: Sites Web
@@ -319,12 +335,17 @@ fr:
     communication:
       block:
         copied: Le bloc a bien été copié dans le presse-papier.
+        drag_and_drop: Drag and drop
+        language_mismatch_alert: Le bloc n'existe pas dans cette langue.
       website:
         agenda:
           events:
             draft: Brouillon
             formatted_time_zone: "Fuseau horaire : %{time_zone}"
             none: Pas encore d'événements
+        confirm_localization:
+          text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction du site web <i>%{website}</i> en %{language}."
+          title: Confirmation de traduction
         default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas."
         default_shared_image: "Image de partage par défaut, 1200 pixels de large est une bonne base car les réseaux ont des standards différents."
         editorial:
@@ -349,21 +370,30 @@ fr:
           published: Publiée
           published_status: État de publication
           show: Voir la page
+          special_pages:
+            organization:
+              disconnect: Déconnecter
+            person:
+              disconnect: Déconnecter
           structure: Pages
           with_children: "avec comme pages enfants :"
         permalinks:
           creation_error: "Erreur lors de la création. Le chemin renseigné est-il au bon format ?"
         portfolio:
           projects:
+            draft: Brouillon
+            in: dans %{categories}
             none: Pas encore de projet
+        post:
+          localizations:
+            and_pinned: et mis en avant
+            draft: Brouillon
+            pinned_status: Mise en avant
+            planned_on: Publication prévue le %{date}
+            published_on: Publiée le %{date}
         posts:
-          and_pinned: et mis en avant
           by: par %{author}
-          draft: Brouillon
           in: dans %{categories}
-          pinned_status: Mise en avant
-          planned_on: Publication prévue le %{date}
-          published_on: Publiée le %{date}
         publish:
           button: Publier
           notice: Publication en cours, cela devrait prendre quelques minutes pour arriver en ligne.
@@ -395,7 +425,7 @@ fr:
           description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
           description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
-      text: Communiquer, c'est mettre en commun ; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
+      text_html: Communiquer, c'est mettre en commun ; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
     extranet:
       post:
         metadata:
@@ -499,6 +529,7 @@ fr:
       security: Sécurité
       see_all: Voir la liste complète (%{number} éléments)
   curation:
+    already_imported: Article déjà importé
     error: Erreur lors de la curation, veillez à utiliser une URL valide
     label: URL de l'article à importer
     placeholder: https://...

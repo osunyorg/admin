@@ -1,5 +1,8 @@
-<% if current_context.logo.attached? %>
-  <%= kamifusen_tag current_context.logo, width: 200, alt: current_context.to_s, class: 'logo' %>
+<% if current_university.logo.attached? %>
+  <%= kamifusen_tag current_university.logo, 
+                    width: 200, 
+                    alt: current_university.to_s, 
+                    class: 'logo' %>
 <% else %>
-  <%= current_context %>
+  <%= current_university %>
 <% end %>

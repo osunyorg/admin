@@ -1,41 +1,46 @@
 <%= simple_form_for [:admin, school] do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="row">
-    <div class="col-xxl-6">
-      <%= osuny_panel t('metadata') do %>
-        <%= f.input :name %>
-        <%= f.input :phone %>
-        <%= f.input :address %>
-        <div class="row pure__row--small">
-          <div class="col-md-4">
-            <%= f.input :zipcode %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+    <div class="row">
+      <div class="col-xxl-6">
+        <%= osuny_panel t('metadata') do %>
+          <%= lf.input :name %>
+          <%= f.input :phone %>
+          <%= f.input :address %>
+          <div class="row pure__row--small">
+            <div class="col-md-4">
+              <%= f.input :zipcode %>
+            </div>
+            <div class="col-md-8">
+              <%= f.input :city %>
+            </div>
           </div>
-          <div class="col-md-8">
-            <%= f.input :city %>
-          </div>
-        </div>
-        <%= f.input :country, input_html: { class: 'form-select' } %>
-        <%= f.input :url %>
-        <%= f.input :logo, 
-                    as: :single_deletable_file,
-                    input_html: { accept: default_images_formats_accepted },
-                    preview: 200,
-                    direct_upload: true %>
-      <% end %>
+          <%= f.input :country, input_html: { class: 'form-select' } %>
+          <%= lf.input :url %>
+          <%= lf.input :logo,
+                      as: :single_deletable_file,
+                      input_html: { accept: default_images_formats_accepted },
+                      preview: 200,
+                      direct_upload: true %>
+        <% end %>
+      </div>
+      <div class="col-xxl-6">
+        <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
+          <%= f.association :programs,
+                            as: :check_boxes,
+                            collection: osuny_collection_tree(
+                              current_university.education_programs
+                                                .tmp_original # TODO L10N : Remove tmp_original
+                                                .root,
+                              localized: true
+                            ) %>
+        <% end %>
+      </div>
     </div>
-    <div class="col-xxl-6">
-      <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
-        <%= f.association :programs,
-                          as: :check_boxes,
-                          collection: collection_tree(current_university.education_programs),
-                          label_method: ->(p) { sanitize p[:label] },
-                          value_method: ->(p) { p[:id] } %>
-      <% end %>
-    </div>
-  </div>
-  <% content_for :action_bar_right do %>
-    <%= submit f %>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
   <% end %>
 <% end %>

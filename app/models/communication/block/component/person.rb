@@ -4,16 +4,12 @@ class Communication::Block::Component::Person < Communication::Block::Component:
     template.block
             .university
             .people
+            .tmp_original # TODO L10N : To remove
             .find_by(id: data)
   end
 
   def dependencies
     [person]
-  end
-
-  def translate!
-    return unless person.present?
-    @data = person.find_or_translate!(template.language).id
   end
 
 end

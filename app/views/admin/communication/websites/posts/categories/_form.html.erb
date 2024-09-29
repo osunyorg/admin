@@ -1,29 +1,37 @@
 <%= simple_form_for [:admin, category] do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="row">
-    <div class="col-md-8">
-      <%= osuny_panel t('content') do %>
-        <%= f.input :name %>
-        <%= render 'admin/application/summary/form', f: f, about: category %>
-      <% end %>
-      <%= render 'admin/application/meta_description/form', f: f, about: category %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
+    <div class="row">
+      <div class="col-md-8">
+        <%= osuny_panel t('content') do %>
+          <%= lf.input :name %>
+          <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+        <% end %>
+        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+      </div>
+      <div class="col-md-4">
+        <%= osuny_panel t('metadata') do %>
+          <%= render  "admin/application/slug/form",
+                      f: lf,
+                      source: '#communication_website_post_category_localizations_attributes_0_name' %>
+          <%= f.association :parent,
+                            collection: osuny_collection_tree(
+                              @website.post_categories
+                                      .tmp_original # TODO L10N : Remove tmp_original
+                                      .root,
+                              except: category,
+                              localized: true
+                            ) %>
+        <% end %>
+        <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
+      </div>
     </div>
-    <div class="col-md-4">
-      <%= osuny_panel t('metadata') do %>
-        <%= render  "admin/application/slug/form",
-                    f: f,
-                    source: '#communication_website_post_category_name' %>
-        <%= f.association :parent,
-                          collection: collection_tree(@website.post_categories.for_language(current_website_language), category),
-                          label_method: ->(p) { sanitize p[:label] },
-                          value_method: ->(p) { p[:id] } %>
-      <% end %>
-      <%= render 'admin/application/featured_image/edit', about: category, f: f %>
-    </div>
-  </div>
-  <% content_for :action_bar_right do %>
-    <%= submit f %>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
   <% end %>
 <% end %>

@@ -1,0 +1,12 @@
+<ol class="programs">
+  <% 
+  block.template.selected_programs.each do |program|
+    next if program.nil?
+    l10n = program.localization_for(current_language)
+    next if l10n.nil?
+  %>
+    <li>
+      <%= link_to l10n, l10n.current_permalink_url_in_website(@website) %>
+    </li>
+  <% end %>
+</ol>

@@ -1,7 +1,7 @@
 <% if can?(:create, Communication::Website::Portfolio::Category)  %>
-  <% 
+  <%
   title = Communication::Website::Portfolio::Category.model_name.human(count: 2)
-  action = create_link Communication::Website::Portfolio::Category 
+  action = create_link Communication::Website::Portfolio::Category
   %>
   <%= osuny_panel title, action: action do %>
     <%= render 'admin/communication/websites/portfolio/categories/list', categories: categories %>

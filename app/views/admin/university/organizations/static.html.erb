@@ -1,71 +1,71 @@
-<% version = 1 %>
----
-<% cache [@about, @website.id, version] do %>
-<%= render 'admin/application/static/title' %>
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
-<%= render 'admin/application/i18n/static' %>
-kind:
-  code: "<%= @about.kind %>"
-  label: "<%= @about.kind_i18n %>"
 <%
-[
-  :long_name,
-  :siren,
-  :address_name,
-  :address,
-  :address_additional,
-  :zipcode,
-  :city,
-  :country,
-  :phone,
-  :email,
-  :twitter,
-  :linkedin
-].each do |key|
-  value = @about.public_send key
-%>
-<%= key %>: >-
-  <%= prepare_text_for_static value %>
-<% end %>
-<% # url is a reserved keyword for Hugo %>
-website: >-
-  <%= prepare_text_for_static @about.url %>
+# this version has to incremented every time you change something in the file, to invalidate the cache
+version = 2
+# Pas dans le controller parce que ça se fait dans les background jobs, à partir du @about
+organization = @about.about
+cache [@about, organization, @website.id, version] do
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            about: organization,
+            l10n: @l10n,
+            full_width: true,
+            toc_offcanvas: true %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/shared_image/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
+<%= render 'admin/application/connections/backlinks', about: @l10n %>
+<%= render 'admin/application/static/attribute/text', about: @about, key: :long_name %>
+<%= render 'admin/application/static/attribute/text', about: organization, key: :siren %>
+kind:
+  code: "<%= organization.kind %>"
+  label: "<%= organization.kind_i18n %>"
 contact_details:
 <%= render 'admin/application/static/contact_detail', variable: :address_name, data: @about.address_name, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address, data: @about.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :address, data: organization.address, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @about.address_additional, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: @about.zipcode, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :city, data: @about.city, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :country, data: @about.country, kind: ContactDetails::Country %>
+<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: organization.zipcode, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :city, data: organization.city, kind: ContactDetails::Base %>
+<%= render 'admin/application/static/contact_detail', variable: :country, data: organization.country, kind: ContactDetails::Country %>
 <%= render 'admin/application/static/contact_detail', variable: :website, data: @about.url, kind: ContactDetails::Website %>
 <%= render 'admin/application/static/contact_detail', variable: :linkedin, data: @about.linkedin, kind: ContactDetails::Linkedin %>
 <%= render 'admin/application/static/contact_detail', variable: :twitter, data: @about.twitter, kind: ContactDetails::Twitter %>
 <%= render 'admin/application/static/contact_detail', variable: :mastodon, data: @about.mastodon, kind: ContactDetails::Mastodon %>
-<%= render 'admin/application/static/contact_detail', variable: :phone, data: @about.phone, kind: ContactDetails::Phone %>
-<%= render 'admin/application/static/contact_detail', variable: :email, data: @about.email, kind: ContactDetails::Email %>
+<%= render 'admin/application/static/contact_detail', variable: :phone, data: organization.phone, kind: ContactDetails::Phone %>
+<%= render 'admin/application/static/contact_detail', variable: :email, data: organization.email, kind: ContactDetails::Email %>
   geolocation:
-    latitude: <%= @about.latitude %>
-    longitude: <%= @about.longitude %>
+    latitude: <%= organization.latitude %>
+    longitude: <%= organization.longitude %>
 <% if @about.logo.attached? %>
 logo: "<%= @about.logo.blob.id %>"
 <% end %>
 <% if @about.logo_on_dark_background.attached? %>
 logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
 <% end %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/shared_image/static' %>
-<%= render 'admin/application/summary/static' %>
-<%= render 'admin/application/connections/backlinks' %>
-<% if @about.categories.any? %>
+<% if organization.categories.any? %>
 organizations_categories:
-<% @about.categories.each do |category| %>
-  - slug: "<%= category.slug %>"
-    path: "<%= category.current_permalink_in_website(@website)&.path %>"
+<% organization.categories.each do |category|
+  category_l10n = category.localization_for(@about.language)
+  if category_l10n.nil?
+    category_slug = nil
+    category_path = nil
+    category_name = category.original_localization&.name
+  else
+    category_slug = category_l10n.slug
+    category_path = category_l10n.current_permalink_in_website(@website)&.path
+    category_name = category.name
+  end
+%>
+  - slug: "<%= category_slug %>"
+    path: "<%= category_path %>"
+    name: >-
+      <%= prepare_text_for_static category_name %>
 <% end %>
 <% end %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---
 <%= prepare_html_for_static @about.text %>
 <% end %>

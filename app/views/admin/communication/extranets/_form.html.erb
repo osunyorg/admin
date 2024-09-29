@@ -1,92 +1,95 @@
 <%= simple_form_for [:admin, extranet] do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
 
-  <div class="row">
-    <div class="col-xl-6">
-      <%= osuny_panel t('metadata') do %>
-        <%= f.input :name %>
-        <% if can?(:create, Communication::Extranet) %>
-          <%= f.input :host %>
-          <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/extranet.about_' %>
+    <div class="row">
+      <div class="col-xl-6">
+        <%= osuny_panel t('metadata') do %>
+          <%= lf.input :name %>
+          <% if can?(:create, Communication::Extranet) %>
+            <%= f.input :host %>
+            <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/extranet.about_' %>
+          <% end %>
+          <%= f.input :registration_contact %>
         <% end %>
-        <%= f.input :registration_contact %>
-      <% end %>
-      <%= osuny_panel t('look_feel') do %>
-        <%= f.input :logo,
-                    as: :single_deletable_file,
-                    hint: images_formats_accepted_hint,
-                    input_html: { accept: default_images_formats_accepted },
-                    preview: 200,
-                    direct_upload: true %>
-        <%= f.input :favicon,
-                    as: :single_deletable_file,
-                    hint: images_formats_accepted_hint(formats: '.png'),
-                    input_html: { accept: '.png' },
-                    preview: 100,
-                    direct_upload: true %>
-        <%= f.input :color, as: :color %>
-        <%= f.input :home_sentence, as: :summernote, input_html: { data: { 'summernote-config': 'link' } } %>
-        <% if can?(:create, Communication::Extranet) %>
-          <%= f.input :sass,
-                    input_html: {
-                      data: {
-                        provider: 'codemirror',
-                        "codemirror-mode": "sass",
-                        "codemirror-indentation": 4
-                      }
-                    } %>
+        <%= osuny_panel t('look_feel') do %>
+          <%= lf.input :logo,
+                      as: :single_deletable_file,
+                      hint: images_formats_accepted_hint,
+                      input_html: { accept: default_images_formats_accepted },
+                      preview: 200,
+                      direct_upload: true %>
+          <%= lf.input :favicon,
+                      as: :single_deletable_file,
+                      hint: images_formats_accepted_hint(formats: '.png'),
+                      input_html: { accept: '.png' },
+                      preview: 100,
+                      direct_upload: true %>
+          <%= f.input :color, as: :color %>
+          <%= lf.input :home_sentence, as: :summernote, input_html: { data: { 'summernote-config': 'link' } } %>
+          <% if can?(:create, Communication::Extranet) %>
+            <%= f.input :sass,
+                      input_html: {
+                        data: {
+                          provider: 'codemirror',
+                          "codemirror-mode": "sass",
+                          "codemirror-indentation": 4
+                        }
+                      } %>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-    <div class="col-xl-6">
-      <% if can?(:create, Communication::Extranet) %>
-        <%= osuny_panel t('extranet.features') do %>
-          <%= f.input :feature_alumni %>
-          <%= f.input :feature_contacts %>
-          <%= f.input :feature_library %>
-          <%= f.input :feature_posts %>
-          <%= f.input :feature_jobs %>
-        <% end %>
-      <% end %>
-      <%= osuny_panel t('legal') do %>
-        <%= f.input :terms, as: :summernote %>
-        <%= f.input :privacy_policy, as: :summernote %>
-        <%= f.input :cookies_policy, as: :summernote %>
-      <% end %>
-    </div>
-  </div>
-
-  <% if can?(:create, Communication::Extranet) %>
-    <%= osuny_panel t('university.sso') do %>
-      <div class="row">
-        <div class="col-xl-6">
-          <%= f.input :has_sso, input_html: { data: { 'conditional': true }, id: 'has_sso' } %>
-          <div class="d-none" 
-               data-conditional-source="has_sso"
-               data-conditional-value="true"
-               >
-            <%= f.input :sso_target_url, required: true %>
-            <%= f.input :sso_cert, required: true %>
-            <%= f.input :sso_name_identifier_format, required: true %>
-            <%= f.input :sso_button_label %>
-          </div>
-        </div>
-        <div class="col-xl-6">
-          <div class="d-none" 
-               data-conditional-source="has_sso"
-               data-conditional-value="true"
-               >
-            <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
-            <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
-            <%= render 'server/universities/sso_mapping', object: extranet %>
-          </div>
-        </div>
       </div>
-    <% end %>
-  <% end %>
+      <div class="col-xl-6">
+        <% if can?(:create, Communication::Extranet) %>
+          <%= osuny_panel t('extranet.features') do %>
+            <%= f.input :feature_alumni %>
+            <%= f.input :feature_contacts %>
+            <%= f.input :feature_documents %>
+            <%= f.input :feature_posts %>
+            <%= f.input :feature_jobs %>
+          <% end %>
+        <% end %>
+        <%= osuny_panel t('legal') do %>
+          <%= lf.input :terms, as: :summernote %>
+          <%= lf.input :privacy_policy, as: :summernote %>
+          <%= lf.input :cookies_policy, as: :summernote %>
+        <% end %>
+      </div>
+    </div>
 
-  <% content_for :action_bar_right do %>
-    <%= submit f %>
+    <% if can?(:create, Communication::Extranet) %>
+      <%= osuny_panel t('university.sso') do %>
+        <div class="row">
+          <div class="col-xl-6">
+            <%= f.input :has_sso, input_html: { data: { 'conditional': true }, id: 'has_sso' } %>
+            <div class="d-none" 
+                data-conditional-source="has_sso"
+                data-conditional-value="true"
+                >
+              <%= f.input :sso_target_url, required: true %>
+              <%= f.input :sso_cert, required: true %>
+              <%= f.input :sso_name_identifier_format, required: true %>
+              <%= lf.input :sso_button_label %>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="d-none" 
+                data-conditional-source="has_sso"
+                data-conditional-value="true"
+                >
+              <h4 class="mb-4"><%= University.human_attribute_name('sso_mapping') %></h4>
+              <%= f.error_notification message: f.object.errors[:sso_mapping].to_sentence if f.object.errors[:sso_mapping].present? %>
+              <%= render 'server/universities/sso_mapping', object: extranet %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
   <% end %>
 <% end %>

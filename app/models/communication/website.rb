@@ -64,6 +64,9 @@ class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
   include Favoritable
+  include Filterable
+  include Localizable
+  include LocalizableOrderByNameScope
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs
@@ -75,7 +78,6 @@ class Communication::Website < ApplicationRecord
   include WithFeaturePortfolio
   include WithGit
   include WithGitRepository
-  include WithLanguages
   include WithLock
   include WithManagers
   include WithProgramCategories
@@ -94,26 +96,44 @@ class Communication::Website < ApplicationRecord
     gitlab: 1
   }
 
-  has_one_attached_deletable :default_image
-  validates :default_image, size: { less_than: 5.megabytes }
+  belongs_to :default_language, class_name: "Language"
 
+  # TODO L10N : remove after migrations
+  has_and_belongs_to_many :legacy_languages,
+                          class_name: "Language",
+                          join_table: :communication_websites_languages,
+                          foreign_key: :communication_website_id,
+                          association_foreign_key: :language_id
+  has_many :languages, through: :localizations
+  has_many  :active_languages,
+            -> { where(communication_website_localizations: { published: true }) },
+            through: :localizations,
+            source: :language
+
+  has_one_attached_deletable :default_image
   has_one_attached_deletable :default_shared_image
+
+  validates :default_image, size: { less_than: 5.megabytes }
   validates :default_shared_image, size: { less_than: 5.megabytes }
 
   before_validation :sanitize_fields
+  before_validation :set_default_language,
+                    :set_first_localization_as_published,
+                    on: :create
 
-  scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
-  scope :for_production, -> (production) { where(in_production: production) }
-  scope :for_search_term, -> (term) {
+  scope :for_production, -> (production, language = nil) { where(in_production: production) }
+  scope :for_search_term, -> (term, language) {
     joins(:university)
-    .where("
-      unaccent(universities.name) % unaccent(:term) OR
-      unaccent(communication_websites.name) % unaccent(:term) OR
-      unaccent(communication_websites.url) % unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+      .joins(:localizations)
+      .where(communication_website_localizations: { language_id: language.id })
+      .where("
+        unaccent(universities.name) % unaccent(:term) OR
+        unaccent(communication_website_localizations.name) % unaccent(:term) OR
+        unaccent(communication_websites.url) % unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
+  scope :for_update, -> (autoupdate, language = nil) { where(autoupdate_theme: autoupdate) }
   scope :with_url, -> { where.not(url: [nil, '']) }
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
 
@@ -128,15 +148,16 @@ class Communication::Website < ApplicationRecord
   def dependencies
     # Le website est le SEUL cas d'auto-dépendance
     [self] +
+    localizations.in_languages(active_language_ids) +
     configs +
-    pages.where(language_id: language_ids) +
-    posts.where(language_id: language_ids) +
-    post_categories.where(language_id: language_ids) +
-    events.where(language_id: language_ids) +
-    agenda_categories.where(language_id: language_ids) +
-    projects.where(language_id: language_ids) +
-    portfolio_categories.where(language_id: language_ids) +
-    menus.where(language_id: language_ids) +
+    pages +
+    posts +
+    post_categories +
+    events +
+    agenda_categories +
+    projects +
+    portfolio_categories +
+    menus.in_languages(active_language_ids) +
     [about] +
     [default_image&.blob] +
     [default_shared_image&.blob]
@@ -144,6 +165,10 @@ class Communication::Website < ApplicationRecord
 
   def website
     self
+  end
+
+  def websites
+    [self]
   end
 
   def website_id
@@ -182,6 +207,17 @@ class Communication::Website < ApplicationRecord
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
+  end
+
+  def set_default_language
+    self.default_language_id = self.localizations.first.language_id
+  end
+
+  def set_first_localization_as_published
+    localizations.first.assign_attributes(
+      published: true,
+      published_at: Time.zone.now
+    )
   end
 
   def reconnect_dependency(dependency, new_university_id)

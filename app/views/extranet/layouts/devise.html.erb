@@ -4,31 +4,24 @@
     <%= render 'extranet/application/head' %>
   </head>
   <body class="<%= body_classes %> layout-devise">
+    <header class="h1 text-center my-5 py-5">
+      <%= link_to root_path do %>
+        <%= render 'extranet/application/logo' %>
+      <% end %>
+    </header>
     <main class="container">
-      <div class="row">
-        <div class="offset-xl-1 col-xl-10">
-          <h1 class="text-center mb-5">
-            <%= link_to root_path do %>
-              <%= render 'logo' %>
-            <% end %>
-          </h1>
-          <% unless notice.blank? %>
-            <div class="alert alert-success mt-2" role="alert"><%= notice.html_safe %></div>
-          <% end %>
-          <% unless alert.blank? %>
-            <div class="alert alert-danger mt-2" role="alert"><%= alert.html_safe %></div>
-          <% end %>
-          <%= yield %>
-          <footer>
-            <nav class="d-md-flex justify-content-between py-4">
-              <%= link_to t('terms_of_service'), terms_path, rel: 'noreferrer' if current_extranet.has_terms? %>
-              <%= link_to t('privacy_policy'), privacy_policy_path, rel: 'noreferrer' if current_extranet.has_privacy_policy? %>
-              <%= link_to t('cookies_policy'), cookies_policy_path, rel: 'noreferrer' if current_extranet.has_cookies_policy? %>
-            </nav>
-          </footer>
+      <% if @small_content %>
+        <div class="row">
+          <div class="offset-md-2 col-md-8 offset-lg-3 col-lg-6 offset-xxl-4 col-xxl-4">
+      <% end %>
+      <%= render 'simple_notice' %>
+      <%= yield %>
+      <% if @small_content %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </main>
+    <%= render 'extranet/application/footer' %>
     <%= render 'bugsnag' %>
     <%= javascript_include_tag 'extranet' %>
   </body>

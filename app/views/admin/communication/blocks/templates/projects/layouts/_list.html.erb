@@ -1,0 +1,12 @@
+<div class="list">
+  <% block.template.selected_projects.each do |project|
+      next if project.nil?
+      project_l10n = project.localization_for(block.language)
+      %>
+    <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
+      <h<%= block.heading_rank_children %> class='project-title' itemprop='name'>
+        <%= link_to project_l10n, project_l10n.current_permalink_url_in_website(@website) %>
+      </h<%= block.heading_rank_children %>>
+    </article>
+  <% end %>
+</div>

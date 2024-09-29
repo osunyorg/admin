@@ -3,10 +3,11 @@ class Admin::University::People::Experiences::ImportsController < Admin::Univers
                               through: :current_university,
                               through_association: :imports
 
-  has_scope :for_status
-
   def index
-    @imports = apply_scopes(@imports.kind_people_experiences).ordered.page(params[:page])
+    @imports = @imports.kind_people_experiences
+                       .filter_by(params[:filters], current_language)
+                       .ordered(current_language)
+                       .page(params[:page])
     breadcrumb
   end
 
@@ -21,8 +22,8 @@ class Admin::University::People::Experiences::ImportsController < Admin::Univers
 
   def create
     @import.kind = :people_experiences
-    @import.university = current_university
     @import.user = current_user
+    @import.language = current_language
     if @import.save
       redirect_to admin_university_people_experiences_import_path(@import),
                   notice: t('admin.successfully_created_html', model: @import.to_s)
@@ -48,5 +49,8 @@ class Admin::University::People::Experiences::ImportsController < Admin::Univers
   def import_params
     params.require(:import)
           .permit(:file)
+          .merge(
+            university_id: current_university.id
+          )
   end
 end

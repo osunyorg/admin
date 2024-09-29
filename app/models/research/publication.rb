@@ -30,11 +30,16 @@
 #
 class Research::Publication < ApplicationRecord
   include AsIndirectObject
+  include Filterable
   include Permalinkable
   include Sanitizable
-  include Sluggable
   include WithCitations
   include WithGitFiles
+
+  enum source: {
+    osuny: 0,
+    hal: 1
+  }
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',
@@ -46,16 +51,17 @@ class Research::Publication < ApplicationRecord
                           foreign_key: :research_publication_id,
                           association_foreign_key: :research_hal_author_id
 
-  scope :ordered, -> { order(publication_date: :desc)}
-
-  enum source: {
-    osuny: 0,
-    hal: 1
-  }
-
-  validates_presence_of :title, :publication_date
+  validates :title, :publication_date, presence: true
 
   before_validation :generate_authors_citeproc
+
+  scope :ordered, -> (language = nil) { order(publication_date: :desc)}
+  scope :for_search_term, -> (term, language = nil) {
+    where("
+      unaccent(research_publications.abstract) ILIKE unaccent(:term) OR
+      unaccent(research_publications.citation_full) ILIKE unaccent(:term) 
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   def editable?
     source == 'osuny'
@@ -82,6 +88,18 @@ class Research::Publication < ApplicationRecord
   end
 
   protected
+
+  # Override to handle default language
+  def hugo_ancestors_for_special_page(website)
+    return [] if is_a?(Communication::Website::Page::Localization)
+    permalink = Communication::Website::Permalink.for_object(self, website)
+    return [] unless permalink
+    special_page = permalink.special_page(website)
+    return [] unless special_page
+    special_page_l10n = special_page.localization_for(website.default_language)
+    return [] unless special_page_l10n
+    special_page_l10n.ancestors_and_self
+  end
 
   def to_citeproc(website: nil)
     {

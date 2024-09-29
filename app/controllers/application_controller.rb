@@ -16,18 +16,12 @@ class ApplicationController < ActionController::Base
   end
   helper_method :background_tasks_count
 
-  def current_subnav_context
-    nil
-  end
-  helper_method :current_subnav_context
-
   protected
 
-  def render_as_plain_text
-    render layout: false, content_type: "text/plain; charset=utf-8"
+  # Deprecated
+  def render_as_plain_text(partial: nil)
+    render partial, layout: false, content_type: "text/plain; charset=utf-8"
   end
-
-  private
 
   def current_ability
     @current_ability ||= Ability.for(current_user)

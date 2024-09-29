@@ -1,0 +1,10 @@
+<% if strip_tags(@l10n.summary.to_s).present? %>
+  <div class="lead mb-5">
+    <%= sanitize @l10n.summary %>
+  </div>
+<% end %>
+<% if strip_tags(@l10n.text.to_s).present? %>
+  <div class="mb-5">
+    <%= sanitize @l10n.text.to_s %>
+  </div>
+<% end %>

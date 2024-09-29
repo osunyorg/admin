@@ -1,44 +1,49 @@
----
-<%= render 'admin/application/static/title' %>
+<%
+page = @l10n.about
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
 breadcrumb_title: >-
-  <%= prepare_text_for_static @about.best_title %>
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design' %>
-<% if @about.static_layout %>
-layout: <%= @about.static_layout %>
+  <%= prepare_text_for_static @l10n.best_breadcrumb_title %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            about: page, 
+            l10n: @l10n %>
+<% if page.static_layout %>
+layout: <%= page.static_layout %>
 <% end %>
-<% if @about.is_a?(Communication::Website::Page::Person) %>
+<% if page.is_a?(Communication::Website::Page::Person) %>
 has:
   administrators: <%= @website.has_administrators? %>
   authors: <%= @website.has_authors? %>
   researchers: <%= @website.has_researchers? %>
   teachers: <%= @website.has_teachers? %>
 <% end %>
-position: <%= @about.position %>
-weight: <%= @about.position %>
-<%= render 'admin/application/i18n/static' %>
+position: <%= page.position %>
+weight: <%= page.position %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
 bodyclass: >-
-  <%= @about.best_bodyclass %>
-<%= render 'admin/application/featured_image/static' %>
-<%= render 'admin/application/shared_image/static' %>
-<% if @about.children.published.any? %>
+  <%= page.best_bodyclass %>
+<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/shared_image/static', about: @l10n %>
+<% if @l10n.children.published.any? %>
 children:
 <%
-@about.children.published.ordered.each do |child|
-  next unless child.is_listed_among_children?
+@l10n.children.published.ordered.each do |child|
+  next unless child.about.is_listed_among_children?
 %>
   - "<%= child.git_path_relative %>"
 <% end %>
 <% end %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/summary/static' %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
 header_text: >-
-  <%= prepare_html_for_static @about.header_text %>
+  <%= prepare_html_for_static @l10n.header_text %>
 header_cta:
-  display: <%= @about.header_cta %>
+  display: <%= @l10n.header_cta %>
   label: >-
-    <%= prepare_text_for_static @about.header_cta_label %>
-  target: "<%= @about.header_cta_url %>"
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+    <%= prepare_text_for_static @l10n.header_cta_label %>
+  target: "<%= @l10n.header_cta_url %>"
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---

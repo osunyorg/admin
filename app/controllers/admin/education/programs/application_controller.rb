@@ -8,13 +8,12 @@ class Admin::Education::Programs::ApplicationController < Admin::Education::Appl
 
   def breadcrumb
     super
-    add_breadcrumb @program, [:admin, @program]
+    breadcrumb_for @program
   end
 
   def default_url_options
-    return {} unless params.has_key? :program_id
-    {
-      program_id: params[:program_id]
-    }
+    options = super
+    options[:program_id] = params[:program_id] if params.has_key? :program_id
+    options
   end
 end

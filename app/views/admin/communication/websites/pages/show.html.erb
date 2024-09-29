@@ -1,30 +1,30 @@
-<% content_for :title, @page %>
+<% content_for :title, @l10n %>
 
 <div class="row">
   <div class="col-lg-7">
-    <%= osuny_panel Communication::Website::Page.human_attribute_name(:title), small: true do %>
+    <%= osuny_panel Communication::Website::Page::Localization.human_attribute_name(:title), small: true do %>
       <p class="lead mb-1"><%= @page.title %></p>
-      <%= render 'admin/application/property/publication', about: @page %>
+      <%= render 'admin/application/property/publication', about: @l10n %>
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/featured_image/show', about: @page, small: true %>
+    <%= render 'admin/application/featured_image/show', about: @l10n, small: true %>
   </div>
 </div>
 <%= osuny_separator %>
-<%= render 'admin/application/a11y/widget', about: @page, horizontal: true %>
+<%= render 'admin/application/a11y/widget', about: @l10n, horizontal: true %>
 <%= osuny_separator %>
 <div class="row">
   <div class="col-lg-4">
     <%= render 'admin/communication/websites/pages/show/metadata' %>
   </div>
   <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @page, small: true %>
-    <%= render 'admin/application/meta_description/show', about: @page, small: true %>
+    <%= render 'admin/application/summary/show', about: @l10n, small: true %>
+    <%= render 'admin/application/meta_description/show', about: @l10n, small: true %>
   </div>
 </div>
-<%= render 'admin/communication/blocks/content/editor', about: @page %>
-<%= render 'admin/communication/websites/pages/show/special_page', about: @page %>
+<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
+<%= render 'admin/communication/websites/pages/show/special_page' %>
 
 <%= render 'admin/application/dependencies', about: @page %>
 
@@ -35,7 +35,7 @@
 <% end %>
 
 <% content_for :action_bar_right do %>
-  <% page_url = @page.current_permalink_url_in_website(@website) %>
+  <% page_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to  t('open'),
               page_url,
               target: :_blank,
@@ -49,7 +49,7 @@
   <%= link_to t('admin.communication.website.publish.button'),
               publish_admin_communication_website_page_path(@page),
               class: button_classes,
-              method: :post if !@page.published && can?(:publish, @page)
+              method: :post if !@l10n.published && can?(:publish, @page)
               # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path
               %>
 <% end %>

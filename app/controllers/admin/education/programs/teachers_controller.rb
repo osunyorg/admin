@@ -10,7 +10,7 @@ class Admin::Education::Programs::TeachersController < Admin::Education::Program
   before_action :get_available_people, except: [:index, :reorder, :destroy]
 
   def index
-    @involvements = @involvements.ordered_by_name
+    @involvements = @involvements.ordered_by_name(current_language)
     breadcrumb
   end
 
@@ -52,11 +52,11 @@ class Admin::Education::Programs::TeachersController < Admin::Education::Program
   def get_available_people
     used_person_ids = @program.university_person_involvements.where.not(id: @involvement.id).pluck(:person_id)
     @available_people = current_university.people
-                                          .for_language_id(current_university.default_language_id)
+                                          .tmp_original
                                           .teachers
                                           .where.not(id: used_person_ids)
                                           .accessible_by(current_ability)
-                                          .ordered
+                                          .ordered(current_language)
   end
 
   def breadcrumb

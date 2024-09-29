@@ -1,19 +1,20 @@
 module Communication::Extranet::WithLegal
   extend ActiveSupport::Concern
 
-  included do
-    include ActionView::Helpers::SanitizeHelper
+  include ActionView::Helpers::SanitizeHelper
+
+  def has_terms_in?(language)
+    l10n = localization_for(language)
+    l10n.present? && strip_tags(l10n.terms).to_s.strip.present?
   end
 
-  def has_terms?
-    strip_tags(terms).to_s.strip.present?
+  def has_cookies_policy_in?(language)
+    l10n = localization_for(language)
+    l10n.present? && strip_tags(l10n.cookies_policy).to_s.strip.present?
   end
 
-  def has_cookies_policy?
-    strip_tags(cookies_policy).to_s.strip.present?
-  end
-
-  def has_privacy_policy?
-    strip_tags(privacy_policy).to_s.strip.present?
+  def has_privacy_policy_in?(language)
+    l10n = localization_for(language)
+    l10n.present? && strip_tags(l10n.privacy_policy).to_s.strip.present?
   end
 end

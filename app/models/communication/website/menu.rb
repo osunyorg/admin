@@ -29,21 +29,45 @@
 #
 class Communication::Website::Menu < ApplicationRecord
   IDENTIFIER_MAX_LENGTH = 100
+  DEFAULT_MENUS_IDENTIFIERS = ['primary', 'legal', 'social'].freeze
 
   include AsDirectObject
   include Initials
   include Sanitizable
-  include Translatable
   include WithAutomatism
+  include WithGitFiles
   include WithUniversity
 
+  belongs_to :language
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy
+
+  # TODO L10N : Deprecated
+  belongs_to  :original,
+              class_name: "Communication::Website::Menu",
+              optional: true
+  has_many    :translations,
+              class_name: "Communication::Website::Menu",
+              foreign_key: :original_id,
+              dependent: :destroy
+  # /Deprecated
 
   validates :title, :identifier, presence: true
   validates :identifier,  length: { maximum: IDENTIFIER_MAX_LENGTH },
                           uniqueness: { scope: [:communication_website_id, :language_id] }
 
-  scope :ordered, -> { order(created_at: :asc) }
+  after_create :sync_in_all_website_languages
+
+  scope :ordered, -> (language = nil) { order(created_at: :asc) }
+  scope :for_identifier, -> (identifier) { where(identifier: identifier) }
+  scope :for_language, -> (language) { where(language_id: language.id) }
+  scope :for_language_id, -> (language_id) { where(language_id: language_id) }
+  scope :in_languages, -> (language_ids) { where(language_id: language_ids) }
+
+  def self.menu_title_from_locales(identifier, language)
+    key = "communication.website.menus.default_title.#{identifier}"
+    locale = language.iso_code
+    I18n.exists?(key, locale) ? I18n.t(key, locale: locale) : ''
+  end
 
   def to_s
     "#{title}"
@@ -57,7 +81,9 @@ class Communication::Website::Menu < ApplicationRecord
     "admin/communication/websites/menus/static"
   end
 
-  def translate_additional_data!(translation)
+  # TODO L10N : remove
+  # Override from Translatable
+  def translate_relations!(translation)
     items.root.ordered.each { |item| translate_menu_item!(item, translation) }
   end
 
@@ -66,9 +92,6 @@ class Communication::Website::Menu < ApplicationRecord
     item_translation.menu = menu_translation
     item_translation.parent = parent_translation
 
-    # TODO : I18n
-    # For now, only pages, posts, categories are handled.
-    # We need to translate programs, diplomas, volumes and papers
     set_item_translation_attributes(item_translation, item, menu_translation)
 
     # If no translation and no children to translate, translation won't be save, as about is nil and kind requires one.
@@ -86,4 +109,21 @@ class Communication::Website::Menu < ApplicationRecord
     # If no target translation found, convert to a blank menu item if item has children.
     item_translation.kind = 'blank' if item_translation.about.nil? && item.children.any?
   end
+  # END TODO L10N
+
+
+
+  private
+
+  def sync_in_all_website_languages
+    # Default menus are handled in Communication::Website::WithMenus
+    return if DEFAULT_MENUS_IDENTIFIERS.include?(identifier)
+    website.languages.where.not(id: language_id).each do |new_language|
+      new_menu = self.dup
+      new_menu.language = new_language
+      new_menu.save
+    end
+  end
+
+
 end

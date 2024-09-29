@@ -1,4 +1,4 @@
-<% content_for :title, @role %>
+<% content_for :title, @l10n %>
 
 <% if @involvements.any? %>
   <div class="table-responsive">
@@ -19,9 +19,9 @@
               <td><i class="<%= Icon::DRAG %> handle"></i></td>
             <% end %>
             <td class="ps-0">
-              <%= link_to_if  can?(:read, involvement.person),
-                              involvement.person,
-                              [:admin, involvement.person] %>
+              <%= osuny_link_localized_if can?(:read, involvement.person),
+                                          involvement.person,
+                                          [:admin, involvement.person] %>
             </td>
             <td class="text-end pe-0">
               <%= link_to t('remove'),

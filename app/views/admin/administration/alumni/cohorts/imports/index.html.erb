@@ -1,0 +1,18 @@
+<% content_for :title, t('university.alumni.cohorts.title') %>
+
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @imports.total_count %>
+    <%= Import.model_name.human(count: @imports.total_count).downcase %>
+  </p>
+  <%= render 'admin/imports/filters', current_path: admin_administration_alumni_cohorts_imports_path %>
+</div>
+
+<%= render 'admin/imports/list', imports: @imports, path_pattern: 'admin_administration_alumni_cohorts_import_path' %>
+
+<% content_for :action_bar_right do %>
+  <%= link_to_if  can?(:create, University::Person::Alumnus),
+                  t('create'),
+                  new_admin_administration_alumni_cohorts_import_path,
+                  class: button_classes %>
+<% end %>

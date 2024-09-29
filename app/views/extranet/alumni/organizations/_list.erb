@@ -1,8 +1,11 @@
-<% @organizations.each do |organization| %>
+<% organizations.each do |organization| %>
+  <%
+  l10n = organization.best_localization_for(current_language)
+  %>
   <div class="organization">
-    <p class="mb-0"><%= link_to organization, [:alumni, organization] %></p>
-    <% if organization.url %>
-      <p class="mb-0 mt-n1"><small><%= link_to organization.url, organization.url %></small></p>
+    <p class="mb-0"><%= link_to l10n, [:alumni, organization] %></p>
+    <% if l10n.url %>
+      <p class="mb-0 mt-n1"><small><%= link_to l10n.url, l10n.url %></small></p>
     <% end %>
   </div>
 <% end %>

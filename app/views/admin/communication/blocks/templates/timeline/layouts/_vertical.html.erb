@@ -1,0 +1,14 @@
+<div class="block-content">
+  <%= render 'admin/communication/blocks/partials/top', block: block %>
+  <div class="timeline-events">
+    <% block.template.elements.each do |element| %>
+      <article class="timeline-event">
+        <h<%= block.heading_rank_children %> class="title">
+          <%= block_component_show block, :title, template: element %>
+        </h<%= block.heading_rank_children %>>
+        <%# TODO: gérer les sauts de ligne %>
+        <p><%= element.text %></p>
+      </article>
+    <% end %>
+  </div>
+</div>

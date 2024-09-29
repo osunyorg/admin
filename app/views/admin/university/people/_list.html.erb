@@ -2,13 +2,15 @@
   <% people.each do |person| %>
     <div class="col-6 col-lg-3 col-xxl-2">
       <div class="card mb-0">
-        <%= osuny_thumbnail person, 
-                            large: true %>
+        <%= osuny_thumbnail_localized person, large: true %>
         <div class="card-body">
-          <p class="mb-0"><%= link_to person,
+          <p class="mb-1">
+            <%= osuny_published_localized person %>
+            <%= osuny_link_localized  person,
                                       admin_university_person_path(person),
-                                      class: 'text-black stretched-link'  %></p>
-          <p class="small text-muted mb-0"><%= sanitize person.summary %></p>
+                                      classes: 'stretched-link'  %>
+          </p>
+          <p class="small text-muted mb-0"><%= sanitize person.localization_for(current_language)&.summary.to_s %></p>
         </div>
       </div>
     </div>

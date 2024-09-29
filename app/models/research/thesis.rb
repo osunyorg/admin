@@ -30,6 +30,9 @@
 #  fk_rails_b3380066dc  (research_laboratory_id => research_laboratories.id)
 #
 class Research::Thesis < ApplicationRecord
+  include Filterable
+  include Localizable
+  include LocalizableOrderByTitleScope
   include Sanitizable
   include WithUniversity
 
@@ -40,15 +43,14 @@ class Research::Thesis < ApplicationRecord
   belongs_to  :director, 
               class_name: 'University::Person'
 
-  scope :ordered, -> { order(:title) }
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(research_theses.abstract) ILIKE unaccent(:term) OR
-      unaccent(research_theses.title) ILIKE unaccent(:term) 
-    ", term: "%#{sanitize_sql_like(term)}%")
-  }
+  validates :laboratory, :author, :director, presence: true
 
-  def to_s
-    "#{title}"
-  end
+  scope :for_search_term, -> (term, language = nil) {
+    joins(:localizations)
+      .where(research_thesis_localizations: { language_id: language.id })
+      .where("
+        unaccent(research_thesis_localizations.abstract) ILIKE unaccent(:term) OR
+        unaccent(research_thesis_localizations.title) ILIKE unaccent(:term) 
+      ", term: "%#{sanitize_sql_like(term)}%")
+  }
 end

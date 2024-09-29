@@ -1,15 +1,15 @@
 <% content_for :title, Communication::Website::Agenda::Event.model_name.human(count: 2) %>
 
-<p>
-  <%= @events.total_count %>
-  <%= Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase %>
-</p>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @events.total_count %>
+    <%= Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_communication_website_agenda_events_path, website: @website %>
+</div>
 
-<%= render 'filters', current_path: admin_communication_website_agenda_events_path, filters: @filters %>
 <%= render 'admin/communication/websites/agenda/events/list', events: @events %>
 <%= paginate @events %>
-
-<%= render 'admin/communication/websites/language_switcher' %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Agenda::Event %>

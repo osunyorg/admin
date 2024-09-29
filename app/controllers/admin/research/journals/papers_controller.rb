@@ -1,27 +1,18 @@
 class Admin::Research::Journals::PapersController < Admin::Research::Journals::ApplicationController
   load_and_authorize_resource class: Research::Journal::Paper, through: :journal
 
+  include Admin::HasStaticAction
+  include Admin::Localizable
   include Admin::Reorderable
 
   def index
-    @papers = @papers.for_language_id(@journal.language_id)
-                     .ordered
+    @papers = @papers.ordered(current_language)
                      .page(params[:page])
     breadcrumb
   end
 
   def show
     breadcrumb
-  end
-
-  def static
-    @about = @paper
-    @website = @journal.websites.first
-    if @website.nil?
-      render plain: "Pas de site Web lié au journal"
-    else
-      render_as_plain_text
-    end
   end
 
   def new
@@ -36,8 +27,6 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
   def create
     @paper.assign_attributes(
       journal: @journal,
-      university: current_university,
-      language_id: @journal.language_id,
       updated_by: current_user
     )
     if @paper.save
@@ -80,9 +69,13 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
   def paper_params
     params.require(:research_journal_paper)
           .permit(
-            :title, :slug, :text, :published, :published_at, :received_at, :accepted_at,
-            :summary, :abstract, :meta_description, :doi, :authors_list,
-            :pdf, :bibliography, :keywords, :research_journal_volume_id, :kind_id, person_ids: [])
+            :received_at, :accepted_at,
+            :doi, :research_journal_volume_id, :kind_id, person_ids: [],
+            localizations_attributes: [
+              :id, :language_id,
+              :title, :slug, :text, :published, :published_at, :summary, :abstract, 
+              :meta_description, :authors_list, :pdf, :pdf_delete, :bibliography, :keywords, 
+            ])
           .merge(university_id: current_university.id)
   end
 end

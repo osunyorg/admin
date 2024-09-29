@@ -20,7 +20,7 @@
 #  zipcode               :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  language_id           :uuid             not null, indexed
+#  language_id           :uuid             indexed
 #  original_id           :uuid             indexed
 #  university_id         :uuid             not null, indexed
 #
@@ -38,18 +38,22 @@
 #
 class Administration::Location < ApplicationRecord
   include AsIndirectObject
-  include Contentful
-  include Permalinkable
+  include Contentful # TODO L10N : To remove
   include Sanitizable
-  include Sluggable
-  include Translatable
+  include Localizable
+  include LocalizableOrderByNameScope
   include WebsitesLinkable
-  include WithBlobs
+  include WithBlobs # TODO L10N : To remove
   include WithCountry
-  include WithFeaturedImage
-  include WithGitFiles
+  include WithFeaturedImage # TODO L10N : To remove
   include WithGeolocation
   include WithUniversity
+
+  # TODO L10N : remove after migrations
+  has_many  :permalinks,
+            class_name: "Communication::Website::Permalink",
+            as: :about,
+            dependent: :destroy
 
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',
@@ -67,21 +71,10 @@ class Administration::Location < ApplicationRecord
                           source: :diploma
                           alias_method :education_diplomas, :diplomas
 
-  scope :ordered, -> { order(:name) }
-
-  validates :name, :address, :city, :zipcode, :country, presence: true
-
-  def to_s
-    "#{name}"
-  end
-
-  def git_path(website)
-    "#{git_path_content_prefix(website)}locations/#{slug}/_index.html" if for_website?(website)
-  end
+  validates :address, :city, :zipcode, :country, presence: true
 
   def dependencies
     active_storage_blobs +
-    contents_dependencies +
     programs +
     schools
   end

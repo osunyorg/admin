@@ -9,23 +9,26 @@
       </tr>
     </thead>
     <tbody>
-      <% programs.each do |program| %>
+      <% 
+      programs.each do |program| 
+        l10n = program.localization_for(current_language)
+        %>
         <tr>
           <td>
             <% if program.ancestors.any? %>
               <small>
                 <% program.ancestors.each do |program| %>
-                  <%= program %> /
+                  <%= program.to_s_in(current_language) %> /
                 <% end %>
               </small><br>
             <% end %>
-            <%= link_to program, [:admin, program] %>
+            <%= osuny_link_localized program, [:admin, program] %>
           </td>
           <% checks.each do |check| %>
             <%
-            method = program.respond_to?("best_#{check}") ? "best_#{check}"
-                                                          : "#{check}"
-            value = program.public_send(method)
+            method = l10n.respond_to?("best_#{check}")  ? "best_#{check}"
+                                                        : "#{check}"
+            value = l10n.public_send(method)
             valid = value.present?
             %>
             <td>

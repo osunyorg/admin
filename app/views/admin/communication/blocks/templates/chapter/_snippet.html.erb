@@ -1,6 +1,14 @@
 <% if block.template.text.present? %>
-  <div><%= block_component_snippet block, :text %></div>
+  <%= block_component_snippet block, :text %>
 <% end %>
 <% if block.template.notes.present? %>
   <div class="small"><%= block_component_snippet block, :notes %></div>
+<% end %>
+
+<% if block.template.image.present? %>
+  <div class="row">
+    <div class="col-6">
+      <%= block_component_snippet block, :image %>
+    </div>
+  </div>
 <% end %>

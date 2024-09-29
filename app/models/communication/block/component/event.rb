@@ -2,17 +2,14 @@ class Communication::Block::Component::Event < Communication::Block::Component::
 
   def event
     return unless website
-    website.events.published.find_by(id: data)
+    website.events
+           .tmp_original # TODO L10N: to remove
+           .published_now_in(template.block.language)
+           .find_by(id: data)
   end
 
   def dependencies
     [event]
-  end
-
-  def translate!
-    return unless website && data.present?
-    source_event = website.pages.find_by(id: data)
-    @data = source_event.find_or_translate!(template.language).id if source_event.present?
   end
 
 end

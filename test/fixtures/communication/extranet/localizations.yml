@@ -1,0 +1,5 @@
+default_extranet_fr:
+  name: Extranet de test
+  about: default_extranet
+  language: fr
+  university: default_university

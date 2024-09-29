@@ -1,31 +1,33 @@
 module Backlinkable
   extend ActiveSupport::Concern
 
+  # TODO: Optimize this method
   def backlinks_pages(website)
+    special_page_ids = website.pages.where.not(type: nil).pluck(:id)
     backlinks(
-      "Communication::Website::Page",
+      "Communication::Website::Page::Localization",
       website
     )
-    .reject { |page| page.is_special_page? }
+    .reject { |page_l10n| special_page_ids.include?(page_l10n.about_id) }
   end
 
   def backlinks_posts(website)
     backlinks(
-      "Communication::Website::Post",
+      "Communication::Website::Post::Localization",
       website
     )
   end
 
   def backlinks_agenda_events(website)
     backlinks(
-      "Communication::Website::Agenda::Event",
+      "Communication::Website::Agenda::Event::Localization",
       website
     )
   end
 
   def backlinks_portfolio_projects(website)
     backlinks(
-      "Communication::Website::Portfolio::Project",
+      "Communication::Website::Portfolio::Project::Localization",
       website
     )
   end
@@ -41,15 +43,19 @@ module Backlinkable
 
   def backlink_in_block?(block, kind, website)
     block.about_type == kind && # Correct kind
-    block.about_id.in?(published_backlinks_object_ids(website, kind)) && # About published
-    self.id.in?(block.template.children_ids) # Mentioning self
+    block.about_id.in?(published_backlinks_localization_ids(website, kind)) && # About published
+    self.about_id.in?(block.template.children_ids) # Mentioning self
   end
 
-  def published_backlinks_object_ids(website, kind)
+  def published_backlinks_localization_ids(website, kind)
+    # Looking for published localization IDs within the website, for current language
     # Memoize to avoid multiple queries for the same website and kind
-    @published_backlinks_object_ids ||= {}
-    @published_backlinks_object_ids[website.id] ||= {}
-    @published_backlinks_object_ids[website.id][kind] ||= kind.safe_constantize.published.where(communication_website_id: website.id).pluck(:id)
+    @published_backlinks_localization_ids ||= {}
+    @published_backlinks_localization_ids[website.id] ||= {}
+    @published_backlinks_localization_ids[website.id][kind] ||= kind.safe_constantize
+                                                              .published
+                                                              .where(communication_website_id: website.id, language_id: language_id)
+                                                              .pluck(:id)
   end
 
   def published_backlinks_blocks(website)

@@ -1,7 +1,15 @@
 <% content_for :title, Research::Thesis.model_name.human(count: 2) %>
 
-<%= render 'filters', current_path: admin_research_theses_path, filters: @filters if @filters.any?  %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @theses.total_count %>
+    <%= Research::Laboratory.model_name.human(count: @theses.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_research_theses_path %>
+</div>
+
 <%= render 'admin/research/theses/list', theses: @theses %>
+<%= paginate @theses %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Research::Thesis %>

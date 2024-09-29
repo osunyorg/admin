@@ -1,15 +1,32 @@
 <%= simple_form_for [:admin, category] do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="row">
-    <div class="col-xl-8">
-      <%= osuny_panel t('content') do %>
-        <%= f.input :name %>
-      <% end %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
+    <div class="row">
+      <div class="col-md-8">
+        <%= osuny_panel t('content') do %>
+          <%= lf.input :name %>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <%= osuny_panel t('metadata') do %>
+          <%= render  "admin/application/slug/form",
+                      f: lf,
+                      source: '#university_person_category_localizations_attributes_0_name' %>
+          <%= f.association :parent,
+                            collection: osuny_collection_tree(
+                              @categories.root,
+                              except: category,
+                              localized: true
+                            ) %>
+        <% end %>
+      </div>
     </div>
-  </div>
-  <% content_for :action_bar_right do %>
-    <%= submit f %>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
   <% end %>
 <% end %>

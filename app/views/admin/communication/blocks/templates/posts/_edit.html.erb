@@ -4,12 +4,12 @@
   </div>
   <div class="col-lg-6">
     <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-    <%= block_component_edit block, :option_image, label: Communication::Website::Post.human_attribute_name(:featured_image) %>
+    <%= block_component_edit block, :option_image, label: Communication::Website::Post::Localization.human_attribute_name(:featured_image) %>
     <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
     <%= block_component_edit block, :option_author, label: Communication::Website::Post.human_attribute_name(:author) %>
-    <%= block_component_edit block, :option_date, label: Communication::Website::Post.human_attribute_name(:date) %>
+    <%= block_component_edit block, :option_date, label: Communication::Website::Post::Localization.human_attribute_name(:date) %>
     <%= block_component_edit block, :option_categories, label: Communication::Website::Post.human_attribute_name(:categories) %>
-    <%= block_component_edit block, :option_reading_time, label: Communication::Website::Post.human_attribute_name(:reading_time) %>
+    <%= block_component_edit block, :option_reading_time, label: Communication::Website::Post::Localization.human_attribute_name(:reading_time) %>
   </div>
 </div>
 <div v-if="data.mode !== 'categories'">
@@ -27,7 +27,7 @@
   <%= block_component_add_element block, t('.add_post') %>
   <draggable :list="data.elements" handle=".dragHandle">
     <div v-for="(element, index) in data.elements" class="d-flex draggable-item">
-      <a class="btn ps-0 dragHandle" title="Drag and drop">
+      <a class="btn ps-0 dragHandle" title="<%= t('admin.communication.block.drag_and_drop') %>">
         <i class="<%= Icon::DRAG %> handle"></i>
       </a>
       <div class="flex-fill">
@@ -35,7 +35,7 @@
       </div>
       <a  class="btn text-danger ms-3"
           v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-          title="Delete">
+          title="<%= t('delete') %>">
           <i class="<%= Icon::DELETE %>"></i>
       </a>
     </div>

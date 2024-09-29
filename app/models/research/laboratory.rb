@@ -12,22 +12,30 @@
 #  zipcode            :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  language_id        :uuid             indexed
+#  original_id        :uuid             indexed
 #  university_id      :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_research_laboratories_on_language_id    (language_id)
+#  index_research_laboratories_on_original_id    (original_id)
 #  index_research_laboratories_on_university_id  (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_0bf891c2d7  (original_id => research_laboratories.id)
+#  fk_rails_2dcf393603  (language_id => languages.id)
 #  fk_rails_f61d27545f  (university_id => universities.id)
 #
 class Research::Laboratory < ApplicationRecord
   include AsIndirectObject
+  include Filterable
+  include Localizable
+  include LocalizableOrderByNameScope
   include Sanitizable
   include WebsitesLinkable
   include WithCountry
-  include WithGitFiles
 
   belongs_to  :university
   has_many    :communication_websites,
@@ -44,34 +52,28 @@ class Research::Laboratory < ApplicationRecord
                           foreign_key: :research_laboratory_id,
                           association_foreign_key: :university_person_id
 
-  validates :name, :address, :city, :zipcode, :country, presence: true
+  validates :address, :city, :zipcode, :country, presence: true
 
-  scope :ordered, -> { order(:name) }
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.city) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.country) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.name) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.zipcode) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+  scope :for_search_term, -> (term, language = nil) {
+    joins(:localizations)
+      .where(research_laboratory_localizations: { language_id: language.id })
+      .where("
+        unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
+        unaccent(research_laboratories.city) ILIKE unaccent(:term) OR
+        unaccent(research_laboratories.country) ILIKE unaccent(:term) OR
+        unaccent(research_laboratory_localizations.name) ILIKE unaccent(:term) OR
+        unaccent(research_laboratories.zipcode) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
-
-  def to_s
-    "#{name}"
-  end
 
   def full_address
     [address, zipcode, city].compact.join ' '
   end
 
-  def git_path(website)
-    "data/laboratory.yml"
-  end
-
   def dependencies
+    localizations +
     axes +
-    researchers.map(&:researcher)
+    researchers.map(&:researcher_facets)
   end
 
   def has_administrators?

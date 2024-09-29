@@ -3,19 +3,19 @@ module Communication::Website::Permalink::WithMapping
 
   included do
     MAPPING = {
-      "Communication::Website::Page" => Communication::Website::Permalink::Page,
-      "Communication::Website::Post" => Communication::Website::Permalink::Post,
-      "Communication::Website::Post::Category" => Communication::Website::Permalink::Category,
+      # TODO L10N : Remove after migration
+      "Administration::Location" => Communication::Website::Permalink::Location,
       "Communication::Website::Agenda::Event" => Communication::Website::Permalink::Agenda::Event,
       "Communication::Website::Agenda::Category" => Communication::Website::Permalink::Agenda::Category,
+      "Communication::Website::Page" => Communication::Website::Permalink::Page,
       "Communication::Website::Portfolio::Project" => Communication::Website::Permalink::Portfolio::Project,
       "Communication::Website::Portfolio::Category" => Communication::Website::Permalink::Portfolio::Category,
-      "Administration::Location" => Communication::Website::Permalink::Location,
+      "Communication::Website::Post" => Communication::Website::Permalink::Post,
+      "Communication::Website::Post::Category" => Communication::Website::Permalink::Category,
       "Education::Diploma" => Communication::Website::Permalink::Diploma,
       "Education::Program" => Communication::Website::Permalink::Program,
       "Research::Journal::Paper" => Communication::Website::Permalink::Paper,
       "Research::Journal::Volume" => Communication::Website::Permalink::Volume,
-      "Research::Publication" => Communication::Website::Permalink::Publication,
       "University::Organization" => Communication::Website::Permalink::Organization,
       "University::Organization::Category" => Communication::Website::Permalink::Organization::Category,
       "University::Person" => Communication::Website::Permalink::Person,
@@ -23,9 +23,32 @@ module Communication::Website::Permalink::WithMapping
       "University::Person::Administrator" => Communication::Website::Permalink::Administrator,
       "University::Person::Author" => Communication::Website::Permalink::Author,
       "University::Person::Researcher" => Communication::Website::Permalink::Researcher,
-      "University::Person::Teacher" => Communication::Website::Permalink::Teacher
+      "University::Person::Teacher" => Communication::Website::Permalink::Teacher,
+      # END TODO L10N
+
+      "Administration::Location::Localization" => Communication::Website::Permalink::Location,
+      "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
+      "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
+      "Communication::Website::Page::Localization" => Communication::Website::Permalink::Page,
+      "Communication::Website::Portfolio::Project::Localization" => Communication::Website::Permalink::Portfolio::Project,
+      "Communication::Website::Portfolio::Category::Localization" => Communication::Website::Permalink::Portfolio::Category,
+      "Communication::Website::Post::Localization" => Communication::Website::Permalink::Post,
+      "Communication::Website::Post::Category::Localization" => Communication::Website::Permalink::Category,
+      "Education::Diploma::Localization" => Communication::Website::Permalink::Diploma,
+      "Education::Program::Localization" => Communication::Website::Permalink::Program,
+      "Research::Journal::Paper::Localization" => Communication::Website::Permalink::Paper,
+      "Research::Journal::Volume::Localization" => Communication::Website::Permalink::Volume,
+      "Research::Publication" => Communication::Website::Permalink::Publication,
+      "University::Organization::Localization" => Communication::Website::Permalink::Organization,
+      "University::Organization::Category::Localization" => Communication::Website::Permalink::Organization::Category,
+      "University::Person::Localization" => Communication::Website::Permalink::Person,
+      "University::Person::Category::Localization" => Communication::Website::Permalink::Person::Category,
+      "University::Person::Localization::Administrator" => Communication::Website::Permalink::Administrator,
+      "University::Person::Localization::Author" => Communication::Website::Permalink::Author,
+      "University::Person::Localization::Researcher" => Communication::Website::Permalink::Researcher,
+      "University::Person::Localization::Teacher" => Communication::Website::Permalink::Teacher
     }
-  
+
     def self.for_object(object, website)
       lookup_key = self.lookup_key_for_object(object)
       permalink_class = MAPPING[lookup_key]

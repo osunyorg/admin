@@ -31,32 +31,39 @@ en:
         school: School
         year: Year
       education/diploma:
-        duration: Duration
         ects: ECTS
         level: Level
-        name: Name
         programs: Programs
+      education/diploma/localization:
+        duration: Duration
+        name: Name
         short_name: Short name
         slug: Slug
       education/program:
-        accessibility: Accessibilité
         apprenticeship: Apprenticeship
         bodyclass: Specific CSS class
         capacity: Capacity
-        contacts: Contacts
-        content: Program's content
         continuing: Continuing training
         diploma: Diploma
+        ects: Crédits ECTS
+        initial: Initial training
+        locations: Campus
+        qualiopi_certified: Qualiopi certified program
+        roles: Roles
+        schools: Schools with this formation
+        teachers: Teachers
+        team: Team
+      education/program/localization:
+        accessibility: Accessibilité
+        contacts: Contacts
+        content: Program's content
         duration: Duration
         downloadable_summary: Downloadable summary
-        ects: Crédits ECTS
         evaluation: Modalités d’évaluation
         featured_image: Featured image
         featured_image_alt: Alt text
-        initial: Initial training
         is_published: Published
         is_draft: Draft
-        locations: Campus
         logo: Program logo
         main_information: Main information
         name: Name
@@ -71,17 +78,12 @@ en:
         pricing_continuing: Costs for continuous training
         pricing_apprenticeship: Costs for apprenticeship
         published: Published?
-        qualiopi_certified: Qualiopi certified program
         qualiopi_text: Certification details
         registration: Modalités et délais d’accès
         registration_url: Registration link (URL)
         results: Results' indicator
-        roles: Roles
-        schools: Schools with this formation
         short_name: Short name
         slug: Slug
-        teachers: Teachers
-        team: Team
         url: Website
       education/school:
         address: Address
@@ -89,25 +91,29 @@ en:
         city: City
         country: Country
         locations: Campus
-        name: Name
         phone: Phone
         programs: Programs provided
         roles: Team Members
         url: Website
-        websites: Linked websites
         zipcode: Zipcode
+      education/school/localization:
+        name: Name
+        websites: Linked websites
   admin:
     education:
       programs:
-        view_as_list: Listview
-        view_as_tree: Treeview
+        categories:
+            root_name: Programs
         publication: Publication
+        teacher:
+          no_teaching: No teaching
+          show_person_html: This page only shows teaching assignments.<br>If you wish to view or modify the person's details, click on the link below.
         tree:
           title: Programs treeview
+        view_as_list: Listview
+        view_as_tree: Treeview
   education:
     description:
-      text: Education is the set of processes and procedures that enable every human child to gradually gain access to culture, access to culture being what distinguishes man from animals.
-      source: Olivier Reboul, La philosophie de l'éducation, 2018
       parts:
         diploma:
           description: Presentation of diplomas and their characteristics
@@ -117,6 +123,8 @@ en:
           description: Presentation of the teachers, with their biographies and their teaching in the various courses
         school:
           description: Presentation of the schools, their contact details, courses, teams and administrative information
+      source: Olivier Reboul, La philosophie de l'éducation, 2018
+      text_html: Education is the set of processes and procedures that enable every human child to gradually gain access to culture, access to culture being what distinguishes man from animals.
     manage_programs: Manage programs
     manage_roles: Manage roles
     manage_teachers: Manage teachers

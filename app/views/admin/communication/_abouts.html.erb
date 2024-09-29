@@ -9,7 +9,7 @@
       data-conditional-source="about_type"
       data-conditional-value="Education::School">
   <%= f.input :about_id,
-              collection: current_university.education_schools.ordered,
+              collection: current_university.education_schools.ordered(current_language),
               label: Education::School.model_name.human,
               include_blank: false %>
 </div>

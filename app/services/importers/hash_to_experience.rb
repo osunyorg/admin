@@ -1,7 +1,8 @@
 module Importers
   class HashToExperience
-    def initialize(person, hash)
+    def initialize(person, language, hash)
       @person = person
+      @language = language
       @university = person.university
       @hash = hash
       @error = nil
@@ -34,13 +35,19 @@ module Importers
 
     def experience
       @experience ||= begin
-        obj = @person.experiences
-                         .where(university: @university,
-                                organization: organization,
-                                from_year: @experience_from)
-                         .first_or_create
-        obj.description = @experience_job
+        obj =  @person.experiences
+                      .where(university: @university,
+                            organization: organization,
+                            from_year: @experience_from)
+                      .first_or_initialize
+        localization_id = obj.localizations.find_by(language_id: @language.id)&.id
         obj.to_year = @experience_to
+        obj.localizations_attributes = [
+          {
+            id: localization_id, language_id: @language.id,
+            description: @experience_job
+          }
+        ]
         obj.save
         obj
       end
@@ -50,26 +57,53 @@ module Importers
       @organization ||= begin
         # Search by SIREN+NIC, then SIREN, then name, or create it with everything
         if @company_siren.present? && @company_nic.present?
-          obj = @university.organizations
-                            .for_language_id(@university.default_language_id)
-                            .find_by siren: @company_siren,
-                                    nic: @company_nic
+          obj = find_organization_with_siren_and_nic
         elsif @company_siren.present?
-          obj = @university.organizations
-                            .for_language_id(@university.default_language_id)
-                            .find_by siren: @company_siren
+          obj = find_organization_with_siren
         end
-        obj ||= @university.organizations
-                            .for_language_id(@university.default_language_id)
-                            .find_by name: @company_name
-        obj ||= @university.organizations
-                            .for_language_id(@university.default_language_id)
-                            .where( name: @company_name,
-                                    siren: @company_siren,
-                                    nic: @company_nic)
-                            .first_or_create
+        obj ||= find_organization_with_name_in_current_language
+        obj ||= find_organization_with_name_in_another_language
+        obj ||= create_organization
         obj
       end
+    end
+
+    def find_organization_with_siren_and_nic
+      @university.organizations.tmp_original.find_by(siren: @company_siren, nic: @company_nic)
+    end
+
+    def find_organization_with_siren
+      @university.organizations.tmp_original.find_by(siren: @company_siren)
+    end
+
+    def find_organization_with_name_in_current_language
+      @university.organizations.tmp_original
+        .joins(:localizations)
+        .where(university_organization_localizations: {
+          language_id: @language.id, name: @company_name
+        })
+        .first
+    end
+
+    def find_organization_with_name_in_another_language
+      @university.organizations.tmp_original
+        .joins(:localizations)
+        .where.not(university_organization_localizations: {
+          language_id: @language.id
+        })
+        .where(university_organization_localizations: {
+          name: @company_name
+        })
+        .first
+    end
+
+    def create_organization
+      @university.organizations.create(
+        siren: @company_siren, nic: @company_nic,
+        localizations_attributes: [
+          { language_id: @language.id, name: @company_name }
+        ]
+      )
     end
   end
 end

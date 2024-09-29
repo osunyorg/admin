@@ -1,0 +1,35 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_alumni_organization,
+                      label: t('filters.attributes.element', element: University::Organization.model_name.human.downcase),
+                      collection: current_university.organizations.tmp_original.ordered(current_language),
+                      multiple: true
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_alumni_program,
+                      label: t('filters.attributes.element', element: Education::Program.model_name.human.downcase),
+                      collection: osuny_collection_tree(current_university.education_programs.tmp_original.root, localized: true),
+                      multiple: true
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_alumni_year,
+                      label: t('filters.attributes.element', element: Education::AcademicYear.model_name.human.downcase),
+                      collection: current_university.academic_years.ordered(current_language),
+                      multiple: true
+                      %>
+
+    <% end %>
+<% end %>
