@@ -13,17 +13,17 @@
               <h<%= block.heading_rank_children %>  itemprop='headline' class='location-title'>
                 <%= link_to_if path, location_l10n, path %>
               </h<%= block.heading_rank_children %>>
-              <% if location.summary.present? %>
+              <% if location_l10n.summary.present? %>
                 <div class="location-description">
                   <p itemprop="description">
-                    <%= location.summary %>
+                    <%= location_l10n.summary %>
                   </p>
                 </div>
               <% end %>
             </div>
             <div class="media">
-              <% if location.featured_image.attached? %>
-                <%= kamifusen_tag location.featured_image %>
+              <% if location_l10n.featured_image.attached? %>
+                <%= kamifusen_tag location_l10n.featured_image %>
               <% end %>
             </div>
           </article>
