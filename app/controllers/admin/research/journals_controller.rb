@@ -6,9 +6,6 @@ class Admin::Research::JournalsController < Admin::Research::Journals::Applicati
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  include Admin::HasStaticAction
-  include Admin::Localizable
-
   def index
     @journals = @journals.filter_by(params[:filters], current_language)
                          .ordered(current_language)

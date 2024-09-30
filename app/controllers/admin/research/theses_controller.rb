@@ -5,8 +5,6 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
 
   include Admin::Localizable
 
-  include Admin::Localizable
-
   def index
     @theses = @theses.filter_by(params[:filters], current_language)
                      .ordered(current_language)

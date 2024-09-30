@@ -6,9 +6,6 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  include Admin::HasStaticAction
-  include Admin::Localizable
-
   def index
     @laboratories = @laboratories.filter_by(params[:filters], current_language)
                                  .ordered(current_language)
