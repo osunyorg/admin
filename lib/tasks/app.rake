@@ -8,6 +8,19 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
+    Communication::Website::Post::Category.find_each do |category|
+      next unless category.featured_image.attached?
+      puts '---'
+      puts category.localizations.first.to_s
+      category.localizations.each do |l10n|
+        puts l10n
+        l10n.featured_image.attach(
+          io: URI.open(category.featured_image.url),
+          filename: category.featured_image.filename.to_s,
+          content_type: category.featured_image.content_type
+        )
+      end
+    end
   end
 
   namespace :websites do
