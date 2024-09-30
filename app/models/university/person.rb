@@ -71,12 +71,6 @@ class University::Person < ApplicationRecord
 
   belongs_to :user, optional: true
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   has_and_belongs_to_many :categories,
                           class_name: 'University::Person::Category',
                           join_table: :university_people_categories

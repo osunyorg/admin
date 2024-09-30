@@ -46,6 +46,7 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
   belongs_to :website,
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
+
   validates :name, presence: true
 
   before_validation :set_communication_website_id, on: :create
@@ -79,6 +80,7 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
   def to_s
     "#{name}"
   end
+
   protected
 
   def slug_unavailable?(slug)
