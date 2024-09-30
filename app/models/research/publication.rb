@@ -59,7 +59,7 @@ class Research::Publication < ApplicationRecord
   scope :for_search_term, -> (term, language = nil) {
     where("
       unaccent(research_publications.abstract) ILIKE unaccent(:term) OR
-      unaccent(research_publications.citation_full) ILIKE unaccent(:term) 
+      unaccent(research_publications.citation_full) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
@@ -117,9 +117,10 @@ class Research::Publication < ApplicationRecord
   def generate_authors_citeproc
     return if hal?
     self.authors_citeproc = researchers.map do |researcher|
+      researcher_l10n = researcher.original_localization
       {
-        "family" => researcher.last_name,
-        "given" => researcher.first_name
+        "family" => researcher_l10n.last_name,
+        "given" => researcher_l10n.first_name
       }
     end
   end

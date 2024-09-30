@@ -4,6 +4,9 @@ default_university:
   sms_sender_name: "unitest"
   default_language: fr
   is_really_a_university: true
+  languages:
+    - fr
+    - en
 
 stale_university:
   name: Université obsolète
@@ -11,3 +14,6 @@ stale_university:
   sms_sender_name: "unistale"
   default_language: fr
   is_really_a_university: false
+  languages:
+    - fr
+    - en

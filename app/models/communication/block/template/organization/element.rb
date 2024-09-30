@@ -18,11 +18,15 @@ class Communication::Block::Template::Organization::Element < Communication::Blo
   end
 
   def best_url
-    organization ? organization.url : url
+    return url unless organization
+    organization_l10n = organization.best_localization_for(block.language)
+    organization_l10n.url
   end
 
   def best_logo_blob
-    organization ? organization.logo&.blob : logo_component.blob
+    return logo_component.blob unless organization
+    organization_l10n = organization.best_localization_for(block.language)
+    organization_l10n.logo&.blob
   end
 
 end

@@ -3,7 +3,6 @@
 # Table name: university_person_experiences
 #
 #  id              :uuid             not null, primary key
-#  description     :text
 #  from_year       :integer
 #  to_year         :integer
 #  created_at      :datetime         not null
@@ -45,12 +44,6 @@ class University::Person::Experience < ApplicationRecord
     .order(from_year: :desc, created_at: :desc)
     .limit(10)
   }
-
-  # FIXME utilisé dans app/views/extranet/experiences/_form.html.erb
-  # Vraiment moche
-  def organization_name
-    organization.original_localization.to_s
-  end
 
   private
 

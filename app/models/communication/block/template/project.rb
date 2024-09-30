@@ -46,7 +46,6 @@ class Communication::Block::Template::Project < Communication::Block::Template::
   def base_projects
     block.about&.website
                 .projects
-                .tmp_original # TODO L10N: to remove
                 .published_now_in(block.language)
   end
 

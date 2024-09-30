@@ -49,7 +49,7 @@ class Research::Journal::Paper::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  has_one_attached :pdf
+  has_one_attached_deletable :pdf
 
   def git_path(website)
     "#{git_path_content_prefix(website)}papers/#{relative_path}.html" if published?

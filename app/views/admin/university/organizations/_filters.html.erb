@@ -12,7 +12,7 @@
                         :select,
                         :for_category,
                         label: t('filters.attributes.category'),
-                        collection: osuny_collection_tree(current_university.organization_categories.tmp_original.root, localized: true),
+                        collection: osuny_collection_tree(current_university.organization_categories.root, localized: true),
                         multiple: true
                         %>
     <% end %>

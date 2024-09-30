@@ -1,0 +1,11 @@
+default_organization_fr:
+  name: Organisation de test
+  about: default_organization
+  language: fr
+  university: default_university
+
+noesya_fr:
+  name: noesya
+  about: noesya
+  language: fr
+  university: default_university

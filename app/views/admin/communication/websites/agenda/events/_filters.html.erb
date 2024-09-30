@@ -11,7 +11,7 @@
                       :select,
                       :for_category,
                       label: t('filters.attributes.element', element: Communication::Website::Agenda::Category.model_name.human.downcase),
-                      collection: osuny_collection_tree(website.agenda_categories.root.tmp_original, localized: true),
+                      collection: osuny_collection_tree(website.agenda_categories.root, localized: true),
                       multiple: true
                       %>
 

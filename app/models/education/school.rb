@@ -8,9 +8,7 @@
 #  country       :string
 #  latitude      :float
 #  longitude     :float
-#  name          :string
 #  phone         :string
-#  url           :string
 #  zipcode       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -37,7 +35,6 @@ class Education::School < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
   include WebsitesLinkable
-  include WithBlobs # TODO L10N : To remove
   include WithCountry
   include WithLocations
   include WithPrograms # must come before WithAlumni and WithTeam
@@ -56,8 +53,6 @@ class Education::School < ApplicationRecord
               class_name: 'Communication::Website',
               as: :about,
               dependent: :nullify
-
-  has_one_attached_deletable :logo # TODO L10N : To remove
 
   validates :address, :city, :zipcode, :country, presence: true
 

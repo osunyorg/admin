@@ -1,8 +1,10 @@
 <%
 # this version has to incremented every time you change something in the file, to invalidate the cache
 version = 2
+# Pas dans le controller parce que ça se fait dans les background jobs, à partir du @about
 organization = @l10n.about
-cache [@about, organization, @website.id, version] do
+cache_key = [organization, @l10n, @website.id, version]
+cache cache_key do
 %>---
 <%= render 'admin/application/static/title', about: @l10n %>
 <%= render 'admin/application/static/permalink', about: @l10n %>
@@ -55,7 +57,7 @@ organizations_categories:
   else
     category_slug = category_l10n.slug
     category_path = category_l10n.current_permalink_in_website(@website)&.path
-    category_name = category.name
+    category_name = category_l10n.name
   end
 %>
   - slug: "<%= category_slug %>"

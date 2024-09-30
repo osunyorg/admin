@@ -40,7 +40,7 @@ linkedin: >-
   <%= prepare_text_for_static @l10n.linkedin %>
 <% end %>
 website: >-
-  <%= prepare_text_for_static person.url %>
+  <%= prepare_text_for_static @l10n.url %>
 contact_details:
 <% if person.address_is_public? %>
 <%= render 'admin/application/static/contact_detail', variable: :address, data: person.address, kind: ContactDetails::Base %>

@@ -155,22 +155,6 @@ module Admin::ApplicationHelper
     collection
   end
 
-  # TODO L10N : should be removed?
-  def collection_tree_for_checkboxes(list, except = nil)
-    collection = collection_tree(list, except)
-    collection.map { |object|
-      [
-        sanitize(object[:label]),
-        object[:id],
-        {
-          data: {
-            parent: object[:parent_id]
-          }
-        }
-      ]
-    }
-  end
-
   def time_zones_for_select
     # Collection items are like ["(GMT+01:00) Paris", "Europe/Paris"]
     # Label specifies the UTC offset

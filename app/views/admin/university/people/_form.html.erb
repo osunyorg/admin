@@ -125,7 +125,7 @@
         <% end if current_university.is_really_a_university? %>
 
         <%= f.association :research_laboratories,
-                          collection: current_university.research_laboratories,
+                          collection: osuny_collection(current_university.research_laboratories, localized: true),
                           as: :check_boxes if person.is_researcher %>
       </div>
       <div class="col-lg-4">
@@ -138,7 +138,7 @@
             <%= f.association :categories,
                               as: :check_boxes,
                               collection: osuny_collection_tree(
-                                @categories.root, 
+                                @categories.root,
                                 localized: true
                               ) %>
           <% end %>

@@ -5,19 +5,21 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   include Admin::HasStaticAction
   include Admin::Localizable
 
+  before_action :load_localization,
+                  :redirect_if_not_localized,
+                  only: [:show, :edit, :update, :static, :publish, :preview, :generate_from_template]
+
   def index
     @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
-    @pages = @website.pages.tmp_original # TODO L10N : To remove
+    @pages = @website.pages
     breadcrumb
   end
 
   def index_list
     @pages = @pages.filter_by(params[:filters], current_language)
-                   .tmp_original # TODO L10N : To remove
                    .ordered_by_title(current_language)
                    .page(params[:page])
-    # @pages = Communication::Website::Page.none.page(params[:page])
     breadcrumb
   end
 
@@ -71,7 +73,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   # TODO L10N : To adjust
   def generate_from_template
-    @page.generate_from_template
+    @page.generate_from_template(@l10n)
     redirect_back(fallback_location: [:admin, @page])
   end
 

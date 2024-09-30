@@ -134,7 +134,6 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
 
   def load_teacher_people
     @teacher_people = current_university.people
-                                        .tmp_original # TODO L10N : To remove.
                                         .teachers
                                         .accessible_by(current_ability)
                                         .ordered(current_language)

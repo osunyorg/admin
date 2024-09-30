@@ -11,7 +11,7 @@
                       :select,
                       :for_category,
                       label: t('filters.attributes.element', element: Communication::Website::Portfolio::Category.model_name.human.downcase),
-                      collection: osuny_collection_tree(website.projects_categories.root.tmp_original, localized: true),
+                      collection: osuny_collection_tree(website.projects_categories.root, localized: true),
                       multiple: true
                       %>
 

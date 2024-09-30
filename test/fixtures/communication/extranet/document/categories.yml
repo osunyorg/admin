@@ -1,9 +1,0 @@
-one:
-  extranet: default_extranet
-  university: default_university
-  name: First category
-
-two:
-  extranet: default_extranet
-  university: default_university
-  name: Second category

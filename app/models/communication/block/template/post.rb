@@ -50,7 +50,6 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   def base_posts
     block.about&.website
                 .posts
-                .tmp_original # TODO L10N : To remove
                 .published_now_in(block.language)
   end
 

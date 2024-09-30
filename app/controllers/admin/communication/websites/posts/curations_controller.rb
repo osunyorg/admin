@@ -6,12 +6,13 @@ class Admin::Communication::Websites::Posts::CurationsController < Admin::Commun
   def create
     @curator = Importers::Curator.new @website, current_user, current_language, curation_params[:url]
     if @curator.valid?
-      redirect_to [:admin, @curator.post],
-                  notice: t('admin.successfully_created_html', model: @curator.post.to_s)
+      @post =  @curator.post
+      redirect_to [:admin, @post],
+                  notice: t('admin.successfully_created_html', model: @post.to_s_in(current_language))
     else
       breadcrumb
       @url = curation_params[:url]
-      flash[:alert] = t('curation.error')
+      flash[:alert] = @curator.already_imported? ? t('curation.already_imported') : t('curation.error')
       render :new, status: :unprocessable_entity
     end
   end

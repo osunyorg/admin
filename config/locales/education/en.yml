@@ -4,9 +4,6 @@ en:
       education: Education
   activerecord:
     models:
-      university/person/teacher:
-        one: Teacher
-        other: Teachers
       education/academic_year:
         one: Year
         other: Years
@@ -25,6 +22,9 @@ en:
       education/school:
         one: School
         other: Schools
+      university/person/localization/teacher:
+        one: Teacher
+        other: Teachers
     attributes:
       education/academic_year:
         year: Year

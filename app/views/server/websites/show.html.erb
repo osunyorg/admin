@@ -52,7 +52,7 @@
   <div class="col-xl-6">
     <div class="card">
       <div class="card-body">
-        <%= t('server_admin.websites.recursive_dependencies_count', count: @website.recursive_dependencies.count) %><br>
+        <%= t('server_admin.websites.recursive_dependencies_count', count: @website.recursive_dependencies(follow_direct: true).count) %><br>
         <%= link_to t('server_admin.websites.details'), admin_communication_website_dependencies_url(@website, lang: @website.default_language, host: @website.university.url), target: :_blank %>
       </div>
     </div>

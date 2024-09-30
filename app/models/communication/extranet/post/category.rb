@@ -3,8 +3,6 @@
 # Table name: communication_extranet_post_categories
 #
 #  id            :uuid             not null, primary key
-#  name          :string
-#  slug          :string           indexed
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  extranet_id   :uuid             not null, indexed
@@ -13,7 +11,6 @@
 # Indexes
 #
 #  index_communication_extranet_post_categories_on_extranet_id    (extranet_id)
-#  index_communication_extranet_post_categories_on_slug           (slug)
 #  index_communication_extranet_post_categories_on_university_id  (university_id)
 #
 # Foreign Keys
@@ -22,12 +19,10 @@
 #  fk_rails_e53c2a25fc  (extranet_id => communication_extranets.id)
 #
 class Communication::Extranet::Post::Category < ApplicationRecord
-  include Contentful # TODO L10N : To remove
   include Localizable
   include LocalizableOrderByNameScope
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   has_many :posts
-
 end

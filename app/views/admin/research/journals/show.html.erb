@@ -5,7 +5,7 @@
     <%= Communication::Website.model_name.human(count: 2) %>
     <i class="<%= Icon::ARROW_RIGHT %> small"></i>
     <% @journal.websites.each do |website| %>
-      <%= link_to website, [:admin, website] %><br>
+      <%= osuny_link_localized_if can?(:read, website), website, [:admin, website] %><br>
     <% end %>
   <% end %>
   <% if @l10n.issn.present? %>

@@ -22,8 +22,7 @@ module Communication::Website::WithSpecialPages
   protected
 
   def find_special_page(type)
-    pages.tmp_original # TODO L10N : To remove
-         .where(type: type.to_s)
+    pages.where(type: type.to_s)
          .first
   end
 

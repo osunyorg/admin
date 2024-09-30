@@ -24,8 +24,7 @@ module Communication::Website::Menu::WithAutomatism
   end
 
   def create_items
-    # TODO L10N : remove tmp_original
-    home = website.pages.tmp_original.root.first
+    home = website.pages.root.first
     create_items_for_children_of(home) if home
   end
 

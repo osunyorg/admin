@@ -85,7 +85,6 @@ class Admin::Education::Schools::RolesController < Admin::Education::Schools::Ap
 
   def load_administration_people
     @administration_people =  current_university.people
-                                                .tmp_original # TODO L10N : To remove
                                                 .administration
                                                 .accessible_by(current_ability)
                                                 .ordered(current_language)
