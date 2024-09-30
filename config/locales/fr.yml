@@ -135,7 +135,7 @@ fr:
       status: Valeur héritée
     meta_description:
       hint: Texte simple, dédié au à l'optimisation pour les moteurs de recherche (Search Engine Optimization, SEO).
-      label: Meta description
+      label: Description pour les moteurs de recherche (meta)
     pending_tasks:
       tasks: Tâches en cours de traitement
       text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."

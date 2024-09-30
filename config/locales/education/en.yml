@@ -16,6 +16,9 @@ en:
       education/program:
         one: Program
         other: Programs
+      education/program/category:
+        one: Category
+        other: Categories
       education/school:
         one: School
         other: Schools
@@ -85,6 +88,13 @@ en:
         short_name: Short name
         slug: Slug
         url: Website
+      education/program/category:
+        children: Children categories
+        parent: Parent category
+      education/program/category/localization:
+        language: Language
+        name: Name
+        slug: Slug
       education/school:
         address: Address
         administrators: Administrators

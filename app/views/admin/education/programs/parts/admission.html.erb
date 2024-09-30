@@ -1,3 +1,41 @@
+<% content_for :title, @l10n %>
+
+<div class="row">
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :prerequisites %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :registration %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :other %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :pricing %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :pricing_initial %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :pricing_continuing %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :pricing_apprenticeship %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :accessibility %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :contacts %>
+  </div>
+  <div class="col-lg-4 mb-4">
+    <% if @l10n.registration_url.present? %>
+      <%= osuny_label Education::Program.human_attribute_name(:registration_url) %>
+      <p><%= link_to @l10n.registration_url, @l10n.registration_url, target: :_blank %></p>
+    <% end %>
+  </div>
+</div>
+
 <%
 action = ''
 if !current_user.program_manager? || current_user.programs_to_manage.pluck(:education_program_id).include?(@program.id)
@@ -38,4 +76,8 @@ end
       </table>
     </div>
   <% end %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @program %>
 <% end %>
