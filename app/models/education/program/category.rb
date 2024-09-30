@@ -7,19 +7,16 @@
 #  position      :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  original_id   :uuid             indexed
 #  parent_id     :uuid             indexed
 #  university_id :uuid             indexed
 #
 # Indexes
 #
-#  index_education_program_categories_on_original_id    (original_id)
 #  index_education_program_categories_on_parent_id      (parent_id)
 #  index_education_program_categories_on_university_id  (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_1cd7dde07b  (original_id => education_program_categories.id)
 #  fk_rails_2f5459d374  (university_id => universities.id)
 #  fk_rails_a99207301f  (parent_id => education_program_categories.id)
 #

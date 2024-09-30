@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -915,11 +915,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.boolean "is_taxonomy", default: false
     t.integer "position"
     t.uuid "parent_id"
-    t.uuid "original_id"
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["original_id"], name: "index_education_program_categories_on_original_id"
     t.index ["parent_id"], name: "index_education_program_categories_on_parent_id"
     t.index ["university_id"], name: "index_education_program_categories_on_university_id"
   end
@@ -1920,7 +1918,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
   add_foreign_key "education_diploma_localizations", "languages"
   add_foreign_key "education_diploma_localizations", "universities"
   add_foreign_key "education_diplomas", "universities"
-  add_foreign_key "education_program_categories", "education_program_categories", column: "original_id"
   add_foreign_key "education_program_categories", "education_program_categories", column: "parent_id"
   add_foreign_key "education_program_categories", "universities"
   add_foreign_key "education_program_category_localizations", "education_program_categories", column: "about_id"
