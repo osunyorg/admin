@@ -15,7 +15,7 @@
       <% end %>
       <% if categories.root.free.any? %>
         <div class="col-lg-6 col-xxl-4">
-          <%= osuny_label t('admin.categories.other') %>
+          <%= osuny_label t('admin.categories.other') if categories.taxonomies.any? %>
           <%= f.association :categories,
                             label_text: false,
                             as: :check_boxes,

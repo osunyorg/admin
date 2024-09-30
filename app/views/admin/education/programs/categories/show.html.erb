@@ -1,0 +1,35 @@
+<% content_for :title, @l10n %>
+
+<div class="row">
+  <div class="col-lg-10">
+    <% if @category.parent %>
+      <%= osuny_label University::Person::Category.human_attribute_name('parent') %>
+      <p>
+        <%= osuny_link_localized_if can?(:read, @category.parent),
+                                    @category.parent,
+                                    [:admin, @category.parent] %>
+      </p>
+    <% end %>
+    <% if @category.children.any? %>
+      <%= osuny_label Education::Program::Category.human_attribute_name('children') %>
+      <%= render 'admin/application/categories/list', 
+                  root_categories: @category.children,
+                  categories_class: Education::Program::Category %>
+    <% end %>
+  </div>
+  <div class="col-lg-2">
+    <%= render 'admin/application/l10n/widget', about: @category, l10n: @l10n, small: true %>
+  </div>
+</div>
+
+<%= render 'admin/education/programs/list', programs: @programs %>
+<%= paginate @programs %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @category %>
+  <%= static_link static_admin_education_program_category_path(@category) %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @category %>
+<% end %>

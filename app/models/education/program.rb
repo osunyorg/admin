@@ -52,6 +52,12 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id
 
+  has_and_belongs_to_many :categories,
+                          class_name: 'Education::Program::Category',
+                          join_table: :education_program_categories_programs,
+                          foreign_key: :education_program_id,
+                          association_foreign_key: :education_program_category_id
+
   before_destroy :move_children
 
   # can't use LocalizableOrderByNameScope because scope ordered is already defined by WithPosition
@@ -118,22 +124,8 @@ class Education::Program < ApplicationRecord
   # WebsitesLinkable methods
   #####################
 
-  def has_administrators?
-    university_people_through_role_involvements.any? ||
-    descendants.any? { |descendant| descendant.university_people_through_role_involvements.any? }
-  end
-
-  def has_researchers?
-    false
-  end
-
-  def has_teachers?
-    university_people_through_involvements.any? ||
-    descendants.any? { |descendant| descendant.university_people_through_involvements.any? }
-  end
-
   def has_education_programs?
-    published? || descendants.any?(&:published?)
+    true
   end
 
   def has_education_diplomas?
