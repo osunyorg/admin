@@ -1,46 +1,32 @@
 <% content_for :title, @emergency_message %>
 
 <div class="row">
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title"><%= t('server_admin.emergency_messages.content') %></h2>
+  <div class="col-lg-8">
+    <h2><%= t('server_admin.emergency_messages.content') %></h2>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= osuny_label EmergencyMessage.human_attribute_name(:subject_fr) %>
+        <p><%= sanitize @emergency_message.subject_fr %></p>
+        <%= osuny_label EmergencyMessage.human_attribute_name(:content_fr) %>
+        <div><%= sanitize @emergency_message.content_fr %></div>
       </div>
-      <div class="table-responsive">
-        <table class="<%= table_classes %>">
-          <% ['subject_fr', 'content_fr', 'subject_en', 'content_en'].each do |attribute| %>
-            <tr>
-              <td><%= EmergencyMessage.human_attribute_name(attribute) %></td>
-              <td class="text-end"><%= sanitize @emergency_message.public_send attribute %></td>
-            </tr>
-          <% end %>
-        </table>
+      <div class="col-lg-6">
+        <%= osuny_label EmergencyMessage.human_attribute_name(:subject_en) %>
+        <p><%= sanitize @emergency_message.subject_en %></p>
+        <%= osuny_label EmergencyMessage.human_attribute_name(:content_en) %>
+        <div><%= sanitize @emergency_message.content_en %></div>
       </div>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header">
-        <h2 class="card-title"><%= t('server_admin.emergency_messages.filters') %></h2>
-      </div>
-      <div class="table-responsive">
-        <table class="<%= table_classes %>">
-          <tr>
-            <td><%= EmergencyMessage.human_attribute_name(:university) %></td>
-            <td class="text-end"><%= @emergency_message.university.present? ? link_to(@emergency_message.university, server_university_path(@emergency_message.university)) : t('server_admin.emergency_messages.all_universities') %></td>
-          </tr>
-          <tr>
-            <td><%= EmergencyMessage.human_attribute_name(:role) %></td>
-            <td class="text-end"><%= @emergency_message.role.present? ? t("activerecord.attributes.user.roles.#{@emergency_message.role}") : t('server_admin.emergency_messages.all_roles') %></td>
-          </tr>
-          <tr>
-            <td><%= t('server_admin.emergency_messages.target') %></td>
-            <% count = @emergency_message.delivered? ? @emergency_message.delivered_count : @emergency_message.target.size %>
-            <td class="text-end"><%= t('server_admin.emergency_messages.users', count: count) %></td>
-          </tr>
-        </table>
-      </div>
-    </div>
+  <div class="col-lg-4">
+    <h2><%= t('server_admin.emergency_messages.filters') %></h2>
+    <%= osuny_label EmergencyMessage.human_attribute_name(:university) %>
+    <p><%= @emergency_message.university.present? ? link_to(@emergency_message.university, server_university_path(@emergency_message.university)) : t('server_admin.emergency_messages.all_universities') %></p>
+    <%= osuny_label EmergencyMessage.human_attribute_name(:role) %>
+    <p><%= @emergency_message.role.present? ? t("activerecord.attributes.user.roles.#{@emergency_message.role}") : t('server_admin.emergency_messages.all_roles') %></p>
+    <%= osuny_label t('server_admin.emergency_messages.target') %>
+    <% count = @emergency_message.delivered? ? @emergency_message.delivered_count : @emergency_message.target.size %>
+    <p><%= t('server_admin.emergency_messages.users', count: count) %></p>
   </div>
 </div>
 

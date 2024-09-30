@@ -29,4 +29,34 @@ module Education::Program::WithTeam
                through: :university_person_involvements,
                source: :person
   end
+
+  def administrators
+    people_ids = (
+      university_people_through_role_involvements +
+      descendants.collect(&:university_people_through_role_involvements).flatten
+    ).pluck(:id)
+    university.people.where(id: people_ids, is_administration: true)
+  end
+
+  def teachers
+    people_ids = (
+      university_people_through_involvements +
+      descendants.collect(&:university_people_through_involvements).flatten
+    ).pluck(:id)
+    university.people.where(id: people_ids, is_teacher: true)
+  end
+
+  def has_administrators?
+    university_people_through_role_involvements.any? ||
+    descendants.any? { |descendant| descendant.university_people_through_role_involvements.any? }
+  end
+
+  def has_researchers?
+    false
+  end
+
+  def has_teachers?
+    university_people_through_involvements.any? ||
+    descendants.any? { |descendant| descendant.university_people_through_involvements.any? }
+  end
 end

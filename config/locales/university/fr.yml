@@ -44,7 +44,7 @@ fr:
         siren: Numéro de SIREN
         zipcode: Code postal
       university/organization/category:
-        children: Catégories enfantes
+        children: Sous-catégories
         parent: Catégorie parente
       university/organization/category/localization:
         language: Langue
@@ -112,7 +112,7 @@ fr:
         user: Utilisateur
         zipcode: Code postal
       university/person/category:
-        children: Catégories enfantes
+        children: Sous-catégories
         parent: Catégorie parente
       university/person/category/localization:
         language: Langue

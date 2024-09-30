@@ -54,7 +54,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   def event_localizations
     Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)
   end
-  
+
   def dependencies
     localizations.in_languages(website.active_language_ids) +
     children +
