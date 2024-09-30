@@ -4,6 +4,11 @@
     <%= render 'extranet/application/head' %>
   </head>
   <body class="<%= body_classes %> layout-devise">
+    <header class="h1 text-center my-5 py-5">
+      <%= link_to root_path do %>
+        <%= render 'extranet/application/logo' %>
+      <% end %>
+    </header>
     <main class="container">
       <% if @small_content %>
           <div class="row">
@@ -32,8 +37,9 @@
             </nav>
           </footer>
         </div>
-      </div>
+      <% end %>
     </main>
+    <%= render 'extranet/application/footer' %>
     <%= render 'bugsnag' %>
     <%= javascript_include_tag 'extranet' %>
   </body>

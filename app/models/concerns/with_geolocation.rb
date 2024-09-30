@@ -11,11 +11,12 @@ module WithGeolocation
     "#{address}, #{zipcode} #{city} #{country}"
   end
 
-  def full_address
+  def full_address_in(language)
+    l10n = localization_for(language)
     string = ""
-    string += "#{address_name}<br>" if address_name.present?
+    string += "#{l10n.address_name}<br>" if l10n&.address_name.present?
     string += "#{address}<br>" if address.present?
-    string += "#{address_additional}<br>" if address_additional.present?
+    string += "#{l10n.address_additional}<br>" if l10n&.address_additional.present?
     string += "#{zipcode} #{city}"
     string += "<br>#{country_common_name}" if country.present?
     string

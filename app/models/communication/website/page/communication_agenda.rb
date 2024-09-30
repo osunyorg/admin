@@ -15,7 +15,7 @@ class Communication::Website::Page::CommunicationAgenda < Communication::Website
   def dependencies
     super +
     [website.config_default_languages] +
-    website.events.where(language_id: language_id)
+    website.events
   end
 
   def git_path_relative

@@ -6,7 +6,7 @@ class University::Organization::Facets < FacetedSearch::Facets
     @about = options[:about]
 
     filter_with_text :name, {
-      title: University::Organization.human_attribute_name('name')
+      title: University::Organization::Localization.human_attribute_name('name')
     }
 
   end

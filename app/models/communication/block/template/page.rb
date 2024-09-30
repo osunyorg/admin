@@ -2,9 +2,9 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
 
   has_elements
   has_layouts [
-    :grid, 
-    :list, 
-    :cards, 
+    :grid,
+    :list,
+    :cards,
     :alternate,
     :large
   ]
@@ -31,14 +31,14 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
   def allowed_for_about?
     !website.nil?
   end
-  
+
   def children
     selected_pages
   end
 
   def heading_title
     block.title.present?  ? block.title
-                          : page&.title
+                          : page&.to_s_in(block.language)
   end
 
   protected
@@ -49,7 +49,9 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
 
   def selected_pages_children
     return [] unless page
-    page.children.for_language(block.language).published.ordered
+    page.children
+        .published_now_in(block.language)
+        .ordered
   end
 
 end

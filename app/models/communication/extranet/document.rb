@@ -3,9 +3,6 @@
 # Table name: communication_extranet_documents
 #
 #  id            :uuid             not null, primary key
-#  name          :string
-#  published     :boolean
-#  published_at  :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  category_id   :uuid             indexed
@@ -29,18 +26,14 @@
 #
 class Communication::Extranet::Document < ApplicationRecord
   include Sanitizable
-  include WithPublication
+  include Localizable
+  include LocalizableOrderByNameScope
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :category
   belongs_to :kind
 
-  has_one_attached_deletable :file
+  validates :category, :kind, presence: true
 
-  validates :name, presence: true
-
-  def to_s
-    "#{name}"
-  end
 end

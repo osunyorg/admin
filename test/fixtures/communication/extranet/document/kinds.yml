@@ -1,9 +1,0 @@
-one:
-  extranet: default_extranet
-  university: default_university
-  name: First kind
-
-two:
-  extranet: default_extranet
-  university: default_university
-  name: Second kind

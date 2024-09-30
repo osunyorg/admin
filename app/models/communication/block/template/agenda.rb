@@ -14,8 +14,8 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     :large
   ]
   has_component :mode, :option, options: [
-    :all, 
-    :category, 
+    :all,
+    :category,
     :selection,
     :categories
   ]
@@ -24,7 +24,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :quantity, :number, options: 3
   has_component :time, :option, options: AUTHORIZED_SCOPES
   has_component :no_event_message, :string
-  
+
   has_component :option_categories,   :boolean, default: false
   has_component :option_dates,        :boolean, default: true
   has_component :option_image,        :boolean, default: true
@@ -53,33 +53,40 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def empty?
-    selected_events.none? && 
-    no_event_message.blank? && 
+    selected_events.none? &&
+    no_event_message.blank? &&
     mode != 'categories'
   end
 
   def title_link
     return link_to_events_archive if time == 'archive'
-    return link_to_category if mode == 'category' && category.present?  
+    return link_to_category if mode == 'category' && category.present?
     link_to_events
   end
 
   protected
 
   def link_to_events
-    website.special_page(Communication::Website::Page::CommunicationAgenda, language: block.language).path
+    special_page = website.special_page(Communication::Website::Page::CommunicationAgenda)
+    special_page_l10n = special_page.localization_for(block.language)
+    special_page_l10n.current_permalink_in_website(website)&.path
   end
 
   def link_to_events_archive
-    website.special_page(Communication::Website::Page::CommunicationAgendaArchive, language: block.language).path
+    special_page = website.special_page(Communication::Website::Page::CommunicationAgendaArchive)
+    special_page_l10n = special_page.localization_for(block.language)
+    special_page_l10n.current_permalink_in_website(website)&.path
   end
 
   def link_to_category
-    category.current_permalink_in_website(website)&.path
+    return if category.nil?
+    category_l10n = category.localization_for(block.language)
+    return if category_l10n.nil?
+    category_l10n.current_permalink_in_website(website)&.path
   end
 
   def base_events
-    events = website.events.for_language(block.language).published
+    events = website.events.published_now_in(block.language)
     events = events.send(time) if time.in? AUTHORIZED_SCOPES
     events
   end

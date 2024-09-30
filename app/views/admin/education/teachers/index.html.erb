@@ -1,6 +1,12 @@
-<% content_for :title, University::Person::Teacher.model_name.human(count: 2) %>
+<% content_for :title, University::Person::Localization::Teacher.model_name.human(count: 2) %>
 
-<%= render 'filters', current_path: admin_education_teachers_path, filters: @filters if @filters.any?  %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @teachers.total_count %>
+    <%= University::Person::Localization::Teacher.model_name.human(count: @teachers.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_education_teachers_path %>
+</div>
 
 <%= render 'admin/education/teachers/list', teachers: @teachers %>
 

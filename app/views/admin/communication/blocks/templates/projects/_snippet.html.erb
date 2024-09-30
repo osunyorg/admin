@@ -1,3 +1,5 @@
 <p class="mb-0">
-  <%= block.template.selected_projects.collect(&:to_s).join(', ') %>
+  <%= block.template.selected_projects
+                    .map { |project| project.to_s_in(block.language) }
+                    .join(', ') %>
 </p>

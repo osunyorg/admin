@@ -1,0 +1,28 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <% if current_university.person_categories.any? %>
+      <%= render_filter f,
+                        :select,
+                        :for_category,
+                        label: t('filters.attributes.category'),
+                        collection: osuny_collection_tree(current_university.person_categories.root, localized: true),
+                        multiple: true
+                        %>
+    <% end %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_role,
+                      label: t('filters.attributes.role'),
+                      collection: University::Person::LIST_OF_ROLES.map { |r| { to_s: University::Person.human_attribute_name(r), id: r } }
+                      %>
+
+    <% end %>
+<% end %>

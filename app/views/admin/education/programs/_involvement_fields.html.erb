@@ -1,25 +1,36 @@
-<% include_id ||= false %>
-<div class="nested-fields">
-  <div class="row">
-    <div class="col-md-5">
-      <%= f.association :person,
-                        collection: @teacher_people,
-                        label: false,
-                        include_blank: :translate,
-                        required: true %>
+<%
+include_id ||= false
+l10n = f.object.localization_for(current_language)
+if l10n.nil? && f.object.persisted?
+  l10n = f.object.localize_in!(current_language)
+end
+l10n ||= f.object.localizations.build(language_id: current_language.id)
+%>
+<%= f.simple_fields_for :localizations, l10n do |lf| %>
+  <%= lf.hidden_field :id %>
+  <%= lf.hidden_field :language_id, value: current_language.id %>
+  <div class="nested-fields">
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.association :person,
+                          collection: osuny_collection(@teacher_people, localized: true, label_method: :to_s_alphabetical),
+                          label: false,
+                          include_blank: :translate,
+                          required: true %>
+      </div>
+      <div class="col-md-6">
+        <%= lf.input :description,
+                    as: :string,
+                    label: false,
+                    placeholder: University::Person::Involvement::Localization.human_attribute_name('description'),
+                    wrapper: false %>
+      </div>
+      <div class="col-md-1 text-end">
+        <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
+                                        f,
+                                        class: 'btn btn-sm btn-danger' %>
+      </div>
     </div>
-    <div class="col-md-6">
-      <%= f.input :description,
-                  as: :string,
-                  label: false,
-                  placeholder: University::Person::Involvement.human_attribute_name('description'),
-                  wrapper: false %>
-    </div>
-    <div class="col-md-1 text-end">
-      <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
-                                      f,
-                                      class: 'btn btn-sm btn-danger' %>
-    </div>
+    <%= f.hidden_field :id if include_id %>
   </div>
-  <%= f.hidden_field :id if include_id %>
-</div>
+<% end %>

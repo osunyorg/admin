@@ -4,7 +4,8 @@ module Communication::Website::WithFeaturePortfolio
   included do
     has_many    :portfolio_projects,
                 class_name: "Communication::Website::Portfolio::Project",
-                foreign_key: :communication_website_id
+                foreign_key: :communication_website_id,
+                dependent: :destroy
                 alias :projects :portfolio_projects
 
     has_many    :portfolio_categories,

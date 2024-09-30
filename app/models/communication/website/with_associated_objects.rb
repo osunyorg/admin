@@ -37,7 +37,7 @@ module Communication::Website::WithAssociatedObjects
   end
 
   def education_programs
-    has_education_programs? ? about.published_programs : Education::Program.none
+    has_education_programs? ? about.programs : Education::Program.none
   end
 
   def administration_locations
@@ -45,11 +45,11 @@ module Communication::Website::WithAssociatedObjects
   end
 
   def research_volumes
-    has_research_volumes? ? about.published_volumes : Research::Journal::Volume.none
+    has_research_volumes? ? about.volumes : Research::Journal::Volume.none
   end
 
   def research_papers
-    has_research_papers? ? about.published_papers : Research::Journal::Paper.none
+    has_research_papers? ? about.papers : Research::Journal::Paper.none
   end
 
   def administrators

@@ -5,7 +5,7 @@
     <div class="row g-5">
       <div class="col-lg-6 pt-5 d-flex flex-column">
         <p class="realm__quote h1 mb-5">
-          <%= t "#{@namespace.to_s.underscore}.description.text" %>
+          <%= t "#{@namespace.to_s.underscore}.description.text_html" %>
         </p>
         <p class="realm__author">
           <%= t "#{@namespace.to_s.underscore}.description.source" %>
@@ -44,7 +44,7 @@
       <div class="position-relative">
         <h2 class="h4"><%= title %></h2>
         <p><%= description %></p>
-        <%= link_to t('manage'), path, class: 'stretched-link' %>
+        <%= link_to t('manage'), path, class: 'stretched-link action' %>
       </div>
     </div>
   <% end %>

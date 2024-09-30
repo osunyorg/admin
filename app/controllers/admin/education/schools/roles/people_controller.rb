@@ -6,7 +6,7 @@ class Admin::Education::Schools::Roles::PeopleController < Admin::Education::Sch
 
   def destroy
     @involvement.destroy
-    redirect_back fallback_location: admin_education_school_role_path(@role, { school_id: @school.id }), notice: t('admin.successfully_destroyed_html', model: @involvement.to_s)
+    redirect_back fallback_location: admin_education_school_role_path(@role, { school_id: @school.id }), notice: t('admin.successfully_destroyed_html', model: @involvement.to_s_in(current_language))
   end
 
   protected

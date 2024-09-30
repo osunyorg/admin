@@ -26,7 +26,7 @@ class Communication::Website::GitFile::Orphan < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  scope :ordered, -> { order(:path) }
+  scope :ordered, -> (language = nil) { order(:path) }
 
   def git_url
     "#{website.git_repository.url}/blob/main/#{path}"

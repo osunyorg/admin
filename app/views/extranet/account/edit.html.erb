@@ -8,7 +8,7 @@
     <div class="col-lg-6">
       <%= f.input :first_name %>
       <%= f.input :last_name %>
-      <%= render 'admin/application/i18n/form', f: f %>
+      <%= render 'admin/application/l10n/form', f: f %>
       <%= f.input :picture,
               as: :single_deletable_file,
               input_html: { accept: default_images_formats_accepted },

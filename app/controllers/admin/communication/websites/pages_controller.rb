@@ -2,24 +2,24 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   load_and_authorize_resource class: Communication::Website::Page,
                               through: :website
 
-  include Admin::Translatable
+  include Admin::HasStaticAction
+  include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_published
-  has_scope :for_full_width
+  before_action :load_localization,
+                  :redirect_if_not_localized,
+                  only: [:show, :edit, :update, :static, :publish, :preview, :generate_from_template]
 
   def index
-    @homepage = @website.special_page(Communication::Website::Page::Home, language: current_website_language)
+    @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
-    @pages = @website.pages.for_language(current_website_language)
+    @pages = @website.pages
     breadcrumb
   end
 
   def index_list
-    @filters = ::Filters::Admin::Communication::Websites::Pages.new(current_user).list
-    @pages = apply_scopes(@pages).for_language(current_website_language)
-                                 .ordered_by_title
-                                 .page(params[:page])
+    @pages = @pages.filter_by(params[:filters], current_language)
+                   .ordered_by_title(current_language)
+                   .page(params[:page])
     breadcrumb
   end
 
@@ -45,19 +45,14 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def show
     @preview = true
     breadcrumb
-    add_breadcrumb(@page, admin_communication_website_page_path(@page))
+    add_breadcrumb(@l10n, admin_communication_website_page_path(@page))
   end
 
   def publish
-    @page.published = true
-    @page.save_and_sync
+    @l10n.publish!
+    @page.sync_with_git
     redirect_back fallback_location: admin_communication_website_page_path(@page),
                   notice: t('admin.communication.website.publish.notice')
-  end
-
-  def static
-    @about = @page
-    render_as_plain_text
   end
 
   def preview
@@ -77,7 +72,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def generate_from_template
-    @page.generate_from_template
+    @page.generate_from_template(@l10n)
     redirect_back(fallback_location: [:admin, @page])
   end
 
@@ -89,15 +84,15 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def edit
     breadcrumb
-    add_breadcrumb(@page, admin_communication_website_page_path(@page))
+    add_breadcrumb(@l10n, admin_communication_website_page_path(@page))
     add_breadcrumb t('edit')
   end
 
   def create
     @page.website = @website
-    @page.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @page.save_and_sync
-      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s)
+      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb(t('create'))
@@ -106,9 +101,9 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def update
-    @page.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @page.update_and_sync(page_params)
-      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s)
+      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb(@page, admin_communication_website_page_path(@page))
@@ -127,7 +122,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       redirect_back(fallback_location: admin_communication_website_page_path(@page), alert: t('admin.communication.website.pages.delete_special_page_notice'))
     else
       @page.destroy
-      redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s)
+      redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s_in(current_language))
     end
   end
 
@@ -138,7 +133,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       params,
       key: :object,
       university: current_university,
-      only: [@page.class.direct_connection_permitted_about_type]
+      permitted_classes: [@page.class.direct_connection_permitted_about_class]
     )
   end
 
@@ -151,15 +146,16 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def page_params
     params.require(:communication_website_page)
           .permit(
-            :communication_website_id, :title, :breadcrumb_title, :bodyclass,
-            :meta_description, :summary, :header_text, :header_cta, :header_cta_label, :header_cta_url, :text, :slug, :published, :full_width,
-            :shared_image, :shared_image_delete,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-            :parent_id
+            :communication_website_id, :bodyclass, :full_width, :parent_id,
+            localizations_attributes: [
+              :id, :title, :breadcrumb_title, :meta_description, :summary, :header_text, :header_cta, :header_cta_label, :header_cta_url, :text, :slug, :published,
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+              :shared_image, :shared_image_delete, :shared_image_infos,
+              :language_id
+            ]
           )
           .merge(
-            university_id: current_university.id,
-            language_id: current_website_language.id
+            university_id: current_university.id
           )
   end
 

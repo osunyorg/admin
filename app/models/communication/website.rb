@@ -22,20 +22,8 @@
 #  in_production                :boolean          default(FALSE)
 #  in_showcase                  :boolean          default(TRUE)
 #  locked_at                    :datetime
-#  name                         :string           indexed
 #  plausible_url                :string
 #  repository                   :string
-#  social_email                 :string
-#  social_facebook              :string
-#  social_github                :string
-#  social_instagram             :string
-#  social_linkedin              :string
-#  social_mastodon              :string
-#  social_peertube              :string
-#  social_tiktok                :string
-#  social_vimeo                 :string
-#  social_x                     :string
-#  social_youtube               :string
 #  style                        :text
 #  style_updated_at             :date
 #  theme_version                :string           default("NA")
@@ -52,7 +40,6 @@
 #
 #  index_communication_websites_on_about                (about_type,about_id)
 #  index_communication_websites_on_default_language_id  (default_language_id)
-#  index_communication_websites_on_name                 (name) USING gin
 #  index_communication_websites_on_university_id        (university_id)
 #
 # Foreign Keys
@@ -64,6 +51,9 @@ class Communication::Website < ApplicationRecord
   self.filter_attributes += [:access_token]
 
   include Favoritable
+  include Filterable
+  include Localizable
+  include LocalizableOrderByNameScope
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs
@@ -75,7 +65,6 @@ class Communication::Website < ApplicationRecord
   include WithFeaturePortfolio
   include WithGit
   include WithGitRepository
-  include WithLanguages
   include WithLock
   include WithManagers
   include WithProgramCategories
@@ -94,31 +83,43 @@ class Communication::Website < ApplicationRecord
     gitlab: 1
   }
 
-  has_one_attached_deletable :default_image
-  validates :default_image, size: { less_than: 5.megabytes }
+  belongs_to :default_language, class_name: "Language"
 
+  has_many :languages, through: :localizations
+  has_many  :active_languages,
+            -> { where(communication_website_localizations: { published: true }) },
+            through: :localizations,
+            source: :language
+
+  has_one_attached_deletable :default_image
   has_one_attached_deletable :default_shared_image
+
+  validates :default_image, size: { less_than: 5.megabytes }
   validates :default_shared_image, size: { less_than: 5.megabytes }
 
   before_validation :sanitize_fields
+  before_validation :set_default_language,
+                    :set_first_localization_as_published,
+                    on: :create
 
-  scope :ordered, -> { order(:name) }
   scope :in_production, -> { where(in_production: true) }
-  scope :for_production, -> (production) { where(in_production: production) }
-  scope :for_search_term, -> (term) {
+  scope :for_production, -> (production, language = nil) { where(in_production: production) }
+  scope :for_search_term, -> (term, language) {
     joins(:university)
-    .where("
-      unaccent(universities.name) % unaccent(:term) OR
-      unaccent(communication_websites.name) % unaccent(:term) OR
-      unaccent(communication_websites.url) % unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+      .joins(:localizations)
+      .where(communication_website_localizations: { language_id: language.id })
+      .where("
+        unaccent(universities.name) % unaccent(:term) OR
+        unaccent(communication_website_localizations.name) % unaccent(:term) OR
+        unaccent(communication_websites.url) % unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_update, -> (autoupdate) { where(autoupdate_theme: autoupdate) }
+  scope :for_update, -> (autoupdate, language = nil) { where(autoupdate_theme: autoupdate) }
   scope :with_url, -> { where.not(url: [nil, '']) }
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
 
   def to_s
-    "#{name}"
+    original_localization.to_s
   end
 
   def git_path(website)
@@ -128,15 +129,16 @@ class Communication::Website < ApplicationRecord
   def dependencies
     # Le website est le SEUL cas d'auto-dépendance
     [self] +
+    localizations.in_languages(active_language_ids) +
     configs +
-    pages.where(language_id: language_ids) +
-    posts.where(language_id: language_ids) +
-    post_categories.where(language_id: language_ids) +
-    events.where(language_id: language_ids) +
-    agenda_categories.where(language_id: language_ids) +
-    projects.where(language_id: language_ids) +
-    portfolio_categories.where(language_id: language_ids) +
-    menus.where(language_id: language_ids) +
+    pages +
+    posts +
+    post_categories +
+    events +
+    agenda_categories +
+    projects +
+    portfolio_categories +
+    menus.in_languages(active_language_ids) +
     [about] +
     [default_image&.blob] +
     [default_shared_image&.blob]
@@ -144,6 +146,10 @@ class Communication::Website < ApplicationRecord
 
   def website
     self
+  end
+
+  def websites
+    [self]
   end
 
   def website_id
@@ -178,10 +184,20 @@ class Communication::Website < ApplicationRecord
   def sanitize_fields
     self.git_branch = Osuny::Sanitizer.sanitize(self.git_branch, 'string')
     self.git_endpoint = Osuny::Sanitizer.sanitize(self.git_endpoint, 'string')
-    self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')
+  end
+
+  def set_default_language
+    self.default_language_id = self.localizations.first.language_id
+  end
+
+  def set_first_localization_as_published
+    localizations.first.assign_attributes(
+      published: true,
+      published_at: Time.zone.now
+    )
   end
 
   def reconnect_dependency(dependency, new_university_id)

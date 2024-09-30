@@ -39,10 +39,12 @@
     <%= osuny_panel Research::Publication.human_attribute_name('authors_list') do %>
      <p><%= sanitize @publication.authors_list %></p>
     <% end %>
-    <%= osuny_panel University::Person::Researcher.model_name.human(count: 2) do %>
-      <% @publication.researchers.in_university(current_university).each do |researcher| %>
-        <%= render 'admin/university/people/researchers/researcher', researcher: researcher %>
-      <% end %>
+    <%= osuny_panel University::Person::Localization::Researcher.model_name.human(count: 2) do %>
+      <div class="row g-2">
+        <% @publication.researchers.in_university(current_university).each do |researcher| %>
+          <%= render 'admin/research/researchers/researcher', researcher: researcher %>
+        <% end %>
+      </div>
     <% end %>
     <%= osuny_panel Research::Hal::Author.model_name.human(count: 2) do %>
       <ul class="list-unstyled">
@@ -61,9 +63,9 @@
         <% value = @publication.send key %>
         <% next if value.blank? %>
         <%= osuny_label Research::Publication.human_attribute_name(key) %>
-        <p><%= link_to value, value, target: :_blank %></p>
-      <% end %>    
-    <% end %>    
+        <p class="text-truncate"><%= link_to value, value, target: :_blank %></p>
+      <% end %>
+    <% end %>
   </div>
 </div>
 

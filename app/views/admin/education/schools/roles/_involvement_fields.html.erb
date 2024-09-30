@@ -1,18 +1,34 @@
-<% include_id ||= false %>
-<div class="nested-fields mb-2">
-  <div class="row pure__row--small align-items-center">
-    <div class="col-1">
-      <i class="<%= Icon::DRAG %> handle"></i>
+<%
+include_id ||= false
+l10n = f.object.localization_for(current_language)
+if l10n.nil? && f.object.persisted?
+  l10n = f.object.localize_in!(current_language)
+end
+l10n ||= f.object.localizations.build(language_id: current_language.id)
+%>
+<%= f.simple_fields_for :localizations, l10n do |lf| %>
+  <div class="nested-fields mb-2">
+    <div class="row pure__row--small align-items-center">
+      <div class="col-1">
+        <i class="<%= Icon::DRAG %> handle"></i>
+      </div>
+      <div class="col-9">
+        <%= lf.hidden_field :id %>
+        <%= lf.hidden_field :language_id, value: current_language.id %>
+        <%= f.association :person,
+                          collection: osuny_collection(@administration_people, localized: true, label_method: :to_s_alphabetical),
+                          label: false,
+                          include_blank: :translate,
+                          wrapper: false,
+                          required: true %>
+      </div>
+      <div class="col-2 text-end">
+        <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
+                                        f,
+                                        class: 'btn btn-sm btn-danger' %>
+      </div>
     </div>
-    <div class="col-9">
-      <%= f.association :person, collection: @administration_people, label: false, include_blank: :translate, wrapper: false, required: true %>
-    </div>
-    <div class="col-2">
-      <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
-                                      f,
-                                      class: 'btn btn-sm btn-danger' %>
-    </div>
+    <%= f.hidden_field :position, data: { 'sortable-input': '' } %>
+    <%= f.hidden_field :id if include_id %>
   </div>
-  <%= f.hidden_field :position, data: { 'sortable-input': '' } %>
-  <%= f.hidden_field :id if include_id %>
-</div>
+<% end %>

@@ -5,24 +5,30 @@ small ||= false
   <p><%= t('admin.communication.website.agenda.events.none') %></p>
 <% else %>
   <div class="row g-2 mb-3">
-    <% events.each do |event| %>
+    <%
+    events.each do |event|
+      event_l10n = event.best_localization_for(current_language)
+      %>
       <div>
         <div class="card card--horizontal">
-          <%= osuny_thumbnail event %>
+          <%= osuny_thumbnail_localized event %>
           <div class="card-body">
-            <%= osuny_published event unless small %>
-            <%= link_to event,
-                        admin_communication_website_agenda_event_path(website_id: event.website.id, id: event.id),
-                        class: "stretched-link text-black" %>
-            <% if event.subtitle.present? %>
+            <%= osuny_published_localized event unless small %>
+            <%= osuny_link_localized  event,
+                                      admin_communication_website_agenda_event_path(
+                                        website_id: event.website.id,
+                                        id: event.id
+                                      ),
+                                      classes: "stretched-link" %>
+            <% if event_l10n&.subtitle.present? %>
               <br>
               <span class="text-muted">
-                <%= event.subtitle %>
+                <%= event_l10n.subtitle %>
               </span>
             <% end %>
           </div>
           <div class="card-footer text-end text-muted">
-            <%= render 'admin/communication/websites/agenda/events/dates', event: event %>
+            <%= render 'admin/communication/websites/agenda/events/dates', event: event, l10n: event_l10n %>
           </div>
         </div>
       </div>

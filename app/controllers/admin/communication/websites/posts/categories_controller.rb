@@ -3,24 +3,20 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
                               through: :website,
                               through_association: :post_categories
 
-  include Admin::Translatable
-  include Admin::Categorizable
+  include Admin::ActAsCategories
+  include Admin::Localizable
+  include Admin::HasStaticAction
 
   def index
-    @root_categories = categories.root
+    @root_categories = categories.root.ordered
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end
 
   def show
-    @posts = @category.posts.ordered.page(params[:page])
+    @posts = @category.posts.ordered(current_language).page(params[:page])
     breadcrumb
-  end
-
-  def static
-    @about = @category
-    render_as_plain_text
   end
 
   def new
@@ -35,9 +31,9 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
 
   def create
     @category.website = @website
-    @category.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @category.save_and_sync
-      redirect_to admin_communication_website_post_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s)
+      redirect_to admin_communication_website_post_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -45,9 +41,9 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   end
 
   def update
-    @category.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @category.update_and_sync(category_params)
-      redirect_to admin_communication_website_post_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s)
+      redirect_to admin_communication_website_post_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -57,7 +53,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
 
   def destroy
     @category.destroy
-    redirect_to admin_communication_website_post_categories_url, notice: t('admin.successfully_destroyed_html', model: @category.to_s)
+    redirect_to admin_communication_website_post_categories_url, notice: t('admin.successfully_destroyed_html', model: @category.to_s_in(current_language))
   end
 
   protected
@@ -80,12 +76,15 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   def category_params
     params.require(:communication_website_post_category)
           .permit(
-            :name, :meta_description, :summary, :slug, :parent_id,
-            :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+            :parent_id,
+            localizations_attributes: [
+              :id, :name, :meta_description, :summary, :slug,
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+              :language_id
+            ]
           )
           .merge(
-            university_id: current_university.id,
-            language_id: current_website_language.id
+            university_id: current_university.id
           )
   end
 end

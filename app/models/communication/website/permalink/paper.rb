@@ -1,6 +1,6 @@
 class Communication::Website::Permalink::Paper < Communication::Website::Permalink
   def self.required_in_config?(website)
-    website.about.is_a? Research::Journal
+    website.about.is_a?(Research::Journal)
   end
 
   def self.static_config_key
@@ -9,7 +9,7 @@ class Communication::Website::Permalink::Paper < Communication::Website::Permali
 
   # /papiers/:slug/
   def self.pattern_in_website(website, language)
-    "/#{slug_with_ancestors(website, language)}/:year-:month-:day-:slug/"
+    special_page_path(website, language) + '/:year-:month-:day-:slug/'
   end
 
   def self.special_page_type

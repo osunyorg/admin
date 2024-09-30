@@ -24,7 +24,10 @@ class Static
       template: template_static,
       layout: false,
       assigns: {
+        # In most cases, about is a localization
         about: about,
+        # Used to clarify the views
+        l10n: about,
         website: website
       }
     )

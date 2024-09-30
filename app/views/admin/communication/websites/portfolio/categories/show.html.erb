@@ -1,16 +1,16 @@
-<% content_for :title, @category %>
+<% content_for :title, @l10n %>
 
 <div class="row">
   <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @category %>
-    <%= render 'admin/application/i18n/widget', about: @category %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
+    <%= render 'admin/application/l10n/widget', about: @category, l10n: @l10n %>
   </div>
   <div class="col-lg-4">
-    <%= render 'admin/application/featured_image/show', about: @category %>
-    <%= render 'admin/application/meta_description/show', about: @category %>
+    <%= render 'admin/application/featured_image/show', about: @l10n %>
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
-<%= render 'admin/communication/blocks/content/editor', about: @category %>
+<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
 <% if @projects.total_count > 0 %>
   <%
   title = Communication::Website::Portfolio::Project.model_name.human(count: 2)

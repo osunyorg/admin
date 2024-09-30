@@ -5,7 +5,7 @@ notyf.open({
         x: 'center',
         y: 'bottom'
     },
-    message: "<%= j(t('server_admin.websites.update_theme_notice', website: @website.to_s)) %>",
+    message: "<%= j(t('server_admin.websites.update_theme_notice', website: @website.to_s_in(current_language))) %>",
     duration: 5000,
     ripple: true,
     dismissible: true

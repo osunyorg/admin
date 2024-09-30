@@ -1,4 +1,12 @@
-<% projects = block.about&.website.projects.for_language(block.language).ordered %>
+<%
+projects = osuny_collection(
+  block.about
+       .website
+       .projects
+       .ordered(block.language),
+  localized: true
+)
+%>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>
@@ -10,6 +18,6 @@
     <option value="" disabled><%= placeholder %></option>
   <% end %>
   <% projects.each do |project| %>
-    <option value="<%= project.id %>"><%= project.title %></option>
+    <option value="<%= project.last %>"><%= project.first %></option>
   <% end %>
 </select>

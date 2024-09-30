@@ -1,16 +1,18 @@
----
+<%
+laboratory = @l10n.about
+%>---
 name: >-
-  <%= prepare_text_for_static @about.name %>
+  <%= prepare_text_for_static @l10n.name %>
 address_name: >-
-  <%= prepare_text_for_static @about.address_name %>
+  <%= prepare_text_for_static @l10n.address_name %>
 address: >-
-  <%= prepare_text_for_static @about.address %>
+  <%= prepare_text_for_static laboratory.address %>
 address_additional: >-
-  <%= prepare_text_for_static @about.address_additional %>
+  <%= prepare_text_for_static @l10n.address_additional %>
 zipcode: >-
-  <%= prepare_text_for_static @about.zipcode %>
+  <%= prepare_text_for_static laboratory.zipcode %>
 city: >-
-  <%= prepare_text_for_static @about.city %>
+  <%= prepare_text_for_static laboratory.city %>
 country: >-
-  <%= @about.country_common_name %>
+  <%= laboratory.country_common_name %>
 ---

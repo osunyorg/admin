@@ -18,11 +18,15 @@
               <td><i class="<%= Icon::DRAG %> handle"></i></td>
             <% end %>
             <td class="ps-0">
-              <%= link_to_if  can?(:read, role),
-                              role,
-                              admin_education_school_role_path(role, { school_id: @school.id }) %>
+              <%= osuny_link_localized_if can?(:read, role),
+                                          role,
+                                          admin_education_school_role_path(role, { school_id: @school.id }) %>
             </td>
-            <td><%= role.involvements.includes(:person).ordered.map { |involvement| involvement.person.to_s }.to_sentence %></td>
+            <td>
+              <% role.involvements.includes(:person).ordered.map do |involvement| %>
+                <%= osuny_link_localized involvement.person, [:admin, involvement.person] %>
+              <% end %>
+            </td>
             <td class="text-end pe-0">
               <div class="btn-group" role="group">
                 <%= link_to t('edit'),
@@ -39,5 +43,7 @@
         <% end %>
       </tbody>
     </table>
-</div>
+  </div>
+<% else %>
+  <p><%= t('admin.education.schools.roles.none') %></p>
 <% end %>

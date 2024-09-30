@@ -1,12 +1,10 @@
 class Admin::UsersController < Admin::ApplicationController
   load_and_authorize_resource through: :current_university
 
-  has_scope :for_language
-  has_scope :for_role
-  has_scope :for_search_term
-
   def index
-    @users = apply_scopes(@users).ordered.page(params[:page])
+    @users = @users.filter_by(params[:filters], current_language)
+                   .ordered
+                   .page(params[:page])
     breadcrumb
   end
 
@@ -25,7 +23,7 @@ class Admin::UsersController < Admin::ApplicationController
       params,
       key: :about,
       university: current_university,
-      only: User::Favorite.permitted_about_types
+      mandatory_module: Favoritable
     )
     if operation == 'add'
       current_user.add_favorite(about)
@@ -70,7 +68,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def breadcrumb
     super
-    add_breadcrumb University.model_name.human, admin_university_root_path if current_university.is_really_a_university
+    add_breadcrumb University.model_name.human, admin_university_root_path if current_university.is_really_a_university?
     add_breadcrumb User.model_name.human(count: 2), admin_users_path
     if @user
       if @user.persisted?

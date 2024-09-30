@@ -3,11 +3,7 @@
 # Table name: research_laboratory_axes
 #
 #  id                     :uuid             not null, primary key
-#  meta_description       :text
-#  name                   :string
 #  position               :integer
-#  short_name             :string
-#  text                   :text
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  research_laboratory_id :uuid             not null, indexed
@@ -24,18 +20,14 @@
 #  fk_rails_d334f832b4  (university_id => universities.id)
 #
 class Research::Laboratory::Axis < ApplicationRecord
+  include Localizable
+  include LocalizableOrderByNameScope
   include Sanitizable
   include WithUniversity
   include WithPosition
 
-  has_summernote :text
-
   belongs_to  :laboratory, 
               foreign_key: :research_laboratory_id
-
-  def to_s
-    "#{name}"
-  end
 
   protected
 

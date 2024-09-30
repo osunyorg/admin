@@ -1,9 +1,9 @@
 # Full :as names are useful for the resolution of links like [:alumni, cohort]
 namespace :contacts do
-  get 'persons' => 'persons#index', as: :university_persons
-  get 'persons/:id' => 'persons#show', as: :university_person
-  get 'organizations' => 'organizations#index', as: :university_organizations
-  get 'organizations/:id' => 'organizations#show', as: :university_organization
+  get 'persons' => 'persons#index', as: :persons
+  get 'persons/:id' => 'persons#show', as: :person
+  get 'organizations' => 'organizations#index', as: :organizations
+  get 'organizations/:id' => 'organizations#show', as: :organization
   get 'search' => 'search#index', as: :search
   root to: 'persons#index'
 end
@@ -30,7 +30,7 @@ namespace :posts do
   get ':date/:slug' => 'posts#show', as: :post
   root to: 'posts#index'
 end
-namespace :library do
+namespace :documents do
   root to: 'documents#index'
 end
 get 'account' => 'account#show', as: :account
@@ -45,4 +45,5 @@ get 'terms' => 'pages#terms', as: :terms
 get 'privacy-policy' => 'pages#privacy_policy', as: :privacy_policy
 get 'cookies-policy' => 'pages#cookies_policy', as: :cookies_policy
 get 'data' => 'pages#data', as: :data
-get 'style' => 'style#index', as: :style, constraints: { format: 'css' }
+
+get '' => 'home#index', as: :extranet_root

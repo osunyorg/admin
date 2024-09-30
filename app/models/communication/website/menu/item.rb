@@ -80,8 +80,31 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   after_commit :sync_menu
 
+  delegate :language, to: :menu
+
   def self.icon_for(kind)
     ICONS[kind] if ICONS.has_key? kind
+  end
+
+  def self.collection_for(kind, website)
+    case kind
+    when 'page'
+      website.pages
+    when 'diploma'
+      website.education_diplomas
+    when 'program'
+      website.education_programs
+    when 'category'
+      website.post_categories
+    when 'post'
+      website.posts
+    when 'volume'
+      website.research_volumes
+    when 'paper'
+      website.research_papers
+    when 'location'
+      website.administration_locations
+    end
   end
 
   def to_s
@@ -98,7 +121,13 @@ class Communication::Website::Menu::Item < ApplicationRecord
     when "url"
       url
     else
-      about.new_permalink_in_website(website).computed_path
+      about_l10n = about.localization_for(language)
+      if about_l10n.present?
+        about_l10n_permalink = about_l10n.new_permalink_in_website(website)
+        about_l10n_permalink.computed_path
+      else
+        nil
+      end
     end
   end
 

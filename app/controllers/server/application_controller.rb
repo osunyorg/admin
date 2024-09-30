@@ -1,8 +1,6 @@
 class Server::ApplicationController < ApplicationController
   layout 'server/layouts/application'
 
-  include Admin::Filterable
-
   before_action :authenticate_user!, :ensure_user_if_server_admin
 
   protected
@@ -13,5 +11,9 @@ class Server::ApplicationController < ApplicationController
 
   def ensure_user_if_server_admin
     raise CanCan::AccessDenied unless current_user.server_admin?
+  end
+
+  def current_language
+    @current_language ||= current_university.default_language
   end
 end

@@ -4,10 +4,10 @@
   </div>
   <div class="col-xl-6" v-if="data.mode !== 'categories'">
     <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-    <%= block_component_edit block, :option_image, label: Communication::Website::Agenda::Event.human_attribute_name(:featured_image) %>
-    <%= block_component_edit block, :option_subtitle, label: Communication::Website::Agenda::Event.human_attribute_name(:subtitle) %>
+    <%= block_component_edit block, :option_image, label: Communication::Website::Agenda::Event::Localization.human_attribute_name(:featured_image) %>
+    <%= block_component_edit block, :option_subtitle, label: Communication::Website::Agenda::Event::Localization.human_attribute_name(:subtitle) %>
     <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
-    <%= block_component_edit block, :option_dates, label: Communication::Website::Agenda::Event.human_attribute_name(:dates) %>
+    <%= block_component_edit block, :option_dates, label: Communication::Website::Agenda::Event::Localization.human_attribute_name(:dates) %>
     <%= block_component_edit block, :option_categories, label: Communication::Website::Agenda::Event.human_attribute_name(:categories) %>
     <%= block_component_edit block, :option_status, label: Communication::Website::Agenda::Event.human_attribute_name(:status) %>
   </div>
@@ -42,7 +42,7 @@
       <div v-for="(element, index) in data.elements" class="draggable-item">
         <div class="d-flex mb-n3">
           <div>
-            <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
+            <a class="btn ps-0 pt-0 dragHandle" title="<%= t('admin.communication.block.drag_and_drop') %>">
               <i class="<%= Icon::DRAG %> handle"></i>
             </a>
           </div>
@@ -52,7 +52,7 @@
           <div>
             <a  class="btn btn-sm text-danger ms-3"
                 v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-                title="Supprimer">
+                title="<%= t('delete') %>">
                 <i class="<%= Icon::DELETE %>"></i>
             </a>
           </div>

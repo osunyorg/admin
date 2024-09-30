@@ -1,0 +1,5 @@
+default_school_fr:
+  name: École de test
+  about: default_school
+  language: fr
+  university: default_university

@@ -1,10 +1,10 @@
 class Admin::Research::PublicationsController < Admin::Research::ApplicationController
   load_and_authorize_resource class: Research::Publication
 
-  has_scope :for_search_term
-
   def index
-    @publications = apply_scopes(@publications).ordered.page(params[:page])
+    @publications = @publications.filter_by(params[:filters], current_language)
+                                 .ordered(current_language)
+                                 .page(params[:page])
     breadcrumb
   end
 

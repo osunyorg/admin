@@ -7,8 +7,8 @@
 <% end %>
 
 <p class="mb-5">
-  <%= @cohort.program.diploma %>
-  <%= @cohort.program %>
+  <%= @cohort.program.diploma.to_s_in(current_language) %>
+  — <%= @cohort.program.to_s_in(current_language) %>
 </p>
 
 <%= render 'extranet/alumni/persons/list', people: @cohort.people %>

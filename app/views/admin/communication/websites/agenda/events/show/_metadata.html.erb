@@ -1,13 +1,13 @@
 <%= osuny_panel t('metadata'), small: true do %>
-  <%= @event.published  ? Communication::Website::Agenda::Event.human_attribute_name(:published)
-                        : t('admin.communication.website.agenda.events.draft') %>
-
-  <%= render 'admin/application/i18n/inline', about: @event %>
+  <%= @l10n.published ? Communication::Website::Agenda::Event.human_attribute_name(:published)
+                      : t('admin.communication.website.agenda.events.draft') %>
   <% if @event.categories.any? %>
+    <% category_names = @event.categories.map { |category| category.to_s_in(current_language) } %>
     <%= t(
-          'admin.communication.website.posts.in', 
-          categories: @event.categories.collect(&:to_s).join(', ')
+          'admin.communication.website.posts.in',
+          categories: category_names.join(', ')
         ) %>
   <% end %>
-  <%= render 'admin/application/permalinks/redirects', about: @event %>
+  <%= render 'admin/application/permalinks/redirects', about: @l10n %>
 <% end %>
+<%= render 'admin/application/l10n/widget', about: @event, l10n: @l10n, small: true %>

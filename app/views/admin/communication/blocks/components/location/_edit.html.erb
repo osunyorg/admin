@@ -1,5 +1,8 @@
-<%# TODO: Traduire les locations %>
-<% locations = @block.template.available_locations.ordered %>
+<%
+  locations = @block.template
+                    .available_locations
+                    .ordered
+%>
 <% if label.present? %>
 <label  class="form-label"
         :for="<%= dom_id.html_safe %>">
@@ -14,7 +17,7 @@
   <% end %>
   <% locations.each do |location| %>
     <option value="<%= location.id %>">
-      <%= location %>
+      <%= location.to_s_in(current_language) %>
     </option>
   <% end %>
 </select>

@@ -11,7 +11,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-end">
           <%= link_to t('menu.profile'), edit_user_registration_path, class: 'dropdown-item' %>
-          <%= link_to t('menu.admin'), admin_root_path, class: 'dropdown-item' %>
+          <%= link_to t('menu.admin'), admin_root_path(lang: current_university.default_language), class: 'dropdown-item' %>
           <%= link_to t('menu.sign_out'), destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
         </div>
       </li>

@@ -1,9 +1,10 @@
 module Permalinkable
   extend ActiveSupport::Concern
 
-  included do
-    include Staticable
+  include Sluggable
+  include Staticable
 
+  included do
     has_many  :permalinks,
               class_name: "Communication::Website::Permalink",
               as: :about,

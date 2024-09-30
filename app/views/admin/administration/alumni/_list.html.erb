@@ -1,0 +1,22 @@
+<div class="row g-3">
+  <% alumni.each do |person| %>
+    <div class="col-6 col-lg-3 col-xxl-2">
+      <div class="card mb-0">
+        <%= osuny_thumbnail_localized person, large: true %>
+        <div class="card-body">
+          <p class="mb-1">
+            <%= osuny_link_localized  person,
+                                      admin_administration_alumnus_path(person),
+                                      classes: 'stretched-link'  %>
+          </p>
+          <% if person.cohorts.any? %>
+            <p class="small text-muted mb-0">
+              <%= person.cohorts.size %>
+              <%= Education::Cohort.model_name.human(count: person.cohorts.size).downcase %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

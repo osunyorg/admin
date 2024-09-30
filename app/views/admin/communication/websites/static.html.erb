@@ -1,4 +1,5 @@
-<%= render 'admin/application/static/title' %>
+<%# TODO: Title should be removed safely as website title is now in languages config file. %>
+<%= render 'admin/application/static/title', about: @website.original_localization.to_s %>
 default:
 <% if @website.default_image.attached? %>
   image:
@@ -7,25 +8,4 @@ default:
 <% if @website.default_shared_image.attached? %>
   shared_image:
     id: <%= @website.default_shared_image.blob&.id %>
-<% end %>
-social:
-<%
-[
-  :email,
-  :mastodon,
-  :peertube,
-  :x,
-  :github,
-  :linkedin,
-  :youtube,
-  :vimeo,
-  :instagram,
-  :facebook,
-  :tiktok
-].each do |social_element|
-  value = @website.send "social_#{social_element}"
-  next if value.blank?
-%>
-  <%= social_element %>: >-
-    <%= value %>
 <% end %>

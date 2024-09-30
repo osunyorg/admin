@@ -1,0 +1,18 @@
+<% content_for :title, University::Person::Alumnus.model_name.human(count: 2) %>
+
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @alumni.total_count %>
+    <%= University::Person::Alumnus.model_name.human(count: @alumni.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_administration_alumni_path %>
+</div>
+
+<%= render 'admin/administration/alumni/list', alumni: @alumni %>
+<%= paginate @alumni %>
+
+<% content_for :action_bar_left do %>
+  <%= link_to t('university.alumni.cohorts.import_btn'),
+              new_admin_administration_alumni_cohorts_import_path,
+              class: button_classes if can? :create, University::Person::Alumnus %>
+<% end %>
