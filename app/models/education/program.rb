@@ -139,7 +139,7 @@ class Education::Program < ApplicationRecord
   end
 
   def has_education_programs?
-    published? || descendants.any?(&:published?)
+    true
   end
 
   def has_education_diplomas?
