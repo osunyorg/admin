@@ -1,7 +1,7 @@
 <div class="row g-2 mb-3">
   <% categories.each do |category| %>
     <div>
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized category %>
         <div class="card-body">
           <%= osuny_published_localized category %>

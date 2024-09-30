@@ -10,7 +10,7 @@
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
-<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
+<%= render 'admin/communication/contents/editor', about: @l10n %>
 <% if @projects.total_count > 0 %>
   <%
   title = Communication::Website::Portfolio::Project.model_name.human(count: 2)

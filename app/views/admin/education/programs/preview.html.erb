@@ -1,21 +1,21 @@
-<% 
-@title = @program.name
-@image = @program.best_featured_image 
+<%
+@title = @l10n.name
+@image = @l10n.best_featured_image
 %>
 <div class="container">
   <div class="lead" itemprop="abstract">
-    <%= sanitize @program.presentation %>
+    <%= sanitize @l10n.presentation %>
   </div>
 </div>
 <section id="presentation">
   <div class="container">
     <div class="content">
       <div>
-        <h2><%= Education::Program.human_attribute_name('presentation') %></h2>
+        <h2><%= Education::Program::Localization.human_attribute_name('presentation') %></h2>
       </div>
       <div>
         <div class="subpart">
-          <%= sanitize @program.objectives %>
+          <%= sanitize @l10n.objectives %>
         </div>
         <div class="subpart">
           <h3>Informations administratives</h3>
@@ -30,15 +30,15 @@
                   </tr>
                 <% end %>
                 <tr>
-                  <th><%= Education::Program.human_attribute_name('initial') %></th>
+                  <th><%= Education::Program::Localization.human_attribute_name('initial') %></th>
                   <td><%= t @program.initial %></td>
                 </tr>
                 <tr>
-                  <th><%= Education::Program.human_attribute_name('continuing') %></th>
+                  <th><%= Education::Program::Localization.human_attribute_name('continuing') %></th>
                   <td><%= t @program.continuing %></td>
                 </tr>
                 <tr>
-                  <th><%= Education::Program.human_attribute_name('apprenticeship') %></th>
+                  <th><%= Education::Program::Localization.human_attribute_name('apprenticeship') %></th>
                   <td><%= t @program.apprenticeship %></td>
                 </tr>
               </tbody>
@@ -51,7 +51,7 @@
 </section>
 
 <div class="blocks">
-  <%= render 'admin/communication/blocks/content/show', about: @program, strip_javascript: true %>
+  <%= render 'admin/communication/contents/show', about: @l10n, strip_javascript: true %>
 </div>
 
 <section id="pedagogy">
@@ -62,16 +62,16 @@
       </div>
       <div>
         <div class="subpart">
-          <h3><%= Education::Program.human_attribute_name('content') %></h3>
-          <%= sanitize @program.content %>
+          <h3><%= Education::Program::Localization.human_attribute_name('content') %></h3>
+          <%= sanitize @l10n.content %>
         </div>
         <div class="subpart">
-          <h3><%= Education::Program.human_attribute_name('pedagogy') %></h3>
-          <%= sanitize @program.pedagogy %>
+          <h3><%= Education::Program::Localization.human_attribute_name('pedagogy') %></h3>
+          <%= sanitize @l10n.pedagogy %>
         </div>
         <div class="subpart">
-          <h3><%= Education::Program.human_attribute_name('evaluation') %></h3>
-          <%= sanitize @program.evaluation %>
+          <h3><%= Education::Program::Localization.human_attribute_name('evaluation') %></h3>
+          <%= sanitize @l10n.evaluation %>
         </div>
         <div class="subpart">
           <h3>Enseignants·es</h3>
@@ -80,9 +80,10 @@
               <caption>Enseignants·es</caption>
               <tbody>
                 <% @program.university_person_involvements.each do |involvement| %>
+                  <% involvement_l10n = involvement.best_localization_for(@l10n.language) %>
                   <tr>
-                    <th scope="row"><a><%= involvement %></a></th>
-                    <td><%= involvement.description%></td>
+                    <th scope="row"><a><%= involvement.to_s_in(@l10n.language) %></a></th>
+                    <td><%= involvement_l10n.description %></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -102,10 +103,10 @@
       </div>
     <div>
     <div class="subpart">
-      <h3><%= Education::Program.human_attribute_name('opportunities') %></h3>
-      <%= sanitize @program.opportunities %>
-      <h3><%= Education::Program.human_attribute_name('results') %></h3>
-      <%= sanitize @program.results %>
+      <h3><%= Education::Program::Localization.human_attribute_name('opportunities') %></h3>
+      <%= sanitize @l10n.opportunities %>
+      <h3><%= Education::Program::Localization.human_attribute_name('results') %></h3>
+      <%= sanitize @l10n.results %>
     </div>
   </div>
 </section>
@@ -118,40 +119,41 @@
       </div>
       <div>
         <div class="subpart">
-          <h3><%= Education::Program.human_attribute_name('prerequisites') %></h3>
-          <%= sanitize @program.prerequisites %>
+          <h3><%= Education::Program::Localization.human_attribute_name('prerequisites') %></h3>
+          <%= sanitize @l10n.prerequisites %>
         </div>
         <div class="subpart">
-          <h3><%= Education::Program.human_attribute_name('pricing') %></h3>
-          <%= sanitize @program.pricing %>
+          <h3><%= Education::Program::Localization.human_attribute_name('pricing') %></h3>
+          <%= sanitize @l10n.pricing %>
         </div>
         <div class="subpart">
-          <h3><%= Education::Program.human_attribute_name('registration') %></h3>
-          <%= sanitize @program.registration %>
+          <h3><%= Education::Program::Localization.human_attribute_name('registration') %></h3>
+          <%= sanitize @l10n.registration %>
         </div>
         <div class="subpart">
-          <h3><%= Education::Program.human_attribute_name('accessibility') %></h3>
-          <%= sanitize @program.accessibility %>
+          <h3><%= Education::Program::Localization.human_attribute_name('accessibility') %></h3>
+          <%= sanitize @l10n.accessibility %>
         </div>
         <div class="subpart">
-          <h3><%= Education::Program.human_attribute_name('other') %></h3>
-          <%= sanitize @program.other %>
+          <h3><%= Education::Program::Localization.human_attribute_name('other') %></h3>
+          <%= sanitize @l10n.other %>
         </div>
         <div class="subpart">
           <h3>Rôles</h3>
           <% @program.university_roles.each do |role| %>
+            <% role_l10n = role.best_localization_for(@l10n.language) %>
             <p>
-              <b><%= role.description %></b><br>
+              <b><%= role_l10n.description %></b><br>
               <% role.people.each do |person| %>
-                <a><%= person %></a><br>
+                <a><%= person.to_s_in(@l10n.language) %></a><br>
                 <a rel="noreferrer" target="_blank"><%= person.email %></a><br>
               <% end %>
             </p>
           <% end %>
         </div>
         <div class="subpart">
-          <h3><%= Education::Program.human_attribute_name('contacts') %></h3>
-          <%= sanitize @program.contacts %>
+          <h3><%= Education::Program::Localization.human_attribute_name('contacts') %></h3>
+          <%= sanitize @l10n.contacts %>
         </div>
       </div>
     </div>

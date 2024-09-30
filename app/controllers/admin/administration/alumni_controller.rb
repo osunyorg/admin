@@ -5,18 +5,11 @@ class Admin::Administration::AlumniController < Admin::Administration::Applicati
 
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_alumni_organization
-  has_scope :for_alumni_program
-  has_scope :for_alumni_year
-
   def index
-    @alumni = apply_scopes(@alumni)
-                .alumni
-                .accessible_by(current_ability)
-                .ordered(current_language)
-                .page(params[:page])
-                .per(6*5)
+    @alumni = @alumni.filter_by(params[:filters], current_language)
+                     .alumni
+                     .ordered(current_language)
+                     .page(params[:page])
     breadcrumb
   end
 

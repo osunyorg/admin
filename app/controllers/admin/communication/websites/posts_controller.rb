@@ -5,17 +5,10 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  # Allow to override the default load_filters from Admin::Filterable
-  before_action :load_filters, only: :index
-
-  has_scope :for_search_term
-  has_scope :for_author
-  has_scope :for_category
-
   def index
-    @posts = apply_scopes(@posts).tmp_original # TODO L10N : To remove
-                                 .ordered(current_language)
-                                 .page(params[:page])
+    @posts = @posts.filter_by(params[:filters], current_language)
+                   .ordered(current_language)
+                   .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end
@@ -27,6 +20,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     is_published = params[:published] == "true"
     target_posts.each do |post|
       l10n = post.localization_for(current_language)
+      next unless l10n.present?
       l10n.publish!
       post.save_and_sync
     end
@@ -66,7 +60,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     @post.website = @website
     @l10n.add_photo_import params[:photo_import]
     if @post.save_and_sync
-      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_created_html', model: @post.to_s_in(current_language))
+      redirect_to admin_communication_website_post_path(@post),
+                  notice: t('admin.successfully_created_html', model: @post.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -77,7 +72,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def update
     @l10n.add_photo_import params[:photo_import]
     if @post.update_and_sync(post_params)
-      redirect_to admin_communication_website_post_path(@post), notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
+      redirect_to admin_communication_website_post_path(@post),
+                  notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -93,7 +89,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def destroy
     @post.destroy
-    redirect_to admin_communication_website_posts_url, notice: t('admin.successfully_destroyed_html', model: @post.to_s_in(current_language))
+    redirect_to admin_communication_website_posts_url,
+                notice: t('admin.successfully_destroyed_html', model: @post.to_s_in(current_language))
   end
 
   protected
@@ -120,17 +117,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     .merge(university_id: current_university.id)
   end
 
-  def load_filters
-    @filters = ::Filters::Admin::Communication::Website::Posts.new(
-        current_user,
-        @website,
-        current_language
-      ).list
-  end
-
   def categories
     @website.post_categories
-            .tmp_original # TODO L10N : To remove
             .ordered
   end
 end

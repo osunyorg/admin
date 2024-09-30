@@ -86,9 +86,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def base_events
-    events = website.events
-                    .tmp_original # TODO L10N: to remove
-                    .published_now_in(block.language)
+    events = website.events.published_now_in(block.language)
     events = events.send(time) if time.in? AUTHORIZED_SCOPES
     events
   end

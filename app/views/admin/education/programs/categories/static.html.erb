@@ -1,0 +1,13 @@
+<%
+category = @l10n.about
+%>
+<%= render 'admin/application/static/title', about: @l10n %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            about: category,
+            l10n: @l10n,
+            full_width: true,
+            toc_offcanvas: true %>
+position: <%= category.position %>
+<%= render 'admin/application/l10n/static', about: @l10n %>

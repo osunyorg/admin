@@ -52,6 +52,7 @@ languages = current_university.languages.ordered
       <%= render_navigation context: 'navigation/admin' %>
     <% end %>
   </div>
+
   <% if languages.many? %>
     <div class="collapse popin-menu" id="menu-language" data-bs-parent="#popins">
       <ul class="list-unstyled">
@@ -68,6 +69,7 @@ languages = current_university.languages.ordered
       </ul>
     </div>
   <% end %>
+
   <div class="collapse popin-menu" id="menu-profile" data-bs-parent="#popins">
     <div class="text-center pt-3 pb-2">
       <%= link_to admin_profile_path do %>

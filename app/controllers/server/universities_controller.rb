@@ -2,14 +2,8 @@ class Server::UniversitiesController < Server::ApplicationController
 
   load_and_authorize_resource
 
-  has_scope :for_search_term
-  has_scope :for_real_university
-  has_scope :for_contribution
-  has_scope :for_university_kind
-  has_scope :for_language
-
   def index
-    @universities = apply_scopes(@universities).ordered.page(params[:page])
+    @universities = @universities.filter_by(params[:filters], current_language).ordered.page(params[:page])
     breadcrumb
   end
 

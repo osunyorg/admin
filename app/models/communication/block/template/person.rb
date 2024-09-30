@@ -56,7 +56,6 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   def selected_elements_category
     return [] if category.nil?
     persons = university.university_people
-                        .tmp_original # TODO L10N : To remove
                         .for_category(category.id)
                         .ordered(block.language)
     persons.map do |person|

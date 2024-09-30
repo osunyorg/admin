@@ -15,15 +15,12 @@
       <div data-show-for-roles="program_manager">
         <%= f.association :programs_to_manage,
                           as: :check_boxes,
-                          collection: collection_tree(current_university.education_programs.ordered),
-                          label_method: ->(p) { sanitize p[:label] },
-                          value_method: ->(p) { p[:id] } %>
+                          collection: osuny_collection_tree(current_university.education_programs.root, localized: true) %>
       </div>
       <div data-show-for-roles="author,contributor,website_manager">
         <%= f.association :websites_to_manage,
                           as: :check_boxes,
-                          collection: current_university.communication_websites.ordered
-                            %>
+                          collection: osuny_collection(current_university.communication_websites, localized: true) %>
       </div>
     </div>
     <div class="col-md-4">

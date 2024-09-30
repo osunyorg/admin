@@ -3,7 +3,6 @@ class Extranet::Alumni::AcademicYearsController < Extranet::Alumni::ApplicationC
     @academic_years = about&.education_academic_years
                             .ordered(current_language)
                             .page(params[:page])
-                            .per(20)
     @count = @academic_years.total_count
     breadcrumb
   end

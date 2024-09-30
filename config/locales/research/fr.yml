@@ -5,9 +5,6 @@ fr:
       research/hal: HAL
   activerecord:
     models:
-      university/person/researcher:
-        one: Chercheur·e
-        other: Chercheur·e·s
       research/hal/author:
         one: Auteur·e HAL
         other: Auteur·e·s HAL
@@ -35,6 +32,9 @@ fr:
       research/thesis:
         one: Thèse
         other: Thèses
+      university/person/localization/researcher:
+        one: Chercheur·e
+        other: Chercheur·e·s
     attributes:
       research/hal/author:
         docid: Identifiant HAL
@@ -84,7 +84,7 @@ fr:
         address_additional: Complément d'adresse
         address_name: Nom de l'adresse
         name: Nom
-      research/laboratory/axis:
+      research/laboratory/axis/localization:
         name: Nom
         short_name: Nom court
         text: Texte
@@ -115,7 +115,7 @@ fr:
   admin:
     research:
       researcher:
-        show_person_html: Cette page montre uniquement les publications scientifiques de la personne. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien     
+        show_person_html: Cette page montre uniquement les publications scientifiques de la personne. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien
   enums:
     research:
       publication:
@@ -124,8 +124,8 @@ fr:
           osuny: Osuny
   research/hal:
     description:
-      text: "HAL signifie Hyper Article en Ligne. C’est une plateforme pluridisciplinaire nationale pour le dépôt et la consultation des écrits, travaux et résultats de recherches scientifiques des chercheur·e·s et enseignant·e·s-chercheur·e·s. HAL est un bien commun pour la recherche : Les plus grands organismes de recherche et la majorité des universités françaises ont choisi et soutiennent HAL, une infrastructure publique, pérenne et responsable."
       source: HAL.science
+      text_html: "HAL signifie Hyper Article en Ligne. C’est une plateforme pluridisciplinaire nationale pour le dépôt et la consultation des écrits, travaux et résultats de recherches scientifiques des chercheur·e·s et enseignant·e·s-chercheur·e·s. HAL est un bien commun pour la recherche : Les plus grands organismes de recherche et la majorité des universités françaises ont choisi et soutiennent HAL, une infrastructure publique, pérenne et responsable."
   research:
     citations:
       apa:
@@ -139,8 +139,6 @@ fr:
       iso690:
         label: ISO 690
     description:
-      text: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
-      source: Serge Haroche, Prix Nobel de physique 2012
       parts:
         hal:
           description: Publications et auteur·e·s dans la base de données HAL
@@ -154,6 +152,8 @@ fr:
           description: Personne physique liée à une université, une composante, un laboratoire, etc.
         thesis:
           description: Production scientifique permettant d'obtenir le titre de Docteur·e
+      source: Serge Haroche, Prix Nobel de physique 2012
+      text_html: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
     hal:
       description:
         parts:
@@ -177,4 +177,3 @@ fr:
         localizations:
           address_additional: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
           address_name: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
-

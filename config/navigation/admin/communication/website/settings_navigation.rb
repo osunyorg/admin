@@ -7,6 +7,5 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :subnav_settings,
                   t('admin.subnav.settings'),
                   edit_admin_communication_website_path(id: @website.id, website_id: nil) if can?(:edit, @website)
-    # TODO L10N : @Arnaud on peut supprimer si qu'un item?
   end
 end

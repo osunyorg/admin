@@ -1,11 +1,11 @@
 class Admin::Communication::Websites::Posts::AuthorsController < Admin::Communication::Websites::Posts::ApplicationController
 
-  has_scope :for_search_term
-
   def index
-    @authors =  apply_scopes(@website.authors.accessible_by(current_ability))
-                                .ordered(current_language)
-                                .page(params[:page])
+    @authors =  @website.authors
+                        .filter_by(params[:filters], current_language)
+                        .accessible_by(current_ability)
+                        .ordered(current_language)
+                        .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end

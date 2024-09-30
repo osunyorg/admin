@@ -1,0 +1,47 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_theme_version,
+                      label: t('filters.attributes.element', element: t('server_admin.websites.theme_version').downcase),
+                      collection: Communication::Website.all.pluck(:theme_version).uniq.sort
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_production,
+                      label: t('filters.attributes.element', element: t('server_admin.websites.production_status').downcase),
+                      collection: [
+                        { to_s: t('true'), id: 'true' }, 
+                        { to_s: t('false'), id: 'false' }
+                      ]
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_update,
+                      label: t('filters.attributes.element', element: t('server_admin.websites.update_mode').downcase),
+                      collection: [
+                        { to_s: t('server_admin.websites.autoupdate_theme.true'), id: 'true' }, 
+                        { to_s:  t('server_admin.websites.autoupdate_theme.false'), id: 'false' }
+                      ]
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_updatable_theme,
+                      label: t('filters.attributes.element', element: t('server_admin.websites.updatable_theme_filter.element').downcase),
+                      collection: [
+                        { to_s: t('server_admin.websites.updatable_theme_filter.value'), id: 'true' }
+                      ]
+                      %>
+
+    <% end %>
+<% end %>

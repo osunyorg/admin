@@ -6,7 +6,7 @@ module University::WithLanguages
     belongs_to :default_language, class_name: "Language"
     has_and_belongs_to_many :languages
 
-    scope :for_language, -> (language) { joins(:languages).where(languages: { id: language } ) }
+    scope :for_language, -> (language_ids, language = nil) { joins(:languages).where(languages: { id: language_ids } ).distinct }
 
   end
 

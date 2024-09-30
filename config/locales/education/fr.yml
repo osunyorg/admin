@@ -4,9 +4,6 @@ fr:
       education: Enseignement
   activerecord:
     models:
-      university/person/teacher:
-        one: Enseignant·e
-        other: Enseignant·e·s
       education/academic_year:
         one: Année
         other: Années
@@ -19,9 +16,15 @@ fr:
       education/program:
         one: Formation
         other: Formations
+      education/program/category:
+        one: Catégorie
+        other: Catégories
       education/school:
         one: École
         other: Écoles
+      university/person/localization/teacher:
+        one: Enseignant·e
+        other: Enseignant·e·s
     attributes:
       education/academic_year:
         year: Année
@@ -85,6 +88,13 @@ fr:
         short_name: Nom abrégé
         slug: Identifiant
         url: Site Web
+      education/program/category:
+        children: Sous-catégories
+        parent: Catégorie parente
+      education/program/category/localization:
+        language: Langue
+        name: Nom
+        slug: Slug
       education/school:
         address: Adresse
         administrators: Équipe administrative
@@ -117,8 +127,6 @@ fr:
           none: Aucun rôle défini
   education:
     description:
-      text: L’éducation est l’ensemble des processus et des procédés qui permettent à tout enfant humain d’accéder progressivement à la culture, l’accès à la culture étant ce qui distingue l’homme de l’animal.
-      source: Olivier Reboul, La philosophie de l'éducation, 2018
       parts:
         diploma:
           description: Présentation des diplômes et de leurs caractéristiques
@@ -128,6 +136,8 @@ fr:
           description: Présentation des enseignants et enseignantes, avec leur biographie et leurs enseignements dans les différentes formations
         school:
           description: Présentation des écoles, de leurs coordonnées, enseignements, équipes et informations administratives
+      source: Olivier Reboul, La philosophie de l'éducation, 2018
+      text_html: L’éducation est l’ensemble des processus et des procédés qui permettent à tout enfant humain d’accéder progressivement à la culture, l’accès à la culture étant ce qui distingue l’homme de l’animal.
     manage_programs: Gérer les formations
     manage_roles: Gérer les rôles
     manage_teachers: Gérer les enseignements

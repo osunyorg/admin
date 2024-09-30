@@ -1,16 +1,12 @@
 class Admin::Communication::WebsitesController < Admin::Communication::Websites::ApplicationController
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_about_type
-
   before_action :set_feature_nav, only: [:edit, :update]
 
   def index
-    @websites = apply_scopes(@websites)
-                  .ordered(current_language)
-                  .page(params[:page])
-                  .per(30)
+    @websites = @websites.filter_by(params[:filters], current_language)
+                         .ordered(current_language)
+                         .page(params[:page])
     breadcrumb
   end
 
@@ -31,13 +27,13 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def show
-    @all_pages = @website.pages.accessible_by(current_ability).tmp_original
+    @all_pages = @website.pages.accessible_by(current_ability)
     @pages = @all_pages.latest_in(current_language)
-    @all_posts = @website.posts.accessible_by(current_ability).tmp_original
+    @all_posts = @website.posts.accessible_by(current_ability)
     @posts = @all_posts.latest_in(current_language)
-    @all_events = @website.events.accessible_by(current_ability).tmp_original
+    @all_events = @website.events.accessible_by(current_ability)
     @events = @all_events.latest_in(current_language)
-    @all_projects = @website.projects.accessible_by(current_ability).tmp_original
+    @all_projects = @website.projects.accessible_by(current_ability)
     @projects = @all_projects.latest_in(current_language)
     breadcrumb
   end
@@ -58,7 +54,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def create
     if @website.save_and_sync
-      redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s)
+      redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -67,7 +63,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def update
     if @website.update_and_sync(website_params)
-      redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s)
+      redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -77,7 +73,20 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def destroy
     @website.destroy
-    redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @website.to_s)
+    redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @website.to_s_in(current_language))
+  end
+
+  def confirm_localization
+    @about_gid = params[:about]
+    @about = GlobalID::Locator.locate(@about_gid)
+  end
+
+  def do_confirm_localization
+    @about_gid = params[:about]
+    @about = GlobalID::Locator.locate(@about_gid)
+    @website.localize_in!(current_language)
+    @about.localize_in!(current_language)
+    redirect_to [:edit, :admin, @about]
   end
 
   def confirm_localization

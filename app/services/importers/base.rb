@@ -6,6 +6,7 @@ module Importers
 
     def initialize(import)
       @import = import
+      @language = import.language
       @university = import.university
       @errors = []
       analyze_xlsx

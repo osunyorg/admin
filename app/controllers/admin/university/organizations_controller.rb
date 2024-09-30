@@ -6,20 +6,14 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_category
-  has_scope :for_kind
-
   def index
-    @organizations = apply_scopes(@organizations)
-                      .tmp_original # TODO L10N : To remove
-                      .ordered(current_language)
-
+    @organizations = @organizations.filter_by(params[:filters], current_language)
+                                   .ordered(current_language)
     @feature_nav = 'navigation/admin/university/organizations'
 
     respond_to do |format|
       format.html {
-        @organizations = @organizations.page(params[:page]).per(24)
+        @organizations = @organizations.page(params[:page])
         breadcrumb
       }
       format.xlsx {
@@ -32,7 +26,6 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def search
     @term = params[:term].to_s
     @organizations = current_university.organizations
-                                       .tmp_original # TODO L10N : To remove
                                        .search_by_siren_or_name(@term, current_language)
                                        .ordered(current_language)
   end
@@ -107,7 +100,6 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def categories
     current_university.organization_categories
-                      .tmp_original # TODO L10N : To remove
                       .ordered
   end
 end

@@ -26,7 +26,7 @@ class Language < ApplicationRecord
                           join_table: :communication_websites_languages,
                           association_foreign_key: :communication_website_id
 
-  validates :iso_code, presence: true
+  validates :name, :iso_code, presence: true
   validates :iso_code, uniqueness: true
 
   scope :available_for_interface, -> { where(iso_code: I18n.available_locales) }

@@ -247,8 +247,10 @@ en:
       kind: Filter by kind
       role: Filter by role
     buttons:
-      expand: Search
-      submit: Search
+      close: Close
+      expand: Search and filter
+      reset: Reset
+      submit: Search and filter
   folder:
     empty: Folder is empty
     open: Open folder

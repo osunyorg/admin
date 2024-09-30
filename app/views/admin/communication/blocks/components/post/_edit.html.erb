@@ -1,10 +1,10 @@
 
 <%
 posts = osuny_collection(
-  block.about.website.posts
-    .tmp_original, # TODO L10N : remove
+  block.about.website.posts,
   localized: true
-) %>
+) 
+%>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>

@@ -9,7 +9,7 @@
         involvement_l10n = involvement.best_localization_for(current_language)
       %>
       <div>
-        <div class="card card--horizontal">
+        <div class="<%= osuny_card_classes(horizontal: true) %>">
           <%= osuny_thumbnail_localized program %>
           <div class="card-body">
             <%= osuny_link_localized program, [:admin, program] %>

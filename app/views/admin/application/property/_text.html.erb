@@ -8,8 +8,11 @@ is_blank = Static.blank?(value)
 hide_blank ||= false
 title = object.class.human_attribute_name(property)
 if source
+  # source is a l10n
+  source_about = source.about
+  language = source.language
   title += ' <span class="small">'
-  title += t 'admin.inheritance.sentence_html', link: link_to(source, [:admin, source])
+  title += t 'admin.inheritance.sentence_html', link: link_to(source, [:admin, source_about, { lang: language }])
   title += '</span>'
 end
 %>

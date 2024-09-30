@@ -73,10 +73,10 @@
 .commands
     backdrop-filter: blur(6px)
     background: $color-commands
-    @media screen and ( min-height: 700px )
+    @media screen and ( min-height: 500px )
         bottom: 0
         left: 0
-        position: sticky
+        position: fixed
         right: 0
         z-index: 100
 
@@ -124,15 +124,16 @@ nav[aria-label="breadcrumb"]
 
 .feature-nav
     line-height: 100%
-    *
-        margin-right: pxToRem(40)
-    h1
-        display: inline-block
     a
         color: $color-flexoki-600
-        display: inline-block
         font-family: $font-family-serif
-        font-size: $h1-font-size
+    h1, a
+        display: inline-block
+        font-size: $h1-font-size !important
+        line-height: 100%
+        margin-bottom: 0
+        margin-right: pxToRem(40)
+        margin-top: 0
 
 #menu-main
     .menu-content

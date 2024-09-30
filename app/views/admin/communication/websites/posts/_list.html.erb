@@ -1,11 +1,9 @@
 <%
 small ||= false
-hide_author ||= false
 hide_buttons ||= false
 hide_pinned ||= false
 selectable ||= false
 if small
-  hide_author = true
   hide_buttons = true
 end
 %>
@@ -43,7 +41,7 @@ end
               </td>
             <% end %>
             <td>
-              <div class="card card--horizontal">
+              <div class="<%= osuny_card_classes(horizontal: true) %>">
                 <%= osuny_thumbnail_localized post %>
                 <div class="card-body">
                   <%= osuny_published_localized post unless small %>
@@ -56,11 +54,8 @@ end
                 </div>
                 <div class="card-footer d-none d-lg-block">
                   <% if !hide_buttons && post.pinned_in?(current_language) %>
+                    <span class="badge border border-subtle text-dark">
                     <%= Communication::Website::Post::Localization.human_attribute_name('pinned') %>
-                  <% end %>
-                  <% if !hide_author && post.author %>
-                    <span class="ms-3">
-                      <%= post.author.to_s_in(current_language) %>
                     </span>
                   <% end %>
                   <% if published_at = post.published_at_in(current_language) %>

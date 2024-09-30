@@ -1,12 +1,17 @@
-<% content_for :title, University::Person::Researcher.model_name.human(count: 2) %>
+<% content_for :title, University::Person::Localization::Researcher.model_name.human(count: 2) %>
 
-<p>&nbsp;</p>
-<%= render 'filters', current_path: admin_research_researchers_path, filters: @filters if @filters.any?  %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @researchers.total_count %>
+    <%= University::Person::Localization::Researcher.model_name.human(count: @researchers.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_research_researchers_path %>
+</div>
 
 <div class="row g-3">
   <% @researchers.each do |person| %>
     <div class="col-6 col-lg-3 col-xxl-2">
-      <div class="card mb-0">
+      <div class="<%= osuny_card_classes %>">
         <%= osuny_thumbnail_localized person, large: true %>
         <div class="card-body">
           <p class="mb-1">

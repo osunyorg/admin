@@ -7,7 +7,7 @@
   </div>
   <div class="offset-lg-1 col-lg-8">
     <%= osuny_panel t('admin.summary.label'), small: true do %>
-      <p class="lead mb-1"><%= @location.summary %></p>
+      <p class="lead mb-1"><%= @l10n.summary %></p>
     <% end %>
     <div class="mb-5">
       <div class="row">
@@ -38,61 +38,25 @@
         </div>
       </div>
     </div>
-    <% if @location.schools.any? %>
+    <% if @schools.any? %>
       <%= osuny_panel Administration::Location.human_attribute_name('schools'), small: true do %>
-        <div class="row g-2">
-          <% @location.schools.ordered.each do |school| %>
-            <div>
-              <div class="card card--horizontal">
-                <%= osuny_thumbnail_localized school %>
-                <div class="card-body">
-                  <%= osuny_link_localized school, [:admin, school], classes: 'stretched-link' %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
+        <%= render 'admin/education/schools/list', schools: @schools %>
       <% end %>
     <% end %>
-    <% if @location.programs.any? %>
+    <% if @programs.any? %>
       <%= osuny_panel Administration::Location.human_attribute_name('programs'), small: true do %>
-        <div class="row g-2">
-          <% @location.programs.ordered.each do |program| %>
-            <div>
-              <div class="card card--horizontal">
-                <%= osuny_thumbnail_localized program %>
-                <div class="card-body">
-                  <%= osuny_link_localized program, [:admin, program], classes: 'stretched-link' %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
+        <%= render 'admin/education/programs/list', programs: @programs %>
       <% end %>
     <% end %>
-    <% if @location.websites.any? %>
+    <% if @websites.any? %>
       <%= osuny_panel Administration::Location.human_attribute_name('websites'), small: true do %>
-        <div class="row g-2">
-          <% @location.websites.each do |website| %>
-            <div>
-              <div class="card card--horizontal">
-                <%= osuny_thumbnail_localized website %>
-                <div class="card-body">
-                  <%= osuny_link_localized website, [:admin, website], classes: 'stretched-link' %>
-                </div>
-                <div class="card-footer small text-muted">
-                  <%= website.url %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
+        <%= render 'admin/communication/websites/list', websites: @websites %>
       <% end %>
     <% end %>
   </div>
 </div>
 
-<%= render 'admin/communication/blocks/content/editor', about: @location %>
+<%= render 'admin/communication/contents/editor', about: @l10n %>
 
 <%= render 'admin/application/connections/list', about: @location %>
 

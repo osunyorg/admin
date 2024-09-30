@@ -45,15 +45,15 @@
     <div class="card">
       <div class="card-body">
         <%= t('server_admin.websites.connections_count', count: @website.connections.count) %><br>
-        <%= link_to t('server_admin.websites.details'), admin_communication_website_connections_url(@website, host: @website.university.url), target: :_blank %>
+        <%= link_to t('server_admin.websites.details'), admin_communication_website_connections_url(@website, lang: @website.default_language, host: @website.university.url), target: :_blank %>
       </div>
     </div>
   </div>
   <div class="col-xl-6">
     <div class="card">
       <div class="card-body">
-        <%= t('server_admin.websites.recursive_dependencies_count', count: @website.recursive_dependencies.count) %><br>
-        <%= link_to t('server_admin.websites.details'), admin_communication_website_dependencies_url(@website, host: @website.university.url), target: :_blank %>
+        <%= t('server_admin.websites.recursive_dependencies_count', count: @website.recursive_dependencies(follow_direct: true).count) %><br>
+        <%= link_to t('server_admin.websites.details'), admin_communication_website_dependencies_url(@website, lang: @website.default_language, host: @website.university.url), target: :_blank %>
       </div>
     </div>
   </div>

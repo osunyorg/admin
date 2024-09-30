@@ -5,16 +5,10 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   include Admin::HasStaticAction
   include Admin::Localizable
 
-  # Allow to override the default load_filters from Admin::Filterable
-  before_action :load_filters, only: :index
-
-  has_scope :for_search_term
-  has_scope :for_category
-
   def index
-    @projects = apply_scopes(@projects).tmp_original # TODO L10N : To remove
-                                     .ordered(current_language)
-                                     .page(params[:page])
+    @projects = @projects.filter_by(params[:filters], current_language)
+                         .ordered(current_language)
+                         .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/portfolio'
     breadcrumb
   end
@@ -43,6 +37,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   def create
     @project.website = @website
+    @project.created_by = current_user
     @l10n.add_photo_import params[:photo_import]
     if @project.save_and_sync
       redirect_to admin_communication_website_portfolio_project_path(@project),
@@ -85,17 +80,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   end
 
   def categories
-    @website.portfolio_categories
-            .tmp_original # TODO L10N : Remove tmp_original
-            .ordered
-  end
-
-  def load_filters
-    @filters = ::Filters::Admin::Communication::Websites::Portfolio::Projects.new(
-        current_user,
-        @website,
-        current_language
-      ).list
+    @website.portfolio_categories.ordered
   end
 
   def project_params
@@ -112,8 +97,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
       ]
     )
     .merge(
-      university_id: current_university.id,
-      language_id: current_language.id
+      university_id: current_university.id
     )
   end
 end

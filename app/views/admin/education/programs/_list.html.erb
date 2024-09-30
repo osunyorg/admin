@@ -3,13 +3,13 @@
   hide_parent ||= false
 %>
 <div class="row g-2 mb-3">
-  <% 
-  programs.each do |program| 
+  <%
+  programs.each do |program|
     parent = program.parent
     diploma = program.diploma
     %>
     <div>
-      <div class="card card--horizontal <%= 'draft' unless program.published? %>">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized program %>
         <div class="card-body">
           <%= osuny_published_localized program %>

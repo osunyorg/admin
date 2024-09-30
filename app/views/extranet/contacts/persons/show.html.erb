@@ -19,11 +19,15 @@
             <h3 class="mb-5"><%= t('extranet.contacts.persons.experiences') %></h3>
 
             <% @current_experiences.each do |experience| %>
+              <%
+              experience_l10n = experience.best_localization_for(current_language)
+              organization_l10n = experience.organization.best_localization_for(current_language)
+              %>
               <article class="experience mb-5 mb-md-4">
                 <div class="row gx-3">
                   <div class="col-md-3">
-                    <% if experience.organization.logo.attached? %>
-                      <%= kamifusen_tag experience.organization.logo, width: 400, class: 'img-fluid',
+                    <% if organization_l10n.logo.attached? %>
+                      <%= kamifusen_tag organization_l10n.logo, width: 400, class: 'img-fluid',
                         sizes: {
                             '(max-width: 576px)': '400px',
                             '(max-width: 991px)': '200px'
@@ -31,10 +35,10 @@
                     <% end %>
                   </div>
                   <div class="col-md-9 mt-4 mt-md-0">
-                    <%= link_to [:contacts, experience.organization], class: 'stretched-link' do %>
+                    <%= link_to contacts_organization_path(experience.organization), class: 'stretched-link' do %>
                       <p>
-                        <b><%= experience.organization %></b><br>
-                        <span class="text-muted"><%= experience.description %></span>
+                        <b><%= organization_l10n %></b><br>
+                        <span class="text-muted"><%= experience_l10n.description %></span>
                       </p>
                     <% end %>
                   </div>

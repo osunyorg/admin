@@ -30,10 +30,16 @@
 #
 class Research::Publication < ApplicationRecord
   include AsIndirectObject
+  include Filterable
   include Permalinkable
   include Sanitizable
   include WithCitations
   include WithGitFiles
+
+  enum source: {
+    osuny: 0,
+    hal: 1
+  }
 
   has_and_belongs_to_many :researchers,
                           class_name: 'University::Person',
@@ -45,16 +51,17 @@ class Research::Publication < ApplicationRecord
                           foreign_key: :research_publication_id,
                           association_foreign_key: :research_hal_author_id
 
-  scope :ordered, -> (language = nil) { order(publication_date: :desc)}
-
-  enum source: {
-    osuny: 0,
-    hal: 1
-  }
-
   validates :title, :publication_date, presence: true
 
   before_validation :generate_authors_citeproc
+
+  scope :ordered, -> (language = nil) { order(publication_date: :desc)}
+  scope :for_search_term, -> (term, language = nil) {
+    where("
+      unaccent(research_publications.abstract) ILIKE unaccent(:term) OR
+      unaccent(research_publications.citation_full) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
 
   def editable?
     source == 'osuny'
@@ -110,9 +117,10 @@ class Research::Publication < ApplicationRecord
   def generate_authors_citeproc
     return if hal?
     self.authors_citeproc = researchers.map do |researcher|
+      researcher_l10n = researcher.original_localization
       {
-        "family" => researcher.last_name,
-        "given" => researcher.first_name
+        "family" => researcher_l10n.last_name,
+        "given" => researcher_l10n.first_name
       }
     end
   end

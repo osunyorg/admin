@@ -68,11 +68,13 @@ teacher_involvements.each do |involvement|
 teachers_description:
 <%
 teacher_involvements.each do |involvement|
+  involvement_l10n = involvement.localization_for(language)
+  next if involvement_l10n.nil?
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
 %>
   "<%= person_l10n.slug %>": >-
-    <%= involvement.description %>
+    <%= involvement_l10n.description %>
 <% end %>
 <% if administrator_involvements.any? %>
 administrators:
@@ -143,5 +145,5 @@ certifications:
 <%= property.to_s %>: >-
   <%= prepare_html_for_static @l10n.send("best_#{property}") %>
 <% end %>
-<%= render 'admin/communication/blocks/content/static', about: @l10n %>
+<%= render 'admin/communication/contents/static', about: @l10n %>
 ---

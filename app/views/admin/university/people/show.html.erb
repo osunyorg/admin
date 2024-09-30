@@ -135,7 +135,7 @@
   </div>
 </div>
 
-<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
+<%= render 'admin/communication/contents/editor', about: @l10n %>
 
 <div class="row">
   <div class="offset-lg-4 col-lg-8">
@@ -158,22 +158,22 @@
                       class: button_classes if can?(:update, @person)
     %>
     <%= osuny_panel University::Person::Experience.model_name.human(count: 2), action: action do %>
-      <%= render 'admin/university/people/experiences/list', experiences: @person.experiences.ordered %>
+      <%= render 'admin/university/people/experiences/list', experiences: @person.experiences.ordered(current_language) %>
     <% end %>
 
     <%= osuny_panel Research::Laboratory.model_name.human(count: 2) do %>
-      <%= render 'admin/research/laboratories/list', laboratories: @person.laboratories.ordered %>
+      <%= render 'admin/research/laboratories/list', laboratories: @person.laboratories.ordered(current_language) %>
     <% end if @person.laboratories.any? %>
 
     <%= render 'admin/application/connections/list', about: @person %>
 
     <% if current_user.server_admin? %>
       <%= osuny_panel t('static') do  %>
-        <%= link_to 'Administrator', 
+        <%= link_to 'Administrator',
                     static_administrator_admin_university_person_path(@person),
                     classes: button_classes,
                     target: :_blank %><br>
-        <%= link_to 'Author', 
+        <%= link_to 'Author',
                     static_author_admin_university_person_path(@person),
                     classes: button_classes,
                     target: :_blank %><br>

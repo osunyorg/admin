@@ -4,7 +4,6 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
   def search
     @term = params[:term].to_s
     @organizations = current_university.organizations
-                                       .tmp_original
                                        .search_by_siren_or_name(@term, current_language)
                                        .ordered(current_language)
   end

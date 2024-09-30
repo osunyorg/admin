@@ -3,7 +3,7 @@ module User::WithPerson
 
   included do
     # Original person
-    has_one :person, -> { where(original_id: nil) }, class_name: 'University::Person', dependent: :nullify
+    has_one :person, class_name: 'University::Person', dependent: :nullify
 
     delegate :experiences, to: :person
 
@@ -15,11 +15,12 @@ module User::WithPerson
 
   def find_or_create_person
     person = university.people.where(email: email).first || university.people.new
-    person.first_name = first_name
-    person.last_name = last_name
-    person.slug = person.to_s.parameterize
     person.user = self
-    person.language_id ||= university.default_language_id
+    person.localizations.build(
+      first_name: first_name,
+      last_name: last_name,
+      language_id: university.default_language_id
+    )
     person.save
   end
 

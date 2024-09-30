@@ -3,21 +3,12 @@
 # Table name: research_journal_papers
 #
 #  id                         :uuid             not null, primary key
-#  abstract                   :text
 #  accepted_at                :date
-#  authors_list               :text
 #  bibliography               :text
 #  doi                        :string
-#  keywords                   :text
-#  meta_description           :text
 #  position                   :integer
-#  published                  :boolean          default(FALSE)
-#  published_at               :datetime
 #  received_at                :date
-#  slug                       :string           indexed
-#  summary                    :text
 #  text                       :text
-#  title                      :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  kind_id                    :uuid             indexed
@@ -31,7 +22,6 @@
 #  index_research_journal_papers_on_kind_id                     (kind_id)
 #  index_research_journal_papers_on_research_journal_id         (research_journal_id)
 #  index_research_journal_papers_on_research_journal_volume_id  (research_journal_volume_id)
-#  index_research_journal_papers_on_slug                        (slug)
 #  index_research_journal_papers_on_university_id               (university_id)
 #  index_research_journal_papers_on_updated_by_id               (updated_by_id)
 #
@@ -45,21 +35,11 @@
 #
 class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : To remove
   include Localizable
   include Sanitizable
   include Searchable
-  include WithBlobs # TODO L10N : To remove
   include WithPosition
   include WithUniversity
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
-  has_one_attached :pdf # TODO L10N : To remove
 
   belongs_to  :journal,
               foreign_key: :research_journal_id
@@ -76,12 +56,32 @@ class Research::Journal::Paper < ApplicationRecord
                           join_table: :research_journal_papers_researchers,
                           association_foreign_key: :researcher_id
 
-  scope :ordered, -> (language = nil) { order(published_at: :desc) }
+  scope :ordered, -> (language) {
+    localization_published_at_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.published_at END),
+        '1970-01-01'
+      ) AS localization_published_at
+    SQL
+
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          research_journal_paper_localizations as localizations
+      ) localizations ON research_journal_papers.id = localizations.about_id
+    SQL
+    ]))
+    .select("research_journal_papers.*", localization_published_at_select)
+    .group("research_journal_papers.id")
+    .order("localization_published_at DESC")
+  }
   scope :ordered_by_position, -> { order(:position) }
 
   def dependencies
     localizations +
-    contents_dependencies +
     people.map(&:researcher_facets)
   end
 

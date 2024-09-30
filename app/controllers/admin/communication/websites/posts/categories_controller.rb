@@ -8,7 +8,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   include Admin::HasStaticAction
 
   def index
-    @root_categories = categories.root.tmp_original # TODO L10N : To remove
+    @root_categories = categories.root.ordered
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
@@ -84,8 +84,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
             ]
           )
           .merge(
-            university_id: current_university.id,
-            language_id: current_language.id
+            university_id: current_university.id
           )
   end
 end

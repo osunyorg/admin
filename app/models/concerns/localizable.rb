@@ -7,22 +7,7 @@ module Localizable
                 inverse_of: :about,
                 dependent: :destroy
 
-    # TODO L10N : Deprecated
-    belongs_to  :language,
-                optional: true
-    belongs_to  :original,
-                class_name: base_class.to_s,
-                optional: true
-    has_many    :translations,
-                class_name: base_class.to_s,
-                foreign_key: :original_id,
-                dependent: :destroy if connection.column_exists?(table_name, :original_id)
-    # /Deprecated
-
     accepts_nested_attributes_for :localizations
-
-    # TODO L10N : remove after data cleanup
-    scope :tmp_original, -> { where(original_id: nil) }
 
     scope :for_language, -> (language) { for_language_id(language.id) }
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself
@@ -35,13 +20,7 @@ module Localizable
     scope :published_now_in, -> (language) {
       l10n_klass = _reflect_on_association(:localizations).klass
       return for_language(language) unless l10n_klass.respond_to?(:published_now)
-      # TODO L10N : Use this when base models are cleaned from publication attributes (published && published_at)
-      # for_language(language).merge(l10n_klass.published_now)
-      # instead of big joins below
-      l10n_table_name = l10n_klass.table_name
-      for_language(language)
-        .where(l10n_table_name => { published: true })
-        .where("#{l10n_table_name}.published_at <= ?", Time.zone.now)
+      for_language(language).merge(l10n_klass.published_now)
     }
 
   end
@@ -90,46 +69,6 @@ module Localizable
 
   def to_s_in(language)
     best_localization_for(language).to_s
-  end
-
-  # TODO L10N : to remove
-  ### DEPRECATED METHODS - has to be removed when cleaning L10N
-
-  # On déclare l'objet syncable pour que l'analyse puisse se poursuivre jusqu'aux localisations.
-  # Il n'y aura pas d'effet lié à la page elle-même.
-  # Peut-être faudrait-il travailler directement sur les localisations, mais c'est une grosse refonte.
-  def syncable?
-    true
-  end
-
-  # TODO L10N : Used in migration, to remove
-  def translate_contents!(translation)
-    blocks.without_heading.ordered.each do |block|
-      block.localize_for!(translation)
-    end
-
-    headings.root.ordered.each do |heading|
-      heading.localize_for!(translation)
-    end
-  end
-
-  # deprecated
-  # Utility method to duplicate attachments
-  # TODO L10N : Used in migration (via translate_other_attachments), to remove
-  def translate_attachment(translation, attachment_name)
-    translation.public_send(attachment_name).attach(
-      io: URI.open(public_send(attachment_name).url),
-      filename: public_send(attachment_name).filename.to_s,
-      content_type: public_send(attachment_name).content_type
-    )
-  rescue
-    # Missing attachment
-  end
-
-  # deprecated
-  # can be overwritten in model
-  # TODO L10N : Used in migration, to remove
-  def translate_other_attachments(translation)
   end
 
 end

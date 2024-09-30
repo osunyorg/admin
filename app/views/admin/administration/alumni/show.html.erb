@@ -8,7 +8,7 @@
   <div class="row g-2 my-3">
     <% @cohorts.ordered.each do |cohort| %>
       <div>
-        <div class="card card--horizontal">
+        <div class="<%= osuny_card_classes(horizontal: true) %>">
           <%= osuny_thumbnail_localized cohort.program %>
           <div class="card-body">
             <%= link_to cohort.academic_year, [:admin, cohort], class: 'stretched-link' %>

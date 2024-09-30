@@ -1,8 +1,8 @@
-<% 
-@title = @post.title
-@summary = @post.summary
-@image = @post.featured_image 
+<%
+@title = @l10n.title
+@summary = @l10n.summary
+@image = @l10n.featured_image
 %>
-<%= render 'admin/communication/blocks/content/show',
-            about: @post,
+<%= render 'admin/communication/contents/show',
+            about: @l10n,
             strip_javascript: true %>
