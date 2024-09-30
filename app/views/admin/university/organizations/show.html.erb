@@ -44,8 +44,8 @@
     <%= render 'admin/application/summary/show', about: @l10n %>
 
     <%= osuny_panel University::Organization.human_attribute_name('text') do %>
-      <%= @organization.text.to_s.html_safe %>
-    <% end if strip_tags(@organization.text.to_s).present? %>
+      <%= @l10n.text.to_s.html_safe %>
+    <% end if strip_tags(@l10n.text.to_s).present? %>
 
     <%= osuny_panel University::Organization.human_attribute_name('physical') do %>
       <%= osuny_property_show_text @l10n, :address_name, hide_blank: true %>

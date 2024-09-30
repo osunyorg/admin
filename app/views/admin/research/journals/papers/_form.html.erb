@@ -29,7 +29,6 @@
           <%= f.association :people,
                             collection: osuny_collection(
                               current_university.people
-                                                .tmp_original # TODO L10N : To remove
                                                 .researchers
                                                 .ordered(current_language), 
                               localized: true

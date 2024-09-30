@@ -10,7 +10,7 @@
     <% end %>
   </div>
   <div class="col-lg-6">
-    <%= osuny_panel University::Person::Researcher.model_name.human(count: 2) do %>
+    <%= osuny_panel University::Person::Localization::Researcher.model_name.human(count: 2) do %>
       <%= render 'admin/research/researchers/list', researchers: @laboratory.researchers %>
     <% end %>
   </div>

@@ -2,19 +2,14 @@
 #
 # Table name: research_laboratories
 #
-#  id                 :uuid             not null, primary key
-#  address            :string
-#  address_additional :string
-#  address_name       :string
-#  city               :string
-#  country            :string
-#  name               :string
-#  zipcode            :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  language_id        :uuid             indexed
-#  original_id        :uuid             indexed
-#  university_id      :uuid             not null, indexed
+#  id            :uuid             not null, primary key
+#  address       :string
+#  city          :string
+#  country       :string
+#  zipcode       :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
@@ -48,7 +43,7 @@ class Research::Laboratory < ApplicationRecord
               dependent: :destroy
 
   has_and_belongs_to_many :researchers,
-                          class_name: 'University::Person::Researcher',
+                          class_name: 'University::Person',
                           foreign_key: :research_laboratory_id,
                           association_foreign_key: :university_person_id
 

@@ -1,19 +1,27 @@
 module Importers
   class Curator
-    attr_reader :website, :user, :language, :url, :post
+    attr_reader :website, :user, :language, :url, :post, :l10n
 
     def initialize(website, user, language, url)
       @website = website
       @user = user
       @language = language
       @url = url
-      create_post!
-      attach_image! unless page.image.blank?
+      unless slug_already_exists?
+        create_post!
+        create_localization!
+        create_chapter!
+        attach_image!
+      end
     rescue
     end
 
+    def already_imported?
+      slug_already_exists?
+    end
+
     def valid?
-      @post.valid?
+      @post&.valid? && @l10n&.valid? && @chapter&.valid?
     end
 
     protected
@@ -21,13 +29,21 @@ module Importers
     def create_post!
       @post = website.posts.create(
         university: website.university,
+        author: @user.person
+      )
+    end
+
+    def create_localization!
+      @l10n = @post.localizations.create(
+        language_id: @language.id,
         title: page.title,
         slug: page.title.parameterize,
-        author: @user.person,
-        published_at: Time.now,
-        language_id: @language.id
+        published_at: Time.now
       )
-      @chapter = @post.blocks.create(
+    end
+
+    def create_chapter!
+      @chapter = @l10n.blocks.create(
         university: website.university,
         template_kind: :chapter,
         published: true,
@@ -41,12 +57,25 @@ module Importers
     end
 
     def attach_image!
-      @post.featured_image.attach(
+      return if page.image.blank?
+      @l10n.featured_image.attach(
         io: URI.open(page.image),
         filename: File.basename(page.image).split('?').first
       )
     rescue
       puts "Attach image failed"
+    end
+
+    def slug
+      @slug ||= page.title.parameterize
+    end
+
+    def slug_already_exists?
+      Communication::Website::Post::Localization.where(
+        website: website,
+        language: language,
+        slug: slug
+      )
     end
 
     def page

@@ -1,7 +1,7 @@
 class Extranet::Alumni::PersonsController < Extranet::Alumni::ApplicationController
   def index
     @facets = University::Person::Alumnus::Facets.new params[:facets], {
-      model: about&.university_person_alumni.tmp_original,
+      model: about&.university_person_alumni,
       about: about,
       language: current_language
     }

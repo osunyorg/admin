@@ -7,7 +7,6 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   def index
     @projects = @projects.filter_by(params[:filters], current_language)
-                         .tmp_original # TODO L10N : To remove
                          .ordered(current_language)
                          .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/portfolio'
@@ -81,9 +80,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   end
 
   def categories
-    @website.portfolio_categories
-            .tmp_original # TODO L10N : Remove tmp_original
-            .ordered
+    @website.portfolio_categories.ordered
   end
 
   def project_params
@@ -100,8 +97,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
       ]
     )
     .merge(
-      university_id: current_university.id,
-      language_id: current_language.id
+      university_id: current_university.id
     )
   end
 end

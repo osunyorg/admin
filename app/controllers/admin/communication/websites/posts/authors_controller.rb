@@ -4,7 +4,6 @@ class Admin::Communication::Websites::Posts::AuthorsController < Admin::Communic
     @authors =  @website.authors
                         .filter_by(params[:filters], current_language)
                         .accessible_by(current_ability)
-                        .tmp_original
                         .ordered(current_language)
                         .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'

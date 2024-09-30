@@ -17,12 +17,6 @@ administrator_involvements = program.involvements_through_roles
             full_width: false,
             toc_offcanvas: true,
             toc_present: true %>
-<%= render 'admin/application/categories/static',
-            about: program,
-            l10n: @l10n,
-            categories: current_university.program_categories,
-            key: :programs_categories %>
-
 <% if @l10n.downloadable_summary.attached? %>
 downloadable_summary: <%= @l10n.downloadable_summary.blob_id %>
 <% end %>
@@ -74,11 +68,13 @@ teacher_involvements.each do |involvement|
 teachers_description:
 <%
 teacher_involvements.each do |involvement|
+  involvement_l10n = involvement.localization_for(language)
+  next if involvement_l10n.nil?
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
 %>
   "<%= person_l10n.slug %>": >-
-    <%= involvement.description %>
+    <%= involvement_l10n.description %>
 <% end %>
 <% if administrator_involvements.any? %>
 administrators:
@@ -115,13 +111,9 @@ roles:
 roles: []
 <% end %>
 locations:
-<%
-program.locations.each do |location|
-  location_l10n = location.localization_for(language)
-  next if location_l10n.nil?
-  %>
-  - path: <%= location_l10n.current_permalink_in_website(@website)&.path %>
-    slug: <%= location_l10n.slug %>
+<% program.locations.each do |location| %>
+  - path: <%= location.current_permalink_in_website(@website)&.path %>
+    slug: <%= location.slug %>
 <% end %>
 apprenticeship: <%= program.apprenticeship %>
 capacity: <%= program.capacity %>

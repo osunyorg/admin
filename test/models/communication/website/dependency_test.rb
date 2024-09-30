@@ -5,30 +5,34 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
   def test_page_dependencies
-    # Par défaut, 1 dépendance (la configuration CSP du site)
+    # Par défaut, 2 dépendances :
+    # - la localisation FR de la page
+    # - la configuration CSP du site
     page = communication_website_pages(:page_with_no_dependency)
-    assert_equal 1, page.recursive_dependencies.count
+    assert_equal 2, page.recursive_dependencies(follow_direct: true).count
 
-    #  On ajoute un block "Chapitre" : +1 dépendance (le block)
-    page.blocks.create(position: 1, published: true, template_kind: :chapter)
-    assert_equal 2, page.recursive_dependencies.count
+    #  On ajoute un block "Chapitre" à la l10n FR : +1 dépendance (le block)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
+    page_l10n.blocks.create(position: 1, published: true, template_kind: :chapter)
+    assert_equal 3, page.recursive_dependencies(follow_direct: true).count
   end
 
   def test_change_block_dependencies
     page = communication_website_pages(:page_with_no_dependency)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
 
     # On ajoute un block Personnes lié à Arnaud : 9 dépendances
-    # - le block Personnes (1)
-    # - 4 composants du template du block + 1 élément (5)
-    # - 2 composants de l'élément du template (2)
-    # - la personne en dépendance du composant Person (1)
+    # - la localisation FR de la page
+    # - le block Personnes
+    # - la personne en dépendance du composant Person
+    # - la localisation FR de la personne
     # - La content security policy
-    block = page.blocks.create(position: 1, published: true, template_kind: :persons)
+    block = page_l10n.blocks.create(position: 1, published: true, template_kind: :persons)
     block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
     block.save
 
     page = page.reload
-    assert_equal 3, page.recursive_dependencies.count
+    assert_equal 5, page.recursive_dependencies(follow_direct: true).count
 
     clear_enqueued_jobs
 
@@ -37,7 +41,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     assert_enqueued_with(job: Dependencies::CleanWebsitesIfNecessaryJob) do
       block.save
     end
-      
+
     # On vérifie qu'on enqueue le job qui clean les websites
     assert_enqueued_with(job: Communication::Website::CleanJob) do
       perform_enqueued_jobs(only: Dependencies::CleanWebsitesIfNecessaryJob)
@@ -48,7 +52,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
       perform_enqueued_jobs(only: Communication::Website::CleanJob)
     end
 
-    assert_equal 3, page.recursive_dependencies.count
+    assert_equal 5, page.recursive_dependencies(follow_direct: true).count
 
     clear_enqueued_jobs
 
@@ -80,22 +84,24 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
   def test_change_website_dependencies
     website_with_github.save
-    dependencies_before_count = website_with_github.reload.recursive_dependencies.count
+    dependencies_before_count = website_with_github.reload.recursive_dependencies(follow_direct: true).count
 
     # On modifie l'about du website en ajoutant une école
     # On vérifie que le job de destroy obsolete git files n'est pas enqueued
     assert_no_enqueued_jobs only: Communication::Website::DestroyObsoleteGitFilesJob do
-      website_with_github.update(about: default_school)
+      assert_enqueued_with(job: Communication::Website::SetProgramsCategoriesJob) do
+        website_with_github.update(about: default_school)
+      end
     end
     perform_enqueued_jobs
-    delta = website_with_github.reload.recursive_dependencies.count - dependencies_before_count
+    delta = website_with_github.reload.recursive_dependencies(follow_direct: true).count - dependencies_before_count
     # En ajoutant l'école, on rajoute en dépendances :
-    # - L'école, ses formations, diplômes et sites en cascade (4)
-    # - Les catégories d'actus liés aux formations, soit la catégorie racine et la catégorie de default_program (2)
-    # - Les catégories d'agenda liés aux formations, soit la catégorie racine et la catégorie de default_program (2)
-    # - Les pages "Teachers", "Administrators", "Researchers", "EducationDiplomas", "EducationPrograms" (5)
-    # Donc un total de 3 + 2 + 5 = 10 dépendances
-    assert_equal 13, delta
+    # - L'école, sa formations (default_program), son diplôme (default_diploma) et les localisations de ces objets (6)
+    # - Les catégories d'actus liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
+    # - Les catégories d'agenda liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
+    # - Les pages "Teachers", "Administrators", "Researchers", "EducationDiplomas", "EducationPrograms", "AdministrationLocation" et leurs localisations (12)
+    # Donc un total de 6 + 4 + 4 + 12 = 26 dépendances
+    assert_equal 26, delta
 
     clear_enqueued_jobs
 
@@ -108,18 +114,14 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
   def test_change_website_dependencies_with_multilingual
     website_with_github.save
-    dependencies_before_count = website_with_github.recursive_dependencies.count
-
-    # On crée une copie anglaise de la homepage
-    page_test_en = communication_website_pages(:page_root).dup
-    page_test_en.language = languages(:en)
-    page_test_en.save
+    dependencies_before_count = website_with_github.reload.recursive_dependencies(follow_direct: true).count
+    # On crée une localisation anglaise de la homepage
+    communication_website_pages(:page_root).localize_in!(english)
 
     # Tant qu'on n'a pas activé l'anglais sur le website le nombre de dépendances ne doit pas bouger
-    assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies.count
+    assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies(follow_direct: true).count
   end
 
-  # TODO : Utile?
   def test_change_menu_item_dependencies
     menu = communication_website_menus(:primary_menu)
 

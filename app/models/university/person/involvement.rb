@@ -3,7 +3,6 @@
 # Table name: university_person_involvements
 #
 #  id            :uuid             not null, primary key
-#  description   :text
 #  kind          :integer
 #  position      :integer
 #  target_type   :string           not null, indexed => [target_id]

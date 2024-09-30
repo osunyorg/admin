@@ -3,11 +3,7 @@
 # Table name: research_laboratory_axes
 #
 #  id                     :uuid             not null, primary key
-#  meta_description       :text
-#  name                   :string
 #  position               :integer
-#  short_name             :string
-#  text                   :text
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  language_id            :uuid             indexed
@@ -35,9 +31,6 @@ class Research::Laboratory::Axis < ApplicationRecord
   include Sanitizable
   include WithUniversity
   include WithPosition
-
-  # TODO L10N : To remove
-  has_summernote :text
 
   belongs_to  :laboratory, 
               foreign_key: :research_laboratory_id

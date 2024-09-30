@@ -7,7 +7,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def index
     @events = @events.filter_by(params[:filters], current_language)
-                     .tmp_original # TODO L10N : To remove
                      .ordered_desc
                      .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
@@ -84,7 +83,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def categories
     @website.agenda_categories
-            .tmp_original # TODO L10N : Remove tmp_original
             .ordered
   end
 
@@ -102,8 +100,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
       ]
     )
     .merge(
-      university_id: current_university.id,
-      language_id: current_language.id
+      university_id: current_university.id
     )
   end
 end

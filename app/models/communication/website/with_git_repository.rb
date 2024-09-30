@@ -35,6 +35,7 @@ module Communication::Website::WithGitRepository
 
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
+    return unless should_sync_with_git?
     indirect_object.direct_sources_with_dependencies_for_website(self).each do |dependency|
       Communication::Website::GitFile.sync self, dependency
     end
@@ -76,8 +77,7 @@ module Communication::Website::WithGitRepository
   end
 
   def should_clean_on_git?
-    # Clean website if about was present and changed OR a language was removed
-    # TODO L10N : décpalcer l'ancien language_was_removed dans les locas ?
+    # Clean website if about was present and changed
     saved_change_to_about_id? && about_id_before_last_save.present?
   end
 

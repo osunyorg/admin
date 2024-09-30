@@ -8,21 +8,22 @@ is_blank = Static.blank?(value)
 hide_blank ||= false
 title = object.class.human_attribute_name(property)
 if source
+  # source is a l10n
+  source_about = source.about
+  language = source.language
   title += ' <span class="small">'
-  title += t 'admin.inheritance.sentence_html', link: link_to(source, [:admin, source])
+  title += t 'admin.inheritance.sentence_html', link: link_to(source, [:admin, source_about, { lang: language }])
   title += '</span>'
 end
 %>
 <% unless hide_blank && is_blank %>
   <%= osuny_label title %>
-  <div>
+  <p>
     <% if is_blank %>
-      <p>
-        <i class="<%= Icon::WARNING %> text-danger"></i>
-        <%= t 'properties.text.missing' %>
-      </p>
+      <i class="<%= Icon::WARNING %> text-danger"></i>
+      <%= t 'properties.text.missing' %>
     <% else %>
-      <%= sanitize value %>
+      <%= strip_tags(value).truncate(200).html_safe %>
     <% end %>
-  </div>
+  </p>
 <% end %>

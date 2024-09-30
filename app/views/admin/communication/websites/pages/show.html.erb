@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-lg-7">
     <%= osuny_panel Communication::Website::Page::Localization.human_attribute_name(:title), small: true do %>
-      <p class="lead mb-1"><%= @page.title %></p>
+      <p class="lead mb-1"><%= @l10n.title %></p>
       <%= render 'admin/application/property/publication', about: @l10n %>
     <% end %>
   </div>

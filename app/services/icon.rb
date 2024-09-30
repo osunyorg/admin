@@ -42,7 +42,7 @@ class Icon
   RESEARCH_PUBLICATION = 'fas fa-book'
   RESEARCH_THESE = 'fas fa-scroll'
   RESEARCH_WATCH = 'fas fa-eye'
-  UNIVERSITY_PERSON_RESEARCHER = RESEARCH_RESEARCHER
+  UNIVERSITY_PERSON_LOCALIZATION_RESEARCHER = RESEARCH_RESEARCHER
   RESEARCH_THESIS = RESEARCH_THESE
   RESEARCH_HAL = RESEARCH_PUBLICATION
 
@@ -58,7 +58,7 @@ class Icon
   UNIVERSITY_PERSON = 'fas fa-users'
   UNIVERSITY_PERSON_ADMINISTRATORS = 'fas fa-users-cog'
   UNIVERSITY_PERSON_ALUMNUS = 'fas fa-user-graduate'
-  UNIVERSITY_PERSON_TEACHER = EDUCATION_TEACHER
+  UNIVERSITY_PERSON_LOCALIZATION_TEACHER = EDUCATION_TEACHER
 
   OSUNY_USER = 'fas fa-user'
   USER = OSUNY_USER
@@ -83,7 +83,7 @@ class Icon
   PASTE = 'fas fa-paste'
 
   def self.icon_for(class_name)
-    # University::Person::Teacher -> UNIVERSITY_PERSON_TEACHER
+    # University::Person::Localization::Teacher -> UNIVERSITY_PERSON_LOCALIZATION_TEACHER
     constant = class_name.to_s.remove('::').underscore.upcase
     const_get constant
   end

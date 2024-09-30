@@ -8,7 +8,7 @@ class Communication::Website::Page::Organization < Communication::Website::Page
 
   # https://developers.osuny.org/docs/admin/sites-web/git/dependencies/iteration-9/
   def references
-    website.connected_organizations.where(language_id: language_id)
+    website.connected_organizations
   end
 
   # For implicit connections, direct_source_type is "Communication::Website::Page"

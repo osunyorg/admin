@@ -16,7 +16,6 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
 
   def show
     @events =  @category.events
-                        .tmp_original
                         .ordered(current_language)
                         .page(params[:page])
     breadcrumb
@@ -82,8 +81,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
             ]
           )
           .merge(
-            university_id: current_university.id,
-            language_id: current_language.id
+            university_id: current_university.id
           )
   end
 end
