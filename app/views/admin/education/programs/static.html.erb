@@ -112,8 +112,12 @@ roles: []
 <% end %>
 locations:
 <% program.locations.each do |location| %>
-  - path: <%= location.current_permalink_in_website(@website)&.path %>
-    slug: <%= location.slug %>
+  <%
+  location_l10n = location.localization_for(current_language)
+  next if location_l10n.nil?
+  %>
+  - path: <%= location_l10n.current_permalink_in_website(@website)&.path %>
+    slug: <%= location_l10n.slug %>
 <% end %>
 apprenticeship: <%= program.apprenticeship %>
 capacity: <%= program.capacity %>
