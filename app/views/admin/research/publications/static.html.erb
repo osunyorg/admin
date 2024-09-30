@@ -31,7 +31,7 @@ links:
 researchers:
 <% @about.researchers.in_university(@website.university).each do |researcher| %>
   <% 
-    researcher_l10n = researcher.localization_for(language)
+    researcher_l10n = researcher.localization_for(@website.default_language)
     next if researcher_l10n.nil?
   %>
   - <%= researcher_l10n.slug %>
