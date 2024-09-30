@@ -57,7 +57,7 @@ organizations_categories:
   else
     category_slug = category_l10n.slug
     category_path = category_l10n.current_permalink_in_website(@website)&.path
-    category_name = category.name
+    category_name = category_l10n.name
   end
 %>
   - slug: "<%= category_slug %>"
