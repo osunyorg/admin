@@ -106,7 +106,7 @@ class University::Person < ApplicationRecord
 
   accepts_nested_attributes_for :involvements
 
-  validates :email, 
+  validates :email,
             uniqueness: { scope: [:university_id, :language_id] },
             allow_blank: true,
             if: :will_save_change_to_email?
