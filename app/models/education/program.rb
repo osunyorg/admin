@@ -124,20 +124,6 @@ class Education::Program < ApplicationRecord
   # WebsitesLinkable methods
   #####################
 
-  def has_administrators?
-    university_people_through_role_involvements.any? ||
-    descendants.any? { |descendant| descendant.university_people_through_role_involvements.any? }
-  end
-
-  def has_researchers?
-    false
-  end
-
-  def has_teachers?
-    university_people_through_involvements.any? ||
-    descendants.any? { |descendant| descendant.university_people_through_involvements.any? }
-  end
-
   def has_education_programs?
     true
   end
