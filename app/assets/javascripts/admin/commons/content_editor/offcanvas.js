@@ -23,7 +23,7 @@ window.osuny.contentEditor.offcanvas = {
     onEditButtonClick: function (event) {
         'use strict';
         event.preventDefault();
-        open(event.target.href, 'editor');
+        window.open(event.target.href, 'editor');
         this.editorBootstrap.show();
     },
 
