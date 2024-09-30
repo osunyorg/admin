@@ -29,7 +29,7 @@ module WithDependencies
       website_ids_before_destroy = websites_to_clean_ids
       super
       snapshot_direct_sources.each do |direct_source|
-        direct_source.sync_with_git
+        direct_source.try(:sync_with_git)
       end
       clean_websites(website_ids_before_destroy)
       # TODO: Actuellement, on ne nettoie pas les références
@@ -133,16 +133,12 @@ module WithDependencies
     end
   end
 
-  def websites_to_clean
-    is_direct_object? ? [website] : websites
-  end
-
   def clean_all_websites
     clean_websites(websites_to_clean_ids)
   end
 
   def websites_to_clean_ids
-    websites_to_clean.pluck(:id)
+    websites.pluck(:id)
   end
 
   def unpublished_by_last_save?

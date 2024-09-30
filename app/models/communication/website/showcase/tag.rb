@@ -17,7 +17,7 @@ class Communication::Website::Showcase::Tag < ApplicationRecord
                           foreign_key: :communication_website_showcase_tag_id,
                           association_foreign_key: :communication_website_id
 
-  scope :ordered, -> { order(:name) }
+  scope :ordered, -> (language = nil) { order(:name) }
 
   def to_s
     "#{name}"

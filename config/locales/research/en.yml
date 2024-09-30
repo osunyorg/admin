@@ -5,9 +5,6 @@ en:
       research/hal: HAL
   activerecord:
     models:
-      university/person/researcher:
-        one: Researcher
-        other: Researchers
       research/hal/author:
         one: HAL author
         other: HAL authors
@@ -35,6 +32,9 @@ en:
       research/thesis:
         one: Thesis
         other: Theses
+      university/person/localization/researcher:
+        one: Researcher
+        other: Researchers
     attributes:
       research/hal/author:
         docid: HAL identifier
@@ -43,45 +43,48 @@ en:
         last_name: Last name
         publications: Publications imported from HAL
         researcher: Researchers in Osuny
-      research/journal:
+      research/journal/localization:
         issn: ISSN
         language: Language
         title: Title
       research/journal/paper:
-        abstract: Abstract
         accepted_at: Accepted at
-        authors_list: Authors list
-        bibliography: Bibliography
         doi: DOI
-        keywords: Keywords
-        kind: Kind of paper
         pdf: PDF
         people: Authors
+        received_at: Received at
+      research/journal/paper/localization:
+        abstract: Abstract
+        authors_list: Authors list
+        bibliography: Bibliography
+        keywords: Keywords
+        kind: Kind of paper
         published_at: Published at
         published: Published?
-        received_at: Received at
         text: Text
         title: Title
-      research/journal/paper/kind:
+      research/journal/paper/kind/localization:
         title: Title
       research/journal/volume:
+        number: Number
+      research/journal/volume/localization:
         featured_image_alt: Alt text
         featured_image: Cover
         keywords: Keywords
-        number: Number
         published_at: Published at
         published: Published?
         text: Text
         title: Title
       research/laboratory:
         address: Address
-        address_additional: Additional address
-        address_name: Address name
         city: City
         country: Country
-        name: Name
         zipcode: Zipcode
-      research/laboratory/axis:
+      research/laboratory/localization:
+        address_additional: Additional address
+        address_name: Address name
+        name: Name
+      research/laboratory/axis/localization:
         name: Name
         short_name: Short name
         text: Text
@@ -100,14 +103,19 @@ en:
         url: URL
         urls: Web URLs
       research/thesis:
-        abstract: Abstract
         author: Author
         completed_at: Completed at
         completed: Completed?
         director: Director
         laboratory: Laboratory
         started_at: Started at
+      research/thesis/localization:
+        abstract: Abstract
         title: Title
+  admin:
+    research:
+      researcher:
+        show_person_html: This page only shows the person's scienfific papers.<br>If you wish to view or modify the person's details, click on the link below.
   enums:
     research:
       publication:
@@ -154,8 +162,9 @@ en:
           publication:
             description: Scientific publications automatically imported from HAL
       title: HAL
-      select_identifier: Select all the HAL authors that correspond to this researcher. Use the publications to be sure it's the same person.
+      select_identifier_html: Select all the HAL authors that correspond to this researcher. <br>Use the publications to be sure it's the same person.
       sync: Synchronize HAL publications
+      synchronization_done: Synchronization done
   simple_form:
     hints:
       research_journal_paper:
@@ -163,8 +172,9 @@ en:
         doi: "You can type the DOI identifier without https://, for example “10.19182/perspective/31918”"
       research_laboratory:
         address: 'This field is used for geolocation. Ex: 3 rue de la Poste'
-        address_additional: 'This field is not used for geolocation. Ex: Bureau 508'
-        address_name: 'This field is not used for geolocation. Ex: Hôtel du Département'
         city: 'This field is used for geolocation. Ex: Cenon'
         country: 'This field is used for geolocation. Ex: France'
         zipcode: 'This field is used for geolocation. Ex: 33150'
+        localizations:
+          address_additional: 'This field is not used for geolocation. Ex: Bureau 508'
+          address_name: 'This field is not used for geolocation. Ex: Hôtel du Département'

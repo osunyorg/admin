@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   constraints host: ENV['OSUNY_SHOWCASE'] do
-    get ':feature' => 'showcase/home#feature', 
-                      as: :showcase_feature, 
-                      constraints: { 
+    get ':feature' => 'showcase/home#feature',
+                      as: :showcase_feature,
+                      constraints: {
                         feature: /actualites|agenda|portfolio/
                       }
     get ':tag' => 'showcase/home#tag', as: :showcase_tag
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     mount GoodJob::Engine => 'background'
     mount PgHero::Engine => 'database'
   end
+  mount Rswag::Ui::Engine => '/api/docs'
+  mount Rswag::Api::Engine => '/api/docs'
 
   devise_for :users, controllers: {
     confirmations: 'users/confirmations',
@@ -36,27 +38,37 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users, except: [:new, :create] do
-      post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
-      patch 'unlock' => 'users#unlock', on: :member
+    scope '/:lang' do
+      resources :users, except: [:new, :create] do
+        post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
+        patch 'unlock' => 'users#unlock', on: :member
+      end
+      get 'profile' => 'profile#edit'
+      patch 'profile' => 'profile#update'
+      delete 'profile' => 'profile#destroy'
+      # libre_translate route
+      post 'translate/:target' => 'translation#translate', as: :translate
+      put 'favorite' => 'users#favorite', as: :favorite
+      draw 'admin/administration'
+      draw 'admin/communication'
+      draw 'admin/education'
+      draw 'admin/research'
+      draw 'admin/university'
+      root to: 'dashboard#index'
     end
-    post 'translate/:target' => 'translation#translate', as: :translate
-    put 'theme' => 'application#set_theme', as: :set_theme
-    put 'favorite' => 'users#favorite', as: :favorite
-    draw 'admin/administration'
-    draw 'admin/communication'
-    draw 'admin/education'
-    draw 'admin/research'
-    draw 'admin/university'
-    root to: 'dashboard#index'
+    get '/' => 'dashboard#redirect_to_default_language'
   end
 
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
 
   draw 'api'
   draw 'server'
+
   scope module: 'extranet' do
-    draw 'extranet'
+    scope '/:lang' do
+      draw 'extranet'
+    end
+    get 'style' => 'style#index', as: :style, constraints: { format: 'css' }
+    root to: 'home#redirect_to_default_language'
   end
-  root to: 'extranet/home#index'
 end

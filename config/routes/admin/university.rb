@@ -3,19 +3,8 @@ namespace :university do
   namespace :organizations do
     resources :imports, only: [:index, :show, :new, :create]
   end
-  namespace :alumni do
-    namespace :cohorts do
-      resources :imports, only: [:index, :show, :new, :create]
-    end
-  end
   resources :apps do
     post :regenerate_token, on: :member
-  end
-  resources :alumni, only: [:index, :show] do
-    member do
-      get 'cohorts' => 'alumni/cohorts#edit'
-      patch 'cohorts' => 'alumni/cohorts#update'
-    end
   end
   namespace :people do
     resources :imports, only: [:index, :show, :new, :create]
@@ -33,13 +22,13 @@ namespace :university do
         member do
           get :children
           get :static
-          get "/translations/:lang" => "people/categories#in_language", as: :show_in_language
         end
       end
     end
     member do
       get :static
-      get "/translations/:lang" => "people#in_language", as: :show_in_language
+      get 'administrator/static' => 'people/administrators#static', as: 'static_administrator' 
+      get 'author/static' => 'people/authors#static', as: 'static_author' 
       get 'experiences' => 'people/experiences#edit'
       patch 'experiences' => 'people/experiences#update'
     end
@@ -55,13 +44,11 @@ namespace :university do
         member do
           get :children
           get :static
-          get "/translations/:lang" => "organizations/categories#in_language", as: :show_in_language
         end
       end
     end
     member do
       get :static
-      get "/translations/:lang" => "organizations#in_language", as: :show_in_language
     end
   end
   root to: 'dashboard#index'

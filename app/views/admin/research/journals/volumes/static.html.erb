@@ -1,15 +1,23 @@
----
-<%= render 'admin/application/static/title' %>
-<%= render 'admin/application/static/permalink' %>
-<%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: false, toc_present: false %>
-number: <%= @about.number %>
-issn: "<%= @about.journal.issn %>"
+<%
+volume = @l10n.about
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            about: volume,
+            l10n: @l10n, 
+            full_width: true,
+            toc_offcanvas: false,
+            toc_present: false %>
+number: <%= volume.number %>
+issn: "<%= volume.journal.best_localization_for(language).issn %>"
 keywords: >-
-  <%= @about.keywords %>
-date: "<%= @about.published_at.iso8601 %>"
-<%= render 'admin/application/featured_image/static' %>
-<%= render 'admin/application/meta_description/static' %>
-<%= render 'admin/application/summary/static' %>
+  <%= @l10n.keywords %>
+date: "<%= @l10n.published_at.iso8601 %>"
+<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
 ---
-<%= prepare_html_for_static @about.text %>
+<%= prepare_html_for_static @l10n.text %>

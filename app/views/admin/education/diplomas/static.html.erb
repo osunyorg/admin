@@ -1,20 +1,35 @@
----
-<%= render 'admin/application/static/title' %>
-<%= render 'admin/application/static/permalink' if @website %>
-<%= render 'admin/application/static/breadcrumbs' %>
-<%= render 'admin/application/static/design', full_width: true, toc_offcanvas: true %>
-<%= render 'admin/application/i18n/static' %>
-<% if @website
-  @programs = @website.education_programs.where(diploma: @about).root.ordered %>
+<%
+diploma = @l10n.about
+language = @l10n.language
+@programs = @website.education_programs
+                    .where(diploma: diploma)
+                    .root
+                    .published_now_in(language)
+                    .ordered if @website.present?
+%>---
+<%= render 'admin/application/static/title', about: @l10n %>
+<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            about: diploma,
+            l10n: @l10n,
+            full_width: true,
+            toc_offcanvas: true %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
+<% if @programs %>
 programs:
-<%= render 'admin/education/programs/static_list', diploma: @about, programs: @programs %>
+<%= render 'admin/education/programs/static_list',
+            diploma: diploma,
+            programs: @programs,
+            language: language %>
 <% end %>
 short_name: >-
-  <%= prepare_text_for_static @about.short_name %>
-<%= render 'admin/application/summary/static' %>
-level: <%= @about.level_i18n %>
-ects: <%= @about.ects %>
+  <%= prepare_text_for_static @l10n.short_name %>
+<%= render 'admin/application/summary/static', about: @l10n %>
+level: >-
+  <%= diploma.level_i18n %>
+ects: <%= diploma.ects %>
 duration: >-
-  <%= prepare_text_for_static @about.duration %>
-<%= render 'admin/communication/blocks/content/static', about: @about %>
+  <%= prepare_text_for_static @l10n.duration %>
+<%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---

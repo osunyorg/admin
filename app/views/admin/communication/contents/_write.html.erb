@@ -11,15 +11,13 @@
   <% end %>
 </div>
 <%= render "admin/communication/blocks/paste_block", about: about %>
-<div class="content-editor__actions row mt-5">
-  <div class="col-lg-4">
+<div class="content-editor__actions row mt-4">
+  <div class="offset-lg-4 col-lg-8 col-xxl-6">
     <%= link_to t('admin.communication.blocks.headings.add'),
                 new_admin_communication_heading_path(about_id: about.id, about_type: about.class.name),
-                class: 'py-5 px-2 d-block bg-light text-center border h4' if can? :create, Communication::Block::Heading %>
-  </div>
-  <div class="col-lg-8">
+                class: 'btn btn-lg btn-dark' if can? :create, Communication::Block::Heading %>
     <%= link_to t('admin.communication.blocks.add'),
                 new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
-                class: 'py-5 px-2 d-block bg-light text-center border h4' if can? :create, Communication::Block %>
+                class: 'btn btn-lg btn-dark' if can? :create, Communication::Block %>
   </div>
 </div>

@@ -6,16 +6,17 @@ en:
     passwords:
       edit:
         new: Password change
+        title: Password change
       new:
         title: Password forgotton
     registrations:
       edit:
         title: Account edition
       new: 
-        title: "Register - %{title}"
+        title: "Register on %{title}"
     sessions:
       new:
-        title: "Welcome - %{title}"
+        title: "Welcome to %{title}"
     two_factor_authentication:
       max_login_attempts_reached:
         title: Maximul login attemps reached

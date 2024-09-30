@@ -1,4 +1,8 @@
-<% events = block.about&.website.events.for_language(block.language).ordered %>
+<% events = osuny_collection(
+              block.about.website.events,
+              localized: true,
+              label_method: :to_s_with_subtitle
+            ) %>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>
@@ -10,11 +14,6 @@
     <option value="" disabled><%= placeholder %></option>
   <% end %>
   <% events.each do |event| %>
-    <option value="<%= event.id %>">
-      <%= event.title %>
-      <% if event.subtitle.present? %>
-        - <%= event.subtitle %>
-      <% end %>
-    </option>
+    <option value="<%= event.last %>"><%= event.first %></option>
   <% end %>
 </select>

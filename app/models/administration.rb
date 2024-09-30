@@ -8,7 +8,7 @@ module Administration
 
   def self.parts
     [
-      [University::Person::Alumnus, :admin_university_alumni_path],
+      [University::Person::Alumnus, :admin_administration_alumni_path],
       [Administration::Location, :admin_administration_locations_path],
       [Administration::Qualiopi, :admin_administration_qualiopi_criterions_path],
     ]

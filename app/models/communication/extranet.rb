@@ -5,27 +5,20 @@
 #  id                         :uuid             not null, primary key
 #  about_type                 :string           indexed => [about_id]
 #  color                      :string
-#  cookies_policy             :text
 #  css                        :text
 #  feature_alumni             :boolean          default(FALSE)
 #  feature_contacts           :boolean          default(FALSE)
+#  feature_documents          :boolean          default(FALSE)
 #  feature_jobs               :boolean          default(FALSE)
-#  feature_library            :boolean          default(FALSE)
 #  feature_posts              :boolean          default(FALSE)
 #  has_sso                    :boolean          default(FALSE)
-#  home_sentence              :text
 #  host                       :string
-#  name                       :string
-#  privacy_policy             :text
-#  registration_contact       :string
 #  sass                       :text
-#  sso_button_label           :string
 #  sso_cert                   :text
 #  sso_mapping                :jsonb
 #  sso_name_identifier_format :string
 #  sso_provider               :integer          default("saml")
 #  sso_target_url             :string
-#  terms                      :text
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  about_id                   :uuid             indexed => [about_type]
@@ -45,6 +38,9 @@ class Communication::Extranet < ApplicationRecord
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Favoritable
+  include Filterable
+  include Localizable
+  include LocalizableOrderByNameScope
   include WithAbouts
   include WithConnectedObjects
   include WithFeatures
@@ -53,34 +49,25 @@ class Communication::Extranet < ApplicationRecord
   include WithStyle
   include WithUniversity
 
-  has_summernote :home_sentence
-  has_summernote :terms
-  has_summernote :privacy_policy
-  has_summernote :cookies_policy
-
-  has_one_attached_deletable :logo
-  has_one_attached_deletable :favicon do |attachable|
-    attachable.variant :thumb, resize_to_limit: [228, 228]
-  end
-
+  has_many :languages, through: :localizations
   has_many :posts
+  has_many :post_localizations, class_name: 'Communication::Extranet::Post::Localization'
   has_many :post_categories, class_name: 'Communication::Extranet::Post::Category'
+  has_many :post_category_localizations, class_name: 'Communication::Extranet::Post::Category::Localization'
   has_many :documents
   has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
 
-  validates_presence_of :name, :host
-  validates :logo, size: { less_than: 1.megabytes }
-  validates :favicon, size: { less_than: 1.megabytes }
-  validates_presence_of :about_type, :about_id, if: :feature_alumni
+  validates :host, presence: true
+  validates :about_type, :about_id, presence: true, if: :feature_alumni
 
   before_validation :sanitize_fields
 
-  scope :ordered, -> { order(:name) }
-  scope :for_search_term, -> (term) {
-    where("
+  scope :for_search_term, -> (term, language) {
+    joins(:localizations)
+    .where("
       unaccent(communication_extranets.host) ILIKE unaccent(:term) OR
-      unaccent(communication_extranets.name) ILIKE unaccent(:term)
+      unaccent(communication_extranet_localizations.name) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
@@ -116,7 +103,7 @@ class Communication::Extranet < ApplicationRecord
   def years
     about&.academic_years
   end
-  alias academic_years years
+  alias :academic_years :years
 
   def organizations
     if about.present? && about.respond_to?(:alumni_organizations)
@@ -138,19 +125,10 @@ class Communication::Extranet < ApplicationRecord
     @url ||= Rails.env.development? ? "http://#{host}:3000" : "https://#{host}"
   end
 
-  def to_s
-    "#{name}"
-  end
-
-  private
+  protected
 
   def sanitize_fields
     self.color = Osuny::Sanitizer.sanitize(self.color, 'string')
-    self.cookies_policy = Osuny::Sanitizer.sanitize(self.cookies_policy, 'text')
     self.host = Osuny::Sanitizer.sanitize(self.host, 'string')
-    self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
-    self.privacy_policy = Osuny::Sanitizer.sanitize(self.privacy_policy, 'text')
-    self.registration_contact = Osuny::Sanitizer.sanitize(self.registration_contact, 'string')
-    self.terms = Osuny::Sanitizer.sanitize(self.terms, 'text')
   end
 end

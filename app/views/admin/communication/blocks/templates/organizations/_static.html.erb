@@ -4,7 +4,8 @@
       organizations:
 <% block.template.selected_elements.each do |element| %>
 <% if element.organization %>
-        - slug: "<%= element.organization.slug %>"
+  <% next unless (organization_l10n = element.organization.localization_for(block.language)) %>
+        - slug: "<%= organization_l10n.slug %>"
 <% else %>
 <% next if element.best_name.blank? %>
 <%= block_component_static block, :name, template: element, depth: 4, list: true %>

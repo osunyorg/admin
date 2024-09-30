@@ -1,24 +1,32 @@
 class Admin::Research::ResearchersController < Admin::Research::ApplicationController
-  before_action :load_researcher, except: :index
+  load_and_authorize_resource class: "University::Person",
+                              through: :current_university,
+                              through_association: :people
 
-  has_scope :for_search_term
+  include Admin::Localizable
+  include Admin::HasStaticAction
 
   def index
-    @researchers = apply_scopes(current_university.people)
-                    .for_language_id(current_university.default_language_id)
-                    .researchers
-                    .accessible_by(current_ability)
-                    .ordered
-                    .page(params[:page])
+    @researchers = current_university.people
+                                     .researchers
+                                     .filter_by(params[:filters], current_language)
+                                     .ordered(current_language)
+                                     .page(params[:page])
     breadcrumb
   end
 
   def show
-    @papers = @researcher.research_journal_papers.ordered.page(params[:page])
-    @hal_authors_with_same_name = Research::Hal::Author.import_from_hal @researcher.to_s
-    @papers = @researcher.research_journal_papers.ordered.page(params[:page])
+    @papers =  @researcher.research_journal_papers
+                          .ordered(current_language)
+                          .page(params[:page])
+    @hal_authors_with_same_name = Research::Hal::Author.import_from_hal @l10n.to_s
     breadcrumb
-    add_breadcrumb @researcher
+    add_breadcrumb @l10n
+  end
+
+  def static
+    @l10n = University::Person::Localization::Researcher.find(@l10n.id)
+    super
   end
 
   def sync_with_hal
@@ -28,7 +36,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
     ensure
       Research::Hal.unpause_git_sync
     end
-    redirect_to admin_research_researcher_path(@researcher)
+    redirect_to admin_research_researcher_path(@researcher), notice: t('research.hal.synchronization_done')
   end
 
   def update
@@ -44,17 +52,9 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   protected
 
-  def load_researcher
-    @researcher = current_university.people
-                                    .for_language_id(current_university.default_language_id)
-                                    .researchers
-                                    .accessible_by(current_ability)
-                                    .find(params[:id])
-  end
-
   def breadcrumb
     super
-    add_breadcrumb University::Person::Researcher.model_name.human(count: 2), admin_research_researchers_path
+    add_breadcrumb University::Person::Localization::Researcher.model_name.human(count: 2), admin_research_researchers_path
   end
 
 end

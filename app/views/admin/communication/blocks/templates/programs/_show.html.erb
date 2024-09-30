@@ -1,45 +1,8 @@
-<% heading_level = block.heading_rank_children %>
-
 <div class="<%= block_html_class(block) %>">
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-
-      <% if block.template.layout == "grid" %>
-        <div class="programs-grid">
-          <% block.template.selected_programs.each do |program|
-              next if program.nil?
-          %>
-            <article itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
-              <div class="program-content">
-                <h<%= heading_level %> itemprop='name'>
-                  <%= link_to program, program.current_permalink_url_in_website(@website), itemprop: "url" %>
-                </h<%= heading_level %>>
-                  <% if program.summary.present? %>
-                    <p itemprop="abstract"><%= program.summary %></p>
-                  <% end %>
-                <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.programs.layouts.grid.more' %></p>
-              </div>
-              <% if program.featured_image.attached? %>
-                <div class="media">
-                  <%= kamifusen_tag program.featured_image %>
-                </div>
-              <% end %>
-            </article>
-          <% end %>
-        </div>
-      <% else %>
-        <ol class="programs">
-          <% block.template.elements.each do |element|
-            program = element.program
-            next if program.nil?
-          %>
-            <li>
-              <%= link_to program, program.current_permalink_url_in_website(@website) %>
-            </li>
-          <% end %>
-        </ol>
-      <% end %>
+      <%= render 'admin/communication/blocks/partials/layout', block: block, file: __FILE__ %>
     </div>
   </div>
 </div>

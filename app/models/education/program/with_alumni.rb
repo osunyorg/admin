@@ -22,6 +22,7 @@ module Education::Program::WithAlumni
                alias_method :university_person_alumni_organizations, :alumni_organizations
 
     # Dénormalisation des alumni pour le faceted search
+    # Pour mémoire, le nom de la table est education_programs_university_people
     has_and_belongs_to_many :university_people,
                class_name: 'University::Person',
                foreign_key: :education_program_id,

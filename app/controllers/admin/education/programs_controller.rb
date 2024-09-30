@@ -5,13 +5,13 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   before_action :load_teacher_people, only: [:new, :edit, :create, :update]
 
-  has_scope :for_search_term
-  has_scope :for_diploma
-  has_scope :for_school
-  has_scope :for_publication
+  include Admin::HasStaticAction
+  include Admin::Localizable
 
   def index
-    @programs = apply_scopes(@programs).ordered_by_name.page(params[:page])
+    @programs = @programs.filter_by(params[:filters], current_language)
+                         .ordered_by_name(current_language)
+                         .page(params[:page])
     breadcrumb
   end
 
@@ -47,15 +47,9 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def show
     @roles = @program.university_roles.ordered
-    @teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name
+    @teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name(current_language)
     @preview = true
     breadcrumb
-  end
-
-  def static
-    @about = @program
-    @website = @program.websites&.first
-    render_as_plain_text
   end
 
   def preview
@@ -73,11 +67,9 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def create
-    @program.university = current_university
-    @program.language_id = current_university.default_language_id
-    @program.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @program.save
-      redirect_to [:admin, @program], notice: t('admin.successfully_created_html', model: @program.to_s)
+      redirect_to [:admin, @program], notice: t('admin.successfully_created_html', model: @program.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -85,9 +77,9 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def update
-    @program.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @program.update(program_params)
-      redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s)
+      redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -97,7 +89,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   def destroy
     @program.destroy
-    redirect_to admin_education_programs_url, notice: t('admin.successfully_destroyed_html', model: @program.to_s)
+    redirect_to admin_education_programs_url, notice: t('admin.successfully_destroyed_html', model: @program.to_s_in(current_language))
   end
 
   protected
@@ -109,28 +101,37 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def program_params
-    params.require(:education_program).permit(
-      :name, :short_name, :slug, :url, :bodyclass,
-      :meta_description, :summary, :published,
-      :capacity, :continuing, :initial, :apprenticeship, 
-      :qualiopi_certified, :qualiopi_text,
-      :logo, :logo_delete, 
-      :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :shared_image, :shared_image_delete,
-      :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
-      :evaluation, :accessibility, :contacts, :opportunities, :results, :other, :main_information,
-      :pricing, :pricing_apprenticeship, :pricing_continuing, :pricing_initial, :duration,
-      :downloadable_summary, :downloadable_summary_delete,
-      :parent_id, :diploma_id, school_ids: [],
-      university_person_involvements_attributes: [:id, :person_id, :description, :position, :_destroy]
-    )
+    params.require(:education_program)
+          .permit(
+            :bodyclass, :capacity, :continuing, :initial, :apprenticeship, :qualiopi_certified,
+            :parent_id, :diploma_id, school_ids: [],
+            university_person_involvements_attributes: [
+              :id, :person_id, :university_id, :position, :_destroy,
+              localizations_attributes: [:id, :description, :language_id]
+            ],
+            localizations_attributes: [
+              :id, :language_id,
+              :name, :short_name, :slug, :url,
+              :meta_description, :summary, :published,
+              :qualiopi_text,
+              :logo, :logo_delete,
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+              :shared_image, :shared_image_delete,
+              :prerequisites, :objectives, :presentation, :registration, :pedagogy, :content, :registration_url,
+              :evaluation, :accessibility, :contacts, :opportunities, :results, :other, :main_information,
+              :pricing, :pricing_apprenticeship, :pricing_continuing, :pricing_initial, :duration,
+              :downloadable_summary, :downloadable_summary_delete,
+            ]
+          )
+          .merge(
+            university_id: current_university.id
+          )
   end
 
   def load_teacher_people
     @teacher_people = current_university.people
-                                        .for_language_id(current_university.default_language_id)
                                         .teachers
                                         .accessible_by(current_ability)
-                                        .ordered
+                                        .ordered(current_language)
   end
 end

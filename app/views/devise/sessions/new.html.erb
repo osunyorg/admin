@@ -1,13 +1,36 @@
-<%= content_for :title, t('.title', title: current_extranet.present? ? current_extranet.name : 'Osuny') %>
+<%= content_for :title, t('.title', title: current_extranet.present? ? current_extranet.to_s_in(current_language) : 'Osuny') %>
 
+<h1 class="h4 d-none">
+  <%= t('.title', title: current_extranet.present? ? current_extranet.to_s_in(current_language) : 'Osuny') %>
+</h1>
 <div class="row">
-  <div class="col-md-6 mb-5">
-    <h2 class="mb-4"><%= t('login.already_registered') %></h2>
+  <div class="col-lg-6 mb-5">
+    <h2 class="h4 mb-3"><%= t('login.already_registered') %></h2>
+    <p class="mb-4"><%= t('login.already_registered_details') %></p>
     <% if current_context.has_sso? %>
-      <% button_label = current_context.sso_button_label.blank? ? t('login.sign_in_with_sso') : current_context.sso_button_label %>
-      <p><%= link_to button_label, omniauth_authorize_path(resource_name, current_context.sso_provider), method: :post, class: 'btn btn-primary' %></p>
-      <p><%= t('login.or') %></p>
-      <a href="#collapseLoginForm" class="btn btn-primary mb-3" data-bs-toggle="collapse"><%= t('login.sign_in_with_credentials') %></a>
+      <%
+      if current_context.try(:localizable?)
+        current_context_l10n = current_context.localization_for(current_language)
+        button_label = current_context_l10n&.sso_button_label
+      else
+        button_label = current_context.sso_button_label
+      end
+      button_label = button_label.presence || t('login.sign_in_with_sso')
+      %>
+      <p>
+        <%= link_to button_label,
+                    omniauth_authorize_path(resource_name, current_context.sso_provider),
+                    method: :post,
+                    class: 'btn btn-primary' %>
+      </p>
+      <p>
+        <%= t('login.or') %>
+      </p>
+      <p>
+        <a href="#collapseLoginForm" class="btn btn-primary mb-3 mt-2" data-bs-toggle="collapse">
+          <%= t('login.sign_in_with_credentials') %>
+        </a>
+      </p>
     <% end %>
 
     <div class="<%= 'collapse' if current_context.has_sso? %> <%= 'show' unless alert.blank? %>" id="collapseLoginForm">
@@ -38,7 +61,7 @@
         </div>
       <% end %>
     </div>
-    <div class="mt-3">
+    <div class="mt-3 small">
       <% if devise_mapping.confirmable? %>
         <%= link_to t('devise.shared.links.didn_t_receive_confirmation_instructions'), new_confirmation_path(resource_name) %><br />
       <% end %>
@@ -48,13 +71,13 @@
       <% end %>
     </div>
   </div>
-  <div class="col-md-6">
-    <h2 class="mb-4"><%= t('login.not_registered_yet') %></h2>
-    <p><%= t('login.not_registered_yet_details') %></p>
-    <div class="form-actions">
+  <div class="col-lg-6">
+    <h2 class="h4 mb-3"><%= t('login.not_registered_yet') %></h2>
+    <p class="mb-4"><%= t('login.not_registered_yet_details') %></p>
+    <p class="form-actions">
       <%= link_to t("devise.registrations.new.sign_up"),
                   new_registration_path(resource_name),
                   class: 'btn btn-primary' %>
-    </div>
+    </p>
   </div>
 </div>

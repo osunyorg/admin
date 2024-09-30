@@ -13,13 +13,12 @@ class Admin::Research::Laboratories::ApplicationController < Admin::Research::Ap
   def breadcrumb
     super
     add_breadcrumb Research::Laboratory.model_name.human(count: 2), admin_research_laboratories_path
-    add_breadcrumb @laboratory, [:admin, @laboratory]
+    add_breadcrumb @laboratory.to_s_in(current_language), [:admin, @laboratory]
   end
 
   def default_url_options
-    return {} unless params.has_key? :laboratory_id
-    {
-      laboratory_id: params[:laboratory_id]
-    }
+    options = super
+    options[:laboratory_id] = params[:laboratory_id] if params.has_key? :laboratory_id
+    options
   end
 end

@@ -1,48 +1,59 @@
 <%
 include_id ||= false
+l10n = f.object.localization_for(current_language)
+if l10n.nil? && f.object.persisted?
+  l10n = f.object.localize_in!(current_language)
+end
+l10n ||= f.object.localizations.build(language_id: current_language.id)
 hint = can?(:create, University::Organization) ?  t('university.person.experience.no_organization_hint_html', url: new_admin_university_organization_path) :
                                                   t('university.person.experience.no_organization_hint_no_access_html')
+organizations = osuny_collection(
+  current_university.organizations,
+  localized: true
+)
 %>
-<div class="nested-fields">
-  <div class="card mb-3">
-    <div class="card-body">
-      <div class="d-flex">
-        <div class="row flex-fill">
-          <div class="col-md-6 col-xxl-4">
-            <%= f.association :organization,
-                              collection: current_university.organizations
-                                                            .for_language_id(current_university.default_language_id)
-                                                            .ordered,
-                              include_blank: t('simple_form.include_blanks.defaults.organization'),
-                              hint: hint,
-                              required: true,
-                              wrapper: false %>
+<%= f.simple_fields_for :localizations, l10n do |lf| %>
+  <%= lf.hidden_field :id %>
+  <%= lf.hidden_field :language_id, value: current_language.id %>
+  <div class="nested-fields">
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="d-flex">
+          <div class="row flex-fill">
+            <div class="col-md-6 col-xxl-4">
+              <%= f.association :organization,
+                                collection: organizations,
+                                include_blank: t('simple_form.include_blanks.defaults.organization'),
+                                hint: hint,
+                                required: true,
+                                wrapper: false %>
+            </div>
+            <div class="col-md-6 col-xxl-4">
+              <%= lf.input :description %>
+            </div>
+            <div class="col-md-6 col-xxl-2">
+              <%= f.input       :from_year,
+                                as: :select,
+                                collection: ((Time.now.year).downto(1950)),
+                                include_blank: University::Person::Experience.human_attribute_name('from_year'),
+                                wrapper: false %>
+            </div>
+            <div class="col-md-6 col-xxl-2">
+              <%= f.input       :to_year,
+                                as: :select,
+                                collection: ((Time.now.year).downto(1950)),
+                                include_blank: University::Person::Experience.human_attribute_name('to_year'),
+                                wrapper: false %>
+            </div>
           </div>
-          <div class="col-md-6 col-xxl-4">
-            <%= f.input :description, as: :string %>
+          <div>
+            <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
+                                            f,
+                                            class: 'btn btn-sm btn-danger' %>
           </div>
-          <div class="col-md-6 col-xxl-2">
-            <%= f.input       :from_year,
-                              as: :select,
-                              collection: ((Time.now.year).downto(1950)),
-                              include_blank: University::Person::Experience.human_attribute_name('from_year'),
-                              wrapper: false %>
-          </div>
-          <div class="col-md-6 col-xxl-2">
-            <%= f.input       :to_year,
-                              as: :select,
-                              collection: ((Time.now.year).downto(1950)),
-                              include_blank: University::Person::Experience.human_attribute_name('to_year'),
-                              wrapper: false %>
-          </div>
-        </div>
-        <div>
-          <%= link_to_remove_association  "<i class=\"#{ Icon::DELETE }\"></i>".html_safe,
-                                          f,
-                                          class: 'btn btn-sm btn-danger' %>
         </div>
       </div>
+      <%= f.hidden_field :id if include_id %>
     </div>
-    <%= f.hidden_field :id if include_id %>
   </div>
-</div>
+<% end %>

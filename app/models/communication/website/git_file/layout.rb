@@ -26,7 +26,7 @@ class Communication::Website::GitFile::Layout < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  scope :ordered, -> { order(:path) }
+  scope :ordered, -> (language = nil) { order(:path) }
 
   def self.overrides
     pluck(:path).compact.uniq.sort

@@ -2,36 +2,26 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   load_and_authorize_resource class: Communication::Website::Agenda::Event,
                               through: :website
 
-  include Admin::Translatable
-
-  # Allow to override the default load_filters from Admin::Filterable
-  before_action :load_filters, only: :index
-
-  has_scope :for_search_term
-  has_scope :for_category
+  include Admin::HasStaticAction
+  include Admin::Localizable
 
   def index
-    @events = apply_scopes(@events).for_language(current_website_language)
-                                  .ordered_desc
-                                  .page(params[:page])
+    @events = @events.filter_by(params[:filters], current_language)
+                     .ordered_desc
+                     .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
   end
 
   def publish
-    @event.published = true
-    @event.save_and_sync
+    @l10n.publish!
+    @event.sync_with_git
     redirect_back fallback_location: admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.communication.website.publish.notice')
   end
 
   def show
     breadcrumb
-  end
-
-  def static
-    @about = @event
-    render_as_plain_text
   end
 
   def new
@@ -47,10 +37,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def create
     @event.website = @website
-    @event.add_photo_import params[:photo_import]
+    @event.created_by = current_user
+    @l10n.add_photo_import params[:photo_import]
     if @event.save_and_sync
       redirect_to admin_communication_website_agenda_event_path(@event),
-                  notice: t('admin.successfully_created_html', model: @event.to_s)
+                  notice: t('admin.successfully_created_html', model: @event.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -59,10 +50,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def update
-    @event.add_photo_import params[:photo_import]
+    @l10n.add_photo_import params[:photo_import]
     if @event.update_and_sync(event_params)
       redirect_to admin_communication_website_agenda_event_path(@event),
-                  notice: t('admin.successfully_updated_html', model: @event.to_s)
+                  notice: t('admin.successfully_updated_html', model: @event.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -73,13 +64,13 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def duplicate
     redirect_to [:admin, @event.duplicate],
-                notice: t('admin.successfully_duplicated_html', model: @event.to_s)
+                notice: t('admin.successfully_duplicated_html', model: @event.to_s_in(current_language))
   end
 
   def destroy
     @event.destroy
     redirect_to admin_communication_website_agenda_events_url,
-                notice: t('admin.successfully_destroyed_html', model: @event.to_s)
+                notice: t('admin.successfully_destroyed_html', model: @event.to_s_in(current_language))
   end
   protected
 
@@ -92,30 +83,24 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def categories
     @website.agenda_categories
-            .for_language(current_website_language)
             .ordered
-  end
-
-  def load_filters
-    @filters = ::Filters::Admin::Communication::Websites::Agenda::Events.new(
-        current_user, 
-        @website, 
-        current_website_language
-      ).list
   end
 
   def event_params
     params.require(:communication_website_agenda_event)
     .permit(
-      :title, :subtitle, :meta_description, :summary, :published, :slug,
-      :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-      :shared_image, :shared_image_delete,
       :from_day, :from_hour, :to_day, :to_hour, :time_zone,
-      category_ids: []
+      category_ids: [],
+      localizations_attributes: [
+        :id, :title, :subtitle, :meta_description, :summary, :text,
+        :published, :published_at, :slug,
+        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+        :shared_image, :shared_image_delete, :shared_image_infos,
+        :language_id
+      ]
     )
     .merge(
-      university_id: current_university.id,
-      language_id: current_website_language.id
+      university_id: current_university.id
     )
   end
 end

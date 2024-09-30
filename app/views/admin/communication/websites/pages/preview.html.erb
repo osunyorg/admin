@@ -1,8 +1,8 @@
-<% 
-@title = @page.title
-@summary = @page.summary
-@image = @page.featured_image 
+<%
+@title = @l10n.title
+@summary = @l10n.summary
+@image = @l10n.featured_image
 %>
 <%= render 'admin/communication/blocks/content/show',
-            about: @page,
+            about: @l10n,
             strip_javascript: true %>

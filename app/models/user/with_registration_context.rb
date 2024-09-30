@@ -12,8 +12,9 @@ module User::WithRegistrationContext
 
     def extranet_access
       unless user_can_access_registration_context?
-        if registration_context.registration_contact.present?
-          errors.add :email, I18n.t('extranet.errors.email_not_allowed_with_contact', contact: registration_context.registration_contact)
+        extranet_l10n = registration_context.localization_for(current_language)
+        if extranet_l10n.registration_contact.present?
+          errors.add :email, I18n.t('extranet.errors.email_not_allowed_with_contact', contact: extranet_l10n.registration_contact)
         else
           errors.add :email, I18n.t('extranet.errors.email_not_allowed')
         end

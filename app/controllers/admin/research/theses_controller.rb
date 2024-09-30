@@ -3,10 +3,12 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
                               through: :current_university,
                               through_association: :research_theses
 
-  has_scope :for_search_term
+  include Admin::Localizable
 
   def index
-    @theses = apply_scopes(@theses).ordered.page(params[:page])
+    @theses = @theses.filter_by(params[:filters], current_language)
+                     .ordered(current_language)
+                     .page(params[:page])
     breadcrumb
   end
 
@@ -25,7 +27,8 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
 
   def create
     if @thesis.save
-      redirect_to [:admin, @thesis], notice: t('admin.successfully_created_html', model: @thesis.to_s)
+      redirect_to [:admin, @thesis], 
+                  notice: t('admin.successfully_created_html', model: @thesis.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -34,7 +37,8 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
 
   def update
     if @thesis.update(thesis_params)
-      redirect_to [:admin, @thesis], notice: t('admin.successfully_updated_html', model: @thesis.to_s)
+      redirect_to [:admin, @thesis], 
+                  notice: t('admin.successfully_updated_html', model: @thesis.to_s_in(current_language))
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -44,16 +48,25 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
 
   def destroy
     @thesis.destroy
-    redirect_to admin_research_theses_url, notice: t('admin.successfully_destroyed_html', model: @thesis.to_s)
+    redirect_to admin_research_theses_url, 
+                notice: t('admin.successfully_destroyed_html', model: @thesis.to_s_in(current_language))
   end
 
   protected
 
   def thesis_params
-    params.require(:research_thesis).permit(
-      :title, :abstract, :started_at, :completed, :completed_at,
-      :research_laboratory_id, :author_id, :director_id
-    ).merge(university_id: current_university.id)
+    params.require(:research_thesis)
+          .permit(
+            :started_at, :completed, :completed_at,
+            :research_laboratory_id, :author_id, :director_id,
+            localizations_attributes: [
+              :id, :language_id, 
+              :title, :abstract
+            ]
+          )
+          .merge(
+            university_id: current_university.id
+          )
   end
 
   def breadcrumb

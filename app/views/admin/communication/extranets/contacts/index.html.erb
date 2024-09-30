@@ -9,7 +9,9 @@
       <tbody>
         <% @people.each do |person| %>
           <tr>
-            <td><%= link_to person, [:admin, person] %></td>
+            <td><%= osuny_link_localized person,
+                                         [:admin, person],
+                                         label_method: :to_s_alphabetical %></td>
             <td><%= person.email %></td>
             <td><%= render 'toggle', about: person %></td>
           </tr>
@@ -28,7 +30,8 @@
       <tbody>
         <% @organizations.each do |organization| %>
           <tr>
-            <td><%= link_to organization, [:admin, organization] %></td>
+            <td><%= osuny_link_localized organization,
+                                         [:admin, organization] %></td>
             <td><%= render 'toggle', about: organization %></td>
           </tr>
         <% end %>

@@ -1,7 +1,10 @@
 <% content_for :title, Communication::Extranet::Post::Category.model_name.human(count: 2) %>
 
 <ul>
-  <% @categories.each do |category| %>
-    <li><%= link_to category, posts_category_path(slug: category.slug) %></li>
+  <% @categories.each do |category| 
+      l10n = category.localization_for(current_language)
+      next if l10n.nil?
+      %>
+    <li><%= link_to l10n, posts_category_path(slug: l10n.slug) %></li>
   <% end %>
 </ul>

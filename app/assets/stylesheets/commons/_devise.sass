@@ -1,0 +1,17 @@
+.layout-devise
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    min-height: 100vh
+    header
+        padding: 100px 0
+        text-align: center
+    main
+        flex-grow: 1
+        min-height: auto
+    footer
+        min-height: auto
+    .mfa-code
+        font-size: pxToRem(26)
+        @include media-breakpoint-up(lg)
+            font-size: pxToRem(32)

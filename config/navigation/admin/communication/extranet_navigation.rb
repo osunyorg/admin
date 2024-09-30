@@ -16,7 +16,7 @@ SimpleNavigation::Configuration.run do |navigation|
       property = "feature_#{feature}"
       primary.item  property.to_sym,
                     Communication::Extranet.human_attribute_name(property),
-                    url_for([:admin, @extranet, feature])
+                    send("admin_communication_extranet_#{feature}_path")
     end
     primary.item  :subnav_settings,
                   t('admin.subnav.settings'),

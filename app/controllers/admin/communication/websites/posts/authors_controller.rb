@@ -1,20 +1,24 @@
 class Admin::Communication::Websites::Posts::AuthorsController < Admin::Communication::Websites::Posts::ApplicationController
 
-  has_scope :for_search_term
-
   def index
-    @authors =  apply_scopes(@website.authors.accessible_by(current_ability))
-                                .ordered
-                                .page(params[:page])
+    @authors =  @website.authors
+                        .filter_by(params[:filters], current_language)
+                        .accessible_by(current_ability)
+                        .ordered(current_language)
+                        .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end
 
   def show
     @author = @website.authors.accessible_by(current_ability).find(params[:id])
-    @posts = @author.communication_website_posts.where(communication_website_id: @website.id).ordered.page(params[:page])
+    @author_l10n = @author.localization_for(current_language)
+    @posts = @author.communication_website_posts
+                    .where(communication_website_id: @website.id)
+                    .ordered(current_language)
+                    .page(params[:page])
     breadcrumb
-    add_breadcrumb @author
+    add_breadcrumb @author_l10n
   end
 
   protected

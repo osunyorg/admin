@@ -56,7 +56,8 @@ module Admin::ApplicationHelper
   end
 
   def publish_link(object)
-    return if object.published || cannot?(:publish, object)
+    l10n = object.localization_for(current_language)
+    return if l10n.published || cannot?(:publish, object)
     link_to t('admin.communication.website.publish.button'),
             [:publish, :admin, object],
             method: :post,
@@ -151,21 +152,6 @@ module Admin::ApplicationHelper
     end
     collection = collection.reject { |o| o[:id] == except.id } unless except.nil?
     collection
-  end
-
-  def collection_tree_for_checkboxes(list, except = nil)
-    collection = collection_tree(list, except)
-    collection.map { |object|
-      [
-        sanitize(object[:label]),
-        object[:id],
-        {
-          data: {
-            parent: object[:parent_id]
-          }
-        }
-      ]
-    }
   end
 
   def time_zones_for_select

@@ -22,6 +22,14 @@ class ActiveSupport::TestCase
     @default_university ||= universities(:default_university)
   end
 
+  def french
+    @french ||= languages(:fr)
+  end
+
+  def english
+    @english ||= languages(:en)
+  end
+
   def default_extranet
     @default_extranet ||= communication_extranets(:default_extranet)
   end

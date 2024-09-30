@@ -1,7 +1,8 @@
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
       programs:
-<% block.template.elements.each do |element| %>
-<% next unless element.program %>
-        - path: "<%= element.program.path %>"
+<% block.template.selected_programs.each do |program| 
+    l10n = program.localization_for(block.language)
+    next if l10n.nil? %>
+        - path: "<%= l10n.path %>"
 <% end %>

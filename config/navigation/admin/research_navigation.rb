@@ -6,13 +6,13 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
     primary.item  :subnav_summary,
-                  t('admin.subnav.summary'), 
-                  admin_research_root_path, 
-                  highlights_on: lambda { 
-                    controller_name == "dashboard" && action_name == "index" 
+                  t('admin.subnav.summary'),
+                  admin_research_root_path,
+                  highlights_on: lambda {
+                    controller_name == "dashboard" && action_name == "index"
                   }
     primary.item  :subnav_researchers,
-                  University::Person::Researcher.model_name.human(count: 2),
+                  University::Person::Localization::Researcher.model_name.human(count: 2),
                   admin_research_researchers_path
     primary.item  :subnav_laboratories,
                   Research::Laboratory.model_name.human(count: 2),

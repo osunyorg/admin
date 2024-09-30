@@ -1,14 +1,20 @@
 class Communication::Website::Permalink::Page < Communication::Website::Permalink
 
+  # /notre-institut/histoire/
+  def self.pattern_in_website(website, language)
+    '/:slug_with_ancestors_slugs/'
+  end
+
   protected
 
   def published?
     website.id == about.communication_website_id && about.published
   end
 
-  # /notre-institut/histoire/
-  # Pages are special, there is no substitution and no pattern
-  def published_path
-    about.path
+  def substitutions
+    {
+      slug_with_ancestors_slugs: about.slug_with_ancestors_slugs
+    }
   end
+
 end

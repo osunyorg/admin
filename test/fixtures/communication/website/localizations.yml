@@ -1,7 +1,20 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+website_with_github_fr:
+  name: Site with github french
+  published: true
+  about: website_with_github
+  language: fr
+  university: default_university
+
+website_with_gitlab_fr:
+  name: Site with gitlab french
+  published: true
+  about: website_with_gitlab
+  language: fr
+  university: default_university
 
 website_with_gitlab_en:
-  university: default_university
-  website: website_with_gitlab
-  language: en
   name: Site with gitlab english
+  published: true
+  about: website_with_gitlab
+  language: en
+  university: default_university

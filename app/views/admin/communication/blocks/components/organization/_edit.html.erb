@@ -1,6 +1,9 @@
-<% organizations = current_university.organizations
-                                      .for_language(block.language)
-                                      .ordered %>
+<%
+organizations = osuny_collection(
+  current_university.organizations,
+  localized: true
+)
+%>
 <% unless label.blank? %>
   <label  class="form-label"
           :for="<%= dom_id.html_safe %>">
@@ -14,8 +17,8 @@
     <%= t "#{i18n_component}.unregistered" %>
   </option>
   <% organizations.each do |organization| %>
-    <option value="<%= organization.id %>">
-      <%= organization.name %>
+    <option value="<%= organization.last %>">
+      <%= organization.first %>
     </option>
   <% end %>
 </select>

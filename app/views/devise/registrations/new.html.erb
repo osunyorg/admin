@@ -1,6 +1,6 @@
-<%= content_for :title, t('.title', title: current_extranet.present? ? current_extranet.name : 'Osuny') %>
+<%= content_for :title, t('.title', title: current_extranet.present? ? current_extranet.to_s_in(current_language) : 'Osuny') %>
 
-<h2 class="mb-4"><%= t(".sign_up") %></h2>
+<h1 class="h4 mb-4"><%= t(".sign_up") %></h1>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>

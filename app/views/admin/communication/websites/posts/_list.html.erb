@@ -1,11 +1,9 @@
 <%
 small ||= false
-hide_author ||= false
 hide_buttons ||= false
 hide_pinned ||= false
 selectable ||= false
 if small
-  hide_author = true
   hide_buttons = true
 end
 %>
@@ -21,7 +19,11 @@ end
         <tr>
           <% if selectable %>
             <th class="border-0">
-              <%= check_box_tag nil, nil, false, data: { batch_selectable_role: "select-all" } if selectable %>
+              <%= check_box_tag nil,
+                                nil,
+                                false,
+                                class: 'form-check-input',
+                                data: { batch_selectable_role: "select-all" } if selectable %>
             </th>
           <% end %>
         </tr>
@@ -30,30 +32,36 @@ end
         <% posts.each do |post| %>
           <tr>
             <% if selectable %>
-              <td class="border-0"><%= check_box_tag "ids[]", post.id, false, data: { batch_selectable_role: "select-single" } %></td>
+              <td class="border-0">
+                <%= check_box_tag "ids[]",
+                                  post.id,
+                                  false,
+                                  class: 'form-check-input',
+                                  data: { batch_selectable_role: "select-single" } %>
+              </td>
             <% end %>
             <td>
               <div class="card card--horizontal">
-                <%= osuny_thumbnail post %>
+                <%= osuny_thumbnail_localized post %>
                 <div class="card-body">
-                  <%= osuny_published post unless small %>
-                  <%= link_to post,
-                              admin_communication_website_post_path(website_id: post.website.id, id: post.id),
-                              class: "stretched-link #{ post.published? ? 'text-black' : 'text-muted' }" %>
+                  <%= osuny_published_localized post unless small %>
+                  <%= osuny_link_localized  post,
+                                            admin_communication_website_post_path(
+                                              website_id: post.website.id,
+                                              id: post.id
+                                            ),
+                                            classes: 'stretched-link' %>
                 </div>
                 <div class="card-footer d-none d-lg-block">
-                  <% if !hide_buttons && post.pinned %>
-                    <%= Communication::Website::Post.human_attribute_name('pinned') %>
-                  <% end %>
-                  <% if !hide_author && post.author %>
-                    <span class="ms-3">
-                      <%= post.author %>
+                  <% if !hide_buttons && post.pinned_in?(current_language) %>
+                    <span class="badge border border-subtle text-dark">
+                    <%= Communication::Website::Post::Localization.human_attribute_name('pinned') %>
                     </span>
                   <% end %>
-                  <% if post.published_at %>
+                  <% if published_at = post.published_at_in(current_language) %>
                     <span class="ms-3">
-                      <%= small ? l(post.published_at.to_date, format: :short)
-                                : l(post.published_at, format: :date_with_explicit_month) %>
+                      <%= small ? l(published_at.to_date, format: :short)
+                                : l(published_at, format: :date_with_explicit_month) %>
                     </span>
                   <% end %>
                 </div>

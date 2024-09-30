@@ -3,25 +3,15 @@
 # Table name: research_journal_papers
 #
 #  id                         :uuid             not null, primary key
-#  abstract                   :text
 #  accepted_at                :date
-#  authors_list               :text
 #  bibliography               :text
 #  doi                        :string
-#  keywords                   :text
-#  meta_description           :text
 #  position                   :integer
-#  published                  :boolean          default(FALSE)
-#  published_at               :datetime
 #  received_at                :date
-#  slug                       :string           indexed
-#  summary                    :text
 #  text                       :text
-#  title                      :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  kind_id                    :uuid             indexed
-#  language_id                :uuid             not null, indexed
 #  research_journal_id        :uuid             not null, indexed
 #  research_journal_volume_id :uuid             indexed
 #  university_id              :uuid             not null, indexed
@@ -30,17 +20,14 @@
 # Indexes
 #
 #  index_research_journal_papers_on_kind_id                     (kind_id)
-#  index_research_journal_papers_on_language_id                 (language_id)
 #  index_research_journal_papers_on_research_journal_id         (research_journal_id)
 #  index_research_journal_papers_on_research_journal_volume_id  (research_journal_volume_id)
-#  index_research_journal_papers_on_slug                        (slug)
 #  index_research_journal_papers_on_university_id               (university_id)
 #  index_research_journal_papers_on_updated_by_id               (updated_by_id)
 #
 # Foreign Keys
 #
 #  fk_rails_05213f4f24  (research_journal_id => research_journals.id)
-#  fk_rails_0da55970b1  (language_id => languages.id)
 #  fk_rails_22f161a6a7  (research_journal_volume_id => research_journal_volumes.id)
 #  fk_rails_2713063b85  (updated_by_id => users.id)
 #  fk_rails_935541e014  (university_id => universities.id)
@@ -48,22 +35,11 @@
 #
 class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
-  include Contentful
-  include Permalinkable
+  include Localizable
   include Sanitizable
-  include Sluggable
-  include WithBlobs
-  include WithCitations
-  include WithGitFiles
   include WithPosition
-  include WithPublication
   include WithUniversity
 
-  has_summernote :bibliography
-  has_summernote :text
-  has_one_attached :pdf
-
-  belongs_to  :language
   belongs_to  :journal,
               foreign_key: :research_journal_id
   belongs_to  :volume,
@@ -79,30 +55,33 @@ class Research::Journal::Paper < ApplicationRecord
                           join_table: :research_journal_papers_researchers,
                           association_foreign_key: :researcher_id
 
-  validates :title, presence: true
+  scope :ordered, -> (language) {
+    localization_published_at_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.published_at END),
+        '1970-01-01'
+      ) AS localization_published_at
+    SQL
 
-  scope :ordered, -> { order(published_at: :desc) }
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          research_journal_paper_localizations as localizations
+      ) localizations ON research_journal_papers.id = localizations.about_id
+    SQL
+    ]))
+    .select("research_journal_papers.*", localization_published_at_select)
+    .group("research_journal_papers.id")
+    .order("localization_published_at DESC")
+  }
   scope :ordered_by_position, -> { order(:position) }
-  scope :for_language, -> (language) { for_language_id(language.id) }
-  # The for_language_id scope can be used when you have the ID without needing to load the Language itself
-  scope :for_language_id, -> (language_id) { where(language_id: language_id) }
-
-  def git_path(website)
-    "#{git_path_content_prefix(website)}papers/#{static_path}.html" if published?
-  end
-
-  def static_path
-    "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
-  end
-
-  def template_static
-    "admin/research/journals/papers/static"
-  end
 
   def dependencies
-    active_storage_blobs +
-    contents_dependencies +
-    people.map(&:researcher)
+    localizations +
+    people.map(&:researcher_facets)
   end
 
   def references
@@ -115,33 +94,9 @@ class Research::Journal::Paper < ApplicationRecord
     Doi.url doi
   end
 
-  def to_s
-    "#{ title }"
-  end
-
   protected
 
-  def to_citeproc(website: nil)
-    citeproc = {
-      "title" => title,
-      "author" => people.map { |person|
-        { "family" => person.last_name, "given" => person.first_name }
-      },
-      "URL" => current_permalink_url_in_website(website),
-      "container-title" => journal.title,
-      "volume" => volume&.number,
-      "keywords" => keywords,
-      "pdf" => pdf.attached? ? pdf.url : nil,
-      "id" => id
-    }
-    citeproc["DOI"] = doi if doi.present?
-    if published_at.present?
-      citeproc["month-numeric"] = published_at.month.to_s
-      citeproc["issued"] = { "date-parts" => [[published_at.year, published_at.month]] }
-    end
-    citeproc
-  end
-
+  # TODO: Maybe removable, no use
   def other_papers_in_the_volume
     return [] if volume.nil?
     volume.papers.where.not(id: self)
@@ -152,9 +107,5 @@ class Research::Journal::Paper < ApplicationRecord
       university_id: university_id,
       research_journal_volume_id: research_journal_volume_id
     ).ordered.last
-  end
-
-  def explicit_blob_ids
-    super.concat [pdf&.blob_id]
   end
 end
