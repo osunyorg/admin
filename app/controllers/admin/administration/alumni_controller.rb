@@ -7,7 +7,6 @@ class Admin::Administration::AlumniController < Admin::Administration::Applicati
 
   def index
     @alumni = @alumni.filter_by(params[:filters], current_language)
-                     .tmp_original # TODO L10N : To remove
                      .alumni
                      .ordered(current_language)
                      .page(params[:page])

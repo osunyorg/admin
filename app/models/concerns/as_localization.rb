@@ -52,26 +52,6 @@ module AsLocalization
     original.nil? || (self == original)
   end
 
-  # def direct_sources
-  #   @direct_sources ||= begin
-  #    if about.is_direct_object?
-  #     [about]
-  #    else
-  #     about.direct_sources
-  #    end
-  #   end
-  # end
-
-  # TODO L10N : To handle
-  # Used to fix Communication::Website::IndirectObject::SyncWithGitJob on Communication::Block
-  # def direct_sources_from_existing_connections
-  #   if about.respond_to?(:direct_sources_from_existing_connections)
-  #     about.direct_sources_from_existing_connections
-  #   else
-  #     raise NameError, "No method 'direct_sources_from_existing_connections' for #{about.class}"
-  #   end
-  # end
-
   def for_website?(website)
     website.active_language_ids.include?(language_id) &&
       website.has_connected_object?(self)

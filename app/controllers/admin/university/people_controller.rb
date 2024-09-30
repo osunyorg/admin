@@ -8,11 +8,8 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def index
     @people = @people.filter_by(params[:filters], current_language)
-                     .tmp_original # TODO L10N : To remove
                      .ordered(current_language)
-
     @feature_nav = 'navigation/admin/university/people'
-
     respond_to do |format|
       format.html {
         @people = @people.page(params[:page])
@@ -28,8 +25,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   def search
     @term = params[:term].to_s
     @people = current_university.people
-                                .tmp_original # TODO L10N : To remove
-                                .for_search_term(@term)
+                                .for_search_term(@term, current_language)
                                 .ordered(current_language)
   end
 
@@ -116,7 +112,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def categories
     current_university.person_categories
-                      .tmp_original # TODO L10N : To remove
                       .ordered(current_language)
   end
 end

@@ -20,7 +20,7 @@ date: <%= project.year %>
 <%= render 'admin/application/categories/static',
             about: project,
             l10n: @l10n,
-            categories: @website.portfolio_categories.tmp_original, # TODO L10N : remove tmp_original
+            categories: @website.portfolio_categories,
             key: :projects_categories %>
 <%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---

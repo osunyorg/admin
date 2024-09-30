@@ -22,20 +22,8 @@
 #  in_production                :boolean          default(FALSE)
 #  in_showcase                  :boolean          default(TRUE)
 #  locked_at                    :datetime
-#  name                         :string           indexed
 #  plausible_url                :string
 #  repository                   :string
-#  social_email                 :string
-#  social_facebook              :string
-#  social_github                :string
-#  social_instagram             :string
-#  social_linkedin              :string
-#  social_mastodon              :string
-#  social_peertube              :string
-#  social_tiktok                :string
-#  social_vimeo                 :string
-#  social_x                     :string
-#  social_youtube               :string
 #  style                        :text
 #  style_updated_at             :date
 #  theme_version                :string           default("NA")
@@ -52,7 +40,6 @@
 #
 #  index_communication_websites_on_about                (about_type,about_id)
 #  index_communication_websites_on_default_language_id  (default_language_id)
-#  index_communication_websites_on_name                 (name) USING gin
 #  index_communication_websites_on_university_id        (university_id)
 #
 # Foreign Keys
@@ -98,12 +85,6 @@ class Communication::Website < ApplicationRecord
 
   belongs_to :default_language, class_name: "Language"
 
-  # TODO L10N : remove after migrations
-  has_and_belongs_to_many :legacy_languages,
-                          class_name: "Language",
-                          join_table: :communication_websites_languages,
-                          foreign_key: :communication_website_id,
-                          association_foreign_key: :language_id
   has_many :languages, through: :localizations
   has_many  :active_languages,
             -> { where(communication_website_localizations: { published: true }) },
@@ -138,7 +119,7 @@ class Communication::Website < ApplicationRecord
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
 
   def to_s
-    "#{name}"
+    original_localization.to_s
   end
 
   def git_path(website)
@@ -203,7 +184,6 @@ class Communication::Website < ApplicationRecord
   def sanitize_fields
     self.git_branch = Osuny::Sanitizer.sanitize(self.git_branch, 'string')
     self.git_endpoint = Osuny::Sanitizer.sanitize(self.git_endpoint, 'string')
-    self.name = Osuny::Sanitizer.sanitize(self.name, 'string')
     self.plausible_url = Osuny::Sanitizer.sanitize(self.plausible_url, 'string')
     self.repository = Osuny::Sanitizer.sanitize(self.repository, 'string')
     self.url = Osuny::Sanitizer.sanitize(self.url, 'string')

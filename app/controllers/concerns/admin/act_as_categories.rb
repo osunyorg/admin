@@ -31,7 +31,6 @@ module Admin::ActAsCategories
   # Good for websites, but needs override for other objects
   def categories
     categories_class.where(communication_website_id: @website.id)
-                    .tmp_original
                     .ordered(current_language)
   end
 

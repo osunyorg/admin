@@ -32,8 +32,6 @@ module AsIndirectObject
     true
   end
 
-  # TODO L10N : Probablement plus utile car for_website? semble appelé sur les l10n uniquement
-  # A voir après migration de la partie Research
   def for_website?(website)
     website.has_connected_object?(self)
   end

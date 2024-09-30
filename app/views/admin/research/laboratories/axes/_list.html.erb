@@ -5,15 +5,16 @@
       <% end %>
       >
   <% axes.each do |axis| %>
+    <% axis_l10n = axis.localization_for(current_language) %>
     <div data-id="<%= axis.id %>">
       <div class="card card--horizontal">
         <%= osuny_thumbnail_localized axis, classes: 'handle m-0' %>
         <div class="card-body">
-          <%= osuny_link_localized  axis, 
+          <%= osuny_link_localized  axis,
                                     admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis) %>
         </div>
         <div class="card-footer">
-          <%= axis.short_name %>
+          <%= axis_l10n&.short_name %>
         </div>
       </div>
     </div>

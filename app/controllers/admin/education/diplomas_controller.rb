@@ -6,12 +6,12 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   include Admin::Localizable
 
   def index
-    @diplomas = @diplomas.tmp_original.ordered # TODO L10N: remove
+    @diplomas = @diplomas.ordered
     breadcrumb
   end
 
   def show
-    @programs = @diploma.programs.tmp_original.ordered.page params[:page]
+    @programs = @diploma.programs.ordered.page params[:page]
     breadcrumb
   end
 

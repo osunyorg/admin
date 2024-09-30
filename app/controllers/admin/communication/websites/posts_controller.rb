@@ -7,7 +7,6 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def index
     @posts = @posts.filter_by(params[:filters], current_language)
-                   .tmp_original # TODO L10N : To remove
                    .ordered(current_language)
                    .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
@@ -119,7 +118,6 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def categories
     @website.post_categories
-            .tmp_original # TODO L10N : To remove
             .ordered
   end
 end

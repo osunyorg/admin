@@ -29,7 +29,6 @@ module WithDependencies
       website_ids_before_destroy = websites_to_clean_ids
       super
       snapshot_direct_sources.each do |direct_source|
-        # TODO L10N : Replaced by a try method, but it's not the best solution
         direct_source.try(:sync_with_git)
       end
       clean_websites(website_ids_before_destroy)

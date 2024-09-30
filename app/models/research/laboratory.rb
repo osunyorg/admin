@@ -2,30 +2,21 @@
 #
 # Table name: research_laboratories
 #
-#  id                 :uuid             not null, primary key
-#  address            :string
-#  address_additional :string
-#  address_name       :string
-#  city               :string
-#  country            :string
-#  name               :string
-#  zipcode            :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  language_id        :uuid             indexed
-#  original_id        :uuid             indexed
-#  university_id      :uuid             not null, indexed
+#  id            :uuid             not null, primary key
+#  address       :string
+#  city          :string
+#  country       :string
+#  zipcode       :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_research_laboratories_on_language_id    (language_id)
-#  index_research_laboratories_on_original_id    (original_id)
 #  index_research_laboratories_on_university_id  (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_0bf891c2d7  (original_id => research_laboratories.id)
-#  fk_rails_2dcf393603  (language_id => languages.id)
 #  fk_rails_f61d27545f  (university_id => universities.id)
 #
 class Research::Laboratory < ApplicationRecord
@@ -48,7 +39,7 @@ class Research::Laboratory < ApplicationRecord
               dependent: :destroy
 
   has_and_belongs_to_many :researchers,
-                          class_name: 'University::Person::Researcher',
+                          class_name: 'University::Person',
                           foreign_key: :research_laboratory_id,
                           association_foreign_key: :university_person_id
 

@@ -1,11 +1,9 @@
 class Admin::Communication::Extranets::ContactsController < Admin::Communication::Extranets::ApplicationController
   def index
     @people = current_university.people
-                                .tmp_original # TODO L10N : To remove
                                 .ordered(current_language)
                                 .page(params[:persons_page])
     @organizations = current_university.organizations
-                                        .tmp_original # TODO L10N : To remove
                                         .ordered(current_language)
                                         .page(params[:organizations_page])
     breadcrumb
@@ -14,7 +12,6 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
 
   def export_people
     @people = @extranet.connected_people
-                       .tmp_original # TODO L10N : To remove
                        .ordered(current_language)
     filename = "people-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
     response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
@@ -23,7 +20,6 @@ class Admin::Communication::Extranets::ContactsController < Admin::Communication
 
   def export_organizations
     @organizations = @extranet.connected_organizations
-                              .tmp_original # TODO L10N : To remove
                               .ordered(current_language)
     filename = "organizations-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
     response.headers['Content-Disposition'] = "attachment; filename=#{filename}"

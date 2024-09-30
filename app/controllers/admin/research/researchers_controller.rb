@@ -10,7 +10,6 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
     @researchers = current_university.people
                                      .researchers
                                      .filter_by(params[:filters], current_language)
-                                     .tmp_original # TODO L10N : To remove
                                      .ordered(current_language)
                                      .page(params[:page])
     breadcrumb
@@ -55,7 +54,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def breadcrumb
     super
-    add_breadcrumb University::Person::Researcher.model_name.human(count: 2), admin_research_researchers_path
+    add_breadcrumb University::Person::Localization::Researcher.model_name.human(count: 2), admin_research_researchers_path
   end
 
 end

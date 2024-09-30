@@ -145,7 +145,6 @@ module Admin::ApplicationHelper
     end
   end
 
-  # TODO L10N : should be removed?
   def collection_tree(list, except = nil)
     collection = []
     list.root.ordered.each do |object|
@@ -153,22 +152,6 @@ module Admin::ApplicationHelper
     end
     collection = collection.reject { |o| o[:id] == except.id } unless except.nil?
     collection
-  end
-
-  # TODO L10N : should be removed?
-  def collection_tree_for_checkboxes(list, except = nil)
-    collection = collection_tree(list, except)
-    collection.map { |object|
-      [
-        sanitize(object[:label]),
-        object[:id],
-        {
-          data: {
-            parent: object[:parent_id]
-          }
-        }
-      ]
-    }
   end
 
   def time_zones_for_select

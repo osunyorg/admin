@@ -14,12 +14,9 @@
       <% elsif @item.has_about? %>
         <%= osuny_label Communication::Website::Menu::Item.human_attribute_name('about') %>
         <p>
-          <%# TODO L10N : Remove when everything is localizable %>
-          <% if @item.about.localizable? %>
-            <%= osuny_link_localized_if can?(:read, @item.about), @item.about, [:admin, @item.about.becomes(@item.about.class.base_class)] %>
-          <% else %>
-            <%= link_to_if can?(:read, @item.about), @item.about, [:admin, @item.about.becomes(@item.about.class.base_class)] %>
-          <% end %>
+          <%= osuny_link_localized_if can?(:read, @item.about), 
+                                      @item.about, 
+                                      [:admin, @item.about.becomes(@item.about.class.base_class)] %>
         </p>
       <% end %>
     <% end %>

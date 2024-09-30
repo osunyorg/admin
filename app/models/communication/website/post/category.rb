@@ -3,20 +3,11 @@
 # Table name: communication_website_post_categories
 #
 #  id                       :uuid             not null, primary key
-#  featured_image_alt       :string
-#  featured_image_credit    :text
 #  is_programs_root         :boolean          default(FALSE)
-#  meta_description         :text
-#  name                     :string
-#  path                     :string
 #  position                 :integer
-#  slug                     :string           indexed
-#  summary                  :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
-#  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
 #  program_id               :uuid             indexed
 #  university_id            :uuid             not null, indexed
@@ -24,17 +15,12 @@
 # Indexes
 #
 #  idx_communication_website_post_cats_on_communication_website_id  (communication_website_id)
-#  index_communication_website_post_categories_on_language_id       (language_id)
-#  index_communication_website_post_categories_on_original_id       (original_id)
 #  index_communication_website_post_categories_on_parent_id         (parent_id)
 #  index_communication_website_post_categories_on_program_id        (program_id)
-#  index_communication_website_post_categories_on_slug              (slug)
 #  index_communication_website_post_categories_on_university_id     (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_3186d8e327  (language_id => languages.id)
-#  fk_rails_52bd5968c9  (original_id => communication_website_post_categories.id)
 #  fk_rails_86a9ce3cea  (parent_id => communication_website_post_categories.id)
 #  fk_rails_9d4210dc43  (university_id => universities.id)
 #  fk_rails_c7c9f7ddc7  (communication_website_id => communication_websites.id)
@@ -42,22 +28,12 @@
 #
 class Communication::Website::Post::Category < ApplicationRecord
   include AsDirectObject
-  include Contentful # TODO L10N : To remove
   include Sanitizable
   include Localizable
-  include Pathable # Included after Sluggable to make sure slug is correct before anything # TODO L10N : To remove
-  include WithBlobs # TODO L10N : To remove
-  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
   include WithPosition
   include WithTree
   include WithUniversity
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-              class_name: "Communication::Website::Permalink",
-              as: :about,
-              dependent: :destroy
 
   belongs_to              :parent,
                           class_name: 'Communication::Website::Post::Category',

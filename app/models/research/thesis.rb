@@ -3,11 +3,9 @@
 # Table name: research_theses
 #
 #  id                     :uuid             not null, primary key
-#  abstract               :text
 #  completed              :boolean          default(FALSE)
 #  completed_at           :date
 #  started_at             :date
-#  title                  :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  author_id              :uuid             not null, indexed

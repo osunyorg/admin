@@ -7,7 +7,7 @@
   </div>
   <div class="offset-lg-1 col-lg-8">
     <%= osuny_panel t('admin.summary.label'), small: true do %>
-      <p class="lead mb-1"><%= @location.summary %></p>
+      <p class="lead mb-1"><%= @l10n.summary %></p>
     <% end %>
     <div class="mb-5">
       <div class="row">
@@ -38,10 +38,10 @@
         </div>
       </div>
     </div>
-    <% if @location.schools.any? %>
+    <% if @schools.any? %>
       <%= osuny_panel Administration::Location.human_attribute_name('schools'), small: true do %>
         <div class="row g-2">
-          <% @location.schools.ordered.each do |school| %>
+          <% @schools.each do |school| %>
             <div>
               <div class="card card--horizontal">
                 <%= osuny_thumbnail_localized school %>
@@ -54,10 +54,10 @@
         </div>
       <% end %>
     <% end %>
-    <% if @location.programs.any? %>
+    <% if @programs.any? %>
       <%= osuny_panel Administration::Location.human_attribute_name('programs'), small: true do %>
         <div class="row g-2">
-          <% @location.programs.ordered.each do |program| %>
+          <% @programs.each do |program| %>
             <div>
               <div class="card card--horizontal">
                 <%= osuny_thumbnail_localized program %>
@@ -70,10 +70,10 @@
         </div>
       <% end %>
     <% end %>
-    <% if @location.websites.any? %>
+    <% if @websites.any? %>
       <%= osuny_panel Administration::Location.human_attribute_name('websites'), small: true do %>
         <div class="row g-2">
-          <% @location.websites.each do |website| %>
+          <% @websites.each do |website| %>
             <div>
               <div class="card card--horizontal">
                 <%= osuny_thumbnail_localized website %>
@@ -92,7 +92,7 @@
   </div>
 </div>
 
-<%= render 'admin/communication/blocks/content/editor', about: @location %>
+<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
 
 <%= render 'admin/application/connections/list', about: @location %>
 

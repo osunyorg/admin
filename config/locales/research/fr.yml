@@ -5,9 +5,6 @@ fr:
       research/hal: HAL
   activerecord:
     models:
-      university/person/researcher:
-        one: Chercheur·e
-        other: Chercheur·e·s
       research/hal/author:
         one: Auteur·e HAL
         other: Auteur·e·s HAL
@@ -35,6 +32,9 @@ fr:
       research/thesis:
         one: Thèse
         other: Thèses
+      university/person/localization/researcher:
+        one: Chercheur·e
+        other: Chercheur·e·s
     attributes:
       research/hal/author:
         docid: Identifiant HAL
@@ -84,7 +84,7 @@ fr:
         address_additional: Complément d'adresse
         address_name: Nom de l'adresse
         name: Nom
-      research/laboratory/axis:
+      research/laboratory/axis/localization:
         name: Nom
         short_name: Nom court
         text: Texte
@@ -115,7 +115,7 @@ fr:
   admin:
     research:
       researcher:
-        show_person_html: Cette page montre uniquement les publications scientifiques de la personne. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien     
+        show_person_html: Cette page montre uniquement les publications scientifiques de la personne. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien
   enums:
     research:
       publication:
@@ -177,4 +177,3 @@ fr:
         localizations:
           address_additional: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
           address_name: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
-

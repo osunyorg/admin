@@ -10,7 +10,6 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
     @teachers = current_university.people
                                   .teachers
                                   .filter_by(params[:filters], current_language)
-                                  .tmp_original # TODO L10N : To remove
                                   .ordered(current_language)
                                   .page(params[:page])
     breadcrumb
@@ -49,7 +48,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
 
   def breadcrumb
     super
-    add_breadcrumb University::Person::Teacher.model_name.human(count: 2), admin_education_teachers_path
+    add_breadcrumb University::Person::Localization::Teacher.model_name.human(count: 2), admin_education_teachers_path
     add_breadcrumb @l10n, admin_education_teacher_path(@teacher) if @teacher
   end
 

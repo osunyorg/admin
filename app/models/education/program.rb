@@ -2,79 +2,39 @@
 #
 # Table name: education_programs
 #
-#  id                     :uuid             not null, primary key
-#  accessibility          :text
-#  apprenticeship         :boolean
-#  bodyclass              :string
-#  capacity               :integer
-#  contacts               :text
-#  content                :text
-#  continuing             :boolean
-#  duration               :string
-#  evaluation             :text
-#  featured_image_alt     :string
-#  featured_image_credit  :text
-#  initial                :boolean
-#  meta_description       :text
-#  name                   :string
-#  objectives             :text
-#  opportunities          :text
-#  other                  :text
-#  path                   :string
-#  pedagogy               :text
-#  position               :integer          default(0)
-#  prerequisites          :text
-#  presentation           :text
-#  pricing                :text
-#  pricing_apprenticeship :text
-#  pricing_continuing     :text
-#  pricing_initial        :text
-#  published              :boolean          default(FALSE)
-#  qualiopi_certified     :boolean          default(FALSE)
-#  qualiopi_text          :text
-#  registration           :text
-#  registration_url       :string
-#  results                :text
-#  short_name             :string
-#  slug                   :string           indexed
-#  summary                :text
-#  url                    :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  diploma_id             :uuid             indexed
-#  language_id            :uuid             indexed
-#  original_id            :uuid             indexed
-#  parent_id              :uuid             indexed
-#  university_id          :uuid             not null, indexed
+#  id                 :uuid             not null, primary key
+#  apprenticeship     :boolean
+#  bodyclass          :string
+#  capacity           :integer
+#  continuing         :boolean
+#  initial            :boolean
+#  position           :integer          default(0)
+#  qualiopi_certified :boolean          default(FALSE)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  diploma_id         :uuid             indexed
+#  parent_id          :uuid             indexed
+#  university_id      :uuid             not null, indexed
 #
 # Indexes
 #
 #  index_education_programs_on_diploma_id     (diploma_id)
-#  index_education_programs_on_language_id    (language_id)
-#  index_education_programs_on_original_id    (original_id)
 #  index_education_programs_on_parent_id      (parent_id)
-#  index_education_programs_on_slug           (slug)
 #  index_education_programs_on_university_id  (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_08b351087c  (university_id => universities.id)
-#  fk_rails_2c27955cee  (original_id => education_programs.id)
-#  fk_rails_e2f027eb9e  (language_id => languages.id)
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : To remove
   include Filterable
   include Localizable
   include Sanitizable
-  include Shareable # TODO L10N : To remove
   include WebsitesLinkable
   include WithAlumni
-  include WithBlobs # TODO L10N : To remove
   include WithDiploma
-  include WithFeaturedImage # TODO L10N : To remove
   include WithLocations
   include WithMenuItemTarget
   include WithPosition
@@ -84,12 +44,6 @@ class Education::Program < ApplicationRecord
   include WithUniversity
   include WithWebsitesCategories
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   belongs_to :parent,
              class_name: 'Education::Program',
              optional: true
@@ -97,10 +51,6 @@ class Education::Program < ApplicationRecord
   has_many   :children,
              class_name: 'Education::Program',
              foreign_key: :parent_id
-
-
-  has_one_attached_deletable :downloadable_summary # TODO L10N : To remove
-  has_one_attached_deletable :logo # TODO L10N : To remove
 
   before_destroy :move_children
 
@@ -151,7 +101,6 @@ class Education::Program < ApplicationRecord
 
   def dependencies
     localizations +
-    active_storage_blobs +
     locations +
     university_people_through_involvements.map(&:teacher_facets) +
     university_people_through_role_involvements.map(&:administrator_facets) +

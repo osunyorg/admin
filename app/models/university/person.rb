@@ -5,13 +5,11 @@
 #  id                            :uuid             not null, primary key
 #  address                       :string
 #  address_visibility            :integer          default("private")
-#  biography                     :text
 #  birthdate                     :date
 #  city                          :string
 #  country                       :string
 #  email                         :string
 #  email_visibility              :integer          default("private")
-#  first_name                    :string
 #  gender                        :integer
 #  habilitation                  :boolean          default(FALSE)
 #  is_administration             :boolean
@@ -19,52 +17,34 @@
 #  is_author                     :boolean
 #  is_researcher                 :boolean
 #  is_teacher                    :boolean
-#  last_name                     :string
-#  linkedin                      :string
 #  linkedin_visibility           :integer          default("private")
-#  mastodon                      :string
 #  mastodon_visibility           :integer          default("private")
-#  meta_description              :text
-#  name                          :string
 #  phone_mobile                  :string
 #  phone_mobile_visibility       :integer          default("private")
 #  phone_personal                :string
 #  phone_personal_visibility     :integer          default("private")
 #  phone_professional            :string
 #  phone_professional_visibility :integer          default("private")
-#  picture_credit                :text
-#  slug                          :string           indexed
-#  summary                       :text
 #  tenure                        :boolean          default(FALSE)
-#  twitter                       :string
 #  twitter_visibility            :integer          default("private")
-#  url                           :string
 #  zipcode                       :string
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
-#  language_id                   :uuid             indexed
-#  original_id                   :uuid             indexed
 #  university_id                 :uuid             not null, indexed
 #  user_id                       :uuid             indexed
 #
 # Indexes
 #
-#  index_university_people_on_language_id    (language_id)
-#  index_university_people_on_original_id    (original_id)
-#  index_university_people_on_slug           (slug)
 #  index_university_people_on_university_id  (university_id)
 #  index_university_people_on_user_id        (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_08f468090d  (original_id => university_people.id)
-#  fk_rails_49a0628c42  (language_id => languages.id)
 #  fk_rails_b47a769440  (user_id => users.id)
 #  fk_rails_da35e70d61  (university_id => universities.id)
 #
 class University::Person < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : To remove
   include Filterable
   include Sanitizable
   include Localizable
@@ -90,12 +70,6 @@ class University::Person < ApplicationRecord
   enum gender: { male: 0, female: 1, non_binary: 2 }
 
   belongs_to :user, optional: true
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Person::Category',
@@ -226,28 +200,6 @@ class University::Person < ApplicationRecord
     active_storage_blobs
   end
 
-  # TODO L10N : To remove
-  def person
-    @person ||= University::Person.find(id)
-  end
-
-  def administrator
-    @administrator ||= University::Person::Administrator.find(id)
-  end
-
-  def author
-    @author ||= University::Person::Author.find(id)
-  end
-
-  def researcher
-    @researcher ||= University::Person::Researcher.find(id)
-  end
-
-  def teacher
-    @teacher ||= University::Person::Teacher.find(id)
-  end
-  # TODO L10N : /To remove
-
   def administrator_facets
     @administrator_facets ||= University::Person::Localization::Administrator.where(id: localization_ids)
   end
@@ -275,11 +227,6 @@ class University::Person < ApplicationRecord
 
   def to_s_alphabetical_in(language)
     best_localization_for(language).to_s_alphabetical
-  end
-
-  # TODO L10N : to remove
-  def translate_other_attachments(translation)
-    translate_attachment(translation, :picture) if picture.attached?
   end
 
   protected

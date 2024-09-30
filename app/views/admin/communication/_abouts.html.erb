@@ -9,7 +9,7 @@
       data-conditional-source="about_type"
       data-conditional-value="Education::School">
   <%= f.input :about_id,
-              collection: current_university.education_schools.ordered(current_language),
+              collection: osuny_collection(current_university.education_schools, localized: true),
               label: Education::School.model_name.human,
               include_blank: false %>
 </div>
@@ -17,17 +17,15 @@
       data-conditional-source="about_type"
       data-conditional-value="Education::Program">
   <%= f.input :about_id,
-              collection: collection_tree(current_university.education_programs),
+              collection: osuny_collection_tree(current_university.education_programs.root, localized: true),
               label: Education::Program.model_name.human,
-              label_method: ->(p) { sanitize p[:label] },
-              value_method: ->(p) { p[:id] },
               include_blank: false %>
 </div>
 <div  class="d-none"
       data-conditional-source="about_type"
       data-conditional-value="Research::Journal">
   <%= f.input :about_id,
-              collection: current_university.research_journals,
+              collection: osuny_collection(current_university.research_journals, localized: true),
               label: Research::Journal.model_name.human,
               include_blank: false %>
 </div>
@@ -35,7 +33,7 @@
       data-conditional-source="about_type"
       data-conditional-value="Research::Laboratory">
   <%= f.input :about_id,
-              collection: current_university.research_laboratories,
+              collection: osuny_collection(current_university.research_laboratories, localized: true),
               label: Research::Laboratory.model_name.human,
               include_blank: false %>
 </div>

@@ -4,46 +4,26 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
-#  breadcrumb_title         :string
-#  featured_image_alt       :string
-#  featured_image_credit    :text
 #  full_width               :boolean          default(FALSE)
-#  header_cta               :boolean          default(FALSE)
-#  header_cta_label         :string
-#  header_cta_url           :string
-#  header_text              :text
-#  meta_description         :text
 #  migration_identifier     :string
 #  position                 :integer          default(0), not null
-#  published                :boolean          default(FALSE)
-#  published_at             :datetime
-#  slug                     :string           indexed
-#  summary                  :text
-#  text                     :text
-#  title                    :string
 #  type                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             indexed
-#  original_id              :uuid             indexed
 #  parent_id                :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
 #  index_communication_website_pages_on_communication_website_id  (communication_website_id)
-#  index_communication_website_pages_on_language_id               (language_id)
-#  index_communication_website_pages_on_original_id               (original_id)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
-#  index_communication_website_pages_on_slug                      (slug)
 #  index_communication_website_pages_on_university_id             (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_1a42003f06  (parent_id => communication_website_pages.id)
 #  fk_rails_280107c62b  (communication_website_id => communication_websites.id)
-#  fk_rails_304f57360f  (original_id => communication_website_pages.id)
 #  fk_rails_d208d15a73  (university_id => universities.id)
 #
 
@@ -53,29 +33,15 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path kind)
 
   include AsDirectObject
-  include Contentful # TODO L10N : To remove
   include Filterable
   include Sanitizable
-  include Shareable # TODO L10N : To remove
   include Localizable
   include WithAutomaticMenus
-  include WithBlobs # TODO L10N : To remove
-  include WithDuplication # TODO L10N : To adjust
-  include WithFeaturedImage # TODO L10N : To remove
   include WithMenuItemTarget
-  # TODO L10N : To adjust (WithType)
   include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before WithPublication
   include WithPosition # Scope :ordered must override WithPublication
   include WithTree
   include WithUniversity
-
-  has_summernote :text # TODO: Remove text attribute
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   belongs_to :parent,
              class_name: 'Communication::Website::Page',
@@ -158,11 +124,6 @@ class Communication::Website::Page < ApplicationRecord
   # Example: The Communication::Website::Page::Person special page allows to connect University::Person records directly.
   def self.direct_connection_permitted_about_class
     nil
-  end
-
-  # TODO L10N : to remove
-  def translate_other_attachments(translation)
-    translate_attachment(translation, :shared_image) if shared_image.attached?
   end
 
   protected

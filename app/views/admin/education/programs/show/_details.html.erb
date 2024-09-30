@@ -34,7 +34,7 @@
       <%= osuny_label Education::Program.human_attribute_name('parent') %>
       <p><%= osuny_link_localized @program.parent, [:admin, @program.parent] %></p>
     <% end %>
-    <% if @program.duration %>
+    <% if @l10n.duration %>
       <%= osuny_label Education::Program::Localization.human_attribute_name('duration') %>
       <p><%= @l10n.duration %></p>
     <% end %>

@@ -12,13 +12,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def index
     @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
-    @pages = @website.pages.tmp_original # TODO L10N : To remove
+    @pages = @website.pages
     breadcrumb
   end
 
   def index_list
     @pages = @pages.filter_by(params[:filters], current_language)
-                   .tmp_original # TODO L10N : To remove
                    .ordered_by_title(current_language)
                    .page(params[:page])
     breadcrumb

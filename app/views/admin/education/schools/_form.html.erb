@@ -31,9 +31,7 @@
           <%= f.association :programs,
                             as: :check_boxes,
                             collection: osuny_collection_tree(
-                              current_university.education_programs
-                                                .tmp_original # TODO L10N : Remove tmp_original
-                                                .root,
+                              current_university.education_programs.root,
                               localized: true
                             ) %>
         <% end %>

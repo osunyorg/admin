@@ -20,9 +20,7 @@
                       source: '#communication_website_portfolio_category_localizations_attributes_0_name' %>
           <%= f.association :parent,
                             collection: osuny_collection_tree(
-                              @website.portfolio_categories
-                                      .tmp_original # TODO L10N : Remove tmp_original
-                                      .root,
+                              @website.portfolio_categories.root,
                               except: category,
                               localized: true
                             ) %>
