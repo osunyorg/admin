@@ -425,7 +425,7 @@ fr:
           description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
           description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
-      text: Communiquer, c'est mettre en commun ; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
+      text_html: Communiquer, c'est mettre en commun ; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
     extranet:
       post:
         metadata:
@@ -529,6 +529,7 @@ fr:
       security: Sécurité
       see_all: Voir la liste complète (%{number} éléments)
   curation:
+    already_imported: Article déjà importé
     error: Erreur lors de la curation, veillez à utiliser une URL valide
     label: URL de l'article à importer
     placeholder: https://...

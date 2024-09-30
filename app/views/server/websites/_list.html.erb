@@ -11,10 +11,10 @@
       </tr>
     </thead>
     <tbody>
-      <% websites.ordered.each do |website| %>
+      <% websites.each do |website| %>
         <tr id="website-<%= website.id %>">
           <td>
-            <%= link_to website.name, server_website_path(website) %>
+            <%= link_to website.to_s_in(current_language), server_website_path(website) %>
             <% if website.in_production? %>
               <span class="badge bg-success"><%= t('server_admin.websites.production') %></span>
             <% end %>

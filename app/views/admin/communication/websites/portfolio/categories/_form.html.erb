@@ -18,6 +18,12 @@
           <%= render  "admin/application/slug/form",
                       f: lf,
                       source: '#communication_website_portfolio_category_localizations_attributes_0_name' %>
+          <%= f.association :parent,
+                            collection: osuny_collection_tree(
+                              @website.portfolio_categories.root,
+                              except: category,
+                              localized: true
+                            ) %>
           <%= f.input :is_taxonomy, label: t('admin.categories.is_taxonomy') if category.possible_taxonomy? %>
         <% end %>
         <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>

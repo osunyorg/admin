@@ -17,8 +17,7 @@ l10n ||= f.object.localizations.build(language_id: current_language.id)
             <%= f.hidden_field :target_type, value: "Education::Program" %>
             <%= f.association :target,
                               collection: osuny_collection_tree(
-                                current_university.education_programs
-                                                  .tmp_original, # TODO L10N: REMOVE
+                                current_university.education_programs.root,
                                 localized: true
                               ),
                               label: false,
@@ -30,7 +29,7 @@ l10n ||= f.object.localizations.build(language_id: current_language.id)
             <%= lf.input :description,
                         as: :string,
                         label: false,
-                        placeholder: University::Person::Involvement.human_attribute_name('description'),
+                        placeholder: University::Person::Involvement::Localization.human_attribute_name('description'),
                         wrapper: false %>
           </div>
           <div class="col-md-1 text-end">

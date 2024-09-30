@@ -3,9 +3,6 @@
 # Table name: communication_extranet_documents
 #
 #  id            :uuid             not null, primary key
-#  name          :string
-#  published     :boolean
-#  published_at  :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  category_id   :uuid             indexed
@@ -37,7 +34,6 @@ class Communication::Extranet::Document < ApplicationRecord
   belongs_to :category
   belongs_to :kind
 
-  # TODO L10N : To remove
-  has_one_attached_deletable :file
+  validates :category, :kind, presence: true
 
 end

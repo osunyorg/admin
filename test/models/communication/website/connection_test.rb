@@ -31,105 +31,99 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
   include ActiveJob::TestHelper
 
   def test_unpublish_indirect_does_nothing
-    page = communication_website_pages(:page_with_no_dependency)
-    setup_page_connections(page)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
+    setup_page_connections(page_l10n)
 
     # On dépublie un bloc : +0
     assert_no_difference("Communication::Website::Connection.count") do
-      page.blocks.second.update(published: false)
+      page_l10n.blocks.second.update(published: false)
     end
   end
 
   def test_unpublish_direct_does_nothing
-    page = communication_website_pages(:page_with_no_dependency)
-    setup_page_connections(page)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
+    setup_page_connections(page_l10n)
 
     # On dépublie la page ayant un bloc chapitre : +0
     assert_no_difference("Communication::Website::Connection.count") do
-      page.update(published: false)
+      page_l10n.update(published: false)
     end
   end
 
   def test_deleting_direct_removes_all_its_connections
-    page = communication_website_pages(:page_with_no_dependency)
-    setup_page_connections(page)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
+    setup_page_connections(page_l10n)
 
-    # On supprime la page ayant un bloc chapitre, et ainsi toutes ses connexions : -10
-    assert_difference -> { Communication::Website::Connection.count } => -10 do
-      page.destroy
+    # On supprime la page, et ainsi toutes ses connexions : -15
+    assert_difference -> { Communication::Website::Connection.count } => -15 do
+      page_l10n.about.destroy
     end
   end
 
   def test_deleting_indirect_removes_all_its_connections
-    page = communication_website_pages(:page_with_no_dependency)
-    setup_page_connections(page)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
+    setup_page_connections(page_l10n)
 
-    # On supprime le bloc qui contient PA : -2 (parce que PA doit être supprimé aussi)
-    assert_difference -> { Communication::Website::Connection.count } => -2 do
-      assert_enqueued_with(job: Communication::Website::CleanJob, args: [page.communication_website_id]) do
-        page.blocks.find_by(position: 2).destroy
+    # On supprime le bloc qui contient PA : -3 (parce que PA et sa localisation doivent être supprimés aussi)
+    assert_difference -> { Communication::Website::Connection.count } => -3 do
+      assert_enqueued_with(job: Communication::Website::CleanJob, args: [page_l10n.communication_website_id]) do
+        page_l10n.blocks.find_by(position: 2).destroy
       end
       perform_enqueued_jobs(only: Communication::Website::CleanJob)
     end
   end
 
   def test_deleting_indirect_with_a_dependency_having_two_sources
-    page = communication_website_pages(:page_with_no_dependency)
-    setup_page_connections(page)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
+    setup_page_connections(page_l10n)
 
-    # On ajoute noesya à PA via un block "Organisations"
+    # On ajoute noesya à PA via un block "Organisations" (+1 avec le bloc, mais noesya est déjà connectée via le bloc 3)
+    pa_l10n = university_person_localizations(:pa_fr)
     assert_difference -> { Communication::Website::Connection.count } => 1 do
-      block = pa.blocks.create(position: 1, published: true, template_kind: :organizations)
+      block = pa_l10n.blocks.create(position: 1, published: true, template_kind: :organizations)
       block.data = "{ \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
       perform_enqueued_jobs
     end
 
     # Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
-    # On supprime le bloc qui contient PA : -3 (parce que PA doit être supprimé aussi ainsi que son bloc Organisations mais pas Noesya, toujours connectée via le block 3)
-    assert_difference -> { Communication::Website::Connection.count } => -3 do
-      assert_enqueued_with(job: Communication::Website::CleanJob, args: [page.communication_website_id]) do
-        page.blocks.find_by(position: 2).destroy
+    # On supprime le bloc qui contient PA : -4 (le bloc, PA, sa localisation et le bloc Organisations de PA)
+    # On ne supprime pas Noesya, toujours connectée via le block 3)
+    assert_difference -> { Communication::Website::Connection.count } => -4 do
+      assert_enqueued_with(job: Communication::Website::CleanJob, args: [page_l10n.communication_website_id]) do
+        page_l10n.blocks.find_by(position: 2).destroy
       end
       perform_enqueued_jobs(only: Communication::Website::CleanJob)
     end
   end
 
-  def test_unpublish_indirect_does_nothing
-    page = communication_website_pages(:page_with_no_dependency)
-    setup_page_connections(page)
-
-    # On dépublie la page ayant un bloc chapitre : +0
-    assert_no_difference("Communication::Website::Connection.count") do
-      page.blocks.ordered.last.update(published: false)
-    end
-  end
-
   def test_deleting_direct_with_indirect_dependency_having_two_sources
     # https://developers.osuny.org/docs/admin/communication/sites-web/dependencies/iteration-4/#olivia-et-le-saumon-de-schr%C3%B6dinger
-    page = communication_website_pages(:page_with_no_dependency)
-    setup_page_connections(page)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
+    setup_page_connections(page_l10n)
 
-    second_page = communication_website_pages(:page_test)
-    block = second_page.blocks.new(position: 1, published: true, template_kind: :organizations)
+    second_page_l10n = communication_website_page_localizations(:page_test_fr)
+    block = second_page_l10n.blocks.new(position: 1, published: true, template_kind: :organizations)
     block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
     block.save
 
     # Noesya est connectée via les 2 pages, donc 2 connexions
-    assert_equal 2, page.website.connections.where(indirect_object: noesya).count
+    assert_equal 2, page_l10n.website.connections.where(indirect_object: noesya).count
 
-    # On supprime la 2e page, donc ses 7 connexions à savoir :
+    # On supprime la 2e page, donc ses 11 connexions à savoir :
+    # - La localisation de la page (1)
     # - Le block Organisations et Noesya (2)
-    # - Les 5 connexions via Noesya, à savoir :
-    #   - Le block Personnes avec Olivia et son block Organisations (3)
+    # - Les 8 connexions via Noesya, à savoir :
+    #   - La localisation de Noesya (1)
+    #   - Le block Personnes avec Olivia, sa localisation et son block Organisations (4)
     #     note : Pas Noesya car la connexion existe déjà plus haut
-    #   - Le block Personnes avec Arnaud (2)
-    assert_difference -> { Communication::Website::Connection.count } => -7 do
-      second_page.destroy
+    #   - Le block Personnes avec Arnaud et sa localisation (3)
+    assert_difference -> { Communication::Website::Connection.count } => -11 do
+      second_page_l10n.about.destroy
     end
 
     # Noesya est toujours connectée via la 1re page
-    assert_equal 1, page.website.connections.where(indirect_object: noesya).count
+    assert_equal 1, page_l10n.website.connections.where(indirect_object: noesya).count
   end
 
   def test_connecting_and_disconnecting_indirect_to_website_directly
@@ -138,14 +132,14 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # En cascade, le save du website va créer les pages de liste des formations et des diplômes, qui ont elles aussi leurs dépendances
     # La page des diplômes aura en dépendance les diplômes (default_diploma), donc 1 connexion avec direct_source = page diplômes
     # La page des formations aura en dépendance les formations (default_program) et leurs diplômes en cascade (default_diploma), donc 2 connexions avec direct_source = page formations
-    # Donc un total de 3 + 1 + 2 = 6 connexions
-    assert_difference -> { Communication::Website::Connection.count } => 6 do
+    # Donc un total de 3 + 1 + 2 = 6 connexions directes au site
+    assert_difference -> { Communication::Website::Connection.where(direct_source_type: "Communication::Website").count } => 6 do
       website_with_github.update(about: default_school)
       perform_enqueued_jobs
     end
 
     # En déconnectant l'école du site, on supprime les connexions créées précédemment
-    assert_difference -> { Communication::Website::Connection.count } => -6 do
+    assert_difference -> { Communication::Website::Connection.where(direct_source_type: "Communication::Website").count } => -6 do
       assert_enqueued_with(job: Communication::Website::CleanJob, args: [website_with_github.id]) do
         assert_enqueued_with(job: Dependencies::CleanWebsitesIfNecessaryJob) do
           website_with_github.update(about: nil)
@@ -158,12 +152,12 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
   def test_delete_obsolete_connections_stays_in_scope
     website_with_github.update(about: default_school)
-    page = communication_website_pages(:page_with_no_dependency)
-    setup_page_connections(page)
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
+    setup_page_connections(page_l10n)
     program = education_programs(:default_program)
-    # On connecte une formation à la page : +3 (bloc, formation, diplôme)
-    assert_difference -> { Communication::Website::Connection.count } => 3 do
-      block = page.blocks.new(position: 3, published: true, template_kind: :programs)
+    # On connecte une formation à la page : +3 (bloc, formation, localisation de formation, diplôme, localisation de diplôme)
+    assert_difference -> { Communication::Website::Connection.count } => 5 do
+      block = page_l10n.blocks.new(position: 3, published: true, template_kind: :programs)
       block.data = "{ \"elements\": [ { \"id\": \"#{program.id}\" } ] }"
       block.save
       perform_enqueued_jobs
@@ -175,44 +169,49 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
   private
 
-  def setup_page_connections(page)
-    assert_no_difference("Communication::Website::Connection.count") do
-      page.save
+  def setup_page_connections(page_l10n)
+    page = page_l10n.about
+
+    # On connecte la localisation à la page : +1
+    assert_difference -> { page.connections.count } => 1 do
+      page_l10n.about.save
     end
 
     # On ajoute un block "Chapitre" : +1
-    assert_difference -> { Communication::Website::Connection.count } => 1 do
-      page.blocks.create(position: 1, published: true, template_kind: :chapter)
+    assert_difference -> { page.connections.count } => 1 do
+      page_l10n.blocks.create(position: 1, published: true, template_kind: :chapter)
       perform_enqueued_jobs
     end
 
-    # On connecte PA via un block "Personnes" : +2 (bloc, personne)
-    assert_difference -> { Communication::Website::Connection.count } => 2 do
-      block = page.blocks.new(position: 2, published: true, template_kind: :persons)
+    # On connecte PA via un block "Personnes" : +3 (bloc, personne, localisation de personne)
+    assert_difference -> { page.connections.count } => 3 do
+      block = page_l10n.blocks.new(position: 2, published: true, template_kind: :persons)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{pa.id}\" } ] }"
       block.save
       perform_enqueued_jobs
     end
 
-    # On ajoute noesya via un block "Organisations" : +4 parce que noesya a un block "Personnes" avec Olivia
-    assert_difference -> { Communication::Website::Connection.count } => 4 do
-      block = page.blocks.new(position: 3, published: true, template_kind: :organizations)
+    # On ajoute noesya via un block "Organisations" : +6 parce que noesya a une localisation et un block "Personnes" avec Olivia (et sa localisation)
+    assert_difference -> { page.connections.count } => 6 do
+      block = page_l10n.blocks.new(position: 3, published: true, template_kind: :organizations)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
       perform_enqueued_jobs
     end
 
-    # On ajoute Arnaud à noesya via un block "Personnes" : +2
-    assert_difference -> { Communication::Website::Connection.count } => 2 do
-      block = noesya.blocks.new(position: 2, published: true, template_kind: :persons)
+    # On ajoute Arnaud à noesya via un block "Personnes" : +3 (bloc, personne, localisation de personne)
+    noesya_l10n = university_organization_localizations(:noesya_fr)
+    assert_difference -> { page.connections.count } => 3 do
+      block = noesya_l10n.blocks.new(position: 2, published: true, template_kind: :persons)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
       block.save
       perform_enqueued_jobs
     end
 
     # On tente la boucle infine en ajoutant noesya à Olivia : +1 (le block ajouté à Olivia)
-    assert_difference -> { Communication::Website::Connection.count } => 1 do
-      block = olivia.blocks.new(position: 1, published: true, template_kind: :organizations)
+    olivia_l10n = university_person_localizations(:olivia_fr)
+    assert_difference -> { page.connections.count } => 1 do
+      block = olivia_l10n.blocks.new(position: 1, published: true, template_kind: :organizations)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
       perform_enqueued_jobs
@@ -220,16 +219,21 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # La page est donc comme ceci
     # Page
-    # - Block Chapitre
-    # - Block Personnes
-    #   - PA
-    # - Block Organisations
-    #   - Noesya
-    #     - Block Personnes
-    #       - Olivia
-    #         - Block Organisations
-    #           - Noesya
-    #     - Block Personnes
-    #       - Arnaud
+    # - Page Localization
+    #   - Block Chapitre
+    #   - Block Personnes
+    #     - PA
+    #       - PA Localization
+    #   - Block Organisations
+    #     - Noesya
+    #       - Noesya Localization
+    #         - Block Personnes
+    #           - Olivia
+    #             - Olivia Localization
+    #               - Block Organisations
+    #                 - Noesya
+    #         - Block Personnes
+    #           - Arnaud
+    #             - Arnaud Localization
   end
 end

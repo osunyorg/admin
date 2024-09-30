@@ -55,7 +55,7 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
 
   def breadcrumb
     super
-    add_breadcrumb Communication::Extranet.human_attribute_name(:feature_documents), admin_communication_extranet_library_path
+    add_breadcrumb Communication::Extranet.human_attribute_name(:feature_documents), admin_communication_extranet_documents_path
     breadcrumb_for @document
   end
 

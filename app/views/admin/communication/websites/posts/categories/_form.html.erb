@@ -20,7 +20,7 @@
                       source: '#communication_website_post_category_localizations_attributes_0_name' %>
           <%= f.association :parent,
                             collection: osuny_collection_tree(
-                              @website.post_categories.tmp_original.ordered, # TODO L10N : Remove tmp_original
+                              @website.post_categories.root,
                               except: category,
                               localized: true
                             ) %>

@@ -2,36 +2,29 @@
 #
 # Table name: research_journals
 #
-#  id               :uuid             not null, primary key
-#  issn             :string
-#  meta_description :text
-#  summary          :text
-#  title            :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  language_id      :uuid             indexed
-#  university_id    :uuid             not null, indexed
+#  id            :uuid             not null, primary key
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_research_journals_on_language_id    (language_id)
 #  index_research_journals_on_university_id  (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_7d3b3f3e79  (language_id => languages.id)
 #  fk_rails_96097d5f10  (university_id => universities.id)
 #
 class Research::Journal < ApplicationRecord
   include AsIndirectObject
   include Favoritable
+  include Filterable
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable
   include WebsitesLinkable
   include WithUniversity
 
-  belongs_to :language, optional: true # TODO L10N : To remove
   has_many  :communication_websites,
             class_name: 'Communication::Website',
             as: :about,
@@ -48,13 +41,14 @@ class Research::Journal < ApplicationRecord
   has_many  :kinds,
             class_name: 'Research::Journal::Paper::Kind'
 
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(research_journals.meta_description) ILIKE unaccent(:term) OR
-      unaccent(research_journals.issn) ILIKE unaccent(:term) OR
-      unaccent(research_journals.repository) ILIKE unaccent(:term) OR
-      unaccent(research_journals.title) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+  scope :for_search_term, -> (term, language = nil) {
+    joins(:localizations)
+      .where(research_journal_localizations: { language_id: language.id })
+      .where("
+        unaccent(research_journal_localizations.meta_description) ILIKE unaccent(:term) OR
+        unaccent(research_journal_localizations.issn) ILIKE unaccent(:term) OR
+        unaccent(research_journal_localizations.title) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
 
   def researchers

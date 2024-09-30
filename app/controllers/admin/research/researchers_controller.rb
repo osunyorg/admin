@@ -6,15 +6,12 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
   include Admin::Localizable
   include Admin::HasStaticAction
 
-  has_scope :for_search_term
-
   def index
-    @researchers = apply_scopes(current_university.people.researchers)
-                    .tmp_original # TODO L10N : To remove
-                    .accessible_by(current_ability)
-                    .ordered(current_language)
-                    .page(params[:page])
-                    .per(6*5)
+    @researchers = current_university.people
+                                     .researchers
+                                     .filter_by(params[:filters], current_language)
+                                     .ordered(current_language)
+                                     .page(params[:page])
     breadcrumb
   end
 
@@ -57,7 +54,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
 
   def breadcrumb
     super
-    add_breadcrumb University::Person::Researcher.model_name.human(count: 2), admin_research_researchers_path
+    add_breadcrumb University::Person::Localization::Researcher.model_name.human(count: 2), admin_research_researchers_path
   end
 
 end

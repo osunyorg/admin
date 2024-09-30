@@ -1,12 +1,14 @@
 <% content_for :title, "#{Communication::Website::Post.model_name.human(count: 2)}" %>
 
-<p>
-  <%= @posts.total_count %>
-  <%= Communication::Website::Post.model_name.human(count: @posts.total_count).downcase %>
-</p>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @posts.total_count %>
+    <%= Communication::Website::Post.model_name.human(count: @posts.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_communication_website_posts_path, website: @website %>
+</div>
 
 <div data-batch-selectable class="mb-5">
-  <%= render 'filters', current_path: admin_communication_website_posts_path, filters: @filters %>
   <%= form_tag publish_batch_admin_communication_website_posts_path do %>
     <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
     <%= paginate @posts %>

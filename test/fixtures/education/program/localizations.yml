@@ -1,0 +1,6 @@
+default_program_fr:
+  name: Formation de test
+  published: true
+  about: default_program
+  language: fr
+  university: default_university

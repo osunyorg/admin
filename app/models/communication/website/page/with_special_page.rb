@@ -95,7 +95,17 @@ module Communication::Website::Page::WithSpecialPage
     'primary'
   end
 
-  def generate_from_template
+  def generate_from_template(l10n)
+  end
+
+  def create_missing_localizations!
+    l10n_created = false
+    website.languages.each do |language|
+      next if localized_in?(language)
+      build_localization_for(language)
+      l10n_created = true
+    end
+    save_and_sync if l10n_created
   end
 
   def create_missing_localizations!
@@ -120,7 +130,6 @@ module Communication::Website::Page::WithSpecialPage
     self.full_width = full_width_by_default?
     # Build the first localization of the page
     build_localization_for(website.default_language)
-  
   end
 
   def build_localization_for(language)
@@ -133,16 +142,6 @@ module Communication::Website::Page::WithSpecialPage
       published: published_by_default?
       # note: published_at will be set by WithPublication concern
     )
-  end
-
-  # TODO L10N : adjust
-  def generate_heading(title)
-    headings.create(university: university, title: title)
-  end
-
-  # TODO L10N : adjust
-  def generate_block(heading, kind, data)
-    blocks.create(university: university, heading: heading, template_kind: kind, data: data.to_json)
   end
 
 end

@@ -1,7 +1,6 @@
 <%
 categories = osuny_collection_tree(
-  current_university.organization_categories
-                    .tmp_original, # TODO L10N : remove
+  current_university.organization_categories.root,
   localized: true
 )
 %>

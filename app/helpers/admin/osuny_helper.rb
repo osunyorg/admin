@@ -38,9 +38,9 @@ module Admin::OsunyHelper
 
   def osuny_thumbnail_localized(object, large: false, cropped: true, classes: '')
     l10n = object.best_localization_for(current_language)
-    osuny_thumbnail l10n, 
-                    large: large, 
-                    cropped: cropped, 
+    osuny_thumbnail l10n,
+                    large: large,
+                    cropped: cropped,
                     classes: classes
   end
 
@@ -74,26 +74,26 @@ module Admin::OsunyHelper
     osuny_property_show(object, property, 'boolean')
   end
 
-  def osuny_link_localized(object, path, classes: '')
+  def osuny_link_localized(object, path, label_method: :to_s, classes: '')
     l10n = object.localization_for(current_language)
     if l10n.present?
-      name = l10n.to_s
+      name = l10n.public_send(label_method)
       alert = ''
     else
-      name = object.original_localization.to_s
+      name = object.original_localization.public_send(label_method)
       classes += ' text-muted fst-italic'
       alert = t('localization.creation_alert')
     end
     link_to name, path, class: classes.strip, data: { confirm: alert }
   end
 
-  def osuny_link_localized_if(condition, object, path, classes: '')
+  def osuny_link_localized_if(condition, object, path, label_method: :to_s, classes: '')
     l10n = object.localization_for(current_language)
     if l10n.present?
-      name = l10n.to_s
+      name = l10n.public_send(label_method)
       alert = ''
     else
-      name = object.original_localization.to_s
+      name = object.original_localization.public_send(label_method)
       classes += 'text-muted fst-italic'
       alert = t('localization.creation_alert')
     end
@@ -103,7 +103,7 @@ module Admin::OsunyHelper
   def osuny_collection(list, except: nil, localized: false, label_method: :to_s)
     collection = list.ordered(current_language).map do |object|
       [
-        osuny_object_label(object, localized, label_method), 
+        osuny_object_label(object, localized, label_method),
         object.id
       ]
     end
@@ -112,7 +112,7 @@ module Admin::OsunyHelper
   end
 
   def osuny_collection_tree(list, except: nil, localized: false, label_method: :to_s)
-    collection = osuny_collection_recursive(list.root, 0, localized, label_method)
+    collection = osuny_collection_recursive(list, 0, localized, label_method)
     collection = collection.reject { |o| o.last == except.id } unless except.nil?
     collection
   end
@@ -137,7 +137,7 @@ module Admin::OsunyHelper
       collection << [label, id]
       collection.concat(
         osuny_collection_recursive(
-          object.children.tmp_original, # TODO L10N : To remove
+          object.children,
           level + 1,
           localized,
           label_method

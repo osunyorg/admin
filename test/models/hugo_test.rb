@@ -6,19 +6,19 @@ class HugoTest < ActiveSupport::TestCase
     website = communication_websites(:website_with_github)
     # FIXME les permalinks ne sont pas calculés, tous les path sont faux
     # Home
-    page = communication_website_pages(:page_root)
-    # assert_equal '/fr/', page.hugo(website).path
-    assert_equal 'content/fr/_index.html', page.hugo(website).file
-    assert_equal '', page.hugo(website).slug
+    page_l10n = communication_website_page_localizations(:page_root_fr)
+    # assert_equal '/fr/', page_l10n.hugo(website).path
+    assert_equal 'content/fr/_index.html', page_l10n.hugo(website).file
+    assert_equal '', page_l10n.hugo(website).slug
     # Test
-    page = communication_website_pages(:page_test)
-    # assert_equal '/fr/test/', page.hugo(website).path
-    assert_equal 'content/fr/pages/test/_index.html', page.hugo(website).file
-    assert_equal 'test', page.hugo(website).slug
+    page_l10n = communication_website_page_localizations(:page_test_fr)
+    # assert_equal '/fr/test/', page_l10n.hugo(website).path
+    assert_equal 'content/fr/pages/test/_index.html', page_l10n.hugo(website).file
+    assert_equal 'test', page_l10n.hugo(website).slug
     # Page sans dépendances
-    page = communication_website_pages(:page_with_no_dependency)
-    # assert_equal '/fr/page-with-no-dependency/', page.hugo(website).path
-    assert_equal 'content/fr/pages/page-with-no-dependency/_index.html', page.hugo(website).file
-    assert_equal 'page-with-no-dependency', page.hugo(website).slug
+    page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
+    # assert_equal '/fr/page-with-no-dependency/', page_l10n.hugo(website).path
+    assert_equal 'content/fr/pages/page-with-no-dependency/_index.html', page_l10n.hugo(website).file
+    assert_equal 'page-with-no-dependency', page_l10n.hugo(website).slug
   end
 end

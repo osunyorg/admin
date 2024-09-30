@@ -3,7 +3,6 @@
 # Table name: university_person_involvements
 #
 #  id            :uuid             not null, primary key
-#  description   :text
 #  kind          :integer
 #  position      :integer
 #  target_type   :string           not null, indexed => [target_id]
@@ -52,11 +51,35 @@ class University::Person::Involvement < ApplicationRecord
                     :set_university_id,
                     on: :create
 
-  # TODO L10N : correct this scope
   scope :ordered_by_name, -> (language) {
-    # TODO L10N j'ai besoin de @sebou, plus assez frais
-    joins(:person).select('university_person_involvements.*')
-                  .order('university_people.last_name', 'university_people.first_name')
+    localization_first_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.first_name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.first_name)))) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_first_name
+    SQL
+    localization_last_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.last_name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.last_name)))) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_last_name
+    SQL
+
+    joins(sanitize_sql_array([<<-SQL
+      INNER JOIN university_people
+        ON university_people.id = university_person_involvements.person_id
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          university_person_localizations as localizations
+      ) localizations ON university_people.id = localizations.about_id
+    SQL
+    ]))
+      .select("university_person_involvements.*", localization_first_name_select, localization_last_name_select)
+      .group("university_person_involvements.id")
+      .order("localization_last_name ASC, localization_first_name ASC")
   }
   scope :ordered_by_date, -> { order(:created_at) }
 

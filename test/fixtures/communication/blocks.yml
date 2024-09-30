@@ -1,7 +1,7 @@
 olivia_in_noesya:
-  university: default_university
-  about: noesya (University::Organization)
   data: { "elements": [ { "id": "53cbac40-e430-585a-965c-a7412a92f35a" } ] }
   position: 1
-  template_kind: :persons
   published: true
+  template_kind: :persons
+  about: noesya_fr (University::Organization::Localization)
+  university: default_university

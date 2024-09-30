@@ -46,7 +46,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   def update
     @l10n.add_photo_import params[:photo_import]
     if @post.update(post_params)
-      redirect_to admin_communication_extranet_post_path(@post), 
+      redirect_to admin_communication_extranet_post_path(@post),
                   notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
     else
       breadcrumb
@@ -57,7 +57,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
 
   def destroy
     @post.destroy
-    redirect_to admin_communication_extranet_posts_url, 
+    redirect_to admin_communication_extranet_posts_url,
                 notice: t('admin.successfully_destroyed_html', model: @post.to_s_in(current_language))
   end
 
@@ -72,12 +72,12 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   def post_params
     params.require(:communication_extranet_post)
     .permit(
-      :featured_image, :featured_image_delete, :featured_image_infos, 
       :author_id, :category_id,
       localizations_attributes: [
         :id, :language_id,
         :title, :summary, :text,
         :published, :published_at, :pinned, :slug,
+        :featured_image, :featured_image_delete, :featured_image_infos,
         :featured_image_alt, :featured_image_credit
       ]
     )

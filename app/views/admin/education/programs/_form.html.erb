@@ -19,14 +19,10 @@
           <div class="row">
             <div class="col-lg-6">
               <%= f.association :diploma,
-                                collection: current_university.diplomas
-                                                              .tmp_original # TODO L10N : To remove.
-                                                              .ordered %>
+                                collection: osuny_collection(current_university.diplomas, localized: true) %>
               <%= f.association :schools,
                                 as: :check_boxes,
-                                collection: current_university.education_schools
-                                                              .tmp_original # TODO L10N : To remove.
-                                                              .ordered %>
+                                collection: osuny_collection(current_university.education_schools, localized: true) %>
             </div>
             <div class="col-lg-6">
               <%= lf.input :url %>
@@ -171,14 +167,11 @@
                       f: lf,
                       source: '#education_program_localizations_attributes_0_name' %>
           <%= f.association :parent,
-                            collection:
-                              current_university.education_programs
-                                                .where.not(id: program)
-                                                .tmp_original # TODO L10N : To remove.
-                                                .ordered
-                                                .map { |program|
-                                                  [program.to_s_in(current_language), program.id]
-                                                } %>
+                            collection: osuny_collection_tree(
+                              current_university.education_programs.root,
+                              localized: true,
+                              except: program
+                            ) %>
           <%= f.input :bodyclass %>
           <%= lf.input :logo,
                       as: :single_deletable_file,

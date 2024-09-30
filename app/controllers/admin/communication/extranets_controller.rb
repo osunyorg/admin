@@ -5,13 +5,10 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
 
   include Admin::Localizable
 
-  has_scope :for_search_term
-  has_scope :for_about_type
-
   def index
-    @extranets = apply_scopes(@extranets)
-                    .ordered(current_language)
-                    .page(params[:page])
+    @extranets = @extranets.filter_by(params[:filters], current_language)
+                           .ordered(current_language)
+                           .page(params[:page])
     breadcrumb
   end
 

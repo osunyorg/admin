@@ -3,15 +3,16 @@ class Admin::Research::JournalsController < Admin::Research::Journals::Applicati
                               through: :current_university,
                               through_association: :research_journals
 
-  has_scope :for_search_term
+  include Admin::HasStaticAction
+  include Admin::Localizable
 
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @journals = apply_scopes(@journals)
-                  .ordered(current_language)
-                  .page(params[:page])
+    @journals = @journals.filter_by(params[:filters], current_language)
+                         .ordered(current_language)
+                         .page(params[:page])
     breadcrumb
   end
 

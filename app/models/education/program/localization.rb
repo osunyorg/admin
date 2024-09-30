@@ -53,6 +53,7 @@
 #
 class Education::Program::Localization < ApplicationRecord
   include AsLocalization
+  include AsLocalizedTree
   include Contentful
   include Initials
   include Pathable
@@ -109,8 +110,8 @@ class Education::Program::Localization < ApplicationRecord
   end
 
   def references
-    schools + 
-    siblings + 
+    schools +
+    siblings +
     descendants +
     [parent]
   end

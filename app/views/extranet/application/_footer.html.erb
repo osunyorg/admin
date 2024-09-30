@@ -1,4 +1,4 @@
-<% 
+<%
 hide_logo ||= false
 about = current_extranet.about
 %>
@@ -13,35 +13,37 @@ about = current_extranet.about
     <div class="row justify-space-between">
       <div class="col-md-6">
         <% if about.is_a?(Education::School) %>
+          <% about_l10n = about.localization_for(current_language) %>
           <address itemscope itemtype="https://schema.org/CollegeOrUniversity">
-            <span itemprop="name"><%= about.name %></span>
+            <span itemprop="name"><%= about.to_s_in(current_language) %></span>
             <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
               <span itemprop="streetAddress"><%= about.address %></span><br>
               <span itemprop="postalCode"><%= about.zipcode %></span>
               <span itemprop="addressLocality"><%= about.city %></span><br>
             </div>
-            <% if about.url.present? %>
-              <a href="<%= social_website_to_url about.url %>" target="_blank" property="url"><%= social_website_to_s about.url %></a>
+            <% if about_l10n.present? && about_l10n.url.present? %>
+              <a href="<%= social_website_to_url about_l10n.url %>" target="_blank" property="url"><%= social_website_to_s about_l10n.url %></a>
             <% end %>
           </address>
         <% elsif current_extranet.about.is_a?(Education::Program) %>
           <div itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
-            <span itemprop="name"><%= current_extranet.about.name %></span>
+            <span itemprop="name"><%= current_extranet.about.to_s_in(current_language) %></span>
           </div>
         <% end %>
       </div>
 
       <nav class="text-md-end col-md-6">
+        <%# language is explicitly given so that it can work with the devise layout which has no default_url option %>
         <%= link_to t('terms_of_service'),
-                    terms_path,
-                    rel: 'noreferrer' if current_extranet.has_terms? %>
+                    terms_path(lang: current_language),
+                    rel: 'noreferrer' if current_extranet.has_terms_in?(current_language) %>
         <%= link_to t('privacy_policy'),
-                    privacy_policy_path,
-                    rel: 'noreferrer' if current_extranet.has_privacy_policy? %>
+                    privacy_policy_path(lang: current_language),
+                    rel: 'noreferrer' if current_extranet.has_privacy_policy_in?(current_language) %>
         <%= link_to t('cookies_policy'),
-                    cookies_policy_path,
-                    rel: 'noreferrer' if current_extranet.has_cookies_policy? %>
-        <%= link_to t('extranet.data'), data_path %>
+                    cookies_policy_path(lang: current_language),
+                    rel: 'noreferrer' if current_extranet.has_cookies_policy_in?(current_language) %>
+        <%= link_to t('extranet.data'), data_path(lang: current_language) %>
         <%= t 'extranet.osuny_html' %>
       </nav>
     </div>

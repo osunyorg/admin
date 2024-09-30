@@ -44,15 +44,12 @@ class Research::Journal::Paper::Localization < ApplicationRecord
 
   alias :paper :about
 
-  delegate  :journal, :volume, :people, :doi, 
+  delegate  :journal, :volume, :people, :doi,
             to: :paper
 
   validates :title, presence: true
 
-  has_summernote :text
-  has_summernote :bibliography
-
-  has_one_attached :pdf
+  has_one_attached_deletable :pdf
 
   def git_path(website)
     "#{git_path_content_prefix(website)}papers/#{relative_path}.html" if published?

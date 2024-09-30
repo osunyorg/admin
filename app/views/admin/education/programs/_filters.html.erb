@@ -1,0 +1,38 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_diploma,
+                      label: t('filters.attributes.element', element: Education::Diploma.model_name.human.downcase),
+                      collection: osuny_collection(current_university.education_diplomas, localized: true),
+                      multiple: true
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_school,
+                      label: t('filters.attributes.element', element: Education::School.model_name.human.downcase),
+                      collection: osuny_collection(current_university.education_schools, localized: true),
+                      multiple: true
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_publication,
+                      label: t('filters.attributes.element', element: t('admin.education.programs.publication').downcase),
+                      collection: [
+                                    { to_s: I18n.t('true'), id: 'true' },
+                                    { to_s: I18n.t('false'), id: 'false' }
+                                  ],
+                      multiple: true
+                      %>
+
+    <% end %>
+<% end %>

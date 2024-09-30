@@ -3,7 +3,6 @@
 # Table name: university_person_experiences
 #
 #  id              :uuid             not null, primary key
-#  description     :text
 #  from_year       :integer
 #  to_year         :integer
 #  created_at      :datetime         not null

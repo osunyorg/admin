@@ -1,5 +1,6 @@
 class Extranet::PagesController < Extranet::ApplicationController
   skip_before_action :authenticate_user!, :authorize_extranet_access!
+  before_action :load_extranet_localization, only: [:terms, :cookies_policy, :privacy_policy]
 
   def terms
     breadcrumb
@@ -39,5 +40,9 @@ class Extranet::PagesController < Extranet::ApplicationController
     end
     breadcrumb
     add_breadcrumb t('extranet.data')
+  end
+
+  def load_extranet_localization
+    @extranet_l10n = current_extranet.localization_for(current_language)
   end
 end

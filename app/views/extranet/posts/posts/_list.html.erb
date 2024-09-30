@@ -17,7 +17,7 @@
           <span class="text-muted"><%= l l10n.published_at.to_date %><span>
         </p>
         <%= link_to t('extranet.posts.read_post'), 
-                    posts_post_path(date: l10n.published_at.strftime('%Y-%m-%d'), slug: post.slug), 
+                    posts_post_path(date: l10n.published_at.strftime('%Y-%m-%d'), slug: l10n.slug), 
                     class: ' btn btn-outline-primary stretched-link' %>
       </div>
     </article>

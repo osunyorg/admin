@@ -15,11 +15,6 @@ namespace :education do
         post :reorder
       end
     end
-    resources :teachers, controller: 'programs/teachers', except: :show do
-      collection do
-        post :reorder
-      end
-    end
     collection do
       get :tree
       post :reorder

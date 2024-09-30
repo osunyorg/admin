@@ -3,14 +3,14 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
                               through: :current_university,
                               through_association: :research_theses
 
-  has_scope :for_search_term
+  include Admin::Localizable
 
   include Admin::Localizable
 
   def index
-    @theses = apply_scopes(@theses)
-                .ordered(current_language)
-                .page(params[:page])
+    @theses = @theses.filter_by(params[:filters], current_language)
+                     .ordered(current_language)
+                     .page(params[:page])
     breadcrumb
   end
 

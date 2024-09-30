@@ -1,6 +1,5 @@
 <%
 @organizations = @page.explicitly_connected_organizations
-                      .tmp_original # TODO L10N : To adjust
                       .ordered(current_language)
                       .page(params[:page])
 %>

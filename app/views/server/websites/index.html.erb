@@ -1,14 +1,15 @@
-<% content_for :title, "#{@websites.total_count} #{Communication::Website.model_name.human(count: @websites.total_count).downcase}" %>
+<% content_for :title, Communication::Website.model_name.human(count: 2) %>
 
-<p><%= t('server_admin.websites.in_production', count: Communication::Website.in_production.count) %></p>
-
-<%= render  'admin/application/filters',
-            current_path: server_websites_path,
-            filters: @filters,
-            collapsable: false if @filters.any? %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @websites.total_count %>
+    <%= Communication::Website.model_name.human(count: @websites.total_count).downcase %>, 
+    <%= t('server_admin.websites.in_production', count: Communication::Website.in_production.count) %>
+  </p>
+  <%= render 'filters', current_path: server_websites_path %>
+</div>
 
 <%= render 'server/websites/list', websites: @websites %>
-
 <%= paginate @websites %>
 
 <% content_for :action_bar_left do %>
@@ -16,7 +17,7 @@
               "#",
               class: "#{button_classes} js-sync-all-theme-versions" %>
   <%= link_to t('server_admin.websites.force_clean_and_rebuild'),
-              clean_and_rebuild_all_websites_server_websites_path(current_scopes),
+              clean_and_rebuild_all_websites_server_websites_path(params: { filters: params[:filters]&.to_unsafe_hash }),
               method: :post,
               class: button_classes %>
 <% end %>

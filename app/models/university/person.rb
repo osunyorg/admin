@@ -5,13 +5,11 @@
 #  id                            :uuid             not null, primary key
 #  address                       :string
 #  address_visibility            :integer          default("private")
-#  biography                     :text
 #  birthdate                     :date
 #  city                          :string
 #  country                       :string
 #  email                         :string
 #  email_visibility              :integer          default("private")
-#  first_name                    :string
 #  gender                        :integer
 #  habilitation                  :boolean          default(FALSE)
 #  is_administration             :boolean
@@ -19,52 +17,35 @@
 #  is_author                     :boolean
 #  is_researcher                 :boolean
 #  is_teacher                    :boolean
-#  last_name                     :string
-#  linkedin                      :string
 #  linkedin_visibility           :integer          default("private")
-#  mastodon                      :string
 #  mastodon_visibility           :integer          default("private")
-#  meta_description              :text
-#  name                          :string
 #  phone_mobile                  :string
 #  phone_mobile_visibility       :integer          default("private")
 #  phone_personal                :string
 #  phone_personal_visibility     :integer          default("private")
 #  phone_professional            :string
 #  phone_professional_visibility :integer          default("private")
-#  picture_credit                :text
-#  slug                          :string           indexed
-#  summary                       :text
 #  tenure                        :boolean          default(FALSE)
-#  twitter                       :string
 #  twitter_visibility            :integer          default("private")
-#  url                           :string
 #  zipcode                       :string
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
-#  language_id                   :uuid             indexed
-#  original_id                   :uuid             indexed
 #  university_id                 :uuid             not null, indexed
 #  user_id                       :uuid             indexed
 #
 # Indexes
 #
-#  index_university_people_on_language_id    (language_id)
-#  index_university_people_on_original_id    (original_id)
-#  index_university_people_on_slug           (slug)
 #  index_university_people_on_university_id  (university_id)
 #  index_university_people_on_user_id        (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_08f468090d  (original_id => university_people.id)
-#  fk_rails_49a0628c42  (language_id => languages.id)
 #  fk_rails_b47a769440  (user_id => users.id)
 #  fk_rails_da35e70d61  (university_id => universities.id)
 #
 class University::Person < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : To remove
+  include Filterable
   include Sanitizable
   include Localizable
   include WithBlobs
@@ -176,9 +157,9 @@ class University::Person < ApplicationRecord
   scope :researchers,       -> { where(is_researcher: true) }
   scope :alumni,            -> { where(is_alumnus: true) }
   scope :with_habilitation, -> { where(habilitation: true) }
-  scope :for_role, -> (role) { where("is_#{role}": true) }
-  scope :for_category, -> (category_id) { joins(:categories).where(university_person_categories: { id: category_id }).distinct }
-  scope :for_program, -> (program_id) {
+  scope :for_role, -> (role, language = nil) { where("is_#{role}": true) }
+  scope :for_category, -> (category_id, language = nil) { joins(:categories).where(university_person_categories: { id: category_id }).distinct }
+  scope :for_program, -> (program_id, language = nil) {
     left_joins(:education_programs_as_administrator, :education_programs_as_teacher)
       .where(education_programs: { id: program_id })
       .or(
@@ -188,11 +169,9 @@ class University::Person < ApplicationRecord
       .select("university_people.*")
       .distinct
   }
-
-   # TODO L10N : To adjust
-  scope :for_search_term, -> (term) {
+  scope :for_search_term, -> (term, language) {
     joins(:localizations)
-      # TODO L10N : To add after filters rework @pabois
+      .where(university_person_localizations: { language_id: language.id })
       .where("
         unaccent(concat(university_person_localizations.first_name, ' ', university_person_localizations.last_name)) ILIKE unaccent(:term) OR
         unaccent(concat(university_person_localizations.last_name, ' ', university_person_localizations.first_name)) ILIKE unaccent(:term) OR
@@ -227,25 +206,20 @@ class University::Person < ApplicationRecord
     active_storage_blobs
   end
 
-  # TODO L10N : To remove
-  def person
-    @person ||= University::Person.find(id)
+  def administrator_facets
+    @administrator_facets ||= University::Person::Localization::Administrator.where(id: localization_ids)
   end
 
-  def administrator
-    @administrator ||= University::Person::Administrator.find(id)
+  def author_facets
+    @author_facets ||= University::Person::Localization::Author.where(id: localization_ids)
   end
 
-  def author
-    @author ||= University::Person::Author.find(id)
+  def researcher_facets
+    @researcher_facets ||= University::Person::Localization::Researcher.where(id: localization_ids)
   end
 
-  def researcher
-    @researcher ||= University::Person::Researcher.find(id)
-  end
-
-  def teacher
-    @teacher ||= University::Person::Teacher.find(id)
+  def teacher_facets
+    @teacher_facets ||= University::Person::Localization::Teacher.where(id: localization_ids)
   end
   # TODO L10N : /To remove
 
@@ -276,11 +250,6 @@ class University::Person < ApplicationRecord
 
   def to_s_alphabetical_in(language)
     best_localization_for(language).to_s_alphabetical
-  end
-
-  # TODO L10N : to remove
-  def translate_other_attachments(translation)
-    translate_attachment(translation, :picture) if picture.attached?
   end
 
   protected

@@ -2,51 +2,33 @@
 #
 # Table name: administration_locations
 #
-#  id                    :uuid             not null, primary key
-#  address               :string
-#  address_additional    :string
-#  address_name          :string
-#  city                  :string
-#  country               :string
-#  featured_image_alt    :text
-#  featured_image_credit :text
-#  latitude              :float
-#  longitude             :float
-#  name                  :string
-#  phone                 :string
-#  slug                  :string
-#  summary               :text
-#  url                   :string
-#  zipcode               :string
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  language_id           :uuid             indexed
-#  original_id           :uuid             indexed
-#  university_id         :uuid             not null, indexed
+#  id            :uuid             not null, primary key
+#  address       :string
+#  city          :string
+#  country       :string
+#  latitude      :float
+#  longitude     :float
+#  phone         :string
+#  zipcode       :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_administration_locations_on_language_id    (language_id)
-#  index_administration_locations_on_original_id    (original_id)
 #  index_administration_locations_on_university_id  (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_2ba052f7a2  (original_id => administration_locations.id)
-#  fk_rails_5951e4a1ea  (language_id => languages.id)
 #  fk_rails_bfeca0e4b1  (university_id => universities.id)
 #
 class Administration::Location < ApplicationRecord
   include AsIndirectObject
-  include Contentful # TODO L10N : To remove
   include Sanitizable
   include Localizable
   include LocalizableOrderByNameScope
   include WebsitesLinkable
-  include WithBlobs # TODO L10N : To remove
   include WithCountry
-  include WithFeaturedImage # TODO L10N : To remove
-  include WithGitFiles
   include WithGeolocation
   include WithUniversity
 
@@ -75,17 +57,12 @@ class Administration::Location < ApplicationRecord
   validates :address, :city, :zipcode, :country, presence: true
 
   def dependencies
-    active_storage_blobs +
     programs +
     schools
   end
 
   def references
     []
-  end
-
-  def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
   end
 
   # WebsitesLinkable

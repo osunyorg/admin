@@ -26,6 +26,7 @@ en:
       administration/location/localization:
         address_additional: Additional address
         address_name: Address name
+        featured_image: Featured image
         name: Name
         url: Website
       administration/qualiopi/criterion:
@@ -49,12 +50,12 @@ en:
         show_person_html: This page only shows alumni cohorts.<br>If you wish to view or modify the person's details, click on the link below.
   administration:
     description:
-      text: Administration, in its many forms, is defined primarily by its activities in the service of the general interest. It acts in the general interest and respects the principle of legality. It is bound by the obligation of neutrality and respect for the principle of secularism. It complies with the principle of equality and guarantees everyone impartial treatment.
+      text_html: Administration, in its many forms, is defined primarily by its activities in the service of the general interest. It acts in the general interest and respects the principle of legality. It is bound by the obligation of neutrality and respect for the principle of secularism. It complies with the principle of equality and guarantees everyone impartial treatment.
       source: Code des relations entre le public et l'administration
       parts:
         alumnus:
           description: Presentation of the students who have studied in the various courses.
-        location: 
+        location:
           description: Management of the various (physical) education and research sites
         qualiopi:
           description: Help in checking the conformity of the training offer with the Qualiopi standard

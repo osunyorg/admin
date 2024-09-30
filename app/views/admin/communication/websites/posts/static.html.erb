@@ -31,3 +31,4 @@ posts_categories:
 <%= render 'admin/application/summary/static', about: @l10n %>
 <%= render 'admin/communication/blocks/content/static', about: @l10n %>
 ---
+<%= prepare_html_for_static @l10n.text %>

@@ -5,9 +5,6 @@ en:
       research/hal: HAL
   activerecord:
     models:
-      university/person/researcher:
-        one: Researcher
-        other: Researchers
       research/hal/author:
         one: HAL author
         other: HAL authors
@@ -35,6 +32,9 @@ en:
       research/thesis:
         one: Thesis
         other: Theses
+      university/person/localization/researcher:
+        one: Researcher
+        other: Researchers
     attributes:
       research/hal/author:
         docid: HAL identifier
@@ -84,7 +84,7 @@ en:
         address_additional: Additional address
         address_name: Address name
         name: Name
-      research/laboratory/axis:
+      research/laboratory/axis/localization:
         name: Name
         short_name: Short name
         text: Text

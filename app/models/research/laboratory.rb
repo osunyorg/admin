@@ -2,19 +2,14 @@
 #
 # Table name: research_laboratories
 #
-#  id                 :uuid             not null, primary key
-#  address            :string
-#  address_additional :string
-#  address_name       :string
-#  city               :string
-#  country            :string
-#  name               :string
-#  zipcode            :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  language_id        :uuid             indexed
-#  original_id        :uuid             indexed
-#  university_id      :uuid             not null, indexed
+#  id            :uuid             not null, primary key
+#  address       :string
+#  city          :string
+#  country       :string
+#  zipcode       :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  university_id :uuid             not null, indexed
 #
 # Indexes
 #
@@ -30,6 +25,7 @@
 #
 class Research::Laboratory < ApplicationRecord
   include AsIndirectObject
+  include Filterable
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
@@ -47,20 +43,22 @@ class Research::Laboratory < ApplicationRecord
               dependent: :destroy
 
   has_and_belongs_to_many :researchers,
-                          class_name: 'University::Person::Researcher',
+                          class_name: 'University::Person',
                           foreign_key: :research_laboratory_id,
                           association_foreign_key: :university_person_id
 
   validates :address, :city, :zipcode, :country, presence: true
 
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.city) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.country) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.name) ILIKE unaccent(:term) OR
-      unaccent(research_laboratories.zipcode) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+  scope :for_search_term, -> (term, language = nil) {
+    joins(:localizations)
+      .where(research_laboratory_localizations: { language_id: language.id })
+      .where("
+        unaccent(research_laboratories.address) ILIKE unaccent(:term) OR
+        unaccent(research_laboratories.city) ILIKE unaccent(:term) OR
+        unaccent(research_laboratories.country) ILIKE unaccent(:term) OR
+        unaccent(research_laboratory_localizations.name) ILIKE unaccent(:term) OR
+        unaccent(research_laboratories.zipcode) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
   }
 
   def full_address

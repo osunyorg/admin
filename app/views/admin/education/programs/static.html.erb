@@ -36,46 +36,75 @@ parent:
     <%= @l10n.parent.name %>
   url: <%= @l10n.parent.current_permalink_in_website(@website)&.path %>
 <% end %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/featured_image/static', about: @l10n %>
 <%= render 'admin/application/shared_image/static', about: @l10n %>
 <% if @l10n.logo.attached? %>
 logo:
   id: "<%= @l10n.logo.blob.id %>"
 <% end %>
-<% if @website %>
-related_category: "<%= @website.post_categories
-                               .find_by(program_id: program.id)
-                               &.slug_with_ancestors_slugs %>"
-<% end %>
+<%
+if @website
+  post_category = @website.post_categories.find_by(program_id: program.id)
+  post_category_l10n = post_category&.localization_for(language)
+  if post_category_l10n
+%>
+related_category: "<%= post_category_l10n.slug_with_ancestors_slugs(separator: '-') %>"
+<%
+  end
+end
+%>
 diplomas: "<%= @l10n.diploma&.slug %>"
 duration: >-
   <%= prepare_text_for_static @l10n.duration %>
 teachers:
-<% teacher_involvements.each do |involvement| %>
-  - "<%= involvement.person.slug %>"
+<%
+teacher_involvements.each do |involvement|
+  person_l10n = involvement.person.localization_for(language)
+  next if person_l10n.nil?
+%>
+  - "<%= person_l10n.slug %>"
 <% end %>
 teachers_description:
-<% teacher_involvements.each do |involvement| %>
-  "<%= involvement.person.slug %>": >-
-    <%= involvement.description %>
+<%
+teacher_involvements.each do |involvement|
+  involvement_l10n = involvement.localization_for(language)
+  next if involvement_l10n.nil?
+  person_l10n = involvement.person.localization_for(language)
+  next if person_l10n.nil?
+%>
+  "<%= person_l10n.slug %>": >-
+    <%= involvement_l10n.description %>
 <% end %>
 <% if administrator_involvements.any? %>
 administrators:
-<% administrator_involvements.each do |involvement| %>
-  - "<%= involvement.person.slug %>"
+<%
+administrator_involvements.each do |involvement|
+  person_l10n = involvement.person.localization_for(language)
+  next if person_l10n.nil?
+%>
+  - "<%= person_l10n.slug %>"
 <% end %>
 administrators_description:
-<% administrator_involvements.each do |involvement| %>
-  "<%= involvement.person.slug %>": >-
-    <%= involvement.target.to_s %>
+<%
+administrator_involvements.each do |involvement|
+  person_l10n = involvement.person.localization_for(language)
+  next if person_l10n.nil?
+%>
+  "<%= person_l10n.slug %>": >-
+    <%= involvement.target.to_s_in(language) %>
 <% end %>
 roles:
-<% @about.university_roles.ordered.each do |role| %>
+<% program.university_roles.ordered.each do |role| %>
   - title: >-
-      <%= role.to_s %>
+      <%= role.to_s_in(language) %>
     persons:
-    <% role.involvements.includes(:person).ordered.each do |involvement| %>
-      - "<%= involvement.person.slug %>"
+    <%
+    role.involvements.ordered.each do |involvement|
+      person_l10n = involvement.person.localization_for(language)
+      next if person_l10n.nil?
+    %>
+      - "<%= person_l10n.slug %>"
     <% end %>
 <% end %>
 <% else %>
@@ -83,8 +112,12 @@ roles: []
 <% end %>
 locations:
 <% program.locations.each do |location| %>
-  - path: <%= location.current_permalink_in_website(@website)&.path %>
-    slug: <%= location.slug %>
+  <%
+  location_l10n = location.localization_for(language)
+  next if location_l10n.nil?
+  %>
+  - path: <%= location_l10n.current_permalink_in_website(@website)&.path %>
+    slug: <%= location_l10n.slug %>
 <% end %>
 apprenticeship: <%= program.apprenticeship %>
 capacity: <%= program.capacity %>

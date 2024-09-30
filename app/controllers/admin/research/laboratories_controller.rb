@@ -3,13 +3,16 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
                               through: :current_university,
                               through_association: :research_laboratories
 
-  has_scope :for_search_term
+  include Admin::HasStaticAction
+  include Admin::Localizable
 
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @laboratories = apply_scopes(@laboratories).ordered(current_language).page(params[:page])
+    @laboratories = @laboratories.filter_by(params[:filters], current_language)
+                                 .ordered(current_language)
+                                 .page(params[:page])
     breadcrumb
   end
 
