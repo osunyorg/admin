@@ -38,7 +38,7 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
 
   def heading_title
     block.title.present?  ? block.title
-                          : page&.title
+                          : page&.to_s_in(block.language)
   end
 
   protected
