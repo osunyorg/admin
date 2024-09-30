@@ -20,7 +20,7 @@ administrator_involvements = program.involvements_through_roles
 <%= render 'admin/application/categories/static',
             about: program,
             l10n: @l10n,
-            categories: current_university.program_categories,
+            categories: program.university.program_categories,
             key: :programs_categories %>
 
 <% if @l10n.downloadable_summary.attached? %>
