@@ -8,6 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
+    
   end
 
   namespace :websites do

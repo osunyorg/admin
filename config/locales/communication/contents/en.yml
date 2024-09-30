@@ -56,6 +56,10 @@ en:
             to: to
         display_options:
           title: Display options
+        editor:
+          offcanvas:
+            close: Close block edition
+            title: Block edition
         empty: This block is empty and will not appear
         headings:
           add: Add a title

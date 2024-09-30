@@ -66,10 +66,10 @@ Rails.application.routes.draw do
   draw 'server'
 
   scope module: 'extranet' do
+    get 'style' => 'style#index', as: :style, constraints: { format: 'css' }
     scope '/:lang' do
       draw 'extranet'
     end
-    get 'style' => 'style#index', as: :style, constraints: { format: 'css' }
     root to: 'home#redirect_to_default_language'
   end
 end
