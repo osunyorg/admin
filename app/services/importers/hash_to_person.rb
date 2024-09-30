@@ -88,11 +88,11 @@ module Importers
     end
 
     def find_person_with_email
-      @university.people.tmp_original.find_by(email: @email)
+      @university.people.find_by(email: @email)
     end
 
     def find_person_with_name_in_current_language
-      @university.people.tmp_original
+      @university.people
         .joins(:localizations)
         .where(university_person_localizations: {
           language_id: @language.id,
@@ -102,7 +102,7 @@ module Importers
     end
 
     def find_person_with_name_in_another_language
-      @university.people.tmp_original
+      @university.people
         .joins(:localizations)
         .where.not(university_person_localizations: {
           language_id: @language.id

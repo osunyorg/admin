@@ -1,0 +1,15 @@
+<% content_for :title, @l10n %>
+
+<div class="row mb-5">
+  <div class="col-lg-4 mb-4">
+    <%= osuny_label Education::Program.human_attribute_name(:qualiopi_certified) %>
+    <p><%= t @program.qualiopi_certified %></p>
+  </div>
+  <div class="col-lg-8 mb-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :qualiopi_text %>
+  </div>
+</div>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @program %>
+<% end %>

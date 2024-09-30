@@ -87,7 +87,7 @@ class Communication::Website::Page < ApplicationRecord
         unaccent(communication_website_page_localizations.title) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_published, -> (published, language) { 
+  scope :for_published, -> (published, language) {
     joins(:localizations)
       .where(communication_website_page_localizations: { language_id: language.id , published: published == 'true'})
   }

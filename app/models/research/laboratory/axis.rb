@@ -26,7 +26,7 @@ class Research::Laboratory::Axis < ApplicationRecord
   include WithUniversity
   include WithPosition
 
-  belongs_to  :laboratory, 
+  belongs_to  :laboratory,
               foreign_key: :research_laboratory_id
 
   protected

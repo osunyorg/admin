@@ -17,6 +17,11 @@ module University::WithEducation
               dependent: :destroy
     alias_method :programs, :education_programs
 
+    has_many  :education_program_categories,
+              class_name: 'Education::Program::Category',
+              dependent: :destroy
+    alias_method :program_categories, :education_program_categories
+
     has_many  :education_schools,
               class_name: 'Education::School',
               dependent: :destroy

@@ -16,6 +16,9 @@ fr:
       education/program:
         one: Formation
         other: Formations
+      education/program/category:
+        one: Catégorie
+        other: Catégories
       education/school:
         one: École
         other: Écoles
@@ -85,6 +88,13 @@ fr:
         short_name: Nom abrégé
         slug: Identifiant
         url: Site Web
+      education/program/category:
+        children: Sous-catégories
+        parent: Catégorie parente
+      education/program/category/localization:
+        language: Langue
+        name: Nom
+        slug: Slug
       education/school:
         address: Adresse
         administrators: Équipe administrative
