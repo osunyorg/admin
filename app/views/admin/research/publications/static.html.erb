@@ -30,7 +30,11 @@ links:
     url: "<%= @about.file %>"
 researchers:
 <% @about.researchers.in_university(@website.university).each do |researcher| %>
-  - <%= researcher.slug %>
+  <% 
+    researcher_l10n = researcher.localization_for(language)
+    next if researcher_l10n.nil?
+  %>
+  - <%= researcher_l10n.slug %>
 <% end %>
 citations:
 <%
