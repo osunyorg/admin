@@ -215,23 +215,6 @@ class University::Person < ApplicationRecord
   def teacher_facets
     @teacher_facets ||= University::Person::Localization::Teacher.where(id: localization_ids)
   end
-  # TODO L10N : /To remove
-
-  def administrator_facets
-    @administrator_facets ||= University::Person::Localization::Administrator.where(id: localization_ids)
-  end
-
-  def author_facets
-    @author_facets ||= University::Person::Localization::Author.where(id: localization_ids)
-  end
-
-  def researcher_facets
-    @researcher_facets ||= University::Person::Localization::Researcher.where(id: localization_ids)
-  end
-
-  def teacher_facets
-    @teacher_facets ||= University::Person::Localization::Teacher.where(id: localization_ids)
-  end
 
   def full_street_address
     return nil if [address, zipcode, city].all?(&:blank?)
