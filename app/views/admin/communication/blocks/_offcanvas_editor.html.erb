@@ -5,11 +5,11 @@
       id="offcanvasEditor"
       aria-labelledby=offcanvasEditorLabel">
   <div class="offcanvas-header border-bottom">
-    <h5 class="offcanvas-title" id="offcanvasEditor">Édition de bloc</h5>
+    <h5 class="offcanvas-title"><%= t('admin.communication.blocks.editor.offcanvas.title') %></h5>
     <button type="button" 
             class="btn-close" 
             data-bs-dismiss="offcanvas" 
-            aria-label="Close"></button>
+            aria-label="<%= t('admin.communication.blocks.editor.offcanvas.close') %>"></button>
   </div>
   <iframe id="offcanvasEditorIframe" class="content-editor__offcanvas__iframe" name="editor"></iframe>
 </div>

@@ -56,6 +56,10 @@ fr:
             to: à
         display_options:
           title: Options d'affichage
+        editor:
+          offcanvas:
+            close: Fermer l'édition du bloc
+            title: Édition de bloc
         empty: Ce bloc est vide et n'apparaitra pas
         headings:
           add: Ajouter un titre
