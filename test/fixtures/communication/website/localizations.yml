@@ -12,18 +12,6 @@ website_with_gitlab_fr:
   language: fr
   university: default_university
 
-website_with_github_fr:
-  university: default_university
-  about: website_with_github
-  language: fr
-  name: Site with github french
-
-website_with_gitlab_fr:
-  university: default_university
-  about: website_with_gitlab
-  language: fr
-  name: Site with gitlab french
-
 website_with_gitlab_en:
   name: Site with gitlab english
   published: true
