@@ -15,10 +15,10 @@ module User::WithPerson
 
   def find_or_create_person
     person = university.people.where(email: email).first || university.people.new
+    person.user = self
     person.localizations.build(
       first_name: first_name,
       last_name: last_name,
-      user: self,
       language_id: university.default_language_id
     )
     person.save
