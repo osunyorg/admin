@@ -71,7 +71,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     redirect_back(fallback_location: [:admin, @object])
   end
 
-  # TODO L10N : To adjust
   def generate_from_template
     @page.generate_from_template(@l10n)
     redirect_back(fallback_location: [:admin, @page])

@@ -89,19 +89,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     redirect_to [:edit, :admin, @about]
   end
 
-  def confirm_localization
-    @about_gid = params[:about]
-    @about = GlobalID::Locator.locate(@about_gid)
-  end
-
-  def do_confirm_localization
-    @about_gid = params[:about]
-    @about = GlobalID::Locator.locate(@about_gid)
-    @website.localize_in!(current_language)
-    @about.localize_in!(current_language)
-    redirect_to [:edit, :admin, @about]
-  end
-
   protected
 
   def set_feature_nav

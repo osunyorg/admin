@@ -17,9 +17,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   end
 
   def tree
-    @programs = @programs.root
-                         .tmp_original # TODO L10N : To remove.
-                         .ordered
+    @programs = @programs.root.ordered
     breadcrumb
     add_breadcrumb t('.title')
   end
@@ -45,7 +43,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
 
   def children
     return unless request.xhr?
-    @children = @program.children.tmp_original.ordered  # TODO L10N : To remove.
+    @children = @program.children.ordered
   end
 
   def show

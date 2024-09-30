@@ -71,12 +71,6 @@ class University::Person < ApplicationRecord
 
   belongs_to :user, optional: true
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   has_and_belongs_to_many :categories,
                           class_name: 'University::Person::Category',
                           join_table: :university_people_categories
@@ -112,7 +106,7 @@ class University::Person < ApplicationRecord
 
   accepts_nested_attributes_for :involvements
 
-  validates :email, 
+  validates :email,
             uniqueness: { scope: [:university_id, :language_id] },
             allow_blank: true,
             if: :will_save_change_to_email?
