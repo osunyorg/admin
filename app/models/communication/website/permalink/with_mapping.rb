@@ -39,10 +39,7 @@ module Communication::Website::Permalink::WithMapping
     end
 
     def self.lookup_key_for_object(object)
-      lookup_key = object.class.to_s
-      # Special pages are defined as STI classes (e.g. Communication::Website::Page::Home) but permalinks are handled the same way.
-      lookup_key = "Communication::Website::Page" if lookup_key.starts_with?("Communication::Website::Page")
-      lookup_key
+      object.class.to_s
     end
 
     protected

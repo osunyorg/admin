@@ -29,7 +29,7 @@ l10n ||= f.object.localizations.build(language_id: current_language.id)
             <%= lf.input :description,
                         as: :string,
                         label: false,
-                        placeholder: University::Person::Involvement.human_attribute_name('description'),
+                        placeholder: University::Person::Involvement::Localization.human_attribute_name('description'),
                         wrapper: false %>
           </div>
           <div class="col-md-1 text-end">

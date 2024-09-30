@@ -87,6 +87,7 @@ class Communication::Website::Post < ApplicationRecord
 
   def dependencies
     [website.config_default_content_security_policy] +
+    [website.config_default_languages] +
     localizations.in_languages(website.active_language_ids) +
     categories +
     (author.present? ? author.author_facets : [])
