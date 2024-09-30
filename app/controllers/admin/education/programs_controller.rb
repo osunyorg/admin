@@ -1,4 +1,4 @@
-class Admin::Education::ProgramsController < Admin::Education::ApplicationController
+class Admin::Education::ProgramsController < Admin::Education::Programs::ApplicationController
   load_and_authorize_resource class: Education::Program,
                               through: :current_university,
                               through_association: :education_programs
@@ -12,6 +12,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     @programs = @programs.filter_by(params[:filters], current_language)
                          .ordered_by_name(current_language)
                          .page(params[:page])
+    @feature_nav = 'navigation/admin/education/programs'
     breadcrumb
   end
 
@@ -46,8 +47,6 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def show
-    @roles = @program.university_roles.ordered
-    @teacher_involvements = @program.university_person_involvements.includes(:person).ordered_by_name(current_language)
     @preview = true
     breadcrumb
   end
@@ -58,10 +57,12 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
   end
 
   def new
+    @categories = categories
     breadcrumb
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb t('edit')
   end
@@ -71,6 +72,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     if @program.save
       redirect_to [:admin, @program], notice: t('admin.successfully_created_html', model: @program.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -81,6 +83,7 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
     if @program.update(program_params)
       redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -94,17 +97,16 @@ class Admin::Education::ProgramsController < Admin::Education::ApplicationContro
 
   protected
 
-  def breadcrumb
-    super
-    add_breadcrumb Education::Program.model_name.human(count: 2), admin_education_programs_path
-    breadcrumb_for @program
+  def categories
+    current_university.program_categories
+                      .ordered
   end
 
   def program_params
     params.require(:education_program)
           .permit(
             :bodyclass, :capacity, :continuing, :initial, :apprenticeship, :qualiopi_certified,
-            :parent_id, :diploma_id, school_ids: [],
+            :parent_id, :diploma_id, school_ids: [], category_ids: [],
             university_person_involvements_attributes: [
               :id, :person_id, :university_id, :position, :_destroy,
               localizations_attributes: [:id, :description, :language_id]

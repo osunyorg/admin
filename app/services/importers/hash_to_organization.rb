@@ -79,15 +79,15 @@ module Importers
     end
 
     def find_organization_with_siren_and_nic
-      @university.organizations.tmp_original.find_by(siren: @siren, nic: @nic)
+      @university.organizations.find_by(siren: @siren, nic: @nic)
     end
 
     def find_organization_with_siren
-      @university.organizations.tmp_original.find_by(siren: @siren)
+      @university.organizations.find_by(siren: @siren)
     end
 
     def find_organization_with_name_in_current_language
-      @university.organizations.tmp_original
+      @university.organizations
         .joins(:localizations)
         .where(university_organization_localizations: {
             language_id: @language.id,
@@ -97,7 +97,7 @@ module Importers
     end
 
     def find_organization_with_name_in_another_language
-      @university.organizations.tmp_original
+      @university.organizations
         .joins(:localizations)
         .where.not(university_organization_localizations: {
           language_id: @language.id

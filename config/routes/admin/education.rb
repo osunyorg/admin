@@ -17,10 +17,25 @@ namespace :education do
     end
     resources :teachers, controller: 'programs/teachers', only: :destroy
     collection do
+      resources :categories, controller: 'programs/categories', as: 'program_categories' do
+        collection do
+          post :reorder
+        end  
+        member do
+          get :children
+          get :static
+        end
+      end
       get :tree
       post :reorder
     end
     member do
+      get 'presentation' => 'programs/parts#presentation', as: :presentation
+      get 'pedagogy' => 'programs/parts#pedagogy', as: :pedagogy
+      get 'results' => 'programs/parts#results', as: :results
+      get 'admission' => 'programs/parts#admission', as: :admission
+      get 'certification' => 'programs/parts#certification', as: :certification
+      get 'alumni' => 'programs/parts#alumni', as: :alumni
       get :children
       get :preview
       get :static

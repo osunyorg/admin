@@ -1,0 +1,39 @@
+<% content_for :title, @l10n %>
+
+<div class="row">
+  <div class="col-lg-3">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th><%= Education::Program.human_attribute_name('initial') %></th>
+          <td class="text-end"><%= t @program.initial %></td>
+        </tr>
+        <tr>
+          <th><%= Education::Program.human_attribute_name('continuing') %></th>
+          <td class="text-end"><%= t @program.continuing %></td>
+        </tr>
+        <tr>
+          <th><%= Education::Program.human_attribute_name('apprenticeship') %></th>
+          <td class="text-end"><%= t @program.apprenticeship %></td>
+        </tr>
+        <tr>
+          <th><%= Education::Program.human_attribute_name('capacity') %></th>
+          <td class="text-end"><%= @program.capacity %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="offset-lg-1 col-lg-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :presentation %>
+  </div>
+  <div class="col-lg-4">
+    <%= render 'admin/application/property/text', object: @l10n, property: :objectives %>
+  </div>
+</div>
+<%= osuny_separator %>
+<%= render 'admin/application/a11y/widget', about: @l10n, horizontal: true %>
+<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @program %>
+<% end %>
