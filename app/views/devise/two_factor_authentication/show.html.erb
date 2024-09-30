@@ -18,23 +18,26 @@
 <%= simple_form_for(resource, url: user_two_factor_authentication_path, html: { method: :put }) do |f| %>
   <div class="form-inputs">
     <div class="input-group">
-      <input  type="tel" 
-              name="code" 
-              id="code" 
-              value="" 
-              pattern="\d*" 
-              maxlength="6"
-              required="required" 
+      <input  autocomplete="one-time-code" 
               autofocus="autofocus" 
-              autocomplete="off" 
-              style="letter-spacing: 1rem"
+              class="form-control form-control-lg mfa-code string required"
+              id="code" 
+              inputmode="numeric"
+              maxlength="6"
+              name="code" 
+              pattern="[0-9]*" 
               placeholder="______" 
-              class="form-control form-control-lg mfa-code string required">
-      <input  type="submit" 
+              required="required" 
+              style="letter-spacing: 1rem"
+              type="tel" 
+              value="" 
+              >
+      <input  class="btn btn-dark bg-black px-3 px-lg-5"
+              data-disable-with="<%= t('devise.two_factor_authentication.validate') %>"
               name="commit"
+              type="submit" 
               value="<%= t('devise.two_factor_authentication.validate') %>" 
-              class="btn btn-dark bg-black px-3 px-lg-5"
-              data-disable-with="<%= t('devise.two_factor_authentication.validate') %>">
+              >
     </div>
   </div>
 <% end %>
