@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -218,7 +217,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "idx_on_university_id_0dc1259072"
   end
 
-  create_table "communication_extranet_document_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_extranet_document_kinds", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "extranet_id", null: false
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
@@ -243,7 +242,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "idx_on_university_id_95419f1df4"
   end
 
-  create_table "communication_extranet_documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_extranet_documents", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "extranet_id", null: false
     t.datetime "created_at", null: false
@@ -274,7 +273,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "index_communication_extranet_localizations_on_university_id"
   end
 
-  create_table "communication_extranet_post_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_extranet_post_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "extranet_id", null: false
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
@@ -319,7 +318,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "idx_on_university_id_28188e2217"
   end
 
-  create_table "communication_extranet_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_extranet_posts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "author_id"
     t.uuid "extranet_id", null: false
     t.uuid "university_id", null: false
@@ -332,7 +331,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "index_communication_extranet_posts_on_university_id"
   end
 
-  create_table "communication_extranets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_extranets", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "host"
     t.datetime "created_at", null: false
@@ -418,7 +417,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "idx_on_university_id_eaf79b0514"
   end
 
-  create_table "communication_website_agenda_events", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_website_agenda_events", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.date "from_day"
@@ -902,7 +901,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "index_education_diploma_localizations_on_university_id"
   end
 
-  create_table "education_diplomas", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "education_diplomas", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "level", default: 0
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
@@ -915,11 +914,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.boolean "is_taxonomy", default: false
     t.integer "position"
     t.uuid "parent_id"
-    t.uuid "original_id"
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["original_id"], name: "index_education_program_categories_on_original_id"
     t.index ["parent_id"], name: "index_education_program_categories_on_parent_id"
     t.index ["university_id"], name: "index_education_program_categories_on_university_id"
   end
@@ -1239,7 +1236,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "idx_on_university_id_dc9f1267b7"
   end
 
-  create_table "research_journal_paper_kinds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "research_journal_paper_kinds", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "journal_id", null: false
     t.datetime "created_at", null: false
@@ -1270,7 +1267,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "index_research_journal_paper_localizations_on_university_id"
   end
 
-  create_table "research_journal_papers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "research_journal_papers", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "research_journal_id", null: false
     t.uuid "research_journal_volume_id"
@@ -1393,7 +1390,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "index_research_laboratory_localizations_on_university_id"
   end
 
-  create_table "research_publications", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "research_publications", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "hal_docid"
     t.jsonb "data"
     t.string "title"
@@ -1514,7 +1511,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["university_id"], name: "index_university_apps_on_university_id"
   end
 
-  create_table "university_organization_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "university_organization_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1630,7 +1627,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.index ["person_id"], name: "index_university_people_categories_on_person_id"
   end
 
-  create_table "university_person_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "university_person_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1700,10 +1697,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "language_id"
-    t.uuid "original_id"
-    t.index ["language_id"], name: "index_university_person_involvements_on_language_id"
-    t.index ["original_id"], name: "index_university_person_involvements_on_original_id"
     t.index ["person_id"], name: "index_university_person_involvements_on_person_id"
     t.index ["target_type", "target_id"], name: "index_university_person_involvements_on_target"
     t.index ["university_id"], name: "index_university_person_involvements_on_university_id"
@@ -1752,10 +1745,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "language_id"
-    t.uuid "original_id"
-    t.index ["language_id"], name: "index_university_roles_on_language_id"
-    t.index ["original_id"], name: "index_university_roles_on_original_id"
     t.index ["target_type", "target_id"], name: "index_university_roles_on_target"
     t.index ["university_id"], name: "index_university_roles_on_university_id"
   end
@@ -1951,7 +1940,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
   add_foreign_key "education_diploma_localizations", "languages"
   add_foreign_key "education_diploma_localizations", "universities"
   add_foreign_key "education_diplomas", "universities"
-  add_foreign_key "education_program_categories", "education_program_categories", column: "original_id"
   add_foreign_key "education_program_categories", "education_program_categories", column: "parent_id"
   add_foreign_key "education_program_categories", "universities"
   add_foreign_key "education_program_category_localizations", "education_program_categories", column: "about_id"
@@ -2053,7 +2041,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_26_120201) do
   add_foreign_key "university_role_localizations", "universities"
   add_foreign_key "university_role_localizations", "university_roles", column: "about_id"
   add_foreign_key "university_roles", "universities"
-  add_foreign_key "university_roles", "university_roles", column: "original_id"
   add_foreign_key "user_favorites", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"

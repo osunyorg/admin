@@ -35,12 +35,6 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
   include WithMenuItemTarget
   include WithUniversity
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true

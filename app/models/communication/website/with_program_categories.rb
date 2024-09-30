@@ -38,8 +38,6 @@ module Communication::Website::WithProgramCategories
     root_category
   end
 
-
-
   def set_programs_categories_at_level_for!(objects, parent_category, programs)
     programs.map.with_index do |program, index|
       category = objects.where(program_id: program.id)

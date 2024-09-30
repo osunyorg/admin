@@ -108,16 +108,6 @@ module Communication::Website::Page::WithSpecialPage
     save_and_sync if l10n_created
   end
 
-  def create_missing_localizations!
-    l10n_created = false
-    website.languages.each do |language|
-      next if localized_in?(language)
-      build_localization_for(language)
-      l10n_created = true
-    end
-    save_and_sync if l10n_created
-  end
-
   protected
 
   def default_parent

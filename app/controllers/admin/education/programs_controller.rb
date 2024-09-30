@@ -17,8 +17,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   end
 
   def tree
-    @programs = @programs.root
-                         .ordered
+    @programs = @programs.root.ordered
     breadcrumb
     add_breadcrumb t('.title')
   end

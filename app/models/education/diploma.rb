@@ -24,12 +24,6 @@ class Education::Diploma < ApplicationRecord
   include Localizable
   include WithUniversity
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   has_many :programs, dependent: :nullify
 
   scope :ordered, -> (language = nil) { order(:level) }

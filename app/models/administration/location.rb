@@ -32,12 +32,6 @@ class Administration::Location < ApplicationRecord
   include WithGeolocation
   include WithUniversity
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',
                           foreign_key: :administration_location_id,

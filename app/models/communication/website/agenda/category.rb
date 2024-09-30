@@ -35,12 +35,6 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   include WithTree
   include WithUniversity
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   belongs_to              :parent,
                           class_name: 'Communication::Website::Agenda::Category',
                           optional: true
@@ -60,7 +54,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   def event_localizations
     Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)
   end
-  
+
   def dependencies
     localizations.in_languages(website.active_language_ids) +
     children +

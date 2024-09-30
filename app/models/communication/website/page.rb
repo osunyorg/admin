@@ -88,7 +88,7 @@ class Communication::Website::Page < ApplicationRecord
         unaccent(communication_website_page_localizations.title) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_published, -> (published, language) { 
+  scope :for_published, -> (published, language) {
     joins(:localizations)
       .where(communication_website_page_localizations: { language_id: language.id , published: published == 'true'})
   }
@@ -125,11 +125,6 @@ class Communication::Website::Page < ApplicationRecord
   # Example: The Communication::Website::Page::Person special page allows to connect University::Person records directly.
   def self.direct_connection_permitted_about_class
     nil
-  end
-
-  # TODO L10N : to remove
-  def translate_other_attachments(translation)
-    translate_attachment(translation, :shared_image) if shared_image.attached?
   end
 
   protected

@@ -56,12 +56,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
                           foreign_key: :communication_website_agenda_event_id,
                           association_foreign_key: :communication_website_agenda_category_id
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
   scope :ordered_asc, -> { order(:from_day, :from_hour) }
   scope :ordered, -> (language = nil) { ordered_asc }

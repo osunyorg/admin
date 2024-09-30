@@ -12,20 +12,14 @@
 #  zipcode       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  language_id   :uuid             indexed
-#  original_id   :uuid             indexed
 #  university_id :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_education_schools_on_language_id    (language_id)
-#  index_education_schools_on_original_id    (original_id)
 #  index_education_schools_on_university_id  (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_84e48509e8  (language_id => languages.id)
-#  fk_rails_cba5631cc9  (original_id => education_schools.id)
 #  fk_rails_e01b37a3ad  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
@@ -42,12 +36,6 @@ class Education::School < ApplicationRecord
   include WithAlumni
   include WithTeam
   include WithUniversity
-
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
 
   # 'websites' might override the same method defined in WithWebsites, so we use the full name
   has_many    :communication_websites,
