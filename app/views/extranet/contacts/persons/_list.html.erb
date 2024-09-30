@@ -1,13 +1,26 @@
-<% if people.any? %>
-  <% people_paged = people.ordered.page(params[:page]).per(60) %>
-  <div class="row">
-    <% people_paged.each do |person| %>
-      <div class="col-md-2">
-        <%= render 'extranet/contacts/persons/person', person: person %>
-      </div>
-    <% end %>
-  </div>
-  <%= paginate people_paged, theme: 'bootstrap-5' %>
-<% else %>
-  <p>Pas de résultat</p>
+<% people.each do |person| %>
+  <% l10n = person.best_localization_for(current_language) %>
+  <article class="row mb-3">
+    <div class="col-lg-2">
+      <%= link_to contacts_person_path(person) do %>
+        <% if person.best_picture.attached? %>
+          <%= kamifusen_tag person.best_picture, width: 400, class: 'img-fluid',
+            sizes: {
+                '(max-width: 576px)': '400px',
+                '(max-width: 991px)': '200px'
+            } %>
+        <% else %>
+          <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-lg-5">
+      <p class="mb-0"><%= link_to l10n, contacts_person_path(person) %></p>
+      <p class="mt-0 text-muted"><%= l10n.summary %></p>
+    </div>
+    <div class="col-lg-5">
+      <%= render 'extranet/contacts/persons/details', person: person, l10n: l10n %>
+    </div>
+  </article>
+  <hr>
 <% end %>

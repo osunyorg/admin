@@ -1,3 +1,2 @@
 <% content_for :title, Communication::Extranet::Document.model_name.human %>
-
-<%= render 'form', document: @document %>
+<%= render 'form', document: @document, l10n: @l10n %>

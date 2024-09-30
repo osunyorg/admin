@@ -1,0 +1,50 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_real_university,
+                      label: University.human_attribute_name('is_really_a_university'),
+                      collection: [
+                        { to_s: t('true'), id: 'true' }, 
+                        { to_s: t('false'), id: 'false' }
+                      ]
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_contribution,
+                      label: t('filters.attributes.element', element: t('server_admin.universities.contribution_filter.title').downcase),
+                      collection: [
+                        { to_s: t('server_admin.universities.contribution_filter.true'), id: 'true' }, 
+                        { to_s: t('server_admin.universities.contribution_filter.false'), id: 'false' }
+                      ]
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_university_kind,
+                      label: t('filters.attributes.element', element: t('server_admin.universities.university_kind_filter.title').downcase),
+                      collection: [
+                        { to_s: t('server_admin.universities.university_kind_filter.public'), id: 'public' }, 
+                        { to_s: t('server_admin.universities.university_kind_filter.private'), id: 'private' }
+                      ]
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_language,
+                      label: t('filters.attributes.element', element: Language.model_name.human.downcase),
+                      collection: Language.ordered,
+                      multiple: true
+                      %>
+
+
+    <% end %>
+<% end %>

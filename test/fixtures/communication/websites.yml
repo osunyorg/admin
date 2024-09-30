@@ -1,25 +1,21 @@
 website_with_github:
-  university: default_university
-  name: Site de test
   git_provider: github
   git_endpoint: <%= ENV['TEST_GITHUB_ENDPOINT'] %>
   git_branch: <%= ENV['TEST_GITHUB_BRANCH'] %>
   access_token: <%= ENV['TEST_GITHUB_TOKEN'] %>
   repository: <%= ENV['TEST_GITHUB_REPOSITORY'] %>
-  languages: [fr]
   default_language: fr
   default_time_zone: Europe/Paris
   deuxfleurs_hosting: false
+  university: default_university
 
 website_with_gitlab:
-  university: default_university
-  name: Site with gitlab
   git_provider: gitlab
   git_endpoint: <%= ENV['TEST_GITLAB_ENDPOINT'] %>
   git_branch: <%= ENV['TEST_GITLAB_BRANCH'] %>
   access_token: <%= ENV['TEST_GITLAB_TOKEN'] %>
   repository: <%= ENV['TEST_GITLAB_REPOSITORY'] %>
-  languages: [fr, en]
   default_language: fr
   default_time_zone: Europe/Paris
   deuxfleurs_hosting: false
+  university: default_university

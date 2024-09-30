@@ -1,18 +1,14 @@
-<% content_for :title, @axis %>
+<% content_for :title, @l10n %>
 
 <div class="row">
-  <div class="col-md-8">
-    <%= osuny_panel t('content') do %>
-      <% unless @axis.short_name.blank? %>
-        <%= osuny_label Research::Laboratory::Axis.human_attribute_name('short_name') %>
-        <p><%= @axis.short_name %></p>
-      <% end %>
-      <%= osuny_label Research::Laboratory::Axis.human_attribute_name('text') %>
-      <%= sanitize @axis.text.to_s %>
+  <div class="col-lg-8">
+    <% unless @l10n.short_name.blank? %>
+      <p class="lead"><%= @l10n.short_name %></p>
     <% end %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
   </div>
-  <div class="col-md-4">
-    <%= render 'admin/application/meta_description/show', about: @axis %>
+  <div class="col-lg-4">
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
 

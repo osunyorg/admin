@@ -7,7 +7,7 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
   def dependencies
     super +
     [website.config_default_languages] +
-    website.administrators.where(language_id: language_id).map(&:administrator)
+    dependencies_administrators
   end
 
   # Not listed in any menu because it makes "Équipe" unclickable (opens submenu)
@@ -21,7 +21,14 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
 
   protected
 
+  def dependencies_administrators
+    University::Person::Localization::Administrator.where(
+      about_id: website.administrators.pluck(:id),
+      language_id: website.active_language_ids
+    )
+  end
+
   def default_parent
-    website.special_page(Communication::Website::Page::Person, language: language)
+    website.special_page(Communication::Website::Page::Person)
   end
 end

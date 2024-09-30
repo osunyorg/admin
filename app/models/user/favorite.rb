@@ -24,8 +24,4 @@ class User::Favorite < ApplicationRecord
 
   scope :websites, -> { where(about_type: 'Communication::Website') }
   scope :except_websites, -> { where.not(about_type: 'Communication::Website') }
-
-  def self.permitted_about_types
-    ApplicationRecord.model_names_with_concern(Favoritable)
-  end
 end

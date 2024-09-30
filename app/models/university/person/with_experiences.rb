@@ -13,9 +13,9 @@ module University::Person::WithExperiences
 
     validates_associated :experiences
 
-    scope :for_alumni_organization, -> (organization_id) {
+    scope :for_alumni_organization, -> (organization_ids, language = nil) {
       left_joins(:experiences)
-        .where(university_person_experiences: { organization_id: organization_id })
+        .where(university_person_experiences: { organization_id: organization_ids })
         .select("university_people.*")
         .distinct
     }

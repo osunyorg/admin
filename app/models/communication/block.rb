@@ -99,10 +99,6 @@ class Communication::Block < ApplicationRecord
 
   before_validation :set_university_and_website_from_about, on: :create
 
-  def self.permitted_about_types
-    ApplicationRecord.model_names_with_concern(Contentful)
-  end
-
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.
   def data=(value)
@@ -125,15 +121,7 @@ class Communication::Block < ApplicationRecord
 
   def language
     return @language if defined?(@language)
-    @language ||= about.respond_to?(:language) ? about.language : about.university.default_language
-  end
-
-  def is_a_translation?
-    about.respond_to?(:is_a_translation?) && about.is_a_translation?
-  end
-
-  def original_language
-    about.try(:original_language)
+    @language ||= about.language
   end
 
   def duplicate
@@ -150,13 +138,11 @@ class Communication::Block < ApplicationRecord
     block
   end
 
-  def translate!(about_translation, heading_id = nil)
-    translation = self.dup
-    translation.about = about_translation
-    translation.template.translate!
-    translation.data = translation.template.data
-    translation.heading_id = heading_id
-    translation.save
+  def localize_for!(new_localization, localized_heading_id = nil)
+    localized_block = self.dup
+    localized_block.about = new_localization
+    localized_block.heading_id = localized_heading_id
+    localized_block.save
   end
 
   def empty?

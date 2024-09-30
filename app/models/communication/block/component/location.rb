@@ -8,7 +8,4 @@ class Communication::Block::Component::Location < Communication::Block::Componen
     [location]
   end
 
-  def translate!
-    # TODO: Traduction à faire
-  end
 end

@@ -1,6 +1,5 @@
 class Communication::Website::Page::Organization < Communication::Website::Page
 
-  # TODO: Scope .where(language_id: language_id) when organizations are translatable
   def dependencies
     super +
     [website.config_default_languages] +
@@ -9,7 +8,7 @@ class Communication::Website::Page::Organization < Communication::Website::Page
 
   # https://developers.osuny.org/docs/admin/sites-web/git/dependencies/iteration-9/
   def references
-    website.connected_organizations.where(language_id: language_id)
+    website.connected_organizations
   end
 
   # For implicit connections, direct_source_type is "Communication::Website::Page"
@@ -23,8 +22,8 @@ class Communication::Website::Page::Organization < Communication::Website::Page
     University::Organization.where(id: ids)
   end
 
-  def self.direct_connection_permitted_about_type
-    "University::Organization"
+  def self.direct_connection_permitted_about_class
+    University::Organization
   end
 
   def git_path_relative

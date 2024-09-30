@@ -1,8 +1,8 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "index") do |sheet|
   options = [
-    University::Person.human_attribute_name('last_name'),
-    University::Person.human_attribute_name('first_name'),
+    University::Person::Localization.human_attribute_name('last_name'),
+    University::Person::Localization.human_attribute_name('first_name'),
     University::Person.human_attribute_name('email'),
     University::Person.human_attribute_name('email_visibility'),
     University::Person.human_attribute_name('gender'),
@@ -18,12 +18,12 @@ wb.add_worksheet(name: "index") do |sheet|
     University::Person.human_attribute_name('phone_professional_visibility'),
     University::Person.human_attribute_name('phone_mobile'),
     University::Person.human_attribute_name('phone_mobile_visibility'),
-    University::Person.human_attribute_name('url'),
-    University::Person.human_attribute_name('linkedin'),
+    University::Person::Localization.human_attribute_name('url'),
+    University::Person::Localization.human_attribute_name('linkedin'),
     University::Person.human_attribute_name('linkedin_visibility'),
-    University::Person.human_attribute_name('twitter'),
+    University::Person::Localization.human_attribute_name('twitter'),
     University::Person.human_attribute_name('twitter_visibility'),
-    University::Person.human_attribute_name('mastodon'),
+    University::Person::Localization.human_attribute_name('mastodon'),
     University::Person.human_attribute_name('mastodon_visibility'),
     University::Person.human_attribute_name('categories')
     ]
@@ -59,9 +59,10 @@ wb.add_worksheet(name: "index") do |sheet|
   sheet.add_row options, types: Array.new(types.length) { |_| :string }
 
   @people.each do |person|
+    l10n = person.best_localization_for(current_language)
     infos = [
-      person.last_name,
-      person.first_name,
+      l10n.last_name,
+      l10n.first_name,
       person.email,
       person.email_visibility,
       person.gender.present? ? t("activerecord.attributes.university/person.genders.#{person.gender}") : '',
@@ -77,14 +78,14 @@ wb.add_worksheet(name: "index") do |sheet|
       person.phone_professional_visibility,
       person.phone_mobile,
       person.phone_mobile_visibility,
-      person.url,
-      person.linkedin,
+      l10n.url,
+      l10n.linkedin,
       person.linkedin_visibility,
-      person.twitter.present? ? "@#{person.twitter}" : '',
+      l10n.twitter.present? ? "@#{l10n.twitter}" : '',
       person.twitter_visibility,
-      person.mastodon,
+      l10n.mastodon,
       person.mastodon_visibility,
-      person.categories.join(', ')
+      person.categories.map { |category| category.to_s_in(current_language) }.join(', ')
     ]
 
     sheet.add_row infos, types: types

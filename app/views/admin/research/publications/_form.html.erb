@@ -20,10 +20,12 @@
       <%= f.input :open_access %>
       <%= f.association :researchers,
                         as: :check_boxes,
-                        collection: current_university.university_people
-                                                      .researchers
-                                                      .for_language(current_language)
-                                                      .ordered %>
+                        collection: osuny_collection(
+                          current_university.university_people
+                          .researchers
+                          .ordered(current_language),
+                          localized: true
+                        ) %>
     </div>
   </div>
 

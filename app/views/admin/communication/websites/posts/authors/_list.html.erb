@@ -2,11 +2,10 @@
   <% authors.each do |author| %>
     <div>
       <div class="card card--horizontal">
-        <%= osuny_thumbnail author %>
+        <%= osuny_thumbnail_localized author %>
         <div class="card-body">
-          <%= link_to author, 
-                      admin_communication_website_post_author_path(website_id: @website.id, id: author.id),
-                      class: 'text-black' %>
+          <%= osuny_link_localized  author, 
+                                    admin_communication_website_post_author_path(website_id: @website.id, id: author.id) %>
         </div>
         <div class="card-footer">
           <%= author.communication_website_posts.count %>

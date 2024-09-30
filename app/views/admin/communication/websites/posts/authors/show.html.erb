@@ -1,13 +1,12 @@
-<% content_for :title, @author %>
-
-<%= render 'admin/university/people/main_infos', person: @author %>
+<% content_for :title, @author_l10n %>
 
 <% if @posts.any? %>
-  <%= osuny_panel Communication::Website::Post.model_name.human(count: 2),
-                  subtitle: "#{@posts.total_count} #{Communication::Website::Post.model_name.human(count: @posts.total_count).downcase}" do %>
-    <%= render 'admin/communication/websites/posts/list', posts: @posts, hide_author: true %>
-    <%= paginate @posts if @posts.total_pages > 1 %>
-  <% end %>
+  <p>
+    <%= @posts.total_count %>
+    <%= Communication::Website::Post.model_name.human(count: @posts.total_count).downcase %>
+  </p>
+  <%= render 'admin/communication/websites/posts/list', posts: @posts %>
+  <%= paginate @posts if @posts.total_pages > 1 %>
 <% end %>
 
 <% content_for :action_bar_right do %>

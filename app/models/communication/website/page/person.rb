@@ -8,7 +8,7 @@ class Communication::Website::Page::Person < Communication::Website::Page
 
   # https://developers.osuny.org/docs/admin/sites-web/git/dependencies/iteration-9/
   def references
-    website.connected_people.where(language_id: language_id)
+    website.connected_people
   end
 
   # For implicit connections, direct_source_type is "Communication::Website::Page"
@@ -22,8 +22,8 @@ class Communication::Website::Page::Person < Communication::Website::Page
     University::Person.where(id: ids)
   end
 
-  def self.direct_connection_permitted_about_type
-    "University::Person"
+  def self.direct_connection_permitted_about_class
+    University::Person
   end
 
   def git_path_relative

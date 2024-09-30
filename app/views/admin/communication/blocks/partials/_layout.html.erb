@@ -1,0 +1,6 @@
+<%
+layout = block.template.layout
+layout_file = "#{file.remove('_show.html.erb')}layouts/_#{layout}.html.erb"
+layout_partial =  "#{file.split('app/views/').last.remove('_show.html.erb')}layouts/#{layout}"
+%>
+<%= render layout_partial, block: block if File.exist?(layout_file)  %>

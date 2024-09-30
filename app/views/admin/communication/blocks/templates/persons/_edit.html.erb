@@ -28,7 +28,7 @@
     <div v-for="(element, index) in data.elements" class="draggable-item">
       <div class="d-flex">
         <div>
-          <a class="btn ps-0 dragHandle" title="<%= t '.drag_title' %>">
+          <a class="btn ps-0 dragHandle" title="<%= t('admin.communication.block.drag_and_drop') %>">
             <i class="<%= Icon::DRAG %> handle"></i>
           </a>
         </div>
@@ -45,7 +45,7 @@
         <div>
           <a  class="btn btn-sm text-danger"
               v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-              title="<%= t '.delete_title' %>">
+              title="<%= t('delete') %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>
         </div>

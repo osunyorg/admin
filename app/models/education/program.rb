@@ -2,84 +2,39 @@
 #
 # Table name: education_programs
 #
-#  id                     :uuid             not null, primary key
-#  accessibility          :text
-#  apprenticeship         :boolean
-#  bodyclass              :string
-#  capacity               :integer
-#  contacts               :text
-#  content                :text
-#  continuing             :boolean
-#  duration               :string
-#  evaluation             :text
-#  featured_image_alt     :string
-#  featured_image_credit  :text
-#  initial                :boolean
-#  meta_description       :text
-#  name                   :string
-#  objectives             :text
-#  opportunities          :text
-#  other                  :text
-#  path                   :string
-#  pedagogy               :text
-#  position               :integer          default(0)
-#  prerequisites          :text
-#  presentation           :text
-#  pricing                :text
-#  pricing_apprenticeship :text
-#  pricing_continuing     :text
-#  pricing_initial        :text
-#  published              :boolean          default(FALSE)
-#  qualiopi_certified     :boolean          default(FALSE)
-#  qualiopi_text          :text
-#  registration           :text
-#  registration_url       :string
-#  results                :text
-#  short_name             :string
-#  slug                   :string           indexed
-#  summary                :text
-#  url                    :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  diploma_id             :uuid             indexed
-#  language_id            :uuid             not null, indexed
-#  original_id            :uuid             indexed
-#  parent_id              :uuid             indexed
-#  university_id          :uuid             not null, indexed
+#  id                 :uuid             not null, primary key
+#  apprenticeship     :boolean
+#  bodyclass          :string
+#  capacity           :integer
+#  continuing         :boolean
+#  initial            :boolean
+#  position           :integer          default(0)
+#  qualiopi_certified :boolean          default(FALSE)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  diploma_id         :uuid             indexed
+#  parent_id          :uuid             indexed
+#  university_id      :uuid             not null, indexed
 #
 # Indexes
 #
 #  index_education_programs_on_diploma_id     (diploma_id)
-#  index_education_programs_on_language_id    (language_id)
-#  index_education_programs_on_original_id    (original_id)
 #  index_education_programs_on_parent_id      (parent_id)
-#  index_education_programs_on_slug           (slug)
 #  index_education_programs_on_university_id  (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_08b351087c  (university_id => universities.id)
-#  fk_rails_2c27955cee  (original_id => education_programs.id)
-#  fk_rails_e2f027eb9e  (language_id => languages.id)
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
   include AsIndirectObject
-  include Contentful
-  include Permalinkable
+  include Filterable
+  include Localizable
   include Sanitizable
-  include Shareable
-  include Sluggable
-  include Translatable
-  include Pathable # Included after Sluggable to make sure slug is correct before anything
   include WebsitesLinkable
-  include WithAccessibility
   include WithAlumni
-  include WithBlobs
   include WithDiploma
-  include WithFeaturedImage
-  include WithGitFiles
-  include WithInheritance
   include WithLocations
   include WithMenuItemTarget
   include WithPosition
@@ -89,24 +44,6 @@ class Education::Program < ApplicationRecord
   include WithUniversity
   include WithWebsitesCategories
 
-  rich_text_areas_with_inheritance  :accessibility,
-                                    :contacts,
-                                    :evaluation,
-                                    :objectives,
-                                    :opportunities,
-                                    :other,
-                                    :pedagogy,
-                                    :prerequisites,
-                                    :pricing,
-                                    :pricing_apprenticeship,
-                                    :pricing_continuing,
-                                    :pricing_initial,
-                                    :registration,
-                                    :content,
-                                    :results
-
-  has_summernote :presentation
-
   belongs_to :parent,
              class_name: 'Education::Program',
              optional: true
@@ -115,73 +52,72 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id
 
-  has_one_attached_deletable :downloadable_summary
-  has_one_attached_deletable :logo
-
   before_destroy :move_children
 
-  validates_presence_of :name
-  validates :downloadable_summary, size: { less_than: 50.megabytes }
-  validates :logo, size: { less_than: 5.megabytes }
+  # can't use LocalizableOrderByNameScope because scope ordered is already defined by WithPosition
+  scope :ordered_by_name, -> (language) {
+    localization_name_select = <<-SQL
+      COALESCE(
+        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.name))) END),
+        MAX(TRIM(LOWER(UNACCENT(localizations.name)))) FILTER (WHERE localizations.rank = 1)
+      ) AS localization_name
+    SQL
 
-  scope :published, -> { where(published: true) }
-  scope :ordered_by_name, -> { order(:name) }
-  scope :for_search_term, -> (term) {
-    where("
-      unaccent(education_programs.name) ILIKE unaccent(:term)
-    ", term: "%#{sanitize_sql_like(term)}%")
+    # Join the table with a subquery that ranks localizations
+    # The subquery assigns a rank to each localization, with 1 being the first localization for each object
+    joins(sanitize_sql_array([<<-SQL
+      LEFT JOIN (
+        SELECT
+          localizations.*,
+          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
+        FROM
+          #{table_name.singularize}_localizations as localizations
+      ) localizations ON #{table_name}.id = localizations.about_id
+    SQL
+    ]))
+    .select("#{table_name}.*", localization_name_select)
+    .group("#{table_name}.id")
+    .order("localization_name ASC")
   }
-  scope :for_diploma, -> (diploma_id) {
+
+  scope :for_search_term, -> (term, language) {
+    joins(:localizations)
+      .where(education_program_localizations: { language_id: language.id })
+      .where("
+        unaccent(education_program_localizations.name) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
+  }
+  scope :for_diploma, -> (diploma_id, language = nil) {
     where(diploma_id: diploma_id)
   }
-  scope :for_school, -> (school_id) {
+  scope :for_school, -> (school_id, language = nil) {
     joins(:schools)
       .where(education_schools: { id: school_id })
       .distinct
   }
-  scope :for_publication, -> (publication) {
+  scope :for_publication, -> (publication, language = nil) {
     where(published: publication)
   }
 
-  def to_short_s
-    short_name.blank? ? to_s : short_name
-  end
-
-  def to_s
-    "#{name}"
-  end
-
-  def best_featured_image_source(fallback: true)
-    return self if featured_image.attached?
-    best_source = parent&.best_featured_image_source(fallback: false)
-    best_source ||= self if fallback
-    best_source
-  end
-
-  def git_path(website)
-    return unless published? && for_website?(website)
-    clean_path = Static.clean_path "#{git_path_content_prefix(website)}programs/#{path}/"
-    "#{clean_path}_index.html"
-  end
-
   def dependencies
-    active_storage_blobs +
-    contents_dependencies +
+    localizations +
     locations +
-    university_people_through_involvements.map(&:teacher) +
-    university_people_through_role_involvements.map(&:administrator) +
+    university_people_through_involvements.map(&:teacher_facets) +
+    university_people_through_role_involvements.map(&:administrator_facets) +
     [diploma]
   end
 
   def references
-    references = schools + siblings + descendants
-    references << parent if parent.present?
-    references
+    schools +
+    siblings +
+    descendants +
+    [parent]
   end
 
   #####################
-  # WebsitesLinkable methods #
+  # WebsitesLinkable methods
   #####################
+
   def has_administrators?
     university_people_through_role_involvements.any? ||
     descendants.any? { |descendant| descendant.university_people_through_role_involvements.any? }
@@ -212,7 +148,7 @@ class Education::Program < ApplicationRecord
     false
   end
 
-  def published_programs
+  def programs
     Education::Program.where(id: id)
   end
 
@@ -226,20 +162,8 @@ class Education::Program < ApplicationRecord
     university.education_programs.where(parent_id: parent_id).ordered.last
   end
 
-  def explicit_blob_ids
-    super.concat [
-      featured_image&.blob_id,
-      shared_image&.blob_id,
-      downloadable_summary&.blob_id,
-      logo&.blob_id
-    ]
-  end
-
-  def inherited_blob_ids
-    [best_featured_image&.blob_id]
-  end
-
   def move_children
     children.update(parent_id: parent_id)
   end
+
 end

@@ -16,17 +16,19 @@ fr:
     attributes:
       administration/location:
         address: Adresse
-        address_additional: Complément d'adresse
-        address_name: Nom de l'adresse
         city: Ville
         country: Pays
-        name: Nom
         phone: Téléphone
         programs: Formations dispensées
         schools: Écoles
-        url: Site Web
         websites: Sites Web associés
         zipcode: Code postal
+      administration/location/localization:
+        address_additional: Complément d'adresse
+        address_name: Nom de l'adresse
+        featured_image: Image à la une
+        name: Nom
+        url: Site Web
       administration/qualiopi/criterion:
         number: Numéro
         name: Nom
@@ -41,14 +43,19 @@ fr:
         requirement: Obligations spécifiques
         non_conformity: Non-conformité
         glossary: Glossaire
+  admin:
+    administration:
+      alumnus:
+        no_cohort: La personne n'est pas encore alumnus
+        show_person_html: Cette page montre uniquement les anciennes promotions de la personne. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien
   administration:
     description:
-      text: L'administration, sous ses multiples formes, se définit principalement par ses activités au service de l'intérêt général. L'administration agit dans l'intérêt général et respecte le principe de légalité. Elle est tenue à l'obligation de neutralité et au respect du principe de laïcité. Elle se conforme au principe d'égalité et garantit à chacun un traitement impartial.
+      text_html: L'administration, sous ses multiples formes, se définit principalement par ses activités au service de l'intérêt général. L'administration agit dans l'intérêt général et respecte le principe de légalité. Elle est tenue à l'obligation de neutralité et au respect du principe de laïcité. Elle se conforme au principe d'égalité et garantit à chacun un traitement impartial.
       source: Code des relations entre le public et l'administration
       parts:
         alumnus:
           description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
-        location: 
+        location:
           description: Gestion des différents sites (physiques) de formation et de recherche
         qualiopi:
           description: Aide à la vérification de la conformité de l'offre de formation avec la norme Qualiopi

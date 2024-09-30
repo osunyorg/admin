@@ -26,7 +26,7 @@ class Communication::Extranet::Connection < ApplicationRecord
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :about, polymorphic: true
 
-  def self.permitted_about_types
-    ["University::Organization", "University::Person"]
+  def self.permitted_about_classes
+    [University::Organization, University::Person]
   end
 end

@@ -22,7 +22,7 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
       params,
       key: :about,
       university: current_university,
-      only: Communication::Block::Heading.permitted_about_types
+      mandatory_module: Contentful
     )
     breadcrumb
   end
@@ -61,7 +61,7 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
 
   protected
 
-  # TODO factorize
+  # TODO factorize with blocks (no need, because this will disappear when heading becomes a special block)
   def website_id
     params[:website_id] || @heading.about&.website.id
   rescue
@@ -78,15 +78,19 @@ class Admin::Communication::Blocks::HeadingsController < Admin::Communication::B
   end
 
   def about_path
+    # Les headings sont toujours affectés à des localisations
+    l10n = @heading.about
+    # La localisation porte sur un objet, par exemple une University::Person ou un Communication::Website::Post
+    object_edited = l10n.about
     # La formation ou la page concernée
-    path_method = "admin_#{@heading.about.class.base_class.to_s.parameterize.underscore}_path"
+    path_method = "admin_#{object_edited.class.base_class.to_s.parameterize.underscore}_path"
     path_method_options = {
-      id: @heading.about_id,
+      id: object_edited.id,
+      lang: l10n.language,
       website_id: website_id,
       extranet_id: extranet_id,
       journal_id: journal_id
     }
-    path_method_options[:lang] = @heading.about.language.iso_code if @heading.about.respond_to?(:language)
     public_send path_method, **path_method_options
   end
   # TODO /factorize

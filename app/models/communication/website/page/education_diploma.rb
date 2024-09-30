@@ -16,11 +16,10 @@ class Communication::Website::Page::EducationDiploma < Communication::Website::P
     true
   end
 
-  # TODO: Scope .where(language_id: language_id) when diplomas are translatable
   def dependencies
     super +
     [website.config_default_languages] +
-    website.education_diplomas.where(language_id: language_id)
+    website.education_diplomas
   end
 
   def git_path_relative

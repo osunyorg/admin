@@ -6,7 +6,7 @@ is_carousel = block.template.is_a?(Communication::Block::Template::Gallery) && b
 
 <figure <% if is_carousel %>class="splide__slide"<% end %>>
   <%= kamifusen_tag blob, width: 600, class: 'img-fluid mb-1', alt: component.template.try(:alt).blank? ? "" : component.template.alt %>
-  <figcaption>
+  <figcaption class="small">
     <%= sanitize component.template.credit if component.template.try(:credit).present? %>
   </figcaption>
 </figure>

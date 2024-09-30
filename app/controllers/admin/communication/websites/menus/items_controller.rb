@@ -6,6 +6,8 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
   load_and_authorize_resource class: Communication::Website::Menu::Item,
                               through: :menu
 
+  before_action :redirect_to_correct_language, only: :show
+
   def reorder
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
     ids = params[:ids] || []
@@ -32,6 +34,7 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
     return unless request.xhr?
     @kind = params[:kind]
     return if @kind.blank?
+    @collection = Communication::Website::Menu::Item.collection_for(@kind, @website)
   end
 
   def new
@@ -79,6 +82,18 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
   end
 
   protected
+
+  def redirect_to_correct_language
+    if @menu.language != current_language
+      correct_menu = @website.menus.find_by(language_id: current_language.id, identifier: @menu.identifier)
+      if correct_menu.present?
+        redirect_to admin_communication_website_menu_path(correct_menu)
+      else
+        # Here, we should redirect to confirm website localization but menus are not localizable so we just redirect to the index page.
+        redirect_to admin_communication_website_menus_path
+      end
+    end
+  end
 
   def redirect_path(item)
     item.parent.nil?  ? admin_communication_website_menu_path(item.menu)

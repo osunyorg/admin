@@ -7,7 +7,7 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
       params,
       key: :about,
       university: current_university,
-      only: Communication::Website::Permalink.permitted_about_types
+      mandatory_module: Permalinkable
     )
     @permalink = @about.add_redirection(@path)
   end

@@ -43,25 +43,24 @@ class Communication::Block::Template::Project < Communication::Block::Template::
 
   protected
 
-  def selected_projects_all
+  def base_projects
     block.about&.website
                 .projects
-                .for_language(block.language)
-                .published
-                .ordered
-                .limit(projects_quantity)
+                .published_now_in(block.language)
+  end
+
+  def selected_projects_all
+    base_projects.ordered(block.language)
+                 .limit(projects_quantity)
   end
 
   def selected_projects_category
     return [] if category.nil?
     category_ids = [category.id, category.descendants.map(&:id)].flatten
-    university.communication_website_projects.for_language(block.language)
-                                            .joins(:categories)
-                                            .where(categories: { id: category_ids })
-                                            .distinct
-                                            .published
-                                            .ordered
-                                            .limit(projects_quantity)
+
+    base_projects.for_category(category_ids)
+                 .ordered(block.language)
+                 .limit(projects_quantity)
   end
 
   def selected_projects_selection
@@ -76,11 +75,7 @@ class Communication::Block::Template::Project < Communication::Block::Template::
 
   def project(id)
     return if id.blank?
-    block.about&.website
-                .projects
-                .for_language(block.language)
-                .published
-                .find_by(id: id)
+    base_projects.find_by(id: id)
   end
 
 end

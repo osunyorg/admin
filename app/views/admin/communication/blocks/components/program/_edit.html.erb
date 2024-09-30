@@ -1,4 +1,3 @@
-<%# TODO: Traduire les formations %>
 <% programs = @block.template.available_programs %>
 <% if label.present? %>
 <label  class="form-label"
@@ -14,7 +13,7 @@
   <% end %>
   <% programs.each do |program| %>
     <option value="<%= program.id %>">
-      <%= program %>
+      <%= program.to_s_in(block.language) %>
     </option>
   <% end %>
 </select>

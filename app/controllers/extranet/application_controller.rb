@@ -5,17 +5,17 @@ class Extranet::ApplicationController < ApplicationController
                 :authorize_extranet_access!
 
   def breadcrumb
-    add_breadcrumb t('home'), root_path
+    add_breadcrumb t('home'), extranet_root_path
   end
 
   def about
     current_extranet.about || current_university
   end
 
-  private
+  protected
 
   def redirect_if_no_extranet!
-    redirect_to admin_root_path unless current_extranet
+    redirect_to admin_root_path(lang: current_university.default_language) unless current_extranet
   end
 
   def authorize_extranet_access!
@@ -36,6 +36,12 @@ class Extranet::ApplicationController < ApplicationController
 
   def user_is_contact
     current_extranet.feature_contacts? && current_extranet.connected_people.find_by(id: current_user.person&.id).present?
+  end
+
+  def default_url_options
+    options = {}
+    options[:lang] = current_language
+    options
   end
 
 end

@@ -3,7 +3,6 @@
 # Table name: university_roles
 #
 #  id            :uuid             not null, primary key
-#  description   :text
 #  position      :integer
 #  target_type   :string           indexed => [target_id]
 #  created_at    :datetime         not null
@@ -21,27 +20,21 @@
 #  fk_rails_8e52293a38  (university_id => universities.id)
 #
 class University::Role < ApplicationRecord
-  include Sanitizable
-  include WithUniversity
+  include Localizable
   include WithPosition
+  include WithUniversity
 
+  # Can be an Education::School or an Education::Program
   belongs_to :target, polymorphic: true, optional: true
   has_many :involvements, class_name: 'University::Person::Involvement', as: :target, dependent: :destroy, inverse_of: :target
   has_many :people, through: :involvements
 
   accepts_nested_attributes_for :involvements, reject_if: :all_blank, allow_destroy: true
 
-  def to_s
-    "#{description}"
-  end
-
-  def sync_with_git
-    target.sync_with_git if target&.respond_to? :sync_with_git
-  end
-
   protected
 
   def last_ordered_element
     self.class.unscoped.where(university_id: university_id, target: target).ordered.last
   end
+
 end

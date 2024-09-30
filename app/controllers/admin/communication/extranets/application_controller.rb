@@ -18,10 +18,8 @@ class Admin::Communication::Extranets::ApplicationController < Admin::Communicat
   end
 
   def default_url_options
-    options = {}
-    if @extranet.present?
-      options[:extranet_id] = @extranet.id
-    end
+    options = super
+    options[:extranet_id] = @extranet.id if @extranet&.persisted?
     options
   end
 end

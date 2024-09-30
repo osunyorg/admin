@@ -1,5 +1,4 @@
-<% content_for :title, @experience %>
-
-<%= render 'form', experience: @experience %>
+<% content_for :title, @l10n %>
+<%= render 'form', experience: @experience, l10n: @l10n %>
 
 <%= link_to t('delete'), experience_path(@experience), method: :delete, data: { confirm: t('please_confirm') }, class: 'btn btn-danger mt-3' %>

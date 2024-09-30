@@ -8,13 +8,18 @@ module User::WithAuthentication
 
     has_one_time_password(encrypted: true)
 
-    validates :role, presence: true
+    validates :role, :first_name, :last_name, :email, presence: true
 
-    validates_presence_of :first_name, :last_name, :email
-    validates_uniqueness_of :email, scope: :university_id, allow_blank: true, if: :will_save_change_to_email?
-    validates_format_of :email, with: Devise::email_regexp, allow_blank: true, if: :will_save_change_to_email?
-    validates_presence_of :password, if: :password_required?
-    validates_confirmation_of :password, if: :password_required?
+    validates :email, 
+              uniqueness: { scope: :university_id }, 
+              allow_blank: true, 
+              if: :will_save_change_to_email?
+    validates :email, 
+              format: { with: Devise::email_regexp }, 
+              allow_blank: true, 
+              if: :will_save_change_to_email?
+    validates :password, presence: true, if: :password_required?
+    validates :password, confirmation: true, if: :password_required?
     validate :password_complexity
     validates :mobile_phone, format: { with: /\A\+[0-9]+\z/ }, allow_blank: true
 

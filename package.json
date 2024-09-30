@@ -7,6 +7,7 @@
     "jquery-cropper": "^1.0.1",
     "leaflet": "^1.9.4",
     "notyf": "^3.10.0",
+    "select2": "^4.1.0-rc.0",
     "slug": "^5.1.0",
     "sortablejs": "^1.14.0",
     "vue": "^3.2.31",

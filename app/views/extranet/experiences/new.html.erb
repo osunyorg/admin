@@ -1,3 +1,2 @@
-<% content_for :title, @experience %>
-
-<%= render 'form', experience: @experience %>
+<% content_for :title, University::Person::Experience.human_attribute_name('new') %>
+<%= render 'form', experience: @experience, l10n: @l10n %>

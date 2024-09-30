@@ -3,53 +3,39 @@ class Admin::University::Organizations::CategoriesController < Admin::University
                               through: :current_university,
                               through_association: :organization_categories
 
-  include Admin::Categorizable
+  include Admin::ActAsCategories
+  include Admin::HasStaticAction
+  include Admin::Localizable
 
   def index
-    @root_categories = categories.root
+    @root_categories = categories.root.ordered(current_language)
     @categories_class = categories_class
     @feature_nav = 'navigation/admin/university/organizations'
     breadcrumb
   end
 
   def show
-    @organizations = @category.organizations.ordered.page(params[:page])
+    @organizations = @category.organizations.ordered(current_language).page(params[:page])
     breadcrumb
   end
 
-  def in_language
-    language = Language.find_by!(iso_code: params[:lang])
-    translation = @category.find_or_translate!(language)
-    if translation.newly_translated
-      # There's an attribute accessor named "newly_translated" that we set to true
-      # when we just created the translation. We use it to redirect to the form instead of the show.
-      redirect_to [:edit, :admin, translation.becomes(translation.class.base_class)]
-    else
-      redirect_to [:admin, translation.becomes(translation.class.base_class)]
-    end
-  end
-
-  def static
-    @about = @category
-    @website = @category.websites&.first
-    render_as_plain_text
-  end
-
   def new
+    @categories = categories
     breadcrumb
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb t('edit')
   end
 
   def create
-    @category.language_id = current_university.default_language_id
     if @category.save
       redirect_to admin_university_organization_category_path(@category),
-                  notice: t('admin.successfully_created_html', model: @category.to_s)
+                  notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -58,8 +44,9 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   def update
     if @category.update(category_params)
       redirect_to admin_university_organization_category_path(@category),
-                  notice: t('admin.successfully_updated_html', model: @category.to_s)
+                  notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -69,7 +56,7 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   def destroy
     @category.destroy
     redirect_to admin_university_organization_categories_path,
-                notice: t('admin.successfully_destroyed_html', model: @category.to_s)
+                notice: t('admin.successfully_destroyed_html', model: @category.to_s_in(current_language))
   end
 
   protected
@@ -79,7 +66,8 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   end
 
   def categories
-    current_university.organization_categories.ordered
+    current_university.organization_categories
+                      .ordered(current_language)
   end
 
   def breadcrumb
@@ -92,8 +80,10 @@ class Admin::University::Organizations::CategoriesController < Admin::University
   end
 
   def category_params
-    params.require(:university_organization_category)
-          .permit(:name)
-          .merge(university_id: current_university.id)
+    params.require(:university_organization_category).permit(
+      :parent_id,
+      localizations_attributes: [
+        :id, :name, :slug, :language_id
+      ]).merge(university_id: current_university.id)
   end
 end

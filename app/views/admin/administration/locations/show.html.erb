@@ -1,87 +1,98 @@
-<% content_for :title, @location %>
+<% content_for :title, @l10n %>
 
 
 <div class="row">
-  <div class="col-lg-7">
-    <%= osuny_panel Administration::Location.human_attribute_name(:name), small: true do %>
-      <p class="lead mb-1"><%= @location.name %></p>
-      <p><%= @location.summary %></p>
+  <div class="col-lg-3">
+    <%= render 'admin/application/featured_image/show', about: @l10n, small: true %>
+  </div>
+  <div class="offset-lg-1 col-lg-8">
+    <%= osuny_panel t('admin.summary.label'), small: true do %>
+      <p class="lead mb-1"><%= @l10n.summary %></p>
+    <% end %>
+    <div class="mb-5">
+      <div class="row">
+        <div class="col-lg-6">
+          <%= osuny_label Administration::Location.human_attribute_name('address') %>
+          <p>
+            <% if @l10n.address_name.present? %>
+              <%= @l10n.address_name %><br>
+            <% end %>
+            <% if @location.address.present? %>
+              <%= @location.address %><br>
+            <% end %>
+            <% if @l10n.address_additional.present? %>
+              <%= @l10n.address_additional %><br>
+            <% end %>
+            <%= @location.zipcode %> <%= @location.city %> <%= @location.country %>
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <% if @location.phone.present? %>
+            <%= osuny_label Administration::Location.human_attribute_name('phone') %>
+            <p><%= @location.phone %></p>
+          <% end %>
+          <% if @l10n.url.present? %>
+            <%= osuny_label Administration::Location::Localization.human_attribute_name('url') %>
+            <p><%= link_to @l10n.url, @l10n.url, target: :_blank %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% if @schools.any? %>
+      <%= osuny_panel Administration::Location.human_attribute_name('schools'), small: true do %>
+        <div class="row g-2">
+          <% @schools.each do |school| %>
+            <div>
+              <div class="card card--horizontal">
+                <%= osuny_thumbnail_localized school %>
+                <div class="card-body">
+                  <%= osuny_link_localized school, [:admin, school], classes: 'stretched-link' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+    <% if @programs.any? %>
+      <%= osuny_panel Administration::Location.human_attribute_name('programs'), small: true do %>
+        <div class="row g-2">
+          <% @programs.each do |program| %>
+            <div>
+              <div class="card card--horizontal">
+                <%= osuny_thumbnail_localized program %>
+                <div class="card-body">
+                  <%= osuny_link_localized program, [:admin, program], classes: 'stretched-link' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+    <% if @websites.any? %>
+      <%= osuny_panel Administration::Location.human_attribute_name('websites'), small: true do %>
+        <div class="row g-2">
+          <% @websites.each do |website| %>
+            <div>
+              <div class="card card--horizontal">
+                <%= osuny_thumbnail_localized website %>
+                <div class="card-body">
+                  <%= osuny_link_localized website, [:admin, website], classes: 'stretched-link' %>
+                </div>
+                <div class="card-footer small text-muted">
+                  <%= website.url %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
-  <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/featured_image/show', about: @location, small: true %>
-  </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-4">
-    <%= osuny_label Administration::Location.human_attribute_name('address') %>
-    <p>
-      <% if @location.address_name.present? %>
-        <%= @location.address_name %><br>
-      <% end %>
-      <% if @location.address.present? %>
-        <%= @location.address %><br>
-      <% end %>
-      <% if @location.address_additional.present? %>
-        <%= @location.address_additional %><br>
-      <% end %>
-      <%= @location.zipcode %> <%= @location.city %> <%= @location.country %>
-    </p>
-  </div>
-  <% if @location.phone.present? %>
-    <div class="col-lg-4">
-      <%= osuny_label Administration::Location.human_attribute_name('phone') %>
-      <p><%= @location.phone %></p>
-    </div>
-  <% end %>
-  <% if @location.url.present? %>
-    <div class="col-lg-4">
-      <%= osuny_label Administration::Location.human_attribute_name('url') %>
-      <p><%= link_to @location.url, @location.url, target: :_blank %></p>
-    </div>
-  <% end %>
-</div>
-
-<div class="row mt-5">
-  <% if @location.schools.any? %>
-    <div class="col-lg-4">
-      <%= osuny_panel Administration::Location.human_attribute_name('schools') do %>
-        <ul class="list-unstyled">
-          <% @location.schools.ordered.each do |school| %>
-            <li><%= link_to_if can?(:read, school), school, [:admin, school] %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% if @location.programs.any? %>
-    <div class="col-lg-4">
-      <%= osuny_panel Administration::Location.human_attribute_name('programs') do %>
-        <ul class="list-unstyled">
-          <% @location.programs.ordered.each do |program| %>
-            <li><%= link_to_if can?(:read, program), program, [:admin, program] %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% if @location.websites.any? %>
-    <div class="col-lg-4">
-      <%= osuny_panel Administration::Location.human_attribute_name('websites') do %>
-        <ul class="list-unstyled">
-          <% @location.websites.each do |website| %>
-            <li><%= link_to website, [:admin, website] %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-
-<%= render 'admin/communication/blocks/content/editor', about: @location %>
+<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
 
 <%= render 'admin/application/connections/list', about: @location %>
 

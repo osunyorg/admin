@@ -1,21 +1,25 @@
-<% 
+<%
+add_link_on_last ||= false
 if @website
-  webpages = @about.hugo_ancestors_and_self(@website)
+  localizations = about.hugo_ancestors_and_self(@website)
 %>
 breadcrumbs:
 <%
-webpages.each do |webpage| 
-  title = webpage.to_s
-  # Les pages (Communication::Website::Page) ont une gymnastique un peu spéciale, 
+localizations.each do |l10n|
+  # Les pages (Communication::Website::Page::Localization) ont une gymnastique un peu spéciale,
   # parce qu'il faut prendre le titre dédié au breadcrumb.
-  title = webpage.best_title if webpage.respond_to?(:best_title)
-  hugo = webpage.hugo(@website)
+  if l10n.respond_to?(:best_breadcrumb_title)
+    title = l10n.best_breadcrumb_title
+  else
+    title = l10n.to_s
+  end
+  hugo = l10n.hugo(@website)
   permalink = hugo.permalink
-  last = webpage == webpages.last
+  last = l10n == localizations.last
 %>
   - title: >-
       <%= title %>
-<% unless last %>
+<% if !last || add_link_on_last %>
     path: "<%= permalink %>"
 <% end %>
 <% end %>

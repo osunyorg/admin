@@ -60,8 +60,10 @@ class Communication::Website::Permalink < ApplicationRecord
     false
   end
 
+  # Should be defined in subclasses
+  # Not protected because it is used in the website config "DefaultLanguages"
   def self.pattern_in_website(website, language)
-    raise NotImplementedError
+    raise NoMethodError
   end
 
   def self.clean_path(path)
@@ -77,19 +79,17 @@ class Communication::Website::Permalink < ApplicationRecord
     nil
   end
 
-  def self.permitted_about_types
-    ApplicationRecord.model_names_with_concern(Permalinkable)
-  end
-
   # Méthode pour accéder facilement à la page spéciale,
   # qui s'appuie sur le `special_page_type` de chaque Permalink
-  def self.special_page(website, language)
-    website.special_page(self.special_page_type, language: language)
+  def self.special_page(website)
+    website.special_page(self.special_page_type)
   end
 
-  # Méthode d'utilité pour récupérer le slug
-  def self.slug_with_ancestors(website, language)
-    self.special_page(website, language).slug_with_ancestors
+  # Méthode d'utilité pour récupérer le slug d'une page spéciale avec ses ancêtres
+  def self.special_page_path(website, language)
+    page_l10n = self.special_page(website).localization_for(language)
+    return '' if page_l10n.nil?
+    '/' + page_l10n.slug_with_ancestors_slugs
   end
 
   # Doit être surchargé dans les classes par type, comme `Communication::Website::Permalink::Post`
@@ -121,8 +121,8 @@ class Communication::Website::Permalink < ApplicationRecord
     end
   end
 
-  def special_page(website, language)
-    self.class.special_page(website, language)
+  def special_page(website)
+    self.class.special_page(website)
   end
 
   def to_s
@@ -133,10 +133,9 @@ class Communication::Website::Permalink < ApplicationRecord
 
   # Can be overwritten (Page for example)
   def published_path
-    # TODO I18n doit prendre la langue du about
     language = about.respond_to?(:language) ? about.language : website.default_language
     p = ""
-    p += "/#{language.iso_code}" if website.languages.many?
+    p += "/#{language.iso_code}" if website.active_languages.many?
     p += pattern
     substitutions.each do |key, value|
       p.gsub! ":#{key}", "#{value}"

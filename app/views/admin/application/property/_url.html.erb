@@ -1,0 +1,26 @@
+<%
+value = object.send(property).to_s
+if object.respond_to? "best_#{property}"
+  value = object.public_send("best_#{property}").to_s
+  source = object.public_send("best_#{property}_source")
+end
+is_blank = value.blank?
+hide_blank ||= false
+title = object.class.human_attribute_name(property)
+if source
+  title += ' <span class="small">'
+  title += t 'admin.inheritance.sentence_html', link: link_to(source, [:admin, source])
+  title += '</span>'
+end
+%>
+<% unless hide_blank && is_blank %>
+  <%= osuny_label title %>
+  <p>
+    <% if is_blank %>
+      <i class="<%= Icon::WARNING %> text-danger"></i>
+      <%= t 'properties.text.missing' %>
+    <% else %>
+      <%= link_to value, value, target: :_blank %>
+    <% end %>
+  </p>
+<% end %>

@@ -1,0 +1,84 @@
+
+<% content_for :title, current_user %>
+
+<%= simple_form_for(current_user, url: admin_profile_path) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.input :email, required: true %>
+      <%= f.input :first_name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "first_name" } %>
+      <%= f.input :last_name,
+                  required: true,
+                  input_html: { autocomplete: "last_name" } %>
+      <%= render 'admin/application/l10n/form', f: f %>
+    </div>
+    <div class="col-lg-6">
+
+      <%= f.input :mobile_phone %>
+      <%= f.input :picture,
+                  as: :single_deletable_file,
+                  input_html: { accept: default_images_formats_accepted },
+                  preview: 200,
+                  resize: 1,
+                  direct_upload: true %>
+      <% if current_user.pending_reconfirmation? %>
+        <p><%= t(".currently_waiting_confirmation_for_email", email: resource.unconfirmed_email) %></p>
+      <% end %>
+    </div>
+  </div>
+
+
+  <h3 class="mt-5 mb-4"><%= t("devise.passwords.edit.new") %></h3>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.input :current_password,
+                  as: :password,
+                  input_html: { autocomplete: "current-password" } %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.input :password,
+                  as: :password_with_hints,
+                  allow_password_uncloaking: true,
+                  validators: {
+                    length: Devise.password_length.first,
+                    uppercase_char: true,
+                    lowercase_char: true,
+                    numeric_char: true,
+                    special_char: Rails.application.config.allowed_special_chars
+                  },
+                  label: t('devise.passwords.edit.new_password'),
+                  required: false,
+                  input_html: { autocomplete: "new-password" } %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.input :password_confirmation,
+                  as: :password_with_sync,
+                  allow_password_uncloaking: true,
+                  compare_with_field: :password,
+                  input_html: { autocomplete: "new-password" } %>
+    </div>
+  </div>
+
+  <% content_for :action_bar_right do %>
+    <%= submit f %>
+  <% end %>
+<% end %>
+
+<h3 class="mt-5 mb-4"><%= t("devise.registrations.edit.cancel_my_account") %></h3>
+
+<p>
+  <%= t("devise.registrations.edit.unhappy") %>
+  <%= link_to t("devise.registrations.edit.cancel_my_account"),
+              admin_profile_path,
+              data: { confirm: t("devise.registrations.edit.are_you_sure") },
+              method: :delete,
+              class: 'text-danger' %>
+</p>

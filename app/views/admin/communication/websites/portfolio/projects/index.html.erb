@@ -1,14 +1,15 @@
 <% content_for :title, Communication::Website::Portfolio::Project.model_name.human(count: 2) %>
 
-<p>
-  <%= @projects.total_count %>
-  <%= Communication::Website::Portfolio::Project.model_name.human(count: @projects.total_count).downcase %>
-</p>
-<%= render 'filters', current_path: admin_communication_website_portfolio_projects_path, filters: @filters %>
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @projects.total_count %>
+    <%= Communication::Website::Portfolio::Project.model_name.human(count: @projects.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_communication_website_portfolio_projects_path, website: @website %>
+</div>
+
 <%= render 'admin/communication/websites/portfolio/projects/list', projects: @projects %>
 <%= paginate @projects %>
-
-<%= render 'admin/communication/websites/language_switcher' %>
 
 <% content_for :action_bar_right do %>
   <%= create_link Communication::Website::Portfolio::Project %>

@@ -11,6 +11,7 @@ fr:
         is_really_a_university: Réellement une université
         identifier: Identifiant
         invoice_date: Date de contribution
+        languages: Langues
         logo: Logo
         name: Nom
         private: Etablissement privé
@@ -29,32 +30,37 @@ fr:
         token: Jeton secret
       university/organization:
         address: Adresse
-        address_additional: Complément d'adresse
-        address_name: Nom de l'adresse
         categories: Catégories
         city: Ville
         country: Pays
         digital: Coordonnées numériques
         email: Email
-        kind: Type
         geolocation: Coordonnées géographiques
+        kind: Type
         legal: Informations légales
+        map: Carte
+        phone: Téléphone
+        physical: Coordonnées physiques
+        siren: Numéro de SIREN
+        zipcode: Code postal
+      university/organization/category:
+        children: Catégories enfantes
+        parent: Catégorie parente
+      university/organization/category/localization:
+        language: Langue
+        name: Nom
+        slug: Slug
+      university/organization/localization:
+        address_additional: Complément d'adresse
+        address_name: Nom de l'adresse
         linkedin: LinkedIn
         logo: Logo sur fond clair (par défaut)
         logo_on_dark_background: Logo sur fond sombre (optionnel)
         long_name: Nom complet
-        map: Carte
         name: Nom
-        phone: Téléphone
-        physical: Coordonnées physiques
-        siren: Numéro de SIREN
         text: Texte
         twitter: Twitter
         url: Site Web
-        zipcode: Code postal
-      university/organization/category:
-        language: Langue
-        name: Nom
       university/person:
         abilities: Responsabilités
         address: Adresse
@@ -62,7 +68,6 @@ fr:
         administration: Personnel administratif
         alumnus: Alumnus
         author: Auteur·rice
-        biography: Biographie
         birthdate: Anniversaire
         categories: Catégories
         city: Ville
@@ -73,7 +78,6 @@ fr:
         email: Email
         email_visibility: Visibilité de l'email
         essentials: Informations essentielles
-        first_name: Prénom
         gender: Genre
         genders:
           female: Féminin
@@ -88,12 +92,8 @@ fr:
         is_author: Auteur·rice
         is_researcher: Chercheur·e
         is_teacher: Enseignant·e
-        last_name: Nom de famille
-        linkedin: LinkedIn (URL)
         linkedin_visibility: Visibilité de l'URL LinkedIn
-        mastodon: Mastodon (nom d'utilisateur)
         mastodon_visibility: Visibilité du nom d'utilisateur Mastodon
-        name: Nom
         phone_mobile: Téléphone mobile
         phone_mobile_visibility: Visibilité du téléphone mobile
         phone_personal: Téléphone personnel
@@ -101,23 +101,23 @@ fr:
         phone_professional: Téléphone professionnel
         phone_professional_visibility: Visibilité du téléphone professionnel
         picture: Photo de profil
-        picture_credit: Crédit
         research_journal_papers: Papiers
         research_laboratories: Laboratoires de recherche
         researcher: Chercheur·e
         roles: Rôles
-        slug: Slug
         socials: Réseaux sociaux
         teacher: Enseignant·e
         tenure: Titulaire ?
-        twitter: Twitter (nom d'utilisateur)
         twitter_visibility: Visibilité du nom d'utilisateur Twitter
-        url: Site web
         user: Utilisateur
         zipcode: Code postal
       university/person/category:
+        children: Catégories enfantes
+        parent: Catégorie parente
+      university/person/category/localization:
         language: Langue
         name: Nom
+        slug: Slug
       university/person/experience:
         description: Description
         edit: Modifier l'expérience
@@ -127,12 +127,25 @@ fr:
         organization_name: Organisation
         to_year: Année de fin
       university/person/involvement:
-        description: Mission (dans ce contexte)
         person: Personne
         target_id: ''
+      university/person/involvement/localization:
+        description: Mission (dans ce contexte)
+      university/person/localization:
+        biography: Biographie
+        first_name: Prénom
+        last_name: Nom de famille
+        linkedin: LinkedIn (URL)
+        mastodon: Mastodon (URL)
+        name: Nom
+        picture_credit: Crédit
+        slug: Slug
+        twitter: Twitter (nom d'utilisateur)
+        url: Site web
       university/role:
-        description: Description
         people: Personnes
+      university/role/localization:
+        description: Description du rôle
     errors:
       models:
         university:
@@ -181,6 +194,7 @@ fr:
     hints:
       university:
         is_really_a_university: Décocher cette case masque les 5 royaumes.
+        languages: "Ces langues sont actuellement utilisées sans les sites web : %{used_languages}"
         sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
         sso_button_label: "Par défaut : Se connecter en SSO"
       university_organization:
@@ -207,7 +221,7 @@ fr:
         tenure: "À différencier d'une personne vacataire."
         twitter: "Exemple : osuny"
       university_person_experience:
-        organization_name: "Choisissez l'organisation si elle existe, en la cherchant par nom ou SIREN.<br>Si elle n'existe pas encore, créez-là en entrant simplement son nom."
+        organization_name: "Choisissez l'organisation si elle existe, en la cherchant par nom ou SIREN. Si elle n'existe pas encore, créez-là en entrant simplement son nom."
         description: "Ex: Chargée de projet, Assistant communication, Journaliste..."
         from_year: "En poste depuis..."
         to_year: "Si vous êtes toujours à ce poste, laissez vide"
@@ -227,7 +241,7 @@ fr:
       token_display_notice: Assurez-vous de stocker votre jeton secret de manière sécurisée. Vous ne pourrez pas le revoir !
       token_successfully_regenerated: Le jeton a bien été regénéré.
     description:
-      text: Une université est une institution d'enseignement supérieur, d'étude et de recherche, constituée par la réunion de divers établissements nommés suivant les traditions “collèges”, “facultés”, “instituts”, “départements”, “centres”, “sections”, “unités” ou écoles spécifiques, mais aussi bibliothèque ou atelier, médiathèque ou musée, etc. formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte.
+      text_html: Une université est une institution d'enseignement supérieur, d'étude et de recherche, constituée par la réunion de divers établissements nommés suivant les traditions <i>collèges</i>, <i>facultés</i>, <i>instituts</i>, <i>départements</i>, <i>centres</i>, <i>sections</i>, <i>unités</i> ou écoles spécifiques, mais aussi bibliothèque ou atelier, médiathèque ou musée, etc. formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte.
       source: Wikipédia
       parts:
         person:
@@ -257,6 +271,19 @@ fr:
         import_btn: Importer des expériences
         import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
         title: Imports d'expériences
+      facets:
+        administrator:
+          responsabilities: Responsabilités
+          responsabilities_of: Responsabilités de %{name}
+        author:
+          posts: Actualités
+          posts_of: Actualités de %{name}
+        researcher:
+          publications: Publications
+          publications_of: Publications de %{name}
+        teacher:
+          programs: Enseignements
+          programs_of: Enseignements de %{name}
       import_btn: Importer des personnes
       import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
       personal_data_visibilities:

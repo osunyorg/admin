@@ -9,7 +9,9 @@ namespace :communication do
       get :security
       get :static
       get :production
-      scope 'git-analysis' do 
+      get :confirm_localization
+      post :do_confirm_localization
+      scope 'git-analysis' do
         get '' => 'websites/git_analysis#index', as: :git_analysis
         post '' => 'websites/git_analysis#launch'
       end
@@ -24,7 +26,7 @@ namespace :communication do
       end
     end
     resources :permalinks, controller: 'websites/permalinks', only: [:create, :destroy]
-    resources :pages, controller: 'websites/pages', path: '/:lang/pages' do
+    resources :pages, controller: 'websites/pages' do
       collection do
         post :reorder
         get 'list' => 'websites/pages#index_list'
@@ -42,7 +44,7 @@ namespace :communication do
       end
     end
     namespace :post, path: '' do
-      resources :categories, controller: '/admin/communication/websites/posts/categories', path: '/:lang/posts/categories' do
+      resources :categories, controller: '/admin/communication/websites/posts/categories' do
         collection do
           post :reorder
         end
@@ -51,9 +53,9 @@ namespace :communication do
           get :static
         end
       end
-      resources :authors, controller: '/admin/communication/websites/posts/authors', path: '/:lang/authors', only: [:index, :show]
+      resources :authors, controller: '/admin/communication/websites/posts/authors', only: [:index, :show]
     end
-    resources :posts, controller: 'websites/posts', path: '/:lang/posts' do
+    resources :posts, controller: 'websites/posts' do
       collection do
         resources :curations, as: :post_curations, controller: 'websites/posts/curations', only: [:new, :create]
         post :publish_batch
@@ -65,7 +67,7 @@ namespace :communication do
         post :publish
       end
     end
-    namespace :agenda, path: '/:lang/agenda' do
+    namespace :agenda do
       resources :events, controller: '/admin/communication/websites/agenda/events' do
         member do
           get :static
@@ -84,7 +86,7 @@ namespace :communication do
       end
       root to: '/admin/communication/websites/agenda/events#index'
     end
-    namespace :portfolio, path: '/:lang/portfolio' do
+    namespace :portfolio do
       resources :projects, controller: '/admin/communication/websites/portfolio/projects' do
         member do
           get :static
@@ -101,8 +103,9 @@ namespace :communication do
           get :static
         end
       end
+      root to: '/admin/communication/websites/portfolio/projects#index'
     end
-    resources :menus, controller: 'websites/menus', path: '/:lang/menus' do
+    resources :menus, controller: 'websites/menus' do
       member do
         get :static
       end
@@ -116,7 +119,6 @@ namespace :communication do
         end
       end
     end
-    resource :localization, controller: 'websites/localizations', path: '/:lang/localization', only: [:show, :update]
   end
   scope "/contents/:about_type/:about_id", as: :contents, controller: 'contents' do
     get :write
@@ -161,7 +163,7 @@ namespace :communication do
       end
     end
     # Automatic routes based on feature names
-    get 'library' => 'extranets/documents#index', as: :library
+    get 'library' => 'extranets/documents#library', as: :library
     resources :documents, controller: 'extranets/documents' do
       collection do
         resources :categories, controller: 'extranets/documents/categories', as: 'document_categories'

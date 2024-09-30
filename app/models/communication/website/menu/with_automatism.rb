@@ -24,7 +24,7 @@ module Communication::Website::Menu::WithAutomatism
   end
 
   def create_items
-    home = website.pages.where(language_id: language_id).root.first
+    home = website.pages.root.first
     create_items_for_children_of(home) if home
   end
 
@@ -38,7 +38,7 @@ module Communication::Website::Menu::WithAutomatism
   def create_item_for(page, parent_item = nil)
     item = items.create kind: :page,
                         about: page,
-                        title: page.title,
+                        title: page.to_s_in(language),
                         position: page.position,
                         website: website,
                         university: university,

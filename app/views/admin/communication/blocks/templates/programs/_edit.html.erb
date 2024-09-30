@@ -2,7 +2,7 @@
 
 <div class="mb-5">
   <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-  <%= block_component_edit block, :option_image, label: Education::Program.human_attribute_name(:image) %>
+  <%= block_component_edit block, :option_image, label: Education::Program::Localization.human_attribute_name(:featured_image) %>
   <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
   <%= block_component_edit block, :option_diploma, label: Education::Program.human_attribute_name(:diploma) %>
 </div>
@@ -11,7 +11,7 @@
 <draggable :list="data.elements" handle=".dragHandle" class="mb-3">
   <div v-for="(element, index) in data.elements" class="d-flex draggable-item">
     <div>
-      <a class="btn ps-0 pt-0 dragHandle" title="Drag and drop">
+      <a class="btn ps-0 pt-0 dragHandle" title="<%= t('admin.communication.block.drag_and_drop') %>">
         <i class="<%= Icon::DRAG %> handle"></i>
       </a>
     </div>

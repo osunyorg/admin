@@ -2,47 +2,49 @@
 #
 # Table name: communication_website_localizations
 #
-#  id                       :uuid             not null, primary key
-#  name                     :string
-#  social_email             :string
-#  social_facebook          :string
-#  social_github            :string
-#  social_instagram         :string
-#  social_linkedin          :string
-#  social_mastodon          :string
-#  social_peertube          :string
-#  social_tiktok            :string
-#  social_vimeo             :string
-#  social_x                 :string
-#  social_youtube           :string
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
-#  university_id            :uuid             not null, indexed
+#  id               :uuid             not null, primary key
+#  name             :string
+#  published        :boolean          default(FALSE)
+#  published_at     :datetime
+#  social_email     :string
+#  social_facebook  :string
+#  social_github    :string
+#  social_instagram :string
+#  social_linkedin  :string
+#  social_mastodon  :string
+#  social_peertube  :string
+#  social_tiktok    :string
+#  social_vimeo     :string
+#  social_x         :string
+#  social_youtube   :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  about_id         :uuid             not null, indexed
+#  language_id      :uuid             not null, indexed
+#  university_id    :uuid             not null, indexed
 #
 # Indexes
 #
-#  idx_on_communication_website_id_ed4630e334                  (communication_website_id)
+#  index_communication_website_localizations_on_about_id       (about_id)
 #  index_communication_website_localizations_on_language_id    (language_id)
 #  index_communication_website_localizations_on_university_id  (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_2b920b0a3a  (language_id => languages.id)
-#  fk_rails_431797c26c  (communication_website_id => communication_websites.id)
+#  fk_rails_431797c26c  (about_id => communication_websites.id)
 #  fk_rails_fc42676b8b  (university_id => universities.id)
 #
 class Communication::Website::Localization < ApplicationRecord
-  include AsDirectObject
-  include Sanitizable
+  include AsLocalization
+  include Initials
+  include WithPublication
   include WithUniversity
 
-  belongs_to :language
+  alias :website :about
 
-  validates :language_id, uniqueness: { scope: :communication_website_id }
-
-  before_validation :set_university_id, on: :create
+  after_create_commit :create_existing_menus_in_language
+  after_save :destroy_website_obsolete_git_files, if: :should_clean_website_on_git?
 
   # Localization is not directly exportable to git
   # Whereas the languages config in the dependencies is exportable to git
@@ -51,16 +53,31 @@ class Communication::Website::Localization < ApplicationRecord
   end
 
   def dependencies
+    # 1 single file for all the languages
     [website.config_default_languages]
   end
 
-  def computed_name
-    name.present? ? "#{name}" : website.to_s
+  def to_s
+    name
   end
 
-  private
+  protected
 
-  def set_university_id
-    self.university_id = website.university_id
+  def create_existing_menus_in_language
+    menus = website.menus.for_language_id(website.default_language_id)
+    menus.each do |menu|
+      new_menu = menu.dup
+      new_menu.language_id = language_id
+      new_menu.save
+    end
+  end
+
+  def should_clean_website_on_git?
+    # Clean website if l10n was unpublished
+    saved_change_to_published? && published_before_last_save
+  end
+
+  def destroy_website_obsolete_git_files
+    website.destroy_obsolete_git_files
   end
 end
