@@ -15,6 +15,7 @@ namespace :education do
         post :reorder
       end
     end
+    resources :teachers, controller: 'programs/teachers', only: :destroy
     collection do
       resources :categories, controller: 'programs/categories', as: 'program_categories' do
         collection do
