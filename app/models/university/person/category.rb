@@ -26,12 +26,6 @@ class University::Person::Category < ApplicationRecord
   include WithTree
   include WithUniversity
 
-  # TODO L10N : remove after migrations
-  has_many  :permalinks,
-            class_name: "Communication::Website::Permalink",
-            as: :about,
-            dependent: :destroy
-
   belongs_to :parent,
              class_name: 'University::Person::Category',
              optional: true

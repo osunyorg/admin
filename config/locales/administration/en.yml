@@ -26,6 +26,7 @@ en:
       administration/location/localization:
         address_additional: Additional address
         address_name: Address name
+        featured_image: Featured image
         name: Name
         url: Website
       administration/qualiopi/criterion:
@@ -54,7 +55,7 @@ en:
       parts:
         alumnus:
           description: Presentation of the students who have studied in the various courses.
-        location: 
+        location:
           description: Management of the various (physical) education and research sites
         qualiopi:
           description: Help in checking the conformity of the training offer with the Qualiopi standard

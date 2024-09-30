@@ -17,7 +17,6 @@ class SetAboutFromMenuItemKind < ActiveRecord::Migration[7.0]
     kinds = mapping.keys.map(&:to_i)
     Communication::Website::Menu::Item.includes(:website).where(kind: kinds).find_each do |menu_item|
       page_class = mapping[menu_item.kind_before_type_cast.to_s]
-      # TODO L10N : To adjust
       about = menu_item.website.special_page(page_class)
       menu_item.update(about: about, kind: :page)
     end
