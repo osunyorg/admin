@@ -17,6 +17,12 @@ administrator_involvements = program.involvements_through_roles
             full_width: false,
             toc_offcanvas: true,
             toc_present: true %>
+<%= render 'admin/application/categories/static',
+            about: program,
+            l10n: @l10n,
+            categories: current_university.program_categories,
+            key: :programs_categories %>
+
 <% if @l10n.downloadable_summary.attached? %>
 downloadable_summary: <%= @l10n.downloadable_summary.blob_id %>
 <% end %>
