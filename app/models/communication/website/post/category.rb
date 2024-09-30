@@ -35,6 +35,8 @@ class Communication::Website::Post::Category < ApplicationRecord
   include WithTree
   include WithUniversity
 
+  has_one_attached_deletable :featured_image # TODO L10N remove
+
   belongs_to              :parent,
                           class_name: 'Communication::Website::Post::Category',
                           optional: true
