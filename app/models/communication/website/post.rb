@@ -24,10 +24,10 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
+  include Duplicable
   include Filterable
   include Sanitizable
   include Localizable
-  include WithDuplication
   include WithMenuItemTarget
   include WithUniversity
 
