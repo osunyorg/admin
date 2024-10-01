@@ -28,13 +28,13 @@
                     source: '#education_diploma_localizations_attributes_0_name' %>
       </div>
     </div>
-    <%= f.input :certification, 
+    <%= f.input :certification,
                 as: :radio_buttons,
                 collection: Education::Diploma.certifications << '',
                 item_wrapper_class: 'd-inline-block mb-5 me-5',
                 label_method: Proc.new { |certification|
                   if certification.empty?
-                    raw "<span class=\"ms-2\">#{t('admin.education.diplomas.certification.none')}</span>"
+                    content_tag :span, t('admin.education.diplomas.certification.none'), class: "ms-2"
                   else
                     image_tag "education/diplomas/certifications/#{certification}.svg",
                               alt: certification,

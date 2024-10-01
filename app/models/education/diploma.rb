@@ -19,14 +19,12 @@
 #  fk_rails_6cb2e9fa90  (university_id => universities.id)
 #
 class Education::Diploma < ApplicationRecord
+  CERTIFICATIONS_DIRECTORY = "app/assets/images/education/diplomas/certifications"
+
   include AsIndirectObject
   include Sanitizable
   include Localizable
   include WithUniversity
-
-  has_many :programs, dependent: :nullify
-
-  scope :ordered, -> (language = nil) { order(:level) }
 
   enum level: {
     not_applicable: 0,
@@ -41,12 +39,21 @@ class Education::Diploma < ApplicationRecord
     doctor: 800
   }
 
-  CERTIFICATIONS_DIRECTORY = "app/assets/images/education/diplomas/certifications"
+  has_many :programs, dependent: :nullify
+
+  validates :certification, inclusion: { in: -> { certifications } }, allow_blank: true
+
+  scope :ordered, -> (language = nil) { order(:level) }
 
   def self.certifications
-    Dir.children(CERTIFICATIONS_DIRECTORY).map do |filename| 
+    Dir.children(CERTIFICATIONS_DIRECTORY).map do |filename|
       filename.remove('.svg')
     end
+  end
+
+  def certification_icon_path
+    return unless certification.present?
+    "education/diplomas/certifications/#{certification}.svg"
   end
 
   def dependencies
