@@ -7,7 +7,7 @@ language = @l10n.language
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: paper,
-            l10n: @l10n, 
+            l10n: @l10n,
             full_width: false,
             toc_offcanvas: false %>
 <% if paper.kind %>
@@ -15,7 +15,7 @@ paper_kind: "<%= prepare_text_for_static paper.kind %>"
 <% end %>
 <% if @l10n.volume_l10n %>
 volumes:
-  - "<%= @l10n.volume_l10n.current_permalink_in_website(@website)&.path %>"
+  - "<%= @l10n.volume_l10n.relative_path.delete_prefix('/') %>"
 <% end %>
 weight: <%= paper.position %>
 date: "<%= @l10n.published_at&.to_date&.iso8601 %>"
