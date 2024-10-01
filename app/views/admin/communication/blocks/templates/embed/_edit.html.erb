@@ -1,11 +1,13 @@
 <div class="row pure__row--small">
-  <div class="col-md-6">
+  <div class="col-xxl-8">
     <p class="text-danger lead"><%= t '.warning' %></p>
   </div>
 </div>
 <div class="mb-4">
   <%= block_component_edit block, :code %>
 </div>
-<%= block_component_edit block, :transcription,
-      label: t('admin.communication.blocks.components.text.transcription.label'),
-      placeholder: t('admin.communication.blocks.components.text.transcription.placeholder') %>
+<%= block_component_edit  block, 
+                          :transcription,
+                          label: t('admin.communication.blocks.components.text.transcription.label'),
+                          placeholder: t('admin.communication.blocks.components.text.transcription.placeholder'), 
+                          summernote_config: 'nothing' %>

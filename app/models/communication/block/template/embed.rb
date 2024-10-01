@@ -1,7 +1,7 @@
 class Communication::Block::Template::Embed < Communication::Block::Template::Base
 
   has_component :code, :code
-  has_component :transcription, :text
+  has_component :transcription, :rich_text
 
   protected
 

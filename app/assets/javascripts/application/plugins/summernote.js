@@ -33,6 +33,13 @@ window.summernoteManager = {
 
     setConfigs: function () {
         'use strict';
+        this.setConfig('nothing',
+            {
+                toolbar: []
+            },
+            [],
+            []);
+
         this.setConfig('link',
             {
                 toolbar: [
