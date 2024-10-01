@@ -30,7 +30,7 @@ module Duplicable
   def duplicate_featured_image(from, to)
     return unless from.respond_to?(:featured_image) && from.featured_image.attached?
     to.featured_image.attach(
-      io: URI(from.featured_image.url).open,
+      io: URI.parse(from.featured_image.url).open,
       filename: from.featured_image.filename.to_s,
       content_type: from.featured_image.content_type
     )
