@@ -8,7 +8,26 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    
+    special_page_types = [
+      "Communication::Website::Page::AdministrationLocation",
+      "Communication::Website::Page::Administrator",
+      "Communication::Website::Page::CommunicationAgendaArchive",
+      "Communication::Website::Page::CommunicationAgenda",
+      "Communication::Website::Page::CommunicationPortfolio",
+      "Communication::Website::Page::EducationDiploma",
+      "Communication::Website::Page::EducationProgram",
+      "Communication::Website::Page::ResearchPaper",
+      "Communication::Website::Page::ResearchPublication",
+      "Communication::Website::Page::ResearchVolume",
+      "Communication::Website::Page::Researcher",
+      "Communication::Website::Page::Teacher"
+    ]
+
+    # On supprime toutes les pages spéciales potentiellement non nécessaires créées après migration
+    Communication::Website::Page.where(type: special_page_types).where('created_at > ?', 2.days.ago).each do |special_page|
+      next unless special_page.is_necessary_for_website?
+      special_page.destroy
+    end
   end
 
   namespace :websites do
