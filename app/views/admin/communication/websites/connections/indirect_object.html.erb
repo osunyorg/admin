@@ -15,9 +15,9 @@
       <% @indirect_objects.each do |indirect_object| %>
         <tr>
           <td><%= render 'admin/communication/websites/connections/indirect_object',
-                          object: indirect_object, 
+                          object: indirect_object,
                           type: @indirect_object_type %></td>
-          <td><%= indirect_object&.language %>
+          <td><%= indirect_object.try(:language) %>
           <td><%= @connections.where(indirect_object_type: @indirect_object_type, indirect_object_id: indirect_object.id).count %></td>
         </tr>
       <% end %>
