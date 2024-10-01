@@ -138,7 +138,7 @@ fr:
       label: Description pour les moteurs de recherche (meta)
     pending_tasks:
       tasks: Tâches en cours de traitement
-      text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites internets."
+      text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."
       what_is_it: Qu'est-ce que c'est ?
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     seo: SEO
@@ -210,7 +210,7 @@ fr:
       code_has_been_sent: "Un code d'authentification vient de vous être envoyé."
       enter_code_direct_otp_email_html: "Pour assurer la sécurité de votre connexion, nous vous envoyons un code à 6 chiffres, à usage unique, sur votre mail %{mail}. Entrez ce code ci-dessous."
       enter_code_direct_otp_mobile_phone_html: "Pour assurer la sécurité de votre connexion, nous vous envoyons un code à 6 chiffres, à usage unique, sur votre mobile %{phone}. Entrez ce code ci-dessous."
-      enter_code_totp: "Entrez le code de votre application d'authentification"
+      enter_code_totp: "Pour assurer la sécurité de votre connexion, nous nous appuyons sur votre application d'authentification. Entrez ci-dessous le code à usage unique qu'elle vous indique."
       help: "Si vous rencontrez un problème, vous pouvez..."
       max_login_attempts_reached: "Votre compte a été bloqué pour des raisons de sécurité.<br />Veuillez contacter un administrateur."
       resend_code: "Renvoyer le code"

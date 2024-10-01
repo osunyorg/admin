@@ -51,6 +51,7 @@ class Administration::Location < ApplicationRecord
   validates :address, :city, :zipcode, :country, presence: true
 
   def dependencies
+    localizations +
     programs +
     schools
   end
