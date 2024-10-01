@@ -112,6 +112,9 @@ en:
         websites: Linked websites
   admin:
     education:
+      diplomas:
+        certification:
+          none: No certification
       programs:
         categories:
             root_name: Programs
