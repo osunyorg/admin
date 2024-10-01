@@ -28,7 +28,11 @@ module Communication::Website::WithSpecialPages
 
   def create_default_special_page(type)
     # Special pages have a before_validation (:on_create) callback to preset the original localization (title, slug, ...)
-    page = pages.where(type: type.to_s, university_id: university_id).first_or_initialize
+    page = Communication::Website::Page.new(
+      type: type.to_s,
+      communication_website_id: id,
+      university_id: university_id
+    )
     # Ignore useless pages (not in this website)
     return unless page.is_necessary_for_website?
     page.save_and_sync
