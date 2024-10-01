@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def edit
     add_breadcrumb t('admin.dashboard'), admin_root_path(lang: current_university.default_language)
     if can? :read, @user
-      add_breadcrumb User.model_name.human(count: 2), admin_users_path
+      add_breadcrumb User.model_name.human(count: 2), admin_users_path(lang: current_university.default_language)
       add_breadcrumb @user, [:admin, @user]
       add_breadcrumb t('edit')
     else
