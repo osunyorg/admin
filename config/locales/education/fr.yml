@@ -34,6 +34,7 @@ fr:
         school: École
         year: Année
       education/diploma:
+        certification: Contrôle par l'État
         ects: Crédits ECTS
         level: Niveau
         programs: Formations
@@ -111,6 +112,9 @@ fr:
         url: Site Web
   admin:
     education:
+      diplomas:
+        certification:
+          none: Pas de certification
       programs:
         categories:
           root_name: Offre de formation

@@ -29,6 +29,7 @@ short_name: >-
 level: >-
   <%= diploma.level_i18n %>
 ects: <%= diploma.ects %>
+certification: <%= diploma.certification %>
 duration: >-
   <%= prepare_text_for_static @l10n.duration %>
 <%= render 'admin/communication/blocks/content/static', about: @l10n %>

@@ -34,6 +34,7 @@ en:
         school: School
         year: Year
       education/diploma:
+        certification: Certification
         ects: ECTS
         level: Level
         programs: Programs
@@ -111,6 +112,9 @@ en:
         websites: Linked websites
   admin:
     education:
+      diplomas:
+        certification:
+          none: No certification
       programs:
         categories:
             root_name: Programs
