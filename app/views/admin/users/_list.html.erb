@@ -1,0 +1,19 @@
+<div class="row g-3">
+  <% users.each do |user| %>
+    <div class="col-6 col-lg-3 col-xxl-2">
+      <div class="card mb-0">
+        <%= osuny_thumbnail user, large: true %>
+        <div class="card-body">
+          <p class="mb-1">
+            <%= link_to user,
+                        admin_user_path(user),
+                        classes: 'stretched-link'  %>
+          </p>
+          <p class="small text-muted mb-0">
+            <%= t("activerecord.attributes.user.roles.#{user.role}") %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
