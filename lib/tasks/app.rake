@@ -25,7 +25,7 @@ namespace :app do
 
     # On supprime toutes les pages spéciales potentiellement non nécessaires créées après migration
     Communication::Website::Page.where(type: special_page_types).where('created_at > ?', 2.days.ago).each do |special_page|
-      next unless special_page.is_necessary_for_website?
+      next if special_page.is_necessary_for_website?
       special_page.destroy
     end
   end
