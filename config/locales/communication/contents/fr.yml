@@ -214,8 +214,8 @@ fr:
               alphabetical:
                 label: Ordre alphabétique
               caption:
-                label: Transcription textuelle
-                placeholder: Entrer ici la transcription textuelle du tableau
+                label: Titre du tableau
+                placeholder: Entrer ici le titre du tableau
               description:
                 label: Description
           definitions:

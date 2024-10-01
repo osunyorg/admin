@@ -214,8 +214,8 @@ en:
               alphabetical:
                 label: Alphabetical order
               caption:
-                label: Text transcript
-                placeholder: Enter the text transcript of the table
+                label: Table title
+                placeholder: Enter the table's title
               description:
                 label: Description
           definitions:
