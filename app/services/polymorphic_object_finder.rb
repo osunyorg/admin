@@ -8,19 +8,19 @@ class PolymorphicObjectFinder
   # Rails uses ActiveRecord::Inheritance#polymorphic_name to hydrate the about_type.
   # Example: A Block for a Communication::Website::Page::Home will have about_type = "Communication::Website::Page"
   def self.find(params, key:, university:, mandatory_module: nil, permitted_classes: [])
-    finder = new  params, 
-                  key: key, 
-                  university: university, 
-                  mandatory_module: mandatory_module, 
+    finder = new  params,
+                  key: key,
+                  university: university,
+                  mandatory_module: mandatory_module,
                   permitted_classes: permitted_classes
-    finder.object
+    finder.record
   end
 
-  def object
+  def record
     return unless complies_with_mandatory_module? && complies_with_permitted_classes?
-    model.where(university: university).find(object_id)
+    model.where(university: university).find(record_id)
   end
-  
+
   private
 
   attr_reader :params, :key, :university, :mandatory_module, :permitted_classes
@@ -36,7 +36,7 @@ class PolymorphicObjectFinder
   def key_id
     "#{key}_id".to_sym
   end
-  
+
   def key_type
     "#{key}_type".to_sym
   end
@@ -45,7 +45,7 @@ class PolymorphicObjectFinder
     params[key_type]
   end
 
-  def object_id
+  def record_id
     params[key_id]
   end
 
