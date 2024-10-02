@@ -119,6 +119,7 @@ en:
         categories:
             root_name: Programs
         publication: Publication
+        submenu: "You are currently in the course summary. For simplicity, each course is broken down into several pages. These pages can be accessed via the menu at the top of the page, and correspond to the headings on the websites. For greater convenience, this summary page shows the menu hereafter. The content blocks are located in the “Presentation” section."
         teacher:
           no_teaching: No teaching
           show_person_html: This page only shows teaching assignments.<br>If you wish to view or modify the person's details, click on the link below.
