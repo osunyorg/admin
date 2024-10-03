@@ -337,6 +337,10 @@ en:
         copied: The block has been copied to clipboard!
         drag_and_drop: Drag and drop
         language_mismatch_alert: This block does not exist in this language.
+      extranet:
+        confirm_localization:
+          text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the extranet <i>%{extranet}</i> in %{language}."
+          title: Localization confirmation
       website:
         agenda:
           events:

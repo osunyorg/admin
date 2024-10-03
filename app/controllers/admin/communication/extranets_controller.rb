@@ -49,6 +49,19 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @extranet.to_s_in(current_language))
   end
 
+  def confirm_localization
+    @about_gid = params[:about]
+    @about = GlobalID::Locator.locate(@about_gid)
+  end
+
+  def do_confirm_localization
+    @about_gid = params[:about]
+    @about = GlobalID::Locator.locate(@about_gid)
+    @extranet.localize_in!(current_language)
+    @about.localize_in!(current_language)
+    redirect_to [:edit, :admin, @about]
+  end
+
   protected
 
   def extranet_params

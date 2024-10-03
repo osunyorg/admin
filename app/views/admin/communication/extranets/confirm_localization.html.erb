@@ -1,0 +1,17 @@
+<% content_for :title, t('admin.communication.extranet.confirm_localization.title') %>
+
+<p>
+  <%= t('admin.communication.extranet.confirm_localization.text_html',
+      about: @about.to_s_in(current_language),
+      language: language_name(current_language.iso_code),
+      extranet: @extranet.to_s_in(current_language)) %>
+</p>
+
+<%= link_to t('cancel'),
+            [:admin, @about, lang: @about.original_localization.language],
+            class: button_classes %>
+
+<%= link_to t('confirm'),
+            [:do_confirm_localization, :admin, @extranet, { about: @about_gid }],
+            method: :post,
+            class: button_classes %>

@@ -337,6 +337,10 @@ fr:
         copied: Le bloc a bien été copié dans le presse-papier.
         drag_and_drop: Drag and drop
         language_mismatch_alert: Le bloc n'existe pas dans cette langue.
+      extranet:
+        confirm_localization:
+          text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction de l'extranet <i>%{extranet}</i> en %{language}."
+          title: Confirmation de traduction
       website:
         agenda:
           events:
