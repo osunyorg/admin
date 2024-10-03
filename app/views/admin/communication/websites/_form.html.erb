@@ -8,13 +8,16 @@
     <div class="row">
       <div class="col-lg-4">
         <%= lf.input :name %>
-        <%= lf.input :published, 
-                      wrapper: :custom_boolean_switch if website.persisted? && current_university.languages.many? %>
-        <% if website.localizations.many? %>
-          <%= f.association :default_language,
-                            include_blank: false,
-                            collection: website.languages,
-                            label_method: lambda { |l| language_name(l.iso_code) } %>
+        <% if website.languages.many? %>
+          <%= lf.input  :published,
+                        wrapper: :custom_boolean_switch,
+                        disabled: l10n.published? && website.active_languages.one? %>
+          <% if website.localizations.many? %>
+            <%= f.association :default_language,
+                              include_blank: false,
+                              collection: website.languages,
+                              label_method: lambda { |l| language_name(l.iso_code) } %>
+          <% end %>
         <% end %>
       </div>
       <div class="col-lg-8">

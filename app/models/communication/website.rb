@@ -94,6 +94,7 @@ class Communication::Website < ApplicationRecord
   has_one_attached_deletable :default_image
   has_one_attached_deletable :default_shared_image
 
+  # validates :default_language, inclusion: { in: -> (website) { website.active_languages } }
   validates :default_image, size: { less_than: 5.megabytes }
   validates :default_shared_image, size: { less_than: 5.megabytes }
 

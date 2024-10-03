@@ -8,6 +8,7 @@ module Localizable
                 dependent: :destroy
 
     accepts_nested_attributes_for :localizations
+    validates_associated :localizations
 
     scope :for_language, -> (language) { for_language_id(language.id) }
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself
