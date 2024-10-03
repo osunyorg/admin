@@ -32,7 +32,11 @@
                         remote: true %>
             <%= duplicate_link block, html_classes: 'action ms-2' %>
           </span>
-          <%= edit_link block, html_classes: 'action ms-2' %>
+          <% if can?(:update, block) %>
+            <%= link_to t('edit'), 
+                        edit_admin_communication_block_path(block),
+                        class: 'action ms-2 js-content-editor__element__edit' %>
+          <% end %>
         </div>
         <% if block.empty? %>
           <span class="small text-danger mb-2">
@@ -41,9 +45,10 @@
         <% end %>
         <div class="content-editor__elements__preview
                     content-editor__elements__preview--<%= block.template_kind %>">
-          <%# TODO Arnaud : Sûrement utiliser le block.heading_rank_self %>
-          <div><%= osuny_label block.title if block.title.present? %></div>
-          <%= render "admin/communication/blocks/templates/#{block.template_kind}/snippet", block: block %>
+          <div id="snippet-<%= block.id %>">
+            <%= render "admin/communication/blocks/title", block: block %>
+            <%= render "admin/communication/blocks/templates/#{block.template_kind}/snippet", block: block %>
+          </div>
         </div>
         <%= render 'admin/application/a11y/status', about: block %>
       </article>

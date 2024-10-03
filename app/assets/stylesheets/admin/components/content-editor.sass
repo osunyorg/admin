@@ -13,6 +13,19 @@
                     border: $color-accent 1px solid !important
 
 .content-editor
+    &__offcanvas
+        width: 95vw !important
+        @include media-breakpoint-up(md)
+            width: 80vw !important
+        @include media-breakpoint-up(lg)
+            width: 70vw !important
+        @include media-breakpoint-up(xl)
+            width: 60vw !important
+        @include media-breakpoint-up(xxl)
+            width: 50vw !important
+        &__iframe
+            height: 100%
+            width: 100%
     &__elements
         &__element
             .draft

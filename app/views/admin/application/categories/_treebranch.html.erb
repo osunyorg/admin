@@ -29,7 +29,7 @@ categories_class_path = categories_class.to_s.parameterize.underscore
               <%= 'treeview__element--empty' unless category.has_children? %>"
       data-id="<%= category.id %>"
       data-parent="<%= category.parent_id %>">
-    <div class="card card--horizontal treeview__label">
+    <div class="<%= osuny_card_classes(horizontal: true) %> treeview__label">
       <%= link_to children_path,
                   class: 'js-treeview-openzone d-inline-block',
                   remote: true do %>

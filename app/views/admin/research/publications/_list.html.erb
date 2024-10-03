@@ -1,7 +1,7 @@
 <div class="row g-2 mb-3">
   <% publications.each do |publication| %>
     <div>
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <div class="card-body">
           <%= link_to publication, [:admin, publication] %><br>
           <small><%= sanitize publication.authors_list %></small>

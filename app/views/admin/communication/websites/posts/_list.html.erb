@@ -41,7 +41,7 @@ end
               </td>
             <% end %>
             <td>
-              <div class="card card--horizontal">
+              <div class="<%= osuny_card_classes(horizontal: true) %>">
                 <%= osuny_thumbnail_localized post %>
                 <div class="card-body">
                   <%= osuny_published_localized post unless small %>

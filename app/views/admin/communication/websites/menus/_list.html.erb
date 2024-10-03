@@ -1,7 +1,7 @@
 <div class="row g-2">
   <% menus.each do |menu| %>
     <div class="col-lg-6 col-xxl-4">
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail menu %>
         <div class="card-body">
           <%= link_to menu, 
