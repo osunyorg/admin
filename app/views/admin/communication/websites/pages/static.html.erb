@@ -8,7 +8,7 @@ breadcrumb_title: >-
 <%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
-            about: page, 
+            about: page,
             l10n: @l10n %>
 <% if page.static_layout %>
 layout: <%= page.static_layout %>
@@ -45,5 +45,6 @@ header_cta:
   label: >-
     <%= prepare_text_for_static @l10n.header_cta_label %>
   target: "<%= @l10n.header_cta_url %>"
+  external: <%= !(@l10n.header_cta_url.to_s.start_with?('/') || @l10n.header_cta_url.to_s.start_with?(@website.url)) %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---
