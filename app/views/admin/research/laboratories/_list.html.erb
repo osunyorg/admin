@@ -1,7 +1,7 @@
 <div class="row g-2 mb-3">
   <% laboratories.each do |laboratory| %>
     <div>
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized laboratory %>
         <div class="card-body">
           <%= osuny_link_localized  laboratory,

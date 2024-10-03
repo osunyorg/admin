@@ -9,7 +9,7 @@
     <article itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
       <div class="program-content">
         <h<%= heading_level %> itemprop='name'>
-          <%= link_to l10n, l10n.current_permalink_url_in_website(@website), itemprop: "url" %>
+          <%= link_to l10n, '#', itemprop: "url" %>
         </h<%= heading_level %>>
           <% if l10n.summary.present? %>
             <p itemprop="abstract"><%= l10n.summary %></p>

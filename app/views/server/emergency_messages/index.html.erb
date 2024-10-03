@@ -6,12 +6,11 @@
       <div class="card card--horizontal">
         <div class="card-body">
           <%= link_to emergency_message, [:server, emergency_message] %><br>
-          <span class="small text-muted">
-            <%= l(emergency_message.delivered_at) if emergency_message.delivered? %>
-          </span>
         </div>
         <div class="card-footer">
-          <% unless emergency_message.delivered? %>
+          <% if emergency_message.delivered? %>
+            <%= l(emergency_message.delivered_at) %>
+          <% else %>
             <%= link_to t('edit'),
                       [:edit, :server, emergency_message],
                       class: button_classes %>

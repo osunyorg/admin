@@ -1,7 +1,7 @@
 <div class="row g-2 mb-3">
   <% kinds.each do |kind| %>
     <div>
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized kind %>
         <div class="card-body">
           <%= osuny_link_localized  kind,

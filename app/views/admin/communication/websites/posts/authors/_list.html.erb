@@ -1,7 +1,7 @@
 <div class="row g-2">
   <% authors.each do |author| %>
     <div>
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized author %>
         <div class="card-body">
           <%= osuny_link_localized  author, 

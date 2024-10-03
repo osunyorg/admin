@@ -62,7 +62,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def diploma_params
     params.require(:education_diploma)
           .permit(
-            :level, :ects,
+            :level, :ects, :certification,
             localizations_attributes: [
               :id, :name, :slug, :short_name, :summary, :duration,
               :language_id

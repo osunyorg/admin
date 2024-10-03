@@ -10,7 +10,7 @@ small ||= false
       event_l10n = event.best_localization_for(current_language)
       %>
       <div>
-        <div class="card card--horizontal">
+        <div class="<%= osuny_card_classes(horizontal: true) %>">
           <%= osuny_thumbnail_localized event %>
           <div class="card-body">
             <%= osuny_published_localized event unless small %>

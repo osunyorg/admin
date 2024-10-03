@@ -56,6 +56,10 @@ fr:
             to: à
         display_options:
           title: Options d'affichage
+        editor:
+          offcanvas:
+            close: Fermer l'édition du bloc
+            title: Édition de bloc
         empty: Ce bloc est vide et n'apparaitra pas
         headings:
           add: Ajouter un titre
@@ -214,8 +218,8 @@ fr:
               alphabetical:
                 label: Ordre alphabétique
               caption:
-                label: Transcription textuelle
-                placeholder: Entrer ici la transcription textuelle du tableau
+                label: Titre du tableau
+                placeholder: Entrer ici le titre du tableau
               description:
                 label: Description
           definitions:
@@ -361,15 +365,18 @@ fr:
               description:
                 label: Description
               element:
+                alt_title:
+                  label: Titre alternatif
+                  placeholder: Entrer le titre alternatif du lien
                 description:
                   label: Description
                   placeholder: Entrer la description du lien
-                url:
-                  label: URL
-                  placeholder: 'https://'
                 title:
                   label: Titre
                   placeholder: Entrer le titre du lien
+                url:
+                  label: URL
+                  placeholder: 'https://'
               remove: Enlever le lien
           locations:
             description: Une sélection de sites dans des campus.

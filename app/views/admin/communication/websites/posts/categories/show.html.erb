@@ -38,7 +38,7 @@
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
-<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
+<%= render 'admin/communication/contents/editor', about: @l10n %>
 <% if @posts.total_count > 0 %>
   <%= osuny_panel Communication::Website::Post.model_name.human(count: 2),
                   subtitle: "#{@posts.total_count} #{Communication::Website::Post.model_name.human(count: @posts.total_count).downcase }" do %>

@@ -16,6 +16,11 @@
     <h2 class="h4">Informations administratives</h2>
   </div>
   <div class="col-lg-8">
+    <% if @diploma.certification.present? %>
+      <div class="mb-4">
+        <%= image_tag @diploma.certification_icon_path, width: 150 %>
+      </div>
+    <% end %>
     <table class="table">
       <tbody>
         <tr>
@@ -39,7 +44,7 @@
   </div>
 </div>
 
-<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
+<%= render 'admin/communication/contents/editor', about: @l10n %>
 
 <h2 class="h4"><%= Education::Program.model_name.human(count: 2) %></h2>
 <%= render 'admin/education/programs/list', programs: @programs, hide_diploma: true %>
