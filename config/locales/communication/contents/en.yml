@@ -361,15 +361,18 @@ en:
               description:
                 label: Description
               element:
+                alt_title:
+                  label: Titre alternatif
+                  placeholder: Entrer le titre alternatif du lien
                 description:
                   label: Description
                   placeholder: Enter link description
-                url:
-                  label: URL
-                  placeholder: 'https://'
                 title:
                   label: Title
                   placeholder: Enter link title
+                url:
+                  label: URL
+                  placeholder: 'https://'
               remove: Remove the link
           locations:
             description: A selection of locations on a campus.
