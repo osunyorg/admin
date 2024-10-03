@@ -362,8 +362,8 @@ en:
                 label: Description
               element:
                 alt_title:
-                  label: Titre alternatif
-                  placeholder: Entrer le titre alternatif du lien
+                  label: Alternative title
+                  placeholder: Enter link alternative title
                 description:
                   label: Description
                   placeholder: Enter link description
