@@ -27,6 +27,10 @@ fr:
           transcription_missing:
             title: Pas de transcription
             text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
+        links:
+          alt_title_missing:
+            title: Pas de titre alternatif du lien
+            text_html: Le titre alternatif du lien est vide. C'est tout à fait pertinent si le titre du lien seul permet de comprendre la fonction et la destination, comme expliqué dans le <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#6" target="_blank">critère 6.1 du RGAA</a>. Dans le cas contraire, merci d'ajouter un titre alternatif à votre lien.
         sound:
           title_missing:
             title: Pas de titre
