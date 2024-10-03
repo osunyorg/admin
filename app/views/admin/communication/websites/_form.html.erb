@@ -9,8 +9,9 @@
       <div class="col-lg-4">
         <%= lf.input :name %>
         <% if website.localizations.many? %>
-          <%= lf.input :published,
-                        wrapper: :custom_boolean_switch %>
+          <%= lf.input  :published,
+                        wrapper: :custom_boolean_switch,
+                        disabled: l10n.published? && website.active_languages.one? %>
           <%= f.association :default_language,
                             include_blank: false,
                             collection: website.languages,

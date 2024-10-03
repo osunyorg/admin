@@ -38,6 +38,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     if @extranet.update(extranet_params)
       redirect_to [:admin, @extranet], notice: t('admin.successfully_updated_html', model: @extranet.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

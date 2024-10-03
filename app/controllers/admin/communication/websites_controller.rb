@@ -65,6 +65,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     if @website.update_and_sync(website_params)
       redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

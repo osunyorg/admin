@@ -249,11 +249,14 @@ fr:
           attributes:
             sso_mapping:
               missing_email: ne gère pas l'adresse email
-        communication/website:
+        communication/extranet/localization:
           attributes:
-            languages:
-              must_include_default: doivent contenir la langue par défaut
-              too_short: doivent en comporter une minimum
+            published:
+              cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
+        communication/website/localization:
+          attributes:
+            published:
+              cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
         communication/website/agenda/event:
           attributes:
             to_day:

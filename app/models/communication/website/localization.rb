@@ -43,6 +43,9 @@ class Communication::Website::Localization < ApplicationRecord
 
   alias :website :about
 
+  validates :name, presence: true
+  validate :prevent_unpublishing_default_language
+
   after_create_commit :create_existing_menus_in_language
   after_save :destroy_website_obsolete_git_files, if: :should_clean_website_on_git?
 
@@ -79,5 +82,11 @@ class Communication::Website::Localization < ApplicationRecord
 
   def destroy_website_obsolete_git_files
     website.destroy_obsolete_git_files
+  end
+
+  def prevent_unpublishing_default_language
+    return unless website.default_language_id == language_id
+    return if published?
+    errors.add(:published, :cannot_unpublished_default)
   end
 end

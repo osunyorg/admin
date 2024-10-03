@@ -45,7 +45,9 @@
         <% if extranet.localizations.many? %>
           <%= osuny_panel t('admin.communication.extranet.languages') do %>
             <%= lf.input :published,
-                          wrapper: :custom_boolean_switch %>
+                          wrapper: :custom_boolean_switch,
+                          disabled: l10n.published? && extranet.active_languages.one? %>
+
             <%= f.association :default_language,
                               include_blank: false,
                               collection: extranet.languages,

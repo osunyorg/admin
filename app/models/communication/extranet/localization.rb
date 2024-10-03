@@ -49,9 +49,18 @@ class Communication::Extranet::Localization < ApplicationRecord
   validates :name, presence: true
   validates :logo, size: { less_than: 1.megabytes }
   validates :favicon, size: { less_than: 1.megabytes }
+  validate :prevent_unpublishing_default_language
 
   def to_s
     "#{name}"
+  end
+
+  protected
+
+  def prevent_unpublishing_default_language
+    return unless about.default_language_id == language_id
+    return if published?
+    errors.add(:published, :cannot_unpublished_default)
   end
 
 end

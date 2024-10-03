@@ -101,10 +101,13 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def update
-    @l10n.add_photo_import params[:photo_import]
-    if @page.update_and_sync(page_params)
+    if @page.update(page_params)
+      load_localization
+      @l10n.add_photo_import params[:photo_import]
+      @page.sync_with_git
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb(@page, admin_communication_website_page_path(@page))
       add_breadcrumb t('edit')
