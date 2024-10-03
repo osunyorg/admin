@@ -14,4 +14,8 @@
     <br>
     <%= t('communication.extranet.post.metadata.by', author: @post.author.best_localization_for(current_language)) %>
   <% end %>
+  
+  <%= render 'admin/application/l10n/widget', about: @post, l10n: @l10n, small: true %>
 </div>
+
+

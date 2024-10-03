@@ -27,6 +27,8 @@
   <% end %>
 </div>
 
+<%= render 'admin/application/l10n/widget', about: @extranet, l10n: @l10n, small: true %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @extranet %>
 <% end %>
