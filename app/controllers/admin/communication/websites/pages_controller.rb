@@ -34,7 +34,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     end
     old_parent_page.sync_with_git
     parent_page.sync_with_git if parent_page != old_parent_page
-    @website.generate_automatic_menus(parent_page.language)
+    @website.generate_automatic_menus_for_language(current_language)
   end
 
   def children
@@ -113,8 +113,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def duplicate
-    redirect_to [:admin, @page.duplicate],
-                notice: t('admin.successfully_duplicated_html', model: @page.to_s)
+    if @page.is_special_page?
+      redirect_back(fallback_location: admin_communication_website_page_path(@page), alert: t('admin.communication.website.pages.duplicate_special_page_notice'))
+    else
+      redirect_to [:admin, @page.duplicate],
+                  notice: t('admin.successfully_duplicated_html', model: @page.to_s)
+    end
   end
 
   def destroy

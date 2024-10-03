@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <lheo xmlns="http://lheo.gouv.fr/2.3">
   <offres>
-    <% @programs.each do |program| %>
+    <% 
+    @programs.each do |program| 
+      program_l10n = program.original_localization
+      if program.schools.any?
+        school = program.schools.first
+        school_l10n = school.original_localization
+      end
+      %>
       <formation>
         <domaine-formation>
-          <code-FORMACODE>...</code-FORMACODE>
-          <code-NSF>...</code-NSF>
-          <code-ROME>...</code-ROME>
+          <code-FORMACODE></code-FORMACODE>
+          <code-NSF></code-NSF>
+          <code-ROME></code-ROME>
         </domaine-formation>
-        <intitule-formation><![CDATA[<%= program.name %>]]></intitule-formation>
+        <intitule-formation><![CDATA[<%= program_l10n.name %>]]></intitule-formation>
         <% if program.schools.any? %>
-        <nom-organisme><![CDATA[<%= program.schools.first.name %>]]></nom-organisme>
+        <nom-organisme><![CDATA[<%= school_l10n.name %>]]></nom-organisme>
         <% end %>
-        <objectif-formation><![CDATA[<%= program.best_objectives %>]]></objectif-formation>
-        <resultats-attendus><![CDATA[<%= program.best_results %>]]></resultats-attendus>
-        <contenu-formation><![CDATA[<%= program.best_content %>]]></contenu-formation>
+        <objectif-formation><![CDATA[<%= program_l10n.best_objectives %>]]></objectif-formation>
+        <resultats-attendus><![CDATA[<%= program_l10n.best_results %>]]></resultats-attendus>
+        <contenu-formation><![CDATA[<%= program_l10n.best_content %>]]></contenu-formation>
         <certifiante>1</certifiante>
       </formation>
     <% end %>

@@ -27,6 +27,10 @@ en:
           transcription_missing:
             title: No transcription
             text_html: The HTML iframe has no text transcription for blind people, for people with low bandwidth or no javascript enabled. Please add a text transcription.
+        links:
+          alt_title_missing:
+            title: No alternative title
+            text_html: The link has no alternative title. It might be completely fine if the link title alone allows to understand the function and the destination, as mentioned in <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#6" target="_blank">criterion 6.1 of RGAA</a>. On the contrary, please add an alternative title to the link.
         sound:
           title_missing:
             title: No title
@@ -383,7 +387,9 @@ en:
     favorites:
       add: Add to favorites
       remove: Remove from favorites
-      none: You have no favorites yet. Feel free to add the websites, extranets or journals you often work on!
+      none:
+        in_university: You have no favorites yet. Feel free to add the websites, extranets or journals you often work on!
+        not_in_university: You have no favorites yet. Feel free to add the websites or extranets you often work on!
   photo_import:
     next: Next image
     nothing: No results for this search

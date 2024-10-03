@@ -218,8 +218,8 @@ en:
               alphabetical:
                 label: Alphabetical order
               caption:
-                label: Text transcript
-                placeholder: Enter the text transcript of the table
+                label: Table title
+                placeholder: Enter the table's title
               description:
                 label: Description
           definitions:
@@ -365,15 +365,18 @@ en:
               description:
                 label: Description
               element:
+                alt_title:
+                  label: Alternative title
+                  placeholder: Enter link alternative title
                 description:
                   label: Description
                   placeholder: Enter link description
-                url:
-                  label: URL
-                  placeholder: 'https://'
                 title:
                   label: Title
                   placeholder: Enter link title
+                url:
+                  label: URL
+                  placeholder: 'https://'
               remove: Remove the link
           locations:
             description: A selection of locations on a campus.

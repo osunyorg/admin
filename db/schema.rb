@@ -907,6 +907,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "ects"
+    t.string "certification"
     t.index ["university_id"], name: "index_education_diplomas_on_university_id"
   end
 

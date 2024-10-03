@@ -58,7 +58,7 @@ class University::Organization < ApplicationRecord
         unaccent(university_organizations.address) ILIKE unaccent(:term) OR
         unaccent(university_organizations.city) ILIKE unaccent(:term) OR
         unaccent(university_organizations.country) ILIKE unaccent(:term) OR
-        unaccent(university_organizations.meta_description) ILIKE unaccent(:term) OR
+        unaccent(university_organization_localizations.meta_description) ILIKE unaccent(:term) OR
         unaccent(university_organizations.email) ILIKE unaccent(:term) OR
         unaccent(university_organization_localizations.long_name) ILIKE unaccent(:term) OR
         unaccent(university_organization_localizations.name) ILIKE unaccent(:term) OR
@@ -67,7 +67,7 @@ class University::Organization < ApplicationRecord
         unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
         unaccent(university_organization_localizations.text) ILIKE unaccent(:term) OR
         unaccent(university_organizations.zipcode) ILIKE unaccent(:term) OR
-        unaccent(university_organizations.url) ILIKE unaccent(:term)
+        unaccent(university_organization_localizations.url) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :search_by_siren_or_name, -> (term, language) {
