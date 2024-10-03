@@ -11,7 +11,9 @@
                 <% isExternal = false %>
               <% end %>
               <link itemprop="url" href="<%= element.url %>">
-              <a href="<%= element.url %>"<% if isExternal %> rel="noopener" target="_blank"<% end %> title="<%= element.title %>">
+              <a  href="<%= element.url %>"
+                  <% if isExternal %> rel="noopener" target="_blank"<% end %>
+                  title="<%= element.alt_title.presence || element.title %>">
                 <%= element.title %>
               </a>
               <p><%= element.description %></p>

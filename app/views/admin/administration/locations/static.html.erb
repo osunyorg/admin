@@ -26,25 +26,29 @@ contact_details:
     latitude: <%= location.latitude %>
     longitude: <%= location.longitude %>
 programs:
-<% location.programs.each do |program| %>
-  - <%= program.path %>
+<%
+location.programs.each do |program|
+  program_l10n = program.best_localization_for(language)
+  %>
+  - <%= program_l10n.current_permalink_in_website(@website)&.path %>
 <% end %>
 diplomas:
 <%
 location.diplomas.each do |diploma|
+  diploma_l10n = diploma.best_localization_for(language)
   programs = location.education_programs.where(diploma: diploma).root.ordered
   next if programs.empty?
 %>
   - name: >-
-      <%= diploma.to_s %>
-    path: <%= diploma.slug %>
+      <%= diploma_l10n.to_s %>
+    path: <%= diploma_l10n.slug %>
     programs:
 <%= render 'admin/education/programs/static_list',
             diploma: diploma,
             programs: programs,
             all_programs: location.programs,
             language: language,
-            depth: 4 %>
+            depth: 6 %>
 <% end %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---

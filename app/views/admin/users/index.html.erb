@@ -1,4 +1,4 @@
-<% content_for :title, "#{User.model_name.human(count: 2)} (#{@users.total_count})" %>
+<% content_for :title, User.model_name.human(count: 2) %>
 
 <div class="d-flex justify-content-between mb-4">
   <p>
@@ -8,40 +8,5 @@
   <%= render 'filters', current_path: admin_users_path %>
 </div>
 
-<div class="table-responsive">
-  <table class="<%= table_classes %>">
-    <thead>
-      <tr>
-        <th><%= User.human_attribute_name('last_name') %></th>
-        <th><%= User.human_attribute_name('first_name') %></th>
-        <th><%= User.human_attribute_name('email') %></th>
-        <th><%= User.human_attribute_name('role') %></th>
-        <th><%= User.human_attribute_name('current_sign_in_at') %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= link_to_if can?(:read, user), user.last_name, [:admin, user] %></td>
-          <td><%= link_to_if can?(:read, user), user.first_name, [:admin, user] %></td>
-          <td><%= mail_to user.email %></td>
-          <td>
-            <span class="badge bg-secondary text-dark">
-              <%= t("activerecord.attributes.user.roles.#{user.role}") %>
-            </span>
-          </td>
-          <td><%= l(user.current_sign_in_at, format: :date_with_explicit_month) if user.current_sign_in_at.present? %></td>
-          <td class="text-end">
-            <div class="btn-group" role="group">
-              <%= edit_link user %>
-              <%= destroy_link user %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
+<%= render 'admin/users/list', users: @users %>
 <%= paginate @users %>

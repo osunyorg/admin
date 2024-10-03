@@ -7,20 +7,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :confirm_two_factor_authenticated, except: [:new, :create, :cancel]
 
   def edit
-    add_breadcrumb t('admin.dashboard'), admin_root_path(lang: current_university.default_language)
-    if can? :read, @user
-      add_breadcrumb User.model_name.human(count: 2), admin_users_path
-      add_breadcrumb @user, [:admin, @user]
-      add_breadcrumb t('edit')
-    else
-      add_breadcrumb t('menu.profile')
-    end
-  end
-
-  def update
-    super do |resource|
-      # Re-set I18n.locale in case of language change.
-      I18n.locale = resource.language.iso_code.to_sym
+    # this action is not used anymore, replaced for both universities and extranets.
+    # so we redirect to the appropriate profile edition
+    case current_mode
+    when 'extranet'
+      redirect_to edit_account_path(lang: current_language)
+    when 'university'
+      redirect_to admin_profile_path(lang: current_language)
     end
   end
 

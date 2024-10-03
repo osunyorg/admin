@@ -34,7 +34,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     end
     old_parent_page.sync_with_git
     parent_page.sync_with_git if parent_page != old_parent_page
-    @website.generate_automatic_menus(parent_page.language)
+    @website.generate_automatic_menus_for_language(current_language)
   end
 
   def children

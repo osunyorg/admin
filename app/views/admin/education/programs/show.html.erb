@@ -78,6 +78,22 @@
   </div>
 </div>
 
+<%= osuny_separator %>
+
+<div class="education_program_nav_in_summary">
+  <div class="row mb-4">
+    <div class="col-lg-4">
+      <p class="small text-muted">
+        <%= t('admin.education.programs.submenu') %>
+      </p>
+    </div>
+    <div class="col-lg-8 small">
+      <%= render_navigation context: 'navigation/admin/education/program',
+                            renderer: :list  %>
+    </div>
+  </div>
+</div>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @program %>
   <%= static_link static_admin_education_program_path(@program) %>

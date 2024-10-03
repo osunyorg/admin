@@ -28,7 +28,13 @@
         <% if @user.person %>
           <tr>
             <td><%= User.human_attribute_name('person') %></td>
-            <td class="text-end"><%= link_to @user.person, [:admin, @user.person] %></td>
+            <td class="text-end"><%= osuny_link_localized @user.person, [:admin, @user.person] %></td>
+          </tr>
+        <% end %>
+        <% if @user.current_sign_in_at.present? %>
+          <tr>
+            <td><%= User.human_attribute_name('current_sign_in_at') %></td>
+            <td class="text-end"><%= l(@user.current_sign_in_at, format: :date_with_explicit_month) %></td>
           </tr>
         <% end %>
       </table>

@@ -70,7 +70,7 @@ class Research::Hal::Author < ApplicationRecord
     # Do not overuse the API if no researcher is concerned
     return if researchers.none?
     Importers::Hal.import_publications_for_author(self).each do |publication|
-      publications << publication
+      publications << publication if publication.valid?
     end
     publications
   end

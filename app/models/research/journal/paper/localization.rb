@@ -73,6 +73,7 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   end
 
   def volume_l10n
+    return unless paper.volume.present?
     paper.volume.localization_for(language)
   end
 
