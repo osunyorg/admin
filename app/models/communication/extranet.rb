@@ -22,15 +22,18 @@
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  about_id                   :uuid             indexed => [about_type]
+#  default_language_id        :uuid             indexed
 #  university_id              :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_extranets_on_about          (about_type,about_id)
-#  index_communication_extranets_on_university_id  (university_id)
+#  index_communication_extranets_on_about                (about_type,about_id)
+#  index_communication_extranets_on_default_language_id  (default_language_id)
+#  index_communication_extranets_on_university_id        (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_6fd7e4d73b  (default_language_id => languages.id)
 #  fk_rails_c2268c7ebd  (university_id => universities.id)
 #
 class Communication::Extranet < ApplicationRecord
@@ -49,6 +52,7 @@ class Communication::Extranet < ApplicationRecord
   include WithStyle
   include WithUniversity
 
+  belongs_to :default_language, class_name: "Language"
   has_many :languages, through: :localizations
   has_many :posts
   has_many :post_localizations, class_name: 'Communication::Extranet::Post::Localization'

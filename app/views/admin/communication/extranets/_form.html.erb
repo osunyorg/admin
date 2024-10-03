@@ -42,6 +42,16 @@
         <% end %>
       </div>
       <div class="col-xl-6">
+        <% if extranet.localizations.many? %>
+          <%= osuny_panel t('admin.communication.extranet.languages') do %>
+            <%= lf.input :published,
+                          wrapper: :custom_boolean_switch %>
+            <%= f.association :default_language,
+                              include_blank: false,
+                              collection: extranet.languages,
+                              label_method: lambda { |l| language_name(l.iso_code) } %>
+          <% end %>
+        <% end %>
         <% if can?(:create, Communication::Extranet) %>
           <%= osuny_panel t('extranet.features') do %>
             <%= f.input :feature_alumni %>

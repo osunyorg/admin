@@ -7,6 +7,8 @@
 #  home_sentence        :text
 #  name                 :string
 #  privacy_policy       :text
+#  published            :boolean          default(FALSE)
+#  published_at         :datetime
 #  registration_contact :string
 #  sso_button_label     :string
 #  terms                :text

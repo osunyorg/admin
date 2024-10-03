@@ -70,7 +70,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     ]
     localizations_attributes = [
       :id, :language_id,
-      :name,
+      :name, :published,
       :registration_contact,
       :logo, :logo_delete, 
       :favicon, :favicon_delete, 
@@ -87,6 +87,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
         :sso_button_label
       ]
     end
+    allowed_params << :default_language_id if @extranet&.persisted?
     allowed_params << { localizations_attributes: localizations_attributes }
     params.require(:communication_extranet)
           .permit(allowed_params)

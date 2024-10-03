@@ -25,6 +25,7 @@ en:
         about_Research::Laboratory: Laboratory extranet
         about_type: About
         color: Couleur
+        default_language: Default language
         feature_alumni: Alumni
         feature_contacts: Directory
         feature_documents: Documents
@@ -45,6 +46,7 @@ en:
         logo: Logo
         name: Name
         privacy_policy: Privacy policy
+        published: Language published
         registration_contact: Contact mail for registrations problems
         sso_button_label: Sign in button's label
         terms: Terms of service
@@ -341,6 +343,7 @@ en:
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the extranet <i>%{extranet}</i> in %{language}."
           title: Localization confirmation
+        languages: Languages
       website:
         agenda:
           events:
