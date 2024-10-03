@@ -113,8 +113,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       ]
     ]
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?
-    # For now, default language can't be changed, too many implications, especially around special pages.
-    attribute_names << :default_language_id unless @website&.persisted?
+    attribute_names << :default_language_id if @website&.persisted?
     params.require(:communication_website)
           .permit(*attribute_names)
           .merge(
