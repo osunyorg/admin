@@ -34,9 +34,9 @@ module Admin::Localizable
     return if @l10n.present?
 
     if resource_is_website_direct_object? && !resource.website.localized_in?(current_language)
-      redirect_to_confirm_localization(resource.website)
+      redirect_to [:confirm_localization, :admin, resource.website, { about: resource.to_gid.to_s }]
     elsif resource_is_extranet_object? && !resource.extranet.localized_in?(current_language)
-      redirect_to_confirm_localization(resource.extranet)
+      redirect_to [:confirm_localization, :admin, resource.extranet, { about: resource.to_gid.to_s }]
     else
       localize_resource_and_redirect_to_edit
     end
@@ -48,10 +48,6 @@ module Admin::Localizable
 
   def resource_is_extranet_object?
     resource.respond_to?(:extranet) && !resource.is_a?(Communication::Extranet)
-  end
-
-  def redirect_to_confirm_localization(parent_resource)
-    redirect_to [:confirm_localization, :admin, parent_resource, { about: resource.to_gid.to_s }]
   end
 
   def localize_resource_and_redirect_to_edit
