@@ -53,7 +53,7 @@ class Search < ApplicationRecord
       term: "%#{sanitize_sql_like(term)}%"
     )
   }
-  scope :in, -> (language) {
+  scope :for_language, -> (language) {
     where(language: language)
   }
 end
