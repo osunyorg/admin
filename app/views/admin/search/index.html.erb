@@ -6,7 +6,6 @@
     @results.each do |result| 
       object = result.about_object
       l10n = result.about_localization
-      cropped = !object.is_a?(University::Organization)
       # communication_website_post
       path_class = object.class.polymorphic_name.parameterize.underscore
       # admin_communication_website_post_path
