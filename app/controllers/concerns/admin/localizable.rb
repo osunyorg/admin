@@ -9,11 +9,8 @@ module Admin::Localizable
                   only: :create
 
     before_action :load_localization,
+                  :redirect_if_not_localized,
                   only: [:show, :edit, :static, :publish, :preview]
-
-    before_action :redirect_if_not_localized,
-                  only: [:show, :edit, :static, :publish, :preview]
-
   end
 
   protected
