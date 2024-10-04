@@ -39,8 +39,7 @@
       <%
       sorted_involvements = @program.university_person_involvements
                                     .sort_by { |involvement|
-                                      involvement.person
-                                                 .to_s_alphabetical_in(current_language)
+                                      involvement.person&.to_s_alphabetical_in(current_language).to_s
                                     }
       %>
       <%= f.simple_fields_for :university_person_involvements,
