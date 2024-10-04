@@ -70,7 +70,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   def create
     @l10n.add_photo_import params[:photo_import]
     if @program.save
-      redirect_to [:admin, @program], 
+      redirect_to [:admin, @program],
                   notice: t('admin.successfully_created_html', model: @program.to_s_in(current_language))
     else
       @categories = categories
@@ -82,13 +82,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   def update
     @l10n.add_photo_import params[:photo_import] if params.has_key?(:photo_import)
     if @program.update(program_params)
-      @part = params.dig('education_program', 'part')
-      if @part.present?
-        path = send "#{@part}_admin_education_program_path", @program
-      else
-        path = admin_education_program_path(@program)
-      end
-      redirect_to path, 
+      redirect_to after_update_path,
                   notice: t('admin.successfully_updated_html', model: @program.to_s_in(current_language))
     else
       @categories = categories
@@ -100,11 +94,17 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
 
   def destroy
     @program.destroy
-    redirect_to admin_education_programs_url, 
+    redirect_to admin_education_programs_url,
                 notice: t('admin.successfully_destroyed_html', model: @program.to_s_in(current_language))
   end
 
   protected
+
+  def after_update_path
+    part = params.dig('education_program', 'part')
+    part.present? ? public_send("#{part}_admin_education_program_path", @program)
+                  : admin_education_program_path(@program)
+  end
 
   def categories
     current_university.program_categories
