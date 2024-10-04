@@ -156,8 +156,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.boolean "published", default: true
-    t.uuid "heading_id"
     t.uuid "communication_website_id"
+    t.uuid "heading_id"
     t.string "migration_identifier"
     t.string "html_class"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
@@ -836,15 +836,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
     t.integer "attempts", default: 0, null: false
     t.text "handler", null: false
     t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
+    t.datetime "run_at", precision: nil
+    t.datetime "locked_at", precision: nil
+    t.datetime "failed_at", precision: nil
     t.string "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string "queue"
     t.string "signature"
     t.text "args"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "education_academic_years", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -1249,14 +1250,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
   create_table "research_journal_paper_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "abstract"
     t.text "authors_list"
-    t.text "bibliography"
     t.text "keywords"
     t.text "meta_description"
     t.boolean "published", default: false
     t.datetime "published_at"
     t.string "slug"
     t.text "summary"
-    t.text "text"
     t.string "title"
     t.uuid "about_id"
     t.uuid "language_id"
