@@ -16,8 +16,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_2e93b6ec10  (original_id => research_laboratory_axes.id)
-#  fk_rails_92d4555202  (language_id => languages.id)
 #  fk_rails_ad2cb9a562  (research_laboratory_id => research_laboratories.id)
 #  fk_rails_d334f832b4  (university_id => universities.id)
 #

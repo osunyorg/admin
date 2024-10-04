@@ -17,8 +17,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_0bf891c2d7  (original_id => research_laboratories.id)
-#  fk_rails_2dcf393603  (language_id => languages.id)
 #  fk_rails_f61d27545f  (university_id => universities.id)
 #
 class Research::Laboratory < ApplicationRecord
