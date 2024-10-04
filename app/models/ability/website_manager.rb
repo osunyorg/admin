@@ -66,7 +66,7 @@ class Ability::WebsiteManager < Ability
   end
 
   def managed_post_category_localization_ids
-    @managed_post_localization_ids ||= begin
+    @managed_post_category_localization_ids ||= begin
       Communication::Website::Post::Category::Localization
         .where(communication_website_id: managed_websites_ids)
         .pluck(:id)
