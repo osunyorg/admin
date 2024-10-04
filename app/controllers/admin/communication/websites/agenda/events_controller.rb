@@ -50,11 +50,14 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def update
-    @l10n.add_photo_import params[:photo_import]
-    if @event.update_and_sync(event_params)
+    if @event.update(event_params)
+      load_localization
+      @l10n.add_photo_import params[:photo_import]
+      @event.sync_with_git
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_updated_html', model: @event.to_s_in(current_language))
     else
+      load_invalid_localization
       @categories = categories
       breadcrumb
       add_breadcrumb t('edit')

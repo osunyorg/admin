@@ -46,6 +46,7 @@ class Admin::University::Organizations::CategoriesController < Admin::University
       redirect_to admin_university_organization_category_path(@category),
                   notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
+      load_invalid_localization
       @categories = categories
       breadcrumb
       add_breadcrumb t('edit')

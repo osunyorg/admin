@@ -38,6 +38,7 @@ class Admin::Education::TeachersController < Admin::Education::ApplicationContro
     if @teacher.update(teacher_params)
       redirect_to admin_education_teacher_path(@teacher), notice: t('admin.successfully_updated_html', model: @teacher.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('education.manage_programs')
       render :edit

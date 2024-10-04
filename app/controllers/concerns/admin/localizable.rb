@@ -10,7 +10,7 @@ module Admin::Localizable
 
     before_action :load_localization,
                   :redirect_if_not_localized,
-                  only: [:show, :edit, :update, :static, :publish, :preview]
+                  only: [:show, :edit, :static, :publish, :preview]
   end
 
   protected
@@ -22,7 +22,7 @@ module Admin::Localizable
 
   # On create, when there's an error, we need to get unsaved localization from association
   def load_invalid_localization
-    @l10n = resource.localizations.first
+    @l10n = resource.localizations.detect { |l10n| l10n.language_id == current_language.id }
   end
 
   # On every other action, we need to load the localization
@@ -32,14 +32,28 @@ module Admin::Localizable
 
   def redirect_if_not_localized
     return if @l10n.present?
-    # If this is a DirectObject and the website is not yet localized in the requested language, we have to confirm we want to localize the website itself before localizing the object
-    if resource.is_direct_object? && !resource.is_a?(Communication::Website) && !resource.website.localized_in?(current_language)
+
+    if resource_is_website_direct_object? && !resource.website.localized_in?(current_language)
       redirect_to [:confirm_localization, :admin, resource.website, { about: resource.to_gid.to_s }]
+    elsif resource_is_extranet_object? && !resource.extranet.localized_in?(current_language)
+      redirect_to [:confirm_localization, :admin, resource.extranet, { about: resource.to_gid.to_s }]
     else
-      @l10n = resource.localize_in!(current_language)
-      edit_path_method = "edit_admin_#{resource.class.base_class.to_s.parameterize.underscore}_path"
-      redirect_to public_send(edit_path_method, id: resource.id)
+      localize_resource_and_redirect_to_edit
     end
+  end
+
+  def resource_is_website_direct_object?
+    resource.try(:is_direct_object?) && !resource.is_a?(Communication::Website)
+  end
+
+  def resource_is_extranet_object?
+    resource.respond_to?(:extranet) && !resource.is_a?(Communication::Extranet)
+  end
+
+  def localize_resource_and_redirect_to_edit
+    @l10n = resource.localize_in!(current_language)
+    edit_path_method = "edit_admin_#{resource.class.base_class.to_s.parameterize.underscore}_path"
+    redirect_to public_send(edit_path_method, id: resource.id)
   end
 
   def resource_name

@@ -42,6 +42,7 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
       redirect_to [:admin, @location],
                   notice: t('admin.successfully_updated_html', model: @location.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
