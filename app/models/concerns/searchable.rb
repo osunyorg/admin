@@ -49,7 +49,7 @@ module Searchable
       next unless value.present?
       text += " #{value}"
     end
-    text += l10n.contents_full_text
+    text += " #{l10n.contents_full_text}"
     text
   end
 end
