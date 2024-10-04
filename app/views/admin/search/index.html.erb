@@ -13,7 +13,7 @@
       if result.website_id?
         path = public_send path_name, { website_id: result.website_id, id: result.about_object_id }
       elsif result.extranet_id?
-        path = send path_name, { extranet_id: result.extranet_id, id: result.about_object_id }
+        path = public_send path_name, { extranet_id: result.extranet_id, id: result.about_object_id }
       else
         path = send path_name, { id: result.about_object_id }
       end
