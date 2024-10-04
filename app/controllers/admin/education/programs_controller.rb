@@ -70,7 +70,8 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   def create
     @l10n.add_photo_import params[:photo_import]
     if @program.save
-      redirect_to [:admin, @program], notice: t('admin.successfully_created_html', model: @program.to_s_in(current_language))
+      redirect_to [:admin, @program],
+                  notice: t('admin.successfully_created_html', model: @program.to_s_in(current_language))
     else
       @categories = categories
       breadcrumb
@@ -79,26 +80,51 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   end
 
   def update
+    load_part
     if @program.update(program_params)
       load_localization
-      @l10n.add_photo_import params[:photo_import]
+      @l10n.add_photo_import params[:photo_import] if params.has_key?(:photo_import)
       @program.touch # to ensure it send the photo_import picture
-      redirect_to [:admin, @program], notice: t('admin.successfully_updated_html', model: @program.to_s_in(current_language))
+      redirect_to after_update_path,
+                  notice: t('admin.successfully_updated_html', model: @program.to_s_in(current_language))
     else
       load_invalid_localization
       @categories = categories
-      breadcrumb
-      add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render_invalid_update
     end
   end
 
   def destroy
     @program.destroy
-    redirect_to admin_education_programs_url, notice: t('admin.successfully_destroyed_html', model: @program.to_s_in(current_language))
+    redirect_to admin_education_programs_url,
+                notice: t('admin.successfully_destroyed_html', model: @program.to_s_in(current_language))
   end
 
   protected
+
+  def load_part
+    part_from_params = params.dig('education_program', 'part')
+    @part = part_from_params if ['admission', 'certification', 'pedagogy', 'presentation', 'results'].include?(part_from_params)
+  end
+
+  def after_update_path
+    @part.present?  ? public_send("#{@part}_admin_education_program_path", @program)
+                    : admin_education_program_path(@program)
+  end
+
+  def render_invalid_update
+    if @part.present?
+      breadcrumb
+      add_breadcrumb  t("education.program.parts.#{@part}.label"),
+                      public_send("#{@part}_admin_education_program_path", id: @program, program_id: nil)
+      add_breadcrumb  t('edit')
+      render "admin/education/programs/parts/edit_#{@part}", status: :unprocessable_entity
+    else
+      breadcrumb
+      add_breadcrumb t('edit')
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def categories
     current_university.program_categories

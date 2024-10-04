@@ -31,10 +31,15 @@ namespace :education do
     end
     member do
       get 'presentation' => 'programs/parts#presentation', as: :presentation
+      get 'presentation/edit' => 'programs/parts#edit_presentation', as: :edit_presentation
       get 'pedagogy' => 'programs/parts#pedagogy', as: :pedagogy
+      get 'pedagogy/edit' => 'programs/parts#edit_pedagogy', as: :edit_pedagogy
       get 'results' => 'programs/parts#results', as: :results
+      get 'results/edit' => 'programs/parts#edit_results', as: :edit_results
       get 'admission' => 'programs/parts#admission', as: :admission
+      get 'admission/edit' => 'programs/parts#edit_admission', as: :edit_admission
       get 'certification' => 'programs/parts#certification', as: :certification
+      get 'certification/edit' => 'programs/parts#edit_certification', as: :edit_certification
       get 'alumni' => 'programs/parts#alumni', as: :alumni
       get :children
       get :preview
