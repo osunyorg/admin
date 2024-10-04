@@ -2,6 +2,7 @@
 
 <div class="row">
   <div class="col-lg-3">
+    <%= osuny_label t('education.program.registration_scheme') %>
     <table class="table">
       <tbody>
         <tr>
@@ -35,5 +36,8 @@
 <%= render 'admin/communication/blocks/content/editor', about: @l10n %>
 
 <% content_for :action_bar_right do %>
-  <%= edit_link @program %>
+  <%= link_to_if  can?(:edit, @program),
+                  t('edit'),
+                  edit_presentation_admin_education_program_path(@program),
+                  class: button_classes %>
 <% end %>

@@ -266,6 +266,8 @@ fr:
     close: Fermer le dossier
   hello: "Bonjour %{name} !"
   home: Accueil
+  html:
+    external_link: lien externe
   imports:
     deleted_user: Utilisateur supprimé
     error_msg: "Ligne %{line} : %{error}"
