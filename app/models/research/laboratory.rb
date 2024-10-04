@@ -9,14 +9,10 @@
 #  zipcode       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  language_id   :uuid             indexed
-#  original_id   :uuid             indexed
 #  university_id :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_research_laboratories_on_language_id    (language_id)
-#  index_research_laboratories_on_original_id    (original_id)
 #  index_research_laboratories_on_university_id  (university_id)
 #
 # Foreign Keys
