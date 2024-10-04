@@ -11,7 +11,6 @@
 #  published_at     :datetime
 #  slug             :string
 #  summary          :text
-#  text             :text
 #  title            :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
