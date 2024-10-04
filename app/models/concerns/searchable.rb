@@ -47,7 +47,7 @@ module Searchable
       next unless l10n.respond_to? property
       value = l10n.send property
       next unless value.present?
-      text += "#{value} "
+      text += " #{value}"
     end
     text += l10n.contents_full_text
     text
