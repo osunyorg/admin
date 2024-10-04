@@ -261,6 +261,8 @@ en:
     close: Close folder
   hello: "Hello %{name}!"
   home: Home
+  html:
+    external_link: external link
   imports:
     deleted_user: Deleted user
     error_msg: "Line %{line}: %{error}"
