@@ -68,6 +68,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       redirect_to admin_university_person_path(@person),
                   notice: t('admin.successfully_updated_html', model: @person.to_s_in(current_language))
     else
+      load_invalid_localization
       @categories = categories
       breadcrumb
       add_breadcrumb t('edit')

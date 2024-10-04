@@ -48,10 +48,13 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   end
 
   def update
-    @l10n.add_photo_import params[:photo_import]
     if @volume.update(volume_params)
+      load_localization
+      @l10n.add_photo_import params[:photo_import]
+      @volume.touch # to ensure it send the photo_import picture
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_updated_html', model: @volume.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       render :edit, status: :unprocessable_entity
       add_breadcrumb t('edit')

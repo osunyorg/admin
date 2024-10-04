@@ -38,6 +38,7 @@ class Admin::Education::Schools::RolesController < Admin::Education::Schools::Ap
     if @role.update(role_params)
       redirect_to admin_education_school_role_path(@role), notice: t('admin.successfully_updated_html', model: @role.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
