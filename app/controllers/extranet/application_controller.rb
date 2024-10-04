@@ -20,7 +20,11 @@ class Extranet::ApplicationController < ApplicationController
   end
   
   def redirect_if_language_not_active!
-    redirect_to extranet_root_path(lang: current_extranet.default_language) unless current_extranet.active_languages.include?(current_language)
+    unless current_extranet.active_languages.include?(current_language)
+      default_language = current_user.language
+      default_language = current_extranet.default_language unless current_extranet.active_languages.include?(default_language)
+      redirect_to extranet_root_path(lang: default_language)
+    end
   end
 
   def authorize_extranet_access!
