@@ -15,7 +15,7 @@
       elsif result.extranet_id?
         path = public_send path_name, { extranet_id: result.extranet_id, id: result.about_object_id }
       else
-        path = send path_name, { id: result.about_object_id }
+        path = public_send path_name, { id: result.about_object_id }
       end
       %>
       <div class="col-lg-4 col-md-6">
