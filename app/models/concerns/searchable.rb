@@ -44,10 +44,8 @@ module Searchable
   def build_search_text(l10n)
     text = l10n.to_s
     SEARCH_FIELDS_OPTIONAL.each do |property|
-      next unless l10n.respond_to? property
-      value = l10n.public_send property
-      next unless value.present?
-      text += " #{value}"
+      value = l10n.try(property)
+      text += " #{value}" if value.present?
     end
     text += " #{l10n.contents_full_text}"
     text

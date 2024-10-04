@@ -13,23 +13,27 @@ window.osuny.search = {
     },
 
     open: function () {
+        'use strict';
         this.field.focus();
     },
 
     update: function () {
+        'use strict';
         this.term = this.field.value;
         this.loadResults();
     },
 
     loadResults: function () {
+        'use strict';
         this.query = this.endpoint + '?term=' + this.term;
         this.request.abort();
         this.request.open('GET', this.query, true);
-        this.request.addEventListener("load", this.resultsLoaded.bind(this));
+        this.request.addEventListener('load', this.resultsLoaded.bind(this));
         this.request.send();
     },
 
     resultsLoaded: function () {
+        'use strict';
         this.results.innerHTML = this.request.response;
     },
 
