@@ -9,7 +9,7 @@ class Communication::Block::Template::Datatable < Communication::Block::Template
   def elements
     if alphabetical
       @elements.sort_by! do |element|
-        "#{element.cells&.first&.to_s&.parameterize&.downcase}"
+        "#{element.cells&.first&.to_s&.parameterize&.downcase.to_s}"
       end
     end
     @elements

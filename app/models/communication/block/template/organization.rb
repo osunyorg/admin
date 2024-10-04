@@ -17,7 +17,7 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   def elements
     if alphabetical
       @elements.sort_by! do |element|
-        "#{element.best_name&.parameterize&.downcase}"
+        "#{element.best_name&.parameterize&.downcase.to_s}"
       end
     end
     @elements
