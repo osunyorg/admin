@@ -8,7 +8,7 @@ class Admin::SearchController < Admin::ApplicationController
   protected
 
   def search_results
-    results = current_university.search.for_title(@term).in(current_language).limit(30)
+    results = current_university.search.for_title(@term).for_language(current_language).limit(30)
     results = results.where(website_id: params[:website_id]) if params.has_key?(:website_id)
     results = results.where(extranet_id: params[:extranet_id]) if params.has_key?(:extranet_id)
     results
