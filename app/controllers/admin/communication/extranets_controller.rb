@@ -38,6 +38,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     if @extranet.update(extranet_params)
       redirect_to [:admin, @extranet], notice: t('admin.successfully_updated_html', model: @extranet.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -49,6 +50,19 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @extranet.to_s_in(current_language))
   end
 
+  def confirm_localization
+    @about_gid = params[:about]
+    @about = GlobalID::Locator.locate(@about_gid)
+  end
+
+  def do_confirm_localization
+    @about_gid = params[:about]
+    @about = GlobalID::Locator.locate(@about_gid)
+    @extranet.localize_in!(current_language)
+    @about.localize_in!(current_language)
+    redirect_to [:edit, :admin, @about]
+  end
+
   protected
 
   def extranet_params
@@ -57,7 +71,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     ]
     localizations_attributes = [
       :id, :language_id,
-      :name,
+      :name, :published,
       :registration_contact,
       :logo, :logo_delete, 
       :favicon, :favicon_delete, 
@@ -74,6 +88,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
         :sso_button_label
       ]
     end
+    allowed_params << :default_language_id if @extranet&.persisted?
     allowed_params << { localizations_attributes: localizations_attributes }
     params.require(:communication_extranet)
           .permit(allowed_params)

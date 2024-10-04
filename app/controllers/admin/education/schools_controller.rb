@@ -42,6 +42,7 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
     if @school.update(school_params)
       redirect_to [:admin, @school], notice: t('admin.successfully_updated_html', model: @school.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

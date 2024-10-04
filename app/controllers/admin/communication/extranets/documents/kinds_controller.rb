@@ -40,6 +40,7 @@ class Admin::Communication::Extranets::Documents::KindsController < Admin::Commu
       redirect_to admin_communication_extranet_document_kind_path(@kind),
                   notice: t('admin.successfully_updated_html', model: @kind.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

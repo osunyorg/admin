@@ -45,6 +45,7 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
     if @laboratory.update(laboratory_params)
       redirect_to [:admin, @laboratory], notice: t('admin.successfully_updated_html', model: @laboratory.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

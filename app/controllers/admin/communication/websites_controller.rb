@@ -65,6 +65,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     if @website.update_and_sync(website_params)
       redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -113,8 +114,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       ]
     ]
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?
-    # For now, default language can't be changed, too many implications, especially around special pages.
-    attribute_names << :default_language_id unless @website&.persisted?
+    attribute_names << :default_language_id if @website&.persisted?
     params.require(:communication_website)
           .permit(*attribute_names)
           .merge(

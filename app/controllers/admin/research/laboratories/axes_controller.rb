@@ -37,10 +37,11 @@ class Admin::Research::Laboratories::AxesController < Admin::Research::Laborator
       redirect_to admin_research_laboratory_axis_path(@axis), 
                   notice: t('admin.successfully_updated_html', model: @axis.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
-  end
+    end
   end
 
   def destroy

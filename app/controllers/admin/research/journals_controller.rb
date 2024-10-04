@@ -47,6 +47,7 @@ class Admin::Research::JournalsController < Admin::Research::Journals::Applicati
     if @journal.update(journal_params)
       redirect_to [:admin, @journal], notice: t('admin.successfully_updated_html', model: @journal.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

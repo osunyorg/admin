@@ -42,6 +42,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
     if @kind.update(kind_params)
       redirect_to admin_research_journal_kind_path(@kind), notice: t('admin.successfully_updated_html', model: @kind.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb @l10n, admin_research_journal_kind_path(@kind)
       add_breadcrumb t('edit')
