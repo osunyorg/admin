@@ -33,6 +33,7 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path kind)
 
   include AsDirectObject
+  include Duplicable
   include Filterable
   include Sanitizable
   include Localizable

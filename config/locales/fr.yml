@@ -388,7 +388,9 @@ fr:
     favorites:
       add: Ajouter aux favoris
       remove: Enlever des favoris
-      none: Vous n'avez pas encore de favoris, n'hésitez pas à ajouter les sites Web, extranets ou revues scientifiques auxquels vous accédez fréquemment !
+      none:
+        in_university: Vous n'avez pas encore de favoris, n'hésitez pas à ajouter les sites Web, extranets ou revues scientifiques auxquels vous accédez fréquemment !
+        not_in_university: Vous n'avez pas encore de favoris, n'hésitez pas à ajouter les sites Web ou extranets auxquels vous accédez fréquemment !
   photo_import:
     next: Images suivantes
     nothing: Aucun résultat pour cette recherche

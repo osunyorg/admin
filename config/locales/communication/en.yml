@@ -374,6 +374,7 @@ en:
           as_tree: Organize structure
           delete_special_page_notice: Can't delete this page
           draft: Draft
+          duplicate_special_page_notice: Can't duplicate this page
           full_width_status: Full width
           in: in
           in_full_width: full width

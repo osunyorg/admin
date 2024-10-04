@@ -374,6 +374,7 @@ fr:
           as_tree: Organiser l'arborescence
           delete_special_page_notice: Impossible de supprimer cette page
           draft: Brouillon
+          duplicate_special_page_notice: Impossible de dupliquer cette page
           full_width_status: Pleine largeur
           in: dans
           in_full_width: en pleine largeur
