@@ -5,7 +5,6 @@
 #  id               :uuid             not null, primary key
 #  abstract         :string
 #  authors_list     :text
-#  bibliography     :text
 #  keywords         :text
 #  meta_description :text
 #  published        :boolean          default(FALSE)
