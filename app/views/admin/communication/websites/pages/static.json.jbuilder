@@ -27,4 +27,4 @@ json.header_cta do
   json.label @about.header_cta_label
   json.target @about.header_cta_url
 end
-json.partial! 'admin/communication/blocks/content/static', about: @about
+json.partial! 'admin/communication/contents/static', about: @about

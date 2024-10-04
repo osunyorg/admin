@@ -56,6 +56,10 @@ en:
             to: to
         display_options:
           title: Display options
+        editor:
+          offcanvas:
+            close: Close block edition
+            title: Block edition
         empty: This block is empty and will not appear
         headings:
           add: Add a title
@@ -361,15 +365,18 @@ en:
               description:
                 label: Description
               element:
+                alt_title:
+                  label: Alternative title
+                  placeholder: Enter link alternative title
                 description:
                   label: Description
                   placeholder: Enter link description
-                url:
-                  label: URL
-                  placeholder: 'https://'
                 title:
                   label: Title
                   placeholder: Enter link title
+                url:
+                  label: URL
+                  placeholder: 'https://'
               remove: Remove the link
           locations:
             description: A selection of locations on a campus.

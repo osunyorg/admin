@@ -6,7 +6,7 @@
               <%= 'treeview__element--empty' unless page.has_children? %>"
       data-id="<%= page.id %>"
       data-parent="<%= page.parent_id %>">
-    <div class="card card--horizontal treeview__label">
+    <div class="<%= osuny_card_classes(horizontal: true) %> treeview__label">
       <%= link_to children_admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                   class: 'js-treeview-openzone d-inline-block', remote: true do %>
         <%= osuny_thumbnail_localized page %>

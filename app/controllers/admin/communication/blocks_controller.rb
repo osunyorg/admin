@@ -27,15 +27,17 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       mandatory_module: Contentful
     )
     breadcrumb
+    render layout: 'admin/layouts/raw'
   end
 
   def show
-    breadcrumb
+    render layout: false
   end
 
   def edit
     @element = @block.template.default_element
     breadcrumb
+    render layout: 'admin/layouts/raw'
   end
 
   def create

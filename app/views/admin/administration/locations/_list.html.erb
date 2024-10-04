@@ -1,7 +1,7 @@
 <div class="row g-2 mb-3">
   <% locations.each do |location| %>
     <div>
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized location %>
         <div class="card-body">
         <%= osuny_link_localized location, [:admin, location] %>
