@@ -840,9 +840,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
     t.datetime "locked_at", precision: nil
     t.datetime "failed_at", precision: nil
     t.string "locked_by"
+    t.string "queue"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "queue"
     t.string "signature"
     t.text "args"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
