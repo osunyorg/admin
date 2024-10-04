@@ -45,7 +45,7 @@ module Searchable
     text = l10n.to_s
     SEARCH_FIELDS_OPTIONAL.each do |property|
       next unless l10n.respond_to? property
-      value = l10n.send property
+      value = l10n.public_send property
       next unless value.present?
       text += " #{value}"
     end
