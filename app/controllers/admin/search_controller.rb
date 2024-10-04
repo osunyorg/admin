@@ -1,7 +1,7 @@
 class Admin::SearchController < Admin::ApplicationController
   def index
     @term = params[:term]
-    @results = @term.present? ? search_results: @results = Search.none
+    @results = @term.present? ? search_results : Search.none
     render layout: false
   end
 
