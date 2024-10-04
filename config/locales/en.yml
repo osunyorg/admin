@@ -389,7 +389,9 @@ en:
     favorites:
       add: Add to favorites
       remove: Remove from favorites
-      none: You have no favorites yet. Feel free to add the websites, extranets or journals you often work on!
+      none:
+        in_university: You have no favorites yet. Feel free to add the websites, extranets or journals you often work on!
+        not_in_university: You have no favorites yet. Feel free to add the websites or extranets you often work on!
   photo_import:
     next: Next image
     nothing: No results for this search
