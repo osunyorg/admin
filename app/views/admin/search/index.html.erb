@@ -1,9 +1,9 @@
 <% if @results.none? %>
-  <p class="text-white text-center">Aucun résultat</p>
+  <p class="text-white text-center"><%= t('admin.search.no_results') %></p>
 <% else %>
   <div class="row g-2 mb-3">
-    <% 
-    @results.each do |result| 
+    <%
+    @results.each do |result|
       object = result.about_object
       l10n = result.about_localization
       # communication_website_post

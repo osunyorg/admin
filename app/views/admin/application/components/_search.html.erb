@@ -1,35 +1,35 @@
 <div class="text-center">
-  <button type="button" 
-          class="btn border border-dark pe-5" 
+  <button type="button"
+          class="btn border border-dark pe-5"
           aria-label="<%= t('admin.search.label') %>"
           data-bs-toggle="modal"
           data-bs-target="#searchModal">
     <%= lucide_icon 'search' %>
-    <span class="me-5"><%= t('admin.search.button') %></span>
+    <span class="me-5"><%= t('admin.search.buttons.search') %></span>
   </button>
 </div>
 
-<div  class="modal fade collapse" 
-      id="searchModal" 
+<div  class="modal fade collapse"
+      id="searchModal"
       data-endpoint="<%= admin_search_path %>"
-      tabindex="-1" 
-      aria-modal="true" 
+      tabindex="-1"
+      aria-modal="true"
       role="dialog">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content bg-transparent border-0">
       <div class="modal-header bg-transparent border-0 p-0" style="max-width: 400px; margin: 100px auto">
         <div class="d-flex align-items-center">
-          <input  class="form-control form-control-lg" 
+          <input  class="form-control form-control-lg"
                   id="searchField"
                   placeholder="<%= t('admin.search.placeholder') %>"
                   style="min-width: 300px;"
-                  name="term" 
+                  name="term"
                   autofocus>
           <span data-bs-theme="dark">
-            <button type="button" 
-                    class="btn-close" 
-                    data-bs-dismiss="modal" 
-                    aria-label="Close"></button>
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="<%= t('admin.search.buttons.close') %>"></button>
           </span>
         </div>
       </div>
