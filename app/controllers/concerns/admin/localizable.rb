@@ -34,15 +34,10 @@ module Admin::Localizable
     return if @l10n.present?
 
     if resource_is_website_direct_object? && !resource.website.localized_in?(current_language)
-      # If this is a (website) direct object and the website is not yet localized in the requested language,
-      # we have to confirm we want to localize the website itself before localizing the object
-      redirect_to [:confirm_localization, :admin, resource.website, { about: resource.to_gid.to_s }]
+      redirect_to_confirm_localization(resource.website)
     elsif resource_is_extranet_object? && !resource.extranet.localized_in?(current_language)
-      # If this is an extranet object and the extranet is not yet localized in the requested language,
-      # we have to confirm we want to localize the extranet itself before localizing the object
-      redirect_to [:confirm_localization, :admin, resource.extranet, { about: resource.to_gid.to_s }]
+      redirect_to_confirm_localization(resource.extranet)
     else
-      # Simply localize the resource and redirect to edit form
       localize_resource_and_redirect_to_edit
     end
   end
@@ -53,6 +48,10 @@ module Admin::Localizable
 
   def resource_is_extranet_object?
     resource.respond_to?(:extranet) && !resource.is_a?(Communication::Extranet)
+  end
+
+  def redirect_to_confirm_localization(parent_resource)
+    redirect_to [:confirm_localization, :admin, parent_resource, { about: resource.to_gid.to_s }]
   end
 
   def localize_resource_and_redirect_to_edit
