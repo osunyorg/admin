@@ -33,7 +33,7 @@
 </div>
 <%= osuny_separator %>
 <%= render 'admin/application/a11y/widget', about: @l10n, horizontal: true %>
-<%= render 'admin/communication/blocks/content/editor', about: @l10n %>
+<%= render 'admin/communication/contents/editor', about: @l10n %>
 
 <% content_for :action_bar_right do %>
   <%= link_to_if  can?(:edit, @program),
