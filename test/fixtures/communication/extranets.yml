@@ -3,3 +3,4 @@ default_extranet:
   feature_alumni: true
   about: default_program (Education::Program)
   university: default_university
+  default_language: fr
