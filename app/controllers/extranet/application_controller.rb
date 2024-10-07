@@ -2,6 +2,7 @@ class Extranet::ApplicationController < ApplicationController
   layout 'extranet/layouts/application'
 
   before_action :redirect_if_no_extranet!,
+                :redirect_if_language_not_active!,
                 :authorize_extranet_access!
 
   def breadcrumb
@@ -16,6 +17,10 @@ class Extranet::ApplicationController < ApplicationController
 
   def redirect_if_no_extranet!
     redirect_to admin_root_path(lang: current_university.default_language) unless current_extranet
+  end
+  
+  def redirect_if_language_not_active!
+    redirect_to root_path(lang: nil) unless current_extranet.active_languages.include?(current_language)
   end
 
   def authorize_extranet_access!

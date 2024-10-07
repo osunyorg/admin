@@ -1,5 +1,7 @@
 <% content_for :title, @l10n %>
 
+<%= render 'admin/application/l10n/widget', about: @kind, l10n: @l10n, small: true %>
+
 <%= render 'admin/communication/extranets/documents/list', documents: @documents %>
 <%= paginate @documents %>
 
