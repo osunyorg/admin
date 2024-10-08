@@ -1,4 +1,3 @@
----
 <%# TODO: Title should be removed safely as website title is now in languages config file. %>
 title: >-
   <%= prepare_text_for_static @website.original_localization.to_s %>
@@ -11,4 +10,3 @@ default:
   shared_image:
     id: <%= @website.default_shared_image.blob&.id %>
 <% end %>
----
