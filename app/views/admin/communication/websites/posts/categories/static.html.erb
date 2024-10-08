@@ -12,13 +12,19 @@ category = @l10n.about
             full_width: true,
             toc_offcanvas: true %>
 position: <%= category.position %>
-<% if @l10n.parent %>
-parent: "<%= @l10n.parent.path %>"
+<% 
+if @l10n.parent
+  hugo = @l10n.parent.hugo(@website)
+  %>
+parent: "<%= hugo.path %>"
 <% end %>
 <% if @l10n.children.any? %>
 children:
-<% @l10n.children.ordered.each do |child| %>
-  - <%= child.path %>
+<% 
+@l10n.children.ordered.each do |child|
+  hugo = child.hugo(@website)
+  %>
+  - <%= hugo.path %>
 <% end %>
 <% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
