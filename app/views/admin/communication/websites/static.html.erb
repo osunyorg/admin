@@ -1,5 +1,7 @@
+---
 <%# TODO: Title should be removed safely as website title is now in languages config file. %>
-<%= render 'admin/application/static/title', about: @website.original_localization.to_s %>
+title: >-
+  <%= prepare_text_for_static @website.original_localization.to_ %>
 default:
 <% if @website.default_image.attached? %>
   image:
@@ -9,3 +11,4 @@ default:
   shared_image:
     id: <%= @website.default_shared_image.blob&.id %>
 <% end %>
+---
