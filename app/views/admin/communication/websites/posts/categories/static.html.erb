@@ -12,6 +12,15 @@ category = @l10n.about
             full_width: true,
             toc_offcanvas: true %>
 position: <%= category.position %>
+<% if @l10n.parent %>
+parent: "<%= @l10n.parent.path %>"
+<% end %>
+<% if @l10n.children.any? %>
+children:
+<% @l10n.children.ordered.each do |child| %>
+  - <%= child.path %>
+<% end %>
+<% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/featured_image/static', about: @l10n %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
