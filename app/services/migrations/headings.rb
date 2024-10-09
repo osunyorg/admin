@@ -11,20 +11,47 @@ module Migrations
     end
 
     def migrate
+      @objects_migrated = 0
       objects_types.each do |type|
         objects = objects_by(type)
-        puts_red "Migration of #{type} (#{objects.count})"
+        puts_red "Migration of #{type} (#{objects.count} objects)"
         objects.find_each do |object|
           migrate_object(object)
         end
       end
+      "Migration done (#{@objects_migrated})"
     end
 
     def migrate_object(object)
+      return unless object.respond_to? :blocks
+      @objects_migrated += 1
       puts object
+      position = 0
+      object.blocks.without_heading.ordered.each do |block|
+        block.update_column :position, position
+        position += 1
+      end
+      object.headings.root.ordered.each do |heading|
+        create_block_title(heading, position)
+        position += 1 
+        heading.blocks.ordered.each do |block|
+          block.update_column :position, position
+          position += 1  
+        end
+      end
     end
 
     protected
+
+    def create_block_title(heading, position)
+      block = heading.about.blocks.where(
+        template_kind: 'title',
+        title: heading.title,
+        university: heading.university,
+        about: heading.about,
+        position: position
+      ).first_or_create
+    end
 
     def self.suspend_callbacks
       Communication::Block.skip_callback :save, :after, :connect_and_sync_direct_sources
