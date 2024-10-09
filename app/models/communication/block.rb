@@ -134,15 +134,13 @@ class Communication::Block < ApplicationRecord
   def paste(about)
     block = self.dup
     block.about = about
-    block.heading = nil
     block.save
     block
   end
 
-  def localize_for!(new_localization, localized_heading_id = nil)
+  def localize_for!(new_localization)
     localized_block = self.dup
     localized_block.about = new_localization
-    localized_block.heading_id = localized_heading_id
     localized_block.save
   end
 

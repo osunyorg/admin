@@ -92,12 +92,8 @@ module AsLocalization
   end
 
   def localize_contents!(localization)
-    blocks.without_heading.ordered.each do |block|
+    blocks.ordered.each do |block|
       block.localize_for!(localization)
-    end
-
-    headings.root.ordered.each do |heading|
-      heading.localize_for!(localization)
     end
   end
 

@@ -21,7 +21,7 @@ module Contentful
   end
 
   def large_number_of_blocks?
-    blocks.count > LARGE_NUMBER_OF_BLOCKS
+    blocks.count >= LARGE_NUMBER_OF_BLOCKS
   end
 
   # Basic rule is: TOC if 2 titles or more
