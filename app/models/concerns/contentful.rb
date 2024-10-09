@@ -1,9 +1,9 @@
 module Contentful
   extend ActiveSupport::Concern
 
-  included do
-    LARGE_NUMBER_OF_BLOCKS = 5
+  LARGE_NUMBER_OF_BLOCKS = 5
 
+  included do
     has_many :blocks, as: :about, class_name: 'Communication::Block', dependent: :destroy
     has_many :headings, as: :about, class_name: 'Communication::Block::Heading', dependent: :destroy
   end
