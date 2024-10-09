@@ -23,6 +23,7 @@ class Education::Diploma < ApplicationRecord
 
   include AsIndirectObject
   include Sanitizable
+  include Searchable
   include Localizable
   include WithUniversity
 

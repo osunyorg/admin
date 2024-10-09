@@ -37,6 +37,7 @@ class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
   include Localizable
   include Sanitizable
+  include Searchable
   include WithPosition
   include WithUniversity
 
