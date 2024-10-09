@@ -100,31 +100,24 @@
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 
 <%= osuny_panel t('university.organization.employees') do %>
-  <div class="table-responsive">
-    <table class="<%= table_classes %>">
-      <thead>
-        <tr>
-          <th><%= University::Person.human_attribute_name('last_name') %></th>
-          <th><%= University::Person.human_attribute_name('first_name') %></th>
-          <th><%= t('university.person.experience.period') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @organization.experiences.ordered.each do |experience| %>
-          <%
-            person = experience.person
-            path = admin_university_person_path(person)
-          %>
-          <tr>
-            <td><%= link_to_if can?(:read, person), person.last_name, path %></td>
-            <td><%= link_to_if can?(:read, person), person.first_name, path %></td>
-            <td>
-              <%= "#{experience.from_year} - #{experience.to_year.present? ? experience.to_year : t('today')}" %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="row g-2 mb-3">
+    <% @organization.experiences.ordered.each do |experience| %>
+      <%
+        person = experience.person
+        path = admin_university_person_path(person)
+      %>
+      <div>
+        <div class="<%= osuny_card_classes(horizontal: true) %>">
+          <%= osuny_thumbnail_localized person %>
+          <div class="card-body">
+            <%= osuny_link_localized person, path %>
+          </div>
+          <div class="card-footer small text-muted">
+            <%= "#{experience.from_year} - #{experience.to_year.present? ? experience.to_year : t('today')}" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% end if @organization.experiences.any? %>
 
