@@ -86,7 +86,7 @@ class Communication::Block < ApplicationRecord
     testimonials: 400,
     timeline: 700,
     video: 52,
-  }
+  }, _prefix: :template
 
   CATEGORIES = {
     basic: [:title, :chapter, :image, :video, :sound, :datatable],

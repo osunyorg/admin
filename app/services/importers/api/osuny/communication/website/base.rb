@@ -38,27 +38,16 @@ class Importers::Api::Osuny::Communication::Website::Base
     blocks.each do |b|
       migration_identifier = b[:migration_identifier]
       template_kind = b[:template_kind]
-      if template_kind == 'title'
-        heading = object.headings
-                        .where(
-                          university: university,
-                          migration_identifier: migration_identifier
-                        )
-                        .first_or_initialize
-        heading.title = b[:title]
-        heading.save
-      else
-        block = object.blocks
-                      .where(
-                        university: university,
-                        migration_identifier: migration_identifier,
-                        template_kind: template_kind
-                      )
-                      .first_or_initialize
-        block.heading = heading
-        block.data = block.template.data.merge b[:data]
-        block.save
-      end
+      block = object.blocks
+                    .where(
+                      university: university,
+                      migration_identifier: migration_identifier,
+                      template_kind: template_kind
+                    )
+                    .first_or_initialize
+      block.heading = heading
+      block.data = block.template.data.merge b[:data]
+      block.save
     end
   end
 end
