@@ -637,6 +637,15 @@ fr:
               vertical:
                 description: Les événements sont présentés verticalement, dans la continuité de la page.
                 label: Vertical
+          title: 
+            description: Un titre de niveau 2, que l'on peut présenter replié si on le souhaite.
+            layouts:
+              classic:
+                description: Le titre, tout simplement.
+                label: Classique
+              collapsed:
+                description: Le titre replié, avec tout les blocs qui le suivent cachés et un bouton pour les afficher.
+                label: Replié
           video:
             description: Une vidéo intégrée dans la page depuis diverses plateformes, avec la transcription et sans lecture automatique.
             edit:
@@ -691,4 +700,5 @@ fr:
           sound: Son
           testimonials: Témoignages
           timeline: Frise chronologique
+          title: Titre
           video: Vidéo

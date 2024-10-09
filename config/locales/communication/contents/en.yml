@@ -637,6 +637,15 @@ en:
               vertical:
                 description: Events are shown vertically, along the page.
                 label: Vertical
+          title: 
+            description: A level 2 title, that can eventually be shown folded, with its content hidden.
+            layouts:
+              classic:
+                description: The title, as simple as possible.
+                label: Classic
+              collapsed:
+                description: The title is folded, which means all the blocks after it are hidden, and there's a button to show them.
+                label: Folded
           video:
             description: An embedded video from most platforms, with the text transcription for accessibility, and no autoplay.
             edit:
@@ -691,4 +700,5 @@ en:
           sound: Sound
           testimonials: Testimonials
           timeline: Timeline
+          title: Title
           video: Video

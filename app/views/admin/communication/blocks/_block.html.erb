@@ -46,8 +46,7 @@
         <div class="content-editor__elements__preview
                     content-editor__elements__preview--<%= block.template_kind %>">
           <div id="snippet-<%= block.id %>">
-            <%= render "admin/communication/blocks/title", block: block %>
-            <%= render "admin/communication/blocks/templates/#{block.template_kind}/snippet", block: block %>
+            <%= render 'admin/communication/blocks/block_snippet', block: block %>
           </div>
         </div>
         <%= render 'admin/application/a11y/status', about: block %>

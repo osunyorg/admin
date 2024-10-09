@@ -82,13 +82,14 @@ class Communication::Block < ApplicationRecord
     projects: 3101,
     programs: 58,
     sound: 1005,
+    title: 1001,
     testimonials: 400,
     timeline: 700,
     video: 52,
   }
 
   CATEGORIES = {
-    basic: [:chapter, :image, :video, :sound, :datatable],
+    basic: [:title, :chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
     references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :projects],
     utilities: [:files, :definitions, :contact, :links, :license, :embed]
