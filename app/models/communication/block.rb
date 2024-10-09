@@ -158,7 +158,7 @@ class Communication::Block < ApplicationRecord
   protected
 
   def last_ordered_element
-    about.blocks.where(heading_id: heading_id).ordered.last
+    about.blocks.ordered.last
   end
 
   def set_university_and_website_from_about
