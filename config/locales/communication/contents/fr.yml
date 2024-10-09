@@ -667,7 +667,7 @@ fr:
             zero: Aucun bloc
         modes:
           structure:
-            description: Dans le mode “Organiser le plan”, vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.
+            description: Dans le mode “Organiser le plan”, vous ne voyez qu'un petit aperçu de chaque bloc. C'est le mode idéal pour ranger les documents longs.
             tab: Organiser le plan
           write:
             description: Dans le mode “Écrire le contenu”, vous pouvez déplacer les blocs et les titres où vous voulez, indépendamment les uns des autres. Ainsi, vous pouvez déplacer un titre plus haut dans le document sans qu'il n'emporte ses blocs.

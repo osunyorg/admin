@@ -44,13 +44,15 @@ module Migrations
     protected
 
     def create_block_title(heading, position)
+      puts "Block with position #{position}"
       block = heading.about.blocks.where(
         template_kind: 'title',
-        title: heading.title,
+        migration_identifier: heading.id,
         university: heading.university,
-        about: heading.about,
-        position: position
+        about: heading.about
       ).first_or_create
+      block.update_columns  title: heading.title,
+                            position: position
     end
 
     def self.suspend_callbacks

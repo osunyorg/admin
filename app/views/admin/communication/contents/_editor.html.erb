@@ -1,10 +1,9 @@
 <%
-mode_expert = about.headings.many?
+mode_expert = about.show_toc?
 %>
+
 <div  class="js-content-editor mb-5"
-      data-sort-blocks-url="<%= reorder_admin_communication_blocks_path(website_id: nil, extranet_id: nil) %>"
-      data-sort-headings-url="<%= reorder_admin_communication_headings_path(website_id: nil, extranet_id: nil) %>"
-      >
+      data-sort-url="<%= reorder_admin_communication_blocks_path(website_id: nil, extranet_id: nil) %>">
   <% if mode_expert %>
     <div class="row">
       <div class="offset-lg-4 col-lg-8 col-xxl-6">

@@ -151,7 +151,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def full_text
-    template.full_text
+    "#{title} #{template.full_text}"
   end
 
   def to_s

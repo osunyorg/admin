@@ -1,20 +1,12 @@
+<%= render 'admin/communication/blocks/add', about: about if about.large_number_of_blocks? %>
 <div  class=" content-editor__elements
               content-editor--write
               content-editor__elements__root
               js-content-editor-sortable-container"
       id="content-editor-elements-root">
-  <% about.blocks.without_heading.ordered.each do |block| %>
+  <% about.blocks.ordered.each do |block| %>
     <%= render 'admin/communication/blocks/block', block: block %>
-  <% end %>
-  <% about.headings.root.ordered.each do |heading| %>
-    <%= render 'admin/communication/blocks/headings/heading', heading: heading %>
   <% end %>
 </div>
 <%= render "admin/communication/blocks/paste_block", about: about %>
-<div class="content-editor__actions row mt-4">
-  <div class="offset-lg-4 col-lg-8 col-xxl-6">
-    <%= link_to t('admin.communication.blocks.add'),
-                new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
-                class: 'btn btn-lg btn-dark js-content-editor__add-block' if can? :create, Communication::Block %>
-  </div>
-</div>
+<%= render 'admin/communication/blocks/add', about: about %>
