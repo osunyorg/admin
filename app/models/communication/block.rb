@@ -122,6 +122,7 @@ class Communication::Block < ApplicationRecord
 
   def language
     return @language if defined?(@language)
+    return unless about.respond_to?(:language)
     @language ||= about.language
   end
 

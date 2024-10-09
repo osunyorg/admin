@@ -12,17 +12,26 @@
       </tr>
     </thead>
     <tbody>
-      <% @blocks.each do |block| %>
+      <% 
+      @blocks.each do |block| 
+        about = block.about
+        %>
         <tr>
           <td>
             <%= truncate "#{block}" %><br>
             <small><%= block.id %></small>
           </td>
           <td>
-            <% if block.about.present? %>
-              <%= truncate "#{block.about}" %>
+            <% if about.present? 
+              begin
+                name = about.to_s_in(block.language)
+              rescue
+                name = about.to_s
+              end
+              %>
+              <p class="mb-0"><%= name %></p>
               <span class="badge bg-dark">
-                <%= block.about.class.model_name.human %>
+                <%= block.about.class.model_name %>
               </span>
             <% end %>
           </td>
