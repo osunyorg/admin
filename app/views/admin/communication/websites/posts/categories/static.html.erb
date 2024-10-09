@@ -1,7 +1,8 @@
 <%
 category = @l10n.about
 %>---
-<%= render 'admin/application/static/title', about: @l10n %>
+title: >-
+  <%= prepare_text_for_static @l10n.to_s %>
 <%= render 'admin/application/static/permalink',
             about: @l10n,
             forced_slug: @l10n.slug_with_ancestors_slugs(separator: '-') %>

@@ -1,7 +1,8 @@
 <%
 journal = @l10n.about
 %>---
-<%= render 'admin/application/static/title', about: @l10n %>
+title: >-
+  <%= prepare_text_for_static @l10n.to_s %>
 issn: >-
   <%= @l10n.issn %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>

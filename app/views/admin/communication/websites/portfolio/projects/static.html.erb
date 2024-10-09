@@ -2,7 +2,10 @@
 project = @l10n.about
 %>
 ---
-<%= render 'admin/application/static/title', about: @l10n %>
+title: >-
+  <%= prepare_text_for_static @l10n.to_s %>
+subtitle: >-
+  <%= prepare_text_for_static @l10n.subtitle %>
 <%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
