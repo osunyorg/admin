@@ -108,13 +108,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
                                 : reorder_block
   end
 
-  def reorder_heading
-    @heading = current_university.communication_block_headings.find(@id)
-    @heading.update_columns position: @index_heading
-    @index_block = 0
-    @index_heading += 1
-  end
-
   def reorder_block
     @block = current_university.communication_blocks.find(@id)
     @block.update_columns position: @index_block,
