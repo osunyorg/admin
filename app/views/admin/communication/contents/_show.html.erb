@@ -1,7 +1,4 @@
 <% strip_javascript ||= false %>
-<% about.blocks.without_heading.published.ordered.each do |block| %>
+<% about.blocks.published.ordered.each do |block| %>
   <%= render "admin/communication/blocks/templates/#{block.template_kind}/show", block: block, strip_javascript: strip_javascript %>
-<% end %>
-<% about.headings.root.ordered.each do |heading| %>
-  <%= render 'admin/communication/blocks/headings/show', heading: heading, strip_javascript: strip_javascript %>
 <% end %>

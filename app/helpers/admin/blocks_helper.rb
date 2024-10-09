@@ -42,7 +42,7 @@ module Admin::BlocksHelper
   def block_html_class(block)
     html_class = "block block-#{block.template_kind}"
     html_class += " block-#{block.template_kind}--#{block.template.layout}" if block.template.respond_to?(:layout)
-    html_class += " block-titled" if block.template.heading_title
+    html_class += " block-titled" if block.title.present?
     html_class
   end
 end

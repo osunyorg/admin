@@ -4,8 +4,7 @@ window.osuny.contentEditor.sort = {
         'use strict';
         this.container = document.querySelector('.js-content-editor');
         this.sortableContainers = this.container.querySelectorAll('.js-content-editor-sortable-container');
-        this.sortHeadingsUrl = this.container.getAttribute('data-sort-headings-url');
-        this.sortBlocksUrl = this.container.getAttribute('data-sort-blocks-url');
+        this.sortUrl = this.container.getAttribute('data-sort-url');
         this.initSortable();
     },
 
@@ -23,43 +22,17 @@ window.osuny.contentEditor.sort = {
 
     onSortableEnd: function (event) {
         'use strict';
-        if (event.from.classList.contains('content-editor--write')) {
-            this.sortModeWrite(event.to);
-        } else if (event.from.classList.contains('content-editor--organize')) {
-            this.sortModeOrganize(event.to);
-        }
-    },
-
-    // Mode écriture du contenu
-    sortModeWrite: function (to) {
-        'use strict';
         var ids = [],
             child,
             i;
-        for (i = 0; i < to.children.length; i += 1) {
-            child = to.children[i];
-            // Nous utilisons une route déjà existante, dédiée aux blocs,
-            // pour gérer à la fois des blocs et des headings.
-            // Ca manque d'élégance.
+        for (i = 0; i < event.to.children.length; i += 1) {
+            child = event.to.children[i];
             ids.push({
                 id: child.dataset.id,
                 kind: child.dataset.kind
             });
         }
-        $.post(this.sortBlocksUrl, { ids: ids });
-    },
-
-    // Mode organisation du plan
-    sortModeOrganize: function (to) {
-        'use strict';
-        var ids = [],
-            child,
-            i;
-        for (i = 0; i < to.children.length; i += 1) {
-            child = to.children[i];
-            ids.push(child.dataset.id);
-        }
-        $.post(this.sortHeadingsUrl, { ids: ids });
+        $.post(this.sortUrl, { ids: ids });
     },
 
     invoke: function () {

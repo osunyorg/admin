@@ -82,13 +82,14 @@ class Communication::Block < ApplicationRecord
     projects: 3101,
     programs: 58,
     sound: 1005,
+    title: 1001,
     testimonials: 400,
     timeline: 700,
     video: 52,
-  }
+  }, _prefix: :template
 
   CATEGORIES = {
-    basic: [:chapter, :image, :video, :sound, :datatable],
+    basic: [:title, :chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
     references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :projects],
     utilities: [:files, :definitions, :contact, :links, :license, :embed]
@@ -121,6 +122,7 @@ class Communication::Block < ApplicationRecord
 
   def language
     return @language if defined?(@language)
+    return unless about.respond_to?(:language)
     @language ||= about.language
   end
 
@@ -133,15 +135,13 @@ class Communication::Block < ApplicationRecord
   def paste(about)
     block = self.dup
     block.about = about
-    block.heading = nil
     block.save
     block
   end
 
-  def localize_for!(new_localization, localized_heading_id = nil)
+  def localize_for!(new_localization)
     localized_block = self.dup
     localized_block.about = new_localization
-    localized_block.heading_id = localized_heading_id
     localized_block.save
   end
 
@@ -150,7 +150,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def full_text
-    template.full_text
+    "#{title} #{template.full_text}"
   end
 
   def to_s
