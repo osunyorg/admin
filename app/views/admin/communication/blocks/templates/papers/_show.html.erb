@@ -1,0 +1,36 @@
+<%
+class_name = "block block-papers"
+unless block.title.blank?
+  class_name += " block-with-title"
+end
+%>
+<div class="<%= class_name %>">
+  <div class="container">
+    <div class="block-content">
+      <% unless block.title.blank? %>
+        <div class="top">
+          <% unless block.title.blank? %>
+            <p class="block-title"><%= block.title %></p>
+          <% end %>
+        </div>
+      <% end %>
+      <% if block.data %>
+        <ul class="papers">
+          <% block.template.selected_papers.each do |paper|
+            next if paper.nil?
+          %>
+            <li>
+              <article class="paper" itemscope itemtype="https://schema.org/ScholarlyArticle" {{- if $inside_volume }} itemProp="hasPart" {{- end -}}>
+                <div>
+                  <h<%= block.heading_rank_children %>>
+                    <%= link_to paper.to_s_in(block.language), '#' %>
+                  </h<%= block.heading_rank_children %>>
+                </div>
+              </article>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
