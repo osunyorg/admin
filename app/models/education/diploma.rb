@@ -46,9 +46,9 @@ class Education::Diploma < ApplicationRecord
   scope :ordered, -> (language = nil) { order(:level) }
 
   def self.certifications
-    Dir.children(CERTIFICATIONS_DIRECTORY).map do |filename|
+    Dir.children(CERTIFICATIONS_DIRECTORY).map { |filename|
       filename.remove('.svg')
-    end
+    }.sort
   end
 
   def certification_icon_path
