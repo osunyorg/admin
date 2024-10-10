@@ -16,20 +16,12 @@
         <div class="col-lg-10">
           <h2 class="h4"><%= website.original_localization.to_s %></h2>
           <div class="small mb-1">
-            <%= link_to website.url, 
-                        target: :_blank, 
-                        class: 'text-dark' do %>
-              <i class="bi bi-compass-fill me-1"></i>
-              <%= social_website_to_s(website.url) %>
-            <% end %>
+            <i class="bi bi-compass-fill me-1"></i>
+            <%= contact_link website.url, :website %>
           </div>
           <div class="small mb-1">
-            <%= link_to website.repository_url, 
-                        target: :_blank, 
-                        class: 'text-dark' do %>
-              <i class="bi bi-github me-1"></i>
-              <%= website.repository_url.remove('https://github.com/') %>
-            <% end %>
+            <i class="bi bi-github me-1"></i>
+            <%= contact_link website.repository_url, :github %>
           </div>
           <% website.showcase_tags.each do |tag| %>
             <%= link_to tag, 

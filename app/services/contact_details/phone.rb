@@ -1,5 +1,4 @@
 class ContactDetails::Phone < ContactDetails::Base
-  PREFIX = "tel:"
 
   protected
 
@@ -7,10 +6,11 @@ class ContactDetails::Phone < ContactDetails::Base
     super
     @value.remove! ' '
     @value.remove! '.'
-    @value = "#{PREFIX}#{@value}"
+    @value = "tel:#{@value}"
   end
 
   def prepare_label
-    @label = @value.remove PREFIX
+    super
+    @label.gsub! '.', ' '
   end
 end

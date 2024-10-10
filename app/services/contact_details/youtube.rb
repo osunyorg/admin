@@ -1,17 +1,17 @@
-class ContactDetails::Twitter < ContactDetails::SocialNetwork
+class ContactDetails::Youtube < ContactDetails::SocialNetwork
 
   protected
 
   def url
-    'https://x.com/'
+    'https://www.youtube.com/@'
   end
 
   def handle
     @handle ||=  @string.remove('https://')
                         .remove('http://')
                         .remove('www.')
-                        .remove('x.com')
-                        .remove('twitter.com')
+                        .remove('youtube.com')
+                        .remove('youtu.be')
                         .remove('@')
                         .remove('/')
   end

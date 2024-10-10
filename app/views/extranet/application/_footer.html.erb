@@ -22,7 +22,7 @@ about = current_extranet.about
               <span itemprop="addressLocality"><%= about.city %></span><br>
             </div>
             <% if about_l10n.present? && about_l10n.url.present? %>
-              <a href="<%= social_website_to_url about_l10n.url %>" target="_blank" property="url"><%= social_website_to_s about_l10n.url %></a>
+              <%= contact_link about_l10n.url, :website %>
             <% end %>
           </address>
         <% elsif current_extranet.about.is_a?(Education::Program) %>

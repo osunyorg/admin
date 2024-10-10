@@ -41,10 +41,7 @@
                   <p><a itemprop="email" href="mailto:<%= email %>%>"><%= email %></a></p>
                 <% end %>
                 <% if block.template.url.present? %>
-                  <% url = block.template.url %>
-                  <a href="<%= social_website_to_url url %>" target="_blank" rel="noreferrer">
-                    <%= social_website_to_s url %>
-                  </a>
+                  <%= contact_link block.template.url, :website %>
                 <% end %>
               </div>
             <% end %>
