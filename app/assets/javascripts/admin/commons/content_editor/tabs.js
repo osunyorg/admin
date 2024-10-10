@@ -26,7 +26,7 @@ window.osuny.contentEditor.tabs = {
 
     tabChanged: function (event) {
         'use strict';
-        if (event.target.id == 'mode-write-tab') {
+        if (event.target.id === 'mode-write-tab') {
             this.loadWrite();
         } else {
             this.loadStructure();
@@ -34,18 +34,21 @@ window.osuny.contentEditor.tabs = {
     },
 
     loadWrite: function () {
+        'use strict';
         this.target = this.modeWriteContainer;
         this.source = this.modeWriteSource;
         this.loadCurrentTab();
     },
 
     loadStructure: function () {
+        'use strict';
         this.target = this.modeStructureContainer;
         this.source = this.modeStructureSource;
         this.loadCurrentTab();
     },
 
     loadCurrentTab: function () {
+        'use strict';
         this.target.innerHTML = '';
         this.xhr = new XMLHttpRequest();
         this.xhr.open('GET', this.source, true);
@@ -54,6 +57,7 @@ window.osuny.contentEditor.tabs = {
     },
 
     reload: function () {
+        'use strict';
         this.loadCurrentTab();
     },
 
@@ -72,7 +76,7 @@ window.osuny.contentEditor.tabs = {
         'use strict';
         return {
             init: this.init.bind(this),
-            reload: this.reload.bind(this),
+            reload: this.reload.bind(this)
         };
     }
 }.invoke();

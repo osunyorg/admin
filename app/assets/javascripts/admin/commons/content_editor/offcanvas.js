@@ -1,3 +1,4 @@
+/*global bootstrap */
 window.osuny.contentEditor.offcanvas = {
     init: function () {
         'use strict';
@@ -45,6 +46,7 @@ window.osuny.contentEditor.offcanvas = {
     },
 
     addNewSnippet: function () {
+        'use strict';
         this.editorBootstrap.hide();
         window.osuny.contentEditor.tabs.reload();
     },
@@ -52,12 +54,12 @@ window.osuny.contentEditor.offcanvas = {
     updateExistingSnippet: function (snippet, blockPath) {
         'use strict';
         var request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if (request.status == 200) {
+        request.onreadystatechange = function () {
+            if (request.status === 200) {
                 snippet.innerHTML = request.responseText;
             }
         };
-        request.open("GET", blockPath);
+        request.open('GET', blockPath);
         request.send();
         this.editorBootstrap.hide();
     },
