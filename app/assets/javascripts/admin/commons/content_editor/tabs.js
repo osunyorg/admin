@@ -67,7 +67,7 @@ window.osuny.contentEditor.tabs = {
             if (this.xhr.status === 200) {
                 this.target.innerHTML = this.xhr.responseText;
                 window.osuny.contentEditor.sort.init();
-                window.osuny.contentEditor.offcanvas.init();
+                window.osuny.contentEditor.offcanvas.initButtons();
             }
         }
     },
