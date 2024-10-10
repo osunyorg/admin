@@ -2,88 +2,172 @@ require "test_helper"
 
 class ContactDetailsTest < ActiveSupport::TestCase
 
-  test "country nil" do
-    detail = ContactDetails::Country.new nil
-    assert_nil detail.label
-    assert_nil detail.value
+  KINDS = [
+    :country,
+    :email,
+    :facebook,
+    :github,
+    :instagram,
+    :linkedin,
+    :mastodon,
+    :peertube,
+    :phone,
+    :tiktok,
+    :twitter,
+    :vimeo,
+    :website,
+    :youtube
+  ]
+
+  test "nil is nil" do
+    KINDS.each do |kind|
+      detail = service_for(kind).new nil
+      assert_nil detail.label
+      assert_nil detail.value
+    end
   end
 
-  test "country FR" do
-    detail = ContactDetails::Country.new 'FR'
-    assert_equal 'France', detail.label
-    assert_equal 'FR', detail.value
+  test "'' is nil" do
+    KINDS.each do |kind|
+      detail = service_for(kind).new ''
+      assert_nil detail.label
+      assert_nil detail.value
+    end
   end
 
-  test "email nil" do
-    detail = ContactDetails::Email.new nil
-    assert_nil detail.label
-    assert_nil detail.value
+  test "country" do
+    batch_test :country, 'France', 'FR', [
+        'FR',
+        'France',
+        'FRANCE'
+      ]
   end
 
-  test "email arnaud.levy@noesya.coop" do
-    detail = ContactDetails::Email.new 'arnaud.levy@noesya.coop'
-    assert_equal 'arnaud.levy@noesya.coop', detail.label
-    assert_equal 'mailto:arnaud.levy@noesya.coop', detail.value
+  test "email" do
+    batch_test :email, 'arnaud.levy@noesya.coop', 'mailto:arnaud.levy@noesya.coop', [
+        'arnaud.levy@noesya.coop'
+      ]
   end
 
-  test "twitter nil" do
-    detail = ContactDetails::Twitter.new nil
-    assert_nil detail.label
-    assert_nil detail.value
+  test 'facebook' do
+    batch_test :facebook, 'noesya.coop', 'https://www.facebook.com/noesya.coop', [
+        'noesya.coop',
+        '@noesya.coop',
+        'https://www.facebook.com/noesya.coop',
+      ]
   end
 
-  test "twitter handle" do
-    detail = ContactDetails::Twitter.new 'arnaudlevy'
-    assert_equal 'arnaudlevy', detail.label
-    assert_equal 'https://twitter.com/arnaudlevy', detail.value
+  test 'github' do
+    batch_test :github, 'noesya', 'https://github.com/noesya', [
+        'noesya',
+        'github.com/noesya',
+        'https://github.com/noesya',
+        'https://www.github.com/noesya',
+      ]
   end
 
-  test "mastodon nil" do
-    detail = ContactDetails::Mastodon.new nil
-    assert_nil detail.label
-    assert_nil detail.value
+  test 'instagram' do
+    batch_test :instagram, 'noesya_coop', 'https://instagram.com/noesya_coop', [
+        'noesya_coop',
+        '@noesya_coop',
+        'https://instagram.com/noesya_coop',
+      ]
   end
 
-  test "mastodon mastodon.social/@arnaudlevy" do
-    detail = ContactDetails::Mastodon.new 'mastodon.social/@arnaudlevy'
-    assert_equal 'mastodon.social/@arnaudlevy', detail.label
-    assert_equal 'https://mastodon.social/@arnaudlevy', detail.value
+  test 'linkedin person' do
+    batch_test :linkedin, 'arnaudlevy', 'https://www.linkedin.com/in/arnaudlevy/', [
+        'https://www.linkedin.com/in/arnaudlevy/',
+      ]
   end
 
-  test "mastodon https://mastodon.social/@arnaudlevy" do
-    detail = ContactDetails::Mastodon.new 'https://mastodon.social/@arnaudlevy'
-    assert_equal 'mastodon.social/@arnaudlevy', detail.label
-    assert_equal 'https://mastodon.social/@arnaudlevy', detail.value
+  test 'linkedin company' do
+    batch_test :linkedin, 'noesyacoop', 'https://www.linkedin.com/company/noesyacoop/', [
+        'https://www.linkedin.com/company/noesyacoop/',
+      ]
   end
 
-  test "twitter twitter.com/arnaudlevy" do
-    detail = ContactDetails::Twitter.new 'twitter.com/arnaudlevy'
-    assert_equal 'arnaudlevy', detail.label
-    assert_equal 'https://twitter.com/arnaudlevy', detail.value
+  test "mastodon" do
+    batch_test :mastodon, 'mastodon.social/@arnaudlevy', 'https://mastodon.social/@arnaudlevy', [
+        'mastodon.social/@arnaudlevy',
+        'https://mastodon.social/@arnaudlevy'
+      ]
   end
 
-  test "twitter https://twitter.com/arnaudlevy" do
-    detail = ContactDetails::Twitter.new 'https://twitter.com/arnaudlevy'
-    assert_equal 'arnaudlevy', detail.label
-    assert_equal 'https://twitter.com/arnaudlevy', detail.value
+  test "peertube" do
+    batch_test :peertube, 'peertube.designersethiques.org', 'https://peertube.designersethiques.org', [
+        'peertube.designersethiques.org',
+        'https://peertube.designersethiques.org'
+      ]
   end
 
-  test "website nil" do
-    detail = ContactDetails::Website.new nil
-    assert_nil detail.label
-    assert_nil detail.value
+  test "phone" do
+    batch_test :phone, '+33 5 05 05 05 05', 'tel:+33505050505', [
+        '+33 5 05 05 05 05',
+        '+33.5.05.05.05.05',
+      ]
   end
 
-  test "website www.noesya.coop" do
-    detail = ContactDetails::Website.new 'www.noesya.coop'
-    assert_equal 'www.noesya.coop', detail.label
-    assert_equal 'https://www.noesya.coop', detail.value
+  test 'tiktok' do
+    batch_test :tiktok, 'aliemeriaud', 'https://www.tiktok.com/@aliemeriaud', [
+        'aliemeriaud',
+        '@aliemeriaud',
+        'https://www.tiktok.com/@aliemeriaud',
+      ]
   end
 
-  test "website https://www.noesya.coop" do
-    detail = ContactDetails::Website.new 'https://www.noesya.coop'
-    assert_equal 'www.noesya.coop', detail.label
-    assert_equal 'https://www.noesya.coop', detail.value
+  test "twitter or x" do
+    batch_test :twitter, 'arnaudlevy', 'https://x.com/arnaudlevy', [
+        'arnaudlevy',
+        '@arnaudlevy',
+        'twitter.com/arnaudlevy',
+        'www.twitter.com/arnaudlevy',
+        'http://twitter.com/arnaudlevy',
+        'http://www.twitter.com/arnaudlevy',
+        'https://twitter.com/arnaudlevy',
+        'https://www.twitter.com/arnaudlevy',
+        'x.com/arnaudlevy',
+        'www.x.com/arnaudlevy',
+        'http://x.com/arnaudlevy',
+        'http://www.x.com/arnaudlevy',
+        'https://x.com/arnaudlevy',
+        'https://www.x.com/arnaudlevy'
+      ]
   end
 
+  test 'vimeo' do
+    batch_test :vimeo, 'noesya', 'https://vimeo.com/noesya', [
+        'noesya',
+        '@noesya',
+        'https://vimeo.com/noesya',
+      ]
+  end
+
+  test 'website' do
+    batch_test :website, 'www.noesya.coop', 'https://www.noesya.coop', [
+        'www.noesya.coop',
+        'https://www.noesya.coop'
+      ]
+  end
+
+  test 'youtube' do
+    batch_test :youtube, 'MMIBordeaux', 'https://www.youtube.com/@MMIBordeaux', [
+        'MMIBordeaux',
+        '@MMIBordeaux',
+        'https://www.youtube.com/@MMIBordeaux',
+      ]
+  end
+
+  protected
+
+  def batch_test(kind, label, value, options)
+    options.each do |option|
+      detail = service_for(kind).new option
+      assert_equal label, detail.label
+      assert_equal value, detail.value
+    end
+  end
+
+  def service_for(kind)
+    "ContactDetails::#{kind.to_s.titleize}".constantize
+  end
 end

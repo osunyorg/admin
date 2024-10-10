@@ -33,14 +33,20 @@ module ApplicationHelper
   end
 
   def social_twitter_to_url(string)
-    string = "https://twitter.com/#{string}" unless 'twitter.com'.in? string
-    string = "https://#{string}" unless string.start_with?('http')
     string.gsub('http://', 'https://')
+          .gsub('https://www.x.com/', 'https://x.com/')
+          .gsub('https://www.twitter.com/', 'https://twitter.com/')
+          .gsub('https://twitter.com/', 'https://x.com/')
+    string = "https://#{string}" unless string.start_with?('http')
+    string = "https://x.com/#{string}" unless 'https://x.com'.in? string
+    string
   end
 
   def social_twitter_to_s(string)
     string.gsub('http://', 'https://')
+          .gsub('https://www.x.com/', 'https://x.com/')
           .gsub('https://www.twitter.com/', 'https://twitter.com/')
+          .gsub('https://x.com/', '')
           .gsub('https://twitter.com/', '')
   end
 

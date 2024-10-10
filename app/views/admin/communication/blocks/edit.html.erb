@@ -3,6 +3,7 @@
   <%= t "enums.communication.block.template_kind.#{@block.template_kind}" %>
 <% end %>
 <div  id="app"
+      class="pb-5"
       v-cloak
       data-languagetool-locale="<%= I18n.locale %>"
       data-languagetool-email="<%= ENV['LANGUAGE_TOOL_USERNAME'] %>"
