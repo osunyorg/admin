@@ -31,18 +31,14 @@
   <% end %>
   <% if l10n.linkedin.present? && !person.linkedin_is_private? %>
     <dt class="fw-normal small"><%= University::Person::Localization.human_attribute_name(:linkedin) %></dt>
-    <dd>
-      <a href="<%= social_linkedin_to_url l10n.linkedin %>" target="_blank" rel="noreferrer">
-        <%= social_linkedin_to_s l10n.linkedin %>
-      </a>
-    </dd>
+    <dd><%= contact_link l10n.linkedin, :linkedin %></dd>
   <% end %>
   <% if l10n.twitter.present? && !person.twitter_is_private? %>
     <dt class="fw-normal small"><%= University::Person::Localization.human_attribute_name(:twitter) %></dt>
-    <dd>
-      <a href="<%= social_twitter_to_url l10n.twitter %>" target="_blank" rel="noreferrer">
-        <%= social_twitter_to_s l10n.twitter %>
-      </a>
-    </dd>
+    <dd><%= contact_link l10n.twitter, :twitter %></dd>
+  <% end %>
+  <% if l10n.mastodon.present? && !person.mastodon_is_private? %>
+    <dt class="fw-normal small"><%= University::Person::Localization.human_attribute_name(:mastodon) %></dt>
+    <dd><%= contact_link l10n.mastodon, :mastodon %></dd>
   <% end %>
 </dl>
