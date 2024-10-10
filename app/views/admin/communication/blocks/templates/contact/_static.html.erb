@@ -7,12 +7,15 @@
 <%= block_component_static block, :city, depth: 4 %>
 <%= block_component_static block, :country, depth: 4 %>
       coordinates:
-<% if block.template.url.present? %>
+<%
+if block.template.url.present?
+  detail = ContactDetails::Website.new block.template.url
+  %>
         url:
           label: >-
-            <%= social_website_to_s block.template.url %>
+            <%= detail.label %>
           value: >-
-            <%= social_website_to_url block.template.url %>
+            <%= detail.value %>
 <% end %>
 <% if block.template.phone_numbers.any? %>
         phone_numbers:

@@ -11,9 +11,9 @@ module ApplicationHelper
     classes
   end
 
-  def social_website_to_url(string)
-    string = "https://#{string}" unless string.start_with?('http')
-    string.gsub('http://', 'https://')
+  def contact_link(string, kind)
+    service = ContactDetails.for(kind, string)
+    sanitize "<a href=\"#{service.value}\" target=\"_blank\" rel=\"noreferrer\">#{service.label}</a>"
   end
 
   def social_website_to_s(string)

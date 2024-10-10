@@ -168,6 +168,6 @@ class ContactDetailsTest < ActiveSupport::TestCase
   end
 
   def service_for(kind)
-    "ContactDetails::#{kind.to_s.titleize}".constantize
+    ContactDetails.with_kind kind
   end
 end

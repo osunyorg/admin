@@ -27,11 +27,7 @@
   <% end %>
   <% if l10n.url.present? %>
     <dt class="fw-normal small"><%= University::Person::Localization.human_attribute_name(:url) %></dt>
-    <dd>
-      <a href="<%= social_website_to_url l10n.url %>" target="_blank" rel="noreferrer">
-        <%= social_website_to_s l10n.url %>
-      </a>
-    </dd>
+    <dd><%= contact_link l10n.url, :website %></dd>
   <% end %>
   <% if l10n.linkedin.present? && !person.linkedin_is_private? %>
     <dt class="fw-normal small"><%= University::Person::Localization.human_attribute_name(:linkedin) %></dt>
