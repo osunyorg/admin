@@ -5,5 +5,5 @@ block.template.selected_volumes.each do |volume|
   next if volume_l10n.nil?
   hugo = volume_l10n.hugo(@website)
   %>
-        - "<%= volume_l10n.relative_path.delete_prefix('/') %>"
+        - "<%= volume_l10n.relative_path %>"
 <% end %>
