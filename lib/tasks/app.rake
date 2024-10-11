@@ -8,6 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
+    Migrations::Headings.migrate
   end
 
   namespace :websites do
