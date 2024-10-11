@@ -26,7 +26,7 @@ class Communication::Block::Template::Paper < Communication::Block::Template::Ba
   protected
 
   def selected_papers_all
-    available_papers.limit(quantity)
+    available_papers.ordered(block.language).limit(quantity)
   end
 
   def selected_papers_selection

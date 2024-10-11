@@ -26,7 +26,7 @@ class Communication::Block::Template::Volume < Communication::Block::Template::B
   protected
 
   def selected_volumes_all
-    available_volumes.limit(quantity)
+    available_volumes.ordered(block.language).limit(quantity)
   end
 
   def selected_volumes_selection
