@@ -13,29 +13,31 @@
 </div>
 
 <% if @teacher_involvements.any? %>
-  <%= osuny_panel t('education.teachings'), classes: 'mt-5' do %>
-    <div class="row g-2 mb-3">
-      <% @teacher_involvements.each do |involvement|
-          person = involvement.person
-          involvement_l10n = involvement.best_localization_for(current_language) %>
-        <div>
-          <div class="card card--horizontal">
-            <%= osuny_thumbnail_localized person %>
-            <div class="card-body">
-              <%= osuny_link_localized_if can?(:read, person),
-                                          person,
-                                          admin_education_teacher_path(person) %>
-            </div>
-            <div class="card-footer">
-              <%= involvement_l10n.description %>
-            </div>
+  <%= osuny_label t('education.teachings') %>
+  <div class="row g-2 mb-3">
+    <% @teacher_involvements.each do |involvement|
+        person = involvement.person
+        involvement_l10n = involvement.best_localization_for(current_language) %>
+      <div>
+        <div class="card card--horizontal">
+          <%= osuny_thumbnail_localized person %>
+          <div class="card-body">
+            <%= osuny_link_localized_if can?(:read, person),
+                                        person,
+                                        admin_education_teacher_path(person) %>
+          </div>
+          <div class="card-footer">
+            <%= involvement_l10n.description %>
           </div>
         </div>
-      <% end %>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <% content_for :action_bar_right do %>
-  <%= edit_link @program %>
+  <%= link_to_if  can?(:edit, @program),
+                  t('edit'),
+                  edit_pedagogy_admin_education_program_path(@program),
+                  class: button_classes %>
 <% end %>

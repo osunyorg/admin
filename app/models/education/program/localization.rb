@@ -141,6 +141,13 @@ class Education::Program::Localization < ApplicationRecord
     about.diploma.best_localization_for(language)
   end
 
+  def schools
+    @schools ||= about.schools
+                      .ordered(language)
+                      .map { |school| school.localization_for(language) }
+                      .compact
+  end
+
   def parent
     return if about.parent.nil?
     about.parent.best_localization_for(language)

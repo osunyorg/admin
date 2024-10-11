@@ -25,6 +25,7 @@ fr:
         about_Research::Laboratory: Extranet d'un laboratoire
         about_type: Type d'extranet
         color: Couleur
+        default_language: Langue par défaut
         feature_alumni: Alumni
         feature_contacts: Annuaire
         feature_documents: Documents
@@ -44,6 +45,7 @@ fr:
         home_sentence: Phrase affichée sur la home
         logo: Logo
         name: Nom
+        published: Langue publiée
         privacy_policy: Politique de confidentialité
         registration_contact: Mail de contact pour les problèmes d'inscription
         sso_button_label: Libellé du bouton de connexion
@@ -247,11 +249,14 @@ fr:
           attributes:
             sso_mapping:
               missing_email: ne gère pas l'adresse email
-        communication/website:
+        communication/extranet/localization:
           attributes:
-            languages:
-              must_include_default: doivent contenir la langue par défaut
-              too_short: doivent en comporter une minimum
+            published:
+              cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
+        communication/website/localization:
+          attributes:
+            published:
+              cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
         communication/website/agenda/event:
           attributes:
             to_day:
@@ -337,6 +342,11 @@ fr:
         copied: Le bloc a bien été copié dans le presse-papier.
         drag_and_drop: Drag and drop
         language_mismatch_alert: Le bloc n'existe pas dans cette langue.
+      extranet:
+        confirm_localization:
+          text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction de l'extranet <i>%{extranet}</i> en %{language}."
+          title: Confirmation de traduction
+        languages: Langues
       website:
         agenda:
           events:
@@ -364,6 +374,7 @@ fr:
           as_tree: Organiser l'arborescence
           delete_special_page_notice: Impossible de supprimer cette page
           draft: Brouillon
+          duplicate_special_page_notice: Impossible de dupliquer cette page
           full_width_status: Pleine largeur
           in: dans
           in_full_width: en pleine largeur

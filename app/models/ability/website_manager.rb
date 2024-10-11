@@ -25,48 +25,82 @@ class Ability::WebsiteManager < Ability
 
   protected
 
-  def managed_pages_ids
-    @managed_pages_ids ||= Communication::Website::Page.where(communication_website_id: managed_websites_ids).pluck(:id)
+  def managed_agenda_category_localization_ids
+    @managed_agenda_category_localization_ids ||= begin
+      Communication::Website::Agenda::Category::Localization
+        .where(communication_website_id: managed_websites_ids)
+        .pluck(:id)
+    end
   end
 
-  def managed_posts_ids
-    @managed_posts_ids ||= Communication::Website::Post.where(communication_website_id: managed_websites_ids).pluck(:id)
+  def managed_agenda_event_localization_ids
+    @managed_agenda_event_localization_ids ||= begin
+      Communication::Website::Agenda::Event::Localization
+        .where(communication_website_id: managed_websites_ids)
+        .pluck(:id)
+    end
   end
 
-  def managed_agenda_categorys_ids
-    @managed_agenda_categorys_ids ||= Communication::Website::Agenda::Category.where(communication_website_id: managed_websites_ids).pluck(:id)
+  def managed_page_localization_ids
+    @managed_page_localization_ids ||= begin
+      Communication::Website::Page::Localization
+        .where(communication_website_id: managed_websites_ids)
+        .pluck(:id)
+    end
   end
 
-  def managed_agenda_events_ids
-    @managed_agenda_events_ids ||= Communication::Website::Agenda::Event.where(communication_website_id: managed_websites_ids).pluck(:id)
+  def managed_portfolio_category_localization_ids
+    @managed_portfolio_category_localization_ids ||= begin
+      Communication::Website::Portfolio::Category::Localization
+        .where(communication_website_id: managed_websites_ids)
+        .pluck(:id)
+    end
   end
 
-  def managed_portfolio_categories_ids
-    @managed_portfolio_categories_ids ||= Communication::Website::Portfolio::Category.where(communication_website_id: managed_websites_ids).pluck(:id)
+  def managed_portfolio_project_localizations_ids
+    @managed_portfolio_project_localizations_ids ||= begin
+      Communication::Website::Portfolio::Project::Localization
+        .where(communication_website_id: managed_websites_ids)
+        .pluck(:id)
+    end
   end
 
-  def managed_portfolio_projects_ids
-    @managed_portfolio_projects_ids ||= Communication::Website::Portfolio::Project.where(communication_website_id: managed_websites_ids).pluck(:id)
+  def managed_post_category_localization_ids
+    @managed_post_category_localization_ids ||= begin
+      Communication::Website::Post::Category::Localization
+        .where(communication_website_id: managed_websites_ids)
+        .pluck(:id)
+    end
+  end
+
+  def managed_post_localization_ids
+    @managed_post_localization_ids ||= begin
+      Communication::Website::Post::Localization
+        .where(communication_website_id: managed_websites_ids)
+        .pluck(:id)
+    end
   end
 
   def manage_blocks
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Category', about_id: managed_agenda_categorys_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event', about_id: managed_agenda_events_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Portfolio::Category', about_id: managed_portfolio_categories_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Portfolio::Project', about_id: managed_portfolio_projects_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Organization', about_id: University::Organization.where(university_id: @user.university_id).pluck(:id)
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id).pluck(:id)
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Category::Localization', about_id: managed_agenda_category_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Page::Localization', about_id: managed_page_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Portfolio::Category::Localization', about_id: managed_portfolio_category_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Portfolio::Project::Localization', about_id: managed_portfolio_project_localizations_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post::Category::Localization', about_id: managed_post_category_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post::Localization', about_id: managed_post_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Organization::Localization', about_id: University::Organization::Localization.where(university_id: @user.university_id).pluck(:id)
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: University::Person::Localization.where(university_id: @user.university_id).pluck(:id)
     can :create, Communication::Block
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Category', about_id: managed_agenda_categorys_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event', about_id: managed_agenda_events_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Page', about_id: managed_pages_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Portfolio::Category', about_id: managed_portfolio_categories_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Portfolio::Project', about_id: managed_portfolio_projects_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post', about_id: managed_posts_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Organization', about_id: University::Organization.where(university_id: @user.university_id).pluck(:id)
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Person', about_id: University::Person.where(university_id: @user.university_id).pluck(:id)
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Category::Localization', about_id: managed_agenda_category_localization_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Page::Localization', about_id: managed_page_localization_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Portfolio::Category::Localization', about_id: managed_portfolio_category_localization_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Portfolio::Project::Localization', about_id: managed_portfolio_project_localizations_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post::Category::Localization', about_id: managed_post_category_localization_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post::Localization', about_id: managed_post_localization_ids
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Organization::Localization', about_id: University::Organization::Localization.where(university_id: @user.university_id).pluck(:id)
+    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: University::Person::Localization.where(university_id: @user.university_id).pluck(:id)
     can :create, Communication::Block::Heading
   end
 

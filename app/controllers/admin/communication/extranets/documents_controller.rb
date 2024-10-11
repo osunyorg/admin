@@ -39,6 +39,7 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
       redirect_to admin_communication_extranet_document_path(@document), 
                   notice: t('admin.successfully_updated_html', model: @document.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

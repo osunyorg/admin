@@ -25,6 +25,8 @@
   </div>
 </div>
 
+<%= render 'admin/application/l10n/widget', about: @document, l10n: @l10n, small: true %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @document %>
 <% end %>

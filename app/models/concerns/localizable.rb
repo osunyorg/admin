@@ -31,7 +31,13 @@ module Localizable
 
   def available_languages
     @available_languages ||= begin
-      languages = is_direct_object? && !is_a?(Communication::Website) ? website.languages : university.languages
+      if try(:is_direct_object?) && !is_a?(Communication::Website)
+        languages = website.languages
+      elsif respond_to?(:extranet)
+        languages = extranet.languages
+      else
+        languages = university.languages
+      end
       languages.ordered
     end
   end
@@ -69,6 +75,15 @@ module Localizable
 
   def to_s_in(language)
     best_localization_for(language).to_s
+  end
+
+  protected
+
+  def set_first_localization_as_published
+    localizations.first.assign_attributes(
+      published: true,
+      published_at: Time.zone.now
+    )
   end
 
 end

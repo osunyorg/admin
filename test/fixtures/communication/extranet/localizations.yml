@@ -3,3 +3,4 @@ default_extranet_fr:
   about: default_extranet
   language: fr
   university: default_university
+  published: true

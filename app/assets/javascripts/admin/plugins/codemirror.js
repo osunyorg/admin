@@ -43,7 +43,7 @@ window.codemirrorManager = {
             indentUnit: 2,
             lineWrapping: true,
             viewportMargin: Infinity
-        }
+        };
     },
 
     invoke: function () {

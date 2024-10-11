@@ -34,19 +34,22 @@
                 min-height: 80px
                 padding: 8px
                 padding-top: 0 // Compensation de la hauteur des lignes
-                &, 
-                p, 
+                &,
+                p,
                 div
                     font-size: $font-size-base
                     line-height: 180%
-                    @include media-breakpoint-up(lg)
+                    @include media-breakpoint-up(md)
                         font-size: $font-size-lg
                 p
                     &:last-of-type
                         margin-bottom: 0
                 sup
-                    top: inherit
                     padding-left: 2px
+                    top: inherit
+                a
+                    color: $color-flexoki-blue-a11y
+                    text-decoration: underline 1px
                 img,
                 video
                     height: auto
@@ -65,8 +68,7 @@
                     *
                         color: white
                     a
-                        text-decoration: solid
-                        text-underline-offset: auto
+                        text-decoration-style: solid
                         &[target="_blank"]::after
                             filter: invert(1)
     b

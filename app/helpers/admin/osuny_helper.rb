@@ -100,6 +100,10 @@ module Admin::OsunyHelper
     link_to_if condition, name, path, class: classes.strip, data: { confirm: alert }
   end
 
+  def osuny_card_classes(horizontal: false)
+    "card card--osuny#{ ' card--horizontal' if horizontal}"
+  end
+
   def osuny_collection(list, except: nil, localized: false, label_method: :to_s)
     collection = list.ordered(current_language).map do |object|
       [

@@ -41,10 +41,13 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   end
 
   def update
-    @l10n.add_photo_import params[:photo_import]
-    if @category.update_and_sync(category_params)
+    if @category.update(category_params)
+      load_localization
+      @l10n.add_photo_import params[:photo_import]
+      @category.sync_with_git
       redirect_to admin_communication_website_post_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

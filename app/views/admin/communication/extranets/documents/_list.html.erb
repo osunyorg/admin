@@ -1,7 +1,7 @@
 <div class="row g-2 mb-3">
   <% documents.each do |document| %>
     <div>
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized document %>
         <div class="card-body">
           <div class="row">

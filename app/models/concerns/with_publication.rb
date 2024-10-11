@@ -14,13 +14,11 @@ module WithPublication
     }
     
     scope :published_now, -> { 
-      where(published: true)
-      .where("#{table_name}.published_at <= ?", Time.zone.now) 
+      published.where("#{table_name}.published_at <= ?", Time.zone.now) 
     }
 
     scope :published_in_the_future, -> {
-      where(published: true)
-      .where("#{table_name}.published_at > ?", Time.zone.now)
+      published.where("#{table_name}.published_at > ?", Time.zone.now)
     }
 
     scope :ordered_by_published_at, -> {

@@ -39,6 +39,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
       redirect_to [:admin, @diploma],
                   notice: t('admin.successfully_updated_html', model: @diploma.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -62,7 +63,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   def diploma_params
     params.require(:education_diploma)
           .permit(
-            :level, :ects,
+            :level, :ects, :certification,
             localizations_attributes: [
               :id, :name, :slug, :short_name, :summary, :duration,
               :language_id
