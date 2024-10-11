@@ -473,6 +473,22 @@ fr:
               list:
                 description: Le chapô de la page principale sert d'édito en gros et les pages sont présentées sous forme de liste à droite.
                 label: Liste
+          papers:
+            description: Une sélection de papiers de recherche publiés dans la revue scientifique.
+            edit:
+              mode:
+                label: Quels papiers afficher ?
+                options:
+                  all: Les papiers les plus récents
+                  selection: Une sélection de papiers
+              quantity:
+                label: Quantité de papiers
+                placeholder: Entrer la quantité
+              selection:
+                add: Ajouter un papier
+                label: Papier
+                none: Aucun papier
+                title: Papiers sélectionnés
           persons:
             description: Une liste de personnes, avec photo, fonction et lien vers la page de la personne.
             edit:
@@ -651,6 +667,22 @@ fr:
               video_title:
                 label: Titre de la vidéo
                 placeholder: Entrer le titre de la vidéo
+          volumes:
+            description: Une sélection de volumes publiés dans la revue scientifique.
+            edit:
+              mode:
+                label: Quels volumes afficher ?
+                options:
+                  all: Les volumes les plus récents
+                  selection: Une sélection de volumes
+              quantity:
+                label: Quantité de volumes
+                placeholder: Entrer la quantité
+              selection:
+                add: Ajouter un volume
+                label: Volume
+                none: Aucun volume
+                title: Volumes sélectionnés
       contents:
         blocks:
           copy: Copier le bloc
@@ -687,6 +719,7 @@ fr:
           locations: Campus
           organizations: Organisations
           pages: Pages
+          papers: Papiers
           persons: Personnes
           posts: Actualités
           programs: Formations
@@ -695,3 +728,4 @@ fr:
           testimonials: Témoignages
           timeline: Frise chronologique
           video: Vidéo
+          volumes: Volumes

@@ -9,7 +9,7 @@ defaultContentLanguageInSubdir: <%= @website.active_languages.many? %>
 ## CACHE
 deployment:
   matchers:
-    - pattern: "^.+\\.(woff2|woff|svg|ttf|eot|js|css)$"
+    - pattern: "^.+\\.(woff2|woff|svg|ttf|otf|eot|js|css)$"
       cacheControl: "max-age=31536000, no-transform, public"
       gzip: true
     - pattern: "^.+\\.(png|jpg|jpeg|gif|webp)$"

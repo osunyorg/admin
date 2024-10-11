@@ -59,7 +59,7 @@ module Importers
     def attach_image!
       return if page.image.blank?
       @l10n.featured_image.attach(
-        io: URI.open(page.image),
+        io: URI.parse(page.image).open,
         filename: File.basename(page.image).split('?').first
       )
     rescue

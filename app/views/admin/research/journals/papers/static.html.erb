@@ -15,7 +15,7 @@ paper_kind: "<%= prepare_text_for_static paper.kind %>"
 <% end %>
 <% if @l10n.volume_l10n %>
 volumes:
-  - "<%= @l10n.volume_l10n.relative_path.delete_prefix('/') %>"
+  - "<%= @l10n.volume_l10n.relative_path %>"
 <% end %>
 weight: <%= paper.position %>
 date: "<%= @l10n.published_at&.to_date&.iso8601 %>"

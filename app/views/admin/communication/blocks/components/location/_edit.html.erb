@@ -1,7 +1,7 @@
 <%
   locations = @block.template
                     .available_locations
-                    .ordered
+                    .ordered(current_language)
 %>
 <% if label.present? %>
 <label  class="form-label"
