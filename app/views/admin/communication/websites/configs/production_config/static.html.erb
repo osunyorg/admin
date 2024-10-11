@@ -15,10 +15,8 @@ deployment:
     - pattern: "^.+\\.(png|jpg|jpeg|gif|webp)$"
       cacheControl: "max-age=31536000, no-transform, public"
       gzip: false
-
 <% if @website.deuxfleurs_hosting %>
-## DEUXFLEURS
-deployment:
+  ## DEUXFLEURS
   targets:
     - name: "production"
       URL: "s3://<%= @website.deuxfleurs_identifier %>?endpoint=garage.deuxfleurs.fr&s3ForcePathStyle=true&region=garage&awssdk=v1"

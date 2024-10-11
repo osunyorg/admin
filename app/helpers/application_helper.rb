@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def contact_link(string, kind)
     service = ContactDetails.for(kind, string)
-    sanitize "<a href=\"#{service.value}\" target=\"_blank\" rel=\"noreferrer\">#{service.label}</a>"
+    link_to service.label, service.value, target: '_blank', rel: 'noreferrer'
   end
 
   def masked_email(string)
