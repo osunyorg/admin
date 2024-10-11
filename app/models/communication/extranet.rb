@@ -22,7 +22,7 @@
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  about_id                   :uuid             indexed => [about_type]
-#  default_language_id        :uuid             indexed
+#  default_language_id        :uuid             not null, indexed
 #  university_id              :uuid             not null, indexed
 #
 # Indexes
@@ -145,12 +145,5 @@ class Communication::Extranet < ApplicationRecord
 
   def set_default_language
     self.default_language_id = self.localizations.first.language_id
-  end
-
-  def set_first_localization_as_published
-    localizations.first.assign_attributes(
-      published: true,
-      published_at: Time.zone.now
-    )
   end
 end

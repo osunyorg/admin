@@ -1,17 +1,16 @@
-class ContactDetails::Twitter < ContactDetails::SocialNetwork
+class ContactDetails::Github < ContactDetails::SocialNetwork
 
   protected
 
   def url
-    'https://x.com/'
+    'https://github.com/'
   end
 
   def handle
     @handle ||=  @string.remove('https://')
                         .remove('http://')
                         .remove('www.')
-                        .remove('x.com')
-                        .remove('twitter.com')
+                        .remove('github.com')
                         .remove('@')
                         .remove('/')
   end

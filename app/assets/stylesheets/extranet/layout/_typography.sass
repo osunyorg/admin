@@ -13,18 +13,18 @@
     src: asset-url("basier-square/basiersquare-semibold-webfont.woff2") format("woff2"), asset-url("basier-square/basiersquare-semibold-webfont.woff") format("woff")
 
 h1
-    margin-top: 20px
     font-weight: 700
     line-height: 125%
+    margin-top: 20px
     @include media-breakpoint-down(md)
         font-size: pxToRem(30)
     a
         color: $active-color
-        transition: text-decoration 0.5s, color 0.5s
         text-decoration: underline
+        text-decoration-color: adjust-color($active-color, $alpha: -0.5)
         text-decoration-thickness: 1px
         text-underline-offset: 5px
-        text-decoration-color: adjust-color($active-color, $alpha: -0.5)
+        transition: text-decoration 0.5s, color 0.5s
         &:hover
             color: darken($active-color, 10)
             text-decoration-color: $active-color

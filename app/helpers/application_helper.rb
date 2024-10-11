@@ -11,46 +11,9 @@ module ApplicationHelper
     classes
   end
 
-  def social_website_to_url(string)
-    string = "https://#{string}" unless string.start_with?('http')
-    string.gsub('http://', 'https://')
-  end
-
-  def social_website_to_s(string)
-    string.gsub('http://', '')
-          .gsub('https://', '')
-          .delete_suffix('/')
-  end
-
-  def social_linkedin_to_url(string)
-    string.gsub('http://', 'https://')
-  end
-
-  def social_linkedin_to_s(string)
-    string.gsub('http://', 'https://')
-          .delete_prefix('https://www.linkedin.com/in/')
-          .delete_suffix('/')
-  end
-
-  def social_twitter_to_url(string)
-    string = "https://twitter.com/#{string}" unless 'twitter.com'.in? string
-    string = "https://#{string}" unless string.start_with?('http')
-    string.gsub('http://', 'https://')
-  end
-
-  def social_twitter_to_s(string)
-    string.gsub('http://', 'https://')
-          .gsub('https://www.twitter.com/', 'https://twitter.com/')
-          .gsub('https://twitter.com/', '')
-  end
-
-  def social_mastodon_to_url(string)
-    string.gsub('http://', 'https://')
-  end
-
-  def social_mastodon_to_s(string)
-    string.gsub('http://', 'https://')
-          .remove('https://')
+  def contact_link(string, kind)
+    service = ContactDetails.for(kind, string)
+    link_to service.label, service.value, target: '_blank', rel: 'noreferrer'
   end
 
   def masked_email(string)

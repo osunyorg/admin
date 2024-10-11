@@ -1,10 +1,10 @@
 <%  if block.template.mode == 'categories' %>
-  <%= @website.post_categories.ordered(current_language).each do |category| %>
+  <% @website.post_categories.ordered(current_language).each do |category| %>
     <p><%= category.to_s_in(current_language) %></p>
   <% end %>
 <% else %>
   <div class="row">
-  <% block.template.selected_posts.each do |post| 
+  <% block.template.selected_posts.each do |post|
     l10n = post.localization_for(block.language)
     next if l10n.nil?
     %>
