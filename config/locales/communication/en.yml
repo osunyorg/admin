@@ -25,6 +25,7 @@ en:
         about_Research::Laboratory: Laboratory extranet
         about_type: About
         color: Couleur
+        default_language: Default language
         feature_alumni: Alumni
         feature_contacts: Directory
         feature_documents: Documents
@@ -45,6 +46,7 @@ en:
         logo: Logo
         name: Name
         privacy_policy: Privacy policy
+        published: Language published
         registration_contact: Contact mail for registrations problems
         sso_button_label: Sign in button's label
         terms: Terms of service
@@ -247,11 +249,14 @@ en:
           attributes:
             sso_mapping:
               missing_email: doesn't handle the email
-        communication/website:
+        communication/extranet/localization:
           attributes:
-            languages:
-              must_include_default: must include at least the default language
-              too_short: must include at least one
+            published:
+              cannot_unpublished_default: cannot be unpublished (default language)
+        communication/website/localization:
+          attributes:
+            published:
+              cannot_unpublished_default: cannot be unpublished (default language)
         communication/website/agenda/event:
           attributes:
             to_day:
@@ -337,6 +342,11 @@ en:
         copied: The block has been copied to clipboard!
         drag_and_drop: Drag and drop
         language_mismatch_alert: This block does not exist in this language.
+      extranet:
+        confirm_localization:
+          text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the extranet <i>%{extranet}</i> in %{language}."
+          title: Localization confirmation
+        languages: Languages
       website:
         agenda:
           events:
@@ -364,6 +374,7 @@ en:
           as_tree: Organize structure
           delete_special_page_notice: Can't delete this page
           draft: Draft
+          duplicate_special_page_notice: Can't duplicate this page
           full_width_status: Full width
           in: in
           in_full_width: full width

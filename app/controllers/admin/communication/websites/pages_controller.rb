@@ -34,7 +34,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     end
     old_parent_page.sync_with_git
     parent_page.sync_with_git if parent_page != old_parent_page
-    @website.generate_automatic_menus(parent_page.language)
+    @website.generate_automatic_menus_for_language(current_language)
   end
 
   def children
@@ -101,10 +101,13 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def update
-    @l10n.add_photo_import params[:photo_import]
-    if @page.update_and_sync(page_params)
+    if @page.update(page_params)
+      load_localization
+      @l10n.add_photo_import params[:photo_import]
+      @page.sync_with_git
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb(@page, admin_communication_website_page_path(@page))
       add_breadcrumb t('edit')
@@ -113,8 +116,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def duplicate
-    redirect_to [:admin, @page.duplicate],
-                notice: t('admin.successfully_duplicated_html', model: @page.to_s)
+    if @page.is_special_page?
+      redirect_back(fallback_location: admin_communication_website_page_path(@page), alert: t('admin.communication.website.pages.duplicate_special_page_notice'))
+    else
+      redirect_to [:admin, @page.duplicate],
+                  notice: t('admin.successfully_duplicated_html', model: @page.to_s)
+    end
   end
 
   def destroy

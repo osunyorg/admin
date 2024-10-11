@@ -23,6 +23,7 @@ module AsLocalizedTree
   end
 
   def parent
+    return if about.parent.nil?
     about.parent.localization_for(language)
   end
 

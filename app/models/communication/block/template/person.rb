@@ -16,7 +16,7 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   def elements
     if alphabetical
       @elements.sort_by! do |element|
-        "#{element.person&.to_s_alphabetical_in(block.language)}"
+        "#{element.person&.to_s_alphabetical_in(block.language).to_s}"
       end
     end
     @elements

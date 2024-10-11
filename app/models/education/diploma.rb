@@ -3,6 +3,7 @@
 # Table name: education_diplomas
 #
 #  id            :uuid             not null, primary key
+#  certification :string
 #  ects          :integer
 #  level         :integer          default("not_applicable")
 #  created_at    :datetime         not null
@@ -18,14 +19,12 @@
 #  fk_rails_6cb2e9fa90  (university_id => universities.id)
 #
 class Education::Diploma < ApplicationRecord
+  CERTIFICATIONS_DIRECTORY = "app/assets/images/education/diplomas/certifications"
+
   include AsIndirectObject
   include Sanitizable
   include Localizable
   include WithUniversity
-
-  has_many :programs, dependent: :nullify
-
-  scope :ordered, -> (language = nil) { order(:level) }
 
   enum level: {
     not_applicable: 0,
@@ -39,6 +38,23 @@ class Education::Diploma < ApplicationRecord
     master: 500,
     doctor: 800
   }
+
+  has_many :programs, dependent: :nullify
+
+  validates :certification, inclusion: { in: -> { certifications } }, allow_blank: true
+
+  scope :ordered, -> (language = nil) { order(:level) }
+
+  def self.certifications
+    Dir.children(CERTIFICATIONS_DIRECTORY).map { |filename|
+      filename.remove('.svg')
+    }.sort
+  end
+
+  def certification_icon_path
+    return unless certification.present?
+    "education/diplomas/certifications/#{certification}.svg"
+  end
 
   def dependencies
     localizations

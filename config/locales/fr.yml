@@ -27,6 +27,10 @@ fr:
           transcription_missing:
             title: Pas de transcription
             text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
+        links:
+          alt_title_missing:
+            title: Pas de titre alternatif du lien
+            text_html: Le titre alternatif du lien est vide. C'est tout à fait pertinent si le titre du lien seul permet de comprendre la fonction et la destination, comme expliqué dans le <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#6" target="_blank">critère 6.1 du RGAA</a>. Dans le cas contraire, merci d'ajouter un titre alternatif à votre lien.
         sound:
           title_missing:
             title: Pas de titre
@@ -138,7 +142,7 @@ fr:
       label: Description pour les moteurs de recherche (meta)
     pending_tasks:
       tasks: Tâches en cours de traitement
-      text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites internets."
+      text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."
       what_is_it: Qu'est-ce que c'est ?
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     seo: SEO
@@ -210,7 +214,7 @@ fr:
       code_has_been_sent: "Un code d'authentification vient de vous être envoyé."
       enter_code_direct_otp_email_html: "Pour assurer la sécurité de votre connexion, nous vous envoyons un code à 6 chiffres, à usage unique, sur votre mail %{mail}. Entrez ce code ci-dessous."
       enter_code_direct_otp_mobile_phone_html: "Pour assurer la sécurité de votre connexion, nous vous envoyons un code à 6 chiffres, à usage unique, sur votre mobile %{phone}. Entrez ce code ci-dessous."
-      enter_code_totp: "Entrez le code de votre application d'authentification"
+      enter_code_totp: "Pour assurer la sécurité de votre connexion, nous nous appuyons sur votre application d'authentification. Entrez ci-dessous le code à usage unique qu'elle vous indique."
       help: "Si vous rencontrez un problème, vous pouvez..."
       max_login_attempts_reached: "Votre compte a été bloqué pour des raisons de sécurité.<br />Veuillez contacter un administrateur."
       resend_code: "Renvoyer le code"
@@ -258,6 +262,8 @@ fr:
     close: Fermer le dossier
   hello: "Bonjour %{name} !"
   home: Accueil
+  html:
+    external_link: lien externe
   imports:
     deleted_user: Utilisateur supprimé
     error_msg: "Ligne %{line} : %{error}"
@@ -384,7 +390,9 @@ fr:
     favorites:
       add: Ajouter aux favoris
       remove: Enlever des favoris
-      none: Vous n'avez pas encore de favoris, n'hésitez pas à ajouter les sites Web, extranets ou revues scientifiques auxquels vous accédez fréquemment !
+      none:
+        in_university: Vous n'avez pas encore de favoris, n'hésitez pas à ajouter les sites Web, extranets ou revues scientifiques auxquels vous accédez fréquemment !
+        not_in_university: Vous n'avez pas encore de favoris, n'hésitez pas à ajouter les sites Web ou extranets auxquels vous accédez fréquemment !
   photo_import:
     next: Images suivantes
     nothing: Aucun résultat pour cette recherche

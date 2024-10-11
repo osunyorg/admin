@@ -6,159 +6,40 @@
 
     <div class="row">
       <div class="col-lg-8 col-xxl-9">
-        <%= render 'admin/education/programs/forms/part', part: :essential do %>
-          <div class="row">
-            <div class="col-lg-9">
-              <%= lf.input :name %>
-            </div>
-            <div class="col-lg-3">
-              <%= lf.input :short_name %>
-            </div>
+        <div class="row">
+          <div class="col-lg-9">
+            <%= lf.input :name %>
           </div>
-          <%= render 'admin/application/summary/form', f: lf, about: l10n %>
-          <div class="row">
-            <div class="col-lg-6">
-              <%= f.association :diploma,
-                                collection: osuny_collection(current_university.diplomas, localized: true) %>
-              <%= f.association :schools,
-                                as: :check_boxes,
-                                collection: osuny_collection(current_university.education_schools, localized: true) %>
-            </div>
-            <div class="col-lg-6">
-              <%= lf.input :url %>
-              <legend class="col-form-label pt-0 mb-1"><%= t('education.program.registration_scheme') %></legend>
-              <div class="mb-n3"><%= f.input :initial %></div>
-              <div class="mb-n3"><%= f.input :continuing %></div>
-              <div><%= f.input :apprenticeship %></div>
-              <%= f.input :capacity %>
-              <%= lf.input :duration %>
-              <%= lf.input :downloadable_summary,
-                          as: :single_deletable_file,
-                          direct_upload: true %>
-            </div>
+          <div class="col-lg-3">
+            <%= lf.input :short_name %>
           </div>
-        <% end %>
-
-        <%= render 'admin/education/programs/forms/part', part: :presentation do %>
-          <div class="row">
-            <div class="col-xxl-6">
-              <%= lf.input :presentation,
-                          as: :summernote,
-                          input_html: {
-                            data: { 'summernote-config' => 'link' }
-                          } %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :objectives %>
-            </div>
+        </div>
+        <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+        <div class="row">
+          <div class="col-lg-6">
+            <%= f.association :diploma,
+                              collection: osuny_collection(current_university.diplomas, localized: true) %>
+            <%= f.association :schools,
+                              as: :check_boxes,
+                              collection: osuny_collection(current_university.education_schools, localized: true) %>
           </div>
-        <% end %>
-
-        <%= render 'admin/education/programs/forms/part', part: :pedagogy do %>
-          <div class="row">
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :content %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :pedagogy %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :evaluation %>
-            </div>
+          <div class="col-lg-6">
+            <%= lf.input :url %>
+            <%= lf.input :duration %>
+            <%= lf.input :downloadable_summary,
+                        as: :single_deletable_file,
+                        direct_upload: true %>
           </div>
-          <div class="row mb-2">
-            <div class="col-md-8">
-              <label class="form-label">
-                <%= t('education.teachings') %>
-              </label>
-            </div>
-            <div class="col-md-4 text-end">
-              <%= link_to_add_association t('add'),
-                                          f,
-                                          :university_person_involvements,
-                                          class: button_classes,
-                                          partial: 'admin/education/programs/involvement_fields',
-                                          data: {
-                                            'association-insertion-method': 'append',
-                                            'association-insertion-node':   '#involvements',
-                                          } %>
-            </div>
+        </div>
+        <%= osuny_separator %>
+        <div class="row">
+          <div class="col-lg-6">
+            <%= render 'admin/application/shared_image/edit', f: lf, about: l10n %>
           </div>
-          <div id="involvements">
-            <%
-            sorted_involvements =  program.university_person_involvements
-                                          .sort_by { |involvement|
-              involvement.person.to_s_alphabetical_in(current_language)
-            }
-            %>
-            <%= f.simple_fields_for :university_person_involvements,
-                                    sorted_involvements,
-                                    include_id: false do |involvement_f| %>
-              <%= render 'admin/education/programs/involvement_fields', f: involvement_f, include_id: true %>
-            <% end %>
+          <div class="col-lg-6">
+            <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
           </div>
-        <% end %>
-
-        <%= render 'admin/education/programs/forms/part', part: :results do %>
-          <div class="row">
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :opportunities %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :results %>
-            </div>
-          </div>
-        <% end %>
-
-        <%= render 'admin/education/programs/forms/part', part: :admission do %>
-          <div class="row">
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :pricing %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :pricing_initial %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :pricing_continuing %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :pricing_apprenticeship %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :prerequisites %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :registration %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :accessibility %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :other %>
-            </div>
-            <div class="col-xxl-6">
-              <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :contacts %>
-            </div>
-            <div class="col-xxl-6">
-              <%= lf.input :registration_url %>
-            </div>
-          </div>
-        <% end %>
-
-        <%= render 'admin/education/programs/forms/part', part: :certification do %>
-          <div class="row">
-            <div class="col-xxl-6">
-              <%= f.input :qualiopi_certified %>
-            </div>
-            <div class="col-xxl-6">
-              <%= lf.input :qualiopi_text,
-                        as: :summernote,
-                        input_html: {
-                          data: { 'summernote-config' => 'link' }
-                        } %>
-            </div>
-          </div>
-        <% end %>
+        </div>
       </div>
       <div class="col-lg-4 col-xxl-3">
         <%= render 'admin/education/programs/forms/part', part: :technical do %>
@@ -180,8 +61,6 @@
                       %>
         <% end %>
         <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
-        <%= render 'admin/application/shared_image/edit', f: lf, about: l10n %>
-        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
     </div>
 

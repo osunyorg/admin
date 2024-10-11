@@ -22,15 +22,18 @@
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  about_id                   :uuid             indexed => [about_type]
+#  default_language_id        :uuid             not null, indexed
 #  university_id              :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_extranets_on_about          (about_type,about_id)
-#  index_communication_extranets_on_university_id  (university_id)
+#  index_communication_extranets_on_about                (about_type,about_id)
+#  index_communication_extranets_on_default_language_id  (default_language_id)
+#  index_communication_extranets_on_university_id        (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_6fd7e4d73b  (default_language_id => languages.id)
 #  fk_rails_c2268c7ebd  (university_id => universities.id)
 #
 class Communication::Extranet < ApplicationRecord
@@ -49,7 +52,12 @@ class Communication::Extranet < ApplicationRecord
   include WithStyle
   include WithUniversity
 
+  belongs_to :default_language, class_name: "Language"
   has_many :languages, through: :localizations
+  has_many  :active_languages,
+            -> { where(communication_extranet_localizations: { published: true }) },
+            through: :localizations,
+            source: :language
   has_many :posts
   has_many :post_localizations, class_name: 'Communication::Extranet::Post::Localization'
   has_many :post_categories, class_name: 'Communication::Extranet::Post::Category'
@@ -62,6 +70,9 @@ class Communication::Extranet < ApplicationRecord
   validates :about_type, :about_id, presence: true, if: :feature_alumni
 
   before_validation :sanitize_fields
+  before_validation :set_default_language,
+                    :set_first_localization_as_published,
+                    on: :create
 
   scope :for_search_term, -> (term, language) {
     joins(:localizations)
@@ -130,5 +141,16 @@ class Communication::Extranet < ApplicationRecord
   def sanitize_fields
     self.color = Osuny::Sanitizer.sanitize(self.color, 'string')
     self.host = Osuny::Sanitizer.sanitize(self.host, 'string')
+  end
+
+  def set_default_language
+    self.default_language_id = self.localizations.first.language_id
+  end
+
+  def set_first_localization_as_published
+    localizations.first.assign_attributes(
+      published: true,
+      published_at: Time.zone.now
+    )
   end
 end

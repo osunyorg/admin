@@ -44,11 +44,13 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   end
 
   def update
-    @l10n.add_photo_import params[:photo_import]
     if @post.update(post_params)
+      load_localization
+      @l10n.add_photo_import params[:photo_import]
       redirect_to admin_communication_extranet_post_path(@post),
                   notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

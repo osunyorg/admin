@@ -42,6 +42,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
     if @paper.update(paper_params)
       redirect_to admin_research_journal_paper_path(@paper), notice: t('admin.successfully_updated_html', model: @paper.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

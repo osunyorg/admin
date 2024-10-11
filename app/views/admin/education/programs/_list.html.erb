@@ -9,7 +9,7 @@
     diploma = program.diploma
     %>
     <div>
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized program %>
         <div class="card-body">
           <%= osuny_published_localized program %>

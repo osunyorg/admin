@@ -35,7 +35,7 @@ module Osuny
       html += "<span class=\"note__call\" role=\"button\" tabindex=\"0\" aria-expanded=\"false\" aria-label=\"#{label}\">#{@index}</span>"
       html += "<span class=\"note__content\" aria-hidden=\"true\" aria-live=\"polite\">#{note}</span>"
       html += "</span>"
-      html += text_after_note
+      html += text_after_note.to_s
       html
     end
   end

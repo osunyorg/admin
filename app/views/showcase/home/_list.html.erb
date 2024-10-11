@@ -14,7 +14,7 @@
       <% end %>
       <div class="row">
         <div class="col-lg-10">
-          <h2 class="h4"><%= website %></h2>
+          <h2 class="h4"><%= website.original_localization.to_s %></h2>
           <div class="small mb-1">
             <%= link_to website.url, 
                         target: :_blank, 

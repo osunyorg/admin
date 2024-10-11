@@ -46,6 +46,7 @@ class Admin::Communication::Extranets::Posts::CategoriesController < Admin::Comm
       redirect_to admin_communication_extranet_post_category_path(@category), 
                   notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
+      load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity

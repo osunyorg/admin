@@ -4,7 +4,7 @@ small ||= false
 <div class="row g-2 mb-2">
   <% pages.each do |page| %>
     <div>
-      <div class="card card--horizontal">
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized page %>
         <div class="card-body">
           <%= osuny_published_localized page %>

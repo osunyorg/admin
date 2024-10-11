@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_03_134739) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -268,6 +268,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "published", default: false
+    t.datetime "published_at"
     t.index ["about_id"], name: "index_communication_extranet_localizations_on_about_id"
     t.index ["language_id"], name: "index_communication_extranet_localizations_on_language_id"
     t.index ["university_id"], name: "index_communication_extranet_localizations_on_university_id"
@@ -352,7 +354,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
     t.boolean "feature_jobs", default: false
     t.text "sass"
     t.text "css"
+    t.uuid "default_language_id"
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
+    t.index ["default_language_id"], name: "index_communication_extranets_on_default_language_id"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
 
@@ -908,6 +912,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "ects"
+    t.string "certification"
     t.index ["university_id"], name: "index_education_diplomas_on_university_id"
   end
 
@@ -1833,6 +1838,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_30_131002) do
   add_foreign_key "communication_extranet_posts", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_posts", "universities"
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
+  add_foreign_key "communication_extranets", "languages", column: "default_language_id"
   add_foreign_key "communication_extranets", "universities"
   add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "parent_id"
   add_foreign_key "communication_website_agenda_categories", "communication_websites"

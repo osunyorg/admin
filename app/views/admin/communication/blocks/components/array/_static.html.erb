@@ -1,6 +1,8 @@
-
+<%
+array = value&.compact_blank
+%>
 <% if list %>
-<%= indentation %>- <%= raw value %>
+<%= indentation %>- <%= raw array %>
 <% else %>
-<%= indentation %><%= property %>: <%= raw value %>
+<%= indentation %><%= property %>: <%= raw array %>
 <% end %>
