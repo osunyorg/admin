@@ -61,13 +61,35 @@ module Migrations
     end
 
     def migrate_features_blocks
-      # TODO element.description
-      # TODO element.credit
+      Communication::Block.features.each do |block|
+        block.template.elements.each do |element|
+          next if element.description.blank? && element.credit.blank?
+          unless element.description.start_with?('<p>')
+            element.description = "<p>#{element.description}</p>"
+          end
+          unless element.credit.start_with?('<p>')
+            element.credit = "<p>#{element.credit}</p>"
+          end
+          block.data = block.template.data
+          block.save
+        end
+      end
     end
 
     def migrate_gallery_blocks
-      # TODO element.text
-      # TODO element.credit
+      Communication::Block.gallery.each do |block|
+        block.template.elements.each do |element|
+          next if element.text.blank? && element.credit.blank?
+          unless element.text.start_with?('<p>')
+            element.text = "<p>#{element.text}</p>"
+          end
+          unless element.credit.start_with?('<p>')
+            element.credit = "<p>#{element.credit}</p>"
+          end
+          block.data = block.template.data
+          block.save
+        end
+      end
     end
   end
 end
