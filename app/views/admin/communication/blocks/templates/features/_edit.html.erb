@@ -1,12 +1,8 @@
-<div class="row pure__row--small">
-  <div class="col-xl-6">
-    <%= block_component_edit block, :description, summernote_config: 'mini' %>
-  </div>
-</div>
+<%= block_component_edit block, :description, summernote_config: 'mini' %>
 
 <%= block_component_add_element block, t('.add_element') %>
 <draggable :list="data.elements" handle=".dragHandle" class="mb-3">
-  <div v-for="(element, index) in data.elements" class="draggable-item">
+  <div v-for="(element, index) in data.elements" class="draggable-item border-bottom">
     <div>
       <a class="btn ps-0 pt-0 dragHandle"><i class="<%= Icon::DRAG %> handle"></i></a>{{element.title}}
       <a  class="btn btn-sm text-danger float-end pe-0"
@@ -15,17 +11,15 @@
           <i class="<%= Icon::DELETE %>"></i>
       </a>
     </div>
-    <div class="row pure__row--small">
-      <div class="col-lg-4">
-        <%= block_component_edit block, :title, template: @element %>
-        <%= block_component_edit block, :description, template: @element, summernote_config: 'mini' %>
-      </div>
-      <div class="col-lg-4">
+    <%= block_component_edit block, :title, template: @element %>
+    <%= block_component_edit block, :description, template: @element, summernote_config: 'mini' %>
+    <div class="row mt-4">
+      <div class="col-sm-6">
         <%= block_component_edit block, :image, template: @element %>
       </div>
-      <div class="col-lg-4" v-show="element.image.id != ''">
+      <div class="col-sm-6" v-show="element.image.id">
         <%= block_component_edit block, :alt, template: @element %>
-        <%= block_component_edit block, :credit, template: @element %>
+        <%= block_component_edit block, :credit, template: @element, summernote_config: 'mini' %>
       </div>
     </div>
   </div>
