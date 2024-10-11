@@ -53,6 +53,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
+  has_summernote :summary
   has_summernote :text # TODO: Remove text attribute
 
   validates :title, presence: true
