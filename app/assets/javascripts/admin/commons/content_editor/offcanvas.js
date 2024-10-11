@@ -16,21 +16,14 @@ window.osuny.contentEditor.offcanvas = {
         this.addBlockButton = document.querySelector('.js-content-editor__add-block');
         for (i = 0; i < this.editButtons.length; i += 1) {
             button = this.editButtons[i];
-            button.addEventListener('click', this.onEditButtonClick.bind(this));
+            button.addEventListener('click', this.onBlockActionClick.bind(this));
         }
         if (this.addBlockButton) {
-            this.addBlockButton.addEventListener('click', this.onAddBlockButtonClick.bind(this));
+            this.addBlockButton.addEventListener('click', this.onBlockActionClick.bind(this));
         }
     },
 
-    onEditButtonClick: function (event) {
-        'use strict';
-        event.preventDefault();
-        this.iframe.contentWindow.location.replace(event.target.href);
-        this.editorBootstrap.show();
-    },
-
-    onAddBlockButtonClick: function (event) {
+    onBlockActionClick: function (event) {
         'use strict';
         event.preventDefault();
         this.iframe.contentWindow.location.replace(event.target.href);
