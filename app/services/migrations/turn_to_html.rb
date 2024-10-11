@@ -13,7 +13,7 @@ module Migrations
 
     def migrate
       migrate_summaries
-      migrate_definition_blocks
+      migrate_definitions_blocks
       migrate_features_blocks
       migrate_gallery_blocks
     end
@@ -42,7 +42,6 @@ module Migrations
 
     def migrate_summaries
       CLASSES_WITH_SUMMARIES.each do |klass|
-        puts "--- #{klass}"
         klass.where.not(summary: [nil, '']).find_each do |object|
           next if object.summary.start_with?('<p>')
           object.update_column :summary, "<p>#{object.summary}</p>"
@@ -50,17 +49,25 @@ module Migrations
       end
     end
 
-    def migrate_definition_blocks
-
+    def migrate_definitions_blocks
+      Communication::Block.definitions.each do |block|
+        block.template.elements.each do |element|
+          next if element.description.blank?
+          next if element.description.start_with?('<p>')
+          element.description = "<p>#{element.description}</p>"
+          # TODO enregistrer correctement sans casser les data ni relancer des callback
+        end
+      end
     end
 
     def migrate_features_blocks
-
+      # TODO element.description
+      # TODO element.credit
     end
 
     def migrate_gallery_blocks
-      # Crédit
-      # Texte
+      # TODO element.text
+      # TODO element.credit
     end
   end
 end
