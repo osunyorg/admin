@@ -6,7 +6,7 @@
 <%= block_component_static block, :zipcode, depth: 4 %>
 <%= block_component_static block, :city, depth: 4 %>
 <%= block_component_static block, :country, depth: 4 %>
-      contact_information:
+      contact_details:
 <%
 if block.template.url.present?
   detail = ContactDetails::Website.new block.template.url

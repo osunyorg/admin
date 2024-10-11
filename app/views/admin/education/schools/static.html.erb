@@ -11,7 +11,7 @@ city: "<%= prepare_text_for_static school.city %>"
 country: "<%= prepare_text_for_static school.country_common_name %>"
 phone: "<%= prepare_text_for_static school.phone %>"
 url: "<%= prepare_text_for_static @l10n.url %>"
-contact_information:
+contact_details:
 <%
 if @l10n.url.present?
   detail = ContactDetails::Website.new @l10n.url
