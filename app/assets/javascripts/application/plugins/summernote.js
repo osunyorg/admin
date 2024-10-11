@@ -159,11 +159,13 @@ window.summernoteManager = {
 
     cleanHtml: function (html) {
         'use strict';
+        var cleanedHtml,
+            previousHtml;
         // remove allMicrosoft Office tag
-        var cleanedHtml = html.replace(/<!\[if !supportLists[\s\S]*?endif\]>/g, '');
+        cleanedHtml = html.replace(/<!\[if !supportLists[\s\S]*?endif\]>/g, '');
         // remove all html comments
         do {
-            var previousHtml = cleanedHtml;
+            previousHtml = cleanedHtml;
             cleanedHtml = cleanedHtml.replace(/<!--[\s\S]*?-->/g, '');
         } while (cleanedHtml !== previousHtml);
         // remove all microsoft attributes,
