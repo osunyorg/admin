@@ -40,6 +40,8 @@ class Education::Diploma::Localization < ApplicationRecord
   include WithPublication
   include WithUniversity
 
+  has_summernote :summary
+
   validates :name, presence: true
   validates :name, uniqueness: { scope: :university_id }
 

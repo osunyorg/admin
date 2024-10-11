@@ -31,6 +31,8 @@ class Research::Laboratory::Axis::Localization < ApplicationRecord
   include Sanitizable
   include WithUniversity
 
+  has_summernote :summary
+
   validates :name, presence: true
 
   def to_s

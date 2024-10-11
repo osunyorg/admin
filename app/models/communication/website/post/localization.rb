@@ -57,7 +57,6 @@ class Communication::Website::Post::Localization < ApplicationRecord
   has_summernote :text # TODO: Remove text attribute
 
   validates :title, presence: true
-
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)

@@ -46,9 +46,10 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   delegate :number, to: :volume
 
-  validates :title, presence: true
-
+  has_summernote :summary
   has_summernote :text
+
+  validates :title, presence: true
 
   def git_path(website)
     "#{git_path_content_prefix(website)}volumes#{relative_path}/_index.html" if published_at
