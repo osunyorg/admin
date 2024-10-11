@@ -77,4 +77,13 @@ module Localizable
     best_localization_for(language).to_s
   end
 
+  protected
+
+  def set_first_localization_as_published
+    localizations.first.assign_attributes(
+      published: true,
+      published_at: Time.zone.now
+    )
+  end
+
 end
