@@ -8,11 +8,11 @@
         p:last-child
             margin-bottom: 0
         &__logo
-            border: 1px solid $light-border-color
-            background: white
-            padding: 60px
             aspect-ratio: 1 / 1
+            background: white
+            border: 1px solid $light-border-color
             object-fit: contain
+            padding: 60px
 
         @include media-breakpoint-up(md)
             align-items: center
@@ -21,7 +21,7 @@
 
     .organizations-show
         .organization__logo
-            margin-top: -130px
             margin-bottom: 50px
+            margin-top: -130px
             @include media-breakpoint-up(md)
                 margin-top: -200px

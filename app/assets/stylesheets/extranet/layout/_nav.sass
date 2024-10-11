@@ -10,7 +10,7 @@
             object-fit: contain
             width: 100%
     .nav-link
-        color: black 
+        color: black
     .active
         .nav-link
             color: $navbar-link-active-color
@@ -34,13 +34,13 @@
         text-transform: uppercase
     .dropdown-toggle
         &::after
-            width: 6px
-            height: 6px
             border-bottom: 1px solid black
             border-left: 0
             border-right: 1px solid black
             border-top: 0
+            height: 6px
             transform: rotate(45deg)
+            width: 6px
 
     @include media-breakpoint-up(md)
         .navbar-nav
@@ -51,7 +51,7 @@
             background: white
             display: block
             left: 0
+            padding: 1rem
             position: fixed
             right: 0
             text-align: right
-            padding: 1rem

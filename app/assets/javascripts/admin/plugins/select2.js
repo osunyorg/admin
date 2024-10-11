@@ -1,7 +1,9 @@
+/*global $ */
 $(document).ready(function () {
-    $("select.select2").each(function () {
+    'use strict';
+    $('select.select2').each(function () {
         $(this)
-            .wrap("<div class=\"position-relative\"></div>")
+            .wrap('<div class="position-relative"></div>')
             .select2({
                 allowClear: true,
                 dropdownParent: $(this).parent(),

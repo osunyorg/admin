@@ -4,7 +4,6 @@ window.osuny.validateFromClickManager = {
         'use strict';
 
         this.elements = document.querySelectorAll('.js-validate-form-click');
-
         if (this.elements.length > 0) {
             this.listen();
         }
