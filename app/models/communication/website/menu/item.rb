@@ -89,13 +89,13 @@ class Communication::Website::Menu::Item < ApplicationRecord
   def self.collection_for(kind, website)
     case kind
     when 'page'
-      website.pages
+      website.pages.root
     when 'diploma'
       website.education_diplomas
     when 'program'
-      website.education_programs
+      website.education_programs.root
     when 'category'
-      website.post_categories
+      website.post_categories.root
     when 'post'
       website.posts
     when 'volume'
