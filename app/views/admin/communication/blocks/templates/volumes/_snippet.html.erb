@@ -1,8 +1,8 @@
 <div class="row">
-  <% 
-  block.template.selected_volumes.each do |volume| 
+  <%
+  block.template.selected_volumes.each do |volume|
     volume_l10n = volume.localization_for(block.language)
-    next if  volume_l10n.nil?
+    next if volume_l10n.nil?
     %>
     <div class="col-lg-4">
       <%= kamifusen_tag volume_l10n.featured_image, width: 400, class: 'img-fluid mb-2' %>
