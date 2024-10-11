@@ -1,10 +1,9 @@
-/* global $ */
+/* global */
 window.osuny.validateFromClickManager = {
     init: function () {
         'use strict';
 
         this.elements = document.querySelectorAll('.js-validate-form-click');
-        
         if (this.elements.length > 0) {
             this.listen();
         }
@@ -26,8 +25,8 @@ window.osuny.validateFromClickManager = {
             return;
         }
 
-        element.style.cursor = "pointer"
-        element.addEventListener('click', function() {
+        element.style.cursor = 'pointer';
+        element.addEventListener('click', function () {
             form.submit();
         });
     },
