@@ -16,11 +16,4 @@ module Communication::Website::WithFeatureAgenda
     scope :with_feature_agenda, -> { where(feature_agenda: true) }
   end
 
-  def has_agenda_events?
-    agenda_events.published.any?
-  end
-
-  def has_agenda_categories?
-    agenda_categories.any?
-  end
 end

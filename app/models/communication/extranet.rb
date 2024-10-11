@@ -146,11 +146,4 @@ class Communication::Extranet < ApplicationRecord
   def set_default_language
     self.default_language_id = self.localizations.first.language_id
   end
-
-  def set_first_localization_as_published
-    localizations.first.assign_attributes(
-      published: true,
-      published_at: Time.zone.now
-    )
-  end
 end

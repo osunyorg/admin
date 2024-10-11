@@ -16,11 +16,4 @@ module Communication::Website::WithFeaturePosts
     scope :with_feature_posts, -> { where(feature_posts: true) }
   end
 
-  def has_blog_posts?
-    posts.published.any?
-  end
-
-  def has_blog_categories?
-    post_categories.any?
-  end
 end

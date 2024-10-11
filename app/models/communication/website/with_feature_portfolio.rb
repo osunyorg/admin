@@ -17,11 +17,4 @@ module Communication::Website::WithFeaturePortfolio
     scope :with_feature_portfolio, -> { where(feature_portfolio: true) }
   end
 
-  def has_portfolio_projects?
-    projects.published.any?
-  end
-
-  def has_portfolio_categories?
-    portfolio_categories.any?
-  end
 end
