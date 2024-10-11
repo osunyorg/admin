@@ -19,6 +19,7 @@ class Admin::Communication::ContentsController < Admin::Communication::Applicati
       university: current_university,
       mandatory_module: Contentful
     )
-    raise_403_unless can?(:edit, @about)
+    # We check ability on localization's about
+    raise_403_unless can?(:update, @about.about)
   end
 end
