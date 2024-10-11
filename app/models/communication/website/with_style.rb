@@ -28,7 +28,7 @@ module Communication::Website::WithStyle
   end
 
   def load_style_from(url)
-    data = URI.open url
+    data = URI.parse(url).open
     html = Nokogiri::HTML data
     css_files = html.xpath '//link[@rel="stylesheet"]/@href'
     css_files.each do |css_url|
@@ -38,7 +38,7 @@ module Communication::Website::WithStyle
   end
 
   def add_css_url_to_style(css_url)
-    @style << URI.open(css_url).read
+    @style << URI.parse(css_url).open.read
   end
 
   # /assets/fonts/Aestetico-Light/font.woff2

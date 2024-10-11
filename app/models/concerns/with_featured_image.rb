@@ -34,7 +34,7 @@ module WithFeaturedImage
     photo = Unsplash::Photo.find id
     url = "#{photo['urls']['full']}&w=2048&fit=max"
     filename = "#{photo['id']}.jpg"
-    file = URI.open url
+    file = URI.parse(url).open
     featured_image.attach(io: file, filename: filename)
     photo.track_download
   end
@@ -43,7 +43,7 @@ module WithFeaturedImage
     photo = Pexels::Client.new.photos.find id
     url = "#{photo.src['original']}?auto=compress&cs=tinysrgb&w=2048"
     filename = "#{photo.id}.png"
-    file = URI.open url
+    file = URI.parse(url).open
     featured_image.attach(io: file, filename: filename)
   end
 end
