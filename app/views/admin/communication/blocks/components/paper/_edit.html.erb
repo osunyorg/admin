@@ -1,5 +1,5 @@
-<% 
-local_assigns[:elements] = component.website.research_papers.ordered 
+<%
+local_assigns[:elements] = component.website.research_papers.ordered(current_language)
 partial = 'admin/communication/blocks/components/_defaults/select'
 %>
 <%= render partial, **local_assigns -%>

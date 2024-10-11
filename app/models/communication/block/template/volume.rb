@@ -2,7 +2,7 @@ class Communication::Block::Template::Volume < Communication::Block::Template::B
 
   has_elements
   has_component :mode, :option, options: [
-    :all, 
+    :all,
     :selection
   ]
   has_component :quantity, :number, options: 3
@@ -18,7 +18,7 @@ class Communication::Block::Template::Volume < Communication::Block::Template::B
   def allowed_for_about?
     website.present? && website.research_volumes.any?
   end
-  
+
   def children
     selected_volumes
   end
@@ -41,6 +41,6 @@ class Communication::Block::Template::Volume < Communication::Block::Template::B
   end
 
   def available_volumes
-    website.research_volumes.ordered
+    website.research_volumes
   end
 end

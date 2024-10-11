@@ -2,7 +2,7 @@ class Communication::Block::Template::Paper < Communication::Block::Template::Ba
 
   has_elements
   has_component :mode, :option, options: [
-    :all, 
+    :all,
     :selection
   ]
   has_component :quantity, :number, options: 3
@@ -18,7 +18,7 @@ class Communication::Block::Template::Paper < Communication::Block::Template::Ba
   def allowed_for_about?
     website.present? && website.research_papers.any?
   end
-  
+
   def children
     selected_papers
   end
@@ -41,6 +41,6 @@ class Communication::Block::Template::Paper < Communication::Block::Template::Ba
   end
 
   def available_papers
-    website.research_papers.ordered
+    website.research_papers
   end
 end
