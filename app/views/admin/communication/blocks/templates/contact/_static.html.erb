@@ -126,7 +126,7 @@ if block.template.social_vimeo.present?
 if block.template.social_x.present?
   detail = ContactDetails::X.new block.template.social_x
   %>
-          mastodon:
+          x:
             label: >-
               <%= detail.label %>
             value: >-
