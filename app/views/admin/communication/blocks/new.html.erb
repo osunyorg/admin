@@ -21,7 +21,7 @@
                 <p class="mb-0 block__description">
                   <%= t "admin.communication.blocks.templates.#{kind}.description" %>
                 </p>
-                <%= simple_form_for [:admin, @block], html: { class: 'mt-auto'} do |f| %>
+                <%= simple_form_for [:admin, @block], remote: true, html: { class: 'mt-auto new-block-form', id: "new-block-#{kind}" } do |f| %>
                   <%= f.input :about_type, as: :hidden %>
                   <%= f.input :about_id, as: :hidden %>
                   <%= f.input :template_kind, as: :hidden %>
@@ -34,3 +34,14 @@
     </div>
   </section>
 <% end %>
+
+<script nonce="<%= request.content_security_policy_nonce %>">
+  window.addEventListener('load', function(){
+    setTimeout(function() {
+      $(".new-block-form").on("ajax:success", function(e, data, status, xhr) {
+        parent.window.osuny.contentEditor.offcanvas.onBlockSave(null, null);
+        window.location.replace(xhr.getResponseHeader('Location'));
+      });
+    }, 100);
+  });
+</script>

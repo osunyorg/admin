@@ -1,4 +1,4 @@
-/* global Sortable */
+/* global $, Sortable */
 window.osuny.contentEditor.sort = {
     init: function () {
         'use strict';

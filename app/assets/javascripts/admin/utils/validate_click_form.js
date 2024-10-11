@@ -9,15 +9,15 @@ window.osuny.validateFromClickManager = {
         }
     },
 
-    listen: function() {
+    listen: function () {
         'use strict';
 
-        this.elements.forEach(function(element) {
-            this.bindClick(element)
+        this.elements.forEach(function (element) {
+            this.bindClick(element);
         }.bind(this));
     },
 
-    bindClick: function(element) {
+    bindClick: function (element) {
         'use strict';
         var form = element.querySelector('form');
 
@@ -27,7 +27,8 @@ window.osuny.validateFromClickManager = {
 
         element.style.cursor = 'pointer';
         element.addEventListener('click', function () {
-            form.submit();
+            var submitBtn = form.querySelector('input[type="submit"]');
+            submitBtn.click();
         });
     },
 
