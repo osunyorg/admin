@@ -42,22 +42,42 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def create
     if @block.save
-      redirect_to [:edit, :admin, @block],
-                  notice: t('admin.successfully_created_html', model: @block.to_s)
+      respond_to do |format|
+        format.html {
+          redirect_to [:edit, :admin, @block],
+                      notice: t('admin.successfully_created_html', model: @block.to_s)
+        }
+        format.js { render json: {}, status: :created, location: [:edit, :admin, @block] }
+      end
     else
-      breadcrumb
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.html {
+          breadcrumb
+          render :new, status: :unprocessable_entity
+        }
+        format.js { head :unprocessable_entity }
+      end
     end
   end
 
   def update
     if @block.update(block_params)
-      redirect_to about_path,
-                  notice: t('admin.successfully_updated_html', model: @block.to_s)
+      respond_to do |format|
+        format.html {
+          redirect_to about_path,
+                      notice: t('admin.successfully_updated_html', model: @block.to_s)
+        }
+        format.js { head :ok }
+      end
     else
-      breadcrumb
-      add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        format.html {
+          breadcrumb
+          add_breadcrumb t('edit')
+          render :edit, status: :unprocessable_entity
+        }
+        format.js { head :unprocessable_entity }
+      end
     end
   end
 
