@@ -162,7 +162,10 @@ window.summernoteManager = {
         // remove allMicrosoft Office tag
         var cleanedHtml = html.replace(/<!\[if !supportLists[\s\S]*?endif\]>/g, '');
         // remove all html comments
-        cleanedHtml = cleanedHtml.replace(/<!--[\s\S]*?-->/g, '');
+        do {
+            var previousHtml = cleanedHtml;
+            cleanedHtml = cleanedHtml.replace(/<!--[\s\S]*?-->/g, '');
+        } while (cleanedHtml !== previousHtml);
         // remove all microsoft attributes,
         cleanedHtml = cleanedHtml.replace(/( class=(")?Mso[a-zA-Z]+(")?)/g, ' ');
         // ensure regular quote
