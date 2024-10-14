@@ -100,7 +100,7 @@ module AsLocalization
   # Utility method to duplicate attachments
   def localize_attachment(localization, attachment_name)
     localization.public_send(attachment_name).attach(
-      io: URI.open(public_send(attachment_name).url),
+      io: URI.parse(public_send(attachment_name).url).open,
       filename: public_send(attachment_name).filename.to_s,
       content_type: public_send(attachment_name).content_type
     )

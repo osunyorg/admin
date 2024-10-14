@@ -32,7 +32,7 @@ module User::WithAvatar
 
   def do_update_picture
     begin
-      downloaded_image = open(picture_url)
+      downloaded_image = URI.parse(picture_url).open
       content_type = downloaded_image.content_type
       extension = content_type.split('/').last
       self.picture.attach(io: downloaded_image, filename: "avatar.#{extension}")
