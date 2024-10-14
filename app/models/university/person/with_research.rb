@@ -33,11 +33,21 @@ module University::Person::WithResearch
     scope :with_hal_identifier, -> { where.not(hal_form_identifier: [nil,'']) }
   end
 
+  # Import HAL publications by retrieving them from API
   def import_research_hal_publications!
     publications.delete(publications.hal)
     hal_authors.each do |author|
       # TODO manage same researcher in different universities
       publications.concat author.import_research_hal_publications!
+    end
+  end
+
+  # Connect HAL publications from HAL authors without calling the API
+  def connect_research_hal_publications!
+    publications.delete(publications.hal)
+    hal_authors.each do |author|
+      # TODO manage same researcher in different universities
+      publications.concat author.publications
     end
   end
 
