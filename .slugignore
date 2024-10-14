@@ -1,6 +1,5 @@
 /.circleci
 /.github
-/.scalingo/node
 /.scalingo/yarn
 /lib/templates
 /node_modules
