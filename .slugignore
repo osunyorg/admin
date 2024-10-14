@@ -1,0 +1,6 @@
+/.circleci
+/.github
+/lib/templates
+/node_modules
+/spec
+/test
