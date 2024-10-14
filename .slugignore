@@ -1,5 +1,6 @@
 /.circleci
 /.github
+/.scalingo
 /lib/templates
 /node_modules
 /spec
