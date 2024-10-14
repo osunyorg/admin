@@ -5,6 +5,6 @@ small ||= false
   <% if about.summary.present? %>
     <div class="lead"><%= sanitize about.summary %></div>
   <% else %>
-    <div class="lead lead--example"><%= t 'communication.summary.none' %></div>
+    <div class="lead lead--example"><p><%= t 'communication.summary.none' %></p></div>
   <% end %>
 <% end %>
