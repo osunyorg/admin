@@ -320,6 +320,9 @@ fr:
             description: Des chiffres clés avec une jolie animation. Chaque chiffre peut être doté d'une unité et d'un texte.
             edit:
               add_key: Ajouter un chiffre clé
+              description:
+                label: Description
+                placeholder: Entrer la description
               element:
                 description:
                   label: Description
