@@ -320,6 +320,9 @@ en:
             description: Animated figures, with a unit and a text.
             edit:
               add_key: Add key figure
+              description:
+                label: Description
+                placeholder: Enter description here
               element:
                 description:
                   label: Description
