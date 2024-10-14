@@ -14,8 +14,15 @@ module Migrations
     def migrate
       migrate_summaries
       migrate_definitions_blocks
+      migrate_embed_blocks
       migrate_features_blocks
       migrate_gallery_blocks
+      migrate_key_figures_blocks
+      migrate_links_blocks
+      migrate_sound_blocks
+      migrate_testimonials_blocks
+      migrate_timeline_blocks
+      migrate_video_blocks
     end
 
     protected
@@ -55,9 +62,19 @@ module Migrations
           next if element.description.blank?
           next if element.description.start_with?('<p>')
           element.description = "<p>#{element.description}</p>"
-          block.data = block.template.data
-          block.save
         end
+        block.data = block.template.data
+        block.save
+      end
+    end
+
+    def migrate_embed_blocks
+      Communication::Block.embed.each do |block|
+        next if block.template.transcription.blank?
+        next if block.template.transcription.start_with?('<p>')
+        block.template.transcription = "<p>#{block.template.transcription}</p>"
+        block.data = block.template.data
+        block.save
       end
     end
 
@@ -71,9 +88,9 @@ module Migrations
           unless element.credit.start_with?('<p>')
             element.credit = "<p>#{element.credit}</p>"
           end
-          block.data = block.template.data
-          block.save
         end
+        block.data = block.template.data
+        block.save
       end
     end
 
@@ -87,10 +104,80 @@ module Migrations
           unless element.credit.start_with?('<p>')
             element.credit = "<p>#{element.credit}</p>"
           end
-          block.data = block.template.data
-          block.save
         end
+        block.data = block.template.data
+        block.save
       end
     end
+
+    def migrate_key_figures_blocks
+      Communication::Block.key_figures.each do |block|
+        block.template.elements.each do |element|
+          next if element.description.blank?
+          next if element.description.start_with?('<p>')
+          element.description = "<p>#{element.description}</p>"
+        end
+        block.data = block.template.data
+        block.save
+      end
+    end
+
+    def migrate_links_blocks
+      Communication::Block.links.each do |block|
+        if block.template.description.present? && !block.template.description.start_with?('<p>')
+          block.template.description = "<p>#{block.template.description}</p>"
+        end
+        block.template.elements.each do |element|
+          next if element.description.blank?
+          next if element.description.start_with?('<p>')
+          element.description = "<p>#{element.description}</p>"
+        end
+        block.data = block.template.data
+        block.save
+      end
+    end
+
+    def migrate_sound_blocks
+      Communication::Block.sound.each do |block|
+        next if block.template.transcription.blank?
+        next if block.template.transcription.start_with?('<p>')
+        block.template.transcription = "<p>#{block.template.transcription}</p>"
+        block.data = block.template.data
+        block.save
+      end
+    end
+
+    def migrate_testimonials_blocks
+      Communication::Block.testimonials.each do |block|
+        block.template.elements.each do |element|
+          next if element.text.blank?
+          next if element.text.start_with?('<p>')
+          element.text = "<p>#{element.text}</p>"
+        end
+        block.data = block.template.data
+        block.save
+      end
+    end
+
+    def migrate_timeline_blocks
+      Communication::Block.timeline.each do |block|
+        next if block.template.text.blank?
+        next if block.template.text.start_with?('<p>')
+        block.template.text = "<p>#{block.template.text}</p>"
+        block.data = block.template.data
+        block.save
+      end
+    end
+
+    def migrate_video_blocks
+      Communication::Block.video.each do |block|
+        next if block.template.transcription.blank?
+        next if block.template.transcription.start_with?('<p>')
+        block.template.transcription = "<p>#{block.template.transcription}</p>"
+        block.data = block.template.data
+        block.save
+      end
+    end
+
   end
 end
