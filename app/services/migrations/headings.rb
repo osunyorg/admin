@@ -33,10 +33,10 @@ module Migrations
       end
       object.headings.root.ordered.each do |heading|
         create_block_title(heading, position)
-        position += 1 
+        position += 1
         heading.blocks.ordered.each do |block|
           block.update_column :position, position
-          position += 1  
+          position += 1
         end
       end
     end
@@ -70,7 +70,7 @@ module Migrations
     end
 
     def object_ids(type)
-      Communication::Block::Heading.where(about_type: type).pluck(:about_id).uniq
+      Communication::Block::Heading.where(about_type: type).distinct.pluck(:about_id)
     end
 
     def objects_by(type)

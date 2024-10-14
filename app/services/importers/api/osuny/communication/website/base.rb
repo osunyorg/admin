@@ -45,6 +45,7 @@ class Importers::Api::Osuny::Communication::Website::Base
                       template_kind: template_kind
                     )
                     .first_or_initialize
+      block.title = b[:title]
       block.data = block.template.data.merge b[:data]
       block.save
     end
