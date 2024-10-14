@@ -250,6 +250,9 @@ en:
             description: A list of features with images (often icons) and a description.
             edit:
               add_element: Add feature
+              description:
+                label: Description
+                placeholder: Enter description here
               element:
                 alt:
                   label: Alternative text

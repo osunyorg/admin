@@ -1,7 +1,7 @@
 <%= block_component_snippet block, :description %>
 <% block.template.elements.each do |element| %>
   <div class="row">
-    <% if element.image.present? %>
+    <% if element.image.present? && element.image['id'].present? %>
       <div class="col-4 col-sm-2 mb-2">
         <%= block_component_snippet block, :image, template: element %>
       </div>

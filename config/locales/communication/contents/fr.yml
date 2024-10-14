@@ -250,6 +250,9 @@ fr:
             description: Une liste de fonctionnalités avec des images, par exemple des icônes, et une description.
             edit:
               add_element: Ajouter une fonctionnalité
+              description:
+                label: Description
+                placeholder: Entrer la description
               element:
                 alt:
                   label: Texte alternatif
