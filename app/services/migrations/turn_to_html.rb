@@ -55,7 +55,8 @@ module Migrations
           next if element.description.blank?
           next if element.description.start_with?('<p>')
           element.description = "<p>#{element.description}</p>"
-          # TODO enregistrer correctement sans casser les data ni relancer des callback
+          block.data = block.template.data
+          block.save
         end
       end
     end
