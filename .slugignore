@@ -1,0 +1,7 @@
+/.circleci
+/.github
+/.scalingo/yarn
+/lib/templates
+/node_modules
+/spec
+/test
