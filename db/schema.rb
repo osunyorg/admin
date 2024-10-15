@@ -1686,7 +1686,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_134739) do
   end
 
   create_table "university_person_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "biography"
+    t.text "biography"
     t.string "first_name"
     t.string "last_name"
     t.string "linkedin"
