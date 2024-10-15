@@ -132,6 +132,8 @@ certifications:
     certified: <%= program.qualiopi_certified %>
     text: >-
       <%= prepare_html_for_static @l10n.qualiopi_text %>
+presentation: >-
+  <%= prepare_html_for_static @l10n.presentation %>
 <%
 [
   :accessibility,
@@ -143,7 +145,6 @@ certifications:
   :other,
   :pedagogy,
   :prerequisites,
-  :presentation,
   :pricing,
   :pricing_initial,
   :pricing_continuing,
