@@ -4,6 +4,9 @@ fr:
     communication:
       blocks:
         add: Ajouter un bloc
+        advanced:
+          anchor: Ancre
+          url_with_anchor: URL avec ancre
         alerts:
           file_is_too_big: "Le fichier est trop lourd\_!"
         categories:

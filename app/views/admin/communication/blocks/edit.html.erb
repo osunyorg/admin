@@ -50,15 +50,15 @@
           about = about_l10n.about
           %>
           <div class="mb-5">
-            <%= osuny_label 'Ancre' %>
-            <input type="text" value="#<%= slug %>" class="form-control" disabled />
+            <%= osuny_label t('admin.communication.blocks.advanced.anchor') %>
+            <pre>#<%= slug %></pre>
             <%
             if about.is_direct_object?
               website = about.website
               path = about_l10n.current_permalink_in_website(website)&.path
               %>
-              <%= osuny_label 'URL avec ancre' %>
-              <input type="text" value="<%= path %>#<%= slug %>" class="form-control" disabled />
+              <%= osuny_label t('admin.communication.blocks.advanced.url_with_anchor') %>
+              <pre><%= path %>#<%= slug %></pre>
             <% end %>
           </div>
         <% end %>

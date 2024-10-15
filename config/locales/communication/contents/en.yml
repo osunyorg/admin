@@ -4,6 +4,9 @@ en:
     communication:
       blocks:
         add: Add block
+        advanced:
+          anchor: Anchor
+          url_with_anchor: URL with anchor
         alerts:
           file_is_too_big: File is too big!
         categories:
