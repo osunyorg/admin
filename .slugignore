@@ -1,9 +1,15 @@
+# No need for CI and workflows
 /.circleci
 /.github
+# Node and Yarn Binaries are only used for assets compilation
 /.scalingo/node
 /.scalingo/yarn
-/lib/templates
+# Assets are precompiled to public/assets
+/app/assets
 /node_modules
+/vendor/assets
+# Development resources
+/lib/templates
+# Tests directories
 /spec
 /test
-/vendor/assets
