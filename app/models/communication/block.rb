@@ -155,6 +155,10 @@ class Communication::Block < ApplicationRecord
     "#{title} #{template.full_text}"
   end
 
+  def slug
+    title.blank? ? '' : "#{title.parameterize}"
+  end
+
   def to_s
     title.blank?  ? "#{Communication::Block.model_name.human} #{position}"
                   : "#{title}"
