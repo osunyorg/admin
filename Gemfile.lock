@@ -7,12 +7,6 @@ GIT
       railties (>= 3.2.16)
 
 GIT
-  remote: https://github.com/noesya/execjs.git
-  revision: 3ecf76890d973bb2c217cf80f88378f7ae6d0c4b
-  specs:
-    execjs (2.9.1)
-
-GIT
   remote: https://github.com/noesya/summernote-rails.git
   revision: 32fd182c929cdcacaa6e3bd3569871bd025fa669
   specs:
@@ -30,6 +24,12 @@ GIT
       rails (>= 3.1.1)
       randexp
       rotp (>= 4.0.0)
+
+GIT
+  remote: https://github.com/rails/execjs.git
+  revision: 86cb852dc4c66f7616a97b1d8c97a487c3889534
+  specs:
+    execjs (2.9.1)
 
 GEM
   remote: https://rubygems.org/
