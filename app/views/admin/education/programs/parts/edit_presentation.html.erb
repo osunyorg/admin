@@ -14,11 +14,11 @@
         <%= f.input :capacity %>
       </div>
       <div class="offset-lg-1 col-lg-4">
-        <%= lf.input :presentation,
-                    as: :summernote,
-                    input_html: {
-                      data: { 'summernote-config' => 'link' }
-                    } %>
+        <%= lf.input  :presentation,
+                      as: :summernote,
+                      input_html: {
+                        data: { 'summernote-config' => 'mini' }
+                      } %>
       </div>
       <div class="col-lg-4">
         <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :objectives %>

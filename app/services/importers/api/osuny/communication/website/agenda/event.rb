@@ -41,8 +41,8 @@ class Importers::Api::Osuny::Communication::Website::Agenda::Event < Importers::
     image = params['image']
     return if image.blank?
     # Not twice
-    return if object.featured_image.attached? 
-    io = URI.open(image)
+    return if object.featured_image.attached?
+    io = URI.parse(image).open
     filename = File.basename(image).split('?').first
     object.featured_image.attach(io: io, filename: filename)
   rescue

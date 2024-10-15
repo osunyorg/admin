@@ -8,10 +8,14 @@
       <% unless block.template.transcription.blank? %>
         <div class="transcription">
           <details>
-            <summary><%= t 'accessibility.transcription' %></summary>
-            <p>
-              <%= block_component_show block, :transcription %>
-            </p>
+            <summary>
+              <% if block.template.transcription_title.present? %>
+                <%= block.template.transcription_title %>
+              <% else %>
+                <%= t 'accessibility.transcription' %>
+              <% end %>
+            </summary>
+            <p><%= block_component_show block, :transcription %></p>
           </details>
         </div>
       <% end %>

@@ -48,9 +48,12 @@ en:
           text:
             label: Text
             placeholder: Enter text
-            transcription:
-              label: Text transcript
-              placeholder: Enter text transcript
+          transcription:
+            label: Text version
+            placeholder: Enter text
+          transcription_title:
+            label: Title of the text version
+            placeholder: Transcription, text version, alternative text...
           time_slot:
             from: From
             to: to
@@ -473,6 +476,22 @@ en:
               list:
                 description: The main page's short description is used as a big text, and the pages are listed on the right.
                 label: List
+          papers:
+            description: A selection of research papers, published in a scientific journal.
+            edit:
+              mode:
+                label: Which papers?
+                options:
+                  all: The most recent papers
+                  selection: A selection of papers
+              quantity:
+                label: Quantity of papers
+                placeholder: Enter quantity
+              selection:
+                add: Add a paper
+                label: Paper
+                none: No paper
+                title: Papers selected
           persons:
             description: People and their jobs.
             edit:
@@ -648,6 +667,22 @@ en:
               video_title:
                 label: Video title
                 placeholder: Enter video title
+          volumes:
+            description: A selection of volumes published in a scientific journal.
+            edit:
+              mode:
+                label: Which volumes?
+                options:
+                  all: The most recent volumes
+                  selection: A selection of volumes
+              quantity:
+                label: Quantity of volumes
+                placeholder: Enter quantity
+              selection:
+                add: Add un volume
+                label: Volume
+                none: No volume
+                title: Selected volumes
       contents:
         blocks:
           copy: Copy block
@@ -684,6 +719,7 @@ en:
           locations: Campus
           organizations: Organizations
           pages: Pages
+          papers: Papers
           persons: People
           posts: Posts
           programs: Programs
@@ -692,3 +728,4 @@ en:
           testimonials: Testimonials
           timeline: Timeline
           video: Video
+          volumes: Volumes
