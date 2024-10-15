@@ -23,7 +23,7 @@ end
       <i class="<%= Icon::WARNING %> text-danger"></i>
       <%= t 'properties.text.missing' %>
     <% else %>
-      <%= strip_tags(value).truncate(200).html_safe %>
+      <%= sanitize value %>
     <% end %>
   </p>
 <% end %>
