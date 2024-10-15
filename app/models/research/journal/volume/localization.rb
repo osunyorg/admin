@@ -51,11 +51,11 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   has_summernote :text
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}volumes#{relative_path}/_index.html" if published_at
+    "#{git_path_content_prefix(website)}volumes/#{relative_path}/_index.html" if published?
   end
 
   def relative_path
-    "/#{published_at&.year}-#{slug}"
+    "#{published_at&.year}-#{slug}"
   end
 
   def template_static

@@ -8,6 +8,7 @@ module Localizable
                 dependent: :destroy
 
     accepts_nested_attributes_for :localizations
+    validates_associated :localizations
 
     scope :for_language, -> (language) { for_language_id(language.id) }
     # The for_language_id scope can be used when you have the ID without needing to load the Language itself
@@ -75,6 +76,15 @@ module Localizable
 
   def to_s_in(language)
     best_localization_for(language).to_s
+  end
+
+  protected
+
+  def set_first_localization_as_published
+    localizations.first.assign_attributes(
+      published: true,
+      published_at: Time.zone.now
+    )
   end
 
 end

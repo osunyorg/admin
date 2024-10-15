@@ -1,11 +1,19 @@
-class ContactDetails::Linkedin < ContactDetails::Website
-  ROOT = 'www.linkedin.com/in/'
+class ContactDetails::Linkedin < ContactDetails::Base
 
   protected
 
+  def prepare_value
+    @value = @string
+  end
+
   def prepare_label
-    super
-    @label.remove! ROOT
-    @label.chomp! '/'
+    @label = @string.remove('https://')
+                    .remove('http://')
+                    .remove('www.')
+                    .remove('linkedin.com/in/')
+                    .remove('linkedin.com/company/')
+                    .remove('@')
+                    .remove('/')
+    @label = CGI.unescape @label
   end
 end

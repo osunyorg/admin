@@ -1,4 +1,11 @@
 class Static
+  DOOMED_CHARACTERS = [
+    "\u2028", # https://github.com/noesya/pixelis-rapportglobal2023/issues/1
+    "\u0094",
+    "\u008d", # https://github.com/osunyorg/lacriee-site/actions/runs/9242403369
+    "\u009D",
+    "\u0090", # https://github.com/osunyorg/marionrebier-beelearning/actions/runs/11340775264
+  ]
   def self.clean_path(path)
     path += '/' unless path.end_with? '/'
     path.gsub("//", '/')
@@ -40,20 +47,14 @@ class Static
   def self.remove_problematic_characters(code)
     # We don't want &#39; in the frontmatters!
     code = code.gsub("&#39\;", "'")
-    # /u2028 breaks Hugo rendering
-    # https://github.com/noesya/pixelis-rapportglobal2023/issues/1
-    code = code.remove("\u2028".encode('utf-8'))
-    # /u0092 also breaks everything, should be an apostrophe
+    # /u0092 breaks everything, should be an apostrophe
     code = code.gsub("\u0092".encode('utf-8'), "'")
     # Same operation with the problematic character itself
     code = code.gsub("", "'")
-    # /u0094
-    code = code.remove("\u0094".encode('utf-8'))
-    # /u008d
-    # https://github.com/osunyorg/lacriee-site/actions/runs/9242403369
-    code = code.remove("\u008d".encode('utf-8'))
-    # /u009D
-    code = code.remove("\u009D".encode('utf-8'))
+    # Doomed characters break Hugo compilation
+    DOOMED_CHARACTERS.each do |character|
+      code = code.remove(character.encode('utf-8'))
+    end
     code
   end
 end

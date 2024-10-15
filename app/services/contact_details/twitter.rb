@@ -1,19 +1,18 @@
-class ContactDetails::Twitter < ContactDetails::Base
-  URL = 'https://twitter.com/'
-  DOMAIN = 'twitter.com'
+class ContactDetails::Twitter < ContactDetails::SocialNetwork
 
   protected
 
-  def prepare_value
-    super
-    @value.remove! DOMAIN if @value.start_with? DOMAIN
-    @value.remove! URL if @value.start_with? URL
-    @value.delete_suffix! '/'
-    @value.delete_prefix! '/'
-    @value = "#{URL}#{@value}"
+  def url
+    'https://x.com/'
   end
 
-  def prepare_label
-    @label = @value.remove URL
+  def handle
+    @handle ||=  @string.remove('https://')
+                        .remove('http://')
+                        .remove('www.')
+                        .remove('x.com')
+                        .remove('twitter.com')
+                        .remove('@')
+                        .remove('/')
   end
 end
