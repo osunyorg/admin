@@ -148,7 +148,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def abouts_with_page_block
-    website.blocks.pages.collect(&:about)
+    website.blocks.template_pages.collect(&:about)
   end
 
   def touch_elements_if_special_page_in_hierarchy

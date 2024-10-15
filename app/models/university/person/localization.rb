@@ -118,7 +118,7 @@ class University::Person::Localization < ApplicationRecord
   protected
 
   def backlinks_blocks(website)
-    website.blocks.persons
+    website.blocks.template_persons
   end
 
   def prepare_name
