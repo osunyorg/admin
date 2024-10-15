@@ -4,8 +4,10 @@ module Contentful
   LARGE_NUMBER_OF_BLOCKS = 5
 
   included do
-    has_many :blocks, as: :about, class_name: 'Communication::Block', dependent: :destroy
-    has_many :headings, as: :about, class_name: 'Communication::Block::Heading', dependent: :destroy
+    has_many  :blocks,
+              as: :about,
+              class_name: 'Communication::Block',
+              dependent: :destroy
   end
 
   def contents
