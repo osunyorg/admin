@@ -57,12 +57,14 @@ module Migrations
 
     def self.suspend_callbacks
       Communication::Block.skip_callback :save, :after, :connect_and_sync_direct_sources
-      Communication::Block::Heading.skip_callback :save, :after, :connect_and_sync_direct_sources
+      Communication::Block.skip_callback :save, :after, :clean_websites_if_necessary
+      Communication::Block.skip_callback :save, :after, :touch_about
     end
 
     def self.resume_callbacks
       Communication::Block.set_callback :save, :after, :connect_and_sync_direct_sources
-      Communication::Block::Heading.set_callback :save, :after, :connect_and_sync_direct_sources
+      Communication::Block.set_callback :save, :after, :clean_websites_if_necessary
+      Communication::Block.set_callback :save, :after, :touch_about
     end
 
     def objects_types
