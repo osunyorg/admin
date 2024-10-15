@@ -106,6 +106,6 @@ class Research::Journal::Paper < ApplicationRecord
     Research::Journal::Paper.where(
       university_id: university_id,
       research_journal_volume_id: research_journal_volume_id
-    ).ordered.last
+    ).ordered_by_position.last
   end
 end

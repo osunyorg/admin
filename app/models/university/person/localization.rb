@@ -3,7 +3,7 @@
 # Table name: university_person_localizations
 #
 #  id               :uuid             not null, primary key
-#  biography        :string
+#  biography        :text
 #  first_name       :string
 #  last_name        :string
 #  linkedin         :string
@@ -118,7 +118,7 @@ class University::Person::Localization < ApplicationRecord
   protected
 
   def backlinks_blocks(website)
-    website.blocks.persons
+    website.blocks.template_persons
   end
 
   def prepare_name

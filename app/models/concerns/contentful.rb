@@ -31,7 +31,7 @@ module Contentful
     blocks.template_title.published.many?
   end
 
-  def generate_block(kind, data)
-    blocks.create(university: university, template_kind: kind, data: data.to_json)
+  def generate_block(kind, title: nil, data: {})
+    blocks.create(university: university, template_kind: kind, title: title, data: data.to_json)
   end
 end

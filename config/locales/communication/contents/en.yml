@@ -4,6 +4,9 @@ en:
     communication:
       blocks:
         add: Add block
+        advanced:
+          anchor: Anchor
+          url_with_anchor: URL with anchor
         alerts:
           file_is_too_big: File is too big!
         categories:
@@ -473,6 +476,22 @@ en:
               list:
                 description: The main page's short description is used as a big text, and the pages are listed on the right.
                 label: List
+          papers:
+            description: A selection of research papers, published in a scientific journal.
+            edit:
+              mode:
+                label: Which papers?
+                options:
+                  all: The most recent papers
+                  selection: A selection of papers
+              quantity:
+                label: Quantity of papers
+                placeholder: Enter quantity
+              selection:
+                add: Add a paper
+                label: Paper
+                none: No paper
+                title: Papers selected
           persons:
             description: People and their jobs.
             edit:
@@ -637,7 +656,7 @@ en:
               vertical:
                 description: Events are shown vertically, along the page.
                 label: Vertical
-          title: 
+          title:
             description: A level 2 title, that can eventually be shown folded, with its content hidden.
             layouts:
               classic:
@@ -657,6 +676,22 @@ en:
               video_title:
                 label: Video title
                 placeholder: Enter video title
+          volumes:
+            description: A selection of volumes published in a scientific journal.
+            edit:
+              mode:
+                label: Which volumes?
+                options:
+                  all: The most recent volumes
+                  selection: A selection of volumes
+              quantity:
+                label: Quantity of volumes
+                placeholder: Enter quantity
+              selection:
+                add: Add un volume
+                label: Volume
+                none: No volume
+                title: Selected volumes
       contents:
         blocks:
           copy: Copy block
@@ -693,6 +728,7 @@ en:
           locations: Campus
           organizations: Organizations
           pages: Pages
+          papers: Papers
           persons: People
           posts: Posts
           programs: Programs
@@ -702,3 +738,4 @@ en:
           timeline: Timeline
           title: Title
           video: Video
+          volumes: Volumes

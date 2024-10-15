@@ -82,7 +82,7 @@ class Education::Diploma::Localization < ApplicationRecord
   end
 
   def backlinks_blocks(website)
-    website.blocks.diplomas
+    website.blocks.template_diplomas
   end
 
 end

@@ -12,6 +12,9 @@ module Research::Hal
       Research::Hal::Author.find_each do |author|
         author.import_research_hal_publications!
       end
+      University::Person.joins(:research_hal_authors).distinct.find_each do |person|
+        person.connect_research_hal_publications!
+      end
     ensure
       unpause_git_sync
     end

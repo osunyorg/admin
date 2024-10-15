@@ -1,7 +1,7 @@
 {
   "jobs": [
     {
-      "command": "0 1 * * * rails auto:update_publications_from_hal",
+      "command": "0 1 * * * rails auto:update_hal",
       "size": "L"
     },
     {
