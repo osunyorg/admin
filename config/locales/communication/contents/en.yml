@@ -51,9 +51,12 @@ en:
           text:
             label: Text
             placeholder: Enter text
-            transcription:
-              label: Text transcript
-              placeholder: Enter text transcript
+          transcription:
+            label: Text version
+            placeholder: Enter text
+          transcription_title:
+            label: Title of the text version
+            placeholder: Transcription, text version, alternative text...
           time_slot:
             from: From
             to: to

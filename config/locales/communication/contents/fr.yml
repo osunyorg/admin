@@ -51,9 +51,12 @@ fr:
           text:
             label: Texte
             placeholder: Entrer le texte
-            transcription:
-              label: Transcription textuelle du contenu
-              placeholder: Entrer ici la transcription
+          transcription:
+            label: Version textuelle du contenu
+            placeholder: Entrer ici le texte
+          transcription_title:
+            label: Titre de la version textuelle
+            placeholder: Transcription, version textuelle, texte alternatif...
           time_slot:
             from: De
             to: à
