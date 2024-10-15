@@ -25,6 +25,12 @@ GIT
       randexp
       rotp (>= 4.0.0)
 
+GIT
+  remote: https://github.com/rails/execjs.git
+  revision: 86cb852dc4c66f7616a97b1d8c97a487c3889534
+  specs:
+    execjs (2.9.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -222,7 +228,6 @@ GEM
       tzinfo
     ethon (0.16.0)
       ffi (>= 1.15.0)
-    execjs (2.9.1)
     faceted_search (3.6.2)
       font-awesome-sass
       rails (>= 5.2.0)
@@ -707,6 +712,7 @@ DEPENDENCIES
   devise
   devise-i18n
   enum_help
+  execjs!
   faceted_search
   faraday
   figaro
