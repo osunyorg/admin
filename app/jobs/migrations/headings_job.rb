@@ -1,5 +1,5 @@
 class Migrations::HeadingsJob < ApplicationJob
-  queue_as :migration
+  queue_as :whale
 
   def perform
     Migrations::Headings.migrate
