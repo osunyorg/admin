@@ -14,5 +14,6 @@ class ContactDetails::Linkedin < ContactDetails::Base
                     .remove('linkedin.com/company/')
                     .remove('@')
                     .remove('/')
+    @label = CGI.unescape @label
   end
 end
