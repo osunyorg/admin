@@ -27,7 +27,6 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
   end
 
   def create
-    @l10n.language_id = current_language.id
     if @location.save
       redirect_to [:admin, @location],
                   notice: t('admin.successfully_created_html', model: @location.to_s_in(current_language))
