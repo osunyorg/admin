@@ -36,6 +36,7 @@ class Communication::Website::Page < ApplicationRecord
   include Duplicable
   include Filterable
   include Sanitizable
+  include Searchable
   include Localizable
   include WithAutomaticMenus
   include WithMenuItemTarget

@@ -145,6 +145,13 @@ en:
       text_html: "Osuny helps you with digital sufficiency.<br><br>The background execution of most tasks on the Osuny platform helps to reduce the carbon footprint of digital technology, by pre-calculating what can be.<br><br>This can cause a delay before your changes are visible on your websites."
       what_is_it: What is it?
     password_hint: Leave blank if you do not wish to change the password.
+    search:
+      buttons:
+        close: Close
+        search: Search...
+      label: Search...
+      no_results: No results
+      placeholder: Search...
     seo: SEO
     subnav:
       settings: Settings
