@@ -1,4 +1,4 @@
-module WithPosition
+module Orderable
   extend ActiveSupport::Concern
 
   included do

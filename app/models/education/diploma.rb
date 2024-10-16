@@ -6,6 +6,7 @@
 #  certification :string
 #  ects          :integer
 #  level         :integer          default("not_applicable")
+#  position      :integer          default(0)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  university_id :uuid             not null, indexed
@@ -22,8 +23,9 @@ class Education::Diploma < ApplicationRecord
   CERTIFICATIONS_DIRECTORY = "app/assets/images/education/diplomas/certifications"
 
   include AsIndirectObject
-  include Sanitizable
   include Localizable
+  include Orderable
+  include Sanitizable
   include WithUniversity
 
   enum level: {
@@ -43,7 +45,7 @@ class Education::Diploma < ApplicationRecord
 
   validates :certification, inclusion: { in: -> { certifications } }, allow_blank: true
 
-  scope :ordered, -> (language = nil) { order(:level) }
+  scope :ordered, -> (language = nil) { order(:position, :level) }
 
   def self.certifications
     Dir.children(CERTIFICATIONS_DIRECTORY).map { |filename|

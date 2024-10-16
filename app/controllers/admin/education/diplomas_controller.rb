@@ -4,6 +4,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
 
   include Admin::HasStaticAction
   include Admin::Localizable
+  include Admin::Reorderable
 
   def index
     @diplomas = @diplomas.ordered

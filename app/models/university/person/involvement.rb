@@ -25,7 +25,7 @@
 #
 class University::Person::Involvement < ApplicationRecord
   include Localizable
-  include WithPosition
+  include Orderable
   include WithUniversity
 
   enum kind: {
