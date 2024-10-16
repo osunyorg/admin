@@ -1,6 +1,14 @@
-<p class="mb-0">
-  <%= block.template
-           .selected_pages
-           .map { |page| page.to_s_in(block.language) }
-           .join(', ') %>
-</p>
+<div class="row">
+  <%
+  block.template.selected_pages.each do |page|
+    page_l10n = page.localization_for(block.about.language) 
+    next if page_l10n.nil? 
+    %>
+    <div class="col-sm-6 mb-3">
+      <% if page_l10n.featured_image.attached? %>
+        <%= kamifusen_tag page_l10n.featured_image %>
+      <% end %>
+      <p><%= page_l10n.to_s %></p>
+    </div>
+  <% end %>
+</div>

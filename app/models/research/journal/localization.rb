@@ -32,6 +32,8 @@ class Research::Journal::Localization < ApplicationRecord
   include WithGitFiles
   include WithUniversity
 
+  has_summernote :summary
+
   validates :title, presence: true
 
   def git_path(website)

@@ -1,6 +1,6 @@
 <div class="row pure__row--small mb-5">
   <div class="col-xl-6">
-    <%= block_component_edit block, :description %>
+    <%= block_component_edit block, :description, summernote_config: 'mini' %>
   </div>
   <div class="col-xl-6" v-if="data.mode !== 'categories'">
     <%= osuny_label t('admin.communication.blocks.display_options.title') %>

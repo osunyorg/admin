@@ -1,6 +1,6 @@
-<p class="mb-0">
-  <%= block.template.elements.map { |element| 
-    (block_component_snippet block, :title, template: element).strip
-  }.join(', ')
-  %>
-</p>
+<% block.template.elements.each do |element| %>
+  <div class="mb-4">
+    <p class="mb-0"><b><%= sanitize element.title %></b></p>
+    <%= sanitize element.text %>
+  </div>
+<% end %>

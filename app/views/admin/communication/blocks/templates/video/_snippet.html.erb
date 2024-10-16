@@ -1,3 +1,16 @@
-<div class="ratio ratio-16x9">
+<div class="ratio ratio-16x9 mb-2">
   <%= block.template.video_iframe %>
 </div>
+<% unless block.template.description.blank? %>
+<div class="description">
+  <%= block_component_show block, :description %>
+</div>
+<% end %>
+<% unless block.template.transcription.blank? %>
+  <div class="transcription">
+    <details>
+      <summary><%= t 'accessibility.transcription' %></summary>
+      <%= block_component_show block, :transcription %>
+    </details>
+  </div>
+<% end %>
