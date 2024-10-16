@@ -5,7 +5,11 @@
 /.scalingo/node
 /.scalingo/yarn
 # Assets are precompiled to public/assets
-/app/assets
+/app/assets/examples
+/app/assets/fonts
+/app/assets/images
+/app/assets/javascripts
+/app/assets/stylesheets
 /node_modules
 /vendor/assets
 # Development resources
