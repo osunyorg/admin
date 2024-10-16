@@ -36,7 +36,7 @@ class Communication::Website::Page < ApplicationRecord
   include Duplicable
   include Filterable
   include Localizable
-  include Orderable # Scope :ordered must override WithPublication
+  include Orderable
   include Sanitizable
   include WithAutomaticMenus
   include WithMenuItemTarget
