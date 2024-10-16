@@ -213,6 +213,7 @@ fr:
       communication/website/portfolio/project/localization:
         featured_image: Image à la une
         published: Publié
+        subtitle: Sous-titre
         title: Titre
       communication/website/post:
         author: Auteur·rice
@@ -237,6 +238,7 @@ fr:
         published_at: Date de publication
         reading_time: Temps de lecture
         slug: Identifiant
+        subtitle: Sous-titre
         text: Texte
         title: Titre
         website: Site Web
