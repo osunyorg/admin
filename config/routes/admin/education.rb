@@ -2,6 +2,9 @@ namespace :education do
   resources :academic_years
   resources :cohorts, only: [:index, :show]
   resources :diplomas do
+    collection do
+      post :reorder
+    end
     member do
       get :static
     end
