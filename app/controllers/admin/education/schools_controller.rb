@@ -29,7 +29,6 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   end
 
   def create
-    @l10n.language_id = current_language.id
     if @school.save
       redirect_to [:admin, @school], notice: t('admin.successfully_created_html', model: @school.to_s_in(current_language))
     else
