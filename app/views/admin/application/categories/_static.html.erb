@@ -9,7 +9,7 @@ about_categories.ordered.each do |category|
   category_l10n = category.localization_for(l10n.language)
   next if category_l10n.nil?
 %>
-  - "<%= category_l10n.slug %>"
+  - "<%= category_l10n.slug_with_ancestors_slugs(separator: '-') %>"
 <% end %>
 <%
   if taxonomies.any?

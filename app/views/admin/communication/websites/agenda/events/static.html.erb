@@ -34,7 +34,7 @@ weight: <%= event.distance_in_days %>
 <% if @l10n.categories.any? %>
 events_categories:
 <% @l10n.categories.each do |category| %>
-  - "<%= category.slug %>"
+  - "<%= category.slug_with_ancestors_slugs(separator: '-') %>"
 <% end %>
 <% end %>
 <%= render 'admin/communication/contents/static', about: @l10n %>

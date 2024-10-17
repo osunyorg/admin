@@ -2,7 +2,9 @@
 category = @l10n.about
 %>---
 <%= render 'admin/application/static/title', about: @l10n %>
-<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/permalink',
+            about: @l10n,
+            forced_slug: @l10n.slug_with_ancestors_slugs(separator: '-') %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: category,
