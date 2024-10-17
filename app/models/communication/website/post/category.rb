@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  is_programs_root         :boolean          default(FALSE)
+#  is_taxonomy              :boolean          default(FALSE)
 #  position                 :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
