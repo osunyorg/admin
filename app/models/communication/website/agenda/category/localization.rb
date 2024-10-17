@@ -53,7 +53,9 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}events_categories/#{slug}/_index.html"
+    prefix = git_path_content_prefix(website)
+    slugs = slug_with_ancestors_slugs(separator: '-')
+    "#{prefix}events_categories/#{slugs}/_index.html"
   end
 
   def template_static
