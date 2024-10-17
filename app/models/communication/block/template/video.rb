@@ -1,5 +1,7 @@
 class Communication::Block::Template::Video < Communication::Block::Template::Base
 
+  has_layouts [:player, :button]
+
   has_component :url, :string
   has_component :video_title, :string
   has_component :transcription, :text
