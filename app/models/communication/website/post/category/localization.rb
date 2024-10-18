@@ -98,4 +98,9 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
   def set_communication_website_id
     self.communication_website_id ||= about.communication_website_id
   end
+
+  # TODO : Pertinent ?
+  def hugo_slug_in_website(website)
+    slug_with_ancestors_slugs(separator: '-')
+  end
 end
