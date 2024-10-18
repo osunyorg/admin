@@ -33,15 +33,15 @@ namespace :education do
       post :reorder
     end
     member do
-      get 'pedagogy' => 'programs/parts#pedagogy', as: :pedagogy
-      get 'pedagogy/edit' => 'programs/parts#edit_pedagogy', as: :edit_pedagogy
-      get 'results' => 'programs/parts#results', as: :results
-      get 'results/edit' => 'programs/parts#edit_results', as: :edit_results
-      get 'admission' => 'programs/parts#admission', as: :admission
-      get 'admission/edit' => 'programs/parts#edit_admission', as: :edit_admission
-      get 'certification' => 'programs/parts#certification', as: :certification
-      get 'certification/edit' => 'programs/parts#edit_certification', as: :edit_certification
-      get 'alumni' => 'programs/parts#alumni', as: :alumni
+      get 'pedagogy'            => 'programs/parts#pedagogy', as: :pedagogy
+      get 'pedagogy/edit'       => 'programs/parts#pedagogy_edit', as: :edit_pedagogy
+      get 'results'             => 'programs/parts#results', as: :results
+      get 'results/edit'        => 'programs/parts#results_edit', as: :edit_results
+      get 'admission'           => 'programs/parts#admission', as: :admission
+      get 'admission/edit'      => 'programs/parts#admission_edit', as: :edit_admission
+      get 'certification'       => 'programs/parts#certification', as: :certification
+      get 'certification/edit'  => 'programs/parts#certification_edit', as: :edit_certification
+      get 'alumni'              => 'programs/parts#alumni', as: :alumni
       get :children
       get :preview
       get :static

@@ -12,8 +12,8 @@
   </div>
 </div>
 
+<%= osuny_label t('education.teachings') %>
 <% if @teacher_involvements.any? %>
-  <%= osuny_label t('education.teachings') %>
   <div class="row g-2 mb-3">
     <% @teacher_involvements.each do |involvement|
         person = involvement.person
@@ -33,6 +33,8 @@
       </div>
     <% end %>
   </div>
+<% else %>
+  <p>-</p>
 <% end %>
 
 <% content_for :action_bar_right do %>

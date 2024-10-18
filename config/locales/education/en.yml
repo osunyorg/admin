@@ -146,15 +146,6 @@ en:
     number_of_programs: Number of programs
     program:
       parts:
-        technical:
-          label: Technical
-          hint: Publication status and URLs in the websites.
-        essential:
-          label: Essential
-          hint: Page header, summary.
-        presentation:
-          label: Presentation
-          hint: This part shows the blocks you set, so you can build a rich, customized presentation of the program.
         pedagogy:
           label: Pedagogy
           hint: Teaching and evaluation methods, pedagogical team.

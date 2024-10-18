@@ -149,18 +149,9 @@ fr:
     number_of_programs: Nombre de formations
     program:
       parts:
-        technical:
-          label: Technique
-          hint: État de publication et URLs dans les sites Web concernés.
-        essential:
-          label: Essentiel
-          hint: Haut de page, résumé de la formation.
-        presentation:
-          label: Présentation
-          hint: Complétée par les blocs, afin de permettre un descriptif libre et riche de la formation.
         pedagogy:
           label: Pédagogie
-          hint: Mode d'enseignement et d'évaluation, et présentation de l'équipe pédagogique.
+          hint: Mode d'enseignement et d'évaluation, présentation de l'équipe pédagogique.
         results:
           label: Résultats
           hint: Débouchés et résultats obtenus par les anciens élèves.
