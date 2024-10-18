@@ -11,9 +11,6 @@ SimpleNavigation::Configuration.run do |navigation|
                   highlights_on: lambda { 
                     controller_name == "programs" && action_name == "show" 
                   } if can?(:read, @program)
-    primary.item  :subnav_presentation,
-                  t('education.program.parts.presentation.label'), 
-                  presentation_admin_education_program_path(id: @program, program_id: nil)
     primary.item  :subnav_pedagogy,
                   t('education.program.parts.pedagogy.label'), 
                   pedagogy_admin_education_program_path(id: @program, program_id: nil)
