@@ -1,8 +1,8 @@
 class Communication::Block::Template::Gallery::Element < Communication::Block::Template::Base
   has_component :image, :image
-  has_component :alt, :text
+  has_component :alt, :string
   has_component :credit, :rich_text
-  has_component :text, :text
+  has_component :text, :rich_text
 
   def blob
     image_component.blob

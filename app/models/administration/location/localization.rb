@@ -42,6 +42,8 @@ class Administration::Location::Localization < ApplicationRecord
   include WithGitFiles
   include WithUniversity
 
+  has_summernote :summary
+
   def git_path(website)
     "#{git_path_content_prefix(website)}locations/#{slug}/_index.html" if for_website?(website)
   end

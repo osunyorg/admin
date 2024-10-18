@@ -44,9 +44,10 @@ class Communication::Extranet::Post::Localization < ApplicationRecord
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
-
+  
+  has_summernote :summary
+  
   validates :title, presence: true
-
   before_validation :set_extranet_id, on: :create
 
   def to_s

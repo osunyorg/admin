@@ -53,7 +53,8 @@ window.osuny.translation = {
 
     translateField: function (field, text) {
         'use strict';
-        if (field.classList.contains('summernote-vue')) {
+        var isSummernote = field.dataset.provider === 'summernote' || field.classList.contains('summernote-vue');
+        if (isSummernote) {
             $(field).summernote('code', text);
         } else {
             field.value = text;

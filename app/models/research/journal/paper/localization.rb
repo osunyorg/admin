@@ -47,9 +47,10 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   delegate  :journal, :volume, :people, :doi,
             to: :paper
 
-  validates :title, presence: true
-
+  has_summernote :summary
   has_one_attached_deletable :pdf
+
+  validates :title, presence: true
 
   def git_path(website)
     "#{git_path_content_prefix(website)}papers/#{relative_path}.html" if published?

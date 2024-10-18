@@ -68,9 +68,10 @@ class Education::Program::Localization < ApplicationRecord
   include WithPublication
   include WithUniversity
 
+  has_summernote :summary
+  has_summernote :presentation
   has_one_attached_deletable :downloadable_summary
   has_one_attached_deletable :logo
-
   rich_text_areas_with_inheritance  :accessibility,
                                     :contacts,
                                     :evaluation,
@@ -86,8 +87,6 @@ class Education::Program::Localization < ApplicationRecord
                                     :registration,
                                     :content,
                                     :results
-
-  has_summernote :presentation
 
   validates :name, presence: true
   validates :downloadable_summary, size: { less_than: 50.megabytes }
