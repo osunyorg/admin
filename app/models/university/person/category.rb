@@ -22,7 +22,7 @@
 class University::Person::Category < ApplicationRecord
   include AsIndirectObject
   include Localizable
-  include WithPosition
+  include Orderable
   include WithTree
   include WithUniversity
 

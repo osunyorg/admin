@@ -22,9 +22,9 @@
 class Research::Laboratory::Axis < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
+  include Orderable
   include Sanitizable
   include WithUniversity
-  include WithPosition
 
   belongs_to  :laboratory,
               foreign_key: :research_laboratory_id

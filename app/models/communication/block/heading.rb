@@ -29,9 +29,9 @@
 #
 class Communication::Block::Heading < ApplicationRecord
   include AsIndirectObject
+  include Orderable
   include Sanitizable
   include Sluggable
-  include WithPosition
   include WithUniversity
 
   belongs_to  :university

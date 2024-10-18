@@ -121,7 +121,6 @@ GEM
       tzinfo-data (~> 1.2020)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
-    angularjs-rails (1.8.0)
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
@@ -261,7 +260,6 @@ GEM
       thor (>= 0.14.0, < 2)
     font-awesome-sass (6.5.2)
       sassc (~> 2.0)
-    front_matter_parser (1.0.1)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -307,7 +305,6 @@ GEM
       json
       net-http
       open-uri
-    hash_dot (2.5.0)
     hashdiff (1.1.1)
     hashie (5.0.0)
     htmlentities (4.3.4)
@@ -616,8 +613,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
-    skylight (6.0.4)
-      activesupport (>= 5.2.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -691,7 +686,6 @@ DEPENDENCIES
   active_storage_validations (~> 1)
   activestorage-scaleway-service
   add_to_calendar
-  angularjs-rails
   annotate
   aws-sdk-s3
   bootsnap (~> 1)
@@ -714,16 +708,13 @@ DEPENDENCIES
   enum_help
   execjs!
   faceted_search
-  faraday
   figaro
   font-awesome-sass
-  front_matter_parser
   geo_point
   geocoder (~> 1)
   gitlab
   good_job (~> 4)
   hal_openscience (~> 0)
-  hash_dot
   i18n_data (~> 0)
   i18n_date_range
   image_processing
@@ -737,7 +728,6 @@ DEPENDENCIES
   listen (~> 3.3)
   lucide-rails
   mini_magick (~> 4.0)
-  observer (~> 0.1.2)
   octokit
   omniauth-rails_csrf_protection (~> 1)
   omniauth-saml (~> 2)
@@ -764,7 +754,6 @@ DEPENDENCIES
   simple_form_bs5_file_input
   simple_form_password_with_hints
   simplecov
-  skylight
   spring
   sprockets-rails (~> 3)
   summernote-rails!
