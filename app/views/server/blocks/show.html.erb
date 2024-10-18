@@ -12,27 +12,36 @@
       </tr>
     </thead>
     <tbody>
-      <% @blocks.each do |block| %>
+      <%
+      @blocks.each do |block|
+        about = block.about
+        %>
         <tr>
           <td>
             <%= truncate "#{block}" %><br>
             <small><%= block.id %></small>
           </td>
           <td>
-            <% if block.about.present? %>
-              <%= truncate "#{block.about}" %>
+            <% if about.present?
+              begin
+                name = about.about.to_s_in(block.language)
+              rescue
+                name = about.to_s
+              end
+              %>
+              <p class="mb-0"><%= name %></p>
               <span class="badge bg-dark">
-                <%= block.about.class.model_name.human %>
+                <%= block.about_type %>
               </span>
             <% end %>
           </td>
           <td class="pe-3" width="600">
-            <%= link_to t('server_admin.blocks.see'), 
-                        "#collpase-#{block.id}", 
-                        class: 'btn btn-xs btn-light', 
-                        role: 'button', 
-                        'data-bs-toggle': 'collapse', 
-                        'aria-expanded': 'false', 
+            <%= link_to t('server_admin.blocks.see'),
+                        "#collpase-#{block.id}",
+                        class: 'btn btn-xs btn-light',
+                        role: 'button',
+                        'data-bs-toggle': 'collapse',
+                        'aria-expanded': 'false',
                         'aria-controls': "collpase-#{block.id}" %>
             <div class="collapse" id="collpase-<%= block.id %>">
               <textarea rows="10" class="form-control"><%= block.data %></textarea>

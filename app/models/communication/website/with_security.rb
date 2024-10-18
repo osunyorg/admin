@@ -35,7 +35,7 @@ module Communication::Website::WithSecurity
 
   def allowed_domains_from_blocks_video(blocks)
     list = []
-    blocks.where(template_kind: :video).each do |block|
+    blocks.template_video.each do |block|
       video_url = block.template.url
       next unless video_url.present?
       list.concat Video::Provider.find(video_url).csp_domains
@@ -52,7 +52,7 @@ module Communication::Website::WithSecurity
 
   def allowed_domains_from_blocks_embed(blocks)
     list = []
-    blocks.where(template_kind: :embed).published.each do |block|
+    blocks.template_embed.published.each do |block|
       code = block.template.code
       # https://stackoverflow.com/questions/25095176/extracting-all-urls-from-a-page-using-ruby
       code.scan(/[[:lower:]]+:\/\/[^\s"]+/).each do |url|

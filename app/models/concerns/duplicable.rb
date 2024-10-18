@@ -39,34 +39,15 @@ module Duplicable
 
   def duplicate_blocks(from, to)
     return unless from.respond_to?(:contents)
-    from.blocks.without_heading.ordered.each do |block|
+    from.blocks.ordered.each do |block|
       duplicate_block(to, block)
-    end
-    from.headings.root.ordered.each do |heading|
-      duplicate_heading(to, heading)
     end
   end
 
-  def duplicate_block(instance, block, heading_id = nil)
+  def duplicate_block(instance, block)
     duplicated_block = block.duplicate
     duplicated_block.about = instance
     duplicated_block.position = block.position
-    duplicated_block.heading_id = heading_id
     duplicated_block.save
-  end
-
-  def duplicate_heading(instance, heading, parent_id = nil)
-    duplicated_heading = heading.duplicate
-    duplicated_heading.about = instance
-    duplicated_heading.position = heading.position
-    duplicated_heading.parent_id = parent_id
-    duplicated_heading.save
-
-    heading.blocks.ordered.each do |block|
-      duplicate_block(instance, block, duplicated_heading.id)
-    end
-    heading.children.ordered.each do |child|
-      duplicate_heading(instance, child, duplicated_heading.id)
-    end
   end
 end

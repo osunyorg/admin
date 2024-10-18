@@ -1,7 +1,22 @@
 <div  class=" content-editor__elements
               content-editor--organize
-              js-content-editor-sortable-container">
-  <% about.headings.root.ordered.each do |heading| %>
-    <%= render 'admin/communication/blocks/headings/heading-for-mode-structure', heading: heading %>
+              js-content-editor-sortable-container
+              row g-2">
+  <% about.blocks.ordered.each do |block| %>
+    <div  class=" content-editor__elements__element
+                  js-content-editor-element"
+          data-id="<%= block.id %>">
+      <div class="<%= osuny_card_classes(horizontal: true) %> content-editor__elements__handle ms-0">
+        <div class="card-body">
+          <i class="<%= Icon::SORT %> me-2"></i>
+          <%= block.template_kind_i18n %>
+        </div>
+        <div class="card-footer small text-muted">
+          <% if block.full_text.present? %>
+            <%= block.full_text.truncate_words(10) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>

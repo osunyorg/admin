@@ -89,6 +89,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   protected
 
   def abouts_with_agenda_block
-    website.blocks.agenda.collect(&:about)
+    website.blocks.template_agenda.collect(&:about)
   end
 end
