@@ -41,10 +41,10 @@ class Communication::Block < ApplicationRecord
   }
 
   include AsIndirectObject
+  include Orderable
   include WithAccessibility
   include WithHeadingRanks
   include WithHtmlClass
-  include WithPosition
   include WithTemplate
   include WithUniversity
   include Sanitizable
