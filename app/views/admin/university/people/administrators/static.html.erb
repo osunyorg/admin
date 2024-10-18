@@ -6,9 +6,9 @@ person_l10n = @l10n.person_l10n
 ---
 title: >-
   <%= t('university.person.facets.administrator.responsabilities_of', name: @l10n.to_s, locale: @l10n.language.iso_code) %>
+<%= render 'admin/application/static/meta', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: person_l10n, add_link_on_last: true -%>
   - title: "<%= t('university.person.facets.administrator.responsabilities', locale: @l10n.language.iso_code) %>"
-<%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: person,
             l10n: @l10n,

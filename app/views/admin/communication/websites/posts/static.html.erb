@@ -3,8 +3,7 @@ post = @l10n.about
 language = @l10n.language
 %>---
 <%= render 'admin/application/static/title', about: @l10n %>
-date: "<%= @l10n.published_at&.iso8601 %>"
-<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/meta', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: post,
