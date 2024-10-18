@@ -12,6 +12,12 @@
         <%= render  "admin/application/slug/form",
                     f: lf,
                     source: '#education_program_category_localizations_attributes_0_name' %>
+        <%= f.association :parent,
+                          collection: osuny_collection_tree(
+                            current_university.education_program_categories.root,
+                            except: category,
+                            localized: true
+                          ) %>
         <%= f.input :is_taxonomy, label: t('admin.categories.is_taxonomy') if category.possible_taxonomy? %>
       </div>
     </div>
