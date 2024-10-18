@@ -7,7 +7,7 @@ cache_key = [organization, @l10n, @website.id, version]
 cache cache_key do
 %>---
 <%= render 'admin/application/static/title', about: @l10n %>
-<%= render 'admin/application/static/meta', about: @l10n %>
+<%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: organization,

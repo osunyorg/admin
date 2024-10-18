@@ -15,7 +15,7 @@ date: "<%= event.from_day&.iso8601 %>"
 <% else %>
 weight: <%= event.distance_in_days %>
 <% end %>
-<%= render 'admin/application/static/meta', about: @l10n, skip_date: true %>
+<%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: event,
