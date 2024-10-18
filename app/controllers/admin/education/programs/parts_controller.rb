@@ -6,17 +6,6 @@ class Admin::Education::Programs::PartsController < Admin::Education::Programs::
                 :load_localization,
                 :redirect_if_not_localized
 
-  def presentation
-    breadcrumb
-    add_breadcrumb t('education.program.parts.presentation.label')
-  end
-
-  def edit_presentation
-    breadcrumb
-    add_breadcrumb t('education.program.parts.presentation.label'), presentation_admin_education_program_path(id: @program, program_id: nil)
-    add_breadcrumb t('edit')
-  end
-
   def pedagogy
     @teacher_involvements = @program.university_person_involvements
                                     .includes(:person)

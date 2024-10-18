@@ -33,8 +33,6 @@ namespace :education do
       post :reorder
     end
     member do
-      get 'presentation' => 'programs/parts#presentation', as: :presentation
-      get 'presentation/edit' => 'programs/parts#edit_presentation', as: :edit_presentation
       get 'pedagogy' => 'programs/parts#pedagogy', as: :pedagogy
       get 'pedagogy/edit' => 'programs/parts#edit_pedagogy', as: :edit_pedagogy
       get 'results' => 'programs/parts#results', as: :results
