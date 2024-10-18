@@ -119,7 +119,7 @@ fr:
         categories:
           root_name: Offre de formation
         publication: Publication
-        submenu: "Vous êtes actuellement dans le résumé d'une formation. Pour plus de simplicité, chaque formation est décomposée en plusieurs pages. Ces pages sont accessibles via le menu en haut de page, et correspondent aux rubriques dans les sites Web. Pour plus de praticité, cette page de résumé reprend ce menu ci-après. Les blocs de contenu se situent dans la partie “Présentation”."
+        submenu: "Vous êtes actuellement dans le résumé d'une formation. Pour plus de simplicité, chaque formation est décomposée en plusieurs pages. Ces pages sont accessibles via le menu en haut de page, et correspondent aux rubriques dans les sites Web. Pour plus de praticité, cette page de résumé reprend ce menu ci-après."
         teacher:
           no_teaching: Aucun enseignement
           show_person_html: Cette page montre uniquement les missions d'enseignement. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien ci-dessous.
@@ -149,27 +149,15 @@ fr:
     number_of_programs: Nombre de formations
     program:
       parts:
-        technical:
-          label: Technique
-          hint: État de publication et URLs dans les sites Web concernés.
-        essential:
-          label: Essentiel
-          hint: Haut de page, résumé de la formation.
-        presentation:
-          label: Présentation
-          hint: Complétée par les blocs, afin de permettre un descriptif libre et riche de la formation.
         pedagogy:
           label: Pédagogie
-          hint: Mode d'enseignement et d'évaluation, et présentation de l'équipe pédagogique.
-        results:
-          label: Résultats
-          hint: Débouchés et résultats obtenus par les anciens élèves.
+          hint: Mode d'enseignement et d'évaluation, présentation de l'équipe pédagogique, débouchés et résultats obtenus par les anciens élèves
         admission:
           label: Admission
-          hint: Modalités administratives d'accès à la formation.
+          hint: Modalités administratives d'accès à la formation
         certification:
           label: Certification
-          hint: Certification légale Qualiopi
+          hint: Certification légale (Qualiopi)
       registration_scheme: Régime d'inscription
     roles:
       one: Rôle
