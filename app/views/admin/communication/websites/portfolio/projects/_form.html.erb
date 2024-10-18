@@ -9,6 +9,7 @@
       <div class="col-md-8">
         <%= osuny_panel t('content') do %>
           <%= lf.input :title %>
+          <%= lf.input :subtitle %>
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
         <% end %>
         <%= render 'admin/application/categories/form', f: f, categories: @categories %>

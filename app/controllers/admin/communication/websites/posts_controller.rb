@@ -109,7 +109,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     .permit(
       :author_id, category_ids: [],
       localizations_attributes: [
-        :id, :title, :meta_description, :summary, :text,
+        :id, :title, :subtitle, :meta_description, :summary, :text,
         :published, :published_at, :slug, :pinned,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
