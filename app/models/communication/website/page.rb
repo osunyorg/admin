@@ -35,12 +35,12 @@ class Communication::Website::Page < ApplicationRecord
   include AsDirectObject
   include Duplicable
   include Filterable
-  include Sanitizable
   include Localizable
+  include Orderable
+  include Sanitizable
   include WithAutomaticMenus
   include WithMenuItemTarget
   include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before WithPublication
-  include WithPosition # Scope :ordered must override WithPublication
   include WithTree
   include WithUniversity
 

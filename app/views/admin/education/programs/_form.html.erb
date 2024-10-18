@@ -16,14 +16,14 @@
         </div>
         <%= render 'admin/application/summary/form', f: lf, about: l10n %>
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <%= f.association :diploma,
                               collection: osuny_collection(current_university.diplomas, localized: true) %>
             <%= f.association :schools,
                               as: :check_boxes,
                               collection: osuny_collection(current_university.education_schools, localized: true) %>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-8">
             <%= lf.input :url %>
             <%= lf.input :duration %>
             <%= lf.input :downloadable_summary,
@@ -33,11 +33,29 @@
         </div>
         <%= osuny_separator %>
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <%= render 'admin/application/shared_image/edit', f: lf, about: l10n %>
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-8">
             <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+          </div>
+        </div>
+        <%= osuny_separator %>
+        <div class="row">
+          <div class="col-lg-4">
+            <%= osuny_label t('education.program.registration_scheme') %>
+            <div class="mb-n3"><%= f.input :initial %></div>
+            <div class="mb-n3"><%= f.input :continuing %></div>
+            <div><%= f.input :apprenticeship %></div>
+            <%= f.input :capacity %>
+          </div>
+          <div class="col-lg-8">
+            <%= lf.input  :presentation,
+                          as: :summernote,
+                          input_html: {
+                            data: { 'summernote-config' => 'mini' }
+                          } %>
+            <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :objectives %>
           </div>
         </div>
       </div>

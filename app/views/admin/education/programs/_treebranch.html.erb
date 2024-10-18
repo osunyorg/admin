@@ -1,8 +1,8 @@
 <% programs.each do |program| %>
-  <li class=" treeview__element 
+  <li class=" treeview__element
               js-treeview-element
               mb-2
-              <%= 'treeview__element--draft' unless program.published %>
+              <%= 'treeview__element--draft' unless program.published_in?(current_language) %>
               <%= 'treeview__element--empty' unless program.has_children? %>"
       data-id="<%= program.id %>"
       data-parent="<%= program.parent_id %>">
@@ -32,7 +32,7 @@
     </div>
     <ul class=" list-unstyled
                 treeview__children
-                js-treeview-children 
+                js-treeview-children
                 mt-2
                 <%= 'js-treeview-sortable-container' if can?(:reorder, program) %>"
         data-id="<%= program.id %>">

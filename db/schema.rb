@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_03_134739) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_16_094257) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -354,7 +354,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_134739) do
     t.boolean "feature_jobs", default: false
     t.text "sass"
     t.text "css"
-    t.uuid "default_language_id"
+    t.uuid "default_language_id", null: false
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["default_language_id"], name: "index_communication_extranets_on_default_language_id"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
@@ -569,7 +569,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_134739) do
     t.boolean "header_cta"
     t.string "header_cta_label"
     t.string "header_cta_url"
-    t.string "header_text"
+    t.text "header_text"
     t.string "meta_description"
     t.string "migration_identifier"
     t.boolean "published"
@@ -913,6 +913,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_134739) do
     t.datetime "updated_at", null: false
     t.integer "ects"
     t.string "certification"
+    t.integer "position", default: 0
     t.index ["university_id"], name: "index_education_diplomas_on_university_id"
   end
 
@@ -1686,7 +1687,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_134739) do
   end
 
   create_table "university_person_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "biography"
+    t.text "biography"
     t.string "first_name"
     t.string "last_name"
     t.string "linkedin"

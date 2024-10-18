@@ -21,7 +21,7 @@
 #
 class University::Role < ApplicationRecord
   include Localizable
-  include WithPosition
+  include Orderable
   include WithUniversity
 
   # Can be an Education::School or an Education::Program
