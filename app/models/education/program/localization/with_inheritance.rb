@@ -48,10 +48,17 @@ module Education::Program::Localization::WithInheritance
 
   def search_source_above(property)
     if parent.present?
+      # Appel récursif, on n'a pas trouvé, on remonte la parentèle
       parent&.send(:best_source, property, is_ancestor: true)
-    elsif diploma.present? && diploma.respond_to?(property)
-      value = diploma.send(property)
-      Static.has_content?(value.to_s) ? diploma : nil
+    elsif is_diploma_source?(property)
+      diploma
     end
+  end
+
+  def is_diploma_source?(property)
+    return false if diploma.nil?
+    return false unless diploma.respond_to?(property)
+    value = diploma.send(property)
+    Static.has_content?(value.to_s)
   end
 end
