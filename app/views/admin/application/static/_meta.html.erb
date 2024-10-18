@@ -21,7 +21,7 @@ aliases:
 <% end %>
 <% end %>
 <% if about.respond_to?(:published_at) && !skip_date %>
-date: "<%= about.published_at&.iso8601 %>"
+date: <%= about.published_at&.iso8601 %>
 <% end %>
 lastmod: <%= about.updated_at&.iso8601 %>
 meta:
