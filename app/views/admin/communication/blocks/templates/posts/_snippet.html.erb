@@ -1,7 +1,7 @@
 <%  if block.template.mode == 'categories' %>
   <% @website.post_categories.ordered(current_language).each do |category| %>
     <p><%= category.to_s_in(current_language) %></p>
-  <% end %>
+  <% end if @website%>
 <% else %>
   <div class="row">
   <% block.template.selected_posts.each do |post|
