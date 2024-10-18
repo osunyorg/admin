@@ -36,8 +36,8 @@
 class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
   include Localizable
+  include Orderable
   include Sanitizable
-  include WithPosition
   include WithUniversity
 
   belongs_to  :journal,

@@ -33,8 +33,8 @@
 #
 class Communication::Website::Menu::Item < ApplicationRecord
   include Initials
+  include Orderable
   include Sanitizable
-  include WithPosition
   include WithTree
   include WithUniversity
 

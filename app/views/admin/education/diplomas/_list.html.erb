@@ -1,6 +1,8 @@
-<div class="row g-2">
+<div  class="row g-2"
+      data-sortable 
+      data-sort-url="<%= reorder_admin_education_diplomas_path %>">
   <% diplomas.ordered.each do |diploma| %>
-    <div>
+    <div data-id="<%= diploma.id %>" class="handle">
       <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized diploma %>
         <div class="card-body">
