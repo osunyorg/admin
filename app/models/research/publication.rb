@@ -36,7 +36,7 @@ class Research::Publication < ApplicationRecord
   include WithCitations
   include WithGitFiles
 
-  enum source: {
+  enum :source, {
     osuny: 0,
     hal: 1
   }

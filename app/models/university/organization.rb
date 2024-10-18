@@ -78,7 +78,7 @@ class University::Organization < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
-  enum kind: {
+  enum :kind, {
     company: 10,
     non_profit: 20,
     government: 30

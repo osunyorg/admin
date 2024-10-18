@@ -4,14 +4,14 @@ module University::Person::WithPersonalData
   VISIBILITY_ENUM = { private: 0, restricted: 10, public: 20 }
 
   included do
-    enum address_visibility:            VISIBILITY_ENUM, _prefix: :address_is
-    enum linkedin_visibility:           VISIBILITY_ENUM, _prefix: :linkedin_is
-    enum twitter_visibility:            VISIBILITY_ENUM, _prefix: :twitter_is
-    enum mastodon_visibility:           VISIBILITY_ENUM, _prefix: :mastodon_is
-    enum phone_mobile_visibility:       VISIBILITY_ENUM, _prefix: :phone_mobile_is
-    enum phone_professional_visibility: VISIBILITY_ENUM, _prefix: :phone_professional_is
-    enum phone_personal_visibility:     VISIBILITY_ENUM, _prefix: :phone_personal_is
-    enum email_visibility:              VISIBILITY_ENUM, _prefix: :email_is
+    enum :address_visibility,            VISIBILITY_ENUM, prefix: :address_is
+    enum :linkedin_visibility,           VISIBILITY_ENUM, prefix: :linkedin_is
+    enum :twitter_visibility,            VISIBILITY_ENUM, prefix: :twitter_is
+    enum :mastodon_visibility,           VISIBILITY_ENUM, prefix: :mastodon_is
+    enum :phone_mobile_visibility,       VISIBILITY_ENUM, prefix: :phone_mobile_is
+    enum :phone_professional_visibility, VISIBILITY_ENUM, prefix: :phone_professional_is
+    enum :phone_personal_visibility,     VISIBILITY_ENUM, prefix: :phone_personal_is
+    enum :email_visibility,              VISIBILITY_ENUM, prefix: :email_is
 
     validates :address_visibility,
               :linkedin_visibility,

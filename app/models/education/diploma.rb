@@ -28,7 +28,7 @@ class Education::Diploma < ApplicationRecord
   include Sanitizable
   include WithUniversity
 
-  enum level: {
+  enum :level, {
     not_applicable: 0,
     primary: 40,
     secondary: 60,
