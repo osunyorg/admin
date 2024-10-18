@@ -151,16 +151,13 @@ fr:
       parts:
         pedagogy:
           label: Pédagogie
-          hint: Mode d'enseignement et d'évaluation, présentation de l'équipe pédagogique.
-        results:
-          label: Résultats
-          hint: Débouchés et résultats obtenus par les anciens élèves.
+          hint: Mode d'enseignement et d'évaluation, présentation de l'équipe pédagogique, débouchés et résultats obtenus par les anciens élèves
         admission:
           label: Admission
-          hint: Modalités administratives d'accès à la formation.
+          hint: Modalités administratives d'accès à la formation
         certification:
           label: Certification
-          hint: Certification légale Qualiopi
+          hint: Certification légale (Qualiopi)
       registration_scheme: Régime d'inscription
     roles:
       one: Rôle

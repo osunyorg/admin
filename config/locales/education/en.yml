@@ -148,16 +148,13 @@ en:
       parts:
         pedagogy:
           label: Pedagogy
-          hint: Teaching and evaluation methods, pedagogical team.
-        results:
-          label: Results
-          hint: What can students do after the program? What did the alumni do?
+          hint: Teaching and evaluation methods, pedagogical team, job opportunities and results obtained by former students
         admission:
           label: Admission
-          hint: How to register.
+          hint: How to register
         certification:
           label: Certification
-          hint: Qualiopi legal certification
+          hint: Legal certification (Qualiopi)
       registration_scheme: Registration scheme
     roles:
       one: Role

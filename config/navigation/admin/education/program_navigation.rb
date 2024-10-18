@@ -14,9 +14,6 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :subnav_pedagogy,
                   t('education.program.parts.pedagogy.label'), 
                   pedagogy_admin_education_program_path(id: @program, program_id: nil)
-    primary.item  :subnav_results,
-                  t('education.program.parts.results.label'), 
-                  results_admin_education_program_path(id: @program, program_id: nil)
     primary.item  :subnav_admission,
                   t('education.program.parts.admission.label'), 
                   admission_admin_education_program_path(id: @program, program_id: nil)

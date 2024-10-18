@@ -35,8 +35,6 @@ namespace :education do
     member do
       get 'pedagogy'            => 'programs/parts#pedagogy', as: :pedagogy
       get 'pedagogy/edit'       => 'programs/parts#pedagogy_edit', as: :edit_pedagogy
-      get 'results'             => 'programs/parts#results', as: :results
-      get 'results/edit'        => 'programs/parts#results_edit', as: :edit_results
       get 'admission'           => 'programs/parts#admission', as: :admission
       get 'admission/edit'      => 'programs/parts#admission_edit', as: :edit_admission
       get 'certification'       => 'programs/parts#certification', as: :certification

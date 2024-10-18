@@ -24,17 +24,6 @@ class Admin::Education::Programs::PartsController < Admin::Education::Programs::
     add_breadcrumb t('edit')
   end
 
-  def results
-    breadcrumb
-    add_breadcrumb t('education.program.parts.results.label')
-  end
-
-  def results_edit
-    breadcrumb
-    add_breadcrumb t('education.program.parts.results.label'), results_admin_education_program_path(id: @program, program_id: nil)
-    add_breadcrumb t('edit')
-  end
-
   def admission
     @roles = @program.university_roles.ordered
     breadcrumb

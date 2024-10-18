@@ -7,17 +7,23 @@
     <%= f.hidden_field :part, value: 'pedagogy' %>
 
     <div class="row mb-5">
-      <div class="col-lg-4">
+      <div class="col-xxl-4 col-md-6 mb-4">
         <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :content %>
       </div>
-      <div class="col-lg-4">
+      <div class="col-xxl-4 col-md-6 mb-4">
         <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :pedagogy %>
       </div>
-      <div class="col-lg-4">
+      <div class="col-xxl-4 col-md-6 mb-4">
         <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :evaluation %>
       </div>
+      <div class="col-xxl-4 col-md-6 mb-4">
+        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :opportunities %>
+      </div>
+      <div class="col-xxl-4 col-md-6 mb-4">
+        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :results %>
+      </div>
     </div>
-
+  
     <%= osuny_panel t('education.teachings'), small: true do %>
       <%= link_to_add_association t('add'),
                                   f,
