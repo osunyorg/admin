@@ -2,7 +2,7 @@ module AsCategory
   extend ActiveSupport::Concern
 
   included do
-    include WithPosition
+    include Orderable
     include WithTree
 
     belongs_to  :parent,

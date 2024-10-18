@@ -28,10 +28,10 @@
 #
 class Communication::Website::Post::Category < ApplicationRecord
   include AsDirectObject
-  include Sanitizable
   include Localizable
+  include Orderable
+  include Sanitizable
   include WithMenuItemTarget
-  include WithPosition
   include WithTree
   include WithUniversity
 

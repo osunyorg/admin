@@ -31,6 +31,7 @@ class Education::Program < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include Localizable
+  include Orderable
   include Sanitizable
   include Searchable
   include WebsitesLinkable
@@ -38,7 +39,6 @@ class Education::Program < ApplicationRecord
   include WithDiploma
   include WithLocations
   include WithMenuItemTarget
-  include WithPosition
   include WithSchools
   include WithTeam
   include WithTree
@@ -61,7 +61,7 @@ class Education::Program < ApplicationRecord
 
   before_destroy :move_children
 
-  # can't use LocalizableOrderByNameScope because scope ordered is already defined by WithPosition
+  # can't use LocalizableOrderByNameScope because scope ordered is already defined by Orderable
   scope :ordered_by_name, -> (language) {
     localization_name_select = <<-SQL
       COALESCE(
