@@ -46,7 +46,38 @@
 
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 
-<h2 class="h4"><%= Education::Program.model_name.human(count: 2) %></h2>
+<%= osuny_separator %>
+
+<%= osuny_label t('admin.education.diplomas.fields_for_programs') %>
+<div class="row">
+  <%
+  [
+    :pedagogy,
+    :evaluation,
+    :prerequisites,
+    :registration,
+    :other,
+    :pricing,
+    :pricing_initial,
+    :pricing_continuing,
+    :pricing_apprenticeship,
+    :accessibility,
+    :contacts
+  ].each do |property| 
+    value = @l10n.send property
+    %>
+    <div class="col-xxl-4 col-md-6 mb-4">
+      <%= osuny_label Education::Diploma::Localization.human_attribute_name(property) %>
+      <% if value.blank? %>
+        <p>-</p>
+      <% else %>
+        <%= sanitize value %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<h2 class="h4 mt-5"><%= Education::Program.model_name.human(count: 2) %></h2>
 <%= render 'admin/education/programs/list', programs: @programs, hide_diploma: true %>
 
 <% content_for :action_bar_left do %>

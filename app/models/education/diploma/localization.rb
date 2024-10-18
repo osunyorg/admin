@@ -2,19 +2,30 @@
 #
 # Table name: education_diploma_localizations
 #
-#  id            :uuid             not null, primary key
-#  duration      :text
-#  name          :string
-#  published     :boolean          default(FALSE)
-#  published_at  :datetime
-#  short_name    :string
-#  slug          :string
-#  summary       :text
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             indexed
-#  language_id   :uuid             indexed
-#  university_id :uuid             indexed
+#  id                     :uuid             not null, primary key
+#  accessibility          :text
+#  contacts               :text
+#  duration               :text
+#  evaluation             :text
+#  name                   :string
+#  other                  :text
+#  pedagogy               :text
+#  prerequisites          :text
+#  pricing                :text
+#  pricing_apprenticeship :text
+#  pricing_continuing     :text
+#  pricing_initial        :text
+#  published              :boolean          default(FALSE)
+#  published_at           :datetime
+#  registration           :text
+#  short_name             :string
+#  slug                   :string
+#  summary                :text
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  about_id               :uuid             indexed
+#  language_id            :uuid             indexed
+#  university_id          :uuid             indexed
 #
 # Indexes
 #

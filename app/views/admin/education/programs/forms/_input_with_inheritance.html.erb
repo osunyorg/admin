@@ -30,15 +30,15 @@ id = "#{property}Collapse"
                   }
                    %>
       <div class="bg-light p-2 mt-n2">
-        <b>
+        <p class="small text-muted mt-2 mb-0">
           <%= t 'admin.inheritance.sentence_html',
                 link: link_to(
                   best_prop_source,
                   [:admin, best_prop_source_about, { lang: best_prop_source_language }],
                   target: :_blank
                 ) %>
-        </b><br>
-        <%= best_prop_value %>
+        </p>
+        <%= sanitize best_prop_value %>
       </div>
     </div>
   </div>

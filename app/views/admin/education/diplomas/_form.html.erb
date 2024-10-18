@@ -28,6 +28,35 @@
                     source: '#education_diploma_localizations_attributes_0_name' %>
       </div>
     </div>
+
+    <%= osuny_separator %>
+
+    <%= osuny_label t('admin.education.diplomas.fields_for_programs') %>
+    <div class="row">
+      <%
+      [
+        :pedagogy,
+        :evaluation,
+        :prerequisites,
+        :registration,
+        :other,
+        :pricing,
+        :pricing_initial,
+        :pricing_continuing,
+        :pricing_apprenticeship,
+        :accessibility,
+        :contacts
+      ].each do |property| %>
+        <div class="col-xxl-4 col-md-6 mb-4">
+          <%= lf.input  property,
+                        as: :summernote,
+                        input_html: {
+                          data: { 'summernote-config' => 'mini' }
+                        } %>
+        </div>
+      <% end %>
+    </div>
+
     <%= f.input :certification,
                 as: :radio_buttons,
                 collection: Education::Diploma.certifications << '',
