@@ -25,6 +25,7 @@
 #
 class Education::Program::Category::Localization < ApplicationRecord
   include AsLocalization
+  include AsLocalizedTree
   include Contentful
   include Initials
   include Permalinkable
