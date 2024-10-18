@@ -1,5 +1,7 @@
 <% content_for :title, @l10n %>
 
+<p class="lead mb-5"><%= t('education.program.parts.certification.hint') %>
+
 <div class="row mb-5">
   <div class="col-lg-4 mb-4">
     <%= osuny_label Education::Program.human_attribute_name(:qualiopi_certified) %>
