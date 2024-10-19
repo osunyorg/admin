@@ -28,7 +28,7 @@ module Education::Program::Localization::WithInheritance
   
   def search_above(property)
     if parent.present? 
-      parent.send("best_#{property}")
+      parent.public_send("best_#{property}")
     elsif diploma.present? && diploma.respond_to?(property)
       diploma.send(property)
     end
