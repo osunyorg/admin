@@ -30,7 +30,7 @@ module Education::Program::Localization::WithInheritance
     if parent.present? 
       parent.public_send("best_#{property}")
     elsif diploma.present? && diploma.respond_to?(property)
-      diploma.send(property)
+      diploma.public_send(property)
     end
   end
 
