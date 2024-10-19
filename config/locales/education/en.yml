@@ -39,8 +39,20 @@ en:
         level: Level
         programs: Programs
       education/diploma/localization:
+        accessibility: Accessibilité
+        contacts: Contacts
         duration: Duration
+        evaluation: Evaluation method
         name: Name
+        other: Other
+        pedagogy: Méthodes mobilisées
+        prerequisites: Prérequis
+        pricing: Costs
+        pricing_initial: Costs for initial training
+        pricing_continuing: Costs for continuous training
+        pricing_apprenticeship: Costs for apprenticeship
+        registration: Registration procedure and delays
+        results: Results' indicator
         short_name: Short name
         slug: Slug
       education/program:
@@ -63,7 +75,7 @@ en:
         content: Program's content
         duration: Duration
         downloadable_summary: Downloadable summary
-        evaluation: Modalités d’évaluation
+        evaluation: Evaluation method
         featured_image: Featured image
         featured_image_alt: Alt text
         is_published: Published
@@ -83,7 +95,7 @@ en:
         pricing_apprenticeship: Costs for apprenticeship
         published: Published?
         qualiopi_text: Certification details
-        registration: Modalités et délais d’accès
+        registration: Registration procedure and delays
         registration_url: Registration link (URL)
         results: Results' indicator
         short_name: Short name
@@ -113,6 +125,7 @@ en:
   admin:
     education:
       diplomas:
+        fields_for_programs: The fields below are used as basic values for programs
         certification:
           none: No certification
       programs:
