@@ -22,7 +22,7 @@ module Education::Program::Localization::WithInheritance
   protected
 
   def best(property)
-    value = send(property)
+    value = public_send(property)
     Static.blank?(value.to_s) ? search_above(property) : value
   end
   
