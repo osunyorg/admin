@@ -35,7 +35,7 @@ module Education::Program::Localization::WithInheritance
   end
 
   def best_source(property, is_ancestor: false)
-    value = send(property)
+    value = public_send(property)
     if Static.has_content?(value.to_s)
       # Le contenu vient de cette formation
       # Si c'est un ancêtre (via appel récursif), c'est bien la meilleure source
