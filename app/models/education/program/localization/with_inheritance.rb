@@ -58,7 +58,7 @@ module Education::Program::Localization::WithInheritance
   def is_diploma_source?(property)
     return false if diploma.nil?
     return false unless diploma.respond_to?(property)
-    value = diploma.send(property)
+    value = diploma.public_send(property)
     Static.has_content?(value.to_s)
   end
 end
