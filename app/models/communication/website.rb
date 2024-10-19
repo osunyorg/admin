@@ -78,7 +78,7 @@ class Communication::Website < ApplicationRecord
   include WithTheme
   include WithUniversity
 
-  enum git_provider: {
+  enum :git_provider, {
     github: 0,
     gitlab: 1
   }
