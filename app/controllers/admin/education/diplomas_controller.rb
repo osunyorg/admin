@@ -67,6 +67,9 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
             :level, :ects, :certification,
             localizations_attributes: [
               :id, :name, :slug, :short_name, :summary, :duration,
+              :pedagogy, :evaluation, :prerequisites, :registration, :other,
+              :pricing, :pricing_initial, :pricing_continuing, :pricing_apprenticeship,
+              :accessibility, :contacts,
               :language_id
             ]
           )
