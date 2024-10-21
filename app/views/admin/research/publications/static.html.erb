@@ -1,7 +1,5 @@
 ---
-<%= render 'admin/application/static/title', about: @about %>
-date: "<%= @about.publication_date&.iso8601 %>"
-<%= render 'admin/application/static/core', about: @about, skip_date: true %>
+<%= render 'admin/application/static/core', about: @about %>
 <%= render 'admin/application/static/breadcrumbs', about: @about %>
 <%= render 'admin/application/static/design',
             about: @about,

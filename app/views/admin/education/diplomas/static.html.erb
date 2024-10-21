@@ -7,7 +7,6 @@ language = @l10n.language
                     .published_now_in(language)
                     .ordered if @website.present?
 %>---
-<%= render 'admin/application/static/title', about: @l10n %>
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',

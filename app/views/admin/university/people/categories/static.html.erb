@@ -1,11 +1,11 @@
 <%
 # this version has to incremented every time you change something in the file, to invalidate the cache
-version = 2
+version = 3
 # Pas dans le controller parce que ça se fait dans les background jobs, à partir du @about
 category = @l10n.about
 cache [@about, category, @l10n, @website.id, version] do
 %>
-<%= render 'admin/application/static/title', about: @l10n %>
+---
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
@@ -15,4 +15,5 @@ cache [@about, category, @l10n, @website.id, version] do
             toc_offcanvas: true %>
 position: <%= category.position %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
+---
 <% end %>

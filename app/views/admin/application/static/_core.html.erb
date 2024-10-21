@@ -1,4 +1,6 @@
 <%
+# Preparing variables
+skip_title ||= false
 skip_date ||= false
 show_date = about.respond_to?(:published_at) && !skip_date
 show_published_at = about.respond_to?(:published_at)
@@ -8,20 +10,44 @@ if about.respond_to?(:slug) && about.slug.present?
 end
 previous_permalinks = about.previous_permalinks_in_website(@website)
 show_hugo = @website && about.respond_to?(:hugo)
+show_subtitle = about.respond_to?(:subtitle)
 hugo = about.hugo(@website) if show_hugo
+%>
+<%
+#############
+# Title and subtitle
+#############
+%>
+<% unless skip_title %>
+title: >-
+  <%= prepare_text_for_static about.to_s %>
+<% end %>
+<% if show_subtitle %>
+subtitle: >-
+  <%= prepare_text_for_static about.subtitle %>
+<% end %>
+<%
+#############
+# Permalinks
+#############
 %>
 <% if @website %>
 url: "<%= about.current_permalink_in_website(@website)&.path %>"
-<% if slug %>
+<%    if slug %>
 slug: "<%= slug %>"
-<% end %>
-<% if previous_permalinks.any? %>
+<%    end %>
+<%    if previous_permalinks.any? %>
 aliases:
-<% previous_permalinks.each do |permalink| %>
+<%      previous_permalinks.each do |permalink| %>
   - <%= permalink.path %>
+<%      end %>
+<%    end %>
 <% end %>
-<% end %>
-<% end %>
+<%
+#############
+# Dates & meta
+#############
+%>
 <% if show_date %>
 date: <%= about.published_at&.iso8601 %>
 <% end %>
@@ -37,6 +63,6 @@ meta:
   dates:
     created_at: <%= about.created_at&.iso8601 %>
     updated_at: <%= about.updated_at&.iso8601 %>
-  <% if show_published_at %>
+<% if show_published_at %>
     published_at: <%= about.published_at&.iso8601 %>
-  <% end %>
+<% end %>
