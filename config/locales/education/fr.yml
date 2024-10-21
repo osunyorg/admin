@@ -39,8 +39,20 @@ fr:
         level: Niveau
         programs: Formations
       education/diploma/localization:
+        accessibility: Accessibilité
+        contacts: Contacts
         duration: Durée
+        evaluation: Modalités d’évaluation
         name: Nom
+        other: Autre
+        pedagogy: Méthodes mobilisées
+        prerequisites: Prérequis
+        pricing: Coûts
+        pricing_initial: Coûts de la formation initiale
+        pricing_continuing: Coûts de la formation continue
+        pricing_apprenticeship: Coûts de l'apprentissage
+        registration: Modalités et délais d’accès
+        results: Indicateurs de résultats
         short_name: Nom abrégé
         slug: Identifiant
       education/program:
@@ -113,6 +125,7 @@ fr:
   admin:
     education:
       diplomas:
+        fields_for_programs: Les champs ci-dessous servent de valeur de base aux formations
         certification:
           none: Pas de certification
       programs:

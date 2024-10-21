@@ -55,7 +55,7 @@ class Communication::Block < ApplicationRecord
   # 2000 storytelling
   # 3000 references
   # 4000 utilities
-  enum template_kind: {
+  enum :template_kind, {
     agenda: 3100,
     call_to_action: 900,
     chapter: 50,
