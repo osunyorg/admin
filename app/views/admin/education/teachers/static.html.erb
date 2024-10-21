@@ -6,7 +6,7 @@ language = @l10n.language
 title = t('university.person.facets.teacher.programs_of', name: @l10n.to_s, locale: @l10n.language.iso_code)
 %>
 ---
-<%= render 'admin/application/static/core', about: @l10n, forced_title: title %>
+<%= render 'admin/application/static/core', about: @l10n, force_title: title %>
 <%= render 'admin/application/static/breadcrumbs', about: person_l10n, add_link_on_last: true -%>
   - title: "<%= t('university.person.facets.teacher.programs', locale: @l10n.language.iso_code) %>"
 <%= render 'admin/application/static/design',
