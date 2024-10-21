@@ -92,7 +92,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
       :year,
       category_ids: [],
       localizations_attributes: [
-        :id, :title, :meta_description, :summary,
+        :id, :title, :subtitle, :meta_description, :summary,
         :published, :published_at, :slug,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,

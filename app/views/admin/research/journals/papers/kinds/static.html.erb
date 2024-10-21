@@ -1,4 +1,5 @@
 ---
-<%= render 'admin/application/static/title', about: @l10n %>
+title: >-
+  <%= prepare_text_for_static @l10n.to_s %>
 slug: "<%= @l10n.slug %>"
 ---
