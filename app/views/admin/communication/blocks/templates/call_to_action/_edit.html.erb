@@ -1,24 +1,24 @@
 <%= block_component_edit block, :layout %>
 
+<%= block_component_edit block, :text,
+      label: t('admin.communication.blocks.components.text.label'),
+      placeholder: t('admin.communication.blocks.components.text.placeholder') %>
 <div class="row pure__row--small mb-5">
-  <div class="col-md-6">
-    <div class="summernote">
-      <%= block_component_edit block, :text,
-          label: t('admin.communication.blocks.components.text.label'),
-          placeholder: t('admin.communication.blocks.components.text.placeholder') %>
-    </div>
-  </div>
-  <div class="col-md-6">
+  <div class="col-sm-6">
     <%= block_component_edit block, :image,
           label: t('admin.communication.blocks.components.image.input.label'),
           remove: t('admin.communication.blocks.components.image.input.remove') %>
-    <%= block_component_edit block, :alt,
-          label: t('admin.communication.blocks.components.image.alt.label'),
-          placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
-    <%= block_component_edit block, :credit,
-          label: t('admin.communication.blocks.components.image.credit.label'),
-          placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
-          summernote_config: 'link' %>
+  </div>
+  <div class="col-sm-6">
+    <div v-show="data.image.id">
+      <%= block_component_edit block, :alt,
+            label: t('admin.communication.blocks.components.image.alt.label'),
+            placeholder: t('admin.communication.blocks.components.image.alt.placeholder') %>
+      <%= block_component_edit block, :credit,
+            label: t('admin.communication.blocks.components.image.credit.label'),
+            placeholder: t('admin.communication.blocks.components.image.credit.placeholder'),
+            summernote_config: 'link' %>
+    </div>
   </div>
 </div>
 

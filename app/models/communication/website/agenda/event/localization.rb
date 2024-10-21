@@ -64,10 +64,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
             :time_zone,
             to: :event
 
+  has_summernote :summary
   has_summernote :text
 
   validates :title, presence: true
-
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)

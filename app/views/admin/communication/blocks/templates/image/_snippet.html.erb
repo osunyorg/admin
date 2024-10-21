@@ -1,2 +1,10 @@
 <% blob = block.template.image_component.blob %>
-<%= kamifusen_tag blob, width: 1024, alt: '', class: 'img-fluid' if blob %>
+<%= kamifusen_tag blob, width: 1024, alt: block.template.alt, class: 'img-fluid mb-2' if blob %>
+<div class="row">
+  <div class="col-sm-8">
+    <%= block_component_snippet block, :text %>
+  </div>
+  <div class="col-sm-4 text-end small">
+    <%= block_component_snippet block, :credit %>
+  </div>
+</div>

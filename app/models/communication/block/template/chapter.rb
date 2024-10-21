@@ -5,7 +5,7 @@ class Communication::Block::Template::Chapter < Communication::Block::Template::
   has_component :text, :rich_text
   has_component :notes, :rich_text
   has_component :image, :image
-  has_component :alt, :text
+  has_component :alt, :string
   has_component :credit, :rich_text
 
   protected
