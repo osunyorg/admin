@@ -7,33 +7,22 @@
     <%= f.hidden_field :part, value: 'admission' %>
 
     <div class="row">
-      <div class="col-xxl-4 col-md-6 mb-4">
-        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :prerequisites %>
-      </div>
-      <div class="col-xxl-4 col-md-6 mb-4">
-        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :registration %>
-      </div>
-      <div class="col-xxl-4 col-md-6 mb-4">
-        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :other %>
-      </div>
-      <div class="col-xxl-4 col-md-6 mb-4">
-        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :pricing %>
-      </div>
-      <div class="col-xxl-4 col-md-6 mb-4">
-        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :pricing_initial %>
-      </div>
-      <div class="col-xxl-4 col-md-6 mb-4">
-        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :pricing_continuing %>
-      </div>
-      <div class="col-xxl-4 col-md-6 mb-4">
-        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :pricing_apprenticeship %>
-      </div>
-      <div class="col-xxl-4 col-md-6 mb-4">
-        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :accessibility %>
-      </div>
-      <div class="col-xxl-4 col-md-6 mb-4">
-        <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: :contacts %>
-      </div>
+      <%
+      [
+        :prerequisites,
+        :registration,
+        :other,
+        :pricing,
+        :pricing_initial,
+        :pricing_continuing,
+        :pricing_apprenticeship,
+        :accessibility,
+        :contacts
+      ].each do |property| %>
+        <div class="col-xxl-4 col-md-6 mb-4">
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: property %>
+        </div>
+      <% end %>
       <div class="col-xxl-4 col-md-6 mb-4">
         <%= lf.input :registration_url %>
       </div>
