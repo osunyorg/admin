@@ -147,6 +147,7 @@ class University::Person < ApplicationRecord
   }
 
   scope :administration,    -> { where(is_administration: true) }
+  scope :authors,           -> { where(is_author: true) }
   scope :teachers,          -> { where(is_teacher: true) }
   scope :researchers,       -> { where(is_researcher: true) }
   scope :alumni,            -> { where(is_alumnus: true) }

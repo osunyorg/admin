@@ -2,7 +2,7 @@
 
 <% content_for :realm do %>
   <div class="container-fluid">
-    <div class="row g-5">
+    <div class="row gx-4">
       <div class="col-lg-6 pt-5 d-flex flex-column">
         <p class="realm__quote h1 mb-5">
           <%= t "#{@namespace.to_s.underscore}.description.text_html" %>
@@ -40,7 +40,7 @@
     key = "#{@namespace.to_s.underscore.gsub('/', '.')}.description.parts.#{class_name.to_s.demodulize.downcase}"
     description = t "#{key}.description"
     %>
-    <div class="col-lg-3">
+    <div class="col-sm-6 col-xl-4 col-xxl-3">
       <div class="position-relative">
         <h2 class="h4"><%= title %></h2>
         <p><%= description %></p>

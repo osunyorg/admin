@@ -11,6 +11,9 @@ SimpleNavigation::Configuration.run do |navigation|
                   highlights_on: lambda { 
                     controller_name == "dashboard" && action_name == "index" 
                   }
+    primary.item  :subnav_authors,
+                  University::Person::Localization::Author.model_name.human(count: 2),
+                  admin_communication_authors_path
     primary.item  :subnav_websites,
                   Communication::Website.model_name.human(count: 2),
                   admin_communication_websites_path

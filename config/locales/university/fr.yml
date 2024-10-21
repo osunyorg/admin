@@ -165,15 +165,18 @@ fr:
       university/person/category:
         one: Catégorie
         other: Catégories
-      university/person/involvement:
-        one: Implication
-        other: Implications
       university/person/alumnus:
         one: Alumnus
         other: Alumni
       university/person/experience:
         one: Expérience professionnelle
         other: Expériences professionnelles
+      university/person/involvement:
+        one: Implication
+        other: Implications
+      university/person/localization/author:
+        one: Auteur·ice
+        other: Auteur·ices
       university/organization:
         one: Organisation
         other: Organisations

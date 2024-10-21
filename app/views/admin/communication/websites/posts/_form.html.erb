@@ -45,7 +45,7 @@
           <% end %>
           <%= f.association :author,
                             collection: osuny_collection(
-                              current_university.people,
+                              current_university.people.authors,
                               localized: true,
                               label_method: :to_s_alphabetical
                             ) %>

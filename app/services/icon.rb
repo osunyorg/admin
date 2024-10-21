@@ -2,6 +2,7 @@
 class Icon
   DASHBOARD = 'fas fa-chart-line'
 
+  COMMUNICATION_AUTHOR = 'fas fa-users'
   COMMUNICATION_EXTRANET = 'fas fa-project-diagram'
   COMMUNICATION_WEBSITE = 'fas fa-sitemap'
   COMMUNICATION_WEBSITE_HOME = 'fas fa-home'
@@ -59,6 +60,7 @@ class Icon
   UNIVERSITY_PERSON_ADMINISTRATORS = 'fas fa-users-cog'
   UNIVERSITY_PERSON_ALUMNUS = 'fas fa-user-graduate'
   UNIVERSITY_PERSON_LOCALIZATION_TEACHER = EDUCATION_TEACHER
+  UNIVERSITY_PERSON_LOCALIZATION_AUTHOR = COMMUNICATION_AUTHOR
 
   OSUNY_USER = 'fas fa-user'
   USER = OSUNY_USER
