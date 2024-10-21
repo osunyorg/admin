@@ -2,12 +2,10 @@ module Migrations
   class TurnToHtml
     def self.migrate
       begin
-        Communication::Block.skip_callback :save, :after, :connect_and_sync_direct_sources
-        Communication::Block::Heading.skip_callback :save, :after, :connect_and_sync_direct_sources
+        suspend_callbacks
         new.migrate
       ensure
-        Communication::Block.set_callback :save, :after, :connect_and_sync_direct_sources
-        Communication::Block::Heading.set_callback :save, :after, :connect_and_sync_direct_sources
+        resume_callbacks
       end
     end
 
@@ -26,6 +24,18 @@ module Migrations
     end
 
     protected
+
+    def self.suspend_callbacks
+      Communication::Block.skip_callback :save, :after, :connect_and_sync_direct_sources
+      Communication::Block.skip_callback :save, :after, :clean_websites_if_necessary
+      Communication::Block.skip_callback :save, :after, :touch_about
+    end
+
+    def self.resume_callbacks
+      Communication::Block.set_callback :save, :after, :connect_and_sync_direct_sources
+      Communication::Block.set_callback :save, :after, :clean_websites_if_necessary
+      Communication::Block.set_callback :save, :after, :touch_about
+    end
 
     CLASSES_WITH_SUMMARIES = [
       Administration::Location::Localization,
@@ -161,9 +171,11 @@ module Migrations
 
     def migrate_timeline_blocks
       Communication::Block.timeline.each do |block|
-        next if block.template.text.blank?
-        next if block.template.text.start_with?('<p>')
-        block.template.text = "<p>#{block.template.text}</p>"
+        block.template.elements.each do |element|
+          next if element.text.blank?
+          next if element.text.start_with?('<p>')
+          element.text = "<p>#{element.text}</p>"
+        end
         block.data = block.template.data
         block.save
       end
