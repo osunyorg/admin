@@ -23,6 +23,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   has_component :option_date,         :boolean, default: false
   has_component :option_image,        :boolean, default: true
   has_component :option_reading_time, :boolean, default: false
+  has_component :option_subtitle,     :boolean, default: true
   has_component :option_summary,      :boolean, default: true
 
   def category
