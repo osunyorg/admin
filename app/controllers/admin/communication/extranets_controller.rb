@@ -65,33 +65,40 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
 
   protected
 
+  PERMITTED_PARAMS = [
+    :color
+  ]
+  PERMITTED_PARAMS_FOR_LOCALIZATIONS = [
+    :id, :language_id,
+    :name, :published,
+    :registration_contact,
+    :logo, :logo_delete, 
+    :favicon, :favicon_delete, 
+    :home_sentence,
+    :terms, :privacy_policy, :cookies_policy
+  ]
+  EXTENDED_PERMITTED_PARAMS = [
+    :host, :about_id, :about_type, :sass,
+    :feature_alumni, :feature_documents, :feature_contacts, :feature_jobs, :feature_posts,
+    :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping
+  ]
+  EXTENDED_PERMITTED_PARAMS_FOR_LOCALIZATIONS = [
+    :sso_button_label
+  ]
+
   def extranet_params
-    allowed_params = [
-      :color
-    ]
-    localizations_attributes = [
-      :id, :language_id,
-      :name, :published,
-      :registration_contact,
-      :logo, :logo_delete, 
-      :favicon, :favicon_delete, 
-      :home_sentence,
-      :terms, :privacy_policy, :cookies_policy
-    ]  
+    permitted_params = PERMITTED_PARAMS
+    localizations_attributes = PERMITTED_PARAMS_FOR_LOCALIZATIONS
     if can?(:create, Communication::Extranet)
-      allowed_params += [
-        :host, :about_id, :about_type, :sass,
-        :feature_alumni, :feature_documents, :feature_contacts, :feature_jobs, :feature_posts,
-        :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping
-      ]
-      localizations_attributes += [
-        :sso_button_label
-      ]
+      permitted_params += EXTENDED_PERMITTED_PARAMS
+      localizations_attributes += EXTENDED_PERMITTED_PARAMS_FOR_LOCALIZATIONS
     end
-    allowed_params << :default_language_id if @extranet&.persisted?
-    allowed_params << { localizations_attributes: localizations_attributes }
+    permitted_params << :default_language_id if @extranet&.persisted?
+    permitted_params << {
+      localizations_attributes: localizations_attributes
+    }
     params.require(:communication_extranet)
-          .permit(allowed_params)
+          .permit(permitted_params)
           .merge(
             university_id: current_university.id
           )
