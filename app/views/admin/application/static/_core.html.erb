@@ -1,6 +1,7 @@
 <%
 # Preparing variables
-skip_title ||= false
+forced_title ||= nil
+title = forced_title || about.to_s
 skip_date ||= false
 show_date = about.respond_to?(:published_at) && !skip_date
 show_published_at = about.respond_to?(:published_at)
@@ -18,10 +19,8 @@ hugo = about.hugo(@website) if show_hugo
 # Title and subtitle
 #############
 %>
-<% unless skip_title %>
 title: >-
-  <%= prepare_text_for_static about.to_s %>
-<% end %>
+  <%= prepare_text_for_static title %>
 <% if show_subtitle %>
 subtitle: >-
   <%= prepare_text_for_static about.subtitle %>
