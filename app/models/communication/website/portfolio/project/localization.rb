@@ -51,8 +51,9 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  validates :title, presence: true
+  has_summernote :summary
 
+  validates :title, presence: true
   before_validation :set_communication_website_id, on: :create
 
   scope :ordered, -> (language = nil) { order(year: :desc, title: :asc) }
