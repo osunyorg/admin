@@ -6,7 +6,8 @@ language = @l10n.language
 cache_key = [person, @l10n, @website.id, version]
 cache cache_key do
 %>---
-<%= render 'admin/application/static/title', about: @l10n %>
+title: >-
+  <%= prepare_text_for_static @l10n.to_s %>
 linkTitle: >-
   <%= @l10n.to_s_alphabetical %>
 <%= render 'admin/application/static/permalink', about: @l10n %>
