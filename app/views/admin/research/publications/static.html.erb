@@ -1,5 +1,6 @@
 ---
-<%= render 'admin/application/static/title', about: @about %>
+title: >-
+  <%= prepare_text_for_static @about.to_s %>
 date: "<%= @about.publication_date&.iso8601 %>"
 <%= render 'admin/application/static/permalink', about: @about %>
 <%= render 'admin/application/static/breadcrumbs', about: @about %>

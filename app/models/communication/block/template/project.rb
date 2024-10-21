@@ -18,6 +18,7 @@ class Communication::Block::Template::Project < Communication::Block::Template::
 
   has_component :option_categories,   :boolean, default: true
   has_component :option_image,        :boolean, default: true
+  has_component :option_subtitle,     :boolean, default: true
   has_component :option_summary,      :boolean, default: false
   has_component :option_year,         :boolean, default: true
 
