@@ -256,6 +256,9 @@ fr:
             description: Une liste de fonctionnalités avec des images, par exemple des icônes, et une description.
             edit:
               add_element: Ajouter une fonctionnalité
+              description:
+                label: Description
+                placeholder: Entrer la description
               element:
                 alt:
                   label: Texte alternatif
@@ -326,6 +329,9 @@ fr:
             description: Des chiffres clés avec une jolie animation. Chaque chiffre peut être doté d'une unité et d'un texte.
             edit:
               add_key: Ajouter un chiffre clé
+              description:
+                label: Description
+                placeholder: Entrer la description
               element:
                 description:
                   label: Description
@@ -671,6 +677,9 @@ fr:
           video:
             description: Une vidéo intégrée dans la page depuis diverses plateformes, avec la transcription et sans lecture automatique.
             edit:
+              description:
+                label: Description
+                placeholder: Entrer la description
               url:
                 hint: |
                   Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=lAYhfCPelO0
