@@ -68,7 +68,7 @@ class University::Person < ApplicationRecord
     :author
   ].freeze
 
-  enum gender: { male: 0, female: 1, non_binary: 2 }
+  enum :gender, { male: 0, female: 1, non_binary: 2 }
 
   belongs_to :user, optional: true
 
