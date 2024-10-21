@@ -349,8 +349,10 @@ en:
         languages: Languages
       website:
         agenda:
+          event:
+            localizations:
+              draft: Draft
           events:
-            draft: Draft
             formatted_time_zone: "Time zone: %{time_zone}"
             none: No event yet
         confirm_localization:
@@ -369,17 +371,19 @@ en:
         localizations:
           fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
           title: Internationalization
+        page:
+          localizations:
+            draft: Draft
+            published: Published
+            published_status: Publication status
         pages:
           as_list: See as a list
           as_tree: Organize structure
           delete_special_page_notice: Can't delete this page
-          draft: Draft
           duplicate_special_page_notice: Can't duplicate this page
           full_width_status: Full width
           in: in
           in_full_width: full width
-          published: Published
-          published_status: Publication status
           show: Show page
           special_pages:
             organization:
@@ -391,8 +395,10 @@ en:
         permalinks:
           creation_error: "Error during the creation. Does the given path have the correct format?"
         portfolio:
+          project:
+            localizations:
+              draft: Draft
           projects:
-            draft: Draft
             in: in %{categories}
             none: No project yet
         post:
@@ -531,12 +537,14 @@ en:
           teacher:
             slug: teachers
             title: Teachers
+      post:
+        localizations:
+          published: Published
+          unpublished: Unpublished
       posts:
         new_curation: New curation
         none: No posts yet.
-        published: Published
         successful_batch_update: Posts have been updated succesfully
-        unpublished: Unpublished
       security: Security
       see_all: See the full list (%{number} elements)
   curation:

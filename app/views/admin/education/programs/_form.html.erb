@@ -61,24 +61,22 @@
         </div>
       </div>
       <div class="col-lg-4 col-xxl-3">
-        <%= render 'admin/education/programs/forms/part', part: :technical do %>
-          <%= lf.input :published %>
-          <%= render  "admin/application/slug/form",
-                      f: lf,
-                      source: '#education_program_localizations_attributes_0_name' %>
-          <%= f.association :parent,
-                            collection: osuny_collection_tree(
-                              current_university.education_programs.root,
-                              localized: true,
-                              except: program
-                            ) %>
-          <%= f.input :bodyclass %>
-          <%= lf.input :logo,
-                      as: :single_deletable_file,
-                      hint: images_formats_accepted_hint,
-                      input_html: { accept: default_images_formats_accepted }
-                      %>
-        <% end %>
+        <%= lf.input :published %>
+        <%= render  "admin/application/slug/form",
+                    f: lf,
+                    source: '#education_program_localizations_attributes_0_name' %>
+        <%= f.association :parent,
+                          collection: osuny_collection_tree(
+                            current_university.education_programs.root,
+                            localized: true,
+                            except: program
+                          ) %>
+        <%= f.input :bodyclass %>
+        <%= lf.input :logo,
+                    as: :single_deletable_file,
+                    hint: images_formats_accepted_hint,
+                    input_html: { accept: default_images_formats_accepted }
+                    %>
         <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
       </div>
     </div>

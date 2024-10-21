@@ -10,7 +10,8 @@ module Communication::Website::WithConfigs
         config_default_permalinks,
         config_development_config,
         config_production_config,
-        config_deuxfleurs_workflow
+        config_deuxfleurs_workflow,
+        config_robots_txt,
       ].compact
     end
 
@@ -37,6 +38,11 @@ module Communication::Website::WithConfigs
     def config_deuxfleurs_workflow
       return unless deuxfleurs_hosting
       @config_deuxfleurs_workflow ||= Communication::Website::Configs::DeuxfleursWorkflow.find(id)
+    end
+
+    def config_robots_txt
+      return if in_production?
+      @config_robots_txt ||= Communication::Website::Configs::RobotsTxt.find(id)
     end
 
   end

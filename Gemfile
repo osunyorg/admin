@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.2"
+ruby "3.3.5"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_storage_validations", "~> 1"
@@ -51,12 +51,13 @@ gem "mini_magick", "~> 4.0"
 gem "octokit"
 gem "omniauth-rails_csrf_protection", "~> 1"
 gem "omniauth-saml", "~> 2"
+gem "ostruct", "~> 0.6.0"
 gem "pexels", "~> 0"
 gem "pg", "~> 1"
 gem "pghero"
 gem "pg_query"
 gem "puma"
-gem "rails", "~> 7.1.0"
+gem "rails", "~> 7.2.0"
 gem "rails-autocomplete", "~> 2"
 gem "rails-i18n"
 gem "rbnacl", "~> 7.1"

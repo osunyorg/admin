@@ -4,15 +4,15 @@ module User::WithRoles
   included do
     attr_accessor :modified_by
 
-    enum role: { 
-      visitor: 0, 
-      contributor: 4, 
-      author: 5, 
-      teacher: 10, 
-      program_manager: 12, 
-      website_manager: 15, 
-      admin: 20, 
-      server_admin: 30 
+    enum :role, {
+      visitor: 0,
+      contributor: 4,
+      author: 5,
+      teacher: 10,
+      program_manager: 12,
+      website_manager: 15,
+      admin: 20,
+      server_admin: 30
     }
 
     has_and_belongs_to_many :programs_to_manage,
