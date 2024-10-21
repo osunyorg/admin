@@ -18,12 +18,11 @@ weight: 1
 authors:
   - "<%= @l10n.author.slug %>"
 <% end %>
-<% if @l10n.categories.any? %>
-posts_categories:
-<% @l10n.categories.each do |category| %>
-  - "<%= category.slug_with_ancestors_slugs(separator: '-') %>"
-<% end %>
-<% end %>
+<%= render 'admin/application/categories/static',
+            about: post,
+            l10n: @l10n,
+            categories: @website.post_categories,
+            key: :posts_categories %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/featured_image/static', about: @l10n %>
 <%= render 'admin/application/shared_image/static', about: @l10n %>

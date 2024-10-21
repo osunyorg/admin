@@ -34,18 +34,7 @@
                       include_blank: false,
                       selected: f.object.time_zone || @website.default_time_zone %>
         <% end %>
-        <% if @categories.any? %>
-          <%= osuny_panel t('activerecord.attributes.communication/website/agenda/event.categories') do %>
-            <%= f.association :categories,
-                              label_text: false,
-                              as: :check_boxes,
-                              collection: osuny_collection_tree(
-                                @website.agenda_categories.root, 
-                                localized: true
-                              ) %>
-          <% end %>
-        <% end %>
-
+        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
 
       </div>

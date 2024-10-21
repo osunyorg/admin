@@ -25,6 +25,7 @@
 #
 class Education::Program::Category::Localization < ApplicationRecord
   include AsLocalization
+  include AsLocalizedTree
   include Contentful
   include Initials
   include Permalinkable
@@ -48,5 +49,12 @@ class Education::Program::Category::Localization < ApplicationRecord
 
   def to_s
     "#{name}"
+  end
+
+  protected
+
+  # TODO : Pertinent ?
+  def hugo_slug_in_website(website)
+    slug_with_ancestors_slugs(separator: '-')
   end
 end
