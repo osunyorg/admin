@@ -84,7 +84,7 @@ class Communication::Block < ApplicationRecord
     title: 1001,
     video: 52,
     volumes: 3310
-  }, _prefix: :template
+  }, prefix: :template
 
   belongs_to  :about, polymorphic: true
   belongs_to  :communication_website,
