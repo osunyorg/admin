@@ -1,33 +1,40 @@
 <%
-depth ||= 0
-indentation = '  ' * depth
-%>
-<%= indentation %>dates:
-<%= indentation %>  status: "<%= event.status %>"
-<%= indentation %>  archive: <%= event.archive? %>
-<%= indentation %>  computed:
-<%= indentation %>    short: >-
-<%= indentation %>      <%= date_range_i18n(event.from_day, event.to_day, format: :short, locale: locale) %>
-<%= indentation %>    long: >-
-<%= indentation %>      <%= date_range_i18n(event.from_day, event.to_day, format: :long, locale: locale) %>
-<%= indentation %>    two_lines:
-<%= indentation %>      short: >-
-<%= indentation %>        <%= date_range_i18n(event.from_day, event.to_day, format: :short, layout: :two_lines, locale: locale) %>
-<%= indentation %>      long: >-
-<%= indentation %>        <%= date_range_i18n(event.from_day, event.to_day, format: :long, layout: :two_lines, locale: locale) %>
-<%= indentation %>  from:
-<%= indentation %>    day: <%= event.from_day %>
+# Dates override default dates in core, so it comes after
+# https://github.com/osunyorg/admin/issues/1880
+if event.archive? %>
+date: "<%= event.from_day&.iso8601 %>"
+<% elsif event.current? %>
+weight: -1
+date: "<%= event.from_day&.iso8601 %>"
+<% else %>
+weight: <%= event.distance_in_days %>
+<% end %>
+dates:
+  status: "<%= event.status %>"
+  archive: <%= event.archive? %>
+  computed:
+    short: >-
+      <%= date_range_i18n(event.from_day, event.to_day, format: :short, locale: locale) %>
+    long: >-
+      <%= date_range_i18n(event.from_day, event.to_day, format: :long, locale: locale) %>
+    two_lines:
+      short: >-
+        <%= date_range_i18n(event.from_day, event.to_day, format: :short, layout: :two_lines, locale: locale) %>
+      long: >-
+        <%= date_range_i18n(event.from_day, event.to_day, format: :long, layout: :two_lines, locale: locale) %>
+  from:
+    day: <%= event.from_day %>
 <% if event.from_hour %>
-<%= indentation %>    hour: <%= event.from_hour.strftime "%H:%M" %>
+    hour: <%= event.from_hour.strftime "%H:%M" %>
 <% end %>
-<%= indentation %>  to:
-<%= indentation %>    day: <%= event.to_day || event.from_day %>
+  to:
+    day: <%= event.to_day || event.from_day %>
 <% if event.to_hour %>
-<%= indentation %>    hour: <%= event.to_hour.strftime "%H:%M" %>
+    hour: <%= event.to_hour.strftime "%H:%M" %>
 <% end %>
-<%= indentation %>  add_to_calendar:
-<%= indentation %>    google: "<%= l10n.cal_google_url.html_safe %>"
-<%= indentation %>    yahoo: "<%= l10n.cal_yahoo_url.html_safe %>"
-<%= indentation %>    office: "<%= l10n.cal_office_url.html_safe %>"
-<%= indentation %>    outlook: "<%= l10n.cal_outlook_url.html_safe %>"
-<%= indentation %>    ical: "<%= l10n.cal_ical_url.html_safe %>"
+  add_to_calendar:
+    google: "<%= l10n.cal_google_url.html_safe %>"
+    yahoo: "<%= l10n.cal_yahoo_url.html_safe %>"
+    office: "<%= l10n.cal_office_url.html_safe %>"
+    outlook: "<%= l10n.cal_outlook_url.html_safe %>"
+    ical: "<%= l10n.cal_ical_url.html_safe %>"
