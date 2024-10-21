@@ -253,6 +253,9 @@ en:
             description: A list of features with images (often icons) and a description.
             edit:
               add_element: Add feature
+              description:
+                label: Description
+                placeholder: Enter description here
               element:
                 alt:
                   label: Alternative text
@@ -323,6 +326,9 @@ en:
             description: Animated figures, with a unit and a text.
             edit:
               add_key: Add key figure
+              description:
+                label: Description
+                placeholder: Enter description here
               element:
                 description:
                   label: Description
@@ -659,6 +665,9 @@ en:
           video:
             description: An embedded video from most platforms, with the text transcription for accessibility, and no autoplay.
             edit:
+              description:
+                label: Description
+                placeholder: Enter description
               url:
                 hint: |
                   Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=lAYhfCPelO0

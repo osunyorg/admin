@@ -48,8 +48,9 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  validates :name, presence: true
+  has_summernote :summary
 
+  validates :name, presence: true
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
