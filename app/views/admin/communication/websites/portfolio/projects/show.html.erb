@@ -5,6 +5,11 @@
     <%= osuny_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:title), small: true do %>
       <p class="lead"><%= @l10n.title %></p>
     <% end %>
+    <% if @l10n.subtitle.present? %>
+      <%= osuny_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:subtitle), small: true do %>
+        <p class="lead"><%= @l10n.subtitle %></p>
+      <% end %>
+    <% end %>
   </div>
   <div class="offset-lg-1 col-lg-4">
     <%= render 'admin/application/featured_image/show', about: @l10n, small: true %>
