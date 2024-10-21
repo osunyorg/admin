@@ -32,6 +32,14 @@
 #  fk_rails_90ac986fab  (heading_id => communication_block_headings.id)
 #
 class Communication::Block < ApplicationRecord
+  BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
+  CATEGORIES = {
+    basic: [:title, :chapter, :image, :video, :sound, :datatable],
+    storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
+    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :projects, :papers, :volumes],
+    utilities: [:files, :definitions, :contact, :links, :license, :embed]
+  }
+
   include AsIndirectObject
   include Orderable
   include WithAccessibility
@@ -40,18 +48,6 @@ class Communication::Block < ApplicationRecord
   include WithTemplate
   include WithUniversity
   include Sanitizable
-
-  BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
-
-  belongs_to  :about, polymorphic: true
-  belongs_to  :communication_website,
-              class_name: "Communication::Website",
-              optional: true
-  alias       :website :communication_website
-
-  # We do not use the :touch option of the belongs_to association
-  # because we do not want to touch the about when destroying the block.
-  after_save :touch_about#, :touch_targets # FIXME
 
   # Les numéros sont un peu en vrac
   # Dans l'idée, pour le futur
@@ -85,21 +81,25 @@ class Communication::Block < ApplicationRecord
     sound: 1005,
     testimonials: 400,
     timeline: 700,
+    title: 1001,
     video: 52,
     volumes: 3310
-  }
+  }, prefix: :template
 
-  CATEGORIES = {
-    basic: [:chapter, :image, :video, :sound, :datatable],
-    storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
-    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :projects, :papers, :volumes],
-    utilities: [:files, :definitions, :contact, :links, :license, :embed]
-  }
+  belongs_to  :about, polymorphic: true
+  belongs_to  :communication_website,
+              class_name: "Communication::Website",
+              optional: true
+  alias       :website :communication_website
+
+  before_validation :set_university_and_website_from_about, on: :create
+
+  # We do not use the :touch option of the belongs_to association
+  # because we do not want to touch the about when destroying the block.
+  after_save :touch_about#, :touch_targets # FIXME
 
   scope :published, -> { where(published: true) }
   scope :without_heading, -> { where(heading: nil) }
-
-  before_validation :set_university_and_website_from_about, on: :create
 
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.
@@ -123,6 +123,7 @@ class Communication::Block < ApplicationRecord
 
   def language
     return @language if defined?(@language)
+    return unless about.respond_to?(:language)
     @language ||= about.language
   end
 
@@ -135,15 +136,13 @@ class Communication::Block < ApplicationRecord
   def paste(about)
     block = self.dup
     block.about = about
-    block.heading = nil
     block.save
     block
   end
 
-  def localize_for!(new_localization, localized_heading_id = nil)
+  def localize_for!(new_localization)
     localized_block = self.dup
     localized_block.about = new_localization
-    localized_block.heading_id = localized_heading_id
     localized_block.save
   end
 
@@ -152,7 +151,11 @@ class Communication::Block < ApplicationRecord
   end
 
   def full_text
-    template.full_text
+    "#{title} #{template.full_text}"
+  end
+
+  def slug
+    title.blank? ? '' : "#{title.parameterize}"
   end
 
   def to_s

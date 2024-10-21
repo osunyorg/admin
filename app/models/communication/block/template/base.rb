@@ -79,10 +79,6 @@ class Communication::Block::Template::Base
     false
   end
 
-  def heading_title
-    block.title
-  end
-
   def empty?
     false
   end
