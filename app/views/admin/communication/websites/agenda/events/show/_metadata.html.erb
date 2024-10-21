@@ -1,6 +1,6 @@
 <%= osuny_panel t('metadata'), small: true do %>
   <%= @l10n.published ? Communication::Website::Agenda::Event.human_attribute_name(:published)
-                      : t('admin.communication.website.agenda.events.draft') %>
+                      : t('admin.communication.website.agenda.event.localizations.draft') %>
   <% if @event.categories.any? %>
     <% category_names = @event.categories.map { |category| category.to_s_in(current_language) } %>
     <%= t(

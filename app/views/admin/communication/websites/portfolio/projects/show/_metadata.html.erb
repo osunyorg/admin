@@ -1,6 +1,6 @@
 <%= osuny_panel t('metadata'), small: true do %>
   <%= @l10n.published ? Communication::Website::Portfolio::Project::Localization.human_attribute_name(:published)
-                      : t('admin.communication.website.portfolio.projects.draft') %>
+                      : t('admin.communication.website.portfolio.project.localizations.draft') %>
 
   <% if @project.categories.any? %>
     <% category_names = @project.categories.map { |category| category.to_s_in(current_language) } %>
