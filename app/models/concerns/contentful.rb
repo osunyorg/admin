@@ -1,23 +1,15 @@
 module Contentful
   extend ActiveSupport::Concern
 
+  LARGE_NUMBER_OF_BLOCKS = 5
+
   included do
     has_many :blocks, as: :about, class_name: 'Communication::Block', dependent: :destroy
     has_many :headings, as: :about, class_name: 'Communication::Block::Heading', dependent: :destroy
   end
 
   def contents
-    unless @contents
-      @contents = []
-      blocks.without_heading.published.ordered.each do |block|
-        @contents << block
-      end
-      headings.ordered.each do |heading|
-        @contents << heading
-        @contents.concat heading.blocks
-      end
-    end
-    @contents
+    @contents ||= blocks.published.ordered
   end
 
   def contents_full_text
@@ -25,19 +17,19 @@ module Contentful
   end
 
   def contents_dependencies
-    blocks + headings
+    blocks
+  end
+
+  def large_number_of_blocks?
+    blocks.count >= LARGE_NUMBER_OF_BLOCKS
   end
 
   # Basic rule is: TOC if 2 titles or more
   def show_toc?
-    headings.many?
+    blocks.template_title.published.many?
   end
 
-  def generate_heading(title)
-    headings.create(university: university, title: title)
-  end
-
-  def generate_block(heading, kind, data)
-    blocks.create(university: university, heading: heading, template_kind: kind, data: data.to_json)
+  def generate_block(kind, title: nil, data: {})
+    blocks.create(university: university, template_kind: kind, title: title, data: data.to_json)
   end
 end

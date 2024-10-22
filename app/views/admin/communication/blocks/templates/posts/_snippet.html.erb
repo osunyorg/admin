@@ -8,9 +8,11 @@
     l10n = post.localization_for(block.language)
     next if l10n.nil?
     %>
-    <div class="col-lg-6 mb-4">
-      <%= kamifusen_tag l10n.featured_image, width: 300, class: 'img-fluid mb-2' if l10n.featured_image.attached? %>
-      <p><%= post.to_s_in(current_language) %></p>
+    <div class="col-lg-6">
+      <article class="mb-4">
+        <%= kamifusen_tag l10n.featured_image, width: 300, class: 'img-fluid mb-2' if l10n.featured_image.attached? %>
+        <p><%= post.to_s_in(current_language) %></p>
+      </article>
     </div>
   <% end %>
   </div>

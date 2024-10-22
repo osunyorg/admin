@@ -15,6 +15,11 @@ class Server::WebsitesController < Server::ApplicationController
     redirect_back(fallback_location: server_websites_path, notice: t('server_admin.websites.clean_and_rebuild_all_websites_notice'))
   end
 
+  def clean_and_rebuild
+    Communication::Website::CleanAndRebuildJob.perform_later(@website.id)
+    redirect_back(fallback_location: server_website_path(@website), notice: t('server_admin.websites.clean_and_rebuild_website_notice'))
+  end
+
   def sync_theme_version
     @website.get_current_theme_version!
   end

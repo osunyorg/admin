@@ -97,7 +97,7 @@ class University::Organization::Localization < ApplicationRecord
   end
 
   def backlinks_blocks(website)
-    website.blocks.organizations
+    website.blocks.template_organizations
   end
 
 end
