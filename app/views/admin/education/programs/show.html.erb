@@ -96,7 +96,7 @@
     <% if @l10n.logo.attached? %>
       <%= osuny_label Education::Program::Localization.human_attribute_name('logo') %>
       <div class="mb-5">
-        <%= kamifusen_tag @l10n.logo, class: 'img-fluid' %>
+        <%= kamifusen_tag @l10n.logo, class: 'img-fluid svg-fluid' %>
       </div>
     <% end %>
     <%= render 'admin/application/featured_image/show', about: @l10n, small: true %>
