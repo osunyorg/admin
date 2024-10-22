@@ -1,0 +1,7 @@
+<div class="content-editor__actions row my-4">
+  <div class="offset-lg-4 col-lg-8 col-xxl-6">
+    <%= link_to t('admin.communication.blocks.add'),
+                new_admin_communication_block_path(about_id: about.id, about_type: about.class.name),
+                class: 'btn btn-lg btn-dark js-content-editor__add-block' if can? :create, Communication::Block %>
+  </div>
+</div>

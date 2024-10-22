@@ -33,8 +33,6 @@ registration_url: >-
   <%= @l10n.registration_url %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
-presentation: >-
-  <%= prepare_text_for_static @l10n.presentation %>
 position: <%= program.position %>
 <% if @l10n.parent %>
 parent:
@@ -134,6 +132,8 @@ certifications:
     certified: <%= program.qualiopi_certified %>
     text: >-
       <%= prepare_html_for_static @l10n.qualiopi_text %>
+presentation: >-
+  <%= prepare_html_for_static @l10n.presentation %>
 <%
 [
   :accessibility,

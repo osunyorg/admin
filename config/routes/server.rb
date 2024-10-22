@@ -7,10 +7,11 @@ namespace :server do
       post :clean_and_rebuild_all_websites
     end
     member do
-      post :sync_theme_version
       post :analyse
-      post :update_theme
+      post :clean_and_rebuild
+      post :sync_theme_version
       post :unlock_for_background_jobs
+      post :update_theme
     end
   end
   resources :blocks, only: [:index, :show] do
