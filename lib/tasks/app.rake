@@ -8,7 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    Migrations::TurnToHtml.migrate
+    Migrations::FixKeyFigures.migrate
   end
 
   namespace :websites do

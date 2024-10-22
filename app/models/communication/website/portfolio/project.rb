@@ -96,7 +96,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   protected
 
   def abouts_with_projects_block
-    website.blocks.projects.collect(&:about)
+    website.blocks.template_projects.collect(&:about)
   end
 
 end

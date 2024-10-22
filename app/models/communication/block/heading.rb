@@ -27,6 +27,8 @@
 #  fk_rails_6d3de8388e  (parent_id => communication_block_headings.id)
 #  fk_rails_ae82723550  (university_id => universities.id)
 #
+
+# TODO TITLE remove
 class Communication::Block::Heading < ApplicationRecord
   include AsIndirectObject
   include Orderable
