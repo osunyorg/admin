@@ -1,7 +1,7 @@
 <div class="organizations-list">
   <% block.template.selected_elements.each do |element| %>
     <% next if element.best_name.blank? %>
-    <div class="me-2 bg-light p-2">
+    <div class="me-2 mb-2 bg-light p-2">
       <% if element.best_logo_blob %>
         <%= kamifusen_tag element.best_logo_blob %>
       <% else %>
