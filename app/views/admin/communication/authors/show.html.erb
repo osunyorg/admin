@@ -1,0 +1,22 @@
+<% content_for :title, @l10n %>
+
+<div class="mb-5">
+  <p><%= t('admin.communication.author.show_person_html') %></p>
+  <%= link_to t('show'), admin_university_person_path(@author) %>
+</div>
+
+<% @author.author_websites.each do |website| %>
+  <div class="row mb-5">
+    <div class="col-lg-3">
+      <%= render 'admin/communication/websites/website', website: website %>
+    </div>
+    <div class="col-lg-9"
+      <% posts = @author.communication_website_posts.where(website: website) %>
+      <p>
+        <%= posts.count %>
+        <%= Communication::Website::Post.model_name.human(count: posts.count).downcase %>
+      </p>
+      <%= render 'admin/communication/websites/posts/list', posts: posts %>
+    </div>
+  </div>
+<% end  %>

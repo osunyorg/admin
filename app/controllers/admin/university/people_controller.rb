@@ -99,7 +99,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       :picture, :picture_delete, :picture_infos,
       :habilitation, :tenure,
       :linkedin_visibility, :twitter_visibility, :mastodon_visibility,
-      :is_researcher, :is_teacher, :is_administration, :is_alumnus, :user_id,
+      :is_researcher, :is_teacher, :is_administration, :is_alumnus, :is_author, :user_id,
       research_laboratory_ids: [], category_ids: [],
       localizations_attributes: [
         :id, :slug, :first_name, :last_name,
