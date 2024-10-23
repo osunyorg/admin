@@ -5,9 +5,7 @@
     next if page_l10n.nil? 
     %>
     <div class="col-sm-6 mb-3">
-      <% if page_l10n.featured_image.attached? %>
-        <%= kamifusen_tag page_l10n.featured_image %>
-      <% end %>
+      <%= kamifusen_tag page_l10n.featured_image, class: 'img-fluid mb-2' if page_l10n.featured_image.attached? %>
       <p><%= page_l10n.to_s %></p>
     </div>
   <% end %>
