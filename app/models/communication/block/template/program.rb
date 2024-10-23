@@ -15,7 +15,7 @@ class Communication::Block::Template::Program < Communication::Block::Template::
     @selected_programs ||= elements.map { |element| 
       program = element.program
       l10n = program.localization_for(about.language)
-      next unless l10n.published
+      next if l10n.draft?
       element.program 
     }.compact
   end
