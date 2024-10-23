@@ -38,6 +38,7 @@ class Communication::Website::Page < ApplicationRecord
   include Localizable
   include Orderable
   include Sanitizable
+  include Searchable
   include WithAutomaticMenus
   include WithMenuItemTarget
   include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before WithPublication

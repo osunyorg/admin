@@ -26,6 +26,7 @@
 #
 class Communication::Extranet::Document < ApplicationRecord
   include Sanitizable
+  include Searchable
   include Localizable
   include LocalizableOrderByNameScope
   include WithUniversity
