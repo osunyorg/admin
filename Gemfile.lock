@@ -610,8 +610,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
-    snail (2.3.0)
-      activesupport
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -757,7 +755,6 @@ DEPENDENCIES
   simple_form_bs5_file_input
   simple_form_password_with_hints
   simplecov
-  snail
   spring
   sprockets-rails (~> 3)
   summernote-rails!

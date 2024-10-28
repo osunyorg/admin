@@ -28,28 +28,39 @@ class Osuny::AddressFormatter
     country_object&.to_s || country_string
   end
 
-  def country_code
+  def country_alpha2
     country_object&.alpha2 || country
   end
 
-  def to_s
-    postal_address.gsub("\n", ' ')
+  def country_alpha3
+    country_object&.alpha3 || country
   end
 
+  def to_s
+    ActionController::Base.helpers.strip_tags(to_html)
+  end
+
+  # <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+  #   <span itemprop="streetAddress">15 rue des Bouviers</span>
+  #   <span itemprop="description">Quartier Saint-Michel</span>
+  #   <span itemprop="postalCode">33000</span> <span itemprop="addressLocality">Bordeaux</span>
+  #   <span itemprop="addressCountry">FRANCE</span>
+  # </address>
   def to_html
-    "<p>#{postal_address.gsub("\n", "<br>")}</p>"
+    html = '<address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">'
+    html += " <span itemprop=\"streetAddress\">#{address}</span>" if address.present?
+    html += " <span itemprop=\"description\">#{address_additional}</span>" if address_additional.present?
+    html += " <span itemprop=\"postalCode\">#{zipcode}</span>" if zipcode.present?
+    html += " <span itemprop=\"addressLocality\">#{city}</span>" if city.present?
+    html += " <span itemprop=\"addressCountry\">#{country.upcase}</span>" if country.present?
+    html += '</address>'
+    html
   end
 
   protected
 
-  def postal_address
-    @postal_address ||= Snail.new(
-      line_1: address,
-      line_2: address_additional,
-      city: city,
-      postal_code: zipcode,
-      country: country_code
-    ).to_s
+  def country_string
+    about.try(:country)
   end
 
   def country_object
@@ -58,9 +69,5 @@ class Osuny::AddressFormatter
     else
       ISO3166::Country.find_country_by_any_name country_string
     end
-  end
-
-  def country_string
-    about.try(:country)
   end
 end
