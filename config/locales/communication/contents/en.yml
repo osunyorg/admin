@@ -67,8 +67,6 @@ en:
             close: Close block edition
             title: Block edition
         empty: This block is empty and will not appear
-        headings:
-          add: Add a title
         templates:
           agenda:
             description: A list of upcoming events.
@@ -717,7 +715,7 @@ en:
             description: In “Organize structure” mode, you see only a small preview of each block. This is the ideal mode to organize long documents.
             tab: Organize structure
           write:
-            description: In “Write content” mode, you can move blocks and headings anywhere you like, independently of each other. For example, you can move a heading higher up in the document without it taking its blocks with it.
+            description: In “Write content” mode, you can move blocks anywhere you like, independently of each other. For example, you can move a title higher up in the document without it taking its blocks with it.
             tab: Write content
   enums:
     communication:

@@ -14,8 +14,6 @@ fr:
         published: Publié ?
         template: Type de bloc
         title: Nom (facultatif)
-      communication/block/heading:
-        title: Titre
       communication/extranet:
         about: Sujet de l'extranet
         about_: Extranet indépendant

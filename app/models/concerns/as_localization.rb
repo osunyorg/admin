@@ -71,7 +71,7 @@ module AsLocalization
     # Blocks need an about, so we save before localizing blocks
     l10n.save
 
-    # Handle headings & blocks if object has any
+    # Handle blocks if object has any
     localize_contents!(l10n) if respond_to?(:contents)
     l10n
   end

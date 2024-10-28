@@ -103,7 +103,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
   end
 
   def show_toc?
-    about.try(:show_toc?) || headings.many?
+    about.try(:show_toc?) || blocks.template_title.many?
   end
 
   def to_s
