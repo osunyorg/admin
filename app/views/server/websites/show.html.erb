@@ -91,6 +91,10 @@
               analyse_server_website_path(@website),
               method: :post,
               class: button_classes %>
+  <%= link_to 'Reconstruire (clean and rebuild)',
+              clean_and_rebuild_server_website_path(@website),
+              method: :post,
+              class: button_classes %>
   <%= link_to 'Changer d\'université',
               edit_server_website_path(@website),
               class: button_classes %>

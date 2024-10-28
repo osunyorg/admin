@@ -51,6 +51,7 @@ en:
           sync: Sync
           update: Update theme
       clean_and_rebuild_all_websites_notice: All themes will be updated. This can take a few minutes.
+      clean_and_rebuild_website_notice: The website will be rebuilt. This can take a few minutes.
       connections_count: "%{count} connexions"
       details: detail
       events_count: "%{count} events"

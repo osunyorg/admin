@@ -102,6 +102,10 @@ class Communication::Website::Page::Localization < ApplicationRecord
     end
   end
 
+  def show_toc?
+    about.try(:show_toc?) || headings.many?
+  end
+
   def to_s
     "#{title}"
   end

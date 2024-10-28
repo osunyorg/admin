@@ -2,9 +2,9 @@ namespace :api do
   get 'lheo' => 'lheo#index', defaults: { format: :xml }
   # v0
   get 'osuny' => '/api/osuny#redirect_to_v1' # redirect to v1
-  post 'osuny/websites/theme-released' => '/api/osuny/server/websites#theme_released'
+  post 'osuny/websites/theme-released' => '/api/osuny/server/websites#theme_released', defaults: {format: :json}
   # v1
-  namespace :osuny, path: 'osuny/v1', defaults: { format: :json } do 
+  namespace :osuny, path: 'osuny/v1', defaults: { format: :json } do
     namespace :communication do
       resources :websites, only: [:index, :show] do
         resources :events, controller: 'websites/events', only: [:index, :show, :create, :update]

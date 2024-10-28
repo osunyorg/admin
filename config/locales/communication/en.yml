@@ -213,6 +213,7 @@ en:
       communication/website/portfolio/project/localization:
         featured_image: Featured image
         published: Published
+        subtitle: Subtitle
         title: Title
       communication/website/post:
         author: Author
@@ -237,6 +238,7 @@ en:
         published_at: Publication date
         reading_time: Reading time
         slug: Slug
+        subtitle: Subtitle
         text: Text
         title: Title
         website: Website
