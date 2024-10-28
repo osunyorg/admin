@@ -4,7 +4,7 @@ module WithGeolocation
   included do
     geocoded_by :full_street_address
 
-    after_validation :geocode, if: -> (geocodable) { geocodable.full_street_address_present? && geocodable.full_street_address_changed? }
+    after_save_commit :geocode_in_background_if_necessary
   end
 
   def full_street_address
@@ -26,6 +26,11 @@ module WithGeolocation
     latitude.present? && longitude.present?
   end
 
+  def geocode_in_background_if_necessary
+    return unless geocodable? && needs_new_geocoding?
+    GeocodingJob.perform_later(self)
+  end
+
   def latlong
     @latlong ||= [latitude, longitude]
   end
@@ -36,11 +41,16 @@ module WithGeolocation
 
   protected
 
-  def full_street_address_present?
-    address.present? || zipcode.present? || city.present?
+  def geocodable?
+    address.present? ||
+    zipcode.present? ||
+    city.present?
   end
 
-  def full_street_address_changed?
-    address_changed? || zipcode_changed? || city_changed? || country_changed?
+  def needs_new_geocoding?
+    saved_change_to_address? ||
+    saved_change_to_zipcode? || 
+    saved_change_to_city? ||
+    saved_change_to_country?
   end
 end
