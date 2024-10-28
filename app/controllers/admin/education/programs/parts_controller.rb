@@ -6,17 +6,6 @@ class Admin::Education::Programs::PartsController < Admin::Education::Programs::
                 :load_localization,
                 :redirect_if_not_localized
 
-  def presentation
-    breadcrumb
-    add_breadcrumb t('education.program.parts.presentation.label')
-  end
-
-  def edit_presentation
-    breadcrumb
-    add_breadcrumb t('education.program.parts.presentation.label'), presentation_admin_education_program_path(id: @program, program_id: nil)
-    add_breadcrumb t('edit')
-  end
-
   def pedagogy
     @teacher_involvements = @program.university_person_involvements
                                     .includes(:person)
@@ -25,7 +14,7 @@ class Admin::Education::Programs::PartsController < Admin::Education::Programs::
     add_breadcrumb t('education.program.parts.pedagogy.label')
   end
 
-  def edit_pedagogy
+  def pedagogy_edit
     @teacher_people = current_university.people
                                         .teachers
                                         .accessible_by(current_ability)
@@ -35,24 +24,13 @@ class Admin::Education::Programs::PartsController < Admin::Education::Programs::
     add_breadcrumb t('edit')
   end
 
-  def results
-    breadcrumb
-    add_breadcrumb t('education.program.parts.results.label')
-  end
-
-  def edit_results
-    breadcrumb
-    add_breadcrumb t('education.program.parts.results.label'), results_admin_education_program_path(id: @program, program_id: nil)
-    add_breadcrumb t('edit')
-  end
-
   def admission
     @roles = @program.university_roles.ordered
     breadcrumb
     add_breadcrumb t('education.program.parts.admission.label')
   end
 
-  def edit_admission
+  def admission_edit
     breadcrumb
     add_breadcrumb t('education.program.parts.admission.label'), admission_admin_education_program_path(id: @program, program_id: nil)
     add_breadcrumb t('edit')
@@ -63,7 +41,7 @@ class Admin::Education::Programs::PartsController < Admin::Education::Programs::
     add_breadcrumb t('education.program.parts.certification.label')
   end
 
-  def edit_certification
+  def certification_edit
     breadcrumb
     add_breadcrumb t('education.program.parts.certification.label'), certification_admin_education_program_path(id: @program, program_id: nil)
     add_breadcrumb t('edit')

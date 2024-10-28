@@ -8,7 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    Migrations::HeadingsJob.perform_later
+    # No fix yet
   end
 
   namespace :websites do

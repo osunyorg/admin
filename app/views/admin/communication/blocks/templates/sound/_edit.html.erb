@@ -1,13 +1,8 @@
-<div class="row pure__row--small">
-  <div class="col-md-6">
-    <%= block_component_edit block, :file,
-            hint: audio_formats_accepted_hint,
-            accept: default_audio_formats_accepted %>
-    <%= block_component_edit block, :title %>
-  </div>
-  <div class="col-md-6">
-    <%= block_component_edit block, :transcription,
-            label: t('admin.communication.blocks.components.text.transcription.label'),
-            placeholder: t('admin.communication.blocks.components.text.transcription.placeholder'), rows: 10 %>
-  </div>
-</div>
+<%= block_component_edit block, :file,
+      hint: audio_formats_accepted_hint,
+      accept: default_audio_formats_accepted %>
+<%= block_component_edit block, :title %>
+<%= block_component_edit block, :transcription,
+      label: t('admin.communication.blocks.components.transcription.label'),
+      placeholder: t('admin.communication.blocks.components.transcription.placeholder'), 
+      summernote_config: 'link' %>

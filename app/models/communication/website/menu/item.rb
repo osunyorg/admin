@@ -33,8 +33,8 @@
 #
 class Communication::Website::Menu::Item < ApplicationRecord
   include Initials
+  include Orderable
   include Sanitizable
-  include WithPosition
   include WithTree
   include WithUniversity
 
@@ -62,7 +62,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
              foreign_key: :parent_id,
              dependent: :destroy
 
-  enum kind: {
+  enum :kind, {
     blank: 0,
     url: 10,
     page: 20,
@@ -73,7 +73,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     volume: 61,
     paper: 63,
     location: 70
-  }, _prefix: :kind
+  }, prefix: :kind
 
   validates :title, presence: true
   validates :about, presence: true, if: :has_about?

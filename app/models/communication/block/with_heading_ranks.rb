@@ -1,6 +1,6 @@
 module Communication::Block::WithHeadingRanks
   extend ActiveSupport::Concern
-  
+
   DEFAULT_HEADING_LEVEL = 2 # h1 is the page title
 
   def heading_rank_self

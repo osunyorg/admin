@@ -25,10 +25,10 @@
 #
 class University::Person::Involvement < ApplicationRecord
   include Localizable
-  include WithPosition
+  include Orderable
   include WithUniversity
 
-  enum kind: {
+  enum :kind, {
     administrator: 10,
     researcher: 20,
     teacher: 30

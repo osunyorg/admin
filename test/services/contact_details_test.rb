@@ -64,6 +64,12 @@ class ContactDetailsTest < ActiveSupport::TestCase
         'https://github.com/noesya',
         'https://www.github.com/noesya',
       ]
+    batch_test :github, 'osunyorg/admin', 'https://github.com/osunyorg/admin', [
+        'osunyorg/admin',
+        'github.com/osunyorg/admin',
+        'https://github.com/osunyorg/admin',
+        'https://www.github.com/osunyorg/admin',
+      ]
   end
 
   test 'instagram' do

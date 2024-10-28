@@ -38,10 +38,10 @@ class Communication::Block < ApplicationRecord
   }
 
   include AsIndirectObject
+  include Orderable
   include WithAccessibility
   include WithHeadingRanks
   include WithHtmlClass
-  include WithPosition
   include WithTemplate
   include WithUniversity
   include Sanitizable
@@ -52,7 +52,7 @@ class Communication::Block < ApplicationRecord
   # 2000 storytelling
   # 3000 references
   # 4000 utilities
-  enum template_kind: {
+  enum :template_kind, {
     agenda: 3100,
     call_to_action: 900,
     chapter: 50,
@@ -81,7 +81,7 @@ class Communication::Block < ApplicationRecord
     title: 1001,
     video: 52,
     volumes: 3310
-  }, _prefix: :template
+  }, prefix: :template
 
   belongs_to  :about, polymorphic: true
   belongs_to  :communication_website,

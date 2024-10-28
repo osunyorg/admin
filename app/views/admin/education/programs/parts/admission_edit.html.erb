@@ -1,0 +1,35 @@
+<% content_for :title, @l10n %>
+<%= simple_form_for [:admin, @program] do |f| %>
+  <%= f.simple_fields_for :localizations, @l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+    <%= f.hidden_field :part, value: 'admission' %>
+
+    <div class="row">
+      <%
+      [
+        :prerequisites,
+        :registration,
+        :other,
+        :pricing,
+        :pricing_initial,
+        :pricing_continuing,
+        :pricing_apprenticeship,
+        :accessibility,
+        :contacts
+      ].each do |property| %>
+        <div class="col-xxl-4 col-md-6 mb-4">
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: property %>
+        </div>
+      <% end %>
+      <div class="col-xxl-4 col-md-6 mb-4">
+        <%= lf.input :registration_url %>
+      </div>
+    </div>
+
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
+  <% end %>
+<% end %>

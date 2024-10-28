@@ -12,6 +12,6 @@ class ContactDetails::Github < ContactDetails::SocialNetwork
                         .remove('www.')
                         .remove('github.com')
                         .remove('@')
-                        .remove('/')
+                        .delete_prefix('/')
   end
 end
