@@ -13,13 +13,14 @@ window.osuny.contentEditor.offcanvas = {
         var i,
             button;
         this.editButtons = document.querySelectorAll('.js-content-editor__element__edit');
-        this.addBlockButton = document.querySelector('.js-content-editor__add-block');
+        this.addBlockButtons = document.querySelectorAll('.js-content-editor__add-block');
         for (i = 0; i < this.editButtons.length; i += 1) {
             button = this.editButtons[i];
             button.addEventListener('click', this.onBlockActionClick.bind(this));
         }
-        if (this.addBlockButton) {
-            this.addBlockButton.addEventListener('click', this.onBlockActionClick.bind(this));
+        for (i = 0; i < this.addBlockButtons.length; i += 1) {
+            button = this.addBlockButtons[i];
+            button.addEventListener('click', this.onBlockActionClick.bind(this));
         }
     },
 

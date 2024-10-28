@@ -7,9 +7,9 @@ teacher_involvements = program.university_person_involvements
 administrator_involvements = program.involvements_through_roles
                                    .includes(:person)
                                    .ordered_by_name(language)
-
 %>---
-<%= render 'admin/application/static/title', about: @l10n %>
+title: >-
+  <%= prepare_text_for_static @l10n.to_s %>
 <%= render 'admin/application/static/permalink', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
@@ -33,8 +33,6 @@ registration_url: >-
   <%= @l10n.registration_url %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
-presentation: >-
-  <%= prepare_text_for_static @l10n.presentation %>
 position: <%= program.position %>
 <% if @l10n.parent %>
 parent:
@@ -140,6 +138,8 @@ certifications:
     certified: <%= program.qualiopi_certified %>
     text: >-
       <%= prepare_html_for_static @l10n.qualiopi_text %>
+presentation: >-
+  <%= prepare_html_for_static @l10n.presentation %>
 <%
 [
   :accessibility,

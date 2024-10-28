@@ -36,11 +36,6 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     selected_pages
   end
 
-  def heading_title
-    block.title.present?  ? block.title
-                          : page&.to_s_in(block.language)
-  end
-
   protected
 
   def selected_pages_selection

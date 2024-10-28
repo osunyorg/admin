@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_17_081524) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -128,24 +127,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_081524) do
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
   end
 
-  create_table "communication_block_headings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.string "about_type", null: false
-    t.uuid "about_id", null: false
-    t.string "title"
-    t.integer "level", default: 2
-    t.uuid "parent_id"
-    t.integer "position"
-    t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "migration_identifier"
-    t.index ["about_type", "about_id"], name: "index_communication_block_headings_on_about"
-    t.index ["parent_id"], name: "index_communication_block_headings_on_parent_id"
-    t.index ["slug"], name: "index_communication_block_headings_on_slug"
-    t.index ["university_id"], name: "index_communication_block_headings_on_university_id"
-  end
-
   create_table "communication_blocks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "about_type"
@@ -158,12 +139,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_081524) do
     t.string "title"
     t.boolean "published", default: true
     t.uuid "communication_website_id"
-    t.uuid "heading_id"
     t.string "migration_identifier"
     t.string "html_class"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
-    t.index ["heading_id"], name: "index_communication_blocks_on_heading_id"
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
 
@@ -683,6 +662,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_081524) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "subtitle"
     t.index ["about_id"], name: "idx_on_about_id_a668ef6090"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_e653b6273a"
     t.index ["language_id"], name: "idx_on_language_id_25a0c1e472"
@@ -755,6 +735,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_081524) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "subtitle"
     t.index ["about_id"], name: "index_communication_website_post_localizations_on_about_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_f6354f61f0"
     t.index ["language_id"], name: "index_communication_website_post_localizations_on_language_id"
@@ -1809,9 +1790,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_081524) do
   add_foreign_key "administration_location_localizations", "universities"
   add_foreign_key "administration_locations", "universities"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
-  add_foreign_key "communication_block_headings", "communication_block_headings", column: "parent_id"
-  add_foreign_key "communication_block_headings", "universities"
-  add_foreign_key "communication_blocks", "communication_block_headings", column: "heading_id"
   add_foreign_key "communication_blocks", "communication_websites"
   add_foreign_key "communication_blocks", "universities"
   add_foreign_key "communication_extranet_connections", "communication_extranets", column: "extranet_id"
