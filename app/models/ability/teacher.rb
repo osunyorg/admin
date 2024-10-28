@@ -5,9 +5,6 @@ class Ability::Teacher < Ability
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program::Localization', about_id: managed_program_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: managed_person_localization_ids
     can :create, Communication::Block
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Education::Program::Localization', about_id: managed_program_localization_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: managed_person_localization_ids
-    can :create, Communication::Block::Heading
     can [:read, :children], Education::Program, university_id: @user.university_id
     can :manage, University::Person, user_id: @user.id
     cannot :create, University::Person

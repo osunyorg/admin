@@ -67,8 +67,6 @@ fr:
             close: Fermer l'édition du bloc
             title: Édition de bloc
         empty: Ce bloc est vide et n'apparaitra pas
-        headings:
-          add: Ajouter un titre
         templates:
           agenda:
             description: Une liste d'événements à venir.
