@@ -9,8 +9,8 @@ hide_blank ||= false
 title = object.class.human_attribute_name(property)
 %>
 <% unless hide_blank && is_blank %>
-  <%= osuny_label title %>
-  <div>
+  <div class="mb-4">
+    <%= osuny_label title %><br>
     <% 
     if source 
       # source is a l10n
