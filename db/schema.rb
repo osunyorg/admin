@@ -349,7 +349,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.uuid "parent_id"
     t.boolean "is_programs_root", default: false
     t.uuid "program_id"
-    t.boolean "is_taxonomy", default: false
     t.index ["communication_website_id"], name: "idx_communication_website_agenda_cats_on_website_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_agenda_categories_on_program_id"
@@ -550,7 +549,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.boolean "header_cta"
     t.string "header_cta_label"
     t.string "header_cta_url"
-    t.string "header_text"
+    t.text "header_text"
     t.string "meta_description"
     t.string "migration_identifier"
     t.boolean "published"
@@ -690,7 +689,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.uuid "parent_id"
     t.uuid "program_id"
     t.boolean "is_programs_root", default: false
-    t.boolean "is_taxonomy", default: false
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_post_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_post_categories_on_program_id"
@@ -1682,7 +1680,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
   end
 
   create_table "university_person_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "biography"
+    t.text "biography"
     t.string "first_name"
     t.string "last_name"
     t.string "linkedin"
