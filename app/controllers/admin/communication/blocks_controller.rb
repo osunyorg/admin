@@ -124,21 +124,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def reorder_object
     @id = @object[:id]
-    @object[:kind] == 'heading' ? reorder_heading
-                                : reorder_block
-  end
-
-  def reorder_heading
-    @heading = current_university.communication_block_headings.find(@id)
-    @heading.update_columns position: @index_heading
-    @index_block = 0
-    @index_heading += 1
-  end
-
-  def reorder_block
     @block = current_university.communication_blocks.find(@id)
-    @block.update_columns position: @index_block,
-                          heading_id: @heading&.id
+    @block.update_columns position: @index_block
     @index_block += 1
   end
 
