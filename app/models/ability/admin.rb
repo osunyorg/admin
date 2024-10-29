@@ -50,8 +50,6 @@ class Ability::Admin < Ability
   def admin_communication
     can :manage, Communication::Block, university_id: @user.university_id
     can :create, Communication::Block
-    can :manage, Communication::Block::Heading, university_id: @user.university_id
-    can :create, Communication::Block::Heading
     can :manage, Communication::Website, university_id: @user.university_id
     # Est-ce bien raisonnable de laisser supprimer un site ?
     # Le risque de faussse manip est grand.

@@ -127,24 +127,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.index ["criterion_id"], name: "index_administration_qualiopi_indicators_on_criterion_id"
   end
 
-  create_table "communication_block_headings", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.string "about_type", null: false
-    t.uuid "about_id", null: false
-    t.string "title"
-    t.integer "level", default: 2
-    t.uuid "parent_id"
-    t.integer "position"
-    t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "migration_identifier"
-    t.index ["about_type", "about_id"], name: "index_communication_block_headings_on_about"
-    t.index ["parent_id"], name: "index_communication_block_headings_on_parent_id"
-    t.index ["slug"], name: "index_communication_block_headings_on_slug"
-    t.index ["university_id"], name: "index_communication_block_headings_on_university_id"
-  end
-
   create_table "communication_blocks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "about_type"
@@ -157,12 +139,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.string "title"
     t.boolean "published", default: true
     t.uuid "communication_website_id"
-    t.uuid "heading_id"
     t.string "migration_identifier"
     t.string "html_class"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
-    t.index ["heading_id"], name: "index_communication_blocks_on_heading_id"
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
 
@@ -354,7 +334,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.boolean "feature_jobs", default: false
     t.text "sass"
     t.text "css"
-    t.uuid "default_language_id", null: false
+    t.uuid "default_language_id"
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["default_language_id"], name: "index_communication_extranets_on_default_language_id"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
@@ -569,7 +549,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.boolean "header_cta"
     t.string "header_cta_label"
     t.string "header_cta_url"
-    t.text "header_text"
+    t.string "header_text"
     t.string "meta_description"
     t.string "migration_identifier"
     t.boolean "published"
@@ -1721,7 +1701,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
   end
 
   create_table "university_person_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.text "biography"
+    t.string "biography"
     t.string "first_name"
     t.string "last_name"
     t.string "linkedin"
@@ -1829,9 +1809,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
   add_foreign_key "administration_location_localizations", "universities"
   add_foreign_key "administration_locations", "universities"
   add_foreign_key "administration_qualiopi_indicators", "administration_qualiopi_criterions", column: "criterion_id"
-  add_foreign_key "communication_block_headings", "communication_block_headings", column: "parent_id"
-  add_foreign_key "communication_block_headings", "universities"
-  add_foreign_key "communication_blocks", "communication_block_headings", column: "heading_id"
   add_foreign_key "communication_blocks", "communication_websites"
   add_foreign_key "communication_blocks", "universities"
   add_foreign_key "communication_extranet_connections", "communication_extranets", column: "extranet_id"
