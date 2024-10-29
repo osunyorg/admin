@@ -20,8 +20,7 @@ class MediaController < ApplicationController
   end
 
   def download
-    data = URI.parse(@blob.url).read
-    send_data data,
+    send_data URI.parse(@blob.url).read,
               type: "#{@blob.content_type}",
               disposition: "attachment; filename=#{@blob.filename.to_s}"
   end
