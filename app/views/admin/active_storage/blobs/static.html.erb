@@ -11,7 +11,6 @@ if ratio.present?
   format = 'portrait' if ratio < 1
 end
 base_url = university&.url || ""
-media_endpoint_path = medium_path(signed_id: @about.signed_id, filename_with_transformations: @about.filename)
 %>
 <%# TODO: Replace @about.url with the media endpoint when it's ready %>
 <%= raw({
@@ -21,7 +20,8 @@ media_endpoint_path = medium_path(signed_id: @about.signed_id, filename_with_tra
   "height" => height,
   "ratio" => ratio,
   "format" => format,
-  "url" => "#{base_url}#{media_endpoint_path}",
-  "direct_url" => @about.url
+  "url" => "#{base_url}#{medium_path(signed_id: @about.signed_id, filename_with_transformations: @about.filename)}",
+  "direct_url" => @about.url,
+  "download_url" => "#{base_url}#{download_path(signed_id: @about.signed_id, filename_with_transformations: @about.filename)}"
 }.compact.to_yaml) %>
 <%- end -%>

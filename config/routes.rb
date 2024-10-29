@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   end
 
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
+  get '/download/:signed_id/:filename_with_transformations' => 'media#download', as: :download
 
   draw 'api'
   draw 'server'

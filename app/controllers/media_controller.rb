@@ -19,6 +19,10 @@ class MediaController < ApplicationController
     redirect_to blob_or_variant_url
   end
 
+  def download
+    # TODO
+  end
+
   protected
 
   def load_blob
