@@ -69,24 +69,49 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     :color
   ]
   PERMITTED_PARAMS_FOR_LOCALIZATIONS = [
-    :id, :language_id,
-    :name, :published,
-    :registration_contact,
-    :logo, :logo_delete, 
-    :favicon, :favicon_delete, 
+    :cookies_policy,
+    :favicon,
+    :favicon_delete,
     :home_sentence,
-    :terms, :privacy_policy, :cookies_policy
+    :id,
+    :language_id,
+    :logo,
+    :logo_delete,
+    :name,
+    :privacy_policy,
+    :published,
+    :registration_contact,
+    :terms
   ]
   EXTENDED_PERMITTED_PARAMS = [
-    :host, :about_id, :about_type, :sass,
-    :feature_alumni, :feature_documents, :feature_contacts, :feature_jobs, :feature_posts,
-    :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping
+    :about_id,
+    :about_type,
+    :feature_alumni,
+    :feature_contacts,
+    :feature_documents,
+    :feature_jobs,
+    :feature_posts,
+    :has_sso,
+    :host,
+    :sass,
+    :sso_cert,
+    :sso_mapping,
+    :sso_name_identifier_format,
+    :sso_target_url
   ]
   EXTENDED_PERMITTED_PARAMS_FOR_LOCALIZATIONS = [
     :sso_button_label
   ]
 
   def extranet_params
+    params.require(:communication_extranet)
+          .permit(permitted_params)
+          .merge(
+            university_id: current_university.id
+          )
+  end
+
+  def permitted_params
     permitted_params = PERMITTED_PARAMS
     localizations_attributes = PERMITTED_PARAMS_FOR_LOCALIZATIONS
     if can?(:create, Communication::Extranet)
@@ -97,10 +122,6 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     permitted_params << {
       localizations_attributes: localizations_attributes
     }
-    params.require(:communication_extranet)
-          .permit(permitted_params)
-          .merge(
-            university_id: current_university.id
-          )
+    permitted_params
   end
 end
