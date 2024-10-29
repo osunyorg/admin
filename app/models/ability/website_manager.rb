@@ -92,16 +92,6 @@ class Ability::WebsiteManager < Ability
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Organization::Localization', about_id: University::Organization::Localization.where(university_id: @user.university_id).pluck(:id)
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: University::Person::Localization.where(university_id: @user.university_id).pluck(:id)
     can :create, Communication::Block
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Category::Localization', about_id: managed_agenda_category_localization_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Page::Localization', about_id: managed_page_localization_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Portfolio::Category::Localization', about_id: managed_portfolio_category_localization_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Portfolio::Project::Localization', about_id: managed_portfolio_project_localizations_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post::Category::Localization', about_id: managed_post_category_localization_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'Communication::Website::Post::Localization', about_id: managed_post_localization_ids
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Organization::Localization', about_id: University::Organization::Localization.where(university_id: @user.university_id).pluck(:id)
-    can :manage, Communication::Block::Heading, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: University::Person::Localization.where(university_id: @user.university_id).pluck(:id)
-    can :create, Communication::Block::Heading
   end
 
 end
