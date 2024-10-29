@@ -28,7 +28,9 @@ class MediaController < ApplicationController
 
   def static
     @about = @blob
-    render template: 'admin/active_storage/blobs/static', layout: false, content_type: "text/plain; charset=utf-8"
+    render  template: 'admin/active_storage/blobs/static',
+            layout: false,
+            content_type: "text/plain; charset=utf-8"
   end
 
   protected
