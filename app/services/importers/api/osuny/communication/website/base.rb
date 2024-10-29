@@ -34,7 +34,6 @@ class Importers::Api::Osuny::Communication::Website::Base
   end
 
   def import_blocks
-    heading = nil
     blocks.each do |b|
       migration_identifier = b[:migration_identifier]
       template_kind = b[:template_kind]

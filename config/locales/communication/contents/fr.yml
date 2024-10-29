@@ -67,8 +67,6 @@ fr:
             close: Fermer l'édition du bloc
             title: Édition de bloc
         empty: Ce bloc est vide et n'apparaitra pas
-        headings:
-          add: Ajouter un titre
         templates:
           agenda:
             description: Une liste d'événements à venir.
@@ -717,7 +715,7 @@ fr:
             description: Dans le mode “Organiser le plan”, vous ne voyez qu'un petit aperçu de chaque bloc. C'est le mode idéal pour ranger les documents longs.
             tab: Organiser le plan
           write:
-            description: Dans le mode “Écrire le contenu”, vous pouvez déplacer les blocs et les titres où vous voulez, indépendamment les uns des autres. Ainsi, vous pouvez déplacer un titre plus haut dans le document sans qu'il n'emporte ses blocs.
+            description: Dans le mode “Écrire le contenu”, vous pouvez déplacer les blocs où vous voulez, indépendamment les uns des autres. Ainsi, vous pouvez déplacer un titre plus haut dans le document sans qu'il n'emporte ses blocs.
             tab: Écrire le contenu
   enums:
     communication:
