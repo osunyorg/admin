@@ -59,8 +59,9 @@ Rails.application.routes.draw do
     get '/' => 'dashboard#redirect_to_default_language'
   end
 
+  get '/media/download/:signed_id/:filename_with_transformations' => 'media#download', as: :download
+  get '/media/static/:signed_id' => 'media#static'
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
-  get '/download/:signed_id/:filename_with_transformations' => 'media#download', as: :download
 
   draw 'api'
   draw 'server'
