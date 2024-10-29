@@ -38,7 +38,7 @@ class MediaController < ApplicationController
   def load_blob
     begin
       @blob = ActiveStorage::Blob.find_signed! params[:signed_id]
-      # TODO 404 si pas la même université ?
+      raise_404_unless(blob.university == current_university)
     rescue ActiveSupport::MessageVerifier::InvalidSignature
       raise ActiveRecord::RecordNotFound
     end

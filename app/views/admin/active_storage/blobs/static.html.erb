@@ -22,6 +22,6 @@ base_url = university&.url || ""
   "format" => format,
   "url" => "#{base_url}#{medium_path(signed_id: @about.signed_id, filename_with_transformations: @about.filename)}",
   "direct_url" => @about.url,
-  "download_url" => "#{base_url}#{download_path(signed_id: @about.signed_id, filename_with_transformations: @about.filename)}"
+  "download_url" => "#{base_url}#{download_medium_path(signed_id: @about.signed_id, filename_with_transformations: @about.filename)}"
 }.compact.to_yaml) %>
 <%- end -%>
