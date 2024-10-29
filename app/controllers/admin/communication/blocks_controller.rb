@@ -6,12 +6,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   before_action :redirect_if_block_language_is_incorrect, only: [:edit, :update]
 
   def reorder
-    # Cette action est très étrange, elle ne met pas en ordre les blocs seuls.
-    # En fait, elle met en ordre dans le mode "Ecrire le contenu", à la fois les headings et les blocks.
     @ids = params[:ids] || []
     @index_block = 0
-    @index_heading = 0
-    @heading = nil
     @ids.values.each do |object|
       @object = object
       reorder_object
@@ -124,21 +120,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def reorder_object
     @id = @object[:id]
-    @object[:kind] == 'heading' ? reorder_heading
-                                : reorder_block
-  end
-
-  def reorder_heading
-    @heading = current_university.communication_block_headings.find(@id)
-    @heading.update_columns position: @index_heading
-    @index_block = 0
-    @index_heading += 1
-  end
-
-  def reorder_block
     @block = current_university.communication_blocks.find(@id)
-    @block.update_columns position: @index_block,
-                          heading_id: @heading&.id
+    @block.update_columns position: @index_block
     @index_block += 1
   end
 
@@ -163,22 +146,22 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   rescue
   end
 
-    def about_path
-      # Les headings sont toujours affectés à des localisations
-      l10n = @block.about
-      # La localisation porte sur un objet, par exemple une University::Person ou un Communication::Website::Post
-      object_edited = l10n.about
-      # La formation ou la page concernée
-      path_method = "admin_#{object_edited.class.base_class.to_s.parameterize.underscore}_path"
-      path_method_options = {
-        id: object_edited.id,
-        lang: l10n.language,
-        website_id: website_id,
-        extranet_id: extranet_id,
-        journal_id: journal_id
-      }
-      public_send path_method, **path_method_options
-    end
+  def about_path
+    # Les blocs sont toujours affectés à des localisations
+    l10n = @block.about
+    # La localisation porte sur un objet, par exemple une University::Person ou un Communication::Website::Post
+    object_edited = l10n.about
+    # La formation ou la page concernée
+    path_method = "admin_#{object_edited.class.base_class.to_s.parameterize.underscore}_path"
+    path_method_options = {
+      id: object_edited.id,
+      lang: l10n.language,
+      website_id: website_id,
+      extranet_id: extranet_id,
+      journal_id: journal_id
+    }
+    public_send path_method, **path_method_options
+  end
 
   def breadcrumb
     short_breadcrumb

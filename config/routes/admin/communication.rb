@@ -127,11 +127,6 @@ namespace :communication do
   end
   resources :blocks, controller: 'blocks', except: [:index] do
     collection do
-      resources :headings, controller: 'blocks/headings', except: [:index, :show] do
-        collection do
-          post :reorder
-        end
-      end
       post :reorder
     end
     member do

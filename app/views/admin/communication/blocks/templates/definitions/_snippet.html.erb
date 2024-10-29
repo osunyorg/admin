@@ -1,6 +1,7 @@
+<%= block_component_snippet block, :description %>
 <dl>
   <% block.template.elements.each do |element| %>
     <dt><%= block_component_snippet block, :title, template: element %></dt>
-    <dd class="text-muted"><%= block_component_snippet block, :description, template: element %></dd>
+    <dd><%= block_component_snippet block, :description, template: element %></dd>
   <% end %>
 </dl>

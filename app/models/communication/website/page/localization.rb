@@ -58,13 +58,14 @@ class Communication::Website::Page::Localization < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
+  delegate :is_home?, to: :about
+
+  has_summernote :summary
+
   validates :title, presence: true
   validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
-
   before_validation :set_communication_website_id, on: :create
   before_validation :set_published_unless_draftable
-
-  delegate :is_home?, to: :about
 
   def template_static
     "admin/communication/websites/pages/static"
@@ -99,6 +100,10 @@ class Communication::Website::Page::Localization < ApplicationRecord
     else
       ['pages', slug_with_ancestors_slugs, '_index.html'].compact_blank.join('/')
     end
+  end
+
+  def show_toc?
+    about.try(:show_toc?) || blocks.template_title.many?
   end
 
   def to_s

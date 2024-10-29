@@ -14,8 +14,6 @@ fr:
         published: Publié ?
         template: Type de bloc
         title: Nom (facultatif)
-      communication/block/heading:
-        title: Titre
       communication/extranet:
         about: Sujet de l'extranet
         about_: Extranet indépendant
@@ -213,6 +211,7 @@ fr:
       communication/website/portfolio/project/localization:
         featured_image: Image à la une
         published: Publié
+        subtitle: Sous-titre
         title: Titre
       communication/website/post:
         author: Auteur·rice
@@ -237,6 +236,7 @@ fr:
         published_at: Date de publication
         reading_time: Temps de lecture
         slug: Identifiant
+        subtitle: Sous-titre
         text: Texte
         title: Titre
         website: Site Web
@@ -351,8 +351,10 @@ fr:
         languages: Langues
       website:
         agenda:
+          event:
+            localizations:
+              draft: Brouillon
           events:
-            draft: Brouillon
             formatted_time_zone: "Fuseau horaire : %{time_zone}"
             none: Pas encore d'événements
         confirm_localization:
@@ -371,17 +373,19 @@ fr:
         localizations:
           fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
           title: Internationalisation
+        page:
+          localizations:
+            draft: Brouillon
+            published: Publiée
+            published_status: État de publication
         pages:
           as_list: Voir en liste
           as_tree: Organiser l'arborescence
           delete_special_page_notice: Impossible de supprimer cette page
-          draft: Brouillon
           duplicate_special_page_notice: Impossible de dupliquer cette page
           full_width_status: Pleine largeur
           in: dans
           in_full_width: en pleine largeur
-          published: Publiée
-          published_status: État de publication
           show: Voir la page
           special_pages:
             organization:
@@ -393,8 +397,10 @@ fr:
         permalinks:
           creation_error: "Erreur lors de la création. Le chemin renseigné est-il au bon format ?"
         portfolio:
+          project:
+            localizations:
+              draft: Brouillon
           projects:
-            draft: Brouillon
             in: dans %{categories}
             none: Pas encore de projet
         post:
@@ -536,12 +542,14 @@ fr:
           teacher:
             slug: equipe-pedagogique
             title: Équipe pédagogique
+      post:
+        localizations:
+          published: Publiée
+          unpublished: Non publiée
       posts:
         new_curation: Nouvelle curation
         none: Il n'y a pas encore d'actualités.
-        published: Publiée
         successful_batch_update: Les actualités ont bien été mises à jour
-        unpublished: Non publiée
       security: Sécurité
       see_all: Voir la liste complète (%{number} éléments)
   curation:

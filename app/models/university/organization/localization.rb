@@ -45,8 +45,8 @@ class University::Organization::Localization < ApplicationRecord
   include WithGitFiles
   include WithUniversity
 
+  has_summernote :summary
   has_summernote :text
-
   has_one_attached_deletable :logo
   has_one_attached_deletable :logo_on_dark_background
 
@@ -97,7 +97,7 @@ class University::Organization::Localization < ApplicationRecord
   end
 
   def backlinks_blocks(website)
-    website.blocks.organizations
+    website.blocks.template_organizations
   end
 
 end
