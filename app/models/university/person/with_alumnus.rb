@@ -54,12 +54,6 @@ module University::Person::WithAlumnus
     }
   end
 
-  def add_to_cohort(cohort)
-    cohorts << cohort unless cohort.in?(cohorts)
-    diploma_years << cohort.academic_year unless cohort.academic_year.in? diploma_years
-    diploma_programs << cohort.program unless cohort.program.in? diploma_programs
-  end
-
   def find_cohorts
     # based on https://stackoverflow.com/questions/3579924/accepts-nested-attributes-for-with-find-or-create
     cohorts = []
