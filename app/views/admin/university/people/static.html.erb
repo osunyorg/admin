@@ -18,6 +18,8 @@ linkTitle: >-
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
+person: >-
+  <%= prepare_text_for_static @l10n.to_s %>
 first_name: >-
   <%= prepare_text_for_static @l10n.first_name %>
 last_name: >-
