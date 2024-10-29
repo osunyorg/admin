@@ -12,11 +12,12 @@ class Communication::Block::Template::Program < Communication::Block::Template::
   end
 
   def selected_programs
-    @selected_programs ||= elements.map { |element| 
+    @selected_programs ||= elements.map { |element|
       program = element.program
+      next if program.nil?
       l10n = program.localization_for(about.language)
       next if l10n.draft?
-      element.program 
+      element.program
     }.compact
   end
 
@@ -27,7 +28,7 @@ class Communication::Block::Template::Program < Communication::Block::Template::
   def available_programs
     website.education_programs
   end
-  
+
   def children
     selected_programs
   end
