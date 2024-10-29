@@ -19,9 +19,9 @@
                                       admin_communication_author_path(person),
                                       classes: 'stretched-link'  %>
           </p>
-          <% if person.communication_website_posts.any? %>
+          <% if person.posts.any? %>
             <p class="small text-muted mb-0">
-              <%= person.communication_website_posts.size %>
+              <%= person.posts.size %>
               <%= Communication::Website::Post.model_name.human(count: person.communication_website_posts.size).downcase %>
             </p>
           <% end %>

@@ -32,7 +32,7 @@
 
 <div class="mt-5 small">
   <p><%= t('admin.education.programs.teacher.show_person_html') %></p>
-  <%= link_to t('show'), admin_university_person_path(@teacher) %>
+  <%= link_to t('show'), admin_university_person_path(@teacher), class: 'action' %>
 </div>
 
 <% content_for :action_bar_left do %>

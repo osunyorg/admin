@@ -22,7 +22,7 @@ if current_user.favorites.none?
             <p class="small mt-n2 mb-1"><%= about.class.model_name.human %></p>
             <%= link_to t('show'),
                         [:admin, about],
-                        class: 'stretched-link' %>
+                        class: 'action stretched-link' %>
           <% end %>
         </div>
       <% end %>

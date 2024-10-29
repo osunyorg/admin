@@ -1,31 +1,16 @@
-module University::Person::WithEducation
+module University::Person::WithAlumnus
   extend ActiveSupport::Concern
 
   included do
-    has_many                      :involvements_as_teacher,
-                                  -> { where(kind: 'teacher') },
-                                  class_name: 'University::Person::Involvement',
-                                  dependent: :destroy
-
-    has_many                      :education_programs_as_teacher,
-                                  through: :involvements_as_teacher,
-                                  source: :target,
-                                  source_type: "Education::Program"
-
-    has_many                      :education_programs_as_administrator,
-                                  -> { distinct },
-                                  through: :roles_as_administrator,
-                                  source: :target,
-                                  source_type: "Education::Program"
-
     has_and_belongs_to_many       :cohorts,
                                   class_name: '::Education::Cohort',
                                   foreign_key: :university_person_id,
                                   association_foreign_key: :education_cohort_id
-
     accepts_nested_attributes_for :cohorts,
                                   reject_if: :all_blank,
                                   allow_destroy: true
+    before_validation :find_cohorts
+    validates_associated :cohorts
 
     # Dénormalisation des liens via cohorts, pour la recherche par facettes
     has_and_belongs_to_many       :diploma_years,
@@ -38,8 +23,22 @@ module University::Person::WithEducation
                                   foreign_key: :university_person_id,
                                   association_foreign_key: :education_program_id
 
-    before_validation :find_cohorts
-    validates_associated :cohorts
+    has_many                      :experiences,
+                                  class_name: "University::Person::Experience",
+                                  dependent: :destroy
+
+    accepts_nested_attributes_for :experiences,
+                                  reject_if: :all_blank,
+                                  allow_destroy: true
+
+    validates_associated :experiences
+
+    scope :for_alumni_organization, -> (organization_ids, language = nil) {
+      left_joins(:experiences)
+        .where(university_person_experiences: { organization_id: organization_ids })
+        .select("university_people.*")
+        .distinct
+    }
 
     scope :for_alumni_program, -> (program_ids, language = nil) {
       left_joins(:cohorts)
@@ -77,5 +76,4 @@ module University::Person::WithEducation
     end
     self.cohorts = cohorts
   end
-
 end

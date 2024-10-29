@@ -1,4 +1,4 @@
-module University::Person::WithResearch
+module University::Person::WithRealmResearch
   extend ActiveSupport::Concern
 
   included do
@@ -24,11 +24,21 @@ module University::Person::WithResearch
                             association_foreign_key: :research_publication_id
                             alias :publications :research_publications
 
+    has_and_belongs_to_many :research_journal_papers,
+                            class_name: 'Research::Journal::Paper',
+                            join_table: :research_journal_papers_researchers,
+                            foreign_key: :researcher_id
+
     has_and_belongs_to_many :research_laboratories,
                             class_name: 'Research::Laboratory',
                             foreign_key: :university_person_id,
                             association_foreign_key: :research_laboratory_id
                             alias :laboratories :research_laboratories
+
+    has_many                :researcher_websites,
+                            -> { distinct },
+                            through: :research_journal_papers,
+                            source: :websites
 
     scope :with_hal_identifier, -> { where.not(hal_form_identifier: [nil,'']) }
   end
