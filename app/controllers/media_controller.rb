@@ -20,7 +20,10 @@ class MediaController < ApplicationController
   end
 
   def download
-    # TODO
+    data = open(@blob.url).read
+    send_data data,
+              type: "#{@blob.content_type}",
+              disposition: "attachment; filename=#{@blob.filename.to_s}"
   end
 
   def static
