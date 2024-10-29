@@ -14,8 +14,6 @@ en:
         published: Published?
         template: Kind of block
         title: Name (optional)
-      communication/block/heading:
-        title: Title
       communication/extranet:
         about: About
         about_: Independent extranet
