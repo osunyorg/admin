@@ -14,6 +14,8 @@ hal:
   url: "<%= @about.hal_url %>"
 abstract: >-
   <%= prepare_html_for_static @about.abstract %>
+journal_title: >-
+  <%= prepare_text_for_static @about.journal_title %>
 citation_full: >-
   <%= prepare_html_for_static @about.citation_full %>
 authors_list: >-
