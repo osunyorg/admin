@@ -1,0 +1,60 @@
+<% content_for :title, t('admin.communication.website.technical.label') %>
+
+<%= simple_form_for [:admin, @website] do |f| %>
+  <%= f.simple_fields_for :localizations, @l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
+    <div class="row">
+      <div class="col-lg-6 col-xxl-4">
+        <%= osuny_panel t('metadata') do %>
+          <%= f.input :url %>
+          <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
+          <%= f.input :in_production %>
+        <% end %>
+      </div>
+      <div class="col-lg-6 col-xxl-4">
+        <%= osuny_panel t('communication.website.git') do %>
+          <%= f.input :git_provider, include_blank: false %>
+          <%= f.input :git_endpoint %>
+          <%= f.input :access_token,
+                      as: :string,
+                      placeholder: masked_string(f.object.access_token),
+                      hint: t("simple_form.hints.communication_website.access_token_#{f.object.access_token.blank? ? 'without' : 'with'}_existing").html_safe,
+                      input_html: {
+                        autocomplete: 'access_token',
+                        role: 'presentation',
+                        value: ''
+                      }
+                      %>
+          <%= f.input :repository %>
+          <%= f.input :git_branch %>
+          <%= f.input :deployment_status_badge,
+                      as: :string,
+                      input_html: {
+                        autocomplete: 'deployment_status_badge',
+                        role: 'presentation'
+                      }
+                      %>
+        <% end %>
+      </div>
+      <div class="col-lg-6 col-xxl-4">
+        <%= osuny_panel t('communication.website.hosting') do %>
+          <%= f.input :deuxfleurs_hosting, hint: @website.deuxfleurs_identifier %>
+          <%= f.input :autoupdate_theme %>
+          <%= f.input :plausible_url %>
+        <% end %>
+        <%= osuny_panel t('communication.website.showcase') do %>
+          <%= f.input :in_showcase, hint: link_to(t('admin.communication.website.see_showcase'), "https://#{ENV['OSUNY_SHOWCASE']}", target: :_blank) %>
+          <%= f.association :showcase_tags, as: :check_boxes %>
+        <% end %>
+      </div>
+    </div>
+
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
+  <% end %>
+<% end %>
