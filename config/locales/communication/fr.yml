@@ -524,7 +524,7 @@ fr:
             title: Papiers
           research_publication:
             slug: publications
-            title: Publications HAL
+            title: Publications
           research_volume:
             slug: volumes
             title: Volumes
