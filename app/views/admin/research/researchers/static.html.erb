@@ -2,17 +2,12 @@
 # @l10n is a localization facet University::Person::Localization::Researcher
 person = @l10n.about
 person_l10n = @l10n.person_l10n
+title = t('university.person.facets.researcher.publications_of', name: @l10n.to_s, locale: @l10n.language.iso_code)
 breadcrumb_title = t('university.person.facets.researcher.publications', locale: @l10n.language.iso_code)
 %>---
-title: >-
-  <%= t('university.person.facets.researcher.publications_of', name: @l10n.to_s, locale: @l10n.language.iso_code) %>
+<%= render 'admin/application/static/core', about: @l10n, forced_title: title %>
 <%= render 'admin/application/static/breadcrumbs', about: person_l10n, last_link: breadcrumb_title %>
-<%= render 'admin/application/static/permalink', about: @l10n %>
-<%= render 'admin/application/static/design',
-            about: person,
-            l10n: @l10n,
-            full_width: true,
-            toc_offcanvas: true %>
+<%= render 'admin/application/static/design', about: person, l10n: @l10n, full_width: true, toc_offcanvas: true %>
 person: >-
   <%= person_l10n.to_s %>
 first_name: >-
