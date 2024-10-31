@@ -339,7 +339,7 @@ en:
       title: Categories
     communication:
       author:
-        show_person_html: "This page only shows posts written by the person as an author.<br>If you wish to view or modify the person's details, click on the link below."
+        show_person_html: "This page only shows the last posts written by the person as an author.<br>If you wish to view or modify the person's details, click on the link below."
       block:
         copied: The block has been copied to clipboard!
         drag_and_drop: Drag and drop
