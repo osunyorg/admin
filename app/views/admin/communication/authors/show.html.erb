@@ -11,7 +11,7 @@
       <%= render 'admin/communication/websites/website', website: website %>
     </div>
     <div class="col-lg-9"
-      <% posts = @author.communication_website_posts.where(website: website) %>
+      <% posts = @author.communication_website_posts.where(website: website).limit(5) %>
       <p>
         <%= posts.count %>
         <%= Communication::Website::Post.model_name.human(count: posts.count).downcase %>
@@ -27,7 +27,7 @@
       <%= render 'admin/communication/extranets/extranet', extranet: extranet %>
     </div>
     <div class="col-lg-9"
-      <% posts = @author.communication_extranet_posts.where(extranet: extranet) %>
+      <% posts = @author.communication_extranet_posts.where(extranet: extranet).limit(5) %>
       <p>
         <%= posts.count %>
         <%= Communication::Extranet::Post.model_name.human(count: posts.count).downcase %>

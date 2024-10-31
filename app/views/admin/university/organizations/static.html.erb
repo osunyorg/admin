@@ -1,6 +1,6 @@
 <%
 # this version has to incremented every time you change something in the file, to invalidate the cache
-version = 2
+version = 3
 # Pas dans le controller parce que ça se fait dans les background jobs, à partir du @about
 organization = @l10n.about
 cache_key = [organization, @l10n, @website.id, version]
@@ -26,6 +26,7 @@ kind:
   code: "<%= organization.kind %>"
   label: "<%= organization.kind_i18n %>"
 contact_details:
+<%= render 'admin/application/static/postal_address', about: organization, l10n: @l10n, language: @l10n.language %>
 <%= render 'admin/application/static/contact_detail', variable: :address_name, data: @about.address_name, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :address, data: organization.address, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @about.address_additional, kind: ContactDetails::Base %>
