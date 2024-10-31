@@ -10,7 +10,7 @@ module Communication::Website::WithProgramCategories
   end
 
   def set_programs_categories_safely
-    [post_categories, agenda_categories, portfolio_categories].each do |objects|
+    categories_collections.each do |objects|
       programs_root_category = set_programs_categories_root_for!(objects)
       set_programs_categories_at_level_for! objects, programs_root_category, education_programs.root.ordered
     end
@@ -18,6 +18,14 @@ module Communication::Website::WithProgramCategories
   end
 
   protected
+
+  def categories_collections
+    collections = []
+    collections << post_categories if feature_posts?
+    collections << agenda_categories if feature_agenda?
+    collections << portfolio_categories if feature_portfolio?
+    collections
+  end
 
   def set_programs_categories_root_for!(objects)
     # 1. Vérifier qu'une catégorie "is_programs_root = true" existe
