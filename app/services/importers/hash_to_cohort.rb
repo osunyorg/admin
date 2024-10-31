@@ -5,7 +5,7 @@ module Importers
       @hash = hash
       @error = nil
       extract_variables
-      person.add_to_cohort cohort if valid?
+      add_to_cohort(person, cohort) if valid?
     end
 
     def valid?
