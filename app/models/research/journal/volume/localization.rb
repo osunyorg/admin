@@ -51,7 +51,7 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  # Necessary for the search to work
+  # Necessary for the search
   def contents_full_text
     ''
   end
