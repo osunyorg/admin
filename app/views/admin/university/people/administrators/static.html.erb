@@ -7,8 +7,7 @@ breadcrumb_title = t('university.person.facets.administrator.responsabilities', 
 %>
 ---
 <%= render 'admin/application/static/core', about: @l10n, forced_title: title %>
-<%= render 'admin/application/static/breadcrumbs', about: person_l10n, add_link_on_last: true -%>
-  - title: "<%= breadcrumb_title %>"
+<%= render 'admin/application/static/breadcrumbs', about: person_l10n, last_item: breadcrumb_title %>
 <%= render 'admin/application/static/design',
             about: person,
             l10n: @l10n,
