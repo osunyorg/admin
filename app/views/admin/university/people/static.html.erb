@@ -2,6 +2,7 @@
 # this version has to be incremented every time you change something in the file, to invalidate the cache
 version = 6
 person = @l10n.about
+university = person.university
 language = @l10n.language
 cache_key = [person, @l10n, @website.id, version]
 cache cache_key do
@@ -111,13 +112,11 @@ administrative_missions:
 <% end %>
 <% end %>
 <%= render 'admin/application/connections/backlinks', about: @l10n %>
-<% if @l10n.categories.any? %>
-persons_categories:
-<% @l10n.categories.each do |category| %>
-  - slug: "<%= category.slug %>"
-    path: "<%= category.current_permalink_in_website(@website)&.path %>"
-<% end %>
-<% end %>
+<%= render 'admin/application/categories/static',
+            about: person,
+            l10n: @l10n,
+            categories: university.person_categories,
+            key: :persons_categories %>
 biography: >-
   <%= prepare_html_for_static @l10n.biography %>
 <%= render 'admin/communication/contents/static', about: @l10n %>

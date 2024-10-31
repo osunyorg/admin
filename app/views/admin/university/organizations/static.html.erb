@@ -3,6 +3,7 @@
 version = 4
 # Pas dans le controller parce que ça se fait dans les background jobs, à partir du @about
 organization = @l10n.about
+university = organization.university
 cache_key = [organization, @l10n, @website.id, version]
 cache cache_key do
 %>---
@@ -46,26 +47,11 @@ logo: "<%= @about.logo.blob.id %>"
 <% if @about.logo_on_dark_background.attached? %>
 logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
 <% end %>
-<% if organization.categories.any? %>
-organizations_categories:
-<% organization.categories.each do |category|
-  category_l10n = category.localization_for(@about.language)
-  if category_l10n.nil?
-    category_slug = nil
-    category_path = nil
-    category_name = category.original_localization&.name
-  else
-    category_slug = category_l10n.slug
-    category_path = category_l10n.current_permalink_in_website(@website)&.path
-    category_name = category_l10n.name
-  end
-%>
-  - slug: "<%= category_slug %>"
-    path: "<%= category_path %>"
-    name: >-
-      <%= prepare_text_for_static category_name %>
-<% end %>
-<% end %>
+<%= render 'admin/application/categories/static',
+            about: organization,
+            l10n: @l10n,
+            categories: university.organization_categories,
+            key: :organizations_categories %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---
 <%= prepare_html_for_static @about.text %>
