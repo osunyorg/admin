@@ -1,16 +1,14 @@
 <%
 # this version has to be incremented every time you change something in the file, to invalidate the cache
-version = 4
+version = 6
 person = @l10n.about
 language = @l10n.language
 cache_key = [person, @l10n, @website.id, version]
 cache cache_key do
 %>---
-title: >-
-  <%= prepare_text_for_static @l10n.to_s %>
 linkTitle: >-
   <%= @l10n.to_s_alphabetical %>
-<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: person,
@@ -46,6 +44,7 @@ website: >-
   <%= prepare_text_for_static @l10n.url %>
 contact_details:
 <% if person.address_is_public? %>
+<%= render 'admin/application/static/postal_address', about: person, l10n: @l10n, language: language %>
 <%= render 'admin/application/static/contact_detail', variable: :address, data: person.address, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :zipcode, data: person.zipcode, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :city, data: person.city, kind: ContactDetails::Base %>

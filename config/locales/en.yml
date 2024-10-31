@@ -255,6 +255,7 @@ en:
       category: Filter by category
       date: Filter by date
       element: Filter by %{element}
+      facet: Filter by responsibility
       kind: Filter by kind
       role: Filter by role
     buttons:

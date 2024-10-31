@@ -33,12 +33,14 @@ class Communication::Extranet::Post < ApplicationRecord
   belongs_to :category, class_name: 'Communication::Extranet::Post::Category', optional: true
   belongs_to :extranet, class_name: 'Communication::Extranet'
 
-  scope :published, -> (language) { 
+  after_save_commit :update_author_status_if_necessary!, if: :saved_change_to_author_id?
+
+  scope :published, -> (language) {
     joins(:localizations)
     .where(communication_extranet_post_localizations: { language_id: language.id, published: true })
     .where('communication_extranet_post_localizations.published_at <= ?', Time.zone.now)
    }
-  
+
   scope :ordered, -> (language) {
     localization_published_at_select = <<-SQL
       COALESCE(
@@ -67,4 +69,10 @@ class Communication::Extranet::Post < ApplicationRecord
     .group("communication_extranet_posts.id")
     .order("localization_pinned DESC, localization_published_at DESC, created_at DESC")
   }
+
+  protected
+
+  def update_author_status_if_necessary!
+    author.update(is_author: true) if author && !author.is_author?
+  end
 end

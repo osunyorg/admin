@@ -255,6 +255,7 @@ fr:
       category: Filtrer par catégorie
       date: Filtrer par date
       element: Filtrer par %{element}
+      facet: Filtrer par responsabilité
       kind: Filtrer par type
       role: Filtrer par rôle
     buttons:
