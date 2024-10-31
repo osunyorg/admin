@@ -64,7 +64,7 @@ class Communication::Website::Menu < ApplicationRecord
   end
 
   def git_path(website)
-    "data/menus/#{language.iso_code}/#{identifier}.yml"
+    "data/menus/#{language.iso_code}/#{identifier}.yml" if website.active_language_ids.include?(language_id)
   end
 
   def template_static

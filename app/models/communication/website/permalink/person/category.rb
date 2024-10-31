@@ -20,7 +20,7 @@ class Communication::Website::Permalink::Person::Category < Communication::Websi
 
   def substitutions
     {
-      slug: about.slug
+      slug: about.slug_with_ancestors_slugs
     }
   end
 

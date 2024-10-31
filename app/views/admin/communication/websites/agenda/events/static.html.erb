@@ -18,11 +18,10 @@ language = @l10n.language
 <%= render 'admin/application/shared_image/static', about: @l10n %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
-<% if @l10n.categories.any? %>
-events_categories:
-<% @l10n.categories.each do |category| %>
-  - "<%= category.slug %>"
-<% end %>
-<% end %>
+<%= render 'admin/application/categories/static',
+            about: event,
+            l10n: @l10n,
+            categories: @website.agenda_categories,
+            key: :events_categories %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---

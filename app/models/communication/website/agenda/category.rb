@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  is_programs_root         :boolean          default(FALSE)
+#  is_taxonomy              :boolean          default(FALSE)
 #  position                 :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -27,24 +28,16 @@
 #  fk_rails_7b5ad84dda  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Category < ApplicationRecord
+  include AsCategory
   include AsDirectObject
   include Localizable
-  include Orderable
   include Sanitizable
   include WithMenuItemTarget
-  include WithTree
   include WithUniversity
 
-  belongs_to              :parent,
-                          class_name: 'Communication::Website::Agenda::Category',
-                          optional: true
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_many                :children,
-                          class_name: 'Communication::Website::Agenda::Category',
-                          foreign_key: :parent_id,
-                          dependent: :destroy
   has_and_belongs_to_many :events,
                           class_name: 'Communication::Website::Agenda::Event',
                           join_table: :communication_website_agenda_events_categories,

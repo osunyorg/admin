@@ -13,21 +13,7 @@
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
           <%= lf.input :text, as: :summernote if strip_tags(l10n.text).present? %>
         <% end %>
-        <% if @categories.any? %>
-          <div class="row pure__row--small">
-            <div class="col-md-6">
-              <%= osuny_panel t('activerecord.attributes.communication/website/post.categories') do %>
-                <%= f.association :categories,
-                                  label_text: false,
-                                  as: :check_boxes,
-                                  collection: osuny_collection_tree(
-                                    @categories.root,
-                                    localized: true
-                                  ) %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
+        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
       <div class="col-md-4">

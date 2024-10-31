@@ -24,6 +24,7 @@
                               except: category,
                               localized: true
                             ) %>
+          <%= f.input :is_taxonomy, label: t('admin.categories.is_taxonomy') if category.possible_taxonomy? %>
         <% end %>
         <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
       </div>
