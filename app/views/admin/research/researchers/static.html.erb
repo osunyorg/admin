@@ -6,7 +6,7 @@ title = t('university.person.facets.researcher.publications_of', name: @l10n.to_
 breadcrumb_title = t('university.person.facets.researcher.publications', locale: @l10n.language.iso_code)
 %>---
 <%= render 'admin/application/static/core', about: @l10n, forced_title: title %>
-<%= render 'admin/application/static/breadcrumbs', about: person_l10n, last_link: breadcrumb_title %>
+<%= render 'admin/application/static/breadcrumbs', about: person_l10n, last_item: breadcrumb_title %>
 <%= render 'admin/application/static/design', about: person, l10n: @l10n, full_width: true, toc_offcanvas: true %>
 person: >-
   <%= person_l10n.to_s %>
