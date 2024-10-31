@@ -1517,6 +1517,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_110237) do
     t.datetime "updated_at", null: false
     t.uuid "parent_id"
     t.integer "position", default: 0
+    t.boolean "is_taxonomy", default: false
     t.index ["parent_id"], name: "index_university_organization_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_organization_categories_on_university_id"
   end
@@ -1633,6 +1634,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_110237) do
     t.datetime "updated_at", null: false
     t.uuid "parent_id"
     t.integer "position", default: 0
+    t.boolean "is_taxonomy", default: false
     t.index ["parent_id"], name: "index_university_person_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_person_categories_on_university_id"
   end

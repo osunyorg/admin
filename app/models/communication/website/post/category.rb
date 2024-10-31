@@ -28,24 +28,16 @@
 #  fk_rails_e58348b119  (program_id => education_programs.id)
 #
 class Communication::Website::Post::Category < ApplicationRecord
+  include AsCategory
   include AsDirectObject
   include Localizable
-  include Orderable
   include Sanitizable
   include WithMenuItemTarget
-  include WithTree
   include WithUniversity
 
-  belongs_to              :parent,
-                          class_name: 'Communication::Website::Post::Category',
-                          optional: true
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_many                :children,
-                          class_name: 'Communication::Website::Post::Category',
-                          foreign_key: :parent_id,
-                          dependent: :destroy
   has_and_belongs_to_many :posts,
                           class_name: 'Communication::Website::Post',
                           join_table: :communication_website_categories_posts,

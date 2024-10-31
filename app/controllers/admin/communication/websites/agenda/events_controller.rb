@@ -85,8 +85,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def categories
-    @website.agenda_categories
-            .ordered
+    @website.agenda_categories.ordered
   end
 
   def event_params
