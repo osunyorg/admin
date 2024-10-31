@@ -74,10 +74,10 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
   end
 
   def permitted_params
-    permitted_params = params_base
-    localizations_attributes = localization_params_base
+    permitted_params = base_params
+    localizations_attributes = base_localization_params
     if can?(:create, Communication::Extranet)
-      permitted_params += params_extended
+      permitted_params += extended_params
       localizations_attributes += localization_params_extended
     end
     permitted_params << :default_language_id if @extranet&.persisted?
@@ -87,13 +87,13 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     permitted_params
   end
 
-  def params_base
+  def base_params
     [
       :color
     ]
   end
 
-  def params_extended
+  def extended_params
     [
       :about_id,
       :about_type,
@@ -112,7 +112,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     ]
   end
 
-  def localization_params_base
+  def base_localization_params
     [
       :cookies_policy,
       :favicon,
@@ -130,7 +130,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     ]
   end
 
-  def localization_params_extended
+  def extended_localization_params
     [
       :sso_button_label
     ]
