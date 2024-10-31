@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_31_101804) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -1496,6 +1496,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.datetime "updated_at", null: false
     t.uuid "parent_id"
     t.integer "position", default: 0
+    t.boolean "is_taxonomy", default: false
     t.index ["parent_id"], name: "index_university_organization_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_organization_categories_on_university_id"
   end
@@ -1612,6 +1613,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.datetime "updated_at", null: false
     t.uuid "parent_id"
     t.integer "position", default: 0
+    t.boolean "is_taxonomy", default: false
     t.index ["parent_id"], name: "index_university_person_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_person_categories_on_university_id"
   end

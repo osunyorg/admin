@@ -3,6 +3,7 @@
 # Table name: university_person_categories
 #
 #  id            :uuid             not null, primary key
+#  is_taxonomy   :boolean          default(FALSE)
 #  position      :integer          default(0)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -20,19 +21,11 @@
 #  fk_rails_4c00a79930  (parent_id => university_person_categories.id)
 #
 class University::Person::Category < ApplicationRecord
+  include AsCategory
   include AsIndirectObject
   include Localizable
-  include Orderable
-  include WithTree
   include WithUniversity
 
-  belongs_to :parent,
-             class_name: 'University::Person::Category',
-             optional: true
-  has_many   :children,
-             class_name: 'University::Person::Category',
-             foreign_key: :parent_id,
-             dependent: :destroy
   has_and_belongs_to_many :people,
                           class_name: 'University::Person',
                           join_table: :university_people_categories
