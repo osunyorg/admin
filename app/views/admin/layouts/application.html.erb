@@ -14,7 +14,6 @@
   </head>
   <body class="<%= body_classes %>">
   <%= render "admin/application/components/nav" %>
-  <%= render "admin/application/components/realm" %>
   <%= render "admin/application/components/subnav" %>
   <%= render "admin/application/components/hero" %>
   <%= render 'application/notice' %>
@@ -26,6 +25,7 @@
     <%= render 'admin/application/preview' if @preview %>
   </main>
   <%= render "admin/application/components/commands" %>
+  <%= render "admin/application/components/realm" %>
   <%= render "admin/application/components/footer" %>
   <%= javascript_include_tag 'admin' %>
   <%= render 'bugsnag' %>
