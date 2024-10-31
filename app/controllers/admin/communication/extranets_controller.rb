@@ -65,44 +65,6 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
 
   protected
 
-  PERMITTED_PARAMS = [
-    :color
-  ]
-  PERMITTED_PARAMS_FOR_LOCALIZATIONS = [
-    :cookies_policy,
-    :favicon,
-    :favicon_delete,
-    :home_sentence,
-    :id,
-    :language_id,
-    :logo,
-    :logo_delete,
-    :name,
-    :privacy_policy,
-    :published,
-    :registration_contact,
-    :terms
-  ]
-  EXTENDED_PERMITTED_PARAMS = [
-    :about_id,
-    :about_type,
-    :feature_alumni,
-    :feature_contacts,
-    :feature_documents,
-    :feature_jobs,
-    :feature_posts,
-    :has_sso,
-    :host,
-    :sass,
-    :sso_cert,
-    :sso_mapping,
-    :sso_name_identifier_format,
-    :sso_target_url
-  ]
-  EXTENDED_PERMITTED_PARAMS_FOR_LOCALIZATIONS = [
-    :sso_button_label
-  ]
-
   def extranet_params
     params.require(:communication_extranet)
           .permit(permitted_params)
@@ -112,16 +74,65 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
   end
 
   def permitted_params
-    permitted_params = PERMITTED_PARAMS
-    localizations_attributes = PERMITTED_PARAMS_FOR_LOCALIZATIONS
+    permitted_params = params_base
+    localizations_attributes = localization_params_base
     if can?(:create, Communication::Extranet)
-      permitted_params += EXTENDED_PERMITTED_PARAMS
-      localizations_attributes += EXTENDED_PERMITTED_PARAMS_FOR_LOCALIZATIONS
+      permitted_params += params_extended
+      localizations_attributes += localization_params_extended
     end
     permitted_params << :default_language_id if @extranet&.persisted?
     permitted_params << {
       localizations_attributes: localizations_attributes
     }
     permitted_params
+  end
+
+  def params_base
+    [
+      :color
+    ]
+  end
+
+  def params_extended
+    [
+      :about_id,
+      :about_type,
+      :feature_alumni,
+      :feature_contacts,
+      :feature_documents,
+      :feature_jobs,
+      :feature_posts,
+      :has_sso,
+      :host,
+      :sass,
+      :sso_cert,
+      :sso_mapping,
+      :sso_name_identifier_format,
+      :sso_target_url
+    ]
+  end
+
+  def localization_params_base
+    [
+      :cookies_policy,
+      :favicon,
+      :favicon_delete,
+      :home_sentence,
+      :id,
+      :language_id,
+      :logo,
+      :logo_delete,
+      :name,
+      :privacy_policy,
+      :published,
+      :registration_contact,
+      :terms
+    ]
+  end
+
+  def localization_params_extended
+    [
+      :sso_button_label
+    ]
   end
 end
