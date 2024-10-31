@@ -56,18 +56,24 @@ module University::Person::WithAlumnus
 
   def find_cohorts
     # based on https://stackoverflow.com/questions/3579924/accepts-nested-attributes-for-with-find-or-create
-    cohorts = []
-    cohorts_ids = []
-    self.cohorts.map do |object|
-      academic_year = Education::AcademicYear.where(university_id: university_id, year: object.year).first_or_create
-      cohort = Education::Cohort.where(university_id: university_id, school_id: object.school_id, program_id: object.program_id, academic_year_id: academic_year.id).first_or_initialize
-      return unless cohort.valid?
-      cohort.save if cohort.new_record?
-      unless cohorts_ids.include?(cohort.reload.id) || object._destroy
-        cohorts_ids << cohort.id unless cohort.id.nil?
-        cohorts << cohort
-      end
+    cohorts_to_set = []
+    cohorts_ids_to_set = []
+    self.cohorts.each do |object|
+      cohort = find_cohort_for_nested(object)
+      next if cohorts_ids_to_set.include?(cohort.reload.id) || object._destroy
+      cohorts_ids_to_set << cohort.id unless cohort.id.nil?
+      cohorts_to_set << cohort
     end
-    self.cohorts = cohorts
+    self.cohorts = cohorts_to_set
+  end
+
+  private
+
+  def find_cohort_for_nested(object)
+    academic_year = Education::AcademicYear.where(university_id: university_id, year: object.year).first_or_create
+    cohort = Education::Cohort.where(university_id: university_id, school_id: object.school_id, program_id: object.program_id, academic_year_id: academic_year.id).first_or_initialize
+    return unless cohort.valid?
+    cohort.save if cohort.new_record?
+    cohort
   end
 end
