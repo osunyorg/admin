@@ -8,9 +8,7 @@ administrator_involvements = program.involvements_through_roles
                                    .includes(:person)
                                    .ordered_by_name(language)
 %>---
-title: >-
-  <%= prepare_text_for_static @l10n.to_s %>
-<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: program,
