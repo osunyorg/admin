@@ -11,7 +11,7 @@ namespace :app do
     Migrations::Authors.migrate
   end
 
-  namespace search do
+  namespace :search do
     task build_index: :environment do
       Search::BuildIndexJob.perform_later
     end
