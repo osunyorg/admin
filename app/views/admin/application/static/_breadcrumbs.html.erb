@@ -1,5 +1,5 @@
 <%
-add_link_on_last ||= false
+last_link ||= nil
 if @website
   localizations = about.hugo_ancestors_and_self(@website)
 %>
@@ -19,8 +19,11 @@ localizations.each do |l10n|
 %>
   - title: >-
       <%= title %>
-<% if !last || add_link_on_last %>
+<% if !last || last_link.present? %>
     path: "<%= permalink %>"
 <% end %>
+<% end %>
+<% if last_link.present? %>
+  - title: <%= last_link %>
 <% end %>
 <% end %>
