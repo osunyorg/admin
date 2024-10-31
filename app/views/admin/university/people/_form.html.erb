@@ -31,6 +31,9 @@
                           data: { 'summernote-config' => 'mini-list' }
                         } %>
         <% end %>
+
+        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
+
         <%= osuny_panel University::Person.human_attribute_name('contacts') do %>
           <p><em><%= t("university.person.personal_data_warning") %></em></p>
           <div class="row pure__row--small mb-4">
@@ -135,7 +138,6 @@
                     f: lf,
                     source: '#university_person_localizations_attributes_0_first_name, #university_person_localizations_attributes_0_last_name' %>
           <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
-          <%= render 'admin/application/categories/form', f: f, categories: @categories %>
         <% end %>
         <%= osuny_panel University::Person.human_attribute_name('picture') do %>
           <%= f.input :picture,

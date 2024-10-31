@@ -8,7 +8,7 @@ administrator_involvements = program.involvements_through_roles
                                    .includes(:person)
                                    .ordered_by_name(language)
 %>---
-<%= render 'admin/application/static/core', about: @l10n %>
+<%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: program,
