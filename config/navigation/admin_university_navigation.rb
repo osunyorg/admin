@@ -10,8 +10,7 @@ SimpleNavigation::Configuration.run do |navigation|
       identifier = class_name.to_s.to_sym
       label = class_name.model_name.human(count: 2)
       path = send part.last, lang: current_language.iso_code
-      icon = Icon.icon_for class_name
-      primary.item identifier, label, path, { icon: icon } if can?(:read, class_name)
+      primary.item identifier, label, path if can?(:read, class_name)
     end
   end
 

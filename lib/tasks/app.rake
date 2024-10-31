@@ -8,7 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    # No fix yet
+    Migrations::Authors.migrate
   end
 
   namespace :websites do

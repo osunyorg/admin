@@ -44,8 +44,11 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def new
+    if current_user.person.present?
+      current_user.person.update_column(:is_author, true)
+      @post.author = current_user.person
+    end
     @categories = categories
-    @post.author_id = current_user.person&.id
     breadcrumb
   end
 

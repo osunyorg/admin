@@ -5,7 +5,7 @@ module Importers
       @hash = hash
       @error = nil
       extract_variables
-      person.add_to_cohort cohort if valid?
+      add_to_cohort(person, cohort) if valid?
     end
 
     def valid?
@@ -26,6 +26,17 @@ module Importers
     end
 
     protected
+
+
+    def add_to_cohort(person, cohort)
+      add_object_if_necessary cohort, person.cohorts
+      add_object_if_necessary cohort.academic_year, person.diploma_years
+      add_object_if_necessary cohort.program, person.diploma_programs
+    end
+
+    def add_object_if_necessary(object, list)
+      list << object unless object.in?(list)
+    end
 
     def extract_variables
       @school_id = @hash[18].to_s.strip

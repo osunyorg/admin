@@ -7,6 +7,7 @@
 <%= block_component_static block, :city, depth: 4 %>
 <%= block_component_static block, :country, depth: 4 %>
       contact_details:
+<%= render 'admin/application/static/postal_address', about: block.template, depth: 4 %>
 <%
 if block.template.url.present?
   detail = ContactDetails::Website.new block.template.url

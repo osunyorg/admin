@@ -8,6 +8,7 @@ module Communication
 
   def self.parts
     [
+      [University::Person::Localization::Author, :admin_communication_authors_path],
       [Communication::Website, :admin_communication_websites_path],
       [Communication::Extranet, :admin_communication_extranets_path],
     ]

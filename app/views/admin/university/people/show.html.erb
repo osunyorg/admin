@@ -142,7 +142,7 @@
     <% if @teacher_involvements.any? %>
       <%= osuny_panel t('education.teachings') do %>
         <p><%= "#{@teacher_involvements.count} #{Education::Program.model_name.human(count: @teacher_involvements.count).downcase}" %></p>
-        <%= link_to t('show'), admin_education_teacher_path(@person) %>
+        <%= link_to t('show'), admin_education_teacher_path(@person), class: 'action' %>
       <% end %>
     <% end %>
     <% if @administrator_involvements.any? %>

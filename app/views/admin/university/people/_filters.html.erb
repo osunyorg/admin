@@ -19,9 +19,14 @@
 
     <%= render_filter f,
                       :select,
-                      :for_role,
-                      label: t('filters.attributes.role'),
-                      collection: University::Person::LIST_OF_ROLES.map { |r| { to_s: University::Person.human_attribute_name(r), id: r } }
+                      :for_facet,
+                      label: t('filters.attributes.facet'),
+                      collection: University::Person::LIST_OF_FACETS.map { |facet| 
+                        {
+                          to_s: University::Person.human_attribute_name(facet), 
+                          id: facet
+                        }
+                      }
                       %>
 
     <% end %>
