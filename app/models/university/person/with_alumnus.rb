@@ -58,9 +58,9 @@ module University::Person::WithAlumnus
     # based on https://stackoverflow.com/questions/3579924/accepts-nested-attributes-for-with-find-or-create
     cohorts_to_set = []
     cohorts_ids_to_set = []
-    self.cohorts.each do |object|
+    self.cohorts.reject(&:_destroy).each do |object|
       cohort = find_cohort_for_nested(object)
-      next if cohorts_ids_to_set.include?(cohort.reload.id) || object._destroy
+      next if cohorts_ids_to_set.include?(cohort.reload.id)
       cohorts_ids_to_set << cohort.id unless cohort.id.nil?
       cohorts_to_set << cohort
     end
