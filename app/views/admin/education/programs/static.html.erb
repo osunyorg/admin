@@ -8,9 +8,7 @@ administrator_involvements = program.involvements_through_roles
                                    .includes(:person)
                                    .ordered_by_name(language)
 %>---
-title: >-
-  <%= prepare_text_for_static @l10n.to_s %>
-<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: program,
@@ -49,11 +47,17 @@ logo:
 <% end %>
 <%
 if @website
-  post_category = @website.post_categories.find_by(program_id: program.id)
-  post_category_l10n = post_category&.localization_for(language)
-  if post_category_l10n
+  website_category_l10ns = program.website_category_l10ns_for(@website, language)
+  if website_category_l10ns[:blog]
 %>
-related_category: "<%= post_category_l10n.slug_with_ancestors_slugs(separator: '-') %>"
+<%# related_category is deprecated, in favor of related_categories %>
+related_category: "<%= website_category_l10ns[:blog].slug_with_ancestors_slugs(separator: '-') %>"
+<%
+  end
+%>
+related_categories:
+<% website_category_l10ns.each do |key, website_category_l10n| %>
+  <%= key %>: "<%= website_category_l10n.slug_with_ancestors_slugs(separator: '-') %>"
 <%
   end
 end

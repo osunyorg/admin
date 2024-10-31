@@ -1,10 +1,9 @@
 <%
 volume = @l10n.about
 language = @l10n.language
+issn = volume.journal.best_localization_for(language).issn
 %>---
-title: >-
-  <%= prepare_text_for_static @l10n.to_s %>
-<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: volume,
@@ -13,7 +12,7 @@ title: >-
             toc_offcanvas: false,
             toc_present: false %>
 number: <%= volume.number %>
-issn: "<%= volume.journal.best_localization_for(language).issn %>"
+issn: "<%= issn %>"
 keywords: >-
   <%= @l10n.keywords %>
 date: "<%= @l10n.published_at.iso8601 %>"

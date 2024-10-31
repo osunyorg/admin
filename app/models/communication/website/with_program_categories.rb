@@ -10,7 +10,7 @@ module Communication::Website::WithProgramCategories
   end
 
   def set_programs_categories_safely
-    [post_categories, agenda_categories].each do |objects|
+    [post_categories, agenda_categories, portfolio_categories].each do |objects|
       programs_root_category = set_programs_categories_root_for!(objects)
       set_programs_categories_at_level_for! objects, programs_root_category, education_programs.root.ordered
     end

@@ -135,14 +135,7 @@
                     f: lf,
                     source: '#university_person_localizations_attributes_0_first_name, #university_person_localizations_attributes_0_last_name' %>
           <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>
-          <% if @categories.any? %>
-            <%= f.association :categories,
-                              as: :check_boxes,
-                              collection: osuny_collection_tree(
-                                @categories.root,
-                                localized: true
-                              ) %>
-          <% end %>
+          <%= render 'admin/application/categories/form', f: f, categories: @categories %>
         <% end %>
         <%= osuny_panel University::Person.human_attribute_name('picture') do %>
           <%= f.input :picture,

@@ -63,6 +63,10 @@ class Research::Publication < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
+  def published_at
+    publication_date
+  end
+
   def editable?
     source == 'osuny'
   end
