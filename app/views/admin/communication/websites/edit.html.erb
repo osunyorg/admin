@@ -15,7 +15,7 @@
         <% if @website.localizations.many? %>
           <%= f.association :default_language,
                             include_blank: false,
-                            collection: website.languages,
+                            collection: @website.languages,
                             label_method: lambda { |l| language_name(l.iso_code) } %>
         <% end %>
         <%= f.input :default_time_zone,
