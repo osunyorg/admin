@@ -66,34 +66,73 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
   protected
 
   def extranet_params
-    allowed_params = [
-      :color
-    ]
-    localizations_attributes = [
-      :id, :language_id,
-      :name, :published,
-      :registration_contact,
-      :logo, :logo_delete, 
-      :favicon, :favicon_delete, 
-      :home_sentence,
-      :terms, :privacy_policy, :cookies_policy
-    ]  
-    if can?(:create, Communication::Extranet)
-      allowed_params += [
-        :host, :about_id, :about_type, :sass,
-        :feature_alumni, :feature_documents, :feature_contacts, :feature_jobs, :feature_posts,
-        :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping
-      ]
-      localizations_attributes += [
-        :sso_button_label
-      ]
-    end
-    allowed_params << :default_language_id if @extranet&.persisted?
-    allowed_params << { localizations_attributes: localizations_attributes }
     params.require(:communication_extranet)
-          .permit(allowed_params)
+          .permit(permitted_params)
           .merge(
             university_id: current_university.id
           )
+  end
+
+  def permitted_params
+    permitted_params = base_params
+    localizations_attributes = base_localization_params
+    if can?(:create, Communication::Extranet)
+      permitted_params += extended_params
+      localizations_attributes += extended_localization_params
+    end
+    permitted_params << :default_language_id if @extranet&.persisted?
+    permitted_params << {
+      localizations_attributes: localizations_attributes
+    }
+    permitted_params
+  end
+
+  def base_params
+    [
+      :color
+    ]
+  end
+
+  def base_localization_params
+    [
+      :cookies_policy,
+      :favicon,
+      :favicon_delete,
+      :home_sentence,
+      :id,
+      :language_id,
+      :logo,
+      :logo_delete,
+      :name,
+      :privacy_policy,
+      :published,
+      :registration_contact,
+      :terms
+    ]
+  end
+
+  def extended_params
+    [
+      :about_id,
+      :about_type,
+      :feature_alumni,
+      :feature_contacts,
+      :feature_documents,
+      :feature_jobs,
+      :feature_posts,
+      :has_sso,
+      :host,
+      :sass,
+      :sso_cert,
+      :sso_mapping,
+      :sso_name_identifier_format,
+      :sso_target_url
+    ]
+  end
+
+  def extended_localization_params
+    [
+      :sso_button_label
+    ]
   end
 end
