@@ -40,7 +40,7 @@ class Communication::Website::Post < ApplicationRecord
                           foreign_key: :communication_website_post_id,
                           association_foreign_key: :communication_website_category_id
 
-  after_save_commit :update_authors_statuses!, if: :saved_change_to_author_id?
+  after_save_commit :update_author_status_if_necessary!, if: :saved_change_to_author_id?
 
   scope :ordered, -> (language) {
     localization_published_at_select = <<-SQL
@@ -108,12 +108,8 @@ class Communication::Website::Post < ApplicationRecord
 
   protected
 
-  def update_authors_statuses!
-    old_author = University::Person.find_by(id: author_id_before_last_save)
-    if old_author && old_author.communication_website_posts.none?
-      old_author.update(is_author: false)
-    end
-    author.update(is_author: true) if author_id
+  def update_author_status_if_necessary!
+    author.update(is_author: true) if author && !author.is_author?
   end
 
   def abouts_with_post_block
