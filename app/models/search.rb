@@ -34,6 +34,24 @@
 class Search < ApplicationRecord
   self.table_name = 'search_index'
 
+  SEARCHABLE_MODELS = [
+    Communication::Extranet::Document,
+    Communication::Extranet::Post,
+    Communication::Website::Page,
+    Communication::Website::Post,
+    Communication::Website::Agenda::Event,
+    Communication::Website::Portfolio::Project,
+    Education::Diploma,
+    Education::Program,
+    Education::School,
+    Research::Journal,
+    Research::Laboratory,
+    Research::Journal::Paper,
+    Research::Journal::Volume,
+    University::Organization,
+    University::Person
+  ]
+
   belongs_to :university
   belongs_to :language
   belongs_to :about_object, polymorphic: true
@@ -56,4 +74,12 @@ class Search < ApplicationRecord
   scope :for_language, -> (language) {
     where(language: language)
   }
+
+  def self.build_index
+    SEARCHABLE_MODELS.each do |model|
+      model.find_each do |object|
+        object.save_search_data
+      end
+    end
+  end
 end

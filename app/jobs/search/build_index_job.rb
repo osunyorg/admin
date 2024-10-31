@@ -2,6 +2,6 @@ class Search::BuildIndexJob < ApplicationJob
   queue_as :whale
 
   def perform
-    # TODO
+    Search.build_index
   end
 end
