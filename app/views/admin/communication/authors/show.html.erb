@@ -11,12 +11,15 @@
       <%= render 'admin/communication/websites/website', website: website %>
     </div>
     <div class="col-lg-9"
-      <% posts = @author.communication_website_posts.where(website: website).limit(5) %>
+      <%
+      total_posts = @author.communication_website_posts.where(website: website)
+      recent_posts = total_posts.ordered(current_language).limit(5)
+      %>
       <p>
-        <%= posts.count %>
-        <%= Communication::Website::Post.model_name.human(count: posts.count).downcase %>
+        <%= total_posts.count %>
+        <%= Communication::Website::Post.model_name.human(count: total_posts.count).downcase %>
       </p>
-      <%= render 'admin/communication/websites/posts/list', posts: posts %>
+      <%= render 'admin/communication/websites/posts/list', posts: recent_posts %>
     </div>
   </div>
 <% end  %>
@@ -27,12 +30,14 @@
       <%= render 'admin/communication/extranets/extranet', extranet: extranet %>
     </div>
     <div class="col-lg-9"
-      <% posts = @author.communication_extranet_posts.where(extranet: extranet).limit(5) %>
+      <%
+      total_posts = @author.communication_extranet_posts.where(extranet: extranet)
+      recent_posts = total_posts.ordered(current_language).limit(5) %>
       <p>
-        <%= posts.count %>
-        <%= Communication::Extranet::Post.model_name.human(count: posts.count).downcase %>
+        <%= total_posts.count %>
+        <%= Communication::Extranet::Post.model_name.human(count: total_posts.count).downcase %>
       </p>
-      <%= render 'admin/communication/extranets/posts/list', posts: posts %>
+      <%= render 'admin/communication/extranets/posts/list', posts: recent_posts %>
     </div>
   </div>
 <% end  %>
