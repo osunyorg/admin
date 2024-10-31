@@ -77,9 +77,7 @@ class Search < ApplicationRecord
 
   def self.build_index
     SEARCHABLE_MODELS.each do |model|
-      model.find_each do |object|
-        object.save_search_data
-      end
+      model.find_each &:save_search_data
     end
   end
 end

@@ -51,6 +51,11 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   validates :title, presence: true
 
+  # Necessary for the search to work
+  def contents_full_text
+    ''
+  end
+
   def git_path(website)
     "#{git_path_content_prefix(website)}volumes/#{relative_path}/_index.html" if published?
   end

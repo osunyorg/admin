@@ -36,6 +36,11 @@ class Research::Journal::Localization < ApplicationRecord
 
   validates :title, presence: true
 
+  # Necessary for the search to work
+  def contents_full_text
+    ''
+  end
+
   def git_path(website)
     "data/journal.yml"
   end

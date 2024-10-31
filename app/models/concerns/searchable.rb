@@ -11,8 +11,6 @@ module Searchable
     after_save :save_search_data
   end
 
-  protected
-
   def save_search_data
     localizations.each do |l10n|
       search = Search.where(
@@ -28,6 +26,8 @@ module Searchable
       search.save
     end
   end
+
+  protected
 
   def search_data_website_id
     return communication_website_id if respond_to?(:communication_website_id)
