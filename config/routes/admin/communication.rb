@@ -1,4 +1,5 @@
 namespace :communication do
+  resources :authors, only: [:index, :show]
   scope 'photo-imports' do
     get 'unsplash' => 'photo_imports#unsplash'
     get 'pexels' => 'photo_imports#pexels'
@@ -172,11 +173,6 @@ namespace :communication do
       end
     end
     resources :jobs, controller: 'extranets/jobs'
-  end
-  resources :alumni do
-    collection do
-      resources :imports, only: [:index, :show, :new, :create]
-    end
   end
   root to: 'dashboard#index'
 end
