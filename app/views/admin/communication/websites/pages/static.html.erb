@@ -2,11 +2,9 @@
 page = @l10n.about
 language = @l10n.language
 %>---
-title: >-
-  <%= prepare_text_for_static @l10n.to_s %>
 breadcrumb_title: >-
   <%= prepare_text_for_static @l10n.best_breadcrumb_title %>
-<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: page,
