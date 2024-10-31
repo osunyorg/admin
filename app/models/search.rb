@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: search
+# Table name: search_index
 #
 #  id                      :uuid             not null, primary key
 #  about_localization_type :string           not null, indexed => [about_localization_id]
@@ -18,12 +18,12 @@
 #
 # Indexes
 #
-#  index_search_on_about_localization  (about_localization_type,about_localization_id)
-#  index_search_on_about_object        (about_object_type,about_object_id)
-#  index_search_on_extranet_id         (extranet_id)
-#  index_search_on_language_id         (language_id)
-#  index_search_on_university_id       (university_id)
-#  index_search_on_website_id          (website_id)
+#  index_search_index_on_extranet_id    (extranet_id)
+#  index_search_index_on_language_id    (language_id)
+#  index_search_index_on_university_id  (university_id)
+#  index_search_index_on_website_id     (website_id)
+#  index_search_on_about_localization   (about_localization_type,about_localization_id)
+#  index_search_on_about_object         (about_object_type,about_object_id)
 #
 # Foreign Keys
 #
@@ -32,7 +32,7 @@
 #  fk_rails_bab17fceaa  (university_id => universities.id)
 #
 class Search < ApplicationRecord
-  self.table_name = 'search'
+  self.table_name = 'search_index'
 
   belongs_to :university
   belongs_to :language

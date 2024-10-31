@@ -11,6 +11,12 @@ namespace :app do
     Migrations::Authors.migrate
   end
 
+  namespace search do
+    task build_index: :environment do
+      Search::BuildIndexJob.perform_later
+    end
+  end
+
   namespace :websites do
     desc "Refresh access token for Communication Websites."
     task refresh_tokens: :environment do

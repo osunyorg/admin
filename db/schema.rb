@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_31_110237) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -334,7 +334,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.boolean "feature_jobs", default: false
     t.text "sass"
     t.text "css"
-    t.uuid "default_language_id"
+    t.uuid "default_language_id", null: false
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["default_language_id"], name: "index_communication_extranets_on_default_language_id"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
@@ -349,6 +349,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.uuid "parent_id"
     t.boolean "is_programs_root", default: false
     t.uuid "program_id"
+    t.boolean "is_taxonomy", default: false
     t.index ["communication_website_id"], name: "idx_communication_website_agenda_cats_on_website_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_agenda_categories_on_program_id"
@@ -549,7 +550,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.boolean "header_cta"
     t.string "header_cta_label"
     t.string "header_cta_url"
-    t.string "header_text"
+    t.text "header_text"
     t.string "meta_description"
     t.string "migration_identifier"
     t.boolean "published"
@@ -689,6 +690,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.uuid "parent_id"
     t.uuid "program_id"
     t.boolean "is_programs_root", default: false
+    t.boolean "is_taxonomy", default: false
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_post_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_post_categories_on_program_id"
@@ -1448,7 +1450,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.index ["university_id"], name: "index_research_thesis_localizations_on_university_id"
   end
 
-  create_table "search", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "search_index", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.string "title"
     t.text "text"
@@ -1463,10 +1465,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
     t.datetime "updated_at", null: false
     t.index ["about_localization_type", "about_localization_id"], name: "index_search_on_about_localization"
     t.index ["about_object_type", "about_object_id"], name: "index_search_on_about_object"
-    t.index ["extranet_id"], name: "index_search_on_extranet_id"
-    t.index ["language_id"], name: "index_search_on_language_id"
-    t.index ["university_id"], name: "index_search_on_university_id"
-    t.index ["website_id"], name: "index_search_on_website_id"
+    t.index ["extranet_id"], name: "index_search_index_on_extranet_id"
+    t.index ["language_id"], name: "index_search_index_on_language_id"
+    t.index ["university_id"], name: "index_search_index_on_university_id"
+    t.index ["website_id"], name: "index_search_index_on_website_id"
   end
 
   create_table "universities", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -1701,7 +1703,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
   end
 
   create_table "university_person_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "biography"
+    t.text "biography"
     t.string "first_name"
     t.string "last_name"
     t.string "linkedin"
@@ -1994,9 +1996,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_144920) do
   add_foreign_key "research_thesis_localizations", "languages"
   add_foreign_key "research_thesis_localizations", "research_theses", column: "about_id"
   add_foreign_key "research_thesis_localizations", "universities"
-  add_foreign_key "search", "communication_extranets", column: "extranet_id"
-  add_foreign_key "search", "communication_websites", column: "website_id"
-  add_foreign_key "search", "universities"
+  add_foreign_key "search_index", "communication_extranets", column: "extranet_id"
+  add_foreign_key "search_index", "communication_websites", column: "website_id"
+  add_foreign_key "search_index", "universities"
   add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_apps", "universities"
   add_foreign_key "university_organization_categories", "universities"
