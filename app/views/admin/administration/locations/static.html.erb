@@ -13,6 +13,7 @@ language = @l10n.language
 <%= render 'admin/application/featured_image/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
 contact_details:
+<%= render 'admin/application/static/postal_address', about: location, l10n: @l10n, language: language %>
 <%= render 'admin/application/static/contact_detail', variable: :address, data: location.address, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :address_name, data: @l10n.address_name, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @l10n.address_additional, kind: ContactDetails::Base %>

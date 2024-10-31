@@ -48,24 +48,18 @@ class University::Person < ApplicationRecord
   include Filterable
   include Sanitizable
   include Localizable
+  include WithAlumnus
   include WithBlobs
   include WithCountry
-  # WithRoles included before WithEducation because needed for the latter
-  include WithRoles
-  include WithEducation
-  include WithExperiences
+  include WithFacets
+  include WithInvolvements
   include WithPersonalData
   include WithPicture
-  include WithResearch
+  include WithRealmAdministration
+  include WithRealmCommunication
+  include WithRealmEducation
+  include WithRealmResearch
   include WithUniversity
-
-  LIST_OF_ROLES = [
-    :administration,
-    :teacher,
-    :researcher,
-    :alumnus,
-    :author
-  ].freeze
 
   enum :gender, { male: 0, female: 1, non_binary: 2 }
 
@@ -74,37 +68,6 @@ class University::Person < ApplicationRecord
   has_and_belongs_to_many :categories,
                           class_name: 'University::Person::Category',
                           join_table: :university_people_categories
-
-  has_and_belongs_to_many :research_journal_papers,
-                          class_name: 'Research::Journal::Paper',
-                          join_table: :research_journal_papers_researchers,
-                          foreign_key: :researcher_id
-
-  has_many                :communication_website_posts,
-                          class_name: 'Communication::Website::Post',
-                          foreign_key: :author_id,
-                          dependent: :nullify
-
-  has_many                :involvements,
-                          class_name: 'University::Person::Involvement',
-                          dependent: :destroy
-
-  has_many                :author_websites,
-                          -> { distinct },
-                          through: :communication_website_posts,
-                          source: :website
-
-  has_many                :researcher_websites,
-                          -> { distinct },
-                          through: :research_journal_papers,
-                          source: :websites
-
-  has_many                :teacher_websites,
-                          -> { distinct },
-                          through: :education_programs,
-                          source: :websites
-
-  accepts_nested_attributes_for :involvements
 
   validates :email,
             uniqueness: { scope: :university_id },
@@ -146,12 +109,6 @@ class University::Person < ApplicationRecord
     .order("localization_last_name ASC, localization_first_name ASC")
   }
 
-  scope :administration,    -> { where(is_administration: true) }
-  scope :teachers,          -> { where(is_teacher: true) }
-  scope :researchers,       -> { where(is_researcher: true) }
-  scope :alumni,            -> { where(is_alumnus: true) }
-  scope :with_habilitation, -> { where(habilitation: true) }
-  scope :for_role, -> (role, language = nil) { where("is_#{role}": true) }
   scope :for_category, -> (category_id, language = nil) { joins(:categories).where(university_person_categories: { id: category_id }).distinct }
   scope :for_program, -> (program_id, language = nil) {
     left_joins(:education_programs_as_administrator, :education_programs_as_teacher)
@@ -188,32 +145,10 @@ class University::Person < ApplicationRecord
       ", term: "%#{sanitize_sql_like(term)}%")
   }
 
-  def roles
-    LIST_OF_ROLES.reject do |role|
-      !public_send("is_#{role}")
-    end
-  end
-
   def dependencies
     localizations +
     categories +
     active_storage_blobs
-  end
-
-  def administrator_facets
-    @administrator_facets ||= University::Person::Localization::Administrator.where(id: localization_ids)
-  end
-
-  def author_facets
-    @author_facets ||= University::Person::Localization::Author.where(id: localization_ids)
-  end
-
-  def researcher_facets
-    @researcher_facets ||= University::Person::Localization::Researcher.where(id: localization_ids)
-  end
-
-  def teacher_facets
-    @teacher_facets ||= University::Person::Localization::Teacher.where(id: localization_ids)
   end
 
   def full_street_address

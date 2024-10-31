@@ -1,0 +1,12 @@
+<div class="position-relative mb-5">
+  <div class="ratio bg-light rounded" style="--bs-aspect-ratio: 62.5%">
+    <%= kamifusen_tag website.screenshot, width: 500, class:'img-fluid rounded' if website.screenshot.attached? %>
+  </div>
+  <p class="strong mt-2 mb-0">
+    <%= osuny_link_localized  website,
+                              admin_communication_website_path(
+                                id: website.id
+                              ),
+                              classes: 'stretched-link' %>
+  </p>
+</div>

@@ -165,15 +165,18 @@ en:
       university/person/category:
         one: Category
         other: Categories
-      university/person/involvement:
-        one: Involvement
-        other: Involvements
       university/person/alumnus:
         one: Alumnus
         other: Alumni
       university/person/experience:
         one: Professional experience
         other: Professional experiences
+      university/person/involvement:
+        one: Involvement
+        other: Involvements
+      university/person/localization/author:
+        one: Author
+        other: Authors
       university/organization:
         one: Organization
         other: Organizations

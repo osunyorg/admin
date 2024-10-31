@@ -44,6 +44,7 @@ website: >-
   <%= prepare_text_for_static @l10n.url %>
 contact_details:
 <% if person.address_is_public? %>
+<%= render 'admin/application/static/postal_address', about: person, l10n: @l10n, language: language %>
 <%= render 'admin/application/static/contact_detail', variable: :address, data: person.address, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :zipcode, data: person.zipcode, kind: ContactDetails::Base %>
 <%= render 'admin/application/static/contact_detail', variable: :city, data: person.city, kind: ContactDetails::Base %>
