@@ -1,9 +1,22 @@
 <% if content_for?(:action_bar_left) or content_for?(:action_bar_right) %>
   <div class="commands container-fluid">
     <div class="d-flex py-3">
+      <% if content_for?(:action_bar_left) %>
       <div>
-        <%= yield :action_bar_left %>
+        <button class="navbar-toggler" 
+                type="button" 
+                data-bs-toggle="dropdown" 
+                data-bs-target="#action_bar_left" 
+                aria-controls="menu" 
+                aria-expanded="false" 
+                aria-label="Toggle actions">
+          <%= lucide_icon('ellipsis') %>
+        </button>
+        <div class="dropdown-menu mb-3 p-3 border-0" id="action_bar_left">
+          <%= yield :action_bar_left %>
+        </div>
       </div>
+      <% end %>
       <div class="ms-auto">
         <%= yield :action_bar_right %>
       </div>
