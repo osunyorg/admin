@@ -1,5 +1,17 @@
-<p class="mb-0">
-  <%= block.template.selected_projects
-                    .map { |project| project.to_s_in(block.language) }
-                    .join(', ') %>
-</p>
+<% block.template.selected_projects.each do |project|
+    l10n = project.localization_for(block.language)
+    next if l10n.nil?
+    %>
+  <div class="row mb-3">
+    <div class="col-2">
+      <% if l10n.featured_image.attached? %>
+        <%= kamifusen_tag l10n.featured_image, width: 200, class: 'img-fluid mb-2' %>
+      <% else %>
+        <%= image_tag 'admin/placeholder.png', class: 'img-fluid mb-2' %>
+      <% end %>
+    </div>
+    <div class="col-10">
+      <p><%= l10n.to_s %></p>
+    </div>
+  </div>
+<% end %>
