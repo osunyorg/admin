@@ -25,20 +25,7 @@
 #  fk_rails_dca0802d2f  (language_id => languages.id)
 #
 class University::Organization::Category::Localization < ApplicationRecord
-  include AsLocalization
-  include AsLocalizedTree
-  include Contentful
-  include Initials
-  include Permalinkable
-  include Sanitizable
-  include WithGitFiles
-  include WithUniversity
-
-  validates :name, presence: true
-
-  def dependencies
-    contents_dependencies
-  end
+  include AsCategoryLocalization
 
   def git_path(website)
     return unless for_website?(website)
@@ -51,17 +38,7 @@ class University::Organization::Category::Localization < ApplicationRecord
     "admin/university/organizations/categories/static"
   end
 
-  def to_s
-    "#{name}"
-  end
-
   def published?
     persisted?
   end
-
-  # TODO : Pertinent ?
-  def hugo_slug_in_website(website)
-    slug_with_ancestors_slugs(separator: '-')
-  end
-
 end

@@ -33,24 +33,12 @@
 #  fk_rails_b8a90413e8  (about_id => communication_website_agenda_categories.id)
 #
 class Communication::Website::Agenda::Category::Localization < ApplicationRecord
-  include AsLocalization
-  include AsLocalizedTree
-  include Contentful
-  include Initials
-  include Permalinkable
-  include Sanitizable
-  include WithBlobs
-  include WithFeaturedImage
-  include WithGitFiles
-  include WithUniversity
+  include AsCategoryLocalization
 
   belongs_to :website,
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  has_summernote :summary
-
-  validates :name, presence: true
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
@@ -68,10 +56,6 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
     contents_dependencies
   end
 
-  def to_s
-    "#{name}"
-  end
-
   protected
 
   def slug_unavailable?(slug)
@@ -86,20 +70,8 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
         .exists?
   end
 
-  def explicit_blob_ids
-    super.concat [featured_image&.blob_id]
-  end
-
-  def inherited_blob_ids
-    [featured_image&.blob_id]
-  end
-
   def set_communication_website_id
     self.communication_website_id ||= about.communication_website_id
   end
 
-  # TODO : Pertinent ?
-  def hugo_slug_in_website(website)
-    slug_with_ancestors_slugs(separator: '-')
-  end
 end

@@ -4,7 +4,6 @@ module Staticable
   def hugo(website)
     @hugo ||= OpenStruct.new(
       permalink: hugo_permalink_in_website(website),
-      path: hugo_path_in_website(website),
       file: hugo_file_in_website(website),
       slug: hugo_slug_in_website(website)
     )
@@ -40,10 +39,6 @@ module Staticable
 
   def hugo_permalink_in_website(website)
     "#{current_permalink_in_website(website)&.path}"
-  end
-
-  def hugo_path_in_website(website)
-    respond_to?(:path) ? path : slug
   end
 
   def hugo_file_in_website(website)

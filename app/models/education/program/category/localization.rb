@@ -24,16 +24,7 @@
 #  fk_rails_fee1ce58f8  (language_id => languages.id)
 #
 class Education::Program::Category::Localization < ApplicationRecord
-  include AsLocalization
-  include AsLocalizedTree
-  include Contentful
-  include Initials
-  include Permalinkable
-  include Sanitizable
-  include WithGitFiles
-  include WithUniversity
-
-  validates :name, presence: true
+  include AsCategoryLocalization
 
   def git_path(website)
     "#{git_path_content_prefix(website)}programs_categories/#{slug}/_index.html"
@@ -45,16 +36,5 @@ class Education::Program::Category::Localization < ApplicationRecord
 
   def dependencies
     contents_dependencies
-  end
-
-  def to_s
-    "#{name}"
-  end
-
-  protected
-
-  # TODO : Pertinent ?
-  def hugo_slug_in_website(website)
-    slug_with_ancestors_slugs(separator: '-')
   end
 end
