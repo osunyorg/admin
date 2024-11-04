@@ -138,7 +138,7 @@ module Importers
     def categories
       @category_names.map do |category_name|
         category_localization = University::Person::Category::Localization.find_by(university_id: @university.id, language_id: @language.id, name: category_name)
-        if category_localization
+        if category_localization.present?
           category_localization.about
         else
           category = @university.person_categories.create(localizations_attributes: [ { name: category_name, language_id: @language.id }])
