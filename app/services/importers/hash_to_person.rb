@@ -136,17 +136,15 @@ module Importers
     end
 
     def categories
-      categories = []
-      @category_names.each do |category_name|
-        category_localization = University::Person::Category::Localization.where(language_id: @language.id, name: category_name).first
+      @category_names.map do |category_name|
+        category_localization = University::Person::Category::Localization.where(university_id: @university.id, language_id: @language.id, name: category_name).first
         if category_localization
-          categories << category_localization.about
+          category_localization.about
         else
-          category ||= @university.person_categories.create(localizations_attributes: [ { name: category_name, language_id: @language.id }])
-          categories << category
+          category = @university.person_categories.create(localizations_attributes: [ { name: category_name, language_id: @language.id }])
+          category
         end
       end
-      categories
     end
 
     def add_picture_if_possible!(person)
