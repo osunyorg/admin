@@ -141,7 +141,7 @@ module Importers
         if category_localization.present?
           category_localization.about
         else
-          category = @university.person_categories.create(localizations_attributes: [ { name: category_name, language_id: @language.id }])
+          category = @university.person_categories.create(localizations_attributes: [{ name: category_name, language_id: @language.id }])
           category
         end
       end
