@@ -237,7 +237,7 @@ fr:
     alumni:
       cohorts:
         import_btn: Importer des promotions
-        import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@.<br>Le champ <i>school</i> doit contenir l'id interne de l'école.<br>Le champ <i>program</i> doit contenir l'id interne de la formation."
+        import_hint_html: "Le champ <i>school</i> doit contenir l'id interne de l'école.<br>Le champ <i>program</i> doit contenir l'id interne de la formation."
         title: Imports de promotions
     apps:
       regenerate_token: Regénérer le jeton
@@ -272,7 +272,7 @@ fr:
         period: Période
       experiences:
         import_btn: Importer des expériences
-        import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
+        import_hint_html: "Les champs <i>company_siren</i> et <i>company_nic</i> doivent être au format texte, pas nombre.<br>Le champ <i>experience_from</i> doit être l'année de début de l'expérience.<br>Le champ <i>experience_to</i> est l'année de fin de l'expérience. Cette valeur peut être vide si l'expérience est toujours en cours."
         title: Imports d'expériences
       facets:
         administrator:
@@ -288,7 +288,7 @@ fr:
           programs: Enseignements
           programs_of: Enseignements de %{name}
       import_btn: Importer des personnes
-      import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@."
+      import_hint_html: "Les valeurs pour <i>gender</i> peuvent être m (masculin), f (féminin) et n (non binaire).<br>Les champs <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> et <i>zipcode</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)<br>Le champ <i>social_twitter</i> ne doit pas contenir d'@.<br>Le champ <i>categories</i> peut contenir une liste de catégories auxquelles l'utilisateur sera rattaché. Il s'agit d'une liste de noms séparés par un caractère \"|\". Si une catégorie de la liste n'existe pas elle sera créée à la volée."
       personal_data_visibilities:
         private: Privé
         public: Public
