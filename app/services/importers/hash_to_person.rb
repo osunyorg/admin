@@ -137,7 +137,7 @@ module Importers
 
     def categories
       @category_names.map do |category_name|
-        category_localization = University::Person::Category::Localization.where(university_id: @university.id, language_id: @language.id, name: category_name).first
+        category_localization = University::Person::Category::Localization.find_by(university_id: @university.id, language_id: @language.id, name: category_name)
         if category_localization
           category_localization.about
         else
