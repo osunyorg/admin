@@ -55,10 +55,10 @@
             <%
             if about.is_direct_object?
               website = about.website
-              path = about_l10n.current_permalink_in_website(website)&.path
+              hugo = about_l10n.hugo(website)
               %>
               <%= osuny_label t('admin.communication.blocks.advanced.url_with_anchor') %>
-              <pre><%= path %>#<%= slug %></pre>
+              <pre><%= hugo.permalink %>#<%= slug %></pre>
             <% end %>
           </div>
         <% end %>

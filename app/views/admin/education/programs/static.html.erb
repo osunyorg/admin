@@ -32,11 +32,13 @@ registration_url: >-
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
 position: <%= program.position %>
-<% if @l10n.parent %>
+<% if @l10n.parent
+  hugo = @l10n.parent.hugo(@website)
+  %>
 parent:
   title: >-
     <%= @l10n.parent.name %>
-  url: <%= @l10n.parent.current_permalink_in_website(@website)&.path %>
+  url: <%= hugo.permalink %>
 <% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/featured_image/static', about: @l10n %>
