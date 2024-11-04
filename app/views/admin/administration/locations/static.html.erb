@@ -29,8 +29,9 @@ programs:
 <%
 location.programs.each do |program|
   program_l10n = program.best_localization_for(language)
+  hugo = program_l10n.hugo(@website)
   %>
-  - <%= program_l10n.current_permalink_in_website(@website)&.path %>
+  - <%= hugo.permalink %>
 <% end %>
 diplomas:
 <%
