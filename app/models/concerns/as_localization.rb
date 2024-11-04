@@ -78,11 +78,11 @@ module AsLocalization
 
   # standalone-category
   # parent-category/child-category
-  def slug_with_ancestors_slugs(separator: '/')
+  def slug_with_ancestors_slugs
     slugs = about.ancestors_and_self.map do |ancestor|
       ancestor.best_localization_for(language).slug
     end
-    slugs.compact_blank.join(separator)
+    slugs.compact_blank.join('/')
   end
 
   protected

@@ -42,8 +42,7 @@ class Communication::Website::Portfolio::Category::Localization < ApplicationRec
 
   def git_path(website)
     prefix = git_path_content_prefix(website)
-    slugs = slug_with_ancestors_slugs(separator: '-')
-    "#{prefix}projects_categories/#{slugs}/_index.html"
+    "#{prefix}projects_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   def template_static

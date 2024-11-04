@@ -7,14 +7,16 @@
 <%
 if block.template.mode == 'category' && block.template.category
   category_l10n = block.template.category.localization_for(block.language)
+  hugo = category_l10n.hugo(@website)
 %>
-      category: "/<%= category_l10n.slug_with_ancestors_slugs(separator: '-') %>/"
+      category: "<%= hugo.slug %>"
 <% end %>
       events:
 <%
 block.template.selected_events.each do |element|
   element_l10n = element.localization_for(block.language)
+  hugo = element_l10n.hugo(@website)
 %>
-        - path: "<%= element_l10n.current_permalink_in_website(@website)&.path %>"
-          file: "<%= element_l10n.git_path_relative %>"
+        - path: "<%= hugo.permalink %>"
+          file: "<%= hugo.file %>"
 <% end %>

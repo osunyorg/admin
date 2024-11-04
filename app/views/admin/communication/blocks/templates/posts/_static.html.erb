@@ -5,8 +5,9 @@
   <%
   category_l10n = block.template.category.localization_for(block.language)
   if category_l10n.present?
+  hugo = category_l10n.hugo(@website)
   %>
-      category: "/<%= category_l10n.slug_with_ancestors_slugs(separator: '-') %>/"
+      category: "<%= hugo.slug %>"
   <% end %>
 <% end %>
       layout: <%= block.template.layout %>

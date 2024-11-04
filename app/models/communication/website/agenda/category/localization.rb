@@ -43,8 +43,7 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
 
   def git_path(website)
     prefix = git_path_content_prefix(website)
-    slugs = slug_with_ancestors_slugs(separator: '-')
-    "#{prefix}events_categories/#{slugs}/_index.html"
+    "#{prefix}events_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   def template_static

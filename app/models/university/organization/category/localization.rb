@@ -30,8 +30,7 @@ class University::Organization::Category::Localization < ApplicationRecord
   def git_path(website)
     return unless for_website?(website)
     prefix = git_path_content_prefix(website)
-    slugs = slug_with_ancestors_slugs(separator: '-')
-    "#{prefix}organizations_categories/#{slugs}/_index.html"
+    "#{prefix}organizations_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   def template_static

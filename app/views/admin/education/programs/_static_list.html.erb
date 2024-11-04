@@ -6,11 +6,12 @@ indentation = ' ' * depth
   <%
   program_l10n = program.localization_for(language)
   next unless program_l10n
+  hugo = program_l10n.hugo(@website)
   %>
 <%= indentation %>- label: >-
 <%= indentation %>    <%= program_l10n.to_s %>
-<%= indentation %>  path: "<%= program_l10n.current_permalink_in_website(@website)&.path %>"
-<%= indentation %>  slug: "/<%= program_l10n.slug_with_ancestors_slugs %>/"
+<%= indentation %>  path: "<%= hugo.permalink %>"
+<%= indentation %>  slug: "<%= hugo.slug %>"
 <%
 children = program.children.published_now_in(language).where(diploma: diploma)
 # Limit to a global list of programs, for example on a location

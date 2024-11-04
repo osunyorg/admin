@@ -1,17 +1,21 @@
 <%= block_component_static block, :mode %>
 <% if block.template.mode == 'all' %>
       all: true
-<% elsif block.template.mode == 'category' && block.template.category %>
-  <% category_l10n = block.template.category.localization_for(block.language) %>
+<% elsif block.template.mode == 'category' && block.template.category
+    category_l10n = block.template.category.localization_for(block.language)
+    hugo = category_l10n.hugo(@website)
+    %>
   <% if category_l10n %>
-      category: "/<%= category_l10n.slug_with_ancestors_slugs(separator: '-') %>/"
+      category: "<%= hugo.slug %>"
   <% end %>
 <% end %>
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
       projects:
-<% block.template.selected_projects.each do |project| %>
-  <% project_l10n = project.localization_for(block.language) %>
-        - slug: "<%= project_l10n.slug %>"
-          file: "<%= project_l10n.git_path_relative %>"
+<% block.template.selected_projects.each do |project| 
+    project_l10n = project.localization_for(block.language)
+    hugo = project_l10n.hugo(@website)
+    %>
+        - slug: "<%= hugo.slug %>"
+          file: "<%= hugo.file %>"
 <% end %>
