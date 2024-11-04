@@ -272,7 +272,7 @@ fr:
         period: Période
       experiences:
         import_btn: Importer des expériences
-        import_hint_html: "Les champs <i>company_siren</i> et <i>company_nic</i> doivent être au format texte, pas nombre.<br>Le champ <i>experience_from</i> doit être l'année de début de l'expérience.<br>Le champ <i>experience_to</i> est l'année de fin de l'expérience. Cette valeur peut être vide si l'expérience est toujours en cours."
+        import_hint_html: "Les champs <i>company_siren</i> et <i>company_nic</i> doivent être au format texte, pas nombre.<br>Le champ <i>experience_from</i> doit être l'année de début de l'expérience.<br>Le champ <i>experience_to</i> est l'année de fin de l'expérience. Cette valeur peut être vide si c'est une expérience actuelle."
         title: Imports d'expériences
       facets:
         administrator:
