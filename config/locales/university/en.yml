@@ -272,7 +272,7 @@ en:
         period: Period
       experiences:
         import_btn: Import experiences
-        import_hint_html: "<i>Company_siren</i> and <i>company_nic</i> fields must have a text format, not numbers.<br><i>experience_from</i> field should be the start year of the experience.<br><i>experience_to</i> field should be the end year of the experience. It can be blank is the experience is still actual."
+        import_hint_html: "<i>Company_siren</i> and <i>company_nic</i> fields must have a text format, not numbers.<br><i>experience_from</i> field should be the start year of the experience.<br><i>experience_to</i> field should be the end year of the experience. It can be blank if it's a current experience."
         title: Experiences imports
       facets:
         administrator:
