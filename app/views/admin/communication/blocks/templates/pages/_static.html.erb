@@ -2,7 +2,7 @@
 if block.template.page
   page = block.template.page
   page_l10n = page.localization_for(block.language)
-  hugo = page_l10n.hugo(page.website)
+  hugo = page_l10n.hugo(block.website)
 %>
       page:
         slug: "<%= hugo.slug %>"
@@ -14,7 +14,7 @@ if block.template.page
 <%
 block.template.selected_pages.each do |element|
   element_l10n = element.localization_for(block.language)
-  hugo = element_l10n.hugo(page.website)
+  hugo = element_l10n.hugo(block.website)
   %>
         - slug: "<%= hugo.slug %>"
           file: "<%= hugo.file %>"
