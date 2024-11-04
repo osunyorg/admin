@@ -1,7 +1,6 @@
 <%
 # Partial arguments 
 forced_title ||= nil
-forced_slug ||= nil
 skip_date ||= false
 # Preparing variables
 title = forced_title || about.to_s
@@ -11,7 +10,6 @@ show_published_at = about.respond_to?(:published_at)
 if @website
   previous_permalinks = about.previous_permalinks_in_website(@website)
   hugo = about.hugo(@website) if about.respond_to?(:hugo)
-  slug = forced_slug || hugo.slug
 end
 %>
 <%
@@ -30,11 +28,9 @@ subtitle: >-
 # Permalinks
 #############
 %>
-<% if @website %>
+<% if hugo %>
 url: "<%= hugo.permalink %>"
-<%    if slug %>
-slug: "<%= slug %>"
-<%    end %>
+slug: "<%= hugo.slug %>"
 <%    if previous_permalinks.any? %>
 aliases:
 <%      previous_permalinks.each do |permalink| %>

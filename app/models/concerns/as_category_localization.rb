@@ -1,18 +1,18 @@
 module AsCategoryLocalization
   extend ActiveSupport::Concern
 
-  included do
-    include AsLocalization
-    include AsLocalizedTree
-    include Contentful
-    include Initials
-    include Permalinkable
-    include Sanitizable
-    include WithBlobs
-    include WithFeaturedImage
-    include WithGitFiles
-    include WithUniversity
+  include AsLocalization
+  include AsLocalizedTree
+  include Contentful
+  include Initials
+  include Permalinkable
+  include Sanitizable
+  include WithBlobs
+  include WithFeaturedImage
+  include WithGitFiles
+  include WithUniversity
   
+  included do
     has_summernote :summary
   
     validates :name, presence: true
