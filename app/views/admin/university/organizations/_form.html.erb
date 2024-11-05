@@ -87,14 +87,12 @@
                       as: :single_deletable_file,
                       input_html: { accept: default_images_formats_accepted },
                       preview: 200,
-                      resize: false,
-                      direct_upload: true %>
+                      resize: false %>
           <%= lf.input :logo_on_dark_background,
                       as: :single_deletable_file,
                       input_html: { accept: default_images_formats_accepted },
                       preview: 200,
-                      resize: false,
-                      direct_upload: true %>
+                      resize: false %>
         <% end %>
         <%= render 'admin/application/shared_image/edit', f: lf, about: l10n %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>

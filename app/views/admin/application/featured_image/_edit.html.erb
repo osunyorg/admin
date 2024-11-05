@@ -1,7 +1,6 @@
 <%= osuny_panel t('featured_image.title') do %>
   <%= f.input :featured_image,
               as: :single_deletable_file,
-              direct_upload: true,
               label: false,
               hint: images_formats_accepted_hint,
               input_html: { accept: default_images_formats_accepted },
