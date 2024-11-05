@@ -237,7 +237,7 @@ en:
     alumni:
       cohorts:
         import_btn: Import cohorts
-        import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @.<br><i>School</i> field should contain the internal school id.<br><i>Program</i> field should contain the internal program id."
+        import_hint_html: "<i>School</i> field should contain the internal school id.<br><i>Program</i> field should contain the internal program id."
         title: Cohorts imports
     apps:
       regenerate_token: Regenerate token
@@ -272,7 +272,7 @@ en:
         period: Period
       experiences:
         import_btn: Import experiences
-        import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @."
+        import_hint_html: "<i>Company_siren</i> and <i>company_nic</i> fields must have a text format, not numbers.<br><i>experience_from</i> field should be the start year of the experience.<br><i>experience_to</i> field should be the end year of the experience. It can be blank if it's a current experience."
         title: Experiences imports
       facets:
         administrator:
@@ -288,7 +288,7 @@ en:
           programs: Teachings
           programs_of: Teachings of %{name}
       import_btn: Import people
-      import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @."
+      import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @.<br><i>Categories</i> field can contain a list of categories to connect ot the person. It is a list of names separated by a \"|\" character. If a category provided does not exist on the platform it will be created."
       personal_data_visibilities:
         private: Private
         public: Public
