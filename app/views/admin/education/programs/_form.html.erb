@@ -28,7 +28,8 @@
             <%= lf.input :url %>
             <%= lf.input :duration %>
             <%= lf.input :downloadable_summary,
-                        as: :single_deletable_file %>
+                        as: :single_deletable_file,
+                        direct_upload: true %>
           </div>
         </div>
         <%= osuny_separator %>
