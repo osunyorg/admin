@@ -50,7 +50,7 @@ fr:
         theme:
           sync: Synchroniser
           update: Mettre à jour le thème
-      clean_and_rebuild_all_websites_notice: Tous les thèmes vont être mis à jour. Cela peut prendre quelques minutes.
+      clean_and_rebuild_all_websites_notice: Tous les sites vont être reconstruits. Cela peut prendre un certain temps.
       clean_and_rebuild_website_notice: Le site va être reconstruit. Cela peut prendre quelques minutes.
       connections_count: "%{count} connexions"
       details: détail

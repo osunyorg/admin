@@ -32,6 +32,26 @@
                         } %>
         <% end %>
 
+        <%= osuny_panel University::Person.human_attribute_name('abilities') do %>
+          <div class="row pure__row--small">
+            <div class="col-xl-6">
+              <% if current_university.is_really_a_university? %>
+                <%= f.input :is_teacher %>
+                <%= f.input :is_administration %>
+                <%= f.input :is_alumnus %>
+              <% end %>
+              <%= f.input :is_author %>
+            </div>
+            <% if current_university.is_really_a_university? %>
+              <div class="col-xl-6">
+                <%= f.input :tenure %>
+                <%= f.input :is_researcher %>
+                <%= f.input :habilitation %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
         <%= render 'admin/application/categories/form', f: f, categories: @categories %>
 
         <%= osuny_panel University::Person.human_attribute_name('contacts') do %>
@@ -112,21 +132,6 @@
             </div>
           </div>
         <% end %>
-        <%= osuny_panel University::Person.human_attribute_name('abilities') do %>
-          <div class="row pure__row--small">
-            <div class="col-xl-6">
-              <%= f.input :is_teacher %>
-              <%= f.input :is_administration %>
-              <%= f.input :is_alumnus %>
-              <%= f.input :is_author %>
-            </div>
-            <div class="col-xl-6">
-              <%= f.input :tenure %>
-              <%= f.input :is_researcher %>
-              <%= f.input :habilitation %>
-            </div>
-          </div>
-        <% end if current_university.is_really_a_university? %>
 
         <%= f.association :research_laboratories,
                           collection: osuny_collection(current_university.research_laboratories, localized: true),
@@ -145,8 +150,7 @@
                       label: false,
                       input_html: { accept: default_images_formats_accepted },
                       preview: 200,
-                      resize: 1,
-                      direct_upload: true %>
+                      resize: 1 %>
           <%= lf.input :picture_credit,
                 as: :summernote,
                 hint: t('featured_image.credit.hint'),
