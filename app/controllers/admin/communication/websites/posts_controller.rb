@@ -110,7 +110,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def post_params
     params.require(:communication_website_post)
     .permit(
-      :author_id, category_ids: [],
+      author_ids: [], category_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text,
         :published, :published_at, :slug, :pinned,

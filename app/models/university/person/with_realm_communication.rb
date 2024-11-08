@@ -2,10 +2,11 @@ module University::Person::WithRealmCommunication
   extend ActiveSupport::Concern
 
   included do
-    has_many  :communication_website_posts,
+    has_and_belongs_to_many :communication_website_posts,
               class_name: 'Communication::Website::Post',
-              foreign_key: :author_id,
-              dependent: :nullify
+              join_table: :communication_website_posts_university_persons,
+              foreign_key: :university_person_id,
+              association_foreign_key: :communication_website_post_id
 
     has_many  :author_websites,
               -> { distinct },

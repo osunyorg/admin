@@ -214,7 +214,7 @@ fr:
         subtitle: Sous-titre
         title: Titre
       communication/website/post:
-        author: Auteur·rice
+        authors: Auteur·rices
         categories: Catégories
         website: Site Web
       communication/website/post/category:

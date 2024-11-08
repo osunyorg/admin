@@ -12,9 +12,14 @@ language = @l10n.language
 <% if @l10n.pinned %>
 weight: 1
 <% end %>
-<% if @l10n.author %>
+<% if @post.authors.any? %>
 authors:
-  - "<%= @l10n.author.slug %>"
+<% @post.authors.each do |author| 
+    author_l10n = author.localization_for(language)
+    next if author_l10n.nil?
+    %>
+  - "<%= author_l10n.slug %>"
+<% end %>
 <% end %>
 <%= render 'admin/application/categories/static',
             about: post,

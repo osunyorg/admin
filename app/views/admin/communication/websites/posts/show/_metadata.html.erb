@@ -6,17 +6,26 @@
     <% else %>
       <%= t('admin.communication.website.post.localizations.draft') %>
     <% end %>
+  <p>
+  <div>
+    <%= osuny_label Communication::Website::Post.human_attribute_name(:authors) %>
+    <ul class="list-unstyled">
+      <% @post.authors.each do |author| %>
+        <li><%= osuny_link_localized author, admin_communication_author_path(author) %></li>
+      <% end %>
+    </ul>
+  </div>
 
-    <%= t('admin.communication.website.posts.by', author: @post.author.to_s_in(@l10n.language)) if @post.author %>
-
-    <% if @post.categories.any? %>
-      <%
-      categories = @post.categories
-      category_names = categories.collect { |category| category.to_s_in(@l10n.language) }
-      %>
-      <%= t('admin.communication.website.posts.in', categories: category_names.join(', ')) %>
-    <% end %>
-  </p>
+  <% if @post.categories.any?  %>
+    <div>
+      <%= osuny_label Communication::Website::Post.human_attribute_name(:categories) %>
+      <ul class="list-unstyled">
+        <% @post.categories.ordered.each do |category| %>
+          <li><%= osuny_link_localized category, admin_communication_website_post_category_path(category) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <%= render 'admin/application/permalinks/redirects', about: @l10n %>
 <% end %>
 <%= render 'admin/application/l10n/widget', about: @post, l10n: @l10n, small: true %>
