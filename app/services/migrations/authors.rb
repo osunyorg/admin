@@ -1,11 +1,15 @@
 module Migrations
   class Authors
     def self.migrate
-      authors_ids = Communication::Website::Post.pluck(:author_id) + Communication::Extranet::Post.pluck(:author_id)
-      authors_ids.uniq!
-                 .compact!
-      puts "#{authors_ids.count} authors"
-      University::Person.where(id: authors_ids).update_all(is_author: true)
+      # Mono to multi-authors
+      Communication::Website::Post.find_each do |post|
+        next if post.author_id.blank?
+        author = University::Person.find(post.author_id)
+        next if author.in?(post.authors)
+        puts post.original_localization.to_s
+        puts "  Adding author #{author.original_localization}"
+        post.authors << author
+      end
     end
   end
 end

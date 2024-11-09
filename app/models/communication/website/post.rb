@@ -92,7 +92,7 @@ class Communication::Website::Post < ApplicationRecord
     [website.config_default_languages] +
     localizations.in_languages(website.active_language_ids) +
     categories +
-    (author.present? ? author.author_facets : [])
+    authors.map { |author| author.author_facets } 
   end
 
   def references
