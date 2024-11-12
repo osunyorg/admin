@@ -1,5 +1,5 @@
 module FacetedSearch
-  class Facets::Category::Taxonomy < Facets::List
+  class Facets::Taxonomy < Facets::List
     attr_reader :l10n, :taxonomy, :language, :university
 
     def initialize(name, params, facets, options)

@@ -16,7 +16,7 @@ class University::Organization::Facets < FacetedSearch::Facets
     @categories.taxonomies.each do |taxonomy|
       taxonomy_l10n = taxonomy.localization_for(@language)
       next if taxonomy_l10n.nil?
-      add_facet FacetedSearch::Facets::Category::Taxonomy, taxonomy_l10n.slug, {
+      add_facet FacetedSearch::Facets::Taxonomy, taxonomy_l10n.slug, {
         l10n: taxonomy_l10n
       }
     end
