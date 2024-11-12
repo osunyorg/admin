@@ -749,6 +749,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_132549) do
     t.datetime "updated_at", null: false
     t.uuid "author_id"
     t.string "migration_identifier"
+    t.boolean "full_width", default: false
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"

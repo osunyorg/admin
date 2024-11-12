@@ -216,6 +216,7 @@ fr:
       communication/website/post:
         authors: Auteur·rices
         categories: Catégories
+        full_width: Pleine largeur
         website: Site Web
       communication/website/post/category:
         children: Catégories enfants
@@ -621,4 +622,5 @@ fr:
       communication_website_permalink:
         path: "Doit être un chemin d'URL. Exemple : /ancien/chemin"
       communication_website_post:
+        full_width: Sur de grands écrans, l'actualité en pleine largeur utilisera tout l'espace disponible.
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
