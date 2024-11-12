@@ -1,5 +1,8 @@
 module Importers
   class HashToPerson
+
+    NUMBER_OF_COLUMNS = 19
+
     def initialize(university, language, hash)
       @university = university
       @language = language
@@ -52,6 +55,7 @@ module Importers
       @social_twitter = @hash[15].to_s.strip
       @social_linkedin = @hash[16].to_s.strip
       @social_mastodon = @hash[17].to_s.strip
+      @category_names = @hash[18].to_s.split('|').map { |e| e.strip }
     end
 
     def build_person
@@ -84,6 +88,7 @@ module Importers
           url: @url
         }
       ]
+      person.categories = categories
       person
     end
 
@@ -130,12 +135,24 @@ module Importers
       end
     end
 
+    def categories
+      @category_names.map do |category_name|
+        category_localization = University::Person::Category::Localization.find_by(university_id: @university.id, language_id: @language.id, name: category_name)
+        if category_localization.present?
+          category_localization.about
+        else
+          category = @university.person_categories.create(localizations_attributes: [{ name: category_name, language_id: @language.id }])
+          category
+        end
+      end
+    end
+
     def add_picture_if_possible!(person)
       return if @photo.nil?
-      return if @person.picture.attached?
+      return if person.picture.attached?
       return unless @photo.end_with?(*Rails.application.config.default_images_formats)
       begin
-        file = URI.parse(@photo).read
+        file = URI.parse(@photo).open
         filename = File.basename(@photo)
         person.picture.attach(io: file, filename: filename)
       rescue

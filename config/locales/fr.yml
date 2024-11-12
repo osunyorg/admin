@@ -128,7 +128,7 @@ fr:
       one: 1 élément
       other: "%{count} éléments"
     footer:
-      signature: Osuny, un commun numérique d’intérêt général
+      signature: Osuny, un commun numérique d’intérêt général
     i18n:
       in: en %{lang}
       switch_to: basculer en %{choices}

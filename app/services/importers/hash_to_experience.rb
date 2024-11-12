@@ -25,12 +25,12 @@ module Importers
     protected
 
     def extract_variables
-      @company_name = @hash[18].to_s.strip
-      @company_siren = @hash[19].to_s.strip
-      @company_nic = @hash[20].to_s.strip
-      @experience_job = @hash[21].to_s.strip
-      @experience_from = @hash[22].to_s.strip
-      @experience_to = @hash[23].to_s.strip
+      @company_name = @hash[offset].to_s.strip
+      @company_siren = @hash[offset + 1].to_s.strip
+      @company_nic = @hash[offset + 2].to_s.strip
+      @experience_job = @hash[offset + 3].to_s.strip
+      @experience_from = @hash[offset + 4].to_s.strip
+      @experience_to = @hash[offset + 5].to_s.strip
     end
 
     def experience
@@ -104,6 +104,10 @@ module Importers
           { language_id: @language.id, name: @company_name }
         ]
       )
+    end
+
+    def offset
+      @offset ||= Importers::HashToPerson::NUMBER_OF_COLUMNS
     end
   end
 end

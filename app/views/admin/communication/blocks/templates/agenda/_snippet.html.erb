@@ -7,14 +7,19 @@
   </p>
 <% else %>
   <% if block.template.selected_events.any? %>
-    <div class="row">
-      <%
-      block.template.selected_events.each do |event|
+    <% block.template.selected_events.each do |event|
         l10n = event.localization_for(block.about.language)
         next if l10n.nil?
         %>
-        <div class="col-sm-6 mb-3">
-          <%= kamifusen_tag l10n.featured_image, class: 'img-fluid mb-2' if l10n.featured_image.attached? %>
+      <div class="row mb-3">
+        <div class="col-2">
+          <% if l10n.featured_image.attached? %>
+            <%= kamifusen_tag l10n.featured_image, width: 200, class: 'img-fluid mb-2' %>
+          <% else %>
+            <%= image_tag 'admin/placeholder.png', class: 'img-fluid mb-2' %>
+          <% end %>
+        </div>
+        <div class="col-10">
           <p class="mb-0">
             <%= l10n.title %>
             <% if l10n.subtitle.present? %>
@@ -25,8 +30,8 @@
             <%= render 'admin/communication/websites/agenda/events/dates', event: event, l10n: l10n, detailed: false %>
           </p>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   <% else %>
    <p><%= block.template.no_event_message %></p>
   <% end %>

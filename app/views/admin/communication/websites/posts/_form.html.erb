@@ -38,6 +38,7 @@
           <%= render  "admin/application/slug/form",
                       f: lf,
                       source: '#communication_website_post_localizations_attributes_0_title' %>
+          <%= f.input :full_width %>
         <% end %>
         <%= render 'admin/application/featured_image/edit', f: lf, about: @l10n %>
         <%= render 'admin/application/shared_image/edit', f: lf, about: @l10n %>
