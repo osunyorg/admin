@@ -2,13 +2,12 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
   attr_reader :language
 
   def initialize(params, options)
-    super params
-
-    @model = options[:model]
-    @about = options[:about]
-    @language = options[:language]
-    @categories = options[:categories]
-
+    super         params
+    @model        = options[:model]
+    @about        = options[:about]
+    @language     = options[:language]
+    @categories   = options[:categories]
+    
     filter_with_text :name, {
       title: University::Person::Localization.human_attribute_name('name')
     }
