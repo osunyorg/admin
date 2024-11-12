@@ -1,7 +1,8 @@
 <%
 categories_class = about.categories.klass
-taxonomies = categories_class.taxonomies.ordered
-free = categories_class.free.root
+categories_in_university = categories_class.where(university: current_university)
+taxonomies = categories_in_university.taxonomies.ordered
+free = categories_in_university.free.root
 free_categories_in_use = about.categories.merge(free)
 %>
 <% 
