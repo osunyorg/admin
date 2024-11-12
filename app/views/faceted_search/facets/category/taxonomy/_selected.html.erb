@@ -1,0 +1,13 @@
+<% anchor ||= '' %>
+<% if facet.values.any? %>
+  <% facet.values.each do |category| %>
+    <% identifier = category.id %>
+    <% if facet.value_selected?(identifier) %>
+      <% display_value = category.to_s_in(current_language) %>
+      <%= render 'faceted_search/facets/facet-selected',
+                  title: facet.title,
+                  value: display_value,
+                  path: facet.facets.path_for(facet, identifier) + anchor %>
+    <% end %>
+  <% end %>
+<% end %>

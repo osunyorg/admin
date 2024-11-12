@@ -1,10 +1,13 @@
 class University::Person::Alumnus::Facets < FacetedSearch::Facets
+  attr_reader :language
+
   def initialize(params, options)
     super params
 
     @model = options[:model]
     @about = options[:about]
     @language = options[:language]
+    @categories = options[:categories]
 
     filter_with_text :name, {
       title: University::Person::Localization.human_attribute_name('name')
@@ -22,5 +25,13 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
       display_method: Proc.new { |program| program.to_s_in(@language) },
       habtm: true
     } unless @about.is_a? Education::Program
+
+    @categories.taxonomies.each do |taxonomy|
+      taxonomy_l10n = taxonomy.localization_for(@language)
+      next if taxonomy_l10n.nil?
+      add_facet FacetedSearch::Facets::Category::Taxonomy, taxonomy_l10n.slug, {
+        l10n: taxonomy_l10n
+      }
+    end
   end
 end
