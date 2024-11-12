@@ -26,7 +26,6 @@
       <div class="col-lg-4">
         <%= f.input :default_image,
                     as: :single_deletable_file,
-                    direct_upload: true,
                     hint: images_formats_accepted_hint,
                     input_html: { accept: default_images_formats_accepted },
                     preview: 300 %>
@@ -37,7 +36,6 @@
       <div class="col-lg-4">
         <%= f.input :default_shared_image,
                     as: :single_deletable_file,
-                    direct_upload: true,
                     hint: images_formats_accepted_hint,
                     input_html: { accept: default_images_formats_accepted },
                     preview: 300 %>

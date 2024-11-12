@@ -101,26 +101,43 @@ nav[aria-label="breadcrumb"]
     border-bottom: 1px solid $color-bg-soft
     padding-bottom: 0
     padding-top: 0
-    #subnav
-        justify-content: center
     .navbar-toggler
         border: none
         padding-left: 0
-    a
-        border-top-color: transparent
-        border-top-style: solid
-        border-top-width: 5px
-        color: $color-text-alt
-        display: inline-block
-        line-height: 100%
-        margin: 0 30px
-        padding-bottom: 20px
-        padding-top: 15px
-        &:hover
-            color: $color-black
-        &.active
-            border-top-color: $color-black
-            color: $color-black
+        a
+            color: $color-text-alt
+    @include media-breakpoint-down(sm)
+        #subnav
+            margin-bottom: 10px
+        a
+            display: block
+            border-left-color: transparent
+            border-left-style: solid
+            border-left-width: 5px
+            margin-left: calc(-1 * var(--bs-gutter-x))
+            padding-bottom: 5px
+            padding-left: calc(var(--bs-gutter-x) - 5px)
+            padding-top: 5px
+            &.active
+                border-left-color: $color-black
+                color: $color-black
+    @include media-breakpoint-up(sm)
+        #subnav
+            justify-content: center
+        a
+            border-top-color: transparent
+            border-top-style: solid
+            border-top-width: 5px
+            display: inline-block
+            line-height: 100%
+            margin: 0 30px
+            padding-bottom: 20px
+            padding-top: 15px
+            &:hover
+                color: $color-black
+            &.active
+                border-top-color: $color-black
+                color: $color-black
 
 .feature-nav
     line-height: 100%

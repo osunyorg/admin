@@ -1,12 +1,17 @@
-<div class="row">
-  <%
-  block.template.selected_pages.each do |page|
-    page_l10n = page.localization_for(block.about.language) 
-    next if page_l10n.nil? 
+<% block.template.selected_pages.each do |page|
+    l10n = page.localization_for(block.language) 
+    next if l10n.nil? 
     %>
-    <div class="col-sm-6 mb-3">
-      <%= kamifusen_tag page_l10n.featured_image, class: 'img-fluid mb-2' if page_l10n.featured_image.attached? %>
-      <p><%= page_l10n.to_s %></p>
+  <div class="row mb-3">
+    <div class="col-2">
+      <% if l10n.featured_image.attached? %>
+        <%= kamifusen_tag l10n.featured_image, width: 200, class: 'img-fluid mb-2' %>
+      <% else %>
+        <%= image_tag 'admin/placeholder.png', class: 'img-fluid mb-2' %>
+      <% end %>
     </div>
-  <% end %>
-</div>
+    <div class="col-10">
+      <p><%= l10n.to_s %></p>
+    </div>
+  </div>
+<% end %>

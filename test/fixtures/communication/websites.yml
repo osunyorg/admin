@@ -7,6 +7,8 @@ website_with_github:
   default_language: fr
   default_time_zone: Europe/Paris
   deuxfleurs_hosting: false
+  feature_posts: true
+  feature_agenda: true
   university: default_university
 
 website_with_gitlab:

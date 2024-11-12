@@ -749,9 +749,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_110237) do
     t.datetime "updated_at", null: false
     t.uuid "author_id"
     t.string "migration_identifier"
+    t.boolean "full_width", default: false
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
+  end
+
+  create_table "communication_website_posts_university_persons", id: false, force: :cascade do |t|
+    t.uuid "communication_website_post_id", null: false
+    t.uuid "university_person_id", null: false
+    t.index ["communication_website_post_id", "university_person_id"], name: "post_person"
+    t.index ["university_person_id", "communication_website_post_id"], name: "person_post"
   end
 
   create_table "communication_website_showcase_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -19,14 +19,12 @@
                       as: :single_deletable_file,
                       hint: images_formats_accepted_hint,
                       input_html: { accept: default_images_formats_accepted },
-                      preview: 200,
-                      direct_upload: true %>
+                      preview: 200 %>
           <%= lf.input :favicon,
                       as: :single_deletable_file,
                       hint: images_formats_accepted_hint(formats: '.png'),
                       input_html: { accept: '.png' },
-                      preview: 100,
-                      direct_upload: true %>
+                      preview: 100 %>
           <%= f.input :color, as: :color %>
           <%= lf.input :home_sentence, as: :summernote, input_html: { data: { 'summernote-config': 'link' } } %>
           <% if can?(:create, Communication::Extranet) %>
