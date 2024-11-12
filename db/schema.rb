@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_31_101804) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_12_132644) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -334,7 +334,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_101804) do
     t.boolean "feature_jobs", default: false
     t.text "sass"
     t.text "css"
-    t.uuid "default_language_id"
+    t.uuid "default_language_id", null: false
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["default_language_id"], name: "index_communication_extranets_on_default_language_id"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
@@ -550,7 +550,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_101804) do
     t.boolean "header_cta"
     t.string "header_cta_label"
     t.string "header_cta_url"
-    t.string "header_text"
+    t.text "header_text"
     t.string "meta_description"
     t.string "migration_identifier"
     t.boolean "published"
@@ -749,9 +749,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_101804) do
     t.datetime "updated_at", null: false
     t.uuid "author_id"
     t.string "migration_identifier"
+    t.boolean "full_width", default: false
     t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
+  end
+
+  create_table "communication_website_posts_university_persons", id: false, force: :cascade do |t|
+    t.uuid "communication_website_post_id", null: false
+    t.uuid "university_person_id", null: false
+    t.index ["communication_website_post_id", "university_person_id"], name: "post_person"
+    t.index ["university_person_id", "communication_website_post_id"], name: "person_post"
   end
 
   create_table "communication_website_showcase_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1450,6 +1458,27 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_101804) do
     t.index ["university_id"], name: "index_research_thesis_localizations_on_university_id"
   end
 
+  create_table "search_index", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.string "title"
+    t.text "text"
+    t.uuid "language_id", null: false
+    t.string "about_object_type", null: false
+    t.uuid "about_object_id", null: false
+    t.string "about_localization_type", null: false
+    t.uuid "about_localization_id", null: false
+    t.uuid "website_id"
+    t.uuid "extranet_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_localization_type", "about_localization_id"], name: "index_search_on_about_localization"
+    t.index ["about_object_type", "about_object_id"], name: "index_search_on_about_object"
+    t.index ["extranet_id"], name: "index_search_index_on_extranet_id"
+    t.index ["language_id"], name: "index_search_index_on_language_id"
+    t.index ["university_id"], name: "index_search_index_on_university_id"
+    t.index ["website_id"], name: "index_search_index_on_website_id"
+  end
+
   create_table "universities", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "identifier"
@@ -1684,7 +1713,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_101804) do
   end
 
   create_table "university_person_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "biography"
+    t.text "biography"
     t.string "first_name"
     t.string "last_name"
     t.string "linkedin"
@@ -1977,6 +2006,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_101804) do
   add_foreign_key "research_thesis_localizations", "languages"
   add_foreign_key "research_thesis_localizations", "research_theses", column: "about_id"
   add_foreign_key "research_thesis_localizations", "universities"
+  add_foreign_key "search_index", "communication_extranets", column: "extranet_id"
+  add_foreign_key "search_index", "communication_websites", column: "website_id"
+  add_foreign_key "search_index", "universities"
   add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_apps", "universities"
   add_foreign_key "university_organization_categories", "universities"
