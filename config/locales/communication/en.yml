@@ -216,6 +216,7 @@ en:
       communication/website/post:
         author: Author
         categories: Categories
+        full_width: Full width
         website: Website
       communication/website/post/category:
         children: Children categories
@@ -621,4 +622,5 @@ en:
       communication_website_permalink:
         path: "Must be an URL path. Example: /old/path"
       communication_website_post:
+        full_width: On large screens, a full width post uses all available space for the content. 
         text: This field is deprecated, content will not be displayed on the website.
