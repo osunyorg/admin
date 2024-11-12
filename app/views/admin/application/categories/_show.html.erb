@@ -2,8 +2,8 @@
 categories_class = about.categories.klass
 categories_in_university = categories_class.where(university: current_university)
 taxonomies = categories_in_university.taxonomies.ordered
-free = categories_in_university.free.root
-free_categories_in_use = about.categories.merge(free)
+free_categories = categories_in_university.free.root
+free_categories_in_use = about.categories.merge(free_categories)
 %>
 <% 
 # First, taxonomies
@@ -15,11 +15,7 @@ taxonomies.each do |taxonomy|
     <%= osuny_label taxonomy.to_s_in(current_language) %>
     <ul class="list-unstyled">
       <% taxons_in_use.each do |category| %>
-        <li>
-          <%= osuny_link_localized_if can?(:read, category),
-                                      category,
-                                      [:admin, category] %>
-        </li>
+        <li><%= osuny_link_localized_if can?(:read, category), category, [:admin, category] %></li>
       <% end %>
     </ul>
   </div>
@@ -30,12 +26,10 @@ if free_categories_in_use.any? %>
   <div class="mb-4">
     <%= osuny_label about.class.human_attribute_name('categories') %>
     <ul class="list-unstyled">
-      <% free_categories_in_use.each do |category| %>
-        <li>
-          <%= osuny_link_localized_if can?(:read, category),
-                                      category,
-                                      [:admin, category] %>
-        </li>
+      <% free_categories_in_use.each do |root_category| %>
+        <% root_category.descendants_and_self.each do |category| %>
+          <li><%= osuny_link_localized_if can?(:read, category), category, [:admin, category] %></li>
+        <% end %>
       <% end %>
     </ul>
   </div>
