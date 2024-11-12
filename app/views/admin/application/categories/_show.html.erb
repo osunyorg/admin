@@ -1,0 +1,41 @@
+<%
+categories_class = about.categories.klass
+taxonomies = categories_class.taxonomies.ordered
+free = categories_class.free.root
+free_categories_in_use = about.categories.merge(free)
+%>
+<% 
+# First, taxonomies
+taxonomies.each do |taxonomy|
+  taxons_in_use = about.categories.merge(taxonomy.children)
+  next if taxons_in_use.none?
+  %>
+  <div class="mb-4">
+    <%= osuny_label taxonomy.to_s_in(current_language) %>
+    <ul class="list-unstyled">
+      <% taxons_in_use.each do |category| %>
+        <li>
+          <%= osuny_link_localized_if can?(:read, category),
+                                      category,
+                                      [:admin, category] %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<% 
+# Then, free categories
+if free_categories_in_use.any? %>
+  <div class="mb-4">
+    <%= osuny_label about.class.human_attribute_name('categories') %>
+    <ul class="list-unstyled">
+      <% free_categories_in_use.each do |category| %>
+        <li>
+          <%= osuny_link_localized_if can?(:read, category),
+                                      category,
+                                      [:admin, category] %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
