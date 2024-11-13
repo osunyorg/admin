@@ -1,0 +1,44 @@
+<%= osuny_panel t('admin.chronicles.title') do %>
+  <div id="chronicles-feed" class="row g-4 mb-3" style="max-height:60vh; overflow-y: scroll"></div>
+<% end %>
+
+<script nonce="<%= request.content_security_policy_nonce %>">
+//const RSS_URL = "https://chroniques.osuny.org/faits/index.xml";
+const RSS_URL = "https://feeds.simplecast.com/hNaFxXpO";
+const element = document.getElementById("chronicles-feed");
+fetch(RSS_URL)
+  .then(response => response.text())
+  .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+  .then(data => {
+    const items = data.querySelectorAll("item");
+    let html = "";
+    let index = 0;
+    items.forEach(item => {
+      let title = item.querySelector("title");
+      let link = item.querySelector("link");
+      if (title == '' || link == '' || index >= 12) {
+        return;
+      }
+      let pubDate = item.querySelector("pubDate");
+      var date = new Date(pubDate.textContent);
+      html += `
+        <div class="col-lg-6 col-xxl-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="card-title">${title.textContent}</h3>
+            </div>
+            <p class="card-footer mb-1 small text-end">
+              ${date.getMonth()}/${date.getFullYear()}
+              — 
+              <a href="${link.textContent}" target="_blank" rel="noopener">
+                <%= t('admin.chronicles.read_more') %>
+              </a>
+            </p>
+          </div>
+        </div>
+        `;
+      index += 1;
+    });
+    element.insertAdjacentHTML("beforeend", html);
+  });
+</script>
