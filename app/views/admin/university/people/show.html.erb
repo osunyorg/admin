@@ -18,22 +18,8 @@
       <% end %>
     <% end if @person.best_picture.attached? %>
 
-    <% if @person.categories.any? %>
-      <%= osuny_panel University::Person.human_attribute_name('categories'), small: true do %>
-        <ul class="list-unstyled">
-          <% @person.categories.ordered.each do |category| %>
-            <li>
-              <%= osuny_link_localized_if can?(:read, category),
-                                          category,
-                                          [:admin, category] %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
-    <% end %>
-
+    <%= render 'admin/application/categories/show', about: @person %>
     <%= render 'admin/application/l10n/widget', about: @person, l10n: @l10n, small: true %>
-
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
   <div class="col-md-8">

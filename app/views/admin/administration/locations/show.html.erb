@@ -6,9 +6,7 @@
     <%= render 'admin/application/featured_image/show', about: @l10n, small: true %>
   </div>
   <div class="offset-lg-1 col-lg-8">
-    <%= osuny_panel t('admin.summary.label'), small: true do %>
-      <p class="lead mb-1"><%= @l10n.summary %></p>
-    <% end %>
+    <%= render 'admin/application/summary/show', about: @l10n, small: true %>
     <div class="mb-5">
       <div class="row">
         <div class="col-lg-6">
