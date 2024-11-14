@@ -2,43 +2,26 @@
 
 <div class="row">
   <div class="col-lg-3">
-  <%= osuny_panel t('university.organization.logo') do %>
-    <% if @l10n.logo.attached? %>
-      <div>
-        <%= osuny_label University::Organization::Localization.human_attribute_name('logo') %><br>
-        <%= kamifusen_tag @l10n.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5 mb-3' %>
-      </div>
-    <% end %>
-    <% if @l10n.logo_on_dark_background.attached? %>
-      <div>
-        <%= osuny_label University::Organization::Localization.human_attribute_name('logo_on_dark_background') %><br>
-        <%= kamifusen_tag @l10n.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail p-5' %>
-      </div>
-    <% end %>
-  <% end if @l10n.logo.attached? || @l10n.logo_on_dark_background.attached? %>
+    <%= osuny_panel t('university.organization.logo') do %>
+      <% if @l10n.logo.attached? %>
+        <div>
+          <%= osuny_label University::Organization::Localization.human_attribute_name('logo') %><br>
+          <%= kamifusen_tag @l10n.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5 mb-3' %>
+        </div>
+      <% end %>
+      <% if @l10n.logo_on_dark_background.attached? %>
+        <div>
+          <%= osuny_label University::Organization::Localization.human_attribute_name('logo_on_dark_background') %><br>
+          <%= kamifusen_tag @l10n.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail p-5' %>
+        </div>
+      <% end %>
+    <% end if @l10n.logo.attached? || @l10n.logo_on_dark_background.attached? %>
 
-  <%= osuny_panel t('metadata') do %>
     <%= osuny_property_show_text @l10n, :slug, hide_blank: true %>
     <%= osuny_property_show_boolean @organization, :active %>
-  <% end %>
-
-  <% if @organization.categories.any? %>
-    <%= osuny_panel University::Organization.human_attribute_name('categories'), small: true do %>
-      <ul class="list-unstyled">
-        <% @organization.categories.ordered.each do |category| %>
-          <li>
-            <%= osuny_link_localized_if can?(:read, category),
-                                        category,
-                                        [:admin, category] %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  <% end %>
-
-  <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
-
-  <%= render 'admin/application/meta_description/show', about: @l10n %>
+    <%= render 'admin/application/categories/show', about: @organization %>
+    <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
   <div class="offset-lg-1 col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n %>

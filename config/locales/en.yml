@@ -120,6 +120,9 @@ en:
   admin:
     advanced_settings: Advanced settings
     attachment_not_available: Attachment not available
+    chronicles:
+      title: Chronicles
+      read_more: Learn more
     dashboard: Dashboard
     directory: Directory
     duplicate: Duplicate
