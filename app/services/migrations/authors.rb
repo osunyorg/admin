@@ -10,7 +10,6 @@ module Migrations
     protected
 
     def self.migrate_post(post)
-      return if post.author_id.blank?
       author = University::Person.find(post.author_id)
       return if author.in?(post.authors)
       puts post.original_localization.to_s
