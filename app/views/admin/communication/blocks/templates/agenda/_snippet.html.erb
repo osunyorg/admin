@@ -1,15 +1,38 @@
-<p class="mb-0">
-  <% if block.template.mode == 'categories' %>
+<% if block.template.mode == 'categories' %>
+  <p>
     <%= @website.agenda_categories
                 .map { |category| category.to_s_in(block.language) }
                 .join(', ') %>
-  <% else %>
-    <% if block.template.selected_events.any? %>
-      <%= block.template.selected_events
-                        .map { |event| event.to_s_in(block.language) }
-                        .join(', ') %>
-    <% else %>
-      <%= block.template.no_event_message %>
+
+  </p>
+<% else %>
+  <% if block.template.selected_events.any? %>
+    <% block.template.selected_events.each do |event|
+        l10n = event.localization_for(block.about.language)
+        next if l10n.nil?
+        %>
+      <div class="row mb-3">
+        <div class="col-2">
+          <% if l10n.featured_image.attached? %>
+            <%= kamifusen_tag l10n.featured_image, width: 200, class: 'img-fluid mb-2' %>
+          <% else %>
+            <%= image_tag 'admin/placeholder.png', class: 'img-fluid mb-2' %>
+          <% end %>
+        </div>
+        <div class="col-10">
+          <p class="mb-0">
+            <%= l10n.title %>
+            <% if l10n.subtitle.present? %>
+              <br><%= l10n.subtitle %>
+            <% end %>
+          </p>
+          <p class="small">
+            <%= render 'admin/communication/websites/agenda/events/dates', event: event, l10n: l10n, detailed: false %>
+          </p>
+        </div>
+      </div>
     <% end %>
+  <% else %>
+   <p><%= block.template.no_event_message %></p>
   <% end %>
-</p>
+<% end %>

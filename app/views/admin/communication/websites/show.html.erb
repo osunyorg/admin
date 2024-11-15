@@ -1,11 +1,11 @@
 <% content_for :title, @l10n %>
 
-<% content_for :title_left do %>
+<% content_for :title_right do %>
   <%= render 'admin/application/favorites/widget', about: @website %>
   <%= link_to @website.url, @website.url, target: :_blank unless @website.url.blank? %>
   <div class="small">
-    <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
     <% if @website.about.present? %>
+      <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
       — <%= osuny_link_localized_if can?(:read, @website.about), @website.about, [:admin, @website.about] %>
     <% end %>
   </div>

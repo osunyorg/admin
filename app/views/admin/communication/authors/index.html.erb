@@ -1,0 +1,33 @@
+<% content_for :title, University::Person::Localization::Author.model_name.human(count: 2) %>
+
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @authors.total_count %>
+    <%= University::Person::Localization::Author.model_name.human(count: @authors.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_communication_authors_path %>
+</div>
+
+<div class="row g-3">
+  <% @authors.each do |person| %>
+    <div class="col-6 col-lg-3 col-xxl-2">
+      <div class="<%= osuny_card_classes %>">
+        <%= osuny_thumbnail_localized person, large: true %>
+        <div class="card-body">
+          <p class="mb-1">
+            <%= osuny_link_localized  person,
+                                      admin_communication_author_path(person),
+                                      classes: 'stretched-link'  %>
+          </p>
+          <% if person.posts.any? %>
+            <p class="small text-muted mb-0">
+              <%= person.posts.size %>
+              <%= Communication::Website::Post.model_name.human(count: person.posts.size).downcase %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= paginate @authors %>

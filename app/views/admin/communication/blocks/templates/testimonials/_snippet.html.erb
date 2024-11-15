@@ -1,5 +1,11 @@
 <% block.template.elements.each do |element| %>
-  <p class="mb-2">
-    <%= block_component_snippet block, :text, template: element %>
-  </p>
+  <div class="mb-3">
+    <blockquote class="fst-italic">
+      <%= block_component_snippet block, :text, template: element %>
+    </blockquote>
+    <p class="small">
+      — <b><%= block_component_snippet block, :author, template: element %></b>
+      <%= block_component_snippet block, :job, template: element %>
+    </p>
+  </div>
 <% end %>

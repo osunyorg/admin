@@ -1,5 +1,6 @@
 <%
 laboratory = @l10n.about
+language = @l10n.language
 %>---
 name: >-
   <%= prepare_text_for_static @l10n.name %>
@@ -15,4 +16,6 @@ city: >-
   <%= prepare_text_for_static laboratory.city %>
 country: >-
   <%= laboratory.country_common_name %>
+contact_details:
+<%= render 'admin/application/static/postal_address', about: laboratory, l10n: @l10n, language: language %>
 ---

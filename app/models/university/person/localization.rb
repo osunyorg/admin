@@ -43,15 +43,14 @@ class University::Person::Localization < ApplicationRecord
   include WithGitFiles
   include WithUniversity
 
-  has_summernote :biography
-
   alias :person :about
 
-  delegate  :featured_image,
-            to: :person
+  delegate :featured_image, to: :person
+
+  has_summernote :summary
+  has_summernote :biography
 
   validates :first_name, :last_name, presence: true
-
   before_validation :prepare_name
 
   def person_l10n
@@ -118,7 +117,7 @@ class University::Person::Localization < ApplicationRecord
   protected
 
   def backlinks_blocks(website)
-    website.blocks.persons
+    website.blocks.template_persons
   end
 
   def prepare_name

@@ -2,20 +2,7 @@
 event = @l10n.about
 language = @l10n.language
 %>---
-<%= render 'admin/application/static/title', about: @l10n %>
-subtitle: >-
-  <%= prepare_text_for_static @l10n.subtitle %>
-<%
-# https://github.com/osunyorg/admin/issues/1880
-if event.archive? %>
-date: "<%= event.from_day&.iso8601 %>"
-<% elsif event.current? %>
-weight: -1
-date: "<%= event.from_day&.iso8601 %>"
-<% else %>
-weight: <%= event.distance_in_days %>
-<% end %>
-<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: event,
@@ -31,11 +18,10 @@ weight: <%= event.distance_in_days %>
 <%= render 'admin/application/shared_image/static', about: @l10n %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
-<% if @l10n.categories.any? %>
-events_categories:
-<% @l10n.categories.each do |category| %>
-  - "<%= category.slug %>"
-<% end %>
-<% end %>
+<%= render 'admin/application/categories/static',
+            about: event,
+            l10n: @l10n,
+            categories: @website.agenda_categories,
+            key: :events_categories %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---

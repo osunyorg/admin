@@ -48,12 +48,15 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  validates :name, presence: true
+  has_summernote :summary
 
+  validates :name, presence: true
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}events_categories/#{slug}/_index.html"
+    prefix = git_path_content_prefix(website)
+    slugs = slug_with_ancestors_slugs(separator: '-')
+    "#{prefix}events_categories/#{slugs}/_index.html"
   end
 
   def template_static
@@ -93,5 +96,10 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
 
   def set_communication_website_id
     self.communication_website_id ||= about.communication_website_id
+  end
+
+  # TODO : Pertinent ?
+  def hugo_slug_in_website(website)
+    slug_with_ancestors_slugs(separator: '-')
   end
 end

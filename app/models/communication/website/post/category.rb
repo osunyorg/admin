@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  is_programs_root         :boolean          default(FALSE)
+#  is_taxonomy              :boolean          default(FALSE)
 #  position                 :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -27,24 +28,16 @@
 #  fk_rails_e58348b119  (program_id => education_programs.id)
 #
 class Communication::Website::Post::Category < ApplicationRecord
+  include AsCategory
   include AsDirectObject
   include Localizable
-  include Orderable
   include Sanitizable
   include WithMenuItemTarget
-  include WithTree
   include WithUniversity
 
-  belongs_to              :parent,
-                          class_name: 'Communication::Website::Post::Category',
-                          optional: true
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_many                :children,
-                          class_name: 'Communication::Website::Post::Category',
-                          foreign_key: :parent_id,
-                          dependent: :destroy
   has_and_belongs_to_many :posts,
                           class_name: 'Communication::Website::Post',
                           join_table: :communication_website_categories_posts,
@@ -86,12 +79,12 @@ class Communication::Website::Post::Category < ApplicationRecord
 
   # Same as the Post object
   def abouts_with_post_block
-    website.blocks.posts.collect(&:about)
+    website.blocks.template_posts.collect(&:about)
     # Potentiel gain de performance (25%)
     # Méthode collect : X abouts = X requêtes
     # Méthode ci-dessous : X abouts = 6 requêtes
-    # website.post_categories.where(id: website.blocks.posts.where(about_type: "Communication::Website::Post::Category").distinct.pluck(:about_id)) +
-    # website.pages.where(id: website.blocks.posts.where(about_type: "Communication::Website::Page").distinct.pluck(:about_id)) +
-    # website.posts.where(id: website.blocks.posts.where(about_type: "Communication::Website::Post").distinct.pluck(:about_id))
+    # website.post_categories.where(id: website.blocks.template_posts.where(about_type: "Communication::Website::Post::Category").distinct.pluck(:about_id)) +
+    # website.pages.where(id: website.blocks.template_posts.where(about_type: "Communication::Website::Page").distinct.pluck(:about_id)) +
+    # website.posts.where(id: website.blocks.template_posts.where(about_type: "Communication::Website::Post").distinct.pluck(:about_id))
   end
 end

@@ -1,0 +1,53 @@
+<% content_for :title, @l10n %>
+<%= simple_form_for [:admin, @program] do |f| %>
+  <%= f.simple_fields_for :localizations, @l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+    <%= f.hidden_field :part, value: 'pedagogy' %>
+
+    <div class="row mb-5">
+      <%
+      [
+        :content,
+        :pedagogy,
+        :evaluation,
+        :opportunities,
+        :results
+      ].each do |property| %>
+        <div class="col-xxl-4 col-md-6 mb-4">
+          <%= render 'admin/education/programs/forms/input_with_inheritance', f: lf, property: property %>
+        </div>
+      <% end %>
+    </div>
+  
+    <%= osuny_panel t('education.teachings'), small: true do %>
+      <%= link_to_add_association t('add'),
+                                  f,
+                                  :university_person_involvements,
+                                  class: button_classes,
+                                  partial: 'admin/education/programs/involvement_fields',
+                                  data: {
+                                    'association-insertion-method': 'append',
+                                    'association-insertion-node':   '#involvements',
+                                  } %>
+      <div id="involvements" class="mt-3">
+        <%
+        sorted_involvements = @program.university_person_involvements
+                                      .sort_by { |involvement|
+                                        involvement.person&.to_s_alphabetical_in(current_language).to_s
+                                      }
+        %>
+        <%= f.simple_fields_for :university_person_involvements,
+                                sorted_involvements,
+                                include_id: false do |involvement_f| %>
+          <%= render 'admin/education/programs/involvement_fields', f: involvement_f, include_id: true %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -36,7 +36,7 @@ class Research::Publication < ApplicationRecord
   include WithCitations
   include WithGitFiles
 
-  enum source: {
+  enum :source, {
     osuny: 0,
     hal: 1
   }
@@ -62,6 +62,10 @@ class Research::Publication < ApplicationRecord
       unaccent(research_publications.citation_full) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
+
+  def published_at
+    publication_date
+  end
 
   def editable?
     source == 'osuny'

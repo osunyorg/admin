@@ -10,6 +10,7 @@
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :string
+#  subtitle                 :string
 #  summary                  :text
 #  title                    :string
 #  created_at               :datetime         not null
@@ -51,8 +52,9 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  validates :title, presence: true
+  has_summernote :summary
 
+  validates :title, presence: true
   before_validation :set_communication_website_id, on: :create
 
   scope :ordered, -> (language = nil) { order(year: :desc, title: :asc) }

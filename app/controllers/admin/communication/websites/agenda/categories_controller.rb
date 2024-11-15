@@ -76,7 +76,7 @@ class Admin::Communication::Websites::Agenda::CategoriesController < Admin::Comm
   def category_params
     params.require(:communication_website_agenda_category)
           .permit(
-            :parent_id,
+            :is_taxonomy, :parent_id,
             localizations_attributes: [
               :id, :language_id,
               :name, :meta_description, :summary, :slug,

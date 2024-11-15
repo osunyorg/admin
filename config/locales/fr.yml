@@ -128,7 +128,7 @@ fr:
       one: 1 élément
       other: "%{count} éléments"
     footer:
-      signature: Osuny, un commun numérique d’intérêt général
+      signature: Osuny, un commun numérique d’intérêt général
     i18n:
       in: en %{lang}
       switch_to: basculer en %{choices}
@@ -248,6 +248,7 @@ fr:
       category: Filtrer par catégorie
       date: Filtrer par date
       element: Filtrer par %{element}
+      facet: Filtrer par responsabilité
       kind: Filtrer par type
       role: Filtrer par rôle
     buttons:

@@ -2,15 +2,9 @@
 post = @l10n.about
 language = @l10n.language
 %>---
-<%= render 'admin/application/static/title', about: @l10n %>
-date: "<%= @l10n.published_at&.iso8601 %>"
-<%= render 'admin/application/static/permalink', about: @l10n %>
+<%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
-<%= render 'admin/application/static/design',
-            about: post,
-            l10n: @l10n,
-            full_width: false,
-            toc_offcanvas: false %>
+<%= render 'admin/application/static/design', about: post, l10n: @l10n %>
 <% if @l10n.pinned %>
 weight: 1
 <% end %>
@@ -18,12 +12,11 @@ weight: 1
 authors:
   - "<%= @l10n.author.slug %>"
 <% end %>
-<% if @l10n.categories.any? %>
-posts_categories:
-<% @l10n.categories.each do |category| %>
-  - "<%= category.slug_with_ancestors_slugs(separator: '-') %>"
-<% end %>
-<% end %>
+<%= render 'admin/application/categories/static',
+            about: post,
+            l10n: @l10n,
+            categories: @website.post_categories,
+            key: :posts_categories %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/featured_image/static', about: @l10n %>
 <%= render 'admin/application/shared_image/static', about: @l10n %>

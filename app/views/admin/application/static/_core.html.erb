@@ -1,0 +1,69 @@
+<%
+# Partial arguments 
+forced_title ||= nil
+forced_slug ||= nil
+skip_date ||= false
+# Preparing variables
+title = forced_title || about.to_s
+show_subtitle = about.respond_to?(:subtitle)
+show_date = about.respond_to?(:published_at) && !skip_date
+show_published_at = about.respond_to?(:published_at)
+if about.respond_to?(:slug) && about.slug.present? 
+  slug = forced_slug || about.slug
+end
+if @website
+  previous_permalinks = about.previous_permalinks_in_website(@website)
+  hugo = about.hugo(@website) if about.respond_to?(:hugo)
+end
+%>
+<%
+#############
+# Title and subtitle
+#############
+%>
+title: >-
+  <%= prepare_text_for_static title %>
+<% if show_subtitle %>
+subtitle: >-
+  <%= prepare_text_for_static about.subtitle %>
+<% end %>
+<%
+#############
+# Permalinks
+#############
+%>
+<% if @website %>
+url: "<%= about.current_permalink_in_website(@website)&.path %>"
+<%    if slug %>
+slug: "<%= slug %>"
+<%    end %>
+<%    if previous_permalinks.any? %>
+aliases:
+<%      previous_permalinks.each do |permalink| %>
+  - <%= permalink.path %>
+<%      end %>
+<%    end %>
+<% end %>
+<%
+#############
+# Dates & meta
+#############
+%>
+<% if show_date %>
+date: <%= about.published_at&.iso8601 %>
+lastmod: <%= about.updated_at&.iso8601 %>
+<% end %>
+meta:
+<% if hugo %>
+  hugo:
+    permalink: "<%= hugo.permalink %>"
+    file: "<%= hugo.file %>"
+    path: "<%= hugo.path %>"
+    slug: "<%= hugo.slug %>"
+<% end %>
+  dates:
+    created_at: <%= about.created_at&.iso8601 %>
+    updated_at: <%= about.updated_at&.iso8601 %>
+<% if show_published_at %>
+    published_at: <%= about.published_at&.iso8601 %>
+<% end %>

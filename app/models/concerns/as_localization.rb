@@ -71,7 +71,7 @@ module AsLocalization
     # Blocks need an about, so we save before localizing blocks
     l10n.save
 
-    # Handle headings & blocks if object has any
+    # Handle blocks if object has any
     localize_contents!(l10n) if respond_to?(:contents)
     l10n
   end
@@ -92,12 +92,8 @@ module AsLocalization
   end
 
   def localize_contents!(localization)
-    blocks.without_heading.ordered.each do |block|
+    blocks.ordered.each do |block|
       block.localize_for!(localization)
-    end
-
-    headings.root.ordered.each do |heading|
-      heading.localize_for!(localization)
     end
   end
 

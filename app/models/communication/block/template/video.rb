@@ -2,9 +2,10 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
 
   has_layouts [:player, :button]
 
+  has_component :description, :rich_text
   has_component :url, :string
   has_component :video_title, :string
-  has_component :transcription, :text
+  has_component :transcription, :rich_text
 
   def video_iframe
     video_provider.iframe_tag(title: video_iframe_title)

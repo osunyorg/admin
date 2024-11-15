@@ -1,5 +1,19 @@
-<p class="mb-0">
-  <%= block.template.elements.map { |element|
-    "#{block_component_snippet block, :number, template: element} #{block_component_snippet block, :unit, template: element}".strip
-  }.join(', ') %>
-</p>
+<%= block_component_snippet block, :description %>
+<div class="row mb-3">
+  <% block.template.elements.each do |element| %>
+    <div class="col-sm-6 mb-4">
+      <% if element.image.present? %>
+        <div class="row">
+          <div class="col-4">
+            <%= block_component_snippet block, :image, template: element %>
+          </div>
+        </div>
+      <% end %>
+      <div class="lead">
+        <%= block_component_snippet block, :number, template: element %>
+        <%= block_component_snippet block, :unit, template: element %>
+      </div>
+      <%= block_component_snippet block, :description, template: element %>
+    </div>
+  <% end %>
+</div>

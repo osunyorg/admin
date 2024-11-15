@@ -41,7 +41,10 @@ class University::Organization::Category::Localization < ApplicationRecord
   end
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}organizations_categories/#{slug}/_index.html" if for_website?(website)
+    return unless for_website?(website)
+    prefix = git_path_content_prefix(website)
+    slugs = slug_with_ancestors_slugs(separator: '-')
+    "#{prefix}organizations_categories/#{slugs}/_index.html"
   end
 
   def template_static
@@ -54,6 +57,11 @@ class University::Organization::Category::Localization < ApplicationRecord
 
   def published?
     persisted?
+  end
+
+  # TODO : Pertinent ?
+  def hugo_slug_in_website(website)
+    slug_with_ancestors_slugs(separator: '-')
   end
 
 end

@@ -1,17 +1,23 @@
 <%  if block.template.mode == 'categories' %>
   <% @website.post_categories.ordered(current_language).each do |category| %>
     <p><%= category.to_s_in(current_language) %></p>
-  <% end %>
+  <% end if @website%>
 <% else %>
-  <div class="row">
   <% block.template.selected_posts.each do |post|
-    l10n = post.localization_for(block.language)
-    next if l10n.nil?
-    %>
-    <div class="col-lg-6 mb-4">
-      <%= kamifusen_tag l10n.featured_image, width: 300, class: 'img-fluid mb-2' if l10n.featured_image.attached? %>
-      <p><%= post.to_s_in(current_language) %></p>
+      l10n = post.localization_for(block.language)
+      next if l10n.nil?
+      %>
+    <div class="row mb-3">
+      <div class="col-2">
+        <% if l10n.featured_image.attached? %>
+          <%= kamifusen_tag l10n.featured_image, width: 200, class: 'img-fluid mb-2' %>
+        <% else %>
+          <%= image_tag 'admin/placeholder.png', class: 'img-fluid mb-2' %>
+        <% end %>
+      </div>
+      <div class="col-10">
+        <p><%= l10n.to_s %></p>
+      </div>
     </div>
   <% end %>
-  </div>
 <% end %>

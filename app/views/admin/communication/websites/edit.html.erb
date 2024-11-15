@@ -1,3 +1,48 @@
 <% content_for :title, t('admin.subnav.settings') %>
 
-<%= render 'form', website: @website, l10n: @l10n %>
+<%= simple_form_for [:admin, @website] do |f| %>
+  <%= f.simple_fields_for :localizations, @l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
+    <%= render 'admin/communication/websites/form/features', f: f %>
+    <%= osuny_separator %>
+    <div class="row">
+      <div class="col-lg-4">
+        <%= lf.input :name unless @website.persisted? %>
+        <% if @website.localizations.many? %>
+          <%= f.association :default_language,
+                            include_blank: false,
+                            collection: @website.languages,
+                            label_method: lambda { |l| language_name(l.iso_code) } %>
+        <% end %>
+        <%= f.input :default_time_zone,
+                    collection: time_zones_for_select,
+                    include_blank: false,
+                    selected: f.object.default_time_zone || Time.zone.name %>
+      </div>
+      <div class="col-lg-4">
+        <%= f.input :default_image,
+                    as: :single_deletable_file,
+                    hint: images_formats_accepted_hint,
+                    input_html: { accept: default_images_formats_accepted },
+                    preview: 300 %>
+        <p class="form-text">
+          <%= t('admin.communication.website.default_image') %>
+        </p>
+      </div>
+      <div class="col-lg-4">
+        <%= f.input :default_shared_image,
+                    as: :single_deletable_file,
+                    hint: images_formats_accepted_hint,
+                    input_html: { accept: default_images_formats_accepted },
+                    preview: 300 %>
+      </div>
+    </div>
+    <% content_for :action_bar_right do %>
+      <%= submit f %>
+    <% end %>
+  <% end %>
+<% end %>

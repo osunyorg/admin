@@ -4,6 +4,9 @@ en:
     communication:
       blocks:
         add: Add block
+        advanced:
+          anchor: Anchor
+          url_with_anchor: URL with anchor
         alerts:
           file_is_too_big: File is too big!
         categories:
@@ -64,8 +67,6 @@ en:
             close: Close block edition
             title: Block edition
         empty: This block is empty and will not appear
-        headings:
-          add: Add a title
         templates:
           agenda:
             description: A list of upcoming events.
@@ -253,6 +254,9 @@ en:
             description: A list of features with images (often icons) and a description.
             edit:
               add_element: Add feature
+              description:
+                label: Description
+                placeholder: Enter description here
               element:
                 alt:
                   label: Alternative text
@@ -323,6 +327,9 @@ en:
             description: Animated figures, with a unit and a text.
             edit:
               add_key: Add key figure
+              description:
+                label: Description
+                placeholder: Enter description here
               element:
                 description:
                   label: Description
@@ -656,9 +663,21 @@ en:
               vertical:
                 description: Events are shown vertically, along the page.
                 label: Vertical
+          title:
+            description: A level 2 title, that can eventually be shown folded, with its content hidden.
+            layouts:
+              classic:
+                description: The title, as simple as possible.
+                label: Classic
+              collapsed:
+                description: The title is folded, which means all the blocks after it are hidden, and there's a button to show them.
+                label: Folded
           video:
             description: An embedded video from most platforms, with the text transcription for accessibility, and no autoplay.
             edit:
+              description:
+                label: Description
+                placeholder: Enter description
               url:
                 hint: |
                   Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=lAYhfCPelO0
@@ -700,10 +719,10 @@ en:
             zero: No block
         modes:
           structure:
-            description: In “Organize structure” mode, you do not see the blocks, only the titles. When you move a title, all the blocks follow. This is the ideal mode for organising long documents.
+            description: In “Organize structure” mode, you see only a small preview of each block. This is the ideal mode to organize long documents.
             tab: Organize structure
           write:
-            description: In “Write content” mode, you can move blocks and headings anywhere you like, independently of each other. For example, you can move a heading higher up in the document without it taking its blocks with it.
+            description: In “Write content” mode, you can move blocks anywhere you like, independently of each other. For example, you can move a title higher up in the document without it taking its blocks with it.
             tab: Write content
   enums:
     communication:
@@ -734,5 +753,6 @@ en:
           sound: Sound
           testimonials: Testimonials
           timeline: Timeline
+          title: Title
           video: Video
           volumes: Volumes

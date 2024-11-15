@@ -44,8 +44,11 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def new
+    if current_user.person.present?
+      current_user.person.update_column(:is_author, true)
+      @post.author = current_user.person
+    end
     @categories = categories
-    @post.author_id = current_user.person&.id
     breadcrumb
   end
 
@@ -107,9 +110,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def post_params
     params.require(:communication_website_post)
     .permit(
-      :author_id, category_ids: [],
+      :full_width, :author_id, category_ids: [], 
       localizations_attributes: [
-        :id, :title, :meta_description, :summary, :text,
+        :id, :title, :subtitle, :meta_description, :summary, :text,
         :published, :published_at, :slug, :pinned,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,

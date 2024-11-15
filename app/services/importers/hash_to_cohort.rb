@@ -5,7 +5,7 @@ module Importers
       @hash = hash
       @error = nil
       extract_variables
-      person.add_to_cohort cohort if valid?
+      add_to_cohort(person, cohort) if valid?
     end
 
     def valid?
@@ -27,10 +27,21 @@ module Importers
 
     protected
 
+
+    def add_to_cohort(person, cohort)
+      add_object_if_necessary cohort, person.cohorts
+      add_object_if_necessary cohort.academic_year, person.diploma_years
+      add_object_if_necessary cohort.program, person.diploma_programs
+    end
+
+    def add_object_if_necessary(object, list)
+      list << object unless object.in?(list)
+    end
+
     def extract_variables
-      @school_id = @hash[18].to_s.strip
-      @program_id = @hash[19].to_s.strip
-      @year = @hash[20].to_s.strip.to_i
+      @school_id = @hash[offset].to_s.strip
+      @program_id = @hash[offset + 1].to_s.strip
+      @year = @hash[offset + 2].to_s.strip.to_i
     end
 
     def school
@@ -49,6 +60,10 @@ module Importers
       @cohort ||= @university.education_cohorts
                        .where(school: school, program: program, academic_year: academic_year)
                        .first_or_create
+    end
+
+    def offset
+      @offset ||= Importers::HashToPerson::NUMBER_OF_COLUMNS
     end
 
   end

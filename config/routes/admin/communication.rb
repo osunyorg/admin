@@ -1,10 +1,13 @@
 namespace :communication do
+  resources :authors, only: [:index, :show]
   scope 'photo-imports' do
     get 'unsplash' => 'photo_imports#unsplash'
     get 'pexels' => 'photo_imports#pexels'
   end
   resources :websites do
     member do
+      get 'edit/language' => 'websites#edit_language', as: :edit_language
+      get 'edit/technical' => 'websites#edit_technical', as: :edit_technical
       get :analytics
       get :security
       get :static
@@ -126,11 +129,6 @@ namespace :communication do
   end
   resources :blocks, controller: 'blocks', except: [:index] do
     collection do
-      resources :headings, controller: 'blocks/headings', except: [:index, :show] do
-        collection do
-          post :reorder
-        end
-      end
       post :reorder
     end
     member do
@@ -175,11 +173,6 @@ namespace :communication do
       end
     end
     resources :jobs, controller: 'extranets/jobs'
-  end
-  resources :alumni do
-    collection do
-      resources :imports, only: [:index, :show, :new, :create]
-    end
   end
   root to: 'dashboard#index'
 end

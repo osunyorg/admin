@@ -36,6 +36,27 @@
             <% end %>
           </ul>
         <% end %>
+        <%= osuny_label t('education.program.registration_scheme') %>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th><%= Education::Program.human_attribute_name('initial') %></th>
+              <td class="text-end"><%= t @program.initial %></td>
+            </tr>
+            <tr>
+              <th><%= Education::Program.human_attribute_name('continuing') %></th>
+              <td class="text-end"><%= t @program.continuing %></td>
+            </tr>
+            <tr>
+              <th><%= Education::Program.human_attribute_name('apprenticeship') %></th>
+              <td class="text-end"><%= t @program.apprenticeship %></td>
+            </tr>
+            <tr>
+              <th><%= Education::Program.human_attribute_name('capacity') %></th>
+              <td class="text-end"><%= @program.capacity %></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="col-lg-6">
         <%= render 'admin/application/summary/show', about: @l10n, small: true %>
@@ -66,13 +87,17 @@
           <p><%= Education::Program::Localization.human_attribute_name(@l10n.published ? 'is_published' : 'is_draft') %></p>
         </div>
         <%= render 'admin/application/meta_description/show', about: @l10n %>
+        <%= render 'admin/application/property/text', object: @l10n, property: :presentation %>
+        <%= render 'admin/application/property/text', object: @l10n, property: :objectives %>
       </div>
     </div>
   </div>
   <div class="offset-lg-1 col-lg-3">
     <% if @l10n.logo.attached? %>
       <%= osuny_label Education::Program::Localization.human_attribute_name('logo') %>
-      <%= kamifusen_tag @l10n.logo, class: 'img-fluid mb-5' %>
+      <div class="mb-5">
+        <%= kamifusen_tag @l10n.logo, class: 'img-fluid svg-fluid' %>
+      </div>
     <% end %>
     <%= render 'admin/application/featured_image/show', about: @l10n, small: true %>
   </div>

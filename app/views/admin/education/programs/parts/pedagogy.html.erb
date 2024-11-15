@@ -1,19 +1,24 @@
 <% content_for :title, @l10n %>
 
+<p class="lead mb-5"><%= t('education.program.parts.pedagogy.hint') %>
+
 <div class="row">
-  <div class="col-lg-4 mb-4">
-    <%= render 'admin/application/property/text', object: @l10n, property: :content %>
-  </div>
-  <div class="col-lg-4 mb-4">
-    <%= render 'admin/application/property/text', object: @l10n, property: :pedagogy %>
-  </div>
-  <div class="col-lg-4 mb-4">
-    <%= render 'admin/application/property/text', object: @l10n, property: :evaluation %>
-  </div>
+  <%
+  [
+    :content,
+    :pedagogy,
+    :evaluation,
+    :opportunities,
+    :results
+  ].each do |property| %>
+    <div class="col-xxl-4 col-md-6 mb-4">
+      <%= render 'admin/application/property/text', object: @l10n, property: property %>
+    </div>
+  <% end %>
 </div>
 
+<%= osuny_label t('education.teachings') %>
 <% if @teacher_involvements.any? %>
-  <%= osuny_label t('education.teachings') %>
   <div class="row g-2 mb-3">
     <% @teacher_involvements.each do |involvement|
         person = involvement.person
@@ -33,6 +38,8 @@
       </div>
     <% end %>
   </div>
+<% else %>
+  <p>-</p>
 <% end %>
 
 <% content_for :action_bar_right do %>

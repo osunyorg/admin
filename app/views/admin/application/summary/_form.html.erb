@@ -1,8 +1,11 @@
 <%= f.input :summary,
+            as: :summernote,
             label: t('admin.summary.label'),
             hint: t('admin.summary.hint'),
+            as: :summernote,
             input_html: {
-              data: { translatable: true },
-              rows: 3,
-              value: about.summary&.gsub('&amp;', '&')
+              data: {
+                translatable: true,
+                'summernote-config' => 'mini'
+              }
             } %>

@@ -4,6 +4,9 @@ fr:
     communication:
       blocks:
         add: Ajouter un bloc
+        advanced:
+          anchor: Ancre
+          url_with_anchor: URL avec ancre
         alerts:
           file_is_too_big: "Le fichier est trop lourd\_!"
         categories:
@@ -64,8 +67,6 @@ fr:
             close: Fermer l'édition du bloc
             title: Édition de bloc
         empty: Ce bloc est vide et n'apparaitra pas
-        headings:
-          add: Ajouter un titre
         templates:
           agenda:
             description: Une liste d'événements à venir.
@@ -253,6 +254,9 @@ fr:
             description: Une liste de fonctionnalités avec des images, par exemple des icônes, et une description.
             edit:
               add_element: Ajouter une fonctionnalité
+              description:
+                label: Description
+                placeholder: Entrer la description
               element:
                 alt:
                   label: Texte alternatif
@@ -323,6 +327,9 @@ fr:
             description: Des chiffres clés avec une jolie animation. Chaque chiffre peut être doté d'une unité et d'un texte.
             edit:
               add_key: Ajouter un chiffre clé
+              description:
+                label: Description
+                placeholder: Entrer la description
               element:
                 description:
                   label: Description
@@ -656,9 +663,21 @@ fr:
               vertical:
                 description: Les événements sont présentés verticalement, dans la continuité de la page.
                 label: Vertical
+          title:
+            description: Un titre de niveau 2, que l'on peut présenter replié si on le souhaite.
+            layouts:
+              classic:
+                description: Le titre, tout simplement.
+                label: Classique
+              collapsed:
+                description: Le titre replié, avec tous les blocs qui le suivent cachés et un bouton pour les afficher.
+                label: Replié
           video:
             description: Une vidéo intégrée dans la page depuis diverses plateformes, avec la transcription et sans lecture automatique.
             edit:
+              description:
+                label: Description
+                placeholder: Entrer la description
               url:
                 hint: |
                   Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=lAYhfCPelO0
@@ -700,10 +719,10 @@ fr:
             zero: Aucun bloc
         modes:
           structure:
-            description: Dans le mode “Organiser le plan”, vous ne voyez pas les blocs mais seulement les titres. Lorsque vous déplacez un titre, tous les blocs suivent. C'est le mode idéal pour ranger les documents longs.
+            description: Dans le mode “Organiser le plan”, vous ne voyez qu'un petit aperçu de chaque bloc. C'est le mode idéal pour ranger les documents longs.
             tab: Organiser le plan
           write:
-            description: Dans le mode “Écrire le contenu”, vous pouvez déplacer les blocs et les titres où vous voulez, indépendamment les uns des autres. Ainsi, vous pouvez déplacer un titre plus haut dans le document sans qu'il n'emporte ses blocs.
+            description: Dans le mode “Écrire le contenu”, vous pouvez déplacer les blocs où vous voulez, indépendamment les uns des autres. Ainsi, vous pouvez déplacer un titre plus haut dans le document sans qu'il n'emporte ses blocs.
             tab: Écrire le contenu
   enums:
     communication:
@@ -734,5 +753,6 @@ fr:
           sound: Son
           testimonials: Témoignages
           timeline: Frise chronologique
+          title: Titre
           video: Vidéo
           volumes: Volumes
