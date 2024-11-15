@@ -11,7 +11,7 @@ module Migrations
 
     def self.migrate_post(post)
       author = University::Person.find(post.author_id)
-      return if author.in?(post.authors)
+      return if post.author_id.in?(post.author_ids)
       puts post.original_localization.to_s
       puts " author #{author.original_localization}"
       post.authors << author
