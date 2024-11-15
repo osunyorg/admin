@@ -81,6 +81,7 @@ jobs:
       # CodeClimate coverage
       - run: ./cc-test-reporter format-coverage --output "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
 
-      - deploy:
+      - run:
+          name: report CodeClimate coverage
           command: |
             ./cc-test-reporter sum-coverage --output - --parts $CIRCLE_NODE_TOTAL coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --input -
