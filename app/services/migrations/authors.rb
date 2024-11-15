@@ -2,7 +2,7 @@ module Migrations
   class Authors
     # Mono to multi-authors
     def self.migrate
-      Communication::Website::Post.find_each do |post|
+      Communication::Website::Post.where.not(author_id: nil).find_each do |post|
         migrate_post(post)
       end
     end
