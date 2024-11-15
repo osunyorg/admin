@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_08_132549) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_15_135650) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -755,7 +755,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_132549) do
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
 
-  create_table "communication_website_posts_university_persons", id: false, force: :cascade do |t|
+  create_table "communication_website_posts_university_people", id: false, force: :cascade do |t|
     t.uuid "communication_website_post_id", null: false
     t.uuid "university_person_id", null: false
     t.index ["communication_website_post_id", "university_person_id"], name: "post_person"

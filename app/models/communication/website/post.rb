@@ -3,6 +3,7 @@
 # Table name: communication_website_posts
 #
 #  id                       :uuid             not null, primary key
+#  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -33,7 +34,6 @@ class Communication::Website::Post < ApplicationRecord
 
   has_and_belongs_to_many :authors,
                           class_name: 'University::Person',
-                          join_table: :communication_website_posts_university_persons,
                           foreign_key: :communication_website_post_id,
                           association_foreign_key: :university_person_id
   has_and_belongs_to_many :categories,
