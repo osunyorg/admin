@@ -120,6 +120,9 @@ fr:
   admin:
     advanced_settings: Réglages avancés
     attachment_not_available: Impossible d'accéder à l'élément
+    chronicles:
+      title: Chroniques
+      read_more: En savoir plus
     dashboard: Tableau de bord
     directory: Annuaire
     duplicate: Dupliquer
