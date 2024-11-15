@@ -2,11 +2,11 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
   attr_reader :language, :categories
 
   def initialize(params, options)
-    super         params
-    @model        = options[:model]
-    @about        = options[:about]
-    @language     = options[:language]
-    @categories   = options[:categories]
+    super       params
+    @model      = options[:model]
+    @about      = options[:about]
+    @language   = options[:language]
+    @categories = options[:categories]
     add_name
     add_years
     add_programs

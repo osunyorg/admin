@@ -1,9 +1,9 @@
 <% anchor ||= '' %>
 <% if facet.values.any? %>
-  <% facet.values.each do |category| %>
-    <% identifier = category.id %>
+  <% facet.values.each do |taxon| %>
+    <% identifier = taxon.id %>
     <% if facet.value_selected?(identifier) %>
-      <% display_value = category.to_s_in(current_language) %>
+      <% display_value = taxon.to_s_in(current_language) %>
       <%= render 'faceted_search/facets/facet-selected',
                   title: facet.title,
                   value: display_value,

@@ -3,10 +3,10 @@
   <li>
     <% unless facet.title.blank? %><b><%= facet.title %></b><% end %>
     <ol class="faceted__facet__list list-unstyled">
-      <% facet.values.each do |category| %>
+      <% facet.values.each do |taxon| %>
         <%
-        identifier = category.id
-        display_value = category.to_s_in(current_language)
+        identifier = taxon.id
+        display_value = taxon.to_s_in(current_language)
         %>
         <li class="faceted__facet__list__value <%= 'faceted__facet__list__value--selected' if facet.value_selected?(identifier) %>">
           <%= render 'faceted_search/link',

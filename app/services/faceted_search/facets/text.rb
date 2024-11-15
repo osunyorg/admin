@@ -9,8 +9,7 @@ module FacetedSearch
     def add_scope(scope)
       return scope if params.blank?
       language = facets.language
-      search_term = self.class.sanitize_sql_like(params)
-      scope.for_search_term(search_term, language)
+      scope.for_search_term(params, language)
     end
   end
 end

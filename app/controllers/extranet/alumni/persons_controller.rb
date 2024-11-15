@@ -6,7 +6,7 @@ class Extranet::Alumni::PersonsController < Extranet::Alumni::ApplicationControl
       language: current_language,
       categories: current_university.person_categories
     }
-    @count = @facets.results.to_a.count
+    @count = @facets.results.count
     @people =  @facets.results
                       .ordered(current_language)
                       .page(params[:page])
