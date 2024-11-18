@@ -18,7 +18,7 @@
         <% @person&.cohorts&.each do |cohort| %>
           <%
           program_l10n = cohort.program.best_localization_for(current_language)
-          diploma_l10n = cohort.program.diploma.best_localization_for(current_language)
+          diploma_l10n = cohort.program.diploma.best_localization_for(current_language) if cohort.program.diploma.present?
           school_l10n = cohort.school.best_localization_for(current_language)
           %>
           <li class="experiences__experience py-4 border-top">
@@ -27,7 +27,9 @@
                 <p class="mb-0">
                   <%= link_to [:alumni, cohort] do %>
                     <b><%= program_l10n %></b><br>
-                    <%= diploma_l10n %><br>
+                    <% if diploma_l10n.present? %>
+                      <%= diploma_l10n %><br>
+                    <% end %>
                     <%= cohort.year %>
                   <% end %>
                 </p>

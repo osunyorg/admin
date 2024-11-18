@@ -6,9 +6,14 @@
 </p>
 <% end %>
 
+<%
+subtitle_parts = []
+subtitle_parts << @cohort.program.diploma.to_s_in(current_language) if @cohort.program.diploma.present?
+subtitle_parts << @cohort.program.to_s_in(current_language)
+%>
+
 <p class="mb-5">
-  <%= @cohort.program.diploma.to_s_in(current_language) %>
-  — <%= @cohort.program.to_s_in(current_language) %>
+  <%= subtitle_parts.join(' — ') %>
 </p>
 
 <%= render 'extranet/alumni/persons/list', people: @cohort.people %>
