@@ -1,4 +1,6 @@
 class Communication::Extranet::Document::Facets < FacetedSearch::Facets
+  attr_reader :language
+
   def initialize(params, extranet, language)
     super(params)
 
