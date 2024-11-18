@@ -46,7 +46,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def new
     if current_user.person.present?
       current_user.person.update_column(:is_author, true)
-      @post.author = current_user.person
+      @post.authors << current_user.person
     end
     @categories = categories
     breadcrumb
@@ -110,7 +110,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def post_params
     params.require(:communication_website_post)
     .permit(
-      :full_width, :author_id, category_ids: [], 
+      :full_width, author_ids: [], category_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text,
         :published, :published_at, :slug, :pinned,
