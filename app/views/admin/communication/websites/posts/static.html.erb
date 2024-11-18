@@ -8,9 +8,9 @@ language = @l10n.language
 <% if @l10n.pinned %>
 weight: 1
 <% end %>
-<% if @post.authors.any? %>
+<% if post.authors.any? %>
 authors:
-<% @post.authors.each do |author| 
+<% post.authors.each do |author|
     author_l10n = author.localization_for(language)
     next if author_l10n.nil?
     %>

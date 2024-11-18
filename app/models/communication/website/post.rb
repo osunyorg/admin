@@ -92,7 +92,7 @@ class Communication::Website::Post < ApplicationRecord
     [website.config_default_languages] +
     localizations.in_languages(website.active_language_ids) +
     categories +
-    authors.map(&:author_facets) 
+    authors.map(&:author_facets).flatten
   end
 
   def references
