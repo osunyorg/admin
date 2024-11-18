@@ -137,7 +137,7 @@ en:
           no_teaching: No teaching
           show_person_html: This page only shows teaching assignments.<br>If you wish to view or modify the person's details, click on the link below.
         tree:
-          title: Programs treeview
+          title: Treeview
         view_as_list: Listview
         view_as_tree: Treeview
   education:

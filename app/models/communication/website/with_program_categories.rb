@@ -12,7 +12,13 @@ module Communication::Website::WithProgramCategories
   def set_programs_categories_safely
     categories_collections.each do |objects|
       programs_root_category = set_programs_categories_root_for!(objects)
-      set_programs_categories_at_level_for! objects, programs_root_category, education_programs.root.ordered
+      original_language = programs_root_category.original_localization.language
+      set_programs_categories_at_level_for!(
+        objects,
+        programs_root_category,
+        education_programs.root.ordered(original_language),
+        original_language
+      )
     end
   rescue
   end
@@ -46,7 +52,7 @@ module Communication::Website::WithProgramCategories
     root_category
   end
 
-  def set_programs_categories_at_level_for!(objects, parent_category, programs)
+  def set_programs_categories_at_level_for!(objects, parent_category, programs, language)
     programs.map.with_index do |program, index|
       category = objects.where(program_id: program.id)
                         .first_or_initialize(university_id: university.id)
@@ -58,8 +64,8 @@ module Communication::Website::WithProgramCategories
           name: program.to_s_in(language)
         )
       end
-      children = education_programs.where(parent_id: program.id).ordered
-      set_programs_categories_at_level_for! objects, category, children
+      children = education_programs.where(parent_id: program.id).ordered(language)
+      set_programs_categories_at_level_for!(objects, category, children, language)
     end
   end
 end

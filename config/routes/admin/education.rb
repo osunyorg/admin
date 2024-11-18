@@ -30,7 +30,6 @@ namespace :education do
         end
       end
       get :tree
-      post :reorder
     end
     member do
       get 'pedagogy'            => 'programs/parts#pedagogy', as: :pedagogy
