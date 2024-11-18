@@ -83,7 +83,7 @@ class Education::Diploma::Localization < ApplicationRecord
 
   def programs
     @programs ||=  about.programs
-                        .ordered
+                        .ordered(language)
                         .map { |program| program.localization_for(language) }
                         .compact
   end

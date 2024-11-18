@@ -123,10 +123,6 @@ class Education::Program < ApplicationRecord
     accessibility_merge_array blocks
   end
 
-  def last_ordered_element
-    university.education_programs.where(parent_id: parent_id).ordered.last
-  end
-
   def move_children
     children.update(parent_id: parent_id)
   end
