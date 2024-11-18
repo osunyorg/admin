@@ -29,12 +29,16 @@
             </div>
             <%= lf.input :published_at, html5: true, as: :date %>
           <% end %>
-          <%= f.association :author,
+          <%= f.association :authors,
                             collection: osuny_collection(
                               current_university.people.authors,
                               localized: true,
                               label_method: :to_s_alphabetical
-                            ) %>
+                            ),
+                            input_html: {
+                              multiple: true,
+                              class: "form-select select2"
+                            } %>
           <%= render  "admin/application/slug/form",
                       f: lf,
                       source: '#communication_website_post_localizations_attributes_0_title' %>
