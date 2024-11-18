@@ -3,6 +3,7 @@
 # Table name: communication_website_posts
 #
 #  id                       :uuid             not null, primary key
+#  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -31,9 +32,10 @@ class Communication::Website::Post < ApplicationRecord
   include WithMenuItemTarget
   include WithUniversity
 
-  belongs_to :author,
-             class_name: 'University::Person',
-             optional: true
+  has_and_belongs_to_many :authors,
+                          class_name: 'University::Person',
+                          foreign_key: :communication_website_post_id,
+                          association_foreign_key: :university_person_id
   has_and_belongs_to_many :categories,
                           class_name: 'Communication::Website::Post::Category',
                           join_table: :communication_website_categories_posts,
@@ -90,7 +92,7 @@ class Communication::Website::Post < ApplicationRecord
     [website.config_default_languages] +
     localizations.in_languages(website.active_language_ids) +
     categories +
-    (author.present? ? author.author_facets : [])
+    authors.map(&:author_facets).flatten
   end
 
   def references
