@@ -8,7 +8,6 @@
 #  capacity           :integer
 #  continuing         :boolean
 #  initial            :boolean
-#  position           :integer          default(0)
 #  qualiopi_certified :boolean          default(FALSE)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -31,7 +30,7 @@ class Education::Program < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include Localizable
-  include Orderable
+  include LocalizableOrderByNameScope
   include Sanitizable
   include WebsitesLinkable
   include WithAlumni
@@ -59,32 +58,6 @@ class Education::Program < ApplicationRecord
                           association_foreign_key: :education_program_category_id
 
   before_destroy :move_children
-
-  # can't use LocalizableOrderByNameScope because scope ordered is already defined by Orderable
-  scope :ordered_by_name, -> (language) {
-    localization_name_select = <<-SQL
-      COALESCE(
-        MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN TRIM(LOWER(UNACCENT(localizations.name))) END),
-        MAX(TRIM(LOWER(UNACCENT(localizations.name)))) FILTER (WHERE localizations.rank = 1)
-      ) AS localization_name
-    SQL
-
-    # Join the table with a subquery that ranks localizations
-    # The subquery assigns a rank to each localization, with 1 being the first localization for each object
-    joins(sanitize_sql_array([<<-SQL
-      LEFT JOIN (
-        SELECT
-          localizations.*,
-          ROW_NUMBER() OVER(PARTITION BY localizations.about_id ORDER BY localizations.created_at ASC) as rank
-        FROM
-          #{table_name.singularize}_localizations as localizations
-      ) localizations ON #{table_name}.id = localizations.about_id
-    SQL
-    ]))
-    .select("#{table_name}.*", localization_name_select)
-    .group("#{table_name}.id")
-    .order("localization_name ASC")
-  }
 
   scope :for_search_term, -> (term, language) {
     joins(:localizations)
