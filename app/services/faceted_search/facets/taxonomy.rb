@@ -23,20 +23,29 @@ module FacetedSearch
 
     def add_scope(scope)
       return scope if params_array.blank?
-      scope.joins(:categories).where(categories: { id: params_array })
+
+      scope.joins(association_name).where(association_table_name => { id: params_array })
     end
 
     protected
+
+    def categories_class
+      taxonomy.class
+    end
+
+    def association_name
+      @association_name ||= :categories
+    end
+
+    def association_table_name
+      @association_table_name ||= categories_class.table_name
+    end
 
     def descendants
       categories_class.where(
         university: university,
         id: taxonomy.descendants.pluck(:id)
       )
-    end
-    
-    def categories_class
-      taxonomy.class
     end
   end
 end
