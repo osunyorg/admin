@@ -12,7 +12,7 @@ class Education::Cohort::Facets < FacetedSearch::Facets
     }
 
     filter_with_checkboxes :program_id, {
-      source: @about.programs.ordered,
+      source: @about.programs.ordered(@language),
       title: Education::Program.model_name.human(count: 2),
       display_method: Proc.new { |program| program.to_s_in(@language) }
     } unless @about.is_a? Education::Program

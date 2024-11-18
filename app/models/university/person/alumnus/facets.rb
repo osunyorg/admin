@@ -32,7 +32,7 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
   def add_programs
     return if @about.is_a? Education::Program
     filter_with_checkboxes :diploma_programs, {
-      source: @about.programs.ordered_by_name(@language),
+      source: @about.programs.ordered(@language),
       title: Education::Program.model_name.human(count: 2),
       display_method: Proc.new { |program| program.to_s_in(@language) },
       habtm: true

@@ -12,7 +12,9 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
   end
 
   def show
-    @programs = @diploma.programs.ordered.page params[:page]
+    @programs = @diploma.programs
+                        .ordered(current_language)
+                        .page(params[:page])
     breadcrumb
   end
 
