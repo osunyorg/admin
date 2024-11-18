@@ -214,7 +214,7 @@ en:
         subtitle: Subtitle
         title: Title
       communication/website/post:
-        author: Author
+        authors: Authors
         categories: Categories
         full_width: Full width
         website: Website
