@@ -15,8 +15,12 @@
       <% end %>
     </div>
     <div class="col-lg-5">
-      <p class="mb-0"><%= link_to l10n, contacts_person_path(person) %></p>
-      <p class="mt-0 text-muted"><%= l10n.summary %></p>
+      <p class="mb-0">
+        <%= link_to l10n, contacts_person_path(person) %>
+      </p>
+      <div class="mt-0 text-muted">
+        <%= sanitize l10n.summary %>
+      </div>
     </div>
     <div class="col-lg-5">
       <%= render 'extranet/contacts/persons/details', person: person, l10n: l10n %>
