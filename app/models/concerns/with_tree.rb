@@ -31,19 +31,16 @@ module WithTree
 
   def siblings
     self.class.unscoped
-              .where(
-                parent: parent,
-                university: university
-              )
+              .where(parent: parent, university: university)
               .where.not(id: id)
-              .ordered(original_localization.language)
+              .ordered(original_language)
   end
 
   def self_and_children(level)
     elements = []
     label = "&nbsp;&nbsp;&nbsp;" * level + self.to_s
     elements << { label: label, id: self.id, parent_id: self.parent_id }
-    children_ordered.each do |child|
+    children.ordered(original_language).each do |child|
       elements.concat(child.self_and_children(level + 1))
     end
     elements
@@ -51,16 +48,12 @@ module WithTree
   
   protected
 
-  def children_ordered
-    if self.respond_to?(:original_localization)
-      children.ordered(original_localization.language)
-    else
-      children.ordered
-    end
+  def original_language
+    self.respond_to?(:original_localization) ? original_localization.language : nil
   end
 
   def descendants_flattened
-    children_ordered.map { |child| 
+    children.ordered(original_language).map { |child| 
       [child, child.descendants]
     }.flatten
   end
