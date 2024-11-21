@@ -11,7 +11,7 @@
   <% if placeholder %>
     <option value="" disabled><%= placeholder %></option>
   <% end %>
-  <% programs.each do |program| %>
+  <% programs.ordered(current_language).each do |program| %>
     <option value="<%= program.id %>">
       <%= program.to_s_in(block.language) %>
     </option>

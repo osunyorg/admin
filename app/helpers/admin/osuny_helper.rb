@@ -132,7 +132,7 @@ module Admin::OsunyHelper
 
   def osuny_collection_recursive(list, level, localized, label_method)
     collection = []
-    list.ordered.each do |object|
+    list.ordered(current_language).each do |object|
       object_for_name = localized ? object.best_localization_for(current_language) : object
       name = label_method.respond_to?(:call) ? label_method.call(object_for_name)
                                              : object_for_name.public_send(label_method)

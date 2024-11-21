@@ -1,5 +1,5 @@
 <%= render  'admin/administration/qualiopi/evaluations/list',
-            programs: current_university.education_programs.ordered,
+            programs: current_university.education_programs.ordered(current_language),
             checks: [
               :prerequisites,
               :objectives,
