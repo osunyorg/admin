@@ -4,8 +4,7 @@
               mb-2
               <%= 'treeview__element--draft' unless program.published_in?(current_language) %>
               <%= 'treeview__element--empty' unless program.has_children? %>"
-      data-id="<%= program.id %>"
-      data-parent="<%= program.parent_id %>">
+      data-id="<%= program.id %>">
     <div class="<%= osuny_card_classes(horizontal: true) %> treeview__label">
       <%= link_to children_admin_education_program_path(id: program.id),
                   class: 'js-treeview-openzone d-inline-block', remote: true do %>

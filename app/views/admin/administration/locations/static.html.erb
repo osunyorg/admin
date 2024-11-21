@@ -37,7 +37,10 @@ diplomas:
 <%
 location.diplomas.ordered.each do |diploma|
   diploma_l10n = diploma.best_localization_for(language)
-  programs = location.education_programs.where(diploma: diploma).root.ordered
+  programs = location.education_programs
+                    .where(diploma: diploma)
+                    .root
+                    .ordered(language)
   next if programs.empty?
 %>
   - name: >-

@@ -3,13 +3,14 @@ class Extranet::Alumni::PersonsController < Extranet::Alumni::ApplicationControl
     @facets = University::Person::Alumnus::Facets.new params[:facets], {
       model: about&.university_person_alumni,
       about: about,
-      language: current_language
+      language: current_language,
+      categories: current_university.person_categories
     }
+    @count = @facets.results.count
     @people =  @facets.results
                       .ordered(current_language)
                       .page(params[:page])
                       .per(72)
-    @count = @people.total_count
     breadcrumb
   end
 

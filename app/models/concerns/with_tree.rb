@@ -14,8 +14,7 @@ module WithTree
   end
 
   def ancestors
-    has_parent? ? parent.ancestors.push(parent)
-                : []
+    has_parent? ? parent.ancestors.push(parent) : []
   end
 
   def ancestors_and_self
@@ -23,8 +22,7 @@ module WithTree
   end
 
   def descendants
-    has_children? ? children.ordered.map { |child| [child, child.descendants].flatten }.flatten
-                  : []
+    has_children? ? descendants_flattened : []
   end
 
   def descendants_and_self
@@ -33,22 +31,31 @@ module WithTree
 
   def siblings
     self.class.unscoped
-              .where(
-                parent: parent, 
-                university: university
-              )
+              .where(parent: parent, university: university)
               .where.not(id: id)
-              .ordered
+              .ordered(original_language)
   end
 
   def self_and_children(level)
     elements = []
     label = "&nbsp;&nbsp;&nbsp;" * level + self.to_s
     elements << { label: label, id: self.id, parent_id: self.parent_id }
-    children.ordered.each do |child|
+    children.ordered(original_language).each do |child|
       elements.concat(child.self_and_children(level + 1))
     end
     elements
+  end
+  
+  protected
+
+  def original_language
+    self.respond_to?(:original_localization) ? original_localization.language : nil
+  end
+
+  def descendants_flattened
+    children.ordered(original_language).map { |child| 
+      [child, child.descendants]
+    }.flatten
   end
 
 end

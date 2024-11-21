@@ -2,7 +2,7 @@
 depth ||= 2
 indentation = ' ' * depth
 %>
-<% programs.ordered_by_name(language).each do |program| %>
+<% programs.ordered(language).each do |program| %>
   <%
   program_l10n = program.localization_for(language)
   next unless program_l10n
