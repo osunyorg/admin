@@ -13,6 +13,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
     @pages = @website.pages
+    @feature_nav = 'navigation/admin/communication/website/pages'
     breadcrumb
   end
 
@@ -20,6 +21,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     @pages = @pages.filter_by(params[:filters], current_language)
                    .ordered_by_title(current_language)
                    .page(params[:page])
+    @feature_nav = 'navigation/admin/communication/website/pages'
     breadcrumb
   end
 

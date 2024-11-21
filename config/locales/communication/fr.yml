@@ -185,6 +185,13 @@ fr:
         related_category: Catégorie liée
         special_page: Page spéciale
         website: Site Web
+      communication/website/page/category:
+        parent: Catégorie parente
+      communication/website/page/category/localization:
+        featured_image: Image à la une
+        featured_image_alt: Texte alternatif
+        name: Nom
+        slug: Slug
       communication/website/page/localization:
         breadcrumb_title: Nom affiché dans le fil d'ariane
         featured_image: Image à la une
@@ -316,6 +323,9 @@ fr:
         all: Toutes les pages
         one: Page
         other: Pages
+      communication/website/page/category:
+        one: Catégorie
+        other: Catégories
       communication/website/portfolio/category:
         one: Catégorie
         other: Catégories
