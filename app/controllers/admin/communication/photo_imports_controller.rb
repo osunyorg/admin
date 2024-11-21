@@ -11,16 +11,28 @@ class Admin::Communication::PhotoImportsController < Admin::Communication::Appli
       lang: @lang
     }
     p[:orientation] = params[:orientation] if params.has_key? :orientation
-    @search = Unsplash::Search.search "/search/photos", Unsplash::Photo, p
-    @total = @search.total
-    @total_pages = @search.total_pages
+    begin
+      @search = Unsplash::Search.search "/search/photos", Unsplash::Photo, p
+      @total = @search.total
+      @total_pages = @search.total_pages
+    rescue Unsplash::Error => e
+      @search = []
+      @total = 0
+      @total_pages = 1
+    end
   end
 
   def pexels
     return if @query.blank?
-    @search = Pexels::Client.new.photos.search(@query, page: @page, per_page: @per_page)
-    @total = @search.total_results
-    @total_pages = @search.total_pages
+    begin
+      @search = Pexels::Client.new.photos.search(@query, page: @page, per_page: @per_page)
+      @total = @search.total_results
+      @total_pages = @search.total_pages
+    rescue Pexels::APIError => e
+      @search = []
+      @total = 0
+      @total_pages = 1
+    end
   end
 
   protected
