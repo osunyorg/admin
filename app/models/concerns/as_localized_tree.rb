@@ -70,7 +70,6 @@ module AsLocalizedTree
               .unscoped
               .where(parent_id: about.parent_id, university: university)
               .where.not(id: about.id)
-              .ordered(language)
   end
 
   def localizations_for(abouts)
@@ -81,8 +80,8 @@ module AsLocalizedTree
 
   # Beaucoup trop semblable à WithTree
   def descendants_flattened
-    children.ordered(language).map { 
-      |child| [child, child.descendants] 
+    children.ordered(language).map {
+      |child| [child, child.descendants]
     }.flatten
   end
 

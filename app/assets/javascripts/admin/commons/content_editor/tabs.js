@@ -49,6 +49,10 @@ window.osuny.contentEditor.tabs = {
 
     loadCurrentTab: function () {
         'use strict';
+        if (!this.target) {
+            return;
+        }
+
         this.target.innerHTML = '';
         this.xhr = new XMLHttpRequest();
         this.xhr.open('GET', this.source, true);
