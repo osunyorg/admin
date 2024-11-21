@@ -2,7 +2,9 @@ class Extranet::Alumni::OrganizationsController < Extranet::Alumni::ApplicationC
   def index
     @facets = University::Organization::Facets.new params[:facets], {
       model: about&.university_person_alumni_organizations,
-      about: about
+      about: about,
+      language: current_language,
+      categories: current_university.organization_categories
     }
     @organizations = @facets.results
                             .ordered(current_language)
