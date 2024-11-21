@@ -21,6 +21,11 @@ has:
 <% end %>
 position: <%= page.position %>
 weight: <%= page.position %>
+<%= render 'admin/application/categories/static',
+            about: page,
+            l10n: @l10n,
+            categories: @website.page_categories,
+            key: :pages_categories %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 bodyclass: >-
   <%= page.best_bodyclass %>
