@@ -23,7 +23,7 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   def new
     if current_user.person.present?
       current_user.person&.update_column(:is_author, true)
-      @post.authors << current_user.person
+      @post.author = current_user.person
     end
     breadcrumb
   end
