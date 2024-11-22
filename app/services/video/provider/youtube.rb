@@ -1,9 +1,11 @@
 class Video::Provider::Youtube < Video::Provider::Default
   DOMAINS = [
-    'youtube.com', 
-    'www.youtube.com', 
-    'img.youtube.com', 
-    'youtu.be', 
+    'youtube.com',
+    'www.youtube.com',
+    'img.youtube.com',
+    'youtu.be',
+    'youtube-nocookie.com',
+    'www.youtube-nocookie.com',
   ]
 
   def identifier
@@ -27,7 +29,7 @@ class Video::Provider::Youtube < Video::Provider::Default
 
   # https://developers.google.com/youtube/player_parameters
   def iframe_url
-    "https://www.youtube.com/embed/#{identifier}"
+    "https://www.youtube-nocookie.com/embed/#{identifier}"
   end
 
   # L'autoplay est à 1 uniquement parce que l'iframe n'est pas chargée
