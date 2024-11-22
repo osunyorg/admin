@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_18_081450) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_22_103550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -747,10 +747,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_18_081450) do
     t.uuid "communication_website_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "author_id"
     t.string "migration_identifier"
     t.boolean "full_width", default: false
-    t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
@@ -1935,7 +1933,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_18_081450) do
   add_foreign_key "communication_website_post_localizations", "universities"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
-  add_foreign_key "communication_website_posts", "university_people", column: "author_id"
   add_foreign_key "communication_websites", "languages", column: "default_language_id"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_academic_years", "universities"
