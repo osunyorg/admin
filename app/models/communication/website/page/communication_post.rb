@@ -8,6 +8,10 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
     true
   end
 
+  def design_options_block_template_kind
+    :posts
+  end
+
   def dependencies
     super +
     [website.config_default_languages] +
@@ -18,4 +22,5 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
   def git_path_relative
     'posts/_index.html'
   end
+  
 end

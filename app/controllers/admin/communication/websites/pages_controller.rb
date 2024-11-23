@@ -153,7 +153,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def page_params
     params.require(:communication_website_page)
           .permit(
-            :communication_website_id, :bodyclass, :full_width, :parent_id,
+            :communication_website_id, :bodyclass, :full_width, :parent_id, :design_options,
             localizations_attributes: [
               :id, :title, :breadcrumb_title, :meta_description, :summary, :header_text, :header_cta, :header_cta_label, :header_cta_url, :text, :slug, :published,
               :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,

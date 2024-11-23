@@ -1,18 +1,6 @@
-<div class="row pure__row--small">
-  <div class="col-lg-6">
-    <div class="mb-5">
-      <%= block_component_edit block, :mode %>
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-    <%= block_component_edit block, :option_main_summary %>
-    <%= block_component_edit block, :option_image %>
-    <%= block_component_edit block, :option_summary %>
-  </div>
-</div>
-
+<%= block_component_edit block, :mode %>
 <%= block_component_edit block, :layout %>
+<%= render 'admin/communication/blocks/templates/pages/options', block: block %>
 
 <div class="row pure__row--small">
   <div class="col-lg-6">
