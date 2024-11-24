@@ -432,7 +432,6 @@ fr:
                 label: Avec des liens cliquables vers les pages des organisations?
               option_logo:
                 label: Logo
-              options: Options d'affichage
             layouts:
               grid:
                 description: Une série de logos carrés, avec le nom de chaque organisation.
@@ -517,11 +516,19 @@ fr:
                 options:
                   category: Une catégorie spécifique
                   selection: Une sélection de personnes
-              option_image:
-                label: "Avec un portrait de chaque personne\_?"
               option_link:
                 label: Lien cliquable vers la page de la personne
-              options: Options d'affichage
+            layouts:
+              grid:
+                description: Les personnes sont présentées en grille, de gauche à droite puis de haut en bas.
+                label: Grille
+              large:
+                description: Chaque personne est présentée en majesté, sur toute la largeur disponible avec une grande image.
+                label: Grand
+                more: En savoir plus
+              list:
+                description: Les personnes sont présentées sous forme de liste.
+                label: Liste
           posts:
             description: Une liste d'actualités mises en avant.
             edit:

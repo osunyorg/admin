@@ -3,6 +3,10 @@ module Communication::Website::Page::WithDesignOptions
 
   OPTION_PREFIX = 'option_'
 
+  def design_options?
+    design_options_block_template_kind.present?
+  end
+
   def design_options=(value)
     self[:design_options] = JSON.parse(value)
   end

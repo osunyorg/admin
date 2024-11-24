@@ -432,7 +432,6 @@ en:
                 label: With clickable link to each organization's page?
               option_logo:
                 label: Logo
-              options: Display options
             layouts:
               grid:
                 description: Square logos and a simple text below.
@@ -517,11 +516,18 @@ en:
                 options:
                   category: A specific category
                   selection: A selection of persons
-              option_image:
-                label: With a portrait for each person?
               option_link:
                 label: Clickable link to person's page
-              options: Display options
+            layouts:
+              grid:
+                description: A grid of persons, with circular photos the same size.
+                label: Grid
+              large:
+                description: Each person is presented in majesty, across the full width available, with a large image.
+                label: Large
+              list:
+                description: A simple list of persons.
+                label: List
           posts:
             description: A list of highlighted news.
             edit:

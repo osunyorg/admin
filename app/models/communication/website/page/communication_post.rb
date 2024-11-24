@@ -1,5 +1,9 @@
 class Communication::Website::Page::CommunicationPost < Communication::Website::Page
 
+  def design_options_block_template_kind
+    :posts
+  end
+
   def editable_width?
     false
   end
