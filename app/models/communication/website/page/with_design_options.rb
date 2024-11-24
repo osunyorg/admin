@@ -18,13 +18,6 @@ module Communication::Website::Page::WithDesignOptions
     }.compact
   end
 
-  def design_options_active
-    design_options_hash.map { |key, value|
-      next unless value
-      key
-    }.compact
-  end
-
   def design_options_layout
     design_options.dig('layout')
   end

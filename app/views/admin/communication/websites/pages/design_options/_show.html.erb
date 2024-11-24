@@ -6,10 +6,4 @@ kind = about.design_options_block_template_kind
     <%= osuny_label t('admin.communication.blocks.components.layouts.label') %><br>
     <%= t "admin.communication.blocks.templates.#{kind}.layouts.#{about.design_options_layout}.label" %>
   </p>
-  <p>
-    <%= osuny_label t('admin.communication.blocks.display_options.title') %><br>
-    <%= about.design_options_active.map { |key| 
-        t "admin.communication.blocks.templates.#{kind}.edit.option_#{key}.label"
-      }.to_sentence %>
-  </p>
 </div>

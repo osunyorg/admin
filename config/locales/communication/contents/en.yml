@@ -450,12 +450,6 @@ en:
                 options:
                   children: Main page and children
                   selection: A specific selection of pages
-              option_image:
-                label: Show pages images
-              option_main_summary:
-                label: Show main page summary
-              option_summary:
-                label: Show pages short descriptions
               page_id:
                 hint: This page will set the title and main link of the block on the website. If you select a page and fill no title above, the page title will be used. If you set a title, it will replace the main page's title.
                 label: Select the main page
@@ -465,6 +459,8 @@ en:
                 label: Page
                 none: No page
                 title: Selected pages
+              show_main_summary:
+                label: Show main page summary
             layouts:
               alternate:
                 description: Pages either on the left or on the right, composing a graphically light layout.

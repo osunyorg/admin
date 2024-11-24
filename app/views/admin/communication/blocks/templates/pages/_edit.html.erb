@@ -7,6 +7,9 @@
     <div class="my-5">
       <h2 class="h4"><%= t '.main_page.title' %></h2>
       <%= block_component_edit block, :page_id %>
+      <div v-show="data.page_id">
+        <%= block_component_edit block, :show_main_summary %>
+      </div>
     </div>
 
     <div class="my-5" v-if="data.mode == 'selection'">
