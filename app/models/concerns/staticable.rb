@@ -1,11 +1,6 @@
 module Staticable
   extend ActiveSupport::Concern
 
-  TYPES_WITHOUT_SPECIAL_PAGE = [
-    Communication::Website::Page::Localization,
-    Communication::Website::Page::Category::Localization
-  ]
-
   def hugo(website)
     @hugo ||= OpenStruct.new(
       permalink: hugo_permalink_in_website(website),
@@ -31,8 +26,7 @@ module Staticable
 
   def hugo_ancestors_for_special_page(website)
     # Si on est sur une page ou une catégorie de page, pas d'ancêtres à chercher, le breadcrumb va se construire avec les parents.
-    does_not_have_special_page = TYPES_WITHOUT_SPECIAL_PAGE.any? { |type| is_a?(type) }
-    return [] if does_not_have_special_page
+    return [] if hugo_does_not_have_special_page?
     # Sinon, les objets ont une "page spéciale", (agenda, actualités, offre de formation...)
     permalink = Communication::Website::Permalink.for_object(self, website)
     return [] unless permalink
@@ -58,5 +52,12 @@ module Staticable
 
   def hugo_slug_in_website(website)
     slug
+  end
+
+  def hugo_does_not_have_special_page?
+    [
+      Communication::Website::Page::Localization,
+      Communication::Website::Page::Category::Localization
+    ].any? { |type| is_a?(type) }
   end
 end
