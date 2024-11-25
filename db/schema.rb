@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_22_103550) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_25_104348) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -881,8 +881,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_22_103550) do
   create_table "education_diploma_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "duration"
     t.string "name"
-    t.boolean "published", default: false
-    t.datetime "published_at"
     t.string "short_name"
     t.string "slug"
     t.text "summary"
