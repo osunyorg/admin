@@ -882,8 +882,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_23_061523) do
   create_table "education_diploma_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "duration"
     t.string "name"
-    t.boolean "published", default: false
-    t.datetime "published_at"
     t.string "short_name"
     t.string "slug"
     t.text "summary"
