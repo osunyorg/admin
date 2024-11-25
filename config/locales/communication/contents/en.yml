@@ -443,11 +443,15 @@ en:
           pages:
             description: A highlight of some pages, with multiple layout options.
             edit:
+              category_id:
+                label: Category
+                placeholder: Select a category
               main_page:
                 title: Main page
               mode:
                 label: List kind
                 options:
+                  category: A specific category
                   children: Main page and children
                   selection: A specific selection of pages
               option_image:
@@ -460,6 +464,8 @@ en:
                 hint: This page will set the title and main link of the block on the website. If you select a page and fill no title above, the page title will be used. If you set a title, it will replace the main page's title.
                 label: Select the main page
                 none: No page selected
+              pages_quantity:
+                label: Quantity
               selection:
                 add: Add a page
                 label: Page
