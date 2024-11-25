@@ -1,6 +1,6 @@
 <% content_for :title, t('.title') %>
 
-<ul class="list-unstyled treeview js-treeview <%= 'treeview--sortable js-treeview-sortable js-treeview-sortable-container' if can?(:reorder, @programs.first) %>" data-id="" data-sort-url="<%= reorder_admin_education_programs_path %>">
+<ul class="list-unstyled treeview js-treeview">
   <%= render 'treebranch', programs: @programs %>
 </ul>
 

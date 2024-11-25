@@ -37,4 +37,12 @@ class Communication::Extranet::Document < ApplicationRecord
 
   validates :category, :kind, presence: true
 
+  scope :for_search_term, -> (term, language) {
+    joins(:localizations)
+      .where(communication_extranet_document_localizations: { language_id: language.id })
+      .where("
+        unaccent(communication_extranet_document_localizations.name) ILIKE unaccent(:term)
+      ", term: "%#{sanitize_sql_like(term)}%")
+  }
+
 end

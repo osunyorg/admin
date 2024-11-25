@@ -10,40 +10,22 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
 
   def index
     @programs = @programs.filter_by(params[:filters], current_language)
-                         .ordered_by_name(current_language)
+                         .ordered(current_language)
                          .page(params[:page])
     @feature_nav = 'navigation/admin/education/programs'
     breadcrumb
   end
 
   def tree
-    @programs = @programs.root.ordered
+    @programs = @programs.root.ordered(current_language)
+    @feature_nav = 'navigation/admin/education/programs'
     breadcrumb
     add_breadcrumb t('.title')
   end
 
-  def reorder
-    parent_id = params[:parentId].blank? ? nil : params[:parentId]
-    old_parent_id = params[:oldParentId].blank? ? nil : params[:oldParentId]
-    ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      program = current_university.education_programs.find(id)
-      program.update_columns  parent_id: parent_id,
-                              position: index + 1
-    end
-    if old_parent_id
-      old_parent = current_university.education_programs.find(old_parent_id)
-      old_parent.set_websites_categories
-      old_parent.touch
-    end
-    program = current_university.education_programs.find(params[:itemId])
-    program.set_websites_categories
-    program.touch
-  end
-
   def children
     return unless request.xhr?
-    @children = @program.children.ordered
+    @children = @program.children.ordered(current_language)
   end
 
   def show

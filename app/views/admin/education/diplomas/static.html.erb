@@ -5,7 +5,7 @@ language = @l10n.language
                     .where(diploma: diploma)
                     .root
                     .published_now_in(language)
-                    .ordered if @website.present?
+                    .ordered(language) if @website.present?
 %>---
 <%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>

@@ -747,15 +747,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_110237) do
     t.uuid "communication_website_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "author_id"
     t.string "migration_identifier"
     t.boolean "full_width", default: false
-    t.index ["author_id"], name: "index_communication_website_posts_on_author_id"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
 
-  create_table "communication_website_posts_university_persons", id: false, force: :cascade do |t|
+  create_table "communication_website_posts_university_people", id: false, force: :cascade do |t|
     t.uuid "communication_website_post_id", null: false
     t.uuid "university_person_id", null: false
     t.index ["communication_website_post_id", "university_person_id"], name: "post_person"
@@ -883,8 +881,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_110237) do
   create_table "education_diploma_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "duration"
     t.string "name"
-    t.boolean "published", default: false
-    t.datetime "published_at"
     t.string "short_name"
     t.string "slug"
     t.text "summary"
@@ -999,7 +995,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_110237) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "parent_id"
-    t.integer "position", default: 0
     t.uuid "diploma_id"
     t.boolean "initial"
     t.boolean "apprenticeship"
@@ -1936,7 +1931,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_110237) do
   add_foreign_key "communication_website_post_localizations", "universities"
   add_foreign_key "communication_website_posts", "communication_websites"
   add_foreign_key "communication_website_posts", "universities"
-  add_foreign_key "communication_website_posts", "university_people", column: "author_id"
   add_foreign_key "communication_websites", "languages", column: "default_language_id"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_academic_years", "universities"

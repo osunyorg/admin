@@ -3,16 +3,15 @@
 # Table name: communication_website_posts
 #
 #  id                       :uuid             not null, primary key
+#  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  author_id                :uuid             indexed
 #  communication_website_id :uuid             not null, indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_website_posts_on_author_id                 (author_id)
 #  index_communication_website_posts_on_communication_website_id  (communication_website_id)
 #  index_communication_website_posts_on_university_id             (university_id)
 #
@@ -20,7 +19,6 @@
 #
 #  fk_rails_1e0d058a25  (university_id => universities.id)
 #  fk_rails_d1c1a10946  (communication_website_id => communication_websites.id)
-#  fk_rails_e0eec447b0  (author_id => university_people.id)
 #
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
@@ -32,16 +30,16 @@ class Communication::Website::Post < ApplicationRecord
   include WithMenuItemTarget
   include WithUniversity
 
-  belongs_to :author,
-             class_name: 'University::Person',
-             optional: true
+  has_and_belongs_to_many :authors,
+                          class_name: 'University::Person',
+                          foreign_key: :communication_website_post_id,
+                          association_foreign_key: :university_person_id
   has_and_belongs_to_many :categories,
                           class_name: 'Communication::Website::Post::Category',
                           join_table: :communication_website_categories_posts,
                           foreign_key: :communication_website_post_id,
                           association_foreign_key: :communication_website_category_id
-
-  after_save_commit :update_author_status_if_necessary!, if: :saved_change_to_author_id?
+  after_save_commit :update_authors_status_if_necessary!
 
   scope :ordered, -> (language) {
     localization_published_at_select = <<-SQL
@@ -91,7 +89,7 @@ class Communication::Website::Post < ApplicationRecord
     [website.config_default_languages] +
     localizations.in_languages(website.active_language_ids) +
     categories +
-    (author.present? ? author.author_facets : [])
+    authors.map(&:author_facets).flatten
   end
 
   def references
@@ -108,9 +106,11 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   protected
-
-  def update_author_status_if_necessary!
-    author.update(is_author: true) if author && !author.is_author?
+  def update_authors_status_if_necessary!
+    authors.each do |author|
+      next if author.is_author
+      author.update_column :is_author, true
+    end
   end
 
   def abouts_with_post_block

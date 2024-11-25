@@ -9,6 +9,7 @@
         <% block.template.selected_events.each do |event|
           next if event.nil?
           event_l10n = event.localization_for(block.language)
+          event_link = event_l10n.current_permalink_url_in_website(@website) || '#'
         %>
           <article class="event <% if event_l10n.featured_image.attached? %>event--with-image<% end %>" itemscope itemtype="https://schema.org/Event">
             <div class="event-content">
@@ -16,7 +17,7 @@
                 <hgroup>
               <% end %>
               <h<%= heading_level %>  itemprop='headline' class='location-title'>
-                <%= link_to event_l10n, event_l10n.current_permalink_url_in_website(@website) %>
+                <%= link_to event_l10n, event_link %>
               </h<%= heading_level %>>
               <% if event_l10n.subtitle %>
                 <p class="event-subtitle"><%= event_l10n.subtitle %></p>
@@ -78,8 +79,9 @@
                     <%
                       category_l10n = category.localization_for(block.language)
                       next if category_l10n.nil?
+                      category_link = category_l10n.current_permalink_url_in_website(@website) || '#'
                     %>
-                    <span><%= link_to category_l10n, category_l10n.current_permalink_url_in_website(@website) %></span>
+                    <span><%= link_to category_l10n, category_link %></span>
                   <% end %>
                 </p>
               <% end %>

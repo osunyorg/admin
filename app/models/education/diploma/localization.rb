@@ -15,8 +15,6 @@
 #  pricing_apprenticeship :text
 #  pricing_continuing     :text
 #  pricing_initial        :text
-#  published              :boolean          default(FALSE)
-#  published_at           :datetime
 #  registration           :text
 #  short_name             :string
 #  slug                   :string
@@ -48,7 +46,6 @@ class Education::Diploma::Localization < ApplicationRecord
   include Sanitizable
   include Shareable
   include WithGitFiles
-  include WithPublication
   include WithUniversity
 
   has_summernote :summary
@@ -83,9 +80,13 @@ class Education::Diploma::Localization < ApplicationRecord
 
   def programs
     @programs ||=  about.programs
-                        .ordered
+                        .ordered(language)
                         .map { |program| program.localization_for(language) }
                         .compact
+  end
+
+  def best_breadcrumb_title
+    short_name.presence || name
   end
 
   protected

@@ -44,8 +44,7 @@ module AsLocalizedTree
   end
 
   def ancestors
-    has_parent? ? parent.ancestors.push(parent)
-                : []
+    has_parent? ? parent.ancestors.push(parent) : []
   end
 
   def ancestors_and_self
@@ -53,8 +52,7 @@ module AsLocalizedTree
   end
 
   def descendants
-    has_children? ? children.ordered.map { |child| [child, child.descendants].flatten }.flatten
-                  : []
+    has_children? ? descendants_flattened : []
   end
 
   def descendants_and_self
@@ -70,21 +68,21 @@ module AsLocalizedTree
   def parent_siblings
     self.class.about_class
               .unscoped
-              .where(
-                parent_id: about.parent_id,
-                university: university
-              )
+              .where(parent_id: about.parent_id, university: university)
               .where.not(id: about.id)
-              .ordered
   end
 
   def localizations_for(abouts)
     about_ids = abouts.pluck(:id)
     self.class.unscoped
-              .where(
-                language_id: language_id,
-                about_id: about_ids
-              )
+              .where(language_id: language_id, about_id: about_ids)
+  end
+
+  # Beaucoup trop semblable à WithTree
+  def descendants_flattened
+    children.ordered(language).map {
+      |child| [child, child.descendants]
+    }.flatten
   end
 
 end

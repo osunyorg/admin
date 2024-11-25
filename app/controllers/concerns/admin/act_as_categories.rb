@@ -12,9 +12,10 @@ module Admin::ActAsCategories
     end
     if old_parent_id.present?
       old_parent = categories.find(old_parent_id)
-      old_parent.sync_with_git
+      trigger_category_sync(old_parent)
     end
-    categories.find(params[:itemId]).sync_with_git # Will sync siblings
+    category = categories.find(params[:itemId])
+    trigger_category_sync(category) # Will sync siblings
   end
 
   def children
@@ -37,5 +38,14 @@ module Admin::ActAsCategories
   # Communication::Website::Agenda::Category
   def categories_class
     raise NoMethodError.new("categories_class must be implemented in the controller, for example Communication::Website::Agenda::Category")
+  end
+
+  def trigger_category_sync(category)
+    if category.respond_to?(:sync_with_git)
+      category.sync_with_git
+    else
+      # Indirect object (Person category, ...)
+      category.touch
+    end
   end
 end
