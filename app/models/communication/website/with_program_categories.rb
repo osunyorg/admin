@@ -38,7 +38,7 @@ module Communication::Website::WithProgramCategories
     # 2. Si elle n'existe pas, la créer
     # 3. Pour chaque langue, vérifier qu'une localisation existe, sinon la créer
     root_category = objects.where(is_programs_root: true)
-                           .first_or_create(university_id: university_id)
+                           .first_or_create(university_id: university_id, is_taxonomy: true)
     languages.each do |language|
       root_category.localizations
                    .where(language: language)
@@ -60,9 +60,9 @@ module Communication::Website::WithProgramCategories
       category.position = index + 1
       category.save
       languages.each do |language|
-        category.localizations.where(language: language).first_or_create(
-          name: program.to_s_in(language)
-        )
+        category_l10n = category.localizations.where(language: language).first_or_initialize
+        category_l10n.name = program.to_s_in(language)
+        category_l10n.save
       end
       children = education_programs.where(parent_id: program.id).ordered(language)
       set_programs_categories_at_level_for!(objects, category, children, language)
