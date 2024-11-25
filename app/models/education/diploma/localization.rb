@@ -88,6 +88,10 @@ class Education::Diploma::Localization < ApplicationRecord
                         .compact
   end
 
+  def best_breadcrumb_title
+    short_name.presence || name
+  end
+
   protected
 
   def check_accessibility
