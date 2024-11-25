@@ -72,11 +72,11 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   # TODO manage real authors (through people)
   def authors_l10n_array
     return [] if authors_list.blank?
-    authors_list.gsub(' & ', ',')
-                .gsub(' and ', ',')
-                .gsub(' et ', ',')
-                .split(',')
-                .map { |name| name.strip }
+    @authors_l10n_array ||= authors_list.gsub(' & ', ',')
+                                        .gsub(' and ', ',')
+                                        .gsub(' et ', ',')
+                                        .split(',')
+                                        .map { |name| name.strip }
   end
 
   def journal_l10n
