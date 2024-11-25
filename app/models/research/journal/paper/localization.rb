@@ -70,7 +70,7 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   end
 
   # TODO manage real authors (through people)
-  def authors_l10_array
+  def authors_l10n_array
     return [] if authors_list.blank?
     authors_list.gsub(' & ', ',')
                 .gsub(' and ', ',')
