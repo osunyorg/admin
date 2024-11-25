@@ -121,7 +121,6 @@ class Communication::Website::Menu::Item < ApplicationRecord
     when "url"
       url
     else
-      about_l10n = about.localization_for(language)
       if about_l10n.present?
         about_l10n_permalink = about_l10n.new_permalink_in_website(website)
         about_l10n_permalink.computed_path
@@ -129,6 +128,10 @@ class Communication::Website::Menu::Item < ApplicationRecord
         nil
       end
     end
+  end
+
+  def static_file
+    hugo.file if about.present?
   end
 
   def list_of_other_items
@@ -146,6 +149,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'title' => title,
       'target' => static_target,
       'kind' => kind,
+      'file' => static_file,
       'children' => children.ordered.map(&:to_static_hash).compact
     }
   end
@@ -173,6 +177,14 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   protected
+
+  def hugo
+    @hugo ||= about_l10n.hugo(website)
+  end
+
+  def about_l10n
+    @about_l10n ||= about.localization_for(language)
+  end
 
   def last_ordered_element
     menu.items.where(parent_id: parent_id).ordered.last
