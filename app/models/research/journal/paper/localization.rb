@@ -76,7 +76,8 @@ class Research::Journal::Paper::Localization < ApplicationRecord
                                         .gsub(' and ', ',')
                                         .gsub(' et ', ',')
                                         .split(',')
-                                        .map { |name| name.strip }
+                                        .collect(&:strip)
+                                        .compact_blank
   end
 
   def journal_l10n

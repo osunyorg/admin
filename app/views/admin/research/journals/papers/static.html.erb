@@ -12,7 +12,7 @@ language = @l10n.language
 metadata:
   - name: "citation_title"
     content: "<%= prepare_text_for_static @l10n.title %>"
-<% @l10n.authors_l10_array.each do |author| %>
+<% @l10n.authors_l10n_array.each do |author| %>
   - name: "citation_author"
     content: "<%= prepare_text_for_static author %>"
 <% end if @l10n.authors_l10n_array.any? %>
