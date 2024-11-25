@@ -145,13 +145,14 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   def to_static_hash
     return nil if static_target.nil?
-    {
+    hash = {
       'title' => title,
       'target' => static_target,
       'kind' => kind,
-      'file' => static_file,
       'children' => children.ordered.map(&:to_static_hash).compact
     }
+    hash['file'] = static_file if static_file.present?
+    hash
   end
 
   def has_about?
