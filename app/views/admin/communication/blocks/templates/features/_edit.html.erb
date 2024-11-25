@@ -23,12 +23,6 @@
 <div v-for="(element, index) in data.elements" class="row mb-4">
   <div class="col-sm-4">
     <%= block_component_edit block, :image, template: @element %>
-    <a  class="btn btn-sm text-danger"
-        v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-        title="<%= t '.remove_element' %>">
-        <i class="<%= Icon::DELETE %>"></i>
-        <%= t '.remove_element' %>
-    </a>
   </div>
   <div class="col-sm-8">
     <%= block_component_edit block, :title, template: @element %>
@@ -37,6 +31,12 @@
       <%= block_component_edit block, :alt, template: @element %>
       <%= block_component_edit block, :credit, template: @element, summernote_config: 'mini' %>
     </div>
+    <a  class="btn btn-sm text-danger"
+        v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+        title="<%= t '.remove_element' %>">
+        <i class="<%= Icon::DELETE %>"></i>
+        <%= t '.remove_element' %>
+    </a>
   </div>
 </div>
 <div v-show="data.elements.length > 2">
