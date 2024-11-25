@@ -17,7 +17,7 @@ metadata:
     content: "<%= prepare_text_for_static author %>"
 <% end if @l10n.authors_l10_array.any? %>
   - name: "citation_publication_date"
-    content: "<%= @l10n.published_at.strftime("%Y/%d/%m") %>"
+    content: "<%= @l10n.published_at.strftime("%Y/%m/%d") %>"
   - name: "citation_journal_title"
     content: "<%= prepare_text_for_static paper.journal.to_s_in(language) %>"
 <% if @l10n.pdf.attached? %>
