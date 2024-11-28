@@ -46,19 +46,19 @@ website: >-
 contact_details:
 <% if person.address_is_public? %>
 <%= render 'admin/application/static/postal_address', about: person, l10n: @l10n, language: language %>
-<%= render 'admin/application/static/contact_detail', variable: :address, data: person.address, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: person.zipcode, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :city, data: person.city, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :country, data: person.country, kind: ContactDetails::Country %>
+<%= render 'admin/application/contact_details/static_single', variable: :address, data: person.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/contact_details/static_single', variable: :zipcode, data: person.zipcode, kind: ContactDetails::Base %>
+<%= render 'admin/application/contact_details/static_single', variable: :city, data: person.city, kind: ContactDetails::Base %>
+<%= render 'admin/application/contact_details/static_single', variable: :country, data: person.country, kind: ContactDetails::Country %>
 <% end %>
-<%= render 'admin/application/static/contact_detail', variable: :website, data: @l10n.url, kind: ContactDetails::Website %>
-<%= render 'admin/application/static/contact_detail', variable: :linkedin, data: @l10n.linkedin, kind: ContactDetails::Linkedin if person.linkedin_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :twitter, data: @l10n.twitter, kind: ContactDetails::Twitter if person.twitter_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :mastodon, data: @l10n.mastodon, kind: ContactDetails::Mastodon if person.mastodon_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :phone, data: person.phone_mobile, kind: ContactDetails::Phone if person.phone_mobile_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :phone_professional, data: person.phone_professional, kind: ContactDetails::Phone if person.phone_professional_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :phone_personal, data: person.phone_personal, kind: ContactDetails::Phone if person.phone_personal_is_public? %>
-<%= render 'admin/application/static/contact_detail', variable: :email, data: person.email, kind: ContactDetails::Email if person.email_is_public? %>
+<%= render 'admin/application/contact_details/static_single', variable: :website, data: @l10n.url, kind: ContactDetails::Website %>
+<%= render 'admin/application/contact_details/static_single', variable: :linkedin, data: @l10n.linkedin, kind: ContactDetails::Linkedin if person.linkedin_is_public? %>
+<%= render 'admin/application/contact_details/static_single', variable: :twitter, data: @l10n.twitter, kind: ContactDetails::Twitter if person.twitter_is_public? %>
+<%= render 'admin/application/contact_details/static_single', variable: :mastodon, data: @l10n.mastodon, kind: ContactDetails::Mastodon if person.mastodon_is_public? %>
+<%= render 'admin/application/contact_details/static_single', variable: :phone, data: person.phone_mobile, kind: ContactDetails::Phone if person.phone_mobile_is_public? %>
+<%= render 'admin/application/contact_details/static_single', variable: :phone_professional, data: person.phone_professional, kind: ContactDetails::Phone if person.phone_professional_is_public? %>
+<%= render 'admin/application/contact_details/static_single', variable: :phone_personal, data: person.phone_personal, kind: ContactDetails::Phone if person.phone_personal_is_public? %>
+<%= render 'admin/application/contact_details/static_single', variable: :email, data: person.email, kind: ContactDetails::Email if person.email_is_public? %>
 <% if person.best_picture.attached? %>
 image:
   id: "<%= person.best_picture.blob.id %>"

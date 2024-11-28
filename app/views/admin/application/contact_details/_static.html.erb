@@ -55,17 +55,16 @@ about.emails.each do |email|
 %>
 <%= indentation %>  social_networks:
 <%
-ContactDetails::SOCIAL_NETWORKS.each do |kind|
-  method = "social_#{kind}"
+ContactDetails::SOCIAL_NETWORKS.each do |variable|
+  method = "social_#{variable}"
   next unless about.respond_to?(method)
-  value = about.send(method)
-  next if value.blank?
-  detail_class = "ContactDetails::#{kind.to_s.capitalize}".constantize
-  detail = detail_class.new value
+  data = about.send(method)
+  next if data.blank?
+  kind = "ContactDetails::#{variable.to_s.capitalize}".constantize
   %>
-<%= indentation %>    <%= kind %>:
-<%= indentation %>      label: >-
-<%= indentation %>        <%= detail.label %>
-<%= indentation %>      value: >-
-<%= indentation %>        <%= detail.value %>
+<%= render 'admin/application/contact_details/static_single',
+            variable: variable, 
+            data: data, 
+            kind: kind,
+            depth: depth+2 %>
 <% end %>

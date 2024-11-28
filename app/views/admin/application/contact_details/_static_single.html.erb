@@ -1,0 +1,12 @@
+<%
+depth ||= 1
+indentation = '  ' * depth
+detail = kind.new data
+if detail.present?
+%>
+<%= indentation %><%= variable %>:
+<%= indentation %>  label: >-
+<%= indentation %>    <%= detail.label %>
+<%= indentation %>  value: >-
+<%= indentation %>    <%= detail.value %>
+<% end %>

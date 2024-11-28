@@ -14,14 +14,14 @@ language = @l10n.language
 <%= render 'admin/application/summary/static', about: @l10n %>
 contact_details:
 <%= render 'admin/application/static/postal_address', about: location, l10n: @l10n, language: language %>
-<%= render 'admin/application/static/contact_detail', variable: :address, data: location.address, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address_name, data: @l10n.address_name, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @l10n.address_additional, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: location.zipcode, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :city, data: location.city, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :country, data: location.country, kind: ContactDetails::Country %>
-<%= render 'admin/application/static/contact_detail', variable: :website, data: @l10n.url, kind: ContactDetails::Website %>
-<%= render 'admin/application/static/contact_detail', variable: :phone, data: location.phone, kind: ContactDetails::Phone %>
+<%= render 'admin/application/contact_details/static_single', variable: :address, data: location.address, kind: ContactDetails::Base %>
+<%= render 'admin/application/contact_details/static_single', variable: :address_name, data: @l10n.address_name, kind: ContactDetails::Base %>
+<%= render 'admin/application/contact_details/static_single', variable: :address_additional, data: @l10n.address_additional, kind: ContactDetails::Base %>
+<%= render 'admin/application/contact_details/static_single', variable: :zipcode, data: location.zipcode, kind: ContactDetails::Base %>
+<%= render 'admin/application/contact_details/static_single', variable: :city, data: location.city, kind: ContactDetails::Base %>
+<%= render 'admin/application/contact_details/static_single', variable: :country, data: location.country, kind: ContactDetails::Country %>
+<%= render 'admin/application/contact_details/static_single', variable: :website, data: @l10n.url, kind: ContactDetails::Website %>
+<%= render 'admin/application/contact_details/static_single', variable: :phone, data: location.phone, kind: ContactDetails::Phone %>
   geolocation:
     latitude: <%= location.latitude %>
     longitude: <%= location.longitude %>
