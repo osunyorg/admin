@@ -21,6 +21,17 @@ namespace :communication do
     end
     get 'style' => 'websites/preview#style', as: :style
     get 'assets/*path' => 'websites/preview#assets'
+    resources :configs, controller: 'websites/configs', 
+                        only: [:index, :show], 
+                        constraints: { show: [
+                          :default_content_security_policy,
+                          :default_languages,
+                          :default_permalinks,
+                          :deuxfleurs_workflow,
+                          :development_config,
+                          :production_config,
+                          :robots_txt
+                        ]}
     resources :dependencies, controller: 'websites/dependencies', only: :index
     resources :connections, controller: 'websites/connections', only: [:index, :show] do
       collection do

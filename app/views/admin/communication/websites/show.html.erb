@@ -42,9 +42,12 @@ number_of_panels = 0
 
 <%= render 'admin/application/l10n/widget', about: @website, l10n: @l10n, small: true %>
 
-<% content_for :action_bar_left do %>
-  <%= destroy_link @website %>
-  <%= static_link static_admin_communication_website_path(@website, website_id: nil) %>
+<% if current_user.server_admin? %>
+  <% content_for :action_bar_left do %>
+    <%= destroy_link @website %>
+    <%= static_link static_admin_communication_website_path(@website, website_id: nil) %>
+    <%= link_to 'Configs', admin_communication_website_configs_path, class: 'btn btn-light btn-xs' %>
+  <% end %>
 <% end %>
 
 <% content_for :action_bar_right do %>
