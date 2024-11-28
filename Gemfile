@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.5"
+ruby "3.3.6"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_storage_validations", "~> 1"
@@ -25,7 +25,7 @@ gem "curation"#, path: "../../arnaudlevy/curation"
 gem "devise"
 gem "devise-i18n"
 gem "enum_help"
-gem "execjs", github: "rails/execjs"
+gem "execjs"#, github: "rails/execjs"
 # gem "faceted_search"#, path: "../../noesya/faceted_search"
 gem "faceted_search"
 gem "font-awesome-sass"
