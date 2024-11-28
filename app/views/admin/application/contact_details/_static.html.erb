@@ -1,0 +1,71 @@
+<% 
+depth ||= 1
+indentation = '  ' * depth
+%>
+<%= indentation %>contact_details:
+<%
+
+
+# Postal address
+%>
+<%
+if about.respond_to?(:address) %>
+<%= render 'admin/application/static/postal_address', about: about, depth: depth+1 %>
+<% end %>
+<%
+
+
+# Phone numbers
+%>
+<% if about.respond_to?(:phone_numbers) %>
+<%= indentation %>  phone_numbers:
+<% 
+about.phone_numbers.each do |phone_number| 
+  next if phone_number.blank?
+  detail = ContactDetails::Phone.new phone_number
+  %>
+<%= indentation %>    - label: >-
+<%= indentation %>        <%= detail.label %>
+<%= indentation %>      value: >-
+<%= indentation %>        <%= detail.value %>
+<% end %>
+<% end %>
+<%
+
+
+# Emails
+%>
+<% if about.respond_to?(:emails) %>
+<%= indentation %>  emails:
+<% 
+about.emails.each do |email| 
+  next if email.blank?
+  detail = ContactDetails::Email.new email
+  %>
+<%= indentation %>    - label: >-
+<%= indentation %>        <%= detail.label %>
+<%= indentation %>      value: >-
+<%= indentation %>        <%= detail.value %>
+<% end %>
+<% end %>
+<%
+
+
+# Social networks
+%>
+<%= indentation %>  social_networks:
+<%
+ContactDetails::SOCIAL_NETWORKS.each do |kind|
+  method = "social_#{kind}"
+  next unless about.respond_to?(method)
+  value = about.send(method)
+  next if value.blank?
+  detail_class = "ContactDetails::#{kind.to_s.capitalize}".constantize
+  detail = detail_class.new value
+  %>
+<%= indentation %>    <%= kind %>:
+<%= indentation %>      label: >-
+<%= indentation %>        <%= detail.label %>
+<%= indentation %>      value: >-
+<%= indentation %>        <%= detail.value %>
+<% end %>
