@@ -15,7 +15,7 @@ class Admin::Communication::Websites::ConfigsController < Admin::Communication::
 
   def breadcrumb
     super
-    add_breadcrumb 'Configs', admin_communication_website_configs_path
+    add_breadcrumb Communication::Website.human_attribute_name(:configs), admin_communication_website_configs_path
   end
 
 end

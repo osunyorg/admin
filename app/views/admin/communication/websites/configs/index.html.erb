@@ -1,9 +1,12 @@
-<% content_for :title, 'Configs' %>
+<% content_for :title, Communication::Website.human_attribute_name(:configs) %>
 
-<%= link_to 'default_content_security_policy.yml', admin_communication_website_config_path(:default_content_security_policy), class: button_classes %>
-<%= link_to 'default_languages.yml', admin_communication_website_config_path(:default_languages), class: button_classes %>
-<%= link_to 'default_permalinks.yml', admin_communication_website_config_path(:default_permalinks), class: button_classes %>
-<%= link_to 'deuxfleurs_workflow.yml', admin_communication_website_config_path(:deuxfleurs_workflow), class: button_classes %>
-<%= link_to 'development_config.yml', admin_communication_website_config_path(:development_config), class: button_classes %>
-<%= link_to 'production_config.yml', admin_communication_website_config_path(:production_config), class: button_classes %>
-<%= link_to 'robots.txt', admin_communication_website_config_path(:robots_txt), class: button_classes %>
+<table class="table">
+  <tbody>
+    <% Communication::Website.config_files.each do |file| %>
+      <tr>
+        <td><%= link_to file, admin_communication_website_config_path(file) %></td>
+        <td><%= Communication::Website.human_attribute_name("config_#{file}") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -46,7 +46,9 @@ number_of_panels = 0
   <% content_for :action_bar_left do %>
     <%= destroy_link @website %>
     <%= static_link static_admin_communication_website_path(@website, website_id: nil) %>
-    <%= link_to 'Configs', admin_communication_website_configs_path, class: 'btn btn-light btn-xs' %>
+    <%= link_to Communication::Website.human_attribute_name(:configs),
+                admin_communication_website_configs_path,
+                class: 'btn btn-light btn-xs' %>
   <% end %>
 <% end %>
 
