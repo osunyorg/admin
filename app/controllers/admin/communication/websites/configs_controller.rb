@@ -1,13 +1,11 @@
 class Admin::Communication::Websites::ConfigsController < Admin::Communication::Websites::ApplicationController
+  before_action :check_route, only: :show
+
   def index
     breadcrumb
   end
 
   def show
-    unless params[:id].to_sym.in?(Communication::Website.config_files)
-      render_not_found 
-      return
-    end
     @about = @website
     partial = "admin/communication/websites/configs/#{params[:id]}/static"
     render  partial, 
@@ -16,6 +14,14 @@ class Admin::Communication::Websites::ConfigsController < Admin::Communication::
   end
 
   protected
+
+  def check_route
+    render_not_found unless route_authorized?
+  end
+
+  def route_authorized?
+    params[:id].to_sym.in?(Communication::Website.config_files)
+  end
 
   def breadcrumb
     super
