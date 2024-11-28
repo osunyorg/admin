@@ -4,6 +4,10 @@ class Admin::Communication::Websites::ConfigsController < Admin::Communication::
   end
 
   def show
+    unless params[:id].to_sym.in?(Communication::Website.config_files)
+      render_not_found 
+      return
+    end
     @about = @website
     partial = "admin/communication/websites/configs/#{params[:id]}/static"
     render  partial, 
