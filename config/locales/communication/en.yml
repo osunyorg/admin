@@ -95,7 +95,7 @@ en:
         autoupdate_theme: Automatically update Osuny theme
         configs: Configuration files
         config_default_content_security_policy: Security policies (CORS)
-        config_default_languages: Langauge definitions
+        config_default_languages: Language definitions
         config_default_permalinks: Permalinks (obsolete)
         config_default_deuxfleurs_workflow: Github action for Deuxfleurs deployment
         config_default_development_config: Development configuration
