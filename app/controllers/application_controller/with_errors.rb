@@ -37,6 +37,13 @@ module ApplicationController::WithErrors
       end
     end
 
+    # Used for API. For other contexts, we redirect to the sign-in page via the `authenticate_user!` method.
+    def render_unauthorized
+      respond_to do |format|
+        format.json { render json: { message: "You are not authorized to access this resource." }, status: 401 }
+      end
+    end
+
     def render_forbidden
       respond_to do |format|
         format.html { render file: Rails.root.join('public/403.html'), formats: [:html], status: 403, layout: false }

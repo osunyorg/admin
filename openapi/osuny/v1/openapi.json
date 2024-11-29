@@ -42,22 +42,8 @@
           }
         ],
         "responses": {
-          "403": {
-            "description": "unauthorized operation",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "test_example": {
-                    "value": {
-                      "message": "You do not have access to this resource."
-                    }
-                  }
-                }
-              }
-            }
-          },
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "examples": {
@@ -97,6 +83,130 @@
                         ]
                       }
                     ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/communication/websites/{id}": {
+      "get": {
+        "summary": "Shows a website",
+        "tags": [
+          "Communication::Website"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
+                      "name": "Site with github french",
+                      "url": null,
+                      "deuxfleurs": {
+                        "hosting": false,
+                        "identifier": null
+                      },
+                      "features": {
+                        "agenda": true,
+                        "portfolio": false,
+                        "posts": true
+                      },
+                      "git": {
+                        "branch": "main",
+                        "endpoint": null,
+                        "provider": "github",
+                        "repository": "noesya/bordeauxmontaigne-test"
+                      },
+                      "showcase": {
+                        "present": true,
+                        "highlighted": false,
+                        "tags": []
+                      },
+                      "localizations": [
+                        {
+                          "id": "3d91a284-4159-504e-81c5-6b9b32a08dd7",
+                          "name": "Site with github french",
+                          "language": "fr",
+                          "published": true,
+                          "published_at": "2024-11-29T16:07:24.232+01:00",
+                          "social_email": null,
+                          "social_facebook": null,
+                          "social_github": null,
+                          "social_instagram": null,
+                          "social_linkedin": null,
+                          "social_mastodon": null,
+                          "social_peertube": null,
+                          "social_tiktok": null,
+                          "social_vimeo": null,
+                          "social_x": null,
+                          "social_youtube": null
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
                   }
                 }
               }
