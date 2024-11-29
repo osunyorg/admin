@@ -51,4 +51,18 @@ RSpec.configure do |config|
   # the key, this may want to be changed to avoid putting yaml in json files.
   # Defaults to json. Accepts ':json' and ':yaml'.
   config.openapi_format = :json
+
+  config.after(:each) do |example|
+    content = example.metadata[:response][:content] || {}
+    example_spec = {
+      "application/json"=>{
+        examples: {
+          test_example: {
+            value: JSON.parse(response.body, symbolize_names: true)
+          }
+        }
+      }
+    }
+    example.metadata[:response][:content] = content.deep_merge(example_spec)
+  end
 end

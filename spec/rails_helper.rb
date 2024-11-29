@@ -32,7 +32,7 @@ end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
-    Rails.root.join('spec/fixtures')
+    Rails.root.join('test/fixtures')
   ]
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -62,4 +62,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.before(:each) do
+    ENV.update(ENV.to_h.merge('APPLICATION_ENV' => 'test'))
+    try(:host!, universities(:default_university).host)
+  end
 end
