@@ -78,7 +78,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def duplicate
-    redirect_to [:edit, :admin, @block.duplicate],
+    # On réattribue à @block pour bénéficier du calcul dans about_path
+    @block = @block.duplicate
+    redirect_to about_path + "#block-#{@block.id}",
                 notice: t('admin.successfully_duplicated_html', model: @block.to_s)
   end
 
