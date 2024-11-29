@@ -2,18 +2,19 @@
 depth ||= 0
 indentation = '  ' * depth
 %>
+<%= indentation %>phone_numbers:
 <% 
 if about.respond_to?(:phone_numbers) %>
-<%= indentation %>phone_numbers:
+<%= indentation %>  list:
 <% 
 about.phone_numbers.each do |phone_number| 
   next if phone_number.blank?
   detail = ContactDetails::Phone.new phone_number
   %>
-<%= indentation %>  - label: >-
-<%= indentation %>      <%= detail.label %>
-<%= indentation %>    value: >-
-<%= indentation %>      <%= detail.value %>
+<%= indentation %>    - label: >-
+<%= indentation %>        <%= detail.label %>
+<%= indentation %>      value: >-
+<%= indentation %>        <%= detail.value %>
 <% end %>
 <% end %>
 <%
@@ -29,7 +30,7 @@ ContactDetails::PHONES.each do |phone_key|
             variable: phone_key, 
             data: data, 
             kind: ContactDetails::Phone,
-            depth: depth %>
+            depth: depth+1 %>
 <% end %>
 <% end %>
 <% end %>

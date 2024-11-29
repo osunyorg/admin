@@ -2,19 +2,20 @@
 depth ||= 0
 indentation = '  ' * depth
 %>
+<%= indentation %>emails:
 <%
 # about.emails
 if about.respond_to?(:emails) %>
-<%= indentation %>emails:
+<%= indentation %>  list:
 <% 
 about.emails.each do |email| 
   next if email.blank?
   detail = ContactDetails::Email.new email
   %>
-<%= indentation %>  - label: >-
-<%= indentation %>      <%= detail.label %>
-<%= indentation %>    value: >-
-<%= indentation %>      <%= detail.value %>
+<%= indentation %>    - label: >-
+<%= indentation %>        <%= detail.label %>
+<%= indentation %>      value: >-
+<%= indentation %>        <%= detail.value %>
 <% end %>
 <% end %>
 <% 
@@ -30,6 +31,6 @@ if about.respond_to?(:email)
             variable: :email, 
             data: data, 
             kind: ContactDetails::Email,
-            depth: depth %>
+            depth: depth+1 %>
 <% end %>
 <% end %>
