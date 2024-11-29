@@ -38,29 +38,22 @@ class ContactDetails
   end
 
   def self.find_data(variable, about, l10n, possible_prefix: nil)
-    # about.linkedin
-    method = "#{variable}"
-    # about.social_linkedin
-    prefixed_method = "#{possible_prefix}#{variable}"
-    data = nil
-    # Search in about
-    if about.respond_to?(method)
-      data = about.send(method)
-    elsif about.respond_to?(prefixed_method)
-      data = about.send(prefixed_method)
-    end
-    # Search in localization
-    if l10n.present?
-      if l10n.respond_to?(method)
-        data = l10n.send(method)
-      elsif l10n.respond_to?(prefixed_method)
-        data = l10n.send(prefixed_method)
-      end
+    data = find_data_in_about_or_l10n(variable, about, l10n)
+    if data.nil?
+      prefixed_method = "#{possible_prefix}#{variable}"
+      data = find_data_in_about_or_l10n(prefixed_method, about, l10n)
     end
     data
   end
 
   def self.find_social(variable, about, l10n)
     find_data(variable, about, l10n, possible_prefix: 'social_')
+  end
+
+  protected
+
+  def self.find_data_in_about_or_l10n(method, about, l10n)
+    return about.send(method) if about.respond_to?(method)
+    return l10n.send(method) if l10n.present? && l10n.respond_to?(method)
   end
 end
