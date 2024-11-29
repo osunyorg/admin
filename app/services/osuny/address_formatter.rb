@@ -53,17 +53,27 @@ class Osuny::AddressFormatter
   # </address>
   def to_html
     html = '<address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">'
-    html += " <span itemprop=\"name\">#{address_name}</span>" if address_name.present?
-    html += " <span itemprop=\"streetAddress\">#{address}</span>" if address.present?
-    html += " <span itemprop=\"description\">#{address_additional}</span>" if address_additional.present?
-    html += " <span itemprop=\"postalCode\">#{zipcode}</span>" if zipcode.present?
-    html += " <span itemprop=\"addressLocality\">#{city}</span>" if city.present?
-    html += " <span itemprop=\"addressCountry\">#{country.upcase}</span>" if country.present?
+    html += add_if  address_name.present?,
+                    " <span itemprop=\"name\">#{address_name}</span>"
+    html += add_if  address.present?, 
+                    " <span itemprop=\"streetAddress\">#{address}</span>"
+    html += add_if  address_additional.present?,
+                    " <span itemprop=\"description\">#{address_additional}</span>"
+    html += add_if  zipcode.present?,
+                    " <span itemprop=\"postalCode\">#{zipcode}</span>"
+    html += add_if  city.present?,
+                    " <span itemprop=\"addressLocality\">#{city}</span>"
+    html += add_if  country.present?,
+                    " <span itemprop=\"addressCountry\">#{country.upcase}</span>"
     html += '</address>'
     html
   end
 
   protected
+
+  def add_if(condition, text)
+    condition ? text : ''
+  end
 
   def country_string
     about.try(:country)
