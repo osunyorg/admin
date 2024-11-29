@@ -224,6 +224,33 @@ fr:
       send_code_instead: "Envoyez-moi plutôt un code"
       send_email_code: 'Envoyer le code par email'
       success: ""
+  contact_details:
+    postal_address:
+      address_name: Nom de l'adresse
+      address: Adresse
+      address_additional: Complément d'adresse
+      zipcode: Code postal
+      city: Ville
+      country: Pays
+    websites:
+      website: Site Web
+    phone_numbers:
+      phone: Téléphone
+      phone_mobile: Téléphone mobile
+      phone_professional: Téléphone professionnel
+      phone_personal: Téléphone personnel
+    social_networks:
+      facebook: Facebook (privatif, Meta)
+      github: Github
+      instagram: Instagram (privatif, Meta)
+      linkedin: LinkedIn (privatif, Microsoft)
+      mastodon: Mastodon (libre)
+      peertube: Peertube (libre)
+      tiktok: TikTok (privatif)
+      twitter: X (privatif)
+      vimeo: Vimeo (privatif)
+      x: X (privatif)
+      youtube: Youtube (privatif, Google)
   download: Télécharger
   download_with_size: Télécharger (%{size})
   edit: Modifier

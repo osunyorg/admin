@@ -1,0 +1,19 @@
+<%
+# label
+# detail
+variable ||= ''
+with_link ||= false
+visibility_method = "#{variable}_visibility"
+has_visibility ||= about.respond_to?(visibility_method)
+if detail.present?
+  %>
+  <%= osuny_label label %>
+  <p>
+    <% if with_link %>
+      <a href="<%= detail.value %>" target="_blank"><%= detail.label %></a>
+    <% else %>
+      <%= detail.label %>
+    <% end %>
+    <%= personal_attribute_visibility_tag(about.send(visibility_method)) if has_visibility %>
+  </p>
+<% end %>

@@ -5,31 +5,13 @@ indentation = '  ' * depth
 <%= indentation %>social_networks:
 <%
 ContactDetails::SOCIAL_NETWORKS.each do |variable|
-  # about.linkedin
-  method = "#{variable}"
-  # about.social_linkedin
-  prefixed_method = "social_#{variable}"
-  data = nil
-  # Search in about
-  if about.respond_to?(method)
-    data = about.send(method)
-  elsif about.respond_to?(prefixed_method)
-    data = about.send(prefixed_method)
-  end
-  # Search in localization
-  if l10n.present?
-    if l10n.respond_to?(method)
-      data = l10n.send(method)
-    elsif l10n.respond_to?(prefixed_method)
-      data = l10n.send(prefixed_method)
-    end
-  end
+  data = ContactDetails.find_social(variable, about, l10n)
   next if data.blank?
   kind = "ContactDetails::#{variable.to_s.capitalize}".constantize
+  detail = kind.new data
   %>
 <%= render 'admin/application/contact_details/static/single',
             variable: variable, 
-            data: data, 
-            kind: kind,
+            detail: detail,
             depth: depth+1 %>
 <% end %>

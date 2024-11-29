@@ -1,0 +1,18 @@
+
+<%
+ContactDetails::SOCIAL_NETWORKS.each do |variable|
+  kind = "ContactDetails::#{variable.to_s.capitalize}".constantize
+  data = ContactDetails.find_data(variable, about, l10n, possible_prefix: 'social_')
+  next if data.blank?
+  label = t("contact_details.social_networks.#{variable}")
+  detail = kind.new data
+  %>
+  <div class="col-md-6">
+    <%= render 'admin/application/contact_details/show/single',
+                about: about,
+                variable: variable,
+                label: label,
+                detail: detail,
+                with_link: true %>
+  </div>
+<% end %>

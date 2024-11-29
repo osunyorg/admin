@@ -1,0 +1,18 @@
+<%
+if about.respond_to?(:address)
+  label = t('contact_details.postal_address.address')
+  visibility_method = :address_visibility
+  address_formatter = Osuny::AddressFormatter.new(about: about, l10n: l10n, language: l10n.language)
+  has_visibility = about.respond_to?(visibility_method)
+  %>
+  <div class="col-md-6 mb-3">
+    <%= osuny_label label %>
+    <div>
+      <%= address_formatter.to_html.html_safe %>
+      <%= personal_attribute_visibility_tag(about.send(visibility_method)) if has_visibility %>
+    </div>
+    <% if about.respond_to?(:geolocated?) && about.geolocated? %>
+      <p class="small text-muted"><%= about.geo_point.to_s %></p>
+    <% end %>
+  </div>
+<% end %>
