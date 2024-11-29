@@ -1,6 +1,6 @@
 class Api::Osuny::Communication::WebsitesController < Api::Osuny::Communication::Websites::ApplicationController
   def index
-    @websites = websites.ordered(current_language)
+    @websites = websites.includes(:localizations)
   end
 
   def show

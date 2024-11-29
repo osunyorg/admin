@@ -30,5 +30,7 @@ json.localizations @website.localizations do |l10n|
                 :published, :published_at,
                 :social_email, :social_facebook, :social_github, :social_instagram,
                 :social_linkedin, :social_mastodon, :social_peertube, :social_tiktok,
-                :social_vimeo, :social_x, :social_youtube
+                :social_vimeo, :social_x, :social_youtube, :created_at, :updated_at
 end
+json.created_at @website.created_at
+json.updated_at @website.updated_at

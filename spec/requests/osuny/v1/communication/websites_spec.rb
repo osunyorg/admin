@@ -7,9 +7,9 @@ RSpec.describe 'Communication::Website' do
     get 'Lists the websites' do
       tags 'Communication::Website'
       security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
 
       response '200', 'Successful operation' do
-        let("X-Osuny-Token") { university_apps(:default_app).token }
         run_test!
       end
 
@@ -27,15 +27,14 @@ RSpec.describe 'Communication::Website' do
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
       parameter name: :id, in: :path, type: :string, description: 'Website identifier'
+      let(:id) { communication_websites(:website_with_github).id }
 
       response '200', 'Successful operation' do
-        let(:id) { communication_websites(:website_with_github).id }
         run_test!
       end
 
       response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
         let("X-Osuny-Token") { 'fake-token' }
-        let(:id) { communication_websites(:website_with_github).id }
         run_test!
       end
 
