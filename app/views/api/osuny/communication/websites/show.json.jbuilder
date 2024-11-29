@@ -1,4 +1,5 @@
-json.extract! @website, :name, :url
+json.name @website.to_s_in(current_language)
+json.url @website.url
 json.deuxfleurs do
   json.hosting @website.deuxfleurs_hosting
   json.identifier @website.deuxfleurs_identifier
@@ -12,6 +13,7 @@ json.git do
   json.branch @website.git_branch
   json.endpoint @website.git_endpoint
   json.provider @website.git_provider
+  json.repository @website.repository
 end
 json.showcase do
   json.present @website.in_showcase
