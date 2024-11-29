@@ -1,7 +1,12 @@
+<% 
+depth ||= 0
+indentation = '  ' * depth
+%>
+<%= indentation %>websites:
 <% if l10n.present? && l10n.respond_to?(:url) %>
 <%= render 'admin/application/contact_details/static/single', 
             variable: :website, 
             data: l10n.url, 
             kind: ContactDetails::Website, 
-            depth: depth %>
+            depth: depth+1 %>
 <% end %>
