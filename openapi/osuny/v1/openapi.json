@@ -30,6 +30,224 @@
     }
   },
   "paths": {
+    "/communication/websites/{website_id}/posts": {
+      "get": {
+        "summary": "Lists a website's posts",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": [
+                      {
+                        "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                        "migration_identifier": null,
+                        "localizations": [
+                          {
+                            "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                            "title": "Test",
+                            "language": "fr",
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "created_at": "2024-11-29T16:57:23.530+01:00",
+                            "updated_at": "2024-11-29T16:57:23.530+01:00"
+                          }
+                        ],
+                        "created_at": "2024-11-29T16:57:23.544+01:00",
+                        "updated_at": "2024-11-29T16:57:23.544+01:00"
+                      },
+                      {
+                        "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
+                        "migration_identifier": null,
+                        "localizations": [
+                          {
+                            "id": "a979b73e-e42b-54de-97d4-df21605e49c0",
+                            "title": "Test 2",
+                            "language": "fr",
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "created_at": "2024-11-29T16:57:23.530+01:00",
+                            "updated_at": "2024-11-29T16:57:23.530+01:00"
+                          }
+                        ],
+                        "created_at": "2024-11-29T16:57:23.544+01:00",
+                        "updated_at": "2024-11-29T16:57:23.544+01:00"
+                      },
+                      {
+                        "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
+                        "migration_identifier": null,
+                        "localizations": [
+                          {
+                            "id": "e60b21c3-5968-54b2-93da-4a6a33fc85cc",
+                            "title": "Test 3",
+                            "language": "fr",
+                            "published": false,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "created_at": "2024-11-29T16:57:23.530+01:00",
+                            "updated_at": "2024-11-29T16:57:23.530+01:00"
+                          }
+                        ],
+                        "created_at": "2024-11-29T16:57:23.544+01:00",
+                        "updated_at": "2024-11-29T16:57:23.544+01:00"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/communication/websites/{website_id}/posts/{id}": {
+      "get": {
+        "summary": "Shows a post",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                      "migration_identifier": null,
+                      "full_width": false,
+                      "localizations": [
+                        {
+                          "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                          "migration_identifier": null,
+                          "title": "Test",
+                          "language": "fr",
+                          "meta_description": null,
+                          "pinned": null,
+                          "published": true,
+                          "published_at": "2010-11-28T01:00:00.000+01:00",
+                          "slug": "test",
+                          "subtitle": null,
+                          "summary": null,
+                          "text": null,
+                          "created_at": "2024-11-29T16:57:23.530+01:00",
+                          "updated_at": "2024-11-29T16:57:23.530+01:00"
+                        }
+                      ],
+                      "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
+                      "created_at": "2024-11-29T16:57:23.544+01:00",
+                      "updated_at": "2024-11-29T16:57:23.544+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/communication/websites": {
       "get": {
         "summary": "Lists the websites",
@@ -58,7 +276,9 @@
                             "name": "Site with github french",
                             "language": "fr",
                             "published": true,
-                            "published_at": "2024-11-29T16:07:24.232+01:00"
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "created_at": "2024-11-29T16:57:23.485+01:00",
+                            "updated_at": "2024-11-29T16:57:23.485+01:00"
                           }
                         ]
                       },
@@ -71,14 +291,18 @@
                             "name": "Site with gitlab french",
                             "language": "fr",
                             "published": true,
-                            "published_at": "2024-11-29T16:07:24.232+01:00"
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "created_at": "2024-11-29T16:57:23.485+01:00",
+                            "updated_at": "2024-11-29T16:57:23.485+01:00"
                           },
                           {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
                             "name": "Site with gitlab english",
                             "language": "en",
                             "published": true,
-                            "published_at": "2024-11-29T16:07:24.232+01:00"
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "created_at": "2024-11-29T16:57:23.485+01:00",
+                            "updated_at": "2024-11-29T16:57:23.485+01:00"
                           }
                         ]
                       }
@@ -175,9 +399,13 @@
                           "social_tiktok": null,
                           "social_vimeo": null,
                           "social_x": null,
-                          "social_youtube": null
+                          "social_youtube": null,
+                          "created_at": "2024-11-29T16:57:23.485+01:00",
+                          "updated_at": "2024-11-29T16:57:23.485+01:00"
                         }
-                      ]
+                      ],
+                      "created_at": "2024-11-29T16:57:23.546+01:00",
+                      "updated_at": "2024-11-29T16:57:23.546+01:00"
                     }
                   }
                 }

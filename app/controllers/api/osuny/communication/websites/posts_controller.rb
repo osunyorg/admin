@@ -2,7 +2,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   before_action :load_post, only: [:create, :update]
 
   def index
-    @posts = website.posts.published
+    @posts = website.posts.includes(:localizations)
   end
 
   def show
