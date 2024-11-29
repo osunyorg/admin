@@ -6,7 +6,7 @@ if detail.present?
 %>
 <%= indentation %><%= variable %>:
 <%= indentation %>  label: >-
-<%= indentation %>    <%= detail.label %>
+<%= indentation %>    <%= prepare_text_for_static detail.label %>
 <%= indentation %>  value: >-
-<%= indentation %>    <%= detail.value %>
+<%= indentation %>    <%= prepare_text_for_static detail.value %>
 <% end %>

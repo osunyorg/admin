@@ -1,9 +1,10 @@
 <%
 # this version has to incremented every time you change something in the file, to invalidate the cache
-version = 5
+version = 6
 # Pas dans le controller parce que ça se fait dans les background jobs, à partir du @about
 organization = @l10n.about
 university = organization.university
+language = @l10n.language
 cache_key = [organization, @l10n, @website.id, version]
 cache cache_key do
 %>---
@@ -24,23 +25,10 @@ cache cache_key do
 kind:
   code: "<%= organization.kind %>"
   label: "<%= organization.kind_i18n %>"
-contact_details:
-<%= render 'admin/application/static/postal_address', about: organization, l10n: @l10n, language: @l10n.language %>
-<%= render 'admin/application/contact_details/static_single', variable: :address_name, data: @about.address_name, kind: ContactDetails::Base %>
-<%= render 'admin/application/contact_details/static_single', variable: :address, data: organization.address, kind: ContactDetails::Base %>
-<%= render 'admin/application/contact_details/static_single', variable: :address_additional, data: @about.address_additional, kind: ContactDetails::Base %>
-<%= render 'admin/application/contact_details/static_single', variable: :zipcode, data: organization.zipcode, kind: ContactDetails::Base %>
-<%= render 'admin/application/contact_details/static_single', variable: :city, data: organization.city, kind: ContactDetails::Base %>
-<%= render 'admin/application/contact_details/static_single', variable: :country, data: organization.country, kind: ContactDetails::Country %>
-<%= render 'admin/application/contact_details/static_single', variable: :website, data: @about.url, kind: ContactDetails::Website %>
-<%= render 'admin/application/contact_details/static_single', variable: :linkedin, data: @about.linkedin, kind: ContactDetails::Linkedin %>
-<%= render 'admin/application/contact_details/static_single', variable: :twitter, data: @about.twitter, kind: ContactDetails::Twitter %>
-<%= render 'admin/application/contact_details/static_single', variable: :mastodon, data: @about.mastodon, kind: ContactDetails::Mastodon %>
-<%= render 'admin/application/contact_details/static_single', variable: :phone, data: organization.phone, kind: ContactDetails::Phone %>
-<%= render 'admin/application/contact_details/static_single', variable: :email, data: organization.email, kind: ContactDetails::Email %>
-  geolocation:
-    latitude: <%= organization.latitude %>
-    longitude: <%= organization.longitude %>
+<%= render 'admin/application/contact_details/static',
+            about: organization,
+            l10n: @l10n,
+            language: language %>
 <% if @about.logo.attached? %>
 logo: "<%= @about.logo.blob.id %>"
 <% end %>

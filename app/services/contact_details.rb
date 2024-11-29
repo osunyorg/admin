@@ -1,7 +1,6 @@
 class ContactDetails
   
   SOCIAL_NETWORKS = [
-    :email,
     :facebook,
     :github,
     :instagram,
@@ -12,6 +11,13 @@ class ContactDetails
     :vimeo,
     :x,
     :youtube
+  ]
+
+  PHONES = [
+    :phone,
+    :phone_mobile,
+    :phone_professional,
+    :phone_personal
   ]
   
   def self.with_kind(kind)

@@ -12,6 +12,10 @@ class Osuny::AddressFormatter
     about.try(:address)
   end
 
+  def address_name
+    l10n.try(:address_name)
+  end
+
   def address_additional
     l10n.try(:address_additional)
   end
@@ -41,6 +45,7 @@ class Osuny::AddressFormatter
   end
 
   # <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+  #   <span itemprop="name">noesya</span>
   #   <span itemprop="streetAddress">15 rue des Bouviers</span>
   #   <span itemprop="description">Quartier Saint-Michel</span>
   #   <span itemprop="postalCode">33000</span> <span itemprop="addressLocality">Bordeaux</span>
@@ -48,6 +53,7 @@ class Osuny::AddressFormatter
   # </address>
   def to_html
     html = '<address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">'
+    html += " <span itemprop=\"name\">#{address_name}</span>" if address_name.present?
     html += " <span itemprop=\"streetAddress\">#{address}</span>" if address.present?
     html += " <span itemprop=\"description\">#{address_additional}</span>" if address_additional.present?
     html += " <span itemprop=\"postalCode\">#{zipcode}</span>" if zipcode.present?

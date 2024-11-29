@@ -1,0 +1,35 @@
+<% 
+depth ||= 0
+indentation = '  ' * depth
+%>
+<%
+# about.emails
+if about.respond_to?(:emails) %>
+<%= indentation %>emails:
+<% 
+about.emails.each do |email| 
+  next if email.blank?
+  detail = ContactDetails::Email.new email
+  %>
+<%= indentation %>  - label: >-
+<%= indentation %>      <%= detail.label %>
+<%= indentation %>    value: >-
+<%= indentation %>      <%= detail.value %>
+<% end %>
+<% end %>
+<% 
+# about.email
+if about.respond_to?(:email)
+  # If the publicity level is defined, we must respect it
+  publicity = 'email_is_public?'
+  should_show = about.respond_to?(publicity) ? about.send(publicity) : true
+  if should_show
+    data = about.email
+    %>
+<%= render 'admin/application/contact_details/static/single',
+            variable: :email, 
+            data: data, 
+            kind: ContactDetails::Email,
+            depth: depth %>
+<% end %>
+<% end %>

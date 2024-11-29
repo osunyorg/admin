@@ -1,0 +1,37 @@
+<%
+depth ||= 1
+indentation = '  ' * depth
+l10n ||= nil
+language ||= about.language
+address_formatter = Osuny::AddressFormatter.new(about: about, l10n: l10n, language: language)
+%>
+<% if about.respond_to?(:address) %>
+<%= indentation %>postal_address:
+<%= indentation %>  data:
+<%= indentation %>    address_name: >-
+<%= indentation %>      <%= prepare_text_for_static address_formatter.address_name %>
+<%= indentation %>    address: >-
+<%= indentation %>      <%= prepare_text_for_static address_formatter.address %>
+<%= indentation %>    address_additional: >-
+<%= indentation %>      <%= prepare_text_for_static address_formatter.address_additional %>
+<%= indentation %>    zipcode: >-
+<%= indentation %>      <%= prepare_text_for_static address_formatter.zipcode %>
+<%= indentation %>    city: >-
+<%= indentation %>      <%= prepare_text_for_static address_formatter.city %>
+<%= indentation %>    country: >-
+<%= indentation %>      name: >-
+<%= indentation %>        <%= prepare_text_for_static address_formatter.country %>
+<%= indentation %>      alpha2: >-
+<%= indentation %>        <%= prepare_text_for_static address_formatter.country_alpha2 %>
+<%= indentation %>      alpha3: >-
+<%= indentation %>        <%= prepare_text_for_static address_formatter.country_alpha3 %>
+<% if about.respond_to?(:latitude) %>
+<%= indentation %>  geolocation:
+<%= indentation %>    latitude: <%= about.latitude %>
+<%= indentation %>    longitude: <%= about.longitude %>
+<% end %>
+<%= indentation %>  text: >-
+<%= indentation %>    <%= prepare_text_for_static address_formatter.to_s %>
+<%= indentation %>  html: >-
+<%= indentation %>    <%= address_formatter.to_html.html_safe %>
+<% end %>

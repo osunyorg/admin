@@ -1,11 +1,6 @@
 <%= block_component_static block, :description %>
 <%= block_component_static block, :name %>
 <%= block_component_static block, :information %>
-      address:
-<%= block_component_static block, :address, depth: 4 %>
-<%= block_component_static block, :zipcode, depth: 4 %>
-<%= block_component_static block, :city, depth: 4 %>
-<%= block_component_static block, :country, depth: 4 %>
 <%= render 'admin/application/contact_details/static', about: block.template, depth: 3 %>
       timetable:
 <% block.template.elements.each do |element| %>
