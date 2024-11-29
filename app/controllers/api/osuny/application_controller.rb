@@ -8,4 +8,8 @@ class Api::Osuny::ApplicationController < Api::ApplicationController
     @app = current_university.apps.find_by(token: request.headers['X-Osuny-Token'])
     render_unauthorized unless @app
   end
+
+  def render_on_missing_migration_identifier
+    render json: { error: 'Missing migration identifier.' }, status: :bad_request
+  end
 end

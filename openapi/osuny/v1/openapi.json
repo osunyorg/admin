@@ -70,12 +70,12 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-11-29T16:57:23.530+01:00",
-                            "updated_at": "2024-11-29T16:57:23.530+01:00"
+                            "created_at": "2024-11-29T18:11:45.611+01:00",
+                            "updated_at": "2024-11-29T18:11:45.611+01:00"
                           }
                         ],
-                        "created_at": "2024-11-29T16:57:23.544+01:00",
-                        "updated_at": "2024-11-29T16:57:23.544+01:00"
+                        "created_at": "2024-11-29T18:11:45.630+01:00",
+                        "updated_at": "2024-11-29T18:11:45.630+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -87,12 +87,12 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-11-29T16:57:23.530+01:00",
-                            "updated_at": "2024-11-29T16:57:23.530+01:00"
+                            "created_at": "2024-11-29T18:11:45.611+01:00",
+                            "updated_at": "2024-11-29T18:11:45.611+01:00"
                           }
                         ],
-                        "created_at": "2024-11-29T16:57:23.544+01:00",
-                        "updated_at": "2024-11-29T16:57:23.544+01:00"
+                        "created_at": "2024-11-29T18:11:45.630+01:00",
+                        "updated_at": "2024-11-29T18:11:45.630+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -104,12 +104,12 @@
                             "language": "fr",
                             "published": false,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-11-29T16:57:23.530+01:00",
-                            "updated_at": "2024-11-29T16:57:23.530+01:00"
+                            "created_at": "2024-11-29T18:11:45.611+01:00",
+                            "updated_at": "2024-11-29T18:11:45.611+01:00"
                           }
                         ],
-                        "created_at": "2024-11-29T16:57:23.544+01:00",
-                        "updated_at": "2024-11-29T16:57:23.544+01:00"
+                        "created_at": "2024-11-29T18:11:45.630+01:00",
+                        "updated_at": "2024-11-29T18:11:45.630+01:00"
                       }
                     ]
                   }
@@ -142,6 +142,152 @@
                     }
                   }
                 }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a post",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "post": {
+                    "type": "object",
+                    "properties": {
+                      "migration_identifier": {
+                        "type": "string",
+                        "description": "Unique migration identifier of the post"
+                      },
+                      "full_width": {
+                        "type": "boolean"
+                      },
+                      "localizations": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "migration_identifier": {
+                              "type": "string",
+                              "description": "Unique migration identifier of the localization"
+                            },
+                            "language": {
+                              "type": "string",
+                              "description": "ISO 639-1 code of the language",
+                              "example": "fr"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "meta_description": {
+                              "type": "string"
+                            },
+                            "pinned": {
+                              "type": "boolean"
+                            },
+                            "published": {
+                              "type": "boolean"
+                            },
+                            "published_at": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "slug": {
+                              "type": "string"
+                            },
+                            "subtitle": {
+                              "type": "string"
+                            },
+                            "summary": {
+                              "type": "string"
+                            },
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "migration_identifier",
+                            "language",
+                            "title"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "migration_identifier",
+                      "localizations"
+                    ]
+                  }
+                },
+                "required": [
+                  "post"
+                ]
               }
             }
           }
@@ -204,13 +350,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-11-29T16:57:23.530+01:00",
-                          "updated_at": "2024-11-29T16:57:23.530+01:00"
+                          "created_at": "2024-11-29T18:11:45.611+01:00",
+                          "updated_at": "2024-11-29T18:11:45.611+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-11-29T16:57:23.544+01:00",
-                      "updated_at": "2024-11-29T16:57:23.544+01:00"
+                      "created_at": "2024-11-29T18:11:45.630+01:00",
+                      "updated_at": "2024-11-29T18:11:45.630+01:00"
                     }
                   }
                 }
@@ -277,8 +423,8 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-11-29T16:57:23.485+01:00",
-                            "updated_at": "2024-11-29T16:57:23.485+01:00"
+                            "created_at": "2024-11-29T18:11:45.568+01:00",
+                            "updated_at": "2024-11-29T18:11:45.568+01:00"
                           }
                         ]
                       },
@@ -292,8 +438,8 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-11-29T16:57:23.485+01:00",
-                            "updated_at": "2024-11-29T16:57:23.485+01:00"
+                            "created_at": "2024-11-29T18:11:45.568+01:00",
+                            "updated_at": "2024-11-29T18:11:45.568+01:00"
                           },
                           {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -301,8 +447,8 @@
                             "language": "en",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-11-29T16:57:23.485+01:00",
-                            "updated_at": "2024-11-29T16:57:23.485+01:00"
+                            "created_at": "2024-11-29T18:11:45.568+01:00",
+                            "updated_at": "2024-11-29T18:11:45.568+01:00"
                           }
                         ]
                       }
@@ -400,12 +546,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-11-29T16:57:23.485+01:00",
-                          "updated_at": "2024-11-29T16:57:23.485+01:00"
+                          "created_at": "2024-11-29T18:11:45.568+01:00",
+                          "updated_at": "2024-11-29T18:11:45.568+01:00"
                         }
                       ],
-                      "created_at": "2024-11-29T16:57:23.546+01:00",
-                      "updated_at": "2024-11-29T16:57:23.546+01:00"
+                      "created_at": "2024-11-29T18:11:45.632+01:00",
+                      "updated_at": "2024-11-29T18:11:45.632+01:00"
                     }
                   }
                 }

@@ -27,39 +27,120 @@ RSpec.describe 'Communication::Website::Post' do
       end
     end
 
-    # post 'Creates a post' do
-    #   tags 'Communication::Website::Post'
+    post 'Creates a post' do
+      tags 'Communication::Website::Post'
+      security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
 
-    #   parameter name: :website_id, in: :path, type: :string, description: 'Website identifier', example: '6d8fb0bb-0445-46f0-8954-0e25143e7a58'
-    #   parameter name: :blog, in: :body, type: :object, schema: {
-    #     type: :object,
-    #     properties: {
-    #       title: { type: :string, description: 'Title', example: 'This is a post' },
-    #       summary: { type: :string, description: 'Summary', example: 'This is a summary' },
-    #       migration_identifier: { type: :string, description: 'Unique migration identifier' },
-    #       published: { type: :boolean, example: false },
-    #       locale: { type: :string, description: 'Locale', example: 'fr' },
-    #     },
-    #     required: %[title migration_identifier]
-    #   }
+      parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
+      let(:website_id) { communication_websites(:website_with_github).id }
 
-    #   response '200', 'successful operation' do
-    #     schema type: :object, properties: {
-    #         id: { type: :string },
-    #         title: { type: :string },
-    #       }, required: [ 'id', 'title' ]
-    #     example 'application/json', :response, [
-    #         {
-    #           id: 'c8a4bed5-2e05-47e4-90e3-cf334c16453f',
-    #           title: 'Référentiel général d\'écoconception de services numériques (RGESN)',
-    #           published: true,
-    #           published_at: 'TODO'
-    #         }
-    #       ]
-    #     run_test!
-    #   end
+      parameter name: :communication_website_post, in: :body, type: :object, schema: {
+        type: :object,
+        properties: {
+          post: {
+            type: :object,
+            properties: {
+              migration_identifier: { type: :string, description: 'Unique migration identifier of the post' },
+              full_width: { type: :boolean },
+              localizations: {
+                type: :array,
+                items: {
+                  type: :object,
+                  properties: {
+                    migration_identifier: { type: :string, description: 'Unique migration identifier of the localization' },
+                    language: { type: :string, description: 'ISO 639-1 code of the language', example: 'fr' },
+                    title: { type: :string },
+                    # TODO Featured image & blocks
+                    meta_description: { type: :string },
+                    pinned: { type: :boolean },
+                    published: { type: :boolean },
+                    published_at: { type: :string, format: 'date-time' },
+                    slug: { type: :string },
+                    subtitle: { type: :string },
+                    summary: { type: :string },
+                    text: { type: :string }
+                  },
+                  required: [:migration_identifier, :language, :title]
+                }
+              }
+            },
+            required: [:migration_identifier, :localizations]
+          }
+        },
+        required: [:post]
+      }
+      let(:communication_website_post) { { post: {
+        migration_identifier: 'post-from-api-1',
+        full_width: false,
+        localizations: [
+          {
+            migration_identifier: 'post-from-api-1-fr',
+            language: 'fr',
+            title: 'Ma nouvelle actualité',
+            meta_description: 'Une nouvelle actualité depuis l\'API',
+            pinned: false,
+            published: true,
+            published_at: '2024-11-29T16:49:00Z',
+            slug: 'ma-nouvelle-actualite',
+            subtitle: 'Une nouvelle actualité',
+            summary: 'Ceci est une nouvelle actualité créée depuis l\'API.'
+          }
+        ]
+      } } }
 
-    # end
+      # response '201', 'Successful creation' do
+      #   run_test!
+      # end
+
+      response '400', 'Missing migration identifier.' do
+        let(:communication_website_post) { { post: {
+          full_width: false,
+          localizations: [
+            {
+              migration_identifier: 'post-from-api-1-fr',
+              language: 'fr',
+              title: 'Ma nouvelle actualité',
+              meta_description: 'Une nouvelle actualité depuis l\'API',
+              pinned: false,
+              published: true,
+              published_at: '2024-11-29T16:49:00Z',
+              slug: 'ma-nouvelle-actualite',
+              subtitle: 'Une nouvelle actualité',
+              summary: 'Ceci est une nouvelle actualité créée depuis l\'API.'
+            }
+          ]
+        } } }
+        run_test!
+      end
+
+      response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
+        let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
+
+      response '404', 'Website not found' do
+        let(:website_id) { 'fake-id' }
+        run_test!
+      end
+
+      # response '422', 'Invalid parameters' do
+      #   let(:communication_website_post) do
+      #     {
+      #       migration_identifier: 'post-from-api-1',
+      #       full_width: false,
+      #       localizations: [
+      #         {
+      #           migration_identifier: 'post-from-api-1-fr',
+      #           language: 'fr',
+      #           title: nil
+      #         }
+      #       ]
+      #     }
+      #   end
+      #   run_test!
+      # end
+    end
   end
 
   path '/communication/websites/{website_id}/posts/{id}' do

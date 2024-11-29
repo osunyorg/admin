@@ -1,5 +1,7 @@
 class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communication::Websites::ApplicationController
-  before_action :load_post, only: [:create, :update]
+  before_action :load_migration_identifier,
+                :load_post,
+                only: [:create, :update]
 
   def index
     @posts = website.posts.includes(:localizations)
@@ -35,9 +37,12 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
 
   protected
 
+  def load_migration_identifier
+    @migration_identifier = post_params[:migration_identifier]
+    render_on_missing_migration_identifier unless @migration_identifier.present?
+  end
+
   def load_post
-    @migration_identifier = params.dig(:post, :migration_identifier)
-    @language = Language.find_by(iso_code: params.dig(:post, :locale))
     @post = website.posts.where(
         migration_identifier: @migration_identifier,
         language: @language
@@ -47,7 +52,10 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   def post_params
     params.require(:post)
           .permit(
-            :title, :summary, :published
+            :migration_identifier, :full_width,
+            localizations_attributes: [
+              :migration_identifier, :language, :title
+            ]
           ).merge(
             university_id: current_university.id,
             communication_website_id: website.id
