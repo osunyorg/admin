@@ -302,6 +302,11 @@ RSpec.describe 'Communication::Website::Post' do
         run_test!
       end
 
+      response '404', 'Post not found' do
+        let(:id) { 'fake-id' }
+        run_test!
+      end
+
       response '422', 'Invalid parameters' do
         let(:communication_website_post) {
           test_post = communication_website_posts(:test_post)
@@ -331,29 +336,34 @@ RSpec.describe 'Communication::Website::Post' do
       end
     end
 
-    # patch 'Updates a post' do
-    #   tags 'Communication::Website::Post'
+    delete 'Deletes a post' do
+      tags 'Communication::Website::Post'
+      security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
 
-    #   parameter name: :website_id, in: :path, type: :string, description: 'Website identifier', example: 'c8a4bed5-2e05-47e4-90e3-cf334c16453f'
-    #   parameter name: :id, in: :path, type: :string, description: 'Post identifier', example: '84722b61-f7c3-43c5-9127-2292101af7c5'
+      parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
+      let(:website_id) { communication_websites(:website_with_github).id }
+      parameter name: :id, in: :path, type: :string, description: 'Post identifier'
+      let(:id) { communication_website_posts(:test_post).id }
 
-    #   response '200', 'successful operation' do
-    #     schema type: :object,
-    #       properties: {
-    #         id: { type: :string },
-    #         title: { type: :string },
-    #       },
-    #       required: [ 'name', 'url' ]
-    #     example 'application/json', :response, [
-    #         {
-    #           id: 'c8a4bed5-2e05-47e4-90e3-cf334c16453f',
-    #           title: 'Référentiel général d\'écoconception de services numériques (RGESN)',
-    #           published: true,
-    #           published_at: 'TODO'
-    #         }
-    #       ]
-    #     run_test!
-    #   end
-    # end
+      response '200', 'Successful deletion' do
+        run_test!
+      end
+
+      response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
+        let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
+
+      response '404', 'Website not found' do
+        let(:website_id) { 'fake-id' }
+        run_test!
+      end
+
+      response '404', 'Post not found' do
+        let(:id) { 'fake-id' }
+        run_test!
+      end
+    end
   end
 end

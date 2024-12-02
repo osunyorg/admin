@@ -58,7 +58,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Successful operation": {
                     "value": [
                       {
                         "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
@@ -70,12 +70,12 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-02T14:14:42.101+01:00",
-                            "updated_at": "2024-12-02T14:14:42.101+01:00"
+                            "created_at": "2024-12-02T14:56:56.550+01:00",
+                            "updated_at": "2024-12-02T14:56:56.550+01:00"
                           }
                         ],
-                        "created_at": "2024-12-02T14:14:42.119+01:00",
-                        "updated_at": "2024-12-02T14:14:42.119+01:00"
+                        "created_at": "2024-12-02T14:56:56.571+01:00",
+                        "updated_at": "2024-12-02T14:56:56.571+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -87,12 +87,12 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-02T14:14:42.101+01:00",
-                            "updated_at": "2024-12-02T14:14:42.101+01:00"
+                            "created_at": "2024-12-02T14:56:56.550+01:00",
+                            "updated_at": "2024-12-02T14:56:56.550+01:00"
                           }
                         ],
-                        "created_at": "2024-12-02T14:14:42.119+01:00",
-                        "updated_at": "2024-12-02T14:14:42.119+01:00"
+                        "created_at": "2024-12-02T14:56:56.571+01:00",
+                        "updated_at": "2024-12-02T14:56:56.571+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -104,12 +104,12 @@
                             "language": "fr",
                             "published": false,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-02T14:14:42.101+01:00",
-                            "updated_at": "2024-12-02T14:14:42.101+01:00"
+                            "created_at": "2024-12-02T14:56:56.550+01:00",
+                            "updated_at": "2024-12-02T14:56:56.550+01:00"
                           }
                         ],
-                        "created_at": "2024-12-02T14:14:42.119+01:00",
-                        "updated_at": "2024-12-02T14:14:42.119+01:00"
+                        "created_at": "2024-12-02T14:56:56.571+01:00",
+                        "updated_at": "2024-12-02T14:56:56.571+01:00"
                       }
                     ]
                   }
@@ -122,7 +122,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
                     "value": {
                       "message": "You are not authorized to access this resource."
                     }
@@ -136,7 +136,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Website not found": {
                     "value": {
                       "message": "The resource you were looking for doesn't exist."
                     }
@@ -174,14 +174,14 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Successful creation": {
                     "value": {
-                      "id": "8988f3e4-39e0-4e42-915b-18cdbd1afc84",
+                      "id": "8af556cd-7679-4812-bd59-d51c57276d2f",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": [
                         {
-                          "id": "86a63e9b-d74d-4372-94f8-e705ea657b82",
+                          "id": "f32abcf2-3484-43db-ada6-a83d67748190",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "language": "fr",
@@ -193,13 +193,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-02T14:14:42.606+01:00",
-                          "updated_at": "2024-12-02T14:14:42.606+01:00"
+                          "created_at": "2024-12-02T14:56:57.124+01:00",
+                          "updated_at": "2024-12-02T14:56:57.124+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-02T14:14:42.596+01:00",
-                      "updated_at": "2024-12-02T14:14:42.612+01:00"
+                      "created_at": "2024-12-02T14:56:57.110+01:00",
+                      "updated_at": "2024-12-02T14:56:57.131+01:00"
                     }
                   }
                 }
@@ -211,7 +211,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Missing migration identifier.": {
                     "value": {
                       "error": "Missing migration identifier."
                     }
@@ -225,7 +225,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
                     "value": {
                       "message": "You are not authorized to access this resource."
                     }
@@ -239,7 +239,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Website not found": {
                     "value": {
                       "message": "The resource you were looking for doesn't exist."
                     }
@@ -253,7 +253,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Invalid parameters": {
                     "value": {
                       "errors": {
                         "localizations.slug": [
@@ -393,7 +393,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Successful operation": {
                     "value": {
                       "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
                       "migration_identifier": "test-post-fixture-1",
@@ -412,13 +412,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-02T14:14:42.101+01:00",
-                          "updated_at": "2024-12-02T14:14:42.101+01:00"
+                          "created_at": "2024-12-02T14:56:56.550+01:00",
+                          "updated_at": "2024-12-02T14:56:56.550+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-02T14:14:42.119+01:00",
-                      "updated_at": "2024-12-02T14:14:42.119+01:00"
+                      "created_at": "2024-12-02T14:56:56.571+01:00",
+                      "updated_at": "2024-12-02T14:56:56.571+01:00"
                     }
                   }
                 }
@@ -430,7 +430,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
                     "value": {
                       "message": "You are not authorized to access this resource."
                     }
@@ -444,7 +444,12 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Post not found": {
                     "value": {
                       "message": "The resource you were looking for doesn't exist."
                     }
@@ -491,7 +496,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Successful update": {
                     "value": {
                       "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
                       "migration_identifier": "test-post-fixture-1",
@@ -510,13 +515,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-02T14:14:42.101+01:00",
-                          "updated_at": "2024-12-02T14:14:42.885+01:00"
+                          "created_at": "2024-12-02T14:56:56.550+01:00",
+                          "updated_at": "2024-12-02T14:56:57.537+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-02T14:14:42.119+01:00",
-                      "updated_at": "2024-12-02T14:14:42.887+01:00"
+                      "created_at": "2024-12-02T14:56:56.571+01:00",
+                      "updated_at": "2024-12-02T14:56:57.540+01:00"
                     }
                   }
                 }
@@ -528,7 +533,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Missing migration identifier.": {
                     "value": {
                       "error": "Missing migration identifier."
                     }
@@ -542,7 +547,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
                     "value": {
                       "message": "You are not authorized to access this resource."
                     }
@@ -552,11 +557,16 @@
             }
           },
           "404": {
-            "description": "Website not found",
+            "description": "Post not found",
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Post not found": {
                     "value": {
                       "message": "The resource you were looking for doesn't exist."
                     }
@@ -570,7 +580,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Invalid parameters": {
                     "value": {
                       "errors": {
                         "localizations.title": [
@@ -667,6 +677,84 @@
             }
           }
         }
+      },
+      "delete": {
+        "summary": "Deletes a post",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful deletion",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful deletion": {
+                    "value": {}
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/communication/websites": {
@@ -686,7 +774,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Successful operation": {
                     "value": [
                       {
                         "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
@@ -698,8 +786,8 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-02T14:14:42.062+01:00",
-                            "updated_at": "2024-12-02T14:14:42.062+01:00"
+                            "created_at": "2024-12-02T14:56:56.495+01:00",
+                            "updated_at": "2024-12-02T14:56:56.495+01:00"
                           }
                         ]
                       },
@@ -713,8 +801,8 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-02T14:14:42.062+01:00",
-                            "updated_at": "2024-12-02T14:14:42.062+01:00"
+                            "created_at": "2024-12-02T14:56:56.495+01:00",
+                            "updated_at": "2024-12-02T14:56:56.495+01:00"
                           },
                           {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -722,8 +810,8 @@
                             "language": "en",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-02T14:14:42.062+01:00",
-                            "updated_at": "2024-12-02T14:14:42.062+01:00"
+                            "created_at": "2024-12-02T14:56:56.495+01:00",
+                            "updated_at": "2024-12-02T14:56:56.495+01:00"
                           }
                         ]
                       }
@@ -738,7 +826,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
                     "value": {
                       "message": "You are not authorized to access this resource."
                     }
@@ -778,7 +866,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Successful operation": {
                     "value": {
                       "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
                       "name": "Site with github french",
@@ -821,12 +909,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-02T14:14:42.062+01:00",
-                          "updated_at": "2024-12-02T14:14:42.062+01:00"
+                          "created_at": "2024-12-02T14:56:56.495+01:00",
+                          "updated_at": "2024-12-02T14:56:56.495+01:00"
                         }
                       ],
-                      "created_at": "2024-12-02T14:14:42.123+01:00",
-                      "updated_at": "2024-12-02T14:14:42.123+01:00"
+                      "created_at": "2024-12-02T14:56:56.577+01:00",
+                      "updated_at": "2024-12-02T14:56:56.577+01:00"
                     }
                   }
                 }
@@ -838,7 +926,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
                     "value": {
                       "message": "You are not authorized to access this resource."
                     }
@@ -852,7 +940,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "test_example": {
+                  "Website not found": {
                     "value": {
                       "message": "The resource you were looking for doesn't exist."
                     }

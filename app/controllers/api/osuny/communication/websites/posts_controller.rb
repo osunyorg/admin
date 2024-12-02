@@ -1,6 +1,6 @@
 class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communication::Websites::ApplicationController
   before_action :build_post, only: :create
-  before_action :load_post, only: [:show, :update]
+  before_action :load_post, only: [:show, :update, :destroy]
 
   before_action :load_migration_identifier, only: [:create, :update]
   before_action :ensure_same_migration_identifier, only: :update
@@ -27,6 +27,11 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
     else
       render json: { errors: @post.errors }, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @post.destroy
+    render json: {}, status: :ok
   end
 
   protected
