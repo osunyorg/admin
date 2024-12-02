@@ -53,6 +53,7 @@ RSpec.configure do |config|
   config.openapi_format = :json
 
   config.after(:each) do |example|
+    next if response.body.blank?
     example.metadata[:response][:content] = {
       'application/json' => {
         examples: {

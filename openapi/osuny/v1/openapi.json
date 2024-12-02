@@ -70,12 +70,12 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-02T14:56:56.550+01:00",
-                            "updated_at": "2024-12-02T14:56:56.550+01:00"
+                            "created_at": "2024-12-02T15:18:41.393+01:00",
+                            "updated_at": "2024-12-02T15:18:41.393+01:00"
                           }
                         ],
-                        "created_at": "2024-12-02T14:56:56.571+01:00",
-                        "updated_at": "2024-12-02T14:56:56.571+01:00"
+                        "created_at": "2024-12-02T15:18:41.415+01:00",
+                        "updated_at": "2024-12-02T15:18:41.415+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -87,12 +87,12 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-02T14:56:56.550+01:00",
-                            "updated_at": "2024-12-02T14:56:56.550+01:00"
+                            "created_at": "2024-12-02T15:18:41.393+01:00",
+                            "updated_at": "2024-12-02T15:18:41.393+01:00"
                           }
                         ],
-                        "created_at": "2024-12-02T14:56:56.571+01:00",
-                        "updated_at": "2024-12-02T14:56:56.571+01:00"
+                        "created_at": "2024-12-02T15:18:41.415+01:00",
+                        "updated_at": "2024-12-02T15:18:41.415+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -104,12 +104,12 @@
                             "language": "fr",
                             "published": false,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-02T14:56:56.550+01:00",
-                            "updated_at": "2024-12-02T14:56:56.550+01:00"
+                            "created_at": "2024-12-02T15:18:41.393+01:00",
+                            "updated_at": "2024-12-02T15:18:41.393+01:00"
                           }
                         ],
-                        "created_at": "2024-12-02T14:56:56.571+01:00",
-                        "updated_at": "2024-12-02T14:56:56.571+01:00"
+                        "created_at": "2024-12-02T15:18:41.415+01:00",
+                        "updated_at": "2024-12-02T15:18:41.415+01:00"
                       }
                     ]
                   }
@@ -176,12 +176,12 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "8af556cd-7679-4812-bd59-d51c57276d2f",
+                      "id": "0dbe7de1-f509-4f3c-952d-f9b617cf2ae6",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": [
                         {
-                          "id": "f32abcf2-3484-43db-ada6-a83d67748190",
+                          "id": "ccd514cf-61c5-4284-b74f-3de57729b2e6",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "language": "fr",
@@ -193,13 +193,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-02T14:56:57.124+01:00",
-                          "updated_at": "2024-12-02T14:56:57.124+01:00"
+                          "created_at": "2024-12-02T15:18:42.096+01:00",
+                          "updated_at": "2024-12-02T15:18:42.096+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-02T14:56:57.110+01:00",
-                      "updated_at": "2024-12-02T14:56:57.131+01:00"
+                      "created_at": "2024-12-02T15:18:42.083+01:00",
+                      "updated_at": "2024-12-02T15:18:42.101+01:00"
                     }
                   }
                 }
@@ -412,13 +412,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-02T14:56:56.550+01:00",
-                          "updated_at": "2024-12-02T14:56:56.550+01:00"
+                          "created_at": "2024-12-02T15:18:41.393+01:00",
+                          "updated_at": "2024-12-02T15:18:41.393+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-02T14:56:56.571+01:00",
-                      "updated_at": "2024-12-02T14:56:56.571+01:00"
+                      "created_at": "2024-12-02T15:18:41.415+01:00",
+                      "updated_at": "2024-12-02T15:18:41.415+01:00"
                     }
                   }
                 }
@@ -515,13 +515,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-02T14:56:56.550+01:00",
-                          "updated_at": "2024-12-02T14:56:57.537+01:00"
+                          "created_at": "2024-12-02T15:18:41.393+01:00",
+                          "updated_at": "2024-12-02T15:18:42.409+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-02T14:56:56.571+01:00",
-                      "updated_at": "2024-12-02T14:56:57.540+01:00"
+                      "created_at": "2024-12-02T15:18:41.415+01:00",
+                      "updated_at": "2024-12-02T15:18:42.410+01:00"
                     }
                   }
                 }
@@ -709,17 +709,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successful deletion",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Successful deletion": {
-                    "value": {}
-                  }
-                }
-              }
-            }
+          "204": {
+            "description": "Successful deletion"
           },
           "401": {
             "description": "Unauthorized. Please make sure you provide a valid API key.",
@@ -786,8 +777,8 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-02T14:56:56.495+01:00",
-                            "updated_at": "2024-12-02T14:56:56.495+01:00"
+                            "created_at": "2024-12-02T15:18:41.349+01:00",
+                            "updated_at": "2024-12-02T15:18:41.349+01:00"
                           }
                         ]
                       },
@@ -801,8 +792,8 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-02T14:56:56.495+01:00",
-                            "updated_at": "2024-12-02T14:56:56.495+01:00"
+                            "created_at": "2024-12-02T15:18:41.349+01:00",
+                            "updated_at": "2024-12-02T15:18:41.349+01:00"
                           },
                           {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -810,8 +801,8 @@
                             "language": "en",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-02T14:56:56.495+01:00",
-                            "updated_at": "2024-12-02T14:56:56.495+01:00"
+                            "created_at": "2024-12-02T15:18:41.349+01:00",
+                            "updated_at": "2024-12-02T15:18:41.349+01:00"
                           }
                         ]
                       }
@@ -909,12 +900,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-02T14:56:56.495+01:00",
-                          "updated_at": "2024-12-02T14:56:56.495+01:00"
+                          "created_at": "2024-12-02T15:18:41.349+01:00",
+                          "updated_at": "2024-12-02T15:18:41.349+01:00"
                         }
                       ],
-                      "created_at": "2024-12-02T14:56:56.577+01:00",
-                      "updated_at": "2024-12-02T14:56:56.577+01:00"
+                      "created_at": "2024-12-02T15:18:41.418+01:00",
+                      "updated_at": "2024-12-02T15:18:41.418+01:00"
                     }
                   }
                 }

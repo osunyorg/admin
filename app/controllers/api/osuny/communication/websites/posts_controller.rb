@@ -31,7 +31,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
 
   def destroy
     @post.destroy
-    render json: {}, status: :ok
+    head :no_content
   end
 
   protected

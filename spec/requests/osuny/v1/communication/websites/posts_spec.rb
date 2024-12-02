@@ -346,7 +346,7 @@ RSpec.describe 'Communication::Website::Post' do
       parameter name: :id, in: :path, type: :string, description: 'Post identifier'
       let(:id) { communication_website_posts(:test_post).id }
 
-      response '200', 'Successful deletion' do
+      response '204', 'Successful deletion' do
         run_test!
       end
 
