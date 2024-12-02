@@ -43,7 +43,7 @@ RSpec.describe 'Communication::Website::Post' do
             properties: {
               migration_identifier: { type: :string, description: 'Unique migration identifier of the post' },
               full_width: { type: :boolean },
-              localizations: {
+              localizations_attributes: {
                 type: :array,
                 items: {
                   type: :object,
@@ -65,7 +65,7 @@ RSpec.describe 'Communication::Website::Post' do
                 }
               }
             },
-            required: [:migration_identifier, :localizations]
+            required: [:migration_identifier, :localizations_attributes]
           }
         },
         required: [:post]
@@ -73,7 +73,7 @@ RSpec.describe 'Communication::Website::Post' do
       let(:communication_website_post) { { post: {
         migration_identifier: 'post-from-api-1',
         full_width: false,
-        localizations: [
+        localizations_attributes: [
           {
             migration_identifier: 'post-from-api-1-fr',
             language: 'fr',
@@ -89,14 +89,19 @@ RSpec.describe 'Communication::Website::Post' do
         ]
       } } }
 
-      # response '201', 'Successful creation' do
-      #   run_test!
-      # end
+      response '201', 'Successful creation' do
+        it 'creates a post and its localization', rswag: true do |example|
+          assert_difference ->{ Communication::Website::Post.count } => 1, ->{ Communication::Website::Post::Localization.count } => 1 do
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+          end
+        end
+      end
 
       response '400', 'Missing migration identifier.' do
         let(:communication_website_post) { { post: {
           full_width: false,
-          localizations: [
+          localizations_attributes: [
             {
               migration_identifier: 'post-from-api-1-fr',
               language: 'fr',
@@ -124,22 +129,22 @@ RSpec.describe 'Communication::Website::Post' do
         run_test!
       end
 
-      # response '422', 'Invalid parameters' do
-      #   let(:communication_website_post) do
-      #     {
-      #       migration_identifier: 'post-from-api-1',
-      #       full_width: false,
-      #       localizations: [
-      #         {
-      #           migration_identifier: 'post-from-api-1-fr',
-      #           language: 'fr',
-      #           title: nil
-      #         }
-      #       ]
-      #     }
-      #   end
-      #   run_test!
-      # end
+      response '422', 'Invalid parameters' do
+        let(:communication_website_post) do
+          {
+            migration_identifier: 'post-from-api-1',
+            full_width: false,
+            localizations_attributes: [
+              {
+                migration_identifier: 'post-from-api-1-fr',
+                language: 'fr',
+                title: nil
+              }
+            ]
+          }
+        end
+        run_test!
+      end
     end
   end
 

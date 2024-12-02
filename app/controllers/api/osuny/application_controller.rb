@@ -12,4 +12,9 @@ class Api::Osuny::ApplicationController < Api::ApplicationController
   def render_on_missing_migration_identifier
     render json: { error: 'Missing migration identifier.' }, status: :bad_request
   end
+
+  # Set API messages to English
+  def switch_locale(&action)
+    I18n.with_locale(:en, &action)
+  end
 end

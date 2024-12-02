@@ -14,26 +14,19 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   def create
     @post.assign_attributes post_params
     if @post.save
-      render json: @post
+      render :show, status: :created
     else
-      render json: @post.errors
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
 
   def update
     if @post.update post_params
-      render json: @post
+      render :show
     else
-      render json: @post.errors
+      render json: @post.errors, status: :unprocessable_entity
     end
   end
-
-  # def import
-  #   Importers::Api::Osuny::Communication::Website::Post.new university: current_university,
-  #                                                           website: website,
-  #                                                           params: params[:post]
-  #   render json: :ok
-  # end
 
   protected
 
@@ -44,21 +37,25 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
 
   def load_post
     @post = website.posts.where(
-        migration_identifier: @migration_identifier,
-        language: @language
-      ).first_or_initialize
+      migration_identifier: @migration_identifier
+    ).first_or_initialize
   end
 
   def post_params
-    params.require(:post)
-          .permit(
-            :migration_identifier, :full_width,
-            localizations_attributes: [
-              :migration_identifier, :language, :title
-            ]
-          ).merge(
-            university_id: current_university.id,
-            communication_website_id: website.id
-          )
+    permitted_params = params.require(:post)
+                        .permit(
+                          :migration_identifier, :full_width,
+                          localizations_attributes: [
+                            :migration_identifier, :language, :title
+                          ]
+                        ).merge(
+                          university_id: current_university.id,
+                          communication_website_id: website.id
+                        )
+    permitted_params[:localizations_attributes].each do |localization_attributes|
+      language_iso_code = localization_attributes.delete(:language)
+      localization_attributes[:language_id] = Language.find_by(iso_code: language_iso_code)&.id
+    end
+    permitted_params
   end
 end

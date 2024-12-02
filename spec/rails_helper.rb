@@ -67,4 +67,6 @@ RSpec.configure do |config|
     ENV.update(ENV.to_h.merge('APPLICATION_ENV' => 'test'))
     try(:host!, universities(:default_university).host)
   end
+
+  config.include ActiveSupport::Testing::Assertions
 end
