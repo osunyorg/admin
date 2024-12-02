@@ -1,0 +1,7 @@
+<% if about.respond_to?(:email) %>
+  <div class="col-md-6">
+    <%= f.input  :email,
+                  label: t('contact_details.emails.email.label'),
+                  hint: t('contact_details.emails.email.hint') %>
+  </div>
+<% end %>

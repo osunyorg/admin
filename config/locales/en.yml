@@ -225,32 +225,80 @@ en:
       send_email_code: 'Send me a code via email'
       success: ""
   contact_details:
-    postal_address:
-      address_name: Address name
-      address: Address
-      address_additional: Additional address
-      zipcode: Zipcode
-      city: City
-      country: Country
-    websites:
-      website: Website
+    emails:
+      email:
+        label: Email
+        hint: ''
     phone_numbers:
-      phone: Phone
-      phone_mobile: Mobile phone
-      phone_professional: Personal phone
-      phone_personal: Professional phone
+      phone:
+        label: Phone
+        hint: ''
+      phone_mobile:
+        label: Mobile phone
+        hint: ''
+      phone_professional:
+        label: Personal phone
+        hint: ''
+      phone_personal:
+        label: Professional phone
+        hint: ''
+    postal_address:
+      address_name:
+        label: Address name
+        hint: 'This field is not used for geolocation. Ex: Hôtel du Département'
+      address: 
+        label: Address
+        hint: 'This field is used for geolocation. Ex: 3 rue de la Poste'
+      address_additional: 
+        label: Additional address
+        hint: 'This field is not used for geolocation. Ex: Bureau 508'
+      zipcode: 
+        label: Zipcode
+        hint: 'This field is used for geolocation. Ex: 33150'
+      city:
+        label: City
+        hint: 'This field is used for geolocation. Ex: Cenon'
+      country: 
+        label: Country
+        hint: 'This field is used for geolocation. Ex: France'
     social_networks:
-      facebook: Facebook (private, Meta)
-      github: Github
-      instagram: Instagram (private, Meta)
-      linkedin: LinkedIn (private, Microsoft)
-      mastodon: Mastodon (free)
-      peertube: Peertube (free)
-      tiktok: TikTok (private)
-      twitter: X (private)
-      vimeo: Vimeo (private)
-      x: X (private)
-      youtube: Youtube (private, Google)
+      facebook:
+        label: Facebook (private, Meta)
+        hint: ''
+      github:
+        label: Github
+        hint: ''
+      instagram:
+        label: Instagram (private, Meta)
+        hint: ''
+      linkedin:
+        label: LinkedIn (private, Microsoft)
+        hint: ''
+      mastodon:
+        label: Mastodon (free)
+        hint: ''
+      peertube:
+        label: Peertube (free)
+        hint: ''
+      tiktok:
+        label: TikTok (private)
+        hint: ''
+      twitter:
+        label: X (private)
+        hint: ''
+      vimeo:
+        label: Vimeo (private)
+        hint: ''
+      x:
+        label: X (private)
+        hint: ''
+      youtube:
+        label: Youtube (private, Google)
+        hint: ''
+    websites:
+      website: 
+        label: Website
+        hint: ''
   download: Download
   download_with_size: Download (%{size})
   edit: Edit

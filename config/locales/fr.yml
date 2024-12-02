@@ -225,32 +225,80 @@ fr:
       send_email_code: 'Envoyer le code par email'
       success: ""
   contact_details:
-    postal_address:
-      address_name: Nom de l'adresse
-      address: Adresse
-      address_additional: Complément d'adresse
-      zipcode: Code postal
-      city: Ville
-      country: Pays
-    websites:
-      website: Site Web
+    emails:
+      email:
+        label: Email
+        hint: ''
     phone_numbers:
-      phone: Téléphone
-      phone_mobile: Téléphone mobile
-      phone_professional: Téléphone professionnel
-      phone_personal: Téléphone personnel
+      phone:
+        label: Téléphone
+        hint: ''
+      phone_mobile:
+        label: Téléphone mobile
+        hint: ''
+      phone_professional:
+        label: Téléphone professionnel
+        hint: ''
+      phone_personal:
+        label: Téléphone personnel
+        hint: ''
+    postal_address:
+      address_name:
+        label: Nom de l'adresse
+        hint: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
+      address:
+        label: Adresse
+        hint: 'Ce champ est utilisé pour géolocaliser. Ex: 3 rue de la Poste'
+      address_additional:
+        label: Complément d'adresse
+        hint: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
+      zipcode:
+        label: Code postal
+        hint: ''
+      city:
+        label: Ville
+        hint: ''
+      country:
+        label: Pays
+        hint: ''
     social_networks:
-      facebook: Facebook (privatif, Meta)
-      github: Github
-      instagram: Instagram (privatif, Meta)
-      linkedin: LinkedIn (privatif, Microsoft)
-      mastodon: Mastodon (libre)
-      peertube: Peertube (libre)
-      tiktok: TikTok (privatif)
-      twitter: X (privatif)
-      vimeo: Vimeo (privatif)
-      x: X (privatif)
-      youtube: Youtube (privatif, Google)
+      facebook:
+        label: Facebook (privatif, Meta)
+        hint: ''
+      github:
+        label: Github
+        hint: ''
+      instagram:
+        label: Instagram (privatif, Meta)
+        hint: ''
+      linkedin:
+        label: LinkedIn (privatif, Microsoft)
+        hint: ''
+      mastodon:
+        label: Mastodon (libre)
+        hint: ''
+      peertube:
+        label: Peertube (libre)
+        hint: ''
+      tiktok:
+        label: TikTok (privatif)
+        hint: ''
+      twitter:
+        label: X (privatif)
+        hint: ''
+      vimeo:
+        label: Vimeo (privatif)
+        hint: ''
+      x:
+        label: X (privatif)
+        hint: ''
+      youtube:
+        label: Youtube (privatif, Google)
+        hint: ''
+    websites:
+      website:
+        label: Site Web
+        hint: ''
   download: Télécharger
   download_with_size: Télécharger (%{size})
   edit: Modifier

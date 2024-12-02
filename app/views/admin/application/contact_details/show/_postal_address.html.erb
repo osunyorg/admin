@@ -1,6 +1,6 @@
 <%
 if about.respond_to?(:address)
-  label = t('contact_details.postal_address.address')
+  label = t('contact_details.postal_address.address.label')
   visibility_method = :address_visibility
   address_formatter = Osuny::AddressFormatter.new(about: about, l10n: l10n, language: l10n.language)
   has_visibility = about.respond_to?(visibility_method)

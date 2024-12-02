@@ -1,0 +1,11 @@
+<%
+ContactDetails::PHONES.each do |variable|
+  if about.respond_to?(variable)
+    %>
+    <div class="col-md-6">
+      <%= f.input variable,
+                  label: t("contact_details.phone_numbers.#{variable}.label"),
+                  hint: t("contact_details.phone_numbers.#{variable}.hint") %>
+    </div>
+  <% end %>
+<% end %>

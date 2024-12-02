@@ -1,5 +1,5 @@
 <%
-label = t('contact_details.websites.website')
+label = t('contact_details.websites.website.label')
 data = ContactDetails.find_data(:website, about, l10n)
 data = ContactDetails.find_data(:url, about, l10n) if data.nil?
 if data.present?

@@ -1,7 +1,7 @@
 <%
 if about.respond_to?(:phone_numbers)
   about.phone_numbers.each do |phone_number| 
-    label = t("contact_details.phone_numbers.phone")
+    label = t("contact_details.phone_numbers.phone.label")
     detail = ContactDetails::Phone.new phone_number
     %>
     <div class="col-md-6">
@@ -17,7 +17,7 @@ end
 <%
 ContactDetails::PHONES.each do |variable|
   if about.respond_to?(variable)
-    label = t("contact_details.phone_numbers.#{variable}")
+    label = t("contact_details.phone_numbers.#{variable}.label")
     data = about.send(variable)
     detail = ContactDetails::Phone.new data
     %>

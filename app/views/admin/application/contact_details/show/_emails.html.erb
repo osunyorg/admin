@@ -1,7 +1,7 @@
 <%
 if about.respond_to?(:emails)
   about.emails.each do |email| 
-    label = t("contact_details.emails.email")
+    label = t("contact_details.emails.email.label")
     detail = ContactDetails::Email.new email
     %>
     <div class="col-md-6">
@@ -17,7 +17,7 @@ end
 %>
 <%
 if about.respond_to?(:email)
-  label = t('contact_details.emails.email')
+  label = t('contact_details.emails.email.label')
   detail = ContactDetails::Email.new(about.email)
   %>
   <div class="col-md-6">
