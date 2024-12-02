@@ -62,7 +62,7 @@
                     "value": [
                       {
                         "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
-                        "migration_identifier": null,
+                        "migration_identifier": "test-post-fixture-1",
                         "localizations": [
                           {
                             "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
@@ -70,12 +70,12 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-02T12:25:52.611+01:00",
-                            "updated_at": "2024-12-02T12:25:52.611+01:00"
+                            "created_at": "2024-12-02T14:14:42.101+01:00",
+                            "updated_at": "2024-12-02T14:14:42.101+01:00"
                           }
                         ],
-                        "created_at": "2024-12-02T12:25:52.631+01:00",
-                        "updated_at": "2024-12-02T12:25:52.631+01:00"
+                        "created_at": "2024-12-02T14:14:42.119+01:00",
+                        "updated_at": "2024-12-02T14:14:42.119+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -87,12 +87,12 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-02T12:25:52.611+01:00",
-                            "updated_at": "2024-12-02T12:25:52.611+01:00"
+                            "created_at": "2024-12-02T14:14:42.101+01:00",
+                            "updated_at": "2024-12-02T14:14:42.101+01:00"
                           }
                         ],
-                        "created_at": "2024-12-02T12:25:52.631+01:00",
-                        "updated_at": "2024-12-02T12:25:52.631+01:00"
+                        "created_at": "2024-12-02T14:14:42.119+01:00",
+                        "updated_at": "2024-12-02T14:14:42.119+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -104,12 +104,12 @@
                             "language": "fr",
                             "published": false,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-02T12:25:52.611+01:00",
-                            "updated_at": "2024-12-02T12:25:52.611+01:00"
+                            "created_at": "2024-12-02T14:14:42.101+01:00",
+                            "updated_at": "2024-12-02T14:14:42.101+01:00"
                           }
                         ],
-                        "created_at": "2024-12-02T12:25:52.631+01:00",
-                        "updated_at": "2024-12-02T12:25:52.631+01:00"
+                        "created_at": "2024-12-02T14:14:42.119+01:00",
+                        "updated_at": "2024-12-02T14:14:42.119+01:00"
                       }
                     ]
                   }
@@ -176,12 +176,12 @@
                 "examples": {
                   "test_example": {
                     "value": {
-                      "id": "0faeefca-bd0a-42ec-834b-5ff2abf006bf",
+                      "id": "8988f3e4-39e0-4e42-915b-18cdbd1afc84",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": [
                         {
-                          "id": "dc7f805b-9077-4763-a017-2c1ee195c604",
+                          "id": "86a63e9b-d74d-4372-94f8-e705ea657b82",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "language": "fr",
@@ -193,13 +193,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-02T12:25:53.141+01:00",
-                          "updated_at": "2024-12-02T12:25:53.141+01:00"
+                          "created_at": "2024-12-02T14:14:42.606+01:00",
+                          "updated_at": "2024-12-02T14:14:42.606+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-02T12:25:53.130+01:00",
-                      "updated_at": "2024-12-02T12:25:53.146+01:00"
+                      "created_at": "2024-12-02T14:14:42.596+01:00",
+                      "updated_at": "2024-12-02T14:14:42.612+01:00"
                     }
                   }
                 }
@@ -255,16 +255,18 @@
                 "examples": {
                   "test_example": {
                     "value": {
-                      "localizations.slug": [
-                        "can't be blank",
-                        "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
-                      ],
-                      "localizations.title": [
-                        "can't be blank"
-                      ],
-                      "localizations": [
-                        "is invalid"
-                      ]
+                      "errors": {
+                        "localizations.slug": [
+                          "can't be blank",
+                          "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                        ],
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
                     }
                   }
                 }
@@ -394,12 +396,12 @@
                   "test_example": {
                     "value": {
                       "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
-                      "migration_identifier": null,
+                      "migration_identifier": "test-post-fixture-1",
                       "full_width": false,
                       "localizations": [
                         {
                           "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
-                          "migration_identifier": null,
+                          "migration_identifier": "test-post-fixture-1-fr",
                           "title": "Test",
                           "language": "fr",
                           "meta_description": null,
@@ -410,13 +412,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-02T12:25:52.611+01:00",
-                          "updated_at": "2024-12-02T12:25:52.611+01:00"
+                          "created_at": "2024-12-02T14:14:42.101+01:00",
+                          "updated_at": "2024-12-02T14:14:42.101+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-02T12:25:52.631+01:00",
-                      "updated_at": "2024-12-02T12:25:52.631+01:00"
+                      "created_at": "2024-12-02T14:14:42.119+01:00",
+                      "updated_at": "2024-12-02T14:14:42.119+01:00"
                     }
                   }
                 }
@@ -452,6 +454,219 @@
             }
           }
         }
+      },
+      "patch": {
+        "summary": "Updates a post",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                      "migration_identifier": "test-post-fixture-1",
+                      "full_width": false,
+                      "localizations": [
+                        {
+                          "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                          "migration_identifier": "test-post-fixture-1-fr",
+                          "title": "Mon nouveau titre",
+                          "language": "fr",
+                          "meta_description": null,
+                          "pinned": null,
+                          "published": true,
+                          "published_at": "2010-11-28T01:00:00.000+01:00",
+                          "slug": "test",
+                          "subtitle": null,
+                          "summary": null,
+                          "text": null,
+                          "created_at": "2024-12-02T14:14:42.101+01:00",
+                          "updated_at": "2024-12-02T14:14:42.885+01:00"
+                        }
+                      ],
+                      "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
+                      "created_at": "2024-12-02T14:14:42.119+01:00",
+                      "updated_at": "2024-12-02T14:14:42.887+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "test_example": {
+                    "value": {
+                      "errors": {
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "post": {
+                    "type": "object",
+                    "properties": {
+                      "migration_identifier": {
+                        "type": "string",
+                        "description": "Unique migration identifier of the post"
+                      },
+                      "full_width": {
+                        "type": "boolean"
+                      },
+                      "localizations_attributes": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "migration_identifier": {
+                              "type": "string",
+                              "description": "Unique migration identifier of the localization"
+                            },
+                            "language": {
+                              "type": "string",
+                              "description": "ISO 639-1 code of the language",
+                              "example": "fr"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "meta_description": {
+                              "type": "string"
+                            },
+                            "pinned": {
+                              "type": "boolean"
+                            },
+                            "published": {
+                              "type": "boolean"
+                            },
+                            "published_at": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "slug": {
+                              "type": "string"
+                            },
+                            "subtitle": {
+                              "type": "string"
+                            },
+                            "summary": {
+                              "type": "string"
+                            },
+                            "text": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "migration_identifier",
+                            "language",
+                            "title"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "migration_identifier",
+                      "localizations_attributes"
+                    ]
+                  }
+                },
+                "required": [
+                  "post"
+                ]
+              }
+            }
+          }
+        }
       }
     },
     "/communication/websites": {
@@ -483,8 +698,8 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-02T12:25:52.559+01:00",
-                            "updated_at": "2024-12-02T12:25:52.559+01:00"
+                            "created_at": "2024-12-02T14:14:42.062+01:00",
+                            "updated_at": "2024-12-02T14:14:42.062+01:00"
                           }
                         ]
                       },
@@ -498,8 +713,8 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-02T12:25:52.559+01:00",
-                            "updated_at": "2024-12-02T12:25:52.559+01:00"
+                            "created_at": "2024-12-02T14:14:42.062+01:00",
+                            "updated_at": "2024-12-02T14:14:42.062+01:00"
                           },
                           {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -507,8 +722,8 @@
                             "language": "en",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-02T12:25:52.559+01:00",
-                            "updated_at": "2024-12-02T12:25:52.559+01:00"
+                            "created_at": "2024-12-02T14:14:42.062+01:00",
+                            "updated_at": "2024-12-02T14:14:42.062+01:00"
                           }
                         ]
                       }
@@ -606,12 +821,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-02T12:25:52.559+01:00",
-                          "updated_at": "2024-12-02T12:25:52.559+01:00"
+                          "created_at": "2024-12-02T14:14:42.062+01:00",
+                          "updated_at": "2024-12-02T14:14:42.062+01:00"
                         }
                       ],
-                      "created_at": "2024-12-02T12:25:52.633+01:00",
-                      "updated_at": "2024-12-02T12:25:52.633+01:00"
+                      "created_at": "2024-12-02T14:14:42.123+01:00",
+                      "updated_at": "2024-12-02T14:14:42.123+01:00"
                     }
                   }
                 }
