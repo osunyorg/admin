@@ -53,16 +53,14 @@ RSpec.configure do |config|
   config.openapi_format = :json
 
   config.after(:each) do |example|
-    content = example.metadata[:response][:content] || {}
-    example_spec = {
-      "application/json"=>{
+    example.metadata[:response][:content] = {
+      'application/json' => {
         examples: {
-          test_example: {
+          example.metadata[:example_group][:description] => {
             value: JSON.parse(response.body, symbolize_names: true)
           }
         }
       }
     }
-    example.metadata[:response][:content] = content.deep_merge(example_spec)
   end
 end
