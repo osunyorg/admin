@@ -15,11 +15,11 @@
       </div>
       <div class="col-xl-4">
         <%= osuny_panel t('metadata') do %>
-          <%= render  "admin/application/slug/form",
+          <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#research_journal_volume_localizations_attributes_0_title' %>
           <%= f.input :number %>
-          <%= lf.input :published %>
+          <%= render 'admin/application/publication/form', f: lf, about: volume %>
           <%= lf.input :published_at, html5: true, as: :date %>
           <%= lf.input :keywords %>
         <% end %>

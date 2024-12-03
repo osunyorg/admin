@@ -17,10 +17,9 @@
       </div>
       <div class="col-md-4">
         <%= osuny_panel t('metadata') do %>
-          <%= lf.input :published,
-                        wrapper: :custom_boolean_switch if can? :publish, project %>
+          <%= render 'admin/application/publication/form', f: lf, about: project %>
           <%= f.input :year %>
-          <%= render  "admin/application/slug/form",
+          <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#communication_website_portfolio_project_localizations_attributes_0_title' %>
         <% end %>

@@ -323,10 +323,6 @@ fr:
         one: Mot-clé
         other: Mot-clés
   admin:
-    categories:
-      is_taxonomy: Est une taxonomie (une famille de catégories)
-      other: Autres
-      title: Catégories
     communication:
       author:
         show_person_html: "Cette page montre uniquement les dernières actualités écrites par la personne, en tant qu'auteur ou autrice. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien ci-dessous."

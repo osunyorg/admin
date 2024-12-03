@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-lg-4">
+    <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
+  </div>
+  <div class="col-lg-8">
+    <%= lf.input :name, label: t('category.name'), input_html: { id: 'category_name' } %>
+    <%= render  'admin/application/slug/form',
+                f: lf,
+                source: '#category_name' %>
+    <%= f.association :parent,
+                      collection: osuny_collection_tree(
+                        collection,
+                        except: category,
+                        localized: true
+                      ) %>
+    <%= f.input :is_taxonomy, label: t('category.taxonomy.is_taxonomy') if category.possible_taxonomy? %>
+    <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+    <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+  </div>
+</div>

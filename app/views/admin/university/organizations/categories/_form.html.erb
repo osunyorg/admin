@@ -13,7 +13,7 @@
       </div>
       <div class="col-md-4">
         <%= osuny_panel t('metadata') do %>
-          <%= render  "admin/application/slug/form",
+          <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#university_organization_category_localizations_attributes_0_name' %>
           <%= f.association :parent,

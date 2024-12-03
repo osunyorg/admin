@@ -179,9 +179,11 @@ fr:
     children: Sous-catégories
     featured_image: Image à la une
     featured_image_alt: Texte alternatif
+    is_taxonomy: Est une taxonomie (une famille de catégories)
     name: Nom
     parent: Catégorie parente
     slug: Slug
+    title: Catégories
   confirm: Confirmer
   content: Contenu
   cookies_consent_choice: Choix en matière de cookies
@@ -353,6 +355,9 @@ fr:
   properties:
     text:
       missing: Texte manquant
+  publication:
+    draft: Brouillon
+    published: Publié
   quit: Quitter
   remove: Retirer
   reset: Réinitialiser

@@ -61,8 +61,8 @@
         </div>
       </div>
       <div class="col-lg-4 col-xxl-3">
-        <%= lf.input :published %>
-        <%= render  "admin/application/slug/form",
+        <%= render 'admin/application/publication/form', f: lf, about: program %>
+        <%= render  'admin/application/slug/form',
                     f: lf,
                     source: '#education_program_localizations_attributes_0_name' %>
         <%= f.association :parent,
