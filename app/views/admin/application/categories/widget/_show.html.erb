@@ -25,7 +25,7 @@ taxonomies.each do |taxonomy|
 # Then, free categories
 if free_categories_in_use.any? %>
   <div class="mb-4">
-    <%= osuny_label about.class.human_attribute_name('categories') %>
+    <%= osuny_label t('category.title') %>
     <ul class="list-unstyled">
       <% free_categories_in_use.each do |category| %>
         <li><%= osuny_link_localized_if can?(:read, category), category, [:admin, category] %></li>

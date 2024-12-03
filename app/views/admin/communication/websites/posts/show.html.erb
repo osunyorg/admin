@@ -40,17 +40,7 @@
           </ul>
         </div>
       <% end %>
-    
-      <% if @post.categories.any?  %>
-        <div>
-          <%= osuny_label Communication::Website::Post.human_attribute_name(:categories) %>
-          <ul class="list-unstyled">
-            <% @post.categories.ordered.each do |category| %>
-              <li><%= osuny_link_localized category, admin_communication_website_post_category_path(category) %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <%= render 'admin/application/categories/widget/show', about: @post %> 
       <%= render 'admin/application/permalinks/redirects', about: @l10n %>
     <% end %>
     <%= render 'admin/application/l10n/widget', about: @post, l10n: @l10n, small: true %>

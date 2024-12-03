@@ -26,7 +26,9 @@
       </div>
       <div class="col-md-3">
         <label class="form-label d-none d-md-block">&nbsp;</label>
-        <%= f.input :published, wrapper: :custom_boolean_switch %>
+        <%= f.input :published,
+                    label: t('publication.published'),
+                    wrapper: :custom_boolean_switch %>
       </div>
     </div>
 
