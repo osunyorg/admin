@@ -175,6 +175,13 @@ fr:
   batch_selectable:
     title: Modifier la sélection
   cancel: Annuler
+  category:
+    children: Sous-catégories
+    featured_image: Image à la une
+    featured_image_alt: Texte alternatif
+    name: Nom
+    parent: Catégorie parente
+    slug: Slug
   confirm: Confirmer
   content: Contenu
   cookies_consent_choice: Choix en matière de cookies

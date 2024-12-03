@@ -16,7 +16,7 @@
                         data: { 'summernote-config' => 'mini-list' }
                       } %>
         <% end %>
-        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= osuny_panel University::Organization.human_attribute_name('physical') do %>
           <div class="row pure__row--small">
             <div class="col-xl-6">

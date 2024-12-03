@@ -127,12 +127,6 @@ fr:
         social: Réseaux sociaux
         university: Université
         url: URL
-      communication/website/agenda/category:
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        parent: Catégorie parente
-        slug: Slug
       communication/website/agenda/event:
         categories: Catégories
         dates: Dates
@@ -208,11 +202,6 @@ fr:
         title: Titre
       communication/website/permalink:
         path: Chemin
-      communication/website/portfolio/category/localization:
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        slug: Slug
       communication/website/portfolio/project:
         categories: Catégories
         year: Année
@@ -226,14 +215,6 @@ fr:
         categories: Catégories
         full_width: Pleine largeur
         website: Site Web
-      communication/website/post/category:
-        children: Catégories enfants
-        parent: Catégorie parente
-      communication/website/post/category/localization:
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        slug: Slug
       communication/website/post/localization:
         category: Catégorie
         date: Date

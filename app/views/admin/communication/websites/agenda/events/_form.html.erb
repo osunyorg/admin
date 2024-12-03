@@ -34,7 +34,7 @@
                       include_blank: false,
                       selected: f.object.time_zone || @website.default_time_zone %>
         <% end %>
-        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
 
       </div>

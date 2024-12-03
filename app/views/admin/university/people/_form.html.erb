@@ -52,7 +52,7 @@
           </div>
         <% end %>
 
-        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
 
         <%= osuny_panel University::Person.human_attribute_name('contacts') do %>
           <p><em><%= t("university.person.personal_data_warning") %></em></p>

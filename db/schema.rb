@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_28_170222) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_03_101113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -584,6 +584,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_28_170222) do
     t.boolean "full_width", default: false
     t.string "type"
     t.string "migration_identifier"
+    t.jsonb "design_options"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
@@ -942,6 +943,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_28_170222) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.text "summary"
     t.index ["about_id"], name: "index_education_program_category_localizations_on_about_id"
     t.index ["language_id"], name: "index_education_program_category_localizations_on_language_id"
     t.index ["university_id"], name: "idx_on_university_id_833fd3c673"
@@ -1534,6 +1539,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_28_170222) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.text "summary"
     t.index ["about_id"], name: "idx_on_about_id_f5fce0a0b7"
     t.index ["language_id"], name: "idx_on_language_id_8e479f2339"
     t.index ["slug"], name: "index_university_organization_category_localizations_on_slug"
@@ -1651,6 +1660,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_28_170222) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.text "summary"
     t.index ["about_id"], name: "index_university_person_category_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_person_category_localizations_on_language_id"
     t.index ["slug"], name: "index_university_person_category_localizations_on_slug"

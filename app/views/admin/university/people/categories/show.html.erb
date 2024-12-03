@@ -1,25 +1,6 @@
 <% content_for :title, @l10n %>
 
-<% if @category.parent %>
-  <%= osuny_label University::Person::Category.human_attribute_name('parent') %>
-  <p>
-    <%= osuny_link_localized_if can?(:read, @category.parent),
-                                @category.parent,
-                                admin_university_person_category_path(@category.parent.id) %>
-  </p>
-<% end %>
-<% if @category.children.any? %>
-  <%= osuny_label University::Person::Category.human_attribute_name('children') %>
-  <ul class="list-unstyled mb-0">
-    <% @category.children.each do |child| %>
-      <li>
-        <%= osuny_link_localized_if can?(:read, child),
-                                    child,
-                                    admin_university_person_category_path(child.id) %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'admin/application/categories/show', category: @category, l10n: @l10n %>
 
 <% if @people.total_count > 0 %>
   <p>

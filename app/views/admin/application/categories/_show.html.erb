@@ -1,35 +1,32 @@
-<%
-categories_class = about.categories.klass
-categories_in_university = categories_class.where(university: current_university)
-taxonomies = categories_in_university.taxonomies.ordered
-free_categories = categories_in_university.free.root
-free_categories_in_use = about.categories.merge(free_categories)
-# TODO manage child free categories
-%>
-<% 
-# First, taxonomies
-taxonomies.each do |taxonomy|
-  taxons_in_use = about.categories.merge(taxonomy.children)
-  next if taxons_in_use.none?
-  %>
-  <div class="mb-4">
-    <%= osuny_label taxonomy.to_s_in(current_language) %>
-    <ul class="list-unstyled">
-      <% taxons_in_use.each do |category| %>
-        <li><%= osuny_link_localized_if can?(:read, category), category, [:admin, category] %></li>
-      <% end %>
-    </ul>
+<div class="row">
+  <div class="col-lg-3">
+    <%= render 'admin/application/featured_image/show', about: l10n, small: true %>
+    <%= render 'admin/application/meta_description/show', about: l10n %>
   </div>
-<% end %>
-<% 
-# Then, free categories
-if free_categories_in_use.any? %>
-  <div class="mb-4">
-    <%= osuny_label about.class.human_attribute_name('categories') %>
-    <ul class="list-unstyled">
-      <% free_categories_in_use.each do |category| %>
-        <li><%= osuny_link_localized_if can?(:read, category), category, [:admin, category] %></li>
+  <div class="offset-lg-1 col-lg-8">
+    <%= render 'admin/application/summary/show', about: l10n, small: true %>
+    <%= render 'admin/application/l10n/widget', about: category, l10n: l10n, small: true %>
+    <div class="row">
+      <% if category.parent %>
+        <div class="col-lg-6">
+          <%= osuny_label t('category.parent') %>
+          <p>
+            <%= osuny_link_localized_if can?(:read, category.parent), category.parent, [:admin, category.parent] %>
+          </p>
+        </div>
       <% end %>
-    </ul>
+      <% if @category.children.any? %>
+        <div class="col-lg-6">
+          <%= osuny_label t('category.children') %>
+          <ul class="list-unstyled mb-0">
+            <% category.children.each do |child| %>
+              <li>
+                <%= osuny_link_localized_if can?(:read, child), child, [:admin, child] %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

@@ -2,14 +2,18 @@
 #
 # Table name: university_person_category_localizations
 #
-#  id            :uuid             not null, primary key
-#  name          :string
-#  slug          :string           indexed
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             indexed
-#  language_id   :uuid             indexed
-#  university_id :uuid             indexed
+#  id                    :uuid             not null, primary key
+#  featured_image_alt    :text
+#  featured_image_credit :text
+#  meta_description      :text
+#  name                  :string
+#  slug                  :string           indexed
+#  summary               :text
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  about_id              :uuid             indexed
+#  language_id           :uuid             indexed
+#  university_id         :uuid             indexed
 #
 # Indexes
 #

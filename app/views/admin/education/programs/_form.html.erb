@@ -15,7 +15,7 @@
           </div>
         </div>
         <%= render 'admin/application/summary/form', f: lf, about: l10n %>
-        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <div class="row">
           <div class="col-lg-4">
             <%= f.association :diploma,
