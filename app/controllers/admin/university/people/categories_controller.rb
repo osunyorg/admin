@@ -82,11 +82,6 @@ class Admin::University::People::CategoriesController < Admin::University::Appli
   end
 
   def category_params
-    params.require(:university_person_category).permit(
-      :is_taxonomy, :parent_id,
-      localizations_attributes: [
-        :id, :name, :slug, :summary, :meta_description, :language_id,
-        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
-      ]).merge(university_id: current_university.id)
+    permitted_params_for(:university_person_category)
   end
 end
