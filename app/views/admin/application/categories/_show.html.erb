@@ -1,12 +1,11 @@
 <div class="row">
   <div class="col-lg-3">
     <%= render 'admin/application/featured_image/show', about: l10n, small: true %>
-    <%= render 'admin/application/meta_description/show', about: l10n %>
   </div>
   <div class="offset-lg-1 col-lg-8">
     <%= render 'admin/application/summary/show', about: l10n, small: true %>
     <%= render 'admin/application/l10n/widget', about: category, l10n: l10n, small: true %>
-    <div class="row">
+    <div class="row mb-5">
       <% if category.parent %>
         <div class="col-lg-6">
           <%= osuny_label t('category.parent') %>
@@ -28,5 +27,6 @@
         </div>
       <% end %>
     </div>
+    <%= render 'admin/application/meta_description/show', about: l10n %>
   </div>
 </div>
