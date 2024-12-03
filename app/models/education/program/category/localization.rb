@@ -2,14 +2,18 @@
 #
 # Table name: education_program_category_localizations
 #
-#  id            :uuid             not null, primary key
-#  name          :string
-#  slug          :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             indexed
-#  language_id   :uuid             indexed
-#  university_id :uuid             indexed
+#  id                    :uuid             not null, primary key
+#  featured_image_alt    :text
+#  featured_image_credit :text
+#  meta_description      :text
+#  name                  :string
+#  slug                  :string
+#  summary               :text
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  about_id              :uuid             indexed
+#  language_id           :uuid             indexed
+#  university_id         :uuid             indexed
 #
 # Indexes
 #
@@ -30,6 +34,7 @@ class Education::Program::Category::Localization < ApplicationRecord
   include Initials
   include Permalinkable
   include Sanitizable
+  include WithFeaturedImage
   include WithGitFiles
   include WithUniversity
 

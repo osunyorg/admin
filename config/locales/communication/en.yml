@@ -127,12 +127,6 @@ en:
         social: Social media
         university: University
         url: URL
-      communication/website/agenda/category:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        parent: Parent category
-        slug: Slug
       communication/website/agenda/event:
         categories: Categories
         dates: Dates
@@ -208,11 +202,6 @@ en:
         title: Title
       communication/website/permalink:
         path: Path
-      communication/website/portfolio/category/localization:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        slug: Slug
       communication/website/portfolio/project:
         categories: Categories
         year: Year
@@ -226,14 +215,6 @@ en:
         categories: Categories
         full_width: Full width
         website: Website
-      communication/website/post/category:
-        children: Children categories
-        parent: Parent category
-      communication/website/post/category/localization:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        slug: Slug
       communication/website/post/localization:
         category: Category
         date: Date

@@ -47,7 +47,7 @@ logo: "<%= @about.logo.blob.id %>"
 <% if @about.logo_on_dark_background.attached? %>
 logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
 <% end %>
-<%= render 'admin/application/categories/static',
+<%= render 'admin/application/categories/widget/static',
             about: organization,
             l10n: @l10n,
             categories: university.organization_categories,

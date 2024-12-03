@@ -12,7 +12,7 @@
           <%= lf.input :subtitle %>
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
         <% end %>
-        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
       <div class="col-md-4">
