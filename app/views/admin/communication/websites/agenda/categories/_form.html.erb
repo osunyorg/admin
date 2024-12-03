@@ -3,7 +3,7 @@
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <%= lf.hidden_field :language_id, value: current_language.id %>
-    <%= render 'admin/application/categories/edit',
+    <%= render 'admin/application/categories/form',
                 f: f, lf: lf, category: category, l10n: l10n,
                 collection: @website.agenda_categories.root %>
     <% content_for :action_bar_right do %>
