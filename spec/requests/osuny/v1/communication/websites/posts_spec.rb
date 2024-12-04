@@ -51,7 +51,8 @@ RSpec.describe 'Communication::Website::Post' do
                     migration_identifier: { type: :string, description: 'Unique migration identifier of the localization' },
                     language: { type: :string, description: 'ISO 639-1 code of the language', example: 'fr' },
                     title: { type: :string },
-                    # TODO Featured image & blocks
+                    featured_image: { type: :string, description: 'URL of the featured image' },
+                    # TODO blocks
                     meta_description: { type: :string },
                     pinned: { type: :boolean },
                     published: { type: :boolean },
@@ -81,6 +82,7 @@ RSpec.describe 'Communication::Website::Post' do
                 language: 'fr',
                 title: 'Ma nouvelle actualité',
                 meta_description: 'Une nouvelle actualité depuis l\'API',
+                featured_image: 'https://images.unsplash.com/photo-1703923633616-254e78f6e9df?q=80&w=2070&auto=format&fit=crop',
                 pinned: false,
                 published: true,
                 published_at: '2024-11-29T16:49:00Z',
@@ -94,7 +96,7 @@ RSpec.describe 'Communication::Website::Post' do
       }
 
       response '201', 'Successful creation' do
-        it 'creates a post and its localization', rswag: true do |example|
+        it 'creates a post and its localization', rswag: true, vcr: true do |example|
           assert_difference ->{ Communication::Website::Post.count } => 1, ->{ Communication::Website::Post::Localization.count } => 1 do
             submit_request(example.metadata)
             assert_response_matches_metadata(example.metadata)

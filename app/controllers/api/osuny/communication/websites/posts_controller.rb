@@ -67,21 +67,32 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
                           communication_website_id: website.id
                         )
     permitted_params[:localizations_attributes].each do |localization_attributes|
-      set_id_and_language_id_to_l10n_attributes(localization_attributes)
+      set_language_id_to_l10n_attributes(localization_attributes)
+      post_l10n = @post.localizations.find_by(
+        migration_identifier: l10n_attributes[:migration_identifier],
+        language_id: l10n_attributes[:language_id]
+      ) if @post.persisted?
+      l10n_attributes[:id] = post_l10n.id if post_l10n.present?
+      set_featured_image_to_l10n_attributes(localization_attributes, l10n: post_l10n)
     end
     permitted_params
   end
 
-  def set_id_and_language_id_to_l10n_attributes(l10n_attributes)
-    l10n_migration_identifier = l10n_attributes[:migration_identifier]
+  def set_language_id_to_l10n_attributes(l10n_attributes)
     language_iso_code = l10n_attributes.delete(:language)
     l10n_attributes[:language_id] = Language.find_by(iso_code: language_iso_code)&.id
-    if @post.persisted?
-      post_l10n = @post.localizations.find_by(
-        migration_identifier: l10n_migration_identifier,
-        language_id: l10n_attributes[:language_id]
-      )
-      l10n_attributes[:id] = post_l10n.id if post_l10n.present?
-    end
+  end
+
+  def set_featured_image_to_l10n_attributes(l10n_attributes, l10n: nil)
+    featured_image_url = l10n_attributes.delete(:featured_image)
+    # No image to upload
+    return unless featured_image_url.present?
+    # Image already uploaded
+    return if l10n.present? && l10n.featured_image.attached? && l10n.featured_image.blob.metadata[:source_url] == featured_image_url
+    l10n_attributes[:featured_image] = {
+      io: URI.parse(featured_image_url).open,
+      filename: File.basename(URI.parse(featured_image_url).path),
+      metadata: { source_url: featured_image_url }
+    }
   end
 end
