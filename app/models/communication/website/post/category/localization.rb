@@ -45,22 +45,6 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
     "#{prefix}posts_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
-  def template_static
-    "admin/application/categories/static"
-  end
-
-  # Deprecated?
-  def best_featured_image_source(fallback: true)
-    return self if featured_image.attached?
-    parent_category = about.parent
-    parent_category_l10n = parent_category&.localization_for(language)
-    if parent_category_l10n.present?
-      best_source = parent_category_l10n&.best_featured_image_source(fallback: false)
-    end
-    best_source ||= self if fallback
-    best_source
-  end
-
   protected
 
   def slug_unavailable?(slug)

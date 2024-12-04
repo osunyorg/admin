@@ -33,12 +33,4 @@ class Education::Program::Category::Localization < ApplicationRecord
   def git_path(website)
     "#{git_path_content_prefix(website)}programs_categories/#{slug}/_index.html"
   end
-
-  def template_static
-    "admin/application/categories/static"
-  end
-
-  def dependencies
-    contents_dependencies
-  end
 end
