@@ -93,6 +93,14 @@ fr:
         access_token: Jeton d'accès
         appearance: Apparence
         autoupdate_theme: Mise à jour automatique du thème Osuny
+        configs: Fichiers de configuration
+        config_default_content_security_policy: Politiques de sécurités pour définir les CSP (CORS)
+        config_default_languages: Définition des langues et des configurations pour chaque langue
+        config_default_permalinks: Définition des permaliens (obsolète)
+        config_default_deuxfleurs_workflow: Action de mise en ligne Deuxfleurs
+        config_default_development_config: Configuration de développement
+        config_default_production_config: Configuration de production, intégrant les règles de cache
+        config_robots_txt: Fichier robots.txt, adressé aux moteurs de recherche
         created_at: Création
         default_image: Image par défaut
         default_language: Langue par défaut
