@@ -53,12 +53,18 @@ module Staticable
   # 3. Converts the result to lower case
   # 4. Replaces spaces with hyphens
   def hugo_path_in_website(website)
-    # Filename
+    # Start with file
     path = "#{hugo_file_in_website(website)}"
     # Strip /content/fr
-    path.delete_prefix!(git_path_content_prefix(website))
-    path.delete_suffix!('/_index.html')
+    prefix = git_path_content_prefix(website)
+    path.delete_prefix!(prefix)
+    # Remove filename for indexes
+    path.delete_suffix!('_index.html')
+    # Remove extension
     path.delete_suffix!('.html')
+    # Remove trailing slash
+    path.delete_suffix!('/')
+    # Add initial slash (last, so home path with just "/" is ok)
     path = "/#{path}" unless path.start_with?('/')
     path
   end
