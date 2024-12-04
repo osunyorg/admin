@@ -21,10 +21,10 @@
           <% if can? :publish, post %>
             <div class="row pure__row--small">
               <div class="col-6">
-                <%= lf.input :published %>
+                <%= lf.input :published, wrapper: :custom_boolean_switch %>
               </div>
               <div class="col-6">
-                <%= lf.input :pinned %>
+                <%= lf.input :pinned, wrapper: :custom_boolean_switch %>
               </div>
             </div>
             <%= lf.input :published_at, html5: true, as: :date %>
@@ -42,7 +42,7 @@
           <%= render  "admin/application/slug/form",
                       f: lf,
                       source: '#communication_website_post_localizations_attributes_0_title' %>
-          <%= f.input :full_width %>
+          <%= f.input :full_width, wrapper: :custom_boolean_switch %>
         <% end %>
         <%= render 'admin/application/featured_image/edit', f: lf, about: @l10n %>
         <%= render 'admin/application/shared_image/edit', f: lf, about: @l10n %>

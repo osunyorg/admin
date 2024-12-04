@@ -40,7 +40,8 @@
       </div>
       <div class="col-md-4">
         <%= osuny_panel t('metadata') do %>
-          <%= lf.input :published if can? :publish, event %>
+          <%= lf.input :published,
+                        wrapper: :custom_boolean_switch if can? :publish, event %>
           <%= render  "admin/application/slug/form",
                       f: lf,
                       source: '#communication_website_agenda_event_localizations_attributes_0_title' %>

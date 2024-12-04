@@ -17,7 +17,8 @@
       </div>
       <div class="col-md-4">
         <%= osuny_panel t('metadata') do %>
-          <%= lf.input :published if can? :publish, project %>
+          <%= lf.input :published,
+                        wrapper: :custom_boolean_switch if can? :publish, project %>
           <%= f.input :year %>
           <%= render  "admin/application/slug/form",
                       f: lf,

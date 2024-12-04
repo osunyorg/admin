@@ -7,7 +7,6 @@ class Api::Osuny::Server::WebsitesController < Api::Osuny::ApplicationController
   end
 
   def verify_autoupdate_theme_key
-    render_forbidden if params[:secret_key].blank?
-    render_forbidden if params[:secret_key] != ENV['OSUNY_API_AUTOUPDATE_THEME_KEY']
+    render_forbidden if params[:secret_key].blank? || params[:secret_key] != ENV['OSUNY_API_AUTOUPDATE_THEME_KEY']
   end
 end
