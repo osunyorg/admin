@@ -27,6 +27,10 @@ module AsCategoryLocalization
     contents_dependencies
   end
 
+  def published?
+    persisted?
+  end
+
   def to_s
     "#{name}"
   end

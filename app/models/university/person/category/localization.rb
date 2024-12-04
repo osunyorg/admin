@@ -36,8 +36,4 @@ class University::Person::Category::Localization < ApplicationRecord
     prefix = git_path_content_prefix(website)
     "#{prefix}persons_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
-
-  def published?
-    persisted?
-  end
 end
