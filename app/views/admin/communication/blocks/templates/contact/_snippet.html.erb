@@ -1,12 +1,17 @@
 <address itemscope itemtype="https://schema.org/Organization" class="mb-0">
-  <%= strip_tags block_component_snippet block, :name %>
+  <% if block.template.name.present? %>
+    <b><%= strip_tags block_component_snippet block, :name %></b><br>
+  <% end %>
+  <% if block.template.information.present? %>
+    <%= strip_tags block_component_snippet block, :information %><br>
+  <% end %>
   <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
     <span itemprop="streetAddress">
       <%= strip_tags block_component_snippet block, :address %>
     </span>
     <span itemprop="addressLocality">
       <%= strip_tags block_component_snippet block, :city %>
-    </span>
+    </span><br>
     <span itemprop="postalCode">
       <%= strip_tags block_component_snippet block, :zipcode %>
     </span>
@@ -14,12 +19,16 @@
       <%= strip_tags block_component_snippet block, :country %>
     </span>
   </span>
-  <% block.template.phone_numbers.each do |phone_number| %>
-    <%= phone_number %>
-  <% end %>
-  <% block.template.emails.each do |email| %>
-    <%= email %>
-  <% end %>
+  <div>
+    <% block.template.phone_numbers.each do |phone_number| %>
+      <%= phone_number %>
+    <% end %>
+  </div>
+  <div>
+    <% block.template.emails.each do |email| %>
+      <%= email %>
+    <% end %>
+  </div>
 </address>
 <ul class="list-unstyled">
   <% block.template.elements.each do |element| %>

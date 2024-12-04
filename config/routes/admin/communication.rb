@@ -21,6 +21,7 @@ namespace :communication do
     end
     get 'style' => 'websites/preview#style', as: :style
     get 'assets/*path' => 'websites/preview#assets'
+    resources :configs, controller: 'websites/configs', only: [:index, :show]
     resources :dependencies, controller: 'websites/dependencies', only: :index
     resources :connections, controller: 'websites/connections', only: [:index, :show] do
       collection do
