@@ -18,6 +18,19 @@ module AsCategoryLocalization
     validates :name, presence: true
   end
 
+  def template_static
+    "admin/application/categories/static"
+  end
+
+  def dependencies
+    active_storage_blobs +
+    contents_dependencies
+  end
+
+  def published?
+    persisted?
+  end
+
   def to_s
     "#{name}"
   end

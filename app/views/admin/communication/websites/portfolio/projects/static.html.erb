@@ -16,7 +16,7 @@ project = @l10n.about
 <%= render 'admin/application/summary/static', about: @l10n %>
 year: <%= project.year %>
 date: <%= project.year %>
-<%= render 'admin/application/categories/static',
+<%= render 'admin/application/categories/widget/static',
             about: project,
             l10n: @l10n,
             categories: @website.portfolio_categories,

@@ -45,10 +45,6 @@ class Communication::Website::Portfolio::Category::Localization < ApplicationRec
     "#{prefix}projects_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
-  def template_static
-    "admin/communication/websites/portfolio/categories/static"
-  end
-
   protected
 
   def slug_unavailable?(slug)

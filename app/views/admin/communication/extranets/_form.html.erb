@@ -43,6 +43,7 @@
         <% if extranet.localizations.many? %>
           <%= osuny_panel t('admin.communication.extranet.languages') do %>
             <%= lf.input :published,
+                          label: t('publication.published'),
                           wrapper: :custom_boolean_switch,
                           disabled: l10n.published? && extranet.active_languages.one? %>
 

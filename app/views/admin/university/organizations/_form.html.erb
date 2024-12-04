@@ -16,7 +16,7 @@
                         data: { 'summernote-config' => 'mini-list' }
                       } %>
         <% end %>
-        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= osuny_panel University::Organization.human_attribute_name('physical') do %>
           <div class="row pure__row--small">
             <div class="col-xl-6">
@@ -77,7 +77,7 @@
       </div>
       <div class="col-xl-4">
         <%= osuny_panel t('metadata') do %>
-          <%= render  "admin/application/slug/form",
+          <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#university_organization_localizations_attributes_0_name' %>
           <%= f.input :active %>

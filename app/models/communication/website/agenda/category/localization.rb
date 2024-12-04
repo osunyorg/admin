@@ -46,15 +46,6 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
     "#{prefix}events_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
-  def template_static
-    "admin/communication/websites/agenda/categories/static"
-  end
-
-  def dependencies
-    active_storage_blobs +
-    contents_dependencies
-  end
-
   protected
 
   def slug_unavailable?(slug)
