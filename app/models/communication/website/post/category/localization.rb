@@ -59,7 +59,7 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/communication/websites/posts/categories/static"
+    "admin/application/categories/static"
   end
 
   def dependencies

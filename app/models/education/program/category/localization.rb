@@ -45,7 +45,7 @@ class Education::Program::Category::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/education/programs/categories/static"
+    "admin/application/categories/static"
   end
 
   def dependencies

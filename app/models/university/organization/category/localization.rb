@@ -53,7 +53,7 @@ class University::Organization::Category::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/university/organizations/categories/static"
+    "admin/application/categories/static"
   end
 
   def to_s
