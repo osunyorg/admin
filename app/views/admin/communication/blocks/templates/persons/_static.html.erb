@@ -11,6 +11,7 @@ block.template.selected_elements.each do |element|
   hugo = l10n.hugo(@website)
 %>
         - permalink: "<%= hugo.permalink %>"
+          path: "<%= hugo.path %>"
           slug: "<%= hugo.slug %>"
           file: "<%= hugo.file %>"
 <%= block_component_static block, :role, template: element, depth: 5 %>

@@ -4,6 +4,7 @@ collection.each do |element|
   hugo = l10n.hugo(@website)
   %>
         - permalink: "<%= hugo.permalink %>"
+          path: "<%= hugo.path %>"
           slug: "<%= hugo.slug %>"
           file: "<%= hugo.file %>"
 <% end %>
