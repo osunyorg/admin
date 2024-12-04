@@ -129,7 +129,7 @@ roles:
 roles: []
 <% end %>
 locations:
-<% program.locations.each do |location| %>
+<% program.locations.ordered(language).each do |location| %>
   <%
   location_l10n = location.localization_for(language)
   next if location_l10n.nil?
