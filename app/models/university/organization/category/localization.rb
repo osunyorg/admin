@@ -37,10 +37,6 @@ class University::Organization::Category::Localization < ApplicationRecord
     "#{prefix}organizations_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
-  def template_static
-    "admin/application/categories/static"
-  end
-
   def published?
     persisted?
   end
