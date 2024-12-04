@@ -25,27 +25,28 @@ contact_details:
   geolocation:
     latitude: <%= location.latitude %>
     longitude: <%= location.longitude %>
-programs:
-<%
-location.programs.each do |program|
-  program_l10n = program.best_localization_for(language)
-  hugo = program_l10n.hugo(@website)
-  %>
-  - <%= hugo.permalink %>
-<% end %>
+<%= render 'admin/application/hugo/collection',
+            key: :programs,
+            collection: location.programs.ordered(language),
+            language: language %>
 diplomas:
 <%
 location.diplomas.ordered.each do |diploma|
-  diploma_l10n = diploma.best_localization_for(language)
+  l10n = diploma.best_localization_for(language)
+  next if l10n.nil?
   programs = location.education_programs
                     .where(diploma: diploma)
                     .root
                     .ordered(language)
   next if programs.empty?
+  hugo = l10n.hugo(@website)
 %>
   - name: >-
-      <%= diploma_l10n.to_s %>
-    path: <%= diploma_l10n.slug %>
+      <%= l10n.to_s %>
+    permalink: "<%= hugo.permalink %>"
+    path: "<%= hugo.path %>"
+    slug: "<%= hugo.slug %>"
+    file: "<%= hugo.file %>"
     programs:
 <%= render 'admin/education/programs/static_list',
             diploma: diploma,

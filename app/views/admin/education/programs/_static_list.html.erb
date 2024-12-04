@@ -10,8 +10,10 @@ indentation = ' ' * depth
   %>
 <%= indentation %>- label: >-
 <%= indentation %>    <%= program_l10n.to_s %>
-<%= indentation %>  path: "<%= hugo.permalink %>"
+<%= indentation %>  permalink: "<%= hugo.permalink %>"
+<%= indentation %>  path: "<%= hugo.path %>"
 <%= indentation %>  slug: "<%= hugo.slug %>"
+<%= indentation %>  file: "<%= hugo.file %>"
 <%
 children = program.children.published_now_in(language).where(diploma: diploma)
 # Limit to a global list of programs, for example on a location

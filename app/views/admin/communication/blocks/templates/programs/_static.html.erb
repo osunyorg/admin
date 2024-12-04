@@ -1,6 +1,7 @@
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
-      programs:
-<%= render 'admin/communication/blocks/partials/list',
+<%= render 'admin/application/hugo/collection',
+            key: :programs,
+            depth: 3,
             collection: block.template.selected_programs,
             language: block.language %>

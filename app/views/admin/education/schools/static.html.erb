@@ -62,10 +62,11 @@ roles:
     persons:
     <%
     role.involvements.includes(:person).ordered.each do |involvement|
-      person_l10n = involvement.person.localization_for(language)
-      next if person_l10n.nil?
+      l10n = involvement.person.localization_for(language)
+      next if l10n.nil?
+      hugo = l10n.hugo(@website)
     %>
-      - "<%= person_l10n.slug %>"
+<%= render 'admin/application/hugo/single', hugo: hugo, depth: 3 %>
     <% end %>
 <% end %>
 <% else %>

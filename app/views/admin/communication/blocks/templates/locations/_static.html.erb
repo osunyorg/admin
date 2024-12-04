@@ -1,6 +1,7 @@
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
-      locations:
-<%= render 'admin/communication/blocks/partials/list',
+<%= render 'admin/application/hugo/collection',
+            key: :locations,
+            depth: 3,
             collection: block.template.selected_locations,
             language: block.language %>

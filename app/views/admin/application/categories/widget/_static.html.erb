@@ -32,9 +32,10 @@ taxonomies:
         hugo = category_l10n.hugo(@website)
 %>
       - name: "<%= prepare_text_for_static category_l10n.to_s %>"
-        permalink: "<%= hugo.permalink %>"
-        file: "<%= hugo.file %>"
         slug: "<%= hugo.slug %>"
+        permalink: "<%= hugo.permalink %>"
+        path: "<%= hugo.path %>"
+        file: "<%= hugo.file %>"
 <%
       end
     end

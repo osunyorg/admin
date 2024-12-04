@@ -11,7 +11,8 @@
 <% end %>
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
-      projects:
-<%= render 'admin/communication/blocks/partials/list',
+<%= render 'admin/application/hugo/collection',
+            key: :projets,
+            depth: 3,
             collection: block.template.selected_projects,
             language: block.language %>

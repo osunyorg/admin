@@ -54,7 +54,7 @@ module Staticable
   # 4. Replaces spaces with hyphens
   def hugo_path_in_website(website)
     # Filename
-    path = hugo_file_in_website(website)
+    path = "#{hugo_file_in_website(website)}"
     # Strip /content/fr
     path.delete_prefix!(git_path_content_prefix(website))
     path.delete_suffix!('/_index.html')

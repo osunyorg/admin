@@ -1,0 +1,13 @@
+<%
+depth ||= 0
+indentation = '  ' * depth
+%>
+<%= indentation %><%= key.to_s %>:
+<%
+collection.each do |element|
+  l10n = element.localization_for(language)
+  next if l10n.nil?
+  hugo = l10n.hugo(@website)
+  %>
+<%= render 'admin/application/hugo/single', hugo: hugo, depth: depth+1 %>
+<% end %>

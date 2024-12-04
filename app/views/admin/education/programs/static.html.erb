@@ -128,16 +128,10 @@ roles:
 <% else %>
 roles: []
 <% end %>
-locations:
-<% program.locations.ordered(language).each do |location| %>
-  <%
-  location_l10n = location.localization_for(language)
-  next if location_l10n.nil?
-  hugo = location_l10n.hugo(@website)
-  %>
-  - path: <%= hugo.permalink %>
-    slug: <%= hugo.slug %>
-<% end %>
+<%= render 'admin/application/hugo/collection',
+            key: :locations,
+            collection: program.locations.ordered(language),
+            language: language %>
 apprenticeship: <%= program.apprenticeship %>
 capacity: <%= program.capacity %>
 continuing: <%= program.continuing %>

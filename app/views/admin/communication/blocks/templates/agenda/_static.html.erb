@@ -14,7 +14,8 @@ if block.template.mode == 'category' && block.template.category
         slug: "<%= hugo.slug %>"
         file: "<%= hugo.file %>"
 <% end %>
-      events:
-<%= render 'admin/communication/blocks/partials/list',
+<%= render 'admin/application/hugo/collection',
+            key: :events,
+            depth: 3,
             collection: block.template.selected_events,
             language: block.language %>
