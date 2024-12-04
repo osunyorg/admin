@@ -11,11 +11,6 @@ if block.template.page
 <%= block_options_static block %>
       layout: <%= block.template.layout %>
       pages:
-<%
-block.template.selected_pages.each do |element|
-  element_l10n = element.localization_for(block.language)
-  hugo = element_l10n.hugo(block.website)
-  %>
-        - slug: "<%= hugo.slug %>"
-          file: "<%= hugo.file %>"
-<% end %>
+<%= render 'admin/communication/blocks/partials/list',
+            collection: block.template.selected_pages,
+            language: block.language %>

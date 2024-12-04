@@ -1,10 +1,6 @@
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
       locations:
-<% block.template.selected_locations.each do |location|
-  next unless location 
-  l10n = location.localization_for(block.language)
-  next unless l10n 
-  %>
-        - slug: "<%= l10n.slug %>"
-<% end %>
+<%= render 'admin/communication/blocks/partials/list',
+            collection: block.template.selected_locations,
+            language: block.language %>

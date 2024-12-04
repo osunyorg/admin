@@ -12,10 +12,6 @@
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
       projects:
-<% block.template.selected_projects.each do |project| 
-    project_l10n = project.localization_for(block.language)
-    hugo = project_l10n.hugo(@website)
-    %>
-        - slug: "<%= hugo.slug %>"
-          file: "<%= hugo.file %>"
-<% end %>
+<%= render 'admin/communication/blocks/partials/list',
+            collection: block.template.selected_projects,
+            language: block.language %>

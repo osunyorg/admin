@@ -6,17 +6,15 @@
       title_link: "<%= block.template.title_link %>"
 <%
 if block.template.mode == 'category' && block.template.category
-  category_l10n = block.template.category.localization_for(block.language)
-  hugo = category_l10n.hugo(@website)
-%>
-      category: "<%= hugo.slug %>"
+  l10n = block.template.category.localization_for(block.language)
+  hugo = l10n.hugo(@website)
+  %>
+      category: 
+        permalink: "<%= hugo.permalink %>"
+        slug: "<%= hugo.slug %>"
+        file: "<%= hugo.file %>"
 <% end %>
       events:
-<%
-block.template.selected_events.each do |element|
-  element_l10n = element.localization_for(block.language)
-  hugo = element_l10n.hugo(@website)
-%>
-        - path: "<%= hugo.permalink %>"
-          file: "<%= hugo.file %>"
-<% end %>
+<%= render 'admin/communication/blocks/partials/list',
+            collection: block.template.selected_events,
+            language: block.language %>

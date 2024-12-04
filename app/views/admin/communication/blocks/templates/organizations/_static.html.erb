@@ -3,9 +3,15 @@
 <%= block_options_static block %>
       organizations:
 <% block.template.selected_elements.each do |element| %>
-<% if element.organization %>
-  <% next unless (organization_l10n = element.organization.localization_for(block.language)) %>
-        - slug: "<%= organization_l10n.slug %>"
+<% 
+if element.organization
+  l10n = element.organization.localization_for(block.language)
+  next if l10n.nil?
+  hugo = l10n.hugo(@website)
+  %>
+        - permalink: "<%= hugo.permalink %>"
+          slug: "<%= hugo.slug %>"
+          file: "<%= hugo.file %>"
 <% else %>
 <% next if element.best_name.blank? %>
 <%= block_component_static block, :name, template: element, depth: 4, list: true %>

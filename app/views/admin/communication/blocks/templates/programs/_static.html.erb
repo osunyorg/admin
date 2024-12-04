@@ -1,8 +1,6 @@
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
       programs:
-<% block.template.selected_programs.each do |program| 
-    l10n = program.localization_for(block.language)
-    next if l10n.nil? %>
-        - path: "<%= l10n.path %>"
-<% end %>
+<%= render 'admin/communication/blocks/partials/list',
+            collection: block.template.selected_programs,
+            language: block.language %>

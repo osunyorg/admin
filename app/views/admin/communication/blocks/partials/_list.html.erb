@@ -1,0 +1,9 @@
+<%
+collection.each do |element|
+  l10n = element.localization_for(language)
+  hugo = l10n.hugo(@website)
+  %>
+        - permalink: "<%= hugo.permalink %>"
+          slug: "<%= hugo.slug %>"
+          file: "<%= hugo.file %>"
+<% end %>

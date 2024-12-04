@@ -13,9 +13,6 @@
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
       posts:
-<% block.template.selected_posts.each do |post| 
-    post_l10n = post.localization_for(block.language)
-    hugo = post_l10n.hugo(block.website)
-    %>
-        - "<%= hugo.permalink %>"
-<% end %>
+<%= render 'admin/communication/blocks/partials/list',
+            collection: block.template.selected_posts,
+            language: block.language %>
