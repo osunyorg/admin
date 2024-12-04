@@ -1,0 +1,12 @@
+<% content_for :title, Communication::Website.human_attribute_name(:configs) %>
+
+<table class="table">
+  <tbody>
+    <% Communication::Website.config_files.each do |file| %>
+      <tr>
+        <td><%= link_to file, admin_communication_website_config_path(file) %></td>
+        <td><%= Communication::Website.human_attribute_name("config_#{file}") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

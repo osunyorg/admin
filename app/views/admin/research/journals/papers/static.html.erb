@@ -9,6 +9,25 @@ language = @l10n.language
             l10n: @l10n,
             full_width: false,
             toc_offcanvas: false %>
+metadata:
+  - name: "citation_title"
+    content: "<%= prepare_text_for_static @l10n.title %>"
+<% @l10n.authors_l10n_array.each do |author| %>
+  - name: "citation_author"
+    content: "<%= prepare_text_for_static author %>"
+<% end %>
+  - name: "citation_publication_date"
+    content: "<%= @l10n.published_at.strftime("%Y/%m/%d") %>"
+  - name: "citation_journal_title"
+    content: "<%= prepare_text_for_static paper.journal.to_s_in(language) %>"
+<% if @l10n.pdf.attached? %>
+  - name: "citation_pdf_url"
+    content: "<%= "#{current_university.url}#{download_medium_path(signed_id: @l10n.pdf.blob.signed_id, lang: nil)}" %>"
+<% end %>
+<% if @l10n.volume_l10n %>
+  - name: "citation_volume"
+    content: "<%= prepare_text_for_static @l10n.volume_l10n.to_s %>"
+<% end %>
 <% if paper.kind %>
 paper_kind: "<%= prepare_text_for_static paper.kind %>"
 <% end %>
