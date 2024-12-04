@@ -47,7 +47,7 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/communication/websites/agenda/categories/static"
+    "admin/application/categories/static"
   end
 
   def dependencies

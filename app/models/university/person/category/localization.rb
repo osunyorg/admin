@@ -38,7 +38,7 @@ class University::Person::Category::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/university/people/categories/static"
+    "admin/application/categories/static"
   end
 
   def published?

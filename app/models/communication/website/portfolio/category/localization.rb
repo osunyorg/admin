@@ -46,7 +46,7 @@ class Communication::Website::Portfolio::Category::Localization < ApplicationRec
   end
 
   def template_static
-    "admin/communication/websites/portfolio/categories/static"
+    "admin/application/categories/static"
   end
 
   protected
