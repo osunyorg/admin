@@ -37,7 +37,10 @@ registration_url: >-
 parent:
   title: >-
     <%= @l10n.parent.name %>
-  url: <%= hugo.permalink %>
+  permalink: "<%= hugo.permalink %>"
+  path: "<%= hugo.path %>"
+  slug: "<%= hugo.slug %>"
+  file: "<%= hugo.file %>"
 <% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/featured_image/static', about: @l10n %>
@@ -49,14 +52,6 @@ logo:
 <%
 if @website
   website_category_l10ns = program.website_category_l10ns_for(@website, language)
-  if website_category_l10ns[:blog]
-    category_l10n = website_category_l10ns[:blog]
-    hugo = category_l10n.hugo(@website)
-%>
-<%# related_category is deprecated, in favor of related_categories %>
-related_category: "<%= hugo.slug %>"
-<%
-  end
 %>
 related_categories:
 <% website_category_l10ns.each do |key, website_category_l10n|

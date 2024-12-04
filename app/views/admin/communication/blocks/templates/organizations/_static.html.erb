@@ -9,10 +9,7 @@ if element.organization
   next if l10n.nil?
   hugo = l10n.hugo(@website)
   %>
-        - permalink: "<%= hugo.permalink %>"
-          path: "<%= hugo.path %>"
-          slug: "<%= hugo.slug %>"
-          file: "<%= hugo.file %>"
+<%= render 'admin/application/hugo/single', hugo: hugo, depth: 4 %>
 <% else %>
 <% next if element.best_name.blank? %>
 <%= block_component_static block, :name, template: element, depth: 4, list: true %>

@@ -92,8 +92,10 @@ teachings:
     program:
       title: >-
         <%= program_l10n.to_s %>
-      url: >-
-        <%= hugo.permalink %>
+      permalink: "<%= hugo.permalink %>"
+      path: "<%= hugo.path %>"
+      slug: "<%= hugo.slug %>"
+      file: "<%= hugo.file %>"
 <% end %>
 <% end %>
 <% if person.roles_as_administrator.any? %>
@@ -109,8 +111,10 @@ administrative_missions:
     target:
       title: >-
         <%= target_l10n.to_s %>
-      url: >-
-        <%= hugo.permalink %>
+      permalink: "<%= hugo.permalink %>"
+      path: "<%= hugo.path %>"
+      slug: "<%= hugo.slug %>"
+      file: "<%= hugo.file %>"
 <% end %>
 <% end %>
 <%= render 'admin/application/connections/backlinks', about: @l10n %>

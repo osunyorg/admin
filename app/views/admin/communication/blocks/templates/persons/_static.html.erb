@@ -2,7 +2,7 @@
 <%= block_options_static block %>
       persons:
 <%
-# Not using partial because of role
+# Not using collection partial because of role
 block.template.selected_elements.each do |element|
   person = element.person
   next if person.nil?
@@ -10,9 +10,6 @@ block.template.selected_elements.each do |element|
   next if l10n.nil?
   hugo = l10n.hugo(@website)
 %>
-        - permalink: "<%= hugo.permalink %>"
-          path: "<%= hugo.path %>"
-          slug: "<%= hugo.slug %>"
-          file: "<%= hugo.file %>"
+<%= render 'admin/application/hugo/single', hugo: hugo, depth: 4 %>
 <%= block_component_static block, :role, template: element, depth: 5 %>
 <% end %>

@@ -31,11 +31,8 @@ taxonomies:
         next if category_l10n.nil?
         hugo = category_l10n.hugo(@website)
 %>
-      - name: "<%= prepare_text_for_static category_l10n.to_s %>"
-        slug: "<%= hugo.slug %>"
-        permalink: "<%= hugo.permalink %>"
-        path: "<%= hugo.path %>"
-        file: "<%= hugo.file %>"
+<%= render 'admin/application/hugo/single', hugo: hugo, depth: 3 %>
+        name: "<%= prepare_text_for_static category_l10n.to_s %>"
 <%
       end
     end

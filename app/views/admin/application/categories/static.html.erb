@@ -14,7 +14,7 @@ is_taxonomy: <%= category.is_taxonomy %>
 if @l10n.parent
   hugo = @l10n.parent.hugo(@website)
   %>
-parent: "<%= hugo.permalink %>"
+parent: "<%= hugo.path %>"
 <% end %>
 <% if @l10n.children.any? %>
 children:
@@ -22,7 +22,7 @@ children:
 @l10n.children.ordered.each do |child|
   hugo = child.hugo(@website)
   %>
-  - <%= hugo.permalink %>
+<%= render 'admin/application/hugo/single', hugo: hugo, depth: 1 %>
 <% end %>
 <% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
