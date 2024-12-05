@@ -1,6 +1,21 @@
-<% if about.respond_to?(:email) %>
+<%
+if about.respond_to?(:email)
+  fb = f
+  attribute_name = :email
+elsif about.respond_to?(:social_email)
+  fb = f
+  attribute_name = :social_email
+elsif l10n.respond_to?(:email)
+  fb = lf
+  attribute_name = :email
+elsif l10n.respond_to?(:social_email)
+  fb = lf
+  attribute_name = :social_email
+end
+if attribute_name.present?
+%>
   <div class="col-md-6">
-    <%= f.input  :email,
+    <%= fb.input  attribute_name,
                   label: t('contact_details.emails.email.label'),
                   hint: t('contact_details.emails.email.hint') %>
   </div>
