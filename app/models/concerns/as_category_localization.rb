@@ -45,10 +45,6 @@ module AsCategoryLocalization
     [featured_image&.blob_id]
   end
 
-  def set_communication_website_id
-    self.communication_website_id ||= about.communication_website_id
-  end
-
   def hugo_slug_in_website(website)
     slug_with_ancestors_slugs
   end
