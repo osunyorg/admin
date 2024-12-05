@@ -88,9 +88,9 @@ end
     methods: {
       addField: function () {
         this.fields.push({sso_key: 'key', internal_key: 'email', roles: {}});
-        this.unDisableSelects();      
+        this.enableSelects();      
       },
-      unDisableSelects: function () {
+      enableSelects: function () {
         // conditional.js messes with the new field added, so we have to force enable the select fields
         var selectFields,
             i;
@@ -104,7 +104,7 @@ end
       }
     },
     mounted() {
-      this.unDisableSelects();
+      this.enableSelects();
     }
   });
 
