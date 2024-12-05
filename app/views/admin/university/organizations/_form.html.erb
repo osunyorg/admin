@@ -8,7 +8,7 @@
     <div class="row mb-5">
       <div class="col-lg-3">
         <%= lf.input :name %>
-        <%= f.input :active %>
+        <%= f.input :active, wrapper: :custom_boolean_switch %>
         <%= render  "admin/application/slug/form",
                     f: lf,
                     source: '#university_organization_localizations_attributes_0_name' %>
