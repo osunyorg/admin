@@ -43,8 +43,8 @@ parent:
   file: "<%= hugo.file %>"
 <% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= render 'admin/application/featured_image/static', about: @l10n %>
-<%= render 'admin/application/shared_image/static', about: @l10n %>
+<%= render 'admin/application/images/featured/static', about: @l10n %>
+<%= render 'admin/application/images/shared/static', about: @l10n %>
 <% if @l10n.logo.attached? %>
 logo:
   id: "<%= @l10n.logo.blob.id %>"

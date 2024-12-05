@@ -23,7 +23,7 @@
           <%= lf.input :published_at, html5: true, as: :date %>
           <%= lf.input :keywords %>
         <% end %>
-        <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
+        <%= render 'admin/application/images/featured/form', f: lf, about: l10n %>
       </div>
     </div>
     <% content_for :action_bar_right do %>

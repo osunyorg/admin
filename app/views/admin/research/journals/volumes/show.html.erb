@@ -37,7 +37,7 @@
     <% end %>
   </div>
   <div class="col-md-3">
-    <%= render 'admin/application/featured_image/show', about: @l10n, small: true if @l10n.featured_image.attached? %>
+    <%= render 'admin/application/images/featured/show', about: @l10n, small: true if @l10n.featured_image.attached? %>
     <% if @volume.number.present? %>
       <%= osuny_label Research::Journal::Volume.human_attribute_name('number') %>
       <p><%= @volume.number %></p>

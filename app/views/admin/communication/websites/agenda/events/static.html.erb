@@ -14,8 +14,8 @@ language = @l10n.language
             l10n: @l10n,
             locale: language.iso_code %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= render 'admin/application/featured_image/static', about: @l10n %>
-<%= render 'admin/application/shared_image/static', about: @l10n %>
+<%= render 'admin/application/images/featured/static', about: @l10n %>
+<%= render 'admin/application/images/shared/static', about: @l10n %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
 <%= render 'admin/application/categories/widget/static',

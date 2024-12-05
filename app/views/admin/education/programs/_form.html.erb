@@ -35,7 +35,7 @@
         <%= osuny_separator %>
         <div class="row">
           <div class="col-lg-4">
-            <%= render 'admin/application/shared_image/edit', f: lf, about: l10n %>
+            <%= render 'admin/application/images/shared/form', f: lf, about: l10n %>
           </div>
           <div class="col-lg-8">
             <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
@@ -77,7 +77,7 @@
                     hint: images_formats_accepted_hint,
                     input_html: { accept: default_images_formats_accepted }
                     %>
-        <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
+        <%= render 'admin/application/images/featured/form', f: lf, about: l10n %>
       </div>
     </div>
 

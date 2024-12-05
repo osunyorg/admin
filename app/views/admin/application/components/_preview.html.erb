@@ -1,0 +1,33 @@
+<div id="preview" class="preview modal preview--mobile">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-body">
+        <iframe src="<%= request.path %>/preview" loading="lazy"></iframe>
+      </div>
+      <div class="modal-footer">
+        <p class="modal-title"><%= t 'preview.title' %></p>
+        <ul class="nav nav-pills m-auto" aria-label="Preview modes">
+          <li class="nav-item mx-2">
+            <a class="nav-link rounded-pill active preview__button" href="#" data-mode="mobile">
+              <i class="<%= Icon::COMMUNICATION_WEBSITE_PREVIEW_MOBILE %>"></i>
+              <%= t 'preview.mobile' %>
+            </a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link rounded-pill preview__button" href="#" data-mode="tablet">
+              <i class="<%= Icon::COMMUNICATION_WEBSITE_PREVIEW_TABLET %>"></i>
+              <%= t 'preview.tablet' %>
+            </a>
+          </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link rounded-pill preview__button" href="#" data-mode="desktop">
+              <i class="<%= Icon::COMMUNICATION_WEBSITE_PREVIEW_DESKTOP %>"></i>
+              <%= t 'preview.desktop' %>
+            </a>
+          </li>
+        </ul>
+        <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+</div>
