@@ -1,0 +1,16 @@
+<% if block.template.option_author || block.template.option_date %>
+  <div class="post-meta">
+    <% if block.template.option_date %>
+      <time itemprop="datePublished" datetime="<%= post_l10n.published_at %>">
+        <%= l(post_l10n.published_at, format: "%e %B %Y") %>
+      </time>
+    <% end %>
+    <% if block.template.option_author %>
+      <% post.authors.each do |author| %>
+        <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
+          <p itemprop="name"><%= author&.to_s_in(block.language) %></p>
+        </div>
+      <% end%>
+    <% end %>
+  </div>
+<% end %>
