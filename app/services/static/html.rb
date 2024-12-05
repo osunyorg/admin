@@ -7,6 +7,7 @@ class Static::Html < Static::Default
       @prepared = sanitize @prepared
       @prepared = remove_line_breaks @prepared
       @prepared = clean_code @prepared
+      @prepared = remove_useless_br @prepared
       # clean_empty_paragraphs_at_beginning_and_end re-sends \n, because of Nokogiri.
       # Can be changed with a weird hack (Nokogiri(format: 0)) but a gsub is easiest (PAB)
       @prepared = remove_line_breaks @prepared
@@ -54,6 +55,12 @@ class Static::Html < Static::Default
     @doc.css('a[target=_blank]').each do |link|
       link << span
     end
+  end
+
+  # Suppression des <br></p>
+  # https://github.com/osunyorg/admin/issues/2462
+  def remove_useless_br(html)
+    html.gsub('<br></p>', '</p>')
   end
 
 end
