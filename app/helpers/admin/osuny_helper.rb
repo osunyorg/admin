@@ -84,7 +84,7 @@ module Admin::OsunyHelper
       classes += ' text-muted fst-italic'
       alert = t('localization.creation_alert')
     end
-    link_to name, path, class: classes.strip, data: { confirm: alert }
+    link_to name.truncate(45), path, class: classes.strip, data: { confirm: alert }
   end
 
   def osuny_link_localized_if(condition, object, path, label_method: :to_s, classes: '')
@@ -97,7 +97,7 @@ module Admin::OsunyHelper
       classes += 'text-muted fst-italic'
       alert = t('localization.creation_alert')
     end
-    link_to_if condition, name, path, class: classes.strip, data: { confirm: alert }
+    link_to_if condition, name.truncate(45), path, class: classes.strip, data: { confirm: alert }
   end
 
   def osuny_card_classes(horizontal: false)
