@@ -22,9 +22,9 @@ ContactDetails::PHONES.each do |variable|
   if about.respond_to?(variable)
     # If the publicity level is defined, we must respect it
     publicity = "#{variable}_is_public?"
-    should_show = about.respond_to?(publicity) ? about.send(publicity) : true
+    should_show = about.respond_to?(publicity) ? about.public_send(publicity) : true
     if should_show
-      data = about.send(variable)
+      data = about.public_send(variable)
       detail = ContactDetails::Phone.new data
       %>
 <%= render 'admin/application/contact_details/static/single',

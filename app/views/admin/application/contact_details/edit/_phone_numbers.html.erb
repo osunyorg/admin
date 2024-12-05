@@ -1,11 +1,11 @@
 <%
-ContactDetails::PHONES.each do |variable|
-  if about.respond_to?(variable)
+ContactDetails::PHONES.each do |attribute|
+  if about.respond_to?(attribute)
     %>
     <div class="col-md-6">
-      <%= f.input variable,
-                  label: t("contact_details.phone_numbers.#{variable}.label"),
-                  hint: t("contact_details.phone_numbers.#{variable}.hint") %>
+      <%= f.input attribute,
+                  label: t("contact_details.phone_numbers.#{attribute}.label"),
+                  hint: t("contact_details.phone_numbers.#{attribute}.hint") %>
     </div>
   <% end %>
 <% end %>

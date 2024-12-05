@@ -15,17 +15,17 @@ if about.respond_to?(:phone_numbers)
 end
 %>
 <%
-ContactDetails::PHONES.each do |variable|
-  if about.respond_to?(variable)
-    label = t("contact_details.phone_numbers.#{variable}.label")
-    data = about.send(variable)
+ContactDetails::PHONES.each do |attribute|
+  if about.respond_to?(attribute)
+    label = t("contact_details.phone_numbers.#{attribute}.label")
+    data = about.public_send(attribute)
     detail = ContactDetails::Phone.new data
     %>
     <div class="col-md-6">
       <%= render 'admin/application/contact_details/show/single',
                   about: about,
                   label: label,
-                  variable: variable, 
+                  attribute: attribute, 
                   detail: detail %>
     </div>
   <% end %>

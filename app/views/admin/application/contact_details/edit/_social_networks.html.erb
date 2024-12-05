@@ -1,7 +1,7 @@
 <%
-ContactDetails::SOCIAL_NETWORKS.each do |variable|
-  method_raw = variable
-  method_prefixed = "social_#{variable}"
+ContactDetails::SOCIAL_NETWORKS.each do |attribute|
+  method_raw = attribute
+  method_prefixed = "social_#{attribute}"
   if l10n.respond_to?(method_raw)
     method = method_raw
   elsif l10n.respond_to?(method_prefixed)
@@ -12,7 +12,7 @@ ContactDetails::SOCIAL_NETWORKS.each do |variable|
   %>
   <div class="col-md-6">
     <%= lf.input  method,
-                  label: t("contact_details.social_networks.#{variable}.label"),
-                  hint: t("contact_details.social_networks.#{variable}.hint") %>
+                  label: t("contact_details.social_networks.#{attribute}.label"),
+                  hint: t("contact_details.social_networks.#{attribute}.hint") %>
   </div>
 <% end %>

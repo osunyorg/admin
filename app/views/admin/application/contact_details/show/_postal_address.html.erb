@@ -9,7 +9,7 @@ if about.respond_to?(:address)
     <%= osuny_label label %>
     <div>
       <%= address_formatter.to_html.html_safe %>
-      <%= personal_attribute_visibility_tag(about.send(visibility_method)) if has_visibility %>
+      <%= personal_attribute_visibility_tag(about.public_send(visibility_method)) if has_visibility %>
     </div>
     <% if about.respond_to?(:geolocated?) && about.geolocated? %>
       <p class="small text-muted"><%= about.geo_point.to_s %></p>

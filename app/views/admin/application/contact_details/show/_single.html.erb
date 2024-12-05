@@ -1,9 +1,9 @@
 <%
 # label
 # detail
-variable ||= ''
+attribute ||= ''
 with_link ||= false
-visibility_method = "#{variable}_visibility"
+visibility_method = "#{attribute}_visibility"
 has_visibility ||= about.respond_to?(visibility_method)
 if detail.present?
   %>

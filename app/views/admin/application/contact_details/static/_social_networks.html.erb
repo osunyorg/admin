@@ -4,14 +4,14 @@ indentation = '  ' * depth
 %>
 <%= indentation %>social_networks:
 <%
-ContactDetails::SOCIAL_NETWORKS.each do |variable|
-  data = ContactDetails.find_social(variable, about, l10n)
+ContactDetails::SOCIAL_NETWORKS.each do |attribute|
+  data = ContactDetails.find_social(attribute, about, l10n)
   next if data.blank?
-  kind = "ContactDetails::#{variable.to_s.capitalize}".constantize
+  kind = "ContactDetails::#{attribute.to_s.camelize}".constantize
   detail = kind.new data
   %>
 <%= render 'admin/application/contact_details/static/single',
-            variable: variable, 
+            attribute: attribute, 
             detail: detail,
             depth: depth+1 %>
 <% end %>

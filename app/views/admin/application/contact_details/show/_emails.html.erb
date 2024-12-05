@@ -23,7 +23,7 @@ if about.respond_to?(:email)
   <div class="col-md-6">
     <%= render 'admin/application/contact_details/show/single',
                 about: about,
-                variable: :email,
+                attribute: :email,
                 label: label,
                 detail: detail,
                 with_link: true %>
