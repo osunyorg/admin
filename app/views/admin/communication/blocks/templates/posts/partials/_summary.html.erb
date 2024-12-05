@@ -1,0 +1,5 @@
+<% if post_l10n.summary.present? && block.template.option_summary %>
+  <div itemprop="articleBody">
+    <%= sanitize post_l10n.summary %>
+  </div>
+<% end %>
