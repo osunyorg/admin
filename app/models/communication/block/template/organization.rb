@@ -40,7 +40,11 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   end
 
   def selected_elements
-    @selected_elements ||= send "selected_elements_#{mode}"
+    @selected_elements ||= send("selected_elements_#{mode}").map { |element|
+      organization_inactive = element.organization.present? && !element.organization.active
+      next if organization_inactive
+      element
+    }.compact
   end
 
   def children
