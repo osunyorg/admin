@@ -55,7 +55,7 @@ class Osuny::AddressFormatter
     html = '<address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">'
     html += add_if  address_name.present?,
                     " <span itemprop=\"name\">#{address_name}</span>"
-    html += add_if  address.present?, 
+    html += add_if  address.present?,
                     " <span itemprop=\"streetAddress\">#{address}</span>"
     html += add_if  address_additional.present?,
                     " <span itemprop=\"description\">#{address_additional}</span>"
@@ -64,7 +64,7 @@ class Osuny::AddressFormatter
     html += add_if  city.present?,
                     " <span itemprop=\"addressLocality\">#{city}</span>"
     html += add_if  country.present?,
-                    " <span itemprop=\"addressCountry\">#{country.upcase}</span>"
+                    " <span itemprop=\"addressCountry\">#{country&.upcase}</span>"
     html += '</address>'
     html
   end
