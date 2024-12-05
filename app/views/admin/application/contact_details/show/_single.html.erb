@@ -14,6 +14,6 @@ if detail.present?
     <% else %>
       <%= detail.label %>
     <% end %>
-    <%= personal_attribute_visibility_tag(about.send(visibility_method)) if has_visibility %>
+    <%= personal_attribute_visibility_tag(about.public_send(visibility_method)) if has_visibility %>
   </p>
 <% end %>
