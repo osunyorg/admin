@@ -87,10 +87,13 @@ end
     },
     methods: {
       addField: function () {
+        this.fields.push({sso_key: 'key', internal_key: 'email', roles: {}});
+        this.unDisableSelects();      
+      },
+      unDisableSelects: function () {
+        // conditional.js messes with the new field added, so we have to force enable the select fields
         var selectFields,
             i;
-        this.fields.push({sso_key: 'key', internal_key: 'email', roles: {}});
-        // conditional.js messes with the new field added, so we have to force enable the select fields
         setTimeout(function() {
           selectFields = document.getElementById("app").getElementsByClassName("form-select");
           for (i = 0; i < selectFields.length; i += 1) {
@@ -99,6 +102,9 @@ end
           }
         }, 100);
       }
+    },
+    mounted() {
+      this.unDisableSelects();
     }
   });
 
