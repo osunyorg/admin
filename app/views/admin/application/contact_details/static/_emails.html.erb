@@ -20,12 +20,12 @@ about.emails.each do |email|
 <% end %>
 <%
 # about.email
-if about.respond_to?(:email)
+data = ContactDetails.find_social(:email, about, about)
+if data.present?
   # If the publicity level is defined, we must respect it
   publicity = 'email_is_public?'
   should_show = about.respond_to?(publicity) ? about.public_send(publicity) : true
   if should_show
-    data = about.email
     detail = ContactDetails::Email.new data
     %>
 <%= render 'admin/application/contact_details/static/single',
