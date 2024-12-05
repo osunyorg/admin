@@ -399,6 +399,9 @@ en:
               list:
                 description: Locations are shown as a list, with images on the left and summary on the right.
                 label: List
+              map:
+                description: A geographic map, with a pin for every location with a known address.
+                label: Map
           organizations:
             description: A list of organizations with logo, name and website.
             edit:
