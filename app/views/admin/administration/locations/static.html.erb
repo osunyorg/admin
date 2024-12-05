@@ -25,7 +25,7 @@ contact_details:
   geolocation:
     latitude: <%= location.latitude %>
     longitude: <%= location.longitude %>
-<%= render 'admin/application/hugo/collection',
+<%= render 'admin/application/static/hugo/collection',
             key: :programs,
             collection: location.programs.ordered(language),
             language: language %>

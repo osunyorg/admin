@@ -10,7 +10,7 @@ if block.template.page
 <% end %>
 <%= block_options_static block %>
       layout: <%= block.template.layout %>
-<%= render 'admin/application/hugo/collection',
+<%= render 'admin/application/static/hugo/collection',
             key: :pages,
             depth: 3,
             collection: block.template.selected_pages,

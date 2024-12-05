@@ -9,5 +9,5 @@ collection.each do |element|
   next if l10n.nil?
   hugo = l10n.hugo(@website)
   %>
-<%= render 'admin/application/hugo/single', hugo: hugo, depth: depth+1 %>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: depth+1 %>
 <% end %>

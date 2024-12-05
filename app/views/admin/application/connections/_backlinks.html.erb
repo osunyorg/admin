@@ -5,23 +5,23 @@ backlinks:
 <% about.backlinks_pages(@website).each do |element| 
     hugo = element.hugo(@website)
     %>
-<%= render 'admin/application/hugo/single', hugo: hugo, depth: 3 %>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
 <% end %>
     posts:
 <% about.backlinks_posts(@website).each do |element| 
     hugo = element.hugo(@website)
     %>
-<%= render 'admin/application/hugo/single', hugo: hugo, depth: 3 %>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
 <% end %>
     events:
 <% about.backlinks_agenda_events(@website).each do |element| 
     hugo = element.hugo(@website)
     %>
-<%= render 'admin/application/hugo/single', hugo: hugo, depth: 3 %>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
 <% end %>
     projects:
 <% about.backlinks_portfolio_projects(@website).each do |element| 
     hugo = element.hugo(@website)
     %>
-<%= render 'admin/application/hugo/single', hugo: hugo, depth: 3 %>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
 <% end %>

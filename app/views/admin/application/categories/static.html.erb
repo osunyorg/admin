@@ -22,7 +22,7 @@ children:
 @l10n.children.ordered.each do |child|
   hugo = child.hugo(@website)
   %>
-<%= render 'admin/application/hugo/single', hugo: hugo, depth: 1 %>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
 <% end %>
 <% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
