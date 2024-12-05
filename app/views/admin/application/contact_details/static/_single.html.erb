@@ -1,11 +1,11 @@
 <%
-# variable
+# attribute
 # detail
 depth ||= 1
 indentation = '  ' * depth
 if detail.present?
 %>
-<%= indentation %><%= variable %>:
+<%= indentation %><%= attribute %>:
 <%= indentation %>  label: >-
 <%= indentation %>    <%= prepare_text_for_static detail.label %>
 <%= indentation %>  value: >-
