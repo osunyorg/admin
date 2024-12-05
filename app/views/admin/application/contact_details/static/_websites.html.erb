@@ -1,14 +1,14 @@
-<% 
+<%
 depth ||= 0
 indentation = '  ' * depth
 %>
 <%= indentation %>websites:
-<% 
-if l10n.present? && l10n.respond_to?(:url) 
+<%
+if l10n.present? && l10n.respond_to?(:url)
   detail = ContactDetails::Website.new l10n.url
   %>
-<%= render 'admin/application/contact_details/static/single', 
-            variable: :website, 
-            detail: detail, 
+<%= render 'admin/application/contact_details/static/single',
+            attribute: :website,
+            detail: detail,
             depth: depth+1 %>
 <% end %>

@@ -7,7 +7,7 @@ class ContactDetails
     :websites,
     :social_networks
   ]
-  
+
   SOCIAL_NETWORKS = [
     :facebook,
     :github,
@@ -28,7 +28,7 @@ class ContactDetails
     :phone_professional,
     :phone_personal
   ]
-  
+
   def self.with_kind(kind)
     "ContactDetails::#{kind.to_s.camelize}".constantize
   end
@@ -37,17 +37,17 @@ class ContactDetails
     with_kind(kind).new(string)
   end
 
-  def self.find_data(variable, about, l10n, possible_prefix: nil)
-    data = find_data_in_about_or_l10n(variable, about, l10n)
+  def self.find_data(attribute, about, l10n, possible_prefix: nil)
+    data = find_data_in_about_or_l10n(attribute, about, l10n)
     if data.nil?
-      prefixed_method = "#{possible_prefix}#{variable}"
+      prefixed_method = "#{possible_prefix}#{attribute}"
       data = find_data_in_about_or_l10n(prefixed_method, about, l10n)
     end
     data
   end
 
-  def self.find_social(variable, about, l10n)
-    find_data(variable, about, l10n, possible_prefix: 'social_')
+  def self.find_social(attribute, about, l10n)
+    find_data(attribute, about, l10n, possible_prefix: 'social_')
   end
 
   protected

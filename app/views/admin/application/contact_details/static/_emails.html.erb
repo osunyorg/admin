@@ -1,4 +1,4 @@
-<% 
+<%
 depth ||= 0
 indentation = '  ' * depth
 %>
@@ -7,8 +7,8 @@ indentation = '  ' * depth
 # about.emails
 if about.respond_to?(:emails) %>
 <%= indentation %>  list:
-<% 
-about.emails.each do |email| 
+<%
+about.emails.each do |email|
   next if email.blank?
   detail = ContactDetails::Email.new email
   %>
@@ -18,7 +18,7 @@ about.emails.each do |email|
 <%= indentation %>        <%= detail.value %>
 <% end %>
 <% end %>
-<% 
+<%
 # about.email
 if about.respond_to?(:email)
   # If the publicity level is defined, we must respect it
@@ -29,10 +29,10 @@ if about.respond_to?(:email)
     detail = ContactDetails::Email.new data
     %>
 <%= render 'admin/application/contact_details/static/single',
-            variable: :email, 
+            attribute: :email,
             detail: detail,
             depth: depth+1 %>
-<% 
+<%
   end
 end
 %>
