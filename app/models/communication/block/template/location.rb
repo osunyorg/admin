@@ -3,7 +3,8 @@ class Communication::Block::Template::Location < Communication::Block::Template:
   has_elements
   has_layouts [
     :grid, 
-    :list
+    :list,
+    :map
   ]
 
   has_component :option_image,        :boolean, default: true
