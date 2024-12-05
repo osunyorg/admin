@@ -80,7 +80,7 @@
           <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#university_organization_localizations_attributes_0_name' %>
-          <%= f.input :active %>
+          <%= f.input :active, wrapper: :custom_boolean_switch %>
         <% end %>
         <%= osuny_panel University::Organization.human_attribute_name('logos') do %>
           <%= lf.input :logo,
