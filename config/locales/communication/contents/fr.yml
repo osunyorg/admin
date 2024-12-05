@@ -399,6 +399,9 @@ fr:
               list:
                 description: Les sites sont présentés en liste, avec une image à gauche et le résumé à droite.
                 label: Liste
+              map:
+                description: Une carte géographique avec un repère pour chaque site dont l'adresse est connue.
+                label: Carte
           organizations:
             description: Une liste d'organisations, avec leur logo, leur site et leur nom.
             edit:

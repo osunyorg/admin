@@ -39,6 +39,7 @@ window.osuny.conditional = {
         target.classList.add('d-none');
         if (input) {
             input.removeAttribute('required');
+            input.setAttribute('disabled', 'disabled');
         }
     },
 
@@ -47,6 +48,7 @@ window.osuny.conditional = {
         var input = target.querySelector('select');
         target.classList.remove('d-none');
         if (input) {
+            input.removeAttribute('disabled');
             input.setAttribute('required', 'required');
         }
     },
