@@ -71,10 +71,8 @@
     <textarea name="communication_block[data]" rows="20" cols="200" class="d-none">
       {{ JSON.stringify(data) }}
     </textarea>
-    <% content_for :action_bar_left do %>
-      <%= render 'admin/application/l10n/libre_translate_button', l10n: @block.about %>
-    <% end %>
     <% content_for :action_bar_right do %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: @block.about %>
       <%= submit f %>
     <% end %>
   <% end %>

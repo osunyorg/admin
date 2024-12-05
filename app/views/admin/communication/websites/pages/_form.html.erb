@@ -51,11 +51,8 @@ url = page.new_record?  ? admin_communication_website_pages_path
       </div>
     </div>
 
-    <% content_for :action_bar_left do %>
-      <%= render 'admin/application/l10n/libre_translate_button', l10n: @l10n %>
-    <% end %>
-
     <% content_for :action_bar_right do %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: @l10n %>
       <%= submit f %>
     <% end %>
   <% end %>
