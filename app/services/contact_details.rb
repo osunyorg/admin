@@ -53,7 +53,7 @@ class ContactDetails
   protected
 
   def self.find_data_in_about_or_l10n(method, about, l10n)
-    return about.send(method) if about.respond_to?(method)
-    return l10n.send(method) if l10n.present? && l10n.respond_to?(method)
+    return about.public_send(method) if about.respond_to?(method)
+    return l10n.public_send(method) if l10n.present? && l10n.respond_to?(method)
   end
 end
