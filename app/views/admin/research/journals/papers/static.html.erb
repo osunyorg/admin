@@ -22,7 +22,7 @@ metadata:
     content: "<%= prepare_text_for_static paper.journal.to_s_in(language) %>"
 <% if @l10n.pdf.attached? %>
   - name: "citation_pdf_url"
-    content: "<%= @l10n.pdf.blob_id %>"
+    content: "<%= "#{@l10n.university.url}#{download_medium_path(signed_id: @l10n.pdf.blob.signed_id, lang: nil)}" %>"
 <% end %>
 <% if @l10n.volume_l10n %>
   - name: "citation_volume"
