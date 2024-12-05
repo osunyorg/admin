@@ -17,23 +17,23 @@ number_of_panels = 0
 <div class="row gx-5">
   <% if @website.feature_posts && @posts.any? && can?(:read, Communication::Website::Post) %>
     <% number_of_panels += 1 %>
-    <div class="col-lg-6">
+    <div class="col-xl-6">
     <%= render 'admin/communication/websites/show/posts'  %>
     </div>
   <% end %>
   <% if @website.feature_agenda && @events.any? && can?(:read, Communication::Website::Agenda::Event) %>
     <% number_of_panels += 1 %>
-    <div class="col-lg-6">
+    <div class="col-xl-6">
       <%= render 'admin/communication/websites/show/events' %>
     </div>
   <% end %>
   <% if @website.feature_portfolio && @projects.any? && can?(:read, Communication::Website::Portfolio::Project) %>
     <% number_of_panels += 1 %>
-    <div class="col-lg-6">
+    <div class="col-xl-6">
       <%= render 'admin/communication/websites/show/projects' %>
     </div>
   <% end %>
-  <div class="col-lg-<%= number_of_panels.even? ? 12 : 6 %>">
+  <div class="col-xl-<%= number_of_panels.even? ? 12 : 6 %>">
     <%= render 'admin/communication/websites/show/pages', large: number_of_panels.even? if can?(:read, Communication::Website::Page) %>
   </div>
 </div>
