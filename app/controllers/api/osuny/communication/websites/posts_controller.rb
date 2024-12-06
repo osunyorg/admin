@@ -56,42 +56,55 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   end
 
   def post_params
-    permitted_params = params.require(:post)
-                        .permit(
-                          :migration_identifier, :full_width,
-                          localizations: [
-                            :migration_identifier, :language, :title, :meta_description,
-                            :featured_image, :featured_image_alt, :featured_image_credit,
-                            :pinned, :published, :published_at, :slug, :subtitle, :summary, :_destroy
-                          ]
-                        ).merge(
-                          university_id: current_university.id,
-                          communication_website_id: website.id
-                        )
-    # permitted_params[:localizations_attributes].each do |localization_attributes|
-    #   set_language_id_to_l10n_attributes(localization_attributes)
-    #   post_l10n = @post.localizations.find_by(
-    #     migration_identifier: localization_attributes[:migration_identifier],
-    #     language_id: localization_attributes[:language_id]
-    #   ) if @post.persisted?
-    #   localization_attributes[:id] = post_l10n.id if post_l10n.present?
-    #   set_featured_image_to_l10n_attributes(localization_attributes, l10n: post_l10n)
-    # end
-    permitted_params
+    @post_params ||= begin
+      permitted_params = params.require(:post)
+                          .permit(
+                            :migration_identifier, :full_width, localizations: {}
+                          ).merge(
+                            university_id: current_university.id,
+                            communication_website_id: website.id
+                          )
+      set_l10n_attributes(permitted_params) if permitted_params[:localizations].present?
+      permitted_params
+    end
   end
 
-  def set_language_id_to_l10n_attributes(l10n_attributes)
-    language_iso_code = l10n_attributes.delete(:language)
-    l10n_attributes[:language_id] = Language.find_by(iso_code: language_iso_code)&.id
+  def set_l10n_attributes(base_params)
+      l10ns_attributes = base_params.delete(:localizations)
+      base_params[:localizations_attributes] = []
+      l10ns_attributes.each do |language_iso_code, l10n_params|
+        l10n_permitted_params = l10n_params.permit(
+          :migration_identifier, :language, :title, :meta_description,
+          :pinned, :published, :published_at, :slug, :subtitle, :summary, :_destroy,
+          featured_image: [:url, :alt, :credit, :_destroy]
+        )
+
+        l10n_permitted_params[:language_id] = Language.find_by(iso_code: language_iso_code)&.id
+
+        existing_post_l10n = @post.localizations.find_by(
+          migration_identifier: localization_attributes[:migration_identifier],
+          language_id: l10n_permitted_params[:language_id]
+        ) if @post.persisted?
+        localization_attributes[:id] = existing_post_l10n.id if existing_post_l10n.present?
+
+        set_featured_image_to_l10n_params(l10n_permitted_params, l10n: existing_post_l10n)
+
+        base_params[:localizations_attributes] << l10n_permitted_params
+      end
   end
 
-  def set_featured_image_to_l10n_attributes(l10n_attributes, l10n: nil)
-    featured_image_url = l10n_attributes.delete(:featured_image)
+  def set_featured_image_to_l10n_params(l10n_params, l10n: nil)
+    featured_image_data = l10n_params.delete(:featured_image)
+    return unless featured_image_data.present?
+    l10n_params[:featured_image_alt] = featured_image_data[:alt] if featured_image_data.has_key?(:alt)
+    l10n_params[:featured_image_credit] = featured_image_data[:credit] if featured_image_data.has_key?(:credit)
+    l10n_params[:featured_image_delete] = '1' if featured_image_data[:_destroy]
+    featured_image_url = featured_image_data[:url]
     # No image to upload
     return unless featured_image_url.present?
     # Image already uploaded
     return if l10n.present? && l10n.featured_image.attached? && l10n.featured_image.blob.metadata[:source_url] == featured_image_url
-    l10n_attributes[:featured_image] = {
+    l10n_params[:featured_image] = {
       io: URI.parse(featured_image_url).open,
       filename: File.basename(URI.parse(featured_image_url).path),
       metadata: { source_url: featured_image_url }

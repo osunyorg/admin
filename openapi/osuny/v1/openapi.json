@@ -250,15 +250,26 @@
           "title": {
             "type": "string"
           },
-          "featured_image_alt": {
-            "type": "string",
-            "description": "Alternative text of the featured image",
-            "nullable": true
-          },
-          "featured_image_credit": {
-            "type": "string",
-            "description": "Credit of the featured image",
-            "nullable": true
+          "featured_image": {
+            "type": "object",
+            "properties": {
+              "blob_id": {
+                "type": "string",
+                "nullable": true
+              },
+              "alt": {
+                "type": "string",
+                "nullable": true
+              },
+              "credit": {
+                "type": "string",
+                "nullable": true
+              },
+              "url": {
+                "type": "string",
+                "nullable": true
+              }
+            }
           },
           "meta_description": {
             "type": "string",
@@ -335,6 +346,12 @@
                             "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
                             "migration_identifier": "test-post-fixture-1-fr",
                             "title": "Test",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
                             "meta_description": null,
                             "pinned": null,
                             "published": true,
@@ -343,12 +360,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-06T16:37:56.537+01:00",
-                            "updated_at": "2024-12-06T16:37:56.537+01:00"
+                            "created_at": "2024-12-06T17:44:59.017+01:00",
+                            "updated_at": "2024-12-06T17:44:59.017+01:00"
                           }
                         },
-                        "created_at": "2024-12-06T16:37:56.551+01:00",
-                        "updated_at": "2024-12-06T16:37:56.551+01:00"
+                        "created_at": "2024-12-06T17:44:59.031+01:00",
+                        "updated_at": "2024-12-06T17:44:59.031+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -359,6 +376,12 @@
                             "id": "a979b73e-e42b-54de-97d4-df21605e49c0",
                             "migration_identifier": null,
                             "title": "Test 2",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
                             "meta_description": null,
                             "pinned": null,
                             "published": true,
@@ -367,12 +390,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-06T16:37:56.537+01:00",
-                            "updated_at": "2024-12-06T16:37:56.537+01:00"
+                            "created_at": "2024-12-06T17:44:59.017+01:00",
+                            "updated_at": "2024-12-06T17:44:59.017+01:00"
                           }
                         },
-                        "created_at": "2024-12-06T16:37:56.551+01:00",
-                        "updated_at": "2024-12-06T16:37:56.551+01:00"
+                        "created_at": "2024-12-06T17:44:59.031+01:00",
+                        "updated_at": "2024-12-06T17:44:59.031+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -383,6 +406,12 @@
                             "id": "e60b21c3-5968-54b2-93da-4a6a33fc85cc",
                             "migration_identifier": null,
                             "title": "Test 3",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
                             "meta_description": null,
                             "pinned": null,
                             "published": false,
@@ -391,12 +420,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-06T16:37:56.537+01:00",
-                            "updated_at": "2024-12-06T16:37:56.537+01:00"
+                            "created_at": "2024-12-06T17:44:59.017+01:00",
+                            "updated_at": "2024-12-06T17:44:59.017+01:00"
                           }
                         },
-                        "created_at": "2024-12-06T16:37:56.551+01:00",
-                        "updated_at": "2024-12-06T16:37:56.551+01:00"
+                        "created_at": "2024-12-06T17:44:59.031+01:00",
+                        "updated_at": "2024-12-06T17:44:59.031+01:00"
                       }
                     ]
                   }
@@ -435,6 +464,88 @@
                     }
                   }
                 }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a post",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful creation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful creation": {
+                    "value": {
+                      "id": "99952f2a-b809-419f-a668-2fdd32a96f98",
+                      "migration_identifier": "post-from-api-1",
+                      "full_width": false,
+                      "localizations": {
+                        "fr": {
+                          "id": "ad992dbe-a059-4193-8fec-5ba4dbfb0809",
+                          "migration_identifier": "post-from-api-1-fr",
+                          "title": "Ma nouvelle actualité",
+                          "featured_image": {
+                            "blob_id": "b12adb76-b715-49b5-a91b-71e31bbf422f",
+                            "alt": "La lumière brille sur les parois du canyon",
+                            "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJtOGhuOGV6OXkzeXIwam83cHVpeWhodWdvcGNoIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDZUMTc6NDQ6NTkuNzM4WiIsInB1ciI6ImJsb2Jfa2V5In19--43e32f3feadf52214951e804f2095c62ed4559a6/photo-1703923633616-254e78f6e9df"
+                          },
+                          "meta_description": "Une nouvelle actualité depuis l'API",
+                          "pinned": false,
+                          "published": true,
+                          "published_at": "2024-11-29T17:49:00.000+01:00",
+                          "slug": "ma-nouvelle-actualite",
+                          "subtitle": "Une nouvelle actualité",
+                          "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
+                          "text": null,
+                          "created_at": "2024-12-06T17:44:59.591+01:00",
+                          "updated_at": "2024-12-06T17:44:59.607+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-06T17:44:59.583+01:00",
+                      "updated_at": "2024-12-06T17:44:59.731+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "post": {
+                    "$ref": "#/components/schemas/communication_website_post"
+                  }
+                },
+                "required": [
+                  "post"
+                ]
               }
             }
           }
@@ -488,6 +599,12 @@
                           "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
                           "migration_identifier": "test-post-fixture-1-fr",
                           "title": "Test",
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
                           "meta_description": null,
                           "pinned": null,
                           "published": true,
@@ -496,12 +613,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-06T16:37:56.537+01:00",
-                          "updated_at": "2024-12-06T16:37:56.537+01:00"
+                          "created_at": "2024-12-06T17:44:59.017+01:00",
+                          "updated_at": "2024-12-06T17:44:59.017+01:00"
                         }
                       },
-                      "created_at": "2024-12-06T16:37:56.551+01:00",
-                      "updated_at": "2024-12-06T16:37:56.551+01:00"
+                      "created_at": "2024-12-06T17:44:59.031+01:00",
+                      "updated_at": "2024-12-06T17:44:59.031+01:00"
                     }
                   }
                 }
@@ -603,12 +720,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-06T16:37:56.508+01:00",
-                            "updated_at": "2024-12-06T16:37:56.508+01:00"
+                            "created_at": "2024-12-06T17:44:58.988+01:00",
+                            "updated_at": "2024-12-06T17:44:58.988+01:00"
                           }
                         },
-                        "created_at": "2024-12-06T16:37:56.552+01:00",
-                        "updated_at": "2024-12-06T16:37:56.552+01:00"
+                        "created_at": "2024-12-06T17:44:59.033+01:00",
+                        "updated_at": "2024-12-06T17:44:59.033+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -650,8 +767,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-06T16:37:56.508+01:00",
-                            "updated_at": "2024-12-06T16:37:56.508+01:00"
+                            "created_at": "2024-12-06T17:44:58.988+01:00",
+                            "updated_at": "2024-12-06T17:44:58.988+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -669,12 +786,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-06T16:37:56.508+01:00",
-                            "updated_at": "2024-12-06T16:37:56.508+01:00"
+                            "created_at": "2024-12-06T17:44:58.988+01:00",
+                            "updated_at": "2024-12-06T17:44:58.988+01:00"
                           }
                         },
-                        "created_at": "2024-12-06T16:37:56.552+01:00",
-                        "updated_at": "2024-12-06T16:37:56.552+01:00"
+                        "created_at": "2024-12-06T17:44:59.033+01:00",
+                        "updated_at": "2024-12-06T17:44:59.033+01:00"
                       }
                     ]
                   }
@@ -774,12 +891,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-06T16:37:56.508+01:00",
-                          "updated_at": "2024-12-06T16:37:56.508+01:00"
+                          "created_at": "2024-12-06T17:44:58.988+01:00",
+                          "updated_at": "2024-12-06T17:44:58.988+01:00"
                         }
                       },
-                      "created_at": "2024-12-06T16:37:56.552+01:00",
-                      "updated_at": "2024-12-06T16:37:56.552+01:00"
+                      "created_at": "2024-12-06T17:44:59.033+01:00",
+                      "updated_at": "2024-12-06T17:44:59.033+01:00"
                     }
                   }
                 },

@@ -8,9 +8,15 @@ module Schemas
           id: { type: :string },
           migration_identifier: { type: :string, nullable: true },
           title: { type: :string },
-          # featured_image: { type: :string, description: 'URL of the featured image' },
-          featured_image_alt: { type: :string, description: 'Alternative text of the featured image', nullable: true },
-          featured_image_credit: { type: :string, description: 'Credit of the featured image', nullable: true },
+          featured_image: {
+            type: :object,
+            properties: {
+              blob_id: { type: :string, nullable: true },
+              alt: { type: :string, nullable: true },
+              credit: { type: :string, nullable: true },
+              url: { type: :string, nullable: true }
+            }
+          },
           meta_description: { type: :string, nullable: true },
           pinned: { type: :boolean, nullable: true },
           published: { type: :boolean },

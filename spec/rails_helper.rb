@@ -67,6 +67,7 @@ RSpec.configure do |config|
   config.before(:each) do
     ENV.update(ENV.to_h.merge('APPLICATION_ENV' => 'test'))
     try(:host!, universities(:default_university).host)
+    ApplicationController.include ActiveStorage::SetCurrent
   end
 
   config.include ActiveSupport::Testing::Assertions
