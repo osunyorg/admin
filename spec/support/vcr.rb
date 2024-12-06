@@ -11,4 +11,5 @@ VCR.configure do |c|
   c.filter_sensitive_data('<Authorization-REDACTED>') do |interaction|
     interaction.request.headers['Authorization'].try(:first)
   end
+  c.configure_rspec_metadata!
 end
