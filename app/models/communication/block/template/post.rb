@@ -15,7 +15,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
     :selection,
     :categories
   ]
-  has_component :posts_quantity, :number, options: 3
+  has_component :posts_quantity, :number, default: 3
   has_component :category_id, :post_category
 
   has_component :option_author,       :boolean, default: false
