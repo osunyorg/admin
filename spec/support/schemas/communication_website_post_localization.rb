@@ -12,7 +12,7 @@ module Schemas
           featured_image_alt: { type: :string, description: 'Alternative text of the featured image', nullable: true },
           featured_image_credit: { type: :string, description: 'Credit of the featured image', nullable: true },
           meta_description: { type: :string, nullable: true },
-          pinned: { type: :boolean },
+          pinned: { type: :boolean, nullable: true },
           published: { type: :boolean },
           published_at: { type: :string, format: 'date-time', nullable: true },
           slug: { type: :string },

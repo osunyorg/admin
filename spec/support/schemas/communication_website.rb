@@ -51,6 +51,7 @@ module Schemas
           },
           localizations: {
             type: :object,
+            description: "Localizations of the website. The key is the language's ISO 639-1 code.",
             additionalProperties: {
               "$ref": "#/components/schemas/communication_website_localization"
             },
