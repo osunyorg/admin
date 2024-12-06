@@ -8,6 +8,10 @@ class Osuny::AddressFormatter
     @language = language
   end
 
+  def present?
+    to_s.present?
+  end
+
   def address
     about.try(:address)
   end

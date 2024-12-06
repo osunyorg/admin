@@ -1,23 +1,18 @@
 <%
 depth ||= 0
 indentation = '  ' * depth
-%>
-<%= indentation %>phone_numbers:
-<%
-if about.respond_to?(:phone_numbers) %>
-<%= indentation %>  list:
-<%
-about.phone_numbers.each do |phone_number|
-  next if phone_number.blank?
-  detail = ContactDetails::Phone.new phone_number
-  %>
-<%= indentation %>    - label: >-
-<%= indentation %>        <%= detail.label %>
-<%= indentation %>      value: >-
-<%= indentation %>        <%= detail.value %>
-<% end %>
-<% end %>
-<%
+present = false
+untyped_phones = []
+if about.respond_to?(:phone_numbers)
+  about.phone_numbers.each do |phone_number|
+    detail = ContactDetails::Phone.new phone_number
+    if detail.present?
+      present = true
+      untyped_phones << detail
+    end
+  end
+end
+typed_phones = []
 ContactDetails::PHONES.each do |attribute|
   if about.respond_to?(attribute)
     # If the publicity level is defined, we must respect it
@@ -26,13 +21,36 @@ ContactDetails::PHONES.each do |attribute|
     if should_show
       data = about.public_send(attribute)
       detail = ContactDetails::Phone.new data
-      %>
-<%= render 'admin/application/contact_details/static/single',
-            attribute: attribute,
-            detail: detail,
-            depth: depth+1 %>
-<%
+      if detail.present?
+        present = true
+        typed_phones << {
+          attribute: attribute,
+          detail: detail
+        }
+      end
     end
   end
+end
+%>
+<% if present %>
+<%= indentation %>phone_numbers:
+<%
+if untyped_phones.any? %>
+<%= indentation %>  list:
+<% untyped_phones.each do |detail| %>
+<%= indentation %>    - label: >-
+<%= indentation %>        <%= detail.label %>
+<%= indentation %>      value: >-
+<%= indentation %>        <%= detail.value %>
+<% 
+  end
+end
+%>
+<% typed_phones.each do |object| %>
+<%= render 'admin/application/contact_details/static/single',
+            attribute: object[:attribute],
+            detail: object[:detail],
+            depth: depth+1 %><%
+  end 
 end
 %>

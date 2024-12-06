@@ -4,8 +4,9 @@ indentation = '  ' * depth
 l10n ||= nil
 language ||= about.language
 address_formatter = Osuny::AddressFormatter.new(about: about, l10n: l10n, language: language)
+present = address_formatter.present?
 %>
-<% if about.respond_to?(:address) %>
+<% if present %>
 <%= indentation %>postal_address:
 <%= indentation %>  data:
 <%= indentation %>    address_name: >-

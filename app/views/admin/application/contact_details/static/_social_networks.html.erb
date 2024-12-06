@@ -1,17 +1,29 @@
 <% 
 depth ||= 0
 indentation = '  ' * depth
-%>
-<%= indentation %>social_networks:
-<%
+present = false
+networks = []
 ContactDetails::SOCIAL_NETWORKS.each do |attribute|
   data = ContactDetails.find_social(attribute, about, l10n)
   next if data.blank?
   kind = "ContactDetails::#{attribute.to_s.camelize}".constantize
   detail = kind.new data
-  %>
-<%= render 'admin/application/contact_details/static/single',
-            attribute: attribute, 
-            detail: detail,
-            depth: depth+1 %>
-<% end %>
+  if detail.present?
+    present = true
+    networks << {
+      attribute: attribute,
+      detail: detail
+    }
+  end
+end
+%>
+<% if present %>
+<%= indentation %>social_networks:
+<%  networks.each do |object| %><%= 
+      render 'admin/application/contact_details/static/single',
+              attribute: object[:attribute],
+              detail: object[:detail],
+              depth: depth+1 %><% 
+  end
+end
+%>
