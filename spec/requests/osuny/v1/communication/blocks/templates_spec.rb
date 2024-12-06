@@ -9,7 +9,26 @@ RSpec.describe 'Communication::Block::Template' do
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
-      response '200', 'Successful operation' do
+      parameter name: :category,
+                getter: :filter_category,
+                in: :query,
+                schema: {
+                  type: :string,
+                  enum: Communication::Block::CATEGORIES.keys,
+                },
+                required: false
+
+      response '200', 'List all templates' do
+        run_test!
+      end
+
+      response '200', 'Basic templates' do
+        let(:filter_category) { 'basic' }
+        run_test!
+      end
+
+      response '200', 'Storytelling templates' do
+        let(:filter_category) { 'storytelling' }
         run_test!
       end
 

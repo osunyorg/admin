@@ -41,13 +41,29 @@
             "api_key": []
           }
         ],
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "basic",
+                "storytelling",
+                "references",
+                "utilities"
+              ]
+            },
+            "required": false
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Successful operation",
+            "description": "Storytelling templates",
             "content": {
               "application/json": {
                 "examples": {
-                  "Successful operation": {
+                  "List all templates": {
                     "value": [
                       "agenda",
                       "call_to_action",
@@ -77,6 +93,26 @@
                       "title",
                       "video",
                       "volumes"
+                    ]
+                  },
+                  "Basic templates": {
+                    "value": [
+                      "title",
+                      "chapter",
+                      "image",
+                      "video",
+                      "sound",
+                      "datatable"
+                    ]
+                  },
+                  "Storytelling templates": {
+                    "value": [
+                      "key_figures",
+                      "features",
+                      "gallery",
+                      "call_to_action",
+                      "testimonials",
+                      "timeline"
                     ]
                   }
                 }
@@ -383,12 +419,12 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-06T11:06:08.557+01:00",
-                            "updated_at": "2024-12-06T11:06:08.557+01:00"
+                            "created_at": "2024-12-06T11:31:29.435+01:00",
+                            "updated_at": "2024-12-06T11:31:29.435+01:00"
                           }
                         ],
-                        "created_at": "2024-12-06T11:06:08.570+01:00",
-                        "updated_at": "2024-12-06T11:06:08.570+01:00"
+                        "created_at": "2024-12-06T11:31:29.451+01:00",
+                        "updated_at": "2024-12-06T11:31:29.451+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -400,12 +436,12 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-06T11:06:08.557+01:00",
-                            "updated_at": "2024-12-06T11:06:08.557+01:00"
+                            "created_at": "2024-12-06T11:31:29.435+01:00",
+                            "updated_at": "2024-12-06T11:31:29.435+01:00"
                           }
                         ],
-                        "created_at": "2024-12-06T11:06:08.570+01:00",
-                        "updated_at": "2024-12-06T11:06:08.570+01:00"
+                        "created_at": "2024-12-06T11:31:29.451+01:00",
+                        "updated_at": "2024-12-06T11:31:29.451+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -417,12 +453,12 @@
                             "language": "fr",
                             "published": false,
                             "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-06T11:06:08.557+01:00",
-                            "updated_at": "2024-12-06T11:06:08.557+01:00"
+                            "created_at": "2024-12-06T11:31:29.435+01:00",
+                            "updated_at": "2024-12-06T11:31:29.435+01:00"
                           }
                         ],
-                        "created_at": "2024-12-06T11:06:08.570+01:00",
-                        "updated_at": "2024-12-06T11:06:08.570+01:00"
+                        "created_at": "2024-12-06T11:31:29.451+01:00",
+                        "updated_at": "2024-12-06T11:31:29.451+01:00"
                       }
                     ]
                   }
@@ -489,17 +525,17 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "4dbc29a2-79fc-4ecd-bd3c-36bab57b51d2",
+                      "id": "ddf89c5d-89b4-40b2-aa10-e23331453545",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": [
                         {
-                          "id": "795b1927-6813-417b-a717-4b3a5a988035",
+                          "id": "f2e87f0c-1fad-42a9-b15b-5b903e033a20",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "language": "fr",
                           "featured_image": {
-                            "blob_id": "602c13a2-b683-4aaf-baa6-b9b749e92c66",
+                            "blob_id": "e157a3e6-ef4a-4685-b1d4-1a42a1a8a52c",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>"
                           },
@@ -511,13 +547,13 @@
                           "subtitle": "Une nouvelle actualité",
                           "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
                           "text": null,
-                          "created_at": "2024-12-06T11:06:09.162+01:00",
-                          "updated_at": "2024-12-06T11:06:09.173+01:00"
+                          "created_at": "2024-12-06T11:31:30.085+01:00",
+                          "updated_at": "2024-12-06T11:31:30.098+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-06T11:06:09.154+01:00",
-                      "updated_at": "2024-12-06T11:06:09.273+01:00"
+                      "created_at": "2024-12-06T11:31:30.078+01:00",
+                      "updated_at": "2024-12-06T11:31:30.219+01:00"
                     }
                   }
                 }
@@ -742,13 +778,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-06T11:06:08.557+01:00",
-                          "updated_at": "2024-12-06T11:06:08.557+01:00"
+                          "created_at": "2024-12-06T11:31:29.435+01:00",
+                          "updated_at": "2024-12-06T11:31:29.435+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-06T11:06:08.570+01:00",
-                      "updated_at": "2024-12-06T11:06:08.570+01:00"
+                      "created_at": "2024-12-06T11:31:29.451+01:00",
+                      "updated_at": "2024-12-06T11:31:29.451+01:00"
                     }
                   }
                 }
@@ -845,13 +881,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-06T11:06:08.557+01:00",
-                          "updated_at": "2024-12-06T11:06:09.418+01:00"
+                          "created_at": "2024-12-06T11:31:29.435+01:00",
+                          "updated_at": "2024-12-06T11:31:30.350+01:00"
                         }
                       ],
                       "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-06T11:06:08.570+01:00",
-                      "updated_at": "2024-12-06T11:06:09.422+01:00"
+                      "created_at": "2024-12-06T11:31:29.451+01:00",
+                      "updated_at": "2024-12-06T11:31:30.353+01:00"
                     }
                   }
                 }
@@ -1119,8 +1155,8 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-06T11:06:08.531+01:00",
-                            "updated_at": "2024-12-06T11:06:08.531+01:00"
+                            "created_at": "2024-12-06T11:31:29.395+01:00",
+                            "updated_at": "2024-12-06T11:31:29.395+01:00"
                           }
                         ]
                       },
@@ -1134,8 +1170,8 @@
                             "language": "fr",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-06T11:06:08.531+01:00",
-                            "updated_at": "2024-12-06T11:06:08.531+01:00"
+                            "created_at": "2024-12-06T11:31:29.395+01:00",
+                            "updated_at": "2024-12-06T11:31:29.395+01:00"
                           },
                           {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -1143,8 +1179,8 @@
                             "language": "en",
                             "published": true,
                             "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-06T11:06:08.531+01:00",
-                            "updated_at": "2024-12-06T11:06:08.531+01:00"
+                            "created_at": "2024-12-06T11:31:29.395+01:00",
+                            "updated_at": "2024-12-06T11:31:29.395+01:00"
                           }
                         ]
                       }
@@ -1242,12 +1278,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-06T11:06:08.531+01:00",
-                          "updated_at": "2024-12-06T11:06:08.531+01:00"
+                          "created_at": "2024-12-06T11:31:29.395+01:00",
+                          "updated_at": "2024-12-06T11:31:29.395+01:00"
                         }
                       ],
-                      "created_at": "2024-12-06T11:06:08.572+01:00",
-                      "updated_at": "2024-12-06T11:06:08.572+01:00"
+                      "created_at": "2024-12-06T11:31:29.454+01:00",
+                      "updated_at": "2024-12-06T11:31:29.454+01:00"
                     }
                   }
                 }
