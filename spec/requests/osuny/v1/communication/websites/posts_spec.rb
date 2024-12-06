@@ -134,36 +134,36 @@ RSpec.describe 'Communication::Website::Post' do
   #   end
   end
 
-  # path '/communication/websites/{website_id}/posts/{id}' do
-  #   get 'Shows a post' do
-  #     tags 'Communication::Website::Post'
-  #     security [{ api_key: [] }]
-  #     let("X-Osuny-Token") { university_apps(:default_app).token }
+  path '/communication/websites/{website_id}/posts/{id}' do
+    get 'Shows a post' do
+      tags 'Communication::Website::Post'
+      security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
 
-  #     parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
-  #     let(:website_id) { communication_websites(:website_with_github).id }
-  #     parameter name: :id, in: :path, type: :string, description: 'Post identifier'
-  #     let(:id) { communication_website_posts(:test_post).id }
+      parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
+      let(:website_id) { communication_websites(:website_with_github).id }
+      parameter name: :id, in: :path, type: :string, description: 'Post identifier'
+      let(:id) { communication_website_posts(:test_post).id }
 
-  #     response '200', 'Successful operation' do
-  #       run_test!
-  #     end
+      response '200', 'Successful operation' do
+        run_test!
+      end
 
-  #     response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
-  #       let("X-Osuny-Token") { 'fake-token' }
-  #       run_test!
-  #     end
+      response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
+        let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
 
-  #     response '404', 'Website not found' do
-  #       let(:website_id) { 'fake-id' }
-  #       run_test!
-  #     end
+      response '404', 'Website not found' do
+        let(:website_id) { 'fake-id' }
+        run_test!
+      end
 
-  #     response '404', 'Post not found' do
-  #       let(:id) { 'fake-id' }
-  #       run_test!
-  #     end
-  #   end
+      response '404', 'Post not found' do
+        let(:id) { 'fake-id' }
+        run_test!
+      end
+    end
 
   #   patch 'Updates a post' do
   #     tags 'Communication::Website::Post'
@@ -312,5 +312,5 @@ RSpec.describe 'Communication::Website::Post' do
   #       run_test!
   #     end
   #   end
-  # end
+  end
 end
