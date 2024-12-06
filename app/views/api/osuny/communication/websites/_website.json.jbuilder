@@ -22,8 +22,12 @@ json.showcase do
     json.array! website.showcase_tags, :id, :name, :slug
   end
 end
-json.localizations  website.localizations,
-                    partial: "api/osuny/communication/websites/localization",
-                    as: :l10n
+json.localizations do
+  website.localizations.each do |l10n|
+    json.set! l10n.language.iso_code do
+      json.partial! "api/osuny/communication/websites/localization", l10n: l10n
+    end
+  end
+end
 json.created_at website.created_at
 json.updated_at website.updated_at

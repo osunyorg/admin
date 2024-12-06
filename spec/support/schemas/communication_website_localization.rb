@@ -7,7 +7,6 @@ module Schemas
         properties: {
           id: { type: :string },
           name: { type: :string },
-          language: { type: :string },
           published: { type: :boolean },
           published_at: { type: :string, format: "date-time", nullable: true },
           social_email: { type: :string, nullable: true },

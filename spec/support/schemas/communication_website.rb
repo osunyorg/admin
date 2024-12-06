@@ -50,10 +50,11 @@ module Schemas
             }
           },
           localizations: {
-            type: :array,
-            items: {
+            type: :object,
+            additionalProperties: {
               "$ref": "#/components/schemas/communication_website_localization"
-            }
+            },
+            minProperties: 1
           },
           created_at: { type: :string, format: "date-time" },
           updated_at: { type: :string, format: "date-time" }
