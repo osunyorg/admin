@@ -52,6 +52,8 @@ RSpec.describe 'Communication::Website::Post' do
                     language: { type: :string, description: 'ISO 639-1 code of the language', example: 'fr' },
                     title: { type: :string },
                     featured_image: { type: :string, description: 'URL of the featured image' },
+                    featured_image_alt: { type: :string, description: 'Alternative text of the featured image' },
+                    featured_image_credit: { type: :string, description: 'Credit of the featured image' },
                     # TODO blocks
                     meta_description: { type: :string },
                     pinned: { type: :boolean },
@@ -83,6 +85,8 @@ RSpec.describe 'Communication::Website::Post' do
                 title: 'Ma nouvelle actualité',
                 meta_description: 'Une nouvelle actualité depuis l\'API',
                 featured_image: 'https://images.unsplash.com/photo-1703923633616-254e78f6e9df?q=80&w=2070&auto=format&fit=crop',
+                featured_image_alt: 'La lumière brille sur les parois du canyon',
+                featured_image_credit: 'Photo de <a href="https://unsplash.com/fr/@johnnzhou">John Zhou</a> sur <a href="https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk">Unsplash</a>',
                 pinned: false,
                 published: true,
                 published_at: '2024-11-29T16:49:00Z',
@@ -217,7 +221,10 @@ RSpec.describe 'Communication::Website::Post' do
                     migration_identifier: { type: :string, description: 'Unique migration identifier of the localization' },
                     language: { type: :string, description: 'ISO 639-1 code of the language', example: 'fr' },
                     title: { type: :string },
-                    # TODO Featured image & blocks
+                    featured_image: { type: :string, description: 'URL of the featured image' },
+                    featured_image_alt: { type: :string, description: 'Alternative text of the featured image' },
+                    featured_image_credit: { type: :string, description: 'Credit of the featured image' },
+                    # TODO blocks
                     meta_description: { type: :string },
                     pinned: { type: :boolean },
                     published: { type: :boolean },

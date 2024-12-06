@@ -60,7 +60,9 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
                         .permit(
                           :migration_identifier, :full_width,
                           localizations_attributes: [
-                            :migration_identifier, :language, :title
+                            :migration_identifier, :language, :title, :meta_description,
+                            :featured_image, :featured_image_alt, :featured_image_credit,
+                            :pinned, :published, :published_at, :slug, :subtitle, :summary, :_destroy
                           ]
                         ).merge(
                           university_id: current_university.id,
@@ -69,10 +71,10 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
     permitted_params[:localizations_attributes].each do |localization_attributes|
       set_language_id_to_l10n_attributes(localization_attributes)
       post_l10n = @post.localizations.find_by(
-        migration_identifier: l10n_attributes[:migration_identifier],
-        language_id: l10n_attributes[:language_id]
+        migration_identifier: localization_attributes[:migration_identifier],
+        language_id: localization_attributes[:language_id]
       ) if @post.persisted?
-      l10n_attributes[:id] = post_l10n.id if post_l10n.present?
+      localization_attributes[:id] = post_l10n.id if post_l10n.present?
       set_featured_image_to_l10n_attributes(localization_attributes, l10n: post_l10n)
     end
     permitted_params
