@@ -27,6 +27,20 @@
         "name": "X-Osuny-Token",
         "in": "header"
       }
+    },
+    "schemas": {
+      "communication_website": {
+        "type": "object",
+        "title": "Communication::Website",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "paths": {
@@ -290,7 +304,7 @@
                             "meta_description": "string",
                             "pinned": true,
                             "published": true,
-                            "published_at": "2024-12-06 12:30:36 +0100",
+                            "published_at": "2024-12-06 14:12:25 +0100",
                             "slug": "string",
                             "subtitle": "string",
                             "summary": "string",
@@ -533,7 +547,7 @@
                             "meta_description": "string",
                             "pinned": true,
                             "published": true,
-                            "published_at": "2024-12-06 12:30:36 +0100",
+                            "published_at": "2024-12-06 14:12:25 +0100",
                             "slug": "string",
                             "subtitle": "string",
                             "summary": "string",

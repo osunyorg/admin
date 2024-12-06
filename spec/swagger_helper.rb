@@ -41,6 +41,10 @@ RSpec.configure do |config|
             name: 'X-Osuny-Token',
             in: :header
           }
+        },
+        schemas: {
+          communication_website: Schemas::CommunicationWebsite.schema,
+          communication_website_localization: Schemas::CommunicationWebsiteLocalization.schema,
         }
       }
     }
