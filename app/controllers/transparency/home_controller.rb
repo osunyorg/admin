@@ -5,7 +5,7 @@ class Transparency::HomeController < Transparency::ApplicationController
     @costs = [
       ['Bugsnag', 'Interception d\'erreur (gratuit pour l\'open source)', 0],
       ['CodeClimate', 'Qualité de code (gratuit pour l\'open source)', 0],
-      ['Deuxfleurs', 'Hébergement sans data center', 100],
+      ['Deuxfleurs', 'Hébergement sans data center', 3000],
       ['KeyCDN', 'Redimensionnement des images', 3000],
       ['LanguageTool', 'Aide à la qualité des contenus', 1200],
       ['LibreTranslate', 'Aide à  la traduction', 696],
