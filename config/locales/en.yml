@@ -259,6 +259,7 @@ en:
       expand: Search and filter
       reset: Reset
       submit: Search and filter
+    title: Search and filter
   folder:
     empty: Folder is empty
     open: Open folder
