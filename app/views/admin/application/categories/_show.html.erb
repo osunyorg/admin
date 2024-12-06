@@ -18,7 +18,7 @@
         <div class="col-lg-6">
           <%= osuny_label t('category.children') %>
           <ul class="list-unstyled mb-0">
-            <% category.children.each do |child| %>
+            <% category.children.ordered(current_language).each do |child| %>
               <li>
                 <%= osuny_link_localized_if can?(:read, child), child, [:admin, child] %>
               </li>

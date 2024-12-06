@@ -5,6 +5,8 @@ if block.template.page
   hugo = page_l10n.hugo(block.website)
 %>
       page:
+        permalink: "<%= hugo.permalink %>"
+        path: "<%= hugo.path %>"
         slug: "<%= hugo.slug %>"
         file: "<%= hugo.file %>"
 <% end %>
