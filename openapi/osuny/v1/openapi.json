@@ -59,79 +59,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Storytelling templates",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "List all templates": {
-                    "value": [
-                      "agenda",
-                      "call_to_action",
-                      "chapter",
-                      "contact",
-                      "datatable",
-                      "definitions",
-                      "embed",
-                      "features",
-                      "files",
-                      "gallery",
-                      "image",
-                      "key_figures",
-                      "license",
-                      "links",
-                      "locations",
-                      "organizations",
-                      "pages",
-                      "papers",
-                      "persons",
-                      "posts",
-                      "projects",
-                      "programs",
-                      "sound",
-                      "testimonials",
-                      "timeline",
-                      "title",
-                      "video",
-                      "volumes"
-                    ]
-                  },
-                  "Basic templates": {
-                    "value": [
-                      "title",
-                      "chapter",
-                      "image",
-                      "video",
-                      "sound",
-                      "datatable"
-                    ]
-                  },
-                  "Storytelling templates": {
-                    "value": [
-                      "key_figures",
-                      "features",
-                      "gallery",
-                      "call_to_action",
-                      "testimonials",
-                      "timeline"
-                    ]
-                  }
-                }
-              }
-            }
+            "description": "Storytelling templates"
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Unauthorized. Please make sure you provide a valid API key.": {
-                    "value": {
-                      "message": "You are not authorized to access this resource."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Unauthorized. Please make sure you provide a valid API key."
           }
         }
       }
@@ -160,221 +91,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Files",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Chapter": {
-                    "value": {
-                      "slug": "chapter",
-                      "components": [
-                        {
-                          "property": "layout",
-                          "kind": "layout",
-                          "options": [
-                            "no_background",
-                            "alt_background",
-                            "accent_background"
-                          ]
-                        },
-                        {
-                          "property": "text",
-                          "kind": "rich_text"
-                        },
-                        {
-                          "property": "notes",
-                          "kind": "rich_text"
-                        },
-                        {
-                          "property": "image",
-                          "kind": "image"
-                        },
-                        {
-                          "property": "alt",
-                          "kind": "string"
-                        },
-                        {
-                          "property": "credit",
-                          "kind": "rich_text"
-                        }
-                      ]
-                    }
-                  },
-                  "Gallery": {
-                    "value": {
-                      "slug": "gallery",
-                      "components": [
-                        {
-                          "property": "layout",
-                          "kind": "layout",
-                          "options": [
-                            "grid",
-                            "carousel",
-                            "large"
-                          ]
-                        },
-                        {
-                          "property": "description",
-                          "kind": "rich_text"
-                        }
-                      ],
-                      "element": {
-                        "components": [
-                          {
-                            "property": "image",
-                            "kind": "image"
-                          },
-                          {
-                            "property": "alt",
-                            "kind": "string"
-                          },
-                          {
-                            "property": "credit",
-                            "kind": "rich_text"
-                          },
-                          {
-                            "property": "text",
-                            "kind": "rich_text"
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  "Posts": {
-                    "value": {
-                      "slug": "posts",
-                      "components": [
-                        {
-                          "property": "layout",
-                          "kind": "layout",
-                          "options": [
-                            "grid",
-                            "list",
-                            "highlight",
-                            "alternate",
-                            "large",
-                            "carousel"
-                          ]
-                        },
-                        {
-                          "property": "mode",
-                          "kind": "option",
-                          "options": [
-                            "all",
-                            "category",
-                            "selection",
-                            "categories"
-                          ]
-                        },
-                        {
-                          "property": "posts_quantity",
-                          "kind": "number",
-                          "default": 3
-                        },
-                        {
-                          "property": "category_id",
-                          "kind": "post_category"
-                        },
-                        {
-                          "property": "option_author",
-                          "kind": "boolean",
-                          "default": false
-                        },
-                        {
-                          "property": "option_categories",
-                          "kind": "boolean",
-                          "default": false
-                        },
-                        {
-                          "property": "option_date",
-                          "kind": "boolean",
-                          "default": false
-                        },
-                        {
-                          "property": "option_image",
-                          "kind": "boolean",
-                          "default": true
-                        },
-                        {
-                          "property": "option_reading_time",
-                          "kind": "boolean",
-                          "default": false
-                        },
-                        {
-                          "property": "option_subtitle",
-                          "kind": "boolean",
-                          "default": true
-                        },
-                        {
-                          "property": "option_summary",
-                          "kind": "boolean",
-                          "default": true
-                        }
-                      ],
-                      "element": {
-                        "components": [
-                          {
-                            "property": "id",
-                            "kind": "post"
-                          }
-                        ]
-                      }
-                    }
-                  },
-                  "Files": {
-                    "value": {
-                      "slug": "files",
-                      "components": [
-                        {
-                          "property": "description",
-                          "kind": "rich_text"
-                        }
-                      ],
-                      "element": {
-                        "components": [
-                          {
-                            "property": "title",
-                            "kind": "string"
-                          },
-                          {
-                            "property": "file",
-                            "kind": "file"
-                          }
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Files"
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Unauthorized. Please make sure you provide a valid API key.": {
-                    "value": {
-                      "message": "You are not authorized to access this resource."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Unauthorized. Please make sure you provide a valid API key."
           },
           "404": {
-            "description": "Template not found",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Template not found": {
-                    "value": {
-                      "message": "The resource you were looking for doesn't exist."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Template not found"
           }
         }
       }
@@ -403,96 +126,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Successful operation": {
-                    "value": [
-                      {
-                        "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
-                        "migration_identifier": "test-post-fixture-1",
-                        "localizations": [
-                          {
-                            "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
-                            "title": "Test",
-                            "language": "fr",
-                            "published": true,
-                            "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-06T11:31:29.435+01:00",
-                            "updated_at": "2024-12-06T11:31:29.435+01:00"
-                          }
-                        ],
-                        "created_at": "2024-12-06T11:31:29.451+01:00",
-                        "updated_at": "2024-12-06T11:31:29.451+01:00"
-                      },
-                      {
-                        "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
-                        "migration_identifier": null,
-                        "localizations": [
-                          {
-                            "id": "a979b73e-e42b-54de-97d4-df21605e49c0",
-                            "title": "Test 2",
-                            "language": "fr",
-                            "published": true,
-                            "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-06T11:31:29.435+01:00",
-                            "updated_at": "2024-12-06T11:31:29.435+01:00"
-                          }
-                        ],
-                        "created_at": "2024-12-06T11:31:29.451+01:00",
-                        "updated_at": "2024-12-06T11:31:29.451+01:00"
-                      },
-                      {
-                        "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
-                        "migration_identifier": null,
-                        "localizations": [
-                          {
-                            "id": "e60b21c3-5968-54b2-93da-4a6a33fc85cc",
-                            "title": "Test 3",
-                            "language": "fr",
-                            "published": false,
-                            "published_at": "2010-11-28T01:00:00.000+01:00",
-                            "created_at": "2024-12-06T11:31:29.435+01:00",
-                            "updated_at": "2024-12-06T11:31:29.435+01:00"
-                          }
-                        ],
-                        "created_at": "2024-12-06T11:31:29.451+01:00",
-                        "updated_at": "2024-12-06T11:31:29.451+01:00"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
+            "description": "Successful operation"
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Unauthorized. Please make sure you provide a valid API key.": {
-                    "value": {
-                      "message": "You are not authorized to access this resource."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Unauthorized. Please make sure you provide a valid API key."
           },
           "404": {
-            "description": "Website not found",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Website not found": {
-                    "value": {
-                      "message": "The resource you were looking for doesn't exist."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Website not found"
           }
         }
       },
@@ -519,113 +159,19 @@
         ],
         "responses": {
           "201": {
-            "description": "Successful creation",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Successful creation": {
-                    "value": {
-                      "id": "ddf89c5d-89b4-40b2-aa10-e23331453545",
-                      "migration_identifier": "post-from-api-1",
-                      "full_width": false,
-                      "localizations": [
-                        {
-                          "id": "f2e87f0c-1fad-42a9-b15b-5b903e033a20",
-                          "migration_identifier": "post-from-api-1-fr",
-                          "title": "Ma nouvelle actualité",
-                          "language": "fr",
-                          "featured_image": {
-                            "blob_id": "e157a3e6-ef4a-4685-b1d4-1a42a1a8a52c",
-                            "alt": "La lumière brille sur les parois du canyon",
-                            "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>"
-                          },
-                          "meta_description": "Une nouvelle actualité depuis l'API",
-                          "pinned": false,
-                          "published": true,
-                          "published_at": "2024-11-29T17:49:00.000+01:00",
-                          "slug": "ma-nouvelle-actualite",
-                          "subtitle": "Une nouvelle actualité",
-                          "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
-                          "text": null,
-                          "created_at": "2024-12-06T11:31:30.085+01:00",
-                          "updated_at": "2024-12-06T11:31:30.098+01:00"
-                        }
-                      ],
-                      "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-06T11:31:30.078+01:00",
-                      "updated_at": "2024-12-06T11:31:30.219+01:00"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Successful creation"
           },
           "400": {
-            "description": "Missing migration identifier.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Missing migration identifier.": {
-                    "value": {
-                      "error": "Missing migration identifier."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Missing migration identifier."
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Unauthorized. Please make sure you provide a valid API key.": {
-                    "value": {
-                      "message": "You are not authorized to access this resource."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Unauthorized. Please make sure you provide a valid API key."
           },
           "404": {
-            "description": "Website not found",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Website not found": {
-                    "value": {
-                      "message": "The resource you were looking for doesn't exist."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Website not found"
           },
           "422": {
-            "description": "Invalid parameters",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Invalid parameters": {
-                    "value": {
-                      "errors": {
-                        "localizations.slug": [
-                          "can't be blank",
-                          "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
-                        ],
-                        "localizations.title": [
-                          "can't be blank"
-                        ],
-                        "localizations": [
-                          "is invalid"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Invalid parameters"
           }
         },
         "requestBody": {
@@ -644,19 +190,15 @@
                       "full_width": {
                         "type": "boolean"
                       },
-                      "localizations_attributes": {
-                        "type": "array",
-                        "items": {
+                      "localizations": {
+                        "type": "object",
+                        "description": "Localizations of the post. The key is the language's ISO 639-1 code.",
+                        "additionalProperties": {
                           "type": "object",
                           "properties": {
                             "migration_identifier": {
                               "type": "string",
                               "description": "Unique migration identifier of the localization"
-                            },
-                            "language": {
-                              "type": "string",
-                              "description": "ISO 639-1 code of the language",
-                              "example": "fr"
                             },
                             "title": {
                               "type": "string"
@@ -697,19 +239,82 @@
                             },
                             "text": {
                               "type": "string"
+                            },
+                            "blocks": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "migration_identifier": {
+                                    "type": "string"
+                                  },
+                                  "template_kind": {
+                                    "type": "string",
+                                    "description": "Template kind of the blocks. See /communication/blocks/templates for possible values."
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "position": {
+                                    "type": "integer"
+                                  },
+                                  "published": {
+                                    "type": "boolean",
+                                    "default": true
+                                  },
+                                  "html_class": {
+                                    "type": "string",
+                                    "description": "For advanced use. Add an HTML class for custom purposes."
+                                  },
+                                  "data": {
+                                    "type": "object",
+                                    "description": "Data of the block. The structure depends on the template kind.",
+                                    "additionalProperties": true
+                                  }
+                                }
+                              }
                             }
                           },
                           "required": [
                             "migration_identifier",
-                            "language",
                             "title"
                           ]
+                        },
+                        "example": {
+                          "fr": {
+                            "migration_identifier": "string",
+                            "title": "string",
+                            "featured_image": "string",
+                            "featured_image_alt": "string",
+                            "featured_image_credit": "string",
+                            "meta_description": "string",
+                            "pinned": true,
+                            "published": true,
+                            "published_at": "2024-12-06 12:30:36 +0100",
+                            "slug": "string",
+                            "subtitle": "string",
+                            "summary": "string",
+                            "text": "string",
+                            "blocks": [
+                              {
+                                "migration_identifier": "string",
+                                "template_kind": "string",
+                                "title": "string",
+                                "position": 1,
+                                "published": true,
+                                "html_class": "string",
+                                "data": {
+                                  "key": "value"
+                                }
+                              }
+                            ]
+                          }
                         }
                       }
                     },
                     "required": [
                       "migration_identifier",
-                      "localizations_attributes"
+                      "localizations"
                     ]
                   }
                 },
@@ -755,74 +360,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Successful operation": {
-                    "value": {
-                      "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
-                      "migration_identifier": "test-post-fixture-1",
-                      "full_width": false,
-                      "localizations": [
-                        {
-                          "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
-                          "migration_identifier": "test-post-fixture-1-fr",
-                          "title": "Test",
-                          "language": "fr",
-                          "meta_description": null,
-                          "pinned": null,
-                          "published": true,
-                          "published_at": "2010-11-28T01:00:00.000+01:00",
-                          "slug": "test",
-                          "subtitle": null,
-                          "summary": null,
-                          "text": null,
-                          "created_at": "2024-12-06T11:31:29.435+01:00",
-                          "updated_at": "2024-12-06T11:31:29.435+01:00"
-                        }
-                      ],
-                      "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-06T11:31:29.451+01:00",
-                      "updated_at": "2024-12-06T11:31:29.451+01:00"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Successful operation"
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Unauthorized. Please make sure you provide a valid API key.": {
-                    "value": {
-                      "message": "You are not authorized to access this resource."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Unauthorized. Please make sure you provide a valid API key."
           },
           "404": {
-            "description": "Post not found",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Website not found": {
-                    "value": {
-                      "message": "The resource you were looking for doesn't exist."
-                    }
-                  },
-                  "Post not found": {
-                    "value": {
-                      "message": "The resource you were looking for doesn't exist."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Post not found"
           }
         }
       },
@@ -858,109 +402,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful update",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Successful update": {
-                    "value": {
-                      "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
-                      "migration_identifier": "test-post-fixture-1",
-                      "full_width": false,
-                      "localizations": [
-                        {
-                          "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
-                          "migration_identifier": "test-post-fixture-1-fr",
-                          "title": "Mon nouveau titre",
-                          "language": "fr",
-                          "meta_description": null,
-                          "pinned": null,
-                          "published": true,
-                          "published_at": "2010-11-28T01:00:00.000+01:00",
-                          "slug": "test",
-                          "subtitle": null,
-                          "summary": null,
-                          "text": null,
-                          "created_at": "2024-12-06T11:31:29.435+01:00",
-                          "updated_at": "2024-12-06T11:31:30.350+01:00"
-                        }
-                      ],
-                      "website_id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "created_at": "2024-12-06T11:31:29.451+01:00",
-                      "updated_at": "2024-12-06T11:31:30.353+01:00"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Successful update"
           },
           "400": {
-            "description": "Missing migration identifier.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Missing migration identifier.": {
-                    "value": {
-                      "error": "Missing migration identifier."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Missing migration identifier."
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Unauthorized. Please make sure you provide a valid API key.": {
-                    "value": {
-                      "message": "You are not authorized to access this resource."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Unauthorized. Please make sure you provide a valid API key."
           },
           "404": {
-            "description": "Post not found",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Website not found": {
-                    "value": {
-                      "message": "The resource you were looking for doesn't exist."
-                    }
-                  },
-                  "Post not found": {
-                    "value": {
-                      "message": "The resource you were looking for doesn't exist."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Post not found"
           },
           "422": {
-            "description": "Invalid parameters",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Invalid parameters": {
-                    "value": {
-                      "errors": {
-                        "localizations.title": [
-                          "can't be blank"
-                        ],
-                        "localizations": [
-                          "is invalid"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Invalid parameters"
           }
         },
         "requestBody": {
@@ -979,19 +433,15 @@
                       "full_width": {
                         "type": "boolean"
                       },
-                      "localizations_attributes": {
-                        "type": "array",
-                        "items": {
+                      "localizations": {
+                        "type": "object",
+                        "description": "Localizations of the post. The key is the language's ISO 639-1 code.",
+                        "additionalProperties": {
                           "type": "object",
                           "properties": {
                             "migration_identifier": {
                               "type": "string",
                               "description": "Unique migration identifier of the localization"
-                            },
-                            "language": {
-                              "type": "string",
-                              "description": "ISO 639-1 code of the language",
-                              "example": "fr"
                             },
                             "title": {
                               "type": "string"
@@ -1032,19 +482,82 @@
                             },
                             "text": {
                               "type": "string"
+                            },
+                            "blocks": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "migration_identifier": {
+                                    "type": "string"
+                                  },
+                                  "template_kind": {
+                                    "type": "string",
+                                    "description": "Template kind of the blocks. See /communication/blocks/templates for possible values."
+                                  },
+                                  "title": {
+                                    "type": "string"
+                                  },
+                                  "position": {
+                                    "type": "integer"
+                                  },
+                                  "published": {
+                                    "type": "boolean",
+                                    "default": true
+                                  },
+                                  "html_class": {
+                                    "type": "string",
+                                    "description": "For advanced use. Add an HTML class for custom purposes."
+                                  },
+                                  "data": {
+                                    "type": "object",
+                                    "description": "Data of the block. The structure depends on the template kind.",
+                                    "additionalProperties": true
+                                  }
+                                }
+                              }
                             }
                           },
                           "required": [
                             "migration_identifier",
-                            "language",
                             "title"
                           ]
+                        },
+                        "example": {
+                          "fr": {
+                            "migration_identifier": "string",
+                            "title": "string",
+                            "featured_image": "string",
+                            "featured_image_alt": "string",
+                            "featured_image_credit": "string",
+                            "meta_description": "string",
+                            "pinned": true,
+                            "published": true,
+                            "published_at": "2024-12-06 12:30:36 +0100",
+                            "slug": "string",
+                            "subtitle": "string",
+                            "summary": "string",
+                            "text": "string",
+                            "blocks": [
+                              {
+                                "migration_identifier": "string",
+                                "template_kind": "string",
+                                "title": "string",
+                                "position": 1,
+                                "published": true,
+                                "html_class": "string",
+                                "data": {
+                                  "key": "value"
+                                }
+                              }
+                            ]
+                          }
                         }
                       }
                     },
                     "required": [
                       "migration_identifier",
-                      "localizations_attributes"
+                      "localizations"
                     ]
                   }
                 },
@@ -1091,37 +604,10 @@
             "description": "Successful deletion"
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Unauthorized. Please make sure you provide a valid API key.": {
-                    "value": {
-                      "message": "You are not authorized to access this resource."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Unauthorized. Please make sure you provide a valid API key."
           },
           "404": {
-            "description": "Post not found",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Website not found": {
-                    "value": {
-                      "message": "The resource you were looking for doesn't exist."
-                    }
-                  },
-                  "Post not found": {
-                    "value": {
-                      "message": "The resource you were looking for doesn't exist."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Post not found"
           }
         }
       }
@@ -1139,70 +625,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Successful operation": {
-                    "value": [
-                      {
-                        "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                        "url": null,
-                        "localizations": [
-                          {
-                            "id": "3d91a284-4159-504e-81c5-6b9b32a08dd7",
-                            "name": "Site with github french",
-                            "language": "fr",
-                            "published": true,
-                            "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-06T11:31:29.395+01:00",
-                            "updated_at": "2024-12-06T11:31:29.395+01:00"
-                          }
-                        ]
-                      },
-                      {
-                        "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
-                        "url": null,
-                        "localizations": [
-                          {
-                            "id": "b854339d-f776-59c7-af65-e12ee2951daa",
-                            "name": "Site with gitlab french",
-                            "language": "fr",
-                            "published": true,
-                            "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-06T11:31:29.395+01:00",
-                            "updated_at": "2024-12-06T11:31:29.395+01:00"
-                          },
-                          {
-                            "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
-                            "name": "Site with gitlab english",
-                            "language": "en",
-                            "published": true,
-                            "published_at": "2024-11-29T16:07:24.232+01:00",
-                            "created_at": "2024-12-06T11:31:29.395+01:00",
-                            "updated_at": "2024-12-06T11:31:29.395+01:00"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                }
-              }
-            }
+            "description": "Successful operation"
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Unauthorized. Please make sure you provide a valid API key.": {
-                    "value": {
-                      "message": "You are not authorized to access this resource."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Unauthorized. Please make sure you provide a valid API key."
           }
         }
       }
@@ -1231,92 +657,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Successful operation": {
-                    "value": {
-                      "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
-                      "name": "Site with github french",
-                      "url": null,
-                      "deuxfleurs": {
-                        "hosting": false,
-                        "identifier": null
-                      },
-                      "features": {
-                        "agenda": true,
-                        "portfolio": false,
-                        "posts": true
-                      },
-                      "git": {
-                        "branch": "main",
-                        "endpoint": null,
-                        "provider": "github",
-                        "repository": "noesya/bordeauxmontaigne-test"
-                      },
-                      "showcase": {
-                        "present": true,
-                        "highlighted": false,
-                        "tags": []
-                      },
-                      "localizations": [
-                        {
-                          "id": "3d91a284-4159-504e-81c5-6b9b32a08dd7",
-                          "name": "Site with github french",
-                          "language": "fr",
-                          "published": true,
-                          "published_at": "2024-11-29T16:07:24.232+01:00",
-                          "social_email": null,
-                          "social_facebook": null,
-                          "social_github": null,
-                          "social_instagram": null,
-                          "social_linkedin": null,
-                          "social_mastodon": null,
-                          "social_peertube": null,
-                          "social_tiktok": null,
-                          "social_vimeo": null,
-                          "social_x": null,
-                          "social_youtube": null,
-                          "created_at": "2024-12-06T11:31:29.395+01:00",
-                          "updated_at": "2024-12-06T11:31:29.395+01:00"
-                        }
-                      ],
-                      "created_at": "2024-12-06T11:31:29.454+01:00",
-                      "updated_at": "2024-12-06T11:31:29.454+01:00"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Successful operation"
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key.",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Unauthorized. Please make sure you provide a valid API key.": {
-                    "value": {
-                      "message": "You are not authorized to access this resource."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Unauthorized. Please make sure you provide a valid API key."
           },
           "404": {
-            "description": "Website not found",
-            "content": {
-              "application/json": {
-                "examples": {
-                  "Website not found": {
-                    "value": {
-                      "message": "The resource you were looking for doesn't exist."
-                    }
-                  }
-                }
-              }
-            }
+            "description": "Website not found"
           }
         }
       }

@@ -3,6 +3,93 @@ require 'swagger_helper'
 RSpec.describe 'Communication::Website::Post' do
   fixtures :all
 
+  COMMUNICATION_WEBSITE_POST_SCHEMA = {
+    type: :object,
+    properties: {
+      post: {
+        type: :object,
+        properties: {
+          migration_identifier: { type: :string, description: 'Unique migration identifier of the post' },
+          full_width: { type: :boolean },
+          localizations: {
+            type: :object,
+            description: "Localizations of the post. The key is the language's ISO 639-1 code.",
+            additionalProperties: {
+              type: :object,
+              properties: {
+                migration_identifier: { type: :string, description: 'Unique migration identifier of the localization' },
+                title: { type: :string },
+                featured_image: { type: :string, description: 'URL of the featured image' },
+                featured_image_alt: { type: :string, description: 'Alternative text of the featured image' },
+                featured_image_credit: { type: :string, description: 'Credit of the featured image' },
+                meta_description: { type: :string },
+                pinned: { type: :boolean },
+                published: { type: :boolean },
+                published_at: { type: :string, format: 'date-time' },
+                slug: { type: :string },
+                subtitle: { type: :string },
+                summary: { type: :string },
+                text: { type: :string },
+                blocks: {
+                  type: :array,
+                  items: {
+                    type: :object,
+                    properties: {
+                      migration_identifier: { type: :string },
+                      template_kind: { type: :string, description: "Template kind of the blocks. See /communication/blocks/templates for possible values." },
+                      title: { type: :string },
+                      position: { type: :integer },
+                      published: { type: :boolean, default: true },
+                      html_class: { type: :string, description: "For advanced use. Add an HTML class for custom purposes." },
+                      data: {
+                        type: :object,
+                        description: "Data of the block. The structure depends on the template kind.",
+                        additionalProperties: true
+                      }
+                    }
+                  }
+                }
+              },
+              required: [:migration_identifier, :title]
+            },
+            example: {
+              fr: {
+                migration_identifier: "string",
+                title: "string",
+                featured_image: "string",
+                featured_image_alt: "string",
+                featured_image_credit: "string",
+                meta_description: "string",
+                pinned: true,
+                published: true,
+                published_at: Time.zone.now,
+                slug: "string",
+                subtitle: "string",
+                summary: "string",
+                text: "string",
+                blocks: [
+                  {
+                    migration_identifier: "string",
+                    template_kind: "string",
+                    title: "string",
+                    position: 1,
+                    published: true,
+                    html_class: "string",
+                    data: {
+                      key: "value"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        required: [:migration_identifier, :localizations]
+      }
+    },
+    required: [:post]
+  }
+
   path '/communication/websites/{website_id}/posts' do
     get "Lists a website's posts" do
       tags 'Communication::Website::Post'
@@ -35,53 +122,15 @@ RSpec.describe 'Communication::Website::Post' do
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
 
-      parameter name: :communication_website_post, in: :body, type: :object, schema: {
-        type: :object,
-        properties: {
-          post: {
-            type: :object,
-            properties: {
-              migration_identifier: { type: :string, description: 'Unique migration identifier of the post' },
-              full_width: { type: :boolean },
-              localizations_attributes: {
-                type: :array,
-                items: {
-                  type: :object,
-                  properties: {
-                    migration_identifier: { type: :string, description: 'Unique migration identifier of the localization' },
-                    language: { type: :string, description: 'ISO 639-1 code of the language', example: 'fr' },
-                    title: { type: :string },
-                    featured_image: { type: :string, description: 'URL of the featured image' },
-                    featured_image_alt: { type: :string, description: 'Alternative text of the featured image' },
-                    featured_image_credit: { type: :string, description: 'Credit of the featured image' },
-                    # TODO blocks
-                    meta_description: { type: :string },
-                    pinned: { type: :boolean },
-                    published: { type: :boolean },
-                    published_at: { type: :string, format: 'date-time' },
-                    slug: { type: :string },
-                    subtitle: { type: :string },
-                    summary: { type: :string },
-                    text: { type: :string }
-                  },
-                  required: [:migration_identifier, :language, :title]
-                }
-              }
-            },
-            required: [:migration_identifier, :localizations_attributes]
-          }
-        },
-        required: [:post]
-      }
+      parameter name: :communication_website_post, in: :body, type: :object, schema: COMMUNICATION_WEBSITE_POST_SCHEMA
       let(:communication_website_post) {
         {
           post: {
             migration_identifier: 'post-from-api-1',
             full_width: false,
-            localizations_attributes: [
-              {
+            localizations: {
+              fr: {
                 migration_identifier: 'post-from-api-1-fr',
-                language: 'fr',
                 title: 'Ma nouvelle actualité',
                 meta_description: 'Une nouvelle actualité depuis l\'API',
                 featured_image: 'https://images.unsplash.com/photo-1703923633616-254e78f6e9df?q=80&w=2070&auto=format&fit=crop',
@@ -94,7 +143,7 @@ RSpec.describe 'Communication::Website::Post' do
                 subtitle: 'Une nouvelle actualité',
                 summary: 'Ceci est une nouvelle actualité créée depuis l\'API.'
               }
-            ]
+            }
           }
         }
       }
@@ -113,10 +162,9 @@ RSpec.describe 'Communication::Website::Post' do
           {
             post: {
               full_width: false,
-              localizations_attributes: [
-                {
+              localizations: {
+                fr: {
                   migration_identifier: 'post-from-api-1-fr',
-                  language: 'fr',
                   title: 'Ma nouvelle actualité',
                   meta_description: 'Une nouvelle actualité depuis l\'API',
                   pinned: false,
@@ -126,7 +174,7 @@ RSpec.describe 'Communication::Website::Post' do
                   subtitle: 'Une nouvelle actualité',
                   summary: 'Ceci est une nouvelle actualité créée depuis l\'API.'
                 }
-              ]
+              }
             }
           }
         }
@@ -205,44 +253,7 @@ RSpec.describe 'Communication::Website::Post' do
       parameter name: :id, in: :path, type: :string, description: 'Post identifier'
       let(:id) { communication_website_posts(:test_post).id }
 
-      parameter name: :communication_website_post, in: :body, type: :object, schema: {
-        type: :object,
-        properties: {
-          post: {
-            type: :object,
-            properties: {
-              migration_identifier: { type: :string, description: 'Unique migration identifier of the post' },
-              full_width: { type: :boolean },
-              localizations_attributes: {
-                type: :array,
-                items: {
-                  type: :object,
-                  properties: {
-                    migration_identifier: { type: :string, description: 'Unique migration identifier of the localization' },
-                    language: { type: :string, description: 'ISO 639-1 code of the language', example: 'fr' },
-                    title: { type: :string },
-                    featured_image: { type: :string, description: 'URL of the featured image' },
-                    featured_image_alt: { type: :string, description: 'Alternative text of the featured image' },
-                    featured_image_credit: { type: :string, description: 'Credit of the featured image' },
-                    # TODO blocks
-                    meta_description: { type: :string },
-                    pinned: { type: :boolean },
-                    published: { type: :boolean },
-                    published_at: { type: :string, format: 'date-time' },
-                    slug: { type: :string },
-                    subtitle: { type: :string },
-                    summary: { type: :string },
-                    text: { type: :string }
-                  },
-                  required: [:migration_identifier, :language, :title]
-                }
-              }
-            },
-            required: [:migration_identifier, :localizations_attributes]
-          }
-        },
-        required: [:post]
-      }
+      parameter name: :communication_website_post, in: :body, type: :object, schema: COMMUNICATION_WEBSITE_POST_SCHEMA
       let(:communication_website_post) {
         test_post = communication_website_posts(:test_post)
         test_post_l10n = communication_website_post_localizations(:test_post_fr)
@@ -250,10 +261,9 @@ RSpec.describe 'Communication::Website::Post' do
           post: {
             migration_identifier: test_post.migration_identifier,
             full_width: test_post.full_width,
-            localizations_attributes: [
-              {
+            localizations: {
+              test_post_l10n.language.iso_code => {
                 migration_identifier: test_post_l10n.migration_identifier,
-                language: test_post_l10n.language.iso_code,
                 title: "Mon nouveau titre",
                 meta_description: test_post_l10n.meta_description,
                 pinned: test_post_l10n.pinned,
@@ -263,7 +273,7 @@ RSpec.describe 'Communication::Website::Post' do
                 subtitle: test_post_l10n.subtitle,
                 summary: test_post_l10n.summary
               }
-            ]
+            }
           }
         }
       }
@@ -281,10 +291,9 @@ RSpec.describe 'Communication::Website::Post' do
           {
             post: {
               full_width: test_post.full_width,
-              localizations_attributes: [
-                {
+              localizations: {
+                test_post_l10n.language.iso_code => {
                   migration_identifier: test_post_l10n.migration_identifier,
-                  language: test_post_l10n.language.iso_code,
                   title: test_post_l10n.title,
                   meta_description: test_post_l10n.meta_description,
                   pinned: test_post_l10n.pinned,
@@ -294,7 +303,7 @@ RSpec.describe 'Communication::Website::Post' do
                   subtitle: test_post_l10n.subtitle,
                   summary: test_post_l10n.summary
                 }
-              ]
+              }
             }
           }
         }
@@ -324,10 +333,9 @@ RSpec.describe 'Communication::Website::Post' do
             post: {
               migration_identifier: test_post.migration_identifier,
               full_width: test_post.full_width,
-              localizations_attributes: [
-                {
+              localizations: {
+                test_post_l10n.language.iso_code => {
                   migration_identifier: test_post_l10n.migration_identifier,
-                  language: test_post_l10n.language.iso_code,
                   title: nil,
                   meta_description: test_post_l10n.meta_description,
                   pinned: test_post_l10n.pinned,
@@ -337,7 +345,7 @@ RSpec.describe 'Communication::Website::Post' do
                   subtitle: test_post_l10n.subtitle,
                   summary: test_post_l10n.summary
                 }
-              ]
+              }
             }
           }
         }

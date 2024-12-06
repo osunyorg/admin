@@ -59,7 +59,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
     permitted_params = params.require(:post)
                         .permit(
                           :migration_identifier, :full_width,
-                          localizations_attributes: [
+                          localizations: [
                             :migration_identifier, :language, :title, :meta_description,
                             :featured_image, :featured_image_alt, :featured_image_credit,
                             :pinned, :published, :published_at, :slug, :subtitle, :summary, :_destroy
@@ -68,15 +68,15 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
                           university_id: current_university.id,
                           communication_website_id: website.id
                         )
-    permitted_params[:localizations_attributes].each do |localization_attributes|
-      set_language_id_to_l10n_attributes(localization_attributes)
-      post_l10n = @post.localizations.find_by(
-        migration_identifier: localization_attributes[:migration_identifier],
-        language_id: localization_attributes[:language_id]
-      ) if @post.persisted?
-      localization_attributes[:id] = post_l10n.id if post_l10n.present?
-      set_featured_image_to_l10n_attributes(localization_attributes, l10n: post_l10n)
-    end
+    # permitted_params[:localizations_attributes].each do |localization_attributes|
+    #   set_language_id_to_l10n_attributes(localization_attributes)
+    #   post_l10n = @post.localizations.find_by(
+    #     migration_identifier: localization_attributes[:migration_identifier],
+    #     language_id: localization_attributes[:language_id]
+    #   ) if @post.persisted?
+    #   localization_attributes[:id] = post_l10n.id if post_l10n.present?
+    #   set_featured_image_to_l10n_attributes(localization_attributes, l10n: post_l10n)
+    # end
     permitted_params
   end
 
