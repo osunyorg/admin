@@ -36,596 +36,179 @@
           "id": {
             "type": "string"
           },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "deuxfleurs": {
+            "type": "object",
+            "properties": {
+              "hosting": {
+                "type": "boolean"
+              },
+              "identifier": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "features": {
+            "type": "object",
+            "properties": {
+              "agenda": {
+                "type": "boolean"
+              },
+              "portfolio": {
+                "type": "boolean"
+              },
+              "posts": {
+                "type": "boolean"
+              }
+            }
+          },
+          "git": {
+            "type": "object",
+            "properties": {
+              "branch": {
+                "type": "string",
+                "nullable": true
+              },
+              "endpoint": {
+                "type": "string",
+                "nullable": true
+              },
+              "provider": {
+                "type": "string",
+                "nullable": true
+              },
+              "repository": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "showcase": {
+            "type": "object",
+            "properties": {
+              "present": {
+                "type": "boolean"
+              },
+              "highlighted": {
+                "type": "boolean"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "slug": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/communication_website_localization"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "communication_website_localization": {
+        "type": "object",
+        "title": "Communication::Website::Localization",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "published": {
+            "type": "boolean"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "social_email": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_facebook": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_github": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_instagram": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_linkedin": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_mastodon": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_peertube": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_tiktok": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_vimeo": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_x": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_youtube": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       }
     }
   },
   "paths": {
-    "/communication/blocks/templates": {
-      "get": {
-        "summary": "Lists available block templates",
-        "tags": [
-          "Communication::Block::Template"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "category",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "basic",
-                "storytelling",
-                "references",
-                "utilities"
-              ]
-            },
-            "required": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Storytelling templates"
-          },
-          "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
-          }
-        }
-      }
-    },
-    "/communication/blocks/templates/{id}": {
-      "get": {
-        "summary": "Shows a block template definition",
-        "tags": [
-          "Communication::Block::Template"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Template identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Files"
-          },
-          "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
-          },
-          "404": {
-            "description": "Template not found"
-          }
-        }
-      }
-    },
-    "/communication/websites/{website_id}/posts": {
-      "get": {
-        "summary": "Lists a website's posts",
-        "tags": [
-          "Communication::Website::Post"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "website_id",
-            "in": "path",
-            "description": "Website identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation"
-          },
-          "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
-          },
-          "404": {
-            "description": "Website not found"
-          }
-        }
-      },
-      "post": {
-        "summary": "Creates a post",
-        "tags": [
-          "Communication::Website::Post"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "website_id",
-            "in": "path",
-            "description": "Website identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Successful creation"
-          },
-          "400": {
-            "description": "Missing migration identifier."
-          },
-          "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
-          },
-          "404": {
-            "description": "Website not found"
-          },
-          "422": {
-            "description": "Invalid parameters"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "post": {
-                    "type": "object",
-                    "properties": {
-                      "migration_identifier": {
-                        "type": "string",
-                        "description": "Unique migration identifier of the post"
-                      },
-                      "full_width": {
-                        "type": "boolean"
-                      },
-                      "localizations": {
-                        "type": "object",
-                        "description": "Localizations of the post. The key is the language's ISO 639-1 code.",
-                        "additionalProperties": {
-                          "type": "object",
-                          "properties": {
-                            "migration_identifier": {
-                              "type": "string",
-                              "description": "Unique migration identifier of the localization"
-                            },
-                            "title": {
-                              "type": "string"
-                            },
-                            "featured_image": {
-                              "type": "string",
-                              "description": "URL of the featured image"
-                            },
-                            "featured_image_alt": {
-                              "type": "string",
-                              "description": "Alternative text of the featured image"
-                            },
-                            "featured_image_credit": {
-                              "type": "string",
-                              "description": "Credit of the featured image"
-                            },
-                            "meta_description": {
-                              "type": "string"
-                            },
-                            "pinned": {
-                              "type": "boolean"
-                            },
-                            "published": {
-                              "type": "boolean"
-                            },
-                            "published_at": {
-                              "type": "string",
-                              "format": "date-time"
-                            },
-                            "slug": {
-                              "type": "string"
-                            },
-                            "subtitle": {
-                              "type": "string"
-                            },
-                            "summary": {
-                              "type": "string"
-                            },
-                            "text": {
-                              "type": "string"
-                            },
-                            "blocks": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "migration_identifier": {
-                                    "type": "string"
-                                  },
-                                  "template_kind": {
-                                    "type": "string",
-                                    "description": "Template kind of the blocks. See /communication/blocks/templates for possible values."
-                                  },
-                                  "title": {
-                                    "type": "string"
-                                  },
-                                  "position": {
-                                    "type": "integer"
-                                  },
-                                  "published": {
-                                    "type": "boolean",
-                                    "default": true
-                                  },
-                                  "html_class": {
-                                    "type": "string",
-                                    "description": "For advanced use. Add an HTML class for custom purposes."
-                                  },
-                                  "data": {
-                                    "type": "object",
-                                    "description": "Data of the block. The structure depends on the template kind.",
-                                    "additionalProperties": true
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "required": [
-                            "migration_identifier",
-                            "title"
-                          ]
-                        },
-                        "example": {
-                          "fr": {
-                            "migration_identifier": "string",
-                            "title": "string",
-                            "featured_image": "string",
-                            "featured_image_alt": "string",
-                            "featured_image_credit": "string",
-                            "meta_description": "string",
-                            "pinned": true,
-                            "published": true,
-                            "published_at": "2024-12-06 14:12:25 +0100",
-                            "slug": "string",
-                            "subtitle": "string",
-                            "summary": "string",
-                            "text": "string",
-                            "blocks": [
-                              {
-                                "migration_identifier": "string",
-                                "template_kind": "string",
-                                "title": "string",
-                                "position": 1,
-                                "published": true,
-                                "html_class": "string",
-                                "data": {
-                                  "key": "value"
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "migration_identifier",
-                      "localizations"
-                    ]
-                  }
-                },
-                "required": [
-                  "post"
-                ]
-              }
-            }
-          }
-        }
-      }
-    },
-    "/communication/websites/{website_id}/posts/{id}": {
-      "get": {
-        "summary": "Shows a post",
-        "tags": [
-          "Communication::Website::Post"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "website_id",
-            "in": "path",
-            "description": "Website identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Post identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation"
-          },
-          "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
-          },
-          "404": {
-            "description": "Post not found"
-          }
-        }
-      },
-      "patch": {
-        "summary": "Updates a post",
-        "tags": [
-          "Communication::Website::Post"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "website_id",
-            "in": "path",
-            "description": "Website identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Post identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful update"
-          },
-          "400": {
-            "description": "Missing migration identifier."
-          },
-          "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
-          },
-          "404": {
-            "description": "Post not found"
-          },
-          "422": {
-            "description": "Invalid parameters"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "post": {
-                    "type": "object",
-                    "properties": {
-                      "migration_identifier": {
-                        "type": "string",
-                        "description": "Unique migration identifier of the post"
-                      },
-                      "full_width": {
-                        "type": "boolean"
-                      },
-                      "localizations": {
-                        "type": "object",
-                        "description": "Localizations of the post. The key is the language's ISO 639-1 code.",
-                        "additionalProperties": {
-                          "type": "object",
-                          "properties": {
-                            "migration_identifier": {
-                              "type": "string",
-                              "description": "Unique migration identifier of the localization"
-                            },
-                            "title": {
-                              "type": "string"
-                            },
-                            "featured_image": {
-                              "type": "string",
-                              "description": "URL of the featured image"
-                            },
-                            "featured_image_alt": {
-                              "type": "string",
-                              "description": "Alternative text of the featured image"
-                            },
-                            "featured_image_credit": {
-                              "type": "string",
-                              "description": "Credit of the featured image"
-                            },
-                            "meta_description": {
-                              "type": "string"
-                            },
-                            "pinned": {
-                              "type": "boolean"
-                            },
-                            "published": {
-                              "type": "boolean"
-                            },
-                            "published_at": {
-                              "type": "string",
-                              "format": "date-time"
-                            },
-                            "slug": {
-                              "type": "string"
-                            },
-                            "subtitle": {
-                              "type": "string"
-                            },
-                            "summary": {
-                              "type": "string"
-                            },
-                            "text": {
-                              "type": "string"
-                            },
-                            "blocks": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "properties": {
-                                  "migration_identifier": {
-                                    "type": "string"
-                                  },
-                                  "template_kind": {
-                                    "type": "string",
-                                    "description": "Template kind of the blocks. See /communication/blocks/templates for possible values."
-                                  },
-                                  "title": {
-                                    "type": "string"
-                                  },
-                                  "position": {
-                                    "type": "integer"
-                                  },
-                                  "published": {
-                                    "type": "boolean",
-                                    "default": true
-                                  },
-                                  "html_class": {
-                                    "type": "string",
-                                    "description": "For advanced use. Add an HTML class for custom purposes."
-                                  },
-                                  "data": {
-                                    "type": "object",
-                                    "description": "Data of the block. The structure depends on the template kind.",
-                                    "additionalProperties": true
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "required": [
-                            "migration_identifier",
-                            "title"
-                          ]
-                        },
-                        "example": {
-                          "fr": {
-                            "migration_identifier": "string",
-                            "title": "string",
-                            "featured_image": "string",
-                            "featured_image_alt": "string",
-                            "featured_image_credit": "string",
-                            "meta_description": "string",
-                            "pinned": true,
-                            "published": true,
-                            "published_at": "2024-12-06 14:12:25 +0100",
-                            "slug": "string",
-                            "subtitle": "string",
-                            "summary": "string",
-                            "text": "string",
-                            "blocks": [
-                              {
-                                "migration_identifier": "string",
-                                "template_kind": "string",
-                                "title": "string",
-                                "position": 1,
-                                "published": true,
-                                "html_class": "string",
-                                "data": {
-                                  "key": "value"
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      }
-                    },
-                    "required": [
-                      "migration_identifier",
-                      "localizations"
-                    ]
-                  }
-                },
-                "required": [
-                  "post"
-                ]
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Deletes a post",
-        "tags": [
-          "Communication::Website::Post"
-        ],
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "website_id",
-            "in": "path",
-            "description": "Website identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Post identifier",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Successful deletion"
-          },
-          "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
-          },
-          "404": {
-            "description": "Post not found"
-          }
-        }
-      }
-    },
     "/communication/websites": {
       "get": {
         "summary": "Lists the websites",
@@ -639,10 +222,153 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful operation"
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": [
+                      {
+                        "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
+                        "url": null,
+                        "deuxfleurs": {
+                          "hosting": false,
+                          "identifier": null
+                        },
+                        "features": {
+                          "agenda": true,
+                          "portfolio": false,
+                          "posts": true
+                        },
+                        "git": {
+                          "branch": "main",
+                          "endpoint": null,
+                          "provider": "github",
+                          "repository": "noesya/bordeauxmontaigne-test"
+                        },
+                        "showcase": {
+                          "present": true,
+                          "highlighted": false,
+                          "tags": []
+                        },
+                        "localizations": [
+                          {
+                            "id": "3d91a284-4159-504e-81c5-6b9b32a08dd7",
+                            "name": "Site with github french",
+                            "language": "fr",
+                            "published": true,
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "social_email": null,
+                            "social_facebook": null,
+                            "social_github": null,
+                            "social_instagram": null,
+                            "social_linkedin": null,
+                            "social_mastodon": null,
+                            "social_peertube": null,
+                            "social_tiktok": null,
+                            "social_vimeo": null,
+                            "social_x": null,
+                            "social_youtube": null,
+                            "created_at": "2024-12-06T15:43:57.130+01:00",
+                            "updated_at": "2024-12-06T15:43:57.130+01:00"
+                          }
+                        ],
+                        "created_at": "2024-12-06T15:43:57.173+01:00",
+                        "updated_at": "2024-12-06T15:43:57.173+01:00"
+                      },
+                      {
+                        "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
+                        "url": null,
+                        "deuxfleurs": {
+                          "hosting": false,
+                          "identifier": null
+                        },
+                        "features": {
+                          "agenda": false,
+                          "portfolio": false,
+                          "posts": true
+                        },
+                        "git": {
+                          "branch": "main",
+                          "endpoint": null,
+                          "provider": "gitlab",
+                          "repository": "33848340"
+                        },
+                        "showcase": {
+                          "present": true,
+                          "highlighted": false,
+                          "tags": []
+                        },
+                        "localizations": [
+                          {
+                            "id": "b854339d-f776-59c7-af65-e12ee2951daa",
+                            "name": "Site with gitlab french",
+                            "language": "fr",
+                            "published": true,
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "social_email": null,
+                            "social_facebook": null,
+                            "social_github": null,
+                            "social_instagram": null,
+                            "social_linkedin": null,
+                            "social_mastodon": null,
+                            "social_peertube": null,
+                            "social_tiktok": null,
+                            "social_vimeo": null,
+                            "social_x": null,
+                            "social_youtube": null,
+                            "created_at": "2024-12-06T15:43:57.130+01:00",
+                            "updated_at": "2024-12-06T15:43:57.130+01:00"
+                          },
+                          {
+                            "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
+                            "name": "Site with gitlab english",
+                            "language": "en",
+                            "published": true,
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "social_email": null,
+                            "social_facebook": null,
+                            "social_github": null,
+                            "social_instagram": null,
+                            "social_linkedin": null,
+                            "social_mastodon": null,
+                            "social_peertube": null,
+                            "social_tiktok": null,
+                            "social_vimeo": null,
+                            "social_x": null,
+                            "social_youtube": null,
+                            "created_at": "2024-12-06T15:43:57.130+01:00",
+                            "updated_at": "2024-12-06T15:43:57.130+01:00"
+                          }
+                        ],
+                        "created_at": "2024-12-06T15:43:57.173+01:00",
+                        "updated_at": "2024-12-06T15:43:57.173+01:00"
+                      }
+                    ]
+                  }
+                },
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/communication_website"
+                  }
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -671,13 +397,94 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful operation"
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": {
+                      "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
+                      "url": null,
+                      "deuxfleurs": {
+                        "hosting": false,
+                        "identifier": null
+                      },
+                      "features": {
+                        "agenda": true,
+                        "portfolio": false,
+                        "posts": true
+                      },
+                      "git": {
+                        "branch": "main",
+                        "endpoint": null,
+                        "provider": "github",
+                        "repository": "noesya/bordeauxmontaigne-test"
+                      },
+                      "showcase": {
+                        "present": true,
+                        "highlighted": false,
+                        "tags": []
+                      },
+                      "localizations": [
+                        {
+                          "id": "3d91a284-4159-504e-81c5-6b9b32a08dd7",
+                          "name": "Site with github french",
+                          "language": "fr",
+                          "published": true,
+                          "published_at": "2024-11-29T16:07:24.232+01:00",
+                          "social_email": null,
+                          "social_facebook": null,
+                          "social_github": null,
+                          "social_instagram": null,
+                          "social_linkedin": null,
+                          "social_mastodon": null,
+                          "social_peertube": null,
+                          "social_tiktok": null,
+                          "social_vimeo": null,
+                          "social_x": null,
+                          "social_youtube": null,
+                          "created_at": "2024-12-06T15:43:57.130+01:00",
+                          "updated_at": "2024-12-06T15:43:57.130+01:00"
+                        }
+                      ],
+                      "created_at": "2024-12-06T15:43:57.173+01:00",
+                      "updated_at": "2024-12-06T15:43:57.173+01:00"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/communication_website"
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Website not found"
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

@@ -10,6 +10,7 @@ RSpec.describe 'Communication::Website' do
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
       response '200', 'Successful operation' do
+        schema type: :array, items: { '$ref' => '#/components/schemas/communication_website' }
         run_test!
       end
 
@@ -30,6 +31,7 @@ RSpec.describe 'Communication::Website' do
       let(:id) { communication_websites(:website_with_github).id }
 
       response '200', 'Successful operation' do
+        schema '$ref' => '#/components/schemas/communication_website'
         run_test!
       end
 
