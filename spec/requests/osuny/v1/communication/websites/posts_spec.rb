@@ -3,93 +3,6 @@ require 'swagger_helper'
 RSpec.describe 'Communication::Website::Post' do
   fixtures :all
 
-  # COMMUNICATION_WEBSITE_POST_SCHEMA = {
-  #   type: :object,
-  #   properties: {
-  #     post: {
-  #       type: :object,
-  #       properties: {
-  #         migration_identifier: { type: :string, description: 'Unique migration identifier of the post' },
-  #         full_width: { type: :boolean },
-  #         localizations: {
-  #           type: :object,
-  #           description: "Localizations of the post. The key is the language's ISO 639-1 code.",
-  #           additionalProperties: {
-  #             type: :object,
-  #             properties: {
-  #               migration_identifier: { type: :string, description: 'Unique migration identifier of the localization' },
-  #               title: { type: :string },
-  #               featured_image: { type: :string, description: 'URL of the featured image' },
-  #               featured_image_alt: { type: :string, description: 'Alternative text of the featured image' },
-  #               featured_image_credit: { type: :string, description: 'Credit of the featured image' },
-  #               meta_description: { type: :string },
-  #               pinned: { type: :boolean },
-  #               published: { type: :boolean },
-  #               published_at: { type: :string, format: 'date-time' },
-  #               slug: { type: :string },
-  #               subtitle: { type: :string },
-  #               summary: { type: :string },
-  #               text: { type: :string },
-  #               blocks: {
-  #                 type: :array,
-  #                 items: {
-  #                   type: :object,
-  #                   properties: {
-  #                     migration_identifier: { type: :string },
-  #                     template_kind: { type: :string, description: "Template kind of the blocks. See /communication/blocks/templates for possible values." },
-  #                     title: { type: :string },
-  #                     position: { type: :integer },
-  #                     published: { type: :boolean, default: true },
-  #                     html_class: { type: :string, description: "For advanced use. Add an HTML class for custom purposes." },
-  #                     data: {
-  #                       type: :object,
-  #                       description: "Data of the block. The structure depends on the template kind.",
-  #                       additionalProperties: true
-  #                     }
-  #                   }
-  #                 }
-  #               }
-  #             },
-  #             required: [:migration_identifier, :title]
-  #           },
-  #           example: {
-  #             fr: {
-  #               migration_identifier: "string",
-  #               title: "string",
-  #               featured_image: "string",
-  #               featured_image_alt: "string",
-  #               featured_image_credit: "string",
-  #               meta_description: "string",
-  #               pinned: true,
-  #               published: true,
-  #               published_at: Time.zone.now,
-  #               slug: "string",
-  #               subtitle: "string",
-  #               summary: "string",
-  #               text: "string",
-  #               blocks: [
-  #                 {
-  #                   migration_identifier: "string",
-  #                   template_kind: "string",
-  #                   title: "string",
-  #                   position: 1,
-  #                   published: true,
-  #                   html_class: "string",
-  #                   data: {
-  #                     key: "value"
-  #                   }
-  #                 }
-  #               ]
-  #             }
-  #           }
-  #         }
-  #       },
-  #       required: [:migration_identifier, :localizations]
-  #     }
-  #   },
-  #   required: [:post]
-  # }
-
   # path '/communication/websites/{website_id}/posts' do
   #   get "Lists a website's posts" do
   #     tags 'Communication::Website::Post'
@@ -100,6 +13,7 @@ RSpec.describe 'Communication::Website::Post' do
   #     let(:website_id) { communication_websites(:website_with_github).id }
 
   #     response '200', 'Successful operation' do
+  #       schema type: :array, items: { '$ref' => '#/components/schemas/communication_website_post' }
   #       run_test!
   #     end
 
@@ -122,7 +36,15 @@ RSpec.describe 'Communication::Website::Post' do
   #     parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
   #     let(:website_id) { communication_websites(:website_with_github).id }
 
-  #     parameter name: :communication_website_post, in: :body, type: :object, schema: COMMUNICATION_WEBSITE_POST_SCHEMA
+  #     parameter name: :communication_website_post, in: :body, type: :object, schema: {
+  #       type: :object,
+  #       properties: {
+  #         post: {
+  #           '$ref': '#/components/schemas/communication_website_post'
+  #         }
+  #       },
+  #       required: [:post]
+  #     }
   #     let(:communication_website_post) {
   #       {
   #         post: {
@@ -253,7 +175,15 @@ RSpec.describe 'Communication::Website::Post' do
   #     parameter name: :id, in: :path, type: :string, description: 'Post identifier'
   #     let(:id) { communication_website_posts(:test_post).id }
 
-  #     parameter name: :communication_website_post, in: :body, type: :object, schema: COMMUNICATION_WEBSITE_POST_SCHEMA
+  #     parameter name: :communication_website_post, in: :body, type: :object, schema: {
+  #       type: :object,
+  #       properties: {
+  #         post: {
+  #           '$ref': '#/components/schemas/communication_website_post'
+  #         }
+  #       },
+  #       required: [:post]
+  #     }
   #     let(:communication_website_post) {
   #       test_post = communication_website_posts(:test_post)
   #       test_post_l10n = communication_website_post_localizations(:test_post_fr)

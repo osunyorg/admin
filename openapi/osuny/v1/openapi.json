@@ -205,10 +205,245 @@
             "format": "date-time"
           }
         }
+      },
+      "communication_website_post": {
+        "type": "object",
+        "title": "Communication::Website::Post",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "full_width": {
+            "type": "boolean"
+          },
+          "localizations": {
+            "type": "object",
+            "description": "Localizations of the post. The key is the language's ISO 639-1 code.",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/communication_website_post_localization"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "communication_website_post_localization": {
+        "type": "object",
+        "title": "Communication::Website::Post::Localization",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "featured_image_alt": {
+            "type": "string",
+            "description": "Alternative text of the featured image",
+            "nullable": true
+          },
+          "featured_image_credit": {
+            "type": "string",
+            "description": "Credit of the featured image",
+            "nullable": true
+          },
+          "meta_description": {
+            "type": "string",
+            "nullable": true
+          },
+          "pinned": {
+            "type": "boolean"
+          },
+          "published": {
+            "type": "boolean"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "slug": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       }
     }
   },
   "paths": {
+    "/communication/websites/{website_id}/posts": {
+      "get": {
+        "summary": "Lists a website's posts",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": [
+                      {
+                        "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                        "migration_identifier": "test-post-fixture-1",
+                        "full_width": false,
+                        "localizations": [
+                          {
+                            "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                            "migration_identifier": "test-post-fixture-1-fr",
+                            "title": "Test",
+                            "language": "fr",
+                            "meta_description": null,
+                            "pinned": null,
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "test",
+                            "subtitle": null,
+                            "summary": null,
+                            "text": null,
+                            "created_at": "2024-12-06T16:19:25.505+01:00",
+                            "updated_at": "2024-12-06T16:19:25.505+01:00"
+                          }
+                        ],
+                        "created_at": "2024-12-06T16:19:25.518+01:00",
+                        "updated_at": "2024-12-06T16:19:25.518+01:00"
+                      },
+                      {
+                        "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
+                        "migration_identifier": null,
+                        "full_width": false,
+                        "localizations": [
+                          {
+                            "id": "a979b73e-e42b-54de-97d4-df21605e49c0",
+                            "migration_identifier": null,
+                            "title": "Test 2",
+                            "language": "fr",
+                            "meta_description": null,
+                            "pinned": null,
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "test-2",
+                            "subtitle": null,
+                            "summary": null,
+                            "text": null,
+                            "created_at": "2024-12-06T16:19:25.505+01:00",
+                            "updated_at": "2024-12-06T16:19:25.505+01:00"
+                          }
+                        ],
+                        "created_at": "2024-12-06T16:19:25.518+01:00",
+                        "updated_at": "2024-12-06T16:19:25.518+01:00"
+                      },
+                      {
+                        "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
+                        "migration_identifier": null,
+                        "full_width": false,
+                        "localizations": [
+                          {
+                            "id": "e60b21c3-5968-54b2-93da-4a6a33fc85cc",
+                            "migration_identifier": null,
+                            "title": "Test 3",
+                            "language": "fr",
+                            "meta_description": null,
+                            "pinned": null,
+                            "published": false,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "test-3",
+                            "subtitle": null,
+                            "summary": null,
+                            "text": null,
+                            "created_at": "2024-12-06T16:19:25.505+01:00",
+                            "updated_at": "2024-12-06T16:19:25.505+01:00"
+                          }
+                        ],
+                        "created_at": "2024-12-06T16:19:25.518+01:00",
+                        "updated_at": "2024-12-06T16:19:25.518+01:00"
+                      }
+                    ]
+                  }
+                },
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/communication_website_post"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/communication/websites": {
       "get": {
         "summary": "Lists the websites",
@@ -269,12 +504,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-06T15:43:57.130+01:00",
-                            "updated_at": "2024-12-06T15:43:57.130+01:00"
+                            "created_at": "2024-12-06T16:19:25.475+01:00",
+                            "updated_at": "2024-12-06T16:19:25.475+01:00"
                           }
                         ],
-                        "created_at": "2024-12-06T15:43:57.173+01:00",
-                        "updated_at": "2024-12-06T15:43:57.173+01:00"
+                        "created_at": "2024-12-06T16:19:25.520+01:00",
+                        "updated_at": "2024-12-06T16:19:25.520+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -317,8 +552,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-06T15:43:57.130+01:00",
-                            "updated_at": "2024-12-06T15:43:57.130+01:00"
+                            "created_at": "2024-12-06T16:19:25.475+01:00",
+                            "updated_at": "2024-12-06T16:19:25.475+01:00"
                           },
                           {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -337,12 +572,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-06T15:43:57.130+01:00",
-                            "updated_at": "2024-12-06T15:43:57.130+01:00"
+                            "created_at": "2024-12-06T16:19:25.475+01:00",
+                            "updated_at": "2024-12-06T16:19:25.475+01:00"
                           }
                         ],
-                        "created_at": "2024-12-06T15:43:57.173+01:00",
-                        "updated_at": "2024-12-06T15:43:57.173+01:00"
+                        "created_at": "2024-12-06T16:19:25.520+01:00",
+                        "updated_at": "2024-12-06T16:19:25.520+01:00"
                       }
                     ]
                   }
@@ -443,12 +678,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-06T15:43:57.130+01:00",
-                          "updated_at": "2024-12-06T15:43:57.130+01:00"
+                          "created_at": "2024-12-06T16:19:25.475+01:00",
+                          "updated_at": "2024-12-06T16:19:25.475+01:00"
                         }
                       ],
-                      "created_at": "2024-12-06T15:43:57.173+01:00",
-                      "updated_at": "2024-12-06T15:43:57.173+01:00"
+                      "created_at": "2024-12-06T16:19:25.520+01:00",
+                      "updated_at": "2024-12-06T16:19:25.520+01:00"
                     }
                   }
                 },
