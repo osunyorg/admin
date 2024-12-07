@@ -82,10 +82,10 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
         l10n_permitted_params[:language_id] = Language.find_by(iso_code: language_iso_code)&.id
 
         existing_post_l10n = @post.localizations.find_by(
-          migration_identifier: localization_attributes[:migration_identifier],
+          migration_identifier: l10n_permitted_params[:migration_identifier],
           language_id: l10n_permitted_params[:language_id]
         ) if @post.persisted?
-        localization_attributes[:id] = existing_post_l10n.id if existing_post_l10n.present?
+        l10n_permitted_params[:id] = existing_post_l10n.id if existing_post_l10n.present?
 
         set_featured_image_to_l10n_params(l10n_permitted_params, l10n: existing_post_l10n)
 

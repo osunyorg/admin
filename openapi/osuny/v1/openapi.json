@@ -360,12 +360,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-06T17:44:59.017+01:00",
-                            "updated_at": "2024-12-06T17:44:59.017+01:00"
+                            "created_at": "2024-12-07T14:43:46.554+01:00",
+                            "updated_at": "2024-12-07T14:43:46.554+01:00"
                           }
                         },
-                        "created_at": "2024-12-06T17:44:59.031+01:00",
-                        "updated_at": "2024-12-06T17:44:59.031+01:00"
+                        "created_at": "2024-12-07T14:43:46.571+01:00",
+                        "updated_at": "2024-12-07T14:43:46.571+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -390,12 +390,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-06T17:44:59.017+01:00",
-                            "updated_at": "2024-12-06T17:44:59.017+01:00"
+                            "created_at": "2024-12-07T14:43:46.554+01:00",
+                            "updated_at": "2024-12-07T14:43:46.554+01:00"
                           }
                         },
-                        "created_at": "2024-12-06T17:44:59.031+01:00",
-                        "updated_at": "2024-12-06T17:44:59.031+01:00"
+                        "created_at": "2024-12-07T14:43:46.571+01:00",
+                        "updated_at": "2024-12-07T14:43:46.571+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -420,12 +420,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-06T17:44:59.017+01:00",
-                            "updated_at": "2024-12-06T17:44:59.017+01:00"
+                            "created_at": "2024-12-07T14:43:46.554+01:00",
+                            "updated_at": "2024-12-07T14:43:46.554+01:00"
                           }
                         },
-                        "created_at": "2024-12-06T17:44:59.031+01:00",
-                        "updated_at": "2024-12-06T17:44:59.031+01:00"
+                        "created_at": "2024-12-07T14:43:46.571+01:00",
+                        "updated_at": "2024-12-07T14:43:46.571+01:00"
                       }
                     ]
                   }
@@ -498,19 +498,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "99952f2a-b809-419f-a668-2fdd32a96f98",
+                      "id": "b7e5ff4b-ae20-4a22-95bd-0ab0427e26a6",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "ad992dbe-a059-4193-8fec-5ba4dbfb0809",
+                          "id": "139935f0-4022-45ef-b9af-a88b5f07408c",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "b12adb76-b715-49b5-a91b-71e31bbf422f",
+                            "blob_id": "a5f39dff-d9ac-4c08-9c55-776c360c26ba",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJtOGhuOGV6OXkzeXIwam83cHVpeWhodWdvcGNoIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDZUMTc6NDQ6NTkuNzM4WiIsInB1ciI6ImJsb2Jfa2V5In19--43e32f3feadf52214951e804f2095c62ed4559a6/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiI0ZnlqdWdlYWp0b2tyYnk4aHliN2x5YjJ3OGd1IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDdUMTQ6NDM6NDcuMjY1WiIsInB1ciI6ImJsb2Jfa2V5In19--7ca042b449c6ee260ab53bceeb6bf7abdda021f8/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -520,12 +520,79 @@
                           "subtitle": "Une nouvelle actualité",
                           "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
                           "text": null,
-                          "created_at": "2024-12-06T17:44:59.591+01:00",
-                          "updated_at": "2024-12-06T17:44:59.607+01:00"
+                          "created_at": "2024-12-07T14:43:47.136+01:00",
+                          "updated_at": "2024-12-07T14:43:47.153+01:00"
                         }
                       },
-                      "created_at": "2024-12-06T17:44:59.583+01:00",
-                      "updated_at": "2024-12-06T17:44:59.731+01:00"
+                      "created_at": "2024-12-07T14:43:47.128+01:00",
+                      "updated_at": "2024-12-07T14:43:47.258+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.slug": [
+                          "can't be blank",
+                          "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                        ],
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
                     }
                   }
                 }
@@ -613,17 +680,245 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-06T17:44:59.017+01:00",
-                          "updated_at": "2024-12-06T17:44:59.017+01:00"
+                          "created_at": "2024-12-07T14:43:46.554+01:00",
+                          "updated_at": "2024-12-07T14:43:46.554+01:00"
                         }
                       },
-                      "created_at": "2024-12-06T17:44:59.031+01:00",
-                      "updated_at": "2024-12-06T17:44:59.031+01:00"
+                      "created_at": "2024-12-07T14:43:46.571+01:00",
+                      "updated_at": "2024-12-07T14:43:46.571+01:00"
                     }
                   }
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a post",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful update": {
+                    "value": {
+                      "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                      "migration_identifier": "test-post-fixture-1",
+                      "full_width": false,
+                      "localizations": {
+                        "fr": {
+                          "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                          "migration_identifier": "test-post-fixture-1-fr",
+                          "title": "Mon nouveau titre",
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
+                          "meta_description": null,
+                          "pinned": null,
+                          "published": true,
+                          "published_at": "2010-11-28T01:00:00.000+01:00",
+                          "slug": "test",
+                          "subtitle": null,
+                          "summary": null,
+                          "text": null,
+                          "created_at": "2024-12-07T14:43:46.554+01:00",
+                          "updated_at": "2024-12-07T14:43:47.394+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-07T14:43:46.571+01:00",
+                      "updated_at": "2024-12-07T14:43:47.398+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "post": {
+                    "$ref": "#/components/schemas/communication_website_post"
+                  }
+                },
+                "required": [
+                  "post"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a post",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful deletion"
           },
           "401": {
             "description": "Unauthorized. Please make sure you provide a valid API key.",
@@ -720,12 +1015,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-06T17:44:58.988+01:00",
-                            "updated_at": "2024-12-06T17:44:58.988+01:00"
+                            "created_at": "2024-12-07T14:43:46.519+01:00",
+                            "updated_at": "2024-12-07T14:43:46.519+01:00"
                           }
                         },
-                        "created_at": "2024-12-06T17:44:59.033+01:00",
-                        "updated_at": "2024-12-06T17:44:59.033+01:00"
+                        "created_at": "2024-12-07T14:43:46.573+01:00",
+                        "updated_at": "2024-12-07T14:43:46.573+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -767,8 +1062,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-06T17:44:58.988+01:00",
-                            "updated_at": "2024-12-06T17:44:58.988+01:00"
+                            "created_at": "2024-12-07T14:43:46.519+01:00",
+                            "updated_at": "2024-12-07T14:43:46.519+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -786,12 +1081,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-06T17:44:58.988+01:00",
-                            "updated_at": "2024-12-06T17:44:58.988+01:00"
+                            "created_at": "2024-12-07T14:43:46.519+01:00",
+                            "updated_at": "2024-12-07T14:43:46.519+01:00"
                           }
                         },
-                        "created_at": "2024-12-06T17:44:59.033+01:00",
-                        "updated_at": "2024-12-06T17:44:59.033+01:00"
+                        "created_at": "2024-12-07T14:43:46.573+01:00",
+                        "updated_at": "2024-12-07T14:43:46.573+01:00"
                       }
                     ]
                   }
@@ -891,12 +1186,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-06T17:44:58.988+01:00",
-                          "updated_at": "2024-12-06T17:44:58.988+01:00"
+                          "created_at": "2024-12-07T14:43:46.519+01:00",
+                          "updated_at": "2024-12-07T14:43:46.519+01:00"
                         }
                       },
-                      "created_at": "2024-12-06T17:44:59.033+01:00",
-                      "updated_at": "2024-12-06T17:44:59.033+01:00"
+                      "created_at": "2024-12-07T14:43:46.573+01:00",
+                      "updated_at": "2024-12-07T14:43:46.573+01:00"
                     }
                   }
                 },
