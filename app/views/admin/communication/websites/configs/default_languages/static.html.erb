@@ -11,27 +11,7 @@
   languageCode: <%= language.iso_code %>
   languageName: <%= language.name %>
   params:
-    social:
-      <%-
-      [
-      :email,
-      :mastodon,
-      :peertube,
-      :x,
-      :github,
-      :linkedin,
-      :youtube,
-      :vimeo,
-      :instagram,
-      :facebook,
-      :tiktok
-      ].each do |social_element|
-      value = l10n.public_send "social_#{social_element}"
-      next if value.blank?
-      -%>
-      <%= social_element %>: >-
-        <%= value %>
-      <%- end -%>
+<%= render 'admin/application/contact_details/static', about: l10n, depth: 2 %>
   permalinks:
 <% Communication::Website::Permalink.config_in_website(@website, language).each do |key, value| %>
     <%= key %>: <%= value %>

@@ -201,15 +201,9 @@ fr:
         sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
         sso_button_label: "Par défaut : Se connecter en SSO"
       university_organization:
-        address: 'Ce champ est utilisé pour géolocaliser. Ex: 3 rue de la Poste'
-        address_name: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
-        address_additional: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
-        city: 'Ce champ est utilisé pour géolocaliser. Ex: Cenon'
-        country: 'Ce champ est utilisé pour géolocaliser. Ex: France'
         description: Si ce champ est vide le début du texte principal sera utilisé.
         logo: Ce logo doit contraster sur un fond clair (blanc ou gris pâle)
         logo_on_dark_background: Ce logo doit contraster sur un fond sombre (noir ou gris sombre).
-        zipcode: 'Ce champ est utilisé pour géolocaliser. Ex: 33150'
       university_person:
         description: Si ce champ est vide la "description courte" sera utilisée. Si elle est également vide le début du texte principal sera utilisé.
         habilitation: "Détient une Habilitation à Diriger des Recherches (HDR)."

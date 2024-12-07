@@ -15,7 +15,7 @@ module University::PeopleHelper
     hint_text = t("simple_form.hints.university_person.personal_data_visibility")
     color_class_name =  case visibility_value
                         when 'public'
-                          'bg-primary'
+                          'bg-success'
                         when 'restricted'
                           'bg-warning'
                         else

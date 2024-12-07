@@ -9,35 +9,15 @@
 
     <div class="row">
       <div class="col-lg-4">
+        <%= lf.input :name %>
         <% if @website.localizations.many? %>
           <%= lf.input  :published,
                         wrapper: :custom_boolean_switch,
                         disabled: @l10n.published? && @website.active_languages.one? %>
         <% end %>
-        <%= lf.input :name %>
       </div>
       <div class="col-lg-8">
-        <%= osuny_panel Communication::Website.human_attribute_name('social') do %>
-          <div class="row">
-            <div class="col-lg-6">
-              <p><%= t('admin.communication.website.social.free') %></p>
-              <%= lf.input :social_email %>
-              <%= lf.input :social_mastodon %>
-              <%= lf.input :social_peertube %>
-            </div>
-            <div class="col-lg-6">
-              <p><%= t('admin.communication.website.social.private') %></p>
-              <%= lf.input :social_x %>
-              <%= lf.input :social_github %>
-              <%= lf.input :social_linkedin %>
-              <%= lf.input :social_youtube %>
-              <%= lf.input :social_vimeo %>
-              <%= lf.input :social_instagram %>
-              <%= lf.input :social_facebook %>
-              <%= lf.input :social_tiktok %>
-            </div>
-          </div>
-        <% end %>
+        <%= render 'admin/application/contact_details/edit', f: f, lf: lf, about: @website, l10n: @l10n %>
       </div>
       <div class="col-lg-6 col-xxl-4">
       </div>

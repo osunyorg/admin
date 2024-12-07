@@ -112,6 +112,7 @@ class ContactDetailsTest < ActiveSupport::TestCase
     batch_test :phone, '+33 5 05 05 05 05', 'tel:+33505050505', [
         '+33 5 05 05 05 05',
         '+33.5.05.05.05.05',
+        '+33-5-05-05-05-05',
       ]
   end
 

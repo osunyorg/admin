@@ -1,0 +1,7 @@
+<% if l10n.respond_to?(:url) %>
+  <div class="col-md-6">
+    <%= lf.input  :url,
+                  label: t('contact_details.websites.website.label'),
+                  hint: t('contact_details.websites.website.hint') %>
+  </div>
+<% end %>

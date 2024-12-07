@@ -11,28 +11,10 @@ city: "<%= prepare_text_for_static school.city %>"
 country: "<%= prepare_text_for_static school.country_common_name %>"
 phone: "<%= prepare_text_for_static school.phone %>"
 url: "<%= prepare_text_for_static @l10n.url %>"
-contact_details:
-<%= render 'admin/application/static/postal_address', about: school, l10n: @l10n, language: language %>
-<%
-if @l10n.url.present?
-  detail = ContactDetails::Website.new @l10n.url
-  %>
-  url:
-    label: >-
-      <%= detail.label %>
-    value: >-
-      <%= detail.value %>
-<% end %>
-<%
-if school.phone.present?
-  detail = ContactDetails::Phone.new school.phone
-  %>
-  phone:
-    label: >-
-      <%= detail.label %>
-    value: >-
-      <%= detail.value %>
-<% end %>
+<%= render 'admin/application/contact_details/static',
+            about: school,
+            l10n: @l10n,
+            language: language %>
 <% if @l10n.logo.attached? %>
 logo:
   id: "<%= @l10n.logo.blob.id %>"

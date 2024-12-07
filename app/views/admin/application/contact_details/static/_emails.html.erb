@@ -1,0 +1,48 @@
+<%
+depth ||= 0
+indentation = '  ' * depth
+present = false
+# about.emails
+emails = []
+if about.respond_to?(:emails)
+  about.emails.each do |email|
+    detail = ContactDetails::Email.new email
+    if detail.present?
+      present = true
+      emails << detail
+    end
+  end
+end
+# about.email
+# If the publicity level is defined, we must respect it
+publicity = 'email_is_public?'
+should_show = about.respond_to?(publicity) ? about.public_send(publicity) : true
+if should_show
+  email = ContactDetails.find_social(:email, about, about)
+  detail = ContactDetails::Email.new email
+  if detail.present?
+    present = true
+  end
+end
+%>
+<% if present %>
+<%= indentation %>emails:
+<% if emails.any? %>
+<%= indentation %>  list:
+<% emails.each do |detail| %>
+<%= indentation %>    - label: >-
+<%= indentation %>        <%= detail.label %>
+<%= indentation %>      value: >-
+<%= indentation %>        <%= detail.value %>
+<% 
+  end
+end 
+%>
+<% if detail.present? %><%= 
+    render 'admin/application/contact_details/static/single',
+            attribute: :email,
+            detail: detail,
+            depth: depth+1 %><%
+  end
+end
+%>

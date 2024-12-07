@@ -1,0 +1,17 @@
+<%
+ContactDetails::SOCIAL_NETWORKS.each do |attribute|
+  kind = "ContactDetails::#{attribute.to_s.camelize}".constantize
+  data = ContactDetails.find_social(attribute, about, l10n)
+  next if data.blank?
+  label = t("contact_details.social_networks.#{attribute}.label")
+  detail = kind.new data
+  %>
+  <div class="col-md-6">
+    <%= render 'admin/application/contact_details/show/single',
+                about: about,
+                attribute: attribute,
+                label: label,
+                detail: detail,
+                with_link: true %>
+  </div>
+<% end %>

@@ -4,17 +4,12 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
-    <div class="row">
-      <div class="col-lg-6">
+    <div class="row mb-5">
+      <div class="col-lg-3">
         <%= lf.input :name %>
       </div>
-      <div class="col-lg-6">
-        <%= lf.input :address_name %>
-        <%= f.input :address %>
-        <%= lf.input :address_additional %>
-        <%= f.input :zipcode %>
-        <%= f.input :city %>
-        <%= f.input :country, input_html: { class: 'form-select' } %>
+      <div class="offset-lg-1 col-lg-8">
+        <%= render 'admin/application/contact_details/edit', f: f, lf: lf, about: laboratory, l10n: l10n %>
       </div>
     </div>
     <% content_for :action_bar_right do %>

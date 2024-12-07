@@ -1,35 +1,4 @@
-<address itemscope itemtype="https://schema.org/Organization" class="mb-0">
-  <% if block.template.name.present? %>
-    <b><%= strip_tags block_component_snippet block, :name %></b><br>
-  <% end %>
-  <% if block.template.information.present? %>
-    <%= strip_tags block_component_snippet block, :information %><br>
-  <% end %>
-  <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-    <span itemprop="streetAddress">
-      <%= strip_tags block_component_snippet block, :address %>
-    </span>
-    <span itemprop="addressLocality">
-      <%= strip_tags block_component_snippet block, :city %>
-    </span><br>
-    <span itemprop="postalCode">
-      <%= strip_tags block_component_snippet block, :zipcode %>
-    </span>
-    <span itemprop="addressCountry">
-      <%= strip_tags block_component_snippet block, :country %>
-    </span>
-  </span>
-  <div>
-    <% block.template.phone_numbers.each do |phone_number| %>
-      <%= phone_number %>
-    <% end %>
-  </div>
-  <div>
-    <% block.template.emails.each do |email| %>
-      <%= email %>
-    <% end %>
-  </div>
-</address>
+<%= render 'admin/application/contact_details/show', about: block.template %>
 <ul class="list-unstyled">
   <% block.template.elements.each do |element| %>
     <li>

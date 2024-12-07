@@ -3,37 +3,22 @@
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <%= lf.hidden_field :language_id, value: current_language.id %>
-    <div class="row">
-      <div class="col-xxl-6">
-        <%= osuny_panel t('metadata') do %>
-          <%= lf.input :name %>
-          <%= f.input :phone %>
-          <%= f.input :address %>
-          <div class="row pure__row--small">
-            <div class="col-md-4">
-              <%= f.input :zipcode %>
-            </div>
-            <div class="col-md-8">
-              <%= f.input :city %>
-            </div>
-          </div>
-          <%= f.input :country, input_html: { class: 'form-select' } %>
-          <%= lf.input :url %>
-          <%= lf.input :logo,
+    <div class="row mb-5">
+      <div class="col-lg-3">
+        <%= lf.input :name %>
+        <%= lf.input  :logo,
                       as: :single_deletable_file,
                       input_html: { accept: default_images_formats_accepted },
                       preview: 200 %>
-        <% end %>
       </div>
-      <div class="col-xxl-6">
-        <%= osuny_panel Education::Program.model_name.human(count: 2) do %>
-          <%= f.association :programs,
-                            as: :check_boxes,
-                            collection: osuny_collection_tree(
-                              current_university.education_programs.root,
-                              localized: true
-                            ) %>
-        <% end %>
+      <div class="offset-lg-1 col-lg-8">
+        <%= render 'admin/application/contact_details/edit', f: f, lf: lf, about: school, l10n: l10n %>
+        <%= f.association :programs,
+                          as: :check_boxes,
+                          collection: osuny_collection_tree(
+                            current_university.education_programs.root,
+                            localized: true
+                          ) %>
       </div>
     </div>
     <% content_for :action_bar_right do %>

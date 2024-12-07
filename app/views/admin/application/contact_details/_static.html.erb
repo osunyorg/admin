@@ -1,0 +1,15 @@
+<% 
+depth ||= 0
+indentation = '  ' * depth
+l10n ||= nil
+language ||= l10n&.language
+%>
+<%= indentation %>contact_details:
+<% ContactDetails::PARTS.each do |part| %><%= 
+    render "admin/application/contact_details/static/#{part}", 
+            about: about,
+            l10n: l10n,
+            language: language,
+            depth: depth+1 %><% 
+end
+%>
