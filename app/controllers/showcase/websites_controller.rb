@@ -15,6 +15,7 @@ class Showcase::WebsitesController < Showcase::ApplicationController
   def tag
     @tag = Communication::Website::Showcase::Tag.find_by!(slug: params[:tag])
     @websites = @tag.websites.in_showcase
+                             .ordered_by_production_date
                              .page(params[:page])
   end
 
@@ -23,6 +24,7 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     @title = Communication::Website::Showcase.title_for_feature(feature)
     @websites = Communication::Website::Showcase.websites_for_feature(feature)
                                                 .in_showcase
+                                                .ordered_by_production_date
                                                 .page(params[:page])
   end
 end
