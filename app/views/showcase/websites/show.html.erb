@@ -1,0 +1,34 @@
+<% content_for :title, @website %>
+
+<h1><%= @website %></h1>
+
+<div class="row mt-5">
+  <div class="col-lg-6">
+    <% if @website.screenshot.attached? %>
+      <%= kamifusen_tag @website.screenshot, 
+                        class: 'img-fluid rounded mb-3' %>
+    <% end %>
+  </div>
+  <div class="col-lg-6">
+    <div class="mb-4">
+      <i class="bi bi-compass-fill me-1"></i>
+      <%= contact_link @website.url, :website %>
+    </div>
+    <div class="mb-4">
+      <i class="bi bi-github me-1"></i>
+      <%= contact_link @website.repository_url, :github %>
+    </div>
+    <div class="mb-4">
+      <% @website.showcase_tags.each do |tag| %>
+        <%= link_to tag, 
+                    showcase_tag_path(tag.slug), 
+                    class: 'btn btn-sm btn-outline-light text-dark rounded-pill' %>
+      <% end %>
+    </div>
+    <% if @website.university.logo.attached? %>
+      <%= image_tag @website.university.logo, 
+                    width: 200,
+                    class: 'img-fluid p-3' %>
+    <% end %>
+  </div>
+</div>
