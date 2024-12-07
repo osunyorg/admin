@@ -21,16 +21,22 @@
       <%= contact_link @website.repository_url, :github %>
     </div>
     <div class="mb-5">
+      <p class="small text-muted">Thèmes</p>
       <% @website.showcase_tags.each do |tag| %>
         <%= link_to tag, 
                     showcase_tag_path(tag.slug), 
                     class: 'btn btn-sm btn-outline-light text-dark rounded-pill' %>
       <% end %>
     </div>
-    <% if @website.university.logo.attached? %>
-      <%= image_tag @website.university.logo, 
-                    width: 200,
-                    class: 'img-fluid p-3' %>
-    <% end %>
+    <div class="mb-5">
+      <p class="small text-muted">Organisation</p>
+      <% if @website.university.logo.attached? %>
+        <%= image_tag @website.university.logo, 
+                      width: 200,
+                      class: 'img-fluid p-3' %>
+      <% else %>
+        <p><%= @website.university %></p>
+      <% end %>
+    </div>
   </div>
 </div>
