@@ -47,6 +47,7 @@ class University::Person < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include Sanitizable
+  include Searchable
   include Localizable
   include WithAlumnus
   include WithBlobs

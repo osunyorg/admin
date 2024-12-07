@@ -12,6 +12,14 @@ namespace :app do
     Communication::Website::Post::Category.where(is_programs_root: true).update_all(is_taxonomy: true)
     Communication::Website::Agenda::Category.where(is_programs_root: true).update_all(is_taxonomy: true)
     Communication::Website::Portfolio::Category.where(is_programs_root: true).update_all(is_taxonomy: true)
+    # Search
+    Search::BuildIndexJob.perform_now
+  end
+
+  namespace :search do
+    task build_index: :environment do
+      Search::BuildIndexJob.perform_later
+    end
   end
 
   namespace :websites do
