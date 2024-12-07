@@ -2,7 +2,7 @@
 
 <h1><%= @website %></h1>
 
-<div class="row mt-5">
+<div class="row g-5 mt-5">
   <div class="col-lg-6">
     <% if @website.screenshot.attached? %>
       <%= kamifusen_tag @website.screenshot, 
@@ -10,15 +10,17 @@
     <% end %>
   </div>
   <div class="col-lg-6">
-    <div class="mb-4">
+    <div class="mb-5">
+      <p class="small text-muted">Adresse du site</p>
       <i class="bi bi-compass-fill me-1"></i>
       <%= contact_link @website.url, :website %>
     </div>
-    <div class="mb-4">
-      <i class="bi bi-github me-1"></i>
+    <div class="mb-5">
+    <p class="small text-muted">Code source</p>
+    <i class="bi bi-github me-1"></i>
       <%= contact_link @website.repository_url, :github %>
     </div>
-    <div class="mb-4">
+    <div class="mb-5">
       <% @website.showcase_tags.each do |tag| %>
         <%= link_to tag, 
                     showcase_tag_path(tag.slug), 
