@@ -32,8 +32,7 @@
       <p class="small text-muted">Organisation</p>
       <% if @website.university.logo.attached? %>
         <%= image_tag @website.university.logo, 
-                      width: 200,
-                      class: 'img-fluid p-3' %>
+                      width: 150 %>
       <% else %>
         <p><%= @website.university %></p>
       <% end %>
