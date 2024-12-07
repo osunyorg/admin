@@ -1,9 +1,14 @@
-class Showcase::HomeController < Showcase::ApplicationController
+class Showcase::WebsitesController < Showcase::ApplicationController
   def index
     @tags = Communication::Website::Showcase::Tag.all.ordered
     @features = Communication::Website::Showcase.features
     @websites = Communication::Website.in_showcase
                                       .page(params[:page])
+  end
+
+  def show
+    @website = Communication::Website.find(params[:id])
+    raise_404_unless(@website.in_showcase && @website.in_production)
   end
 
   def tag

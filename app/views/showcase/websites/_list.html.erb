@@ -1,3 +1,6 @@
+<%
+current_year = nil
+%>
 <p class="text-end">
   <%= @websites.total_count %>
   <%= Communication::Website.model_name.human(count: @websites.total_count).downcase %>
@@ -5,17 +8,27 @@
 
 <div class="row">
   <% @websites.each do |website| %>
+    <% 
+    year = website.created_at.year
+    if current_year != year
+      current_year = year
+      %>
+      <div class="col-12">
+        <h2><%= year %></h2>
+        <hr>
+      </div>
+    <% end %>
     <div class="col-lg-6">
       <article class="mb-5 pb-5">
         <% if website.screenshot.attached? %>
-          <%= link_to website.url, target: :_blank, class: 'no-icon' do %>
+          <%= link_to showcase_website_path(website) do %>
             <%= kamifusen_tag website.screenshot, 
                               class: 'img-fluid rounded mb-3' %>
           <% end %>
         <% end %>
         <div class="row">
           <div class="col-lg-10">
-            <h2 class="h4"><%= website.original_localization.to_s %></h2>
+            <h3 class="h4"><%= link_to website.original_localization.to_s, showcase_website_path(website) %></h3>
             <div class="small mb-1">
               <i class="bi bi-compass-fill me-1"></i>
               <%= contact_link website.url, :website %>
