@@ -3,6 +3,7 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     @tags = Communication::Website::Showcase::Tag.all.ordered
     @features = Communication::Website::Showcase.features
     @websites = Communication::Website.in_showcase
+                                      .ordered_by_production_date
                                       .page(params[:page])
   end
 
