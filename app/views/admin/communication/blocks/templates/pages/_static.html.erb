@@ -8,6 +8,15 @@ if block.template.page
         slug: "<%= page_l10n.slug %>"
         file: "<%= page_l10n.git_path_relative %>"
 <% end %>
+<% if block.template.mode == 'category' && block.template.category %>
+  <%
+  category = block.template.category
+  category_l10n = category.localization_for(block.language)
+  if category_l10n.present?
+  %>
+      category: "/<%= category_l10n.slug_with_ancestors_slugs(separator: '-') %>/"
+  <% end %>
+<% end %>
 <%= block_options_static block %>
       layout: <%= block.template.layout %>
       pages:

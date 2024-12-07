@@ -30,6 +30,17 @@ namespace :communication do
       end
     end
     resources :permalinks, controller: 'websites/permalinks', only: [:create, :destroy]
+    namespace :page, path: 'pages' do
+      resources :categories, controller: '/admin/communication/websites/pages/categories' do
+        collection do
+          post :reorder
+        end
+        member do
+          get :children
+          get :static
+        end
+      end
+    end
     resources :pages, controller: 'websites/pages' do
       collection do
         post :reorder
