@@ -47,6 +47,7 @@ RSpec.configure do |config|
           communication_website_localization: Schemas::CommunicationWebsiteLocalization.schema,
           communication_website_post: Schemas::CommunicationWebsitePost.schema,
           communication_website_post_localization: Schemas::CommunicationWebsitePostLocalization.schema,
+          communication_block: Schemas::CommunicationBlock.schema,
         }
       }
     }

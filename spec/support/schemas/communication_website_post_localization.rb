@@ -24,26 +24,13 @@ module Schemas
           slug: { type: :string },
           subtitle: { type: :string, nullable: true },
           summary: { type: :string, nullable: true },
-          text: { type: :string, nullable: true }
-          # blocks: {
-          #   type: :array,
-          #   items: {
-          #     type: :object,
-          #     properties: {
-          #       migration_identifier: { type: :string },
-          #       template_kind: { type: :string, description: "Template kind of the blocks. See /communication/blocks/templates for possible values." },
-          #       title: { type: :string },
-          #       position: { type: :integer },
-          #       published: { type: :boolean, default: true },
-          #       html_class: { type: :string, description: "For advanced use. Add an HTML class for custom purposes." },
-          #       data: {
-          #         type: :object,
-          #         description: "Data of the block. The structure depends on the template kind.",
-          #         additionalProperties: true
-          #       }
-          #     }
-          #   }
-          # }
+          text: { type: :string, nullable: true },
+          blocks: {
+            type: :array,
+            items: {
+              "$ref": "#/components/schemas/communication_block"
+            }
+          }
         }
       }
     end
