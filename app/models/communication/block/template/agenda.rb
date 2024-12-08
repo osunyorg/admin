@@ -67,22 +67,32 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   protected
 
   def link_to_events
-    special_page = website.special_page(Communication::Website::Page::CommunicationAgenda)
-    special_page_l10n = special_page.localization_for(block.language)
-    special_page_l10n.current_permalink_in_website(website)&.path
+    special_page_l10n = events_special_page.localization_for(block.language)
+    permalink_for(special_page_l10n)
   end
 
   def link_to_events_archive
-    special_page = website.special_page(Communication::Website::Page::CommunicationAgendaArchive)
-    special_page_l10n = special_page.localization_for(block.language)
-    special_page_l10n.current_permalink_in_website(website)&.path
+    special_page_l10n = events_archive_special_page.localization_for(block.language)
+    permalink_for(special_page_l10n)
   end
 
   def link_to_category
-    return if category.nil?
     category_l10n = category.localization_for(block.language)
-    return if category_l10n.nil?
-    category_l10n.current_permalink_in_website(website)&.path
+    permalink_for(category_l10n)
+  end
+
+  def events_special_page
+    website.special_page(Communication::Website::Page::CommunicationAgenda)
+  end
+
+  def events_archive_special_page
+    website.special_page(Communication::Website::Page::CommunicationAgendaArchive)
+  end
+
+  def permalink_for(l10n)
+    return if l10n.nil?
+    hugo = l10n.hugo(website)
+    hugo.permalink
   end
 
   def base_events

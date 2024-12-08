@@ -43,13 +43,6 @@ fr:
         physical: Coordonnées physiques
         siren: Numéro de SIREN
         zipcode: Code postal
-      university/organization/category:
-        children: Sous-catégories
-        parent: Catégorie parente
-      university/organization/category/localization:
-        language: Langue
-        name: Nom
-        slug: Slug
       university/organization/localization:
         address_additional: Complément d'adresse
         address_name: Nom de l'adresse
@@ -111,13 +104,6 @@ fr:
         twitter_visibility: Visibilité du nom d'utilisateur Twitter
         user: Utilisateur
         zipcode: Code postal
-      university/person/category:
-        children: Sous-catégories
-        parent: Catégorie parente
-      university/person/category/localization:
-        language: Langue
-        name: Nom
-        slug: Slug
       university/person/experience:
         description: Description
         edit: Modifier l'expérience

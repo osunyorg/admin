@@ -77,17 +77,6 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
   end
 
   def category_params
-    params.require(:communication_website_post_category)
-          .permit(
-            :is_taxonomy, :parent_id,
-            localizations_attributes: [
-              :id, :name, :meta_description, :summary, :slug,
-              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
-              :language_id
-            ]
-          )
-          .merge(
-            university_id: current_university.id
-          )
+    permitted_params_for(:communication_website_post_category)
   end
 end

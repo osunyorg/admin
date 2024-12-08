@@ -6,8 +6,9 @@
         <h<%= block.heading_rank_children %> class="title">
           <%= block_component_show block, :title, template: element %>
         </h<%= block.heading_rank_children %>>
-        <%# TODO: gérer les sauts de ligne %>
-        <p><%= element.text %></p>
+        <div itemprop="text">
+          <%= block_component_show block, :text, template: element %>
+        </div>
       </article>
     <% end %>
   </div>

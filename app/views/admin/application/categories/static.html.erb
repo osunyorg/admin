@@ -1,9 +1,7 @@
 <%
 category = @l10n.about
 %>---
-<%= render 'admin/application/static/core',
-            about: @l10n,
-            forced_slug: @l10n.slug_with_ancestors_slugs(separator: '-') %>
+<%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: category,
@@ -24,11 +22,11 @@ children:
 @l10n.children.ordered.each do |child|
   hugo = child.hugo(@website)
   %>
-  - <%= hugo.path %>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
 <% end %>
 <% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
 <%= render 'admin/communication/contents/static', about: @l10n %>

@@ -15,7 +15,7 @@ administrator_involvements = program.involvements_through_roles
             full_width: false,
             toc_offcanvas: true,
             toc_present: true %>
-<%= render 'admin/application/categories/static',
+<%= render 'admin/application/categories/widget/static',
             about: program,
             l10n: @l10n,
             categories: program.university.program_categories,
@@ -31,15 +31,20 @@ registration_url: >-
   <%= @l10n.registration_url %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
-<% if @l10n.parent %>
+<% if @l10n.parent
+  hugo = @l10n.parent.hugo(@website)
+  %>
 parent:
   title: >-
     <%= @l10n.parent.name %>
-  url: <%= @l10n.parent.current_permalink_in_website(@website)&.path %>
+  permalink: "<%= hugo.permalink %>"
+  path: "<%= hugo.path %>"
+  slug: "<%= hugo.slug %>"
+  file: "<%= hugo.file %>"
 <% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= render 'admin/application/featured_image/static', about: @l10n %>
-<%= render 'admin/application/shared_image/static', about: @l10n %>
+<%= render 'admin/application/images/featured/static', about: @l10n %>
+<%= render 'admin/application/images/shared/static', about: @l10n %>
 <% if @l10n.logo.attached? %>
 logo:
   id: "<%= @l10n.logo.blob.id %>"
@@ -47,16 +52,12 @@ logo:
 <%
 if @website
   website_category_l10ns = program.website_category_l10ns_for(@website, language)
-  if website_category_l10ns[:blog]
-%>
-<%# related_category is deprecated, in favor of related_categories %>
-related_category: "<%= website_category_l10ns[:blog].slug_with_ancestors_slugs(separator: '-') %>"
-<%
-  end
 %>
 related_categories:
-<% website_category_l10ns.each do |key, website_category_l10n| %>
-  <%= key %>: "<%= website_category_l10n.slug_with_ancestors_slugs(separator: '-') %>"
+<% website_category_l10ns.each do |key, website_category_l10n|
+    hugo = website_category_l10n.hugo(@website)
+    %>
+  <%= key %>: "<%= hugo.slug %>"
 <%
   end
 end
@@ -69,8 +70,9 @@ teachers:
 teacher_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
-%>
-  - "<%= person_l10n.slug %>"
+  hugo = person_l10n.hugo(@website)
+  %>
+  - "<%= hugo.slug %>"
 <% end %>
 teachers_description:
 <%
@@ -79,8 +81,9 @@ teacher_involvements.each do |involvement|
   next if involvement_l10n.nil?
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
-%>
-  "<%= person_l10n.slug %>": >-
+  hugo = person_l10n.hugo(@website)
+  %>
+  "<%= hugo.slug %>": >-
     <%= involvement_l10n.description %>
 <% end %>
 <% if administrator_involvements.any? %>
@@ -89,16 +92,18 @@ administrators:
 administrator_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
-%>
-  - "<%= person_l10n.slug %>"
+  hugo = person_l10n.hugo(@website)
+  %>
+  - "<%= hugo.slug %>"
 <% end %>
 administrators_description:
 <%
 administrator_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
-%>
-  "<%= person_l10n.slug %>": >-
+  hugo = person_l10n.hugo(@website)
+  %>
+  "<%= hugo.slug %>": >-
     <%= involvement.target.to_s_in(language) %>
 <% end %>
 roles:
@@ -110,22 +115,18 @@ roles:
     role.involvements.ordered.each do |involvement|
       person_l10n = involvement.person.localization_for(language)
       next if person_l10n.nil?
-    %>
-      - "<%= person_l10n.slug %>"
+      hugo = person_l10n.hugo(@website)
+      %>
+      - "<%= hugo.slug %>"
     <% end %>
 <% end %>
 <% else %>
 roles: []
 <% end %>
-locations:
-<% program.locations.ordered(language).each do |location| %>
-  <%
-  location_l10n = location.localization_for(language)
-  next if location_l10n.nil?
-  %>
-  - path: <%= location_l10n.current_permalink_in_website(@website)&.path %>
-    slug: <%= location_l10n.slug %>
-<% end %>
+<%= render 'admin/application/static/hugo/collection',
+            key: :locations,
+            collection: program.locations.ordered(language),
+            language: language %>
 apprenticeship: <%= program.apprenticeship %>
 capacity: <%= program.capacity %>
 continuing: <%= program.continuing %>

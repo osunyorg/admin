@@ -1,29 +1,19 @@
 <% content_for :title, @l10n %>
 
-<div class="row">
-  <div class="col-lg-10">
-    <% if @category.parent %>
-      <%= osuny_label University::Person::Category.human_attribute_name('parent') %>
-      <p>
-        <%= osuny_link_localized_if can?(:read, @category.parent),
-                                    @category.parent,
-                                    [:admin, @category.parent] %>
-      </p>
-    <% end %>
-    <% if @category.children.any? %>
-      <%= osuny_label Education::Program::Category.human_attribute_name('children') %>
-      <%= render 'admin/application/categories/list', 
-                  root_categories: @category.children,
-                  categories_class: Education::Program::Category %>
-    <% end %>
-  </div>
-  <div class="col-lg-2">
-    <%= render 'admin/application/l10n/widget', about: @category, l10n: @l10n, small: true %>
-  </div>
-</div>
+<%= render 'admin/application/categories/show', category: @category, l10n: @l10n %>
 
-<%= render 'admin/education/programs/list', programs: @programs %>
-<%= paginate @programs %>
+<% if @programs.total_count > 0 %>
+  <div class="row">
+    <div class="offset-lg-4 col-lg-8">
+      <p>
+        <%= @programs.total_count %> 
+        <%= Education::Program.model_name.human(count: @programs.total_count).downcase %>
+      </p>
+      <%= render 'admin/education/programs/list', programs: @programs %>
+      <%= paginate @programs %>
+    </div>
+  </div>
+<% end %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @category %>

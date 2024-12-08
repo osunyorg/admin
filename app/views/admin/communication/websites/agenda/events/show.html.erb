@@ -11,7 +11,7 @@
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/featured_image/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
   </div>
 </div>
 <hr class="mb-5">
@@ -19,7 +19,12 @@
 <hr class="mb-5">
 <div class="row">
   <div class="col-lg-4">
-    <%= render 'admin/communication/websites/agenda/events/show/metadata' %>
+    <%= osuny_panel t('metadata'), small: true do %>
+      <%= render 'admin/application/publication/show', about: @l10n %> 
+      <%= render 'admin/application/categories/widget/show', about: @event %> 
+      <%= render 'admin/application/permalinks/redirects', about: @l10n %>
+      <%= render 'admin/application/l10n/widget', about: @event, l10n: @l10n, small: true %>
+    <% end %>
   </div>
   <div class="col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n, small: true %>

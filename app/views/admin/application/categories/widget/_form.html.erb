@@ -1,0 +1,28 @@
+<% if categories.any? %>
+  <div class="row">
+    <% categories.taxonomies.each do |taxonomy| %>
+      <div class="col-lg-6 col-xxl-4">
+        <%= osuny_label taxonomy.to_s_in(current_language) %>
+        <%= f.association :categories,
+                          label_text: false,
+                          as: :check_boxes,
+                          collection: osuny_collection_tree(
+                            taxonomy.children,
+                            localized: true
+                          ) %>
+      </div>
+    <% end %>
+    <% if categories.root.free.any? %>
+      <div class="col-lg-6 col-xxl-4">
+        <%= osuny_label t('category.title') %>
+        <%= f.association :categories,
+                          label_text: false,
+                          as: :check_boxes,
+                          collection: osuny_collection_tree(
+                            categories.root.free,
+                            localized: true
+                          ) %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

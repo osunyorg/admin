@@ -35,7 +35,7 @@ module Admin::BlocksHelper
   end
 
   def block_options_static(block)
-    render 'admin/communication/blocks/options/static',
+    render 'admin/communication/blocks/partials/options',
             block: block
   end
 

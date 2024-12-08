@@ -4,13 +4,15 @@
       <%= render 'admin/communication/blocks/partials/top', block: block %>
 
       <div class="informations">
+        <% unless block.template.name.blank? %>
+          <p itemprop="name"><%= block_component_show block, :name %></p>
+        <% end %>
+        <% if block.template.information.present? %>
+          <div><%= block_component_show block, :information %></div>
+        <% end %>
+      </div>
+      <div class="contacts">
         <address itemscope itemtype="https://schema.org/Organization">
-          <% unless block.template.name.blank? %>
-            <p itemprop="name"><%= block_component_show block, :name %></p>
-          <% end %>
-          <% if block.template.information.present? %>
-            <%= block_component_show block, :information %>
-          <% end %>
           <div class="contacts">
             <% if block.template.address.present? %>
               <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">

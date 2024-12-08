@@ -15,7 +15,7 @@
           </div>
         </div>
         <%= render 'admin/application/summary/form', f: lf, about: l10n %>
-        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <div class="row">
           <div class="col-lg-4">
             <%= f.association :diploma,
@@ -35,7 +35,7 @@
         <%= osuny_separator %>
         <div class="row">
           <div class="col-lg-4">
-            <%= render 'admin/application/shared_image/edit', f: lf, about: l10n %>
+            <%= render 'admin/application/images/shared/form', f: lf, about: l10n %>
           </div>
           <div class="col-lg-8">
             <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
@@ -61,8 +61,8 @@
         </div>
       </div>
       <div class="col-lg-4 col-xxl-3">
-        <%= lf.input :published %>
-        <%= render  "admin/application/slug/form",
+        <%= render 'admin/application/publication/form', f: lf, about: program %>
+        <%= render  'admin/application/slug/form',
                     f: lf,
                     source: '#education_program_localizations_attributes_0_name' %>
         <%= f.association :parent,
@@ -77,7 +77,7 @@
                     hint: images_formats_accepted_hint,
                     input_html: { accept: default_images_formats_accepted }
                     %>
-        <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
+        <%= render 'admin/application/images/featured/form', f: lf, about: l10n %>
       </div>
     </div>
 

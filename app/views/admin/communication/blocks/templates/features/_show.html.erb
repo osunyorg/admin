@@ -11,7 +11,9 @@
               <h<%= heading_level %> class="name" itemprop="name">
                 <%= element.title %>
               </h<%= heading_level %>>
-              <p><%= element.description %></p>
+              <div>
+                <%= block_component_show block, :description, template: element %>
+              </div>
             </div>
             <%= block_component_show block, :image, template: element %>
           </li>

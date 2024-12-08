@@ -86,10 +86,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     "admin/communication/websites/agenda/events/static"
   end
 
-  def static_path
-    "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
-  end
-
   def dependencies
     active_storage_blobs +
     contents_dependencies

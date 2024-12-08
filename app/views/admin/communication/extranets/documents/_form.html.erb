@@ -16,7 +16,7 @@
       <div class="col-md-4">
         <%= osuny_panel t('metadata') do %>
           <% if can? :publish, document %>
-            <%= lf.input :published %>
+            <%= render 'admin/application/publication/form', f: lf, about: document %>
             <%= lf.input :published_at, html5: true, as: :date %>
           <% end %>
           <%= f.association :kind, collection: osuny_collection(@extranet.document_kinds, localized: true), include_blank: false %>

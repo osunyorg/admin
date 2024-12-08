@@ -19,7 +19,7 @@
 
     <%= osuny_property_show_text @l10n, :slug, hide_blank: true %>
     <%= osuny_property_show_boolean @organization, :active %>
-    <%= render 'admin/application/categories/show', about: @organization %>
+    <%= render 'admin/application/categories/widget/show', about: @organization %>
     <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>

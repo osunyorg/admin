@@ -82,10 +82,6 @@ class Admin::Education::Programs::CategoriesController < Admin::Education::Progr
   end
 
   def category_params
-    params.require(:education_program_category).permit(
-      :is_taxonomy, :parent_id,
-      localizations_attributes: [
-        :id, :name, :slug, :language_id
-      ]).merge(university_id: current_university.id)
+    permitted_params_for(:education_program_category)
   end
 end
