@@ -38,8 +38,8 @@ module Schemas
       base_schema.deep_merge({
         title: "Communication::Block (#{template_kind.humanize})",
         properties: {
+          template_kind: { enum: [template_kind] },
           data: {
-            template_kind: { enum: [template_kind] },
             properties: data_properties
           }
         }

@@ -383,34 +383,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "agenda"
             ]
           },
           "title": {
@@ -431,11 +404,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "agenda"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -519,34 +487,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "call_to_action"
             ]
           },
           "title": {
@@ -567,11 +508,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "call_to_action"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -624,34 +560,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "chapter"
             ]
           },
           "title": {
@@ -672,11 +581,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "chapter"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -716,34 +620,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "contact"
             ]
           },
           "title": {
@@ -764,11 +641,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "contact"
-              ]
-            },
             "properties": {
               "description": {
                 "type": "string"
@@ -888,34 +760,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "datatable"
             ]
           },
           "title": {
@@ -936,11 +781,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "datatable"
-              ]
-            },
             "properties": {
               "alphabetical": {
                 "type": "boolean"
@@ -986,34 +826,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "definitions"
             ]
           },
           "title": {
@@ -1034,11 +847,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "definitions"
-              ]
-            },
             "properties": {
               "description": {
                 "type": "string"
@@ -1072,34 +880,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "embed"
             ]
           },
           "title": {
@@ -1120,11 +901,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "embed"
-              ]
-            },
             "properties": {
               "code": {
                 "type": "string"
@@ -1150,34 +926,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "features"
             ]
           },
           "title": {
@@ -1198,11 +947,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "features"
-              ]
-            },
             "properties": {
               "description": {
                 "type": "string"
@@ -1245,34 +989,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "files"
             ]
           },
           "title": {
@@ -1293,11 +1010,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "files"
-              ]
-            },
             "properties": {
               "description": {
                 "type": "string"
@@ -1331,34 +1043,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "gallery"
             ]
           },
           "title": {
@@ -1379,11 +1064,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "gallery"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -1431,34 +1111,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "image"
             ]
           },
           "title": {
@@ -1479,11 +1132,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "image"
-              ]
-            },
             "properties": {
               "image": {
                 "type": "string"
@@ -1512,34 +1160,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "key_figures"
             ]
           },
           "title": {
@@ -1560,11 +1181,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "key_figures"
-              ]
-            },
             "properties": {
               "description": {
                 "type": "string"
@@ -1604,34 +1220,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "license"
             ]
           },
           "title": {
@@ -1652,11 +1241,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "license"
-              ]
-            },
             "properties": {
               "description": {
                 "type": "string"
@@ -1710,34 +1294,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "links"
             ]
           },
           "title": {
@@ -1758,11 +1315,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "links"
-              ]
-            },
             "properties": {
               "description": {
                 "type": "string"
@@ -1805,34 +1357,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "locations"
             ]
           },
           "title": {
@@ -1853,11 +1378,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "locations"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -1899,34 +1419,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "organizations"
             ]
           },
           "title": {
@@ -1947,11 +1440,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "organizations"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -2020,34 +1508,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "pages"
             ]
           },
           "title": {
@@ -2068,11 +1529,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "pages"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -2132,34 +1588,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "papers"
             ]
           },
           "title": {
@@ -2180,11 +1609,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "papers"
-              ]
-            },
             "properties": {
               "mode": {
                 "type": "string",
@@ -2222,34 +1646,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "persons"
             ]
           },
           "title": {
@@ -2270,11 +1667,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "persons"
-              ]
-            },
             "properties": {
               "mode": {
                 "type": "string",
@@ -2330,34 +1722,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "posts"
             ]
           },
           "title": {
@@ -2378,11 +1743,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "posts"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -2457,34 +1817,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "projects"
             ]
           },
           "title": {
@@ -2505,11 +1838,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "projects"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -2576,34 +1904,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "programs"
             ]
           },
           "title": {
@@ -2624,11 +1925,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "programs"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -2672,34 +1968,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "sound"
             ]
           },
           "title": {
@@ -2720,11 +1989,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "sound"
-              ]
-            },
             "properties": {
               "file": {
                 "type": "string"
@@ -2750,34 +2014,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "testimonials"
             ]
           },
           "title": {
@@ -2798,11 +2035,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "testimonials"
-              ]
-            },
             "properties": {
               "elements": {
                 "type": "array",
@@ -2839,34 +2071,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "timeline"
             ]
           },
           "title": {
@@ -2887,11 +2092,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "timeline"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -2929,34 +2129,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "title"
             ]
           },
           "title": {
@@ -2977,11 +2150,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "title"
-              ]
-            },
             "properties": {
               "layout": {
                 "type": "string",
@@ -3005,34 +2173,7 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
+              "video"
             ]
           },
           "title": {
@@ -3053,11 +2194,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "video"
-              ]
-            },
             "properties": {
               "description": {
                 "type": "string"
@@ -3086,33 +2222,6 @@
             "type": "string",
             "description": "Template kind of the blocks.",
             "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
               "volumes"
             ]
           },
@@ -3134,11 +2243,6 @@
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": true,
-            "template_kind": {
-              "enum": [
-                "volumes"
-              ]
-            },
             "properties": {
               "mode": {
                 "type": "string",
@@ -3221,12 +2325,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-08T17:39:16.796+01:00",
-                            "updated_at": "2024-12-08T17:39:16.796+01:00"
+                            "created_at": "2024-12-08T17:43:00.650+01:00",
+                            "updated_at": "2024-12-08T17:43:00.650+01:00"
                           }
                         },
-                        "created_at": "2024-12-08T17:39:16.811+01:00",
-                        "updated_at": "2024-12-08T17:39:16.811+01:00"
+                        "created_at": "2024-12-08T17:43:00.665+01:00",
+                        "updated_at": "2024-12-08T17:43:00.665+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -3251,12 +2355,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-08T17:39:16.796+01:00",
-                            "updated_at": "2024-12-08T17:39:16.796+01:00"
+                            "created_at": "2024-12-08T17:43:00.650+01:00",
+                            "updated_at": "2024-12-08T17:43:00.650+01:00"
                           }
                         },
-                        "created_at": "2024-12-08T17:39:16.811+01:00",
-                        "updated_at": "2024-12-08T17:39:16.811+01:00"
+                        "created_at": "2024-12-08T17:43:00.665+01:00",
+                        "updated_at": "2024-12-08T17:43:00.665+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -3281,12 +2385,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-08T17:39:16.796+01:00",
-                            "updated_at": "2024-12-08T17:39:16.796+01:00"
+                            "created_at": "2024-12-08T17:43:00.650+01:00",
+                            "updated_at": "2024-12-08T17:43:00.650+01:00"
                           }
                         },
-                        "created_at": "2024-12-08T17:39:16.811+01:00",
-                        "updated_at": "2024-12-08T17:39:16.811+01:00"
+                        "created_at": "2024-12-08T17:43:00.665+01:00",
+                        "updated_at": "2024-12-08T17:43:00.665+01:00"
                       }
                     ]
                   }
@@ -3359,19 +2463,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "faeae3e4-8ff1-414c-ae2a-fef14f27ecb3",
+                      "id": "1672dc08-0924-4abf-a58f-414957a0f62e",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "0c121db0-0b11-496f-9781-e28a012e4a48",
+                          "id": "e4479d40-c56d-470d-9720-eccc229c10b7",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "b86ec114-61f4-4d2d-810a-19beec383fb2",
+                            "blob_id": "75316211-1924-4a36-ac98-0c0afce242ed",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ6dXhyOHgxb3F0cHNxbDk2cHF2bXc4MTJ4NmtsIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDhUMTc6Mzk6MTcuNDYzWiIsInB1ciI6ImJsb2Jfa2V5In19--64278279c3f6510c3ceaa539191f1c3888f229a3/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJpNzNwcXdkM2JtZ3FuZThqZjhjZG42OGx4ODNrIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDhUMTc6NDM6MDEuNTAwWiIsInB1ciI6ImJsb2Jfa2V5In19--8bab0be23233034931e77a22387cd5f0ed65542c/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -3381,12 +2485,12 @@
                           "subtitle": "Une nouvelle actualité",
                           "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
                           "text": null,
-                          "created_at": "2024-12-08T17:39:17.335+01:00",
-                          "updated_at": "2024-12-08T17:39:17.352+01:00"
+                          "created_at": "2024-12-08T17:43:01.364+01:00",
+                          "updated_at": "2024-12-08T17:43:01.383+01:00"
                         }
                       },
-                      "created_at": "2024-12-08T17:39:17.327+01:00",
-                      "updated_at": "2024-12-08T17:39:17.456+01:00"
+                      "created_at": "2024-12-08T17:43:01.354+01:00",
+                      "updated_at": "2024-12-08T17:43:01.494+01:00"
                     }
                   }
                 }
@@ -3541,12 +2645,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-08T17:39:16.796+01:00",
-                          "updated_at": "2024-12-08T17:39:16.796+01:00"
+                          "created_at": "2024-12-08T17:43:00.650+01:00",
+                          "updated_at": "2024-12-08T17:43:00.650+01:00"
                         }
                       },
-                      "created_at": "2024-12-08T17:39:16.811+01:00",
-                      "updated_at": "2024-12-08T17:39:16.811+01:00"
+                      "created_at": "2024-12-08T17:43:00.665+01:00",
+                      "updated_at": "2024-12-08T17:43:00.665+01:00"
                     }
                   }
                 }
@@ -3648,12 +2752,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-08T17:39:16.796+01:00",
-                          "updated_at": "2024-12-08T17:39:17.595+01:00"
+                          "created_at": "2024-12-08T17:43:00.650+01:00",
+                          "updated_at": "2024-12-08T17:43:01.645+01:00"
                         }
                       },
-                      "created_at": "2024-12-08T17:39:16.811+01:00",
-                      "updated_at": "2024-12-08T17:39:17.600+01:00"
+                      "created_at": "2024-12-08T17:43:00.665+01:00",
+                      "updated_at": "2024-12-08T17:43:01.651+01:00"
                     }
                   }
                 }
@@ -3876,12 +2980,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-08T17:39:16.765+01:00",
-                            "updated_at": "2024-12-08T17:39:16.765+01:00"
+                            "created_at": "2024-12-08T17:43:00.622+01:00",
+                            "updated_at": "2024-12-08T17:43:00.622+01:00"
                           }
                         },
-                        "created_at": "2024-12-08T17:39:16.813+01:00",
-                        "updated_at": "2024-12-08T17:39:16.813+01:00"
+                        "created_at": "2024-12-08T17:43:00.667+01:00",
+                        "updated_at": "2024-12-08T17:43:00.667+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -3923,8 +3027,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-08T17:39:16.765+01:00",
-                            "updated_at": "2024-12-08T17:39:16.765+01:00"
+                            "created_at": "2024-12-08T17:43:00.622+01:00",
+                            "updated_at": "2024-12-08T17:43:00.622+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -3942,12 +3046,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-08T17:39:16.765+01:00",
-                            "updated_at": "2024-12-08T17:39:16.765+01:00"
+                            "created_at": "2024-12-08T17:43:00.622+01:00",
+                            "updated_at": "2024-12-08T17:43:00.622+01:00"
                           }
                         },
-                        "created_at": "2024-12-08T17:39:16.813+01:00",
-                        "updated_at": "2024-12-08T17:39:16.813+01:00"
+                        "created_at": "2024-12-08T17:43:00.667+01:00",
+                        "updated_at": "2024-12-08T17:43:00.667+01:00"
                       }
                     ]
                   }
@@ -4047,12 +3151,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-08T17:39:16.765+01:00",
-                          "updated_at": "2024-12-08T17:39:16.765+01:00"
+                          "created_at": "2024-12-08T17:43:00.622+01:00",
+                          "updated_at": "2024-12-08T17:43:00.622+01:00"
                         }
                       },
-                      "created_at": "2024-12-08T17:39:16.813+01:00",
-                      "updated_at": "2024-12-08T17:39:16.813+01:00"
+                      "created_at": "2024-12-08T17:43:00.667+01:00",
+                      "updated_at": "2024-12-08T17:43:00.667+01:00"
                     }
                   }
                 },
