@@ -14,6 +14,17 @@ RSpec.configure do |config|
   # By default, the operations defined in spec files are added to the first
   # document below. You can override this behavior by adding a openapi_spec tag to the
   # the root example_group in your specs, e.g. describe '...', openapi_spec: 'v2/swagger.json'
+  schemas = {
+    communication_website: Schemas::CommunicationWebsite.schema,
+    communication_website_localization: Schemas::CommunicationWebsiteLocalization.schema,
+    communication_website_post: Schemas::CommunicationWebsitePost.schema,
+    communication_website_post_localization: Schemas::CommunicationWebsitePostLocalization.schema,
+    communication_block: Schemas::CommunicationBlock.base_schema
+  }
+  Communication::Block.template_kinds.keys.each do |template_kind|
+    schema_key = "communication_block_#{template_kind}".to_sym
+    schemas[schema_key] = Schemas::CommunicationBlock.template_schema(template_kind)
+  end
   config.openapi_specs = {
     'osuny/v1/openapi.json' => {
       openapi: '3.0.1',
@@ -42,13 +53,7 @@ RSpec.configure do |config|
             in: :header
           }
         },
-        schemas: {
-          communication_website: Schemas::CommunicationWebsite.schema,
-          communication_website_localization: Schemas::CommunicationWebsiteLocalization.schema,
-          communication_website_post: Schemas::CommunicationWebsitePost.schema,
-          communication_website_post_localization: Schemas::CommunicationWebsitePostLocalization.schema,
-          communication_block: Schemas::CommunicationBlock.schema,
-        }
+        schemas: schemas
       }
     }
   }

@@ -371,6 +371,2799 @@
             "additionalProperties": true
           }
         }
+      },
+      "communication_block_agenda": {
+        "type": "object",
+        "title": "Communication::Block (Agenda)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "agenda"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "large"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "category",
+                  "selection",
+                  "categories"
+                ]
+              },
+              "category_id": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "number"
+              },
+              "time": {
+                "type": "string",
+                "enum": [
+                  "future_or_current",
+                  "future",
+                  "current",
+                  "archive"
+                ]
+              },
+              "no_event_message": {
+                "type": "string"
+              },
+              "option_categories": {
+                "type": "boolean"
+              },
+              "option_dates": {
+                "type": "boolean"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_subtitle": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "option_status": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_call_to_action": {
+        "type": "object",
+        "title": "Communication::Block (Call to action)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "call_to_action"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "accent_background",
+                  "no_background"
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "alt": {
+                "type": "string"
+              },
+              "credit": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "target_blank": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_chapter": {
+        "type": "object",
+        "title": "Communication::Block (Chapter)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "chapter"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "no_background",
+                  "alt_background",
+                  "accent_background"
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "alt": {
+                "type": "string"
+              },
+              "credit": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "communication_block_contact": {
+        "type": "object",
+        "title": "Communication::Block (Contact)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "contact"
+              ]
+            },
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "information": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "phone_numbers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "emails": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "social_mastodon": {
+                "type": "string"
+              },
+              "social_x": {
+                "type": "string"
+              },
+              "social_linkedin": {
+                "type": "string"
+              },
+              "social_youtube": {
+                "type": "string"
+              },
+              "social_vimeo": {
+                "type": "string"
+              },
+              "social_peertube": {
+                "type": "string"
+              },
+              "social_instagram": {
+                "type": "string"
+              },
+              "social_facebook": {
+                "type": "string"
+              },
+              "social_tiktok": {
+                "type": "string"
+              },
+              "social_github": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "time_slot_morning": {
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "type": "string",
+                          "format": "time"
+                        },
+                        "to": {
+                          "type": "string",
+                          "format": "time"
+                        }
+                      }
+                    },
+                    "time_slot_afternoon": {
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "type": "string",
+                          "format": "time"
+                        },
+                        "to": {
+                          "type": "string",
+                          "format": "time"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_datatable": {
+        "type": "object",
+        "title": "Communication::Block (Datatable)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "datatable"
+              ]
+            },
+            "properties": {
+              "alphabetical": {
+                "type": "boolean"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "columns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "cells": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_definitions": {
+        "type": "object",
+        "title": "Communication::Block (Definitions)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "definitions"
+              ]
+            },
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_embed": {
+        "type": "object",
+        "title": "Communication::Block (Embed)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "embed"
+              ]
+            },
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "transcription": {
+                "type": "string"
+              },
+              "transcription_title": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "communication_block_features": {
+        "type": "object",
+        "title": "Communication::Block (Features)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "features"
+              ]
+            },
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string"
+                    },
+                    "alt": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_files": {
+        "type": "object",
+        "title": "Communication::Block (Files)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "files"
+              ]
+            },
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_gallery": {
+        "type": "object",
+        "title": "Communication::Block (Gallery)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "gallery"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "carousel",
+                  "large"
+                ]
+              },
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "image": {
+                      "type": "string"
+                    },
+                    "alt": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_image": {
+        "type": "object",
+        "title": "Communication::Block (Image)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "image"
+              ]
+            },
+            "properties": {
+              "image": {
+                "type": "string"
+              },
+              "alt": {
+                "type": "string"
+              },
+              "credit": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "communication_block_key_figures": {
+        "type": "object",
+        "title": "Communication::Block (Key figures)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "key_figures"
+              ]
+            },
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "number": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_license": {
+        "type": "object",
+        "title": "Communication::Block (License)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "license"
+              ]
+            },
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "creative_commons"
+                ]
+              },
+              "creative_commons_attribution": {
+                "type": "string",
+                "enum": [
+                  "false",
+                  "true"
+                ]
+              },
+              "creative_commons_commercial_use": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false"
+                ]
+              },
+              "creative_commons_derivatives": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false"
+                ]
+              },
+              "creative_commons_sharing": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "communication_block_links": {
+        "type": "object",
+        "title": "Communication::Block (Links)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "links"
+              ]
+            },
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "alt_title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_locations": {
+        "type": "object",
+        "title": "Communication::Block (Locations)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "locations"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "map"
+                ]
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_organizations": {
+        "type": "object",
+        "title": "Communication::Block (Organizations)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "organizations"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "map"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "selection",
+                  "category"
+                ]
+              },
+              "category_id": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "alphabetical": {
+                "type": "boolean"
+              },
+              "option_link": {
+                "type": "boolean"
+              },
+              "option_logo": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "logo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_pages": {
+        "type": "object",
+        "title": "Communication::Block (Pages)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "pages"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "cards",
+                  "alternate",
+                  "large"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "selection",
+                  "children"
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "page_id": {
+                "type": "string"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_main_summary": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_papers": {
+        "type": "object",
+        "title": "Communication::Block (Papers)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "papers"
+              ]
+            },
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "selection"
+                ]
+              },
+              "quantity": {
+                "type": "number"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_persons": {
+        "type": "object",
+        "title": "Communication::Block (Persons)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "persons"
+              ]
+            },
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "selection",
+                  "category"
+                ]
+              },
+              "category_id": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "alphabetical": {
+                "type": "boolean"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "option_link": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "role": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_posts": {
+        "type": "object",
+        "title": "Communication::Block (Posts)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "posts"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "highlight",
+                  "alternate",
+                  "large",
+                  "carousel"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "category",
+                  "selection",
+                  "categories"
+                ]
+              },
+              "posts_quantity": {
+                "type": "number"
+              },
+              "category_id": {
+                "type": "string"
+              },
+              "option_author": {
+                "type": "boolean"
+              },
+              "option_categories": {
+                "type": "boolean"
+              },
+              "option_date": {
+                "type": "boolean"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_reading_time": {
+                "type": "boolean"
+              },
+              "option_subtitle": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_projects": {
+        "type": "object",
+        "title": "Communication::Block (Projects)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "projects"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "alternate",
+                  "large"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "category",
+                  "selection",
+                  "categories"
+                ]
+              },
+              "projects_quantity": {
+                "type": "number"
+              },
+              "category_id": {
+                "type": "string"
+              },
+              "option_categories": {
+                "type": "boolean"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_subtitle": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "option_year": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_programs": {
+        "type": "object",
+        "title": "Communication::Block (Programs)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "programs"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "list",
+                  "grid"
+                ]
+              },
+              "option_diploma": {
+                "type": "boolean"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_sound": {
+        "type": "object",
+        "title": "Communication::Block (Sound)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "sound"
+              ]
+            },
+            "properties": {
+              "file": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "transcription": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "communication_block_testimonials": {
+        "type": "object",
+        "title": "Communication::Block (Testimonials)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "testimonials"
+              ]
+            },
+            "properties": {
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "job": {
+                      "type": "string"
+                    },
+                    "photo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_timeline": {
+        "type": "object",
+        "title": "Communication::Block (Timeline)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "timeline"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "vertical",
+                  "horizontal"
+                ]
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_title": {
+        "type": "object",
+        "title": "Communication::Block (Title)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "title"
+              ]
+            },
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "classic",
+                  "collapsed"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "communication_block_video": {
+        "type": "object",
+        "title": "Communication::Block (Video)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "video"
+              ]
+            },
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "video_title": {
+                "type": "string"
+              },
+              "transcription": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "communication_block_volumes": {
+        "type": "object",
+        "title": "Communication::Block (Volumes)",
+        "properties": {
+          "migration_identifier": {
+            "type": "string"
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true,
+            "template_kind": {
+              "enum": [
+                "volumes"
+              ]
+            },
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "selection"
+                ]
+              },
+              "quantity": {
+                "type": "number"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -428,12 +3221,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-07T14:57:12.969+01:00",
-                            "updated_at": "2024-12-07T14:57:12.969+01:00"
+                            "created_at": "2024-12-08T17:39:16.796+01:00",
+                            "updated_at": "2024-12-08T17:39:16.796+01:00"
                           }
                         },
-                        "created_at": "2024-12-07T14:57:12.989+01:00",
-                        "updated_at": "2024-12-07T14:57:12.989+01:00"
+                        "created_at": "2024-12-08T17:39:16.811+01:00",
+                        "updated_at": "2024-12-08T17:39:16.811+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -458,12 +3251,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-07T14:57:12.969+01:00",
-                            "updated_at": "2024-12-07T14:57:12.969+01:00"
+                            "created_at": "2024-12-08T17:39:16.796+01:00",
+                            "updated_at": "2024-12-08T17:39:16.796+01:00"
                           }
                         },
-                        "created_at": "2024-12-07T14:57:12.989+01:00",
-                        "updated_at": "2024-12-07T14:57:12.989+01:00"
+                        "created_at": "2024-12-08T17:39:16.811+01:00",
+                        "updated_at": "2024-12-08T17:39:16.811+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -488,12 +3281,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-07T14:57:12.969+01:00",
-                            "updated_at": "2024-12-07T14:57:12.969+01:00"
+                            "created_at": "2024-12-08T17:39:16.796+01:00",
+                            "updated_at": "2024-12-08T17:39:16.796+01:00"
                           }
                         },
-                        "created_at": "2024-12-07T14:57:12.989+01:00",
-                        "updated_at": "2024-12-07T14:57:12.989+01:00"
+                        "created_at": "2024-12-08T17:39:16.811+01:00",
+                        "updated_at": "2024-12-08T17:39:16.811+01:00"
                       }
                     ]
                   }
@@ -566,19 +3359,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "63739aa2-9a6a-4065-9033-515f26065c79",
+                      "id": "faeae3e4-8ff1-414c-ae2a-fef14f27ecb3",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "32ab3468-91d8-4d61-b8ba-da70473f9409",
+                          "id": "0c121db0-0b11-496f-9781-e28a012e4a48",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "30510b55-312b-471d-bc58-02e4784c6d76",
+                            "blob_id": "b86ec114-61f4-4d2d-810a-19beec383fb2",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJtZXZxdDltcnhsZHZzM3ZxNWRjNW56dmZ4enByIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDdUMTQ6NTc6MTMuNjkyWiIsInB1ciI6ImJsb2Jfa2V5In19--025e788d97587d27a4847f619f709e18822d5ad2/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ6dXhyOHgxb3F0cHNxbDk2cHF2bXc4MTJ4NmtsIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDhUMTc6Mzk6MTcuNDYzWiIsInB1ciI6ImJsb2Jfa2V5In19--64278279c3f6510c3ceaa539191f1c3888f229a3/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -588,12 +3381,12 @@
                           "subtitle": "Une nouvelle actualité",
                           "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
                           "text": null,
-                          "created_at": "2024-12-07T14:57:13.554+01:00",
-                          "updated_at": "2024-12-07T14:57:13.570+01:00"
+                          "created_at": "2024-12-08T17:39:17.335+01:00",
+                          "updated_at": "2024-12-08T17:39:17.352+01:00"
                         }
                       },
-                      "created_at": "2024-12-07T14:57:13.546+01:00",
-                      "updated_at": "2024-12-07T14:57:13.686+01:00"
+                      "created_at": "2024-12-08T17:39:17.327+01:00",
+                      "updated_at": "2024-12-08T17:39:17.456+01:00"
                     }
                   }
                 }
@@ -748,12 +3541,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-07T14:57:12.969+01:00",
-                          "updated_at": "2024-12-07T14:57:12.969+01:00"
+                          "created_at": "2024-12-08T17:39:16.796+01:00",
+                          "updated_at": "2024-12-08T17:39:16.796+01:00"
                         }
                       },
-                      "created_at": "2024-12-07T14:57:12.989+01:00",
-                      "updated_at": "2024-12-07T14:57:12.989+01:00"
+                      "created_at": "2024-12-08T17:39:16.811+01:00",
+                      "updated_at": "2024-12-08T17:39:16.811+01:00"
                     }
                   }
                 }
@@ -855,12 +3648,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-07T14:57:12.969+01:00",
-                          "updated_at": "2024-12-07T14:57:13.828+01:00"
+                          "created_at": "2024-12-08T17:39:16.796+01:00",
+                          "updated_at": "2024-12-08T17:39:17.595+01:00"
                         }
                       },
-                      "created_at": "2024-12-07T14:57:12.989+01:00",
-                      "updated_at": "2024-12-07T14:57:13.832+01:00"
+                      "created_at": "2024-12-08T17:39:16.811+01:00",
+                      "updated_at": "2024-12-08T17:39:17.600+01:00"
                     }
                   }
                 }
@@ -1083,12 +3876,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-07T14:57:12.935+01:00",
-                            "updated_at": "2024-12-07T14:57:12.935+01:00"
+                            "created_at": "2024-12-08T17:39:16.765+01:00",
+                            "updated_at": "2024-12-08T17:39:16.765+01:00"
                           }
                         },
-                        "created_at": "2024-12-07T14:57:12.991+01:00",
-                        "updated_at": "2024-12-07T14:57:12.991+01:00"
+                        "created_at": "2024-12-08T17:39:16.813+01:00",
+                        "updated_at": "2024-12-08T17:39:16.813+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -1130,8 +3923,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-07T14:57:12.935+01:00",
-                            "updated_at": "2024-12-07T14:57:12.935+01:00"
+                            "created_at": "2024-12-08T17:39:16.765+01:00",
+                            "updated_at": "2024-12-08T17:39:16.765+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -1149,12 +3942,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-07T14:57:12.935+01:00",
-                            "updated_at": "2024-12-07T14:57:12.935+01:00"
+                            "created_at": "2024-12-08T17:39:16.765+01:00",
+                            "updated_at": "2024-12-08T17:39:16.765+01:00"
                           }
                         },
-                        "created_at": "2024-12-07T14:57:12.991+01:00",
-                        "updated_at": "2024-12-07T14:57:12.991+01:00"
+                        "created_at": "2024-12-08T17:39:16.813+01:00",
+                        "updated_at": "2024-12-08T17:39:16.813+01:00"
                       }
                     ]
                   }
@@ -1254,12 +4047,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-07T14:57:12.935+01:00",
-                          "updated_at": "2024-12-07T14:57:12.935+01:00"
+                          "created_at": "2024-12-08T17:39:16.765+01:00",
+                          "updated_at": "2024-12-08T17:39:16.765+01:00"
                         }
                       },
-                      "created_at": "2024-12-07T14:57:12.991+01:00",
-                      "updated_at": "2024-12-07T14:57:12.991+01:00"
+                      "created_at": "2024-12-08T17:39:16.813+01:00",
+                      "updated_at": "2024-12-08T17:39:16.813+01:00"
                     }
                   }
                 },
