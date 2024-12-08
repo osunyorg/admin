@@ -1,0 +1,36 @@
+<%
+current_year = nil
+%>
+<p class="text-end">
+  <%= @websites.total_count %>
+  <%= Communication::Website.model_name.human(count: @websites.total_count).downcase %>
+</p>
+
+<div class="row g-5">
+  <% @websites.each do |website| %>
+    <% 
+    year = website.created_at.year
+    if current_year != year
+      current_year = year
+      %>
+      <div class="col-12">
+        <h2><%= year %></h2>
+        <hr>
+      </div>
+    <% end %>
+    <div class="col-md-6 col-xl-4">
+      <article class="position-relative">
+        <% if website.screenshot.attached? %>
+          <%= kamifusen_tag website.screenshot, 
+                            class: 'img-fluid rounded mb-3' %>
+        <% end %>
+        <h3 class="fs-6 mt-1">
+          <%= link_to website.original_localization.to_s,
+                      showcase_website_path(website),
+                      class: 'stretched-link' %>
+        </h3>
+      </article>
+    </div>
+  <% end %>
+</div>
+<%= paginate @websites %>
