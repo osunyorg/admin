@@ -1505,6 +1505,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_03_101113) do
     t.uuid "default_language_id", null: false
     t.boolean "is_really_a_university", default: true
     t.float "contribution_amount"
+    t.string "default_github_access_token"
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
     t.index ["name"], name: "index_universities_on_name", opclass: :gin_trgm_ops, using: :gin
   end

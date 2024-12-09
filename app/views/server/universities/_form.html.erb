@@ -54,7 +54,22 @@
   </div>
 
 
-  <h3 class="mt-5"><%= t('university.sso') %></h3>
+  <h3 class="mt-5"><%= t('university.technical') %></h3>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :default_github_access_token,
+                  as: :string,
+                  placeholder: masked_string(f.object.default_github_access_token),
+                  hint: t("simple_form.hints.university.default_github_access_token_#{f.object.default_github_access_token.blank? ? 'without' : 'with'}_existing").html_safe,
+                  input_html: {
+                    autocomplete: 'access_token',
+                    role: 'presentation',
+                    value: ''
+                  }
+                  %>
+    </div>
+  </div>
+  <h4 class="mt-3"><%= t('university.sso') %></h4>
   <div class="row">
     <div class="col-md-6">
       <%= f.input :has_sso, input_html: { data: { 'conditional': true }, id: 'has_sso' } %>

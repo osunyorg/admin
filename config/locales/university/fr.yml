@@ -6,6 +6,7 @@ fr:
         city: Ville
         contribution_amount: Montant
         country: Pays
+        default_github_access_token: Jeton d'accès Github par défaut
         default_language: Langue par défaut
         has_sso: A un SSO ?
         is_really_a_university: Réellement une université
@@ -182,6 +183,8 @@ fr:
   simple_form:
     hints:
       university:
+        default_github_access_token_with_existing: Votre jeton d'accès Github confidentiel, utilisé par défaut pour les sites créés avec l'hébergement Deuxfleurs.<br>Laisser le champ vide pour ne pas le modifier.
+        default_github_access_token_without_existing: Votre jeton d'accès Github confidentiel, utilisé par défaut pour les sites créés avec l'hébergement Deuxfleurs.<br>Si vide, un jeton est défini au niveau de l'application.
         is_really_a_university: Décocher cette case masque les 5 royaumes.
         languages: "Ces langues sont actuellement utilisées sans les sites web : %{used_languages}"
         sms_sender_name: "11 caractères maximum. Que des caractères alphadécimaux ([A-Z][a-z][0-9])."
@@ -278,3 +281,4 @@ fr:
       taught_programs: Formations enseignées
     sso: SSO
     sso_key: Clé sur le SSO
+    technical: Technique
