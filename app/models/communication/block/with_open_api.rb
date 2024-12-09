@@ -9,10 +9,10 @@ module Communication::Block::WithOpenApi
         id: { type: :string, format: :uuid, nullable: true },
         migration_identifier: { type: :string, nullable: true },
         template_kind: { type: :string, description: "Template kind of the blocks.", enum: self.template_kinds.keys },
-        title: { type: :string },
-        position: { type: :integer },
+        title: { type: :string, nullable: true },
+        position: { type: :integer, nullable: true },
         published: { type: :boolean, default: true },
-        html_class: { type: :string, description: "For advanced use. Add an HTML class for custom purposes." },
+        html_class: { type: :string, description: "For advanced use. Add an HTML class for custom purposes.", nullable: true },
         data: {
           type: :object,
           description: "Data of the block. The structure depends on the template kind.",
@@ -42,7 +42,8 @@ module Communication::Block::WithOpenApi
         properties: {
           template_kind: { enum: [template_kind] },
           data: {
-            properties: data_properties
+            properties: data_properties,
+            additionalProperties: false
           }
         }
       })

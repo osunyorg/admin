@@ -422,10 +422,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -433,12 +435,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -533,10 +536,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -544,12 +549,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -627,10 +633,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -638,12 +646,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -708,10 +717,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -719,12 +730,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "description": {
                 "type": "string"
@@ -854,10 +866,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -865,12 +879,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "alphabetical": {
                 "type": "boolean"
@@ -926,10 +941,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -937,12 +954,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "description": {
                 "type": "string"
@@ -986,10 +1004,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -997,12 +1017,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "code": {
                 "type": "string"
@@ -1038,10 +1059,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1049,12 +1072,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "description": {
                 "type": "string"
@@ -1122,10 +1146,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1133,12 +1159,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "description": {
                 "type": "string"
@@ -1197,10 +1224,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1208,12 +1237,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -1286,10 +1316,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1297,12 +1329,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "image": {
                 "type": "object",
@@ -1356,10 +1389,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1367,12 +1402,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "description": {
                 "type": "string"
@@ -1437,10 +1473,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1448,12 +1486,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "description": {
                 "type": "string"
@@ -1517,10 +1556,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1528,12 +1569,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "description": {
                 "type": "string"
@@ -1601,10 +1643,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1612,12 +1656,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -1670,10 +1715,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1681,12 +1728,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -1782,10 +1830,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1793,12 +1843,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -1870,10 +1921,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1881,12 +1934,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "mode": {
                 "type": "string",
@@ -1935,10 +1989,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -1946,12 +2002,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "mode": {
                 "type": "string",
@@ -2019,10 +2076,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -2030,12 +2089,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -2122,10 +2182,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -2133,12 +2195,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -2217,10 +2280,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -2228,12 +2293,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -2288,10 +2354,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -2299,12 +2367,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "file": {
                 "type": "object",
@@ -2355,10 +2424,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -2366,12 +2437,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "elements": {
                 "type": "array",
@@ -2433,10 +2505,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -2444,12 +2518,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -2497,10 +2572,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -2508,12 +2585,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "layout": {
                 "type": "string",
@@ -2547,10 +2625,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -2558,12 +2638,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "description": {
                 "type": "string"
@@ -2602,10 +2683,12 @@
             ]
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "position": {
-            "type": "integer"
+            "type": "integer",
+            "nullable": true
           },
           "published": {
             "type": "boolean",
@@ -2613,12 +2696,13 @@
           },
           "html_class": {
             "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
           },
           "data": {
             "type": "object",
             "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true,
+            "additionalProperties": false,
             "properties": {
               "mode": {
                 "type": "string",
@@ -2702,12 +2786,13 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-09T15:51:56.762+01:00",
-                            "updated_at": "2024-12-09T15:51:56.762+01:00"
+                            "blocks": [],
+                            "created_at": "2024-12-09T16:45:27.606+01:00",
+                            "updated_at": "2024-12-09T16:45:27.606+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T15:51:56.778+01:00",
-                        "updated_at": "2024-12-09T15:51:56.778+01:00"
+                        "created_at": "2024-12-09T16:45:27.622+01:00",
+                        "updated_at": "2024-12-09T16:45:27.622+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -2732,12 +2817,13 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-09T15:51:56.762+01:00",
-                            "updated_at": "2024-12-09T15:51:56.762+01:00"
+                            "blocks": [],
+                            "created_at": "2024-12-09T16:45:27.606+01:00",
+                            "updated_at": "2024-12-09T16:45:27.606+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T15:51:56.778+01:00",
-                        "updated_at": "2024-12-09T15:51:56.778+01:00"
+                        "created_at": "2024-12-09T16:45:27.622+01:00",
+                        "updated_at": "2024-12-09T16:45:27.622+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -2762,12 +2848,13 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-09T15:51:56.762+01:00",
-                            "updated_at": "2024-12-09T15:51:56.762+01:00"
+                            "blocks": [],
+                            "created_at": "2024-12-09T16:45:27.606+01:00",
+                            "updated_at": "2024-12-09T16:45:27.606+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T15:51:56.778+01:00",
-                        "updated_at": "2024-12-09T15:51:56.778+01:00"
+                        "created_at": "2024-12-09T16:45:27.622+01:00",
+                        "updated_at": "2024-12-09T16:45:27.622+01:00"
                       }
                     ]
                   }
@@ -2840,19 +2927,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "4a935454-5f8e-44ed-a8c9-e0e2c2a02785",
+                      "id": "cb66abcd-0bdc-4bfb-a212-e749c0fbfd6e",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "868f95ef-c95a-4280-8700-235c28d6fb17",
+                          "id": "2af4b97d-c36c-40b7-9fbb-71edf5ca1077",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "406d406e-3f96-41e0-bbc0-124e3dbe2863",
+                            "blob_id": "dad9d5dd-4baf-4899-8c5a-b4f5442e3726",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiIzdDIydXJydHp0YmRhYTg3Y25uMGNoM202Nnk0IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDlUMTU6NTE6NTcuNTM5WiIsInB1ciI6ImJsb2Jfa2V5In19--642b0735108a40d7f47cf9e3bd326b78e78a967d/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJjZ2pkbXdxbTgxazF6dTZueDl5djdoOXRtbWQ4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDlUMTY6NDU6MjguMzEyWiIsInB1ciI6ImJsb2Jfa2V5In19--99cb85527e9e12ffe1718ac4944dd5b47d5b9b73/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -2862,12 +2949,35 @@
                           "subtitle": "Une nouvelle actualité",
                           "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
                           "text": null,
-                          "created_at": "2024-12-09T15:51:57.405+01:00",
-                          "updated_at": "2024-12-09T15:51:57.424+01:00"
+                          "blocks": [
+                            {
+                              "id": "c5c946ee-7285-4d05-a986-b458c2128a85",
+                              "migration_identifier": "post-from-api-1-fr-block-1",
+                              "template_kind": "chapter",
+                              "title": "Mon premier chapitre",
+                              "position": 1,
+                              "published": true,
+                              "html_class": null,
+                              "data": {
+                                "layout": "no_background",
+                                "text": "<p>Ceci est mon premier chapitre</p>",
+                                "notes": "",
+                                "image": {
+                                  "id": ""
+                                },
+                                "alt": "",
+                                "credit": ""
+                              },
+                              "created_at": "2024-12-09T16:45:28.164+01:00",
+                              "updated_at": "2024-12-09T16:45:28.164+01:00"
+                            }
+                          ],
+                          "created_at": "2024-12-09T16:45:28.160+01:00",
+                          "updated_at": "2024-12-09T16:45:28.179+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T15:51:57.395+01:00",
-                      "updated_at": "2024-12-09T15:51:57.533+01:00"
+                      "created_at": "2024-12-09T16:45:28.151+01:00",
+                      "updated_at": "2024-12-09T16:45:28.305+01:00"
                     }
                   }
                 }
@@ -3022,12 +3132,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-09T15:51:56.762+01:00",
-                          "updated_at": "2024-12-09T15:51:56.762+01:00"
+                          "blocks": [],
+                          "created_at": "2024-12-09T16:45:27.606+01:00",
+                          "updated_at": "2024-12-09T16:45:27.606+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T15:51:56.778+01:00",
-                      "updated_at": "2024-12-09T15:51:56.778+01:00"
+                      "created_at": "2024-12-09T16:45:27.622+01:00",
+                      "updated_at": "2024-12-09T16:45:27.622+01:00"
                     }
                   }
                 }
@@ -3129,12 +3240,13 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-09T15:51:56.762+01:00",
-                          "updated_at": "2024-12-09T15:51:57.676+01:00"
+                          "blocks": [],
+                          "created_at": "2024-12-09T16:45:27.606+01:00",
+                          "updated_at": "2024-12-09T16:45:28.462+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T15:51:56.778+01:00",
-                      "updated_at": "2024-12-09T15:51:57.681+01:00"
+                      "created_at": "2024-12-09T16:45:27.622+01:00",
+                      "updated_at": "2024-12-09T16:45:28.463+01:00"
                     }
                   }
                 }
@@ -3357,12 +3469,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T15:51:56.729+01:00",
-                            "updated_at": "2024-12-09T15:51:56.729+01:00"
+                            "created_at": "2024-12-09T16:45:27.577+01:00",
+                            "updated_at": "2024-12-09T16:45:27.577+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T15:51:56.780+01:00",
-                        "updated_at": "2024-12-09T15:51:56.780+01:00"
+                        "created_at": "2024-12-09T16:45:27.624+01:00",
+                        "updated_at": "2024-12-09T16:45:27.624+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -3404,8 +3516,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T15:51:56.729+01:00",
-                            "updated_at": "2024-12-09T15:51:56.729+01:00"
+                            "created_at": "2024-12-09T16:45:27.577+01:00",
+                            "updated_at": "2024-12-09T16:45:27.577+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -3423,12 +3535,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T15:51:56.729+01:00",
-                            "updated_at": "2024-12-09T15:51:56.729+01:00"
+                            "created_at": "2024-12-09T16:45:27.577+01:00",
+                            "updated_at": "2024-12-09T16:45:27.577+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T15:51:56.780+01:00",
-                        "updated_at": "2024-12-09T15:51:56.780+01:00"
+                        "created_at": "2024-12-09T16:45:27.624+01:00",
+                        "updated_at": "2024-12-09T16:45:27.624+01:00"
                       }
                     ]
                   }
@@ -3528,12 +3640,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-09T15:51:56.729+01:00",
-                          "updated_at": "2024-12-09T15:51:56.729+01:00"
+                          "created_at": "2024-12-09T16:45:27.577+01:00",
+                          "updated_at": "2024-12-09T16:45:27.577+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T15:51:56.780+01:00",
-                      "updated_at": "2024-12-09T15:51:56.780+01:00"
+                      "created_at": "2024-12-09T16:45:27.624+01:00",
+                      "updated_at": "2024-12-09T16:45:27.624+01:00"
                     }
                   }
                 },

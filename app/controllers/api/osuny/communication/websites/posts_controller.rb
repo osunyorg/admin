@@ -1,5 +1,6 @@
 class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communication::Websites::ApplicationController
-  load_resource class: 'Communication::Website::Post'
+  before_action :build_post, only: :create
+  before_action :load_post, only: [:show, :update, :destroy]
 
   before_action :load_migration_identifier, only: [:create, :update]
   before_action :ensure_same_migration_identifier, only: :update
@@ -36,6 +37,14 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
 
   protected
 
+  def build_post
+    @post = website.posts.build
+  end
+
+  def load_post
+    @post = website.posts.find params[:id]
+  end
+
   def load_migration_identifier
     @migration_identifier = post_params[:migration_identifier]
     render_on_missing_migration_identifier unless @migration_identifier.present?
@@ -68,7 +77,8 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
         l10n_permitted_params = l10n_params.permit(
           :migration_identifier, :language, :title, :meta_description,
           :pinned, :published, :published_at, :slug, :subtitle, :summary, :_destroy,
-          featured_image: [:url, :alt, :credit, :_destroy]
+          featured_image: [:url, :alt, :credit, :_destroy],
+          blocks: [:migration_identifier, :template_kind, :title, :position, :published, :html_class, data: {}]
         )
 
         l10n_permitted_params[:language_id] = Language.find_by(iso_code: language_iso_code)&.id
@@ -80,6 +90,13 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
         l10n_permitted_params[:id] = existing_post_l10n.id if existing_post_l10n.present?
 
         set_featured_image_to_l10n_params(l10n_permitted_params, l10n: existing_post_l10n)
+
+        blocks_attributes = l10n_permitted_params.delete(:blocks)
+        l10n_permitted_params[:blocks_attributes] = blocks_attributes.map do |block_params|
+          existing_block = existing_post_l10n.blocks.find_by(migration_identifier: block_params[:migration_identifier]) if existing_post_l10n.present?
+          block_params[:id] = existing_block.id if existing_block.present?
+          block_params
+        end if blocks_attributes.present?
 
         base_params[:localizations_attributes] << l10n_permitted_params
       end

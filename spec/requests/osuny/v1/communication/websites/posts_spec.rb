@@ -65,7 +65,20 @@ RSpec.describe 'Communication::Website::Post' do
                 published_at: '2024-11-29T16:49:00Z',
                 slug: 'ma-nouvelle-actualite',
                 subtitle: 'Une nouvelle actualité',
-                summary: 'Ceci est une nouvelle actualité créée depuis l\'API.'
+                summary: 'Ceci est une nouvelle actualité créée depuis l\'API.',
+                blocks: [
+                  {
+                    migration_identifier: 'post-from-api-1-fr-block-1',
+                    template_kind: 'chapter',
+                    title: 'Mon premier chapitre',
+                    position: 1,
+                    published: true,
+                    data: {
+                      layout: "no_background",
+                      text: "<p>Ceci est mon premier chapitre</p>"
+                    }
+                  }
+                ]
               }
             }
           }
