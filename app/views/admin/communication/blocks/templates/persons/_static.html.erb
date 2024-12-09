@@ -2,12 +2,14 @@
 <%= block_options_static block %>
       persons:
 <%
+# Not using collection partial because of role
 block.template.selected_elements.each do |element|
   person = element.person
   next if person.nil?
-  person_l10n = person.localization_for(block.language)
-  next if person_l10n.nil?
+  l10n = person.localization_for(block.language)
+  next if l10n.nil?
+  hugo = l10n.hugo(@website)
 %>
-        - slug: "<%= person_l10n.slug %>"
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 4 %>
 <%= block_component_static block, :role, template: element, depth: 5 %>
 <% end %>

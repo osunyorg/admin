@@ -175,6 +175,15 @@ en:
   batch_selectable:
     title: Edit the selection
   cancel: Cancel
+  category:
+    children: Sub-categories
+    featured_image: Featured image
+    featured_image_alt: Alternative text
+    is_taxonomy: Is a taxonomy (a family of categories)?
+    name: Name
+    parent: Parent category
+    slug: Slug
+    title: Catégories
   confirm: Confirm
   content: Content
   cookies_consent_choice: Cookies consent choice
@@ -420,6 +429,9 @@ en:
   properties:
     text:
       missing: Missing text
+  publication:
+    draft: Draft
+    published: Published
   quit: Quit
   remove: Remove
   reset: Reset

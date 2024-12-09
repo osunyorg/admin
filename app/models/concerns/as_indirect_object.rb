@@ -5,11 +5,11 @@
 module AsIndirectObject
   extend ActiveSupport::Concern
 
-  included do
-    # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas WithGitFiles ici
-    include WithDependencies
-    include WithReferences
+  # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas WithGitFiles ici
+  include WithDependencies
+  include WithReferences
 
+  included do
     has_many  :connections,
               as: :indirect_object,
               class_name: 'Communication::Website::Connection'

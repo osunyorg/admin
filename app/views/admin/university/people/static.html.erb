@@ -73,14 +73,17 @@ teachings:
     involvement_l10n = involvement.best_localization_for(language)
     program = involvement.target
     program_l10n = program.best_localization_for(language)
+    hugo = program_l10n.hugo(@website)
     %>
   - description: >-
       <%= involvement_l10n.description %>
     program:
       title: >-
         <%= program_l10n.to_s %>
-      url: >-
-        <%= program_l10n.current_permalink_in_website(@website)&.path %>
+      permalink: "<%= hugo.permalink %>"
+      path: "<%= hugo.path %>"
+      slug: "<%= hugo.slug %>"
+      file: "<%= hugo.file %>"
 <% end %>
 <% end %>
 <% if person.roles_as_administrator.any? %>
@@ -89,18 +92,21 @@ administrative_missions:
     role_l10n = role.best_localization_for(language)
     target = role.target
     target_l10n = target.best_localization_for(language)
+    hugo = target_l10n.hugo(@website)
     %>
   - description: >-
       <%= role_l10n.to_s %>
     target:
       title: >-
         <%= target_l10n.to_s %>
-      url: >-
-        <%= target_l10n.current_permalink_in_website(@website)&.path if target_l10n.respond_to? :current_permalink_in_website %>
+      permalink: "<%= hugo.permalink %>"
+      path: "<%= hugo.path %>"
+      slug: "<%= hugo.slug %>"
+      file: "<%= hugo.file %>"
 <% end %>
 <% end %>
 <%= render 'admin/application/connections/backlinks', about: @l10n %>
-<%= render 'admin/application/categories/static',
+<%= render 'admin/application/categories/widget/static',
             about: person,
             l10n: @l10n,
             categories: university.person_categories,

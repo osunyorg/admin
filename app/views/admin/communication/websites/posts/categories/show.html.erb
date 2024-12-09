@@ -1,50 +1,19 @@
 <% content_for :title, @l10n %>
 
-<div class="row">
-  <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @l10n %>
-    <%= render 'admin/application/l10n/widget', about: @category, l10n: @l10n %>
-    <%= osuny_panel t('metadata') do %>
-      <% if @category.parent %>
-        <%= osuny_label Communication::Website::Post::Category.human_attribute_name('parent') %>
-        <p>
-          <%= osuny_link_localized_if can?(:read, @category.parent),
-                                      @category.parent,
-                                      admin_communication_website_post_category_path(
-                                        website_id: @website.id,
-                                        id: @category.parent.id
-                                      ) %>
-        </p>
-      <% end %>
-      <% if @category.children.any? %>
-        <%= osuny_label Communication::Website::Post::Category.human_attribute_name('children') %>
-        <ul class="list-unstyled mb-0">
-          <% @category.children.each do |child| %>
-            <li>
-              <%= osuny_link_localized_if can?(:read, child),
-                                          child,
-                                          admin_communication_website_post_category_path(
-                                            website_id: @website.id,
-                                            id: child.id
-                                          ) %>
-            </li>
-          <% end %>
-        </ul>
-      <% end %>
-    <% end if @category.parent.present? || @category.children.any? %>
-  </div>
-  <div class="col-lg-4">
-    <%= render 'admin/application/featured_image/show', about: @l10n %>
-    <%= render 'admin/application/meta_description/show', about: @l10n %>
-  </div>
-</div>
+<%= render 'admin/application/categories/show', category: @category, l10n: @l10n %>
 <%= render 'admin/communication/contents/editor', about: @l10n %>
+
 <% if @posts.total_count > 0 %>
-  <%= osuny_panel Communication::Website::Post.model_name.human(count: 2),
-                  subtitle: "#{@posts.total_count} #{Communication::Website::Post.model_name.human(count: @posts.total_count).downcase }" do %>
-    <%= render 'admin/communication/websites/posts/list', posts: @posts, hide_category: true %>
-    <%= paginate @posts %>
-  <% end %>
+  <div class="row">
+    <div class="offset-lg-4 col-lg-8">
+      <p>
+        <%= @posts.total_count %> 
+        <%= Communication::Website::Post.model_name.human(count: @posts.total_count).downcase %>
+      </p>
+      <%= render 'admin/communication/websites/posts/list', posts: @posts, hide_category: true %>
+      <%= paginate @posts %>
+    </div>
+  </div>
 <% end %>
 
 <% content_for :action_bar_left do %>

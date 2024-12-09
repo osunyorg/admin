@@ -8,7 +8,9 @@
             <summary itemprop="name">
               <%= block_component_show block, :title, template: element %>
             </summary>
-            <p itemprop="description"><%= block_component_show block, :description, template: element %></p>
+            <div itemprop="description">
+              <%= block_component_show block, :description, template: element %>
+            </div>
           </details>
         <% end %>
     </div>

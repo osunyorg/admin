@@ -1,10 +1,10 @@
 module AsCategory
   extend ActiveSupport::Concern
 
-  included do
-    include Orderable
-    include WithTree
+  include Orderable
+  include WithTree
 
+  included do
     belongs_to  :parent,
                 class_name: self.name,
                 optional: true
