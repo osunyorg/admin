@@ -2,31 +2,32 @@
 #
 # Table name: universities
 #
-#  id                         :uuid             not null, primary key
-#  address                    :string
-#  city                       :string
-#  contribution_amount        :float
-#  country                    :string
-#  has_sso                    :boolean          default(FALSE)
-#  identifier                 :string
-#  invoice_date               :date
-#  invoice_date_yday          :integer
-#  is_really_a_university     :boolean          default(TRUE)
-#  mail_from_address          :string
-#  mail_from_name             :string
-#  name                       :string           indexed
-#  private                    :boolean
-#  sms_sender_name            :string
-#  sso_button_label           :string
-#  sso_cert                   :text
-#  sso_mapping                :jsonb
-#  sso_name_identifier_format :string
-#  sso_provider               :integer          default("saml")
-#  sso_target_url             :string
-#  zipcode                    :string
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  default_language_id        :uuid             not null, indexed
+#  id                          :uuid             not null, primary key
+#  address                     :string
+#  city                        :string
+#  contribution_amount         :float
+#  country                     :string
+#  default_github_access_token :string
+#  has_sso                     :boolean          default(FALSE)
+#  identifier                  :string
+#  invoice_date                :date
+#  invoice_date_yday           :integer
+#  is_really_a_university      :boolean          default(TRUE)
+#  mail_from_address           :string
+#  mail_from_name              :string
+#  name                        :string           indexed
+#  private                     :boolean
+#  sms_sender_name             :string
+#  sso_button_label            :string
+#  sso_cert                    :text
+#  sso_mapping                 :jsonb
+#  sso_name_identifier_format  :string
+#  sso_provider                :integer          default("saml")
+#  sso_target_url              :string
+#  zipcode                     :string
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  default_language_id         :uuid             not null, indexed
 #
 # Indexes
 #
@@ -46,6 +47,7 @@ class University < ApplicationRecord
   include WithCommunication
   include WithCountry
   include WithEducation
+  include WithGithub
   include WithIdentifier
   include WithInvoice
   include WithLanguages

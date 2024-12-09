@@ -29,7 +29,7 @@ metadata:
     content: "<%= prepare_text_for_static @l10n.volume_l10n.to_s %>"
 <% end %>
 <% if paper.kind %>
-paper_kind: "<%= prepare_text_for_static paper.kind %>"
+paper_kind: "<%= prepare_text_for_static paper.kind.to_s_in(language) %>"
 <% end %>
 <% if @l10n.volume_l10n %>
 volumes:
