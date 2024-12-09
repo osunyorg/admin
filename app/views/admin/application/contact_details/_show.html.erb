@@ -1,0 +1,9 @@
+<%
+# Fallback l10n to the about if not present
+l10n ||= about
+%>
+<div class="row">
+  <% ContactDetails::PARTS.each do |part| %>
+    <%= render "admin/application/contact_details/show/#{part}", about: about, l10n: l10n %>
+  <% end %>
+</div>

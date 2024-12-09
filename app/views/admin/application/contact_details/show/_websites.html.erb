@@ -1,0 +1,15 @@
+<%
+label = t('contact_details.websites.website.label')
+data = ContactDetails.find_data(:website, about, l10n)
+data = ContactDetails.find_data(:url, about, l10n) if data.nil?
+if data.present?
+  detail = ContactDetails::Website.new(data)
+  %>
+  <div class="col-md-6">
+    <%= render 'admin/application/contact_details/show/single',
+                about: about,
+                label: label,
+                detail: detail,
+                with_link: true %>
+  </div>
+<% end %>

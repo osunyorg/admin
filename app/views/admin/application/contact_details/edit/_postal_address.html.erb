@@ -1,0 +1,30 @@
+<% if about.respond_to?(:address) %>
+  <%= lf.input  :address_name,
+                label: t('contact_details.postal_address.address_name.label'),
+                hint: t('contact_details.postal_address.address_name.hint') if l10n.respond_to?(:address_name) %>
+  <%= f.input   :address,
+                label: t('contact_details.postal_address.address.label'),
+                hint: t('contact_details.postal_address.address.hint') %>
+  <%= lf.input :address_additional,
+                label: t('contact_details.postal_address.address_additional.label'),
+                hint: t('contact_details.postal_address.address_additional.hint') if l10n.respond_to?(:address_name) %>
+  <div class="row">
+    <div class="col-lg-2">
+      <%= f.input :zipcode,
+                label: t('contact_details.postal_address.zipcode.label'),
+                hint: t('contact_details.postal_address.zipcode.hint') %>
+    </div>
+    <div class="col-lg-5">
+      <%= f.input :city,
+                label: t('contact_details.postal_address.city.label'),
+                hint: t('contact_details.postal_address.city.hint') %>
+    </div>
+    <div class="col-lg-5">
+    <%= f.input :country,
+                label: t('contact_details.postal_address.country.label'),
+                hint: t('contact_details.postal_address.country.hint'),
+                input_html: { class: 'form-select' } %>
+
+    </div>
+  </div>
+<% end %>

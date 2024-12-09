@@ -12,19 +12,10 @@ language = @l10n.language
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/featured_image/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
-contact_details:
-<%= render 'admin/application/static/postal_address', about: location, l10n: @l10n, language: language %>
-<%= render 'admin/application/static/contact_detail', variable: :address, data: location.address, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address_name, data: @l10n.address_name, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @l10n.address_additional, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: location.zipcode, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :city, data: location.city, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :country, data: location.country, kind: ContactDetails::Country %>
-<%= render 'admin/application/static/contact_detail', variable: :website, data: @l10n.url, kind: ContactDetails::Website %>
-<%= render 'admin/application/static/contact_detail', variable: :phone, data: location.phone, kind: ContactDetails::Phone %>
-  geolocation:
-    latitude: <%= location.latitude %>
-    longitude: <%= location.longitude %>
+<%= render 'admin/application/contact_details/static',
+            about: location,
+            l10n: @l10n,
+            language: language %>
 programs:
 <%
 location.programs.each do |program|
