@@ -4,18 +4,8 @@ language = @l10n.language
 %>---
 name: >-
   <%= prepare_text_for_static @l10n.name %>
-address_name: >-
-  <%= prepare_text_for_static @l10n.address_name %>
-address: >-
-  <%= prepare_text_for_static laboratory.address %>
-address_additional: >-
-  <%= prepare_text_for_static @l10n.address_additional %>
-zipcode: >-
-  <%= prepare_text_for_static laboratory.zipcode %>
-city: >-
-  <%= prepare_text_for_static laboratory.city %>
-country: >-
-  <%= laboratory.country_common_name %>
-contact_details:
-<%= render 'admin/application/static/postal_address', about: laboratory, l10n: @l10n, language: language %>
+<%= render 'admin/application/contact_details/static',
+            about: laboratory,
+            l10n: @l10n,
+            language: language %>
 ---

@@ -5,29 +5,16 @@
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
     <div class="row mb-5">
-      <div class="col-lg-4">
-        <%= render 'admin/application/images/featured/form', f: lf, about: l10n %>
-        <%= render  'admin/application/slug/form',
+      <div class="col-lg-3">
+        <%= lf.input :name %>
+        <%= render  "admin/application/slug/form",
                     f: lf,
                     source: '#administration_location_localizations_attributes_0_name' %>
+        <%= render 'admin/application/featured_image/edit', f: lf, about: l10n %>
       </div>
-      <div class="col-lg-8">
-        <%= lf.input :name %>
+      <div class="offset-lg-1 col-lg-8">
         <%= render 'admin/application/summary/form', f: lf, about: l10n %>
-        <%= lf.input :address_name %>
-        <%= f.input :address %>
-        <%= lf.input :address_additional %>
-        <div class="row">
-          <div class="col-lg-4">
-            <%= f.input :zipcode %>
-          </div>
-          <div class="col-lg-8">
-            <%= f.input :city %>
-          </div>
-        </div>
-        <%= f.input :country, input_html: { class: 'form-select' } %>
-        <%= f.input :phone %>
-        <%= lf.input :url %>
+        <%= render 'admin/application/contact_details/edit', f: f, lf: lf, about: location, l10n: l10n %>
         <%= f.association :programs,
                           as: :check_boxes,
                           collection: osuny_collection_tree(

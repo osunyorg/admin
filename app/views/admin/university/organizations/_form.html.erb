@@ -5,62 +5,35 @@
 
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
-    <div class="row">
-      <div class="col-xl-8">
-        <%= osuny_panel t('content') do %>
-          <%= lf.input :name %>
-          <%= render 'admin/application/summary/form', f: lf, about: l10n %>
-          <%= lf.input :text,
-                      as: :summernote,
-                      input_html: {
-                        data: { 'summernote-config' => 'mini-list' }
-                      } %>
-        <% end %>
-        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
-        <%= osuny_panel University::Organization.human_attribute_name('physical') do %>
-          <div class="row pure__row--small">
-            <div class="col-xl-6">
-              <%= lf.input :address_name %>
-            </div>
-            <div class="col-xl-6">
-              <%= f.input :address %>
-            </div>
-            <div class="col-xl-6">
-              <%= lf.input :address_additional %>
-            </div>
-            <div class="col-xl-6">
-              <%= f.input :zipcode %>
-            </div>
-            <div class="col-xl-6">
-              <%= f.input :city %>
-            </div>
-            <div class="col-xl-6">
-              <%= f.input :country, input_html: { class: 'form-select' } %>
-            </div>
-          </div>
-        <% end %>
-        <%= osuny_panel University::Organization.human_attribute_name('digital') do %>
-          <div class="row pure__row--small">
-            <div class="col-xl-6">
-              <%= lf.input :url %>
-            </div>
-            <div class="col-xl-6">
-              <%= f.input :phone %>
-            </div>
-            <div class="col-xl-6">
-              <%= f.input :email %>
-            </div>
-            <div class="col-xl-6">
-              <%= lf.input :linkedin %>
-            </div>
-            <div class="col-xl-6">
-              <%= lf.input :twitter %>
-            </div>
-            <div class="col-xl-6">
-              <%= lf.input :mastodon %>
-            </div>
-          </div>
-        <% end %>
+    <div class="row mb-5">
+      <div class="col-lg-3">
+        <%= lf.input :name %>
+        <%= f.input :active, wrapper: :custom_boolean_switch %>
+        <%= render  "admin/application/slug/form",
+                    f: lf,
+                    source: '#university_organization_localizations_attributes_0_name' %>
+        <%= lf.input :logo,
+                    as: :single_deletable_file,
+                    input_html: { accept: default_images_formats_accepted },
+                    preview: 200,
+                    resize: false %>
+        <%= lf.input :logo_on_dark_background,
+                    as: :single_deletable_file,
+                    input_html: { accept: default_images_formats_accepted },
+                    preview: 200,
+                    resize: false %>
+        <%= render 'admin/application/shared_image/edit', f: lf, about: l10n %>
+        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+      </div>
+      <div class="offset-lg-1 col-lg-8">
+        <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+        <%= lf.input :text,
+                    as: :summernote,
+                    input_html: {
+                      data: { 'summernote-config' => 'mini-list' }
+                    } %>
+        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
+        <%= render 'admin/application/contact_details/edit', f: f, lf: lf, about: organization, l10n: l10n %>
         <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
           <div class="row pure__row--small">
             <div class="col-xl-6">
@@ -74,28 +47,6 @@
             </div>
           </div>
         <% end %>
-      </div>
-      <div class="col-xl-4">
-        <%= osuny_panel t('metadata') do %>
-          <%= render  'admin/application/slug/form',
-                      f: lf,
-                      source: '#university_organization_localizations_attributes_0_name' %>
-          <%= f.input :active, wrapper: :custom_boolean_switch %>
-        <% end %>
-        <%= osuny_panel University::Organization.human_attribute_name('logos') do %>
-          <%= lf.input :logo,
-                      as: :single_deletable_file,
-                      input_html: { accept: default_images_formats_accepted },
-                      preview: 200,
-                      resize: false %>
-          <%= lf.input :logo_on_dark_background,
-                      as: :single_deletable_file,
-                      input_html: { accept: default_images_formats_accepted },
-                      preview: 200,
-                      resize: false %>
-        <% end %>
-        <%= render 'admin/application/images/shared/form', f: lf, about: l10n %>
-        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
     </div>
     <% content_for :action_bar_right do %>
