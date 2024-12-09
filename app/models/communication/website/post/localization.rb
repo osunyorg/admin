@@ -47,6 +47,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
+  include WithOpenApi
   include WithPublication
   include WithUniversity
 

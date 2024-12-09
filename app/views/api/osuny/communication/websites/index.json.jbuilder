@@ -1,3 +1,1 @@
-json.array! @websites.each do |website|
-  json.extract! website, :id, :name, :url
-end
+json.partial! "api/osuny/communication/websites/website", collection: @websites, as: :website

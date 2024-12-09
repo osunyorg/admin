@@ -9,7 +9,7 @@ namespace :api do
       resources :websites, only: [:index, :show] do
         resources :events, controller: 'websites/events', only: [:index, :show, :create, :update]
         resources :pages, controller: 'websites/pages', only: [:index, :show, :create, :update]
-        resources :posts, controller: 'websites/posts', only: [:index, :show, :create, :update]
+        resources :posts, controller: 'websites/posts', only: [:index, :show, :create, :update, :destroy]
         resources :projects, controller: 'websites/projects', only: [:index, :show, :create, :update]
       end
       root to: '/api/osuny/communication#index'#, controller: '/api/osuny/communication'

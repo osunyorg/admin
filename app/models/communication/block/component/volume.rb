@@ -1,4 +1,4 @@
-class Communication::Block::Component::Volume < Communication::Block::Component::Base
+class Communication::Block::Component::Volume < Communication::Block::Component::BaseReference
 
   def volume
     return unless website

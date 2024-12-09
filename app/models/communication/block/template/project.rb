@@ -13,7 +13,7 @@ class Communication::Block::Template::Project < Communication::Block::Template::
     :selection,
     :categories
   ]
-  has_component :projects_quantity, :number, options: 3
+  has_component :projects_quantity, :number, default: 3
   has_component :category_id, :project_category
 
   has_component :option_categories,   :boolean, default: true
