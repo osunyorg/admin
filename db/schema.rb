@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_28_170222) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_09_095758) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -1500,6 +1500,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_28_170222) do
     t.uuid "default_language_id", null: false
     t.boolean "is_really_a_university", default: true
     t.float "contribution_amount"
+    t.string "default_github_access_token"
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
     t.index ["name"], name: "index_universities_on_name", opclass: :gin_trgm_ops, using: :gin
   end

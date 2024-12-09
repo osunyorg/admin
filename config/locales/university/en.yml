@@ -6,6 +6,7 @@ en:
         city: City
         contribution_amount: Amount
         country: Country
+        default_github_access_token: Default Github access token
         default_language: Default language
         has_sso: Has SSO?
         is_really_a_university: Is really a university
@@ -196,6 +197,8 @@ en:
   simple_form:
     hints:
       university:
+        default_github_access_token_with_existing: Your Github confidential access token, used by default for websites created with Deuxfleurs hosting.<br>Leave the field blank if you don't want to change the token.
+        default_github_access_token_without_existing: Your Github confidential access token, used by default for websites created with Deuxfleurs hosting.<br>If empty, a token is defined on application level.
         is_really_a_university: Uncheck this to hide the 5 realms.
         languages: "Those languages are currently used on websites: %{used_languages}"
         sms_sender_name: "11 characters max. Only alphanumeric chars ([A-Z][a-z][0-9])."
@@ -292,3 +295,4 @@ en:
       taught_programs: Taught programs
     sso: SSO
     sso_key: SSO Key
+    technical: Technical

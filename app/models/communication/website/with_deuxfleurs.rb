@@ -62,7 +62,7 @@ module Communication::Website::WithDeuxfleurs
   end
 
   def deuxfleurs_create_github_repository
-    update_columns  access_token: ENV['GITHUB_ACCESS_TOKEN'],
+    update_columns  access_token: university.github_access_token,
                     repository: deuxfleurs_default_github_repository,
                     deployment_status_badge: deuxfleurs_default_badge_url
     git_repository.init_from_template(deuxfleurs_default_github_repository_name)
