@@ -630,8 +630,22 @@
                 "type": "string"
               },
               "image": {
-                "type": "string",
-                "format": "uuid"
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "filename": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "signed_id": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
               },
               "alt": {
                 "type": "string"
@@ -714,8 +728,22 @@
                 "type": "string"
               },
               "image": {
-                "type": "string",
-                "format": "uuid"
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "filename": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "signed_id": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
               },
               "alt": {
                 "type": "string"
@@ -1111,8 +1139,22 @@
                       "type": "string"
                     },
                     "image": {
-                      "type": "string",
-                      "format": "uuid"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     },
                     "alt": {
                       "type": "string"
@@ -1178,8 +1220,22 @@
                       "type": "string"
                     },
                     "file": {
-                      "type": "string",
-                      "format": "uuid"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     }
                   }
                 }
@@ -1244,8 +1300,22 @@
                   "type": "object",
                   "properties": {
                     "image": {
-                      "type": "string",
-                      "format": "uuid"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     },
                     "alt": {
                       "type": "string"
@@ -1303,8 +1373,22 @@
             "additionalProperties": true,
             "properties": {
               "image": {
-                "type": "string",
-                "format": "uuid"
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "filename": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "signed_id": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
               },
               "alt": {
                 "type": "string"
@@ -1376,8 +1460,22 @@
                       "type": "string"
                     },
                     "image": {
-                      "type": "string",
-                      "format": "uuid"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     }
                   }
                 }
@@ -1526,8 +1624,22 @@
                       "type": "string"
                     },
                     "image": {
-                      "type": "string",
-                      "format": "uuid"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     }
                   }
                 }
@@ -1693,8 +1805,22 @@
                       "type": "string"
                     },
                     "logo": {
-                      "type": "string",
-                      "format": "uuid"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     }
                   }
                 }
@@ -2249,8 +2375,22 @@
             "additionalProperties": true,
             "properties": {
               "file": {
-                "type": "string",
-                "format": "uuid"
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "filename": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "signed_id": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
               },
               "title": {
                 "type": "string"
@@ -2316,8 +2456,22 @@
                       "type": "string"
                     },
                     "photo": {
-                      "type": "string",
-                      "format": "uuid"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
                     }
                   }
                 }
@@ -2616,12 +2770,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-09T10:20:31.080+01:00",
-                            "updated_at": "2024-12-09T10:20:31.080+01:00"
+                            "created_at": "2024-12-09T10:23:50.979+01:00",
+                            "updated_at": "2024-12-09T10:23:50.979+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T10:20:31.094+01:00",
-                        "updated_at": "2024-12-09T10:20:31.094+01:00"
+                        "created_at": "2024-12-09T10:23:50.992+01:00",
+                        "updated_at": "2024-12-09T10:23:50.992+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -2646,12 +2800,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-09T10:20:31.080+01:00",
-                            "updated_at": "2024-12-09T10:20:31.080+01:00"
+                            "created_at": "2024-12-09T10:23:50.979+01:00",
+                            "updated_at": "2024-12-09T10:23:50.979+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T10:20:31.094+01:00",
-                        "updated_at": "2024-12-09T10:20:31.094+01:00"
+                        "created_at": "2024-12-09T10:23:50.992+01:00",
+                        "updated_at": "2024-12-09T10:23:50.992+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -2676,12 +2830,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-09T10:20:31.080+01:00",
-                            "updated_at": "2024-12-09T10:20:31.080+01:00"
+                            "created_at": "2024-12-09T10:23:50.979+01:00",
+                            "updated_at": "2024-12-09T10:23:50.979+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T10:20:31.094+01:00",
-                        "updated_at": "2024-12-09T10:20:31.094+01:00"
+                        "created_at": "2024-12-09T10:23:50.992+01:00",
+                        "updated_at": "2024-12-09T10:23:50.992+01:00"
                       }
                     ]
                   }
@@ -2754,19 +2908,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "41e598a5-52b2-4722-8c1d-8c014be34bc4",
+                      "id": "115751f4-042b-46a7-97ac-d886357a2286",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "e6065849-e9cb-46ad-a143-103b4677f530",
+                          "id": "90f39cac-3059-4e3d-ac40-cd2a8b6c82d0",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "d47f2236-874d-42b8-8a0c-60d9081d22ed",
+                            "blob_id": "27ae8816-c996-4513-853e-f7e6a074bae8",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiIxdmpvbW5yMDl0ZWRrZzV6ZnJhdWpxYzViZXM3IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDlUMTA6MjA6MzEuNzc2WiIsInB1ciI6ImJsb2Jfa2V5In19--a4c5ef707581a25fe83d3c5809626adcd9236766/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiI2Ynk0ZTU4b3k4ZnFvY3NqdWFoM2E3ZWc5aGYyIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDlUMTA6MjM6NTEuNzA4WiIsInB1ciI6ImJsb2Jfa2V5In19--ecacf13c3a478a13f45173691de637c75881b35e/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -2776,12 +2930,12 @@
                           "subtitle": "Une nouvelle actualité",
                           "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
                           "text": null,
-                          "created_at": "2024-12-09T10:20:31.644+01:00",
-                          "updated_at": "2024-12-09T10:20:31.661+01:00"
+                          "created_at": "2024-12-09T10:23:51.542+01:00",
+                          "updated_at": "2024-12-09T10:23:51.561+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T10:20:31.634+01:00",
-                      "updated_at": "2024-12-09T10:20:31.770+01:00"
+                      "created_at": "2024-12-09T10:23:51.532+01:00",
+                      "updated_at": "2024-12-09T10:23:51.701+01:00"
                     }
                   }
                 }
@@ -2936,12 +3090,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-09T10:20:31.080+01:00",
-                          "updated_at": "2024-12-09T10:20:31.080+01:00"
+                          "created_at": "2024-12-09T10:23:50.979+01:00",
+                          "updated_at": "2024-12-09T10:23:50.979+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T10:20:31.094+01:00",
-                      "updated_at": "2024-12-09T10:20:31.094+01:00"
+                      "created_at": "2024-12-09T10:23:50.992+01:00",
+                      "updated_at": "2024-12-09T10:23:50.992+01:00"
                     }
                   }
                 }
@@ -3043,12 +3197,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-09T10:20:31.080+01:00",
-                          "updated_at": "2024-12-09T10:20:31.909+01:00"
+                          "created_at": "2024-12-09T10:23:50.979+01:00",
+                          "updated_at": "2024-12-09T10:23:51.877+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T10:20:31.094+01:00",
-                      "updated_at": "2024-12-09T10:20:31.913+01:00"
+                      "created_at": "2024-12-09T10:23:50.992+01:00",
+                      "updated_at": "2024-12-09T10:23:51.881+01:00"
                     }
                   }
                 }
@@ -3271,12 +3425,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T10:20:31.058+01:00",
-                            "updated_at": "2024-12-09T10:20:31.058+01:00"
+                            "created_at": "2024-12-09T10:23:50.950+01:00",
+                            "updated_at": "2024-12-09T10:23:50.950+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T10:20:31.096+01:00",
-                        "updated_at": "2024-12-09T10:20:31.096+01:00"
+                        "created_at": "2024-12-09T10:23:50.994+01:00",
+                        "updated_at": "2024-12-09T10:23:50.994+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -3318,8 +3472,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T10:20:31.058+01:00",
-                            "updated_at": "2024-12-09T10:20:31.058+01:00"
+                            "created_at": "2024-12-09T10:23:50.950+01:00",
+                            "updated_at": "2024-12-09T10:23:50.950+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -3337,12 +3491,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T10:20:31.058+01:00",
-                            "updated_at": "2024-12-09T10:20:31.058+01:00"
+                            "created_at": "2024-12-09T10:23:50.950+01:00",
+                            "updated_at": "2024-12-09T10:23:50.950+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T10:20:31.096+01:00",
-                        "updated_at": "2024-12-09T10:20:31.096+01:00"
+                        "created_at": "2024-12-09T10:23:50.994+01:00",
+                        "updated_at": "2024-12-09T10:23:50.994+01:00"
                       }
                     ]
                   }
@@ -3442,12 +3596,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-09T10:20:31.058+01:00",
-                          "updated_at": "2024-12-09T10:20:31.058+01:00"
+                          "created_at": "2024-12-09T10:23:50.950+01:00",
+                          "updated_at": "2024-12-09T10:23:50.950+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T10:20:31.096+01:00",
-                      "updated_at": "2024-12-09T10:20:31.096+01:00"
+                      "created_at": "2024-12-09T10:23:50.994+01:00",
+                      "updated_at": "2024-12-09T10:23:50.994+01:00"
                     }
                   }
                 },
