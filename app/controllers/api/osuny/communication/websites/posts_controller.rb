@@ -1,6 +1,5 @@
 class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communication::Websites::ApplicationController
-  before_action :build_post, only: :create
-  before_action :load_post, only: [:show, :update, :destroy]
+  load_resource class: 'Communication::Website::Post'
 
   before_action :load_migration_identifier, only: [:create, :update]
   before_action :ensure_same_migration_identifier, only: :update
@@ -13,6 +12,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   end
 
   def create
+    @post = website.posts.build # Peut-on le supprimer ? Est-ce que load_resource le fait ?
     @post.assign_attributes post_params
     if @post.save
       render :show, status: :created
@@ -35,14 +35,6 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   end
 
   protected
-
-  def build_post
-    @post = website.posts.build
-  end
-
-  def load_post
-    @post = website.posts.find params[:id]
-  end
 
   def load_migration_identifier
     @migration_identifier = post_params[:migration_identifier]
