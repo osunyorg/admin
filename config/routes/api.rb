@@ -6,9 +6,6 @@ namespace :api do
   # v1
   namespace :osuny, path: 'osuny/v1', defaults: { format: :json } do
     namespace :communication do
-      namespace :blocks do
-        resources :templates, only: [:index, :show]
-      end
       resources :websites, only: [:index, :show] do
         resources :events, controller: 'websites/events', only: [:index, :show, :create, :update]
         resources :pages, controller: 'websites/pages', only: [:index, :show, :create, :update]
