@@ -1,3 +1,5 @@
+      layout: <%= block.template.layout %>
+<%= block_options_static block %>
 <%
 if block.template.page
   page = block.template.page
@@ -7,9 +9,8 @@ if block.template.page
         path: "<%= page_l10n.current_permalink_in_website(@website)&.path %>"
         slug: "<%= page_l10n.slug %>"
         file: "<%= page_l10n.git_path_relative %>"
+<%= block_component_static block, :show_main_summary, depth: 4 %>
 <% end %>
-<%= block_options_static block %>
-      layout: <%= block.template.layout %>
       pages:
 <%
 block.template.selected_pages.each do |element|
