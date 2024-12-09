@@ -18,8 +18,7 @@ RSpec.configure do |config|
     communication_website: Schemas::CommunicationWebsite.schema,
     communication_website_localization: Schemas::CommunicationWebsiteLocalization.schema,
     communication_website_post: Schemas::CommunicationWebsitePost.schema,
-    communication_website_post_localization: Schemas::CommunicationWebsitePostLocalization.schema,
-    communication_block: Schemas::CommunicationBlock.base_schema
+    communication_website_post_localization: Schemas::CommunicationWebsitePostLocalization.schema
   }
   Communication::Block.template_kinds.keys.each do |template_kind|
     schema_key = "communication_block_#{template_kind}".to_sym

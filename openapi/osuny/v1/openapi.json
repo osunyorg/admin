@@ -305,70 +305,93 @@
           "blocks": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/communication_block"
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/communication_block_agenda"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_call_to_action"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_chapter"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_contact"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_datatable"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_definitions"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_embed"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_features"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_files"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_gallery"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_image"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_key_figures"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_license"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_links"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_locations"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_organizations"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_pages"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_papers"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_persons"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_posts"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_projects"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_programs"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_sound"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_testimonials"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_timeline"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_title"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_video"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_volumes"
+                }
+              ]
             }
-          }
-        }
-      },
-      "communication_block": {
-        "type": "object",
-        "title": "Communication::Block",
-        "properties": {
-          "migration_identifier": {
-            "type": "string"
-          },
-          "template_kind": {
-            "type": "string",
-            "description": "Template kind of the blocks.",
-            "enum": [
-              "agenda",
-              "call_to_action",
-              "chapter",
-              "contact",
-              "datatable",
-              "definitions",
-              "embed",
-              "features",
-              "files",
-              "gallery",
-              "image",
-              "key_figures",
-              "license",
-              "links",
-              "locations",
-              "organizations",
-              "pages",
-              "papers",
-              "persons",
-              "posts",
-              "projects",
-              "programs",
-              "sound",
-              "testimonials",
-              "timeline",
-              "title",
-              "video",
-              "volumes"
-            ]
-          },
-          "title": {
-            "type": "string"
-          },
-          "position": {
-            "type": "integer"
-          },
-          "published": {
-            "type": "boolean",
-            "default": true
-          },
-          "html_class": {
-            "type": "string",
-            "description": "For advanced use. Add an HTML class for custom purposes."
-          },
-          "data": {
-            "type": "object",
-            "description": "Data of the block. The structure depends on the template kind.",
-            "additionalProperties": true
           }
         }
       },
@@ -2325,12 +2348,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-08T17:43:00.650+01:00",
-                            "updated_at": "2024-12-08T17:43:00.650+01:00"
+                            "created_at": "2024-12-09T09:58:51.111+01:00",
+                            "updated_at": "2024-12-09T09:58:51.111+01:00"
                           }
                         },
-                        "created_at": "2024-12-08T17:43:00.665+01:00",
-                        "updated_at": "2024-12-08T17:43:00.665+01:00"
+                        "created_at": "2024-12-09T09:58:51.126+01:00",
+                        "updated_at": "2024-12-09T09:58:51.126+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -2355,12 +2378,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-08T17:43:00.650+01:00",
-                            "updated_at": "2024-12-08T17:43:00.650+01:00"
+                            "created_at": "2024-12-09T09:58:51.111+01:00",
+                            "updated_at": "2024-12-09T09:58:51.111+01:00"
                           }
                         },
-                        "created_at": "2024-12-08T17:43:00.665+01:00",
-                        "updated_at": "2024-12-08T17:43:00.665+01:00"
+                        "created_at": "2024-12-09T09:58:51.126+01:00",
+                        "updated_at": "2024-12-09T09:58:51.126+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -2385,12 +2408,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-08T17:43:00.650+01:00",
-                            "updated_at": "2024-12-08T17:43:00.650+01:00"
+                            "created_at": "2024-12-09T09:58:51.111+01:00",
+                            "updated_at": "2024-12-09T09:58:51.111+01:00"
                           }
                         },
-                        "created_at": "2024-12-08T17:43:00.665+01:00",
-                        "updated_at": "2024-12-08T17:43:00.665+01:00"
+                        "created_at": "2024-12-09T09:58:51.126+01:00",
+                        "updated_at": "2024-12-09T09:58:51.126+01:00"
                       }
                     ]
                   }
@@ -2463,19 +2486,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "1672dc08-0924-4abf-a58f-414957a0f62e",
+                      "id": "519fdc63-02eb-4613-bffa-4ff49722dd52",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "e4479d40-c56d-470d-9720-eccc229c10b7",
+                          "id": "5c57e1b1-b2b5-401f-8b0c-d7f0e90607d1",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "75316211-1924-4a36-ac98-0c0afce242ed",
+                            "blob_id": "1abbfadb-a0e7-4421-8900-1fca098adedd",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJpNzNwcXdkM2JtZ3FuZThqZjhjZG42OGx4ODNrIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDhUMTc6NDM6MDEuNTAwWiIsInB1ciI6ImJsb2Jfa2V5In19--8bab0be23233034931e77a22387cd5f0ed65542c/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJyenJ4aXBlMjl5ZXlwOG1vMzhhcHJ1eHBpdm1uIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDlUMDk6NTg6NTEuODE1WiIsInB1ciI6ImJsb2Jfa2V5In19--737352d1ee2da8b378dba62ece6e2e7e66198604/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -2485,12 +2508,12 @@
                           "subtitle": "Une nouvelle actualité",
                           "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
                           "text": null,
-                          "created_at": "2024-12-08T17:43:01.364+01:00",
-                          "updated_at": "2024-12-08T17:43:01.383+01:00"
+                          "created_at": "2024-12-09T09:58:51.688+01:00",
+                          "updated_at": "2024-12-09T09:58:51.704+01:00"
                         }
                       },
-                      "created_at": "2024-12-08T17:43:01.354+01:00",
-                      "updated_at": "2024-12-08T17:43:01.494+01:00"
+                      "created_at": "2024-12-09T09:58:51.678+01:00",
+                      "updated_at": "2024-12-09T09:58:51.808+01:00"
                     }
                   }
                 }
@@ -2645,12 +2668,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-08T17:43:00.650+01:00",
-                          "updated_at": "2024-12-08T17:43:00.650+01:00"
+                          "created_at": "2024-12-09T09:58:51.111+01:00",
+                          "updated_at": "2024-12-09T09:58:51.111+01:00"
                         }
                       },
-                      "created_at": "2024-12-08T17:43:00.665+01:00",
-                      "updated_at": "2024-12-08T17:43:00.665+01:00"
+                      "created_at": "2024-12-09T09:58:51.126+01:00",
+                      "updated_at": "2024-12-09T09:58:51.126+01:00"
                     }
                   }
                 }
@@ -2752,12 +2775,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-08T17:43:00.650+01:00",
-                          "updated_at": "2024-12-08T17:43:01.645+01:00"
+                          "created_at": "2024-12-09T09:58:51.111+01:00",
+                          "updated_at": "2024-12-09T09:58:51.946+01:00"
                         }
                       },
-                      "created_at": "2024-12-08T17:43:00.665+01:00",
-                      "updated_at": "2024-12-08T17:43:01.651+01:00"
+                      "created_at": "2024-12-09T09:58:51.126+01:00",
+                      "updated_at": "2024-12-09T09:58:51.951+01:00"
                     }
                   }
                 }
@@ -2980,12 +3003,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-08T17:43:00.622+01:00",
-                            "updated_at": "2024-12-08T17:43:00.622+01:00"
+                            "created_at": "2024-12-09T09:58:51.080+01:00",
+                            "updated_at": "2024-12-09T09:58:51.080+01:00"
                           }
                         },
-                        "created_at": "2024-12-08T17:43:00.667+01:00",
-                        "updated_at": "2024-12-08T17:43:00.667+01:00"
+                        "created_at": "2024-12-09T09:58:51.128+01:00",
+                        "updated_at": "2024-12-09T09:58:51.128+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -3027,8 +3050,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-08T17:43:00.622+01:00",
-                            "updated_at": "2024-12-08T17:43:00.622+01:00"
+                            "created_at": "2024-12-09T09:58:51.080+01:00",
+                            "updated_at": "2024-12-09T09:58:51.080+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -3046,12 +3069,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-08T17:43:00.622+01:00",
-                            "updated_at": "2024-12-08T17:43:00.622+01:00"
+                            "created_at": "2024-12-09T09:58:51.080+01:00",
+                            "updated_at": "2024-12-09T09:58:51.080+01:00"
                           }
                         },
-                        "created_at": "2024-12-08T17:43:00.667+01:00",
-                        "updated_at": "2024-12-08T17:43:00.667+01:00"
+                        "created_at": "2024-12-09T09:58:51.128+01:00",
+                        "updated_at": "2024-12-09T09:58:51.128+01:00"
                       }
                     ]
                   }
@@ -3151,12 +3174,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-08T17:43:00.622+01:00",
-                          "updated_at": "2024-12-08T17:43:00.622+01:00"
+                          "created_at": "2024-12-09T09:58:51.080+01:00",
+                          "updated_at": "2024-12-09T09:58:51.080+01:00"
                         }
                       },
-                      "created_at": "2024-12-08T17:43:00.667+01:00",
-                      "updated_at": "2024-12-08T17:43:00.667+01:00"
+                      "created_at": "2024-12-09T09:58:51.128+01:00",
+                      "updated_at": "2024-12-09T09:58:51.128+01:00"
                     }
                   }
                 },

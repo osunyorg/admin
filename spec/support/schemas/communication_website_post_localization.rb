@@ -28,7 +28,7 @@ module Schemas
           blocks: {
             type: :array,
             items: {
-              "$ref": "#/components/schemas/communication_block"
+              oneOf: CommunicationBlock.template_schema_references
             }
           }
         }

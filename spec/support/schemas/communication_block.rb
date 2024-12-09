@@ -46,6 +46,12 @@ module Schemas
       })
     end
 
+    def self.template_schema_references
+      Communication::Block.template_kinds.keys.map do |template_kind|
+        { "$ref": "#/components/schemas/communication_block_#{template_kind}" }
+      end
+    end
+
     protected
 
     def self.component_schema(component)
