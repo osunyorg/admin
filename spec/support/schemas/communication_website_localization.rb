@@ -5,7 +5,7 @@ module Schemas
         type: :object,
         title: "Communication::Website::Localization",
         properties: {
-          id: { type: :string },
+          id: { type: :string, format: :uuid },
           name: { type: :string },
           published: { type: :boolean },
           published_at: { type: :string, format: "date-time", nullable: true },

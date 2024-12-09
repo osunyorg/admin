@@ -1,4 +1,4 @@
-class Communication::Block::Component::Post < Communication::Block::Component::Base
+class Communication::Block::Component::Post < Communication::Block::Component::BaseReference
 
   def post
     return unless website

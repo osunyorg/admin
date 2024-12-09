@@ -5,7 +5,7 @@ module Schemas
         type: :object,
         title: "Communication::Website",
         properties: {
-          id: { type: :string },
+          id: { type: :string, format: :uuid },
           url: { type: :string, nullable: true },
           deuxfleurs: {
             type: :object,
@@ -41,7 +41,7 @@ module Schemas
                 items: {
                   type: :object,
                   properties: {
-                    id: { type: :string },
+                    id: { type: :string, format: :uuid },
                     name: { type: :string },
                     slug: { type: :string }
                   }

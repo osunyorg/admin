@@ -1,4 +1,4 @@
-class Communication::Block::Component::File < Communication::Block::Component::Base
+class Communication::Block::Component::File < Communication::Block::Component::BaseReference
 
   def blob
     return if data.nil? || data['id'].blank?

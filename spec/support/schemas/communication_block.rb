@@ -6,7 +6,8 @@ module Schemas
         type: :object,
         title: "Communication::Block",
         properties: {
-          migration_identifier: { type: :string },
+          id: { type: :string, format: :uuid, nullable: true },
+          migration_identifier: { type: :string, nullable: true },
           template_kind: { type: :string, description: "Template kind of the blocks.", enum: Communication::Block.template_kinds.keys },
           title: { type: :string },
           position: { type: :integer },
@@ -57,6 +58,7 @@ module Schemas
     def self.component_schema(component)
       component_class = "Communication::Block::Component::#{component[:kind].to_s.classify}".constantize
       schema = { type: component_class.openapi_property_type }
+      schema[:format] = component_class.openapi_property_format if component_class.openapi_property_format.present?
       schema[:enum] = component[:options] if component[:options].present?
       schema.merge(component_class.openapi_property_additional_properties)
     end

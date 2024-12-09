@@ -5,13 +5,13 @@ module Schemas
         type: :object,
         title: "Communication::Website::Post::Localization",
         properties: {
-          id: { type: :string },
+          id: { type: :string, format: :uuid },
           migration_identifier: { type: :string, nullable: true },
           title: { type: :string },
           featured_image: {
             type: :object,
             properties: {
-              blob_id: { type: :string, nullable: true },
+              blob_id: { type: :string, format: :uuid, nullable: true },
               alt: { type: :string, nullable: true },
               credit: { type: :string, nullable: true },
               url: { type: :string, nullable: true }
@@ -29,6 +29,7 @@ module Schemas
             type: :array,
             items: {
               oneOf: CommunicationBlock.template_schema_references
+              # "$ref": "#/components/schemas/communication_block"
             }
           }
         }

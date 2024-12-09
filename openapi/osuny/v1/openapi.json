@@ -34,7 +34,8 @@
         "title": "Communication::Website",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "url": {
             "type": "string",
@@ -102,7 +103,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     },
                     "name": {
                       "type": "string"
@@ -138,7 +140,8 @@
         "title": "Communication::Website::Localization",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string"
@@ -210,7 +213,8 @@
         "title": "Communication::Website::Post",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "migration_identifier": {
             "type": "string",
@@ -241,7 +245,8 @@
         "title": "Communication::Website::Post::Localization",
         "properties": {
           "id": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           "migration_identifier": {
             "type": "string",
@@ -255,6 +260,7 @@
             "properties": {
               "blob_id": {
                 "type": "string",
+                "format": "uuid",
                 "nullable": true
               },
               "alt": {
@@ -395,12 +401,86 @@
           }
         }
       },
+      "communication_block": {
+        "type": "object",
+        "title": "Communication::Block",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda",
+              "call_to_action",
+              "chapter",
+              "contact",
+              "datatable",
+              "definitions",
+              "embed",
+              "features",
+              "files",
+              "gallery",
+              "image",
+              "key_figures",
+              "license",
+              "links",
+              "locations",
+              "organizations",
+              "pages",
+              "papers",
+              "persons",
+              "posts",
+              "projects",
+              "programs",
+              "sound",
+              "testimonials",
+              "timeline",
+              "title",
+              "video",
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes."
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": true
+          }
+        }
+      },
       "communication_block_agenda": {
         "type": "object",
         "title": "Communication::Block (Agenda)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -446,7 +526,8 @@
                 ]
               },
               "category_id": {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               "description": {
                 "type": "string"
@@ -503,8 +584,14 @@
         "type": "object",
         "title": "Communication::Block (Call to action)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -543,7 +630,8 @@
                 "type": "string"
               },
               "image": {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               "alt": {
                 "type": "string"
@@ -576,8 +664,14 @@
         "type": "object",
         "title": "Communication::Block (Chapter)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -620,7 +714,8 @@
                 "type": "string"
               },
               "image": {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               "alt": {
                 "type": "string"
@@ -636,8 +731,14 @@
         "type": "object",
         "title": "Communication::Block (Contact)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -776,8 +877,14 @@
         "type": "object",
         "title": "Communication::Block (Datatable)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -842,8 +949,14 @@
         "type": "object",
         "title": "Communication::Block (Definitions)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -896,8 +1009,14 @@
         "type": "object",
         "title": "Communication::Block (Embed)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -942,8 +1061,14 @@
         "type": "object",
         "title": "Communication::Block (Features)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -986,7 +1111,8 @@
                       "type": "string"
                     },
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     },
                     "alt": {
                       "type": "string"
@@ -1005,8 +1131,14 @@
         "type": "object",
         "title": "Communication::Block (Files)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1046,7 +1178,8 @@
                       "type": "string"
                     },
                     "file": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -1059,8 +1192,14 @@
         "type": "object",
         "title": "Communication::Block (Gallery)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1105,7 +1244,8 @@
                   "type": "object",
                   "properties": {
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     },
                     "alt": {
                       "type": "string"
@@ -1127,8 +1267,14 @@
         "type": "object",
         "title": "Communication::Block (Image)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1157,7 +1303,8 @@
             "additionalProperties": true,
             "properties": {
               "image": {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               "alt": {
                 "type": "string"
@@ -1176,8 +1323,14 @@
         "type": "object",
         "title": "Communication::Block (Key figures)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1223,7 +1376,8 @@
                       "type": "string"
                     },
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -1236,8 +1390,14 @@
         "type": "object",
         "title": "Communication::Block (License)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1310,8 +1470,14 @@
         "type": "object",
         "title": "Communication::Block (Links)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1360,7 +1526,8 @@
                       "type": "string"
                     },
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -1373,8 +1540,14 @@
         "type": "object",
         "title": "Communication::Block (Locations)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1422,7 +1595,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -1435,8 +1609,14 @@
         "type": "object",
         "title": "Communication::Block (Organizations)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1479,7 +1659,8 @@
                 ]
               },
               "category_id": {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               "description": {
                 "type": "string"
@@ -1502,7 +1683,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     },
                     "name": {
                       "type": "string"
@@ -1511,7 +1693,8 @@
                       "type": "string"
                     },
                     "logo": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -1524,8 +1707,14 @@
         "type": "object",
         "title": "Communication::Block (Pages)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1574,7 +1763,8 @@
                 "type": "string"
               },
               "page_id": {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               "option_image": {
                 "type": "boolean"
@@ -1591,7 +1781,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -1604,8 +1795,14 @@
         "type": "object",
         "title": "Communication::Block (Papers)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1649,7 +1846,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -1662,8 +1860,14 @@
         "type": "object",
         "title": "Communication::Block (Persons)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1699,7 +1903,8 @@
                 ]
               },
               "category_id": {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               "description": {
                 "type": "string"
@@ -1722,7 +1927,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     },
                     "role": {
                       "type": "string"
@@ -1738,8 +1944,14 @@
         "type": "object",
         "title": "Communication::Block (Posts)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1791,7 +2003,8 @@
                 "type": "number"
               },
               "category_id": {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               "option_author": {
                 "type": "boolean"
@@ -1820,7 +2033,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -1833,8 +2047,14 @@
         "type": "object",
         "title": "Communication::Block (Projects)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1884,7 +2104,8 @@
                 "type": "number"
               },
               "category_id": {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               "option_categories": {
                 "type": "boolean"
@@ -1907,7 +2128,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -1920,8 +2142,14 @@
         "type": "object",
         "title": "Communication::Block (Programs)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -1971,7 +2199,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -1984,8 +2213,14 @@
         "type": "object",
         "title": "Communication::Block (Sound)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -2014,7 +2249,8 @@
             "additionalProperties": true,
             "properties": {
               "file": {
-                "type": "string"
+                "type": "string",
+                "format": "uuid"
               },
               "title": {
                 "type": "string"
@@ -2030,8 +2266,14 @@
         "type": "object",
         "title": "Communication::Block (Testimonials)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -2074,7 +2316,8 @@
                       "type": "string"
                     },
                     "photo": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -2087,8 +2330,14 @@
         "type": "object",
         "title": "Communication::Block (Timeline)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -2145,8 +2394,14 @@
         "type": "object",
         "title": "Communication::Block (Title)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -2189,8 +2444,14 @@
         "type": "object",
         "title": "Communication::Block (Video)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -2238,8 +2499,14 @@
         "type": "object",
         "title": "Communication::Block (Volumes)",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
           "migration_identifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "template_kind": {
             "type": "string",
@@ -2283,7 +2550,8 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "format": "uuid"
                     }
                   }
                 }
@@ -2348,12 +2616,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-09T09:58:51.111+01:00",
-                            "updated_at": "2024-12-09T09:58:51.111+01:00"
+                            "created_at": "2024-12-09T10:20:31.080+01:00",
+                            "updated_at": "2024-12-09T10:20:31.080+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T09:58:51.126+01:00",
-                        "updated_at": "2024-12-09T09:58:51.126+01:00"
+                        "created_at": "2024-12-09T10:20:31.094+01:00",
+                        "updated_at": "2024-12-09T10:20:31.094+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -2378,12 +2646,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-09T09:58:51.111+01:00",
-                            "updated_at": "2024-12-09T09:58:51.111+01:00"
+                            "created_at": "2024-12-09T10:20:31.080+01:00",
+                            "updated_at": "2024-12-09T10:20:31.080+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T09:58:51.126+01:00",
-                        "updated_at": "2024-12-09T09:58:51.126+01:00"
+                        "created_at": "2024-12-09T10:20:31.094+01:00",
+                        "updated_at": "2024-12-09T10:20:31.094+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -2408,12 +2676,12 @@
                             "subtitle": null,
                             "summary": null,
                             "text": null,
-                            "created_at": "2024-12-09T09:58:51.111+01:00",
-                            "updated_at": "2024-12-09T09:58:51.111+01:00"
+                            "created_at": "2024-12-09T10:20:31.080+01:00",
+                            "updated_at": "2024-12-09T10:20:31.080+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T09:58:51.126+01:00",
-                        "updated_at": "2024-12-09T09:58:51.126+01:00"
+                        "created_at": "2024-12-09T10:20:31.094+01:00",
+                        "updated_at": "2024-12-09T10:20:31.094+01:00"
                       }
                     ]
                   }
@@ -2486,19 +2754,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "519fdc63-02eb-4613-bffa-4ff49722dd52",
+                      "id": "41e598a5-52b2-4722-8c1d-8c014be34bc4",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "5c57e1b1-b2b5-401f-8b0c-d7f0e90607d1",
+                          "id": "e6065849-e9cb-46ad-a143-103b4677f530",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "1abbfadb-a0e7-4421-8900-1fca098adedd",
+                            "blob_id": "d47f2236-874d-42b8-8a0c-60d9081d22ed",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJyenJ4aXBlMjl5ZXlwOG1vMzhhcHJ1eHBpdm1uIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDlUMDk6NTg6NTEuODE1WiIsInB1ciI6ImJsb2Jfa2V5In19--737352d1ee2da8b378dba62ece6e2e7e66198604/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiIxdmpvbW5yMDl0ZWRrZzV6ZnJhdWpxYzViZXM3IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDlUMTA6MjA6MzEuNzc2WiIsInB1ciI6ImJsb2Jfa2V5In19--a4c5ef707581a25fe83d3c5809626adcd9236766/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -2508,12 +2776,12 @@
                           "subtitle": "Une nouvelle actualité",
                           "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
                           "text": null,
-                          "created_at": "2024-12-09T09:58:51.688+01:00",
-                          "updated_at": "2024-12-09T09:58:51.704+01:00"
+                          "created_at": "2024-12-09T10:20:31.644+01:00",
+                          "updated_at": "2024-12-09T10:20:31.661+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T09:58:51.678+01:00",
-                      "updated_at": "2024-12-09T09:58:51.808+01:00"
+                      "created_at": "2024-12-09T10:20:31.634+01:00",
+                      "updated_at": "2024-12-09T10:20:31.770+01:00"
                     }
                   }
                 }
@@ -2668,12 +2936,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-09T09:58:51.111+01:00",
-                          "updated_at": "2024-12-09T09:58:51.111+01:00"
+                          "created_at": "2024-12-09T10:20:31.080+01:00",
+                          "updated_at": "2024-12-09T10:20:31.080+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T09:58:51.126+01:00",
-                      "updated_at": "2024-12-09T09:58:51.126+01:00"
+                      "created_at": "2024-12-09T10:20:31.094+01:00",
+                      "updated_at": "2024-12-09T10:20:31.094+01:00"
                     }
                   }
                 }
@@ -2775,12 +3043,12 @@
                           "subtitle": null,
                           "summary": null,
                           "text": null,
-                          "created_at": "2024-12-09T09:58:51.111+01:00",
-                          "updated_at": "2024-12-09T09:58:51.946+01:00"
+                          "created_at": "2024-12-09T10:20:31.080+01:00",
+                          "updated_at": "2024-12-09T10:20:31.909+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T09:58:51.126+01:00",
-                      "updated_at": "2024-12-09T09:58:51.951+01:00"
+                      "created_at": "2024-12-09T10:20:31.094+01:00",
+                      "updated_at": "2024-12-09T10:20:31.913+01:00"
                     }
                   }
                 }
@@ -3003,12 +3271,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T09:58:51.080+01:00",
-                            "updated_at": "2024-12-09T09:58:51.080+01:00"
+                            "created_at": "2024-12-09T10:20:31.058+01:00",
+                            "updated_at": "2024-12-09T10:20:31.058+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T09:58:51.128+01:00",
-                        "updated_at": "2024-12-09T09:58:51.128+01:00"
+                        "created_at": "2024-12-09T10:20:31.096+01:00",
+                        "updated_at": "2024-12-09T10:20:31.096+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -3050,8 +3318,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T09:58:51.080+01:00",
-                            "updated_at": "2024-12-09T09:58:51.080+01:00"
+                            "created_at": "2024-12-09T10:20:31.058+01:00",
+                            "updated_at": "2024-12-09T10:20:31.058+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -3069,12 +3337,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T09:58:51.080+01:00",
-                            "updated_at": "2024-12-09T09:58:51.080+01:00"
+                            "created_at": "2024-12-09T10:20:31.058+01:00",
+                            "updated_at": "2024-12-09T10:20:31.058+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T09:58:51.128+01:00",
-                        "updated_at": "2024-12-09T09:58:51.128+01:00"
+                        "created_at": "2024-12-09T10:20:31.096+01:00",
+                        "updated_at": "2024-12-09T10:20:31.096+01:00"
                       }
                     ]
                   }
@@ -3174,12 +3442,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-09T09:58:51.080+01:00",
-                          "updated_at": "2024-12-09T09:58:51.080+01:00"
+                          "created_at": "2024-12-09T10:20:31.058+01:00",
+                          "updated_at": "2024-12-09T10:20:31.058+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T09:58:51.128+01:00",
-                      "updated_at": "2024-12-09T09:58:51.128+01:00"
+                      "created_at": "2024-12-09T10:20:31.096+01:00",
+                      "updated_at": "2024-12-09T10:20:31.096+01:00"
                     }
                   }
                 },

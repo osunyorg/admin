@@ -8,6 +8,10 @@ class Communication::Block::Component::Base
     :string
   end
 
+  def self.openapi_property_format
+    nil
+  end
+
   def self.openapi_property_additional_properties
     {}
   end

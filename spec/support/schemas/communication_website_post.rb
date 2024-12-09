@@ -5,7 +5,7 @@ module Schemas
         type: :object,
         title: "Communication::Website::Post",
         properties: {
-          id: { type: :string },
+          id: { type: :string, format: :uuid },
           migration_identifier: { type: :string, nullable: true },
           full_width: { type: :boolean },
           localizations: {
