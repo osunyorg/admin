@@ -241,6 +241,8 @@ RSpec.describe 'Communication::Website::Post' do
         run_test!
       end
 
+      # TODO: Add test for missing migration identifier in localization
+
       response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
         let("X-Osuny-Token") { 'fake-token' }
         run_test!
