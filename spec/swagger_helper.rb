@@ -15,16 +15,16 @@ RSpec.configure do |config|
   # document below. You can override this behavior by adding a openapi_spec tag to the
   # the root example_group in your specs, e.g. describe '...', openapi_spec: 'v2/swagger.json'
   schemas = {
-    communication_website: Schemas::CommunicationWebsite.schema,
-    communication_website_localization: Schemas::CommunicationWebsiteLocalization.schema,
-    communication_website_post: Schemas::CommunicationWebsitePost.schema,
-    communication_website_post_localization: Schemas::CommunicationWebsitePostLocalization.schema,
-    communication_block: Schemas::CommunicationBlock.base_schema
+    communication_website: Communication::Website::OPENAPI_SCHEMA,
+    communication_website_localization: Communication::Website::Localization::OPENAPI_SCHEMA,
+    communication_website_post: Communication::Website::Post::OPENAPI_SCHEMA,
+    communication_website_post_localization: Communication::Website::Post::Localization::OPENAPI_SCHEMA
   }
   Communication::Block.template_kinds.keys.each do |template_kind|
     schema_key = "communication_block_#{template_kind}".to_sym
-    schemas[schema_key] = Schemas::CommunicationBlock.template_schema(template_kind)
+    schemas[schema_key] = Communication::Block.openapi_schema_for_template(template_kind)
   end
+
   config.openapi_specs = {
     'osuny/v1/openapi.json' => {
       openapi: '3.0.1',

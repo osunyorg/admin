@@ -1,28 +1,29 @@
-# frozen_string_literal: true
-module Schemas
-  class CommunicationBlock
-    def self.base_schema
-      {
-        type: :object,
-        title: "Communication::Block",
-        properties: {
-          id: { type: :string, format: :uuid, nullable: true },
-          migration_identifier: { type: :string, nullable: true },
-          template_kind: { type: :string, description: "Template kind of the blocks.", enum: Communication::Block.template_kinds.keys },
-          title: { type: :string },
-          position: { type: :integer },
-          published: { type: :boolean, default: true },
-          html_class: { type: :string, description: "For advanced use. Add an HTML class for custom purposes." },
-          data: {
-            type: :object,
-            description: "Data of the block. The structure depends on the template kind.",
-            additionalProperties: true
-          }
+module Communication::Block::WithOpenApi
+  extend ActiveSupport::Concern
+
+  included do
+    OPENAPI_SCHEMA = {
+      type: :object,
+      title: "Communication::Block",
+      properties: {
+        id: { type: :string, format: :uuid, nullable: true },
+        migration_identifier: { type: :string, nullable: true },
+        template_kind: { type: :string, description: "Template kind of the blocks.", enum: self.template_kinds.keys },
+        title: { type: :string },
+        position: { type: :integer },
+        published: { type: :boolean, default: true },
+        html_class: { type: :string, description: "For advanced use. Add an HTML class for custom purposes." },
+        data: {
+          type: :object,
+          description: "Data of the block. The structure depends on the template kind.",
+          additionalProperties: true
         }
       }
-    end
+    }
+  end
 
-    def self.template_schema(template_kind)
+  class_methods do
+    def openapi_schema_for_template(template_kind)
       template_class = "Communication::Block::Template::#{template_kind.classify}".constantize
       data_properties = {}
 
@@ -36,7 +37,7 @@ module Schemas
         items: element_schema(template_class.element_class)
       } if template_class.element_class.present?
 
-      base_schema.deep_merge({
+      OPENAPI_SCHEMA.deep_merge({
         title: "Communication::Block (#{template_kind.humanize})",
         properties: {
           template_kind: { enum: [template_kind] },
@@ -47,15 +48,15 @@ module Schemas
       })
     end
 
-    def self.template_schema_references
-      Communication::Block.template_kinds.keys.map do |template_kind|
+    def templates_openapi_schema_references
+      self.template_kinds.keys.map do |template_kind|
         { "$ref": "#/components/schemas/communication_block_#{template_kind}" }
       end
     end
 
     protected
 
-    def self.component_schema(component)
+    def component_schema(component)
       component_class = "Communication::Block::Component::#{component[:kind].to_s.classify}".constantize
       schema = { type: component_class.openapi_property_type }
       schema[:format] = component_class.openapi_property_format if component_class.openapi_property_format.present?
@@ -63,7 +64,7 @@ module Schemas
       schema.merge(component_class.openapi_property_additional_properties)
     end
 
-    def self.element_schema(element_class)
+    def element_schema(element_class)
       schema = { type: :object, properties: {} }
       element_class.components_descriptions.each do |component|
         property = component[:property]
