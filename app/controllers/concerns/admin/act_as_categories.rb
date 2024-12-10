@@ -40,6 +40,15 @@ module Admin::ActAsCategories
     raise NoMethodError.new("categories_class must be implemented in the controller, for example Communication::Website::Agenda::Category")
   end
 
+  def permitted_params_for(object_key)
+    params.require(object_key).permit(
+      :is_taxonomy, :parent_id,
+      localizations_attributes: [
+        :id, :name, :slug, :summary, :meta_description, :language_id,
+        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+      ]).merge(university_id: current_university.id)
+  end
+
   def trigger_category_sync(category)
     if category.respond_to?(:sync_with_git)
       category.sync_with_git

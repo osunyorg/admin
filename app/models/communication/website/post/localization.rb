@@ -67,11 +67,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   end
 
   def git_path_relative
-    "posts/#{static_path}.html"
-  end
-
-  def static_path
-    "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
+    "posts/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 
   def template_static

@@ -52,7 +52,7 @@
           </div>
         <% end %>
 
-        <%= render 'admin/application/categories/form', f: f, categories: @categories %>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
 
         <%= osuny_panel University::Person.human_attribute_name('contacts') do %>
           <p><em><%= t("university.person.personal_data_warning") %></em></p>
@@ -139,7 +139,7 @@
       </div>
       <div class="col-lg-4">
         <%= osuny_panel t('metadata') do %>
-          <%= render  "admin/application/slug/form",
+          <%= render  'admin/application/slug/form',
                     f: lf,
                     source: '#university_person_localizations_attributes_0_first_name, #university_person_localizations_attributes_0_last_name' %>
           <%= f.association :user, collection: current_university.users.ordered if can?(:manage, User) %>

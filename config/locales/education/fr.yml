@@ -101,13 +101,6 @@ fr:
         short_name: Nom abrégé
         slug: Identifiant
         url: Site Web
-      education/program/category:
-        children: Sous-catégories
-        parent: Catégorie parente
-      education/program/category/localization:
-        language: Langue
-        name: Nom
-        slug: Slug
       education/school:
         address: Adresse
         administrators: Équipe administrative
