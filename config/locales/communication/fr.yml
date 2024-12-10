@@ -590,7 +590,7 @@ fr:
         feature_posts: Pour publier des actualités, comme un média
         git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
-        in_production: Ne cochez pas cette case tant que le site n'est pas sur un domaine ou un sous-domaine dédié (pas *.osuny.site).
+        in_production: Cochez cette case une fois le site déployé sur un domaine ou un sous-domaine dédié (pas *.osuny.site).
         languages: 'Si vous sélectionnez une seule langue les urls ne seront pas préfixées. Si vous en sélectionnez plusieurs le site sera considéré comme multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'
         plausible_url: Lien de partage généré selon la <a href="https://plausible.io/docs/shared-links" target="_blank">documentation officielle Plausible</a>.
         repository: Sous la forme organisation/nom, par exemple noesya/bordeauxmontaigne-iut, à laisser vide lors de la création d'un site avec Deuxfleurs.
