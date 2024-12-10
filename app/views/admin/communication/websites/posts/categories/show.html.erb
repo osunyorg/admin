@@ -1,7 +1,6 @@
 <% content_for :title, @l10n %>
 
 <%= render 'admin/application/categories/show', category: @category, l10n: @l10n %>
-<%= render 'admin/communication/contents/editor', about: @l10n %>
 
 <% if @posts.total_count > 0 %>
   <div class="row">
