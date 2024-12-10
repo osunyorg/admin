@@ -1,0 +1,9 @@
+<% if can?(:create, Communication::Website::Page::Category)  %>
+  <%
+  title = Communication::Website::Page::Category.model_name.human(count: 2)
+  action = create_link Communication::Website::Page::Category
+  %>
+  <%= osuny_panel title, action: action do %>
+    <%= render 'admin/communication/websites/pages/categories/list', categories: categories %>
+  <% end %>
+<% end %>

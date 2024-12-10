@@ -181,12 +181,18 @@ en:
         url: URL
       communication/website/page:
         bodyclass: Specific CSS class
+        categories: Categories
         children: Children pages
         full_width: Full width
         parent: Parent page
         related_category: Related category
         special_page: Special page
         website: Website
+      communication/website/page/category/localization:
+        featured_image: Featured image
+        featured_image_alt: Alt text
+        name: Name
+        slug: Slug
       communication/website/page/localization:
         breadcrumb_title: Title in breadcrumbs
         featured_image: Featured image
@@ -305,6 +311,9 @@ en:
         all: All pages
         one: Page
         other: Pages
+      communication/website/page/category:
+        one: Category
+        other: Categories
       communication/website/portfolio/category:
         one: Category
         other: Categories
@@ -604,5 +613,5 @@ en:
       communication_website_permalink:
         path: "Must be an URL path. Example: /old/path"
       communication_website_post:
-        full_width: On large screens, a full width post uses all available space for the content. 
+        full_width: On large screens, a full width post uses all available space for the content.
         text: This field is deprecated, content will not be displayed on the website.
