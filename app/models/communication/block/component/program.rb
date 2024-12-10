@@ -1,4 +1,4 @@
-class Communication::Block::Component::Program < Communication::Block::Component::Base
+class Communication::Block::Component::Program < Communication::Block::Component::BaseReference
 
   def program
     template.block.university.programs.find_by(id: data)

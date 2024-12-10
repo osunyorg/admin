@@ -1,12 +1,13 @@
 class Api::Osuny::Communication::Websites::ApplicationController < Api::Osuny::ApplicationController
+  before_action :load_website
 
   protected
 
-  def websites
-    @websites ||= current_university.websites
+  def load_website
+    @website = current_university.websites.find params[:website_id]
   end
 
   def website
-    @website ||= websites.find params[:website_id]
+    @website
   end
 end

@@ -1,4 +1,4 @@
-class Communication::Block::Component::Organization < Communication::Block::Component::Base
+class Communication::Block::Component::Organization < Communication::Block::Component::BaseReference
 
   def organization
     template.block

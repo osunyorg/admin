@@ -67,6 +67,7 @@ class Communication::Website < ApplicationRecord
   include WithGitRepository
   include WithLock
   include WithManagers
+  include WithOpenApi
   include WithProgramCategories
   include WithReferences
   include WithSpecialPages

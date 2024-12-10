@@ -1,4 +1,5 @@
 test_post:
+  migration_identifier: test-post-fixture-1
   website: website_with_github
   university: default_university
 

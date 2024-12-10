@@ -1,4 +1,4 @@
-class Communication::Block::Component::Person < Communication::Block::Component::Base
+class Communication::Block::Component::Person < Communication::Block::Component::BaseReference
 
   def person
     template.block

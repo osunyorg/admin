@@ -43,45 +43,9 @@ class Communication::Block < ApplicationRecord
   include WithHeadingRanks
   include WithHtmlClass
   include WithTemplate
+  include WithOpenApi # Must be included after WithTemplate to load template_kinds
   include WithUniversity
   include Sanitizable
-
-  # Les numéros sont un peu en vrac
-  # Dans l'idée, pour le futur
-  # 1000 basic
-  # 2000 storytelling
-  # 3000 references
-  # 4000 utilities
-  enum :template_kind, {
-    agenda: 3100,
-    call_to_action: 900,
-    chapter: 50,
-    contact: 57,
-    datatable: 54,
-    definitions: 800,
-    embed: 53,
-    features: 2010,
-    files: 55,
-    gallery: 300,
-    image: 51,
-    key_figures: 56,
-    license: 4040,
-    links: 4050,
-    locations: 3200,
-    organizations: 200,
-    pages: 600,
-    papers: 3300,
-    persons: 100,
-    posts: 500,
-    projects: 3101,
-    programs: 58,
-    sound: 1005,
-    testimonials: 400,
-    timeline: 700,
-    title: 1001,
-    video: 52,
-    volumes: 3310
-  }, prefix: :template
 
   belongs_to  :about, polymorphic: true
   belongs_to  :communication_website,

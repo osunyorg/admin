@@ -1,9 +1,9 @@
-class Api::Osuny::Communication::WebsitesController < Api::Osuny::Communication::Websites::ApplicationController
+class Api::Osuny::Communication::WebsitesController < Api::Osuny::ApplicationController
   def index
-    @websites = websites.ordered(current_language)
+    @websites = current_university.websites.includes(:localizations)
   end
 
   def show
-    @website = websites.find params[:id]
+    @website = current_university.websites.find params[:id]
   end
 end
