@@ -27,6 +27,8 @@ class Ability::Admin < Ability
   end
 
   def admin_education
+    # Necessaire pour l'affichage des tableaux de bord
+    # https://github.com/osunyorg/admin/pull/2491
     can :manage, University::Person::Localization::Teacher
     can :manage, Education::AcademicYear, university_id: @user.university_id
     can :manage, Education::Cohort, university_id: @user.university_id
@@ -37,6 +39,8 @@ class Ability::Admin < Ability
   end
 
   def admin_research
+    # Necessaire pour l'affichage des tableaux de bord
+    # https://github.com/osunyorg/admin/pull/2491
     can :manage, University::Person::Localization::Researcher
     can :manage, Research::Hal::Author
     can :manage, Research::Publication
@@ -50,6 +54,8 @@ class Ability::Admin < Ability
   end
 
   def admin_communication
+    # Necessaire pour l'affichage des tableaux de bord
+    # https://github.com/osunyorg/admin/pull/2491
     can :manage, University::Person::Localization::Author
     can :manage, Communication::Block, university_id: @user.university_id
     can :create, Communication::Block
@@ -80,6 +86,8 @@ class Ability::Admin < Ability
   end
 
   def admin_administration
+    # Necessaire pour l'affichage des tableaux de bord
+    # https://github.com/osunyorg/admin/pull/2491
     can :manage, University::Person::Alumnus
     can :manage, Administration::Location
     can :read, Administration::Qualiopi
