@@ -11,7 +11,10 @@ call_to_action_class += ' call_to_action--with-title' unless block.title.blank?
           <%= render 'admin/communication/blocks/partials/top', block: block %>
           <% if block.template.elements %>
             <div class="actions" <% if block.template.elements.count > 1 %>role="group"<% end %>>
-              <% block.template.elements.each do |element| %>
+              <%
+              block.template.elements.each do |element|
+                next if element.title.blank?
+                %>
                 <% if element.title %>
                   <a href="<%= block_component_show block, :url, template: element %>"
                     <% if element.target_blank %>
