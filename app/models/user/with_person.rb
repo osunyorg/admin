@@ -31,11 +31,9 @@ module User::WithPerson
     person_l10n.slug = person_l10n.to_s.parameterize
     person_l10n.save
     if picture.attached?
-      # Update person with the new picture
-      person.picture = picture # FIXME ?
+      ActiveStorage::Utils.duplicate(picture, person.picture)
     elsif person.picture.attached?
-      # Update user with the person's picture
-      picture = person.picture
+      ActiveStorage::Utils.duplicate(person.picture, picture)
     end
     person.save
   end
