@@ -28,9 +28,15 @@ module User::WithPerson
     person_l10n = person.original_localization
     person_l10n.first_name = first_name
     person_l10n.last_name = last_name
-    person_l10n.slug =person_l10n.to_s.parameterize
+    person_l10n.slug = person_l10n.to_s.parameterize
     person_l10n.save
-    person.picture.purge if picture_infos.present? && person.picture&.attached?
+    if picture.attached?
+      # Update person with the new picture
+      person.picture = picture # FIXME ?
+    elsif person.picture.attached?
+      # Update user with the person's picture
+      picture = person.picture
+    end
     person.save
   end
 end
