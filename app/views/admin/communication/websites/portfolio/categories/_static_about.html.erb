@@ -1,6 +1,0 @@
-<% if @about.categories.any? %>
-projects_categories:
-  <% @about.portfolio_categories.each do |category| %>
-  - "<%= category.slug_with_ancestors_slugs(separator: '-') %>"
-  <% end %>
-<% end %>

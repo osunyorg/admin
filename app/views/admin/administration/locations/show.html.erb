@@ -1,40 +1,13 @@
 <% content_for :title, @l10n %>
 
-
 <div class="row">
   <div class="col-lg-3">
-    <%= render 'admin/application/featured_image/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
   </div>
   <div class="offset-lg-1 col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n, small: true %>
     <div class="mb-5">
-      <div class="row">
-        <div class="col-lg-6">
-          <%= osuny_label Administration::Location.human_attribute_name('address') %>
-          <p>
-            <% if @l10n.address_name.present? %>
-              <%= @l10n.address_name %><br>
-            <% end %>
-            <% if @location.address.present? %>
-              <%= @location.address %><br>
-            <% end %>
-            <% if @l10n.address_additional.present? %>
-              <%= @l10n.address_additional %><br>
-            <% end %>
-            <%= @location.zipcode %> <%= @location.city %> <%= @location.country %>
-          </p>
-        </div>
-        <div class="col-lg-6">
-          <% if @location.phone.present? %>
-            <%= osuny_label Administration::Location.human_attribute_name('phone') %>
-            <p><%= @location.phone %></p>
-          <% end %>
-          <% if @l10n.url.present? %>
-            <%= osuny_label Administration::Location::Localization.human_attribute_name('url') %>
-            <p><%= link_to @l10n.url, @l10n.url, target: :_blank %></p>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'admin/application/contact_details/show', about: @location, l10n: @l10n %>
     </div>
     <% if @schools.any? %>
       <%= osuny_panel Administration::Location.human_attribute_name('schools'), small: true do %>

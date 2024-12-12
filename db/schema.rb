@@ -943,6 +943,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_23_061523) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.text "summary"
     t.index ["about_id"], name: "index_education_program_category_localizations_on_about_id"
     t.index ["language_id"], name: "index_education_program_category_localizations_on_language_id"
     t.index ["university_id"], name: "idx_on_university_id_833fd3c673"
@@ -1501,6 +1505,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_23_061523) do
     t.uuid "default_language_id", null: false
     t.boolean "is_really_a_university", default: true
     t.float "contribution_amount"
+    t.string "default_github_access_token"
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
     t.index ["name"], name: "index_universities_on_name", opclass: :gin_trgm_ops, using: :gin
   end
@@ -1535,6 +1540,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_23_061523) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.text "summary"
     t.index ["about_id"], name: "idx_on_about_id_f5fce0a0b7"
     t.index ["language_id"], name: "idx_on_language_id_8e479f2339"
     t.index ["slug"], name: "index_university_organization_category_localizations_on_slug"
@@ -1652,6 +1661,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_23_061523) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.text "summary"
     t.index ["about_id"], name: "index_university_person_category_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_person_category_localizations_on_language_id"
     t.index ["slug"], name: "index_university_person_category_localizations_on_slug"

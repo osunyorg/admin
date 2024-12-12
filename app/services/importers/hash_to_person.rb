@@ -151,12 +151,7 @@ module Importers
       return if @photo.nil?
       return if person.picture.attached?
       return unless @photo.end_with?(*Rails.application.config.default_images_formats)
-      begin
-        file = URI.parse(@photo).open
-        filename = File.basename(@photo)
-        person.picture.attach(io: file, filename: filename)
-      rescue
-      end
+      ActiveStorage::Utils.attach_from_url(person.picture, @photo)
     end
 
   end

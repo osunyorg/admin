@@ -32,43 +32,17 @@
 #  fk_rails_e84628b736  (university_id => universities.id)
 #
 class Communication::Website::Portfolio::Category::Localization < ApplicationRecord
-  include AsLocalization
-  include AsLocalizedTree
-  include Contentful
-  include Initials
-  include Permalinkable # We override slug_unavailable? method
-  include Sanitizable
-  include WithBlobs
-  include WithFeaturedImage
-  include WithGitFiles
-  include WithUniversity
+  include AsCategoryLocalization
 
   belongs_to :website,
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  has_summernote :summary
-
-  validates :name, presence: true
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     prefix = git_path_content_prefix(website)
-    slugs = slug_with_ancestors_slugs(separator: '-')
-    "#{prefix}projects_categories/#{slugs}/_index.html"
-  end
-
-  def template_static
-    "admin/communication/websites/portfolio/categories/static"
-  end
-
-  def dependencies
-    active_storage_blobs +
-    contents_dependencies
-  end
-
-  def to_s
-    "#{name}"
+    "#{prefix}projects_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   protected
@@ -87,10 +61,5 @@ class Communication::Website::Portfolio::Category::Localization < ApplicationRec
 
   def set_communication_website_id
     self.communication_website_id ||= about.communication_website_id
-  end
-
-  # TODO : Pertinent ?
-  def hugo_slug_in_website(website)
-    slug_with_ancestors_slugs(separator: '-')
   end
 end

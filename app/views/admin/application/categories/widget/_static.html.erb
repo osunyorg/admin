@@ -1,0 +1,41 @@
+<%
+about_categories = about.categories
+taxonomies = categories.taxonomies.ordered
+%>
+<% if about_categories.any? %>
+<%= key %>:
+<%
+about_categories.ordered.each do |category|
+  category_l10n = category.localization_for(l10n.language)
+  next if category_l10n.nil?
+  hugo = category_l10n.hugo(@website)
+%>
+  - "<%= hugo.slug %>"
+<% end %>
+<%
+  if taxonomies.any?
+%>
+taxonomies:
+<%
+    taxonomies.ordered.each do |taxonomy|
+      taxonomy_l10n = taxonomy.localization_for(l10n.language)
+      next if taxonomy_l10n.nil?
+      hugo = taxonomy_l10n.hugo(@website)
+%>
+  - name: "<%= prepare_text_for_static taxonomy_l10n.to_s %>"
+    slug: "<%= hugo.slug %>"
+    categories:
+<%
+      about_categories.in_taxonomy(taxonomy).ordered.each do |category|
+        category_l10n = category.localization_for(l10n.language)
+        next if category_l10n.nil?
+        hugo = category_l10n.hugo(@website)
+%>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
+        name: "<%= prepare_text_for_static category_l10n.to_s %>"
+<%
+      end
+    end
+  end
+end
+%>

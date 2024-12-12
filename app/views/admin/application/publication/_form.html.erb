@@ -1,0 +1,3 @@
+<%= f.input :published,
+            label: t('publication.published'),
+            wrapper: :custom_boolean_switch if can? :publish, about %>

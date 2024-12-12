@@ -1,6 +1,6 @@
 <% if block.template.mode == 'categories' %>
   <p>
-    <%= @website.agenda_categories
+    <%= block.website.agenda_categories
                 .map { |category| category.to_s_in(block.language) }
                 .join(', ') %>
 
