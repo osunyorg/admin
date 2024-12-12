@@ -39,3 +39,13 @@ taxonomies:
   end
 end
 %>
+free_categories:
+<%
+about_categories.ordered.each do |category|
+  next if category.in_taxonomy?
+  category_l10n = category.localization_for(l10n.language)
+  next if category_l10n.nil?
+  hugo = category_l10n.hugo(@website)
+%>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
+<% end %>
