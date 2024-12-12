@@ -31,12 +31,15 @@ module User::WithAvatar
   end
 
   def do_update_picture
-    begin
-      downloaded_image = URI.parse(picture_url).open
-      content_type = downloaded_image.content_type
-      extension = content_type.split('/').last
-      self.picture.attach(io: downloaded_image, filename: "avatar.#{extension}")
-    rescue
-    end
+    # Not using ActiveStorage::Utils because of the specific name
+    downloaded_image = URI.parse(picture_url).open
+    content_type = downloaded_image.content_type
+    extension = content_type.split('/').last
+    filename =  "avatar.#{extension}"
+    self.picture.attach(
+      io: downloaded_image, 
+      filename: filename
+    )
+  rescue
   end
 end

@@ -8,9 +8,10 @@ module Communication::Website::WithScreenshot
   def screenshot!
     return if url.blank?
     screenshot_url = Screenshot.capture(url)
-    return if screenshot_url.blank?
-    downloaded_image = URI(screenshot_url).open
-    self.screenshot.attach  io: downloaded_image, 
-                            filename: "screenshot.png"
+    ActiveStorage::Utils.attach_from_url(
+      self.screenshot,
+      screenshot_url,
+      filename: 'screenshot.png'
+    )
   end
 end
