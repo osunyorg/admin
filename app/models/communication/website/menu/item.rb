@@ -130,10 +130,6 @@ class Communication::Website::Menu::Item < ApplicationRecord
     end
   end
 
-  def static_file
-    hugo.file if about.present?
-  end
-
   def list_of_other_items
     items = []
     menu.items.where.not(id: id).root.ordered.each do |item|
@@ -151,7 +147,10 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'kind' => kind,
       'children' => children.ordered.map(&:to_static_hash).compact
     }
-    hash['file'] = static_file if static_file.present?
+    if hugo.present?
+      hash['path'] = hugo.path
+      hash['file'] = hugo.file
+    end
     hash
   end
 
@@ -180,11 +179,11 @@ class Communication::Website::Menu::Item < ApplicationRecord
   protected
 
   def hugo
-    @hugo ||= about_l10n.hugo(website)
+    @hugo ||= about_l10n&.hugo(website)
   end
 
   def about_l10n
-    @about_l10n ||= about.localization_for(language)
+    @about_l10n ||= about&.localization_for(language)
   end
 
   def last_ordered_element
