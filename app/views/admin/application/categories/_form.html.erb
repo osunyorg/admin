@@ -1,30 +1,20 @@
-<% if categories.any? %>
-  <%= osuny_panel t('admin.categories.title') do %>
-    <div class="row">
-      <% categories.taxonomies.each do |taxonomy| %>
-        <div class="col-lg-6 col-xxl-4">
-          <%= osuny_label taxonomy.to_s_in(current_language) %>
-          <%= f.association :categories,
-                            label_text: false,
-                            as: :check_boxes,
-                            collection: osuny_collection_tree(
-                              taxonomy.children,
-                              localized: true
-                            ) %>
-        </div>
-      <% end %>
-      <% if categories.root.free.any? %>
-        <div class="col-lg-6 col-xxl-4">
-          <%= osuny_label t('admin.categories.other') if categories.taxonomies.any? %>
-          <%= f.association :categories,
-                            label_text: false,
-                            as: :check_boxes,
-                            collection: osuny_collection_tree(
-                              categories.root.free,
-                              localized: true
-                            ) %>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
-<% end %>
+<div class="row">
+  <div class="col-lg-4">
+    <%= render 'admin/application/images/featured/form', f: lf, about: l10n %>
+  </div>
+  <div class="col-lg-8">
+    <%= lf.input :name, label: t('category.name'), input_html: { id: 'category_name' } %>
+    <%= render  'admin/application/slug/form',
+                f: lf,
+                source: '#category_name' %>
+    <%= f.association :parent,
+                      collection: osuny_collection_tree(
+                        collection,
+                        except: category,
+                        localized: true
+                      ) unless category.is_taxonomy %>
+    <%= f.input :is_taxonomy, label: t('category.is_taxonomy') if category.possible_taxonomy? %>
+    <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+    <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+  </div>
+</div>

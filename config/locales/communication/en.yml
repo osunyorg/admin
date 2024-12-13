@@ -127,12 +127,6 @@ en:
         social: Social media
         university: University
         url: URL
-      communication/website/agenda/category:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        parent: Parent category
-        slug: Slug
       communication/website/agenda/event:
         categories: Categories
         dates: Dates
@@ -208,11 +202,6 @@ en:
         title: Title
       communication/website/permalink:
         path: Path
-      communication/website/portfolio/category/localization:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        slug: Slug
       communication/website/portfolio/project:
         categories: Categories
         year: Year
@@ -226,14 +215,6 @@ en:
         categories: Categories
         full_width: Full width
         website: Website
-      communication/website/post/category:
-        children: Children categories
-        parent: Parent category
-      communication/website/post/category/localization:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        slug: Slug
       communication/website/post/localization:
         category: Category
         date: Date
@@ -342,10 +323,6 @@ en:
         one: Tag
         other: Tags
   admin:
-    categories:
-      is_taxonomy: Is a taxonomy (a family of categories)
-      other: Other
-      title: Categories
     communication:
       author:
         show_person_html: "This page only shows the last posts written by the person as an author.<br>If you wish to view or modify the person's details, click on the link below."
@@ -432,9 +409,6 @@ en:
           previous_paths: Redirects (old paths)
           title: Manage redirects
         see_showcase: See showcase
-        social:
-          free: Libres
-          private: Privatifs
         subnav:
           structure: Structure
         technical:
@@ -616,7 +590,7 @@ en:
         feature_posts: To publish posts, like a media
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
-        in_production: Do not tick this box until the site is on a dedicated domain or sub-domain (not *.osuny.site).
+        in_production: Tick this box once the site is deployed on a dedicated domain or sub-domain (not *.osuny.site).
         languages: 'If you select one language the website urls will not be prefixed. If you select more than one language the website will then be considered as multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
         plausible_url: Dashboard link generated following the <a href="https://plausible.io/docs/shared-links" target="_blank">official Plausible documentation</a>.
         repository: As organization/name, for example noesya/bordeauxmontaigne-iut. Leave it empty when creating a website with Deuxfleurs.
@@ -630,5 +604,5 @@ en:
       communication_website_permalink:
         path: "Must be an URL path. Example: /old/path"
       communication_website_post:
-        full_width: On large screens, a full width post uses all available space for the content. 
+        full_width: On large screens, a full width post uses all available space for the content.
         text: This field is deprecated, content will not be displayed on the website.

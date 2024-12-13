@@ -58,10 +58,7 @@ module Importers
 
     def attach_image!
       return if page.image.blank?
-      @l10n.featured_image.attach(
-        io: URI.parse(page.image).open,
-        filename: File.basename(page.image).split('?').first
-      )
+      ActiveStorage::Utils.attach_from_url(@l10n.featured_image, page.image)
     rescue
       puts "Attach image failed"
     end

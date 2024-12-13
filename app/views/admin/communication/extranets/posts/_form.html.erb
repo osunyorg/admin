@@ -16,7 +16,7 @@
           <% if can? :publish, post %>
             <div class="row pure__row--small">
               <div class="col-6">
-                <%= lf.input :published %>
+                <%= render 'admin/application/publication/form', f: lf, about: post %>
               </div>
               <div class="col-6">
                 <%= lf.input :pinned %>
@@ -28,11 +28,11 @@
                             collection: osuny_collection(@extranet.post_categories, localized: true) %>
           <%= f.association :author,
                             collection: osuny_collection(@extranet.connected_people, localized: true) %>
-          <%= render  "admin/application/slug/form",
+          <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#communication_extranet_post_localizations_attributes_0_title' %>
         <% end %>
-        <%= render 'admin/application/featured_image/edit', f: lf, about: @l10n %>
+        <%= render 'admin/application/images/featured/form', f: lf, about: @l10n %>
       </div>
     </div>
     <% content_for :action_bar_right do %>

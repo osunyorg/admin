@@ -78,11 +78,11 @@ module AsLocalization
 
   # standalone-category
   # parent-category/child-category
-  def slug_with_ancestors_slugs(separator: '/')
+  def slug_with_ancestors_slugs
     slugs = about.ancestors_and_self.map do |ancestor|
       ancestor.best_localization_for(language).slug
     end
-    slugs.compact_blank.join(separator)
+    slugs.compact_blank.join('/')
   end
 
   protected
@@ -99,13 +99,9 @@ module AsLocalization
 
   # Utility method to duplicate attachments
   def localize_attachment(localization, attachment_name)
-    localization.public_send(attachment_name).attach(
-      io: URI.parse(public_send(attachment_name).url).open,
-      filename: public_send(attachment_name).filename.to_s,
-      content_type: public_send(attachment_name).content_type
-    )
-  rescue
-    # Missing attachment
+    from = public_send(attachment_name)
+    to = localization.public_send(attachment_name)
+    ActiveStorage::Utils.duplicate(from, to)
   end
 
   # can be overwritten in model

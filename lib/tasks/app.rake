@@ -34,6 +34,11 @@ namespace :app do
         puts "Refreshing token for « #{website} »"
         website.update_column :access_token, options[:new_access_token]
       }
+      universities = University.where(default_github_access_token: options[:old_access_token])
+      websites.each { |university|
+        puts "Refreshing token for « #{university} »"
+        university.update_column :default_github_access_token, options[:new_access_token]
+      }
       exit 0
     end
   end
