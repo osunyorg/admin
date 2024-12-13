@@ -35,7 +35,7 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
   end
 
   def before_validation
-    return if url.blank? || video_provider.nil? || video_title.present?
+    return if url.blank? || video_title.present? || video_provider.nil?
     # It should be as simple as...
     self.video_title = video_provider.title
     # ... but it's not, as previous line does nothing
