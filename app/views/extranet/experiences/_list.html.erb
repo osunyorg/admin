@@ -22,15 +22,17 @@ edit ||= false
                           class: 'btn btn-sm btn-primary mt-2' if edit %>
             </div>
             <div class="col-md-6 text-end">
-              <% if experience.organization.present? %>
+              <%
+              if experience.organization.present?
+                path = alumni_university_organization_path(experience.organization)
+                %>
                 <% if organization_l10n.logo.attached? %>
-                  <%= link_to organization_path(experience.organization) do %>
+                  <%= link_to path do %>
                     <%= kamifusen_tag organization_l10n.logo, width: 100, class: 'img-fluid experience__organization__logo' %>
                   <% end %>
                 <% else %>
                   <p class="text-end">
-                    <%= link_to organization_l10n,
-                                organization_path(experience.organization) %>
+                    <%= link_to organization_l10n, path %>
                   </p>
                 <% end %>
               <div>

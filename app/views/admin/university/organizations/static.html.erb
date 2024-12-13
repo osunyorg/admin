@@ -1,9 +1,10 @@
 <%
 # this version has to incremented every time you change something in the file, to invalidate the cache
-version = 5
+version = 6
 # Pas dans le controller parce que ça se fait dans les background jobs, à partir du @about
 organization = @l10n.about
 university = organization.university
+language = @l10n.language
 cache_key = [organization, @l10n, @website.id, version]
 cache cache_key do
 %>---
@@ -16,7 +17,7 @@ cache cache_key do
             toc_offcanvas: true %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
-<%= render 'admin/application/shared_image/static', about: @l10n %>
+<%= render 'admin/application/images/shared/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
 <%= render 'admin/application/connections/backlinks', about: @l10n %>
 <%= render 'admin/application/static/attribute/text', about: @about, key: :long_name %>
@@ -24,30 +25,17 @@ cache cache_key do
 kind:
   code: "<%= organization.kind %>"
   label: "<%= organization.kind_i18n %>"
-contact_details:
-<%= render 'admin/application/static/postal_address', about: organization, l10n: @l10n, language: @l10n.language %>
-<%= render 'admin/application/static/contact_detail', variable: :address_name, data: @about.address_name, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address, data: organization.address, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @about.address_additional, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: organization.zipcode, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :city, data: organization.city, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :country, data: organization.country, kind: ContactDetails::Country %>
-<%= render 'admin/application/static/contact_detail', variable: :website, data: @about.url, kind: ContactDetails::Website %>
-<%= render 'admin/application/static/contact_detail', variable: :linkedin, data: @about.linkedin, kind: ContactDetails::Linkedin %>
-<%= render 'admin/application/static/contact_detail', variable: :twitter, data: @about.twitter, kind: ContactDetails::Twitter %>
-<%= render 'admin/application/static/contact_detail', variable: :mastodon, data: @about.mastodon, kind: ContactDetails::Mastodon %>
-<%= render 'admin/application/static/contact_detail', variable: :phone, data: organization.phone, kind: ContactDetails::Phone %>
-<%= render 'admin/application/static/contact_detail', variable: :email, data: organization.email, kind: ContactDetails::Email %>
-  geolocation:
-    latitude: <%= organization.latitude %>
-    longitude: <%= organization.longitude %>
+<%= render 'admin/application/contact_details/static',
+            about: organization,
+            l10n: @l10n,
+            language: language %>
 <% if @about.logo.attached? %>
 logo: "<%= @about.logo.blob.id %>"
 <% end %>
 <% if @about.logo_on_dark_background.attached? %>
 logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
 <% end %>
-<%= render 'admin/application/categories/static',
+<%= render 'admin/application/categories/widget/static',
             about: organization,
             l10n: @l10n,
             categories: university.organization_categories,

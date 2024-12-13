@@ -61,14 +61,16 @@ class Server::UniversitiesController < Server::ApplicationController
   end
 
   def university_params
-    params.require(:university).permit(:name,
-      :address, :zipcode, :city, :country,
+    attribute_names = [
+      :name, :address, :zipcode, :city, :country,
       :private, :identifier, :logo, :logo_delete, :sms_sender_name,
       :has_sso, :sso_target_url, :sso_cert, :sso_name_identifier_format, :sso_mapping, :sso_button_label,
       :invoice_date, :contribution_amount,
       :is_really_a_university,
       :default_language_id, language_ids: []
-    )
+    ]
+    attribute_names << :default_github_access_token unless params[:university][:default_github_access_token].blank?
+    params.require(:university).permit(attribute_names)
   end
 
 end

@@ -28,9 +28,13 @@ module User::WithPerson
     person_l10n = person.original_localization
     person_l10n.first_name = first_name
     person_l10n.last_name = last_name
-    person_l10n.slug =person_l10n.to_s.parameterize
+    person_l10n.slug = person_l10n.to_s.parameterize
     person_l10n.save
-    person.picture.purge if picture_infos.present? && person.picture&.attached?
+    if picture.attached?
+      ActiveStorage::Utils.duplicate(picture, person.picture)
+    elsif person.picture.attached?
+      ActiveStorage::Utils.duplicate(person.picture, picture)
+    end
     person.save
   end
 end

@@ -1,82 +1,54 @@
 <% content_for :title, @l10n %>
 
 <div class="row">
-
-  <div class="col-xxl-4">
-    <%= osuny_panel t('metadata') do %>
-      <%= osuny_label Education::School.human_attribute_name('address') %>
-      <p>
-        <%= @school.address %><br>
-        <%= @school.zipcode %> <%= @school.city %>
-        <% if @school.country.present? %>
-          <br><%= @school.country_name %>
-        <% end %>
-      </p>
-      <% if @school.phone.present? %>
-        <%= osuny_label Education::School.human_attribute_name('phone') %>
-        <p><%= @school.phone %></p>
+  <div class="col-lg-3">
+    <% if @l10n.logo.attached? %>
+      <div>
+        <%= osuny_label University::Organization::Localization.human_attribute_name('logo') %><br>
+        <%= kamifusen_tag @l10n.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5 mb-3' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="offset-lg-1 col-lg-8">
+    <div class="mb-5">
+      <%= render 'admin/application/contact_details/show', about: @school, l10n: @l10n %>
+    </div>
+    <% if @websites.any? %>
+      <%= osuny_panel Administration::Location.human_attribute_name('websites'), small: true do %>
+        <%= render 'admin/communication/websites/list', websites: @websites %>
       <% end %>
-      <% if @l10n.url.present? %>
-        <%= osuny_label Education::School::Localization.human_attribute_name('url') %>
-        <p><%= link_to @l10n.url, @l10n.url, target: :_blank %></p>
+    <% end %>
+
+    <% if @locations.any? %>
+      <%= osuny_panel Education::School.human_attribute_name('locations') do %>
+        <%= render 'admin/administration/locations/list', locations: @locations %>
+      <% end %>
+    <% end %>
+
+    <%
+    action = ''
+    action += link_to t('education.schools.manage_roles'),
+                      admin_education_school_roles_path(school_id: @school.id),
+                      class: button_classes if can?(:update, University::Role)
+    %>
+    <%= osuny_panel Education::School.human_attribute_name('roles'), action: action do %>
+      <% if @roles.any? %>
+        <%= render 'admin/education/schools/roles/list', roles: @roles %>
+      <% end %>
+    <% end %>
+
+    <% if @programs.any? %>
+      <%= osuny_panel Education::School.human_attribute_name('programs') do %>
+        <%= render 'admin/education/programs/list', programs: @programs %>
+        <div>
+          <%= @school.alumni.count %>
+          <%= University::Person::Alumnus.model_name.human(count: 2).downcase %>
+        </div>
       <% end %>
     <% end %>
   </div>
-  <% if @l10n.logo.attached? %>
-    <div class="col-xxl-4">
-      <%= osuny_panel Education::School::Localization.human_attribute_name('logo') do %>
-        <%= image_tag @l10n.logo, class: 'img-fluid' %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% if @school.locations.any? %>
-    <div class="col-xxl-4">
-      <%= osuny_panel Education::School.human_attribute_name('locations') do %>
-        <ul class="list-unstyled">
-          <% @school.locations.ordered(current_language).each do |location| %>
-            <li><%= osuny_link_localized_if can?(:read, location), location, [:admin, location] %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% if @school.websites.any? %>
-    <div class="col-xxl-4">
-      <%= osuny_panel Education::School.human_attribute_name('websites') do %>
-        <ul class="list-unstyled">
-          <% @school.websites.each do |website| %>
-            <li><%= osuny_link_localized website, [:admin, website] %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
-  <% end %>
-
 </div>
 
-<%
-action = ''
-action += link_to t('education.schools.manage_roles'),
-                  admin_education_school_roles_path(school_id: @school.id),
-                  class: button_classes if can?(:update, University::Role)
-%>
-<%= osuny_panel Education::School.human_attribute_name('roles'), action: action do %>
-  <% if @roles.any? %>
-    <%= render 'admin/education/schools/roles/list', roles: @roles %>
-  <% end %>
-<% end %>
-
-<% if @programs.any? %>
-  <%= osuny_panel Education::School.human_attribute_name('programs') do %>
-    <%= render 'admin/education/programs/list', programs: @programs %>
-    <div>
-      <%= @school.alumni.count %>
-      <%= University::Person::Alumnus.model_name.human(count: 2).downcase %>
-    </div>
-  <% end %>
-<% end %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @school %>

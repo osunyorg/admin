@@ -2,7 +2,7 @@ Bugsnag.configure do |config|
   config.api_key = ENV['BUGSNAG_RUBY_KEY']
   config.release_stage = ENV['APPLICATION_ENV']
   config.notify_release_stages = ['production', 'staging']
-  config.meta_data_filters += ['access_token', 'sso_cert']
+  config.meta_data_filters += ['default_github_access_token', 'access_token', 'sso_cert']
 
   config.add_on_error(proc do |event|
     next unless event.metadata.key?(:job)

@@ -4,13 +4,16 @@ class ContactDetails::Phone < ContactDetails::Base
 
   def prepare_value
     super
-    @value.remove! ' '
-    @value.remove! '.'
+    [' ', '.', '-'].each do |string|
+      @value.remove! string
+    end
     @value = "tel:#{@value}"
   end
 
   def prepare_label
     super
-    @label.gsub! '.', ' '
+    ['.', '-'].each do |string|
+      @label.gsub! string, ' '
+    end
   end
 end

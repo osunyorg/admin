@@ -5,14 +5,15 @@
   <%
   category_l10n = block.template.category.localization_for(block.language)
   if category_l10n.present?
+  hugo = category_l10n.hugo(@website)
   %>
-      category: "/<%= category_l10n.slug_with_ancestors_slugs(separator: '-') %>/"
+      category: "<%= hugo.slug %>"
   <% end %>
 <% end %>
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
-      posts:
-<% block.template.selected_posts.each do |post| %>
-  <% post_l10n = post.localization_for(block.language) %>
-        - "<%= post_l10n.static_path %>"
-<% end %>
+<%= render 'admin/application/static/hugo/collection',
+            key: :posts,
+            depth: 3,
+            collection: block.template.selected_posts,
+            language: block.language %>

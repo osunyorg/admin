@@ -117,6 +117,10 @@ class Communication::Website < ApplicationRecord
   scope :for_update, -> (autoupdate, language = nil) { where(autoupdate_theme: autoupdate) }
   scope :with_url, -> { where.not(url: [nil, '']) }
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
+  scope :ordered_by_production_date, -> {
+    # TODO add in_production_at and use it
+    order(created_at: :desc)
+  }
 
   def to_s
     original_localization.to_s

@@ -19,7 +19,7 @@
 
     <%= osuny_property_show_text @l10n, :slug, hide_blank: true %>
     <%= osuny_property_show_boolean @organization, :active %>
-    <%= render 'admin/application/categories/show', about: @organization %>
+    <%= render 'admin/application/categories/widget/show', about: @organization %>
     <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
@@ -30,40 +30,7 @@
       <%= @l10n.text.to_s.html_safe %>
     <% end if strip_tags(@l10n.text.to_s).present? %>
 
-    <%= osuny_panel University::Organization.human_attribute_name('physical') do %>
-      <%= osuny_property_show_text @l10n, :address_name, hide_blank: true %>
-      <%= osuny_property_show_text @organization, :address, hide_blank: true %>
-      <%= osuny_property_show_text @l10n, :address_additional, hide_blank: true %>
-      <%= osuny_property_show_text @organization, :zipcode, hide_blank: true %>
-      <%= osuny_property_show_text @organization, :city, hide_blank: true %>
-      <% if @organization.country.present? %>
-        <div class="col-md-4">
-          <%= osuny_label University::Organization.human_attribute_name('country') %>
-        </div>
-        <div class="col-md-8">
-          <p><%= @organization.country_name %></p>
-        </div>
-      <% end %>
-      <% if @organization.geolocated? %>
-        <div class="col-md-4">
-          <%= osuny_label University::Organization.human_attribute_name('geolocation') %>
-        </div>
-        <div class="col-md-8">
-          <p><%= @organization.geo_point.to_s %></p>
-        </div>
-      <% end %>
-
-    <% end %>
-    <%= osuny_panel University::Organization.human_attribute_name('digital') do %>
-      <div class="row pure__row--small">
-        <%= osuny_property_show_url @l10n, :url, hide_blank: true %>
-        <%= osuny_property_show_text @organization, :phone, hide_blank: true %>
-        <%= osuny_property_show_text @organization, :email, hide_blank: true %>
-        <%= osuny_property_show_text @l10n, :linkedin, hide_blank: true %>
-        <%= osuny_property_show_text @l10n, :twitter, hide_blank: true %>
-        <%= osuny_property_show_text @l10n, :mastodon, hide_blank: true %>
-      </div>
-    <% end %>
+    <%= render 'admin/application/contact_details/show', about: @organization, l10n: @l10n %>
 
     <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
       <div class="row pure__row--small">

@@ -2,11 +2,13 @@
 if block.template.page
   page = block.template.page
   page_l10n = page.localization_for(block.language)
+  hugo = page_l10n.hugo(block.website)
 %>
       page:
-        path: "<%= page_l10n.current_permalink_in_website(@website)&.path %>"
-        slug: "<%= page_l10n.slug %>"
-        file: "<%= page_l10n.git_path_relative %>"
+        permalink: "<%= hugo.permalink %>"
+        path: "<%= hugo.path %>"
+        slug: "<%= hugo.slug %>"
+        file: "<%= hugo.file %>"
 <% end %>
 <% if block.template.mode == 'category' && block.template.category %>
   <%
@@ -19,13 +21,8 @@ if block.template.page
 <% end %>
 <%= block_options_static block %>
       layout: <%= block.template.layout %>
-      pages:
-<%
-block.template.selected_pages.each do |element|
-  element_l10n = element.localization_for(block.language)
-%>
-        - path: "<%= element_l10n.current_permalink_in_website(@website)&.path %>"
-          slug: "<%= element_l10n.slug %>"
-          file: "<%= element_l10n.git_path_relative %>"
-          external: false
-<% end %>
+<%= render 'admin/application/static/hugo/collection',
+            key: :pages,
+            depth: 3,
+            collection: block.template.selected_pages,
+            language: block.language %>

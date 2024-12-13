@@ -1,0 +1,41 @@
+<div id="preview" class="preview modal preview--mobile">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-body">
+        <iframe src="<%= request.path %>/preview" loading="lazy"></iframe>
+      </div>
+      <div class="modal-footer d-block">
+        <div class="row">
+          <div class="col-6 col-lg-3 order-2 order-lg-1 pt-2">
+            <p class="modal-title"><%= t 'preview.title' %></p>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2 d-flex small">
+            <ul class="nav nav-pills m-lg-auto" aria-label="Preview modes">
+              <li class="nav-item">
+                <a class="nav-link rounded-pill active preview__button" href="#" data-mode="mobile">
+                  <i class="<%= Icon::COMMUNICATION_WEBSITE_PREVIEW_MOBILE %>"></i>
+                  <%= t 'preview.mobile' %>
+                </a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link rounded-pill preview__button" href="#" data-mode="tablet">
+                  <i class="<%= Icon::COMMUNICATION_WEBSITE_PREVIEW_TABLET %>"></i>
+                  <%= t 'preview.tablet' %>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link rounded-pill preview__button" href="#" data-mode="desktop">
+                  <i class="<%= Icon::COMMUNICATION_WEBSITE_PREVIEW_DESKTOP %>"></i>
+                  <%= t 'preview.desktop' %>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-3 order-3 order-lg-3 text-end pt-2">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

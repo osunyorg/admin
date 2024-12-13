@@ -2,7 +2,7 @@ class Communication::Website::Permalink::Page < Communication::Website::Permalin
 
   # /notre-institut/histoire/
   def self.pattern_in_website(website, language)
-    '/:slug_with_ancestors_slugs/'
+    '/:slug/'
   end
 
   protected
@@ -13,7 +13,7 @@ class Communication::Website::Permalink::Page < Communication::Website::Permalin
 
   def substitutions
     {
-      slug_with_ancestors_slugs: about.slug_with_ancestors_slugs
+      slug: about.slug_with_ancestors_slugs
     }
   end
 

@@ -1,7 +1,10 @@
 <%= block_component_static block, :description %>
-<%= block_component_static block, :columns %>
+      columns:
+<% block.template.columns.each do |column| %>
+        - "<%= prepare_text_for_static column %>"
+<% end %>
       rows:
 <% block.template.elements.each do |element| %>
-<%= block_component_static block, :cells, template: element, list: true, depth: 4 %>
+        - <%= sanitize element.cells.to_json %>
 <% end %>
 <%= block_component_static block, :caption %>

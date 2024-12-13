@@ -8,12 +8,6 @@ module Communication::Website::WithShowcase
                             foreign_key: :communication_website_id,
                             association_foreign_key: :communication_website_showcase_tag_id
 
-    scope :ordered_for_showcase, -> { 
-      order(highlighted_in_showcase: :desc, created_at: :desc)
-    }
-    scope :in_showcase, -> { 
-      in_production.where(in_showcase: true)
-                   .ordered_for_showcase
-    }
+    scope :in_showcase, -> { in_production.where(in_showcase: true) }
   end
 end
