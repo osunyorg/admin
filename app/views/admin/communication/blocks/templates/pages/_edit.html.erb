@@ -17,8 +17,18 @@
 <div class="row pure__row--small">
   <div class="col-lg-6">
     <div class="my-5">
-      <h2 class="h4"><%= t '.main_page.title' %></h2>
-      <%= block_component_edit block, :page_id %>
+      <div v-if="data.mode !== 'category'">
+        <h2 class="h4"><%= t '.main_page.title' %></h2>
+        <%= block_component_edit block, :page_id %>
+      </div>
+      <div class="row pure__row--small" v-if="data.mode === 'category'">
+        <div class="col-lg-3">
+          <%= block_component_edit block, :pages_quantity %>
+        </div>
+        <div class="col-lg-9">
+          <%= block_component_edit block, :category_id %>
+        </div>
+      </div>
     </div>
 
     <div class="my-5" v-if="data.mode == 'selection'">
@@ -49,6 +59,6 @@
   </div>
 </div>
 
-<div v-show="data.elements.length > 2">
+<div v-show="data.mode == 'selection' && data.elements.length > 2">
   <%= block_component_add_element block, t('.selection.add') %>
 </div>

@@ -136,6 +136,7 @@ class Communication::Website < ApplicationRecord
     localizations.in_languages(active_language_ids) +
     configs +
     pages +
+    page_categories +
     posts +
     post_categories +
     events +
