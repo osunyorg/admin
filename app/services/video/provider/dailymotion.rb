@@ -29,4 +29,13 @@ class Video::Provider::Dailymotion < Video::Provider::Default
   def embed_with_defaults
     "#{iframe_url}?autoplay=1&quality=380"
   end
+
+  # https://developers.dailymotion.com/guides/embed-with-oembed/
+  def title
+    url = "https://www.dailymotion.com/services/oembed?url=https://www.dailymotion.com/video/#{identifier}"
+    opened = URI.open(url)
+    json = JSON.load(opened)
+    json['title']
+  rescue
+  end
 end

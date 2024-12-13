@@ -83,6 +83,11 @@ class Communication::Block::Template::Base
     false
   end
 
+  # Called before block validation
+  # Has an override in some templates (video)
+  def before_validation
+  end
+
   def to_s
     self.class.to_s.demodulize
   end

@@ -34,6 +34,15 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
     video_provider.embed_with_defaults
   end
 
+  def before_validation
+    return if url.blank? || video_provider.nil? || video_title.present?
+    # It should be as simple as...
+    self.video_title = video_provider.title
+    # ... but it's not, as previous line does nothing
+    block.attributes['data']['video_title'] = video_provider.title
+    # We need to modify the attributes directly, so they are saved
+  end
+
   protected
 
   def video_provider
