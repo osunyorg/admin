@@ -127,12 +127,6 @@ fr:
         social: Réseaux sociaux
         university: Université
         url: URL
-      communication/website/agenda/category:
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        parent: Catégorie parente
-        slug: Slug
       communication/website/agenda/event:
         categories: Catégories
         dates: Dates
@@ -208,11 +202,6 @@ fr:
         title: Titre
       communication/website/permalink:
         path: Chemin
-      communication/website/portfolio/category/localization:
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        slug: Slug
       communication/website/portfolio/project:
         categories: Catégories
         year: Année
@@ -226,14 +215,6 @@ fr:
         categories: Catégories
         full_width: Pleine largeur
         website: Site Web
-      communication/website/post/category:
-        children: Catégories enfants
-        parent: Catégorie parente
-      communication/website/post/category/localization:
-        featured_image: Image à la une
-        featured_image_alt: Texte alternatif
-        name: Nom
-        slug: Slug
       communication/website/post/localization:
         category: Catégorie
         date: Date
@@ -342,10 +323,6 @@ fr:
         one: Mot-clé
         other: Mot-clés
   admin:
-    categories:
-      is_taxonomy: Est une taxonomie (une famille de catégories)
-      other: Autres
-      title: Catégories
     communication:
       author:
         show_person_html: "Cette page montre uniquement les dernières actualités écrites par la personne, en tant qu'auteur ou autrice. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien ci-dessous."
@@ -432,9 +409,6 @@ fr:
           previous_paths: Redirections (anciens chemins)
           title: Gérer les redirections
         see_showcase: Voir le showcase
-        social:
-          free: Libres
-          private: Privatifs
         subnav:
           structure: Arborescence
         technical:
@@ -616,7 +590,7 @@ fr:
         feature_posts: Pour publier des actualités, comme un média
         git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
-        in_production: Ne cochez pas cette case tant que le site n'est pas sur un domaine ou un sous-domaine dédié (pas *.osuny.site).
+        in_production: Cochez cette case une fois le site déployé sur un domaine ou un sous-domaine dédié (pas *.osuny.site).
         languages: 'Si vous sélectionnez une seule langue les urls ne seront pas préfixées. Si vous en sélectionnez plusieurs le site sera considéré comme multilingue et donc toutes les urls seront préfixées avec la langue (/fr, /en)'
         plausible_url: Lien de partage généré selon la <a href="https://plausible.io/docs/shared-links" target="_blank">documentation officielle Plausible</a>.
         repository: Sous la forme organisation/nom, par exemple noesya/bordeauxmontaigne-iut, à laisser vide lors de la création d'un site avec Deuxfleurs.

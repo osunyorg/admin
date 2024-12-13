@@ -1,0 +1,27 @@
+<% content_for :title, 'Showcase' %>
+
+<h1>Showcase</h1>
+
+<% unless params.has_key?(:page) %>
+  <div class="my-5">
+    <p class="small text-uppercase">Thèmes</p>
+    <% @tags.each do |tag| %>
+      <% next if tag.websites.none? %>
+      <%= link_to "#{tag} <span class=\"badge bg-light text-dark rounded-pill\">#{tag.websites.in_production.count}</span>".html_safe, 
+                  showcase_tag_path(tag.slug), 
+                  class: 'btn btn-outline-light text-dark rounded-pill mb-2 me-1 px-lg-3 py-lg-2' %>
+    <% end %>
+  </div>
+
+  <div class="my-5">
+    <p class="small text-uppercase">Fonctionnalités</p>
+    <% @features.each do |feature| %>
+      <% next if feature[:websites].none? %>
+      <%= link_to "#{feature[:name]} <span class=\"badge bg-light text-dark rounded-pill\">#{feature[:websites].count}</span>".html_safe, 
+                  feature[:path], 
+                  class: 'btn btn-outline-light text-dark rounded-pill mb-2 me-1 px-lg-3 py-lg-2' %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render 'list' %>

@@ -182,6 +182,15 @@ en:
   batch_selectable:
     title: Edit the selection
   cancel: Cancel
+  category:
+    children: Sub-categories
+    featured_image: Featured image
+    featured_image_alt: Alternative text
+    is_taxonomy: Is a taxonomy (a family of categories)?
+    name: Name
+    parent: Parent category
+    slug: Slug
+    title: Catégories
   confirm: Confirm
   content: Content
   cookies_consent_choice: Cookies consent choice
@@ -231,6 +240,81 @@ en:
       send_code_instead: "Send me a code instead"
       send_email_code: 'Send me a code via email'
       success: ""
+  contact_details:
+    emails:
+      email:
+        label: Email
+        hint: ''
+    phone_numbers:
+      phone:
+        label: Phone
+        hint: ''
+      phone_mobile:
+        label: Mobile phone
+        hint: ''
+      phone_professional:
+        label: Personal phone
+        hint: ''
+      phone_personal:
+        label: Professional phone
+        hint: ''
+    postal_address:
+      address_name:
+        label: Address name
+        hint: 'This field is not used for geolocation. Ex: Hôtel du Département'
+      address: 
+        label: Address
+        hint: 'This field is used for geolocation. Ex: 3 rue de la Poste'
+      address_additional: 
+        label: Additional address
+        hint: 'This field is not used for geolocation. Ex: Bureau 508'
+      zipcode: 
+        label: Zipcode
+        hint: 'This field is used for geolocation. Ex: 33150'
+      city:
+        label: City
+        hint: 'This field is used for geolocation. Ex: Cenon'
+      country: 
+        label: Country
+        hint: 'This field is used for geolocation. Ex: France'
+    social_networks:
+      facebook:
+        label: Facebook (private, Meta)
+        hint: ''
+      github:
+        label: Github
+        hint: ''
+      instagram:
+        label: Instagram (private, Meta)
+        hint: ''
+      linkedin:
+        label: LinkedIn (private, Microsoft)
+        hint: ''
+      mastodon:
+        label: Mastodon (free)
+        hint: ''
+      peertube:
+        label: Peertube (free)
+        hint: ''
+      tiktok:
+        label: TikTok (private)
+        hint: ''
+      twitter:
+        label: X (private)
+        hint: ''
+      vimeo:
+        label: Vimeo (private)
+        hint: ''
+      x:
+        label: X (private)
+        hint: ''
+      youtube:
+        label: Youtube (private, Google)
+        hint: ''
+    websites:
+      website: 
+        label: Website
+        hint: ''
   download: Download
   download_with_size: Download (%{size})
   edit: Edit
@@ -352,6 +436,9 @@ en:
   properties:
     text:
       missing: Missing text
+  publication:
+    draft: Draft
+    published: Published
   quit: Quit
   remove: Remove
   reset: Reset

@@ -8,7 +8,7 @@
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/featured_image/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
   </div>
 </div>
 <%= osuny_separator %>
@@ -26,7 +26,7 @@
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 <%= render 'admin/communication/websites/pages/show/special_page' %>
 
-<%= render 'admin/application/dependencies', about: @page %>
+<%= render 'admin/application/components/dependencies', about: @page %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @page if @page.is_regular_page? %>

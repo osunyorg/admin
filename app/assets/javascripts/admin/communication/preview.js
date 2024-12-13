@@ -5,11 +5,9 @@ $(function () {
     $('.preview__button').on('click', function () {
         mode = $(this).data('mode');
         $('.preview__button')
-            .removeClass('btn-primary')
-            .addClass('btn-light');
+            .removeClass('active');
         $(this)
-            .removeClass('btn-light')
-            .addClass('btn-primary');
+            .addClass('active');
         $('#preview')
             .removeClass('preview--desktop')
             .removeClass('preview--tablet')

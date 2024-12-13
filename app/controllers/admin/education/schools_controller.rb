@@ -16,6 +16,8 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   def show
     @programs = @school.programs.ordered(current_language)
     @roles = @school.university_roles.ordered(current_language)
+    @websites = @school.websites.ordered(current_language)
+    @locations = @school.locations.ordered(current_language)
     breadcrumb
   end
 

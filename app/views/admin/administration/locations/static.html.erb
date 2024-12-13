@@ -10,41 +10,34 @@ language = @l10n.language
             full_width: true,
             toc_offcanvas: true %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= render 'admin/application/featured_image/static', about: @l10n %>
+<%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
-contact_details:
-<%= render 'admin/application/static/postal_address', about: location, l10n: @l10n, language: language %>
-<%= render 'admin/application/static/contact_detail', variable: :address, data: location.address, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address_name, data: @l10n.address_name, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :address_additional, data: @l10n.address_additional, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :zipcode, data: location.zipcode, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :city, data: location.city, kind: ContactDetails::Base %>
-<%= render 'admin/application/static/contact_detail', variable: :country, data: location.country, kind: ContactDetails::Country %>
-<%= render 'admin/application/static/contact_detail', variable: :website, data: @l10n.url, kind: ContactDetails::Website %>
-<%= render 'admin/application/static/contact_detail', variable: :phone, data: location.phone, kind: ContactDetails::Phone %>
-  geolocation:
-    latitude: <%= location.latitude %>
-    longitude: <%= location.longitude %>
-programs:
-<%
-location.programs.each do |program|
-  program_l10n = program.best_localization_for(language)
-  %>
-  - <%= program_l10n.current_permalink_in_website(@website)&.path %>
-<% end %>
+<%= render 'admin/application/static/hugo/collection',
+            key: :programs,
+            collection: location.programs.ordered(language),
+            language: language %>
+<%= render 'admin/application/contact_details/static',
+            about: location,
+            l10n: @l10n,
+            language: language %>
 diplomas:
 <%
 location.diplomas.ordered.each do |diploma|
-  diploma_l10n = diploma.best_localization_for(language)
+  l10n = diploma.best_localization_for(language)
+  next if l10n.nil?
   programs = location.education_programs
                     .where(diploma: diploma)
                     .root
                     .ordered(language)
   next if programs.empty?
+  hugo = l10n.hugo(@website)
 %>
   - name: >-
-      <%= diploma_l10n.to_s %>
-    path: <%= diploma_l10n.slug %>
+      <%= l10n.to_s %>
+    permalink: "<%= hugo.permalink %>"
+    path: "<%= hugo.path %>"
+    slug: "<%= hugo.slug %>"
+    file: "<%= hugo.file %>"
     programs:
 <%= render 'admin/education/programs/static_list',
             diploma: diploma,

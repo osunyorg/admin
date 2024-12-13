@@ -11,35 +11,22 @@ date_format = "%e %B %Y"
   %>
     <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
       <div class="post-content">
-        <h<%= heading_level %> class='post-title' itemprop='headline'>
-          <%= link_to_if permalink, post_l10n, permalink %>
-        </h<%= heading_level %>>
-        <% if post_l10n.summary.present? && block.template.option_summary %>
-          <p itemprop="articleBody"><%= post_l10n.summary %></p>
-        <% end %>
-        <% if block.template.option_author || block.template.option_date %>
-          <div class="post-meta">
-            <% if block.template.option_date %>
-              <time itemprop="datePublished" datetime="<%= post_l10n.published_at %>"><%= l(post_l10n.published_at, format: date_format) %></time>
-            <% end %>
-            <% if block.template.option_author %>
-              <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
-                <p itemprop="name"><%= post.author&.to_s_in(block.language) %></p>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-        <% if !post.categories.empty? && block.template.option_categories %>
-          <ul class="post-categories">
-            <% post.categories.each do |category| %>
-              <%
-              category_l10n = category.localization_for(block.language)
-              next if category_l10n.nil?
-              %>
-              <%= link_to category_l10n, category_l10n.current_permalink_url_in_website(@website) %>
-            <% end %>
-          </ul>
-        <% end %>
+        <%= render 'admin/communication/blocks/templates/posts/partials/heading', 
+                    level: block.heading_rank_children,
+                    label: post_l10n.to_s,
+                    permalink: permalink %>
+        <%= render 'admin/communication/blocks/templates/posts/partials/summary',
+                    block: block,
+                    post: post,
+                    post_l10n: post_l10n %>
+        <%= render 'admin/communication/blocks/templates/posts/partials/post_meta',
+                    block: block,
+                    post: post,
+                    post_l10n: post_l10n %>
+        <%= render 'admin/communication/blocks/templates/posts/partials/categories',
+                    block: block,
+                    post: post,
+                    post_l10n: post_l10n %>
       </div>
       <% if block.template.option_image %>
         <div class="media">

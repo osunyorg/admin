@@ -31,8 +31,9 @@ url = page.new_record?  ? admin_communication_website_pages_path
       <div class="col-md-4">
         <%= osuny_panel t('metadata') do %>
           <%= lf.input :published,
+                        label: t('publication.published'),
                         wrapper: :custom_boolean_switch if page.draftable? %>
-          <%= render  "admin/application/slug/form",
+          <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#communication_website_page_localizations_attributes_0_title' unless page.is_home? %>
           <%= f.association :parent,
@@ -45,8 +46,8 @@ url = page.new_record?  ? admin_communication_website_pages_path
           <%= f.input :bodyclass if can?(:edit, @website) %>
           <%= f.input :full_width if page.editable_width? %>
         <% end %>
-        <%= render 'admin/application/featured_image/edit', f: lf, about: @l10n %>
-        <%= render 'admin/application/shared_image/edit', f: lf, about: @l10n %>
+        <%= render 'admin/application/images/featured/form', f: lf, about: @l10n %>
+        <%= render 'admin/application/images/shared/form', f: lf, about: @l10n %>
       </div>
     </div>
 
