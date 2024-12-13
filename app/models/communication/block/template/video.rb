@@ -39,8 +39,8 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
     # It should be as simple as...
     self.video_title = video_provider.title
     # ... but it's not, as previous line does nothing
-    block.attributes['data']['video_title'] = video_provider.title
     # We need to modify the attributes directly, so they are saved
+    block.attributes['data']['video_title'] = video_provider.title
   end
 
   protected
