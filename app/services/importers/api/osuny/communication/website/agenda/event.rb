@@ -42,11 +42,7 @@ class Importers::Api::Osuny::Communication::Website::Agenda::Event < Importers::
     return if image.blank?
     # Not twice
     return if object.featured_image.attached?
-    io = URI.parse(image).open
-    filename = File.basename(image).split('?').first
-    object.featured_image.attach(io: io, filename: filename)
-  rescue
-    puts "Attach image failed"
+    ActiveStorage::Utils.attach_from_url(object.featured_image, image)
   end
 
   def find_or_create_category(data)
