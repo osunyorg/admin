@@ -34,7 +34,7 @@ class Video::Provider::Dailymotion < Video::Provider::Default
   def title
     url = "https://www.dailymotion.com/services/oembed?url=https://www.dailymotion.com/video/#{identifier}"
     io = URI.parse(url).open
-    json = JSON.load(opened)
+    json = JSON.load(io)
     json['title']
   rescue
   end
