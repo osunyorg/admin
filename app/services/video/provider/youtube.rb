@@ -39,7 +39,7 @@ class Video::Provider::Youtube < Video::Provider::Default
 
   def title
     url = "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=#{identifier}&format=json"
-    opened = URI.open(url)
+    io = URI.parse(url).open
     json = JSON.load(opened)
     json['title']
   rescue
