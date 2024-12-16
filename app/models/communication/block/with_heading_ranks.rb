@@ -4,7 +4,8 @@ module Communication::Block::WithHeadingRanks
   DEFAULT_HEADING_LEVEL = 2 # h1 is the page title
 
   def heading_rank_self
-    title.present? ? heading_rank_base : DEFAULT_HEADING_LEVEL
+    return false if title.blank?
+    heading_rank_base
   end
 
   def heading_rank_children
