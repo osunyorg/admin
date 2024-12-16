@@ -30,6 +30,14 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
     end
   end
 
+  def upsert
+    posts_params = params[:posts] || []
+    permitted_posts_params = posts_params.map { |unpermitted_params|
+      post_params_for_upsert(unpermitted_params)
+    }
+    # TODO Create or update if ID present. Use transaction to rollback if one fails.
+  end
+
   def destroy
     @post.destroy
     head :no_content
@@ -70,7 +78,21 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
     end
   end
 
-  def set_l10n_attributes(base_params)
+  def post_params_for_upsert(post_params)
+    permitted_params = post_params
+                          .permit(
+                            :migration_identifier, :full_width, localizations: {}
+                          ).merge(
+                            university_id: current_university.id,
+                            communication_website_id: website.id
+                          )
+    post = website.posts.find_by(migration_identifier: permitted_params[:migration_identifier])
+    permitted_params[:id] = post.id if post.present?
+    set_l10n_attributes(permitted_params, post) if permitted_params[:localizations].present?
+    permitted_params
+  end
+
+  def set_l10n_attributes(base_params, post)
       l10ns_attributes = base_params.delete(:localizations)
       base_params[:localizations_attributes] = []
       l10ns_attributes.each do |language_iso_code, l10n_params|
@@ -83,10 +105,10 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
 
         l10n_permitted_params[:language_id] = Language.find_by(iso_code: language_iso_code)&.id
 
-        existing_post_l10n = @post.localizations.find_by(
+        existing_post_l10n = post.localizations.find_by(
           migration_identifier: l10n_permitted_params[:migration_identifier],
           language_id: l10n_permitted_params[:language_id]
-        ) if @post.persisted?
+        ) if post&.persisted?
         l10n_permitted_params[:id] = existing_post_l10n.id if existing_post_l10n.present?
 
         set_featured_image_to_l10n_params(l10n_permitted_params, l10n: existing_post_l10n)

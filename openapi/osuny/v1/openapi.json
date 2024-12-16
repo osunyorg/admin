@@ -2787,12 +2787,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-09T16:45:27.606+01:00",
-                            "updated_at": "2024-12-09T16:45:27.606+01:00"
+                            "created_at": "2024-12-16T09:59:21.980+01:00",
+                            "updated_at": "2024-12-16T09:59:21.980+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T16:45:27.622+01:00",
-                        "updated_at": "2024-12-09T16:45:27.622+01:00"
+                        "created_at": "2024-12-16T09:59:21.995+01:00",
+                        "updated_at": "2024-12-16T09:59:21.995+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -2818,12 +2818,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-09T16:45:27.606+01:00",
-                            "updated_at": "2024-12-09T16:45:27.606+01:00"
+                            "created_at": "2024-12-16T09:59:21.980+01:00",
+                            "updated_at": "2024-12-16T09:59:21.980+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T16:45:27.622+01:00",
-                        "updated_at": "2024-12-09T16:45:27.622+01:00"
+                        "created_at": "2024-12-16T09:59:21.995+01:00",
+                        "updated_at": "2024-12-16T09:59:21.995+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -2849,12 +2849,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-09T16:45:27.606+01:00",
-                            "updated_at": "2024-12-09T16:45:27.606+01:00"
+                            "created_at": "2024-12-16T09:59:21.980+01:00",
+                            "updated_at": "2024-12-16T09:59:21.980+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T16:45:27.622+01:00",
-                        "updated_at": "2024-12-09T16:45:27.622+01:00"
+                        "created_at": "2024-12-16T09:59:21.995+01:00",
+                        "updated_at": "2024-12-16T09:59:21.995+01:00"
                       }
                     ]
                   }
@@ -2927,19 +2927,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "cb66abcd-0bdc-4bfb-a212-e749c0fbfd6e",
+                      "id": "ffb9009e-c563-4594-b3c7-ae4c359be296",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "2af4b97d-c36c-40b7-9fbb-71edf5ca1077",
+                          "id": "fe2e1071-7f4e-4af7-9cf4-87baaca53d2c",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "dad9d5dd-4baf-4899-8c5a-b4f5442e3726",
+                            "blob_id": "6b36032e-f184-42ef-9174-3a4204f260df",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJjZ2pkbXdxbTgxazF6dTZueDl5djdoOXRtbWQ4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMDlUMTY6NDU6MjguMzEyWiIsInB1ciI6ImJsb2Jfa2V5In19--99cb85527e9e12ffe1718ac4944dd5b47d5b9b73/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJyOGE5bTdqNTFpMTI1aHlzMTl2cHBkMXNseWMyIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMTZUMDk6NTk6MjIuODA3WiIsInB1ciI6ImJsb2Jfa2V5In19--89155ac80419d9743275377f2caf5c8f2f2b85c5/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -2951,7 +2951,7 @@
                           "text": null,
                           "blocks": [
                             {
-                              "id": "c5c946ee-7285-4d05-a986-b458c2128a85",
+                              "id": "8f0e7cdb-3103-4ab8-b80f-ba8caa603f89",
                               "migration_identifier": "post-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -2968,16 +2968,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2024-12-09T16:45:28.164+01:00",
-                              "updated_at": "2024-12-09T16:45:28.164+01:00"
+                              "created_at": "2024-12-16T09:59:22.658+01:00",
+                              "updated_at": "2024-12-16T09:59:22.658+01:00"
                             }
                           ],
-                          "created_at": "2024-12-09T16:45:28.160+01:00",
-                          "updated_at": "2024-12-09T16:45:28.179+01:00"
+                          "created_at": "2024-12-16T09:59:22.653+01:00",
+                          "updated_at": "2024-12-16T09:59:22.673+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T16:45:28.151+01:00",
-                      "updated_at": "2024-12-09T16:45:28.305+01:00"
+                      "created_at": "2024-12-16T09:59:22.631+01:00",
+                      "updated_at": "2024-12-16T09:59:22.798+01:00"
                     }
                   }
                 }
@@ -3133,12 +3133,12 @@
                           "summary": null,
                           "text": null,
                           "blocks": [],
-                          "created_at": "2024-12-09T16:45:27.606+01:00",
-                          "updated_at": "2024-12-09T16:45:27.606+01:00"
+                          "created_at": "2024-12-16T09:59:21.980+01:00",
+                          "updated_at": "2024-12-16T09:59:21.980+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T16:45:27.622+01:00",
-                      "updated_at": "2024-12-09T16:45:27.622+01:00"
+                      "created_at": "2024-12-16T09:59:21.995+01:00",
+                      "updated_at": "2024-12-16T09:59:21.995+01:00"
                     }
                   }
                 }
@@ -3241,12 +3241,12 @@
                           "summary": null,
                           "text": null,
                           "blocks": [],
-                          "created_at": "2024-12-09T16:45:27.606+01:00",
-                          "updated_at": "2024-12-09T16:45:28.462+01:00"
+                          "created_at": "2024-12-16T09:59:21.980+01:00",
+                          "updated_at": "2024-12-16T09:59:22.952+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T16:45:27.622+01:00",
-                      "updated_at": "2024-12-09T16:45:28.463+01:00"
+                      "created_at": "2024-12-16T09:59:21.995+01:00",
+                      "updated_at": "2024-12-16T09:59:22.953+01:00"
                     }
                   }
                 }
@@ -3469,12 +3469,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T16:45:27.577+01:00",
-                            "updated_at": "2024-12-09T16:45:27.577+01:00"
+                            "created_at": "2024-12-16T09:59:21.962+01:00",
+                            "updated_at": "2024-12-16T09:59:21.962+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T16:45:27.624+01:00",
-                        "updated_at": "2024-12-09T16:45:27.624+01:00"
+                        "created_at": "2024-12-16T09:59:21.997+01:00",
+                        "updated_at": "2024-12-16T09:59:21.997+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -3516,8 +3516,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T16:45:27.577+01:00",
-                            "updated_at": "2024-12-09T16:45:27.577+01:00"
+                            "created_at": "2024-12-16T09:59:21.962+01:00",
+                            "updated_at": "2024-12-16T09:59:21.962+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -3535,12 +3535,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-09T16:45:27.577+01:00",
-                            "updated_at": "2024-12-09T16:45:27.577+01:00"
+                            "created_at": "2024-12-16T09:59:21.962+01:00",
+                            "updated_at": "2024-12-16T09:59:21.962+01:00"
                           }
                         },
-                        "created_at": "2024-12-09T16:45:27.624+01:00",
-                        "updated_at": "2024-12-09T16:45:27.624+01:00"
+                        "created_at": "2024-12-16T09:59:21.997+01:00",
+                        "updated_at": "2024-12-16T09:59:21.997+01:00"
                       }
                     ]
                   }
@@ -3640,12 +3640,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-09T16:45:27.577+01:00",
-                          "updated_at": "2024-12-09T16:45:27.577+01:00"
+                          "created_at": "2024-12-16T09:59:21.962+01:00",
+                          "updated_at": "2024-12-16T09:59:21.962+01:00"
                         }
                       },
-                      "created_at": "2024-12-09T16:45:27.624+01:00",
-                      "updated_at": "2024-12-09T16:45:27.624+01:00"
+                      "created_at": "2024-12-16T09:59:21.997+01:00",
+                      "updated_at": "2024-12-16T09:59:21.997+01:00"
                     }
                   }
                 },
