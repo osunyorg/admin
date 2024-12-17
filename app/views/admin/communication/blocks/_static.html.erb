@@ -28,6 +28,9 @@ should_render_data = block.data && block.data.present?
 <% if block.template.top_link.present? %>
         link: "<%= block.template.top_link %>"
 <% end %>
+<% if block.template.top_screen_reader_only.present? %>
+        screen_reader_only: <%= block.template.top_screen_reader_only %>
+<% end %>
 <% end %>
 <% if block.template.top_description.present? %>
       description: >-
