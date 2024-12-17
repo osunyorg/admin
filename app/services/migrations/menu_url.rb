@@ -3,7 +3,7 @@ class Migrations::MenuUrl
     Communication::Website::Menu::Item.find_each do |item|
       next unless item.kind_url?
       puts item.url
-      blank = item.url.start_with?('https://')
+      blank = item.url.start_with?('http')
       puts blank
       item.update_column :blank, blank
     end
