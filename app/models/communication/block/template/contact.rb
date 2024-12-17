@@ -39,11 +39,11 @@ class Communication::Block::Template::Contact < Communication::Block::Template::
     ].compact_blank
   end
 
-  # Different kinds of contacts are like children
+  # We fake children presence.
   # This is used by the ranks, so we have ranks.children
   # https://github.com/osunyorg/admin/pull/2505
   def children
-    emails + phone_numbers + socials
+    [true]
   end
 
   def has_emails?
