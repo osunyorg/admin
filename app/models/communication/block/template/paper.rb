@@ -23,6 +23,12 @@ class Communication::Block::Template::Paper < Communication::Block::Template::Ba
     selected_papers
   end
 
+  def top_link
+    l10n = special_page.localization_for(language)
+    return nil if l10n.nil?
+    l10n.hugo(website).permalink
+  end
+
   protected
 
   def selected_papers_all
@@ -42,5 +48,9 @@ class Communication::Block::Template::Paper < Communication::Block::Template::Ba
 
   def available_papers
     website.research_papers
+  end
+
+  def special_page
+    @special_page ||= website.special_page(Communication::Website::Page::ResearchPaper)
   end
 end
