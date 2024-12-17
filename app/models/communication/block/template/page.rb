@@ -9,7 +9,7 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     :large
   ]
   has_component :mode, :option, options: [:selection, :children]
-  has_component :text, :rich_text
+  has_component :text, :rich_text # Deprecated
   has_component :page_id, :page
 
   has_component :option_image,        :boolean, default: true
@@ -36,7 +36,22 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     selected_pages
   end
 
+  def top_title
+    page_l10n.present? ? page_l10n.to_s : block.title
+  end
+
+  def top_description
+    page_l10n.present? ? page_l10n.summary : false
+  end
+
   protected
+
+  def page_l10n
+    return nil if page.nil?
+    l10n = page.localization_for(language)
+    return nil if l10n.draft?
+    l10n
+  end
 
   def selected_pages_selection
     elements.map { |element| element.page }.compact
