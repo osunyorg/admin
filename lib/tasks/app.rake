@@ -8,10 +8,7 @@ namespace :app do
 
   desc 'Fix things'
   task fix: :environment do
-    # Les catégories liées aux formations sont une taxonomie
-    Communication::Website::Post::Category.where(is_programs_root: true).update_all(is_taxonomy: true)
-    Communication::Website::Agenda::Category.where(is_programs_root: true).update_all(is_taxonomy: true)
-    Communication::Website::Portfolio::Category.where(is_programs_root: true).update_all(is_taxonomy: true)
+    Migrations::MenuUrl.migrate
   end
 
   namespace :websites do

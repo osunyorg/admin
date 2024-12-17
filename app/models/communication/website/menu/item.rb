@@ -4,6 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  about_type    :string           indexed => [about_id]
+#  blank         :boolean          default(FALSE)
 #  kind          :integer          default("blank")
 #  position      :integer
 #  title         :string
@@ -145,6 +146,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'title' => title,
       'target' => static_target,
       'kind' => kind,
+      'blank' => blank,
       'children' => children.ordered.map(&:to_static_hash).compact
     }
     if hugo.present?
@@ -152,6 +154,11 @@ class Communication::Website::Menu::Item < ApplicationRecord
       hash['file'] = hugo.file
     end
     hash
+  end
+
+  def blank
+    return false unless kind_url?
+    super
   end
 
   def has_about?

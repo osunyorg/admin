@@ -7,6 +7,7 @@ window.osuny.communication.websites.menuItems = {
         this.kindInput = document.getElementById('communication_website_menu_item_kind');
         this.kinds = document.querySelectorAll('[data-kind]');
         this.url = document.querySelector('.communication_website_menu_item_url');
+        this.blank = document.querySelector('.communication_website_menu_item_blank');
         this.switchUrl = this.kindInput.dataset.url;
         this.about = document.querySelector('#communication_website_menu_item_about_id');
         this.title = document.querySelector('#communication_website_menu_item_title');
@@ -39,8 +40,10 @@ window.osuny.communication.websites.menuItems = {
         active.classList.add('kind--selected');
         if (kind === 'url') {
             this.url.classList.remove('d-none');
+            this.blank.classList.remove('d-none');
         } else {
             this.url.classList.add('d-none');
+            this.blank.classList.add('d-none');
         }
     },
 
