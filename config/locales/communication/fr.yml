@@ -174,10 +174,10 @@ fr:
         title: Titre
       communication/website/menu/item:
         about: Cible
-        blank: Ouvrir dans une nouvelle fenêtre
         children: Sous-éléments
         kind: Type
         parent: Élément parent
+        should_open_new_tab: Ouvrir dans une nouvelle fenêtre
         title: Titre
         url: URL
       communication/website/page:

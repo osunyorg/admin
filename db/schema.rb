@@ -520,7 +520,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_17_141959) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "url"
-    t.boolean "blank", default: false
+    t.boolean "should_open_new_tab", default: false
     t.index ["about_type", "about_id"], name: "index_communication_website_menu_items_on_about"
     t.index ["menu_id"], name: "index_communication_website_menu_items_on_menu_id"
     t.index ["parent_id"], name: "index_communication_website_menu_items_on_parent_id"
