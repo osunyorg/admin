@@ -1,6 +1,10 @@
 module Communication::Block::Template::Base::WithTop
   extend ActiveSupport::Concern
 
+  def top_active
+    top_title.present? || top_description.present?
+  end
+
   def top_title
     block.try(:title)
   end

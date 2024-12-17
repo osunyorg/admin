@@ -20,6 +20,7 @@ should_render_data = block.data && block.data.present?
     html_class: "<%= block.html_class_prepared %>"
 <% end %>
     top:
+      active: <%= block.template.top_active %>
 <% if block.template.top_title.present? %>
       title: 
         value: >-
