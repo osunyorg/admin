@@ -41,8 +41,6 @@ module Communication::Block::WithHeadingRanks
     heading_rank_self + 1
   end
 
-  protected
-
   # If a block is root, it will have level 2
   # If a block is below a title block, it will have level 3
   # Not real yet: if a block is below a subtitle, it will have level 4
@@ -57,6 +55,8 @@ module Communication::Block::WithHeadingRanks
       about.try(:blocks_heading_rank_base) || DEFAULT_HEADING_LEVEL
     end
   end
+
+  protected
 
   # A block can belong to a title, meaning it is below the title
   def block_title
