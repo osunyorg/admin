@@ -24,15 +24,7 @@ class Communication::Block::Template::Contact < Communication::Block::Template::
 
   has_elements
 
-  def has_emails?
-    emails.any?(&:present?)
-  end
-
-  def has_phone_numbers?
-    phone_numbers.any?(&:present?)
-  end
-
-  def has_socials?
+  def socials
     [
       social_mastodon,
       social_x,
@@ -44,7 +36,22 @@ class Communication::Block::Template::Contact < Communication::Block::Template::
       social_facebook,
       social_tiktok,
       social_github
-    ].any?(&:present?)
+    ].compact_blank
   end
 
+  def children
+    emails + phone_numbers + socials
+  end
+
+  def has_emails?
+    emails.any?(&:present?)
+  end
+
+  def has_phone_numbers?
+    phone_numbers.any?(&:present?)
+  end
+
+  def has_socials?
+    socials.any?(&:present?)
+  end
 end
