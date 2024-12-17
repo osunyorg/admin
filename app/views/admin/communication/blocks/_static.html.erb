@@ -20,6 +20,7 @@ should_render_data = block.data && block.data.present?
     html_class: "<%= block.html_class_prepared %>"
 <% end %>
     top:
+      active: <%= block.template.top_active %>
 <% if block.template.top_title.present? %>
       title: 
         value: >-
@@ -27,6 +28,9 @@ should_render_data = block.data && block.data.present?
         heading: <%= block.template.top_heading %>
 <% if block.template.top_link.present? %>
         link: "<%= block.template.top_link %>"
+<% end %>
+<% if block.template.top_screen_reader_only.present? %>
+        screen_reader_only: <%= block.template.top_screen_reader_only %>
 <% end %>
 <% end %>
 <% if block.template.top_description.present? %>
