@@ -46,7 +46,7 @@ module Communication::Block::WithHeadingRanks
   # Not real yet: if a block is below a subtitle, it will have level 4
   # There are no subtitles at the moment, so it's all between 2 and 3
   def heading_rank_base
-    if block_title.present?
+    if block_title.present? && !block_title.empty?
       # We delegate the rank computing to the block title, and we add 1
       block_title.heading_rank_self + 1
     else
