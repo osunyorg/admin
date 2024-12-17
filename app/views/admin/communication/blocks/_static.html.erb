@@ -9,7 +9,9 @@ should_render_data = block.data && block.data.present?
     slug: >-
       <%= block.slug %>
     ranks:
+<% if block.heading_self? %>
       self: <%= block.heading_rank_self %>
+<% end %>
 <% if block.heading_children? %>
       children: <%= block.heading_rank_children %>
 <% end %>
