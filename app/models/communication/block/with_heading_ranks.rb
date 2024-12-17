@@ -9,7 +9,7 @@ module Communication::Block::WithHeadingRanks
 
   def heading_rank_children
     return false unless heading_children?
-    title.present? ? heading_rank_self + 1 : heading_rank_self
+    heading_rank_self ? heading_rank_self + 1 : heading_rank_base
   end
 
   def heading_children?
