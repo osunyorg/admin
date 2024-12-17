@@ -10,7 +10,7 @@ module Communication::Block::Template::Base::WithTop
   end
 
   def top_link
-    false
+    nil
   end
 
   def top_heading

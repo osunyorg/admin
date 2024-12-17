@@ -37,11 +37,11 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
   end
 
   def top_title
-    page_l10n.present? ? page_l10n.to_s : block.title
+    block.title.presence || page_l10n.to_s
   end
 
   def top_description
-    page_l10n.present? ? page_l10n.summary : false
+    page_l10n.try(:summary)
   end
 
   protected
