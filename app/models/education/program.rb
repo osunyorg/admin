@@ -30,7 +30,7 @@ class Education::Program < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include Localizable
-  include LocalizableOrderByNameScope
+  include LocalizableOrderBySlugScope
   include Sanitizable
   include Searchable
   include WebsitesLinkable

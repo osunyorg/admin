@@ -115,6 +115,10 @@ class Education::Program::Localization < ApplicationRecord
     [parent]
   end
 
+  def blocks_heading_rank_base
+    3
+  end
+
   def best_featured_image_source(fallback: true)
     return self if featured_image.attached?
     best_source = parent&.best_featured_image_source(fallback: false)
