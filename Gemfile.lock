@@ -309,6 +309,7 @@ GEM
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
+    httpclient (2.8.3)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     i18n_data (0.17.1)
@@ -414,6 +415,12 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
+    oauth (1.1.0)
+      oauth-tty (~> 1.0, >= 1.0.1)
+      snaky_hash (~> 2.0)
+      version_gem (~> 1.1)
+    oauth-tty (1.0.5)
+      version_gem (~> 1.1, >= 1.1.1)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
@@ -649,6 +656,12 @@ GEM
     vcr (6.3.1)
       base64
     version_gem (1.1.4)
+    vimeo (1.5.4)
+      httparty (>= 0.4.5)
+      httpclient (>= 2.1.5.2)
+      json (>= 1.1.9)
+      multipart-post (>= 1.0.1)
+      oauth (>= 0.4.3)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -760,6 +773,7 @@ DEPENDENCIES
   tzinfo-data
   unsplash
   vcr
+  vimeo
   web-console (>= 4.1.0)
   webdrivers
   webmock
