@@ -37,6 +37,14 @@ class Video::Provider::Youtube < Video::Provider::Default
     "#{iframe_url}?autoplay=1&modestbranding=1&rel=0"
   end
 
+  def title
+    url = "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=#{identifier}&format=json"
+    io = URI.parse(url).open
+    json = JSON.load(io)
+    json['title']
+  rescue
+  end
+
   protected
 
   def short_url?

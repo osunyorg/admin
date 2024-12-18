@@ -686,7 +686,7 @@ fr:
                 placeholder: Entrer la description
               url:
                 hint: |
-                  Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=lAYhfCPelO0
+                  Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=7BTsrH6ulwQ
                 label: Url de la vidéo
                 placeholder: Entrer l'url de la vidéo
               video_title:
