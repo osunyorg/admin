@@ -11,6 +11,10 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
   has_component :alt, :string
   has_component :credit, :rich_text
 
+  def top_description
+    text
+  end
+  
   protected
 
   def check_accessibility

@@ -2,4 +2,7 @@ class Communication::Block::Template::Testimonial < Communication::Block::Templa
 
   has_elements
 
+  def top_screen_reader_only
+    true
+  end
 end

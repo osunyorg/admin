@@ -43,6 +43,7 @@
     <div class="col-lg-6">
       <div data-kind-if="url">
         <%= f.input :url, as: :string %>
+        <%= f.input :should_open_new_tab %>
       </div>
       <div class="<%= 'd-none' unless item.has_about? %> js-about-fields">
         <%
