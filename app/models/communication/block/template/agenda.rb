@@ -64,6 +64,10 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     link_to_events
   end
 
+  def top_link
+    title_link
+  end
+
   protected
 
   def link_to_events

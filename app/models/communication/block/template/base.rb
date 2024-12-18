@@ -2,6 +2,7 @@ class Communication::Block::Template::Base
   include WithAccessibility
   include WithData
   include WithDependencies
+  include WithTop
 
   class_attribute :components_descriptions,
                   :layouts,
