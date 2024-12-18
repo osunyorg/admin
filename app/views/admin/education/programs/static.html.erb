@@ -42,6 +42,12 @@ parent:
   slug: "<%= hugo.slug %>"
   file: "<%= hugo.file %>"
 <% end %>
+<% if @l10n.children.any? %>
+<%= render 'admin/application/static/hugo/collection',
+            key: :children,
+            collection: program.children.ordered(language),
+            language: language %>
+<% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/images/shared/static', about: @l10n %>
