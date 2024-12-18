@@ -33,6 +33,10 @@ class Video::Provider::Default
     ''
   end
 
+  def title
+    ''
+  end
+
   def embed
     iframe_url
   end
