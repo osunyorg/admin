@@ -27,4 +27,10 @@ class Video::Provider::Vimeo < Video::Provider::Default
   def embed_with_defaults
     "#{iframe_url}?autoplay=1&quality=360p&dnt=1"
   end
+
+  def title
+    info = Vimeo::Simple::Video.info(identifier)
+    info.parsed_response.first['title']
+  rescue
+  end
 end
