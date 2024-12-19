@@ -24,8 +24,15 @@ module Admin::OsunyHelper
 
   def osuny_thumbnail(object, large: false, cropped: true, classes: '')
     return if object.nil?
-    image = object.respond_to?(:featured_image) ? object.featured_image
-                                                : nil
+    if object.respond_to?(:logo)
+      # For organizations
+      image = object.logo
+    elsif object.respond_to?(:featured_image)
+      # For all other objects
+      image = object.featured_image
+    else
+      image = nil
+    end
     render  partial: "admin/application/components/thumbnail",
             locals: {
               image: image,
