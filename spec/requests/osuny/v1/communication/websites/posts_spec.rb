@@ -149,7 +149,7 @@ RSpec.describe 'Communication::Website::Post' do
   end
 
   path '/communication/websites/{website_id}/posts/upsert' do
-    post '[WIP] Upsert posts' do
+    post 'Upsert posts' do
       tags 'Communication::Website::Post'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
