@@ -35,8 +35,10 @@ class Search < ApplicationRecord
   self.table_name = 'search_index'
 
   SEARCHABLE_MODELS = [
+    Communication::Extranet,
     Communication::Extranet::Document,
     Communication::Extranet::Post,
+    Communication::Website,
     Communication::Website::Page,
     Communication::Website::Post,
     Communication::Website::Agenda::Event,
@@ -71,13 +73,18 @@ class Search < ApplicationRecord
       term: "%#{sanitize_sql_like(term)}%"
     )
   }
-  scope :for_language, -> (language) {
-    where(language: language)
-  }
+  scope :for_language, -> (language) { where(language: language) }
+  scope :for_website, -> (website) { where(website_id: website.id) }
+  scope :for_extranet, -> (extranet) { where(extranet_id: extranet.id) }
+  scope :without_context, -> { where(website_id: nil, extranet_id: nil) }
 
   def self.build_index
     SEARCHABLE_MODELS.each do |model|
-      model.find_each &:save_search_data
+      puts "Indexing #{model}"
+      model.find_each do |object| 
+        puts "  #{object}"
+        object.save_search_data
+      end
     end
   end
 end

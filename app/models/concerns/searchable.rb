@@ -30,12 +30,14 @@ module Searchable
   protected
 
   def search_data_website_id
+    return nil if is_a?(Communication::Website) # Websites are not parts of themselves
     return communication_website_id if respond_to?(:communication_website_id)
     return website_id if respond_to?(:website_id)
     nil
   end
 
   def search_data_extranet_id
+    return nil if is_a?(Communication::Extranet) # Extranets are not parts of themselves
     return communication_extranet_id if respond_to?(:communication_extranet_id)
     return extranet_id if respond_to?(:extranet_id)
     nil
