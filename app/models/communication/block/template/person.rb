@@ -1,6 +1,11 @@
 class Communication::Block::Template::Person < Communication::Block::Template::Base
 
   has_elements
+  has_layouts [
+    :grid,
+    :list,
+    :large
+  ]
   has_component :mode, :option, options: [
     :selection,
     :category

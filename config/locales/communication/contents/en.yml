@@ -529,6 +529,16 @@ en:
               option_link:
                 label: Clickable link to person's page
               options: Display options
+            layouts:
+              grid:
+                description: As a grid, left to right and top to bottom.
+                label: Grid
+              large:
+                description: Each person is presented in majesty, across the full width available, with a large image.
+                label: Large
+              list:
+                description: A simple list of people, very similar to a table. 
+                label: List
           posts:
             description: A list of highlighted news.
             edit:
