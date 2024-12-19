@@ -46,6 +46,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def create
+    @l10n.add_photo_import params[:photo_import]
     if @organization.save
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_created_html', model: @organization.to_s_in(current_language))
@@ -58,6 +59,8 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def update
     if @organization.update(organization_params)
+      load_localization
+      @l10n.add_photo_import params[:photo_import]
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_updated_html', model: @organization.to_s_in(current_language))
     else
@@ -93,6 +96,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
               :url, :linkedin, :twitter, :mastodon,
               :logo, :logo_delete, :logo_infos,
               :logo_on_dark_background, :logo_on_dark_background_delete, :logo_on_dark_background_infos,
+              :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
               :shared_image, :shared_image_delete,
               :language_id
             ]

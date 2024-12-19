@@ -22,8 +22,8 @@
                     input_html: { accept: default_images_formats_accepted },
                     preview: 200,
                     resize: false %>
-        <%= render 'admin/application/images/shared/form', f: lf, about: l10n %>
-        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+        <%= osuny_separator %>
+        <%= render 'admin/application/images/featured/form', f: lf, about: l10n %>
       </div>
       <div class="offset-lg-1 col-lg-8">
         <%= render 'admin/application/summary/form', f: lf, about: l10n %>
@@ -47,6 +47,14 @@
             </div>
           </div>
         <% end %>
+        <div class="row">
+          <div class="col-lg-6">
+            <%= render 'admin/application/images/shared/form', f: lf, about: l10n %>
+          </div>
+          <div class="col-lg-6">
+            <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+          </div>
+        </div>
       </div>
     </div>
     <% content_for :action_bar_right do %>
