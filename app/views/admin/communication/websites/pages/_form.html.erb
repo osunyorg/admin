@@ -26,6 +26,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
           </div>
           <%= lf.input :text, as: :summernote if strip_tags(l10n.text).present? %>
         <% end %>
+        <%= render 'admin/communication/websites/pages/design_options/form', f: f, about: page %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
       <div class="col-md-4">
