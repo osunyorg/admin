@@ -54,6 +54,7 @@ class Communication::Block < ApplicationRecord
   alias       :website :communication_website
 
   before_validation :set_university_and_website_from_about, on: :create
+  before_validation :execute_template_before_validation
 
   # We do not use the :touch option of the belongs_to association
   # because we do not want to touch the about when destroying the block.
@@ -135,6 +136,10 @@ class Communication::Block < ApplicationRecord
     self.communication_website_id = about.try(:communication_website_id)
   end
 
+  def execute_template_before_validation
+    template.before_validation
+  end
+
   def check_accessibility
     accessibility_merge template
   end
@@ -154,5 +159,4 @@ class Communication::Block < ApplicationRecord
       # Ideally we should only touch the diff between old and new dependencies
     end
   end
-
 end

@@ -9,12 +9,33 @@ should_render_data = block.data && block.data.present?
     slug: >-
       <%= block.slug %>
     ranks:
+      base: <%= block.heading_rank_base %>
+<% if block.heading_self? %>
       self: <%= block.heading_rank_self %>
+<% end %>
 <% if block.heading_children? %>
       children: <%= block.heading_rank_children %>
 <% end %>
 <% if block.html_class.present? %>
     html_class: "<%= block.html_class_prepared %>"
+<% end %>
+    top:
+      active: <%= block.template.top_active %>
+<% if block.template.top_title.present? %>
+      title: 
+        value: >-
+          <%= prepare_text_for_static block.template.top_title %>
+        heading: <%= block.template.top_heading %>
+<% if block.template.top_link.present? %>
+        link: "<%= block.template.top_link %>"
+<% end %>
+<% if block.template.top_screen_reader_only.present? %>
+        screen_reader_only: <%= block.template.top_screen_reader_only %>
+<% end %>
+<% end %>
+<% if block.template.top_description.present? %>
+      description: >-
+        <%= prepare_html_for_static block.template.top_description %>
 <% end %>
     data:
 <%= render  template_path, 

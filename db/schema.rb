@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_13_073536) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_18_180521) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -520,6 +520,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_13_073536) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "url"
+    t.boolean "should_open_new_tab", default: false
     t.index ["about_type", "about_id"], name: "index_communication_website_menu_items_on_about"
     t.index ["menu_id"], name: "index_communication_website_menu_items_on_menu_id"
     t.index ["parent_id"], name: "index_communication_website_menu_items_on_parent_id"
@@ -1551,6 +1552,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_13_073536) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
     t.index ["about_id"], name: "index_university_organization_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_organization_localizations_on_language_id"
     t.index ["university_id"], name: "index_university_organization_localizations_on_university_id"

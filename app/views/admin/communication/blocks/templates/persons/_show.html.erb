@@ -18,11 +18,16 @@
           else
             person_link = '#'
           end
+          begin
+            title_with_optional_link = link_to_if block.template.option_link, person_l10n, person_link
+          rescue
+            title_with_optional_link = person_l10n
+          end
           %>
           <article class="person" itemscope itemtype="https://schema.org/Person">
             <div class="description">
               <h<%= heading_level %>>
-                <%= link_to_if block.template.option_link, person_l10n, person_link %>
+                <%= title_with_optional_link %>
               </h<%= heading_level %>>
               <p itemprop="jobTitle">
                 <%= element.role %>
