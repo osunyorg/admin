@@ -1552,6 +1552,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_31_110237) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
     t.index ["about_id"], name: "index_university_organization_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_organization_localizations_on_language_id"
     t.index ["university_id"], name: "index_university_organization_localizations_on_university_id"
