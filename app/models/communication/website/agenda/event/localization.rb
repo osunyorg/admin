@@ -49,6 +49,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include WithCal
   include WithFeaturedImage
   include WithGitFiles
+  include WithOpenApi
   include WithPublication
   include WithUniversity
 

@@ -394,6 +394,7 @@ GEM
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     multipart-post (2.4.1)
+    mutex_m (0.3.0)
     namae (1.2.0)
       racc (~> 1.7)
     nesty (1.0.2)
@@ -739,6 +740,7 @@ DEPENDENCIES
   listen (~> 3.3)
   lucide-rails
   mini_magick (~> 4.0)
+  mutex_m (~> 0.3.0)
   octokit
   omniauth-rails_csrf_protection (~> 1)
   omniauth-saml (~> 2)

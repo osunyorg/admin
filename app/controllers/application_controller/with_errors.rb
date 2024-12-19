@@ -31,11 +31,24 @@ module ApplicationController::WithErrors
     end
 
     def render_not_found
-      render file: Rails.root.join('public/404.html'), formats: [:html], status: 404, layout: false
+      respond_to do |format|
+        format.html { render file: Rails.root.join('public/404.html'), formats: [:html], status: 404, layout: false }
+        format.json { render json: { message: "The resource you were looking for doesn't exist." }, status: 404 }
+      end
+    end
+
+    # Used for API. For other contexts, we redirect to the sign-in page via the `authenticate_user!` method.
+    def render_unauthorized
+      respond_to do |format|
+        format.json { render json: { message: "You are not authorized to access this resource." }, status: 401 }
+      end
     end
 
     def render_forbidden
-      render file: Rails.root.join('public/403.html'), formats: [:html], status: 403, layout: false
+      respond_to do |format|
+        format.html { render file: Rails.root.join('public/403.html'), formats: [:html], status: 403, layout: false }
+        format.json { render json: { message: "You do not have access to this resource." }, status: 403 }
+      end
     end
   end
 end

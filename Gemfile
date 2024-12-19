@@ -85,6 +85,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "vcr"
   gem "webmock"
+  gem "mutex_m", "~> 0.3.0"
 end
 
 group :development do
