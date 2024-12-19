@@ -484,7 +484,7 @@ fr:
                 label: Grand
                 more: En savoir plus
               list:
-                description: Le chapô de la page principale sert d'édito en gros et les pages sont présentées sous forme de liste à droite.
+                description: Le résumé de la page principale sert d'édito en gros et les pages sont présentées sous forme de liste à droite.
                 label: Liste
           papers:
             description: Une sélection de papiers de recherche publiés dans la revue scientifique.
@@ -529,6 +529,16 @@ fr:
               option_link:
                 label: Lien cliquable vers la page de la personne
               options: Options d'affichage
+            layouts:
+              grid:
+                description: Les personnes sont présentées en grille, de gauche à droite puis de haut en bas.
+                label: Grille
+              large:
+                description: Chaque personne est présentée en majesté, sur toute la largeur disponible avec une grande image.
+                label: Grand
+              list:
+                description: Une liste de personnes, très semblable à un tableau.
+                label: Liste
           posts:
             description: Une liste d'actualités mises en avant.
             edit:
