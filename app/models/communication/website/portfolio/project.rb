@@ -27,6 +27,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include Duplicable
   include Filterable
   include Sanitizable
+  include Searchable
   include Localizable
   include WithMenuItemTarget
   include WithUniversity
