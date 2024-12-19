@@ -60,6 +60,11 @@ class Communication::Website::Localization < ApplicationRecord
     [website.config_default_languages]
   end
 
+  # Necessary for the search
+  def contents_full_text
+    ''
+  end
+
   def to_s
     name
   end

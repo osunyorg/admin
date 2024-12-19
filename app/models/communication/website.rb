@@ -54,6 +54,7 @@ class Communication::Website < ApplicationRecord
   include Filterable
   include Localizable
   include LocalizableOrderByNameScope
+  include Searchable
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs
