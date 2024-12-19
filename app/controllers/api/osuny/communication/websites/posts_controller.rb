@@ -32,33 +32,40 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
 
   def upsert
     posts_params = params[:posts] || []
-    render_on_missing_migration_identifier unless posts_params.all? { |post_params|
+    every_post_has_migration_identifier = posts_params.all? { |post_params|
       post_params[:migration_identifier].present?
     }
+    unless every_post_has_migration_identifier
+      render_on_missing_migration_identifier
+      return
+    end
 
     permitted_posts_params = posts_params.map { |unpermitted_params|
       post_params_for_upsert(unpermitted_params)
     }
-    successfully_created_posts = []
-    successfully_updated_posts = []
-    invalid_posts_with_index = []
+    @successfully_created_posts = []
+    @successfully_updated_posts = []
+    @invalid_posts_with_index = []
     permitted_posts_params.each_with_index do |permitted_post_params, index|
       post = website.posts.find_by(migration_identifier: permitted_post_params[:migration_identifier])
       if post.present?
         if post.update(permitted_post_params)
-          successfully_updated_posts << post
+          @successfully_updated_posts << post
         else
-          invalid_posts_with_index << { post: post, index: index }
+          @invalid_posts_with_index << { post: post, index: index }
         end
       else
         post = website.posts.build(permitted_post_params)
         if post.save
-          successfully_created_posts << post
+          @successfully_created_posts << post
         else
-          invalid_posts_with_index << { post: post, index: index }
+          @invalid_posts_with_index << { post: post, index: index }
         end
       end
     end
+
+    status = @invalid_posts_with_index.any? ? :unprocessable_entity : :ok
+    render 'upsert', status: status
   end
 
   def destroy
