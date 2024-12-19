@@ -6,6 +6,7 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+Dir["./spec/support/**/*.rb"].each { |f| require f }
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -32,7 +33,7 @@ end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
-    Rails.root.join('spec/fixtures')
+    Rails.root.join('test/fixtures')
   ]
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
@@ -62,4 +63,12 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.before(:each) do
+    ENV.update(ENV.to_h.merge('APPLICATION_ENV' => 'test'))
+    try(:host!, universities(:default_university).host)
+    ApplicationController.include ActiveStorage::SetCurrent
+  end
+
+  config.include ActiveSupport::Testing::Assertions
 end

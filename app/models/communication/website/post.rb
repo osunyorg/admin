@@ -27,6 +27,7 @@ class Communication::Website::Post < ApplicationRecord
   include Sanitizable
   include Localizable
   include WithMenuItemTarget
+  include WithOpenApi
   include WithUniversity
 
   has_and_belongs_to_many :authors,

@@ -1,4 +1,4 @@
-class Communication::Block::Component::Page < Communication::Block::Component::Base
+class Communication::Block::Component::Page < Communication::Block::Component::BaseReference
   def page
     return unless website
     website.pages

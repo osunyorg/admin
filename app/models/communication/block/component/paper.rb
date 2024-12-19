@@ -1,4 +1,4 @@
-class Communication::Block::Component::Paper < Communication::Block::Component::Base
+class Communication::Block::Component::Paper < Communication::Block::Component::BaseReference
 
   def paper
     return unless website

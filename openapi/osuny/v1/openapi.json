@@ -17,9 +17,7 @@
   ],
   "security": [
     {
-      "api_key": [
-
-      ]
+      "api_key": []
     }
   ],
   "components": {
@@ -29,21 +27,2728 @@
         "name": "X-Osuny-Token",
         "in": "header"
       }
+    },
+    "schemas": {
+      "communication_website": {
+        "type": "object",
+        "title": "Communication::Website",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "deuxfleurs": {
+            "type": "object",
+            "properties": {
+              "hosting": {
+                "type": "boolean"
+              },
+              "identifier": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "features": {
+            "type": "object",
+            "properties": {
+              "agenda": {
+                "type": "boolean"
+              },
+              "portfolio": {
+                "type": "boolean"
+              },
+              "posts": {
+                "type": "boolean"
+              }
+            }
+          },
+          "git": {
+            "type": "object",
+            "properties": {
+              "branch": {
+                "type": "string",
+                "nullable": true
+              },
+              "endpoint": {
+                "type": "string",
+                "nullable": true
+              },
+              "provider": {
+                "type": "string",
+                "nullable": true
+              },
+              "repository": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "showcase": {
+            "type": "object",
+            "properties": {
+              "present": {
+                "type": "boolean"
+              },
+              "highlighted": {
+                "type": "boolean"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "slug": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "localizations": {
+            "type": "object",
+            "description": "Localizations of the website. The key is the language's ISO 639-1 code.",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/communication_website_localization"
+            },
+            "minProperties": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "communication_website_localization": {
+        "type": "object",
+        "title": "Communication::Website::Localization",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "published": {
+            "type": "boolean"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "social_email": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_facebook": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_github": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_instagram": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_linkedin": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_mastodon": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_peertube": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_tiktok": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_vimeo": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_x": {
+            "type": "string",
+            "nullable": true
+          },
+          "social_youtube": {
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "communication_website_post": {
+        "type": "object",
+        "title": "Communication::Website::Post",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "full_width": {
+            "type": "boolean"
+          },
+          "localizations": {
+            "type": "object",
+            "description": "Localizations of the post. The key is the language's ISO 639-1 code.",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/communication_website_post_localization"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "communication_website_post_localization": {
+        "type": "object",
+        "title": "Communication::Website::Post::Localization",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "featured_image": {
+            "type": "object",
+            "properties": {
+              "blob_id": {
+                "type": "string",
+                "format": "uuid",
+                "nullable": true
+              },
+              "alt": {
+                "type": "string",
+                "nullable": true
+              },
+              "credit": {
+                "type": "string",
+                "nullable": true
+              },
+              "url": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "meta_description": {
+            "type": "string",
+            "nullable": true
+          },
+          "pinned": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "slug": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/communication_block_agenda"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_call_to_action"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_chapter"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_contact"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_datatable"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_definitions"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_embed"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_features"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_files"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_gallery"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_image"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_key_figures"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_license"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_links"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_locations"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_organizations"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_pages"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_papers"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_persons"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_posts"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_projects"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_programs"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_sound"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_testimonials"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_timeline"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_title"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_video"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_volumes"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "communication_block_agenda": {
+        "type": "object",
+        "title": "Communication::Block (Agenda)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "agenda"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "large"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "category",
+                  "selection",
+                  "categories"
+                ]
+              },
+              "category_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "description": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "number"
+              },
+              "time": {
+                "type": "string",
+                "enum": [
+                  "future_or_current",
+                  "future",
+                  "current",
+                  "archive"
+                ]
+              },
+              "no_event_message": {
+                "type": "string"
+              },
+              "option_categories": {
+                "type": "boolean"
+              },
+              "option_dates": {
+                "type": "boolean"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_subtitle": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "option_status": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_call_to_action": {
+        "type": "object",
+        "title": "Communication::Block (Call to action)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "call_to_action"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "accent_background",
+                  "no_background"
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "image": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "filename": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "signed_id": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "alt": {
+                "type": "string"
+              },
+              "credit": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "target_blank": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_chapter": {
+        "type": "object",
+        "title": "Communication::Block (Chapter)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "chapter"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "no_background",
+                  "alt_background",
+                  "accent_background"
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "image": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "filename": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "signed_id": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "alt": {
+                "type": "string"
+              },
+              "credit": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "communication_block_contact": {
+        "type": "object",
+        "title": "Communication::Block (Contact)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "contact"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "information": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "phone_numbers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "emails": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "social_mastodon": {
+                "type": "string"
+              },
+              "social_x": {
+                "type": "string"
+              },
+              "social_linkedin": {
+                "type": "string"
+              },
+              "social_youtube": {
+                "type": "string"
+              },
+              "social_vimeo": {
+                "type": "string"
+              },
+              "social_peertube": {
+                "type": "string"
+              },
+              "social_instagram": {
+                "type": "string"
+              },
+              "social_facebook": {
+                "type": "string"
+              },
+              "social_tiktok": {
+                "type": "string"
+              },
+              "social_github": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "time_slot_morning": {
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "type": "string",
+                          "format": "time"
+                        },
+                        "to": {
+                          "type": "string",
+                          "format": "time"
+                        }
+                      }
+                    },
+                    "time_slot_afternoon": {
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "type": "string",
+                          "format": "time"
+                        },
+                        "to": {
+                          "type": "string",
+                          "format": "time"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_datatable": {
+        "type": "object",
+        "title": "Communication::Block (Datatable)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "datatable"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "alphabetical": {
+                "type": "boolean"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "columns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "cells": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_definitions": {
+        "type": "object",
+        "title": "Communication::Block (Definitions)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "definitions"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_embed": {
+        "type": "object",
+        "title": "Communication::Block (Embed)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "embed"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "code": {
+                "type": "string"
+              },
+              "transcription": {
+                "type": "string"
+              },
+              "transcription_title": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "communication_block_features": {
+        "type": "object",
+        "title": "Communication::Block (Features)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "features"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "alt": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_files": {
+        "type": "object",
+        "title": "Communication::Block (Files)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "files"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "file": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_gallery": {
+        "type": "object",
+        "title": "Communication::Block (Gallery)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "gallery"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "carousel",
+                  "large"
+                ]
+              },
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "image": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "alt": {
+                      "type": "string"
+                    },
+                    "credit": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_image": {
+        "type": "object",
+        "title": "Communication::Block (Image)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "image"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "image": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "filename": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "signed_id": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "alt": {
+                "type": "string"
+              },
+              "credit": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "communication_block_key_figures": {
+        "type": "object",
+        "title": "Communication::Block (Key figures)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "key_figures"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "number": {
+                      "type": "number"
+                    },
+                    "unit": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_license": {
+        "type": "object",
+        "title": "Communication::Block (License)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "license"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "creative_commons"
+                ]
+              },
+              "creative_commons_attribution": {
+                "type": "string",
+                "enum": [
+                  "false",
+                  "true"
+                ]
+              },
+              "creative_commons_commercial_use": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false"
+                ]
+              },
+              "creative_commons_derivatives": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false"
+                ]
+              },
+              "creative_commons_sharing": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "communication_block_links": {
+        "type": "object",
+        "title": "Communication::Block (Links)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "links"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "alt_title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_locations": {
+        "type": "object",
+        "title": "Communication::Block (Locations)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "locations"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "map"
+                ]
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_organizations": {
+        "type": "object",
+        "title": "Communication::Block (Organizations)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "organizations"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "map"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "selection",
+                  "category"
+                ]
+              },
+              "category_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "description": {
+                "type": "string"
+              },
+              "alphabetical": {
+                "type": "boolean"
+              },
+              "option_link": {
+                "type": "boolean"
+              },
+              "option_logo": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "logo": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_pages": {
+        "type": "object",
+        "title": "Communication::Block (Pages)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "pages"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "cards",
+                  "alternate",
+                  "large"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "selection",
+                  "children"
+                ]
+              },
+              "text": {
+                "type": "string"
+              },
+              "page_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_main_summary": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_papers": {
+        "type": "object",
+        "title": "Communication::Block (Papers)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "papers"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "selection"
+                ]
+              },
+              "quantity": {
+                "type": "number"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_persons": {
+        "type": "object",
+        "title": "Communication::Block (Persons)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "persons"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "selection",
+                  "category"
+                ]
+              },
+              "category_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "description": {
+                "type": "string"
+              },
+              "alphabetical": {
+                "type": "boolean"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "option_link": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "role": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_posts": {
+        "type": "object",
+        "title": "Communication::Block (Posts)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "posts"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "highlight",
+                  "alternate",
+                  "large",
+                  "carousel"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "category",
+                  "selection",
+                  "categories"
+                ]
+              },
+              "posts_quantity": {
+                "type": "number"
+              },
+              "category_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "option_author": {
+                "type": "boolean"
+              },
+              "option_categories": {
+                "type": "boolean"
+              },
+              "option_date": {
+                "type": "boolean"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_reading_time": {
+                "type": "boolean"
+              },
+              "option_subtitle": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_projects": {
+        "type": "object",
+        "title": "Communication::Block (Projects)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "projects"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "alternate",
+                  "large"
+                ]
+              },
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "category",
+                  "selection",
+                  "categories"
+                ]
+              },
+              "projects_quantity": {
+                "type": "number"
+              },
+              "category_id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "option_categories": {
+                "type": "boolean"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_subtitle": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "option_year": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_programs": {
+        "type": "object",
+        "title": "Communication::Block (Programs)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "programs"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "list",
+                  "grid"
+                ]
+              },
+              "option_diploma": {
+                "type": "boolean"
+              },
+              "option_image": {
+                "type": "boolean"
+              },
+              "option_summary": {
+                "type": "boolean"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_sound": {
+        "type": "object",
+        "title": "Communication::Block (Sound)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "sound"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "file": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "nullable": true
+                  },
+                  "filename": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "signed_id": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "title": {
+                "type": "string"
+              },
+              "transcription": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "communication_block_testimonials": {
+        "type": "object",
+        "title": "Communication::Block (Testimonials)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "testimonials"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "string"
+                    },
+                    "job": {
+                      "type": "string"
+                    },
+                    "photo": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "nullable": true
+                        },
+                        "filename": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "signed_id": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_timeline": {
+        "type": "object",
+        "title": "Communication::Block (Timeline)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "timeline"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "vertical",
+                  "horizontal"
+                ]
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "communication_block_title": {
+        "type": "object",
+        "title": "Communication::Block (Title)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "title"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "classic",
+                  "collapsed"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "communication_block_video": {
+        "type": "object",
+        "title": "Communication::Block (Video)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "video"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "video_title": {
+                "type": "string"
+              },
+              "transcription": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "communication_block_volumes": {
+        "type": "object",
+        "title": "Communication::Block (Volumes)",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "template_kind": {
+            "type": "string",
+            "description": "Template kind of the blocks.",
+            "enum": [
+              "volumes"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "html_class": {
+            "type": "string",
+            "description": "For advanced use. Add an HTML class for custom purposes.",
+            "nullable": true
+          },
+          "data": {
+            "type": "object",
+            "description": "Data of the block. The structure depends on the template kind.",
+            "additionalProperties": false,
+            "properties": {
+              "mode": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "selection"
+                ]
+              },
+              "quantity": {
+                "type": "number"
+              },
+              "elements": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "paths": {
     "/communication/websites/{website_id}/posts": {
       "get": {
-        "summary": "Lists the posts in a website",
+        "summary": "Lists a website's posts",
         "tags": [
           "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
         ],
         "parameters": [
           {
             "name": "website_id",
             "in": "path",
             "description": "Website identifier",
-            "example": "6d8fb0bb-0445-46f0-8954-0e25143e7a58",
             "required": true,
             "schema": {
               "type": "string"
@@ -52,33 +2757,141 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "examples": {
-                  "response": {
+                  "Successful operation": {
                     "value": [
                       {
-                        "id": "c8a4bed5-2e05-47e4-90e3-cf334c16453f",
-                        "title": "Référentiel général d'écoconception de services numériques (RGESN)"
+                        "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                        "migration_identifier": "test-post-fixture-1",
+                        "full_width": false,
+                        "localizations": {
+                          "fr": {
+                            "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                            "migration_identifier": "test-post-fixture-1-fr",
+                            "title": "Test",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "pinned": null,
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "test",
+                            "subtitle": null,
+                            "summary": null,
+                            "text": null,
+                            "blocks": [],
+                            "created_at": "2024-12-19T15:37:30.224+01:00",
+                            "updated_at": "2024-12-19T15:37:30.224+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-19T15:37:30.243+01:00",
+                        "updated_at": "2024-12-19T15:37:30.243+01:00"
+                      },
+                      {
+                        "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
+                        "migration_identifier": null,
+                        "full_width": false,
+                        "localizations": {
+                          "fr": {
+                            "id": "a979b73e-e42b-54de-97d4-df21605e49c0",
+                            "migration_identifier": null,
+                            "title": "Test 2",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "pinned": null,
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "test-2",
+                            "subtitle": null,
+                            "summary": null,
+                            "text": null,
+                            "blocks": [],
+                            "created_at": "2024-12-19T15:37:30.224+01:00",
+                            "updated_at": "2024-12-19T15:37:30.224+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-19T15:37:30.243+01:00",
+                        "updated_at": "2024-12-19T15:37:30.243+01:00"
+                      },
+                      {
+                        "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
+                        "migration_identifier": null,
+                        "full_width": false,
+                        "localizations": {
+                          "fr": {
+                            "id": "e60b21c3-5968-54b2-93da-4a6a33fc85cc",
+                            "migration_identifier": null,
+                            "title": "Test 3",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "pinned": null,
+                            "published": false,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "test-3",
+                            "subtitle": null,
+                            "summary": null,
+                            "text": null,
+                            "blocks": [],
+                            "created_at": "2024-12-19T15:37:30.224+01:00",
+                            "updated_at": "2024-12-19T15:37:30.224+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-19T15:37:30.243+01:00",
+                        "updated_at": "2024-12-19T15:37:30.243+01:00"
                       }
                     ]
                   }
                 },
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/communication_website_post"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
                     }
-                  },
-                  "equired": [
-                    "name",
-                    "url"
-                  ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
                 }
               }
             }
@@ -90,12 +2903,16 @@
         "tags": [
           "Communication::Website::Post"
         ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
         "parameters": [
           {
             "name": "website_id",
             "in": "path",
             "description": "Website identifier",
-            "example": "6d8fb0bb-0445-46f0-8954-0e25143e7a58",
             "required": true,
             "schema": {
               "type": "string"
@@ -103,36 +2920,133 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "successful operation",
+          "201": {
+            "description": "Successful creation",
             "content": {
               "application/json": {
                 "examples": {
-                  "response": {
-                    "value": [
-                      {
-                        "id": "c8a4bed5-2e05-47e4-90e3-cf334c16453f",
-                        "title": "Référentiel général d'écoconception de services numériques (RGESN)",
-                        "published": true,
-                        "published_at": "TODO"
-                      }
-                    ]
-                  }
-                },
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
+                  "Successful creation": {
+                    "value": {
+                      "id": "83f9cd5b-4feb-41e2-a275-df05ab0b8718",
+                      "migration_identifier": "post-from-api-1",
+                      "full_width": false,
+                      "localizations": {
+                        "fr": {
+                          "id": "34b7c2e8-5353-4f4f-99f7-0cc33e900b5f",
+                          "migration_identifier": "post-from-api-1-fr",
+                          "title": "Ma nouvelle actualité",
+                          "featured_image": {
+                            "blob_id": "608bff22-23f0-483b-b4da-9900b0c7a658",
+                            "alt": "La lumière brille sur les parois du canyon",
+                            "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ5aTd3cGQ0OGVkZWgxcGw0anZpMmZ3ankxMGx5IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMTlUMTU6Mzc6MzAuOTQ3WiIsInB1ciI6ImJsb2Jfa2V5In19--18e9c1f704195502879788e33d1296c91f39b48c/photo-1703923633616-254e78f6e9df"
+                          },
+                          "meta_description": "Une nouvelle actualité depuis l'API",
+                          "pinned": false,
+                          "published": true,
+                          "published_at": "2024-11-29T17:49:00.000+01:00",
+                          "slug": "ma-nouvelle-actualite",
+                          "subtitle": "Une nouvelle actualité",
+                          "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
+                          "text": null,
+                          "blocks": [
+                            {
+                              "id": "759fb1ae-3fc6-47e8-b338-ed118466fb78",
+                              "migration_identifier": "post-from-api-1-fr-block-1",
+                              "template_kind": "chapter",
+                              "title": "Mon premier chapitre",
+                              "position": 1,
+                              "published": true,
+                              "html_class": null,
+                              "data": {
+                                "layout": "no_background",
+                                "text": "<p>Ceci est mon premier chapitre</p>",
+                                "notes": "",
+                                "image": {
+                                  "id": ""
+                                },
+                                "alt": "",
+                                "credit": ""
+                              },
+                              "created_at": "2024-12-19T15:37:30.803+01:00",
+                              "updated_at": "2024-12-19T15:37:30.803+01:00"
+                            }
+                          ],
+                          "created_at": "2024-12-19T15:37:30.798+01:00",
+                          "updated_at": "2024-12-19T15:37:30.819+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-19T15:37:30.789+01:00",
+                      "updated_at": "2024-12-19T15:37:30.941+01:00"
                     }
-                  },
-                  "required": [
-                    "id",
-                    "title"
-                  ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.slug": [
+                          "can't be blank",
+                          "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                        ],
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -144,31 +3058,246 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "title": {
-                    "type": "string",
-                    "description": "Title",
-                    "example": "This is a post"
-                  },
-                  "summary": {
-                    "type": "string",
-                    "description": "Summary",
-                    "example": "This is a summary"
-                  },
-                  "migration_identifier": {
-                    "type": "string",
-                    "description": "Unique migration identifier"
-                  },
-                  "published": {
-                    "type": "boolean",
-                    "example": false
-                  },
-                  "locale": {
-                    "type": "string",
-                    "description": "Locale",
-                    "example": "fr"
+                  "post": {
+                    "$ref": "#/components/schemas/communication_website_post"
                   }
                 },
-                "required": "title migration_identifier"
+                "required": [
+                  "post"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/communication/websites/{website_id}/posts/upsert": {
+      "post": {
+        "summary": "[WIP] Upsert posts",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful upsertion",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful upsertion": {
+                    "value": {
+                      "created": [
+                        {
+                          "id": "7f2851be-847f-4f64-a2c6-127fbaec2cc4",
+                          "migration_identifier": "post-from-api-1",
+                          "full_width": false,
+                          "localizations": {
+                            "fr": {
+                              "id": "5996f2ba-e79d-4f50-80d5-330a238b0f22",
+                              "migration_identifier": "post-from-api-1-fr",
+                              "title": "Ma nouvelle actualité",
+                              "featured_image": {
+                                "blob_id": "2e23b9ac-3dc4-4d50-9193-1adef738c3b9",
+                                "alt": "La lumière brille sur les parois du canyon",
+                                "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiIwd3VxcnBob2s1NHBxd200dTBya3F5M3VicDZjIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMTlUMTU6Mzc6MzEuMjM2WiIsInB1ciI6ImJsb2Jfa2V5In19--7df47eed6fd1108dfc9a66e63e5dad6d9d32fa72/photo-1703923633616-254e78f6e9df"
+                              },
+                              "meta_description": "Une nouvelle actualité depuis l'API",
+                              "pinned": false,
+                              "published": true,
+                              "published_at": "2024-11-29T17:49:00.000+01:00",
+                              "slug": "ma-nouvelle-actualite",
+                              "subtitle": "Une nouvelle actualité",
+                              "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
+                              "text": null,
+                              "blocks": [
+                                {
+                                  "id": "271e7684-e6ee-485d-b6db-7726dc4d395d",
+                                  "migration_identifier": "post-from-api-1-fr-block-1",
+                                  "template_kind": "chapter",
+                                  "title": "Mon premier chapitre",
+                                  "position": 1,
+                                  "published": true,
+                                  "html_class": null,
+                                  "data": {
+                                    "layout": "no_background",
+                                    "text": "<p>Ceci est mon premier chapitre</p>",
+                                    "notes": "",
+                                    "image": {
+                                      "id": ""
+                                    },
+                                    "alt": "",
+                                    "credit": ""
+                                  },
+                                  "created_at": "2024-12-19T15:37:31.076+01:00",
+                                  "updated_at": "2024-12-19T15:37:31.076+01:00"
+                                }
+                              ],
+                              "created_at": "2024-12-19T15:37:31.074+01:00",
+                              "updated_at": "2024-12-19T15:37:31.087+01:00"
+                            }
+                          },
+                          "created_at": "2024-12-19T15:37:31.072+01:00",
+                          "updated_at": "2024-12-19T15:37:31.164+01:00"
+                        }
+                      ],
+                      "updated": [
+                        {
+                          "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                          "migration_identifier": "test-post-fixture-1",
+                          "full_width": false,
+                          "localizations": {
+                            "fr": {
+                              "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                              "migration_identifier": "test-post-fixture-1-fr",
+                              "title": "Mon nouveau titre",
+                              "featured_image": {
+                                "blob_id": null,
+                                "alt": null,
+                                "credit": null,
+                                "url": null
+                              },
+                              "meta_description": null,
+                              "pinned": null,
+                              "published": true,
+                              "published_at": "2010-11-28T01:00:00.000+01:00",
+                              "slug": "test",
+                              "subtitle": null,
+                              "summary": null,
+                              "text": null,
+                              "blocks": [],
+                              "created_at": "2024-12-19T15:37:30.224+01:00",
+                              "updated_at": "2024-12-19T15:37:31.201+01:00"
+                            }
+                          },
+                          "created_at": "2024-12-19T15:37:30.243+01:00",
+                          "updated_at": "2024-12-19T15:37:31.203+01:00"
+                        }
+                      ],
+                      "errors": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "created": [],
+                      "updated": [],
+                      "errors": [
+                        {
+                          "index": 0,
+                          "errors": {
+                            "localizations.slug": [
+                              "can't be blank",
+                              "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                            ],
+                            "localizations.title": [
+                              "can't be blank"
+                            ],
+                            "localizations": [
+                              "is invalid"
+                            ]
+                          }
+                        },
+                        {
+                          "index": 1,
+                          "errors": {
+                            "localizations.title": [
+                              "can't be blank"
+                            ],
+                            "localizations": [
+                              "is invalid"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "posts": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/communication_website_post"
+                    }
+                  }
+                },
+                "required": [
+                  "post"
+                ]
               }
             }
           }
@@ -181,12 +3310,16 @@
         "tags": [
           "Communication::Website::Post"
         ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
         "parameters": [
           {
             "name": "website_id",
             "in": "path",
             "description": "Website identifier",
-            "example": "6d8fb0bb-0445-46f0-8954-0e25143e7a58",
             "required": true,
             "schema": {
               "type": "string"
@@ -196,7 +3329,6 @@
             "name": "id",
             "in": "path",
             "description": "Post identifier",
-            "example": "84722b61-f7c3-43c5-9127-2292101af7c5",
             "required": true,
             "schema": {
               "type": "string"
@@ -205,33 +3337,76 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "examples": {
-                  "response": {
-                    "value": [
-                      {
-                        "id": "c8a4bed5-2e05-47e4-90e3-cf334c16453f",
-                        "title": "Référentiel général d'écoconception de services numériques (RGESN)"
-                      }
-                    ]
+                  "Successful operation": {
+                    "value": {
+                      "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                      "migration_identifier": "test-post-fixture-1",
+                      "full_width": false,
+                      "localizations": {
+                        "fr": {
+                          "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                          "migration_identifier": "test-post-fixture-1-fr",
+                          "title": "Test",
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
+                          "meta_description": null,
+                          "pinned": null,
+                          "published": true,
+                          "published_at": "2010-11-28T01:00:00.000+01:00",
+                          "slug": "test",
+                          "subtitle": null,
+                          "summary": null,
+                          "text": null,
+                          "blocks": [],
+                          "created_at": "2024-12-19T15:37:30.224+01:00",
+                          "updated_at": "2024-12-19T15:37:30.224+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-19T15:37:30.243+01:00",
+                      "updated_at": "2024-12-19T15:37:30.243+01:00"
+                    }
                   }
-                },
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
                     }
                   },
-                  "required": [
-                    "name",
-                    "url"
-                  ]
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
                 }
               }
             }
@@ -243,12 +3418,16 @@
         "tags": [
           "Communication::Website::Post"
         ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
         "parameters": [
           {
             "name": "website_id",
             "in": "path",
             "description": "Website identifier",
-            "example": "c8a4bed5-2e05-47e4-90e3-cf334c16453f",
             "required": true,
             "schema": {
               "type": "string"
@@ -258,7 +3437,6 @@
             "name": "id",
             "in": "path",
             "description": "Post identifier",
-            "example": "84722b61-f7c3-43c5-9127-2292101af7c5",
             "required": true,
             "schema": {
               "type": "string"
@@ -267,35 +3445,197 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful update",
             "content": {
               "application/json": {
                 "examples": {
-                  "response": {
-                    "value": [
-                      {
-                        "id": "c8a4bed5-2e05-47e4-90e3-cf334c16453f",
-                        "title": "Référentiel général d'écoconception de services numériques (RGESN)",
-                        "published": true,
-                        "published_at": "TODO"
-                      }
-                    ]
+                  "Successful update": {
+                    "value": {
+                      "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                      "migration_identifier": "test-post-fixture-1",
+                      "full_width": false,
+                      "localizations": {
+                        "fr": {
+                          "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                          "migration_identifier": "test-post-fixture-1-fr",
+                          "title": "Mon nouveau titre",
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
+                          "meta_description": null,
+                          "pinned": null,
+                          "published": true,
+                          "published_at": "2010-11-28T01:00:00.000+01:00",
+                          "slug": "test",
+                          "subtitle": null,
+                          "summary": null,
+                          "text": null,
+                          "blocks": [],
+                          "created_at": "2024-12-19T15:37:30.224+01:00",
+                          "updated_at": "2024-12-19T15:37:31.347+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-19T15:37:30.243+01:00",
+                      "updated_at": "2024-12-19T15:37:31.348+01:00"
+                    }
                   }
-                },
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string"
-                    },
-                    "title": {
-                      "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
                     }
                   },
-                  "required": [
-                    "name",
-                    "url"
-                  ]
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "post": {
+                    "$ref": "#/components/schemas/communication_website_post"
+                  }
+                },
+                "required": [
+                  "post"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a post",
+        "tags": [
+          "Communication::Website::Post"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful deletion"
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
                 }
               }
             }
@@ -309,28 +3649,152 @@
         "tags": [
           "Communication::Website"
         ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": [
+                      {
+                        "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
+                        "url": null,
+                        "deuxfleurs": {
+                          "hosting": false,
+                          "identifier": null
+                        },
+                        "features": {
+                          "agenda": true,
+                          "portfolio": false,
+                          "posts": true
+                        },
+                        "git": {
+                          "branch": "main",
+                          "endpoint": null,
+                          "provider": "github",
+                          "repository": "noesya/bordeauxmontaigne-test"
+                        },
+                        "showcase": {
+                          "present": true,
+                          "highlighted": false,
+                          "tags": []
+                        },
+                        "localizations": {
+                          "fr": {
+                            "id": "3d91a284-4159-504e-81c5-6b9b32a08dd7",
+                            "name": "Site with github french",
+                            "published": true,
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "social_email": null,
+                            "social_facebook": null,
+                            "social_github": null,
+                            "social_instagram": null,
+                            "social_linkedin": null,
+                            "social_mastodon": null,
+                            "social_peertube": null,
+                            "social_tiktok": null,
+                            "social_vimeo": null,
+                            "social_x": null,
+                            "social_youtube": null,
+                            "created_at": "2024-12-19T15:37:30.183+01:00",
+                            "updated_at": "2024-12-19T15:37:30.183+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-19T15:37:30.245+01:00",
+                        "updated_at": "2024-12-19T15:37:30.245+01:00"
+                      },
+                      {
+                        "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
+                        "url": null,
+                        "deuxfleurs": {
+                          "hosting": false,
+                          "identifier": null
+                        },
+                        "features": {
+                          "agenda": false,
+                          "portfolio": false,
+                          "posts": true
+                        },
+                        "git": {
+                          "branch": "main",
+                          "endpoint": null,
+                          "provider": "gitlab",
+                          "repository": "33848340"
+                        },
+                        "showcase": {
+                          "present": true,
+                          "highlighted": false,
+                          "tags": []
+                        },
+                        "localizations": {
+                          "fr": {
+                            "id": "b854339d-f776-59c7-af65-e12ee2951daa",
+                            "name": "Site with gitlab french",
+                            "published": true,
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "social_email": null,
+                            "social_facebook": null,
+                            "social_github": null,
+                            "social_instagram": null,
+                            "social_linkedin": null,
+                            "social_mastodon": null,
+                            "social_peertube": null,
+                            "social_tiktok": null,
+                            "social_vimeo": null,
+                            "social_x": null,
+                            "social_youtube": null,
+                            "created_at": "2024-12-19T15:37:30.183+01:00",
+                            "updated_at": "2024-12-19T15:37:30.183+01:00"
+                          },
+                          "en": {
+                            "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
+                            "name": "Site with gitlab english",
+                            "published": true,
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "social_email": null,
+                            "social_facebook": null,
+                            "social_github": null,
+                            "social_instagram": null,
+                            "social_linkedin": null,
+                            "social_mastodon": null,
+                            "social_peertube": null,
+                            "social_tiktok": null,
+                            "social_vimeo": null,
+                            "social_x": null,
+                            "social_youtube": null,
+                            "created_at": "2024-12-19T15:37:30.183+01:00",
+                            "updated_at": "2024-12-19T15:37:30.183+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-19T15:37:30.245+01:00",
+                        "updated_at": "2024-12-19T15:37:30.245+01:00"
+                      }
+                    ]
+                  }
+                },
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "string",
-                      "example": "6d8fb0bb-0445-46f0-8954-0e25143e7a58",
-                      "title": "Website identifier"
-                    },
-                    "name": {
-                      "type": "string",
-                      "example": "Site de démo",
-                      "title": "Nom du site"
-                    },
-                    "url": {
-                      "type": "string",
-                      "example": "https://example.osuny.org",
-                      "title": "URL du site"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/communication_website"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
                     }
                   }
                 }
@@ -346,12 +3810,16 @@
         "tags": [
           "Communication::Website"
         ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "Identifier",
-            "example": "6d8fb0bb-0445-46f0-8954-0e25143e7a58",
+            "description": "Website identifier",
             "required": true,
             "schema": {
               "type": "string"
@@ -360,7 +3828,93 @@
         ],
         "responses": {
           "200": {
-            "description": "successful operation"
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": {
+                      "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
+                      "url": null,
+                      "deuxfleurs": {
+                        "hosting": false,
+                        "identifier": null
+                      },
+                      "features": {
+                        "agenda": true,
+                        "portfolio": false,
+                        "posts": true
+                      },
+                      "git": {
+                        "branch": "main",
+                        "endpoint": null,
+                        "provider": "github",
+                        "repository": "noesya/bordeauxmontaigne-test"
+                      },
+                      "showcase": {
+                        "present": true,
+                        "highlighted": false,
+                        "tags": []
+                      },
+                      "localizations": {
+                        "fr": {
+                          "id": "3d91a284-4159-504e-81c5-6b9b32a08dd7",
+                          "name": "Site with github french",
+                          "published": true,
+                          "published_at": "2024-11-29T16:07:24.232+01:00",
+                          "social_email": null,
+                          "social_facebook": null,
+                          "social_github": null,
+                          "social_instagram": null,
+                          "social_linkedin": null,
+                          "social_mastodon": null,
+                          "social_peertube": null,
+                          "social_tiktok": null,
+                          "social_vimeo": null,
+                          "social_x": null,
+                          "social_youtube": null,
+                          "created_at": "2024-12-19T15:37:30.183+01:00",
+                          "updated_at": "2024-12-19T15:37:30.183+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-19T15:37:30.245+01:00",
+                      "updated_at": "2024-12-19T15:37:30.245+01:00"
+                    }
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/communication_website"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

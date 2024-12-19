@@ -5,7 +5,7 @@ class Communication::Block::Template::Paper < Communication::Block::Template::Ba
     :all,
     :selection
   ]
-  has_component :quantity, :number, options: 3
+  has_component :quantity, :number, default: 3
 
   def dependencies
     selected_papers
