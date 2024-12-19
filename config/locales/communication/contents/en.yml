@@ -689,6 +689,13 @@ en:
               video_title:
                 label: Video title
                 placeholder: Enter video title
+            layouts:
+              player:
+                description: A video player integrated into the page, which waits for a click to load the external platform'player.
+                label: Player
+              button:
+                description: A button that launches the video by displaying it as a popin on top of the current page, against a dark background.
+                label: Button
           volumes:
             description: A selection of volumes published in a scientific journal.
             edit:
