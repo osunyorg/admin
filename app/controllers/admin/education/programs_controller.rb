@@ -65,7 +65,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
     load_part
     if @program.update(program_params)
       load_localization
-      @l10n.add_photo_import params[:photo_import] if params.has_key?(:photo_import)
+      @l10n.add_photo_import params[:photo_import]
       @program.touch # to ensure it send the photo_import picture
       redirect_to after_update_path,
                   notice: t('admin.successfully_updated_html', model: @program.to_s_in(current_language))
