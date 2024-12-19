@@ -1,0 +1,10 @@
+test_event_fr:
+  migration_identifier: test-event-fixture-1-fr
+  title: Coupe du Monde d'Escalade 2024 - Chamonix
+  slug: coupe-du-monde-d-escalade-2024-chamonix
+  published: true
+  published_at: 2024-07-01 00:00:00
+  about: test_event
+  language: fr
+  website: website_with_github
+  university: default_university
