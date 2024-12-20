@@ -560,7 +560,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
         run_test!
       end
 
-      response '404', 'Post not found' do
+      response '404', 'Event not found' do
         let(:id) { 'fake-id' }
         run_test!
       end

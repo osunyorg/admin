@@ -3058,12 +3058,12 @@
                               "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z"
                             },
                             "blocks": [],
-                            "created_at": "2024-12-20T08:13:38.788+01:00",
-                            "updated_at": "2024-12-20T08:13:38.788+01:00"
+                            "created_at": "2024-12-20T08:16:08.483+01:00",
+                            "updated_at": "2024-12-20T08:16:08.483+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T08:13:38.800+01:00",
-                        "updated_at": "2024-12-20T08:13:38.800+01:00"
+                        "created_at": "2024-12-20T08:16:08.494+01:00",
+                        "updated_at": "2024-12-20T08:16:08.494+01:00"
                       }
                     ]
                   }
@@ -3136,7 +3136,7 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "4360ab5a-5bba-493a-bdfa-1e3c291d1716",
+                      "id": "7981c853-3f83-49c9-90c4-985ad140b396",
                       "migration_identifier": "event-from-api-1",
                       "from_day": "2024-12-24",
                       "from_hour": "19:00",
@@ -3147,14 +3147,14 @@
                       "parent_id": null,
                       "localizations": {
                         "fr": {
-                          "id": "a2715407-c204-4e75-bdce-d7b962015305",
+                          "id": "e02fcf57-c50b-4600-bdcd-149dc577a0d4",
                           "migration_identifier": "event-from-api-1-fr",
                           "title": "Noël",
                           "featured_image": {
-                            "blob_id": "d66a6aca-978e-439b-ba02-ec1d6c80a393",
+                            "blob_id": "ecd4efb0-1218-438c-930b-f6cbed6c8de0",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJnOW9ybmtqcWkyOGZxNjBtZHJweGJndjR2MDVoIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDg6MTM6MzkuNTM1WiIsInB1ciI6ImJsb2Jfa2V5In19--8bd453746bda40afddcaee68570e5941283f1214/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJmMDEyY3VzbWtkc2FsN3puNTRnOWFleG1uMnAxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDg6MTY6MDkuMjE1WiIsInB1ciI6ImJsb2Jfa2V5In19--6d8831dd9276200568d672957602c8ea94a5bf4c/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Les repas de Noël",
                           "published": true,
@@ -3168,11 +3168,11 @@
                             "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&ST=20241224T180000Z&DUR=1900&DESC=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                             "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
-                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T081339Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
+                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T081609Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
                           },
                           "blocks": [
                             {
-                              "id": "81b9ad9e-e19b-4605-bc81-a26966e577eb",
+                              "id": "4843c1df-fe9a-46de-9650-d5b966b90a61",
                               "migration_identifier": "event-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -3189,16 +3189,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2024-12-20T08:13:39.426+01:00",
-                              "updated_at": "2024-12-20T08:13:39.426+01:00"
+                              "created_at": "2024-12-20T08:16:09.108+01:00",
+                              "updated_at": "2024-12-20T08:16:09.108+01:00"
                             }
                           ],
-                          "created_at": "2024-12-20T08:13:39.419+01:00",
-                          "updated_at": "2024-12-20T08:13:39.445+01:00"
+                          "created_at": "2024-12-20T08:16:09.101+01:00",
+                          "updated_at": "2024-12-20T08:16:09.126+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T08:13:39.409+01:00",
-                      "updated_at": "2024-12-20T08:13:39.506+01:00"
+                      "created_at": "2024-12-20T08:16:09.092+01:00",
+                      "updated_at": "2024-12-20T08:16:09.187+01:00"
                     }
                   }
                 }
@@ -3324,7 +3324,7 @@
                     "value": {
                       "created": [
                         {
-                          "id": "b2795933-b720-4bcd-bb5f-57e083450be9",
+                          "id": "975f83ae-a33f-4de3-9f86-097bd4461e44",
                           "migration_identifier": "event-from-api-1",
                           "from_day": "2024-12-24",
                           "from_hour": "19:00",
@@ -3335,14 +3335,14 @@
                           "parent_id": null,
                           "localizations": {
                             "fr": {
-                              "id": "5e2ee9d3-5b87-42ae-bab3-2bce33bc3fe1",
+                              "id": "f6accf07-b08b-4db9-8dfb-7931975a9a16",
                               "migration_identifier": "event-from-api-1-fr",
                               "title": "Noël",
                               "featured_image": {
-                                "blob_id": "014f7aa1-bc6d-4d8a-92a6-6f32acf6849a",
+                                "blob_id": "688b0472-7639-43c6-884d-722ed4003227",
                                 "alt": "La lumière brille sur les parois du canyon",
                                 "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ0M2ZyNDNidzRtMXM0Znl1Z29xbmVqZ3d6d256IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDg6MTM6MzkuNzY0WiIsInB1ciI6ImJsb2Jfa2V5In19--18d0e904239c448c16e975404b9a1df51e3370a6/photo-1703923633616-254e78f6e9df"
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ0cnl2MXJlOXU1ZWUzampmMmRvdjI2ZmlsY3FlIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDg6MTY6MDkuNDQ1WiIsInB1ciI6ImJsb2Jfa2V5In19--e313f40e38fe9ba5c55d3df52b63aa598bde4640/photo-1703923633616-254e78f6e9df"
                               },
                               "meta_description": "Les repas de Noël",
                               "published": true,
@@ -3356,11 +3356,11 @@
                                 "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&ST=20241224T180000Z&DUR=1900&DESC=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
-                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T081339Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
+                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T081609Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
                               },
                               "blocks": [
                                 {
-                                  "id": "8068d170-7b26-424a-b9ab-54cc214b1695",
+                                  "id": "3199e45e-6257-4698-87cd-d8e25dd8d043",
                                   "migration_identifier": "event-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -3377,16 +3377,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2024-12-20T08:13:39.657+01:00",
-                                  "updated_at": "2024-12-20T08:13:39.657+01:00"
+                                  "created_at": "2024-12-20T08:16:09.344+01:00",
+                                  "updated_at": "2024-12-20T08:16:09.344+01:00"
                                 }
                               ],
-                              "created_at": "2024-12-20T08:13:39.655+01:00",
-                              "updated_at": "2024-12-20T08:13:39.664+01:00"
+                              "created_at": "2024-12-20T08:16:09.342+01:00",
+                              "updated_at": "2024-12-20T08:16:09.351+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T08:13:39.651+01:00",
-                          "updated_at": "2024-12-20T08:13:39.695+01:00"
+                          "created_at": "2024-12-20T08:16:09.338+01:00",
+                          "updated_at": "2024-12-20T08:16:09.381+01:00"
                         }
                       ],
                       "updated": [
@@ -3423,15 +3423,15 @@
                                 "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Mon%20nouveau%20titre%20&ST=20240712T070000Z&DUR=3915",
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
-                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T081339Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
+                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T081609Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
                               },
                               "blocks": [],
-                              "created_at": "2024-12-20T08:13:38.788+01:00",
-                              "updated_at": "2024-12-20T08:13:39.740+01:00"
+                              "created_at": "2024-12-20T08:16:08.483+01:00",
+                              "updated_at": "2024-12-20T08:16:09.422+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T08:13:38.800+01:00",
-                          "updated_at": "2024-12-20T08:13:39.741+01:00"
+                          "created_at": "2024-12-20T08:16:08.494+01:00",
+                          "updated_at": "2024-12-20T08:16:09.423+01:00"
                         }
                       ],
                       "errors": []
@@ -3623,12 +3623,12 @@
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z"
                           },
                           "blocks": [],
-                          "created_at": "2024-12-20T08:13:38.788+01:00",
-                          "updated_at": "2024-12-20T08:13:38.788+01:00"
+                          "created_at": "2024-12-20T08:16:08.483+01:00",
+                          "updated_at": "2024-12-20T08:16:08.483+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T08:13:38.800+01:00",
-                      "updated_at": "2024-12-20T08:13:38.800+01:00"
+                      "created_at": "2024-12-20T08:16:08.494+01:00",
+                      "updated_at": "2024-12-20T08:16:08.494+01:00"
                     }
                   }
                 }
@@ -3740,15 +3740,15 @@
                             "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Mon%20nouveau%20titre%20&ST=20240712T070000Z&DUR=3915",
                             "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
-                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T081339Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
+                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T081609Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
                           },
                           "blocks": [],
-                          "created_at": "2024-12-20T08:13:38.788+01:00",
-                          "updated_at": "2024-12-20T08:13:39.896+01:00"
+                          "created_at": "2024-12-20T08:16:08.483+01:00",
+                          "updated_at": "2024-12-20T08:16:09.577+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T08:13:38.800+01:00",
-                      "updated_at": "2024-12-20T08:13:39.897+01:00"
+                      "created_at": "2024-12-20T08:16:08.494+01:00",
+                      "updated_at": "2024-12-20T08:16:09.578+01:00"
                     }
                   }
                 }
@@ -3891,7 +3891,7 @@
             }
           },
           "404": {
-            "description": "Post not found",
+            "description": "Event not found",
             "content": {
               "application/json": {
                 "examples": {
@@ -3900,7 +3900,7 @@
                       "message": "The resource you were looking for doesn't exist."
                     }
                   },
-                  "Post not found": {
+                  "Event not found": {
                     "value": {
                       "message": "The resource you were looking for doesn't exist."
                     }
@@ -3966,12 +3966,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-20T08:13:38.845+01:00",
-                            "updated_at": "2024-12-20T08:13:38.845+01:00"
+                            "created_at": "2024-12-20T08:16:08.536+01:00",
+                            "updated_at": "2024-12-20T08:16:08.536+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T08:13:38.857+01:00",
-                        "updated_at": "2024-12-20T08:13:38.857+01:00"
+                        "created_at": "2024-12-20T08:16:08.548+01:00",
+                        "updated_at": "2024-12-20T08:16:08.548+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -3997,12 +3997,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-20T08:13:38.845+01:00",
-                            "updated_at": "2024-12-20T08:13:38.845+01:00"
+                            "created_at": "2024-12-20T08:16:08.536+01:00",
+                            "updated_at": "2024-12-20T08:16:08.536+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T08:13:38.857+01:00",
-                        "updated_at": "2024-12-20T08:13:38.857+01:00"
+                        "created_at": "2024-12-20T08:16:08.548+01:00",
+                        "updated_at": "2024-12-20T08:16:08.548+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -4028,12 +4028,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-20T08:13:38.845+01:00",
-                            "updated_at": "2024-12-20T08:13:38.845+01:00"
+                            "created_at": "2024-12-20T08:16:08.536+01:00",
+                            "updated_at": "2024-12-20T08:16:08.536+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T08:13:38.857+01:00",
-                        "updated_at": "2024-12-20T08:13:38.857+01:00"
+                        "created_at": "2024-12-20T08:16:08.548+01:00",
+                        "updated_at": "2024-12-20T08:16:08.548+01:00"
                       }
                     ]
                   }
@@ -4106,19 +4106,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "a7af1500-017d-4ee2-b277-06ec0025aa62",
+                      "id": "78c4266c-94c7-4f71-8f36-da4f4b3f3172",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "3917167c-d36f-45bd-aba7-21f913bd206e",
+                          "id": "a2966d6e-0ee9-40fc-a796-1a7ec4196be1",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "f27b0c2f-4417-41a2-88d6-207b8947486a",
+                            "blob_id": "4a09deaf-ac89-460b-9118-d8920f1b66f2",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ0ZWFkbmhhNXNnOTMyaDVmdm5nZm0xOW1nbmZxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDg6MTM6NDAuMzEwWiIsInB1ciI6ImJsb2Jfa2V5In19--7b8be34b7bced14257a5c01b473f0dd15fc4bacb/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiI5ZGNoczltMXI5ZDNhYjE4bHpiYWtvbDVtZWYxIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDg6MTY6MDkuOTYyWiIsInB1ciI6ImJsb2Jfa2V5In19--1b2cd6ef98c3f46fc01cb7931df2493239e28c09/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -4130,7 +4130,7 @@
                           "text": null,
                           "blocks": [
                             {
-                              "id": "4df0e3bc-ba5d-4098-a17f-aff66a0824a9",
+                              "id": "0551632e-fb37-4969-88ff-dcea7e6b4ece",
                               "migration_identifier": "post-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -4147,16 +4147,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2024-12-20T08:13:40.240+01:00",
-                              "updated_at": "2024-12-20T08:13:40.240+01:00"
+                              "created_at": "2024-12-20T08:16:09.895+01:00",
+                              "updated_at": "2024-12-20T08:16:09.895+01:00"
                             }
                           ],
-                          "created_at": "2024-12-20T08:13:40.238+01:00",
-                          "updated_at": "2024-12-20T08:13:40.248+01:00"
+                          "created_at": "2024-12-20T08:16:09.893+01:00",
+                          "updated_at": "2024-12-20T08:16:09.902+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T08:13:40.236+01:00",
-                      "updated_at": "2024-12-20T08:13:40.307+01:00"
+                      "created_at": "2024-12-20T08:16:09.891+01:00",
+                      "updated_at": "2024-12-20T08:16:09.959+01:00"
                     }
                   }
                 }
@@ -4282,19 +4282,19 @@
                     "value": {
                       "created": [
                         {
-                          "id": "cd7303dc-b58d-4ce0-9620-ff99d33b52f7",
+                          "id": "eaa41556-edb0-422f-8c70-057593b673e9",
                           "migration_identifier": "post-from-api-1",
                           "full_width": false,
                           "localizations": {
                             "fr": {
-                              "id": "0fdabda0-ca3e-4e35-a9a7-699a490ca2a2",
+                              "id": "be26487e-3a95-478e-97e4-426b65256aa3",
                               "migration_identifier": "post-from-api-1-fr",
                               "title": "Ma nouvelle actualité",
                               "featured_image": {
-                                "blob_id": "20956bd2-c052-42a0-a97f-7ec2b4a6691b",
+                                "blob_id": "3ca64b9e-7c3c-4dbc-9256-66d59795a9eb",
                                 "alt": "La lumière brille sur les parois du canyon",
                                 "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ5NTU2YnB5dWU2dXNiYnd6emxja2FlZW91OXlnIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDg6MTM6NDAuNDI5WiIsInB1ciI6ImJsb2Jfa2V5In19--33739bb5d35ccf8fe3d4745d17e5f71d65a84465/photo-1703923633616-254e78f6e9df"
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJuZHJ2cHA1MHE2aTB2eWFvbzFrd3k3cTZycjkyIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDg6MTY6MTAuMTAyWiIsInB1ciI6ImJsb2Jfa2V5In19--a72d3a48762c2f0981a6acbc0fbb50056c7389b2/photo-1703923633616-254e78f6e9df"
                               },
                               "meta_description": "Une nouvelle actualité depuis l'API",
                               "pinned": false,
@@ -4306,7 +4306,7 @@
                               "text": null,
                               "blocks": [
                                 {
-                                  "id": "bba53d79-8cb2-4ce1-aef3-f330d032df38",
+                                  "id": "ef64e663-97f0-4a07-a2ba-795dab19ff8e",
                                   "migration_identifier": "post-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -4323,16 +4323,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2024-12-20T08:13:40.371+01:00",
-                                  "updated_at": "2024-12-20T08:13:40.371+01:00"
+                                  "created_at": "2024-12-20T08:16:10.041+01:00",
+                                  "updated_at": "2024-12-20T08:16:10.041+01:00"
                                 }
                               ],
-                              "created_at": "2024-12-20T08:13:40.370+01:00",
-                              "updated_at": "2024-12-20T08:13:40.376+01:00"
+                              "created_at": "2024-12-20T08:16:10.040+01:00",
+                              "updated_at": "2024-12-20T08:16:10.044+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T08:13:40.369+01:00",
-                          "updated_at": "2024-12-20T08:13:40.395+01:00"
+                          "created_at": "2024-12-20T08:16:10.038+01:00",
+                          "updated_at": "2024-12-20T08:16:10.067+01:00"
                         }
                       ],
                       "updated": [
@@ -4360,12 +4360,12 @@
                               "summary": null,
                               "text": null,
                               "blocks": [],
-                              "created_at": "2024-12-20T08:13:38.845+01:00",
-                              "updated_at": "2024-12-20T08:13:40.412+01:00"
+                              "created_at": "2024-12-20T08:16:08.536+01:00",
+                              "updated_at": "2024-12-20T08:16:10.084+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T08:13:38.857+01:00",
-                          "updated_at": "2024-12-20T08:13:40.413+01:00"
+                          "created_at": "2024-12-20T08:16:08.548+01:00",
+                          "updated_at": "2024-12-20T08:16:10.084+01:00"
                         }
                       ],
                       "errors": []
@@ -4545,12 +4545,12 @@
                           "summary": null,
                           "text": null,
                           "blocks": [],
-                          "created_at": "2024-12-20T08:13:38.845+01:00",
-                          "updated_at": "2024-12-20T08:13:38.845+01:00"
+                          "created_at": "2024-12-20T08:16:08.536+01:00",
+                          "updated_at": "2024-12-20T08:16:08.536+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T08:13:38.857+01:00",
-                      "updated_at": "2024-12-20T08:13:38.857+01:00"
+                      "created_at": "2024-12-20T08:16:08.548+01:00",
+                      "updated_at": "2024-12-20T08:16:08.548+01:00"
                     }
                   }
                 }
@@ -4653,12 +4653,12 @@
                           "summary": null,
                           "text": null,
                           "blocks": [],
-                          "created_at": "2024-12-20T08:13:38.845+01:00",
-                          "updated_at": "2024-12-20T08:13:40.535+01:00"
+                          "created_at": "2024-12-20T08:16:08.536+01:00",
+                          "updated_at": "2024-12-20T08:16:10.209+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T08:13:38.857+01:00",
-                      "updated_at": "2024-12-20T08:13:40.536+01:00"
+                      "created_at": "2024-12-20T08:16:08.548+01:00",
+                      "updated_at": "2024-12-20T08:16:10.210+01:00"
                     }
                   }
                 }
@@ -4881,12 +4881,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-20T08:13:38.809+01:00",
-                            "updated_at": "2024-12-20T08:13:38.809+01:00"
+                            "created_at": "2024-12-20T08:16:08.503+01:00",
+                            "updated_at": "2024-12-20T08:16:08.503+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T08:13:38.859+01:00",
-                        "updated_at": "2024-12-20T08:13:38.859+01:00"
+                        "created_at": "2024-12-20T08:16:08.550+01:00",
+                        "updated_at": "2024-12-20T08:16:08.550+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -4928,8 +4928,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-20T08:13:38.809+01:00",
-                            "updated_at": "2024-12-20T08:13:38.809+01:00"
+                            "created_at": "2024-12-20T08:16:08.503+01:00",
+                            "updated_at": "2024-12-20T08:16:08.503+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -4947,12 +4947,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-20T08:13:38.809+01:00",
-                            "updated_at": "2024-12-20T08:13:38.809+01:00"
+                            "created_at": "2024-12-20T08:16:08.503+01:00",
+                            "updated_at": "2024-12-20T08:16:08.503+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T08:13:38.859+01:00",
-                        "updated_at": "2024-12-20T08:13:38.859+01:00"
+                        "created_at": "2024-12-20T08:16:08.550+01:00",
+                        "updated_at": "2024-12-20T08:16:08.550+01:00"
                       }
                     ]
                   }
@@ -5052,12 +5052,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-20T08:13:38.809+01:00",
-                          "updated_at": "2024-12-20T08:13:38.809+01:00"
+                          "created_at": "2024-12-20T08:16:08.503+01:00",
+                          "updated_at": "2024-12-20T08:16:08.503+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T08:13:38.859+01:00",
-                      "updated_at": "2024-12-20T08:13:38.859+01:00"
+                      "created_at": "2024-12-20T08:16:08.550+01:00",
+                      "updated_at": "2024-12-20T08:16:08.550+01:00"
                     }
                   }
                 },
