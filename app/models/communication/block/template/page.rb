@@ -16,7 +16,6 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
   has_component :text, :rich_text # Deprecated
   has_component :page_id, :page
   has_component :category_id, :page_category
-  has_component :pages_quantity, :number, options: 3
 
   has_component :option_image,        :boolean, default: true
   has_component :option_main_summary, :boolean, default: true
@@ -83,7 +82,6 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
                 .published_now_in(block.language)
                 .for_category(category_ids)
                 .ordered(block.language)
-                .limit(pages_quantity)
   end
 
 end
