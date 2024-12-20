@@ -189,11 +189,6 @@ en:
         related_category: Related category
         special_page: Special page
         website: Website
-      communication/website/page/category/localization:
-        featured_image: Featured image
-        featured_image_alt: Alt text
-        name: Name
-        slug: Slug
       communication/website/page/localization:
         breadcrumb_title: Title in breadcrumbs
         featured_image: Featured image

@@ -37,16 +37,7 @@
       }.join(', ') %>
     <% end %>
   </p>
-  <% if @page.categories.any?  %>
-    <div>
-      <%= osuny_label Communication::Website::Page.human_attribute_name(:categories) %>
-      <ul class="list-unstyled">
-        <% @page.categories.ordered.each do |category| %>
-          <li><%= osuny_link_localized category, admin_communication_website_page_category_path(category) %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'admin/application/categories/widget/show', about: @page %>
   <%= render 'admin/application/permalinks/redirects', about: @l10n %>
 <% end %>
 <%= render 'admin/application/l10n/widget', about: @page, l10n: @l10n, small: true %>

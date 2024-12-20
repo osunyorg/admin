@@ -1,25 +1,18 @@
 <% content_for :title, @l10n %>
 
-<div class="row">
-  <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @l10n %>
-    <%= render 'admin/application/l10n/widget', about: @category, l10n: @l10n %>
-  </div>
-  <div class="col-lg-4">
-    <%= render 'admin/application/featured_image/show', about: @l10n %>
-    <%= render 'admin/application/meta_description/show', about: @l10n %>
-  </div>
-</div>
-<%= render 'admin/communication/contents/editor', about: @l10n %>
+<%= render 'admin/application/categories/show', category: @category, l10n: @l10n %>
+
 <% if @pages.total_count > 0 %>
-  <%
-  title = Communication::Website::Page.model_name.human(count: 2)
-  subtitle = "#{@pages.total_count} #{Communication::Website::Page.model_name.human(count: @pages.total_count).downcase }"
-  %>
-  <%= osuny_panel title, subtitle: subtitle do %>
-    <%= render 'admin/communication/websites/pages/list', pages: @pages, hide_category: true %>
-    <%= paginate @pages %>
-  <% end %>
+  <div class="row">
+    <div class="offset-lg-4 col-lg-8">
+      <p>
+        <%= @pages.total_count %> 
+        <%= Communication::Website::Page.model_name.human(count: @pages.total_count).downcase %>
+      </p>
+      <%= render 'admin/communication/websites/pages/list', pages: @pages, hide_category: true %>
+      <%= paginate @pages %>
+      <div>
+  </div>
 <% end %>
 
 <% content_for :action_bar_left do %>
