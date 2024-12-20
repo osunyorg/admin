@@ -78,13 +78,24 @@ class Communication::Website::Post::Localization < ApplicationRecord
     contents_dependencies
   end
 
-  def author
-    return if about.author.nil?
-    about.author.localization_for(language)
+  def authors
+    about.authors.map { |author| author.localization_for(language) }.compact
   end
 
   def categories
     about.categories.ordered.map { |category| category.localization_for(language) }.compact
+  end
+
+  def to_detailed_s
+    detailed = "#{title}"
+    detailed += ", #{subtitle}" if subtitle.present?
+    detailed += " — #{published_at ? I18n.l(published_at.to_date) : I18n.t('publication.draft')}"
+    if authors.one?
+      detailed += ", #{authors.first}"
+    elsif authors.many?
+      detailed += ", #{authors.collect(&:last_name).to_sentence}"
+    end
+    detailed
   end
 
   def to_s

@@ -2,19 +2,20 @@
 #
 # Table name: communication_website_menu_items
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           indexed => [about_id]
-#  kind          :integer          default("blank")
-#  position      :integer
-#  title         :string
-#  url           :text
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             indexed => [about_type]
-#  menu_id       :uuid             not null, indexed
-#  parent_id     :uuid             indexed
-#  university_id :uuid             not null, indexed
-#  website_id    :uuid             not null, indexed
+#  id                  :uuid             not null, primary key
+#  about_type          :string           indexed => [about_id]
+#  kind                :integer          default("blank")
+#  position            :integer
+#  should_open_new_tab :boolean          default(FALSE)
+#  title               :string
+#  url                 :text
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  about_id            :uuid             indexed => [about_type]
+#  menu_id             :uuid             not null, indexed
+#  parent_id           :uuid             indexed
+#  university_id       :uuid             not null, indexed
+#  website_id          :uuid             not null, indexed
 #
 # Indexes
 #
@@ -145,6 +146,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'title' => title,
       'target' => static_target,
       'kind' => kind,
+      'new_tab' => should_open_new_tab,
       'children' => children.ordered.map(&:to_static_hash).compact
     }
     if hugo.present?
@@ -152,6 +154,11 @@ class Communication::Website::Menu::Item < ApplicationRecord
       hash['file'] = hugo.file
     end
     hash
+  end
+
+  def should_open_new_tab
+    return false unless kind_url?
+    super
   end
 
   def has_about?

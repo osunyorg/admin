@@ -689,12 +689,19 @@ en:
                 placeholder: Enter description
               url:
                 hint: |
-                  Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=lAYhfCPelO0
+                  Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=7BTsrH6ulwQ
                 label: Video url
                 placeholder: Enter video's url
               video_title:
                 label: Video title
                 placeholder: Enter video title
+            layouts:
+              player:
+                description: A video player integrated into the page, which waits for a click to load the external platform'player.
+                label: Player
+              button:
+                description: A button that launches the video by displaying it as a popin on top of the current page, against a dark background.
+                label: Button
           volumes:
             description: A selection of volumes published in a scientific journal.
             edit:

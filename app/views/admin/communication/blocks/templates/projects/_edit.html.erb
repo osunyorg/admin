@@ -1,24 +1,9 @@
+<%= block_component_edit block, :mode %>
 <div class="row">
-  <div class="col-lg-6">
-    <%= block_component_edit block, :mode %>
-  </div>
-  <div class="col-lg-6" v-if="data.mode !== 'categories'">
-    <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-    <%= block_component_edit block, :option_image, label: Communication::Website::Portfolio::Project::Localization.human_attribute_name(:featured_image) %>
-    <%= block_component_edit block, :option_subtitle, label: Communication::Website::Portfolio::Project::Localization.human_attribute_name(:subtitle) %>
-    <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
-    <%= block_component_edit block, :option_categories, label: Communication::Website::Portfolio::Project.human_attribute_name(:categories) %>
-    <%= block_component_edit block, :option_year, label: Communication::Website::Portfolio::Project.human_attribute_name(:year) %>
-  </div>
-</div>
-<div v-if="data.mode !== 'categories'">
-  <%= block_component_edit block, :layout %>
-</div>
-<div class="row pure__row--small">
-  <div v-if="data.mode === 'category' || data.mode === 'all'" class="col-lg-3">
+  <div v-if="data.mode === 'category' || data.mode === 'all'" class="col-sm-3">
     <%= block_component_edit block, :projects_quantity %>
   </div>
-  <div v-if="data.mode === 'category'" class="col-lg-9">
+  <div v-if="data.mode === 'category'" class="col-sm-9">
     <%= block_component_edit block, :category_id %>
   </div>
 </div>
@@ -39,4 +24,23 @@
       </a>
     </div>
   </draggable>
+</div>
+
+<div v-if="data.mode !== 'categories'">
+  <%= osuny_separator %>
+  <%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+    <%= block_component_edit block, :layout %>
+    <%= osuny_label t('admin.communication.blocks.display_options.title') %>
+    <div class="row">
+      <div class="col-sm-6">
+        <%= block_component_edit block, :option_image, label: Communication::Website::Portfolio::Project::Localization.human_attribute_name(:featured_image) %>
+        <%= block_component_edit block, :option_subtitle, label: Communication::Website::Portfolio::Project::Localization.human_attribute_name(:subtitle) %>
+        <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
+      </div>
+      <div class="col-sm-6">
+        <%= block_component_edit block, :option_categories, label: Communication::Website::Portfolio::Project.human_attribute_name(:categories) %>
+        <%= block_component_edit block, :option_year, label: Communication::Website::Portfolio::Project.human_attribute_name(:year) %>
+      </div>
+    </div>
+  <% end %>
 </div>

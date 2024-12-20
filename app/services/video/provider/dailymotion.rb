@@ -1,7 +1,8 @@
 class Video::Provider::Dailymotion < Video::Provider::Default
   DOMAINS = [
-    'dailymotion.com', 
-    'www.dailymotion.com', 
+    'dailymotion.com',
+    'www.dailymotion.com',
+    'geo.dailymotion.com',
     'dai.ly',
     '*.dmcdn.net'
   ]
@@ -28,5 +29,14 @@ class Video::Provider::Dailymotion < Video::Provider::Default
   # L'autoplay est à 1 uniquement parce que l'iframe n'est pas chargée
   def embed_with_defaults
     "#{iframe_url}?autoplay=1&quality=380"
+  end
+
+  # https://developers.dailymotion.com/guides/embed-with-oembed/
+  def title
+    url = "https://www.dailymotion.com/services/oembed?url=https://www.dailymotion.com/video/#{identifier}"
+    io = URI.parse(url).open
+    json = JSON.load(io)
+    json['title']
+  rescue
   end
 end

@@ -1,27 +1,17 @@
-<div class="row">
-  <div class="col-xl-6">
-    <%= block_component_edit block, :description, summernote_config: 'mini' %>
-  </div>
+<%= block_component_edit block, :description, summernote_config: 'mini' %>
+
+<p><%= t('.send_multiple_images') %></p>
+<input  class="form-control mb-3"
+        type="file"
+        accept="<%= default_images_formats_accepted %>"
+        @change="onMultipleFileImageChange( $event, 'image' )"
+        data-size-limit="<%= Rails.application.config.default_image_max_size %>"
+        multiple>
+<div class="form-text mb-2">
+  <%= images_formats_accepted_hint %>
 </div>
 
-<%= block_component_edit block, :layout %>
-
-<div class="row">
-  <div class="col-xl-6">
-    <p><%= t('.send_multiple_images') %></p>
-    <input  class="form-control"
-            type="file"
-            accept="<%= default_images_formats_accepted %>"
-            @change="onMultipleFileImageChange( $event, 'image' )"
-            data-size-limit="<%= Rails.application.config.default_image_max_size %>"
-            multiple>
-    <div class="form-text mb-2">
-      <%= images_formats_accepted_hint %>
-    </div>
-  </div>
-</div>
-
-<hr class="my-5">
+<%= osuny_separator %>
 
 <p><%= t('.move_images') %></p>
 <draggable :list="data.elements" class="row">
@@ -37,7 +27,7 @@
   </div>
 </draggable>
 
-<hr class="my-5">
+<%= osuny_separator %>
 
 <p><%= t('.send_and_edit_images') %></p>
 
@@ -74,5 +64,9 @@
           summernote_config: 'mini' %>
   <% end %>
 </div>
-
 <%= block_component_add_element block, t('.add_image') %>
+
+<%= osuny_separator %>
+<%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+  <%= block_component_edit block, :layout %>
+<% end %>

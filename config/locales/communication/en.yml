@@ -177,6 +177,7 @@ en:
         children: Children items
         kind: Kind
         parent: Parent item
+        should_open_new_tab: Open in a new tab
         title: Title
         url: URL
       communication/website/page:

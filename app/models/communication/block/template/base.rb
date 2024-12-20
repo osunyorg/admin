@@ -2,6 +2,7 @@ class Communication::Block::Template::Base
   include WithAccessibility
   include WithData
   include WithDependencies
+  include WithTop
 
   class_attribute :components_descriptions,
                   :layouts,
@@ -81,6 +82,11 @@ class Communication::Block::Template::Base
 
   def empty?
     false
+  end
+
+  # Called before block validation
+  # Has an override in some templates (video)
+  def before_validation
   end
 
   def to_s

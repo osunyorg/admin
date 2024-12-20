@@ -689,12 +689,19 @@ fr:
                 placeholder: Entrer la description
               url:
                 hint: |
-                  Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=lAYhfCPelO0
+                  Ex: https://vimeo.com/732180675, https://www.youtube.com/watch?v=7BTsrH6ulwQ
                 label: Url de la vidéo
                 placeholder: Entrer l'url de la vidéo
               video_title:
                 label: Titre de la vidéo
                 placeholder: Entrer le titre de la vidéo
+            layouts:
+              player:
+                description: Un lecteur de vidéo intégré dans la page, qui attend un clic pour charger le lecteur de la plateforme externe.
+                label: Lecteur
+              button:
+                description: Un bouton qui lance la vidéo en l'affichant par dessus la page en cours, sur un fond sombre. 
+                label: Bouton
           volumes:
             description: Une sélection de volumes publiés dans la revue scientifique.
             edit:

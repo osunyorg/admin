@@ -177,6 +177,7 @@ fr:
         children: Sous-éléments
         kind: Type
         parent: Élément parent
+        should_open_new_tab: Ouvrir dans un nouvel onglet
         title: Titre
         url: URL
       communication/website/page:

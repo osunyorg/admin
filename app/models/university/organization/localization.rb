@@ -2,24 +2,26 @@
 #
 # Table name: university_organization_localizations
 #
-#  id                 :uuid             not null, primary key
-#  address_additional :string
-#  address_name       :string
-#  linkedin           :string
-#  long_name          :string
-#  mastodon           :string
-#  meta_description   :text
-#  name               :string
-#  slug               :string
-#  summary            :text
-#  text               :text
-#  twitter            :string
-#  url                :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  about_id           :uuid             indexed
-#  language_id        :uuid             indexed
-#  university_id      :uuid             indexed
+#  id                    :uuid             not null, primary key
+#  address_additional    :string
+#  address_name          :string
+#  featured_image_alt    :string
+#  featured_image_credit :text
+#  linkedin              :string
+#  long_name             :string
+#  mastodon              :string
+#  meta_description      :text
+#  name                  :string
+#  slug                  :string
+#  summary               :text
+#  text                  :text
+#  twitter               :string
+#  url                   :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  about_id              :uuid             indexed
+#  language_id           :uuid             indexed
+#  university_id         :uuid             indexed
 #
 # Indexes
 #
@@ -42,6 +44,7 @@ class University::Organization::Localization < ApplicationRecord
   include Sanitizable
   include Shareable
   include WithBlobs
+  include WithFeaturedImage
   include WithGitFiles
   include WithUniversity
 
@@ -49,8 +52,6 @@ class University::Organization::Localization < ApplicationRecord
   has_summernote :text
   has_one_attached_deletable :logo
   has_one_attached_deletable :logo_on_dark_background
-
-  alias :featured_image :logo
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: [:university_id, :language_id] }
@@ -84,6 +85,7 @@ class University::Organization::Localization < ApplicationRecord
     [
       logo&.blob_id,
       logo_on_dark_background&.blob_id,
+      featured_image&.blob_id,
       shared_image&.blob_id
     ]
   end
