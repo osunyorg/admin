@@ -21,6 +21,8 @@ RSpec.configure do |config|
     communication_website_post_localization: Communication::Website::Post::Localization::OPENAPI_SCHEMA,
     communication_website_agenda_event: Communication::Website::Agenda::Event::OPENAPI_SCHEMA,
     communication_website_agenda_event_localization: Communication::Website::Agenda::Event::Localization::OPENAPI_SCHEMA,
+    university_organization: University::Organization::OPENAPI_SCHEMA,
+    university_organization_localization: University::Organization::Localization::OPENAPI_SCHEMA,
   }
   Communication::Block.template_kinds.keys.each do |template_kind|
     schema_key = "communication_block_#{template_kind}".to_sym
