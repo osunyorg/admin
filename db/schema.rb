@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_18_180521) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_20_103713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -1554,6 +1554,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_18_180521) do
     t.datetime "updated_at", null: false
     t.string "featured_image_alt"
     t.text "featured_image_credit"
+    t.string "migration_identifier"
     t.index ["about_id"], name: "index_university_organization_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_organization_localizations_on_language_id"
     t.index ["university_id"], name: "index_university_organization_localizations_on_university_id"
@@ -1576,6 +1577,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_18_180521) do
     t.string "nic"
     t.float "latitude"
     t.float "longitude"
+    t.string "migration_identifier"
     t.index ["slug"], name: "index_university_organizations_on_slug"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
