@@ -19,22 +19,15 @@
 
     <%= render 'admin/application/a11y/widget', about: @block %>
 
-    <div class="row">
-      <div class="col-md-9">
-        <%= f.input :title,
-                    input_html: { data: { translatable: true } } %>
-      </div>
-      <div class="col-md-3">
-        <label class="form-label d-none d-md-block">&nbsp;</label>
-        <%= f.input :published,
-                    label: t('publication.published'),
-                    wrapper: :custom_boolean_switch %>
-      </div>
-    </div>
+    <%= f.input :published,
+                label: t('publication.published'),
+                wrapper: :custom_boolean_switch %>
+    <%= f.input :title,
+                input_html: { data: { translatable: true } } %>
 
     <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f, block: @block %>
  
-    <div>
+    <div class="mt-5">
       <a  class="text-muted small"
           data-bs-toggle="collapse" 
           href="#advanced" 
