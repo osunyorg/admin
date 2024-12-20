@@ -377,7 +377,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
   end
 
   path '/communication/websites/{website_id}/agenda/events/{id}' do
-    get 'Shows a event' do
+    get 'Shows an event' do
       tags 'Communication::Website::Agenda::Event'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
@@ -407,7 +407,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
       end
     end
 
-    patch 'Updates a event' do
+    patch 'Updates an event' do
       tags 'Communication::Website::Agenda::Event'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
@@ -536,7 +536,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
       end
     end
 
-    delete 'Deletes a event' do
+    delete 'Deletes an event' do
       tags 'Communication::Website::Agenda::Event'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }

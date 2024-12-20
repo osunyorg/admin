@@ -9,7 +9,7 @@ module University::Organization::Localization::WithOpenApi
         id: { type: :string, format: :uuid },
         migration_identifier: { type: :string, nullable: true },
         name: { type: :string },
-        long_name: { type: :string },
+        long_name: { type: :string, nullable: true },
         featured_image: {
           type: :object,
           properties: {
@@ -26,7 +26,7 @@ module University::Organization::Localization::WithOpenApi
         mastodon: { type: :string, nullable: true },
         twitter: { type: :string, nullable: true },
         url: { type: :string, nullable: true },
-        slug: { type: :string },
+        slug: { type: :string, nullable: true },
         summary: { type: :string, nullable: true },
         text: { type: :string, nullable: true },
         blocks: {

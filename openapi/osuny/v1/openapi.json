@@ -751,7 +751,8 @@
             "type": "string"
           },
           "long_name": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "featured_image": {
             "type": "object",
@@ -804,7 +805,8 @@
             "nullable": true
           },
           "slug": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "summary": {
             "type": "string",
@@ -3320,12 +3322,12 @@
                               "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z"
                             },
                             "blocks": [],
-                            "created_at": "2024-12-20T15:15:44.415+01:00",
-                            "updated_at": "2024-12-20T15:15:44.415+01:00"
+                            "created_at": "2024-12-20T18:10:28.168+01:00",
+                            "updated_at": "2024-12-20T18:10:28.168+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T15:15:44.426+01:00",
-                        "updated_at": "2024-12-20T15:15:44.426+01:00"
+                        "created_at": "2024-12-20T18:10:28.180+01:00",
+                        "updated_at": "2024-12-20T18:10:28.180+01:00"
                       }
                     ]
                   }
@@ -3398,7 +3400,7 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "def5fd88-011f-429b-9c16-3ed1b51968fa",
+                      "id": "c1c27ad2-ade3-4667-92e8-307710e46ea2",
                       "migration_identifier": "event-from-api-1",
                       "from_day": "2024-12-24",
                       "from_hour": "19:00",
@@ -3409,14 +3411,14 @@
                       "parent_id": null,
                       "localizations": {
                         "fr": {
-                          "id": "4c873cab-497b-498c-9eeb-f7f08ccc3cf8",
+                          "id": "39006bfc-644d-49cf-81a5-78091070ceb0",
                           "migration_identifier": "event-from-api-1-fr",
                           "title": "Noël",
                           "featured_image": {
-                            "blob_id": "dcabcc8d-d6ec-44d7-852e-2e0de7585829",
+                            "blob_id": "15545c72-7aa5-4cd5-ab83-2b8b20b119fc",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJhNHFhc3lvcHYwMWN2ZGE3Z3F0cTRwNWJ2Mmt0IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTU6MTU6NDUuMTc4WiIsInB1ciI6ImJsb2Jfa2V5In19--7099e9a9c715e495a93ea5f0503cd2d3c8840bd0/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJiZGRjYzFwa2oyaXNwMGdrazZ6cmozdGE2a2diIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MjguODc3WiIsInB1ciI6ImJsb2Jfa2V5In19--6858a92601bb2ecd1b072275dd218ba1bcb5cb4f/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Les repas de Noël",
                           "published": true,
@@ -3430,11 +3432,11 @@
                             "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&ST=20241224T180000Z&DUR=1900&DESC=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                             "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
-                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T151545Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
+                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T181028Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
                           },
                           "blocks": [
                             {
-                              "id": "814d0240-a0be-458e-b544-cae5a60fb4d1",
+                              "id": "25d30aa6-345b-4764-9cef-333077237c6d",
                               "migration_identifier": "event-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -3451,16 +3453,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2024-12-20T15:15:45.065+01:00",
-                              "updated_at": "2024-12-20T15:15:45.065+01:00"
+                              "created_at": "2024-12-20T18:10:28.771+01:00",
+                              "updated_at": "2024-12-20T18:10:28.771+01:00"
                             }
                           ],
-                          "created_at": "2024-12-20T15:15:45.058+01:00",
-                          "updated_at": "2024-12-20T15:15:45.084+01:00"
+                          "created_at": "2024-12-20T18:10:28.765+01:00",
+                          "updated_at": "2024-12-20T18:10:28.790+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T15:15:45.048+01:00",
-                      "updated_at": "2024-12-20T15:15:45.149+01:00"
+                      "created_at": "2024-12-20T18:10:28.755+01:00",
+                      "updated_at": "2024-12-20T18:10:28.849+01:00"
                     }
                   }
                 }
@@ -3586,7 +3588,7 @@
                     "value": {
                       "created": [
                         {
-                          "id": "fddbb38a-3fdb-4abf-bf60-b45d5ec332e7",
+                          "id": "99f07eac-936d-47a5-891f-cb5d1dcdf714",
                           "migration_identifier": "event-from-api-1",
                           "from_day": "2024-12-24",
                           "from_hour": "19:00",
@@ -3597,14 +3599,14 @@
                           "parent_id": null,
                           "localizations": {
                             "fr": {
-                              "id": "7bf1683d-9cc6-4f57-8276-249c28aaeef7",
+                              "id": "bd2c3a2e-d126-4a3d-9584-60f5c5285ab0",
                               "migration_identifier": "event-from-api-1-fr",
                               "title": "Noël",
                               "featured_image": {
-                                "blob_id": "d044fdea-3ba3-470f-832a-1a251fde4b20",
+                                "blob_id": "c890147d-6932-42c9-ab5e-e66a06ec7b0f",
                                 "alt": "La lumière brille sur les parois du canyon",
                                 "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJzbmg4eTdyc25qbmVycXl4ZzI1bGc5MWw1eDZzIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTU6MTU6NDUuNDQ0WiIsInB1ciI6ImJsb2Jfa2V5In19--ddba4bb960970f77fccedb90acb3004862083fb4/photo-1703923633616-254e78f6e9df"
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJrNWZncWh4a216a2pxeHBtZWRwOXU1bXB6MnowIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MjkuMTIwWiIsInB1ciI6ImJsb2Jfa2V5In19--2e5513bfa213895795bd0e00bff49d8e36010aa5/photo-1703923633616-254e78f6e9df"
                               },
                               "meta_description": "Les repas de Noël",
                               "published": true,
@@ -3618,11 +3620,11 @@
                                 "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&ST=20241224T180000Z&DUR=1900&DESC=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
-                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T151545Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
+                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T181028Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
                               },
                               "blocks": [
                                 {
-                                  "id": "f422d6a3-9f2b-4ea2-814e-201bb68de4cc",
+                                  "id": "65af43ec-15f7-47e0-8619-d2335bd3851b",
                                   "migration_identifier": "event-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -3639,16 +3641,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2024-12-20T15:15:45.302+01:00",
-                                  "updated_at": "2024-12-20T15:15:45.302+01:00"
+                                  "created_at": "2024-12-20T18:10:28.997+01:00",
+                                  "updated_at": "2024-12-20T18:10:28.997+01:00"
                                 }
                               ],
-                              "created_at": "2024-12-20T15:15:45.300+01:00",
-                              "updated_at": "2024-12-20T15:15:45.309+01:00"
+                              "created_at": "2024-12-20T18:10:28.995+01:00",
+                              "updated_at": "2024-12-20T18:10:29.003+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T15:15:45.296+01:00",
-                          "updated_at": "2024-12-20T15:15:45.345+01:00"
+                          "created_at": "2024-12-20T18:10:28.991+01:00",
+                          "updated_at": "2024-12-20T18:10:29.033+01:00"
                         }
                       ],
                       "updated": [
@@ -3685,15 +3687,15 @@
                                 "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Mon%20nouveau%20titre%20&ST=20240712T070000Z&DUR=3915",
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
-                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T151545Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
+                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T181029Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
                               },
                               "blocks": [],
-                              "created_at": "2024-12-20T15:15:44.415+01:00",
-                              "updated_at": "2024-12-20T15:15:45.419+01:00"
+                              "created_at": "2024-12-20T18:10:28.168+01:00",
+                              "updated_at": "2024-12-20T18:10:29.077+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T15:15:44.426+01:00",
-                          "updated_at": "2024-12-20T15:15:45.420+01:00"
+                          "created_at": "2024-12-20T18:10:28.180+01:00",
+                          "updated_at": "2024-12-20T18:10:29.078+01:00"
                         }
                       ],
                       "errors": []
@@ -3813,7 +3815,7 @@
     },
     "/communication/websites/{website_id}/agenda/events/{id}": {
       "get": {
-        "summary": "Shows a event",
+        "summary": "Shows an event",
         "tags": [
           "Communication::Website::Agenda::Event"
         ],
@@ -3885,12 +3887,12 @@
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z"
                           },
                           "blocks": [],
-                          "created_at": "2024-12-20T15:15:44.415+01:00",
-                          "updated_at": "2024-12-20T15:15:44.415+01:00"
+                          "created_at": "2024-12-20T18:10:28.168+01:00",
+                          "updated_at": "2024-12-20T18:10:28.168+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T15:15:44.426+01:00",
-                      "updated_at": "2024-12-20T15:15:44.426+01:00"
+                      "created_at": "2024-12-20T18:10:28.180+01:00",
+                      "updated_at": "2024-12-20T18:10:28.180+01:00"
                     }
                   }
                 }
@@ -3933,7 +3935,7 @@
         }
       },
       "patch": {
-        "summary": "Updates a event",
+        "summary": "Updates an event",
         "tags": [
           "Communication::Website::Agenda::Event"
         ],
@@ -4002,15 +4004,15 @@
                             "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Mon%20nouveau%20titre%20&ST=20240712T070000Z&DUR=3915",
                             "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
-                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T151545Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
+                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T181029Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
                           },
                           "blocks": [],
-                          "created_at": "2024-12-20T15:15:44.415+01:00",
-                          "updated_at": "2024-12-20T15:15:45.573+01:00"
+                          "created_at": "2024-12-20T18:10:28.168+01:00",
+                          "updated_at": "2024-12-20T18:10:29.248+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T15:15:44.426+01:00",
-                      "updated_at": "2024-12-20T15:15:45.573+01:00"
+                      "created_at": "2024-12-20T18:10:28.180+01:00",
+                      "updated_at": "2024-12-20T18:10:29.249+01:00"
                     }
                   }
                 }
@@ -4105,7 +4107,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes a event",
+        "summary": "Deletes an event",
         "tags": [
           "Communication::Website::Agenda::Event"
         ],
@@ -4228,12 +4230,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-20T15:15:44.471+01:00",
-                            "updated_at": "2024-12-20T15:15:44.471+01:00"
+                            "created_at": "2024-12-20T18:10:28.224+01:00",
+                            "updated_at": "2024-12-20T18:10:28.224+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T15:15:44.481+01:00",
-                        "updated_at": "2024-12-20T15:15:44.481+01:00"
+                        "created_at": "2024-12-20T18:10:28.235+01:00",
+                        "updated_at": "2024-12-20T18:10:28.235+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -4259,12 +4261,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-20T15:15:44.471+01:00",
-                            "updated_at": "2024-12-20T15:15:44.471+01:00"
+                            "created_at": "2024-12-20T18:10:28.224+01:00",
+                            "updated_at": "2024-12-20T18:10:28.224+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T15:15:44.481+01:00",
-                        "updated_at": "2024-12-20T15:15:44.481+01:00"
+                        "created_at": "2024-12-20T18:10:28.235+01:00",
+                        "updated_at": "2024-12-20T18:10:28.235+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -4290,12 +4292,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-20T15:15:44.471+01:00",
-                            "updated_at": "2024-12-20T15:15:44.471+01:00"
+                            "created_at": "2024-12-20T18:10:28.224+01:00",
+                            "updated_at": "2024-12-20T18:10:28.224+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T15:15:44.481+01:00",
-                        "updated_at": "2024-12-20T15:15:44.481+01:00"
+                        "created_at": "2024-12-20T18:10:28.235+01:00",
+                        "updated_at": "2024-12-20T18:10:28.235+01:00"
                       }
                     ]
                   }
@@ -4368,19 +4370,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "ca35df91-6b50-48c1-a839-34d1ddfeb025",
+                      "id": "b09aad11-bcc4-4ae7-a1e6-41c944a1dbe5",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "f10425fa-0282-490d-8f7b-f7d1c6353f74",
+                          "id": "e1d7edf7-3cfc-467e-8a6a-5ca9b98dbad2",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "654cae64-461e-463f-b42b-919d0efe818b",
+                            "blob_id": "1bf7b06f-971f-4a88-9862-a47bf04f82e6",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJxZHhnMHNrd3VjYmZqY2hnc3hhYmIxc2p0aGI4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTU6MTU6NDUuOTUxWiIsInB1ciI6ImJsb2Jfa2V5In19--4383b5545598b78e68ebd0ea66e6720d8f81bc74/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ0NndndGtrNXRuemNvOGF4Y2xzemI2NGg4Z2NvIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MjkuNjQxWiIsInB1ciI6ImJsb2Jfa2V5In19--2298b33d13904ea0cc6c6d545fb295b617c286eb/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -4392,7 +4394,7 @@
                           "text": null,
                           "blocks": [
                             {
-                              "id": "faf2583a-3b1c-4b45-98cc-6e9a3b386cc1",
+                              "id": "a1059327-1610-4042-bb65-ce116ef9a990",
                               "migration_identifier": "post-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -4409,16 +4411,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2024-12-20T15:15:45.884+01:00",
-                              "updated_at": "2024-12-20T15:15:45.884+01:00"
+                              "created_at": "2024-12-20T18:10:29.575+01:00",
+                              "updated_at": "2024-12-20T18:10:29.575+01:00"
                             }
                           ],
-                          "created_at": "2024-12-20T15:15:45.882+01:00",
-                          "updated_at": "2024-12-20T15:15:45.891+01:00"
+                          "created_at": "2024-12-20T18:10:29.573+01:00",
+                          "updated_at": "2024-12-20T18:10:29.583+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T15:15:45.881+01:00",
-                      "updated_at": "2024-12-20T15:15:45.948+01:00"
+                      "created_at": "2024-12-20T18:10:29.570+01:00",
+                      "updated_at": "2024-12-20T18:10:29.638+01:00"
                     }
                   }
                 }
@@ -4544,19 +4546,19 @@
                     "value": {
                       "created": [
                         {
-                          "id": "e50b9c44-41be-4e96-b193-5dfa44ced919",
+                          "id": "ab0ac7bc-23d9-4659-aee4-3b1549e19d27",
                           "migration_identifier": "post-from-api-1",
                           "full_width": false,
                           "localizations": {
                             "fr": {
-                              "id": "610458e3-37c5-4b5d-99b3-f18fdb1d9f3c",
+                              "id": "8b2249c1-ab1d-4f65-aad5-3b24ec2ca811",
                               "migration_identifier": "post-from-api-1-fr",
                               "title": "Ma nouvelle actualité",
                               "featured_image": {
-                                "blob_id": "c1ed74c7-2789-4df7-ad29-15680b24bb21",
+                                "blob_id": "79c9b466-6aa5-42b4-bf8f-dadac6fbf105",
                                 "alt": "La lumière brille sur les parois du canyon",
                                 "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3cWJkd2Zyd3VqbWh2YmxpOWhuNTl6ZWYxamJvIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTU6MTU6NDYuMDY5WiIsInB1ciI6ImJsb2Jfa2V5In19--9df99e0de3c39c1a69855968712ff66348f21024/photo-1703923633616-254e78f6e9df"
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ4aWVkdXB5dzV3YXltY2J3YnNiNDdvMmExMmk1IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MjkuNzYyWiIsInB1ciI6ImJsb2Jfa2V5In19--0198a8121f8288c200c4c2fc0a9b125bb6a2e004/photo-1703923633616-254e78f6e9df"
                               },
                               "meta_description": "Une nouvelle actualité depuis l'API",
                               "pinned": false,
@@ -4568,7 +4570,7 @@
                               "text": null,
                               "blocks": [
                                 {
-                                  "id": "cfa7e511-5cbe-4de3-8ab9-e88832deb8c3",
+                                  "id": "fe4981a5-b811-4c62-8a6d-93ec95f574c7",
                                   "migration_identifier": "post-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -4585,16 +4587,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2024-12-20T15:15:46.011+01:00",
-                                  "updated_at": "2024-12-20T15:15:46.011+01:00"
+                                  "created_at": "2024-12-20T18:10:29.704+01:00",
+                                  "updated_at": "2024-12-20T18:10:29.704+01:00"
                                 }
                               ],
-                              "created_at": "2024-12-20T15:15:46.010+01:00",
-                              "updated_at": "2024-12-20T15:15:46.014+01:00"
+                              "created_at": "2024-12-20T18:10:29.703+01:00",
+                              "updated_at": "2024-12-20T18:10:29.708+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T15:15:46.008+01:00",
-                          "updated_at": "2024-12-20T15:15:46.033+01:00"
+                          "created_at": "2024-12-20T18:10:29.701+01:00",
+                          "updated_at": "2024-12-20T18:10:29.729+01:00"
                         }
                       ],
                       "updated": [
@@ -4622,12 +4624,12 @@
                               "summary": null,
                               "text": null,
                               "blocks": [],
-                              "created_at": "2024-12-20T15:15:44.471+01:00",
-                              "updated_at": "2024-12-20T15:15:46.053+01:00"
+                              "created_at": "2024-12-20T18:10:28.224+01:00",
+                              "updated_at": "2024-12-20T18:10:29.748+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T15:15:44.481+01:00",
-                          "updated_at": "2024-12-20T15:15:46.053+01:00"
+                          "created_at": "2024-12-20T18:10:28.235+01:00",
+                          "updated_at": "2024-12-20T18:10:29.748+01:00"
                         }
                       ],
                       "errors": []
@@ -4807,12 +4809,12 @@
                           "summary": null,
                           "text": null,
                           "blocks": [],
-                          "created_at": "2024-12-20T15:15:44.471+01:00",
-                          "updated_at": "2024-12-20T15:15:44.471+01:00"
+                          "created_at": "2024-12-20T18:10:28.224+01:00",
+                          "updated_at": "2024-12-20T18:10:28.224+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T15:15:44.481+01:00",
-                      "updated_at": "2024-12-20T15:15:44.481+01:00"
+                      "created_at": "2024-12-20T18:10:28.235+01:00",
+                      "updated_at": "2024-12-20T18:10:28.235+01:00"
                     }
                   }
                 }
@@ -4915,12 +4917,12 @@
                           "summary": null,
                           "text": null,
                           "blocks": [],
-                          "created_at": "2024-12-20T15:15:44.471+01:00",
-                          "updated_at": "2024-12-20T15:15:46.170+01:00"
+                          "created_at": "2024-12-20T18:10:28.224+01:00",
+                          "updated_at": "2024-12-20T18:10:29.867+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T15:15:44.481+01:00",
-                      "updated_at": "2024-12-20T15:15:46.170+01:00"
+                      "created_at": "2024-12-20T18:10:28.235+01:00",
+                      "updated_at": "2024-12-20T18:10:29.868+01:00"
                     }
                   }
                 }
@@ -5143,12 +5145,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-20T15:15:44.438+01:00",
-                            "updated_at": "2024-12-20T15:15:44.438+01:00"
+                            "created_at": "2024-12-20T18:10:28.189+01:00",
+                            "updated_at": "2024-12-20T18:10:28.189+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T15:15:44.483+01:00",
-                        "updated_at": "2024-12-20T15:15:44.483+01:00"
+                        "created_at": "2024-12-20T18:10:28.237+01:00",
+                        "updated_at": "2024-12-20T18:10:28.237+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -5190,8 +5192,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-20T15:15:44.438+01:00",
-                            "updated_at": "2024-12-20T15:15:44.438+01:00"
+                            "created_at": "2024-12-20T18:10:28.189+01:00",
+                            "updated_at": "2024-12-20T18:10:28.189+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -5209,12 +5211,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-20T15:15:44.438+01:00",
-                            "updated_at": "2024-12-20T15:15:44.438+01:00"
+                            "created_at": "2024-12-20T18:10:28.189+01:00",
+                            "updated_at": "2024-12-20T18:10:28.189+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T15:15:44.483+01:00",
-                        "updated_at": "2024-12-20T15:15:44.483+01:00"
+                        "created_at": "2024-12-20T18:10:28.237+01:00",
+                        "updated_at": "2024-12-20T18:10:28.237+01:00"
                       }
                     ]
                   }
@@ -5314,12 +5316,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-20T15:15:44.438+01:00",
-                          "updated_at": "2024-12-20T15:15:44.438+01:00"
+                          "created_at": "2024-12-20T18:10:28.189+01:00",
+                          "updated_at": "2024-12-20T18:10:28.189+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T15:15:44.483+01:00",
-                      "updated_at": "2024-12-20T15:15:44.483+01:00"
+                      "created_at": "2024-12-20T18:10:28.237+01:00",
+                      "updated_at": "2024-12-20T18:10:28.237+01:00"
                     }
                   }
                 },
@@ -5349,6 +5351,976 @@
               "application/json": {
                 "examples": {
                   "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/university/organizations": {
+      "get": {
+        "summary": "Lists organizations",
+        "tags": [
+          "University::Organization"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": [
+                      {
+                        "id": "a992e14d-7d45-5e66-b33b-a1e98721df80",
+                        "migration_identifier": null,
+                        "kind": "company",
+                        "active": true,
+                        "email": null,
+                        "phone": null,
+                        "address": null,
+                        "zipcode": null,
+                        "city": null,
+                        "country": null,
+                        "latitude": null,
+                        "longitude": null,
+                        "nic": null,
+                        "siren": null,
+                        "localizations": {
+                          "fr": {
+                            "id": "2ebc2ecd-4043-5784-b71e-2b6391d021f2",
+                            "migration_identifier": null,
+                            "name": "Organisation de test",
+                            "long_name": null,
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "address_name": null,
+                            "address_additional": null,
+                            "linkedin": null,
+                            "mastodon": null,
+                            "twitter": null,
+                            "url": null,
+                            "slug": null,
+                            "summary": null,
+                            "text": null,
+                            "blocks": [],
+                            "created_at": "2024-12-20T18:10:28.301+01:00",
+                            "updated_at": "2024-12-20T18:10:28.301+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-20T18:10:28.314+01:00",
+                        "updated_at": "2024-12-20T18:10:28.314+01:00"
+                      },
+                      {
+                        "id": "c71c1e3d-24c7-55a8-bf15-11296170b436",
+                        "migration_identifier": "test-noesya",
+                        "kind": "company",
+                        "active": true,
+                        "email": "contact@noesya.coop",
+                        "phone": null,
+                        "address": "15 Rue des Bouviers",
+                        "zipcode": "33800",
+                        "city": "Bordeaux",
+                        "country": null,
+                        "latitude": 44.832899,
+                        "longitude": -0.565434,
+                        "nic": "00031",
+                        "siren": "902773050",
+                        "localizations": {
+                          "fr": {
+                            "id": "9f5b2e6a-c4bc-5ae2-b584-58de31945f54",
+                            "migration_identifier": "test-noesya-fr",
+                            "name": "noesya",
+                            "long_name": "coopérative noesya",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": "La coopérative noesya s’engage pour un numérique de grande qualité, éco-conçu, esthétique, éthique et durable.",
+                            "address_name": "Siège social",
+                            "address_additional": null,
+                            "linkedin": "https://www.linkedin.com/company/noesyacoop",
+                            "mastodon": null,
+                            "twitter": null,
+                            "url": "https://www.noesya.coop",
+                            "slug": "noesya",
+                            "summary": null,
+                            "text": null,
+                            "blocks": [
+                              {
+                                "id": "53cbac40-e430-585a-965c-a7412a92f35a",
+                                "migration_identifier": null,
+                                "template_kind": "persons",
+                                "title": null,
+                                "position": 1,
+                                "published": true,
+                                "html_class": null,
+                                "data": {
+                                  "elements": [
+                                    {
+                                      "id": "53cbac40-e430-585a-965c-a7412a92f35a",
+                                      "role": ""
+                                    }
+                                  ],
+                                  "mode": "selection",
+                                  "category_id": "",
+                                  "description": "",
+                                  "alphabetical": false,
+                                  "option_image": true,
+                                  "option_summary": true,
+                                  "option_link": true
+                                },
+                                "created_at": "2024-12-20T18:10:28.133+01:00",
+                                "updated_at": "2024-12-20T18:10:28.133+01:00"
+                              }
+                            ],
+                            "created_at": "2024-12-20T18:10:28.301+01:00",
+                            "updated_at": "2024-12-20T18:10:28.301+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-20T18:10:28.314+01:00",
+                        "updated_at": "2024-12-20T18:10:28.314+01:00"
+                      }
+                    ]
+                  }
+                },
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/university_organization"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a organization",
+        "tags": [
+          "University::Organization"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Successful creation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful creation": {
+                    "value": {
+                      "id": "e8aff297-9aae-47de-9686-7f30a2c94ddb",
+                      "migration_identifier": "organization-from-api-1",
+                      "kind": "company",
+                      "active": true,
+                      "email": "contact@example.org",
+                      "phone": "+33123456789",
+                      "address": "1 rue de l'organisation",
+                      "zipcode": "75000",
+                      "city": "Paris",
+                      "country": "FR",
+                      "latitude": null,
+                      "longitude": null,
+                      "nic": "00001",
+                      "siren": "123456789",
+                      "localizations": {
+                        "fr": {
+                          "id": "d04e6652-3572-44b5-851a-82e7c28a4ee0",
+                          "migration_identifier": "organization-from-api-1-fr",
+                          "name": "Mon organisation",
+                          "long_name": "Mon organisation ESS",
+                          "featured_image": {
+                            "blob_id": "388bac80-effa-4177-82bd-254c2ebdcaed",
+                            "alt": "La lumière brille sur les parois du canyon",
+                            "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiI5bmR0MmpmdHl6N2s0Ynd0enIxeXJ5bGtiYXlsIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MzAuMTIzWiIsInB1ciI6ImJsb2Jfa2V5In19--dcab61c32dd21cfa761bcbef65d2c0f402b34c06/photo-1703923633616-254e78f6e9df"
+                          },
+                          "meta_description": "Une organisation de l'ESS",
+                          "address_name": "Siège",
+                          "address_additional": null,
+                          "linkedin": null,
+                          "mastodon": null,
+                          "twitter": null,
+                          "url": "https://example.org",
+                          "slug": "mon-organisation",
+                          "summary": null,
+                          "text": null,
+                          "blocks": [
+                            {
+                              "id": "32bae2d1-cff1-4e3e-8336-d6f5bcbeb78f",
+                              "migration_identifier": "organization-from-api-1-fr-block-1",
+                              "template_kind": "chapter",
+                              "title": "Mon premier chapitre",
+                              "position": 1,
+                              "published": true,
+                              "html_class": null,
+                              "data": {
+                                "layout": "no_background",
+                                "text": "<p>Ceci est mon premier chapitre</p>",
+                                "notes": "",
+                                "image": {
+                                  "id": ""
+                                },
+                                "alt": "",
+                                "credit": ""
+                              },
+                              "created_at": "2024-12-20T18:10:30.106+01:00",
+                              "updated_at": "2024-12-20T18:10:30.106+01:00"
+                            }
+                          ],
+                          "created_at": "2024-12-20T18:10:30.104+01:00",
+                          "updated_at": "2024-12-20T18:10:30.111+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-20T18:10:30.101+01:00",
+                      "updated_at": "2024-12-20T18:10:30.119+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.slug": [
+                          "can't be blank",
+                          "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                        ],
+                        "localizations.name": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "organization": {
+                    "$ref": "#/components/schemas/university_organization"
+                  }
+                },
+                "required": [
+                  "organization"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/university/organizations/upsert": {
+      "post": {
+        "summary": "Upsert organizations",
+        "tags": [
+          "University::Organization"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful upsertion",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful upsertion": {
+                    "value": {
+                      "created": [
+                        {
+                          "id": "d73fb5e0-22ab-41a4-8ad6-af00748e0ef7",
+                          "migration_identifier": "organization-from-api-1",
+                          "kind": "company",
+                          "active": true,
+                          "email": "contact@example.org",
+                          "phone": "+33123456789",
+                          "address": "1 rue de l'organisation",
+                          "zipcode": "75000",
+                          "city": "Paris",
+                          "country": "FR",
+                          "latitude": null,
+                          "longitude": null,
+                          "nic": "00001",
+                          "siren": "123456789",
+                          "localizations": {
+                            "fr": {
+                              "id": "1d067b06-1d12-4e0e-bae6-8c8a2df8cafe",
+                              "migration_identifier": "organization-from-api-1-fr",
+                              "name": "Mon organisation",
+                              "long_name": "Mon organisation ESS",
+                              "featured_image": {
+                                "blob_id": "0632fbd8-aced-456a-8f42-2cb49ec7e591",
+                                "alt": "La lumière brille sur les parois du canyon",
+                                "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3MzdxMzBuNzFiYWZ2ZGs5b3FmcHNnYXR2YnNlIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MzAuMjAzWiIsInB1ciI6ImJsb2Jfa2V5In19--89a4163af085ee393c1d32856f45caba45dd7424/photo-1703923633616-254e78f6e9df"
+                              },
+                              "meta_description": "Une organisation de l'ESS",
+                              "address_name": "Siège",
+                              "address_additional": null,
+                              "linkedin": null,
+                              "mastodon": null,
+                              "twitter": null,
+                              "url": "https://example.org",
+                              "slug": "mon-organisation",
+                              "summary": null,
+                              "text": null,
+                              "blocks": [
+                                {
+                                  "id": "6f216ec6-34e3-4355-9827-5783b355a4cb",
+                                  "migration_identifier": "organization-from-api-1-fr-block-1",
+                                  "template_kind": "chapter",
+                                  "title": "Mon premier chapitre",
+                                  "position": 1,
+                                  "published": true,
+                                  "html_class": null,
+                                  "data": {
+                                    "layout": "no_background",
+                                    "text": "<p>Ceci est mon premier chapitre</p>",
+                                    "notes": "",
+                                    "image": {
+                                      "id": ""
+                                    },
+                                    "alt": "",
+                                    "credit": ""
+                                  },
+                                  "created_at": "2024-12-20T18:10:30.172+01:00",
+                                  "updated_at": "2024-12-20T18:10:30.172+01:00"
+                                }
+                              ],
+                              "created_at": "2024-12-20T18:10:30.170+01:00",
+                              "updated_at": "2024-12-20T18:10:30.177+01:00"
+                            }
+                          },
+                          "created_at": "2024-12-20T18:10:30.169+01:00",
+                          "updated_at": "2024-12-20T18:10:30.180+01:00"
+                        }
+                      ],
+                      "updated": [
+                        {
+                          "id": "c71c1e3d-24c7-55a8-bf15-11296170b436",
+                          "migration_identifier": "test-noesya",
+                          "kind": "company",
+                          "active": true,
+                          "email": "contact@noesya.coop",
+                          "phone": null,
+                          "address": "15 Rue des Bouviers",
+                          "zipcode": "33800",
+                          "city": "Bordeaux",
+                          "country": null,
+                          "latitude": 44.832899,
+                          "longitude": -0.565434,
+                          "nic": "00031",
+                          "siren": "902773050",
+                          "localizations": {
+                            "fr": {
+                              "id": "9f5b2e6a-c4bc-5ae2-b584-58de31945f54",
+                              "migration_identifier": "test-noesya-fr",
+                              "name": "noesya (new)",
+                              "long_name": "coopérative noesya",
+                              "featured_image": {
+                                "blob_id": null,
+                                "alt": null,
+                                "credit": null,
+                                "url": null
+                              },
+                              "meta_description": "La coopérative noesya s’engage pour un numérique de grande qualité, éco-conçu, esthétique, éthique et durable.",
+                              "address_name": "Siège social",
+                              "address_additional": null,
+                              "linkedin": "https://www.linkedin.com/company/noesyacoop",
+                              "mastodon": null,
+                              "twitter": null,
+                              "url": "https://www.noesya.coop",
+                              "slug": "noesya",
+                              "summary": null,
+                              "text": null,
+                              "blocks": [
+                                {
+                                  "id": "53cbac40-e430-585a-965c-a7412a92f35a",
+                                  "migration_identifier": null,
+                                  "template_kind": "persons",
+                                  "title": null,
+                                  "position": 1,
+                                  "published": true,
+                                  "html_class": null,
+                                  "data": {
+                                    "elements": [
+                                      {
+                                        "id": "53cbac40-e430-585a-965c-a7412a92f35a",
+                                        "role": ""
+                                      }
+                                    ],
+                                    "mode": "selection",
+                                    "category_id": "",
+                                    "description": "",
+                                    "alphabetical": false,
+                                    "option_image": true,
+                                    "option_summary": true,
+                                    "option_link": true
+                                  },
+                                  "created_at": "2024-12-20T18:10:28.133+01:00",
+                                  "updated_at": "2024-12-20T18:10:28.133+01:00"
+                                }
+                              ],
+                              "created_at": "2024-12-20T18:10:28.301+01:00",
+                              "updated_at": "2024-12-20T18:10:30.200+01:00"
+                            }
+                          },
+                          "created_at": "2024-12-20T18:10:28.314+01:00",
+                          "updated_at": "2024-12-20T18:10:30.200+01:00"
+                        }
+                      ],
+                      "errors": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "created": [],
+                      "updated": [],
+                      "errors": [
+                        {
+                          "index": 0,
+                          "errors": {
+                            "localizations.slug": [
+                              "can't be blank",
+                              "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                            ],
+                            "localizations.name": [
+                              "can't be blank"
+                            ],
+                            "localizations": [
+                              "is invalid"
+                            ]
+                          }
+                        },
+                        {
+                          "index": 1,
+                          "errors": {
+                            "localizations.name": [
+                              "can't be blank"
+                            ],
+                            "localizations": [
+                              "is invalid"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "organizations": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/university_organization"
+                    }
+                  }
+                },
+                "required": [
+                  "organizations"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/university/organizations/{id}": {
+      "get": {
+        "summary": "Shows an organization",
+        "tags": [
+          "University::Organization"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Organization identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": {
+                      "id": "c71c1e3d-24c7-55a8-bf15-11296170b436",
+                      "migration_identifier": "test-noesya",
+                      "kind": "company",
+                      "active": true,
+                      "email": "contact@noesya.coop",
+                      "phone": null,
+                      "address": "15 Rue des Bouviers",
+                      "zipcode": "33800",
+                      "city": "Bordeaux",
+                      "country": null,
+                      "latitude": 44.832899,
+                      "longitude": -0.565434,
+                      "nic": "00031",
+                      "siren": "902773050",
+                      "localizations": {
+                        "fr": {
+                          "id": "9f5b2e6a-c4bc-5ae2-b584-58de31945f54",
+                          "migration_identifier": "test-noesya-fr",
+                          "name": "noesya",
+                          "long_name": "coopérative noesya",
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
+                          "meta_description": "La coopérative noesya s’engage pour un numérique de grande qualité, éco-conçu, esthétique, éthique et durable.",
+                          "address_name": "Siège social",
+                          "address_additional": null,
+                          "linkedin": "https://www.linkedin.com/company/noesyacoop",
+                          "mastodon": null,
+                          "twitter": null,
+                          "url": "https://www.noesya.coop",
+                          "slug": "noesya",
+                          "summary": null,
+                          "text": null,
+                          "blocks": [
+                            {
+                              "id": "53cbac40-e430-585a-965c-a7412a92f35a",
+                              "migration_identifier": null,
+                              "template_kind": "persons",
+                              "title": null,
+                              "position": 1,
+                              "published": true,
+                              "html_class": null,
+                              "data": {
+                                "elements": [
+                                  {
+                                    "id": "53cbac40-e430-585a-965c-a7412a92f35a",
+                                    "role": ""
+                                  }
+                                ],
+                                "mode": "selection",
+                                "category_id": "",
+                                "description": "",
+                                "alphabetical": false,
+                                "option_image": true,
+                                "option_summary": true,
+                                "option_link": true
+                              },
+                              "created_at": "2024-12-20T18:10:28.133+01:00",
+                              "updated_at": "2024-12-20T18:10:28.133+01:00"
+                            }
+                          ],
+                          "created_at": "2024-12-20T18:10:28.301+01:00",
+                          "updated_at": "2024-12-20T18:10:28.301+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-20T18:10:28.314+01:00",
+                      "updated_at": "2024-12-20T18:10:28.314+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Organization not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Organization not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates an organization",
+        "tags": [
+          "University::Organization"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Organization identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful update": {
+                    "value": {
+                      "id": "c71c1e3d-24c7-55a8-bf15-11296170b436",
+                      "migration_identifier": "test-noesya",
+                      "kind": "company",
+                      "active": true,
+                      "email": "contact@noesya.coop",
+                      "phone": null,
+                      "address": "15 Rue des Bouviers",
+                      "zipcode": "33800",
+                      "city": "Bordeaux",
+                      "country": null,
+                      "latitude": 44.832899,
+                      "longitude": -0.565434,
+                      "nic": "00031",
+                      "siren": "902773050",
+                      "localizations": {
+                        "fr": {
+                          "id": "9f5b2e6a-c4bc-5ae2-b584-58de31945f54",
+                          "migration_identifier": "test-noesya-fr",
+                          "name": "noesya (new)",
+                          "long_name": "coopérative noesya",
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
+                          "meta_description": "La coopérative noesya s’engage pour un numérique de grande qualité, éco-conçu, esthétique, éthique et durable.",
+                          "address_name": "Siège social",
+                          "address_additional": null,
+                          "linkedin": "https://www.linkedin.com/company/noesyacoop",
+                          "mastodon": null,
+                          "twitter": null,
+                          "url": "https://www.noesya.coop",
+                          "slug": "noesya",
+                          "summary": null,
+                          "text": null,
+                          "blocks": [
+                            {
+                              "id": "53cbac40-e430-585a-965c-a7412a92f35a",
+                              "migration_identifier": null,
+                              "template_kind": "persons",
+                              "title": null,
+                              "position": 1,
+                              "published": true,
+                              "html_class": null,
+                              "data": {
+                                "elements": [
+                                  {
+                                    "id": "53cbac40-e430-585a-965c-a7412a92f35a",
+                                    "role": ""
+                                  }
+                                ],
+                                "mode": "selection",
+                                "category_id": "",
+                                "description": "",
+                                "alphabetical": false,
+                                "option_image": true,
+                                "option_summary": true,
+                                "option_link": true
+                              },
+                              "created_at": "2024-12-20T18:10:28.133+01:00",
+                              "updated_at": "2024-12-20T18:10:28.133+01:00"
+                            }
+                          ],
+                          "created_at": "2024-12-20T18:10:28.301+01:00",
+                          "updated_at": "2024-12-20T18:10:30.278+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-20T18:10:28.314+01:00",
+                      "updated_at": "2024-12-20T18:10:30.278+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.name": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "organization": {
+                    "$ref": "#/components/schemas/university_organization"
+                  }
+                },
+                "required": [
+                  "organization"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes an organization",
+        "tags": [
+          "University::Organization"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Organization identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful deletion"
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Organization not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Organization not found": {
                     "value": {
                       "message": "The resource you were looking for doesn't exist."
                     }

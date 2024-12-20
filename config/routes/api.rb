@@ -18,7 +18,12 @@ namespace :api do
         end
         resources :projects, controller: '/api/osuny/communication/websites/projects', only: [:index, :show, :create, :update]
       end
-      root to: '/api/osuny/communication#index'#, controller: '/api/osuny/communication'
+      root to: '/api/osuny/communication#index'
+    end
+    namespace :university do
+      resources :organizations, controller: '/api/osuny/university/organizations', only: [:index, :show, :create, :update, :destroy] do
+        post :upsert, on: :collection
+      end
     end
     root to: '/api/osuny#index'
   end
