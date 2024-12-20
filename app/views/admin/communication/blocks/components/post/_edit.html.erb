@@ -2,7 +2,8 @@
 <%
 posts = osuny_collection(
   block.about.website.posts,
-  localized: true
+  localized: true,
+  label_method: :to_detailed_s
 ) 
 %>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"

@@ -2,9 +2,6 @@
 layouts = template.class.layouts
 %>
 <p>
-  <span class="form-label pe-2">
-    <%= t('admin.communication.blocks.components.layouts.label') %>
-  </span>
   <% layouts.each do |layout| %>
     <strong v-show="data.layout == '<%= layout %>'">
       <%= t "admin.communication.blocks.templates.#{template.kind}.layouts.#{layout}.label" %>
@@ -27,13 +24,13 @@ layouts = template.class.layouts
     <div class="mb-4 layout" v-bind:class="{ 'layout--selected': data.layout == '<%= layout %>' }">
       <label for="layout-<%= layout %>">
         <div class="row pure__row--small">
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <%= image_tag "communication/blocks/templates/#{template.kind}/#{layout}.png",
                           alt: name,
                           class: 'layout__image img-fluid border',
                           loading: 'lazy' %>
           </div>
-          <div class="col-md-8 d-md-flex flex-column justify-content-center">
+          <div class="col-sm-8 d-md-flex flex-column justify-content-center">
             <div class="p-3 pe-5">
               <p class="mb-0">
                 <b><%= name %></b>

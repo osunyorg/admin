@@ -1,4 +1,3 @@
-<%= block_component_edit block, :layout %>
 <%= block_component_edit block, :text %>
 <%= block_component_edit block, :notes %>
 <h2 class="h4 mt-5"><%= t("admin.communication.blocks.templates.chapter.edit.image.label") %></h2>
@@ -17,3 +16,8 @@
           summernote_config: 'link' %>
   </div>
 </div>
+
+<%= osuny_separator %>
+<%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+  <%= block_component_edit block, :layout %>
+<% end %>
