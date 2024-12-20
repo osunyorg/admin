@@ -26,6 +26,7 @@ class Education::School < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include Sanitizable
+  include Searchable
   include Localizable
   include LocalizableOrderByNameScope
   include WebsitesLinkable
