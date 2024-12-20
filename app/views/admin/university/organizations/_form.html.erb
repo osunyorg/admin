@@ -33,7 +33,9 @@
                       data: { 'summernote-config' => 'mini-list' }
                     } %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
+        <%= osuny_separator %>
         <%= render 'admin/application/contact_details/edit', f: f, lf: lf, about: organization, l10n: l10n %>
+        <%= osuny_separator %>
         <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
           <div class="row pure__row--small">
             <div class="col-xl-6">
