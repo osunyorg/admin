@@ -31,7 +31,9 @@ module Communication::Website::Post::Localization::WithOpenApi
           items: {
             oneOf: Communication::Block.templates_openapi_schema_references
           }
-        }
+        },
+        created_at: { type: :string, format: "date-time" },
+        updated_at: { type: :string, format: "date-time" }
       }
     }
   end

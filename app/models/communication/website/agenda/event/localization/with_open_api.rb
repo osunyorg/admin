@@ -28,19 +28,22 @@ module Communication::Website::Agenda::Event::Localization::WithOpenApi
         add_to_calendar_urls: {
           type: :object,
           properties: {
-            google: { type: :string, nullable: true },
-            yahoo: { type: :string, nullable: true },
-            office: { type: :string, nullable: true },
-            outlook: { type: :string, nullable: true },
-            ical: { type: :string, nullable: true }
-          }
+            google: { type: :string },
+            yahoo: { type: :string },
+            office: { type: :string },
+            outlook: { type: :string },
+            ical: { type: :string }
+          },
+          nullable: true
         },
         blocks: {
           type: :array,
           items: {
             oneOf: Communication::Block.templates_openapi_schema_references
           }
-        }
+        },
+        created_at: { type: :string, format: "date-time" },
+        updated_at: { type: :string, format: "date-time" }
       }
     }
   end

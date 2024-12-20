@@ -13,7 +13,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
       let(:website_id) { communication_websites(:website_with_github).id }
 
       response '200', 'Successful operation' do
-        schema type: :array, items: { '$ref' => '#/components/schemas/communication_website_event' }
+        schema type: :array, items: { '$ref' => '#/components/schemas/communication_website_agenda_event' }
         run_test!
       end
 
@@ -28,124 +28,134 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
       end
     end
 
-    # post 'Creates a post' do
-    #   tags 'Communication::Website::Post'
-    #   security [{ api_key: [] }]
-    #   let("X-Osuny-Token") { university_apps(:default_app).token }
+    post 'Creates a post' do
+      tags 'Communication::Website::Agenda::Event'
+      security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
 
-    #   parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
-    #   let(:website_id) { communication_websites(:website_with_github).id }
+      parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
+      let(:website_id) { communication_websites(:website_with_github).id }
 
-    #   parameter name: :communication_website_post, in: :body, type: :object, schema: {
-    #     type: :object,
-    #     properties: {
-    #       post: {
-    #         '$ref': '#/components/schemas/communication_website_post'
-    #       }
-    #     },
-    #     required: [:post]
-    #   }
-    #   let(:communication_website_post) {
-    #     {
-    #       post: {
-    #         migration_identifier: 'post-from-api-1',
-    #         full_width: false,
-    #         localizations: {
-    #           fr: {
-    #             migration_identifier: 'post-from-api-1-fr',
-    #             title: 'Ma nouvelle actualité',
-    #             meta_description: 'Une nouvelle actualité depuis l\'API',
-    #             featured_image: {
-    #               url: 'https://images.unsplash.com/photo-1703923633616-254e78f6e9df?q=80&w=2070&auto=format&fit=crop',
-    #               alt: 'La lumière brille sur les parois du canyon',
-    #               credit: 'Photo de <a href="https://unsplash.com/fr/@johnnzhou">John Zhou</a> sur <a href="https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk">Unsplash</a>'
-    #             },
-    #             pinned: false,
-    #             published: true,
-    #             published_at: '2024-11-29T16:49:00Z',
-    #             slug: 'ma-nouvelle-actualite',
-    #             subtitle: 'Une nouvelle actualité',
-    #             summary: 'Ceci est une nouvelle actualité créée depuis l\'API.',
-    #             blocks: [
-    #               {
-    #                 migration_identifier: 'post-from-api-1-fr-block-1',
-    #                 template_kind: 'chapter',
-    #                 title: 'Mon premier chapitre',
-    #                 position: 1,
-    #                 published: true,
-    #                 data: {
-    #                   layout: "no_background",
-    #                   text: "<p>Ceci est mon premier chapitre</p>"
-    #                 }
-    #               }
-    #             ]
-    #           }
-    #         }
-    #       }
-    #     }
-    #   }
+      parameter name: :communication_website_agenda_event, in: :body, type: :object, schema: {
+        type: :object,
+        properties: {
+          event: {
+            '$ref': '#/components/schemas/communication_website_agenda_event'
+          }
+        },
+        required: [:event]
+      }
+      let(:communication_website_agenda_event) {
+        {
+          event: {
+            migration_identifier: 'event-from-api-1',
+            from_day: '2024-12-24',
+            from_hour: '19:00:00',
+            to_day: '2024-12-25',
+            to_hour: '14:00:00',
+            time_zone: 'Europe/Paris',
+            localizations: {
+              fr: {
+                migration_identifier: 'event-from-api-1-fr',
+                title: 'Noël',
+                meta_description: 'Les repas de Noël',
+                featured_image: {
+                  url: 'https://images.unsplash.com/photo-1703923633616-254e78f6e9df?q=80&w=2070&auto=format&fit=crop',
+                  alt: 'La lumière brille sur les parois du canyon',
+                  credit: 'Photo de <a href="https://unsplash.com/fr/@johnnzhou">John Zhou</a> sur <a href="https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk">Unsplash</a>'
+                },
+                published: true,
+                published_at: '2024-12-20T06:47:00Z',
+                slug: 'noel',
+                subtitle: 'Les repas de Noël',
+                summary: 'Les repas de Noël en famille.',
+                blocks: [
+                  {
+                    migration_identifier: 'event-from-api-1-fr-block-1',
+                    template_kind: 'chapter',
+                    title: 'Mon premier chapitre',
+                    position: 1,
+                    published: true,
+                    data: {
+                      layout: "no_background",
+                      text: "<p>Ceci est mon premier chapitre</p>"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
 
-    #   response '201', 'Successful creation' do
-    #     it 'creates a post and its localization', rswag: true, vcr: true do |example|
-    #       assert_difference ->{ Communication::Website::Post.count } => 1, ->{ Communication::Website::Post::Localization.count } => 1 do
-    #         submit_request(example.metadata)
-    #         assert_response_matches_metadata(example.metadata)
-    #       end
-    #     end
-    #   end
+      response '201', 'Successful creation' do
+        it 'creates an event and its localization', rswag: true, vcr: true do |example|
+          assert_difference ->{ Communication::Website::Agenda::Event.count } => 1, ->{ Communication::Website::Agenda::Event::Localization.count } => 1 do
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+          end
+        end
+      end
 
-    #   response '400', 'Missing migration identifier.' do
-    #     let(:communication_website_post) {
-    #       {
-    #         post: {
-    #           full_width: false,
-    #           localizations: {
-    #             fr: {
-    #               migration_identifier: 'post-from-api-1-fr',
-    #               title: 'Ma nouvelle actualité',
-    #               meta_description: 'Une nouvelle actualité depuis l\'API',
-    #               pinned: false,
-    #               published: true,
-    #               published_at: '2024-11-29T16:49:00Z',
-    #               slug: 'ma-nouvelle-actualite',
-    #               subtitle: 'Une nouvelle actualité',
-    #               summary: 'Ceci est une nouvelle actualité créée depuis l\'API.'
-    #             }
-    #           }
-    #         }
-    #       }
-    #     }
-    #     run_test!
-    #   end
+      response '400', 'Missing migration identifier.' do
+        let(:communication_website_agenda_event) {
+          {
+            event: {
+              from_day: '2024-12-24',
+              from_hour: '19:00:00',
+              to_day: '2024-12-25',
+              to_hour: '14:00:00',
+              time_zone: 'Europe/Paris',
+              localizations: {
+                fr: {
+                  migration_identifier: 'event-from-api-1-fr',
+                  title: 'Noël',
+                  meta_description: 'Les repas de Noël',
+                  published: true,
+                  published_at: '2024-12-20T06:47:00Z',
+                  slug: 'noel',
+                  subtitle: 'Les repas de Noël',
+                  summary: 'Les repas de Noël en famille.'
+                }
+              }
+            }
+          }
+        }
+        run_test!
+      end
 
-    #   response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
-    #     let("X-Osuny-Token") { 'fake-token' }
-    #     run_test!
-    #   end
+      response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
+        let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
 
-    #   response '404', 'Website not found' do
-    #     let(:website_id) { 'fake-id' }
-    #     run_test!
-    #   end
+      response '404', 'Website not found' do
+        let(:website_id) { 'fake-id' }
+        run_test!
+      end
 
-    #   response '422', 'Invalid parameters' do
-    #     let(:communication_website_post) {
-    #       {
-    #         post: {
-    #           migration_identifier: 'post-from-api-1',
-    #           full_width: false,
-    #           localizations: {
-    #             fr: {
-    #               migration_identifier: 'post-from-api-1-fr',
-    #               title: nil
-    #             }
-    #           }
-    #         }
-    #       }
-    #     }
-    #     run_test!
-    #   end
-    # end
+      response '422', 'Invalid parameters' do
+        let(:communication_website_agenda_event) {
+          {
+            event: {
+              migration_identifier: 'event-from-api-1',
+              from_day: '2024-12-24',
+              from_hour: '19:00:00',
+              to_day: '2024-12-25',
+              to_hour: '14:00:00',
+              time_zone: 'Europe/Paris',
+              localizations: {
+                fr: {
+                  migration_identifier: 'event-from-api-1-fr',
+                  title: nil
+                }
+              }
+            }
+          }
+        }
+        run_test!
+      end
+    end
   end
 
   # path '/communication/websites/{website_id}/agenda/events/upsert' do
@@ -345,36 +355,36 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
   #   end
   # end
 
-  # path '/communication/websites/{website_id}/agenda/events/{id}' do
-  #   get 'Shows a post' do
-  #     tags 'Communication::Website::Post'
-  #     security [{ api_key: [] }]
-  #     let("X-Osuny-Token") { university_apps(:default_app).token }
+  path '/communication/websites/{website_id}/agenda/events/{id}' do
+    get 'Shows a event' do
+      tags 'Communication::Website::Agenda::Event'
+      security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
 
-  #     parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
-  #     let(:website_id) { communication_websites(:website_with_github).id }
-  #     parameter name: :id, in: :path, type: :string, description: 'Post identifier'
-  #     let(:id) { communication_website_posts(:test_post).id }
+      parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
+      let(:website_id) { communication_websites(:website_with_github).id }
+      parameter name: :id, in: :path, type: :string, description: 'Event identifier'
+      let(:id) { communication_website_agenda_events(:test_event).id }
 
-  #     response '200', 'Successful operation' do
-  #       run_test!
-  #     end
+      response '200', 'Successful operation' do
+        run_test!
+      end
 
-  #     response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
-  #       let("X-Osuny-Token") { 'fake-token' }
-  #       run_test!
-  #     end
+      response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
+        let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
 
-  #     response '404', 'Website not found' do
-  #       let(:website_id) { 'fake-id' }
-  #       run_test!
-  #     end
+      response '404', 'Website not found' do
+        let(:website_id) { 'fake-id' }
+        run_test!
+      end
 
-  #     response '404', 'Post not found' do
-  #       let(:id) { 'fake-id' }
-  #       run_test!
-  #     end
-  #   end
+      response '404', 'Post not found' do
+        let(:id) { 'fake-id' }
+        run_test!
+      end
+    end
 
   #   patch 'Updates a post' do
   #     tags 'Communication::Website::Post'
@@ -525,5 +535,5 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
   #       run_test!
   #     end
   #   end
-  # end
+  end
 end

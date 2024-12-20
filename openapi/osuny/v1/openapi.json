@@ -398,6 +398,258 @@
                 }
               ]
             }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "communication_website_agenda_event": {
+        "type": "object",
+        "title": "Communication::Website::Agenda::Event",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "from_day": {
+            "type": "string",
+            "format": "date"
+          },
+          "from_hour": {
+            "type": "string",
+            "format": "time"
+          },
+          "to_day": {
+            "type": "string",
+            "format": "date"
+          },
+          "to_hour": {
+            "type": "string",
+            "format": "time"
+          },
+          "time_zone": {
+            "type": "string"
+          },
+          "created_by_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "parent_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "localizations": {
+            "type": "object",
+            "description": "Localizations of the event. The key is the language's ISO 639-1 code.",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/communication_website_agenda_event_localization"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "communication_website_agenda_event_localization": {
+        "type": "object",
+        "title": "Communication::Website::Agenda::Event::Localization",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "featured_image": {
+            "type": "object",
+            "properties": {
+              "blob_id": {
+                "type": "string",
+                "format": "uuid",
+                "nullable": true
+              },
+              "alt": {
+                "type": "string",
+                "nullable": true
+              },
+              "credit": {
+                "type": "string",
+                "nullable": true
+              },
+              "url": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "meta_description": {
+            "type": "string",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "slug": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string",
+            "nullable": true
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "add_to_calendar_urls": {
+            "type": "object",
+            "properties": {
+              "google": {
+                "type": "string"
+              },
+              "yahoo": {
+                "type": "string"
+              },
+              "office": {
+                "type": "string"
+              },
+              "outlook": {
+                "type": "string"
+              },
+              "ical": {
+                "type": "string"
+              }
+            },
+            "nullable": true
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/communication_block_agenda"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_call_to_action"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_chapter"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_contact"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_datatable"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_definitions"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_embed"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_features"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_files"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_gallery"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_image"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_key_figures"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_license"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_links"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_locations"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_organizations"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_pages"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_papers"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_persons"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_posts"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_projects"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_programs"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_sound"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_testimonials"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_timeline"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_title"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_video"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_volumes"
+                }
+              ]
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
           }
         }
       },
@@ -2760,20 +3012,397 @@
             "description": "Successful operation",
             "content": {
               "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": [
+                      {
+                        "id": "f1140bb9-e443-59fc-a8ac-116097f726d1",
+                        "migration_identifier": "test-event-fixture-1",
+                        "from_day": "2024-07-12",
+                        "from_hour": "2000-01-01T09:00:00.000+01:00",
+                        "to_day": "2024-07-14",
+                        "to_hour": "2000-01-02T00:15:00.000+01:00",
+                        "time_zone": "Europe/Paris",
+                        "created_by_id": null,
+                        "parent_id": null,
+                        "localizations": {
+                          "fr": {
+                            "id": "6667d415-895d-53b4-b3ae-f287ae761945",
+                            "migration_identifier": "test-event-fixture-1-fr",
+                            "title": "Coupe du Monde d'Escalade 2024 - Chamonix",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "published": true,
+                            "published_at": "2024-07-01T02:00:00.000+02:00",
+                            "slug": "coupe-du-monde-d-escalade-2024-chamonix",
+                            "subtitle": null,
+                            "summary": null,
+                            "text": null,
+                            "add_to_calendar_urls": {
+                              "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T073004Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20%0AUID:-20240712T070000Z-Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20%0AEND:VEVENT%0AEND:VCALENDAR",
+                              "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&ST=20240712T070000Z&DUR=3915",
+                              "google": "https://www.google.com/calendar/render?action=TEMPLATE&text=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&dates=20240712T090000/20240714T001500&ctz=Europe/Paris",
+                              "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
+                              "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z"
+                            },
+                            "blocks": [],
+                            "created_at": "2024-12-20T07:49:59.453+01:00",
+                            "updated_at": "2024-12-20T07:49:59.453+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-20T07:49:59.465+01:00",
+                        "updated_at": "2024-12-20T07:49:59.465+01:00"
+                      }
+                    ]
+                  }
+                },
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/communication_website_event"
+                    "$ref": "#/components/schemas/communication_website_agenda_event"
                   }
                 }
               }
             }
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Website not found"
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a post",
+        "tags": [
+          "Communication::Website::Agenda::Event"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful creation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful creation": {
+                    "value": {
+                      "id": "a4672f10-61a2-47cb-badc-a3d5a7e77318",
+                      "migration_identifier": "event-from-api-1",
+                      "from_day": "2024-12-24",
+                      "from_hour": "2000-01-01T19:00:00.000+01:00",
+                      "to_day": "2024-12-25",
+                      "to_hour": "2000-01-01T14:00:00.000+01:00",
+                      "time_zone": "Europe/Paris",
+                      "created_by_id": null,
+                      "parent_id": null,
+                      "localizations": {
+                        "fr": {
+                          "id": "8b74f9b9-36e3-4f22-9e51-16b9de309db7",
+                          "migration_identifier": "event-from-api-1-fr",
+                          "title": "Noël",
+                          "featured_image": {
+                            "blob_id": "44e2ca16-956a-4b6c-9ec0-8c0bb4b85d8b",
+                            "alt": "La lumière brille sur les parois du canyon",
+                            "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJqMTlwZ2h0ZGl4M29vMnZoMjlxOHV4NW90djlpIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDc6NTA6MDAuMTE4WiIsInB1ciI6ImJsb2Jfa2V5In19--1df09de4ae79ede5580d04d5d220ce3f5688a9a8/photo-1703923633616-254e78f6e9df"
+                          },
+                          "meta_description": "Les repas de Noël",
+                          "published": true,
+                          "published_at": "2024-12-20T07:47:00.000+01:00",
+                          "slug": "noel",
+                          "subtitle": "Les repas de Noël",
+                          "summary": "<p>Les repas de Noël en famille.</p>",
+                          "text": null,
+                          "add_to_calendar_urls": {
+                            "google": "https://www.google.com/calendar/render?action=TEMPLATE&text=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&dates=20241224T190000/20241225T140000&ctz=Europe/Paris&details=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
+                            "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&ST=20241224T180000Z&DUR=1900&DESC=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
+                            "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
+                            "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
+                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T075000Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
+                          },
+                          "blocks": [
+                            {
+                              "id": "050d8ee9-5317-4a02-80f6-d320dc1faab0",
+                              "migration_identifier": "event-from-api-1-fr-block-1",
+                              "template_kind": "chapter",
+                              "title": "Mon premier chapitre",
+                              "position": 1,
+                              "published": true,
+                              "html_class": null,
+                              "data": {
+                                "layout": "no_background",
+                                "text": "<p>Ceci est mon premier chapitre</p>",
+                                "notes": "",
+                                "image": {
+                                  "id": ""
+                                },
+                                "alt": "",
+                                "credit": ""
+                              },
+                              "created_at": "2024-12-20T07:50:00.017+01:00",
+                              "updated_at": "2024-12-20T07:50:00.017+01:00"
+                            }
+                          ],
+                          "created_at": "2024-12-20T07:50:00.010+01:00",
+                          "updated_at": "2024-12-20T07:50:00.036+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-20T07:49:59.998+01:00",
+                      "updated_at": "2024-12-20T07:50:00.092+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.slug": [
+                          "can't be blank",
+                          "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                        ],
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "event": {
+                    "$ref": "#/components/schemas/communication_website_agenda_event"
+                  }
+                },
+                "required": [
+                  "event"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/communication/websites/{website_id}/agenda/events/{id}": {
+      "get": {
+        "summary": "Shows a event",
+        "tags": [
+          "Communication::Website::Agenda::Event"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Event identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": {
+                      "id": "f1140bb9-e443-59fc-a8ac-116097f726d1",
+                      "migration_identifier": "test-event-fixture-1",
+                      "from_day": "2024-07-12",
+                      "from_hour": "2000-01-01T09:00:00.000+01:00",
+                      "to_day": "2024-07-14",
+                      "to_hour": "2000-01-02T00:15:00.000+01:00",
+                      "time_zone": "Europe/Paris",
+                      "created_by_id": null,
+                      "parent_id": null,
+                      "localizations": {
+                        "fr": {
+                          "id": "6667d415-895d-53b4-b3ae-f287ae761945",
+                          "migration_identifier": "test-event-fixture-1-fr",
+                          "title": "Coupe du Monde d'Escalade 2024 - Chamonix",
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
+                          "meta_description": null,
+                          "published": true,
+                          "published_at": "2024-07-01T02:00:00.000+02:00",
+                          "slug": "coupe-du-monde-d-escalade-2024-chamonix",
+                          "subtitle": null,
+                          "summary": null,
+                          "text": null,
+                          "add_to_calendar_urls": {
+                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T073004Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20%0AUID:-20240712T070000Z-Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20%0AEND:VEVENT%0AEND:VCALENDAR",
+                            "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&ST=20240712T070000Z&DUR=3915",
+                            "google": "https://www.google.com/calendar/render?action=TEMPLATE&text=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&dates=20240712T090000/20240714T001500&ctz=Europe/Paris",
+                            "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
+                            "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z"
+                          },
+                          "blocks": [],
+                          "created_at": "2024-12-20T07:49:59.453+01:00",
+                          "updated_at": "2024-12-20T07:49:59.453+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-20T07:49:59.465+01:00",
+                      "updated_at": "2024-12-20T07:49:59.465+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -2805,6 +3434,105 @@
             "description": "Successful operation",
             "content": {
               "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": [
+                      {
+                        "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                        "migration_identifier": "test-post-fixture-1",
+                        "full_width": false,
+                        "localizations": {
+                          "fr": {
+                            "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                            "migration_identifier": "test-post-fixture-1-fr",
+                            "title": "Test",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "pinned": null,
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "test",
+                            "subtitle": null,
+                            "summary": null,
+                            "text": null,
+                            "blocks": [],
+                            "created_at": "2024-12-20T07:49:59.506+01:00",
+                            "updated_at": "2024-12-20T07:49:59.506+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-20T07:49:59.515+01:00",
+                        "updated_at": "2024-12-20T07:49:59.515+01:00"
+                      },
+                      {
+                        "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
+                        "migration_identifier": null,
+                        "full_width": false,
+                        "localizations": {
+                          "fr": {
+                            "id": "a979b73e-e42b-54de-97d4-df21605e49c0",
+                            "migration_identifier": null,
+                            "title": "Test 2",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "pinned": null,
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "test-2",
+                            "subtitle": null,
+                            "summary": null,
+                            "text": null,
+                            "blocks": [],
+                            "created_at": "2024-12-20T07:49:59.506+01:00",
+                            "updated_at": "2024-12-20T07:49:59.506+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-20T07:49:59.515+01:00",
+                        "updated_at": "2024-12-20T07:49:59.515+01:00"
+                      },
+                      {
+                        "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
+                        "migration_identifier": null,
+                        "full_width": false,
+                        "localizations": {
+                          "fr": {
+                            "id": "e60b21c3-5968-54b2-93da-4a6a33fc85cc",
+                            "migration_identifier": null,
+                            "title": "Test 3",
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "pinned": null,
+                            "published": false,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "test-3",
+                            "subtitle": null,
+                            "summary": null,
+                            "text": null,
+                            "blocks": [],
+                            "created_at": "2024-12-20T07:49:59.506+01:00",
+                            "updated_at": "2024-12-20T07:49:59.506+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-20T07:49:59.515+01:00",
+                        "updated_at": "2024-12-20T07:49:59.515+01:00"
+                      }
+                    ]
+                  }
+                },
                 "schema": {
                   "type": "array",
                   "items": {
@@ -2815,10 +3543,32 @@
             }
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Website not found"
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -2845,19 +3595,135 @@
         ],
         "responses": {
           "201": {
-            "description": "Successful creation"
+            "description": "Successful creation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful creation": {
+                    "value": {
+                      "id": "7d52b2b5-25ae-4291-b933-ae49f4216547",
+                      "migration_identifier": "post-from-api-1",
+                      "full_width": false,
+                      "localizations": {
+                        "fr": {
+                          "id": "6babfbc0-feda-49fa-87a9-f74ded25a30b",
+                          "migration_identifier": "post-from-api-1-fr",
+                          "title": "Ma nouvelle actualité",
+                          "featured_image": {
+                            "blob_id": "2d7a7f9f-d956-474d-a92a-35b9030da6b7",
+                            "alt": "La lumière brille sur les parois du canyon",
+                            "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ5a3AxODFua2EyODdlMmxrczIxcDd0cTR5cWczIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDc6NTA6MDAuNDUxWiIsInB1ciI6ImJsb2Jfa2V5In19--67936300931c7f553e6a31039d55765dd7c3216d/photo-1703923633616-254e78f6e9df"
+                          },
+                          "meta_description": "Une nouvelle actualité depuis l'API",
+                          "pinned": false,
+                          "published": true,
+                          "published_at": "2024-11-29T17:49:00.000+01:00",
+                          "slug": "ma-nouvelle-actualite",
+                          "subtitle": "Une nouvelle actualité",
+                          "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
+                          "text": null,
+                          "blocks": [
+                            {
+                              "id": "ca0f5ccf-6ad5-4224-b36c-89358874ff23",
+                              "migration_identifier": "post-from-api-1-fr-block-1",
+                              "template_kind": "chapter",
+                              "title": "Mon premier chapitre",
+                              "position": 1,
+                              "published": true,
+                              "html_class": null,
+                              "data": {
+                                "layout": "no_background",
+                                "text": "<p>Ceci est mon premier chapitre</p>",
+                                "notes": "",
+                                "image": {
+                                  "id": ""
+                                },
+                                "alt": "",
+                                "credit": ""
+                              },
+                              "created_at": "2024-12-20T07:50:00.344+01:00",
+                              "updated_at": "2024-12-20T07:50:00.344+01:00"
+                            }
+                          ],
+                          "created_at": "2024-12-20T07:50:00.342+01:00",
+                          "updated_at": "2024-12-20T07:50:00.368+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-20T07:50:00.339+01:00",
+                      "updated_at": "2024-12-20T07:50:00.446+01:00"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "Missing migration identifier."
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Website not found"
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
           },
           "422": {
-            "description": "Invalid parameters"
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.slug": [
+                          "can't be blank",
+                          "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                        ],
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "requestBody": {
@@ -2903,19 +3769,191 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful upsertion"
+            "description": "Successful upsertion",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful upsertion": {
+                    "value": {
+                      "created": [
+                        {
+                          "id": "9f6530fd-1d95-4b20-b333-05963d2311b4",
+                          "migration_identifier": "post-from-api-1",
+                          "full_width": false,
+                          "localizations": {
+                            "fr": {
+                              "id": "0a1940d5-93ca-4998-ae89-60083e9f1840",
+                              "migration_identifier": "post-from-api-1-fr",
+                              "title": "Ma nouvelle actualité",
+                              "featured_image": {
+                                "blob_id": "c1bcadfc-e253-4ef0-a443-c7ea17de46b0",
+                                "alt": "La lumière brille sur les parois du canyon",
+                                "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJzMTJ2MHB4aG16YnZzamg1b2s0endsemI3dGRoIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMDc6NTA6MDAuNjIxWiIsInB1ciI6ImJsb2Jfa2V5In19--231107300a63d5a6eca56b1a889d9219a87e7fca/photo-1703923633616-254e78f6e9df"
+                              },
+                              "meta_description": "Une nouvelle actualité depuis l'API",
+                              "pinned": false,
+                              "published": true,
+                              "published_at": "2024-11-29T17:49:00.000+01:00",
+                              "slug": "ma-nouvelle-actualite",
+                              "subtitle": "Une nouvelle actualité",
+                              "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
+                              "text": null,
+                              "blocks": [
+                                {
+                                  "id": "4090a27d-86b6-4b5f-9fbf-de4c15f84ab5",
+                                  "migration_identifier": "post-from-api-1-fr-block-1",
+                                  "template_kind": "chapter",
+                                  "title": "Mon premier chapitre",
+                                  "position": 1,
+                                  "published": true,
+                                  "html_class": null,
+                                  "data": {
+                                    "layout": "no_background",
+                                    "text": "<p>Ceci est mon premier chapitre</p>",
+                                    "notes": "",
+                                    "image": {
+                                      "id": ""
+                                    },
+                                    "alt": "",
+                                    "credit": ""
+                                  },
+                                  "created_at": "2024-12-20T07:50:00.536+01:00",
+                                  "updated_at": "2024-12-20T07:50:00.536+01:00"
+                                }
+                              ],
+                              "created_at": "2024-12-20T07:50:00.535+01:00",
+                              "updated_at": "2024-12-20T07:50:00.549+01:00"
+                            }
+                          },
+                          "created_at": "2024-12-20T07:50:00.534+01:00",
+                          "updated_at": "2024-12-20T07:50:00.571+01:00"
+                        }
+                      ],
+                      "updated": [
+                        {
+                          "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                          "migration_identifier": "test-post-fixture-1",
+                          "full_width": false,
+                          "localizations": {
+                            "fr": {
+                              "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                              "migration_identifier": "test-post-fixture-1-fr",
+                              "title": "Mon nouveau titre",
+                              "featured_image": {
+                                "blob_id": null,
+                                "alt": null,
+                                "credit": null,
+                                "url": null
+                              },
+                              "meta_description": null,
+                              "pinned": null,
+                              "published": true,
+                              "published_at": "2010-11-28T01:00:00.000+01:00",
+                              "slug": "test",
+                              "subtitle": null,
+                              "summary": null,
+                              "text": null,
+                              "blocks": [],
+                              "created_at": "2024-12-20T07:49:59.506+01:00",
+                              "updated_at": "2024-12-20T07:50:00.593+01:00"
+                            }
+                          },
+                          "created_at": "2024-12-20T07:49:59.515+01:00",
+                          "updated_at": "2024-12-20T07:50:00.594+01:00"
+                        }
+                      ],
+                      "errors": []
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "Missing migration identifier."
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Website not found"
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
           },
           "422": {
-            "description": "Invalid parameters"
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "created": [],
+                      "updated": [],
+                      "errors": [
+                        {
+                          "index": 0,
+                          "errors": {
+                            "localizations.slug": [
+                              "can't be blank",
+                              "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                            ],
+                            "localizations.title": [
+                              "can't be blank"
+                            ],
+                            "localizations": [
+                              "is invalid"
+                            ]
+                          }
+                        },
+                        {
+                          "index": 1,
+                          "errors": {
+                            "localizations.title": [
+                              "can't be blank"
+                            ],
+                            "localizations": [
+                              "is invalid"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "requestBody": {
@@ -2973,13 +4011,79 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful operation"
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": {
+                      "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                      "migration_identifier": "test-post-fixture-1",
+                      "full_width": false,
+                      "localizations": {
+                        "fr": {
+                          "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                          "migration_identifier": "test-post-fixture-1-fr",
+                          "title": "Test",
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
+                          "meta_description": null,
+                          "pinned": null,
+                          "published": true,
+                          "published_at": "2010-11-28T01:00:00.000+01:00",
+                          "slug": "test",
+                          "subtitle": null,
+                          "summary": null,
+                          "text": null,
+                          "blocks": [],
+                          "created_at": "2024-12-20T07:49:59.506+01:00",
+                          "updated_at": "2024-12-20T07:49:59.506+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-20T07:49:59.515+01:00",
+                      "updated_at": "2024-12-20T07:49:59.515+01:00"
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Post not found"
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -3015,19 +4119,114 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful update"
+            "description": "Successful update",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful update": {
+                    "value": {
+                      "id": "03f9a88a-084d-535b-baf7-9008b43969c2",
+                      "migration_identifier": "test-post-fixture-1",
+                      "full_width": false,
+                      "localizations": {
+                        "fr": {
+                          "id": "16a1d9cf-f9eb-5ded-914d-dd421b5d395b",
+                          "migration_identifier": "test-post-fixture-1-fr",
+                          "title": "Mon nouveau titre",
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
+                          "meta_description": null,
+                          "pinned": null,
+                          "published": true,
+                          "published_at": "2010-11-28T01:00:00.000+01:00",
+                          "slug": "test",
+                          "subtitle": null,
+                          "summary": null,
+                          "text": null,
+                          "blocks": [],
+                          "created_at": "2024-12-20T07:49:59.506+01:00",
+                          "updated_at": "2024-12-20T07:50:00.750+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-20T07:49:59.515+01:00",
+                      "updated_at": "2024-12-20T07:50:00.750+01:00"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "Missing migration identifier."
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Post not found"
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
           },
           "422": {
-            "description": "Invalid parameters"
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "requestBody": {
@@ -3083,10 +4282,37 @@
             "description": "Successful deletion"
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Post not found"
+            "description": "Post not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Post not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -3107,6 +4333,125 @@
             "description": "Successful operation",
             "content": {
               "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": [
+                      {
+                        "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
+                        "url": null,
+                        "deuxfleurs": {
+                          "hosting": false,
+                          "identifier": null
+                        },
+                        "features": {
+                          "agenda": true,
+                          "portfolio": false,
+                          "posts": true
+                        },
+                        "git": {
+                          "branch": "main",
+                          "endpoint": null,
+                          "provider": "github",
+                          "repository": "noesya/bordeauxmontaigne-test"
+                        },
+                        "showcase": {
+                          "present": true,
+                          "highlighted": false,
+                          "tags": []
+                        },
+                        "localizations": {
+                          "fr": {
+                            "id": "3d91a284-4159-504e-81c5-6b9b32a08dd7",
+                            "name": "Site with github french",
+                            "published": true,
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "social_email": null,
+                            "social_facebook": null,
+                            "social_github": null,
+                            "social_instagram": null,
+                            "social_linkedin": null,
+                            "social_mastodon": null,
+                            "social_peertube": null,
+                            "social_tiktok": null,
+                            "social_vimeo": null,
+                            "social_x": null,
+                            "social_youtube": null,
+                            "created_at": "2024-12-20T07:49:59.474+01:00",
+                            "updated_at": "2024-12-20T07:49:59.474+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-20T07:49:59.516+01:00",
+                        "updated_at": "2024-12-20T07:49:59.516+01:00"
+                      },
+                      {
+                        "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
+                        "url": null,
+                        "deuxfleurs": {
+                          "hosting": false,
+                          "identifier": null
+                        },
+                        "features": {
+                          "agenda": false,
+                          "portfolio": false,
+                          "posts": true
+                        },
+                        "git": {
+                          "branch": "main",
+                          "endpoint": null,
+                          "provider": "gitlab",
+                          "repository": "33848340"
+                        },
+                        "showcase": {
+                          "present": true,
+                          "highlighted": false,
+                          "tags": []
+                        },
+                        "localizations": {
+                          "fr": {
+                            "id": "b854339d-f776-59c7-af65-e12ee2951daa",
+                            "name": "Site with gitlab french",
+                            "published": true,
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "social_email": null,
+                            "social_facebook": null,
+                            "social_github": null,
+                            "social_instagram": null,
+                            "social_linkedin": null,
+                            "social_mastodon": null,
+                            "social_peertube": null,
+                            "social_tiktok": null,
+                            "social_vimeo": null,
+                            "social_x": null,
+                            "social_youtube": null,
+                            "created_at": "2024-12-20T07:49:59.474+01:00",
+                            "updated_at": "2024-12-20T07:49:59.474+01:00"
+                          },
+                          "en": {
+                            "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
+                            "name": "Site with gitlab english",
+                            "published": true,
+                            "published_at": "2024-11-29T16:07:24.232+01:00",
+                            "social_email": null,
+                            "social_facebook": null,
+                            "social_github": null,
+                            "social_instagram": null,
+                            "social_linkedin": null,
+                            "social_mastodon": null,
+                            "social_peertube": null,
+                            "social_tiktok": null,
+                            "social_vimeo": null,
+                            "social_x": null,
+                            "social_youtube": null,
+                            "created_at": "2024-12-20T07:49:59.474+01:00",
+                            "updated_at": "2024-12-20T07:49:59.474+01:00"
+                          }
+                        },
+                        "created_at": "2024-12-20T07:49:59.516+01:00",
+                        "updated_at": "2024-12-20T07:49:59.516+01:00"
+                      }
+                    ]
+                  }
+                },
                 "schema": {
                   "type": "array",
                   "items": {
@@ -3117,7 +4462,18 @@
             }
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -3149,6 +4505,57 @@
             "description": "Successful operation",
             "content": {
               "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": {
+                      "id": "39d8ed64-c1b7-52d3-9095-025a5742a04f",
+                      "url": null,
+                      "deuxfleurs": {
+                        "hosting": false,
+                        "identifier": null
+                      },
+                      "features": {
+                        "agenda": true,
+                        "portfolio": false,
+                        "posts": true
+                      },
+                      "git": {
+                        "branch": "main",
+                        "endpoint": null,
+                        "provider": "github",
+                        "repository": "noesya/bordeauxmontaigne-test"
+                      },
+                      "showcase": {
+                        "present": true,
+                        "highlighted": false,
+                        "tags": []
+                      },
+                      "localizations": {
+                        "fr": {
+                          "id": "3d91a284-4159-504e-81c5-6b9b32a08dd7",
+                          "name": "Site with github french",
+                          "published": true,
+                          "published_at": "2024-11-29T16:07:24.232+01:00",
+                          "social_email": null,
+                          "social_facebook": null,
+                          "social_github": null,
+                          "social_instagram": null,
+                          "social_linkedin": null,
+                          "social_mastodon": null,
+                          "social_peertube": null,
+                          "social_tiktok": null,
+                          "social_vimeo": null,
+                          "social_x": null,
+                          "social_youtube": null,
+                          "created_at": "2024-12-20T07:49:59.474+01:00",
+                          "updated_at": "2024-12-20T07:49:59.474+01:00"
+                        }
+                      },
+                      "created_at": "2024-12-20T07:49:59.516+01:00",
+                      "updated_at": "2024-12-20T07:49:59.516+01:00"
+                    }
+                  }
+                },
                 "schema": {
                   "$ref": "#/components/schemas/communication_website"
                 }
@@ -3156,10 +4563,32 @@
             }
           },
           "401": {
-            "description": "Unauthorized. Please make sure you provide a valid API key."
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
           },
           "404": {
-            "description": "Website not found"
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

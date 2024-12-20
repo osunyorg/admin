@@ -13,13 +13,13 @@ module Communication::Website::Agenda::Event::WithOpenApi
         to_day: { type: :string, format: "date" },
         to_hour: { type: :string, format: "time" },
         time_zone: { type: :string },
-        created_by_id: { type: :string, format: :uuid },
-        parent_id: { type: :string, format: :uuid },
+        created_by_id: { type: :string, format: :uuid, nullable: true },
+        parent_id: { type: :string, format: :uuid, nullable: true },
         localizations: {
           type: :object,
           description: "Localizations of the event. The key is the language's ISO 639-1 code.",
           additionalProperties: {
-            "$ref": "#/components/schemas/communication_website_event_localization"
+            "$ref": "#/components/schemas/communication_website_agenda_event_localization"
           }
         },
         created_at: { type: :string, format: "date-time" },
