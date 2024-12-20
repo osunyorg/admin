@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_20_103713) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -1573,12 +1573,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_103713) do
     t.integer "kind", default: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "slug"
     t.string "nic"
     t.float "latitude"
     t.float "longitude"
     t.string "migration_identifier"
-    t.index ["slug"], name: "index_university_organizations_on_slug"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
