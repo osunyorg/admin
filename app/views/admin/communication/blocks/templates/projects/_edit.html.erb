@@ -1,19 +1,9 @@
+<%= block_component_edit block, :mode %>
 <div class="row">
-  <div class="col-lg-6">
-    <%= block_component_edit block, :mode %>
-  </div>
-  <div class="col-lg-6" v-if="data.mode !== 'categories'">
-    <%= render 'admin/communication/blocks/templates/projects/options', block: block %>
-  </div>
-</div>
-<div v-if="data.mode !== 'categories'">
-  <%= block_component_edit block, :layout %>
-</div>
-<div class="row pure__row--small">
-  <div v-if="data.mode === 'category' || data.mode === 'all'" class="col-lg-3">
+  <div v-if="data.mode === 'category' || data.mode === 'all'" class="col-sm-3">
     <%= block_component_edit block, :projects_quantity %>
   </div>
-  <div v-if="data.mode === 'category'" class="col-lg-9">
+  <div v-if="data.mode === 'category'" class="col-sm-9">
     <%= block_component_edit block, :category_id %>
   </div>
 </div>
@@ -34,4 +24,12 @@
       </a>
     </div>
   </draggable>
+</div>
+
+<div v-if="data.mode !== 'categories'">
+  <%= osuny_separator %>
+  <%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+    <%= block_component_edit block, :layout %>
+    <%= render 'admin/communication/blocks/templates/projects/options', block: block %>
+  <% end %>
 </div>

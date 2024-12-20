@@ -1,35 +1,23 @@
-<div class="row pure__row--small mb-5">
-  <div class="col-xl-6">
-    <%= block_component_edit block, :description, summernote_config: 'mini' %>
-  </div>
-  <div class="col-xl-6" v-if="data.mode !== 'categories'">
-    <%= render 'admin/communication/blocks/templates/agenda/options', block: block %>
-  </div>
-</div>
+<%= block_component_edit block, :description, summernote_config: 'mini' %>
 
-<div class="row pure__row--small">
-  <div class="col-xl-6 mb-3">
+<div class="row">
+  <div class="col-sm-6 mb-3">
     <%= block_component_edit block, :mode %>
   </div>
-  <div class="col-xl-6 mb-3" v-show="data.mode != 'selection' && data.mode != 'categories'">
+  <div class="col-sm-6 mb-3" v-show="data.mode != 'selection' && data.mode != 'categories'">
     <%= block_component_edit block, :time %>
   </div>
 </div>
 
 <div v-if="data.mode !== 'categories'">
-  <div class="mb-3">
-    <%= block_component_edit block, :layout %>
-  </div>
-
-  <div class="row pure__row--small">
-    <div class="col-xl-6 mb-3" v-show="data.mode != 'selection'">
+  <div class="row">
+    <div class="col-sm-6 mb-3" v-show="data.mode != 'selection'">
       <%= block_component_edit block, :quantity %>
     </div>
-    <div class="col-xl-6 mb-3" v-show="data.mode === 'category'">
+    <div class="col-sm-6 mb-3" v-show="data.mode === 'category'">
       <%= block_component_edit block, :category_id %>
     </div>
   </div>
-
   <div class="mb-3" v-show="data.mode === 'selection'">
     <%= block_component_add_element block, t('.add_event') %>
     <draggable :list="data.elements" handle=".dragHandle">
@@ -55,4 +43,12 @@
     </draggable>
   </div>
   <%= block_component_edit block, :no_event_message %>
+</div>
+
+<div v-if="data.mode !== 'categories'">
+  <%= osuny_separator %>
+  <%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+    <%= block_component_edit block, :layout %>
+    <%= render 'admin/communication/blocks/templates/agenda/options', block: block %>
+  <% end %>
 </div>

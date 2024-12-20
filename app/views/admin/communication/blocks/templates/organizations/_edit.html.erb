@@ -1,24 +1,8 @@
-<div class="row pure__row--small">
-  <div class="col-xl-6">
-    <%= block_component_edit block, :description, summernote_config: 'mini' %>
-  </div>
+<%= block_component_edit block, :description, summernote_config: 'mini' %>
+<%= block_component_edit block, :mode %>
+<div v-if="data.mode === 'category'">
+  <%= block_component_edit block, :category_id %>
 </div>
-<div class="row pure__row--small">
-  <div class="col-xl-6">
-    <%= block_component_edit block, :mode %>
-    <div v-if="data.mode === 'category'">
-      <%= block_component_edit block, :category_id %>
-    </div>
-  </div>
-  <div class="col-xl-6">
-    <%= render 'admin/communication/blocks/templates/organizations/options', block: block %>
-    <%= block_component_edit block, :option_link %>
-    <div v-if="data.mode === 'selection'">
-      <%= block_component_edit block, :alphabetical %>
-    </div>
-  </div>
-</div>
-<%= block_component_edit block, :layout %>
 
 <div v-if="data.mode === 'selection'">
   <div><%= osuny_label University::Organization.model_name.human(count: 2) %></div>
@@ -57,3 +41,13 @@
     <%= block_component_add_element block, t('.add_organization') %>
   </div>
 </div>
+
+<%= osuny_separator %>
+<%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+  <%= block_component_edit block, :layout %>
+  <%= render 'admin/communication/blocks/templates/organizations/options', block: block %>
+  <%= block_component_edit block, :option_link %>
+  <div v-if="data.mode === 'selection'">
+    <%= block_component_edit block, :alphabetical %>
+  </div>
+<% end %>

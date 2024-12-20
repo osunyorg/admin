@@ -1,15 +1,12 @@
 <%= block_component_edit block, :mode %>
-<div class="row pure__row--small">
+
+<div class="row mt-5">
   <div v-if="data.mode === 'category' || data.mode === 'all'" class="col-sm-4">
     <%= block_component_edit block, :posts_quantity %>
   </div>
   <div v-if="data.mode === 'category'" class="col-sm-8">
     <%= block_component_edit block, :category_id %>
   </div>
-</div>
-<div v-if="data.mode !== 'categories'">
-  <%= block_component_edit block, :layout %>
-  <%= render 'admin/communication/blocks/templates/posts/options', block: block %>
 </div>
 <div v-if="data.mode === 'selection'">
   <%= block_component_add_element block, t('.add_post') %>
@@ -28,7 +25,15 @@
       </a>
     </div>
   </draggable>
-  <div v-show="data.elements.length > 2">
-    <%= block_component_add_element block, t('.add_post') %>
-  </div>  
+</div>
+<div v-show="data.elements.length > 2">
+  <%= block_component_add_element block, t('.add_post') %>
+</div>
+
+<div v-if="data.mode !== 'categories'">
+  <%= osuny_separator %>
+  <%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+    <%= block_component_edit block, :layout %>
+    <%= render 'admin/communication/blocks/templates/posts/options', block: block %>
+  <% end %>
 </div>

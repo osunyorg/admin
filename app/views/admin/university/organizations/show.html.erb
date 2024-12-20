@@ -6,17 +6,21 @@
       <% if @l10n.logo.attached? %>
         <div>
           <%= osuny_label University::Organization::Localization.human_attribute_name('logo') %><br>
-          <%= kamifusen_tag @l10n.logo, class: 'img-fluid img-fill bg-light img-thumbnail p-5 mb-3' %>
+          <%= kamifusen_tag @l10n.logo,
+                            width: 200,
+                            class: 'img-fluid img-fill bg-light img-thumbnail p-5 mb-3' %>
         </div>
       <% end %>
       <% if @l10n.logo_on_dark_background.attached? %>
         <div>
           <%= osuny_label University::Organization::Localization.human_attribute_name('logo_on_dark_background') %><br>
-          <%= kamifusen_tag @l10n.logo_on_dark_background, class: 'img-fluid img-fill bg-dark img-thumbnail p-5' %>
+          <%= kamifusen_tag @l10n.logo_on_dark_background,
+                            width: 200,
+                            class: 'img-fluid img-fill bg-dark img-thumbnail p-5' %>
         </div>
       <% end %>
     <% end if @l10n.logo.attached? || @l10n.logo_on_dark_background.attached? %>
-
+    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
     <%= osuny_property_show_text @l10n, :slug, hide_blank: true %>
     <%= osuny_property_show_boolean @organization, :active %>
     <%= render 'admin/application/categories/widget/show', about: @organization %>
