@@ -28,7 +28,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
       end
     end
 
-    post 'Creates a post' do
+    post 'Creates an event' do
       tags 'Communication::Website::Agenda::Event'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
@@ -380,160 +380,169 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
         run_test!
       end
 
-      response '404', 'Post not found' do
+      response '404', 'Event not found' do
         let(:id) { 'fake-id' }
         run_test!
       end
     end
 
-  #   patch 'Updates a post' do
-  #     tags 'Communication::Website::Post'
-  #     security [{ api_key: [] }]
-  #     let("X-Osuny-Token") { university_apps(:default_app).token }
+    patch 'Updates a event' do
+      tags 'Communication::Website::Agenda::Event'
+      security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
 
-  #     parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
-  #     let(:website_id) { communication_websites(:website_with_github).id }
-  #     parameter name: :id, in: :path, type: :string, description: 'Post identifier'
-  #     let(:id) { communication_website_posts(:test_post).id }
+      parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
+      let(:website_id) { communication_websites(:website_with_github).id }
+      parameter name: :id, in: :path, type: :string, description: 'Event identifier'
+      let(:id) { communication_website_agenda_events(:test_event).id }
 
-  #     parameter name: :communication_website_post, in: :body, type: :object, schema: {
-  #       type: :object,
-  #       properties: {
-  #         post: {
-  #           '$ref': '#/components/schemas/communication_website_post'
-  #         }
-  #       },
-  #       required: [:post]
-  #     }
-  #     let(:communication_website_post) {
-  #       test_post = communication_website_posts(:test_post)
-  #       test_post_l10n = communication_website_post_localizations(:test_post_fr)
-  #       {
-  #         post: {
-  #           migration_identifier: test_post.migration_identifier,
-  #           full_width: test_post.full_width,
-  #           localizations: {
-  #             test_post_l10n.language.iso_code => {
-  #               migration_identifier: test_post_l10n.migration_identifier,
-  #               title: "Mon nouveau titre",
-  #               meta_description: test_post_l10n.meta_description,
-  #               pinned: test_post_l10n.pinned,
-  #               published: test_post_l10n.published,
-  #               published_at: test_post_l10n.published_at,
-  #               slug: test_post_l10n.slug,
-  #               subtitle: test_post_l10n.subtitle,
-  #               summary: test_post_l10n.summary
-  #             }
-  #           }
-  #         }
-  #       }
-  #     }
+      parameter name: :communication_website_agenda_event, in: :body, type: :object, schema: {
+        type: :object,
+        properties: {
+          event: {
+            '$ref': '#/components/schemas/communication_website_agenda_event'
+          }
+        },
+        required: [:event]
+      }
+      let(:communication_website_agenda_event) {
+        test_event = communication_website_agenda_events(:test_event)
+        test_event_l10n = communication_website_agenda_event_localizations(:test_event_fr)
+        {
+          event: {
+            migration_identifier: test_event.migration_identifier,
+            from_day: test_event.from_day,
+            from_hour: test_event.from_hour,
+            to_day: test_event.to_day,
+            from_day: test_event.from_day,
+            time_zone: test_event.time_zone,
+            localizations: {
+              test_event_l10n.language.iso_code => {
+                migration_identifier: test_event_l10n.migration_identifier,
+                title: "Mon nouveau titre",
+                meta_description: test_event_l10n.meta_description,
+                published: test_event_l10n.published,
+                published_at: test_event_l10n.published_at,
+                slug: test_event_l10n.slug,
+                subtitle: test_event_l10n.subtitle,
+                summary: test_event_l10n.summary
+              }
+            }
+          }
+        }
+      }
 
-  #     response '200', 'Successful update' do
-  #       run_test! do |response|
-  #         assert_equal("Mon nouveau titre", communication_website_post_localizations(:test_post_fr).reload.title)
-  #       end
-  #     end
+      response '200', 'Successful update' do
+        run_test! do |response|
+          assert_equal("Mon nouveau titre", communication_website_agenda_event_localizations(:test_event_fr).reload.title)
+        end
+      end
 
-  #     response '400', 'Missing migration identifier.' do
-  #       let(:communication_website_post) {
-  #         test_post = communication_website_posts(:test_post)
-  #         test_post_l10n = communication_website_post_localizations(:test_post_fr)
-  #         {
-  #           post: {
-  #             full_width: test_post.full_width,
-  #             localizations: {
-  #               test_post_l10n.language.iso_code => {
-  #                 migration_identifier: test_post_l10n.migration_identifier,
-  #                 title: test_post_l10n.title,
-  #                 meta_description: test_post_l10n.meta_description,
-  #                 pinned: test_post_l10n.pinned,
-  #                 published: test_post_l10n.published,
-  #                 published_at: test_post_l10n.published_at,
-  #                 slug: test_post_l10n.slug,
-  #                 subtitle: test_post_l10n.subtitle,
-  #                 summary: test_post_l10n.summary
-  #               }
-  #             }
-  #           }
-  #         }
-  #       }
-  #       run_test!
-  #     end
+      response '400', 'Missing migration identifier.' do
+        let(:communication_website_agenda_event) {
+          test_event = communication_website_agenda_events(:test_event)
+          test_event_l10n = communication_website_agenda_event_localizations(:test_event_fr)
+          {
+            event: {
+              from_day: test_event.from_day,
+              from_hour: test_event.from_hour,
+              to_day: test_event.to_day,
+              from_day: test_event.from_day,
+              time_zone: test_event.time_zone,
+              localizations: {
+                test_event_l10n.language.iso_code => {
+                  migration_identifier: test_event_l10n.migration_identifier,
+                  title: "Mon nouveau titre",
+                  meta_description: test_event_l10n.meta_description,
+                  published: test_event_l10n.published,
+                  published_at: test_event_l10n.published_at,
+                  slug: test_event_l10n.slug,
+                  subtitle: test_event_l10n.subtitle,
+                  summary: test_event_l10n.summary
+                }
+              }
+            }
+          }
+        }
+        run_test!
+      end
 
-  #     # TODO: Add test for missing migration identifier in localization
+      # TODO: Add test for missing migration identifier in localization
 
-  #     response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
-  #       let("X-Osuny-Token") { 'fake-token' }
-  #       run_test!
-  #     end
+      response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
+        let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
 
-  #     response '404', 'Website not found' do
-  #       let(:website_id) { 'fake-id' }
-  #       run_test!
-  #     end
+      response '404', 'Website not found' do
+        let(:website_id) { 'fake-id' }
+        run_test!
+      end
 
-  #     response '404', 'Post not found' do
-  #       let(:id) { 'fake-id' }
-  #       run_test!
-  #     end
+      response '404', 'Event not found' do
+        let(:id) { 'fake-id' }
+        run_test!
+      end
 
-  #     response '422', 'Invalid parameters' do
-  #       let(:communication_website_post) {
-  #         test_post = communication_website_posts(:test_post)
-  #         test_post_l10n = communication_website_post_localizations(:test_post_fr)
-  #         {
-  #           post: {
-  #             migration_identifier: test_post.migration_identifier,
-  #             full_width: test_post.full_width,
-  #             localizations: {
-  #               test_post_l10n.language.iso_code => {
-  #                 migration_identifier: test_post_l10n.migration_identifier,
-  #                 title: nil,
-  #                 meta_description: test_post_l10n.meta_description,
-  #                 pinned: test_post_l10n.pinned,
-  #                 published: test_post_l10n.published,
-  #                 published_at: test_post_l10n.published_at,
-  #                 slug: test_post_l10n.slug,
-  #                 subtitle: test_post_l10n.subtitle,
-  #                 summary: test_post_l10n.summary
-  #               }
-  #             }
-  #           }
-  #         }
-  #       }
-  #       run_test!
-  #     end
-  #   end
+      response '422', 'Invalid parameters' do
+        let(:communication_website_agenda_event) {
+          test_event = communication_website_agenda_events(:test_event)
+          test_event_l10n = communication_website_agenda_event_localizations(:test_event_fr)
+          {
+            event: {
+              migration_identifier: test_event.migration_identifier,
+              from_day: test_event.from_day,
+              from_hour: test_event.from_hour,
+              to_day: test_event.to_day,
+              to_hour: test_event.to_hour,
+              time_zone: test_event.time_zone,
+              localizations: {
+                test_event_l10n.language.iso_code => {
+                  migration_identifier: test_event_l10n.migration_identifier,
+                  title: nil,
+                  meta_description: test_event_l10n.meta_description,
+                  published: test_event_l10n.published,
+                  published_at: test_event_l10n.published_at,
+                  slug: test_event_l10n.slug,
+                  subtitle: test_event_l10n.subtitle,
+                  summary: test_event_l10n.summary
+                }
+              }
+            }
+          }
+        }
+        run_test!
+      end
+    end
 
-  #   delete 'Deletes a post' do
-  #     tags 'Communication::Website::Post'
-  #     security [{ api_key: [] }]
-  #     let("X-Osuny-Token") { university_apps(:default_app).token }
+    delete 'Deletes a event' do
+      tags 'Communication::Website::Agenda::Event'
+      security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
 
-  #     parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
-  #     let(:website_id) { communication_websites(:website_with_github).id }
-  #     parameter name: :id, in: :path, type: :string, description: 'Post identifier'
-  #     let(:id) { communication_website_posts(:test_post).id }
+      parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
+      let(:website_id) { communication_websites(:website_with_github).id }
+      parameter name: :id, in: :path, type: :string, description: 'Event identifier'
+      let(:id) { communication_website_agenda_events(:test_event).id }
 
-  #     response '204', 'Successful deletion' do
-  #       run_test!
-  #     end
+      response '204', 'Successful deletion' do
+        run_test!
+      end
 
-  #     response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
-  #       let("X-Osuny-Token") { 'fake-token' }
-  #       run_test!
-  #     end
+      response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
+        let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
 
-  #     response '404', 'Website not found' do
-  #       let(:website_id) { 'fake-id' }
-  #       run_test!
-  #     end
+      response '404', 'Website not found' do
+        let(:website_id) { 'fake-id' }
+        run_test!
+      end
 
-  #     response '404', 'Post not found' do
-  #       let(:id) { 'fake-id' }
-  #       run_test!
-  #     end
-  #   end
+      response '404', 'Post not found' do
+        let(:id) { 'fake-id' }
+        run_test!
+      end
+    end
   end
 end

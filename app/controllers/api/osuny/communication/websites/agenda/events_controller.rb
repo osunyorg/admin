@@ -3,7 +3,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   before_action :load_event, only: [:show, :update, :destroy]
 
   before_action :load_migration_identifier, only: [:create, :update]
-  # before_action :ensure_same_migration_identifier, only: :update
+  before_action :ensure_same_migration_identifier, only: :update
 
   def index
     @events = website.events.includes(:localizations)
@@ -20,13 +20,13 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
     end
   end
 
-  # def update
-  #   if @post.update(post_params)
-  #     render :show
-  #   else
-  #     render json: { errors: @post.errors }, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+    if @event.update(event_params)
+      render :show
+    else
+      render json: { errors: @event.errors }, status: :unprocessable_entity
+    end
+  end
 
   # def upsert
   #   posts_params = params[:posts] || []
@@ -66,10 +66,10 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   #   render 'upsert', status: status
   # end
 
-  # def destroy
-  #   @post.destroy
-  #   head :no_content
-  # end
+  def destroy
+    @event.destroy
+    head :no_content
+  end
 
   protected
 
@@ -87,11 +87,11 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
     render_on_missing_migration_identifier unless @migration_identifier.present?
   end
 
-  # def ensure_same_migration_identifier
-  #   if @post.migration_identifier != @migration_identifier
-  #     render json: { error: 'Migration identifier does not match' }, status: :unprocessable_entity
-  #   end
-  # end
+  def ensure_same_migration_identifier
+    if @event.migration_identifier != @migration_identifier
+      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_entity
+    end
+  end
 
   def l10n_permitted_keys
     [
