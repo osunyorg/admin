@@ -21,7 +21,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   ]
   has_component :category_id, :agenda_category
   has_component :description, :rich_text
-  has_component :quantity, :number, options: 3
+  has_component :quantity, :number, default: 3
   has_component :time, :option, options: AUTHORIZED_SCOPES
   has_component :no_event_message, :string
 

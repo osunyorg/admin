@@ -1,4 +1,4 @@
-class Communication::Block::Component::OrganizationCategory < Communication::Block::Component::Base
+class Communication::Block::Component::OrganizationCategory < Communication::Block::Component::BaseReference
 
   def categories
     university.organization_categories

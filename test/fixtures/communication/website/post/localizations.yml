@@ -1,4 +1,5 @@
 test_post_fr:
+  migration_identifier: test-post-fixture-1-fr
   title: Test
   slug: test
   published: true

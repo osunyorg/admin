@@ -1,0 +1,16 @@
+test_event_fr:
+  migration_identifier: test-event-fixture-1-fr
+  title: Coupe du Monde d'Escalade 2024 - Chamonix
+  slug: coupe-du-monde-d-escalade-2024-chamonix
+  published: true
+  published_at: 2024-07-01 00:00:00
+  add_to_calendar_urls:
+    google: "https://www.google.com/calendar/render?action=TEMPLATE&text=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&dates=20240712T090000/20240714T001500&ctz=Europe/Paris"
+    yahoo: "https://calendar.yahoo.com/?v=60&TITLE=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&ST=20240712T070000Z&DUR=3915"
+    office: "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z"
+    outlook: "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z"
+    ical: "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T073004Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20%0AUID:-20240712T070000Z-Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20%0AEND:VEVENT%0AEND:VCALENDAR"
+  about: test_event
+  language: fr
+  website: website_with_github
+  university: default_university
