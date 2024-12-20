@@ -1,22 +1,6 @@
-<div class="row pure__row--small">
-  <div class="col-lg-6">
-    <%= block_component_edit block, :mode %>
-  </div>
-  <div class="col-lg-6">
-    <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-    <%= block_component_edit block, :option_image, label: Communication::Website::Post::Localization.human_attribute_name(:featured_image) %>
-    <%= block_component_edit block, :option_subtitle, label: Communication::Website::Post::Localization.human_attribute_name(:subtitle) %>
-    <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
-    <%= block_component_edit block, :option_author, label: Communication::Website::Post.human_attribute_name(:authors) %>
-    <%= block_component_edit block, :option_date, label: Communication::Website::Post::Localization.human_attribute_name(:date) %>
-    <%= block_component_edit block, :option_categories, label: Communication::Website::Post.human_attribute_name(:categories) %>
-    <%= block_component_edit block, :option_reading_time, label: Communication::Website::Post::Localization.human_attribute_name(:reading_time) %>
-  </div>
-</div>
-<div v-if="data.mode !== 'categories'">
-  <%= block_component_edit block, :layout %>
-</div>
-<div class="row pure__row--small">
+<%= block_component_edit block, :mode %>
+
+<div class="row mt-5">
   <div v-if="data.mode === 'category' || data.mode === 'all'" class="col-lg-3">
     <%= block_component_edit block, :posts_quantity %>
   </div>
@@ -44,4 +28,25 @@
 </div>
 <div v-show="data.elements.length > 2">
   <%= block_component_add_element block, t('.add_post') %>
+</div>
+
+<div v-if="data.mode !== 'categories'">
+  <%= osuny_separator %>
+  <%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+    <%= block_component_edit block, :layout %>
+    <%= osuny_label t('admin.communication.blocks.display_options.title') %>
+    <div class="row">
+      <div class="col-sm-6">
+        <%= block_component_edit block, :option_image, label: Communication::Website::Post::Localization.human_attribute_name(:featured_image) %>
+        <%= block_component_edit block, :option_subtitle, label: Communication::Website::Post::Localization.human_attribute_name(:subtitle) %>
+        <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
+        <%= block_component_edit block, :option_author, label: Communication::Website::Post.human_attribute_name(:authors) %>
+      </div>
+      <div class="col-sm-6">
+        <%= block_component_edit block, :option_date, label: Communication::Website::Post::Localization.human_attribute_name(:date) %>
+        <%= block_component_edit block, :option_categories, label: Communication::Website::Post.human_attribute_name(:categories) %>
+        <%= block_component_edit block, :option_reading_time, label: Communication::Website::Post::Localization.human_attribute_name(:reading_time) %>
+      </div>
+    </div>
+  <% end %>
 </div>
