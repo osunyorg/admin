@@ -1,9 +1,9 @@
 test_event:
   migration_identifier: test-event-fixture-1
   from_day: 2024-07-12
-  from_hour: "08:00:00"
+  from_hour: "08:00"
   time_zone: Europe/Paris
   to_day: 2024-07-14
-  to_hour: "23:15:00"
+  to_hour: "23:15"
   website: website_with_github
   university: default_university

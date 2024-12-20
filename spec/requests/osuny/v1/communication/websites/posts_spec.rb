@@ -167,7 +167,7 @@ RSpec.describe 'Communication::Website::Post' do
             }
           }
         },
-        required: [:post]
+        required: [:posts]
       }
       let(:posts) {
         test_post = communication_website_posts(:test_post)
