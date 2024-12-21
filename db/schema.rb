@@ -544,6 +544,39 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
     t.index ["university_id"], name: "index_communication_website_menus_on_university_id"
   end
 
+  create_table "communication_website_page_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "is_taxonomy", default: false
+    t.integer "position"
+    t.uuid "communication_website_id", null: false
+    t.uuid "parent_id"
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_communication_website_page_cats_on_website_id"
+    t.index ["parent_id"], name: "index_communication_website_page_categories_on_parent_id"
+    t.index ["university_id"], name: "index_communication_website_page_categories_on_university_id"
+  end
+
+  create_table "communication_website_page_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.string "path"
+    t.text "meta_description"
+    t.text "summary"
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "communication_website_id", null: false
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_6c76163c36"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_f605face95"
+    t.index ["language_id"], name: "idx_on_language_id_adc4ce8d8e"
+    t.index ["university_id"], name: "idx_on_university_id_2237677b2f"
+  end
+
   create_table "communication_website_page_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "breadcrumb_title"
     t.string "featured_image_alt"
@@ -589,6 +622,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
+  end
+
+  create_table "communication_website_pages_categories", id: false, force: :cascade do |t|
+    t.uuid "communication_website_page_id", null: false
+    t.uuid "communication_website_page_category_id", null: false
+    t.index ["communication_website_page_category_id", "communication_website_page_id"], name: "idx_on_communication_website_page_category_id_commu_0ed05f8637"
+    t.index ["communication_website_page_id", "communication_website_page_category_id"], name: "idx_on_communication_website_page_id_communication__6ff1d70f62"
   end
 
   create_table "communication_website_permalinks", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -1894,6 +1934,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
   add_foreign_key "communication_website_menus", "communication_websites"
   add_foreign_key "communication_website_menus", "languages"
   add_foreign_key "communication_website_menus", "universities"
+  add_foreign_key "communication_website_page_categories", "communication_website_page_categories", column: "parent_id"
+  add_foreign_key "communication_website_page_categories", "communication_websites"
+  add_foreign_key "communication_website_page_categories", "universities"
+  add_foreign_key "communication_website_page_category_localizations", "communication_website_page_categories", column: "about_id"
+  add_foreign_key "communication_website_page_category_localizations", "communication_websites"
+  add_foreign_key "communication_website_page_category_localizations", "languages"
+  add_foreign_key "communication_website_page_category_localizations", "universities"
   add_foreign_key "communication_website_page_localizations", "communication_website_pages", column: "about_id"
   add_foreign_key "communication_website_page_localizations", "communication_websites"
   add_foreign_key "communication_website_page_localizations", "languages"
