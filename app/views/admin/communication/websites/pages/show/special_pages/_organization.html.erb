@@ -3,33 +3,44 @@
                       .ordered(current_language)
                       .page(params[:page])
 %>
-<%= osuny_panel University::Organization.model_name.human(count: 2) do %>
-  <%= simple_form_for :association, class_name: 'association' do |f| %>
-    <%= f.input :name,
-                label: false,
-                as: :autocomplete,
-                url: search_admin_university_organizations_path(website_id: nil),
-                placeholder: t("university.organization.search"),
-                input_html: {
-                  data: {
-                    type: 'University::Organization',
-                    target: connect_admin_communication_website_page_path(@page)
-                  }
-                }
-                %>
-  <% end %>
-  <table class="<%= table_classes %>">
-    <tbody>
-      <% @organizations.each do |organization| %>
-        <tr>
-          <td><%= osuny_link_localized organization, [:admin, organization] %></td>
-          <td><%= link_to t('admin.communication.website.pages.special_pages.organization.disconnect'),
-                          disconnect_admin_communication_website_page_path(@page, object_id: organization.id, object_type: organization.class),
-                          class: button_classes_danger,
-                          method: :post %></td>
-        </tr>
+<div class="row">
+  <div class="offset-lg-4 col-lg-8">
+    <%= osuny_panel University::Organization.model_name.human(count: 2) do %>
+      <%= simple_form_for :association, class_name: 'association' do |f| %>
+        <%= f.input :name,
+                    label: false,
+                    as: :autocomplete,
+                    url: search_admin_university_organizations_path(website_id: nil),
+                    placeholder: t("university.organization.search"),
+                    input_html: {
+                      data: {
+                        type: 'University::Organization',
+                        target: connect_admin_communication_website_page_path(@page)
+                      }
+                    }
+                    %>
       <% end %>
-    </tbody>
-  </table>
-  <%= paginate @organizations %>
-<% end %>
+      <div class="row g-3">
+        <% @organizations.each do |organization| %>
+          <div class="col-6 col-lg-4 col-xxl-3">
+            <div class="<%= osuny_card_classes %>">
+              <%= render 'admin/university/organizations/thumbnail', organization: organization %>
+              <div class="card-body">
+                <%= osuny_published_localized organization %>
+                <%= osuny_link_localized  organization,
+                                          admin_university_organization_path(organization) %>
+              </div>
+              <div class="card-footer text-end">
+                <%= link_to t('admin.communication.website.pages.special_pages.organization.disconnect'),
+                            disconnect_admin_communication_website_page_path(@page, object_id: organization.id, object_type: organization.class),
+                            class: button_classes_danger,
+                            method: :post %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <%= paginate @organizations %>
+    <% end %>
+  </div>
+</div>
