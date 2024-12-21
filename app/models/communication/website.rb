@@ -48,7 +48,7 @@
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
-  self.filter_attributes += [:access_token]
+  self.filter_attributes += [:access_token, :deuxfleurs_secret_access_key]
 
   include Favoritable
   include Filterable

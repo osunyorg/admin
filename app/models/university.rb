@@ -39,7 +39,7 @@
 #  fk_rails_a8022b1c3f  (default_language_id => languages.id)
 #
 class University < ApplicationRecord
-  self.filter_attributes += [:sso_cert]
+  self.filter_attributes += [:sso_cert, :default_github_access_token]
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Filterable
