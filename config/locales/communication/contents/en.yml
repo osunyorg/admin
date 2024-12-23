@@ -524,6 +524,8 @@ en:
                 options:
                   category: A specific category
                   selection: A selection of persons
+              option_contact:
+                label: "With contact information for each person?"
               option_image:
                 label: With a portrait for each person?
               option_link:
@@ -537,7 +539,7 @@ en:
                 description: Each person is presented in majesty, across the full width available, with a large image.
                 label: Large
               list:
-                description: A simple list of people, very similar to a table. 
+                description: A simple list of people, very similar to a table.
                 label: List
           posts:
             description: A list of highlighted news.

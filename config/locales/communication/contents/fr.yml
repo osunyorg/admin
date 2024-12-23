@@ -524,6 +524,8 @@ fr:
                 options:
                   category: Une catégorie spécifique
                   selection: Une sélection de personnes
+              option_contact:
+                label: "Avec les informations de contact de chaque personne\_?"
               option_image:
                 label: "Avec un portrait de chaque personne\_?"
               option_link:
@@ -704,7 +706,7 @@ fr:
                 description: Un lecteur de vidéo intégré dans la page, qui attend un clic pour charger le lecteur de la plateforme externe.
                 label: Lecteur
               button:
-                description: Un bouton qui lance la vidéo en l'affichant par dessus la page en cours, sur un fond sombre. 
+                description: Un bouton qui lance la vidéo en l'affichant par dessus la page en cours, sur un fond sombre.
                 label: Bouton
           volumes:
             description: Une sélection de volumes publiés dans la revue scientifique.

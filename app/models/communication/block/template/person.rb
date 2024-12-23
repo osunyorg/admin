@@ -17,6 +17,7 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   has_component :option_image,        :boolean, default: true
   has_component :option_summary,      :boolean, default: true
   has_component :option_link,         :boolean, default: true
+  has_component :option_contact,      :boolean, default: false
 
   def elements
     if alphabetical
