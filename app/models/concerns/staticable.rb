@@ -2,12 +2,18 @@ module Staticable
   extend ActiveSupport::Concern
 
   def hugo(website)
-    @hugo ||= OpenStruct.new(
-      permalink: hugo_permalink_in_website(website),
-      path: hugo_path_in_website(website),
-      file: hugo_file_in_website(website),
-      slug: hugo_slug_in_website(website)
-    )
+    @hugo ||= begin
+      if website.nil?
+        OpenStruct.new(permalink: nil, path: nil, file: nil, slug: nil)
+      else
+        OpenStruct.new(
+          permalink: hugo_permalink_in_website(website),
+          path: hugo_path_in_website(website),
+          file: hugo_file_in_website(website),
+          slug: hugo_slug_in_website(website)
+        )
+      end
+    end
   end
 
   def hugo_ancestors(website)
@@ -40,7 +46,7 @@ module Staticable
 
   # Le permalink tel que mentionné dans les statics, dans la clé `url``
   # Ex: "/agenda/2024-11-27-communs-numerique-et-interet-general/"
-  # Il y a un slash au début et à la fin, et la langue si elle existe 
+  # Il y a un slash au début et à la fin, et la langue si elle existe
   def hugo_permalink_in_website(website)
     "#{current_permalink_in_website(website)&.path}"
   end
