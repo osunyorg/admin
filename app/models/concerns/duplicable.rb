@@ -3,6 +3,7 @@ module Duplicable
 
   def duplicate
     instance = duplicate_instance
+    duplicate_categories_for(instance)
     duplicate_localizations_for(instance)
     instance
   end
@@ -13,6 +14,11 @@ module Duplicable
     instance = self.dup
     instance.save
     instance
+  end
+
+  def duplicate_categories_for(instance)
+    return unless respond_to?(:categories)
+    instance.categories = categories
   end
 
   def duplicate_localizations_for(instance)
