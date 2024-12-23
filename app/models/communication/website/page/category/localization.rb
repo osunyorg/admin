@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: communication_website_post_category_localizations
+# Table name: communication_website_page_category_localizations
 #
 #  id                       :uuid             not null, primary key
-#  featured_image_alt       :string
+#  featured_image_alt       :text
 #  featured_image_credit    :text
 #  meta_description         :text
 #  name                     :string
@@ -14,24 +14,24 @@
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
-#  university_id            :uuid             not null, indexed
+#  language_id              :uuid             indexed
+#  university_id            :uuid             indexed
 #
 # Indexes
 #
-#  idx_on_about_id_6e430d4efc                  (about_id)
-#  idx_on_communication_website_id_0c06c1ae6f  (communication_website_id)
-#  idx_on_language_id_cc5f73e306               (language_id)
-#  idx_on_university_id_fb03a6e3c0             (university_id)
+#  idx_on_about_id_6c76163c36                  (about_id)
+#  idx_on_communication_website_id_f605face95  (communication_website_id)
+#  idx_on_language_id_adc4ce8d8e               (language_id)
+#  idx_on_university_id_2237677b2f             (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_04d5596411  (communication_website_id => communication_websites.id)
-#  fk_rails_49ba67b5ed  (university_id => universities.id)
-#  fk_rails_9edc398287  (about_id => communication_website_post_categories.id)
-#  fk_rails_e1dc625b2e  (language_id => languages.id)
+#  fk_rails_37a52c472a  (communication_website_id => communication_websites.id)
+#  fk_rails_bfcb0cd4b4  (language_id => languages.id)
+#  fk_rails_c523df1672  (university_id => universities.id)
+#  fk_rails_ee39c2fc35  (about_id => communication_website_page_categories.id)
 #
-class Communication::Website::Post::Category::Localization < ApplicationRecord
+class Communication::Website::Page::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
 
   belongs_to :website,
@@ -42,7 +42,7 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
 
   def git_path(website)
     prefix = git_path_content_prefix(website)
-    "#{prefix}posts_categories/#{slug_with_ancestors_slugs}/_index.html"
+    "#{prefix}pages_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   protected

@@ -6,6 +6,11 @@ module Communication::Website::WithAssociatedObjects
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
+    has_many    :page_categories,
+                class_name: "Communication::Website::Page::Category",
+                foreign_key: :communication_website_id,
+                dependent: :destroy
+
     has_many    :permalinks,
                 class_name: "Communication::Website::Permalink",
                 dependent: :destroy
