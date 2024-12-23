@@ -61,7 +61,8 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   def title_link
     return link_to_events_archive if time == 'archive'
     return link_to_category if mode == 'category' && category.present?
-    link_to_events
+    return link_to_events if mode == 'all'
+    nil
   end
 
   def top_link
