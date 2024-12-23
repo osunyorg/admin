@@ -42,7 +42,29 @@ class Communication::Block::Template::Project < Communication::Block::Template::
     selected_projects
   end
 
+  def top_link
+    return link_to_category if mode == 'category' && category.present?
+    return link_to_special_page if mode == 'all'
+    nil
+  end
+
   protected
+
+  def link_to_category
+    category_l10n = category.localization_for(block.language)
+    permalink_for(category_l10n)
+  end
+
+  def link_to_special_page
+    special_page_l10n = special_page.localization_for(block.language)
+    permalink_for(special_page_l10n)
+  end
+
+  def permalink_for(l10n)
+    return if l10n.nil?
+    hugo = l10n.hugo(website)
+    hugo.permalink
+  end
 
   def base_projects
     block.about&.website
@@ -79,4 +101,7 @@ class Communication::Block::Template::Project < Communication::Block::Template::
     base_projects.find_by(id: id)
   end
 
+  def special_page
+    @special_page ||= website.special_page(Communication::Website::Page::CommunicationPortfolio)
+  end
 end

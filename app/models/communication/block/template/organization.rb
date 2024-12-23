@@ -55,7 +55,23 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
     organization_ids
   end
 
+  def top_link
+    return unless mode == 'category' && category.present?
+    link_to_category
+  end
+
   protected
+
+  def link_to_category
+    category_l10n = category.localization_for(block.language)
+    permalink_for(category_l10n)
+  end
+
+  def permalink_for(l10n)
+    return if l10n.nil?
+    hugo = l10n.hugo(website)
+    hugo.permalink
+  end
 
   def selected_elements_selection
     elements
