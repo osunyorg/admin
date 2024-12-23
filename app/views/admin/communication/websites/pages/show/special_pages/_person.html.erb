@@ -1,33 +1,50 @@
 <%
 @people = @page.explicitly_connected_people.ordered(current_language).page params[:page]
 %>
-<%= osuny_panel University::Person.model_name.human(count: 2) do %>
-  <%= simple_form_for :association, class_name: 'association' do |f| %>
-    <%= f.input :name,
-                label: false,
-                as: :autocomplete,
-                url: search_admin_university_people_path(website_id: nil),
-                placeholder: t("university.person.search"),
-                input_html: {
-                  data: {
-                    type: 'University::Person',
-                    target: connect_admin_communication_website_page_path(@page)
-                  }
-                }
-                %>
-  <% end %>
-  <table class="<%= table_classes %>">
-    <tbody>
-      <% @people.each do |person| %>
-        <tr>
-          <td><%= osuny_link_localized person, [:admin, person] %></td>
-          <td><%= link_to t('admin.communication.website.pages.special_pages.person.disconnect'),
-                          disconnect_admin_communication_website_page_path(@page, object_id: person.id, object_type: person.class),
-                          class: button_classes_danger,
-                          method: :post %></td>
-        </tr>
+<div class="row">
+  <div class="offset-lg-4 col-lg-8">
+    <%= osuny_panel University::Person.model_name.human(count: 2) do %>
+      <%= simple_form_for :association, class_name: 'association' do |f| %>
+        <%= f.input :name,
+                    label: false,
+                    as: :autocomplete,
+                    url: search_admin_university_people_path(website_id: nil),
+                    placeholder: t("university.person.search"),
+                    input_html: {
+                      data: {
+                        type: 'University::Person',
+                        target: connect_admin_communication_website_page_path(@page)
+                      }
+                    }
+                    %>
       <% end %>
-    </tbody>
-  </table>
-  <%= paginate @people %>
-<% end %>
+      <div class="row g-3">
+        <% @people.each do |person| %>
+          <div class="col-6 col-lg-4 col-xxl-3">
+            <div class="<%= osuny_card_classes %>">
+              <%= osuny_thumbnail_localized person, large: true %>
+              <div class="card-body">
+                <p class="mb-1">
+                  <%= osuny_published_localized person %>
+                  <%= osuny_link_localized  person,
+                                            admin_university_person_path(person)  %>
+                </p>
+                <p class="small text-muted mb-0">
+                  <%= sanitize person.localization_for(current_language)&.summary.to_s %>
+                </p>
+              </div>
+              <div class="card-footer text-end">
+                <%= link_to t('admin.communication.website.pages.special_pages.person.disconnect'),
+                            disconnect_admin_communication_website_page_path(@page, object_id: person.id, object_type: person.class),
+                            class: button_classes_danger,
+                            method: :post %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <%= paginate @people %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

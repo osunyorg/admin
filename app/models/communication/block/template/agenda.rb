@@ -21,7 +21,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   ]
   has_component :category_id, :agenda_category
   has_component :description, :rich_text
-  has_component :quantity, :number, options: 3
+  has_component :quantity, :number, default: 3
   has_component :time, :option, options: AUTHORIZED_SCOPES
   has_component :no_event_message, :string
 
@@ -61,7 +61,8 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   def title_link
     return link_to_events_archive if time == 'archive'
     return link_to_category if mode == 'category' && category.present?
-    link_to_events
+    return link_to_events if mode == 'all'
+    nil
   end
 
   def top_link

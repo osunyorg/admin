@@ -8,6 +8,8 @@ module Contentful
               as: :about,
               class_name: 'Communication::Block',
               dependent: :destroy
+
+    accepts_nested_attributes_for :blocks, allow_destroy: true
   end
 
   def contents

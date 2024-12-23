@@ -1,4 +1,4 @@
-class Communication::Block::Component::PersonCategory < Communication::Block::Component::Base
+class Communication::Block::Component::PersonCategory < Communication::Block::Component::BaseReference
 
   def categories
     university.person_categories

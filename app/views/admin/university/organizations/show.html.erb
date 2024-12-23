@@ -53,29 +53,33 @@
 
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 
-<%= osuny_panel t('university.organization.employees') do %>
-  <div class="row g-2 mb-3">
-    <% @organization.experiences.ordered.each do |experience| %>
-      <%
-        person = experience.person
-        path = admin_university_person_path(person)
-      %>
-      <div>
-        <div class="<%= osuny_card_classes(horizontal: true) %>">
-          <%= osuny_thumbnail_localized person %>
-          <div class="card-body">
-            <%= osuny_link_localized person, path %>
+<div class="row">
+  <div class="offset-lg-4">
+    <%= osuny_panel t('university.organization.employees') do %>
+      <div class="row g-2 mb-3">
+        <% @organization.experiences.ordered.each do |experience| %>
+          <%
+            person = experience.person
+            path = admin_university_person_path(person)
+          %>
+          <div>
+            <div class="<%= osuny_card_classes(horizontal: true) %>">
+              <%= osuny_thumbnail_localized person %>
+              <div class="card-body">
+                <%= osuny_link_localized person, path %>
+              </div>
+              <div class="card-footer small text-muted">
+                <%= "#{experience.from_year} - #{experience.to_year.present? ? experience.to_year : t('today')}" %>
+              </div>
+            </div>
           </div>
-          <div class="card-footer small text-muted">
-            <%= "#{experience.from_year} - #{experience.to_year.present? ? experience.to_year : t('today')}" %>
-          </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-<% end if @organization.experiences.any? %>
+    <% end if @organization.experiences.any? %>
 
-<%= render 'admin/application/connections/list', about: @organization %>
+    <%= render 'admin/application/connections/list', about: @organization %>
+  </div>
+</div>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @organization %>

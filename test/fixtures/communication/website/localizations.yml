@@ -1,6 +1,7 @@
 website_with_github_fr:
   name: Site with github french
   published: true
+  published_at: 2024-11-29T16:07:24.232+01:00
   about: website_with_github
   language: fr
   university: default_university
@@ -8,6 +9,7 @@ website_with_github_fr:
 website_with_gitlab_fr:
   name: Site with gitlab french
   published: true
+  published_at: 2024-11-29T16:07:24.232+01:00
   about: website_with_gitlab
   language: fr
   university: default_university
@@ -15,6 +17,7 @@ website_with_gitlab_fr:
 website_with_gitlab_en:
   name: Site with gitlab english
   published: true
+  published_at: 2024-11-29T16:07:24.232+01:00
   about: website_with_gitlab
   language: en
   university: default_university

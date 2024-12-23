@@ -1,4 +1,4 @@
-class Communication::Block::Component::Project < Communication::Block::Component::Base
+class Communication::Block::Component::Project < Communication::Block::Component::BaseReference
 
   def project
     return unless website

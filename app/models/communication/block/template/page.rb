@@ -44,6 +44,11 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
     page_l10n.try(:summary)
   end
 
+  def top_link
+    return if page_l10n.nil?
+    page_l10n.hugo(website).permalink
+  end
+
   protected
 
   def page_l10n
