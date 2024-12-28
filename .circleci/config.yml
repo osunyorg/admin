@@ -48,7 +48,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            bundle config set path 'vendor/bundle'`
+            bundle config set path 'vendor/bundle'
             bundle install --jobs=4 --retry=3
 
       # Install yarn dependencies
