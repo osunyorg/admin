@@ -1,5 +1,17 @@
 class Communication::Website::Page::Accessibility < Communication::Website::Page
 
+  def draftable?
+    false
+  end
+
+  def is_listed_among_children?
+    false
+  end
+
+  def default_menu_identifier
+    'legal'
+  end
+
   TEMPLATE_BLOCKS = [
     {
       title: 'Déclaration d\'accessibilité',
@@ -82,16 +94,4 @@ class Communication::Website::Page::Accessibility < Communication::Website::Page
       }
     }
   ]
-
-  def draftable?
-    false
-  end
-
-  def is_listed_among_children?
-    false
-  end
-
-  def default_menu_identifier
-    'legal'
-  end
 end
