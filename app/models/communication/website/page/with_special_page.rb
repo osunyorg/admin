@@ -91,6 +91,10 @@ module Communication::Website::Page::WithSpecialPage
     nil
   end
 
+  def has_template_blocks?
+    self.class.const_defined?('TEMPLATE_BLOCKS')
+  end
+
   def default_menu_identifier
     'primary'
   end
