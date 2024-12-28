@@ -96,6 +96,7 @@ module Communication::Website::Page::WithSpecialPage
   end
 
   def generate_from_template(l10n)
+    l10n.generate_blocks self.class::TEMPLATE_BLOCKS
   end
 
   def create_missing_localizations!

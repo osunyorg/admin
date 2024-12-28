@@ -33,7 +33,24 @@ module Contentful
     blocks.template_title.published.many?
   end
 
-  def generate_block(kind, title: nil, data: {})
-    blocks.create(university: university, template_kind: kind, title: title, data: data.to_json)
+  def generate_blocks(template_blocks)
+    template_blocks.each { |hash| generate_block(hash) }
+  end
+
+  protected
+
+  def generate_block(hash)
+    hash[:university] = university
+    hash[:published] = true unless hash.has_key?(:published)
+    prepare_template_block_data!(hash)
+    blocks.create(hash)
+  end
+
+  def prepare_template_block_data!(hash)
+    data = hash.has_key?(:data) ? hash[:data] : {}
+    data = data.to_json
+    data = data.gsub('{website}', website.to_s)
+    data = data.gsub('{website.url}', website.url)
+    hash[:data] = data
   end
 end

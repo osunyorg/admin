@@ -1,16 +1,39 @@
 class Communication::Website::Page::LegalTerm < Communication::Website::Page
 
-  DEFAULT_CONTENT = [
+  TEMPLATE_BLOCKS = [
     {
       title: 'Direction de publication',
       template_kind: :title
     },
     {
-      template_kind: :chapter,
+      template_kind: :contact,
       data: {
-        text: '<p>[Prénom Nom]<br>[Adresse postale]<br>[Adresse email]</p>'
+        name: '[Prénom Nom]',
+        address: '[Adresse postale]',
+        city: '[Ville]',
+        zipcode: '[Code postal]',
+        country: 'FRANCE',
+        emails: [
+          '[Adresse email]'
+        ]
       }
-    }
+    },
+    {
+      title: 'Hébergement',
+      template_kind: :title
+    },
+    {
+      template_kind: :contact,
+      data: {
+        name: 'Deuxfleurs',
+        address: '16 rue de la Convention',
+        information: 'RDC - Appt. 1',
+        city: 'Lille',
+        zipcode: '59800',
+        country: 'FRANCE',
+        url: 'https://deuxfleurs.fr'
+      }
+    },
   ]
 
   def draftable?
