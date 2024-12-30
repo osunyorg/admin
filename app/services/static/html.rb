@@ -47,11 +47,11 @@ class Static::Html < Static::Default
     end
   end
 
-  # Each external link needs a <span class="sr-only"> - lien externe</span> in it
+  # Each external link needs a <span class="sr-only">(lien externe)</span> in it
   # https://github.com/osunyorg/admin/issues/2151
   def add_html_tags_to_external_links!
     hint = I18n.t('html.external_link', locale: locale)
-    span = "<span class=\"sr-only\"> - #{hint}</span>"
+    span = " <span class=\"sr-only\">(#{hint})</span>"
     @doc.css('a[target=_blank]').each do |link|
       link << span
     end
