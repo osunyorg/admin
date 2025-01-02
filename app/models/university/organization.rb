@@ -34,6 +34,7 @@ class University::Organization < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
+  include Searchable
   include WithCountry
   include WithGeolocation
   include WithKind
