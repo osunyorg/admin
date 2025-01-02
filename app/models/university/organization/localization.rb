@@ -11,6 +11,7 @@
 #  long_name             :string
 #  mastodon              :string
 #  meta_description      :text
+#  migration_identifier  :string
 #  name                  :string
 #  slug                  :string
 #  summary               :text
@@ -46,6 +47,7 @@ class University::Organization::Localization < ApplicationRecord
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
+  include WithOpenApi
   include WithUniversity
 
   has_summernote :summary

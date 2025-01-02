@@ -1,4 +1,1 @@
-json.array! @posts.each do |post|
-  json.id post.id
-  json.title post.title
-end
+json.partial! "api/osuny/communication/websites/posts/post", collection: @posts, as: :post

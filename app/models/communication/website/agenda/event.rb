@@ -38,6 +38,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Searchable
   include Localizable
   include WithMenuItemTarget
+  include WithOpenApi
   include WithTime
   include WithTree
   include WithUniversity

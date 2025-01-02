@@ -1,0 +1,5 @@
+default_app:
+  name: Test API App
+  token: Yjw7TIGYUcPw6QvoHeoYMKquIwMHTEBhR0ThKYTo
+  token_was_displayed: true
+  university: default_university

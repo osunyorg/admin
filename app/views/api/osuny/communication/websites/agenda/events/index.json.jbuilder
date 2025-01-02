@@ -1,0 +1,1 @@
+json.partial! "api/osuny/communication/websites/agenda/events/event", collection: @events, as: :event

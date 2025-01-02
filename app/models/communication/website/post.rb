@@ -28,6 +28,7 @@ class Communication::Website::Post < ApplicationRecord
   include Searchable
   include Localizable
   include WithMenuItemTarget
+  include WithOpenApi
   include WithUniversity
 
   has_and_belongs_to_many :authors,

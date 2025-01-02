@@ -39,7 +39,7 @@ class Server::WebsitesController < Server::ApplicationController
   end
 
   def analyse
-    Git::OrphanAndLayoutAnalyzer.new(@website).launch
+    @website.analyse_repository!
     redirect_back fallback_location: server_website_path(@website),
                   notice: t('admin.communication.website.git_file.analysis.launched')
   end

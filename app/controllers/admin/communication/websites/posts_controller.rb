@@ -44,10 +44,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def new
-    if current_user.person.present?
-      current_user.person.update_column(:is_author, true)
-      @post.authors << current_user.person
-    end
+    set_current_person_as_author_of(@post)
     @categories = categories
     breadcrumb
   end
@@ -88,7 +85,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def duplicate
-    redirect_to [:admin, @post.duplicate],
+    duplicate_post = @post.duplicate
+    set_current_person_as_author_of(duplicate_post)
+    redirect_to [:admin, duplicate_post],
                 notice: t('admin.successfully_duplicated_html', model: @post.to_s_in(current_language))
   end
 
@@ -125,5 +124,11 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def categories
     @website.post_categories
             .ordered
+  end
+
+  def set_current_person_as_author_of(post)
+    return unless current_user.person.present?
+    current_user.person.update_column(:is_author, true)
+    post.authors << current_user.person
   end
 end

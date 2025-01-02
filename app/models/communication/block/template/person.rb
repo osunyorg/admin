@@ -1,6 +1,11 @@
 class Communication::Block::Template::Person < Communication::Block::Template::Base
 
   has_elements
+  has_layouts [
+    :grid,
+    :list,
+    :large
+  ]
   has_component :mode, :option, options: [
     :selection,
     :category
@@ -12,6 +17,7 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   has_component :option_image,        :boolean, default: true
   has_component :option_summary,      :boolean, default: true
   has_component :option_link,         :boolean, default: true
+  has_component :option_contact,      :boolean, default: false
 
   def elements
     if alphabetical
@@ -47,7 +53,23 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
     person_ids
   end
 
+  def top_link
+    return unless mode == 'category' && category.present?
+    link_to_category
+  end
+
   protected
+
+  def link_to_category
+    category_l10n = category.localization_for(block.language)
+    permalink_for(category_l10n)
+  end
+
+  def permalink_for(l10n)
+    return if l10n.nil?
+    hugo = l10n.hugo(website)
+    hugo.permalink
+  end
 
   def selected_elements_selection
     elements

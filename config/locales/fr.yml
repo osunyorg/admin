@@ -1,50 +1,50 @@
 fr:
   accessibility:
-    label: Accessibilité
-    errors:
-      zero: Félicitations, aucun problème d'accessibilité détecté !
-      one: '1 erreur'
-      other: '%{count} erreurs'
-    status:
-      true: Accessible
-      false: Non accessible
-      warnings: À vérifier
-    warnings:
-      one: '1 information utile'
-      other: '%{count} informations utiles'
-    commons:
-      alt:
-        empty:
-          title: Texte alternatif vide
-          text_html: Vous avez une image, mais le texte alternatif est vide. C'est tout à fait pertinent s'il n'y a aucune information significative dans l'image. En revanche, si l'image contient des informations utiles, il est nécessaire de les indiquer en texte.
     blocks:
       components:
       templates:
         embed:
           title_missing:
-            title: Pas de titre de cadre
             text_html: L'intégration HTML n'a pas de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle la vidéo, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter une balise <b>title</b> explicite à votre iframe.
+            title: Pas de titre de cadre
           transcription_missing:
-            title: Pas de transcription
             text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
+            title: Pas de transcription
         links:
           alt_title_missing:
-            title: Pas de titre alternatif du lien
             text_html: Le titre alternatif du lien est vide. C'est tout à fait pertinent si le titre du lien seul permet de comprendre la fonction et la destination, comme expliqué dans le <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#6" target="_blank">critère 6.1 du RGAA</a>. Dans le cas contraire, merci d'ajouter un titre alternatif à votre lien.
+            title: Pas de titre alternatif du lien
         sound:
           title_missing:
-            title: Pas de titre
             text_html: Ni le bloc ni le fichier audio n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle l'enregistrement, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter un titre à l'enregistrement.
+            title: Pas de titre
           transcription_missing:
-            title: Pas de transcription
             text_html: L'enregistrement n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
+            title: Pas de transcription
         video:
           title_missing:
-            title: Pas de titre
             text_html: Ni le bloc ni la vidéo n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle la vidéo, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter un titre à la vidéo.
+            title: Pas de titre
           transcription_missing:
-            title: Pas de transcription
             text_html: La vidéo n'est pas accompagnée d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
+            title: Pas de transcription
+    commons:
+      alt:
+        empty:
+          text_html: Vous avez une image, mais le texte alternatif est vide. C'est tout à fait pertinent s'il n'y a aucune information significative dans l'image. En revanche, si l'image contient des informations utiles, il est nécessaire de les indiquer en texte.
+          title: Texte alternatif vide
+    errors:
+      one: '1 erreur'
+      other: '%{count} erreurs'
+      zero: Félicitations, aucun problème d'accessibilité détecté !
+    label: Accessibilité
+    status:
+      false: Non accessible
+      true: Accessible
+      warnings: À vérifier
+    warnings:
+      one: '1 information utile'
+      other: '%{count} informations utiles'
   activerecord:
     attributes:
       emergency_message:
@@ -72,8 +72,8 @@ fr:
         first_name: Prénom
         language: Langue préférée
         last_name: Nom
-        person: Personne
         mobile_phone: Téléphone portable
+        person: Personne
         picture: Photo de profil
         picture_url: Url de la photo de profil
         programs_to_manage: Formation(s) gérée(s)
@@ -121,15 +121,15 @@ fr:
     advanced_settings: Réglages avancés
     attachment_not_available: Impossible d'accéder à l'élément
     chronicles:
-      title: Chroniques
       read_more: En savoir plus
+      title: Chroniques
     dashboard: Tableau de bord
     directory: Annuaire
     duplicate: Dupliquer
     elements:
-      zero: Aucun élément
       one: 1 élément
       other: "%{count} éléments"
+      zero: Aucun élément
     footer:
       signature: Osuny, un commun numérique d’intérêt général
     i18n:
@@ -137,24 +137,17 @@ fr:
       switch_to: basculer en %{choices}
     infos: Informations
     inheritance:
-      sentence_without_link: Valeur héritée
       sentence_html: Valeur héritée de %{link}
+      sentence_without_link: Valeur héritée
       status: Valeur héritée
     meta_description:
       hint: Texte simple, dédié au à l'optimisation pour les moteurs de recherche (Search Engine Optimization, SEO).
       label: Description pour les moteurs de recherche (meta)
+    password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     pending_tasks:
       tasks: Tâches en cours de traitement
       text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."
       what_is_it: Qu'est-ce que c'est ?
-    password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
-    search:
-      buttons:
-        close: Fermer
-        search: Rechercher...
-      label: Rechercher...
-      no_results: Aucun résultat
-      placeholder: Rechercher...
     seo: SEO
     subnav:
       settings: Réglages
@@ -166,8 +159,8 @@ fr:
     successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
     summary:
-      label: Résumé
       hint: Un texte court, comme un chapô pour un article. Ne mettez pas tout le contenu ici, pour ça, il y a les blocs !
+      label: Résumé
     translation:
       button: Traduire avec LibreTranslate
       done: Traduction effectuée ! Merci de relire avant d'enregistrer.
@@ -192,6 +185,81 @@ fr:
     slug: Slug
     title: Catégories
   confirm: Confirmer
+  contact_details:
+    emails:
+      email:
+        hint: ''
+        label: Email
+    phone_numbers:
+      phone:
+        hint: ''
+        label: Téléphone
+      phone_mobile:
+        hint: ''
+        label: Téléphone mobile
+      phone_personal:
+        hint: ''
+        label: Téléphone personnel
+      phone_professional:
+        hint: ''
+        label: Téléphone professionnel
+    postal_address:
+      address:
+        hint: 'Ce champ est utilisé pour géolocaliser. Ex: 3 rue de la Poste'
+        label: Adresse
+      address_additional:
+        hint: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
+        label: Complément d'adresse
+      address_name:
+        hint: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
+        label: Nom de l'adresse
+      city:
+        hint: ''
+        label: Ville
+      country:
+        hint: ''
+        label: Pays
+      zipcode:
+        hint: ''
+        label: Code postal
+    social_networks:
+      facebook:
+        hint: ''
+        label: Facebook (privatif, Meta)
+      github:
+        hint: ''
+        label: Github
+      instagram:
+        hint: ''
+        label: Instagram (privatif, Meta)
+      linkedin:
+        hint: ''
+        label: LinkedIn (privatif, Microsoft)
+      mastodon:
+        hint: ''
+        label: Mastodon (libre)
+      peertube:
+        hint: ''
+        label: Peertube (libre)
+      tiktok:
+        hint: ''
+        label: TikTok (privatif)
+      twitter:
+        hint: ''
+        label: X (privatif)
+      vimeo:
+        hint: ''
+        label: Vimeo (privatif)
+      x:
+        hint: ''
+        label: X (privatif)
+      youtube:
+        hint: ''
+        label: Youtube (privatif, Google)
+    websites:
+      website:
+        hint: ''
+        label: Site Web
   content: Contenu
   cookies_consent_choice: Choix en matière de cookies
   cookies_policy: Politique de cookies
@@ -204,6 +272,9 @@ fr:
       full: "%A %-d %B %Y"
   delete: Supprimer
   devise:
+    confirmations:
+      new:
+        title: Confirmation de compte
     failure:
       invalid: "Email ou mot de passe incorrect."
       not_found_in_database: "Email ou mot de passe incorrect."
@@ -215,11 +286,21 @@ fr:
     omniauth_callbacks:
       failure: "Échec de l'authentification."
     passwords:
+      edit:
+        new: Changement de mot de passe
+        title: Changement de mot de passe
       new:
         send_me_reset_password_instructions: Réinitialiser mon mot de passe
+        title: Mot de passe oublié
     registrations:
+      edit:
+        title: Modification de votre compte
+      new:
+        title: "Inscription sur %{title}"
       signed_up: "Bienvenue ! Vous vous êtes bien enregistré(e). Vous avez reçu un e-mail contenant un lien de confirmation. En l'absence de confirmation, votre compte cessera de fonctionner après 1 jour. Si vous n'avez pas reçu cet email pensez à vérifier votre dossier spam ou cliquez sur le bouton \"je n'ai pas reçu l'email de confirmation\" de l'écran d'identification."
     sessions:
+      new:
+        title: "Bienvenue sur %{title}"
       signed_in: ''
     shared:
       links:
@@ -227,94 +308,26 @@ fr:
     two_factor_authentication:
       admin_locked_html: Ce compte utilisateur est actuellement <i>verrouillé</i>.
       admin_locked_mfa_html: Ce compte utilisateur est actuellement <i>verrouillé</i> à cause de tentatives de MFA excessives.
-      admin_unlock_in_html: Il se débloquera automatiquement dans <i>%{distance}</i>.
       admin_unlock: Le débloquer !
+      admin_unlock_in_html: Il se débloquera automatiquement dans <i>%{distance}</i>.
       attempt_failed: "Code invalide"
       code_has_been_sent: "Un code d'authentification vient de vous être envoyé."
       enter_code_direct_otp_email_html: "Pour assurer la sécurité de votre connexion, nous vous envoyons un code à 6 chiffres, à usage unique, sur votre mail %{mail}. Entrez ce code ci-dessous."
       enter_code_direct_otp_mobile_phone_html: "Pour assurer la sécurité de votre connexion, nous vous envoyons un code à 6 chiffres, à usage unique, sur votre mobile %{phone}. Entrez ce code ci-dessous."
       enter_code_totp: "Pour assurer la sécurité de votre connexion, nous nous appuyons sur votre application d'authentification. Entrez ci-dessous le code à usage unique qu'elle vous indique."
       help: "Si vous rencontrez un problème, vous pouvez..."
-      max_login_attempts_reached: "Votre compte a été bloqué pour des raisons de sécurité.<br />Veuillez contacter un administrateur."
+      max_login_attempts_reached:
+        message_html: "Votre compte a été bloqué pour des raisons de sécurité.<br />Veuillez contacter un administrateur."
+        title: Maximum d'essais atteint
       resend_code: "Renvoyer le code"
       send_code_instead: "Envoyez-moi plutôt un code"
       send_email_code: 'Envoyer le code par email'
+      show:
+        title: Authentification multi-facteur
       success: ""
-  contact_details:
-    emails:
-      email:
-        label: Email
-        hint: ''
-    phone_numbers:
-      phone:
-        label: Téléphone
-        hint: ''
-      phone_mobile:
-        label: Téléphone mobile
-        hint: ''
-      phone_professional:
-        label: Téléphone professionnel
-        hint: ''
-      phone_personal:
-        label: Téléphone personnel
-        hint: ''
-    postal_address:
-      address_name:
-        label: Nom de l'adresse
-        hint: 'Ce champ est ignoré dans la géolocalisation. Ex: Hôtel du Département'
-      address:
-        label: Adresse
-        hint: 'Ce champ est utilisé pour géolocaliser. Ex: 3 rue de la Poste'
-      address_additional:
-        label: Complément d'adresse
-        hint: 'Ce champ est ignoré dans la géolocalisation. Ex: Bureau 508'
-      zipcode:
-        label: Code postal
-        hint: ''
-      city:
-        label: Ville
-        hint: ''
-      country:
-        label: Pays
-        hint: ''
-    social_networks:
-      facebook:
-        label: Facebook (privatif, Meta)
-        hint: ''
-      github:
-        label: Github
-        hint: ''
-      instagram:
-        label: Instagram (privatif, Meta)
-        hint: ''
-      linkedin:
-        label: LinkedIn (privatif, Microsoft)
-        hint: ''
-      mastodon:
-        label: Mastodon (libre)
-        hint: ''
-      peertube:
-        label: Peertube (libre)
-        hint: ''
-      tiktok:
-        label: TikTok (privatif)
-        hint: ''
-      twitter:
-        label: X (privatif)
-        hint: ''
-      vimeo:
-        label: Vimeo (privatif)
-        hint: ''
-      x:
-        label: X (privatif)
-        hint: ''
-      youtube:
-        label: Youtube (privatif, Google)
-        hint: ''
-    websites:
-      website:
-        label: Site Web
-        hint: ''
+    unlocks:
+      new:
+        title: Déblocage de compte
   download: Télécharger
   download_with_size: Télécharger (%{size})
   edit: Modifier
@@ -327,14 +340,14 @@ fr:
   export: Exporter (xlsx)
   false: Non
   featured_image:
-    title: Image
     alt:
-      label: Texte alternatif
       hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
+      label: Texte alternatif
     credit:
-      label: Crédit
       hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
+      label: Crédit
     remove: Supprimer l'image
+    title: Image
   file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
   file_hint_without_formats: "%{filesize} max."
   filters:
@@ -352,13 +365,14 @@ fr:
       submit: Chercher
     title: Rechercher et filtrer
   folder:
+    close: Fermer le dossier
     empty: Le dossier est vide
     open: Ouvrir le dossier
-    close: Fermer le dossier
   hello: "Bonjour %{name} !"
   home: Accueil
   html:
     external_link: lien externe
+  import_btn: Importer
   imports:
     deleted_user: Utilisateur supprimé
     error_msg: "Ligne %{line} : %{error}"
@@ -369,7 +383,6 @@ fr:
     number_of_lines: "Nombre de lignes dans le fichier :"
     status: "Statut :"
     still_pending: "Votre import est toujours en cours de traitement. Vous recevrez un email dès qu'il est prêt."
-  import_btn: Importer
   inactivity_alert: "Il semble que vous soyez resté sur la page un peu trop longtemps. Pouvez-vous ré-essayer ?"
   internationalization:
     label: Internationalisation
@@ -396,11 +409,11 @@ fr:
       import:
         subject_with_errors: Votre import a bien été traité mais comporte des erreurs
         subject_without_errors: Votre import a bien été traité
+        text_error_msg: "Ligne %{line} : %{error}"
+        text_errors_title: "Des erreurs sont survenues :"
         text_line_1_html: Votre import a bien été traité.
         text_line_2_html: "Vous pouvez voir le détail de l'import en cliquant <a href=\"%{url}\">ici</a>."
         text_line_3_html: "Nombre de lignes traitées : %{number}."
-        text_error_msg: "Ligne %{line} : %{error}"
-        text_errors_title: "Des erreurs sont survenues :"
       low_sms_credits:
         body_1_html: "Attention, vos crédits SMS sont bas : %{credits} crédits restants !"
         body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour recharger le compte."
@@ -425,13 +438,21 @@ fr:
   move: Déplacer
   open: Ouvrir
   organize: Organiser
+  photo_import:
+    next: Images suivantes
+    nothing: Aucun résultat pour cette recherche
+    open: Chercher une image
+    placeholder: Tapez votre recherche
+    previous: Images précédentes
+    search: Chercher
+    title: Recherche d'image
   please_confirm: Est-ce que vous confirmez ?
   preview:
     button: Prévisualiser
-    title: Prévisualisation
+    desktop: Ordinateur
     mobile: Mobile
     tablet: Tablette
-    desktop: Ordinateur
+    title: Prévisualisation
   privacy_policy: Politique de confidentialité
   privacy_policy_url: https://www.osuny.org/politique-de-confidentialite/
   properties:
@@ -444,11 +465,12 @@ fr:
   remove: Retirer
   reset: Réinitialiser
   save: Enregistrer
-  shared_image:
-    title: Image de partage
   search: Recherche
   select_language: Sélectionnez une langue
   seo: SEO
+  shared_image:
+    title: Image de partage
+  show: Voir
   simple_form:
     error_notification:
       default_message: "Les erreurs ci-dessous empêchent la validation :"
@@ -469,8 +491,7 @@ fr:
         language: "Sélectionnez une langue"
         person: "Sélectionnez une personne"
   simple_form_password_with_hints:
-      test_chars: "%{min_length} caractères min."
-  show: Voir
+    test_chars: "%{min_length} caractères min."
   slug_error: ne peut contenir que des lettres minuscules, des chiffres et des traits d'union.
   sms_code: "%{code} est votre code d'authentification sur %{context} (valide %{duration})"
   static: Fichier statique
@@ -487,23 +508,15 @@ fr:
   user:
     favorites:
       add: Ajouter aux favoris
-      remove: Enlever des favoris
       none:
         in_university: Vous n'avez pas encore de favoris, n'hésitez pas à ajouter les sites Web, extranets ou revues scientifiques auxquels vous accédez fréquemment !
         not_in_university: Vous n'avez pas encore de favoris, n'hésitez pas à ajouter les sites Web ou extranets auxquels vous accédez fréquemment !
-  photo_import:
-    next: Images suivantes
-    nothing: Aucun résultat pour cette recherche
-    open: Chercher une image
-    placeholder: Tapez votre recherche
-    previous: Images précédentes
-    search: Chercher
-    title: Recherche d'image
+      remove: Enlever des favoris
   validate: Valider
   views:
     pagination:
       first: "Premier"
       last: "Dernier"
-      previous: "Précédent"
       next: "Suivant"
+      previous: "Précédent"
       truncate: "&hellip;"
