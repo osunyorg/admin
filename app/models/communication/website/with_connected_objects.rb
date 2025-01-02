@@ -26,6 +26,7 @@ module Communication::Website::WithConnectedObjects
     sync_with_git_safely
     destroy_obsolete_git_files_safely
     get_current_theme_version!
+    analyse_repository!
     screenshot!
   end
 
