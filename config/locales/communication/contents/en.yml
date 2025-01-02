@@ -524,11 +524,23 @@ en:
                 options:
                   category: A specific category
                   selection: A selection of persons
+              option_contact:
+                label: "With contact information for each person?"
               option_image:
                 label: With a portrait for each person?
               option_link:
                 label: Clickable link to person's page
               options: Display options
+            layouts:
+              grid:
+                description: As a grid, left to right and top to bottom.
+                label: Grid
+              large:
+                description: Each person is presented in majesty, across the full width available, with a large image.
+                label: Large
+              list:
+                description: A simple list of people, very similar to a table.
+                label: List
           posts:
             description: A list of highlighted news.
             edit:
