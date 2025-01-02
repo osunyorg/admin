@@ -1,5 +1,5 @@
 class Admin::Communication::Websites::GitAnalysisController < Admin::Communication::Websites::ApplicationController
-  # Ce n'est pas une ressource nested comme dependencies, 
+  # Ce n'est pas une ressource nested comme dependencies,
   # donc on doit charger explicitement pour utiliser id et pas website_id
   load_and_authorize_resource :website,
                               id_param: :id,
@@ -15,8 +15,8 @@ class Admin::Communication::Websites::GitAnalysisController < Admin::Communicati
   end
 
   def launch
-    Git::OrphanAndLayoutAnalyzer.new(@website).launch
-    redirect_back fallback_location: admin_communication_website_path(@website), 
+    @website.analyse_repository!
+    redirect_back fallback_location: admin_communication_website_path(@website),
                   notice: t('admin.communication.website.git_file.analysis.launched')
   end
 end

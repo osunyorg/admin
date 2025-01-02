@@ -1,50 +1,50 @@
 en:
   accessibility:
-    label: Accessibility
-    errors:
-      zero: Congratulations, no accessibility problem detected!
-      one: '1 error'
-      other: '%{count} errors'
-    status:
-      true: Accessible
-      false: Not accessible
-      warnings: Needs checking
-    warnings:
-      one: '1 insight'
-      other: '%{count} insights'
-    commons:
-      alt:
-        empty:
-          title: Empty alternative text
-          text_html: You have an image with an empty alternative text. It might be completely fine if the image contains no significant data. On the contrary, if there are some important things in the image, it must be typed in the alternative text.
     blocks:
       components:
       templates:
         embed:
           title_missing:
-            title: No frame title
             text_html: The HTML embedding has not title. This will prevent blind people from knowing what the video is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the iframe.
+            title: No frame title
           transcription_missing:
-            title: No transcription
             text_html: The HTML iframe has no text transcription for blind people, for people with low bandwidth or no javascript enabled. Please add a text transcription.
+            title: No transcription
         links:
           alt_title_missing:
-            title: No alternative title
             text_html: The link has no alternative title. It might be completely fine if the link title alone allows to understand the function and the destination, as mentioned in <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#6" target="_blank">criterion 6.1 of RGAA</a>. On the contrary, please add an alternative title to the link.
+            title: No alternative title
         sound:
           title_missing:
-            title: No title
             text_html: Neither the block, neither the recording have a title. It will prevent blind people from knowing what the recording is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the recording.
+            title: No title
           transcription_missing:
-            title: No transcription
             text_html: The recording has no text transcription for blind people, or for users with a low bitrate connection who could not read the recording properly. Please add a text transcription.
+            title: No transcription
         video:
           title_missing:
-            title: No title
             text_html: Neither the block, neither the video have a title. It will prevent blind people from knowing what the video is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the video.
+            title: No title
           transcription_missing:
-            title: No transcription
             text_html: The video has no text transcription for blind people, or for users with a low bitrate connection who could not read the video properly. Please add a text transcription.
+            title: No transcription
+    commons:
+      alt:
+        empty:
+          text_html: You have an image with an empty alternative text. It might be completely fine if the image contains no significant data. On the contrary, if there are some important things in the image, it must be typed in the alternative text.
+          title: Empty alternative text
+    errors:
+      one: '1 error'
+      other: '%{count} errors'
+      zero: Congratulations, no accessibility problem detected!
+    label: Accessibility
+    status:
+      false: Not accessible
+      true: Accessible
+      warnings: Needs checking
+    warnings:
+      one: '1 insight'
+      other: '%{count} insights'
   activerecord:
     attributes:
       emergency_message:
@@ -72,8 +72,8 @@ en:
         first_name: First name
         language: Favourite language
         last_name: Last name
-        person: Person
         mobile_phone: Mobile phone
+        person: Person
         picture: Profile picture
         picture_url: Profile picture Url
         programs_to_manage: Program(s) managed
@@ -121,15 +121,15 @@ en:
     advanced_settings: Advanced settings
     attachment_not_available: Attachment not available
     chronicles:
-      title: Chronicles
       read_more: Learn more
+      title: Chronicles
     dashboard: Dashboard
     directory: Directory
     duplicate: Duplicate
     elements:
-      zero: No element
       one: 1 element
       other: "%{count} elements"
+      zero: No element
     footer:
       signature: Osuny, a public interest digital common
     i18n:
@@ -137,17 +137,17 @@ en:
       switch_to: switch to %{choices}
     infos: Informations
     inheritance:
-      sentence_without_link: Value inherited
       sentence_html: Value inherited from %{link}
+      sentence_without_link: Value inherited
       status: Inherited value
     meta_description:
       hint: Plain text without HTML, dedicated to Search Engine Optimization (SEO).
       label: Meta description
+    password_hint: Leave blank if you do not wish to change the password.
     pending_tasks:
       tasks: Background tasks pending
       text_html: "Osuny helps you with digital sufficiency.<br><br>The background execution of most tasks on the Osuny platform helps to reduce the carbon footprint of digital technology, by pre-calculating what can be.<br><br>This can cause a delay before your changes are visible on your websites."
       what_is_it: What is it?
-    password_hint: Leave blank if you do not wish to change the password.
     seo: SEO
     subnav:
       settings: Settings
@@ -159,8 +159,8 @@ en:
     successfully_removed_html: "<i>%{model}</i> was successfully removed."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."
     summary:
-      label: Summary
       hint: A short text, like a heading for an article. Don't write all the content here, there are blocks for that.
+      label: Summary
     translation:
       button: Translate with LibreTranslate
       done: Translation done! Please proof read before you save.
@@ -185,6 +185,81 @@ en:
     slug: Slug
     title: Catégories
   confirm: Confirm
+  contact_details:
+    emails:
+      email:
+        hint: ''
+        label: Email
+    phone_numbers:
+      phone:
+        hint: ''
+        label: Phone
+      phone_mobile:
+        hint: ''
+        label: Mobile phone
+      phone_personal:
+        hint: ''
+        label: Professional phone
+      phone_professional:
+        hint: ''
+        label: Personal phone
+    postal_address:
+      address:
+        hint: 'This field is used for geolocation. Ex: 3 rue de la Poste'
+        label: Address
+      address_additional:
+        hint: 'This field is not used for geolocation. Ex: Bureau 508'
+        label: Additional address
+      address_name:
+        hint: 'This field is not used for geolocation. Ex: Hôtel du Département'
+        label: Address name
+      city:
+        hint: 'This field is used for geolocation. Ex: Cenon'
+        label: City
+      country:
+        hint: 'This field is used for geolocation. Ex: France'
+        label: Country
+      zipcode:
+        hint: 'This field is used for geolocation. Ex: 33150'
+        label: Zipcode
+    social_networks:
+      facebook:
+        hint: ''
+        label: Facebook (private, Meta)
+      github:
+        hint: ''
+        label: Github
+      instagram:
+        hint: ''
+        label: Instagram (private, Meta)
+      linkedin:
+        hint: ''
+        label: LinkedIn (private, Microsoft)
+      mastodon:
+        hint: ''
+        label: Mastodon (free)
+      peertube:
+        hint: ''
+        label: Peertube (free)
+      tiktok:
+        hint: ''
+        label: TikTok (private)
+      twitter:
+        hint: ''
+        label: X (private)
+      vimeo:
+        hint: ''
+        label: Vimeo (private)
+      x:
+        hint: ''
+        label: X (private)
+      youtube:
+        hint: ''
+        label: Youtube (private, Google)
+    websites:
+      website:
+        hint: ''
+        label: Website
   content: Content
   cookies_consent_choice: Cookies consent choice
   cookies_policy: Cookies policy
@@ -197,6 +272,9 @@ en:
       full: "%A %-d %B %Y"
   delete: Delete
   devise:
+    confirmations:
+      new:
+        title: Account confirmation
     failure:
       invalid: "Invalid email or password."
       not_found_in_database: "Invalid email or password."
@@ -208,11 +286,21 @@ en:
     omniauth_callbacks:
       failure: "Failed to sign in."
     passwords:
+      edit:
+        new: Password change
+        title: Password change
       new:
         send_me_reset_password_instructions: Reset my password
+        title: Password forgotton
     registrations:
+      edit:
+        title: Account edition
+      new:
+        title: "Register on %{title}"
       signed_up: "Welcome! You have signed up successfully. You have received an e-mail with a confirmation link. If you don't confirm, your account will stop working after 1 day. If you did not received the email check your spam folder or click on the button \"I did not received the confirmation email\" on the authentication screen."
     sessions:
+      new:
+        title: "Welcome to %{title}"
       signed_in: ''
     shared:
       links:
@@ -220,94 +308,26 @@ en:
     two_factor_authentication:
       admin_locked_html: This user account is currently <i>locked</i>.
       admin_locked_mfa_html: This user account is currently <i>locked</i> due to too many MFA attempts.
-      admin_unlock_in_html: It will unlock automatically in <i>%{distance}</i>.
       admin_unlock: Unlock it now!
+      admin_unlock_in_html: It will unlock automatically in <i>%{distance}</i>.
       attempt_failed: "Invalid Code"
       code_has_been_sent: "Your authentication code has been sent."
       enter_code_direct_otp_email_html: "To ensure a secure connection, we will send you a 6-digit, one-time code to your e-mail address %{mail}. Enter the code below."
       enter_code_direct_otp_mobile_phone_html: "To ensure a secure connection, we will send you a 6-digit, one-time code to your mobile phone %{phone}. Enter the code below."
       enter_code_totp: "Enter the code from your authentication application"
       help: "If you have a problem, you can..."
-      max_login_attempts_reached: "You're account has been locked for security reasons.<br />Please contact an administrator."
+      max_login_attempts_reached:
+        message_html: "You're account has been locked for security reasons.<br />Please contact an administrator."
+        title: Maximum login attempts reached
       resend_code: "Resend Code"
       send_code_instead: "Send me a code instead"
       send_email_code: 'Send me a code via email'
+      show:
+        title: Multi-factor authentication
       success: ""
-  contact_details:
-    emails:
-      email:
-        label: Email
-        hint: ''
-    phone_numbers:
-      phone:
-        label: Phone
-        hint: ''
-      phone_mobile:
-        label: Mobile phone
-        hint: ''
-      phone_professional:
-        label: Personal phone
-        hint: ''
-      phone_personal:
-        label: Professional phone
-        hint: ''
-    postal_address:
-      address_name:
-        label: Address name
-        hint: 'This field is not used for geolocation. Ex: Hôtel du Département'
-      address: 
-        label: Address
-        hint: 'This field is used for geolocation. Ex: 3 rue de la Poste'
-      address_additional: 
-        label: Additional address
-        hint: 'This field is not used for geolocation. Ex: Bureau 508'
-      zipcode: 
-        label: Zipcode
-        hint: 'This field is used for geolocation. Ex: 33150'
-      city:
-        label: City
-        hint: 'This field is used for geolocation. Ex: Cenon'
-      country: 
-        label: Country
-        hint: 'This field is used for geolocation. Ex: France'
-    social_networks:
-      facebook:
-        label: Facebook (private, Meta)
-        hint: ''
-      github:
-        label: Github
-        hint: ''
-      instagram:
-        label: Instagram (private, Meta)
-        hint: ''
-      linkedin:
-        label: LinkedIn (private, Microsoft)
-        hint: ''
-      mastodon:
-        label: Mastodon (free)
-        hint: ''
-      peertube:
-        label: Peertube (free)
-        hint: ''
-      tiktok:
-        label: TikTok (private)
-        hint: ''
-      twitter:
-        label: X (private)
-        hint: ''
-      vimeo:
-        label: Vimeo (private)
-        hint: ''
-      x:
-        label: X (private)
-        hint: ''
-      youtube:
-        label: Youtube (private, Google)
-        hint: ''
-    websites:
-      website: 
-        label: Website
-        hint: ''
+    unlocks:
+      new:
+        title: Account unlocking
   download: Download
   download_with_size: Download (%{size})
   edit: Edit
@@ -320,14 +340,14 @@ en:
   export: Export (xlsx)
   false: No
   featured_image:
-    title: Image
     alt:
-      label: Alternative text
       hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
+      label: Alternative text
     credit:
-      label: Credit
       hint: The credit must be present according to copyright or copyleft licenses.
+      label: Credit
     remove: Remove image
+    title: Image
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"
   filters:
@@ -343,14 +363,16 @@ en:
       expand: Search and filter
       reset: Reset
       submit: Search and filter
+    title: Search and filter
   folder:
+    close: Close folder
     empty: Folder is empty
     open: Open folder
-    close: Close folder
   hello: "Hello %{name}!"
   home: Home
   html:
     external_link: external link
+  import_btn: Import
   imports:
     deleted_user: Deleted user
     error_msg: "Line %{line}: %{error}"
@@ -361,7 +383,6 @@ en:
     number_of_lines: "Number of lines in the file:"
     status: "Status:"
     still_pending: "Your import has not been processed yet. You will receive an email as soon as it's ready."
-  import_btn: Import
   inactivity_alert: "It seems you have been away a little bit too long. Could you please retry?"
   internationalization:
     label: Internationalization
@@ -388,11 +409,11 @@ en:
       import:
         subject_with_errors: Your import has been processed with errors
         subject_without_errors: Your import has been processed
+        text_error_msg: "Line %{line}: %{error}"
+        text_errors_title: "Some errors have occured:"
         text_line_1_html: Your import has been processed.
         text_line_2_html: "You can check the result by clicking <a href=\"%{url}\">here</a>."
         text_line_3_html: "Number of lines in the file: %{number}."
-        text_error_msg: "Line %{line}: %{error}"
-        text_errors_title: "Some errors have occured:"
       low_sms_credits:
         body_1_html: "Warning, your SMS credits are low: %{credits} credits remaining!"
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to refull."
@@ -409,21 +430,29 @@ en:
   manage: Manage
   menu:
     admin: Admin
-    profile: Profile
     edit_profile: Edit my profile
+    profile: Profile
     server_admin: Server administration
     sign_out: Log out
   metadata: Metadata
   move: Move
   open: Open
   organize: Organize
+  photo_import:
+    next: Next image
+    nothing: No results for this search
+    open: Search an image
+    placeholder: Type your search here
+    previous: Previous images
+    search: Search
+    title: Photo search
   please_confirm: Are you sure?
   preview:
     button: Preview
-    title: Preview
+    desktop: Desktop
     mobile: Mobile
     tablet: Tablet
-    desktop: Desktop
+    title: Preview
   privacy_policy: Privacy policy
   privacy_policy_url: https://www.osuny.org/politique-de-confidentialite/
   properties:
@@ -436,11 +465,12 @@ en:
   remove: Remove
   reset: Reset
   save: Save
-  shared_image:
-    title: Shared image
   search: Search
   select_language: Select language
   seo: SEO
+  shared_image:
+    title: Shared image
+  show: Show
   simple_form:
     error_notification:
       default_message: "Please review the problems below:"
@@ -461,8 +491,7 @@ en:
         language: "Select a language"
         person: "Select a person"
   simple_form_password_with_hints:
-      test_chars: "%{min_length} characters min."
-  show: Show
+    test_chars: "%{min_length} characters min."
   slug_error: can only contain downcase letters, numbers, and dashes.
   sms_code: "%{code} is your authentication code on %{context} (valid %{duration})"
   static: Static file
@@ -479,23 +508,15 @@ en:
   user:
     favorites:
       add: Add to favorites
-      remove: Remove from favorites
       none:
         in_university: You have no favorites yet. Feel free to add the websites, extranets or journals you often work on!
         not_in_university: You have no favorites yet. Feel free to add the websites or extranets you often work on!
-  photo_import:
-    next: Next image
-    nothing: No results for this search
-    open: Search an image
-    placeholder: Type your search here
-    previous: Previous images
-    search: Search
-    title: Photo search
+      remove: Remove from favorites
   validate: Validate
   views:
     pagination:
       first: "First"
       last: "Last"
-      previous: "Previous"
       next: "Next"
+      previous: "Previous"
       truncate: "&hellip;"

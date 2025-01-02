@@ -6,8 +6,8 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   include Admin::Localizable
 
   before_action :load_localization,
-                  :redirect_if_not_localized,
-                  only: [:show, :edit, :update, :static, :publish, :preview, :generate_from_template]
+                :redirect_if_not_localized,
+                only: [:show, :edit, :update, :static, :publish, :preview, :generate_from_template]
 
   def index
     @homepage = @website.special_page(Communication::Website::Page::Home)

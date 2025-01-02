@@ -90,4 +90,9 @@ module Communication::Website::WithGitRepository
     git_repository.update_theme_version!
   end
 
+  def analyse_repository!
+    return unless should_sync_with_git?
+    Git::OrphanAndLayoutAnalyzer.new(self).launch
+  end
+
 end

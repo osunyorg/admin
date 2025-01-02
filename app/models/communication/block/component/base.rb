@@ -4,6 +4,18 @@ class Communication::Block::Component::Base
 
   attr_reader :property, :template
 
+  def self.openapi_property_type
+    :string
+  end
+
+  def self.openapi_property_format
+    nil
+  end
+
+  def self.openapi_property_additional_properties
+    {}
+  end
+
   def initialize(property, template, options: nil, default: nil)
     @property = property.to_s
     @template = template

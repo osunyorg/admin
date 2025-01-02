@@ -3,5 +3,15 @@ default_organization:
   university: default_university
 
 noesya:
+  migration_identifier: test-noesya
+  kind: company
   active: true
+  email: contact@noesya.coop
+  address: 15 Rue des Bouviers
+  zipcode: 33800
+  city: Bordeaux
+  latitude: 44.832899
+  longitude: -0.565434
+  nic: "00031"
+  siren: "902773050"
   university: default_university

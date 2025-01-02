@@ -2,27 +2,26 @@
 #
 # Table name: university_organizations
 #
-#  id            :uuid             not null, primary key
-#  active        :boolean          default(TRUE)
-#  address       :string
-#  city          :string
-#  country       :string
-#  email         :string
-#  kind          :integer          default("company")
-#  latitude      :float
-#  longitude     :float
-#  nic           :string
-#  phone         :string
-#  siren         :string
-#  slug          :string           indexed
-#  zipcode       :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  university_id :uuid             not null, indexed
+#  id                   :uuid             not null, primary key
+#  active               :boolean          default(TRUE)
+#  address              :string
+#  city                 :string
+#  country              :string
+#  email                :string
+#  kind                 :integer          default("company")
+#  latitude             :float
+#  longitude            :float
+#  migration_identifier :string
+#  nic                  :string
+#  phone                :string
+#  siren                :string
+#  zipcode              :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  university_id        :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_university_organizations_on_slug           (slug)
 #  index_university_organizations_on_university_id  (university_id)
 #
 # Foreign Keys
@@ -37,6 +36,8 @@ class University::Organization < ApplicationRecord
   include Sanitizable
   include WithCountry
   include WithGeolocation
+  include WithKind
+  include WithOpenApi
   include WithUniversity
 
   attr_accessor :created_from_extranet
@@ -48,7 +49,6 @@ class University::Organization < ApplicationRecord
            class_name: 'University::Person::Experience',
            dependent: :destroy
 
-  scope :for_kind, -> (kind, language = nil) { where(kind: kind) }
   scope :for_category, -> (category_id, language = nil) { joins(:categories).where(university_organization_categories: { id: category_id }).distinct }
   scope :for_search_term, -> (term, language) {
     joins(:localizations)
@@ -76,12 +76,6 @@ class University::Organization < ApplicationRecord
       unaccent(university_organizations.siren) ILIKE unaccent(:term) OR
       unaccent(university_organization_localizations.name) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
-  }
-
-  enum :kind, {
-    company: 10,
-    non_profit: 20,
-    government: 30
   }
 
   def dependencies

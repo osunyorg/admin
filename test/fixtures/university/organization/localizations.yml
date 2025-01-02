@@ -5,7 +5,14 @@ default_organization_fr:
   university: default_university
 
 noesya_fr:
+  migration_identifier: test-noesya-fr
   name: noesya
+  long_name: coopérative noesya
+  meta_description: La coopérative noesya s’engage pour un numérique de grande qualité, éco-conçu, esthétique, éthique et durable.
+  address_name: Siège social
+  linkedin: https://www.linkedin.com/company/noesyacoop
+  url: https://www.noesya.coop
+  slug: noesya
   about: noesya
   language: fr
   university: default_university

@@ -7,12 +7,23 @@ namespace :api do
   namespace :osuny, path: 'osuny/v1', defaults: { format: :json } do
     namespace :communication do
       resources :websites, only: [:index, :show] do
-        resources :events, controller: 'websites/events', only: [:index, :show, :create, :update]
-        resources :pages, controller: 'websites/pages', only: [:index, :show, :create, :update]
-        resources :posts, controller: 'websites/posts', only: [:index, :show, :create, :update]
-        resources :projects, controller: 'websites/projects', only: [:index, :show, :create, :update]
+        namespace :agenda do
+          resources :events, controller: '/api/osuny/communication/websites/agenda/events', only: [:index, :show, :create, :update, :destroy] do
+            post :upsert, on: :collection
+          end
+        end
+        resources :pages, controller: '/api/osuny/communication/websites/pages', only: [:index, :show, :create, :update]
+        resources :posts, controller: '/api/osuny/communication/websites/posts', only: [:index, :show, :create, :update, :destroy] do
+          post :upsert, on: :collection
+        end
+        resources :projects, controller: '/api/osuny/communication/websites/projects', only: [:index, :show, :create, :update]
       end
-      root to: '/api/osuny/communication#index'#, controller: '/api/osuny/communication'
+      root to: '/api/osuny/communication#index'
+    end
+    namespace :university do
+      resources :organizations, controller: '/api/osuny/university/organizations', only: [:index, :show, :create, :update, :destroy] do
+        post :upsert, on: :collection
+      end
     end
     root to: '/api/osuny#index'
   end
