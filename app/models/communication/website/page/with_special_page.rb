@@ -91,11 +91,16 @@ module Communication::Website::Page::WithSpecialPage
     nil
   end
 
+  def has_template_blocks?
+    self.class.const_defined?('TEMPLATE_BLOCKS')
+  end
+
   def default_menu_identifier
     'primary'
   end
 
   def generate_from_template(l10n)
+    l10n.generate_blocks self.class::TEMPLATE_BLOCKS
   end
 
   def create_missing_localizations!
