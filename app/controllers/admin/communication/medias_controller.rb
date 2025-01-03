@@ -13,7 +13,6 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
   end
 
   def show
-    byebug
     breadcrumb
   end
 

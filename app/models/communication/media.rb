@@ -8,6 +8,7 @@
 #  digest        :string
 #  filename      :string
 #  origin        :integer          default("content"), not null
+#  variant       :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  blob_id       :uuid             not null, indexed
@@ -30,31 +31,31 @@ class Communication::Media < ApplicationRecord
   include WithUniversity
 
   enum :origin, {
-    variant: 0,   # variant (ignored)
     content: 1,   # file uploaded through content (default)
     library: 2,   # file uploaded through media library
     unsplash: 11, # file imported from Unsplash
     pexels: 12    # file imported from Pexels
   }, prefix: :origin
 
-  belongs_to  :blob,
-              class_name: 'ActiveStorage::Blob'
-
+  belongs_to              :blob,
+                          class_name: 'ActiveStorage::Blob'
   has_and_belongs_to_many :blobs,
                           class_name: 'ActiveStorage::Blob',
                           foreign_key: :communication_media_id,
                           association_foreign_key: :active_storage_blob_id,
                           join_table: :active_storage_blobs_communication_medias,
                           uniq: true
+  has_many                :attachments, 
+                          through: :blobs,
+                          class_name: 'ActiveStorage::Attachment'
 
   after_create :create_original_localization
 
-  scope :without_variants, -> { where.not(origin: :variant) }
-  default_scope { without_variants }
+  default_scope { where(variant: false) }
 
-  def self.add_blob(blob)
+  def self.create_from_blob(blob)
     digest = compute_digest(blob)
-    puts "add blob #{blob.id} [#{digest}]"
+    puts "create blob #{blob.id} [#{digest}]"
     media = Communication::Media.unscoped.where(
         university: blob.university_id,
         digest: digest,
@@ -66,19 +67,18 @@ class Communication::Media < ApplicationRecord
       media.byte_size = blob.byte_size
     end
     media.blobs << blob
+    media
   end
 
   def self.discard_variant(variant)
-    # blob = variant.blob
-    # digest = compute_digest(blob)
-    # puts "discard variant #{variant.id} for blob #{blob.id} [#{digest}]"
-    # Communication::Media.unscoped
-    #                     .find_by(digest: digest)
-    #                     .disable!
+    media = create_from_blob(variant.image.blob)
+    # Le media est-il le bon ?
+    media.discard!
+    puts "discard variant #{media.blob.id} [#{media.digest}]"
   end
 
-  def disable!
-    update_column :origin, :variant
+  def discard!
+    update_column :variant, true
   end
 
   protected

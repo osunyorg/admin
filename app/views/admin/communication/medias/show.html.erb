@@ -1,0 +1,24 @@
+<% content_for :title, @l10n %>
+
+<div class="row">
+  <div class="col-lg-4">
+    <% if @media.blob.representable? %>
+      <%= kamifusen_tag @media.blob, class: 'img-fluid' %>
+    <% end %>
+  </div>
+  <div class="col-lg-4">
+    Blobs
+    <ul>
+      <% @media.blobs.each do |blob| %>
+        <li><%= blob %></li>
+      <% end %>
+    </ul>
+
+    Attachments
+    <ul>
+      <% @media.attachments.each do |attachment| %>
+        <li><%= attachment.record %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

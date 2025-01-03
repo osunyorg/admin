@@ -6,6 +6,7 @@ class CreateCommunicationMedias < ActiveRecord::Migration[7.2]
       t.integer :origin, default: 1, null: false
       t.string :content_type
       t.bigint :byte_size
+      t.boolean :variant, default: false
       t.references :blob, null: false, foreign_key: {to_table: :active_storage_blobs}, type: :uuid
       t.references :university, null: false, foreign_key: true, type: :uuid
 

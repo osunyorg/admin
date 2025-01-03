@@ -367,6 +367,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_03_143237) do
     t.integer "origin", default: 1, null: false
     t.string "content_type"
     t.bigint "byte_size"
+    t.boolean "variant", default: false
     t.uuid "blob_id", null: false
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false

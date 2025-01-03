@@ -60,7 +60,7 @@ Rails.application.config.to_prepare do
     extend ActiveSupport::Concern
 
     included do
-      after_create :sync_with_media_library
+      after_create_commit :sync_with_media_library
     end
 
     protected
@@ -76,13 +76,13 @@ Rails.application.config.to_prepare do
     extend ActiveSupport::Concern
 
     included do
-      after_create :sync_with_media_library
+      after_create_commit :sync_with_media_library
     end
 
     protected
 
     def sync_with_media_library
-      Communication::Media::DiscardVariantJob.perform_later(self)
+      Communication::Media.discard_variant(self)
     end
   end
 
