@@ -3,18 +3,31 @@
 <div class="row">
   <div class="col-lg-4">
     <% if @media.blob.representable? %>
-      <%= kamifusen_tag @media.blob, class: 'img-fluid' %>
+      <%= kamifusen_tag @media.blob, class: 'img-fluid mb-3' %>
     <% end %>
+
+    <%= link_to 'Télécharger',
+              download_medium_path(signed_id: @media.blob.signed_id),
+              class: button_classes %>
   </div>
   <div class="col-lg-4">
-    Blobs
+    <%= osuny_label Communication::Media.human_attribute_name(:filename) %>
+    <p><%= @media.filename %></p>
+
+    <%= osuny_label Communication::Media.human_attribute_name(:content_type) %>
+    <p><%= @media.content_type %></p>
+
+    <%= osuny_label Communication::Media.human_attribute_name(:byte_size) %>
+    <p><%= number_to_human_size @media.byte_size %></p>
+
+    <%= osuny_label 'Blobs' %>
     <ul>
       <% @media.blobs.each do |blob| %>
         <li><%= blob %></li>
       <% end %>
     </ul>
 
-    Attachments
+    <%= osuny_label 'Attachments' %>
     <ul>
       <% @media.attachments.each do |attachment| %>
         <li><%= attachment.record %></li>
@@ -22,3 +35,7 @@
     </ul>
   </div>
 </div>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @media %>
+<% end %>

@@ -35,7 +35,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
   end
 
   def update
-    if @media.update(extranet_params)
+    if @media.update(media_params)
       redirect_to [:admin, @media], notice: t('admin.successfully_updated_html', model: @media.to_s_in(current_language))
     else
       breadcrumb
@@ -48,4 +48,18 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
     @media.destroy
     redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @media.to_s_in(current_language))
   end
+
+  protected
+
+  def media_params
+    params.require(:communication_media)
+          .permit(
+            :collection_id, category_ids: [],
+            localizations_attributes: [
+              :id, :name, :alt, :credit, :language_id
+            ]
+          )
+          .merge(university_id: current_university.id)
+  end
+
 end

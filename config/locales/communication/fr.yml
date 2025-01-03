@@ -82,6 +82,10 @@ fr:
         quantity: Quantité d'actualités
       communication/extranet/post/category/localization:
         name: Nom
+      communication/media:
+        filename: Nom du fichier original
+        content_type: Type de contenu
+        byte_size: Poids
       communication/media/localization:
         name: Nom
       communication/website:
