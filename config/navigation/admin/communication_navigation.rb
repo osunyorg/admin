@@ -20,5 +20,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :subnav_extranets,
                   Communication::Extranet.model_name.human(count: 2),
                   admin_communication_extranets_path
+    primary.item  :subnav_medias,
+                  Communication::Media.model_name.human(count: 2),
+                  admin_communication_medias_path
   end
 end
