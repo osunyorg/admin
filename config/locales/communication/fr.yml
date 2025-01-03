@@ -82,6 +82,8 @@ fr:
         quantity: Quantité d'actualités
       communication/extranet/post/category/localization:
         name: Nom
+      communication/media/localization:
+        name: Nom
       communication/website:
         about: Sujet du site
         about_: Site indépendant
@@ -277,6 +279,9 @@ fr:
       communication/extranet/post/category:
         one: Catégorie
         other: Catégories
+      communication/media:
+        one: Média
+        other: Médias
       communication/website:
         one: Site Web
         other: Sites Web
@@ -427,6 +432,9 @@ fr:
         extranet:
           description: Espaces d'échanges sécurisés dédiés aux utilisateur·rice·s authentifié·e·s
           description_non_university: Espaces d'échanges sécurisés dédiés aux utilisateur·rice·s authentifié·e·s
+        media:
+          description: Bibliothèque de médias regroupant l'intégralité des fichiers utilisés dans le système
+          description_non_university: Bibliothèque de médias regroupant l'intégralité des fichiers utilisés dans le système
         website:
           description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
           description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_03_143237) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -49,6 +49,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
     t.uuid "university_id"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
     t.index ["university_id"], name: "index_active_storage_blobs_on_university_id"
+  end
+
+  create_table "active_storage_blobs_communication_medias", id: false, force: :cascade do |t|
+    t.uuid "active_storage_blob_id", null: false
+    t.uuid "communication_media_id", null: false
+    t.index ["active_storage_blob_id", "communication_media_id"], name: "blob_media"
+    t.index ["communication_media_id", "active_storage_blob_id"], name: "media_blob"
   end
 
   create_table "active_storage_variant_records", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -338,6 +345,34 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["default_language_id"], name: "index_communication_extranets_on_default_language_id"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
+  end
+
+  create_table "communication_media_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.text "alt"
+    t.text "credit"
+    t.uuid "language_id", null: false
+    t.uuid "about_id", null: false
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_media_localizations_on_about_id"
+    t.index ["language_id"], name: "index_communication_media_localizations_on_language_id"
+    t.index ["university_id"], name: "index_communication_media_localizations_on_university_id"
+  end
+
+  create_table "communication_medias", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "filename"
+    t.string "digest"
+    t.integer "origin", default: 1, null: false
+    t.string "content_type"
+    t.bigint "byte_size"
+    t.uuid "blob_id", null: false
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blob_id"], name: "index_communication_medias_on_blob_id"
+    t.index ["university_id"], name: "index_communication_medias_on_university_id"
   end
 
   create_table "communication_website_agenda_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1900,6 +1935,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "languages", column: "default_language_id"
   add_foreign_key "communication_extranets", "universities"
+  add_foreign_key "communication_media_localizations", "communication_medias", column: "about_id"
+  add_foreign_key "communication_media_localizations", "languages"
+  add_foreign_key "communication_media_localizations", "universities"
+  add_foreign_key "communication_medias", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "communication_medias", "universities"
   add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "parent_id"
   add_foreign_key "communication_website_agenda_categories", "communication_websites"
   add_foreign_key "communication_website_agenda_categories", "education_programs", column: "program_id"

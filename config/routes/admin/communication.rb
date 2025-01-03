@@ -175,5 +175,6 @@ namespace :communication do
     end
     resources :jobs, controller: 'extranets/jobs'
   end
+  resources :medias
   root to: 'dashboard#index'
 end
