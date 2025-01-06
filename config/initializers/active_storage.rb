@@ -55,36 +55,4 @@ Rails.application.config.to_prepare do
   end
 
   ActiveStorage::Blob.include ActiveStorageGitPathStatic
-
-  module ActiveStorageMediaLibraryBlob
-    extend ActiveSupport::Concern
-
-    included do
-      after_create_commit :sync_with_media_library
-    end
-
-    protected
-
-    def sync_with_media_library
-      Communication::Media::AddBlobJob.perform_later(self)
-    end
-  end
-
-  ActiveStorage::Blob.include ActiveStorageMediaLibraryBlob
-
-  module ActiveStorageMediaLibraryVariant
-    extend ActiveSupport::Concern
-
-    included do
-      after_create_commit :sync_with_media_library
-    end
-
-    protected
-
-    def sync_with_media_library
-      Communication::Media.discard_variant(self)
-    end
-  end
-
-  ActiveStorage::VariantRecord.include ActiveStorageMediaLibraryVariant
 end

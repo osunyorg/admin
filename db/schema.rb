@@ -51,13 +51,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_03_143237) do
     t.index ["university_id"], name: "index_active_storage_blobs_on_university_id"
   end
 
-  create_table "active_storage_blobs_communication_medias", id: false, force: :cascade do |t|
-    t.uuid "active_storage_blob_id", null: false
-    t.uuid "communication_media_id", null: false
-    t.index ["active_storage_blob_id", "communication_media_id"], name: "blob_media"
-    t.index ["communication_media_id", "active_storage_blob_id"], name: "media_blob"
-  end
-
   create_table "active_storage_variant_records", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
@@ -347,6 +340,20 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_03_143237) do
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
   end
 
+  create_table "communication_media_contexts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "communication_media_id", null: false
+    t.uuid "active_storage_blob_id", null: false
+    t.string "about_type"
+    t.uuid "about_id"
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_type", "about_id"], name: "index_communication_media_contexts_on_about"
+    t.index ["active_storage_blob_id"], name: "index_communication_media_contexts_on_active_storage_blob_id"
+    t.index ["communication_media_id"], name: "index_communication_media_contexts_on_communication_media_id"
+    t.index ["university_id"], name: "index_communication_media_contexts_on_university_id"
+  end
+
   create_table "communication_media_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "alt"
@@ -362,17 +369,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_03_143237) do
   end
 
   create_table "communication_medias", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "filename"
-    t.string "digest"
     t.integer "origin", default: 1, null: false
-    t.string "content_type"
-    t.bigint "byte_size"
-    t.boolean "variant", default: false
-    t.uuid "blob_id", null: false
+    t.string "original_filename"
+    t.string "original_checksum"
+    t.string "original_content_type"
+    t.bigint "original_byte_size"
+    t.uuid "original_blob_id", null: false
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["blob_id"], name: "index_communication_medias_on_blob_id"
+    t.index ["original_blob_id"], name: "index_communication_medias_on_original_blob_id"
     t.index ["university_id"], name: "index_communication_medias_on_university_id"
   end
 
@@ -1936,10 +1942,13 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_03_143237) do
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "languages", column: "default_language_id"
   add_foreign_key "communication_extranets", "universities"
+  add_foreign_key "communication_media_contexts", "active_storage_blobs"
+  add_foreign_key "communication_media_contexts", "communication_medias"
+  add_foreign_key "communication_media_contexts", "universities"
   add_foreign_key "communication_media_localizations", "communication_medias", column: "about_id"
   add_foreign_key "communication_media_localizations", "languages"
   add_foreign_key "communication_media_localizations", "universities"
-  add_foreign_key "communication_medias", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "communication_medias", "active_storage_blobs", column: "original_blob_id"
   add_foreign_key "communication_medias", "universities"
   add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "parent_id"
   add_foreign_key "communication_website_agenda_categories", "communication_websites"

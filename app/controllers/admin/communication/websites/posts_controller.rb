@@ -72,6 +72,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     if @post.update(post_params)
       load_localization
       @l10n.add_photo_import params[:photo_import]
+      Communication::Media.create_from_blob(@l10n.featured_image.blob, in_context: @l10n)
       @post.sync_with_git
       redirect_to admin_communication_website_post_path(@post),
                   notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))

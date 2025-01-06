@@ -3,7 +3,7 @@ l10n = media.best_localization_for(current_language)
 initials = l10n.initials
 cropped = true
 image_class = 'img-fluid'
-image = media.blob
+image = media.original_blob
 if image.variable?
   if cropped
     image_variant = image.variant(resize_to_fill: [600, 600, gravity: 'center'], quality: 50)

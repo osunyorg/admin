@@ -1,13 +1,12 @@
 class CreateCommunicationMedias < ActiveRecord::Migration[7.2]
   def change
     create_table :communication_medias, id: :uuid do |t|
-      t.string :filename
-      t.string :digest
       t.integer :origin, default: 1, null: false
-      t.string :content_type
-      t.bigint :byte_size
-      t.boolean :variant, default: false
-      t.references :blob, null: false, foreign_key: {to_table: :active_storage_blobs}, type: :uuid
+      t.string :original_filename
+      t.string :original_checksum
+      t.string :original_content_type
+      t.bigint :original_byte_size
+      t.references :original_blob, null: false, foreign_key: {to_table: :active_storage_blobs}, type: :uuid
       t.references :university, null: false, foreign_key: true, type: :uuid
 
       t.timestamps

@@ -1,8 +1,12 @@
 class CreateJoinTableActiveStorageBlobsCommunicationMedias < ActiveRecord::Migration[7.2]
   def change
-    create_join_table :active_storage_blobs, :communication_medias, column_options: {type: :uuid}  do |t|
-      t.index [:active_storage_blob_id, :communication_media_id], name: 'blob_media'
-      t.index [:communication_media_id, :active_storage_blob_id], name: 'media_blob'
+    create_table :communication_media_contexts, id: :uuid  do |t|
+      t.references :communication_media, null: false, foreign_key: true, type: :uuid
+      t.references :active_storage_blob, null: false, foreign_key: true, type: :uuid
+      t.references :about, polymorphic: true, type: :uuid
+      t.references :university, null: false, foreign_key: true, type: :uuid
+
+      t.timestamps
     end
   end
 end

@@ -2,37 +2,38 @@
 
 <div class="row">
   <div class="col-lg-4">
-    <% if @media.blob.representable? %>
-      <%= kamifusen_tag @media.blob, class: 'img-fluid mb-3' %>
+    <% if @media.original_blob.representable? %>
+      <%= kamifusen_tag @media.original_blob, class: 'img-fluid mb-3' %>
     <% end %>
 
     <%= link_to 'Télécharger',
-              download_medium_path(signed_id: @media.blob.signed_id),
+              download_medium_path(signed_id: @media.original_blob.signed_id),
               class: button_classes %>
   </div>
   <div class="col-lg-4">
-    <%= osuny_label Communication::Media.human_attribute_name(:filename) %>
-    <p><%= @media.filename %></p>
+    <%= osuny_label Communication::Media.human_attribute_name(:original_filename) %>
+    <p><%= @media.original_filename %></p>
 
-    <%= osuny_label Communication::Media.human_attribute_name(:content_type) %>
-    <p><%= @media.content_type %></p>
+    <%= osuny_label Communication::Media.human_attribute_name(:original_content_type) %>
+    <p><%= @media.original_content_type %></p>
 
-    <%= osuny_label Communication::Media.human_attribute_name(:byte_size) %>
-    <p><%= number_to_human_size @media.byte_size %></p>
+    <%= osuny_label Communication::Media.human_attribute_name(:original_byte_size) %>
+    <p><%= number_to_human_size @media.original_byte_size %></p>
 
-    <%= osuny_label 'Blobs' %>
+    <%= osuny_label Communication::Media::Context.model_name.human(count: 2) %>
     <ul>
-      <% @media.blobs.each do |blob| %>
-        <li><%= blob %></li>
+      <% @media.contexts.each do |context| %>
+        <li><%= context.about.to_s %> (<%= context.about_type %>)</li>
       <% end %>
     </ul>
-
-    <%= osuny_label 'Attachments' %>
-    <ul>
-      <% @media.attachments.each do |attachment| %>
-        <li><%= attachment.record %></li>
-      <% end %>
-    </ul>
+  </div>
+  <div class="col-lg-4">
+    <%= osuny_label Communication::Media::Localization.human_attribute_name(:name) %>
+    <p><%= @l10n.name %></p>
+    <%= osuny_label Communication::Media::Localization.human_attribute_name(:alt) %>
+    <p><%= @l10n.alt %></p>
+    <%= osuny_label Communication::Media::Localization.human_attribute_name(:credit) %>
+    <div><%= sanitize @l10n.credit %></div>
   </div>
 </div>
 

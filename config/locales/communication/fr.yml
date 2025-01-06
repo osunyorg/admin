@@ -83,9 +83,9 @@ fr:
       communication/extranet/post/category/localization:
         name: Nom
       communication/media:
-        filename: Nom du fichier original
-        content_type: Type de contenu
-        byte_size: Poids
+        original_filename: Nom du fichier original
+        original_content_type: Type de contenu
+        original_byte_size: Poids
       communication/media/localization:
         name: Nom
       communication/website:
@@ -286,6 +286,9 @@ fr:
       communication/media:
         one: Média
         other: Médias
+      communication/media/context:
+        one: Contexte
+        other: Contextes
       communication/website:
         one: Site Web
         other: Sites Web
