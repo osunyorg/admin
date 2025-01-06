@@ -12,13 +12,13 @@ SimpleNavigation::Configuration.run do |navigation|
                     controller_name == "dashboard" && action_name == "index" 
                   }
     primary.item  :subnav_alumni,
-                  University::Person::Alumnus.model_name.human(count: 2),
+                  t('administration.description.parts.alumnus.title'),
                   admin_administration_alumni_path
     primary.item  :subnav_locations,
-                  Administration::Location.model_name.human(count: 2),
+                  t('administration.description.parts.location.title'),
                   admin_administration_locations_path
     primary.item  :subnav_qualiopi,
-                  Administration::Qualiopi.model_name.human(count: 2),
+                  t('administration.description.parts.qualiopi.title'),
                   admin_administration_qualiopi_criterions_path,
                   highlights_on: lambda { 
                     controller_name.in?(["indicators", "criterions"])

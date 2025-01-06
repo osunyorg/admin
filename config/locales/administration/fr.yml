@@ -54,8 +54,11 @@ fr:
       source: Code des relations entre le public et l'administration
       parts:
         alumnus:
+          title: Alumni
           description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
         location:
+          title: Campus
           description: Gestion des différents sites (physiques) de formation et de recherche
         qualiopi:
+          title: Qualiopi
           description: Aide à la vérification de la conformité de l'offre de formation avec la norme Qualiopi

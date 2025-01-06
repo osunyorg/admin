@@ -12,16 +12,16 @@ SimpleNavigation::Configuration.run do |navigation|
                     controller_name == "dashboard" && action_name == "index" 
                   }
     primary.item  :subnav_authors,
-                  University::Person::Localization::Author.model_name.human(count: 2),
+                  t('communication.description.parts.author.title'),
                   admin_communication_authors_path
     primary.item  :subnav_websites,
-                  Communication::Website.model_name.human(count: 2),
+                  t('communication.description.parts.website.title'),
                   admin_communication_websites_path
     primary.item  :subnav_extranets,
-                  Communication::Extranet.model_name.human(count: 2),
+                  t('communication.description.parts.extranet.title'),
                   admin_communication_extranets_path
     primary.item  :subnav_medias,
-                  Communication::Media.model_name.human(count: 2),
+                  t('communication.description.parts.media.title'),
                   admin_communication_medias_path
   end
 end

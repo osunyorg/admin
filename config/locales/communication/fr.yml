@@ -429,21 +429,22 @@ fr:
           description: Tout ce qui est lié aux réglages techniques
           label: Technique
   communication:
-    authors:
-      one: Auteur·rice
-      other: Auteur·rice·s
     description:
       parts:
         author:
+          title: Auteur·ices
           description: Personnes écrivant des actualités dans des sites Web ou des Extranets
           description_non_university: Personnes écrivant des actualités dans des sites Web ou des Extranets
         extranet:
-          description: Espaces d'échanges sécurisés dédiés aux utilisateur·rice·s authentifié·e·s
-          description_non_university: Espaces d'échanges sécurisés dédiés aux utilisateur·rice·s authentifié·e·s
+          title: Extranets
+          description: Espaces d'échanges sécurisés dédiés aux utilisateur·rices authentifié·es
+          description_non_university: Espaces d'échanges sécurisés dédiés aux utilisateur·rices authentifié·es
         media:
+          title: Médiathèque
           description: Bibliothèque de médias regroupant l'intégralité des fichiers utilisés dans le système
           description_non_university: Bibliothèque de médias regroupant l'intégralité des fichiers utilisés dans le système
         website:
+          title: Sites Web
           description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
           description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
@@ -456,7 +457,7 @@ fr:
           draft: Brouillon
           planned_on: Publication prévue le %{date}
           published_on: Publiée le %{date}
-    manage_authors: Gérer les auteur·rice·s
+    manage_authors: Gérer les auteur·rices
     number_of_posts: Nombre d'actualités
     summary:
       none: Il n'y a pas encore de résumé
