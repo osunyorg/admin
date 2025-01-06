@@ -4,26 +4,31 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
-    <%= lf.input :name %>
-    <%= lf.input :alt,
-                  label: t('featured_image.alt.label'),
-                  hint: t('featured_image.alt.hint'), 
-                  input_html: { 
-                    data: {
-                      translatable: true
-                    } 
-                  } %>
-    <%= lf.input :credit,
-                  as: :summernote,
-                  label: t('featured_image.credit.label'),
-                  hint: t('featured_image.credit.hint'),
-                  input_html: {
-                    data: {
-                      translatable: true,
-                      'summernote-config' => 'link' 
-                    }
-                  } %>
-
+    <div class="row">
+      <div class="col-lg-6">
+        <%= lf.input :name %>
+      </div>
+      <div class="col-lg-6">
+        <%= lf.input :alt,
+                      label: t('featured_image.alt.label'),
+                      hint: t('featured_image.alt.hint'), 
+                      input_html: { 
+                        data: {
+                          translatable: true
+                        } 
+                      } %>
+        <%= lf.input :credit,
+                      as: :summernote,
+                      label: t('featured_image.credit.label'),
+                      hint: t('featured_image.credit.hint'),
+                      input_html: {
+                        data: {
+                          translatable: true,
+                          'summernote-config' => 'link' 
+                        }
+                      } %>
+      </div>
+    </div>
     <% content_for :action_bar_right do %>
       <%= render 'admin/application/l10n/libre_translate_button', l10n: @l10n %>
       <%= submit f %>
