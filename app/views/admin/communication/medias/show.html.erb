@@ -11,6 +11,9 @@
               class: button_classes %>
   </div>
   <div class="col-lg-4">
+    <%= osuny_label Communication::Media.human_attribute_name(:origin) %>
+    <p><%= @media.origin_i18n %></p>
+
     <%= osuny_label Communication::Media.human_attribute_name(:original_filename) %>
     <p><%= @media.original_filename %></p>
 

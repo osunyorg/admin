@@ -83,6 +83,7 @@ fr:
       communication/extranet/post/category/localization:
         name: Nom
       communication/media:
+        origin: Provenance
         original_filename: Nom du fichier original
         original_content_type: Type de contenu
         original_byte_size: Poids
@@ -287,8 +288,8 @@ fr:
         one: Média
         other: Médias
       communication/media/context:
-        one: Contexte
-        other: Contextes
+        one: Contexte d'utilisation
+        other: Contextes d'utilisation
       communication/website:
         one: Site Web
         other: Sites Web
@@ -558,6 +559,11 @@ fr:
     placeholder: https://...
   enums:
     communication:
+      media:
+        origin:
+          pexels: Photothèque Pexels
+          unsplash: Photothèque Unsplash
+          upload: Envoi direct de fichier
       website:
         menu:
           item:

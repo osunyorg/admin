@@ -30,11 +30,10 @@ class Communication::Media < ApplicationRecord
   include WithUniversity
 
   enum :origin, {
-    content: 1,   # file uploaded through content (default)
-    library: 2,   # file uploaded through media library
+    upload: 1,    # file uploaded (default)
     unsplash: 11, # file imported from Unsplash
     pexels: 12    # file imported from Pexels
-  }, prefix: :origin
+  }, prefix: :from
 
   belongs_to              :original_blob,
                           class_name: 'ActiveStorage::Blob'
@@ -45,13 +44,20 @@ class Communication::Media < ApplicationRecord
                           through: :contexts,
                           source: :active_storage_blob
 
-  after_create :create_original_localization
+  def self.create_from_blob(blob, in_context:, origin: :upload, alt: nil, credit: nil)
+    media = find_or_create_media_from_blob(blob, origin)
+    create_context(media, blob, in_context)
+    find_or_create_media_l10n(media, in_context, alt, credit)
+    media
+  end
 
-  def self.create_from_blob(blob, in_context:, origin: :content)
-    media = Communication::Media.where(
+  protected
+
+  def self.find_or_create_media_from_blob(blob, origin)
+    Communication::Media.where(
         university: blob.university_id,
         original_checksum: blob.checksum,
-      ).first_or_create do |media|
+    ).first_or_create do |media|
       # On creation, we set the original blob, so we can find variants afterwards
       media.origin = origin
       media.original_blob = blob
@@ -59,19 +65,23 @@ class Communication::Media < ApplicationRecord
       media.original_content_type = blob.content_type
       media.original_byte_size = blob.byte_size
     end
+  end
+
+  def self.create_context(media, blob, about)
     media.contexts.where(
-      about: in_context,
+      about: about,
       active_storage_blob: blob,
       university_id: blob.university_id
     ).first_or_create
-    media
   end
 
-  protected
-
-  def create_original_localization
-    l10n = localizations.where(language: university.default_language).first_or_create
-    l10n.name = original_filename
+  def self.find_or_create_media_l10n(media, about, alt, credit)
+    l10n = media.localizations.where(
+      language: about.language
+    ).first_or_initialize
+    l10n.name = File.basename(media.original_filename, ".*").humanize
+    l10n.alt = alt
+    l10n.credit = credit
     l10n.save
   end
 end
