@@ -82,6 +82,13 @@ en:
         quantity: Quantity of posts
       communication/extranet/post/category/localization:
         name: Name
+      communication/media:
+        origin: Origin
+        original_filename: Original filename
+        original_content_type: Content type
+        original_byte_size: Size
+      communication/media/localization:
+        name: Name
       communication/website:
         about: About
         about_: Independent website
@@ -277,6 +284,12 @@ en:
       communication/extranet/post/category:
         one: Category
         other: Categories
+      communication/media:
+        one: Media
+        other: Medias
+      communication/media/context:
+        one: Usage context
+        other: Usage contexts
       communication/website:
         one: Website
         other: Websites
@@ -427,6 +440,9 @@ en:
         extranet:
           description: Secure exchange areas dedicated to authenticated users
           description_non_university: Secure exchange areas dedicated to authenticated users
+        media:
+          description: Media library containing all the files used in the system
+          description_non_university: Media library containing all the files used in the system
         website:
           description: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
           description_non_university: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
@@ -543,6 +559,11 @@ en:
     placeholder: https://...
   enums:
     communication:
+      media:
+        origin:
+          pexels: Pexels photo library
+          unsplash: Unsplash photo library
+          upload: Direct file upload
       website:
         menu:
           item:

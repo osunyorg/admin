@@ -6,7 +6,7 @@
       <%= kamifusen_tag @media.original_blob, class: 'img-fluid mb-3' %>
     <% end %>
 
-    <%= link_to 'Télécharger',
+    <%= link_to t('download'),
               download_medium_path(signed_id: @media.original_blob.signed_id),
               class: button_classes %>
   </div>
