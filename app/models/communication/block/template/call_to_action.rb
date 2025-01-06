@@ -14,7 +14,18 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
   def top_description
     text
   end
-  
+
+  def media_blobs
+    return [] unless image_component.blob.present?
+    [
+      {
+        blob: image_component.blob,
+        alt: alt,
+        credit: credit
+      }
+    ]
+  end
+
   protected
 
   def check_accessibility
