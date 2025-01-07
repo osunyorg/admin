@@ -3,10 +3,12 @@
     aspect-ratio: 1
     background: $color-bg-soft
     display: flex
+    height: 100%
     justify-content: center
-    max-height: 100px
-    max-width: 100px
+    max-height: 70px
+    max-width: 70px
     overflow: hidden
+    width: 100%
     @include media-breakpoint-down(md)
         display: none
     &__initials
@@ -21,7 +23,9 @@
         .osuny__thumbnail__initials
             font-size: pxToRem(60)
     &--uncropped
-        padding: 20%
+        position: relative
+        img
+            margin: 20%
     .organizations-index &
         img
             mix-blend-mode: multiply

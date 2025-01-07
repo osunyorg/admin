@@ -1,0 +1,7 @@
+<%
+# communication/website/post
+key = context.about_type.underscore.remove('/localization')
+# admin/communication/medias/contexts/communication/website/post
+partial = "admin/communication/medias/contexts/#{key}"
+%>
+<%= render partial, about: context.about %>

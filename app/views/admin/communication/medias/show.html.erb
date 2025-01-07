@@ -1,7 +1,7 @@
 <% content_for :title, @l10n %>
 
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-5">
     <% if @media.original_blob.representable? %>
       <%= kamifusen_tag @media.original_blob, class: 'img-fluid mb-3' %>
     <% end %>
@@ -10,7 +10,7 @@
               download_medium_path(signed_id: @media.original_blob.signed_id),
               class: button_classes %>
   </div>
-  <div class="col-lg-4">
+  <div class="offset-lg-1 col-lg-6">
     <%= osuny_label Communication::Media.human_attribute_name(:origin) %>
     <p><%= @media.origin_i18n %></p>
 
@@ -23,21 +23,21 @@
     <%= osuny_label Communication::Media.human_attribute_name(:original_byte_size) %>
     <p><%= number_to_human_size @media.original_byte_size %></p>
 
-    <%= osuny_label Communication::Media::Context.model_name.human(count: 2) %>
-    <ul>
-      <% @media.contexts.each do |context| %>
-        <li><%= context.about.to_s %> (<%= context.about_type %>)</li>
-      <% end %>
-    </ul>
-  </div>
-  <div class="col-lg-4">
     <%= osuny_label Communication::Media::Localization.human_attribute_name(:name) %>
     <p><%= @l10n.name %></p>
-    <%= osuny_label Communication::Media::Localization.human_attribute_name(:alt) %>
-    <p><%= @l10n.alt %></p>
-    <%= osuny_label Communication::Media::Localization.human_attribute_name(:credit) %>
-    <div><%= sanitize @l10n.credit %></div>
+
+    <% if @l10n.alt.present? %>
+      <%= osuny_label Communication::Media::Localization.human_attribute_name(:alt) %>
+      <p><%= @l10n.alt %></p>
+    <% end %>
+
+    <% if @l10n.credit.present? %>
+      <%= osuny_label Communication::Media::Localization.human_attribute_name(:credit) %>
+      <div><%= sanitize @l10n.credit %></div>
+    <% end %>
+    
     <%= render 'admin/application/categories/widget/show', about: @media %>
+    <%= render 'admin/communication/medias/contexts/list', media: @media %>
   </div>
 </div>
 
