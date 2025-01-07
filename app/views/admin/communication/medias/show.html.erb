@@ -37,6 +37,7 @@
     <p><%= @l10n.alt %></p>
     <%= osuny_label Communication::Media::Localization.human_attribute_name(:credit) %>
     <div><%= sanitize @l10n.credit %></div>
+    <%= render 'admin/application/categories/widget/show', about: @media %>
   </div>
 </div>
 

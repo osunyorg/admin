@@ -3,7 +3,7 @@
 # Table name: communication_medias
 #
 #  id                    :uuid             not null, primary key
-#  origin                :integer          default("content"), not null
+#  origin                :integer          default("upload"), not null
 #  original_byte_size    :bigint
 #  original_checksum     :string
 #  original_content_type :string
@@ -43,6 +43,11 @@ class Communication::Media < ApplicationRecord
   has_many                :blobs,
                           through: :contexts,
                           source: :active_storage_blob
+  has_and_belongs_to_many :categories,
+                          class_name: 'Communication::Media::Category',
+                          foreign_key: :communication_media_id,
+                          association_foreign_key: :communication_media_category_id,
+                          join_table: :communication_media_categories_medias
 
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)
@@ -58,6 +63,7 @@ class Communication::Media < ApplicationRecord
   }
 
   def self.create_from_blob(blob, in_context:, origin: :upload, alt: nil, credit: nil)
+    return if blob.nil?
     media = find_or_create_media_from_blob(blob, origin)
     create_context(media, blob, in_context)
     find_or_create_media_l10n(media, in_context, alt, credit)

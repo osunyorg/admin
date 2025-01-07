@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_03_143237) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_07_095405) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -338,6 +338,41 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_03_143237) do
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["default_language_id"], name: "index_communication_extranets_on_default_language_id"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
+  end
+
+  create_table "communication_media_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "is_taxonomy", default: false
+    t.integer "position", default: 0
+    t.uuid "university_id", null: false
+    t.uuid "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_communication_media_categories_on_parent_id"
+    t.index ["university_id"], name: "index_communication_media_categories_on_university_id"
+  end
+
+  create_table "communication_media_categories_medias", id: false, force: :cascade do |t|
+    t.uuid "communication_media_id", null: false
+    t.uuid "communication_media_category_id", null: false
+    t.index ["communication_media_category_id", "communication_media_id"], name: "category_media"
+    t.index ["communication_media_id", "communication_media_category_id"], name: "media_category"
+  end
+
+  create_table "communication_media_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug"
+    t.string "name"
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "summary"
+    t.text "meta_description"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_media_category_localizations_on_about_id"
+    t.index ["language_id"], name: "idx_on_language_id_b744f004d4"
+    t.index ["university_id"], name: "idx_on_university_id_0e75cba3b7"
   end
 
   create_table "communication_media_contexts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1942,6 +1977,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_03_143237) do
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "languages", column: "default_language_id"
   add_foreign_key "communication_extranets", "universities"
+  add_foreign_key "communication_media_categories", "communication_media_categories", column: "parent_id"
+  add_foreign_key "communication_media_categories", "universities"
+  add_foreign_key "communication_media_category_localizations", "communication_media_categories", column: "about_id"
+  add_foreign_key "communication_media_category_localizations", "languages"
+  add_foreign_key "communication_media_category_localizations", "universities"
   add_foreign_key "communication_media_contexts", "active_storage_blobs"
   add_foreign_key "communication_media_contexts", "communication_medias"
   add_foreign_key "communication_media_contexts", "universities"

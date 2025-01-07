@@ -17,6 +17,11 @@ module University::WithCommunication
               dependent: :destroy
     alias_method :medias, :communication_medias
 
+    has_many  :communication_media_categories,
+              class_name: 'Communication::Media::Category',
+              dependent: :destroy
+    alias_method :media_categories, :communication_media_categories
+
     has_many  :communication_websites,
               class_name: 'Communication::Website',
               dependent: :destroy

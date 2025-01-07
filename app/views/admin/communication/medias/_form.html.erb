@@ -7,6 +7,7 @@
     <div class="row">
       <div class="col-lg-6">
         <%= lf.input :name %>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
       </div>
       <div class="col-lg-6">
         <%= lf.input :alt,

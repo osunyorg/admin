@@ -17,10 +17,12 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
   end
 
   def new
+    @categories = categories
     breadcrumb
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb t('admin.subnav.settings')
   end
@@ -29,6 +31,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
     if @media.save
       redirect_to [:admin, @media], notice: t('admin.successfully_created_html', model: @media.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       render :new, status: :unprocessable_entity
     end
@@ -38,6 +41,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
     if @media.update(media_params)
       redirect_to [:admin, @media], notice: t('admin.successfully_updated_html', model: @media.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
       render :edit, status: :unprocessable_entity
@@ -60,6 +64,10 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
             ]
           )
           .merge(university_id: current_university.id)
+  end
+
+  def categories
+    current_university.communication_media_categories.ordered
   end
 
 end

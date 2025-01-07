@@ -287,6 +287,9 @@ fr:
       communication/media:
         one: Média
         other: Médias
+      communication/media/category:
+        one: Catégorie
+        other: Catégories
       communication/media/context:
         one: Contexte d'utilisation
         other: Contextes d'utilisation

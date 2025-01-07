@@ -175,6 +175,17 @@ namespace :communication do
     end
     resources :jobs, controller: 'extranets/jobs'
   end
-  resources :medias
+  resources :medias do
+    collection do
+      resources :categories, controller: '/admin/communication/medias/categories', as: 'media_categories' do
+        collection do
+          post :reorder
+        end
+        member do
+          get :children
+        end
+      end
+    end
+  end
   root to: 'dashboard#index'
 end
