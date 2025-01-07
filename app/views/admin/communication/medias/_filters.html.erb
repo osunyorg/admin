@@ -7,5 +7,12 @@
                       label: t('search')
                       %>
 
-    <% end %>
+    <%= render_filter f,
+                      :select,
+                      :for_origin,
+                      label: Communication::Media.human_attribute_name(:origin),
+                      collection: Communication::Media::origins.keys.map { |r| { to_s: t("enums.communication.media.origin.#{r}"), id: r } }
+                      %>
+
+  <% end %>
 <% end %>

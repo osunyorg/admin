@@ -4,7 +4,7 @@ class Admin::Communication::Medias::ApplicationController < Admin::Communication
 
   def breadcrumb
     super
-    add_breadcrumb Communication::Media.model_name.human(count: 2), admin_communication_medias_path
+    add_breadcrumb t('communication.description.parts.media.title'), admin_communication_medias_path
     breadcrumb_for @media
   end
 end

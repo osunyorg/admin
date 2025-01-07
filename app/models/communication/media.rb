@@ -44,6 +44,19 @@ class Communication::Media < ApplicationRecord
                           through: :contexts,
                           source: :active_storage_blob
 
+  scope :for_search_term, -> (term, language = nil) {
+    joins(:localizations)
+    .where(communication_media_localizations: { language_id: language.id })
+    .where("
+      unaccent(communication_media_localizations.name) ILIKE unaccent(:term) OR
+      unaccent(communication_media_localizations.alt) ILIKE unaccent(:term) OR
+      unaccent(communication_media_localizations.credit) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
+  scope :for_origin, -> (origin, language = nil) {
+    where(origin: origin)
+  }
+
   def self.create_from_blob(blob, in_context:, origin: :upload, alt: nil, credit: nil)
     media = find_or_create_media_from_blob(blob, origin)
     create_context(media, blob, in_context)
