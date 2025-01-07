@@ -46,8 +46,8 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def create
-    @l10n.add_photo_import params[:photo_import]
     if @organization.save
+      @l10n.add_photo_import params[:photo_import]
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_created_html', model: @organization.to_s_in(current_language))
     else

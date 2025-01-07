@@ -26,21 +26,28 @@ module WithFeaturedImage
   end
 
   def add_photo_import(params)
-    photo_import_unsplash(params['unsplash']) if params['unsplash'].present?
-    photo_import_pexels(params['pexels']) if params['pexels'].present?
+    origin = photo_origin(params)
+    case origin
+    when :unsplash
+      photo_import_unsplash(params['unsplash'])
+    when :pexels
+      photo_import_pexels(params['pexels'])
+    end
     Communication::Media.create_from_blob(
       featured_image.blob, 
       in_context: self, 
-      origin: photo_origin(params),
+      origin: origin,
       alt: featured_image_alt,
       credit: featured_image_credit
     )
   end
 
+  protected
+
   def photo_origin(params)
-    if params['unsplash'].present?
+    if params&.dig(:unsplash).present?
       :unsplash
-    elsif params['pexels'].present?
+    elsif params&.dig(:pexels).present?
       :pexels
     else
       :upload
