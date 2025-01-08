@@ -23,12 +23,15 @@ small ||= false
             <% if event_l10n&.subtitle.present? %>
               <br>
               <span class="text-muted">
-                <%= event_l10n.subtitle %>
+                <%= event_l10n.subtitle.truncate(45) %>
               </span>
             <% end %>
           </div>
-          <div class="card-footer text-end text-muted">
-            <%= render 'admin/communication/websites/agenda/events/dates', event: event, l10n: event_l10n %>
+          <div class="card-footer text-end small text-muted">
+            <%= render 'admin/communication/websites/agenda/events/dates',
+                        event: event,
+                        l10n: event_l10n,
+                        detailed: false %>
           </div>
         </div>
       </div>
