@@ -31,6 +31,7 @@ class Ability::Admin < Ability
     can :manage, Education::Cohort, university_id: @user.university_id
     can :manage, Education::Diploma, university_id: @user.university_id
     can :manage, Education::Program, university_id: @user.university_id
+    can :manage, Education::Program::Category, university_id: @user.university_id
     can :manage, Education::School, university_id: @user.university_id
     can :manage, :all_programs # needed to prevent program_manager to access specific global screens
   end
