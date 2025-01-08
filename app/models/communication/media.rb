@@ -68,6 +68,15 @@ class Communication::Media < ApplicationRecord
   scope :for_origin, -> (origin, language = nil) {
     where(origin: origin)
   }
+  scope :for_collection, -> (collection_id, language = nil) {
+    where(collection: collection_id)
+  }
+  scope :for_category, -> (category_id, language = nil) { 
+    joins(:categories)
+      .where(
+        communication_media_categories: { id: category_id }
+      ).distinct
+  }
 
   def self.create_from_blob(blob, in_context:, origin: :upload, alt: nil, credit: nil)
     return if blob.nil?

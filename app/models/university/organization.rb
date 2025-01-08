@@ -49,7 +49,12 @@ class University::Organization < ApplicationRecord
            class_name: 'University::Person::Experience',
            dependent: :destroy
 
-  scope :for_category, -> (category_id, language = nil) { joins(:categories).where(university_organization_categories: { id: category_id }).distinct }
+  scope :for_category, -> (category_id, language = nil) { 
+    joins(:categories)
+      .where(
+        university_organization_categories: { id: category_id }
+      ).distinct
+  }
   scope :for_search_term, -> (term, language) {
     joins(:localizations)
       .where(university_organization_localizations: { language_id: language.id })
