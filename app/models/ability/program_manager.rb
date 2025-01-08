@@ -13,6 +13,7 @@ class Ability::ProgramManager < Ability
     can :manage, Education::Program, id: managed_programs_ids
     can [:read, :children], Education::Program, university_id: @user.university_id
     cannot :create, Education::Program
+    can :manage, Education::Program::Category, university_id: @user.university_id
     can :manage, University::Person, university_id: @user.university_id
     can :manage, University::Person::Involvement, target_type: "Education::Program", target_id: managed_programs_ids
     can :manage, University::Role, target_type: "Education::Program", target_id: managed_programs_ids
