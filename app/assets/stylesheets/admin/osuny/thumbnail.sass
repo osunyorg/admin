@@ -4,8 +4,6 @@
     background: $color-bg-soft
     display: flex
     justify-content: center
-    max-height: 100px
-    max-width: 100px
     overflow: hidden
     @include media-breakpoint-down(md)
         display: none
@@ -15,13 +13,17 @@
         font-family: $font-family-serif
         font-size: pxToRem(30)
         user-select: none
+    &--small
+        height: 70px
+        width: 70px
+        min-width: 70px // Force width when too much text would make the thumb smaller
     &--large
-        max-height: 300px
-        max-width: 300px
         .osuny__thumbnail__initials
             font-size: pxToRem(60)
     &--uncropped
-        padding: 20%
+        position: relative
+        img
+            margin: 20%
     .organizations-index &
         img
             mix-blend-mode: multiply
