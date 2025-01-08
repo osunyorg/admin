@@ -26,6 +26,19 @@
               <h5 class="modal-title"><%= t('communication.description.parts.media.title') %></h5>
             </div>
             <div class="col-auto d-flex flex-fill mx-lg-5">
+              <div class="input-group">
+                <input  type="text"
+                        name="search"
+                        placeholder="<%= t 'photo_import.placeholder' %>"
+                        v-model="query"
+                        class="form-control ms-auto">
+                <button type="button"
+                        class="btn btn-primary me-auto"
+                        v-on:click="research"
+                        aria-label="<%= t 'photo_import.search' %>">
+                  <%= t 'photo_import.search' %>
+                </button>
+              </div>
             </div>
             <div class="col-auto">
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -33,7 +46,23 @@
           </div>
           <div class="modal-body overflow-x-hidden" id="media-results">
           </div>
-          <div class="modal-footer d-block">
+          <div class="modal-footer d-block" v-if="media.data.total > 0">
+            <div class="row">
+              <div class="col-lg-6">
+                <a  href="#"
+                    v-if="media.page > 1"
+                    v-on:click="media.page = media.page - 1"
+                    class="btn btn-light btn-sm">
+                  <%= t 'photo_import.previous' %>
+                </a>
+              </div>
+              <div class="col-lg-6 text-end">
+                <a  href="#" v-if="media.page < media.data.total_pages"
+                    v-on:click="media.page = media.page + 1"
+                    class="btn btn-light btn-sm">
+                  <%= t 'photo_import.next' %>
+                </a>
+              </div>
           </div>
         </div>
       </div>
@@ -46,6 +75,11 @@
     data() {
       return {
         media: {
+          page: 1,
+          data: {
+            results: [],
+            total: 0
+          },
           selected: null
         },
         targets: {
@@ -65,6 +99,14 @@
 
       modalElement.addEventListener('hide.bs.modal', function() {
           this.isOpened = false;
+      }.bind(this));
+
+      document.addEventListener("keydown", function(event) {
+        if (event.key === "Enter" && this.isOpened) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          this.research();
+        }
       }.bind(this));
 
       this.isReady = true;
