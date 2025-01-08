@@ -1,6 +1,8 @@
-<%= osuny_label Communication::Media::Context.model_name.human(count: 2) %>
-<div class="row g-3">
-  <% media.contexts.each do |context| %>
-    <%= render 'admin/communication/medias/contexts/context', context: context %>
-  <% end %>
-</div>
+<% if media.contexts.any? %>
+  <%= osuny_label Communication::Media::Context.model_name.human(count: 2) %>
+  <div class="row g-3">
+    <% media.contexts.each do |context| %>
+      <%= render 'admin/communication/medias/contexts/context', context: context %>
+    <% end %>
+  </div>
+<% end %>
