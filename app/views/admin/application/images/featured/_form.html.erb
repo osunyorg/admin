@@ -24,5 +24,11 @@
                   'summernote-config' => 'link' 
                 }
               } %>
-  <%= render 'admin/communication/photo_imports/selector', about: about, f:f %>
+
+  <%# Include vue.js before call Vue.createApp %>
+  <%= javascript_include_tag 'vue' %>
+  <div class="d-flex">
+    <%= render 'admin/communication/photo_imports/selector', about: about, f:f %>
+    <%= render 'admin/communication/medias/selector', about: about, f:f %>
+  </div>
 <% end %>

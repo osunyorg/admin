@@ -441,7 +441,7 @@ en:
   photo_import:
     next: Next image
     nothing: No results for this search
-    open: Search an image
+    open: Unsplash & Pexels
     placeholder: Type your search here
     previous: Previous images
     search: Search

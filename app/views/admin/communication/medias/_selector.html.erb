@@ -1,0 +1,84 @@
+<div id="media-import-app" v-cloak>
+  <div class="app-loader" role="status">
+    <button type="button" class="btn btn-secondary btn-sm" disabled>
+      <%= t('communication.description.parts.media.title') %>
+    </button>
+  </div>
+  <div class="app-content">
+    <button type="button"
+            class="btn btn-secondary btn-sm"
+            data-bs-toggle="modal"
+            data-bs-target="#mediaImportModal">
+      <%= t('communication.description.parts.media.title') %>
+    </button>
+    <input  type="hidden"
+            name="photo_import[media]"
+            v-model="media.selected">
+    <div  class="modal fade"
+          id="mediaImportModal"
+          tabindex="-1"
+          aria-labelledby="<%= t('communication.description.parts.media.title') %>"
+          aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="col-auto d-none d-lg-block">
+              <h5 class="modal-title"><%= t('communication.description.parts.media.title') %></h5>
+            </div>
+            <div class="col-auto d-flex flex-fill mx-lg-5">
+            </div>
+            <div class="col-auto">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+          </div>
+          <div class="modal-body overflow-x-hidden" id="media-results">
+          </div>
+          <div class="modal-footer d-block">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script nonce="<%= request.content_security_policy_nonce %>">
+  var mediaApp = Vue.createApp({
+    data() {
+      return {
+        media: {
+          selected: null
+        },
+        targets: {
+        },
+        isOpened: false,
+        isReady: false
+      }
+    },
+    mounted() {
+      var modalElement = document.querySelector('#mediaImportModal')
+      this.modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+
+      modalElement.addEventListener('show.bs.modal', function (){
+        this.isOpened = true;
+        this.research();
+      }.bind(this));
+
+      modalElement.addEventListener('hide.bs.modal', function() {
+          this.isOpened = false;
+      }.bind(this));
+
+      this.isReady = true;
+    },
+    methods: {
+      research() {
+        console.log('media search');
+      },
+    }
+  });
+
+  window.addEventListener('load', function(){
+    setTimeout(function() {
+      mediaApp.mount('#media-import-app');
+    }, 1000);
+  });
+</script>
