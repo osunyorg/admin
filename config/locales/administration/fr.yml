@@ -6,7 +6,7 @@ fr:
     models:
       administration/location:
         one: Site
-        other: Campus
+        other: Sites
       administration/qualiopi/criterion:
         one: Critère
         other: Critères

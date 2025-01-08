@@ -83,11 +83,14 @@ en:
       communication/extranet/post/category/localization:
         name: Name
       communication/media:
-        origin: Origin
+        collection: Collection
+        origin: Provenance
         original_filename: Original filename
         original_content_type: Content type
         original_byte_size: Size
       communication/media/localization:
+        name: Name
+      communication/media/collection/localization:
         name: Name
       communication/website:
         about: About
@@ -287,6 +290,12 @@ en:
       communication/media:
         one: Media
         other: Medias
+      communication/media/category:
+        one: Category
+        other: Categories
+      communication/media/collection:
+        one: Collection
+        other: Collections
       communication/media/context:
         one: Usage context
         other: Usage contexts
@@ -429,21 +438,22 @@ en:
           description: Everything related to technical settings
           label: Technical
   communication:
-    authors:
-      one: Author
-      other: Authors
     description:
       parts:
         author:
+          title: Authors
           description: People writing posts in websites or extranets
           description_non_university: People writing posts in websites or extranets
         extranet:
+          title: Extranets
           description: Secure exchange areas dedicated to authenticated users
           description_non_university: Secure exchange areas dedicated to authenticated users
         media:
-          description: Media library containing all the files used in the system
-          description_non_university: Media library containing all the files used in the system
+          title: Media library
+          description: Library of all the photos used in this Osuny instance
+          description_non_university: Library of all the photos used in this Osuny instance
         website:
+          title: Websites
           description: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
           description_non_university: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997

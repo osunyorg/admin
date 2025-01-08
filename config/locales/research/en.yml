@@ -142,24 +142,29 @@ en:
       text: Scientific research is both an approach that creates knowledge motivated by pure curiosity and an activity that generates innovations that increase the means of action and diagnosis on nature, man and society. These two aspects of research, fundamental and applied, far from opposing each other, complement each other. Fundamental research creates the knowledge base from which applications are born and, conversely, technological advances provide the increasingly sophisticated investigative tools that lead to a deepening of our fundamental knowledge.
       source: Serge Haroche, Prix Nobel de physique 2012
       parts:
-        hal:
-          description: Publications and authors in the HAL database
         journal:
-          description: Open access journals allowing researchers to contribute to research
+          title: Journals
+          description: Open access scientific journals allowing researchers to contribute to research
         laboratory:
+          title: Laboratories
           description: Research structure hosting the work of researchers
         publication:
+          title: Publications
           description: Scientific publications produced by researchers
         researcher:
+          title: Researchers
           description: Individual linked to a university, department, laboratory, etc.
         thesis:
+          title: Theses
           description: Scientific production leading to the title of Doctor
     hal:
       description:
         parts:
           author:
+            title: Authors
             description: Profiles of researchers in the HAL database
           publication:
+            title: Publications
             description: Scientific publications automatically imported from HAL
       title: HAL
       select_identifier_html: Select all the HAL authors that correspond to this researcher. <br>Use the publications to be sure it's the same person.
