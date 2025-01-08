@@ -1,14 +1,10 @@
 .osuny__thumbnail
     align-items: center
     aspect-ratio: 1
-    background: $color-bg-soft
     display: flex
-    height: 100%
     justify-content: center
-    max-height: 70px
-    max-width: 70px
+    background: $color-bg-soft
     overflow: hidden
-    width: 100%
     @include media-breakpoint-down(md)
         display: none
     &__initials
@@ -17,9 +13,11 @@
         font-family: $font-family-serif
         font-size: pxToRem(30)
         user-select: none
+    &--small
+        height: 70px
+        width: 70px
+        min-width: 70px // Force width when too much text would make the thumb smaller
     &--large
-        max-height: 300px
-        max-width: 300px
         .osuny__thumbnail__initials
             font-size: pxToRem(60)
     &--uncropped

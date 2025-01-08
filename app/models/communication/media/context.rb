@@ -29,11 +29,11 @@ class Communication::Media::Context < ApplicationRecord
 
   belongs_to  :communication_media,
               class_name: 'Communication::Media'
-  alias :media :communication_media
+  alias       :media :communication_media
 
   belongs_to  :active_storage_blob,
               class_name: 'ActiveStorage::Blob'
-  alias :blob :active_storage_blob
+  alias       :blob :active_storage_blob
  
   belongs_to :about, polymorphic: true
 end

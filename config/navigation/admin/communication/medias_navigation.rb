@@ -10,6 +10,9 @@ SimpleNavigation::Configuration.run do |navigation|
                   highlights_on: lambda { 
                     controller_name == "medias" && action_name == "index" 
                   }
+    primary.item  :feature_nav_collections,
+                  Communication::Media::Collection.model_name.human(count: 2),
+                  admin_communication_media_collections_path
     primary.item  :feature_nav_categories,
                   Communication::Media::Category.model_name.human(count: 2),
                   admin_communication_media_categories_path

@@ -58,7 +58,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
   def media_params
     params.require(:communication_media)
           .permit(
-            :collection_id, category_ids: [],
+            :communication_media_collection_id, category_ids: [],
             localizations_attributes: [
               :id, :name, :alt, :credit, :language_id
             ]

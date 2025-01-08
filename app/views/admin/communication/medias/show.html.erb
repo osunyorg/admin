@@ -36,6 +36,12 @@
       <%= osuny_label Communication::Media::Localization.human_attribute_name(:credit) %>
       <div><%= sanitize @l10n.credit %></div>
     <% end %>
+
+    <% if @media.collection.present? %>
+      <%= osuny_label Communication::Media::Localization.human_attribute_name(:collection) %>
+      <p><%= osuny_link_localized @media.collection, admin_communication_media_collection_path(@media.collection) %><p>
+
+    <% end %>
     
     <%= render 'admin/application/categories/widget/show', about: @media %>
     <%= render 'admin/communication/medias/contexts/list', media: @media %>

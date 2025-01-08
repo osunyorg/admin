@@ -185,6 +185,7 @@ namespace :communication do
           get :children
         end
       end
+      resources :collections, controller: '/admin/communication/medias/collections', as: 'media_collections'
     end
   end
   root to: 'dashboard#index'

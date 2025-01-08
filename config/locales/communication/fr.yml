@@ -83,11 +83,14 @@ fr:
       communication/extranet/post/category/localization:
         name: Nom
       communication/media:
+        collection: Collection
         origin: Provenance
         original_filename: Nom du fichier original
         original_content_type: Type de contenu
         original_byte_size: Poids
       communication/media/localization:
+        name: Nom
+      communication/media/collection/localization:
         name: Nom
       communication/website:
         about: Sujet du site
@@ -290,6 +293,9 @@ fr:
       communication/media/category:
         one: Catégorie
         other: Catégories
+      communication/media/collection:
+        one: Collection
+        other: Collections
       communication/media/context:
         one: Contexte d'utilisation
         other: Contextes d'utilisation

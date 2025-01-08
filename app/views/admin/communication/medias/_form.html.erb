@@ -7,6 +7,11 @@
     <div class="row">
       <div class="col-lg-6">
         <%= lf.input :name %>
+        <%= f.association :collection,
+                          collection: osuny_collection(
+                            current_university.communication_media_collections,
+                            localized: true
+                          ) %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
       </div>
       <div class="col-lg-6">

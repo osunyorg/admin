@@ -22,6 +22,11 @@ module University::WithCommunication
               dependent: :destroy
     alias_method :media_categories, :communication_media_categories
 
+    has_many  :communication_media_collections,
+              class_name: 'Communication::Media::Collection',
+              dependent: :destroy
+    alias_method :media_collections, :communication_media_collections
+
     has_many  :communication_websites,
               class_name: 'Communication::Website',
               dependent: :destroy
