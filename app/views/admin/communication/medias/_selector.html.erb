@@ -1,3 +1,28 @@
+<%
+# L'Escale du livre 2022
+search = about.to_s
+# communication_website_post_localization
+l10n_identifier =  about.class
+                        .base_class
+                        .to_s
+                        .parameterize
+                        .underscore
+# communication_website_post
+about_identifier = l10n_identifier.remove('_localization')
+# input[name="communication_website_post[localizations_attributes][0][featured_image]"]
+about_featured_image_file = "input[name=\"#{about_identifier}[localizations_attributes][0][featured_image]\"]".html_safe
+# input[name="communication_website_post[localizations_attributes][0][featured_image_delete]"]
+about_featured_image_file_delete = "input[name=\"#{about_identifier}[localizations_attributes][0][featured_image_delete]\"]".html_safe
+# input[name="communication_website_post[localizations_attributes][0][featured_image_infos]"]
+about_featured_image_file_infos = "input[name=\"#{about_identifier}[localizations_attributes][0][featured_image_infos]\"]".html_safe
+# .communication_website_post_localizations_featured_image
+about_featured_image_image = ".#{about_identifier}_localizations_featured_image"
+# #communication_website_post_localizations_attributes_0_featured_image_alt
+about_featured_image_alt = "##{about_identifier}_localizations_attributes_0_featured_image_alt"
+# #communication_website_post_localizations_featured_image_credit
+about_featured_image_credit = "##{about_identifier}_localizations_attributes_0_featured_image_credit"
+%>
+
 <div id="media-import-app" v-cloak>
   <div class="app-loader" role="status">
     <button type="button" class="btn btn-secondary btn-sm" disabled>
@@ -96,6 +121,14 @@
           selected: null
         },
         targets: {
+          fileInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file %>'),
+          fileLabel: document.querySelector('<%= about_featured_image_image %> .js-sdfi-deletable-file__label'),
+          fileDeleteInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file_delete %>'),
+          fileInfosInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file_infos %>'),
+          image: document.querySelector('<%= about_featured_image_image %> img'),
+          imageContainer: document.querySelector('<%= about_featured_image_image %> .sdfi-deletable-file__preview'),
+          alt: document.querySelector('<%= about_featured_image_alt %>'),
+          credit: document.querySelector('<%= about_featured_image_credit %>')
         },
         isOpened: false,
         isReady: false
@@ -138,6 +171,30 @@
         xmlHttp.open("GET", url, false);
         xmlHttp.send();
       },
+      select(media) {
+        this.media.selected = media.id;
+
+        this.targets.fileInput.value = null;
+        this.targets.fileLabel.textContent = media.name;
+        this.targets.fileDeleteInput.value = null;
+        this.targets.fileInfosInput.value = null;
+        // Refresh in case cropper replaces img
+        this.targets.image = document.querySelector('<%= about_featured_image_image %> img');
+        if (!this.targets.image) {
+          this.targets.image = document.createElement('img');
+          this.targets.image.classList.add('img-fluid', 'img-thumbnail');
+          this.targets.image.width = 1000;
+          this.targets.imageContainer.appendChild(this.targets.image);
+        }
+
+        this.targets.image.setAttribute('src', media.thumb);
+        this.targets.imageContainer.parentElement.classList.add('sdfi-deletable-file--with-file');
+
+        this.targets.alt.value = media.alt;
+        $(this.targets.credit).summernote('code', media.credit);
+
+        this.modal.hide();
+      }
     }
   });
 

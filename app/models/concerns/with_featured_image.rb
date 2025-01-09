@@ -30,16 +30,13 @@ module WithFeaturedImage
     case origin
     when :unsplash
       photo_import_unsplash(params['unsplash'])
+      register_featured_image_in_media_library
     when :pexels
       photo_import_pexels(params['pexels'])
+      register_featured_image_in_media_library
+    when :media
+      photo_import_media(params['media'])
     end
-    Communication::Media.create_from_blob(
-      featured_image.blob, 
-      in_context: self, 
-      origin: origin,
-      alt: featured_image_alt,
-      credit: featured_image_credit
-    )
   end
 
   protected
@@ -49,6 +46,8 @@ module WithFeaturedImage
       :unsplash
     elsif params&.dig(:pexels).present?
       :pexels
+    elsif params&.dig(:media).present?
+      :media
     else
       :upload
     end
@@ -67,5 +66,25 @@ module WithFeaturedImage
     url = "#{photo.src['original']}?auto=compress&cs=tinysrgb&w=2048"
     filename = "#{photo.id}.png"
     ActiveStorage::Utils.attach_from_url(featured_image, url, filename: filename)
+  end
+
+  def photo_import_media(id)
+    media = Communication::Media.find(id)
+    featured_image.attach(media.original_blob)
+    context = media.contexts.where(
+      university_id: media.university_id,
+      active_storage_blob_id: media.original_blob_id,
+      about: self
+    ).first_or_create
+  end
+
+  def register_featured_image_in_media_library
+    Communication::Media.create_from_blob(
+      featured_image.blob, 
+      in_context: self, 
+      origin: origin,
+      alt: featured_image_alt,
+      credit: featured_image_credit
+    )
   end
 end
