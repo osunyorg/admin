@@ -14,7 +14,7 @@ action += link_to t('create'),
           <div class="card-body">
             <%= osuny_link_localized page, admin_communication_website_page_path(website_id: page.website.id, id: page.id), classes: "stretched-link" %>
           </div>
-          <div class="card-footer text-muted">
+          <div class="card-footer small text-muted">
             <%= l page.updated_at.to_date, format: :short %>
           </div>
         </div>

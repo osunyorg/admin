@@ -52,7 +52,7 @@ end
                                             ),
                                             classes: 'stretched-link' %>
                 </div>
-                <div class="card-footer d-none d-lg-block">
+                <div class="card-footer small text-muted d-none d-lg-block">
                   <% if !hide_buttons && post.pinned_in?(current_language) %>
                     <span class="badge border border-subtle text-dark">
                     <%= Communication::Website::Post::Localization.human_attribute_name('pinned') %>

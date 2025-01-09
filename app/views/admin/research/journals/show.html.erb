@@ -47,7 +47,7 @@ action = link_to    t('create'),
                     class: button_classes
 %>
 <%= osuny_panel Research::Journal::Paper::Kind.model_name.human(count: 2), action: action do %>
-  <%= render 'admin/research/journals/papers/kinds/list', kinds: @kinds %>
+  <%= render 'admin/research/journals/papers/kinds/list', kinds: @paper_kinds %>
 <% end %>
 
 <% content_for :action_bar_left do %>
