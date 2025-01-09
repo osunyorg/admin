@@ -194,8 +194,8 @@ pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil,
           selected: null
         },
         targets: {
-          fileInput: document.querySelector('<% about_featured_image_image %> <%= about_featured_image_file %>'),
-          fileLabel: document.querySelector('<% about_featured_image_image %> .js-sdfi-deletable-file__label'),
+          fileInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file %>'),
+          fileLabel: document.querySelector('<%= about_featured_image_image %> .js-sdfi-deletable-file__label'),
           fileDeleteInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file_delete %>'),
           fileInfosInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file_infos %>'),
           image: document.querySelector('<%= about_featured_image_image %> img'),

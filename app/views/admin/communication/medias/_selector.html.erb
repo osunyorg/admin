@@ -45,8 +45,20 @@
             </div>
           </div>
           <div class="modal-body overflow-x-hidden" id="media-results">
+            <p v-if="media.data.results.length === 0 || !media.data" >
+              <%= t 'photo_import.nothing' %>
+            </p>
+            <div class="photo_import__results photo_import__media photo_import__media__results" ref="results">
+              <img  :src="media.thumb"
+                    :alt="media.alt"
+                    v-for="media in media.data.results" class="photo_import__results__result"
+                    v-on:click="select(media)">
+            </div>
+            <p class="small text-muted" v-if="media.data.total_pages">
+              {{media.page}} / {{media.data.total_pages }}
+            </p>
           </div>
-          <div class="modal-footer d-block" v-if="media.data.total > 0">
+          <div class="modal-footer d-block" v-if="media.data.total_pages > 1">
             <div class="row">
               <div class="col-lg-6">
                 <a  href="#"
@@ -74,6 +86,7 @@
   var mediaApp = Vue.createApp({
     data() {
       return {
+        query: '',
         media: {
           page: 1,
           data: {
@@ -113,7 +126,17 @@
     },
     methods: {
       research() {
-        console.log('media search');
+        var url = "<%= admin_communication_medias_url(website_id: nil, extranet_id: nil, format: :json) %>"
+                    + '?filters[for_search_term]=' + encodeURIComponent(this.query);
+            xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            this.media.data = JSON.parse(xmlHttp.responseText);
+            document.getElementById('results').scrollTop = 0;
+          }
+        }.bind(this);
+        xmlHttp.open("GET", url, false);
+        xmlHttp.send();
       },
     }
   });
