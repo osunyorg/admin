@@ -26,6 +26,7 @@ module WithFeaturedImage
   end
 
   def add_photo_import(params)
+    return if params.blank?
     photo_import_unsplash(params['unsplash']) if params['unsplash'].present?
     photo_import_pexels(params['pexels']) if params['pexels'].present?
   rescue
