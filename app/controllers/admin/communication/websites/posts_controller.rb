@@ -57,8 +57,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def create
     @post.website = @website
-    @l10n.add_photo_import params[:photo_import]
-    if @post.save_and_sync
+    if @post.save
+      @l10n.add_photo_import params[:photo_import]
+      @post.sync_with_git
       redirect_to admin_communication_website_post_path(@post),
                   notice: t('admin.successfully_created_html', model: @post.to_s_in(current_language))
     else

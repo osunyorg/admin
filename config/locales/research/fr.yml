@@ -7,7 +7,7 @@ fr:
     models:
       research/hal/author:
         one: Auteur·e HAL
-        other: Auteur·e·s HAL
+        other: Auteur·es HAL
       research/journal:
         one: Revue scientifique
         other: Revues scientifiques
@@ -34,7 +34,7 @@ fr:
         other: Thèses
       university/person/localization/researcher:
         one: Chercheur·e
-        other: Chercheur·e·s
+        other: Chercheur·es
     attributes:
       research/hal/author:
         docid: Identifiant HAL
@@ -51,11 +51,11 @@ fr:
         accepted_at: Accepté le
         doi: DOI
         kind: Type de papier
-        people: Auteur·e·s
+        people: Auteur·es
         received_at: Reçu le
       research/journal/paper/localization:
         abstract: Extrait
-        authors_list: Liste des auteur·e·s
+        authors_list: Liste des auteur·es
         bibliography: Bibliographie
         keywords: Mots clés
         pdf: PDF
@@ -90,7 +90,7 @@ fr:
         text: Texte
       research/publication:
         abstract: Résumé
-        authors_list: Liste des auteur·e·s
+        authors_list: Liste des auteur·es
         docid: Identifiant
         doi: DOI
         doi_url: URL DOI
@@ -125,7 +125,7 @@ fr:
   research/hal:
     description:
       source: HAL.science
-      text_html: "HAL signifie Hyper Article en Ligne. C’est une plateforme pluridisciplinaire nationale pour le dépôt et la consultation des écrits, travaux et résultats de recherches scientifiques des chercheur·e·s et enseignant·e·s-chercheur·e·s. HAL est un bien commun pour la recherche : Les plus grands organismes de recherche et la majorité des universités françaises ont choisi et soutiennent HAL, une infrastructure publique, pérenne et responsable."
+      text_html: "HAL signifie Hyper Article en Ligne. C’est une plateforme pluridisciplinaire nationale pour le dépôt et la consultation des écrits, travaux et résultats de recherches scientifiques des chercheur·es et enseignant·es-chercheur·es. HAL est un bien commun pour la recherche : Les plus grands organismes de recherche et la majorité des universités françaises ont choisi et soutiennent HAL, une infrastructure publique, pérenne et responsable."
   research:
     citations:
       apa:
@@ -140,17 +140,20 @@ fr:
         label: ISO 690
     description:
       parts:
-        hal:
-          description: Publications et auteur·e·s dans la base de données HAL
         journal:
-          description: Journaux en accès ouvert (open access) permettant aux chercheur·e·s de contribuer à la recherche
+          title: Revues scientifiques
+          description: Journaux en accès ouvert (open access) permettant aux chercheur·es de contribuer à la recherche
         laboratory:
-          description: Structure de recherche hébergeant le travail des chercheur·e·s
+          title: Laboratoires
+          description: Structure de recherche hébergeant le travail des chercheur·es
         publication:
-          description: Publications scientifiques produites par les chercheur·e·s
+          title: Publications
+          description: Publications scientifiques produites par les chercheur·es
         researcher:
+          title: Chercheur·es
           description: Personne physique liée à une université, une composante, un laboratoire, etc.
         thesis:
+          title: Thèses
           description: Production scientifique permettant d'obtenir le titre de Docteur·e
       source: Serge Haroche, Prix Nobel de physique 2012
       text_html: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
@@ -158,15 +161,17 @@ fr:
       description:
         parts:
           author:
-            description: Profils des chercheur·e·s dans la base de données HAL
+            title: Chercheur·es
+            description: Profils des chercheur·es dans la base de données HAL
           publication:
+            title: Publications
             description: Publications scientifiques importées automatiquement de HAL
-      select_identifier_html: Choisissez tou·te·s les auteur·e·s HAL correspondant à cette personne. <br>Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
+      select_identifier_html: Choisissez tou·tes les auteur·es HAL correspondant à cette personne. <br>Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
       sync: Synchroniser les publications HAL
       synchronization_done: Synchronisation effectuée
   simple_form:
     hints:
       research_journal_paper:
-        authors_list: Tapez la liste des auteurs si vous n'utilisez pas les cases à cocher “Auteur·e·s” ci-dessus
+        authors_list: Tapez la liste des auteurs si vous n'utilisez pas les cases à cocher “Auteur·es” ci-dessus
         doi: "Vous pouvez saisir l'identifiant DOI sans https://, par exemple “10.19182/perspective/31918”"
 

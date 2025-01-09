@@ -133,17 +133,24 @@ en:
           title: Treeview
         view_as_list: Listview
         view_as_tree: Treeview
+      schools:
+        roles:
+          none: No role defined
   education:
     description:
       parts:
         diploma:
+          title: Diplomas
           description: Presentation of diplomas and their characteristics
         program:
+          title: Programs
           description: Comprehensive presentation of the courses, their content, teaching methods and prospects
-        teacher:
-          description: Presentation of the teachers, with their biographies and their teaching in the various courses
         school:
+          title: Schools
           description: Presentation of the schools, their contact details, courses, teams and administrative information
+        teacher:
+          title: Teachers
+          description: Presentation of the teachers, with their biographies and their teaching in the various courses
       source: Olivier Reboul, La philosophie de l'éducation, 2018
       text_html: Education is the set of processes and procedures that enable every human child to gradually gain access to culture, access to culture being what distinguishes man from animals.
     manage_programs: Manage programs

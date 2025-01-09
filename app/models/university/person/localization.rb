@@ -2,24 +2,26 @@
 #
 # Table name: university_person_localizations
 #
-#  id               :uuid             not null, primary key
-#  biography        :text
-#  first_name       :string
-#  last_name        :string
-#  linkedin         :string
-#  mastodon         :string
-#  meta_description :text
-#  name             :string
-#  picture_credit   :text
-#  slug             :string           indexed
-#  summary          :text
-#  twitter          :string
-#  url              :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  about_id         :uuid             indexed
-#  language_id      :uuid             indexed
-#  university_id    :uuid             indexed
+#  id                    :uuid             not null, primary key
+#  biography             :text
+#  featured_image_alt    :text
+#  featured_image_credit :text
+#  first_name            :string
+#  last_name             :string
+#  linkedin              :string
+#  mastodon              :string
+#  meta_description      :text
+#  name                  :string
+#  picture_credit        :text
+#  slug                  :string           indexed
+#  summary               :text
+#  twitter               :string
+#  url                   :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  about_id              :uuid             indexed
+#  language_id           :uuid             indexed
+#  university_id         :uuid             indexed
 #
 # Indexes
 #
@@ -40,6 +42,8 @@ class University::Person::Localization < ApplicationRecord
   include Contentful
   include Permalinkable
   include Sanitizable
+  include WithBlobs
+  include WithFeaturedImage
   include WithGitFiles
   include WithUniversity
 
@@ -112,6 +116,13 @@ class University::Person::Localization < ApplicationRecord
   # user in statics where we don't need the cateogries not localized
   def categories
     about.categories.ordered.map { |category| category.localization_for(language) }.compact
+  end
+
+  def explicit_blob_ids
+    [
+      picture&.blob_id,
+      featured_image&.blob_id
+    ]
   end
 
   protected

@@ -1,5 +1,7 @@
 class Admin::Communication::Extranets::Posts::CategoriesController < Admin::Communication::Extranets::ApplicationController
-  load_and_authorize_resource class: Communication::Extranet::Post::Category, through: :extranet, through_association: :post_categories
+  load_and_authorize_resource class: Communication::Extranet::Post::Category,
+                              through: :extranet,
+                              through_association: :post_categories
 
   include Admin::Localizable
 

@@ -1,0 +1,8 @@
+<%
+block = about
+# communication/website/post
+key = block.about_type.underscore.remove('/localization')
+# admin/communication/medias/contexts/communication/website/post
+partial = "admin/communication/medias/contexts/#{key}"
+%>
+<%= render partial, about: block.about, target: "#block-#{block.id}" %>

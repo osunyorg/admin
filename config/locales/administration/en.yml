@@ -6,7 +6,7 @@ en:
     models:
       administration/location:
         one: Location
-        other: Campus
+        other: Locations
       administration/qualiopi/criterion:
         one: Criterion
         other: Criterions
@@ -54,8 +54,11 @@ en:
       source: Code des relations entre le public et l'administration
       parts:
         alumnus:
+          title: Alumni
           description: Presentation of the students who have studied in the various courses.
         location:
+          title: Alumni
           description: Management of the various (physical) education and research sites
         qualiopi:
+          title: Qualiopi
           description: Help in checking the conformity of the training offer with the Qualiopi standard

@@ -7,4 +7,9 @@ class Communication::Block::Template::Gallery < Communication::Block::Template::
   def empty?
     elements.none?
   end
+
+  def media_blobs
+    return [] if empty?
+    elements.map(&:media_blob).compact
+  end
 end

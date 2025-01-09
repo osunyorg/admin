@@ -1,14 +1,15 @@
 <%
 l10n = organization.best_localization_for(current_language)
+large ||= false
 %>
 <% if l10n.logo.attached? %>
   <%= render partial: "admin/application/components/thumbnail",
             locals: {
               image: l10n.logo,
               initials: l10n.initials,
-              large: true,
+              large: large,
               cropped: false
             } %>
 <% else %>
-  <%= osuny_thumbnail_localized organization, large: true%>
+  <%= osuny_thumbnail_localized organization, large: large %>
 <% end %>

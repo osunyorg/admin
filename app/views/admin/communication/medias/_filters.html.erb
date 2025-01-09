@@ -1,0 +1,35 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :string,
+                      :for_search_term,
+                      label: t('search')
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_origin,
+                      label: Communication::Media.human_attribute_name(:origin),
+                      collection: Communication::Media::origins.keys.map { |r| { to_s: t("enums.communication.media.origin.#{r}"), id: r } }
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_collection,
+                      label: Communication::Media.human_attribute_name(:collection),
+                      collection: osuny_collection(current_university.communication_media_collections, localized: true)
+                      %>
+
+    <% if current_university.communication_media_categories.any? %>
+      <%= render_filter f,
+                        :select,
+                        :for_category,
+                        label: t('filters.attributes.category'),
+                        collection: osuny_collection_tree(current_university.communication_media_categories.root, localized: true),
+                        multiple: true
+                        %>
+    <% end %>
+
+  <% end %>
+<% end %>
