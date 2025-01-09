@@ -441,11 +441,14 @@ fr:
   photo_import:
     next: Images suivantes
     nothing: Aucun résultat pour cette recherche
-    open: Unsplash & Pexels
     placeholder: Tapez votre recherche
     previous: Images précédentes
     search: Chercher
     title: Recherche d'image
+    buttons:
+      medias: Choisir dans la médiathèque
+      unsplash: Importer depuis Unsplash & Pexels
+      upload: Envoyer une image
   please_confirm: Est-ce que vous confirmez ?
   preview:
     button: Prévisualiser
