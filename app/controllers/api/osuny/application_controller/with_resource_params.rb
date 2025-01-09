@@ -45,9 +45,12 @@ module Api::Osuny::ApplicationController::WithResourceParams
     return unless featured_image_url.present?
     # Image already uploaded
     return if l10n.present? && l10n.featured_image.attached? && l10n.featured_image.blob.metadata[:source_url] == featured_image_url
+
+    featured_image_uri = URI.parse(featured_image_url)
+    return unless featured_image_uri.is_a?(URI::HTTP)
     l10n_params[:featured_image] = {
-      io: URI.parse(featured_image_url).open,
-      filename: File.basename(URI.parse(featured_image_url).path),
+      io: featured_image_uri.open,
+      filename: File.basename(featured_image_uri.path),
       metadata: { source_url: featured_image_url }
     }
   end
