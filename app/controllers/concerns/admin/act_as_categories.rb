@@ -19,12 +19,15 @@ module Admin::ActAsCategories
   end
 
   def children
-    return unless request.xhr?
-    @categories_class = categories_class
-    @category = categories.find(params[:id])
-    @children =  @category.children
-                          .ordered(current_language)
-    render 'admin/application/categories/children'
+    if request.xhr?
+      @categories_class = categories_class
+      @category = categories.find(params[:id])
+      @children =  @category.children
+                            .ordered(current_language)
+      render 'admin/application/categories/children'
+    else
+      redirect_to [:admin, categories_class]
+    end
   end
 
   protected

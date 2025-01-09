@@ -25,9 +25,12 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
   end
 
   def children
-    return unless request.xhr?
-    @item = @menu.items.find(params[:id])
-    @children = @item.children.ordered
+    if request.xhr?
+      @item = @menu.items.find(params[:id])
+      @children = @item.children.ordered
+    else
+      redirect_to admin_communication_website_menu_path(@menu)
+    end
   end
 
   def kind_switch
