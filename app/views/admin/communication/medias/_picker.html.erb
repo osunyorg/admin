@@ -1,0 +1,12 @@
+<div  id="image-picker-app" 
+      class="image_picker"
+      v-cloak>
+  <%= render 'admin/communication/medias/picker/panel' %>
+</div>
+
+<%# Include vue.js before call Vue.createApp %>
+<%= javascript_include_tag 'vue' %>
+
+<script nonce="<%= request.content_security_policy_nonce %>">
+<%= render 'admin/communication/medias/picker/js', about: about %>
+</script>

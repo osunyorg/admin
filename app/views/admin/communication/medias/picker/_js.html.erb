@@ -1,0 +1,114 @@
+var imagePickerApp = Vue.createApp({
+  data() {
+    return {
+      current: <%= {
+        image: {
+          blob: {
+            id: about.featured_image&.blob_id,
+            signed_id: about.featured_image&.signed_id,
+            preview: "/media/#{ about.featured_image&.signed_id }/preview.jpg"
+          },
+          media: {
+            id: nil
+          },
+          alt: about.featured_image_alt,
+          credit: about.featured_image_credit
+        }
+      }.to_json.html_safe %>,
+    }
+  },
+  methods: {
+    onFileImageChange(event) {
+      var files = event.target.files || event.dataTransfer.files;
+      if (!files.length) {
+        return;
+      }
+      this.uploadFile(event.target, files[0]);
+    },
+    uploadFile(input, file) {
+      var size = Math.round(file.size / 1024 / 1024),
+          sizeLimit = <%= Rails.application.config.default_image_max_size %>,
+          sizeLimitMo = Math.round(sizeLimit / 1024 / 1024),
+          url = "<%= rails_direct_uploads_url.html_safe %>",
+          controller = new Vue.DirectUploadController(input, file, url),
+          that = this;
+      if (file.size > sizeLimit) {
+        alert("<%= t('admin.communication.blocks.alerts.file_is_too_big').html_safe %> (" + size + " Mo > " + sizeLimitMo + " Mo)");
+        return;
+      }
+      controller.start(function (blob) {
+        that.current.image.blob = {
+          id: blob.id,
+          signed_id: blob.signed_id,
+          filename: blob.filename,
+          preview: "/media/" + blob.signed_id + "/preview.jpg"
+        };
+        that.save();
+      });
+    },
+    removeImage() {
+      this.current.image.blob = {};
+      this.current.image.alt = "";
+      this.current.image.credit = "";
+    },
+    handleSummernotes() {
+      var $summernoteElements = $('.summernote-vue:not(.is-initialized)');
+      $summernoteElements.each(function(index) {
+        var element = $summernoteElements.get(index);
+        this.initSummernote(element);
+      }.bind(this));
+    },
+    initSummernote(element) {
+      element.classList.add('is-initialized');
+      $(element).summernote({
+        lang: '<%= current_interface_language.summernote_locale unless current_interface_language.summernote_locale.blank? %>',
+        toolbar: window.SUMMERNOTE_CONFIGS['link'].toolbar,
+        callbacks: {
+          onChange: function(content) {
+            element.value = content;
+            element.dispatchEvent(new Event('input'));
+          },
+        }
+      });
+    },
+    save() {
+      console.log("save");
+      var params = {
+        communication_website_post: {
+          localizations_attributes: {
+            id: "<%= @l10n.id %>",
+            featured_image: this.current.image.blob.signed_id,
+            featured_image_delete: null,
+            featured_image_infos: "", 
+            featured_image_alt: this.current.image.alt,
+            featured_image_credit: this.current.image.credit
+          }
+        }
+      };
+      var xhr = new XMLHttpRequest();
+      xhr.open("PATCH", "<%= request.path %>.json", true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('X-CSRF-Token', document.querySelector('[name="csrf-token"]').content);
+      xhr.onreadystatechange = function () {
+        if (this.readyState != 4) return;
+        if (this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            console.log(data);
+        }
+      };
+      xhr.send(JSON.stringify(params));
+    },
+  },
+  updated: function() {
+    this.handleSummernotes();
+  },
+  mounted: function() {
+    this.handleSummernotes();
+  }
+});
+
+window.addEventListener('load', function(){
+  setTimeout(function() {
+    imagePickerApp.mount('#image-picker-app');
+  }, 1000);
+});

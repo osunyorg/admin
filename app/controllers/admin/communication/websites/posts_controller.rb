@@ -74,8 +74,15 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
       load_localization
       @l10n.add_photo_import params[:photo_import]
       @post.sync_with_git
-      redirect_to admin_communication_website_post_path(@post),
-                  notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
+      respond_to do |format|
+        format.html {
+          redirect_to admin_communication_website_post_path(@post),
+                      notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
+        }
+        format.json { 
+          head :ok
+        }
+      end
     else
       load_invalid_localization
       @categories = categories
