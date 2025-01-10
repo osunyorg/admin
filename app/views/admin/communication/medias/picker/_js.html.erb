@@ -1,3 +1,7 @@
+<%
+# fr, en...
+lang = about&.language&.iso_code if about.respond_to? :language
+%>
 var imagePickerApp = Vue.createApp({
   data() {
     return {
@@ -15,9 +19,81 @@ var imagePickerApp = Vue.createApp({
           credit: about.featured_image_credit
         }
       }.to_json.html_safe %>,
+      cloud: {
+        query: <%= about.to_s.to_json.html_safe %>,
+        modal: {
+          opened: false
+        },
+        unsplash: {
+          page: 1,
+          data: {
+            results: [],
+            total: 0
+          },
+          selected: null
+        },
+        pexels: {
+          page: 1,
+          data: {
+            results: [],
+            total: 0
+          },
+          selected: null
+        },
+      },
+      medias: {
+
+      }
     }
   },
   methods: {
+    // Commons
+    handleSummernotes() {
+      var $summernoteElements = $('.summernote-vue:not(.is-initialized)');
+      $summernoteElements.each(function(index) {
+        var element = $summernoteElements.get(index);
+        this.initSummernote(element);
+      }.bind(this));
+    },
+    initSummernote(element) {
+      element.classList.add('is-initialized');
+      $(element).summernote({
+        lang: '<%= current_interface_language.summernote_locale unless current_interface_language.summernote_locale.blank? %>',
+        toolbar: window.SUMMERNOTE_CONFIGS['link'].toolbar,
+        callbacks: {
+          onChange: function(content) {
+            element.value = content;
+            element.dispatchEvent(new Event('input'));
+          },
+        }
+      });
+    },
+    save() {
+      console.log("save");
+      var params = {
+        communication_website_post: {
+          localizations_attributes: {
+            id: "<%= @l10n.id %>",
+            featured_image: this.current.image.blob.signed_id,
+            featured_image_alt: this.current.image.alt,
+            featured_image_credit: this.current.image.credit
+          }
+        }
+      };
+      var xhr = new XMLHttpRequest();
+      xhr.open("PATCH", "<%= request.path %>.json", true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('X-CSRF-Token', document.querySelector('[name="csrf-token"]').content);
+      xhr.onreadystatechange = function () {
+        if (this.readyState != 4) return;
+        if (this.status == 200) {
+            console.log(this.responseText);
+        }
+      };
+      xhr.send(JSON.stringify(params));
+    },
+
+    // Upload
     onFileImageChange(event) {
       var files = event.target.files || event.dataTransfer.files;
       if (!files.length) {
@@ -47,57 +123,90 @@ var imagePickerApp = Vue.createApp({
       });
     },
     removeImage() {
-      this.current.image.blob = {};
+      this.current.image.blob = {
+        id: "",
+        signed_id: "",
+        preview: ""
+      };
       this.current.image.alt = "";
       this.current.image.credit = "";
+      this.save();
     },
-    handleSummernotes() {
-      var $summernoteElements = $('.summernote-vue:not(.is-initialized)');
-      $summernoteElements.each(function(index) {
-        var element = $summernoteElements.get(index);
-        this.initSummernote(element);
-      }.bind(this));
+
+    // Cloud
+    cloudOpen() {
+      document.body.classList.add("modal-open");
+      this.cloud.modal.opened = true;
+      this.cloudSearch();
     },
-    initSummernote(element) {
-      element.classList.add('is-initialized');
-      $(element).summernote({
-        lang: '<%= current_interface_language.summernote_locale unless current_interface_language.summernote_locale.blank? %>',
-        toolbar: window.SUMMERNOTE_CONFIGS['link'].toolbar,
-        callbacks: {
-          onChange: function(content) {
-            element.value = content;
-            element.dispatchEvent(new Event('input'));
-          },
+    cloudClose() {
+      document.body.classList.remove("modal-open");
+      this.cloud.modal.opened = false;
+    },
+    cloudSearch() {
+      this.cloudSearchUnsplash();
+      this.cloudSearchPexels();
+    },
+    cloudSearchUnsplash() {
+      var url = "<%= admin_communication_unsplash_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
+                    + '?query=' + encodeURIComponent(this.cloud.query)
+                    + '&page=' + this.cloud.unsplash.page
+                    + '&per_page=12&lang=<%= lang %>';
+      this.cloudLoadSearchResults(url, this.cloud.unsplash);
+    },
+    cloudSearchPexels() {
+      var url = "<%= admin_communication_pexels_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
+                  + '?query=' + encodeURIComponent(this.cloud.query)
+                  + '&page=' + this.cloud.pexels.page
+                  + '&per_page=12&lang=<%= lang %>';
+      this.cloudLoadSearchResults(url, this.cloud.pexels);
+    },
+    cloudLoadSearchResults(url, source) {
+      if (!this.cloud.query) {
+        return null;
+      }
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          source.data.results = [];
+          source.data = JSON.parse(xmlHttp.responseText);
         }
-      });
+      }.bind(this);
+      xmlHttp.open("GET", url, false);
+      xmlHttp.send(null);
     },
-    save() {
-      console.log("save");
-      var params = {
-        communication_website_post: {
-          localizations_attributes: {
-            id: "<%= @l10n.id %>",
-            featured_image: this.current.image.blob.signed_id,
-            featured_image_delete: null,
-            featured_image_infos: "", 
-            featured_image_alt: this.current.image.alt,
-            featured_image_credit: this.current.image.credit
-          }
-        }
-      };
-      var xhr = new XMLHttpRequest();
-      xhr.open("PATCH", "<%= request.path %>.json", true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.setRequestHeader('X-CSRF-Token', document.querySelector('[name="csrf-token"]').content);
-      xhr.onreadystatechange = function () {
-        if (this.readyState != 4) return;
-        if (this.status == 200) {
-            var data = JSON.parse(this.responseText);
-            console.log(data);
-        }
-      };
-      xhr.send(JSON.stringify(params));
+    cloudSelectUnsplash(image) {
+      this.cloud.unsplash.selected = image.id;
+      this.cloud.pexels.selected = null;
+      this.cloudSelect(image);
     },
+    cloudSelectPexels(image) {
+      this.cloud.unsplash.selected = null;
+      this.cloud.pexels.selected = image.id;
+      this.cloudSelect(image);
+    },
+    cloudSelect(image) {
+      this.current.image = {
+        blob: {
+          id: "cloud",
+          signed_id: null,
+          preview: image.preview
+        },
+        alt: "",
+        credit: image.credit
+      }
+      this.cloudClose();
+    }
+  },
+
+
+  watch: {
+    'cloud.unsplash.page': function(newVal, oldVal) {
+      this.cloudSearchUnsplash();
+    },
+    'cloud.pexels.page': function(newVal, oldVal) {
+      this.cloudSearchPexels();
+    }
   },
   updated: function() {
     this.handleSummernotes();

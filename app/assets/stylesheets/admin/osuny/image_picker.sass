@@ -11,3 +11,11 @@
             padding: 20px
             text-align: center
             width: 100%
+        &__loader
+            aspect-ratio: 4/3
+            background: $color-bg-soft
+            width: 100%
+    // Vue app is loaded
+    &[data-v-app]
+        .image_picker__selector__loader
+            display: none

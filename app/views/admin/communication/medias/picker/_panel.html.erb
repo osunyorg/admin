@@ -1,4 +1,5 @@
 <%= osuny_panel t('featured_image.title'), small: true do %>
+  <div class="image_picker__selector__loader"></div>
   <div class="app-content">
     <div v-if="!current.image.blob.id" class="image_picker__selector">
       <div class="image_picker__selector__viewport">
@@ -6,10 +7,10 @@
                 ref="file"
                 type="file"
                 accept="<%= default_images_formats_accepted %>"
-                @change="onFileImageChange($event)">
+                v-on:change="onFileImageChange($event)">
         <button type="button"
                 class="btn"
-                @click.prevent="$refs.file.click()">
+                v-on:click.prevent="$refs.file.click()">
           <%= lucide_icon('upload') %>
           <%= t 'photo_import.buttons.upload' %>
         </button>
@@ -17,8 +18,7 @@
       </div>
       <button type="button"
               class="btn btn-sm"
-              data-bs-toggle="modal"
-              data-bs-target="#photoImportModal">
+              v-on:click="cloudOpen()">
         <%= lucide_icon('cloud-download') %>
         <%= t 'photo_import.buttons.unsplash' %>
       </button>
