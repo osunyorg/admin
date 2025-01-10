@@ -1,0 +1,26 @@
+test_category_fr:
+  migration_identifier: test-page-category-fixture-1-fr
+  name: Catégorie de test
+  slug: categorie-de-test
+  about: test_category
+  language: fr
+  website: website_with_github
+  university: default_university
+
+test_taxonomy_fr:
+  migration_identifier: test-page-category-fixture-2-fr
+  name: Taxonomie de test
+  slug: taxonomie-de-test
+  about: test_taxonomy
+  language: fr
+  website: website_with_github
+  university: default_university
+
+test_taxonomy_item_fr:
+  migration_identifier: test-page-category-fixture-3-fr
+  name: Élément de taxonomie de test
+  slug: element-de-taxonomie-de-test
+  about: test_taxonomy_item
+  language: fr
+  website: website_with_github
+  university: default_university
