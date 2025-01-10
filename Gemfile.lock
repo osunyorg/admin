@@ -247,9 +247,7 @@ GEM
     faraday-retry (2.2.1)
       faraday (~> 2.0)
     fastimage (2.3.1)
-    ffi (1.17.0-arm64-darwin)
-    ffi (1.17.0-x86_64-darwin)
-    ffi (1.17.0-x86_64-linux-gnu)
+    ffi (1.17.0)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     font-awesome-sass (6.7.2)
@@ -287,13 +285,13 @@ GEM
       fugit (>= 1.11.0)
       railties (>= 6.1.0)
       thor (>= 1.0.0)
-    google-protobuf (4.29.2-arm64-darwin)
+    google-protobuf (4.29.3-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.29.2-x86_64-darwin)
+    google-protobuf (4.29.3-x86_64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.29.2-x86_64-linux)
+    google-protobuf (4.29.3-x86_64-linux)
       bigdecimal
       rake (>= 13)
     hal_openscience (0.1.0)
@@ -409,7 +407,6 @@ GEM
     net-protocol (0.2.2)
       timeout
     net-smtp (0.5.0)
-      net-protocol
     nio4r (2.7.4)
     nokogiri (1.18.0-arm64-darwin)
       racc (~> 1.4)
@@ -783,7 +780,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 3.3.6p108
+   ruby 3.4.1p0
 
 BUNDLED WITH
-   2.5.23
+   2.6.2

@@ -208,6 +208,236 @@
           }
         }
       },
+      "communication_website_page": {
+        "type": "object",
+        "title": "Communication::Website::Page",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true,
+            "description": "Read-only. It is set when it's a special page."
+          },
+          "parent_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "position": {
+            "type": "integer"
+          },
+          "bodyclass": {
+            "type": "string",
+            "nullable": true
+          },
+          "full_width": {
+            "type": "boolean"
+          },
+          "localizations": {
+            "type": "object",
+            "description": "Localizations of the page. The key is the language's ISO 639-1 code.",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/communication_website_page_localization"
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "communication_website_page_localization": {
+        "type": "object",
+        "title": "Communication::Website::Page::Localization",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "migration_identifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "breadcrumb_title": {
+            "type": "string",
+            "nullable": true
+          },
+          "featured_image": {
+            "type": "object",
+            "properties": {
+              "blob_id": {
+                "type": "string",
+                "format": "uuid",
+                "nullable": true
+              },
+              "alt": {
+                "type": "string",
+                "nullable": true
+              },
+              "credit": {
+                "type": "string",
+                "nullable": true
+              },
+              "url": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "meta_description": {
+            "type": "string",
+            "nullable": true
+          },
+          "published": {
+            "type": "boolean"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "slug": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "header_text": {
+            "type": "string",
+            "nullable": true
+          },
+          "header_cta": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "header_cta_label": {
+            "type": "string",
+            "nullable": true
+          },
+          "header_cta_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/communication_block_agenda"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_call_to_action"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_chapter"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_contact"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_datatable"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_definitions"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_embed"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_features"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_files"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_gallery"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_image"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_key_figures"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_license"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_links"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_locations"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_organizations"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_pages"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_papers"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_persons"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_posts"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_projects"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_programs"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_sound"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_testimonials"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_timeline"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_title"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_video"
+                },
+                {
+                  "$ref": "#/components/schemas/communication_block_volumes"
+                }
+              ]
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "communication_website_post": {
         "type": "object",
         "title": "Communication::Website::Post",
@@ -2526,6 +2756,14 @@
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": false,
             "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "grid",
+                  "list",
+                  "large"
+                ]
+              },
               "mode": {
                 "type": "string",
                 "enum": [
@@ -2550,6 +2788,9 @@
                 "type": "boolean"
               },
               "option_link": {
+                "type": "boolean"
+              },
+              "option_contact": {
                 "type": "boolean"
               },
               "elements": {
@@ -3322,12 +3563,12 @@
                               "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z"
                             },
                             "blocks": [],
-                            "created_at": "2024-12-20T18:10:28.168+01:00",
-                            "updated_at": "2024-12-20T18:10:28.168+01:00"
+                            "created_at": "2025-01-10T11:50:17.589+01:00",
+                            "updated_at": "2025-01-10T11:50:17.589+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T18:10:28.180+01:00",
-                        "updated_at": "2024-12-20T18:10:28.180+01:00"
+                        "created_at": "2025-01-10T11:50:17.594+01:00",
+                        "updated_at": "2025-01-10T11:50:17.594+01:00"
                       }
                     ]
                   }
@@ -3400,7 +3641,7 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "c1c27ad2-ade3-4667-92e8-307710e46ea2",
+                      "id": "4860a3fd-b3bd-4d9d-9ad8-53aecc0c66b5",
                       "migration_identifier": "event-from-api-1",
                       "from_day": "2024-12-24",
                       "from_hour": "19:00",
@@ -3411,14 +3652,14 @@
                       "parent_id": null,
                       "localizations": {
                         "fr": {
-                          "id": "39006bfc-644d-49cf-81a5-78091070ceb0",
+                          "id": "7a9fb72a-d7e5-4378-86d1-9a5bac7118f1",
                           "migration_identifier": "event-from-api-1-fr",
                           "title": "Noël",
                           "featured_image": {
-                            "blob_id": "15545c72-7aa5-4cd5-ab83-2b8b20b119fc",
+                            "blob_id": "0a0a84df-6979-492e-a341-145af3041994",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJiZGRjYzFwa2oyaXNwMGdrazZ6cmozdGE2a2diIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MjguODc3WiIsInB1ciI6ImJsb2Jfa2V5In19--6858a92601bb2ecd1b072275dd218ba1bcb5cb4f/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJoeG4yenU2c2IzZTBjcXlrbGV5a2Q5dXYxdXNoIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjUtMDEtMTBUMTE6NTA6MTguMzYzWiIsInB1ciI6ImJsb2Jfa2V5In19--afead8f627be98313e9c106219527931ac88284b/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Les repas de Noël",
                           "published": true,
@@ -3432,11 +3673,11 @@
                             "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&ST=20241224T180000Z&DUR=1900&DESC=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                             "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
-                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T181028Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
+                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20250110T115018Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
                           },
                           "blocks": [
                             {
-                              "id": "25d30aa6-345b-4764-9cef-333077237c6d",
+                              "id": "715876f4-e1e7-444b-8c62-fa84f9086316",
                               "migration_identifier": "event-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -3453,16 +3694,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2024-12-20T18:10:28.771+01:00",
-                              "updated_at": "2024-12-20T18:10:28.771+01:00"
+                              "created_at": "2025-01-10T11:50:18.212+01:00",
+                              "updated_at": "2025-01-10T11:50:18.212+01:00"
                             }
                           ],
-                          "created_at": "2024-12-20T18:10:28.765+01:00",
-                          "updated_at": "2024-12-20T18:10:28.790+01:00"
+                          "created_at": "2025-01-10T11:50:18.207+01:00",
+                          "updated_at": "2025-01-10T11:50:18.235+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T18:10:28.755+01:00",
-                      "updated_at": "2024-12-20T18:10:28.849+01:00"
+                      "created_at": "2025-01-10T11:50:18.200+01:00",
+                      "updated_at": "2025-01-10T11:50:18.309+01:00"
                     }
                   }
                 }
@@ -3588,7 +3829,7 @@
                     "value": {
                       "created": [
                         {
-                          "id": "99f07eac-936d-47a5-891f-cb5d1dcdf714",
+                          "id": "8e8d0b00-3625-48f8-aa01-bf8904cebd87",
                           "migration_identifier": "event-from-api-1",
                           "from_day": "2024-12-24",
                           "from_hour": "19:00",
@@ -3599,14 +3840,14 @@
                           "parent_id": null,
                           "localizations": {
                             "fr": {
-                              "id": "bd2c3a2e-d126-4a3d-9584-60f5c5285ab0",
+                              "id": "c949e661-353a-4112-ae7a-005cdb330ec1",
                               "migration_identifier": "event-from-api-1-fr",
                               "title": "Noël",
                               "featured_image": {
-                                "blob_id": "c890147d-6932-42c9-ab5e-e66a06ec7b0f",
+                                "blob_id": "74f1bee3-f3ec-485b-bfbb-4462dea6f60d",
                                 "alt": "La lumière brille sur les parois du canyon",
                                 "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJrNWZncWh4a216a2pxeHBtZWRwOXU1bXB6MnowIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MjkuMTIwWiIsInB1ciI6ImJsb2Jfa2V5In19--2e5513bfa213895795bd0e00bff49d8e36010aa5/photo-1703923633616-254e78f6e9df"
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiIyaDNwbXY1Yjl1d3AwOHYyNTI3dTd3YTZ0ZHRiIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjUtMDEtMTBUMTE6NTA6MTguNjQzWiIsInB1ciI6ImJsb2Jfa2V5In19--55cfdd5f19e3ef379297ebe9c91f5f048c63677b/photo-1703923633616-254e78f6e9df"
                               },
                               "meta_description": "Les repas de Noël",
                               "published": true,
@@ -3620,11 +3861,11 @@
                                 "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&ST=20241224T180000Z&DUR=1900&DESC=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Les%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-25T13:00:00Z&body=Les%20repas%20de%20No%C3%ABl%20en%20famille.",
-                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T181028Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
+                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20250110T115018Z%0ADTSTART:20241224T180000Z%0ADTEND:20241225T130000Z%0ASUMMARY:No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Les%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241224T180000Z-No%C3%ABl%20Les%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
                               },
                               "blocks": [
                                 {
-                                  "id": "65af43ec-15f7-47e0-8619-d2335bd3851b",
+                                  "id": "e58d308c-4ae5-477a-ac97-c0bff51db35a",
                                   "migration_identifier": "event-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -3641,16 +3882,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2024-12-20T18:10:28.997+01:00",
-                                  "updated_at": "2024-12-20T18:10:28.997+01:00"
+                                  "created_at": "2025-01-10T11:50:18.511+01:00",
+                                  "updated_at": "2025-01-10T11:50:18.511+01:00"
                                 }
                               ],
-                              "created_at": "2024-12-20T18:10:28.995+01:00",
-                              "updated_at": "2024-12-20T18:10:29.003+01:00"
+                              "created_at": "2025-01-10T11:50:18.507+01:00",
+                              "updated_at": "2025-01-10T11:50:18.520+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T18:10:28.991+01:00",
-                          "updated_at": "2024-12-20T18:10:29.033+01:00"
+                          "created_at": "2025-01-10T11:50:18.501+01:00",
+                          "updated_at": "2025-01-10T11:50:18.561+01:00"
                         }
                       ],
                       "updated": [
@@ -3687,15 +3928,15 @@
                                 "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Mon%20nouveau%20titre%20&ST=20240712T070000Z&DUR=3915",
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
-                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T181029Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
+                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20250110T115018Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
                               },
                               "blocks": [],
-                              "created_at": "2024-12-20T18:10:28.168+01:00",
-                              "updated_at": "2024-12-20T18:10:29.077+01:00"
+                              "created_at": "2025-01-10T11:50:17.589+01:00",
+                              "updated_at": "2025-01-10T11:50:18.616+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T18:10:28.180+01:00",
-                          "updated_at": "2024-12-20T18:10:29.078+01:00"
+                          "created_at": "2025-01-10T11:50:17.594+01:00",
+                          "updated_at": "2025-01-10T11:50:18.619+01:00"
                         }
                       ],
                       "errors": []
@@ -3887,12 +4128,12 @@
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z"
                           },
                           "blocks": [],
-                          "created_at": "2024-12-20T18:10:28.168+01:00",
-                          "updated_at": "2024-12-20T18:10:28.168+01:00"
+                          "created_at": "2025-01-10T11:50:17.589+01:00",
+                          "updated_at": "2025-01-10T11:50:17.589+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T18:10:28.180+01:00",
-                      "updated_at": "2024-12-20T18:10:28.180+01:00"
+                      "created_at": "2025-01-10T11:50:17.594+01:00",
+                      "updated_at": "2025-01-10T11:50:17.594+01:00"
                     }
                   }
                 }
@@ -4004,15 +4245,15 @@
                             "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Mon%20nouveau%20titre%20&ST=20240712T070000Z&DUR=3915",
                             "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T07:00:00Z&enddt=2024-07-13T22:15:00Z",
-                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20241220T181029Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
+                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20250110T115018Z%0ADTSTART:20240712T070000Z%0ADTEND:20240713T221500Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T070000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
                           },
                           "blocks": [],
-                          "created_at": "2024-12-20T18:10:28.168+01:00",
-                          "updated_at": "2024-12-20T18:10:29.248+01:00"
+                          "created_at": "2025-01-10T11:50:17.589+01:00",
+                          "updated_at": "2025-01-10T11:50:18.760+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T18:10:28.180+01:00",
-                      "updated_at": "2024-12-20T18:10:29.249+01:00"
+                      "created_at": "2025-01-10T11:50:17.594+01:00",
+                      "updated_at": "2025-01-10T11:50:18.760+01:00"
                     }
                   }
                 }
@@ -4176,6 +4417,966 @@
         }
       }
     },
+    "/communication/websites/{website_id}/pages": {
+      "get": {
+        "summary": "Lists a website's pages",
+        "tags": [
+          "Communication::Website::Page"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": [
+                      {
+                        "id": "aa678357-9416-5d2e-a7ec-f112e37c64e6",
+                        "migration_identifier": null,
+                        "type": "Communication::Website::Page::Home",
+                        "parent_id": null,
+                        "position": 1,
+                        "bodyclass": null,
+                        "full_width": false,
+                        "localizations": {
+                          "fr": {
+                            "id": "b7c8ae2d-0008-51fa-a7f0-b8909c077a76",
+                            "migration_identifier": null,
+                            "title": "Accueil",
+                            "breadcrumb_title": null,
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "",
+                            "summary": null,
+                            "text": null,
+                            "header_cta": null,
+                            "header_cta_label": null,
+                            "header_cta_url": null,
+                            "blocks": [],
+                            "created_at": "2025-01-10T11:50:17.622+01:00",
+                            "updated_at": "2025-01-10T11:50:17.622+01:00"
+                          }
+                        },
+                        "created_at": "2025-01-10T11:50:17.635+01:00",
+                        "updated_at": "2025-01-10T11:50:17.635+01:00"
+                      },
+                      {
+                        "id": "aa9402a0-16f6-5075-b5b0-5467750ed326",
+                        "migration_identifier": "test-page-fixture-1",
+                        "type": null,
+                        "parent_id": "aa678357-9416-5d2e-a7ec-f112e37c64e6",
+                        "position": 1,
+                        "bodyclass": null,
+                        "full_width": false,
+                        "localizations": {
+                          "fr": {
+                            "id": "4a90b759-299a-5154-85e2-53600a6719b0",
+                            "migration_identifier": "test-page-fixture-1-fr",
+                            "title": "Test",
+                            "breadcrumb_title": null,
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "test",
+                            "summary": null,
+                            "text": null,
+                            "header_cta": null,
+                            "header_cta_label": null,
+                            "header_cta_url": null,
+                            "blocks": [],
+                            "created_at": "2025-01-10T11:50:17.622+01:00",
+                            "updated_at": "2025-01-10T11:50:17.622+01:00"
+                          }
+                        },
+                        "created_at": "2025-01-10T11:50:17.635+01:00",
+                        "updated_at": "2025-01-10T11:50:17.635+01:00"
+                      },
+                      {
+                        "id": "6e49bb62-957c-53e7-a05a-195160b0abdb",
+                        "migration_identifier": null,
+                        "type": null,
+                        "parent_id": "aa678357-9416-5d2e-a7ec-f112e37c64e6",
+                        "position": 2,
+                        "bodyclass": null,
+                        "full_width": false,
+                        "localizations": {
+                          "fr": {
+                            "id": "55948af8-8cf1-5fbe-ba39-18a3e5fa15f3",
+                            "migration_identifier": null,
+                            "title": "Page with no dependency",
+                            "breadcrumb_title": null,
+                            "featured_image": {
+                              "blob_id": null,
+                              "alt": null,
+                              "credit": null,
+                              "url": null
+                            },
+                            "meta_description": null,
+                            "published": true,
+                            "published_at": "2010-11-28T01:00:00.000+01:00",
+                            "slug": "page-with-no-dependency",
+                            "summary": null,
+                            "text": null,
+                            "header_cta": null,
+                            "header_cta_label": null,
+                            "header_cta_url": null,
+                            "blocks": [],
+                            "created_at": "2025-01-10T11:50:17.622+01:00",
+                            "updated_at": "2025-01-10T11:50:17.622+01:00"
+                          }
+                        },
+                        "created_at": "2025-01-10T11:50:17.635+01:00",
+                        "updated_at": "2025-01-10T11:50:17.635+01:00"
+                      }
+                    ]
+                  }
+                },
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/communication_website_page"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a page",
+        "tags": [
+          "Communication::Website::Page"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful creation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful creation": {
+                    "value": {
+                      "id": "d2ff9eaa-b3cd-426f-b365-04227a45547d",
+                      "migration_identifier": "page-from-api-1",
+                      "type": null,
+                      "parent_id": "aa678357-9416-5d2e-a7ec-f112e37c64e6",
+                      "position": 3,
+                      "bodyclass": null,
+                      "full_width": true,
+                      "localizations": {
+                        "fr": {
+                          "id": "1bcd2831-86c5-43e7-a602-35b40094b279",
+                          "migration_identifier": "page-from-api-1-fr",
+                          "title": "Ma nouvelle page",
+                          "breadcrumb_title": "Nouvelle page",
+                          "featured_image": {
+                            "blob_id": "8a6a446b-6baf-4744-8b44-332c99741d54",
+                            "alt": "La lumière brille sur les parois du canyon",
+                            "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ6eGN0ZG1vN3RkdG5hZjZtbnZ4c2tibmxqcW95IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjUtMDEtMTBUMTE6NTA6MTkuMjMzWiIsInB1ciI6ImJsb2Jfa2V5In19--33dd488a603c3c24d76cb3acdd69592f6ce66f2c/photo-1703923633616-254e78f6e9df"
+                          },
+                          "meta_description": "Une nouvelle page depuis l'API",
+                          "published": true,
+                          "published_at": "2024-11-29T17:49:00.000+01:00",
+                          "slug": "ma-nouvelle-page",
+                          "summary": "<p>Ceci est une nouvelle page créée depuis l'API.</p>",
+                          "text": null,
+                          "header_cta": true,
+                          "header_cta_label": "Découvrir",
+                          "header_cta_url": "https://www.example.com",
+                          "blocks": [
+                            {
+                              "id": "1f9f5e93-98a3-40c4-9352-8f97c3a4d5ab",
+                              "migration_identifier": "page-from-api-1-fr-block-1",
+                              "template_kind": "chapter",
+                              "title": "Mon premier chapitre",
+                              "position": 1,
+                              "published": true,
+                              "html_class": null,
+                              "data": {
+                                "layout": "no_background",
+                                "text": "<p>Ceci est mon premier chapitre</p>",
+                                "notes": "",
+                                "image": {
+                                  "id": ""
+                                },
+                                "alt": "",
+                                "credit": ""
+                              },
+                              "created_at": "2025-01-10T11:50:19.183+01:00",
+                              "updated_at": "2025-01-10T11:50:19.183+01:00"
+                            }
+                          ],
+                          "created_at": "2025-01-10T11:50:19.181+01:00",
+                          "updated_at": "2025-01-10T11:50:19.192+01:00"
+                        }
+                      },
+                      "created_at": "2025-01-10T11:50:19.177+01:00",
+                      "updated_at": "2025-01-10T11:50:19.224+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.slug": [
+                          "can't be blank",
+                          "has already been taken",
+                          "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                        ],
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "$ref": "#/components/schemas/communication_website_page"
+                  }
+                },
+                "required": [
+                  "page"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/communication/websites/{website_id}/pages/upsert": {
+      "post": {
+        "summary": "Upsert pages",
+        "tags": [
+          "Communication::Website::Page"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful upsertion",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful upsertion": {
+                    "value": {
+                      "created": [
+                        {
+                          "id": "ec03e6d6-aa56-4a05-86cd-c5358d07aa84",
+                          "migration_identifier": "page-from-api-1",
+                          "type": null,
+                          "parent_id": "aa678357-9416-5d2e-a7ec-f112e37c64e6",
+                          "position": 3,
+                          "bodyclass": null,
+                          "full_width": true,
+                          "localizations": {
+                            "fr": {
+                              "id": "a3e2d471-5d08-43cf-b662-f214859df277",
+                              "migration_identifier": "page-from-api-1-fr",
+                              "title": "Ma nouvelle page",
+                              "breadcrumb_title": "Nouvelle page",
+                              "featured_image": {
+                                "blob_id": "ee2a472a-3e3d-4bab-8e5a-df70d7a6d646",
+                                "alt": "La lumière brille sur les parois du canyon",
+                                "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJiNGxqNmp0d2xtNGJrM2pvc3dndDAydHlnOGlvIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjUtMDEtMTBUMTE6NTA6MTkuNTAzWiIsInB1ciI6ImJsb2Jfa2V5In19--0dc338deed70648196f9d8557870d4fd4c262f8c/photo-1703923633616-254e78f6e9df"
+                              },
+                              "meta_description": "Une nouvelle page depuis l'API",
+                              "published": true,
+                              "published_at": "2024-11-29T17:49:00.000+01:00",
+                              "slug": "ma-nouvelle-page",
+                              "summary": "<p>Ceci est une nouvelle page créée depuis l'API.</p>",
+                              "text": null,
+                              "header_cta": true,
+                              "header_cta_label": "Découvrir",
+                              "header_cta_url": "https://www.example.com",
+                              "blocks": [
+                                {
+                                  "id": "b4a13523-a268-4a3b-b315-ce227c65ba67",
+                                  "migration_identifier": "page-from-api-1-fr-block-1",
+                                  "template_kind": "chapter",
+                                  "title": "Mon premier chapitre",
+                                  "position": 1,
+                                  "published": true,
+                                  "html_class": null,
+                                  "data": {
+                                    "layout": "no_background",
+                                    "text": "<p>Ceci est mon premier chapitre</p>",
+                                    "notes": "",
+                                    "image": {
+                                      "id": ""
+                                    },
+                                    "alt": "",
+                                    "credit": ""
+                                  },
+                                  "created_at": "2025-01-10T11:50:19.418+01:00",
+                                  "updated_at": "2025-01-10T11:50:19.418+01:00"
+                                }
+                              ],
+                              "created_at": "2025-01-10T11:50:19.416+01:00",
+                              "updated_at": "2025-01-10T11:50:19.423+01:00"
+                            }
+                          },
+                          "created_at": "2025-01-10T11:50:19.413+01:00",
+                          "updated_at": "2025-01-10T11:50:19.438+01:00"
+                        }
+                      ],
+                      "updated": [
+                        {
+                          "id": "aa9402a0-16f6-5075-b5b0-5467750ed326",
+                          "migration_identifier": "test-page-fixture-1",
+                          "type": null,
+                          "parent_id": "aa678357-9416-5d2e-a7ec-f112e37c64e6",
+                          "position": 1,
+                          "bodyclass": null,
+                          "full_width": false,
+                          "localizations": {
+                            "fr": {
+                              "id": "4a90b759-299a-5154-85e2-53600a6719b0",
+                              "migration_identifier": "test-page-fixture-1-fr",
+                              "title": "Mon nouveau titre",
+                              "breadcrumb_title": null,
+                              "featured_image": {
+                                "blob_id": null,
+                                "alt": null,
+                                "credit": null,
+                                "url": null
+                              },
+                              "meta_description": null,
+                              "published": true,
+                              "published_at": "2010-11-28T01:00:00.000+01:00",
+                              "slug": "test",
+                              "summary": null,
+                              "text": null,
+                              "header_cta": null,
+                              "header_cta_label": null,
+                              "header_cta_url": null,
+                              "blocks": [],
+                              "created_at": "2025-01-10T11:50:17.622+01:00",
+                              "updated_at": "2025-01-10T11:50:19.466+01:00"
+                            }
+                          },
+                          "created_at": "2025-01-10T11:50:17.635+01:00",
+                          "updated_at": "2025-01-10T11:50:19.477+01:00"
+                        }
+                      ],
+                      "errors": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Website not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "created": [],
+                      "updated": [],
+                      "errors": [
+                        {
+                          "index": 0,
+                          "errors": {
+                            "localizations.slug": [
+                              "can't be blank",
+                              "has already been taken",
+                              "ne peut contenir que des lettres minuscules, des chiffres et des traits d'union."
+                            ],
+                            "localizations.title": [
+                              "can't be blank"
+                            ],
+                            "localizations": [
+                              "is invalid"
+                            ]
+                          }
+                        },
+                        {
+                          "index": 1,
+                          "errors": {
+                            "localizations.title": [
+                              "can't be blank"
+                            ],
+                            "localizations": [
+                              "is invalid"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pages": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/communication_website_page"
+                    }
+                  }
+                },
+                "required": [
+                  "pages"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/communication/websites/{website_id}/pages/{id}": {
+      "get": {
+        "summary": "Shows a page",
+        "tags": [
+          "Communication::Website::Page"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Page identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful operation": {
+                    "value": {
+                      "id": "aa9402a0-16f6-5075-b5b0-5467750ed326",
+                      "migration_identifier": "test-page-fixture-1",
+                      "type": null,
+                      "parent_id": "aa678357-9416-5d2e-a7ec-f112e37c64e6",
+                      "position": 1,
+                      "bodyclass": null,
+                      "full_width": false,
+                      "localizations": {
+                        "fr": {
+                          "id": "4a90b759-299a-5154-85e2-53600a6719b0",
+                          "migration_identifier": "test-page-fixture-1-fr",
+                          "title": "Test",
+                          "breadcrumb_title": null,
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
+                          "meta_description": null,
+                          "published": true,
+                          "published_at": "2010-11-28T01:00:00.000+01:00",
+                          "slug": "test",
+                          "summary": null,
+                          "text": null,
+                          "header_cta": null,
+                          "header_cta_label": null,
+                          "header_cta_url": null,
+                          "blocks": [],
+                          "created_at": "2025-01-10T11:50:17.622+01:00",
+                          "updated_at": "2025-01-10T11:50:17.622+01:00"
+                        }
+                      },
+                      "created_at": "2025-01-10T11:50:17.635+01:00",
+                      "updated_at": "2025-01-10T11:50:17.635+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Page not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a page",
+        "tags": [
+          "Communication::Website::Page"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Page identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Successful update": {
+                    "value": {
+                      "id": "aa9402a0-16f6-5075-b5b0-5467750ed326",
+                      "migration_identifier": "test-page-fixture-1",
+                      "type": null,
+                      "parent_id": "aa678357-9416-5d2e-a7ec-f112e37c64e6",
+                      "position": 1,
+                      "bodyclass": null,
+                      "full_width": false,
+                      "localizations": {
+                        "fr": {
+                          "id": "4a90b759-299a-5154-85e2-53600a6719b0",
+                          "migration_identifier": "test-page-fixture-1-fr",
+                          "title": "Mon nouveau titre",
+                          "breadcrumb_title": null,
+                          "featured_image": {
+                            "blob_id": null,
+                            "alt": null,
+                            "credit": null,
+                            "url": null
+                          },
+                          "meta_description": null,
+                          "published": true,
+                          "published_at": "2010-11-28T01:00:00.000+01:00",
+                          "slug": "test",
+                          "summary": null,
+                          "text": null,
+                          "header_cta": null,
+                          "header_cta_label": null,
+                          "header_cta_url": null,
+                          "blocks": [],
+                          "created_at": "2025-01-10T11:50:17.622+01:00",
+                          "updated_at": "2025-01-10T11:50:19.639+01:00"
+                        }
+                      },
+                      "created_at": "2025-01-10T11:50:17.635+01:00",
+                      "updated_at": "2025-01-10T11:50:19.640+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing migration identifier.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Missing migration identifier.": {
+                    "value": {
+                      "error": "Missing migration identifier."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Page not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Invalid parameters": {
+                    "value": {
+                      "errors": {
+                        "localizations.title": [
+                          "can't be blank"
+                        ],
+                        "localizations": [
+                          "is invalid"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "$ref": "#/components/schemas/communication_website_page"
+                  }
+                },
+                "required": [
+                  "page"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes a page",
+        "tags": [
+          "Communication::Website::Page"
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "website_id",
+            "in": "path",
+            "description": "Website identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Page identifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful deletion"
+          },
+          "401": {
+            "description": "Unauthorized. Please make sure you provide a valid API key.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized. Please make sure you provide a valid API key.": {
+                    "value": {
+                      "message": "You are not authorized to access this resource."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Website not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  },
+                  "Page not found": {
+                    "value": {
+                      "message": "The resource you were looking for doesn't exist."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/communication/websites/{website_id}/posts": {
       "get": {
         "summary": "Lists a website's posts",
@@ -4230,12 +5431,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-20T18:10:28.224+01:00",
-                            "updated_at": "2024-12-20T18:10:28.224+01:00"
+                            "created_at": "2025-01-10T11:50:17.646+01:00",
+                            "updated_at": "2025-01-10T11:50:17.646+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T18:10:28.235+01:00",
-                        "updated_at": "2024-12-20T18:10:28.235+01:00"
+                        "created_at": "2025-01-10T11:50:17.658+01:00",
+                        "updated_at": "2025-01-10T11:50:17.658+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -4261,12 +5462,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-20T18:10:28.224+01:00",
-                            "updated_at": "2024-12-20T18:10:28.224+01:00"
+                            "created_at": "2025-01-10T11:50:17.646+01:00",
+                            "updated_at": "2025-01-10T11:50:17.646+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T18:10:28.235+01:00",
-                        "updated_at": "2024-12-20T18:10:28.235+01:00"
+                        "created_at": "2025-01-10T11:50:17.658+01:00",
+                        "updated_at": "2025-01-10T11:50:17.658+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -4292,12 +5493,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-20T18:10:28.224+01:00",
-                            "updated_at": "2024-12-20T18:10:28.224+01:00"
+                            "created_at": "2025-01-10T11:50:17.646+01:00",
+                            "updated_at": "2025-01-10T11:50:17.646+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T18:10:28.235+01:00",
-                        "updated_at": "2024-12-20T18:10:28.235+01:00"
+                        "created_at": "2025-01-10T11:50:17.658+01:00",
+                        "updated_at": "2025-01-10T11:50:17.658+01:00"
                       }
                     ]
                   }
@@ -4370,19 +5571,19 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "b09aad11-bcc4-4ae7-a1e6-41c944a1dbe5",
+                      "id": "1f9daa77-09fc-44bd-8f5d-9451fb012561",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "e1d7edf7-3cfc-467e-8a6a-5ca9b98dbad2",
+                          "id": "37237180-b096-46b3-b047-505fc947e8d6",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
-                            "blob_id": "1bf7b06f-971f-4a88-9862-a47bf04f82e6",
+                            "blob_id": "397d7765-e703-4b5f-bf8f-3bd109f8def8",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ0NndndGtrNXRuemNvOGF4Y2xzemI2NGg4Z2NvIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MjkuNjQxWiIsInB1ciI6ImJsb2Jfa2V5In19--2298b33d13904ea0cc6c6d545fb295b617c286eb/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJxdTU0cW9ocHZxenowbnhycTNhOHNjbTFqNGd2IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjUtMDEtMTBUMTE6NTA6MTkuODk4WiIsInB1ciI6ImJsb2Jfa2V5In19--941ee3c837f0785c6d7f8bd63ff0e36baafdeaca/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une nouvelle actualité depuis l'API",
                           "pinned": false,
@@ -4394,7 +5595,7 @@
                           "text": null,
                           "blocks": [
                             {
-                              "id": "a1059327-1610-4042-bb65-ce116ef9a990",
+                              "id": "41627a86-4092-46a2-b0e3-695258197c56",
                               "migration_identifier": "post-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -4411,16 +5612,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2024-12-20T18:10:29.575+01:00",
-                              "updated_at": "2024-12-20T18:10:29.575+01:00"
+                              "created_at": "2025-01-10T11:50:19.822+01:00",
+                              "updated_at": "2025-01-10T11:50:19.822+01:00"
                             }
                           ],
-                          "created_at": "2024-12-20T18:10:29.573+01:00",
-                          "updated_at": "2024-12-20T18:10:29.583+01:00"
+                          "created_at": "2025-01-10T11:50:19.819+01:00",
+                          "updated_at": "2025-01-10T11:50:19.833+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T18:10:29.570+01:00",
-                      "updated_at": "2024-12-20T18:10:29.638+01:00"
+                      "created_at": "2025-01-10T11:50:19.815+01:00",
+                      "updated_at": "2025-01-10T11:50:19.894+01:00"
                     }
                   }
                 }
@@ -4546,19 +5747,19 @@
                     "value": {
                       "created": [
                         {
-                          "id": "ab0ac7bc-23d9-4659-aee4-3b1549e19d27",
+                          "id": "973190e8-f83b-4a59-ac64-849e271c76b9",
                           "migration_identifier": "post-from-api-1",
                           "full_width": false,
                           "localizations": {
                             "fr": {
-                              "id": "8b2249c1-ab1d-4f65-aad5-3b24ec2ca811",
+                              "id": "2f38c3ff-f43b-49ff-9c1b-56bd522dbc25",
                               "migration_identifier": "post-from-api-1-fr",
                               "title": "Ma nouvelle actualité",
                               "featured_image": {
-                                "blob_id": "79c9b466-6aa5-42b4-bf8f-dadac6fbf105",
+                                "blob_id": "4509b7e9-afe2-4279-be2f-d25dd9c0a4d1",
                                 "alt": "La lumière brille sur les parois du canyon",
                                 "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ4aWVkdXB5dzV3YXltY2J3YnNiNDdvMmExMmk1IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MjkuNzYyWiIsInB1ciI6ImJsb2Jfa2V5In19--0198a8121f8288c200c4c2fc0a9b125bb6a2e004/photo-1703923633616-254e78f6e9df"
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJkYXk0N3o2OGVzYzZidDFmdGVpbG5yOTZzdTR0IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjUtMDEtMTBUMTE6NTA6MjAuMDYwWiIsInB1ciI6ImJsb2Jfa2V5In19--1980f988fb5d3dca4d23f575d2360b5370949c98/photo-1703923633616-254e78f6e9df"
                               },
                               "meta_description": "Une nouvelle actualité depuis l'API",
                               "pinned": false,
@@ -4570,7 +5771,7 @@
                               "text": null,
                               "blocks": [
                                 {
-                                  "id": "fe4981a5-b811-4c62-8a6d-93ec95f574c7",
+                                  "id": "049d67c9-7675-4e84-bc52-daa8a48ae020",
                                   "migration_identifier": "post-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -4587,16 +5788,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2024-12-20T18:10:29.704+01:00",
-                                  "updated_at": "2024-12-20T18:10:29.704+01:00"
+                                  "created_at": "2025-01-10T11:50:19.982+01:00",
+                                  "updated_at": "2025-01-10T11:50:19.982+01:00"
                                 }
                               ],
-                              "created_at": "2024-12-20T18:10:29.703+01:00",
-                              "updated_at": "2024-12-20T18:10:29.708+01:00"
+                              "created_at": "2025-01-10T11:50:19.980+01:00",
+                              "updated_at": "2025-01-10T11:50:19.990+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T18:10:29.701+01:00",
-                          "updated_at": "2024-12-20T18:10:29.729+01:00"
+                          "created_at": "2025-01-10T11:50:19.977+01:00",
+                          "updated_at": "2025-01-10T11:50:20.010+01:00"
                         }
                       ],
                       "updated": [
@@ -4624,12 +5825,12 @@
                               "summary": null,
                               "text": null,
                               "blocks": [],
-                              "created_at": "2024-12-20T18:10:28.224+01:00",
-                              "updated_at": "2024-12-20T18:10:29.748+01:00"
+                              "created_at": "2025-01-10T11:50:17.646+01:00",
+                              "updated_at": "2025-01-10T11:50:20.042+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T18:10:28.235+01:00",
-                          "updated_at": "2024-12-20T18:10:29.748+01:00"
+                          "created_at": "2025-01-10T11:50:17.658+01:00",
+                          "updated_at": "2025-01-10T11:50:20.043+01:00"
                         }
                       ],
                       "errors": []
@@ -4809,12 +6010,12 @@
                           "summary": null,
                           "text": null,
                           "blocks": [],
-                          "created_at": "2024-12-20T18:10:28.224+01:00",
-                          "updated_at": "2024-12-20T18:10:28.224+01:00"
+                          "created_at": "2025-01-10T11:50:17.646+01:00",
+                          "updated_at": "2025-01-10T11:50:17.646+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T18:10:28.235+01:00",
-                      "updated_at": "2024-12-20T18:10:28.235+01:00"
+                      "created_at": "2025-01-10T11:50:17.658+01:00",
+                      "updated_at": "2025-01-10T11:50:17.658+01:00"
                     }
                   }
                 }
@@ -4917,12 +6118,12 @@
                           "summary": null,
                           "text": null,
                           "blocks": [],
-                          "created_at": "2024-12-20T18:10:28.224+01:00",
-                          "updated_at": "2024-12-20T18:10:29.867+01:00"
+                          "created_at": "2025-01-10T11:50:17.646+01:00",
+                          "updated_at": "2025-01-10T11:50:20.122+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T18:10:28.235+01:00",
-                      "updated_at": "2024-12-20T18:10:29.868+01:00"
+                      "created_at": "2025-01-10T11:50:17.658+01:00",
+                      "updated_at": "2025-01-10T11:50:20.122+01:00"
                     }
                   }
                 }
@@ -5145,12 +6346,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-20T18:10:28.189+01:00",
-                            "updated_at": "2024-12-20T18:10:28.189+01:00"
+                            "created_at": "2025-01-10T11:50:17.605+01:00",
+                            "updated_at": "2025-01-10T11:50:17.605+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T18:10:28.237+01:00",
-                        "updated_at": "2024-12-20T18:10:28.237+01:00"
+                        "created_at": "2025-01-10T11:50:17.661+01:00",
+                        "updated_at": "2025-01-10T11:50:17.661+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -5192,8 +6393,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-20T18:10:28.189+01:00",
-                            "updated_at": "2024-12-20T18:10:28.189+01:00"
+                            "created_at": "2025-01-10T11:50:17.605+01:00",
+                            "updated_at": "2025-01-10T11:50:17.605+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -5211,12 +6412,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2024-12-20T18:10:28.189+01:00",
-                            "updated_at": "2024-12-20T18:10:28.189+01:00"
+                            "created_at": "2025-01-10T11:50:17.605+01:00",
+                            "updated_at": "2025-01-10T11:50:17.605+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T18:10:28.237+01:00",
-                        "updated_at": "2024-12-20T18:10:28.237+01:00"
+                        "created_at": "2025-01-10T11:50:17.661+01:00",
+                        "updated_at": "2025-01-10T11:50:17.661+01:00"
                       }
                     ]
                   }
@@ -5316,12 +6517,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2024-12-20T18:10:28.189+01:00",
-                          "updated_at": "2024-12-20T18:10:28.189+01:00"
+                          "created_at": "2025-01-10T11:50:17.605+01:00",
+                          "updated_at": "2025-01-10T11:50:17.605+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T18:10:28.237+01:00",
-                      "updated_at": "2024-12-20T18:10:28.237+01:00"
+                      "created_at": "2025-01-10T11:50:17.661+01:00",
+                      "updated_at": "2025-01-10T11:50:17.661+01:00"
                     }
                   }
                 },
@@ -5419,12 +6620,12 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2024-12-20T18:10:28.301+01:00",
-                            "updated_at": "2024-12-20T18:10:28.301+01:00"
+                            "created_at": "2025-01-10T11:50:17.748+01:00",
+                            "updated_at": "2025-01-10T11:50:17.748+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T18:10:28.314+01:00",
-                        "updated_at": "2024-12-20T18:10:28.314+01:00"
+                        "created_at": "2025-01-10T11:50:17.758+01:00",
+                        "updated_at": "2025-01-10T11:50:17.758+01:00"
                       },
                       {
                         "id": "c71c1e3d-24c7-55a8-bf15-11296170b436",
@@ -5479,24 +6680,26 @@
                                       "role": ""
                                     }
                                   ],
+                                  "layout": "grid",
                                   "mode": "selection",
                                   "category_id": "",
                                   "description": "",
                                   "alphabetical": false,
                                   "option_image": true,
                                   "option_summary": true,
-                                  "option_link": true
+                                  "option_link": true,
+                                  "option_contact": false
                                 },
-                                "created_at": "2024-12-20T18:10:28.133+01:00",
-                                "updated_at": "2024-12-20T18:10:28.133+01:00"
+                                "created_at": "2025-01-10T11:50:17.549+01:00",
+                                "updated_at": "2025-01-10T11:50:17.549+01:00"
                               }
                             ],
-                            "created_at": "2024-12-20T18:10:28.301+01:00",
-                            "updated_at": "2024-12-20T18:10:28.301+01:00"
+                            "created_at": "2025-01-10T11:50:17.748+01:00",
+                            "updated_at": "2025-01-10T11:50:17.748+01:00"
                           }
                         },
-                        "created_at": "2024-12-20T18:10:28.314+01:00",
-                        "updated_at": "2024-12-20T18:10:28.314+01:00"
+                        "created_at": "2025-01-10T11:50:17.758+01:00",
+                        "updated_at": "2025-01-10T11:50:17.758+01:00"
                       }
                     ]
                   }
@@ -5545,7 +6748,7 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "e8aff297-9aae-47de-9686-7f30a2c94ddb",
+                      "id": "77c829f0-36ac-429d-8dee-8a3b1e4b4549",
                       "migration_identifier": "organization-from-api-1",
                       "kind": "company",
                       "active": true,
@@ -5561,15 +6764,15 @@
                       "siren": "123456789",
                       "localizations": {
                         "fr": {
-                          "id": "d04e6652-3572-44b5-851a-82e7c28a4ee0",
+                          "id": "c139a55a-0e5d-4340-ab69-921abd02282f",
                           "migration_identifier": "organization-from-api-1-fr",
                           "name": "Mon organisation",
                           "long_name": "Mon organisation ESS",
                           "featured_image": {
-                            "blob_id": "388bac80-effa-4177-82bd-254c2ebdcaed",
+                            "blob_id": "c8734a21-35f0-4c60-a991-f771b0d0134d",
                             "alt": "La lumière brille sur les parois du canyon",
                             "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiI5bmR0MmpmdHl6N2s0Ynd0enIxeXJ5bGtiYXlsIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MzAuMTIzWiIsInB1ciI6ImJsb2Jfa2V5In19--dcab61c32dd21cfa761bcbef65d2c0f402b34c06/photo-1703923633616-254e78f6e9df"
+                            "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiI0YXY1c3IxdGFwemJoYXFoeG03ZXNrY2hjYTZnIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjUtMDEtMTBUMTE6NTA6MjAuMzc5WiIsInB1ciI6ImJsb2Jfa2V5In19--da6811361ea1406dd28c39aadcf36d072ee8feb8/photo-1703923633616-254e78f6e9df"
                           },
                           "meta_description": "Une organisation de l'ESS",
                           "address_name": "Siège",
@@ -5583,7 +6786,7 @@
                           "text": null,
                           "blocks": [
                             {
-                              "id": "32bae2d1-cff1-4e3e-8336-d6f5bcbeb78f",
+                              "id": "51104ccf-608d-4184-8ff9-f44c7a0f6a31",
                               "migration_identifier": "organization-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -5600,16 +6803,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2024-12-20T18:10:30.106+01:00",
-                              "updated_at": "2024-12-20T18:10:30.106+01:00"
+                              "created_at": "2025-01-10T11:50:20.365+01:00",
+                              "updated_at": "2025-01-10T11:50:20.365+01:00"
                             }
                           ],
-                          "created_at": "2024-12-20T18:10:30.104+01:00",
-                          "updated_at": "2024-12-20T18:10:30.111+01:00"
+                          "created_at": "2025-01-10T11:50:20.363+01:00",
+                          "updated_at": "2025-01-10T11:50:20.370+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T18:10:30.101+01:00",
-                      "updated_at": "2024-12-20T18:10:30.119+01:00"
+                      "created_at": "2025-01-10T11:50:20.360+01:00",
+                      "updated_at": "2025-01-10T11:50:20.374+01:00"
                     }
                   }
                 }
@@ -5711,7 +6914,7 @@
                     "value": {
                       "created": [
                         {
-                          "id": "d73fb5e0-22ab-41a4-8ad6-af00748e0ef7",
+                          "id": "8f3c0dd1-0568-4757-9416-cb3e252d8e93",
                           "migration_identifier": "organization-from-api-1",
                           "kind": "company",
                           "active": true,
@@ -5727,15 +6930,15 @@
                           "siren": "123456789",
                           "localizations": {
                             "fr": {
-                              "id": "1d067b06-1d12-4e0e-bae6-8c8a2df8cafe",
+                              "id": "496121e2-dee2-4d88-8e9c-0b691ea188b4",
                               "migration_identifier": "organization-from-api-1-fr",
                               "name": "Mon organisation",
                               "long_name": "Mon organisation ESS",
                               "featured_image": {
-                                "blob_id": "0632fbd8-aced-456a-8f42-2cb49ec7e591",
+                                "blob_id": "65ed4f42-b10b-422d-ae51-41c055e7ada3",
                                 "alt": "La lumière brille sur les parois du canyon",
                                 "credit": "<p>Photo de <a href=\"https://unsplash.com/fr/@johnnzhou\">John Zhou</a> sur <a href=\"https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk\">Unsplash</a></p>",
-                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJ3MzdxMzBuNzFiYWZ2ZGs5b3FmcHNnYXR2YnNlIiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjQtMTItMjBUMTg6MTA6MzAuMjAzWiIsInB1ciI6ImJsb2Jfa2V5In19--89a4163af085ee393c1d32856f45caba45dd7424/photo-1703923633616-254e78f6e9df"
+                                "url": "http://my-university.osuny.test/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJhb3lkcXo0MW1jbjhzajh5dmN1MWEyOGR3NDE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwicGhvdG8tMTcwMzkyMzYzMzYxNi0yNTRlNzhmNmU5ZGZcIjsgZmlsZW5hbWUqPVVURi04JydwaG90by0xNzAzOTIzNjMzNjE2LTI1NGU3OGY2ZTlkZiIsImNvbnRlbnRfdHlwZSI6ImltYWdlL2pwZWciLCJzZXJ2aWNlX25hbWUiOiJ0ZXN0In0sImV4cCI6IjIwMjUtMDEtMTBUMTE6NTA6MjAuNDY0WiIsInB1ciI6ImJsb2Jfa2V5In19--ccc7e6115fda961c944cae03b478d51f574aec71/photo-1703923633616-254e78f6e9df"
                               },
                               "meta_description": "Une organisation de l'ESS",
                               "address_name": "Siège",
@@ -5749,7 +6952,7 @@
                               "text": null,
                               "blocks": [
                                 {
-                                  "id": "6f216ec6-34e3-4355-9827-5783b355a4cb",
+                                  "id": "eac4327b-7e3e-4a8f-89c5-10cb0c869731",
                                   "migration_identifier": "organization-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -5766,16 +6969,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2024-12-20T18:10:30.172+01:00",
-                                  "updated_at": "2024-12-20T18:10:30.172+01:00"
+                                  "created_at": "2025-01-10T11:50:20.434+01:00",
+                                  "updated_at": "2025-01-10T11:50:20.434+01:00"
                                 }
                               ],
-                              "created_at": "2024-12-20T18:10:30.170+01:00",
-                              "updated_at": "2024-12-20T18:10:30.177+01:00"
+                              "created_at": "2025-01-10T11:50:20.433+01:00",
+                              "updated_at": "2025-01-10T11:50:20.438+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T18:10:30.169+01:00",
-                          "updated_at": "2024-12-20T18:10:30.180+01:00"
+                          "created_at": "2025-01-10T11:50:20.432+01:00",
+                          "updated_at": "2025-01-10T11:50:20.441+01:00"
                         }
                       ],
                       "updated": [
@@ -5832,24 +7035,26 @@
                                         "role": ""
                                       }
                                     ],
+                                    "layout": "grid",
                                     "mode": "selection",
                                     "category_id": "",
                                     "description": "",
                                     "alphabetical": false,
                                     "option_image": true,
                                     "option_summary": true,
-                                    "option_link": true
+                                    "option_link": true,
+                                    "option_contact": false
                                   },
-                                  "created_at": "2024-12-20T18:10:28.133+01:00",
-                                  "updated_at": "2024-12-20T18:10:28.133+01:00"
+                                  "created_at": "2025-01-10T11:50:17.549+01:00",
+                                  "updated_at": "2025-01-10T11:50:17.549+01:00"
                                 }
                               ],
-                              "created_at": "2024-12-20T18:10:28.301+01:00",
-                              "updated_at": "2024-12-20T18:10:30.200+01:00"
+                              "created_at": "2025-01-10T11:50:17.748+01:00",
+                              "updated_at": "2025-01-10T11:50:20.462+01:00"
                             }
                           },
-                          "created_at": "2024-12-20T18:10:28.314+01:00",
-                          "updated_at": "2024-12-20T18:10:30.200+01:00"
+                          "created_at": "2025-01-10T11:50:17.758+01:00",
+                          "updated_at": "2025-01-10T11:50:20.462+01:00"
                         }
                       ],
                       "errors": []
@@ -6035,24 +7240,26 @@
                                     "role": ""
                                   }
                                 ],
+                                "layout": "grid",
                                 "mode": "selection",
                                 "category_id": "",
                                 "description": "",
                                 "alphabetical": false,
                                 "option_image": true,
                                 "option_summary": true,
-                                "option_link": true
+                                "option_link": true,
+                                "option_contact": false
                               },
-                              "created_at": "2024-12-20T18:10:28.133+01:00",
-                              "updated_at": "2024-12-20T18:10:28.133+01:00"
+                              "created_at": "2025-01-10T11:50:17.549+01:00",
+                              "updated_at": "2025-01-10T11:50:17.549+01:00"
                             }
                           ],
-                          "created_at": "2024-12-20T18:10:28.301+01:00",
-                          "updated_at": "2024-12-20T18:10:28.301+01:00"
+                          "created_at": "2025-01-10T11:50:17.748+01:00",
+                          "updated_at": "2025-01-10T11:50:17.748+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T18:10:28.314+01:00",
-                      "updated_at": "2024-12-20T18:10:28.314+01:00"
+                      "created_at": "2025-01-10T11:50:17.758+01:00",
+                      "updated_at": "2025-01-10T11:50:17.758+01:00"
                     }
                   }
                 }
@@ -6170,24 +7377,26 @@
                                     "role": ""
                                   }
                                 ],
+                                "layout": "grid",
                                 "mode": "selection",
                                 "category_id": "",
                                 "description": "",
                                 "alphabetical": false,
                                 "option_image": true,
                                 "option_summary": true,
-                                "option_link": true
+                                "option_link": true,
+                                "option_contact": false
                               },
-                              "created_at": "2024-12-20T18:10:28.133+01:00",
-                              "updated_at": "2024-12-20T18:10:28.133+01:00"
+                              "created_at": "2025-01-10T11:50:17.549+01:00",
+                              "updated_at": "2025-01-10T11:50:17.549+01:00"
                             }
                           ],
-                          "created_at": "2024-12-20T18:10:28.301+01:00",
-                          "updated_at": "2024-12-20T18:10:30.278+01:00"
+                          "created_at": "2025-01-10T11:50:17.748+01:00",
+                          "updated_at": "2025-01-10T11:50:20.520+01:00"
                         }
                       },
-                      "created_at": "2024-12-20T18:10:28.314+01:00",
-                      "updated_at": "2024-12-20T18:10:30.278+01:00"
+                      "created_at": "2025-01-10T11:50:17.758+01:00",
+                      "updated_at": "2025-01-10T11:50:20.521+01:00"
                     }
                   }
                 }

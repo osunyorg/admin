@@ -6,12 +6,12 @@ class HugoTest < ActiveSupport::TestCase
     website = communication_websites(:website_with_github)
     # FIXME les permalinks ne sont pas calculés, tous les path sont faux
     # Home
-    page_l10n = communication_website_page_localizations(:page_root_fr)
+    page_l10n = communication_website_page_localizations(:root_page_fr)
     # assert_equal '/fr/', page_l10n.hugo(website).path
     assert_equal 'content/fr/_index.html', page_l10n.hugo(website).file
     assert_equal '', page_l10n.hugo(website).slug
     # Test
-    page_l10n = communication_website_page_localizations(:page_test_fr)
+    page_l10n = communication_website_page_localizations(:test_page_fr)
     # assert_equal '/fr/test/', page_l10n.hugo(website).path
     assert_equal 'content/fr/pages/test/_index.html', page_l10n.hugo(website).file
     assert_equal 'test', page_l10n.hugo(website).slug
