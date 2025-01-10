@@ -8,4 +8,5 @@ json.localizations do
     end
   end
 end
+json.extract! page, :category_ids
 json.extract! page, :created_at, :updated_at

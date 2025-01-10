@@ -446,11 +446,15 @@ en:
           pages:
             description: A highlight of some pages, with multiple layout options.
             edit:
+              category_id:
+                label: Category
+                placeholder: Select a category
               main_page:
                 title: Main page
               mode:
                 label: List kind
                 options:
+                  category: A specific category
                   children: Main page and children
                   selection: A specific selection of pages
               option_image:

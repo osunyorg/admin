@@ -21,4 +21,5 @@ exclude_patterns:
   - "db/**"
   - "config/**"
   - "docs/**"
+  - "spec/**"
   - "test/**"
