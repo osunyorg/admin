@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  is_taxonomy              :boolean          default(FALSE)
+#  migration_identifier     :string
 #  position                 :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -29,6 +30,7 @@ class Communication::Website::Page::Category < ApplicationRecord
   include Sanitizable
   include Localizable
   include WithMenuItemTarget
+  include WithOpenApi
   include WithUniversity
 
   has_and_belongs_to_many :pages,

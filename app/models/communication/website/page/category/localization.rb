@@ -6,6 +6,7 @@
 #  featured_image_alt       :text
 #  featured_image_credit    :text
 #  meta_description         :text
+#  migration_identifier     :string
 #  name                     :string
 #  path                     :string
 #  slug                     :string
@@ -33,6 +34,7 @@
 #
 class Communication::Website::Page::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
+  include WithOpenApi
 
   belongs_to :website,
               class_name: 'Communication::Website',
