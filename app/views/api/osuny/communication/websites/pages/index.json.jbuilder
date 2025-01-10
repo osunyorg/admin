@@ -1,0 +1,1 @@
+json.partial! "api/osuny/communication/websites/pages/page", collection: @pages, as: :page
