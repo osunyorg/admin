@@ -6,7 +6,7 @@
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-lg-8">
         <%= osuny_panel t('content') do %>
           <%= lf.input :title, input_html: { data: { translatable: true } } %>
           <%= lf.input :subtitle, input_html: { data: { translatable: true } } %>
@@ -14,9 +14,17 @@
           <%= lf.input :text, as: :summernote if strip_tags(l10n.text).present? %>
         <% end %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
-        <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+          </div>
+          <div class="col-lg-6">
+            <%= render 'admin/application/images/shared/form', f: lf, about: @l10n %>
+          </div>
+        </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-lg-4">
         <%= osuny_panel t('metadata') do %>
           <% if can? :publish, post %>
             <div class="row pure__row--small">
@@ -45,7 +53,6 @@
           <%= f.input :full_width, wrapper: :custom_boolean_switch %>
         <% end %>
         <%= render 'admin/application/images/featured/form', f: lf, about: @l10n %>
-        <%= render 'admin/application/images/shared/form', f: lf, about: @l10n %>
       </div>
     </div>
 

@@ -1,0 +1,212 @@
+<%
+# L'Escale du livre 2022
+search = about.to_s
+# communication_website_post_localization
+l10n_identifier =  about.class
+                        .base_class
+                        .to_s
+                        .parameterize
+                        .underscore
+# communication_website_post
+about_identifier = l10n_identifier.remove('_localization')
+# input[name="communication_website_post[localizations_attributes][0][featured_image]"]
+about_featured_image_file = "input[name=\"#{about_identifier}[localizations_attributes][0][featured_image]\"]".html_safe
+# input[name="communication_website_post[localizations_attributes][0][featured_image_delete]"]
+about_featured_image_file_delete = "input[name=\"#{about_identifier}[localizations_attributes][0][featured_image_delete]\"]".html_safe
+# input[name="communication_website_post[localizations_attributes][0][featured_image_infos]"]
+about_featured_image_file_infos = "input[name=\"#{about_identifier}[localizations_attributes][0][featured_image_infos]\"]".html_safe
+# .communication_website_post_localizations_featured_image
+about_featured_image_image = ".#{about_identifier}_localizations_featured_image"
+# #communication_website_post_localizations_attributes_0_featured_image_alt
+about_featured_image_alt = "##{about_identifier}_localizations_attributes_0_featured_image_alt"
+# #communication_website_post_localizations_featured_image_credit
+about_featured_image_credit = "##{about_identifier}_localizations_attributes_0_featured_image_credit"
+# fr, en...
+lang = about&.language&.iso_code if about.respond_to? :language
+# /admin/communication/photo_import.json?query=Page%20de%20test&per_page=12&page=1&lang=fr
+unsplash_path = admin_communication_unsplash_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json)
+pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json)
+%>
+
+<%# Include vue.js before call Vue.createApp %>
+<%= javascript_include_tag 'vue' %>
+
+<script nonce="<%= request.content_security_policy_nonce %>">
+  var app = Vue.createApp({
+    data() {
+      return {
+        parameters: {
+          per_page: 12,
+          lang: '<%= lang %>',
+        },
+        query: <%= search.to_json.html_safe %>,
+        featured_image: {
+          blob: {
+            id: "<%= about.featured_image&.blob&.id %>",
+            signed_id: "<%= about.featured_image&.signed_id %>",
+            preview: "<%= "/media/#{ about.featured_image&.signed_id }/preview.jpg" %>"
+          }
+        },
+        unsplash: {
+          url: '<%= unsplash_path %>',
+          page: 1,
+          data: {
+            results: [],
+            total: 0
+          },
+          selected: null
+        },
+        pexels: {
+          url: '<%= pexels_path %>',
+          page: 1,
+          data: {
+            results: [],
+            total: 0
+          },
+          selected: null
+        },
+        isOpened: false,
+        isReady: false
+      }
+    },
+    mounted() {
+      this.connectToDom();
+      this.isReady = true;
+    },
+    watch: {
+      'unsplash.page': function(newVal, oldVal) {
+        this.searchUnsplash();
+      },
+      'pexels.page': function(newVal, oldVal) {
+        this.searchPexels();
+      }
+    },
+    methods: {
+      connectToDom() {
+        this.targets = {
+          fileInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file %>'),
+          fileLabel: document.querySelector('<%= about_featured_image_image %> .js-sdfi-deletable-file__label'),
+          fileDeleteInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file_delete %>'),
+          fileInfosInput: document.querySelector('<%= about_featured_image_image %> <%= about_featured_image_file_infos %>'),
+          image: document.querySelector('<%= about_featured_image_image %> img'),
+          imageContainer: document.querySelector('<%= about_featured_image_image %> .sdfi-deletable-file__preview'),
+          alt: document.querySelector('<%= about_featured_image_alt %>'),
+          credit: document.querySelector('<%= about_featured_image_credit %>')
+        };
+
+        var modalElement = document.querySelector('#photoImportModal')
+        console.log(modalElement);
+        /*
+        this.modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+        console.log(this.modal);
+
+        modalElement.addEventListener('show.bs.modal', function (){
+          this.isOpened = true;
+          this.research();
+        }.bind(this));
+
+        modalElement.addEventListener('hide.bs.modal', function() {
+            this.isOpened = false;
+        }.bind(this));
+
+        document.addEventListener("keydown", function(event) {
+          if (event.key === "Enter" && this.isOpened) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            this.research();
+          }
+        }.bind(this));
+        */
+      },
+      onFileImageChange(event) {
+        var files = event.target.files || event.dataTransfer.files;
+        if (!files.length) {
+          return;
+        }
+        this.uploadFile(event.target, files[0]);
+      },
+      uploadFile(input, file) {
+        var size = Math.round(file.size / 1024 / 1024),
+            sizeLimit = <%= Rails.application.config.default_image_max_size %>,
+            sizeLimitMo = Math.round(sizeLimit / 1024 / 1024),
+            controller = new Vue.DirectUploadController(input, file, this.directUpload.url),
+            that = this;
+        if (file.size > sizeLimit) {
+          alert("<%= t('admin.communication.blocks.alerts.file_is_too_big').html_safe %> (" + size + " Mo > " + sizeLimitMo + " Mo)");
+          return;
+        }
+        controller.start(function (blob) {
+          that.featured_image.blob = {
+            id: blob.id,
+            signed_id: blob.signed_id,
+            filename: blob.filename,
+            preview: "/media/" + blob.signed_id + "/preview.jpg"
+          };
+          that.save();
+        });
+      },
+      removeImage() {
+        this.featured_image.blob = {};
+        this.featured_image.alt = "";
+        this.featured_image.credit = "";
+      },
+      research() {
+        this.searchUnsplash();
+        this.searchPexels();
+      },
+      searchUnsplash() {
+        var url = this.unsplash.url
+                      + '?query=' + encodeURIComponent(this.query)
+                      + '&page=' + this.unsplash.page
+                      + '&per_page=' + this.parameters.per_page
+                      + '&lang=' + this.parameters.lang
+        this.searchCloud(url, this.unsplash);
+      },
+      searchPexels() {
+        var url = this.pexels.url
+                    + '?query=' + encodeURIComponent(this.query)
+                    + '&page=' + this.pexels.page
+                    + '&per_page=' + this.parameters.per_page
+                    + '&lang=' + this.parameters.lang
+        this.searchCloud(url, this.pexels);
+      },
+      searchCloud(url, source) {
+        if (!this.query) {
+          return null;
+        }
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            source.data = JSON.parse(xmlHttp.responseText);
+            document.getElementById('results').scrollTop = 0;
+          }
+        }.bind(this);
+        xmlHttp.open("GET", url, false);
+        xmlHttp.send(null);
+      },
+      selectUnsplash(image) {
+        this.unsplash.selected = image.id;
+        this.pexels.selected = null;
+        this.selectFromCloud(image);
+      },
+      selectPexels(image) {
+        this.unsplash.selected = null;
+        this.pexels.selected = image.id;
+        this.selectFromCloud(image);
+      },
+      selectFromCloud(image) {
+        this.featured_image.blob.id = 'cloud';
+        this.featured_image.blob.signed_id = null;
+        this.featured_image.blob.preview = image.preview;
+        this.featured_image.credit = image.credit;
+        this.modal.hide();
+      }
+    }
+  });
+
+  window.addEventListener('load', function(){
+    setTimeout(function() {
+      app.mount('#photo-import-app');
+    }, 1000);
+  });
+</script>
