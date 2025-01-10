@@ -439,9 +439,12 @@ fr:
   open: Ouvrir
   organize: Organiser
   photo_import:
+    buttons:
+      medias: Choisir dans la médiathèque
+      cloud: Importer (Unsplash & Pexels)
+      upload: Envoyer une image
     next: Images suivantes
     nothing: Aucun résultat pour cette recherche
-    open: Unsplash & Pexels
     placeholder: Tapez votre recherche
     previous: Images précédentes
     search: Chercher

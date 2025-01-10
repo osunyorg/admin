@@ -1,0 +1,129 @@
+<button type="button"
+        class="btn btn-sm"
+        data-bs-toggle="modal"
+        data-bs-target="#photoImportModal">
+  <%= lucide_icon('cloud-download') %>
+  <%= t 'photo_import.buttons.cloud' %>
+</button>
+<input  type="hidden"
+        name="photo_import[unsplash]"
+        v-model="unsplash.selected">
+<input  class="form-control string optional"
+        type="hidden"
+        name="photo_import[pexels]"
+        v-model="pexels.selected">
+<div  class="modal fade"
+      id="photoImportModal"
+      tabindex="-1"
+      aria-labelledby="<%= t 'photo_import.buttons.cloud' %>"
+      aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="col-auto d-none d-lg-block">
+          <h5 class="modal-title"><%= t 'photo_import.title' %></h5>
+        </div>
+        <div class="col-auto d-flex flex-fill mx-lg-5">
+          <div class="input-group">
+            <input  type="text"
+                    name="search"
+                    placeholder="<%= t 'photo_import.placeholder' %>"
+                    v-model="query"
+                    class="form-control ms-auto">
+            <button type="button"
+                    class="btn btn-primary me-auto"
+                    v-on:click="research"
+                    aria-label="<%= t 'photo_import.search' %>">
+              <%= t 'photo_import.search' %>
+            </button>
+          </div>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="modal-body overflow-x-hidden" id="results">
+        <div class="row">
+          <div class="col-lg-6">
+            <p v-if="unsplash.data.results.length === 0 || !unsplash.data" >
+              <%= t 'photo_import.nothing' %>
+            </p>
+            <div class="photo_import__results photo_import__unsplash photo_import__unsplash__results" ref="results">
+              <img  :src="image.thumb"
+                    :alt="image.alt"
+                    v-for="image in unsplash.data.results" class="photo_import__results__result"
+                    v-on:click="selectUnsplash(image)">
+            </div>
+            <p class="small text-muted" v-if="unsplash.data.total_pages">
+              {{unsplash.page}} / {{unsplash.data.total_pages }}
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <p v-if="pexels.data.results.length === 0 || !pexels.data" >
+              <%= t 'photo_import.nothing' %>
+            </p>
+            <div class="photo_import__results photo_import__pexels photo_import__pexels__results" ref="results">
+              <img  :src="image.thumb"
+                    :alt="image.alt"
+                    v-for="image in pexels.data.results"
+                    v-on:click="selectPexels(image)"
+                    class="photo_import__results__result">
+            </div>
+            <p class="small text-muted" v-if="pexels.data.total_pages">
+              {{pexels.page}} / {{pexels.data.total_pages }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-block">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row photo_import__unsplash photo_import__unsplash__nav">
+              <div class="col-lg-5">
+                <a  href="#"
+                    v-if="unsplash.page > 1"
+                    v-on:click="unsplash.page = unsplash.page - 1"
+                    class="btn btn-light btn-sm">
+                  <%= t 'photo_import.previous' %>
+                </a>
+              </div>
+              <div class="col-lg-2 text-center">
+                <%= image_tag 'communication/photo_imports/unsplash.svg', width: 100, alt: 'Unsplash' %>
+              </div>
+              <div class="col-lg-5 text-end">
+                <a  href="#" v-if="unsplash.page < unsplash.data.total_pages"
+                    v-on:click="unsplash.page = unsplash.page + 1"
+                    class="btn btn-light btn-sm">
+                  <%= t 'photo_import.next' %>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row photo_import__pexels photo_import__pexels__nav">
+              <div class="col-lg-5">
+                <a  href="#"
+                    v-if="pexels.page > 1"
+                    v-on:click="pexels.page = pexels.page - 1"
+                    class="btn btn-light btn-sm">
+                  <%= t 'photo_import.previous' %>
+                </a>
+              </div>
+              <div class="col-lg-2 text-center">
+                <%= image_tag 'communication/photo_imports/pexels.png', width: 100, alt: 'Unsplash' %>
+              </div>
+              <div class="col-lg-5 text-end">
+                <a  href="#"
+                    v-if="pexels.page < pexels.data.total_pages"
+                    v-on:click="pexels.page = pexels.page + 1"
+                    class="btn btn-light btn-sm">
+                  <%= t 'photo_import.next' %>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
