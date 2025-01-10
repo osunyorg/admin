@@ -5,7 +5,7 @@
     <%= lf.hidden_field :language_id, value: current_language.id %>
     <%= render 'admin/application/categories/form',
                 f: f, lf: lf, category: category, l10n: l10n,
-                collection: @website.post_categories.root %>
+                collection: @website.page_categories.root %>
     <% content_for :action_bar_right do %>
       <%= submit f %>
     <% end %>
