@@ -11,11 +11,11 @@
                     name="search"
                     placeholder="<%= t 'photo_import.placeholder' %>"
                     v-model="cloud.query"
-                    @keyup.enter="cloudSearch"
+                    v-on:keyup.enter="cloudSearch"
                     class="form-control ms-auto">
             <button type="button"
                     class="btn btn-primary me-auto"
-                    @click="cloudSearch"
+                    v-on:click="cloudSearch"
                     aria-label="<%= t 'photo_import.search' %>">
               <%= t 'photo_import.search' %>
             </button>

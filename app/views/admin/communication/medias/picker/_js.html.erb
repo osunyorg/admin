@@ -42,7 +42,16 @@ var imagePickerApp = Vue.createApp({
         },
       },
       medias: {
-
+        query: "",
+        modal: {
+          opened: false
+        },
+        page: 1,
+        data: {
+          results: [],
+          total: 0
+        },
+        selected: null
       }
     }
   },
@@ -173,7 +182,7 @@ var imagePickerApp = Vue.createApp({
         }
       }.bind(this);
       xmlHttp.open("GET", url, false);
-      xmlHttp.send(null);
+      xmlHttp.send();
     },
     cloudSelectUnsplash(image) {
       this.cloud.unsplash.selected = image.id;
@@ -189,16 +198,55 @@ var imagePickerApp = Vue.createApp({
       this.current.image = {
         blob: {
           id: "cloud",
-          signed_id: null,
+          signed_id: "",
           preview: image.preview
         },
         alt: "",
         credit: image.credit
       }
       this.cloudClose();
-    }
-  },
+    },
 
+    // Medias
+    mediasOpen() {
+      document.body.classList.add("modal-open");
+      this.medias.modal.opened = true;
+      this.mediasSearch();
+    },
+    mediasClose() {
+      document.body.classList.remove("modal-open");
+      this.medias.modal.opened = false;
+    },
+    mediasSearch() {
+      var url = "<%= admin_communication_medias_url(website_id: nil, extranet_id: nil, format: :json) %>"
+                  + '?filters[for_search_term]=' + encodeURIComponent(this.medias.query);
+                  console.log(url);
+          xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          this.medias.data = JSON.parse(xmlHttp.responseText);
+        }
+      }.bind(this);
+      xmlHttp.open("GET", url, false);
+      xmlHttp.send();
+    },
+    mediasSelect(image) {
+      this.current.image = {
+        blob: {
+          id: "medias",
+          signed_id: "",
+          preview: image.thumb
+        },
+        media: {
+          id: image.id
+        },
+        alt: "",
+        credit: image.credit
+      }
+      // TODO
+      this.mediasClose();
+    },
+  },
 
   watch: {
     'cloud.unsplash.page': function(newVal, oldVal) {
