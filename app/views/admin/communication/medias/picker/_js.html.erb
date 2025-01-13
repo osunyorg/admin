@@ -65,6 +65,7 @@ var imagePickerApp = Vue.createApp({
       // Clone
       this.current = JSON.parse( JSON.stringify( this.previous ) );
       this.needsSaving = false;
+      this.summernoteHandle();
     },
     save() {
       console.log("save");
@@ -89,6 +90,7 @@ var imagePickerApp = Vue.createApp({
         }
       };
       xhr.send(JSON.stringify(params));
+      this.needsSaving = false;
     },
     removeImage() {
       this.current.image.blob = {
