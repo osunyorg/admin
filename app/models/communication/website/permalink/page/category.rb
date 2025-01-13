@@ -12,6 +12,10 @@ class Communication::Website::Permalink::Page::Category < Communication::Website
     '/:slug/'
   end
 
+  def self.special_page_type
+    Communication::Website::Page::Home
+  end
+
   protected
 
   def published?

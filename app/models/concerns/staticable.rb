@@ -31,8 +31,8 @@ module Staticable
   protected
 
   def hugo_ancestors_for_special_page(website)
-    # Si on est sur une page ou une catégorie de page, pas d'ancêtres à chercher, le breadcrumb va se construire avec les parents.
-    return [] if hugo_does_not_have_special_page?
+    # Si on est sur une page, pas d'ancêtres à chercher, le breadcrumb va se construire avec les parents.
+    return [] if is_a?(Communication::Website::Page::Localization)
     # Sinon, les objets ont une "page spéciale", (agenda, actualités, offre de formation...)
     permalink = Communication::Website::Permalink.for_object(self, website)
     return [] unless permalink
@@ -85,12 +85,5 @@ module Staticable
   # Ex: communs-numerique-et-interet-general
   def hugo_slug_in_website(website)
     slug
-  end
-
-  def hugo_does_not_have_special_page?
-    [
-      Communication::Website::Page::Localization,
-      Communication::Website::Page::Category::Localization
-    ].any? { |type| is_a?(type) }
   end
 end
