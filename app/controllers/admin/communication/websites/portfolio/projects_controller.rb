@@ -89,7 +89,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   def project_params
     params.require(:communication_website_portfolio_project)
     .permit(
-      :year,
+      :year, :full_width,
       category_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary,

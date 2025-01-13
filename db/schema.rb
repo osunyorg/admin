@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_13_115005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -338,6 +338,106 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
     t.index ["about_type", "about_id"], name: "index_communication_extranets_on_about"
     t.index ["default_language_id"], name: "index_communication_extranets_on_default_language_id"
     t.index ["university_id"], name: "index_communication_extranets_on_university_id"
+  end
+
+  create_table "communication_media_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "is_taxonomy", default: false
+    t.integer "position", default: 0
+    t.uuid "university_id", null: false
+    t.uuid "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_communication_media_categories_on_parent_id"
+    t.index ["university_id"], name: "index_communication_media_categories_on_university_id"
+  end
+
+  create_table "communication_media_categories_medias", id: false, force: :cascade do |t|
+    t.uuid "communication_media_id", null: false
+    t.uuid "communication_media_category_id", null: false
+    t.index ["communication_media_category_id", "communication_media_id"], name: "category_media"
+    t.index ["communication_media_id", "communication_media_category_id"], name: "media_category"
+  end
+
+  create_table "communication_media_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug"
+    t.string "name"
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "summary"
+    t.text "meta_description"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_media_category_localizations_on_about_id"
+    t.index ["language_id"], name: "idx_on_language_id_b744f004d4"
+    t.index ["university_id"], name: "idx_on_university_id_0e75cba3b7"
+  end
+
+  create_table "communication_media_collection_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
+    t.uuid "language_id", null: false
+    t.uuid "about_id", null: false
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_media_collection_localizations_on_about_id"
+    t.index ["language_id"], name: "idx_on_language_id_bb72607fc6"
+    t.index ["university_id"], name: "idx_on_university_id_8e25b8c926"
+  end
+
+  create_table "communication_media_collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["university_id"], name: "index_communication_media_collections_on_university_id"
+  end
+
+  create_table "communication_media_contexts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "communication_media_id", null: false
+    t.uuid "active_storage_blob_id", null: false
+    t.string "about_type"
+    t.uuid "about_id"
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_type", "about_id"], name: "index_communication_media_contexts_on_about"
+    t.index ["active_storage_blob_id"], name: "index_communication_media_contexts_on_active_storage_blob_id"
+    t.index ["communication_media_id"], name: "index_communication_media_contexts_on_communication_media_id"
+    t.index ["university_id"], name: "index_communication_media_contexts_on_university_id"
+  end
+
+  create_table "communication_media_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.text "alt"
+    t.text "credit"
+    t.uuid "language_id", null: false
+    t.uuid "about_id", null: false
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_communication_media_localizations_on_about_id"
+    t.index ["language_id"], name: "index_communication_media_localizations_on_language_id"
+    t.index ["university_id"], name: "index_communication_media_localizations_on_university_id"
+  end
+
+  create_table "communication_medias", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "origin", default: 1, null: false
+    t.string "original_filename"
+    t.string "original_checksum"
+    t.string "original_content_type"
+    t.bigint "original_byte_size"
+    t.uuid "original_blob_id", null: false
+    t.uuid "university_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "communication_media_collection_id"
+    t.index ["communication_media_collection_id"], name: "idx_on_communication_media_collection_id_6cace98319"
+    t.index ["original_blob_id"], name: "index_communication_medias_on_original_blob_id"
+    t.index ["university_id"], name: "index_communication_medias_on_university_id"
   end
 
   create_table "communication_website_agenda_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -718,6 +818,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "created_by_id"
+    t.boolean "full_width", default: true
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_aac12e3adb"
     t.index ["created_by_id"], name: "idx_on_created_by_id_7009ee99c6"
     t.index ["university_id"], name: "idx_on_university_id_ac2f4a0bfc"
@@ -1766,6 +1867,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "featured_image_alt"
+    t.text "featured_image_credit"
     t.index ["about_id"], name: "index_university_person_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_person_localizations_on_language_id"
     t.index ["slug"], name: "index_university_person_localizations_on_slug"
@@ -1900,6 +2003,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_20_104128) do
   add_foreign_key "communication_extranet_posts", "university_people", column: "author_id"
   add_foreign_key "communication_extranets", "languages", column: "default_language_id"
   add_foreign_key "communication_extranets", "universities"
+  add_foreign_key "communication_media_categories", "communication_media_categories", column: "parent_id"
+  add_foreign_key "communication_media_categories", "universities"
+  add_foreign_key "communication_media_category_localizations", "communication_media_categories", column: "about_id"
+  add_foreign_key "communication_media_category_localizations", "languages"
+  add_foreign_key "communication_media_category_localizations", "universities"
+  add_foreign_key "communication_media_collection_localizations", "communication_media_collections", column: "about_id"
+  add_foreign_key "communication_media_collection_localizations", "languages"
+  add_foreign_key "communication_media_collection_localizations", "universities"
+  add_foreign_key "communication_media_collections", "universities"
+  add_foreign_key "communication_media_contexts", "active_storage_blobs"
+  add_foreign_key "communication_media_contexts", "communication_medias"
+  add_foreign_key "communication_media_contexts", "universities"
+  add_foreign_key "communication_media_localizations", "communication_medias", column: "about_id"
+  add_foreign_key "communication_media_localizations", "languages"
+  add_foreign_key "communication_media_localizations", "universities"
+  add_foreign_key "communication_medias", "active_storage_blobs", column: "original_blob_id"
+  add_foreign_key "communication_medias", "communication_media_collections"
+  add_foreign_key "communication_medias", "universities"
   add_foreign_key "communication_website_agenda_categories", "communication_website_agenda_categories", column: "parent_id"
   add_foreign_key "communication_website_agenda_categories", "communication_websites"
   add_foreign_key "communication_website_agenda_categories", "education_programs", column: "program_id"
