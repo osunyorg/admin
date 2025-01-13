@@ -38,9 +38,9 @@ number_of_panels = 0
   </div>
 </div>
 
-<%= image_tag @website.deployment_status_badge, alt: '' if @website.deployment_status_badge.present? %>
-
 <%= render 'admin/application/l10n/widget', about: @website, l10n: @l10n, small: true %>
+
+<%= image_tag @website.deployment_status_badge, alt: '' if @website.deployment_status_badge.present? %>
 
 <% if current_user.server_admin? %>
   <% content_for :action_bar_left do %>
