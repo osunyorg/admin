@@ -4,7 +4,6 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
-#  design_options           :jsonb
 #  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  position                 :integer          default(0), not null
