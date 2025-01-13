@@ -1,5 +1,5 @@
 <%
-title = t('communication.website.last_events')
+title = @website.feature_agenda_name(current_language)
 action = ''
 action += link_to t('create'),
                   new_admin_communication_website_agenda_event_path(website_id: @website),

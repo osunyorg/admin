@@ -1,5 +1,5 @@
 <%
-title = t('communication.website.last_projects')
+title = @website.feature_portfolio_name(current_language)
 action = ''
 action += link_to t('create'),
                   new_admin_communication_website_portfolio_project_path(website_id: @website),

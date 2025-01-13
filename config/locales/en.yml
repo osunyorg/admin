@@ -136,6 +136,9 @@ en:
       in: in %{lang}
       switch_to: switch to %{choices}
     infos: Informations
+    items:
+      one: item
+      other: items
     inheritance:
       sentence_html: Value inherited from %{link}
       sentence_without_link: Value inherited

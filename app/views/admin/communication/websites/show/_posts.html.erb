@@ -1,5 +1,5 @@
 <%
-title = t('communication.website.last_posts')
+title = @website.feature_posts_name(current_language)
 action = ''
 action += link_to t('create'),
                   new_admin_communication_website_post_path(website_id: @website),

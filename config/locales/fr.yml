@@ -141,8 +141,8 @@ fr:
       sentence_without_link: Valeur héritée
       status: Valeur héritée
     item:
-      one: Élément
-      other: Éléments
+      one: élément
+      other: éléments
     meta_description:
       hint: Texte simple, dédié au à l'optimisation pour les moteurs de recherche (Search Engine Optimization, SEO).
       label: Description pour les moteurs de recherche (meta)
