@@ -16,4 +16,11 @@ module Communication::Website::WithFeaturePosts
     scope :with_feature_posts, -> { where(feature_posts: true) }
   end
 
+  def feature_posts_name(language)
+    begin
+      special_page(Communication::Website::Page::CommunicationPost).best_localization_for(language)
+    rescue
+      Communication::Website::Post.model_name.human(count: 2)
+    end
+  end
 end

@@ -12,7 +12,7 @@ SimpleNavigation::Configuration.run do |navigation|
                     controller_name == "websites" && action_name == "show" 
                   } if can?(:read, @website)
     primary.item  :subnav_posts,
-                  Communication::Website::Post.model_name.human(count: 2),
+                  @website.feature_posts_name(current_language),
                   admin_communication_website_posts_path(website_id: @website.id),
                   highlights_on: lambda { 
                     admin_communication_website_posts_path(website_id: @website.id).in?(request.path) ||
