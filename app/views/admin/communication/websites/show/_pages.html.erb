@@ -20,7 +20,7 @@ action += link_to t('create'),
         </div>
       </div>
     <% end %>
+    <%= render 'admin/application/components/all',
+                link: admin_communication_website_pages_path(website_id: @website) %>
   </div>
-  <%= link_to t('communication.website.see_all', number: @all_pages.count),
-              admin_communication_website_pages_path(website_id: @website) %>
 <% end %>

@@ -143,6 +143,7 @@ fr:
     item:
       one: élément
       other: éléments
+      see_all: Voir tout
     meta_description:
       hint: Texte simple, dédié au à l'optimisation pour les moteurs de recherche (Search Engine Optimization, SEO).
       label: Description pour les moteurs de recherche (meta)

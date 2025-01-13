@@ -4,6 +4,21 @@
     &--osuny
         height: 100%
         overflow: hidden
+    &--all
+        background: none
+        box-shadow: none
+        &:hover
+            box-shadow: none !important
+            .osuny__thumbnail
+                background: $color-flexoki-200
+                .osuny__thumbnail__initials
+                    color: $color-text
+        .osuny__thumbnail
+            border-radius: var(--bs-card-border-radius)
+            transition: background 0.3s ease-in-out
+        .osuny__thumbnail__initials
+            margin-top: -6px
+            transition: color 0.3s ease-in-out
     &--horizontal
         align-items: center
         flex-direction: row
@@ -17,7 +32,7 @@
             font-weight: normal
     .card-body,
     .card-footer
-        line-height: 120%
+        line-height: 110%
     .table
         margin-bottom: 0
         th,
