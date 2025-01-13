@@ -7,17 +7,14 @@ else
 end
 %>
 
-<%# Include vue.js before call Vue.createApp %>
-<%= javascript_include_tag 'vue' %>
-
-<div id="app" v-cloak>
-  <div class="spinner-border text-primary" role="status">
+<div id="sso-mapping-app" v-cloak>
+  <div class="spinner-border text-primary" role="status" ref="test">
     <span class="sr-only"><%= t('loading') %></span>
   </div>
 
   <div class="app-form">
     <draggable :list="fields" handle=".dragHandle" >
-      <div v-for="(field, index) in fields">
+      <div v-for="(field, index) in fields" ref="fieldElements">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <div>
@@ -63,7 +60,7 @@ end
       </div>
     </draggable>
 
-    <a v-on:click="addField" class="btn btn-primary btn-sm">
+    <a @on:click="addField" class="btn btn-primary btn-sm">
       <%= t('add_field') %>
     </a>
   </div>
@@ -73,44 +70,3 @@ end
   </textarea>
 
 </div>
-
-<script nonce="<%= request.content_security_policy_nonce %>">
-  var app = Vue.createApp({
-    components: {
-      draggable: VueDraggableNext.VueDraggableNext,
-    },
-    data() {
-      return {
-        fields: <%= object.sso_mapping.blank? ? '[]' : object.sso_mapping.to_json.html_safe %>,
-        keys: <%= mapping_keys.map { |key| [key, User.human_attribute_name(key)] }.to_h.to_json.html_safe %>
-      }
-    },
-    methods: {
-      addField: function () {
-        this.fields.push({sso_key: 'key', internal_key: 'email', roles: {}});
-        this.enableSelects();      
-      },
-      enableSelects: function () {
-        // conditional.js messes with the new field added, so we have to force enable the select fields
-        var selectFields,
-            i;
-        setTimeout(function() {
-          selectFields = document.getElementById("app").getElementsByClassName("form-select");
-          for (i = 0; i < selectFields.length; i += 1) {
-              target = selectFields[i];
-              target.removeAttribute('disabled');
-          }
-        }, 100);
-      }
-    },
-    mounted() {
-      this.enableSelects();
-    }
-  });
-
-  window.addEventListener('load', function(){
-    setTimeout(function() {
-      app.mount('#app');
-    }, 1000);
-  });
-</script>
