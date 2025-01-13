@@ -7,7 +7,7 @@
                 ref="file"
                 type="file"
                 accept="<%= default_images_formats_accepted %>"
-                v-on:change="onFileImageChange($event)">
+                v-on:change="uploadInputChanged($event)">
         <button type="button"
                 class="btn"
                 v-on:click.prevent="$refs.file.click()">

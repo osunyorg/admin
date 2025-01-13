@@ -1,24 +1,27 @@
 <%
+current = {
+  image: {
+    blob: {
+      id: about.featured_image&.blob_id,
+      signed_id: about.featured_image&.signed_id,
+      preview: "/media/#{ about.featured_image&.signed_id }/preview.jpg"
+    },
+    media: {
+      id: nil
+    },
+    alt: about.featured_image_alt,
+    credit: about.featured_image_credit
+  }
+}
 # fr, en...
 lang = about&.language&.iso_code if about.respond_to? :language
 %>
 var imagePickerApp = Vue.createApp({
   data() {
     return {
-      current: <%= {
-        image: {
-          blob: {
-            id: about.featured_image&.blob_id,
-            signed_id: about.featured_image&.signed_id,
-            preview: "/media/#{ about.featured_image&.signed_id }/preview.jpg"
-          },
-          media: {
-            id: nil
-          },
-          alt: about.featured_image_alt,
-          credit: about.featured_image_credit
-        }
-      }.to_json.html_safe %>,
+      needsSaving: false,
+      current: <%= current.to_json.html_safe %>,
+      previous: <%= current.to_json.html_safe %>,
       cloud: {
         query: <%= about.to_s.to_json.html_safe %>,
         modal: {
@@ -57,25 +60,11 @@ var imagePickerApp = Vue.createApp({
   },
   methods: {
     // Commons
-    handleSummernotes() {
-      var $summernoteElements = $('.summernote-vue:not(.is-initialized)');
-      $summernoteElements.each(function(index) {
-        var element = $summernoteElements.get(index);
-        this.initSummernote(element);
-      }.bind(this));
-    },
-    initSummernote(element) {
-      element.classList.add('is-initialized');
-      $(element).summernote({
-        lang: '<%= current_interface_language.summernote_locale unless current_interface_language.summernote_locale.blank? %>',
-        toolbar: window.SUMMERNOTE_CONFIGS['link'].toolbar,
-        callbacks: {
-          onChange: function(content) {
-            element.value = content;
-            element.dispatchEvent(new Event('input'));
-          },
-        }
-      });
+    cancel() {
+      console.log("cancel");
+      // Clone
+      this.current = JSON.parse( JSON.stringify( this.previous ) );
+      this.needsSaving = false;
     },
     save() {
       console.log("save");
@@ -101,9 +90,17 @@ var imagePickerApp = Vue.createApp({
       };
       xhr.send(JSON.stringify(params));
     },
+    removeImage() {
+      this.current.image.blob = {
+        id: "",
+        signed_id: "",
+        preview: ""
+      };
+      this.save();
+    },
 
     // Upload
-    onFileImageChange(event) {
+    uploadInputChanged(event) {
       var files = event.target.files || event.dataTransfer.files;
       if (!files.length) {
         return;
@@ -130,16 +127,6 @@ var imagePickerApp = Vue.createApp({
         };
         that.save();
       });
-    },
-    removeImage() {
-      this.current.image.blob = {
-        id: "",
-        signed_id: "",
-        preview: ""
-      };
-      this.current.image.alt = "";
-      this.current.image.credit = "";
-      this.save();
     },
 
     // Cloud
@@ -246,21 +233,49 @@ var imagePickerApp = Vue.createApp({
       // TODO
       this.mediasClose();
     },
-  },
 
+    // Summernote
+    summernoteHandle() {
+      var $summernoteElements = $('.summernote-vue:not(.is-initialized)');
+      $summernoteElements.each(function(index) {
+        var element = $summernoteElements.get(index);
+        this.summernoteInit(element);
+      }.bind(this));
+    },
+    summernoteInit(element) {
+      element.classList.add('is-initialized');
+      $(element).summernote({
+        lang: '<%= current_interface_language.summernote_locale unless current_interface_language.summernote_locale.blank? %>',
+        toolbar: window.SUMMERNOTE_CONFIGS['link'].toolbar,
+        callbacks: {
+          onChange: function(content) {
+            element.value = content;
+            element.dispatchEvent(new Event('input'));
+          },
+        }
+      });
+    },
+  },
   watch: {
     'cloud.unsplash.page': function(newVal, oldVal) {
       this.cloudSearchUnsplash();
     },
     'cloud.pexels.page': function(newVal, oldVal) {
       this.cloudSearchPexels();
+    },
+    current: {
+      handler: function() {
+        this.needsSaving = true;
+      },
+      deep: true,
+      flush: 'sync'
     }
   },
   updated: function() {
-    this.handleSummernotes();
+    this.summernoteHandle();
   },
   mounted: function() {
-    this.handleSummernotes();
+    this.summernoteHandle();
   }
 });
 

@@ -19,3 +19,20 @@
     &[data-v-app]
         .image_picker__selector__loader
             display: none
+    &__changes
+        background: #FFFFFF
+        border-radius: $border-radius
+        border: 1px solid $color-bg-soft
+        bottom: 10px
+        display: none
+        left: 50%
+        padding: 10px
+        position: fixed
+        transform: translate(-50%, 0)
+        z-index: 9999
+        &__cancel,
+        &__save,
+            border: none
+        &__cancel
+            background: $color-bg-soft
+            margin-right: 10px

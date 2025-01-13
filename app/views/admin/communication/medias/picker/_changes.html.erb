@@ -1,0 +1,12 @@
+<div class="image_picker__changes" :class="{'d-block': needsSaving}">
+  <button type="button"
+          class="btn btn-light image_picker__changes__cancel"
+          v-on:click="cancel()">
+    <%= t('cancel') %>
+  </button>
+  <button type="button"
+          class="btn btn-success image_picker__changes__save"
+          v-on:click="save()">
+    <%= t('save_changes') %>
+  </button>
+</div>
