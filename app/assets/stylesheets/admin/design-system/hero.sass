@@ -1,6 +1,16 @@
 .hero
-    margin-bottom: 50px
-    min-height: 200px
+    margin-bottom: $spacing0
+    &__content
+        border-bottom: 1px solid $color-border
+        margin-top: $spacing2
+        padding-bottom: $spacing0
+        h1
+            margin-bottom: 0
+            line-height: 100%
+    &--summary
+        .hero__content
+            border-bottom: none
+            margin-bottom: $spacing2
     .welcome
         color: $color-text-alt
         font-size: pxToRem(14)
