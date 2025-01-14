@@ -86,6 +86,28 @@ class Communication::Media < ApplicationRecord
     media
   end
 
+  def attach(about, key)
+    # TODO il faut enlever les blobs des contextes (c'est le même que le média) et ajouter la clé (le même média peut être utilisé pour 2 clés différentes)
+    # TODO supprimer le contexte du média d'avant
+    # Création du contexte
+    contexts.where(
+      university: university,
+      active_storage_blob: original_blob,
+      about: about
+    ).first_or_create
+    # Détachement du blob précédent
+    ActiveStorage::Attachment.where(
+      name: key,
+      record: about
+    ).destroy_all
+    # Attachement du nouveau blob
+    ActiveStorage::Attachment.create(
+      name: key,
+      blob: original_blob,
+      record: about
+    )
+  end
+
   protected
 
   def self.find_or_create_media_from_blob(blob, origin)

@@ -21,6 +21,14 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
     breadcrumb
   end
 
+  def pick
+    picker = Osuny::MediaPicker.new
+    picker.university = current_university
+    picker.language = current_language
+    picker.params = params.to_unsafe_hash
+    render json: picker.to_json
+  end
+
   def edit
     @categories = categories
     breadcrumb

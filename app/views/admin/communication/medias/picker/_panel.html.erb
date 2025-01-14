@@ -1,8 +1,8 @@
 <%= osuny_panel t('featured_image.title'), small: true do %>
-  <div class="image_picker__selector__loader"></div>
+  <div class="image-picker__selector__loader"></div>
   <div class="app-content">
-    <div v-if="!current.image.blob.id" class="image_picker__selector">
-      <div class="image_picker__selector__viewport">
+    <div v-if="!current.image.url" class="image-picker__selector">
+      <div class="image-picker__selector__viewport">
         <input  hidden
                 ref="file"
                 type="file"
@@ -29,8 +29,8 @@
         <%= t('photo_import.buttons.medias') %>
       </button>
     </div>
-    <div v-if="current.image.blob.id">
-      <img :src="current.image.blob.preview" class="img-fluid" />
+    <div v-if="current.image.url">
+      <img :src="current.image.url" class="img-fluid" />
       <div class="text-end">
         <a  class="btn btn-sm text-danger pe-0"
             v-on:click="removeImage()">

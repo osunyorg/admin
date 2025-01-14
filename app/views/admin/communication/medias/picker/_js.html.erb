@@ -1,29 +1,29 @@
 <%
-current = {
-  image: {
-    blob: {
-      id: about.featured_image&.blob_id,
-      signed_id: about.featured_image&.signed_id,
-      preview: "/media/#{ about.featured_image&.signed_id }/preview.jpg"
-    },
-    media: {
-      id: nil
-    },
-    alt: about.featured_image_alt,
-    credit: about.featured_image_credit
-  }
-}
+key ||= :featured_image
+picker = Osuny::MediaPicker.new
+picker.about = about
+picker.key = key
+# About name is default query
+default_query = about.to_s
+# Paths
+save_path = pick_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json)
+unsplash_path = admin_communication_unsplash_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json)
+pexels_path = admin_communication_pexels_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json)
+medias_path = admin_communication_medias_url(website_id: nil, extranet_id: nil, format: :json)
 # fr, en...
 lang = about&.language&.iso_code if about.respond_to? :language
 %>
 var imagePickerApp = Vue.createApp({
   data() {
     return {
-      needsSaving: false,
-      current: <%= current.to_json.html_safe %>,
-      previous: <%= current.to_json.html_safe %>,
+      changes: {
+        needsSaving: false,
+        savingInProgress: false,
+      },
+      current: <%= picker.to_json.html_safe %>,
+      previous: <%= picker.to_json.html_safe %>,
       cloud: {
-        query: <%= about.to_s.to_json.html_safe %>,
+        query: <%= default_query.to_json.html_safe %>,
         modal: {
           opened: false
         },
@@ -32,16 +32,14 @@ var imagePickerApp = Vue.createApp({
           data: {
             results: [],
             total: 0
-          },
-          selected: null
+          }
         },
         pexels: {
           page: 1,
           data: {
             results: [],
             total: 0
-          },
-          selected: null
+          }
         },
       },
       medias: {
@@ -53,52 +51,49 @@ var imagePickerApp = Vue.createApp({
         data: {
           results: [],
           total: 0
-        },
-        selected: null
+        }
       }
     }
   },
   methods: {
     // Commons
-    cancel() {
-      console.log("cancel");
-      // Clone
-      this.current = JSON.parse( JSON.stringify( this.previous ) );
-      this.needsSaving = false;
-      this.summernoteHandle();
-    },
     save() {
-      console.log("save");
-      var params = {
-        communication_website_post: {
-          localizations_attributes: {
-            id: "<%= @l10n.id %>",
-            featured_image: this.current.image.blob.signed_id,
-            featured_image_alt: this.current.image.alt,
-            featured_image_credit: this.current.image.credit
-          }
-        }
-      };
       var xhr = new XMLHttpRequest();
-      xhr.open("PATCH", "<%= request.path %>.json", true);
+      xhr.open("POST", "<%= save_path %>", true);
       xhr.setRequestHeader('Content-Type', 'application/json');
       xhr.setRequestHeader('X-CSRF-Token', document.querySelector('[name="csrf-token"]').content);
       xhr.onreadystatechange = function () {
-        if (this.readyState != 4) return;
-        if (this.status == 200) {
-            console.log(this.responseText);
+        if (xhr.readyState != 4) return;
+        if (xhr.status == 200) {
+          console.log(xhr.responseText);
+          this.current = JSON.parse(xhr.responseText);
+          this.previous = JSON.parse(xhr.responseText);
+          this.changes.needsSaving = false;
+          this.changes.savingInProgress = false;
         }
-      };
-      xhr.send(JSON.stringify(params));
-      this.needsSaving = false;
+      }.bind(this);
+      xhr.send(JSON.stringify(this.current));
+      this.changes.savingInProgress = true;
+    },
+    cancel() {
+      // Clone
+      this.current = JSON.parse(JSON.stringify(this.previous));
+      this.summernoteHandle();
+      this.changes.needsSaving = false;
     },
     removeImage() {
-      this.current.image.blob = {
-        id: "",
-        signed_id: "",
-        preview: ""
-      };
-      this.save();
+      this.resetOrigin();
+      this.current.image.url = "";
+      this.current.origin.blob.delete = true;
+    },
+    resetOrigin() {
+      this.current.origin = JSON.parse(JSON.stringify(this.previous.origin));
+    },
+    modalOpen() {
+      document.body.classList.add("modal-open");
+    },
+    modalClose() {
+      document.body.classList.remove("modal-open");
     },
 
     // Upload
@@ -121,24 +116,22 @@ var imagePickerApp = Vue.createApp({
         return;
       }
       controller.start(function (blob) {
-        that.current.image.blob = {
-          id: blob.id,
-          signed_id: blob.signed_id,
-          filename: blob.filename,
-          preview: "/media/" + blob.signed_id + "/preview.jpg"
-        };
-        that.save();
+        that.current.image.url = "/media/" + blob.signed_id + "/preview.jpg";
+        that.resetOrigin();
+        that.current.origin.blob.id = blob.id;
+        that.current.origin.blob.signed_id = blob.signed_id;
+        that.current.origin.blob.checksum = blob.checksum;
       });
     },
 
     // Cloud
     cloudOpen() {
-      document.body.classList.add("modal-open");
+      this.modalOpen();
       this.cloud.modal.opened = true;
       this.cloudSearch();
     },
     cloudClose() {
-      document.body.classList.remove("modal-open");
+      this.modalClose();
       this.cloud.modal.opened = false;
     },
     cloudSearch() {
@@ -146,14 +139,14 @@ var imagePickerApp = Vue.createApp({
       this.cloudSearchPexels();
     },
     cloudSearchUnsplash() {
-      var url = "<%= admin_communication_unsplash_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
+      var url = "<%= unsplash_path %>"
                     + '?query=' + encodeURIComponent(this.cloud.query)
                     + '&page=' + this.cloud.unsplash.page
                     + '&per_page=12&lang=<%= lang %>';
       this.cloudLoadSearchResults(url, this.cloud.unsplash);
     },
     cloudSearchPexels() {
-      var url = "<%= admin_communication_pexels_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
+      var url = "<%= pexels_path %>"
                   + '?query=' + encodeURIComponent(this.cloud.query)
                   + '&page=' + this.cloud.pexels.page
                   + '&per_page=12&lang=<%= lang %>';
@@ -163,76 +156,63 @@ var imagePickerApp = Vue.createApp({
       if (!this.cloud.query) {
         return null;
       }
-      var xmlHttp = new XMLHttpRequest();
-      xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
           source.data.results = [];
-          source.data = JSON.parse(xmlHttp.responseText);
+          source.data = JSON.parse(xhr.responseText);
         }
       }.bind(this);
-      xmlHttp.open("GET", url, false);
-      xmlHttp.send();
+      xhr.open("GET", url, false);
+      xhr.send();
     },
     cloudSelectUnsplash(image) {
-      this.cloud.unsplash.selected = image.id;
-      this.cloud.pexels.selected = null;
+      this.resetOrigin();
+      this.current.origin.cloud.unsplash.id = image.id;
+      this.current.origin.cloud.unsplash.url = image.preview;
       this.cloudSelect(image);
     },
     cloudSelectPexels(image) {
-      this.cloud.unsplash.selected = null;
-      this.cloud.pexels.selected = image.id;
+      this.resetOrigin();
+      this.current.origin.cloud.pexels.id = image.id;
+      this.current.origin.cloud.pexels.url = image.preview;
       this.cloudSelect(image);
     },
     cloudSelect(image) {
-      this.current.image = {
-        blob: {
-          id: "cloud",
-          signed_id: "",
-          preview: image.preview
-        },
-        alt: "",
-        credit: image.credit
-      }
+      this.current.image.alt = "";
+      this.current.image.credit = image.credit;
+      this.current.image.url = image.preview;
       this.cloudClose();
     },
 
     // Medias
     mediasOpen() {
-      document.body.classList.add("modal-open");
+      this.modalOpen();
       this.medias.modal.opened = true;
       this.mediasSearch();
     },
     mediasClose() {
-      document.body.classList.remove("modal-open");
+      this.modalClose();
       this.medias.modal.opened = false;
     },
     mediasSearch() {
-      var url = "<%= admin_communication_medias_url(website_id: nil, extranet_id: nil, format: :json) %>"
+      var xhr = new XMLHttpRequest(),
+          url = "<%= medias_path %>"
                   + '?filters[for_search_term]=' + encodeURIComponent(this.medias.query);
-                  console.log(url);
-          xmlHttp = new XMLHttpRequest();
-      xmlHttp.onreadystatechange = function() {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-          this.medias.data = JSON.parse(xmlHttp.responseText);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          this.medias.data = JSON.parse(xhr.responseText);
         }
       }.bind(this);
-      xmlHttp.open("GET", url, false);
-      xmlHttp.send();
+      xhr.open("GET", url, false);
+      xhr.send();
     },
     mediasSelect(image) {
-      this.current.image = {
-        blob: {
-          id: "medias",
-          signed_id: "",
-          preview: image.thumb
-        },
-        media: {
-          id: image.id
-        },
-        alt: "",
-        credit: image.credit
-      }
-      // TODO
+      this.current.image.alt = "";
+      this.current.image.credit = image.credit;
+      this.current.image.url = image.thumb;
+      this.resetOrigin();
+      this.current.origin.medias.id = image.id;
       this.mediasClose();
     },
 
@@ -265,9 +245,12 @@ var imagePickerApp = Vue.createApp({
     'cloud.pexels.page': function(newVal, oldVal) {
       this.cloudSearchPexels();
     },
+    'current.credit': function () {
+      this.summernoteHandle();
+    },
     current: {
       handler: function() {
-        this.needsSaving = true;
+        this.changes.needsSaving = true;
       },
       deep: true,
       flush: 'sync'

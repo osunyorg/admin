@@ -1,4 +1,4 @@
-.image_picker
+.image-picker
     &__selector
         &__viewport
             align-items: center
@@ -17,19 +17,21 @@
             width: 100%
     // Vue app is loaded
     &[data-v-app]
-        .image_picker__selector__loader
+        .image-picker__selector__loader
             display: none
     &__changes
         background: #FFFFFF
         border-radius: $border-radius
         border: 1px solid $color-bg-soft
-        bottom: 10px
-        display: none
+        bottom: -200px
         left: 50%
         padding: 10px
         position: fixed
         transform: translate(-50%, 0)
+        transition: bottom 0.5s ease-in-out
         z-index: 9999
+        &--changed
+            bottom: 10px
         &__cancel,
         &__save,
             border: none
