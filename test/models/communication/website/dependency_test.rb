@@ -116,7 +116,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     website_with_github.save
     dependencies_before_count = website_with_github.reload.recursive_dependencies(follow_direct: true).count
     # On crée une localisation anglaise de la homepage
-    communication_website_pages(:page_root).localize_in!(english)
+    communication_website_pages(:root_page).localize_in!(english)
 
     # Tant qu'on n'a pas activé l'anglais sur le website le nombre de dépendances ne doit pas bouger
     assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies(follow_direct: true).count

@@ -24,12 +24,16 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   end
 
   def children
-    return unless request.xhr?
-    @children = @program.children.ordered(current_language)
+    if request.xhr?
+      @children = @program.children.ordered(current_language)
+    else
+      redirect_to admin_education_programs_path
+    end
   end
 
   def show
     @preview = true
+    @hero_summary = true
     breadcrumb
   end
 

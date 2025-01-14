@@ -215,6 +215,7 @@ fr:
         path: Chemin
       communication/website/portfolio/project:
         categories: Catégories
+        full_width: Pleine largeur
         year: Année
       communication/website/portfolio/project/localization:
         featured_image: Image à la une
@@ -477,10 +478,6 @@ fr:
         button: Mettre en production
         title: Mise en production
       hosting: Hébergement
-      last_events: Derniers événements
-      last_pages: Dernières pages
-      last_posts: Dernières actualités
-      last_projects: Derniers projets
       menus:
         automatic: Ce menu se constitue automatiquement. <br>Cela signifie qu'il reflète l'arborescence du site. <br>Dès que vous souhaiterez le modifier, en créant un élément, l'automatisme s'arrêtera.
         default_title:
@@ -638,3 +635,5 @@ fr:
       communication_website_post:
         full_width: Sur de grands écrans, l'actualité en pleine largeur utilisera tout l'espace disponible.
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
+      communication_website_portfolio_project:
+        full_width: Sur de grands écrans, le projet en pleine largeur utilisera tout l'espace disponible.

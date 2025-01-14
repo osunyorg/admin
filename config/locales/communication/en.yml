@@ -215,6 +215,7 @@ en:
         path: Path
       communication/website/portfolio/project:
         categories: Categories
+        full_width: Full width
         year: Year
       communication/website/portfolio/project/localization:
         featured_image: Featured image
@@ -477,10 +478,6 @@ en:
         button: Go live
         title: Go live
       hosting: Hosting
-      last_events: Last events
-      last_pages: Last pages
-      last_posts: Last posts
-      last_projects: Last projects
       menus:
         automatic: This menu is created automatically. <br>This means that it reflects the site's tree structure. <br>As soon as you want to modify it, by creating an item, the automatism will stop.
         default_title:
@@ -638,3 +635,5 @@ en:
       communication_website_post:
         full_width: On large screens, a full width post uses all available space for the content.
         text: This field is deprecated, content will not be displayed on the website.
+      communication_website_portfolio_project:
+        full_width: On large screens, a full width project uses all available space for the content.

@@ -71,8 +71,8 @@ class Communication::Website::Post < ApplicationRecord
   }
 
   scope :latest_in, -> (language) { published_now_in(language).order("communication_website_post_localizations.published_at DESC").limit(5) }
-  scope :for_author, -> (author_id, language = nil) { where(author_id: author_id) }
-  scope :for_category, -> (category_id, language = nil) { joins(:categories).where(communication_website_post_categories: { id: category_id }).distinct }
+  scope :for_author, -> (author_ids, language = nil) { joins(:authors).where(university_people: { id: author_ids }).distinct }
+  scope :for_category, -> (category_ids, language = nil) { joins(:categories).where(communication_website_post_categories: { id: category_ids }).distinct }
   scope :for_search_term, -> (term, language) {
      joins(:localizations)
       .where(communication_website_post_localizations: { language_id: language.id })

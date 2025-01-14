@@ -38,8 +38,9 @@ class Research::Journal < ApplicationRecord
   has_many  :people,
             -> { distinct },
             through: :papers
-  has_many  :kinds,
-            class_name: 'Research::Journal::Paper::Kind'
+  has_many  :paper_kinds,
+            class_name: 'Research::Journal::Paper::Kind',
+            dependent: :destroy
 
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)

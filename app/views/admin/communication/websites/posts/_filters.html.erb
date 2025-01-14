@@ -10,7 +10,7 @@
     <%= render_filter f,
                       :select,
                       :for_author,
-                      label: t('filters.attributes.element', element: Communication::Website::Post.human_attribute_name(:author).downcase),
+                      label: t('filters.attributes.element', element: t('communication.authors', count: 1).downcase),
                       collection: osuny_collection(website.authors, localized: true),
                       multiple: true
                       %>
