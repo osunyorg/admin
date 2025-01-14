@@ -452,10 +452,6 @@ fr:
         button: Mettre en production
         title: Mise en production
       hosting: Hébergement
-      last_events: Derniers événements
-      last_pages: Dernières pages
-      last_posts: Dernières actualités
-      last_projects: Derniers projets
       menus:
         automatic: Ce menu se constitue automatiquement. <br>Cela signifie qu'il reflète l'arborescence du site. <br>Dès que vous souhaiterez le modifier, en créant un élément, l'automatisme s'arrêtera.
         default_title:

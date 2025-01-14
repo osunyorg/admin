@@ -4,7 +4,7 @@ class Admin::Communication::Websites::Agenda::ApplicationController < Admin::Com
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Website::Agenda.model_name.human(count: 2), 
+    add_breadcrumb  @website.feature_agenda_name(current_language), 
                     admin_communication_website_agenda_events_path
   end
 end
