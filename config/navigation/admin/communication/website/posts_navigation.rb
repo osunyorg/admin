@@ -5,7 +5,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
     primary.item  :feature_nav_posts,
-                  Communication::Website::Post.model_name.human(count: 2),
+                  @website.feature_posts_name(current_language),
                   admin_communication_website_posts_path(website_id: @website.id),
                   highlights_on: lambda { 
                     controller_name == "posts" && action_name == "index" 

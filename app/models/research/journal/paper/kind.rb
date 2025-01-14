@@ -26,6 +26,6 @@ class Research::Journal::Paper::Kind < ApplicationRecord
   include WithUniversity
 
   belongs_to :journal, class_name: 'Research::Journal'
-  has_many :papers
+  has_many :papers, dependent: :nullify
 
 end

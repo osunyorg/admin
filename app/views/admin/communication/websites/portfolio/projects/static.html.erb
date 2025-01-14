@@ -4,11 +4,7 @@ project = @l10n.about
 ---
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
-<%= render 'admin/application/static/design',
-            full_width: true,
-            toc_offcanvas: false,
-            about: project,
-            l10n: @l10n %>
+<%= render 'admin/application/static/design', about: project, l10n: @l10n %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/images/shared/static', about: @l10n %>

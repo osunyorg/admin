@@ -109,7 +109,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Website::Post.model_name.human(count: 2),
+    add_breadcrumb  @website.feature_posts_name(current_language),
                     admin_communication_website_posts_path
     breadcrumb_for @post
   end

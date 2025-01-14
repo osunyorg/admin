@@ -12,7 +12,7 @@ SimpleNavigation::Configuration.run do |navigation|
                     controller_name == "websites" && action_name == "show" 
                   } if can?(:read, @website)
     primary.item  :subnav_posts,
-                  Communication::Website::Post.model_name.human(count: 2),
+                  @website.feature_posts_name(current_language),
                   admin_communication_website_posts_path(website_id: @website.id),
                   highlights_on: lambda { 
                     admin_communication_website_posts_path(website_id: @website.id).in?(request.path) ||
@@ -20,13 +20,13 @@ SimpleNavigation::Configuration.run do |navigation|
                     admin_communication_website_post_authors_path(website_id: @website.id).in?(request.path)
                   } if @website.feature_posts
     primary.item  :subnav_agenda,
-                  Communication::Website::Agenda.model_name.human(count: 2),
+                  @website.feature_agenda_name(current_language),
                   admin_communication_website_agenda_events_path(website_id: @website.id),
                   highlights_on: lambda { 
                     admin_communication_website_agenda_root_path(website_id: @website.id).in?(request.path) 
                   } if @website.feature_agenda
     primary.item  :subnav_portfolio,
-                  Communication::Website::Portfolio.model_name.human(count: 2),
+                  @website.feature_portfolio_name(current_language),
                   admin_communication_website_portfolio_projects_path(website_id: @website.id),
                   highlights_on: lambda { 
                     admin_communication_website_portfolio_root_path(website_id: @website.id).in?(request.path) 

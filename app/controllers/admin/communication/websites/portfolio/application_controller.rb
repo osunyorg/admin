@@ -4,7 +4,7 @@ class Admin::Communication::Websites::Portfolio::ApplicationController < Admin::
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Website::Portfolio.model_name.human(count: 2), 
+    add_breadcrumb  @website.feature_portfolio_name(current_language), 
                     admin_communication_website_portfolio_projects_path
   end
 end

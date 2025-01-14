@@ -1,5 +1,6 @@
 <%
 small ||= false
+link_to_all ||= false
 %>
 <% if projects.none? %>
   <p><%= t('admin.communication.website.portfolio.projects.none') %></p>
@@ -24,5 +25,7 @@ small ||= false
         </div>
       </div>
     <% end %>
+    <%= render 'admin/application/components/all',
+                link: admin_communication_website_portfolio_projects_path(website_id: @website) if link_to_all %>
   </div>
 <% end %>
