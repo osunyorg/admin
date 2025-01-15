@@ -29,7 +29,7 @@ fetch(RSS_URL)
               <p class="small">${description.textContent}</p>
             </div>
             <p class="card-footer mb-1 small text-end">
-              ${date.getMonth()}/${date.getFullYear()}
+              ${date.getMonth()+1}/${date.getFullYear()}
               — 
               <a href="${link.textContent}" target="_blank" rel="noopener">
                 <%= t('admin.chronicles.read_more') %>

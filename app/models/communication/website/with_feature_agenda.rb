@@ -16,4 +16,12 @@ module Communication::Website::WithFeatureAgenda
     scope :with_feature_agenda, -> { where(feature_agenda: true) }
   end
 
+  def feature_agenda_name(language)
+    begin
+      special_page(Communication::Website::Page::CommunicationAgenda).best_localization_for(language)
+    rescue
+      Communication::Website::Agenda::Event.model_name.human(count: 2)
+    end
+  end
+
 end
