@@ -2,6 +2,8 @@ env:
   browser: true
   es6: true
 extends: "eslint:recommended"
+parserOptions:
+  sourceType: module
 rules:
   # key: 0 = allow, 1 = warn, 2 = error
 
