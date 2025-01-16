@@ -1,11 +1,11 @@
 <%
+title = Communication::Website::Page.model_name.human(count: 2)
 action = ''
 action += link_to t('create'),
                   new_admin_communication_website_page_path(website_id: @website),
                   class: button_classes if can?(:create, Communication::Website::Page)
 %>
-<%= osuny_panel t('communication.website.last_pages'),
-                action: action do %>
+<%= osuny_panel title, action: action do %>
   <div class="row g-2 mb-3">
     <% @pages.each do |page| %>
       <div class="<%= 'col-lg-6 col-xxl-4' if large %>">
@@ -20,7 +20,7 @@ action += link_to t('create'),
         </div>
       </div>
     <% end %>
+    <%= render 'admin/application/components/all',
+                link: admin_communication_website_pages_path(website_id: @website) %>
   </div>
-  <%= link_to t('communication.website.see_all', number: @all_pages.count),
-              admin_communication_website_pages_path(website_id: @website) %>
 <% end %>

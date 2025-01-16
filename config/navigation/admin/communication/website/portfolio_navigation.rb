@@ -5,7 +5,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
     primary.item  :feature_nav_projects,
-                  Communication::Website::Portfolio::Project.model_name.human(count: 2),
+                  @website.feature_portfolio_name(current_language),
                   admin_communication_website_portfolio_projects_path(website_id: @website.id)
     primary.item  :feature_nav_categories,
                   Communication::Website::Portfolio::Category.model_name.human(count: 2),

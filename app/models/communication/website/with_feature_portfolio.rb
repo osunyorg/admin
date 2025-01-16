@@ -17,4 +17,11 @@ module Communication::Website::WithFeaturePortfolio
     scope :with_feature_portfolio, -> { where(feature_portfolio: true) }
   end
 
+  def feature_portfolio_name(language)
+    begin
+      special_page(Communication::Website::Page::CommunicationPortfolio).best_localization_for(language)
+    rescue
+      Communication::Website::Portfolio::Project.model_name.human(count: 2)
+    end
+  end
 end

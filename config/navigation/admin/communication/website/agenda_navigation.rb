@@ -5,7 +5,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
     primary.item  :feature_nav_events,
-                  Communication::Website::Agenda::Event.model_name.human(count: 2),
+                  @website.feature_agenda_name(current_language),
                   admin_communication_website_agenda_events_path(website_id: @website.id)
     primary.item  :feature_nav_categories,
                   Communication::Website::Agenda::Category.model_name.human(count: 2),

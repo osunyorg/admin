@@ -37,13 +37,12 @@ class Ability::ProgramManager < Ability
     end
   end
 
+  def managed_programs_ids
+    @managed_programs_ids ||= @user.programs_to_manage.pluck(:id)
+  end
+
   def managed_program_localization_ids
-    @managed_program_localization_ids ||= begin
-      managed_program_ids = @user.programs_to_manage.pluck(:id)
-      Education::Program::Localization
-        .where(about_id: managed_program_ids)
-        .pluck(:id)
-    end
+    @managed_program_localization_ids ||= Education::Program::Localization.where(about_id: managed_program_ids).pluck(:id)
   end
 
   def managed_person_localization_ids
