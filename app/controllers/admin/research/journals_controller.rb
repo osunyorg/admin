@@ -22,6 +22,7 @@ class Admin::Research::JournalsController < Admin::Research::Journals::Applicati
     @volumes =  @journal.volumes
                         .ordered(current_language)
                         .limit(6)
+    @hero_summary = true
     breadcrumb
   end
 

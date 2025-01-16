@@ -1,5 +1,5 @@
 <%
-title = t('communication.website.last_projects')
+title = @website.feature_portfolio_name(current_language)
 action = ''
 action += link_to t('create'),
                   new_admin_communication_website_portfolio_project_path(website_id: @website),
@@ -8,7 +8,6 @@ action += link_to t('create'),
 <%= osuny_panel title, action: action do %>
   <%= render 'admin/communication/websites/portfolio/projects/list',
               projects: @projects, 
-              small: true %>
-  <%= link_to t('communication.website.see_all', number: @all_projects.size), 
-              admin_communication_website_portfolio_projects_path(website_id: @website) if @all_projects.any? %>
+              small: true,
+              link_to_all: true %>
 <% end %>

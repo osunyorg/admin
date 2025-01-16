@@ -33,6 +33,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
 
   def show
     @preview = true
+    @hero_summary = true
     breadcrumb
   end
 
