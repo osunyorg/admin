@@ -5,9 +5,15 @@ if kind == 'university'
 else
   mapping_keys = ['email', 'first_name', 'last_name', 'mobile_phone', 'language', 'picture_url']
 end
+
+fieldsPropValue = object.sso_mapping.blank? ? [] : object.sso_mapping
+keysPropValue = mapping_keys.map { |key| [key, User.human_attribute_name(key)] }.to_h
 %>
 
-<div id="sso-mapping-app" v-cloak>
+<div  id="sso-mapping-app"
+      data-fields="<%= fieldsPropValue.to_json %>"
+      data-keys="<%= keysPropValue.to_json %>"
+      v-cloak>
   <div class="spinner-border text-primary" role="status" ref="test">
     <span class="sr-only"><%= t('loading') %></span>
   </div>
@@ -60,7 +66,7 @@ end
       </div>
     </draggable>
 
-    <a @on:click="addField" class="btn btn-primary btn-sm">
+    <a @click="addField" class="btn btn-primary btn-sm">
       <%= t('add_field') %>
     </a>
   </div>

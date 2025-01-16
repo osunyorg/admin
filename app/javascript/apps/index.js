@@ -1,11 +1,6 @@
-import ssoMappingApp from './sso-mapping';
+import { createApp } from 'vue';
+import SsoMappingApp from './SsoMappingApp.vue';
 
-// Initialize the SsoMappingApp if the element is present
-window.addEventListener('load', function () {
-    const ssoMappingAppElement = document.getElementById('sso-mapping-app');
-    if (ssoMappingAppElement) {
-        setTimeout(function () {
-            ssoMappingApp.mount(ssoMappingAppElement);
-        }, 1000);
-    }
-});
+if (document.getElementById('sso-mapping-app')) {
+    createApp(SsoMappingApp).mount('#sso-mapping-app');
+}
