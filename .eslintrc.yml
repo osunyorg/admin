@@ -1,9 +1,14 @@
 env:
   browser: true
-  es6: true
 extends: "eslint:recommended"
-parserOptions:
-  sourceType: module
+overrides:
+  - files: ["app/javascript/**/*.js", "*.vue"]
+    env:
+      browser: true
+      es6: true
+    parserOptions:
+      sourceType: module
+
 rules:
   # key: 0 = allow, 1 = warn, 2 = error
 
