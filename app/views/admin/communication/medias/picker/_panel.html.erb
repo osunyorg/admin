@@ -16,18 +16,20 @@
         </button>
         <div class="form-text"><%= images_formats_accepted_hint %></div>
       </div>
-      <button type="button"
-              class="btn btn-sm"
-              v-on:click="cloudOpen()">
-        <%= lucide_icon('cloud-download') %>
-        <%= t 'photo_import.buttons.unsplash' %>
-      </button>
-      <button type="button"
-              class="btn btn-sm"
-              v-on:click="mediasOpen()">
-        <%= lucide_icon('image') %>
-        <%= t('photo_import.buttons.medias') %>
-      </button>
+      <div class="d-flex flex-wrap justify-content-between">
+        <button type="button"
+                class="btn btn-sm ms-n2"
+                v-on:click="cloudOpen()">
+          <%= lucide_icon('cloud-download') %>
+          <%= t 'photo_import.buttons.unsplash' %>
+        </button>
+        <button type="button"
+                class="btn btn-sm mx-n2"
+                v-on:click="mediasOpen()">
+          <%= lucide_icon('image') %>
+          <%= t('photo_import.buttons.medias') %>
+        </button>
+      </div>
     </div>
     <div v-if="current.image.url">
       <img :src="current.image.url" class="img-fluid" />

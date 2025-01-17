@@ -27,9 +27,9 @@
       </div>
       <div class="modal-body overflow-x-hidden" id="media-results">
         <div class="row">
-          <div class="col-lg-2">
+          <div class="col-md-2">
             <div class="mb-4">
-              <p class="small text-muted mb-0">
+              <p class="small text-muted mb-1">
                 <%= Communication::Media::Collection.model_name.human(count: 2) %>
               </p>
               <div  v-for="collection in medias.data.collections"
@@ -47,7 +47,7 @@
             </div>
             <div  class="mb-4" 
                   v-for="taxonomy in medias.data.taxonomies">
-              <p class="small text-muted mb-0">
+              <p class="small text-muted mb-1">
                 {{taxonomy.name}}
               </p>
               <div  v-for="category in taxonomy.categories"
@@ -64,7 +64,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-10">
+          <div class="col-md-10">
             <p v-if="medias.data.results.length === 0 || !medias.data" >
               <%= t 'photo_import.nothing' %>
             </p>
