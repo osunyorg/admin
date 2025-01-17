@@ -26,19 +26,60 @@
         </div>
       </div>
       <div class="modal-body overflow-x-hidden" id="media-results">
-        <p v-if="medias.data.results.length === 0 || !medias.data" >
-          <%= t 'photo_import.nothing' %>
-        </p>
-        <div class="photo_import__results photo_import__media photo_import__media__results">
-          <img  :src="media.thumb"
-                :alt="media.alt"
-                class="photo_import__results__result"
-                v-for="media in medias.data.results"
-                v-on:click="mediasSelect(media)">
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="mb-4">
+              <p class="small text-muted mb-0">
+                <%= Communication::Media::Collection.model_name.human(count: 2) %>
+              </p>
+              <div  v-for="collection in medias.data.collections"
+                    class="form-check">
+                <input  class="form-check-input"
+                        type="checkbox"
+                        @change="mediasToggleCollection(collection.id)"
+                        :id="'collection' + collection.id"
+                        />
+                <label  class="form-check-label"
+                        :for="'collection' + collection.id">
+                  {{collection.name}}
+                </label>
+              </div>
+            </div>
+            <div  class="mb-4" 
+                  v-for="taxonomy in medias.data.taxonomies">
+              <p class="small text-muted mb-0">
+                {{taxonomy.name}}
+              </p>
+              <div  v-for="category in taxonomy.categories"
+                    class="form-check">
+                <input  class="form-check-input"
+                        type="checkbox"
+                        @change="mediasToggleCategory(category.id)"
+                        :id="'category' + category.id"
+                        />
+                <label  class="form-check-label"
+                        :for="'category' + category.id">
+                  {{category.name}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-10">
+            <p v-if="medias.data.results.length === 0 || !medias.data" >
+              <%= t 'photo_import.nothing' %>
+            </p>
+            <div class="photo_import__results photo_import__media photo_import__media__results">
+              <img  :src="media.thumb"
+                    :alt="media.alt"
+                    class="photo_import__results__result"
+                    v-for="media in medias.data.results"
+                    v-on:click="mediasSelect(media)">
+            </div>
+            <p class="small text-muted" v-if="medias.data.total_pages && medias.data.results.length > 0">
+              {{medias.page}} / {{medias.data.total_pages }}
+            </p>
+          </div>
         </div>
-        <p class="small text-muted" v-if="medias.data.total_pages">
-          {{medias.page}} / {{medias.data.total_pages }}
-        </p>
       </div>
       <div class="modal-footer d-block" v-if="medias.data.total_pages > 1">
         <div class="row">

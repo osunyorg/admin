@@ -44,6 +44,10 @@ var imagePickerApp = Vue.createApp({
       },
       medias: {
         query: "",
+        selected: {
+          collections: [],
+          categories: []
+        },
         modal: {
           opened: false
         },
@@ -198,7 +202,13 @@ var imagePickerApp = Vue.createApp({
     mediasSearch() {
       var xhr = new XMLHttpRequest(),
           url = "<%= medias_path %>"
-                  + '?filters[for_search_term]=' + encodeURIComponent(this.medias.query);
+                  + "?filters[for_search_term]=" + encodeURIComponent(this.medias.query);
+      for (var i = 0; i < this.medias.selected.collections.length; i++) {
+        url += "&filters[for_collection][]=" + this.medias.selected.collections[i];
+      };
+      for (var i = 0; i < this.medias.selected.categories.length; i++) {
+        url += "&filters[for_category][]=" + this.medias.selected.categories[i];
+      };
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4 && xhr.status == 200) {
           this.medias.data = JSON.parse(xhr.responseText);
@@ -214,6 +224,21 @@ var imagePickerApp = Vue.createApp({
       this.resetOrigin();
       this.current.origin.medias.id = image.id;
       this.mediasClose();
+    },
+    mediasToggleCollection(collection) {
+      this.mediasToggle(this.medias.selected.collections, collection);
+      this.mediasSearch();
+    },
+    mediasToggleCategory(category) {
+      this.mediasToggle(this.medias.selected.categories, category);
+      this.mediasSearch();
+    },
+    mediasToggle(array, value) {
+      if (array.includes(value)) {
+        array.splice(array.indexOf(value), 1);
+      } else {
+        array.push(value);
+      }
     },
 
     // Summernote

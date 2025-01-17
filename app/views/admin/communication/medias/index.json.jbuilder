@@ -1,5 +1,12 @@
 json.total @medias.total_count
 json.total_pages @medias.total_pages
+json.collections @collections do |collection|
+  json.id collection.id
+  json.name collection.to_s_in(current_language)
+end
+
+json.partial! 'admin/application/categories/list', categories: @categories
+
 json.results @medias do |media|
   thumb = media.original_blob.variant(resize: "600x").url
   next if thumb.nil?
