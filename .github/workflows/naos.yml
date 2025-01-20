@@ -1,4 +1,4 @@
-name: GitlabSync
+name: naos sync
 
 on:
   - push
