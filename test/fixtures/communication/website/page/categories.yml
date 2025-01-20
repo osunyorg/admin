@@ -1,0 +1,19 @@
+test_category:
+  migration_identifier: test-page-category-fixture-1
+  position: 1
+  website: website_with_github
+  university: default_university
+
+test_taxonomy:
+  migration_identifier: test-page-category-fixture-2
+  position: 2
+  is_taxonomy: true
+  website: website_with_github
+  university: default_university
+
+test_taxonomy_item:
+  migration_identifier: test-page-category-fixture-3
+  parent: test_taxonomy
+  position: 1
+  website: website_with_github
+  university: default_university

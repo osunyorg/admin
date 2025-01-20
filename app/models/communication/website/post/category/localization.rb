@@ -48,14 +48,15 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
   protected
 
   def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(
-                communication_website_id: self.communication_website_id,
-                language_id: language_id,
-                slug: slug
-              )
-              .where.not(id: self.id)
-              .exists?
+    self.class
+        .unscoped
+        .where(
+          communication_website_id: self.communication_website_id,
+          language_id: language_id,
+          slug: slug
+        )
+        .where.not(id: self.id)
+        .exists?
   end
 
   def set_communication_website_id

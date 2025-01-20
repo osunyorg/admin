@@ -13,6 +13,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
     @pages = @website.pages
+    @feature_nav = 'navigation/admin/communication/website/pages'
     breadcrumb
   end
 
@@ -20,6 +21,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     @pages = @pages.filter_by(params[:filters], current_language)
                    .ordered_by_title(current_language)
                    .page(params[:page])
+    @feature_nav = 'navigation/admin/communication/website/pages'
     breadcrumb
   end
 
@@ -81,11 +83,13 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def new
     @page.website = @website
+    @categories = categories
     breadcrumb
     add_breadcrumb(t('create'))
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb(@l10n, admin_communication_website_page_path(@page))
     add_breadcrumb t('edit')
@@ -97,6 +101,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     if @page.save_and_sync
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       add_breadcrumb(t('create'))
       render :new, status: :unprocessable_entity
@@ -111,6 +116,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s_in(current_language))
     else
       load_invalid_localization
+      @categories = categories
       breadcrumb
       add_breadcrumb(@page, admin_communication_website_page_path(@page))
       add_breadcrumb t('edit')
@@ -156,7 +162,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def page_params
     params.require(:communication_website_page)
           .permit(
-            :communication_website_id, :bodyclass, :full_width, :parent_id,
+            :communication_website_id, :bodyclass, :full_width, :parent_id, category_ids: [],
             localizations_attributes: [
               :id, :title, :breadcrumb_title, :meta_description, :summary, :header_text, :header_cta, :header_cta_label, :header_cta_url, :text, :slug, :published,
               :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
@@ -167,6 +173,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
           .merge(
             university_id: current_university.id
           )
+  end
+
+  def categories
+    @website.page_categories
+            .ordered
   end
 
 end
