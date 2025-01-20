@@ -10,6 +10,16 @@ if block.template.page
         slug: "<%= hugo.slug %>"
         file: "<%= hugo.file %>"
 <% end %>
+<% if block.template.mode == 'category' && block.template.category %>
+  <%
+  category = block.template.category
+  category_l10n = category.localization_for(block.language)
+  if category_l10n.present?
+    hugo = category_l10n.hugo(@website)
+  %>
+      category: "<%= hugo.slug %>"
+  <% end %>
+<% end %>
 <%= block_options_static block %>
       layout: <%= block.template.layout %>
 <%= render 'admin/application/static/hugo/collection',

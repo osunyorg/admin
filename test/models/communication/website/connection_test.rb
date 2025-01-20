@@ -54,8 +54,8 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
     setup_page_connections(page_l10n)
 
-    # On supprime la page, et ainsi toutes ses connexions : -15
-    assert_difference -> { Communication::Website::Connection.count } => -15 do
+    # On supprime la page, et ainsi toutes ses connexions : -17
+    assert_difference -> { Communication::Website::Connection.count } => -17 do
       page_l10n.about.destroy
     end
   end
@@ -110,15 +110,16 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # Noesya est connectée via les 2 pages, donc 2 connexions
     assert_equal 2, page_l10n.website.connections.where(indirect_object: noesya).count
 
-    # On supprime la 2e page, donc ses 11 connexions à savoir :
+    # On supprime la 2e page, donc ses 13 connexions à savoir :
     # - La localisation de la page (1)
     # - Le block Organisations et Noesya (2)
-    # - Les 8 connexions via Noesya, à savoir :
+    # - Les 10 connexions via Noesya, à savoir :
     #   - La localisation de Noesya (1)
+    #   - La catégorie de Noesya et sa localisation (2)
     #   - Le block Personnes avec Olivia, sa localisation et son block Organisations (4)
     #     note : Pas Noesya car la connexion existe déjà plus haut
     #   - Le block Personnes avec Arnaud et sa localisation (3)
-    assert_difference -> { Communication::Website::Connection.count } => -11 do
+    assert_difference -> { Communication::Website::Connection.count } => -13 do
       second_page_l10n.about.destroy
     end
 
@@ -191,8 +192,8 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       perform_enqueued_jobs
     end
 
-    # On ajoute noesya via un block "Organisations" : +6 parce que noesya a une localisation et un block "Personnes" avec Olivia (et sa localisation)
-    assert_difference -> { page.connections.count } => 6 do
+    # On ajoute noesya via un block "Organisations" : +8 parce que noesya a une localisation, une catégorie (et sa localisation) et un block "Personnes" avec Olivia (et sa localisation)
+    assert_difference -> { page.connections.count } => 8 do
       block = page_l10n.blocks.new(position: 3, published: true, template_kind: :organizations)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
       block.save
@@ -235,5 +236,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     #         - Block Personnes
     #           - Arnaud
     #             - Arnaud Localization
+    #       - Catégorie
+    #         - Catégorie Localization
   end
 end

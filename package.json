@@ -12,5 +12,12 @@
     "sortablejs": "^1.14.0",
     "vue": "^3.2.31",
     "vue-draggable-next": "^2.1.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2",
+    "esbuild-plugin-vue-next": "^0.1.4"
+  },
+  "scripts": {
+    "build": "node bin/esbuild"
   }
 }

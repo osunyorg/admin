@@ -9,4 +9,5 @@ json.localizations do
     end
   end
 end
+json.extract! organization, :category_ids
 json.extract! organization, :created_at, :updated_at
