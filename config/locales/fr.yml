@@ -140,13 +140,17 @@ fr:
       sentence_html: Valeur héritée de %{link}
       sentence_without_link: Valeur héritée
       status: Valeur héritée
+    item:
+      one: élément
+      other: éléments
+      see_all: Voir tout
     meta_description:
       hint: Texte simple, dédié au à l'optimisation pour les moteurs de recherche (Search Engine Optimization, SEO).
       label: Description pour les moteurs de recherche (meta)
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     pending_tasks:
       tasks: Tâches en cours de traitement
-      text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."
+      text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."
       what_is_it: Qu'est-ce que c'est ?
     seo: SEO
     subnav:

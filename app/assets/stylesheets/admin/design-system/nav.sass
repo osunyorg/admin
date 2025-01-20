@@ -86,9 +86,12 @@ nav[aria-label="breadcrumb"]
     overflow-x: scroll
     padding-left: var(--bs-gutter-x)
     padding-right: var(--bs-gutter-x)
+    @include media-breakpoint-up(sm)
+        padding-bottom: $spacing1
     .breadcrumb
         align-items: center
         flex-wrap: nowrap
+        text-transform: uppercase
         *
             color: $color-text-alt !important
         .breadcrumb-item
@@ -141,9 +144,6 @@ nav[aria-label="breadcrumb"]
 
 .feature-nav
     line-height: 100%
-    a
-        color: $color-flexoki-600
-        font-family: $font-family-serif
     h1, a
         display: inline-block
         font-size: $h1-font-size !important
@@ -151,6 +151,11 @@ nav[aria-label="breadcrumb"]
         margin-bottom: 0
         margin-right: pxToRem(40)
         margin-top: 0
+    a
+        color: $color-text-alt-large
+        font-family: $font-family-serif
+    h1
+        font-weight: bold
 
 #menu-main
     .menu-content

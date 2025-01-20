@@ -1,4 +1,2 @@
-<% content_for :title, Communication::Website::Post.model_name.human %>
-<%= render  'form',
-            post: @post,
-            l10n: @l10n %>
+<% content_for :title, t('create') %>
+<%= render  'form', post: @post, l10n: @l10n %>

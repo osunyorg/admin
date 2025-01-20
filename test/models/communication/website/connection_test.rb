@@ -102,7 +102,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
     setup_page_connections(page_l10n)
 
-    second_page_l10n = communication_website_page_localizations(:page_test_fr)
+    second_page_l10n = communication_website_page_localizations(:test_page_fr)
     block = second_page_l10n.blocks.new(position: 1, published: true, template_kind: :organizations)
     block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
     block.save

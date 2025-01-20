@@ -12,7 +12,9 @@ namespace :api do
             post :upsert, on: :collection
           end
         end
-        resources :pages, controller: '/api/osuny/communication/websites/pages', only: [:index, :show, :create, :update]
+        resources :pages, controller: '/api/osuny/communication/websites/pages', only: [:index, :show, :create, :update, :destroy] do
+          post :upsert, on: :collection
+        end
         resources :posts, controller: '/api/osuny/communication/websites/posts', only: [:index, :show, :create, :update, :destroy] do
           post :upsert, on: :collection
         end

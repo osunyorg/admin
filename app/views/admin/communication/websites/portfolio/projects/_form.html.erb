@@ -22,6 +22,7 @@
           <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#communication_website_portfolio_project_localizations_attributes_0_title' %>
+          <%= f.input :full_width, wrapper: :custom_boolean_switch %>
         <% end %>
         <%= render 'admin/application/images/featured/form', about: l10n, f: lf %>
         <%= render 'admin/application/images/shared/form', about: l10n, f: lf %>

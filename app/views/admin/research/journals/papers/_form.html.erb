@@ -19,7 +19,7 @@
           <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#research_journal_paper_localizations_attributes_0_title' %>
-          <%= f.association :volume, 
+          <%= f.association :volume,
                             collection: osuny_collection(@journal.volumes, localized: true) %>
           <%= render 'admin/application/publication/form', f: lf, about: paper %>
           <%= lf.input :published_at, html5: true, as: :date %>
@@ -30,12 +30,12 @@
                             collection: osuny_collection(
                               current_university.people
                                                 .researchers
-                                                .ordered(current_language), 
+                                                .ordered(current_language),
                               localized: true
                             ),
                             as: :check_boxes %>
           <%= lf.input :authors_list %>
-          <%= f.association :kind, collection: osuny_collection(@journal.kinds, localized: true) if @journal.kinds.any? %>
+          <%= f.association :kind, collection: osuny_collection(@journal.paper_kinds, localized: true) if @journal.paper_kinds.any? %>
         <% end %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>

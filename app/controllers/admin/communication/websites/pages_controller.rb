@@ -38,8 +38,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def children
-    return unless request.xhr?
-    @children = @page.children.ordered
+    if request.xhr?
+      @children = @page.children.ordered
+    else
+      redirect_to admin_communication_website_pages_path
+    end
   end
 
   def show
