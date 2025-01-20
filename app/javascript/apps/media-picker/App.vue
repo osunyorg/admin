@@ -9,42 +9,13 @@ export default {
       Changes,
       Cloud,
       Medias,
-      Upload
+      Upload,
     },
     data () {
       return {
-        current: {
-          about: {
-            type: null,
-            id: null,
-          },
-          image: {
-            alt: "",
-            credit: "",
-            url: ""
-          },
-          origin: {
-            blob: {
-              id: "",
-              signed_id: "",
-              delete: false,
-            },
-            cloud: {
-              "pexels":{
-                id: "",
-                url: "",
-              },
-              "unsplash":{
-                id: "",
-                url: "",
-              }
-            },
-            medias: {
-              id: "",
-            }
-          }
-        },
+        current: {},
         previous: {},
+        i18n: {},
       }
     },
     methods: {
@@ -62,9 +33,13 @@ export default {
         this.current.image.url = this.current.origin.blob.url;
       },
     },
+    beforeMount() {
+      this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n);
+      this.current = JSON.parse(document.getElementById('media-picker-app').dataset.current);
+    },
     mounted() {
-      this.previous.origin = JSON.parse(JSON.stringify(this.current.origin));
-    }
+      this.previous = JSON.parse(JSON.stringify(this.current));
+    },
 };
 </script>
 
@@ -75,7 +50,7 @@ export default {
     </div>
     <div class="app-content">
       <div v-if="!current.image.url" class="image-picker__selector">
-        <Upload @uploaded="uploaded"></Upload>
+        <Upload @uploaded="uploaded" :i18n="i18n.upload"></Upload>
         <div class="d-flex flex-wrap justify-content-between">
           <Cloud></Cloud>
           <Medias></Medias>
@@ -87,31 +62,29 @@ export default {
           <a  class="btn btn-sm text-danger pe-0"
               v-on:click="removeImage()">
             <i class="<%= Icon::DELETE %>"></i>
-            <%= t('featured_image.remove') %>
+            {{ i18n.image.remove }}
           </a>
         </div>
         <div class="mb-3">
-          <label class="form-label" aria-label="<%= t('featured_image.alt.label') %>" for="alt">
-            <%= t('featured_image.alt.label') %>
+          <label class="form-label" aria-label="{{ i18n.image.alt.label }}" for="alt">
+            {{ i18n.image.alt.label }}
           </label>
           <input  id="alt"
                   class="form-control"
                   data-translatable="true" 
                   v-model="current.image.alt"
-                  placeholder="<%= t('featured_image.alt.label') %>"
                   type="text">
-          <div class="form-text"><%= t('featured_image.alt.hint') %></div>
+          <div class="form-text">{{ i18n.image.alt.hint }}</div>
         </div>
         <div class="mb-3 summernote">
           <label class="form-label" aria-label="<%= t('featured_image.credit.label') %>" for="credit">
-            <%= t('featured_image.credit.label') %>
+            {{ i18n.image.credit.label }}
           </label>
           <textarea id="credit" 
                     class="form-control summernote-vue"
                     data-translatable="true"
-                    v-model="current.image.credit"
-                    placeholder="<%= t('featured_image.credit.label') %>"></textarea>
-          <div class="form-text"><%= t('featured_image.credit.hint') %></div>
+                    v-model="current.image.credit"></textarea>
+          <div class="form-text">{{ i18n.image.credit.hint }}</div>
         </div>
       </div>
     </div>

@@ -1,7 +1,37 @@
+<%
+key ||= :featured_image
+picker = Osuny::MediaPicker.new
+picker.about = about
+picker.key = key
+# About name is default query
+default_query = about.to_s
+# fr, en...
+lang = about&.language&.iso_code if about.respond_to? :language
+%>
 <div  id="media-picker-app"
       class="image-picker"
-      v-cloak>
+      data-current="<%= picker.to_json %>"
+      data-i18n="<%= {
+          image: {
+            remove: t('featured_image.remove'),
+            alt: {
+              label: t('featured_image.alt.label'),
+              hint: t('featured_image.alt.hint'),
+            },
+            credit: {
+              label: t('featured_image.credit.label'),
+              hint: t('featured_image.credit.hint'),
+            },
+          },
+          upload: {
+            button: t('photo_import.buttons.upload'),
+            hint: images_formats_accepted_hint,
+          },
+        }.to_json
+      %>"
+      >
 </div>
+
 <div  id="image-picker-app" 
       class="image-picker"
       v-cloak>

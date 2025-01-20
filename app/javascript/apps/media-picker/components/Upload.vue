@@ -5,9 +5,6 @@ export default {
   components: { 
     Upload
   },
-  props: [
-    'target'
-  ],
   data () {
     return {
       url: "/rails/active_storage/direct_uploads",
@@ -37,6 +34,7 @@ export default {
         checksum: null,
       },
       directUpload: null,
+      i18n: {},
     }
   },
   methods: {
@@ -76,6 +74,9 @@ export default {
       }.bind(this));
     },
   },
+  beforeMount() {
+    this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n).upload;
+  },
   mounted() {
   }
 };
@@ -92,8 +93,8 @@ export default {
             class="btn"
             v-on:click.prevent="$refs.file.click()">
       <Upload stroke-width="1.5" />
-      <%= t 'photo_import.buttons.upload' %>
+      {{ i18n.button }}
     </button>
-    <div class="form-text">Fichiers .jpg, .jpeg, .png, .svg uniquement. 5 Mo max.</div>
+    <div class="form-text">{{ i18n.hint }}</div>
   </div>
 </template>
