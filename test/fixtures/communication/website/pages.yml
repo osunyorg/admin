@@ -8,6 +8,8 @@ test_page:
   migration_identifier: test-page-fixture-1
   position: 1
   parent: root_page
+  categories:
+   - test_category
   website: website_with_github
   university: default_university
 

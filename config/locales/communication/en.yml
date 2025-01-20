@@ -192,6 +192,7 @@ en:
         url: URL
       communication/website/page:
         bodyclass: Specific CSS class
+        categories: Categories
         children: Children pages
         full_width: Full width
         parent: Parent page
@@ -329,6 +330,9 @@ en:
         all: All pages
         one: Page
         other: Pages
+      communication/website/page/category:
+        one: Category
+        other: Categories
       communication/website/portfolio/category:
         one: Category
         other: Categories

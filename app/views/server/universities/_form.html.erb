@@ -39,6 +39,7 @@
                         required: true,
                         wrapper_html: { class: "js-languages" },
                         label_method: lambda { |l| language_name(l.iso_code) },
+                        collection: Language.ordered,
                         hint: t(
                           'simple_form.hints.university.languages',
                           used_languages: Language.where(id: university.websites.map(&:language_ids).flatten.uniq).ordered.map(&:name).join(', ')

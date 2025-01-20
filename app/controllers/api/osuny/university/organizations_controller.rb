@@ -109,7 +109,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
                           .permit(
                             :migration_identifier, :kind, :active, :email, :phone,
                             :address, :zipcode, :city, :country, :nic, :siren,
-                            localizations: {}
+                            category_ids: [], localizations: {}
                           ).merge(university_id: current_university.id)
       set_l10n_attributes(permitted_params, @organization) if permitted_params[:localizations].present?
       permitted_params
@@ -121,7 +121,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
                           .permit(
                             :migration_identifier, :kind, :active, :email, :phone,
                             :address, :zipcode, :city, :country, :nic, :siren,
-                            localizations: {}
+                            category_ids: [], localizations: {}
                           ).merge(university_id: current_university.id)
     organization = current_university.organizations.find_by(migration_identifier: permitted_params[:migration_identifier])
     permitted_params[:id] = organization.id if organization.present?

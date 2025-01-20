@@ -1,0 +1,16 @@
+test_category:
+  migration_identifier: test-organization-category-fixture-1
+  position: 1
+  university: default_university
+
+test_taxonomy:
+  migration_identifier: test-organization-category-fixture-2
+  position: 2
+  is_taxonomy: true
+  university: default_university
+
+test_taxonomy_item:
+  migration_identifier: test-organization-category-fixture-3
+  parent: test_taxonomy
+  position: 1
+  university: default_university

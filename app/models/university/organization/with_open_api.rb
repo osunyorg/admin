@@ -27,6 +27,10 @@ module University::Organization::WithOpenApi
             "$ref": "#/components/schemas/university_organization_localization"
           }
         },
+        category_ids: {
+          type: :array,
+          items: { type: :string, format: :uuid }
+        },
         created_at: { type: :string, format: "date-time" },
         updated_at: { type: :string, format: "date-time" }
       }

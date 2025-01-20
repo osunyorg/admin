@@ -6,6 +6,7 @@
 #  featured_image_alt    :text
 #  featured_image_credit :text
 #  meta_description      :text
+#  migration_identifier  :string
 #  name                  :string
 #  slug                  :string           indexed
 #  summary               :text
@@ -30,6 +31,7 @@
 #
 class University::Organization::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
+  include WithOpenApi
 
   def git_path(website)
     return unless for_website?(website)

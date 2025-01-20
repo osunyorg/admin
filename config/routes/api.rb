@@ -12,6 +12,11 @@ namespace :api do
             post :upsert, on: :collection
           end
         end
+        namespace :page, path: 'pages' do
+          resources :categories, controller: '/api/osuny/communication/websites/pages/categories', only: [:index, :show, :create, :update, :destroy] do
+            post :upsert, on: :collection
+          end
+        end
         resources :pages, controller: '/api/osuny/communication/websites/pages', only: [:index, :show, :create, :update, :destroy] do
           post :upsert, on: :collection
         end
@@ -23,6 +28,11 @@ namespace :api do
       root to: '/api/osuny/communication#index'
     end
     namespace :university do
+      namespace :organization, path: 'organizations' do
+        resources :categories, controller: '/api/osuny/university/organizations/categories', only: [:index, :show, :create, :update, :destroy] do
+          post :upsert, on: :collection
+        end
+      end
       resources :organizations, controller: '/api/osuny/university/organizations', only: [:index, :show, :create, :update, :destroy] do
         post :upsert, on: :collection
       end
