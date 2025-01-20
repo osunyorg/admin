@@ -35,6 +35,7 @@ RSpec.describe 'University::Organization' do
         required: [:organization]
       }
       let(:university_organization) {
+        organization_category = university_organization_categories(:test_category)
         {
           organization: {
             migration_identifier: 'organization-from-api-1',
@@ -46,6 +47,7 @@ RSpec.describe 'University::Organization' do
             country: "FR",
             nic: "00001",
             siren: "123456789",
+            category_ids: [organization_category.id],
             localizations: {
               fr: {
                 migration_identifier: 'organization-from-api-1-fr',
@@ -173,6 +175,7 @@ RSpec.describe 'University::Organization' do
       let(:organizations) {
         noesya = university_organizations(:noesya)
         noesya_l10n = university_organization_localizations(:noesya_fr)
+        organization_category = university_organization_categories(:test_category)
         {
           organizations: [
             {
@@ -185,6 +188,7 @@ RSpec.describe 'University::Organization' do
               country: "FR",
               nic: "00001",
               siren: "123456789",
+              category_ids: [organization_category.id],
               localizations: {
                 fr: {
                   migration_identifier: 'organization-from-api-1-fr',
@@ -226,6 +230,7 @@ RSpec.describe 'University::Organization' do
               country: noesya.country,
               nic: noesya.nic,
               siren: noesya.siren,
+              category_ids: noesya.category_ids,
               localizations: {
                 noesya_l10n.language.iso_code => {
                   migration_identifier: noesya_l10n.migration_identifier,
