@@ -3,7 +3,7 @@ namespace :app do
   task :start do
     sh 'yarn'
     sh 'rails tmp:cache:clear'
-    sh 'rails server'
+    sh 'bin/dev'
   end
 
   desc 'Fix things'
