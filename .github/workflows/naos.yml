@@ -1,4 +1,4 @@
-name: GitlabSync
+name: naos sync
 
 on:
   - push
@@ -14,6 +14,6 @@ jobs:
         fetch-depth: 0
     - uses: wangchucheng/git-repo-sync@v0.1.0
       with:
-        target-url: https://gitlab.com/osuny/admin.git
-        target-username: ${{ secrets.GITLAB_TARGET_USERNAME }}
-        target-token: ${{ secrets.GITLAB_TARGET_TOKEN }}
+        target-url: https://forge.naos-cluster.tech/osuny/admin.git
+        target-username: ${{ secrets.GITLAB_NAOS_USERNAME }}
+        target-token: ${{ secrets.GITLAB_NAOS_TOKEN }}
