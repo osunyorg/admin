@@ -46,11 +46,13 @@ RSpec.describe 'Communication::Website::Page' do
         required: [:page]
       }
       let(:communication_website_page) {
+        page_category = communication_website_page_categories(:test_category)
         {
           page: {
             migration_identifier: 'page-from-api-1',
             parent_id: communication_website_pages(:root_page).id,
             full_width: true,
+            category_ids: [page_category.id],
             localizations: {
               fr: {
                 migration_identifier: 'page-from-api-1-fr',
@@ -184,12 +186,14 @@ RSpec.describe 'Communication::Website::Page' do
       let(:pages) {
         test_page = communication_website_pages(:test_page)
         test_page_l10n = communication_website_page_localizations(:test_page_fr)
+        page_category = communication_website_page_categories(:test_category)
         {
           pages: [
             {
               migration_identifier: 'page-from-api-1',
               parent_id: communication_website_pages(:root_page).id,
               full_width: true,
+              category_ids: [page_category.id],
               localizations: {
                 fr: {
                   migration_identifier: 'page-from-api-1-fr',
@@ -229,6 +233,7 @@ RSpec.describe 'Communication::Website::Page' do
               migration_identifier: test_page.migration_identifier,
               parent_id: test_page.parent_id,
               full_width: test_page.full_width,
+              category_ids: test_page.category_ids,
               localizations: {
                 test_page_l10n.language.iso_code => {
                   migration_identifier: test_page_l10n.migration_identifier,
@@ -432,6 +437,7 @@ RSpec.describe 'Communication::Website::Page' do
             migration_identifier: test_page.migration_identifier,
             parent_id: test_page.parent_id,
             full_width: test_page.full_width,
+            category_ids: test_page.category_ids,
             localizations: {
               test_page_l10n.language.iso_code => {
                 migration_identifier: test_page_l10n.migration_identifier,
@@ -466,6 +472,7 @@ RSpec.describe 'Communication::Website::Page' do
             page: {
               parent_id: test_page.parent_id,
               full_width: test_page.full_width,
+              category_ids: test_page.category_ids,
               localizations: {
                 test_page_l10n.language.iso_code => {
                   migration_identifier: test_page_l10n.migration_identifier,
@@ -514,6 +521,7 @@ RSpec.describe 'Communication::Website::Page' do
               migration_identifier: test_page.migration_identifier,
               parent_id: test_page.parent_id,
               full_width: test_page.full_width,
+              category_ids: test_page.category_ids,
               localizations: {
                 test_page_l10n.language.iso_code => {
                   migration_identifier: test_page_l10n.migration_identifier,
