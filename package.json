@@ -6,6 +6,7 @@
     "cropperjs": "^1.5.12",
     "jquery-cropper": "^1.0.1",
     "leaflet": "^1.9.4",
+    "lucide-vue-next": "^0.473.0",
     "notyf": "^3.10.0",
     "select2": "^4.1.0-rc.0",
     "slug": "^5.1.0",
