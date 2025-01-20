@@ -230,31 +230,21 @@ RSpec.describe 'Communication::Website::Page::Category' do
           {
             categories: [
               {
-                migration_identifier: 'page-from-api-1',
-                parent_id: communication_website_pages(:root_page).id,
-                full_width: true,
                 localizations: {
                   fr: {
-                    migration_identifier: 'page-from-api-1-fr',
-                    title: 'Ma nouvelle page',
-                    breadcrumb_title: 'Nouvelle page',
-                    meta_description: 'Une nouvelle page depuis l\'API',
+                    migration_identifier: 'page-category-from-api-1-fr',
+                    name: 'Ma nouvelle catégorie',
+                    meta_description: 'Une nouvelle catégorie depuis l\'API',
                     featured_image: {
                       url: 'https://images.unsplash.com/photo-1703923633616-254e78f6e9df?q=80&w=2070&auto=format&fit=crop',
                       alt: 'La lumière brille sur les parois du canyon',
                       credit: 'Photo de <a href="https://unsplash.com/fr/@johnnzhou">John Zhou</a> sur <a href="https://unsplash.com/fr/photos/la-lumiere-brille-sur-les-parois-du-canyon-AM-G-Yp5hIk">Unsplash</a>'
                     },
-                    published: true,
-                    published_at: '2024-11-29T16:49:00Z',
-                    slug: 'ma-nouvelle-page',
-                    summary: 'Ceci est une nouvelle page créée depuis l\'API.',
-                    header_text: 'Bienvenue sur ma nouvelle page',
-                    header_cta: true,
-                    header_cta_label: 'Découvrir',
-                    header_cta_url: 'https://www.example.com',
+                    slug: 'ma-nouvelle-categorie',
+                    summary: 'Ceci est une nouvelle catégorie créée depuis l\'API.',
                     blocks: [
                       {
-                        migration_identifier: 'page-from-api-1-fr-block-1',
+                        migration_identifier: 'page-category-from-api-1-fr-block-1',
                         template_kind: 'chapter',
                         title: 'Mon premier chapitre',
                         position: 1,
