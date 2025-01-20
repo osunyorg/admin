@@ -6,6 +6,7 @@ module Communication::Website::Permalink::WithMapping
       "Administration::Location::Localization" => Communication::Website::Permalink::Location,
       "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
       "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
+      "Communication::Website::Page::Category::Localization" => Communication::Website::Permalink::Page::Category,
       "Communication::Website::Page::Localization" => Communication::Website::Permalink::Page,
       "Communication::Website::Portfolio::Project::Localization" => Communication::Website::Permalink::Portfolio::Project,
       "Communication::Website::Portfolio::Category::Localization" => Communication::Website::Permalink::Portfolio::Category,

@@ -17,14 +17,18 @@ RSpec.configure do |config|
   schemas = {
     communication_website: Communication::Website::OPENAPI_SCHEMA,
     communication_website_localization: Communication::Website::Localization::OPENAPI_SCHEMA,
-    communication_website_page: Communication::Website::Page::OPENAPI_SCHEMA,
-    communication_website_page_localization: Communication::Website::Page::Localization::OPENAPI_SCHEMA,
-    communication_website_post: Communication::Website::Post::OPENAPI_SCHEMA,
-    communication_website_post_localization: Communication::Website::Post::Localization::OPENAPI_SCHEMA,
     communication_website_agenda_event: Communication::Website::Agenda::Event::OPENAPI_SCHEMA,
     communication_website_agenda_event_localization: Communication::Website::Agenda::Event::Localization::OPENAPI_SCHEMA,
+    communication_website_page: Communication::Website::Page::OPENAPI_SCHEMA,
+    communication_website_page_localization: Communication::Website::Page::Localization::OPENAPI_SCHEMA,
+    communication_website_page_category: Communication::Website::Page::Category::OPENAPI_SCHEMA,
+    communication_website_page_category_localization: Communication::Website::Page::Category::Localization::OPENAPI_SCHEMA,
+    communication_website_post: Communication::Website::Post::OPENAPI_SCHEMA,
+    communication_website_post_localization: Communication::Website::Post::Localization::OPENAPI_SCHEMA,
     university_organization: University::Organization::OPENAPI_SCHEMA,
     university_organization_localization: University::Organization::Localization::OPENAPI_SCHEMA,
+    university_organization_category: University::Organization::Category::OPENAPI_SCHEMA,
+    university_organization_category_localization: University::Organization::Category::Localization::OPENAPI_SCHEMA,
   }
   Communication::Block.template_kinds.keys.each do |template_kind|
     schema_key = "communication_block_#{template_kind}".to_sym

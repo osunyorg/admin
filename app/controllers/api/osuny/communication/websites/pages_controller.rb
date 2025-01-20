@@ -107,7 +107,8 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
     @page_params ||= begin
       permitted_params = params.require(:page)
                           .permit(
-                            :migration_identifier, :parent_id, :position, :bodyclass, :full_width, localizations: {}
+                            :migration_identifier, :bodyclass, :full_width,
+                            :parent_id, :position, category_ids: [], localizations: {}
                           ).merge(
                             university_id: current_university.id,
                             communication_website_id: website.id
@@ -120,7 +121,8 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
   def page_params_for_upsert(page_params)
     permitted_params = page_params
                           .permit(
-                            :migration_identifier, :parent_id, :position, :bodyclass, :full_width, localizations: {}
+                            :migration_identifier, :bodyclass, :full_width,
+                            :parent_id, :position, category_ids: [], localizations: {}
                           ).merge(
                             university_id: current_university.id,
                             communication_website_id: website.id
