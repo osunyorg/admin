@@ -447,6 +447,11 @@ fr:
       medias: Choisir dans la médiathèque
       unsplash: Importer (Unsplash & Pexels)
       upload: Envoyer une image
+    cropper:
+      cancel: Annuler
+      rotate: Tourner l'image
+      title: Cadrer l'image
+      validate: Valider
     next: Images suivantes
     nothing: Aucun résultat pour cette recherche
     placeholder: Tapez votre recherche

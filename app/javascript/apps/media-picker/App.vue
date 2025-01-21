@@ -2,14 +2,14 @@
 import Changes from './components/Changes.vue';
 import Cloud from './components/Cloud.vue';
 import Medias from './components/Medias.vue';
-import Upload from './components/Upload.vue';
+import ImageUploader from './components/ImageUploader.vue';
 
 export default {
     components: {
       Changes,
       Cloud,
       Medias,
-      Upload,
+      ImageUploader,
     },
     data () {
       return {
@@ -31,6 +31,7 @@ export default {
         this.resetOrigin();
         this.current.origin.blob = blob;
         this.current.image.url = this.current.origin.blob.url;
+        console.log(this.current);
       },
     },
     beforeMount() {
@@ -49,8 +50,11 @@ export default {
       <label class="form-label">Image</label>
     </div>
     <div class="app-content">
-      <div v-if="!current.image.url" class="image-picker__selector">
-        <Upload @uploaded="uploaded" :i18n="i18n.upload"></Upload>
+      <div v-if="!current.image.url" class="media-picker__selector">
+        <ImageUploader
+          @done="uploaded"
+          :i18n="i18n.upload"
+          />
         <div class="d-flex flex-wrap justify-content-between">
           <Cloud></Cloud>
           <Medias></Medias>

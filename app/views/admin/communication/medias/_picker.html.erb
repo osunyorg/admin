@@ -26,6 +26,13 @@ lang = about&.language&.iso_code if about.respond_to? :language
           upload: {
             button: t('photo_import.buttons.upload'),
             hint: images_formats_accepted_hint,
+            formats_accepted: default_images_formats_accepted,
+            crop: {
+              cancel: t('photo_import.cropper.cancel'),
+              rotate: t('photo_import.cropper.rotate'),
+              title: t('photo_import.cropper.title'),
+              validate: t('photo_import.cropper.validate'),
+            },
           },
         }.to_json
       %>"

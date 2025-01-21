@@ -12,6 +12,7 @@
     "slug": "^5.1.0",
     "sortablejs": "^1.14.0",
     "vue": "^3.2.31",
+    "vue-advanced-cropper": "^2.8.9",
     "vue-draggable-next": "^2.1.1"
   },
   "devDependencies": {

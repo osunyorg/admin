@@ -32,6 +32,41 @@ class MediaController < ApplicationController
             content_type: "text/plain; charset=utf-8"
   end
 
+  # Resize a blob, coming from Vue advanced cropper
+  # answers with another blob
+  def resize
+    @rotation = params.dig(:rotation)
+    @left = params.dig(:left)
+    @top = params.dig(:top)
+    @width = params.dig(:width)
+    @height = params.dig(:height)
+    @untouched =  @rotation == 0 &&
+                  @left == 0 && 
+                  @top == 0 &&
+                  @width == @blob.metadata.dig(:width) &&
+                  @height == @blob.metadata.dig(:height)
+    if @untouched
+      @resized_blob = @blob
+    else
+      transformations = { :'auto-orient' => true }
+      # Handle rotation
+      transformations[:rotate] = @rotation if @rotation.present?
+      # Handle cropping
+      transformations[:crop] = "#{@width}x#{@height}+#{@left}+#{@top}"
+      # Finalize by repaging
+      transformations.merge!({
+        repage: true,
+        :'+' => true
+      })
+      @resized_blob = @blob.variant(**transformations).processed.image
+    end
+    render json: {
+      id: @resized_blob.id,
+      signed_id: @resized_blob.signed_id,
+      checksum: @resized_blob.checksum,
+    }
+  end
+
   protected
 
   def load_blob

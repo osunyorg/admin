@@ -443,9 +443,17 @@ en:
   open: Open
   organize: Organize
   photo_import:
+    buttons:
+      medias: Choose from media library
+      unsplash: Import (Unsplash & Pexels)
+      upload: Upload an image
+    cropper:
+      cancel: Cancel
+      rotate: Rotate image
+      title: Frame image
+      validate: Validate
     next: Next image
     nothing: No results for this search
-    open: Unsplash & Pexels
     placeholder: Type your search here
     previous: Previous images
     search: Search
