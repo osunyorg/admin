@@ -31,7 +31,6 @@ export default {
         this.resetOrigin();
         this.current.origin.blob = blob;
         this.current.image.url = this.current.origin.blob.url;
-        console.log(this.current);
       },
     },
     beforeMount() {
@@ -47,7 +46,7 @@ export default {
 <template>
   <section class="pure__section flex-fill position-relative">
     <div class="d-lg-flex me-4 mb-0">
-      <label class="form-label">Image</label>
+      <label class="form-label">{{i18n.image.title}}</label>
     </div>
     <div class="app-content">
       <div v-if="!current.image.url" class="media-picker__selector">

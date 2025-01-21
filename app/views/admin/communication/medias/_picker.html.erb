@@ -13,7 +13,6 @@ lang = about&.language&.iso_code if about.respond_to? :language
       data-current="<%= picker.to_json %>"
       data-i18n="<%= {
           image: {
-            remove: t('featured_image.remove'),
             alt: {
               label: t('featured_image.alt.label'),
               hint: t('featured_image.alt.hint'),
@@ -22,6 +21,8 @@ lang = about&.language&.iso_code if about.respond_to? :language
               label: t('featured_image.credit.label'),
               hint: t('featured_image.credit.hint'),
             },
+            remove: t('featured_image.remove'),
+            title: t('featured_image.title'),
           },
           upload: {
             button: t('photo_import.buttons.upload'),

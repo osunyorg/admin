@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
-import SsoMappingApp from './SsoMappingApp.vue';
-import MediaPickerApp from './media-picker/App.vue';
+import SsoMappingApp from './sso-mapping/SsoMappingApp.vue';
+import MediaPickerApp from './media-picker/MediaPickerApp.vue';
 
 if (document.getElementById('sso-mapping-app')) {
     createApp(SsoMappingApp).mount('#sso-mapping-app');
