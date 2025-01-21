@@ -27,6 +27,7 @@ module Communication::Website::WithProgramCategories
 
   def categories_collections
     collections = []
+    collections << page_categories
     collections << post_categories if feature_posts?
     collections << agenda_categories if feature_agenda?
     collections << portfolio_categories if feature_portfolio?
