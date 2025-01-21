@@ -31,12 +31,4 @@ class Education::Program::Category < ApplicationRecord
                           join_table: :education_program_categories_programs,
                           foreign_key: :education_program_category_id,
                           association_foreign_key: :education_program_id
-
-  def dependencies
-    localizations
-  end
-
-  def references
-    programs
-  end
 end
