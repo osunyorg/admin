@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_20_095346) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_21_145930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -595,8 +595,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_20_095346) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "migration_identifier"
+    t.uuid "program_id"
+    t.boolean "is_programs_root", default: false
     t.index ["communication_website_id"], name: "idx_communication_website_page_cats_on_website_id"
     t.index ["parent_id"], name: "index_communication_website_page_categories_on_parent_id"
+    t.index ["program_id"], name: "index_communication_website_page_categories_on_program_id"
     t.index ["university_id"], name: "index_communication_website_page_categories_on_university_id"
   end
 
@@ -1969,6 +1972,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_20_095346) do
   add_foreign_key "communication_website_menus", "universities"
   add_foreign_key "communication_website_page_categories", "communication_website_page_categories", column: "parent_id"
   add_foreign_key "communication_website_page_categories", "communication_websites"
+  add_foreign_key "communication_website_page_categories", "education_programs", column: "program_id"
   add_foreign_key "communication_website_page_categories", "universities"
   add_foreign_key "communication_website_page_category_localizations", "communication_website_page_categories", column: "about_id"
   add_foreign_key "communication_website_page_category_localizations", "communication_websites"
