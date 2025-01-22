@@ -58,7 +58,10 @@ class MediaController < ApplicationController
         repage: true,
         :'+' => true
       })
-      @resized_blob = @blob.variant(**transformations).processed.image
+      @resized_blob =  @blob.variant(**transformations)
+                            .processed
+                            .image
+                            .blob
     end
     render json: {
       id: @resized_blob.id,

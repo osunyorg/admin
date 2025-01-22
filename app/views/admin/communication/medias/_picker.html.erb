@@ -3,68 +3,69 @@ picker = Osuny::MediaPicker.new(about: about)
 # fr, en...
 lang = about&.language&.iso_code if about.respond_to? :language
 summernote_lang = current_interface_language.summernote_locale.presence() || 'en-US'
+i18n = {
+  image: {
+    alt: {
+      label: t('featured_image.alt.label'),
+      hint: t('featured_image.alt.hint'),
+    },
+    credit: {
+      label: t('featured_image.credit.label'),
+      hint: t('featured_image.credit.hint'),
+    },
+    remove: t('featured_image.remove'),
+    title: t('featured_image.title'),
+  },
+  upload: {
+    button: t('photo_import.buttons.upload'),
+    hint: images_formats_accepted_hint,
+    formats_accepted: default_images_formats_accepted,
+  },
+  cloud: {
+    button: t('photo_import.buttons.unsplash'),
+    title: t('photo_import.title'),
+    search: t('photo_import.search'),
+    placeholder: t('photo_import.placeholder'),
+    previous: t('photo_import.previous'),
+    next: t('photo_import.next'),
+    nothing: t('photo_import.nothing'),
+    unsplash: {
+      logo: asset_path('communication/photo_imports/unsplash.svg'),
+      endpoint: admin_communication_unsplash_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+    },
+    pexels: {
+      logo: asset_path('communication/photo_imports/pexels.png'),
+      endpoint: admin_communication_pexels_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+    },
+  },
+  medias: {
+    button: t('photo_import.buttons.medias'),
+    title: t('communication.description.parts.media.title'),
+    collections: Communication::Media::Collection.model_name.human(count: 2),
+    search: t('photo_import.search'),
+    placeholder: t('photo_import.placeholder'),
+    previous: t('photo_import.previous'),
+    next: t('photo_import.next'),
+    nothing: t('photo_import.nothing'),
+    endpoint: admin_communication_medias_url(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+  },
+  cropper: {
+    cancel: t('photo_import.cropper.cancel'),
+    rotate: t('photo_import.cropper.rotate'),
+    title: t('photo_import.cropper.title'),
+    validate: t('photo_import.cropper.validate'),
+  },
+  changes: {
+    cancel: t('cancel'),
+    save: t('save_changes'),
+    endpoint: pick_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+  },
+}
 %>
 <div  id="media-picker-app"
       class="image-picker"
       data-lang="<%= lang %>"
       data-current="<%= picker.to_json %>"
       data-summernote-lang="<%= summernote_lang %>"
-      data-i18n="<%= {
-        image: {
-          alt: {
-            label: t('featured_image.alt.label'),
-            hint: t('featured_image.alt.hint'),
-          },
-          credit: {
-            label: t('featured_image.credit.label'),
-            hint: t('featured_image.credit.hint'),
-          },
-          remove: t('featured_image.remove'),
-          title: t('featured_image.title'),
-        },
-        upload: {
-          button: t('photo_import.buttons.upload'),
-          hint: images_formats_accepted_hint,
-          formats_accepted: default_images_formats_accepted,
-          crop: {
-            cancel: t('photo_import.cropper.cancel'),
-            rotate: t('photo_import.cropper.rotate'),
-            title: t('photo_import.cropper.title'),
-            validate: t('photo_import.cropper.validate'),
-          },
-        },
-        cloud: {
-          button: t('photo_import.buttons.unsplash'),
-          title: t('photo_import.title'),
-          search: t('photo_import.search'),
-          placeholder: t('photo_import.placeholder'),
-          previous: t('photo_import.previous'),
-          next: t('photo_import.next'),
-          nothing: t('photo_import.nothing'),
-          unsplash: {
-            logo: asset_path('communication/photo_imports/unsplash.svg'),
-            endpoint: admin_communication_unsplash_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
-          },
-          pexels: {
-            logo: asset_path('communication/photo_imports/pexels.png'),
-            endpoint: admin_communication_pexels_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
-          },
-        },
-        medias: {
-          button: t('photo_import.buttons.medias'),
-          title: t('communication.description.parts.media.title'),
-          collections: Communication::Media::Collection.model_name.human(count: 2),
-          search: t('photo_import.search'),
-          placeholder: t('photo_import.placeholder'),
-          previous: t('photo_import.previous'),
-          next: t('photo_import.next'),
-          nothing: t('photo_import.nothing'),
-          endpoint: admin_communication_medias_url(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
-        },
-        changes: {
-          cancel: t('cancel'),
-          save: t('save_changes'),
-          endpoint: pick_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
-        },
-      }.to_json %>">
+      data-i18n="<%= i18n.to_json %>">
 </div>

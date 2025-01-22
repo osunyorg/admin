@@ -1,18 +1,15 @@
 <script>
 import { Upload } from 'lucide-vue-next';
-import { Cropper } from 'vue-advanced-cropper';
+import CropperModal from '../../components/CropperModal.vue';
 
 export default {
   components: { 
     Upload,
-    Cropper
+    CropperModal,
   },
   data () {
     return {
-      endpoints: {
-        upload: "/rails/active_storage/direct_uploads",
-        resize: "/media/resize/", // signed_id will be added
-      },
+      endpoint: "/rails/active_storage/direct_uploads",
       input: {
         field: null,
         object: null,
@@ -40,16 +37,6 @@ export default {
         url: null
       },
       directUpload: null,
-      crop: {
-        modal: false,
-        data: {
-          rotation: 0,
-          left: null,
-          top: null,
-          width: null,
-          height: null,
-        },
-      },
       i18n: {},
     }
   },
@@ -76,13 +63,13 @@ export default {
       }
     },
     uploadFile() {
-      this.directUpload = new ActiveStorage.DirectUpload(this.input.object, this.endpoints.upload, this);
+      this.directUpload = new ActiveStorage.DirectUpload(this.input.object, this.endpoint, this);
       this.directUpload.create(function (error, blob) {
         if (error) {
           console.error(error);
         } else {
           this.setBlob(blob);
-          this.cropperOpen();
+          this.$refs.cropper.launch(this.blob);
         }
       }.bind(this));
     },
@@ -92,54 +79,15 @@ export default {
       this.blob.checksum = blob.checksum;
       this.blob.url = "/media/" + this.blob.signed_id + "/preview.jpg";
     },
-    cropperOpen() {
-      this.crop.modal = true;
-      document.body.classList.add("modal-open");
-    },
-    cropperClose() {
-      this.crop.modal = false;
-      document.body.classList.remove("modal-open");
-    },
-		cropperChange({ coordinates }) {
-      this.crop.data.left = coordinates.left;
-      this.crop.data.top = coordinates.top;
-      this.crop.data.width = coordinates.width;
-      this.crop.data.height = coordinates.height;
-		},
-    cropperSize({ imageSize }) {
-      return {
-        width: imageSize.width,
-        height: imageSize.height,
-      };
-    },
-		rotate(angle) {
-      this.crop.data.rotation += angle;
-			this.$refs.cropper.rotate(angle);
-		},
-    cropperCrop() {
-      let xhr = new XMLHttpRequest();
-      let url = this.endpoints.resize + this.blob.signed_id;
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.setRequestHeader('X-CSRF-Token', document.querySelector('[name="csrf-token"]').content);
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState != 4) return;
-        if (xhr.status == 200) {
-          let blob = JSON.parse(xhr.responseText); 
-          this.setBlob(blob);
-          this.$emit('uploaded', this.blob);
-        }
-      }.bind(this);
-      xhr.send(JSON.stringify(this.crop.data));
-      this.cropperClose();
-    },
+    cropped(blob) {
+      this.setBlob(blob);
+      this.$emit('uploaded', this.blob);
+    }
   },
   beforeMount() {
     this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n).upload;
   },
 };
-// Sur le cropper, On utilise canvas=false et check-orientation=false pour éviter les problèmes de CORS
-// https://github.com/advanced-cropper/vue-advanced-cropper/issues/44#issuecomment-648254767
 </script>
 
 <template>
@@ -158,55 +106,9 @@ export default {
       </button>
       <div class="form-text">{{ i18n.hint }}</div>
     </div>
-
-    <div  class="modal show vue__media-picker__cropper" 
-          tabindex="-1"
-          role="dialog"
-          :class="{'d-block': crop.modal}">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">{{i18n.crop.title}}</h5>
-            <button type="button"
-                    class="btn-close"
-                    @click="cropperClose()">
-                  </button>
-          </div>
-          <div class="modal-body bg-black">
-            <cropper
-              ref="cropper"
-              :canvas="false"
-              :check-orientation="false"
-              :default-size="cropperSize"
-              :minWidth="600"
-              :resizeImage="{ wheel: false }"
-              :src="blob.url"
-              @change="cropperChange"
-              />
-          </div>
-          <div class="modal-footer justify-content-between">
-            <button type="button"
-                    class="btn btn-sm"
-                    aria-label="{{i18n.crop.rotate}}"
-                    @click="rotate(90)">
-              <i class="bi bi-arrow-clockwise"></i>
-            </button>
-            <div>
-              <button type="button" 
-                      class="btn btn-sm btn-secondary me-2"
-                      @click="cropperClose()">
-                {{i18n.crop.cancel}}
-              </button>
-              <button type="button"
-                      class="btn btn-sm btn-primary"
-                      @click="cropperCrop()">
-                {{i18n.crop.validate}}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal-backdrop show" :class="{'d-none': !crop.modal}"></div>
+    <CropperModal
+      ref="cropper" 
+      @cropped="cropped"
+      />
   </div>
 </template>
