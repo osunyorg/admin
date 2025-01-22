@@ -119,5 +119,7 @@ export default {
       </div>
     </div>
   </section>
-  <Changes></Changes>
+  <Changes
+    v-model="current"
+    />
 </template>

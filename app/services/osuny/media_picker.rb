@@ -1,6 +1,10 @@
 class Osuny::MediaPicker
   attr_accessor :university, :language, :params, :about, :key
 
+  def initialize(about: nil)
+    @about = about unless about.nil?
+  end
+
   def params=(value)
     @params = value
     import_from_params

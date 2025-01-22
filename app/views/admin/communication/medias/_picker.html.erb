@@ -1,10 +1,5 @@
 <%
-key ||= :featured_image
-picker = Osuny::MediaPicker.new
-picker.about = about
-picker.key = key
-# About name is default query
-default_query = about.to_s
+picker = Osuny::MediaPicker.new(about: about)
 # fr, en...
 lang = about&.language&.iso_code if about.respond_to? :language
 %>
@@ -63,6 +58,11 @@ lang = about&.language&.iso_code if about.respond_to? :language
             next: t('photo_import.next'),
             nothing: t('photo_import.nothing'),
             endpoint: admin_communication_medias_url(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+          },
+          changes: {
+            cancel: t('cancel'),
+            save: t('save_changes'),
+            endpoint: pick_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
           },
         }.to_json
       %>"
