@@ -1,8 +1,5 @@
 <div class="row">
   <div class="col-lg-4">
-    <%= render 'admin/application/images/featured/form', f: lf, about: l10n %>
-  </div>
-  <div class="col-lg-8">
     <%= lf.input :name, label: t('category.name'), input_html: { id: 'category_name' } %>
     <%= render  'admin/application/slug/form',
                 f: lf,
@@ -14,6 +11,8 @@
                         localized: true
                       ) unless category.is_taxonomy %>
     <%= f.input :is_taxonomy, label: t('category.is_taxonomy') if category.possible_taxonomy? %>
+  </div>
+  <div class="col-lg-8">
     <%= render 'admin/application/summary/form', f: lf, about: l10n %>
     <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
   </div>
