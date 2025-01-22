@@ -140,14 +140,14 @@ export default {
                 <p v-if="unsplash.data.results.length === 0" >
                   {{ i18n.nothing }}
                 </p>
-                <div class="photo_import__results photo_import__unsplash photo_import__unsplash__results">
+                <div class="vue__media-picker__results">
                   <img  :src="image.thumb"
                         :alt="image.alt"
-                        class="photo_import__results__result"
+                        class="vue__media-picker__results__result"
                         v-for="image in unsplash.data.results"
                         @click="selectUnsplash(image)">
                 </div>
-                <p class="small text-muted" v-if="unsplash.data.total_pages">
+                <p v-if="unsplash.data.total_pages" class="small text-muted mt-5">
                   {{ unsplash.page }} / {{ unsplash.data.total_pages }}
                 </p>
               </div>
@@ -155,14 +155,14 @@ export default {
                 <p v-if="pexels.data.results.length === 0" >
                   {{ i18n.nothing }}
                 </p>
-                <div class="photo_import__results photo_import__pexels photo_import__pexels__results">
+                <div class="vue__media-picker__results">
                   <img  :src="image.thumb"
                         :alt="image.alt"
-                        class="photo_import__results__result"
+                        class="vue__media-picker__results__result"
                         v-for="image in pexels.data.results"
                         @click="selectPexels(image)">
                 </div>
-                <p class="small text-muted" v-if="pexels.data.total_pages">
+                <p v-if="pexels.data.total_pages" class="small text-muted mt-5">
                   {{pexels.page}} / {{pexels.data.total_pages }}
                 </p>
               </div>
@@ -171,48 +171,48 @@ export default {
           <div class="modal-footer d-block">
             <div class="row">
               <div class="col-lg-6">
-                <div class="row photo_import__unsplash photo_import__unsplash__nav">
+                <div class="row vue__media-picker__unsplash vue__media-picker__unsplash__nav">
                   <div class="col-lg-5">
-                    <a  href="#"
+                    <button
                         class="btn btn-light btn-sm"
                         v-if="unsplash.page > 1"
                         @click="unsplash.page = unsplash.page - 1">
                       {{ i18n.previous }}
-                    </a>
+                    </button>
                   </div>
                   <div class="col-lg-2 text-center">
                     <img :src="i18n.unsplash.logo" width="100" alt="Unsplash" />
                   </div>
                   <div class="col-lg-5 text-end">
-                    <a  href="#"
+                    <button
                         class="btn btn-light btn-sm"
                         v-if="unsplash.page < unsplash.data.total_pages"
                         @click="unsplash.page = unsplash.page + 1">
                       {{ i18n.next }}
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
               <div class="col-lg-6">
-                <div class="row photo_import__pexels photo_import__pexels__nav">
+                <div class="row vue__media-picker__pexels vue__media-picker__pexels__nav">
                   <div class="col-lg-5">
-                    <a  href="#"
+                    <button
                         class="btn btn-light btn-sm"
                         v-if="pexels.page > 1"
                         @click="pexels.page = pexels.page - 1">
                       {{ i18n.previous }}
-                    </a>
+                    </button>
                   </div>
                   <div class="col-lg-2 text-center">
                     <img :src="i18n.pexels.logo" width="100" alt="Pexels" />
                   </div>
                   <div class="col-lg-5 text-end">
-                    <a  href="#"
+                    <button
                         class="btn btn-light btn-sm"
                         v-if="pexels.page < pexels.data.total_pages"
                         @click="pexels.page = pexels.page + 1">
                       {{ i18n.next }}
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>

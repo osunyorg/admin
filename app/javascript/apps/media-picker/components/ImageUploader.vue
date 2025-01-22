@@ -144,7 +144,7 @@ export default {
 
 <template>
   <div>
-    <div class="media-picker__selector__viewport">
+    <div class="vue__media-picker__selector__viewport">
       <input  hidden
               ref="file"
               type="file"
@@ -159,7 +159,7 @@ export default {
       <div class="form-text">{{ i18n.hint }}</div>
     </div>
 
-    <div  class="modal show media-picker__cropper" 
+    <div  class="modal show vue__media-picker__cropper" 
           tabindex="-1"
           role="dialog"
           :class="{'d-block': crop.modal}">

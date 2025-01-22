@@ -68,19 +68,3 @@ summernote_lang = current_interface_language.summernote_locale.presence() || 'en
         },
       }.to_json %>">
 </div>
-
-<div  id="image-picker-app" 
-      class="image-picker"
-      v-cloak>
-  <%= render 'admin/communication/medias/picker/panel' %>
-  <%= render 'admin/communication/medias/picker/changes' %>
-  <%= render 'admin/communication/medias/picker/modal/cloud' %>
-  <%= render 'admin/communication/medias/picker/modal/medias' %>
-</div>
-
-<%# Include vue.js before call Vue.createApp %>
-<%= javascript_include_tag 'vue' %>
-
-<script nonce="<%= request.content_security_policy_nonce %>">
-<%= render 'admin/communication/medias/picker/js', about: about %>
-</script>

@@ -154,14 +154,14 @@ export default {
               </div>
               <div class="col-md-10">
                 <p v-if="data.results.length === 0" >{{ i18n.nothing }}</p>
-                <div class="photo_import__results photo_import__media photo_import__media__results">
+                <div class="vue__media-picker__results--medias">
                   <img  :src="media.thumb"
                         :alt="media.alt"
-                        class="photo_import__results__result"
+                        class="vue__media-picker__results__result"
                         v-for="media in data.results"
                         @click="select(media)">
                 </div>
-                <p v-if="data.total_pages && data.results.length > 0" class="small text-muted">
+                <p v-if="data.total_pages && data.results.length > 0" class="small text-muted mt-5">
                   {{page}} / {{data.total_pages }}
                 </p>
               </div>
@@ -170,19 +170,20 @@ export default {
           <div class="modal-footer d-block" v-if="data.total_pages > 1">
             <div class="row">
               <div class="col-lg-6">
-                <a  href="#"
+                <button
                     v-if="page > 1"
                     @click="page = page - 1"
                     class="btn btn-light btn-sm">
                   {{ i18n.previous }}
-                </a>
+                </button>
               </div>
               <div class="col-lg-6 text-end">
-                <a  href="#" v-if="page < data.total_pages"
+                <button
+                    v-if="page < data.total_pages"
                     @click="page = page + 1"
                     class="btn btn-light btn-sm">
                   {{ i18n.next }}
-                </a>
+                </button>
               </div>
             </div>
           </div>

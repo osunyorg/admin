@@ -67,12 +67,12 @@ export default {
 </script>
 
 <template>
-  <section class="pure__section flex-fill position-relative">
+  <section class="vue__media-picker">
     <div class="d-lg-flex me-4 mb-0">
       <label class="form-label">{{ i18n.image.title }}</label>
     </div>
     <div class="app-content">
-      <div v-if="!current.image.url" class="media-picker__selector">
+      <div v-if="!current.image.url" class="vue__media-picker__selector">
         <ImageUploader
           @uploaded="uploaded"
           :i18n="i18n.upload"
