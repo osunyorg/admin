@@ -77,7 +77,10 @@ export default {
     cropped(blob) {
       this.setBlob(blob);
       this.$emit('uploaded', this.blob);
-    }
+    },
+    closeAlert() {
+      this.size.alert = false;
+    },
   },
   beforeMount() {
     this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n).upload;
@@ -105,31 +108,41 @@ export default {
       ref="cropper" 
       @cropped="cropped"
       />
-    <div class="modal show" tabindex="-1" role="dialog" :class="{'d-block': size.alert}">
+    <div  class="modal show"
+          tabindex="-1"
+          role="dialog"
+          :class="{'d-block': (size.alert === true)}">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Image trop lourde</h5>
-            <button type="button" class="btn-close" @click="size.alert = false"></button>
+            <h5 class="modal-title">
+              Image trop lourde
+            </h5>
+            <button type="button"
+                    class="btn-close"
+                    @click="closeAlert()">
+            </button>
           </div>
           <div class="modal-body">
             <p>
-              L'image envoyée est beaucoup trop lourde !
-              Elle pèse {{ this.file.size.mo }}Mo, 
-              alors que le maximum autorisé est de {{ this.size.max.mo }}Mo.
-              Il est nécessaire de la réduire avant de l'envoyer, 
+              L'image envoyée est beaucoup trop lourde, 
+              elle pèse {{ this.file.size.mo }} Mo !
+              Sur Osuny, nous traitons automatiquement les images de moins de {{ this.size.max.mo }} Mo.
+              Au-delà de ce poids, il est nécessaire de réduire l'image avant de l'envoyer, 
               par exemple en utilisant un outil comme 
               <a href="https://www.iloveimg.com/fr " target="_blank" rel="noreferrer">iLoveIMG</a>.
             </p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-sm btn-secondary ms-auto" @click="size.alert = false">
+            <button type="button"
+                    class="btn btn-sm btn-secondary ms-auto"
+                    @click="closeAlert()">
               Fermer
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal-backdrop show" :class="{'d-none': !size.alert}"></div>
+    <div class="modal-backdrop show" :class="{'d-none': (size.alert !== true)}"></div>
   </div>
 </template>
