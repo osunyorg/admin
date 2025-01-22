@@ -100,7 +100,7 @@ export default {
   <div>
     <button type="button"
           class="btn btn-sm ms-n2"
-          v-on:click="open()">
+          @click="open()">
       <CloudDownload stroke-width="1.5" />
       {{ i18n.button }}
     </button>
@@ -121,7 +121,7 @@ export default {
                         v-on:keyup.enter="search">
                 <button type="button"
                         class="btn btn-primary me-auto"
-                        v-on:click="search"
+                        @click="search"
                         aria-label="<%= t 'photo_import.search' %>">
                   {{ i18n.search }}
                 </button>
@@ -145,7 +145,7 @@ export default {
                         :alt="image.alt"
                         class="photo_import__results__result"
                         v-for="image in unsplash.data.results"
-                        v-on:click="selectUnsplash(image)">
+                        @click="selectUnsplash(image)">
                 </div>
                 <p class="small text-muted" v-if="unsplash.data.total_pages">
                   {{ unsplash.page }} / {{ unsplash.data.total_pages }}
@@ -160,7 +160,7 @@ export default {
                         :alt="image.alt"
                         class="photo_import__results__result"
                         v-for="image in pexels.data.results"
-                        v-on:click="selectPexels(image)">
+                        @click="selectPexels(image)">
                 </div>
                 <p class="small text-muted" v-if="pexels.data.total_pages">
                   {{pexels.page}} / {{pexels.data.total_pages }}
@@ -176,8 +176,8 @@ export default {
                     <a  href="#"
                         class="btn btn-light btn-sm"
                         v-if="unsplash.page > 1"
-                        v-on:click="unsplash.page = unsplash.page - 1">
-                        {{ i18n.previous }}
+                        @click="unsplash.page = unsplash.page - 1">
+                      {{ i18n.previous }}
                     </a>
                   </div>
                   <div class="col-lg-2 text-center">
@@ -187,7 +187,7 @@ export default {
                     <a  href="#"
                         class="btn btn-light btn-sm"
                         v-if="unsplash.page < unsplash.data.total_pages"
-                        v-on:click="unsplash.page = unsplash.page + 1">
+                        @click="unsplash.page = unsplash.page + 1">
                       {{ i18n.next }}
                     </a>
                   </div>
@@ -199,7 +199,7 @@ export default {
                     <a  href="#"
                         class="btn btn-light btn-sm"
                         v-if="pexels.page > 1"
-                        v-on:click="pexels.page = pexels.page - 1">
+                        @click="pexels.page = pexels.page - 1">
                       {{ i18n.previous }}
                     </a>
                   </div>
@@ -210,7 +210,7 @@ export default {
                     <a  href="#"
                         class="btn btn-light btn-sm"
                         v-if="pexels.page < pexels.data.total_pages"
-                        v-on:click="pexels.page = pexels.page + 1">
+                        @click="pexels.page = pexels.page + 1">
                       {{ i18n.next }}
                     </a>
                   </div>

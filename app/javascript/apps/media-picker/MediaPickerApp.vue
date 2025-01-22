@@ -27,25 +27,31 @@ export default {
         this.current.image.url = "";
         this.current.origin.blob.delete = true;
       },
-      uploaded (blob) {
+      uploaded(blob) {
         this.resetOrigin();
         this.current.origin.blob = blob;
         this.current.image.url = this.current.origin.blob.url;
       },
-      unsplashSelected (image) {
+      unsplashSelected(image) {
         this.resetOrigin();
         this.current.origin.cloud.unsplash.id = image.id;
         this.current.origin.cloud.unsplash.url = image.preview;
         this.current.image.credit = image.credit;
         this.current.image.url = image.preview;
       },
-      pexelsSelected (image) {
+      pexelsSelected(image) {
         this.resetOrigin();
         this.current.origin.cloud.pexels.id = image.id;
         this.current.origin.cloud.pexels.url = image.preview;
         this.current.image.credit = image.credit;
         this.current.image.url = image.preview;
       },
+      mediaSelected(image) {
+        this.resetOrigin();
+        this.current.origin.medias.id = image.id;
+        this.current.image.credit = image.credit;
+        this.current.image.url = image.thumb;
+      }
     },
     beforeMount() {
       this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n);
@@ -76,6 +82,7 @@ export default {
             />
           <Medias
             :i18n="i18n.medias"
+            @mediaSelected="mediaSelected"
             />
         </div>
       </div>

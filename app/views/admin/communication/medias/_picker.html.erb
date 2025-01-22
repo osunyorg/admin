@@ -54,7 +54,15 @@ lang = about&.language&.iso_code if about.respond_to? :language
             },
           },
           medias: {
-
+            button: t('photo_import.buttons.medias'),
+            title: t('communication.description.parts.media.title'),
+            collections: Communication::Media::Collection.model_name.human(count: 2),
+            search: t('photo_import.search'),
+            placeholder: t('photo_import.placeholder'),
+            previous: t('photo_import.previous'),
+            next: t('photo_import.next'),
+            nothing: t('photo_import.nothing'),
+            endpoint: admin_communication_medias_url(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
           },
         }.to_json
       %>"
