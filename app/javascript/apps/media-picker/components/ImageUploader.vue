@@ -25,10 +25,7 @@ export default {
           bytes: 5242880,
           mo: 5242880 / 1024 / 1024, // 5 Mo
         },
-        alert: {
-          active: false,
-          sentence: '',
-        },
+        alert: false,
       },
       blob: {
         id: null,
@@ -49,7 +46,7 @@ export default {
       this.input.field = event.target;
       this.input.object = files[0];
       this.checkSize();
-      if (!this.size.alert.active) {
+      if (!this.size.alert) {
         this.uploadFile();
       }
     },
@@ -57,9 +54,7 @@ export default {
       this.file.size.bytes = this.input.object.size;
       this.file.size.mo = Math.round(this.file.size.bytes / 1024 / 1024);
       if (this.file.size.bytes > this.size.max.bytes) {
-        this.size.alert.active = true;
-        this.size.alert.sentence = "Le fichier est trop lourd ! (" + this.file.size.mo + " Mo > " + this.size.max.mo + " Mo)",
-        alert(this.size.alert.sentence);
+        this.size.alert = true;
       }
     },
     uploadFile() {
@@ -110,5 +105,31 @@ export default {
       ref="cropper" 
       @cropped="cropped"
       />
+    <div class="modal show" tabindex="-1" role="dialog" :class="{'d-block': size.alert}">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Image trop lourde</h5>
+            <button type="button" class="btn-close" @click="size.alert = false"></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              L'image envoyée est beaucoup trop lourde !
+              Elle pèse {{ this.file.size.mo }}Mo, 
+              alors que le maximum autorisé est de {{ this.size.max.mo }}Mo.
+              Il est nécessaire de la réduire avant de l'envoyer, 
+              par exemple en utilisant un outil comme 
+              <a href="https://www.iloveimg.com/fr " target="_blank" rel="noreferrer">iLoveIMG</a>.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-secondary ms-auto" @click="size.alert = false">
+              Fermer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop show" :class="{'d-none': !size.alert}"></div>
   </div>
 </template>
