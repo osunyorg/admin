@@ -1,4 +1,4 @@
-class Osuny::MediaPicker::Origins
+class Osuny::Media::Picker::Origins
   attr_reader :picker
   delegate  :params, :university, :about, :image, :image_property, :alt, :credit,
             to: :picker

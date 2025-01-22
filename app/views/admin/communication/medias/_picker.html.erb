@@ -1,5 +1,5 @@
 <%
-picker = Osuny::MediaPicker.new(about: about)
+picker = Osuny::Media::Picker.new(about: about)
 # fr, en...
 lang = about&.language&.iso_code if about.respond_to? :language
 summernote_lang = current_interface_language.summernote_locale.presence() || 'en-US'

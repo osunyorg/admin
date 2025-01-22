@@ -1,4 +1,4 @@
-class Osuny::MediaPicker
+class Osuny::Media::Picker
   attr_accessor :university, :language, :params, :about, :key
 
   def initialize(about: nil)
@@ -84,6 +84,6 @@ class Osuny::MediaPicker
   end
 
   def origins
-    @origins ||= Osuny::MediaPicker::Origins.new(self)
+    @origins ||= Osuny::Media::Picker::Origins.new(self)
   end
 end
