@@ -1,8 +1,9 @@
 <script>
-import Changes from './components/Changes.vue';
+import Changes from '../components/Changes.vue';
 import Cloud from './components/Cloud.vue';
 import Medias from './components/Medias.vue';
 import ImageUploader from './components/ImageUploader.vue';
+import Summernote from '../components/Summernote.vue';
 
 export default {
     components: {
@@ -10,11 +11,11 @@ export default {
       Cloud,
       Medias,
       ImageUploader,
+      Summernote,
     },
     data () {
       return {
         current: {},
-        previous: {},
         i18n: {},
       }
     },
@@ -54,8 +55,10 @@ export default {
       }
     },
     beforeMount() {
-      this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n);
-      this.current = JSON.parse(document.getElementById('media-picker-app').dataset.current);
+      const dataset = document.getElementById('media-picker-app').dataset
+      this.i18n = JSON.parse(dataset.i18n);
+      this.summernoteLang = dataset.summernoteLang;
+      this.current = JSON.parse(dataset.current);
     },
     mounted() {
       this.previous = JSON.parse(JSON.stringify(this.current));
@@ -107,13 +110,14 @@ export default {
           <div class="form-text">{{ i18n.image.alt.hint }}</div>
         </div>
         <div class="mb-3 summernote">
-          <label class="form-label" aria-label="<%= t('featured_image.credit.label') %>" for="credit">
+          <label class="form-label" :aria-label="i18n.image.credit.label" for="credit">
             {{ i18n.image.credit.label }}
           </label>
-          <textarea id="credit" 
-                    class="form-control summernote-vue"
-                    data-translatable="true"
-                    v-model="current.image.credit"></textarea>
+          <Summernote
+            id="credit"
+            :lang="summernoteLang"
+            v-model="current.image.credit"
+            />
           <div class="form-text">{{ i18n.image.credit.hint }}</div>
         </div>
       </div>
@@ -121,5 +125,8 @@ export default {
   </section>
   <Changes
     v-model="current"
+    :button-save="i18n.changes.save"
+    :button-cancel="i18n.changes.cancel"
+    :endpoint="i18n.changes.endpoint"
     />
 </template>

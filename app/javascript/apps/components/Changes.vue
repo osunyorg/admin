@@ -1,6 +1,11 @@
 <script>
 export default {
-    props: ['modelValue'],
+    props: [
+      'modelValue',
+      'buttonCancel',
+      'buttonSave',
+      'endpoint',
+    ],
     emits: ['update:modelValue'],
     computed: {
       value: {
@@ -13,10 +18,11 @@ export default {
       },
       needsSaving: {
         get() {
-          if (!this.mounted) {
+          if (this.mounted) {
+            return JSON.stringify(this.modelValue) !== JSON.stringify(this.archive);
+          } else {
             return false;
           }
-          return JSON.stringify(this.modelValue) !== JSON.stringify(this.archive);
         }
       }
     },
@@ -25,14 +31,13 @@ export default {
         mounted: false,
         savingInProgress: false,
         archive: {},
-        i18n: {},
         csrfToken: "",
       }
     },
     methods: {
       save() {
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', this.i18n.endpoint, true);
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', this.endpoint, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.setRequestHeader('X-CSRF-Token', this.csrfToken);
         xhr.onreadystatechange = function () {
@@ -51,31 +56,27 @@ export default {
         this.needsSaving = false;
       },
     },
-    beforeMount() {
-      this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n).changes;
-      this.csrfToken = document.querySelector('[name="csrf-token"]').content;
-    },
     mounted() {
       this.archive = JSON.parse(JSON.stringify(this.modelValue));
+      this.csrfToken = document.querySelector('[name="csrf-token"]').content;
       this.mounted = true;
     },
 };
 </script>
 
 <template>
-  <div  class="media-picker__changes"
-        :class="{'media-picker__changes--changed': needsSaving}">
+  <div class="vue__changes" :class="{'vue__changes--changed': needsSaving}">
     <button type="button"
-            class="btn btn-light media-picker__changes__cancel"
+            class="btn btn-light vue__changes__cancel"
             v-on:click="cancel()"
             :disabled="savingInProgress">
-      {{ i18n.cancel }}
+      {{ buttonCancel }}
     </button>
     <button type="button"
-            class="btn btn-success media-picker__changes__save"
+            class="btn btn-success vue__changes__save"
             v-on:click="save()"
             :disabled="savingInProgress">
-      {{ i18n.save }}
+      {{ buttonSave }}
     </button>
   </div>
 </template>
