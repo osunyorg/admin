@@ -1,9 +1,11 @@
 <script>
 import { Image } from 'lucide-vue-next';
+import Taxonomies from './medias/Taxonomies.vue';
 
 export default {
     components: {
-      Image
+      Image,
+      Taxonomies
     },
     data () {
       return {
@@ -136,21 +138,10 @@ export default {
                     </label>
                   </div>
                 </div>
-                <div v-for="taxonomy in data.taxonomies" class="mb-4">
-                  <p class="small text-muted mb-1">{{ taxonomy.name }}</p>
-                  <div  v-for="category in taxonomy.categories"
-                        class="form-check">
-                    <input  class="form-check-input"
-                            type="checkbox"
-                            :id="'category' + category.id"
-                            @change="toggleCategory(category.id)"
-                            />
-                    <label  class="form-check-label"
-                            :for="'category' + category.id">
-                      {{ category.name }}
-                    </label>
-                  </div>
-                </div>
+                <Taxonomies
+                  v-model="data.taxonomies"
+                  @toggle="toggleCategory"
+                  />
               </div>
               <div class="col-md-10">
                 <p v-if="data.results.length === 0" >{{ i18n.nothing }}</p>
