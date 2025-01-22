@@ -127,7 +127,7 @@ export default {
         if (xhr.status == 200) {
           let blob = JSON.parse(xhr.responseText); 
           this.setBlob(blob);
-          this.$emit('done', this.blob);
+          this.$emit('uploaded', this.blob);
         }
       }.bind(this);
       xhr.send(JSON.stringify(this.crop.data));
@@ -137,8 +137,6 @@ export default {
   beforeMount() {
     this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n).upload;
   },
-  mounted() {
-  }
 };
 // Sur le cropper, On utilise canvas=false et check-orientation=false pour éviter les problèmes de CORS
 // https://github.com/advanced-cropper/vue-advanced-cropper/issues/44#issuecomment-648254767

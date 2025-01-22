@@ -11,6 +11,7 @@ class Osuny::MediaPicker
       about: {
         type: about.class.polymorphic_name,
         id: about.id,
+        name: about.to_s,
       },
       image: {
         alt: alt,

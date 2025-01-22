@@ -10,6 +10,7 @@ lang = about&.language&.iso_code if about.respond_to? :language
 %>
 <div  id="media-picker-app"
       class="image-picker"
+      data-lang="<%= lang %>"
       data-current="<%= picker.to_json %>"
       data-i18n="<%= {
           image: {
@@ -34,6 +35,26 @@ lang = about&.language&.iso_code if about.respond_to? :language
               title: t('photo_import.cropper.title'),
               validate: t('photo_import.cropper.validate'),
             },
+          },
+          cloud: {
+            button: t('photo_import.buttons.unsplash'),
+            title: t('photo_import.title'),
+            search: t('photo_import.search'),
+            placeholder: t('photo_import.placeholder'),
+            previous: t('photo_import.previous'),
+            next: t('photo_import.next'),
+            nothing: t('photo_import.nothing'),
+            unsplash: {
+              logo: asset_path('communication/photo_imports/unsplash.svg'),
+              endpoint: admin_communication_unsplash_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+            },
+            pexels: {
+              logo: asset_path('communication/photo_imports/pexels.png'),
+              endpoint: admin_communication_pexels_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+            },
+          },
+          medias: {
+
           },
         }.to_json
       %>"

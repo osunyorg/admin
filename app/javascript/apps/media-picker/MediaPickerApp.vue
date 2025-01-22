@@ -32,6 +32,20 @@ export default {
         this.current.origin.blob = blob;
         this.current.image.url = this.current.origin.blob.url;
       },
+      unsplashSelected (image) {
+        this.resetOrigin();
+        this.current.origin.cloud.unsplash.id = image.id;
+        this.current.origin.cloud.unsplash.url = image.preview;
+        this.current.image.credit = image.credit;
+        this.current.image.url = image.preview;
+      },
+      pexelsSelected (image) {
+        this.resetOrigin();
+        this.current.origin.cloud.pexels.id = image.id;
+        this.current.origin.cloud.pexels.url = image.preview;
+        this.current.image.credit = image.credit;
+        this.current.image.url = image.preview;
+      },
     },
     beforeMount() {
       this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n);
@@ -46,17 +60,23 @@ export default {
 <template>
   <section class="pure__section flex-fill position-relative">
     <div class="d-lg-flex me-4 mb-0">
-      <label class="form-label">{{i18n.image.title}}</label>
+      <label class="form-label">{{ i18n.image.title }}</label>
     </div>
     <div class="app-content">
       <div v-if="!current.image.url" class="media-picker__selector">
         <ImageUploader
-          @done="uploaded"
+          @uploaded="uploaded"
           :i18n="i18n.upload"
           />
         <div class="d-flex flex-wrap justify-content-between">
-          <Cloud></Cloud>
-          <Medias></Medias>
+          <Cloud
+            :i18n="i18n.cloud"
+            @unsplashSelected="unsplashSelected"
+            @pexelsSelected="pexelsSelected"
+            />
+          <Medias
+            :i18n="i18n.medias"
+            />
         </div>
       </div>
       <div v-if="current.image.url">
