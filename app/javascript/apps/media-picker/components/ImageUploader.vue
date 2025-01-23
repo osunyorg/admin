@@ -7,6 +7,16 @@ export default {
     Upload,
     CropperModal,
   },
+  computed: {
+    sizeWarningSentence: {
+      get() {
+        let sentence = this.i18n.size.text;
+        sentence = sentence.replace(':size', this.file.size.mo);
+        sentence = sentence.replace(':max', this.size.max.mo);
+        return sentence;
+      }
+    },
+  },
   data () {
     return {
       endpoint: "/rails/active_storage/direct_uploads",
@@ -83,7 +93,12 @@ export default {
     },
   },
   beforeMount() {
-    this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n).upload;
+    const dataset = document.getElementById('media-picker-app').dataset
+    this.i18n = JSON.parse(dataset.i18n).mediaPicker.imageUploader;
+    this.formats = {
+      accepted: dataset.formatsAccepted,
+      hint: dataset.formatsAcceptedHint,
+    };
   },
 };
 </script>
@@ -94,7 +109,7 @@ export default {
       <input  hidden
               ref="file"
               type="file"
-              :accept="i18n.formats_accepted"
+              :accept="formats.accepted"
               @change="uploadInputChanged($event)">
       <button type="button"
               class="btn"
@@ -102,7 +117,7 @@ export default {
         <Upload stroke-width="1.5" />
         {{ i18n.button }}
       </button>
-      <div class="form-text">{{ i18n.hint }}</div>
+      <div class="form-text">{{ formats.hint }}</div>
     </div>
     <CropperModal
       ref="cropper" 
@@ -115,29 +130,19 @@ export default {
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">
-              Image trop lourde
-            </h5>
+            <h5 class="modal-title">{{ i18n.size.title }}</h5>
             <button type="button"
                     class="btn-close"
                     @click="closeAlert()">
             </button>
           </div>
-          <div class="modal-body">
-            <p>
-              L'image envoyée est beaucoup trop lourde, 
-              elle pèse {{ this.file.size.mo }} Mo !
-              Sur Osuny, nous traitons automatiquement les images de moins de {{ this.size.max.mo }} Mo.
-              Au-delà de ce poids, il est nécessaire de réduire l'image avant de l'envoyer, 
-              par exemple en utilisant un outil comme 
-              <a href="https://www.iloveimg.com/fr " target="_blank" rel="noreferrer">iLoveIMG</a>.
-            </p>
+          <div class="modal-body" v-html="sizeWarningSentence">
           </div>
           <div class="modal-footer">
             <button type="button"
                     class="btn btn-sm btn-secondary ms-auto"
                     @click="closeAlert()">
-              Fermer
+              {{ i18n.size.close }}
             </button>
           </div>
         </div>

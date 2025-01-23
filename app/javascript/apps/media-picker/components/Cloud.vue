@@ -43,14 +43,14 @@ export default {
         this.searchPexels();
       },
       searchUnsplash() {
-        var url = this.i18n.unsplash.endpoint
+        var url = this.settings.unsplash.endpoint
                       + '?query=' + encodeURIComponent(this.query)
                       + '&page=' + this.unsplash.page
                       + '&per_page=12&lang=' + this.lang;
         this.loadSearchResults(url, this.unsplash);
       },
       searchPexels() {
-        var url = this.i18n.pexels.endpoint
+        var url = this.settings.pexels.endpoint
                     + '?query=' + encodeURIComponent(this.query)
                     + '&page=' + this.pexels.page
                     + '&per_page=12&lang=' + this.lang;
@@ -91,7 +91,8 @@ export default {
       const dataset = document.getElementById('media-picker-app').dataset;
       this.lang = dataset.lang;
       this.query = JSON.parse(dataset.current).about.name;
-      this.i18n = JSON.parse(dataset.i18n).cloud;
+      this.i18n = JSON.parse(dataset.i18n).mediaPicker.cloud;
+      this.settings = JSON.parse(dataset.cloud);
     },
 };
 </script>
@@ -122,7 +123,7 @@ export default {
                 <button type="button"
                         class="btn btn-primary me-auto"
                         @click="search"
-                        aria-label="<%= t 'photo_import.search' %>">
+                        :aria-label="i18n.search">
                   {{ i18n.search }}
                 </button>
               </div>
@@ -181,7 +182,7 @@ export default {
                     </button>
                   </div>
                   <div class="col-lg-2 text-center">
-                    <img :src="i18n.unsplash.logo" width="100" alt="Unsplash" />
+                    <img :src="settings.unsplash.logo" width="100" alt="Unsplash" />
                   </div>
                   <div class="col-lg-5 text-end">
                     <button
@@ -204,7 +205,7 @@ export default {
                     </button>
                   </div>
                   <div class="col-lg-2 text-center">
-                    <img :src="i18n.pexels.logo" width="100" alt="Pexels" />
+                    <img :src="settings.pexels.logo" width="100" alt="Pexels" />
                   </div>
                   <div class="col-lg-5 text-end">
                     <button

@@ -75,7 +75,7 @@ export default {
     },
     beforeMount() {
       const dataset = document.getElementById('media-picker-app').dataset;
-      this.i18n = JSON.parse(dataset.i18n).medias;
+      this.i18n = JSON.parse(dataset.i18n).mediaPicker.medias;
     },
 };
 </script>

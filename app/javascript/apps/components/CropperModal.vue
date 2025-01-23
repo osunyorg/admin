@@ -75,7 +75,8 @@ export default {
       },
     },
     beforeMount() {
-      this.i18n = JSON.parse(document.getElementById('media-picker-app').dataset.i18n).cropper;
+      this.dataset = document.getElementById('media-picker-app').dataset;
+      this.i18n = JSON.parse(this.dataset.i18n).cropperModal;
     },
 };
 

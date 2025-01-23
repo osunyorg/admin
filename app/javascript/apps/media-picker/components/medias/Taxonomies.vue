@@ -31,9 +31,6 @@ export default {
 <template>
   <div v-for="taxonomy in value" class="mb-4">
     <p class="small text-muted mb-1">{{ taxonomy.name }}</p>
-    <Categories 
-      v-model="taxonomy.categories"
-      @toggle="toggle"
-      />
+    <Categories v-model="taxonomy.categories" @toggle="toggle" />
   </div>
 </template>

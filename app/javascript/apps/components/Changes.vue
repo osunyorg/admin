@@ -2,8 +2,6 @@
 export default {
     props: [
       'modelValue',
-      'buttonCancel',
-      'buttonSave',
       'endpoint',
     ],
     emits: ['update:modelValue'],
@@ -32,6 +30,7 @@ export default {
         savingInProgress: false,
         archive: {},
         csrfToken: "",
+        i18n: {},
       }
     },
     methods: {
@@ -70,13 +69,13 @@ export default {
             class="btn btn-light vue__changes__cancel"
             v-on:click="cancel()"
             :disabled="savingInProgress">
-      {{ buttonCancel }}
+      {{ i18n.cancel }}
     </button>
     <button type="button"
             class="btn btn-success vue__changes__save"
             v-on:click="save()"
             :disabled="savingInProgress">
-      {{ buttonSave }}
+      {{ i18n.save }}
     </button>
   </div>
 </template>

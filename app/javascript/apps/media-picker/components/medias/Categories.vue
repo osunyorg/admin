@@ -24,20 +24,15 @@ export default {
 </script>
 
 <template>
-  <div  v-for="category in value"
-        class="form-check">
+  <div v-for="category in value" class="form-check">
     <input  class="form-check-input"
             type="checkbox"
             :id="'category' + category.id"
             @change="toggle(category.id)"
             />
-    <label  class="form-check-label"
-            :for="'category' + category.id">
+    <label class="form-check-label" :for="'category' + category.id">
       {{ category.name }}
     </label>
-    <Categories 
-      v-model="category.categories"
-      @toggle="toggle"
-      />
+    <Categories v-model="category.categories" @toggle="toggle" />
   </div>
 </template>
