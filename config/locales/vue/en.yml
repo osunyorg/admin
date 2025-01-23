@@ -1,4 +1,4 @@
-fr:
+en:
   vue:
     changes:
       cancel: Cancel
@@ -27,7 +27,7 @@ fr:
         button: Upload an image
         size:
           title: Image too heavy
-          text: "The image sent is far too heavy, it weights :size Mo! Osuny manages all images under :maxMo automatically. When your image is bigger than that, you need to reduce them before upload. You might use a tool like <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
+          text: "The image sent is far too heavy, it weights :sizeMB! Osuny manages all images under :maxMB automatically. When your image is bigger than that, you need to reduce them before upload. You might use a tool like <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
           close: Close
       medias:
         button: Choose from media library

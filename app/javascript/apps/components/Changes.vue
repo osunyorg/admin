@@ -3,6 +3,7 @@ export default {
     props: [
       'modelValue',
       'endpoint',
+      'i18n'
     ],
     emits: ['update:modelValue'],
     computed: {
@@ -30,7 +31,6 @@ export default {
         savingInProgress: false,
         archive: {},
         csrfToken: "",
-        i18n: {},
       }
     },
     methods: {
