@@ -1,0 +1,15 @@
+<p><%= t('mailers.extranet.invitation_message.text_line_1_html', extranet: @extranet_name) %></p>
+<% if @user.present? %>
+  <p>
+    <%= t('mailers.extranet.invitation_message.text_line_2_with_user_html',
+          email: @email,
+          sign_in_url: new_user_session_url(email: @email, host: @extranet.host)) %>
+  </p>
+<% else %>
+  <p>
+    <%= t('mailers.extranet.invitation_message.text_line_2_without_user_html',
+          email: @email,
+          sign_up_url: new_user_registration_url(email: @email, host: @extranet.host)) %>
+  </p>
+<% end %>
+<p><%= t('mailers.yours') %></p>
