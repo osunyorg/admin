@@ -10,8 +10,9 @@ class ExtranetMailer < ApplicationMailer
 
     @user = @person.user
     # If the person has a user, we use the user's email in priority as it can be used for login.
-    @email = @user.present? ? @user.email : @person.email
-    language = @user.present? ? @user.language : university.default_language
+    @email = @user.try(:email) || @person.email
+
+    language = @user.try(:language) || university.default_language
     @extranet_name = @extranet.to_s_in(language)
 
     I18n.with_locale(language.iso_code) do
