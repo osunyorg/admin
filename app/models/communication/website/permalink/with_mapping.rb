@@ -13,6 +13,7 @@ module Communication::Website::Permalink::WithMapping
       "Communication::Website::Post::Localization" => Communication::Website::Permalink::Post,
       "Communication::Website::Post::Category::Localization" => Communication::Website::Permalink::Category,
       "Education::Diploma::Localization" => Communication::Website::Permalink::Diploma,
+      "Education::Program::Category::Localization" => Communication::Website::Permalink::Program::Category,
       "Education::Program::Localization" => Communication::Website::Permalink::Program,
       "Research::Journal::Paper::Localization" => Communication::Website::Permalink::Paper,
       "Research::Journal::Volume::Localization" => Communication::Website::Permalink::Volume,
