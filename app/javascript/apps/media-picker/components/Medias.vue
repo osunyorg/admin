@@ -37,7 +37,7 @@ export default {
       },
       search() {
         var xhr = new XMLHttpRequest(),
-            url = this.i18n.endpoint
+            url = this.endpoint
                     + "?filters[for_search_term]=" + encodeURIComponent(this.query);
         for (var i = 0; i < this.selected.collections.length; i++) {
           url += "&filters[for_collection][]=" + this.selected.collections[i];
@@ -76,6 +76,7 @@ export default {
     beforeMount() {
       const dataset = document.getElementById('media-picker-app').dataset;
       this.i18n = JSON.parse(dataset.i18n).mediaPicker.medias;
+      this.endpoint = dataset.mediaEndpoint;
     },
 };
 </script>
@@ -138,10 +139,7 @@ export default {
                     </label>
                   </div>
                 </div>
-                <Taxonomies
-                  v-model="data.taxonomies"
-                  @toggle="toggleCategory"
-                  />
+                <Taxonomies v-model="data.taxonomies" @toggle="toggleCategory" />
               </div>
               <div class="col-md-10">
                 <p v-if="data.results.length === 0" >{{ i18n.nothing }}</p>

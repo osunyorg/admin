@@ -22,5 +22,6 @@ cloud = {
       data-formats-accepted-hint="<%= images_formats_accepted_hint %>"
       data-i18n="<%= t('vue').to_json %>"
       data-cloud="<%= cloud.to_json %>"
+      data-media-endpoint="<%= admin_communication_medias_url(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
       >
 </div>
