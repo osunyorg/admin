@@ -400,6 +400,12 @@ en:
     subtitle: Sign in to your account to continue
   look_feel: Look & feel
   mailers:
+    extranet:
+      invitation_message:
+        subject: You now have access to the “%{extranet}” extranet
+        text_line_1_html: You now have access to the “%{extranet}” extranet.
+        text_line_2_with_user_html: You can sign in with your email address <b>%{email}</b> by clicking <a href="%{sign_in_url}">here</a>.
+        text_line_2_without_user_html: You can sign up with your email address <b>%{email}</b> by clicking <a href="%{sign_up_url}">here</a>.
     notifications:
       import:
         subject_with_errors: Your import has been processed with errors

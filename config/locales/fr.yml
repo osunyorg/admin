@@ -400,6 +400,12 @@ fr:
     subtitle: Vous devez être authentifié pour continuer
   look_feel: Look & feel
   mailers:
+    extranet:
+      invitation_message:
+        subject: Vous avez désormais accès à l'extranet « %{extranet} »
+        text_line_1_html: Vous avez désormais accès à l'extranet « %{extranet} ».
+        text_line_2_with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en cliquant <a href="%{sign_in_url}">ici</a>.
+        text_line_2_without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en cliquant <a href="%{sign_up_url}">ici</a>.
     notifications:
       import:
         subject_with_errors: Votre import a bien été traité mais comporte des erreurs
