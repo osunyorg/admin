@@ -8,6 +8,11 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
     @medias = @medias.filter_by(params[:filters], current_language)
                       .ordered(current_language)
                       .page(params[:page])
+    @collections = current_university.communication_media_collections
+                                     .ordered(current_language)
+    @categories = current_university.communication_media_categories
+                                    .root
+                                    .ordered(current_language)
     breadcrumb
     @feature_nav = 'navigation/admin/communication/medias'
   end
@@ -19,6 +24,14 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
   def new
     @categories = categories
     breadcrumb
+  end
+
+  def pick
+    picker = Osuny::Media::Picker.new
+    picker.university = current_university
+    picker.language = current_language
+    picker.params = params.to_unsafe_hash
+    render json: picker.to_json
   end
 
   def edit

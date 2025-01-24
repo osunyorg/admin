@@ -343,15 +343,6 @@ en:
         pending: Pending
   export: Export (xlsx)
   false: No
-  featured_image:
-    alt:
-      hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
-      label: Alternative text
-    credit:
-      hint: The credit must be present according to copyright or copyleft licenses.
-      label: Credit
-    remove: Remove image
-    title: Image
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"
   filters:
@@ -442,14 +433,6 @@ en:
   move: Move
   open: Open
   organize: Organize
-  photo_import:
-    next: Next image
-    nothing: No results for this search
-    open: Unsplash & Pexels
-    placeholder: Type your search here
-    previous: Previous images
-    search: Search
-    title: Photo search
   please_confirm: Are you sure?
   preview:
     button: Preview

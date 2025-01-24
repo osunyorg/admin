@@ -1,10 +1,8 @@
-#!/usr/bin/env node
-
 import * as esbuild from 'esbuild'
 import vuePlugin from 'esbuild-plugin-vue-next'
 
 const options = {
-    entryPoints: ['app/javascript/admin-module.js'],
+    entryPoints: ['app/javascript/vue-apps.js'],
     bundle: true,
     sourcemap: true,
     format: 'esm',

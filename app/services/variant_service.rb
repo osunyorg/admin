@@ -11,6 +11,21 @@ class VariantService
   CROP_REGEX = /_crop_(#{GRAVITY_PER_CROP.keys.join('|')})$/
   SIZE_REGEX = /_([0-9]+x[0-9]*|[0-9]*x[0-9]+)$/
 
+  def self.manage(blob, params)
+    if blob.variable?
+      variant_service = VariantService.compute(blob, params[:filename_with_transformations], params[:format])
+      transformations = variant_service.transformations
+      if transformations.empty?
+        blob
+      else
+        variant = blob.variant transformations
+        variant
+      end
+    else
+      blob
+    end
+  end
+
   def self.compute(blob, filename, format)
     new blob, filename, format
   end

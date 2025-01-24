@@ -188,6 +188,7 @@ namespace :communication do
   end
   resources :medias do
     collection do
+      post 'pick' => 'medias#pick', as: :pick
       resources :categories, controller: '/admin/communication/medias/categories', as: 'media_categories' do
         collection do
           post :reorder

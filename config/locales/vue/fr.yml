@@ -1,0 +1,42 @@
+fr:
+  vue:
+    changes:
+      cancel: Annuler
+      save: Enregistrer les modifications
+    cropperModal:
+        cancel: Annuler
+        rotate: Tourner l'image
+        title: Cadrer l'image
+        validate: Valider
+    mediaPicker:
+      alt:
+        hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
+        label: Texte alternatif
+      cloud:
+        button: Importer (Unsplash & Pexels)
+        next: Images suivantes
+        nothing: Aucun résultat pour cette recherche
+        placeholder: Tapez votre recherche
+        previous: Images précédentes
+        search: Chercher
+        title: Recherche d'image
+      credit:
+        hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
+        label: Crédit
+      imageUploader:
+        button: Envoyer une image
+        size:
+          title: Image trop lourde
+          text: "L'image envoyée est beaucoup trop lourde, elle pèse :size Mo ! Sur Osuny, nous traitons automatiquement les images de moins de :max Mo. Au-delà de ce poids, il est nécessaire de réduire l'image avant de l'envoyer, par exemple en utilisant un outil comme <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
+          close: Fermer
+      medias:
+        button: Choisir dans la médiathèque
+        collections: Collections
+        next: Images suivantes
+        nothing: Aucun résultat pour cette recherche
+        placeholder: Tapez votre recherche
+        previous: Images précédentes
+        search: Chercher  
+        title: Médiathèque
+      remove: Supprimer l'image
+      title: Image
