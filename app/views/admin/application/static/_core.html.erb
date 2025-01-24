@@ -61,3 +61,22 @@ meta:
 <% if show_published_at %>
     published_at: <%= about.published_at&.iso8601 %>
 <% end %>
+<%
+#############
+# Search engine data
+#############
+search_title = title
+search_title += " #{subtitle}" if show_subtitle && about.subtitle.present?
+%>
+search:
+  id: "<%= about.id %>"
+  url: "<%= hugo.permalink %>"
+  lang: ""<%= about.language.iso_code %>"
+  title: >-
+    <%= prepare_text_for_static search_title %>
+  summary: >-
+    <%= prepare_html_for_static about.summary %>
+  body: >-
+    <%= prepare_text_for_static about.contents_full_text %>
+
+  
