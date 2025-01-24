@@ -71,7 +71,8 @@ search_title += " #{subtitle}" if show_subtitle && about.subtitle.present?
 search:
   id: "<%= about.id %>"
   url: "<%= hugo.permalink %>"
-  lang: ""<%= about.language.iso_code %>"
+  kind: "<%= about.class.model_name %>"
+  lang: "<%= about.language.iso_code %>"
   title: >-
     <%= prepare_text_for_static search_title %>
   summary: >-
