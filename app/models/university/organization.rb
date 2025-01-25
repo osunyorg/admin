@@ -40,14 +40,20 @@ class University::Organization < ApplicationRecord
   include WithOpenApi
   include WithUniversity
 
-  attr_accessor :created_from_extranet
+  attr_accessor :created_from_extranet,
+                :categories_were_changed
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Organization::Category',
-                          join_table: :university_organizations_categories
+                          join_table: :university_organizations_categories,
+                          after_add: :mark_categories_as_changed,
+                          after_remove: :mark_categories_as_changed
+
   has_many :experiences,
            class_name: 'University::Person::Experience',
            dependent: :destroy
+
+  after_save :touch_after_categories_change, if: :saved_only_changed_categories?
 
   scope :for_category, -> (category_id, language = nil) { joins(:categories).where(university_organization_categories: { id: category_id }).distinct }
   scope :for_search_term, -> (term, language) {
@@ -81,5 +87,20 @@ class University::Organization < ApplicationRecord
   def dependencies
     localizations +
     categories
+  end
+
+  protected
+
+  def touch_after_categories_change
+    touch
+    @categories_were_changed = false
+  end
+
+  def saved_only_changed_categories?
+    saved_changes.blank? && @categories_were_changed
+  end
+
+  def mark_categories_as_changed(_)
+    @categories_were_changed = true
   end
 end

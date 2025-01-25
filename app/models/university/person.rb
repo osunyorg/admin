@@ -61,13 +61,17 @@ class University::Person < ApplicationRecord
   include WithRealmResearch
   include WithUniversity
 
+  attr_accessor :categories_were_changed
+
   enum :gender, { male: 0, female: 1, non_binary: 2 }
 
   belongs_to :user, optional: true
 
   has_and_belongs_to_many :categories,
                           class_name: 'University::Person::Category',
-                          join_table: :university_people_categories
+                          join_table: :university_people_categories,
+                          after_add: :mark_categories_as_changed,
+                          after_remove: :mark_categories_as_changed
 
   validates :email,
             uniqueness: { scope: :university_id },
@@ -79,6 +83,8 @@ class University::Person < ApplicationRecord
             if: :will_save_change_to_email?
 
   before_validation :sanitize_email
+
+  after_save :touch_after_categories_change, if: :saved_only_changed_categories?
 
   scope :ordered, -> (language) {
     localization_first_name_select = <<-SQL
@@ -176,6 +182,19 @@ class University::Person < ApplicationRecord
 
   def sanitize_email
     self.email = self.email.to_s.downcase.strip
+  end
+
+  def touch_after_categories_change
+    touch
+    @categories_were_changed = false
+  end
+
+  def saved_only_changed_categories?
+    saved_changes.blank? && @categories_were_changed
+  end
+
+  def mark_categories_as_changed(_)
+    @categories_were_changed = true
   end
 
 end
