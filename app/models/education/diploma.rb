@@ -39,7 +39,7 @@ class Education::Diploma < ApplicationRecord
     fourth_year: 400,
     master: 500,
     doctor: 800
-  }
+  }, prefix: :level
 
   has_many :programs, dependent: :nullify
 

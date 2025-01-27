@@ -32,9 +32,9 @@
         <%= lf.input :url %>
         <%= f.input :phone %>
         <%= f.input :email %>
-        <%= f.input :linkedin %>
-        <%= f.input :twitter %>
-        <%= f.input :mastodon %>
+        <%= lf.input :linkedin %>
+        <%= lf.input :twitter %>
+        <%= lf.input :mastodon %>
 
         <h2 class="h5 mt-5 mb-4"><%= University::Organization.human_attribute_name('legal') %></h2>
         <%= lf.input :long_name %>
@@ -45,12 +45,12 @@
       <div class="offset-lg-1 col-lg-3">
 
         <h2 class="h5 mt-5 mb-4"><%= University::Organization.human_attribute_name('logos') %></h2>
-        <%= f.input :logo,
+        <%= lf.input :logo,
                     as: :single_deletable_file,
                     input_html: { accept: default_images_formats_accepted },
                     preview: 200,
                     resize: false %>
-        <%= f.input :logo_on_dark_background,
+        <%= lf.input :logo_on_dark_background,
                     as: :single_deletable_file,
                     input_html: { accept: default_images_formats_accepted },
                     preview: 200,
