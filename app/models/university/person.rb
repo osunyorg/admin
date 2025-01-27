@@ -68,8 +68,6 @@ class University::Person < ApplicationRecord
   belongs_to :user, optional: true
 
   has_and_belongs_to_many :categories,
-                          class_name: 'University::Person::Category',
-                          join_table: :university_people_categories,
                           after_add: :mark_categories_as_changed,
                           after_remove: :mark_categories_as_changed
 

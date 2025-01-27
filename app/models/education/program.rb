@@ -51,11 +51,7 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id
 
-  has_and_belongs_to_many :categories,
-                          class_name: 'Education::Program::Category',
-                          join_table: :education_program_categories_programs,
-                          foreign_key: :education_program_id,
-                          association_foreign_key: :education_program_category_id
+  has_and_belongs_to_many :categories
 
   before_destroy :move_children
 

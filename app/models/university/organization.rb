@@ -44,8 +44,6 @@ class University::Organization < ApplicationRecord
                 :categories_were_changed
 
   has_and_belongs_to_many :categories,
-                          class_name: 'University::Organization::Category',
-                          join_table: :university_organizations_categories,
                           after_add: :mark_categories_as_changed,
                           after_remove: :mark_categories_as_changed
 

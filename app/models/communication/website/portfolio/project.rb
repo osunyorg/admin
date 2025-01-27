@@ -36,11 +36,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
               class_name: 'User',
               optional: true
 
-  has_and_belongs_to_many :categories,
-                          class_name: 'Communication::Website::Portfolio::Category',
-                          join_table: :communication_website_portfolio_categories_projects,
-                          foreign_key: :communication_website_portfolio_project_id,
-                          association_foreign_key: :communication_website_portfolio_category_id
+  has_and_belongs_to_many :categories
 
   validates :year, presence: true
 

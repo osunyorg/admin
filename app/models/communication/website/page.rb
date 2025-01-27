@@ -53,11 +53,7 @@ class Communication::Website::Page < ApplicationRecord
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id,
              dependent: :destroy
-  has_and_belongs_to_many :categories,
-                          class_name: 'Communication::Website::Page::Category',
-                          join_table: :communication_website_pages_categories,
-                          foreign_key: :communication_website_page_id,
-                          association_foreign_key: :communication_website_page_category_id
+  has_and_belongs_to_many :categories
 
   after_save :touch_elements_if_special_page_in_hierarchy
 

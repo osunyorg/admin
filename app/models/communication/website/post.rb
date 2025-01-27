@@ -34,11 +34,7 @@ class Communication::Website::Post < ApplicationRecord
                           class_name: 'University::Person',
                           foreign_key: :communication_website_post_id,
                           association_foreign_key: :university_person_id
-  has_and_belongs_to_many :categories,
-                          class_name: 'Communication::Website::Post::Category',
-                          join_table: :communication_website_categories_posts,
-                          foreign_key: :communication_website_post_id,
-                          association_foreign_key: :communication_website_category_id
+  has_and_belongs_to_many :categories
   after_save_commit :update_authors_status_if_necessary!
 
   scope :ordered, -> (language) {
