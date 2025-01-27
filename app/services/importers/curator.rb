@@ -35,7 +35,7 @@ module Importers
     end
 
     def set_post_author!
-      @post.authors << @user.person
+      @post.authors << @user.person if @user.person.present?
     end
 
     def create_localization!
