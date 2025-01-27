@@ -28,9 +28,7 @@ class University::Organization::Category < ApplicationRecord
   include WithOpenApi
   include WithUniversity
 
-  has_and_belongs_to_many :organizations,
-                          class_name: 'University::Organization',
-                          join_table: :university_organizations_categories
+  has_and_belongs_to_many :organizations
   alias                   :category_objects :organizations
 
   def dependencies

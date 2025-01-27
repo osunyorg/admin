@@ -40,11 +40,7 @@ class Communication::Website::Page::Category < ApplicationRecord
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_and_belongs_to_many :pages,
-                          class_name: 'Communication::Website::Page',
-                          join_table: :communication_website_pages_categories,
-                          foreign_key: :communication_website_page_category_id,
-                          association_foreign_key: :communication_website_page_id
+  has_and_belongs_to_many :pages
   alias                   :category_objects :pages
 
   def page_localizations

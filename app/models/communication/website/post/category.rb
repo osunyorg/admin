@@ -38,11 +38,7 @@ class Communication::Website::Post::Category < ApplicationRecord
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_and_belongs_to_many :posts,
-                          class_name: 'Communication::Website::Post',
-                          join_table: :communication_website_categories_posts,
-                          foreign_key: :communication_website_category_id,
-                          association_foreign_key: :communication_website_post_id
+  has_and_belongs_to_many :posts
   alias                   :category_objects :posts
 
   def post_localizations

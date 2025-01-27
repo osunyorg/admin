@@ -26,11 +26,9 @@ class University::Person::Category < ApplicationRecord
   include Localizable
   include WithUniversity
 
-  has_and_belongs_to_many :university_people,
-                          class_name: 'University::Person',
-                          join_table: :university_people_categories
-  alias                   :people :university_people
-  alias                   :category_objects :university_people
+  has_and_belongs_to_many :people
+  alias                   :university_people :people
+  alias                   :category_objects :people
 
   def dependencies
     localizations

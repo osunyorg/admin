@@ -30,6 +30,7 @@
 #
 class University::Organization < ApplicationRecord
   include AsIndirectObject
+  include Categorizable
   include Filterable
   include Localizable
   include LocalizableOrderByNameScope
@@ -42,14 +43,10 @@ class University::Organization < ApplicationRecord
 
   attr_accessor :created_from_extranet
 
-  has_and_belongs_to_many :categories,
-                          class_name: 'University::Organization::Category',
-                          join_table: :university_organizations_categories
   has_many :experiences,
            class_name: 'University::Person::Experience',
            dependent: :destroy
 
-  scope :for_category, -> (category_id, language = nil) { joins(:categories).where(university_organization_categories: { id: category_id }).distinct }
   scope :for_search_term, -> (term, language) {
     joins(:localizations)
       .where(university_organization_localizations: { language_id: language.id })
