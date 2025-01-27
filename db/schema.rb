@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_27_090219) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_27_151857) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -352,10 +352,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_090219) do
   end
 
   create_table "communication_media_categories_medias", id: false, force: :cascade do |t|
-    t.uuid "communication_media_id", null: false
-    t.uuid "communication_media_category_id", null: false
-    t.index ["communication_media_category_id", "communication_media_id"], name: "category_media"
-    t.index ["communication_media_id", "communication_media_category_id"], name: "media_category"
+    t.uuid "media_id", null: false
+    t.uuid "category_id", null: false
+    t.index ["category_id", "media_id"], name: "category_media"
+    t.index ["media_id", "category_id"], name: "media_category"
   end
 
   create_table "communication_media_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

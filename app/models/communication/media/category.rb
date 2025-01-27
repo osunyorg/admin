@@ -25,10 +25,5 @@ class Communication::Media::Category < ApplicationRecord
   include Localizable
   include WithUniversity
 
-  has_and_belongs_to_many :communication_medias,
-                          class_name: 'Communication::Media',
-                          join_table: :communication_media_categories_medias,
-                          foreign_key: :communication_media_category_id,
-                          association_foreign_key: :communication_media_id
-  alias                   :medias :communication_medias
+  has_and_belongs_to_many :medias
 end

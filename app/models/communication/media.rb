@@ -27,6 +27,7 @@
 #  fk_rails_de56e1762f  (university_id => universities.id)
 #
 class Communication::Media < ApplicationRecord
+  include Categorizable
   include Filterable
   include Localizable
   include LocalizableOrderByNameScope
@@ -50,11 +51,6 @@ class Communication::Media < ApplicationRecord
   has_many                :blobs,
                           through: :contexts,
                           source: :active_storage_blob
-  has_and_belongs_to_many :categories,
-                          class_name: 'Communication::Media::Category',
-                          foreign_key: :communication_media_id,
-                          association_foreign_key: :communication_media_category_id,
-                          join_table: :communication_media_categories_medias
 
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)
@@ -70,12 +66,6 @@ class Communication::Media < ApplicationRecord
   }
   scope :for_collection, -> (collection_id, language = nil) {
     where(collection: collection_id)
-  }
-  scope :for_category, -> (category_id, language = nil) { 
-    joins(:categories)
-      .where(
-        communication_media_categories: { id: category_id }
-      ).distinct
   }
 
   def self.create_from_blob(blob, in_context:, origin: :upload, alt: nil, credit: nil)
