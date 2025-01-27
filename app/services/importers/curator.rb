@@ -9,6 +9,7 @@ module Importers
       @url = url
       unless slug_already_exists?
         create_post!
+        set_post_author!
         create_localization!
         create_chapter!
         attach_image!
@@ -21,16 +22,20 @@ module Importers
     end
 
     def valid?
-      @post&.valid? && @l10n&.valid? && @chapter&.valid?
+      # if nothing exists valid? is "nil" and not "false"
+      (@post&.valid? && @l10n&.valid? && @chapter&.valid?) == true
     end
 
     protected
 
     def create_post!
       @post = website.posts.create(
-        university: website.university,
-        author: @user.person
+        university: website.university
       )
+    end
+
+    def set_post_author!
+      @post.authors << @user.person
     end
 
     def create_localization!
@@ -72,7 +77,7 @@ module Importers
         website: website,
         language: language,
         slug: slug
-      )
+      ).any?
     end
 
     def page
