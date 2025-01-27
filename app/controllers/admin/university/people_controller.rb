@@ -54,7 +54,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def create
     if @person.save
-      @l10n.add_photo_import params[:photo_import]
       redirect_to admin_university_person_path(@person),
                   notice: t('admin.successfully_created_html', model: @person.to_s_in(current_language))
     else
@@ -66,8 +65,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def update
     if @person.update(person_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
       redirect_to admin_university_person_path(@person),
                   notice: t('admin.successfully_updated_html', model: @person.to_s_in(current_language))
     else

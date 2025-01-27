@@ -47,7 +47,6 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def create
     if @organization.save
-      @l10n.add_photo_import params[:photo_import]
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_created_html', model: @organization.to_s_in(current_language))
     else
@@ -59,8 +58,6 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def update
     if @organization.update(organization_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
       redirect_to admin_university_organization_path(@organization),
                   notice: t('admin.successfully_updated_html', model: @organization.to_s_in(current_language))
     else

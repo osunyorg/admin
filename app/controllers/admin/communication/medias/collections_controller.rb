@@ -28,7 +28,6 @@ class Admin::Communication::Medias::CollectionsController < Admin::Communication
 
   def create
     if @collection.save
-      @l10n.add_photo_import params[:photo_import]
       redirect_to admin_communication_media_collection_path(@collection),
                   notice: t('admin.successfully_created_html', model: @collection.to_s_in(current_language))
     else
@@ -39,8 +38,6 @@ class Admin::Communication::Medias::CollectionsController < Admin::Communication
 
   def update
     if @collection.update(collection_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
       redirect_to admin_communication_media_collection_path(@collection),
                   notice: t('admin.successfully_updated_html', model: @collection.to_s_in(current_language))
     else

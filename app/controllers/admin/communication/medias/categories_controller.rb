@@ -32,7 +32,6 @@ class Admin::Communication::Medias::CategoriesController < Admin::Communication:
   end
 
   def create
-    @l10n.add_photo_import params[:photo_import]
     if @category.save
       redirect_to admin_communication_media_category_path(@category),
                   notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
@@ -45,8 +44,6 @@ class Admin::Communication::Medias::CategoriesController < Admin::Communication:
 
   def update
     if @category.update(category_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
       redirect_to admin_communication_media_category_path(@category),
                   notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
