@@ -10,9 +10,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
                       .page(params[:page])
     @collections = current_university.communication_media_collections
                                      .ordered(current_language)
-    @categories = current_university.communication_media_categories
-                                    .root
-                                    .ordered(current_language)
+    @categories = categories.root
     breadcrumb
     @feature_nav = 'navigation/admin/communication/medias'
   end

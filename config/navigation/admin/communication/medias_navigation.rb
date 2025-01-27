@@ -4,11 +4,11 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.highlight_on_subpath = true
 
   navigation.items do |primary|
-    primary.item  :feature_navs_medias,
-                  t('communication.description.parts.media.title'), 
+    primary.item  :feature_nav_medias,
+                  t('communication.description.parts.media.title'),
                   admin_communication_medias_path,
-                  highlights_on: lambda { 
-                    controller_name == "medias" && action_name == "index" 
+                  highlights_on: lambda {
+                    controller_name == "medias" && action_name == "index"
                   }
     primary.item  :feature_nav_collections,
                   Communication::Media::Collection.model_name.human(count: 2),
