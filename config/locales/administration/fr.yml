@@ -57,7 +57,7 @@ fr:
           title: Alumni
           description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
         location:
-          title: Campus
+          title: Sites
           description: Gestion des différents sites (physiques) de formation et de recherche
         qualiopi:
           title: Qualiopi
