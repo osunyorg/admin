@@ -45,6 +45,7 @@ class Communication::Website::Page::Category < ApplicationRecord
                           join_table: :communication_website_pages_categories,
                           foreign_key: :communication_website_page_category_id,
                           association_foreign_key: :communication_website_page_id
+  alias                   :category_objects :pages
 
   def page_localizations
     Communication::Website::Page::Localization.where(about_id: page_ids)

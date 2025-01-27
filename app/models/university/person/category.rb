@@ -30,6 +30,7 @@ class University::Person::Category < ApplicationRecord
                           class_name: 'University::Person',
                           join_table: :university_people_categories
   alias                   :people :university_people
+  alias                   :category_objects :university_people
 
   def dependencies
     localizations

@@ -31,6 +31,7 @@ class University::Organization::Category < ApplicationRecord
   has_and_belongs_to_many :organizations,
                           class_name: 'University::Organization',
                           join_table: :university_organizations_categories
+  alias                   :category_objects :organizations
 
   def dependencies
     localizations

@@ -43,6 +43,7 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
                           join_table: :communication_website_portfolio_categories_projects,
                           foreign_key: :communication_website_portfolio_category_id,
                           association_foreign_key: :communication_website_portfolio_project_id
+  alias                   :category_objects :projects
 
   def project_localizations
     Communication::Website::Portfolio::Project::Localization.where(about_id: project_ids)
@@ -62,6 +63,10 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
 
   def siblings
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
+  end
+
+  def objects_in(language)
+    projects.published_now_in(language)
   end
 
   protected

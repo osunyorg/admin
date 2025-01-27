@@ -43,6 +43,7 @@ class Communication::Website::Post::Category < ApplicationRecord
                           join_table: :communication_website_categories_posts,
                           foreign_key: :communication_website_category_id,
                           association_foreign_key: :communication_website_post_id
+  alias                   :category_objects :posts
 
   def post_localizations
     Communication::Website::Post::Localization.where(about_id: post_ids)

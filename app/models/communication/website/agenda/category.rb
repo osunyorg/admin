@@ -43,6 +43,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
                           join_table: :communication_website_agenda_events_categories,
                           foreign_key: :communication_website_agenda_category_id,
                           association_foreign_key: :communication_website_agenda_event_id
+  alias                   :category_objects :events
 
   def event_localizations
     Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)
