@@ -28,6 +28,7 @@
 #
 class Education::Program < ApplicationRecord
   include AsIndirectObject
+  include Categorizable
   include Filterable
   include Localizable
   include LocalizableOrderBySlugScope
@@ -50,8 +51,6 @@ class Education::Program < ApplicationRecord
   has_many   :children,
              class_name: 'Education::Program',
              foreign_key: :parent_id
-
-  has_and_belongs_to_many :categories
 
   before_destroy :move_children
 

@@ -22,6 +22,7 @@
 #
 class Communication::Website::Post < ApplicationRecord
   include AsDirectObject
+  include Categorizable
   include Duplicable
   include Filterable
   include Sanitizable
@@ -34,7 +35,7 @@ class Communication::Website::Post < ApplicationRecord
                           class_name: 'University::Person',
                           foreign_key: :communication_website_post_id,
                           association_foreign_key: :university_person_id
-  has_and_belongs_to_many :categories
+
   after_save_commit :update_authors_status_if_necessary!
 
   scope :ordered, -> (language) {
@@ -68,7 +69,6 @@ class Communication::Website::Post < ApplicationRecord
 
   scope :latest_in, -> (language) { published_now_in(language).order("communication_website_post_localizations.published_at DESC").limit(5) }
   scope :for_author, -> (author_ids, language = nil) { joins(:authors).where(university_people: { id: author_ids }).distinct }
-  scope :for_category, -> (category_ids, language = nil) { joins(:categories).where(communication_website_post_categories: { id: category_ids }).distinct }
   scope :for_search_term, -> (term, language) {
      joins(:localizations)
       .where(communication_website_post_localizations: { language_id: language.id })
