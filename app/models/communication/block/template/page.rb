@@ -50,7 +50,7 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
   end
 
   def top_description
-    page_l10n.try(:summary)
+    option_main_summary ? page_l10n.try(:summary) : false
   end
 
   def top_link
