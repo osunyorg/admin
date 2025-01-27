@@ -26,9 +26,9 @@ en:
       imageUploader:
         button: Upload an image
         size:
-          title: Image too heavy
-          text: "The image sent is far too heavy, it weights :sizeMB! Osuny manages all images under :maxMB automatically. When your image is bigger than that, you need to reduce them before upload. You might use a tool like <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
           close: Close
+          text: "The image sent is far too heavy, it weights :sizeMB! Osuny manages all images under :maxMB automatically. When your image is bigger than that, you need to reduce them before upload. You might use a tool like <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
+          title: Image too heavy
       medias:
         button: Choose from media library
         collections: Collections
@@ -36,7 +36,7 @@ en:
         nothing: No results for this search
         placeholder: Type your search here
         previous: Previous images
-        search: Search  
+        search: Search
         title: Media library
       remove: Remove image
       title: Image

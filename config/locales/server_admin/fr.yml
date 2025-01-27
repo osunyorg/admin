@@ -14,8 +14,8 @@ fr:
       url: URL
     dashboard: Administration du serveur
     emergency_messages:
-      all_universities: Toutes
       all_roles: Tous
+      all_universities: Toutes
       content: Contenu
       deliver: Envoyer
       delivered: Votre message a bien été envoyé
@@ -73,9 +73,9 @@ fr:
       university_html: "Université : %{university}"
       unlock_for_background_jobs_btn: Déverrouiller pour les background jobs
       unlock_for_background_jobs_notice: Le site est déverrouillé pour les background jobs.
-      update_all_themes: Synchroniser toutes les versions de thème
-      update_mode: Mode de mise à jour
       updatable_theme_filter:
         element: Capacité de mise à jour automatique
         value: Mise à jour automatique possible
+      update_all_themes: Synchroniser toutes les versions de thème
+      update_mode: Mode de mise à jour
       update_theme_notice: Le thème de %{website} va être mis à jour dans quelques instants

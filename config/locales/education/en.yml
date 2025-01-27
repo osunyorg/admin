@@ -3,28 +3,6 @@ en:
     models:
       education: Education
   activerecord:
-    models:
-      education/academic_year:
-        one: Year
-        other: Years
-      education/cohort:
-        one: Cohort
-        other: Cohorts
-      education/diploma:
-        one: Diploma
-        other: Diplomas
-      education/program:
-        one: Program
-        other: Programs
-      education/program/category:
-        one: Category
-        other: Categories
-      education/school:
-        one: School
-        other: Schools
-      university/person/localization/teacher:
-        one: Teacher
-        other: Teachers
     attributes:
       education/academic_year:
         year: Year
@@ -48,9 +26,9 @@ en:
         pedagogy: Méthodes mobilisées
         prerequisites: Prérequis
         pricing: Costs
-        pricing_initial: Costs for initial training
-        pricing_continuing: Costs for continuous training
         pricing_apprenticeship: Costs for apprenticeship
+        pricing_continuing: Costs for continuous training
+        pricing_initial: Costs for initial training
         registration: Registration procedure and delays
         results: Results' indicator
         short_name: Short name
@@ -73,13 +51,13 @@ en:
         accessibility: Accessibilité
         contacts: Contacts
         content: Program's content
-        duration: Duration
         downloadable_summary: Downloadable summary
+        duration: Duration
         evaluation: Evaluation method
         featured_image: Featured image
         featured_image_alt: Alt text
-        is_published: Published
         is_draft: Draft
+        is_published: Published
         logo: Program logo
         main_information: Main information
         name: Name
@@ -90,9 +68,9 @@ en:
         prerequisites: Prérequis
         presentation: In brief
         pricing: Costs
-        pricing_initial: Costs for initial training
-        pricing_continuing: Costs for continuous training
         pricing_apprenticeship: Costs for apprenticeship
+        pricing_continuing: Costs for continuous training
+        pricing_initial: Costs for initial training
         published: Published?
         qualiopi_text: Certification details
         registration: Registration procedure and delays
@@ -115,12 +93,34 @@ en:
       education/school/localization:
         name: Name
         websites: Linked websites
+    models:
+      education/academic_year:
+        one: Year
+        other: Years
+      education/cohort:
+        one: Cohort
+        other: Cohorts
+      education/diploma:
+        one: Diploma
+        other: Diplomas
+      education/program:
+        one: Program
+        other: Programs
+      education/program/category:
+        one: Category
+        other: Categories
+      education/school:
+        one: School
+        other: Schools
+      university/person/localization/teacher:
+        one: Teacher
+        other: Teachers
   admin:
     education:
       diplomas:
-        fields_for_programs: The fields below are used as basic values for programs
         certification:
           none: No certification
+        fields_for_programs: The fields below are used as basic values for programs
       programs:
         categories:
             root_name: Programs
@@ -140,17 +140,17 @@ en:
     description:
       parts:
         diploma:
-          title: Diplomas
           description: Presentation of diplomas and their characteristics
+          title: Diplomas
         program:
-          title: Programs
           description: Comprehensive presentation of the courses, their content, teaching methods and prospects
+          title: Programs
         school:
-          title: Schools
           description: Presentation of the schools, their contact details, courses, teams and administrative information
+          title: Schools
         teacher:
-          title: Teachers
           description: Presentation of the teachers, with their biographies and their teaching in the various courses
+          title: Teachers
       source: Olivier Reboul, La philosophie de l'éducation, 2018
       text_html: Education is the set of processes and procedures that enable every human child to gradually gain access to culture, access to culture being what distinguishes man from animals.
     manage_programs: Manage programs
@@ -159,15 +159,15 @@ en:
     number_of_programs: Number of programs
     program:
       parts:
-        pedagogy:
-          label: Pedagogy
-          hint: Teaching and evaluation methods, pedagogical team, job opportunities and results obtained by former students
         admission:
-          label: Admission
           hint: How to apply to the program
+          label: Admission
         certification:
-          label: Certification
           hint: Legal certification (Qualiopi)
+          label: Certification
+        pedagogy:
+          hint: Teaching and evaluation methods, pedagogical team, job opportunities and results obtained by former students
+          label: Pedagogy
       registration_scheme: Registration scheme
     roles:
       one: Role
@@ -179,16 +179,16 @@ en:
     education:
       diploma:
         level:
+          doctor: Doctorate (8 years)
+          first_year: 1 year
+          fourth_year: 4 years
+          high: High School
+          master: Master (5 years)
           not_applicable: Not applicable
           primary: Primary school
-          secondary: Secondary school
-          high: High School
-          first_year: 1 year
           second_year: 2 years
+          secondary: Secondary school
           third_year: Licence (3 years)
-          fourth_year: 4 years
-          master: Master (5 years)
-          doctor: Doctorate (8 years)
   simple_form:
     hints:
       education_diploma:

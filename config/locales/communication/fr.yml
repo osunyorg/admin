@@ -37,27 +37,11 @@ fr:
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
-      communication/extranet/localization:
-        cookies_policy: Politique de cookies
-        favicon: Icône de navigateur (favicon)
-        home_sentence: Phrase affichée sur la home
-        logo: Logo
-        name: Nom
-        published: Langue publiée
-        privacy_policy: Politique de confidentialité
-        registration_contact: Mail de contact pour les problèmes d'inscription
-        sso_button_label: Libellé du bouton de connexion
-        terms: Conditions d'utilisation
       communication/extranet/connection:
         connected: Connecté
       communication/extranet/document:
         category: Catégorie
         kind: Type
-      communication/extranet/document/localization:
-        file: Fichier téléchargeable
-        name: Nom
-        published: Publié ?
-        published_at: Date de publication
       communication/extranet/document/category:
         quantity: Quantité de documents
       communication/extranet/document/category/localization:
@@ -66,9 +50,29 @@ fr:
         quantity: Quantité de documents
       communication/extranet/document/kind/localization:
         name: Nom
+      communication/extranet/document/localization:
+        file: Fichier téléchargeable
+        name: Nom
+        published: Publié ?
+        published_at: Date de publication
+      communication/extranet/localization:
+        cookies_policy: Politique de cookies
+        favicon: Icône de navigateur (favicon)
+        home_sentence: Phrase affichée sur la home
+        logo: Logo
+        name: Nom
+        privacy_policy: Politique de confidentialité
+        published: Langue publiée
+        registration_contact: Mail de contact pour les problèmes d'inscription
+        sso_button_label: Libellé du bouton de connexion
+        terms: Conditions d'utilisation
       communication/extranet/post:
         author: Auteur·rice
         category: Catégorie
+      communication/extranet/post/category:
+        quantity: Quantité d'actualités
+      communication/extranet/post/category/localization:
+        name: Nom
       communication/extranet/post/localization:
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
@@ -78,19 +82,15 @@ fr:
         published_at: Date de publication
         slug: Identifiant
         title: Titre
-      communication/extranet/post/category:
-        quantity: Quantité d'actualités
-      communication/extranet/post/category/localization:
-        name: Nom
       communication/media:
         collection: Collection
         origin: Provenance
-        original_filename: Nom du fichier original
-        original_content_type: Type de contenu
         original_byte_size: Poids
-      communication/media/localization:
-        name: Nom
+        original_content_type: Type de contenu
+        original_filename: Nom du fichier original
       communication/media/collection/localization:
+        name: Nom
+      communication/media/localization:
         name: Nom
       communication/website:
         about: Sujet du site
@@ -103,14 +103,14 @@ fr:
         access_token: Jeton d'accès
         appearance: Apparence
         autoupdate_theme: Mise à jour automatique du thème Osuny
-        configs: Fichiers de configuration
         config_default_content_security_policy: Politiques de sécurités pour définir les CSP (CORS)
-        config_default_languages: Définition des langues et des configurations pour chaque langue
-        config_default_permalinks: Définition des permaliens (obsolète)
         config_default_deuxfleurs_workflow: Action de mise en ligne Deuxfleurs
         config_default_development_config: Configuration de développement
+        config_default_languages: Définition des langues et des configurations pour chaque langue
+        config_default_permalinks: Définition des permaliens (obsolète)
         config_default_production_config: Configuration de production, intégrant les règles de cache
         config_robots_txt: Fichier robots.txt, adressé aux moteurs de recherche
+        configs: Fichiers de configuration
         created_at: Création
         default_image: Image par défaut
         default_language: Langue par défaut
@@ -256,16 +256,16 @@ fr:
           attributes:
             published:
               cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
-        communication/website/localization:
-          attributes:
-            published:
-              cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
         communication/website/agenda/event:
           attributes:
             to_day:
               too_soon: doit être après jour de début
             to_hour:
               too_soon: doit être après l'heure de début
+        communication/website/localization:
+          attributes:
+            published:
+              cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
     models:
       communication/block:
         one: Bloc de contenu
@@ -446,21 +446,21 @@ fr:
     description:
       parts:
         author:
-          title: Auteur·ices
           description: Personnes écrivant des actualités dans des sites Web ou des Extranets
           description_non_university: Personnes écrivant des actualités dans des sites Web ou des Extranets
+          title: Auteur·ices
         extranet:
-          title: Extranets
           description: Espaces d'échanges sécurisés dédiés aux utilisateur·rices authentifié·es
           description_non_university: Espaces d'échanges sécurisés dédiés aux utilisateur·rices authentifié·es
+          title: Extranets
         media:
-          title: Médiathèque
           description: Bibliothèque de médias regroupant l'intégralité des fichiers utilisés dans le système
           description_non_university: Bibliothèque de médias regroupant l'intégralité des fichiers utilisés dans le système
+          title: Médiathèque
         website:
-          title: Sites Web
           description: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
           description_non_university: Espaces publics de diffusion d'information, sobre sur le plan écologique et accessible aux personnes en situation de handicap
+          title: Sites Web
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
       text_html: Communiquer, c'est mettre en commun ; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
     extranet:
@@ -636,8 +636,8 @@ fr:
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
       communication_website_permalink:
         path: "Doit être un chemin d'URL. Exemple : /ancien/chemin"
+      communication_website_portfolio_project:
+        full_width: Sur de grands écrans, le projet en pleine largeur utilisera tout l'espace disponible.
       communication_website_post:
         full_width: Sur de grands écrans, l'actualité en pleine largeur utilisera tout l'espace disponible.
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
-      communication_website_portfolio_project:
-        full_width: Sur de grands écrans, le projet en pleine largeur utilisera tout l'espace disponible.
