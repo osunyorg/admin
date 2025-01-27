@@ -29,4 +29,8 @@ class Communication::Website::Page::Person < Communication::Website::Page
   def git_path_relative
     'persons/_index.html'
   end
+
+  def special_page_categories
+    university.person_categories
+  end
 end

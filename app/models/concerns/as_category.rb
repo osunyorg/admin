@@ -21,12 +21,13 @@ module AsCategory
     scope :in_taxonomy, -> (taxonomy) { where(id: taxonomy.descendants.pluck(:id)) }
     # All categories that are not taxonomies, nor belongs to a taxonomy
     scope :out_of_taxonomy, -> {
-      ids = taxonomies.map { |taxonomy| taxonomy.descendants.pluck(:id) }.flatten.compact
-      where.not(id: taxonomies.map { |taxonomy|
-          taxonomy.descendants.pluck(:id) 
-        }.flatten.compact
-      )
-    }
+      ids = taxonomies.map { |taxonomy|
+        # The taxonomy itself
+        [taxonomy.id] + 
+        # All descendants
+        taxonomy.descendants.pluck(:id) 
+      }.flatten.compact
+      where.not(id: ids) }
   end
 
   def possible_taxonomy?
@@ -35,5 +36,9 @@ module AsCategory
 
   def in_taxonomy?
     ancestors.detect { |category| category.is_taxonomy }
+  end
+
+  def count_objects_in(language)
+    category_objects.published_now_in(language).count
   end
 end
