@@ -124,6 +124,10 @@ class Communication::Website::Page < ApplicationRecord
     classes.join(' ')
   end
 
+  def special_page_categories
+    false
+  end
+
   def siblings
     self.class.unscoped
               .where(parent: parent, university: university, website: website)

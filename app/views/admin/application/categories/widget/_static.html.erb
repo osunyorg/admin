@@ -1,12 +1,13 @@
 <%
 about_categories = about.categories
 taxonomies = categories.taxonomies.ordered
+language = l10n.language
 %>
 <% if about_categories.any? %>
 <%= key %>:
 <%
 about_categories.ordered.each do |category|
-  category_l10n = category.localization_for(l10n.language)
+  category_l10n = category.localization_for(language)
   next if category_l10n.nil?
   hugo = category_l10n.hugo(@website)
 %>
@@ -17,35 +18,26 @@ taxonomies:
     slug: ""
     categories:
 <%
-about_categories.ordered.each do |category|
-  next if category.in_taxonomy?
-  category_l10n = category.localization_for(l10n.language)
-  next if category_l10n.nil?
-  hugo = category_l10n.hugo(@website)
-%>
-<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-        name: "<%= prepare_text_for_static category_l10n.to_s %>"
+  about_categories.ordered.each do |category| 
+    next if category.in_taxonomy? %>
+<%= render 'admin/application/categories/category_static',
+            category: category,
+            language: language %>
 <% end %>
 <%
   if taxonomies.any?
-%>
-<%
-    taxonomies.ordered.each do |taxonomy|
-      taxonomy_l10n = taxonomy.localization_for(l10n.language)
+    taxonomies.each do |taxonomy|
+      taxonomy_l10n = taxonomy.localization_for(language)
       next if taxonomy_l10n.nil?
       hugo = taxonomy_l10n.hugo(@website)
 %>
   - name: "<%= prepare_text_for_static taxonomy_l10n.to_s %>"
     slug: "<%= hugo.slug %>"
     categories:
-<%
-      about_categories.in_taxonomy(taxonomy).ordered.each do |category|
-        category_l10n = category.localization_for(l10n.language)
-        next if category_l10n.nil?
-        hugo = category_l10n.hugo(@website)
-%>
-<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-        name: "<%= prepare_text_for_static category_l10n.to_s %>"
+<% about_categories.in_taxonomy(taxonomy).ordered.each do |category| %>
+<%= render 'admin/application/categories/category_static',
+            category: category,
+            language: language %>
 <%
       end
     end
