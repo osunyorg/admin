@@ -15,9 +15,18 @@ module AsCategory
                 dependent: :destroy
 
     scope :taxonomies, -> { root.where(is_taxonomy: true) }
+    # Taxons IN a taxonomy have is_taxonomy = false
     scope :free, -> { where(is_taxonomy: false) }
 
-    scope :in_taxonomy, -> (category) { where(id: category.descendants.pluck(:id)) }
+    scope :in_taxonomy, -> (taxonomy) { where(id: taxonomy.descendants.pluck(:id)) }
+    # All categories that are not taxonomies, nor belongs to a taxonomy
+    scope :out_of_taxonomy, -> {
+      ids = taxonomies.map { |taxonomy| taxonomy.descendants.pluck(:id) }.flatten.compact
+      where.not(id: taxonomies.map { |taxonomy|
+          taxonomy.descendants.pluck(:id) 
+        }.flatten.compact
+      )
+    }
   end
 
   def possible_taxonomy?

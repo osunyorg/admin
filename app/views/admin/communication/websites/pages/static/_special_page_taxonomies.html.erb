@@ -2,12 +2,7 @@
 if page.special_page_categories
   categories = page.special_page_categories
   taxonomies = categories.taxonomies.ordered
-  # TODO do a scope to simplify that
-  free_categories_ids = []
-  categories.each do |category|
-    free_categories_ids << category.id unless category.in_taxonomy?
-  end
-  free_categories = categories.where(id: free_categories_ids)
+  free_categories = categories.out_of_taxonomy
   %>
 special_page_taxonomies:
   - name: "<%= t('category.title') %>"
