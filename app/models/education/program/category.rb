@@ -3,6 +3,7 @@
 # Table name: education_program_categories
 #
 #  id            :uuid             not null, primary key
+#  bodyclass     :string
 #  is_taxonomy   :boolean          default(FALSE)
 #  position      :integer
 #  created_at    :datetime         not null

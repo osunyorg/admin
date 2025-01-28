@@ -1,6 +1,7 @@
 module AsCategory
   extend ActiveSupport::Concern
 
+  include Bodyclassed
   include Orderable
   include WithTree
 

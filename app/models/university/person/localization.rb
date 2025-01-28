@@ -2,24 +2,26 @@
 #
 # Table name: university_person_localizations
 #
-#  id               :uuid             not null, primary key
-#  biography        :text
-#  first_name       :string
-#  last_name        :string
-#  linkedin         :string
-#  mastodon         :string
-#  meta_description :text
-#  name             :string
-#  picture_credit   :text
-#  slug             :string           indexed
-#  summary          :text
-#  twitter          :string
-#  url              :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  about_id         :uuid             indexed
-#  language_id      :uuid             indexed
-#  university_id    :uuid             indexed
+#  id                    :uuid             not null, primary key
+#  biography             :text
+#  featured_image_alt    :text
+#  featured_image_credit :text
+#  first_name            :string
+#  last_name             :string
+#  linkedin              :string
+#  mastodon              :string
+#  meta_description      :text
+#  name                  :string
+#  picture_credit        :text
+#  slug                  :string           indexed
+#  summary               :text
+#  twitter               :string
+#  url                   :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  about_id              :uuid             indexed
+#  language_id           :uuid             indexed
+#  university_id         :uuid             indexed
 #
 # Indexes
 #
