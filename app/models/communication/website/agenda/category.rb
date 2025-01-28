@@ -38,11 +38,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_and_belongs_to_many :events,
-                          class_name: 'Communication::Website::Agenda::Event',
-                          join_table: :communication_website_agenda_events_categories,
-                          foreign_key: :communication_website_agenda_category_id,
-                          association_foreign_key: :communication_website_agenda_event_id
+  has_and_belongs_to_many :events
 
   def event_localizations
     Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)

@@ -33,6 +33,7 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path kind)
 
   include AsDirectObject
+  include Categorizable
   include Duplicable
   include Filterable
   include Localizable
@@ -52,11 +53,6 @@ class Communication::Website::Page < ApplicationRecord
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id,
              dependent: :destroy
-  has_and_belongs_to_many :categories,
-                          class_name: 'Communication::Website::Page::Category',
-                          join_table: :communication_website_pages_categories,
-                          foreign_key: :communication_website_page_id,
-                          association_foreign_key: :communication_website_page_category_id
 
   after_save :touch_elements_if_special_page_in_hierarchy
 
@@ -94,7 +90,7 @@ class Communication::Website::Page < ApplicationRecord
         unaccent(communication_website_page_localizations.title) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
-  scope :for_category, -> (category_id, language = nil) { joins(:categories).where(communication_website_page_categories: { id: category_id }).distinct }
+
   scope :for_published, -> (published, language) {
     joins(:localizations)
       .where(communication_website_page_localizations: { language_id: language.id , published: published == 'true'})
