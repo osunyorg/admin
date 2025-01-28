@@ -134,7 +134,7 @@ RSpec.describe 'University::Organization::Category' do
           categories: {
             type: :array,
             items: {
-              '$ref': '#/components/schemas/university_organization_categories'
+              '$ref': '#/components/schemas/university_organization_category'
             }
           }
         },
