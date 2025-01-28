@@ -2,7 +2,7 @@
 categories_class = about.categories.klass
 categories_in_university = categories_class.where(university: current_university)
 taxonomies = categories_in_university.taxonomies.ordered
-free_categories = categories_in_university.free.root
+free_categories = categories_in_university.free
 free_categories_in_use = about.categories.merge(free_categories)
 # TODO manage child free categories
 %>

@@ -39,6 +39,7 @@ class Communication::Website::Post::Category < ApplicationRecord
                           class_name: 'Education::Program',
                           optional: true
   has_and_belongs_to_many :posts
+  alias                   :category_objects :posts
 
   def post_localizations
     Communication::Website::Post::Localization.where(about_id: post_ids)
