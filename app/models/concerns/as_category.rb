@@ -16,17 +16,14 @@ module AsCategory
 
     scope :taxonomies, -> { root.where(is_taxonomy: true) }
     # Taxons IN a taxonomy have is_taxonomy = false
-    scope :free, -> { where(is_taxonomy: false) }
+    scope :free, -> { root.where(is_taxonomy: false) }
 
     scope :in_taxonomy, -> (taxonomy) { where(id: taxonomy.descendants.pluck(:id)) }
     # All categories that are not taxonomies, nor belongs to a taxonomy
     scope :out_of_taxonomy, -> {
-      ids = taxonomies.map { |taxonomy|
-        # The taxonomy itself
-        [taxonomy.id] + 
-        # All descendants
-        taxonomy.descendants.pluck(:id) 
-      }.flatten.compact
+      ids = taxonomies.map { |taxonomy| taxonomy.descendants_and_self.pluck(:id) }
+                      .flatten
+                      .compact
       where.not(id: ids) }
   end
 
