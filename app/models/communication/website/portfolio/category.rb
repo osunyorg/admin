@@ -38,11 +38,7 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_and_belongs_to_many :projects,
-                          class_name: 'Communication::Website::Portfolio::Project',
-                          join_table: :communication_website_portfolio_categories_projects,
-                          foreign_key: :communication_website_portfolio_category_id,
-                          association_foreign_key: :communication_website_portfolio_project_id
+  has_and_belongs_to_many :projects
   alias                   :category_objects :projects
 
   def project_localizations
