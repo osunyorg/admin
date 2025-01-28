@@ -61,10 +61,6 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
-  def objects_in(language)
-    projects.published_now_in(language)
-  end
-
   protected
 
   def last_ordered_element
