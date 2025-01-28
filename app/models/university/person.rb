@@ -45,6 +45,7 @@
 #
 class University::Person < ApplicationRecord
   include AsIndirectObject
+  include Categorizable
   include Filterable
   include Sanitizable
   include Searchable
@@ -65,10 +66,6 @@ class University::Person < ApplicationRecord
   enum :gender, { male: 0, female: 1, non_binary: 2 }
 
   belongs_to :user, optional: true
-
-  has_and_belongs_to_many :categories,
-                          class_name: 'University::Person::Category',
-                          join_table: :university_people_categories
 
   validates :email,
             uniqueness: { scope: :university_id },
@@ -110,7 +107,6 @@ class University::Person < ApplicationRecord
     .order("localization_last_name ASC, localization_first_name ASC")
   }
 
-  scope :for_category, -> (category_id, language = nil) { joins(:categories).where(university_person_categories: { id: category_id }).distinct }
   scope :for_program, -> (program_id, language = nil) {
     left_joins(:education_programs_as_administrator, :education_programs_as_teacher)
       .where(education_programs: { id: program_id })

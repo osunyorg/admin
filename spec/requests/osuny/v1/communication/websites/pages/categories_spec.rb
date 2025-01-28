@@ -153,7 +153,7 @@ RSpec.describe 'Communication::Website::Page::Category' do
           categories: {
             type: :array,
             items: {
-              '$ref': '#/components/schemas/communication_website_page_categories'
+              '$ref': '#/components/schemas/communication_website_page_category'
             }
           }
         },

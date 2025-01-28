@@ -2,7 +2,7 @@ env:
   browser: true
 extends: "eslint:recommended"
 overrides:
-  - files: ["app/javascript/**/*.js", "*.vue"]
+  - files: ["app/javascript/**/*.js", "*.vue", "*.mjs"]
     env:
       browser: true
       es6: true

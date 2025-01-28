@@ -73,6 +73,7 @@ class Ability::Admin < Ability
     can :manage, Communication::Website::Menu, university_id: @user.university_id
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id
+    can :manage, Communication::Website::Page::Category, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
   end
 
