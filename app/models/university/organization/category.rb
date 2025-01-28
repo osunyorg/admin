@@ -2,13 +2,14 @@
 #
 # Table name: university_organization_categories
 #
-#  id            :uuid             not null, primary key
-#  is_taxonomy   :boolean          default(FALSE)
-#  position      :integer          default(0)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  parent_id     :uuid             indexed
-#  university_id :uuid             not null, indexed
+#  id                   :uuid             not null, primary key
+#  is_taxonomy          :boolean          default(FALSE)
+#  migration_identifier :string
+#  position             :integer          default(0)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  parent_id            :uuid             indexed
+#  university_id        :uuid             not null, indexed
 #
 # Indexes
 #
@@ -24,11 +25,10 @@ class University::Organization::Category < ApplicationRecord
   include AsCategory
   include AsIndirectObject
   include Localizable
+  include WithOpenApi
   include WithUniversity
 
-  has_and_belongs_to_many :organizations,
-                          class_name: 'University::Organization',
-                          join_table: :university_organizations_categories
+  has_and_belongs_to_many :organizations
 
   def dependencies
     localizations

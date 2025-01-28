@@ -1,11 +1,4 @@
 namespace :app do
-  desc 'Start server'
-  task :start do
-    sh 'yarn'
-    sh 'rails tmp:cache:clear'
-    sh 'rails server'
-  end
-
   desc 'Fix things'
   task fix: :environment do
     Migrations::MenuUrl.migrate

@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.3.6"
+ruby "3.4.1"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_storage_validations", "~> 1"
@@ -42,6 +42,7 @@ gem "image_processing"
 gem "jbuilder"
 gem "jquery-rails"
 gem "jquery-ui-rails", git: "https://github.com/jquery-ui-rails/jquery-ui-rails.git", tag: "v7.0.0"
+gem "jsbundling-rails", "~> 1.3"
 gem "kamifusen"#, path: "../kamifusen"
 gem "kaminari"
 gem "leaflet-rails"

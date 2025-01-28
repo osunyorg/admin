@@ -4,15 +4,10 @@
       <div class="<%= osuny_card_classes %>">
         <%= osuny_thumbnail_localized person, large: true %>
         <div class="card-body">
-          <p class="mb-1">
-            <%= osuny_published_localized person %>
-            <%= osuny_link_localized  person,
-                                      admin_university_person_path(person),
-                                      classes: 'stretched-link'  %>
-          </p>
-          <p class="small text-muted mb-0">
-            <%= sanitize person.localization_for(current_language)&.summary.to_s %>
-          </p>
+          <%= osuny_published_localized person %>
+          <%= osuny_link_localized  person,
+                                    admin_university_person_path(person),
+                                    classes: 'stretched-link'  %>
         </div>
       </div>
     </div>

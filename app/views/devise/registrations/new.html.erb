@@ -9,7 +9,7 @@
     <div class="col-lg-6">
       <%= f.input :email,
                   required: true,
-                  input_html: { autocomplete: "email" } %>
+                  input_html: { autocomplete: "email", value: params[:email] } %>
       <%= f.input :first_name,
                   required: true,
                   autofocus: true,

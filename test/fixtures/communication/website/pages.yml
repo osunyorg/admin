@@ -1,17 +1,20 @@
-page_root:
+root_page:
   type: Communication::Website::Page::Home
   position: 1
   website: website_with_github
   university: default_university
 
-page_test:
+test_page:
+  migration_identifier: test-page-fixture-1
   position: 1
-  parent: page_root
+  parent: root_page
+  categories:
+   - test_category
   website: website_with_github
   university: default_university
 
 page_with_no_dependency:
   position: 2
-  parent: page_root
+  parent: root_page
   website: website_with_github
   university: default_university

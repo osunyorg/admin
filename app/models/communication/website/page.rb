@@ -34,6 +34,7 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path kind)
 
   include AsDirectObject
+  include Categorizable
   include Duplicable
   include Filterable
   include Localizable
@@ -41,6 +42,7 @@ class Communication::Website::Page < ApplicationRecord
   include Sanitizable
   include WithAutomaticMenus
   include WithMenuItemTarget
+  include WithOpenApi
   include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before WithPublication
   include WithTree
   include WithUniversity
@@ -89,6 +91,7 @@ class Communication::Website::Page < ApplicationRecord
         unaccent(communication_website_page_localizations.title) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
+
   scope :for_published, -> (published, language) {
     joins(:localizations)
       .where(communication_website_page_localizations: { language_id: language.id , published: published == 'true'})
@@ -96,7 +99,8 @@ class Communication::Website::Page < ApplicationRecord
   scope :for_full_width, -> (full_width, language = nil) { where(full_width: full_width == 'true') }
 
   def dependencies
-    localizations.in_languages(website.active_language_ids)
+    localizations.in_languages(website.active_language_ids) +
+    categories
   end
 
   def references

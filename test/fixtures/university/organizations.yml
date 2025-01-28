@@ -14,4 +14,6 @@ noesya:
   longitude: -0.565434
   nic: "00031"
   siren: "902773050"
+  categories:
+    - test_category
   university: default_university

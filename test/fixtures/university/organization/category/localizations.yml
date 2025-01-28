@@ -1,0 +1,23 @@
+test_category_fr:
+  migration_identifier: test-organization-category-fixture-1-fr
+  name: Catégorie de test
+  slug: categorie-de-test
+  about: test_category
+  language: fr
+  university: default_university
+
+test_taxonomy_fr:
+  migration_identifier: test-organization-category-fixture-2-fr
+  name: Taxonomie de test
+  slug: taxonomie-de-test
+  about: test_taxonomy
+  language: fr
+  university: default_university
+
+test_taxonomy_item_fr:
+  migration_identifier: test-organization-category-fixture-3-fr
+  name: Élément de taxonomie de test
+  slug: element-de-taxonomie-de-test
+  about: test_taxonomy_item
+  language: fr
+  university: default_university

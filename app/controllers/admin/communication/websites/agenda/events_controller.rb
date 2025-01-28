@@ -79,8 +79,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Website::Agenda::Event.model_name.human(count: 2),
-                    admin_communication_website_agenda_events_path
     breadcrumb_for @event
   end
 

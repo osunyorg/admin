@@ -6,6 +6,7 @@ selectable ||= false
 if small
   hide_buttons = true
 end
+link_to_all ||= false
 %>
 <% if posts.none? %>
   <p><%= t('communication.website.posts.none') %></p>
@@ -52,7 +53,7 @@ end
                                             ),
                                             classes: 'stretched-link' %>
                 </div>
-                <div class="card-footer d-none d-lg-block">
+                <div class="card-footer small text-muted d-none d-lg-block">
                   <% if !hide_buttons && post.pinned_in?(current_language) %>
                     <span class="badge border border-subtle text-dark">
                     <%= Communication::Website::Post::Localization.human_attribute_name('pinned') %>
@@ -66,6 +67,15 @@ end
                   <% end %>
                 </div>
               </div>
+            </td>
+          </tr>
+        <% end %>
+        <% if link_to_all %>
+          <tr>
+            <td>
+
+              <%= render 'admin/application/components/all',
+                          link: admin_communication_website_posts_path(website_id: @website) %>
             </td>
           </tr>
         <% end %>

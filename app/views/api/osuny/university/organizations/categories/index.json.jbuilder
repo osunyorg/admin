@@ -1,0 +1,1 @@
+json.partial! "api/osuny/university/organizations/categories/category", collection: @categories, as: :category

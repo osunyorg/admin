@@ -99,7 +99,7 @@ class University::Person::Involvement < ApplicationRecord
   end
 
   def set_university_id
-    self.university_id = person.university_id
+    self.university_id = person&.university_id
   end
 
 end

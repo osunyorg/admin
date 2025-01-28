@@ -17,11 +17,12 @@ class Admin::Research::JournalsController < Admin::Research::Journals::Applicati
     @papers = @journal.papers
                       .ordered(current_language)
                       .limit(10)
-    @kinds =  @journal.kinds
-                      .ordered(current_language)
+    @paper_kinds =  @journal.paper_kinds
+                            .ordered(current_language)
     @volumes =  @journal.volumes
                         .ordered(current_language)
                         .limit(6)
+    @hero_summary = true
     breadcrumb
   end
 

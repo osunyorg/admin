@@ -446,11 +446,15 @@ fr:
           pages:
             description: Une mise en avant d'une sélection de pages, avec plusieurs options d'affichage.
             edit:
+              category_id:
+                label: Catégorie
+                placeholder: Sélectionner une catégorie
               main_page:
                 title: Page principale
               mode:
                 label: Type de liste
                 options:
+                  category: Une catégorie spécifique de pages
                   children: La page principale et ses enfants
                   selection: Une sélection spécifique de pages
               option_image:
@@ -559,9 +563,9 @@ fr:
                   categories: La liste des catégories d'actualités
                   category: Une catégorie spécifique
                   selection: Une sélection d'actualités
-                placeholder: Entrer la quantité
               posts_quantity:
                 label: Quantité d'articles
+                placeholder: Entrer la quantité
             layouts:
               alternate:
                 description: Une alternance très légère graphiquement d'articles entre la gauche et la droite de la page.

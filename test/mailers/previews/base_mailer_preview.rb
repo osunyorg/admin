@@ -10,8 +10,16 @@ class BaseMailerPreview < ActionMailer::Preview
     @user ||= university.users.first
   end
 
+  def person
+    @person ||= university.people.first
+  end
+
   def website
     @website ||= university.communication_websites.first
+  end
+
+  def extranet
+    @extranet ||= university.communication_extranets.first
   end
 
   def organizations_import
