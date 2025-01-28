@@ -1,12 +1,7 @@
 <%
 category_l10n = category.localization_for(language)
 if category_l10n.present?
-  hugo = category_l10n.hugo(@website)
-  count = category.count_objects_in(language)
-  if count > 0
-  %>
+  hugo = category_l10n.hugo(@website) %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
         name: "<%= prepare_text_for_static category_l10n.to_s %>"
-        count: <%= category.count_objects_in(language) %>
-<% end
-end %>
+<% end %>
