@@ -1,14 +1,10 @@
 <div class="card">
   <div class="ratio rounded-top bg-light" style="--bs-aspect-ratio: 62.5%">
-    <%= kamifusen_tag website.screenshot,
-                      width: 500,
-                      class:'img-fluid' if website.screenshot.attached? %>
+    <%= kamifusen_tag website.screenshot, class:'img-fluid' if website.screenshot.attached? %>
   </div>
   <div class="card-body border-top border-light">
     <%= osuny_link_localized  website,
-                              admin_communication_website_path(
-                                id: website.id
-                              ),
+                              admin_communication_website_path(id: website.id),
                               classes: 'stretched-link' %>
   </div>
 </div>
