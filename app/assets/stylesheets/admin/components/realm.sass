@@ -1,7 +1,7 @@
 .realm
     background: $gray-900
-    position: relative
     min-height: 500px
+    position: relative
     @include media-breakpoint-up(lg)
         height: calc(100vh - 60px - 60px)
         overflow: hidden
@@ -46,15 +46,15 @@
                 filter: invert(1)
     &__image
         @include media-breakpoint-up(lg)
-            position: absolute
-            top: 0
-            left: calc(50% + 1.5rem)
             bottom: 0
+            left: calc(50% + 1.5rem)
+            position: absolute
             right: 0
+            top: 0
             img
-                width: 100%
                 height: 100%
                 object-fit: cover
+                width: 100%
         @include media-breakpoint-down(lg)
             img
                 width: 100%
