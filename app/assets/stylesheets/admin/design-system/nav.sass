@@ -22,6 +22,10 @@
         color: $gray-700
         margin-left: -1rem
         margin-right: -1rem
+    .image
+        border-radius: 100%
+        margin-bottom: 20px
+        width: 100px
     ul
         list-style-type: none
         margin-bottom: 0
@@ -82,9 +86,12 @@
                 background-color: $gray-800 !important
     .submenu
         background-color: black !important
-        margin-left: 0.5rem !important
         min-width: 200px
         padding-top: 0
+        @include media-breakpoint-down(lg)
+            transform: translateX(140px) !important
+        @include media-breakpoint-up(lg)
+            margin-left: 0.5rem !important
         &__image
             margin: 0
             padding: 0

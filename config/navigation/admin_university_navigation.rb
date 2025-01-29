@@ -17,31 +17,31 @@ SimpleNavigation::Configuration.run do |navigation|
     if feature_education?
       primary.item :education, Education.model_name.human, admin_education_root_path, { image: 'admin/education-thumb.jpg' } do |secondary|
         load_from_parts Education, secondary
-        secondary.item :education_rel, 'Ressources éducatives', nil, html: { class: 'disabled' }
-        secondary.item :education_feedbacks, 'Feedbacks', nil, html: { class: 'disabled' }
+        secondary.item :education_rel, 'Ressources éducatives', nil
+        secondary.item :education_feedbacks, 'Feedbacks', nil
       end
     end
 
     if feature_research?
       primary.item :research, Research.model_name.human, admin_research_root_path, { image: 'admin/research-thumb.jpg' } do |secondary|
         load_from_parts Research, secondary
-        secondary.item :research_watch, 'Veille', nil, html: { class: 'disabled' }
+        secondary.item :research_watch, 'Veille', nil
       end
     end
 
     if feature_communication?
       primary.item :communication, Communication.model_name.human, admin_communication_root_path, { image: 'admin/communication-thumb.jpg' } do |secondary|
         load_from_parts Communication, secondary
-        secondary.item :communication_newsletters, 'Lettres d\'information', nil, html: { class: 'disabled' }
+        secondary.item :communication_newsletters, 'Lettres d\'information', nil
       end
     end
 
     if feature_administration?
       primary.item :administration, Administration.model_name.human, admin_administration_root_path, { image: 'admin/administration-thumb.jpg' } do |secondary|
         load_from_parts Administration, secondary
-        secondary.item :administration_admissions, 'Admissions', nil, html: { class: 'disabled' }
-        secondary.item :administration_internship, 'Stages', nil, html: { class: 'disabled' }
-        secondary.item :administration_statistics, 'Statistiques', nil, html: { class: 'disabled' }
+        secondary.item :administration_admissions, 'Admissions', nil
+        secondary.item :administration_internship, 'Stages', nil
+        secondary.item :administration_statistics, 'Statistiques', nil
       end
     end
 

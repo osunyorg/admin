@@ -14,6 +14,8 @@
         flex-direction: column
         height: 100%
         padding: 1.5rem
+        @include media-breakpoint-down(lg)
+            min-height: 70vh
         @include media-breakpoint-up(lg)
             padding: 4rem
             width: calc(50% + 1.5rem)

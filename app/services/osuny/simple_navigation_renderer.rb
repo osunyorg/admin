@@ -16,22 +16,30 @@ class Osuny::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
     li += " active" if item.selected?
     li += " dropend" if has_sub_navigation
     li += "\">"
-    li += make_a(item)
+    li += make_item(item)
     li += make_subnavigation(item) if has_sub_navigation
     li += '</li>'
     li
   end
 
-  def make_a(item)
+  def make_item(item)
+    item.url.present? ? make_item_with_url(item) : make_item_without_url(item)
+  end
+
+  def make_item_with_url(item)
     has_sub_navigation = consider_sub_navigation?(item)
-    a = "<a href=\"#{ item.url }\" class=\"nav-link"
-    a += " dropdown-toggle" if has_sub_navigation
-    a += "\""
-    a += " data-bs-toggle=\"dropdown\" aria-expanded=\"false\"" if has_sub_navigation
-    a += ">"
-    a += item.name
-    a += "</a>"
+    a = "<a href=\"#{ item.url }\" "
+    if has_sub_navigation
+      a += "class=\"nav-link dropdown-toggle\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\""
+    else
+      a += "class=\"nav-link\""
+    end
+    a += ">#{item.name}</a>"
     a
+  end
+
+  def make_item_without_url(item)
+    "<span class=\"nav-link\">#{item.name}</span>"
   end
 
   def make_subnavigation(item)
