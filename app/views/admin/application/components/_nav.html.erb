@@ -47,6 +47,20 @@ languages = current_university.languages.ordered
       <% context = current_university.is_really_a_university? ? 'navigation/admin_university' : 'navigation/admin' %>
       <%= render_navigation context: context %>
       <hr>
+      <div class="favorites">
+        <p class="section"><%= User::Favorite.model_name.human(count: 2) %></p>
+        <ul class="navbar-nav">
+          <% Communication::Website.organized_for(current_user, current_language).each do |website|
+            l10n = website.best_localization_for(current_language) %>
+            <li class="nav-item">
+              <%= link_to [:admin, website], class: 'nav-link' do %>
+                <span class="initials"><%= l10n.initials %></span>
+                <%= l10n.to_s.truncate(28) %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
 

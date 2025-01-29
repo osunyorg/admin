@@ -123,6 +123,26 @@ class Communication::Website < ApplicationRecord
     order(created_at: :desc)
   }
 
+  def self.organized_for(user, language, limit: 6)
+    university = user.university
+    # Favorites first
+    favorites_ids = user.favorites.websites.pluck(:about_id)
+    websites =  university.websites
+                          .where(id: favorites_ids)
+                          .ordered(language)
+                          .collect(&:website)
+    # Then the rest
+    if websites.count < limit
+      remaining = limit - websites.count
+      websites += university.websites
+                            .where.not(id: favorites_ids)
+                            .ordered(language)
+                            .limit(limit - websites.count)
+                            .collect(&:website)
+    end
+    websites
+  end
+
   def to_s
     original_localization.to_s
   end
