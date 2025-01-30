@@ -3,6 +3,7 @@
 # Table name: communication_media_categories
 #
 #  id            :uuid             not null, primary key
+#  bodyclass     :string
 #  is_taxonomy   :boolean          default(FALSE)
 #  position      :integer          default(0)
 #  created_at    :datetime         not null

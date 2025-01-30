@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_28_084758) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_30_155839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -347,6 +347,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_28_084758) do
     t.uuid "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "bodyclass"
     t.index ["parent_id"], name: "index_communication_media_categories_on_parent_id"
     t.index ["university_id"], name: "index_communication_media_categories_on_university_id"
   end
