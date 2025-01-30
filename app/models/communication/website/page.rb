@@ -119,6 +119,11 @@ class Communication::Website::Page < ApplicationRecord
     classes.join(' ')
   end
 
+  # Pages do have a category, but we do not list all the existing pages categories
+  def special_page_categories
+    false
+  end
+
   def siblings
     self.class.unscoped
               .where(parent: parent, university: university, website: website)

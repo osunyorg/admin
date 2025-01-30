@@ -8,8 +8,19 @@
   <% end %>
 <% end %>
 
-<%= render 'admin/application/favorites/show' %>
-<%= render 'admin/dashboard/chronicles' %>
+<div class="row">
+  <div class="col-lg-8">
+    <%= osuny_panel Communication::Website.model_name.human(count: 2) do %>
+      <%= render 'admin/communication/websites/list', 
+                  websites: Communication::Website.organized_for(current_user, current_language),
+                  large: true %>
+    <% end %>
+    <%= render 'admin/application/favorites/show' %>
+  </div>
+  <div class="offset-lg-1 col-lg-3">
+    <%= render 'admin/dashboard/chronicles' %>
+  </div>
+</div>
 
 <% if current_university.is_really_a_university? %>
   <%= render 'admin/dashboard/really_a_university' %>

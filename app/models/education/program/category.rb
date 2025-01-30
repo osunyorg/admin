@@ -27,4 +27,13 @@ class Education::Program::Category < ApplicationRecord
   include WithUniversity
 
   has_and_belongs_to_many :programs
+  alias                   :category_objects :programs
+
+  def dependencies
+    localizations
+  end
+
+  def references
+    programs
+  end
 end

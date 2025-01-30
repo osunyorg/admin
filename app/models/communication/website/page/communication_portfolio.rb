@@ -21,4 +21,8 @@ class Communication::Website::Page::CommunicationPortfolio < Communication::Webs
   def git_path_relative
     'projects/_index.html'
   end
+
+  def special_page_categories
+    website.portfolio_categories
+  end
 end

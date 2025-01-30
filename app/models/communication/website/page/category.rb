@@ -41,6 +41,7 @@ class Communication::Website::Page::Category < ApplicationRecord
                           class_name: 'Education::Program',
                           optional: true
   has_and_belongs_to_many :pages
+  alias                   :category_objects :pages
 
   def page_localizations
     Communication::Website::Page::Localization.where(about_id: page_ids)

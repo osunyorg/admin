@@ -1,5 +1,5 @@
 <%= osuny_panel t('admin.chronicles.title') do %>
-  <div id="chronicles-feed" class="row g-4 pb-3 mb-3" style="max-height:60vh; overflow-y: scroll"></div>
+  <div id="chronicles-feed"></div>
 <% end %>
 
 <script nonce="<%= request.content_security_policy_nonce %>">
@@ -22,21 +22,18 @@ fetch(RSS_URL)
       let date = new Date(pubDate.textContent);
       let description = item.querySelector("description");
       html += `
-        <div class="col-lg-6 col-xl-4 col-xxl-3">
-          <div class="card h-100">
-            <div class="card-body">
-              <h3 class="card-title">${title.textContent}</h3>
-              <p class="small">${description.textContent}</p>
-            </div>
-            <p class="card-footer mb-1 small text-end">
-              ${date.getMonth()+1}/${date.getFullYear()}
-              — 
-              <a href="${link.textContent}" target="_blank" rel="noopener">
-                <%= t('admin.chronicles.read_more') %>
-              </a>
-            </p>
-          </div>
-        </div>
+        <article class="mb-3 position-relative">
+          <p class="mb-0"><b>${title.textContent}</b></p>
+          <p class="">${description.textContent}</p>
+          <p class="small">
+            ${date.getMonth()+1}/${date.getFullYear()}
+            — 
+            <a href="${link.textContent}" target="_blank" rel="noopener">
+              <%= t('admin.chronicles.read_more') %>
+            </a>
+          </p>
+        </article>
+        <hr>
         `;
       index += 1;
     });
