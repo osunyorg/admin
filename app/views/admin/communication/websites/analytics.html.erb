@@ -1,6 +1,7 @@
 <% content_for :title, t('communication.website.analytics') %>
 
-<iframe plausible-embed 
+<iframe plausible-embed
+        class="mt-1"
         src="<%= @website.plausible_url %>&embed=true&theme=light&background=transparent" 
         scrolling="no" 
         frameborder="0" 
