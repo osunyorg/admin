@@ -28,7 +28,7 @@ module AsCategory
   end
 
   def dependencies
-    [parent] + children
+    [parent]
   end
 
   def possible_taxonomy?
