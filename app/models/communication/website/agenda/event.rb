@@ -36,6 +36,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Duplicable
   include Filterable
   include Sanitizable
+  include Searchable
   include Localizable
   include WithMenuItemTarget
   include WithOpenApi
