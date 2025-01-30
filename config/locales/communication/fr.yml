@@ -88,6 +88,7 @@ fr:
         original_byte_size: Poids
         original_content_type: Type de contenu
         original_filename: Nom du fichier original
+        original_uploaded_file: Fichier original
       communication/media/collection/localization:
         name: Nom
       communication/media/localization:

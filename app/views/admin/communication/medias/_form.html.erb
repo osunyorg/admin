@@ -7,6 +7,7 @@
     <div class="row">
       <div class="col-lg-6">
         <%= lf.input :name %>
+        <%= f.input :original_uploaded_file, as: :file, input_html: { accept: default_images_formats_accepted } %>
         <%= f.association :collection,
                           collection: osuny_collection(
                             current_university.communication_media_collections,
@@ -17,11 +18,11 @@
       <div class="col-lg-6">
         <%= lf.input :alt,
                       label: t('featured_image.alt.label'),
-                      hint: t('featured_image.alt.hint'), 
-                      input_html: { 
+                      hint: t('featured_image.alt.hint'),
+                      input_html: {
                         data: {
                           translatable: true
-                        } 
+                        }
                       } %>
         <%= lf.input :credit,
                       as: :summernote,
@@ -30,7 +31,7 @@
                       input_html: {
                         data: {
                           translatable: true,
-                          'summernote-config' => 'link' 
+                          'summernote-config' => 'link'
                         }
                       } %>
       </div>

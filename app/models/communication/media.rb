@@ -33,6 +33,8 @@ class Communication::Media < ApplicationRecord
   include LocalizableOrderByNameScope
   include WithUniversity
 
+  attr_accessor :original_uploaded_file
+
   enum :origin, {
     upload: 1,    # file uploaded (default)
     unsplash: 11, # file imported from Unsplash
@@ -51,6 +53,8 @@ class Communication::Media < ApplicationRecord
   has_many                :blobs,
                           through: :contexts,
                           source: :active_storage_blob
+
+  before_validation :create_original_blob_from_upload, on: :create, if: :original_uploaded_file
 
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)
@@ -130,5 +134,19 @@ class Communication::Media < ApplicationRecord
     l10n.alt = alt
     l10n.credit = credit
     l10n.save
+  end
+
+  def create_original_blob_from_upload
+    return unless original_uploaded_file.is_a?(ActionDispatch::Http::UploadedFile)
+    blob = ActiveStorage::Blob.create_and_upload!(
+      io: original_uploaded_file.open,
+      filename: original_uploaded_file.original_filename,
+      content_type: original_uploaded_file.content_type
+    )
+    blob.update_column :university_id, university_id
+    self.original_blob_id = blob.id
+    self.original_filename = blob.filename.to_s
+    self.original_content_type = blob.content_type
+    self.original_byte_size = blob.byte_size
   end
 end

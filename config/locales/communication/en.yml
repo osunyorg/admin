@@ -88,6 +88,7 @@ en:
         original_byte_size: Size
         original_content_type: Content type
         original_filename: Original filename
+        original_uploaded_file: Original file
       communication/media/collection/localization:
         name: Name
       communication/media/localization:
