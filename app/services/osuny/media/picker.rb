@@ -71,7 +71,12 @@ class Osuny::Media::Picker
   end
 
   def about
-    @about ||= about_type.constantize.find_by(university: university, id: about_id)
+    @about ||= PolymorphicObjectFinder.find(
+      { about_type: about_type, about_id: about_id },
+      key: :about,
+      university: university,
+      mandatory_module: WithFeaturedImage
+    )
   end
 
   protected
