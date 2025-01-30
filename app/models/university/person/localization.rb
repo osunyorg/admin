@@ -43,7 +43,7 @@ class University::Person::Localization < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include WithBlobs
-  include WithFeaturedImage
+  include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
   include WithGitFiles
   include WithUniversity
 
