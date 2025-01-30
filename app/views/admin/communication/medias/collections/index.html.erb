@@ -1,0 +1,7 @@
+<% content_for :title, Communication::Media::Collection.model_name.human(count: 2) %>
+
+<%= render 'admin/communication/medias/collections/list', collections: @collections %>
+
+<% content_for :action_bar_right do %>
+  <%= create_link Communication::Media::Collection %>
+<% end %>

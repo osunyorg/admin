@@ -1,0 +1,53 @@
+<% content_for :title, @l10n %>
+
+<div class="row">
+  <div class="col-lg-5">
+    <% if @media.original_blob.representable? %>
+      <div>
+        <%= kamifusen_tag @media.original_blob, class: 'img-fluid mb-3' %>
+      </div>
+    <% end %>
+    <%= link_to t('download'),
+              download_medium_path(signed_id: @media.original_blob.signed_id),
+              class: button_classes %>
+  </div>
+  <div class="offset-lg-1 col-lg-6">
+    <%= osuny_label Communication::Media.human_attribute_name(:origin) %>
+    <p><%= @media.origin_i18n %></p>
+
+    <%= osuny_label Communication::Media.human_attribute_name(:original_filename) %>
+    <p><%= @media.original_filename %></p>
+
+    <%= osuny_label Communication::Media.human_attribute_name(:original_content_type) %>
+    <p><%= @media.original_content_type %></p>
+
+    <%= osuny_label Communication::Media.human_attribute_name(:original_byte_size) %>
+    <p><%= number_to_human_size @media.original_byte_size %></p>
+
+    <%= osuny_label Communication::Media::Localization.human_attribute_name(:name) %>
+    <p><%= @l10n.name %></p>
+
+    <% if @l10n.alt.present? %>
+      <%= osuny_label Communication::Media::Localization.human_attribute_name(:alt) %>
+      <p><%= @l10n.alt %></p>
+    <% end %>
+
+    <% if @l10n.credit.present? %>
+      <%= osuny_label Communication::Media::Localization.human_attribute_name(:credit) %>
+      <div><%= sanitize @l10n.credit %></div>
+    <% end %>
+
+    <% if @media.collection.present? %>
+      <%= osuny_label Communication::Media::Localization.human_attribute_name(:collection) %>
+      <p><%= osuny_link_localized @media.collection, admin_communication_media_collection_path(@media.collection) %><p>
+
+    <% end %>
+    
+    <%= render 'admin/application/categories/widget/show', about: @media %>
+    <%= render 'admin/communication/medias/contexts/list', media: @media %>
+  </div>
+</div>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @media %>
+<% end %>

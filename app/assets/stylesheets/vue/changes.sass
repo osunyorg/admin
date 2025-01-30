@@ -1,0 +1,19 @@
+.vue__changes
+    background: #FFFFFF
+    border: 1px solid $color-bg-soft
+    border-radius: $border-radius
+    bottom: -200px
+    left: 50%
+    padding: 10px
+    position: fixed
+    transform: translate(-50%, 0)
+    transition: bottom 0.5s ease-in-out
+    z-index: 9999
+    &--changed
+        bottom: 10px
+    &__cancel,
+    &__save
+        border: none
+    &__cancel
+        background: $color-bg-soft !important
+        margin-right: 10px

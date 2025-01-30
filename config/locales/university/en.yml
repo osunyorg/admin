@@ -9,9 +9,9 @@ en:
         default_github_access_token: Default Github access token
         default_language: Default language
         has_sso: Has SSO?
-        is_really_a_university: Is really a university
         identifier: Identifier
         invoice_date: Contribution date
+        is_really_a_university: Is really a university
         languages: Languages
         logo: Logo
         name: Name
@@ -108,11 +108,11 @@ en:
       university/person/experience:
         description: Description
         edit: Edit experience
+        from_year: Start year
+        new: Add experience
         organization: Organization
         organization_name: Organisation
-        from_year: Start year
         to_year: End year
-        new: Add experience
       university/person/involvement:
         person: Person
         target_id: ''
@@ -146,15 +146,21 @@ en:
       university/app:
         one: App
         other: Apps
+      university/organization:
+        one: Organization
+        other: Organizations
+      university/organization/category:
+        one: Category
+        other: Categories
       university/person:
         one: Person
         other: People
-      university/person/category:
-        one: Category
-        other: Categories
       university/person/alumnus:
         one: Alumnus
         other: Alumni
+      university/person/category:
+        one: Category
+        other: Categories
       university/person/experience:
         one: Professional experience
         other: Professional experiences
@@ -164,12 +170,6 @@ en:
       university/person/localization/author:
         one: Author
         other: Authors
-      university/organization:
-        one: Organization
-        other: Organizations
-      university/organization/category:
-        one: Category
-        other: Categories
       university/role:
         one: Role
         other: Roles
@@ -178,8 +178,8 @@ en:
       organization:
         kind:
           company: Company
-          non_profit: Association
           government: Government
+          non_profit: Association
   simple_form:
     hints:
       university:
@@ -207,9 +207,9 @@ en:
         tenure: "To differ from temporary lecturer."
         twitter: "Example: osuny"
       university_person_experience:
-        organization_name: "Choose the organization if it exists, by searching with name or SIREN code.<br>Otherwise create it by entering it's name."
         description: "Ex: Project manager, Communication assistant, Journalist..."
         from_year: "In charge since..."
+        organization_name: "Choose the organization if it exists, by searching with name or SIREN code.<br>Otherwise create it by entering it's name."
         to_year: "Leave blank if you are still in charge"
     include_blanks:
       defaults:
@@ -227,26 +227,26 @@ en:
       token_display_notice: Make sure to store your token somewhere safe. You won’t be able to see it again!
       token_successfully_regenerated: The token was successfully regenerated.
     description:
-      text_html: A university is an institution of higher education, study and research, made up of various establishments called, depending on the tradition, "colleges", "faculties", "institutes", "departments", "centres", "sections", "units" or specific schools, but also a library or workshop, media library or museum, etc. forming a coherent administrative whole with a defined legal status, whether public, private or possibly mixed.
-      source: Wikipedia
       parts:
-        person:
-          description: Physical person linked to a university, component, laboratory, etc.
-          description_non_university: Person, not necessarily linked to an Osuny user account
         organization:
           description: Legal entity linked to a university, component, laboratory, etc.
           description_non_university: Legal entity, whether a public organisation, a non-governmental organisation (e.g. an association) or a company
+        person:
+          description: Physical person linked to a university, component, laboratory, etc.
+          description_non_university: Person, not necessarily linked to an Osuny user account
         user:
           description: Person using Osuny, with an authenticated account
           description_non_university: Person using Osuny, with an authenticated account
+      source: Wikipedia
+      text_html: A university is an institution of higher education, study and research, made up of various establishments called, depending on the tradition, "colleges", "faculties", "institutes", "departments", "centres", "sections", "units" or specific schools, but also a library or workshop, media library or museum, etc. forming a coherent administrative whole with a defined legal status, whether public, private or possibly mixed.
     internal_key: Internal Key
     manage_cohorts: Manage cohorts
     manage_experiences: Manage experiences
     organization:
-      search: Search by name
       employees: Employees
       import_hint_html: "Possible values for <i>kind</i> are: company, non_profit, government.<br><i>Siren</i>, <i>nic</i>, <i>zipcode</i> and <i>phone</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)."
       logo: Logo
+      search: Search by name
     person:
       administrator_roles: Administrator roles
       experience:

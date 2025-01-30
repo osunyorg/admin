@@ -1,0 +1,34 @@
+<%
+# communication/website/post
+key = context.about_type.underscore.remove('/localization')
+# admin/communication/medias/contexts/communication/website/post
+partial = "admin/communication/medias/contexts/#{key}"
+%>
+<% begin %>
+<%= render partial, about: context.about %>
+<% rescue %>
+<%
+object = context.about
+# If it's a localization, get real object
+if object.respond_to?(:about)
+  object = object.about
+end
+begin
+  # TODO fix special pages
+  title = osuny_link_localized object, [:admin, object], classes: "stretched-link"
+rescue
+  title = object.to_s_in(current_language)
+end
+%>
+<div>
+  <div class="<%= osuny_card_classes(horizontal: true) %>">
+    <%= osuny_thumbnail_localized object %>
+    <div class="card-body">
+      <%= title %>
+    </div>
+    <div class="card-footer text-muted">
+      <%= object.class.model_name.human %>
+    </div>
+  </div>
+</div>
+<% end %>

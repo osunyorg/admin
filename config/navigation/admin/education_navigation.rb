@@ -12,16 +12,16 @@ SimpleNavigation::Configuration.run do |navigation|
                     controller_name == "dashboard" && action_name == "index"
                   }
     primary.item  :subnav_teachers,
-                  University::Person::Localization::Teacher.model_name.human(count: 2),
+                  t('education.description.parts.teacher.title'),
                   admin_education_teachers_path
     primary.item  :subnav_schools,
-                  Education::School.model_name.human(count: 2),
+                  t('education.description.parts.school.title'),
                   admin_education_schools_path
     primary.item  :subnav_diplomas,
-                  Education::Diploma.model_name.human(count: 2),
+                  t('education.description.parts.diploma.title'),
                   admin_education_diplomas_path
     primary.item  :subnav_programs,
-                  Education::Program.model_name.human(count: 2),
+                  t('education.description.parts.program.title'),
                   admin_education_programs_path
   end
 end
