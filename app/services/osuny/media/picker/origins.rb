@@ -32,6 +32,7 @@ class Osuny::Media::Picker::Origins
   end
 
   def import
+    clean_previous_blob
     if blob_id.present?
       import_blob
     elsif cloud_unsplash_id.present?
@@ -40,8 +41,6 @@ class Osuny::Media::Picker::Origins
       import_cloud_pexels
     elsif media_id.present?
       import_medias
-    elsif delete?
-      delete_blob
     end
   end
 
@@ -109,11 +108,18 @@ class Osuny::Media::Picker::Origins
     attach_media_to_about
   end
 
-  def delete_blob
+  # Utilities
+
+  def clean_previous_blob
+    # Delete context
+    Communication::Media::Context.where(
+      university: university,
+      about: about,
+      active_storage_blob: image.blob
+    ).destroy_all
+    # Detach image (attachment)
     image.detach
   end
-
-  # Utilities
   
   def find_or_create_media_with_checksum(checksum, origin)
     if Communication::Media.where(university: university, original_checksum: checksum).exists?
@@ -139,5 +145,6 @@ class Osuny::Media::Picker::Origins
 
   def attach_media_to_about
     media.attach(about, image_property)
+    picker.image_reset!
   end
 end

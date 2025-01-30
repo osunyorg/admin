@@ -42,6 +42,12 @@ class Osuny::Media::Picker
     @image ||= about.public_send(image_property)
   end
 
+  def image_reset!
+    @image = nil
+    @url = nil
+    about.reload
+  end
+
   def alt_property
     @alt_property ||= "#{key}_alt".to_sym
   end
@@ -72,7 +78,10 @@ class Osuny::Media::Picker
 
   def about
     @about ||= PolymorphicObjectFinder.find(
-      { about_type: about_type, about_id: about_id },
+      { 
+        about_type: about_type, 
+        about_id: about_id 
+      },
       key: :about,
       university: university,
       mandatory_module: WithFeaturedImage
