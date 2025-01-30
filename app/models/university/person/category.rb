@@ -31,9 +31,8 @@ class University::Person::Category < ApplicationRecord
   alias                   :category_objects :people
 
   def dependencies
-    super +
-    localizations +
-    [website.config_default_content_security_policy]
+    [parent] +
+    localizations
   end
 
   def references
