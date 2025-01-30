@@ -3,6 +3,7 @@
 # Table name: university_organization_categories
 #
 #  id                   :uuid             not null, primary key
+#  bodyclass            :string
 #  is_taxonomy          :boolean          default(FALSE)
 #  migration_identifier :string
 #  position             :integer          default(0)

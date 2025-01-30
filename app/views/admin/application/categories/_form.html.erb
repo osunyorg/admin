@@ -16,5 +16,6 @@
     <%= f.input :is_taxonomy, label: t('category.is_taxonomy') if category.possible_taxonomy? %>
     <%= render 'admin/application/summary/form', f: lf, about: l10n %>
     <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+    <%= f.input :bodyclass, label: t('category.bodyclass') %>
   </div>
 </div>

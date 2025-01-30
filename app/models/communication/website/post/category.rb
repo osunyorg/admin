@@ -3,6 +3,7 @@
 # Table name: communication_website_post_categories
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
 #  position                 :integer

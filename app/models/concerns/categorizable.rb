@@ -1,3 +1,4 @@
+# Attention, doit être chargé après Bodyclassed pour pouvoir s'appuyer sur best_bodyclass
 module Categorizable
   extend ActiveSupport::Concern
 
@@ -14,6 +15,13 @@ module Categorizable
       categories_table_name = _reflect_on_association(:categories).klass.table_name
       joins(:categories).where(categories_table_name => { id: category_ids }).distinct
     }
+  end
+
+  def best_bodyclass
+    original = super
+    categories_bodyclasses = categories.collect(&:bodyclass)
+    classes = add_prefix_to_classes(categories_bodyclasses, 'category')
+    "#{original} #{classes.join(' ')}"
   end
 
   protected
