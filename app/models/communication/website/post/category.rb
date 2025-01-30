@@ -47,7 +47,7 @@ class Communication::Website::Post::Category < ApplicationRecord
   end
 
   def dependencies
-    super +
+    [parent] +
     localizations.in_languages(website.active_language_ids) +
     [website.config_default_content_security_policy]
   end

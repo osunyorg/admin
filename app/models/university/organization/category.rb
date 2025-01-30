@@ -33,9 +33,8 @@ class University::Organization::Category < ApplicationRecord
   alias                   :category_objects :organizations
 
   def dependencies
-    super +
-    localizations +
-    [website.config_default_content_security_policy]
+    [parent] +
+    localizations
   end
 
   def references
