@@ -28,6 +28,8 @@ class University::Person::Category < ApplicationRecord
   include WithUniversity
 
   has_and_belongs_to_many :people
+  alias                   :university_people :people
+  alias                   :category_objects :people
 
   def dependencies
     localizations

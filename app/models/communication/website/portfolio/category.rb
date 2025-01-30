@@ -40,6 +40,7 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
                           class_name: 'Education::Program',
                           optional: true
   has_and_belongs_to_many :projects
+  alias                   :category_objects :projects
 
   def project_localizations
     Communication::Website::Portfolio::Project::Localization.where(about_id: project_ids)

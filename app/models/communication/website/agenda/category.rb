@@ -40,6 +40,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
                           class_name: 'Education::Program',
                           optional: true
   has_and_belongs_to_many :events
+  alias                   :category_objects :events
 
   def event_localizations
     Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)
