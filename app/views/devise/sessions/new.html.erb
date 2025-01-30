@@ -40,7 +40,10 @@
           <%= f.input :email,
                       required: false,
                       autofocus: true,
-                      input_html: { autocomplete: "email" } %>
+                      input_html: {
+                        autocomplete: "email",
+                        value: (resource.email.presence || params[:email])
+                      } %>
           <div class="mb-3 password optional user_password password_with_hints">
             <%= f.input :password,
                         as: :password_with_hints,
