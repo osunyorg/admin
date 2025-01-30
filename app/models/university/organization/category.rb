@@ -3,6 +3,7 @@
 # Table name: university_organization_categories
 #
 #  id                   :uuid             not null, primary key
+#  bodyclass            :string
 #  is_taxonomy          :boolean          default(FALSE)
 #  migration_identifier :string
 #  position             :integer          default(0)
@@ -29,8 +30,10 @@ class University::Organization::Category < ApplicationRecord
   include WithUniversity
 
   has_and_belongs_to_many :organizations
+  alias                   :category_objects :organizations
 
   def dependencies
+    [parent] +
     localizations
   end
 

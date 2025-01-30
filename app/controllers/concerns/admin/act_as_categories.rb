@@ -45,7 +45,7 @@ module Admin::ActAsCategories
 
   def permitted_params_for(object_key)
     params.require(object_key).permit(
-      :is_taxonomy, :parent_id,
+      :is_taxonomy, :parent_id, :bodyclass,
       localizations_attributes: [
         :id, :name, :slug, :summary, :meta_description, :language_id,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit

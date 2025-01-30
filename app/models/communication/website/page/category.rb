@@ -3,6 +3,7 @@
 # Table name: communication_website_page_categories
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
 #  migration_identifier     :string
@@ -41,14 +42,16 @@ class Communication::Website::Page::Category < ApplicationRecord
                           class_name: 'Education::Program',
                           optional: true
   has_and_belongs_to_many :pages
+  alias                   :category_objects :pages
 
   def page_localizations
     Communication::Website::Page::Localization.where(about_id: page_ids)
   end
 
   def dependencies
-    [website.config_default_content_security_policy] +
-    localizations.in_languages(website.active_language_ids)
+    [parent] +
+    localizations.in_languages(website.active_language_ids) +
+    [website.config_default_content_security_policy]
   end
 
   def references

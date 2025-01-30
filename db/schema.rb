@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_27_090219) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_28_084758) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -350,6 +350,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_090219) do
     t.boolean "is_programs_root", default: false
     t.uuid "program_id"
     t.boolean "is_taxonomy", default: false
+    t.string "bodyclass"
     t.index ["communication_website_id"], name: "idx_communication_website_agenda_cats_on_website_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_agenda_categories_on_program_id"
@@ -548,6 +549,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_090219) do
     t.string "migration_identifier"
     t.uuid "program_id"
     t.boolean "is_programs_root", default: false
+    t.string "bodyclass"
     t.index ["communication_website_id"], name: "idx_communication_website_page_cats_on_website_id"
     t.index ["parent_id"], name: "index_communication_website_page_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_page_categories_on_program_id"
@@ -652,6 +654,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_090219) do
     t.datetime "updated_at", null: false
     t.boolean "is_taxonomy", default: false
     t.uuid "program_id"
+    t.string "bodyclass"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_8f309901d4"
     t.index ["parent_id"], name: "index_communication_website_portfolio_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_portfolio_categories_on_program_id"
@@ -731,6 +734,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_090219) do
     t.uuid "program_id"
     t.boolean "is_programs_root", default: false
     t.boolean "is_taxonomy", default: false
+    t.string "bodyclass"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_post_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_post_categories_on_program_id"
@@ -953,6 +957,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_090219) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "bodyclass"
     t.index ["parent_id"], name: "index_education_program_categories_on_parent_id"
     t.index ["university_id"], name: "index_education_program_categories_on_university_id"
   end
@@ -1537,6 +1542,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_090219) do
     t.integer "position", default: 0
     t.boolean "is_taxonomy", default: false
     t.string "migration_identifier"
+    t.string "bodyclass"
     t.index ["parent_id"], name: "index_university_organization_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_organization_categories_on_university_id"
   end
@@ -1661,6 +1667,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_27_090219) do
     t.uuid "parent_id"
     t.integer "position", default: 0
     t.boolean "is_taxonomy", default: false
+    t.string "bodyclass"
     t.index ["parent_id"], name: "index_university_person_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_person_categories_on_university_id"
   end
