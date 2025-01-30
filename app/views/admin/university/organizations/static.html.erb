@@ -23,6 +23,8 @@ cache cache_key do
 <%= render 'admin/application/connections/backlinks', about: @l10n %>
 <%= render 'admin/application/static/attribute/text', about: @about, key: :long_name %>
 <%= render 'admin/application/static/attribute/text', about: organization, key: :siren %>
+text: >-
+  <%= prepare_html_for_static @l10n.text %>
 kind:
   code: "<%= organization.kind %>"
   label: "<%= organization.kind_i18n %>"
