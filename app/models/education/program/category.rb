@@ -30,8 +30,7 @@ class Education::Program::Category < ApplicationRecord
   alias                   :category_objects :programs
 
   def dependencies
-    localizations +
-    [parent]
+    super + localizations
   end
 
   def references

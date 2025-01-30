@@ -46,9 +46,8 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   end
 
   def dependencies
-    localizations.in_languages(website.active_language_ids) +
-    children +
-    [website.config_default_content_security_policy]
+    super +
+    localizations.in_languages(website.active_language_ids)
   end
 
   def references

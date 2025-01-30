@@ -31,7 +31,7 @@ class University::Person::Category < ApplicationRecord
   alias                   :category_objects :people
 
   def dependencies
-    localizations
+    super + localizations
   end
 
   def references

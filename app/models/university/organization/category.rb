@@ -32,7 +32,7 @@ class University::Organization::Category < ApplicationRecord
   alias                   :category_objects :organizations
 
   def dependencies
-    localizations
+    super + localizations
   end
 
   def references
