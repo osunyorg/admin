@@ -31,8 +31,9 @@ class Education::Program::Category < ApplicationRecord
   alias                   :category_objects :programs
 
   def dependencies
+    super +
     localizations +
-    [parent]
+    [website.config_default_content_security_policy]
   end
 
   def references

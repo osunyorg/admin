@@ -28,6 +28,10 @@ module AsCategory
       where.not(id: ids) }
   end
 
+  def dependencies
+    [parent]
+  end
+
   def possible_taxonomy?
     persisted? && parent_id.blank?
   end

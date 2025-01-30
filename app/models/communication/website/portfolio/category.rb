@@ -47,8 +47,9 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
   end
 
   def dependencies
-    [website.config_default_content_security_policy] +
-    localizations.in_languages(website.active_language_ids)
+    super +
+    localizations.in_languages(website.active_language_ids) +
+    [website.config_default_content_security_policy]
   end
 
   def references
