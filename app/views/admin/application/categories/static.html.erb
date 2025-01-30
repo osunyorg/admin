@@ -23,6 +23,7 @@ children:
 <%
 @l10n.children.ordered.each do |child|
   hugo = child.hugo(@website)
+  next if hugo.permalink.blank?
   %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
 <% end %>
