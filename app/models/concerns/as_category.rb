@@ -1,6 +1,7 @@
 module AsCategory
   extend ActiveSupport::Concern
 
+  include Bodyclassed
   include Orderable
   include WithTree
 
@@ -25,6 +26,10 @@ module AsCategory
                       .flatten
                       .compact
       where.not(id: ids) }
+  end
+
+  def dependencies
+    [parent]
   end
 
   def possible_taxonomy?

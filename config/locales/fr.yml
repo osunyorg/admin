@@ -180,6 +180,7 @@ fr:
     title: Modifier la sélection
   cancel: Annuler
   category:
+    bodyclass: Classe CSS spécifique
     children: Sous-catégories
     featured_image: Image à la une
     featured_image_alt: Texte alternatif

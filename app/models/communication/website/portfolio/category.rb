@@ -3,6 +3,7 @@
 # Table name: communication_website_portfolio_categories
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
 #  position                 :integer
@@ -46,8 +47,9 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
   end
 
   def dependencies
-    [website.config_default_content_security_policy] +
-    localizations.in_languages(website.active_language_ids)
+    [parent] +
+    localizations.in_languages(website.active_language_ids) +
+    [website.config_default_content_security_policy]
   end
 
   def references

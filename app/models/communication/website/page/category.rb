@@ -3,6 +3,7 @@
 # Table name: communication_website_page_categories
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
 #  migration_identifier     :string
@@ -48,8 +49,9 @@ class Communication::Website::Page::Category < ApplicationRecord
   end
 
   def dependencies
-    [website.config_default_content_security_policy] +
-    localizations.in_languages(website.active_language_ids)
+    [parent] +
+    localizations.in_languages(website.active_language_ids) +
+    [website.config_default_content_security_policy]
   end
 
   def references

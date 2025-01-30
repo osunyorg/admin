@@ -3,6 +3,7 @@
 # Table name: communication_website_post_categories
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
 #  position                 :integer
@@ -46,8 +47,8 @@ class Communication::Website::Post::Category < ApplicationRecord
   end
 
   def dependencies
+    [parent] +
     localizations.in_languages(website.active_language_ids) +
-    children +
     [website.config_default_content_security_policy]
   end
 

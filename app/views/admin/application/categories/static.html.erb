@@ -10,6 +10,8 @@ category = @l10n.about
             toc_offcanvas: true %>
 position: <%= category.position %>
 is_taxonomy: <%= category.is_taxonomy %>
+bodyclass: >-
+  <%= category.best_bodyclass %>
 <%
 if @l10n.parent
   hugo = @l10n.parent.hugo(@website)
