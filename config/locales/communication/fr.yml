@@ -37,6 +37,7 @@ fr:
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
+        upper_menu: Menu haut (en HTML)
       communication/extranet/localization:
         cookies_policy: Politique de cookies
         favicon: Icône de navigateur (favicon)

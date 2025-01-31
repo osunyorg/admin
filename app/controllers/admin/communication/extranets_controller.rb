@@ -124,6 +124,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
       :has_sso,
       :host,
       :sass,
+      :upper_menu,
       :sso_cert,
       :sso_mapping,
       :sso_name_identifier_format,
