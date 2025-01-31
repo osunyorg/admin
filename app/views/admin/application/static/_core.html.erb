@@ -72,7 +72,9 @@ search:
   id: "<%= about.id %>"
   url: "<%= hugo.permalink %>"
   kind: "<%= about.class.model_name %>"
+  <% if about.respond_to?(:language) %>
   lang: "<%= about.language.iso_code %>"
+  <% end %>
   title: >-
     <%= prepare_text_for_static search_title %>
   <% if about.respond_to?(:summary) %>
