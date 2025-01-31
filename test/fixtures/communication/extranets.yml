@@ -1,6 +1,7 @@
 default_extranet:
   host: extranet.osuny.test
   feature_alumni: true
+  feature_contacts: true
   about: default_program (Education::Program)
   university: default_university
   default_language: fr
