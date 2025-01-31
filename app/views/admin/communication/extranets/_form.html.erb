@@ -70,6 +70,10 @@
             <%= f.input :feature_jobs %>
           <% end %>
         <% end %>
+        <%= osuny_panel Communication::Extranet::Localization.human_attribute_name(:invitation_message) do %>
+          <%= lf.input :invitation_message_subject %>
+          <%= lf.input :invitation_message_text, input_html: { rows: 5 } %>
+        <% end %>
         <%= osuny_panel t('legal') do %>
           <%= lf.input :terms, as: :summernote %>
           <%= lf.input :privacy_policy, as: :summernote %>

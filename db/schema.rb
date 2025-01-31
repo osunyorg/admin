@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_31_065408) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_31_070408) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -250,6 +250,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_065408) do
     t.datetime "updated_at", null: false
     t.boolean "published", default: false
     t.datetime "published_at"
+    t.string "invitation_message_subject", default: ""
+    t.text "invitation_message_text", default: ""
     t.index ["about_id"], name: "index_communication_extranet_localizations_on_about_id"
     t.index ["language_id"], name: "index_communication_extranet_localizations_on_language_id"
     t.index ["university_id"], name: "index_communication_extranet_localizations_on_university_id"
