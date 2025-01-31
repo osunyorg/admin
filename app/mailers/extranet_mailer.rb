@@ -1,24 +1,22 @@
 class ExtranetMailer < ApplicationMailer
-  helper :application # gives access to all helpers defined within `application_helper`.
+  helper :application # Gives access to all helpers defined within `application_helper`
   default template_path: 'mailers/extranet'
 
   def invitation_message(extranet, person)
     @extranet = extranet
+    @university = @extranet.university
     @person = person
-    university = @extranet.university
-    merge_with_university_infos(university, {})
-
+    @language = @user.try(:language) || @university.default_language
+    @l10n = @extranet.localization_for(@language)
     @user = @person.user
-    # If the person has a user, we use the user's email in priority as it can be used for login.
+    # If the person has a user, we use the user's email in priority as it can be used for login
     @email = @user.try(:email) || @person.email
 
-    language = @user.try(:language) || university.default_language
-    @extranet_name = @extranet.to_s_in(language)
+    merge_with_university_infos(@university, {})
 
-    I18n.with_locale(language.iso_code) do
-      subject = t('mailers.extranet.invitation_message.subject', extranet: @extranet_name)
-      mail(from: university.mail_from[:full], to: @email, subject: subject) if should_send?(@email)
-    end
+    mail  from: @university.mail_from[:full],
+          to: @email,
+          subject: @l10n.invitation_message_subject if should_send?(@email)
   end
 
 end

@@ -37,10 +37,14 @@ en:
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
+        upper_menu: Upper menu (HTML)
       communication/extranet/localization:
         cookies_policy: Cookies policy
         favicon: Browser icon (favicon)
         home_sentence: Sentence displayed on homepage
+        invitation_message: Invitation message (automatically sended)
+        invitation_message_subject: Subject
+        invitation_message_text: Texte
         logo: Logo
         name: Name
         privacy_policy: Privacy policy
