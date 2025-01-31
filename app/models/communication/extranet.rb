@@ -95,7 +95,7 @@ class Communication::Extranet < ApplicationRecord
   end
 
   def alumni
-    about&.university_person_alumni
+    about.present? ? about.university_person_alumni : University::Person::Alumnus.none
   end
 
   def users
