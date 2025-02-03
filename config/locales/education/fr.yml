@@ -3,28 +3,6 @@ fr:
     models:
       education: Enseignement
   activerecord:
-    models:
-      education/academic_year:
-        one: Année
-        other: Années
-      education/cohort:
-        one: Promotion
-        other: Promotions
-      education/diploma:
-        one: Diplôme
-        other: Diplômes
-      education/program:
-        one: Formation
-        other: Formations
-      education/program/category:
-        one: Catégorie
-        other: Catégories
-      education/school:
-        one: École
-        other: Écoles
-      university/person/localization/teacher:
-        one: Enseignant·e
-        other: Enseignant·e·s
     attributes:
       education/academic_year:
         year: Année
@@ -48,9 +26,9 @@ fr:
         pedagogy: Méthodes mobilisées
         prerequisites: Prérequis
         pricing: Coûts
-        pricing_initial: Coûts de la formation initiale
-        pricing_continuing: Coûts de la formation continue
         pricing_apprenticeship: Coûts de l'apprentissage
+        pricing_continuing: Coûts de la formation continue
+        pricing_initial: Coûts de la formation initiale
         registration: Modalités et délais d’accès
         results: Indicateurs de résultats
         short_name: Nom abrégé
@@ -67,19 +45,19 @@ fr:
         qualiopi_certified: Formation certifiée Qualiopi
         roles: Rôles
         schools: Écoles proposant cette formation
-        teachers: Enseignant·e·s
+        teachers: Enseignant·es
         team: Équipe
       education/program/localization:
         accessibility: Accessibilité
         contacts: Contacts
         content: Contenus de la formation
-        duration: Durée
         downloadable_summary: Document de synthèse téléchargeable
+        duration: Durée
         evaluation: Modalités d’évaluation
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
-        is_published: Publiée
         is_draft: Brouillon
+        is_published: Publiée
         logo: Logo de la formation
         main_information: Informations essentielles
         name: Nom
@@ -90,9 +68,9 @@ fr:
         prerequisites: Prérequis
         presentation: En bref
         pricing: Coûts
-        pricing_initial: Coûts de la formation initiale
-        pricing_continuing: Coûts de la formation continue
         pricing_apprenticeship: Coûts de l'apprentissage
+        pricing_continuing: Coûts de la formation continue
+        pricing_initial: Coûts de la formation initiale
         published: Publiée ?
         qualiopi_text: Détails de la certification
         registration: Modalités et délais d’accès
@@ -115,12 +93,34 @@ fr:
       education/school/localization:
         name: Nom
         url: Site Web
+    models:
+      education/academic_year:
+        one: Année
+        other: Années
+      education/cohort:
+        one: Promotion
+        other: Promotions
+      education/diploma:
+        one: Diplôme
+        other: Diplômes
+      education/program:
+        one: Formation
+        other: Formations
+      education/program/category:
+        one: Catégorie
+        other: Catégories
+      education/school:
+        one: École
+        other: Écoles
+      university/person/localization/teacher:
+        one: Enseignant·e
+        other: Enseignant·es
   admin:
     education:
       diplomas:
-        fields_for_programs: Les champs ci-dessous servent de valeur de base aux formations
         certification:
           none: Pas de certification
+        fields_for_programs: Les champs ci-dessous servent de valeur de base aux formations
       programs:
         categories:
           root_name: Offre de formation
@@ -141,12 +141,16 @@ fr:
       parts:
         diploma:
           description: Présentation des diplômes et de leurs caractéristiques
+          title: Diplômes
         program:
           description: Présentation exhaustive des formations, de leurs contenus, modalités pédagogiques et perspectives
-        teacher:
-          description: Présentation des enseignants et enseignantes, avec leur biographie et leurs enseignements dans les différentes formations
+          title: Formations
         school:
           description: Présentation des écoles, de leurs coordonnées, enseignements, équipes et informations administratives
+          title: Écoles
+        teacher:
+          description: Présentation des enseignants et enseignantes, avec leur biographie et leurs enseignements dans les différentes formations
+          title: Enseignant·es
       source: Olivier Reboul, La philosophie de l'éducation, 2018
       text_html: L’éducation est l’ensemble des processus et des procédés qui permettent à tout enfant humain d’accéder progressivement à la culture, l’accès à la culture étant ce qui distingue l’homme de l’animal.
     manage_programs: Gérer les formations
@@ -155,15 +159,15 @@ fr:
     number_of_programs: Nombre de formations
     program:
       parts:
-        pedagogy:
-          label: Pédagogie
-          hint: Mode d'enseignement et d'évaluation, présentation de l'équipe pédagogique, débouchés et résultats obtenus par les anciens élèves
         admission:
-          label: Admission
           hint: Modalités administratives d'accès à la formation
+          label: Admission
         certification:
-          label: Certification
           hint: Certification légale (Qualiopi)
+          label: Certification
+        pedagogy:
+          hint: Mode d'enseignement et d'évaluation, présentation de l'équipe pédagogique, débouchés et résultats obtenus par les anciens élèves
+          label: Pédagogie
       registration_scheme: Régime d'inscription
     roles:
       one: Rôle
@@ -175,16 +179,16 @@ fr:
     education:
       diploma:
         level:
+          doctor: Doctorat (Bac + 8)
+          first_year: Bac + 1
+          fourth_year: Bac + 4
+          high: Lycée
+          master: Master (Bac + 5)
           not_applicable: Non applicable
           primary: École primaire
-          secondary: Collège
-          high: Lycée
-          first_year: Bac + 1
           second_year: Bac + 2
+          secondary: Collège
           third_year: Licence (Bac + 3)
-          fourth_year: Bac + 4
-          master: Master (Bac + 5)
-          doctor: Doctorat (Bac + 8)
   simple_form:
     hints:
       education_diploma:

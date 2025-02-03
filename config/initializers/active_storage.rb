@@ -55,4 +55,17 @@ Rails.application.config.to_prepare do
   end
 
   ActiveStorage::Blob.include ActiveStorageGitPathStatic
+
+  module ActiveStorageMediaLibrary
+    extend ActiveSupport::Concern
+
+    included do
+      has_many  :communication_media_contexts,
+                class_name: "Communication::Media::Context",
+                foreign_key: :active_storage_blob_id,
+                dependent: :destroy
+    end
+  end
+
+  ActiveStorage::Blob.include ActiveStorageMediaLibrary
 end

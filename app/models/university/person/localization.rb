@@ -42,6 +42,8 @@ class University::Person::Localization < ApplicationRecord
   include Contentful
   include Permalinkable
   include Sanitizable
+  include WithBlobs
+  include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
   include WithGitFiles
   include WithUniversity
 
@@ -114,6 +116,13 @@ class University::Person::Localization < ApplicationRecord
   # user in statics where we don't need the cateogries not localized
   def categories
     about.categories.ordered.map { |category| category.localization_for(language) }.compact
+  end
+
+  def explicit_blob_ids
+    [
+      picture&.blob_id,
+      featured_image&.blob_id
+    ]
   end
 
   protected
