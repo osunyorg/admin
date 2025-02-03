@@ -22,7 +22,8 @@ class Communication::Block::Template::Category < Communication::Block::Template:
   has_component :option_image,        :boolean, default: true
   has_component :option_summary,      :boolean, default: true
 
-  def categories_for_current_kind
+  # All the categories for the chosen kind
+  def available_categories
     categories_for(category_kind)
   end
 

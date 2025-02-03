@@ -3,7 +3,7 @@ class Communication::Block::Component::Category < Communication::Block::Componen
 
   def category
     return unless website
-    template.categories_for_current_kind
+    template.available_categories
             .find_by(id: data)
   end
 

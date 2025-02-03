@@ -3,7 +3,7 @@ class Communication::Block::Component::Taxonomy < Communication::Block::Componen
 
   def taxonomy
     return unless website
-    template.categories_for_current_kind
+    template.available_categories
             .find_by(id: data)
   end
 
