@@ -145,12 +145,16 @@ fr:
             edit:
               category_kind:
                 label: Type de catégories
+              description:
+                label: Description
               option_count:
                 label: Afficher le nombre d'élements dans la catégorie
               option_image:
                 label: Afficher les images des catégories
               option_summary:
                 label: Afficher les descriptions courtes des catégories
+              taxonomy_id:
+                label: Quelle taxonomie afficher ?
             layouts:
               alternate:
                 description: Une alternance très légère graphiquement de catégories, rythmée entre la gauche et la droite.
