@@ -1,6 +1,5 @@
 class Communication::Block::Template::Category < Communication::Block::Template::Base
 
-  has_elements
   has_layouts [
     :grid,
     :list,
@@ -23,16 +22,8 @@ class Communication::Block::Template::Category < Communication::Block::Template:
   has_component :option_image,        :boolean, default: true
   has_component :option_summary,      :boolean, default: true
 
-  def category_kinds_allowed
-    @category_kinds_allowed = []
-    category_kind_component.options.each do |kind|
-      b = Communication::Block.new
-      b.template_kind = kind
-      b.about = about
-      next unless b.template.allowed_for_about?
-      @category_kinds_allowed << kind
-    end
-    @category_kinds_allowed
+  def categories_for_current_kind
+    categories_for(category_kind)
   end
 
   def categories_for(category_kind)
@@ -60,12 +51,27 @@ class Communication::Block::Template::Category < Communication::Block::Template:
     end
   end
 
-  def selected_categories
-    current_categories.reject { |category| category.count_objects_in(block.language, website).zero? }
+  def taxonomies_for(category_kind)
+    categories_for(category_kind)&.taxonomies.ordered(language)
   end
 
-  def current_categories
-    categories_for(category_kind)
+  def category_kinds_allowed
+    @category_kinds_allowed = []
+    category_kind_component.options.each do |kind|
+      b = Communication::Block.new
+      b.template_kind = kind
+      b.about = about
+      next unless b.template.allowed_for_about?
+      @category_kinds_allowed << kind
+    end
+    @category_kinds_allowed
+  end
+
+  def selected_categories
+    return [] if taxonomy.nil?
+    taxonomy.children
+            .ordered(language)
+            .reject { |category| category.count_objects_in(block.language, website).zero? }
   end
 
   def taxonomy

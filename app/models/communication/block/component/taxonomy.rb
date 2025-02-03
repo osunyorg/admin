@@ -1,8 +1,9 @@
+# Used by the Category template
 class Communication::Block::Component::Taxonomy < Communication::Block::Component::Base
 
   def taxonomy
     return unless website
-    template.current_categories
+    template.categories_for_current_kind
             .find_by(id: data)
   end
 

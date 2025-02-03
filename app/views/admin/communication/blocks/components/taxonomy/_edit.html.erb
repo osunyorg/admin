@@ -1,8 +1,8 @@
 <%
 block.template.category_kinds_allowed.each do |kind|
-  categories = block.template.categories_for(kind)
-  next if categories.nil?
-  collection = osuny_collection(categories.root, localized: true)
+  taxonomies = block.template.taxonomies_for(kind)
+  next if taxonomies.none?
+  collection = osuny_collection(taxonomies, localized: true)
   %>
   <div v-show="data.category_kind == '<%= kind.to_s %>'">
     <fieldset class="mb-3">
