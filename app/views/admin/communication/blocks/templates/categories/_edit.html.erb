@@ -1,7 +1,7 @@
 <%= block_component_edit block, :description, summernote_config: 'mini' %>
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-md-6">
     <fieldset class="mb-3">
       <legend class="form-label"><%= t('admin.communication.blocks.templates.categories.edit.category_kind.label') %></legend>
       <% block.template.category_kinds_allowed.each do |kind| %>
@@ -19,7 +19,7 @@
       <% end %>
     </fieldset>
   </div>
-  <div class="col-lg-6" v-show="data.category_kind">
+  <div class="col-md-6" v-show="data.category_kind">
     <%= block_component_edit block, :taxonomy_id %>
   </div>
 </div>
