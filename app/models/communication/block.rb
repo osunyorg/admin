@@ -42,6 +42,7 @@ class Communication::Block < ApplicationRecord
   include WithAccessibility
   include WithHeadingRanks
   include WithHtmlClass
+  include WithMediaLibrary
   include WithTemplate
   include WithOpenApi # Must be included after WithTemplate to load template_kinds
   include WithUniversity

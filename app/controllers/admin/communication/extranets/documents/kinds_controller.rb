@@ -1,5 +1,7 @@
 class Admin::Communication::Extranets::Documents::KindsController < Admin::Communication::Extranets::Documents::ApplicationController
-  load_and_authorize_resource class: Communication::Extranet::Document::Kind, through: :extranet, through_association: :document_kinds
+  load_and_authorize_resource class: Communication::Extranet::Document::Kind,
+                              through: :extranet,
+                              through_association: :document_kinds
 
   include Admin::Localizable
 
