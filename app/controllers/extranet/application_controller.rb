@@ -18,7 +18,7 @@ class Extranet::ApplicationController < ApplicationController
   def redirect_if_no_extranet!
     redirect_to admin_root_path(lang: current_university.default_language) unless current_extranet
   end
-  
+
   def redirect_if_language_not_active!
     redirect_to root_path(lang: nil) unless current_extranet.active_languages.include?(current_language)
   end
@@ -36,7 +36,7 @@ class Extranet::ApplicationController < ApplicationController
   end
 
   def user_is_alumnus
-    current_extranet.feature_alumni? && about.alumni.find_by(id: current_user.person&.id).present?
+    current_extranet.feature_alumni? && current_extranet.alumni.find_by(id: current_user.person&.id).present?
   end
 
   def user_is_contact
