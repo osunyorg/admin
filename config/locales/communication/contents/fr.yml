@@ -168,7 +168,6 @@ fr:
               large:
                 description: Chaque catégorie est présentée en majesté, sur toute la largeur disponible avec une grande image.
                 label: Grand
-                more: En savoir plus
               list:
                 description: Une liste de catégories avec de petites images à la même largeur.
                 label: Liste
