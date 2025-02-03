@@ -1,0 +1,30 @@
+<fieldset class="mb-3">
+  <legend class="form-label"><%= t('admin.communication.blocks.templates.categories.edit.category_kind.label') %></legend>
+  <% 
+  block.template.category_kind_component.options.each do |kind|
+    b = Communication::Block.new
+    b.template_kind = kind
+    b.about = block.about
+    next unless b.template.allowed_for_about?
+    label = t "enums.communication.block.template_kind.#{kind}"
+    %>
+    <div class="form-check">
+      <input  class="form-check-input"
+              type="radio"
+              name="communication_block[mode]"
+              value="<%= kind %>"
+              v-model="data.mode"
+              id="mode-<%= kind %>">
+      <label class="form-check-label" for="mode-<%= kind %>"><%= label %></label>
+    </div>
+  <% end %>
+</fieldset>
+
+<%= osuny_separator %>
+<%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+  <%= block_component_edit block, :layout %>
+  <%= osuny_label t('admin.communication.blocks.display_options.title') %>
+  <%= block_component_edit block, :option_image %>
+  <%= block_component_edit block, :option_summary %>
+  <%= block_component_edit block, :option_count %>
+<% end %>
