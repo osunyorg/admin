@@ -36,6 +36,14 @@
                           "codemirror-indentation": 4
                         }
                       } %>
+            <%= f.input :upper_menu,
+                      input_html: {
+                        data: {
+                          provider: 'codemirror',
+                          "codemirror-mode": "html",
+                          "codemirror-indentation": 4
+                        }
+                      } %>
           <% end %>
         <% end %>
       </div>
@@ -61,6 +69,10 @@
             <%= f.input :feature_posts %>
             <%= f.input :feature_jobs %>
           <% end %>
+        <% end %>
+        <%= osuny_panel Communication::Extranet::Localization.human_attribute_name(:invitation_message) do %>
+          <%= lf.input :invitation_message_subject %>
+          <%= lf.input :invitation_message_text, input_html: { rows: 5 } %>
         <% end %>
         <%= osuny_panel t('legal') do %>
           <%= lf.input :terms, as: :summernote %>
