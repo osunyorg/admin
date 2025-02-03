@@ -18,7 +18,7 @@ module Bodyclassed
   def add_prefix_to_classes(classes, prefix)
     classes.map { |single_class|
       next if single_class.blank?
-      "#{prefix}-#{single_class}"
+      "#{prefix}-#{single_class.to_s.parameterize}"
     }.compact_blank
   end
 

@@ -19,12 +19,19 @@ module Categorizable
 
   def best_bodyclass
     original = super
-    categories_bodyclasses = categories.collect(&:bodyclass)
     classes = add_prefix_to_classes(categories_bodyclasses, 'category')
     "#{original} #{classes.join(' ')}"
   end
 
   protected
+
+  def categories_bodyclasses
+    # Every category might have several bodyclasses, or none
+    categories.collect(&:bodyclass)
+              .compact_blank
+              .join(' ')
+              .split(' ')
+  end
 
   def touch_after_categories_change
     touch
