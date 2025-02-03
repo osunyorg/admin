@@ -1,0 +1,18 @@
+<div class="row g-3">
+  <% collections.each do |collection| %>
+    <div class="col-6 col-lg-3 col-xxl-2">
+      <div class="<%= osuny_card_classes %>">
+        <%= osuny_thumbnail_localized collection, large: true %>
+        <div class="card-body">
+          <%= osuny_link_localized  collection,
+                                    admin_communication_media_collection_path(collection),
+                                    classes: 'stretched-link' %>
+        </div>
+        <div class="card-footer small text-muted">
+          <%= collection.medias.count %>
+          <%= Communication::Media.model_name.human(count: collection.medias.count).downcase %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

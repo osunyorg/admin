@@ -3,16 +3,6 @@ fr:
     models:
       administration/qualiopi: Qualiopi
   activerecord:
-    models:
-      administration/location:
-        one: Site
-        other: Campus
-      administration/qualiopi/criterion:
-        one: Critère
-        other: Critères
-      administration/qualiopi/indicator:
-        one: Indicateur
-        other: Indicateurs
     attributes:
       administration/location:
         address: Adresse
@@ -30,19 +20,29 @@ fr:
         name: Nom
         url: Site Web
       administration/qualiopi/criterion:
-        number: Numéro
-        name: Nom
         description: Description
-      administration/qualiopi/indicator:
-        number: Numéro
         name: Nom
+        number: Numéro
+      administration/qualiopi/indicator:
         criterion: Critère
         description: Description
+        glossary: Glossaire
         level_expected: Niveau attendu
+        name: Nom
+        non_conformity: Non-conformité
+        number: Numéro
         proof: Éléments de preuve
         requirement: Obligations spécifiques
-        non_conformity: Non-conformité
-        glossary: Glossaire
+    models:
+      administration/location:
+        one: Site
+        other: Sites
+      administration/qualiopi/criterion:
+        one: Critère
+        other: Critères
+      administration/qualiopi/indicator:
+        one: Indicateur
+        other: Indicateurs
   admin:
     administration:
       alumnus:
@@ -50,12 +50,15 @@ fr:
         show_person_html: Cette page montre uniquement les anciennes promotions de la personne. <br>Si vous voulez voir ou modifier les informations sur la personne, cliquez sur le lien
   administration:
     description:
-      text_html: L'administration, sous ses multiples formes, se définit principalement par ses activités au service de l'intérêt général. L'administration agit dans l'intérêt général et respecte le principe de légalité. Elle est tenue à l'obligation de neutralité et au respect du principe de laïcité. Elle se conforme au principe d'égalité et garantit à chacun un traitement impartial.
-      source: Code des relations entre le public et l'administration
       parts:
         alumnus:
           description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
+          title: Alumni
         location:
           description: Gestion des différents sites (physiques) de formation et de recherche
+          title: Sites
         qualiopi:
           description: Aide à la vérification de la conformité de l'offre de formation avec la norme Qualiopi
+          title: Qualiopi
+      source: Code des relations entre le public et l'administration
+      text_html: L'administration, sous ses multiples formes, se définit principalement par ses activités au service de l'intérêt général. L'administration agit dans l'intérêt général et respecte le principe de légalité. Elle est tenue à l'obligation de neutralité et au respect du principe de laïcité. Elle se conforme au principe d'égalité et garantit à chacun un traitement impartial.

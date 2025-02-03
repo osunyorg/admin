@@ -32,9 +32,9 @@ class Admin::Communication::Websites::Pages::CategoriesController < Admin::Commu
 
   def create
     @category.website = @website
-    @l10n.add_photo_import params[:photo_import]
     if @category.save_and_sync
-      redirect_to admin_communication_website_page_category_path(@category), notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
+      redirect_to admin_communication_website_page_category_path(@category),
+                  notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -42,11 +42,9 @@ class Admin::Communication::Websites::Pages::CategoriesController < Admin::Commu
   end
 
   def update
-    if @category.update(category_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
-      @category.sync_with_git
-      redirect_to admin_communication_website_page_category_path(@category), notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
+    if @category.update_and_sync(category_params)
+      redirect_to admin_communication_website_page_category_path(@category),
+                  notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else
       load_invalid_localization
       breadcrumb

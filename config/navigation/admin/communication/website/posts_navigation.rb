@@ -14,7 +14,7 @@ SimpleNavigation::Configuration.run do |navigation|
                   Communication::Website::Post::Category.model_name.human(count: 2),
                   admin_communication_website_post_categories_path(website_id: @website.id)
     primary.item  :feature_nav_authors,
-                  t('communication.authors', count: 2),
+                  University::Person::Localization::Author.model_name.human(count: 2),
                   admin_communication_website_post_authors_path(website_id: @website.id)
   end
 end

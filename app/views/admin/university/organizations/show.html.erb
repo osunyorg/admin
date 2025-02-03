@@ -1,7 +1,7 @@
 <% content_for :title, @l10n %>
 
 <div class="row">
-  <div class="col-lg-3">
+  <div class="col-lg-4">
     <%= osuny_panel t('university.organization.logo') do %>
       <% if @l10n.logo.attached? %>
         <div>
@@ -27,7 +27,7 @@
     <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
-  <div class="offset-lg-1 col-lg-8">
+  <div class="col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n %>
 
     <%= osuny_panel University::Organization.human_attribute_name('text') do %>

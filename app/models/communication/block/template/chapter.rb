@@ -8,6 +8,17 @@ class Communication::Block::Template::Chapter < Communication::Block::Template::
   has_component :alt, :string
   has_component :credit, :rich_text
 
+  def media_blobs
+    return [] unless image_component.blob.present?
+    [
+      {
+        blob: image_component.blob,
+        alt: alt,
+        credit: credit
+      }
+    ]
+  end
+
   protected
 
   def check_accessibility
