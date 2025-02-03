@@ -69,4 +69,8 @@ class DeviseMailer < Devise::Mailer
     opts
   end
 
+  def should_send?(email)
+    Rails.env.production? || email.end_with?(*Rails.application.config.internal_domains)
+  end
+
 end
