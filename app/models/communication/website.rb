@@ -110,9 +110,9 @@ class Communication::Website < ApplicationRecord
       .joins(:localizations)
       .where(communication_website_localizations: { language_id: language.id })
       .where("
-        unaccent(universities.name) % unaccent(:term) OR
-        unaccent(communication_website_localizations.name) % unaccent(:term) OR
-        unaccent(communication_websites.url) % unaccent(:term)
+        unaccent(universities.name) ILIKE unaccent(:term) OR
+        unaccent(communication_website_localizations.name) ILIKE unaccent(:term) OR
+        unaccent(communication_websites.url) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_update, -> (autoupdate, language = nil) { where(autoupdate_theme: autoupdate) }

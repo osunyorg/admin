@@ -5,7 +5,7 @@
               js-content-editor-sortable-container"
       id="content-editor-elements-root">
   <% about.blocks.ordered.each do |block| %>
-    <%= render 'admin/communication/blocks/block', block: block %>
+    <%= render 'admin/communication/blocks/block/show', block: block %>
   <% end %>
 </div>
 <%= render "admin/communication/blocks/paste_block", about: about %>

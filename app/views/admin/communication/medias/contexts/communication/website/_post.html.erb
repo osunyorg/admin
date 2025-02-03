@@ -1,0 +1,20 @@
+<%
+localization = about
+post = localization.about
+language = localization.language
+website = post.website
+path = admin_communication_website_post_path(website_id: website.id, id: post.id)
+target ||= ''
+link = "#{path}#{target}"
+%>
+<div>
+  <div class="<%= osuny_card_classes(horizontal: true) %>">
+    <%= osuny_thumbnail localization %>
+    <div class="card-body">
+      <%= osuny_link_localized post, link, classes: "stretched-link" %>
+    </div>
+    <div class="card-footer text-muted">
+      <%= Communication::Website::Post.model_name.human %>
+    </div>
+  </div>
+</div>

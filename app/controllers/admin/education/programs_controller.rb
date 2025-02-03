@@ -54,7 +54,6 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   end
 
   def create
-    @l10n.add_photo_import params[:photo_import]
     if @program.save
       redirect_to [:admin, @program],
                   notice: t('admin.successfully_created_html', model: @program.to_s_in(current_language))
@@ -68,9 +67,6 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   def update
     load_part
     if @program.update(program_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
-      @program.touch # to ensure it send the photo_import picture
       redirect_to after_update_path,
                   notice: t('admin.successfully_updated_html', model: @program.to_s_in(current_language))
     else

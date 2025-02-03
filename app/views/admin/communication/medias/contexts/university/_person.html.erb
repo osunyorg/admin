@@ -1,0 +1,19 @@
+<%
+localization = about
+person = localization.about
+language = localization.language
+path = admin_university_person_path(person)
+target ||= ''
+link = "#{path}#{target}"
+%>
+<div>
+  <div class="<%= osuny_card_classes(horizontal: true) %>">
+    <%= osuny_thumbnail localization %>
+    <div class="card-body">
+      <%= osuny_link localization, link, classes: 'stretched-link' %>
+    </div>
+    <div class="card-footer text-muted">
+      <%= University::Person.model_name.human %>
+    </div>
+  </div>
+</div>
