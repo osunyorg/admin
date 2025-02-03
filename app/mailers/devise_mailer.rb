@@ -7,7 +7,7 @@ class DeviseMailer < Devise::Mailer
     @record = record
     opts = merge_with_university_infos(record.university, opts)
     I18n.with_locale(record.language.iso_code.to_sym) do
-      super
+      super if should_send?(record.email)
     end
   end
 
@@ -15,7 +15,7 @@ class DeviseMailer < Devise::Mailer
     @record = record
     opts = merge_with_university_infos(record.university, opts)
     I18n.with_locale(record.language.iso_code.to_sym) do
-      super
+      super if should_send?(record.email)
     end
   end
 
@@ -23,7 +23,7 @@ class DeviseMailer < Devise::Mailer
     @record = record
     opts = merge_with_university_infos(record.university, opts)
     I18n.with_locale(record.language.iso_code.to_sym) do
-      super
+      super if should_send?(record.email)
     end
   end
 
@@ -31,7 +31,7 @@ class DeviseMailer < Devise::Mailer
     @record = record
     opts = merge_with_university_infos(record.university, opts)
     I18n.with_locale(record.language.iso_code.to_sym) do
-      super
+      super if should_send?(record.email)
     end
   end
 
@@ -39,7 +39,7 @@ class DeviseMailer < Devise::Mailer
     @record = record
     opts = merge_with_university_infos(record.university, opts)
     I18n.with_locale(record.language.iso_code.to_sym) do
-      super
+      super if should_send?(record.email)
     end
   end
 
@@ -49,7 +49,7 @@ class DeviseMailer < Devise::Mailer
     @code = code
     @duration =  ActiveSupport::Duration.build(Rails.application.config.devise.direct_otp_valid_for).inspect
     I18n.with_locale(record.language.iso_code.to_sym) do
-      devise_mail(record, :two_factor_authentication_code, opts)
+      devise_mail(record, :two_factor_authentication_code, opts) if should_send?(record.email)
     end
   end
 
