@@ -2,7 +2,6 @@
 class Communication::Block::Component::Category < Communication::Block::Component::Base
 
   def category
-    return unless website
     template.available_categories
             .find_by(id: data)
   end
