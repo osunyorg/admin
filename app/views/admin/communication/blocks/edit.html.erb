@@ -151,6 +151,16 @@
           this.initSummernote($summernoteElements.get(index));
         }.bind(this));
       },
+      refreshSummernotes() {
+        var $summernotes = $('.summernote-vue');
+        $summernotes.each(function(index){
+          setTimeout(function () {
+            var $summernote = $($summernotes.get(index)),
+                code = $summernote.summernote('code');
+            $summernote.summernote('code', code);
+          }, 100);
+        }.bind(this));
+      },
       handleCodemirrors() {
         var $codemirrorElements = $('.codemirror-vue');
 
