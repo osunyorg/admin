@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-lg-6">
         <%= lf.input :name %>
-        <%= f.input :original_uploaded_file, as: :file, input_html: { accept: default_images_formats_accepted } if f.new_record? %>
+        <%= f.input :original_uploaded_file, as: :file, input_html: { accept: default_images_formats_accepted } if media.new_record? %>
         <%= f.association :collection,
                           collection: osuny_collection(
                             current_university.communication_media_collections,
