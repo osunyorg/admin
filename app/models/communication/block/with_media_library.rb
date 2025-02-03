@@ -2,11 +2,11 @@ module Communication::Block::WithMediaLibrary
   extend ActiveSupport::Concern
 
   included do
-    after_save :synchronize_media_library
+    # after_save :synchronize_media_library
   end
 
   protected
-  
+
   def synchronize_media_library
     media_blob_ids = []
     # Add
@@ -18,7 +18,7 @@ module Communication::Block::WithMediaLibrary
       media_blob_ids << blob.id
       Communication::Media.create_from_blob(
         blob,
-        in_context: self, 
+        in_context: self,
         origin: :upload,
         alt: alt,
         credit: credit
