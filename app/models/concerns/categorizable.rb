@@ -28,8 +28,11 @@ module Categorizable
   def categories_bodyclasses
     # Every category might have several bodyclasses, or none
     categories.collect(&:bodyclass)
+              # Remove blanks
               .compact_blank
+              # Join everything together
               .join(' ')
+              # Split globally
               .split(' ')
   end
 
