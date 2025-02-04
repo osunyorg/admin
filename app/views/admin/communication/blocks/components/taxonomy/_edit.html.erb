@@ -7,6 +7,16 @@ block.template.category_kinds_allowed.each do |kind|
   <div v-show="data.category_kind == '<%= kind.to_s %>'">
     <fieldset class="mb-3">
       <legend class="form-label"><%= label %></legend>
+      <div class="form-check">
+        <input  class="form-check-input"
+                type="radio"
+                value=""
+                v-model="<%= model %>.<%= property %>"
+                id="<%= dom_id.html_safe %>-<%= kind.to_s %>-free">
+        <label class="form-check-label" for="<%= dom_id.html_safe %>-<%= kind.to_s %>-free">
+          <%= t("category.free") %>
+        </label>
+      </div>
       <%
       collection.each do |taxonomy|
         taxonomy_label = taxonomy.first
@@ -15,7 +25,6 @@ block.template.category_kinds_allowed.each do |kind|
         <div class="form-check">
           <input  class="form-check-input"
                   type="radio"
-                  name="<%= model %>.<%= property %>"
                   value="<%= taxonomy_id %>"
                   v-model="<%= model %>.<%= property %>"
                   id="<%= dom_id.html_safe %>-<%= taxonomy_id %>">

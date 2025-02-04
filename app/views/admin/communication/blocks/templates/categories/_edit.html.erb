@@ -3,16 +3,15 @@
 <div class="row">
   <div class="col-md-6">
     <fieldset class="mb-3">
-      <legend class="form-label"><%= t('admin.communication.blocks.templates.categories.edit.category_kind.label') %></legend>
-      <% block.template.category_kinds_allowed.each do |kind| %>
+    <legend class="form-label"><%= t('admin.communication.blocks.templates.categories.edit.category_kind.label') %></legend>
+    <% block.template.category_kinds_allowed.each do |kind| %>
         <div class="form-check">
           <input  class="form-check-input"
                   type="radio"
-                  name="communication_block[category_kind]"
                   value="<%= kind %>"
                   v-model="data.category_kind"
-                  id="mode-<%= kind %>">
-          <label class="form-check-label" for="mode-<%= kind %>">
+                  id="category_kind-<%= kind %>">
+          <label class="form-check-label" for="category_kind-<%= kind %>">
             <%= t("enums.communication.block.template_kind.#{kind}") %>
           </label>
         </div>

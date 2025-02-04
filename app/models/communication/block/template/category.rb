@@ -69,13 +69,29 @@ class Communication::Block::Template::Category < Communication::Block::Template:
   end
 
   def selected_categories
-    return [] if taxonomy.nil?
-    taxonomy.children
-            .ordered(language)
-            .reject { |category| category.count_objects_in(block.language, website).zero? }
+    return [] if category_kind.nil?
+    if taxonomy.present?
+      selected_categories_from_taxonomy
+    else
+      selected_categories_free
+    end
   end
 
   def taxonomy
     taxonomy_id_component.taxonomy
+  end
+
+  protected
+
+  def selected_categories_from_taxonomy
+    only_categories_used(taxonomy.children.ordered(language))
+  end
+
+  def selected_categories_free
+    only_categories_used(available_categories.out_of_taxonomy.ordered(language))
+  end
+
+  def only_categories_used(categories)
+    categories.reject { |category| category.count_objects_in(block.language, website).zero? }
   end
 end
