@@ -2,7 +2,7 @@ en:
   vue:
     changes:
       cancel: Cancel
-      save: Enregistrer les modifications
+      save: Save changes
     cropperModal:
         cancel: Cancel
         rotate: Rotate image
