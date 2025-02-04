@@ -14,6 +14,8 @@ class Ability::Author < Ability
     can :create, Communication::Block
     can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, User::Favorite, user_id: @user
+    can :manage, Communication::Media, university_id: @user.university_id
+    cannot :destroy, Communication::Website
   end
 
   protected
