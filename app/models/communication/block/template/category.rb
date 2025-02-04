@@ -22,6 +22,10 @@ class Communication::Block::Template::Category < Communication::Block::Template:
   has_component :option_image,        :boolean, default: true
   has_component :option_summary,      :boolean, default: true
 
+  def allowed_for_about?
+    !website.nil?
+  end
+
   # All the categories for the chosen kind
   def available_categories
     categories_for(category_kind)
