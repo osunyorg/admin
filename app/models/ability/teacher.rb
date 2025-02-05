@@ -11,6 +11,8 @@ class Ability::Teacher < Ability
     can :manage, University::Person::Involvement, person_id: @user.person&.id
     can :read, University::Person::Involvement, university_id: @user.university_id
     can :read, University::Role, university_id: @user.university_id
+    can :manage, Communication::Media, university_id: @user.university_id
+    cannot :destroy, Communication::Website
   end
 
   protected

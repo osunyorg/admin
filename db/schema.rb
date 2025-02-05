@@ -729,7 +729,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_070408) do
     t.boolean "full_width", default: false
     t.string "type"
     t.string "migration_identifier"
-    t.jsonb "design_options"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
@@ -1598,27 +1597,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_070408) do
     t.index ["university_id"], name: "index_research_thesis_localizations_on_university_id"
   end
 
-  create_table "search_index", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "university_id", null: false
-    t.string "title"
-    t.text "text"
-    t.uuid "language_id", null: false
-    t.string "about_object_type", null: false
-    t.uuid "about_object_id", null: false
-    t.string "about_localization_type", null: false
-    t.uuid "about_localization_id", null: false
-    t.uuid "website_id"
-    t.uuid "extranet_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["about_localization_type", "about_localization_id"], name: "index_search_on_about_localization"
-    t.index ["about_object_type", "about_object_id"], name: "index_search_on_about_object"
-    t.index ["extranet_id"], name: "index_search_index_on_extranet_id"
-    t.index ["language_id"], name: "index_search_index_on_language_id"
-    t.index ["university_id"], name: "index_search_index_on_university_id"
-    t.index ["website_id"], name: "index_search_index_on_website_id"
-  end
-
   create_table "universities", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "identifier"
@@ -2188,9 +2166,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_31_070408) do
   add_foreign_key "research_thesis_localizations", "languages"
   add_foreign_key "research_thesis_localizations", "research_theses", column: "about_id"
   add_foreign_key "research_thesis_localizations", "universities"
-  add_foreign_key "search_index", "communication_extranets", column: "extranet_id"
-  add_foreign_key "search_index", "communication_websites", column: "website_id"
-  add_foreign_key "search_index", "universities"
   add_foreign_key "universities", "languages", column: "default_language_id"
   add_foreign_key "university_apps", "universities"
   add_foreign_key "university_organization_categories", "universities"

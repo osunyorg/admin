@@ -2,7 +2,9 @@
   <% organizations.each do |organization| %>
     <div class="col-6 col-lg-3 col-xxl-2">
       <div class="<%= osuny_card_classes %>">
-        <%= render 'admin/university/organizations/thumbnail', organization: organization %>
+        <%= render 'admin/university/organizations/thumbnail',
+                    organization: organization,
+                    large: true %>
         <div class="card-body">
           <%= osuny_published_localized organization %>
           <%= osuny_link_localized  organization,
