@@ -272,6 +272,10 @@ fr:
           attributes:
             published:
               cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
+        communication/media:
+          attributes:
+            original_uploaded_file:
+              too_big: trop lourd !
         communication/website/agenda/event:
           attributes:
             to_day:

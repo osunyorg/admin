@@ -133,6 +133,7 @@ class Communication::Media < ApplicationRecord
 
   def create_original_blob_from_upload
     return unless original_uploaded_file.is_a?(ActionDispatch::Http::UploadedFile)
+    return unless file_size_ok?
     blob = ActiveStorage::Blob.create_and_upload!(
       io: original_uploaded_file.open,
       filename: original_uploaded_file.original_filename,
@@ -143,5 +144,14 @@ class Communication::Media < ApplicationRecord
     self.original_filename = blob.filename.to_s
     self.original_content_type = blob.content_type
     self.original_byte_size = blob.byte_size
+  end
+
+  def file_size_ok?
+    if original_uploaded_file.size <= Rails.application.config.default_image_max_size
+      true
+    else
+      errors.add :original_uploaded_file, :too_big
+      false
+    end
   end
 end
