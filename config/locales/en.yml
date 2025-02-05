@@ -136,14 +136,14 @@ en:
       in: in %{lang}
       switch_to: switch to %{choices}
     infos: Informations
-    items:
-      one: item
-      other: items
-      see_all: See all
     inheritance:
       sentence_html: Value inherited from %{link}
       sentence_without_link: Value inherited
       status: Inherited value
+    item:
+      one: item
+      other: items
+      see_all: See all
     meta_description:
       hint: Plain text without HTML, dedicated to Search Engine Optimization (SEO).
       label: Meta description
@@ -180,6 +180,7 @@ en:
     title: Edit the selection
   cancel: Cancel
   category:
+    bodyclass: Specific CSS class
     children: Sub-categories
     featured_image: Featured image
     featured_image_alt: Alternative text
@@ -350,8 +351,6 @@ en:
     credit:
       hint: The credit must be present according to copyright or copyleft licenses.
       label: Credit
-    remove: Remove image
-    title: Image
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"
   filters:
@@ -411,10 +410,10 @@ en:
   mailers:
     extranet:
       invitation_message:
-        subject: You now have access to the “%{extranet}” extranet
-        text_line_1_html: You now have access to the “%{extranet}” extranet.
-        text_line_2_with_user_html: You can sign in with your email address <b>%{email}</b> by clicking <a href="%{sign_in_url}">here</a>.
-        text_line_2_without_user_html: You can sign up with your email address <b>%{email}</b> by clicking <a href="%{sign_up_url}">here</a>.
+        subject: Welcome to your extranet
+        text: You now have access to the extranet.
+        with_user_html: You can sign in with your email address <b>%{email}</b> by clicking <a href="%{sign_in_url}">here</a>.
+        without_user_html: You can sign up with your email address <b>%{email}</b> by clicking <a href="%{sign_up_url}">here</a>.
     notifications:
       import:
         subject_with_errors: Your import has been processed with errors
@@ -448,14 +447,6 @@ en:
   move: Move
   open: Open
   organize: Organize
-  photo_import:
-    next: Next image
-    nothing: No results for this search
-    open: Search an image
-    placeholder: Type your search here
-    previous: Previous images
-    search: Search
-    title: Photo search
   please_confirm: Are you sure?
   preview:
     button: Preview

@@ -1,6 +1,10 @@
-<div class="row">
+<%
+large ||= false
+classes = large ? 'col-lg-6' : 'col-sm-6 col-lg-4'
+%>
+<div class="row g-3">
   <% websites.each do |website| %>
-    <div class="col-sm-6 col-lg-4 col-xl-3">
+    <div class="<%= classes %>">
       <%= render 'admin/communication/websites/website', website: website %>
     </div>
   <% end %>

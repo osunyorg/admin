@@ -3,7 +3,7 @@ class Admin::University::ApplicationController < Admin::ApplicationController
   protected
 
   def current_subnav_context
-    'navigation/admin/university'
+    'navigation/admin/university' if current_university.is_really_a_university
   end
 
   def breadcrumb

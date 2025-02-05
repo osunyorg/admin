@@ -19,6 +19,7 @@
 #  sso_name_identifier_format :string
 #  sso_provider               :integer          default("saml")
 #  sso_target_url             :string
+#  upper_menu                 :text             default("")
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  about_id                   :uuid             indexed => [about_type]
@@ -95,7 +96,7 @@ class Communication::Extranet < ApplicationRecord
   end
 
   def alumni
-    about&.university_person_alumni
+    about.present? ? about.university_person_alumni : University::Person::Alumnus.none
   end
 
   def users

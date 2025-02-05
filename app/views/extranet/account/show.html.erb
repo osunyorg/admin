@@ -7,7 +7,7 @@
         <%= sanitize @person_l10n.biography %>
       </div>
     <% end %>
-    <% if @person %>
+    <% if @person && current_extranet.feature_alumni? %>
       <p><%= t('extranet.experiences.title') %></p>
       <%= link_to University::Person::Experience.human_attribute_name('new'),
                   new_experience_path,
@@ -16,18 +16,18 @@
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-3">
-    <%= kamifusen_tag current_user.picture, 
+    <%= kamifusen_tag current_user.picture,
                       width: 400,
                       class: 'img-fluid person__portrait' if current_user.picture.attached? %>
     <div class="mb-4">
-      <%= link_to t('extranet.account.edit'), 
-                  edit_account_path, 
+      <%= link_to t('extranet.account.edit'),
+                  edit_account_path,
                   class: 'btn btn-primary mb-2' %>
-      <%= link_to t('extranet.account.edit_personal_data'), 
-                  edit_personal_data_path, 
+      <%= link_to t('extranet.account.edit_personal_data'),
+                  edit_personal_data_path,
                   class: 'btn btn-primary mb-2' %>
     </div>
-    <%= render 'extranet/personal_data/details', 
+    <%= render 'extranet/personal_data/details',
                 person: @person,
                 l10n: @person_l10n unless @person.nil? %>
   </div>

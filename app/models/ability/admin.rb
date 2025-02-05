@@ -75,6 +75,7 @@ class Ability::Admin < Ability
     can :manage, Communication::Website::Page, university_id: @user.university_id
     can :manage, Communication::Website::Page::Category, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
+    can :manage, Communication::Media, university_id: @user.university_id
   end
 
   def admin_communication_extranet

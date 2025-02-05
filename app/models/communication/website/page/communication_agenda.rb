@@ -21,4 +21,8 @@ class Communication::Website::Page::CommunicationAgenda < Communication::Website
   def git_path_relative
     'events/_index.html'
   end
+
+  def special_page_categories
+    website.agenda_categories
+  end
 end

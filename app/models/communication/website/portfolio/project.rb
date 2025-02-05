@@ -25,9 +25,9 @@
 #
 class Communication::Website::Portfolio::Project < ApplicationRecord
   include AsDirectObject
-  include Categorizable
   include Duplicable
   include Filterable
+  include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Sanitizable
   include Searchable
   include Localizable

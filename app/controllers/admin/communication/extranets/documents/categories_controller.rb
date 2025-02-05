@@ -1,5 +1,7 @@
 class Admin::Communication::Extranets::Documents::CategoriesController < Admin::Communication::Extranets::ApplicationController
-  load_and_authorize_resource class: Communication::Extranet::Document::Category, through: :extranet, through_association: :document_categories
+  load_and_authorize_resource class: Communication::Extranet::Document::Category,
+                              through: :extranet,
+                              through_association: :document_categories
 
   include Admin::Localizable
 
