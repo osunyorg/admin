@@ -151,15 +151,16 @@
           this.initSummernote($summernoteElements.get(index));
         }.bind(this));
       },
+      // Deletes and recreates Summernote instances
       refreshSummernotes() {
         var $summernotes = $('.summernote-vue');
         $summernotes.each(function(index){
-          setTimeout(function () {
-            var $summernote = $($summernotes.get(index)),
-                code = $summernote.summernote('code');
-            $summernote.summernote('code', code);
-          }, 100);
+            var textarea = $summernotes.get(index),
+                $summernote = $(textarea);
+            textarea.classList.remove('is-initialized');
+            $summernote.summernote('destroy');
         }.bind(this));
+        this.handleSummernotes();
       },
       handleCodemirrors() {
         var $codemirrorElements = $('.codemirror-vue');
