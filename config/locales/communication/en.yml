@@ -275,6 +275,7 @@ en:
         communication/media:
           attributes:
             original_uploaded_file:
+              already_imported: already imported in media library
               too_big: too heavy!
         communication/website/agenda/event:
           attributes:

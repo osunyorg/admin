@@ -134,16 +134,31 @@ class Communication::Media < ApplicationRecord
   def create_original_blob_from_upload
     return unless original_uploaded_file.is_a?(ActionDispatch::Http::UploadedFile)
     return unless file_size_ok?
-    blob = ActiveStorage::Blob.create_and_upload!(
+    blob = create_blob_from_upload
+    return if blob_already_exists?(blob)
+    blob.update_column :university_id, university_id
+    self.original_blob_id = blob.id
+    self.original_checksum = blob.checksum
+    self.original_filename = blob.filename.to_s
+    self.original_content_type = blob.content_type
+    self.original_byte_size = blob.byte_size
+  end
+
+  def create_blob_from_upload
+    ActiveStorage::Blob.create_and_upload!(
       io: original_uploaded_file.open,
       filename: original_uploaded_file.original_filename,
       content_type: original_uploaded_file.content_type
     )
-    blob.update_column :university_id, university_id
-    self.original_blob_id = blob.id
-    self.original_filename = blob.filename.to_s
-    self.original_content_type = blob.content_type
-    self.original_byte_size = blob.byte_size
+  end
+
+  def blob_already_exists?(blob)
+    if university.communication_medias.where(original_checksum: blob.checksum).any?
+      errors.add :original_uploaded_file, :already_imported
+      true
+    else
+      false
+    end
   end
 
   def file_size_ok?

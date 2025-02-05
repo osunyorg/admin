@@ -275,6 +275,7 @@ fr:
         communication/media:
           attributes:
             original_uploaded_file:
+              already_imported: déjà importé dans la médiathèque
               too_big: trop lourd !
         communication/website/agenda/event:
           attributes:
