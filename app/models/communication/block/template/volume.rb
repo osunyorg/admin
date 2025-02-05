@@ -5,7 +5,7 @@ class Communication::Block::Template::Volume < Communication::Block::Template::B
     :all,
     :selection
   ]
-  has_component :quantity, :number, options: 3
+  has_component :quantity, :number, default: 3
 
   def dependencies
     selected_volumes
@@ -23,7 +23,23 @@ class Communication::Block::Template::Volume < Communication::Block::Template::B
     selected_volumes
   end
 
+  def top_link
+    return unless mode == 'all'
+    link_to_special_page
+  end
+
   protected
+
+  def link_to_special_page
+    special_page_l10n = special_page.localization_for(block.language)
+    permalink_for(special_page_l10n)
+  end
+
+  def permalink_for(l10n)
+    return if l10n.nil?
+    hugo = l10n.hugo(website)
+    hugo.permalink
+  end
 
   def selected_volumes_all
     available_volumes.ordered(block.language).limit(quantity)
@@ -42,5 +58,9 @@ class Communication::Block::Template::Volume < Communication::Block::Template::B
 
   def available_volumes
     website.research_volumes
+  end
+
+  def special_page
+    @special_page ||= website.special_page(Communication::Website::Page::ResearchVolume)
   end
 end

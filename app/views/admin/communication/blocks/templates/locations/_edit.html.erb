@@ -1,11 +1,3 @@
-<%= block_component_edit block, :layout %>
-
-<div class="mb-5">
-  <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-  <%= block_component_edit block, :option_image, label: Administration::Location::Localization.human_attribute_name(:featured_image) %>
-  <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
-</div>
-
 <%= block_component_add_element block, t('.add') %>
 <draggable :list="data.elements" handle=".dragHandle" class="mb-3">
   <div v-for="(element, index) in data.elements" class="d-flex draggable-item">
@@ -29,3 +21,11 @@
 <div v-show="data.elements.length > 2">
   <%= block_component_add_element block, t('.add') %>
 </div>
+
+<%= osuny_separator %>
+<%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+  <%= block_component_edit block, :layout %>
+  <%= osuny_label t('admin.communication.blocks.display_options.title') %>
+  <%= block_component_edit block, :option_image, label: Administration::Location::Localization.human_attribute_name(:featured_image) %>
+  <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
+<% end %>

@@ -30,6 +30,17 @@ namespace :communication do
       end
     end
     resources :permalinks, controller: 'websites/permalinks', only: [:create, :destroy]
+    namespace :page, path: 'pages' do
+      resources :categories, controller: '/admin/communication/websites/pages/categories' do
+        collection do
+          post :reorder
+        end
+        member do
+          get :children
+          get :static
+        end
+      end
+    end
     resources :pages, controller: 'websites/pages' do
       collection do
         post :reorder
@@ -174,6 +185,20 @@ namespace :communication do
       end
     end
     resources :jobs, controller: 'extranets/jobs'
+  end
+  resources :medias do
+    collection do
+      post 'pick' => 'medias#pick', as: :pick
+      resources :categories, controller: '/admin/communication/medias/categories', as: 'media_categories' do
+        collection do
+          post :reorder
+        end
+        member do
+          get :children
+        end
+      end
+      resources :collections, controller: '/admin/communication/medias/collections', as: 'media_collections'
+    end
   end
   root to: 'dashboard#index'
 end

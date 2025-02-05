@@ -2,6 +2,6 @@
 <% @small_content = true %>
 
 <div class="alert alert-danger" role="alert">
-  <%= t('devise.two_factor_authentication.max_login_attempts_reached').html_safe %>
+  <%= t('.message_html') %>
 </div>
 <%= link_to t('devise.shared.links.sign_out'), destroy_user_session_path, method: :delete, class: "btn btn-danger" %>

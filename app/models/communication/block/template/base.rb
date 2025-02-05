@@ -23,7 +23,7 @@ class Communication::Block::Template::Base
 
   def self.has_layouts(property)
     self.layouts = property
-    has_component :layout, :layout
+    has_component :layout, :layout, options: property
   end
 
   def self.has_component(property, kind, options: nil, default: nil)
@@ -87,6 +87,10 @@ class Communication::Block::Template::Base
   # Called before block validation
   # Has an override in some templates (video)
   def before_validation
+  end
+
+  def media_blobs
+    []
   end
 
   def to_s

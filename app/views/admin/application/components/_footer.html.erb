@@ -10,11 +10,14 @@
         <p class="text-white"><%= t('admin.pending_tasks.text_html') %></p>
       </div>
     </div>
-    <div class="d-md-flex justify-content-between mt-5 pt-5 mb-5 mb-sm-0">
-      <%= link_to 'https://www.osuny.org', target: :_blank, class: 'text-white-50' do %>
-        <%= t('admin.footer.signature') %>
-      <% end %>
-      <ul class="list-unstyled d-md-flex mt-4">
+    <div class="d-md-flex justify-content-between my-5 py-5 mb-sm-0">
+      <div class="mb-5">
+        <%= link_to t('admin.footer.signature'),
+                    'https://www.osuny.org',
+                    target: :_blank,
+                    class: 'text-white-50' %>
+      </div>
+      <ul class="list-unstyled d-md-flex">
         <%
           [
             ['Aide à la contribution', 'https://support.osuny.org'],

@@ -3,12 +3,12 @@
 <% content_for :title_right do %>
   <%= render 'admin/application/favorites/widget', about: @website %>
   <%= link_to @website.url, @website.url, target: :_blank unless @website.url.blank? %>
-  <div class="small">
-    <% if @website.about.present? %>
+  <% if @website.about.present? %>
+    <div class="small">
       <%= I18n.t("activerecord.attributes.communication/website.about_#{@website.about_type}") %>
       — <%= osuny_link_localized_if can?(:read, @website.about), @website.about, [:admin, @website.about] %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>
 
 <%
@@ -38,9 +38,9 @@ number_of_panels = 0
   </div>
 </div>
 
-<%= image_tag @website.deployment_status_badge, alt: '' if @website.deployment_status_badge.present? %>
-
 <%= render 'admin/application/l10n/widget', about: @website, l10n: @l10n, small: true %>
+
+<%= image_tag @website.deployment_status_badge, alt: '' if @website.deployment_status_badge.present? %>
 
 <% if current_user.server_admin? %>
   <% content_for :action_bar_left do %>

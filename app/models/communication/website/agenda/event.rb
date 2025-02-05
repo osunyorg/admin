@@ -34,10 +34,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
   include Duplicable
   include Filterable
+  include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Sanitizable
   include Searchable
   include Localizable
   include WithMenuItemTarget
+  include WithOpenApi
   include WithTime
   include WithTree
   include WithUniversity
@@ -50,22 +52,11 @@ class Communication::Website::Agenda::Event < ApplicationRecord
               class_name: 'Communication::Website::Agenda::Event',
               optional: true
 
-  has_and_belongs_to_many :categories,
-                          class_name: 'Communication::Website::Agenda::Category',
-                          join_table: :communication_website_agenda_events_categories,
-                          foreign_key: :communication_website_agenda_event_id,
-                          association_foreign_key: :communication_website_agenda_category_id
-
   scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
   scope :ordered_asc, -> { order(:from_day, :from_hour) }
   scope :ordered, -> (language = nil) { ordered_asc }
   scope :latest_in, -> (language) { published_now_in(language).future_or_current.order("communication_website_agenda_event_localizations.updated_at").limit(5) }
 
-  scope :for_category, -> (category_id, language = nil) {
-    joins(:categories)
-    .where(communication_website_agenda_categories: { id: category_id })
-    .distinct
-  }
   scope :for_search_term, -> (term, language) {
     joins(:localizations)
       .where(communication_website_agenda_event_localizations: { language_id: language.id })

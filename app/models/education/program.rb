@@ -29,6 +29,7 @@
 class Education::Program < ApplicationRecord
   include AsIndirectObject
   include Filterable
+  include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Localizable
   include LocalizableOrderBySlugScope
   include Sanitizable
@@ -51,12 +52,6 @@ class Education::Program < ApplicationRecord
   has_many   :children,
              class_name: 'Education::Program',
              foreign_key: :parent_id
-
-  has_and_belongs_to_many :categories,
-                          class_name: 'Education::Program::Category',
-                          join_table: :education_program_categories_programs,
-                          foreign_key: :education_program_id,
-                          association_foreign_key: :education_program_category_id
 
   before_destroy :move_children
 

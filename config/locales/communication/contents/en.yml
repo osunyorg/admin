@@ -446,11 +446,15 @@ en:
           pages:
             description: A highlight of some pages, with multiple layout options.
             edit:
+              category_id:
+                label: Category
+                placeholder: Select a category
               main_page:
                 title: Main page
               mode:
                 label: List kind
                 options:
+                  category: A specific category
                   children: Main page and children
                   selection: A specific selection of pages
               option_image:
@@ -524,11 +528,23 @@ en:
                 options:
                   category: A specific category
                   selection: A selection of persons
+              option_contact:
+                label: "With contact information for each person?"
               option_image:
                 label: With a portrait for each person?
               option_link:
                 label: Clickable link to person's page
               options: Display options
+            layouts:
+              grid:
+                description: As a grid, left to right and top to bottom.
+                label: Grid
+              large:
+                description: Each person is presented in majesty, across the full width available, with a large image.
+                label: Large
+              list:
+                description: A simple list of people, very similar to a table.
+                label: List
           posts:
             description: A list of highlighted news.
             edit:
@@ -689,6 +705,13 @@ en:
               video_title:
                 label: Video title
                 placeholder: Enter video title
+            layouts:
+              player:
+                description: A video player integrated into the page, which waits for a click to load the external platform'player.
+                label: Player
+              button:
+                description: A button that launches the video by displaying it as a popin on top of the current page, against a dark background.
+                label: Button
           volumes:
             description: A selection of volumes published in a scientific journal.
             edit:

@@ -26,7 +26,17 @@ class Communication::Extranet::Connection < ApplicationRecord
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :about, polymorphic: true
 
+  after_create_commit :send_invitation_to_person, if: -> { about.is_a?(University::Person) }
+
   def self.permitted_about_classes
     [University::Organization, University::Person]
+  end
+
+  protected
+
+  def send_invitation_to_person
+    # Do not send invitation if there is no email on the person's user or the person itself
+    return unless about.user.try(:email).present? || about.email.present?
+    ExtranetMailer.invitation_message(extranet, about).deliver_later
   end
 end

@@ -12,7 +12,7 @@ small ||= false
                                     admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                                     classes: "stretched-link" %>
         </div>
-        <div class="card-footer text-muted">
+        <div class="card-footer small text-muted">
           <% if small %>
             <%= l page.updated_at.to_date, format: :short %>
           <% else %>

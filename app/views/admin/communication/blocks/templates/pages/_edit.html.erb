@@ -1,54 +1,48 @@
-<div class="row pure__row--small">
-  <div class="col-lg-6">
-    <div class="mb-5">
-      <%= block_component_edit block, :mode %>
-    </div>
-  </div>
-  <div class="col-lg-6">
-    <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-    <%= block_component_edit block, :option_main_summary %>
-    <%= block_component_edit block, :option_image %>
-    <%= block_component_edit block, :option_summary %>
-  </div>
+<%= block_component_edit block, :mode %>
+
+<div class="my-5" v-if="data.mode !== 'category'">
+  <h2 class="h4"><%= t '.main_page.title' %></h2>
+  <%= block_component_edit block, :page_id %>
 </div>
 
-<%= block_component_edit block, :layout %>
-
-<div class="row pure__row--small">
-  <div class="col-lg-6">
-    <div class="my-5">
-      <h2 class="h4"><%= t '.main_page.title' %></h2>
-      <%= block_component_edit block, :page_id %>
-    </div>
-
-    <div class="my-5" v-if="data.mode == 'selection'">
-      <h2 class="h4"><%= t '.selection.title' %></h2>
-      <%= block_component_add_element block, t('.selection.add') %>
-      <draggable :list="data.elements" handle=".dragHandle">
-        <div v-for="(element, index) in data.elements" class="draggable-item">
-          <div class="d-flex mb-n3">
-            <div>
-              <a class="btn ps-0 pt-0 dragHandle" title="<%= t('admin.communication.block.drag_and_drop') %>">
-                <i class="<%= Icon::DRAG %> handle"></i>
-              </a>
-            </div>
-            <div class="flex-fill">
-              <%= block_component_edit block, :id, template: @element %>
-            </div>
-            <div>
-              <a  class="btn btn-sm text-danger ms-3"
-                  v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
-                  title="<%= t('delete') %>">
-                  <i class="<%= Icon::DELETE %>"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </draggable>
-    </div>
-  </div>
+<div class="my-5" v-if="data.mode === 'category'">
+  <%= block_component_edit block, :category_id %>
 </div>
 
-<div v-show="data.elements.length > 2">
+<div class="my-5" v-if="data.mode === 'selection'">
+  <h2 class="h4"><%= t '.selection.title' %></h2>
   <%= block_component_add_element block, t('.selection.add') %>
+  <draggable :list="data.elements" handle=".dragHandle">
+    <div v-for="(element, index) in data.elements" class="draggable-item">
+      <div class="d-flex mb-n3">
+        <div>
+          <a class="btn ps-0 pt-0 dragHandle" title="<%= t('admin.communication.block.drag_and_drop') %>">
+            <i class="<%= Icon::DRAG %> handle"></i>
+          </a>
+        </div>
+        <div class="flex-fill">
+          <%= block_component_edit block, :id, template: @element %>
+        </div>
+        <div>
+          <a  class="btn btn-sm text-danger ms-3"
+              v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+              title="<%= t('delete') %>">
+              <i class="<%= Icon::DELETE %>"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </draggable>
+  <div v-show="data.elements.length > 2">
+    <%= block_component_add_element block, t('.selection.add') %>
+  </div>
 </div>
+
+<%= osuny_separator %>
+<%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+  <%= block_component_edit block, :layout %>
+  <%= osuny_label t('admin.communication.blocks.display_options.title') %>
+  <%= block_component_edit block, :option_main_summary %>
+  <%= block_component_edit block, :option_image %>
+  <%= block_component_edit block, :option_summary %>
+<% end %>

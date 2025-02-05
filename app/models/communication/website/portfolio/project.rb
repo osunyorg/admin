@@ -3,6 +3,7 @@
 # Table name: communication_website_portfolio_projects
 #
 #  id                       :uuid             not null, primary key
+#  full_width               :boolean          default(TRUE)
 #  year                     :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -26,6 +27,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include AsDirectObject
   include Duplicable
   include Filterable
+  include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Sanitizable
   include Searchable
   include Localizable
@@ -35,12 +37,6 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   belongs_to  :created_by,
               class_name: 'User',
               optional: true
-
-  has_and_belongs_to_many :categories,
-                          class_name: 'Communication::Website::Portfolio::Category',
-                          join_table: :communication_website_portfolio_categories_projects,
-                          foreign_key: :communication_website_portfolio_project_id,
-                          association_foreign_key: :communication_website_portfolio_category_id
 
   validates :year, presence: true
 
@@ -67,12 +63,6 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
     .order("communication_website_portfolio_projects.year DESC, localization_title ASC")
   }
   scope :latest_in, -> (language) { published_now_in(language).order("communication_website_portfolio_project_localizations.updated_at DESC").limit(5) }
-
-  scope :for_category, -> (category_id, language = nil) {
-    joins(:categories)
-    .where(communication_website_portfolio_categories: { id: category_id })
-    .distinct
-  }
   scope :for_search_term, -> (term, language) {
     joins(:localizations)
       .where(communication_website_portfolio_project_localizations: { language_id: language.id })

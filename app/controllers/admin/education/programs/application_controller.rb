@@ -15,6 +15,7 @@ class Admin::Education::Programs::ApplicationController < Admin::Education::Appl
     super
     add_breadcrumb Education::Program.model_name.human(count: 2), admin_education_programs_path
     @program.ancestors_and_self.each do |program|
+      next unless program.persisted?
       add_breadcrumb program.to_s_in(current_language), admin_education_program_path(program)
     end if @program.present?
   end

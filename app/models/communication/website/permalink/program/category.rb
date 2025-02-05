@@ -1,6 +1,6 @@
 class Communication::Website::Permalink::Program::Category < Communication::Website::Permalink
   def self.required_in_config?(website)
-    website.has_programs?
+    website.has_education_programs?
   end
 
   def self.static_config_key

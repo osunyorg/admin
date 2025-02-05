@@ -3,6 +3,7 @@
 # Table name: university_person_categories
 #
 #  id            :uuid             not null, primary key
+#  bodyclass     :string
 #  is_taxonomy   :boolean          default(FALSE)
 #  position      :integer          default(0)
 #  created_at    :datetime         not null
@@ -26,12 +27,12 @@ class University::Person::Category < ApplicationRecord
   include Localizable
   include WithUniversity
 
-  has_and_belongs_to_many :university_people,
-                          class_name: 'University::Person',
-                          join_table: :university_people_categories
-  alias                   :people :university_people
+  has_and_belongs_to_many :people
+  alias                   :university_people :people
+  alias                   :category_objects :people
 
   def dependencies
+    [parent] +
     localizations
   end
 

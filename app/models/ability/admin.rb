@@ -34,6 +34,7 @@ class Ability::Admin < Ability
     can :manage, Education::Cohort, university_id: @user.university_id
     can :manage, Education::Diploma, university_id: @user.university_id
     can :manage, Education::Program, university_id: @user.university_id
+    can :manage, Education::Program::Category, university_id: @user.university_id
     can :manage, Education::School, university_id: @user.university_id
     can :manage, :all_programs # needed to prevent program_manager to access specific global screens
   end
@@ -72,7 +73,9 @@ class Ability::Admin < Ability
     can :manage, Communication::Website::Menu, university_id: @user.university_id
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id
+    can :manage, Communication::Website::Page::Category, university_id: @user.university_id
     can :manage, Communication::Website::Post, university_id: @user.university_id
+    can :manage, Communication::Media, university_id: @user.university_id
   end
 
   def admin_communication_extranet

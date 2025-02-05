@@ -24,24 +24,4 @@ module WithFeaturedImage
   def best_featured_image_credit
     best_featured_image_source.featured_image_credit
   end
-
-  def add_photo_import(params)
-    photo_import_unsplash(params['unsplash']) if params['unsplash'].present?
-    photo_import_pexels(params['pexels']) if params['pexels'].present?
-  end
-
-  def photo_import_unsplash(id)
-    photo = Unsplash::Photo.find id
-    url = "#{photo['urls']['full']}&w=2048&fit=max"
-    filename = "#{photo['id']}.jpg"
-    ActiveStorage::Utils.attach_from_url(featured_image, url, filename: filename)
-    photo.track_download
-  end
-
-  def photo_import_pexels(id)
-    photo = Pexels::Client.new.photos.find id
-    url = "#{photo.src['original']}?auto=compress&cs=tinysrgb&w=2048"
-    filename = "#{photo.id}.png"
-    ActiveStorage::Utils.attach_from_url(featured_image, url, filename: filename)
-  end
 end

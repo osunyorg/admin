@@ -1,0 +1,2 @@
+<%= render "admin/communication/blocks/block/title", block: block unless block.template_title? %>
+<%= render "admin/communication/blocks/templates/#{block.template_kind}/snippet", block: block %>

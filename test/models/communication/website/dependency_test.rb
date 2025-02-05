@@ -99,9 +99,10 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # - L'école, sa formations (default_program), son diplôme (default_diploma) et les localisations de ces objets (6)
     # - Les catégories d'actus liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
     # - Les catégories d'agenda liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
+    # - Les catégories de pages liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
     # - Les pages "Teachers", "Administrators", "Researchers", "EducationDiplomas", "EducationPrograms", "AdministrationLocation" et leurs localisations (12)
     # Donc un total de 6 + 4 + 4 + 12 = 26 dépendances
-    assert_equal 26, delta
+    assert_equal 30, delta
 
     clear_enqueued_jobs
 
@@ -116,7 +117,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     website_with_github.save
     dependencies_before_count = website_with_github.reload.recursive_dependencies(follow_direct: true).count
     # On crée une localisation anglaise de la homepage
-    communication_website_pages(:page_root).localize_in!(english)
+    communication_website_pages(:root_page).localize_in!(english)
 
     # Tant qu'on n'a pas activé l'anglais sur le website le nombre de dépendances ne doit pas bouger
     assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies(follow_direct: true).count

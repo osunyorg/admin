@@ -446,11 +446,15 @@ fr:
           pages:
             description: Une mise en avant d'une sélection de pages, avec plusieurs options d'affichage.
             edit:
+              category_id:
+                label: Catégorie
+                placeholder: Sélectionner une catégorie
               main_page:
                 title: Page principale
               mode:
                 label: Type de liste
                 options:
+                  category: Une catégorie spécifique de pages
                   children: La page principale et ses enfants
                   selection: Une sélection spécifique de pages
               option_image:
@@ -484,7 +488,7 @@ fr:
                 label: Grand
                 more: En savoir plus
               list:
-                description: Le chapô de la page principale sert d'édito en gros et les pages sont présentées sous forme de liste à droite.
+                description: Le résumé de la page principale sert d'édito en gros et les pages sont présentées sous forme de liste à droite.
                 label: Liste
           papers:
             description: Une sélection de papiers de recherche publiés dans la revue scientifique.
@@ -524,11 +528,23 @@ fr:
                 options:
                   category: Une catégorie spécifique
                   selection: Une sélection de personnes
+              option_contact:
+                label: "Avec les informations de contact de chaque personne\_?"
               option_image:
                 label: "Avec un portrait de chaque personne\_?"
               option_link:
                 label: Lien cliquable vers la page de la personne
               options: Options d'affichage
+            layouts:
+              grid:
+                description: Les personnes sont présentées en grille, de gauche à droite puis de haut en bas.
+                label: Grille
+              large:
+                description: Chaque personne est présentée en majesté, sur toute la largeur disponible avec une grande image.
+                label: Grand
+              list:
+                description: Une liste de personnes, très semblable à un tableau.
+                label: Liste
           posts:
             description: Une liste d'actualités mises en avant.
             edit:
@@ -547,9 +563,9 @@ fr:
                   categories: La liste des catégories d'actualités
                   category: Une catégorie spécifique
                   selection: Une sélection d'actualités
-                placeholder: Entrer la quantité
               posts_quantity:
                 label: Quantité d'articles
+                placeholder: Entrer la quantité
             layouts:
               alternate:
                 description: Une alternance très légère graphiquement d'articles entre la gauche et la droite de la page.
@@ -689,6 +705,13 @@ fr:
               video_title:
                 label: Titre de la vidéo
                 placeholder: Entrer le titre de la vidéo
+            layouts:
+              player:
+                description: Un lecteur de vidéo intégré dans la page, qui attend un clic pour charger le lecteur de la plateforme externe.
+                label: Lecteur
+              button:
+                description: Un bouton qui lance la vidéo en l'affichant par dessus la page en cours, sur un fond sombre.
+                label: Bouton
           volumes:
             description: Une sélection de volumes publiés dans la revue scientifique.
             edit:

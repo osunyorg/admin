@@ -1,0 +1,3 @@
+web: rails server
+worker: bundle exec good_job start
+js: yarn build --watch

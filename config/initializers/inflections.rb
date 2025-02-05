@@ -10,6 +10,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   # inflect.uncountable %w( fish sheep )
   inflect.irregular 'axis', 'axes'
   inflect.irregular 'alumnus', 'alumni'
+  inflect.irregular 'media', 'medias'
 end
 
 # These inflection rules are supported but not enabled by default:
