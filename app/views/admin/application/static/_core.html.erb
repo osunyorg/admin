@@ -66,7 +66,7 @@ meta:
 # Search engine data
 #############
 search_title = title
-search_title += " #{subtitle}" if show_subtitle && about.subtitle.present?
+search_title += " #{about.subtitle}" if show_subtitle && about.subtitle.present?
 %>
 search:
   id: "<%= about.id %>"
