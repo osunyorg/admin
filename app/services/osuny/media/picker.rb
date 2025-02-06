@@ -65,7 +65,7 @@ class Osuny::Media::Picker
   end
 
   def url
-    @url ||= image.attached? ? "/media/#{image.signed_id}/preview.jpg" : ''
+    @url ||= image.attached? ? "/media/#{image.signed_id}/preview.png" : ''
   end
 
   def about_type
