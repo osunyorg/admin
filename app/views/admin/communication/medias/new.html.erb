@@ -1,24 +1,2 @@
 <% content_for :title, Communication::Media.model_name.human %>
-<%= simple_form_for [:admin, @media] do |f| %>
-  <%= f.simple_fields_for :localizations, @l10n do |lf| %>
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-    <%= lf.hidden_field :language_id, value: current_language.id %>
-
-    <div class="row">
-      <div class="col-lg-4">
-        <%= f.input :original_uploaded_file,
-                    as: :file,
-                    hint: images_formats_accepted_hint,
-                    input_html: { accept: default_images_formats_accepted } %>
-      </div>
-      <div class="col-lg-8">
-        <%= render 'admin/communication/medias/form_common', f: f, lf: lf %>
-      </div>
-    </div>
-    <% content_for :action_bar_right do %>
-      <%= render 'admin/application/l10n/libre_translate_button', l10n: @l10n %>
-      <%= submit f %>
-    <% end %>
-  <% end %>
-<% end %>
+<%= render 'form', media: @media, l10n: @l10n %>
