@@ -38,20 +38,6 @@ fr:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: URL cible
         upper_menu: Menu haut (en HTML)
-      communication/extranet/localization:
-        cookies_policy: Politique de cookies
-        favicon: Icône de navigateur (favicon)
-        home_sentence: Phrase affichée sur la home
-        invitation_message: Message d'invitation automatique
-        invitation_message_subject: Sujet du mail
-        invitation_message_text: Texte du mail
-        logo: Logo
-        name: Nom
-        published: Langue publiée
-        privacy_policy: Politique de confidentialité
-        registration_contact: Mail de contact pour les problèmes d'inscription
-        sso_button_label: Libellé du bouton de connexion
-        terms: Conditions d'utilisation
       communication/extranet/connection:
         connected: Connecté
       communication/extranet/document:
@@ -74,6 +60,9 @@ fr:
         cookies_policy: Politique de cookies
         favicon: Icône de navigateur (favicon)
         home_sentence: Phrase affichée sur la home
+        invitation_message: Message d'invitation automatique
+        invitation_message_subject: Sujet du mail
+        invitation_message_text: Texte du mail
         logo: Logo
         name: Nom
         privacy_policy: Politique de confidentialité
