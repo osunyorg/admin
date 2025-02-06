@@ -56,7 +56,7 @@ class Communication::Media < ApplicationRecord
 
   before_validation :create_original_blob_from_upload, on: :create, if: :original_uploaded_file
 
-  validates_presence_of :original_uploaded_file
+  validates_presence_of :original_uploaded_file, on: :create
 
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)
