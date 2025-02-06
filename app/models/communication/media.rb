@@ -56,7 +56,7 @@ class Communication::Media < ApplicationRecord
 
   before_validation :create_original_blob_from_upload, on: :create, if: :original_uploaded_file
 
-  validates :original_blob, presence: true, on: :create
+  validates :original_uploaded_file, presence: true, on: :create, unless: :original_blob
 
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)
@@ -92,11 +92,11 @@ class Communication::Media < ApplicationRecord
       about: about
     ).first_or_create
     # Attachement du nouveau blob
-    ActiveStorage::Attachment.create(
+    ActiveStorage::Attachment.where(
       name: key,
       blob: original_blob,
       record: about
-    )
+    ).first_or_create
   end
 
   protected
