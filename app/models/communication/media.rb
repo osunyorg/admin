@@ -140,6 +140,7 @@ class Communication::Media < ApplicationRecord
     return if media_exists_for_blob_checksum?(blob)
     # Blob is not a duplicate, we can save it and upload the file
     blob.save!
+    # https://apidock.com/rails/v7.0.0/ActiveStorage/Blob/upload_without_unfurling
     blob.upload_without_unfurling(original_uploaded_file_io)
     blob.update_column :university_id, university_id
 
@@ -155,6 +156,7 @@ class Communication::Media < ApplicationRecord
     # Instead, we use the build_and_unfurl method of the Blob class:
     # - Build will initialize a new Blob object
     # - Unfurl will calculate the checksum, the content type and the byte size
+    # https://apidock.com/rails/v7.0.0/ActiveStorage/Blob/build_after_unfurling/class
     ActiveStorage::Blob.build_after_unfurling(
       io: io,
       filename: original_uploaded_file.original_filename,
