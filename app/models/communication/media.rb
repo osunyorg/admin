@@ -56,7 +56,7 @@ class Communication::Media < ApplicationRecord
 
   before_validation :create_original_blob_from_upload, on: :create, if: :original_uploaded_file
 
-  validates_presence_of :original_uploaded_file, on: :create
+  validates :original_blob, presence: true, on: :create
 
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)
@@ -135,9 +135,15 @@ class Communication::Media < ApplicationRecord
 
   def create_original_blob_from_upload
     return if wrong_uploaded_file? || file_size_too_big?
-    blob = create_blob_from_upload
-    return if blob_already_exists?(blob)
+    original_uploaded_file_io = original_uploaded_file.open
+    # We build the blob to get the checksum and avoid duplicates
+    blob = build_blob_from_upload(original_uploaded_file_io)
+    return if media_exists_for_blob_checksum?(blob)
+    # Blob is not a duplicate, we can save it and upload the file
+    blob.save!
+    blob.upload_without_unfurling(original_uploaded_file_io)
     blob.update_column :university_id, university_id
+
     self.original_blob_id = blob.id
     self.original_checksum = blob.checksum
     self.original_filename = blob.filename.to_s
@@ -145,16 +151,14 @@ class Communication::Media < ApplicationRecord
     self.original_byte_size = blob.byte_size
   end
 
-  def create_blob_from_upload
-    ActiveStorage::Blob.create_and_upload!(
-      io: original_uploaded_file.open,
+  def build_blob_from_upload(io)
+    ActiveStorage::Blob.build_after_unfurling!(
+      io: io,
       filename: original_uploaded_file.original_filename,
       content_type: original_uploaded_file.content_type
     )
   end
 
-  # When does that happen? @SebouChu do you know? 
-  # There's a check `if: :original_uploaded_file` on the validator.
   def wrong_uploaded_file?
     if !original_uploaded_file.is_a?(ActionDispatch::Http::UploadedFile)
       errors.add :original_uploaded_file, :no_file
@@ -173,7 +177,7 @@ class Communication::Media < ApplicationRecord
     end
   end
 
-  def blob_already_exists?(blob)
+  def media_exists_for_blob_checksum?(blob)
     if university.communication_medias.where(original_checksum: blob.checksum).any?
       errors.add :original_uploaded_file, :already_imported
       true
