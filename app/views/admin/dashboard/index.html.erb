@@ -12,7 +12,7 @@
   <div class="col-lg-8">
     <%= osuny_panel Communication::Website.model_name.human(count: 2) do %>
       <%= render 'admin/communication/websites/list', 
-                  websites: Communication::Website.organized_for(current_user, current_language),
+                  websites: Communication::Website.organized_for(current_user, current_language, current_ability),
                   large: true %>
     <% end %>
     <%= render 'admin/application/favorites/show' %>

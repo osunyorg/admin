@@ -24,6 +24,8 @@ class Ability::WebsiteManager < Ability
     can :manage, University::Person::Involvement, university_id: @user.university_id
     can :manage, User::Favorite, user_id: @user
     can :manage, Communication::Media, university_id: @user.university_id
+    can :manage, Communication::Media::Category, university_id: @user.university_id
+    can :manage, Communication::Media::Collection, university_id: @user.university_id
     cannot :destroy, Communication::Website
   end
 
