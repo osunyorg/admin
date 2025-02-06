@@ -56,6 +56,8 @@ class Communication::Media < ApplicationRecord
 
   before_validation :create_original_blob_from_upload, on: :create, if: :original_uploaded_file
 
+  validates_presence_of :original_uploaded_file
+
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)
     .where(communication_media_localizations: { language_id: language.id })
@@ -132,8 +134,7 @@ class Communication::Media < ApplicationRecord
   end
 
   def create_original_blob_from_upload
-    return unless original_uploaded_file.is_a?(ActionDispatch::Http::UploadedFile)
-    return unless file_size_ok?
+    return if wrong_uploaded_file? || file_size_too_big?
     blob = create_blob_from_upload
     return if blob_already_exists?(blob)
     blob.update_column :university_id, university_id
@@ -152,20 +153,31 @@ class Communication::Media < ApplicationRecord
     )
   end
 
-  def blob_already_exists?(blob)
-    if university.communication_medias.where(original_checksum: blob.checksum).any?
-      errors.add :original_uploaded_file, :already_imported
+  # When does that happen? @SebouChu do you know? 
+  # There's a check `if: :original_uploaded_file` on the validator.
+  def wrong_uploaded_file?
+    if !original_uploaded_file.is_a?(ActionDispatch::Http::UploadedFile)
+      errors.add :original_uploaded_file, :no_file
       true
     else
       false
     end
   end
 
-  def file_size_ok?
-    if original_uploaded_file.size <= Rails.application.config.default_image_max_size
+  def file_size_too_big?
+    if original_uploaded_file.size > Rails.application.config.default_image_max_size
+      errors.add :original_uploaded_file, :too_big
       true
     else
-      errors.add :original_uploaded_file, :too_big
+      false
+    end
+  end
+
+  def blob_already_exists?(blob)
+    if university.communication_medias.where(original_checksum: blob.checksum).any?
+      errors.add :original_uploaded_file, :already_imported
+      true
+    else
       false
     end
   end
