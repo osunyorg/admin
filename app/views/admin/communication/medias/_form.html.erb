@@ -5,17 +5,30 @@
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
     <div class="row">
-      <div class="col-lg-6">
-        <%= lf.input :name %>
-        <%= f.input :original_uploaded_file, as: :file, input_html: { accept: default_images_formats_accepted } if media.new_record? %>
-        <%= f.association :collection,
-                          collection: osuny_collection(
-                            current_university.communication_media_collections,
-                            localized: true
-                          ) %>
-        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
+      <div class="col-lg-4">
+        <% if @media.new_record? %>
+          <%= f.input :original_uploaded_file,
+                      as: :file,
+                      hint: images_formats_accepted_hint,
+                      input_html: { accept: default_images_formats_accepted } %>
+        <% else %>
+          <%= kamifusen_tag @media.original_blob, class: 'img-fluid mb-3' %>
+        <% end %>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-lg-6">
+          <%= lf.input :name %>
+          </div>
+          <div class="col-lg-6">
+            <%= f.association :collection,
+                              collection: osuny_collection(
+                                current_university.communication_media_collections,
+                                localized: true
+                              ) %>
+          </div>
+        </div>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= lf.input :alt,
                       label: t('featured_image.alt.label'),
                       hint: t('featured_image.alt.hint'),
@@ -37,7 +50,7 @@
       </div>
     </div>
     <% content_for :action_bar_right do %>
-      <%= render 'admin/application/l10n/libre_translate_button', l10n: @l10n %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: l10n %>
       <%= submit f %>
     <% end %>
   <% end %>

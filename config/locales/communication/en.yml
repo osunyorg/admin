@@ -272,6 +272,11 @@ en:
           attributes:
             published:
               cannot_unpublished_default: cannot be unpublished (default language)
+        communication/media:
+          attributes:
+            original_uploaded_file:
+              already_imported: already imported in media library
+              too_big: too heavy!
         communication/website/agenda/event:
           attributes:
             to_day:

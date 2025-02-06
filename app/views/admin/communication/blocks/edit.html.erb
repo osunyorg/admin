@@ -77,7 +77,7 @@
 <%= javascript_include_tag 'vue' %>
 
 <script nonce="<%= request.content_security_policy_nonce %>">
-  var app = Vue.createApp({
+  let app = Vue.createApp({
     components: {
       draggable: VueDraggableNext.VueDraggableNext,
     },
@@ -96,25 +96,25 @@
     methods: {
       // TODO : create a uploader vue3 component
       onMultipleFileImageChange(event, key) {
-        var files = event.target.files || event.dataTransfer.files;
+        let files = event.target.files || event.dataTransfer.files;
         if (!files.length)
           return;
 
-        var index = 0;
-        for(var i = 0; i < files.length; i += 1) {
+        let index = 0;
+        for(let i = 0; i < files.length; i += 1) {
           index = this.data.elements.length;
           this.data.elements.push(JSON.parse(JSON.stringify(this.defaultElement)));
           this.uploadFile(event.target, files[i], this.data.elements[index], key);
         }
       },
       onFileImageChange(event, object, key) {
-        var files = event.target.files || event.dataTransfer.files;
+        let files = event.target.files || event.dataTransfer.files;
         if (!files.length)
           return;
         this.uploadFile(event.target, files[0], object, key);
       },
       uploadFile(input, file, object, key) {
-        var size = Math.round(file.size / 1024 / 1024),
+        let size = Math.round(file.size / 1024 / 1024),
             sizeLimit = <%= Rails.application.config.default_image_max_size %>,
             sizeLimitMo = 0,
             controller;
@@ -144,22 +144,32 @@
         return this.getFileUrl(data.signed_id, "image_1024x.jpg");
       },
       handleSummernotes() {
-        var $summernoteElements = $('.summernote-vue:not(.is-initialized)');
+        let $summernoteElements = $('.summernote-vue:not(.is-initialized)');
 
         $summernoteElements.each(function(index){
           $summernoteElements.get(index).classList.add('is-initialized');
           this.initSummernote($summernoteElements.get(index));
         }.bind(this));
       },
+      // Deletes and recreates Summernote instances
+      refreshSummernotes() {
+        let summernotes = document.getElementsByClassName('summernote-vue');
+        for (let textarea of summernotes) {
+          textarea.classList.remove('is-initialized');
+          let $summernote = $(textarea);
+          $summernote.summernote('destroy');
+        };
+        this.handleSummernotes();
+      },
       handleCodemirrors() {
-        var $codemirrorElements = $('.codemirror-vue');
+        let $codemirrorElements = $('.codemirror-vue');
 
         $codemirrorElements.each(function(index){
           this.initCodemirror($codemirrorElements.get(index));
         }.bind(this));
       },
       initSummernote(element) {
-        var config = element.getAttribute('data-summernote-config') || 'default',
+        let config = element.getAttribute('data-summernote-config') || 'default',
           onChangeCallback = function(content) {
               element.value = content;
               element.dispatchEvent(new Event('input'))
@@ -169,10 +179,10 @@
             $(this).parent().children('.note-editor').addClass('note-editor--focus');
           },
           onBlurCallback = function() {
-            var editor = $(this).parent().children('.note-editor');
+            let editor = $(this).parent().children('.note-editor');
             editor.addClass('note-editor--defocusing');
             setTimeout(function () {
-              var defocusing = editor.hasClass('note-editor--defocusing'),
+              let defocusing = editor.hasClass('note-editor--defocusing'),
                   codeview = editor.hasClass('codeview');
               if (defocusing && !codeview) {
                 editor.removeClass('note-editor--focus');
@@ -182,7 +192,7 @@
           },
           onCursorCallback = function(event) {
             // TODO vérifier si on est dans une note correctement, là ça ne marche pas si on se balade au clavier
-            var node = event.target.nodeName,
+            let node = event.target.nodeName,
                 $editor = $(this).parent().children('.note-editor'),
                 $buttonNote = $editor.find('.note-btn-note');
             if (node === 'NOTE') {
@@ -212,7 +222,7 @@
         });
       },
       initCodemirror(element) {
-        var config = window.codemirrorManager.defaultConfig(),
+        let config = window.codemirrorManager.defaultConfig(),
             mode = element.getAttribute('data-codemirror-mode'),
             editor;
         config['mode'] = mode;
@@ -240,14 +250,14 @@
   });
 
   window.addEventListener('direct-upload:progress', function (event) {
-    var progressBar = event.target.parentNode.querySelector('progress');
+    let progressBar = event.target.parentNode.querySelector('progress');
     if (progressBar) {
       progressBar.value = event.detail.progress;
     }
   });
 
   window.addEventListener('direct-upload:end', function (event) {
-    var progressBar = event.target.parentNode.querySelector('progress');
+    let progressBar = event.target.parentNode.querySelector('progress');
     if (progressBar) {
       progressBar.parentNode.removeChild(progressBar);
     }
@@ -258,7 +268,7 @@
       app.mount('#app');
       
       $("#block-form").on("ajax:success", function(e) {
-        var blockIdentifier = "<%= @block.id %>", 
+        let blockIdentifier = "<%= @block.id %>", 
             blockPath = "<%= admin_communication_block_path(@block) %>";
         parent.window.osuny.contentEditor.offcanvas.onBlockSave(blockIdentifier, blockPath);
       });

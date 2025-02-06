@@ -56,6 +56,8 @@ class Communication::Media < ApplicationRecord
 
   before_validation :create_original_blob_from_upload, on: :create, if: :original_uploaded_file
 
+  validates :original_uploaded_file, presence: true, on: :create, unless: :original_blob
+
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)
     .where(communication_media_localizations: { language_id: language.id })
@@ -90,11 +92,11 @@ class Communication::Media < ApplicationRecord
       about: about
     ).first_or_create
     # Attachement du nouveau blob
-    ActiveStorage::Attachment.create(
+    ActiveStorage::Attachment.where(
       name: key,
       blob: original_blob,
       record: about
-    )
+    ).first_or_create
   end
 
   protected
@@ -132,16 +134,60 @@ class Communication::Media < ApplicationRecord
   end
 
   def create_original_blob_from_upload
-    return unless original_uploaded_file.is_a?(ActionDispatch::Http::UploadedFile)
-    blob = ActiveStorage::Blob.create_and_upload!(
-      io: original_uploaded_file.open,
-      filename: original_uploaded_file.original_filename,
-      content_type: original_uploaded_file.content_type
-    )
+    return if wrong_uploaded_file? || file_size_too_big?
+    original_uploaded_file_io = original_uploaded_file.open
+    blob = build_blob_from_upload(original_uploaded_file_io)
+    return if media_exists_for_blob_checksum?(blob)
+    # Blob is not a duplicate, we can save it and upload the file
+    blob.save!
+    # https://apidock.com/rails/v7.0.0/ActiveStorage/Blob/upload_without_unfurling
+    blob.upload_without_unfurling(original_uploaded_file_io)
     blob.update_column :university_id, university_id
+
     self.original_blob_id = blob.id
+    self.original_checksum = blob.checksum
     self.original_filename = blob.filename.to_s
     self.original_content_type = blob.content_type
     self.original_byte_size = blob.byte_size
+  end
+
+  def build_blob_from_upload(io)
+    # We don't use create_and_upload! method as persisting the blob and uploading the file might be useless.
+    # Instead, we use the build_and_unfurl method of the Blob class:
+    # - Build will initialize a new Blob object
+    # - Unfurl will calculate the checksum, the content type and the byte size
+    # https://apidock.com/rails/v7.0.0/ActiveStorage/Blob/build_after_unfurling/class
+    ActiveStorage::Blob.build_after_unfurling(
+      io: io,
+      filename: original_uploaded_file.original_filename,
+      content_type: original_uploaded_file.content_type
+    )
+  end
+
+  def wrong_uploaded_file?
+    if !original_uploaded_file.is_a?(ActionDispatch::Http::UploadedFile)
+      errors.add :original_uploaded_file, :no_file
+      true
+    else
+      false
+    end
+  end
+
+  def file_size_too_big?
+    if original_uploaded_file.size > Rails.application.config.default_image_max_size
+      errors.add :original_uploaded_file, :too_big
+      true
+    else
+      false
+    end
+  end
+
+  def media_exists_for_blob_checksum?(blob)
+    if university.communication_medias.where(original_checksum: blob.checksum).any?
+      errors.add :original_uploaded_file, :already_imported
+      true
+    else
+      false
+    end
   end
 end
