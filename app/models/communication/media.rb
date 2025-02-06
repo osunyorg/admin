@@ -136,7 +136,6 @@ class Communication::Media < ApplicationRecord
   def create_original_blob_from_upload
     return if wrong_uploaded_file? || file_size_too_big?
     original_uploaded_file_io = original_uploaded_file.open
-    # We build the blob to get the checksum and avoid duplicates
     blob = build_blob_from_upload(original_uploaded_file_io)
     return if media_exists_for_blob_checksum?(blob)
     # Blob is not a duplicate, we can save it and upload the file
@@ -152,6 +151,10 @@ class Communication::Media < ApplicationRecord
   end
 
   def build_blob_from_upload(io)
+    # We don't use create_and_upload! method as persisting the blob and uploading the file might be useless.
+    # Instead, we use the build_and_unfurl method of the Blob class:
+    # - Build will initialize a new Blob object
+    # - Unfurl will calculate the checksum, the content type and the byte size
     ActiveStorage::Blob.build_after_unfurling(
       io: io,
       filename: original_uploaded_file.original_filename,
