@@ -3,7 +3,7 @@ import { Upload } from 'lucide-vue-next';
 import CropperModal from '../../components/CropperModal.vue';
 
 export default {
-  components: { 
+  components: {
     Upload,
     CropperModal,
   },
@@ -72,9 +72,14 @@ export default {
       this.directUpload.create(function (error, blob) {
         if (error) {
           console.error(error);
-        } else {
-          this.setBlob(blob);
+          return;
+        }
+
+        this.setBlob(blob);
+        if (this.isResizable(this.input.object)) {
           this.$refs.cropper.launch(this.blob);
+        } else {
+          this.$emit('uploaded', this.blob);
         }
       }.bind(this));
     },
@@ -82,11 +87,15 @@ export default {
       this.blob.id = blob.id;
       this.blob.signed_id = blob.signed_id;
       this.blob.checksum = blob.checksum;
-      this.blob.url = "/media/" + this.blob.signed_id + "/preview.jpg";
+      // png to manage transparency, even if image is a jpg (it's just a preview)
+      this.blob.url = "/media/" + this.blob.signed_id + "/preview.png";
     },
     cropped(blob) {
       this.setBlob(blob);
       this.$emit('uploaded', this.blob);
+    },
+    isResizable (file) {
+      return (/^image\/(png|jpeg)+$/).test(file.type);
     },
     closeAlert() {
       this.size.alert = false;
@@ -120,7 +129,7 @@ export default {
       <div class="form-text">{{ formats.hint }}</div>
     </div>
     <CropperModal
-      ref="cropper" 
+      ref="cropper"
       @cropped="cropped"
       />
     <div  class="modal show"
