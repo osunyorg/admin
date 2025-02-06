@@ -54,7 +54,7 @@
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 
 <div class="row">
-  <div class="offset-lg-4">
+  <div class="offset-lg-4 col-lg-8">
     <%= osuny_panel t('university.organization.employees') do %>
       <div class="row g-2 mb-3">
         <% @organization.experiences.ordered.each do |experience| %>
