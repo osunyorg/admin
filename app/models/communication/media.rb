@@ -152,7 +152,7 @@ class Communication::Media < ApplicationRecord
   end
 
   def build_blob_from_upload(io)
-    ActiveStorage::Blob.build_after_unfurling!(
+    ActiveStorage::Blob.build_after_unfurling(
       io: io,
       filename: original_uploaded_file.original_filename,
       content_type: original_uploaded_file.content_type
