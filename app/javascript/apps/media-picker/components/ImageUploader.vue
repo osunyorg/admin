@@ -87,7 +87,8 @@ export default {
       this.blob.id = blob.id;
       this.blob.signed_id = blob.signed_id;
       this.blob.checksum = blob.checksum;
-      this.blob.url = "/media/" + this.blob.signed_id + "/preview.jpg";
+      // png to manage transparency, even if image is a jpg (it's just a preview)
+      this.blob.url = "/media/" + this.blob.signed_id + "/preview.png";
     },
     cropped(blob) {
       this.setBlob(blob);
