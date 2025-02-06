@@ -123,8 +123,9 @@ class Communication::Website < ApplicationRecord
     order(created_at: :desc)
   }
 
-  def self.organized_for(user, language, ability, limit: 6)
+  def self.organized_for(user, language, limit: 6)
     university = user.university
+    ability = ::Ability.for(user)
     # Favorites first
     favorites_ids = user.favorites.websites.pluck(:about_id)
     websites =  university.websites

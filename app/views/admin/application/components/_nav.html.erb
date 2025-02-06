@@ -50,7 +50,7 @@ languages = current_university.languages.ordered
       <div class="favorites">
         <p class="section"><%= User::Favorite.model_name.human(count: 2) %></p>
         <ul class="navbar-nav">
-          <% Communication::Website.organized_for(current_user, current_language, current_ability).each do |website|
+          <% Communication::Website.organized_for(current_user, current_language).each do |website|
             l10n = website.best_localization_for(current_language) %>
             <li class="nav-item">
               <%= link_to [:admin, website], class: 'nav-link' do %>
