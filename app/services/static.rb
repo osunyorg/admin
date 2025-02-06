@@ -47,6 +47,8 @@ class Static
   def self.remove_problematic_characters(code)
     # We don't want &#39; in the frontmatters!
     code = code.gsub("&#39\;", "'")
+    # We don't want &amp: either
+    code = code.gsub('&amp;', '&')
     # /u0092 breaks everything, should be an apostrophe
     code = code.gsub("\u0092".encode('utf-8'), "'")
     # Same operation with the problematic character itself

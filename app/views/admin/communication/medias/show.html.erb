@@ -1,7 +1,7 @@
 <% content_for :title, @l10n %>
 
 <div class="row">
-  <div class="col-lg-5">
+  <div class="col-lg-4">
     <% if @media.original_blob.representable? %>
       <div>
         <%= kamifusen_tag @media.original_blob, class: 'img-fluid mb-3' %>
@@ -11,7 +11,7 @@
               download_medium_path(signed_id: @media.original_blob.signed_id),
               class: button_classes %>
   </div>
-  <div class="offset-lg-1 col-lg-6">
+  <div class="col-lg-8">
     <%= osuny_label Communication::Media.human_attribute_name(:origin) %>
     <p><%= @media.origin_i18n %></p>
 
