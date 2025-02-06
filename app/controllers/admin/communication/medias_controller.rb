@@ -42,6 +42,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
     if @media.save
       redirect_to [:admin, @media], notice: t('admin.successfully_created_html', model: @media.to_s_in(current_language))
     else
+      load_invalid_localization
       @categories = categories
       breadcrumb
       render :new, status: :unprocessable_entity
@@ -52,6 +53,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
     if @media.update(media_params)
       redirect_to [:admin, @media], notice: t('admin.successfully_updated_html', model: @media.to_s_in(current_language))
     else
+      load_invalid_localization
       @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
