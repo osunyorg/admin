@@ -45,6 +45,7 @@ class Communication::Extranet < ApplicationRecord
   include Filterable
   include Localizable
   include LocalizableOrderByNameScope
+  include Searchable
   include WithAbouts
   include WithConnectedObjects
   include WithFeatures

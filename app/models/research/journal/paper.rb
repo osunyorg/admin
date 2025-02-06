@@ -38,6 +38,7 @@ class Research::Journal::Paper < ApplicationRecord
   include Localizable
   include Orderable
   include Sanitizable
+  include Searchable
   include WithUniversity
 
   belongs_to  :journal,
