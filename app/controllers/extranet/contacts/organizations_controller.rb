@@ -10,10 +10,10 @@ class Extranet::Contacts::OrganizationsController < Extranet::Contacts::Applicat
   def show
     @organization = current_extranet.connected_organizations.find(params[:id])
     @l10n = @organization.best_localization_for(current_language)
-    person_ids = @organization.experiences
-                              .pluck(:person_id)
-    @people = current_university.people
-                                .where(id: person_ids)
+    @people = current_extranet.connected_people
+                                .joins(:experiences)
+                                .merge(University::Person::Experience.current.where(organization_id: @organization.id))
+                                .ordered(current_language)
     breadcrumb
     add_breadcrumb @l10n
   end

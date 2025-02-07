@@ -17,7 +17,6 @@
         <% if @current_experiences.any? %>
           <div class="experiences mb-5">
             <h3 class="mb-5"><%= t('extranet.contacts.persons.experiences') %></h3>
-
             <% @current_experiences.each do |experience| %>
               <%
               experience_l10n = experience.best_localization_for(current_language)

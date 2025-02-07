@@ -10,7 +10,11 @@ class Extranet::Contacts::PersonsController < Extranet::Contacts::ApplicationCon
   def show
     @person = current_extranet.connected_people.find(params[:id])
     @l10n = @person.best_localization_for(@person)
-    @current_experiences = @person.experiences.includes(:organization).current.ordered
+    @current_experiences = @person.experiences
+                                  .joins(:organization)
+                                  .where(university_organizations: { id: current_extranet.connected_organizations.pluck(:id) })
+                                  .current
+                                  .ordered
     breadcrumb
     add_breadcrumb @l10n
   end
