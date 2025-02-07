@@ -150,7 +150,7 @@ class Communication::Media < ApplicationRecord
     # https://apidock.com/rails/v7.0.0/ActiveStorage/Blob/upload_without_unfurling
     blob.upload_without_unfurling(original_uploaded_file_io)
     blob.update_column :university_id, university_id
-    original_blob = blob
+    self.original_blob = blob
   end
 
   def build_blob_from_upload(io)
