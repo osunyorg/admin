@@ -1,0 +1,13 @@
+<%
+localization = about
+project = localization.about
+language = localization.language
+website = project.website
+path = admin_communication_website_portfolio_projet_path(website_id: website.id, id: project.id)
+target ||= ''
+link = "#{path}#{target}"
+%>
+<%= render 'admin/communication/medias/contexts/default',
+            localization: localization,
+            link: link,
+            type: Communication::Website::Portfolio::Project.model_name.human %>

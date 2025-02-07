@@ -17,15 +17,16 @@ authors:
   - "<%= author_l10n.slug %>"
 <% end %>
 <% end %>
-<%= render 'admin/application/categories/widget/static',
-            about: post,
-            l10n: @l10n,
-            categories: @website.post_categories,
-            key: :posts_categories %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/images/shared/static', about: @l10n %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
+<%= render 'admin/application/header_cta/static', about: @l10n %>
+<%= render 'admin/application/categories/widget/static',
+            about: post,
+            l10n: @l10n,
+            categories: @website.post_categories,
+            key: :posts_categories %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---

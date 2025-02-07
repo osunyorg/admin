@@ -41,6 +41,7 @@ class Communication::Website::Page < ApplicationRecord
   include Localizable
   include Orderable
   include Sanitizable
+  include Searchable
   include WithAutomaticMenus
   include WithMenuItemTarget
   include WithOpenApi
