@@ -2,15 +2,16 @@
 #
 # Table name: communication_media_localizations
 #
-#  id            :uuid             not null, primary key
-#  alt           :text
-#  credit        :text
-#  name          :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             not null, indexed
-#  language_id   :uuid             not null, indexed
-#  university_id :uuid             not null, indexed
+#  id                   :uuid             not null, primary key
+#  alt                  :text
+#  credit               :text
+#  internal_description :text
+#  name                 :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  about_id             :uuid             not null, indexed
+#  language_id          :uuid             not null, indexed
+#  university_id        :uuid             not null, indexed
 #
 # Indexes
 #

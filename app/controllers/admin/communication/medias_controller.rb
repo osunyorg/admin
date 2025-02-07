@@ -63,7 +63,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
 
   def destroy
     @media.destroy
-    redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @media.to_s_in(current_language))
+    redirect_to admin_communication_medias_url, notice: t('admin.successfully_destroyed_html', model: @media.to_s_in(current_language))
   end
 
   protected
@@ -73,7 +73,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
           .permit(
             :communication_media_collection_id, :original_uploaded_file, category_ids: [],
             localizations_attributes: [
-              :id, :name, :alt, :credit, :language_id
+              :id, :name, :alt, :credit, :internal_description, :language_id
             ]
           )
           .merge(university_id: current_university.id)
