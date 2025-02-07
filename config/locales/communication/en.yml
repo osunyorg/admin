@@ -108,6 +108,7 @@ en:
         name: Name
       communication/media/localization:
         name: Name
+        internal_description: Internal description
       communication/website:
         about: About
         about_: Independent website
@@ -219,9 +220,6 @@ en:
         breadcrumb_title: Title in breadcrumbs
         featured_image: Featured image
         featured_image_alt: Alt text
-        header_cta: Display call to action into header
-        header_cta_label: Call to action label
-        header_cta_url: Call to cation target
         header_text: Title displayed in header
         path: Path
         published: Published?
@@ -405,6 +403,11 @@ en:
             launch: Launch analysis
             launched: Analysis launched
             title: Git analysis
+        header:
+          cta:
+            button: Display call to action in header
+            label: Call to action label
+            url: Call to action URL
         localizations:
           fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
           title: Internationalization

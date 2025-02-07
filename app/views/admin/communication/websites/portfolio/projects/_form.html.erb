@@ -11,6 +11,7 @@
           <%= lf.input :title %>
           <%= lf.input :subtitle %>
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+          <%= render 'admin/application/header_cta/form', f: lf %>
         <% end %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
