@@ -68,7 +68,6 @@ class Communication::Extranet < ApplicationRecord
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
 
   validates :host, presence: true
-  validates :about_type, :about_id, presence: true, if: :feature_alumni
 
   before_validation :sanitize_fields
   before_validation :set_default_language,

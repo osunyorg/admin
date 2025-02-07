@@ -256,6 +256,8 @@ en:
       models:
         communication/extranet:
           attributes:
+            feature_alumni:
+              unavailable: is not available for this kind of extranet
             sso_mapping:
               missing_email: doesn't handle the email
         communication/extranet/localization:
