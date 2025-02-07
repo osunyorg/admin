@@ -1,12 +1,7 @@
-<% 
-people_paged =  people.ordered(current_language)
-                      .page(params[:page])
-%>
 <div class="row">
-  <% people_paged.each do |person| %>
+  <% people.each do |person| %>
     <div class="col-md-2">
       <%= render 'extranet/alumni/persons/person', person: person %>
     </div>
   <% end %>
 </div>
-<%= paginate people_paged, theme: 'bootstrap-5' %>

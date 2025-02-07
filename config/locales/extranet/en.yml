@@ -46,3 +46,5 @@ en:
     posts:
       home: Recent posts
       read_post: Read post
+    search:
+      no_results: No results

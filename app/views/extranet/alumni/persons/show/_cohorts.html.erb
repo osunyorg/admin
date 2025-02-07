@@ -1,0 +1,35 @@
+<div class="experiences mt-4">
+  <h2 class="mb-4"><%= Education::Cohort.model_name.human(count: 2) %></h2>
+  <ul class="list-unstyled">
+    <% cohorts.each do |cohort| %>
+      <%
+      program_l10n = cohort.program.best_localization_for(current_language)
+      diploma_l10n = cohort.program.diploma.best_localization_for(current_language) if cohort.program.diploma.present?
+      school_l10n = cohort.school.best_localization_for(current_language)
+      %>
+      <li class="experiences__experience py-4 border-top">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="mb-0">
+              <%= link_to [:alumni, cohort] do %>
+                <b><%= program_l10n %></b><br>
+                <% if diploma_l10n.present? %>
+                  <%= diploma_l10n %><br>
+                <% end %>
+                <%= cohort.year %>
+              <% end %>
+            </p>
+          </div>
+          <div class="col-md-6 text-end">
+            <% if school_l10n.logo.attached? %>
+              <%= kamifusen_tag school_l10n.logo, width: 100, class: 'img-fluid experience__organization__logo' %>
+            <% else %>
+              <p class="text-end"><%= school_l10n %></p>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%= paginate cohorts, theme: 'bootstrap-5', param_name: :cohorts_page %>
+</div>

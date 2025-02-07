@@ -1,8 +1,9 @@
-class Extranet::ExperiencesController < Extranet::ApplicationController
+class Extranet::Account::ExperiencesController < Extranet::ApplicationController
   before_action :load_experience, only: [:edit, :update, :destroy]
 
   def new
-    @experience = current_user.experiences.new
+    organization = current_university.organizations.find_by(id: params[:organization_id])
+    @experience = current_user.experiences.new(organization: organization)
     @l10n = @experience.localizations.build(language: current_language)
     breadcrumb
     add_breadcrumb University::Person::Experience.human_attribute_name('new')
@@ -18,7 +19,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
     @experience = current_user.experiences.new(experience_params)
     if @experience.save
       redirect_to account_path,
-                  notice: t('admin.successfully_created_html', model: @experience.organization.to_s)
+                  notice: t('admin.successfully_created_html', model: @experience.class.model_name.human)
     else
       @l10n = @experience.localizations.first
       breadcrumb
@@ -30,7 +31,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
   def update
     if @experience.update experience_params
       redirect_to account_path,
-                  notice: t('admin.successfully_updated_html', model: @experience.organization.to_s)
+                  notice: t('admin.successfully_updated_html', model: @experience.class.model_name.human)
     else
       breadcrumb
       add_breadcrumb @l10n
@@ -41,7 +42,7 @@ class Extranet::ExperiencesController < Extranet::ApplicationController
   def destroy
     @experience.destroy
     redirect_to account_path,
-                notice: t('admin.successfully_destroyed_html', model: @experience.organization.to_s)
+                notice: t('admin.successfully_destroyed_html', model: @experience.class.model_name.human)
   end
 
   protected

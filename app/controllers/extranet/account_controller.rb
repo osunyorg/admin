@@ -4,7 +4,10 @@ class Extranet::AccountController < Extranet::ApplicationController
   def show
     # Admin or Superadmins can have NO person
     @person = current_user.person
-    @person_l10n = @person&.best_localization_for(current_language)
+    if @person.present?
+      @person_l10n = @person.best_localization_for(current_language)
+      @experiences = @person.experiences.ordered.page(params[:page])
+    end
     breadcrumb
   end
 

@@ -1,4 +1,6 @@
 # Full :as names are useful for the resolution of links like [:alumni, cohort]
+
+# Feature Contacts
 namespace :contacts do
   get 'persons' => 'persons#index', as: :persons
   get 'persons/:id' => 'persons#show', as: :person
@@ -7,6 +9,8 @@ namespace :contacts do
   get 'search' => 'search#index', as: :search
   root to: 'persons#index'
 end
+
+# Feature Alumni
 namespace :alumni do
   get 'cohorts' => 'cohorts#index', as: :education_cohorts
   get 'cohorts/:id' => 'cohorts#show', as: :education_cohort
@@ -18,11 +22,15 @@ namespace :alumni do
   get 'years/:id' => 'academic_years#show', as: :education_academic_year
   root to: 'persons#index'
 end
-resources :organizations, except: [:index, :destroy] do
+
+# Search and Organization creation in the context of experiences
+resources :organizations, only: [:new, :create] do
   collection do
     get 'search' => 'organizations#search', as: :search, defaults: { format: 'json' }
   end
 end
+
+# Feature Posts
 namespace :posts do
   get 'categories' => 'categories#index', as: :categories
   get 'categories/:slug' => 'categories#show', as: :category
@@ -30,17 +38,20 @@ namespace :posts do
   get ':date/:slug' => 'posts#show', as: :post
   root to: 'posts#index'
 end
+
+# Feature Documents
 namespace :documents do
   root to: 'documents#index'
 end
-get 'account' => 'account#show', as: :account
-get 'account/edit' => 'account#edit', as: :edit_account
-patch 'account' => 'account#update'
-scope :account do
-  resources :experiences, controller: 'experiences', except: [:index, :show]
-  get 'personal_data' => 'personal_data#edit', as: :edit_personal_data
-  patch 'personal_data' => 'personal_data#update', as: :personal_data
+
+# Account section
+namespace :account do
+  resources :experiences, except: [:index, :show]
+  resource :personal_data, only: [:edit, :update], controller: 'personal_data'
 end
+resource :account, only: [:show, :edit, :update], controller: 'account'
+
+# Static pages
 get 'terms' => 'pages#terms', as: :terms
 get 'privacy-policy' => 'pages#privacy_policy', as: :privacy_policy
 get 'cookies-policy' => 'pages#cookies_policy', as: :cookies_policy

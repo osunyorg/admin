@@ -1,6 +1,5 @@
-<% cohorts_paged = @cohorts.ordered.page(params[:page]) %>
 <div class="row">
-  <% cohorts_paged.each do |cohort| %>
+  <% cohorts.each do |cohort| %>
   <div class="col-md-4 col-xl-3">
     <article class="card mb-5">
       <div class="card-body">
@@ -17,4 +16,4 @@
   </div>
   <% end %>
 </div>
-<%= paginate cohorts_paged, theme: 'bootstrap-5' %>
+<%= paginate cohorts, theme: 'bootstrap-5' %>

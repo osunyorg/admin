@@ -17,7 +17,6 @@
         <% if @current_experiences.any? %>
           <div class="experiences mb-5">
             <h3 class="mb-5"><%= t('extranet.contacts.persons.experiences') %></h3>
-
             <% @current_experiences.each do |experience| %>
               <%
               experience_l10n = experience.best_localization_for(current_language)
@@ -51,6 +50,6 @@
   </div>
   <div class="offset-md-1 col-md-3 order-1 order-md-2">
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person.best_picture.attached? %>
-    <%= render 'extranet/contacts/persons/details', person: @person, l10n: @l10n %>
+    <%= render 'extranet/persons/details', person: @person, l10n: @l10n %>
   </div>
 </div>

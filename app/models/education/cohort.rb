@@ -57,6 +57,13 @@ class Education::Cohort < ApplicationRecord
     "#{program.to_s_in(university.default_language)} #{academic_year}"
   end
 
+  def subtitle_in(language)
+    subtitle_parts = []
+    subtitle_parts << program.diploma.to_s_in(language) if program.diploma.present?
+    subtitle_parts << program.to_s_in(language)
+    subtitle_parts.join(' — ')
+  end
+
   def year
     academic_year&.year
   end

@@ -1,16 +1,16 @@
 require "test_helper"
 
-class Extranet::ExperiencesControllerTest < ActionDispatch::IntegrationTest
+class Extranet::Account::ExperiencesControllerTest < ActionDispatch::IntegrationTest
   include ExtranetSetup
 
   def test_new
-    get new_experience_path(lang: french)
+    get new_account_experience_path(lang: french)
     assert_response(:success)
   end
 
   def test_create
     assert_difference("alumnus.experiences.count") do
-      post experiences_path(lang: french), params: {
+      post account_experiences_path(lang: french), params: {
         university_person_experience: {
           description: "Stage",
           from_year: 2022,
@@ -27,7 +27,7 @@ class Extranet::ExperiencesControllerTest < ActionDispatch::IntegrationTest
 
   def test_create_invalid
     assert_no_difference("alumnus.experiences.count") do
-      post experiences_path(lang: french), params: {
+      post account_experiences_path(lang: french), params: {
         university_person_experience: {
           from_year: 2022,
           to_year: 2022,
@@ -41,7 +41,7 @@ class Extranet::ExperiencesControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_edit
-    get edit_experience_path(university_person_experiences(:default_experience), lang: french)
+    get edit_account_experience_path(university_person_experiences(:default_experience), lang: french)
     assert_response(:success)
   end
 
@@ -50,7 +50,7 @@ class Extranet::ExperiencesControllerTest < ActionDispatch::IntegrationTest
     experience_l10n = experience.localization_for(french)
 
     assert(experience_l10n.description.blank?)
-    patch experience_path(experience, lang: french), params: {
+    patch account_experience_path(experience, lang: french), params: {
       university_person_experience: {
         localizations_attributes: [
           { id: experience_l10n.id, description: "Alternance", language_id: french.id }
@@ -64,7 +64,7 @@ class Extranet::ExperiencesControllerTest < ActionDispatch::IntegrationTest
   def test_update_invalid
     experience = university_person_experiences(:default_experience)
 
-    patch experience_path(experience, lang: french), params: {
+    patch account_experience_path(experience, lang: french), params: {
       university_person_experience: {
         organization_id: ""
       }

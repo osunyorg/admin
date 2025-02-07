@@ -53,6 +53,11 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id
 
+  has_many    :communication_extranets,
+              class_name: 'Communication::Extranet',
+              as: :about,
+              dependent: :nullify
+
   before_destroy :move_children
 
   scope :for_search_term, -> (term, language) {

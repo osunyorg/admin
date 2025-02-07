@@ -1,8 +1,8 @@
 class Extranet::Alumni::CohortsController < Extranet::Alumni::ApplicationController
   def index
     @facets = Education::Cohort::Facets.new params[:facets], {
-      model: about.education_cohorts,
-      about: about,
+      model: current_extranet.about.education_cohorts,
+      about: current_extranet.about,
       language: current_language
     }
     @cohorts = @facets.results
@@ -14,7 +14,11 @@ class Extranet::Alumni::CohortsController < Extranet::Alumni::ApplicationControl
   end
 
   def show
-    @cohort = about.education_cohorts.find(params[:id])
+    @cohort = current_extranet.about.education_cohorts
+                                    .find(params[:id])
+    @people =  @cohort.people
+                      .ordered(current_language)
+                      .page(params[:page])
     breadcrumb
     add_breadcrumb @cohort
   end

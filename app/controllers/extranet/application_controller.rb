@@ -9,10 +9,6 @@ class Extranet::ApplicationController < ApplicationController
     add_breadcrumb t('home'), extranet_root_path
   end
 
-  def about
-    current_extranet.about || current_university
-  end
-
   protected
 
   def redirect_if_no_extranet!

@@ -6,8 +6,8 @@
   </p>
 <% end %>
 
-<% if current_extranet.should_show_years? %>
-  <%= render 'index_facets' %>
+<% if current_extranet.should_show_academic_years? %>
+  <%= render 'extranet/alumni/cohorts/index/facets', cohorts: @cohorts, facets: @facets %>
 <% else %>
-  <%= render 'index_cards' %>
+  <%= render 'extranet/alumni/cohorts/index/cards', cohorts: @cohorts %>
 <% end %>

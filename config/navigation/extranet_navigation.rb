@@ -12,7 +12,7 @@ SimpleNavigation::Configuration.run do |navigation|
                       Communication::Extranet.human_attribute_name(:feature_documents),
                       documents_root_path if current_extranet.feature_documents?
 
-    primary.item      :contacts, 
+    primary.item      :contacts,
                       Communication::Extranet.human_attribute_name(:feature_contacts) do |secondary|
       secondary.item  :person,
                       University::Person.model_name.human(count: 2),
@@ -22,14 +22,14 @@ SimpleNavigation::Configuration.run do |navigation|
                       contacts_organizations_path
     end if current_extranet.feature_contacts?
 
-    primary.item      :alumni, 
+    primary.item      :alumni,
                       University::Person::Alumnus.model_name.human(count: 2) do |secondary|
       secondary.item  :person,
                       University::Person.model_name.human(count: 2),
                       alumni_university_persons_path
       secondary.item  :years,
                       Education::AcademicYear.model_name.human(count: 2),
-                      alumni_education_academic_years_path if current_extranet.should_show_years?
+                      alumni_education_academic_years_path if current_extranet.should_show_academic_years?
       secondary.item  :cohorts,
                       Education::Cohort.model_name.human(count: 2),
                       alumni_education_cohorts_path

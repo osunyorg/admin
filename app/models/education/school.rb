@@ -42,6 +42,10 @@ class Education::School < ApplicationRecord
               class_name: 'Communication::Website',
               as: :about,
               dependent: :nullify
+  has_many    :communication_extranets,
+              class_name: 'Communication::Extranet',
+              as: :about,
+              dependent: :nullify
 
   validates :address, :city, :zipcode, :country, presence: true
 

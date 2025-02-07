@@ -1,4 +1,4 @@
-class Extranet::PersonalDataController < Extranet::ApplicationController
+class Extranet::Account::PersonalDataController < Extranet::ApplicationController
   before_action :load_person
 
   def edit
@@ -34,7 +34,7 @@ class Extranet::PersonalDataController < Extranet::ApplicationController
             localizations_attributes: [
               :id, :language_id,
               :summary, :biography,
-              :url, :linkedin, :twitter, :mastodon, 
+              :url, :linkedin, :twitter, :mastodon,
             ]
           )
   end
