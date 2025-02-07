@@ -100,6 +100,15 @@ class Communication::Media < ApplicationRecord
     ).first_or_create
   end
 
+  def original_blob=(value)
+    super(value)
+    return if value.blank?
+    self.original_checksum = value.checksum
+    self.original_filename = value.filename.to_s
+    self.original_content_type = value.content_type
+    self.original_byte_size = value.byte_size
+  end
+
   protected
 
   def self.find_or_create_media_from_blob(blob, origin)
@@ -129,15 +138,6 @@ class Communication::Media < ApplicationRecord
     l10n.alt = alt
     l10n.credit = credit
     l10n.save
-  end
-
-  def original_blob=(value)
-    super(value)
-    return if value.blank?
-    self.original_checksum = value.checksum
-    self.original_filename = value.filename.to_s
-    self.original_content_type = value.content_type
-    self.original_byte_size = value.byte_size
   end
 
   def create_original_blob_from_upload
