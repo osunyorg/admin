@@ -44,6 +44,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
   include AsLocalizedTree
   include Contentful
   include Initials
+  include HeaderCallToAction
   include Permalinkable
   include Sanitizable
   include Shareable

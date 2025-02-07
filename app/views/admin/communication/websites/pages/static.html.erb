@@ -43,13 +43,8 @@ children:
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
 header_text: >-
-  <%= prepare_html_for_static @l10n.header_text %>
-header_cta:
-  display: <%= @l10n.header_cta %>
-  label: >-
-    <%= prepare_text_for_static @l10n.header_cta_label %>
-  target: "<%= @l10n.header_cta_url %>"
-  external: <%= @l10n.header_cta_url.present? && !(@l10n.header_cta_url.start_with?('/') || @l10n.header_cta_url.start_with?(@website.url)) %>
+<%= prepare_html_for_static @l10n.header_text %>
+<%= render 'admin/application/header_cta/static', about: @l10n %>
 <%= render 'admin/communication/websites/pages/static/section_taxonomies', page: page, language: language %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---

@@ -5,6 +5,9 @@
 #  id                       :uuid             not null, primary key
 #  featured_image_alt       :string
 #  featured_image_credit    :text
+#  header_cta               :boolean          default(FALSE)
+#  header_cta_label         :string
+#  header_cta_url           :string
 #  meta_description         :string
 #  migration_identifier     :string
 #  published                :boolean          default(FALSE)
@@ -38,6 +41,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   include AsLocalization
   include Contentful
   include Initials
+  include HeaderCallToAction
   include Permalinkable
   include Sanitizable
   include Shareable

@@ -220,9 +220,6 @@ fr:
         breadcrumb_title: Nom affiché dans le fil d'ariane
         featured_image: Image à la une
         featured_image_alt: Texte alternatif
-        header_cta: Afficher un bouton d'action dans le header
-        header_cta_label: Texte du bouton d'action
-        header_cta_url: URL du bouton d'action
         header_text: Titre affiché en haut de page
         path: Chemin
         published: Publié ?
@@ -406,6 +403,11 @@ fr:
             launch: Lancer une analyse
             launched: Analyse lancée
             title: Analyse Git
+        header:
+          cta:
+            button: Afficher un bouton d'action dans l'entête
+            label: Texte du bouton d'action
+            url: URL du bouton d'action
         localizations:
           fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
           title: Internationalisation
