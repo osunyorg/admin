@@ -12,33 +12,37 @@
               class: button_classes %>
   </div>
   <div class="col-lg-8">
-    <% if @l10n.name.present? %>
-      <%= osuny_label Communication::Media::Localization.human_attribute_name(:name) %>
-      <p><%= @l10n.name %></p>
-    <% end%>
-
-    <%= osuny_label Communication::Media.human_attribute_name(:origin) %>
-    <p><%= @media.origin_i18n %></p>
-
-    <%= osuny_label Communication::Media.human_attribute_name(:original_filename) %>
-    <p><%= @media.original_filename %></p>
-
-    <%= osuny_label Communication::Media.human_attribute_name(:original_content_type) %>
-    <p><%= @media.original_content_type %></p>
-
-    <%= osuny_label Communication::Media.human_attribute_name(:original_byte_size) %>
-    <p><%= number_to_human_size @media.original_byte_size %></p>
-
-    <% if @l10n.alt.present? %>
-      <%= osuny_label Communication::Media::Localization.human_attribute_name(:alt) %>
-      <p><%= @l10n.alt %></p>
-    <% end %>
-
-    <% if @l10n.credit.present? %>
-      <%= osuny_label Communication::Media::Localization.human_attribute_name(:credit) %>
-      <div><%= sanitize @l10n.credit %></div>
-    <% end %>
-
+    <div class="row">
+      <div class="col-lg-6">
+      <%= osuny_label Communication::Media.human_attribute_name(:origin) %>
+      <p><%= @media.origin_i18n %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Communication::Media.human_attribute_name(:original_filename) %>
+        <p><%= @media.original_filename %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Communication::Media.human_attribute_name(:original_content_type) %>
+        <p><%= @media.original_content_type %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Communication::Media.human_attribute_name(:original_byte_size) %>
+        <p><%= number_to_human_size @media.original_byte_size %></p>
+      </div>
+      <% if @l10n.alt.present? %>
+        <div class="col-lg-6">
+          <%= osuny_label t('featured_image.alt.label') %>
+          <p><%= @l10n.alt %></p>
+        </div>
+      <% end %>
+      <% if @l10n.credit.present? %>
+        <div class="col-lg-6">
+          <%= osuny_label t('featured_image.credit.label') %>
+          <div><%= sanitize @l10n.credit %></div>
+        </div>
+      <% end %>
+    </div>
+  
     <% if @media.collection.present? %>
       <%= osuny_label Communication::Media::Localization.human_attribute_name(:collection) %>
       <p><%= osuny_link_localized @media.collection, admin_communication_media_collection_path(@media.collection) %><p>

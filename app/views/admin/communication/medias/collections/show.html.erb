@@ -1,9 +1,5 @@
 <% content_for :title, @l10n %>
 
-<% content_for :title_right do %>
-  <%= osuny_thumbnail_localized @collection %>
-<% end %>
-
 <% if @medias.total_count > 0 %>
   <p>
     <%= @medias.total_count %>
