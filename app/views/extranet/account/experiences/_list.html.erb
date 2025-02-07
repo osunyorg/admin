@@ -1,5 +1,6 @@
 <%
 edit ||= false
+hide_organization_link ||= false
 %>
 <div class="experiences mt-4">
   <ul class="list-unstyled">
@@ -27,12 +28,12 @@ edit ||= false
                 path = alumni_university_organization_path(experience.organization)
                 %>
                 <% if organization_l10n.logo.attached? %>
-                  <%= link_to path do %>
-                    <%= kamifusen_tag organization_l10n.logo, width: 100, class: 'img-fluid experience__organization__logo' %>
-                  <% end %>
+                  <%= link_to_unless  hide_organization_link,
+                                      kamifusen_tag(organization_l10n.logo, width: 100, class: 'img-fluid experience__organization__logo'),
+                                      path %>
                 <% else %>
                   <p class="text-end">
-                    <%= link_to organization_l10n, path %>
+                    <%= link_to_unless hide_organization_link, organization_l10n, path %>
                   </p>
                 <% end %>
               <div>

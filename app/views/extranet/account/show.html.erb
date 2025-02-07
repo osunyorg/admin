@@ -7,12 +7,15 @@
         <%= sanitize @person_l10n.biography %>
       </div>
     <% end %>
-    <% if @person && current_extranet.feature_alumni? %>
+    <% if @person %>
       <p><%= t('extranet.experiences.title') %></p>
       <%= link_to University::Person::Experience.human_attribute_name('new'),
                   new_account_experience_path,
                   class: 'btn btn-sm btn-primary mt-md-n5 float-md-end' %>
-      <%= render 'extranet/account/experiences/list', person: @person, edit: true %>
+      <%= render 'extranet/account/experiences/list',
+                  person: @person,
+                  edit: true,
+                  hide_organization_link: true %>
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-3">
