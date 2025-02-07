@@ -49,7 +49,7 @@ module Searchable
       value = l10n.try(property)
       text += " #{value}" if value.present?
     end
-    text += " #{l10n.contents_full_text}"
+    text += " #{l10n.contents_full_text}" if l10n.respond_to?(:contents_full_text)
     text
   end
 end

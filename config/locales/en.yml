@@ -156,7 +156,7 @@ en:
       label: Search
       placeholder: Type here
       buttons:
-        search: Search
+        search: Search...
         close: Close
     seo: SEO
     subnav:

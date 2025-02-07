@@ -55,11 +55,6 @@ class Communication::Extranet::Localization < ApplicationRecord
   validates :favicon, size: { less_than: 1.megabytes }
   validate :prevent_unpublishing_default_language
 
-  # Necessary for the search
-  def contents_full_text
-    ''
-  end
-
   def to_s
     "#{name}"
   end

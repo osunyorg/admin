@@ -5,17 +5,22 @@
     <%
     @results.each do |result|
       object = result.about_object
+      next unless can?(:read, object)
       l10n = result.about_localization
       # communication_website_post
       path_class = object.class.polymorphic_name.parameterize.underscore
       # admin_communication_website_post_path
-      path_name = "admin_#{path_class}_path"
-      if result.website_id?
-        path = public_send path_name, { website_id: result.website_id, id: result.about_object_id }
-      elsif result.extranet_id?
-        path = public_send path_name, { extranet_id: result.extranet_id, id: result.about_object_id }
-      else
-        path = public_send path_name, { id: result.about_object_id }
+      begin
+        path_name = "admin_#{path_class}_path"
+        if result.website_id?
+          path = public_send path_name, { website_id: result.website_id, id: result.about_object_id }
+        elsif result.extranet_id?
+          path = public_send path_name, { extranet_id: result.extranet_id, id: result.about_object_id }
+        else
+          path = public_send path_name, { id: result.about_object_id }
+        end
+      rescue
+        next
       end
       %>
       <div class="col-lg-4 col-md-6">
