@@ -23,6 +23,7 @@ class Research::Journal::Volume < ApplicationRecord
   include AsIndirectObject
   include Localizable
   include Sanitizable
+  include Searchable
   include WithUniversity
 
   belongs_to  :journal,

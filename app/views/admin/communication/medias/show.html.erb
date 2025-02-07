@@ -12,6 +12,11 @@
               class: button_classes %>
   </div>
   <div class="col-lg-8">
+    <% if @l10n.name.present? %>
+      <%= osuny_label Communication::Media::Localization.human_attribute_name(:name) %>
+      <p><%= @l10n.name %></p>
+    <% end%>
+
     <%= osuny_label Communication::Media.human_attribute_name(:origin) %>
     <p><%= @media.origin_i18n %></p>
 
@@ -23,9 +28,6 @@
 
     <%= osuny_label Communication::Media.human_attribute_name(:original_byte_size) %>
     <p><%= number_to_human_size @media.original_byte_size %></p>
-
-    <%= osuny_label Communication::Media::Localization.human_attribute_name(:name) %>
-    <p><%= @l10n.name %></p>
 
     <% if @l10n.alt.present? %>
       <%= osuny_label Communication::Media::Localization.human_attribute_name(:alt) %>
@@ -40,13 +42,16 @@
     <% if @media.collection.present? %>
       <%= osuny_label Communication::Media::Localization.human_attribute_name(:collection) %>
       <p><%= osuny_link_localized @media.collection, admin_communication_media_collection_path(@media.collection) %><p>
-
     <% end %>
     
     <%= render 'admin/application/categories/widget/show', about: @media %>
     <%= render 'admin/communication/medias/contexts/list', media: @media %>
   </div>
 </div>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @media if @media.contexts.none? %>
+<% end %>
 
 <% content_for :action_bar_right do %>
   <%= edit_link @media %>

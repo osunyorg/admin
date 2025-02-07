@@ -1,0 +1,11 @@
+<%= f.input  :header_cta, 
+              input_html: { data: { 'conditional': true }, id: 'header_cta' },
+              label: t('admin.communication.website.header.cta.button') %>
+<div  class="d-none"
+      data-conditional-source="header_cta"
+      data-conditional-value="true">
+  <%= f.input :header_cta_label,
+              label: t('admin.communication.website.header.cta.label') %>
+  <%= f.input :header_cta_url,
+              label: t('admin.communication.website.header.cta.url') %>
+</div>

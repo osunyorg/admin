@@ -152,6 +152,12 @@ en:
       tasks: Background tasks pending
       text_html: "Osuny helps you with digital sufficiency.<br><br>The background execution of most tasks on the Osuny platform helps to reduce the carbon footprint of digital technology, by pre-calculating what can be.<br><br>This can cause a delay before your changes are visible on your websites."
       what_is_it: What is it?
+    search:
+      label: Search
+      placeholder: Type here
+      buttons:
+        search: Search...
+        close: Close
     seo: SEO
     subnav:
       settings: Settings

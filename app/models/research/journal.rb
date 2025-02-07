@@ -22,6 +22,7 @@ class Research::Journal < ApplicationRecord
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable
+  include Searchable
   include WebsitesLinkable
   include WithUniversity
 

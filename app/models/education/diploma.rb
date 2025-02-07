@@ -26,6 +26,7 @@ class Education::Diploma < ApplicationRecord
   include Localizable
   include Orderable
   include Sanitizable
+  include Searchable
   include WithUniversity
 
   enum :level, {

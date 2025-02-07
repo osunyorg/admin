@@ -231,12 +231,15 @@ en:
         organization:
           description: Legal entity linked to a university, component, laboratory, etc.
           description_non_university: Legal entity, whether a public organisation, a non-governmental organisation (e.g. an association) or a company
+          title: Organizations
         person:
           description: Physical person linked to a university, component, laboratory, etc.
           description_non_university: Person, not necessarily linked to an Osuny user account
+          title: People
         user:
           description: Person using Osuny, with an authenticated account
           description_non_university: Person using Osuny, with an authenticated account
+          title: Users
       source: Wikipedia
       text_html: A university is an institution of higher education, study and research, made up of various establishments called, depending on the tradition, "colleges", "faculties", "institutes", "departments", "centres", "sections", "units" or specific schools, but also a library or workshop, media library or museum, etc. forming a coherent administrative whole with a defined legal status, whether public, private or possibly mixed.
     internal_key: Internal Key
