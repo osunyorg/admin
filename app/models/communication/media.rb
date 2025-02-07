@@ -64,7 +64,8 @@ class Communication::Media < ApplicationRecord
     .where("
       unaccent(communication_media_localizations.name) ILIKE unaccent(:term) OR
       unaccent(communication_media_localizations.alt) ILIKE unaccent(:term) OR
-      unaccent(communication_media_localizations.credit) ILIKE unaccent(:term)
+      unaccent(communication_media_localizations.credit) ILIKE unaccent(:term) OR
+      unaccent(communication_media_localizations.internal_description) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_origin, -> (origin, language = nil) {
@@ -109,9 +110,6 @@ class Communication::Media < ApplicationRecord
       # On creation, we set the original blob, so we can find variants afterwards
       media.origin = origin
       media.original_blob = blob
-      media.original_filename = blob.filename
-      media.original_content_type = blob.content_type
-      media.original_byte_size = blob.byte_size
     end
   end
 
@@ -133,6 +131,15 @@ class Communication::Media < ApplicationRecord
     l10n.save
   end
 
+  def original_blob=(value)
+    super(value)
+    return if value.blank?
+    self.original_checksum = value.checksum
+    self.original_filename = value.filename.to_s
+    self.original_content_type = value.content_type
+    self.original_byte_size = value.byte_size
+  end
+
   def create_original_blob_from_upload
     return if wrong_uploaded_file? || file_size_too_big?
     original_uploaded_file_io = original_uploaded_file.open
@@ -143,12 +150,7 @@ class Communication::Media < ApplicationRecord
     # https://apidock.com/rails/v7.0.0/ActiveStorage/Blob/upload_without_unfurling
     blob.upload_without_unfurling(original_uploaded_file_io)
     blob.update_column :university_id, university_id
-
-    self.original_blob_id = blob.id
-    self.original_checksum = blob.checksum
-    self.original_filename = blob.filename.to_s
-    self.original_content_type = blob.content_type
-    self.original_byte_size = blob.byte_size
+    original_blob = blob
   end
 
   def build_blob_from_upload(io)

@@ -108,6 +108,7 @@ fr:
         name: Nom
       communication/media/localization:
         name: Nom
+        internal_description: Description interne
       communication/website:
         about: Sujet du site
         about_: Site indépendant
