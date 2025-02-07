@@ -1,6 +1,6 @@
 <%
 allow_edit ||= false
-hide_organization_link ||= false
+organization_path_method ||= nil
 %>
 <% experiences.each do |experience| %>
   <%
@@ -22,15 +22,15 @@ hide_organization_link ||= false
       <div class="col-md-6 text-end">
         <%
         if experience.organization.present?
-          path = alumni_university_organization_path(experience.organization)
+          path = public_send(organization_path_method, experience.organization) if organization_path_method.present?
           %>
           <% if organization_l10n.logo.attached? %>
-            <%= link_to_unless  hide_organization_link,
-                                kamifusen_tag(organization_l10n.logo, width: 100, class: 'img-fluid experience__organization__logo'),
-                                path %>
+            <%= link_to_if  path,
+                            kamifusen_tag(organization_l10n.logo, width: 100, class: 'img-fluid experience__organization__logo'),
+                            path %>
           <% else %>
             <p class="text-end">
-              <%= link_to_unless hide_organization_link, organization_l10n, path %>
+              <%= link_to_if path, organization_l10n, path %>
             </p>
           <% end %>
         <div>

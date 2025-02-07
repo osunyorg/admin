@@ -15,10 +15,9 @@
       <% if @experiences.any? %>
         <div class="experiences mt-4">
           <ul class="list-unstyled">
-            <%= render 'extranet/account/experiences/list',
+            <%= render 'extranet/persons/experiences',
                         experiences: @experiences,
-                        allow_edit: true,
-                        hide_organization_link: true %>
+                        allow_edit: true %>
             <%= paginate @experiences, theme: 'bootstrap-5' %>
           </ul>
         </div>
