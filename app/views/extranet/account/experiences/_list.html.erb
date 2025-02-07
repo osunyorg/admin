@@ -18,7 +18,7 @@ edit ||= false
                 <%= experience.to_year || t('today') %>
               </p>
               <%= link_to University::Person::Experience.human_attribute_name('edit'),
-                          edit_experience_path(experience),
+                          edit_account_experience_path(experience),
                           class: 'btn btn-sm btn-primary mt-2' if edit %>
             </div>
             <div class="col-md-6 text-end">

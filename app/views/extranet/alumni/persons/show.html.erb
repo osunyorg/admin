@@ -12,7 +12,7 @@
       </div>
     </div>
     <p class="mb-4"><%= t('extranet.experiences.title') %></p>
-    <%= render 'extranet/experiences/list', person: @person %>
+    <%= render 'extranet/account/experiences/list', person: @person %>
     <div class="experiences mt-4">
       <ul class="list-unstyled">
         <% @person&.cohorts&.each do |cohort| %>
