@@ -1,7 +1,7 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Migrations::MenuUrl.migrate
+    Migrations::Medias.migrate
   end
 
   namespace :access_token do
