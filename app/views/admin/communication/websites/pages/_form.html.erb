@@ -16,14 +16,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
           <%= lf.input :breadcrumb_title, input_html: { data: { translatable: true } } %>
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
           <%= lf.input :header_text, as: :string, input_html: { data: { translatable: true } } %>
-          <%= lf.input :header_cta, input_html: { data: { 'conditional': true }, id: 'header_cta' } %>
-          <div class="d-none"
-              data-conditional-source="header_cta"
-              data-conditional-value="true"
-              >
-            <%= lf.input :header_cta_label %>
-            <%= lf.input :header_cta_url %>
-          </div>
+          <%= render 'admin/application/header_cta/form', f: lf %>
           <%= lf.input :text, as: :summernote if strip_tags(l10n.text).present? %>
         <% end %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>

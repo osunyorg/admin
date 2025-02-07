@@ -11,6 +11,7 @@
           <%= lf.input :title, input_html: { data: { translatable: true } } %>
           <%= lf.input :subtitle, input_html: { data: { translatable: true } } %>
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+          <%= render 'admin/application/header_cta/form', f: lf %>
         <% end %>
         <%= osuny_panel Communication::Website::Agenda::Event.human_attribute_name('dates') do %>
           <div class="row pure__row--small">

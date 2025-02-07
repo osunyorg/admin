@@ -43,6 +43,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
   include AsLocalization
   include AsLocalizedTree
   include Contentful
+  include HeaderCallToAction
   include Initials
   include Permalinkable
   include Sanitizable

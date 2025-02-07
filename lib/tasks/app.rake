@@ -1,7 +1,13 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Migrations::MenuUrl.migrate
+    Search::BuildIndexJob.perform_now
+  end
+
+  namespace :search do
+    task build_index: :environment do
+      Search::BuildIndexJob.perform_later
+    end
   end
 
   namespace :access_token do

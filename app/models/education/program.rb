@@ -33,6 +33,7 @@ class Education::Program < ApplicationRecord
   include Localizable
   include LocalizableOrderBySlugScope
   include Sanitizable
+  include Searchable
   include WebsitesLinkable
   include WithAlumni
   include WithDiploma
