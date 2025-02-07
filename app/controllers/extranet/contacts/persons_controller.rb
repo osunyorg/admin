@@ -14,7 +14,7 @@ class Extranet::Contacts::PersonsController < Extranet::Contacts::ApplicationCon
                                   .joins(:organization)
                                   .where(university_organizations: { id: current_extranet.connected_organizations.pluck(:id) })
                                   .current
-                                  .ordered
+                                  .ordered(current_language)
     breadcrumb
     add_breadcrumb @l10n
   end

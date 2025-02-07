@@ -8,9 +8,14 @@ class Extranet::Alumni::AcademicYearsController < Extranet::Alumni::ApplicationC
   end
 
   def show
-    @academic_year = current_extranet.about.education_academic_years.find(params[:id])
-    @cohorts = @academic_year.cohorts_in_context(current_extranet.about).page(params[:cohorts_page])
-    @alumni = @academic_year.alumni_in_context(current_extranet.about).page(params[:alumni_page])
+    @academic_year =  current_extranet.about.education_academic_years
+                                            .find(params[:id])
+    @cohorts =  @academic_year.cohorts_in_context(current_extranet.about)
+                              .ordered(current_language)
+                              .page(params[:cohorts_page])
+    @alumni =   @academic_year.alumni_in_context(current_extranet.about)
+                              .ordered(current_language)
+                              .page(params[:alumni_page])
     breadcrumb
     add_breadcrumb @academic_year
   end

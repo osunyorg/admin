@@ -42,11 +42,10 @@ class Education::School < ApplicationRecord
               class_name: 'Communication::Website',
               as: :about,
               dependent: :nullify
-  # Did not specify the dependent option, as it is not clear if the extranet should be destroyed when the school is.
-  # Should be checked manually.
   has_many    :communication_extranets,
               class_name: 'Communication::Extranet',
-              as: :about
+              as: :about,
+              dependent: :nullify
 
   validates :address, :city, :zipcode, :country, presence: true
 

@@ -53,11 +53,10 @@ class Education::Program < ApplicationRecord
              class_name: 'Education::Program',
              foreign_key: :parent_id
 
-  # Did not specify the dependent option, as it is not clear if the extranet should be destroyed when the program is.
-  # Should be checked manually.
   has_many    :communication_extranets,
               class_name: 'Communication::Extranet',
-              as: :about
+              as: :about,
+              dependent: :nullify
 
   before_destroy :move_children
 

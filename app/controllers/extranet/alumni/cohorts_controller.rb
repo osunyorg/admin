@@ -14,8 +14,11 @@ class Extranet::Alumni::CohortsController < Extranet::Alumni::ApplicationControl
   end
 
   def show
-    @cohort = current_extranet.about.education_cohorts.find(params[:id])
-    @people = @cohort.people.page(params[:page])
+    @cohort = current_extranet.about.education_cohorts
+                                    .find(params[:id])
+    @people =  @cohort.people
+                      .ordered(current_language)
+                      .page(params[:page])
     breadcrumb
     add_breadcrumb @cohort
   end

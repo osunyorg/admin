@@ -13,14 +13,17 @@ class Extranet::HomeController < Extranet::ApplicationController
   protected
 
   def load_posts_variables
-    @posts = current_extranet.posts
-                .published(current_language)
-                .ordered(current_language)
-                .limit(3)
+    @posts =  current_extranet.posts
+                              .published(current_language)
+                              .ordered(current_language)
+                              .limit(3)
   end
 
   def load_alumni_variables
-    @cohorts = current_extranet.about.education_cohorts.ordered.limit(5)
-    @experiences = current_extranet.about.university_person_experiences.latest
+    @cohorts =  current_extranet.about.education_cohorts
+                                      .ordered
+                                      .limit(5)
+    @experiences =  current_extranet.about.university_person_experiences
+                                          .latest
   end
 end

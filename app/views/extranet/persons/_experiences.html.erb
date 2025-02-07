@@ -25,12 +25,12 @@ organization_path_method ||= nil
           path = public_send(organization_path_method, experience.organization) if organization_path_method.present?
           %>
           <% if organization_l10n.logo.attached? %>
-            <%= link_to_if  path,
+            <%= link_to_if  path.present?,
                             kamifusen_tag(organization_l10n.logo, width: 100, class: 'img-fluid experience__organization__logo'),
                             path %>
           <% else %>
             <p class="text-end">
-              <%= link_to_if path, organization_l10n, path %>
+              <%= link_to_if path.present?, organization_l10n, path %>
             </p>
           <% end %>
         <div>
