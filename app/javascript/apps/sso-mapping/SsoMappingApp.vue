@@ -24,7 +24,7 @@ export default {
           target,
           i;
       setTimeout(function() {
-        selectFields = document.getElementsByClassName("form-select");
+        selectFields = appElt.getElementsByClassName("form-select");
         for (i = 0; i < selectFields.length; i += 1) {
           target = selectFields[i];
           target.removeAttribute('disabled');

@@ -97,6 +97,7 @@ en:
         name: Name
       communication/media/localization:
         name: Name
+        internal_description: Internal description
       communication/website:
         about: About
         about_: Independent website

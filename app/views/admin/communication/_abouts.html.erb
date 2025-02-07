@@ -1,5 +1,5 @@
 <%= f.input :about_type,
-            collection: Communication::Website.about_types,
+            collection: f.object.class.about_types,
             input_html: { data: { conditional: true }, id: "about_type" },
             label_method: lambda { |object|
               I18n.t("#{i18n_key}#{object}")
