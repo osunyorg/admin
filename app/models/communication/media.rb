@@ -133,6 +133,7 @@ class Communication::Media < ApplicationRecord
 
   def original_blob=(value)
     super(value)
+    return if value.blank?
     self.original_checksum = value.checksum
     self.original_filename = value.filename.to_s
     self.original_content_type = value.content_type
