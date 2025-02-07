@@ -14,6 +14,7 @@ class Extranet::Contacts::OrganizationsController < Extranet::Contacts::Applicat
                                 .joins(:experiences)
                                 .merge(University::Person::Experience.current.where(organization_id: @organization.id))
                                 .ordered(current_language)
+                                .page(params[:page])
     breadcrumb
     add_breadcrumb @l10n
   end
