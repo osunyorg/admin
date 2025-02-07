@@ -2,7 +2,8 @@ class Extranet::Account::ExperiencesController < Extranet::ApplicationController
   before_action :load_experience, only: [:edit, :update, :destroy]
 
   def new
-    @experience = current_user.experiences.new
+    organization = current_university.organizations.find_by(id: params[:organization_id])
+    @experience = current_user.experiences.new(organization: organization)
     @l10n = @experience.localizations.build(language: current_language)
     breadcrumb
     add_breadcrumb University::Person::Experience.human_attribute_name('new')

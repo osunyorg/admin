@@ -23,8 +23,8 @@ namespace :alumni do
   root to: 'persons#index'
 end
 
-# Search and Organization creation/edition in the context of experiences
-resources :organizations, except: [:index, :destroy] do
+# Search and Organization creation in the context of experiences
+resources :organizations, only: [:new, :create] do
   collection do
     get 'search' => 'organizations#search', as: :search, defaults: { format: 'json' }
   end
