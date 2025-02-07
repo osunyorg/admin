@@ -12,10 +12,17 @@
       <%= link_to University::Person::Experience.human_attribute_name('new'),
                   new_account_experience_path,
                   class: 'btn btn-sm btn-primary mt-md-n5 float-md-end' %>
-      <%= render 'extranet/account/experiences/list',
-                  person: @person,
-                  edit: true,
-                  hide_organization_link: true %>
+      <% if @experiences.any? %>
+        <div class="experiences mt-4">
+          <ul class="list-unstyled">
+            <%= render 'extranet/account/experiences/list',
+                        experiences: @experiences,
+                        allow_edit: true,
+                        hide_organization_link: true %>
+            <%= paginate @experiences, theme: 'bootstrap-5' %>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-3">

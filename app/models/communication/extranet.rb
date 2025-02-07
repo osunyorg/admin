@@ -86,11 +86,10 @@ class Communication::Extranet < ApplicationRecord
     find_by host: host
   end
 
-  def should_show_years?
-    # For a single program, year is like cohort
-    return false if about.nil? || about&.is_a?(Education::Program)
-    # if a school has a single program, same thing
-    about&.programs&.many?
+  def should_show_academic_years?
+    # Show years if there are more than one program
+    return about.programs.many? if about.is_a?(Education::School)
+    false
   end
 
   def alumni

@@ -5,51 +5,7 @@
     <%= render 'extranet/organizations/show/description',
                 organization: @organization,
                 l10n: @l10n %>
-    <% if @organization.experiences.any? %>
-      <div class="experiences">
-        <h3 class="mb-5"><%= t('extranet.organization.experiences') %></h3>
-        <ul class="list-unstyled">
-          <% @organization.experiences.ordered.each do |experience| %>
-            <%
-            experience_l10n = experience.best_localization_for(current_language)
-            %>
-            <li class="mb-4">
-              <article class="row position-relative">
-                <div class="col-md-3">
-                  <% if experience.person.best_picture.attached? %>
-                    <%= kamifusen_tag experience.person.best_picture, width: 400, class: 'img-fluid' %>
-                  <% else %>
-                    <%= image_tag 'extranet/avatar.png', width: 400, class: 'img-fluid' %>
-                  <% end %>
-                </div>
-                <div class="col-md-9 ms-md-n4">
-                  <div class="border-top">
-                    <div class="row pt-4">
-                      <div class="col-md-6">
-                        <p><b>
-                          <%= osuny_link_localized experience.person,
-                                                  [:alumni, experience.person],
-                                                  classes: "stretched-link" %>
-                        </b></p>
-                      </div>
-                      <div class="col-md-6">
-                        <p class="text-end">
-                          <% if experience_l10n.description.present? %>
-                            <%= experience_l10n.description %><br>
-                          <% end %>
-                          <%= "#{experience.from_year} —" if experience.from_year %>
-                          <%= experience.to_year || t('today') %>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= render 'extranet/alumni/organizations/show/experiences', experiences: @experiences if @experiences.any? %>
   </div>
   <div class="offset-lg-1 col-lg-3 order-1 order-lg-2">
     <%= render 'extranet/organizations/show/details',
