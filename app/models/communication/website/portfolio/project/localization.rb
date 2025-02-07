@@ -40,8 +40,8 @@
 class Communication::Website::Portfolio::Project::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
-  include Initials
   include HeaderCallToAction
+  include Initials
   include Permalinkable
   include Sanitizable
   include Shareable
