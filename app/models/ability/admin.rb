@@ -21,7 +21,6 @@ class Ability::Admin < Ability
     can :manage, University::Person::Experience, university_id: @user.university_id
     can :manage, University::Person::Involvement, university_id: @user.university_id
     can :manage, University::Role, university_id: @user.university_id
-    can :read, User, university_id: @user.university_id
     can :manage, User, university_id: @user.university_id, role: @user.managed_roles
     can :manage, User::Favorite, user_id: @user
   end
