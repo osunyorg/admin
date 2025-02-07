@@ -104,11 +104,11 @@ fr:
         original_content_type: Type de contenu
         original_filename: Nom du fichier original
         original_uploaded_file: Fichier original
+      communication/media/collection/localization:
+        name: Nom
       communication/media/localization:
         name: Nom
         internal_description: Description interne
-      communication/media/collection/localization:
-        name: Nom
       communication/website:
         about: Sujet du site
         about_: Site indépendant

@@ -104,11 +104,11 @@ en:
         original_content_type: Content type
         original_filename: Original filename
         original_uploaded_file: Original file
+      communication/media/collection/localization:
+        name: Name
       communication/media/localization:
         name: Name
         internal_description: Internal description
-      communication/media/collection/localization:
-        name: Name
       communication/website:
         about: About
         about_: Independent website

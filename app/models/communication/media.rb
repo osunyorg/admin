@@ -133,10 +133,10 @@ class Communication::Media < ApplicationRecord
 
   def original_blob=(value)
     super(value)
-    self.original_checksum = blob.checksum
-    self.original_filename = blob.filename.to_s
-    self.original_content_type = blob.content_type
-    self.original_byte_size = blob.byte_size
+    self.original_checksum = value.checksum
+    self.original_filename = value.filename.to_s
+    self.original_content_type = value.content_type
+    self.original_byte_size = value.byte_size
   end
 
   def create_original_blob_from_upload
