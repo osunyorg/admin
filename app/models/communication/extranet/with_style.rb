@@ -8,6 +8,11 @@ module Communication::Extranet::WithStyle
   protected
 
   def generate_css
+    if sass.blank?
+      self.css = ''
+      return
+    end
+
     begin
       self.css = SassC::Engine.new(sass, syntax: :sass, style: :compressed).render
     rescue SassC::SyntaxError
