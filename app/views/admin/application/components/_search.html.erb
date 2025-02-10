@@ -5,11 +5,11 @@
           data-bs-toggle="modal"
           data-bs-target="#searchModal">
     <%= lucide_icon 'search' %>
-    <span class="ms-2 small"><%= t('admin.search.buttons.search') %></span>
+    <span class="ms-2 d-none d-lg-inline small"><%= t('admin.search.buttons.search') %></span>
   </button>
 </div>
 
-<div  class="modal fade collapse"
+<div  class="osuny__search__modal modal fade collapse"
       id="searchModal"
       data-endpoint="<%= admin_search_path %>"
       tabindex="-1"
@@ -17,20 +17,17 @@
       role="dialog">
   <div class="modal-dialog modal-fullscreen">
     <div class="modal-content bg-transparent border-0">
-      <div class="modal-header bg-transparent border-0 p-0" style="max-width: 400px; margin: 100px auto">
-        <div class="d-flex align-items-center">
+      <div class="modal-header bg-transparent border-0 p-0">
+        <div class="osuny__search__field">
           <input  class="form-control form-control-lg border-0"
                   id="searchField"
                   placeholder="<%= t('admin.search.placeholder') %>"
-                  style="min-width: 300px;"
                   name="term"
                   autofocus>
-          <span data-bs-theme="dark">
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="<%= t('admin.search.buttons.close') %>"></button>
-          </span>
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="<%= t('admin.search.buttons.close') %>"></button>
         </div>
       </div>
       <div class="container-fluid" id="searchResults"></div>

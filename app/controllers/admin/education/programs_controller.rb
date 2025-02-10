@@ -100,7 +100,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
       add_breadcrumb  t("education.program.parts.#{@part}.label"),
                       public_send("#{@part}_admin_education_program_path", id: @program, program_id: nil)
       add_breadcrumb  t('edit')
-      render "admin/education/programs/parts/edit_#{@part}", status: :unprocessable_entity
+      render "admin/education/programs/parts/#{@part}_edit", status: :unprocessable_entity
     else
       breadcrumb
       add_breadcrumb t('edit')

@@ -4,6 +4,10 @@ class Communication::Block::Template::Sound < Communication::Block::Template::Ba
   has_component :title, :string
   has_component :transcription, :rich_text
 
+  def allowed_for_about?
+    !about.respond_to?(:extranet)
+  end
+  
   protected
 
   def check_accessibility

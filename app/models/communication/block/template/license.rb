@@ -7,4 +7,8 @@ class Communication::Block::Template::License < Communication::Block::Template::
   has_component :creative_commons_derivatives, :option, options: [:true, :false]
   has_component :creative_commons_sharing, :option, options: [:true, :false]
 
+  def allowed_for_about?
+    !about.respond_to?(:extranet)
+  end
+  
 end

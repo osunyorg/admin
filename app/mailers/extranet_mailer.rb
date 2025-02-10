@@ -14,9 +14,11 @@ class ExtranetMailer < ApplicationMailer
 
     merge_with_university_infos(@university, {})
 
-    mail  from: @university.mail_from[:full],
-          to: @email,
-          subject: @l10n.invitation_message_subject if should_send?(@email)
+    I18n.with_locale(@language.iso_code.to_sym) do
+      mail  from: @university.mail_from[:full],
+            to: @email,
+            subject: @l10n.invitation_message_subject if should_send?(@email)
+    end
   end
 
 end

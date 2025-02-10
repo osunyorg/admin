@@ -48,6 +48,8 @@ module Admin::ApplicationHelper
   end
 
   def preview_link
+    # Test without preview
+    return ''
     raw "<button  class=\"btn btn-light btn-xs\"
                   type=\"button\"
                   data-bs-toggle=\"modal\"

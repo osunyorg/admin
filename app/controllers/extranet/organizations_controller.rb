@@ -1,17 +1,9 @@
 class Extranet::OrganizationsController < Extranet::ApplicationController
-  before_action :load_organization, only: [:show, :edit, :update]
-
   def search
     @term = params[:term].to_s
     @organizations = current_university.organizations
                                        .search_by_siren_or_name(@term, current_language)
                                        .ordered(current_language)
-  end
-
-  def show
-    @l10n = @organization.best_localization_for(current_language)
-    breadcrumb
-    add_breadcrumb @l10n
   end
 
   def new
@@ -25,31 +17,12 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
   def create
     @organization = current_university.organizations.new(organization_params)
     if @organization.save
-      redirect_to organization_path(@organization),
+      redirect_to new_account_experience_path(organization_id: @organization.id),
                   notice: t('admin.successfully_created_html', model: @organization.to_s_in(current_language))
     else
       @l10n = @organization.localizations.first
       breadcrumb
       add_breadcrumb t('create')
-      render :new, status: :unprocessable_entity
-    end
-  end
-
-  def edit
-    @l10n = @organization.best_localization_for(current_language)
-    breadcrumb
-    add_breadcrumb @l10n, organization_path(@organization)
-    add_breadcrumb t('edit')
-  end
-
-  def update
-    if @organization.update(organization_params)
-      redirect_to organization_path(@organization),
-                  notice: t('admin.successfully_updated_html', model: @organization.to_s_in(current_language))
-    else
-      @l10n = @organization.best_localization_for(current_language)
-      breadcrumb
-      add_breadcrumb t('edit')
       render :new, status: :unprocessable_entity
     end
   end

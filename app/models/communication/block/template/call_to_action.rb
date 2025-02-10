@@ -11,6 +11,10 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
   has_component :alt, :string
   has_component :credit, :rich_text
 
+  def allowed_for_about?
+    !about.respond_to?(:extranet)
+  end
+  
   def top_description
     text
   end
