@@ -1,4 +1,4 @@
-namespace :university do
+namespace :university, path: :directory do
   # Resources must come after namespaces, otherwise there is a confusion with ids
   namespace :organizations do
     resources :imports, only: [:index, :show, :new, :create]
