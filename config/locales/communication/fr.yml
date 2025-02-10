@@ -25,7 +25,7 @@ fr:
         color: Couleur
         default_language: Langue par défaut
         feature_alumni: Alumni
-        feature_contacts: Annuaire
+        feature_contacts: Répertoire
         feature_documents: Documents
         feature_jobs: Offres d'emploi
         feature_posts: Actualités
@@ -478,6 +478,7 @@ fr:
           title: Sites Web
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
       text_html: Communiquer, c'est mettre en commun ; et mettre en commun, c'est l'acte qui nous constitue. Si l'on estime que cet acte est impossible, on refuse tout projet humain.
+      title: Communication
     extranet:
       post:
         metadata:

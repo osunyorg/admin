@@ -240,8 +240,9 @@ en:
           description: Person using Osuny, with an authenticated account
           description_non_university: Person using Osuny, with an authenticated account
           title: Users
-      source: Wikipedia
-      text_html: A university is an institution of higher education, study and research, made up of various establishments called, depending on the tradition, "colleges", "faculties", "institutes", "departments", "centres", "sections", "units" or specific schools, but also a library or workshop, media library or museum, etc. forming a coherent administrative whole with a defined legal status, whether public, private or possibly mixed.
+      source: Dictionnaire de l'Académie Française
+      text_html: Inventory, listing of data and information in a methodical order so that they can be easily found; the material support for this inventory.
+      title: Directory
     internal_key: Internal Key
     manage_cohorts: Manage cohorts
     manage_experiences: Manage experiences

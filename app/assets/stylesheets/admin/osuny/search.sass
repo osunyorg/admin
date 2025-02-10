@@ -1,4 +1,18 @@
 .osuny__search
     &__launch
+        @include media-breakpoint-down(lg)
+            margin-left: auto
+        @include media-breakpoint-up(lg)
+            button
+                background: rgba(255, 255, 255, 0.08)
+    &__field
+        margin: 100px auto
+        position: relative
+        input
+            max-width: 400px
+            min-width: 350px
         button
-            background: rgba(255, 255, 255, 0.08)
+            position: absolute
+            right: 15px
+            top: 15px
+        
