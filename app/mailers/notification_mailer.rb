@@ -42,7 +42,7 @@ class NotificationMailer < ApplicationMailer
       mail(from: university.mail_from[:full], to: whitelisted_mails, subject: subject) if whitelisted_mails.any?
     end
   end
-
+  
   def new_registration(university, user)
     merge_with_university_infos(university, {})
     @user = user
