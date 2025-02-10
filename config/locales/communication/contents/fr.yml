@@ -524,11 +524,9 @@ fr:
                   category: Une catégorie spécifique
                   selection: Une sélection de personnes
               option_contact:
-                label: "Avec les informations de contact de chaque personne\_?"
-              option_image:
-                label: "Avec un portrait de chaque personne\_?"
+                label: Informations de contact
               option_link:
-                label: Lien cliquable vers la page de la personne
+                label: Lien cliquable
               options: Options d'affichage
             layouts:
               grid:
