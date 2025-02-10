@@ -9,6 +9,7 @@
       <div class="experiences mb-5">
         <h3 class="mb-5"><%= t('extranet.contacts.organizations.people') %></h3>
         <%= render 'extranet/contacts/persons/list', people: @people %>
+        <%= paginate @people, theme: 'bootstrap-5' %>
       </div>
     <% end %>
   </div>
