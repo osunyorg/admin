@@ -1,4 +1,4 @@
-<% content_for :title, @namespace.model_name.human %>
+<% content_for :title, t("#{@namespace.to_s.underscore}.description.title") %>
 
 <% content_for :realm do %>
   <div class="realm">

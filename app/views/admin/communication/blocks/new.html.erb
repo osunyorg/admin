@@ -1,18 +1,28 @@
 <% content_for :title, t('admin.communication.blocks.choose.title') %>
 
 <% Communication::Block::CATEGORIES.each do |category, kinds| %>
+  <% 
+    selected_kinds = []
+    kinds.each do |kind| 
+      @block.template_reset!
+      @block.template_kind = kind
+      about = @block.about
+      template = @block.template
+      next unless template.allowed_for_about?
+      selected_kinds << kind
+    end
+
+    next unless selected_kinds.any?
+  %>
   <section class="blocks">
     <p class="float-end blocks__category__description"><%= t "admin.communication.blocks.categories.#{category}.description" %></p>
     <h2 class="h3 category blocks__category__title"><%= t "admin.communication.blocks.categories.#{category}.label" %></h2>
     <div class="row">
-      <% kinds.each do |kind| %>
+      <% selected_kinds.each do |kind| %>
         <%
         @block.template_reset!
         @block.template_kind = kind
-        about = @block.about
-        template = @block.template
         %>
-        <% next unless template.allowed_for_about? %>
         <div class="col-xxl-2 col-lg-3 col-sm-4 col-6 d-flex mb-5">
           <div class="flex-fill position-relative js-validate-form-click">
             <%= image_tag "communication/blocks/templates/#{kind}.jpg", alt: '', class:"card-img-top block__image" %>
