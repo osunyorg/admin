@@ -38,20 +38,6 @@ en:
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
         upper_menu: Upper menu (HTML)
-      communication/extranet/localization:
-        cookies_policy: Cookies policy
-        favicon: Browser icon (favicon)
-        home_sentence: Sentence displayed on homepage
-        invitation_message: Invitation message (automatically sended)
-        invitation_message_subject: Subject
-        invitation_message_text: Texte
-        logo: Logo
-        name: Name
-        privacy_policy: Privacy policy
-        published: Language published
-        registration_contact: Contact mail for registrations problems
-        sso_button_label: Sign in button's label
-        terms: Terms of service
       communication/extranet/connection:
         connected: Connected
       communication/extranet/document:
@@ -74,6 +60,9 @@ en:
         cookies_policy: Cookies policy
         favicon: Browser icon (favicon)
         home_sentence: Sentence displayed on homepage
+        invitation_message: Invitation message (automatically sended)
+        invitation_message_subject: Subject
+        invitation_message_text: Texte
         logo: Logo
         name: Name
         privacy_policy: Privacy policy
@@ -264,6 +253,8 @@ en:
       models:
         communication/extranet:
           attributes:
+            feature_alumni:
+              unavailable: is not available for this kind of extranet
             sso_mapping:
               missing_email: doesn't handle the email
         communication/extranet/localization:

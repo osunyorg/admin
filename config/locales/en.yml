@@ -121,6 +121,7 @@ en:
     advanced_settings: Advanced settings
     attachment_not_available: Attachment not available
     chronicles:
+      read_all: See all chronicles
       read_more: Learn more
       title: Chronicles
     dashboard: Dashboard

@@ -37,12 +37,12 @@ class Education::AcademicYear < ApplicationRecord
   scope :ordered, -> (language = nil) { order(year: :desc) }
 
   def cohorts_in_context(context)
-    return cohorts if context.nil? || !context.respond_to?(:cohorts)
+    return Education::Cohort.none unless context.respond_to?(:cohorts)
     cohorts.where(id: context.cohorts.pluck(:id))
   end
 
   def alumni_in_context(context)
-    return alumni if context.nil? || !context.respond_to?(:alumni)
+    return University::Person.none unless context.respond_to?(:alumni)
     people.where(id: context.alumni.pluck(:id))
   end
 
