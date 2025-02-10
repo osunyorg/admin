@@ -14,7 +14,7 @@ module User::WithPerson
   protected
 
   def find_or_create_person
-    person = university.people.where(email: email).first || university.people.new
+    person = university.people.where(email: email).first_or_initialize
     person_l10n = person.localizations.find_by(language_id: university.default_language_id)
     person.user = self
     person.localizations_attributes = [

@@ -14,7 +14,7 @@ fr:
       persons:
         experiences: Organisations dont la personne fait partie
       search:
-        home: Chercher dans l'annuaire
+        home: Chercher dans le répertoire
         placeholder: Entrez votre recherche ici
         submit: Chercher
         title: Recherche

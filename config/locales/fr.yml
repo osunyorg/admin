@@ -125,7 +125,6 @@ fr:
       read_more: En savoir plus
       title: Chroniques
     dashboard: Tableau de bord
-    directory: Annuaire
     duplicate: Dupliquer
     elements:
       one: 1 élément
@@ -154,11 +153,12 @@ fr:
       text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."
       what_is_it: Qu'est-ce que c'est ?
     search:
-      label: Rechercher
-      placeholder: Tapez ici
       buttons:
         search: Rechercher...
         close: Fermer
+      label: Rechercher
+      placeholder: Tapez ici
+      no_results: Pas de résultats
     seo: SEO
     subnav:
       settings: Réglages
