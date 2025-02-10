@@ -28,11 +28,12 @@
 #
 class Education::Program < ApplicationRecord
   include AsIndirectObject
-  include Categorizable
   include Filterable
+  include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Localizable
   include LocalizableOrderBySlugScope
   include Sanitizable
+  include Searchable
   include WebsitesLinkable
   include WithAlumni
   include WithDiploma
@@ -51,6 +52,11 @@ class Education::Program < ApplicationRecord
   has_many   :children,
              class_name: 'Education::Program',
              foreign_key: :parent_id
+
+  has_many    :communication_extranets,
+              class_name: 'Communication::Extranet',
+              as: :about,
+              dependent: :nullify
 
   before_destroy :move_children
 

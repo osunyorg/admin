@@ -1,11 +1,8 @@
-<% cohorts_paged = cohorts.ordered.page(params[:page]) %>
 <ul class="list">
-  <% cohorts_paged.each do |cohort| %>
+  <% cohorts.each do |cohort| %>
   <li>
     <h2>
-        <%= osuny_link_localized cohort.program, 
-                                 [:alumni, cohort], 
-                                 classes: 'stretched-link' %>
+      <%= osuny_link_localized cohort.program, [:alumni, cohort], classes: 'stretched-link' %>
     </h2>
     <p>
       <%= cohort.academic_year.year %>
@@ -13,4 +10,3 @@
   </li>
   <% end %>
 </ul>
-<%= paginate cohorts_paged, theme: 'bootstrap-5' %>

@@ -48,12 +48,12 @@ class Communication::Extranet::Localization < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [228, 228]
   end
 
+  before_validation :set_default_invitation_message
+
   validates :name, presence: true
   validates :logo, size: { less_than: 1.megabytes }
   validates :favicon, size: { less_than: 1.megabytes }
   validate :prevent_unpublishing_default_language
-
-  before_validation :set_default_invitation_message
 
   def to_s
     "#{name}"

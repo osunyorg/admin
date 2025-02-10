@@ -9,9 +9,9 @@ fr:
         default_github_access_token: Jeton d'accès Github par défaut
         default_language: Langue par défaut
         has_sso: A un SSO ?
-        is_really_a_university: Réellement une université
         identifier: Identifiant
         invoice_date: Date de contribution
+        is_really_a_university: Réellement une université
         languages: Langues
         logo: Logo
         name: Nom
@@ -146,15 +146,21 @@ fr:
       university/app:
         one: App
         other: Apps
+      university/organization:
+        one: Organisation
+        other: Organisations
+      university/organization/category:
+        one: Catégorie
+        other: Catégories
       university/person:
         one: Personne
         other: Personnes
-      university/person/category:
-        one: Catégorie
-        other: Catégories
       university/person/alumnus:
         one: Alumnus
         other: Alumni
+      university/person/category:
+        one: Catégorie
+        other: Catégories
       university/person/experience:
         one: Expérience professionnelle
         other: Expériences professionnelles
@@ -164,12 +170,6 @@ fr:
       university/person/localization/author:
         one: Auteur·ice
         other: Auteur·ices
-      university/organization:
-        one: Organisation
-        other: Organisations
-      university/organization/category:
-        one: Catégorie
-        other: Catégories
       university/role:
         one: Rôle
         other: Rôles
@@ -178,8 +178,8 @@ fr:
       organization:
         kind:
           company: Entreprise
-          non_profit: Association
           government: Structure gouvernementale
+          non_profit: Association
   simple_form:
     hints:
       university:
@@ -207,9 +207,9 @@ fr:
         tenure: "À différencier d'une personne vacataire."
         twitter: "Exemple : osuny"
       university_person_experience:
-        organization_name: "Choisissez l'organisation si elle existe, en la cherchant par nom ou SIREN. Si elle n'existe pas encore, créez-là en entrant simplement son nom."
         description: "Ex: Chargée de projet, Assistant communication, Journaliste..."
         from_year: "En poste depuis..."
+        organization_name: "Choisissez l'organisation si elle existe, en la cherchant par nom ou SIREN. Si elle n'existe pas encore, créez-là en entrant simplement son nom."
         to_year: "Si vous êtes toujours à ce poste, laissez vide"
     include_blanks:
       defaults:
@@ -227,26 +227,29 @@ fr:
       token_display_notice: Assurez-vous de stocker votre jeton secret de manière sécurisée. Vous ne pourrez pas le revoir !
       token_successfully_regenerated: Le jeton a bien été regénéré.
     description:
-      text_html: Une université est une institution d'enseignement supérieur, d'étude et de recherche, constituée par la réunion de divers établissements nommés suivant les traditions <i>collèges</i>, <i>facultés</i>, <i>instituts</i>, <i>départements</i>, <i>centres</i>, <i>sections</i>, <i>unités</i> ou écoles spécifiques, mais aussi bibliothèque ou atelier, médiathèque ou musée, etc. formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte.
-      source: Wikipédia
       parts:
-        person:
-          description: Personne physique liée à une université, une composante, un laboratoire, etc.
-          description_non_university: Personne physique, pas nécessairement liée à un compte utilisateur d'Osuny
         organization:
           description: Personne morale liée à une université, une composante, un laboratoire, etc.
           description_non_university: Personne morale, qu'il s'agisse d'une organisation publique, d'une organisation non gouvernementale (association par exemple) ou d'une entreprise
+          title: Organisations
+        person:
+          description: Personne physique liée à une université, une composante, un laboratoire, etc.
+          description_non_university: Personne physique, pas nécessairement liée à un compte utilisateur d'Osuny
+          title: Personnes
         user:
           description: Personne utilisant Osuny, dotée d'un compte authentifié
           description_non_university: Personne utilisant Osuny, dotée d'un compte authentifié
+          title: Utilisateur·rices
+      source: Wikipédia
+      text_html: Une université est une institution d'enseignement supérieur, d'étude et de recherche, constituée par la réunion de divers établissements nommés suivant les traditions <i>collèges</i>, <i>facultés</i>, <i>instituts</i>, <i>départements</i>, <i>centres</i>, <i>sections</i>, <i>unités</i> ou écoles spécifiques, mais aussi bibliothèque ou atelier, médiathèque ou musée, etc. formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte.
     internal_key: Clé interne
     manage_cohorts: Gérer les promotions
     manage_experiences: Gérer les expériences professionnelles
     organization:
-      search: Rechercher par nom d'organisation
-      employees: Employé·e·s
+      employees: Employé·es
       import_hint_html: "Les valeurs possibles pour <i>kind</i> sont : company, non_profit, government.<br>Les champs <i>siren</i>, <i>nic</i>, <i>zipcode</i> et <i>phone</i> doivent être au format texte, pas nombre.<br>Le champ <i>country</i> doit contenir le code ISO 3166 du pays, sur 2 caractères en majuscule (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">liste</a>)"
       logo: Logo
+      search: Rechercher par nom d'organisation
     person:
       administrator_roles: Rôles administratifs
       experience:

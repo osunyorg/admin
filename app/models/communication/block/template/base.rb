@@ -89,6 +89,10 @@ class Communication::Block::Template::Base
   def before_validation
   end
 
+  def media_blobs
+    []
+  end
+
   def to_s
     self.class.to_s.demodulize
   end

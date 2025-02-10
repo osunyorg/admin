@@ -16,7 +16,10 @@ module Bodyclassed
 
   # ["class1", "class2"], "page" -> ["page-class1", "page-class2"]
   def add_prefix_to_classes(classes, prefix)
-    classes.map { |single_class| "#{prefix}-#{single_class}" }
+    classes.map { |single_class|
+      next if single_class.blank?
+      "#{prefix}-#{single_class.to_s.parameterize}"
+    }.compact_blank
   end
 
   # ["class1", "class2", "class3 class4"] -> ["class1", "class2", "class3", "class4"]

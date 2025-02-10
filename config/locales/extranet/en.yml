@@ -1,14 +1,13 @@
 en:
   extranet:
-    features: Features
     account:
       edit: Edit account
       edit_personal_data: Edit profile
       experiences:
         create_new_html: The organization *** doesn't exist, do you want to <a class='btn btn-primary' href='%{url}'>create it</a>?
+      logout: Log out
       my: My account
       updated: Updated
-      logout: Log out
     contacts:
       organizations:
         people: Members of this organization
@@ -16,9 +15,9 @@ en:
         experiences: Organizations where they belong
       search:
         home: Search in directory
-        title: Search
         placeholder: Type your search here
         submit: Search
+        title: Search
     data: Data
     errors:
       email_not_allowed: is not authorized to access this extranet.
@@ -27,6 +26,7 @@ en:
       new: Add experience
       search_organization: Search by name or SIREN
       title: Path
+    features: Features
     home:
       recent_cohorts: Recent cohorts
       recent_experiences: Recent experiences
@@ -46,3 +46,5 @@ en:
     posts:
       home: Recent posts
       read_post: Read post
+    search:
+      no_results: No results

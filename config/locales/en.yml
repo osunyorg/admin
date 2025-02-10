@@ -121,6 +121,7 @@ en:
     advanced_settings: Advanced settings
     attachment_not_available: Attachment not available
     chronicles:
+      read_all: See all chronicles
       read_more: Learn more
       title: Chronicles
     dashboard: Dashboard
@@ -136,14 +137,14 @@ en:
       in: in %{lang}
       switch_to: switch to %{choices}
     infos: Informations
-    items:
-      one: item
-      other: items
-      see_all: See all
     inheritance:
       sentence_html: Value inherited from %{link}
       sentence_without_link: Value inherited
       status: Inherited value
+    item:
+      one: item
+      other: items
+      see_all: See all
     meta_description:
       hint: Plain text without HTML, dedicated to Search Engine Optimization (SEO).
       label: Meta description
@@ -152,6 +153,12 @@ en:
       tasks: Background tasks pending
       text_html: "Osuny helps you with digital sufficiency.<br><br>The background execution of most tasks on the Osuny platform helps to reduce the carbon footprint of digital technology, by pre-calculating what can be.<br><br>This can cause a delay before your changes are visible on your websites."
       what_is_it: What is it?
+    search:
+      label: Search
+      placeholder: Type here
+      buttons:
+        search: Search...
+        close: Close
     seo: SEO
     subnav:
       settings: Settings
@@ -351,8 +358,6 @@ en:
     credit:
       hint: The credit must be present according to copyright or copyleft licenses.
       label: Credit
-    remove: Remove image
-    title: Image
   file_hint_with_formats: "%{formats} files only. %{filesize} max."
   file_hint_without_formats: "%{filesize} max"
   filters:
@@ -449,14 +454,6 @@ en:
   move: Move
   open: Open
   organize: Organize
-  photo_import:
-    next: Next image
-    nothing: No results for this search
-    open: Search an image
-    placeholder: Type your search here
-    previous: Previous images
-    search: Search
-    title: Photo search
   please_confirm: Are you sure?
   preview:
     button: Preview

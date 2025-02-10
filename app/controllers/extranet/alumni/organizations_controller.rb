@@ -1,8 +1,8 @@
 class Extranet::Alumni::OrganizationsController < Extranet::Alumni::ApplicationController
   def index
     @facets = University::Organization::Facets.new params[:facets], {
-      model: about&.university_person_alumni_organizations,
-      about: about,
+      model: current_extranet.about.university_person_alumni_organizations,
+      about: current_extranet.about,
       language: current_language,
       categories: current_university.organization_categories
     }
@@ -14,8 +14,12 @@ class Extranet::Alumni::OrganizationsController < Extranet::Alumni::ApplicationC
   end
 
   def show
-    @organization = about.university_person_alumni_organizations.find(params[:id])
-    @l10n = @organization.best_localization_for(current_language)   
+    @organization = current_extranet.about.university_person_alumni_organizations.find(params[:id])
+    @l10n = @organization.best_localization_for(current_language)
+    @experiences =  current_extranet.about.alumni_experiences
+                                          .where(organization_id: @organization.id)
+                                          .ordered(current_language)
+                                          .page(params[:page])
     breadcrumb
     add_breadcrumb @l10n
   end
