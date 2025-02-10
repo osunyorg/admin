@@ -7,12 +7,21 @@
         <%= sanitize @person_l10n.biography %>
       </div>
     <% end %>
-    <% if @person && current_extranet.feature_alumni? %>
+    <% if @person %>
       <p><%= t('extranet.experiences.title') %></p>
       <%= link_to University::Person::Experience.human_attribute_name('new'),
-                  new_experience_path,
+                  new_account_experience_path,
                   class: 'btn btn-sm btn-primary mt-md-n5 float-md-end' %>
-      <%= render 'extranet/experiences/list', person: @person, edit: true %>
+      <% if @experiences.any? %>
+        <div class="experiences mt-4">
+          <ul class="list-unstyled">
+            <%= render 'extranet/persons/experiences',
+                        experiences: @experiences,
+                        allow_edit: true %>
+            <%= paginate @experiences, theme: 'bootstrap-5' %>
+          </ul>
+        </div>
+      <% end %>
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-3">
@@ -24,10 +33,10 @@
                   edit_account_path,
                   class: 'btn btn-primary mb-2' %>
       <%= link_to t('extranet.account.edit_personal_data'),
-                  edit_personal_data_path,
+                  edit_account_personal_data_path,
                   class: 'btn btn-primary mb-2' %>
     </div>
-    <%= render 'extranet/personal_data/details',
+    <%= render 'extranet/account/personal_data/details',
                 person: @person,
                 l10n: @person_l10n unless @person.nil? %>
   </div>
