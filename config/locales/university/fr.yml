@@ -240,8 +240,9 @@ fr:
           description: Personne utilisant Osuny, dotée d'un compte authentifié
           description_non_university: Personne utilisant Osuny, dotée d'un compte authentifié
           title: Utilisateur·rices
-      source: Wikipédia
-      text_html: Une université est une institution d'enseignement supérieur, d'étude et de recherche, constituée par la réunion de divers établissements nommés suivant les traditions <i>collèges</i>, <i>facultés</i>, <i>instituts</i>, <i>départements</i>, <i>centres</i>, <i>sections</i>, <i>unités</i> ou écoles spécifiques, mais aussi bibliothèque ou atelier, médiathèque ou musée, etc. formant un ensemble administratif cohérent avec un statut de droit défini, public, privé ou éventuellement mixte.
+      source: Dictionnaire de l'Académie Française
+      text_html: Inventaire, recensement de données et d’informations, selon un ordre méthodique qui permet de les retrouver facilement ; le support matériel de cet inventaire.
+      title: Répertoire
     internal_key: Clé interne
     manage_cohorts: Gérer les promotions
     manage_experiences: Gérer les expériences professionnelles

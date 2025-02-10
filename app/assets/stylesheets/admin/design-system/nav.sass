@@ -1,6 +1,7 @@
 .navbar-main
     > *
-        min-width: 300px
+        @include media-breakpoint-up(lg)
+            min-width: 300px
 .navbar
     .btn
         color: $gray-300

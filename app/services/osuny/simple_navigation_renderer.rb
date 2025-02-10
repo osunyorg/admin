@@ -47,7 +47,10 @@ class Osuny::SimpleNavigationRenderer < SimpleNavigation::Renderer::Base
     image = item.options[:image]
     if image.present?
       subnavigation += "<a href=\"#{item.url}\" class=\"submenu__image\">";
-      subnavigation += ActionController::Base.helpers.image_tag image, class: 'card-img-top rounded-top', loading: :lazy
+      subnavigation += ActionController::Base.helpers.image_tag image,
+                                                                class: 'card-img-top rounded-top',
+                                                                loading: :lazy,
+                                                                width: 200, height: 200
       subnavigation += "</a>";
     end
     subnavigation += "<ul class=\"pt-2\">"
