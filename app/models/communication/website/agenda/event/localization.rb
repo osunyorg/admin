@@ -6,6 +6,9 @@
 #  add_to_calendar_urls     :jsonb
 #  featured_image_alt       :string
 #  featured_image_credit    :text
+#  header_cta               :boolean          default(FALSE)
+#  header_cta_label         :string
+#  header_cta_url           :string
 #  meta_description         :string
 #  migration_identifier     :string
 #  published                :boolean          default(FALSE)
@@ -40,6 +43,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include AsLocalization
   include AsLocalizedTree
   include Contentful
+  include HeaderCallToAction
   include Initials
   include Permalinkable
   include Sanitizable
@@ -49,6 +53,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include WithCal
   include WithFeaturedImage
   include WithGitFiles
+  include WithOpenApi
   include WithPublication
   include WithUniversity
 

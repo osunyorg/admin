@@ -18,4 +18,8 @@ class ApplicationMailer < ActionMailer::Base
     opts[:from] = opts[:reply_to] = university.mail_from[:full]
     opts
   end
+
+  def should_send?(email)
+    Rails.env.production? || email.end_with?(*Rails.application.config.internal_domains)
+  end
 end

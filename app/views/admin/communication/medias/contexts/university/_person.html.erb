@@ -1,0 +1,12 @@
+<%
+localization = about
+person = localization.about
+language = localization.language
+path = admin_university_person_path(person)
+target ||= ''
+link = "#{path}#{target}"
+%>
+<%= render 'admin/communication/medias/contexts/default',
+            localization: localization,
+            link: link,
+            type: University::Person.model_name.human %>

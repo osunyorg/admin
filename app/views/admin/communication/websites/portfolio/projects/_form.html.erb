@@ -11,6 +11,7 @@
           <%= lf.input :title %>
           <%= lf.input :subtitle %>
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+          <%= render 'admin/application/header_cta/form', f: lf %>
         <% end %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
@@ -22,8 +23,8 @@
           <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#communication_website_portfolio_project_localizations_attributes_0_title' %>
+          <%= f.input :full_width, wrapper: :custom_boolean_switch %>
         <% end %>
-        <%= render 'admin/application/images/featured/form', about: l10n, f: lf %>
         <%= render 'admin/application/images/shared/form', about: l10n, f: lf %>
       </div>
     </div>

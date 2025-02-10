@@ -24,15 +24,8 @@ module Admin::OsunyHelper
 
   def osuny_thumbnail(object, large: false, cropped: true, classes: '')
     return if object.nil?
-    if object.respond_to?(:logo)
-      # For organizations
-      image = object.logo
-    elsif object.respond_to?(:featured_image)
-      # For all other objects
-      image = object.featured_image
-    else
-      image = nil
-    end
+    image = object.respond_to?(:featured_image) ? object.featured_image
+                                                : nil
     render  partial: "admin/application/components/thumbnail",
             locals: {
               image: image,
@@ -91,7 +84,11 @@ module Admin::OsunyHelper
       classes += ' text-muted fst-italic'
       alert = t('localization.creation_alert')
     end
-    link_to name.truncate(45), path, class: classes.strip, data: { confirm: alert }
+    osuny_link(name, path, classes: classes, alert: alert)
+  end
+
+  def osuny_link(name, path, classes: '', alert: '')
+    link_to name.to_s.truncate(45), path, class: classes.strip, data: { confirm: alert }
   end
 
   def osuny_link_localized_if(condition, object, path, label_method: :to_s, classes: '')

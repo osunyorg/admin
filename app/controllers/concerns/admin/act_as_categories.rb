@@ -19,12 +19,15 @@ module Admin::ActAsCategories
   end
 
   def children
-    return unless request.xhr?
-    @categories_class = categories_class
-    @category = categories.find(params[:id])
-    @children =  @category.children
-                          .ordered(current_language)
-    render 'admin/application/categories/children'
+    if request.xhr?
+      @categories_class = categories_class
+      @category = categories.find(params[:id])
+      @children =  @category.children
+                            .ordered(current_language)
+      render 'admin/application/categories/children'
+    else
+      redirect_to [:admin, categories_class]
+    end
   end
 
   protected
@@ -42,7 +45,7 @@ module Admin::ActAsCategories
 
   def permitted_params_for(object_key)
     params.require(object_key).permit(
-      :is_taxonomy, :parent_id,
+      :is_taxonomy, :parent_id, :bodyclass,
       localizations_attributes: [
         :id, :name, :slug, :summary, :meta_description, :language_id,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit

@@ -5,6 +5,9 @@
 #  id                       :uuid             not null, primary key
 #  featured_image_alt       :string
 #  featured_image_credit    :text
+#  header_cta               :boolean          default(FALSE)
+#  header_cta_label         :string
+#  header_cta_url           :string
 #  meta_description         :text
 #  migration_identifier     :string
 #  pinned                   :boolean
@@ -39,6 +42,7 @@
 class Communication::Website::Post::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
+  include HeaderCallToAction
   include Initials
   include Permalinkable
   include Sanitizable
@@ -47,6 +51,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include WithBlobs
   include WithFeaturedImage
   include WithGitFiles
+  include WithOpenApi
   include WithPublication
   include WithUniversity
 

@@ -34,14 +34,18 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path kind)
 
   include AsDirectObject
+  include Bodyclassed
   include Duplicable
   include Filterable
+  include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Localizable
   include Orderable
   include Sanitizable
+  include Searchable
   include WithAutomaticMenus
   include WithDesignOptions
   include WithMenuItemTarget
+  include WithOpenApi
   include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before WithPublication
   include WithTree
   include WithUniversity
@@ -90,6 +94,7 @@ class Communication::Website::Page < ApplicationRecord
         unaccent(communication_website_page_localizations.title) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
+
   scope :for_published, -> (published, language) {
     joins(:localizations)
       .where(communication_website_page_localizations: { language_id: language.id , published: published == 'true'})
@@ -97,7 +102,8 @@ class Communication::Website::Page < ApplicationRecord
   scope :for_full_width, -> (full_width, language = nil) { where(full_width: full_width == 'true') }
 
   def dependencies
-    localizations.in_languages(website.active_language_ids)
+    localizations.in_languages(website.active_language_ids) +
+    categories
   end
 
   def references
@@ -107,14 +113,9 @@ class Communication::Website::Page < ApplicationRecord
     abouts_with_page_block
   end
 
-  # La page actuelle a les bodyclass classe1 et classe2 ("classe1 classe2")
-  # Les différents ancêtres ont les classes home, bodyclass et secondclass
-  # -> "page-classe1 page-classe2 ancestor-home ancestor-bodyclass ancestor-secondclass"
-  def best_bodyclass
-    classes = []
-    classes += add_prefix_to_classes(bodyclass.split(' '), 'page') unless bodyclass.blank?
-    classes += add_prefix_to_classes(ancestor_classes, 'ancestor') unless ancestor_classes.blank?
-    classes.join(' ')
+  # Pages do have a category, but we do not list all the existing pages categories
+  def special_page_categories
+    false
   end
 
   def siblings
@@ -130,20 +131,6 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   protected
-
-  # ["class1", "class2"], "page" -> ["page-class1", "page-class2"]
-  def add_prefix_to_classes(classes, prefix)
-    classes.map { |single_class| "#{prefix}-#{single_class}" }
-  end
-
-  # ["class1", "class2", "class3 class4"] -> ["class1", "class2", "class3", "class4"]
-  def ancestor_classes
-    @ancestor_classes ||= ancestors.pluck(:bodyclass)
-                                   .compact_blank
-                                   .join(' ')
-                                   .split(' ')
-                                   .compact_blank
-  end
 
   def last_ordered_element
     website.pages.where(parent_id: parent_id).ordered.last

@@ -29,4 +29,8 @@ class Communication::Website::Page::EducationProgram < Communication::Website::P
   def git_path_relative
     'programs/_index.html'
   end
+
+  def special_page_categories
+    university.education_program_categories
+  end
 end

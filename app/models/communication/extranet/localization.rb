@@ -2,21 +2,23 @@
 #
 # Table name: communication_extranet_localizations
 #
-#  id                   :uuid             not null, primary key
-#  cookies_policy       :text
-#  home_sentence        :text
-#  name                 :string
-#  privacy_policy       :text
-#  published            :boolean          default(FALSE)
-#  published_at         :datetime
-#  registration_contact :string
-#  sso_button_label     :string
-#  terms                :text
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  about_id             :uuid             indexed
-#  language_id          :uuid             indexed
-#  university_id        :uuid             indexed
+#  id                         :uuid             not null, primary key
+#  cookies_policy             :text
+#  home_sentence              :text
+#  invitation_message_subject :string           default("")
+#  invitation_message_text    :text             default("")
+#  name                       :string
+#  privacy_policy             :text
+#  published                  :boolean          default(FALSE)
+#  published_at               :datetime
+#  registration_contact       :string
+#  sso_button_label           :string
+#  terms                      :text
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  about_id                   :uuid             indexed
+#  language_id                :uuid             indexed
+#  university_id              :uuid             indexed
 #
 # Indexes
 #
@@ -46,6 +48,8 @@ class Communication::Extranet::Localization < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [228, 228]
   end
 
+  before_validation :set_default_invitation_message
+
   validates :name, presence: true
   validates :logo, size: { less_than: 1.megabytes }
   validates :favicon, size: { less_than: 1.megabytes }
@@ -61,6 +65,11 @@ class Communication::Extranet::Localization < ApplicationRecord
     return unless about.default_language_id == language_id
     return if published?
     errors.add(:published, :cannot_unpublished_default)
+  end
+
+  def set_default_invitation_message
+    self.invitation_message_subject = I18n.t('mailers.extranet.invitation_message.subject') if self.invitation_message_subject.blank?
+    self.invitation_message_text = I18n.t('mailers.extranet.invitation_message.text') if self.invitation_message_text.blank?
   end
 
 end

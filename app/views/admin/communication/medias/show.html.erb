@@ -1,0 +1,62 @@
+<% content_for :title, @l10n %>
+
+<div class="row">
+  <div class="col-lg-4">
+    <% if @media.original_blob.representable? %>
+      <div>
+        <%= kamifusen_tag @media.original_blob, class: 'img-fluid mb-3' %>
+      </div>
+    <% end %>
+    <%= link_to t('download'),
+              download_medium_path(signed_id: @media.original_blob.signed_id),
+              class: button_classes %>
+  </div>
+  <div class="col-lg-8">
+    <div class="row">
+      <div class="col-lg-6">
+      <%= osuny_label Communication::Media.human_attribute_name(:origin) %>
+      <p><%= @media.origin_i18n %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Communication::Media.human_attribute_name(:original_filename) %>
+        <p><%= @media.original_filename %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Communication::Media.human_attribute_name(:original_content_type) %>
+        <p><%= @media.original_content_type %></p>
+      </div>
+      <div class="col-lg-6">
+        <%= osuny_label Communication::Media.human_attribute_name(:original_byte_size) %>
+        <p><%= number_to_human_size @media.original_byte_size %></p>
+      </div>
+      <% if @l10n.alt.present? %>
+        <div class="col-lg-6">
+          <%= osuny_label t('featured_image.alt.label') %>
+          <p><%= @l10n.alt %></p>
+        </div>
+      <% end %>
+      <% if @l10n.credit.present? %>
+        <div class="col-lg-6">
+          <%= osuny_label t('featured_image.credit.label') %>
+          <div><%= sanitize @l10n.credit %></div>
+        </div>
+      <% end %>
+    </div>
+  
+    <% if @media.collection.present? %>
+      <%= osuny_label Communication::Media::Localization.human_attribute_name(:collection) %>
+      <p><%= osuny_link_localized @media.collection, admin_communication_media_collection_path(@media.collection) %><p>
+    <% end %>
+    
+    <%= render 'admin/application/categories/widget/show', about: @media %>
+    <%= render 'admin/communication/medias/contexts/list', media: @media %>
+  </div>
+</div>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @media if @media.contexts.none? %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @media %>
+<% end %>

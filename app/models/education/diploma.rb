@@ -26,6 +26,7 @@ class Education::Diploma < ApplicationRecord
   include Localizable
   include Orderable
   include Sanitizable
+  include Searchable
   include WithUniversity
 
   enum :level, {
@@ -39,7 +40,7 @@ class Education::Diploma < ApplicationRecord
     fourth_year: 400,
     master: 500,
     doctor: 800
-  }
+  }, prefix: :level
 
   has_many :programs, dependent: :nullify
 

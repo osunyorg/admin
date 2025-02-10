@@ -48,12 +48,13 @@
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
 class Communication::Website < ApplicationRecord
-  self.filter_attributes += [:access_token]
+  self.filter_attributes += [:access_token, :deuxfleurs_secret_access_key]
 
   include Favoritable
   include Filterable
   include Localizable
   include LocalizableOrderByNameScope
+  include Searchable
   include WithAbouts
   include WithAssociatedObjects
   include WithConfigs
@@ -67,6 +68,7 @@ class Communication::Website < ApplicationRecord
   include WithGitRepository
   include WithLock
   include WithManagers
+  include WithOpenApi
   include WithProgramCategories
   include WithReferences
   include WithSpecialPages
@@ -109,9 +111,9 @@ class Communication::Website < ApplicationRecord
       .joins(:localizations)
       .where(communication_website_localizations: { language_id: language.id })
       .where("
-        unaccent(universities.name) % unaccent(:term) OR
-        unaccent(communication_website_localizations.name) % unaccent(:term) OR
-        unaccent(communication_websites.url) % unaccent(:term)
+        unaccent(universities.name) ILIKE unaccent(:term) OR
+        unaccent(communication_website_localizations.name) ILIKE unaccent(:term) OR
+        unaccent(communication_websites.url) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
   scope :for_update, -> (autoupdate, language = nil) { where(autoupdate_theme: autoupdate) }
@@ -121,6 +123,29 @@ class Communication::Website < ApplicationRecord
     # TODO add in_production_at and use it
     order(created_at: :desc)
   }
+
+  def self.organized_for(user, language, limit: 6)
+    university = user.university
+    ability = ::Ability.for(user)
+    # Favorites first
+    favorites_ids = user.favorites.websites.pluck(:about_id)
+    websites =  university.websites
+                          .where(id: favorites_ids)
+                          .accessible_by(ability)
+                          .ordered(language)
+                          .collect(&:website)
+    # Then the rest
+    if websites.count < limit
+      remaining = limit - websites.count
+      websites += university.websites
+                            .where.not(id: favorites_ids)
+                            .accessible_by(ability)
+                            .ordered(language)
+                            .limit(limit - websites.count)
+                            .collect(&:website)
+    end
+    websites
+  end
 
   def to_s
     original_localization.to_s
@@ -136,6 +161,7 @@ class Communication::Website < ApplicationRecord
     localizations.in_languages(active_language_ids) +
     configs +
     pages +
+    page_categories +
     posts +
     post_categories +
     events +

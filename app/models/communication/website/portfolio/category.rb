@@ -3,6 +3,7 @@
 # Table name: communication_website_portfolio_categories
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
 #  position                 :integer
@@ -38,19 +39,17 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_and_belongs_to_many :projects,
-                          class_name: 'Communication::Website::Portfolio::Project',
-                          join_table: :communication_website_portfolio_categories_projects,
-                          foreign_key: :communication_website_portfolio_category_id,
-                          association_foreign_key: :communication_website_portfolio_project_id
+  has_and_belongs_to_many :projects
+  alias                   :category_objects :projects
 
   def project_localizations
     Communication::Website::Portfolio::Project::Localization.where(about_id: project_ids)
   end
 
   def dependencies
-    [website.config_default_content_security_policy] +
-    localizations.in_languages(website.active_language_ids)
+    [parent] +
+    localizations.in_languages(website.active_language_ids) +
+    [website.config_default_content_security_policy]
   end
 
   def references

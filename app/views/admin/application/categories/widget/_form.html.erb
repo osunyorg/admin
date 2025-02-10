@@ -12,14 +12,14 @@
                           ) %>
       </div>
     <% end %>
-    <% if categories.root.free.any? %>
+    <% if categories.free.any? %>
       <div class="col-lg-6 col-xxl-4">
         <%= osuny_label t('category.title') %>
         <%= f.association :categories,
                           label_text: false,
                           as: :check_boxes,
                           collection: osuny_collection_tree(
-                            categories.root.free,
+                            categories.free,
                             localized: true
                           ) %>
       </div>

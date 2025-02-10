@@ -1,0 +1,42 @@
+en:
+  vue:
+    changes:
+      cancel: Cancel
+      save: Save changes
+    cropperModal:
+        cancel: Cancel
+        rotate: Rotate image
+        title: Frame image
+        validate: Validate
+    mediaPicker:
+      alt:
+        hint: This text is important for accessibility. If the image conveys important information, it must be written here. If the information is already written somewhere else in the page, or if the image is purely decorative, the field must be left empty. Otherwise, it would pollute voice navigation.
+        label: Alternative text
+      cloud:
+        button: Import (Unsplash & Pexels)
+        next: Next images
+        nothing: No results for this search
+        placeholder: Type your search here
+        previous: Previous images
+        search: Search
+        title: Photo search
+      credit:
+        hint: The credit must be present according to copyright or copyleft licenses.
+        label: Credit
+      imageUploader:
+        button: Upload an image
+        size:
+          close: Close
+          text: "The image sent is far too heavy, it weights :sizeMB! Osuny manages all images under :maxMB automatically. When your image is bigger than that, you need to reduce them before upload. You might use a tool like <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
+          title: Image too heavy
+      medias:
+        button: Choose from media library
+        collections: Collections
+        next: Next images
+        nothing: No results for this search
+        placeholder: Type your search here
+        previous: Previous images
+        search: Search
+        title: Media library
+      remove: Remove image
+      title: Image

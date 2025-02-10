@@ -1,22 +1,21 @@
 namespace :app do
-  desc 'Start server'
-  task :start do
-    sh 'yarn'
-    sh 'rails tmp:cache:clear'
-    sh 'rails server'
-  end
-
   desc 'Fix things'
   task fix: :environment do
-    Migrations::MenuUrl.migrate
+    Search::BuildIndexJob.perform_now
   end
 
-  namespace :websites do
-    desc "Refresh access token for Communication Websites."
-    task refresh_tokens: :environment do
+  namespace :search do
+    task build_index: :environment do
+      Search::BuildIndexJob.perform_later
+    end
+  end
+
+  namespace :access_token do
+    desc "Refresh access token for Universities & Websites."
+    task refresh: :environment do
       options = {}
       option_parser = OptionParser.new
-      option_parser.banner = "Usage: rake app:websites:refresh_tokens -- --old=ghp_oldtoken --new=ghp_newtoken"
+      option_parser.banner = "Usage: rake app:access_token:refresh -- --old=ghp_oldtoken --new=ghp_newtoken"
       option_parser.on("-o OLDTOKEN", "--old OLDTOKEN") do |old_access_token|
         options[:old_access_token] = old_access_token
       end
@@ -32,7 +31,7 @@ namespace :app do
         website.update_column :access_token, options[:new_access_token]
       }
       universities = University.where(default_github_access_token: options[:old_access_token])
-      websites.each { |university|
+      universities.each { |university|
         puts "Refreshing token for « #{university} »"
         university.update_column :default_github_access_token, options[:new_access_token]
       }

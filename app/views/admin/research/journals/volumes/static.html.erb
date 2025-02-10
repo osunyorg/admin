@@ -16,6 +16,8 @@ issn: "<%= issn %>"
 keywords: >-
   <%= @l10n.keywords %>
 date: "<%= @l10n.published_at.iso8601 %>"
+text: >-
+  <%= prepare_html_for_static @l10n.text %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>

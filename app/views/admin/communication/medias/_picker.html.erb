@@ -1,0 +1,27 @@
+<%
+picker = Osuny::Media::Picker.new(about: about)
+lang = about&.language&.iso_code if about.respond_to? :language
+summernote_lang = current_interface_language.summernote_locale.presence() || 'en-US'
+cloud = {
+  unsplash: {
+    logo: asset_path('communication/photo_imports/unsplash.svg'),
+    endpoint: admin_communication_unsplash_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+  },
+  pexels: {
+    logo: asset_path('communication/photo_imports/pexels.png'),
+    endpoint: admin_communication_pexels_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+  },
+}
+%>
+<div  id="media-picker-app"
+      data-lang="<%= lang %>"
+      data-current="<%= picker.to_json %>"
+      data-summernote-lang="<%= summernote_lang %>"
+      data-changes-endpoint="<%= pick_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
+      data-formats-accepted="<%= default_images_formats_accepted %>"
+      data-formats-accepted-hint="<%= images_formats_accepted_hint %>"
+      data-i18n="<%= t('vue').to_json %>"
+      data-cloud="<%= cloud.to_json %>"
+      data-media-endpoint="<%= admin_communication_medias_url(website_id: nil, extranet_id: nil, journal_id: nil, format: :json) %>"
+      >
+</div>

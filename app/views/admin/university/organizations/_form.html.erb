@@ -22,8 +22,6 @@
                     input_html: { accept: default_images_formats_accepted },
                     preview: 200,
                     resize: false %>
-        <%= osuny_separator %>
-        <%= render 'admin/application/images/featured/form', f: lf, about: l10n %>
       </div>
       <div class="offset-lg-1 col-lg-8">
         <%= render 'admin/application/summary/form', f: lf, about: l10n %>
@@ -33,7 +31,9 @@
                       data: { 'summernote-config' => 'mini-list' }
                     } %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
+        <%= osuny_separator %>
         <%= render 'admin/application/contact_details/edit', f: f, lf: lf, about: organization, l10n: l10n %>
+        <%= osuny_separator %>
         <%= osuny_panel University::Organization.human_attribute_name('legal') do %>
           <div class="row pure__row--small">
             <div class="col-xl-6">

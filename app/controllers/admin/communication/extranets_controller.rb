@@ -13,6 +13,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
   end
 
   def show
+    @hero_summary = true
     breadcrumb
   end
 
@@ -100,6 +101,8 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
       :favicon_delete,
       :home_sentence,
       :id,
+      :invitation_message_subject,
+      :invitation_message_text,
       :language_id,
       :logo,
       :logo_delete,
@@ -126,7 +129,8 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
       :sso_cert,
       :sso_mapping,
       :sso_name_identifier_format,
-      :sso_target_url
+      :sso_target_url,
+      :upper_menu
     ]
   end
 

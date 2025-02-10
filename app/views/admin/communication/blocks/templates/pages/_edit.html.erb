@@ -1,11 +1,15 @@
 <%= block_component_edit block, :mode %>
 
-<div class="my-5">
+<div class="my-5" v-if="data.mode !== 'category'">
   <h2 class="h4"><%= t '.main_page.title' %></h2>
   <%= block_component_edit block, :page_id %>
 </div>
 
-<div class="my-5" v-if="data.mode == 'selection'">
+<div class="my-5" v-if="data.mode === 'category'">
+  <%= block_component_edit block, :category_id %>
+</div>
+
+<div class="my-5" v-if="data.mode === 'selection'">
   <h2 class="h4"><%= t '.selection.title' %></h2>
   <%= block_component_add_element block, t('.selection.add') %>
   <draggable :list="data.elements" handle=".dragHandle">

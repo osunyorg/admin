@@ -3,6 +3,7 @@
 # Table name: communication_website_agenda_categories
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
 #  position                 :integer
@@ -38,19 +39,16 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   belongs_to              :program,
                           class_name: 'Education::Program',
                           optional: true
-  has_and_belongs_to_many :events,
-                          class_name: 'Communication::Website::Agenda::Event',
-                          join_table: :communication_website_agenda_events_categories,
-                          foreign_key: :communication_website_agenda_category_id,
-                          association_foreign_key: :communication_website_agenda_event_id
+  has_and_belongs_to_many :events
+  alias                   :category_objects :events
 
   def event_localizations
     Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)
   end
 
   def dependencies
+    [parent] +
     localizations.in_languages(website.active_language_ids) +
-    children +
     [website.config_default_content_security_policy]
   end
 

@@ -1,19 +1,20 @@
-page_root_fr:
+root_page_fr:
   title: Accueil
   slug: ''
   published: true
   published_at: 2010-11-28 00:00:00
-  about: page_root
+  about: root_page
   language: fr
   website: website_with_github
   university: default_university
 
-page_test_fr:
+test_page_fr:
+  migration_identifier: test-page-fixture-1-fr
   title: Test
   slug: 'test'
   published: true
   published_at: 2010-11-28 00:00:00
-  about: page_test
+  about: test_page
   language: fr
   website: website_with_github
   university: default_university

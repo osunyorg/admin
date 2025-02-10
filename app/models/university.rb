@@ -39,7 +39,7 @@
 #  fk_rails_a8022b1c3f  (default_language_id => languages.id)
 #
 class University < ApplicationRecord
-  self.filter_attributes += [:sso_cert]
+  self.filter_attributes += [:sso_cert, :default_github_access_token]
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Filterable
@@ -63,6 +63,7 @@ class University < ApplicationRecord
   has_many :active_storage_blobs, class_name: 'ActiveStorage::Blob'
   has_many :imports, dependent: :destroy
   has_many :apps, dependent: :destroy
+  has_many :search, dependent: :destroy
 
   validates :name, presence: true
   validates :sms_sender_name, presence: true, length: { maximum: 11 }

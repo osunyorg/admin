@@ -1,4 +1,4 @@
-class Communication::Block::Component::PostCategory < Communication::Block::Component::Base
+class Communication::Block::Component::PostCategory < Communication::Block::Component::BaseReference
 
   def category
     return unless website

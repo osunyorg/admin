@@ -1,0 +1,39 @@
+<% if @results.none? %>
+  <p class="text-white text-center"><%= t('admin.search.no_results') %></p>
+<% else %>
+  <div class="row g-2 mb-3">
+    <%
+    @results.each do |result|
+      object = result.about_object
+      next unless can?(:read, object)
+      l10n = result.about_localization
+      # communication_website_post
+      path_class = object.class.polymorphic_name.parameterize.underscore
+      # admin_communication_website_post_path
+      begin
+        path_name = "admin_#{path_class}_path"
+        if result.website_id?
+          path = public_send path_name, { website_id: result.website_id, id: result.about_object_id }
+        elsif result.extranet_id?
+          path = public_send path_name, { extranet_id: result.extranet_id, id: result.about_object_id }
+        else
+          path = public_send path_name, { id: result.about_object_id }
+        end
+      rescue
+        next
+      end
+      %>
+      <div class="col-lg-4 col-md-6">
+        <div>
+          <div class="<%= osuny_card_classes(horizontal: true) %>">
+            <%= osuny_thumbnail_localized object %>
+            <div class="card-body py-1">
+              <%= osuny_link_localized object, path, classes: 'stretched-link' %><br>
+              <span class="small text-muted"><%= object.class.model_name.human %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

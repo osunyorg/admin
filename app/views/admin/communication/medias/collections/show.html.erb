@@ -1,0 +1,18 @@
+<% content_for :title, @l10n %>
+
+<% if @medias.total_count > 0 %>
+  <p>
+    <%= @medias.total_count %>
+    <%= Communication::Media.model_name.human(count: @medias.total_count).downcase %>
+  </p>
+  <%= render 'admin/communication/medias/list', medias: @medias %>
+  <%= paginate @medias %>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= destroy_link @collection %>
+<% end %>
+
+<% content_for :action_bar_right do %>
+  <%= edit_link @collection %>
+<% end %>

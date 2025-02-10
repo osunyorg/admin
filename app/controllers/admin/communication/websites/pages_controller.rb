@@ -6,13 +6,14 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   include Admin::Localizable
 
   before_action :load_localization,
-                  :redirect_if_not_localized,
-                  only: [:show, :edit, :update, :static, :publish, :preview, :generate_from_template]
+                :redirect_if_not_localized,
+                only: [:show, :edit, :update, :static, :publish, :preview, :generate_from_template]
 
   def index
     @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
     @pages = @website.pages
+    @feature_nav = 'navigation/admin/communication/website/pages'
     breadcrumb
   end
 
@@ -20,6 +21,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     @pages = @pages.filter_by(params[:filters], current_language)
                    .ordered_by_title(current_language)
                    .page(params[:page])
+    @feature_nav = 'navigation/admin/communication/website/pages'
     breadcrumb
   end
 
@@ -38,8 +40,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def children
-    return unless request.xhr?
-    @children = @page.children.ordered
+    if request.xhr?
+      @children = @page.children.ordered
+    else
+      redirect_to admin_communication_website_pages_path
+    end
   end
 
   def show
@@ -78,11 +83,13 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def new
     @page.website = @website
+    @categories = categories
     breadcrumb
     add_breadcrumb(t('create'))
   end
 
   def edit
+    @categories = categories
     breadcrumb
     add_breadcrumb(@l10n, admin_communication_website_page_path(@page))
     add_breadcrumb t('edit')
@@ -90,10 +97,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def create
     @page.website = @website
-    @l10n.add_photo_import params[:photo_import]
     if @page.save_and_sync
-      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_created_html', model: @page.to_s_in(current_language))
+      redirect_to admin_communication_website_page_path(@page),
+                  notice: t('admin.successfully_created_html', model: @page.to_s_in(current_language))
     else
+      @categories = categories
       breadcrumb
       add_breadcrumb(t('create'))
       render :new, status: :unprocessable_entity
@@ -101,13 +109,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def update
-    if @page.update(page_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
-      @page.sync_with_git
-      redirect_to admin_communication_website_page_path(@page), notice: t('admin.successfully_updated_html', model: @page.to_s_in(current_language))
+    if @page.update_and_sync(page_params)
+      redirect_to admin_communication_website_page_path(@page),
+                  notice: t('admin.successfully_updated_html', model: @page.to_s_in(current_language))
     else
       load_invalid_localization
+      @categories = categories
       breadcrumb
       add_breadcrumb(@page, admin_communication_website_page_path(@page))
       add_breadcrumb t('edit')
@@ -153,9 +160,10 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def page_params
     params.require(:communication_website_page)
           .permit(
-            :communication_website_id, :bodyclass, :full_width, :parent_id, :design_options,
+            :communication_website_id, :bodyclass, :full_width, :parent_id, :design_options, category_ids: [],
             localizations_attributes: [
-              :id, :title, :breadcrumb_title, :meta_description, :summary, :header_text, :header_cta, :header_cta_label, :header_cta_url, :text, :slug, :published,
+              :id, :title, :breadcrumb_title, :meta_description, :summary, :header_text, :text, :slug, :published,
+              :header_cta, :header_cta_label, :header_cta_url, 
               :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
               :shared_image, :shared_image_delete, :shared_image_infos,
               :language_id
@@ -164,6 +172,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
           .merge(
             university_id: current_university.id
           )
+  end
+
+  def categories
+    @website.page_categories
+            .ordered
   end
 
 end

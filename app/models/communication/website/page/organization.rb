@@ -33,4 +33,8 @@ class Communication::Website::Page::Organization < Communication::Website::Page
   def git_path_relative
     'organizations/_index.html'
   end
+
+  def special_page_categories
+    university.organization_categories
+  end
 end

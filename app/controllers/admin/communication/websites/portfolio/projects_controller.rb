@@ -38,7 +38,6 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   def create
     @project.website = @website
     @project.created_by = current_user
-    @l10n.add_photo_import params[:photo_import]
     if @project.save_and_sync
       redirect_to admin_communication_website_portfolio_project_path(@project),
                   notice: t('admin.successfully_created_html', model: @project.to_s_in(current_language))
@@ -50,10 +49,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   end
 
   def update
-    if @project.update(project_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
-      @project.sync_with_git
+    if @project.update_and_sync(project_params)
       redirect_to admin_communication_website_portfolio_project_path(@project),
                   notice: t('admin.successfully_updated_html', model: @project.to_s_in(current_language))
     else
@@ -89,11 +85,12 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   def project_params
     params.require(:communication_website_portfolio_project)
     .permit(
-      :year,
+      :year, :full_width,
       category_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary,
         :published, :published_at, :slug,
+        :header_cta, :header_cta_label, :header_cta_url,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id

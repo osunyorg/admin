@@ -1,0 +1,15 @@
+<div class="row g-3 mb-3">
+  <% @extranets.each do |extranet| %>
+    <div>
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
+        <%= osuny_thumbnail_localized extranet %>
+        <div class="card-body">
+          <%= osuny_link_localized extranet, [:admin, extranet], classes: 'stretched-link' %>
+        </div>
+        <div class="card-footer small text-muted">
+          <%= extranet.about.to_s_in(current_language) if extranet.about %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

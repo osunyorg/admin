@@ -35,10 +35,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   end
 
   def create
-    @l10n.add_photo_import params[:photo_import]
-    @volume.assign_attributes(
-      journal: @journal
-    )
+    @volume.journal = @journal
     if @volume.save
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s_in(current_language))
     else
@@ -49,9 +46,6 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
 
   def update
     if @volume.update(volume_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
-      @volume.touch # to ensure it send the photo_import picture
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_updated_html', model: @volume.to_s_in(current_language))
     else
       load_invalid_localization
@@ -77,7 +71,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
   def volume_params
     params.require(:research_journal_volume)
           .permit(
-            :number, 
+            :number,
             localizations_attributes: [
               :id, :language_id,
               :title, :slug, :keywords, :published, :published_at, :meta_description, :summary, :text,

@@ -20,6 +20,11 @@ has:
 <% end %>
 position: <%= page.position %>
 weight: <%= page.position %>
+<%= render 'admin/application/categories/widget/static',
+            about: page,
+            l10n: @l10n,
+            categories: @website.page_categories,
+            key: :pages_categories %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 bodyclass: >-
   <%= page.best_bodyclass %>
@@ -38,11 +43,7 @@ children:
 <%= render 'admin/application/summary/static', about: @l10n %>
 header_text: >-
   <%= prepare_html_for_static @l10n.header_text %>
-header_cta:
-  display: <%= @l10n.header_cta %>
-  label: >-
-    <%= prepare_text_for_static @l10n.header_cta_label %>
-  target: "<%= @l10n.header_cta_url %>"
-  external: <%= @l10n.header_cta_url.present? && !(@l10n.header_cta_url.start_with?('/') || @l10n.header_cta_url.start_with?(@website.url)) %>
+<%= render 'admin/application/header_cta/static', about: @l10n %>
+<%= render 'admin/communication/websites/pages/static/section_taxonomies', page: page, language: language %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---

@@ -44,10 +44,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def new
-    if current_user.person.present?
-      current_user.person.update_column(:is_author, true)
-      @post.authors << current_user.person
-    end
+    set_current_person_as_author_of(@post)
     @categories = categories
     breadcrumb
   end
@@ -60,8 +57,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def create
     @post.website = @website
-    @l10n.add_photo_import params[:photo_import]
-    if @post.save_and_sync
+    if @post.save
+      @post.sync_with_git
       redirect_to admin_communication_website_post_path(@post),
                   notice: t('admin.successfully_created_html', model: @post.to_s_in(current_language))
     else
@@ -72,10 +69,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def update
-    if @post.update(post_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
-      @post.sync_with_git
+    if @post.update_and_sync(post_params)
       redirect_to admin_communication_website_post_path(@post),
                   notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
     else
@@ -88,7 +82,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def duplicate
-    redirect_to [:admin, @post.duplicate],
+    duplicate_post = @post.duplicate
+    set_current_person_as_author_of(duplicate_post)
+    redirect_to [:admin, duplicate_post],
                 notice: t('admin.successfully_duplicated_html', model: @post.to_s_in(current_language))
   end
 
@@ -102,7 +98,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def breadcrumb
     super
-    add_breadcrumb  Communication::Website::Post.model_name.human(count: 2),
+    add_breadcrumb  @website.feature_posts_name(current_language),
                     admin_communication_website_posts_path
     breadcrumb_for @post
   end
@@ -113,6 +109,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
       :full_width, author_ids: [], category_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text,
+        :header_cta, :header_cta_label, :header_cta_url, 
         :published, :published_at, :slug, :pinned,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
@@ -125,5 +122,11 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def categories
     @website.post_categories
             .ordered
+  end
+
+  def set_current_person_as_author_of(post)
+    return unless current_user.person.present?
+    current_user.person.update_column(:is_author, true)
+    post.authors << current_user.person
   end
 end

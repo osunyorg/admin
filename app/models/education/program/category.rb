@@ -3,6 +3,7 @@
 # Table name: education_program_categories
 #
 #  id            :uuid             not null, primary key
+#  bodyclass     :string
 #  is_taxonomy   :boolean          default(FALSE)
 #  position      :integer
 #  created_at    :datetime         not null
@@ -26,9 +27,15 @@ class Education::Program::Category < ApplicationRecord
   include Localizable
   include WithUniversity
 
-  has_and_belongs_to_many :programs,
-                          class_name: 'Education::Program',
-                          join_table: :education_program_categories_programs,
-                          foreign_key: :education_program_category_id,
-                          association_foreign_key: :education_program_id
+  has_and_belongs_to_many :programs
+  alias                   :category_objects :programs
+
+  def dependencies
+    [parent] +
+    localizations
+  end
+
+  def references
+    programs
+  end
 end
