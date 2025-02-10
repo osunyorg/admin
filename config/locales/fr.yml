@@ -121,6 +121,7 @@ fr:
     advanced_settings: Réglages avancés
     attachment_not_available: Impossible d'accéder à l'élément
     chronicles:
+      read_all: Voir toutes les chroniques
       read_more: En savoir plus
       title: Chroniques
     dashboard: Tableau de bord
