@@ -57,4 +57,9 @@ class Communication::Block::Template::Contact < Communication::Block::Template::
   def has_socials?
     socials.any?(&:present?)
   end
+
+  def allowed_for_about?
+    !about.respond_to?(:extranet)
+  end
+  
 end

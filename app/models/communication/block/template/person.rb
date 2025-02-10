@@ -19,6 +19,10 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   has_component :option_link,         :boolean, default: true
   has_component :option_contact,      :boolean, default: false
 
+  def allowed_for_about?
+    !about.respond_to?(:extranet)
+  end
+  
   def elements
     if alphabetical
       @elements.sort_by! do |element|
