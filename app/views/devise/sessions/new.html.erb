@@ -1,4 +1,5 @@
 <%= content_for :title, t('.title', title: current_extranet.present? ? current_extranet.to_s_in(current_language) : 'Osuny') %>
+<% user_email = resource.email.presence || params[:email] %>
 
 <h1 class="h4 d-none">
   <%= t('.title', title: current_extranet.present? ? current_extranet.to_s_in(current_language) : 'Osuny') %>
@@ -40,7 +41,10 @@
           <%= f.input :email,
                       required: false,
                       autofocus: true,
-                      input_html: { autocomplete: "email" } %>
+                      input_html: {
+                        autocomplete: "email",
+                        value: user_email
+                      } %>
           <div class="mb-3 password optional user_password password_with_hints">
             <%= f.input :password,
                         as: :password_with_hints,
@@ -76,7 +80,7 @@
     <p class="mb-4"><%= t('login.not_registered_yet_details') %></p>
     <p class="form-actions">
       <%= link_to t("devise.registrations.new.sign_up"),
-                  new_registration_path(resource_name),
+                  new_registration_path(resource_name, email: user_email),
                   class: 'btn btn-primary' %>
     </p>
   </div>

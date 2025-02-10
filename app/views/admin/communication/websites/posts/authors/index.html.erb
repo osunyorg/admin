@@ -1,9 +1,9 @@
-<% content_for :title, t('communication.authors', count: 2) %>
+<% content_for :title, t('communication.description.parts.author.title', count: 2) %>
 
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @authors.total_count %>
-    <%= t('communication.authors', count: @authors.total_count).downcase %>
+    <%= University::Person::Localization::Author.model_name.human(count: @authors.total_count).downcase %>
   </p>
   <%= render 'filters', current_path: admin_communication_website_post_authors_path  %>
 </div>

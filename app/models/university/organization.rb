@@ -30,11 +30,12 @@
 #
 class University::Organization < ApplicationRecord
   include AsIndirectObject
-  include Categorizable
   include Filterable
+  include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
+  include Searchable
   include WithCountry
   include WithGeolocation
   include WithKind

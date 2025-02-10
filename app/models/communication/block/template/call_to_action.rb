@@ -11,10 +11,25 @@ class Communication::Block::Template::CallToAction < Communication::Block::Templ
   has_component :alt, :string
   has_component :credit, :rich_text
 
+  def allowed_for_about?
+    !about.respond_to?(:extranet)
+  end
+  
   def top_description
     text
   end
-  
+
+  def media_blobs
+    return [] unless image_component.blob.present?
+    [
+      {
+        blob: image_component.blob,
+        alt: alt,
+        credit: credit
+      }
+    ]
+  end
+
   protected
 
   def check_accessibility

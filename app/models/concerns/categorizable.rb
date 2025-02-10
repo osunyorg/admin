@@ -1,3 +1,4 @@
+# Attention, doit être chargé après Bodyclassed pour pouvoir s'appuyer sur best_bodyclass
 module Categorizable
   extend ActiveSupport::Concern
 
@@ -16,7 +17,24 @@ module Categorizable
     }
   end
 
+  def best_bodyclass
+    original = super
+    classes = add_prefix_to_classes(categories_bodyclasses, 'category')
+    "#{original} #{classes.join(' ')}"
+  end
+
   protected
+
+  def categories_bodyclasses
+    # Every category might have several bodyclasses, or none
+    categories.collect(&:bodyclass)
+              # Remove blanks
+              .compact_blank
+              # Join everything together
+              .join(' ')
+              # Split globally
+              .split(' ')
+  end
 
   def touch_after_categories_change
     touch

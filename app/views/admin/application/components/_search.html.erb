@@ -1,0 +1,36 @@
+<div class="osuny__search__launch">
+  <button type="button"
+          class="btn w-100 text-start"
+          aria-label="<%= t('admin.search.label') %>"
+          data-bs-toggle="modal"
+          data-bs-target="#searchModal">
+    <%= lucide_icon 'search' %>
+    <span class="ms-2 d-none d-lg-inline small"><%= t('admin.search.buttons.search') %></span>
+  </button>
+</div>
+
+<div  class="osuny__search__modal modal fade collapse"
+      id="searchModal"
+      data-endpoint="<%= admin_search_path %>"
+      tabindex="-1"
+      aria-modal="true"
+      role="dialog">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content bg-transparent border-0">
+      <div class="modal-header bg-transparent border-0 p-0">
+        <div class="osuny__search__field">
+          <input  class="form-control form-control-lg border-0"
+                  id="searchField"
+                  placeholder="<%= t('admin.search.placeholder') %>"
+                  name="term"
+                  autofocus>
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="<%= t('admin.search.buttons.close') %>"></button>
+        </div>
+      </div>
+      <div class="container-fluid" id="searchResults"></div>
+    </div>
+  </div>
+</div>

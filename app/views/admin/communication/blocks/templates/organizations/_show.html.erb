@@ -10,16 +10,19 @@
         <div class="map" data-marker-icon="<%= image_path 'map-marker.svg' %>">
       <% end %>
         <% block.template.selected_elements.each do |element| %>
-          <% next if element.best_name.blank? %>
+          <%
+          next if element.best_name.blank?
+          organization_link = '#' unless current_extranet.present?
+          %>
           <article  class="organization"
                     data-latitude="<%= element.organization&.latitude %>"
                     data-longitude="<%= element.organization&.longitude %>">
             <p class="organization-title">
-              <% if block.template.option_link && element.best_url %>
-                <a href="<%= element.best_url %>" target="_blank">
+              <% if block.template.option_link && organization_link %>
+                <a href="<%= organization_link %>" target="_blank">
               <% end %>
               <%= element.best_name %>
-              <% if block.template.option_link && element.best_url %>
+              <% if block.template.option_link && organization_link %>
                 </a>
               <% end %>
             </p>

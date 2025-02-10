@@ -8,7 +8,7 @@ class Admin::Communication::ApplicationController < Admin::ApplicationController
 
   def breadcrumb
     super
-    add_breadcrumb Communication.model_name.human, admin_communication_root_path if current_university.is_really_a_university?
+    add_breadcrumb Communication.model_name.human, admin_communication_root_path
     @menu_collapsed = true if @website
   end
 end

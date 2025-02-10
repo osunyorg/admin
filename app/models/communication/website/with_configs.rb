@@ -53,7 +53,6 @@ module Communication::Website::WithConfigs
   end
 
   def config_robots_txt
-    return if in_production?
     @config_robots_txt ||= Communication::Website::Configs::RobotsTxt.find(id)
   end
 end

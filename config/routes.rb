@@ -50,6 +50,7 @@ Rails.application.routes.draw do
       # libre_translate route
       post 'translate/:target' => 'translation#translate', as: :translate
       put 'favorite' => 'users#favorite', as: :favorite
+      get 'search(/website/:website_id)(/extranet/:extranet_id)' => 'search#index', as: :search
       draw 'admin/administration'
       draw 'admin/communication'
       draw 'admin/education'
@@ -63,6 +64,7 @@ Rails.application.routes.draw do
   get '/media/download/:signed_id' => 'media#download', as: :download_medium
   get '/media/static/:signed_id' => 'media#static'
   get '/media/:signed_id/:filename_with_transformations' => 'media#show', as: :medium
+  post '/media/resize/:signed_id' => 'media#resize'
 
   draw 'api'
   draw 'server'

@@ -19,6 +19,7 @@
 #  sso_name_identifier_format :string
 #  sso_provider               :integer          default("saml")
 #  sso_target_url             :string
+#  upper_menu                 :text             default("")
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  about_id                   :uuid             indexed => [about_type]
@@ -44,6 +45,7 @@ class Communication::Extranet < ApplicationRecord
   include Filterable
   include Localizable
   include LocalizableOrderByNameScope
+  include Searchable
   include WithAbouts
   include WithConnectedObjects
   include WithFeatures
@@ -67,7 +69,6 @@ class Communication::Extranet < ApplicationRecord
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
 
   validates :host, presence: true
-  validates :about_type, :about_id, presence: true, if: :feature_alumni
 
   before_validation :sanitize_fields
   before_validation :set_default_language,
@@ -86,15 +87,14 @@ class Communication::Extranet < ApplicationRecord
     find_by host: host
   end
 
-  def should_show_years?
-    # For a single program, year is like cohort
-    return false if about.nil? || about&.is_a?(Education::Program)
-    # if a school has a single program, same thing
-    about&.programs&.many?
+  def should_show_academic_years?
+    # Show years if there are more than one program
+    return about.programs.many? if about.is_a?(Education::School)
+    false
   end
 
   def alumni
-    about&.university_person_alumni
+    about.present? ? about.university_person_alumni : University::Person::Alumnus.none
   end
 
   def users

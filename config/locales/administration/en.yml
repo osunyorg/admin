@@ -3,16 +3,6 @@ en:
     models:
       administration/qualiopi: Qualiopi
   activerecord:
-    models:
-      administration/location:
-        one: Location
-        other: Campus
-      administration/qualiopi/criterion:
-        one: Criterion
-        other: Criterions
-      administration/qualiopi/indicator:
-        one: Indicator
-        other: Indicators
     attributes:
       administration/location:
         address: Address
@@ -30,19 +20,29 @@ en:
         name: Name
         url: Website
       administration/qualiopi/criterion:
-        number: Number
-        name: Name
         description: Description
-      administration/qualiopi/indicator:
-        number: Number
         name: Name
+        number: Number
+      administration/qualiopi/indicator:
         criterion: Criterion
         description: Description
+        glossary: Glossary
         level_expected: Level expected
+        name: Name
+        non_conformity: Non-conformity
+        number: Number
         proof: Proof
         requirement: Requirement
-        non_conformity: Non-conformity
-        glossary: Glossary
+    models:
+      administration/location:
+        one: Location
+        other: Locations
+      administration/qualiopi/criterion:
+        one: Criterion
+        other: Criterions
+      administration/qualiopi/indicator:
+        one: Indicator
+        other: Indicators
   admin:
     administration:
       alumnus:
@@ -50,12 +50,16 @@ en:
         show_person_html: This page only shows alumni cohorts.<br>If you wish to view or modify the person's details, click on the link below.
   administration:
     description:
-      text_html: Administration, in its many forms, is defined primarily by its activities in the service of the general interest. It acts in the general interest and respects the principle of legality. It is bound by the obligation of neutrality and respect for the principle of secularism. It complies with the principle of equality and guarantees everyone impartial treatment.
-      source: Code des relations entre le public et l'administration
       parts:
         alumnus:
           description: Presentation of the students who have studied in the various courses.
+          title: Alumni
         location:
           description: Management of the various (physical) education and research sites
+          title: Locations
         qualiopi:
           description: Help in checking the conformity of the training offer with the Qualiopi standard
+          title: Qualiopi
+      source: Code des relations entre le public et l'administration
+      text_html: Administration, in its many forms, is defined primarily by its activities in the service of the general interest. It acts in the general interest and respects the principle of legality. It is bound by the obligation of neutrality and respect for the principle of secularism. It complies with the principle of equality and guarantees everyone impartial treatment.
+      title: Administration

@@ -1,3 +1,7 @@
+.navbar-main
+    > *
+        @include media-breakpoint-up(lg)
+            min-width: 300px
 .navbar
     .btn
         color: $gray-300
@@ -66,7 +70,59 @@
                 margin-bottom: 0
             &__email
                 color: $gray-500
-
+#menu-main
+    max-width: 300px
+    min-width: 200px
+    overflow-y: unset
+    a
+        line-height: 100%
+        margin: 0px -1rem
+        padding: 10px 1rem
+    li
+        > a:hover
+            background: $gray-900 !important
+    .dropend
+        a
+            background-color: black !important
+            &::after
+                float: right
+                margin-top: 4px
+            &.dropdown-toggle.show
+                background-color: $gray-800 !important
+    .submenu
+        background-color: black !important
+        padding-top: 0
+        width: 200px
+        @include media-breakpoint-down(lg)
+            transform: translateX(140px) !important
+        @include media-breakpoint-up(lg)
+            margin-left: 0.5rem !important
+        &__image
+            margin: 0
+            padding: 0
+        li
+            padding-bottom: 0
+        a
+            margin: 0
+    .favorites
+        .nav-link
+            align-items: center
+            display: flex
+            padding-bottom: 4px
+            padding-top: 4px
+        .initials
+            align-items: center
+            background: $gray-900
+            border-radius: var(--bs-border-radius)
+            color: $gray-600
+            display: flex
+            flex-shrink: 0
+            font-family: $font-family-serif
+            font-size: 18px
+            height: 24px
+            justify-content: center
+            margin-right: 6px
+            width: 24px
 .commands
     backdrop-filter: blur(6px)
     background: $color-commands
@@ -151,6 +207,7 @@ nav[aria-label="breadcrumb"]
     a
         color: $color-text-alt-large
         font-family: $font-family-serif
+        font-kerning: none
     h1
         font-weight: bold
 

@@ -1,4 +1,5 @@
 <%= content_for :title, t('.title', title: current_extranet.present? ? current_extranet.to_s_in(current_language) : 'Osuny') %>
+<% user_email = resource.email.presence || params[:email] %>
 
 <h1 class="h4 mb-4"><%= t(".sign_up") %></h1>
 
@@ -9,7 +10,10 @@
     <div class="col-lg-6">
       <%= f.input :email,
                   required: true,
-                  input_html: { autocomplete: "email", value: params[:email] } %>
+                  input_html: {
+                    autocomplete: "email",
+                    value: user_email
+                  } %>
       <%= f.input :first_name,
                   required: true,
                   autofocus: true,

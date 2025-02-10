@@ -4,6 +4,83 @@ en:
       research: Research
       research/hal: HAL
   activerecord:
+    attributes:
+      research/hal/author:
+        docid: HAL identifier
+        first_name: First name
+        full_name: Full name
+        last_name: Last name
+        publications: Publications imported from HAL
+        researcher: Researchers in Osuny
+      research/journal/localization:
+        issn: ISSN
+        language: Language
+        title: Title
+      research/journal/paper:
+        accepted_at: Accepted at
+        doi: DOI
+        pdf: PDF
+        people: Authors
+        received_at: Received at
+      research/journal/paper/kind/localization:
+        title: Title
+      research/journal/paper/localization:
+        abstract: Abstract
+        authors_list: Authors list
+        bibliography: Bibliography
+        keywords: Keywords
+        kind: Kind of paper
+        published: Published?
+        published_at: Published at
+        text: Text
+        title: Title
+      research/journal/volume:
+        number: Number
+      research/journal/volume/localization:
+        featured_image: Cover
+        featured_image_alt: Alt text
+        keywords: Keywords
+        published: Published?
+        published_at: Published at
+        text: Text
+        title: Title
+      research/laboratory:
+        address: Address
+        city: City
+        country: Country
+        zipcode: Zipcode
+      research/laboratory/axis/localization:
+        name: Name
+        short_name: Short name
+        text: Text
+      research/laboratory/localization:
+        address_additional: Additional address
+        address_name: Address name
+        name: Name
+      research/publication:
+        abstract: Abstract
+        authors_list: Authors list
+        docid: Identifier
+        doi: DOI
+        doi_url: URL DOI
+        hal_url: URL HAL
+        journal_title: In...
+        open_access: Open access
+        publication_date: Publication date
+        slug: Slug
+        title: Title
+        url: URL
+        urls: Web URLs
+      research/thesis:
+        author: Author
+        completed: Completed?
+        completed_at: Completed at
+        director: Director
+        laboratory: Laboratory
+        started_at: Started at
+      research/thesis/localization:
+        abstract: Abstract
+        title: Title
     models:
       research/hal/author:
         one: HAL author
@@ -35,83 +112,6 @@ en:
       university/person/localization/researcher:
         one: Researcher
         other: Researchers
-    attributes:
-      research/hal/author:
-        docid: HAL identifier
-        first_name: First name
-        full_name: Full name
-        last_name: Last name
-        publications: Publications imported from HAL
-        researcher: Researchers in Osuny
-      research/journal/localization:
-        issn: ISSN
-        language: Language
-        title: Title
-      research/journal/paper:
-        accepted_at: Accepted at
-        doi: DOI
-        pdf: PDF
-        people: Authors
-        received_at: Received at
-      research/journal/paper/localization:
-        abstract: Abstract
-        authors_list: Authors list
-        bibliography: Bibliography
-        keywords: Keywords
-        kind: Kind of paper
-        published_at: Published at
-        published: Published?
-        text: Text
-        title: Title
-      research/journal/paper/kind/localization:
-        title: Title
-      research/journal/volume:
-        number: Number
-      research/journal/volume/localization:
-        featured_image_alt: Alt text
-        featured_image: Cover
-        keywords: Keywords
-        published_at: Published at
-        published: Published?
-        text: Text
-        title: Title
-      research/laboratory:
-        address: Address
-        city: City
-        country: Country
-        zipcode: Zipcode
-      research/laboratory/localization:
-        address_additional: Additional address
-        address_name: Address name
-        name: Name
-      research/laboratory/axis/localization:
-        name: Name
-        short_name: Short name
-        text: Text
-      research/publication:
-        abstract: Abstract
-        authors_list: Authors list
-        docid: Identifier
-        doi: DOI
-        doi_url: URL DOI
-        hal_url: URL HAL
-        journal_title: In...
-        open_access: Open access
-        publication_date: Publication date
-        slug: Slug
-        title: Title
-        url: URL
-        urls: Web URLs
-      research/thesis:
-        author: Author
-        completed_at: Completed at
-        completed: Completed?
-        director: Director
-        laboratory: Laboratory
-        started_at: Started at
-      research/thesis/localization:
-        abstract: Abstract
-        title: Title
   admin:
     research:
       researcher:
@@ -122,49 +122,55 @@ en:
         source:
           hal: HAL
           osuny: Osuny
-  research/hal:
-    description:
-      text: "HAL signifie Hyper Article en Ligne. C’est une plateforme pluridisciplinaire nationale pour le dépôt et la consultation des écrits, travaux et résultats de recherches scientifiques des chercheur·e·s et enseignant·e·s-chercheur·e·s. HAL est un bien commun pour la recherche : Les plus grands organismes de recherche et la majorité des universités françaises ont choisi et soutiennent HAL, une infrastructure publique, pérenne et responsable."
-      source: HAL.science
   research:
     citations:
       apa:
         label: APA
-      mla:
-        label: MLA
       chicago:
         label: Chicago
       harvard:
         label: Harvard
       iso690:
         label: ISO 690
+      mla:
+        label: MLA
     description:
-      text: Scientific research is both an approach that creates knowledge motivated by pure curiosity and an activity that generates innovations that increase the means of action and diagnosis on nature, man and society. These two aspects of research, fundamental and applied, far from opposing each other, complement each other. Fundamental research creates the knowledge base from which applications are born and, conversely, technological advances provide the increasingly sophisticated investigative tools that lead to a deepening of our fundamental knowledge.
-      source: Serge Haroche, Prix Nobel de physique 2012
       parts:
-        hal:
-          description: Publications and authors in the HAL database
         journal:
-          description: Open access journals allowing researchers to contribute to research
+          description: Open access scientific journals allowing researchers to contribute to research
+          title: Journals
         laboratory:
           description: Research structure hosting the work of researchers
+          title: Laboratories
         publication:
           description: Scientific publications produced by researchers
+          title: Publications
         researcher:
           description: Individual linked to a university, department, laboratory, etc.
+          title: Researchers
         thesis:
           description: Scientific production leading to the title of Doctor
+          title: Theses
+      source: Serge Haroche, Prix Nobel de physique 2012
+      text: Scientific research is both an approach that creates knowledge motivated by pure curiosity and an activity that generates innovations that increase the means of action and diagnosis on nature, man and society. These two aspects of research, fundamental and applied, far from opposing each other, complement each other. Fundamental research creates the knowledge base from which applications are born and, conversely, technological advances provide the increasingly sophisticated investigative tools that lead to a deepening of our fundamental knowledge.
+      title: Research
     hal:
       description:
         parts:
           author:
             description: Profiles of researchers in the HAL database
+            title: Authors
           publication:
             description: Scientific publications automatically imported from HAL
-      title: HAL
+            title: Publications
       select_identifier_html: Select all the HAL authors that correspond to this researcher. <br>Use the publications to be sure it's the same person.
       sync: Synchronize HAL publications
       synchronization_done: Synchronization done
+      title: HAL
+  research/hal:
+    description:
+      source: HAL.science
+      text: "HAL signifie Hyper Article en Ligne. C’est une plateforme pluridisciplinaire nationale pour le dépôt et la consultation des écrits, travaux et résultats de recherches scientifiques des chercheur·es et enseignant·es-chercheur·es. HAL est un bien commun pour la recherche : Les plus grands organismes de recherche et la majorité des universités françaises ont choisi et soutiennent HAL, une infrastructure publique, pérenne et responsable."
   simple_form:
     hints:
       research_journal_paper:

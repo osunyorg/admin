@@ -26,6 +26,7 @@ class Education::School < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include Sanitizable
+  include Searchable
   include Localizable
   include LocalizableOrderByNameScope
   include WebsitesLinkable
@@ -39,6 +40,10 @@ class Education::School < ApplicationRecord
   # 'websites' might override the same method defined in WithWebsites, so we use the full name
   has_many    :communication_websites,
               class_name: 'Communication::Website',
+              as: :about,
+              dependent: :nullify
+  has_many    :communication_extranets,
+              class_name: 'Communication::Extranet',
               as: :about,
               dependent: :nullify
 

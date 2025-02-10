@@ -37,27 +37,12 @@ en:
         sso_mapping: Mapping
         sso_name_identifier_format: Name Identifier Format
         sso_target_url: Target URL
-      communication/extranet/localization:
-        cookies_policy: Cookies policy
-        favicon: Browser icon (favicon)
-        home_sentence: Sentence displayed on homepage
-        logo: Logo
-        name: Name
-        privacy_policy: Privacy policy
-        published: Language published
-        registration_contact: Contact mail for registrations problems
-        sso_button_label: Sign in button's label
-        terms: Terms of service
+        upper_menu: Upper menu (HTML)
       communication/extranet/connection:
         connected: Connected
       communication/extranet/document:
         category: Category
         kind: Type
-      communication/extranet/document/localization:
-        file: Downloadable file
-        name: Name
-        published: Published?
-        published_at: Publication date
       communication/extranet/document/category:
         quantity: Quantity of documents
       communication/extranet/document/category/localization:
@@ -66,9 +51,32 @@ en:
         quantity: Quantity of documents
       communication/extranet/document/kind/localization:
         name: Name
+      communication/extranet/document/localization:
+        file: Downloadable file
+        name: Name
+        published: Published?
+        published_at: Publication date
+      communication/extranet/localization:
+        cookies_policy: Cookies policy
+        favicon: Browser icon (favicon)
+        home_sentence: Sentence displayed on homepage
+        invitation_message: Invitation message (automatically sended)
+        invitation_message_subject: Subject
+        invitation_message_text: Texte
+        logo: Logo
+        name: Name
+        privacy_policy: Privacy policy
+        published: Language published
+        registration_contact: Contact mail for registrations problems
+        sso_button_label: Sign in button's label
+        terms: Terms of service
       communication/extranet/post:
         author: Author
         category: Category
+      communication/extranet/post/category:
+        quantity: Quantity of posts
+      communication/extranet/post/category/localization:
+        name: Name
       communication/extranet/post/localization:
         featured_image: Featured image
         featured_image_alt: Alt text
@@ -78,10 +86,18 @@ en:
         published_at: Publication date
         slug: Slug
         title: Title
-      communication/extranet/post/category:
-        quantity: Quantity of posts
-      communication/extranet/post/category/localization:
+      communication/media:
+        collection: Collection
+        origin: Origin
+        original_byte_size: Size
+        original_content_type: Content type
+        original_filename: Original filename
+        original_uploaded_file: Original file
+      communication/media/collection/localization:
         name: Name
+      communication/media/localization:
+        name: Name
+        internal_description: Internal description
       communication/website:
         about: About
         about_: Independent website
@@ -93,14 +109,14 @@ en:
         access_token: Access token
         appearance: Appearance
         autoupdate_theme: Automatically update Osuny theme
-        configs: Configuration files
         config_default_content_security_policy: Security policies (CORS)
-        config_default_languages: Language definitions
-        config_default_permalinks: Permalinks (obsolete)
         config_default_deuxfleurs_workflow: Github action for Deuxfleurs deployment
         config_default_development_config: Development configuration
+        config_default_languages: Language definitions
+        config_default_permalinks: Permalinks (obsolete)
         config_default_production_config: Production configuration, with cache rules
         config_robots_txt: Search engine dedicated robots.txt file
+        configs: Configuration files
         created_at: Creation
         default_image: Default image
         default_language: Default language
@@ -193,9 +209,6 @@ en:
         breadcrumb_title: Title in breadcrumbs
         featured_image: Featured image
         featured_image_alt: Alt text
-        header_cta: Display call to action into header
-        header_cta_label: Call to action label
-        header_cta_url: Call to cation target
         header_text: Title displayed in header
         path: Path
         published: Published?
@@ -240,22 +253,29 @@ en:
       models:
         communication/extranet:
           attributes:
+            feature_alumni:
+              unavailable: is not available for this kind of extranet
             sso_mapping:
               missing_email: doesn't handle the email
         communication/extranet/localization:
           attributes:
             published:
               cannot_unpublished_default: cannot be unpublished (default language)
-        communication/website/localization:
+        communication/media:
           attributes:
-            published:
-              cannot_unpublished_default: cannot be unpublished (default language)
+            original_uploaded_file:
+              already_imported: already imported in media library
+              too_big: too heavy!
         communication/website/agenda/event:
           attributes:
             to_day:
               too_soon: must be after "from day"
             to_hour:
               too_soon: must be after "from hour"
+        communication/website/localization:
+          attributes:
+            published:
+              cannot_unpublished_default: cannot be unpublished (default language)
     models:
       communication/block:
         one: Content block
@@ -279,6 +299,18 @@ en:
       communication/extranet/post/category:
         one: Category
         other: Categories
+      communication/media:
+        one: Media
+        other: Medias
+      communication/media/category:
+        one: Category
+        other: Categories
+      communication/media/collection:
+        one: Collection
+        other: Collections
+      communication/media/context:
+        one: Usage context
+        other: Usage contexts
       communication/website:
         one: Website
         other: Websites
@@ -362,6 +394,11 @@ en:
             launch: Launch analysis
             launched: Analysis launched
             title: Git analysis
+        header:
+          cta:
+            button: Display call to action in header
+            label: Call to action label
+            url: Call to action URL
         localizations:
           fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
           title: Internationalization
@@ -421,22 +458,27 @@ en:
           description: Everything related to technical settings
           label: Technical
   communication:
-    authors:
-      one: Author
-      other: Authors
     description:
       parts:
         author:
           description: People writing posts in websites or extranets
           description_non_university: People writing posts in websites or extranets
+          title: Authors
         extranet:
           description: Secure exchange areas dedicated to authenticated users
           description_non_university: Secure exchange areas dedicated to authenticated users
+          title: Extranets
+        media:
+          description: Library of all the photos used in this Osuny instance
+          description_non_university: Library of all the photos used in this Osuny instance
+          title: Media library
         website:
           description: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
           description_non_university: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
+          title: Websites
       source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
       text_html: To communicate is to share; and sharing is the act that constitutes us. If we believe that this act is impossible, we reject any human project.
+      title: Communication
     extranet:
       post:
         metadata:
@@ -544,6 +586,11 @@ en:
     placeholder: https://...
   enums:
     communication:
+      media:
+        origin:
+          pexels: Pexels photo library
+          unsplash: Unsplash photo library
+          upload: Direct file upload
       website:
         menu:
           item:
@@ -605,8 +652,8 @@ en:
         text: This field is deprecated, content will not be displayed on the website.
       communication_website_permalink:
         path: "Must be an URL path. Example: /old/path"
+      communication_website_portfolio_project:
+        full_width: On large screens, a full width project uses all available space for the content.
       communication_website_post:
         full_width: On large screens, a full width post uses all available space for the content.
         text: This field is deprecated, content will not be displayed on the website.
-      communication_website_portfolio_project:
-        full_width: On large screens, a full width project uses all available space for the content.

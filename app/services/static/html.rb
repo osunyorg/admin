@@ -28,7 +28,7 @@ class Static::Html < Static::Default
     return html unless html.present?
     @doc = Nokogiri::HTML::DocumentFragment.parse(html)
     clean_empty_paragraphs_at_beginning_and_end!
-    add_html_tags_to_external_links!
+    clean_external_links!
     @doc.to_html
   end
 
@@ -49,11 +49,17 @@ class Static::Html < Static::Default
 
   # Each external link needs a <span class="sr-only">(lien externe)</span> in it
   # https://github.com/osunyorg/admin/issues/2151
-  def add_html_tags_to_external_links!
+  # It also needs rel="noreferrer"
+  # https://github.com/osunyorg/theme/issues/667 
+  def clean_external_links!
     hint = I18n.t('html.external_link', locale: locale)
     span = " <span class=\"sr-only\">(#{hint})</span>"
     @doc.css('a[target=_blank]').each do |link|
+      # Add text for screen readers
       link << span
+      # Add noreferrer
+      # https://nokogiri.org/rdoc/Nokogiri/XML/Node.html#method-i-kwattr_add
+      link.kwattr_add('rel', 'noreferrer')
     end
   end
 

@@ -3,6 +3,7 @@
 # Table name: communication_website_post_categories
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
 #  position                 :integer
@@ -39,14 +40,15 @@ class Communication::Website::Post::Category < ApplicationRecord
                           class_name: 'Education::Program',
                           optional: true
   has_and_belongs_to_many :posts
+  alias                   :category_objects :posts
 
   def post_localizations
     Communication::Website::Post::Localization.where(about_id: post_ids)
   end
 
   def dependencies
+    [parent] +
     localizations.in_languages(website.active_language_ids) +
-    children +
     [website.config_default_content_security_policy]
   end
 

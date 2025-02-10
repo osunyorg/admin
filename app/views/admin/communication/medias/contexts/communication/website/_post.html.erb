@@ -1,0 +1,13 @@
+<%
+localization = about
+post = localization.about
+language = localization.language
+website = post.website
+path = admin_communication_website_post_path(website_id: website.id, id: post.id)
+target ||= ''
+link = "#{path}#{target}"
+%>
+<%= render 'admin/communication/medias/contexts/default',
+            localization: localization,
+            link: link,
+            type: Communication::Website::Post.model_name.human %>

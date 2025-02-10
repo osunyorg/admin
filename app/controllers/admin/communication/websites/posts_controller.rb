@@ -57,8 +57,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def create
     @post.website = @website
-    @l10n.add_photo_import params[:photo_import]
-    if @post.save_and_sync
+    if @post.save
+      @post.sync_with_git
       redirect_to admin_communication_website_post_path(@post),
                   notice: t('admin.successfully_created_html', model: @post.to_s_in(current_language))
     else
@@ -69,10 +69,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def update
-    if @post.update(post_params)
-      load_localization
-      @l10n.add_photo_import params[:photo_import]
-      @post.sync_with_git
+    if @post.update_and_sync(post_params)
       redirect_to admin_communication_website_post_path(@post),
                   notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
     else
@@ -112,6 +109,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
       :full_width, author_ids: [], category_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text,
+        :header_cta, :header_cta_label, :header_cta_url, 
         :published, :published_at, :slug, :pinned,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,

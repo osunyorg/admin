@@ -10,6 +10,8 @@ category = @l10n.about
             toc_offcanvas: true %>
 position: <%= category.position %>
 is_taxonomy: <%= category.is_taxonomy %>
+bodyclass: >-
+  <%= category.best_bodyclass %>
 <%
 if @l10n.parent
   hugo = @l10n.parent.hugo(@website)
@@ -21,6 +23,7 @@ children:
 <%
 @l10n.children.ordered.each do |child|
   hugo = child.hugo(@website)
+  next if hugo.permalink.blank?
   %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
 <% end %>

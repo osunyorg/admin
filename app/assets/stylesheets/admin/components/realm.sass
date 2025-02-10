@@ -1,13 +1,42 @@
 .realm
     background: $gray-900
+    min-height: 500px
+    position: relative
+    @include media-breakpoint-up(lg)
+        height: calc(100vh - 60px - 60px)
+        overflow: hidden
+        .container-fluid
+            height: 100%
+            .row
+                height: 100%
+    &__texts
+        display: flex
+        flex-direction: column
+        height: 100%
+        padding: 1.5rem
+        @include media-breakpoint-down(lg)
+            min-height: 70vh
+        @include media-breakpoint-up(lg)
+            padding: 4rem
+            width: calc(50% + 1.5rem)
     &__quote
         color: $white
-        margin-top: pxToRem(50)
+        font-family: $font-family-serif
+        font-size: pxToRem(40)
+        line-height: 120%
+        @media (max-height: 800px)
+            font-size: pxToRem(30)
+        @include media-breakpoint-down(lg)
+            font-size: pxToRem(22)
     &__author
         color: $gray-300
         &::before
             content: "— "
     &__credit
+        margin-bottom: 0
+        margin-top: auto
+        @include media-breakpoint-up(lg)
+            align-self: end
         &, a
             color: $gray-500
         a
@@ -17,7 +46,16 @@
                 filter: invert(1)
     &__image
         @include media-breakpoint-up(lg)
-            max-width: calc(100% + 4rem)
+            bottom: 0
+            left: calc(50% + 1.5rem)
+            position: absolute
+            right: 0
+            top: 0
+            img
+                height: 100%
+                object-fit: cover
+                width: 100%
         @include media-breakpoint-down(lg)
-            margin-bottom: 2rem
+            img
+                width: 100%
     

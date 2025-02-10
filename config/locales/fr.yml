@@ -111,7 +111,7 @@ fr:
         other: Langues
       user:
         one: Utilisateur·rice
-        other: Utilisateur·rice·s
+        other: Utilisateur·rices
       user/favorite:
         one: Favori
         other: Favoris
@@ -121,10 +121,10 @@ fr:
     advanced_settings: Réglages avancés
     attachment_not_available: Impossible d'accéder à l'élément
     chronicles:
+      read_all: Voir toutes les chroniques
       read_more: En savoir plus
       title: Chroniques
     dashboard: Tableau de bord
-    directory: Annuaire
     duplicate: Dupliquer
     elements:
       one: 1 élément
@@ -152,6 +152,13 @@ fr:
       tasks: Tâches en cours de traitement
       text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."
       what_is_it: Qu'est-ce que c'est ?
+    search:
+      buttons:
+        search: Rechercher...
+        close: Fermer
+      label: Rechercher
+      placeholder: Tapez ici
+      no_results: Pas de résultats
     seo: SEO
     subnav:
       settings: Réglages
@@ -180,6 +187,7 @@ fr:
     title: Modifier la sélection
   cancel: Annuler
   category:
+    bodyclass: Classe CSS spécifique
     children: Sous-catégories
     featured_image: Image à la une
     featured_image_alt: Texte alternatif
@@ -350,8 +358,6 @@ fr:
     credit:
       hint: Le crédit photo doit être indiqué, dans le respect du droit d'auteur.
       label: Crédit
-    remove: Supprimer l'image
-    title: Image
   file_hint_with_formats: "Fichiers %{formats} uniquement. %{filesize} max."
   file_hint_without_formats: "%{filesize} max."
   filters:
@@ -411,10 +417,10 @@ fr:
   mailers:
     extranet:
       invitation_message:
-        subject: Vous avez désormais accès à l'extranet « %{extranet} »
-        text_line_1_html: Vous avez désormais accès à l'extranet « %{extranet} ».
-        text_line_2_with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en cliquant <a href="%{sign_in_url}">ici</a>.
-        text_line_2_without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en cliquant <a href="%{sign_up_url}">ici</a>.
+        subject: Bienvenue sur votre extranet
+        text: Vous avez désormais accès à l'extranet.
+        with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en cliquant <a href="%{sign_in_url}">ici</a>.
+        without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en cliquant <a href="%{sign_up_url}">ici</a>.
     notifications:
       import:
         subject_with_errors: Votre import a bien été traité mais comporte des erreurs
@@ -448,14 +454,6 @@ fr:
   move: Déplacer
   open: Ouvrir
   organize: Organiser
-  photo_import:
-    next: Images suivantes
-    nothing: Aucun résultat pour cette recherche
-    open: Chercher une image
-    placeholder: Tapez votre recherche
-    previous: Images précédentes
-    search: Chercher
-    title: Recherche d'image
   please_confirm: Est-ce que vous confirmez ?
   preview:
     button: Prévisualiser

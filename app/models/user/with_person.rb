@@ -8,19 +8,21 @@ module User::WithPerson
     delegate :experiences, to: :person
 
     after_save_commit :sync_person, if: :person
-    after_create_commit :find_or_create_person, unless: :server_admin?
+    after_create :find_or_create_person, unless: :server_admin?
   end
 
   protected
 
   def find_or_create_person
-    person = university.people.where(email: email).first || university.people.new
+    person = university.people.where(email: email).first_or_initialize
+    person_l10n = person.localizations.find_by(language_id: university.default_language_id)
     person.user = self
-    person.localizations.build(
-      first_name: first_name,
-      last_name: last_name,
-      language_id: university.default_language_id
-    )
+    person.localizations_attributes = [
+      {
+        id: person_l10n&.id, language_id: university.default_language_id,
+        first_name: first_name, last_name: last_name
+      }
+    ]
     person.save
   end
 

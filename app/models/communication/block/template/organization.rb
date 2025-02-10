@@ -14,6 +14,10 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   has_component :option_logo,         :boolean, default: true
   has_component :option_summary,      :boolean, default: false
 
+  def allowed_for_about?
+    !about.respond_to?(:extranet)
+  end
+  
   def elements
     if alphabetical
       @elements.sort_by! do |element|

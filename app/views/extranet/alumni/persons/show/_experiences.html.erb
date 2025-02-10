@@ -1,0 +1,9 @@
+<div class="experiences mt-4">
+  <h2 class="mb-4"><%= t('extranet.experiences.title') %></h2>
+  <ul class="list-unstyled">
+    <%= render 'extranet/persons/experiences',
+                experiences: experiences,
+                organization_path_method: :alumni_university_organization_path %>
+    <%= paginate experiences, theme: 'bootstrap-5', param_name: :experiences_page %>
+  </ul>
+</div>
