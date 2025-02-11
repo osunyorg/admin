@@ -2,6 +2,11 @@
 
 baseURL: <%= @website.url %>
 
+## OSUNY
+osuny:
+  website
+    id: <%= @website.id %>
+
 ## LANGUAGE
 defaultContentLanguage: <%= @website.default_language.iso_code %>
 defaultContentLanguageInSubdir: <%= @website.active_languages.many? %>
