@@ -85,7 +85,6 @@ en:
                 label: Which events should be presented?
                 options:
                   all: All events, regardless of category
-                  categories: A list of all events' categories
                   category: A specific category of events
                   selection: A selection of events
               no_event_message:
@@ -591,7 +590,6 @@ en:
                 label: Which posts shall we show?
                 options:
                   all: All posts
-                  categories: A list of all posts' categories
                   category: A specific category
                   selection: A selection of posts
               posts_quantity:
@@ -644,7 +642,6 @@ en:
                 label: Which projects shall we show?
                 options:
                   all: All projects
-                  categories: A list of all projects' categories
                   category: A specific category
                   selection: A selection of projects
               projects_quantity:
