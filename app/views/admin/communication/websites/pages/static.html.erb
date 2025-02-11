@@ -27,8 +27,6 @@ weight: <%= page.position %>
             categories: @website.page_categories,
             key: :pages_categories %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-bodyclass: >-
-  <%= page.best_bodyclass %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/images/shared/static', about: @l10n %>
 <% if @l10n.children.published.any? %>
