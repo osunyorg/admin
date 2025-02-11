@@ -545,6 +545,9 @@ fr:
           communication_agenda_archive:
             slug: archives
             title: Archives
+          communication_agenda_exhibition:
+            slug: expositions
+            title: Expositions
           communication_portfolio:
             slug: projets
             title: Projets
