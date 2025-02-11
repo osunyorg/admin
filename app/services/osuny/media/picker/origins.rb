@@ -32,6 +32,7 @@ class Osuny::Media::Picker::Origins
   end
 
   def import
+    return if nothing_changed?
     clean_previous_blob
     if blob_id.present?
       import_blob
@@ -45,6 +46,10 @@ class Osuny::Media::Picker::Origins
   end
 
   protected
+
+  def nothing_changed?
+    params[:origin].deep_symbolize_keys == to_hash
+  end
 
   def blob_id
     params.dig(:origin, :blob, :id)
