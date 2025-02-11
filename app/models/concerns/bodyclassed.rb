@@ -8,7 +8,7 @@ module Bodyclassed
   def best_bodyclass
     classes = []
     classes += add_prefix_to_classes(bodyclass.split(' '), 'page') if try(:bodyclass).present?
-    classes += add_prefix_to_classes(ancestor_classes, 'ancestor') unless ancestor_classes.blank?
+    classes += add_prefix_to_classes(ancestor_classes, 'ancestor') if ancestor_classes.present?
     classes.join(' ')
   end
 
