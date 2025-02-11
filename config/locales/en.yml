@@ -153,11 +153,12 @@ en:
       text_html: "Osuny helps you with digital sufficiency.<br><br>The background execution of most tasks on the Osuny platform helps to reduce the carbon footprint of digital technology, by pre-calculating what can be.<br><br>This can cause a delay before your changes are visible on your websites."
       what_is_it: What is it?
     search:
-      label: Search
-      placeholder: Type here
       buttons:
         search: Search...
         close: Close
+      label: Search
+      placeholder: Type here
+      no_results: No results
     seo: SEO
     subnav:
       settings: Settings
@@ -190,6 +191,7 @@ en:
     children: Sub-categories
     featured_image: Featured image
     featured_image_alt: Alternative text
+    free: Free categories (without taxonomy)
     is_taxonomy: Is a taxonomy (a family of categories)?
     name: Name
     parent: Parent category
@@ -395,9 +397,6 @@ en:
   inactivity_alert: "It seems you have been away a little bit too long. Could you please retry?"
   internationalization:
     label: Internationalization
-  languages:
-    en: English
-    fr: French
   legal: Legal
   loading: Loading...
   localization:
