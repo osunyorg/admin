@@ -23,7 +23,7 @@
         </tr>
         <tr>
           <td><%= User.human_attribute_name('language') %></td>
-          <td class="text-end"><%= t("languages.#{@user.language.iso_code.to_s}") %></td>
+          <td class="text-end"><%= language_name(@user.language.iso_code) %></td>
         </tr>
         <% if @user.person %>
           <tr>
