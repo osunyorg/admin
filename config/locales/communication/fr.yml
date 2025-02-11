@@ -320,6 +320,9 @@ fr:
       communication/website/agenda/event:
         one: Événement
         other: Événements
+      communication/website/agenda/exhibition:
+        one: Exposition
+        other: Expositions
       communication/website/connection:
         one: Connexion
         other: Connexions
