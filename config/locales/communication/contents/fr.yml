@@ -85,7 +85,6 @@ fr:
                 label: Quels événements afficher ?
                 options:
                   all: Tous les événements, peu importe la catégorie
-                  categories: La liste des catégories d'événements
                   category: Une catégorie spécifique d'événements
                   selection: Une sélection d'événements
               no_event_message:
@@ -591,7 +590,6 @@ fr:
                 label: Quelles actualités afficher ?
                 options:
                   all: Toutes les actualités
-                  categories: La liste des catégories d'actualités
                   category: Une catégorie spécifique
                   selection: Une sélection d'actualités
               posts_quantity:
@@ -644,7 +642,6 @@ fr:
                 label: Quel projets afficher ?
                 options:
                   all: Tous les projets
-                  categories: La liste des catégories de projets
                   category: Une catégorie spécifique
                   selection: Une sélection de projets
               projects_quantity:

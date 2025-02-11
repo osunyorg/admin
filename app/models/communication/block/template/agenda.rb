@@ -16,8 +16,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :mode, :option, options: [
     :all,
     :category,
-    :selection,
-    :categories
+    :selection
   ]
   has_component :category_id, :agenda_category
   has_component :description, :rich_text
