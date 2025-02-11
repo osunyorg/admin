@@ -4,6 +4,7 @@ import Cloud from './components/Cloud.vue';
 import Medias from './components/Medias.vue';
 import ImageUploader from './components/ImageUploader.vue';
 import Summernote from '../components/Summernote.vue';
+import InputString from '../components/inputs/InputString.vue';
 
 export default {
     components: {
@@ -12,6 +13,7 @@ export default {
       Medias,
       ImageUploader,
       Summernote,
+      InputString
     },
     data () {
       return {
@@ -89,17 +91,10 @@ export default {
             {{ i18n.mediaPicker.remove }}
           </a>
         </div>
-        <div class="mb-3">
-          <label class="form-label" aria-label="{{ i18n.mediaPicker.alt.label }}" for="alt">
-            {{ i18n.mediaPicker.alt.label }}
-          </label>
-          <input  id="alt"
-                  class="form-control"
-                  data-translatable="true" 
-                  v-model="current.image.alt"
-                  type="text">
-          <div class="form-text">{{ i18n.mediaPicker.alt.hint }}</div>
-        </div>
+        <InputString  v-model="current.image.alt"
+                      :i18n="i18n.mediaPicker.alt"
+                      :id="'mediaPicker.alt'"
+                      />
         <div class="mb-3 summernote">
           <label class="form-label" :aria-label="i18n.mediaPicker.credit.label" for="credit">
             {{ i18n.mediaPicker.credit.label }}
