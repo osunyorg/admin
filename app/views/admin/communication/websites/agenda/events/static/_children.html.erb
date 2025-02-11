@@ -1,0 +1,10 @@
+<% if event.children.any? %>
+<%= render 'admin/application/static/hugo/collection',
+    key: :children_for_the_day,
+    collection: event.children.ordered(language),
+    language: language %>
+<%= render 'admin/application/static/hugo/collection',
+    key: :children,
+    collection: event.children.ordered(language),
+    language: language %>
+<% end %>

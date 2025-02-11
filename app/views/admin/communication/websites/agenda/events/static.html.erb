@@ -16,6 +16,9 @@ language = @l10n.language
 <%= render 'admin/communication/websites/agenda/events/static/parent',
             event: event,
             language: language %>
+<%= render 'admin/communication/websites/agenda/events/static/children',
+            event: event,
+            language: language %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/images/shared/static', about: @l10n %>
