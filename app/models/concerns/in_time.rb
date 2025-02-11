@@ -1,4 +1,4 @@
-module Communication::Website::Agenda::Event::WithTime
+module InTime
   extend ActiveSupport::Concern
 
   included do
@@ -89,6 +89,7 @@ module Communication::Website::Agenda::Event::WithTime
 
   def to_hour_after_from_hour_on_same_day
     return if from_day != to_day
+    return unless respond_to?(:from_hour) && respond_to?(:to_hour)
     errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
   end
 end

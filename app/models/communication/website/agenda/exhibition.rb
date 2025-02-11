@@ -30,16 +30,22 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
+  include InTime
   include Sanitizable
   include Searchable
   include Localizable
   include WithMenuItemTarget
   include WithOpenApi
-  # include WithTime
   include WithUniversity
 
   belongs_to  :created_by,
               class_name: "User",
               optional: true
 
+  validates :from_day, presence: true
+  validates :to_day, presence: true, comparison: { greater_than_or_equal_to: :from_day }
+
+  scope :ordered_desc, -> { order(from_day: :desc) }
+  scope :ordered_asc, -> { order(:from_day) }
+  scope :ordered, -> (language = nil) { ordered_asc }
 end
