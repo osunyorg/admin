@@ -397,9 +397,6 @@ fr:
   inactivity_alert: "Il semble que vous soyez resté sur la page un peu trop longtemps. Pouvez-vous ré-essayer ?"
   internationalization:
     label: Internationalisation
-  languages:
-    en: Anglais
-    fr: Français
   legal: Légal
   loading: Chargement...
   localization:
