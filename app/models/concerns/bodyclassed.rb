@@ -7,8 +7,8 @@ module Bodyclassed
   # -> "page-classe1 page-classe2 ancestor-home ancestor-bodyclass ancestor-secondclass"
   def best_bodyclass
     classes = []
-    classes += add_prefix_to_classes(bodyclass.split(' '), 'page') unless bodyclass.blank?
-    classes += add_prefix_to_classes(ancestor_classes, 'ancestor') unless ancestor_classes.blank?
+    classes += add_prefix_to_classes(bodyclass.split(' '), 'page') if try(:bodyclass).present?
+    classes += add_prefix_to_classes(ancestor_classes, 'ancestor') if ancestor_classes.present?
     classes.join(' ')
   end
 
@@ -24,6 +24,7 @@ module Bodyclassed
 
   # ["class1", "class2", "class3 class4"] -> ["class1", "class2", "class3", "class4"]
   def ancestor_classes
+    return unless respond_to?(:ancestors)
     @ancestor_classes ||= ancestors.pluck(:bodyclass)
                                    .compact_blank
                                    .join(' ')
