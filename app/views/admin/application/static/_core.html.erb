@@ -25,6 +25,19 @@ subtitle: >-
 <% end %>
 <%
 #############
+# Body classes
+#############
+if about.respond_to?(:about)
+  object = about.about
+  if object.respond_to?(:best_bodyclass) %>
+bodyclass: >-
+  <%= object.best_bodyclass %>
+<% 
+  end
+end
+%>
+<%
+#############
 # Permalinks
 #############
 %>

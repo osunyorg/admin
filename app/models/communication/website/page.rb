@@ -34,7 +34,6 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path kind)
 
   include AsDirectObject
-  include Bodyclassed
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
