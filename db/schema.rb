@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_12_095511) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_12_124156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -537,6 +537,34 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_095511) do
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_87f393a516"
     t.index ["language_id"], name: "idx_on_language_id_c00e1d0218"
     t.index ["university_id"], name: "idx_on_university_id_eaf79b0514"
+  end
+
+  create_table "communication_website_agenda_event_time_slot_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.uuid "about_id", null: false
+    t.bigint "language_id"
+    t.integer "duration"
+    t.string "place"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_e52a2e12b0"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_526f156fed"
+    t.index ["language_id"], name: "idx_on_language_id_f50f565794"
+    t.index ["university_id"], name: "idx_on_university_id_4dee92bcc5"
+  end
+
+  create_table "communication_website_agenda_event_time_slots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.uuid "communication_website_agenda_event_id", null: false
+    t.datetime "datetime"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_agenda_event_id"], name: "idx_on_communication_website_agenda_event_id_022d825cf7"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_c0ac516bb5"
+    t.index ["university_id"], name: "idx_on_university_id_bca328e63c"
   end
 
   create_table "communication_website_agenda_events", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -2130,6 +2158,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_095511) do
   add_foreign_key "communication_website_agenda_event_localizations", "communication_websites"
   add_foreign_key "communication_website_agenda_event_localizations", "languages"
   add_foreign_key "communication_website_agenda_event_localizations", "universities"
+  add_foreign_key "communication_website_agenda_event_time_slot_localizations", "communication_website_agenda_event_time_slots", column: "about_id"
+  add_foreign_key "communication_website_agenda_event_time_slot_localizations", "communication_websites"
+  add_foreign_key "communication_website_agenda_event_time_slot_localizations", "universities"
+  add_foreign_key "communication_website_agenda_event_time_slots", "communication_website_agenda_events"
+  add_foreign_key "communication_website_agenda_event_time_slots", "communication_websites"
+  add_foreign_key "communication_website_agenda_event_time_slots", "universities"
   add_foreign_key "communication_website_agenda_events", "communication_website_agenda_events", column: "parent_id"
   add_foreign_key "communication_website_agenda_events", "communication_websites"
   add_foreign_key "communication_website_agenda_events", "universities"
