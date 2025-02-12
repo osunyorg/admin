@@ -1,11 +1,11 @@
 module InTime
   extend ActiveSupport::Concern
+  
+  STATUS_FUTURE = 'future'
+  STATUS_CURRENT = 'current'
+  STATUS_ARCHIVE = 'archive'
 
   included do
-    STATUS_FUTURE = 'future'
-    STATUS_CURRENT = 'current'
-    STATUS_ARCHIVE = 'archive'
-
     scope :future, -> { 
       where('from_day > :today', today: Date.today)
       .ordered_asc 

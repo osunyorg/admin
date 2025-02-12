@@ -39,6 +39,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Sanitizable
   include Searchable
   include Localizable
+  include WithDays
   include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
@@ -75,7 +76,9 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def dependencies
     [website.config_default_content_security_policy] +
-    localizations.in_languages(website.active_language_ids)
+    localizations.in_languages(website.active_language_ids) +
+    [parent] +
+    days
   end
 
   def references

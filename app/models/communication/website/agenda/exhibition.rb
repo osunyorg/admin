@@ -43,7 +43,7 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
               optional: true
 
   validates :from_day, presence: true
-  validates :to_day, presence: true, comparison: { greater_than_or_equal_to: :from_day }
+  validates :to_day, presence: true, comparison: { greater_than: :from_day }
 
   scope :ordered_desc, -> { order(from_day: :desc) }
   scope :ordered_asc, -> { order(:from_day) }
