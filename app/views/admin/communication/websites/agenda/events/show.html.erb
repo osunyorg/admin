@@ -33,6 +33,22 @@
 </div>
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 
+<% if @event.can_have_children? %>
+  <%= osuny_separator %>
+  <div class="row">
+    <div class="col-lg-4">
+      <%= link_to new_admin_communication_website_agenda_event_path(parent_id: @event),
+                class: 'btn btn-light mb-3' do %>
+        <%= lucide_icon :plus, width: 20 %>
+        <%= t('admin.communication.website.agenda.event.create_child') %>
+      <% end %>
+    </div>
+    <div class="col-lg-8">
+      <%= render 'admin/communication/websites/agenda/events/list', events: @event.children.ordered %>
+    </div>
+  </div>
+<% end %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @event %>
   <%= duplicate_link @event %>

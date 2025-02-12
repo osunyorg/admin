@@ -148,6 +148,7 @@ fr:
         dates: Dates
         from_day: Jour de début
         from_hour: Heure de début
+        parent: Événement parent
         status: Statut
         status_archive: Archive
         status_current: En cours
@@ -394,6 +395,7 @@ fr:
       website:
         agenda:
           event:
+            create_child: Créer un événement enfant
             localizations:
               draft: Brouillon
           events:
