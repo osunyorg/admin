@@ -25,9 +25,11 @@ module Communication::Website::Agenda::Event::WithKinds
     parent.nil?
   end
 
+  def can_have_time_slots?
+    children.none?
+  end
+
   def multiple_time_slots?
-    # TODO
-    return false
     time_slots.count > 1
   end
 

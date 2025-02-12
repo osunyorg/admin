@@ -40,6 +40,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Searchable
   include Localizable
   include WithDays
+  include WithTimeSlots
   include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
@@ -88,6 +89,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   protected
 
+  # TODO refactor that with service or addition to DateTime (ex: DateTime.merge(date, time))
   def time_with(day, hour)
     DateTime.new  day.year,
                   day.month,

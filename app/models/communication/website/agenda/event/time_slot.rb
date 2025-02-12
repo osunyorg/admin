@@ -25,10 +25,21 @@
 #
 class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include AsDirectObject
-  include InTime
+  # include InTime
   include Localizable
   include WithUniversity
 
-  belongs_to :communication_website_agenda_event
+  belongs_to  :communication_website_agenda_event,
+              class_name: 'Communication::Website::Agenda::Event'
   alias :event :communication_website_agenda_event
+
+  delegate :time_zone, to: :event
+
+  def date
+    datetime.to_date
+  end
+
+  def time
+    datetime.strftime("%H:%M")
+  end
 end

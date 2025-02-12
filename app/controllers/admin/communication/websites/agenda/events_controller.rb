@@ -63,6 +63,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     end
   end
 
+  def save_time_slots
+    @event.save_time_slots(current_language, params.to_unsafe_hash)
+    render json: @event.time_slots_to_json(current_language)
+  end
+
   def duplicate
     redirect_to [:admin, @event.duplicate],
                 notice: t('admin.successfully_duplicated_html', model: @event.to_s_in(current_language))

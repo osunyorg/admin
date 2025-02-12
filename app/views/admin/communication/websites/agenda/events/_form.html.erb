@@ -37,26 +37,18 @@
                         include_blank: false,
                         selected: f.object.time_zone || @website.default_time_zone %>
           <% else %>
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :from_day, html5: true  %>
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.input :from_day, html5: true  %>
+              </div>
+              <div class="col-md-6">
+                <%= f.input :to_day, html5: true %>
+              </div>
             </div>
-            <div class="col-md-6">
-              <%= f.input :from_hour, html5: true %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <%= f.input :to_day, html5: true %>
-            </div>
-            <div class="col-md-6">
-              <%= f.input :to_hour, html5: true %>
-            </div>
-          </div>
-          <%= f.input :time_zone,
-                      collection: time_zones_for_select,
-                      include_blank: false,
-                      selected: f.object.time_zone || @website.default_time_zone %>
+            <%= f.input :time_zone,
+                        collection: time_zones_for_select,
+                        include_blank: false,
+                        selected: f.object.time_zone || @website.default_time_zone %>
           <% end %>
         <% end %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>

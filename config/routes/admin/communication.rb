@@ -88,6 +88,7 @@ namespace :communication do
           get :static
           post :duplicate
           post :publish
+          post :save_time_slots
         end
       end
       resources :exhibitions, controller: '/admin/communication/websites/agenda/exhibitions' do
