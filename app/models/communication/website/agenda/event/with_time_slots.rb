@@ -8,6 +8,7 @@ module Communication::Website::Agenda::Event::WithTimeSlots
 
   def save_time_slots(language, params)
     params[:slots].each do |slot|
+      next if slot[:date].blank?  || slot[:time].blank?
       date = slot[:date].to_date
       time = slot[:time].to_time
       datetime = Time.new date.year,
@@ -27,7 +28,7 @@ module Communication::Website::Agenda::Event::WithTimeSlots
           datetime: datetime
         ).first_or_create
       end
-      time_slot.duration = slot[:duration]
+      time_slot.duration = slot[:duration].to_i
       time_slot.save
     end
   end
@@ -36,7 +37,7 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     {
       min: from_day.strftime('%F'),
       max: to_day.strftime('%F'),
-      slots: time_slots.map { |slot| 
+      slots: time_slots.ordered.map { |slot| 
         {
           id: slot.id,
           date: slot.date,

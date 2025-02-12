@@ -18,8 +18,8 @@ export default {
         this.current.slots.push({
           place: "",
           date: this.current.min,
-          time: null,
-          duration: null
+          time: "20:00",
+          duration: ""
         });
       }
     },
@@ -34,37 +34,19 @@ export default {
 <template>
   <section class="vue__time-slots">
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-xxl-4">
         <button
-          class="btn btn-light mb-3 mb-lg-0"
+          class="btn btn-light mb-3 mb-xxl-0"
           @click="addSlot()">
           <Plus />
           {{ i18n.timeSlots.add }}
         </button>
         <br>{{ current }}
       </div>
-      <div class="col-lg-8">
-        <div class="row mb-3 d-none d-md-flex">
-          <div class="col-lg-4">
-            <label class="form-label" aria-label="{{ i18n.timeSlots.datetime.label }}">
-              {{ i18n.timeSlots.datetime.label }}
-            </label>
-          </div>
-          <div class="col-lg-2">
-            <label class="form-label" aria-label="{{ i18n.timeSlots.duration.label }}">
-              {{ i18n.timeSlots.duration.label }}
-            </label>
-          </div>
-          <div class="col-lg-6">
-            <label class="form-label mb-0" aria-label="{{ i18n.timeSlots.place.label }}">
-              {{ i18n.timeSlots.place.label }}
-            </label>
-            <div class="form-text">{{ i18n.timeSlots.place.hint }}</div>
-          </div>
-        </div>
-        <article v-for="slot in current.slots" class="mb-3">
-          <div class="row g-3">
-            <div class="col-lg-4">
+      <div class="col-xxl-8">
+        <article v-for="slot in current.slots" class="mb-4">
+          <div class="row g-2">
+            <div class="col-lg-6">
               <div class="input-group">
                 <input  id="date"
                         class="form-select"
@@ -79,27 +61,25 @@ export default {
                         type="time"
                         v-model="slot.time"
                         />
+                <select id="duration"
+                        class="form-select"
+                        v-model="slot.duration"
+                        >
+                  <option value="0">{{ i18n.timeSlots.duration.label }}</option>
+                  <option value="1800">30mn</option>
+                  <option value="3600">1h</option>
+                  <option value="5400">1h30</option>
+                  <option value="7200">2h</option>
+                  <option value="9000">2h30</option>
+                  <option value="10800">3h</option>
+                  <option value="10800">3h30</option>
+                  <option value="14400">4h</option>
+                  <option value="18000">5h</option>
+                  <option value="21600">6h</option>
+                  <option value="25200">7h</option>
+                  <option value="28800">8h</option>
+                </select>
               </div>
-            </div>
-            <div class="col-lg-2">
-              <select id="duration"
-                      class="form-select"
-                      v-model="slot.duration"
-                      >
-                <option value=""></option>
-                <option value="1800">30mn</option>
-                <option value="3600">1h</option>
-                <option value="5400">1h30</option>
-                <option value="7200">2h</option>
-                <option value="9000">2h30</option>
-                <option value="10800">3h</option>
-                <option value="10800">3h30</option>
-                <option value="14400">4h</option>
-                <option value="18000">5h</option>
-                <option value="21600">6h</option>
-                <option value="25200">7h</option>
-                <option value="28800">8h</option>
-              </select>
             </div>
             <div class="col-lg-6">
               <input  id="place"

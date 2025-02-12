@@ -33,6 +33,8 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
               class_name: 'Communication::Website::Agenda::Event'
   alias :event :communication_website_agenda_event
 
+  scope :ordered, -> { order(:datetime) }
+
   delegate :time_zone, to: :event
 
   def date

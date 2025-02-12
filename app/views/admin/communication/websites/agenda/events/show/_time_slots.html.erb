@@ -5,6 +5,7 @@
           data-changes-endpoint="<%= save_time_slots_admin_communication_website_agenda_event_path(event) %>"
           data-current="<%= event.time_slots_to_json(current_language).to_json %>"
           data-i18n="<%= t('vue').to_json %>"
-          ></div>
+          >
+    </div>
   </div>
 <% end %>
