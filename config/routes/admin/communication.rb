@@ -90,6 +90,13 @@ namespace :communication do
           post :publish
         end
       end
+      resources :exhibitions, controller: '/admin/communication/websites/agenda/exhibitions' do
+        member do
+          get :static
+          post :duplicate
+          post :publish
+        end
+      end
       resources :categories, controller: '/admin/communication/websites/agenda/categories' do
         collection do
           post :reorder

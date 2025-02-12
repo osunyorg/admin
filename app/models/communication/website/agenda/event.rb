@@ -35,12 +35,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
+  include InTime
   include Sanitizable
   include Searchable
   include Localizable
   include WithMenuItemTarget
   include WithOpenApi
-  include WithTime
   include WithTree
   include WithUniversity
 
