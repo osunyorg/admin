@@ -48,4 +48,31 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   scope :ordered_desc, -> { order(from_day: :desc) }
   scope :ordered_asc, -> { order(:from_day) }
   scope :ordered, -> (language = nil) { ordered_asc }
+
+  scope :for_search_term, -> (term, language) {
+    joins(:localizations)
+      .where(communication_website_agenda_exhibition_localizations: { language_id: language.id })
+      . where("
+      unaccent(communication_website_agenda_exhibition_localizations.meta_description) ILIKE unaccent(:term) OR
+      unaccent(communication_website_agenda_exhibition_localizations.summary) ILIKE unaccent(:term) OR
+      unaccent(communication_website_agenda_exhibition_localizations.title) ILIKE unaccent(:term) OR
+      unaccent(communication_website_agenda_exhibition_localizations.subtitle) ILIKE unaccent(:term)
+    ", term: "%#{sanitize_sql_like(term)}%")
+  }
+
+  def dependencies
+    [website.config_default_content_security_policy] +
+    localizations.in_languages(website.active_language_ids)
+  end
+
+  def references
+    menus +
+    abouts_with_agenda_block
+  end
+
+  protected
+
+  def abouts_with_agenda_block
+    website.blocks.template_agenda.collect(&:about)
+  end
 end

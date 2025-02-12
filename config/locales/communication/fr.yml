@@ -545,11 +545,14 @@ fr:
             slug: agenda
             title: Agenda
           communication_agenda_archive:
-            slug: archives
-            title: Archives
+            slug: archives-evenements
+            title: Archives des événements
           communication_agenda_exhibition:
             slug: expositions
             title: Expositions
+          communication_agenda_exhibition_archive:
+            slug: archives-expositions
+            title: Archives des expositions
           communication_portfolio:
             slug: projets
             title: Projets

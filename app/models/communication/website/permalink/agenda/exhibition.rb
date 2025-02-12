@@ -7,7 +7,7 @@ class Communication::Website::Permalink::Agenda::Exhibition < Communication::Web
     :exhibitions
   end
 
-  # /expositions/2022-10-21-un-article/
+  # /expositions/2022-10-21-pulse/
   def self.pattern_in_website(website, language)
     special_page_path(website, language) + '/:year-:month-:day-:slug/'
   end
