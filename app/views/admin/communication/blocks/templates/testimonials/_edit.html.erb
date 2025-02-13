@@ -4,8 +4,7 @@
 
 <div v-show="data.elements.length > 0">
   <%= osuny_separator %>
-  <draggable  class="mb-3"
-              :list="data.elements"
+  <draggable  :list="data.elements"
               @end="refreshSummernotes()"
               handle=".dragHandle">
     <div v-for="(element, index) in data.elements" class="mb-2">
