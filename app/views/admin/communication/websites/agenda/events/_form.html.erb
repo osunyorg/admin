@@ -16,7 +16,7 @@
         <%= osuny_panel Communication::Website::Agenda::Event.human_attribute_name('dates') do %>
           <% if event.kind_child? %>
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <%= f.input :from_day,
                             html5: true,
                             input_html: {
@@ -25,17 +25,13 @@
                             }
                             %>
               </div>
-              <div class="col-md-4">
-                <%= f.input :from_hour, html5: true %>
-              </div>
-              <div class="col-md-4">
-                <%= f.input :to_hour, html5: true %>
+              <div class="col-md-6">
+                <%= f.input :time_zone,
+                            collection: time_zones_for_select,
+                            include_blank: false,
+                            selected: f.object.time_zone || @website.default_time_zone %>
               </div>
             </div>
-            <%= f.input :time_zone,
-                        collection: time_zones_for_select,
-                        include_blank: false,
-                        selected: f.object.time_zone || @website.default_time_zone %>
           <% else %>
             <div class="row">
               <div class="col-md-6">
@@ -69,7 +65,7 @@
                       source: '#communication_website_agenda_event_localizations_attributes_0_title' %>
           <%= f.association :parent,
                             collection: osuny_collection(
-                              @website.events.root,
+                              @website.events.who_can_have_children,
                               localized: true
                             ) if event.parent.present? %>
         <% end %>

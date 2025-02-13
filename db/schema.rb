@@ -544,7 +544,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_124156) do
     t.uuid "communication_website_id", null: false
     t.uuid "about_id", null: false
     t.bigint "language_id"
-    t.integer "duration"
     t.string "place"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

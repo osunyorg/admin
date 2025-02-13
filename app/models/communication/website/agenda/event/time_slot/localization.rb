@@ -3,7 +3,6 @@
 # Table name: communication_website_agenda_event_time_slot_localizations
 #
 #  id                       :uuid             not null, primary key
-#  duration                 :integer
 #  place                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null

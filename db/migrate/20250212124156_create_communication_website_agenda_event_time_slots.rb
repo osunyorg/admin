@@ -14,7 +14,6 @@ class CreateCommunicationWebsiteAgendaEventTimeSlots < ActiveRecord::Migration[7
       t.references :communication_website, null: false, foreign_key: true, type: :uuid
       t.references :about, null: false, foreign_key: {to_table: :communication_website_agenda_event_time_slots}, type: :uuid
       t.references :language
-      t.integer :duration
       t.string :place
 
       t.timestamps

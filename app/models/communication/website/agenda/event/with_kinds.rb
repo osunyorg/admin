@@ -3,6 +3,9 @@ module Communication::Website::Agenda::Event::WithKinds
 
   included do
     after_save :sync_parent_if_child
+
+    scope :with_no_time_slots, -> { where.missing(:time_slots) } 
+    scope :who_can_have_children, -> { root.with_no_time_slots }
   end
 
   def kind_simple?
@@ -22,7 +25,7 @@ module Communication::Website::Agenda::Event::WithKinds
   end
 
   def can_have_children?
-    parent.nil?
+    parent.nil? && time_slots.none?
   end
 
   def can_have_time_slots?

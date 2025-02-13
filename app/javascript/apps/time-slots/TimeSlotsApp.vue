@@ -1,11 +1,12 @@
 <script>
 import Changes from '../components/Changes.vue';
-import { Plus } from 'lucide-vue-next';
+import { Plus, X } from 'lucide-vue-next';
 
 export default {
     components: {
       Changes,
       Plus,
+      X,
     },
     data () {
       return {
@@ -15,12 +16,23 @@ export default {
     },
     methods: {
       addSlot() {
+        this.hideEventChildren();
         this.current.slots.push({
           place: "",
           date: this.current.min,
           time: "20:00",
-          duration: ""
+          duration: 0
         });
+      },
+      removeSlot(slot) {
+        let index = this.current.slots.indexOf(slot)
+        this.current.slots.splice(index, 1)
+      },
+      hideEventChildren() {
+        let elements = document.getElementsByClassName('event__children');
+        if (elements.length > 0) {
+          elements[0].style.display = "none";
+        }
       }
     },
     beforeMount() {
@@ -38,15 +50,14 @@ export default {
         <button
           class="btn btn-light mb-3 mb-xxl-0"
           @click="addSlot()">
-          <Plus />
+          <Plus width="20" stroke-width="1.5" />
           {{ i18n.timeSlots.add }}
         </button>
-        <br>{{ current }}
       </div>
       <div class="col-xxl-8">
         <article v-for="slot in current.slots" class="mb-4">
           <div class="row g-2">
-            <div class="col-lg-6">
+            <div class="col-lg-5">
               <div class="input-group">
                 <input  id="date"
                         class="form-select"
@@ -85,10 +96,16 @@ export default {
               <input  id="place"
                       class="form-control"
                       data-translatable="true" 
-                      :placeholder="i18n.timeSlots.place.label"
-                      type="text"
                       v-model="slot.place"
+                      type="text"
+                      :placeholder="i18n.timeSlots.place.label"
                       />
+            </div>
+            <div class="col-lg-1">
+              <a  class="btn btn-xs btn-danger w-100 h-100 d-flex align-items-center justify-content-center"
+                  @click="removeSlot(slot)">
+                <X /> 
+              </a>
             </div>
           </div>
         </article>
