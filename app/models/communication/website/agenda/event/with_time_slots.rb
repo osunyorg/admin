@@ -53,13 +53,13 @@ module Communication::Website::Agenda::Event::WithTimeSlots
 
   def time_slots_to_json(language)
     {
-      min: from_day.strftime('%F'),
-      max: to_day.strftime('%F'),
+      min: from_day.iso8601,
+      max: to_day.iso8601,
       slots: time_slots.ordered.map { |slot| 
         l10n = slot.localization_for(language)
         {
           id: slot.id,
-          date: slot.date,
+          date: slot.date.iso8601,
           time: slot.time,
           place: l10n&.place,
           duration: slot.duration

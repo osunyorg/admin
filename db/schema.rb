@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_12_124156) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_13_155321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -543,10 +543,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_124156) do
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.uuid "about_id", null: false
-    t.bigint "language_id"
+    t.uuid "language_id", null: false
     t.string "place"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "add_to_calendar_urls"
     t.index ["about_id"], name: "idx_on_about_id_e52a2e12b0"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_526f156fed"
     t.index ["language_id"], name: "idx_on_language_id_f50f565794"
@@ -2159,6 +2160,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_124156) do
   add_foreign_key "communication_website_agenda_event_localizations", "universities"
   add_foreign_key "communication_website_agenda_event_time_slot_localizations", "communication_website_agenda_event_time_slots", column: "about_id"
   add_foreign_key "communication_website_agenda_event_time_slot_localizations", "communication_websites"
+  add_foreign_key "communication_website_agenda_event_time_slot_localizations", "languages"
   add_foreign_key "communication_website_agenda_event_time_slot_localizations", "universities"
   add_foreign_key "communication_website_agenda_event_time_slots", "communication_website_agenda_events"
   add_foreign_key "communication_website_agenda_event_time_slots", "communication_websites"

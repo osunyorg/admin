@@ -3,12 +3,13 @@
 # Table name: communication_website_agenda_event_time_slot_localizations
 #
 #  id                       :uuid             not null, primary key
+#  add_to_calendar_urls     :jsonb
 #  place                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             not null, indexed
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :bigint           indexed
+#  language_id              :uuid             not null, indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
@@ -22,9 +23,11 @@
 #
 #  fk_rails_058062d234  (university_id => universities.id)
 #  fk_rails_641e55dd7e  (about_id => communication_website_agenda_event_time_slots.id)
+#  fk_rails_84332c62e4  (language_id => languages.id)
 #  fk_rails_ef5c90fa45  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Event::TimeSlot::Localization < ApplicationRecord
+  include AddableToCalendar
   include AsLocalization
   include WithGitFiles
   include WithUniversity
@@ -34,4 +37,53 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
               foreign_key: :communication_website_id
 
   alias :time_slot :about
+
+  delegate :event, to: :about
+
+  delegate :title, :subtitle, :summary, to: :event_l10n
+
+  def git_path(website)
+    return unless website.id == communication_website_id
+    return if event.kind_parent? # Rendered by Communication::Website::Agenda::Event::Day
+    git_path_content_prefix(website) + git_path_relative
+  end
+
+  def git_path_relative
+    path = "events/"
+    # path += "archives/#{from_day.year}/" if archive? # TODO
+    path += "#{from_day.strftime "%Y-%m-%d"}-#{event_l10n.slug}.html"
+    path
+  end
+
+  def template_static
+    "admin/communication/websites/agenda/events/static"
+  end
+
+  def from_day
+    about.datetime.to_date
+  end
+
+  def from_hour
+    about.datetime.to_time
+  end
+
+  def to_day
+    about.end_datetime&.to_date
+  end
+
+  def to_hour
+    about.end_datetime&.to_time
+  end
+
+  def time_zone
+    event.time_zone
+  end
+
+  def current_permalink_url_in_website(website)
+    event_l10n.current_permalink_url_in_website(website)
+  end
+  
+  def event_l10n
+    @event_l10n ||= event.localization_for(language)
+  end
 end

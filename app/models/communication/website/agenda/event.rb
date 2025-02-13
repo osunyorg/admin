@@ -79,7 +79,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     [website.config_default_content_security_policy] +
     localizations.in_languages(website.active_language_ids) +
     [parent] +
-    days
+    days +
+    time_slots
   end
 
   def references

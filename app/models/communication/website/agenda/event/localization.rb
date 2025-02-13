@@ -40,6 +40,7 @@
 #  fk_rails_bb85c47fb8  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
+  include AddableToCalendar
   include AsLocalization
   include AsLocalizedTree
   include Contentful
@@ -50,7 +51,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include Shareable
   include WithAccessibility
   include WithBlobs
-  include WithCal
   include WithFeaturedImage
   include WithGitFiles
   include WithOpenApi
