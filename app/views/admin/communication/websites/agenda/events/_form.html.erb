@@ -16,16 +16,17 @@
         <%= osuny_panel Communication::Website::Agenda::Event.human_attribute_name('dates') do %>
           <% if event.kind_child? %>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-lg-6">
                 <%= f.input :from_day,
                             html5: true,
+                            label: Communication::Website::Agenda::Event.human_attribute_name(:day),
                             input_html: {
                               min: event.parent.from_day,
                               max: event.parent.to_day
                             }
                             %>
               </div>
-              <div class="col-md-6">
+              <div class="col-lg-6">
                 <%= f.input :time_zone,
                             collection: time_zones_for_select,
                             include_blank: false,
@@ -34,17 +35,19 @@
             </div>
           <% else %>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-lg-4">
                 <%= f.input :from_day, html5: true  %>
               </div>
-              <div class="col-md-6">
+              <div class="col-lg-4">
                 <%= f.input :to_day, html5: true %>
               </div>
+              <div class="col-lg-4">
+                <%= f.input :time_zone,
+                            collection: time_zones_for_select,
+                            include_blank: false,
+                            selected: f.object.time_zone || @website.default_time_zone %>
+              </div>
             </div>
-            <%= f.input :time_zone,
-                        collection: time_zones_for_select,
-                        include_blank: false,
-                        selected: f.object.time_zone || @website.default_time_zone %>
           <% end %>
         <% end %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>

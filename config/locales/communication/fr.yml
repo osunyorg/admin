@@ -145,9 +145,10 @@ fr:
         url: URL
       communication/website/agenda/event:
         categories: Catégories
+        children: Événements enfants
         dates: Dates
+        day: Jour
         from_day: Jour de début
-        from_hour: Heure de début
         parent: Événement parent
         status: Statut
         status_archive: Archive
@@ -155,12 +156,13 @@ fr:
         status_future: À venir
         time_zone: Fuseau horaire
         to_day: Jour de fin
-        to_hour: Heure de fin
       communication/website/agenda/event/localization:
         featured_image: Image à la une
         published: Publié
         subtitle: Sous-titre
         title: Titre
+      communication/website/agenda/event/time_slot:
+        hour: Heure
       communication/website/agenda/exhibition:
         categories: Catégories
         dates: Dates
@@ -336,6 +338,9 @@ fr:
       communication/website/agenda/event:
         one: Événement
         other: Événements
+      communication/website/agenda/event/time_slot:
+        one: Créneau horaire
+        other: Créneaux horaires
       communication/website/agenda/exhibition:
         one: Exposition
         other: Expositions
