@@ -2,35 +2,38 @@
 
 <%= block_component_add_element block, t('.add_testimonial') %>
 
-<draggable :list="data.elements" handle=".dragHandle" class="row">
-  <div v-for="(element, index) in data.elements">
-    <div class="d-flex mb-5">
-      <div>
-        <a class="btn ps-0 pt-0 dragHandle">
-          <i class="<%= Icon::DRAG %> handle"></i>
-        </a>
-      </div>
-      <div class="flex-fill">
-        <div class="row mb-n3">
-          <div class="col-lg-4">
-            <%= block_component_edit block, :text, template: @element, summernote_config: 'mini' %>
-          </div>
-          <div class="col-lg-4">
-            <%= block_component_edit block, :author, template: @element %>
-            <%= block_component_edit block, :job, template: @element %>
-          </div>
-          <div class="col-lg-4">
-            <%= block_component_edit block, :photo, template: @element %>
-          </div>
+<div v-show="data.elements.length > 0">
+  <%= osuny_separator %>
+  <draggable  :list="data.elements"
+              @end="refreshSummernotes()"
+              handle=".dragHandle">
+    <div v-for="(element, index) in data.elements" class="mb-2">
+      <div class="card draggable-item dragHandle m-0">
+        <div class="card-body d-flex">
+          <i class="<%= Icon::MOVE %> handle"></i>
+          <div v-html="element.text" class="mt-1"></div>
+          <a  class="btn btn-sm text-danger ms-auto"
+              v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+              title="<%= t '.remove_testimonial' %>">
+              <i class="<%= Icon::DELETE %>"></i>
+          </a>
         </div>
       </div>
-      <div>
-        <a  class="btn btn-sm text-danger ms-3"
-            v-on:click="data.elements.splice(data.elements.indexOf(testimonial), 1)"
-            title="<%= t '.remove_testimonial' %>">
-            <i class="<%= Icon::DELETE %>"></i>
-        </a>
-      </div>
+    </div>
+  </draggable>
+  <%= osuny_separator %>
+</div>
+
+<div  v-for="(element, index) in data.elements" 
+      class="pb-5 mb-5">
+  <div class="row">
+    <div class="col-lg-6">
+      <%= block_component_edit block, :text, template: @element, summernote_config: 'mini' %>
+    </div>
+    <div class="col-lg-6">
+      <%= block_component_edit block, :author, template: @element %>
+      <%= block_component_edit block, :job, template: @element %>
+      <%= block_component_edit block, :photo, template: @element %>
     </div>
   </div>
-</draggable>
+</div>
