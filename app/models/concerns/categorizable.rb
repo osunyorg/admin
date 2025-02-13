@@ -1,6 +1,7 @@
-# Attention, doit être chargé après Bodyclassed pour pouvoir s'appuyer sur best_bodyclass
 module Categorizable
   extend ActiveSupport::Concern
+
+  include Bodyclassed
 
   included do
     attr_accessor :categories_were_changed
