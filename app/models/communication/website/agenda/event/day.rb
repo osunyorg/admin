@@ -60,4 +60,8 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
     return unless event.localized_in?(language)
     event.localization_for(language)
   end
+
+  def from_day
+    date
+  end
 end

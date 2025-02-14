@@ -62,4 +62,8 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   def end_time
     end_datetime&.strftime("%H:%M")
   end
+
+  def from_day
+    date
+  end
 end

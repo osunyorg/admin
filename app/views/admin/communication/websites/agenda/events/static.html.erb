@@ -28,6 +28,8 @@ language = @l10n.language
             toc_offcanvas: false %>
 <%= render 'admin/communication/websites/agenda/events/static/dates',
             event: event,
+            day: day,
+            time_slot: time_slot,
             l10n: @l10n,
             locale: language.iso_code %>
 <%= render 'admin/communication/websites/agenda/events/static/parent', event: event, language: language %>
