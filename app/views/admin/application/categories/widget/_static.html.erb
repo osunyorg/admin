@@ -29,6 +29,7 @@ taxonomies:
   if free_categories_content.present? %>
   - name: "<%= t('category.title') %>"
     slug: ""
+    path: ""
     categories:
 <%= sanitize free_categories_content %>
 <% end %>
@@ -47,6 +48,7 @@ taxonomies:
       if taxonomy_content.present? %>
   - name: "<%= prepare_text_for_static taxonomy_l10n.to_s %>"
     slug: "<%= hugo.slug %>"
+    path: "<%= hugo.path %>"
     categories:
 <%= sanitize taxonomy_content %>
 <%
