@@ -11,7 +11,13 @@
       <div class="card draggable-item dragHandle m-0">
         <div class="card-body d-flex">
           <i class="<%= Icon::MOVE %> handle"></i>
-          <div v-html="element.text" class="mt-1"></div>
+          <div class="mt-1">
+            <blockquote v-html="element.text" class="fst-italic"></blockquote>
+            <p class="small mb-0">
+              — <b>{{ element.author }}</b>
+              {{ element.job }}
+            </p>
+          </div>
           <a  class="btn btn-sm text-danger ms-auto"
               v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
               title="<%= t '.remove_testimonial' %>">
