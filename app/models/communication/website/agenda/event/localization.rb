@@ -40,6 +40,7 @@
 #  fk_rails_bb85c47fb8  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
+  include AddableToCalendar
   include AsLocalization
   include AsLocalizedTree
   include Contentful
@@ -50,7 +51,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include Shareable
   include WithAccessibility
   include WithBlobs
-  include WithCal
   include WithFeaturedImage
   include WithGitFiles
   include WithOpenApi
@@ -67,6 +67,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
             :from_day, :from_hour,
             :to_day, :to_hour,
             :time_zone,
+            :kind_simple?,
+            :kind_recurring?,
+            :kind_parent?,
+            :kind_child?,
             to: :event
 
   has_summernote :summary
@@ -77,6 +81,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
+    return if event.kind_parent? # Rendered by Communication::Website::Agenda::Event::Day
     git_path_content_prefix(website) + git_path_relative
   end
 
@@ -98,6 +103,11 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def categories
     about.categories.ordered.map { |category| category.localization_for(language) }.compact
+  end
+
+  # Utility method to give parent localization
+  def parent
+    event.parent&.localization_for(language)
   end
 
   def to_s
