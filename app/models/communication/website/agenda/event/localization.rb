@@ -67,6 +67,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
             :from_day, :from_hour,
             :to_day, :to_hour,
             :time_zone,
+            :kind_simple?,
+            :kind_recurring?,
+            :kind_parent?,
+            :kind_child?,
             to: :event
 
   has_summernote :summary
@@ -99,6 +103,11 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def categories
     about.categories.ordered.map { |category| category.localization_for(language) }.compact
+  end
+
+  # Utility method to give parent localization
+  def parent
+    event.parent&.localization_for(language)
   end
 
   def to_s
