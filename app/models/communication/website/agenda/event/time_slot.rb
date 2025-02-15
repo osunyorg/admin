@@ -25,7 +25,7 @@
 #
 class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include AsDirectObject
-  # include InTime # TODO
+  include InTime
   include Localizable
   include WithUniversity
 
@@ -37,7 +37,6 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   delegate :time_zone, to: :event
 
-
   def dependencies
     localizations.in_languages(website.active_language_ids)
   end
@@ -45,6 +44,7 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   def date
     datetime.to_date
   end
+  alias :from_day :date # Used by InTime
 
   def time
     datetime.strftime("%H:%M")
@@ -58,12 +58,13 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   def end_date
     end_datetime&.to_date
   end
+  alias :to_day :end_date # Used by InTime
 
   def end_time
     end_datetime&.strftime("%H:%M")
   end
 
-  def from_day
-    date
+  # Used by InTime, do nothing :)
+  def to_day=(value)
   end
 end
