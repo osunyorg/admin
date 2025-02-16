@@ -6,7 +6,9 @@ module AsLocalizedTree
       joins(:about).where(about_table_name => { parent_id: nil })
     }
     scope :ordered, -> (language = nil) {
-      joins(:about).order("#{about_table_name}.position")
+      # Use the ordered scope from the about class
+      joins(:about)
+        .merge(about_class.ordered(language))
     }
   end
 
