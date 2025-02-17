@@ -77,6 +77,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
+  def from_datetime
+    time_with from_day, from_hour
+  end
+
+  def to_datetime
+    time_with to_day, to_hour
+  end
+
   def dependencies
     [website.config_default_content_security_policy] +
     localizations.in_languages(website.active_language_ids) +
@@ -88,14 +96,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   def references
     menus +
     abouts_with_agenda_block
-  end
-
-  def from_datetime
-    time_with from_day, from_hour
-  end
-
-  def to_datetime
-    time_with to_day, to_hour
   end
 
   protected
