@@ -96,5 +96,5 @@ search:
   <% end %>
   <% if about.respond_to?(:contents_full_text) %>
   body: >-
-    <%= prepare_text_for_static about.contents_full_text %>
+    <%= prepare_html_for_static simple_format(about.contents_full_text) %>
   <% end %>
