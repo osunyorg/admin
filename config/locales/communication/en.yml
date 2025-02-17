@@ -145,21 +145,24 @@ en:
         url: URL
       communication/website/agenda/event:
         categories: Categories
+        children: Child events
         dates: Dates
+        day: Day
         from_day: From day
-        from_hour: From hour
+        parent: Parent event
         status: Status
         status_archive: Archive
         status_current: Running now
         status_future: In the future
         time_zone: Time zone
         to_day: To day
-        to_hour: To hour
       communication/website/agenda/event/localization:
         featured_image: Featured image
         published: Published
         subtitle: Subtitle
         title: Title
+      communication/website/agenda/event/time_slot:
+        hour: Hour
       communication/website/agenda/exhibition:
         categories: Categories
         dates: Dates
@@ -335,6 +338,12 @@ en:
       communication/website/agenda/event:
         one: Event
         other: Events
+      communication/website/agenda/event/time_slot:
+        one: Time slot
+        other: Time slots
+      communication/website/agenda/exhibition:
+        one: Exhibition
+        other: Exhibitions
       communication/website/connection:
         one: Connection
         other: Connections
@@ -391,6 +400,7 @@ en:
       website:
         agenda:
           event:
+            create_child: Create a child event
             localizations:
               draft: Draft
           events:
@@ -540,8 +550,14 @@ en:
             slug: agenda
             title: Agenda
           communication_agenda_archive:
-            slug: archives
-            title: Archives
+            slug: events-archives
+            title: Events' archives
+          communication_agenda_exhibition:
+            slug: exhibitions
+            title: Exhibitions
+          communication_agenda_exhibition_archive:
+            slug: exhibitions-archives
+            title: Exhibitions' archives
           communication_portfolio:
             slug: projects
             title: Projects
