@@ -1,26 +1,26 @@
 module InTime
   extend ActiveSupport::Concern
-  
+
   STATUS_FUTURE = 'future'
   STATUS_CURRENT = 'current'
   STATUS_ARCHIVE = 'archive'
 
   included do
-    scope :future, -> { 
+    scope :future, -> {
       where('from_day > :today', today: Date.today)
-      .ordered_asc 
+      .ordered_asc
     }
-    scope :current, -> { 
+    scope :current, -> {
       where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today)
       .ordered_asc
     }
-    scope :future_or_current, -> { 
+    scope :future_or_current, -> {
       future.or(current)
-      .ordered_asc 
+      .ordered_asc
     }
-    scope :archive, -> { 
+    scope :archive, -> {
       where('to_day < :today', today: Date.today)
-      .ordered_desc 
+      .ordered_desc
     }
     scope :past, -> { archive }
 
@@ -59,22 +59,6 @@ module InTime
     from_day == to_day
   end
 
-  def has_hours?
-    from_hour.present? || to_hour.present?
-  end
-
-  def has_specific_time_zone?
-    time_zone != website.default_time_zone
-  end
-
-  def from_datetime
-    time_with from_day, from_hour
-  end
-
-  def to_datetime
-    time_with to_day, to_hour
-  end
-
   # Un événement demain aura une distance de 1, comme un événement hier
   # On utilise cette info pour classer les événements à venir dans un sens et les archives dans l'autre
   def distance_in_days
@@ -93,11 +77,5 @@ module InTime
 
   def to_day_after_from_day
     errors.add(:to_day, :too_soon) if to_day.present? && to_day < from_day
-  end
-
-  def to_hour_after_from_hour_on_same_day
-    return if from_day != to_day
-    return unless respond_to?(:from_hour) && respond_to?(:to_hour)
-    errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
   end
 end

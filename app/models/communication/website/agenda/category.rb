@@ -47,6 +47,10 @@ class Communication::Website::Agenda::Category < ApplicationRecord
     Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)
   end
 
+  def exhibition_localizations
+    Communication::Website::Agenda::Exhibition::Localization.where(about_id: exhibition_ids)
+  end
+
   def dependencies
     [parent] +
     localizations.in_languages(website.active_language_ids) +
@@ -56,6 +60,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   def references
     events +
     event_localizations +
+    exhibition_localizations +
     website.menus.in_languages(website.active_language_ids) +
     [parent]
   end

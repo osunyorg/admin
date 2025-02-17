@@ -14,7 +14,7 @@ module Communication::Website::Agenda::Exhibition::WithOpenApi
         created_by_id: { type: :string, format: :uuid, nullable: true },
         localizations: {
           type: :object,
-          description: "Localizations of the exhibitiojn. The key is the language's ISO 639-1 code.",
+          description: "Localizations of the exhibition. The key is the language's ISO 639-1 code.",
           additionalProperties: {
             "$ref": "#/components/schemas/communication_website_agenda_exhibition_localization"
           }

@@ -71,6 +71,7 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
     redirect_to admin_communication_website_agenda_exhibitions_url,
                 notice: t('admin.successfully_destroyed_html', model: @exhibition.to_s_in(current_language))
   end
+
   protected
 
   def breadcrumb
@@ -92,7 +93,7 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text,
         :published, :published_at, :slug,
-        :header_cta, :header_cta_label, :header_cta_url, 
+        :header_cta, :header_cta_label, :header_cta_url,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id
