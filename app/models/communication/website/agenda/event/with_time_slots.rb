@@ -3,7 +3,8 @@ module Communication::Website::Agenda::Event::WithTimeSlots
 
   included do
     has_many  :time_slots,
-              foreign_key: :communication_website_agenda_event_id
+              foreign_key: :communication_website_agenda_event_id,
+              dependent: :destroy
   end
 
   def save_time_slots(language, params)
@@ -59,7 +60,7 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     {
       min: from_day.iso8601,
       max: to_day.iso8601,
-      slots: time_slots.ordered.map { |slot| 
+      slots: time_slots.ordered.map { |slot|
         l10n = slot.localization_for(language)
         {
           id: slot.id,

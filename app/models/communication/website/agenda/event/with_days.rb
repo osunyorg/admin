@@ -3,7 +3,8 @@ module Communication::Website::Agenda::Event::WithDays
 
   included do
     has_many  :days,
-              foreign_key: :communication_website_agenda_event_id
+              foreign_key: :communication_website_agenda_event_id,
+              dependent: :destroy
     after_save :generate_days
   end
 
@@ -15,7 +16,7 @@ module Communication::Website::Agenda::Event::WithDays
     existing_days_ids = []
     date = from_day
     # Create missing days
-    loop do 
+    loop do
       existing_days_ids.concat generate_day(date)
       date += 1.day
       break if date > to_day
