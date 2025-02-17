@@ -8,6 +8,7 @@ module Communication::Website::Agenda::Event::WithTimeSlots
 
   def save_time_slots(language, params)
     existing_slots_ids = []
+    # Create slots
     params[:slots].each do |slot|
       next if slot[:date].blank?  || slot[:time].blank?
       date = slot[:date].to_date
@@ -22,7 +23,10 @@ module Communication::Website::Agenda::Event::WithTimeSlots
       time_slot = save_time_slot(slot, datetime, language)
       existing_slots_ids << time_slot.id
     end
-    time_slots.where.not(id: existing_slots_ids).destroy_all
+    # Delete obsolete slots
+    time_slots.where.not(id: existing_slots_ids).each do |time_slot|
+      time_slot.destroy
+    end
   end
 
   # slot is a hash

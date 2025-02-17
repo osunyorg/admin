@@ -39,8 +39,8 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   alias :time_slot :about
 
   delegate :event, to: :about
-
   delegate :title, :subtitle, :summary, to: :event_l10n
+  delegate :archive?, to: :event
 
   def git_path(website)
     return unless website.id == communication_website_id
