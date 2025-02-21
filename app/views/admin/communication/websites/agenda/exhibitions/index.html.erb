@@ -1,4 +1,4 @@
-<% content_for :title, t('create') %>
+<% content_for :title, "#{Communication::Website::Agenda::Exhibition.model_name.human(count: 2)} (#{@exhibitions.total_count})" %>
 
 <div class="d-flex justify-content-between mb-4">
   <p>
