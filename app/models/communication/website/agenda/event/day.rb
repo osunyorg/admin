@@ -29,10 +29,12 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   include AsDirectObject
   include WithUniversity
   include WithGitFiles
-  
+
   belongs_to  :event,
               foreign_key: :communication_website_agenda_event_id
   belongs_to  :language
+
+  scope :for_language, -> (language) { where(language: language) }
 
   def git_path(website)
     return if website.id != communication_website_id || # Wrong website, should never happen
