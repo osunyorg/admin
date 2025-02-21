@@ -2,9 +2,9 @@ module Communication::Website::Agenda::Event::WithKinds
   extend ActiveSupport::Concern
 
   included do
-    after_save :sync_parent_if_child
+    after_commit :sync_parent_if_child
 
-    scope :with_no_time_slots, -> { where.missing(:time_slots) } 
+    scope :with_no_time_slots, -> { where.missing(:time_slots) }
     scope :who_can_have_children, -> { root.with_no_time_slots }
   end
 
@@ -39,8 +39,7 @@ module Communication::Website::Agenda::Event::WithKinds
   protected
 
   def sync_parent_if_child
-    return unless kind_child?
-    # @SebouChu je suis pas du tout sûr. Ca fonctionne (mise à jour du parent ok)
+    return unless kind_child? && parent.persisted?
     parent.sync_with_git
   end
 end
