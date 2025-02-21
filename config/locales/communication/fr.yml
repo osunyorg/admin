@@ -160,6 +160,7 @@ fr:
         featured_image: Image à la une
         published: Publié
         subtitle: Sous-titre
+        text: Informations pratiques
         title: Titre
       communication/website/agenda/event/time_slot:
         hour: Heure

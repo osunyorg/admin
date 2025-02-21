@@ -160,6 +160,7 @@ en:
         featured_image: Featured image
         published: Published
         subtitle: Subtitle
+        text: Information
         title: Title
       communication/website/agenda/event/time_slot:
         hour: Hour
