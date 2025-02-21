@@ -39,7 +39,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   alias :time_slot :about
 
   delegate :event, to: :about
-  delegate :title, :subtitle, :summary, to: :event_l10n
+  delegate :title, :subtitle, :summary, :current_permalink_url_in_website, to: :event_l10n
   delegate :archive?, to: :event
 
   def git_path(website)
@@ -79,10 +79,6 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
     event.time_zone
   end
 
-  def current_permalink_url_in_website(website)
-    event_l10n.current_permalink_url_in_website(website)
-  end
-  
   def event_l10n
     @event_l10n ||= event.localization_for(language)
   end

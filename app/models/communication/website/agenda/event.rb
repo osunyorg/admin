@@ -59,8 +59,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
               foreign_key: :parent_id,
               dependent: :destroy
 
-  validate :to_hour_after_from_hour_on_same_day
-
   scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
   scope :ordered_asc, -> { order(:from_day, :from_hour) }
   scope :ordered, -> (language = nil) { ordered_asc }
@@ -107,11 +105,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
                   day.day,
                   hour.hour,
                   hour.min
-  end
-
-  def to_hour_after_from_hour_on_same_day
-    return if from_day != to_day
-    errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
   end
 
   def abouts_with_agenda_block

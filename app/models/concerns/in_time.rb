@@ -78,4 +78,10 @@ module InTime
   def to_day_after_from_day
     errors.add(:to_day, :too_soon) if to_day.present? && to_day < from_day
   end
+
+  def to_hour_after_from_hour_on_same_day
+    return if from_day != to_day
+    return unless respond_to?(:from_hour) && respond_to?(:to_hour)
+    errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
+  end
 end
