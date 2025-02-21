@@ -37,6 +37,7 @@
 #
 class Communication::Website::Localization < ApplicationRecord
   include AsLocalization
+  include Contentful
   include Initials
   include WithOpenApi
   include WithPublication
