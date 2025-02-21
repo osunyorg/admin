@@ -1,7 +1,7 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Search::BuildIndexJob.perform_now
+    Communication::Website::Agenda::CreateTimeSlotsJob.perform_later
   end
 
   namespace :search do

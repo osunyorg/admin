@@ -9,7 +9,7 @@
         <%= @events.total_count %> 
         <%= Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase %>
       </p>
-      <%= render 'admin/communication/websites/agenda/events/list', events: @events, hide_category: true %>
+      <%= render 'admin/communication/websites/agenda/events/list', events: @events %>
       <%= paginate @events %>  
     </div>
   </div>

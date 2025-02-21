@@ -3,7 +3,7 @@
 # Table name: university_person_localizations
 #
 #  id                    :uuid             not null, primary key
-#  biography             :text
+#  biography             :string
 #  featured_image_alt    :text
 #  featured_image_credit :text
 #  first_name            :string

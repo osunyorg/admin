@@ -8,7 +8,7 @@ class Communication::Website::Permalink::Portfolio::Project < Communication::Web
   end
 
   # /projets/2022-lac-project/
-  def self.pattern_in_website(website, language)
+  def self.pattern_in_website(website, language, about = nil)
     special_page_path(website, language) + '/:year-:slug/'
   end
 
