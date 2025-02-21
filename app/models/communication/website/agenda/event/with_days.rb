@@ -5,14 +5,16 @@ module Communication::Website::Agenda::Event::WithDays
     has_many  :days,
               foreign_key: :communication_website_agenda_event_id,
               dependent: :destroy
-    after_save :generate_days
+    after_save :generate_days, if: :kind_parent?
+    after_save :generate_parent_days, if: :kind_child?
   end
 
-  protected
+  def generate_parent_days
+    parent.generate_days
+  end
 
   def generate_days
     # Days are used to group children
-    return unless kind_parent?
     existing_days_ids = []
     date = from_day
     # Create missing days
