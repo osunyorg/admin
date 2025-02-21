@@ -7,12 +7,12 @@ class Communication::Website::Permalink::Agenda::Event < Communication::Website:
     :events
   end
 
-  def self.pattern_in_website(website, language, about)
+  def self.pattern_in_website(website, language, about = nil)
     pattern = special_page_path(website, language)
-    if about.kind_child?
+    if about&.kind_child?
       # /agenda/2025/arte-concert-festival/2025-02-18-priya-ragu/
       pattern += '/:parent_year/:parent_slug/:year-:month-:day-:slug/'
-    elsif about.kind_parent?
+    elsif about&.kind_parent?
       # /agenda/2025/arte-concert-festival/
       pattern += '/:year/:slug/'
     else
