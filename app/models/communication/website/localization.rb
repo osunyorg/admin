@@ -39,6 +39,7 @@ class Communication::Website::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
   include Initials
+  include WithAccessibility
   include WithOpenApi
   include WithPublication
   include WithUniversity
@@ -59,7 +60,8 @@ class Communication::Website::Localization < ApplicationRecord
 
   def dependencies
     # 1 single file for all the languages
-    [website.config_default_languages]
+    [website.config_default_languages] +
+    contents_dependencies
   end
 
   def to_s
@@ -67,6 +69,10 @@ class Communication::Website::Localization < ApplicationRecord
   end
 
   protected
+
+  def check_accessibility
+    accessibility_merge_array blocks
+  end
 
   def create_existing_menus_in_language
     menus = website.menus.for_language_id(website.default_language_id)
