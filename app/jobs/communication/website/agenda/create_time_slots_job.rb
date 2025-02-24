@@ -3,8 +3,8 @@ class Communication::Website::Agenda::CreateTimeSlotsJob < ApplicationJob
 
   def perform
     Communication::Website::Agenda::Event.root.where.missing(:time_slots).each do |event|
-      # No time, we skip
-      next if event.from_hour.nil?
+      # No time or can't have time slots, we skip
+      next if event.from_hour.nil? || !event.can_have_time_slots?
       if event.to_day.nil? || event.to_day == event.from_day
         # One-day event
         create_time_slot(event, event.from_day)

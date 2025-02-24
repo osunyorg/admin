@@ -59,8 +59,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
               foreign_key: :parent_id,
               dependent: :destroy
 
-  scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
-  scope :ordered_asc, -> { order(:from_day, :from_hour) }
+  scope :ordered_desc, -> {
+    left_joins(:time_slots)
+      .order(from_day: :desc, from_hour: :desc, "communication_website_agenda_event_time_slots.datetime": :desc)
+  }
+  scope :ordered_asc, -> {
+    left_joins(:time_slots)
+      .order(:from_day, :from_hour, "communication_website_agenda_event_time_slots.datetime")
+  }
   scope :ordered, -> (language = nil) { ordered_asc }
   scope :latest_in, -> (language) { published_now_in(language).future_or_current.order("communication_website_agenda_event_localizations.updated_at").limit(5) }
 
