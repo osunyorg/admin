@@ -1,4 +1,4 @@
-module Communication::Website::Agenda::Event::Localization::WithCal
+module AddableToCalendar
   extend ActiveSupport::Concern
 
   included do
@@ -36,7 +36,6 @@ module Communication::Website::Agenda::Event::Localization::WithCal
   def cal_ical_url
     add_to_calendar_urls['ical']
   end
-
 
   protected
 

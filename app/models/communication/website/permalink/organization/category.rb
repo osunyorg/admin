@@ -8,7 +8,7 @@ class Communication::Website::Permalink::Organization::Category < Communication:
   end
 
   # /organisations/categories/:slug/
-  def self.pattern_in_website(website, language)
+  def self.pattern_in_website(website, language, about = nil)
     special_page_path(website, language) + '/categories/:slug/'
   end
 

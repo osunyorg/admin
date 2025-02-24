@@ -25,6 +25,7 @@ module Communication::Website::Agenda::Event::Localization::WithOpenApi
         subtitle: { type: :string, nullable: true },
         summary: { type: :string, nullable: true },
         text: { type: :string, nullable: true },
+        notes: { type: :string, nullable: true },
         add_to_calendar_urls: {
           type: :object,
           properties: {

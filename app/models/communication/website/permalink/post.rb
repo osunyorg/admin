@@ -8,7 +8,7 @@ class Communication::Website::Permalink::Post < Communication::Website::Permalin
   end
 
   # /actualites/2022-10-21-un-article/
-  def self.pattern_in_website(website, language)
+  def self.pattern_in_website(website, language, about = nil)
     special_page_path(website, language) + "/:year-:month-:day-:slug/"
   end
 

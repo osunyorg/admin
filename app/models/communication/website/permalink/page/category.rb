@@ -8,7 +8,7 @@ class Communication::Website::Permalink::Page::Category < Communication::Website
   end
 
   # /:slug/
-  def self.pattern_in_website(website, language)
+  def self.pattern_in_website(website, language, about = nil)
     '/:slug/'
   end
 

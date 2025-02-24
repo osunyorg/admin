@@ -62,7 +62,7 @@ class Communication::Website::Permalink < ApplicationRecord
 
   # Should be defined in subclasses
   # Not protected because it is used in the website config "DefaultLanguages"
-  def self.pattern_in_website(website, language)
+  def self.pattern_in_website(website, language, about = nil)
     raise NoMethodError
   end
 
@@ -99,7 +99,7 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def pattern
     language = about.respond_to?(:language) ? about.language : website.default_language
-    self.class.pattern_in_website(website, language)
+    self.class.pattern_in_website(website, language, about)
   end
 
   def computed_path
