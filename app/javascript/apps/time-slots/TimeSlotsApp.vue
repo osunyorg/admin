@@ -57,7 +57,7 @@ export default {
       <div class="col-xxl-8">
         <article v-for="slot in current.slots" class="mb-4">
           <div class="row g-2">
-            <div class="col-lg-5">
+            <div class="col-lg-7">
               <div class="input-group">
                 <input  id="date"
                         class="form-select"
@@ -92,7 +92,7 @@ export default {
                 </select>
               </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
               <input  id="place"
                       class="form-control"
                       data-translatable="true" 
