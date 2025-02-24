@@ -1,4 +1,5 @@
 <%
+language = @l10n.language
 if @l10n.is_a? Communication::Website::Agenda::Event::Day
   # Shazam! It's not an event, it's a day in a parent event.
   # Let's put everything in its right place (like Radiohead).
@@ -15,9 +16,8 @@ else
   # Almost boring... this event really is an event.
   event = @l10n.about
   # Always fresh like the first day
-  day = event.days.first
+  day = event.days.for_language(language).ordered.first
 end
-language = @l10n.language
 %>---
 <%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>

@@ -35,6 +35,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   belongs_to  :language
 
   scope :for_language, -> (language) { where(language: language) }
+  scope :ordered, -> { order(:date) }
 
   def git_path(website)
     return if website.id != communication_website_id || # Wrong website, should never happen
