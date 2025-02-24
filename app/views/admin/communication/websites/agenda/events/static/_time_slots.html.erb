@@ -1,7 +1,7 @@
 <% if event.time_slots.any? %>
 time_slots:
 <%
-event.time_slots.each do |time_slot|
+event.time_slots.ordered.each do |time_slot|
   l10n = time_slot.localization_for(language)
   next if l10n.nil?
   %>
@@ -11,7 +11,7 @@ event.time_slots.each do |time_slot|
       datetime: "<%= time_slot.datetime&.iso8601 %>"
     duration:
       seconds: <%= time_slot.duration %>
-    end: 
+    end:
       date: "<%= time_slot.end_date&.iso8601 %>"
       time: "<%= time_slot.end_time %>"
       datetime: "<%= time_slot.end_datetime&.iso8601 %>"
