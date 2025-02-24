@@ -76,6 +76,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   has_summernote :summary
   has_summernote :text
+  has_summernote :notes
 
   validates :title, presence: true
   before_validation :set_communication_website_id, on: :create

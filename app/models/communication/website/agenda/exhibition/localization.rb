@@ -11,11 +11,13 @@
 #  header_cta_url           :string
 #  meta_description         :string
 #  migration_identifier     :string
+#  notes                    :text
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :string
 #  subtitle                 :string
 #  summary                  :text
+#  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -67,6 +69,8 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
             to: :exhibition
 
   has_summernote :summary
+  has_summernote :text
+  has_summernote :notes
 
   validates :title, presence: true
   before_validation :set_communication_website_id, on: :create

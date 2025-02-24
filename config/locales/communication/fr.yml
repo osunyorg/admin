@@ -177,8 +177,10 @@ fr:
         to_day: Jour de fin
       communication/website/agenda/exhibition/localization:
         featured_image: Image à la une
+        notes: Notes
         published: Publié
         subtitle: Sous-titre
+        text: Informations pratiques
         title: Titre
       communication/website/connection:
         direct_source: Source directe

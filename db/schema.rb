@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_24_092449) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_24_102300) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -608,6 +608,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_24_092449) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "communication_website_id", null: false
+    t.text "text"
+    t.text "notes"
     t.index ["about_id"], name: "idx_on_about_id_a6e772a338"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_8261badeaa"
     t.index ["language_id"], name: "idx_on_language_id_a2de6ce8d0"

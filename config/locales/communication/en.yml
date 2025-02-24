@@ -177,8 +177,10 @@ en:
         to_day: To day
       communication/website/agenda/exhibition/localization:
         featured_image: Featured image
+        notes: Notes
         published: Published
         subtitle: Subtitle
+        text: Information
         title: Title
       communication/website/connection:
         direct_source: Direct source

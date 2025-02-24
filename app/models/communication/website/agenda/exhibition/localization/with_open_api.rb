@@ -24,6 +24,8 @@ module Communication::Website::Agenda::Exhibition::Localization::WithOpenApi
         slug: { type: :string },
         subtitle: { type: :string, nullable: true },
         summary: { type: :string, nullable: true },
+        text: { type: :string, nullable: true },
+        notes: { type: :string, nullable: true },
         add_to_calendar_urls: {
           type: :object,
           properties: {
