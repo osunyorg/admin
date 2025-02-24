@@ -178,6 +178,7 @@ en:
       communication/website/agenda/exhibition/localization:
         featured_image: Featured image
         notes: Notes
+        place: Place
         published: Published
         subtitle: Subtitle
         text: Information

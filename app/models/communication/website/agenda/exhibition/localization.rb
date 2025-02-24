@@ -12,6 +12,7 @@
 #  meta_description         :string
 #  migration_identifier     :string
 #  notes                    :text
+#  place                    :string
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :string

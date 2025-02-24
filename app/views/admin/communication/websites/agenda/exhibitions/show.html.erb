@@ -7,8 +7,11 @@
       <% if @l10n.subtitle.present? %>
         <p class="mt-n3 text-muted"><%= @l10n.subtitle %></p>
       <% end %>
-      <p><%#= render 'admin/communication/websites/agenda/exhibitions/dates', exhibition: @exhibition, l10n: @l10n, detailed: true %></p>
+      <p><%= render 'admin/communication/websites/agenda/exhibitions/dates', exhibition: @exhibition, l10n: @l10n, detailed: true %></p>
     <% end %>
+    <%= osuny_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name(:place), small: true do %>
+      <p><%= @l10n.place %></p>
+    <% end if @l10n.place.present? %>
   </div>
   <div class="offset-lg-1 col-lg-4">
     <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
@@ -29,10 +32,10 @@
   <div class="col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n, small: true %>
     <%= osuny_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name("text"), small: true do %>
-      <div class="lead"><%= sanitize @l10n.text %></div>
+      <div><%= sanitize @l10n.text %></div>
     <% end if @l10n.text.present? %>
     <%= osuny_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name("notes"), small: true do %>
-      <div class="lead"><%= sanitize @l10n.notes %></div>
+      <div class="small"><%= sanitize @l10n.notes %></div>
     <% end if @l10n.notes.present? %>
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>

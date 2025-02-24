@@ -13,6 +13,8 @@ language = @l10n.language
             exhibition: exhibition,
             l10n: @l10n,
             locale: language.iso_code %>
+place: >-
+  <%= prepare_text_for_static @l10n.place %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/images/shared/static', about: @l10n %>
