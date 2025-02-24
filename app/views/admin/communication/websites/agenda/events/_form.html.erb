@@ -59,6 +59,14 @@
                           'summernote-config' => 'mini'
                         }
                       } %>
+        <%= lf.input  :notes,
+                      as: :summernote,
+                      input_html: {
+                        data: {
+                          translatable: true,
+                          'summernote-config' => 'mini'
+                        }
+                      } %>
 
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <div class="row">

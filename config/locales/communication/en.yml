@@ -158,6 +158,7 @@ en:
         to_day: To day
       communication/website/agenda/event/localization:
         featured_image: Featured image
+        notes: Notes
         published: Published
         subtitle: Subtitle
         text: Information

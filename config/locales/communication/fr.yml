@@ -158,6 +158,7 @@ fr:
         to_day: Jour de fin
       communication/website/agenda/event/localization:
         featured_image: Image à la une
+        notes: Notes
         published: Publié
         subtitle: Sous-titre
         text: Informations pratiques

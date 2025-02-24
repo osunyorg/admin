@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_13_155321) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_24_092449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -533,6 +533,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_13_155321) do
     t.boolean "header_cta", default: false
     t.string "header_cta_label"
     t.string "header_cta_url"
+    t.text "notes"
     t.index ["about_id"], name: "idx_on_about_id_db6323806a"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_87f393a516"
     t.index ["language_id"], name: "idx_on_language_id_c00e1d0218"
@@ -1968,7 +1969,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_13_155321) do
   end
 
   create_table "university_person_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "biography"
+    t.text "biography"
     t.string "first_name"
     t.string "last_name"
     t.string "linkedin"

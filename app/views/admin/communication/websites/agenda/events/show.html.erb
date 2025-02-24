@@ -31,6 +31,9 @@
     <%= osuny_panel Communication::Website::Agenda::Event::Localization.human_attribute_name("text"), small: true do %>
       <div class="lead"><%= sanitize @l10n.text %></div>
     <% end if @l10n.text.present? %>
+    <%= osuny_panel Communication::Website::Agenda::Event::Localization.human_attribute_name("notes"), small: true do %>
+      <div class="lead"><%= sanitize @l10n.notes %></div>
+    <% end if @l10n.notes.present? %>
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
