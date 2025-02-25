@@ -18,10 +18,10 @@
       </div>
       <div class="col-lg-8">
         <%= render 'admin/application/contact_details/edit', f: f, lf: lf, about: @website, l10n: @l10n %>
-      </div>
-      <div class="col-lg-6 col-xxl-4">
+        <%= osuny_separator %>
       </div>
     </div>
+    <%= render 'admin/communication/contents/editor', about: @l10n %>
 
     <% content_for :action_bar_right do %>
       <%= submit f %>
