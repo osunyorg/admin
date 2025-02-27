@@ -65,7 +65,7 @@ class Ability::ProgramManager < Ability
   end
 
   def managed_program_localization_ids
-    @managed_program_localization_ids ||= Education::Program::Localization.where(about_id: managed_program_ids).pluck(:id)
+    @managed_program_localization_ids ||= Education::Program::Localization.where(about_id: managed_programs_ids).pluck(:id)
   end
 
   def managed_program_category_ids

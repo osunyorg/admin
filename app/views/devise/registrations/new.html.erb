@@ -8,6 +8,8 @@
 
   <div class="row">
     <div class="col-lg-6">
+      <%= f.invisible_captcha :osuny_verification %>
+      <%= hashcash_hidden_field_tag %>
       <%= f.input :email,
                   required: true,
                   input_html: {
