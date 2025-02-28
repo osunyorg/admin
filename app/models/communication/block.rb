@@ -38,6 +38,7 @@ class Communication::Block < ApplicationRecord
   }
 
   include AsIndirectObject
+  include Migratable
   include Orderable
   include WithAccessibility
   include WithHeadingRanks

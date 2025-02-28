@@ -32,6 +32,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include Sanitizable
   include Searchable
   include Localizable
+  include Migratable
   include WithMenuItemTarget
   include WithUniversity
 

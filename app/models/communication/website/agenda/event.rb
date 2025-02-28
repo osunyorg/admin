@@ -38,6 +38,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Sanitizable
   include Searchable
   include Localizable
+  include Migratable
   include WithMenuItemTarget
   include WithOpenApi
   include WithTime

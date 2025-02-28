@@ -41,6 +41,7 @@ class University::Organization::Localization < ApplicationRecord
   include Backlinkable
   include Contentful
   include Initials
+  include Migratable
   include Permalinkable
   include Sanitizable
   include Shareable

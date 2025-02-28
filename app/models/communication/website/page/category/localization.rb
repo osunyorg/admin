@@ -34,6 +34,7 @@
 #
 class Communication::Website::Page::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
+  include Migratable
   include WithOpenApi
 
   belongs_to :website,

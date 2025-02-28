@@ -34,6 +34,7 @@ class Communication::Website::Page::Category < ApplicationRecord
   include AsDirectObject
   include Sanitizable
   include Localizable
+  include Migratable
   include WithMenuItemTarget
   include WithOpenApi
   include WithUniversity

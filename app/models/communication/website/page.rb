@@ -37,6 +37,7 @@ class Communication::Website::Page < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Localizable
+  include Migratable
   include Orderable
   include Sanitizable
   include Searchable

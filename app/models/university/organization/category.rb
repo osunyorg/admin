@@ -26,6 +26,7 @@ class University::Organization::Category < ApplicationRecord
   include AsCategory
   include AsIndirectObject
   include Localizable
+  include Migratable
   include WithOpenApi
   include WithUniversity
 

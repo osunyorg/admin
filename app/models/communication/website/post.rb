@@ -28,6 +28,7 @@ class Communication::Website::Post < ApplicationRecord
   include Sanitizable
   include Searchable
   include Localizable
+  include Migratable
   include WithMenuItemTarget
   include WithOpenApi
   include WithUniversity

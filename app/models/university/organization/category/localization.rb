@@ -31,6 +31,7 @@
 #
 class University::Organization::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
+  include Migratable
   include WithOpenApi
 
   def git_path(website)

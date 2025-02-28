@@ -42,6 +42,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   include Contentful
   include HeaderCallToAction
   include Initials
+  include Migratable
   include Permalinkable
   include Sanitizable
   include Shareable
