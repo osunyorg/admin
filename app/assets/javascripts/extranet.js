@@ -11,6 +11,7 @@
 //= require simple_form_bs5_file_input
 //= require summernote/summernote-bs5
 //= require autocomplete-rails
+//= require hashcash
 //= require_tree ./application/plugins
 //= require_tree ./extranet
 //= require osuny-hugo-theme/script
