@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_24_215711) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_28_162651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -848,6 +848,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_24_215711) do
     t.datetime "updated_at", null: false
     t.uuid "created_by_id"
     t.boolean "full_width", default: true
+    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_aac12e3adb"
     t.index ["created_by_id"], name: "idx_on_created_by_id_7009ee99c6"
     t.index ["university_id"], name: "idx_on_university_id_ac2f4a0bfc"
