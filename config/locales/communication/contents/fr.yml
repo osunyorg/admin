@@ -67,6 +67,7 @@ fr:
             close: Fermer l'édition du bloc
             title: Édition de bloc
         empty: Ce bloc est vide et n'apparaitra pas
+        footer: Les blocs ajoutés ici apparaissent dans le pied de page (footer) du site, sur chaque page.
         templates:
           agenda:
             description: Une liste d'événements à venir.

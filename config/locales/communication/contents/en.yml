@@ -67,6 +67,7 @@ en:
             close: Close block edition
             title: Block edition
         empty: This block is empty and will not appear
+        footer: The blocks here appear in the website footer, on each page.
         templates:
           agenda:
             description: A list of upcoming events.
