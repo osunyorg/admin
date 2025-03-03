@@ -6,6 +6,9 @@ window.osuny.search = {
         this.modal = document.getElementById('searchModal');
         this.field = document.getElementById('searchField');
         this.results = document.getElementById('searchResults');
+        if (this.modal === null) {
+            return;
+        }
         this.modal.addEventListener('shown.bs.modal', this.open.bind(this));
         this.field.addEventListener('input', this.update.bind(this));
         this.request = new XMLHttpRequest();
