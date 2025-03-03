@@ -1,6 +1,17 @@
 <%= block_component_snippet block, :description %>
-<ul class="list-unstyled">
-  <% block.template.elements.each do |element| %>
-    <li><%= element.title %></li>
+<div class="row">
+  <%
+  block.template.elements.each do |element|
+    image_blob = element.image_component.blob
+    file_blob = element.file_component.blob
+    %>
+    <div class="col-6 col-md-4">
+      <%= kamifusen_tag image_blob, width: 200, class: 'img-fluid' if image_blob %>
+      <%= element.title %>
+      <% if file_blob %>
+        <br>
+        <span class="small"><%= file_blob.filename %></span>
+      <% end %>
+    </div>
   <% end %>
-</ul>
+</div>
