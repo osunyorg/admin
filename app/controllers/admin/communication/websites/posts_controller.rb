@@ -20,7 +20,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     target_posts.each do |post|
       l10n = post.localization_for(current_language)
       next unless l10n.present?
-      l10n.publish!
+      is_published ? l10n.publish! : l10n.unpublish!
       post.save_and_sync
     end
     redirect_back fallback_location: admin_communication_website_posts_path,

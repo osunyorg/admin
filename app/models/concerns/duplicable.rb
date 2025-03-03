@@ -27,6 +27,8 @@ module Duplicable
       instance_l10n.about = instance
       # note: fragile. It only works because every duplicate objects currently has a "title" property.
       instance_l10n.title = I18n.t('copy_of', title: l10n.title)
+      instance_l10n.published = false if instance_l10n.respond_to?(:published)
+      instance_l10n.published_at = nil if instance_l10n.respond_to?(:published_at)
       instance_l10n.save
       duplicate_featured_image(l10n, instance_l10n)
       duplicate_blocks(l10n, instance_l10n)

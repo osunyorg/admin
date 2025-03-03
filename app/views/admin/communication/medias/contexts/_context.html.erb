@@ -9,6 +9,7 @@ partial = "admin/communication/medias/contexts/#{key}"
 <% rescue %>
 <%
 object = context.about
+next if object.nil?
 # If it's a localization, get real object
 if object.respond_to?(:about)
   object = object.about

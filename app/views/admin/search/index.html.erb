@@ -5,8 +5,7 @@
     <%
     @results.each do |result|
       object = result.about_object
-      next unless can?(:read, object)
-      l10n = result.about_localization
+      next unless object.present? && can?(:read, object)
       # communication_website_post
       path_class = object.class.polymorphic_name.parameterize.underscore
       # admin_communication_website_post_path

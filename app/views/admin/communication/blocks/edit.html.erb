@@ -11,7 +11,7 @@
   <div class="spinner-border text-primary" role="status">
     <span class="sr-only"><%= t 'loading' %></span>
   </div>
-  <%= simple_form_for [:admin, @block], 
+  <%= simple_form_for [:admin, @block],
                       remote: true,
                       html: { id: 'block-form' } do |f| %>
     <%= f.error_notification %>
@@ -26,20 +26,20 @@
                 input_html: { data: { translatable: true } } %>
 
     <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f, block: @block %>
- 
+
     <div class="mt-5">
       <a  class="text-muted small"
-          data-bs-toggle="collapse" 
-          href="#advanced" 
-          role="button" 
-          aria-expanded="false" 
+          data-bs-toggle="collapse"
+          href="#advanced"
+          role="button"
+          aria-expanded="false"
           aria-controls="advanced">
         <i class="bi bi-gear-fill"></i>
         <%= t('admin.advanced_settings') %>
       </a>
       <div class="collapse mt-3" id="advanced">
-        <% 
-        if @block.title.present? 
+        <%
+        if @block.title.present?
           slug = @block.slug
           about_l10n = @block.about
           about = about_l10n.about
@@ -48,7 +48,7 @@
             <%= osuny_label t('admin.communication.blocks.advanced.anchor') %>
             <pre>#<%= slug %></pre>
             <%
-            if about.is_direct_object?
+            if about.try(:is_direct_object?)
               website = about.website
               hugo = about_l10n.hugo(website)
               %>
@@ -266,9 +266,9 @@
   window.addEventListener('load', function(){
     setTimeout(function() {
       app.mount('#app');
-      
+
       $("#block-form").on("ajax:success", function(e) {
-        let blockIdentifier = "<%= @block.id %>", 
+        let blockIdentifier = "<%= @block.id %>",
             blockPath = "<%= admin_communication_block_path(@block) %>";
         parent.window.osuny.contentEditor.offcanvas.onBlockSave(blockIdentifier, blockPath);
       });

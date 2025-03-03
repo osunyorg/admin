@@ -33,6 +33,12 @@ module WithPublication
     save
   end
 
+  def unpublish!
+    self.published = false
+    self.published_at = nil
+    save
+  end
+
   def draft?
     !published
   end

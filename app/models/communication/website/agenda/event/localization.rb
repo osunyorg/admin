@@ -11,6 +11,7 @@
 #  header_cta_url           :string
 #  meta_description         :string
 #  migration_identifier     :string
+#  notes                    :text
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
 #  slug                     :string
