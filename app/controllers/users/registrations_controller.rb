@@ -1,7 +1,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  include ActiveHashcash
   include Users::AddContextToRequestParams
   include Users::LayoutChoice
 
+  invisible_captcha only: [:create], honeypot: :osuny_verification
+
+  before_action :check_hashcash, only: :create
   before_action :configure_sign_up_params, only: :create
   before_action :configure_account_update_params, only: :update
   before_action :confirm_two_factor_authenticated, except: [:new, :create, :cancel]

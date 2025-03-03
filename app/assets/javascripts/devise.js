@@ -8,6 +8,7 @@
 //= require simple_form_bs5_file_input
 //= require cropperjs/dist/cropper
 //= require jquery-cropper/dist/jquery-cropper
+//= require hashcash
 //= require_self
 
 window.osuny = {};

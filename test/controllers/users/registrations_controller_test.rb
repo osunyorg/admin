@@ -1,6 +1,8 @@
 require "test_helper"
 
 class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
+  ActiveHashcash.bits = 2
+
   def test_extranet_create
     host! default_extranet.host
     default_extranet.connect(olivia)
@@ -12,7 +14,8 @@ class Users::RegistrationsControllerTest < ActionDispatch::IntegrationTest
         password: "MyP4ssw0rd!",
         password_confirmation: "MyP4ssw0rd!",
         language_id: french.id
-      }
+      },
+      hashcash: ActiveHashcash::Stamp.mint(host).to_s
     }
     assert_redirected_to root_path
     user = User.find_by(email: olivia.email)

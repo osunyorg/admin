@@ -12,6 +12,10 @@ module Education::Program::WithWebsitesCategories
                class_name: 'Communication::Website::Portfolio::Category',
                dependent: :destroy
 
+    has_many   :website_page_categories,
+               class_name: 'Communication::Website::Page::Category',
+               dependent: :destroy
+
     has_many   :website_post_categories,
                class_name: 'Communication::Website::Post::Category',
                dependent: :destroy
@@ -26,6 +30,7 @@ module Education::Program::WithWebsitesCategories
     categories[:events] = website_agenda_categories.find_by(communication_website_id: website.id)&.localization_for(language)
     categories[:posts] = website_post_categories.find_by(communication_website_id: website.id)&.localization_for(language)
     categories[:projects] = website_portfolio_categories.find_by(communication_website_id: website.id)&.localization_for(language)
+    categories[:pages] = website_page_categories.find_by(communication_website_id: website.id)&.localization_for(language)
     categories.compact
   end
 end
