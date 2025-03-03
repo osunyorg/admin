@@ -101,7 +101,10 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
 
   def base_events
     events = website.events.published_now_in(block.language)
-    events = events.send(time) if time.in? AUTHORIZED_SCOPES
+    if time.in?(AUTHORIZED_SCOPES)
+      events = events.public_send(time)
+      events = time == 'archive' ? events.ordered_desc : events.ordered_asc
+    end
     events
   end
 

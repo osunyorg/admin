@@ -8,7 +8,7 @@ class Communication::Website::Permalink::Researcher < Communication::Website::Pe
   end
 
   # FIXME : Remplacer le publications comme dans Permalink::Author ?
-  def self.pattern_in_website(website, language)
+  def self.pattern_in_website(website, language, about = nil)
     special_page_path(website, language) + '/:slug/publications/'
   end
 
