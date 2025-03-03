@@ -107,6 +107,12 @@ namespace :communication do
           get :static
         end
       end
+      resources :years, only: [:index, :show], controller: '/admin/communication/websites/agenda/years' do        
+        member do
+          get :static
+        end
+        resources :months, only: :show, controller: '/admin/communication/websites/agenda/months'
+      end
       root to: '/admin/communication/websites/agenda/events#index'
     end
     namespace :portfolio do

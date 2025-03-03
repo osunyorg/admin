@@ -1,0 +1,50 @@
+<% content_for :title, @month %>
+
+<%
+current = nil
+finished = false
+first_day = @month.to_date
+%>
+<% 6.times do |i| %>
+  <div class="row g-3">
+    <% 7.times do |j| %>
+      <div class="col mb-3">
+        <% 
+        current = first_day if current.nil? && j == first_day.cwday && !finished
+        if current.present?
+          events = @month.events_for(current)
+          %>
+          <div class="<%= osuny_card_classes %>">
+            <div class="card-body">
+              <%= current.day %>
+            </div>
+            <div class="card-footer text-end small text-muted">
+              <%= events.count %>
+            </div>
+          </div>
+          <%
+          current += 1.day
+          if current.month != first_day.month
+            current = nil
+            finished = true
+          end
+          %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<table class="table">
+  <%
+  @month.days.each do |day| 
+    events = @month.events_for(day)
+    %>
+      <tr>
+        <td><%= day.day %></td>
+        <td><%= events.count %></td>
+      </tr>
+  <% end %>
+</table>
+
+<%= render 'admin/communication/websites/agenda/events/list', events: @month.events %>

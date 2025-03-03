@@ -1,0 +1,22 @@
+<% content_for :title, Communication::Website::Agenda::Year.model_name.human(count: 2) %>
+
+<div class="row g-3">
+  <% @years.each do |year| %>
+      <div class="col-6 col-lg-2">
+        <div class="<%= osuny_card_classes %>">
+          <div class="osuny__thumbnail">
+            <span class="osuny__thumbnail__initials">
+              <%= year.last_two_digits %>
+            </span>
+          </div>
+          <div class="card-body">
+            <%= link_to year, [:admin, year], class: 'stretched-link' %>
+          </div>
+          <div class="card-footer text-end small text-muted">
+            <%= year.events.count %>
+            <%= Communication::Website::Agenda::Event.model_name.human(count: year.events.count).downcase %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

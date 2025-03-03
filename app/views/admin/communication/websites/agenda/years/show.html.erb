@@ -1,0 +1,28 @@
+<% content_for :title, @year %>
+
+<div class="row g-3">
+  <% @year.months.each do |month| %>
+      <div class="col-6 col-lg-2">
+        <div class="<%= osuny_card_classes %>">
+          <div class="osuny__thumbnail">
+            <span class="osuny__thumbnail__initials">
+              <%= month.value %>
+            </span>
+          </div>
+          <div class="card-body">
+            <%= link_to month,
+                        admin_communication_website_agenda_year_month_path(
+                          website_id: month.website.id,
+                          year_id: month.year.id,
+                          id: month.id
+                        ),
+                        class: 'stretched-link' %>
+          </div>
+          <div class="card-footer text-end small text-muted">
+            <%= month.events.count %>
+            <%= Communication::Website::Agenda::Event.model_name.human(count: month.events.count).downcase %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

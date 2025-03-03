@@ -19,6 +19,16 @@ module Communication::Website::WithFeatureAgenda
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
+    has_many    :years,
+                class_name: 'Communication::Website::Agenda::Year',
+                foreign_key: :communication_website_id,
+                dependent: :destroy
+
+    has_many    :months,
+                class_name: 'Communication::Website::Agenda::Month',
+                foreign_key: :communication_website_id,
+                dependent: :destroy
+
     scope :with_feature_agenda, -> { where(feature_agenda: true) }
   end
 

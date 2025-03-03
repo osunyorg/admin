@@ -349,6 +349,12 @@ fr:
       communication/website/agenda/exhibition:
         one: Exposition
         other: Expositions
+      communication/website/agenda/month:
+        one: Mois
+        other: Mois
+      communication/website/agenda/year:
+        one: Année
+        other: Années
       communication/website/connection:
         one: Connexion
         other: Connexions

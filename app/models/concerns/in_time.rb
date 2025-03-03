@@ -23,6 +23,9 @@ module InTime
     before_validation :set_time_zone
     before_validation :set_to_day
 
+    after_save :create_year
+    after_touch :create_year
+
     validates :from_day, presence: true
     validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
   end
@@ -79,5 +82,13 @@ module InTime
     return if from_day != to_day
     return unless respond_to?(:from_hour) && respond_to?(:to_hour)
     errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
+  end
+
+  def create_year
+    Communication::Website::Agenda::Year.where(
+      university: university,
+      website: website,
+      value: from_day.year
+    ).first_or_create
   end
 end

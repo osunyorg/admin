@@ -85,6 +85,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
+  scope :in_year, -> (year) { where('extract(year from from_day) = ?', year) }
+  scope :in_month, -> (year, month) { where('extract(year from from_day) = ? and extract(month from from_day) = ?', year, month) }
+  scope :in_day, -> (day) { where(from_day: day) }
+
   def from_datetime
     time_with from_day, from_hour
   end
