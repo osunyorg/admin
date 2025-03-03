@@ -36,6 +36,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   belongs_to  :language
 
   delegate :to_s, :title, :subtitle, :summary, :contents_full_text, to: :event_l10n, allow_nil: true
+  delegate :best_bodyclass, to: :event
 
   scope :for_language, -> (language) { where(language: language) }
   scope :ordered, -> { order(:date) }
