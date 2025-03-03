@@ -27,6 +27,7 @@
 #
 class Communication::Website::Agenda::Event::Day < ApplicationRecord
   include AsDirectObject
+  include Permalinkable
   include WithUniversity
   include WithGitFiles
 
@@ -34,13 +35,16 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
               foreign_key: :communication_website_agenda_event_id
   belongs_to  :language
 
+  delegate :to_s, :title, :subtitle, :summary, :contents_full_text, to: :event_l10n, allow_nil: true
+
   scope :for_language, -> (language) { where(language: language) }
   scope :ordered, -> { order(:date) }
 
   def git_path(website)
     return if website.id != communication_website_id || # Wrong website, should never happen
               events.none? || # Nothing this day
-              event_l10n.nil? # Event not localized in this language
+              event_l10n.nil? # Event not localized in this language ||
+              !event_l10n.published # Event not published
     git_path_content_prefix(website) + git_path_relative
   end
 
@@ -66,5 +70,22 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
 
   def from_day
     date
+  end
+
+  protected
+
+  # Override from Permalinkable/Sluggable
+  def skip_slug_validation?
+    true # Slug is in event_l10n
+  end
+
+  # Override from Permalinkable/Sluggable
+  def set_slug
+    # Slug is in event_l10n
+  end
+
+  # Override from Permalinkable/Staticable
+  def hugo_slug_in_website(website)
+    event_l10n.try(:slug)
   end
 end

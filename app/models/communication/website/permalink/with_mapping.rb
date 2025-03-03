@@ -4,6 +4,7 @@ module Communication::Website::Permalink::WithMapping
   included do
     MAPPING = {
       "Administration::Location::Localization" => Communication::Website::Permalink::Location,
+      "Communication::Website::Agenda::Event::Day" => Communication::Website::Permalink::Agenda::Event::Day,
       "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
       "Communication::Website::Agenda::Exhibition::Localization" => Communication::Website::Permalink::Agenda::Exhibition,
       "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
