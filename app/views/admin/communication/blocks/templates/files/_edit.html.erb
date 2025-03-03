@@ -15,7 +15,7 @@
       <div class="card draggable-item dragHandle m-0">
         <div class="card-body d-flex align-items-center">
           <i class="<%= Icon::MOVE %> handle m-2"></i>
-          <p class="mb-0">{{element.title }}</p>
+          <p class="mb-0">{{ element.title }}</p>
           <a  class="btn btn-sm text-danger ms-auto"
               v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
               title="<%= t '.remove_file' %>">
