@@ -16,7 +16,7 @@ class Communication::Block::Template::Program < Communication::Block::Template::
       program = element.program
       next if program.nil?
       l10n = program.localization_for(about.language)
-      next if l10n.draft?
+      next if l1On.nil? || l10n.draft?
       element.program
     }.compact
   end
