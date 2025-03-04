@@ -85,6 +85,6 @@ module InTime
   end
 
   def connect_to_year_and_month
-    Communication::Website::Agenda::Month.connect(self)
+    Communication::Website::Agenda::Period::Day.connect(self)
   end
 end

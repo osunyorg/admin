@@ -18,13 +18,11 @@ months:
   - number: "<%= month.value %>"
     name: "<%= month.to_month_name %>"
     days:
-<%
-month.days.each do |day| 
-  events = month.events_for(day)
-  %>
+<% month.days.each do |day| %>
       - day: <%= day.iso8601 %>
+        label: "<%= day.to_s %>"
         cwday: <%= day.cwday %>
-        events: <%= events.count %>
+        events: <%= day.events.count %>
 <% end %>
 <% end %>
 ---

@@ -2,17 +2,14 @@
 
 <%= render 'admin/communication/websites/agenda/periods/months/calendar', month: @l10n %>
 
-<%
-@l10n.days.each do |day| 
-  events = @l10n.events_for(day)
-  %>
-  <% if events.any? %>
+<% @l10n.days.each do |day| %>
+  <% if day.events.any? %>
     <div id="day-<%= day.day %>" class="row mt-5 pt-5">
       <div class="col-lg-4">
-      <h2 class="h4 mb-2"><%= l(day, format: '%A %d %B %Y').titleize %></h2>
+      <h2 class="h4 mb-2"><%= day.to_full_name %></h2>
       </div>
       <div class="col-lg-8">
-        <%= render 'admin/communication/websites/agenda/events/list', events: events %>
+        <%= render 'admin/communication/websites/agenda/events/list', events: day.events %>
       </div>
     </section>
   <% end %>

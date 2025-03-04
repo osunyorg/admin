@@ -54,7 +54,7 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   end
 
   def events
-    website.events.in_year(value)
+    @events ||= website.events.in_year(value)
   end
 
   # 25

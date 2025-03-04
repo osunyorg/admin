@@ -13,7 +13,7 @@
 <%
 current = nil
 finished = false
-first_day_of_month = month.to_date
+first_day_of_month = month.days.first
 %>
 <%
 # More than enough months
@@ -31,9 +31,9 @@ first_day_of_month = month.to_date
       <div class="col mb-3">
         <% 
         if current.present?
-          events = month.events_for(current)
+          events = current.events
           %>
-          <div class="position-relative p-2 rounded" style="<% if events.any? %>background: white; <% end %>min-height: 60px;">
+          <div class="position-relative p-2 rounded" style="<% if events.any? %>background: white; <% end %>min-height: 65px;">
             <p class="small text-muted m-0">
               <% if events.any? %><a href="#day-<%= current.day %>" class="stretched-link"><% end %>
               <%= current.day %>
@@ -46,11 +46,8 @@ first_day_of_month = month.to_date
               <% end %>
             </p>
             <%
-            current += 1.day
-            if current.month != first_day_of_month.month
-              current = nil
-              finished = true
-            end
+            current = current.next
+            finished = current.nil?
             %>
           </div>
           <hr>

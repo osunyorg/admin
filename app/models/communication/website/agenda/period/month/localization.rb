@@ -63,19 +63,15 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
   end
 
   def days
-    about.days
+    about.days.map { |day| day.localized_in(language) }
   end
 
   def events
-    website.events.in_month(year.value, value)
-  end
-
-  def events_for(day)
-    website.events.in_day(day)
+    @events ||= website.events.in_month(year.value, value)
   end
 
   # 02, 11
   def to_s
-    about.to_date.strftime '%m'
+    I18n.localize(to_date, locale: language.iso_code, format: '%m')
   end
 end

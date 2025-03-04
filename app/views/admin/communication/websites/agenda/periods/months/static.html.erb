@@ -2,7 +2,6 @@
 month = @l10n.about
 language = @l10n.language
 %>---
-
 <%= render 'admin/application/static/core',
             about: @l10n,
             skip_date: true,
@@ -15,11 +14,15 @@ language = @l10n.language
 <%= render 'admin/application/l10n/static', about: @l10n %>
 days:
 <%
-month.days.each do |day| 
-  events = month.events_for(day)
+@l10n.days.each do |day| 
+  events = day.events
   next if events.none?
   %>
-  - day: <%= day.iso8601 %>
+  - day:
+      date: <%= day.iso8601 %>
+      labels: 
+        day: "<%= day.to_s %>"
+        full: "<%= day.to_full_name %>"
     events:
       count: <%= events.count %>
 <%= render 'admin/application/static/hugo/collection',

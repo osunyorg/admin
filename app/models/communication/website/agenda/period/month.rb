@@ -28,39 +28,23 @@ class Communication::Website::Agenda::Period::Month < ApplicationRecord
   include WithUniversity
 
   belongs_to :year
+  has_many :days
 
   scope :ordered, -> { order(value: :asc) }
   default_scope { ordered }
 
+  after_save :create_days
   after_save :create_all_localizations
   after_touch :create_all_localizations
 
-  def self.table_name
-    'communication_website_agenda_period_months'
-  end
-
-  # Entry point for everything
   def self.connect(object)
     year = Communication::Website::Agenda::Period::Year.connect(object)
-    month = Communication::Website::Agenda::Month.where(
+    Communication::Website::Agenda::Period::Month.where(
       university: object.university,
       website: object.website,
       year: year,
       value: object.from_day.month
     ).first_or_create
-    month
-  end
-
-  def days
-    unless @days
-      @days = []
-      current_date = to_date.dup
-      while current_date.month == to_date.month
-        @days << current_date
-        current_date += 1.day
-      end
-    end
-    @days
   end
 
   def to_date
@@ -68,6 +52,20 @@ class Communication::Website::Agenda::Period::Month < ApplicationRecord
   end
 
   protected
+  
+  def create_days
+    current = to_date.dup
+    while current.month == to_date.month
+      Communication::Website::Agenda::Period::Day.where(
+        university: university,
+        website: website,
+        year: year,
+        month: self,
+        value: current.day
+      ).first_or_create
+      current += 1.day
+    end
+  end
 
   def create_all_localizations
     available_languages.each do |language|
