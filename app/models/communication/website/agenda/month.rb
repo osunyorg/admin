@@ -24,12 +24,28 @@
 #
 class Communication::Website::Agenda::Month < ApplicationRecord
   include AsDirectObject
+  include Localizable
   include WithUniversity
 
   belongs_to :year
 
   scope :ordered, -> { order(value: :asc) }
   default_scope { ordered }
+
+  after_save :create_all_localizations
+  after_touch :create_all_localizations
+
+  # Entry point for everything
+  def self.connect(object)
+    year = Communication::Website::Agenda::Year.connect(object)
+    month = Communication::Website::Agenda::Month.where(
+      university: object.university,
+      website: object.website,
+      year: year,
+      value: object.from_day.month
+    ).first_or_create
+    month
+  end
 
   def events
     website.events.in_month(year.value, value)
@@ -55,7 +71,15 @@ class Communication::Website::Agenda::Month < ApplicationRecord
     @to_date ||= Date.new(year.value, value, 1)
   end
 
-  def to_s
-    I18n.t("date.month_names")[value].titleize
+  protected
+
+  def create_all_localizations
+    available_languages.each do |language|
+      localizations.where(
+        university: university,
+        website: website,
+        language: language
+      ).first_or_create
+    end
   end
 end

@@ -21,37 +21,60 @@
 #
 class Communication::Website::Agenda::Year < ApplicationRecord
   include AsDirectObject
+  include Localizable
   include WithUniversity
 
-  after_create :create_months
-  
+  # TODO optimize
+  after_save :create_months
+  after_save :create_all_localizations
+  after_touch :create_all_localizations
+
   has_many :months
 
   scope :ordered, -> { order(value: :desc) }
   default_scope { ordered }
 
+  def self.connect(object)
+    year = Communication::Website::Agenda::Year.where(
+      university: object.university,
+      website: object.website,
+      value: object.from_day.year
+    ).first_or_create
+    languages = object.website.languages
+    languages.each do |language|
+      year.localizations.where(
+        university: object.university,
+        website: object.website,
+        language: language
+      ).first_or_create
+    end
+    year
+  end
+
   def events
     website.events.in_year(value)
-  end
-
-  def last_two_digits
-    to_s.last(2)
-  end
-
-  def to_s
-    "#{value}"
   end
 
   protected
   
   def create_months
     12.times { |index|
-      Communication::Website::Agenda::Month.create(
+      month = Communication::Website::Agenda::Month.where(
         university: university,
         website: website,
         year: self,
         value: index + 1
-      )
+      ).first_or_create
     }
+  end
+
+  def create_all_localizations
+    available_languages.each do |language|
+      localizations.where(
+        university: university,
+        website: website,
+        language: language
+      ).first_or_create
+    end
   end
 end

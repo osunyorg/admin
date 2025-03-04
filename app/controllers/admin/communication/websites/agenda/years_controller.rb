@@ -3,6 +3,7 @@ class Admin::Communication::Websites::Agenda::YearsController < Admin::Communica
                               through: :website
 
   include Admin::HasStaticAction
+  include Admin::Localizable
 
   def index
     breadcrumb
@@ -10,6 +11,7 @@ class Admin::Communication::Websites::Agenda::YearsController < Admin::Communica
   
   def show
     breadcrumb
+    add_breadcrumb @l10n
   end
 
   protected
@@ -18,6 +20,5 @@ class Admin::Communication::Websites::Agenda::YearsController < Admin::Communica
     super
     add_breadcrumb  Communication::Website::Agenda::Year.model_name.human(count: 2),
                     admin_communication_website_agenda_years_path
-    breadcrumb_for @year
   end
 end

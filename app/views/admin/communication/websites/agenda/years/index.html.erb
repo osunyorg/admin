@@ -1,16 +1,19 @@
-<% content_for :title, Communication::Website::Agenda::Year.model_name.human(count: 2) %>
+<% content_for :title, @l10n %>
 
 <div class="row g-3">
-  <% @years.each do |year| %>
+  <%
+  @years.each do |year|
+    year_l10n = year.localization_for(current_language)
+    %>
       <div class="col-6 col-lg-2">
         <div class="<%= osuny_card_classes %>">
           <div class="osuny__thumbnail">
             <span class="osuny__thumbnail__initials">
-              <%= year.last_two_digits %>
+              <%= year_l10n.last_two_digits %>
             </span>
           </div>
           <div class="card-body">
-            <%= link_to year, [:admin, year], class: 'stretched-link' %>
+            <%= link_to year_l10n, [:admin, year], class: 'stretched-link' %>
           </div>
           <div class="card-footer text-end small text-muted">
             <%= year.events.count %>

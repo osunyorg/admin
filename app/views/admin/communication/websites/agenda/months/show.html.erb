@@ -1,50 +1,77 @@
-<% content_for :title, @month %>
+<% content_for :title, @l10n.to_month_name %>
 
+<div class="row mt-5 g-3">
+  <%
+  7.times do |index|
+    day_index = (index + 1) % 7
+    %>
+    <div class="col mb-3">
+      <%= I18n.t("date.day_names")[day_index].titleize %>
+    </div>
+  <% end %>
+</div>
 <%
 current = nil
 finished = false
-first_day = @month.to_date
+first_day_of_month = @month.to_date
 %>
-<% 6.times do |i| %>
+<% 6.times do %>
   <div class="row g-3">
-    <% 7.times do |j| %>
+    <%
+    7.times do |index|
+      # Week starting on monday
+      # https://apidock.com/ruby/v2_2_9/Date/cwday
+      cwday = index + 1
+      current = first_day_of_month if current.nil? && cwday == first_day_of_month.cwday && !finished
+      %>
       <div class="col mb-3">
         <% 
-        current = first_day if current.nil? && j == first_day.cwday && !finished
         if current.present?
           events = @month.events_for(current)
           %>
-          <div class="<%= osuny_card_classes %>">
-            <div class="card-body">
+          <div class="position-relative p-2 rounded"<% if events.any? %> style="background: white"<% end %>>
+            <p class="small text-muted m-0">
+              <% if events.any? %><a href="#day-<%= current.day %>" class="stretched-link"><% end %>
               <%= current.day %>
-            </div>
-            <div class="card-footer text-end small text-muted">
-              <%= events.count %>
-            </div>
+              <% if events.any? %></a><% end %>
+            </p>
+            <p class="m-0">
+              <% if events.any? %>
+                <%= osuny_published true %>
+                <%= events.count %>
+              <% end %>
+            </p>
+            <%
+            current += 1.day
+            if current.month != first_day_of_month.month
+              current = nil
+              finished = true
+            end
+            %>
           </div>
-          <%
-          current += 1.day
-          if current.month != first_day.month
-            current = nil
-            finished = true
-          end
-          %>
         <% end %>
       </div>
     <% end %>
   </div>
 <% end %>
 
-<table class="table">
-  <%
-  @month.days.each do |day| 
-    events = @month.events_for(day)
-    %>
-      <tr>
-        <td><%= day.day %></td>
-        <td><%= events.count %></td>
-      </tr>
+<%
+@month.days.each do |day| 
+  events = @month.events_for(day)
+  %>
+  <% if events.any? %>
+    <div id="day-<%= day.day %>" class="row mt-5 pt-5">
+      <div class="col-lg-4">
+      <h2 class="h4 mb-2"><%= l(day, format: '%A %d %B %Y').titleize %></h2>
+      </div>
+      <div class="col-lg-8">
+        <%= render 'admin/communication/websites/agenda/events/list', events: events %>
+      </div>
+    </section>
   <% end %>
-</table>
+<% end %>
 
-<%= render 'admin/communication/websites/agenda/events/list', events: @month.events %>
+<% content_for :action_bar_left do %>
+  <%= static_link static_admin_communication_website_agenda_year_month_path(year_id: @month.year.id, id: @month.id) %>
+<% end %>
+

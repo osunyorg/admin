@@ -111,7 +111,11 @@ namespace :communication do
         member do
           get :static
         end
-        resources :months, only: :show, controller: '/admin/communication/websites/agenda/months'
+        resources :months, only: :show, controller: '/admin/communication/websites/agenda/months' do
+          member do
+            get :static
+          end
+        end
       end
       root to: '/admin/communication/websites/agenda/events#index'
     end

@@ -8,6 +8,8 @@ module Communication::Website::Permalink::WithMapping
       "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
       "Communication::Website::Agenda::Exhibition::Localization" => Communication::Website::Permalink::Agenda::Exhibition,
       "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
+      "Communication::Website::Agenda::Month::Localization" => Communication::Website::Permalink::Agenda::Month,
+      "Communication::Website::Agenda::Year::Localization" => Communication::Website::Permalink::Agenda::Year,
       "Communication::Website::Page::Category::Localization" => Communication::Website::Permalink::Page::Category,
       "Communication::Website::Page::Localization" => Communication::Website::Permalink::Page,
       "Communication::Website::Portfolio::Project::Localization" => Communication::Website::Permalink::Portfolio::Project,
