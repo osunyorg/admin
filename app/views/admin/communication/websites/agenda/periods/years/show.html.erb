@@ -4,6 +4,7 @@
   <%
   @year.months.each do |month|
     month_l10n = month.localization_for(current_language)
+    events = month_l10n.events
     %>
       <div class="col-6 col-lg-2">
         <div class="<%= osuny_card_classes %>">
@@ -14,7 +15,7 @@
           </div>
           <div class="card-body">
             <%= link_to month_l10n.to_month_name,
-                        admin_communication_website_agenda_year_month_path(
+                        admin_communication_website_agenda_periods_year_month_path(
                           website_id: month.website.id,
                           year_id: month.year.id,
                           id: month.id
@@ -22,10 +23,14 @@
                         class: 'stretched-link' %>
           </div>
           <div class="card-footer text-end small text-muted">
-            <%= month.events.count %>
-            <%= Communication::Website::Agenda::Event.model_name.human(count: month.events.count).downcase %>
+            <%= events.count %>
+            <%= Communication::Website::Agenda::Event.model_name.human(count: events.count).downcase %>
           </div>
         </div>
       </div>
   <% end %>
 </div>
+
+<% content_for :action_bar_left do %>
+  <%= static_link static_admin_communication_website_agenda_periods_year_path(id: @year.id) %>
+<% end %>

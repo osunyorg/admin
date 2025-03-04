@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: communication_website_agenda_months
+# Table name: communication_website_agenda_period_months
 #
 #  id                       :uuid             not null, primary key
 #  value                    :integer
@@ -12,17 +12,17 @@
 #
 # Indexes
 #
-#  idx_on_communication_website_id_93f9d5408c                  (communication_website_id)
-#  index_communication_website_agenda_months_on_university_id  (university_id)
-#  index_communication_website_agenda_months_on_year_id        (year_id)
+#  idx_on_communication_website_id_49eaf81807                   (communication_website_id)
+#  idx_on_university_id_f680736f97                              (university_id)
+#  index_communication_website_agenda_period_months_on_year_id  (year_id)
 #
 # Foreign Keys
 #
 #  fk_rails_912208071c  (university_id => universities.id)
 #  fk_rails_b9b2c3a105  (communication_website_id => communication_websites.id)
-#  fk_rails_d1531afc39  (year_id => communication_website_agenda_years.id)
+#  fk_rails_d1531afc39  (year_id => communication_website_agenda_period_years.id)
 #
-class Communication::Website::Agenda::Month < ApplicationRecord
+class Communication::Website::Agenda::Period::Month < ApplicationRecord
   include AsDirectObject
   include Localizable
   include WithUniversity
@@ -35,9 +35,13 @@ class Communication::Website::Agenda::Month < ApplicationRecord
   after_save :create_all_localizations
   after_touch :create_all_localizations
 
+  def self.table_name
+    'communication_website_agenda_period_months'
+  end
+
   # Entry point for everything
   def self.connect(object)
-    year = Communication::Website::Agenda::Year.connect(object)
+    year = Communication::Website::Agenda::Period::Year.connect(object)
     month = Communication::Website::Agenda::Month.where(
       university: object.university,
       website: object.website,
@@ -45,10 +49,6 @@ class Communication::Website::Agenda::Month < ApplicationRecord
       value: object.from_day.month
     ).first_or_create
     month
-  end
-
-  def events
-    website.events.in_month(year.value, value)
   end
 
   def days
@@ -61,10 +61,6 @@ class Communication::Website::Agenda::Month < ApplicationRecord
       end
     end
     @days
-  end
-
-  def events_for(day)
-    website.events.in_day(day)
   end
 
   def to_date

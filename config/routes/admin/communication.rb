@@ -107,13 +107,15 @@ namespace :communication do
           get :static
         end
       end
-      resources :years, only: [:index, :show], controller: '/admin/communication/websites/agenda/years' do        
-        member do
-          get :static
-        end
-        resources :months, only: :show, controller: '/admin/communication/websites/agenda/months' do
+      namespace :periods, path: '' do
+        resources :years, only: [:index, :show], controller: '/admin/communication/websites/agenda/periods/years' do        
           member do
             get :static
+          end
+          resources :months, only: :show, controller: '/admin/communication/websites/agenda/periods/months' do
+            member do
+              get :static
+            end
           end
         end
       end

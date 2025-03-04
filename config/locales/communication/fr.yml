@@ -349,10 +349,10 @@ fr:
       communication/website/agenda/exhibition:
         one: Exposition
         other: Expositions
-      communication/website/agenda/month:
+      communication/website/agenda/period/month:
         one: Mois
         other: Mois
-      communication/website/agenda/year:
+      communication/website/agenda/period/year:
         one: Année
         other: Années
       communication/website/connection:

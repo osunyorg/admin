@@ -1,0 +1,24 @@
+<% content_for :title, @l10n.to_month_name %>
+
+<%= render 'admin/communication/websites/agenda/periods/months/calendar', month: @l10n %>
+
+<%
+@l10n.days.each do |day| 
+  events = @l10n.events_for(day)
+  %>
+  <% if events.any? %>
+    <div id="day-<%= day.day %>" class="row mt-5 pt-5">
+      <div class="col-lg-4">
+      <h2 class="h4 mb-2"><%= l(day, format: '%A %d %B %Y').titleize %></h2>
+      </div>
+      <div class="col-lg-8">
+        <%= render 'admin/communication/websites/agenda/events/list', events: events %>
+      </div>
+    </section>
+  <% end %>
+<% end %>
+
+<% content_for :action_bar_left do %>
+  <%= static_link static_admin_communication_website_agenda_periods_year_month_path(year_id: @month.year.id, id: @month.id) %>
+<% end %>
+

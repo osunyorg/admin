@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: communication_website_agenda_month_localizations
+# Table name: communication_website_agenda_period_year_localizations
 #
 #  id                       :uuid             not null, primary key
 #  slug                     :string
@@ -13,18 +13,18 @@
 #
 # Indexes
 #
-#  idx_on_about_id_1633c4ffee                  (about_id)
-#  idx_on_communication_website_id_8d27450ae8  (communication_website_id)
-#  idx_on_language_id_3066e03f18               (language_id)
-#  idx_on_university_id_3c128c5f75             (university_id)
+#  idx_on_about_id_9d0e59880a                  (about_id)
+#  idx_on_communication_website_id_ccc9a47ea5  (communication_website_id)
+#  idx_on_language_id_bfc0e09bd9               (language_id)
+#  idx_on_university_id_22e1603ccb             (university_id)
 #
 # Foreign Keys
 #
-#  fk_rails_13625949f9  (language_id => languages.id)
-#  fk_rails_ae31731b91  (about_id => communication_website_agenda_months.id)
-#  fk_rails_f7d0b8f0e9  (university_id => universities.id)
+#  fk_rails_1ef1a9b99c  (about_id => communication_website_agenda_period_years.id)
+#  fk_rails_9c20f2a5c9  (university_id => universities.id)
+#  fk_rails_e8dfb6948e  (language_id => languages.id)
 #
-class Communication::Website::Agenda::Month::Localization < ApplicationRecord
+class Communication::Website::Agenda::Period::Year::Localization < ApplicationRecord
   include AsLocalization
   include Permalinkable
   include WithGitFiles
@@ -34,33 +34,36 @@ class Communication::Website::Agenda::Month::Localization < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
+  delegate :value, to: :about
+
   def git_path(website)
     return unless website.id == communication_website_id
     git_path_content_prefix(website) + git_path_relative
   end
 
   def git_path_relative
-    "events/#{year.slug}/#{slug}/_index.html"
+    "events/#{slug}/_index.html"
   end
 
   def template_static
-    "admin/communication/websites/agenda/months/static"
+    "admin/communication/websites/agenda/periods/years/static"
   end
 
-  def to_month_name
-    I18n.t("date.month_names", locale: language.iso_code)[about.value].titleize
+  def months
+    about.months.map { |month| month.localized_in(language) }
   end
 
-  def to_month_and_year
-    "#{to_month_name} #{year}"
+  def events
+    website.events.in_year(value)
   end
 
-  def year
-    about.year.localized_in(language)
+  # 25
+  def last_two_digits
+    to_s.last(2)
   end
 
-  # 02, 11
+  # 2025
   def to_s
-    about.to_date.strftime '%m'
+    "#{about.value}"
   end
 end

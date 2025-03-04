@@ -4,6 +4,7 @@
   <%
   @years.each do |year|
     year_l10n = year.localization_for(current_language)
+    events = year_l10n.events
     %>
       <div class="col-6 col-lg-2">
         <div class="<%= osuny_card_classes %>">
@@ -13,11 +14,13 @@
             </span>
           </div>
           <div class="card-body">
-            <%= link_to year_l10n, [:admin, year], class: 'stretched-link' %>
+            <%= link_to year_l10n,
+                        admin_communication_website_agenda_periods_year_path(year),
+                        class: 'stretched-link' %>
           </div>
           <div class="card-footer text-end small text-muted">
-            <%= year.events.count %>
-            <%= Communication::Website::Agenda::Event.model_name.human(count: year.events.count).downcase %>
+            <%= events.count %>
+            <%= Communication::Website::Agenda::Event.model_name.human(count: events.count).downcase %>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: communication_website_agenda_years
+# Table name: communication_website_agenda_period_years
 #
 #  id                       :uuid             not null, primary key
 #  value                    :integer
@@ -11,15 +11,15 @@
 #
 # Indexes
 #
-#  idx_on_communication_website_id_5597ee5d02                 (communication_website_id)
-#  index_communication_website_agenda_years_on_university_id  (university_id)
+#  idx_on_communication_website_id_dd738e97d3  (communication_website_id)
+#  idx_on_university_id_2c377eb7c0             (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_3b2775135a  (university_id => universities.id)
 #  fk_rails_67a8039d71  (communication_website_id => communication_websites.id)
 #
-class Communication::Website::Agenda::Year < ApplicationRecord
+class Communication::Website::Agenda::Period::Year < ApplicationRecord
   include AsDirectObject
   include Localizable
   include WithUniversity
@@ -34,8 +34,12 @@ class Communication::Website::Agenda::Year < ApplicationRecord
   scope :ordered, -> { order(value: :desc) }
   default_scope { ordered }
 
+  def self.table_name
+    'communication_website_agenda_period_years'
+  end
+
   def self.connect(object)
-    year = Communication::Website::Agenda::Year.where(
+    year = Communication::Website::Agenda::Period::Year.where(
       university: object.university,
       website: object.website,
       value: object.from_day.year
@@ -49,10 +53,6 @@ class Communication::Website::Agenda::Year < ApplicationRecord
       ).first_or_create
     end
     year
-  end
-
-  def events
-    website.events.in_year(value)
   end
 
   protected

@@ -1,4 +1,4 @@
-class Communication::Website::Permalink::Agenda::Month < Communication::Website::Permalink
+class Communication::Website::Permalink::Agenda::Period::Month < Communication::Website::Permalink
   def self.required_in_config?(website)
     website.feature_agenda
   end

@@ -1,35 +1,39 @@
-<% content_for :title, @l10n.to_month_name %>
-
 <div class="row mt-5 g-3">
   <%
+  # Show days, Monday to Sunday
   7.times do |index|
     day_index = (index + 1) % 7
     %>
     <div class="col mb-3">
       <%= I18n.t("date.day_names")[day_index].titleize %>
+      <hr>
     </div>
   <% end %>
 </div>
 <%
 current = nil
 finished = false
-first_day_of_month = @month.to_date
+first_day_of_month = month.to_date
 %>
-<% 6.times do %>
+<%
+# More than enough months
+6.times do %>
   <div class="row g-3">
     <%
+    # 7 days per week
     7.times do |index|
       # Week starting on monday
       # https://apidock.com/ruby/v2_2_9/Date/cwday
       cwday = index + 1
+      # Start at the proper day
       current = first_day_of_month if current.nil? && cwday == first_day_of_month.cwday && !finished
       %>
       <div class="col mb-3">
         <% 
         if current.present?
-          events = @month.events_for(current)
+          events = month.events_for(current)
           %>
-          <div class="position-relative p-2 rounded"<% if events.any? %> style="background: white"<% end %>>
+          <div class="position-relative p-2 rounded" style="<% if events.any? %>background: white; <% end %>min-height: 60px;">
             <p class="small text-muted m-0">
               <% if events.any? %><a href="#day-<%= current.day %>" class="stretched-link"><% end %>
               <%= current.day %>
@@ -49,29 +53,9 @@ first_day_of_month = @month.to_date
             end
             %>
           </div>
+          <hr>
         <% end %>
       </div>
     <% end %>
   </div>
 <% end %>
-
-<%
-@month.days.each do |day| 
-  events = @month.events_for(day)
-  %>
-  <% if events.any? %>
-    <div id="day-<%= day.day %>" class="row mt-5 pt-5">
-      <div class="col-lg-4">
-      <h2 class="h4 mb-2"><%= l(day, format: '%A %d %B %Y').titleize %></h2>
-      </div>
-      <div class="col-lg-8">
-        <%= render 'admin/communication/websites/agenda/events/list', events: events %>
-      </div>
-    </section>
-  <% end %>
-<% end %>
-
-<% content_for :action_bar_left do %>
-  <%= static_link static_admin_communication_website_agenda_year_month_path(year_id: @month.year.id, id: @month.id) %>
-<% end %>
-

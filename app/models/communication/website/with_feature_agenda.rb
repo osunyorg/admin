@@ -19,15 +19,17 @@ module Communication::Website::WithFeatureAgenda
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
-    has_many    :years,
-                class_name: 'Communication::Website::Agenda::Year',
+    has_many    :agenda_period_years,
+                class_name: 'Communication::Website::Agenda::Period::Year',
                 foreign_key: :communication_website_id,
                 dependent: :destroy
+    alias       :agenda_years :agenda_period_years
 
-    has_many    :months,
-                class_name: 'Communication::Website::Agenda::Month',
+    has_many    :agenda_period_months,
+                class_name: 'Communication::Website::Agenda::Period::Month',
                 foreign_key: :communication_website_id,
                 dependent: :destroy
+    alias       :agenda_months :agenda_period_months
 
     scope :with_feature_agenda, -> { where(feature_agenda: true) }
   end
