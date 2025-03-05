@@ -1,4 +1,4 @@
-module InTime
+module Communication::Website::Agenda::Period::InPeriod
   extend ActiveSupport::Concern
 
   STATUS_FUTURE = 'future'

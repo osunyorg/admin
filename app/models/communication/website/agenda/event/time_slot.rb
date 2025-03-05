@@ -25,7 +25,7 @@
 #
 class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include AsDirectObject
-  include InTime
+  include Communication::Website::Agenda::Period::InPeriod
   include Localizable
   include WithUniversity
 
