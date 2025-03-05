@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_04_145529) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_05_130722) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -672,6 +672,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_04_145529) do
     t.uuid "month_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_54db819007"
     t.index ["month_id"], name: "index_communication_website_agenda_period_days_on_month_id"
     t.index ["university_id"], name: "idx_on_university_id_a0967d0da6"
@@ -686,6 +687,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_04_145529) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "events_count", default: 0
     t.index ["about_id"], name: "idx_on_about_id_e3d3e69fcb"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_2202f6cc51"
     t.index ["language_id"], name: "idx_on_language_id_8b9b18a131"
@@ -712,6 +714,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_04_145529) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "events_count", default: 0
     t.index ["about_id"], name: "idx_on_about_id_9d0e59880a"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_ccc9a47ea5"
     t.index ["language_id"], name: "idx_on_language_id_bfc0e09bd9"

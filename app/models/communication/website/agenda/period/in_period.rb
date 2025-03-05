@@ -23,8 +23,8 @@ module Communication::Website::Agenda::Period::InPeriod
     before_validation :set_time_zone
     before_validation :set_to_day
 
-    after_save :connect_to_year_and_month
-    after_touch :connect_to_year_and_month
+    before_save :touch_periods
+    after_save :create_periods
 
     validates :from_day, presence: true
     validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
@@ -84,7 +84,37 @@ module Communication::Website::Agenda::Period::InPeriod
     errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
   end
 
-  def connect_to_year_and_month
-    Communication::Website::Agenda::Period::Day.connect(self)
+  def touch_periods
+    # Periods might not exist yet!
+    # If so, no problem, they will be properly initialized by create_periods
+    return unless from_day_changed?
+    before, after = from_day_change
+    touch_day(before)
+    touch_day(after)
+    # Get year
+    years = [before.year, after.year].uniq
+    years.each do |year|
+      save_and_sync_year(year)
+    end
+  end
+
+  def touch_day(date)
+    Communication::Website::Agenda::Period::Day.find_by(
+      university: university,
+      website: website,
+      date: date
+    ).touch
+  end
+
+  def save_and_sync_year(year_value)
+    Communication::Website::Agenda::Period::Year.find_by(
+      university: university,
+      website: website,
+      value: year_value
+    ).save_and_sync
+  end
+
+  def create_periods
+    Communication::Website::Agenda::CreatePeriodsJob.perform_later(self)
   end
 end

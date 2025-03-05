@@ -3,6 +3,7 @@
 # Table name: communication_website_agenda_period_days
 #
 #  id                       :uuid             not null, primary key
+#  date                     :date
 #  value                    :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -27,32 +28,12 @@
 #
 class Communication::Website::Agenda::Period::Day < ApplicationRecord
   include AsDirectObject
+  include Communication::Website::Agenda::Period::BasePeriod
   include Localizable
   include WithUniversity
 
   belongs_to :year
   belongs_to :month
-
-  scope :ordered, -> { order(value: :asc) }
-  default_scope { ordered }
-
-  after_save :create_all_localizations
-  after_touch :create_all_localizations
-
-  def self.connect(object)
-    month = Communication::Website::Agenda::Period::Month.connect(object)
-    Communication::Website::Agenda::Period::Day.where(
-      university: object.university,
-      website: object.website,
-      year: month.year,
-      month: month,
-      value: object.from_day.day
-    ).first_or_create
-  end
-
-  def to_date
-    @to_date ||= Date.new(year.value, month.value, value)
-  end
 
   def next
     Communication::Website::Agenda::Period::Day.find_by(
@@ -62,17 +43,5 @@ class Communication::Website::Agenda::Period::Day < ApplicationRecord
       month: month,
       value: value + 1
     )
-  end
-
-  protected
-
-  def create_all_localizations
-    available_languages.each do |language|
-      localizations.where(
-        university: university,
-        website: website,
-        language: language
-      ).first_or_create
-    end
   end
 end

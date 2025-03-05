@@ -23,8 +23,8 @@
                         class: 'stretched-link' %>
           </div>
           <div class="card-footer text-end small text-muted">
-            <%= events.count %>
-            <%= Communication::Website::Agenda::Event.model_name.human(count: events.count).downcase %>
+            <%= month_l10n.events_count %>
+            <%= Communication::Website::Agenda::Event.model_name.human(count: month_l10n.events_count).downcase %>
           </div>
         </div>
       </div>

@@ -21,46 +21,51 @@
 #
 class Communication::Website::Agenda::Period::Year < ApplicationRecord
   include AsDirectObject
+  include Communication::Website::Agenda::Period::BasePeriod
   include Localizable
   include WithUniversity
 
-  after_save :create_months
-  after_save :create_all_localizations
-  after_touch :create_all_localizations
+  after_create :create_months
 
   has_many :months
+  has_many :days
 
   scope :ordered, -> { order(value: :desc) }
-  default_scope { ordered }
 
-  def self.connect(object)
-    Communication::Website::Agenda::Period::Year.where(
-      university: object.university,
-      website: object.website,
-      value: object.from_day.year
+  def self.exists_for?(website, value)
+    exists?(
+      university: website.university, 
+      website: website, 
+      value: value
+    )
+  end
+
+  def self.create_for(website, value)
+    return if exists_for?(website, value)
+    where(
+      university: website.university, 
+      website: website, 
+      value: value
     ).first_or_create
+  end
+
+  def dependencies
+    [website.config_default_content_security_policy] +
+    localizations.in_languages(website.active_language_ids) +
+    months
   end
 
   protected
   
   def create_months
-    12.times { |index|
+    12.times do |index|
       month = Communication::Website::Agenda::Period::Month.where(
         university: university,
         website: website,
         year: self,
         value: index + 1
-      ).first_or_create
-    }
-  end
-
-  def create_all_localizations
-    available_languages.each do |language|
-      localizations.where(
-        university: university,
-        website: website,
-        language: language
-      ).first_or_create
+      ).create
+      puts "Created month #{month}"
     end
   end
 end

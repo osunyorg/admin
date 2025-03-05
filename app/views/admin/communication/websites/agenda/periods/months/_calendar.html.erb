@@ -29,20 +29,21 @@ first_day_of_month = month.days.first
       current = first_day_of_month if current.nil? && cwday == first_day_of_month.cwday && !finished
       %>
       <div class="col mb-3">
-        <% 
+        <%
+        # Skip days not in the month (before first day of month)
         if current.present?
           events = current.events
           %>
-          <div class="position-relative p-2 rounded" style="<% if events.any? %>background: white; <% end %>min-height: 65px;">
+          <div class="position-relative p-2 rounded" style="<% if current.events? %>background: white; <% end %>min-height: 65px;">
             <p class="small text-muted m-0">
-              <% if events.any? %><a href="#day-<%= current.day %>" class="stretched-link"><% end %>
+              <% if current.events? %><a href="#day-<%= current.day %>" class="stretched-link"><% end %>
               <%= current.day %>
-              <% if events.any? %></a><% end %>
+              <% if current.events? %></a><% end %>
             </p>
             <p class="m-0">
-              <% if events.any? %>
+              <% if current.events? %>
                 <%= osuny_published true %>
-                <%= events.count %>
+                <%= current.events_count %>
               <% end %>
             </p>
             <%

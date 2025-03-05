@@ -3,6 +3,7 @@
 # Table name: communication_website_agenda_period_month_localizations
 #
 #  id                       :uuid             not null, primary key
+#  events_count             :integer          default(0)
 #  slug                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -26,16 +27,10 @@
 #
 class Communication::Website::Agenda::Period::Month::Localization < ApplicationRecord
   include AsLocalization
+  include Communication::Website::Agenda::Period::BaseLocalization
   include Permalinkable
   include WithGitFiles
   include WithUniversity
-
-  belongs_to :website,
-              class_name: 'Communication::Website',
-              foreign_key: :communication_website_id
-
-  delegate  :value, :to_date, 
-            to: :about
 
   def git_path(website)
     return unless website.id == communication_website_id
@@ -67,11 +62,11 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
   end
 
   def events
-    @events ||= website.events.in_month(year.value, value)
+    @events ||= website.events.on_month(year.value, value)
   end
 
   # 02, 11
   def to_s
-    I18n.localize(to_date, locale: language.iso_code, format: '%m')
+    I18n.localize(about.first_day, locale: language.iso_code, format: '%m')
   end
 end

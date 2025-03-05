@@ -28,20 +28,14 @@
 #
 class Communication::Website::Agenda::Period::Day::Localization < ApplicationRecord
   include AsLocalization
+  include Communication::Website::Agenda::Period::BaseLocalization
   include WithUniversity
 
-  belongs_to :website,
-              class_name: 'Communication::Website',
-              foreign_key: :communication_website_id
-
-  delegate  :value, :to_date, 
-            to: :about
-
-  delegate  :cwday, :day, :iso8601,
-            to: :to_date
+  delegate :date, to: :about
+  delegate :cwday, :day, :iso8601, to: :date
 
   def events
-    @events ||= website.events.in_day(to_date)
+    @events ||= website.events.on_day(date)
   end
 
   def next
@@ -49,10 +43,10 @@ class Communication::Website::Agenda::Period::Day::Localization < ApplicationRec
   end
 
   def to_full_name
-    I18n.localize(to_date, locale: language.iso_code, format: '%A %d %B %Y').humanize
+    I18n.localize(date, locale: language.iso_code, format: '%A %d %B %Y').humanize
   end
 
   def to_s
-    I18n.localize(to_date, locale: language.iso_code, format: '%A').humanize
+    I18n.localize(date, locale: language.iso_code, format: '%A').humanize
   end
 end
