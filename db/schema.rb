@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_05_130722) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_05_174306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -687,7 +687,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_05_130722) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "events_count", default: 0
     t.index ["about_id"], name: "idx_on_about_id_e3d3e69fcb"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_2202f6cc51"
     t.index ["language_id"], name: "idx_on_language_id_8b9b18a131"
@@ -714,7 +713,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_05_130722) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "events_count", default: 0
     t.index ["about_id"], name: "idx_on_about_id_9d0e59880a"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_ccc9a47ea5"
     t.index ["language_id"], name: "idx_on_language_id_bfc0e09bd9"

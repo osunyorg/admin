@@ -1,4 +1,4 @@
-module Communication::Website::Agenda::Period::BasePeriod
+module Communication::Website::Agenda::Period::Base
   extend ActiveSupport::Concern
 
   included do

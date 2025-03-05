@@ -28,7 +28,7 @@
 #
 class Communication::Website::Agenda::Period::Day < ApplicationRecord
   include AsDirectObject
-  include Communication::Website::Agenda::Period::BasePeriod
+  include Communication::Website::Agenda::Period::Base
   include Localizable
   include WithUniversity
 

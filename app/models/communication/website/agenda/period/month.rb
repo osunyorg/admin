@@ -24,7 +24,7 @@
 #
 class Communication::Website::Agenda::Period::Month < ApplicationRecord
   include AsDirectObject
-  include Communication::Website::Agenda::Period::BasePeriod
+  include Communication::Website::Agenda::Period::Base
   include Localizable
   include WithUniversity
 

@@ -28,12 +28,15 @@
 #
 class Communication::Website::Agenda::Period::Day::Localization < ApplicationRecord
   include AsLocalization
-  include Communication::Website::Agenda::Period::BaseLocalization
   include WithUniversity
 
-  after_commit :denormalize_events_count
+  belongs_to  :website,
+              class_name: 'Communication::Website',
+              foreign_key: :communication_website_id
 
-  delegate :date, to: :about
+  after_commit :denormalize_events_count
+  
+  delegate :value, :date, to: :about
   delegate :cwday, :day, :iso8601, to: :date
 
   def events
@@ -44,6 +47,10 @@ class Communication::Website::Agenda::Period::Day::Localization < ApplicationRec
 
   def time_slots
     @time_slots ||= website.time_slots.on_day(date)
+  end
+
+  def events?
+    events_count > 0
   end
 
   def next

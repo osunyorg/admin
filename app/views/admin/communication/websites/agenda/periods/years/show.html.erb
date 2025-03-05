@@ -4,7 +4,6 @@
   <%
   @year.months.each do |month|
     month_l10n = month.localization_for(current_language)
-    events = month_l10n.events
     %>
       <div class="col-6 col-lg-2">
         <div class="<%= osuny_card_classes %>">
