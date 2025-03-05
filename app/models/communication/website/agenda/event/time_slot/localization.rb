@@ -29,6 +29,7 @@
 class Communication::Website::Agenda::Event::TimeSlot::Localization < ApplicationRecord
   include AddableToCalendar
   include AsLocalization
+  include Permalinkable
   include WithGitFiles
   include WithUniversity
 
@@ -39,6 +40,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   alias :time_slot :about
 
   delegate :event, to: :about
+  delegate :slug, to: :event_l10n
   delegate :title, :subtitle, :summary, :current_permalink_url_in_website, to: :event_l10n
   delegate :archive?, to: :event
 

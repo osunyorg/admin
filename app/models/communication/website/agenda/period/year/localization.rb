@@ -57,6 +57,10 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
     @events ||= website.events.on_year(value)
   end
 
+  def time_slots
+    @time_slots ||= website.time_slots.on_year(value)
+  end
+
   # 25
   def last_two_digits
     to_s.last(2)

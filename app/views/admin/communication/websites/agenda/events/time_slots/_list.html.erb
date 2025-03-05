@@ -1,0 +1,42 @@
+<div class="row g-2 mb-3">
+  <%
+  time_slots.each do |time_slot|
+    time_slot_l10n = time_slot.best_localization_for(current_language)
+    event = time_slot.event
+    event_l10n = event.best_localization_for(current_language)
+    %>
+    <div>
+      <div class="<%= osuny_card_classes(horizontal: true) %> align-items-start">
+        <%= osuny_thumbnail_localized event, large: true %>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="d-flex">
+                <div class="me-2">
+                  <%= osuny_published_localized event %>
+                </div>
+                <div>
+                  <p class="mb-1">
+                    <%= osuny_link_localized  event,
+                                              admin_communication_website_agenda_event_path(
+                                                website_id: event.website.id,
+                                                id: event.id
+                                              ),
+                                              classes: "stretched-link" %>
+                  </p>
+                  <% if event_l10n&.subtitle.present? %>
+                    <p class="text-muted"><%= event_l10n.subtitle %></p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <%= osuny_label Communication::Website::Agenda::Event::TimeSlot.human_attribute_name(:hour) %>
+              <p><%= time_slot.datetime.strftime("%H:%M") %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

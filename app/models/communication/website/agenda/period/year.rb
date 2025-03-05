@@ -42,11 +42,13 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
 
   def self.create_for(website, value)
     return if exists_for?(website, value)
-    where(
+    year = where(
       university: website.university, 
       website: website, 
       value: value
     ).first_or_create
+    year.save_and_sync
+    year
   end
 
   def dependencies

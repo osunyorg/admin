@@ -65,6 +65,10 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
     @events ||= website.events.on_month(year.value, value)
   end
 
+  def time_slots
+    @time_slots ||= website.time_slots.on_month(year.value, value)
+  end
+
   # 02, 11
   def to_s
     I18n.localize(about.first_day, locale: language.iso_code, format: '%m')

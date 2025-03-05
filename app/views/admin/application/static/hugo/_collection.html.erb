@@ -2,7 +2,9 @@
 depth ||= 0
 indentation = '  ' * depth
 %>
+<% if key.present? %>
 <%= indentation %><%= key.to_s %>:
+<% end %>
 <%
 collection.each do |element|
   l10n = element.localization_for(language)

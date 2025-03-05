@@ -89,4 +89,10 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   def hugo_slug_in_website(website)
     event_l10n.try(:slug)
   end
+
+  # Method for Communication::Website::Agenda::Period::InPeriod
+  def day_changed?
+    false
+  end
+
 end

@@ -31,11 +31,19 @@ class Communication::Website::Agenda::Period::Day::Localization < ApplicationRec
   include Communication::Website::Agenda::Period::BaseLocalization
   include WithUniversity
 
+  after_commit :denormalize_events_count
+
   delegate :date, to: :about
   delegate :cwday, :day, :iso8601, to: :date
 
   def events
-    @events ||= website.events.on_day(date)
+    @events ||=  website.events
+                        .on_day(date)
+                        .with_no_time_slots
+  end
+
+  def time_slots
+    @time_slots ||= website.time_slots.on_day(date)
   end
 
   def next
@@ -48,5 +56,12 @@ class Communication::Website::Agenda::Period::Day::Localization < ApplicationRec
 
   def to_s
     I18n.localize(date, locale: language.iso_code, format: '%A').humanize
+  end
+
+  protected
+
+  def denormalize_events_count
+    count = events.count + time_slots.count
+    self.update_column :events_count, count
   end
 end

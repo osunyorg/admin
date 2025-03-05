@@ -8,6 +8,12 @@ module Communication::Website::WithFeatureAgenda
                 dependent: :destroy
     alias       :events :agenda_events
 
+    has_many    :agenda_events_time_slots,
+                class_name: "Communication::Website::Agenda::Event::TimeSlot",
+                foreign_key: :communication_website_id,
+                dependent: :destroy
+    alias       :time_slots :agenda_events_time_slots
+
     has_many    :agenda_exhibitions,
                 class_name: "Communication::Website::Agenda::Exhibition",
                 foreign_key: :communication_website_id,

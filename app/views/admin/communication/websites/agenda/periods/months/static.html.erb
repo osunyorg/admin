@@ -29,5 +29,10 @@ days:
             collection: day.events,
             language: language,
             depth: 3 %>
+<%= render 'admin/application/static/hugo/collection',
+            key: false,
+            collection: day.time_slots,
+            language: language,
+            depth: 3 %>
 <% end %>
 ---

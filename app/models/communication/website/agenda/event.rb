@@ -112,6 +112,20 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   protected
 
+  # Methods for Communication::Website::Agenda::Period::InPeriod
+
+  def day_changed?
+    from_day_changed?
+  end
+
+  def day_before_change
+    from_day_change.first
+  end
+
+  def day_after_change
+    from_day_change.last
+  end
+
   # TODO refactor that with service or addition to DateTime (ex: DateTime.merge(date, time))
   def time_with(day, hour)
     DateTime.new  day.year,

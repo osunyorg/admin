@@ -71,7 +71,7 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def set_to_day
-    self.to_day = self.from_day if self.to_day.nil?
+    self.to_day = self.from_day if respond_to?(:to_day=) && self.to_day.nil?
   end
 
   def to_day_after_from_day
@@ -84,26 +84,40 @@ module Communication::Website::Agenda::Period::InPeriod
     errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
   end
 
+  def day_changed?
+    raise NotImplementedError
+  end
+
+  def day_before_change
+    raise NotImplementedError
+  end
+
+  def day_after_change
+    raise NotImplementedError
+  end
+
+  def years_concerned_by_change
+    [day_before_change&.year, day_after_change&.year].uniq.compact
+  end
+
   def touch_periods
     # Periods might not exist yet!
     # If so, no problem, they will be properly initialized by create_periods
-    return unless from_day_changed?
-    before, after = from_day_change
-    touch_day(before)
-    touch_day(after)
-    # Get year
-    years = [before.year, after.year].uniq
-    years.each do |year|
+    return unless day_changed?
+    touch_day(day_before_change)
+    touch_day(day_after_change)
+    years_concerned_by_change.each do |year|
       save_and_sync_year(year)
     end
   end
 
   def touch_day(date)
+    return if date.nil?
     Communication::Website::Agenda::Period::Day.find_by(
       university: university,
       website: website,
       date: date
-    ).touch
+    )&.touch
   end
 
   def save_and_sync_year(year_value)
@@ -111,7 +125,7 @@ module Communication::Website::Agenda::Period::InPeriod
       university: university,
       website: website,
       value: year_value
-    ).save_and_sync
+    )&.save_and_sync
   end
 
   def create_periods

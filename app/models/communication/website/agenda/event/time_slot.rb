@@ -35,6 +35,10 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   validates :datetime, presence: true
 
+  scope :on_year, -> (year) { where('extract(year from datetime) = ?', year) }
+  scope :on_month, -> (year, month) { where('extract(year from datetime) = ? and extract(month from datetime) = ?', year, month) }
+  scope :on_day, -> (day) {  where('DATE(datetime) = ?', day) }
+
   scope :ordered, -> { order(:datetime) }
 
   delegate :time_zone, to: :event
@@ -46,7 +50,7 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   def date
     datetime.to_date
   end
-  alias :from_day :date # Used by InTime
+  alias :from_day :date # Used by Communication::Website::Agenda::Period::InPeriod
 
   def time
     datetime.strftime("%H:%M")
@@ -60,13 +64,25 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   def end_date
     end_datetime&.to_date
   end
-  alias :to_day :end_date # Used by InTime
+  alias :to_day :end_date # Used by Communication::Website::Agenda::Period::InPeriod
 
   def end_time
     end_datetime&.strftime("%H:%M")
   end
 
-  # Used by InTime, do nothing :)
-  def to_day=(value)
+  protected
+
+  # Methods for Communication::Website::Agenda::Period::InPeriod
+
+  def day_changed?
+    datetime_changed?
+  end
+
+  def day_before_change
+    datetime_change.first&.to_date
+  end
+
+  def day_after_change
+    datetime_change.last&.to_date
   end
 end

@@ -4,7 +4,7 @@
   7.times do |index|
     day_index = (index + 1) % 7
     %>
-    <div class="col mb-3">
+    <div class="col">
       <%= I18n.t("date.day_names")[day_index].titleize %>
       <hr>
     </div>
@@ -28,12 +28,10 @@ first_day_of_month = month.days.first
       # Start at the proper day
       current = first_day_of_month if current.nil? && cwday == first_day_of_month.cwday && !finished
       %>
-      <div class="col mb-3">
+      <div class="col">
         <%
         # Skip days not in the month (before first day of month)
-        if current.present?
-          events = current.events
-          %>
+        if current.present? %>
           <div class="position-relative p-2 rounded" style="<% if current.events? %>background: white; <% end %>min-height: 65px;">
             <p class="small text-muted m-0">
               <% if current.events? %><a href="#day-<%= current.day %>" class="stretched-link"><% end %>

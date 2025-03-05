@@ -17,10 +17,6 @@
                         admin_communication_website_agenda_periods_year_path(year),
                         class: 'stretched-link' %>
           </div>
-          <div class="card-footer text-end small text-muted">
-            <%= year_l10n.events_count %>
-            <%= Communication::Website::Agenda::Event.model_name.human(count: year_l10n.events_count).downcase %>
-          </div>
         </div>
       </div>
   <% end %>
