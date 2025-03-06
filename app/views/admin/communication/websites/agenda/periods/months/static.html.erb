@@ -17,22 +17,10 @@ days:
 @l10n.days.each do |day| 
   next unless day.events?
   %>
-  - day:
-      date: <%= day.iso8601 %>
-      labels: 
-        day: "<%= day.to_s %>"
-        full: "<%= day.to_full_name %>"
-    events:
-      count: <%= day.events_count %>
-<%= render 'admin/application/static/hugo/collection',
-            key: :list,
-            collection: day.events,
-            language: language,
-            depth: 3 %>
-<%= render 'admin/application/static/hugo/collection',
-            key: false,
-            collection: day.time_slots,
-            language: language,
-            depth: 3 %>
+  - date: <%= day.iso8601 %>
+    labels: 
+      day: "<%= day.to_s %>"
+      full: "<%= day.to_full_name %>"
+    events: <%= day.events_count %>
 <% end %>
 ---
