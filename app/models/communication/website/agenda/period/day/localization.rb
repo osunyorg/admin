@@ -34,8 +34,8 @@ class Communication::Website::Agenda::Period::Day::Localization < ApplicationRec
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  after_commit :denormalize_events_count
-  
+  after_save_commit :denormalize_events_count
+
   delegate :value, :date, to: :about
   delegate :cwday, :day, :iso8601, to: :date
 
