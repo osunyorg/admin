@@ -9,17 +9,17 @@ partial = "admin/communication/medias/contexts/#{key}"
 <% rescue %>
 <%
 object = context.about
-next if object.nil?
-# If it's a localization, get real object
-if object.respond_to?(:about)
-  object = object.about
-end
-begin
-  # TODO fix special pages
-  title = osuny_link_localized object, [:admin, object], classes: "stretched-link"
-rescue
-  title = object.to_s_in(current_language)
-end
+if object.present?
+  # If it's a localization, get real object
+  if object.respond_to?(:about)
+    object = object.about
+  end
+  begin
+    # TODO fix special pages
+    title = osuny_link_localized object, [:admin, object], classes: "stretched-link"
+  rescue
+    title = object.to_s_in(current_language)
+  end
 %>
 <div>
   <div class="<%= osuny_card_classes(horizontal: true) %>">
