@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_05_174306) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_06_153704) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -566,6 +566,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_05_174306) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "add_to_calendar_urls"
+    t.string "slug"
     t.index ["about_id"], name: "idx_on_about_id_e52a2e12b0"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_526f156fed"
     t.index ["language_id"], name: "idx_on_language_id_f50f565794"

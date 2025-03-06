@@ -84,13 +84,14 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
     return if event.kind_parent? # Rendered by Communication::Website::Agenda::Event::Day
+    return if event.kind_recurring? # Rendered by Communication::Website::Agenda::Event::TimeSlot
     git_path_content_prefix(website) + git_path_relative
   end
 
   def git_path_relative
     path = "events/"
     path += "archives/#{from_day.year}/" if archive?
-    path += "#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
+    path += "#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
     path
   end
 

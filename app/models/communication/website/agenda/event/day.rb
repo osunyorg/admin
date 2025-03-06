@@ -52,7 +52,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   def git_path_relative
     path = "events/"
     path += "archives/#{date.year}/" if event.archive?
-    path += "#{date.strftime "%Y-%m-%d"}-#{event_l10n.slug}.html"
+    path += "#{date.strftime "%Y/%m/%d"}-#{event_l10n.slug}.html"
     path
   end
 

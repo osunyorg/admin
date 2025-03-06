@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  add_to_calendar_urls     :jsonb
 #  place                    :string
+#  slug                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             not null, indexed
@@ -29,7 +30,7 @@
 class Communication::Website::Agenda::Event::TimeSlot::Localization < ApplicationRecord
   include AddableToCalendar
   include AsLocalization
-  include Staticable
+  include Permalinkable
   include WithGitFiles
   include WithUniversity
 
@@ -52,7 +53,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   def git_path_relative
     path = "events/"
     path += "archives/#{from_day.year}/" if archive?
-    path += "#{from_day.strftime "%Y-%m-%d"}-#{event_l10n.slug}.html"
+    path += "#{from_day.strftime "%Y/%m/%d"}-#{slug}-#{event_l10n.slug}.html"
     path
   end
 
@@ -82,5 +83,16 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   def event_l10n
     @event_l10n ||= event.localization_for(language)
+  end
+
+  def set_slug
+    self.slug = from_hour.strftime '%H-%M'
+  end
+
+  protected
+
+  # Slugs are the hour: "20-00", there are no problems with the duplication
+  def skip_slug_validation?
+    true
   end
 end

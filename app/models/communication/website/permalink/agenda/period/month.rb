@@ -1,8 +1,4 @@
 class Communication::Website::Permalink::Agenda::Period::Month < Communication::Website::Permalink
-  def self.required_in_config?(website)
-    website.feature_agenda
-  end
-
   def self.static_config_key
     :events
   end

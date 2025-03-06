@@ -4,8 +4,10 @@ time_slots:
 event.time_slots.ordered.each do |time_slot|
   l10n = time_slot.localization_for(language)
   next if l10n.nil?
+  hugo = l10n.hugo(@website)
   %>
-  - start:
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
+    start:
       date: "<%= time_slot.date&.iso8601 %>"
       time: "<%= time_slot.time %>"
       datetime: "<%= time_slot.datetime&.iso8601 %>"
