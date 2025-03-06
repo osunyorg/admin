@@ -3,9 +3,10 @@ class Transparency::HomeController < Transparency::ApplicationController
     @universities = University.contributing.ordered
     @contributions_total = University.sum(:contribution_amount)
     @costs = [
-      ['Insight Hub', 'Interception d\'erreur (gratuit pour l\'open source)', 0],
+      ['Brevo', 'SMS et mails transactionnels', 420],
       ['CodeClimate', 'Qualité de code (gratuit pour l\'open source)', 0],
       ['Deuxfleurs', 'Hébergement sans data center', 3000],
+      ['Insight Hub', 'Interception d\'erreur (gratuit pour l\'open source)', 0],
       ['KeyCDN', 'Redimensionnement des images', 6000],
       ['LanguageTool', 'Aide à la qualité des contenus', 1200],
       ['LibreTranslate', 'Aide à  la traduction', 660],
