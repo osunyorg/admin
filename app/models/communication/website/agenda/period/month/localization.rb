@@ -66,7 +66,16 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
   end
 
   # 02, 11
+  # Necessary for the slug
   def to_s
     I18n.localize(about.first_day, locale: language.iso_code, format: '%m')
+  end
+
+  protected
+
+  # Slugs are the month: "01", "11"...
+  # There are no problems with the duplication
+  def skip_slug_validation?
+    true
   end
 end

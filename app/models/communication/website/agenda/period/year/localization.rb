@@ -66,4 +66,12 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   def to_s
     "#{about.value}"
   end
+
+  protected
+
+  # Slugs are the year: "2025"
+  # There are no problems with the duplication
+  def skip_slug_validation?
+    true
+  end
 end

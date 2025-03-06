@@ -2,7 +2,6 @@
 year = @l10n.about
 language = @l10n.language
 %>---
-
 <%= render 'admin/application/static/core',
             about: @l10n,
             skip_date: true %>
@@ -14,8 +13,10 @@ language = @l10n.language
 <%= render 'admin/application/l10n/static', about: @l10n %>
 months:
 <%
-@l10n.months.each do |month| %>
-  - number: "<%= month.value %>"
+@l10n.months.each do |month|
+  hugo = month.hugo(@website)
+  %>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
     name: "<%= month.to_month_name %>"
     days:
 <% month.days.each do |day| %>
