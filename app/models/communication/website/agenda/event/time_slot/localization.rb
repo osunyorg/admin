@@ -46,7 +46,6 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   def git_path(website)
     return unless website.id == communication_website_id
-    return if event.kind_parent? # Rendered by Communication::Website::Agenda::Event::Day
     git_path_content_prefix(website) + git_path_relative
   end
 
