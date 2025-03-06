@@ -84,8 +84,10 @@ module Communication::Website::Agenda::Period::InPeriod
     errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
   end
 
-  def day_changed?
-    raise NotImplementedError
+  # By default, no update
+  # Event and time slots will override that
+  def should_update_periods?
+    false
   end
 
   def day_before_change
@@ -103,7 +105,7 @@ module Communication::Website::Agenda::Period::InPeriod
   def touch_periods
     # Periods might not exist yet!
     # If so, no problem, they will be properly initialized by create_periods
-    return unless day_changed?
+    return unless should_update_periods?
     touch_day(day_before_change)
     touch_day(day_after_change)
     years_concerned_by_change.each do |year|

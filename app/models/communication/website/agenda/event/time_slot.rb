@@ -74,7 +74,7 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   # Methods for Communication::Website::Agenda::Period::InPeriod
 
-  def day_changed?
+  def should_update_periods?
     datetime_changed?
   end
 

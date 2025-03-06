@@ -114,7 +114,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   # Methods for Communication::Website::Agenda::Period::InPeriod
 
-  def day_changed?
+  def should_update_periods?
     from_day_changed?
   end
 
