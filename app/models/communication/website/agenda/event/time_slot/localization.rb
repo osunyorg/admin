@@ -51,7 +51,6 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   def git_path_relative
     path = "events/"
-    path += "archives/#{from_day.year}/" if archive?
     path += "#{from_day.strftime "%Y/%m/%d"}-#{slug}-#{event_l10n.slug}.html"
     path
   end

@@ -16,8 +16,8 @@ class Communication::Website::Permalink::Agenda::Event < Communication::Website:
       # /agenda/2025/arte-concert-festival/
       pattern += '/:year/:slug/'
     else
-      # /agenda/2025/03/19-vel-anetha/
-      pattern += '/:year/:month/:day-:slug/'
+      # /agenda/2025/vel-anetha/
+      pattern += '/:year/:slug/'
     end
     pattern
   end
