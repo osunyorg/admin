@@ -83,14 +83,8 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
-    return if event.kind_recurring? # Rendered by Communication::Website::Agenda::Event::TimeSlot
+    return if event.time_slots.any? # Rendered by Communication::Website::Agenda::Event::TimeSlot
     git_path_content_prefix(website) + git_path_relative
-  end
-
-  def git_path_relative
-    path = "events/"
-    path += "#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
-    path
   end
 
   def template_static
@@ -120,6 +114,30 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   end
 
   protected
+
+  def git_path_relative
+    # events with 1 slot or more are managed by TimeSlots
+    if event.time_slots.none?
+      git_path_relative_no_slots
+    elsif event.kind_parent?
+      git_path_relative_parent
+    end
+  end
+
+  def git_path_relative_no_slots
+    if event.kind_child?
+      # events/YYYY/parent_slug/YYYY-MM-DD-slug.html
+      "events/#{parent.from_day.strftime "%Y"}/#{parent.slug}/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
+    else
+      # events/YYYY/MM/DD-slug.html
+      "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
+    end
+  end
+  
+  # events/YYYY/slug/_index.html
+  def git_path_relative_parent
+    "events/#{from_day.strftime "%Y"}/#{slug}/_index.html"
+  end
 
   def check_accessibility
     accessibility_merge_array blocks
