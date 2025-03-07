@@ -44,15 +44,15 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   delegate :title, :subtitle, :summary, :current_permalink_url_in_website, to: :event_l10n
   delegate :archive?, to: :event
 
+  # /content/fr/events/YYYY/MM/DD-hh-mm-slug.html
   def git_path(website)
     return unless website.id == communication_website_id
     git_path_content_prefix(website) + git_path_relative
   end
 
+  # events/YYYY/MM/DD-hh-mm-slug.html
   def git_path_relative
-    path = "events/"
-    path += "#{from_day.strftime "%Y/%m/%d"}-#{slug}-#{event_l10n.slug}.html"
-    path
+    "events/#{from_day.strftime "%Y/%m"}/#{slug}.html"
   end
 
   def template_static
@@ -83,13 +83,14 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
     @event_l10n ||= event.localization_for(language)
   end
 
+  # DD-hh-mm-slug
+  # 14-16-00-contes-a-paillettes
   def set_slug
-    self.slug = from_hour.strftime '%H-%M'
+    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}-#{event_l10n.slug}
   end
 
   protected
 
-  # Slugs are the hour: "20-00", there are no problems with the duplication
   def skip_slug_validation?
     true
   end
