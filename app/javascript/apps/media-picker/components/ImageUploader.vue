@@ -132,7 +132,7 @@ export default {
       ref="cropper"
       @cropped="cropped"
       />
-    <div  class="modal show"
+    <div  class="modal"
           tabindex="-1"
           role="dialog"
           :class="{'d-block': (size.alert === true)}">

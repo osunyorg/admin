@@ -105,7 +105,7 @@ export default {
       <CloudDownload stroke-width="1.5" />
       {{ i18n.button }}
     </button>
-    <div class="modal show" tabindex="-1" role="dialog" :class="{'d-block': modal}">
+    <div class="modal" tabindex="-1" role="dialog" :class="{'d-block': modal}">
       <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
@@ -129,7 +129,7 @@ export default {
               </div>
             </div>
             <div class="col-auto">
-              <button type="button" 
+              <button type="button"
                       class="btn-close"
                       @click="close()">
               </button>
