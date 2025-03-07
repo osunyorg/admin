@@ -65,17 +65,19 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
     about.days.map { |day| day.localized_in(language) }
   end
 
-  # 02, 11
-  # Necessary for the slug
   def to_s
     I18n.localize(about.first_day, locale: language.iso_code, format: '%m')
   end
 
   protected
 
-  # Slugs are the month: "01", "11"...
-  # There are no problems with the duplication
+  # Override from Permalinkable/Sluggable
   def skip_slug_validation?
     true
+  end
+
+  # Override from Permalinkable/Sluggable
+  def set_slug
+    self.slug = about.value < 10 ? "0#{about.value}" : about.value
   end
 end
