@@ -83,11 +83,6 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
     @event_l10n ||= event.localization_for(language)
   end
 
-  # DD-hh-mm
-  # 14-16-00
-  def set_slug
-    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}"
-  end
 
   def to_s
     slug
@@ -95,6 +90,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   protected
 
+  # Override from Permalinkable/Sluggable
   def slug_unavailable?(slug)
     self.class.unscoped
               .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
@@ -103,4 +99,10 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
               .exists?
   end
 
+  # Override from Permalinkable/Sluggable
+  # DD-hh-mm
+  # 14-16-00
+  def set_slug
+    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}"
+  end
 end
