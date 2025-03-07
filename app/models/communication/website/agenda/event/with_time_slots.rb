@@ -48,7 +48,8 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     if l10n.nil?
       l10n = time_slot.localizations.build(
         language: language,
-        website: website
+        website: website,
+        university: university
       )
     end
     l10n.place = slot[:place]
