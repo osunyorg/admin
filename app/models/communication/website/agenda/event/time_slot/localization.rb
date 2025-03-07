@@ -86,7 +86,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   # DD-hh-mm-slug
   # 14-16-00-contes-a-paillettes
   def set_slug
-    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}-#{event_l10n.slug}
+    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}-#{event_l10n.slug}"
   end
 
   protected
