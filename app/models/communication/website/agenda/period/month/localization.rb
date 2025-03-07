@@ -42,7 +42,7 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
   end
 
   def git_path_relative
-    "events/#{year.slug}/#{about.first_day.strftime '%d'}/_index.html"
+    "events/#{year.slug}/#{slug}/_index.html"
   end
 
   def template_static
