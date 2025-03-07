@@ -52,6 +52,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   # events/YYYY/MM/DD-hh-mm-slug.html
   def git_path_relative
+    # Slug is in fact DD-hh-mm-slug
     "events/#{from_day.strftime "%Y/%m"}/#{slug}.html"
   end
 
