@@ -1,8 +1,11 @@
 class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication::Website::Permalink
 
-  # /agenda/2025/03/19-vel-anetha/
+  # Récurrent
+  # /fr/agenda/YYYY/slug/
+  # Récurrent enfant
+  # /fr/agenda/YYYY/parent_slug/slug/
   def self.pattern_in_website(website, language, about = nil)
-    "#{special_page_path(website, language)}/:year/:month/:day-:slug/'"
+    "#{special_page_path(website, language)}/:year/:slug/'"
   end
 
   def self.special_page_type
@@ -16,12 +19,18 @@ class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication
   end
 
   def substitutions
-    {
-      year: about.from_day.strftime("%Y"),
-      month: about.from_day.strftime("%m"),
-      day: about.from_day.strftime("%d"),
-      slug: about.slug
-    }
+    if about.kind_children?
+      parent = about.parent
+      {
+        year: parent.from_day.strftime("%Y"),
+        slug: "#{parent.slug}/#{about.slug}"
+      }
+    else
+      {
+        year: about.from_day.strftime("%Y"),
+        slug: about.slug
+      }
+    end
   end
 
 end

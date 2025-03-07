@@ -73,7 +73,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   end
 
   def first?
-    events.days.first.id == id
+    event.days.first.id == id
   end
 
   protected
