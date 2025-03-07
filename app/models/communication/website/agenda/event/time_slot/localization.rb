@@ -89,6 +89,10 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
     self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}-#{event_l10n.slug}"
   end
 
+  def to_s
+    slug
+  end
+
   protected
 
   def skip_slug_validation?
