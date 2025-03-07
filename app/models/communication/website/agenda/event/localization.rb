@@ -79,6 +79,8 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   has_summernote :notes
 
   validates :title, presence: true
+  validate :slug_cant_be_numeric_only
+
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
@@ -150,6 +152,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
               .where.not(id: self.id)
               .where("date_part('year', communication_website_agenda_events.from_day) = ?", about.from_day.year)
               .exists?
+  end
+
+  def slug_cant_be_numeric_only
+    errors.add(:slug, :numeric_only) if slug.tr('0-9', '').blank?
   end
 
   def set_communication_website_id
