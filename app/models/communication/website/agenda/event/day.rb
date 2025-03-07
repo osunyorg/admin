@@ -44,16 +44,15 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   def git_path(website)
     return if website.id != communication_website_id || # Wrong website, should never happen
               events.none? || # Nothing this day
-              event_l10n.nil? # Event not localized in this language ||
-              !event_l10n.published # Event not published
+              event_l10n.nil? || # Event not localized in this language
+              !event_l10n.published || # Event not published
+              first? # First day is done by the event itself
     git_path_content_prefix(website) + git_path_relative
   end
 
+  # events/2025/arte-concert-festival/2025-01-02.html
   def git_path_relative
-    path = "events/"
-    path += "archives/#{date.year}/" if event.archive?
-    path += "#{date.strftime "%Y/%m/%d"}-#{event_l10n.slug}.html"
-    path
+    "events/#{event.from_day.strftime "%Y"}/#{event_l10n.slug}/#{date.strftime "%Y/%m/%d"}.html"
   end
 
   def template_static
@@ -71,6 +70,10 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
 
   def from_day
     date
+  end
+
+  def first?
+    events.days.first.id == id
   end
 
   protected
