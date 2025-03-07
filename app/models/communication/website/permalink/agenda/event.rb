@@ -7,9 +7,19 @@ class Communication::Website::Permalink::Agenda::Event < Communication::Website:
     :events
   end
 
-  # /agenda/2022-10-21-un-article/
-  def self.pattern_in_website(website, language)
-    special_page_path(website, language) + '/:year-:month-:day-:slug/'
+  def self.pattern_in_website(website, language, about = nil)
+    pattern = special_page_path(website, language)
+    if about&.kind_child?
+      # /agenda/2025/arte-concert-festival/2025-02-18-priya-ragu/
+      pattern += '/:parent_year/:parent_slug/:year-:month-:day-:slug/'
+    elsif about&.kind_parent?
+      # /agenda/2025/arte-concert-festival/
+      pattern += '/:year/:slug/'
+    else
+      # /agenda/2025/vel-anetha/
+      pattern += '/:year/:slug/'
+    end
+    pattern
   end
 
   def self.special_page_type
@@ -23,7 +33,10 @@ class Communication::Website::Permalink::Agenda::Event < Communication::Website:
   end
 
   def substitutions
+    parent = about.parent
     {
+      parent_year: parent&.from_day&.strftime("%Y"),
+      parent_slug: parent&.slug,
       year: about.from_day.strftime("%Y"),
       month: about.from_day.strftime("%m"),
       day: about.from_day.strftime("%d"),

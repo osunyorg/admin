@@ -103,6 +103,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   protected
+
   def update_authors_status_if_necessary!
     authors.each do |author|
       next if author.is_author

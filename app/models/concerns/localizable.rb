@@ -46,6 +46,7 @@ module Localizable
   def localization_for(language)
     localizations.find_by(language_id: language.id)
   end
+  alias :localized_in :localization_for
 
   def original_localization
     @original_localization ||= localizations.order(:created_at).first

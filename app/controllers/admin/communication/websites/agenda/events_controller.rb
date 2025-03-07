@@ -8,6 +8,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def index
     @events = @events.filter_by(params[:filters], current_language)
                      .ordered_desc
+                     .root
                      .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
@@ -25,6 +26,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def new
+    @event.parent = @website.events.find(params[:parent_id]) if params.has_key?(:parent_id)
     @categories = categories
     breadcrumb
   end
@@ -61,6 +63,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     end
   end
 
+  def save_time_slots
+    @event.save_time_slots(current_language, params.to_unsafe_hash)
+    render json: @event.time_slots_to_json(current_language)
+  end
+
   def duplicate
     redirect_to [:admin, @event.duplicate],
                 notice: t('admin.successfully_duplicated_html', model: @event.to_s_in(current_language))
@@ -75,6 +82,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def breadcrumb
     super
+    add_breadcrumb @event.parent.to_s_in(current_language), [:admin, @event.parent] if @event&.parent
     breadcrumb_for @event
   end
 
@@ -86,11 +94,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     params.require(:communication_website_agenda_event)
     .permit(
       :from_day, :from_hour, :to_day, :to_hour, :time_zone,
-      category_ids: [],
+      :parent_id, category_ids: [],
       localizations_attributes: [
-        :id, :title, :subtitle, :meta_description, :summary, :text,
+        :id, :title, :subtitle, :meta_description, :summary, :text, :notes,
         :published, :published_at, :slug,
-        :header_cta, :header_cta_label, :header_cta_url, 
+        :header_cta, :header_cta_label, :header_cta_url,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id

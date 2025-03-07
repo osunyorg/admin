@@ -145,20 +145,43 @@ fr:
         url: URL
       communication/website/agenda/event:
         categories: Catégories
+        children: Événements enfants
         dates: Dates
+        day: Jour
         from_day: Jour de début
-        from_hour: Heure de début
+        parent: Événement parent
         status: Statut
         status_archive: Archive
         status_current: En cours
         status_future: À venir
         time_zone: Fuseau horaire
         to_day: Jour de fin
-        to_hour: Heure de fin
       communication/website/agenda/event/localization:
         featured_image: Image à la une
+        notes: Notes
         published: Publié
         subtitle: Sous-titre
+        text: Informations pratiques
+        title: Titre
+      communication/website/agenda/event/time_slot:
+        hour: Heure
+      communication/website/agenda/exhibition:
+        categories: Catégories
+        dates: Dates
+        from_day: Jour de début
+        status: Statut
+        status_archive: Archive
+        status_current: En cours
+        status_future: À venir
+        time_zone: Fuseau horaire
+        to_day: Jour de fin
+      communication/website/agenda/exhibition/localization:
+        featured_image: Image à la une
+        notes: Notes
+        place: Lieu
+        published: Publié
+        subtitle: Sous-titre
+        text: Informations pratiques
         title: Titre
       communication/website/connection:
         direct_source: Source directe
@@ -272,6 +295,10 @@ fr:
               too_soon: doit être après jour de début
             to_hour:
               too_soon: doit être après l'heure de début
+        communication/website/agenda/event/localization:
+          attributes:
+            slug:
+              numeric_only: ne doit pas être constitué que de chiffres
         communication/website/localization:
           attributes:
             published:
@@ -320,6 +347,18 @@ fr:
       communication/website/agenda/event:
         one: Événement
         other: Événements
+      communication/website/agenda/event/time_slot:
+        one: Créneau horaire
+        other: Créneaux horaires
+      communication/website/agenda/exhibition:
+        one: Exposition
+        other: Expositions
+      communication/website/agenda/period/month:
+        one: Mois
+        other: Mois
+      communication/website/agenda/period/year:
+        one: Année
+        other: Années
       communication/website/connection:
         one: Connexion
         other: Connexions
@@ -376,11 +415,15 @@ fr:
       website:
         agenda:
           event:
+            create_child: Créer un événement enfant
             localizations:
               draft: Brouillon
           events:
             formatted_time_zone: "Fuseau horaire : %{time_zone}"
             none: Pas encore d'événements
+          exhibitions:
+            formatted_time_zone: "Fuseau horaire : %{time_zone}"
+            none: Pas encore d'expositions
         confirm_localization:
           text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction du site web <i>%{website}</i> en %{language}."
           title: Confirmation de traduction
@@ -522,8 +565,14 @@ fr:
             slug: agenda
             title: Agenda
           communication_agenda_archive:
-            slug: archives
-            title: Archives
+            slug: archives-evenements
+            title: Archives des événements
+          communication_agenda_exhibition:
+            slug: expositions
+            title: Expositions
+          communication_agenda_exhibition_archive:
+            slug: archives-expositions
+            title: Archives des expositions
           communication_portfolio:
             slug: projets
             title: Projets
