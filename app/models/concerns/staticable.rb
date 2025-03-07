@@ -45,14 +45,14 @@ module Staticable
   end
 
   # Le permalink tel que mentionné dans les statics, dans la clé `url``
-  # Ex: "/agenda/2024-11-27-communs-numerique-et-interet-general/"
+  # Ex: "/agenda/2024/communs-numerique-et-interet-general/"
   # Il y a un slash au début et à la fin, et la langue si elle existe
   def hugo_permalink_in_website(website)
     "#{current_permalink_in_website(website)&.path}"
   end
 
   # L'identifiant Hugo
-  # Ex: /events/2024-12-27-communs-numerique-et-interet-general
+  # Ex: /events/2024/12/27-communs-numerique-et-interet-general
   # https://gohugo.io/methods/page/path/
   # 1. Strips the file extension
   # 2. Strips the language identifier
@@ -76,7 +76,7 @@ module Staticable
   end
 
   # Le chemin physique du fichier
-  # Ex: content/fr/events/2024-12-27-communs-numerique-et-interet-general.html
+  # Ex: content/fr/events/2024/12/27-communs-numerique-et-interet-general.html
   def hugo_file_in_website(website)
     git_path(website)
   end
