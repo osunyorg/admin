@@ -127,10 +127,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   def git_path_relative_no_slots
     if event.kind_child?
       # events/YYYY/parent_slug/YYYY-MM-DD-slug.html
-      "events/#{parent.from_day.strftime "%Y"}/#{parent.slug}/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
+      "events/#{parent.from_day.strftime "%Y"}/#{parent.slug}/#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
     else
-      # events/YYYY/MM/DD-slug.html
-      "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
+      # events/YYYY/MM-DD-slug.html
+      "events/#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
     end
   end
   

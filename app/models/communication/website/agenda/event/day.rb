@@ -52,7 +52,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
 
   # events/2025/arte-concert-festival/2025-01-02.html
   def git_path_relative
-    "events/#{event.from_day.strftime "%Y"}/#{event_l10n.slug}/#{date.strftime "%Y/%m/%d"}.html"
+    "events/#{event.from_day.strftime "%Y"}/#{event_l10n.slug}/#{date.strftime "%Y-%m-%d"}.html"
   end
 
   def template_static
