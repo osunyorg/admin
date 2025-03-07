@@ -130,7 +130,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
       "events/#{parent.from_day.strftime "%Y"}/#{parent.slug}/#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
     else
       # events/YYYY/MM-DD-slug.html
-      "events/#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
+      "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
     end
   end
   
