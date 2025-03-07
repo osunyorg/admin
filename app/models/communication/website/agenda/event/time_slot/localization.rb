@@ -83,11 +83,6 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
     @event_l10n ||= event.localization_for(language)
   end
 
-  # DD-hh-mm
-  # 14-16-00
-  def set_slug
-    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}"
-  end
 
   def to_s
     slug
@@ -95,7 +90,15 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   protected
 
+  # Override from Permalinkable/Sluggable
   def skip_slug_validation?
     true
+  end
+
+  # Override from Permalinkable/Sluggable
+  # DD-hh-mm
+  # 14-16-00
+  def set_slug
+    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}"
   end
 end
