@@ -95,7 +95,12 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   protected
 
-  def skip_slug_validation?
-    true
+  def slug_unavailable?(slug)
+    self.class.unscoped
+              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
+              .where(about_id: about_id)
+              .where.not(id: self.id)
+              .exists?
   end
+
 end
