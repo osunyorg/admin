@@ -119,10 +119,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def git_path_relative
     # events with 1 slot or more are managed by TimeSlots
-    if event.time_slots.none?
-      git_path_relative_no_slots
-    elsif event.kind_parent?
+    if event.kind_parent?
       git_path_relative_parent
+    elsif event.time_slots.none?
+      git_path_relative_no_slots
     end
   end
 
@@ -135,7 +135,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
       "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
     end
   end
-  
+
   # events/YYYY/slug/_index.html
   def git_path_relative_parent
     "events/#{from_day.strftime "%Y"}/#{slug}/_index.html"
