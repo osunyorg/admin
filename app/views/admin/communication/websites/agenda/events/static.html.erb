@@ -1,7 +1,7 @@
 <%
 event = @l10n.about
-day = event.days.for_language(language).ordered.first
 language = @l10n.language
+day = event.days.for_language(language).ordered.first
 %>---
 <%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
