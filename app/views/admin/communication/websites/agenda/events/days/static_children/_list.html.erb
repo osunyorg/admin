@@ -1,0 +1,14 @@
+<%= key %>:
+<%
+collection.each do |child_event|
+  child_event_l10n = child_event.localization_for(language)
+  next if child_event_l10n.nil?
+  if child_event.time_slots.any?
+    time_slot_l10n = child_event.time_slots.ordered.first.localization_for(language)
+    hugo = time_slot_l10n.hugo(@website)
+  else
+    hugo = child_event_l10n.hugo(@website)
+  end
+%>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
+<% end %>

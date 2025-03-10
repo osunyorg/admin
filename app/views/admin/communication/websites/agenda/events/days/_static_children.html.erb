@@ -9,11 +9,11 @@ if day.present?
                   .published_now_in(language)
                   .ordered(language)
 %>
-<%= render 'admin/application/static/hugo/collection',
+<%= render 'admin/communication/websites/agenda/events/days/static_children/list',
     key: :children_for_the_day,
     collection: children_for_day,
     language: language %>
-<%= render 'admin/application/static/hugo/collection',
+<%= render 'admin/communication/websites/agenda/events/days/static_children/list',
     key: :children,
     collection: children,
     language: language %>
