@@ -24,4 +24,9 @@ module Communication::Website::WithFeaturePortfolio
       Communication::Website::Portfolio::Project.model_name.human(count: 2)
     end
   end
+
+  def feature_portfolio_dependencies
+    projects +
+    portfolio_categories
+  end
 end

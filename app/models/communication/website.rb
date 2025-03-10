@@ -162,12 +162,9 @@ class Communication::Website < ApplicationRecord
     configs +
     pages +
     page_categories +
-    posts +
-    post_categories +
-    events +
-    agenda_categories +
-    projects +
-    portfolio_categories +
+    feature_agenda_dependencies +
+    feature_portfolio_dependencies +
+    feature_posts_dependencies +
     menus.in_languages(active_language_ids) +
     [about] +
     [default_image&.blob] +
