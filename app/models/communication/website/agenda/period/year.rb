@@ -3,16 +3,17 @@
 # Table name: communication_website_agenda_period_years
 #
 #  id                       :uuid             not null, primary key
-#  value                    :integer
+#  value                    :integer          indexed => [university_id, communication_website_id]
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null, indexed
-#  university_id            :uuid             not null, indexed
+#  communication_website_id :uuid             not null, indexed, indexed => [university_id, value]
+#  university_id            :uuid             not null, indexed, indexed => [communication_website_id, value]
 #
 # Indexes
 #
-#  idx_on_communication_website_id_dd738e97d3  (communication_website_id)
-#  idx_on_university_id_2c377eb7c0             (university_id)
+#  idx_on_communication_website_id_dd738e97d3              (communication_website_id)
+#  idx_on_university_id_2c377eb7c0                         (university_id)
+#  index_communication_website_agenda_period_years_unique  (university_id,communication_website_id,value) UNIQUE
 #
 # Foreign Keys
 #

@@ -3,18 +3,19 @@
 # Table name: communication_website_agenda_period_months
 #
 #  id                       :uuid             not null, primary key
-#  value                    :integer
+#  value                    :integer          indexed => [university_id, communication_website_id, year_id]
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null, indexed
-#  university_id            :uuid             not null, indexed
-#  year_id                  :uuid             not null, indexed
+#  communication_website_id :uuid             not null, indexed, indexed => [university_id, year_id, value]
+#  university_id            :uuid             not null, indexed, indexed => [communication_website_id, year_id, value]
+#  year_id                  :uuid             not null, indexed, indexed => [university_id, communication_website_id, value]
 #
 # Indexes
 #
 #  idx_on_communication_website_id_49eaf81807                   (communication_website_id)
 #  idx_on_university_id_f680736f97                              (university_id)
 #  index_communication_website_agenda_period_months_on_year_id  (year_id)
+#  index_communication_website_agenda_period_months_unique      (university_id,communication_website_id,year_id,value) UNIQUE
 #
 # Foreign Keys
 #
@@ -52,9 +53,10 @@ class Communication::Website::Agenda::Period::Month < ApplicationRecord
         website: website,
         year: year,
         month: self,
-        date: date,
         value: date.day
-      ).first_or_create
+      ).first_or_create do |day|
+        day.date = date
+      end
       date += 1.day
       puts "Created day #{date}"
     end
