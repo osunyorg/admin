@@ -21,7 +21,9 @@ months:
     days:
 <% month.days.each do |day| %>
       - day: <%= day.iso8601 %>
-        label: "<%= day.to_s %>"
+        labels:
+          day: "<%= day.to_s %>"
+          full: "<%= day.to_full_name %>"
         cwday: <%= day.cwday %>
         events: <%= day.events_count %>
 <% end %>
