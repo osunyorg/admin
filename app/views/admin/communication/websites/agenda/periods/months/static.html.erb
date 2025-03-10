@@ -12,14 +12,12 @@ language = @l10n.language
             toc_present: false,
             toc_offcanvas: false %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
+is_month: true
 days:
 <%
 @l10n.days.each do |day|
   %>
   - day: <%= day.iso8601 %>
-    labels:
-      day: "<%= day.to_s %>"
-      full: "<%= day.to_full_name %>"
     cwday: <%= day.cwday %>
     events: <%= day.events_count %>
 <% end %>

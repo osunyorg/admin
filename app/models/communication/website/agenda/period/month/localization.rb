@@ -65,6 +65,10 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
     about.days.map { |day| day.localized_in(language) }
   end
 
+  def ancestors
+    [year]
+  end
+
   def to_s
     I18n.localize(about.first_day, locale: language.iso_code, format: '%m')
   end
