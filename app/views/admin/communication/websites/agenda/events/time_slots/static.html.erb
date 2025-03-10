@@ -5,7 +5,7 @@ event = time_slot.event
 event_l10n = time_slot_l10n.event_l10n
 language = @l10n.language
 %>---
-<%= render 'admin/application/static/core', about: event_l10n, skip_date: true %>
+<%= render 'admin/application/static/core', about: time_slot_l10n, skip_date: true %>
 <%= render 'admin/application/static/breadcrumbs', about: event_l10n %>
 <%= render 'admin/application/static/design',
             about: event,
