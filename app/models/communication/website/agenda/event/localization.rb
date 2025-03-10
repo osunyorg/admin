@@ -146,12 +146,21 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   end
 
   def slug_unavailable?(slug)
-    self.class.unscoped
-              .left_joins(:about)
-              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
-              .where.not(id: self.id)
-              .where("date_part('year', communication_website_agenda_events.from_day) = ?", about.from_day.year)
-              .exists?
+    if parent_id.present?
+      self.class.unscoped
+                .left_joins(:about)
+                .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
+                .where.not(id: self.id)
+                .where(parent_id: self.parent_id)
+                .exists?
+    else
+      self.class.unscoped
+                .left_joins(:about)
+                .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
+                .where.not(id: self.id)
+                .where("date_part('year', communication_website_agenda_events.from_day) = ?", about.from_day.year)
+                .exists?
+    end
   end
 
   def slug_cant_be_numeric_only

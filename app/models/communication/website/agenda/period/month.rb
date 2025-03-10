@@ -29,7 +29,7 @@ class Communication::Website::Agenda::Period::Month < ApplicationRecord
   include WithUniversity
 
   belongs_to :year
-  has_many :days
+  has_many :days, dependent: :destroy
 
   after_create :create_days
 
@@ -43,7 +43,7 @@ class Communication::Website::Agenda::Period::Month < ApplicationRecord
   end
 
   protected
-  
+
   def create_days
     date = first_day.dup
     while date.month == first_day.month
