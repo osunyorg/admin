@@ -84,6 +84,16 @@ namespace :communication do
     end
     namespace :agenda do
       resources :events, controller: '/admin/communication/websites/agenda/events' do
+        resources :days, controller: '/admin/communication/websites/agenda/events/days', only: [] do
+          member do
+            get :static
+          end
+        end
+        resources :time_slots, controller: '/admin/communication/websites/agenda/events/time_slots', only: [] do
+          member do
+            get :static
+          end
+        end
         member do
           get :static
           post :duplicate

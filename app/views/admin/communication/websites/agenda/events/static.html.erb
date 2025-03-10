@@ -13,7 +13,6 @@ day = event.days.for_language(language).ordered.first
 <%= render 'admin/communication/websites/agenda/events/static/dates',
             event: event,
             day: day,
-            time_slot: time_slot,
             l10n: @l10n,
             locale: language.iso_code %>
 <%= render 'admin/communication/websites/agenda/events/static/parent', event: event, language: language %>

@@ -1,0 +1,26 @@
+<% if current_user.server_admin? %>
+  <section class="mt-5">
+    <h2 class="h5">Fichiers statiques</h2>
+    <% if @event.time_slots.any? %>
+      <%
+      @event.time_slots.each do |time_slot|
+        time_slot_l10n = time_slot.localization_for(current_language) %>
+        <%= link_to 'Créneau du ' + l(time_slot.datetime),
+                    static_admin_communication_website_agenda_event_time_slot_path(
+                      event_id: @event.id,
+                      id: time_slot.id
+                    ) %><br>
+      <% end %>
+    <% elsif @event.kind_parent? %>
+      <% @event.days.ordered.where(language: current_language).each do |day| %>
+        <%= link_to 'Événement parent, jour ' + l(day.date),
+                    static_admin_communication_website_agenda_event_day_path(
+                      event_id: @event.id,
+                      id: day.id
+                    ) %><br>
+      <% end %>        
+    <% else %>
+      <%= link_to 'Événement sans créneau ni enfant', static_admin_communication_website_agenda_event_path(@event) %>
+    <% end %>
+  </section>
+<% end %>

@@ -1,4 +1,6 @@
 <%
+day ||= nil
+time_slot ||= nil
 source = time_slot || day || event
 %>
 date: "<%= source.from_day&.iso8601 %>"
