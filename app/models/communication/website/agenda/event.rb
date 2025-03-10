@@ -53,7 +53,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   belongs_to  :parent,
               class_name: 'Communication::Website::Agenda::Event',
-              optional: true
+              optional: true, 
+              touch: true
   has_many    :children,
               class_name: 'Communication::Website::Agenda::Event',
               foreign_key: :parent_id,
