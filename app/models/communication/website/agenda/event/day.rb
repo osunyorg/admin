@@ -56,7 +56,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   end
 
   def template_static
-    "admin/communication/websites/agenda/events/static"
+    "admin/communication/websites/agenda/events/days/static"
   end
 
   def events

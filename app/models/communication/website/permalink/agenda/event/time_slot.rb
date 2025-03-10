@@ -19,16 +19,17 @@ class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication
   end
 
   def substitutions
-    if about.kind_children?
-      parent = about.parent
+    event = about.event
+    if event.kind_children?
+      parent_event = event.parent
       {
-        year: parent.from_day.strftime("%Y"),
-        slug: "#{parent.slug}/#{about.slug}"
+        year: parent_event.from_day.strftime("%Y"),
+        slug: "#{parent_event.slug}/#{event.slug}"
       }
     else
       {
-        year: about.from_day.strftime("%Y"),
-        slug: about.slug
+        year: event.from_day.strftime("%Y"),
+        slug: event.slug
       }
     end
   end

@@ -56,7 +56,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   end
 
   def template_static
-    "admin/communication/websites/agenda/events/static"
+    "admin/communication/websites/agenda/events/time_slots/static"
   end
 
   def from_day

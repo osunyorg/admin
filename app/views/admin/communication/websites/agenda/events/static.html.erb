@@ -1,58 +1,38 @@
 <%
+event = @l10n.about
+day = event.days.for_language(language).ordered.first
 language = @l10n.language
-if @l10n.is_a? Communication::Website::Agenda::Event::Day
-  # Shazam! It's not an event, it's a day in a parent event.
-  # Let's put everything in its right place (like Radiohead).
-  day = @l10n
-  event = day.event
-  event_l10n = day.event_l10n
-  core_l10n = day
-elsif @l10n.is_a? Communication::Website::Agenda::Event::TimeSlot::Localization
-  # Bang! It's a time slot, maybe from a recurring event.
-  time_slot_l10n = @l10n
-  time_slot = time_slot_l10n.time_slot
-  event = time_slot.event
-  event_l10n = time_slot_l10n.event_l10n
-  core_l10n = time_slot_l10n.event_l10n
-else
-  # Almost boring... this event really is an event.
-  event = @l10n.about
-  event_l10n = @l10n
-  core_l10n = @l10n
-  # Always fresh like the first day
-  day = event.days.for_language(language).ordered.first
-end
 %>---
-<%= render 'admin/application/static/core', about: core_l10n, skip_date: true %>
-<%= render 'admin/application/static/breadcrumbs', about: event_l10n %>
+<%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             about: event,
-            l10n: event_l10n,
+            l10n: @l10n,
             full_width: false,
             toc_offcanvas: false %>
 <%= render 'admin/communication/websites/agenda/events/static/dates',
             event: event,
             day: day,
             time_slot: time_slot,
-            l10n: event_l10n,
+            l10n: @l10n,
             locale: language.iso_code %>
 <%= render 'admin/communication/websites/agenda/events/static/parent', event: event, language: language %>
 <%= render 'admin/communication/websites/agenda/events/static/children', day: day %>
 <%= render 'admin/communication/websites/agenda/events/static/time_slots', event: event, language: language %>
-<%= render 'admin/application/l10n/static', about: event_l10n %>
-<%= render 'admin/application/images/featured/static', about: event_l10n %>
-<%= render 'admin/application/images/shared/static', about: event_l10n %>
-<%= render 'admin/application/meta_description/static', about: event_l10n %>
-<%= render 'admin/application/summary/static', about: event_l10n %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
+<%= render 'admin/application/images/featured/static', about: @l10n %>
+<%= render 'admin/application/images/shared/static', about: @l10n %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
 text: >-
-  <%= prepare_html_for_static event_l10n.text %>
+  <%= prepare_html_for_static @l10n.text %>
 notes: >-
-  <%= prepare_html_for_static event_l10n.notes %>
-<%= render 'admin/application/header_cta/static', about: event_l10n %>
+  <%= prepare_html_for_static @l10n.notes %>
+<%= render 'admin/application/header_cta/static', about: @l10n %>
 <%= render 'admin/application/categories/widget/static',
             about: event,
-            l10n: event_l10n,
+            l10n: @l10n,
             categories: @website.agenda_categories,
             key: :events_categories %>
-<%= render 'admin/communication/contents/static', about: event_l10n %>
+<%= render 'admin/communication/contents/static', about: @l10n %>
 ---

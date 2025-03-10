@@ -6,7 +6,7 @@ module Communication::Website::Permalink::WithMapping
       "Administration::Location::Localization" => Communication::Website::Permalink::Location,
       "Communication::Website::Agenda::Event::Day" => Communication::Website::Permalink::Agenda::Event::Day,
       "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
-      "Communication::Website::Agenda::Event::TimeSlotLocalization" => Communication::Website::Permalink::Agenda::Event::TimeSlot,
+      "Communication::Website::Agenda::Event::TimeSlot::Localization" => Communication::Website::Permalink::Agenda::Event::TimeSlot,
       "Communication::Website::Agenda::Exhibition::Localization" => Communication::Website::Permalink::Agenda::Exhibition,
       "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
       "Communication::Website::Agenda::Period::Month::Localization" => Communication::Website::Permalink::Agenda::Period::Month,
