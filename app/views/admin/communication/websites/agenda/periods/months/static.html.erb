@@ -14,11 +14,10 @@ language = @l10n.language
 <%= render 'admin/application/l10n/static', about: @l10n %>
 days:
 <%
-@l10n.days.each do |day| 
-  next unless day.events?
+@l10n.days.each do |day|
   %>
   - date: <%= day.iso8601 %>
-    labels: 
+    labels:
       day: "<%= day.to_s %>"
       full: "<%= day.to_full_name %>"
     events: <%= day.events_count %>
