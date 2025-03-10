@@ -13,7 +13,7 @@ elsif @l10n.is_a? Communication::Website::Agenda::Event::TimeSlot::Localization
   time_slot = time_slot_l10n.time_slot
   event = time_slot.event
   event_l10n = time_slot_l10n.event_l10n
-  core_l10n = time_slot_l10n.event_l10n
+  core_l10n = time_slot_l10n
 else
   # Almost boring... this event really is an event.
   event = @l10n.about

@@ -41,8 +41,8 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   alias :time_slot :about
 
   delegate :event, to: :about
-  delegate :title, :subtitle, :summary, :current_permalink_url_in_website, to: :event_l10n
-  delegate :archive?, to: :event
+  delegate :to_s, :title, :subtitle, :summary, :contents_full_text, to: :event_l10n, allow_nil: true
+  delegate :best_bodyclass, :archive?, to: :event
 
   # /content/fr/events/YYYY/MM/DD-hh-mm-slug.html
   def git_path(website)
@@ -83,9 +83,8 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
     @event_l10n ||= event.localization_for(language)
   end
 
-
-  def to_s
-    slug
+  def hugo_slug_in_website(website)
+    event_l10n.slug
   end
 
   protected

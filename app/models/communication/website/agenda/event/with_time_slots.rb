@@ -7,6 +7,10 @@ module Communication::Website::Agenda::Event::WithTimeSlots
               dependent: :destroy
   end
 
+  def time_slot_localizations
+    Communication::Website::Agenda::Event::TimeSlot::Localization.where(about_id: time_slot_ids)
+  end
+
   def save_time_slots(language, params)
     existing_slots_ids = []
     # Create slots

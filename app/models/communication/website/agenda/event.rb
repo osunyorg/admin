@@ -102,7 +102,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     localizations.in_languages(website.active_language_ids) +
     [parent] +
     days +
-    time_slots
+    # We can't use time_slots here because saving the event does not follow direct objects
+    time_slot_localizations.in_languages(website.active_language_ids)
   end
 
   def references

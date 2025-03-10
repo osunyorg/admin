@@ -27,15 +27,15 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
 
   after_create :create_months
 
-  has_many :months
-  has_many :days
+  has_many :months, dependent: :destroy
+  has_many :days, dependent: :destroy
 
   scope :ordered, -> { order(value: :desc) }
 
   def self.exists_for?(website, value)
     exists?(
-      university: website.university, 
-      website: website, 
+      university: website.university,
+      website: website,
       value: value
     )
   end
@@ -43,8 +43,8 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
   def self.create_for(website, value)
     return if exists_for?(website, value)
     year = where(
-      university: website.university, 
-      website: website, 
+      university: website.university,
+      website: website,
       value: value
     ).first_or_create
     year.save_and_sync
@@ -58,7 +58,7 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
   end
 
   protected
-  
+
   def create_months
     12.times do |index|
       month = Communication::Website::Agenda::Period::Month.where(
