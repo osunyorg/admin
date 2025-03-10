@@ -146,12 +146,12 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   end
 
   def slug_unavailable?(slug)
-    if parent_id.present?
+    if about.parent_id.present?
       self.class.unscoped
                 .left_joins(:about)
                 .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
                 .where.not(id: self.id)
-                .where(parent_id: self.parent_id)
+                .where(about: { parent_id: about.parent_id })
                 .exists?
     else
       self.class.unscoped
