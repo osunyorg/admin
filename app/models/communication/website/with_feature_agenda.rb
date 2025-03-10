@@ -48,4 +48,11 @@ module Communication::Website::WithFeatureAgenda
     end
   end
 
+  def feature_agenda_dependencies
+    events +
+    exhibitions +
+    agenda_categories +
+    agenda_years +
+    agenda_months
+  end
 end

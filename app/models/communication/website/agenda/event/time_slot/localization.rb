@@ -52,8 +52,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   # events/YYYY/MM/DD-hh-mm-slug.html
   def git_path_relative
-    # Slug is in fact DD-hh-mm-slug
-    "events/#{from_day.strftime "%Y/%m"}/#{slug}.html"
+    "events/#{from_day.strftime "%Y/%m"}/#{slug}-#{event_l10n.slug}.html"
   end
 
   def template_static
@@ -84,11 +83,6 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
     @event_l10n ||= event.localization_for(language)
   end
 
-  # DD-hh-mm-slug
-  # 14-16-00-contes-a-paillettes
-  def set_slug
-    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}-#{event_l10n.slug}"
-  end
 
   def to_s
     slug
@@ -96,7 +90,19 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   protected
 
-  def skip_slug_validation?
-    true
+  # Override from Permalinkable/Sluggable
+  def slug_unavailable?(slug)
+    self.class.unscoped
+              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
+              .where(about_id: about_id)
+              .where.not(id: self.id)
+              .exists?
+  end
+
+  # Override from Permalinkable/Sluggable
+  # DD-hh-mm
+  # 14-16-00
+  def set_slug
+    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}"
   end
 end
