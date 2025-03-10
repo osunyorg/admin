@@ -32,6 +32,8 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     time_slots.where.not(id: existing_slots_ids).each do |time_slot|
       time_slot.destroy
     end
+    # Sync event after time slots save
+    sync_with_git
   end
 
   # slot is a hash
