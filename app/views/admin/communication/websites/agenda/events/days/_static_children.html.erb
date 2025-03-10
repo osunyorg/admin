@@ -2,8 +2,12 @@
 if day.present?
   event = day.event
   language = day.language
-  children_for_day = day.events.ordered(language)
-  children = event.children.ordered(language)
+  children_for_day = day.events
+                        .published_now_in(language)
+                        .ordered(language)
+  children = event.children
+                  .published_now_in(language)
+                  .ordered(language)
 %>
 <%= render 'admin/application/static/hugo/collection',
     key: :children_for_the_day,

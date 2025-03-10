@@ -30,7 +30,8 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include WithUniversity
 
   belongs_to  :communication_website_agenda_event,
-              class_name: 'Communication::Website::Agenda::Event'
+              class_name: 'Communication::Website::Agenda::Event',
+              touch: true
   alias :event :communication_website_agenda_event
 
   validates :datetime, presence: true

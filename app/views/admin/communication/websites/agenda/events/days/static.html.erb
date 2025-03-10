@@ -17,7 +17,7 @@ language = @l10n.language
             l10n: event_l10n,
             locale: language.iso_code %>
 <%= render 'admin/communication/websites/agenda/events/static/parent', event: event, language: language %>
-<%= render 'admin/communication/websites/agenda/events/static/children', day: day %>
+<%= render 'admin/communication/websites/agenda/events/days/static_children', day: day %>
 <%= render 'admin/communication/websites/agenda/events/static/time_slots', event: event, language: language %>
 <%= render 'admin/application/l10n/static', about: event_l10n %>
 <%= render 'admin/application/images/featured/static', about: event_l10n %>

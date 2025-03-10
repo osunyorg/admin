@@ -12,6 +12,7 @@
                     ) %><br>
       <% end %>
     <% elsif @event.kind_parent? %>
+      <%= link_to 'Événement parent (premier jour)', static_admin_communication_website_agenda_event_path(@event) %><br>
       <% @event.days.ordered.where(language: current_language).each do |day| %>
         <%= link_to 'Événement parent, jour ' + l(day.date),
                     static_admin_communication_website_agenda_event_day_path(
