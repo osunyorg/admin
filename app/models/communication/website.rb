@@ -78,6 +78,7 @@ class Communication::Website < ApplicationRecord
   include WithShowcase
   include WithStyle
   include WithTheme
+  include WithTimeZone
   include WithUniversity
 
   enum :git_provider, {
