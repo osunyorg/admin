@@ -102,6 +102,10 @@ module Communication::Website::Agenda::Period::InPeriod
     [day_before_change&.year, day_after_change&.year].uniq.compact
   end
 
+  def months_concerned_by_change
+    [day_before_change&.month, day_after_change&.month].uniq.compact
+  end
+
   def touch_periods
     # Periods might not exist yet!
     # If so, no problem, they will be properly initialized by create_periods
@@ -110,6 +114,9 @@ module Communication::Website::Agenda::Period::InPeriod
     touch_day(day_after_change)
     years_concerned_by_change.each do |year|
       save_and_sync_year(year)
+    end
+    months_concerned_by_change.each do |month|
+      save_and_sync_month(month)
     end
   end
 
@@ -127,6 +134,14 @@ module Communication::Website::Agenda::Period::InPeriod
       university: university,
       website: website,
       value: year_value
+    )&.save_and_sync
+  end
+
+  def save_and_sync_month(month_value)
+    Communication::Website::Agenda::Period::Month.find_by(
+      university: university,
+      website: website,
+      value: month_value
     )&.save_and_sync
   end
 
