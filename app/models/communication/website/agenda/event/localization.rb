@@ -90,6 +90,11 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     git_path_content_prefix(website) + git_path_relative
   end
 
+  # events/2025/01/01-arte-concert-festival.html
+  def git_path_relative
+    "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
+  end
+
   def template_static
     "admin/communication/websites/agenda/events/static"
   end
@@ -117,30 +122,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   end
 
   protected
-
-  def git_path_relative
-    # events with 1 slot or more are managed by TimeSlots
-    if event.kind_parent?
-      git_path_relative_parent
-    elsif event.time_slots.none?
-      git_path_relative_no_slots
-    end
-  end
-
-  def git_path_relative_no_slots
-    if event.kind_child?
-      # events/YYYY/parent_slug/YYYY-MM-DD-slug.html
-      "events/#{parent.from_day.strftime "%Y"}/#{parent.slug}/#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
-    else
-      # events/YYYY/MM-DD-slug.html
-      "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
-    end
-  end
-
-  # events/YYYY/slug/_index.html
-  def git_path_relative_parent
-    "events/#{from_day.strftime "%Y"}/#{slug}/_index.html"
-  end
 
   def check_accessibility
     accessibility_merge_array blocks
