@@ -58,7 +58,6 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def title_link
-    return link_to_events_archive if time == 'archive'
     return link_to_category if mode == 'category' && category.present?
     return link_to_events if mode == 'all'
     nil
@@ -75,11 +74,6 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     permalink_for(special_page_l10n)
   end
 
-  def link_to_events_archive
-    special_page_l10n = events_archive_special_page.localization_for(block.language)
-    permalink_for(special_page_l10n)
-  end
-
   def link_to_category
     category_l10n = category.localization_for(block.language)
     permalink_for(category_l10n)
@@ -87,10 +81,6 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
 
   def events_special_page
     website.special_page(Communication::Website::Page::CommunicationAgenda)
-  end
-
-  def events_archive_special_page
-    website.special_page(Communication::Website::Page::CommunicationAgendaArchive)
   end
 
   def permalink_for(l10n)
