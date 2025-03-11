@@ -49,6 +49,10 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
     "admin/communication/websites/agenda/periods/months/static"
   end
 
+  def to_month_number
+    I18n.localize(about.first_day, locale: language.iso_code, format: '%m')
+  end
+
   def to_month_name
     I18n.t("date.month_names", locale: language.iso_code)[about.value].titleize
   end
@@ -70,7 +74,7 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
   end
 
   def to_s
-    I18n.localize(about.first_day, locale: language.iso_code, format: '%m')
+    to_month_name
   end
 
   protected
