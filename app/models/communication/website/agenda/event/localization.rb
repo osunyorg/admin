@@ -113,6 +113,19 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     event.parent&.localization_for(language)
   end
 
+  def hugo(website)
+    if event.time_slots.any?
+      time_slot = event.time_slots.first
+      time_slot_l10n = time_slot.localization_for(language)
+      time_slot_l10n.hugo(website)
+    elsif event.days.any?
+      day = event.days.first
+      day.hugo(website)
+    else
+      super(website)
+    end
+  end
+
   def to_s
     "#{title}"
   end
