@@ -112,7 +112,7 @@ module Communication::Website::Agenda::Period::InPeriod
       save_and_sync_year(year)
     end
     save_and_sync_month(day_after_change)
-    different_months = (day_before_change.strftime('%Y%m') != day_before_change.strftime('%Y%m'))
+    different_months = (day_after_change&.strftime('%Y%m') != day_before_change&.strftime('%Y%m'))
     save_and_sync_month(day_before_change) if different_months
   end
 
@@ -134,6 +134,7 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def save_and_sync_month(date)
+    return if date.nil?
     year = Communication::Website::Agenda::Period::Year.find_by(
       university: university,
       website: website,
