@@ -2,6 +2,7 @@ namespace :app do
   desc 'Fix things'
   task fix: :environment do
     Communication::Website::Agenda::CreateTimeSlotsJob.perform_later
+    Migrations::Agenda.migrate
   end
 
   namespace :search do
