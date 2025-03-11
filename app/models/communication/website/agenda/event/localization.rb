@@ -115,11 +115,11 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def hugo(website)
     if event.time_slots.any?
-      time_slot = event.time_slots.first
+      time_slot = event.time_slots.ordered.first
       time_slot_l10n = time_slot.localization_for(language)
       time_slot_l10n.hugo(website)
     elsif event.days.any?
-      day = event.days.first
+      day = event.days.ordered.first
       day.hugo(website)
     else
       super(website)

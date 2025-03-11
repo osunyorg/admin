@@ -1,6 +1,7 @@
 class Communication::Website::Permalink::Agenda::Event::Day < Communication::Website::Permalink
+
+  # /agenda/2025/arte-concert-festival/
   def self.pattern_in_website(website, language, about = nil)
-    # /agenda/2025/arte-concert-festival/
     "#{special_page_path(website, language)}/:year/:slug/"
   end
 

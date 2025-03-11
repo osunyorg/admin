@@ -59,7 +59,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   end
 
   def events
-    event.children.where(from_day: date)
+    @events ||= event.children.on_day(date)
   end
 
   def event_l10n
