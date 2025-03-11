@@ -45,8 +45,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
     return if website.id != communication_website_id || # Wrong website, should never happen
               events.none? || # Nothing this day
               event_l10n.nil? || # Event not localized in this language
-              !event_l10n.published || # Event not published
-              first? # First day is done by the event itself
+              !event_l10n.published # Event not published
     git_path_content_prefix(website) + git_path_relative
   end
 
@@ -70,10 +69,6 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
 
   def from_day
     date
-  end
-
-  def first?
-    event.days.first.id == id
   end
 
   protected

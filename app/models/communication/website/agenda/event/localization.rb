@@ -86,6 +86,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
     return if event.time_slots.any? # Rendered by Communication::Website::Agenda::Event::TimeSlot
+    return if event.children.any? # Rendered by Communication::Website::Agenda::Event::Day
     git_path_content_prefix(website) + git_path_relative
   end
 
