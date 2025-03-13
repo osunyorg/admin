@@ -74,4 +74,9 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   def skip_slug_validation?
     true
   end
+
+  # Override from Permalinkable/Sluggable
+  def set_slug
+    self.slug = about.value
+  end
 end
