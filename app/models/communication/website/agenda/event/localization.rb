@@ -117,10 +117,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     if event.time_slots.any?
       time_slot = event.time_slots.ordered.first
       time_slot_l10n = time_slot.localization_for(language)
-      time_slot_l10n.hugo(website)
+      time_slot_l10n&.hugo(website)
     elsif event.days.any?
       day = event.days.ordered.first
-      day.hugo(website)
+      day&.hugo(website)
     else
       super(website)
     end
