@@ -6,6 +6,7 @@ class Ability::WebsiteManager < Ability
     can [:read, :analytics], Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, Communication::Website::Localization, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id, communication_website_id: managed_websites_ids
+    can :manage, Communication::Website::Agenda::Exhibition, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Agenda::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can [:read, :update, :reorder], Communication::Website::Menu, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Menu::Item, university_id: @user.university_id, website_id: managed_websites_ids
@@ -42,6 +43,14 @@ class Ability::WebsiteManager < Ability
   def managed_agenda_event_localization_ids
     @managed_agenda_event_localization_ids ||= begin
       Communication::Website::Agenda::Event::Localization
+        .where(communication_website_id: managed_websites_ids)
+        .pluck(:id)
+    end
+  end
+
+  def managed_agenda_exhibition_localization_ids
+    @managed_agenda_event_localization_ids ||= begin
+      Communication::Website::Agenda::Exhibition::Localization
         .where(communication_website_id: managed_websites_ids)
         .pluck(:id)
     end
@@ -97,6 +106,7 @@ class Ability::WebsiteManager < Ability
 
   def manage_blocks
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Exhibition::Localization', about_id: managed_agenda_exhibition_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Category::Localization', about_id: managed_agenda_category_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Page::Localization', about_id: managed_page_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Page::Category::Localization', about_id: managed_page_category_localization_ids
