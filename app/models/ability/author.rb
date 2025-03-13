@@ -11,7 +11,7 @@ class Ability::Author < Ability
     can :create, Communication::Website::Portfolio::Project, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :create, Communication::Website::Post, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Exhibition::Localization', about_id: managed_agenda_event_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Exhibition::Localization', about_id: managed_agenda_exhibition_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Portfolio::Project::Localization', about_id: managed_portfolio_project_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post::Localization', about_id: managed_post_localization_ids
     can :create, Communication::Block
