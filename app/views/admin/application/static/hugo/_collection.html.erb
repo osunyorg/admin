@@ -10,6 +10,7 @@ collection.each do |element|
   l10n = element.localization_for(language)
   next if l10n.nil?
   hugo = l10n.hugo(@website)
+  next if hugo.nil?
   %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: depth+1 %>
 <% end %>
