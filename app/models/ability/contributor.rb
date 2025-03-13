@@ -4,6 +4,7 @@ class Ability::Contributor < Ability::Author
     super
     cannot :publish, Communication::Website::Post
     cannot :publish, Communication::Website::Agenda::Event
+    cannot :publish, Communication::Website::Agenda::Exhibition
     cannot :publish, Communication::Website::Portfolio::Project
   end
 
