@@ -41,9 +41,14 @@ class Communication::Website::Agenda::Category < ApplicationRecord
                           optional: true
   has_and_belongs_to_many :events
   alias                   :category_objects :events
+  has_and_belongs_to_many :exhibitions
 
   def event_localizations
     Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)
+  end
+
+  def exhibition_localizations
+    Communication::Website::Agenda::Exhibition::Localization.where(about_id: exhibition_ids)
   end
 
   def dependencies
@@ -55,6 +60,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   def references
     events +
     event_localizations +
+    exhibition_localizations +
     website.menus.in_languages(website.active_language_ids) +
     [parent]
   end

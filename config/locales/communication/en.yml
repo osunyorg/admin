@@ -145,20 +145,43 @@ en:
         url: URL
       communication/website/agenda/event:
         categories: Categories
+        children: Child events
         dates: Dates
+        day: Day
         from_day: From day
-        from_hour: From hour
+        parent: Parent event
         status: Status
         status_archive: Archive
         status_current: Running now
         status_future: In the future
         time_zone: Time zone
         to_day: To day
-        to_hour: To hour
       communication/website/agenda/event/localization:
         featured_image: Featured image
+        notes: Notes
         published: Published
         subtitle: Subtitle
+        text: Information
+        title: Title
+      communication/website/agenda/event/time_slot:
+        hour: Hour
+      communication/website/agenda/exhibition:
+        categories: Categories
+        dates: Dates
+        from_day: From day
+        status: Status
+        status_archive: Archive
+        status_current: Running now
+        status_future: In the future
+        time_zone: Time zone
+        to_day: To day
+      communication/website/agenda/exhibition/localization:
+        featured_image: Featured image
+        notes: Notes
+        place: Place
+        published: Published
+        subtitle: Subtitle
+        text: Information
         title: Title
       communication/website/connection:
         direct_source: Direct source
@@ -272,6 +295,10 @@ en:
               too_soon: must be after "from day"
             to_hour:
               too_soon: must be after "from hour"
+        communication/website/agenda/event/localization:
+          attributes:
+            slug:
+              numeric_only: ne doit pas être constitué que de chiffres
         communication/website/localization:
           attributes:
             published:
@@ -320,6 +347,12 @@ en:
       communication/website/agenda/event:
         one: Event
         other: Events
+      communication/website/agenda/event/time_slot:
+        one: Time slot
+        other: Time slots
+      communication/website/agenda/exhibition:
+        one: Exhibition
+        other: Exhibitions
       communication/website/connection:
         one: Connection
         other: Connections
@@ -376,11 +409,15 @@ en:
       website:
         agenda:
           event:
+            create_child: Create a child event
             localizations:
               draft: Draft
           events:
             formatted_time_zone: "Time zone: %{time_zone}"
             none: No event yet
+          exhibitions:
+            formatted_time_zone: "Time zone: %{time_zone}"
+            none: No exhibition yet
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the website <i>%{website}</i> in %{language}."
           title: Localization confirmation
@@ -522,8 +559,14 @@ en:
             slug: agenda
             title: Agenda
           communication_agenda_archive:
-            slug: archives
-            title: Archives
+            slug: events-archives
+            title: Events' archives
+          communication_agenda_exhibition:
+            slug: exhibitions
+            title: Exhibitions
+          communication_agenda_exhibition_archive:
+            slug: exhibitions-archives
+            title: Exhibitions' archives
           communication_portfolio:
             slug: projects
             title: Projects

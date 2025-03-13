@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_24_215711) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_10_154532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
@@ -550,6 +550,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_24_215711) do
     t.boolean "header_cta", default: false
     t.string "header_cta_label"
     t.string "header_cta_url"
+    t.text "notes"
     t.index ["about_id"], name: "idx_on_about_id_db6323806a"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_87f393a516"
     t.index ["language_id"], name: "idx_on_language_id_c00e1d0218"
@@ -565,6 +566,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_24_215711) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "add_to_calendar_urls"
+    t.string "slug"
     t.index ["about_id"], name: "idx_on_about_id_e52a2e12b0"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_526f156fed"
     t.index ["language_id"], name: "idx_on_language_id_f50f565794"
@@ -624,6 +626,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_24_215711) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "communication_website_id", null: false
+    t.text "text"
+    t.text "notes"
+    t.string "place"
     t.index ["about_id"], name: "idx_on_about_id_a6e772a338"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_8261badeaa"
     t.index ["language_id"], name: "idx_on_language_id_a2de6ce8d0"
@@ -643,6 +648,89 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_24_215711) do
     t.index ["communication_website_id"], name: "index_agenda_exhibitions_on_communication_website_id"
     t.index ["created_by_id"], name: "idx_on_created_by_id_c3766f3a0a"
     t.index ["university_id"], name: "idx_on_university_id_46e895f493"
+  end
+
+  create_table "communication_website_agenda_period_day_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug"
+    t.integer "events_count", default: 0
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.uuid "language_id", null: false
+    t.uuid "about_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_ff7b8b96ea"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_c9cc20d97c"
+    t.index ["language_id"], name: "idx_on_language_id_1d8b40b5f3"
+    t.index ["university_id"], name: "idx_on_university_id_55f80b8bba"
+  end
+
+  create_table "communication_website_agenda_period_days", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "value"
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.uuid "year_id", null: false
+    t.uuid "month_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_54db819007"
+    t.index ["month_id"], name: "index_communication_website_agenda_period_days_on_month_id"
+    t.index ["university_id", "communication_website_id", "year_id", "month_id", "value"], name: "index_communication_website_agenda_period_days_unique", unique: true
+    t.index ["university_id"], name: "idx_on_university_id_a0967d0da6"
+    t.index ["year_id"], name: "index_communication_website_agenda_period_days_on_year_id"
+  end
+
+  create_table "communication_website_agenda_period_month_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "communication_website_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_e3d3e69fcb"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_2202f6cc51"
+    t.index ["language_id"], name: "idx_on_language_id_8b9b18a131"
+    t.index ["university_id"], name: "idx_on_university_id_a6d1f20f5d"
+  end
+
+  create_table "communication_website_agenda_period_months", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.uuid "year_id", null: false
+    t.integer "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_49eaf81807"
+    t.index ["university_id", "communication_website_id", "year_id", "value"], name: "index_communication_website_agenda_period_months_unique", unique: true
+    t.index ["university_id"], name: "idx_on_university_id_f680736f97"
+    t.index ["year_id"], name: "index_communication_website_agenda_period_months_on_year_id"
+  end
+
+  create_table "communication_website_agenda_period_year_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "slug"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "communication_website_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_9d0e59880a"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_ccc9a47ea5"
+    t.index ["language_id"], name: "idx_on_language_id_bfc0e09bd9"
+    t.index ["university_id"], name: "idx_on_university_id_22e1603ccb"
+  end
+
+  create_table "communication_website_agenda_period_years", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.integer "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_dd738e97d3"
+    t.index ["university_id", "communication_website_id", "value"], name: "index_communication_website_agenda_period_years_unique", unique: true
+    t.index ["university_id"], name: "idx_on_university_id_2c377eb7c0"
   end
 
   create_table "communication_website_connections", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -2192,6 +2280,25 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_24_215711) do
   add_foreign_key "communication_website_agenda_exhibitions", "communication_websites"
   add_foreign_key "communication_website_agenda_exhibitions", "universities"
   add_foreign_key "communication_website_agenda_exhibitions", "users", column: "created_by_id"
+  add_foreign_key "communication_website_agenda_period_day_localizations", "communication_website_agenda_period_days", column: "about_id"
+  add_foreign_key "communication_website_agenda_period_day_localizations", "communication_websites"
+  add_foreign_key "communication_website_agenda_period_day_localizations", "languages"
+  add_foreign_key "communication_website_agenda_period_day_localizations", "universities"
+  add_foreign_key "communication_website_agenda_period_days", "communication_website_agenda_period_months", column: "month_id"
+  add_foreign_key "communication_website_agenda_period_days", "communication_website_agenda_period_years", column: "year_id"
+  add_foreign_key "communication_website_agenda_period_days", "communication_websites"
+  add_foreign_key "communication_website_agenda_period_days", "universities"
+  add_foreign_key "communication_website_agenda_period_month_localizations", "communication_website_agenda_period_months", column: "about_id"
+  add_foreign_key "communication_website_agenda_period_month_localizations", "languages"
+  add_foreign_key "communication_website_agenda_period_month_localizations", "universities"
+  add_foreign_key "communication_website_agenda_period_months", "communication_website_agenda_period_years", column: "year_id"
+  add_foreign_key "communication_website_agenda_period_months", "communication_websites"
+  add_foreign_key "communication_website_agenda_period_months", "universities"
+  add_foreign_key "communication_website_agenda_period_year_localizations", "communication_website_agenda_period_years", column: "about_id"
+  add_foreign_key "communication_website_agenda_period_year_localizations", "languages"
+  add_foreign_key "communication_website_agenda_period_year_localizations", "universities"
+  add_foreign_key "communication_website_agenda_period_years", "communication_websites"
+  add_foreign_key "communication_website_agenda_period_years", "universities"
   add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_connections", "universities"
   add_foreign_key "communication_website_git_file_layouts", "communication_websites"

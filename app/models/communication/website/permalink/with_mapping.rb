@@ -4,8 +4,13 @@ module Communication::Website::Permalink::WithMapping
   included do
     MAPPING = {
       "Administration::Location::Localization" => Communication::Website::Permalink::Location,
+      "Communication::Website::Agenda::Event::Day" => Communication::Website::Permalink::Agenda::Event::Day,
       "Communication::Website::Agenda::Event::Localization" => Communication::Website::Permalink::Agenda::Event,
+      "Communication::Website::Agenda::Event::TimeSlot::Localization" => Communication::Website::Permalink::Agenda::Event::TimeSlot,
+      "Communication::Website::Agenda::Exhibition::Localization" => Communication::Website::Permalink::Agenda::Exhibition,
       "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
+      "Communication::Website::Agenda::Period::Month::Localization" => Communication::Website::Permalink::Agenda::Period::Month,
+      "Communication::Website::Agenda::Period::Year::Localization" => Communication::Website::Permalink::Agenda::Period::Year,
       "Communication::Website::Page::Category::Localization" => Communication::Website::Permalink::Page::Category,
       "Communication::Website::Page::Localization" => Communication::Website::Permalink::Page,
       "Communication::Website::Portfolio::Project::Localization" => Communication::Website::Permalink::Portfolio::Project,

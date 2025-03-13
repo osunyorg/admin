@@ -1,0 +1,57 @@
+<div class="row mt-5 g-3">
+  <%
+  # Show days, Monday to Sunday
+  7.times do |index|
+    day_index = (index + 1) % 7
+    %>
+    <div class="col">
+      <%= I18n.t("date.day_names")[day_index].titleize %>
+      <hr>
+    </div>
+  <% end %>
+</div>
+<%
+current = nil
+finished = false
+first_day_of_month = month.days.first
+%>
+<%
+# More than enough months
+6.times do %>
+  <div class="row g-3">
+    <%
+    # 7 days per week
+    7.times do |index|
+      # Week starting on monday
+      # https://apidock.com/ruby/v2_2_9/Date/cwday
+      cwday = index + 1
+      # Start at the proper day
+      current = first_day_of_month if current.nil? && cwday == first_day_of_month.cwday && !finished
+      %>
+      <div class="col">
+        <%
+        # Skip days not in the month (before first day of month)
+        if current.present? %>
+          <div class="position-relative p-2 rounded" style="<% if current.events? %>background: white; <% end %>min-height: 65px;">
+            <p class="small text-muted m-0">
+              <% if current.events? %><a href="#day-<%= current.day %>" class="stretched-link"><% end %>
+              <%= current.day %>
+              <% if current.events? %></a><% end %>
+            </p>
+            <p class="m-0">
+              <% if current.events? %>
+                <%= osuny_published true %>
+                <%= current.events_count %>
+              <% end %>
+            </p>
+            <%
+            current = current.next
+            finished = current.nil?
+            %>
+          </div>
+          <hr>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

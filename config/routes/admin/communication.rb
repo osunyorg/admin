@@ -84,6 +84,24 @@ namespace :communication do
     end
     namespace :agenda do
       resources :events, controller: '/admin/communication/websites/agenda/events' do
+        resources :days, controller: '/admin/communication/websites/agenda/events/days', only: [] do
+          member do
+            get :static
+          end
+        end
+        resources :time_slots, controller: '/admin/communication/websites/agenda/events/time_slots', only: [] do
+          member do
+            get :static
+          end
+        end
+        member do
+          get :static
+          post :duplicate
+          post :publish
+          post :save_time_slots
+        end
+      end
+      resources :exhibitions, controller: '/admin/communication/websites/agenda/exhibitions' do
         member do
           get :static
           post :duplicate
@@ -97,6 +115,18 @@ namespace :communication do
         member do
           get :children
           get :static
+        end
+      end
+      namespace :periods, path: '' do
+        resources :years, only: [:index, :show], controller: '/admin/communication/websites/agenda/periods/years' do        
+          member do
+            get :static
+          end
+          resources :months, only: :show, controller: '/admin/communication/websites/agenda/periods/months' do
+            member do
+              get :static
+            end
+          end
         end
       end
       root to: '/admin/communication/websites/agenda/events#index'

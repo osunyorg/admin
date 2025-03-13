@@ -1,0 +1,31 @@
+<%
+year = @l10n.about
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/core',
+            about: @l10n,
+            skip_date: true %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            full_width: true,
+            toc_present: false,
+            toc_offcanvas: false %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
+is_year: true
+bodyclass: >-
+  events__section-year
+months:
+<%
+@l10n.months.each do |month|
+  hugo = month.hugo(@website)
+  %>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
+    name: "<%= month.to_month_name %>"
+    days:
+<% month.days.each do |day| %>
+      - day: <%= day.iso8601 %>
+        cwday: <%= day.cwday %>
+        events: <%= day.events_count %>
+<% end %>
+<% end %>
+---

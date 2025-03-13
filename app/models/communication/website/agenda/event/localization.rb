@@ -41,17 +41,17 @@
 #  fk_rails_bb85c47fb8  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
+  include AddableToCalendar
   include AsLocalization
   include AsLocalizedTree
   include Contentful
   include HeaderCallToAction
   include Initials
-  include Permalinkable
+  include Permalinkable # slug_unavailable method overwrite in this file
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
-  include WithCal
   include WithFeaturedImage
   include WithGitFiles
   include WithOpenApi
@@ -68,24 +68,31 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
             :from_day, :from_hour,
             :to_day, :to_hour,
             :time_zone,
+            :kind_simple?,
+            :kind_recurring?,
+            :kind_parent?,
+            :kind_child?,
             to: :event
 
   has_summernote :summary
   has_summernote :text
+  has_summernote :notes
 
   validates :title, presence: true
+  validate :slug_cant_be_numeric_only
+
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
+    return if event.time_slots.any? # Rendered by Communication::Website::Agenda::Event::TimeSlot
+    return if event.children.any? # Rendered by Communication::Website::Agenda::Event::Day
     git_path_content_prefix(website) + git_path_relative
   end
 
+  # events/2025/01/01-arte-concert-festival.html
   def git_path_relative
-    path = "events/"
-    path += "archives/#{from_day.year}/" if archive?
-    path += "#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
-    path
+    "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
   end
 
   def template_static
@@ -99,6 +106,24 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def categories
     about.categories.ordered.map { |category| category.localization_for(language) }.compact
+  end
+
+  # Utility method to give parent localization
+  def parent
+    event.parent&.localization_for(language)
+  end
+
+  def hugo(website)
+    if event.time_slots.any?
+      time_slot = event.time_slots.ordered.first
+      time_slot_l10n = time_slot.localization_for(language)
+      time_slot_l10n.hugo(website)
+    elsif event.days.any?
+      day = event.days.ordered.first
+      day.hugo(website)
+    else
+      super(website)
+    end
   end
 
   def to_s
@@ -116,10 +141,25 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   end
 
   def slug_unavailable?(slug)
-    self.class.unscoped
-              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
-              .where.not(id: self.id)
-              .exists?
+    if about.parent_id.present?
+      self.class.unscoped
+                .left_joins(:about)
+                .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
+                .where.not(id: self.id)
+                .where(about: { parent_id: about.parent_id })
+                .exists?
+    else
+      self.class.unscoped
+                .left_joins(:about)
+                .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
+                .where.not(id: self.id)
+                .where("date_part('year', communication_website_agenda_events.from_day) = ?", about.from_day.year)
+                .exists?
+    end
+  end
+
+  def slug_cant_be_numeric_only
+    errors.add(:slug, :numeric_only) if slug.tr('0-9', '').blank?
   end
 
   def set_communication_website_id
@@ -136,4 +176,5 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   def localize_other_attachments(localization)
     localize_attachment(localization, :shared_image) if shared_image.attached?
   end
+
 end

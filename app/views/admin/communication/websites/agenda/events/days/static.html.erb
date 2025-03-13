@@ -1,0 +1,38 @@
+<%
+day = @l10n
+event = day.event
+event_l10n = day.event_l10n
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/core', about: day, skip_date: true %>
+<%= render 'admin/application/static/breadcrumbs', about: event_l10n %>
+<%= render 'admin/application/static/design',
+            about: event,
+            l10n: event_l10n,
+            full_width: false,
+            toc_offcanvas: false %>
+<%= render 'admin/communication/websites/agenda/events/static/dates',
+            event: event,
+            day: day,
+            l10n: event_l10n,
+            locale: language.iso_code %>
+<%= render 'admin/communication/websites/agenda/events/static/parent', event: event, language: language %>
+<%= render 'admin/communication/websites/agenda/events/days/static_children', day: day %>
+<%= render 'admin/communication/websites/agenda/events/time_slots/static/all', event: event, language: language %>
+<%= render 'admin/application/l10n/static', about: event_l10n %>
+<%= render 'admin/application/images/featured/static', about: event_l10n %>
+<%= render 'admin/application/images/shared/static', about: event_l10n %>
+<%= render 'admin/application/meta_description/static', about: event_l10n %>
+<%= render 'admin/application/summary/static', about: event_l10n %>
+text: >-
+  <%= prepare_html_for_static event_l10n.text %>
+notes: >-
+  <%= prepare_html_for_static event_l10n.notes %>
+<%= render 'admin/application/header_cta/static', about: event_l10n %>
+<%= render 'admin/application/categories/widget/static',
+            about: event,
+            l10n: event_l10n,
+            categories: @website.agenda_categories,
+            key: :events_categories %>
+<%= render 'admin/communication/contents/static', about: event_l10n %>
+---
