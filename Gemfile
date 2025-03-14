@@ -60,7 +60,7 @@ gem "pg", "~> 1"
 gem "pghero"
 gem "pg_query"
 gem "puma"
-gem "rails", "~> 7.2.0"
+gem "rails", "~> 8.0.2"
 gem "rails-autocomplete", "~> 2"
 gem "rails-i18n"
 gem "rbnacl", "~> 7.1"
@@ -92,7 +92,7 @@ group :development, :test do
 end
 
 group :development do
-  gem "annotate"
+  gem "annotaterb"
   gem "listen", "~> 3.3"
   gem "rack-mini-profiler", "~> 3.0"
   gem "spring"
