@@ -12,6 +12,14 @@ language = @l10n.language
             toc_offcanvas: false %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 is_year: true
+<% if @l10n.next.present? %>
+next_year:
+<%= render 'admin/application/static/hugo/values', hugo: @l10n.next.hugo(@website) %>
+<% end %>
+<% if @l10n.previous.present? %>
+previous_year:
+<%= render 'admin/application/static/hugo/values', hugo: @l10n.previous.hugo(@website) %>
+<% end %>
 bodyclass: >-
   events__section-year
 months:

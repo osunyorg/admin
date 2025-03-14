@@ -57,6 +57,14 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
     about.days.map { |day| day.localized_in(language) }
   end
 
+  def next
+    about.next&.localized_in(language)
+  end
+
+  def previous
+    about.previous&.localized_in(language)
+  end
+
   # 25
   def last_two_digits
     to_s.last(2)
