@@ -1,0 +1,8 @@
+<%
+depth ||= 0
+indentation = '  ' * depth
+%>
+<%= indentation %>  permalink: "<%= hugo.permalink %>"
+<%= indentation %>  path: "<%= hugo.path %>"
+<%= indentation %>  slug: "<%= hugo.slug %>"
+<%= indentation %>  file: "<%= hugo.file %>"

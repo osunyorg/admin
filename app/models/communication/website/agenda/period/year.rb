@@ -58,6 +58,22 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
     months
   end
 
+  def previous
+    Communication::Website::Agenda::Period::Year.find_by(
+      university: university,
+      website: website,
+      value: value - 1
+    )
+  end
+
+  def next
+    Communication::Website::Agenda::Period::Year.find_by(
+      university: university,
+      website: website,
+      value: value + 1
+    )
+  end
+
   protected
 
   def create_months
