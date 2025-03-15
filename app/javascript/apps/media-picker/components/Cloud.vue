@@ -1,9 +1,11 @@
 <script>
-import { CloudDownload } from 'lucide-vue-next';
+import { CloudDownload, ArrowRight, ArrowLeft } from 'lucide-vue-next';
 
 export default {
     components: {
-      CloudDownload
+      CloudDownload,
+      ArrowRight,
+      ArrowLeft
     },
     data () {
       return {
@@ -172,49 +174,41 @@ export default {
           <div class="modal-footer d-block">
             <div class="row">
               <div class="col-lg-6">
-                <div class="row vue__media-picker__unsplash vue__media-picker__unsplash__nav">
-                  <div class="col-lg-5">
-                    <button
-                        class="btn btn-light btn-sm"
-                        v-if="unsplash.page > 1"
-                        @click="unsplash.page = unsplash.page - 1">
-                      {{ i18n.previous }}
-                    </button>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img :src="settings.unsplash.logo" width="100" alt="Unsplash" />
-                  </div>
-                  <div class="col-lg-5 text-end">
-                    <button
-                        class="btn btn-light btn-sm"
-                        v-if="unsplash.page < unsplash.data.total_pages"
-                        @click="unsplash.page = unsplash.page + 1">
-                      {{ i18n.next }}
-                    </button>
-                  </div>
+                <div class="vue__media-picker__unsplash vue__media-picker__unsplash__nav">
+                  <img :src="settings.unsplash.logo" width="100" alt="Unsplash" class="me-3" />
+                  <button
+                    class="btn btn-sm me-3"
+                    v-if="unsplash.page < unsplash.data.total_pages"
+                    @click="unsplash.page = unsplash.page + 1"
+                    title="{{ i18n.next }}">
+                    <ArrowRight stroke-width="1.5" />
+                  </button>
+                  <button
+                    class="btn btn-sm me-3"
+                    v-if="unsplash.page > 1"
+                    @click="unsplash.page = unsplash.page - 1"
+                    title="{{ i18n.previous }}">
+                    <ArrowLeft stroke-width="1.5" />
+                  </button>
                 </div>
               </div>
               <div class="col-lg-6">
-                <div class="row vue__media-picker__pexels vue__media-picker__pexels__nav">
-                  <div class="col-lg-5">
-                    <button
-                        class="btn btn-light btn-sm"
-                        v-if="pexels.page > 1"
-                        @click="pexels.page = pexels.page - 1">
-                      {{ i18n.previous }}
-                    </button>
-                  </div>
-                  <div class="col-lg-2 text-center">
-                    <img :src="settings.pexels.logo" width="100" alt="Pexels" />
-                  </div>
-                  <div class="col-lg-5 text-end">
-                    <button
-                        class="btn btn-light btn-sm"
-                        v-if="pexels.page < pexels.data.total_pages"
-                        @click="pexels.page = pexels.page + 1">
-                      {{ i18n.next }}
-                    </button>
-                  </div>
+                <div class="vue__media-picker__pexels vue__media-picker__pexels__nav text-end">
+                  <button
+                    class="btn btn-sm ms-3"
+                    v-if="pexels.page > 1"
+                    @click="pexels.page = pexels.page - 1"
+                    title="{{ i18n.previous }}">
+                    <ArrowLeft stroke-width="1.5" />
+                  </button>
+                  <button
+                    class="btn btn-sm ms-3"
+                    v-if="pexels.page < pexels.data.total_pages"
+                    @click="pexels.page = pexels.page + 1"
+                    title="{{ i18n.next }}">
+                    <ArrowRight stroke-width="1.5" />
+                  </button>
+                  <img :src="settings.pexels.logo" width="100" alt="Pexels" class="ms-3" />
                 </div>
               </div>
             </div>
