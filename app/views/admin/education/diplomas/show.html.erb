@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @diploma %>
+  <%= button_advanced do %>
+    <%= destroy_link @diploma %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-4">
     <%= osuny_panel Education::Diploma::Localization.human_attribute_name('name'), small: true do %>
@@ -82,12 +89,4 @@
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_education_diploma_path(@diploma) %>
-<% end %>
-  
-<% content_for :action_bar_left do %>
-  <%= destroy_link @diploma %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @diploma %>
 <% end %>

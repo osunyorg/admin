@@ -4,7 +4,7 @@
   <%= link_to t('open'),
               @l10n.current_permalink_url_in_website(@website),
               target: :_blank,
-              class: 'btn btn-light btn-xs' if post_url %>
+              class: button_classes if post_url %>
   <%= preview_link %>
   <%= edit_link @post %>
   <%= publish_link @post %>
@@ -70,18 +70,3 @@
   <%= static_link static_admin_communication_website_post_path(@post) %>
 <% end %>
 
-<% content_for :action_bar_left do %>
-  <%= destroy_link @post %>
-  <%= duplicate_link @post %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <% post_url = @l10n.current_permalink_url_in_website(@website) %>
-  <%= link_to t('open'),
-              post_url,
-              target: :_blank,
-              class: 'btn btn-light btn-xs' if post_url %>
-  <%= preview_link %>
-  <%= edit_link @post %>
-  <%= publish_link @post %>
-<% end %>
