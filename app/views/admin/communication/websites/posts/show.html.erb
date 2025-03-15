@@ -1,5 +1,18 @@
 <% content_for :title, @l10n %>
-
+<% content_for :title_right do %>
+  <% post_url = @l10n.current_permalink_url_in_website(@website) %>
+  <%= link_to t('open'),
+              @l10n.current_permalink_url_in_website(@website),
+              target: :_blank,
+              class: 'btn btn-light btn-xs' if post_url %>
+  <%= preview_link %>
+  <%= edit_link @post %>
+  <%= publish_link @post %>
+  <%= button_advanced do %>
+    <%= destroy_link @post %>
+    <%= duplicate_link @post %>  
+  <% end %>
+<% end %>
 <div class="row">
   <div class="col-lg-7">
     <%= osuny_panel Communication::Website::Post::Localization.human_attribute_name(:title), small: true do %>

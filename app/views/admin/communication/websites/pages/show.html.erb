@@ -1,5 +1,29 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <% page_url = @l10n.current_permalink_url_in_website(@website) %>
+  <%= link_to  t('open'),
+              page_url,
+              target: :_blank,
+              class: button_classes if page_url %>
+  <%= preview_link %>
+  <%= link_to t('edit'),
+              edit_admin_communication_website_page_path(@page),
+              class: button_classes
+              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path
+              %>
+  <%= link_to t('admin.communication.website.publish.button'),
+              publish_admin_communication_website_page_path(@page),
+              class: button_classes,
+              method: :post if !@l10n.published && can?(:publish, @page)
+              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path
+              %>
+  <%= button_advanced do %>
+    <%= destroy_link @page if @page.is_regular_page? %>
+    <%= duplicate_link @page if @page.is_regular_page? %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-7">
     <%= osuny_panel Communication::Website::Page::Localization.human_attribute_name(:title), small: true do %>
@@ -27,31 +51,6 @@
 <%= render 'admin/communication/websites/pages/show/special_page' %>
 
 <% content_for :server_admin_only do %>
-  <%= render 'admin/application/components/dependencies', about: @page %>
-<% end %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @page if @page.is_regular_page? %>
-  <%= duplicate_link @page if @page.is_regular_page? %>
   <%= static_link static_admin_communication_website_page_path(@page) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <% page_url = @l10n.current_permalink_url_in_website(@website) %>
-  <%= link_to  t('open'),
-              page_url,
-              target: :_blank,
-              class: 'btn btn-light btn-xs' if page_url %>
-  <%= preview_link %>
-  <%= link_to t('edit'),
-              edit_admin_communication_website_page_path(@page),
-              class: button_classes
-              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path
-              %>
-  <%= link_to t('admin.communication.website.publish.button'),
-              publish_admin_communication_website_page_path(@page),
-              class: button_classes,
-              method: :post if !@l10n.published && can?(:publish, @page)
-              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path
-              %>
+  <%= render 'admin/application/components/dependencies', about: @page %>
 <% end %>

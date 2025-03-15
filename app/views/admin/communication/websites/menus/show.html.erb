@@ -1,5 +1,15 @@
 <% content_for :title, @menu %>
 
+<% content_for :title_right do %>
+  <%= edit_link @menu %>
+  <%= link_to t('create'),
+              new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id),
+              class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
+  <%= button_advanced do %>
+    <%= destroy_link @menu %>
+  <% end %>
+<% end %>
+
 <% if @menu.automatic %>
   <div class="p-3 mb-2 border border-success">
     <span class="badge bg-success">
@@ -12,15 +22,4 @@
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_communication_website_menu_path(@menu) %>
-<% end %>
-  
-<% content_for :action_bar_left do %>
-  <%= destroy_link @menu %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @menu %>
-  <%= link_to t('create'),
-              new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id),
-              class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
 <% end %>

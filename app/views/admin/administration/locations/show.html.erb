@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @location %>
+  <%= button_advanced do %>
+    <%= destroy_link @location %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-3">
     <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
@@ -32,12 +39,4 @@
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_administration_location_path(@location) %>
-<% end %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @location %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @location %>
 <% end %>

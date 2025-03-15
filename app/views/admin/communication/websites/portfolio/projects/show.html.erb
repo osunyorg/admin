@@ -1,5 +1,19 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <% project_url = @l10n.current_permalink_url_in_website(@website) %>
+  <%= link_to t('open'),
+              project_url,
+              target: :_blank,
+              class: 'btn btn-light btn-xs' if project_url %>
+  <%= edit_link @project %>
+  <%= publish_link @project %>
+  <%= button_advanced do %>
+    <%= destroy_link @project %>
+    <%= duplicate_link @project %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-7">
     <%= osuny_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:title), small: true do %>
@@ -32,19 +46,4 @@
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_communication_website_portfolio_project_path(@project) %>
-<% end %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @project %>
-  <%= duplicate_link @project %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <% project_url = @l10n.current_permalink_url_in_website(@website) %>
-  <%= link_to t('open'),
-              project_url,
-              target: :_blank,
-              class: 'btn btn-light btn-xs' if project_url %>
-  <%= edit_link @project %>
-  <%= publish_link @project %>
 <% end %>

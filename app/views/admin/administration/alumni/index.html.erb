@@ -11,7 +11,7 @@
 <%= render 'admin/administration/alumni/list', alumni: @alumni %>
 <%= paginate @alumni %>
 
-<% content_for :action_bar_right do %>
+<% content_for :title_right do %>
   <%= link_to t('university.alumni.cohorts.import_btn'),
               new_admin_administration_alumni_cohorts_import_path,
               class: button_classes if can? :create, University::Person::Alumnus %>

@@ -1,5 +1,21 @@
 <% content_for :title, @item %>
 
+<% content_for :title_right do %>
+  <%= link_to t('edit'),
+              edit_admin_communication_website_menu_item_path(@item, website_id: @website, menu_id: @menu.id),
+              class: button_classes %>
+  <%= link_to t('create'),
+              new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id, parent_id: @item.id),
+              class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
+  <%= button_advanced do %>
+    <%= link_to t('delete'),
+            admin_communication_website_menu_item_path(website_id: @item.website.id, menu_id: @item.menu.id, id: @item.id),
+            method: :delete,
+            data: { confirm: t('please_confirm') },
+            class: button_classes_danger if can?(:destroy, @item) %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-xl-8">
     <%= render 'admin/communication/websites/menus/items/list', items: @children, item: @item if @children.any? %>
@@ -22,20 +38,3 @@
     <% end %>
   </div>
 </div>
-
-<% content_for :action_bar_left do %>
-  <%= link_to t('delete'),
-              admin_communication_website_menu_item_path(website_id: @item.website.id, menu_id: @item.menu.id, id: @item.id),
-              method: :delete,
-              data: { confirm: t('please_confirm') },
-              class: button_classes_danger if can?(:destroy, @item) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('edit'),
-              edit_admin_communication_website_menu_item_path(@item, website_id: @website, menu_id: @menu.id),
-              class: button_classes %>
-  <%= link_to t('create'),
-              new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id, parent_id: @item.id),
-              class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
-<% end %>

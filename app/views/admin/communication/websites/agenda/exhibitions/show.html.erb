@@ -1,5 +1,19 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <% exhibition_url = @l10n.current_permalink_url_in_website(@website) %>
+  <%= link_to t('open'),
+              exhibition_url,
+              target: :_blank,
+              class: 'btn btn-light btn-xs' if exhibition_url %>
+  <%= edit_link @exhibition %>
+  <%= publish_link @exhibition %>
+  <%= button_advanced do %>
+    <%= destroy_link @exhibition %>
+    <%= duplicate_link @exhibition %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-7">
     <%= osuny_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name(:title), small: true do %>
@@ -44,19 +58,4 @@
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_communication_website_agenda_exhibition_path(@exhibition) %>
-<% end %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @exhibition %>
-  <%= duplicate_link @exhibition %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <% exhibition_url = @l10n.current_permalink_url_in_website(@website) %>
-  <%= link_to t('open'),
-              exhibition_url,
-              target: :_blank,
-              class: 'btn btn-light btn-xs' if exhibition_url %>
-  <%= edit_link @exhibition %>
-  <%= publish_link @exhibition %>
 <% end %>
