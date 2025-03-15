@@ -1,5 +1,12 @@
 <% content_for :title, @user %>
 
+<% content_for :title_right do %>
+  <%= edit_link @user %>
+  <%= button_advanced do %>
+    <%= destroy_link @user %>
+  <% end %>
+<% end %>
+
 <%= render 'lock' %>
 
 <div class="row">
@@ -47,11 +54,3 @@
     </div>
   <% end %>
 </div>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @user %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @user %>
-<% end %>

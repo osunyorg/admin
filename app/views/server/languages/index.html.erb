@@ -1,5 +1,9 @@
 <% content_for :title, "#{@languages.total_count} #{Language.model_name.human(count: @languages.total_count).downcase}" %>
 
+<% content_for :title_right do %>
+  <%= link_to t('create'), new_server_language_path, class: button_classes %>
+<% end %>
+
 <div class="table-responsive">
   <table class="<%= table_classes %>">
     <thead>
@@ -34,9 +38,4 @@
     </tbody>
   </table>
 </div>
-
 <%= paginate @languages %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('create'), new_server_language_path, class: button_classes %>
-<% end %>

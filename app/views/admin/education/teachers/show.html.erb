@@ -1,5 +1,9 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= link_to t('education.manage_programs'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:update, @teacher) %>
+<% end %>
+
 <% if @involvements.any? %>
   <p><%= "#{@involvements.count} #{Education::Program.model_name.human(count: @involvements.count).downcase}" %></p>
   <div class="row g-2 mb-3">
@@ -37,8 +41,4 @@
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_education_teacher_path(@teacher) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('education.manage_programs'), edit_admin_education_teacher_path(@teacher), class: button_classes if can?(:update, @teacher) %>
 <% end %>

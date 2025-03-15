@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @laboratory %>
+  <%= button_advanced do %>
+    <%= destroy_link @laboratory %>
+  <% end %>
+<% end %>
+
 <div class="mb-5">
   <%= render 'admin/application/contact_details/show', about: @laboratory, l10n: @l10n %>
 </div>
@@ -22,12 +29,4 @@
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_research_laboratory_path(@laboratory) %>
-<% end %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @laboratory %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @laboratory %>
 <% end %>

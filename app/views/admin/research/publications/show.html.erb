@@ -1,5 +1,11 @@
 <% content_for :title, @publication %>
 
+<% content_for :title_right do %>
+  <%= edit_link @publication if @publication.editable? %>
+  <%= button_advanced do %>
+    <%= destroy_link @publication if @publication.editable? %>
+  <% end %>
+<% end %>
 
 <div class="row mb-5">
   <div class="col-lg-8">
@@ -82,12 +88,4 @@
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_research_publication_path(@publication) %>
-<% end %>
-  
-<% content_for :action_bar_left do %>
-  <%= destroy_link @publication if @publication.editable? %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @publication if @publication.editable? %>
 <% end %>

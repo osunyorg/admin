@@ -1,5 +1,13 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @person %>
+  <%= button_advanced do %>
+    <%= destroy_link @person %>
+    <%= static_link static_admin_university_person_path(@person) %>
+  <% end %>
+<% end %>
+
 <div class="row g-5">
   <div class="col-md-4">
     <%= osuny_panel t('activerecord.attributes.university/person.picture'), small: true do %>
@@ -98,13 +106,4 @@
                 classes: button_classes,
                 target: :_blank %><br>
   <% end %>
-<% end %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @person %>
-  <%= static_link static_admin_university_person_path(@person) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @person %>
 <% end %>

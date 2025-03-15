@@ -1,7 +1,7 @@
 <% content_for :title, @tag %>
 
-<%= render 'server/websites/list', websites: @websites %>
-
-<% content_for :action_bar_right do %>
+<% content_for :title_right do %>
   <%= link_to t('edit'), edit_server_tag_path(@tag), class: button_classes %>
 <% end %>
+
+<%= render 'server/websites/list', websites: @websites %>

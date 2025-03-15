@@ -1,6 +1,14 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
+  <%= render 'admin/application/favorites/widget', about: @journal %>
+  <%= edit_link @journal %>
+  <%= button_advanced do %>
+    <%= destroy_link @journal %>
+  <% end %>
+<% end %>
+
+<% content_for :title_left do %>
   <% if @journal.websites.any? %>
     <%= Communication::Website.model_name.human(count: 2) %>
     <i class="<%= Icon::ARROW_RIGHT %> small"></i>
@@ -12,7 +20,6 @@
     <%= Research::Journal::Localization.human_attribute_name('issn') %>
     <%= @l10n.issn %>
   <% end %>
-  <%= render 'admin/application/favorites/widget', about: @journal %>
 <% end %>
 
 <div class="row">
@@ -52,12 +59,4 @@ action = link_to    t('create'),
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_research_journal_path(@journal) %>
-<% end %>
-  
-<% content_for :action_bar_left do %>
-  <%= destroy_link @journal %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @journal %>
 <% end %>
