@@ -1,5 +1,9 @@
 <% content_for :title, t('admin.communication.website.pages.structure') %>
 
+<% content_for :title_right do %>
+  <%= create_link Communication::Website::Page %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @pages.total_count %>
@@ -26,7 +30,3 @@
   <%= render 'admin/communication/websites/pages/list', pages: @pages %>
   <%= paginate @pages %>
 </div>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Website::Page %>
-<% end %>

@@ -1,5 +1,13 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= preview_link %>
+  <%= edit_link @program %>
+  <%= button_advanced do %>
+    <%= destroy_link @program %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-8">
     <div class="row">
@@ -124,12 +132,6 @@
   </div>
 </div>
 
-<% content_for :action_bar_left do %>
-  <%= destroy_link @program %>
+<% content_for :server_admin_only do %>
   <%= static_link static_admin_education_program_path(@program) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= preview_link %>
-  <%= edit_link @program %>
 <% end %>

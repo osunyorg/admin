@@ -49,10 +49,12 @@
   </div>
 </div>
 
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_education_school_path(@school) %>
+<% end %>  
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @school %>
-  <%= static_link static_admin_education_school_path(@school) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

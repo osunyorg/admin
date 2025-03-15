@@ -24,6 +24,7 @@
       <%= yield %>
     </div>
     <%= render 'admin/application/components/preview' if @preview %>
+    <%= render 'admin/application/components/server_admin_only' %>
   </main>
   <%= render "admin/application/components/commands" %>
   <%= render "admin/application/components/footer" %>

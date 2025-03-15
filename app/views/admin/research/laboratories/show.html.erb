@@ -20,9 +20,12 @@
   </div>
 </div>
 
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_research_laboratory_path(@laboratory) %>
+<% end %>
+
 <% content_for :action_bar_left do %>
   <%= destroy_link @laboratory %>
-  <%= static_link static_admin_research_laboratory_path(@laboratory) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

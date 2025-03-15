@@ -1,5 +1,9 @@
 <% content_for :title, t('communication.description.parts.author.title', count: 2) %>
 
+<% content_for :title_right do %>
+  <%= link_to t('communication.manage_authors'), admin_university_people_path, class: button_classes if can?(:read, University::Person) %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @authors.total_count %>
@@ -10,7 +14,3 @@
 
 <%= render 'admin/communication/websites/posts/authors/list', authors: @authors %>
 <%= paginate @authors %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('communication.manage_authors'), admin_university_people_path, class: button_classes if can?(:read, University::Person) %>
-<% end %>

@@ -1,14 +1,19 @@
 <% content_for :title, @l10n %>
 
+
 <% content_for :title_right do %>
-  <% unless @extranet.url.blank? %>
-    <%= link_to @extranet.url, @extranet.url, target: :_blank %><br>
+  <%= render 'admin/application/favorites/widget', about: @extranet %>
+  <%= link_to t('open'), @extranet.url, target: :_blank, class: button_classes unless @extranet.url.blank? %>
+  <%= button_advanced do %>
+    <%= destroy_link @extranet %>
   <% end %>
+<% end %>
+
+<% content_for :title_left do %>
   <%= I18n.t("activerecord.attributes.communication/extranet.about_#{@extranet.about_type}") %>
   <% if @extranet.about %>
     — <%= osuny_link_localized @extranet.about, [:admin, @extranet.about] unless @extranet.about.nil? %>
   <% end %>
-  <%= render 'admin/application/favorites/widget', about: @extranet %>
 <% end %>
 
 <div class="row">
@@ -28,11 +33,3 @@
 </div>
 
 <%= render 'admin/application/l10n/widget', about: @extranet, l10n: @l10n, small: true %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @extranet %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @extranet %>
-<% end %>

@@ -1,5 +1,9 @@
 <% content_for :title, "#{Communication::Website::Agenda::Exhibition.model_name.human(count: 2)} (#{@exhibitions.total_count})" %>
 
+<% content_for :title_right do %>
+  <%= create_link Communication::Website::Agenda::Exhibition %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @exhibitions.total_count %>
@@ -10,7 +14,3 @@
 
 <%= render 'admin/communication/websites/agenda/exhibitions/list', exhibitions: @exhibitions %>
 <%= paginate @exhibitions %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Website::Agenda::Exhibition %>
-<% end %>

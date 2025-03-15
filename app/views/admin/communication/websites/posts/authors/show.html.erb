@@ -1,5 +1,9 @@
 <% content_for :title, @author_l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @author %>
+<% end %>
+
 <% if @posts.any? %>
   <p>
     <%= @posts.total_count %>
@@ -7,8 +11,4 @@
   </p>
   <%= render 'admin/communication/websites/posts/list', posts: @posts %>
   <%= paginate @posts if @posts.total_pages > 1 %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @author %>
 <% end %>

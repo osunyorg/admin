@@ -1,5 +1,9 @@
 <% content_for :title, t('admin.communication.website.subnav.structure') %>
 
+<% content_for :title_right do %>
+  <%= create_link Communication::Website::Page %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @pages.size %>
@@ -39,7 +43,3 @@
     </ul>
   </li>
 </ul>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Website::Page %>
-<% end %>

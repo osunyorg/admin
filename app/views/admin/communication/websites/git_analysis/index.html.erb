@@ -1,5 +1,12 @@
 <% content_for :title, t('admin.communication.website.git_file.analysis.title') %>
 
+<% content_for :title_right do %>
+  <%= link_to t('admin.communication.website.git_file.analysis.title'), 
+            git_analysis_admin_communication_website_path(website_id: nil), 
+            class: button_classes, 
+            method: :post %>
+<% end %>
+
 <div class="table-responsive mb-5">
   <table class="<%= table_classes(with_actions: false) %>">
     <thead>
@@ -39,11 +46,3 @@
     </tbody>
   </table>
 </div>
-
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('admin.communication.website.git_file.analysis.title'), 
-              git_analysis_admin_communication_website_path(website_id: nil), 
-              class: button_classes, 
-              method: :post %>
-<% end %>

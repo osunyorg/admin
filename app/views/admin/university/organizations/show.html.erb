@@ -81,9 +81,12 @@
   </div>
 </div>
 
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_university_organization_path(@organization) %>
+<% end %>
+  
 <% content_for :action_bar_left do %>
   <%= destroy_link @organization %>
-  <%= static_link static_admin_university_organization_path(@organization) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

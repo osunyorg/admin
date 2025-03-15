@@ -35,7 +35,7 @@
   <%= link_to t('show'), admin_university_person_path(@teacher), class: 'action' %>
 </div>
 
-<% content_for :action_bar_left do %>
+<% content_for :server_admin_only do %>
   <%= static_link static_admin_education_teacher_path(@teacher) %>
 <% end %>
 

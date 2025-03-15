@@ -1,0 +1,12 @@
+<% if current_user.server_admin? && content_for?(:server_admin_only) %>
+  <div class="mt-5">
+    <i  class="<%= Icon::SETTINGS %>"
+        style="opacity: 0.1"
+        data-bs-toggle="collapse"
+        data-bs-target="#server_admin_only"
+        aria-controls="server_admin_only"></i>
+    <div id="server_admin_only" class="collapse">
+      <%= yield :server_admin_only %>
+    </div>
+  </div>
+<% end %>

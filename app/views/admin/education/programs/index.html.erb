@@ -1,5 +1,9 @@
 <% content_for :title, Education::Program.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= create_link Education::Program %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @programs.total_count %>
@@ -10,7 +14,3 @@
 
 <%= render 'admin/education/programs/list', programs: @programs %>
 <%= paginate @programs %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Education::Program %>
-<% end %>

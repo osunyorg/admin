@@ -1,5 +1,9 @@
 <% content_for :title, t('communication.description.parts.media.title') %>
 
+<% content_for :title_right do %>
+  <%= create_link Communication::Media %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @medias.total_count %>
@@ -10,7 +14,3 @@
 
 <%= render 'admin/communication/medias/list', medias: @medias %>
 <%= paginate @medias %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Media %>
-<% end %>

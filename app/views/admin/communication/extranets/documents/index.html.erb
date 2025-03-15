@@ -1,8 +1,8 @@
 <% content_for :title, Communication::Extranet.human_attribute_name(:feature_documents) %>
 
-<%= render 'admin/communication/extranets/documents/list', documents: @documents %>
-<%= paginate @documents %>
-
-<% content_for :action_bar_right do %>
+<% content_for :title_right do %>
   <%= create_link Communication::Extranet::Document %>
 <% end %>
+
+<%= render 'admin/communication/extranets/documents/list', documents: @documents %>
+<%= paginate @documents %>

@@ -6,7 +6,8 @@
                   about_type: about.class.polymorphic_name
                 ), 
                 method: :put,
-                title: t('user.favorites.remove') do %>
+                title: t('user.favorites.remove'),
+                class: button_classes do %>
       <i class="fas fa-star"></i>
     <% end %>
   <% else %>
@@ -16,7 +17,8 @@
                   about_type: about.class.polymorphic_name
                 ), 
                 method: :put,
-                title: t('user.favorites.add') do %>
+                title: t('user.favorites.add'),
+                class: button_classes do %>
       <i class="fa-regular fa-star"></i>
     <% end %>
   <% end %>

@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @media %>
+  <%= button_advanced do %>
+    <%= destroy_link @media if @media.contexts.none? %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-4">
     <% if @media.original_blob.representable? %>
@@ -52,11 +59,3 @@
     <%= render 'admin/communication/medias/contexts/list', media: @media %>
   </div>
 </div>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @media if @media.contexts.none? %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @media %>
-<% end %>

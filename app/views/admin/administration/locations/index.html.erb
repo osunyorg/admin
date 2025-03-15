@@ -1,7 +1,6 @@
 <% content_for :title, Administration::Location.model_name.human(count: 2) %>
 
 <%= render 'admin/administration/locations/list', locations: @locations %>
-
-<% content_for :action_bar_right do %>
+<% content_for :title_right do %>
   <%= create_link Administration::Location %>
 <% end %>
