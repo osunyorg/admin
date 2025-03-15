@@ -50,9 +50,12 @@ action = link_to    t('create'),
   <%= render 'admin/research/journals/papers/kinds/list', kinds: @paper_kinds %>
 <% end %>
 
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_research_journal_path(@journal) %>
+<% end %>
+  
 <% content_for :action_bar_left do %>
   <%= destroy_link @journal %>
-  <%= static_link static_admin_research_journal_path(@journal) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

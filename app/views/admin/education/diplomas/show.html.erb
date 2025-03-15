@@ -80,9 +80,12 @@
 <h2 class="h4 mt-5"><%= Education::Program.model_name.human(count: 2) %></h2>
 <%= render 'admin/education/programs/list', programs: @programs, hide_diploma: true %>
 
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_education_diploma_path(@diploma) %>
+<% end %>
+  
 <% content_for :action_bar_left do %>
   <%= destroy_link @diploma %>
-  <%= static_link static_admin_education_diploma_path(@diploma) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

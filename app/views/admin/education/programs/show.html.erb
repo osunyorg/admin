@@ -124,9 +124,12 @@
   </div>
 </div>
 
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_education_program_path(@program) %>
+<% end %>
+  
 <% content_for :action_bar_left do %>
   <%= destroy_link @program %>
-  <%= static_link static_admin_education_program_path(@program) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

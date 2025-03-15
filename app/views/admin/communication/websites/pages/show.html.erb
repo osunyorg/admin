@@ -26,7 +26,9 @@
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 <%= render 'admin/communication/websites/pages/show/special_page' %>
 
-<%= render 'admin/application/components/dependencies', about: @page %>
+<% content_for :server_admin_only do %>
+  <%= render 'admin/application/components/dependencies', about: @page %>
+<% end %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @page if @page.is_regular_page? %>

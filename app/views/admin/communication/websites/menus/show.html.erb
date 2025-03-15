@@ -10,9 +10,12 @@
 <% end %>
 <%= render 'admin/communication/websites/menus/items/list', items: @root_items if @items.any? %>
 
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_communication_website_menu_path(@menu) %>
+<% end %>
+  
 <% content_for :action_bar_left do %>
   <%= destroy_link @menu %>
-  <%= static_link static_admin_communication_website_menu_path(@menu) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

@@ -48,9 +48,12 @@
   </div>
 </div>
 
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_research_journal_volume_path(@volume) %>
+<% end %>
+  
 <% content_for :action_bar_left do %>
   <%= destroy_link @volume %>
-  <%= static_link static_admin_research_journal_volume_path(@volume) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

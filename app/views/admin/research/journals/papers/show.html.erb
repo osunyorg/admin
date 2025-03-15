@@ -78,9 +78,12 @@
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 <%= render 'admin/application/components/dependencies', about: @paper %>
 
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_research_journal_paper_path(@paper) %>
+<% end %>
+  
 <% content_for :action_bar_left do %>
   <%= destroy_link @paper %>
-  <%= static_link static_admin_research_journal_paper_path(@paper) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

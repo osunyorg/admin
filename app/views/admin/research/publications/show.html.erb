@@ -80,9 +80,12 @@
   </div>
 <% end if @publication.hal? %>
 
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_research_publication_path(@publication) %>
+<% end %>
+  
 <% content_for :action_bar_left do %>
   <%= destroy_link @publication if @publication.editable? %>
-  <%= static_link static_admin_research_publication_path(@publication) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

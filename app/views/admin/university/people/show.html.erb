@@ -80,27 +80,25 @@
     <%= osuny_panel University::Person::Experience.model_name.human(count: 2), action: action do %>
       <%= render 'admin/university/people/experiences/list', experiences: @person.experiences.ordered(current_language) %>
     <% end %>
-
     <%= osuny_panel Research::Laboratory.model_name.human(count: 2) do %>
       <%= render 'admin/research/laboratories/list', laboratories: @person.laboratories.ordered(current_language) %>
     <% end if @person.laboratories.any? %>
-
     <%= render 'admin/application/connections/list', about: @person %>
-
-    <% if current_user.server_admin? %>
-      <%= osuny_panel t('static') do  %>
-        <%= link_to 'Administrator',
-                    static_administrator_admin_university_person_path(@person),
-                    classes: button_classes,
-                    target: :_blank %><br>
-        <%= link_to 'Author',
-                    static_author_admin_university_person_path(@person),
-                    classes: button_classes,
-                    target: :_blank %><br>
-      <% end %>
-    <% end %>
   </div>
 </div>
+
+<% content_for :server_admin_only do %>
+  <%= osuny_panel t('static'), small: true do  %>
+    <%= link_to 'Administrator',
+                static_administrator_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
+    <%= link_to 'Author',
+                static_author_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
+  <% end %>
+<% end %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @person %>

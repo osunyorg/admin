@@ -28,12 +28,14 @@
 </div>
 
 <%= render 'admin/communication/contents/editor', about: @l10n %>
-
 <%= render 'admin/application/connections/list', about: @location %>
+
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_administration_location_path(@location) %>
+<% end %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @location %>
-  <%= static_link static_admin_administration_location_path(@location) %>
 <% end %>
 
 <% content_for :action_bar_right do %>

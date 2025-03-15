@@ -40,7 +40,10 @@
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 <%= render 'admin/communication/websites/agenda/events/show/children', event: @event %>
 <%= render 'admin/communication/websites/agenda/events/show/time_slots', event: @event %>
-<%= render 'admin/communication/websites/agenda/events/show/links_to_static_files', event: @event %>
+
+<% content_for :server_admin_only do %>
+  <%= render 'admin/communication/websites/agenda/events/show/links_to_static_files', event: @event %>
+<% end %>
 
 <% content_for :action_bar_left do %>
   <%= destroy_link @event %>
