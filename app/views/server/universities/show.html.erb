@@ -1,7 +1,7 @@
 <% content_for :title, @university %>
 
 <% content_for :title_right do %>
-  <%= link_to t('open'), @university.url, target: :_blank %>
+  <%= link_to t('open'), @university.url, target: :_blank, class: button_classes %>
   <%= link_to t('edit'), edit_server_university_path(@university), class: button_classes %>
 <% end %>
 

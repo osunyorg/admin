@@ -1,5 +1,15 @@
 <% content_for :title, Communication::Website.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= link_to t('server_admin.websites.update_all_themes'),
+              "#",
+              class: "#{button_classes} js-sync-all-theme-versions" %>
+  <%= link_to t('server_admin.websites.force_clean_and_rebuild'),
+              clean_and_rebuild_all_websites_server_websites_path(params: { filters: params[:filters]&.to_unsafe_hash }),
+              method: :post,
+              class: button_classes %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @websites.total_count %>
@@ -11,13 +21,3 @@
 
 <%= render 'server/websites/list', websites: @websites %>
 <%= paginate @websites %>
-
-<% content_for :action_bar_left do %>
-  <%= link_to t('server_admin.websites.update_all_themes'),
-              "#",
-              class: "#{button_classes} js-sync-all-theme-versions" %>
-  <%= link_to t('server_admin.websites.force_clean_and_rebuild'),
-              clean_and_rebuild_all_websites_server_websites_path(params: { filters: params[:filters]&.to_unsafe_hash }),
-              method: :post,
-              class: button_classes %>
-<% end %>

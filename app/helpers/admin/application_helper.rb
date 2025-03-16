@@ -81,10 +81,14 @@ module Admin::ApplicationHelper
     'text-end pe-0'
   end
 
+  def cancel(url)
+    link_to t('cancel'), url, class: 'btn btn-light vue__changes__cancel'
+  end
+
   def submit(form)
     form.button :submit,
                 t('save'),
-                class: button_classes,
+                class: 'btn btn-success vue__changes__save',
                 form: form.options.dig(:html, :id)
   end
 

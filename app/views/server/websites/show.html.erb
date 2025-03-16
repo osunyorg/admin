@@ -29,9 +29,10 @@
   <% end %>
 <% end %>
 
-<% content_for :title_right do %>
-  <%= link_to @website.university, server_university_path(@website.university) %><br>
-<% end %>
+<p>
+  <%= osuny_label University.model_name.human %>
+  <%= link_to @website.university, server_university_path(@website.university) %>
+</p>
 
 <div class="row g-2">
   <div class="col-xl-4">

@@ -1,7 +1,7 @@
 
 <% content_for :title, current_user %>
 
-<%= simple_form_for(current_user, url: admin_profile_path) do |f| %>
+<%= simple_form_for current_user, url: admin_profile_path do |f| %>
   <%= f.error_notification %>
 
   <div class="row">
@@ -72,6 +72,7 @@
   </div>
 
   <% content_for :action_bar_right do %>
+    <%= cancel admin_root_path %>
     <%= submit f %>
   <% end %>
 <% end %>

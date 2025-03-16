@@ -10,6 +10,7 @@
     </div>
   </div>
   <% content_for :action_bar_right do %>
+    <%= cancel [:admin, @menu] %>
     <%= submit f %>
   <% end %>
 <% end %>
