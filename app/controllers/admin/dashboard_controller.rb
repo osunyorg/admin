@@ -5,6 +5,7 @@ class Admin::DashboardController < Admin::ApplicationController
     @namespaces << Research if feature_research?
     @namespaces << Communication if feature_communication?
     @namespaces << Administration if feature_administration?
+    @namespaces << University if feature_settings?
     @hero_summary = true
     breadcrumb
   end
