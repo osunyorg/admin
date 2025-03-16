@@ -643,6 +643,8 @@ GEM
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
     singleton (0.3.0)
+    skylight (6.0.4)
+      activesupport (>= 5.2.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -800,6 +802,7 @@ DEPENDENCIES
   simple_form_bs5_file_input
   simple_form_password_with_hints
   simplecov
+  skylight
   spring
   sprockets-rails (~> 3)
   summernote-rails!
