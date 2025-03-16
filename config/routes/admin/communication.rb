@@ -154,7 +154,7 @@ namespace :communication do
       member do
         get :static
       end
-      resources :items, controller: 'websites/menus/items', except: :index do
+      resources :items, controller: 'websites/menus/items' do
         collection do
           get :kind_switch
           post :reorder

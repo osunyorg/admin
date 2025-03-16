@@ -1,5 +1,18 @@
 <% content_for :title, @l10n %>
-
+<% content_for :title_right do %>
+  <% post_url = @l10n.current_permalink_url_in_website(@website) %>
+  <%= link_to t('open'),
+              @l10n.current_permalink_url_in_website(@website),
+              target: :_blank,
+              class: button_classes if post_url %>
+  <%= preview_link %>
+  <%= edit_link @post %>
+  <%= publish_link @post %>
+  <%= button_advanced do %>
+    <%= destroy_link @post %>
+    <%= duplicate_link @post %>  
+  <% end %>
+<% end %>
 <div class="row">
   <div class="col-lg-7">
     <%= osuny_panel Communication::Website::Post::Localization.human_attribute_name(:title), small: true do %>
@@ -50,21 +63,10 @@
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
+
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 
-<% content_for :action_bar_left do %>
-  <%= destroy_link @post %>
-  <%= duplicate_link @post %>
+<% content_for :server_admin_only do %>
   <%= static_link static_admin_communication_website_post_path(@post) %>
 <% end %>
 
-<% content_for :action_bar_right do %>
-  <% post_url = @l10n.current_permalink_url_in_website(@website) %>
-  <%= link_to t('open'),
-              post_url,
-              target: :_blank,
-              class: 'btn btn-light btn-xs' if post_url %>
-  <%= preview_link %>
-  <%= edit_link @post %>
-  <%= publish_link @post %>
-<% end %>

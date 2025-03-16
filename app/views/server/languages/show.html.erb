@@ -1,5 +1,9 @@
 <% content_for :title, @language %>
 
+<% content_for :title_right do %>
+  <%= link_to t('edit'), edit_server_language_path(@language), class: button_classes %>
+<% end %>
+
 <div class="row">
   <div class="col-md-5">
     <div class="table-responsive">
@@ -14,7 +18,3 @@
     </div>
   </div>
 </div>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('edit'), edit_server_language_path(@language), class: button_classes %>
-<% end %>

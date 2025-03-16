@@ -1,5 +1,19 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <% event_url = @l10n.current_permalink_url_in_website(@website) %>
+  <%= link_to t('open'),
+              event_url,
+              target: :_blank,
+              class: 'btn btn-light btn-xs' if event_url %>
+  <%= edit_link @event %>
+  <%= publish_link @event %>
+  <%= button_advanced do %>
+    <%= destroy_link @event %>
+    <%= duplicate_link @event %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-7">
     <%= osuny_panel Communication::Website::Agenda::Event::Localization.human_attribute_name(:title), small: true do %>
@@ -40,19 +54,7 @@
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 <%= render 'admin/communication/websites/agenda/events/show/children', event: @event %>
 <%= render 'admin/communication/websites/agenda/events/show/time_slots', event: @event %>
-<%= render 'admin/communication/websites/agenda/events/show/links_to_static_files', event: @event %>
 
-<% content_for :action_bar_left do %>
-  <%= destroy_link @event %>
-  <%= duplicate_link @event %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <% event_url = @l10n.current_permalink_url_in_website(@website) %>
-  <%= link_to t('open'),
-              event_url,
-              target: :_blank,
-              class: 'btn btn-light btn-xs' if event_url %>
-  <%= edit_link @event %>
-  <%= publish_link @event %>
+<% content_for :server_admin_only do %>
+  <%= render 'admin/communication/websites/agenda/events/show/links_to_static_files', event: @event %>
 <% end %>

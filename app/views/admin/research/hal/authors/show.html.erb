@@ -1,5 +1,11 @@
 <% content_for :title, @author %>
 
+<% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @author %>
+  <% end %>
+<% end %>
+
 <div class="row mb-5">
   <div class="col-lg-8">
     <%= osuny_label Research::Hal::Author.human_attribute_name(:docid) %>
@@ -18,8 +24,4 @@
 
 <%= osuny_panel Research::Hal::Author.human_attribute_name(:publications), subtitle: @author.publications.count do %>
   <%= render 'admin/research/publications/list', publications: @author.publications.ordered %>
-<% end %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @author %>
 <% end %>

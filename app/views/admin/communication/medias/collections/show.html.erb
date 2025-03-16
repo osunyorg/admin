@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @collection %>
+  <%= button_advanced do %>
+    <%= destroy_link @collection %>
+  <% end %>
+<% end %>
+
 <% if @medias.total_count > 0 %>
   <p>
     <%= @medias.total_count %>
@@ -7,12 +14,4 @@
   </p>
   <%= render 'admin/communication/medias/list', medias: @medias %>
   <%= paginate @medias %>
-<% end %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @collection %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @collection %>
 <% end %>

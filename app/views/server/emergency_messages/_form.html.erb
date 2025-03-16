@@ -35,6 +35,7 @@
   </div>
 
   <% content_for :action_bar_right do %>
+    <%= cancel [:server, emergency_message] %>
     <%= submit f %>
   <% end %>
 <% end %>

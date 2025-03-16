@@ -1,9 +1,9 @@
 <% content_for :title, Communication::Website::Post::Category.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= create_link Communication::Website::Post::Category %>
+<% end %>
+
 <%= render 'admin/application/categories/list', 
             root_categories: @root_categories, 
             categories_class: @categories_class %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Website::Post::Category %>
-<% end %>

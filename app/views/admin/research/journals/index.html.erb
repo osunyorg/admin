@@ -1,5 +1,9 @@
 <% content_for :title, Research::Journal.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= create_link Research::Journal %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @journals.total_count %>
@@ -30,9 +34,4 @@
     </div>
   <% end %>
 </div>
-
 <%= paginate @journals %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Research::Journal %>
-<% end %>
