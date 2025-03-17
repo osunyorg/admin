@@ -13,7 +13,8 @@ if page.special_page_categories
   %>
 section_taxonomies:
 <% if free_categories_content.present? %>
-  - name: "<%= t('category.title') %>"
+  - name: >-
+      <%= t('category.title') %>
     slug: ""
     path: ""
     categories:
