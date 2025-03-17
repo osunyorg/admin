@@ -5,7 +5,7 @@
   <%= link_to t('open'),
               exhibition_url,
               target: :_blank,
-              class: 'btn btn-light btn-xs' if exhibition_url %>
+              class: button_classes if exhibition_url %>
   <%= edit_link @exhibition %>
   <%= publish_link @exhibition %>
   <%= button_advanced do %>
