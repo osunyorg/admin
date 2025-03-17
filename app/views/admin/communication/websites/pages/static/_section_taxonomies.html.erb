@@ -17,7 +17,7 @@ section_taxonomies:
     slug: ""
     path: ""
     categories:
-<%= sanitize free_categories_content %>
+<%= free_categories_content.html_safe %>
 <% end %>
 <%
   if taxonomies.any?
@@ -35,7 +35,7 @@ section_taxonomies:
     slug: "<%= hugo.slug %>"
     path: "<%= hugo.path %>"
     categories:
-<%= sanitize taxonomy_content %><%
+<%= taxonomy_content.html_safe %><%
       end
     end
   end

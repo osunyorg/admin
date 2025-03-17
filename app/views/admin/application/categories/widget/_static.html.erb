@@ -27,11 +27,12 @@ taxonomies:
 <%
   # First, all free categories in a "fake" taxonomy
   if free_categories_content.present? %>
-  - name: "<%= t('category.title') %>"
+  - name: >-
+      <%= t('category.title') %>
     slug: ""
     path: ""
     categories:
-<%= sanitize free_categories_content %>
+<%= free_categories_content.html_safe %>
 <% end %>
 <%
   # Then, all the real taxonomies, if necessary
@@ -46,11 +47,12 @@ taxonomies:
                 language: language
       }.join('')
       if taxonomy_content.present? %>
-  - name: "<%= prepare_text_for_static taxonomy_l10n.to_s %>"
+  - name: >-
+      <%= prepare_text_for_static taxonomy_l10n.to_s %>
     slug: "<%= hugo.slug %>"
     path: "<%= hugo.path %>"
     categories:
-<%= sanitize taxonomy_content %>
+<%= taxonomy_content.html_safe %>
 <%
       end
     end
