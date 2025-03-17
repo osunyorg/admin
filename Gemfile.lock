@@ -16,7 +16,7 @@ GIT
 
 GIT
   remote: https://github.com/noesya/two_factor_authentication.git
-  revision: fa056cd259b72607fd5741874a61ded1a60ef72c
+  revision: a8deaf9a30e1b75f70dbc7a9e8c97b8e5d161f4e
   specs:
     two_factor_authentication (4.1.2)
       devise
