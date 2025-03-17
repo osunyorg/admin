@@ -22,39 +22,23 @@
   <% end %>
 <% end %>
 
-<div class="row">
-  <div class="col-md-8">
-    <%= render 'admin/application/summary/show', about: @l10n %>
+<% @volumes.each do |volume| %>
+  <div class="row mb-5">
+    <div class="col-lg-3 col-xxl-2">
+      <div class="card">
+        <%= osuny_thumbnail_localized volume, large: true %>
+        <div class="card-body">
+          <%= osuny_published_localized volume %>
+          <%= osuny_link_localized  volume,
+                                    admin_research_journal_volume_path(journal_id: @journal, id: volume),
+                                    classes: 'stretched-link' %>
+        </div>
+      </div>
+    </div>
+    <div class="offset-lg-1 offset-xxl-1 col-lg-8 col-xxl-9">
+      <%= render 'admin/research/journals/papers/list', papers: volume.papers.ordered(current_language) %>
+    </div>
   </div>
-  <div class="col-md-4">
-    <%= render 'admin/application/meta_description/show', about: @l10n %>
-  </div>
-</div>
-<%
-action = link_to    t('create'),
-                    new_admin_research_journal_volume_path(journal_id: @journal),
-                    class: button_classes
-%>
-<%= osuny_panel Research::Journal::Volume.model_name.human(count: 2), action: action do %>
-  <%= render 'admin/research/journals/volumes/list', volumes: @volumes %>
-<% end %>
-
-<%
-action = link_to    t('create'),
-                    new_admin_research_journal_paper_path(journal_id: @journal),
-                    class: button_classes
-%>
-<%= osuny_panel Research::Journal::Paper.model_name.human(count: 2), action: action do %>
-  <%= render 'admin/research/journals/papers/list', papers: @papers %>
-<% end %>
-
-<%
-action = link_to    t('create'),
-                    new_admin_research_journal_kind_path(journal_id: @journal),
-                    class: button_classes
-%>
-<%= osuny_panel Research::Journal::Paper::Kind.model_name.human(count: 2), action: action do %>
-  <%= render 'admin/research/journals/papers/kinds/list', kinds: @paper_kinds %>
 <% end %>
 
 <% content_for :server_admin_only do %>
