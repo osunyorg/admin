@@ -153,7 +153,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
                 .left_joins(:about)
                 .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
                 .where.not(id: self.id)
-                .where("date_part('year', communication_website_agenda_events.from_day) = ?", about.from_day.year)
+                .where("date_part('year', communication_website_agenda_events.from_day) = ?", about.from_day&.year)
                 .exists?
     end
   end
