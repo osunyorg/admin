@@ -1,6 +1,8 @@
 <div class="card">
   <div class="ratio rounded-top bg-light" style="--bs-aspect-ratio: 62.5%">
-    <%= kamifusen_tag website.screenshot, class:'img-fluid' if website.screenshot.attached? %>
+    <%= kamifusen_tag website.screenshot,
+                      class:'img-fluid',
+                      cached: true if website.screenshot.attached? %>
   </div>
   <div class="card-body border-top border-light">
     <%= osuny_link_localized  website,

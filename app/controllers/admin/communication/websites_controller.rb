@@ -35,7 +35,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @events = @all_events.latest_in(current_language)
     @all_projects = @website.projects.accessible_by(current_ability)
     @projects = @all_projects.latest_in(current_language)
-    @hero_summary = true
     breadcrumb
   end
 

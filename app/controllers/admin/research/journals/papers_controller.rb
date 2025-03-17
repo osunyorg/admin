@@ -8,6 +8,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
   def index
     @papers = @papers.ordered(current_language)
                      .page(params[:page])
+    @feature_nav = 'navigation/admin/research/journal/papers'
     breadcrumb
   end
 

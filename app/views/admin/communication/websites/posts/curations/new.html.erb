@@ -1,6 +1,8 @@
 <% content_for :title, t('communication.website.posts.new_curation') %>
 
-<%= simple_form_for :curation, url: admin_communication_website_post_curations_path, html: { id: 'new_communication_website_post_curation' } do |f| %>
+<%= simple_form_for :curation, 
+                    url: admin_communication_website_post_curations_path, 
+                    html: { id: 'new_communication_website_post_curation' } do |f| %>
   <%= f.error_notification %>
   <%= f.input :url,
               label: t('curation.label'),
@@ -8,6 +10,7 @@
               input_html: { value: @url } %>
 
   <% content_for :action_bar_right do %>
+    <%= cancel [:admin, @website] %>
     <%= submit f %>
   <% end %>
 <% end %>

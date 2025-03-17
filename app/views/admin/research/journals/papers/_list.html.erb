@@ -7,7 +7,8 @@
           <%= osuny_published_localized paper %>
           <%= osuny_link_localized  paper,
                                     admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
-                                    classes: 'stretched-link' %>
+                                    classes: 'stretched-link',
+                                    truncate: 100 %>
 
         </div>
         <div class="card-footer small text-muted">

@@ -5,6 +5,7 @@
   <%= f.input :name %>
 
   <% content_for :action_bar_right do %>
+    <%= cancel [:admin, app] %>
     <%= submit f %>
   <% end %>
 <% end %>

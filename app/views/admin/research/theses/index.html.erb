@@ -1,5 +1,9 @@
 <% content_for :title, Research::Thesis.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= create_link Research::Thesis %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @theses.total_count %>
@@ -10,7 +14,3 @@
 
 <%= render 'admin/research/theses/list', theses: @theses %>
 <%= paginate @theses %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Research::Thesis %>
-<% end %>

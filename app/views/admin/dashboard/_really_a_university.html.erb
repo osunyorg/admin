@@ -1,46 +1,16 @@
 <div class="row mt-5 pt-5">
   <% @namespaces.each do |namespace| %>
     <%
-    path = send "admin_#{namespace.to_s.underscore}_root_path"
-    description = t "#{namespace.to_s.underscore}.description.text_html"
+    key = namespace.to_s.underscore
+    path = send "admin_#{key}_root_path"
+    title = t("#{key}.description.title") 
     %>
-  <div class="col-md-6 col-lg-3 mb-5">
+  <div class="col mb-5">
     <div class="position-relative">
-      <%= image_tag "admin/#{namespace.to_s.underscore}.jpg", class: 'img-fluid rounded' %>
-      <h2 class="h4 mt-3"><%= namespace.model_name.human %></h2>
-      <p><%= description.truncate_words 30 %></p>
+      <%= image_tag "admin/#{key}.jpg", class: 'img-fluid rounded' %>
+      <h2 class="h4 mt-3"><%= title %></h2>
       <%= link_to t('manage'), path, class: 'action stretched-link' %>
     </div>
   </div>
 <% end %>
 </div>
-
-<% if feature_settings? %>
-  <div class="row mt-5">
-    <div class="col-md-6 col-lg-3">
-      <%= link_to admin_university_root_path do %>
-        <%= image_tag "admin/university.jpg", class: 'img-fluid rounded'%>
-      <% end %>
-    </div>
-    <div class="col-md-6 col-xxl-6">
-      <div class="position-relative">
-        <h2 class="h4"><%= University.model_name.human %></h2>
-        <p><%= t('university.description.text_html') %></p>
-        <%= link_to t('manage'), admin_university_root_path, class: 'action stretched-link' %>
-      </div>
-      <ul class="list-inline mt-4">
-        <% University.parts.each do |part| %>
-          <%
-          next unless can? :read, part.first
-          class_name = part.first
-          path = send part.last, lang: current_language.iso_code
-          title = class_name.model_name.human(count: 2)
-          %>
-          <li class="list-inline-item">
-            <%= link_to title, path, class: 'btn btn-light mt-3' %>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-<% end %>

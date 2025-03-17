@@ -29,6 +29,7 @@
     <%= render 'admin/communication/contents/editor', about: @l10n %>
 
     <% content_for :action_bar_right do %>
+      <%= cancel [:admin, @website] %>
       <%= submit f %>
     <% end %>
   <% end %>

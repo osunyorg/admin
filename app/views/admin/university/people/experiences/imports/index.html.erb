@@ -1,5 +1,12 @@
 <% content_for :title, t('university.person.experiences.title') %>
 
+<% content_for :title_right do %>
+  <%= link_to_if  can?(:create, University::Person::Experience),
+                  t('create'),
+                  new_admin_university_people_experiences_import_path,
+                  class: button_classes %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @imports.total_count %>
@@ -9,10 +16,3 @@
 </div>
 
 <%= render 'admin/imports/list', imports: @imports, path_pattern: 'admin_university_people_experiences_import_path' %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to_if  can?(:create, University::Person::Experience),
-                  t('create'),
-                  new_admin_university_people_experiences_import_path,
-                  class: button_classes %>
-<% end %>

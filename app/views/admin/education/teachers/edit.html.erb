@@ -1,6 +1,7 @@
 <% content_for :title, t('education.manage_programs') %>
 
-<%= simple_form_for [:admin, @teacher], url: admin_education_teacher_path(@teacher) do |f| %>
+<% url = admin_education_teacher_path(@teacher) %>
+<%= simple_form_for [:admin, @teacher], url: url do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -19,6 +20,7 @@
   </div>
 
   <% content_for :action_bar_right do %>
+    <%= cancel url %>
     <%= submit f %>
   <% end %>
 <% end %>

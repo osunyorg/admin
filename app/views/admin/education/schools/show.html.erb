@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @school %>
+  <%= button_advanced do %>
+    <%= destroy_link @school %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-3">
     <% if @l10n.logo.attached? %>
@@ -49,12 +56,6 @@
   </div>
 </div>
 
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @school %>
+<% content_for :server_admin_only do %>
   <%= static_link static_admin_education_school_path(@school) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @school %>
-<% end %>
+<% end %>  

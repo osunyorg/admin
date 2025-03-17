@@ -28,7 +28,7 @@ module Admin::ApplicationHelper
             class: html_classes
   end
 
-  def create_link(object_class, html_classes: button_classes, **options)
+  def create_link(object_class, html_classes: button_classes_major, **options)
     return unless can?(:create, object_class)
     object_class_sym = object_class.name.underscore.gsub('/', '_').to_sym
 
@@ -68,19 +68,7 @@ module Admin::ApplicationHelper
 
   def static_link(path)
     return unless current_user.server_admin?
-    raw "<a href=\"#{path}\" class=\"btn btn-light btn-xs\">#{t 'static' }</a>"
-  end
-
-  def button_classes(additional = '', **options)
-    classes = "btn btn-primary btn-xs #{additional}"
-    classes += ' disabled' if options[:disabled]
-    classes
-  end
-
-  def button_classes_danger(**options)
-    classes = 'btn btn-danger btn-xs'
-    classes += ' disabled' if options[:disabled]
-    classes
+    raw "<a href=\"#{path}\" class=\"#{button_classes}\">#{t 'static' }</a>"
   end
 
   def table_classes(with_actions: true)
@@ -93,10 +81,14 @@ module Admin::ApplicationHelper
     'text-end pe-0'
   end
 
+  def cancel(url)
+    link_to t('cancel'), url, class: 'btn btn-light vue__changes__cancel'
+  end
+
   def submit(form)
     form.button :submit,
                 t('save'),
-                class: button_classes,
+                class: 'btn btn-success vue__changes__save',
                 form: form.options.dig(:html, :id)
   end
 

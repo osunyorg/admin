@@ -81,6 +81,10 @@ class Communication::Block::Template::Category < Communication::Block::Template:
     end
   end
 
+  def children
+    selected_categories
+  end
+
   def taxonomy
     taxonomy_id_component.taxonomy
   end

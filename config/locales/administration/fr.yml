@@ -35,8 +35,8 @@ fr:
         requirement: Obligations spécifiques
     models:
       administration/location:
-        one: Site
-        other: Sites
+        one: Lieu
+        other: Lieux
       administration/qualiopi/criterion:
         one: Critère
         other: Critères
@@ -55,8 +55,8 @@ fr:
           description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
           title: Alumni
         location:
-          description: Gestion des différents sites (physiques) de formation et de recherche
-          title: Sites
+          description: Gestion des différents lieux de formation et de recherche
+          title: Lieux
         qualiopi:
           description: Aide à la vérification de la conformité de l'offre de formation avec la norme Qualiopi
           title: Qualiopi

@@ -1,5 +1,9 @@
 <% content_for :title, University.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= link_to t('create'), new_server_university_path, class: button_classes %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @universities.total_count %>
@@ -68,9 +72,4 @@
     </tfoot>
   </table>
 </div>
-
 <%= paginate @universities %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('create'), new_server_university_path, class: button_classes %>
-<% end %>

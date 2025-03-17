@@ -1,5 +1,9 @@
 <% content_for :title, Communication::Extranet.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= create_link Communication::Extranet %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @extranets.total_count %>
@@ -10,7 +14,3 @@
 
 <%= render 'admin/communication/extranets/list', extranets: @extranets %>
 <%= paginate @extranets %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Extranet %>
-<% end %>

@@ -15,6 +15,7 @@
       </div>
     </div>
     <% content_for :action_bar_right do %>
+      <%= cancel [:admin, category] %>
       <%= submit f %>
     <% end %>
   <% end %>

@@ -2,7 +2,8 @@
   <% block.template.selected_elements.each do |element|
     person = element.person
     next if person.nil?
-    l10n = person.best_localization_for(person)
+    l10n = person.localized_in(block.language)
+    next if l10n.nil?
     %>
     <div class="col-6 col-xxl-2 col-lg-3 mb-3">
       <%= osuny_thumbnail l10n, classes: 'rounded-circle' %>

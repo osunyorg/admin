@@ -1,4 +1,5 @@
-<%= simple_form_for tag, url: tag.new_record? ? server_tags_path : server_tag_path(tag) do |f| %>
+<% url = tag.new_record? ? server_tags_path : server_tag_path(tag) %>
+<%= simple_form_for tag, url: url do |f| %>
   <%= f.input :name %>
   <%= f.association :websites,
                     as: :check_boxes,
@@ -8,6 +9,7 @@
                       label_method: ->(website_l10n) { "#{website_l10n} — #{website_l10n.university}" }
                     ) %>
   <% content_for :action_bar_right do %>
+    <%= cancel url %>
     <%= submit f %>
   <% end %>
 <% end %>
