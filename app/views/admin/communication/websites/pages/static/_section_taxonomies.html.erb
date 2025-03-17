@@ -13,11 +13,12 @@ if page.special_page_categories
   %>
 section_taxonomies:
 <% if free_categories_content.present? %>
-  - name: "<%= t('category.title') %>"
+  - name: >-
+      <%= t('category.title') %>
     slug: ""
     path: ""
     categories:
-<%= sanitize free_categories_content %>
+<%= free_categories_content.html_safe %>
 <% end %>
 <%
   if taxonomies.any?
@@ -31,11 +32,12 @@ section_taxonomies:
                 language: language
       }.join('')
       if taxonomy_content.present? %>
-  - name: "<%= prepare_text_for_static taxonomy_l10n.to_s %>"
+  - name: >-
+      <%= prepare_text_for_static taxonomy_l10n.to_s %>
     slug: "<%= hugo.slug %>"
     path: "<%= hugo.path %>"
     categories:
-<%= sanitize taxonomy_content %><%
+<%= taxonomy_content.html_safe %><%
       end
     end
   end

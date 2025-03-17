@@ -5,7 +5,8 @@ if category_l10n.present?
   count = category.count_objects_in(language, @website)
   if count > 0 %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-        name: "<%= prepare_text_for_static category_l10n.to_s %>"
+        name: >-
+          <%= prepare_text_for_static category_l10n.to_s %>
         count: <%= count %>
 <% end
 end %>
