@@ -23,6 +23,7 @@ class Ability::Admin < Ability
     can :manage, University::Role, university_id: @user.university_id
     can :manage, User, university_id: @user.university_id, role: @user.managed_roles
     can :manage, User::Favorite, user_id: @user
+    can :manage, University::App, university_id: @user.university_id
   end
 
   def admin_education
