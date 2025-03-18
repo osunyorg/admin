@@ -65,8 +65,8 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   alias :event :about
 
   delegate  :archive?,
-            :from_day, :from_hour,
-            :to_day, :to_hour,
+            :from_day,
+            :to_day,
             :time_zone,
             :kind_simple?,
             :kind_recurring?,

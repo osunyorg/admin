@@ -26,11 +26,9 @@
               <%
                 computed_short_date = date_range_i18n(event.from_day, event.to_day, format: :short, locale: block.language.iso_code)
                 computed_short_two_lines_date = date_range_i18n(event.from_day, event.to_day, format: :short, layout: :two_lines, locale: block.language.iso_code)
-                from_hour = event.from_hour ? event.from_hour.strftime("%H:%M") : nil
-                to_hour = event.to_hour ? event.to_hour.strftime("%H:%M") : nil
               %>
-              <% if computed_short_date || computed_short_two_lines_date || from_hour || to_hour %>
-                <div class="event-dates" itemprop="startDate" content="<%= "#{event.from_day}#{from_hour}" %>">
+              <% if computed_short_date || computed_short_two_lines_date %>
+                <div class="event-dates" itemprop="startDate" content="<%= "#{event.from_day}" %>">
                   <span>
                     <% date_format = computed_short_two_lines_date %>
                     <% if block.template.layout != "list" %>
@@ -38,16 +36,6 @@
                     <% end %>
                     <span><%= date_format %></span>
                   </span>
-                  <% if from_hour || to_hour %>
-                    <div class="event-time">
-                      <% if from_hour %>
-                        <span><%= from_hour %></span>
-                      <% end %>
-                      <% if to_hour %>
-                        <span><%= to_hour %></span>
-                      <% end %>
-                    </div>
-                  <% end %>
                 </div>
               <% end %>
               <% if event.status.present? && block.template.option_status %>
