@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_10_154532) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -1376,8 +1376,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_10_154532) do
   end
 
   create_table "education_school_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.boolean "published", default: false
-    t.datetime "published_at"
     t.string "slug"
     t.string "name"
     t.string "url"
