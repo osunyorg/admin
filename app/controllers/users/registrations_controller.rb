@@ -53,4 +53,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     flash[:alert] = t('devise.failure.unauthenticated')
     redirect_to user_two_factor_authentication_url
   end
+
+  def hashcash_after_failure
+    redirect_to(new_user_registration_path, alert: t("active_hashcash.error_label"))
+  end
 end
