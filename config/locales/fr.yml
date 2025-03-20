@@ -45,6 +45,8 @@ fr:
     warnings:
       one: '1 information utile'
       other: '%{count} informations utiles'
+  active_hashcash:
+    error_label: La vérification hashcash a échoué. Veuillez réessayer.
   activerecord:
     attributes:
       emergency_message:

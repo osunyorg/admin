@@ -45,6 +45,8 @@ en:
     warnings:
       one: '1 insight'
       other: '%{count} insights'
+  active_hashcash:
+    error_label: Hashcash verification failed. Please try again.
   activerecord:
     attributes:
       emergency_message:
