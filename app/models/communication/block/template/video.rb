@@ -48,7 +48,7 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
   protected
 
   def video_provider
-    @video_provider ||= Video::Provider.find(url)
+    @video_provider ||= Video::Provider.find(url.to_s.strip)
   end
 
   def check_accessibility
