@@ -13,4 +13,10 @@ class Users::SessionsController < Devise::SessionsController
     super
   end
 
+  protected
+
+  def hashcash_after_failure
+    redirect_to(new_user_session_path, alert: t("active_hashcash.error_label"))
+  end
+
 end
