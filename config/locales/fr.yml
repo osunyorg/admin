@@ -122,6 +122,8 @@ fr:
   admin:
     advanced_settings: Réglages avancés
     attachment_not_available: Impossible d'accéder à l'élément
+    categories:
+      cant_move_taxonomy_here: Impossible de déplacer une taxonomie dans une autre catégorie
     chronicles:
       read_all: Voir toutes les chroniques
       read_more: En savoir plus
