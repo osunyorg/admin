@@ -1,6 +1,6 @@
 class Git::Providers::Github < Git::Providers::Abstract
   BASE_URL = "https://github.com".freeze
-  COMMIT_BATCH_SIZE = 250
+  COMMIT_BATCH_SIZE = 100
 
   include WithSecrets
   include WithTheme
