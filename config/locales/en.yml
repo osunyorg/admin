@@ -122,6 +122,8 @@ en:
   admin:
     advanced_settings: Advanced settings
     attachment_not_available: Attachment not available
+    categories:
+      cant_move_taxonomy_here: Can't move a taxonomy in another category
     chronicles:
       read_all: See all chronicles
       read_more: Learn more
