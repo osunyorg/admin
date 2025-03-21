@@ -5,6 +5,9 @@ module Education::Program::WithDiploma
     belongs_to  :diploma,
                 class_name: 'Education::Diploma',
                 optional: true
+
+    alias :education_diploma :diploma
+    alias :education_diplomas :diplomas
   end
 
   # Used by website
