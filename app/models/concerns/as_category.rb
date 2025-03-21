@@ -54,6 +54,11 @@ module AsCategory
     end
   end
 
+  def editable?
+    return true unless respond_to?(:is_programs_root)
+    is_programs_root == false && program_id.nil?
+  end
+
   protected
 
   # We want only the objects used in the website, not a count of all objects
