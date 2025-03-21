@@ -54,6 +54,7 @@ module AsCategory
     end
   end
 
+  # This does not depend on CanCanCan, because no one should edit some categories
   def editable?
     !generated_by_programs?
   end
