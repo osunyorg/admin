@@ -12,7 +12,7 @@ module Admin::ActAsCategories
     parent_id = params.dig(:parentId)
 
     if moved_category.is_taxonomy? && parent_id.present?
-      render plain: "Impossible de déplacer une taxonomie dans une autre catégorie", status: :unprocessable_entity
+      render plain: I18n.t('admin.categories.cant_move_taxonomy_here'), status: :unprocessable_entity
     else
       old_parent_id = params.dig(:oldParentId)
       ids = params[:ids] || []
