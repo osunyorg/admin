@@ -54,7 +54,19 @@ module AsCategory
     end
   end
 
+  # This does not depend on CanCanCan, because no one should edit some categories
+  def editable?
+    !generated_by_programs?
+  end
+
   protected
+
+  def generated_by_programs?
+    # Persons|Organizations|Programs|... categories have no links to programs
+    return false unless respond_to?(:is_programs_root)
+    # Either taxonomy category (root) or category linked to a program
+    is_programs_root == true || program_id.present?
+  end
 
   # We want only the objects used in the website, not a count of all objects
   def count_indirect_objects_in(objects, website)

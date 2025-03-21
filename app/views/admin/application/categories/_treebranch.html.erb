@@ -52,8 +52,8 @@ categories_class_path = categories_class.to_s.parameterize.underscore
       </div>
       <div class="card-footer">
         <%= link_to t('show'), show_path, class: 'action ps-3' %>
-        <%= link_to t('edit'), edit_path, class: 'action ps-3' %>
-        <%= link_to t('delete'), show_path, method: :delete, data: { confirm: t('please_confirm') }, class: 'action text-danger ps-3' %>
+        <%= link_to t('edit'), edit_path, class: 'action ps-3' if category.editable? && can?(:update, category) %>
+        <%= link_to t('delete'), show_path, method: :delete, data: { confirm: t('please_confirm') }, class: 'action text-danger ps-3' if category.editable? && can?(:destroy, category) %>
       </div>
     </div>
     <ul class=" list-unstyled

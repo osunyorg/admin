@@ -1,6 +1,10 @@
 module Admin::ActAsCategories
   extend ActiveSupport::Concern
 
+  included do
+    before_action :ensure_category_is_editable, only: [:edit, :update, :destroy]
+  end
+
   def reorder
     parent_id = params.dig(:parentId)
     old_parent_id = params.dig(:oldParentId)
@@ -59,5 +63,9 @@ module Admin::ActAsCategories
       # Indirect object (Person category, ...)
       category.touch
     end
+  end
+
+  def ensure_category_is_editable
+    render_forbidden unless @category.editable?
   end
 end
