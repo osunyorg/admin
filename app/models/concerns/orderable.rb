@@ -2,7 +2,7 @@ module Orderable
   extend ActiveSupport::Concern
 
   included do
-    before_create :set_position
+    before_create :set_position, if: -> (object) { object.position.nil? }
     scope :ordered, -> (language = nil) { order(position: :asc) }
   end
 
