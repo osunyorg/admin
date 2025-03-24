@@ -31,3 +31,16 @@ x-ratelimit-used: "1681"
 x-ratelimit-used: "1843"
 
 140 requêtes
+
+
+## v5 shared_cache: false
+
+On avait compris à l'envers :)
+
+x-ratelimit-used: "1919"
+x-ratelimit-used: "1923"
+
+on a juste récupéré des ressources
+
+
+https://evilmartians.com/chronicles/down-the-caching-hole-adventures-in-http-caching-and-faraday-land
