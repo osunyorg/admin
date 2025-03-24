@@ -49,9 +49,14 @@ https://evilmartians.com/chronicles/down-the-caching-hole-adventures-in-http-cac
 
 ## v12 early returns
 
+https://github.com/osunydev/demo-test-github-12
+
+
 On n'interroge plus l'API pour `valid?` ni pour `default_branch`
 
+
 76 requêtes (gain de 64 !)
+
 
 x-ratelimit-used: "442"
 x-ratelimit-used: "526"
