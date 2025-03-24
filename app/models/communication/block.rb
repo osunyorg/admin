@@ -7,7 +7,7 @@
 #  data                     :jsonb
 #  html_class               :string
 #  migration_identifier     :string
-#  position                 :integer          default(0), not null
+#  position                 :integer          not null
 #  published                :boolean          default(TRUE)
 #  template_kind            :integer          default(NULL), not null
 #  title                    :string
