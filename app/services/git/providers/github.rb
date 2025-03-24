@@ -126,7 +126,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def default_branch
-    @default_branch ||= branch.present? ? branch : 'main'
+    @default_branch ||= branch.presence || 'main'
   end
 
   def branch_sha
