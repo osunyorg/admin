@@ -6,7 +6,7 @@
 #  bodyclass                :string
 #  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
-#  position                 :integer          default(0), not null
+#  position                 :integer          not null
 #  type                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
