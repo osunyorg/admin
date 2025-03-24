@@ -758,6 +758,7 @@ DEPENDENCIES
   enum_help
   execjs
   faceted_search
+  faraday-http-cache
   figaro
   font-awesome-sass
   geo_point

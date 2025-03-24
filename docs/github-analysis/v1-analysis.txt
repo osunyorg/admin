@@ -1,0 +1,152 @@
+534 rate au début
+698 rate à la fin
+164 actions mais pas forcément que nous
+
+
+140 requêtes loggées
+
+107     INFO -- : request: GET
+21      INFO -- : request: POST
+10      INFO -- : request: PATCH
+2       INFO -- : request: PUT
+
+
+
+10:35:28 worker.1 | I, [2025-03-24T10:35:28.161929 #17568]  INFO -- : request: POST https://api.github.com/repos/osunyorg/template/generate
+10:35:40 worker.1 | I, [2025-03-24T10:35:40.466324 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/actions/secrets/public-key
+10:35:40 worker.1 | I, [2025-03-24T10:35:40.667885 #17568]  INFO -- : request: PUT https://api.github.com/repos/osunydev/demo-test-github-3/actions/secrets/DEUXFLEURS_ACCESS_KEY
+10:35:40 worker.1 | I, [2025-03-24T10:35:40.953520 #17568]  INFO -- : request: PUT https://api.github.com/repos/osunydev/demo-test-github-3/actions/secrets/DEUXFLEURS_SECRET
+10:36:02 worker.1 | I, [2025-03-24T10:36:02.771477 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:03 worker.1 | I, [2025-03-24T10:36:03.294214 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:03 worker.1 | I, [2025-03-24T10:36:03.647512 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:03 worker.1 | I, [2025-03-24T10:36:03.919385 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/58c519fd79e945eacc8e56f39c86b9cc44582b37?recursive=true
+10:36:04 worker.1 | I, [2025-03-24T10:36:04.489206 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:04 worker.1 | I, [2025-03-24T10:36:04.780851 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/trees
+10:36:05 worker.1 | I, [2025-03-24T10:36:05.346212 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/commits
+10:36:05 worker.1 | I, [2025-03-24T10:36:05.669556 #17568]  INFO -- : request: PATCH https://api.github.com/repos/osunydev/demo-test-github-3/git/refs/heads/main
+10:36:06 worker.1 | I, [2025-03-24T10:36:06.727311 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:07 worker.1 | I, [2025-03-24T10:36:07.103693 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:07 worker.1 | I, [2025-03-24T10:36:07.428475 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:07 worker.1 | I, [2025-03-24T10:36:07.661077 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/363e4595adf49a7781d5022c4505a2f4f685c9fb?recursive=true
+10:36:08 worker.1 | I, [2025-03-24T10:36:08.124142 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:08 worker.1 | I, [2025-03-24T10:36:08.463804 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/trees
+10:36:08 worker.1 | I, [2025-03-24T10:36:08.882486 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/commits
+10:36:09 worker.1 | I, [2025-03-24T10:36:09.209500 #17568]  INFO -- : request: PATCH https://api.github.com/repos/osunydev/demo-test-github-3/git/refs/heads/main
+10:36:10 worker.1 | I, [2025-03-24T10:36:10.321286 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:10 worker.1 | I, [2025-03-24T10:36:10.697712 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:11 worker.1 | I, [2025-03-24T10:36:11.013610 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:11 worker.1 | I, [2025-03-24T10:36:11.239629 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/e67ce2fe1d65319143c0342b85bca752c5eb156e?recursive=true
+10:36:11 worker.1 | I, [2025-03-24T10:36:11.771492 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:12 worker.1 | I, [2025-03-24T10:36:12.125630 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/trees
+10:36:12 worker.1 | I, [2025-03-24T10:36:12.481437 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/commits
+10:36:12 worker.1 | I, [2025-03-24T10:36:12.853093 #17568]  INFO -- : request: PATCH https://api.github.com/repos/osunydev/demo-test-github-3/git/refs/heads/main
+10:36:13 worker.1 | I, [2025-03-24T10:36:13.831837 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:14 worker.1 | I, [2025-03-24T10:36:14.226880 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:14 worker.1 | I, [2025-03-24T10:36:14.567059 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:14 worker.1 | I, [2025-03-24T10:36:14.795842 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/9144db74743515a5ae7663aaee950427d21a257c?recursive=true
+10:36:15 worker.1 | I, [2025-03-24T10:36:15.220363 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:15 worker.1 | I, [2025-03-24T10:36:15.543573 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/trees
+10:36:15 worker.1 | I, [2025-03-24T10:36:15.927124 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/commits
+10:36:16 worker.1 | I, [2025-03-24T10:36:16.223133 #17568]  INFO -- : request: PATCH https://api.github.com/repos/osunydev/demo-test-github-3/git/refs/heads/main
+10:36:17 worker.1 | I, [2025-03-24T10:36:17.212515 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:17 worker.1 | I, [2025-03-24T10:36:17.652881 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:17 worker.1 | I, [2025-03-24T10:36:17.996113 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:18 worker.1 | I, [2025-03-24T10:36:18.263986 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/24ec7b7b956855d1d1ba4746a56cc5a3d587bd8b?recursive=true
+10:36:18 worker.1 | I, [2025-03-24T10:36:18.721517 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:19 worker.1 | I, [2025-03-24T10:36:19.050562 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/trees
+10:36:19 worker.1 | I, [2025-03-24T10:36:19.384032 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/commits
+10:36:19 worker.1 | I, [2025-03-24T10:36:19.733731 #17568]  INFO -- : request: PATCH https://api.github.com/repos/osunydev/demo-test-github-3/git/refs/heads/main
+10:36:20 worker.1 | I, [2025-03-24T10:36:20.677281 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:21 worker.1 | I, [2025-03-24T10:36:21.044504 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:21 worker.1 | I, [2025-03-24T10:36:21.348185 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:21 worker.1 | I, [2025-03-24T10:36:21.566249 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/e271a365f5ca22f23d832f5ccb6d57fd4695119a?recursive=true
+10:36:21 worker.1 | I, [2025-03-24T10:36:21.986396 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:22 worker.1 | I, [2025-03-24T10:36:22.314278 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/trees
+10:36:22 worker.1 | I, [2025-03-24T10:36:22.692267 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/commits
+10:36:23 worker.1 | I, [2025-03-24T10:36:23.098015 #17568]  INFO -- : request: PATCH https://api.github.com/repos/osunydev/demo-test-github-3/git/refs/heads/main
+10:36:24 worker.1 | I, [2025-03-24T10:36:24.037216 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:24 worker.1 | I, [2025-03-24T10:36:24.506453 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:24 worker.1 | I, [2025-03-24T10:36:24.855014 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:25 worker.1 | I, [2025-03-24T10:36:25.090759 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/ba69c1bd8ded98cb5c15b316495568831b3a0a41?recursive=true
+10:36:25 worker.1 | I, [2025-03-24T10:36:25.490785 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:25 worker.1 | I, [2025-03-24T10:36:25.825752 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/trees
+10:36:26 worker.1 | I, [2025-03-24T10:36:26.156851 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/commits
+10:36:26 worker.1 | I, [2025-03-24T10:36:26.549135 #17568]  INFO -- : request: PATCH https://api.github.com/repos/osunydev/demo-test-github-3/git/refs/heads/main
+10:36:27 worker.1 | I, [2025-03-24T10:36:27.521627 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:27 worker.1 | I, [2025-03-24T10:36:27.940916 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:28 worker.1 | I, [2025-03-24T10:36:28.256522 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:28 worker.1 | I, [2025-03-24T10:36:28.471915 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/71bfb71e12a607d2559e5e8abad6b454a069d5ba?recursive=true
+10:36:28 worker.1 | I, [2025-03-24T10:36:28.876557 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:29 worker.1 | I, [2025-03-24T10:36:29.235795 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/trees
+10:36:29 worker.1 | I, [2025-03-24T10:36:29.612370 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/commits
+10:36:29 worker.1 | I, [2025-03-24T10:36:29.960161 #17568]  INFO -- : request: PATCH https://api.github.com/repos/osunydev/demo-test-github-3/git/refs/heads/main
+10:36:30 worker.1 | I, [2025-03-24T10:36:30.986810 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:31 worker.1 | I, [2025-03-24T10:36:31.390725 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:31 worker.1 | I, [2025-03-24T10:36:31.715549 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:31 worker.1 | I, [2025-03-24T10:36:31.922804 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/aaa8e569b6be77144f1d62f2572b430263da3eb2?recursive=true
+10:36:32 worker.1 | I, [2025-03-24T10:36:32.293733 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:32 worker.1 | I, [2025-03-24T10:36:32.639356 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/trees
+10:36:33 worker.1 | I, [2025-03-24T10:36:33.046214 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/commits
+10:36:33 worker.1 | I, [2025-03-24T10:36:33.380717 #17568]  INFO -- : request: PATCH https://api.github.com/repos/osunydev/demo-test-github-3/git/refs/heads/main
+10:36:34 worker.1 | I, [2025-03-24T10:36:34.299987 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:34 worker.1 | I, [2025-03-24T10:36:34.608629 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:34 worker.1 | I, [2025-03-24T10:36:34.921495 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:35 worker.1 | I, [2025-03-24T10:36:35.143052 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/32ae5119450a553ca0e4207865c57f96d3a88313?recursive=true
+10:36:35 worker.1 | I, [2025-03-24T10:36:35.429520 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:36 worker.1 | I, [2025-03-24T10:36:36.017842 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:36 worker.1 | I, [2025-03-24T10:36:36.371089 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:36 worker.1 | I, [2025-03-24T10:36:36.695749 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:36 worker.1 | I, [2025-03-24T10:36:36.910810 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/32ae5119450a553ca0e4207865c57f96d3a88313?recursive=true
+10:36:37 worker.1 | I, [2025-03-24T10:36:37.198555 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:37 worker.1 | I, [2025-03-24T10:36:37.709943 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:38 worker.1 | I, [2025-03-24T10:36:38.400388 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:38 worker.1 | I, [2025-03-24T10:36:38.703421 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:38 worker.1 | I, [2025-03-24T10:36:38.953217 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/32ae5119450a553ca0e4207865c57f96d3a88313?recursive=true
+10:36:40 worker.1 | I, [2025-03-24T10:36:40.223268 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/trees
+10:36:40 worker.1 | I, [2025-03-24T10:36:40.842310 #17568]  INFO -- : request: POST https://api.github.com/repos/osunydev/demo-test-github-3/git/commits
+10:36:41 worker.1 | I, [2025-03-24T10:36:41.153757 #17568]  INFO -- : request: PATCH https://api.github.com/repos/osunydev/demo-test-github-3/git/refs/heads/main
+10:36:42 worker.1 | I, [2025-03-24T10:36:42.131079 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:42 worker.1 | I, [2025-03-24T10:36:42.497902 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:42 worker.1 | I, [2025-03-24T10:36:42.844390 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:43 worker.1 | I, [2025-03-24T10:36:43.075468 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/dafbe9fdacc1cc115381731b8f3b80eed4d144a8?recursive=true
+10:36:43 worker.1 | I, [2025-03-24T10:36:43.360264 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:43 worker.1 | I, [2025-03-24T10:36:43.832839 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:44 worker.1 | I, [2025-03-24T10:36:44.251092 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:44 worker.1 | I, [2025-03-24T10:36:44.569867 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:44 worker.1 | I, [2025-03-24T10:36:44.792436 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/dafbe9fdacc1cc115381731b8f3b80eed4d144a8?recursive=true
+10:36:45 worker.1 | I, [2025-03-24T10:36:45.297975 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:45 worker.1 | I, [2025-03-24T10:36:45.815468 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:46 worker.1 | I, [2025-03-24T10:36:46.226211 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:46 worker.1 | I, [2025-03-24T10:36:46.557863 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:46 worker.1 | I, [2025-03-24T10:36:46.766346 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/dafbe9fdacc1cc115381731b8f3b80eed4d144a8?recursive=true
+10:36:47 worker.1 | I, [2025-03-24T10:36:47.241087 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:47 worker.1 | I, [2025-03-24T10:36:47.692981 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:48 worker.1 | I, [2025-03-24T10:36:48.052265 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:48 worker.1 | I, [2025-03-24T10:36:48.398159 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:48 worker.1 | I, [2025-03-24T10:36:48.619489 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/dafbe9fdacc1cc115381731b8f3b80eed4d144a8?recursive=true
+10:36:48 worker.1 | I, [2025-03-24T10:36:48.929558 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:49 worker.1 | I, [2025-03-24T10:36:49.437221 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:49 worker.1 | I, [2025-03-24T10:36:49.879034 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:50 worker.1 | I, [2025-03-24T10:36:50.189954 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:50 worker.1 | I, [2025-03-24T10:36:50.428744 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/dafbe9fdacc1cc115381731b8f3b80eed4d144a8?recursive=true
+10:36:50 worker.1 | I, [2025-03-24T10:36:50.723186 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:51 worker.1 | I, [2025-03-24T10:36:51.580221 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:51 worker.1 | I, [2025-03-24T10:36:51.899379 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:52 worker.1 | I, [2025-03-24T10:36:52.119269 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/dafbe9fdacc1cc115381731b8f3b80eed4d144a8?recursive=true
+10:36:52 worker.1 | I, [2025-03-24T10:36:52.391339 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:52 worker.1 | I, [2025-03-24T10:36:52.884322 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:53 worker.1 | I, [2025-03-24T10:36:53.263952 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:53 worker.1 | I, [2025-03-24T10:36:53.575288 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:53 worker.1 | I, [2025-03-24T10:36:53.827620 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/dafbe9fdacc1cc115381731b8f3b80eed4d144a8?recursive=true
+10:36:54 worker.1 | I, [2025-03-24T10:36:54.098772 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:54 worker.1 | I, [2025-03-24T10:36:54.633361 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:55 worker.1 | I, [2025-03-24T10:36:55.062471 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:55 worker.1 | I, [2025-03-24T10:36:55.421504 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:55 worker.1 | I, [2025-03-24T10:36:55.640574 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/dafbe9fdacc1cc115381731b8f3b80eed4d144a8?recursive=true
+10:36:55 worker.1 | I, [2025-03-24T10:36:55.908884 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:56 worker.1 | I, [2025-03-24T10:36:56.451980 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:56 worker.1 | I, [2025-03-24T10:36:56.804660 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:57 worker.1 | I, [2025-03-24T10:36:57.148843 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/branches/main
+10:36:57 worker.1 | I, [2025-03-24T10:36:57.373405 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3/git/trees/dafbe9fdacc1cc115381731b8f3b80eed4d144a8?recursive=true
+10:36:57 worker.1 | I, [2025-03-24T10:36:57.647690 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
+10:36:58 worker.1 | I, [2025-03-24T10:36:58.099830 #17568]  INFO -- : request: GET https://api.github.com/repos/osunydev/demo-test-github-3
