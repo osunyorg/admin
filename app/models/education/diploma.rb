@@ -6,7 +6,7 @@
 #  certification :string
 #  ects          :integer
 #  level         :integer          default("not_applicable")
-#  position      :integer
+#  position      :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  university_id :uuid             not null, indexed

@@ -6,7 +6,7 @@
 #  bodyclass            :string
 #  is_taxonomy          :boolean          default(FALSE)
 #  migration_identifier :string
-#  position             :integer
+#  position             :integer          not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  parent_id            :uuid             indexed

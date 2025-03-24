@@ -5,7 +5,7 @@
 #  id            :uuid             not null, primary key
 #  bodyclass     :string
 #  is_taxonomy   :boolean          default(FALSE)
-#  position      :integer
+#  position      :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  parent_id     :uuid             indexed
