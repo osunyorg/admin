@@ -929,6 +929,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_24_083936) do
     t.boolean "full_width", default: false
     t.string "type"
     t.string "migration_identifier"
+    t.jsonb "design_options"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"

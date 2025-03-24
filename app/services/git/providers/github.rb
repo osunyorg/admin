@@ -103,17 +103,6 @@ class Git::Providers::Github < Git::Providers::Abstract
     tree_item_at_path(path)&.dig(:sha)
   end
 
-  def valid?
-    return false unless super
-    begin
-      client.repository(repository)
-      true
-    rescue Octokit::Unauthorized
-      git_repository.website.invalidate_access_token!
-      false
-    end
-  end
-
   def files_in_the_repository
     @files_in_the_repository ||= tree[:tree].map { |file| file[:path] }
   end
@@ -125,8 +114,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def default_branch
-    @default_branch ||= branch.present? ? branch
-                                        : client.repo(repository)[:default_branch]
+    @default_branch ||= branch.presence || 'main'
   end
 
   def branch_sha
