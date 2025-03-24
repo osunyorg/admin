@@ -5,7 +5,7 @@
 #  id                  :uuid             not null, primary key
 #  about_type          :string           indexed => [about_id]
 #  kind                :integer          default("blank")
-#  position            :integer
+#  position            :integer          not null
 #  should_open_new_tab :boolean          default(FALSE)
 #  title               :string
 #  url                 :text
