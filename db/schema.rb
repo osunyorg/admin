@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_24_083936) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -150,7 +150,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
     t.uuid "about_id"
     t.integer "template_kind", default: 0, null: false
     t.jsonb "data"
-    t.integer "position", default: 0, null: false
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "title"
@@ -362,7 +362,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
 
   create_table "communication_media_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "is_taxonomy", default: false
-    t.integer "position", default: 0
+    t.integer "position", null: false
     t.uuid "university_id", null: false
     t.uuid "parent_id"
     t.datetime "created_at", null: false
@@ -463,7 +463,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
   end
 
   create_table "communication_website_agenda_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "position"
+    t.integer "position", null: false
     t.uuid "communication_website_id", null: false
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
@@ -810,7 +810,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
     t.uuid "website_id", null: false
     t.uuid "menu_id", null: false
     t.string "title"
-    t.integer "position"
+    t.integer "position", null: false
     t.integer "kind", default: 0
     t.uuid "parent_id"
     t.string "about_type"
@@ -844,7 +844,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
 
   create_table "communication_website_page_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "is_taxonomy", default: false
-    t.integer "position"
+    t.integer "position", null: false
     t.uuid "communication_website_id", null: false
     t.uuid "parent_id"
     t.uuid "university_id", null: false
@@ -921,7 +921,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
     t.uuid "communication_website_id", null: false
     t.text "path"
     t.uuid "parent_id"
-    t.integer "position", default: 0, null: false
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "kind"
@@ -951,7 +951,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
 
   create_table "communication_website_portfolio_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "is_programs_root", default: false
-    t.integer "position"
+    t.integer "position", null: false
     t.uuid "communication_website_id", null: false
     t.uuid "parent_id"
     t.uuid "university_id", null: false
@@ -1035,7 +1035,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
   create_table "communication_website_post_categories", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
-    t.integer "position"
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "parent_id"
@@ -1257,13 +1257,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
     t.datetime "updated_at", null: false
     t.integer "ects"
     t.string "certification"
-    t.integer "position", default: 0
+    t.integer "position", null: false
     t.index ["university_id"], name: "index_education_diplomas_on_university_id"
   end
 
   create_table "education_program_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "is_taxonomy", default: false
-    t.integer "position"
+    t.integer "position", null: false
     t.uuid "parent_id"
     t.uuid "university_id"
     t.datetime "created_at", null: false
@@ -1627,7 +1627,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
     t.datetime "updated_at", null: false
     t.uuid "updated_by_id"
     t.text "bibliography"
-    t.integer "position"
+    t.integer "position", null: false
     t.text "text"
     t.uuid "kind_id"
     t.date "received_at"
@@ -1706,7 +1706,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
   create_table "research_laboratory_axes", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "research_laboratory_id", null: false
-    t.integer "position"
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["research_laboratory_id"], name: "index_research_laboratory_axes_on_research_laboratory_id"
@@ -1869,7 +1869,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "parent_id"
-    t.integer "position", default: 0
+    t.integer "position", null: false
     t.boolean "is_taxonomy", default: false
     t.string "migration_identifier"
     t.string "bodyclass"
@@ -1995,7 +1995,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "parent_id"
-    t.integer "position", default: 0
+    t.integer "position", null: false
     t.boolean "is_taxonomy", default: false
     t.string "bodyclass"
     t.index ["parent_id"], name: "index_university_person_categories_on_parent_id"
@@ -2063,7 +2063,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
     t.integer "kind"
     t.string "target_type", null: false
     t.uuid "target_id", null: false
-    t.integer "position"
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_university_person_involvements_on_person_id"
@@ -2113,7 +2113,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_20_150906) do
     t.uuid "university_id", null: false
     t.string "target_type"
     t.uuid "target_id"
-    t.integer "position"
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["target_type", "target_id"], name: "index_university_roles_on_target"
