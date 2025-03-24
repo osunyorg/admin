@@ -47,7 +47,7 @@ class Git::Repository
   end
 
   def valid?
-    provider.valid?
+    @valid ||= provider.valid?
   end
 
   def init_from_template(name)
