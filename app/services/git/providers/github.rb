@@ -106,7 +106,8 @@ class Git::Providers::Github < Git::Providers::Abstract
   def valid?
     return false unless super
     begin
-      client.repository(repository)
+      # Save some requests here, @arnaud clean this up
+      # client.repository(repository)
       true
     rescue Octokit::Unauthorized
       git_repository.website.invalidate_access_token!
@@ -125,8 +126,7 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def default_branch
-    @default_branch ||= branch.present? ? branch
-                                        : client.repo(repository)[:default_branch]
+    @default_branch ||= branch.present? ? branch : 'main'
   end
 
   def branch_sha

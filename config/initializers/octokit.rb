@@ -1,5 +1,4 @@
 Octokit.middleware = Faraday::RackBuilder.new do |builder|
-  builder.use Faraday::HttpCache, serializer: Marshal, shared_cache: true, store: Rails.cache
   builder.use Faraday::Retry::Middleware, exceptions: Faraday::Retry::Middleware::DEFAULT_EXCEPTIONS + [Octokit::ServerError]
   builder.use Octokit::Middleware::FollowRedirects
   builder.use Octokit::Response::RaiseError
