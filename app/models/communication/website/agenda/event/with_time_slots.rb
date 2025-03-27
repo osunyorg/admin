@@ -5,6 +5,7 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     has_many  :time_slots,
               foreign_key: :communication_website_agenda_event_id,
               dependent: :destroy
+    accepts_nested_attributes_for :time_slots, allow_destroy: true
   end
 
   def time_slot_localizations
