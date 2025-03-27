@@ -4,7 +4,7 @@ module Orderable
   included do
     validates :position, presence: true
 
-    before_create :set_position, if: -> (object) { object.position.nil? }
+    before_validation :set_position, on: :create, if: -> (object) { object.position.nil? }
 
     scope :ordered, -> (language = nil) { order(position: :asc) }
   end
