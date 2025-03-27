@@ -48,7 +48,7 @@ class Administration::Location < ApplicationRecord
                           source: :diploma
                           alias_method :education_diplomas, :diplomas
 
-  validates :address, :city, :zipcode, :country, presence: true
+  validates :address, :city, :country, presence: true
 
   def dependencies
     localizations +
