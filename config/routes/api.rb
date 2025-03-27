@@ -24,6 +24,10 @@ namespace :api do
           post :upsert, on: :collection
         end
         resources :projects, controller: '/api/osuny/communication/websites/projects', only: [:index, :show, :create, :update]
+
+        member do
+          post :sync
+        end
       end
       root to: '/api/osuny/communication#index'
     end
