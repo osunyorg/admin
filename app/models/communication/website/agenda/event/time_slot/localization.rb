@@ -46,6 +46,8 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   delegate :to_s, :title, :subtitle, :summary, :contents_full_text, to: :event_l10n, allow_nil: true
   delegate :best_bodyclass, :archive?, to: :event
 
+  before_validation :set_communication_website_id, on: :create
+
   # /content/fr/events/YYYY/MM/DD-hh-mm-slug.html
   def git_path(website)
     return unless website.id == communication_website_id
@@ -105,5 +107,9 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   # 14-16-00
   def set_slug
     self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}"
+  end
+
+  def set_communication_website_id
+    self.communication_website_id ||= about.communication_website_id
   end
 end

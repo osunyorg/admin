@@ -38,6 +38,8 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   validates :datetime, presence: true
 
+  before_validation :set_website_and_university, on: :create
+
   scope :on_year, -> (year) { where('extract(year from datetime) = ?', year) }
   scope :on_month, -> (year, month) { where('extract(year from datetime) = ? and extract(month from datetime) = ?', year, month) }
   scope :on_day, -> (day) {  where('DATE(datetime) = ?', day) }
@@ -87,5 +89,10 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   def day_after_change
     datetime_change.last&.to_date
+  end
+
+  def set_website_and_university
+    self.communication_website_id = event.communication_website_id
+    self.university_id = event.university_id
   end
 end

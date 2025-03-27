@@ -161,6 +161,6 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
         time_slot_attributes[:localizations_attributes] << l10n_permitted_params
       end
     end
-    event.time_slots_attributes = time_slots_attributes
+    permitted_params[:time_slots_attributes] = time_slots_attributes
   end
 end

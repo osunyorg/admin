@@ -1,7 +1,7 @@
 test_event_time_slot_fr:
   migration_identifier: test-event-time-slot-fixture-1-fr
   place: Place du Mont-Blanc
-  slug: 08-00
+  slug: 12-08-00
   add_to_calendar_urls:
     google: "https://www.google.com/calendar/render?action=TEMPLATE&text=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&dates=20240712T080000/20240712T120000&ctz=Europe/Paris"
     yahoo: "https://calendar.yahoo.com/?v=60&TITLE=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&ST=20240712T060000Z&DUR=0400"

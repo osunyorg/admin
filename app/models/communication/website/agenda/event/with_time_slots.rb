@@ -4,7 +4,8 @@ module Communication::Website::Agenda::Event::WithTimeSlots
   included do
     has_many  :time_slots,
               foreign_key: :communication_website_agenda_event_id,
-              dependent: :destroy
+              dependent: :destroy,
+              inverse_of: :communication_website_agenda_event
     accepts_nested_attributes_for :time_slots, allow_destroy: true
   end
 
