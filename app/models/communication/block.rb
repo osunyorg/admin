@@ -149,6 +149,10 @@ class Communication::Block < ApplicationRecord
     about.touch
   end
 
+  def connect_and_sync_direct_sources
+    # We do nothing as the about will perform it
+  end
+
   # Invalidation des caches des personnes pour les backlinks
   # if a block changed we need to touch the old targets (for example persons previously connected), and the new connected ones
   # FIXME
