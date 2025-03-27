@@ -5,6 +5,7 @@
 #  id                                    :uuid             not null, primary key
 #  datetime                              :datetime
 #  duration                              :integer
+#  migration_identifier                  :string
 #  created_at                            :datetime         not null
 #  updated_at                            :datetime         not null
 #  communication_website_agenda_event_id :uuid             not null, indexed
@@ -27,6 +28,7 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
   include Localizable
+  include WithOpenApi
   include WithUniversity
 
   belongs_to  :communication_website_agenda_event,

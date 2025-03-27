@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  add_to_calendar_urls     :jsonb
+#  migration_identifier     :string
 #  place                    :string
 #  slug                     :string
 #  created_at               :datetime         not null
@@ -32,6 +33,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   include AsLocalization
   include Permalinkable
   include WithGitFiles
+  include WithOpenApi
   include WithUniversity
 
   belongs_to :website,

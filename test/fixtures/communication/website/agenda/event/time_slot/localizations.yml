@@ -1,0 +1,14 @@
+test_event_time_slot_fr:
+  migration_identifier: test-event-time-slot-fixture-1-fr
+  place: Place du Mont-Blanc
+  slug: 08-00
+  add_to_calendar_urls:
+    google: "https://www.google.com/calendar/render?action=TEMPLATE&text=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&dates=20240712T080000/20240712T120000&ctz=Europe/Paris"
+    yahoo: "https://calendar.yahoo.com/?v=60&TITLE=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&ST=20240712T060000Z&DUR=0400"
+    office: "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T06:00:00Z&enddt=2024-07-12T10:00:00Z"
+    outlook: "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T06:00:00Z&enddt=2024-07-12T10:00:00Z"
+    ical: "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20250327T130306Z%0ADTSTART:20240712T060000Z%0ADTEND:20240712T100000Z%0ASUMMARY:Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20%0AUID:-20240712T060000Z-Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20%0AEND:VEVENT%0AEND:VCALENDAR"
+  about: test_event_time_slot
+  language: fr
+  website: website_with_github
+  university: default_university
