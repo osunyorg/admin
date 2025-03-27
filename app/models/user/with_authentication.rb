@@ -8,7 +8,7 @@ module User::WithAuthentication
 
     has_one_time_password(encrypted: true)
 
-    validates :role, :first_name, :last_name, :email, presence: true
+    validates :role, :last_name, :email, presence: true
 
     validates :email, 
               uniqueness: { scope: :university_id }, 
