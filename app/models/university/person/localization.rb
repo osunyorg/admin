@@ -54,7 +54,7 @@ class University::Person::Localization < ApplicationRecord
   has_summernote :summary
   has_summernote :biography
 
-  validates :first_name, :last_name, presence: true
+  validates :last_name, presence: true
   before_validation :prepare_name
 
   def person_l10n
