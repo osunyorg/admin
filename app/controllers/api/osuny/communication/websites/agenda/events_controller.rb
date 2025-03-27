@@ -98,7 +98,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
       :migration_identifier, :language, :title, :meta_description,
       :published, :published_at, :slug, :subtitle, :summary, :text, :_destroy,
       featured_image: [:url, :alt, :credit, :_destroy],
-      blocks: [:migration_identifier, :template_kind, :title, :position, :published, :html_class, data: {}]
+      **nested_blocks_params
     ]
   end
 

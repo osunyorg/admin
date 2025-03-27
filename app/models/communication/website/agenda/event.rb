@@ -40,7 +40,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Searchable
   include Localizable
   include WithDays
-  include WithTimeSlots
   include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
@@ -53,7 +52,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   belongs_to  :parent,
               class_name: 'Communication::Website::Agenda::Event',
-              optional: true, 
+              optional: true,
               touch: true
   has_many    :children,
               class_name: 'Communication::Website::Agenda::Event',

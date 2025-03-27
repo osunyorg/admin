@@ -54,4 +54,8 @@ module Api::Osuny::ApplicationController::WithResourceParams
       metadata: { source_url: featured_image_url }
     }
   end
+
+  def nested_blocks_params
+    { blocks: [:migration_identifier, :template_kind, :title, :position, :published, :html_class, :_destroy, data: {}] }
+  end
 end
