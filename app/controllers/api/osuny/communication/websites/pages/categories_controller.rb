@@ -98,7 +98,7 @@ class Api::Osuny::Communication::Websites::Pages::CategoriesController < Api::Os
       :migration_identifier, :language, :name, :meta_description,
       :path, :slug, :summary, :_destroy,
       featured_image: [:url, :alt, :credit, :_destroy],
-      blocks: [:migration_identifier, :template_kind, :title, :position, :published, :html_class, data: {}]
+      **nested_blocks_params
     ]
   end
 

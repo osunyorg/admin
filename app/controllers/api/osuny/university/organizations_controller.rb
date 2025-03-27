@@ -99,7 +99,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
       :address_name, :address_additional, :linkedin, :mastodon, :twitter, :url,
       :slug, :summary, :text, :_destroy,
       featured_image: [:url, :alt, :credit, :_destroy],
-      blocks: [:migration_identifier, :template_kind, :title, :position, :published, :html_class, data: {}]
+      **nested_blocks_params
     ]
   end
 
