@@ -94,7 +94,7 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def to_s
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".strip
   end
 
   def to_s_with_mail
@@ -102,7 +102,7 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def to_s_alphabetical
-    "#{last_name} #{first_name}"
+    "#{last_name} #{first_name}".strip
   end
 
   def initials
