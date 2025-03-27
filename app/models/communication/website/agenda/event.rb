@@ -40,6 +40,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Searchable
   include Localizable
   include WithDays
+  include WithTimeSlots
   include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
