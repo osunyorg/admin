@@ -75,6 +75,7 @@ fr:
         language: Langue préférée
         last_name: Nom
         mobile_phone: Téléphone portable
+        optin_newsletter: Je souhaite recevoir par mail les actualités concernant les évolutions d'Osuny (invitation aux réunions de la communauté une fois par mois, synthèse une fois par trimestre).
         person: Personne
         picture: Photo de profil
         picture_url: Url de la photo de profil
