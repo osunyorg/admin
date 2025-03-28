@@ -22,6 +22,7 @@ module User::WithBrevo
   end
 
   def should_sync_with_brevo?
+    return false unless ENV['APPLICATION_ENV'] == 'production'
     return false unless confirmed?
     # Saved from Brevo webhook, no need to call it
     return false if from_brevo_webhook
