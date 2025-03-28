@@ -75,6 +75,7 @@ en:
         language: Favourite language
         last_name: Last name
         mobile_phone: Mobile phone
+        optin_newsletter: I would like to receive updates by email regarding developments on Osuny (invitation to community meetings once a month, summary once a quarter).
         person: Person
         picture: Profile picture
         picture_url: Profile picture Url
