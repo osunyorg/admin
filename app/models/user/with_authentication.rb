@@ -75,7 +75,7 @@ module User::WithAuthentication
     def send_two_factor_authentication_code(code, delivery_method)
       case delivery_method
       when :mobile_phone
-        Sendinblue::SmsService.send_mfa_code(self, code)
+        Brevo::SmsService.send_mfa_code(self, code)
       when :email
         send_devise_notification(:two_factor_authentication_code, code, {})
       end

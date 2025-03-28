@@ -38,6 +38,11 @@ Rails.application.routes.draw do
     match '/users/auth/saml/setup' => 'users/omniauth_callbacks#saml_setup', via: [:get, :post]
   end
 
+  # Hooks
+  scope 'webhooks' do
+    post 'brevo' => 'webhooks#brevo'
+  end
+
   namespace :admin do
     scope '/:lang' do
       resources :users, except: [:new, :create] do

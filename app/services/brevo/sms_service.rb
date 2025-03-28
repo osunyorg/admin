@@ -1,4 +1,4 @@
-module Sendinblue
+module Brevo
   class SmsService
     DEFAULT_SENDER_NAME = 'Osuny'.freeze
     SMS_CREDITS_LIMIT = 500
@@ -25,8 +25,8 @@ module Sendinblue
       sender_name = user.university.sms_sender_name
       sender_name ||= DEFAULT_SENDER_NAME
 
-      api_instance = SibApiV3Sdk::TransactionalSMSApi.new
-      send_transac_sms = SibApiV3Sdk::SendTransacSms.new(
+      api_instance = Brevo::TransactionalSMSApi.new
+      send_transac_sms = Brevo::SendTransacSms.new(
         sender: sender_name,
         recipient: user.mobile_phone,
         content: message
@@ -36,7 +36,7 @@ module Sendinblue
         # Send SMS message to a mobile number
         result = api_instance.send_transac_sms(send_transac_sms)
         p result
-      rescue SibApiV3Sdk::ApiError => e
+      rescue Brevo::ApiError => e
         puts "Exception when calling TransactionalSMSApi->send_transac_sms: #{e}"
       end
     end
@@ -46,7 +46,7 @@ module Sendinblue
     end
 
     def account_api
-      @account_api ||= SibApiV3Sdk::AccountApi.new
+      @account_api ||= Brevo::AccountApi.new
     end
   end
 end

@@ -12,6 +12,7 @@ gem "bootstrap"
 gem "bootsnap", "~> 1", require: false
 gem "bootstrap5-kaminari-views"
 gem "breadcrumbs_on_rails"
+gem "brevo"
 gem "bugsnag"
 # Lock précis parce que @sebouchu a identifié un problème
 # (les authorize through des modèles qui faisaient des faux négatifs sur les rôles intermédiaires)
@@ -69,7 +70,6 @@ gem "roo", "~> 2"
 gem "rswag", "~> 2"
 gem "sanitize"
 gem "sassc-rails"
-gem "sib-api-v3-sdk"
 gem "simple-navigation"
 gem "simple_form"
 gem "simple_form_bs5_file_input"#, path: "../simple_form_bs5_file_input"
