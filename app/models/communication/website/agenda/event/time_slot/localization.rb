@@ -43,7 +43,8 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   alias :time_slot :about
 
   delegate :event, to: :about
-  delegate :to_s, :title, :subtitle, :summary, :contents_full_text, to: :event_l10n, allow_nil: true
+
+  delegate :to_s, :title, :subtitle, :summary, :contents_full_text, :previous_permalinks_in_website, to: :event_l10n, allow_nil: true
   delegate :best_bodyclass, :archive?, to: :event
 
   before_validation :set_communication_website_id, on: :create
