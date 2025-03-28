@@ -9,7 +9,7 @@ module Communication::Website::Agenda::Event::TimeSlot::WithOpenApi
         id: { type: :string, format: :uuid },
         migration_identifier: { type: :string, nullable: true },
         datetime: { type: :string, format: "date-time" },
-        duration: { type: :integer },
+        duration: { type: :integer, description: "Duration of the time slot (in seconds)." },
         localizations: {
           type: :object,
           description: "Localizations of the time slot. The key is the language's ISO 639-1 code.",
