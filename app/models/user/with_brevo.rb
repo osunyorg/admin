@@ -10,11 +10,11 @@ module User::WithBrevo
   private
 
   def sync_with_brevo
-    Brevo::UserSyncJob.perform_later(self)
+    Brevo::UserSyncJob.perform_later(self) if ENV['APPLICATION_ENV'] == 'production'
   end
 
   def destroy_from_brevo
-    Brevo::UserDestroyJob.perform_later(self.brevo_contact_id, self.university_id) if self.brevo_contact_id.present?
+    Brevo::UserDestroyJob.perform_later(self.brevo_contact_id, self.university_id) if ENV['APPLICATION_ENV'] == 'production' && self.brevo_contact_id.present?
   end
 
   def after_confirmation
@@ -22,7 +22,6 @@ module User::WithBrevo
   end
 
   def should_sync_with_brevo?
-    return false unless ENV['APPLICATION_ENV'] == 'production'
     return false unless confirmed?
     # Saved from Brevo webhook, no need to call it
     return false if from_brevo_webhook
