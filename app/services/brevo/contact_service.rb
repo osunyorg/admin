@@ -6,6 +6,8 @@ module Brevo
     end
 
     def self.destroy(contact_id)
+      # Don't destroy if another User uses this contact_id (as users of multiple instances use the same contact in Brevo)
+      return if User.where(brevo_contact_id: contact_id).any?
       api_instance = Brevo::ContactsApi.new
       begin
         api_instance.delete_contact(contact_id)
