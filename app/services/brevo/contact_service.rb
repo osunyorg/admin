@@ -87,6 +87,5 @@ module Brevo
       end
     end
 
-
   end
 end
