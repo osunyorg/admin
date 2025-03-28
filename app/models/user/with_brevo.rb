@@ -14,7 +14,7 @@ module User::WithBrevo
   end
 
   def destroy_from_brevo
-    Brevo::UserDestroyJob.perform_later(self.brevo_contact_id) if self.brevo_contact_id.present?
+    Brevo::UserDestroyJob.perform_later(self.brevo_contact_id, self.university_id) if self.brevo_contact_id.present?
   end
 
   def after_confirmation

@@ -1028,7 +1028,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_28_094614) do
     t.datetime "updated_at", null: false
     t.uuid "created_by_id"
     t.boolean "full_width", default: true
-    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_aac12e3adb"
     t.index ["created_by_id"], name: "idx_on_created_by_id_7009ee99c6"
     t.index ["university_id"], name: "idx_on_university_id_ac2f4a0bfc"

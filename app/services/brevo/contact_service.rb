@@ -5,14 +5,21 @@ module Brevo
       new(user).sync
     end
 
-    def self.destroy(contact_id)
-      # Don't destroy if another User uses this contact_id (as users of multiple instances use the same contact in Brevo)
-      return if User.where(brevo_contact_id: contact_id).any?
+    def self.destroy(contact_id, university_id)
       api_instance = Brevo::ContactsApi.new
-      begin
-        api_instance.delete_contact(contact_id)
-      rescue Brevo::ApiError => e
-        puts "Exception when calling ContactsApi->delete_contact: #{e}"
+      other_user = User.where(brevo_contact_id: contact_id).first
+
+      # If another User uses this contact_id (as users of multiple instances use the same contact in Brevo)
+      # we just ensure that the current university_id for this user is not the deleted one
+      if other_user.present?
+        current_university_id_for_contact = api_instance.get_contact_info(contact_id).attributes[:UNIVERSITY_ID]
+        self.sync(other_user) if current_university_id_for_contact == university_id
+      else
+        begin
+          api_instance.delete_contact(contact_id)
+        rescue Brevo::ApiError => e
+          puts "Exception when calling ContactsApi->delete_contact: #{e}"
+        end
       end
     end
 
@@ -36,12 +43,7 @@ module Brevo
     def existing_contact
       @existing_contact ||= begin
         contact_with_id = search_contact(@user.brevo_contact_id)
-        contact_with_email = search_contact(@user.email)
-        if contact_with_id.present? && contact_with_email.present? && contact_with_id.id != contact_with_email.id
-          # User is linked to a Brevo contact but another contact exists with the same email
-          # We destroy the user with the same email because the synced contact ID is more important than a contact from another source (site, newsletter...)
-          Brevo::ContactService.destroy(contact_with_email.id)
-        end
+        contact_with_email = search_contact(@user.email)        
         contact_with_id || contact_with_email
       end
     end
