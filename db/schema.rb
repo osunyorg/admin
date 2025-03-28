@@ -567,6 +567,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_28_094614) do
     t.datetime "updated_at", null: false
     t.jsonb "add_to_calendar_urls"
     t.string "slug"
+    t.string "migration_identifier"
     t.index ["about_id"], name: "idx_on_about_id_e52a2e12b0"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_526f156fed"
     t.index ["language_id"], name: "idx_on_language_id_f50f565794"
@@ -581,6 +582,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_28_094614) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "migration_identifier"
     t.index ["communication_website_agenda_event_id"], name: "idx_on_communication_website_agenda_event_id_022d825cf7"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_c0ac516bb5"
     t.index ["university_id"], name: "idx_on_university_id_bca328e63c"
@@ -1026,6 +1028,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_28_094614) do
     t.datetime "updated_at", null: false
     t.uuid "created_by_id"
     t.boolean "full_width", default: true
+    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_aac12e3adb"
     t.index ["created_by_id"], name: "idx_on_created_by_id_7009ee99c6"
     t.index ["university_id"], name: "idx_on_university_id_ac2f4a0bfc"
