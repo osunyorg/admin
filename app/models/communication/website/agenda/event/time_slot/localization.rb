@@ -64,11 +64,11 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   end
 
   def from_day
-    about.datetime.to_date
+    about.datetime&.to_date
   end
 
   def from_hour
-    about.datetime.to_time
+    about.datetime&.to_time
   end
 
   def to_day
@@ -106,7 +106,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   # DD-hh-mm
   # 14-16-00
   def set_slug
-    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}"
+    self.slug = "#{from_day&.strftime("%d")}-#{from_hour&.strftime('%H-%M')}"
   end
 
   def set_communication_website_id

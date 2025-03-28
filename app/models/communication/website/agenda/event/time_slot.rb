@@ -53,16 +53,16 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   end
 
   def date
-    datetime.to_date
+    datetime&.to_date
   end
   alias :from_day :date # Used by Communication::Website::Agenda::Period::InPeriod
 
   def time
-    datetime.strftime("%H:%M")
+    datetime&.strftime("%H:%M")
   end
 
   def end_datetime
-    return if duration.to_i.zero?
+    return if datetime.nil? || duration.to_i.zero?
     datetime + duration.seconds
   end
 
