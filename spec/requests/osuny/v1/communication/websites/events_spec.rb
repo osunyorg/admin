@@ -443,134 +443,141 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
       end
     end
 
-    # patch 'Updates an event' do
-    #   tags 'Communication::Website::Agenda::Event'
-    #   security [{ api_key: [] }]
-    #   let("X-Osuny-Token") { university_apps(:default_app).token }
+    patch 'Updates an event' do
+      tags 'Communication::Website::Agenda::Event'
+      security [{ api_key: [] }]
+      let("X-Osuny-Token") { university_apps(:default_app).token }
 
-    #   parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
-    #   let(:website_id) { communication_websites(:website_with_github).id }
-    #   parameter name: :id, in: :path, type: :string, description: 'Event identifier'
-    #   let(:id) { communication_website_agenda_events(:test_event).id }
+      parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
+      let(:website_id) { communication_websites(:website_with_github).id }
+      parameter name: :id, in: :path, type: :string, description: 'Event identifier'
+      let(:id) { communication_website_agenda_events(:test_event).id }
 
-    #   parameter name: :communication_website_agenda_event, in: :body, type: :object, schema: {
-    #     type: :object,
-    #     properties: {
-    #       event: {
-    #         '$ref': '#/components/schemas/communication_website_agenda_event'
-    #       }
-    #     },
-    #     required: [:event]
-    #   }
-    #   let(:communication_website_agenda_event) {
-    #     test_event = communication_website_agenda_events(:test_event)
-    #     test_event_l10n = communication_website_agenda_event_localizations(:test_event_fr)
-    #     {
-    #       event: {
-    #         migration_identifier: test_event.migration_identifier,
-    #         from_day: test_event.from_day,
-    #         from_hour: test_event.from_hour.strftime("%H:%M"),
-    #         to_day: test_event.to_day,
-    #         to_hour: test_event.to_hour.strftime("%H:%M"),
-    #         time_zone: test_event.time_zone,
-    #         localizations: {
-    #           test_event_l10n.language.iso_code => {
-    #             migration_identifier: test_event_l10n.migration_identifier,
-    #             title: "Mon nouveau titre",
-    #             meta_description: test_event_l10n.meta_description,
-    #             published: test_event_l10n.published,
-    #             published_at: test_event_l10n.published_at,
-    #             slug: test_event_l10n.slug,
-    #             subtitle: test_event_l10n.subtitle,
-    #             summary: test_event_l10n.summary
-    #           }
-    #         }
-    #       }
-    #     }
-    #   }
+      parameter name: :communication_website_agenda_event, in: :body, type: :object, schema: {
+        type: :object,
+        properties: {
+          event: {
+            '$ref': '#/components/schemas/communication_website_agenda_event'
+          }
+        },
+        required: [:event]
+      }
+      let(:communication_website_agenda_event) {
+        test_event = communication_website_agenda_events(:test_event)
+        test_event_l10n = communication_website_agenda_event_localizations(:test_event_fr)
+        test_event_time_slot = communication_website_agenda_event_time_slots(:test_event_time_slot)
+        test_event_time_slot_l10n = communication_website_agenda_event_time_slot_localizations(:test_event_time_slot_fr)
+        {
+          event: {
+            migration_identifier: test_event.migration_identifier,
+            from_day: test_event.from_day,
+            to_day: test_event.to_day,
+            time_zone: test_event.time_zone,
+            localizations: {
+              test_event_l10n.language.iso_code => {
+                migration_identifier: test_event_l10n.migration_identifier,
+                title: "Mon nouveau titre",
+                meta_description: test_event_l10n.meta_description,
+                published: test_event_l10n.published,
+                published_at: test_event_l10n.published_at,
+                slug: test_event_l10n.slug,
+                subtitle: test_event_l10n.subtitle,
+                summary: test_event_l10n.summary
+              }
+            },
+            time_slots: [
+              {
+                migration_identifier: test_event_time_slot.migration_identifier,
+                datetime: test_event_time_slot.datetime,
+                duration: 7200,
+                localizations: {
+                  test_event_time_slot_l10n.language.iso_code => {
+                    migration_identifier: test_event_time_slot_l10n.migration_identifier,
+                    place: "Salon"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
 
-    #   response '200', 'Successful update' do
-    #     run_test! do |response|
-    #       assert_equal("Mon nouveau titre", communication_website_agenda_event_localizations(:test_event_fr).reload.title)
-    #     end
-    #   end
+      response '200', 'Successful update' do
+        run_test! do |response|
+          assert_equal("Mon nouveau titre", communication_website_agenda_event_localizations(:test_event_fr).reload.title)
+        end
+      end
 
-    #   response '400', 'Missing migration identifier.' do
-    #     let(:communication_website_agenda_event) {
-    #       test_event = communication_website_agenda_events(:test_event)
-    #       test_event_l10n = communication_website_agenda_event_localizations(:test_event_fr)
-    #       {
-    #         event: {
-    #           from_day: test_event.from_day,
-    #           from_hour: test_event.from_hour.strftime("%H:%M"),
-    #           to_day: test_event.to_day,
-    #           to_hour: test_event.to_hour.strftime("%H:%M"),
-    #           time_zone: test_event.time_zone,
-    #           localizations: {
-    #             test_event_l10n.language.iso_code => {
-    #               migration_identifier: test_event_l10n.migration_identifier,
-    #               title: "Mon nouveau titre",
-    #               meta_description: test_event_l10n.meta_description,
-    #               published: test_event_l10n.published,
-    #               published_at: test_event_l10n.published_at,
-    #               slug: test_event_l10n.slug,
-    #               subtitle: test_event_l10n.subtitle,
-    #               summary: test_event_l10n.summary
-    #             }
-    #           }
-    #         }
-    #       }
-    #     }
-    #     run_test!
-    #   end
+      response '400', 'Missing migration identifier.' do
+        let(:communication_website_agenda_event) {
+          test_event = communication_website_agenda_events(:test_event)
+          test_event_l10n = communication_website_agenda_event_localizations(:test_event_fr)
+          {
+            event: {
+              from_day: test_event.from_day,
+              to_day: test_event.to_day,
+              time_zone: test_event.time_zone,
+              localizations: {
+                test_event_l10n.language.iso_code => {
+                  migration_identifier: test_event_l10n.migration_identifier,
+                  title: "Mon nouveau titre",
+                  meta_description: test_event_l10n.meta_description,
+                  published: test_event_l10n.published,
+                  published_at: test_event_l10n.published_at,
+                  slug: test_event_l10n.slug,
+                  subtitle: test_event_l10n.subtitle,
+                  summary: test_event_l10n.summary
+                }
+              }
+            }
+          }
+        }
+        run_test!
+      end
 
-    #   # TODO: Add test for missing migration identifier in localization
+      response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
+        let("X-Osuny-Token") { 'fake-token' }
+        run_test!
+      end
 
-    #   response '401', 'Unauthorized. Please make sure you provide a valid API key.' do
-    #     let("X-Osuny-Token") { 'fake-token' }
-    #     run_test!
-    #   end
+      response '404', 'Website not found' do
+        let(:website_id) { 'fake-id' }
+        run_test!
+      end
 
-    #   response '404', 'Website not found' do
-    #     let(:website_id) { 'fake-id' }
-    #     run_test!
-    #   end
+      response '404', 'Event not found' do
+        let(:id) { 'fake-id' }
+        run_test!
+      end
 
-    #   response '404', 'Event not found' do
-    #     let(:id) { 'fake-id' }
-    #     run_test!
-    #   end
-
-    #   response '422', 'Invalid parameters' do
-    #     let(:communication_website_agenda_event) {
-    #       test_event = communication_website_agenda_events(:test_event)
-    #       test_event_l10n = communication_website_agenda_event_localizations(:test_event_fr)
-    #       {
-    #         event: {
-    #           migration_identifier: test_event.migration_identifier,
-    #           from_day: test_event.from_day,
-    #           from_hour: test_event.from_hour.strftime("%H:%M"),
-    #           to_day: test_event.to_day,
-    #           to_hour: test_event.to_hour.strftime("%H:%M"),
-    #           time_zone: test_event.time_zone,
-    #           localizations: {
-    #             test_event_l10n.language.iso_code => {
-    #               migration_identifier: test_event_l10n.migration_identifier,
-    #               title: nil,
-    #               meta_description: test_event_l10n.meta_description,
-    #               published: test_event_l10n.published,
-    #               published_at: test_event_l10n.published_at,
-    #               slug: test_event_l10n.slug,
-    #               subtitle: test_event_l10n.subtitle,
-    #               summary: test_event_l10n.summary
-    #             }
-    #           }
-    #         }
-    #       }
-    #     }
-    #     run_test!
-    #   end
-    # end
+      response '422', 'Invalid parameters' do
+        let(:communication_website_agenda_event) {
+          test_event = communication_website_agenda_events(:test_event)
+          test_event_l10n = communication_website_agenda_event_localizations(:test_event_fr)
+          {
+            event: {
+              migration_identifier: test_event.migration_identifier,
+              from_day: test_event.from_day,
+              to_day: test_event.to_day,
+              time_zone: test_event.time_zone,
+              localizations: {
+                test_event_l10n.language.iso_code => {
+                  migration_identifier: test_event_l10n.migration_identifier,
+                  title: nil,
+                  meta_description: test_event_l10n.meta_description,
+                  published: test_event_l10n.published,
+                  published_at: test_event_l10n.published_at,
+                  slug: test_event_l10n.slug,
+                  subtitle: test_event_l10n.subtitle,
+                  summary: test_event_l10n.summary
+                }
+              }
+            }
+          }
+        }
+        run_test!
+      end
+    end
 
     delete 'Deletes an event' do
       tags 'Communication::Website::Agenda::Event'
