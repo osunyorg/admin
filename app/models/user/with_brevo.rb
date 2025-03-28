@@ -23,7 +23,7 @@ module User::WithBrevo
 
   def should_sync_with_brevo?
     return false unless confirmed?
-    # Saved from Sendinblue webhook, no need to call it
+    # Saved from Brevo webhook, no need to call it
     return false if from_brevo_webhook
 
     saved_change_to_optin_newsletter? ||
