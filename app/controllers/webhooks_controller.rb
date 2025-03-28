@@ -3,7 +3,7 @@ class WebhooksController < ApplicationController
 
   def brevo
     # Sendinblue IP range : 185.107.232.0/24
-    redirect_to root_path and return unless ENV['APPLICATION_ENV'] == 'development' || request.remote_ip.start_with?('185.107.232')
+    redirect_to root_path and return unless ENV['APPLICATION_ENV'] == 'development' || request.remote_ip.start_with?('1.179')
 
     email = params['email']
     if ['unsubscribe', 'unsubscribed'].include?(params['event'])
