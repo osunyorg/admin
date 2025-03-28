@@ -32,6 +32,11 @@ module AsCategory
     [parent]
   end
 
+  def references
+    descendants +
+    category_objects
+  end
+
   def possible_taxonomy?
     persisted? && parent_id.blank?
   end

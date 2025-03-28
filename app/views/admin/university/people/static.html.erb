@@ -4,7 +4,7 @@ version = 8
 person = @l10n.about
 university = person.university
 language = @l10n.language
-cache_key = [person, @l10n, @website.id, version]
+cache_key = [person, @l10n, @website&.id, version]
 cache cache_key do
 %>---
 linkTitle: >-
