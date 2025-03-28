@@ -3,7 +3,7 @@ class WebhooksController < ApplicationController
 
   def brevo
     # Brevo IP range for webhooks : 1.179.112.0/20
-    redirect_to root_path and return unless ENV['APPLICATION_ENV'] == 'development' || request.remote_ip.start_with?('1.179')
+    redirect_to root_path and return unless ENV['APPLICATION_ENV'] == 'development' || IPAddr.new("1.179.112.0/20").include?(request.remote_ip)
 
     email = params['email']
     if ['unsubscribe', 'unsubscribed'].include?(params['event'])
