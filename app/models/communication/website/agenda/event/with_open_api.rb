@@ -9,9 +9,7 @@ module Communication::Website::Agenda::Event::WithOpenApi
         id: { type: :string, format: :uuid },
         migration_identifier: { type: :string, nullable: true },
         from_day: { type: :string, format: "date" },
-        from_hour: { type: :string, format: "time" },
         to_day: { type: :string, format: "date" },
-        to_hour: { type: :string, format: "time" },
         time_zone: { type: :string },
         created_by_id: { type: :string, format: :uuid, nullable: true },
         parent_id: { type: :string, format: :uuid, nullable: true },
@@ -20,6 +18,12 @@ module Communication::Website::Agenda::Event::WithOpenApi
           description: "Localizations of the event. The key is the language's ISO 639-1 code.",
           additionalProperties: {
             "$ref": "#/components/schemas/communication_website_agenda_event_localization"
+          }
+        },
+        time_slots: {
+          type: :array,
+          items: {
+            "$ref": "#/components/schemas/communication_website_agenda_event_time_slot"
           }
         },
         created_at: { type: :string, format: "date-time" },

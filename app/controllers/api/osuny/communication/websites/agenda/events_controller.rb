@@ -106,13 +106,15 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
     @event_params ||= begin
       permitted_params = params.require(:event)
                           .permit(
-                            :migration_identifier, :from_day, :from_hour, :to_day, :to_hour, :time_zone,
-                            :created_by_id, :parent_id, localizations: {}
+                            :migration_identifier, :from_day, :to_day, :time_zone,
+                            :created_by_id, :parent_id, localizations: {},
+                            time_slots: [:migration_identifier, :datetime, :duration, :_destroy, localizations: {}]
                           ).merge(
                             university_id: current_university.id,
                             communication_website_id: website.id
                           )
       set_l10n_attributes(permitted_params, @event) if permitted_params[:localizations].present?
+      set_time_slots_attributes(permitted_params, @event) if permitted_params[:time_slots].present?
       permitted_params
     end
   end
@@ -120,8 +122,9 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   def event_params_for_upsert(event_params)
     permitted_params = event_params
                           .permit(
-                            :migration_identifier, :from_day, :from_hour, :to_day, :to_hour, :time_zone,
-                            :created_by_id, :parent_id, localizations: {}
+                            :migration_identifier, :from_day, :to_day, :time_zone,
+                            :created_by_id, :parent_id, localizations: {},
+                            time_slots: [:migration_identifier, :datetime, :duration, :_destroy, localizations: {}]
                           ).merge(
                             university_id: current_university.id,
                             communication_website_id: website.id
@@ -129,6 +132,37 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
     event = website.events.find_by(migration_identifier: permitted_params[:migration_identifier])
     permitted_params[:id] = event.id if event.present?
     set_l10n_attributes(permitted_params, event) if permitted_params[:localizations].present?
+    set_time_slots_attributes(permitted_params, event) if permitted_params[:time_slots].present?
     permitted_params
+  end
+
+  def set_time_slots_attributes(permitted_params, event)
+    time_slots_attributes = permitted_params.delete(:time_slots)
+
+    time_slots_attributes.each do |time_slot_attributes|
+      # Set the id of the time slot if it already exists
+      time_slot = event.time_slots.find_by(migration_identifier: time_slot_attributes[:migration_identifier]) if event&.persisted?
+      time_slot_attributes[:id] = time_slot.id if time_slot.present?
+
+      # Handle localizations for the time slot
+      time_slot_l10ns_attributes = time_slot_attributes.delete(:localizations)
+      time_slot_attributes[:localizations_attributes] = []
+
+      time_slot_l10ns_attributes.each do |language_iso_code, time_slot_l10n_params|
+        language = Language.find_by(iso_code: language_iso_code)
+        next unless language.present?
+
+        l10n_permitted_params = time_slot_l10n_params
+                                  .permit(:migration_identifier, :place, :_destroy)
+                                  .merge({ language_id: language.id })
+        existing_time_slot_l10n = time_slot.localizations.find_by(
+          migration_identifier: l10n_permitted_params[:migration_identifier],
+          language_id: l10n_permitted_params[:language_id]
+        ) if time_slot&.persisted?
+        l10n_permitted_params[:id] = existing_time_slot_l10n.id if existing_time_slot_l10n.present?
+        time_slot_attributes[:localizations_attributes] << l10n_permitted_params
+      end
+    end
+    permitted_params[:time_slots_attributes] = time_slots_attributes
   end
 end

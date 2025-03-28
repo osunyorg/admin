@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  add_to_calendar_urls     :jsonb
+#  migration_identifier     :string
 #  place                    :string
 #  slug                     :string
 #  created_at               :datetime         not null
@@ -32,6 +33,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   include AsLocalization
   include Permalinkable
   include WithGitFiles
+  include WithOpenApi
   include WithUniversity
 
   belongs_to :website,
@@ -43,6 +45,8 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   delegate :event, to: :about
   delegate :to_s, :title, :subtitle, :summary, :contents_full_text, to: :event_l10n, allow_nil: true
   delegate :best_bodyclass, :archive?, to: :event
+
+  before_validation :set_communication_website_id, on: :create
 
   # /content/fr/events/YYYY/MM/DD-hh-mm-slug.html
   def git_path(website)
@@ -60,11 +64,11 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   end
 
   def from_day
-    about.datetime.to_date
+    about.datetime&.to_date
   end
 
   def from_hour
-    about.datetime.to_time
+    about.datetime&.to_time
   end
 
   def to_day
@@ -102,6 +106,10 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   # DD-hh-mm
   # 14-16-00
   def set_slug
-    self.slug = "#{from_day.strftime "%d"}-#{from_hour.strftime '%H-%M'}"
+    self.slug = "#{from_day&.strftime("%d")}-#{from_hour&.strftime('%H-%M')}"
+  end
+
+  def set_communication_website_id
+    self.communication_website_id ||= about.communication_website_id
   end
 end
