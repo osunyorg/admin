@@ -106,7 +106,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
     @event_params ||= begin
       permitted_params = params.require(:event)
                           .permit(
-                            :migration_identifier, :from_day, :from_hour, :to_day, :to_hour, :time_zone,
+                            :migration_identifier, :from_day, :to_day, :time_zone,
                             :created_by_id, :parent_id, localizations: {},
                             time_slots: [:migration_identifier, :datetime, :duration, :_destroy, localizations: {}]
                           ).merge(
@@ -122,7 +122,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   def event_params_for_upsert(event_params)
     permitted_params = event_params
                           .permit(
-                            :migration_identifier, :from_day, :from_hour, :to_day, :to_hour, :time_zone,
+                            :migration_identifier, :from_day, :to_day, :time_zone,
                             :created_by_id, :parent_id, localizations: {},
                             time_slots: [:migration_identifier, :datetime, :duration, :_destroy, localizations: {}]
                           ).merge(
