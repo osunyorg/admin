@@ -92,6 +92,8 @@ en:
           website_manager: Website manager
         websites_to_manage: Websites managed
     errors:
+      messages:
+        invalid_year: The year must be a 4-digit number.
       models:
         emergency_message:
           one: Emergency message
