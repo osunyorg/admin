@@ -77,8 +77,8 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def year_is_a_four_digit_number
-    errors.add(:from_day, :invalid_year) if from_day.present? && (1000..9999).include?(from_day.year)
-    errors.add(:to_day, :invalid_year) if to_day.present? && (1000..9999).include?(to_day.year)
+    errors.add(:from_day, :invalid_year) if from_day.present? && !(1000..9999).include?(from_day.year)
+    errors.add(:to_day, :invalid_year) if to_day.present? && !(1000..9999).include?(to_day.year)
   end
 
   def to_day_after_from_day
