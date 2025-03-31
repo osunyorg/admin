@@ -5,7 +5,7 @@ collection.each do |child_event|
   next if child_event_l10n.nil?
   if child_event.time_slots.any?
     time_slot_l10n = child_event.time_slots.ordered.first.localization_for(language)
-    hugo = time_slot_l10n.hugo(@website)
+    hugo = time_slot_l10n.hugo(@website) if time_slot_l10n.present?
   else
     hugo = child_event_l10n.hugo(@website)
   end
