@@ -92,6 +92,8 @@ fr:
           website_manager: Responsable de site web
         websites_to_manage: Sites gérés
     errors:
+      messages:
+        invalid_year: L'année doit être un nombre à 4 chiffres.
       models:
         import:
           attributes:
