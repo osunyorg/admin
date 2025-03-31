@@ -1,7 +1,6 @@
 <%
 language = @l10n.language
 time_slot = @l10n.time_slot
-time_slot_l10n = time_slot.localization_for(language)
 event = time_slot.event
 event_l10n = @l10n.event_l10n
 %>---
@@ -18,7 +17,7 @@ event_l10n = @l10n.event_l10n
             l10n: event_l10n,
             locale: language.iso_code %>
 <%= render 'admin/communication/websites/agenda/events/static/parent', event: event, language: language %>
-<%= render 'admin/communication/websites/agenda/events/time_slots/static/current', time_slot: time_slot, l10n: time_slot_l10n %>
+<%= render 'admin/communication/websites/agenda/events/time_slots/static/current', time_slot: time_slot, l10n: @l10n %>
 <%= render 'admin/communication/websites/agenda/events/time_slots/static/all', event: event, language: language %>
 <%= render 'admin/application/l10n/static', about: event_l10n %>
 <%= render 'admin/application/images/featured/static', about: event_l10n %>

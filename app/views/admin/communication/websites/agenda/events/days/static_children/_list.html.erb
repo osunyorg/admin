@@ -9,6 +9,10 @@ collection.each do |child_event|
   else
     hugo = child_event_l10n.hugo(@website)
   end
+  if hugo.present?
 %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
-<% end %>
+<%
+  end
+end
+%>
