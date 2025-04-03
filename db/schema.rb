@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_28_094614) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_03_113342) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -1948,6 +1948,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_28_094614) do
     t.float "latitude"
     t.float "longitude"
     t.string "migration_identifier"
+    t.uuid "created_by_id"
+    t.index ["created_by_id"], name: "index_university_organizations_on_created_by_id"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
 
@@ -1981,6 +1983,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_28_094614) do
     t.integer "phone_professional_visibility", default: 0
     t.integer "phone_personal_visibility", default: 0
     t.integer "email_visibility", default: 0
+    t.uuid "created_by_id"
+    t.index ["created_by_id"], name: "index_university_people_on_created_by_id"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
   end
@@ -2450,8 +2454,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_28_094614) do
   add_foreign_key "university_organization_localizations", "universities"
   add_foreign_key "university_organization_localizations", "university_organizations", column: "about_id"
   add_foreign_key "university_organizations", "universities"
+  add_foreign_key "university_organizations", "users", column: "created_by_id"
   add_foreign_key "university_people", "universities"
   add_foreign_key "university_people", "users"
+  add_foreign_key "university_people", "users", column: "created_by_id"
   add_foreign_key "university_people_person_categories", "university_people", column: "person_id"
   add_foreign_key "university_people_person_categories", "university_person_categories", column: "category_id"
   add_foreign_key "university_person_categories", "universities"

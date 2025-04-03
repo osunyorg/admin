@@ -30,16 +30,19 @@
 #  zipcode                       :string
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
+#  created_by_id                 :uuid             indexed
 #  university_id                 :uuid             not null, indexed
 #  user_id                       :uuid             indexed
 #
 # Indexes
 #
+#  index_university_people_on_created_by_id  (created_by_id)
 #  index_university_people_on_university_id  (university_id)
 #  index_university_people_on_user_id        (user_id)
 #
 # Foreign Keys
 #
+#  fk_rails_6e77b14f8b  (created_by_id => users.id)
 #  fk_rails_b47a769440  (user_id => users.id)
 #  fk_rails_da35e70d61  (university_id => universities.id)
 #
@@ -65,6 +68,9 @@ class University::Person < ApplicationRecord
 
   enum :gender, { male: 0, female: 1, non_binary: 2 }
 
+  belongs_to  :created_by,
+              class_name: "User",
+              optional: true
   belongs_to :user, optional: true
 
   validates :email,
