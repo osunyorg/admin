@@ -119,7 +119,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
       time_slot_l10n = time_slot.localization_for(language)
       time_slot_l10n&.hugo(website)
     elsif event.days.any?
-      day = event.days.ordered.first
+      day = event.days.where(language: language).ordered.first
       day&.hugo(website)
     else
       super(website)
