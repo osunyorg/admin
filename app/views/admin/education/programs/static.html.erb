@@ -33,7 +33,7 @@ registration_url: >-
 <%= render 'admin/application/summary/static', about: @l10n %>
 <% if @l10n.parent
   hugo = @l10n.parent.hugo(@website)
-  if hugo.file.blank?
+  if hugo.file.present?
   %>
 parent:
   title: >-
