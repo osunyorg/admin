@@ -33,6 +33,7 @@ registration_url: >-
 <%= render 'admin/application/summary/static', about: @l10n %>
 <% if @l10n.parent
   hugo = @l10n.parent.hugo(@website)
+  if hugo.file.blank?
   %>
 parent:
   title: >-
@@ -41,7 +42,10 @@ parent:
   path: "<%= hugo.path %>"
   slug: "<%= hugo.slug %>"
   file: "<%= hugo.file %>"
-<% end %>
+<%
+  end
+end
+%>
 <% if @l10n.children.any? %>
 <%= render 'admin/application/static/hugo/collection',
             key: :children,
@@ -62,6 +66,7 @@ if @website
 related_categories:
 <% website_category_l10ns.each do |key, website_category_l10n|
     hugo = website_category_l10n.hugo(@website)
+    next if hugo.file.blank?
     %>
   <%= key %>: "<%= hugo.slug %>"
 <%
@@ -77,6 +82,7 @@ teacher_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
   hugo = person_l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
   - "<%= hugo.slug %>"
 <% end %>
@@ -88,6 +94,7 @@ teacher_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
   hugo = person_l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
   "<%= hugo.slug %>": >-
     <%= involvement_l10n.description %>
@@ -99,6 +106,7 @@ administrator_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
   hugo = person_l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
   - "<%= hugo.slug %>"
 <% end %>
@@ -108,6 +116,7 @@ administrator_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
   hugo = person_l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
   "<%= hugo.slug %>": >-
     <%= involvement.target.to_s_in(language) %>
@@ -122,6 +131,7 @@ roles:
       person_l10n = involvement.person.localization_for(language)
       next if person_l10n.nil?
       hugo = person_l10n.hugo(@website)
+      next if hugo.file.blank?
       %>
       - "<%= hugo.slug %>"
     <% end %>
