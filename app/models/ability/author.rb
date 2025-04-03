@@ -96,7 +96,7 @@ class Ability::Author < Ability
   end
 
   def managed_organization_ids
-    @managed_organizations_ids ||= University::Organization
+    @managed_organization_ids ||= University::Organization
                                     .where(
                                       university_id: @user.university_id,
                                       created_by_id: @user.id
