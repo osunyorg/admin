@@ -4,7 +4,7 @@ class Ability::Author < Ability
     super
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id, id: managed_agenda_event_ids
     can :create, Communication::Website::Agenda::Event, university_id: @user.university_id, communication_website_id: managed_websites_ids
-    can :manage, Communication::Website::Agenda::Exhibition, university_id: @user.university_id, id: managed_agenda_event_ids
+    can :manage, Communication::Website::Agenda::Exhibition, university_id: @user.university_id, id: managed_agenda_exhibition_ids
     can :create, Communication::Website::Agenda::Exhibition, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Portfolio::Project, university_id: @user.university_id, id: managed_portfolio_project_ids
     can :create, Communication::Website::Portfolio::Project, university_id: @user.university_id, communication_website_id: managed_websites_ids
@@ -39,6 +39,12 @@ class Ability::Author < Ability
                                     .pluck(:id)
   end
 
+  def managed_agenda_event_localization_ids
+    @managed_agenda_event_localization_ids ||= Communication::Website::Agenda::Event::Localization
+                                                .where(about_id: managed_agenda_event_ids)
+                                                .pluck(:id)
+  end
+
   def managed_agenda_exhibition_ids
     @managed_agenda_exhibition_ids ||= Communication::Website::Agenda::Exhibition
                                     .where(
@@ -47,12 +53,6 @@ class Ability::Author < Ability
                                       created_by_id: @user.id
                                     )
                                     .pluck(:id)
-  end
-
-  def managed_agenda_event_localization_ids
-    @managed_agenda_event_localization_ids ||= Communication::Website::Agenda::Event::Localization
-                                                .where(about_id: managed_agenda_event_ids)
-                                                .pluck(:id)
   end
 
   def managed_agenda_exhibition_localization_ids
