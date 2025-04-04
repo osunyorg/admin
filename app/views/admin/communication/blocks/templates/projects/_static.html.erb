@@ -2,13 +2,17 @@
 <% if block.template.mode == 'all' %>
       all: true
 <% elsif block.template.mode == 'category' && block.template.category
-    category_l10n = block.template.category.localization_for(block.language)
+  category_l10n = block.template.category.localization_for(block.language)
+  if category_l10n.present?
     hugo = category_l10n.hugo(@website)
-    %>
-  <% if category_l10n %>
+    if hugo.file.present?
+%>
       category: "<%= hugo.slug %>"
-  <% end %>
-<% end %>
+<%
+    end
+  end
+end
+%>
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
 <%= render 'admin/application/static/hugo/collection',

@@ -31,6 +31,7 @@ location.diplomas.ordered.each do |diploma|
                     .ordered(language)
   next if programs.empty?
   hugo = l10n.hugo(@website)
+  next if hugo.file.blank?
 %>
   - name: >-
       <%= l10n.to_s %>

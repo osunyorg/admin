@@ -7,14 +7,20 @@
 <%
 if block.template.mode == 'category' && block.template.category
   l10n = block.template.category.localization_for(block.language)
-  hugo = l10n.hugo(@website)
+  if l10n.present?
+    hugo = l10n.hugo(@website)
+    if hugo.file.present?
   %>
-      category: 
+      category:
         permalink: "<%= hugo.permalink %>"
         path: "<%= hugo.path %>"
         slug: "<%= hugo.slug %>"
         file: "<%= hugo.file %>"
-<% end %>
+<%
+    end
+  end
+end
+%>
 <%= render 'admin/application/static/hugo/collection',
             key: :events,
             depth: 3,

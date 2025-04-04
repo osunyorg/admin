@@ -74,6 +74,7 @@ teachings:
     program = involvement.target
     program_l10n = program.best_localization_for(language)
     hugo = program_l10n.hugo(@website)
+    next if hugo.file.blank?
     %>
   - description: >-
       <%= involvement_l10n.description %>
@@ -93,6 +94,7 @@ administrative_missions:
     target = role.target
     target_l10n = target.best_localization_for(language)
     hugo = target_l10n.hugo(@website)
+    next if hugo.file.blank?
     %>
   - description: >-
       <%= role_l10n.to_s %>

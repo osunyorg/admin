@@ -1,5 +1,6 @@
 <%
 hugo = l10n.hugo(@website)
+if hugo.file.present?
 %>
 current_time_slot:
   permalink: "<%= hugo.permalink %>"
@@ -24,3 +25,4 @@ current_time_slot:
     office: "<%= l10n.cal_office_url.html_safe %>"
     outlook: "<%= l10n.cal_outlook_url.html_safe %>"
     ical: "<%= l10n.cal_ical_url.html_safe %>"
+<% end %>
