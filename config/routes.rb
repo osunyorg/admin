@@ -52,6 +52,7 @@ Rails.application.routes.draw do
       get 'profile' => 'profile#edit'
       patch 'profile' => 'profile#update'
       delete 'profile' => 'profile#destroy'
+      post 'profile/optin_newsletter' => 'profile#optin_newsletter', as: :optin_newsletter
       # libre_translate route
       post 'translate/:target' => 'translation#translate', as: :translate
       put 'favorite' => 'users#favorite', as: :favorite
