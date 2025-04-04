@@ -18,14 +18,17 @@
 #  zipcode              :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  created_by_id        :uuid             indexed
 #  university_id        :uuid             not null, indexed
 #
 # Indexes
 #
+#  index_university_organizations_on_created_by_id  (created_by_id)
 #  index_university_organizations_on_university_id  (university_id)
 #
 # Foreign Keys
 #
+#  fk_rails_024ed0d118  (created_by_id => users.id)
 #  fk_rails_35fcd198e0  (university_id => universities.id)
 #
 class University::Organization < ApplicationRecord
@@ -43,6 +46,10 @@ class University::Organization < ApplicationRecord
   include WithUniversity
 
   attr_accessor :created_from_extranet
+
+  belongs_to  :created_by,
+              class_name: "User",
+              optional: true
 
   has_many :experiences,
            class_name: 'University::Person::Experience',

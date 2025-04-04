@@ -11,14 +11,14 @@ SimpleNavigation::Configuration.run do |navigation|
                   highlights_on: lambda { 
                     controller_name == "dashboard" && action_name == "index" 
                   }
-    primary.item  :subnav_alumni,
+    primary.item  :subnav_people,
                   University::Person.model_name.human(count: 2),
-                  admin_university_people_path
-    primary.item  :subnav_locations,
+                  admin_university_people_path if can?(:read, University::Person)
+    primary.item  :subnav_organizations,
                   University::Organization.model_name.human(count: 2),
-                  admin_university_organizations_path
-    primary.item  :subnav_qualiopi,
+                  admin_university_organizations_path if can?(:read, University::Organization)
+    primary.item  :subnav_users,
                   User.model_name.human(count: 2),
-                  admin_users_path
+                  admin_users_path if can?(:read, User)
   end
 end
