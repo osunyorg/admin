@@ -5,11 +5,11 @@
         <%= t('admin.users_alerts.optin_not_set.text_html') %>
         <div class="d-flex justify-content-between">
           <%= link_to t('admin.users_alerts.optin_not_set.button_allow_optin'), 
-                      admin_optin_newsletter_path('optin': true), 
+                      admin_optin_newsletter_path(optin: true), 
                       method: :post, 
                       class: 'alert-link text-success' %>
           <%= link_to t('admin.users_alerts.optin_not_set.button_disallow_optin'), 
-                      admin_optin_newsletter_path('optin': false), 
+                      admin_optin_newsletter_path(optin: false), 
                       method: :post, 
                       class: 'alert-link text-danger' %>
           </div>

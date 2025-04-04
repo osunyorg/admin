@@ -1,7 +1,7 @@
 class Admin::ProfileController < Admin::ApplicationController
   include UserManagement
 
-  before_action :set_environment_variable, except: [:destroy, :optin_newsletter]
+  before_action :set_environment_variable
 
   def edit
     breadcrumb
