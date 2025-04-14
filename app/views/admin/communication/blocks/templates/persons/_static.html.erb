@@ -10,6 +10,7 @@ block.template.selected_elements.each do |element|
   l10n = person.localization_for(block.language)
   next if l10n.nil?
   hugo = l10n.hugo(@website)
+  next if hugo.file.blank?
 %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 4 %>
 <%= block_component_static block, :role, template: element, depth: 5 %>

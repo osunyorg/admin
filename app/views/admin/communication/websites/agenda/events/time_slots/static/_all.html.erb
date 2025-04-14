@@ -5,6 +5,7 @@ event.time_slots.ordered.each do |time_slot|
   l10n = time_slot.localization_for(language)
   next if l10n.nil?
   hugo = l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
     start:
