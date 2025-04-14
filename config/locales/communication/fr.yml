@@ -96,8 +96,8 @@ fr:
       communication/media/collection/localization:
         name: Nom
       communication/media/localization:
-        name: Nom
         internal_description: Description interne
+        name: Nom
       communication/website:
         about: Sujet du site
         about_: Site indépendant
@@ -501,6 +501,9 @@ fr:
           description: Tout ce qui est lié aux réglages techniques
           label: Technique
   communication:
+    authors:
+      one: Auteur·ice
+      other: Auteur·ices
     description:
       parts:
         author:
