@@ -5,11 +5,15 @@
   <%
   category_l10n = block.template.category.localization_for(block.language)
   if category_l10n.present?
-  hugo = category_l10n.hugo(@website)
+    hugo = category_l10n.hugo(@website)
+    if hugo.file.present?
   %>
       category: "<%= hugo.slug %>"
-  <% end %>
-<% end %>
+<%
+    end
+  end
+end
+%>
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
 <%= render 'admin/application/static/hugo/collection',
