@@ -1,7 +1,7 @@
 class Admin::ProfileController < Admin::ApplicationController
   include UserManagement
 
-  before_action :set_environment_variable
+  before_action :set_hide_optin_alert
 
   def edit
     breadcrumb
@@ -39,7 +39,7 @@ class Admin::ProfileController < Admin::ApplicationController
     add_breadcrumb t('menu.edit_profile')
   end
 
-  def set_environment_variable
+  def set_hide_optin_alert
     @hide_optin_alert = true
   end
 
