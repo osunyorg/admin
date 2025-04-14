@@ -7,7 +7,7 @@ module Admin::ButtonsHelper
   end
 
   def button_classes_major(additional = '', **options)
-    classes = "btn btn-primary #{additional}"
+    classes = "btn btn-primary mb-2 #{additional}"
     classes += ' disabled' if options[:disabled]
     classes
   end
