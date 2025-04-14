@@ -19,7 +19,9 @@
   <%= render "admin/application/components/hero" %>
   <%= render 'application/notice' %>
   <main class="container-fluid">
-    <%= render "admin/application/components/user_unconfirmed" %>
+    <%= render "admin/application/components/user_unconfirmed" unless current_user.confirmed? %>
+    <%# the next line (and the associated action / route / locales) can be safely deleted when every user has an optin_newsletter set %>
+    <%= render "admin/application/components/user_optin_unconfirmed" if current_user.optin_newsletter.nil? && @hide_optin_alert != true %>
     <div class="position-relative">
       <%= yield %>
     </div>
