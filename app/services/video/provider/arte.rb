@@ -21,6 +21,7 @@ class Video::Provider::Arte < Video::Provider::Default
   rescue
   end
 
+  # <iframe title="Lala&#x20;&amp;ce" allowfullscreen="true" style="transition-duration:0;transition-property:no;margin:0 auto;position:relative;display:block;background-color:#000000;" frameborder="0" scrolling="no" width="100%" height="100%" src="https://www.arte.tv/embeds/fr/121417-001-A?autoplay=true&mute=0"></iframe>
   def iframe_url
     "https://www.arte.tv/embeds/#{language}/#{identifier}"
   end
@@ -46,5 +47,3 @@ class Video::Provider::Arte < Video::Provider::Default
     @data_from_api
   end
 end
-
-# <iframe title="Lala&#x20;&amp;ce" allowfullscreen="true" style="transition-duration:0;transition-property:no;margin:0 auto;position:relative;display:block;background-color:#000000;" frameborder="0" scrolling="no" width="100%" height="100%" src="https://www.arte.tv/embeds/fr/121417-001-A?autoplay=true&mute=0"></iframe>
