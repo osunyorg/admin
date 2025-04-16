@@ -1,6 +1,8 @@
 class Video::Provider::Arte < Video::Provider::Default
   DOMAINS = [
-    'arte.tv'
+    'arte.tv',
+    'www.arte.tv',
+    'api-cdn.arte.tv'
   ]
 
   # https://www.arte.tv/fr/videos/121417-001-A/lala-ce/
