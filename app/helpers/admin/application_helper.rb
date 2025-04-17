@@ -48,7 +48,7 @@ module Admin::ApplicationHelper
   end
 
   def preview_link
-    raw "<button  class=\"btn btn-light\"
+    raw "<button  class=\"btn btn-light mb-2\"
                   type=\"button\"
                   data-bs-toggle=\"modal\"
                   data-bs-target=\"#preview\"
