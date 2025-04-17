@@ -109,7 +109,8 @@ class Api::Osuny::Communication::Websites::Pages::CategoriesController < Api::Os
                             :migration_identifier, :parent_id, :position, :is_taxonomy, localizations: {}
                           ).merge(
                             university_id: current_university.id,
-                            communication_website_id: website.id
+                            communication_website_id: website.id,
+                            saved_from_api: true
                           )
       set_l10n_attributes(permitted_params, @category) if permitted_params[:localizations].present?
       permitted_params
@@ -122,7 +123,8 @@ class Api::Osuny::Communication::Websites::Pages::CategoriesController < Api::Os
                             :migration_identifier, :parent_id, :position, :is_taxonomy, localizations: {}
                           ).merge(
                             university_id: current_university.id,
-                            communication_website_id: website.id
+                            communication_website_id: website.id,
+                            saved_from_api: true
                           )
     category = website.page_categories.find_by(migration_identifier: permitted_params[:migration_identifier])
     permitted_params[:id] = category.id if category.present?
