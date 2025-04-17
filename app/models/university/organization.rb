@@ -87,4 +87,20 @@ class University::Organization < ApplicationRecord
     localizations +
     categories
   end
+
+  def references
+    abouts_with_organization_block
+  end
+
+  protected
+
+  def abouts_with_organization_block
+    localizations = university.communication_blocks
+                              .template_organizations
+                              .collect(&:about)
+                              .compact
+                              .uniq
+    abouts = localizations.collect(&:about).compact.uniq
+    localizations + abouts
+  end
 end
