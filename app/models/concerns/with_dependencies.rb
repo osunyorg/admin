@@ -9,7 +9,9 @@ module WithDependencies
     attr_accessor :previous_dependencies
 
     if self < ActiveRecord::Base
-      after_save :clean_websites_if_necessary
+      attr_accessor :saved_from_api
+
+      after_save :clean_websites_if_necessary, unless: :saved_from_api
     end
   end
 
