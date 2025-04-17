@@ -105,8 +105,10 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
                             ->{ Communication::Website::Agenda::Event::Localization.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_no_enqueued_jobs except: [ActiveStorage::AnalyzeJob, Communication::Website::Agenda::CreatePeriodsJob] do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
@@ -312,8 +314,10 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
                             ->{ Communication::Website::Agenda::Event::Localization.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_no_enqueued_jobs except: [ActiveStorage::AnalyzeJob, Communication::Website::Agenda::CreatePeriodsJob] do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
@@ -583,7 +587,11 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
       }
 
       response '200', 'Successful update' do
-        run_test! do |response|
+        it 'updates an event and its localization', rswag: true do |example|
+          assert_no_enqueued_jobs except: Communication::Website::Agenda::CreatePeriodsJob do
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+          end
           assert_equal("Mon nouveau titre", communication_website_agenda_event_localizations(:test_event_fr).reload.title)
         end
       end
