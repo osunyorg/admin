@@ -75,6 +75,10 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
     "#{about.value}"
   end
 
+  def exportable_to_git?
+    about.website.events.on_year(to_s).any?
+  end
+
   protected
 
   # Slugs are the year: "2025"
