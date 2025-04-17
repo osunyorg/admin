@@ -1,4 +1,6 @@
 .navbar-main
+    .btn--main
+        padding-left: 10px
     > *
         @include media-breakpoint-up(lg)
             min-width: 300px
@@ -165,6 +167,8 @@ nav[aria-label="breadcrumb"]
     @include media-breakpoint-down(sm)
         #subnav
             margin-bottom: 10px
+        .navbar-toggler
+            margin-left: -2px
         a
             display: block
             border-left-color: transparent
