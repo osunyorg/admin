@@ -12,20 +12,35 @@ language = @l10n.language
             toc_offcanvas: false %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 is_year: true
-<% if @l10n.next.present? %>
+<%
+if @l10n.next.present?
+  hugo = @l10n.next.hugo(@website)
+  if hugo.file.present?
+%>
 next_year:
-<%= render 'admin/application/static/hugo/values', hugo: @l10n.next.hugo(@website) %>
-<% end %>
-<% if @l10n.previous.present? %>
+<%= render 'admin/application/static/hugo/values', hugo: hugo %>
+<%
+  end
+end
+%>
+<%
+if @l10n.previous.present?
+  hugo = @l10n.previous.hugo(@website)
+  if hugo.file.present?
+%>
 previous_year:
-<%= render 'admin/application/static/hugo/values', hugo: @l10n.previous.hugo(@website) %>
-<% end %>
+<%= render 'admin/application/static/hugo/values', hugo: hugo %>
+<%
+  end
+end
+%>
 bodyclass: >-
   events__section-year
 months:
 <%
 @l10n.months.each do |month|
   hugo = month.hugo(@website)
+  next if hugo.file.blank?
   %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
     name: "<%= month.to_month_name %>"

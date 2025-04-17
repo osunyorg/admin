@@ -4,6 +4,7 @@ block.template.selected_papers.each do |paper|
   paper_l10n = paper.localization_for(block.language)
   next if paper_l10n.nil?
   hugo = paper_l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
         - "<%= paper_l10n.relative_path %>"
 <% end %>

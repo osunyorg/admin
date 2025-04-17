@@ -96,8 +96,8 @@ en:
       communication/media/collection/localization:
         name: Name
       communication/media/localization:
-        name: Name
         internal_description: Internal description
+        name: Name
       communication/website:
         about: About
         about_: Independent website
@@ -495,6 +495,9 @@ en:
           description: Everything related to technical settings
           label: Technical
   communication:
+    authors:
+      one: Author
+      other: Authors
     description:
       parts:
         author:

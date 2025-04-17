@@ -75,6 +75,7 @@ fr:
         language: Langue préférée
         last_name: Nom
         mobile_phone: Téléphone portable
+        optin_newsletter: Je souhaite recevoir par mail les actualités concernant les évolutions d'Osuny (invitation aux assemblées de la communauté une fois par mois, synthèse une fois par trimestre).
         person: Personne
         picture: Photo de profil
         picture_url: Url de la photo de profil
@@ -91,6 +92,8 @@ fr:
           website_manager: Responsable de site web
         websites_to_manage: Sites gérés
     errors:
+      messages:
+        invalid_year: L'année doit être un nombre à 4 chiffres.
       models:
         import:
           attributes:
@@ -184,6 +187,12 @@ fr:
     users_alerts:
       already_confirmed: "Votre compte est déjà confirmé."
       not_locked_html: "<i>%{model}</i> n'était pas verrouillé(e)."
+      optin_not_set:
+        button_allow_optin: Autoriser l'envoi
+        button_disallow_optin: Interdire l'envoi
+        text_html: "Vous n'avez pas encore défini vos préférences de communication par email. <br>Si vous nous autorisez à vous contacter, vous recevrez des invitations aux assemblées de la communauté une fois par mois, et une synthèse des évolutions d'Osuny une fois par trimestre maximum. Vous pourrez toujours par la suite changer ce paramètre dans votre profil."
+        title: Préférences de communication
+        updated: Vos préférences ont bien été enregistrées.
       pending_confirmation_html: "Votre compte n'a pas encore été <b>confirmé</b>. Vous avez reçu un e-mail contenant un lien de confirmation. En l'absence de confirmation, votre compte cessera de fonctionner après <b>%{duration}</b>. Si vous n'avez pas reçu cet email pensez à vérifier votre dossier spam ou cliquez sur le bouton ci-dessous."
       successfully_unlocked_html: "<i>%{model}</i> a bien été déverrouillé(e)."
     will_be_published_html: "<i>%{model}</i> va bientôt être publié(e)."

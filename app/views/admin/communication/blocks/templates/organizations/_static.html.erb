@@ -3,11 +3,12 @@
 <%= block_options_static block %>
       organizations:
 <% block.template.selected_elements.each do |element| %>
-<% 
+<%
 if element.organization
   l10n = element.organization.localization_for(block.language)
   next if l10n.nil?
   hugo = l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 4 %>
 <% else %>

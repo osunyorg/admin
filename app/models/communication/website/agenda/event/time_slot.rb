@@ -5,6 +5,7 @@
 #  id                                    :uuid             not null, primary key
 #  datetime                              :datetime
 #  duration                              :integer
+#  migration_identifier                  :string
 #  created_at                            :datetime         not null
 #  updated_at                            :datetime         not null
 #  communication_website_agenda_event_id :uuid             not null, indexed
@@ -27,6 +28,7 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
   include Localizable
+  include WithOpenApi
   include WithUniversity
 
   belongs_to  :communication_website_agenda_event,
@@ -35,6 +37,8 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   alias :event :communication_website_agenda_event
 
   validates :datetime, presence: true
+
+  before_validation :set_website_and_university, on: :create
 
   scope :on_year, -> (year) { where('extract(year from datetime) = ?', year) }
   scope :on_month, -> (year, month) { where('extract(year from datetime) = ? and extract(month from datetime) = ?', year, month) }
@@ -49,16 +53,16 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   end
 
   def date
-    datetime.to_date
+    datetime&.to_date
   end
   alias :from_day :date # Used by Communication::Website::Agenda::Period::InPeriod
 
   def time
-    datetime.strftime("%H:%M")
+    datetime&.strftime("%H:%M")
   end
 
   def end_datetime
-    return if duration.to_i.zero?
+    return if datetime.nil? || duration.to_i.zero?
     datetime + duration.seconds
   end
 
@@ -85,5 +89,10 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   def day_after_change
     datetime_change.last&.to_date
+  end
+
+  def set_website_and_university
+    self.communication_website_id = event.communication_website_id
+    self.university_id = event.university_id
   end
 end

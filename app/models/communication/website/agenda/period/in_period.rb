@@ -27,7 +27,9 @@ module Communication::Website::Agenda::Period::InPeriod
     after_save :create_periods
 
     validates :from_day, presence: true
-    validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
+    validate  :year_is_a_four_digit_number,
+              :to_day_after_from_day,
+              :to_hour_after_from_hour_on_same_day
   end
 
   def status
@@ -72,6 +74,11 @@ module Communication::Website::Agenda::Period::InPeriod
 
   def set_to_day
     self.to_day = self.from_day if respond_to?(:to_day=) && self.to_day.nil?
+  end
+
+  def year_is_a_four_digit_number
+    errors.add(:from_day, :invalid_year) if from_day.present? && !(1000..9999).include?(from_day.year)
+    errors.add(:to_day, :invalid_year) if to_day.present? && !(1000..9999).include?(to_day.year)
   end
 
   def to_day_after_from_day

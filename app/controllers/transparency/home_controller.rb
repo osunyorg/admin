@@ -7,7 +7,7 @@ class Transparency::HomeController < Transparency::ApplicationController
       ['CodeClimate', 'Qualité de code (gratuit pour l\'open source)', 0],
       ['Deuxfleurs', 'Hébergement sans data center', 3000],
       ['Insight Hub', 'Interception d\'erreur (gratuit pour l\'open source)', 0],
-      ['KeyCDN', 'Redimensionnement des images', 6000],
+      ['KeyCDN', 'Redimensionnement des images', 3000],
       ['LanguageTool', 'Aide à la qualité des contenus', 1200],
       ['LibreTranslate', 'Aide à  la traduction', 660],
       ['MicroLink', 'Captures d\'écran', 144],

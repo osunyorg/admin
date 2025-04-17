@@ -1,9 +1,9 @@
-class Sendinblue::SmsCreditsWarningJob < ApplicationJob
+class Brevo::SmsCreditsWarningJob < ApplicationJob
   queue_as :default
 
   def perform
     return unless ENV['APPLICATION_ENV'] == 'production'
-    sms_service = Sendinblue::SmsService.new
+    sms_service = Brevo::SmsService.new
     if sms_service.low?
       # this message is sent to server_admins only, and server_admins are duplicated between all universities.
       # so we take the first university
