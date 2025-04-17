@@ -111,7 +111,8 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
                             :parent_id, :position, category_ids: [], localizations: {}
                           ).merge(
                             university_id: current_university.id,
-                            communication_website_id: website.id
+                            communication_website_id: website.id,
+                            saved_from_api: true
                           )
       set_l10n_attributes(permitted_params, @page) if permitted_params[:localizations].present?
       permitted_params
@@ -125,7 +126,8 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
                             :parent_id, :position, category_ids: [], localizations: {}
                           ).merge(
                             university_id: current_university.id,
-                            communication_website_id: website.id
+                            communication_website_id: website.id,
+                            saved_from_api: true
                           )
     page = website.pages.find_by(migration_identifier: permitted_params[:migration_identifier])
     permitted_params[:id] = page.id if page.present?
