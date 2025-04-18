@@ -111,7 +111,8 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
                             time_slots: [:migration_identifier, :datetime, :duration, :_destroy, localizations: {}]
                           ).merge(
                             university_id: current_university.id,
-                            communication_website_id: website.id
+                            communication_website_id: website.id,
+                            saved_from_api: true
                           )
       set_l10n_attributes(permitted_params, @event) if permitted_params[:localizations].present?
       set_time_slots_attributes(permitted_params, @event) if permitted_params[:time_slots].present?
@@ -127,7 +128,8 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
                             time_slots: [:migration_identifier, :datetime, :duration, :_destroy, localizations: {}]
                           ).merge(
                             university_id: current_university.id,
-                            communication_website_id: website.id
+                            communication_website_id: website.id,
+                            saved_from_api: true
                           )
     event = website.events.find_by(migration_identifier: permitted_params[:migration_identifier])
     permitted_params[:id] = event.id if event.present?
@@ -143,6 +145,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
       # Set the id of the time slot if it already exists
       time_slot = event.time_slots.find_by(migration_identifier: time_slot_attributes[:migration_identifier]) if event&.persisted?
       time_slot_attributes[:id] = time_slot.id if time_slot.present?
+      time_slot_attributes[:saved_from_api] = true
 
       # Handle localizations for the time slot
       time_slot_l10ns_attributes = time_slot_attributes.delete(:localizations)
@@ -154,7 +157,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
 
         l10n_permitted_params = time_slot_l10n_params
                                   .permit(:migration_identifier, :place, :_destroy)
-                                  .merge({ language_id: language.id })
+                                  .merge({ language_id: language.id, saved_from_api: true })
         existing_time_slot_l10n = time_slot.localizations.find_by(
           migration_identifier: l10n_permitted_params[:migration_identifier],
           language_id: l10n_permitted_params[:language_id]

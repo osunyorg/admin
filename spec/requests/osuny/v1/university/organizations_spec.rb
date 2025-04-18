@@ -84,8 +84,10 @@ RSpec.describe 'University::Organization' do
       response '201', 'Successful creation' do
         it 'creates an organization and its localization', rswag: true, vcr: true do |example|
           assert_difference ->{ University::Organization.count } => 1, ->{ University::Organization::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_no_enqueued_jobs except: [GeocodingJob, ActiveStorage::AnalyzeJob] do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
@@ -252,8 +254,10 @@ RSpec.describe 'University::Organization' do
       response '200', 'Successful upsertion' do
         it 'creates an organization and updates another with their localizations', rswag: true, vcr: true do |example|
           assert_difference ->{ University::Organization.count } => 1, ->{ University::Organization::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_no_enqueued_jobs except: [GeocodingJob, ActiveStorage::AnalyzeJob] do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
@@ -462,7 +466,11 @@ RSpec.describe 'University::Organization' do
       }
 
       response '200', 'Successful update' do
-        run_test! do |response|
+        it 'updates an organization and its localization', rswag: true do |example|
+          assert_no_enqueued_jobs except: [GeocodingJob, ActiveStorage::AnalyzeJob] do
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+          end
           assert_equal("noesya (new)", university_organization_localizations(:noesya_fr).reload.name)
         end
       end

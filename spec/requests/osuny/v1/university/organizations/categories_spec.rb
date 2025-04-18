@@ -72,8 +72,10 @@ RSpec.describe 'University::Organization::Category' do
       response '201', 'Successful creation' do
         it 'creates a organization category and its localization', rswag: true, vcr: true do |example|
           assert_difference ->{ University::Organization::Category.count } => 1, ->{ University::Organization::Category::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_no_enqueued_jobs except: ActiveStorage::AnalyzeJob do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
@@ -197,8 +199,10 @@ RSpec.describe 'University::Organization::Category' do
       response '200', 'Successful upsertion' do
         it 'creates a organization category and updates another with their localizations', rswag: true, vcr: true do |example|
           assert_difference ->{ University::Organization::Category.count } => 1, ->{ University::Organization::Category::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_no_enqueued_jobs except: ActiveStorage::AnalyzeJob do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
@@ -353,7 +357,11 @@ RSpec.describe 'University::Organization::Category' do
       }
 
       response '200', 'Successful update' do
-        run_test! do |response|
+        it 'updates a category and its localization', rswag: true do |example|
+          assert_no_enqueued_jobs do
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+          end
           assert_equal("Mon nouveau nom", university_organization_category_localizations(:test_category_fr).reload.name)
         end
       end

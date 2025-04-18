@@ -16,7 +16,7 @@ module Api::Osuny::ApplicationController::WithResourceParams
 
       l10n_permitted_params = l10n_params
                                 .permit(*l10n_permitted_keys)
-                                .merge({ language_id: language.id })
+                                .merge({ language_id: language.id, saved_from_api: true })
 
       existing_resource_l10n = resource.localizations.find_by(
         migration_identifier: l10n_permitted_params[:migration_identifier],
@@ -30,6 +30,7 @@ module Api::Osuny::ApplicationController::WithResourceParams
       l10n_permitted_params[:blocks_attributes] = blocks_attributes.map do |block_params|
         existing_block = existing_resource_l10n.blocks.find_by(migration_identifier: block_params[:migration_identifier]) if existing_resource_l10n.present?
         block_params[:id] = existing_block.id if existing_block.present?
+        block_params[:saved_from_api] = true
         block_params
       end if blocks_attributes.present?
 

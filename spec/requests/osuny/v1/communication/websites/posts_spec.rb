@@ -88,8 +88,10 @@ RSpec.describe 'Communication::Website::Post' do
       response '201', 'Successful creation' do
         it 'creates a post and its localization', rswag: true, vcr: true do |example|
           assert_difference ->{ Communication::Website::Post.count } => 1, ->{ Communication::Website::Post::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_no_enqueued_jobs except: ActiveStorage::AnalyzeJob do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
@@ -233,8 +235,10 @@ RSpec.describe 'Communication::Website::Post' do
       response '200', 'Successful upsertion' do
         it 'creates a post and updates another with their localizations', rswag: true, vcr: true do |example|
           assert_difference ->{ Communication::Website::Post.count } => 1, ->{ Communication::Website::Post::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_no_enqueued_jobs except: ActiveStorage::AnalyzeJob do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
@@ -420,7 +424,11 @@ RSpec.describe 'Communication::Website::Post' do
       }
 
       response '200', 'Successful update' do
-        run_test! do |response|
+        it 'updates a post and its localization', rswag: true do |example|
+          assert_no_enqueued_jobs do
+            submit_request(example.metadata)
+            assert_response_matches_metadata(example.metadata)
+          end
           assert_equal("Mon nouveau titre", communication_website_post_localizations(:test_post_fr).reload.title)
         end
       end

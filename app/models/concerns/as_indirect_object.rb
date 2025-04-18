@@ -20,8 +20,8 @@ module AsIndirectObject
     # Ce serait super de faire la ligne ci-dessous, mais Rails ne sait pas faire ça avec un objet polymorphe (direct_source)
     # has_many :direct_sources, through: :connections
 
-    after_save  :connect_and_sync_direct_sources
-    after_touch :connect_and_sync_direct_sources
+    after_save  :connect_and_sync_direct_sources, unless: :saved_from_api
+    after_touch :connect_and_sync_direct_sources, unless: :saved_from_api
   end
 
   def is_direct_object?

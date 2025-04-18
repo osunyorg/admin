@@ -108,7 +108,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
                           .permit(
                             :migration_identifier, :parent_id, :position, :is_taxonomy, localizations: {}
                           ).merge(
-                            university_id: current_university.id
+                            university_id: current_university.id, saved_from_api: true
                           )
       set_l10n_attributes(permitted_params, @category) if permitted_params[:localizations].present?
       permitted_params
@@ -120,7 +120,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
                           .permit(
                             :migration_identifier, :parent_id, :position, :is_taxonomy, localizations: {}
                           ).merge(
-                            university_id: current_university.id
+                            university_id: current_university.id, saved_from_api: true
                           )
     category = current_university.organization_categories.find_by(migration_identifier: permitted_params[:migration_identifier])
     permitted_params[:id] = category.id if category.present?
