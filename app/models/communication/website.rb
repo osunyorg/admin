@@ -192,11 +192,14 @@ class Communication::Website < ApplicationRecord
   # Appelé en asynchrone par Communication::Website::SyncWithGitJob
   def sync_with_git_safely
     return unless should_sync_with_git?
-    Communication::Website::GitFile.generate website, self
-    recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
-      Communication::Website::GitFile.generate website, object
+    git_files_batch.each do |git_file|
+      git_repository.add_git_file git_file
     end
     git_repository.sync!
+  end
+
+  def git_files_batch
+    git_files.batch(git_repository.batch_size)
   end
 
   def move_to_university(new_university_id)

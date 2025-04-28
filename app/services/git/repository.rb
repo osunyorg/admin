@@ -1,22 +1,23 @@
 class Git::Repository
-  attr_reader :website, :commit_message
+  attr_reader :website, :commit_message, :git_files
 
   def initialize(website)
     @website = website
+    @git_files = []
+    @commit_message = "Sync"
   end
 
   def url
     provider.url
   end
 
+  def batch_size
+    provider.class::COMMIT_BATCH_SIZE
+  end
+
   def add_git_file(git_file)
     return if git_files.include?(git_file)
-    puts "Adding #{git_file.path}"
-    if git_files.empty?
-      # The first file gives the commit name
-      analyzer.git_file = git_file
-      @commit_message = analyzer.commit_message
-    end
+    puts "Adding #{git_file.current_path}"
     git_files << git_file
   end
 
@@ -72,10 +73,6 @@ class Git::Repository
     @provider_class ||= "Git::Providers::#{website.git_provider.titleize}".constantize
   end
 
-  def git_files
-    @git_files ||= []
-  end
-
   def analyzer
     @analyzer ||= Git::Analyzer.new self
   end
@@ -84,16 +81,19 @@ class Git::Repository
     git_files.each do |git_file|
       analyzer.git_file = git_file
       if analyzer.should_create?
-        puts "Syncing - Creating #{git_file.path}"
-        provider.create_file git_file.path, git_file.to_s
+        puts "Syncing - Creating #{git_file.current_path}"
+        provider.create_file  git_file.current_path,
+                              git_file.current_content
       elsif analyzer.should_update?
-        puts "Syncing - Updating #{git_file.path}"
-        provider.update_file git_file.path, git_file.previous_path, git_file.to_s
+        puts "Syncing - Updating #{git_file.current_path}"
+        provider.update_file  git_file.current_path,
+                              git_file.previous_path,
+                              git_file.current_content
       elsif analyzer.should_destroy?
         puts "Syncing - Destroying #{git_file.previous_path}"
         provider.destroy_file git_file.previous_path
       else
-        puts "Syncing - Nothing to do with #{git_file.path}"
+        puts "Syncing - Nothing to do with #{git_file.current_path}"
       end
     end
   end
@@ -106,9 +106,8 @@ class Git::Repository
         puts "Destroying #{git_file.previous_path}"
         git_file.destroy
       else
-        path = git_file.path
-        puts "Marking #{path}"
-        git_file.update previous_path: path, previous_sha: computed_sha(git_file.to_s)
+        puts "Marking #{git_file.current_path}"
+        git_file.mark_as_synced!
       end
     end
   end

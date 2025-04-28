@@ -13,6 +13,14 @@ namespace :auto do
     end
   end
 
+  desc 'Synchronize every website'
+  task synchronize_websites: :environment do
+    Communication::Website.find_each do |website|
+      next if website.git_files.desynchronized.none?
+      Communication::Website::SyncWithGitJob.perform_later(website.id)
+    end
+  end
+
   desc 'Check SMS credits on SiB'
   task brevo_sms_credits: :environment do
     Brevo::SmsCreditsWarningJob.perform_later

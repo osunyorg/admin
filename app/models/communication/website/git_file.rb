@@ -28,12 +28,15 @@
 class Communication::Website::GitFile < ApplicationRecord
   # We don't include Sanitizable as this model is never handled by users directly.
 
+
+
   attr_accessor :will_be_destroyed
 
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :about, polymorphic: true
 
   scope :desynchronized, -> { where(desynchronized: true) }
+  scope :batch, -> (batch_size) { desynchronized.order(:desynchronized_at).limit(batch_size) }
   scope :ordered, -> { order("communication_website_git_files.desynchronized_at DESC NULLS LAST, communication_website_git_files.updated_at DESC") }
 
   def self.generate(website, object)
@@ -73,7 +76,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def generate_later
-    Communication::Website::GenerateGitFileJob.perform_later(self)
+    Communication::Website::GitFile::GenerateJob.perform_later(self)
   end
 
   def computed_path
@@ -84,6 +87,14 @@ class Communication::Website::GitFile < ApplicationRecord
     @computed_filename ||= File.basename(computed_path)
   end
 
+  def computed_content
+    @computed_content ||= Static.render(template_static, about, website)
+  end
+
+  def computed_sha
+    website.git_repository.computed_sha(computed_content)
+  end
+
   def content_up_to_date?
     current_content == computed_content
   end
@@ -92,12 +103,13 @@ class Communication::Website::GitFile < ApplicationRecord
     !desynchronized
   end
 
-  def computed_content
-    @computed_content ||= Static.render(template_static, about, website)
-  end
-
-  def computed_sha
-    website.git_repository.computed_sha(computed_content)
+  def mark_as_synced!
+    update(
+      previous_path: current_path,
+      previous_sha: current_sha,
+      desynchronized: false,
+      desynchronized_at: nil
+    )
   end
 
   def to_s
