@@ -1,11 +1,11 @@
 require 'swagger_helper'
 
-RSpec.describe 'Communication::Website::Page::Category' do
+RSpec.describe 'Communication::Website::Agenda::Category' do
   fixtures :all
 
-  path '/communication/websites/{website_id}/pages/categories' do
-    get "Lists a website's page categories" do
-      tags 'Communication::Website::Page::Category'
+  path '/communication/websites/{website_id}/agenda/categories' do
+    get "Lists a website's agenda categories" do
+      tags 'Communication::Website::Agenda::Category'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
@@ -13,7 +13,7 @@ RSpec.describe 'Communication::Website::Page::Category' do
       let(:website_id) { communication_websites(:website_with_github).id }
 
       response '200', 'Successful operation' do
-        schema type: :array, items: { '$ref' => '#/components/schemas/communication_website_page_category' }
+        schema type: :array, items: { '$ref' => '#/components/schemas/communication_website_agenda_category' }
         run_test!
       end
 
@@ -28,30 +28,30 @@ RSpec.describe 'Communication::Website::Page::Category' do
       end
     end
 
-    post 'Creates a page category' do
-      tags 'Communication::Website::Page::Category'
+    post 'Creates an agenda category' do
+      tags 'Communication::Website::Agenda::Category'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
 
-      parameter name: :communication_website_page_category, in: :body, type: :object, schema: {
+      parameter name: :communication_website_agenda_category, in: :body, type: :object, schema: {
         type: :object,
         properties: {
           category: {
-            '$ref': '#/components/schemas/communication_website_page_category'
+            '$ref': '#/components/schemas/communication_website_agenda_category'
           }
         },
         required: [:category]
       }
-      let(:communication_website_page_category) {
+      let(:communication_website_agenda_category) {
         {
           category: {
-            migration_identifier: 'page-category-from-api-1',
+            migration_identifier: 'agenda-category-from-api-1',
             localizations: {
               fr: {
-                migration_identifier: 'page-category-from-api-1-fr',
+                migration_identifier: 'agenda-category-from-api-1-fr',
                 name: 'Ma nouvelle catégorie',
                 meta_description: 'Une nouvelle catégorie depuis l\'API',
                 featured_image: {
@@ -63,7 +63,7 @@ RSpec.describe 'Communication::Website::Page::Category' do
                 summary: 'Ceci est une nouvelle catégorie créée depuis l\'API.',
                 blocks: [
                   {
-                    migration_identifier: 'page-category-from-api-1-fr-block-1',
+                    migration_identifier: 'agenda-category-from-api-1-fr-block-1',
                     template_kind: 'chapter',
                     title: 'Mon premier chapitre',
                     position: 1,
@@ -81,8 +81,8 @@ RSpec.describe 'Communication::Website::Page::Category' do
       }
 
       response '201', 'Successful creation' do
-        it 'creates a page category and its localization', rswag: true, vcr: true do |example|
-          assert_difference ->{ Communication::Website::Page::Category.count } => 1, ->{ Communication::Website::Page::Category::Localization.count } => 1 do
+        it 'creates an agenda category and its localization', rswag: true, vcr: true do |example|
+          assert_difference ->{ Communication::Website::Agenda::Category.count } => 1, ->{ Communication::Website::Agenda::Category::Localization.count } => 1 do
             submit_request(example.metadata)
             assert_response_matches_metadata(example.metadata)
           end
@@ -90,12 +90,12 @@ RSpec.describe 'Communication::Website::Page::Category' do
       end
 
       response '400', 'Missing migration identifier.' do
-        let(:communication_website_page_category) {
+        let(:communication_website_agenda_category) {
           {
             category: {
               localizations: {
                 fr: {
-                  migration_identifier: 'page-category-from-api-1-fr',
+                  migration_identifier: 'agenda-category-from-api-1-fr',
                   name: 'Ma nouvelle catégorie',
                   meta_description: 'Une nouvelle catégorie depuis l\'API',
                   slug: 'ma-nouvelle-categorie',
@@ -119,13 +119,13 @@ RSpec.describe 'Communication::Website::Page::Category' do
       end
 
       response '422', 'Invalid parameters' do
-        let(:communication_website_page_category) {
+        let(:communication_website_agenda_category) {
           {
             category: {
-              migration_identifier: 'page-category-from-api-1',
+              migration_identifier: 'agenda-category-from-api-1',
               localizations: {
                 fr: {
-                  migration_identifier: 'page-category-from-api-1-fr',
+                  migration_identifier: 'agenda-category-from-api-1-fr',
                   meta_description: 'Une nouvelle catégorie depuis l\'API',
                   summary: 'Ceci est une nouvelle catégorie créée depuis l\'API.'
                 }
@@ -138,9 +138,9 @@ RSpec.describe 'Communication::Website::Page::Category' do
     end
   end
 
-  path '/communication/websites/{website_id}/pages/categories/upsert' do
-    post 'Upsert page categories' do
-      tags 'Communication::Website::Page::Category'
+  path '/communication/websites/{website_id}/agenda/categories/upsert' do
+    post 'Upsert agenda categories' do
+      tags 'Communication::Website::Agenda::Category'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
@@ -153,22 +153,22 @@ RSpec.describe 'Communication::Website::Page::Category' do
           categories: {
             type: :array,
             items: {
-              '$ref': '#/components/schemas/communication_website_page_category'
+              '$ref': '#/components/schemas/communication_website_agenda_category'
             }
           }
         },
         required: [:categories]
       }
       let(:categories) {
-        test_category = communication_website_page_categories(:test_category)
-        test_category_l10n = communication_website_page_category_localizations(:test_category_fr)
+        test_category = communication_website_agenda_categories(:test_category)
+        test_category_l10n = communication_website_agenda_category_localizations(:test_category_fr)
         {
           categories: [
             {
-              migration_identifier: 'page-category-from-api-1',
+              migration_identifier: 'agenda-category-from-api-1',
               localizations: {
                 fr: {
-                  migration_identifier: 'page-category-from-api-1-fr',
+                  migration_identifier: 'agenda-category-from-api-1-fr',
                   name: 'Ma nouvelle catégorie',
                   meta_description: 'Une nouvelle catégorie depuis l\'API',
                   featured_image: {
@@ -180,7 +180,7 @@ RSpec.describe 'Communication::Website::Page::Category' do
                   summary: 'Ceci est une nouvelle catégorie créée depuis l\'API.',
                   blocks: [
                     {
-                      migration_identifier: 'page-category-from-api-1-fr-block-1',
+                      migration_identifier: 'agenda-category-from-api-1-fr-block-1',
                       template_kind: 'chapter',
                       title: 'Mon premier chapitre',
                       position: 1,
@@ -215,8 +215,8 @@ RSpec.describe 'Communication::Website::Page::Category' do
       }
 
       response '200', 'Successful upsertion' do
-        it 'creates a page category and updates another with their localizations', rswag: true, vcr: true do |example|
-          assert_difference ->{ Communication::Website::Page::Category.count } => 1, ->{ Communication::Website::Page::Category::Localization.count } => 1 do
+        it 'creates an agenda category and updates another with their localizations', rswag: true, vcr: true do |example|
+          assert_difference ->{ Communication::Website::Agenda::Category.count } => 1, ->{ Communication::Website::Agenda::Category::Localization.count } => 1 do
             submit_request(example.metadata)
             assert_response_matches_metadata(example.metadata)
           end
@@ -225,14 +225,14 @@ RSpec.describe 'Communication::Website::Page::Category' do
 
       response '400', 'Missing migration identifier.' do
         let(:categories) {
-          test_category = communication_website_page_categories(:test_category)
-          test_category_l10n = communication_website_page_category_localizations(:test_category_fr)
+          test_category = communication_website_agenda_categories(:test_category)
+          test_category_l10n = communication_website_agenda_category_localizations(:test_category_fr)
           {
             categories: [
               {
                 localizations: {
                   fr: {
-                    migration_identifier: 'page-category-from-api-1-fr',
+                    migration_identifier: 'agenda-category-from-api-1-fr',
                     name: 'Ma nouvelle catégorie',
                     meta_description: 'Une nouvelle catégorie depuis l\'API',
                     featured_image: {
@@ -244,7 +244,7 @@ RSpec.describe 'Communication::Website::Page::Category' do
                     summary: 'Ceci est une nouvelle catégorie créée depuis l\'API.',
                     blocks: [
                       {
-                        migration_identifier: 'page-category-from-api-1-fr-block-1',
+                        migration_identifier: 'agenda-category-from-api-1-fr-block-1',
                         template_kind: 'chapter',
                         title: 'Mon premier chapitre',
                         position: 1,
@@ -291,15 +291,15 @@ RSpec.describe 'Communication::Website::Page::Category' do
 
       response '422', 'Invalid parameters' do
         let(:categories) {
-          test_category = communication_website_page_categories(:test_category)
-          test_category_l10n = communication_website_page_category_localizations(:test_category_fr)
+          test_category = communication_website_agenda_categories(:test_category)
+          test_category_l10n = communication_website_agenda_category_localizations(:test_category_fr)
           {
             categories: [
               {
-                migration_identifier: 'page-category-from-api-1',
+                migration_identifier: 'agenda-category-from-api-1',
                 localizations: {
                   fr: {
-                    migration_identifier: 'page-category-from-api-1-fr',
+                    migration_identifier: 'agenda-category-from-api-1-fr',
                     name: nil,
                     meta_description: 'Une nouvelle catégorie depuis l\'API',
                     summary: 'Ceci est une nouvelle catégorie créée depuis l\'API.'
@@ -328,16 +328,16 @@ RSpec.describe 'Communication::Website::Page::Category' do
     end
   end
 
-  path '/communication/websites/{website_id}/pages/categories/{id}' do
-    get 'Shows a page category' do
-      tags 'Communication::Website::Page::Category'
+  path '/communication/websites/{website_id}/agenda/categories/{id}' do
+    get 'Shows an agenda category' do
+      tags 'Communication::Website::Agenda::Category'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
       parameter name: :id, in: :path, type: :string, description: 'Category identifier'
-      let(:id) { communication_website_page_categories(:test_category).id }
+      let(:id) { communication_website_agenda_categories(:test_category).id }
 
       response '200', 'Successful operation' do
         run_test!
@@ -359,28 +359,28 @@ RSpec.describe 'Communication::Website::Page::Category' do
       end
     end
 
-    patch 'Updates a page category' do
-      tags 'Communication::Website::Page::Category'
+    patch 'Updates an agenda category' do
+      tags 'Communication::Website::Agenda::Category'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
       parameter name: :id, in: :path, type: :string, description: 'Category identifier'
-      let(:id) { communication_website_page_categories(:test_category).id }
+      let(:id) { communication_website_agenda_categories(:test_category).id }
 
-      parameter name: :communication_website_page_category, in: :body, type: :object, schema: {
+      parameter name: :communication_website_agenda_category, in: :body, type: :object, schema: {
         type: :object,
         properties: {
           category: {
-            '$ref': '#/components/schemas/communication_website_page_category'
+            '$ref': '#/components/schemas/communication_website_agenda_category'
           }
         },
         required: [:category]
       }
-      let(:communication_website_page_category) {
-        test_category = communication_website_page_categories(:test_category)
-        test_category_l10n = communication_website_page_category_localizations(:test_category_fr)
+      let(:communication_website_agenda_category) {
+        test_category = communication_website_agenda_categories(:test_category)
+        test_category_l10n = communication_website_agenda_category_localizations(:test_category_fr)
         {
           category: {
             migration_identifier: test_category.migration_identifier,
@@ -403,14 +403,14 @@ RSpec.describe 'Communication::Website::Page::Category' do
 
       response '200', 'Successful update' do
         run_test! do |response|
-          assert_equal("Mon nouveau nom", communication_website_page_category_localizations(:test_category_fr).reload.name)
+          assert_equal("Mon nouveau nom", communication_website_agenda_category_localizations(:test_category_fr).reload.name)
         end
       end
 
       response '400', 'Missing migration identifier.' do
-        let(:communication_website_page_category) {
-          test_category = communication_website_page_categories(:test_category)
-          test_category_l10n = communication_website_page_category_localizations(:test_category_fr)
+        let(:communication_website_agenda_category) {
+          test_category = communication_website_agenda_categories(:test_category)
+          test_category_l10n = communication_website_agenda_category_localizations(:test_category_fr)
           {
             category: {
               parent_id: test_category.parent_id,
@@ -450,9 +450,9 @@ RSpec.describe 'Communication::Website::Page::Category' do
       end
 
       response '422', 'Invalid parameters' do
-        let(:communication_website_page_category) {
-          test_category = communication_website_page_categories(:test_category)
-          test_category_l10n = communication_website_page_category_localizations(:test_category_fr)
+        let(:communication_website_agenda_category) {
+          test_category = communication_website_agenda_categories(:test_category)
+          test_category_l10n = communication_website_agenda_category_localizations(:test_category_fr)
           {
             category: {
               migration_identifier: test_category.migration_identifier,
@@ -476,15 +476,15 @@ RSpec.describe 'Communication::Website::Page::Category' do
       end
     end
 
-    delete 'Deletes a page category' do
-      tags 'Communication::Website::Page::Category'
+    delete 'Deletes an agenda category' do
+      tags 'Communication::Website::Agenda::Category'
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
       parameter name: :id, in: :path, type: :string, description: 'Category identifier'
-      let(:id) { communication_website_page_categories(:test_category).id }
+      let(:id) { communication_website_agenda_categories(:test_category).id }
 
       response '204', 'Successful deletion' do
         run_test!

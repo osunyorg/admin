@@ -35,6 +35,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   include Localizable
   include Sanitizable
   include WithMenuItemTarget
+  include WithOpenApi
   include WithUniversity
 
   belongs_to              :program,
