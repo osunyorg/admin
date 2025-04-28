@@ -2,14 +2,19 @@
 #
 # Table name: communication_website_git_files
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           not null, indexed => [about_id]
-#  previous_path :string
-#  previous_sha  :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             not null, indexed => [about_type]
-#  website_id    :uuid             not null, indexed
+#  id                :uuid             not null, primary key
+#  about_type        :string           not null, indexed => [about_id]
+#  current_content   :text
+#  current_path      :string
+#  current_sha       :string
+#  desynchronized    :boolean
+#  desynchronized_at :datetime
+#  previous_path     :string
+#  previous_sha      :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  about_id          :uuid             not null, indexed => [about_type]
+#  website_id        :uuid             not null, indexed
 #
 # Indexes
 #
@@ -23,10 +28,13 @@
 class Communication::Website::GitFile < ApplicationRecord
   # We don't include Sanitizable as this model is never handled by users directly.
 
+  attr_accessor :will_be_destroyed
+
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :about, polymorphic: true
 
-  attr_accessor :will_be_destroyed
+  scope :desynchronized, -> { where(desynchronized: true) }
+  scope :ordered, -> { order("communication_website_git_files.desynchronized_at DESC NULLS LAST, communication_website_git_files.updated_at DESC") }
 
   def self.sync(website, object)
     # All exportable objects must respond to this method
@@ -58,12 +66,47 @@ class Communication::Website::GitFile < ApplicationRecord
     website.git_repository.add_git_file git_file
   end
 
-  def path
-    @path ||= about.nil? ? nil : about.git_path(website)&.gsub(/\/+/, '/')
+  def generate
+    return if content_up_to_date?
+    update(
+      current_content: computed_content,
+      current_path: computed_path,
+      current_sha: computed_sha,
+      desynchronized: true,
+      desynchronized_at: Time.zone.now
+    )
+  end
+
+  def generate_later
+    Communication::Website::GenerateGitFileJob.perform_later(self)
+  end
+
+  def computed_path
+    @computed_path ||= about.nil? ? nil : about.git_path(website)&.gsub(/\/+/, '/')
+  end
+
+  def computed_filename
+    @computed_filename ||= File.basename(computed_path)
+  end
+
+  def content_up_to_date?
+    current_content == computed_content
+  end
+
+  def synchronized?
+    !desynchronized
+  end
+
+  def computed_content
+    @computed_content ||= Static.render(template_static, about, website)
+  end
+
+  def computed_sha
+    website.git_repository.computed_sha(computed_content)
   end
 
   def to_s
-    @to_s ||= Static.render(template_static, about, website)
+    "#{current_path}"
   end
 
   protected

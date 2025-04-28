@@ -5,6 +5,8 @@ module WithGitFiles
     has_many  :git_files,
               class_name: "Communication::Website::GitFile",
               as: :about
+
+    after_save :generate_git_files_content
   end
 
   def git_path(website)
@@ -26,5 +28,11 @@ module WithGitFiles
     path_language = respond_to?(:language_id) && language_id.present? ? language : website.default_language
     path += "#{path_language.iso_code}/"
     path
+  end
+
+  protected
+
+  def generate_git_files_content
+    git_files.find_each &:generate_later
   end
 end

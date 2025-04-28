@@ -1,0 +1,23 @@
+<% content_for :title, 'Git files' %>
+
+<div class="table-responsive mb-5">
+  <table class="<%= table_classes(with_actions: false) %>">
+    <thead>
+      <tr>
+        <th><%= Communication::Website::GitFile.human_attribute_name(:status) %></th>
+        <th><%= Communication::Website::GitFile.human_attribute_name(:path) %></th>
+        <th><%= Communication::Website::GitFile.human_attribute_name(:desynchronized_at) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @git_files.each do |git_file| %>
+        <tr>
+          <td><%= osuny_published(git_file.synchronized?) %></td>
+          <td><%= link_to git_file, admin_communication_website_git_file_path(git_file) %></td>
+          <td><%= l(git_file.desynchronized_at) if git_file.desynchronized_at.present? %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @git_files %>
+</div>

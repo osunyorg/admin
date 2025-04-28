@@ -30,6 +30,7 @@ namespace :communication do
       end
     end
     resources :permalinks, controller: 'websites/permalinks', only: [:create, :destroy]
+    resources :git_files, controller: 'websites/git_files', only: [:index, :show]
     namespace :page, path: 'pages' do
       resources :categories, controller: '/admin/communication/websites/pages/categories' do
         collection do
