@@ -3,5 +3,7 @@ test_event:
   from_day: 2024-07-12
   time_zone: Europe/Paris
   to_day: 2024-07-12
+  categories:
+   - test_category
   website: website_with_github
   university: default_university
