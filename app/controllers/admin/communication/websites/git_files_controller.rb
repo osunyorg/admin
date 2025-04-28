@@ -9,7 +9,7 @@ class Admin::Communication::Websites::GitFilesController < Admin::Communication:
 
   def show
     breadcrumb
-    add_breadcrumb @git_file.filename
+    add_breadcrumb @git_file.computed_filename
   end
 
   protected

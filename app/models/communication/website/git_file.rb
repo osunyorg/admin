@@ -36,11 +36,10 @@ class Communication::Website::GitFile < ApplicationRecord
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :ordered, -> { order("communication_website_git_files.desynchronized_at DESC NULLS LAST, communication_website_git_files.updated_at DESC") }
 
-  def self.sync(website, object)
+  def self.generate(website, object)
     # All exportable objects must respond to this method
     # WithGitFiles defines it
-    # AsDirectObject includes WithGitFiles, therefore all direct objects are exportable
-    # AsIndirectObject does not include it, but some indirect objects have it (Person, Organization...)
+    # AsIndirectObject does not include it, but some indirect objects have it (Person l10n, Organization l10n...)
     # Some objects need to declare that property:
     # - the website itself
     # - configs (which inherit from the website)
@@ -52,11 +51,7 @@ class Communication::Website::GitFile < ApplicationRecord
     analyze_if_blob object
     # The git file might exist or not
     git_file = where(website: website, about: object).first_or_create
-    # It is very important to go through this specific instance of the website,
-    # and not through each git_file.website, which would be different instances.
-    # Otherwise, we get 1 instance of git_repository per git_file,
-    # and it causes a huge amount of useless queries.
-    website.git_repository.add_git_file git_file
+    git_file.generate_later
   end
 
   # Simplified version of the sync method to simply delete an obsolete git_file

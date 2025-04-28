@@ -21,7 +21,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
       l10n = post.localization_for(current_language)
       next unless l10n.present?
       is_published ? l10n.publish! : l10n.unpublish!
-      post.save_and_sync
+      post.save
     end
     redirect_back fallback_location: admin_communication_website_posts_path,
                   notice: t('communication.website.posts.successful_batch_update')
@@ -69,7 +69,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def update
-    if @post.update_and_sync(post_params)
+    if @post.update(post_params)
       redirect_to admin_communication_website_post_path(@post),
                   notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
     else

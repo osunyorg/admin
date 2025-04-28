@@ -67,7 +67,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def create
-    if @website.save_and_sync
+    if @website.save
       redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s_in(current_language))
     else
       breadcrumb
@@ -76,7 +76,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def update
-    if @website.update_and_sync(website_params)
+    if @website.update(website_params)
       redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s_in(current_language))
     else
       load_invalid_localization

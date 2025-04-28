@@ -48,11 +48,7 @@ number_of_panels = 0
 
 <%= render 'admin/application/l10n/widget', about: @website, l10n: @l10n, small: true %>
 <%= image_tag @website.deployment_status_badge, alt: '' if @website.deployment_status_badge.present? %>
-
-<div>
-<%= @website.git_files.desynchronized.count %> / 
-<%= @website.git_files.count %>
-</div>
+<%= render 'admin/communication/websites/git_files/quantity' %>
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_communication_website_path(@website, website_id: nil) %>

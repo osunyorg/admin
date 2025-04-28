@@ -1,3 +1,3 @@
-<% content_for :title, @git_file.path %>
+<% content_for :title, @git_file.computed_filename %>
 
-<pre class="bg-dark text-white p-3"><%= @git_file.content %></pre>
+<pre class="bg-dark text-white p-3"><%= @git_file.current_content %></pre>

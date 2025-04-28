@@ -38,7 +38,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   def create
     @project.website = @website
     @project.created_by = current_user
-    if @project.save_and_sync
+    if @project.save
       redirect_to admin_communication_website_portfolio_project_path(@project),
                   notice: t('admin.successfully_created_html', model: @project.to_s_in(current_language))
     else
@@ -49,7 +49,7 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   end
 
   def update
-    if @project.update_and_sync(project_params)
+    if @project.update(project_params)
       redirect_to admin_communication_website_portfolio_project_path(@project),
                   notice: t('admin.successfully_updated_html', model: @project.to_s_in(current_language))
     else

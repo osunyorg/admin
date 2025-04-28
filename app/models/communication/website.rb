@@ -192,9 +192,9 @@ class Communication::Website < ApplicationRecord
   # Appelé en asynchrone par Communication::Website::SyncWithGitJob
   def sync_with_git_safely
     return unless should_sync_with_git?
-    Communication::Website::GitFile.sync website, self
+    Communication::Website::GitFile.generate website, self
     recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
-      Communication::Website::GitFile.sync website, object
+      Communication::Website::GitFile.generate website, object
     end
     git_repository.sync!
   end

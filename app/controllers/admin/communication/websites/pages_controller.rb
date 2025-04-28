@@ -97,7 +97,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def create
     @page.website = @website
-    if @page.save_and_sync
+    if @page.save
       redirect_to admin_communication_website_page_path(@page),
                   notice: t('admin.successfully_created_html', model: @page.to_s_in(current_language))
     else
@@ -109,7 +109,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def update
-    if @page.update_and_sync(page_params)
+    if @page.update(page_params)
       redirect_to admin_communication_website_page_path(@page),
                   notice: t('admin.successfully_updated_html', model: @page.to_s_in(current_language))
     else

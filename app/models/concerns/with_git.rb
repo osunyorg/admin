@@ -5,36 +5,18 @@
 module WithGit
   extend ActiveSupport::Concern
 
-  def save_and_sync
-    if save
-      sync_with_git
-      true
-    else
-      false
-    end
-  end
-
-  def update_and_sync(params)
-    if update(params)
-      sync_with_git
-      true
-    else
-      false
-    end
-  end
-
   def sync_with_git
     Communication::Website::DirectObject::SyncWithGitJob.perform_later(website.id, direct_object: self)
   end
 
   def sync_with_git_safely
     return unless should_sync_with_git?
-    Communication::Website::GitFile.sync website, self
+    Communication::Website::GitFile.generate website, self
     recursive_dependencies(syncable_only: true).each do |object|
-      Communication::Website::GitFile.sync website, object
+      Communication::Website::GitFile.generate website, object
     end
     references.each do |object|
-      Communication::Website::GitFile.sync website, object
+      Communication::Website::GitFile.generate website, object
     end
     website.git_repository.sync!
   end
