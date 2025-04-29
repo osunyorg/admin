@@ -107,7 +107,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
       permitted_params = params.require(:event)
                           .permit(
                             :migration_identifier, :from_day, :to_day, :time_zone,
-                            :created_by_id, :parent_id, localizations: {},
+                            :created_by_id, :parent_id, category_ids: [], localizations: {},
                             time_slots: [:migration_identifier, :datetime, :duration, :_destroy, localizations: {}]
                           ).merge(
                             university_id: current_university.id,
@@ -123,7 +123,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
     permitted_params = event_params
                           .permit(
                             :migration_identifier, :from_day, :to_day, :time_zone,
-                            :created_by_id, :parent_id, localizations: {},
+                            :created_by_id, :parent_id, category_ids: [], localizations: {},
                             time_slots: [:migration_identifier, :datetime, :duration, :_destroy, localizations: {}]
                           ).merge(
                             university_id: current_university.id,

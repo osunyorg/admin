@@ -17,6 +17,8 @@ RSpec.configure do |config|
   schemas = {
     communication_website: Communication::Website::OPENAPI_SCHEMA,
     communication_website_localization: Communication::Website::Localization::OPENAPI_SCHEMA,
+    communication_website_agenda_category: Communication::Website::Agenda::Category::OPENAPI_SCHEMA,
+    communication_website_agenda_category_localization: Communication::Website::Agenda::Category::Localization::OPENAPI_SCHEMA,
     communication_website_agenda_event: Communication::Website::Agenda::Event::OPENAPI_SCHEMA,
     communication_website_agenda_event_localization: Communication::Website::Agenda::Event::Localization::OPENAPI_SCHEMA,
     communication_website_agenda_event_time_slot: Communication::Website::Agenda::Event::TimeSlot::OPENAPI_SCHEMA,

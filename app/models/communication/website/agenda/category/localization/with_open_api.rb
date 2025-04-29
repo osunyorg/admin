@@ -1,14 +1,14 @@
-module Communication::Website::Agenda::Event::Localization::WithOpenApi
+module Communication::Website::Agenda::Category::Localization::WithOpenApi
   extend ActiveSupport::Concern
 
   included do
     OPENAPI_SCHEMA = {
       type: :object,
-      title: "Communication::Website::Agenda::Event::Localization",
+      title: "Communication::Website::Agenda::Category::Localization",
       properties: {
         id: { type: :string, format: :uuid },
         migration_identifier: { type: :string, nullable: true },
-        title: { type: :string },
+        name: { type: :string },
         featured_image: {
           type: :object,
           properties: {
@@ -19,27 +19,9 @@ module Communication::Website::Agenda::Event::Localization::WithOpenApi
           }
         },
         meta_description: { type: :string, nullable: true },
-        published: { type: :boolean },
-        published_at: { type: :string, format: 'date-time', nullable: true },
+        path: { type: :string, nullable: true },
         slug: { type: :string },
-        subtitle: { type: :string, nullable: true },
         summary: { type: :string, nullable: true },
-        text: { type: :string, nullable: true },
-        notes: { type: :string, nullable: true },
-        header_cta: { type: :boolean, nullable: true },
-        header_cta_label: { type: :string, nullable: true },
-        header_cta_url: { type: :string, nullable: true },
-        add_to_calendar_urls: {
-          type: :object,
-          properties: {
-            google: { type: :string },
-            yahoo: { type: :string },
-            office: { type: :string },
-            outlook: { type: :string },
-            ical: { type: :string }
-          },
-          nullable: true
-        },
         blocks: {
           type: :array,
           items: {

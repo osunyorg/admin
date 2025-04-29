@@ -26,6 +26,10 @@ module Communication::Website::Agenda::Event::WithOpenApi
             "$ref": "#/components/schemas/communication_website_agenda_event_time_slot"
           }
         },
+        category_ids: {
+          type: :array,
+          items: { type: :string, format: :uuid }
+        },
         created_at: { type: :string, format: "date-time" },
         updated_at: { type: :string, format: "date-time" }
       }
