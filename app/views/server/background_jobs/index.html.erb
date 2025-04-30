@@ -1,0 +1,44 @@
+<% content_for :title, 'Jobs' %>
+
+<p><%= @jobs.count %></p>
+
+<div class="row">
+  <div class="col-lg-6">
+    <h2>By universities</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Université</th>
+          <th>Jobs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @jobs_by_university.each do |university, count| %>
+          <tr>
+            <td><%= university %></td>
+            <td><%= count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-lg-6">
+    <h2>By websites</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Site</th>
+          <th>Jobs</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @jobs_by_website.each do |website, count| %>
+          <tr>
+            <td><%= website %></td>
+            <td><%= count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
