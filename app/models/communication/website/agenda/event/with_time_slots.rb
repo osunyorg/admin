@@ -21,9 +21,9 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     existing_slots_ids = []
     # Create slots
     params[:slots].each do |slot|
-      break if existing_slots_ids.length >= TIME_SLOTS_LIMIT
-      time_slot = time_slot_from_param(slot, language)
-      next if time_slot.nil?
+      datetime = datetime_from_param(slot)
+      next if datetime.nil? || existing_slots_ids.length >= TIME_SLOTS_LIMIT
+      time_slot = save_time_slot(slot, datetime, language)
       existing_slots_ids << time_slot.id
     end
     delete_obsolete_slots(existing_slots_ids)
@@ -49,18 +49,17 @@ module Communication::Website::Agenda::Event::WithTimeSlots
 
   protected
 
-  def time_slot_from_param(slot, language)
+  def datetime_from_param(slot)
     return if slot[:date].blank? || slot[:time].blank?
     date = slot[:date].to_date
     time = slot[:time].to_time
-    datetime = Time.new date.year,
-                        date.month,
-                        date.day,
-                        time.hour,
-                        time.min,
-                        time.sec,
-                        ActiveSupport::TimeZone[time_zone]
-    save_time_slot(slot, datetime, language)
+    Time.new  date.year,
+              date.month,
+              date.day,
+              time.hour,
+              time.min,
+              time.sec,
+              ActiveSupport::TimeZone[time_zone]
   end
 
   # slot is a hash
