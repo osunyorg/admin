@@ -46,12 +46,14 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
         required: [:event]
       }
       let(:communication_website_agenda_event) {
+        agenda_category = communication_website_agenda_categories(:test_category)
         {
           event: {
             migration_identifier: 'event-from-api-1',
             from_day: '2024-12-24',
             to_day: '2024-12-24',
             time_zone: 'Europe/Paris',
+            category_ids: [agenda_category.id],
             localizations: {
               fr: {
                 migration_identifier: 'event-from-api-1-fr',
@@ -220,6 +222,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
         test_event_l10n = communication_website_agenda_event_localizations(:test_event_fr)
         test_event_time_slot = communication_website_agenda_event_time_slots(:test_event_time_slot)
         test_event_time_slot_l10n = communication_website_agenda_event_time_slot_localizations(:test_event_time_slot_fr)
+        agenda_category = communication_website_agenda_categories(:test_category)
         {
           events: [
             {
@@ -227,6 +230,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
               from_day: '2024-12-24',
               to_day: '2024-12-24',
               time_zone: 'Europe/Paris',
+              category_ids: [agenda_category.id],
               localizations: {
                 fr: {
                   migration_identifier: 'event-from-api-1-fr',
@@ -276,6 +280,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
               from_day: test_event.from_day,
               to_day: test_event.to_day,
               time_zone: test_event.time_zone,
+              category_ids: test_event.category_ids,
               localizations: {
                 test_event_l10n.language.iso_code => {
                   migration_identifier: test_event_l10n.migration_identifier,
@@ -553,6 +558,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
             from_day: test_event.from_day,
             to_day: test_event.to_day,
             time_zone: test_event.time_zone,
+            category_ids: test_event.category_ids,
             localizations: {
               test_event_l10n.language.iso_code => {
                 migration_identifier: test_event_l10n.migration_identifier,
@@ -597,6 +603,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
               from_day: test_event.from_day,
               to_day: test_event.to_day,
               time_zone: test_event.time_zone,
+              category_ids: test_event.category_ids,
               localizations: {
                 test_event_l10n.language.iso_code => {
                   migration_identifier: test_event_l10n.migration_identifier,
@@ -640,6 +647,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
               from_day: test_event.from_day,
               to_day: test_event.to_day,
               time_zone: test_event.time_zone,
+              category_ids: test_event.category_ids,
               localizations: {
                 test_event_l10n.language.iso_code => {
                   migration_identifier: test_event_l10n.migration_identifier,
