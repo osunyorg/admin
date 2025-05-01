@@ -26,11 +26,7 @@ module Communication::Website::Agenda::Event::WithTimeSlots
       next if time_slot.nil?
       existing_slots_ids << time_slot.id
     end
-    # Delete obsolete slots
-    time_slots.where.not(id: existing_slots_ids).each do |time_slot|
-      time_slot.destroy
-    end
-    # Sync event after time slots save
+    delete_obsolete_slots(existing_slots_ids)
     sync_with_git
   end
 
@@ -94,4 +90,9 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     time_slot
   end
 
+  def delete_obsolete_slots(except_ids)
+    time_slots.where.not(id: except_ids).each do |time_slot|
+      time_slot.destroy
+    end
+  end
 end
