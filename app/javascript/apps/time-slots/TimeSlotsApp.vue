@@ -49,6 +49,7 @@ export default {
       <div class="col-xxl-4">
         <button
           class="btn btn-light mb-3 mb-xxl-0"
+          v-show="current.slots.length < 30"
           @click="addSlot()">
           <Plus width="20" stroke-width="1.5" />
           {{ i18n.timeSlots.add }}

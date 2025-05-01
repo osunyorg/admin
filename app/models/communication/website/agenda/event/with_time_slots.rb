@@ -2,11 +2,15 @@ module Communication::Website::Agenda::Event::WithTimeSlots
   extend ActiveSupport::Concern
 
   included do
+
+    TIME_SLOTS_LIMIT = 30.freeze
+
     has_many  :time_slots,
               foreign_key: :communication_website_agenda_event_id,
               dependent: :destroy,
               inverse_of: :communication_website_agenda_event
     accepts_nested_attributes_for :time_slots, allow_destroy: true
+    validates_length_of :time_slots, maximum: TIME_SLOTS_LIMIT
   end
 
   def time_slot_localizations
@@ -17,25 +21,45 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     existing_slots_ids = []
     # Create slots
     params[:slots].each do |slot|
-      next if slot[:date].blank?  || slot[:time].blank?
-      date = slot[:date].to_date
-      time = slot[:time].to_time
-      datetime = Time.new date.year,
-                          date.month,
-                          date.day,
-                          time.hour,
-                          time.min,
-                          time.sec,
-                          ActiveSupport::TimeZone[time_zone]
+      datetime = datetime_from_param(slot)
+      next if datetime.nil? || existing_slots_ids.length >= TIME_SLOTS_LIMIT
       time_slot = save_time_slot(slot, datetime, language)
       existing_slots_ids << time_slot.id
     end
-    # Delete obsolete slots
-    time_slots.where.not(id: existing_slots_ids).each do |time_slot|
-      time_slot.destroy
-    end
-    # Sync event after time slots save
+    delete_obsolete_slots(existing_slots_ids)
     sync_with_git
+  end
+
+  def time_slots_to_json(language)
+    {
+      min: from_day.iso8601,
+      max: to_day.iso8601,
+      slots: time_slots.ordered.map { |slot|
+        l10n = slot.localization_for(language)
+        {
+          id: slot.id,
+          date: slot.date.iso8601,
+          time: slot.time,
+          place: l10n&.place,
+          duration: slot.duration
+        }
+      }
+    }
+  end
+
+  protected
+
+  def datetime_from_param(slot)
+    return if slot[:date].blank? || slot[:time].blank?
+    date = slot[:date].to_date
+    time = slot[:time].to_time
+    Time.new  date.year,
+              date.month,
+              date.day,
+              time.hour,
+              time.min,
+              time.sec,
+              ActiveSupport::TimeZone[time_zone]
   end
 
   # slot is a hash
@@ -65,20 +89,9 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     time_slot
   end
 
-  def time_slots_to_json(language)
-    {
-      min: from_day.iso8601,
-      max: to_day.iso8601,
-      slots: time_slots.ordered.map { |slot|
-        l10n = slot.localization_for(language)
-        {
-          id: slot.id,
-          date: slot.date.iso8601,
-          time: slot.time,
-          place: l10n&.place,
-          duration: slot.duration
-        }
-      }
-    }
+  def delete_obsolete_slots(except_ids)
+    time_slots.where.not(id: except_ids).each do |time_slot|
+      time_slot.destroy
+    end
   end
 end
