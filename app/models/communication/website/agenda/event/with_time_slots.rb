@@ -2,11 +2,15 @@ module Communication::Website::Agenda::Event::WithTimeSlots
   extend ActiveSupport::Concern
 
   included do
+
+    TIME_SLOTS_LIMIT = 30.freeze
+
     has_many  :time_slots,
               foreign_key: :communication_website_agenda_event_id,
               dependent: :destroy,
               inverse_of: :communication_website_agenda_event
     accepts_nested_attributes_for :time_slots, allow_destroy: true
+    validates_length_of :time_slots, maximum: TIME_SLOTS_LIMIT
   end
 
   def time_slot_localizations
@@ -18,6 +22,7 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     # Create slots
     params[:slots].each do |slot|
       next if slot[:date].blank?  || slot[:time].blank?
+      break if existing_slots_ids.length >= TIME_SLOTS_LIMIT
       date = slot[:date].to_date
       time = slot[:time].to_time
       datetime = Time.new date.year,
