@@ -75,6 +75,10 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
     end_datetime&.strftime("%H:%M")
   end
 
+  def first?
+    @first ||= id == event.time_slots.ordered.first.id
+  end
+
   protected
 
   # Methods for Communication::Website::Agenda::Period::InPeriod
