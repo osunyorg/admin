@@ -784,7 +784,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_114550) do
     t.string "current_sha"
     t.text "current_content"
     t.boolean "desynchronized", default: true
-    t.datetime "desynchronized_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "desynchronized_at"
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
     t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
   end

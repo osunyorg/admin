@@ -1,10 +1,13 @@
-module WithGitFiles
+module HasGitFiles
   extend ActiveSupport::Concern
 
   included do
     has_many  :git_files,
               class_name: "Communication::Website::GitFile",
               as: :about
+    
+    after_save  :generate_git_file
+    after_touch :generate_git_file
   end
 
   def git_path(website)
@@ -28,4 +31,17 @@ module WithGitFiles
     path
   end
 
+  def generate_git_files
+    return unless respond_to?(:git_files)
+    websites.each do |website|
+      # Generate will skip if not needed on website
+      Communication::Website::GitFile.generate website, self
+      recursive_dependencies(syncable_only: true).each do |object|
+        Communication::Website::GitFile.generate website, object
+      end if respond_to?(:recursive_dependencies)
+      references.each do |object|
+        Communication::Website::GitFile.generate website, object
+      end if respond_to?(:references)
+    end
+  end
 end

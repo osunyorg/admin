@@ -39,7 +39,7 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def self.generate(website, about)
     # All exportable objects must respond to this method
-    # WithGitFiles defines it
+    # HasGitFiles defines it
     # AsIndirectObject does not include it, but some indirect objects have it (Person l10n, Organization l10n...)
     # Some objects need to declare that property:
     # - the website itself

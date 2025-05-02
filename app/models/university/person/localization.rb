@@ -40,11 +40,11 @@ class University::Person::Localization < ApplicationRecord
   include AsLocalization
   include Backlinkable
   include Contentful
+  include HasGitFiles
   include Permalinkable
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
-  include WithGitFiles
   include WithUniversity
 
   alias :person :about

@@ -1,15 +1,10 @@
 # Ce concern ajoute les éléments nécessaires pour les objets directs :
-# - Dépendances (avec et via synchro)
-# - Git
-# - GitFiles
-# - Références
+# - Dépendances et références (avec et via synchro)
 # - Connexions (en tant que source)
 module AsDirectObject
   extend ActiveSupport::Concern
 
   include WithDependencies
-  include WithGit
-  include WithReferences
 
   included do
     belongs_to :website,
@@ -21,8 +16,8 @@ module AsDirectObject
               class_name: 'Communication::Website::Connection',
               dependent: :destroy # When the direct object disappears all connections with the object as a source must disappear
 
-    after_save  :connect_dependencies, :generate_git_file
-    after_touch :connect_dependencies, :generate_git_file
+    after_save  :connect_dependencies
+    after_touch :connect_dependencies
   end
 
   def websites
@@ -53,10 +48,4 @@ module AsDirectObject
     )
   end
 
-  protected
-
-  def generate_git_file
-    return unless respond_to?(:git_files)
-    Communication::Website::GitFile.generate website, self
-  end
 end

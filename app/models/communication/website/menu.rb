@@ -32,10 +32,10 @@ class Communication::Website::Menu < ApplicationRecord
   DEFAULT_MENUS_IDENTIFIERS = ['primary', 'legal', 'social'].freeze
 
   include AsDirectObject
+  include HasGitFiles
   include Initials
   include Sanitizable
   include WithAutomatism
-  include WithGitFiles
   include WithUniversity
 
   belongs_to :language

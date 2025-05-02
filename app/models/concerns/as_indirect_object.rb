@@ -1,13 +1,11 @@
 # Ce concern ajoute les éléments nécessaires pour les objets indirects :
-# - connexions
-# - dépendances (avec et via synchro)
-# - références nécessaires
+# - Dépendances et références (avec et via synchro)
+# - Connexions (en tant que cible)
 module AsIndirectObject
   extend ActiveSupport::Concern
 
-  # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas WithGitFiles ici
+  # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas HasGitFiles ici
   include WithDependencies
-  include WithReferences
 
   included do
     has_many  :connections,
@@ -84,13 +82,6 @@ module AsIndirectObject
   def connect_direct_sources
     direct_sources.each do |direct_source|
       direct_source.website.connect self, direct_source
-    end
-  end
-
-  def generate_git_files
-    websites.each do |website|
-      # Generate will skip if not needed on website
-      Communication::Website::GitFile.generate website, self
     end
   end
 

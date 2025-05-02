@@ -33,9 +33,22 @@ module Communication::Website::WithGitRepository
     git_repository.url
   end
 
+  def sync_with_git
+    update_column(:last_sync_at, Time.now)
+    Communication::Website::SyncWithGitJob.perform_later(id)
+  end
+
+  def sync_with_git_safely
+    return unless git_repository.valid?
+    git_repository.git_files = git_files.desynchronized
+                                        .order(:desynchronized_at)
+                                        .limit(git_repository.batch_size)
+    git_repository.sync!
+  end
+
   # Synchronisation optimale d'objet indirect
   def sync_indirect_object_with_git(indirect_object)
-    return unless should_sync_with_git?
+    return unless git_repository.valid?
     indirect_object.direct_sources_with_dependencies_for_website(self).each do |dependency|
       Communication::Website::GitFile.generate self, dependency
     end
@@ -48,7 +61,7 @@ module Communication::Website::WithGitRepository
   end
 
   def destroy_obsolete_git_files_safely
-    return unless should_sync_with_git?
+    return unless git_repository.valid?
     git_files.find_each do |git_file|
       dependency = git_file.about
       # Here, dependency can be nil (object was previously destroyed)
@@ -87,12 +100,12 @@ module Communication::Website::WithGitRepository
   end
 
   def update_theme_version_safely
-    return unless should_sync_with_git?
+    return unless git_repository.valid?
     git_repository.update_theme_version!
   end
 
   def analyse_repository!
-    return unless should_sync_with_git?
+    return unless git_repository.valid?
     Git::OrphanAndLayoutAnalyzer.new(self).launch
   end
 

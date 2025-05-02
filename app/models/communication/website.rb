@@ -65,13 +65,11 @@ class Communication::Website < ApplicationRecord
   include WithFeatureAgenda
   include WithFeaturePosts
   include WithFeaturePortfolio
-  include WithGit
   include WithGitRepository
   include WithLock
   include WithManagers
   include WithOpenApi
   include WithProgramCategories
-  include WithReferences
   include WithSpecialPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithScreenshot
@@ -183,19 +181,6 @@ class Communication::Website < ApplicationRecord
 
   def website_id
     id
-  end
-
-  def sync_with_git
-    update_column(:last_sync_at, Time.now)
-    Communication::Website::SyncWithGitJob.perform_later(id)
-  end
-
-  def sync_with_git_safely
-    return unless git_repository.valid?
-    git_repository.git_files = git_files.desynchronized
-                                        .order(:desynchronized_at)
-                                        .limit(git_repository.batch_size)
-    git_repository.sync!
   end
 
   def move_to_university(new_university_id)
