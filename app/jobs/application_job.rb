@@ -6,6 +6,8 @@ class ApplicationJob < ActiveJob::Base
 
   include GoodJob::ActiveJobExtensions::Concurrency
 
+  before_enqueue :add_good_job_labels
+
   good_job_control_concurrency_with(
     # Maximum number of unfinished jobs to allow with the concurrency key
     # Can be an Integer or Lambda/Proc that is invoked in the context of the job
@@ -57,7 +59,22 @@ class ApplicationJob < ActiveJob::Base
     key: -> { "#{self.class.name}-#{queue_name}-#{digest_arguments(arguments)}" }
   )
 
+  protected
+
+  def good_job_additional_labels
+    []
+  end
+
   private
+
+  def add_good_job_labels
+    return if good_job_additional_labels.empty?
+    if @good_job_labels.nil?
+      @good_job_labels = good_job_additional_labels
+    else
+      @good_job_labels += good_job_additional_labels
+    end
+  end
 
   def digest_arguments(arguments)
     Digest::MD5.hexdigest(stringify_arguments_for_digest(arguments))

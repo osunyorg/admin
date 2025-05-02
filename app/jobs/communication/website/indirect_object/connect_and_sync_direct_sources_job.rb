@@ -6,4 +6,13 @@ class Communication::Website::IndirectObject::ConnectAndSyncDirectSourcesJob < A
   def perform(indirect_object)
     indirect_object.connect_and_sync_direct_sources_safely
   end
+
+  protected
+
+  def good_job_additional_labels
+    indirect_object = arguments.first
+    [
+      indirect_object.university&.to_global_id.to_s
+    ]
+  end
 end

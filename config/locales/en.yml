@@ -157,7 +157,7 @@ en:
     password_hint: Leave blank if you do not wish to change the password.
     pending_tasks:
       tasks: Background tasks pending
-      text_html: "Osuny helps you with digital sufficiency.<br><br>The background execution of most tasks on the Osuny platform helps to reduce the carbon footprint of digital technology, by pre-calculating what can be.<br><br>This can cause a delay before your changes are visible on your websites."
+      text_html: "Osuny guides you towards digital sufficiency.<br><br>The mutualized background execution of most tasks on the Osuny platform helps reducing the carbon footprint of digital technology, by pre-computing what can be.<br><br>This can cause a delay before your changes are visible on your websites."
       what_is_it: What is it?
     search:
       buttons:
