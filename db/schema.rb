@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_28_121721) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_02_091757) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -783,8 +783,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_28_121721) do
     t.string "current_path"
     t.string "current_sha"
     t.text "current_content"
-    t.boolean "desynchronized"
-    t.datetime "desynchronized_at"
+    t.boolean "desynchronized", default: true
+    t.datetime "desynchronized_at", default: -> { "CURRENT_TIMESTAMP" }
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
     t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
   end

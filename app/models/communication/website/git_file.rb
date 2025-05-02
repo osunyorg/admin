@@ -7,7 +7,7 @@
 #  current_content   :text
 #  current_path      :string
 #  current_sha       :string
-#  desynchronized    :boolean
+#  desynchronized    :boolean          default(TRUE)
 #  desynchronized_at :datetime
 #  previous_path     :string
 #  previous_sha      :string
@@ -28,8 +28,6 @@
 class Communication::Website::GitFile < ApplicationRecord
   # We don't include Sanitizable as this model is never handled by users directly.
 
-
-
   attr_accessor :will_be_destroyed
 
   belongs_to :website, class_name: 'Communication::Website'
@@ -38,6 +36,8 @@ class Communication::Website::GitFile < ApplicationRecord
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :batch, -> (batch_size) { desynchronized.order(:desynchronized_at).limit(batch_size) }
   scope :ordered, -> { order("communication_website_git_files.desynchronized_at DESC NULLS LAST, communication_website_git_files.updated_at DESC") }
+
+  before_create :set_desynchronized_at
 
   def self.generate(website, object)
     # All exportable objects must respond to this method
@@ -54,7 +54,7 @@ class Communication::Website::GitFile < ApplicationRecord
     analyze_if_blob object
     # The git file might exist or not
     git_file = where(website: website, about: object).first_or_create
-    git_file.generate_later
+    git_file.generate_content
   end
 
   # Simplified version of the sync method to simply delete an obsolete git_file
@@ -64,7 +64,7 @@ class Communication::Website::GitFile < ApplicationRecord
     website.git_repository.add_git_file git_file
   end
 
-  def generate
+  def generate_content_safely
     return if content_up_to_date?
     update(
       current_content: computed_content,
@@ -75,8 +75,8 @@ class Communication::Website::GitFile < ApplicationRecord
     )
   end
 
-  def generate_later
-    Communication::Website::GitFile::GenerateJob.perform_later(self)
+  def generate_content
+    Communication::Website::GitFile::GenerateContentJob.perform_later(self)
   end
 
   def computed_path
@@ -152,5 +152,9 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def git_sha
     @git_sha ||= git_sha_for(path)
+  end
+
+  def set_desynchronized_at
+    self.desynchronized_at = Time.current
   end
 end

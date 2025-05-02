@@ -6,7 +6,7 @@ module WithGitFiles
               class_name: "Communication::Website::GitFile",
               as: :about
 
-    after_save :generate_git_files_content
+    after_save :generate_git_files
   end
 
   def git_path(website)
@@ -32,7 +32,12 @@ module WithGitFiles
 
   protected
 
-  def generate_git_files_content
-    git_files.find_each &:generate_later
+  def generate_git_files
+    # TODO iteration 11: for an indirect object this depends on the presence of websites, so on established connections.
+    # for instance a l10n which is currently an indirect object has no websites on the creation 
+    # git_files should probably been created just after connexions
+    websites.each do |website|
+      Communication::Website::GitFile.generate website, self
+    end
   end
 end

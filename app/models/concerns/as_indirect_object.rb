@@ -60,12 +60,14 @@ module AsIndirectObject
     dependencies
   end
 
+  # TODO iteration 11: rename properly
   def connect_and_sync_direct_sources_safely
     direct_sources.each do |direct_source|
       direct_source.website.connect self, direct_source
     end
     websites.each do |website|
-      Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website.id, indirect_object: self)
+      Communication::Website::GitFile.generate website, self
+      # Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website.id, indirect_object: self)
     end
   end
 
