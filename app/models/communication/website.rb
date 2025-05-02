@@ -185,13 +185,11 @@ class Communication::Website < ApplicationRecord
     id
   end
 
-  # Override to follow direct objects
   def sync_with_git
     update_column(:last_sync_at, Time.now)
     Communication::Website::SyncWithGitJob.perform_later(id)
   end
 
-  # Appelé en asynchrone par Communication::Website::SyncWithGitJob
   def sync_with_git_safely
     return unless git_repository.valid?
     git_repository.git_files = git_files.desynchronized

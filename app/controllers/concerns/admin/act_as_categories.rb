@@ -23,10 +23,10 @@ module Admin::ActAsCategories
       end
       if old_parent_id.present?
         old_parent = categories.find(old_parent_id)
-        trigger_category_sync(old_parent)
+        old_parent.touch
       end
       category = categories.find(params[:itemId])
-      trigger_category_sync(category) # Will sync siblings
+      category.touch
       head :ok
     end
   end
@@ -59,15 +59,6 @@ module Admin::ActAsCategories
         :id, :name, :slug, :summary, :meta_description, :language_id,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
       ]).merge(university_id: current_university.id)
-  end
-
-  def trigger_category_sync(category)
-    if category.respond_to?(:sync_with_git)
-      category.sync_with_git
-    else
-      # Indirect object (Person category, ...)
-      category.touch
-    end
   end
 
   def ensure_xhr

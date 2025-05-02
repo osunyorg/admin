@@ -2,6 +2,7 @@
 # Utilisé par :
 # - website
 # - objets directs
+# TODO iteration 11 : ça ne doit plus synchroniser, mais générer
 module WithGit
   extend ActiveSupport::Concern
 

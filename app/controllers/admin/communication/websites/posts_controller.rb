@@ -29,7 +29,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def publish
     @l10n.publish!
-    @post.sync_with_git
+    @website.sync_with_git
     redirect_back fallback_location: admin_communication_website_post_path(@post),
                   notice: t('admin.communication.website.publish.notice')
   end
@@ -58,7 +58,6 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def create
     @post.website = @website
     if @post.save
-      @post.sync_with_git
       redirect_to admin_communication_website_post_path(@post),
                   notice: t('admin.successfully_created_html', model: @post.to_s_in(current_language))
     else

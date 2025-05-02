@@ -82,7 +82,7 @@ module Communication::Website::WithConnectedObjects
 
   def connect_and_sync(indirect_object, direct_source, direct_source_type: nil)
     connect(indirect_object, direct_source, direct_source_type: direct_source_type)
-    direct_source.sync_with_git
+    direct_source.touch
   end
 
   def disconnect(indirect_object, direct_source, direct_source_type: nil)
@@ -96,7 +96,7 @@ module Communication::Website::WithConnectedObjects
 
   def disconnect_and_sync(indirect_object, direct_source, direct_source_type: nil)
     disconnect(indirect_object, direct_source, direct_source_type: direct_source_type)
-    direct_source.sync_with_git
+    direct_source.touch
     destroy_obsolete_git_files
   end
 

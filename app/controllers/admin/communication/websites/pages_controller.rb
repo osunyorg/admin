@@ -31,11 +31,10 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       page = @website.pages.find(id)
-      page.update_columns parent_id: parent_page.id,
-                          position: index + 1
+      page.update(parent_id: parent_page.id, position: index + 1)
     end
-    old_parent_page.sync_with_git
-    parent_page.sync_with_git if parent_page != old_parent_page
+    old_parent_page.touch
+    parent_page.touch if parent_page != old_parent_page
     @website.generate_automatic_menus_for_language(current_language)
   end
 
@@ -55,7 +54,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def publish
     @l10n.publish!
-    @page.sync_with_git
+    @website.sync_with_git
     redirect_back fallback_location: admin_communication_website_page_path(@page),
                   notice: t('admin.communication.website.publish.notice')
   end
