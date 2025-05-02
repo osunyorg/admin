@@ -21,6 +21,7 @@
 #  highlighted_in_showcase      :boolean          default(FALSE)
 #  in_production                :boolean          default(FALSE)
 #  in_showcase                  :boolean          default(TRUE)
+#  last_sync_at                 :datetime
 #  locked_at                    :datetime
 #  plausible_url                :string
 #  repository                   :string
@@ -186,20 +187,17 @@ class Communication::Website < ApplicationRecord
 
   # Override to follow direct objects
   def sync_with_git
+    update_column(:last_sync_at, Time.now)
     Communication::Website::SyncWithGitJob.perform_later(id)
   end
 
   # Appelé en asynchrone par Communication::Website::SyncWithGitJob
   def sync_with_git_safely
-    return unless should_sync_with_git?
-    git_files_batch.each do |git_file|
-      git_repository.add_git_file git_file
-    end
+    return unless git_repository.valid?
+    git_repository.git_files = git_files.desynchronized
+                                        .order(:desynchronized_at)
+                                        .limit(git_repository.batch_size)
     git_repository.sync!
-  end
-
-  def git_files_batch
-    git_files.batch(git_repository.batch_size)
   end
 
   def move_to_university(new_university_id)

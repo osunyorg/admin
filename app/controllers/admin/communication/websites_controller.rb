@@ -35,7 +35,13 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @events = @all_events.latest_in(current_language)
     @all_projects = @website.projects.accessible_by(current_ability)
     @projects = @all_projects.latest_in(current_language)
+    @git_files_desynchronized = @website.git_files_desynchronized
     breadcrumb
+  end
+
+  def synchronize
+    @website.sync_with_git
+    redirect_to admin_communication_website_path(@website), notice: t('admin.communication.website.synchronize.running')
   end
 
   def static

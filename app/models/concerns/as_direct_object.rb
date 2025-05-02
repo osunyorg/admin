@@ -21,8 +21,8 @@ module AsDirectObject
               class_name: 'Communication::Website::Connection',
               dependent: :destroy # When the direct object disappears all connections with the object as a source must disappear
 
-    after_save  :connect_dependencies
-    after_touch :connect_dependencies
+    after_save  :connect_dependencies, :generate_git_file
+    after_touch :connect_dependencies, :generate_git_file
   end
 
   def websites
@@ -53,4 +53,10 @@ module AsDirectObject
     )
   end
 
+  protected
+
+  def generate_git_file
+    return unless respond_to?(:git_files)
+    Communication::Website::GitFile.generate website, self
+  end
 end

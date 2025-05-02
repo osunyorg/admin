@@ -7,25 +7,12 @@ module Research::Hal
   end
 
   def self.update_from_api!
-    begin
-      pause_git_sync
-      Research::Hal::Author.find_each do |author|
-        author.import_research_hal_publications!
-      end
-      University::Person.joins(:research_hal_authors).distinct.find_each do |person|
-        person.connect_research_hal_publications!
-      end
-    ensure
-      unpause_git_sync
+    Research::Hal::Author.find_each do |author|
+      author.import_research_hal_publications!
     end
-  end
-
-  def self.pause_git_sync
-    Research::Publication.skip_callback :save, :after, :connect_and_sync_direct_sources
-  end
-
-  def self.unpause_git_sync
-    Research::Publication.set_callback :save, :after, :connect_and_sync_direct_sources
+    University::Person.joins(:research_hal_authors).distinct.find_each do |person|
+      person.connect_research_hal_publications!
+    end
   end
 
   def self.clear_queue!

@@ -8,20 +8,28 @@ class Git::Analyzer
   end
 
   def should_create?
-    !should_destroy? &&
-    git_file.previous_path.nil?
+    !should_destroy? && !exists?(git_file.current_path) && !moved?
   end
 
   def should_update?
-    !should_destroy? &&
-    (
-      git_file.previous_path != git_file.current_path ||
-      git_file.previous_sha != git_file.current_sha
-    )
+    !should_destroy? && (moved? || different?)
   end
 
   def should_destroy?
-    git_file.will_be_destroyed ||
     git_file.current_path.nil?
+  end
+
+  protected
+
+  def exists?(path)
+    repository.git_sha(path).present?
+  end
+
+  def moved?
+    (git_file.previous_path != git_file.current_path) && exists?(git_file.previous_path)
+  end
+
+  def different?
+    git_file.previous_sha != git_file.current_sha
   end
 end

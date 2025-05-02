@@ -49,12 +49,13 @@ module Communication::Website::WithGitRepository
 
   def destroy_obsolete_git_files_safely
     return unless should_sync_with_git?
-    website_git_files.find_each do |git_file|
+    git_files.find_each do |git_file|
       dependency = git_file.about
       # Here, dependency can be nil (object was previously destroyed)
       is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable_following_direct)
       if is_obsolete
-        Communication::Website::GitFile.mark_for_destruction(self, git_file)
+        git_file.mark_for_destruction!
+        git_repository.git_files << git_file
       end
     end
     git_repository.sync!
@@ -95,4 +96,7 @@ module Communication::Website::WithGitRepository
     Git::OrphanAndLayoutAnalyzer.new(self).launch
   end
 
+  def git_files_desynchronized
+    last_sync_at.nil? ? git_files.desynchronized : git_files.desynchronized_since(last_sync_at)
+  end
 end

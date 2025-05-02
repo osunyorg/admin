@@ -39,8 +39,8 @@ class Communication::Website::Agenda::CreatePeriodsJob < ApplicationJob
       object_class.skip_callback :save, :after, :clean_websites_if_necessary
     end
     localization_classes.each do |localization_class|
-      localization_class.skip_callback :save, :after, :connect_and_sync_direct_sources
-      localization_class.skip_callback :touch, :after, :connect_and_sync_direct_sources
+      localization_class.skip_callback :save, :after, :connect_to_websites
+      localization_class.skip_callback :touch, :after, :connect_to_websites
       localization_class.skip_callback :save, :after, :clean_websites_if_necessary
     end
   end
@@ -51,8 +51,8 @@ class Communication::Website::Agenda::CreatePeriodsJob < ApplicationJob
       object_class.set_callback :save, :after, :clean_websites_if_necessary
     end
     localization_classes.each do |localization_class|
-      localization_class.set_callback :save, :after, :connect_and_sync_direct_sources
-      localization_class.set_callback :touch, :after, :connect_and_sync_direct_sources
+      localization_class.set_callback :save, :after, :connect_to_websites
+      localization_class.set_callback :touch, :after, :connect_to_websites
       localization_class.set_callback :save, :after, :clean_websites_if_necessary
     end
   end

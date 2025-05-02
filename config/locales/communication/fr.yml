@@ -362,6 +362,9 @@ fr:
       communication/website/connection:
         one: Connexion
         other: Connexions
+      communication/website/git_file:
+        one: Fichier GIT
+        other: Fichiers GIT
       communication/website/git_file/layout:
         one: Surcouche HTML
         other: Surcouches HTML
@@ -497,6 +500,9 @@ fr:
         see_showcase: Voir le showcase
         subnav:
           structure: Arborescence
+        synchronize: 
+          button: Synchroniser
+          running: La synchronisation va est lancée, un peu de patience...
         technical:
           description: Tout ce qui est lié aux réglages techniques
           label: Technique

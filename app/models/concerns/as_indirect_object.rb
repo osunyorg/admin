@@ -20,8 +20,8 @@ module AsIndirectObject
     # Ce serait super de faire la ligne ci-dessous, mais Rails ne sait pas faire ça avec un objet polymorphe (direct_source)
     # has_many :direct_sources, through: :connections
 
-    after_save  :connect_and_sync_direct_sources
-    after_touch :connect_and_sync_direct_sources
+    after_save  :connect_to_websites
+    after_touch :connect_to_websites
   end
 
   def is_direct_object?
@@ -60,14 +60,10 @@ module AsIndirectObject
     dependencies
   end
 
-  # TODO iteration 11: rename properly
-  def connect_and_sync_direct_sources_safely
-    direct_sources.each do |direct_source|
-      direct_source.website.connect self, direct_source
-    end
-    websites.each do |website|
-      Communication::Website::GitFile.generate website, self
-      # Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website.id, indirect_object: self)
+  def connect_to_websites_safely
+    transaction do
+      connect_direct_sources
+      generate_git_files
     end
   end
 
@@ -81,8 +77,21 @@ module AsIndirectObject
 
   end
 
-  def connect_and_sync_direct_sources
-    Communication::Website::IndirectObject::ConnectAndSyncDirectSourcesJob.perform_later self
+  def connect_to_websites
+    Communication::Website::IndirectObject::ConnectToWebsitesJob.perform_later self
+  end
+
+  def connect_direct_sources
+    direct_sources.each do |direct_source|
+      direct_source.website.connect self, direct_source
+    end
+  end
+
+  def generate_git_files
+    websites.each do |website|
+      # Generate will skip if not needed on website
+      Communication::Website::GitFile.generate website, self
+    end
   end
 
   def add_direct_source_to_dependencies(direct_source, website, array: [])

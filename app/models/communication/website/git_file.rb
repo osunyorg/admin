@@ -28,18 +28,16 @@
 class Communication::Website::GitFile < ApplicationRecord
   # We don't include Sanitizable as this model is never handled by users directly.
 
-  attr_accessor :will_be_destroyed
-
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :about, polymorphic: true
 
   scope :desynchronized, -> { where(desynchronized: true) }
-  scope :batch, -> (batch_size) { desynchronized.order(:desynchronized_at).limit(batch_size) }
+  scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
   scope :ordered, -> { order("communication_website_git_files.desynchronized_at DESC NULLS LAST, communication_website_git_files.updated_at DESC") }
 
   before_create :set_desynchronized_at
 
-  def self.generate(website, object)
+  def self.generate(website, about)
     # All exportable objects must respond to this method
     # WithGitFiles defines it
     # AsIndirectObject does not include it, but some indirect objects have it (Person l10n, Organization l10n...)
@@ -47,25 +45,40 @@ class Communication::Website::GitFile < ApplicationRecord
     # - the website itself
     # - configs (which inherit from the website)
     # - active storage blobs
-    return unless object.try(:exportable_to_git?)
+    return unless about.try(:exportable_to_git?)
     # Permalinks must be calculated BEFORE renders
-    manage_permalink object, website
+    manage_permalink about, website
     # Blobs need to be completely analyzed, which is async
-    analyze_if_blob object
+    analyze_if_blob about
     # The git file might exist or not
-    git_file = where(website: website, about: object).first_or_create
-    git_file.generate_content
+    git_file = where(website: website, about: about).first_or_initialize
+    git_file.analyze!
   end
 
-  # Simplified version of the sync method to simply delete an obsolete git_file
-  # Not an instance method because we need to share the website's instance, and thus pass it as an argument
-  def self.mark_for_destruction(website, git_file)
-    git_file.will_be_destroyed = true
-    website.git_repository.add_git_file git_file
+  def analyze!
+    if about.try(:syncable?)
+      # If it's just initialized, it needs to be saved
+      save unless persisted?
+      # Anyway, we need to generate content
+      generate_content
+    elsif persisted?
+      # There, but not syncable, so bye bye
+      mark_for_destruction!
+    end
+  end
+
+  def mark_for_destruction!
+    return if current_path.nil? && current_sha.nil?
+    update(
+      current_path: nil, 
+      current_sha: nil,
+      desynchronized: true,
+      desynchronized_at: Time.zone.now
+    )
   end
 
   def generate_content_safely
-    return if content_up_to_date?
+    return if path_up_to_date? && content_up_to_date?
     update(
       current_content: computed_content,
       current_path: computed_path,
@@ -75,12 +88,12 @@ class Communication::Website::GitFile < ApplicationRecord
     )
   end
 
-  def generate_content
-    Communication::Website::GitFile::GenerateContentJob.perform_later(self)
+  def computed_path
+    @computed_path ||= needs_deletion? ? nil : about.git_path(website)&.gsub(/\/+/, '/')
   end
 
-  def computed_path
-    @computed_path ||= about.nil? ? nil : about.git_path(website)&.gsub(/\/+/, '/')
+  def needs_deletion?
+    about.nil? || !about.try(:syncable?)
   end
 
   def computed_filename
@@ -99,6 +112,10 @@ class Communication::Website::GitFile < ApplicationRecord
     current_content == computed_content
   end
 
+  def path_up_to_date?
+    current_path == previous_path
+  end
+
   def synchronized?
     !desynchronized
   end
@@ -113,10 +130,14 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def to_s
-    "#{current_path}"
+    current_path.nil? ? 'Nil' : "#{current_path}"
   end
 
   protected
+
+  def generate_content
+    Communication::Website::GitFile::GenerateContentJob.perform_later(self)
+  end
 
   def self.manage_permalink(object, website)
     return unless Communication::Website::Permalink.supported_by?(object)
@@ -155,6 +176,6 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def set_desynchronized_at
-    self.desynchronized_at = Time.current
+    self.desynchronized_at = Time.now
   end
 end

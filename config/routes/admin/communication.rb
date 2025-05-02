@@ -14,6 +14,7 @@ namespace :communication do
       get :production
       get :confirm_localization
       post :do_confirm_localization
+      post :synchronize
       scope 'git-analysis' do
         get '' => 'websites/git_analysis#index', as: :git_analysis
         post '' => 'websites/git_analysis#launch'

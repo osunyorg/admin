@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_02_091757) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_02_114550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -1177,6 +1177,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_091757) do
     t.uuid "locked_by_job_id"
     t.string "deuxfleurs_access_key_id"
     t.string "deuxfleurs_secret_access_key"
+    t.datetime "last_sync_at"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"

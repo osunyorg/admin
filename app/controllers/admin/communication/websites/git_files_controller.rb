@@ -16,6 +16,6 @@ class Admin::Communication::Websites::GitFilesController < Admin::Communication:
 
   def breadcrumb
     super
-    add_breadcrumb 'Git files', admin_communication_website_git_files_path
+    add_breadcrumb Communication::Website::GitFile.model_name.human(count: 2), admin_communication_website_git_files_path
   end
 end

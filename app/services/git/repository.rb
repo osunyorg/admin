@@ -1,10 +1,10 @@
 class Git::Repository
-  attr_reader :website, :commit_message, :git_files
+  attr_accessor :git_files
+  attr_reader :website
 
   def initialize(website)
     @website = website
     @git_files = []
-    @commit_message = "Sync"
   end
 
   def url
@@ -15,17 +15,11 @@ class Git::Repository
     provider.class::COMMIT_BATCH_SIZE
   end
 
-  def add_git_file(git_file)
-    return if git_files.include?(git_file)
-    puts "Adding #{git_file.current_path}"
-    git_files << git_file
-  end
-
   def sync!
     return if git_files.empty?
     puts "Start sync"
-    sync_git_files
-    mark_as_synced if provider.push(commit_message)
+    synchronize_git_files
+    refresh_git_files if provider.push('Sync from Osuny')
   end
 
   def update_theme_version!
@@ -77,18 +71,18 @@ class Git::Repository
     @analyzer ||= Git::Analyzer.new self
   end
 
-  def sync_git_files
+  def synchronize_git_files
     git_files.each do |git_file|
       analyzer.git_file = git_file
       if analyzer.should_create?
         puts "Syncing - Creating #{git_file.current_path}"
-        provider.create_file  git_file.current_path,
-                              git_file.current_content
+        provider.create_file git_file.current_path,
+                             git_file.current_content
       elsif analyzer.should_update?
         puts "Syncing - Updating #{git_file.current_path}"
-        provider.update_file  git_file.current_path,
-                              git_file.previous_path,
-                              git_file.current_content
+        provider.update_file git_file.current_path,
+                             git_file.previous_path,
+                             git_file.current_content
       elsif analyzer.should_destroy?
         puts "Syncing - Destroying #{git_file.previous_path}"
         provider.destroy_file git_file.previous_path
@@ -98,8 +92,8 @@ class Git::Repository
     end
   end
 
-  def mark_as_synced
-    puts "Marking as synced"
+  def refresh_git_files
+    puts "Refreshing git files"
     git_files.each do |git_file|
       analyzer.git_file = git_file
       if analyzer.should_destroy?
