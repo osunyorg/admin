@@ -55,6 +55,10 @@ class Communication::Website::GitFile < ApplicationRecord
     git_file.analyze!
   end
 
+  # 3 cases:
+  # - it's not there, and should not be there
+  # - it's not there, and should be
+  # - it's there, and should not be
   def analyze!
     if about.try(:syncable?)
       # If it's just initialized, it needs to be saved

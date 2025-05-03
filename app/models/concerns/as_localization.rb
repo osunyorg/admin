@@ -3,7 +3,6 @@ module AsLocalization
 
   include AsIndirectObject
   include LibreTranslatable
-  include WithDependencies
 
   included do
     belongs_to  :language

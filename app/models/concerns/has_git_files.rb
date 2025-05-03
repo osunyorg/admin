@@ -32,7 +32,6 @@ module HasGitFiles
   end
 
   def generate_git_files
-    return unless respond_to?(:git_files)
     websites.each do |website|
       # Generate will skip if not needed on website
       Communication::Website::GitFile.generate website, self

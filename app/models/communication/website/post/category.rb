@@ -65,6 +65,7 @@ class Communication::Website::Post::Category < ApplicationRecord
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
+  # TODO pourquoi cette catégorie est la seule à définir cela ?
   def exportable_to_git?
     false
   end
