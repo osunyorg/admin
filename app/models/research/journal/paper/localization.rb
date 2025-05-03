@@ -31,6 +31,7 @@
 #  fk_rails_c0d88fdf40  (university_id => universities.id)
 #
 class Research::Journal::Paper::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Contentful
   include HasGitFiles

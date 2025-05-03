@@ -1,7 +1,6 @@
 module AsLocalization
   extend ActiveSupport::Concern
 
-  include AsIndirectObject
   include LibreTranslatable
 
   included do
@@ -12,28 +11,21 @@ module AsLocalization
 
     validates :language_id, uniqueness: { scope: :about_id }
 
-    before_validation :set_university
-
-    # delegate :websites, to: :about
+    before_validation :set_university_and_website_from_about
 
     scope :in_languages, -> (language_ids) {
       where(language_id: language_ids)
     }
   end
 
-  # localizations are not connected directly to websites, they might be connected through about.
-  # so they are indirect objects
-  # def is_direct_object?
-  #   false
-  # end
-
-  # def is_indirect_object?
-  #   false
-  # end
-
-  # def delete_obsolete_connections
-  #   about.try(:delete_obsolete_connections)
-  # end
+  def for_website?(website)
+    if is_direct_object?
+      self.communication_website_id == website.id
+    else
+      website.active_language_ids.include?(language_id) &&
+      website.has_connected_object?(self)
+    end
+  end
 
   # Used by Hugo to link localizations with themselves
   # communication-website-post-25bf629a-27ef-40b6-bb61-4fd0a984e08d
@@ -49,11 +41,6 @@ module AsLocalization
   # Otherwise, comparison is ok.
   def original?
     original.nil? || (self == original)
-  end
-
-  def for_website?(website)
-    website.active_language_ids.include?(language_id) &&
-      website.has_connected_object?(self)
   end
 
   def localize_in!(language)
@@ -86,10 +73,6 @@ module AsLocalization
 
   protected
 
-  def set_university
-    self.university_id = about.university_id
-  end
-
   def localize_contents!(localization)
     blocks.ordered.each do |block|
       block.localize_for!(localization)
@@ -106,4 +89,11 @@ module AsLocalization
   # can be overwritten in model
   def localize_other_attachments(localization)
   end
+
+  def set_university_and_website_from_about
+    self.university_id = about.university_id
+    return unless respond_to? :communication_website_id
+    self.communication_website_id = about.communication_website_id
+  end
+
 end

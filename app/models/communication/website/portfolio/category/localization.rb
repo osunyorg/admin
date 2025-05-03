@@ -33,6 +33,7 @@
 #
 class Communication::Website::Portfolio::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
+  include AsDirectObject
 
   belongs_to :website,
               class_name: 'Communication::Website',

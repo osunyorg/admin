@@ -23,6 +23,7 @@
 #  fk_rails_c269f41345  (language_id => languages.id)
 #
 class University::Role::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Sanitizable
   include WithUniversity

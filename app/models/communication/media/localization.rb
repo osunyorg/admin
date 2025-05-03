@@ -26,6 +26,7 @@
 #  fk_rails_e7e1203351  (university_id => universities.id)
 #
 class Communication::Media::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Initials
   include WithUniversity

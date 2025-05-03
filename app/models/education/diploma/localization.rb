@@ -38,6 +38,7 @@
 #  fk_rails_e96c95a9cd  (university_id => universities.id)
 #
 class Education::Diploma::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Backlinkable
   include Contentful

@@ -25,6 +25,7 @@
 #  fk_rails_f7d0b8f0e9  (university_id => universities.id)
 #
 class Communication::Website::Agenda::Period::Month::Localization < ApplicationRecord
+  include AsDirectObject
   include AsLocalization
   include Permalinkable
   include HasGitFiles

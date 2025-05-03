@@ -25,6 +25,7 @@
 #  fk_rails_90d53633e4  (about_id => communication_media_collections.id)
 #
 class Communication::Media::Collection::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Initials
   include WithFeaturedImage

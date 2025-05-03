@@ -24,6 +24,7 @@
 #  fk_rails_bd6b0dc62a  (language_id => languages.id)
 #
 class Research::Thesis::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Initials
   include Sanitizable

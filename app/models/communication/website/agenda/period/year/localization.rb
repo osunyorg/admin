@@ -25,6 +25,7 @@
 #  fk_rails_e8dfb6948e  (language_id => languages.id)
 #
 class Communication::Website::Agenda::Period::Year::Localization < ApplicationRecord
+  include AsDirectObject
   include AsLocalization
   include Permalinkable
   include HasGitFiles

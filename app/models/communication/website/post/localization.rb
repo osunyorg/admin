@@ -40,6 +40,7 @@
 #  fk_rails_db7d7c515c  (university_id => universities.id)
 #
 class Communication::Website::Post::Localization < ApplicationRecord
+  include AsDirectObject
   include AsLocalization
   include Contentful
   include HasGitFiles

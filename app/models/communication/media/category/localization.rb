@@ -29,4 +29,5 @@
 #
 class Communication::Media::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
+  include AsIndirectObject
 end

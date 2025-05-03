@@ -40,6 +40,7 @@
 #  fk_rails_c6b93016c7  (language_id => languages.id)
 #
 class Communication::Website::Page::Localization < ApplicationRecord
+  include AsDirectObject
   include AsLocalization
   include AsLocalizedTree
   include Contentful

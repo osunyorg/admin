@@ -29,6 +29,7 @@
 #
 class Education::Program::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
+  include AsIndirectObject
 
   def git_path(website)
     return unless for_website?(website)

@@ -33,6 +33,7 @@
 #  fk_rails_75081bcff8  (language_id => languages.id)
 #
 class Communication::Extranet::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Initials
   include Sanitizable

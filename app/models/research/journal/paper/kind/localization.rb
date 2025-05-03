@@ -24,6 +24,7 @@
 #  fk_rails_ec1bc36169  (language_id => languages.id)
 #
 class Research::Journal::Paper::Kind::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include HasGitFiles
   include Initials

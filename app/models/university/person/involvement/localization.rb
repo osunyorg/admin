@@ -23,6 +23,7 @@
 #  fk_rails_ec0c3f2630  (about_id => university_person_involvements.id)
 #
 class University::Person::Involvement::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Sanitizable
   include WithUniversity

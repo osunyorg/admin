@@ -37,6 +37,7 @@
 #  fk_rails_bf16824595  (language_id => languages.id)
 #
 class University::Person::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Backlinkable
   include Contentful
