@@ -206,6 +206,15 @@ fr:
         social_vimeo: "Vimeo (privatif)"
         social_x: "X, ex-Twitter (privatif)"
         social_youtube: "Youtube (privatif, appartient à Google)"
+      communication/website/git_file:
+        current_content: Contenu actuel
+        current_path: Chemin actuel
+        current_sha: SHA actuel
+        desynchronized_at: Désynchronisé depuis
+        path: Chemin
+        previous_path: Chemin précédent
+        previous_sha: SHA précédent
+        status: État
       communication/website/menu:
         automatic: Automatique
         identifier: Identifiant

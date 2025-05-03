@@ -6,8 +6,8 @@ module HasGitFiles
               class_name: "Communication::Website::GitFile",
               as: :about
     
-    after_save  :generate_git_file
-    after_touch :generate_git_file
+    after_save  :generate_git_files
+    after_touch :generate_git_files
   end
 
   def git_path(website)
