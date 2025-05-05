@@ -31,6 +31,7 @@ module HasGitFiles
     path
   end
 
+  # TODO iteration 11 : vérifier si cette action est vraiment rapide et peu couteuse en RAM
   def generate_git_files
     websites.each do |website|
       # Generate will skip if not needed on website

@@ -34,6 +34,14 @@ module AsIndirectObject
     website.has_connected_object?(self)
   end
 
+  def references
+    if respond_to?(:language)
+      direct_sources_localizations_for(language_id)
+    else
+      direct_sources_localizations
+    end
+  end
+
   def direct_sources
     @direct_sources ||= begin
       # On initialise les direct_sources avec les connexions existantes
@@ -58,10 +66,22 @@ module AsIndirectObject
     dependencies
   end
 
+  def direct_sources_localizations
+    direct_sources_from_existing_connections.collect(&:localizations).flatten
+  end
+
+  def direct_sources_localizations_for(language_id)
+    direct_sources_localizations.select { |l10n| l10n.language_id == language_id }
+  end
+
   def connect_to_websites_safely
-    transaction do
-      connect_direct_sources
-      generate_git_files
+    previous_direct_sources = direct_sources_from_existing_connections
+    direct_sources.each do |direct_source|
+      direct_source.website.connect self, direct_source
+    end
+    new_direct_sources = direct_sources - previous_direct_sources
+    if new_direct_sources.any? && respond_to?(:localizations)
+      localizations.find_each(&:touch)
     end
   end
 
@@ -77,12 +97,6 @@ module AsIndirectObject
 
   def connect_to_websites
     Communication::Website::IndirectObject::ConnectToWebsitesJob.perform_later self
-  end
-
-  def connect_direct_sources
-    direct_sources.each do |direct_source|
-      direct_source.website.connect self, direct_source
-    end
   end
 
   def add_direct_source_to_dependencies(direct_source, website, array: [])

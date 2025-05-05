@@ -37,6 +37,7 @@ class University::Person::Category < ApplicationRecord
   end
 
   def references
+    super +
     people
   end
 

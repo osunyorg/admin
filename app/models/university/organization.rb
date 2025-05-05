@@ -89,6 +89,7 @@ class University::Organization < ApplicationRecord
   end
 
   def references
+    super +
     abouts_with_organization_block
   end
 
