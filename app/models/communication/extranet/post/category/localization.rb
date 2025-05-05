@@ -27,6 +27,7 @@
 #  fk_rails_ef1682777f  (about_id => communication_extranet_post_categories.id)
 #
 class Communication::Extranet::Post::Category::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Initials
   include Sanitizable

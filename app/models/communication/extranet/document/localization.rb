@@ -28,6 +28,7 @@
 #  fk_rails_f87cc9be27  (university_id => universities.id)
 #
 class Communication::Extranet::Document::Localization < ApplicationRecord
+  include AsIndirectObject
   include AsLocalization
   include Initials
   include WithPublication
