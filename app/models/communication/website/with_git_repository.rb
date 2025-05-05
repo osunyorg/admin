@@ -38,16 +38,6 @@ module Communication::Website::WithGitRepository
     Communication::Website::SyncWithGitJob.perform_later(id)
   end
 
-  def generate_git_file_for_object(object)
-    Communication::Website::GitFile.generate self, object
-  end
-
-  def generate_git_file_for_array(array)
-    array.each do |object|
-      generate_git_file_for_object(object)
-    end
-  end
-
   def sync_with_git_safely
     return unless git_repository.valid?
     git_repository.git_files = git_files.desynchronized_until(last_sync_at)
@@ -58,6 +48,16 @@ module Communication::Website::WithGitRepository
       # More than one batch, we need to requeue the job
       Communication::Website::SyncWithGitJob.perform_later(id)
     end
+  end
+
+  def generate_git_file_for_array(array)
+    array.each do |object|
+      generate_git_file_for_object(object)
+    end
+  end
+
+  def generate_git_file_for_object(object)
+    Communication::Website::GitFile.generate self, object
   end
 
   # Marque comme obsolete tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
