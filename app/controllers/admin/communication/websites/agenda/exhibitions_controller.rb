@@ -15,7 +15,6 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
 
   def publish
     @l10n.publish!
-    @website.sync_with_git
     redirect_back fallback_location: admin_communication_website_agenda_exhibition_path(@exhibition),
                   notice: t('admin.communication.website.publish.notice')
   end

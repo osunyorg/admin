@@ -41,7 +41,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def synchronize
     @website.sync_with_git
-    redirect_to admin_communication_website_path(@website), notice: t('admin.communication.website.synchronize.running')
+    redirect_to admin_communication_website_path(@website),
+                notice: t('admin.communication.website.synchronize.running')
   end
 
   def static

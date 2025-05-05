@@ -15,7 +15,6 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
 
   def publish
     @l10n.publish!
-    @website.sync_with_git
     redirect_back fallback_location: admin_communication_website_portfolio_project_path(@project),
                   notice: t('admin.communication.website.publish.notice')
   end

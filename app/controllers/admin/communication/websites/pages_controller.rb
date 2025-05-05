@@ -54,7 +54,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def publish
     @l10n.publish!
-    @website.sync_with_git
     redirect_back fallback_location: admin_communication_website_page_path(@page),
                   notice: t('admin.communication.website.publish.notice')
   end

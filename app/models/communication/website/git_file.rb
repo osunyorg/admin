@@ -140,7 +140,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def to_s
-    current_path.presence || previous_path.present? ? "Delete #{previous_path}" : "No path"
+    current_path.presence || (previous_path.present? ? "Delete #{previous_path}" : "No path")
   end
 
   protected
