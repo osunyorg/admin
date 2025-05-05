@@ -33,7 +33,6 @@
 #  fk_rails_587ccae541  (language_id => languages.id)
 #
 class Communication::Extranet::Post::Localization < ApplicationRecord
-  include AsIndirectObject
   include AsLocalization
   include Contentful
   include Initials
