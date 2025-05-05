@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SimpleNavigation::BootstrapRenderer < SimpleNavigation::Renderer::Base
   def render(item_container)
     content = '<ul class="navbar-nav">'

@@ -55,7 +55,6 @@ class Communication::Website::GitFile < ApplicationRecord
     analyze_if_blob about
     # The git file might exist or not
     git_file = where(website: website, about: about).first_or_initialize
-    puts "[generate] #{about.to_gid.to_s}"
     git_file.analyze!
   end
 
