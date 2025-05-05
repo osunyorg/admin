@@ -103,6 +103,8 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def computed_filename
     @computed_filename ||= File.basename(computed_path)
+  rescue
+    ''
   end
 
   def computed_content

@@ -82,6 +82,7 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def references
+    super + 
     [administrator, author, researcher, teacher]
   end
 

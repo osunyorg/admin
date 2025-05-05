@@ -86,9 +86,10 @@ class Research::Journal::Paper < ApplicationRecord
   end
 
   def references
-    references = people + [journal]
-    references << volume if volume.present?
-    references
+    refs = super + people
+    refs << journal
+    refs << volume if volume.present?
+    refs
   end
 
   def doi_url
