@@ -40,10 +40,14 @@ module Communication::Website::WithGitRepository
 
   def sync_with_git_safely
     return unless git_repository.valid?
-    git_repository.git_files = git_files.desynchronized
+    git_repository.git_files = git_files.desynchronized_until(last_sync_at)
                                         .order(:desynchronized_at)
                                         .limit(git_repository.batch_size)
     git_repository.sync!
+    if git_files.desynchronized_until(last_sync_at).any?
+      # More than one batch, we need to requeue the job
+      Communication::Website::SyncWithGitJob.perform_later(id)
+    end
   end
 
   # Synchronisation optimale d'objet indirect

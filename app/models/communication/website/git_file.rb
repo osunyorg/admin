@@ -33,6 +33,7 @@ class Communication::Website::GitFile < ApplicationRecord
 
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
+  scope :desynchronized_until, -> (time) { desynchronized.where('desynchronized_at <= ?', time) }
   scope :ordered, -> { order("communication_website_git_files.desynchronized_at DESC NULLS LAST, communication_website_git_files.updated_at DESC") }
 
   before_create :set_desynchronized_at
@@ -74,7 +75,7 @@ class Communication::Website::GitFile < ApplicationRecord
   def mark_for_destruction!
     return if current_path.nil? && current_sha.nil?
     update(
-      current_path: nil, 
+      current_path: nil,
       current_sha: nil,
       desynchronized: true,
       desynchronized_at: Time.zone.now
