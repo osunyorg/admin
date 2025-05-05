@@ -1,11 +1,39 @@
-#!/usr/bin/env sh
+#!/usr/bin/env ruby
 
-if gem list --no-installed --exact --silent foreman; then
-  echo "Installing foreman..."
-  gem install foreman
-fi
+ENV["PORT"] ||= "3000"
+VERBOSE = ARGV.include?("--verbose") || ARGV.include?("-v") || ENV["VERBOSE"]
+RAILS_ARGS = ARGV - [ "--verbose", "-v" ]
+PROCFILE = "Procfile.dev"
+Process.exec(*%w[bundle exec rails server], *RAILS_ARGS) unless File.exist?(PROCFILE)
 
-# Default to port 3000 if not specified
-export PORT="${PORT:-3000}"
+Signal.trap("INT") { }
 
-exec foreman start -f Procfile.dev --env /dev/null "$@"
+if system(*%w[gem list --no-installed --exact --silent foreman])
+  puts "Installing foreman..."
+  system(*%w[gem install foreman])
+end
+
+begin
+  in_r, in_w = IO.pipe
+  foreman_pid = Process.spawn(
+    *%w[foreman start -f Procfile.dev -m all=1,web=0 --env /dev/null],
+    in: in_r,
+    out: (VERBOSE ? STDOUT : "/dev/null"),
+    err: (VERBOSE ? STDOUT : "/dev/null"),
+    pgroup: true,
+  )
+  foreman_pgid = Process.getpgid(foreman_pid)
+  pid = Process.spawn(*%w[bundle exec rails server], *RAILS_ARGS)
+
+  Process.wait(pid)
+  pid = nil
+ensure
+  Process.kill("INT", -foreman_pgid)
+  Process.wait(-foreman_pgid)
+  begin
+    Process.kill("KILL", pid) if pid
+  rescue Errno::ESRCH
+  end
+  in_w.close
+  in_r.close
+end
