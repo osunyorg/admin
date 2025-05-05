@@ -31,7 +31,6 @@
 #  fk_rails_a4a4f31786  (about_id => administration_locations.id)
 #
 class Administration::Location::Localization < ApplicationRecord
-  include AsIndirectObject
   include AsLocalization
   include Contentful
   include HasGitFiles

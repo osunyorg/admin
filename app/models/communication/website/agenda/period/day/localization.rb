@@ -27,7 +27,6 @@
 #  fk_rails_a4f13fe1c0  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Period::Day::Localization < ApplicationRecord
-  include AsDirectObject
   include AsLocalization
   include WithUniversity
 

@@ -31,7 +31,6 @@
 #
 class University::Organization::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
-  include AsIndirectObject
   include WithOpenApi
 
   def git_path(website)

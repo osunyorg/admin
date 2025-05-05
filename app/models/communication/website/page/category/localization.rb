@@ -34,7 +34,6 @@
 #
 class Communication::Website::Page::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
-  include AsDirectObject
   include WithOpenApi
 
   belongs_to :website,

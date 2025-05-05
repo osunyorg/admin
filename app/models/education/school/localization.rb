@@ -25,7 +25,6 @@
 #  fk_rails_ef497f2390  (university_id => universities.id)
 #
 class Education::School::Localization < ApplicationRecord
-  include AsIndirectObject
   include AsLocalization
   include Contentful
   include HasGitFiles

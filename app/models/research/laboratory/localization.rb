@@ -25,7 +25,6 @@
 #  fk_rails_975d06fc20  (about_id => research_laboratories.id)
 #
 class Research::Laboratory::Localization < ApplicationRecord
-  include AsIndirectObject
   include AsLocalization
   include HasGitFiles
   include Initials

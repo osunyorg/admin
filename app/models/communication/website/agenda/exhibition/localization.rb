@@ -41,7 +41,6 @@
 #  fk_rails_f684b71a8c  (university_id => universities.id)
 #
 class Communication::Website::Agenda::Exhibition::Localization < ApplicationRecord
-  include AsDirectObject
   include AsLocalization
   include Contentful
   include HasGitFiles

@@ -32,7 +32,6 @@
 #  fk_rails_f071a0b35b  (about_id => research_journal_volumes.id)
 #
 class Research::Journal::Volume::Localization < ApplicationRecord
-  include AsIndirectObject
   include AsLocalization
   include HasGitFiles
   include Initials

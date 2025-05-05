@@ -27,7 +27,6 @@
 #  fk_rails_fe1c677982  (university_id => universities.id)
 #
 class Communication::Extranet::Document::Kind::Localization < ApplicationRecord
-  include AsIndirectObject
   include AsLocalization
   include Initials
   include Sluggable

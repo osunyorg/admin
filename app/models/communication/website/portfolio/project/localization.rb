@@ -38,7 +38,6 @@
 #  fk_rails_fbc92c5948  (about_id => communication_website_portfolio_projects.id)
 #
 class Communication::Website::Portfolio::Project::Localization < ApplicationRecord
-  include AsDirectObject
   include AsLocalization
   include Contentful
   include HasGitFiles

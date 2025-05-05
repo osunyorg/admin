@@ -37,7 +37,6 @@
 #  fk_rails_ba221edb00  (university_id => universities.id)
 #
 class University::Organization::Localization < ApplicationRecord
-  include AsIndirectObject
   include AsLocalization
   include Backlinkable
   include Contentful

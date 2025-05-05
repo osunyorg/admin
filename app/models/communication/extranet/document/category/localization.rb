@@ -27,7 +27,6 @@
 #  fk_rails_c87b1b79d4  (language_id => languages.id)
 #
 class Communication::Extranet::Document::Category::Localization < ApplicationRecord
-  include AsIndirectObject
   include AsLocalization
   include Initials
   include Sluggable

@@ -42,7 +42,6 @@
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include AddableToCalendar
-  include AsDirectObject
   include AsLocalization
   include AsLocalizedTree
   include Contentful
