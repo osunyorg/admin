@@ -154,6 +154,11 @@ class University::Person < ApplicationRecord
     active_storage_blobs
   end
 
+  # def references
+  #   super +
+  #   abouts_with_person_block
+  # end
+
   def full_street_address
     return nil if [address, zipcode, city].all?(&:blank?)
     [address, "#{zipcode} #{city} #{country}".strip].join(', ')
@@ -168,6 +173,16 @@ class University::Person < ApplicationRecord
   end
 
   protected
+
+  # def abouts_with_person_block
+  #   localizations = university.communication_blocks
+  #                             .template_persons
+  #                             .collect(&:about)
+  #                             .compact
+  #                             .uniq
+  #   abouts = localizations.collect(&:about).compact.uniq
+  #   localizations + abouts
+  # end
 
   def explicit_blob_ids
     [picture&.blob_id]

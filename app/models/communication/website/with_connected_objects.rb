@@ -24,16 +24,20 @@ module Communication::Website::WithConnectedObjects
     create_missing_special_pages
     initialize_menus
     sync_with_git_safely
-    destroy_obsolete_git_files_safely
+    mark_obsolete_git_files
     get_current_theme_version!
     analyse_repository!
     screenshot!
   end
 
-  # Appelé uniquement en asynchrone par Communication::Website::CleanJob
   def clean
+    Communication::Website::CleanJob.perform_later(id)
+  end
+
+  # Appelé uniquement en asynchrone par Communication::Website::CleanJob
+  def clean_safely
     delete_obsolete_connections_for_self_and_direct_sources
-    destroy_obsolete_git_files
+    mark_obsolete_git_files
   end
 
   # Le site fait le ménage de ses connexions directes uniquement
@@ -97,7 +101,7 @@ module Communication::Website::WithConnectedObjects
   def disconnect_and_sync(indirect_object, direct_source, direct_source_type: nil)
     disconnect(indirect_object, direct_source, direct_source_type: direct_source_type)
     direct_source.touch
-    destroy_obsolete_git_files
+    mark_obsolete_git_files
   end
 
   # TODO factoriser avec les extranets

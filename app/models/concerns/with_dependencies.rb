@@ -24,17 +24,12 @@ module WithDependencies
     # 1. on stocke les websites (et les sources directes si nécessaire)
     # 2. on laisse la méthode destroy normale faire son travail
     # 3. PUIS on demande aux websites stockés de nettoyer leurs connexions et leurs git files (et on synchronise les potentielles sources directes)
-    self.transaction do
-      snapshot_direct_sources = try(:direct_sources).to_a || []
+    transaction do
+      references_before_destroy = references
       website_ids_before_destroy = websites_to_clean_ids
       super
-      snapshot_direct_sources.each do |direct_source|
-        direct_source.try(:sync_with_git)
-      end
+      references_before_destroy.each &:touch
       clean_websites(website_ids_before_destroy)
-      # TODO: Actuellement, on ne nettoie pas les références
-      # Exemple : Quand on supprime un auteur, il n'est pas nettoyé dans le static de ses anciens posts.
-      # Un save du website le fera en nocturne pour l'instant.
     end
   end
 
@@ -133,7 +128,7 @@ module WithDependencies
     # Les objets directs et les objets indirects (et les websites) répondent !
     return unless respond_to?(:is_direct_object?)
     websites_ids.each do |website_id|
-      Communication::Website::CleanJob.perform_later(website_id)
+      Communication::Website.find(website_id).clean_safely
     end
   end
 

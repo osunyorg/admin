@@ -107,7 +107,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     clear_enqueued_jobs
 
     # On enlève l'about du website
-    # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site
+    # On vérifie qu'on appelle bien la méthode mark_obsolete_git_files sur le site
     assert_enqueued_with(job: Communication::Website::DestroyObsoleteGitFilesJob) do
       website_with_github.update(about: nil)
     end

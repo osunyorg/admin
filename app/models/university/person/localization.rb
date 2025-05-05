@@ -78,11 +78,12 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def dependencies
+    person.active_storage_blobs + 
     contents_dependencies
   end
 
   def references
-    super + 
+    super +
     [administrator, author, researcher, teacher]
   end
 

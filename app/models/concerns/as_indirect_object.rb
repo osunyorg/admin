@@ -66,14 +66,6 @@ module AsIndirectObject
     dependencies
   end
 
-  def direct_sources_localizations
-    direct_sources_from_existing_connections.collect(&:localizations).flatten
-  end
-
-  def direct_sources_localizations_for(language_id)
-    direct_sources_localizations.select { |l10n| l10n.language_id == language_id }
-  end
-
   def connect_to_websites_safely
     previous_direct_sources = direct_sources_from_existing_connections
     direct_sources.each do |direct_source|
@@ -86,6 +78,14 @@ module AsIndirectObject
   end
 
   protected
+
+  def direct_sources_localizations
+    direct_sources_from_existing_connections.collect(&:localizations).flatten
+  end
+
+  def direct_sources_localizations_for(language_id)
+    direct_sources_localizations.select { |l10n| l10n.language_id == language_id }
+  end
 
   def direct_sources_from_reference(reference)
     # Early-return to ignore contexts without connections (ex: extranets)

@@ -39,6 +39,8 @@ class Communication::Website::GitFile < ApplicationRecord
   before_create :set_desynchronized_at
 
   def self.generate(website, about)
+    # Do nothing about nil...
+    return if about.nil?
     # All exportable objects must respond to this method
     # HasGitFiles defines it
     # AsIndirectObject does not include it, but some indirect objects have it (Person l10n, Organization l10n...)
@@ -53,6 +55,7 @@ class Communication::Website::GitFile < ApplicationRecord
     analyze_if_blob about
     # The git file might exist or not
     git_file = where(website: website, about: about).first_or_initialize
+    puts "[generate] #{about.to_gid.to_s}"
     git_file.analyze!
   end
 
@@ -137,7 +140,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def to_s
-    current_path.nil? ? 'Nil' : "#{current_path}"
+    current_path.presence || previous_path.present? ? "Delete #{previous_path}" : "No path"
   end
 
   protected
@@ -172,10 +175,6 @@ class Communication::Website::GitFile < ApplicationRecord
   # Real sha on the git repo
   def git_sha_for(path)
     website.git_repository.git_sha path
-  end
-
-  def previous_git_sha
-    @previous_git_sha ||= git_sha_for(previous_path)
   end
 
   def git_sha

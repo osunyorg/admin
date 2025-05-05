@@ -88,20 +88,20 @@ class University::Organization < ApplicationRecord
     categories
   end
 
-  def references
-    super +
-    abouts_with_organization_block
-  end
+  # def references
+  #   super +
+  #   abouts_with_organization_block
+  # end
 
   protected
 
-  def abouts_with_organization_block
-    localizations = university.communication_blocks
-                              .template_organizations
-                              .collect(&:about)
-                              .compact
-                              .uniq
-    abouts = localizations.collect(&:about).compact.uniq
-    localizations + abouts
-  end
+  # def abouts_with_organization_block
+  #   localizations = university.communication_blocks
+  #                             .template_organizations
+  #                             .collect(&:about)
+  #                             .compact
+  #                             .uniq
+  #   abouts = localizations.collect(&:about).compact.uniq
+  #   localizations + abouts
+  # end
 end
