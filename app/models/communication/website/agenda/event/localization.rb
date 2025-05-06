@@ -136,14 +136,16 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   def hugo_for_time_slots(website)
     time_slot = event.time_slots.ordered.first
     time_slot_l10n = time_slot.localization_for(language)
-    time_slot_l10n&.hugo(website)
+    return hugo_nil if time_slot_l10n.nil?
+    time_slot_l10n.hugo(website)
   end
 
   def hugo_for_parent(website)
     first_child = event.children.published_now_in(language).ordered.first
-    return if first_child.nil?
+    return hugo_nil if first_child.nil?
     day = event.days.where(language: language, date: first_child.from_day).first
-    day&.hugo(website)
+    return hugo_nil if day.nil?
+    day.hugo(website)
   end
 
   def check_accessibility
