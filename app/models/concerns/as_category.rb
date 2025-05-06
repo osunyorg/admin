@@ -79,7 +79,7 @@ module AsCategory
 
   # We want only the objects used in the website, not a count of all objects
   def indirect_objects_in(language, website)
-    objects = direct_objects_in(language)
+    objects = descendants_and_self_objects(language)
     connected_objects = category_objects_in(website)
     intersection = objects & connected_objects
     intersection
