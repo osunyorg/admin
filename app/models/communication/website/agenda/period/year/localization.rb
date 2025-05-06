@@ -37,7 +37,8 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   delegate :value, to: :about
 
   def git_path(website)
-    return unless website.id == communication_website_id
+    return if website.id != communication_website_id || # Wrong site
+              events_count.zero? # No events
     git_path_content_prefix(website) + git_path_relative
   end
 
@@ -65,6 +66,10 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
     about.previous&.localized_in(language)
   end
 
+  def events_count
+    days.sum(:events_count)
+  end
+
   # 25
   def last_two_digits
     to_s.last(2)
@@ -76,6 +81,14 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   end
 
   protected
+
+  def days
+    Communication::Website::Agenda::Period::Day::Localization.where(
+      about_id: about.days.pluck(:id),
+      language: language,
+      university: university
+    )
+  end
 
   # Slugs are the year: "2025"
   # There are no problems with the duplication

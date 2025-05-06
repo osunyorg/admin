@@ -73,11 +73,23 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
     [year]
   end
 
+  def events_count
+    days.sum(:events_count)
+  end
+
   def to_s
     to_month_name
   end
 
   protected
+
+  def days
+    Communication::Website::Agenda::Period::Day::Localization.where(
+      about_id: about.days.pluck(:id),
+      language: language,
+      university: university
+    )
+  end
 
   # Override from Permalinkable/Sluggable
   def skip_slug_validation?
