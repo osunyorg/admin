@@ -55,7 +55,11 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   end
 
   def days
-    about.days.map { |day| day.localized_in(language) }
+    @days ||= Communication::Website::Agenda::Period::Day::Localization.where(
+      about_id: about.days.pluck(:id),
+      language: language,
+      university: university
+    )
   end
 
   def next
@@ -81,14 +85,6 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   end
 
   protected
-
-  def days
-    Communication::Website::Agenda::Period::Day::Localization.where(
-      about_id: about.days.pluck(:id),
-      language: language,
-      university: university
-    )
-  end
 
   # Slugs are the year: "2025"
   # There are no problems with the duplication

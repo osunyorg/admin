@@ -66,7 +66,11 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
   end
 
   def days
-    about.days.map { |day| day.localized_in(language) }
+    @days ||= Communication::Website::Agenda::Period::Day::Localization.where(
+      about_id: about.days.pluck(:id),
+      language: language,
+      university: university
+    )
   end
 
   def ancestors
@@ -82,14 +86,6 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
   end
 
   protected
-
-  def days
-    Communication::Website::Agenda::Period::Day::Localization.where(
-      about_id: about.days.pluck(:id),
-      language: language,
-      university: university
-    )
-  end
 
   # Override from Permalinkable/Sluggable
   def skip_slug_validation?
