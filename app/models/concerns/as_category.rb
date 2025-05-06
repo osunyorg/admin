@@ -44,19 +44,9 @@ module AsCategory
   def in_taxonomy?
     ancestors.detect { |category| category.is_taxonomy }
   end
-  
-  def objects_in(language)
-    category_objects.published_now_in(language)
-  end
 
   def count_objects_in(language, website)
-    objects = objects_in(language)
-    return 0 if objects.none?
-    if objects.first.is_indirect_object?
-      count_indirect_objects_in(objects, website)
-    else
-      objects.count
-    end
+    objects_in(language, website).count
   end
 
   # This does not depend on CanCanCan, because no one should edit some categories
@@ -66,6 +56,52 @@ module AsCategory
 
   protected
 
+  def objects_in(language, website)
+    category_objects_direct?  ? direct_objects_in(language)
+                              : indirect_objects_in(language, website)
+  end
+
+  def category_objects_direct?
+    category_object_new.is_direct_object?
+  end
+
+  def category_object_new
+    category_objects.unscoped.new
+  end
+
+  def category_object_polymorphic_name
+    category_object_new.class.polymorphic_name
+  end
+
+  def direct_objects_in(language)
+    descendants_and_self_objects(language)
+  end
+
+  # We want only the objects used in the website, not a count of all objects
+  def indirect_objects_in(language, website)
+    objects = direct_objects_in(language)
+    connected_objects = category_objects_in(website)
+    intersection = objects & connected_objects
+    intersection
+  end
+  
+  def category_objects_in(website)
+    website.connections
+           .where(indirect_object_type: category_object_polymorphic_name)
+           .collect(&:indirect_object)
+  end
+
+  def descendants_and_self_objects(language)
+    category_objects.unscoped
+                    .where(university: university)
+                    .for_category(descendants_and_self_ids)
+                    .published_now_in(language)
+  end
+
+  def descendants_and_self_ids
+    @descendants_and_self_ids ||= descendants_and_self.pluck(:id)
+  end
+
   def generated_by_programs?
     # Persons|Organizations|Programs|... categories have no links to programs
     return false unless respond_to?(:is_programs_root)
@@ -73,12 +109,4 @@ module AsCategory
     is_programs_root == true || program_id.present?
   end
 
-  # We want only the objects used in the website, not a count of all objects
-  def count_indirect_objects_in(objects, website)
-    type = objects.first.class.polymorphic_name
-    connections = website.connections.where(indirect_object_type: type)
-    objects_connected = connections.collect(&:indirect_object)
-    intersection = objects & objects_connected
-    intersection.count
-  end
 end
