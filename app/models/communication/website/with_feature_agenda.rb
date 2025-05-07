@@ -55,4 +55,12 @@ module Communication::Website::WithFeatureAgenda
     agenda_years +
     agenda_months
   end
+
+  def current_year
+    @current_year ||= agenda_period_years.find_by(value: Date.today.year)
+  end
+
+  def agenda_next_months
+    current_year.months.from_now.limit(3)
+  end
 end

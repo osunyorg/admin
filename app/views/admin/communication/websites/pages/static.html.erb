@@ -1,28 +1,22 @@
 <%
-page = @l10n.about
-language = @l10n.language
+@page = @l10n.about
+@language = @l10n.language
 %>---
 breadcrumb_title: >-
   <%= prepare_text_for_static @l10n.best_breadcrumb_title %>
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
-            about: page,
+            about: @page,
             l10n: @l10n %>
-<% if page.static_layout %>
-layout: <%= page.static_layout %>
+<% if @page.static_layout %>
+layout: <%= @page.static_layout %>
 <% end %>
-<% if page.is_a?(Communication::Website::Page::Person) %>
-has:
-  administrators: <%= @website.has_administrators? %>
-  authors: <%= @website.has_authors? %>
-  researchers: <%= @website.has_researchers? %>
-  teachers: <%= @website.has_teachers? %>
-<% end %>
-position: <%= page.position %>
-weight: <%= page.position %>
+<%= render 'admin/communication/websites/pages/static/special_page' %>
+position: <%= @page.position %>
+weight: <%= @page.position %>
 <%= render 'admin/application/categories/widget/static',
-            about: page,
+            about: @page,
             l10n: @l10n,
             categories: @website.page_categories,
             key: :pages_categories %>
@@ -43,6 +37,6 @@ children:
 header_text: >-
   <%= prepare_html_for_static @l10n.header_text %>
 <%= render 'admin/application/header_cta/static', about: @l10n %>
-<%= render 'admin/communication/websites/pages/static/section_taxonomies', page: page, language: language %>
+<%= render 'admin/communication/websites/pages/static/section_taxonomies', page: @page, language: @language %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---
