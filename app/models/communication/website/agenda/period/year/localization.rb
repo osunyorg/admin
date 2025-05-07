@@ -55,11 +55,7 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   end
 
   def days
-    @days ||= Communication::Website::Agenda::Period::Day::Localization.where(
-      about_id: about.days.pluck(:id),
-      language: language,
-      university: university
-    )
+    about.days.map { |day| day.localized_in(language) }
   end
 
   def next
@@ -71,7 +67,12 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   end
 
   def events_count
-    days.sum(:events_count)
+    unordered_days = Communication::Website::Agenda::Period::Day::Localization.where(
+      about_id: about.days.pluck(:id),
+      language: language,
+      university: university
+    )
+    unordered_days.sum(:events_count)
   end
 
   # 25
