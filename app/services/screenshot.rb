@@ -24,7 +24,7 @@ class Screenshot
         url: url,
         screenshot: true,
         meta: false,
-        waitUntil: 'load',
+        headers: { 'accept-language': 'fr;q=0.9, en;q=0.8' },
         device: 'Macbook Pro 15'
       },
       headers: {
