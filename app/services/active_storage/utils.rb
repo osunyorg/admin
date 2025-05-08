@@ -32,6 +32,19 @@ module ActiveStorage
       )
     rescue
     end
+
+    def self.attach_from_text(property, text, filename)
+      io = StringIO.new text.force_encoding('UTF-8')
+      property.attach(
+        io: io, 
+        filename: filename,
+        content_type: "text/plain; charset=utf-8"
+      )
+    end
+
+    def self.text_from_attachment(property)
+      property.download.force_encoding('UTF-8')
+    end
   end
 
   class UrlAttachable

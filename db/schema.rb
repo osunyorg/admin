@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_02_114550) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -782,10 +782,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_114550) do
     t.string "previous_sha"
     t.string "current_path"
     t.string "current_sha"
-    t.text "current_content"
     t.boolean "desynchronized", default: true
     t.datetime "desynchronized_at"
+    t.uuid "university_id"
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
+    t.index ["university_id"], name: "index_communication_website_git_files_on_university_id"
     t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
   end
 
@@ -2320,6 +2321,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_02_114550) do
   add_foreign_key "communication_website_git_file_orphans", "communication_websites"
   add_foreign_key "communication_website_git_file_orphans", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_git_files", "universities"
   add_foreign_key "communication_website_localizations", "communication_websites", column: "about_id"
   add_foreign_key "communication_website_localizations", "languages"
   add_foreign_key "communication_website_localizations", "universities"

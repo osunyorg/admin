@@ -4,7 +4,6 @@
 #
 #  id                :uuid             not null, primary key
 #  about_type        :string           not null, indexed => [about_id]
-#  current_content   :text
 #  current_path      :string
 #  current_sha       :string
 #  desynchronized    :boolean          default(TRUE)
@@ -14,22 +13,28 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  about_id          :uuid             not null, indexed => [about_type]
+#  university_id     :uuid             indexed
 #  website_id        :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_website_git_files_on_website_id  (website_id)
-#  index_communication_website_github_files_on_about    (about_type,about_id)
+#  index_communication_website_git_files_on_university_id  (university_id)
+#  index_communication_website_git_files_on_website_id     (website_id)
+#  index_communication_website_github_files_on_about       (about_type,about_id)
 #
 # Foreign Keys
 #
 #  fk_rails_8505d649e8  (website_id => communication_websites.id)
+#  fk_rails_b163dea854  (university_id => universities.id)
 #
 class Communication::Website::GitFile < ApplicationRecord
   # We don't include Sanitizable as this model is never handled by users directly.
 
+  belongs_to :university
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :about, polymorphic: true
+
+  has_one_attached :current_content_file
 
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
@@ -54,7 +59,7 @@ class Communication::Website::GitFile < ApplicationRecord
     # Blobs need to be completely analyzed, which is async
     analyze_if_blob about
     # The git file might exist or not
-    git_file = where(website: website, about: about).first_or_initialize
+    git_file = where(university: website.university, website: website, about: about).first_or_initialize
     git_file.analyze!
   end
 
@@ -84,10 +89,15 @@ class Communication::Website::GitFile < ApplicationRecord
     )
   end
 
+  def current_content
+    return '' unless current_content_file.attached?
+    ActiveStorage::Utils.text_from_attachment(current_content_file)
+  end
+
   def generate_content_safely
     return if path_up_to_date? && content_up_to_date?
+    ActiveStorage::Utils.attach_from_text(current_content_file, computed_content, 'file.html')
     update(
-      current_content: computed_content,
       current_path: computed_path,
       current_sha: computed_sha,
       desynchronized: true,
