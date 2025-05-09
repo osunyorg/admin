@@ -53,6 +53,7 @@ class University::Person < ApplicationRecord
   include Sanitizable
   include Searchable
   include Localizable
+  include MentionableByBlocks
   include WithAlumnus
   include WithBlobs
   include WithCountry
@@ -154,10 +155,10 @@ class University::Person < ApplicationRecord
     active_storage_blobs
   end
 
-  # def references
-  #   super +
-  #   abouts_with_person_block
-  # end
+  def references
+    super +
+    mentions_by_blocks
+  end
 
   def full_street_address
     return nil if [address, zipcode, city].all?(&:blank?)
@@ -174,15 +175,11 @@ class University::Person < ApplicationRecord
 
   protected
 
-  # def abouts_with_person_block
-  #   localizations = university.communication_blocks
-  #                             .template_persons
-  #                             .collect(&:about)
-  #                             .compact
-  #                             .uniq
-  #   abouts = localizations.collect(&:about).compact.uniq
-  #   localizations + abouts
-  # end
+  def blocks_mentioning_self
+    @blocks_mentioning_self ||= university.communication_blocks
+                                          .template_persons
+                                          .select { |block| block.template.persons.include?(self) }
+  end
 
   def explicit_blob_ids
     [picture&.blob_id]
