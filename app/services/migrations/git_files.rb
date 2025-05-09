@@ -12,6 +12,7 @@ class Migrations::GitFiles
   protected
 
   def self.migrate_git_file(git_file)
+    puts git_file.id
     ActiveStorage::Utils.attach_from_text(
       git_file.current_content_file, 
       git_file.computed_content, 
