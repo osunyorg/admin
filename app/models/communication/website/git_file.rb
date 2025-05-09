@@ -91,11 +91,12 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def current_content
     return '' unless current_content_file.attached?
-    ActiveStorage::Utils.text_from_attachment(current_content_file)
+    @current_content ||= ActiveStorage::Utils.text_from_attachment(current_content_file)
   end
 
   def generate_content_safely
     return if path_up_to_date? && content_up_to_date?
+    @current_content = nil
     ActiveStorage::Utils.attach_from_text(current_content_file, computed_content, 'file.html')
     update(
       current_path: computed_path,
