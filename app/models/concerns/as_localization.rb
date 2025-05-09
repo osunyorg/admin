@@ -31,9 +31,9 @@ module AsLocalization
   #   false
   # end
 
-  # def delete_obsolete_connections
-  #   about.try(:delete_obsolete_connections)
-  # end
+  def delete_obsolete_connections
+    about.try(:delete_obsolete_connections)
+  end
 
   # Used by Hugo to link localizations with themselves
   # communication-website-post-25bf629a-27ef-40b6-bb61-4fd0a984e08d
