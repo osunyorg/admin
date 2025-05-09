@@ -87,7 +87,7 @@ module WithDependencies
     # S'il y a des dépendances obsolètes, on lance le nettoyage
     # Si l'objet est dépublié, on lance aussi
     should_clean = previous_dependencies.nil? || unpublished_by_last_save? || obsolete_dependencies.any?
-    clean_all_websites if should_clean
+    clean_websites(websites_to_clean_ids) if should_clean
     # On enregistre les dépendances pour la prochaine sauvegarde
     Rails.cache.write(dependencies_cache_key, current_dependencies)
   end
@@ -128,12 +128,8 @@ module WithDependencies
     # Les objets directs et les objets indirects (et les websites) répondent !
     return unless respond_to?(:is_direct_object?)
     websites_ids.each do |website_id|
-      Communication::Website.find(website_id).clean_safely
+      Communication::Website.find(website_id).clean
     end
-  end
-
-  def clean_all_websites
-    clean_websites(websites_to_clean_ids)
   end
 
   def websites_to_clean_ids
