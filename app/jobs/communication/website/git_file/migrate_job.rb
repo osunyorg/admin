@@ -1,5 +1,7 @@
 # TODO supprimer après déploiement de l'itération 11 (mai 2025)
 class Communication::Website::GitFile::MigrateJob < ApplicationJob
+  discard_on ActiveJob::DeserializationError
+
   def perform(git_file)
     return if git_file.current_content_file.attached?
     puts git_file.id
