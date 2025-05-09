@@ -45,6 +45,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include AsLocalization
   include AsLocalizedTree
   include Contentful
+  include HasGitFiles
   include HeaderCallToAction
   include Initials
   include Permalinkable # slug_unavailable method overwrite in this file
@@ -53,7 +54,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithGitFiles
   include WithOpenApi
   include WithPublication
   include WithUniversity

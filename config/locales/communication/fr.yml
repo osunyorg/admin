@@ -206,6 +206,15 @@ fr:
         social_vimeo: "Vimeo (privatif)"
         social_x: "X, ex-Twitter (privatif)"
         social_youtube: "Youtube (privatif, appartient à Google)"
+      communication/website/git_file:
+        current_content: Contenu actuel
+        current_path: Chemin actuel
+        current_sha: SHA actuel
+        desynchronized_at: Désynchronisé depuis
+        path: Chemin
+        previous_path: Chemin précédent
+        previous_sha: SHA précédent
+        status: État
       communication/website/menu:
         automatic: Automatique
         identifier: Identifiant
@@ -362,6 +371,9 @@ fr:
       communication/website/connection:
         one: Connexion
         other: Connexions
+      communication/website/git_file:
+        one: Fichier GIT
+        other: Fichiers GIT
       communication/website/git_file/layout:
         one: Surcouche HTML
         other: Surcouches HTML
@@ -497,6 +509,9 @@ fr:
         see_showcase: Voir le showcase
         subnav:
           structure: Arborescence
+        synchronize: 
+          button: Synchroniser
+          running: La synchronisation va est lancée, un peu de patience...
         technical:
           description: Tout ce qui est lié aux réglages techniques
           label: Technique

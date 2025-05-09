@@ -111,7 +111,7 @@ module Communication::Website::Page::WithSpecialPage
       build_localization_for(language)
       l10n_created = true
     end
-    save_and_sync if l10n_created
+    save if l10n_created
   end
 
   protected

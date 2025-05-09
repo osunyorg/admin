@@ -2,6 +2,6 @@ class Communication::Website::CleanAndRebuildJob < Communication::Website::BaseJ
   queue_as :whale
 
   def execute
-    website.clean_and_rebuild
+    website.clean_and_rebuild_safely
   end
 end

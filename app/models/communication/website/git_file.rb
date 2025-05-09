@@ -2,68 +2,108 @@
 #
 # Table name: communication_website_git_files
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           not null, indexed => [about_id]
-#  previous_path :string
-#  previous_sha  :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             not null, indexed => [about_type]
-#  website_id    :uuid             not null, indexed
+#  id                :uuid             not null, primary key
+#  about_type        :string           not null, indexed => [about_id]
+#  current_path      :string
+#  current_sha       :string
+#  desynchronized    :boolean          default(TRUE)
+#  desynchronized_at :datetime
+#  previous_path     :string
+#  previous_sha      :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  about_id          :uuid             not null, indexed => [about_type]
+#  university_id     :uuid             indexed
+#  website_id        :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_website_git_files_on_website_id  (website_id)
-#  index_communication_website_github_files_on_about    (about_type,about_id)
+#  index_communication_website_git_files_on_university_id  (university_id)
+#  index_communication_website_git_files_on_website_id     (website_id)
+#  index_communication_website_github_files_on_about       (about_type,about_id)
 #
 # Foreign Keys
 #
 #  fk_rails_8505d649e8  (website_id => communication_websites.id)
+#  fk_rails_b163dea854  (university_id => universities.id)
 #
 class Communication::Website::GitFile < ApplicationRecord
   # We don't include Sanitizable as this model is never handled by users directly.
 
+  include WithContent
+
+  belongs_to :university
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :about, polymorphic: true
 
-  attr_accessor :will_be_destroyed
+  scope :desynchronized, -> { where(desynchronized: true) }
+  scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
+  scope :desynchronized_until, -> (time) { desynchronized.where('desynchronized_at <= ?', time) }
+  scope :ordered, -> { order("communication_website_git_files.desynchronized_at DESC NULLS LAST, communication_website_git_files.updated_at DESC") }
 
-  def self.sync(website, object)
+  before_create :set_desynchronized_at
+
+  def self.generate(website, about)
+    # Do nothing about nil...
+    return if about.nil?
     # All exportable objects must respond to this method
-    # WithGitFiles defines it
-    # AsDirectObject includes WithGitFiles, therefore all direct objects are exportable
-    # AsIndirectObject does not include it, but some indirect objects have it (Person, Organization...)
+    # HasGitFiles defines it
+    # AsIndirectObject does not include it, but some indirect objects have it (Person l10n, Organization l10n...)
     # Some objects need to declare that property:
     # - the website itself
     # - configs (which inherit from the website)
     # - active storage blobs
-    return unless object.try(:exportable_to_git?)
+    return unless about.try(:exportable_to_git?)
     # Permalinks must be calculated BEFORE renders
-    manage_permalink object, website
+    manage_permalink about, website
     # Blobs need to be completely analyzed, which is async
-    analyze_if_blob object
+    analyze_if_blob about
     # The git file might exist or not
-    git_file = where(website: website, about: object).first_or_create
-    # It is very important to go through this specific instance of the website,
-    # and not through each git_file.website, which would be different instances.
-    # Otherwise, we get 1 instance of git_repository per git_file,
-    # and it causes a huge amount of useless queries.
-    website.git_repository.add_git_file git_file
+    git_file = where(university: website.university, website: website, about: about).first_or_initialize
+    git_file.analyze!
   end
 
-  # Simplified version of the sync method to simply delete an obsolete git_file
-  # Not an instance method because we need to share the website's instance, and thus pass it as an argument
-  def self.mark_for_destruction(website, git_file)
-    git_file.will_be_destroyed = true
-    website.git_repository.add_git_file git_file
+  # 3 cases:
+  # - it's not there, and should not be there
+  # - it's not there, and should be
+  # - it's there, and should not be
+  def analyze!
+    if about.try(:syncable?)
+      # If it's just initialized, it needs to be saved
+      save unless persisted?
+      # Anyway, we need to generate content (from WithContent)
+      generate_content
+    elsif persisted?
+      # There, but not syncable, so bye bye
+      mark_for_destruction!
+    end
   end
 
-  def path
-    @path ||= about.nil? ? nil : about.git_path(website)&.gsub(/\/+/, '/')
+  def mark_for_destruction!
+    return if current_path.nil? && current_sha.nil?
+    update(
+      current_path: nil,
+      current_sha: nil,
+      desynchronized: true,
+      desynchronized_at: Time.zone.now
+    )
+  end
+
+  def synchronized?
+    !desynchronized
+  end
+
+  def mark_as_synced!
+    update(
+      previous_path: current_path,
+      previous_sha: current_sha,
+      desynchronized: false,
+      desynchronized_at: nil
+    )
   end
 
   def to_s
-    @to_s ||= Static.render(template_static, about, website)
+    current_path.presence || (previous_path.present? ? "Delete #{previous_path}" : "No path")
   end
 
   protected
@@ -96,11 +136,11 @@ class Communication::Website::GitFile < ApplicationRecord
     website.git_repository.git_sha path
   end
 
-  def previous_git_sha
-    @previous_git_sha ||= git_sha_for(previous_path)
-  end
-
   def git_sha
     @git_sha ||= git_sha_for(path)
+  end
+
+  def set_desynchronized_at
+    self.desynchronized_at = Time.now
   end
 end

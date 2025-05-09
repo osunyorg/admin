@@ -116,11 +116,11 @@ module Communication::Website::Agenda::Period::InPeriod
     touch_day(day_before_change)
     touch_day(day_after_change)
     years_concerned_by_change.each do |year|
-      save_and_sync_year(year)
+      save_year(year)
     end
-    save_and_sync_month(day_after_change)
+    save_month(day_after_change)
     different_months = (day_after_change&.strftime('%Y%m') != day_before_change&.strftime('%Y%m'))
-    save_and_sync_month(day_before_change) if different_months
+    save_month(day_before_change) if different_months
   end
 
   def touch_day(date)
@@ -132,15 +132,15 @@ module Communication::Website::Agenda::Period::InPeriod
     )&.touch
   end
 
-  def save_and_sync_year(year_value)
+  def save_year(year_value)
     Communication::Website::Agenda::Period::Year.find_by(
       university: university,
       website: website,
       value: year_value
-    )&.save_and_sync
+    )&.save
   end
 
-  def save_and_sync_month(date)
+  def save_month(date)
     return if date.nil?
     year = Communication::Website::Agenda::Period::Year.find_by(
       university: university,
@@ -152,7 +152,7 @@ module Communication::Website::Agenda::Period::InPeriod
       website: website,
       year: year,
       value: date.month
-    )&.save_and_sync
+    )&.save
   end
 
   def create_periods

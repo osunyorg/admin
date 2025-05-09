@@ -27,14 +27,6 @@ class University::Role::Localization < ApplicationRecord
   include Sanitizable
   include WithUniversity
 
-  after_commit :sync_with_git
-
-  def sync_with_git
-    target_l10n = about.target.localization_for(language)
-    return unless target_l10n.present?
-    target_l10n.try(:sync_with_git)
-  end
-
   def to_s
     "#{description}"
   end

@@ -38,6 +38,7 @@ class University::Organization::Category < ApplicationRecord
   end
 
   def references
+    super +
     organizations
   end
 

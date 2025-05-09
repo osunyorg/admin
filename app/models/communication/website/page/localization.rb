@@ -43,6 +43,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
   include AsLocalization
   include AsLocalizedTree
   include Contentful
+  include HasGitFiles
   include HeaderCallToAction
   include Initials
   include Permalinkable
@@ -51,7 +52,6 @@ class Communication::Website::Page::Localization < ApplicationRecord
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithGitFiles
   include WithOpenApi
   include WithPublication
   include WithUniversity

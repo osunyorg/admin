@@ -79,8 +79,6 @@ class Communication::Website::Menu::Item < ApplicationRecord
   validates :title, presence: true
   validates :about, presence: true, if: :has_about?
 
-  after_commit :sync_menu
-
   delegate :language, to: :menu
 
   def self.icon_for(kind)
@@ -170,10 +168,6 @@ class Communication::Website::Menu::Item < ApplicationRecord
     kind_post? ||
     kind_program? ||
     kind_volume?
-  end
-
-  def sync_menu
-    menu.sync_with_git if menu && !menu.destroyed?
   end
 
   def siblings

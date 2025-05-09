@@ -9,7 +9,15 @@ namespace :auto do
   desc 'Clean and rebuild every website to enable publications in the future'
   task clean_and_rebuild_websites: :environment do
     Communication::Website.find_each do |website|
-      Communication::Website::CleanAndRebuildJob.perform_later(website.id)
+      website.clean_and_rebuild
+    end
+  end
+
+  desc 'Synchronize every website'
+  task synchronize_websites: :environment do
+    Communication::Website.with_desynchronized_git_files.find_each do |website|
+      puts "Sync website #{website.original_localization.to_s}"
+      website.sync_with_git
     end
   end
 

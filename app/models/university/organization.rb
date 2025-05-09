@@ -37,6 +37,7 @@ class University::Organization < ApplicationRecord
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Localizable
   include LocalizableOrderByNameScope
+  include MentionableByBlocks
   include Sanitizable
   include Searchable
   include WithCountry
@@ -89,18 +90,15 @@ class University::Organization < ApplicationRecord
   end
 
   def references
-    abouts_with_organization_block
+    super +
+    mentions_by_blocks
   end
 
   protected
 
-  def abouts_with_organization_block
-    localizations = university.communication_blocks
-                              .template_organizations
-                              .collect(&:about)
-                              .compact
-                              .uniq
-    abouts = localizations.collect(&:about).compact.uniq
-    localizations + abouts
+  def blocks_mentioning_self
+    @blocks_mentioning_self ||= university.communication_blocks
+                                          .template_organizations
+                                          .select { |block| block.template.organizations.include?(self) }
   end
 end

@@ -27,7 +27,6 @@ module Communication::Website::Agenda::Event::WithTimeSlots
       existing_slots_ids << time_slot.id
     end
     delete_obsolete_slots(existing_slots_ids)
-    sync_with_git
   end
 
   def time_slots_to_json(language)

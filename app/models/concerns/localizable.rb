@@ -2,6 +2,8 @@ module Localizable
   extend ActiveSupport::Concern
 
   included do
+    include GeneratesGitFiles
+
     has_many    :localizations,
                 foreign_key: :about_id,
                 inverse_of: :about,

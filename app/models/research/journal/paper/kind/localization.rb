@@ -25,10 +25,10 @@
 #
 class Research::Journal::Paper::Kind::Localization < ApplicationRecord
   include AsLocalization
+  include HasGitFiles
   include Initials
   include Permalinkable
   include Sanitizable
-  include WithGitFiles
   include WithUniversity
 
   validates :title, presence: true

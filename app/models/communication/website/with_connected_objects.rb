@@ -12,8 +12,13 @@ module Communication::Website::WithConnectedObjects
     after_save :connect_about, if: :saved_change_to_about_id?
   end
 
-  # Appelé uniquement en asynchrone par Communication::Website::CleanAndRebuildJob
   def clean_and_rebuild
+    Communication::Website::CleanAndRebuildJob.perform_later(id)
+  end
+
+  # Appelé uniquement en asynchrone par Communication::Website::CleanAndRebuildJob
+  # (job nocturne une fois par jour + appels forcés depuis la partie Server)
+  def clean_and_rebuild_safely
     direct_objects_association_names.each do |association_name|
       # We use find_each to avoid loading all the objects in memory
       public_send(association_name).find_each(&:connect_dependencies)
@@ -24,20 +29,27 @@ module Communication::Website::WithConnectedObjects
     create_missing_special_pages
     initialize_menus
     sync_with_git_safely
-    destroy_obsolete_git_files_safely
+    mark_obsolete_git_files
     get_current_theme_version!
     analyse_repository!
     screenshot!
   end
 
-  # Appelé uniquement en asynchrone par Communication::Website::CleanJob
   def clean
+    Communication::Website::CleanJob.perform_later(id)
+  end
+
+  def clean_safely
     delete_obsolete_connections_for_self_and_direct_sources
-    destroy_obsolete_git_files
+    mark_obsolete_git_files
   end
 
   # Le site fait le ménage de ses connexions directes uniquement
   def delete_obsolete_connections
+    Communication::Website::DeleteObsoleteConnectionsJob.perform_later(id)
+  end
+
+  def delete_obsolete_connections_safely
     Communication::Website::Connection.delete_useless_connections(
       # On ne liste pas toutes les connexions du website,
       # mais juste les connexions pour lesquelles le site est la source.
@@ -47,20 +59,6 @@ module Communication::Website::WithConnectedObjects
       # uniquement à la connexion via about.
       about_dependencies
     )
-  end
-
-  # Le site fait son ménage de printemps
-  # Appelé
-  # - par un objet avec des connexions lorsqu'il est destroyed
-  # - par le website lui-même au changement du about
-  def delete_obsolete_connections_for_self_and_direct_sources
-    direct_source_ids_per_type_through_connections.each do |direct_source_type, direct_source_ids|
-      next if direct_source_type.nil?
-      # On récupère une liste d'objets directs d'une même classe
-      direct_sources = direct_source_type.safe_constantize.where(id: direct_source_ids)
-      # On exécute en synchrone pour chaque objet
-      direct_sources.find_each(&:delete_obsolete_connections)
-    end
   end
 
   def has_connected_object?(indirect_object)
@@ -76,13 +74,8 @@ module Communication::Website::WithConnectedObjects
     ) if should_connect?(indirect_object, direct_source)
     return unless should_connect_recursive_dependencies?(indirect_object)
     indirect_object.recursive_dependencies.each do |dependency|
-      connect_object dependency, direct_source
+      connect_object(dependency, direct_source)
     end
-  end
-
-  def connect_and_sync(indirect_object, direct_source, direct_source_type: nil)
-    connect(indirect_object, direct_source, direct_source_type: direct_source_type)
-    direct_source.sync_with_git
   end
 
   def disconnect(indirect_object, direct_source, direct_source_type: nil)
@@ -92,12 +85,7 @@ module Communication::Website::WithConnectedObjects
                       direct_source_id: direct_source.id,
                       direct_source_type: direct_source_type)
                 .delete_all
-  end
-
-  def disconnect_and_sync(indirect_object, direct_source, direct_source_type: nil)
-    disconnect(indirect_object, direct_source, direct_source_type: direct_source_type)
-    direct_source.sync_with_git
-    destroy_obsolete_git_files
+    mark_obsolete_git_files
   end
 
   # TODO factoriser avec les extranets
@@ -186,6 +174,21 @@ module Communication::Website::WithConnectedObjects
     indirect_object.respond_to?(:recursive_dependencies) &&
     # On ne suit pas les objets directs
     !indirect_object.try(:is_direct_object?)
+  end
+
+  # Le site fait son ménage de printemps.
+  # Méthode appelée par les nettoyages, toujours en arrière plan.
+  # Appelé
+  # - par un objet avec des connexions lorsqu'il est destroyed (via le clean_websites_if_necessary => CleanJob)
+  # - par le website lui-même au changement du about
+  def delete_obsolete_connections_for_self_and_direct_sources
+    direct_source_ids_per_type_through_connections.each do |direct_source_type, direct_source_ids|
+      next if direct_source_type.nil?
+      # On récupère une liste d'objets directs d'une même classe
+      direct_sources = direct_source_type.safe_constantize.where(id: direct_source_ids)
+      # On exécute en synchrone pour chaque objet
+      direct_sources.find_each(&:delete_obsolete_connections_safely)
+    end
   end
 
   # On passe par les connexions pour éviter d'analyser des objets directs qui n'ont pas d'objets indirects du tout

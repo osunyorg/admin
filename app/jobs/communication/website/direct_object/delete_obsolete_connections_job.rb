@@ -1,7 +1,9 @@
-class Communication::Website::DirectObject::SyncWithGitJob < Communication::Website::BaseJob
+
+class Communication::Website::DirectObject::DeleteObsoleteConnectionsJob < Communication::Website::BaseJob
+
   def execute
     direct_object = options.fetch(:direct_object)
-    direct_object.sync_with_git_safely if direct_object.present?
+    direct_object.delete_obsolete_connections_safely if direct_object.present?
   end
 
   protected
@@ -14,4 +16,5 @@ class Communication::Website::DirectObject::SyncWithGitJob < Communication::Webs
       website&.to_global_id.to_s
     ]
   end
+
 end

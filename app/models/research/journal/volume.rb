@@ -65,6 +65,7 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   def references
+    super +
     [journal]
   end
 end

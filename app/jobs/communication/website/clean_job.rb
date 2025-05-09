@@ -1,5 +1,5 @@
 class Communication::Website::CleanJob < Communication::Website::BaseJob
   def execute
-    website.clean
+    website.clean_safely
   end
 end

@@ -1,0 +1,29 @@
+<% content_for :title, @git_file.computed_filename %>
+
+<% content_for :title_right do %>
+  <%= osuny_published(@git_file.synchronized?) %>
+  <%= l @git_file.desynchronized_at if @git_file.desynchronized? %>
+<% end %>
+
+<div class="text-end float-end">
+  <p>
+    <%= osuny_label Communication::Website::GitFile.human_attribute_name :current_sha %><br>
+    <%= @git_file.current_sha %>
+  </p>
+  <p>
+    <%= osuny_label Communication::Website::GitFile.human_attribute_name :previous_sha %><br>
+    <%= @git_file.previous_sha %>
+  </p>
+</div>
+<div>
+<p>
+  <%= osuny_label Communication::Website::GitFile.human_attribute_name :current_path %><br>
+  <%= @git_file.current_path %><br>
+</p>
+<p>
+  <%= osuny_label Communication::Website::GitFile.human_attribute_name :previous_path %><br>
+  <%= @git_file.previous_path %>
+</p>
+</div>
+<%= osuny_label Communication::Website::GitFile.human_attribute_name :current_content %><br>
+<pre class="bg-dark text-white p-3"><%= @git_file.current_content %></pre>

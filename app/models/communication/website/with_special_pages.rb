@@ -35,7 +35,7 @@ module Communication::Website::WithSpecialPages
     )
     # Ignore useless pages (not in this website)
     return unless page.is_necessary_for_website?
-    page.save_and_sync
+    page.save
     page
   end
 

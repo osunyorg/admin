@@ -206,6 +206,15 @@ en:
         social_vimeo: "Vimeo (private)"
         social_x: "X, ex-Twitter (private)"
         social_youtube: "Youtube (private, belongs to Google)"
+      communication/website/git_file:
+        current_content: Current content
+        current_path: Current path
+        current_sha: Current SHA
+        desynchronized_at: Desynchronized at
+        path: Path
+        previous_path: Previous path
+        previous_sha: Previous SHA
+        status: Status
       communication/website/menu:
         automatic: Automatic
         identifier: Identifier
@@ -353,9 +362,18 @@ en:
       communication/website/agenda/exhibition:
         one: Exhibition
         other: Exhibitions
+      communication/website/agenda/period/month:
+        one: Month
+        other: Months
+      communication/website/agenda/period/year:
+        one: Year
+        other: Years
       communication/website/connection:
         one: Connection
         other: Connections
+      communication/website/git_file:
+        one: GIT file
+        other: GIT files
       communication/website/git_file/layout:
         one: HTML overlay
         other: HTML overlays
@@ -491,6 +509,9 @@ en:
         see_showcase: See showcase
         subnav:
           structure: Structure
+        synchronize: 
+          button: Synchronize
+          running: Synchronization launched, please be patient...
         technical:
           description: Everything related to technical settings
           label: Technical

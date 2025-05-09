@@ -89,6 +89,7 @@ class Education::Program < ApplicationRecord
   end
 
   def references
+    super +
     schools +
     siblings +
     descendants +

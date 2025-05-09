@@ -17,10 +17,8 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       item = @menu.items.find(id)
-      item.update_columns parent_id: parent_id,
-                          position: index + 1
+      item.update(parent_id: parent_id, position: index + 1)
     end
-    @menu.sync_with_git
   end
 
   def show

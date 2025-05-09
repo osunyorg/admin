@@ -43,6 +43,7 @@
 class Communication::Website::Agenda::Exhibition::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
+  include HasGitFiles
   include HeaderCallToAction
   include Initials
   include Permalinkable
@@ -52,7 +53,6 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   include WithBlobs
   include WithCal
   include WithFeaturedImage
-  include WithGitFiles
   include WithOpenApi
   include WithPublication
   include WithUniversity

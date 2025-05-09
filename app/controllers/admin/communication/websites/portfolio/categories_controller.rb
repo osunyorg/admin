@@ -30,7 +30,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
 
   def create
     @category.website = @website
-    if @category.save_and_sync
+    if @category.save
       redirect_to admin_communication_website_portfolio_category_path(@category),
                   notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
@@ -40,7 +40,7 @@ class Admin::Communication::Websites::Portfolio::CategoriesController < Admin::C
   end
 
   def update
-    if @category.update_and_sync(category_params)
+    if @category.update(category_params)
       redirect_to admin_communication_website_portfolio_category_path(@category),
                   notice: t('admin.successfully_updated_html', model: @category.to_s_in(current_language))
     else

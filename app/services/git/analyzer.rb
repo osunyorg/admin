@@ -8,71 +8,28 @@ class Git::Analyzer
   end
 
   def should_create?
-    !should_destroy? &&
-    !exists_on_git? &&
-    (
-      !synchronized_with_git? ||
-      previous_path.nil? ||
-      previous_sha.nil?
-    )
+    !should_destroy? && !exists?(git_file.current_path) && !moved?
   end
 
   def should_update?
-    !should_destroy? &&
-    (
-      previous_path != path ||
-      previous_sha != computed_sha
-    )
+    !should_destroy? && (moved? || different?)
   end
 
   def should_destroy?
-    will_be_destroyed ||
-    path.nil?
-  end
-
-  def commit_message
-    git_file.about.nil? ? "[#{ git_file.class.name }] #{ action } Git file"
-                        : "[#{ git_file.about.class.name }] #{ action } #{ git_file.about }"
+    git_file.current_path.nil?
   end
 
   protected
 
-  def action
-    should_destroy? ? "Destroy" : "Save"
+  def exists?(path)
+    repository.git_sha(path).present?
   end
 
-  def path
-    git_file.path
+  def moved?
+    (git_file.previous_path != git_file.current_path) && exists?(git_file.previous_path)
   end
 
-  def computed_sha
-    repository.computed_sha(git_file.to_s)
+  def different?
+    git_file.previous_sha != git_file.current_sha
   end
-
-  def will_be_destroyed
-    git_file.will_be_destroyed
-  end
-
-  def previous_path
-    git_file.previous_path
-  end
-
-  def previous_sha
-    repository.previous_sha(git_file)
-  end
-
-  def exists_on_git?
-    repository.git_sha(git_file.previous_path).present? ||  # The file exists where it was last time
-    (
-      git_file.previous_path.nil? &&                        # Never saved in the database
-      repository.git_sha(git_file.path).present?            # but it exists in the git repo
-    )
-  end
-
-  def synchronized_with_git?
-    exists_on_git? &&                                           # File exists
-    git_file.previous_path == git_file.path &&                  # at the same place
-    repository.git_sha(git_file.path) == previous_sha  # with the same content
-  end
-
 end

@@ -14,6 +14,7 @@ namespace :communication do
       get :production
       get :confirm_localization
       post :do_confirm_localization
+      post :synchronize
       scope 'git-analysis' do
         get '' => 'websites/git_analysis#index', as: :git_analysis
         post '' => 'websites/git_analysis#launch'
@@ -30,6 +31,7 @@ namespace :communication do
       end
     end
     resources :permalinks, controller: 'websites/permalinks', only: [:create, :destroy]
+    resources :git_files, controller: 'websites/git_files', only: [:index, :show]
     namespace :page, path: 'pages' do
       resources :categories, controller: '/admin/communication/websites/pages/categories' do
         collection do

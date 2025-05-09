@@ -56,10 +56,6 @@ class Administration::Location < ApplicationRecord
     schools
   end
 
-  def references
-    []
-  end
-
   # WebsitesLinkable
 
   def has_administrators?

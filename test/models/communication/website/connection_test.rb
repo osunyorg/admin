@@ -88,7 +88,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # Suppression d'un objet indirect qui a en dépendance un autre objet utilisé ailleurs (dans le cas précédent si PA était utilisé par une autre source)
     # On supprime le bloc qui contient PA : -4 (le bloc, PA, sa localisation et le bloc Organisations de PA)
-    # On ne supprime pas Noesya, toujours connectée via le block 3)
+    # On ne supprime pas noesya, toujours connectée via le block 3)
     assert_difference -> { Communication::Website::Connection.count } => -4 do
       assert_enqueued_with(job: Communication::Website::CleanJob, args: [page_l10n.communication_website_id]) do
         page_l10n.blocks.find_by(position: 2).destroy
@@ -107,23 +107,23 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
     block.save
 
-    # Noesya est connectée via les 2 pages, donc 2 connexions
+    # noesya est connectée via les 2 pages, donc 2 connexions
     assert_equal 2, page_l10n.website.connections.where(indirect_object: noesya).count
 
     # On supprime la 2e page, donc ses 13 connexions à savoir :
     # - La localisation de la page (1)
-    # - Le block Organisations et Noesya (2)
-    # - Les 10 connexions via Noesya, à savoir :
-    #   - La localisation de Noesya (1)
-    #   - La catégorie de Noesya et sa localisation (2)
+    # - Le block Organisations et noesya (2)
+    # - Les 10 connexions via noesya, à savoir :
+    #   - La localisation de noesya (1)
+    #   - La catégorie de noesya et sa localisation (2)
     #   - Le block Personnes avec Olivia, sa localisation et son block Organisations (4)
-    #     note : Pas Noesya car la connexion existe déjà plus haut
+    #     note : Pas noesya car la connexion existe déjà plus haut
     #   - Le block Personnes avec Arnaud et sa localisation (3)
     assert_difference -> { Communication::Website::Connection.count } => -13 do
       second_page_l10n.about.destroy
+      perform_enqueued_jobs
     end
-
-    # Noesya est toujours connectée via la 1re page
+    # noesya est toujours connectée via la 1re page
     assert_equal 1, page_l10n.website.connections.where(indirect_object: noesya).count
   end
 
@@ -164,14 +164,34 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       perform_enqueued_jobs
     end
     assert_no_difference('Communication::Website::Connection.count') do
-      website_with_github.reload.delete_obsolete_connections_for_self_and_direct_sources
+      website_with_github.reload.send(:delete_obsolete_connections_for_self_and_direct_sources)
     end
   end
 
   private
 
+  # Méthode bien pratique pour débugger :)
+  def debug_connections(direct_source = nil)
+    list = Communication::Website::Connection.all
+    list = list.where(direct_source: direct_source) if direct_source.present?
+    list.reload.map do |connection| 
+      gid = connection.indirect_object.to_gid.to_s
+      if connection.indirect_object.respond_to?(:original_localization)
+        name = connection.indirect_object.original_localization.to_s
+      else
+        name = connection.indirect_object.to_s
+      end
+      [gid, "  #{name}", "  #{connection.direct_source.to_gid.to_s}"]
+    end
+  end
+
   def setup_page_connections(page_l10n)
     page = page_l10n.about
+    homepage = page.parent
+    homepage.save # Setup home connections
+
+    sibling_page = communication_website_pages(:test_page)
+    sibling_page.save # Setup sibling_page connections
 
     # On connecte la localisation à la page : +1
     assert_difference -> { page.connections.count } => 1 do
@@ -226,13 +246,13 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     #     - PA
     #       - PA Localization
     #   - Block Organisations
-    #     - Noesya
-    #       - Noesya Localization
+    #     - noesya
+    #       - noesya Localization
     #         - Block Personnes
     #           - Olivia
     #             - Olivia Localization
     #               - Block Organisations
-    #                 - Noesya
+    #                 - noesya
     #         - Block Personnes
     #           - Arnaud
     #             - Arnaud Localization

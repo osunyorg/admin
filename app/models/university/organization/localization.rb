@@ -40,13 +40,13 @@ class University::Organization::Localization < ApplicationRecord
   include AsLocalization
   include Backlinkable
   include Contentful
+  include HasGitFiles
   include Initials
   include Permalinkable
   include Sanitizable
   include Shareable
   include WithBlobs
   include WithFeaturedImage
-  include WithGitFiles
   include WithOpenApi
   include WithUniversity
 
