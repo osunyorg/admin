@@ -170,10 +170,27 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
   private
 
+  def debug_connections(direct_source = nil)
+    list = Communication::Website::Connection.all
+    list = list.where(direct_source: direct_source) if direct_source.present?
+    list.reload.map do |connection| 
+      gid = connection.indirect_object.to_gid.to_s
+      if connection.indirect_object.respond_to?(:original_localization)
+        name = connection.indirect_object.original_localization.to_s
+      else
+        name = connection.indirect_object.to_s
+      end
+      [gid, "  #{name}", "  #{connection.direct_source.to_gid.to_s}"]
+    end
+  end
+
   def setup_page_connections(page_l10n)
     page = page_l10n.about
     homepage = page.parent
     homepage.save # Setup home connections
+
+    sibling_page = communication_website_pages(:test_page)
+    sibling_page.save
 
     # On connecte la localisation à la page : +1
     assert_difference -> { page.connections.count } => 1 do
