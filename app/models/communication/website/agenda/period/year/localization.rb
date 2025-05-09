@@ -37,7 +37,8 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   delegate :value, to: :about
 
   def git_path(website)
-    return unless website.id == communication_website_id
+    return if website.id != communication_website_id || # Wrong site
+              events_count.zero? # No events
     git_path_content_prefix(website) + git_path_relative
   end
 
@@ -63,6 +64,15 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
 
   def previous
     about.previous&.localized_in(language)
+  end
+
+  def events_count
+    unordered_days = Communication::Website::Agenda::Period::Day::Localization.where(
+      about_id: about.days.pluck(:id),
+      language: language,
+      university: university
+    )
+    unordered_days.sum(:events_count)
   end
 
   # 25

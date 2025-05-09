@@ -96,7 +96,7 @@ class Communication::Block::Template::Category < Communication::Block::Template:
   end
 
   def selected_categories_free
-    only_categories_used(available_categories.out_of_taxonomy.ordered(language))
+    only_categories_used(available_categories.out_of_taxonomy.root.ordered(language))
   end
 
   def only_categories_used(categories)

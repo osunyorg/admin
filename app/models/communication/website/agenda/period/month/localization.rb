@@ -73,6 +73,15 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
     [year]
   end
 
+  def events_count
+    unordered_days = Communication::Website::Agenda::Period::Day::Localization.where(
+      about_id: about.days.pluck(:id),
+      language: language,
+      university: university
+    )
+    unordered_days.sum(:events_count)
+  end
+
   def to_s
     to_month_name
   end
