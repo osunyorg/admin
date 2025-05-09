@@ -76,7 +76,6 @@ module Communication::Website::WithConnectedObjects
     indirect_object.recursive_dependencies.each do |dependency|
       connect_object(dependency, direct_source)
     end
-    direct_source.touch
   end
 
   def disconnect(indirect_object, direct_source, direct_source_type: nil)
@@ -86,7 +85,6 @@ module Communication::Website::WithConnectedObjects
                       direct_source_id: direct_source.id,
                       direct_source_type: direct_source_type)
                 .delete_all
-    direct_source.touch
     mark_obsolete_git_files
   end
 

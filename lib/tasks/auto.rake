@@ -15,9 +15,9 @@ namespace :auto do
 
   desc 'Synchronize every website'
   task synchronize_websites: :environment do
-    Communication::Website.find_each do |website|
-      next if website.git_files.desynchronized.none?
-      Communication::Website::SyncWithGitJob.perform_later(website.id)
+    Communication::Website.with_desynchronized_git_files.find_each do |website|
+      puts "Sync website #{website.original_localization.to_s}"
+      website.sync_with_git
     end
   end
 

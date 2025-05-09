@@ -22,7 +22,9 @@ module Communication::Website::WithGitRepository
     after_save :mark_obsolete_git_files, if: :should_clean_on_git?
 
     scope :with_repository, -> { where.not(repository: [nil, '']) }
-
+    scope :with_desynchronized_git_files, -> {
+      joins(:website_git_files).merge(Communication::Website::GitFile.desynchronized).distinct
+    }
   end
 
   def git_repository
