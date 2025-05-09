@@ -121,7 +121,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def computed_content
-    @computed_content ||= Static.render(template_static, about, website)
+    @computed_content ||= (about.nil? ? nil : Static.render(template_static, about, website))
   end
 
   def computed_sha
