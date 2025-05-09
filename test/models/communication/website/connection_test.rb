@@ -164,7 +164,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       perform_enqueued_jobs
     end
     assert_no_difference('Communication::Website::Connection.count') do
-      website_with_github.reload.delete_obsolete_connections_for_self_and_direct_sources
+      website_with_github.reload.send(:delete_obsolete_connections_for_self_and_direct_sources)
     end
   end
 
@@ -190,7 +190,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     homepage.save # Setup home connections
 
     sibling_page = communication_website_pages(:test_page)
-    sibling_page.save
+    sibling_page.save # Setup sibling_page connections
 
     # On connecte la localisation à la page : +1
     assert_difference -> { page.connections.count } => 1 do
