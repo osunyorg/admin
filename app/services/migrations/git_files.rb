@@ -29,7 +29,9 @@ class Migrations::GitFiles
     else
       git_file.update(
         current_path: git_file.computed_path,
-        current_sha: git_file.computed_sha
+        current_sha: git_file.computed_sha,
+        desynchronized: false,
+        desynchronized_at: nil
       )
     end
   end
