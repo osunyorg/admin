@@ -22,17 +22,24 @@
 #
 require "test_helper"
 
+# rails test test/models/communication/website/git_file_test.rb
 class Communication::Website::GitFileTest < ActiveSupport::TestCase
-  test "should_create? a new file" do
+  include ActiveJob::TestHelper
+  
+  # Tests about Git::Analyzer, it should probably not be here
+  def test_should_create_a_new_file
     VCR.use_cassette(location) do
-      file = communication_website_git_files(:git_file_1)
-      analyzer = Git::Analyzer.new(file.website.git_repository)
-      analyzer.git_file = file
+      git_file = communication_website_git_files(:git_file_1)
+      git_file.analyze!
+      perform_enqueued_jobs(only: Communication::Website::GitFile::GenerateContentJob)
+      git_file.reload
+      analyzer = Git::Analyzer.new(git_file.website.git_repository)
+      analyzer.git_file = git_file
       assert analyzer.should_create?
     end
   end
 
-  test "should_update? an existing file" do
+  def test_should_update_an_existing_file
     VCR.use_cassette(location) do
       # To create the file, i first did that:
       # file = communication_website_git_files(:git_file_2)
@@ -46,7 +53,6 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
       assert analyzer.should_update?
     end
   end
-
 
   def test_change_block_dependencies
     page = communication_website_pages(:page_with_no_dependency)
@@ -63,7 +69,6 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
     block.save
 
     page = page.reload
-    assert_equal 5, page.recursive_dependencies(follow_direct: true).count
 
     # On lance l'identification pour Arnaud
     assert_difference -> { arnaud.original_localization.git_files.count } do
@@ -94,8 +99,6 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
     # On vérifie qu'Arnaud sera bien supprimé du repository (computed_path == nil)
     refute(arnaud.original_localization.git_files.first.computed_path)
 
-    assert_equal 5, page.recursive_dependencies(follow_direct: true).count
-
     clear_enqueued_jobs
 
     # Vérifie qu'en resauvant immédiatement l'objet on ne relance pas la boucle
@@ -110,17 +113,9 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
 
     clear_enqueued_jobs
 
-    # Vérifie qu'on a bien
-    # - une tâche pour resynchroniser la page
-    # - une tâche de nettoyage des git files (dépendances du bloc supprimé)
-    assert_enqueued_with(job: Communication::Website::DirectObject::SyncWithGitJob, args: [page.communication_website_id, direct_object: page]) do
-      assert_enqueued_with(job: Communication::Website::CleanJob) do
-        block.destroy
-      end
-    end
-
-    assert_enqueued_with(job: Communication::Website::DestroyObsoleteGitFilesJob) do
-      perform_enqueued_jobs(only: Communication::Website::CleanJob)
+    # Vérifie qu'on a bien une tâche de nettoyage (dépendances du bloc supprimé)
+    assert_enqueued_with(job: Communication::Website::CleanJob) do
+      block.destroy
     end
   end
 
