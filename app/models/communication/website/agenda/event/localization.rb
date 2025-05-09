@@ -115,12 +115,9 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def hugo(website)
     if event.time_slots.any?
-      time_slot = event.time_slots.ordered.first
-      time_slot_l10n = time_slot.localization_for(language)
-      time_slot_l10n&.hugo(website)
-    elsif event.days.any?
-      day = event.days.where(language: language).ordered.first
-      day&.hugo(website)
+      hugo_for_time_slots(website)
+    elsif event.kind_parent?
+      hugo_for_parent(website)
     else
       super(website)
     end
@@ -135,6 +132,21 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   end
 
   protected
+
+  def hugo_for_time_slots(website)
+    time_slot = event.time_slots.ordered.first
+    time_slot_l10n = time_slot.localization_for(language)
+    return hugo_nil if time_slot_l10n.nil?
+    time_slot_l10n.hugo(website)
+  end
+
+  def hugo_for_parent(website)
+    first_child = event.children.published_now_in(language).ordered.first
+    return hugo_nil if first_child.nil?
+    day = event.days.where(language: language, date: first_child.from_day).first
+    return hugo_nil if day.nil?
+    day.hugo(website)
+  end
 
   def check_accessibility
     accessibility_merge_array blocks
