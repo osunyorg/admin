@@ -170,6 +170,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
   private
 
+  # Méthode bien pratique pour débugger :)
   def debug_connections(direct_source = nil)
     list = Communication::Website::Connection.all
     list = list.where(direct_source: direct_source) if direct_source.present?
