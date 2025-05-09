@@ -34,6 +34,13 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     page = page.reload
     assert_equal 5, page.recursive_dependencies(follow_direct: true).count
 
+    # On lance l'identification pour Arnaud
+    assert_difference -> { arnaud.original_localization.git_files.count } do
+      perform_enqueued_jobs(only: Communication::Website::GitFile::IdentifyJob)
+    end
+    # On vérifie qu'Arnaud sera bien écrit quelque part dans le repository
+    assert(arnaud.original_localization.git_files.first.computed_path)
+    
     clear_enqueued_jobs
 
     # On modifie le target du block
@@ -42,15 +49,19 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
       block.save
     end
 
+    # On lance l'identification pour Olivia
+    assert_difference -> { olivia.original_localization.git_files.count } do
+      perform_enqueued_jobs(only: Communication::Website::GitFile::IdentifyJob)
+    end
+
     # On vérifie qu'on enqueue le job qui clean les websites
     assert_enqueued_with(job: Communication::Website::CleanJob) do
       perform_enqueued_jobs(only: Dependencies::CleanWebsitesIfNecessaryJob)
     end
-
-    # On vérifie qu'on enqueue le job qui destroy les obsolete git files
-    assert_enqueued_with(job: Communication::Website::DestroyObsoleteGitFilesJob) do
-      perform_enqueued_jobs(only: Communication::Website::CleanJob)
-    end
+      
+    perform_enqueued_jobs(only: Communication::Website::CleanJob)
+    # On vérifie qu'Arnaud sera bien supprimé du repository (computed_path == nil)
+    refute(arnaud.original_localization.git_files.first.computed_path)
 
     assert_equal 5, page.recursive_dependencies(follow_direct: true).count
 

@@ -95,7 +95,7 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   def generate_content_safely
-    return if path_up_to_date? && content_up_to_date?
+    return if up_to_date?
     @current_content = nil
     ActiveStorage::Utils.attach_from_text(current_content_file, computed_content, 'file.html')
     update(
@@ -128,12 +128,16 @@ class Communication::Website::GitFile < ApplicationRecord
     website.git_repository.computed_sha(computed_content)
   end
 
-  def content_up_to_date?
-    current_content == computed_content
+  def up_to_date?
+    path_up_to_date? && content_up_to_date?
   end
 
   def path_up_to_date?
     current_path == previous_path
+  end
+
+  def content_up_to_date?
+    current_content == computed_content
   end
 
   def synchronized?
