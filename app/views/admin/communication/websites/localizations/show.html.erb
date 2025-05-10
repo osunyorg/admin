@@ -34,6 +34,7 @@
   </div>
 
   <% content_for :action_bar_right do %>
+    <%= cancel [:admin, @localization] %>
     <%= submit f %>
   <% end %>
 <% end %>

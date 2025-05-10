@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @organization %>
+  <%= button_advanced do %>
+    <%= destroy_link @organization %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-4">
     <%= osuny_panel t('university.organization.logo') do %>
@@ -30,7 +37,7 @@
   <div class="col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n %>
 
-    <%= osuny_panel University::Organization.human_attribute_name('text') do %>
+    <%= osuny_panel University::Organization::Localization.human_attribute_name('text') do %>
       <%= @l10n.text.to_s.html_safe %>
     <% end if strip_tags(@l10n.text.to_s).present? %>
 
@@ -81,11 +88,6 @@
   </div>
 </div>
 
-<% content_for :action_bar_left do %>
-  <%= destroy_link @organization %>
+<% content_for :server_admin_only do %>
   <%= static_link static_admin_university_organization_path(@organization) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @organization %>
 <% end %>

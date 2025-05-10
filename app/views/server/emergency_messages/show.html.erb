@@ -1,5 +1,16 @@
 <% content_for :title, @emergency_message %>
 
+<% content_for :title_right do %>
+  <% unless @emergency_message.delivered? %>
+    <%= link_to t('edit'), [:edit, :server, @emergency_message], class: button_classes %>
+    <%= link_to t('server_admin.emergency_messages.deliver'), 
+                [:deliver, :server, @emergency_message], 
+                method: :post,
+                data: { confirm: t('please_confirm') },
+                class: button_classes %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-8">
     <h2><%= t('server_admin.emergency_messages.content') %></h2>
@@ -29,14 +40,3 @@
     <p><%= t('server_admin.emergency_messages.users', count: count) %></p>
   </div>
 </div>
-
-<% content_for :action_bar_right do %>
-  <% unless @emergency_message.delivered? %>
-    <%= link_to t('edit'), [:edit, :server, @emergency_message], class: button_classes %>
-    <%= link_to t('server_admin.emergency_messages.deliver'), 
-                 [:deliver, :server, @emergency_message], 
-                method: :post,
-                data: { confirm: t('please_confirm') },
-                class: button_classes %>
-  <% end %>
-<% end %>

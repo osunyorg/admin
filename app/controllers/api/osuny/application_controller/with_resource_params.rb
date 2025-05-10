@@ -11,9 +11,12 @@ module Api::Osuny::ApplicationController::WithResourceParams
     l10ns_attributes = base_params.delete(:localizations)
     base_params[:localizations_attributes] = []
     l10ns_attributes.each do |language_iso_code, l10n_params|
-      l10n_permitted_params = l10n_params.permit(*l10n_permitted_keys)
+      language = Language.find_by(iso_code: language_iso_code)
+      next unless language.present?
 
-      l10n_permitted_params[:language_id] = Language.find_by(iso_code: language_iso_code)&.id
+      l10n_permitted_params = l10n_params
+                                .permit(*l10n_permitted_keys)
+                                .merge({ language_id: language.id })
 
       existing_resource_l10n = resource.localizations.find_by(
         migration_identifier: l10n_permitted_params[:migration_identifier],
@@ -53,5 +56,9 @@ module Api::Osuny::ApplicationController::WithResourceParams
       filename: File.basename(featured_image_uri.path),
       metadata: { source_url: featured_image_url }
     }
+  end
+
+  def nested_blocks_params
+    { blocks: [:migration_identifier, :template_kind, :title, :position, :published, :html_class, :_destroy, data: {}] }
   end
 end

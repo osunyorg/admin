@@ -45,6 +45,8 @@ en:
     warnings:
       one: '1 insight'
       other: '%{count} insights'
+  active_hashcash:
+    error_label: Hashcash verification failed. Please try again.
   activerecord:
     attributes:
       emergency_message:
@@ -73,6 +75,7 @@ en:
         language: Favourite language
         last_name: Last name
         mobile_phone: Mobile phone
+        optin_newsletter: I would like to receive updates by email regarding developments on Osuny (invitation to community assemblies once a month, summary once a quarter).
         person: Person
         picture: Profile picture
         picture_url: Profile picture Url
@@ -89,6 +92,8 @@ en:
           website_manager: Website manager
         websites_to_manage: Websites managed
     errors:
+      messages:
+        invalid_year: The year must be a 4-digit number.
       models:
         emergency_message:
           one: Emergency message
@@ -120,6 +125,8 @@ en:
   admin:
     advanced_settings: Advanced settings
     attachment_not_available: Attachment not available
+    categories:
+      cant_move_taxonomy_here: Can't move a taxonomy in another category
     chronicles:
       read_all: See all chronicles
       read_more: Learn more
@@ -150,7 +157,7 @@ en:
     password_hint: Leave blank if you do not wish to change the password.
     pending_tasks:
       tasks: Background tasks pending
-      text_html: "Osuny helps you with digital sufficiency.<br><br>The background execution of most tasks on the Osuny platform helps to reduce the carbon footprint of digital technology, by pre-calculating what can be.<br><br>This can cause a delay before your changes are visible on your websites."
+      text_html: "Osuny guides you towards digital sufficiency.<br><br>The mutualized background execution of most tasks on the Osuny platform helps reducing the carbon footprint of digital technology, by pre-computing what can be.<br><br>This can cause a delay before your changes are visible on your websites."
       what_is_it: What is it?
     search:
       buttons:
@@ -181,6 +188,12 @@ en:
       already_confirmed: "Your account has already been confirmed."
       not_locked_html: '<i>%{model}</i> was not locked.'
       pending_confirmation_html: "Your account has not been <b>confirmed</b> yet. You have received an e-mail with a confirmation link. If you don't confirm, your account will stop working after <b>%{duration}</b>. If you did not received the email check your spam folder or click on the following link."
+      optin_not_set:
+        button_allow_optin: Allow sending
+        button_disallow_optin: Deny sending
+        text_html: "You have not defined your choice about communications by email yet.<br>If you allow it, you will receive the invitations to the Osuny community assemblies once per month, and summaries about Osuny updates once per quarter max. You will always be able to change this setting in your profile."
+        title: Communication settings
+        updated: Your settings have been updated.
       successfully_unlocked_html: "<i>%{model}</i> was successfully unlocked."
     will_be_published_html: "<i>%{model}</i> will soon be published."
   batch_selectable:
@@ -191,6 +204,7 @@ en:
     children: Sub-categories
     featured_image: Featured image
     featured_image_alt: Alternative text
+    free: Free categories (without taxonomy)
     is_taxonomy: Is a taxonomy (a family of categories)?
     name: Name
     parent: Parent category
@@ -396,9 +410,6 @@ en:
   inactivity_alert: "It seems you have been away a little bit too long. Could you please retry?"
   internationalization:
     label: Internationalization
-  languages:
-    en: English
-    fr: French
   legal: Legal
   loading: Loading...
   localization:

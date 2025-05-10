@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @thesis %>
+  <%= button_advanced do %>
+    <%= destroy_link @thesis %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-xl-6">
     <%= simple_format @l10n.abstract %>
@@ -29,11 +36,3 @@
                                 admin_research_researcher_path(@thesis.director) %></p>
   </div>
 </div>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @thesis %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @thesis %>
-<% end %>

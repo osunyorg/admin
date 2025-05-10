@@ -74,7 +74,7 @@ module Admin::OsunyHelper
     osuny_property_show(object, property, 'boolean')
   end
 
-  def osuny_link_localized(object, path, label_method: :to_s, classes: '')
+  def osuny_link_localized(object, path, label_method: :to_s, classes: '', **options)
     l10n = object.localization_for(current_language)
     if l10n.present?
       name = l10n.public_send(label_method)
@@ -84,11 +84,12 @@ module Admin::OsunyHelper
       classes += ' text-muted fst-italic'
       alert = t('localization.creation_alert')
     end
-    osuny_link(name, path, classes: classes, alert: alert)
+    osuny_link(name, path, classes: classes, alert: alert, **options)
   end
 
-  def osuny_link(name, path, classes: '', alert: '')
-    link_to name.to_s.truncate(45), path, class: classes.strip, data: { confirm: alert }
+  def osuny_link(name, path, classes: '', alert: '', **options)
+    truncate = options[:truncate] || 45
+    link_to name.to_s.truncate(truncate), path, class: classes.strip, data: { confirm: alert }
   end
 
   def osuny_link_localized_if(condition, object, path, label_method: :to_s, classes: '')

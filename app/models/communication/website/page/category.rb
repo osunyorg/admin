@@ -7,7 +7,7 @@
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
 #  migration_identifier     :string
-#  position                 :integer
+#  position                 :integer          not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed

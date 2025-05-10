@@ -1,0 +1,28 @@
+<%
+hugo = l10n.hugo(@website)
+if hugo.file.present?
+%>
+current_time_slot:
+  permalink: "<%= hugo.permalink %>"
+  path: "<%= hugo.path %>"
+  slug: "<%= hugo.slug %>"
+  file: "<%= hugo.file %>"
+  start:
+    date: "<%= time_slot.date&.iso8601 %>"
+    time: "<%= time_slot.time %>"
+    datetime: "<%= time_slot.datetime&.iso8601 %>"
+  duration:
+    seconds: <%= time_slot.duration %>
+  end:
+    date: "<%= time_slot.end_date&.iso8601 %>"
+    time: "<%= time_slot.end_time %>"
+    datetime: "<%= time_slot.end_datetime&.iso8601 %>"
+  place: >-
+    <%= prepare_text_for_static l10n.place %>
+  add_to_calendar:
+    google: "<%= l10n.cal_google_url.html_safe %>"
+    yahoo: "<%= l10n.cal_yahoo_url.html_safe %>"
+    office: "<%= l10n.cal_office_url.html_safe %>"
+    outlook: "<%= l10n.cal_outlook_url.html_safe %>"
+    ical: "<%= l10n.cal_ical_url.html_safe %>"
+<% end %>

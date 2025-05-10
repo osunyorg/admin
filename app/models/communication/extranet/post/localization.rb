@@ -44,9 +44,9 @@ class Communication::Extranet::Post::Localization < ApplicationRecord
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
-  
+
   has_summernote :summary
-  
+
   validates :title, presence: true
   before_validation :set_extranet_id, on: :create
 
@@ -62,7 +62,11 @@ class Communication::Extranet::Post::Localization < ApplicationRecord
 
   def slug_unavailable?(slug)
     self.class.unscoped
-              .where(extranet_id: self.extranet_id, slug: slug)
+              .where(
+                extranet_id: self.extranet_id,
+                language_id: self.language_id,
+                slug: slug
+              )
               .where.not(id: self.id)
               .exists?
   end

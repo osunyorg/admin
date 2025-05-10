@@ -1,5 +1,9 @@
 <% content_for :title, "#{@emergency_messages.total_count} #{EmergencyMessage.model_name.human(count: @emergency_messages.total_count).downcase}" %>
 
+<% content_for :title_right do %>
+  <%= link_to t('create'), new_server_emergency_message_path, class: button_classes %>
+<% end %>
+
 <div class="row g-2 mb-3">
   <% @emergency_messages.each do |emergency_message| %>
     <div>
@@ -25,10 +29,4 @@
     </div>
   <% end %>
 </div>
-
 <%= paginate @emergency_messages %>
-
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('create'), new_server_emergency_message_path, class: button_classes %>
-<% end %>

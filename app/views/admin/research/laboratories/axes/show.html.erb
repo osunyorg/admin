@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @axis %>
+  <%= button_advanced do %>
+    <%= destroy_link @axis %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-8">
     <% unless @l10n.short_name.blank? %>
@@ -11,11 +18,3 @@
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @axis %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @axis %>
-<% end %>

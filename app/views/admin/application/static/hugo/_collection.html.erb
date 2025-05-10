@@ -2,12 +2,15 @@
 depth ||= 0
 indentation = '  ' * depth
 %>
+<% if key.present? %>
 <%= indentation %><%= key.to_s %>:
+<% end %>
 <%
 collection.each do |element|
   l10n = element.localization_for(language)
   next if l10n.nil?
   hugo = l10n.hugo(@website)
+  next if hugo.nil? || hugo.file.blank?
   %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: depth+1 %>
 <% end %>

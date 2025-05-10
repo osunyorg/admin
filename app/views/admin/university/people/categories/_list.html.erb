@@ -15,8 +15,8 @@
           </td>
           <td class="text-end">
             <div class="btn-group" role="group">
-              <%= edit_link category %>
-              <%= destroy_link category %>
+              <%= edit_link category if category.editable? %>
+              <%= destroy_link category if category.editable? %>
             </div>
           </td>
         </tr>

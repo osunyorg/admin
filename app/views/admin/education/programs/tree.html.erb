@@ -1,15 +1,9 @@
 <% content_for :title, t('.title') %>
 
+<% content_for :title_right do %>
+  <%= create_link Education::Program %>
+<% end %>
+
 <ul class="list-unstyled treeview js-treeview">
   <%= render 'treebranch', programs: @programs %>
 </ul>
-
-<% content_for :action_bar_left do %>
-  <%= link_to t('admin.education.programs.view_as_list'),
-              admin_education_programs_path,
-              class: button_classes %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Education::Program %>
-<% end %>

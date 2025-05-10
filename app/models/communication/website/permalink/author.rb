@@ -8,7 +8,7 @@ class Communication::Website::Permalink::Author < Communication::Website::Permal
   end
 
   # /equipe/:slug/actualites/
-  def self.pattern_in_website(website, language)
+  def self.pattern_in_website(website, language, about = nil)
     posts_page = website.special_page(Communication::Website::Page::CommunicationPost)
     posts_page_l10n = posts_page.best_localization_for(language)
     special_page_path(website, language) + "/:slug/#{posts_page_l10n.slug}/"

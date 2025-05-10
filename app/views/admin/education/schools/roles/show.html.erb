@@ -1,5 +1,11 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= link_to t('edit'),
+              edit_admin_education_school_role_path(@role, { school_id: @school.id }),
+              class: button_classes if can?(:update, @role) %>
+<% end %>
+
 <% if @involvements.any? %>
   <div class="table-responsive">
     <table class="<%= table_classes %>">
@@ -35,11 +41,4 @@
       </tbody>
     </table>
   </div>
-<% end %>
-
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('edit'),
-              edit_admin_education_school_role_path(@role, { school_id: @school.id }),
-              class: button_classes if can?(:update, @role) %>
 <% end %>

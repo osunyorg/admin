@@ -1,7 +1,7 @@
 <% if l10n.libre_translatable? %>
   <span id="translation-button"
         data-translation-url="<%= admin_translate_path target: l10n.language.iso_code %>">
-    <a class="btn btn-light btn-xs js-translation-start">
+    <a class="<%= button_classes %> js-translation-start">
       <%= t('admin.translation.button') %>
     </a>
     <span class="spinner-border spinner-border-sm js-translation-loader"

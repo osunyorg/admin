@@ -1,5 +1,14 @@
 <% content_for :title, @l10n %>
 
+<% if @category.editable? %>
+  <% content_for :title_right do %>
+    <%= edit_link @category %>
+    <%= button_advanced do %>
+      <%= destroy_link @category %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <%= render 'admin/application/categories/show', category: @category, l10n: @l10n %>
 
 <p>
@@ -9,11 +18,6 @@
 <%= render 'admin/university/organizations/list', organizations: @organizations %>
 <%= paginate @organizations %>
 
-<% content_for :action_bar_left do %>
-  <%= destroy_link @category %>
+<% content_for :server_admin_only do %>
   <%= static_link static_admin_university_organization_category_path(@category) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @category %>
 <% end %>

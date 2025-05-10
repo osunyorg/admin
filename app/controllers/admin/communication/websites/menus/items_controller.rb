@@ -8,6 +8,10 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
 
   before_action :redirect_to_correct_language, only: :show
 
+  def index
+    redirect_to [:admin, @menu]
+  end
+
   def reorder
     parent_id = params[:parentId].blank? ? nil : params[:parentId]
     ids = params[:ids] || []

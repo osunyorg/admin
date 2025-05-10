@@ -1,7 +1,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  include ActiveHashcash
   include Users::AddContextToRequestParams
   include Users::LayoutChoice
 
+  invisible_captcha only: [:create], honeypot: :osuny_verification
+
+  before_action :check_hashcash, only: :create
   before_action :configure_sign_up_params, only: :create
   before_action :configure_account_update_params, only: :update
   before_action :confirm_two_factor_authenticated, except: [:new, :create, :cancel]
@@ -33,11 +37,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:mobile_phone, :language_id, :first_name, :last_name, :picture, :picture_infos, :picture_delete])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:mobile_phone, :language_id, :first_name, :last_name, :optin_newsletter, :picture, :picture_infos, :picture_delete])
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:mobile_phone, :language_id, :first_name, :last_name, :picture, :picture_infos, :picture_delete, :admin_theme])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:mobile_phone, :language_id, :first_name, :last_name, :optin_newsletter, :picture, :picture_infos, :picture_delete, :admin_theme])
   end
 
   def sign_up_params
@@ -48,5 +52,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     return if is_fully_authenticated?
     flash[:alert] = t('devise.failure.unauthenticated')
     redirect_to user_two_factor_authentication_url
+  end
+
+  def hashcash_after_failure
+    redirect_to(new_user_registration_path, alert: t("active_hashcash.error_label"))
   end
 end

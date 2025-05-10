@@ -1,33 +1,42 @@
 module Admin::ActAsCategories
   extend ActiveSupport::Concern
 
+  included do
+    before_action :ensure_category_is_editable, only: [:edit, :update, :destroy]
+    before_action :ensure_xhr, only: [:reorder, :children]
+  end
+
   def reorder
+    moved_category_id = params.dig(:itemId)
+    moved_category = categories.find(moved_category_id)
     parent_id = params.dig(:parentId)
-    old_parent_id = params.dig(:oldParentId)
-    ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      category = categories.find(id)
-      category.update_columns parent_id: parent_id,
-                              position: index + 1
+
+    if moved_category.is_taxonomy? && parent_id.present?
+      render plain: I18n.t('admin.categories.cant_move_taxonomy_here'), status: :unprocessable_entity
+    else
+      old_parent_id = params.dig(:oldParentId)
+      ids = params[:ids] || []
+      ids.each.with_index do |id, index|
+        category = categories.find(id)
+        category.update_columns parent_id: parent_id,
+                                position: index + 1
+      end
+      if old_parent_id.present?
+        old_parent = categories.find(old_parent_id)
+        trigger_category_sync(old_parent)
+      end
+      category = categories.find(params[:itemId])
+      trigger_category_sync(category) # Will sync siblings
+      head :ok
     end
-    if old_parent_id.present?
-      old_parent = categories.find(old_parent_id)
-      trigger_category_sync(old_parent)
-    end
-    category = categories.find(params[:itemId])
-    trigger_category_sync(category) # Will sync siblings
   end
 
   def children
-    if request.xhr?
-      @categories_class = categories_class
-      @category = categories.find(params[:id])
-      @children =  @category.children
-                            .ordered(current_language)
-      render 'admin/application/categories/children'
-    else
-      redirect_to [:admin, categories_class]
-    end
+    @categories_class = categories_class
+    @category = categories.find(params[:id])
+    @children =  @category.children
+                          .ordered(current_language)
+    render 'admin/application/categories/children'
   end
 
   protected
@@ -59,5 +68,13 @@ module Admin::ActAsCategories
       # Indirect object (Person category, ...)
       category.touch
     end
+  end
+
+  def ensure_xhr
+    redirect_to [:admin, categories_class] unless request.xhr?
+  end
+
+  def ensure_category_is_editable
+    render_forbidden unless @category.editable?
   end
 end

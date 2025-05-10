@@ -64,7 +64,7 @@ export default {
         xhr.onreadystatechange = function () {
           if (xhr.readyState != 4) return;
           if (xhr.status == 200) {
-            let blob = JSON.parse(xhr.responseText); 
+            let blob = JSON.parse(xhr.responseText);
             this.$emit('cropped', blob);
             this.pending = false;
             this.close();
@@ -87,7 +87,7 @@ export default {
 
 <template>
   <div>
-    <div  class="modal show vue__cropper" 
+    <div  class="modal vue__cropper"
           tabindex="-1"
           role="dialog"
           :class="{'d-block': modal}">
@@ -120,7 +120,7 @@ export default {
               <i class="bi bi-arrow-clockwise"></i>
             </button>
             <div>
-              <button type="button" 
+              <button type="button"
                       class="btn btn-sm btn-secondary me-2"
                       :disabled="pending"
                       @click="close()">

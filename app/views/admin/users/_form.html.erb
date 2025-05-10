@@ -32,6 +32,7 @@
     </div>
   </div>
   <% content_for :action_bar_right do %>
+    <%= cancel [:admin, user] %>
     <%= submit f %>
   <% end %>
 <% end %>

@@ -4,13 +4,13 @@ module Staticable
   def hugo(website)
     @hugo ||= begin
       if website.nil?
-        OpenStruct.new(permalink: nil, path: nil, file: nil, slug: nil)
+        hugo_nil
       else
-        OpenStruct.new(
-          permalink: hugo_permalink_in_website(website),
-          path: hugo_path_in_website(website),
-          file: hugo_file_in_website(website),
-          slug: hugo_slug_in_website(website)
+        hugo_with(
+          hugo_permalink_in_website(website),
+          hugo_path_in_website(website),
+          hugo_file_in_website(website),
+          hugo_slug_in_website(website)
         )
       end
     end
@@ -30,6 +30,19 @@ module Staticable
 
   protected
 
+  def hugo_nil
+    hugo_with(nil, nil, nil, nil)
+  end
+
+  def hugo_with(permalink, path, file, slug)
+    OpenStruct.new(
+      permalink: permalink,
+      path: path,
+      file: file,
+      slug: slug
+    )
+  end
+
   def hugo_ancestors_for_special_page(website)
     # Si on est sur une page, pas d'ancêtres à chercher, le breadcrumb va se construire avec les parents.
     return [] if is_a?(Communication::Website::Page::Localization)
@@ -45,14 +58,14 @@ module Staticable
   end
 
   # Le permalink tel que mentionné dans les statics, dans la clé `url``
-  # Ex: "/agenda/2024-11-27-communs-numerique-et-interet-general/"
+  # Ex: "/agenda/2024/communs-numerique-et-interet-general/"
   # Il y a un slash au début et à la fin, et la langue si elle existe
   def hugo_permalink_in_website(website)
     "#{current_permalink_in_website(website)&.path}"
   end
 
   # L'identifiant Hugo
-  # Ex: /events/2024-12-27-communs-numerique-et-interet-general
+  # Ex: /events/2024/12/27-communs-numerique-et-interet-general
   # https://gohugo.io/methods/page/path/
   # 1. Strips the file extension
   # 2. Strips the language identifier
@@ -76,7 +89,7 @@ module Staticable
   end
 
   # Le chemin physique du fichier
-  # Ex: content/fr/events/2024-12-27-communs-numerique-et-interet-general.html
+  # Ex: content/fr/events/2024/12/27-communs-numerique-et-interet-general.html
   def hugo_file_in_website(website)
     git_path(website)
   end

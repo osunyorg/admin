@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @document %>
+  <%= button_advanced do %>
+    <%= destroy_link @document %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-xl-3">
     <%= osuny_label Communication::Extranet::Document::Localization.human_attribute_name('file') %>
@@ -26,11 +33,3 @@
 </div>
 
 <%= render 'admin/application/l10n/widget', about: @document, l10n: @l10n, small: true %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @document %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @document %>
-<% end %>

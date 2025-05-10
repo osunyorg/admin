@@ -52,6 +52,11 @@ window.osuny.treeView = {
                         parentId: parentId,
                         ids: ids,
                         itemId: item.dataset.id
+                    }).fail(function(data) {
+                        // undo the move in html
+                        var items = from.querySelectorAll(':scope > li');
+                        from.insertBefore(item, items[evt.oldIndex])
+                        alert(data.responseText);
                     });
                 }
             });

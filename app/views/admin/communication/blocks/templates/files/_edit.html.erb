@@ -6,25 +6,39 @@
 
 <%= block_component_add_element block, t('.add_file') %>
 
-<draggable :list="data.elements" handle=".dragHandle" class="row g-3">
-  <div v-for="(element, index) in data.elements" class="col-md-6">
-    <div class="card">
-      <div class="card-header border-bottom">
-        <a class="btn ps-0 pt-0 dragHandle">
-          <i class="<%= Icon::DRAG %> handle"></i>
-        </a>
-        <div class="float-end">
-          <a  class="btn btn-sm text-danger"
+<div v-show="data.elements.length > 1">
+  <%= osuny_separator %>
+  <draggable  :list="data.elements"
+              @end="refreshSummernotes()"
+              handle=".dragHandle">
+    <div v-for="(element, index) in data.elements" class="mb-2">
+      <div class="card draggable-item dragHandle m-0">
+        <div class="card-body d-flex align-items-center">
+          <i class="<%= Icon::MOVE %> handle m-2"></i>
+          <p class="mb-0">{{ element.title }}</p>
+          <a  class="btn btn-sm text-danger ms-auto"
               v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
               title="<%= t '.remove_file' %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>
         </div>
       </div>
-      <div class="card-body">
-        <%= block_component_edit block, :title, template: @element %>
-        <%= block_component_edit block, :file, template: @element %>
-      </div>
+    </div>
+  </draggable>
+  <%= osuny_separator %>
+</div>
+
+<div v-for="(element, index) in data.elements" class="pb-5 mb-5">
+  <div class="row">  
+    <div class="col-md-6">
+      <%= block_component_edit block, :title, template: @element %>
+      <%= block_component_edit block, :file, template: @element %>
+    </div>
+    <div class="col-md-6">
+      <%= block_component_edit block, :image,
+            template: @element,
+            label: t('admin.communication.blocks.components.image.input.label'),
+            placeholder: t('admin.communication.blocks.components.image.input.placeholder') %>
     </div>
   </div>
-</draggable>
+</div>

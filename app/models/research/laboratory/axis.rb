@@ -3,7 +3,7 @@
 # Table name: research_laboratory_axes
 #
 #  id                     :uuid             not null, primary key
-#  position               :integer
+#  position               :integer          not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  research_laboratory_id :uuid             not null, indexed

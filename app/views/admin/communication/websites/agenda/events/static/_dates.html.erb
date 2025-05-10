@@ -1,14 +1,9 @@
 <%
-# Dates override default dates in core, so it comes after
-# https://github.com/osunyorg/admin/issues/1880
-if event.archive? %>
-date: "<%= event.from_day&.iso8601 %>"
-<% elsif event.current? %>
-weight: -1
-date: "<%= event.from_day&.iso8601 %>"
-<% else %>
-weight: <%= event.distance_in_days %>
-<% end %>
+day ||= nil
+time_slot ||= nil
+source = time_slot || day || event
+%>
+date: "<%= source.from_day&.iso8601 %>"
 dates:
   status: "<%= event.status %>"
   archive: <%= event.archive? %>

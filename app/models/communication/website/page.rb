@@ -4,10 +4,9 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
-#  design_options           :jsonb
 #  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
-#  position                 :integer          default(0), not null
+#  position                 :integer          not null
 #  type                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -34,7 +33,6 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path kind)
 
   include AsDirectObject
-  include Bodyclassed
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories

@@ -10,8 +10,7 @@ class Communication::Block::Template::Project < Communication::Block::Template::
   has_component :mode, :option, options: [
     :all,
     :category,
-    :selection,
-    :categories
+    :selection
   ]
   has_component :projects_quantity, :number, default: 3
   has_component :category_id, :project_category

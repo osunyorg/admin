@@ -1,5 +1,17 @@
 <% content_for :title, University::Organization.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= create_link University::Organization %>
+  <%= button_advanced do %>
+    <%= link_to t('import_btn'),
+                new_admin_university_organizations_import_path,
+                class: button_classes if can? :create, University::Organization %>
+    <%= link_to t('export'),
+                request.params.merge(format: "xlsx"),
+                class: button_classes %>
+  <% end %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @organizations.total_count %>
@@ -10,16 +22,3 @@
 
 <%= render 'admin/university/organizations/list', organizations: @organizations %>
 <%= paginate @organizations %>
-
-<% content_for :action_bar_left do %>
-  <%= link_to t('import_btn'),
-              new_admin_university_organizations_import_path,
-              class: button_classes if can? :create, University::Organization %>
-  <%= link_to t('export'),
-              request.params.merge(format: "xlsx"),
-              class: button_classes %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link University::Organization %>
-<% end %>

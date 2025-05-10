@@ -42,7 +42,7 @@ categories_class_path = categories_class.to_s.parameterize.underscore
           <span class="text-muted">(<%= category.children.count %>)</span>
         <% end %>
         <span class="show-on-hover">
-          <%= render 'admin/application/tree/sort' %>
+          <%= render 'admin/application/tree/sort' if category.editable? %>
           <%= link_to children_path,
                       class: 'js-treeview-openzone small ps-2', remote: true do %>
             <span class="open_text"><%= t 'folder.open' %></span>
@@ -52,14 +52,14 @@ categories_class_path = categories_class.to_s.parameterize.underscore
       </div>
       <div class="card-footer">
         <%= link_to t('show'), show_path, class: 'action ps-3' %>
-        <%= link_to t('edit'), edit_path, class: 'action ps-3' %>
-        <%= link_to t('delete'), show_path, method: :delete, data: { confirm: t('please_confirm') }, class: 'action text-danger ps-3' %>
+        <%= link_to t('edit'), edit_path, class: 'action ps-3' if category.editable? && can?(:update, category) %>
+        <%= link_to t('delete'), show_path, method: :delete, data: { confirm: t('please_confirm') }, class: 'action text-danger ps-3' if category.editable? && can?(:destroy, category) %>
       </div>
     </div>
     <ul class=" list-unstyled
                 treeview__children
                 js-treeview-children
-                js-treeview-sortable-container"
+                <%= 'js-treeview-sortable-container' if category.editable? %>"
         data-id="<%= category.id %>">
       <li class="treeview__empty">
         <div class="d-flex align-items-center treeview__label p-1">

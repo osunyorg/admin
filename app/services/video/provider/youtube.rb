@@ -13,6 +13,8 @@ class Video::Provider::Youtube < Video::Provider::Default
       param_from_short_url
     elsif live_url?
       param_from_live_url
+    elsif embed_url?
+      param_from_embed_url
     else
       param_from_regular_url
     end
@@ -61,12 +63,22 @@ class Video::Provider::Youtube < Video::Provider::Default
     video_url.include?('/live/')
   end
 
+  def embed_url?
+    video_url.include?('/embed/')
+  end
+
   # https://www.youtube.com/live/n4jqeyBnuHM?si=RkjPzgQ_lJm7YlTh
   def param_from_live_url
     video_url.split('/live/').last
              .split('?').first
   end
-  
+
+  # https://www.youtube.com/embed/1yayRw5JEhk?list=UUsnXdS8k7q26ViqHshYjavg
+  def param_from_embed_url
+    video_url.split('/embed/').last
+             .split('?').first
+  end
+
   # youtube.com, www.youtube.com
   def param_from_regular_url
     uri = URI(video_url)

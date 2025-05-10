@@ -1,5 +1,12 @@
 <% content_for :title, @user %>
 
+<% content_for :title_right do %>
+  <%= edit_link @user %>
+  <%= button_advanced do %>
+    <%= destroy_link @user %>
+  <% end %>
+<% end %>
+
 <%= render 'lock' %>
 
 <div class="row">
@@ -23,7 +30,7 @@
         </tr>
         <tr>
           <td><%= User.human_attribute_name('language') %></td>
-          <td class="text-end"><%= t("languages.#{@user.language.iso_code.to_s}") %></td>
+          <td class="text-end"><%= language_name(@user.language.iso_code) %></td>
         </tr>
         <% if @user.person %>
           <tr>
@@ -47,11 +54,3 @@
     </div>
   <% end %>
 </div>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @user %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @user %>
-<% end %>

@@ -22,7 +22,7 @@ Bundler.require(*Rails.groups)
 module Osuny
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.2
+    config.load_defaults 8.0
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -69,5 +69,8 @@ module Osuny
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
+
+    # https://www.skylight.io/support/background-jobs
+    config.skylight.probes << 'active_job'
   end
 end

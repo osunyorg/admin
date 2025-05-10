@@ -500,7 +500,7 @@ RSpec.describe 'Communication::Website::Page::Category' do
         run_test!
       end
 
-      response '404', 'Page not found' do
+      response '404', 'Category not found' do
         let(:id) { 'fake-id' }
         run_test!
       end

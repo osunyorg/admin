@@ -7,7 +7,7 @@
 #  data                     :jsonb
 #  html_class               :string
 #  migration_identifier     :string
-#  position                 :integer          default(0), not null
+#  position                 :integer          not null
 #  published                :boolean          default(TRUE)
 #  template_kind            :integer          default(NULL), not null
 #  title                    :string
@@ -33,7 +33,7 @@ class Communication::Block < ApplicationRecord
   CATEGORIES = {
     basic: [:title, :chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
-    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :projects, :papers, :volumes],
+    references: [:pages, :posts, :persons, :organizations, :agenda, :programs, :locations, :projects, :papers, :volumes, :categories],
     utilities: [:files, :definitions, :contact, :links, :license, :embed]
   }
 
@@ -147,6 +147,10 @@ class Communication::Block < ApplicationRecord
 
   def touch_about
     about.touch
+  end
+
+  def connect_and_sync_direct_sources
+    # We do nothing as the about will perform it
   end
 
   # Invalidation des caches des personnes pour les backlinks
