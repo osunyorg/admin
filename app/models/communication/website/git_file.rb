@@ -2,23 +2,30 @@
 #
 # Table name: communication_website_git_files
 #
-#  id            :uuid             not null, primary key
-#  about_type    :string           not null, indexed => [about_id]
-#  previous_path :string
-#  previous_sha  :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  about_id      :uuid             not null, indexed => [about_type]
-#  website_id    :uuid             not null, indexed
+#  id                :uuid             not null, primary key
+#  about_type        :string           not null, indexed => [about_id]
+#  current_path      :string
+#  current_sha       :string
+#  desynchronized    :boolean          default(TRUE)
+#  desynchronized_at :datetime
+#  previous_path     :string
+#  previous_sha      :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  about_id          :uuid             not null, indexed => [about_type]
+#  university_id     :uuid             indexed
+#  website_id        :uuid             not null, indexed
 #
 # Indexes
 #
-#  index_communication_website_git_files_on_website_id  (website_id)
-#  index_communication_website_github_files_on_about    (about_type,about_id)
+#  index_communication_website_git_files_on_university_id  (university_id)
+#  index_communication_website_git_files_on_website_id     (website_id)
+#  index_communication_website_github_files_on_about       (about_type,about_id)
 #
 # Foreign Keys
 #
 #  fk_rails_8505d649e8  (website_id => communication_websites.id)
+#  fk_rails_b163dea854  (university_id => universities.id)
 #
 class Communication::Website::GitFile < ApplicationRecord
   # We don't include Sanitizable as this model is never handled by users directly.

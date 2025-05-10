@@ -6,6 +6,7 @@
 #  about_type          :string           indexed => [about_id]
 #  kind                :integer          default("blank")
 #  position            :integer          not null
+#  position_in_tree    :integer
 #  should_open_new_tab :boolean          default(FALSE)
 #  title               :string
 #  url                 :text
@@ -33,10 +34,10 @@
 #  fk_rails_fa4f4585e4  (website_id => communication_websites.id)
 #
 class Communication::Website::Menu::Item < ApplicationRecord
+  include AsTree
   include Initials
   include Orderable
   include Sanitizable
-  include WithTree
   include WithUniversity
 
   attr_accessor :skip_publication_callback

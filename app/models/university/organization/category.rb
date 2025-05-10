@@ -7,6 +7,7 @@
 #  is_taxonomy          :boolean          default(FALSE)
 #  migration_identifier :string
 #  position             :integer          not null
+#  position_in_tree     :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  parent_id            :uuid             indexed
