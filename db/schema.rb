@@ -368,6 +368,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "bodyclass"
+    t.integer "position_in_tree"
     t.index ["parent_id"], name: "index_communication_media_categories_on_parent_id"
     t.index ["university_id"], name: "index_communication_media_categories_on_university_id"
   end
@@ -474,6 +475,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
     t.boolean "is_taxonomy", default: false
     t.string "bodyclass"
     t.string "migration_identifier"
+    t.integer "position_in_tree"
     t.index ["communication_website_id"], name: "idx_communication_website_agenda_cats_on_website_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_agenda_categories_on_program_id"
@@ -829,6 +831,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
     t.datetime "updated_at", null: false
     t.text "url"
     t.boolean "should_open_new_tab", default: false
+    t.integer "position_in_tree"
     t.index ["about_type", "about_id"], name: "index_communication_website_menu_items_on_about"
     t.index ["menu_id"], name: "index_communication_website_menu_items_on_menu_id"
     t.index ["parent_id"], name: "index_communication_website_menu_items_on_parent_id"
@@ -864,6 +867,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
     t.uuid "program_id"
     t.boolean "is_programs_root", default: false
     t.string "bodyclass"
+    t.integer "position_in_tree"
     t.index ["communication_website_id"], name: "idx_communication_website_page_cats_on_website_id"
     t.index ["parent_id"], name: "index_communication_website_page_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_page_categories_on_program_id"
@@ -939,6 +943,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
     t.boolean "full_width", default: false
     t.string "type"
     t.string "migration_identifier"
+    t.integer "position_in_tree"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
@@ -969,6 +974,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
     t.boolean "is_taxonomy", default: false
     t.uuid "program_id"
     t.string "bodyclass"
+    t.integer "position_in_tree"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_8f309901d4"
     t.index ["parent_id"], name: "index_communication_website_portfolio_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_portfolio_categories_on_program_id"
@@ -1052,6 +1058,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
     t.boolean "is_programs_root", default: false
     t.boolean "is_taxonomy", default: false
     t.string "bodyclass"
+    t.integer "position_in_tree"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_post_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_post_categories_on_program_id"
@@ -1279,6 +1286,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "bodyclass"
+    t.integer "position_in_tree"
     t.index ["parent_id"], name: "index_education_program_categories_on_parent_id"
     t.index ["university_id"], name: "index_education_program_categories_on_university_id"
   end
@@ -1884,6 +1892,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
     t.boolean "is_taxonomy", default: false
     t.string "migration_identifier"
     t.string "bodyclass"
+    t.integer "position_in_tree"
     t.index ["parent_id"], name: "index_university_organization_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_organization_categories_on_university_id"
   end
@@ -2013,6 +2022,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_171008) do
     t.integer "position", null: false
     t.boolean "is_taxonomy", default: false
     t.string "bodyclass"
+    t.integer "position_in_tree"
     t.index ["parent_id"], name: "index_university_person_categories_on_parent_id"
     t.index ["university_id"], name: "index_university_person_categories_on_university_id"
   end

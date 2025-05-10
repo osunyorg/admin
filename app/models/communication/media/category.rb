@@ -2,14 +2,15 @@
 #
 # Table name: communication_media_categories
 #
-#  id            :uuid             not null, primary key
-#  bodyclass     :string
-#  is_taxonomy   :boolean          default(FALSE)
-#  position      :integer          not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  parent_id     :uuid             indexed
-#  university_id :uuid             not null, indexed
+#  id               :uuid             not null, primary key
+#  bodyclass        :string
+#  is_taxonomy      :boolean          default(FALSE)
+#  position         :integer          not null
+#  position_in_tree :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  parent_id        :uuid             indexed
+#  university_id    :uuid             not null, indexed
 #
 # Indexes
 #
