@@ -32,6 +32,7 @@
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
+  include AsTree
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
@@ -44,7 +45,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
-  include WithTree
   include WithUniversity
 
   belongs_to  :created_by,
