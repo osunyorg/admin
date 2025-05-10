@@ -47,7 +47,11 @@ class Communication::Extranet::Post::Category::Localization < ApplicationRecord
 
   def slug_unavailable?(slug)
     self.class.unscoped
-              .where(extranet_id: self.extranet_id, slug: slug)
+              .where(
+                extranet_id: self.extranet_id,
+                language_id: self.language_id,
+                slug: slug
+              )
               .where.not(id: self.id)
               .exists?
   end

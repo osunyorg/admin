@@ -9,7 +9,7 @@
       "size": "XL"
     },
     {
-      "command": "0 1 * * * rails auto:sib_sms_credits",
+      "command": "0 1 * * * rails auto:brevo_sms_credits",
       "size": "S"
     }
   ]

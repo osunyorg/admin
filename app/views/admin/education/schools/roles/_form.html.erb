@@ -33,6 +33,7 @@ url = role.new_record?  ? admin_education_school_roles_path(@school)
     </div>
 
     <% content_for :action_bar_right do %>
+      <%= cancel url %>
       <%= submit f %>
     <% end %>
   <% end %>

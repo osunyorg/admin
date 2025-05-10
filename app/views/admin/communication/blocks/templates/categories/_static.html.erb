@@ -1,0 +1,41 @@
+      layout: <%= block.template.layout %>
+<%= block_component_static block, :description %>
+<%= block_options_static block %>
+<%= block_component_static block, :category_kind %>
+<%= block_component_static block, :taxonomy_id %>
+<%
+if block.template.taxonomy
+  taxonomy = block.template.taxonomy
+  taxonomy_l10n = taxonomy.localization_for(block.language)
+  if taxonomy_l10n
+    hugo = taxonomy_l10n.hugo(@website)
+    if hugo.file.present?
+%>
+      taxonomy:
+        permalink: "<%= hugo.permalink %>"
+        path: "<%= hugo.path %>"
+        slug: "<%= hugo.slug %>"
+        file: "<%= hugo.file %>"
+        name: "<%= prepare_text_for_static taxonomy_l10n.to_s %>"
+<%
+    end
+  end
+end
+%>
+      categories:
+<%
+block.template.selected_categories.each do |category|
+  category_l10n = category.localization_for(block.language)
+  next if category_l10n.nil?
+  hugo = category_l10n.hugo(@website)
+  next if hugo.file.blank?
+  name = taxonomy_l10n.to_s
+  count = category.count_objects_in(block.language, @website)
+%>
+        - permalink: "<%= hugo.permalink %>"
+          path: "<%= hugo.path %>"
+          slug: "<%= hugo.slug %>"
+          file: "<%= hugo.file %>"
+          name: "<%= prepare_text_for_static name %>"
+          count: <%= count %>
+<% end %>

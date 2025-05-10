@@ -6,7 +6,7 @@
 #  accepted_at                :date
 #  bibliography               :text
 #  doi                        :string
-#  position                   :integer
+#  position                   :integer          not null
 #  received_at                :date
 #  text                       :text
 #  created_at                 :datetime         not null

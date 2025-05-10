@@ -1,0 +1,1 @@
+json.partial! "api/osuny/communication/websites/agenda/categories/category", category: @category

@@ -1,10 +1,13 @@
 class Admin::Research::Journals::Papers::KindsController < Admin::Research::Journals::ApplicationController
-  load_and_authorize_resource class: Research::Journal::Paper::Kind, through: :journal
+  load_and_authorize_resource class: Research::Journal::Paper::Kind,
+                              through: :journal,
+                              through_association: :paper_kinds
 
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
+    @feature_nav = 'navigation/admin/research/journal/papers'
     breadcrumb
   end
 
@@ -59,6 +62,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
 
   def breadcrumb
     super
+    add_breadcrumb Research::Journal::Paper.model_name.human(count: 2), admin_research_journal_papers_path
     add_breadcrumb Research::Journal::Paper::Kind.model_name.human(count: 2), admin_research_journal_kinds_path
   end
 

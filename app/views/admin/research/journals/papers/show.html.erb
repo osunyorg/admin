@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= edit_link @paper %>
+  <%= button_advanced do %>
+    <%= destroy_link @paper %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-4">
     <%= osuny_label Research::Journal::Paper.human_attribute_name('received_at') %>
@@ -78,11 +85,6 @@
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 <%= render 'admin/application/components/dependencies', about: @paper %>
 
-<% content_for :action_bar_left do %>
-  <%= destroy_link @paper %>
+<% content_for :server_admin_only do %>
   <%= static_link static_admin_research_journal_paper_path(@paper) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @paper %>
 <% end %>

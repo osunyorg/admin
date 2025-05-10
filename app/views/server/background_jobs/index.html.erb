@@ -1,0 +1,29 @@
+<% content_for :title, 'Jobs' %>
+
+<p><%= @jobs.count %></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Université</th>
+      <th>Site</th>
+      <th>Jobs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @universities.each do |id, hash| %>
+      <tr>
+        <td><%= hash[:label] %></td>
+        <td>Instance</td>
+        <td><%= hash[:count] %></td>
+      </tr>
+      <% hash[:websites].each do |hash| %>
+        <tr>
+          <td></td>
+          <td><%= hash[:label] %></td>
+          <td><%= hash[:count] %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

@@ -1,11 +1,15 @@
 <% content_for :title, t('admin.dashboard') %>
 
 <% content_for :title_right do %>
-  <% if current_university.logo.attached? %>
-    <%= kamifusen_tag current_university.logo, width: 120 %>
-  <% else %>
-    <%= current_university %>
-  <% end %>
+  <div class="mt-5 mt-xl-0">
+    <% if current_university.logo.attached? %>
+      <%= kamifusen_tag current_university.logo,
+                        width: 120,
+                        cached: true %>
+    <% else %>
+      <%= current_university %>
+    <% end %>
+  </div>
 <% end %>
 
 <div class="row">

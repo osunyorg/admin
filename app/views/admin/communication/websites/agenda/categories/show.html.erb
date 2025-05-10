@@ -1,5 +1,14 @@
 <% content_for :title, @l10n %>
 
+<% if @category.editable? %>
+  <% content_for :title_right do %>
+    <%= edit_link @category %>
+    <%= button_advanced do %>
+      <%= destroy_link @category %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <%= render 'admin/application/categories/show', category: @category, l10n: @l10n %>
 
 <% if @events.total_count > 0 %>
@@ -9,17 +18,12 @@
         <%= @events.total_count %> 
         <%= Communication::Website::Agenda::Event.model_name.human(count: @events.total_count).downcase %>
       </p>
-      <%= render 'admin/communication/websites/agenda/events/list', events: @events, hide_category: true %>
+      <%= render 'admin/communication/websites/agenda/events/list', events: @events %>
       <%= paginate @events %>  
     </div>
   </div>
 <% end %>
 
-<% content_for :action_bar_left do %>
-  <%= destroy_link @category %>
+<% content_for :server_admin_only do %>
   <%= static_link static_admin_communication_website_agenda_category_path(@category) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= edit_link @category %>
 <% end %>

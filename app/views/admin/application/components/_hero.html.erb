@@ -1,4 +1,4 @@
-<div class="hero<%= ' hero--summary' if @hero_summary %>">
+<div class="hero">
   <div class="container-fluid">
     <% if breadcrumbs.one? %>
       <div class="welcome py-4">
@@ -14,12 +14,12 @@
         <% else %>
           <h1><%= yield :title %></h1>
         <% end %>
-        <div class="ms-xl-auto text-xl-end mt-2">
+        <div class="mt-4 mt-lg-0 ms-xl-auto text-xl-end">
           <%= yield :title_right %>
         </div>
       </div>
       <% if content_for(:title_left) %>
-        <div class="mt-2">
+        <div class="mt-4">
           <%= yield :title_left %>
         </div>
       <% end %>

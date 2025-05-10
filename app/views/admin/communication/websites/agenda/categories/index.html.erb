@@ -1,9 +1,7 @@
 <% content_for :title, "#{Communication::Website::Agenda::Category.model_name.human(count: 2)} (#{@categories.count})" %>
 
-<%= render 'admin/application/categories/list', 
-            root_categories: @root_categories, 
-            categories_class: @categories_class %>
-
-<% content_for :action_bar_right do %>
+<% content_for :title_right do %>
   <%= create_link Communication::Website::Agenda::Category %>
 <% end %>
+
+<%= render 'admin/application/categories/list', root_categories: @root_categories, categories_class: @categories_class %>

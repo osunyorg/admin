@@ -1,5 +1,5 @@
 <%
-# Partial arguments 
+# Partial arguments
 forced_title ||= nil
 skip_date ||= false
 # Preparing variables
@@ -23,6 +23,17 @@ title: >-
 subtitle: >-
   <%= prepare_text_for_static about.subtitle %>
 <% end %>
+<%
+#############
+# Body classes
+#############
+bodyclass_object = about.respond_to?(:about) ? about.about : about
+if bodyclass_object.respond_to?(:best_bodyclass) %>
+bodyclass: >-
+  <%= bodyclass_object.best_bodyclass %>
+<%
+end
+%>
 <%
 #############
 # Permalinks
@@ -61,3 +72,27 @@ meta:
 <% if show_published_at %>
     published_at: <%= about.published_at&.iso8601 %>
 <% end %>
+<%
+#############
+# Search engine data
+#############
+search_title = title
+search_title += " #{about.subtitle}" if show_subtitle && about.subtitle.present?
+%>
+search:
+  id: "<%= about.id %>"
+  url: "<%= hugo.permalink %>"
+  kind: "<%= about.class.model_name %>"
+  <% if about.respond_to?(:language) && about.language.present? %>
+  lang: "<%= about.language.iso_code %>"
+  <% end %>
+  title: >-
+    <%= prepare_text_for_static search_title %>
+  <% if about.respond_to?(:summary) %>
+  summary: >-
+    <%= prepare_html_for_static about.summary %>
+  <% end %>
+  <% if about.respond_to?(:contents_full_text) %>
+  body: >-
+    <%= prepare_html_for_static simple_format(about.contents_full_text) %>
+  <% end %>

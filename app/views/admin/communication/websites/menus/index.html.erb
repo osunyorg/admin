@@ -1,11 +1,11 @@
 <% content_for :title, Communication::Website::Menu.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= create_link Communication::Website::Menu %>
+<% end %>
+
 <p>
   <%= @menus.count %>
   <%= Communication::Website::Menu.model_name.human(count: @menus.count).downcase %>
 </p>
 <%= render 'admin/communication/websites/menus/list', menus: @menus %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Website::Menu %>
-<% end %>

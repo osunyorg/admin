@@ -1,0 +1,23 @@
+<% content_for :title, @l10n.to_month_name %>
+
+<%= render 'admin/communication/websites/agenda/periods/months/calendar', month: @l10n %>
+
+<section>
+  <% @l10n.days.each do |day| %>
+    <% if day.events? %>
+      <div id="day-<%= day.day %>" class="row mt-5 pt-5">
+        <div class="col-lg-4">
+        <h2 class="h4 mb-2"><%= day.to_full_name %></h2>
+        </div>
+        <div class="col-lg-8">
+          <%= render 'admin/communication/websites/agenda/events/list', events: day.events if day.events.any? %>
+          <%= render 'admin/communication/websites/agenda/events/time_slots/list', time_slots: day.time_slots if day.time_slots.any? %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</section>
+
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_communication_website_agenda_periods_year_month_path(year_id: @month.year.id, id: @month.id) %>
+<% end %>

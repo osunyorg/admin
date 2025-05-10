@@ -12,8 +12,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   has_component :mode, :option, options: [
     :all,
     :category,
-    :selection,
-    :categories
+    :selection
   ]
   has_component :posts_quantity, :number, default: 3
   has_component :category_id, :post_category

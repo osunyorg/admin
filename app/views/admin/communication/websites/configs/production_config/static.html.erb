@@ -2,6 +2,11 @@
 
 baseURL: <%= @website.url %>
 
+## OSUNY
+osuny:
+  website:
+    id: <%= @website.id %>
+
 ## LANGUAGE
 defaultContentLanguage: <%= @website.default_language.iso_code %>
 defaultContentLanguageInSubdir: <%= @website.active_languages.many? %>
@@ -17,6 +22,7 @@ deployment:
       gzip: false
 <% if @website.deuxfleurs_hosting %>
   ## DEUXFLEURS
+  workers: 2
   targets:
     - name: "production"
       URL: "s3://<%= @website.deuxfleurs_identifier %>?endpoint=garage.deuxfleurs.fr&s3ForcePathStyle=true&region=garage&awssdk=v1"

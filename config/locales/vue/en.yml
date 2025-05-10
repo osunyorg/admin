@@ -40,3 +40,12 @@ en:
         title: Media library
       remove: Remove image
       title: Image
+    timeSlots:
+      add: Add a time slot
+      datetime:
+        label: Datetime
+      duration:
+        label: Duration
+      place:
+        hint: For example “Main room” ou “Outdoor”
+        label: Place

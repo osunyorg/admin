@@ -1,5 +1,9 @@
 <% content_for :title, t('create') %>
 
+<% content_for :title_right do %>
+  <%= create_link Communication::Website::Portfolio::Project %>
+<% end %>
+
 <div class="d-flex justify-content-between mb-4">
   <p>
     <%= @projects.total_count %>
@@ -10,7 +14,3 @@
 
 <%= render 'admin/communication/websites/portfolio/projects/list', projects: @projects %>
 <%= paginate @projects %>
-
-<% content_for :action_bar_right do %>
-  <%= create_link Communication::Website::Portfolio::Project %>
-<% end %>

@@ -23,4 +23,9 @@ module Communication::Website::WithFeaturePosts
       Communication::Website::Post.model_name.human(count: 2)
     end
   end
+
+  def feature_posts_dependencies
+    posts +
+    post_categories
+  end
 end

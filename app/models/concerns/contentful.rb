@@ -17,7 +17,9 @@ module Contentful
   end
 
   def contents_full_text
-    @contents_full_text ||= contents.collect(&:full_text).join("\r")
+    @contents_full_text ||= contents.collect(&:full_text)
+                                    .reject(&:blank?)
+                                    .join(" ")
   end
 
   def contents_dependencies
@@ -34,7 +36,7 @@ module Contentful
   end
 
   def generate_blocks(template_blocks)
-    template_blocks.each { |hash| generate_block(hash) }
+    template_blocks.each { |hash| generate_block(hash.dup) }
   end
 
   protected

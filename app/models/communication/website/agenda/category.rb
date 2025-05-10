@@ -6,7 +6,8 @@
 #  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
-#  position                 :integer
+#  migration_identifier     :string
+#  position                 :integer          not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
@@ -34,6 +35,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   include Localizable
   include Sanitizable
   include WithMenuItemTarget
+  include WithOpenApi
   include WithUniversity
 
   belongs_to              :program,
@@ -41,9 +43,14 @@ class Communication::Website::Agenda::Category < ApplicationRecord
                           optional: true
   has_and_belongs_to_many :events
   alias                   :category_objects :events
+  has_and_belongs_to_many :exhibitions
 
   def event_localizations
     Communication::Website::Agenda::Event::Localization.where(about_id: event_ids)
+  end
+
+  def exhibition_localizations
+    Communication::Website::Agenda::Exhibition::Localization.where(about_id: exhibition_ids)
   end
 
   def dependencies
@@ -55,6 +62,7 @@ class Communication::Website::Agenda::Category < ApplicationRecord
   def references
     events +
     event_localizations +
+    exhibition_localizations +
     website.menus.in_languages(website.active_language_ids) +
     [parent]
   end

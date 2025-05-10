@@ -1,5 +1,12 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= link_to_if  can?(:edit, @program),
+                  t('edit'),
+                  edit_certification_admin_education_program_path(@program),
+                  class: button_classes %>
+<% end %>
+
 <p class="lead mb-5"><%= t('education.program.parts.certification.hint') %>
 
 <div class="row mb-5">
@@ -11,10 +18,3 @@
     <%= render 'admin/application/property/text', object: @l10n, property: :qualiopi_text %>
   </div>
 </div>
-
-<% content_for :action_bar_right do %>
-  <%= link_to_if  can?(:edit, @program),
-                  t('edit'),
-                  edit_certification_admin_education_program_path(@program),
-                  class: button_classes %>
-<% end %>

@@ -13,7 +13,6 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
   end
 
   def show
-    @hero_summary = true
     breadcrumb
   end
 

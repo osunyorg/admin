@@ -1,0 +1,20 @@
+<%
+if day.present?
+  event = day.event
+  language = day.language
+  children_for_day = day.events
+                        .published_now_in(language)
+                        .ordered(language)
+  children = event.children
+                  .published_now_in(language)
+                  .ordered(language)
+%>
+<%= render 'admin/communication/websites/agenda/events/days/static_children/list',
+    key: :children_for_the_day,
+    collection: children_for_day,
+    language: language %>
+<%= render 'admin/communication/websites/agenda/events/days/static_children/list',
+    key: :children,
+    collection: children,
+    language: language %>
+<% end %>

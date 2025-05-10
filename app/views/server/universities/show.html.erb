@@ -1,6 +1,8 @@
 <% content_for :title, @university %>
+
 <% content_for :title_right do %>
-  <%= link_to @university.url, @university.url, target: :_blank %>
+  <%= link_to t('open'), @university.url, target: :_blank, class: button_classes %>
+  <%= link_to t('edit'), edit_server_university_path(@university), class: button_classes %>
 <% end %>
 
 <div class="row">
@@ -52,7 +54,3 @@
 <h2 class="mt-5 h3"><%= Communication::Website.model_name.human(count: @websites.total_count) %></h2>
 <%= render 'server/websites/list', websites: @websites %>
 <%= paginate @websites %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('edit'), edit_server_university_path(@university), class: button_classes %>
-<% end %>

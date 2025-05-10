@@ -23,6 +23,7 @@ class Ability::Admin < Ability
     can :manage, University::Role, university_id: @user.university_id
     can :manage, User, university_id: @user.university_id, role: @user.managed_roles
     can :manage, User::Favorite, user_id: @user
+    can :manage, University::App, university_id: @user.university_id
   end
 
   def admin_education
@@ -66,6 +67,7 @@ class Ability::Admin < Ability
     can :manage, Communication::Website::Localization, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Category, university_id: @user.university_id
+    can :manage, Communication::Website::Agenda::Exhibition, university_id: @user.university_id
     can :manage, Communication::Website::Portfolio::Category, university_id: @user.university_id
     can :manage, Communication::Website::Portfolio::Project, university_id: @user.university_id
     can :manage, Communication::Website::Post::Category, university_id: @user.university_id

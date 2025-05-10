@@ -9,12 +9,12 @@ window.addEventListener('DOMContentLoaded', function () {
         notyf.open({
             type: 'error',
             position: {
-                x: 'center',
+                x: 'left',
                 y: 'bottom'
             },
             message: notyfAlerts[0].innerText,
             duration: 9000,
-            ripple: true,
+            ripple: false,
             dismissible: true
         });
     }
@@ -22,12 +22,12 @@ window.addEventListener('DOMContentLoaded', function () {
         notyf.open({
             type: 'success',
             position: {
-                x: 'center',
+                x: 'left',
                 y: 'bottom'
             },
             message: notyfNotices[0].innerText,
             duration: 9000,
-            ripple: true,
+            ripple: false,
             dismissible: true
         });
     }

@@ -1,0 +1,26 @@
+<%
+month = @l10n.about
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/core',
+            about: @l10n,
+            skip_date: true,
+            forced_title: @l10n.to_month_and_year %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            full_width: true,
+            toc_present: false,
+            toc_offcanvas: false %>
+<%= render 'admin/application/l10n/static', about: @l10n %>
+is_month: true
+bodyclass: >-
+  events__section-month
+days:
+<%
+@l10n.days.each do |day|
+  %>
+  - day: <%= day.iso8601 %>
+    cwday: <%= day.cwday %>
+    events: <%= day.events_count %>
+<% end %>
+---

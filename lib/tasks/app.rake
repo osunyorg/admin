@@ -1,7 +1,7 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Search::BuildIndexJob.perform_now
+    Migrations::Agenda.migrate
   end
 
   namespace :search do

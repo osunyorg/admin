@@ -14,6 +14,7 @@
     </div>
     <%= render 'admin/communication/websites/form/features', f: f %>
     <% content_for :action_bar_right do %>
+      <%= cancel [:admin, @website] %>
       <%= submit f %>
     <% end %>
   <% end %>

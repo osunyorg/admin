@@ -1,5 +1,17 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= link_to t('open'),
+              posts_post_url(date: @l10n.published_at.strftime('%Y-%m-%d'), slug: @l10n.slug, host: @post.extranet.url, extranet_id: nil),
+              target: :_blank,
+              class: button_classes if @l10n.published %>
+  <%= preview_link %>
+  <%= edit_link @post %>
+  <%= button_advanced do %>
+    <%= destroy_link @post %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-7">
     <%= osuny_panel Communication::Website::Post::Localization.human_attribute_name(:title), small: true do %>
@@ -22,16 +34,3 @@
   </div>
 </div>
 <%= render 'admin/communication/contents/editor', about: @l10n %>
-
-<% content_for :action_bar_left do %>
-  <%= destroy_link @post %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('open'),
-              posts_post_url(date: @l10n.published_at.strftime('%Y-%m-%d'), slug: @l10n.slug, host: @post.extranet.url, extranet_id: nil),
-              target: :_blank,
-              class: 'btn btn-light btn-xs' if @l10n.published %>
-  <%= preview_link %>
-  <%= edit_link @post %>
-<% end %>

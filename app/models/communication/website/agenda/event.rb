@@ -35,12 +35,15 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
+  include Communication::Website::Agenda::Period::InPeriod
   include Sanitizable
   include Searchable
   include Localizable
+  include WithDays
+  include WithTimeSlots
+  include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
-  include WithTime
   include WithTree
   include WithUniversity
 
@@ -50,10 +53,25 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   belongs_to  :parent,
               class_name: 'Communication::Website::Agenda::Event',
-              optional: true
+              optional: true,
+              touch: true
+  has_many    :children,
+              class_name: 'Communication::Website::Agenda::Event',
+              foreign_key: :parent_id,
+              dependent: :destroy
 
-  scope :ordered_desc, -> { order(from_day: :desc, from_hour: :desc) }
-  scope :ordered_asc, -> { order(:from_day, :from_hour) }
+  scope :ordered_desc, -> {
+    select("communication_website_agenda_events.*, MIN(communication_website_agenda_event_time_slots.datetime) as least_recent_time_slot")
+      .left_joins(:time_slots)
+      .group("communication_website_agenda_events.id")
+      .order(from_day: :desc, from_hour: :desc, "least_recent_time_slot": :desc)
+  }
+  scope :ordered_asc, -> {
+    select("communication_website_agenda_events.*, MIN(communication_website_agenda_event_time_slots.datetime) as least_recent_time_slot")
+      .left_joins(:time_slots)
+      .group("communication_website_agenda_events.id")
+      .order(:from_day, :from_hour, "least_recent_time_slot ASC")
+  }
   scope :ordered, -> (language = nil) { ordered_asc }
   scope :latest_in, -> (language) { published_now_in(language).future_or_current.order("communication_website_agenda_event_localizations.updated_at").limit(5) }
 
@@ -68,6 +86,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
+  scope :on_year, -> (year) { where('extract(year from from_day) = ?', year) }
+  scope :on_month, -> (year, month) { where('extract(year from from_day) = ? and extract(month from from_day) = ?', year, month) }
+  scope :on_day, -> (day) { where(from_day: day) }
+
   def from_datetime
     time_with from_day, from_hour
   end
@@ -78,7 +100,11 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def dependencies
     [website.config_default_content_security_policy] +
-    localizations.in_languages(website.active_language_ids)
+    localizations.in_languages(website.active_language_ids) +
+    [parent] +
+    days +
+    # We can't use time_slots here because saving the event does not follow direct objects
+    time_slot_localizations.in_languages(website.active_language_ids)
   end
 
   def references
@@ -88,6 +114,21 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   protected
 
+  # Methods for Communication::Website::Agenda::Period::InPeriod
+
+  def should_update_periods?
+    from_day_changed?
+  end
+
+  def day_before_change
+    from_day_change.first
+  end
+
+  def day_after_change
+    from_day_change.last
+  end
+
+  # TODO refactor that with service or addition to DateTime (ex: DateTime.merge(date, time))
   def time_with(day, hour)
     DateTime.new  day.year,
                   day.month,

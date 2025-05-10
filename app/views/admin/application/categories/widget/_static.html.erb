@@ -8,10 +8,11 @@ about_categories.ordered.each do |category|
   category_l10n = category.localization_for(language)
   next if category_l10n.nil?
   hugo = category_l10n.hugo(@website)
+  next if hugo.file.blank?
   flat_categories << hugo.slug
 end
 # Prepare categories for Osuny
-free_categories_content = about_categories.ordered.map { |category| 
+free_categories_content = about_categories.ordered.map { |category|
   next if category.in_taxonomy?
   render 'admin/application/categories/static/category',
           category: category,
@@ -27,10 +28,12 @@ taxonomies:
 <%
   # First, all free categories in a "fake" taxonomy
   if free_categories_content.present? %>
-  - name: "<%= t('category.title') %>"
+  - name: >-
+      <%= t('category.title') %>
     slug: ""
+    path: ""
     categories:
-<%= sanitize free_categories_content %>
+<%= free_categories_content.html_safe %>
 <% end %>
 <%
   # Then, all the real taxonomies, if necessary
@@ -39,16 +42,19 @@ taxonomies:
       taxonomy_l10n = taxonomy.localization_for(language)
       next if taxonomy_l10n.nil?
       hugo = taxonomy_l10n.hugo(@website)
+      next if hugo.file.blank?
       taxonomy_content = about_categories.in_taxonomy(taxonomy).ordered.map { |category|
         render 'admin/application/categories/static/category',
                 category: category,
                 language: language
       }.join('')
       if taxonomy_content.present? %>
-  - name: "<%= prepare_text_for_static taxonomy_l10n.to_s %>"
+  - name: >-
+      <%= prepare_text_for_static taxonomy_l10n.to_s %>
     slug: "<%= hugo.slug %>"
+    path: "<%= hugo.path %>"
     categories:
-<%= sanitize taxonomy_content %>
+<%= taxonomy_content.html_safe %>
 <%
       end
     end

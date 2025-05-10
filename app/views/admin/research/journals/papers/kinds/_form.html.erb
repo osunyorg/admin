@@ -23,6 +23,7 @@ url = kind.new_record?  ? admin_research_journal_kinds_path
       </div>
     </div>
     <% content_for :action_bar_right do %>
+      <%= cancel url %>
       <%= submit f %>
     <% end %>
   <% end %>

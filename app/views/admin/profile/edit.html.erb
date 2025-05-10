@@ -1,7 +1,7 @@
 
 <% content_for :title, current_user %>
 
-<%= simple_form_for(current_user, url: admin_profile_path) do |f| %>
+<%= simple_form_for current_user, url: admin_profile_path do |f| %>
   <%= f.error_notification %>
 
   <div class="row">
@@ -20,9 +20,7 @@
         <div class="col-lg-6">
           <%= render 'admin/application/l10n/form', f: f %>
           <%= f.input :mobile_phone %>
-          <% if current_user.pending_reconfirmation? %>
-            <p><%= t(".currently_waiting_confirmation_for_email", email: resource.unconfirmed_email) %></p>
-          <% end %>
+          <%= f.input :optin_newsletter %>
         </div>
       </div>
 
@@ -71,8 +69,8 @@
     </div>
   </div>
 
-
   <% content_for :action_bar_right do %>
+    <%= cancel admin_root_path %>
     <%= submit f %>
   <% end %>
 <% end %>

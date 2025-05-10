@@ -1,6 +1,7 @@
 <%
 event = @l10n.about
 language = @l10n.language
+day = event.days.for_language(language).ordered.first
 %>---
 <%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
@@ -11,13 +12,21 @@ language = @l10n.language
             toc_offcanvas: false %>
 <%= render 'admin/communication/websites/agenda/events/static/dates',
             event: event,
+            day: day,
             l10n: @l10n,
             locale: language.iso_code %>
+<%= render 'admin/communication/websites/agenda/events/static/parent', event: event, language: language %>
+<%= render 'admin/communication/websites/agenda/events/days/static_children', day: day %>
+<%= render 'admin/communication/websites/agenda/events/time_slots/static/all', event: event, language: language %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/images/shared/static', about: @l10n %>
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
+text: >-
+  <%= prepare_html_for_static @l10n.text %>
+notes: >-
+  <%= prepare_html_for_static @l10n.notes %>
 <%= render 'admin/application/header_cta/static', about: @l10n %>
 <%= render 'admin/application/categories/widget/static',
             about: event,

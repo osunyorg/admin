@@ -89,7 +89,7 @@ export default {
       <Image stroke-width="1.5" />
       {{ i18n.button }}
     </button>
-    <div  class="modal show"
+    <div  class="modal"
           tabindex="-1"
           role="dialog"
           :class="{'d-block': modal}">

@@ -1,5 +1,9 @@
 <% content_for :title, Communication::Website::Showcase::Tag.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= link_to t('create'), new_server_tag_path, class: button_classes %>
+<% end %>
+
 <div class="table-responsive">
   <table class="<%= table_classes %>">
     <thead>
@@ -31,7 +35,3 @@
     </tbody>
   </table>
 </div>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('create'), new_server_tag_path, class: button_classes %>
-<% end %>

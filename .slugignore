@@ -1,4 +1,5 @@
 /.circleci
+/.cache
 /.github
 /.scalingo/node
 /.scalingo/yarn

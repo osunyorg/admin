@@ -1,5 +1,12 @@
 <% content_for :title, t("enums.communication.block.template_kind.#{@template}") %>
 
+<% content_for :title_right do %>
+  <%= link_to t('server_admin.blocks.resave'),
+              resave_server_block_path(@template),
+              method: :post,
+              class: button_classes %>
+<% end %>
+
 <div class="table-responsive">
   <table class="<%= table_classes %>">
     <thead>
@@ -61,13 +68,4 @@
     </tbody>
   </table>
 </div>
-
 <%= paginate @blocks %>
-
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('server_admin.blocks.resave'),
-              resave_server_block_path(@template),
-              method: :post,
-              class: button_classes %>
-<% end %>

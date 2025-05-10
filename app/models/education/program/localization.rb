@@ -53,7 +53,7 @@
 #
 class Education::Program::Localization < ApplicationRecord
   include AsLocalization
-  include AsLocalizedTree
+  include AsLocalizedTree # ordered scope is overridden below
   include Contentful
   include Initials
   include Pathable
@@ -91,6 +91,8 @@ class Education::Program::Localization < ApplicationRecord
   validates :name, presence: true
   validates :downloadable_summary, size: { less_than: 50.megabytes }
   validates :logo, size: { less_than: 5.megabytes }
+
+  scope :ordered, -> (language = nil) { order(:slug) }
 
   def git_path(website)
     return unless published? && for_website?(website)

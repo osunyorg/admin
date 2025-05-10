@@ -1,5 +1,11 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= link_to t('research.hal.sync'), 
+              sync_with_hal_admin_research_researcher_path(@researcher), 
+              method: :post, 
+              class: button_classes %>
+<% end %>
 
 <div class="row">
   <div class="col-lg-6">
@@ -67,13 +73,6 @@
   </div>
 <% end %>
 
-<% content_for :action_bar_left do %>
+<% content_for :server_admin_only do %>
   <%= static_link static_admin_research_researcher_path(@researcher) %>
-<% end %>
-
-<% content_for :action_bar_right do %>
-  <%= link_to t('research.hal.sync'), 
-              sync_with_hal_admin_research_researcher_path(@researcher), 
-              method: :post, 
-              class: button_classes %>
 <% end %>

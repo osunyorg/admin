@@ -78,6 +78,7 @@ class Communication::Website < ApplicationRecord
   include WithShowcase
   include WithStyle
   include WithTheme
+  include WithTimeZone
   include WithUniversity
 
   enum :git_provider, {
@@ -162,12 +163,9 @@ class Communication::Website < ApplicationRecord
     configs +
     pages +
     page_categories +
-    posts +
-    post_categories +
-    events +
-    agenda_categories +
-    projects +
-    portfolio_categories +
+    feature_agenda_dependencies +
+    feature_portfolio_dependencies +
+    feature_posts_dependencies +
     menus.in_languages(active_language_ids) +
     [about] +
     [default_image&.blob] +
