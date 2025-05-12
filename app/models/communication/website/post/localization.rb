@@ -16,7 +16,6 @@
 #  slug                     :string
 #  subtitle                 :string
 #  summary                  :text
-#  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -60,7 +59,6 @@ class Communication::Website::Post::Localization < ApplicationRecord
               foreign_key: :communication_website_id
 
   has_summernote :summary
-  has_summernote :text # TODO: Remove text attribute
 
   validates :title, presence: true
   before_validation :set_communication_website_id, on: :create

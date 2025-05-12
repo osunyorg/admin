@@ -76,7 +76,6 @@ class Communication::Website::Post < ApplicationRecord
       .where("
         unaccent(communication_website_post_localizations.meta_description) ILIKE unaccent(:term) OR
         unaccent(communication_website_post_localizations.summary) ILIKE unaccent(:term) OR
-        unaccent(communication_website_post_localizations.text) ILIKE unaccent(:term) OR
         unaccent(communication_website_post_localizations.title) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
