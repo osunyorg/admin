@@ -29,7 +29,7 @@
 #
 class Communication::Website::Menu < ApplicationRecord
   IDENTIFIER_MAX_LENGTH = 100
-  DEFAULT_MENUS_IDENTIFIERS = ['primary', 'legal', 'social'].freeze
+  DEFAULT_MENUS_IDENTIFIERS = ['primary', 'legal'].freeze
 
   include AsDirectObject
   include Initials
