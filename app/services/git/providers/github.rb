@@ -22,14 +22,14 @@ class Git::Providers::Github < Git::Providers::Abstract
     # Handle newly created GitFiles which update existing remote files while having blank previous_path.
     path_to_check = previous_path.present? ? previous_path : path
     file = tree_item_at_path(path_to_check)
-    # Remove at path_to_check if file is present
+    # En cas de dissonnance entre l'analyzer et le provider, on ne fait rien
+    return if file.nil?
     batch << {
       path: path_to_check,
       mode: file[:mode],
       type: file[:type],
       sha: nil
-    } if file.present?
-    # Write at new path
+    }
     batch << {
       path: path,
       mode: file[:mode],
