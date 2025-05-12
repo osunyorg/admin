@@ -1,7 +1,7 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Migrations::Agenda.migrate
+    Migrations::GitFiles.migrate_all
   end
 
   namespace :search do
