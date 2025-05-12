@@ -22,13 +22,14 @@ class Git::Providers::Github < Git::Providers::Abstract
     # Handle newly created GitFiles which update existing remote files while having blank previous_path.
     path_to_check = previous_path.present? ? previous_path : path
     file = tree_item_at_path(path_to_check)
-    return if file.nil?
+    # Remove at path_to_check if file is present
     batch << {
       path: path_to_check,
       mode: file[:mode],
       type: file[:type],
       sha: nil
-    }
+    } if file.present?
+    # Write at new path
     batch << {
       path: path,
       mode: file[:mode],
@@ -60,7 +61,8 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def push(commit_message)
-    return if !valid? || batch.empty?
+    return false if !valid?
+    return true if batch.empty?
     commit = create_commit_from_batch(batch, commit_message)
     client.update_branch repository, default_branch, commit[:sha]
     # The repo changed, invalidate the tree
