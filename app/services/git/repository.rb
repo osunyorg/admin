@@ -19,11 +19,8 @@ class Git::Repository
     return if git_files.empty?
     puts "Start sync"
     synchronize_git_files
-    if provider.push('Sync from Osuny')
-      refresh_git_files
-    else
-      puts "Push failed"
-    end
+    provider.push('Sync from Osuny')
+    refresh_git_files
   end
 
   def update_theme_version!
