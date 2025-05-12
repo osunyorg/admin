@@ -16,7 +16,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def publish
     @l10n.publish!
-    @event.sync_with_git
     redirect_back fallback_location: admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.communication.website.publish.notice')
   end
@@ -40,7 +39,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def create
     @event.website = @website
     @event.created_by = current_user
-    if @event.save_and_sync
+    if @event.save
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_created_html', model: @event.to_s_in(current_language))
     else
@@ -51,7 +50,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def update
-    if @event.update_and_sync(event_params)
+    if @event.update(event_params)
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_updated_html', model: @event.to_s_in(current_language))
     else

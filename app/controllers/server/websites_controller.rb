@@ -10,13 +10,13 @@ class Server::WebsitesController < Server::ApplicationController
 
   def clean_and_rebuild_all_websites
     @websites.find_each do |website|
-      Communication::Website::CleanAndRebuildJob.perform_later(website.id)
+      website.clean_and_rebuild
     end
     redirect_back(fallback_location: server_websites_path, notice: t('server_admin.websites.clean_and_rebuild_all_websites_notice'))
   end
 
   def clean_and_rebuild
-    Communication::Website::CleanAndRebuildJob.perform_later(@website.id)
+    @website.clean_and_rebuild
     redirect_back(fallback_location: server_website_path(@website), notice: t('server_admin.websites.clean_and_rebuild_website_notice'))
   end
 

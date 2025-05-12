@@ -35,7 +35,14 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @events = @all_events.latest_in(current_language)
     @all_projects = @website.projects.accessible_by(current_ability)
     @projects = @all_projects.latest_in(current_language)
+    @git_files_desynchronized = @website.git_files_desynchronized
     breadcrumb
+  end
+
+  def synchronize
+    @website.sync_with_git
+    redirect_to admin_communication_website_path(@website),
+                notice: t('admin.communication.website.synchronize.running')
   end
 
   def static
@@ -67,7 +74,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def create
-    if @website.save_and_sync
+    if @website.save
       redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s_in(current_language))
     else
       breadcrumb
@@ -76,7 +83,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def update
-    if @website.update_and_sync(website_params)
+    if @website.update(website_params)
       redirect_to [:admin, @website], notice: t('admin.successfully_updated_html', model: @website.to_s_in(current_language))
     else
       load_invalid_localization

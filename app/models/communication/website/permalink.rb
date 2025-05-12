@@ -24,7 +24,6 @@
 #  fk_rails_f389ba7d45  (website_id => communication_websites.id)
 #
 class Communication::Website::Permalink < ApplicationRecord
-  attr_accessor :force_sync_about
 
   include WithMapping
   # We don't include Sanitizable as this model is never handled by users directly.
@@ -39,7 +38,7 @@ class Communication::Website::Permalink < ApplicationRecord
   before_validation :set_university, on: :create
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
   # so we have an attribute accessor to force-sync the about, for example in the Permalinkable concern
-  after_commit :sync_about, on: [:create, :destroy], if: :force_sync_about
+  after_commit :touch_about, on: [:create, :destroy]
 
   scope :for_website, -> (website) { where(website_id: website.id) }
   scope :current, -> { where(is_current: true) }
@@ -160,8 +159,8 @@ class Communication::Website::Permalink < ApplicationRecord
     self.university_id = website.university_id
   end
 
-  def sync_about
+  def touch_about
     return unless about.persisted?
-    about.is_direct_object? ? about.sync_with_git : about.touch
+    about.touch
   end
 end

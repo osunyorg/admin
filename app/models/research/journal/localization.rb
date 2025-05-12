@@ -27,9 +27,9 @@
 #
 class Research::Journal::Localization < ApplicationRecord
   include AsLocalization
+  include HasGitFiles
   include Initials
   include Sanitizable
-  include WithGitFiles
   include WithUniversity
 
   has_summernote :summary

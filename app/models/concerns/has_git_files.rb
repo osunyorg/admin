@@ -1,7 +1,9 @@
-module WithGitFiles
+module HasGitFiles
   extend ActiveSupport::Concern
 
   included do
+    include GeneratesGitFiles
+    
     has_many  :git_files,
               class_name: "Communication::Website::GitFile",
               as: :about
@@ -27,4 +29,5 @@ module WithGitFiles
     path += "#{path_language.iso_code}/"
     path
   end
+
 end
