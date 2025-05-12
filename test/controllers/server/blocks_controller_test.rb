@@ -9,7 +9,8 @@ class Server::BlocksControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_show
-    get(server_block_path("chapter"))
+    block = communication_blocks(:olivia_in_noesya)
+    get(server_block_path(block.id))
     assert_response(:success)
   end
 end
