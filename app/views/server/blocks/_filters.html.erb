@@ -1,0 +1,26 @@
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_university,
+                      label: t('filters.attributes.element', element: University.model_name.human.downcase),
+                      collection: University.all.ordered
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_template_kind,
+                      label: t('filters.attributes.element', element: Communication::Block.human_attribute_name(:template).downcase),
+                      collection: Communication::Block.template_kinds
+                      %>
+
+    <%= render_filter f,
+                      :select,
+                      :for_about_type,
+                      label: t('filters.attributes.element', element: Communication::Block.human_attribute_name(:about_type).downcase),
+                      collection: Communication::Block.pluck(:about_type).compact.uniq.sort
+                      %>
+
+    <% end %>
+<% end %>
