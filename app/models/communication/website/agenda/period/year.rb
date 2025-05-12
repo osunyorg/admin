@@ -23,6 +23,7 @@
 class Communication::Website::Agenda::Period::Year < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::Base
+  include GeneratesGitFiles
   include Localizable
   include WithUniversity
 

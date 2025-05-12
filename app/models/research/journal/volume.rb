@@ -21,6 +21,7 @@
 #
 class Research::Journal::Volume < ApplicationRecord
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include Sanitizable
   include Searchable
