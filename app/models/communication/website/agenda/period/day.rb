@@ -30,6 +30,7 @@
 class Communication::Website::Agenda::Period::Day < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::Base
+  include GeneratesGitFiles
   include Localizable
   include WithUniversity
 

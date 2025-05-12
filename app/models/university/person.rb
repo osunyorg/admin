@@ -50,10 +50,11 @@ class University::Person < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
-  include Sanitizable
-  include Searchable
+  include GeneratesGitFiles
   include Localizable
   include MentionableByBlocks
+  include Sanitizable
+  include Searchable
   include WithAlumnus
   include WithBlobs
   include WithCountry
