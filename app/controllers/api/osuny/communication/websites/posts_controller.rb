@@ -96,7 +96,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   def l10n_permitted_keys
     [
       :migration_identifier, :language, :title, :meta_description,
-      :pinned, :published, :published_at, :slug, :subtitle, :summary, :text, :_destroy,
+      :pinned, :published, :published_at, :slug, :subtitle, :summary, :_destroy,
       featured_image: [:url, :alt, :credit, :_destroy],
       **nested_blocks_params
     ]

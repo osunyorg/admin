@@ -25,7 +25,6 @@ module Communication::Website::Post::Localization::WithOpenApi
         slug: { type: :string },
         subtitle: { type: :string, nullable: true },
         summary: { type: :string, nullable: true },
-        text: { type: :string, nullable: true },
         blocks: {
           type: :array,
           items: {
