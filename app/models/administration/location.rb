@@ -24,9 +24,10 @@
 #
 class Administration::Location < ApplicationRecord
   include AsIndirectObject
-  include Sanitizable
   include Localizable
   include LocalizableOrderByNameScope
+  include GeneratesGitFiles
+  include Sanitizable
   include WebsitesLinkable
   include WithCountry
   include WithGeolocation
@@ -54,10 +55,6 @@ class Administration::Location < ApplicationRecord
     localizations +
     programs +
     schools
-  end
-
-  def references
-    []
   end
 
   # WebsitesLinkable
