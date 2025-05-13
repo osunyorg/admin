@@ -31,10 +31,10 @@
 class Research::Publication < ApplicationRecord
   include AsIndirectObject
   include Filterable
+  include HasGitFiles
   include Permalinkable
   include Sanitizable
   include WithCitations
-  include WithGitFiles
 
   enum :source, {
     osuny: 0,

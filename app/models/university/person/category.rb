@@ -24,6 +24,7 @@
 class University::Person::Category < ApplicationRecord
   include AsCategory
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include WithUniversity
 
@@ -37,6 +38,7 @@ class University::Person::Category < ApplicationRecord
   end
 
   def references
+    super +
     people
   end
 
