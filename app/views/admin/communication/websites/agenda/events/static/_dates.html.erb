@@ -29,9 +29,4 @@ dates:
     hour: "<%= event.to_hour.strftime "%H:%M" %>"
     datetime: "<%= event.to_datetime&.iso8601 %>"
 <% end %>
-  add_to_calendar:
-    google: "<%= l10n.cal_google_url.html_safe %>"
-    yahoo: "<%= l10n.cal_yahoo_url.html_safe %>"
-    office: "<%= l10n.cal_office_url.html_safe %>"
-    outlook: "<%= l10n.cal_outlook_url.html_safe %>"
-    ical: "<%= l10n.cal_ical_url.html_safe %>"
+<%= render 'admin/communication/websites/agenda/static_add_to_calendar', l10n: l10n %>
