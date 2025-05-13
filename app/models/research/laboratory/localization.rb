@@ -26,9 +26,9 @@
 #
 class Research::Laboratory::Localization < ApplicationRecord
   include AsLocalization
+  include HasGitFiles
   include Initials
   include Sanitizable
-  include WithGitFiles
   include WithUniversity
 
   validates :name, presence: true

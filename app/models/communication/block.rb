@@ -149,7 +149,7 @@ class Communication::Block < ApplicationRecord
     about.touch
   end
 
-  def connect_and_sync_direct_sources
+  def connect_to_websites
     # We do nothing as the about will perform it
   end
 

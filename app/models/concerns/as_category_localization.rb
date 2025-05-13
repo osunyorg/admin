@@ -4,12 +4,12 @@ module AsCategoryLocalization
   include AsLocalization
   include AsLocalizedTree
   include Contentful
+  include HasGitFiles
   include Initials
   include Permalinkable
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage
-  include WithGitFiles
   include WithUniversity
   
   included do

@@ -11,6 +11,10 @@
     {
       "command": "0 1 * * * rails auto:brevo_sms_credits",
       "size": "S"
+    },
+    {
+      "command": "*/10 * * * * rails auto:synchronize_websites",
+      "size": "S"
     }
   ]
 }
