@@ -23,7 +23,7 @@ class Git::Providers::Github < Git::Providers::Abstract
     path_to_check = previous_path.present? ? previous_path : path
     file = tree_item_at_path(path_to_check)
     # En cas de dissonnance entre l'analyzer et le provider, on raise une erreur
-    raise "File to update does not exist on Git (previous_path: #{previous_path}, path: #{path})" if file.nil?
+    raise "File to update does not exist on Git (repository: #{repository) previous_path: #{previous_path}, path: #{path})" if file.nil?
     batch << {
       path: path_to_check,
       mode: file[:mode],
