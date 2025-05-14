@@ -1,24 +1,22 @@
-module Communication::Website::Post::WithOpenApi
+module Communication::Website::Post::Category::WithOpenApi
   extend ActiveSupport::Concern
 
   included do
     OPENAPI_SCHEMA = {
       type: :object,
-      title: "Communication::Website::Post",
+      title: "Communication::Website::Post::Category",
       properties: {
         id: { type: :string, format: :uuid },
         migration_identifier: { type: :string, nullable: true },
-        full_width: { type: :boolean },
+        parent_id: { type: :string, format: :uuid, nullable: true },
+        position: { type: :integer },
+        is_taxonomy: { type: :boolean },
         localizations: {
           type: :object,
-          description: "Localizations of the post. The key is the language's ISO 639-1 code.",
+          description: "Localizations of the category. The key is the language's ISO 639-1 code.",
           additionalProperties: {
-            "$ref": "#/components/schemas/communication_website_post_localization"
+            "$ref": "#/components/schemas/communication_website_post_category_localization"
           }
-        },
-        category_ids: {
-          type: :array,
-          items: { type: :string, format: :uuid }
         },
         created_at: { type: :string, format: "date-time" },
         updated_at: { type: :string, format: "date-time" }

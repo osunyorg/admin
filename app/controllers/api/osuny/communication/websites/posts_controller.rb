@@ -106,7 +106,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
     @post_params ||= begin
       permitted_params = params.require(:post)
                           .permit(
-                            :migration_identifier, :full_width, localizations: {}
+                            :migration_identifier, :full_width, category_ids: [], localizations: {}
                           ).merge(
                             university_id: current_university.id,
                             communication_website_id: website.id
@@ -119,7 +119,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   def post_params_for_upsert(post_params)
     permitted_params = post_params
                           .permit(
-                            :migration_identifier, :full_width, localizations: {}
+                            :migration_identifier, :full_width, category_ids: [], localizations: {}
                           ).merge(
                             university_id: current_university.id,
                             communication_website_id: website.id
