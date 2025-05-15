@@ -2,6 +2,6 @@ class Communication::Website::DeleteObsoleteConnectionsJob < Communication::Webs
   queue_as :mice
 
   def execute
-    website.delete_obsolete_connections
+    website.delete_obsolete_connections_safely
   end
 end

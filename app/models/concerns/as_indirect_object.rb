@@ -1,13 +1,11 @@
 # Ce concern ajoute les éléments nécessaires pour les objets indirects :
-# - connexions
-# - dépendances (avec et via synchro)
-# - références nécessaires
+# - Dépendances et références (avec et via synchro)
+# - Connexions (en tant que cible)
 module AsIndirectObject
   extend ActiveSupport::Concern
 
-  # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas WithGitFiles ici
+  # Les blocs sont des objets indirects, mais n'ont pas de GitFiles, on n'inclut donc pas HasGitFiles ici
   include WithDependencies
-  include WithReferences
 
   included do
     has_many  :connections,
@@ -20,8 +18,8 @@ module AsIndirectObject
     # Ce serait super de faire la ligne ci-dessous, mais Rails ne sait pas faire ça avec un objet polymorphe (direct_source)
     # has_many :direct_sources, through: :connections
 
-    after_save  :connect_and_sync_direct_sources
-    after_touch :connect_and_sync_direct_sources
+    after_save  :connect_to_websites
+    after_touch :connect_to_websites
   end
 
   def is_direct_object?
@@ -34,6 +32,14 @@ module AsIndirectObject
 
   def for_website?(website)
     website.has_connected_object?(self)
+  end
+
+  def references
+    if respond_to?(:language)
+      direct_sources_localizations_for(language_id)
+    else
+      direct_sources_localizations
+    end
   end
 
   def direct_sources
@@ -60,16 +66,26 @@ module AsIndirectObject
     dependencies
   end
 
-  def connect_and_sync_direct_sources_safely
+  def connect_to_websites_safely
+    previous_direct_sources = direct_sources_from_existing_connections
     direct_sources.each do |direct_source|
       direct_source.website.connect self, direct_source
     end
-    websites.each do |website|
-      Communication::Website::IndirectObject::SyncWithGitJob.perform_later(website.id, indirect_object: self)
+    new_direct_sources = direct_sources - previous_direct_sources
+    if new_direct_sources.any? && respond_to?(:localizations)
+      localizations.find_each(&:touch)
     end
   end
 
   protected
+
+  def direct_sources_localizations
+    direct_sources_from_existing_connections.collect(&:localizations).flatten
+  end
+
+  def direct_sources_localizations_for(language_id)
+    direct_sources_localizations.select { |l10n| l10n.language_id == language_id }
+  end
 
   def direct_sources_from_reference(reference)
     # Early-return to ignore contexts without connections (ex: extranets)
@@ -79,8 +95,8 @@ module AsIndirectObject
 
   end
 
-  def connect_and_sync_direct_sources
-    Communication::Website::IndirectObject::ConnectAndSyncDirectSourcesJob.perform_later self
+  def connect_to_websites
+    Communication::Website::IndirectObject::ConnectToWebsitesJob.perform_later self
   end
 
   def add_direct_source_to_dependencies(direct_source, website, array: [])

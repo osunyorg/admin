@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_01_082630) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_14_074232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -780,7 +780,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_01_082630) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "previous_sha"
+    t.string "current_path"
+    t.string "current_sha"
+    t.boolean "desynchronized", default: true
+    t.datetime "desynchronized_at"
+    t.uuid "university_id"
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
+    t.index ["university_id"], name: "index_communication_website_git_files_on_university_id"
     t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
   end
 
@@ -1047,6 +1053,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_01_082630) do
     t.boolean "is_programs_root", default: false
     t.boolean "is_taxonomy", default: false
     t.string "bodyclass"
+    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_post_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_post_categories_on_program_id"
@@ -1074,6 +1081,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_01_082630) do
     t.uuid "communication_website_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "migration_identifier"
     t.index ["about_id"], name: "idx_on_about_id_6e430d4efc"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_0c06c1ae6f"
     t.index ["language_id"], name: "idx_on_language_id_cc5f73e306"
@@ -1090,7 +1098,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_01_082630) do
     t.datetime "published_at"
     t.string "slug"
     t.text "summary"
-    t.text "text"
     t.string "title"
     t.uuid "about_id"
     t.uuid "language_id"
@@ -1173,6 +1180,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_01_082630) do
     t.uuid "locked_by_job_id"
     t.string "deuxfleurs_access_key_id"
     t.string "deuxfleurs_secret_access_key"
+    t.datetime "last_sync_at"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
@@ -2315,6 +2323,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_01_082630) do
   add_foreign_key "communication_website_git_file_orphans", "communication_websites"
   add_foreign_key "communication_website_git_file_orphans", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
+  add_foreign_key "communication_website_git_files", "universities"
   add_foreign_key "communication_website_localizations", "communication_websites", column: "about_id"
   add_foreign_key "communication_website_localizations", "languages"
   add_foreign_key "communication_website_localizations", "universities"

@@ -21,12 +21,15 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     page = communication_website_pages(:page_with_no_dependency)
     page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
 
-    # On ajoute un block Personnes lié à Arnaud : 9 dépendances
+    # Au départ, 2 dépendances :
     # - la localisation FR de la page
+    # - La content security policy
+    assert_equal 2, page.recursive_dependencies(follow_direct: true).count
+
+    # On ajoute un block Personnes lié à Arnaud : +3 dépendances
     # - le block Personnes
     # - la personne en dépendance du composant Person
     # - la localisation FR de la personne
-    # - La content security policy
     block = page_l10n.blocks.create(position: 1, published: true, template_kind: :persons)
     block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
     block.save
@@ -46,12 +49,12 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     assert_enqueued_with(job: Communication::Website::CleanJob) do
       perform_enqueued_jobs(only: Dependencies::CleanWebsitesIfNecessaryJob)
     end
+      
+    perform_enqueued_jobs(only: Communication::Website::CleanJob)
 
-    # On vérifie qu'on enqueue le job qui destroy les obsolete git files
-    assert_enqueued_with(job: Communication::Website::DestroyObsoleteGitFilesJob) do
-      perform_enqueued_jobs(only: Communication::Website::CleanJob)
-    end
-
+    # On modifie le bloc Personnes en remplaçant Arnaud par Olivia : -2 puis +2 dépendances
+    # - On retire Arnaud et sa localisation FR
+    # - On ajoute Olivia et sa localisation FR
     assert_equal 5, page.recursive_dependencies(follow_direct: true).count
 
     clear_enqueued_jobs
@@ -68,32 +71,28 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
     clear_enqueued_jobs
 
-    # Vérifie qu'on a bien
-    # - une tâche pour resynchroniser la page
-    # - une tâche de nettoyage des git files (dépendances du bloc supprimé)
-    assert_enqueued_with(job: Communication::Website::DirectObject::SyncWithGitJob, args: [page.communication_website_id, direct_object: page]) do
-      assert_enqueued_with(job: Communication::Website::CleanJob) do
-        block.destroy
-      end
+    # Vérifie qu'on a bien  une tâche de nettoyage (dépendances du bloc supprimé)
+    assert_enqueued_with(job: Communication::Website::CleanJob) do
+      block.destroy
     end
 
-    assert_enqueued_with(job: Communication::Website::DestroyObsoleteGitFilesJob) do
-      perform_enqueued_jobs(only: Communication::Website::CleanJob)
-    end
+    # On a enlevé le bloc, reste les 2 dépendances d'origine
+    # - la localisation FR de la page
+    # - La content security policy
+    assert_equal 2, page.recursive_dependencies(follow_direct: true).count
   end
 
   def test_change_website_dependencies
     website_with_github.save
+    perform_enqueued_jobs
+
     dependencies_before_count = website_with_github.reload.recursive_dependencies(follow_direct: true).count
 
     # On modifie l'about du website en ajoutant une école
     # On vérifie que le job de destroy obsolete git files n'est pas enqueued
-    assert_no_enqueued_jobs only: Communication::Website::DestroyObsoleteGitFilesJob do
-      assert_enqueued_with(job: Communication::Website::SetProgramsCategoriesJob) do
-        website_with_github.update(about: default_school)
-      end
-    end
+    website_with_github.update(about: default_school)
     perform_enqueued_jobs
+
     delta = website_with_github.reload.recursive_dependencies(follow_direct: true).count - dependencies_before_count
     # En ajoutant l'école, on rajoute en dépendances :
     # - L'école, sa formations (default_program), son diplôme (default_diploma) et les localisations de ces objets (6)
@@ -101,16 +100,10 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # - Les catégories d'agenda liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
     # - Les catégories de pages liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
     # - Les pages "Teachers", "Administrators", "Researchers", "EducationDiplomas", "EducationPrograms", "AdministrationLocation" et leurs localisations (12)
-    # Donc un total de 6 + 4 + 4 + 12 = 26 dépendances
+    # Donc un total de 6 + 4 + 4 + 4 + 12 = 30 dépendances
     assert_equal 30, delta
 
     clear_enqueued_jobs
-
-    # On enlève l'about du website
-    # On vérifie qu'on appelle bien la méthode destroy_obsolete_git_files sur le site
-    assert_enqueued_with(job: Communication::Website::DestroyObsoleteGitFilesJob) do
-      website_with_github.update(about: nil)
-    end
   end
 
   def test_change_website_dependencies_with_multilingual
@@ -121,21 +114,6 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
     # Tant qu'on n'a pas activé l'anglais sur le website le nombre de dépendances ne doit pas bouger
     assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies(follow_direct: true).count
-  end
-
-  def test_change_menu_item_dependencies
-    menu = communication_website_menus(:primary_menu)
-
-    item = menu.items.create(university: default_university, website: website_with_github, kind: :blank, title: 'Test')
-
-    item.kind = :page
-    item.about = communication_website_pages(:page_with_no_dependency)
-    item.save
-
-    # Comme les menu items ne répondent pas à is_direct_object? du coup aucune tâche de nettoyage n'est ajoutée
-    assert_no_enqueued_jobs only: Communication::Website::DestroyObsoleteGitFilesJob do
-      item.destroy
-    end
   end
 
 end

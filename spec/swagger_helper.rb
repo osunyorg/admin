@@ -29,6 +29,8 @@ RSpec.configure do |config|
     communication_website_page_category_localization: Communication::Website::Page::Category::Localization::OPENAPI_SCHEMA,
     communication_website_post: Communication::Website::Post::OPENAPI_SCHEMA,
     communication_website_post_localization: Communication::Website::Post::Localization::OPENAPI_SCHEMA,
+    communication_website_post_category: Communication::Website::Post::Category::OPENAPI_SCHEMA,
+    communication_website_post_category_localization: Communication::Website::Post::Category::Localization::OPENAPI_SCHEMA,
     university_organization: University::Organization::OPENAPI_SCHEMA,
     university_organization_localization: University::Organization::Localization::OPENAPI_SCHEMA,
     university_organization_category: University::Organization::Category::OPENAPI_SCHEMA,

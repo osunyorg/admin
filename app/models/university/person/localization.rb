@@ -40,11 +40,11 @@ class University::Person::Localization < ApplicationRecord
   include AsLocalization
   include Backlinkable
   include Contentful
+  include HasGitFiles
   include Permalinkable
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
-  include WithGitFiles
   include WithUniversity
 
   alias :person :about
@@ -78,10 +78,12 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def dependencies
+    person.active_storage_blobs + 
     contents_dependencies
   end
 
   def references
+    super +
     [administrator, author, researcher, teacher]
   end
 

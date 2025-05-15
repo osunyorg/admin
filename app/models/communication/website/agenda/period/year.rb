@@ -23,6 +23,7 @@
 class Communication::Website::Agenda::Period::Year < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::Base
+  include GeneratesGitFiles
   include Localizable
   include WithUniversity
 
@@ -48,7 +49,7 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
       website: website,
       value: value
     ).first_or_create
-    year.save_and_sync
+    year.save
     year
   end
 
