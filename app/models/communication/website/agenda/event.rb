@@ -32,6 +32,7 @@
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
+  include AsTree
   include Communication::Website::Agenda::Period::InPeriod
   include Duplicable
   include Filterable
@@ -45,7 +46,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
-  include WithTree
   include WithUniversity
 
   belongs_to  :created_by,

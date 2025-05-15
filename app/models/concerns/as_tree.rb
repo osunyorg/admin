@@ -1,8 +1,10 @@
-module WithTree
+module AsTree
   extend ActiveSupport::Concern
 
   included do
     scope :root, -> { where(parent_id: nil) }
+    scope :ordered_by_position_in_tree, -> { order(:position_in_tree)}
+    after_save :rebuild_position_in_tree_if_necessary
   end
 
   def has_children?
@@ -56,6 +58,36 @@ module WithTree
     children.ordered(original_language).map { |child| 
       [child, child.descendants]
     }.flatten
+  end
+
+  def rebuild_position_in_tree_if_necessary
+    return unless saved_change_to_position? || saved_change_to_parent_id?
+    update_position_in_tree(root_objects)
+  end
+
+  def root_objects
+    objects = self.class
+                  .unscoped
+                  .where(university: university)
+                  .root
+                  .ordered
+    if respond_to?(:website)
+      objects = objects.where(website: website)
+    end
+    objects
+  end
+
+  def update_position_in_tree(list, current_position = 1)
+    puts "update_position_in_tree #{current_position}"
+    list.each do |object|
+      object.update_column :position_in_tree, current_position
+      current_position += 1
+      if object.children.any?
+        child_objects = object.children.ordered
+        current_position = update_position_in_tree(child_objects, current_position)
+      end
+    end
+    current_position
   end
 
 end
