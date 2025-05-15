@@ -31,8 +31,8 @@
 class Communication::Website::Agenda::Event::TimeSlot::Localization < ApplicationRecord
   include AddableToCalendar
   include AsLocalization
+  include HasGitFiles
   include Permalinkable
-  include WithGitFiles
   include WithOpenApi
   include WithUniversity
 

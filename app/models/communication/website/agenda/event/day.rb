@@ -27,9 +27,9 @@
 #
 class Communication::Website::Agenda::Event::Day < ApplicationRecord
   include AsDirectObject
+  include HasGitFiles
   include Permalinkable
   include WithUniversity
-  include WithGitFiles
 
   belongs_to  :event,
               foreign_key: :communication_website_agenda_event_id

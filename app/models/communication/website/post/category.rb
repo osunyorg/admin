@@ -6,6 +6,7 @@
 #  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
+#  migration_identifier     :string
 #  position                 :integer          not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -31,9 +32,11 @@
 class Communication::Website::Post::Category < ApplicationRecord
   include AsCategory
   include AsDirectObject
+  include GeneratesGitFiles
   include Localizable
   include Sanitizable
   include WithMenuItemTarget
+  include WithOpenApi
   include WithUniversity
 
   belongs_to              :program,
@@ -65,6 +68,7 @@ class Communication::Website::Post::Category < ApplicationRecord
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
   end
 
+  # TODO pourquoi cette catégorie est la seule à définir cela ?
   def exportable_to_git?
     false
   end

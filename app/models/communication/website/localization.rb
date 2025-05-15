@@ -50,7 +50,7 @@ class Communication::Website::Localization < ApplicationRecord
   validate :prevent_unpublishing_default_language
 
   after_create_commit :create_existing_menus_in_language
-  after_save :destroy_website_obsolete_git_files, if: :should_clean_website_on_git?
+  after_save :mark_website_obsolete_git_files, if: :should_clean_website_on_git?
 
   # Localization is not directly exportable to git
   # Whereas the languages config in the dependencies is exportable to git
@@ -88,8 +88,8 @@ class Communication::Website::Localization < ApplicationRecord
     saved_change_to_published? && published_before_last_save
   end
 
-  def destroy_website_obsolete_git_files
-    website.destroy_obsolete_git_files
+  def mark_website_obsolete_git_files
+    website.mark_obsolete_git_files
   end
 
   def prevent_unpublishing_default_language

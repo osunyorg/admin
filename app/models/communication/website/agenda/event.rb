@@ -32,13 +32,14 @@
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
+  include Communication::Website::Agenda::Period::InPeriod
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
-  include Communication::Website::Agenda::Period::InPeriod
+  include GeneratesGitFiles
+  include Localizable
   include Sanitizable
   include Searchable
-  include Localizable
   include WithDays
   include WithTimeSlots
   include WithKinds
