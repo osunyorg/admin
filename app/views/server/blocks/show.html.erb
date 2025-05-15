@@ -14,13 +14,7 @@
 
   <div class="col-lg-4 mb-3">
     <%= osuny_label Communication::Block.human_attribute_name(:about) %><br>
-    <%=
-    begin
-      @block.about.about.to_s_in(block.language)
-    rescue
-      @block.about.to_s
-    end
-    %>
+    <%= @block.about.to_s %>
   </div>
 </div>
 
