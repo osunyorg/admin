@@ -1,14 +1,14 @@
-module Communication::Website::Post::Localization::WithOpenApi
+module Communication::Website::Post::Category::Localization::WithOpenApi
   extend ActiveSupport::Concern
 
   included do
     OPENAPI_SCHEMA = {
       type: :object,
-      title: "Communication::Website::Post::Localization",
+      title: "Communication::Website::Post::Category::Localization",
       properties: {
         id: { type: :string, format: :uuid },
         migration_identifier: { type: :string, nullable: true },
-        title: { type: :string },
+        name: { type: :string },
         featured_image: {
           type: :object,
           properties: {
@@ -19,11 +19,8 @@ module Communication::Website::Post::Localization::WithOpenApi
           }
         },
         meta_description: { type: :string, nullable: true },
-        pinned: { type: :boolean, nullable: true },
-        published: { type: :boolean },
-        published_at: { type: :string, format: 'date-time', nullable: true },
+        path: { type: :string, nullable: true },
         slug: { type: :string },
-        subtitle: { type: :string, nullable: true },
         summary: { type: :string, nullable: true },
         blocks: {
           type: :array,
