@@ -33,7 +33,7 @@ module Communication::Website::GitFile::WithContent
   end
 
   def computed_content
-    @computed_content ||= (about.nil? ? '' : Static.render(template_static, about, website))
+    @computed_content ||= (about.nil? || computed_path.nil? ? '' : Static.render(template_static, about, website))
   end
 
   def computed_sha

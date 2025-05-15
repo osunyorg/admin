@@ -1,6 +1,8 @@
 class ApplicationJob < ActiveJob::Base
   retry_on StandardError, wait: :polynomially_longer, attempts: Float::INFINITY
 
+  discard_on  ActiveJob::DeserializationError # Discard if object does not exist anymore
+
   # https://github.com/bensheldon/good_job?tab=readme-ov-file#labelled-jobs
   include GoodJob::ActiveJobExtensions::Labels
 

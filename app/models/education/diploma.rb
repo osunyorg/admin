@@ -23,6 +23,7 @@ class Education::Diploma < ApplicationRecord
   CERTIFICATIONS_DIRECTORY = "app/assets/images/education/diplomas/certifications"
 
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include Orderable
   include Sanitizable

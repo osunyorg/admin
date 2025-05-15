@@ -24,6 +24,7 @@
 class Education::Program::Category < ApplicationRecord
   include AsCategory
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include WithUniversity
 
