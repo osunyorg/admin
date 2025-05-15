@@ -19,7 +19,7 @@
                       :select,
                       :for_about_type,
                       label: t('filters.attributes.element', element: Communication::Block.human_attribute_name(:about_type).downcase),
-                      collection: Communication::Block.pluck(:about_type).compact.uniq.sort
+                      collection: Communication::Block.distinct.pluck(:about_type).compact.sort
                       %>
 
     <% end %>
