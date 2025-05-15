@@ -21,7 +21,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
       l10n = post.localization_for(current_language)
       next unless l10n.present?
       is_published ? l10n.publish! : l10n.unpublish!
-      post.save_and_sync
+      post.save
     end
     redirect_back fallback_location: admin_communication_website_posts_path,
                   notice: t('communication.website.posts.successful_batch_update')
@@ -29,7 +29,6 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def publish
     @l10n.publish!
-    @post.sync_with_git
     redirect_back fallback_location: admin_communication_website_post_path(@post),
                   notice: t('admin.communication.website.publish.notice')
   end
@@ -58,7 +57,6 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def create
     @post.website = @website
     if @post.save
-      @post.sync_with_git
       redirect_to admin_communication_website_post_path(@post),
                   notice: t('admin.successfully_created_html', model: @post.to_s_in(current_language))
     else
@@ -69,7 +67,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def update
-    if @post.update_and_sync(post_params)
+    if @post.update(post_params)
       redirect_to admin_communication_website_post_path(@post),
                   notice: t('admin.successfully_updated_html', model: @post.to_s_in(current_language))
     else
@@ -108,8 +106,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     .permit(
       :full_width, author_ids: [], category_ids: [],
       localizations_attributes: [
-        :id, :title, :subtitle, :meta_description, :summary, :text,
-        :header_cta, :header_cta_label, :header_cta_url, 
+        :id, :title, :subtitle, :meta_description, :summary,
+        :header_cta, :header_cta_label, :header_cta_url,
         :published, :published_at, :slug, :pinned,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,

@@ -28,10 +28,11 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include AsDirectObject
   include Duplicable
   include Filterable
+  include GeneratesGitFiles
   include Categorizable # Must be loaded after Filterable to be filtered by categories
+  include Localizable
   include Sanitizable
   include Searchable
-  include Localizable
   include WithMenuItemTarget
   include WithUniversity
 

@@ -27,7 +27,7 @@
 class Communication::Website::Agenda::Period::Year::Localization < ApplicationRecord
   include AsLocalization
   include Permalinkable
-  include WithGitFiles
+  include HasGitFiles
   include WithUniversity
 
   belongs_to  :website,

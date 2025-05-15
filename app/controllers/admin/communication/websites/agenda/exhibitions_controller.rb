@@ -15,7 +15,6 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
 
   def publish
     @l10n.publish!
-    @exhibition.sync_with_git
     redirect_back fallback_location: admin_communication_website_agenda_exhibition_path(@exhibition),
                   notice: t('admin.communication.website.publish.notice')
   end
@@ -38,7 +37,7 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
   def create
     @exhibition.website = @website
     @exhibition.created_by = current_user
-    if @exhibition.save_and_sync
+    if @exhibition.save
       redirect_to admin_communication_website_agenda_exhibition_path(@exhibition),
                   notice: t('admin.successfully_created_html', model: @exhibition.to_s_in(current_language))
     else
@@ -49,7 +48,7 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
   end
 
   def update
-    if @exhibition.update_and_sync(exhibition_params)
+    if @exhibition.update(exhibition_params)
       redirect_to admin_communication_website_agenda_exhibition_path(@exhibition),
                   notice: t('admin.successfully_updated_html', model: @exhibition.to_s_in(current_language))
     else

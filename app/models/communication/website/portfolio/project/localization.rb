@@ -40,6 +40,7 @@
 class Communication::Website::Portfolio::Project::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
+  include HasGitFiles
   include HeaderCallToAction
   include Initials
   include Permalinkable
@@ -48,7 +49,6 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithGitFiles
   include WithPublication
   include WithUniversity
 
