@@ -33,13 +33,13 @@
 class Administration::Location::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
+  include HasGitFiles
   include Initials
   include Permalinkable
   include Sanitizable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithGitFiles
   include WithUniversity
 
   has_summernote :summary
