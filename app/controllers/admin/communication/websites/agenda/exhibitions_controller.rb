@@ -87,7 +87,7 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
   def exhibition_params
     params.require(:communication_website_agenda_exhibition)
     .permit(
-      :from_day, :to_day, :time_zone,
+      :from_day, :to_day, :time_zone, :bodyclass,
       category_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text, :notes, :place,

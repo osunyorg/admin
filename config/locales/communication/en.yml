@@ -229,7 +229,6 @@ en:
         title: Title
         url: URL
       communication/website/page:
-        bodyclass: Specific CSS class
         categories: Categories
         children: Children pages
         full_width: Full width
