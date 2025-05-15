@@ -22,7 +22,8 @@ class Git::Providers::Github < Git::Providers::Abstract
     # Handle newly created GitFiles which update existing remote files while having blank previous_path.
     path_to_check = previous_path.present? ? previous_path : path
     file = tree_item_at_path(path_to_check)
-    return if file.nil?
+    # En cas de dissonnance entre l'analyzer et le provider, on raise une erreur
+    raise "File to update does not exist on Git (repository: #{repository}, previous_path: #{previous_path}, path: #{path})" if file.nil?
     batch << {
       path: path_to_check,
       mode: file[:mode],

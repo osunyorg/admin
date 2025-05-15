@@ -46,10 +46,12 @@ RSpec.describe 'Communication::Website::Post' do
         required: [:post]
       }
       let(:communication_website_post) {
+        post_category = communication_website_post_categories(:test_category)
         {
           post: {
             migration_identifier: 'post-from-api-1',
             full_width: false,
+            category_ids: [post_category.id],
             localizations: {
               fr: {
                 migration_identifier: 'post-from-api-1-fr',
@@ -172,11 +174,13 @@ RSpec.describe 'Communication::Website::Post' do
       let(:posts) {
         test_post = communication_website_posts(:test_post)
         test_post_l10n = communication_website_post_localizations(:test_post_fr)
+        post_category = communication_website_post_categories(:test_category)
         {
           posts: [
             {
               migration_identifier: 'post-from-api-1',
               full_width: false,
+              category_ids: [post_category.id],
               localizations: {
                 fr: {
                   migration_identifier: 'post-from-api-1-fr',
@@ -212,6 +216,7 @@ RSpec.describe 'Communication::Website::Post' do
             {
               migration_identifier: test_post.migration_identifier,
               full_width: test_post.full_width,
+              category_ids: test_post.category_ids,
               localizations: {
                 test_post_l10n.language.iso_code => {
                   migration_identifier: test_post_l10n.migration_identifier,
@@ -402,6 +407,7 @@ RSpec.describe 'Communication::Website::Post' do
           post: {
             migration_identifier: test_post.migration_identifier,
             full_width: test_post.full_width,
+            category_ids: test_post.category_ids,
             localizations: {
               test_post_l10n.language.iso_code => {
                 migration_identifier: test_post_l10n.migration_identifier,
@@ -432,6 +438,7 @@ RSpec.describe 'Communication::Website::Post' do
           {
             post: {
               full_width: test_post.full_width,
+              category_ids: test_post.category_ids,
               localizations: {
                 test_post_l10n.language.iso_code => {
                   migration_identifier: test_post_l10n.migration_identifier,
@@ -476,6 +483,7 @@ RSpec.describe 'Communication::Website::Post' do
             post: {
               migration_identifier: test_post.migration_identifier,
               full_width: test_post.full_width,
+              category_ids: test_post.category_ids,
               localizations: {
                 test_post_l10n.language.iso_code => {
                   migration_identifier: test_post_l10n.migration_identifier,

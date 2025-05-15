@@ -33,6 +33,7 @@
 class Communication::Website::Agenda::Category < ApplicationRecord
   include AsCategory
   include AsDirectObject
+  include GeneratesGitFiles
   include Localizable
   include Sanitizable
   include WithMenuItemTarget

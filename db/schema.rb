@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_10_081918) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_14_074232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -1059,6 +1059,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_10_081918) do
     t.boolean "is_taxonomy", default: false
     t.string "bodyclass"
     t.integer "position_in_tree"
+    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_post_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_post_categories_on_program_id"
@@ -1086,6 +1087,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_10_081918) do
     t.uuid "communication_website_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "migration_identifier"
     t.index ["about_id"], name: "idx_on_about_id_6e430d4efc"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_0c06c1ae6f"
     t.index ["language_id"], name: "idx_on_language_id_cc5f73e306"
@@ -1102,7 +1104,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_10_081918) do
     t.datetime "published_at"
     t.string "slug"
     t.text "summary"
-    t.text "text"
     t.string "title"
     t.uuid "about_id"
     t.uuid "language_id"

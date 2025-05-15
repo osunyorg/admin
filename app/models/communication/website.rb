@@ -53,6 +53,7 @@ class Communication::Website < ApplicationRecord
 
   include Favoritable
   include Filterable
+  include GeneratesGitFiles
   include Localizable
   include LocalizableOrderByNameScope
   include Searchable

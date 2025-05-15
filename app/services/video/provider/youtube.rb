@@ -9,12 +9,14 @@ class Video::Provider::Youtube < Video::Provider::Default
   ]
 
   def identifier
-    if short_url?
-      param_from_short_url
+    if share_url?
+      param_from_share_url
     elsif live_url?
       param_from_live_url
     elsif embed_url?
       param_from_embed_url
+    elsif short_url?
+      param_from_short_url
     else
       param_from_regular_url
     end
@@ -49,14 +51,8 @@ class Video::Provider::Youtube < Video::Provider::Default
 
   protected
 
-  def short_url?
+  def share_url?
     video_url.include?('youtu.be')
-  end
-
-  # youtu.be
-  def param_from_short_url
-    video_url.split('youtu.be/').last
-             .split('?').first
   end
 
   def live_url?
@@ -65,6 +61,16 @@ class Video::Provider::Youtube < Video::Provider::Default
 
   def embed_url?
     video_url.include?('/embed/')
+  end
+
+  def short_url?
+    video_url.include?('/shorts/')
+  end
+
+  # https://youtu.be/1yayRw5JEhk
+  def param_from_share_url
+    video_url.split('youtu.be/').last
+             .split('?').first
   end
 
   # https://www.youtube.com/live/n4jqeyBnuHM?si=RkjPzgQ_lJm7YlTh
@@ -76,6 +82,12 @@ class Video::Provider::Youtube < Video::Provider::Default
   # https://www.youtube.com/embed/1yayRw5JEhk?list=UUsnXdS8k7q26ViqHshYjavg
   def param_from_embed_url
     video_url.split('/embed/').last
+             .split('?').first
+  end
+
+  # https://www.youtube.com/shorts/z14G0G5cCN8
+  def param_from_short_url
+    video_url.split('/shorts/').last
              .split('?').first
   end
 

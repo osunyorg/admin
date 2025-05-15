@@ -35,6 +35,7 @@
 #
 class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include Orderable
   include Sanitizable

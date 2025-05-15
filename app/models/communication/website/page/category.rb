@@ -33,8 +33,9 @@
 class Communication::Website::Page::Category < ApplicationRecord
   include AsCategory
   include AsDirectObject
-  include Sanitizable
+  include GeneratesGitFiles
   include Localizable
+  include Sanitizable
   include WithMenuItemTarget
   include WithOpenApi
   include WithUniversity

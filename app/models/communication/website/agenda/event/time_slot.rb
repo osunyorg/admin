@@ -27,6 +27,7 @@
 class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
+  include GeneratesGitFiles
   include Localizable
   include WithOpenApi
   include WithUniversity

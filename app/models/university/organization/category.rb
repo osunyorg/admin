@@ -26,6 +26,7 @@
 class University::Organization::Category < ApplicationRecord
   include AsCategory
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include WithOpenApi
   include WithUniversity
