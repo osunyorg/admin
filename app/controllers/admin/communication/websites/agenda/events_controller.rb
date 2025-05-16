@@ -92,7 +92,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def event_params
     params.require(:communication_website_agenda_event)
     .permit(
-      :from_day, :to_day, :time_zone,
+      :from_day, :to_day, :time_zone, :bodyclass,
       :parent_id, category_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text, :notes,
