@@ -6,6 +6,7 @@
 #  about_type          :string           indexed => [about_id]
 #  kind                :integer          default("blank")
 #  position            :integer          not null
+#  position_in_tree    :integer
 #  should_open_new_tab :boolean          default(FALSE)
 #  title               :string
 #  url                 :text

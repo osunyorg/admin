@@ -38,6 +38,7 @@ class Communication::Block < ApplicationRecord
   }
 
   include AsIndirectObject
+  include Filterable
   include Orderable
   include WithAccessibility
   include WithHeadingRanks
@@ -62,6 +63,9 @@ class Communication::Block < ApplicationRecord
   after_save :touch_about#, :touch_targets # FIXME
 
   scope :published, -> { where(published: true) }
+  scope :for_template_kind, -> (template_kind, language = nil) { where(template_kind: template_kind) }
+  scope :for_about_type, -> (about_type, language = nil) { where(about_type: about_type) }
+  scope :for_university, -> (university, language = nil) { where(university: university) }
 
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.

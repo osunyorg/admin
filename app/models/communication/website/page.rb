@@ -7,6 +7,7 @@
 #  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  position                 :integer          not null
+#  position_in_tree         :integer
 #  type                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
