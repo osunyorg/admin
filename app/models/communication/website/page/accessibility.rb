@@ -1,7 +1,7 @@
 class Communication::Website::Page::Accessibility < Communication::Website::Page
 
   def draftable?
-    false
+    true
   end
 
   def is_listed_among_children?
