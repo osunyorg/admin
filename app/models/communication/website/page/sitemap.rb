@@ -4,10 +4,6 @@ class Communication::Website::Page::Sitemap < Communication::Website::Page
     false
   end
 
-  def draftable?
-    true
-  end
-
   def full_width
     false
   end

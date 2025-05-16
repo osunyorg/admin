@@ -1,9 +1,5 @@
 class Communication::Website::Page::PrivacyPolicy < Communication::Website::Page
 
-  def draftable?
-    true
-  end
-
   def is_listed_among_children?
     false
   end

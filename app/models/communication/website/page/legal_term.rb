@@ -1,9 +1,5 @@
 class Communication::Website::Page::LegalTerm < Communication::Website::Page
 
-  def draftable?
-    true
-  end
-
   def is_listed_among_children?
     false
   end
