@@ -125,6 +125,7 @@ en:
   admin:
     advanced_settings: Advanced settings
     attachment_not_available: Attachment not available
+    bodyclass: Specific CSS class
     categories:
       cant_move_taxonomy_here: Can't move a taxonomy in another category
     chronicles:
@@ -200,7 +201,6 @@ en:
     title: Edit the selection
   cancel: Cancel
   category:
-    bodyclass: Specific CSS class
     children: Sub-categories
     featured_image: Featured image
     featured_image_alt: Alternative text

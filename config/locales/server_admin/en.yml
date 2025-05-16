@@ -8,7 +8,6 @@ en:
       data: Data
       open: Open
       quantity: Quantity
-      resave: Force those blocks re-save
       see: See
       title: Name
       url: URL

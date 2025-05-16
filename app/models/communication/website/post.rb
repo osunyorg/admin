@@ -3,6 +3,7 @@
 # Table name: communication_website_posts
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  created_at               :datetime         not null

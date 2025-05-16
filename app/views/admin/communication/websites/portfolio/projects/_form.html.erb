@@ -24,6 +24,7 @@
                       f: lf,
                       source: '#communication_website_portfolio_project_localizations_attributes_0_title' %>
           <%= f.input :full_width, wrapper: :custom_boolean_switch %>
+          <%= f.input :bodyclass, label: t('admin.bodyclass') %>
         <% end %>
         <%= render 'admin/application/images/shared/form', about: l10n, f: lf %>
       </div>
