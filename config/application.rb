@@ -69,8 +69,5 @@ module Osuny
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
-
-    # https://www.skylight.io/support/background-jobs
-    config.skylight.probes << 'active_job'
   end
 end

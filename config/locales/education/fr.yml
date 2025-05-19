@@ -35,7 +35,6 @@ fr:
         slug: Identifiant
       education/program:
         apprenticeship: Apprentissage
-        bodyclass: Classe CSS spécifique
         capacity: Capacité
         continuing: Formation continue
         diploma: Diplôme

@@ -9,12 +9,8 @@ class Server::BlocksControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_show
-    get(server_block_path("chapter"))
+    block = communication_blocks(:olivia_in_noesya)
+    get(server_block_path(block.id))
     assert_response(:success)
-  end
-
-  def test_resave
-    post(resave_server_block_path("chapter"))
-    assert_redirected_to(server_block_path("chapter"))
   end
 end

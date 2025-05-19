@@ -229,7 +229,6 @@ fr:
         title: Titre
         url: URL
       communication/website/page:
-        bodyclass: Classe CSS spécifique
         categories: Catégories
         children: Pages enfants
         full_width: Pleine largeur

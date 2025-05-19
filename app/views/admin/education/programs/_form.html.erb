@@ -71,7 +71,7 @@
                             localized: true,
                             except: program
                           ) %>
-        <%= f.input :bodyclass %>
+        <%= f.input :bodyclass, label: t('admin.bodyclass') %>
         <%= lf.input :logo,
                     as: :single_deletable_file,
                     hint: images_formats_accepted_hint,

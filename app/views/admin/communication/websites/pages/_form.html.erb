@@ -37,7 +37,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
                               localized: true
                             ),
                             include_blank: false unless page.is_home? %>
-          <%= f.input :bodyclass if can?(:edit, @website) %>
+          <%= f.input :bodyclass, label: t('admin.bodyclass') if can?(:edit, @website) %>
           <%= f.input :full_width if page.editable_width? %>
         <% end %>
         <%= render 'admin/application/images/shared/form', f: lf, about: @l10n %>

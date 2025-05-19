@@ -35,7 +35,6 @@ en:
         slug: Slug
       education/program:
         apprenticeship: Apprenticeship
-        bodyclass: Specific CSS class
         capacity: Capacity
         continuing: Continuing training
         diploma: Diploma
