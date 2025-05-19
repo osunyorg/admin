@@ -17,7 +17,10 @@
         <tr>
           <td><%= osuny_published(git_file.synchronized?) %></td>
           <td><%= link_to git_file, admin_communication_website_git_file_path(git_file) %></td>
-          <td><%= git_file.about %></td>
+          <td>
+            <%= git_file.about %><br>
+            <span class="small"><%= git_file.about_type %></span>
+          </td>
           <td><%= l(git_file.desynchronized_at) if git_file.desynchronized_at.present? %></td>
         </tr>
       <% end %>

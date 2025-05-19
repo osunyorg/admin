@@ -20,7 +20,7 @@ class University::Person::Localization::Researcher < University::Person::Localiz
   end
 
   def references
-    research_journal_papers
+    person.research_journal_papers
   end
 
   def static_localization_key

@@ -12,6 +12,7 @@
 #  deuxfleurs_identifier        :string
 #  deuxfleurs_secret_access_key :string
 #  feature_agenda               :boolean          default(FALSE)
+#  feature_alumni               :boolean          default(FALSE)
 #  feature_portfolio            :boolean          default(FALSE)
 #  feature_posts                :boolean          default(TRUE)
 #  git_branch                   :string
@@ -64,6 +65,7 @@ class Communication::Website < ApplicationRecord
   include WithDependencies
   include WithDeuxfleurs
   include WithFeatureAgenda
+  include WithFeatureAlumni
   include WithFeaturePosts
   include WithFeaturePortfolio
   include WithGitRepository
@@ -164,6 +166,7 @@ class Communication::Website < ApplicationRecord
     pages +
     page_categories +
     feature_agenda_dependencies +
+    feature_alumni_dependencies +
     feature_portfolio_dependencies +
     feature_posts_dependencies +
     menus.in_languages(active_language_ids) +
