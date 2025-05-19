@@ -1,0 +1,41 @@
+<%
+job = @l10n.about
+language = @l10n.language
+%>---
+<%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            about: job,
+            l10n: @l10n,
+            full_width: false,
+            toc_offcanvas: false %>
+dates:
+  computed:
+    short: >-
+      <%= date_range_i18n(job.from_day, job.to_day, format: :short, locale: language.iso_code) %>
+    long: >-
+      <%= date_range_i18n(job.from_day, job.to_day, format: :long, locale: language.iso_code) %>
+    two_lines:
+      short: >-
+        <%= date_range_i18n(job.from_day, job.to_day, format: :short, layout: :two_lines, locale: language.iso_code) %>
+      long: >-
+        <%= date_range_i18n(job.from_day, job.to_day, format: :long, layout: :two_lines, locale: language.iso_code) %>
+  from:
+    day: "<%= job.from_day %>"
+  to:
+    day: "<%= job.to_day || job.from_day %>"
+<%= render 'admin/application/l10n/static', about: @l10n %>
+<%= render 'admin/application/images/featured/static', about: @l10n %>
+<%= render 'admin/application/images/shared/static', about: @l10n %>
+<%= render 'admin/application/meta_description/static', about: @l10n %>
+<%= render 'admin/application/summary/static', about: @l10n %>
+description: >-
+  <%= prepare_html_for_static @l10n.description %>
+<%= render 'admin/application/header_cta/static', about: @l10n %>
+<%= render 'admin/application/categories/widget/static',
+            about: job,
+            l10n: @l10n,
+            categories: @website.jobboard_categories,
+            key: :jobs_categories %>
+<%= render 'admin/communication/contents/static', about: @l10n %>
+---

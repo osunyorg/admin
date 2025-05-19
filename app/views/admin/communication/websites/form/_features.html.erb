@@ -1,13 +1,16 @@
 <%= osuny_panel Communication::Website.human_attribute_name('features') do %>
   <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <%= f.input :feature_posts %>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <%= f.input :feature_agenda %>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <%= f.input :feature_portfolio %>
+    </div>
+    <div class="col-lg-3">
+      <%= f.input :feature_jobboard %>
     </div>
   </div>
 <% end %>
