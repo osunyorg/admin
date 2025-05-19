@@ -3,7 +3,9 @@
 # Table name: communication_website_portfolio_projects
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  full_width               :boolean          default(TRUE)
+#  migration_identifier     :string
 #  year                     :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null

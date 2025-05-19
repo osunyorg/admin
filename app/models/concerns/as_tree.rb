@@ -78,7 +78,6 @@ module AsTree
   end
 
   def update_position_in_tree(list, current_position = 1)
-    puts "update_position_in_tree #{current_position}"
     list.each do |object|
       object.update_column :position_in_tree, current_position
       current_position += 1
