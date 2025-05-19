@@ -15,6 +15,6 @@ module Communication::Website::WithFeatureAlumni
 
   def feature_alumni_dependencies
     return [] unless has_alumni?
-    about.alumni
+    alumni
   end
 end
