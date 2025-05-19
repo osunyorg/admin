@@ -1,9 +1,9 @@
 module AsCategory
   extend ActiveSupport::Concern
 
+  include AsTree
   include Bodyclassed
   include Orderable
-  include WithTree
 
   included do
     belongs_to  :parent,
