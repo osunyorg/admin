@@ -53,10 +53,19 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
     localizations.in_languages(website.active_language_ids)
   end
 
-  def date
-    datetime&.to_date
+  # Used by Communication::Website::Agenda::Period::InPeriod
+  def from_day
+    date
   end
-  alias :from_day :date # Used by Communication::Website::Agenda::Period::InPeriod
+
+  # Used by Communication::Website::Agenda::Period::InPeriod
+  def to_day
+    date
+  end
+
+  def date
+    @date ||= datetime&.to_date
+  end
 
   def time
     datetime&.strftime("%H:%M")
@@ -70,7 +79,6 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   def end_date
     end_datetime&.to_date
   end
-  alias :to_day :end_date # Used by Communication::Website::Agenda::Period::InPeriod
 
   def end_time
     end_datetime&.strftime("%H:%M")
