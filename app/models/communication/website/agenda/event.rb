@@ -33,7 +33,6 @@
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
-  include AsTree
   include Communication::Website::Agenda::Period::InPeriod
   include Duplicable
   include Filterable
