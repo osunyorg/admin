@@ -122,7 +122,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :url, :repository, :about_type, :about_id, :in_production,
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
-      :feature_posts, :feature_agenda, :feature_portfolio,
+      :feature_posts, :feature_agenda, :feature_portfolio, :feature_alumni,
       :default_time_zone,
       :deuxfleurs_hosting, :default_image, :default_image_delete, :default_image_infos, :default_shared_image, :default_shared_image_delete, :default_shared_image_infos,
       :deployment_status_badge, :autoupdate_theme,

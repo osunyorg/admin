@@ -9,5 +9,11 @@
     <div class="col-lg-4">
       <%= f.input :feature_portfolio %>
     </div>
+    </div>
+    <% if @website.can_have_feature_alumni? %>
+      <div class="col-lg-4">
+        <%= f.input :feature_alumni %>
+      </div>
+    <% end %>
   </div>
 <% end %>

@@ -4,6 +4,7 @@ class Admin::Communication::Websites::GitFilesController < Admin::Communication:
   def index
     @git_files = @git_files.ordered
                            .page(params[:page])
+                           .per(100)
     breadcrumb
   end
 

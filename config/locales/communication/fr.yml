@@ -126,6 +126,7 @@ fr:
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
         feature_agenda: Agenda
+        feature_alumni: Alumni
         feature_portfolio: Portfolio
         feature_posts: Actualités
         features: Fonctionnalités
@@ -701,6 +702,7 @@ fr:
         access_token_without_existing: Votre jeton d'accès Github ou Gitlab confidentiel, à laisser vide lors de la création d'un site avec Deuxfleurs.
         deployment_status_badge: "URL du badge : <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_agenda: Pour partager des événements
+        feature_alumni: Pour présenter les alumni publiquement
         feature_portfolio: Pour présenter des projets
         feature_posts: Pour publier des actualités, comme un média
         git_branch: 'Laisser vide pour la branche par défaut'
