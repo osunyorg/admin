@@ -4,7 +4,7 @@ taxonomies = categories.taxonomies.ordered
 language = l10n.language
 # Prepare categories for Hugo (native)
 flat_categories = []
-about_categories.ordered.each do |category|
+about_categories.ordered_by_position_in_tree.each do |category|
   category_l10n = category.localization_for(language)
   next if category_l10n.nil?
   hugo = category_l10n.hugo(@website)
@@ -12,7 +12,7 @@ about_categories.ordered.each do |category|
   flat_categories << hugo.slug
 end
 # Prepare categories for Osuny
-free_categories_content = about_categories.ordered.map { |category|
+free_categories_content = about_categories.ordered_by_position_in_tree.map { |category|
   next if category.in_taxonomy?
   render 'admin/application/categories/static/category',
           category: category,

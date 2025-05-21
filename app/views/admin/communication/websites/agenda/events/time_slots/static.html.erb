@@ -18,7 +18,6 @@ event_l10n = @l10n.event_l10n
             l10n: event_l10n,
             categories: @website.agenda_categories,
             key: :events_categories %>
-<%# if time_slot.first? # time slots after the first one are never shown as pages, only in lists %>
 <%= render 'admin/application/static/breadcrumbs', about: event_l10n %>
 <%= render 'admin/application/static/design',
             about: event,
@@ -36,5 +35,4 @@ notes: >-
   <%= prepare_html_for_static event_l10n.notes %>
 <%= render 'admin/application/header_cta/static', about: event_l10n %>
 <%= render 'admin/communication/contents/static', about: event_l10n %>
-<%# end %>
 ---
