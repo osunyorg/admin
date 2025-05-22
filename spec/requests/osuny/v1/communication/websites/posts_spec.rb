@@ -90,7 +90,7 @@ RSpec.describe 'Communication::Website::Post' do
       response '201', 'Successful creation' do
         it 'creates a post and its localization', rswag: true do |example|
           assert_difference ->{ Communication::Website::Post.count } => 1, ->{ Communication::Website::Post::Localization.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachmentUrlUploadJob do
+            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end
@@ -240,7 +240,7 @@ RSpec.describe 'Communication::Website::Post' do
       response '200', 'Successful upsertion' do
         it 'creates a post and updates another with their localizations', rswag: true do |example|
           assert_difference ->{ Communication::Website::Post.count } => 1, ->{ Communication::Website::Post::Localization.count } => 1 do
-            assert_enqueued_jobs 1, only: Api::AttachmentUrlUploadJob do
+            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
             end

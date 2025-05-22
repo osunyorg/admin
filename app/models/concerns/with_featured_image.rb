@@ -37,7 +37,7 @@ module WithFeaturedImage
     # Image already uploaded
     return if featured_image.attached? && featured_image.blob.metadata[:source_url] == featured_image_new_url
     # Else, delay the upload
-    Api::AttachmentUrlUploadJob.perform_later(self, :featured_image, featured_image_new_url)
+    Api::AttachFeaturedImageFromUrlJob.perform_later(self, featured_image_new_url)
   ensure
     self.featured_image_new_url = nil
   end
