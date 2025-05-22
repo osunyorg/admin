@@ -25,11 +25,7 @@ module Communication::Website::WithFeatureJobboard
   end
 
   def feature_jobboard_dependencies
-    []
-    # events +
-    # exhibitions +
-    # agenda_categories +
-    # agenda_years +
-    # agenda_months
+    jobs +
+    jobboard_categories
   end
 end
