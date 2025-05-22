@@ -8,7 +8,7 @@ class Communication::Website::Permalink::Jobboard::Job < Communication::Website:
   end
 
   def self.pattern_in_website(website, language, about = nil)
-    special_page_path(website, language) + '/:year-:slug/'
+    special_page_path(website, language) + '/:year/:slug/'
   end
 
   def self.special_page_type
