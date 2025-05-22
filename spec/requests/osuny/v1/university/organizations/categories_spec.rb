@@ -70,10 +70,12 @@ RSpec.describe 'University::Organization::Category' do
       }
 
       response '201', 'Successful creation' do
-        it 'creates a organization category and its localization', rswag: true, vcr: true do |example|
+        it 'creates a organization category and its localization', rswag: true do |example|
           assert_difference ->{ University::Organization::Category.count } => 1, ->{ University::Organization::Category::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_enqueued_jobs 1, only: Api::AttachmentUrlUploadJob do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
@@ -195,10 +197,12 @@ RSpec.describe 'University::Organization::Category' do
       }
 
       response '200', 'Successful upsertion' do
-        it 'creates a organization category and updates another with their localizations', rswag: true, vcr: true do |example|
+        it 'creates a organization category and updates another with their localizations', rswag: true do |example|
           assert_difference ->{ University::Organization::Category.count } => 1, ->{ University::Organization::Category::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_enqueued_jobs 1, only: Api::AttachmentUrlUploadJob do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
