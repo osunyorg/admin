@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/BaseSecrete/active_hashcash.git
-  revision: d7a38553320568735240b3ceb4e62ec8bd9a6cee
+  revision: 9dd76d4e9eb9ad622518316564235435d6d32e8f
   specs:
-    active_hashcash (0.3.2)
+    active_hashcash (0.4.0)
       rails (>= 5.2.0)
 
 GIT
@@ -122,18 +122,18 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     annotaterb (4.14.0)
     aws-eventstream (1.3.2)
-    aws-partitions (1.1102.0)
-    aws-sdk-core (3.223.0)
+    aws-partitions (1.1104.0)
+    aws-sdk-core (3.224.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
       aws-sigv4 (~> 1.9)
       base64
       jmespath (~> 1, >= 1.6.1)
       logger
-    aws-sdk-kms (1.100.0)
+    aws-sdk-kms (1.101.0)
       aws-sdk-core (~> 3, >= 3.216.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.185.0)
+    aws-sdk-s3 (1.186.1)
       aws-sdk-core (~> 3, >= 3.216.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
@@ -144,7 +144,7 @@ GEM
     benchmark (0.4.0)
     bigdecimal (3.1.9)
     bindex (0.8.1)
-    bootsnap (1.18.4)
+    bootsnap (1.18.6)
       msgpack (~> 1.2)
     bootstrap (5.3.5)
       popper_js (>= 2.11.8, < 3)
@@ -254,9 +254,9 @@ GEM
       faraday
     faraday-follow_redirects (0.3.0)
       faraday (>= 1, < 3)
-    faraday-gzip (1.0.0)
+    faraday-gzip (2.0.1)
       faraday (>= 1.0)
-      zlib (~> 2.1)
+      zlib (~> 3.0)
     faraday-http-cache (2.5.1)
       faraday (>= 0.8)
     faraday-multipart (1.0.4)
@@ -307,13 +307,13 @@ GEM
       fugit (>= 1.11.0)
       railties (>= 6.1.0)
       thor (>= 1.0.0)
-    google-protobuf (4.30.2-arm64-darwin)
+    google-protobuf (4.31.0-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.30.2-x86_64-darwin)
+    google-protobuf (4.31.0-x86_64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.30.2-x86_64-linux)
+    google-protobuf (4.31.0-x86_64-linux-gnu)
       bigdecimal
       rake (>= 13)
     hal_openscience (0.1.0)
@@ -358,7 +358,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
-    json (2.11.3)
+    json (2.12.0)
     json-schema (5.1.1)
       addressable (~> 2.8)
       bigdecimal (~> 3.1)
@@ -390,7 +390,7 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
-    loofah (2.24.0)
+    loofah (2.24.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     lucide-rails (0.5.1)
@@ -402,18 +402,18 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.2)
-    metainspector (5.15.0)
+    metainspector (5.16.0)
       addressable (~> 2.8.4)
       faraday (~> 2.5)
       faraday-cookie_jar (~> 0.0)
       faraday-encoding (~> 0.0)
       faraday-follow_redirects (~> 0.3)
-      faraday-gzip (>= 0.1, < 2.0)
+      faraday-gzip (>= 0.1, < 3.0)
       faraday-http-cache (~> 2.5)
       faraday-retry (~> 2.0)
       fastimage (~> 2.2)
       nesty (~> 1.0)
-      nokogiri (~> 1.13)
+      nokogiri (~> 1.18.8)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.25.5)
@@ -449,13 +449,14 @@ GEM
       version_gem (~> 1.1)
     oauth-tty (1.0.5)
       version_gem (~> 1.1, >= 1.1.1)
-    oauth2 (2.0.9)
-      faraday (>= 0.17.3, < 3.0)
-      jwt (>= 1.0, < 3.0)
+    oauth2 (2.0.10)
+      faraday (>= 0.17.3, < 4.0)
+      jwt (>= 1.0, < 4.0)
+      logger (~> 1.2)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 4)
       snaky_hash (~> 2.0)
-      version_gem (~> 1.1)
+      version_gem (>= 1.1.8, < 3)
     observer (0.1.2)
     octokit (10.0.0)
       faraday (>= 1, < 3)
@@ -487,7 +488,7 @@ GEM
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
-    psych (5.2.5)
+    psych (5.2.6)
       date
       stringio
     public_suffix (6.0.2)
@@ -495,7 +496,7 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.14)
+    rack (3.1.15)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
     rack-protection (4.1.1)
@@ -627,7 +628,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    set (1.1.1)
+    set (1.1.2)
     simple-navigation (4.4.0)
       activesupport (>= 2.3.2)
     simple_form (5.3.1)
@@ -647,8 +648,6 @@ GEM
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
     singleton (0.3.0)
-    skylight (6.0.4)
-      activesupport (>= 5.2.0)
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -721,7 +720,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.2)
-    zlib (2.1.1)
+    zlib (3.2.1)
 
 PLATFORMS
   arm64-darwin-23
@@ -807,7 +806,6 @@ DEPENDENCIES
   simple_form_bs5_file_input
   simple_form_password_with_hints
   simplecov
-  skylight
   spring
   sprockets-rails (~> 3)
   summernote-rails!

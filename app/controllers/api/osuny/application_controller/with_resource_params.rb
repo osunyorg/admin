@@ -43,19 +43,8 @@ module Api::Osuny::ApplicationController::WithResourceParams
     l10n_params[:featured_image_alt] = featured_image_data[:alt] if featured_image_data.has_key?(:alt)
     l10n_params[:featured_image_credit] = featured_image_data[:credit] if featured_image_data.has_key?(:credit)
     l10n_params[:featured_image_delete] = '1' if featured_image_data[:_destroy]
-    featured_image_url = featured_image_data[:url]
-    # No image to upload
-    return unless featured_image_url.present?
-    # Image already uploaded
-    return if l10n.present? && l10n.featured_image.attached? && l10n.featured_image.blob.metadata[:source_url] == featured_image_url
-
-    featured_image_uri = URI.parse(featured_image_url)
-    return unless featured_image_uri.is_a?(URI::HTTP)
-    l10n_params[:featured_image] = {
-      io: featured_image_uri.open,
-      filename: File.basename(featured_image_uri.path),
-      metadata: { source_url: featured_image_url }
-    }
+    # Set the image URL so that the object can delay the upload if needed
+    l10n_params[:featured_image_new_url] = featured_image_data[:url]
   end
 
   def nested_blocks_params
