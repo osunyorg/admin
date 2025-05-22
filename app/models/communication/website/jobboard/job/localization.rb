@@ -66,7 +66,8 @@ class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
-    return unless website.id == communication_website_id && published && published_at && about.current?
+    return unless website.id == communication_website_id && published && published_at 
+    return unless about.current?
     git_path_content_prefix(website) + git_path_relative
   end
 
