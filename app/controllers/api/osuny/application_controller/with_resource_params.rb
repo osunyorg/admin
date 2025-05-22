@@ -49,7 +49,11 @@ module Api::Osuny::ApplicationController::WithResourceParams
     # Image already uploaded
     return if l10n.present? && l10n.featured_image.attached? && l10n.featured_image.blob.metadata[:source_url] == featured_image_url
 
-    featured_image_uri = URI.parse(featured_image_url)
+    featured_image_uri = begin
+      URI.parse(featured_image_url)
+    rescue URI::InvalidURIError
+      raise ActionController::BadRequest.new("Invalid featured image URL: #{featured_image_url}")
+    end
     return unless featured_image_uri.is_a?(URI::HTTP)
     l10n_params[:featured_image] = {
       io: featured_image_uri.open,
