@@ -61,7 +61,7 @@ module AsTree
   end
 
   def rebuild_position_in_tree_if_necessary
-    return unless saved_change_to_position? || saved_change_to_parent_id?
+    return unless respond_to?(:position_in_tree) && (saved_change_to_position? || saved_change_to_parent_id?)
     update_position_in_tree(root_objects)
   end
 
