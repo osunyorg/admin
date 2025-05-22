@@ -16,8 +16,8 @@ class Admin::Communication::Websites::Jobboard::CategoriesController < Admin::Co
 
   def show
     @jobs =  @category.jobs
-                        .ordered(current_language)
-                        .page(params[:page])
+                      .ordered(current_language)
+                      .page(params[:page])
     breadcrumb
   end
 
