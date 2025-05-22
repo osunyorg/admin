@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_21_092922) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_22_133322) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -878,6 +878,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_21_092922) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "created_by_id"
+    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "index_jobboard_jobs_on_communication_website_id"
     t.index ["created_by_id"], name: "index_communication_website_jobboard_jobs_on_created_by_id"
     t.index ["university_id"], name: "index_communication_website_jobboard_jobs_on_university_id"

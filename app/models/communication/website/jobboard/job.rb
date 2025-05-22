@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
 #  from_day                 :date
+#  migration_identifier     :string
 #  to_day                   :date
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
