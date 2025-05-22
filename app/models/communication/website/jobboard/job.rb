@@ -62,5 +62,9 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
     [website.config_default_content_security_policy] +
     localizations.in_languages(website.active_language_ids) 
   end
+
+  def current?
+    from_day <= Date.today && Date.today <= to_day
+  end
  
 end
