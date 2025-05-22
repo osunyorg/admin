@@ -61,6 +61,6 @@ module Communication::Website::WithFeatureAgenda
   end
 
   def agenda_next_months
-    current_year.months.from_now.limit(3)
+    current_year.months.from_now
   end
 end

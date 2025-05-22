@@ -1,6 +1,6 @@
 next_months:
 <%
-@website.agenda_next_months.each do |month|
+@website.agenda_next_months.limit(3).each do |month|
   month_l10n = month.localization_for(@language)
   hugo = month_l10n.hugo(@website)
   next if hugo.file.blank?
@@ -8,7 +8,7 @@ next_months:
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
     name: "<%= month_l10n.to_month_name %>"
     days:
-<% month_l10n.days.each do |day| %>
+<% month_l10n.days.ordered.each do |day| %>
       - day: <%= day.iso8601 %>
         cwday: <%= day.cwday %>
         current: <%= day.date.today? %>
