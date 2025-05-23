@@ -22,7 +22,7 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
   def allowed_for_about?
     !about.respond_to?(:extranet)
   end
-  
+
   def elements
     if alphabetical
       @elements.sort_by! do |element|
