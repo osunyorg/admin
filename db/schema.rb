@@ -1192,6 +1192,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_21_092922) do
     t.string "deuxfleurs_access_key_id"
     t.string "deuxfleurs_secret_access_key"
     t.datetime "last_sync_at"
+    t.boolean "feature_alumni", default: false
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
