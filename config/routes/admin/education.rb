@@ -1,5 +1,9 @@
 namespace :education do
-  resources :academic_years
+  resources :academic_years, only: [:index, :show] do
+    member do
+      get :static
+    end
+  end
   resources :cohorts, only: [:index, :show] do
     member do
       get :static

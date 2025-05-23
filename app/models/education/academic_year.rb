@@ -17,6 +17,13 @@
 #  fk_rails_7d376afe35  (university_id => universities.id)
 #
 class Education::AcademicYear < ApplicationRecord
+  include AsIndirectObject
+  include GeneratesGitFiles
+  include Localizable
+  include LocalizableOrderByNameScope
+  include Sanitizable
+  include Searchable
+  include WebsitesLinkable
   include WithUniversity
 
   has_many  :education_cohorts,

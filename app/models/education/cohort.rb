@@ -28,8 +28,6 @@
 class Education::Cohort < ApplicationRecord
   include AsIndirectObject
   include GeneratesGitFiles
-  include Sanitizable
-  include WithUniversity
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable

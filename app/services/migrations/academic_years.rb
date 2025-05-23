@@ -1,9 +1,9 @@
-class Migrations::Cohorts
+class Migrations::AcademicYears
   def self.migrate_all
-    Education::Cohort.find_each do |cohort|
-      university = cohort.university
+    Education::AcademicYear.find_each do |year|
+      university = year.university
       university.languages.each do |language|
-        cohort.localizations.where(
+        year.localizations.where(
           university: university,
           language: language
         ).first_or_create

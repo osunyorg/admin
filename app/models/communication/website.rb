@@ -179,8 +179,8 @@ class Communication::Website < ApplicationRecord
     return [] unless about.present?
     [about] +
     alumni +
-    cohorts
-    # academic_years
+    cohorts +
+    academic_years
   end
 
   # Objets indirects connectés, avec toutes leurs dépendances récursives
