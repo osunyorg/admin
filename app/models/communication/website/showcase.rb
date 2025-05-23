@@ -2,7 +2,8 @@ module Communication::Website::Showcase
   FEATURES = [
     :actualites,
     :agenda,
-    :portfolio
+    :portfolio,
+    :jobboard
   ].freeze
 
   def self.table_name_prefix
@@ -27,6 +28,8 @@ module Communication::Website::Showcase
       Communication::Website::Agenda.model_name.human(count: 2)
     when :portfolio
       Communication::Website::Portfolio.model_name.human(count: 2)
+    when :jobboard
+      Communication::Website::Jobboard.model_name.human(count: 2)
     end
   end
 
@@ -39,6 +42,8 @@ module Communication::Website::Showcase
       websites.with_feature_agenda
     when :portfolio
       websites.with_feature_portfolio
+    when :jobboard
+      websites.with_feature_jobboard
     end
   end
 end

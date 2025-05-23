@@ -1,0 +1,29 @@
+<% content_for :title, @l10n %>
+
+<% if @category.editable? %>
+  <% content_for :title_right do %>
+    <%= edit_link @category %>
+    <%= button_advanced do %>
+      <%= destroy_link @category %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= render 'admin/application/categories/show', category: @category, l10n: @l10n %>
+
+<% if @jobs.total_count > 0 %>
+  <div class="row">
+    <div class="offset-lg-4 col-lg-8">
+      <p>
+        <%= @jobs.total_count %> 
+        <%= Communication::Website::Jobboard::Job.model_name.human(count: @jobs.total_count).downcase %>
+      </p>
+      <%= render 'admin/communication/websites/jobboard/jobs/list', jobs: @jobs %>
+      <%= paginate @jobs %>  
+    </div>
+  </div>
+<% end %>
+
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_communication_website_jobboard_category_path(@category) %>
+<% end %>

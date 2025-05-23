@@ -1,0 +1,9 @@
+<% if can?(:create, Communication::Website::Jobboard::Category)  %>
+  <%
+  title = Communication::Website::Jobboard::Category.model_name.human(count: 2)
+  action = create_link Communication::Website::Jobboard::Category
+  %>
+  <%= osuny_panel title, action: action do %>
+    <%= render 'admin/communication/websites/jobboard/categories/list', categories: categories %>
+  <% end %>
+<% end %>
