@@ -8,3 +8,4 @@ block.template.selected_papers.each do |paper|
   %>
         - "<%= paper_l10n.relative_path %>"
 <% end %>
+      quantity: <%= block.template.selected_papers.to_a.count %>

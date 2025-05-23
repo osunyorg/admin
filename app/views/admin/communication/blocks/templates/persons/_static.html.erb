@@ -1,3 +1,6 @@
+<%
+quantity = 0
+%>
 <%= block_component_static block, :description %>
 <%= block_component_static block, :layout %>
 <%= block_options_static block %>
@@ -11,7 +14,9 @@ block.template.selected_elements.each do |element|
   next if l10n.nil?
   hugo = l10n.hugo(@website)
   next if hugo.file.blank?
+  quantity += 1
 %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 4 %>
 <%= block_component_static block, :role, template: element, depth: 5 %>
 <% end %>
+      quantity: <%= quantity %>

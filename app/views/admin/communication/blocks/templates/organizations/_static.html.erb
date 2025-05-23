@@ -1,3 +1,6 @@
+<%
+quantity = 0
+%>
       layout: <%= block.template.layout %>
 <%= block_component_static block, :description %>
 <%= block_options_static block %>
@@ -9,6 +12,7 @@ if element.organization
   next if l10n.nil?
   hugo = l10n.hugo(@website)
   next if hugo.file.blank?
+  quantity += 1
   %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 4 %>
 <% else %>
@@ -19,3 +23,4 @@ if element.organization
           external: true
 <% end %>
 <% end %>
+      quantity: <%= quantity %>
