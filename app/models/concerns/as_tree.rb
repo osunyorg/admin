@@ -79,7 +79,10 @@ module AsTree
 
   def update_position_in_tree(list, current_position = 1)
     list.each do |object|
-      object.update_column :position_in_tree, current_position
+      ActiveRecord::Base.transaction do
+        # Trying to avoid deadlocks https://github.com/osunyorg/admin/issues/3044
+        object.update_column :position_in_tree, current_position
+      end
       current_position += 1
       if object.children.any?
         child_objects = object.children.ordered
