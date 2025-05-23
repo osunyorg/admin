@@ -69,7 +69,7 @@ module Communication::Website::Agenda::Period::InPeriod
   protected
 
   def set_time_zone
-    self.time_zone = website.default_time_zone if self.time_zone.blank?
+    self.time_zone = website.default_time_zone if respond_to?(:time_zone=) && self.time_zone.blank?
   end
 
   def set_to_day
