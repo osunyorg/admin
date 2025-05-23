@@ -1,0 +1,9 @@
+<%
+cohort = @about
+%>
+<%= render 'admin/application/static/core', about: cohort %>
+<%= render 'admin/application/static/breadcrumbs', about: cohort %>
+<%= render 'admin/application/static/design',
+            full_width: true,
+            toc_offcanvas: true,
+            toc_present: false %>

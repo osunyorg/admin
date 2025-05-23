@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_19_125918) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_23_145814) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -160,7 +160,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_19_125918) do
     t.string "html_class"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
-    t.index ["university_id"], name: "index_communication_blocks_on_university_id"
+    t.index ["university_id", "template_kind"], name: "index_communication_blocks_on_university_id_and_template_kind"
   end
 
   create_table "communication_extranet_connections", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -685,7 +685,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_19_125918) do
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_54db819007"
     t.index ["month_id"], name: "index_communication_website_agenda_period_days_on_month_id"
     t.index ["university_id", "communication_website_id", "year_id", "month_id", "value"], name: "index_communication_website_agenda_period_days_unique", unique: true
-    t.index ["university_id"], name: "idx_on_university_id_a0967d0da6"
     t.index ["year_id"], name: "index_communication_website_agenda_period_days_on_year_id"
   end
 
@@ -712,7 +711,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_19_125918) do
     t.datetime "updated_at", null: false
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_49eaf81807"
     t.index ["university_id", "communication_website_id", "year_id", "value"], name: "index_communication_website_agenda_period_months_unique", unique: true
-    t.index ["university_id"], name: "idx_on_university_id_f680736f97"
     t.index ["year_id"], name: "index_communication_website_agenda_period_months_on_year_id"
   end
 
@@ -738,7 +736,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_19_125918) do
     t.datetime "updated_at", null: false
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_dd738e97d3"
     t.index ["university_id", "communication_website_id", "value"], name: "index_communication_website_agenda_period_years_unique", unique: true
-    t.index ["university_id"], name: "idx_on_university_id_2c377eb7c0"
   end
 
   create_table "communication_website_connections", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -790,8 +787,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_19_125918) do
     t.datetime "desynchronized_at"
     t.uuid "university_id"
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
+    t.index ["desynchronized_at"], name: "index_communication_website_git_files_on_desynchronized_at"
     t.index ["university_id"], name: "index_communication_website_git_files_on_university_id"
-    t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
+    t.index ["website_id", "id"], name: "index_communication_website_git_files_on_website_id_and_id"
   end
 
   create_table "communication_website_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1226,6 +1224,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_19_125918) do
     t.index ["university_person_id", "education_academic_year_id"], name: "index_person_academic_year"
   end
 
+  create_table "education_cohort_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "about_id", null: false
+    t.uuid "language_id", null: false
+    t.uuid "university_id", null: false
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "index_education_cohort_localizations_on_about_id"
+    t.index ["language_id"], name: "index_education_cohort_localizations_on_language_id"
+    t.index ["university_id"], name: "index_education_cohort_localizations_on_university_id"
+  end
+
   create_table "education_cohorts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "university_id", null: false
     t.uuid "program_id", null: false
@@ -1524,6 +1534,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_19_125918) do
     t.index ["cron_key", "created_at"], name: "index_good_jobs_on_cron_key_and_created_at_cond", where: "(cron_key IS NOT NULL)"
     t.index ["cron_key", "cron_at"], name: "index_good_jobs_on_cron_key_and_cron_at_cond", unique: true, where: "(cron_key IS NOT NULL)"
     t.index ["finished_at"], name: "index_good_jobs_jobs_on_finished_at", where: "((retried_good_job_id IS NULL) AND (finished_at IS NOT NULL))"
+    t.index ["finished_at"], name: "index_good_jobs_on_finished_at"
     t.index ["labels"], name: "index_good_jobs_on_labels", where: "(labels IS NOT NULL)", using: :gin
     t.index ["locked_by_id"], name: "index_good_jobs_on_locked_by_id", where: "(locked_by_id IS NOT NULL)"
     t.index ["priority", "created_at"], name: "index_good_job_jobs_for_candidate_lookup", where: "(finished_at IS NULL)"
@@ -2399,6 +2410,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_19_125918) do
   add_foreign_key "communication_websites", "languages", column: "default_language_id"
   add_foreign_key "communication_websites", "universities"
   add_foreign_key "education_academic_years", "universities"
+  add_foreign_key "education_cohort_localizations", "education_cohorts", column: "about_id"
+  add_foreign_key "education_cohort_localizations", "languages"
+  add_foreign_key "education_cohort_localizations", "universities"
   add_foreign_key "education_cohorts", "education_academic_years", column: "academic_year_id"
   add_foreign_key "education_cohorts", "education_programs", column: "program_id"
   add_foreign_key "education_cohorts", "education_schools", column: "school_id"

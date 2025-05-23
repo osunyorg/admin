@@ -178,7 +178,9 @@ class Communication::Website < ApplicationRecord
   def indirect_objects_connected_to_website
     return [] unless about.present?
     [about] +
-    alumni
+    alumni +
+    cohorts
+    # academic_years
   end
 
   # Objets indirects connectés, avec toutes leurs dépendances récursives

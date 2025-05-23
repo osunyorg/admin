@@ -9,6 +9,14 @@ module Communication::Website::WithFeatureAlumni
     has_alumni? ? about.alumni : University::Person.none
   end
 
+  def cohorts
+    has_alumni? ? about.cohorts : Education::Cohort.none
+  end
+
+  def academic_years
+    has_alumni? ? about.academic_years : Education::AcademicYear.none
+  end
+
   def has_alumni?
     about && feature_alumni && about.alumni.any?
   end

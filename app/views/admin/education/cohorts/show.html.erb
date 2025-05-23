@@ -1,21 +1,30 @@
-<% content_for :title, @cohort %>
+<% content_for :title, @l10n %>
 
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-3">
     <%= osuny_label Education::Cohort.human_attribute_name('school') %>
     <p><%= osuny_link_localized @cohort.school, [:admin, @cohort.school] %></p>
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-3">
     <%= osuny_label Education::Cohort.human_attribute_name('program') %>
     <p><%= osuny_link_localized @cohort.program, [:admin, @cohort.program] %></p>
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-3">
     <%= osuny_label Education::Cohort.human_attribute_name('year') %>
     <p><%= link_to @cohort.academic_year, [:admin, @cohort.academic_year] %></p>
   </div>
+  <div class="col-lg-3">
+    <%= render 'admin/application/l10n/widget', about: @cohort, l10n: @l10n, small: true %>
+  </div>
 </div>
+
 
 <% if @cohort.people.any? %>
   <h2 class="mt-5"><%= University::Person::Alumnus.model_name.human(count: 2) %></h2>
   <%= render 'admin/administration/alumni/list', alumni: @cohort.people.ordered(current_language) %>
 <% end %>
+
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_education_cohort_path(@cohort) %>
+  <%= render 'admin/communication/websites/git_files/list', git_files: @l10n.git_files %>
+<% end %>  

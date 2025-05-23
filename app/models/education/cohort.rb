@@ -26,7 +26,15 @@
 #  fk_rails_c2d725cabd  (academic_year_id => education_academic_years.id)
 #
 class Education::Cohort < ApplicationRecord
+  include AsIndirectObject
+  include GeneratesGitFiles
   include Sanitizable
+  include WithUniversity
+  include Localizable
+  include LocalizableOrderByNameScope
+  include Sanitizable
+  include Searchable
+  include WebsitesLinkable
   include WithUniversity
 
   belongs_to  :school,
@@ -53,10 +61,7 @@ class Education::Cohort < ApplicationRecord
     includes(:academic_year).order('education_academic_years.year DESC')
   }
 
-  def to_s
-    "#{program.to_s_in(university.default_language)} #{academic_year}"
-  end
-
+  # TODO deprecated, use l10n
   def subtitle_in(language)
     subtitle_parts = []
     subtitle_parts << program.diploma.to_s_in(language) if program.diploma.present?
@@ -68,8 +73,8 @@ class Education::Cohort < ApplicationRecord
     academic_year&.year
   end
 
-  def year=(val)
-    self.academic_year = Education::AcademicYear.where(university_id: university_id, year: val).first_or_create
+  def year=(value)
+    self.academic_year = Education::AcademicYear.where(university_id: university_id, year: value).first_or_create
   end
 
 end

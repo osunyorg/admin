@@ -17,6 +17,7 @@ module Communication::Website::Permalink::WithMapping
       "Communication::Website::Portfolio::Category::Localization" => Communication::Website::Permalink::Portfolio::Category,
       "Communication::Website::Post::Localization" => Communication::Website::Permalink::Post,
       "Communication::Website::Post::Category::Localization" => Communication::Website::Permalink::Category,
+      "Education::Cohort::Localization" => Communication::Website::Permalink::Cohort,
       "Education::Diploma::Localization" => Communication::Website::Permalink::Diploma,
       "Education::Program::Category::Localization" => Communication::Website::Permalink::Program::Category,
       "Education::Program::Localization" => Communication::Website::Permalink::Program,
