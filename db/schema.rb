@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_23_132615) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_23_134915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -161,7 +161,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_132615) do
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
     t.index ["university_id", "template_kind"], name: "index_communication_blocks_on_university_id_and_template_kind"
-    t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
 
   create_table "communication_extranet_connections", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -791,7 +790,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_132615) do
     t.index ["desynchronized_at"], name: "index_communication_website_git_files_on_desynchronized_at"
     t.index ["university_id"], name: "index_communication_website_git_files_on_university_id"
     t.index ["website_id", "id"], name: "index_communication_website_git_files_on_website_id_and_id"
-    t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
   end
 
   create_table "communication_website_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

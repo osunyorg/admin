@@ -14,13 +14,12 @@
 #  updated_at        :datetime         not null
 #  about_id          :uuid             not null, indexed => [about_type]
 #  university_id     :uuid             indexed
-#  website_id        :uuid             not null, indexed, indexed => [id]
+#  website_id        :uuid             not null, indexed => [id]
 #
 # Indexes
 #
 #  index_communication_website_git_files_on_desynchronized_at  (desynchronized_at)
 #  index_communication_website_git_files_on_university_id      (university_id)
-#  index_communication_website_git_files_on_website_id         (website_id)
 #  index_communication_website_git_files_on_website_id_and_id  (website_id,id)
 #  index_communication_website_github_files_on_about           (about_type,about_id)
 #
