@@ -35,8 +35,6 @@ class Communication::Website::Agenda::Period::Month < ApplicationRecord
 
   after_create :create_days
 
-  scope :from_now, -> { where('value >= ?', Date.today.month).ordered }
-
   def first_day
     @first_day ||= Date.new(year.value, value, 1)
   end
