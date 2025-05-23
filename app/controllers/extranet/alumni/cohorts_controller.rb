@@ -16,11 +16,12 @@ class Extranet::Alumni::CohortsController < Extranet::Alumni::ApplicationControl
   def show
     @cohort = current_extranet.about.education_cohorts
                                     .find(params[:id])
+    @l10n = @cohort.best_localization_for(current_language)
     @people =  @cohort.people
                       .ordered(current_language)
                       .page(params[:page])
     breadcrumb
-    add_breadcrumb @cohort
+    add_breadcrumb @l10n
   end
 
   protected

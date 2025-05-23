@@ -1,9 +1,14 @@
 <%
-cohort = @about
+cohort = @l10n.about
+language = @l10n.language
 %>
-<%= render 'admin/application/static/core', about: cohort %>
-<%= render 'admin/application/static/breadcrumbs', about: cohort %>
+<%= render 'admin/application/static/core', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
             full_width: true,
             toc_offcanvas: true,
             toc_present: false %>
+<%= render 'admin/application/static/hugo/collection',
+            key: :people,
+            collection: cohort.people.ordered(language),
+            language: language %>

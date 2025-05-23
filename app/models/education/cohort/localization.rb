@@ -52,6 +52,15 @@ class Education::Cohort::Localization < ApplicationRecord
     "admin/education/cohorts/static"
   end
 
+  # Example: IUT de Bordeaux > Formations > BUT > Génie biologique > Agronomie > 2024
+  def hugo_ancestors(website)
+    program_l10n.hugo_ancestors_and_self(website)
+  end
+
+  def best_breadcrumb_title
+    academic_year
+  end
+
   def to_s
     parts = []
     parts << diploma_l10n if diploma_l10n.present?

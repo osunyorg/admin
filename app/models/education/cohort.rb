@@ -61,14 +61,6 @@ class Education::Cohort < ApplicationRecord
     includes(:academic_year).order('education_academic_years.year DESC')
   }
 
-  # TODO deprecated, use l10n
-  def subtitle_in(language)
-    subtitle_parts = []
-    subtitle_parts << program.diploma.to_s_in(language) if program.diploma.present?
-    subtitle_parts << program.to_s_in(language)
-    subtitle_parts.join(' — ')
-  end
-
   def year
     academic_year&.year
   end
