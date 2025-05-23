@@ -175,6 +175,21 @@ class Communication::Website < ApplicationRecord
     [default_shared_image&.blob]
   end
 
+  def indirect_objects_connected_to_website
+    return [] unless about.present?
+    [about] +
+    alumni
+  end
+
+  # Objets indirects connectés, avec toutes leurs dépendances récursives
+  # Méthode utilisée pour vérifier les connexions obsolètes
+  def indirect_objects_connected_to_website_recursive
+    (
+      indirect_objects_connected_to_website +
+      indirect_objects_connected_to_website.collect(&:recursive_dependencies).flatten
+    ).compact.uniq
+  end
+
   def website
     self
   end

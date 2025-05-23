@@ -23,7 +23,9 @@ module Communication::Website::WithConnectedObjects
       # We use find_each to avoid loading all the objects in memory
       public_send(association_name).find_each(&:connect_dependencies)
     end
-    connect(about, self) if about.present?
+    indirect_objects_connected_to_website.each do |indirect_object|
+      connect(indirect_object, self)
+    end
     delete_obsolete_connections_for_self_and_direct_sources
     # In the same job
     create_missing_special_pages
@@ -57,7 +59,7 @@ module Communication::Website::WithConnectedObjects
       # On prend l'about et ses dépendances récursives.
       # On ne prend pas toutes les dépendances parce qu'on s'intéresse
       # uniquement à la connexion via about.
-      about_dependencies
+      indirect_objects_connected_to_website_recursive
     )
   end
 
