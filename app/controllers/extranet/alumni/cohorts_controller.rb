@@ -20,6 +20,7 @@ class Extranet::Alumni::CohortsController < Extranet::Alumni::ApplicationControl
     @people =  @cohort.people
                       .ordered(current_language)
                       .page(params[:page])
+                      .per(72)
     breadcrumb
     add_breadcrumb @l10n
   end
