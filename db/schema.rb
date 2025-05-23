@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_21_092922) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_23_132615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -160,6 +160,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_21_092922) do
     t.string "html_class"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
+    t.index ["university_id", "template_kind"], name: "index_communication_blocks_on_university_id_and_template_kind"
     t.index ["university_id"], name: "index_communication_blocks_on_university_id"
   end
 
@@ -685,7 +686,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_21_092922) do
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_54db819007"
     t.index ["month_id"], name: "index_communication_website_agenda_period_days_on_month_id"
     t.index ["university_id", "communication_website_id", "year_id", "month_id", "value"], name: "index_communication_website_agenda_period_days_unique", unique: true
-    t.index ["university_id"], name: "idx_on_university_id_a0967d0da6"
     t.index ["year_id"], name: "index_communication_website_agenda_period_days_on_year_id"
   end
 
@@ -712,7 +712,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_21_092922) do
     t.datetime "updated_at", null: false
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_49eaf81807"
     t.index ["university_id", "communication_website_id", "year_id", "value"], name: "index_communication_website_agenda_period_months_unique", unique: true
-    t.index ["university_id"], name: "idx_on_university_id_f680736f97"
     t.index ["year_id"], name: "index_communication_website_agenda_period_months_on_year_id"
   end
 
@@ -738,7 +737,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_21_092922) do
     t.datetime "updated_at", null: false
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_dd738e97d3"
     t.index ["university_id", "communication_website_id", "value"], name: "index_communication_website_agenda_period_years_unique", unique: true
-    t.index ["university_id"], name: "idx_on_university_id_2c377eb7c0"
   end
 
   create_table "communication_website_connections", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
@@ -790,7 +788,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_21_092922) do
     t.datetime "desynchronized_at"
     t.uuid "university_id"
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
+    t.index ["desynchronized_at"], name: "index_communication_website_git_files_on_desynchronized_at"
     t.index ["university_id"], name: "index_communication_website_git_files_on_university_id"
+    t.index ["website_id", "id"], name: "index_communication_website_git_files_on_website_id_and_id"
     t.index ["website_id"], name: "index_communication_website_git_files_on_website_id"
   end
 
