@@ -3352,9 +3352,6 @@
                     "title": {
                       "type": "string"
                     },
-                    "alt_title": {
-                      "type": "string"
-                    },
                     "description": {
                       "type": "string"
                     },
