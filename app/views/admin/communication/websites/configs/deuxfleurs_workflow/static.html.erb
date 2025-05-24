@@ -25,10 +25,11 @@ jobs:
       run: yarn install
 
     - name: Installation de Hugo
-      uses: peaceiris/actions-hugo@v3.0.0
+      uses: noesya/actions-hugo@release
       with:
-        hugo-version: '0.136.5'
+        hugo-version: 'latest'
         extended: true
+        withdeploy: true
 
     - name: Compilation du site
       run: yarn osuny build
