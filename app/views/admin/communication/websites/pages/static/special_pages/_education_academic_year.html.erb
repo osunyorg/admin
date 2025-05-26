@@ -1,2 +1,12 @@
+<% 
+  language = l10n.language
+  taxonomies = @website.university.person_categories.taxonomies.ordered
+%>
 alumni: 
-    total: <%= @website.alumni.count %>
+  total: <%= @website.alumni.count %>
+<% taxonomies.each do |taxonomy| %>
+<% @website.university.person_categories.in_taxonomy(taxonomy).ordered.each do |person_category| %>
+  <% person_category_l10n = person_category.localization_for(language) %>
+  <%= person_category_l10n.slug %>: <%= @website.alumni.for_category(person_category).count %>
+<% end %>
+<% end %>
