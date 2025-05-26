@@ -10,7 +10,8 @@ alumni:
     taxonomy_l10n = taxonomy.localization_for(language) 
     taxonomy_total = 0
   %>
-    - title: <%= taxonomy_l10n.to_s %>
+    - title: >-
+        <%= prepare_text_for_static taxonomy_l10n.to_s %>
       slug: <%= taxonomy_l10n.slug %>
       children:
 <% @website.university.person_categories.in_taxonomy(taxonomy).ordered.each do |person_category| %>
@@ -19,7 +20,8 @@ alumni:
     category_total = @website.alumni.for_category(person_category).count
     taxonomy_total += category_total
   %>
-        - title: <%= person_category_l10n.to_s %>
+        - title: >-
+            <%= prepare_text_for_static person_category_l10n.to_s %>
           slug: <%= person_category_l10n.slug %>
           total: <%= category_total %>
 <% end %>
