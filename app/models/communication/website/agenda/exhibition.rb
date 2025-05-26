@@ -3,6 +3,7 @@
 # Table name: communication_website_agenda_exhibitions
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  from_day                 :date
 #  migration_identifier     :string
 #  time_zone                :string

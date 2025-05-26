@@ -1,6 +1,10 @@
 <% content_for :title, Communication::Website::GitFile.model_name.human(count: 2) %>
 
-<%= render 'admin/communication/websites/git_files/quantity' %>
+<div>
+  <%= osuny_published false %>
+  <%= @website.git_files.desynchronized.count %> / 
+  <%= @website.git_files.count %>
+</div>
 
 <div class="table-responsive mb-5">
   <table class="<%= table_classes(with_actions: false) %>">

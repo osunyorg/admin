@@ -6,6 +6,7 @@
 #  about_type          :string           indexed => [about_id]
 #  kind                :integer          default("blank")
 #  position            :integer          not null
+#  position_in_tree    :integer
 #  should_open_new_tab :boolean          default(FALSE)
 #  title               :string
 #  url                 :text
@@ -33,10 +34,10 @@
 #  fk_rails_fa4f4585e4  (website_id => communication_websites.id)
 #
 class Communication::Website::Menu::Item < ApplicationRecord
+  include AsTree
   include Initials
   include Orderable
   include Sanitizable
-  include WithTree
   include WithUniversity
 
   attr_accessor :skip_publication_callback
@@ -55,7 +56,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   }.freeze
 
   belongs_to :website, class_name: 'Communication::Website'
-  belongs_to :menu, class_name: 'Communication::Website::Menu'
+  belongs_to :menu, class_name: 'Communication::Website::Menu', touch: true
   belongs_to :parent, class_name: 'Communication::Website::Menu::Item', optional: true
   belongs_to :about, polymorphic: true, optional: true
   has_many   :children,

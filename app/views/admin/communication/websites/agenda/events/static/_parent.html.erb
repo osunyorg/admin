@@ -3,7 +3,6 @@ if event.parent.present?
   l10n = event.parent.localization_for(language)
   if l10n.present?
     hugo = l10n.hugo(@website)
-    if hugo.file.present?
 %>
 parent:
   permalink: "<%= hugo.permalink %>"
@@ -11,7 +10,6 @@ parent:
   slug: "<%= hugo.slug %>"
   file: "<%= hugo.file %>"
 <%
-    end
   end
 end
 %>

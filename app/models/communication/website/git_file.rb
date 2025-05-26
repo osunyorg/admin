@@ -2,25 +2,26 @@
 #
 # Table name: communication_website_git_files
 #
-#  id                :uuid             not null, primary key
+#  id                :uuid             not null, primary key, indexed => [website_id]
 #  about_type        :string           not null, indexed => [about_id]
 #  current_path      :string
 #  current_sha       :string
 #  desynchronized    :boolean          default(TRUE)
-#  desynchronized_at :datetime
+#  desynchronized_at :datetime         indexed
 #  previous_path     :string
 #  previous_sha      :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  about_id          :uuid             not null, indexed => [about_type]
-#  university_id     :uuid             indexed
-#  website_id        :uuid             not null, indexed
+#  university_id     :uuid             not null, indexed
+#  website_id        :uuid             not null, indexed => [id]
 #
 # Indexes
 #
-#  index_communication_website_git_files_on_university_id  (university_id)
-#  index_communication_website_git_files_on_website_id     (website_id)
-#  index_communication_website_github_files_on_about       (about_type,about_id)
+#  index_communication_website_git_files_on_desynchronized_at  (desynchronized_at)
+#  index_communication_website_git_files_on_university_id      (university_id)
+#  index_communication_website_git_files_on_website_id_and_id  (website_id,id)
+#  index_communication_website_github_files_on_about           (about_type,about_id)
 #
 # Foreign Keys
 #

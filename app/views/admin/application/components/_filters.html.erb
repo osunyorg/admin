@@ -10,7 +10,7 @@
   <div class="offcanvas-body">
     <%= yield %>
     <div class='form-group mt-2 d-flex justify-content-between'>
-      <%= link_to t('filters.buttons.reset'), current_path, class: 'btn btn-secondary btn-xs' %>
+      <%= link_to t('filters.buttons.reset'), current_path, class: button_classes %>
       <%= submit_tag t('filters.buttons.submit'), class: button_classes %>
     </div>
   </div>

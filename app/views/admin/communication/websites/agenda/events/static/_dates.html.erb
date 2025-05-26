@@ -5,8 +5,8 @@ source = time_slot || day || event
 %>
 date: "<%= source.from_day&.iso8601 %>"
 dates:
-  status: "<%= event.status %>"
-  archive: <%= event.archive? %>
+  status: "<%= source.status %>"
+  archive: <%= source.archive? %>
   computed:
     short: >-
       <%= date_range_i18n(event.from_day, event.to_day, format: :short, locale: locale) %>

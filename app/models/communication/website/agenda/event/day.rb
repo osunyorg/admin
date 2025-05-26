@@ -27,6 +27,7 @@
 #
 class Communication::Website::Agenda::Event::Day < ApplicationRecord
   include AsDirectObject
+  include Communication::Website::Agenda::Period::InPeriod
   include HasGitFiles
   include Permalinkable
   include WithUniversity
@@ -63,11 +64,19 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   end
 
   def event_l10n
-    return unless event.localized_in?(language)
-    event.localization_for(language)
+    unless @event_l10n
+      if event.localized_in?(language)
+        @event_l10n = event.localization_for(language)
+      end
+    end
+    @event_l10n
   end
 
   def from_day
+    date
+  end
+
+  def to_day
     date
   end
 
