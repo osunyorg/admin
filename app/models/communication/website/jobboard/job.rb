@@ -65,7 +65,7 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
   end
 
   def current?
-    from_day <= Date.today && Date.today <= to_day
+    from_day <= Date.today && (to_day.nil? || Date.today <= to_day)
   end
  
 end

@@ -12,7 +12,7 @@ class Communication::Website::Permalink::Jobboard::Job < Communication::Website:
   end
 
   def self.special_page_type
-    Communication::Website::Page::CommunicationAgenda
+    Communication::Website::Page::CommunicationJobboard
   end
 
   protected
