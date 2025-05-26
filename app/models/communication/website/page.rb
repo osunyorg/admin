@@ -7,6 +7,7 @@
 #  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  position                 :integer          not null
+#  position_in_tree         :integer
 #  type                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -33,6 +34,7 @@ class Communication::Website::Page < ApplicationRecord
   self.ignored_columns = %w(path kind)
 
   include AsDirectObject
+  include AsTree
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
@@ -46,7 +48,6 @@ class Communication::Website::Page < ApplicationRecord
   include WithMenuItemTarget
   include WithOpenApi
   include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before WithPublication
-  include WithTree
   include WithUniversity
 
   belongs_to :parent,

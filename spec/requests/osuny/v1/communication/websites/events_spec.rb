@@ -102,13 +102,15 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
       }
 
       response '201', 'Successful creation' do
-        it 'creates an event, its localization, its time slot and its localization', rswag: true, vcr: true do |example|
+        it 'creates an event, its localization, its time slot and its localization', rswag: true do |example|
           assert_difference ->{ Communication::Website::Agenda::Event.count } => 1,
                             ->{ Communication::Website::Agenda::Event::Localization.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end
@@ -312,13 +314,15 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
       }
 
       response '200', 'Successful upsertion' do
-        it 'creates an event and updates another with their localizations', rswag: true, vcr: true do |example|
+        it 'creates an event and updates another with their localizations', rswag: true do |example|
           assert_difference ->{ Communication::Website::Agenda::Event.count } => 1,
                             ->{ Communication::Website::Agenda::Event::Localization.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot::Localization.count } => 1 do
-            submit_request(example.metadata)
-            assert_response_matches_metadata(example.metadata)
+            assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
+              submit_request(example.metadata)
+              assert_response_matches_metadata(example.metadata)
+            end
           end
         end
       end

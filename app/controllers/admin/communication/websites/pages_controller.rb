@@ -65,12 +65,14 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def connect
     load_object
     @website.connect @object, @page, direct_source_type: @page.class.to_s
+    @page.touch
     head :ok
   end
 
   def disconnect
     load_object
     @website.disconnect @object, @page, direct_source_type: @page.class.to_s
+    @page.touch
     redirect_back(fallback_location: [:admin, @object])
   end
 
@@ -161,7 +163,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
             :communication_website_id, :bodyclass, :full_width, :parent_id, :design_options, category_ids: [],
             localizations_attributes: [
               :id, :title, :breadcrumb_title, :meta_description, :summary, :header_text, :text, :slug, :published,
-              :header_cta, :header_cta_label, :header_cta_url, 
+              :header_cta, :header_cta_label, :header_cta_url,
               :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
               :shared_image, :shared_image_delete, :shared_image_infos,
               :language_id

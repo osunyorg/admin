@@ -11,13 +11,7 @@ breadcrumb_title: >-
 <% if page.static_layout %>
 layout: <%= page.static_layout %>
 <% end %>
-<% if page.is_a?(Communication::Website::Page::Person) %>
-has:
-  administrators: <%= @website.has_administrators? %>
-  authors: <%= @website.has_authors? %>
-  researchers: <%= @website.has_researchers? %>
-  teachers: <%= @website.has_teachers? %>
-<% end %>
+<%= render 'admin/communication/websites/pages/static/special_page', page: page, l10n: @l10n %>
 position: <%= page.position %>
 weight: <%= page.position %>
 <%= render 'admin/application/categories/widget/static',

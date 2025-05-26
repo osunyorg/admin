@@ -31,6 +31,12 @@ SimpleNavigation::Configuration.run do |navigation|
                   highlights_on: lambda { 
                     admin_communication_website_portfolio_root_path(website_id: @website.id).in?(request.path) 
                   } if @website.feature_portfolio
+    primary.item  :subnav_jobboard,
+                  @website.feature_jobboard_name(current_language),
+                  admin_communication_website_jobboard_jobs_path(website_id: @website.id),
+                  highlights_on: lambda { 
+                    admin_communication_website_jobboard_root_path(website_id: @website.id).in?(request.path) 
+                  } if @website.feature_jobboard
     primary.item  :subnav_pages,
                   t('admin.communication.website.subnav.structure'),
                   admin_communication_website_pages_path(website_id: @website.id) if can?(:read, Communication::Website::Page)

@@ -1,0 +1,22 @@
+<table class="<%= table_classes(with_actions: false) %>">
+  <thead>
+    <tr>
+      <th><%= Communication::Website::GitFile.human_attribute_name(:status) %></th>
+      <th><%= Communication::Website::GitFile.human_attribute_name(:path) %></th>
+      <th><%= Communication::Website::GitFile.human_attribute_name(:website) %></th>
+      <th><%= Communication::Website::GitFile.human_attribute_name(:about) %></th>
+      <th><%= Communication::Website::GitFile.human_attribute_name(:desynchronized_at) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% git_files.each do |git_file| %>
+      <tr>
+        <td><%= osuny_published(git_file.synchronized?) %></td>
+        <td><%= link_to git_file, admin_communication_website_git_file_path(website_id: git_file.website_id, id: git_file.id) %></td>
+        <td><%= git_file.website %></td>
+        <td><%= git_file.about %></td>
+        <td><%= l(git_file.desynchronized_at) if git_file.desynchronized_at.present? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

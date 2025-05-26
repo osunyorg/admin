@@ -4,10 +4,6 @@ class Communication::Website::Page::LegalTerm < Communication::Website::Page
     nil
   end
 
-  def draftable?
-    false
-  end
-
   def is_listed_among_children?
     false
   end

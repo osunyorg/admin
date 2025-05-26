@@ -9,19 +9,19 @@
 #  migration_identifier     :string
 #  position                 :integer          not null
 #  published                :boolean          default(TRUE)
-#  template_kind            :integer          default(NULL), not null
+#  template_kind            :integer          default(NULL), not null, indexed => [university_id]
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed => [about_type]
 #  communication_website_id :uuid             indexed
-#  university_id            :uuid             not null, indexed
+#  university_id            :uuid             not null, indexed => [template_kind]
 #
 # Indexes
 #
-#  index_communication_blocks_on_communication_website_id  (communication_website_id)
-#  index_communication_blocks_on_university_id             (university_id)
-#  index_communication_website_blocks_on_about             (about_type,about_id)
+#  index_communication_blocks_on_communication_website_id         (communication_website_id)
+#  index_communication_blocks_on_university_id_and_template_kind  (university_id,template_kind)
+#  index_communication_website_blocks_on_about                    (about_type,about_id)
 #
 # Foreign Keys
 #
@@ -38,6 +38,7 @@ class Communication::Block < ApplicationRecord
   }
 
   include AsIndirectObject
+  include Filterable
   include Orderable
   include WithAccessibility
   include WithHeadingRanks
@@ -62,6 +63,9 @@ class Communication::Block < ApplicationRecord
   after_save :touch_about#, :touch_targets # FIXME
 
   scope :published, -> { where(published: true) }
+  scope :for_template_kind, -> (template_kind, language = nil) { where(template_kind: template_kind) }
+  scope :for_about_type, -> (about_type, language = nil) { where(about_type: about_type) }
+  scope :for_university, -> (university, language = nil) { where(university: university) }
 
   # When we set data from json, we pass it to the template.
   # The json we save is first sanitized and prepared by the template.

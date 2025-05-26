@@ -42,6 +42,8 @@
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include AddableToCalendar
+  # Needs to be included before Sluggable (which is included by Permalinkable)
+  include AsDirectObjectLocalization
   include AsLocalization
   include AsLocalizedTree
   include Contentful
@@ -80,8 +82,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   validates :title, presence: true
   validate :slug_cant_be_numeric_only
-
-  before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
@@ -172,10 +172,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def slug_cant_be_numeric_only
     errors.add(:slug, :numeric_only) if slug.tr('0-9', '').blank?
-  end
-
-  def set_communication_website_id
-    self.communication_website_id ||= about.communication_website_id
   end
 
   def explicit_blob_ids

@@ -14,9 +14,7 @@ namespace :server do
       post :update_theme
     end
   end
-  resources :blocks, only: [:index, :show] do
-    post :resave, on: :member
-  end
+  resources :blocks, only: [:index, :show]
   resources :emergency_messages do
     member do
       post :deliver
