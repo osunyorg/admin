@@ -3,6 +3,6 @@
     <%= f.association  :content_federations,
                         collection: @website.destination_websites.ordered(current_language),
                         as: :check_boxes, 
-                        label: false %>
+                        label: '' %>
   <% end %>
 <% end %>
