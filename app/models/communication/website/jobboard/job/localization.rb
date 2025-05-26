@@ -58,9 +58,7 @@ class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
 
   alias :job :about
 
-  has_summernote :description
-
-  validates :title, :description, presence: true
+  validates :title, presence: true
 
   before_validation :set_communication_website_id, on: :create
 
