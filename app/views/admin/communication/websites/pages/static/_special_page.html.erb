@@ -1,0 +1,9 @@
+<%
+if page.is_special_page?
+  path = "admin/communication/websites/pages/static/special_pages/#{page.type_key}"
+  # https://api.rubyonrails.org/v7.1.3.4/classes/ActionView/LookupContext/ViewPaths.html#method-i-exists-3F
+  # il faut envoyer un tableau vide, qui est la valeur par défaut, pour mettre le troisième argument `partial` à true
+  exists = lookup_context.exists? path, [], true
+  %>
+<%= render path, page: page, l10n: l10n if exists %>
+<% end %>

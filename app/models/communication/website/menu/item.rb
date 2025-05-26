@@ -56,7 +56,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   }.freeze
 
   belongs_to :website, class_name: 'Communication::Website'
-  belongs_to :menu, class_name: 'Communication::Website::Menu'
+  belongs_to :menu, class_name: 'Communication::Website::Menu', touch: true
   belongs_to :parent, class_name: 'Communication::Website::Menu::Item', optional: true
   belongs_to :about, polymorphic: true, optional: true
   has_many   :children,

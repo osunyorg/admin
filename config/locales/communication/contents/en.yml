@@ -406,9 +406,6 @@ en:
               description:
                 label: Description
               element:
-                alt_title:
-                  label: Alternative title
-                  placeholder: Enter link alternative title
                 description:
                   label: Description
                   placeholder: Enter link description

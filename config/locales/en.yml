@@ -10,10 +10,6 @@ en:
           transcription_missing:
             text_html: The HTML iframe has no text transcription for blind people, for people with low bandwidth or no javascript enabled. Please add a text transcription.
             title: No transcription
-        links:
-          alt_title_missing:
-            text_html: The link has no alternative title. It might be completely fine if the link title alone allows to understand the function and the destination, as mentioned in <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#6" target="_blank">criterion 6.1 of RGAA</a>. On the contrary, please add an alternative title to the link.
-            title: No alternative title
         sound:
           title_missing:
             text_html: Neither the block, neither the recording have a title. It will prevent blind people from knowing what the recording is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the recording.
