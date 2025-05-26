@@ -97,6 +97,13 @@ class Education::Program < ApplicationRecord
     [parent]
   end
 
+  def has_administrative_information?
+    capacity.present? ||
+    initial ||
+    continuing ||
+    apprenticeship
+  end
+
   #####################
   # WebsitesLinkable methods
   #####################

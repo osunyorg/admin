@@ -73,6 +73,23 @@ related_categories:
   end
 end
 %>
+information:
+<% if program.has_administrative_information? %>
+  administrative:
+    apprenticeship: <%= program.apprenticeship %>
+    capacity: <%= program.capacity %>
+    continuing: <%= program.continuing %>
+    initial: <%= program.initial %>
+<% end %>
+  pricing:
+    global: >-
+      <%= prepare_html_for_static @l10n.best_pricing %>
+    initial: >-
+      <%= prepare_html_for_static @l10n.pricing_initial %>
+    continuing: >-
+      <%= prepare_html_for_static @l10n.pricing_continuing %>
+    apprenticeship: >-
+      <%= prepare_html_for_static @l10n.pricing_apprenticeship %>
 diplomas: "<%= @l10n.diploma&.slug %>"
 duration: >-
   <%= prepare_text_for_static @l10n.duration %>
@@ -143,10 +160,12 @@ roles: []
             key: :locations,
             collection: program.locations.ordered(language),
             language: language %>
+<% # Start deprecation %>
 apprenticeship: <%= program.apprenticeship %>
 capacity: <%= program.capacity %>
 continuing: <%= program.continuing %>
 initial: <%= program.initial %>
+<% # End deprecation %>
 certifications:
   qualiopi:
     certified: <%= program.qualiopi_certified %>
@@ -165,10 +184,10 @@ presentation: >-
   :other,
   :pedagogy,
   :prerequisites,
-  :pricing,
-  :pricing_initial,
-  :pricing_continuing,
-  :pricing_apprenticeship,
+  :pricing, # Deprecated
+  :pricing_initial, # Deprecated
+  :pricing_continuing, # Deprecated
+  :pricing_apprenticeship, # Deprecated
   :registration,
   :results
 ].each do |property| %>
