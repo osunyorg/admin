@@ -18,7 +18,7 @@ module Communication::Website::WithFeatureAlumni
   end
 
   def has_alumni?
-    about && feature_alumni && about.alumni.any?
+    about.present? && feature_alumni && about.alumni.any?
   end
 
   def feature_alumni_dependencies
