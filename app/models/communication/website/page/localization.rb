@@ -40,6 +40,8 @@
 #  fk_rails_c6b93016c7  (language_id => languages.id)
 #
 class Communication::Website::Page::Localization < ApplicationRecord
+  # Needs to be included before Sluggable (which is included by Permalinkable)
+  include AsDirectObjectLocalization
   include AsLocalization
   include AsLocalizedTree
   include Contentful
@@ -66,7 +68,6 @@ class Communication::Website::Page::Localization < ApplicationRecord
 
   validates :title, presence: true
   validates :header_cta_label, :header_cta_url, presence: true, if: :header_cta
-  before_validation :set_communication_website_id, on: :create
   before_validation :set_published_unless_draftable
 
   def template_static
@@ -144,10 +145,6 @@ class Communication::Website::Page::Localization < ApplicationRecord
 
   def git_path_prefix
     @git_path_prefix ||= git_path_content_prefix(website)
-  end
-
-  def set_communication_website_id
-    self.communication_website_id ||= about.communication_website_id
   end
 
   def explicit_blob_ids
