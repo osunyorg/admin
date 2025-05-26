@@ -619,6 +619,9 @@ fr:
           communication_post:
             slug: actualites
             title: Actualités
+          education_academic_year:
+            slug: alumni
+            title: Alumni
           education_diploma:
             slug: diplomes
             title: "Diplômes"

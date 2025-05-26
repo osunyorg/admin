@@ -619,6 +619,9 @@ en:
           communication_post:
             slug: posts
             title: Posts
+          education_academic_year:
+            slug: alumni
+            title: Alumni
           education_diploma:
             slug: diplomas
             title: Diplomas

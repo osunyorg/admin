@@ -7,20 +7,20 @@ class Communication::Website::Permalink::AcademicYear < Communication::Website::
     :academic_years
   end
 
-  # /formations/2020/
+  # /alumni/2020/
   def self.pattern_in_website(website, language, about = nil)
     special_page_path(website, language) + '/:year'
   end
 
   def self.special_page_type
-    Communication::Website::Page::EducationProgram
+    Communication::Website::Page::EducationAcademicYear
   end
 
   protected
 
   def substitutions
     {
-      year: about.year,
+      year: about.about.year,
     }
   end
 end

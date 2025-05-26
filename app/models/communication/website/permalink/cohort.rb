@@ -7,13 +7,13 @@ class Communication::Website::Permalink::Cohort < Communication::Website::Permal
     :cohorts
   end
 
-  # /formations/metiers-du-multimedia-et-de-l-internet/2020/
+  # /alumni/2020/metiers-du-multimedia-et-de-l-internet
   def self.pattern_in_website(website, language, about = nil)
-    special_page_path(website, language) + '/:program_slug/:year'
+    special_page_path(website, language) + '/:year/:program_slug'
   end
 
   def self.special_page_type
-    Communication::Website::Page::EducationProgram
+    Communication::Website::Page::EducationAcademicYear
   end
 
   protected

@@ -30,7 +30,7 @@ class Education::AcademicYear::Localization < ApplicationRecord
   include WithUniversity
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}academic_years/#{academic_year.year}/_index.html" if for_website?(website)
+    "#{git_path_content_prefix(website)}alumni/#{academic_year.year}/_index.html" if for_website?(website)
   end
 
   def template_static
