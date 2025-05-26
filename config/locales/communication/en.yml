@@ -131,6 +131,7 @@ en:
         feature_portfolio: Portfolio
         feature_posts: Posts
         features: Features
+        federations: Federated content sources
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
@@ -460,6 +461,8 @@ en:
         editorial:
           description: Everything related to content
           label: Editorial
+        federation:
+          label: Content federation
         git_file:
           analysis:
             launch: Launch analysis
@@ -731,6 +734,7 @@ en:
         feature_jobboard: To share job offers
         feature_portfolio: To showcase projects
         feature_posts: To publish posts, like a media
+        federations: Choose the websites that can send content to it
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
         in_production: Tick this box once the site is deployed on a dedicated domain or sub-domain (not *.osuny.site).

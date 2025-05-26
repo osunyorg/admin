@@ -1,7 +1,7 @@
 class Admin::Communication::WebsitesController < Admin::Communication::Websites::ApplicationController
   include Admin::Localizable
 
-  before_action :set_feature_nav, only: [:edit, :edit_language, :edit_technical, :update]
+  before_action :set_feature_nav, only: [:edit, :edit_language, :edit_federation, :edit_technical, :update]
 
   def index
     @websites = @websites.filter_by(params[:filters], current_language)
@@ -66,6 +66,16 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     add_breadcrumb current_language
   end
 
+  def edit_federation
+    @l10n = @website.localization_for(current_language)
+    @source_websites = current_university.websites
+                                         .where.not(id: @website.id)
+                                         .ordered(current_language)
+    breadcrumb
+    add_breadcrumb t('admin.subnav.settings'), edit_admin_communication_website_path(@website, website_id: nil)
+    add_breadcrumb t('admin.communication.website.federation.label')
+  end
+
   def edit_technical
     @l10n = @website.localization_for(current_language)
     breadcrumb
@@ -122,11 +132,11 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :url, :repository, :about_type, :about_id, :in_production,
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
-      :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni,
+      :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication,
       :default_time_zone,
       :deuxfleurs_hosting, :default_image, :default_image_delete, :default_image_infos, :default_shared_image, :default_shared_image_delete, :default_shared_image_infos,
       :deployment_status_badge, :autoupdate_theme,
-      showcase_tag_ids: [],
+      showcase_tag_ids: [], source_website_ids: [],
       localizations_attributes: [
         :id, :language_id, :name, :published,
         :social_mastodon, :social_x, :social_linkedin, :social_youtube,

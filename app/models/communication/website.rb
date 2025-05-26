@@ -70,6 +70,7 @@ class Communication::Website < ApplicationRecord
   include WithFeatureJobboard
   include WithFeaturePosts
   include WithFeaturePortfolio
+  include WithFederations
   include WithGitRepository
   include WithLock
   include WithManagers

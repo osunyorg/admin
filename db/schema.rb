@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_26_090733) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_26_152736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -751,6 +751,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_090733) do
     t.index ["indirect_object_type", "indirect_object_id"], name: "index_communication_website_connections_on_object"
     t.index ["university_id"], name: "index_communication_website_connections_on_university_id"
     t.index ["website_id"], name: "index_communication_website_connections_on_website_id"
+  end
+
+  create_table "communication_website_content_federations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.string "about_type", null: false
+    t.uuid "about_id", null: false
+    t.uuid "destination_website_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_type", "about_id"], name: "index_communication_website_content_federations_on_about"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_ca52307519"
+    t.index ["destination_website_id"], name: "idx_on_destination_website_id_2ef67cad17"
+    t.index ["university_id"], name: "idx_on_university_id_04037a794f"
+  end
+
+  create_table "communication_website_federations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "source_website_id", null: false
+    t.uuid "destination_website_id", null: false
+    t.index ["destination_website_id"], name: "idx_on_destination_website_id_f782caba64"
+    t.index ["source_website_id"], name: "index_communication_website_federations_on_source_website_id"
   end
 
   create_table "communication_website_git_file_layouts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -2446,6 +2467,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_090733) do
   add_foreign_key "communication_website_agenda_period_years", "universities"
   add_foreign_key "communication_website_connections", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_connections", "universities"
+  add_foreign_key "communication_website_content_federations", "communication_websites"
+  add_foreign_key "communication_website_content_federations", "communication_websites", column: "destination_website_id"
+  add_foreign_key "communication_website_content_federations", "universities"
+  add_foreign_key "communication_website_federations", "communication_websites", column: "destination_website_id"
+  add_foreign_key "communication_website_federations", "communication_websites", column: "source_website_id"
   add_foreign_key "communication_website_git_file_layouts", "communication_websites"
   add_foreign_key "communication_website_git_file_layouts", "universities"
   add_foreign_key "communication_website_git_file_orphans", "communication_websites"

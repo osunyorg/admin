@@ -131,6 +131,8 @@ fr:
         feature_portfolio: Portfolio
         feature_posts: Actualités
         features: Fonctionnalités
+        source_websites: Sources de contenus fédérées
+        destination_websites: Sites dans lesquels diffuser
         git_branch: Branche
         git_endpoint: Point d'accès Git
         git_provider: Fournisseur Git
@@ -460,6 +462,8 @@ fr:
         editorial:
           description: Tout ce qui est lié au contenu
           label: Éditorial
+        federation:
+          label: Fédération de contenu
         git_file:
           analysis:
             launch: Lancer une analyse
@@ -731,6 +735,7 @@ fr:
         feature_jobboard: Pour partager des offres d'emploi
         feature_portfolio: Pour présenter des projets
         feature_posts: Pour publier des actualités, comme un média
+        source_websites: Choisissez les sites Web qui pourront envoyer du contenu vers celui-ci
         git_branch: 'Laisser vide pour la branche par défaut'
         git_endpoint: 'Laisser vide pour les valeurs par défaut (https://github.com ou https://gitlab.com/api/v4)'
         in_production: Cochez cette case une fois le site déployé sur un domaine ou un sous-domaine dédié (pas *.osuny.site).
