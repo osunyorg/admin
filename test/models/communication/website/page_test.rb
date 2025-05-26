@@ -26,8 +26,9 @@ class Communication::Website::PageTest < ActiveSupport::TestCase
     params[:localizations_attributes].first[:slug] = communication_website_page_localizations(:test_page_fr).slug
 
     page = Communication::Website::Page.new(params)
-    refute page.save
-    assert page.errors.of_kind?("localizations.slug", :taken)
+    assert page.save
+    # Slug was adjusted to avoid conflict
+    assert_equal "test-1", page.localizations.first.slug
   end
 
   protected
