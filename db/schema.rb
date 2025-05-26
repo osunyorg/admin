@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_23_134915) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_26_090733) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -784,12 +784,101 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_134915) do
     t.string "current_path"
     t.string "current_sha"
     t.boolean "desynchronized", default: true
-    t.datetime "desynchronized_at"
-    t.uuid "university_id"
+    t.datetime "desynchronized_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.uuid "university_id", null: false
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
     t.index ["desynchronized_at"], name: "index_communication_website_git_files_on_desynchronized_at"
     t.index ["university_id"], name: "index_communication_website_git_files_on_university_id"
     t.index ["website_id", "id"], name: "index_communication_website_git_files_on_website_id_and_id"
+  end
+
+  create_table "communication_website_jobboard_categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "position", null: false
+    t.boolean "is_programs_root", default: false
+    t.boolean "is_taxonomy", default: false
+    t.string "bodyclass"
+    t.string "migration_identifier"
+    t.integer "position_in_tree"
+    t.uuid "program_id"
+    t.uuid "parent_id"
+    t.uuid "communication_website_id", null: false
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_b870d88a86"
+    t.index ["parent_id"], name: "index_communication_website_jobboard_categories_on_parent_id"
+    t.index ["program_id"], name: "index_communication_website_jobboard_categories_on_program_id"
+    t.index ["university_id"], name: "idx_on_university_id_f6904a3396"
+  end
+
+  create_table "communication_website_jobboard_categories_jobs", id: false, force: :cascade do |t|
+    t.uuid "job_id", null: false
+    t.uuid "category_id", null: false
+    t.index ["category_id", "job_id"], name: "category_job"
+    t.index ["job_id", "category_id"], name: "job_category"
+  end
+
+  create_table "communication_website_jobboard_category_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.text "meta_description"
+    t.string "name"
+    t.string "path"
+    t.string "slug"
+    t.text "summary"
+    t.string "migration_identifier"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "university_id"
+    t.uuid "communication_website_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_id"], name: "idx_on_about_id_973f5413e1"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_1bf1f14ca6"
+    t.index ["language_id"], name: "idx_on_language_id_56b9ed6a5c"
+    t.index ["slug"], name: "idx_on_slug_6db7a1bcbc"
+    t.index ["university_id"], name: "idx_on_university_id_f8e53f00be"
+  end
+
+  create_table "communication_website_jobboard_job_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "featured_image_alt"
+    t.text "featured_image_credit"
+    t.string "meta_description"
+    t.string "migration_identifier"
+    t.boolean "published", default: false
+    t.datetime "published_at"
+    t.string "slug"
+    t.string "subtitle"
+    t.string "title"
+    t.boolean "header_cta", default: false
+    t.string "header_cta_label"
+    t.string "header_cta_url"
+    t.uuid "about_id"
+    t.uuid "language_id"
+    t.uuid "communication_website_id"
+    t.uuid "university_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "summary"
+    t.index ["about_id"], name: "idx_on_about_id_8bbb00c89f"
+    t.index ["communication_website_id"], name: "idx_on_communication_website_id_3e7b95d239"
+    t.index ["language_id"], name: "idx_on_language_id_d4c8ef57a7"
+    t.index ["university_id"], name: "idx_on_university_id_dfeba87c37"
+  end
+
+  create_table "communication_website_jobboard_jobs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "bodyclass"
+    t.date "from_day"
+    t.date "to_day"
+    t.uuid "university_id", null: false
+    t.uuid "communication_website_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "created_by_id"
+    t.string "migration_identifier"
+    t.index ["communication_website_id"], name: "index_jobboard_jobs_on_communication_website_id"
+    t.index ["created_by_id"], name: "index_communication_website_jobboard_jobs_on_created_by_id"
+    t.index ["university_id"], name: "index_communication_website_jobboard_jobs_on_university_id"
   end
 
   create_table "communication_website_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1043,7 +1132,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_134915) do
     t.uuid "created_by_id"
     t.boolean "full_width", default: true
     t.string "bodyclass"
-    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_aac12e3adb"
     t.index ["created_by_id"], name: "idx_on_created_by_id_7009ee99c6"
     t.index ["university_id"], name: "idx_on_university_id_ac2f4a0bfc"
@@ -1190,7 +1278,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_134915) do
     t.string "deuxfleurs_access_key_id"
     t.string "deuxfleurs_secret_access_key"
     t.datetime "last_sync_at"
-    t.boolean "feature_alumni", default: false
+    t.boolean "feature_jobboard", default: false
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
@@ -2338,6 +2426,21 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_23_134915) do
   add_foreign_key "communication_website_git_file_orphans", "universities"
   add_foreign_key "communication_website_git_files", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_git_files", "universities"
+  add_foreign_key "communication_website_jobboard_categories", "communication_website_jobboard_categories", column: "parent_id"
+  add_foreign_key "communication_website_jobboard_categories", "communication_websites"
+  add_foreign_key "communication_website_jobboard_categories", "education_programs", column: "program_id"
+  add_foreign_key "communication_website_jobboard_categories", "universities"
+  add_foreign_key "communication_website_jobboard_category_localizations", "communication_website_jobboard_categories", column: "about_id"
+  add_foreign_key "communication_website_jobboard_category_localizations", "communication_websites"
+  add_foreign_key "communication_website_jobboard_category_localizations", "languages"
+  add_foreign_key "communication_website_jobboard_category_localizations", "universities"
+  add_foreign_key "communication_website_jobboard_job_localizations", "communication_website_jobboard_jobs", column: "about_id"
+  add_foreign_key "communication_website_jobboard_job_localizations", "communication_websites"
+  add_foreign_key "communication_website_jobboard_job_localizations", "languages"
+  add_foreign_key "communication_website_jobboard_job_localizations", "universities"
+  add_foreign_key "communication_website_jobboard_jobs", "communication_websites"
+  add_foreign_key "communication_website_jobboard_jobs", "universities"
+  add_foreign_key "communication_website_jobboard_jobs", "users", column: "created_by_id"
   add_foreign_key "communication_website_localizations", "communication_websites", column: "about_id"
   add_foreign_key "communication_website_localizations", "languages"
   add_foreign_key "communication_website_localizations", "universities"
