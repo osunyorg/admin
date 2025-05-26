@@ -199,7 +199,6 @@ en:
         to_day: End date
       communication/website/jobboard/job/localization:
         featured_image: Featured image
-        description: Offer
         published: Published
         subtitle: Subtitle
         title: Title

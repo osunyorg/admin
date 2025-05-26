@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_22_133322) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_26_090733) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -851,7 +851,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_22_133322) do
     t.datetime "published_at"
     t.string "slug"
     t.string "subtitle"
-    t.text "description"
     t.string "title"
     t.boolean "header_cta", default: false
     t.string "header_cta_label"

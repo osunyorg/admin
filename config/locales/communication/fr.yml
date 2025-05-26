@@ -199,7 +199,6 @@ fr:
         to_day: Date de clôture
       communication/website/jobboard/job/localization:
         featured_image: Image à la une
-        description: Offre
         published: Publiée
         subtitle: Sous-titre
         title: Titre

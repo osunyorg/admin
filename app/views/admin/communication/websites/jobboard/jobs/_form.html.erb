@@ -24,15 +24,6 @@
           </div>
         <% end %>
 
-        <%= lf.input  :description,
-                      as: :summernote,
-                      input_html: {
-                        data: {
-                          translatable: true,
-                          'summernote-config' => 'mini'
-                        }
-                      } %>
-
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <div class="row">
           <div class="col-lg-6">

@@ -3,7 +3,6 @@
 # Table name: communication_website_jobboard_job_localizations
 #
 #  id                       :uuid             not null, primary key
-#  description              :text
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean          default(FALSE)

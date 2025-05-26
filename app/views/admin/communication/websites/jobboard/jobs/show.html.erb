@@ -42,9 +42,6 @@
   </div>
   <div class="col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n, small: true %>
-    <%= osuny_panel Communication::Website::Jobboard::Job::Localization.human_attribute_name("description"), small: true do %>
-      <div><%= sanitize @l10n.description %></div>
-    <% end if @l10n.description.present? %>
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
