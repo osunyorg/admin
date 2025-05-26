@@ -4,9 +4,12 @@
 %>
 alumni: 
   total: <%= @website.alumni.count %>
+  taxonomies:
 <% taxonomies.each do |taxonomy| %>
+  <% taxonomy_l10n = taxonomy.localization_for(language) %>
+    - <%= taxonomy_l10n.slug %>
 <% @website.university.person_categories.in_taxonomy(taxonomy).ordered.each do |person_category| %>
   <% person_category_l10n = person_category.localization_for(language) %>
-  <%= person_category_l10n.slug %>: <%= @website.alumni.for_category(person_category).count %>
+      - <%= person_category_l10n.slug %>: <%= @website.alumni.for_category(person_category).count %>
 <% end %>
 <% end %>
