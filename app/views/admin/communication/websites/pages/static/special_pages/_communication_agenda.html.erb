@@ -9,7 +9,7 @@ next_months:
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
     name: "<%= month_l10n.to_month_name %>"
     days:
-<% month_l10n.days.ordered.each do |day| %>
+<% month_l10n.days.each do |day| %>
       - day: <%= day.iso8601 %>
         cwday: <%= day.cwday %>
         current: <%= day.date.today? %>
