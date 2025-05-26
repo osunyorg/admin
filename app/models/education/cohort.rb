@@ -67,4 +67,8 @@ class Education::Cohort < ApplicationRecord
     self.academic_year = Education::AcademicYear.where(university_id: university_id, year: value).first_or_create
   end
 
+  def dependencies
+    localizations
+  end
+
 end

@@ -52,8 +52,13 @@ class Education::AcademicYear < ApplicationRecord
     return University::Person.none unless context.respond_to?(:alumni)
     people.where(id: context.alumni.pluck(:id))
   end
+  
+  def dependencies
+    localizations
+  end
 
   def to_s
     "#{year}"
   end
+
 end
