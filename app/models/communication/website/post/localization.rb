@@ -39,6 +39,8 @@
 #  fk_rails_db7d7c515c  (university_id => universities.id)
 #
 class Communication::Website::Post::Localization < ApplicationRecord
+  # Needs to be included before Sluggable (which is included by Permalinkable)
+  include AsDirectObjectLocalization
   include AsLocalization
   include Contentful
   include HasGitFiles
@@ -61,7 +63,6 @@ class Communication::Website::Post::Localization < ApplicationRecord
   has_summernote :summary
 
   validates :title, presence: true
-  before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
@@ -116,10 +117,6 @@ class Communication::Website::Post::Localization < ApplicationRecord
               .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
               .where.not(id: self.id)
               .exists?
-  end
-
-  def set_communication_website_id
-    self.communication_website_id ||= about.communication_website_id
   end
 
   def explicit_blob_ids

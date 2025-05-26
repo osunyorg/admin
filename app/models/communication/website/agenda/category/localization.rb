@@ -34,14 +34,14 @@
 #  fk_rails_b8a90413e8  (about_id => communication_website_agenda_categories.id)
 #
 class Communication::Website::Agenda::Category::Localization < ApplicationRecord
+  # Needs to be included before Sluggable (which is included by AsCategoryLocalization > Permalinkable)
+  include AsDirectObjectLocalization
   include AsCategoryLocalization
   include WithOpenApi
 
   belongs_to :website,
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
-
-  before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     prefix = git_path_content_prefix(website)
@@ -60,10 +60,6 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
         )
         .where.not(id: self.id)
         .exists?
-  end
-
-  def set_communication_website_id
-    self.communication_website_id ||= about.communication_website_id
   end
 
 end
