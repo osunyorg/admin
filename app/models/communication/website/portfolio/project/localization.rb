@@ -38,6 +38,8 @@
 #  fk_rails_fbc92c5948  (about_id => communication_website_portfolio_projects.id)
 #
 class Communication::Website::Portfolio::Project::Localization < ApplicationRecord
+  # Needs to be included before Sluggable (which is included by Permalinkable)
+  include AsDirectObjectLocalization
   include AsLocalization
   include Contentful
   include HasGitFiles
@@ -59,7 +61,6 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   has_summernote :summary
 
   validates :title, presence: true
-  before_validation :set_communication_website_id, on: :create
 
   scope :ordered, -> (language = nil) { order(year: :desc, title: :asc) }
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }
@@ -97,10 +98,6 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
       featured_image&.blob_id,
       shared_image&.blob_id
     ]
-  end
-
-  def set_communication_website_id
-    self.communication_website_id ||= about.communication_website_id
   end
 
 end
