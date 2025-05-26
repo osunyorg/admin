@@ -10,10 +10,6 @@ fr:
           transcription_missing:
             text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
             title: Pas de transcription
-        links:
-          alt_title_missing:
-            text_html: Le titre alternatif du lien est vide. C'est tout à fait pertinent si le titre du lien seul permet de comprendre la fonction et la destination, comme expliqué dans le <a href="https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/#6" target="_blank">critère 6.1 du RGAA</a>. Dans le cas contraire, merci d'ajouter un titre alternatif à votre lien.
-            title: Pas de titre alternatif du lien
         sound:
           title_missing:
             text_html: Ni le bloc ni le fichier audio n'ont de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle l'enregistrement, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter un titre à l'enregistrement.
