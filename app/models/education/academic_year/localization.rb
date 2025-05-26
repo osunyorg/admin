@@ -29,8 +29,12 @@ class Education::AcademicYear::Localization < ApplicationRecord
   include Permalinkable
   include WithUniversity
 
+  alias :academic_year :about
+
+  delegate :year, to: :about
+
   def git_path(website)
-    "#{git_path_content_prefix(website)}academic_years/#{academic_year.year}/_index.html" if for_website?(website)
+    "#{git_path_content_prefix(website)}academic_years/#{year}/_index.html" if for_website?(website)
   end
 
   def template_static
@@ -38,6 +42,6 @@ class Education::AcademicYear::Localization < ApplicationRecord
   end
 
   def to_s
-    "#{about.year}"
+    "#{year}"
   end
 end

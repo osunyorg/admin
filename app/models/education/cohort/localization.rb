@@ -45,7 +45,7 @@ class Education::Cohort::Localization < ApplicationRecord
   end
 
   def git_path(website)
-    "#{git_path_content_prefix(website)}academic_years/#{academic_year.year}/#{program.slug}.html" if for_website?(website)
+    "#{git_path_content_prefix(website)}academic_years/#{academic_year.year}/#{program_l10n.slug}.html" if for_website?(website)
   end
 
   def template_static
