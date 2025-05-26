@@ -1,0 +1,16 @@
+<% content_for :title, "#{Communication::Website::Jobboard::Job.model_name.human(count: 2)} (#{@jobs.total_count})" %>
+
+<% content_for :title_right do %>
+  <%= create_link Communication::Website::Jobboard::Job %>
+<% end %>
+
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @jobs.total_count %>
+    <%= t('admin.item', count: @jobs.total_count) %>
+  </p>
+  <%= render 'filters', current_path: admin_communication_website_jobboard_jobs_path, website: @website %>
+</div>
+
+<%= render 'admin/communication/websites/jobboard/jobs/list', jobs: @jobs %>
+<%= paginate @jobs %>

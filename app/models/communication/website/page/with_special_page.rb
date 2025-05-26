@@ -13,6 +13,7 @@ module Communication::Website::Page::WithSpecialPage
       Communication::Website::Page::CommunicationAgendaExhibition,
       Communication::Website::Page::CommunicationAgendaExhibitionArchive,
       Communication::Website::Page::CommunicationPortfolio,
+      Communication::Website::Page::CommunicationJobboard,
       Communication::Website::Page::Person,
       Communication::Website::Page::Organization,
       # Education
