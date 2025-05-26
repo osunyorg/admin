@@ -9,19 +9,19 @@
 #  migration_identifier     :string
 #  position                 :integer          not null
 #  published                :boolean          default(TRUE)
-#  template_kind            :integer          default(NULL), not null
+#  template_kind            :integer          default(NULL), not null, indexed => [university_id]
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             indexed => [about_type]
 #  communication_website_id :uuid             indexed
-#  university_id            :uuid             not null, indexed
+#  university_id            :uuid             not null, indexed => [template_kind]
 #
 # Indexes
 #
-#  index_communication_blocks_on_communication_website_id  (communication_website_id)
-#  index_communication_blocks_on_university_id             (university_id)
-#  index_communication_website_blocks_on_about             (about_type,about_id)
+#  index_communication_blocks_on_communication_website_id         (communication_website_id)
+#  index_communication_blocks_on_university_id_and_template_kind  (university_id,template_kind)
+#  index_communication_website_blocks_on_about                    (about_type,about_id)
 #
 # Foreign Keys
 #

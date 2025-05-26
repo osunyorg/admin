@@ -23,7 +23,7 @@ class Communication::Website::Permalink::Jobboard::Job < Communication::Website:
 
   def substitutions
     {
-      year: about.from_day.strftime("%Y"),
+      year: about.about.from_day.strftime("%Y"),
       slug: about.slug
     }
   end

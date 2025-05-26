@@ -72,7 +72,7 @@ class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
 
   # jobs/2025/01/01-nom-offre.html
   def git_path_relative
-    "jobs/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
+    "jobs/#{about.from_day.strftime "%Y/%m/%d"}-#{slug}.html"
   end
 
   def template_static
