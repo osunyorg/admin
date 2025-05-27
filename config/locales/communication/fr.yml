@@ -309,7 +309,10 @@ fr:
               too_big: trop lourd !
         communication/website/agenda/event:
           attributes:
+            from_day:
+              events_before: doit être avant le début du premier événement
             to_day:
+              events_after: doit être après la fin du dernier événement
               too_soon: doit être après jour de début
             to_hour:
               too_soon: doit être après l'heure de début

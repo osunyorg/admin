@@ -2,8 +2,11 @@ module Communication::Website::Agenda::Event::WithKinds
   extend ActiveSupport::Concern
 
   included do
-    before_validation :set_to_day_if_child
-    after_commit :touch_parent_if_child
+    validate :no_child_before?, if: :kind_parent?
+    validate :no_child_after?, if: :kind_parent?
+
+    before_validation :set_to_day, if: :kind_child?
+    after_commit :touch_parent, if: :kind_child?
 
     scope :with_no_time_slots, -> { where.missing(:time_slots) }
     scope :who_can_have_children, -> { root.with_no_time_slots }
@@ -22,7 +25,7 @@ module Communication::Website::Agenda::Event::WithKinds
   end
 
   def kind_child?
-    parent.present?
+    parent.present? && parent.persisted?
   end
 
   def can_have_children?
@@ -39,13 +42,23 @@ module Communication::Website::Agenda::Event::WithKinds
 
   protected
 
-  def set_to_day_if_child
-    return unless kind_child?
+  def no_child_before?
+    if children.where('from_day < ?', self.from_day).any?
+      errors.add(:from_day, :events_before)
+    end
+  end
+
+  def no_child_after?
+    if children.where('to_day > ?', self.to_day).any?
+      errors.add(:to_day, :events_after)
+    end
+  end
+
+  def set_to_day
     self.to_day = self.from_day
   end
 
-  def touch_parent_if_child
-    return unless kind_child? && parent.persisted?
+  def touch_parent
     parent.touch
   end
 end
