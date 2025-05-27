@@ -5,8 +5,12 @@
       "size": "L"
     },
     {
+      "command": "0 1 * * * rails auto:managed_planned_objects",
+      "size": "L"
+    },
+    {
       "command": "0 3 * * * rails auto:clean_and_rebuild_websites",
-      "size": "XL"
+      "size": "L"
     },
     {
       "command": "0 1 * * * rails auto:brevo_sms_credits",
