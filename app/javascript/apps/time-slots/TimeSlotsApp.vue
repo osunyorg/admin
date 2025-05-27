@@ -1,10 +1,12 @@
 <script>
 import Changes from '../components/Changes.vue';
+import Duration from './components/Duration.vue';
 import { Plus, X } from 'lucide-vue-next';
 
 export default {
     components: {
       Changes,
+      Duration,
       Plus,
       X,
     },
@@ -60,37 +62,21 @@ export default {
           <div class="row g-2">
             <div class="col-lg-7">
               <div class="input-group">
-                <input  id="date"
-                        class="form-select"
+                <input  class="form-select"
                         type="date"
                         v-model="slot.date"
                         v-show="current.min != current.max"
                         :min="current.min"
                         :max="current.max"
                         />
-                <input  id="time"
-                        class="form-select"
+                <input  class="form-select"
                         type="time"
                         v-model="slot.time"
                         />
-                <select id="duration"
-                        class="form-select"
+                <Duration
                         v-model="slot.duration"
-                        >
-                  <option value="0">{{ i18n.timeSlots.duration.label }}</option>
-                  <option value="1800">30mn</option>
-                  <option value="3600">1h</option>
-                  <option value="5400">1h30</option>
-                  <option value="7200">2h</option>
-                  <option value="9000">2h30</option>
-                  <option value="10800">3h</option>
-                  <option value="10800">3h30</option>
-                  <option value="14400">4h</option>
-                  <option value="18000">5h</option>
-                  <option value="21600">6h</option>
-                  <option value="25200">7h</option>
-                  <option value="28800">8h</option>
-                </select>
+                        :i18n="i18n.timeSlots.duration"
+                        />
               </div>
             </div>
             <div class="col-lg-4">
