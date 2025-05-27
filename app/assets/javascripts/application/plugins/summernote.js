@@ -24,6 +24,40 @@ window.summernoteManager = {
         // return button as jquery object
         return button.render();
     },
+    qButton: function (context) {
+        'use strict';
+        var ui = $.summernote.ui,
+            button = ui.button({
+                contents: '<i class="fas fa-quote-left"/>',
+                tooltip: 'Quote',
+                className: 'note-btn-quote',
+                click: function () {
+                    var range = context.invoke('editor.createRange');
+                    var selectedText = range.toString();
+                    if (selectedText) {
+                        // Si du texte est sélectionné, le remplacer par <q>texte</q>
+                        context.invoke('editor.pasteHTML', `<q>${selectedText}</q>`);
+                    } else {
+                        // Si aucun texte sélectionné, insérer <q> et placer le curseur dedans
+                        var qNode = document.createElement('q');
+                        qNode.innerHTML = '&#8203;'; // Caractère invisible pour éviter un q vide inaccessible
+                        range.insertNode(qNode);
+
+                        // Placer le curseur à l'intérieur du q
+                        var newRange = document.createRange();
+                        newRange.setStart(qNode, 0);
+                        newRange.setEnd(qNode, 0);
+                        var sel = window.getSelection();
+                        sel.removeAllRanges();
+                        sel.addRange(newRange);
+
+                        context.invoke('editor.focus');
+                    }
+                }
+            });
+        // return button as jquery object
+        return button.render();
+    },
     init: function () {
         'use strict';
         this.setConfigs();
@@ -77,14 +111,13 @@ window.summernoteManager = {
         this.setConfig('mini-list-with-notes',
             {
                 toolbar: [
-                    ['font', ['bold', 'italic']],
-                    ['position', ['superscript']],
+                    ['font', ['bold', 'italic', 'superscript', 'q']],
                     ['para', ['ul', 'ol']],
                     ['insert', ['link', 'unlink', 'note']],
                     ['view', ['codeview']]
                 ]
             },
-            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li', 'note'],
+            ['b', 'strong', 'i', 'em', 'q', 'sup', 'a', 'ul', 'ol', 'li', 'note'],
             ['href', 'target']);
 
         this.setConfig('default',
