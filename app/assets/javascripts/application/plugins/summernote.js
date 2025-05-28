@@ -1,63 +1,6 @@
 /*global $ */
 window.summernoteManager = {
     configs: {},
-    noteButton: function (context) {
-        'use strict';
-        var ui = $.summernote.ui,
-            button = ui.button({
-                contents: '<i class="fas fa-note-sticky"/>',
-                tooltip: 'Note (beta)',
-                className: 'note-btn-note',
-                click: function () {
-                    var text = context.invoke('editor.getSelectedText'),
-                        // TODO find if it's a note or not
-                        isANote = false,
-                        note;
-                    if (isANote) {
-                        // TODO remove note
-                    } else {
-                        note = '<note>' + text + '</note>';
-                        context.invoke('editor.pasteHTML', note);
-                    }
-                }
-            });
-        // return button as jquery object
-        return button.render();
-    },
-    qButton: function (context) {
-        'use strict';
-        var ui = $.summernote.ui,
-            button = ui.button({
-                contents: '<i class="fas fa-quote-left"/>',
-                tooltip: 'Quote',
-                className: 'note-btn-quote',
-                click: function () {
-                    var range = context.invoke('editor.createRange');
-                    var selectedText = range.toString();
-                    if (selectedText) {
-                        // Si du texte est sélectionné, le remplacer par <q>texte</q>
-                        context.invoke('editor.pasteHTML', `<q>${selectedText}</q>`);
-                    } else {
-                        // Si aucun texte sélectionné, insérer <q> et placer le curseur dedans
-                        var qNode = document.createElement('q');
-                        qNode.innerHTML = '&#8203;'; // Caractère invisible pour éviter un q vide inaccessible
-                        range.insertNode(qNode);
-
-                        // Placer le curseur à l'intérieur du q
-                        var newRange = document.createRange();
-                        newRange.setStart(qNode, 0);
-                        newRange.setEnd(qNode, 0);
-                        var sel = window.getSelection();
-                        sel.removeAllRanges();
-                        sel.addRange(newRange);
-
-                        context.invoke('editor.focus');
-                    }
-                }
-            });
-        // return button as jquery object
-        return button.render();
-    },
     init: function () {
         'use strict';
         this.setConfigs();
