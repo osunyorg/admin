@@ -46,13 +46,9 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   scope :on_day, -> (day) {  where('DATE(datetime) = ?', day) }
 
   scope :changed_status_today, -> {
-    where(
-      'DATE(datetime) = :today OR DATE(datetime) = :yesterday',
-      today: Date.today,
-      yesterday: Date.yesterday
-    )
+    where(datetime: (Date.yesterday.beginning_of_day..Date.today.end_of_day))
   }
-  
+
   scope :ordered, -> { order(:datetime) }
 
   delegate :time_zone, to: :event
