@@ -10,7 +10,7 @@ module Communication::Website::Agenda::Event::WithKinds
     validate :no_time_slot_after?, if: :has_time_slots?
     validate :not_too_long
 
-    before_validation :set_to_day, if: :kind_child?
+    before_validation :set_to_day
     after_commit :touch_parent, if: :kind_child?
 
     scope :with_no_time_slots, -> { where.missing(:time_slots) }
@@ -84,7 +84,13 @@ module Communication::Website::Agenda::Event::WithKinds
   end
 
   def set_to_day
-    self.to_day = self.from_day
+    if kind_child?
+      # Always the same day for children
+      self.to_day = self.from_day if kind_child?
+    else
+      # Either it's explicitly set, or it's the same as the start date (no empty to_day)
+      self.to_day ||= self.from_day
+    end
   end
 
   def touch_parent
