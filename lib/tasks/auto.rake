@@ -6,11 +6,6 @@ namespace :auto do
     Research::Hal::UpdateJob.perform_later
   end
 
-  desc 'Touch objects depending on time, so they can be published or archived'
-  task managed_planned_objects: :environment do
-    Osuny::PlannedObjects.manage
-  end
-
   desc 'Clean and rebuild every website to enable publications in the future'
   task clean_and_rebuild_websites: :environment do
     Communication::Website.find_each do |website|
