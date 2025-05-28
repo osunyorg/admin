@@ -311,8 +311,10 @@ fr:
           attributes:
             from_day:
               events_before: doit être avant le début du premier événement
+              time_slots_before: doit être avant le premier créneau horaire
             to_day:
               events_after: doit être après la fin du dernier événement
+              time_slots_after: doit être après le dernier créneau horaire
               too_soon: doit être après le jour de début
               too_long: doit être inférieur au %{max_end_date}
         communication/website/agenda/event/localization:

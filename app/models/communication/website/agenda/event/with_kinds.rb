@@ -6,6 +6,8 @@ module Communication::Website::Agenda::Event::WithKinds
 
     validate :no_child_before?, if: :kind_parent?
     validate :no_child_after?, if: :kind_parent?
+    validate :no_time_slot_before?, if: :has_time_slots?
+    validate :no_time_slot_after?, if: :has_time_slots?
     validate :not_too_long
 
     before_validation :set_to_day, if: :kind_child?
@@ -39,6 +41,10 @@ module Communication::Website::Agenda::Event::WithKinds
     children.none?
   end
 
+  def has_time_slots?
+    time_slots.any?
+  end
+
   def multiple_time_slots?
     time_slots.count > 1
   end
@@ -54,6 +60,18 @@ module Communication::Website::Agenda::Event::WithKinds
   def no_child_after?
     if children.where('to_day > ?', self.to_day).any?
       errors.add(:to_day, :events_after)
+    end
+  end
+
+  def no_time_slot_before?
+    if time_slots.where('DATE(datetime) < ?', self.from_day).any?
+      errors.add(:from_day, :time_slots_before)
+    end
+  end
+
+  def no_time_slot_after?
+    if time_slots.where('DATE(datetime) > ?', self.to_day).any?
+      errors.add(:to_day, :time_slots_after)
     end
   end
 
