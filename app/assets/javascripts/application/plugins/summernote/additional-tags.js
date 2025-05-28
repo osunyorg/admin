@@ -177,5 +177,4 @@
         iconHtml: '<i class="fas fa-note-sticky"></i>',
         tooltip: 'Note (beta)'
     });
-
 }(jQuery));
