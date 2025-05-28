@@ -86,7 +86,7 @@ module Communication::Website::Agenda::Event::WithKinds
   def set_to_day
     if kind_child?
       # Always the same day for children
-      self.to_day = self.from_day if kind_child?
+      self.to_day = self.from_day
     else
       # Either it's explicitly set, or it's the same as the start date (no empty to_day)
       self.to_day ||= self.from_day
