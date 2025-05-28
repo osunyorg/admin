@@ -2,8 +2,11 @@ module Communication::Website::Agenda::Event::WithKinds
   extend ActiveSupport::Concern
 
   included do
+    MAX_DURATION = 1.year
+
     validate :no_child_before?, if: :kind_parent?
     validate :no_child_after?, if: :kind_parent?
+    validate :not_too_long
 
     before_validation :set_to_day, if: :kind_child?
     after_commit :touch_parent, if: :kind_child?
@@ -51,6 +54,14 @@ module Communication::Website::Agenda::Event::WithKinds
   def no_child_after?
     if children.where('to_day > ?', self.to_day).any?
       errors.add(:to_day, :events_after)
+    end
+  end
+
+  def not_too_long
+    max_duration_in_days = MAX_DURATION / 1.day
+    if duration_in_days > max_duration_in_days
+      max_end_date = from_day + max_duration_in_days
+      errors.add(:to_day, :too_long, max_end_date: max_end_date)
     end
   end
 

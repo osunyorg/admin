@@ -60,6 +60,10 @@ module Communication::Website::Agenda::Period::InPeriod
     from_day == to_day
   end
 
+  def duration_in_days
+    to_day.nil? ? 1 : (to_day - from_day).to_i
+  end
+
   # Un événement demain aura une distance de 1, comme un événement hier
   # On utilise cette info pour classer les événements à venir dans un sens et les archives dans l'autre
   def distance_in_days
