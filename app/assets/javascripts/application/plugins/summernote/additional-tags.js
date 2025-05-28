@@ -5,7 +5,6 @@
 
     var TagUtils = {
         findClosestTag: function (node, tagName) {
-            'use strict';
             var currentNode = node;
             tagName = tagName.toLowerCase();
             while (currentNode && currentNode.nodeType !== 9) { // 9 = DOCUMENT_NODE
@@ -18,20 +17,22 @@
         },
 
         unwrapTag: function ($tag) {
-            'use strict';
             $tag.contents().unwrap();
         },
 
         wrapSelectionWithTag: function (context, tagName) {
-            'use strict';
-            var sel = window.getSelection();
+            var sel = window.getSelection(),
+                range,
+                frag,
+                node,
+                newRange;
             if (!sel.rangeCount) {
                 return;
             }
 
-            var range = sel.getRangeAt(0);
-            var frag = range.extractContents();
-            var node = document.createElement(tagName);
+            range = sel.getRangeAt(0);
+            frag = range.extractContents();
+            node = document.createElement(tagName);
 
             if (!frag.textContent) {
                 node.innerHTML = '&#8203;'; // caractère invisible pour curseur accessible
@@ -42,7 +43,7 @@
             range.insertNode(node);
 
             // Positionner le curseur à l’intérieur de la nouvelle balise
-            var newRange = document.createRange();
+            newRange = document.createRange();
             newRange.setStart(node, 0);
             newRange.collapse(true);
 
@@ -55,28 +56,31 @@
         },
 
         isSelectionInsideTag: function (tagName) {
-            'use strict';
-            var sel = window.getSelection();
+            var sel = window.getSelection(),
+                range,
+                startTag,
+                endTag;
             if (!sel.rangeCount) {
                 return false;
             }
 
-            var range = sel.getRangeAt(0);
-            var startTag = this.findClosestTag(range.startContainer, tagName);
-            var endTag = this.findClosestTag(range.endContainer, tagName);
+            range = sel.getRangeAt(0);
+            startTag = this.findClosestTag(range.startContainer, tagName);
+            endTag = this.findClosestTag(range.endContainer, tagName);
 
             return startTag && startTag === endTag;
         },
 
         removeTagAroundSelection: function (context, tagName) {
-            'use strict';
-            var sel = window.getSelection();
+            var sel = window.getSelection(),
+                range,
+                tagNode;
             if (!sel.rangeCount) {
                 return;
             }
 
-            var range = sel.getRangeAt(0);
-            var tagNode = this.findClosestTag(range.startContainer, tagName);
+            range = sel.getRangeAt(0);
+            tagNode = this.findClosestTag(range.startContainer, tagName);
 
             if (tagNode) {
                 this.unwrapTag($(tagNode));
@@ -86,7 +90,6 @@
         },
 
         toggleTag: function (context, tagName) {
-            'use strict';
             var sel = window.getSelection();
             if (!sel.rangeCount) {
                 return;
@@ -101,15 +104,14 @@
     };
 
     function createUpdateButtonState(context, tagName) {
-        'use strict';
         return function () {
-            'use strict';
-            var sel = window.getSelection();
-            var isActive = false;
-            var $btn;
+            var sel = window.getSelection(),
+                isActive = false,
+                $btn,
+                range;
 
             if (sel.rangeCount) {
-                var range = sel.getRangeAt(0);
+                range = sel.getRangeAt(0);
                 isActive = !!TagUtils.findClosestTag(range.startContainer, tagName);
             }
 
@@ -119,17 +121,15 @@
     }
 
     function attachEditorEvents(context, tagName, updateButtonState) {
-        'use strict';
-        var events = ['keyup', 'mouseup', 'change', 'nodechange'];
-        var i;
-        var $editable = context.layoutInfo.editable;
+        var events = ['keyup', 'mouseup', 'change', 'nodechange'],
+            i,
+            $editable = context.layoutInfo.editable;
 
         for (i = 0; i < events.length; i++) {
             context.invoke('events.on', events[i], updateButtonState);
         }
 
         $editable.on('mouseup keyup', function () {
-            'use strict';
             if (document.activeElement === $editable[0]) {
                 updateButtonState();
             }
@@ -137,20 +137,18 @@
     }
 
     function createButton(context, tagName, options) {
-        'use strict';
-        var ui = $.summernote.ui;
-        var updateButtonState = createUpdateButtonState(context, tagName);
-
-        var button = ui.button({
-            contents: options.iconHtml,
-            tooltip: options.tooltip,
-            className: 'note-btn-' + tagName,
-            click: function () {
-                'use strict';
-                TagUtils.toggleTag(context, tagName);
-                updateButtonState();
-            }
-        });
+        var ui = $.summernote.ui,
+            updateButtonState = createUpdateButtonState(context, tagName),
+            button = ui.button({
+                contents: options.iconHtml,
+                tooltip: options.tooltip,
+                className: 'note-btn-' + tagName,
+                click: function () {
+                    'use strict';
+                    TagUtils.toggleTag(context, tagName);
+                    updateButtonState();
+                }
+            });
 
         attachEditorEvents(context, tagName, updateButtonState);
         updateButtonState();
