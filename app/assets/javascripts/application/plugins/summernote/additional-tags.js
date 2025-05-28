@@ -1,8 +1,8 @@
 (function($) {
   window.summernoteManager = window.summernoteManager || {};
 
-  const TagUtils = {
-    findClosestTag(node, tagName) {
+  var TagUtils = {
+    findClosestTag: function(node, tagName) {
       tagName = tagName.toLowerCase();
       while (node && node.nodeType !== 9) {
         if (node.nodeType === 1 && node.tagName.toLowerCase() === tagName) return node;
@@ -10,13 +10,13 @@
       }
       return null;
     },
-    unwrapTag($tag) { $tag.contents().unwrap(); },
-    wrapSelectionWithTag(context, tagName) {
-      const sel = window.getSelection();
+    unwrapTag: function($tag) { $tag.contents().unwrap(); },
+    wrapSelectionWithTag: function(context, tagName) {
+      var sel = window.getSelection();
       if (!sel.rangeCount) return;
-      const range = sel.getRangeAt(0);
-      const frag = range.extractContents();
-      const node = document.createElement(tagName);
+      var range = sel.getRangeAt(0);
+      var frag = range.extractContents();
+      var node = document.createElement(tagName);
       node.appendChild(frag);
       range.insertNode(node);
       range.setStartAfter(node);
@@ -25,27 +25,28 @@
       sel.addRange(range);
       context.invoke('editor.focus');
     },
-    isSelectionInsideTag(tagName) {
-      const sel = window.getSelection();
+    isSelectionInsideTag: function(tagName) {
+      var sel = window.getSelection();
       if (!sel.rangeCount) return false;
-      const range = sel.getRangeAt(0);
-      const startTag = this.findClosestTag(range.startContainer, tagName);
-      const endTag = this.findClosestTag(range.endContainer, tagName);
+      var range = sel.getRangeAt(0);
+      var startTag = this.findClosestTag(range.startContainer, tagName);
+      var endTag = this.findClosestTag(range.endContainer, tagName);
       return startTag && startTag === endTag;
     },
-    removeTagAroundSelection(tagName) {
-      const sel = window.getSelection();
+    removeTagAroundSelection: function(tagName) {
+      var sel = window.getSelection();
       if (!sel.rangeCount) return;
-      const range = sel.getRangeAt(0);
-      const tagNode = this.findClosestTag(range.startContainer, tagName);
+      var range = sel.getRangeAt(0);
+      var tagNode = this.findClosestTag(range.startContainer, tagName);
       if (tagNode) this.unwrapTag($(tagNode));
     },
-    toggleTag(context, tagName) {
-      const sel = window.getSelection();
+    toggleTag: function(context, tagName) {
+      var sel = window.getSelection();
       if (!sel.rangeCount) return;
-      if (this.isSelectionInsideTag(tagName)) this.removeTagAroundSelection(tagName);
-      else {
-        const text = context.invoke('editor.getSelectedText');
+      if (this.isSelectionInsideTag(tagName)) {
+        this.removeTagAroundSelection(tagName);
+      } else {
+        var text = context.invoke('editor.getSelectedText');
         if (!text) return;
         this.wrapSelectionWithTag(context, tagName);
       }
@@ -54,44 +55,46 @@
 
   function createUpdateButtonState(context, tagName) {
     return function() {
-      const sel = window.getSelection();
-      let isActive = false;
+      var sel = window.getSelection();
+      var isActive = false;
       if (sel.rangeCount) {
-        const range = sel.getRangeAt(0);
+        var range = sel.getRangeAt(0);
         isActive = !!TagUtils.findClosestTag(range.startContainer, tagName);
       }
-      const $btn = context.layoutInfo.toolbar.find(`.note-btn-${tagName}`);
+      var $btn = context.layoutInfo.toolbar.find('.note-btn-' + tagName);
       $btn.toggleClass('active', isActive);
     };
   }
 
-  window.summernoteManager.createTagToggleButton = function(tagName, options = {}) {
-    const iconHtml = options.iconHtml || `<i class="fas fa-${tagName}"></i>`;
-    const tooltip = options.tooltip || `Toggle ${tagName}`;
+  window.summernoteManager.createTagToggleButton = function(tagName, options) {
+    options = options || {};
+    var iconHtml = options.iconHtml || '<i class="fas fa-' + tagName + '"></i>';
+    var tooltip = options.tooltip || 'Toggle ' + tagName;
 
     return function(context) {
-      const ui = $.summernote.ui;
-      const $editable = context.layoutInfo.editable;
-      const updateButtonState = createUpdateButtonState(context, tagName);
+      var ui = $.summernote.ui;
+      var $editable = context.layoutInfo.editable;
+      var updateButtonState = createUpdateButtonState(context, tagName);
 
-      const button = ui.button({
+      var button = ui.button({
         contents: iconHtml,
-        tooltip,
-        className: `note-btn-${tagName}`,
-        click() {
+        tooltip: tooltip,
+        className: 'note-btn-' + tagName,
+        click: function() {
           TagUtils.toggleTag(context, tagName);
           updateButtonState();
         }
       });
 
-      ['keyup', 'mouseup', 'change', 'nodechange'].forEach(evt =>
-        context.invoke('events.on', evt, updateButtonState)
-      );
-
-      function onSelectionChange() {
-        if (document.activeElement === $editable[0]) updateButtonState();
+      var events = ['keyup', 'mouseup', 'change', 'nodechange'];
+      for (var i = 0; i < events.length; i++) {
+        context.invoke('events.on', events[i], updateButtonState);
       }
-      $editable.on('mouseup keyup', onSelectionChange);
+
+      $editable.on('mouseup keyup', function() {
+        if (document.activeElement === $editable[0]) updateButtonState();
+      });
+
       updateButtonState();
 
       return button.render();
@@ -107,4 +110,5 @@
     iconHtml: '<i class="fas fa-note-sticky"></i>',
     tooltip: 'Note (beta)'
   });
+
 })(jQuery);
