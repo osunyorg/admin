@@ -122,6 +122,7 @@ module Communication::Website::WithConnectedObjects
     # Peut-être pas utile
     # find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
   end
+
   protected
 
   def direct_objects_association_names

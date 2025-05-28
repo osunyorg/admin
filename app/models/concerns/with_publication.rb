@@ -5,20 +5,20 @@ module WithPublication
   extend ActiveSupport::Concern
 
   included do
-    scope :draft, -> { 
-      where(published: false) 
+    scope :draft, -> {
+      where(published: false)
     }
-    
+
     scope :published, -> {
       where(published: true)
     }
 
     scope :published_today, -> {
-      where('published_at = :today', today: Date.today)
+      where(published_at: Date.today.all_day)
     }
-    
-    scope :published_now, -> { 
-      published.where("#{table_name}.published_at <= ?", Time.zone.now) 
+
+    scope :published_now, -> {
+      published.where("#{table_name}.published_at <= ?", Time.zone.now)
     }
 
     scope :published_in_the_future, -> {
@@ -26,7 +26,7 @@ module WithPublication
     }
 
     scope :ordered_by_published_at, -> {
-      order(published_at: :desc) 
+      order(published_at: :desc)
     }
 
     before_validation :set_published_at
@@ -54,7 +54,7 @@ module WithPublication
   def published_now?
     published && published_at.present? && published_at <= Time.zone.now
   end
-  
+
 
   def published_in_the_future?
     published && published_at.present? && published_at > Time.zone.now
