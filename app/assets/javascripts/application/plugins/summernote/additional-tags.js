@@ -1,14 +1,17 @@
 (function ($) {
     'use strict';
+    var TagUtils,
+        ButtonUtils;
 
     window.summernoteManager = window.summernoteManager || {};
 
-    var TagUtils = {
+    TagUtils = {
         findClosestTag: function (node, tagName) {
-            var currentNode = node;
-            tagName = tagName.toLowerCase();
-            while (currentNode && currentNode.nodeType !== 9) { // 9 = DOCUMENT_NODE
-                if (currentNode.nodeType === 1 && currentNode.tagName.toLowerCase() === tagName) {
+            var currentNode = node,
+                tag = tagName.toLowerCase();
+            // 9 = DOCUMENT_NODE
+            while (currentNode && currentNode.nodeType !== 9) {
+                if (currentNode.nodeType === 1 && currentNode.tagName.toLowerCase() === tag) {
                     return currentNode;
                 }
                 currentNode = currentNode.parentNode;
@@ -35,7 +38,8 @@
             node = document.createElement(tagName);
 
             if (!frag.textContent) {
-                node.innerHTML = '&#8203;'; // caractère invisible pour curseur accessible
+                // caractère invisible pour curseur accessible
+                node.innerHTML = '&#8203;';
             } else {
                 node.appendChild(frag);
             }
@@ -103,64 +107,63 @@
         }
     };
 
-    function createUpdateButtonState(context, tagName) {
-        return function () {
-            var sel = window.getSelection(),
-                isActive = false,
-                $btn,
-                range;
+    ButtonUtils = {
+        createUpdateButtonState: function (context, tagName) {
+            return function () {
+                var sel = window.getSelection(),
+                    isActive = false,
+                    $btn,
+                    range;
 
-            if (sel.rangeCount) {
-                range = sel.getRangeAt(0);
-                isActive = !!TagUtils.findClosestTag(range.startContainer, tagName);
+                if (sel.rangeCount) {
+                    range = sel.getRangeAt(0);
+                    isActive = !!TagUtils.findClosestTag(range.startContainer, tagName);
+                }
+
+                $btn = context.layoutInfo.toolbar.find('.note-btn-' + tagName);
+                $btn.toggleClass('active', isActive);
+            };
+        },
+
+        attachEditorEvents: function (context, tagName, updateButtonState) {
+            var events = ['keyup', 'mouseup', 'change', 'nodechange'],
+                i,
+                $editable = context.layoutInfo.editable;
+
+            for (i = 0; i < events.length; i++) {
+                context.invoke('events.on', events[i], updateButtonState);
             }
 
-            $btn = context.layoutInfo.toolbar.find('.note-btn-' + tagName);
-            $btn.toggleClass('active', isActive);
-        };
-    }
-
-    function attachEditorEvents(context, tagName, updateButtonState) {
-        var events = ['keyup', 'mouseup', 'change', 'nodechange'],
-            i,
-            $editable = context.layoutInfo.editable;
-
-        for (i = 0; i < events.length; i++) {
-            context.invoke('events.on', events[i], updateButtonState);
-        }
-
-        $editable.on('mouseup keyup', function () {
-            if (document.activeElement === $editable[0]) {
-                updateButtonState();
-            }
-        });
-    }
-
-    function createButton(context, tagName, options) {
-        var ui = $.summernote.ui,
-            updateButtonState = createUpdateButtonState(context, tagName),
-            button = ui.button({
-                contents: options.iconHtml,
-                tooltip: options.tooltip,
-                className: 'note-btn-' + tagName,
-                click: function () {
-                    'use strict';
-                    TagUtils.toggleTag(context, tagName);
+            $editable.on('mouseup keyup', function () {
+                if (document.activeElement === $editable[0]) {
                     updateButtonState();
                 }
             });
+        },
 
-        attachEditorEvents(context, tagName, updateButtonState);
-        updateButtonState();
+        createButton: function (context, tagName, options) {
+            var ui = $.summernote.ui,
+                updateButtonState = ButtonUtils.createUpdateButtonState(context, tagName),
+                button = ui.button({
+                    contents: options.iconHtml,
+                    tooltip: options.tooltip,
+                    className: 'note-btn-' + tagName,
+                    click: function () {
+                        TagUtils.toggleTag(context, tagName);
+                        updateButtonState();
+                    }
+                });
 
-        return button.render();
-    }
+            ButtonUtils.attachEditorEvents(context, tagName, updateButtonState);
+            updateButtonState();
+
+            return button.render();
+        }
+    }    
 
     window.summernoteManager.createTagToggleButton = function (tagName, options) {
-        'use strict';
         return function (context) {
-            'use strict';
-            return createButton(context, tagName, options);
+            return ButtonUtils.createButton(context, tagName, options);
         };
     };
 
