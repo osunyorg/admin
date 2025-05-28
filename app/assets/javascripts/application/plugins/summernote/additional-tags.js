@@ -25,12 +25,14 @@
         wrapSelectionWithTag: function (context, tagName) {
             'use strict';
             var sel = window.getSelection();
-            var range, frag, node;
-            if (!sel.rangeCount) return;
+            if (!sel.rangeCount) {
+                return;
+            }
 
-            range = sel.getRangeAt(0);
-            frag = range.extractContents();
-            node = document.createElement(tagName);
+            var range = sel.getRangeAt(0);
+            var frag = range.extractContents();
+            var node = document.createElement(tagName);
+
             node.appendChild(frag);
             range.insertNode(node);
 
@@ -39,43 +41,53 @@
             sel.removeAllRanges();
             sel.addRange(range);
             context.invoke('editor.focus');
+            context.trigger('change');
         },
 
         isSelectionInsideTag: function (tagName) {
             'use strict';
             var sel = window.getSelection();
-            var range, startTag, endTag;
-            if (!sel.rangeCount) return false;
+            if (!sel.rangeCount) {
+                return false;
+            }
 
-            range = sel.getRangeAt(0);
-            startTag = this.findClosestTag(range.startContainer, tagName);
-            endTag = this.findClosestTag(range.endContainer, tagName);
+            var range = sel.getRangeAt(0);
+            var startTag = this.findClosestTag(range.startContainer, tagName);
+            var endTag = this.findClosestTag(range.endContainer, tagName);
+
             return startTag && startTag === endTag;
         },
 
-        removeTagAroundSelection: function (tagName) {
+        removeTagAroundSelection: function (context, tagName) {
             'use strict';
             var sel = window.getSelection();
-            var range, tagNode;
-            if (!sel.rangeCount) return;
+            if (!sel.rangeCount) {
+                return;
+            }
 
-            range = sel.getRangeAt(0);
-            tagNode = this.findClosestTag(range.startContainer, tagName);
+            var range = sel.getRangeAt(0);
+            var tagNode = this.findClosestTag(range.startContainer, tagName);
+
             if (tagNode) {
                 this.unwrapTag($(tagNode));
+                context.trigger('change');
             }
         },
 
         toggleTag: function (context, tagName) {
             'use strict';
             var sel = window.getSelection();
-            if (!sel.rangeCount) return;
+            if (!sel.rangeCount) {
+                return;
+            }
 
             if (this.isSelectionInsideTag(tagName)) {
-                this.removeTagAroundSelection(tagName);
+                this.removeTagAroundSelection(context, tagName);
             } else {
                 var text = context.invoke('editor.getSelectedText');
-                if (!text) return;
+                if (!text) {
+                    return;
+                }
                 this.wrapSelectionWithTag(context, tagName);
             }
         }
@@ -83,11 +95,12 @@
 
     function createUpdateButtonState (context, tagName) {
         'use strict';
-        var sel, range, isActive, $btn;
         return function () {
             'use strict';
-            sel = window.getSelection();
-            isActive = false;
+            var sel = window.getSelection();
+            var range = null;
+            var isActive = false;
+            var $btn = null;
 
             if (sel.rangeCount) {
                 range = sel.getRangeAt(0);
@@ -102,7 +115,8 @@
     function attachEditorEvents (context, tagName, updateButtonState) {
         'use strict';
         var events = ['keyup', 'mouseup', 'change', 'nodechange'];
-        var i, $editable = context.layoutInfo.editable;
+        var i = 0;
+        var $editable = context.layoutInfo.editable;
 
         for (i = 0; i < events.length; i++) {
             context.invoke('events.on', events[i], updateButtonState);
@@ -120,6 +134,7 @@
         'use strict';
         var ui = $.summernote.ui;
         var updateButtonState = createUpdateButtonState(context, tagName);
+
         var button = ui.button({
             contents: options.iconHtml,
             tooltip: options.tooltip,
@@ -133,6 +148,7 @@
 
         attachEditorEvents(context, tagName, updateButtonState);
         updateButtonState();
+
         return button.render();
     }
 
