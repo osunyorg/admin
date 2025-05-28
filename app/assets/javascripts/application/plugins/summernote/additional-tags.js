@@ -8,7 +8,7 @@
             'use strict';
             var currentNode = node;
             tagName = tagName.toLowerCase();
-            while (currentNode && currentNode.nodeType !== 9) {
+            while (currentNode && currentNode.nodeType !== 9) { // 9 = DOCUMENT_NODE
                 if (currentNode.nodeType === 1 && currentNode.tagName.toLowerCase() === tagName) {
                     return currentNode;
                 }
@@ -33,15 +33,25 @@
             var frag = range.extractContents();
             var node = document.createElement(tagName);
 
-            node.appendChild(frag);
+            if (!frag.textContent) {
+                node.innerHTML = '&#8203;'; // caractère invisible pour curseur accessible
+            } else {
+                node.appendChild(frag);
+            }
+
             range.insertNode(node);
 
-            range.setStartAfter(node);
-            range.collapse(true);
+            // Positionner le curseur à l’intérieur de la nouvelle balise
+            var newRange = document.createRange();
+            newRange.setStart(node, 0);
+            newRange.collapse(true);
+
             sel.removeAllRanges();
-            sel.addRange(range);
+            sel.addRange(newRange);
             context.invoke('editor.focus');
-            context.trigger('change');
+
+            // Important : notifier Summernote du changement
+            context.invoke('editor.afterCommand');
         },
 
         isSelectionInsideTag: function (tagName) {
@@ -70,7 +80,8 @@
 
             if (tagNode) {
                 this.unwrapTag($(tagNode));
-                context.trigger('change');
+                // Important : notifier Summernote du changement
+                context.invoke('editor.afterCommand');
             }
         },
 
@@ -84,26 +95,21 @@
             if (this.isSelectionInsideTag(tagName)) {
                 this.removeTagAroundSelection(context, tagName);
             } else {
-                var text = context.invoke('editor.getSelectedText');
-                if (!text) {
-                    return;
-                }
                 this.wrapSelectionWithTag(context, tagName);
             }
         }
     };
 
-    function createUpdateButtonState (context, tagName) {
+    function createUpdateButtonState(context, tagName) {
         'use strict';
         return function () {
             'use strict';
             var sel = window.getSelection();
-            var range = null;
             var isActive = false;
-            var $btn = null;
+            var $btn;
 
             if (sel.rangeCount) {
-                range = sel.getRangeAt(0);
+                var range = sel.getRangeAt(0);
                 isActive = !!TagUtils.findClosestTag(range.startContainer, tagName);
             }
 
@@ -112,10 +118,10 @@
         };
     }
 
-    function attachEditorEvents (context, tagName, updateButtonState) {
+    function attachEditorEvents(context, tagName, updateButtonState) {
         'use strict';
         var events = ['keyup', 'mouseup', 'change', 'nodechange'];
-        var i = 0;
+        var i;
         var $editable = context.layoutInfo.editable;
 
         for (i = 0; i < events.length; i++) {
@@ -130,7 +136,7 @@
         });
     }
 
-    function createButton (context, tagName, options) {
+    function createButton(context, tagName, options) {
         'use strict';
         var ui = $.summernote.ui;
         var updateButtonState = createUpdateButtonState(context, tagName);
