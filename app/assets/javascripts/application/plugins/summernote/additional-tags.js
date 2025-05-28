@@ -1,3 +1,4 @@
+/*global jQuery*/
 (function ($) {
     'use strict';
     var TagUtils,
@@ -117,7 +118,7 @@
 
                 if (sel.rangeCount) {
                     range = sel.getRangeAt(0);
-                    isActive = !!TagUtils.findClosestTag(range.startContainer, tagName);
+                    isActive = Boolean(TagUtils.findClosestTag(range.startContainer, tagName));
                 }
 
                 $btn = context.layoutInfo.toolbar.find('.note-btn-' + tagName);
@@ -130,7 +131,7 @@
                 i,
                 $editable = context.layoutInfo.editable;
 
-            for (i = 0; i < events.length; i++) {
+            for (i = 0; i < events.length; i += 1) {
                 context.invoke('events.on', events[i], updateButtonState);
             }
 
@@ -159,7 +160,7 @@
 
             return button.render();
         }
-    }    
+    };
 
     window.summernoteManager.createTagToggleButton = function (tagName, options) {
         return function (context) {
