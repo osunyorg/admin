@@ -116,10 +116,9 @@ module Communication::Website::WithConnectedObjects
 
   def touch_planned_objects
     events.changed_status_today.find_each &:touch
-    # TODO time_slots
-    # Communication::Website::Agenda::Event::TimeSlot.where(website: self).published_today.find_each &:touch
+    agenda_events_time_slots.changed_status_today.find_each &:touch
     exhibitions.changed_status_today.find_each &:touch
-    Communication::Website::Post::Localization.where(website: self).published_today.find_each &:touch
+    post_localizations.published_today.find_each &:touch
     # Peut-être pas utile
     # find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
   end

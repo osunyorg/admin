@@ -45,6 +45,14 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   scope :on_month, -> (year, month) { where('extract(year from datetime) = ? and extract(month from datetime) = ?', year, month) }
   scope :on_day, -> (day) {  where('DATE(datetime) = ?', day) }
 
+  scope :changed_status_today, -> {
+    where(
+      'DATE(datetime) = :today OR DATE(datetime) = :yesterday',
+      today: Date.today,
+      yesterday: Date.yesterday
+    )
+  }
+  
   scope :ordered, -> { order(:datetime) }
 
   delegate :time_zone, to: :event
