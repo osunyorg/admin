@@ -12,6 +12,10 @@ module WithPublication
     scope :published, -> {
       where(published: true)
     }
+
+    scope :published_today, -> {
+      where('published_at = :today', today: Date.today)
+    }
     
     scope :published_now, -> { 
       published.where("#{table_name}.published_at <= ?", Time.zone.now) 
@@ -50,6 +54,7 @@ module WithPublication
   def published_now?
     published && published_at.present? && published_at <= Time.zone.now
   end
+  
 
   def published_in_the_future?
     published && published_at.present? && published_at > Time.zone.now

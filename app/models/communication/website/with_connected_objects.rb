@@ -114,6 +114,15 @@ module Communication::Website::WithConnectedObjects
     false
   end
 
+  def touch_planned_objects
+    events.changed_status_today.find_each &:touch
+    # TODO time_slots
+    # Communication::Website::Agenda::Event::TimeSlot.where(website: self).published_today.find_each &:touch
+    exhibitions.changed_status_today.find_each &:touch
+    Communication::Website::Post::Localization.where(website: self).published_today.find_each &:touch
+    # Peut-être pas utile
+    # find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
+  end
   protected
 
   def direct_objects_association_names
@@ -206,10 +215,4 @@ module Communication::Website::WithConnectedObjects
                .to_h
   end
 
-  def touch_planned_objects
-    events.find_each &:touch
-    exhibitions.find_each &:touch
-    posts.find_each &:touch
-    find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
-  end
 end
