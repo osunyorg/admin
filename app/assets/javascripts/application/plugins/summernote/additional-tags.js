@@ -177,4 +177,4 @@
         tooltip: 'Note (beta)'
     });
 
-})(jQuery);
+}(jQuery));
