@@ -80,12 +80,9 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   protected
 
   def filter(events)
-    list = []
-    events.each do |event|
-      list << event unless event_forbidden?(event)
-      break if list.count >= quantity
-    end
-    list
+    events.lazy # Do not load everything
+          .reject { |event| event_forbidden?(event) }
+          .first(quantity)
   end
 
   def event_forbidden?(event)
