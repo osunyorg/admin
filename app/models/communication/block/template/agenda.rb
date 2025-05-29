@@ -24,12 +24,18 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :time, :option, options: AUTHORIZED_SCOPES
   has_component :no_event_message, :string
 
+  # Options d'affichage
   has_component :option_categories,   :boolean, default: false
   has_component :option_dates,        :boolean, default: true
   has_component :option_image,        :boolean, default: true
   has_component :option_subtitle,     :boolean, default: true
   has_component :option_summary,      :boolean, default: true
   has_component :option_status,       :boolean, default: false
+
+  # Choix des types d'événements
+  has_component :kind_parent,         :boolean, default: false
+  has_component :kind_child,          :boolean, default: true
+  has_component :kind_recurring,      :boolean, default: true
 
   def selected_events
     @selected_events ||= send "selected_events_#{mode}"
