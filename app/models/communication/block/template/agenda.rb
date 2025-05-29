@@ -82,13 +82,17 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   def filter(events)
     list = []
     events.each do |event|
-      next if event.kind_parent? && !kind_parent
-      next if event.kind_child? && !kind_child
-      next if event.kind_recurring? && !kind_recurring
+      next if event_forbidden?(event)
       list << event
       break if list.count >= quantity
     end
     list
+  end
+
+  def event_forbidden?(event)
+    (event.kind_parent? && !kind_parent) ||
+    (event.kind_child? && !kind_child) ||
+    (event.kind_recurring? && !kind_recurring)
   end
 
   def link_to_events
