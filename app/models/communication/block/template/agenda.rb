@@ -38,7 +38,11 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :kind_recurring,      :boolean, default: true
 
   def selected_events
-    @selected_events ||= send "selected_events_#{mode}"
+    unless @selected_events
+      events = send "selected_events_#{mode}"
+      @selected_events = filter(events)
+    end
+    @selected_events
   end
 
   def category
@@ -75,6 +79,18 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
 
   protected
 
+  def filter(events)
+    list = []
+    events.each do |event|
+      next if event.kind_parent? && !kind_parent
+      next if event.kind_child? && !kind_child
+      next if event.kind_recurring? && !kind_recurring
+      list << event
+      break if list.count >= quantity
+    end
+    list
+  end
+
   def link_to_events
     special_page_l10n = events_special_page.localization_for(block.language)
     permalink_for(special_page_l10n)
@@ -105,13 +121,13 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def selected_events_all
-    events = base_events.limit(quantity)
+    base_events
   end
 
   def selected_events_category
     events = base_events
     events = events.for_category(category) if category
-    events = events.limit(quantity)
+    events
   end
 
   def selected_events_selection
