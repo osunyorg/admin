@@ -82,8 +82,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   def filter(events)
     list = []
     events.each do |event|
-      next if event_forbidden?(event)
-      list << event
+      list << event unless event_forbidden?(event)
       break if list.count >= quantity
     end
     list
