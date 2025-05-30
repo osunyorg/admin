@@ -6,7 +6,7 @@ module Communication::Website::Agenda::Event::WithKinds
 
     validate :no_child_before?, if: :kind_parent?
     validate :no_child_after?, if: :kind_parent?
-    # validate :not_too_long # TODO activate mid-june 2025, when Rennes is ready
+    validate :not_too_long
 
     before_validation :set_to_day
     after_save :manage_time_slots
