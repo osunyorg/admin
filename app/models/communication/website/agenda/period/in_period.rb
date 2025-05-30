@@ -18,6 +18,13 @@ module Communication::Website::Agenda::Period::InPeriod
     scope :archive, -> {
       where('to_day < :today', today: Date.today)
     }
+    scope :changed_status_today, -> {
+      where(
+        'from_day = :today OR from_day = :yesterday OR to_day = :today OR to_day = :yesterday',
+        today: Date.today,
+        yesterday: Date.yesterday
+      )
+    }
     scope :past, -> { archive }
 
     before_validation :set_time_zone
