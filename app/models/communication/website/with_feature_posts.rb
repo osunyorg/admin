@@ -11,7 +11,12 @@ module Communication::Website::WithFeaturePosts
     has_many    :post_categories,
                 class_name: 'Communication::Website::Post::Category',
                 foreign_key: :communication_website_id,
-                dependent: :destroy    
+                dependent: :destroy
+
+    has_many    :post_localizations,
+                class_name: 'Communication::Website::Post::Localization',
+                foreign_key: :communication_website_id,
+                dependent: :destroy
 
     scope :with_feature_posts, -> { where(feature_posts: true) }
   end
