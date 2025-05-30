@@ -86,10 +86,20 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def event_forbidden?(event)
+    event_kind_forbidden?(event) ||
+    recurring_event_has_no_time_slot_today?(event)
+  end
+
+  def event_kind_forbidden?(event)
     (event.kind_parent? && !kind_parent) ||
     (event.kind_child? && !kind_child) ||
-    (event.kind_recurring? && !kind_recurring) ||
-    (time == 'current' && event.kind_recurring? && event.no_time_slot_today?)
+    (event.kind_recurring? && !kind_recurring)
+  end
+
+  def recurring_event_has_no_time_slot_today?(event)
+    time == 'current' &&
+    event.kind_recurring? &&
+    event.no_time_slot_today?
   end
 
   def link_to_events
