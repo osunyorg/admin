@@ -81,15 +81,19 @@ module Communication::Website::Agenda::Event::WithKinds
   end
 
   def manage_time_slots
-    if same_day?
-      time_slots.each do |time_slot|
-        time_slot.set_date_to(from_day)
-      end
-    else
-      time_slots.each do |time_slot|
-        outside = time_slot.datetime < from_day || time_slot.datetime > to_day
-        time_slot.destroy if outside
-      end
+    same_day? ? manage_time_slots_same_day : manage_time_slots_multiple_days
+  end
+
+  def manage_time_slots_same_day
+    time_slots.each do |time_slot|
+      time_slot.set_date_to(from_day)
+    end
+  end
+
+  def manage_time_slots_multiple_days
+    time_slots.each do |time_slot|
+      outside = time_slot.datetime < from_day || time_slot.datetime > to_day
+      time_slot.destroy if outside
     end
   end
 
