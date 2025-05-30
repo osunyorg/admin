@@ -46,6 +46,7 @@ fr:
         label: Horaire
       duration:
         label: Durée
+        custom: Durée personnalisée (en minutes)
       place:
         hint: Par exemple “Grande salle” ou “Hors les murs”
         label: Lieu
