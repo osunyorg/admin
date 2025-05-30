@@ -6,11 +6,10 @@ module Communication::Website::Agenda::Event::WithKinds
 
     validate :no_child_before?, if: :kind_parent?
     validate :no_child_after?, if: :kind_parent?
-    validate :no_time_slot_before?, if: :has_time_slots?
-    validate :no_time_slot_after?, if: :has_time_slots?
-    validate :not_too_long
+    # validate :not_too_long # TODO activate mid-june 2025, when Rennes is ready
 
     before_validation :set_to_day
+    after_save :manage_time_slots
     after_commit :touch_parent, if: :kind_child?
 
     scope :with_no_time_slots, -> { where.missing(:time_slots) }
@@ -63,18 +62,6 @@ module Communication::Website::Agenda::Event::WithKinds
     end
   end
 
-  def no_time_slot_before?
-    if time_slots.where('DATE(datetime) < ?', self.from_day).any?
-      errors.add(:from_day, :time_slots_before)
-    end
-  end
-
-  def no_time_slot_after?
-    if time_slots.where('DATE(datetime) > ?', self.to_day).any?
-      errors.add(:to_day, :time_slots_after)
-    end
-  end
-
   def not_too_long
     max_duration_in_days = MAX_DURATION / 1.day
     if duration_in_days > max_duration_in_days
@@ -90,6 +77,19 @@ module Communication::Website::Agenda::Event::WithKinds
     else
       # Either it's explicitly set, or it's the same as the start date (no empty to_day)
       self.to_day ||= self.from_day
+    end
+  end
+
+  def manage_time_slots
+    if same_day?
+      time_slots.each do |time_slot|
+        time_slot.set_date_to(from_day)
+      end
+    else
+      time_slots.each do |time_slot|
+        outside = time_slot.datetime < from_day || time_slot.datetime > to_day
+        time_slot.destroy if outside
+      end
     end
   end
 
