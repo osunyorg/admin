@@ -47,6 +47,7 @@ export default {
         for (var i = 0; i < this.selected.categories.length; i++) {
           url += "&filters[for_category][]=" + this.selected.categories[i];
         };
+        url += '&page=' + this.page;
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
             this.data.results = [];
@@ -57,10 +58,12 @@ export default {
         xhr.send();
       },
       toggleCollection(collection) {
+        this.page = 1;
         this.toggle(this.selected.collections, collection);
         this.search();
       },
       toggleCategory(category) {
+        this.page = 1;
         this.toggle(this.selected.categories, category);
         this.search();
       },
