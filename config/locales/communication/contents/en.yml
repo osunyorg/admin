@@ -459,6 +459,8 @@ en:
                 options:
                   category: A specific category
                   selection: Selected organizations
+              option_address: 
+                label: Postal address
               option_link:
                 label: With clickable link to each organization's page?
               option_logo:
