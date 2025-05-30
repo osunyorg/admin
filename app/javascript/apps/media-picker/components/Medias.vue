@@ -1,11 +1,13 @@
 <script>
-import { Image } from 'lucide-vue-next';
+import { Image, ArrowRight, ArrowLeft } from 'lucide-vue-next';
 import Taxonomies from './medias/Taxonomies.vue';
 
 export default {
     components: {
       Image,
-      Taxonomies
+      Taxonomies,
+      ArrowRight,
+      ArrowLeft
     },
     data () {
       return {
@@ -47,6 +49,7 @@ export default {
         };
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
+            this.data.results = [];
             this.data = JSON.parse(xhr.responseText);
           }
         }.bind(this);
@@ -71,6 +74,11 @@ export default {
       select(image) {
         this.$emit('mediaSelected', image);
         this.close();
+      },
+    },
+    watch: {
+      'page': function() {
+        this.search();
       },
     },
     beforeMount() {
@@ -143,6 +151,29 @@ export default {
               </div>
               <div class="col-md-10">
                 <p v-if="data.results.length === 0" >{{ i18n.nothing }}</p>
+                <div v-if="data.total_pages" class="d-flex justify-content-between mb-2">
+                  <div class="vue__media-picker__button_container">
+                    <button
+                      class="btn btn-sm ps-0"
+                      v-if="page > 1"
+                      @click="page = page - 1"
+                      title="{{ i18n.previous }}">
+                      <ArrowLeft stroke-width="1.5" />
+                    </button>
+                  </div>
+                  <p class="m-0">
+                    {{ page }} / {{ data.total_pages }}
+                  </p>
+                  <div class="vue__media-picker__button_container text-end">
+                    <button
+                      class="btn btn-sm pe-0"
+                      v-if="page < data.total_pages"
+                      @click="page = page + 1"
+                      title="{{ i18n.next }}">
+                      <ArrowRight stroke-width="1.5" />
+                    </button>
+                  </div>
+                </div>
                 <div class="vue__media-picker__results--medias">
                   <img  :src="media.thumb"
                         :alt="media.alt"
@@ -150,29 +181,6 @@ export default {
                         v-for="media in data.results"
                         @click="select(media)">
                 </div>
-                <p v-if="data.total_pages && data.results.length > 0" class="small text-muted mt-5">
-                  {{page}} / {{data.total_pages }}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer d-block" v-if="data.total_pages > 1">
-            <div class="row">
-              <div class="col-lg-6">
-                <button
-                    v-if="page > 1"
-                    @click="page = page - 1"
-                    class="btn btn-light btn-sm">
-                  {{ i18n.previous }}
-                </button>
-              </div>
-              <div class="col-lg-6 text-end">
-                <button
-                    v-if="page < data.total_pages"
-                    @click="page = page + 1"
-                    class="btn btn-light btn-sm">
-                  {{ i18n.next }}
-                </button>
               </div>
             </div>
           </div>
