@@ -1,8 +1,14 @@
 git_file_1:
   about: test_post_fr (Communication::Website::Post::Localization)
   website: website_with_github
+  university: default_university
 git_file_2:
+  current_sha: 7b58a401710ed6560d7d06353c0fdf46f587128f
   previous_sha: 8b58a401710ed6560d7d06353c0fdf46f587128f
+  current_path: content/posts/2010/2010-11-28-test-2.html
   previous_path: content/posts/2010/2010-11-28-test-2.html
   about: test_post_2_fr (Communication::Website::Post::Localization)
   website: website_with_github
+  university: default_university
+  desynchronized: true
+  desynchronized_at: Time.now - 1.hour

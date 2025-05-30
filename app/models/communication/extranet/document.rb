@@ -25,10 +25,10 @@
 #  fk_rails_eb351dc444  (category_id => communication_extranet_document_categories.id)
 #
 class Communication::Extranet::Document < ApplicationRecord
-  include Sanitizable
-  include Searchable
   include Localizable
   include LocalizableOrderByNameScope
+  include Sanitizable
+  include Searchable
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'

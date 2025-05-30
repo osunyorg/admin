@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="alert alert-warning mb-4">
+      <div class="alert-message">
+        <h2><%= t('admin.users_alerts.optin_not_set.title') %></h2>
+
+        <%= t('admin.users_alerts.optin_not_set.text_html') %>
+        <div class="mt-4">
+          <%= link_to t('admin.users_alerts.optin_not_set.button_allow_optin'), 
+                      admin_optin_newsletter_path(optin: true), 
+                      method: :post, 
+                      class: button_classes_major %>
+          <%= link_to t('admin.users_alerts.optin_not_set.button_disallow_optin'), 
+                      admin_optin_newsletter_path(optin: false), 
+                      method: :post, 
+                      class: button_classes_major %>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+

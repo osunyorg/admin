@@ -1,0 +1,7 @@
+test_event_time_slot:
+  migration_identifier: test-event-time-slot-fixture-1
+  datetime: 2024-07-12T08:00:00+02:00
+  duration: 14400
+  communication_website_agenda_event: test_event
+  website: website_with_github
+  university: default_university

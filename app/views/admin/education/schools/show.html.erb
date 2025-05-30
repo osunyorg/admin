@@ -58,4 +58,5 @@
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_education_school_path(@school) %>
+  <%= render 'admin/communication/websites/git_files/list', git_files: @l10n.git_files %>
 <% end %>  

@@ -5,6 +5,7 @@
 #  id                                    :uuid             not null, primary key
 #  datetime                              :datetime
 #  duration                              :integer
+#  migration_identifier                  :string
 #  created_at                            :datetime         not null
 #  updated_at                            :datetime         not null
 #  communication_website_agenda_event_id :uuid             not null, indexed
@@ -26,7 +27,9 @@
 class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
+  include GeneratesGitFiles
   include Localizable
+  include WithOpenApi
   include WithUniversity
 
   belongs_to  :communication_website_agenda_event,
@@ -36,9 +39,15 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   validates :datetime, presence: true
 
+  before_validation :set_website_and_university, on: :create
+
   scope :on_year, -> (year) { where('extract(year from datetime) = ?', year) }
   scope :on_month, -> (year, month) { where('extract(year from datetime) = ? and extract(month from datetime) = ?', year, month) }
   scope :on_day, -> (day) {  where('DATE(datetime) = ?', day) }
+
+  scope :changed_status_today, -> {
+    where(datetime: (Date.yesterday.beginning_of_day..Date.today.end_of_day))
+  }
 
   scope :ordered, -> { order(:datetime) }
 
@@ -48,27 +57,39 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
     localizations.in_languages(website.active_language_ids)
   end
 
-  def date
-    datetime.to_date
+  # Used by Communication::Website::Agenda::Period::InPeriod
+  def from_day
+    date
   end
-  alias :from_day :date # Used by Communication::Website::Agenda::Period::InPeriod
+
+  # Used by Communication::Website::Agenda::Period::InPeriod
+  def to_day
+    date
+  end
+
+  def date
+    @date ||= datetime&.to_date
+  end
 
   def time
-    datetime.strftime("%H:%M")
+    datetime&.strftime("%H:%M")
   end
 
   def end_datetime
-    return if duration.to_i.zero?
+    return if datetime.nil? || duration.to_i.zero?
     datetime + duration.seconds
   end
 
   def end_date
     end_datetime&.to_date
   end
-  alias :to_day :end_date # Used by Communication::Website::Agenda::Period::InPeriod
 
   def end_time
     end_datetime&.strftime("%H:%M")
+  end
+
+  def first?
+    @first ||= id == event.time_slots.ordered.first.id
   end
 
   protected
@@ -85,5 +106,10 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   def day_after_change
     datetime_change.last&.to_date
+  end
+
+  def set_website_and_university
+    self.communication_website_id = event.communication_website_id
+    self.university_id = event.university_id
   end
 end

@@ -28,6 +28,7 @@
                         collection: Language.available_for_interface,
                         label_method: lambda { |l| language_name(l.iso_code) },
                         include_blank: :translate %>
+      <%= f.input :optin_newsletter %>
     </div>
     <div class="col-lg-6">
       <%= f.input :password,

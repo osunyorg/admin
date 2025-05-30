@@ -55,6 +55,7 @@ class Education::Program::Localization < ApplicationRecord
   include AsLocalization
   include AsLocalizedTree # ordered scope is overridden below
   include Contentful
+  include HasGitFiles
   include Initials
   include Pathable
   include Permalinkable
@@ -63,7 +64,6 @@ class Education::Program::Localization < ApplicationRecord
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithGitFiles
   include WithInheritance
   include WithPublication
   include WithUniversity

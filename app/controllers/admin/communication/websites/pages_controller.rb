@@ -31,11 +31,10 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       page = @website.pages.find(id)
-      page.update_columns parent_id: parent_page.id,
-                          position: index + 1
+      page.update(parent_id: parent_page.id, position: index + 1)
     end
-    old_parent_page.sync_with_git
-    parent_page.sync_with_git if parent_page != old_parent_page
+    old_parent_page.touch
+    parent_page.touch if parent_page != old_parent_page
     @website.generate_automatic_menus_for_language(current_language)
   end
 
@@ -55,7 +54,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def publish
     @l10n.publish!
-    @page.sync_with_git
     redirect_back fallback_location: admin_communication_website_page_path(@page),
                   notice: t('admin.communication.website.publish.notice')
   end
@@ -66,13 +64,15 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def connect
     load_object
-    @website.connect_and_sync @object, @page, direct_source_type: @page.class.to_s
+    @website.connect @object, @page, direct_source_type: @page.class.to_s
+    @page.touch
     head :ok
   end
 
   def disconnect
     load_object
-    @website.disconnect_and_sync @object, @page, direct_source_type: @page.class.to_s
+    @website.disconnect @object, @page, direct_source_type: @page.class.to_s
+    @page.touch
     redirect_back(fallback_location: [:admin, @object])
   end
 
@@ -97,7 +97,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
 
   def create
     @page.website = @website
-    if @page.save_and_sync
+    if @page.save
       redirect_to admin_communication_website_page_path(@page),
                   notice: t('admin.successfully_created_html', model: @page.to_s_in(current_language))
     else
@@ -109,7 +109,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def update
-    if @page.update_and_sync(page_params)
+    if @page.update(page_params)
       redirect_to admin_communication_website_page_path(@page),
                   notice: t('admin.successfully_updated_html', model: @page.to_s_in(current_language))
     else
@@ -163,7 +163,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
             :communication_website_id, :bodyclass, :full_width, :parent_id, category_ids: [],
             localizations_attributes: [
               :id, :title, :breadcrumb_title, :meta_description, :summary, :header_text, :text, :slug, :published,
-              :header_cta, :header_cta_label, :header_cta_url, 
+              :header_cta, :header_cta_label, :header_cta_url,
               :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
               :shared_image, :shared_image_delete, :shared_image_infos,
               :language_id

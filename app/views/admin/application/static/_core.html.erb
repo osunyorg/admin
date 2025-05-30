@@ -81,6 +81,9 @@ search_title += " #{about.subtitle}" if show_subtitle && about.subtitle.present?
 %>
 search:
   id: "<%= about.id %>"
+  <% if about.respond_to?(:about_id) %>
+  about_id: "<%= about.about_id %>"
+  <% end %>
   url: "<%= hugo.permalink %>"
   kind: "<%= about.class.model_name %>"
   <% if about.respond_to?(:language) && about.language.present? %>

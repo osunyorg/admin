@@ -2,14 +2,15 @@
 #
 # Table name: university_person_categories
 #
-#  id            :uuid             not null, primary key
-#  bodyclass     :string
-#  is_taxonomy   :boolean          default(FALSE)
-#  position      :integer          default(0)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  parent_id     :uuid             indexed
-#  university_id :uuid             not null, indexed
+#  id               :uuid             not null, primary key
+#  bodyclass        :string
+#  is_taxonomy      :boolean          default(FALSE)
+#  position         :integer          not null
+#  position_in_tree :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  parent_id        :uuid             indexed
+#  university_id    :uuid             not null, indexed
 #
 # Indexes
 #
@@ -24,6 +25,7 @@
 class University::Person::Category < ApplicationRecord
   include AsCategory
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include WithUniversity
 
@@ -37,6 +39,7 @@ class University::Person::Category < ApplicationRecord
   end
 
   def references
+    super +
     people
   end
 

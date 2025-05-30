@@ -5,8 +5,8 @@ source = time_slot || day || event
 %>
 date: "<%= source.from_day&.iso8601 %>"
 dates:
-  status: "<%= event.status %>"
-  archive: <%= event.archive? %>
+  status: "<%= source.status %>"
+  archive: <%= source.archive? %>
   computed:
     short: >-
       <%= date_range_i18n(event.from_day, event.to_day, format: :short, locale: locale) %>
@@ -21,9 +21,8 @@ dates:
     day: "<%= event.from_day %>"
   to:
     day: "<%= event.to_day || event.from_day %>"
-  add_to_calendar:
-    google: "<%= l10n.cal_google_url.html_safe %>"
-    yahoo: "<%= l10n.cal_yahoo_url.html_safe %>"
-    office: "<%= l10n.cal_office_url.html_safe %>"
-    outlook: "<%= l10n.cal_outlook_url.html_safe %>"
-    ical: "<%= l10n.cal_ical_url.html_safe %>"
+<% if event.to_hour %>
+    hour: "<%= event.to_hour.strftime "%H:%M" %>"
+    datetime: "<%= event.to_datetime&.iso8601 %>"
+<% end %>
+<%= render 'admin/communication/websites/agenda/static_add_to_calendar', l10n: l10n %>

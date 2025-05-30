@@ -4,8 +4,6 @@
 #
 #  id            :uuid             not null, primary key
 #  name          :string
-#  published     :boolean          default(FALSE)
-#  published_at  :datetime
 #  slug          :string
 #  url           :string
 #  created_at    :datetime         not null
@@ -29,13 +27,12 @@
 class Education::School::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
+  include HasGitFiles
   include Initials
   include Permalinkable
   include Sanitizable
   include WithAccessibility
   include WithBlobs
-  include WithGitFiles
-  include WithPublication
   include WithUniversity
 
   has_one_attached_deletable :logo

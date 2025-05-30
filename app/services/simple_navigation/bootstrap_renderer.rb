@@ -1,6 +1,8 @@
 class SimpleNavigation::BootstrapRenderer < SimpleNavigation::Renderer::Base
   def render(item_container)
-    content = '<ul class="navbar-nav">'
+    # Prefix unfrozen strings with "+"
+    # Source: https://docs.rubocop.org/rubocop-performance/cops_performance.html#performanceunfreezestring
+    content = +'<ul class="navbar-nav">'
     item_container.items.each do |item|
       content << make(item)
     end
@@ -12,7 +14,7 @@ class SimpleNavigation::BootstrapRenderer < SimpleNavigation::Renderer::Base
 
   def make(item)
     has_sub_navigation = consider_sub_navigation?(item)
-    li = "<li class=\"nav-item"
+    li = +"<li class=\"nav-item"
     li += " active" if item.selected?
     li += " dropdown" if has_sub_navigation
     li += "\">"
@@ -24,7 +26,7 @@ class SimpleNavigation::BootstrapRenderer < SimpleNavigation::Renderer::Base
 
   def make_a(item)
     has_sub_navigation = consider_sub_navigation?(item)
-    a = "<a href=\"#{ item.url }\" class=\"nav-link"
+    a = +"<a href=\"#{ item.url }\" class=\"nav-link"
     a += " dropdown-toggle" if has_sub_navigation
     a += "\""
     a += " data-bs-toggle=\"dropdown\" aria-expanded=\"false\"" if has_sub_navigation
@@ -35,7 +37,7 @@ class SimpleNavigation::BootstrapRenderer < SimpleNavigation::Renderer::Base
   end
 
   def make_subnavigation(item)
-    ul = "<ul class=\"dropdown-menu\">"
+    ul = +"<ul class=\"dropdown-menu\">"
     item.sub_navigation.items.each do |i|
       ul += "<li>"
       ul += "<a href=\"#{ i.url }\" class=\"dropdown-item\">"

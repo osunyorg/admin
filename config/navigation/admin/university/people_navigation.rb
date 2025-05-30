@@ -12,6 +12,6 @@ SimpleNavigation::Configuration.run do |navigation|
                   }
     primary.item  :feature_nav_categories,
                   University::Person::Category.model_name.human(count: 2),
-                  admin_university_person_categories_path
+                  admin_university_person_categories_path if can?(:read, University::Person::Category)
   end
 end

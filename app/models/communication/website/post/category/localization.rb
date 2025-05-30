@@ -6,6 +6,7 @@
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  meta_description         :text
+#  migration_identifier     :string
 #  name                     :string
 #  path                     :string
 #  slug                     :string
@@ -32,13 +33,14 @@
 #  fk_rails_e1dc625b2e  (language_id => languages.id)
 #
 class Communication::Website::Post::Category::Localization < ApplicationRecord
+  # Needs to be included before Sluggable (which is included in AsCategoryLocalization > Permalinkable)
+  include AsDirectObjectLocalization
   include AsCategoryLocalization
+  include WithOpenApi
 
   belongs_to :website,
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
-
-  before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     prefix = git_path_content_prefix(website)
@@ -57,9 +59,5 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
         )
         .where.not(id: self.id)
         .exists?
-  end
-
-  def set_communication_website_id
-    self.communication_website_id ||= about.communication_website_id
   end
 end

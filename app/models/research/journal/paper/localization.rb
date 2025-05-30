@@ -33,12 +33,12 @@
 class Research::Journal::Paper::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
+  include HasGitFiles
   include Initials
   include Permalinkable
   include Sanitizable
   include WithBlobs
   include WithCitations
-  include WithGitFiles
   include WithPublication
   include WithUniversity
 

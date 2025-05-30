@@ -1,6 +1,8 @@
 class Admin::ProfileController < Admin::ApplicationController
   include UserManagement
 
+  before_action :set_hide_optin_alert
+
   def edit
     breadcrumb
   end
@@ -21,10 +23,24 @@ class Admin::ProfileController < Admin::ApplicationController
     redirect_to root_path
   end
 
+  def optin_newsletter
+    if current_user.optin_newsletter.nil?
+      current_user.update(optin_newsletter: params[:optin] == 'true')
+      redirect_back(fallback_location: root_path, notice: t('admin.users_alerts.optin_not_set.updated'))
+    else
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   protected
 
   def breadcrumb
     super
     add_breadcrumb t('menu.edit_profile')
   end
+
+  def set_hide_optin_alert
+    @hide_optin_alert = true
+  end
+
 end

@@ -4,7 +4,9 @@ classes ||= ''
 image_class = 'img-fluid'
 image_variant = nil
 quality = 50
+content_type = ''
 if image && image.attached?
+  content_type = image.blob.content_type
   image_variant = image
   if image.variable?
     if cropped
@@ -19,6 +21,7 @@ end
 <div class="osuny__thumbnail 
             osuny__thumbnail--<%= large ? 'large' : 'small' %>
             osuny__thumbnail--<%= cropped ? 'cropped' : 'uncropped' %>
+            osuny__thumbnail--<%= content_type.parameterize.underscore %>
             <%= classes %>">
   <% if image_variant %>
     <%= image_tag image_variant, class: image_class, loading: 'lazy' %>

@@ -22,6 +22,7 @@
 class Research::Laboratory < ApplicationRecord
   include AsIndirectObject
   include Filterable
+  include GeneratesGitFiles
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable

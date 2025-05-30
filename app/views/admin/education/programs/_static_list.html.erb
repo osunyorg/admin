@@ -7,6 +7,7 @@ indentation = ' ' * depth
   program_l10n = program.localization_for(language)
   next unless program_l10n
   hugo = program_l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
 <%= indentation %>- label: >-
 <%= indentation %>    <%= program_l10n.to_s %>

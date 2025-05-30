@@ -96,8 +96,8 @@ en:
       communication/media/collection/localization:
         name: Name
       communication/media/localization:
-        name: Name
         internal_description: Internal description
+        name: Name
       communication/website:
         about: About
         about_: Independent website
@@ -126,6 +126,7 @@ en:
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
         feature_agenda: Agenda
+        feature_jobboard: Job board
         feature_portfolio: Portfolio
         feature_posts: Posts
         features: Features
@@ -192,6 +193,15 @@ en:
         indirect_object_id: Indirect object identifier
         indirect_object_type: Indirect object type
         updated_at: Updated at
+      communication/website/jobboard/job:
+        categories: Categories
+        from_day: Publication date
+        to_day: End date
+      communication/website/jobboard/job/localization:
+        featured_image: Featured image
+        published: Published
+        subtitle: Subtitle
+        title: Title
       communication/website/localization:
         name: Name
         published: Language published
@@ -206,6 +216,15 @@ en:
         social_vimeo: "Vimeo (private)"
         social_x: "X, ex-Twitter (private)"
         social_youtube: "Youtube (private, belongs to Google)"
+      communication/website/git_file:
+        current_content: Current content
+        current_path: Current path
+        current_sha: Current SHA
+        desynchronized_at: Desynchronized at
+        path: Path
+        previous_path: Previous path
+        previous_sha: Previous SHA
+        status: Status
       communication/website/menu:
         automatic: Automatic
         identifier: Identifier
@@ -220,7 +239,6 @@ en:
         title: Title
         url: URL
       communication/website/page:
-        bodyclass: Specific CSS class
         categories: Categories
         children: Children pages
         full_width: Full width
@@ -353,15 +371,30 @@ en:
       communication/website/agenda/exhibition:
         one: Exhibition
         other: Exhibitions
+      communication/website/agenda/period/month:
+        one: Month
+        other: Months
+      communication/website/agenda/period/year:
+        one: Year
+        other: Years
       communication/website/connection:
         one: Connection
         other: Connections
+      communication/website/git_file:
+        one: GIT file
+        other: GIT files
       communication/website/git_file/layout:
         one: HTML overlay
         other: HTML overlays
       communication/website/git_file/orphan:
         one: Orphan file
         other: Orphan files
+      communication/website/jobboard/category:
+        one: Category
+        other: Categories
+      communication/website/jobboard/job:
+        one: Job offers
+        other: Job offers
       communication/website/menu:
         all: All menus
         one: Menu
@@ -431,6 +464,9 @@ en:
             launch: Launch analysis
             launched: Analysis launched
             title: Git analysis
+        jobboard:
+          jobs:
+            none: No offer yet
         header:
           cta:
             button: Display call to action in header
@@ -491,10 +527,16 @@ en:
         see_showcase: See showcase
         subnav:
           structure: Structure
+        synchronize: 
+          button: Synchronize
+          running: Synchronization launched, please be patient...
         technical:
           description: Everything related to technical settings
           label: Technical
   communication:
+    authors:
+      one: Author
+      other: Authors
     description:
       parts:
         author:
@@ -567,6 +609,9 @@ en:
           communication_agenda_exhibition_archive:
             slug: exhibitions-archives
             title: Exhibitions' archives
+          communication_jobboard:
+            slug: job-offers
+            title: Job offers
           communication_portfolio:
             slug: projects
             title: Projects
@@ -678,6 +723,7 @@ en:
         access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website with Deuxfleurs.
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_agenda: To share events
+        feature_jobboard: To share job offers
         feature_portfolio: To showcase projects
         feature_posts: To publish posts, like a media
         git_branch: 'If blank, default branch will be used'

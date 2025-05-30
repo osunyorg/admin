@@ -57,6 +57,7 @@
           <%= render  'admin/application/slug/form',
                       f: lf,
                       source: '#communication_website_agenda_exhibition_localizations_attributes_0_title' %>
+          <%= f.input :bodyclass, label: t('admin.bodyclass') %>
         <% end %>
         <%= render 'admin/application/images/shared/form', f: lf, about: l10n %>
       </div>

@@ -33,6 +33,7 @@ registration_url: >-
 <%= render 'admin/application/summary/static', about: @l10n %>
 <% if @l10n.parent
   hugo = @l10n.parent.hugo(@website)
+  if hugo.file.present?
   %>
 parent:
   title: >-
@@ -41,7 +42,10 @@ parent:
   path: "<%= hugo.path %>"
   slug: "<%= hugo.slug %>"
   file: "<%= hugo.file %>"
-<% end %>
+<%
+  end
+end
+%>
 <% if @l10n.children.any? %>
 <%= render 'admin/application/static/hugo/collection',
             key: :children,
@@ -62,12 +66,30 @@ if @website
 related_categories:
 <% website_category_l10ns.each do |key, website_category_l10n|
     hugo = website_category_l10n.hugo(@website)
+    next if hugo.file.blank?
     %>
   <%= key %>: "<%= hugo.slug %>"
 <%
   end
 end
 %>
+information:
+<% if program.has_administrative_information? %>
+  administrative:
+    apprenticeship: <%= program.apprenticeship %>
+    capacity: <%= program.capacity %>
+    continuing: <%= program.continuing %>
+    initial: <%= program.initial %>
+<% end %>
+  pricing:
+    global: >-
+      <%= prepare_html_for_static @l10n.best_pricing %>
+    initial: >-
+      <%= prepare_html_for_static @l10n.pricing_initial %>
+    continuing: >-
+      <%= prepare_html_for_static @l10n.pricing_continuing %>
+    apprenticeship: >-
+      <%= prepare_html_for_static @l10n.pricing_apprenticeship %>
 diplomas: "<%= @l10n.diploma&.slug %>"
 duration: >-
   <%= prepare_text_for_static @l10n.duration %>
@@ -77,6 +99,7 @@ teacher_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
   hugo = person_l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
   - "<%= hugo.slug %>"
 <% end %>
@@ -88,6 +111,7 @@ teacher_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
   hugo = person_l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
   "<%= hugo.slug %>": >-
     <%= involvement_l10n.description %>
@@ -99,6 +123,7 @@ administrator_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
   hugo = person_l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
   - "<%= hugo.slug %>"
 <% end %>
@@ -108,6 +133,7 @@ administrator_involvements.each do |involvement|
   person_l10n = involvement.person.localization_for(language)
   next if person_l10n.nil?
   hugo = person_l10n.hugo(@website)
+  next if hugo.file.blank?
   %>
   "<%= hugo.slug %>": >-
     <%= involvement.target.to_s_in(language) %>
@@ -122,6 +148,7 @@ roles:
       person_l10n = involvement.person.localization_for(language)
       next if person_l10n.nil?
       hugo = person_l10n.hugo(@website)
+      next if hugo.file.blank?
       %>
       - "<%= hugo.slug %>"
     <% end %>
@@ -133,10 +160,12 @@ roles: []
             key: :locations,
             collection: program.locations.ordered(language),
             language: language %>
+<% # Start deprecation %>
 apprenticeship: <%= program.apprenticeship %>
 capacity: <%= program.capacity %>
 continuing: <%= program.continuing %>
 initial: <%= program.initial %>
+<% # End deprecation %>
 certifications:
   qualiopi:
     certified: <%= program.qualiopi_certified %>
@@ -155,10 +184,10 @@ presentation: >-
   :other,
   :pedagogy,
   :prerequisites,
-  :pricing,
-  :pricing_initial,
-  :pricing_continuing,
-  :pricing_apprenticeship,
+  :pricing, # Deprecated
+  :pricing_initial, # Deprecated
+  :pricing_continuing, # Deprecated
+  :pricing_apprenticeship, # Deprecated
   :registration,
   :results
 ].each do |property| %>

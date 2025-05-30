@@ -14,6 +14,9 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :emergency_messages,
                   EmergencyMessage.model_name.human(count: 2),
                   server_emergency_messages_path
+    primary.item  :background_jobs,
+                  'Jobs',
+                  server_background_jobs_path
     primary.item  :communication, Communication.model_name.human, nil, html: { class: 'section' }
     primary.item  :websites,
                   Communication::Website.model_name.human(count: 2),

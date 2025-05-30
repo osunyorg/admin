@@ -406,9 +406,6 @@ fr:
               description:
                 label: Description
               element:
-                alt_title:
-                  label: Titre alternatif
-                  placeholder: Entrer le titre alternatif du lien
                 description:
                   label: Description
                   placeholder: Entrer la description du lien

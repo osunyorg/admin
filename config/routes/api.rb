@@ -8,6 +8,9 @@ namespace :api do
     namespace :communication do
       resources :websites, only: [:index, :show] do
         namespace :agenda do
+          resources :categories, controller: '/api/osuny/communication/websites/agenda/categories', only: [:index, :show, :create, :update, :destroy] do
+            post :upsert, on: :collection
+          end
           resources :events, controller: '/api/osuny/communication/websites/agenda/events', only: [:index, :show, :create, :update, :destroy] do
             post :upsert, on: :collection
           end
@@ -19,6 +22,11 @@ namespace :api do
         end
         resources :pages, controller: '/api/osuny/communication/websites/pages', only: [:index, :show, :create, :update, :destroy] do
           post :upsert, on: :collection
+        end
+        namespace :post, path: 'posts' do
+          resources :categories, controller: '/api/osuny/communication/websites/posts/categories', only: [:index, :show, :create, :update, :destroy] do
+            post :upsert, on: :collection
+          end
         end
         resources :posts, controller: '/api/osuny/communication/websites/posts', only: [:index, :show, :create, :update, :destroy] do
           post :upsert, on: :collection

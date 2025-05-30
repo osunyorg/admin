@@ -29,13 +29,13 @@
 #
 class Communication::Website::Menu < ApplicationRecord
   IDENTIFIER_MAX_LENGTH = 100
-  DEFAULT_MENUS_IDENTIFIERS = ['primary', 'legal', 'social'].freeze
+  DEFAULT_MENUS_IDENTIFIERS = ['primary', 'legal'].freeze
 
   include AsDirectObject
+  include HasGitFiles
   include Initials
   include Sanitizable
   include WithAutomatism
-  include WithGitFiles
   include WithUniversity
 
   belongs_to :language
@@ -59,16 +59,17 @@ class Communication::Website::Menu < ApplicationRecord
     I18n.exists?(key, locale) ? I18n.t(key, locale: locale) : ''
   end
 
-  def to_s
-    "#{title}"
-  end
-
   def git_path(website)
-    "data/menus/#{language.iso_code}/#{identifier}.yml" if website.active_language_ids.include?(language_id)
+    return if !website.active_language_ids.include?(language_id) || items.none?
+    "data/menus/#{language.iso_code}/#{identifier}.yml"
   end
 
   def template_static
     "admin/communication/websites/menus/static"
+  end
+
+  def to_s
+    "#{title}"
   end
 
   private
@@ -82,6 +83,5 @@ class Communication::Website::Menu < ApplicationRecord
       new_menu.save
     end
   end
-
 
 end

@@ -23,6 +23,7 @@
 #  last_sign_in_ip               :string
 #  locked_at                     :datetime
 #  mobile_phone                  :string
+#  optin_newsletter              :boolean
 #  picture_url                   :string
 #  remember_created_at           :datetime
 #  reset_password_sent_at        :datetime
@@ -36,6 +37,7 @@
 #  unlock_token                  :string           indexed
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
+#  brevo_contact_id              :integer
 #  language_id                   :uuid             indexed
 #  university_id                 :uuid             not null, indexed => [email], indexed
 #
@@ -62,6 +64,7 @@ class User < ApplicationRecord
   include WithAuthentication
   include WithAuthorship
   include WithAvatar
+  include WithBrevo
   include WithFavorites
   include WithOmniauth
   include WithPerson
@@ -88,7 +91,7 @@ class User < ApplicationRecord
   }
 
   def to_s
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".strip
   end
 
 end

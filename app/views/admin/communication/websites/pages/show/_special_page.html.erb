@@ -6,7 +6,8 @@
           <%= link_to 'Générer la déclaration',
                       generate_admin_communication_website_page_path(@page),
                       method: :post,
-                      class: button_classes %>
+                      class: button_classes,
+                      data: { disable_with: "Génération en cours..." } %>
           <p class="mt-1">Le modèle de déclaration est conforme au droit français</p>
         </div>
       </div>

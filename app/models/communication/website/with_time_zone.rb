@@ -2,11 +2,10 @@ module Communication::Website::WithTimeZone
   extend ActiveSupport::Concern
 
   included do
-    before_validation :set_default_time_zone_if_blank, on: :create
+    before_validation :set_default_time_zone_if_blank
   end
 
   def set_default_time_zone_if_blank
-    return unless default_time_zone.blank?
-    self.default_time_zone = Time.zone.name
+    self.default_time_zone = default_time_zone.presence || Time.zone.name
   end
 end

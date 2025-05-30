@@ -1,0 +1,52 @@
+<% if jobs.none? %>
+  <p><%= t('admin.communication.website.jobboard.jobs.none') %></p>
+<% else %>
+  <div class="row g-2 mb-3">
+    <%
+    jobs.each do |job|
+      job_l10n = job.best_localization_for(current_language)
+      %>
+      <div>
+        <div class="<%= osuny_card_classes(horizontal: true) %> align-items-start">
+          <%= osuny_thumbnail_localized job, large: true %>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="d-flex">
+                  <div class="me-2">
+                    <%= osuny_published_localized job %>
+                  </div>
+                  <div>
+                    <p class="mb-1">
+                      <%= osuny_link_localized  job,
+                                                admin_communication_website_jobboard_job_path(
+                                                  website_id: job.website.id,
+                                                  id: job.id
+                                                ),
+                                                classes: "stretched-link" %>
+                    </p>
+                    <% if job_l10n&.subtitle.present? %>
+                      <p class="text-muted"><%= job_l10n.subtitle %></p>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="row mb-2">
+                  <div class="col-lg-6">
+                    <%= osuny_label Communication::Website::Jobboard::Job.human_attribute_name(:from_day) %>
+                    <p><%= l job.from_day %></p>
+                  </div>
+                  <div class="col-lg-6">
+                    <%= osuny_label Communication::Website::Jobboard::Job.human_attribute_name(:to_day) %>
+                    <p><%= l job.to_day %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -6,4 +6,5 @@ json.localizations do
     end
   end
 end
+json.extract! post, :category_ids
 json.extract! post, :created_at, :updated_at

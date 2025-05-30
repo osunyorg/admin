@@ -15,7 +15,7 @@ module UserManagement
   def user_params
     params.require(:user)
           .permit(
-            :first_name, :last_name, :email, :mobile_phone, :language_id,
+            :first_name, :last_name, :email, :mobile_phone, :language_id, :optin_newsletter,
             :current_password, :password, :password_confirmation,
             :picture, :picture_infos, :picture_delete
           )

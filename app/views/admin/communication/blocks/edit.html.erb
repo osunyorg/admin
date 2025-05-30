@@ -212,6 +212,7 @@
             note: window.summernoteManager.noteButton
           },
           callbacks: {
+            onPaste: window.SUMMERNOTE_CONFIGS[config].callbacks.onPaste,
             onChange: onChangeCallback,
             onChangeCodeview: onChangeCallback,
             onBlur: onBlurCallback,

@@ -16,6 +16,9 @@
             <%= link_to year_l10n,
                         admin_communication_website_agenda_periods_year_path(year),
                         class: 'stretched-link' %>
+            <span class="badge bg-dark rounded-pill float-end">
+              <%= year_l10n.events_count %>
+            </span>
           </div>
         </div>
       </div>

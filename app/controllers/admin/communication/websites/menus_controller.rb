@@ -31,7 +31,7 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
 
   def create
     @menu.website = @website
-    if @menu.save_and_sync
+    if @menu.save
       redirect_to admin_communication_website_menu_path(@menu), notice: t('admin.successfully_created_html', model: @menu.to_s)
     else
       breadcrumb
@@ -40,7 +40,7 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
   end
 
   def update
-    if @menu.update_and_sync(menu_params)
+    if @menu.update(menu_params)
       redirect_to admin_communication_website_menu_path(@menu), notice: t('admin.successfully_updated_html', model: @menu.to_s)
     else
       breadcrumb

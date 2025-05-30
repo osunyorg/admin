@@ -11,6 +11,8 @@ module Communication::Website::Permalink::WithMapping
       "Communication::Website::Agenda::Category::Localization" => Communication::Website::Permalink::Agenda::Category,
       "Communication::Website::Agenda::Period::Month::Localization" => Communication::Website::Permalink::Agenda::Period::Month,
       "Communication::Website::Agenda::Period::Year::Localization" => Communication::Website::Permalink::Agenda::Period::Year,
+      "Communication::Website::Jobboard::Job::Localization" => Communication::Website::Permalink::Jobboard::Job,
+      "Communication::Website::Jobboard::Category::Localization" => Communication::Website::Permalink::Jobboard::Category,
       "Communication::Website::Page::Category::Localization" => Communication::Website::Permalink::Page::Category,
       "Communication::Website::Page::Localization" => Communication::Website::Permalink::Page,
       "Communication::Website::Portfolio::Project::Localization" => Communication::Website::Permalink::Portfolio::Project,

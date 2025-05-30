@@ -12,6 +12,7 @@
 #  deuxfleurs_identifier        :string
 #  deuxfleurs_secret_access_key :string
 #  feature_agenda               :boolean          default(FALSE)
+#  feature_jobboard             :boolean          default(FALSE)
 #  feature_portfolio            :boolean          default(FALSE)
 #  feature_posts                :boolean          default(TRUE)
 #  git_branch                   :string
@@ -21,6 +22,7 @@
 #  highlighted_in_showcase      :boolean          default(FALSE)
 #  in_production                :boolean          default(FALSE)
 #  in_showcase                  :boolean          default(TRUE)
+#  last_sync_at                 :datetime
 #  locked_at                    :datetime
 #  plausible_url                :string
 #  repository                   :string
@@ -52,6 +54,7 @@ class Communication::Website < ApplicationRecord
 
   include Favoritable
   include Filterable
+  include GeneratesGitFiles
   include Localizable
   include LocalizableOrderByNameScope
   include Searchable
@@ -62,15 +65,14 @@ class Communication::Website < ApplicationRecord
   include WithDependencies
   include WithDeuxfleurs
   include WithFeatureAgenda
+  include WithFeatureJobboard
   include WithFeaturePosts
   include WithFeaturePortfolio
-  include WithGit
   include WithGitRepository
   include WithLock
   include WithManagers
   include WithOpenApi
   include WithProgramCategories
-  include WithReferences
   include WithSpecialPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithScreenshot
@@ -165,6 +167,7 @@ class Communication::Website < ApplicationRecord
     page_categories +
     feature_agenda_dependencies +
     feature_portfolio_dependencies +
+    feature_jobboard_dependencies +
     feature_posts_dependencies +
     menus.in_languages(active_language_ids) +
     [about] +
@@ -182,21 +185,6 @@ class Communication::Website < ApplicationRecord
 
   def website_id
     id
-  end
-
-  # Override to follow direct objects
-  def sync_with_git
-    Communication::Website::SyncWithGitJob.perform_later(id)
-  end
-
-  # Appelé en asynchrone par Communication::Website::SyncWithGitJob
-  def sync_with_git_safely
-    return unless should_sync_with_git?
-    Communication::Website::GitFile.sync website, self
-    recursive_dependencies(syncable_only: true, follow_direct: true).each do |object|
-      Communication::Website::GitFile.sync website, object
-    end
-    git_repository.sync!
   end
 
   def move_to_university(new_university_id)

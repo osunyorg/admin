@@ -48,9 +48,7 @@ module Admin::ApplicationHelper
   end
 
   def preview_link
-    # Test without preview
-    return ''
-    raw "<button  class=\"btn btn-light btn-xs\"
+    raw "<button  class=\"btn btn-light mb-2\"
                   type=\"button\"
                   data-bs-toggle=\"modal\"
                   data-bs-target=\"#preview\"

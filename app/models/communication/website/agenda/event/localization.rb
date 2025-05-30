@@ -42,9 +42,12 @@
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include AddableToCalendar
+  # Needs to be included before Sluggable (which is included by Permalinkable)
+  include AsDirectObjectLocalization
   include AsLocalization
   include AsLocalizedTree
   include Contentful
+  include HasGitFiles
   include HeaderCallToAction
   include Initials
   include Permalinkable # slug_unavailable method overwrite in this file
@@ -53,7 +56,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithGitFiles
   include WithOpenApi
   include WithPublication
   include WithUniversity
@@ -80,8 +82,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   validates :title, presence: true
   validate :slug_cant_be_numeric_only
-
-  before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
@@ -115,12 +115,9 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def hugo(website)
     if event.time_slots.any?
-      time_slot = event.time_slots.ordered.first
-      time_slot_l10n = time_slot.localization_for(language)
-      time_slot_l10n&.hugo(website)
-    elsif event.days.any?
-      day = event.days.ordered.first
-      day&.hugo(website)
+      hugo_for_time_slots(website)
+    elsif event.kind_parent?
+      hugo_for_parent(website)
     else
       super(website)
     end
@@ -135,6 +132,21 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   end
 
   protected
+
+  def hugo_for_time_slots(website)
+    time_slot = event.time_slots.ordered.first
+    time_slot_l10n = time_slot.localization_for(language)
+    return hugo_nil if time_slot_l10n.nil?
+    time_slot_l10n.hugo(website)
+  end
+
+  def hugo_for_parent(website)
+    first_child = event.children.published_now_in(language).ordered.first
+    return hugo_nil if first_child.nil?
+    day = event.days.where(language: language, date: first_child.from_day).first
+    return hugo_nil if day.nil?
+    day.hugo(website)
+  end
 
   def check_accessibility
     accessibility_merge_array blocks
@@ -160,10 +172,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def slug_cant_be_numeric_only
     errors.add(:slug, :numeric_only) if slug.tr('0-9', '').blank?
-  end
-
-  def set_communication_website_id
-    self.communication_website_id ||= about.communication_website_id
   end
 
   def explicit_blob_ids

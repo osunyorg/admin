@@ -24,9 +24,10 @@
 #
 class Administration::Location < ApplicationRecord
   include AsIndirectObject
-  include Sanitizable
   include Localizable
   include LocalizableOrderByNameScope
+  include GeneratesGitFiles
+  include Sanitizable
   include WebsitesLinkable
   include WithCountry
   include WithGeolocation
@@ -48,16 +49,12 @@ class Administration::Location < ApplicationRecord
                           source: :diploma
                           alias_method :education_diplomas, :diplomas
 
-  validates :address, :city, :zipcode, :country, presence: true
+  validates :address, :city, :country, presence: true
 
   def dependencies
     localizations +
     programs +
     schools
-  end
-
-  def references
-    []
   end
 
   # WebsitesLinkable

@@ -28,8 +28,10 @@
 #
 class Education::Program < ApplicationRecord
   include AsIndirectObject
+  include AsTree
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
+  include GeneratesGitFiles
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
@@ -41,7 +43,6 @@ class Education::Program < ApplicationRecord
   include WithMenuItemTarget
   include WithSchools
   include WithTeam
-  include WithTree
   include WithUniversity
   include WithWebsitesCategories
 
@@ -89,10 +90,18 @@ class Education::Program < ApplicationRecord
   end
 
   def references
+    super +
     schools +
     siblings +
     descendants +
     [parent]
+  end
+
+  def has_administrative_information?
+    capacity.present? ||
+    initial ||
+    continuing ||
+    apprenticeship
   end
 
   #####################

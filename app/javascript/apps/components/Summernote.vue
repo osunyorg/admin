@@ -44,6 +44,7 @@ export default {
           lang: this.lang,
           toolbar: window.SUMMERNOTE_CONFIGS['link'].toolbar,
           callbacks: {
+            onPaste: window.SUMMERNOTE_CONFIGS['link'].callbacks.onPaste,
             onChange: function(content) {
               element.value = content;
               element.dispatchEvent(new Event('input'));

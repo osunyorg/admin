@@ -38,6 +38,11 @@ Rails.application.routes.draw do
     match '/users/auth/saml/setup' => 'users/omniauth_callbacks#saml_setup', via: [:get, :post]
   end
 
+  # Hooks
+  scope 'webhooks' do
+    post 'brevo' => 'webhooks#brevo'
+  end
+
   namespace :admin do
     scope '/:lang' do
       resources :users, except: [:new, :create] do
@@ -47,6 +52,7 @@ Rails.application.routes.draw do
       get 'profile' => 'profile#edit'
       patch 'profile' => 'profile#update'
       delete 'profile' => 'profile#destroy'
+      post 'profile/optin_newsletter' => 'profile#optin_newsletter', as: :optin_newsletter
       # libre_translate route
       post 'translate/:target' => 'translation#translate', as: :translate
       put 'favorite' => 'users#favorite', as: :favorite

@@ -11,9 +11,12 @@ module Api::Osuny::ApplicationController::WithResourceParams
     l10ns_attributes = base_params.delete(:localizations)
     base_params[:localizations_attributes] = []
     l10ns_attributes.each do |language_iso_code, l10n_params|
-      l10n_permitted_params = l10n_params.permit(*l10n_permitted_keys)
+      language = Language.find_by(iso_code: language_iso_code)
+      next unless language.present?
 
-      l10n_permitted_params[:language_id] = Language.find_by(iso_code: language_iso_code)&.id
+      l10n_permitted_params = l10n_params
+                                .permit(*l10n_permitted_keys)
+                                .merge({ language_id: language.id })
 
       existing_resource_l10n = resource.localizations.find_by(
         migration_identifier: l10n_permitted_params[:migration_identifier],
@@ -40,18 +43,11 @@ module Api::Osuny::ApplicationController::WithResourceParams
     l10n_params[:featured_image_alt] = featured_image_data[:alt] if featured_image_data.has_key?(:alt)
     l10n_params[:featured_image_credit] = featured_image_data[:credit] if featured_image_data.has_key?(:credit)
     l10n_params[:featured_image_delete] = '1' if featured_image_data[:_destroy]
-    featured_image_url = featured_image_data[:url]
-    # No image to upload
-    return unless featured_image_url.present?
-    # Image already uploaded
-    return if l10n.present? && l10n.featured_image.attached? && l10n.featured_image.blob.metadata[:source_url] == featured_image_url
+    # Set the image URL so that the object can delay the upload if needed
+    l10n_params[:featured_image_new_url] = featured_image_data[:url]
+  end
 
-    featured_image_uri = URI.parse(featured_image_url)
-    return unless featured_image_uri.is_a?(URI::HTTP)
-    l10n_params[:featured_image] = {
-      io: featured_image_uri.open,
-      filename: File.basename(featured_image_uri.path),
-      metadata: { source_url: featured_image_url }
-    }
+  def nested_blocks_params
+    { blocks: [:migration_identifier, :template_kind, :title, :position, :published, :html_class, :_destroy, data: {}] }
   end
 end

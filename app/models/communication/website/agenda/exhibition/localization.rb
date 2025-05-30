@@ -41,8 +41,11 @@
 #  fk_rails_f684b71a8c  (university_id => universities.id)
 #
 class Communication::Website::Agenda::Exhibition::Localization < ApplicationRecord
+  # Needs to be included before Sluggable (which is included by Permalinkable)
+  include AsDirectObjectLocalization
   include AsLocalization
   include Contentful
+  include HasGitFiles
   include HeaderCallToAction
   include Initials
   include Permalinkable
@@ -52,7 +55,6 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   include WithBlobs
   include WithCal
   include WithFeaturedImage
-  include WithGitFiles
   include WithOpenApi
   include WithPublication
   include WithUniversity
@@ -74,7 +76,6 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   has_summernote :notes
 
   validates :title, presence: true
-  before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
@@ -120,10 +121,6 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
               .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
               .where.not(id: self.id)
               .exists?
-  end
-
-  def set_communication_website_id
-    self.communication_website_id ||= about.communication_website_id
   end
 
   def explicit_blob_ids

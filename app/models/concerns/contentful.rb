@@ -36,7 +36,7 @@ module Contentful
   end
 
   def generate_blocks(template_blocks)
-    template_blocks.each { |hash| generate_block(hash) }
+    template_blocks.each { |hash| generate_block(hash.dup) }
   end
 
   protected

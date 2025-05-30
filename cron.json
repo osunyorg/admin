@@ -6,10 +6,14 @@
     },
     {
       "command": "0 3 * * * rails auto:clean_and_rebuild_websites",
-      "size": "XL"
+      "size": "L"
     },
     {
-      "command": "0 1 * * * rails auto:sib_sms_credits",
+      "command": "0 1 * * * rails auto:brevo_sms_credits",
+      "size": "S"
+    },
+    {
+      "command": "*/10 * * * * rails auto:synchronize_websites",
       "size": "S"
     }
   ]

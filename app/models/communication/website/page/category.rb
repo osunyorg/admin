@@ -7,7 +7,8 @@
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
 #  migration_identifier     :string
-#  position                 :integer
+#  position                 :integer          not null
+#  position_in_tree         :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
@@ -32,8 +33,9 @@
 class Communication::Website::Page::Category < ApplicationRecord
   include AsCategory
   include AsDirectObject
-  include Sanitizable
+  include GeneratesGitFiles
   include Localizable
+  include Sanitizable
   include WithMenuItemTarget
   include WithOpenApi
   include WithUniversity

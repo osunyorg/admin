@@ -80,7 +80,7 @@ module AsLocalizedTree
               .where(language_id: language_id, about_id: about_ids)
   end
 
-  # Beaucoup trop semblable à WithTree
+  # Beaucoup trop semblable à AsTree
   def descendants_flattened
     children.ordered(language).map {
       |child| [child, child.descendants]

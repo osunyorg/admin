@@ -6,7 +6,7 @@
 #  certification :string
 #  ects          :integer
 #  level         :integer          default("not_applicable")
-#  position      :integer          default(0)
+#  position      :integer          not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  university_id :uuid             not null, indexed
@@ -23,6 +23,7 @@ class Education::Diploma < ApplicationRecord
   CERTIFICATIONS_DIRECTORY = "app/assets/images/education/diplomas/certifications"
 
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include Orderable
   include Sanitizable

@@ -3,20 +3,7 @@
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-      <% if block.template.mode == "categories" %>
-        <ul class="categories categories--grid">
-          <% @website.post_categories.ordered.each do |category| %>
-            <%
-            category_l10n = category.localization_for(block.language)
-            next if category_l10n.nil?
-            %>
-            <li data-title="<%= category_l10n %>">
-              <%= link_to category_l10n, category_l10n.current_permalink_url_in_website(@website), class: "title" %>
-              <p><%= category.posts.count %> <%= Communication::Website::Post.model_name.human(count: category.posts.count) %></p>
-            </li>
-          <% end %>
-        </ul>
-      <% elsif block.data %>
+      <% if block.data %>
         <%= render 'admin/communication/blocks/partials/layout', block: block, file: __FILE__ %>
       <% end %>
     </div>

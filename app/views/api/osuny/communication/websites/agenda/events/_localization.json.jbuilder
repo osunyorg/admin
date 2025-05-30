@@ -6,7 +6,9 @@ json.featured_image do
   json.url l10n.featured_image.url
 end
 json.extract! l10n, :meta_description, :published, :published_at,
-                    :slug, :subtitle, :summary, :text, :add_to_calendar_urls
+                    :slug, :subtitle, :summary, :text, :notes,
+                    :header_cta, :header_cta_label, :header_cta_url,
+                    :add_to_calendar_urls
 json.blocks do
   json.partial! "api/osuny/communication/blocks/block", collection: l10n.blocks.ordered, as: :block
 end

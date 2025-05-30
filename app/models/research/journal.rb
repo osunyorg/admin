@@ -19,6 +19,7 @@ class Research::Journal < ApplicationRecord
   include AsIndirectObject
   include Favoritable
   include Filterable
+  include GeneratesGitFiles
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable

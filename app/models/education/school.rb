@@ -25,10 +25,11 @@
 class Education::School < ApplicationRecord
   include AsIndirectObject
   include Filterable
-  include Sanitizable
-  include Searchable
+  include GeneratesGitFiles
   include Localizable
   include LocalizableOrderByNameScope
+  include Sanitizable
+  include Searchable
   include WebsitesLinkable
   include WithCountry
   include WithLocations

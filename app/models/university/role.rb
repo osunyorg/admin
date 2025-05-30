@@ -3,7 +3,7 @@
 # Table name: university_roles
 #
 #  id            :uuid             not null, primary key
-#  position      :integer
+#  position      :integer          not null
 #  target_type   :string           indexed => [target_id]
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

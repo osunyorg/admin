@@ -21,6 +21,7 @@
 #
 class Research::Journal::Volume < ApplicationRecord
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include Sanitizable
   include Searchable
@@ -65,6 +66,7 @@ class Research::Journal::Volume < ApplicationRecord
   end
 
   def references
+    super +
     [journal]
   end
 end

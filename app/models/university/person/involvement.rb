@@ -4,7 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  kind          :integer
-#  position      :integer
+#  position      :integer          not null
 #  target_type   :string           not null, indexed => [target_id]
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

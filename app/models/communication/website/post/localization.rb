@@ -16,7 +16,6 @@
 #  slug                     :string
 #  subtitle                 :string
 #  summary                  :text
-#  text                     :text
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -40,8 +39,11 @@
 #  fk_rails_db7d7c515c  (university_id => universities.id)
 #
 class Communication::Website::Post::Localization < ApplicationRecord
+  # Needs to be included before Sluggable (which is included by Permalinkable)
+  include AsDirectObjectLocalization
   include AsLocalization
   include Contentful
+  include HasGitFiles
   include HeaderCallToAction
   include Initials
   include Permalinkable
@@ -50,7 +52,6 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithGitFiles
   include WithOpenApi
   include WithPublication
   include WithUniversity
@@ -60,10 +61,8 @@ class Communication::Website::Post::Localization < ApplicationRecord
               foreign_key: :communication_website_id
 
   has_summernote :summary
-  has_summernote :text # TODO: Remove text attribute
 
   validates :title, presence: true
-  before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
@@ -118,10 +117,6 @@ class Communication::Website::Post::Localization < ApplicationRecord
               .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
               .where.not(id: self.id)
               .exists?
-  end
-
-  def set_communication_website_id
-    self.communication_website_id ||= about.communication_website_id
   end
 
   def explicit_blob_ids

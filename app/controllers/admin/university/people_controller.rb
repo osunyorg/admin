@@ -53,6 +53,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def create
+    @person.created_by = current_user
     if @person.save
       redirect_to admin_university_person_path(@person),
                   notice: t('admin.successfully_created_html', model: @person.to_s_in(current_language))

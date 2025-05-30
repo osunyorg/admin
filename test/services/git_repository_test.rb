@@ -3,10 +3,11 @@ require "test_helper"
 class GitRepositoryTest < ActiveSupport::TestCase
   include ActionMailer::TestHelper
 
+  # note: this case does not send email anymore, a credential error on GH will just crash the task
   test "incorrect credentials for github" do
     website_with_github.update(access_token: 'wrong access token')
     VCR.use_cassette(location) do
-      assert_enqueued_emails 1 do
+      assert_raise Octokit::Unauthorized do
         provider = website_with_github.git_repository.send(:provider)
         provider.create_file '/path.txt', 'content'
         provider.push 'this is a commit'

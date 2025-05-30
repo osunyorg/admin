@@ -18,6 +18,13 @@ module Communication::Website::Agenda::Period::InPeriod
     scope :archive, -> {
       where('to_day < :today', today: Date.today)
     }
+    scope :changed_status_today, -> {
+      where(
+        'from_day = :today OR from_day = :yesterday OR to_day = :today OR to_day = :yesterday',
+        today: Date.today,
+        yesterday: Date.yesterday
+      )
+    }
     scope :past, -> { archive }
 
     before_validation :set_time_zone
@@ -27,7 +34,9 @@ module Communication::Website::Agenda::Period::InPeriod
     after_save :create_periods
 
     validates :from_day, presence: true
-    validate :to_day_after_from_day, :to_hour_after_from_hour_on_same_day
+    validate  :year_is_a_four_digit_number,
+              :to_day_after_from_day,
+              :to_hour_after_from_hour_on_same_day
   end
 
   def status
@@ -67,11 +76,16 @@ module Communication::Website::Agenda::Period::InPeriod
   protected
 
   def set_time_zone
-    self.time_zone = website.default_time_zone if self.time_zone.blank?
+    self.time_zone = website.default_time_zone if respond_to?(:time_zone=) && self.time_zone.blank?
   end
 
   def set_to_day
     self.to_day = self.from_day if respond_to?(:to_day=) && self.to_day.nil?
+  end
+
+  def year_is_a_four_digit_number
+    errors.add(:from_day, :invalid_year) if from_day.present? && !(1000..9999).include?(from_day.year)
+    errors.add(:to_day, :invalid_year) if to_day.present? && !(1000..9999).include?(to_day.year)
   end
 
   def to_day_after_from_day
@@ -109,11 +123,11 @@ module Communication::Website::Agenda::Period::InPeriod
     touch_day(day_before_change)
     touch_day(day_after_change)
     years_concerned_by_change.each do |year|
-      save_and_sync_year(year)
+      save_year(year)
     end
-    save_and_sync_month(day_after_change)
+    save_month(day_after_change)
     different_months = (day_after_change&.strftime('%Y%m') != day_before_change&.strftime('%Y%m'))
-    save_and_sync_month(day_before_change) if different_months
+    save_month(day_before_change) if different_months
   end
 
   def touch_day(date)
@@ -125,15 +139,15 @@ module Communication::Website::Agenda::Period::InPeriod
     )&.touch
   end
 
-  def save_and_sync_year(year_value)
+  def save_year(year_value)
     Communication::Website::Agenda::Period::Year.find_by(
       university: university,
       website: website,
       value: year_value
-    )&.save_and_sync
+    )&.save
   end
 
-  def save_and_sync_month(date)
+  def save_month(date)
     return if date.nil?
     year = Communication::Website::Agenda::Period::Year.find_by(
       university: university,
@@ -145,7 +159,7 @@ module Communication::Website::Agenda::Period::InPeriod
       website: website,
       year: year,
       value: date.month
-    )&.save_and_sync
+    )&.save
   end
 
   def create_periods

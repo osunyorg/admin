@@ -3,6 +3,7 @@
 # Table name: communication_website_agenda_events
 #
 #  id                       :uuid             not null, primary key
+#  bodyclass                :string
 #  from_day                 :date
 #  from_hour                :time
 #  migration_identifier     :string
@@ -32,19 +33,20 @@
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
+  include AsTree
+  include Communication::Website::Agenda::Period::InPeriod
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
-  include Communication::Website::Agenda::Period::InPeriod
+  include GeneratesGitFiles
+  include Localizable
   include Sanitizable
   include Searchable
-  include Localizable
   include WithDays
   include WithTimeSlots
   include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
-  include WithTree
   include WithUniversity
 
   belongs_to  :created_by,
@@ -53,7 +55,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   belongs_to  :parent,
               class_name: 'Communication::Website::Agenda::Event',
-              optional: true, 
+              optional: true,
               touch: true
   has_many    :children,
               class_name: 'Communication::Website::Agenda::Event',

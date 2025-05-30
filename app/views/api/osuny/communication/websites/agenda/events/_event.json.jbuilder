@@ -9,4 +9,8 @@ json.localizations do
     end
   end
 end
+json.time_slots do
+  json.partial! "api/osuny/communication/websites/agenda/events/time_slots/time_slot", collection: event.time_slots.ordered, as: :time_slot
+end
+json.extract! event, :category_ids
 json.extract! event, :created_at, :updated_at

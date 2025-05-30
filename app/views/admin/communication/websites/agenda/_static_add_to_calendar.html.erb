@@ -1,0 +1,10 @@
+<%
+depth ||= 1
+indentation = '  ' * depth
+%>
+<%= indentation %>add_to_calendar:
+<%= indentation %>  google: "<%= l10n.cal_google_url.html_safe %>"
+<%= indentation %>  yahoo: "<%= l10n.cal_yahoo_url.html_safe %>"
+<%= indentation %>  office: "<%= l10n.cal_office_url.html_safe %>"
+<%= indentation %>  outlook: "<%= l10n.cal_outlook_url.html_safe %>"
+<%= indentation %>  ical: "<%= l10n.cal_ical_url.html_safe %>"

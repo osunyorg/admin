@@ -7,7 +7,7 @@ class Admin::Communication::Websites::LocalizationsController < Admin::Communica
   end
 
   def update
-    if @localization.update_and_sync(localization_params)
+    if @localization.update(localization_params)
       redirect_to admin_communication_website_localization_path, notice: t('admin.successfully_updated_html', model: Communication::Website::Localization.model_name.human)
     else
       breadcrumb

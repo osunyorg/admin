@@ -2,14 +2,15 @@
 #
 # Table name: education_program_categories
 #
-#  id            :uuid             not null, primary key
-#  bodyclass     :string
-#  is_taxonomy   :boolean          default(FALSE)
-#  position      :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  parent_id     :uuid             indexed
-#  university_id :uuid             indexed
+#  id               :uuid             not null, primary key
+#  bodyclass        :string
+#  is_taxonomy      :boolean          default(FALSE)
+#  position         :integer          not null
+#  position_in_tree :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  parent_id        :uuid             indexed
+#  university_id    :uuid             indexed
 #
 # Indexes
 #
@@ -24,6 +25,7 @@
 class Education::Program::Category < ApplicationRecord
   include AsCategory
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include WithUniversity
 
@@ -36,6 +38,7 @@ class Education::Program::Category < ApplicationRecord
   end
 
   def references
+    super +
     programs
   end
 end

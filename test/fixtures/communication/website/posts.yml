@@ -1,5 +1,7 @@
 test_post:
   migration_identifier: test-post-fixture-1
+  categories:
+   - test_category
   website: website_with_github
   university: default_university
 

@@ -85,7 +85,7 @@ languages = current_university.languages.ordered
   <div id="menu-profile" class="collapse popin-menu text-center" data-bs-parent="#popins">
     <div class="pt-3 pb-2">
       <%= link_to admin_profile_path do %>
-        <% if current_user.picture.attached? %>
+        <% if current_user.picture.attached? && current_user.picture.persisted? %>
           <%= kamifusen_tag current_user.picture, width: 100, height: 100, class: 'image' %>
         <% else %>
           <%= image_tag 'avatar.jpg', class: 'image', loading: :lazy %>

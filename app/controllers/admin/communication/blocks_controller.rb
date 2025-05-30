@@ -6,13 +6,11 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   before_action :redirect_if_block_language_is_incorrect, only: [:edit, :update]
 
   def reorder
-    @ids = params[:ids] || []
-    @index_block = 0
-    @ids.values.each do |object|
-      @object = object
-      reorder_object
+    ids = params[:ids] || []
+    ids.values.each_with_index do |object, index|
+      block = current_university.communication_blocks.find(object[:id])
+      block.update(position: index + 1)
     end
-    sync_after_reorder
   end
 
   def new
@@ -118,19 +116,6 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def redirect_if_block_language_is_incorrect
     return if @block.language == current_language
     redirect_to about_path, alert: t('admin.communication.block.language_mismatch_alert')
-  end
-
-  def reorder_object
-    @id = @object[:id]
-    @block = current_university.communication_blocks.find(@id)
-    @block.update_columns position: @index_block
-    @index_block += 1
-  end
-
-  def sync_after_reorder
-    return unless @block && @block.about&.respond_to?(:is_direct_object?)
-    @block.about.is_direct_object?  ? @block.about.sync_with_git
-                                    : @block.about.touch # Sync indirect object's direct sources through after_touch
   end
 
   def website_id

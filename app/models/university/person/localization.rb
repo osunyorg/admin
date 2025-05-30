@@ -40,11 +40,11 @@ class University::Person::Localization < ApplicationRecord
   include AsLocalization
   include Backlinkable
   include Contentful
+  include HasGitFiles
   include Permalinkable
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
-  include WithGitFiles
   include WithUniversity
 
   alias :person :about
@@ -54,7 +54,7 @@ class University::Person::Localization < ApplicationRecord
   has_summernote :summary
   has_summernote :biography
 
-  validates :first_name, :last_name, presence: true
+  validates :last_name, presence: true
   before_validation :prepare_name
 
   def person_l10n
@@ -78,10 +78,12 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def dependencies
+    person.active_storage_blobs + 
     contents_dependencies
   end
 
   def references
+    super +
     [administrator, author, researcher, teacher]
   end
 
@@ -94,7 +96,7 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def to_s
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".strip
   end
 
   def to_s_with_mail
@@ -102,7 +104,7 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def to_s_alphabetical
-    "#{last_name} #{first_name}"
+    "#{last_name} #{first_name}".strip
   end
 
   def initials

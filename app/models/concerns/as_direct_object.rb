@@ -1,15 +1,10 @@
 # Ce concern ajoute les éléments nécessaires pour les objets directs :
-# - Dépendances (avec et via synchro)
-# - Git
-# - GitFiles
-# - Références
+# - Dépendances et références (avec et via synchro)
 # - Connexions (en tant que source)
 module AsDirectObject
   extend ActiveSupport::Concern
 
   include WithDependencies
-  include WithGit
-  include WithReferences
 
   included do
     belongs_to :website,
@@ -44,9 +39,11 @@ module AsDirectObject
   end
 
   # L'objet fait son ménage
-  # TODO Cette méthode devrait être appelée dès qu'on enregistre un objet indirect,
-  # sur chaque `direct_source` connectée (via les connexions).
   def delete_obsolete_connections
+    Communication::Website::DirectObject::DeleteObsoleteConnectionsJob.perform_later(website.id, direct_object: self)
+  end
+
+  def delete_obsolete_connections_safely
     Communication::Website::Connection.delete_useless_connections(
       connections,
       recursive_dependencies

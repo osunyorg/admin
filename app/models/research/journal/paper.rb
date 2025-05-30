@@ -6,7 +6,7 @@
 #  accepted_at                :date
 #  bibliography               :text
 #  doi                        :string
-#  position                   :integer
+#  position                   :integer          not null
 #  received_at                :date
 #  text                       :text
 #  created_at                 :datetime         not null
@@ -35,6 +35,7 @@
 #
 class Research::Journal::Paper < ApplicationRecord
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include Orderable
   include Sanitizable
@@ -86,9 +87,10 @@ class Research::Journal::Paper < ApplicationRecord
   end
 
   def references
-    references = people + [journal]
-    references << volume if volume.present?
-    references
+    refs = super + people
+    refs << journal
+    refs << volume if volume.present?
+    refs
   end
 
   def doi_url

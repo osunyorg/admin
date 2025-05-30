@@ -6,7 +6,8 @@
 #  bodyclass            :string
 #  is_taxonomy          :boolean          default(FALSE)
 #  migration_identifier :string
-#  position             :integer          default(0)
+#  position             :integer          not null
+#  position_in_tree     :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  parent_id            :uuid             indexed
@@ -25,6 +26,7 @@
 class University::Organization::Category < ApplicationRecord
   include AsCategory
   include AsIndirectObject
+  include GeneratesGitFiles
   include Localizable
   include WithOpenApi
   include WithUniversity
@@ -38,6 +40,7 @@ class University::Organization::Category < ApplicationRecord
   end
 
   def references
+    super +
     organizations
   end
 
