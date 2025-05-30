@@ -32,6 +32,7 @@ module Communication::Website::WithConnectedObjects
     initialize_menus
     sync_with_git_safely
     mark_obsolete_git_files
+    touch_planned_objects
     get_current_theme_version!
     analyse_repository!
     screenshot!
@@ -113,6 +114,15 @@ module Communication::Website::WithConnectedObjects
 
   def is_indirect_object?
     false
+  end
+
+  def touch_planned_objects
+    events.changed_status_today.find_each &:touch
+    agenda_events_time_slots.changed_status_today.find_each &:touch
+    exhibitions.changed_status_today.find_each &:touch
+    post_localizations.published_today.find_each &:touch
+    # Peut-être pas utile
+    # find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
   end
 
   protected
@@ -206,4 +216,5 @@ module Communication::Website::WithConnectedObjects
                .pluck(:direct_source_type, Arel.sql('array_agg(DISTINCT direct_source_id)'))
                .to_h
   end
+
 end
