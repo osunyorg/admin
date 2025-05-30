@@ -147,8 +147,4 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     }.compact
   end
 
-  def selected_events_categories
-    []
-  end
-
 end
