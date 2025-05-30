@@ -10,5 +10,6 @@ class Admin::Communication::Websites::PreviewController < Admin::Communication::
     data = URI.parse(url).open.read
     render  body: data,
             content_type: request.format.to_s
+  rescue
   end
 end
