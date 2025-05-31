@@ -5,10 +5,10 @@
     %>
     <article class="card">
       <h<%= block.heading_rank_children %>>
-        <%= link_to page, page_l10n.current_permalink_url_in_website(@website) %>
+        <%= link_to page, '#' %>
       </h<%= block.heading_rank_children %>>
       <% if block.template.option_summary %>
-        <p><%= page_l10n.summary %></p>
+        <%= sanitize page_l10n.summary %>
       <% end %>
       <p class="more meta" aria-hidden="true">
         <%= t 'admin.communication.blocks.templates.pages.layouts.cards.more' %>
