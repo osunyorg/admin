@@ -158,6 +158,16 @@ class Education::Program::Localization < ApplicationRecord
     about.parent.best_localization_for(language)
   end
 
+  # Override Staticable to add diploma between special page and program's ancestors
+  # Example: IUT de Bordeaux > Formations > BUT > Génie biologique > Agronomie
+  def hugo_ancestors(website)
+    ancestors = []
+    ancestors.concat hugo_ancestors_for_special_page(website)
+    ancestors << diploma if diploma.present?
+    ancestors.concat self.ancestors if respond_to?(:ancestors)
+    ancestors.compact
+  end
+
   def to_short_s
     short_name.blank? ? to_s : short_name
   end
@@ -170,15 +180,5 @@ class Education::Program::Localization < ApplicationRecord
 
   def check_accessibility
     accessibility_merge_array blocks
-  end
-
-  # Override Staticable to add diploma between special page and program's ancestors
-  # Example: IUT de Bordeaux > Formations > BUT > Génie biologique > Agronomie
-  def hugo_ancestors(website)
-    ancestors = []
-    ancestors.concat hugo_ancestors_for_special_page(website)
-    ancestors << diploma if diploma.present?
-    ancestors.concat self.ancestors if respond_to?(:ancestors)
-    ancestors.compact
   end
 end

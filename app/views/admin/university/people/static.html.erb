@@ -107,6 +107,20 @@ administrative_missions:
       file: "<%= hugo.file %>"
 <% end %>
 <% end %>
+cohorts:
+<% person.cohorts.each do |cohort|%>
+  <% 
+    cohort_l10n = cohort.best_localization_for(language)
+    hugo = cohort_l10n.hugo(@website)
+    next if hugo.file.blank?
+  %>
+  - title: >-
+      <%= cohort_l10n.to_s %>
+    permalink: "<%= hugo.permalink %>"
+    path: "<%= hugo.path %>"
+    slug: "<%= hugo.slug %>"
+    file: "<%= hugo.file %>"
+<% end %>
 <%= render 'admin/application/connections/backlinks', about: @l10n %>
 <%= render 'admin/application/categories/widget/static',
             about: person,

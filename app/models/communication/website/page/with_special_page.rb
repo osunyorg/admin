@@ -19,6 +19,7 @@ module Communication::Website::Page::WithSpecialPage
       # Education
       Communication::Website::Page::EducationDiploma,
       Communication::Website::Page::EducationProgram,
+      Communication::Website::Page::EducationAcademicYear,
       # Research
       Communication::Website::Page::ResearchVolume,
       Communication::Website::Page::ResearchPaper,
