@@ -92,6 +92,14 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
     @first ||= id == event.time_slots.ordered.first.id
   end
 
+  def set_date_to(date)
+    self.datetime = DateTime.new(
+      date.year, date.month, date.day,
+      datetime.hour, datetime.min, datetime.sec, datetime.zone
+    )
+    save
+  end
+
   protected
 
   # Methods for Communication::Website::Agenda::Period::InPeriod
