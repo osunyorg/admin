@@ -8,6 +8,7 @@ namespace :communication do
     member do
       get 'edit/language' => 'websites#edit_language', as: :edit_language
       get 'edit/technical' => 'websites#edit_technical', as: :edit_technical
+      get 'edit/federation' => 'websites#edit_federation', as: :edit_federation
       get :analytics
       get :security
       get :static

@@ -91,6 +91,7 @@
                             ) if event.parent.present? %>
           <%= f.input :bodyclass, label: t('admin.bodyclass') %>
         <% end %>
+        <%= render 'admin/communication/websites/federations/widget', f: f %>
       </div>
     </div>
 

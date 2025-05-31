@@ -1,4 +1,4 @@
-<% content_for :title, @cohort %>
+<% content_for :title, @l10n %>
 <% content_for :header_right do %>
 <p>
   <%= @people.total_count %>
@@ -7,7 +7,7 @@
 <% end %>
 
 <p class="mb-5">
-  <%= @cohort.subtitle_in(current_language) %>
+  <%= @l10n %>
 </p>
 
 <%= render 'extranet/alumni/persons/list', people: @people %>
