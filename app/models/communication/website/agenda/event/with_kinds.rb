@@ -2,6 +2,8 @@ module Communication::Website::Agenda::Event::WithKinds
   extend ActiveSupport::Concern
 
   included do
+    before_validation :same_to_day, if: :kind_child?
+
     after_commit :touch_parent_if_child
 
     scope :with_no_time_slots, -> { where.missing(:time_slots) }
@@ -41,5 +43,9 @@ module Communication::Website::Agenda::Event::WithKinds
   def touch_parent_if_child
     return unless kind_child? && parent.persisted?
     parent.touch
+  end
+
+  def same_to_day
+    self.to_day = self.from_day
   end
 end

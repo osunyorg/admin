@@ -82,6 +82,11 @@ en:
                 id:
                   label: ''
                   placeholder: Choose event
+              kinds: What kind of events?
+              kind:
+                parent: Parents (Festival)
+                child: Children (concert during a festival)
+                recurring: Recurring (events with several time slots)
               mode:
                 label: Which events should be presented?
                 options:

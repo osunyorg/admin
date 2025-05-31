@@ -82,6 +82,11 @@ fr:
                 id:
                   label: ''
                   placeholder: Choisir l'événement
+              kinds: Quels types d'événements afficher ?
+              kind:
+                parent: Parents (festival)
+                child: Enfants (concert dans un festival)
+                recurring: Récurrents (événement avec plusieurs créneaux horaires)
               mode:
                 label: Quels événements afficher ?
                 options:
