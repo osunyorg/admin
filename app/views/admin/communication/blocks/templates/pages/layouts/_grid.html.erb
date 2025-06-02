@@ -5,10 +5,10 @@
     %>
     <article>
       <h<%= block.heading_rank_children %>>
-        <%= link_to page_l10n, page_l10n.current_permalink_url_in_website(@website) %>
+        <%= link_to page_l10n, '#' %>
       </h<%= block.heading_rank_children %>>
       <% if block.template.option_summary %>
-        <p><%= page_l10n.summary %></p>
+        <%= sanitize page_l10n.summary %>
       <% end %>
       <% if block.template.option_image %>
         <div class="media" itemprop="image">
