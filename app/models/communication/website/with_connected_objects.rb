@@ -171,8 +171,8 @@ module Communication::Website::WithConnectedObjects
     direct_source.present? &&
     # On ne connecte pas le site à lui-même
     !indirect_object.is_a?(Communication::Website) &&
-    # On ne connecte pas les objets directs (en principe ça n'arrive pas)
-    !indirect_object.try(:is_direct_object?) &&
+    # On autorise les objets indirects et les objets fédérés
+    is_indirect_or_federated?(indirect_object) &&
     # On ne connecte pas des objets qui ne sont pas issus de modèles ActiveRecord (comme les composants des blocs)
     indirect_object.is_a?(ActiveRecord::Base) &&
     # On ne connecte pas certains types d'objets, listés dans une black list
@@ -184,8 +184,22 @@ module Communication::Website::WithConnectedObjects
     indirect_object.present? &&
     # On ne suit pas les objets qui n'ont pas de dépendances
     indirect_object.respond_to?(:recursive_dependencies) &&
-    # On ne suit pas les objets directs
-    !indirect_object.try(:is_direct_object?)
+    # On autorise les objets indirects et les objets directs fédérés
+    is_indirect_or_federated?(indirect_object)
+  end
+
+  # ex: 
+  # - Personne (objet indirecct)
+  # - Event d'un autre site (fédération)
+  def is_indirect_or_federated?(object)
+    # Si la méthode n'existe pas, ça transtype correctement
+    # Les blobs, par exemple, ne répondent pas à is_indirect_object
+    !object.try(:is_direct_object?) || 
+    # L'objet est-il fédéré dans ce site ?
+    (
+      object.respond_to?(:is_federated_in?) &&
+      object.is_federated_in?(self)
+    )
   end
 
   # Le site fait son ménage de printemps.

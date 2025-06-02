@@ -9,6 +9,10 @@ module Federated
               as: :about
     
     has_many  :destination_websites,
-              through: :content_federations    
+              through: :content_federations
+  end
+
+  def is_federated_in?(website)
+    website.in?(destination_websites)
   end
 end

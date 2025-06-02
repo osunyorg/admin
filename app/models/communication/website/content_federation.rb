@@ -36,11 +36,16 @@ class Communication::Website::ContentFederation < ApplicationRecord
   belongs_to :about, polymorphic: true
 
   before_validation :set_website_and_university, on: :create
+  after_commit :connect_about_to_destination_website, on: :create
 
   protected
 
   def set_website_and_university
     self.communication_website_id = about.communication_website_id
     self.university_id = about.university_id
+  end
+
+  def connect_about_to_destination_website
+    destination_website.connect(about, destination_website)
   end
 end
