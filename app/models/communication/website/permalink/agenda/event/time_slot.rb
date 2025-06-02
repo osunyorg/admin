@@ -14,13 +14,14 @@ class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication
 
   protected
 
+  delegate  :event, :event_l10n,
+            to: :about
+
   def published?
-    website.id == about.communication_website_id || about.is_federated_in?(website)
+    event.allowed_in?(website)
   end
 
   def substitutions
-    event_l10n = about.event_l10n
-    event = event_l10n.about
     if event.kind_child?
       parent_event_l10n = event_l10n.parent
       parent_event = parent_event_l10n.about

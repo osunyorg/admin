@@ -46,14 +46,14 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   delegate :event, to: :about
 
-  delegate :is_federated_in?, to: :event
+  delegate :federated_in?, to: :event
 
   delegate :to_s, :title, :subtitle, :summary, :contents_full_text, :previous_permalinks_in_website, to: :event_l10n, allow_nil: true
   delegate :best_bodyclass, :archive?, to: :event
 
   # /content/fr/events/YYYY/MM/DD-hh-mm-slug.html
   def git_path(website)
-    return unless event.is_allowed_in?(website)
+    return unless event.allowed_in?(website)
     "#{git_path_content_prefix(website)}events/#{from_day.strftime "%Y/%m"}/#{slug}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
   end
 

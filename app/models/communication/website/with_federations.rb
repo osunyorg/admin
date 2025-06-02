@@ -24,4 +24,8 @@ module Communication::Website::WithFederations
               source: :about,
               source_type: "Communication::Website::Agenda::Event"
   end
+
+  def federated_objects
+    federated_communication_website_agenda_events
+  end
 end

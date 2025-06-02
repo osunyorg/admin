@@ -83,16 +83,12 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   validates :title, presence: true
   validate :slug_cant_be_numeric_only
 
+  # events/2025/01/01-arte-concert-festival.html
   def git_path(website)
-    return unless website.id == communication_website_id && published && published_at
+    return unless event.allowed_in?(website) && published && published_at
     return if event.time_slots.any? # Rendered by Communication::Website::Agenda::Event::TimeSlot
     return if event.children.any? # Rendered by Communication::Website::Agenda::Event::Day
-    git_path_content_prefix(website) + git_path_relative
-  end
-
-  # events/2025/01/01-arte-concert-festival.html
-  def git_path_relative
-    "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
+    "#{git_path_content_prefix(website)}events/#{from_day.strftime "%Y/%m/%d"}-#{slug}#{event.suffix_in(website)}.html"
   end
 
   def template_static

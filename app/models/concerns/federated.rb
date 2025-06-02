@@ -19,19 +19,19 @@ module Federated
 
   # --www-communication-democratie-fr
   def suffix_in(destination_website)
-    is_federated_in?(destination_website) ? "--#{website.domain_slug}"
+    federated_in?(destination_website) ? "--#{website.domain_slug}"
                                           : ''
   end
 
-  def is_direct_in?(website)
+  def direct_in?(website)
     communication_website_id == website.id
   end
 
-  def is_federated_in?(website)
+  def federated_in?(website)
     website.in?(destination_websites)
   end
 
-  def is_allowed_in?(website)
-    is_direct_in?(website) || is_federated_in?(website)
+  def allowed_in?(website)
+    direct_in?(website) || federated_in?(website)
   end
 end

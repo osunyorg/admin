@@ -197,8 +197,8 @@ module Communication::Website::WithConnectedObjects
     !object.try(:is_direct_object?) || 
     # L'objet est-il fédéré dans ce site ?
     (
-      object.respond_to?(:is_federated_in?) &&
-      object.is_federated_in?(self)
+      object.respond_to?(:federated_in?) &&
+      object.federated_in?(self)
     )
   end
 

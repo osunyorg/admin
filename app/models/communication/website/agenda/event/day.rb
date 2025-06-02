@@ -42,17 +42,13 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   scope :for_language, -> (language) { where(language: language) }
   scope :ordered, -> { order(:date) }
 
+  # events/2025/01/02-arte-concert-festival.html
   def git_path(website)
-    return if website.id != communication_website_id || # Wrong website, should never happen
+    return if event.is_allowed_in?(website) ||
               events.none? || # Nothing this day
               event_l10n.nil? || # Event not localized in this language
               !event_l10n.published # Event not published
-    git_path_content_prefix(website) + git_path_relative
-  end
-
-  # events/2025/01/02-arte-concert-festival.html
-  def git_path_relative
-    "events/#{event.from_day.strftime "%Y"}/#{date.strftime "%m/%d"}-#{event_l10n.slug}.html"
+    "#{git_path_content_prefix(website)}events/#{event.from_day.strftime "%Y"}/#{date.strftime "%m/%d"}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
   end
 
   def template_static

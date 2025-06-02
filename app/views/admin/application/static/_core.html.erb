@@ -103,7 +103,7 @@ search:
 #############
 # Federation
 #############
-if about.respond_to?(:is_federated_in?) && about.is_federated_in?(@website)
+if about.respond_to?(:federated_in?) && about.federated_in?(@website)
   canonical_website = about.website
   canonical_hugo = about.hugo(canonical_website) if about.respond_to?(:hugo)
 %>

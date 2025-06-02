@@ -170,31 +170,31 @@ class Communication::Website < ApplicationRecord
     page_categories +
     feature_agenda_dependencies +
     feature_alumni_dependencies +
-    feature_portfolio_dependencies +
     feature_jobboard_dependencies +
+    feature_portfolio_dependencies +
     feature_posts_dependencies +
     menus.in_languages(active_language_ids) +
-    [about] +
     [default_image&.blob] +
-    [default_shared_image&.blob]
+    [default_shared_image&.blob] +
+    indirect_objects_connected_to_website
   end
 
   def indirect_objects_connected_to_website
-    return [] unless about.present?
-    [about] +
+    [about].compact +
     alumni +
     cohorts +
     academic_years +
-    federated_communication_website_agenda_events
+    federated_objects
   end
 
   # Objets indirects connectés, avec toutes leurs dépendances récursives
   # Méthode utilisée pour vérifier les connexions obsolètes
   def indirect_objects_connected_to_website_recursive
+    objects = indirect_objects_connected_to_website
     (
-      indirect_objects_connected_to_website +
-      indirect_objects_connected_to_website.collect(&:recursive_dependencies).flatten
-    ).compact.uniq
+      objects +
+      objects.collect(&:recursive_dependencies).flatten
+    ).uniq
   end
 
   def website
