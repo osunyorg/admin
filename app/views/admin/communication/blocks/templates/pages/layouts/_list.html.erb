@@ -8,10 +8,10 @@
         <article>
           <div class="page-content">
             <h<%= block.heading_rank_children %>>
-              <%= link_to page_l10n, page_l10n.current_permalink_url_in_website(@website) %>
+              <%= link_to page_l10n, '#' %>
             </h<%= block.heading_rank_children %>>
             <% if block.template.option_summary %>
-              <p><%= page_l10n.summary %></p>
+              <%= sanitize page_l10n.summary %>
             <% end %>
           </div>
           <% if block.template.option_image %>
@@ -23,7 +23,7 @@
           <% end %>
         </article>
       <% else %>
-        <%= link_to page_l10n, page_l10n.current_permalink_url_in_website(@website) %>
+        <%= link_to page_l10n, '#' %>
       <% end %>
     </li>
   <% end %>
