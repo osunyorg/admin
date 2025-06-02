@@ -7,13 +7,11 @@ block_page_l10n = block_page&.localization_for(block.language)
     <div class="block-content">
       <% unless block.title.blank? %>
         <div class="top">
-          <% if block.template.layout == "cards" || block.template.layout == "list" %>
-            <% if block_page_l10n %>
-              <p class="block-title"><%= link_to block_page_l10n, block_page_l10n.current_permalink_url_in_website(@website) %></p>
-            <% end %>
+          <% if block_page_l10n && (block.template.layout == "cards" || block.template.layout == "list") %>
+            <p class="block-title"><%= link_to block_page_l10n, '#' %></p>
 
-          <% elsif block.template.layout == "grid" && block_page_l10n && block.template.option_main_summary %>
-            <p class="block-title"><%= link_to block.title, block_page_l10n.current_permalink_url_in_website(@website) %></p>
+          <% elsif block_page_l10n && block.template.layout == "grid" && block.template.option_main_summary %>
+            <p class="block-title"><%= link_to block.title, '#' %></p>
             <p class="description"><%= block_page_l10n&.summary %></p>
 
           <% else %>
