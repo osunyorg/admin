@@ -12,7 +12,6 @@
 #  deuxfleurs_identifier        :string
 #  deuxfleurs_secret_access_key :string
 #  feature_agenda               :boolean          default(FALSE)
-#  feature_alumni               :boolean          default(FALSE)
 #  feature_jobboard             :boolean          default(FALSE)
 #  feature_portfolio            :boolean          default(FALSE)
 #  feature_posts                :boolean          default(TRUE)
