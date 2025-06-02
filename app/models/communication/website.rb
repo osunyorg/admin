@@ -224,7 +224,7 @@ class Communication::Website < ApplicationRecord
   end
 
   def domain_slug
-    domain.parameterize
+    domain&.parameterize
   end
 
   protected

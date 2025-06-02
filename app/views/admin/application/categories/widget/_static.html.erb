@@ -1,7 +1,11 @@
 <%
-# For federation, we restrict to categories in the website.
+# Either it's not federable, or it's direct in this website
+federable = about.respond_to?(:federated?)
+direct = about.direct_in?(@website)
+allowed = !federable || direct
+if allowed
 # Content from other websites will have no category at all.
-about_categories = about.categories.where(communication_website_id: @website.id)
+about_categories = about.categories
 taxonomies = categories.where(communication_website_id: @website.id).taxonomies.ordered
 language = l10n.language
 # Prepare categories for Hugo (native)
@@ -58,6 +62,7 @@ taxonomies:
     categories:
 <%= taxonomy_content.html_safe %>
 <%
+        end
       end
     end
   end
