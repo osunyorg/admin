@@ -24,6 +24,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :time, :option, options: AUTHORIZED_SCOPES
   has_component :no_event_message, :string
 
+  # Options d'affichage
   has_component :option_categories,   :boolean, default: false
   has_component :option_dates,        :boolean, default: true
   has_component :option_image,        :boolean, default: true
@@ -31,8 +32,17 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :option_summary,      :boolean, default: true
   has_component :option_status,       :boolean, default: false
 
+  # Choix des types d'événements
+  has_component :kind_parent,         :boolean, default: false
+  has_component :kind_child,          :boolean, default: true
+  has_component :kind_recurring,      :boolean, default: true
+
   def selected_events
-    @selected_events ||= send "selected_events_#{mode}"
+    unless @selected_events
+      events = send "selected_events_#{mode}"
+      @selected_events = filter(events)
+    end
+    @selected_events
   end
 
   def category
@@ -69,6 +79,29 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
 
   protected
 
+  def filter(events)
+    events.lazy # Do not load everything
+          .reject { |event| event_forbidden?(event) }
+          .first(quantity)
+  end
+
+  def event_forbidden?(event)
+    event_kind_forbidden?(event) ||
+    recurring_event_has_no_time_slot_today?(event)
+  end
+
+  def event_kind_forbidden?(event)
+    (event.kind_parent? && !kind_parent) ||
+    (event.kind_child? && !kind_child) ||
+    (event.kind_recurring? && !kind_recurring)
+  end
+
+  def recurring_event_has_no_time_slot_today?(event)
+    time == 'current' &&
+    event.kind_recurring? &&
+    event.no_time_slot_today?
+  end
+
   def link_to_events
     special_page_l10n = events_special_page.localization_for(block.language)
     permalink_for(special_page_l10n)
@@ -99,23 +132,19 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def selected_events_all
-    events = base_events.limit(quantity)
+    base_events
   end
 
   def selected_events_category
     events = base_events
     events = events.for_category(category) if category
-    events = events.limit(quantity)
+    events
   end
 
   def selected_events_selection
     elements.map { |element|
       element.event
     }.compact
-  end
-
-  def selected_events_categories
-    []
   end
 
 end

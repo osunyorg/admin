@@ -4,6 +4,14 @@
   <div class="col-sm-6 mb-3">
     <%= block_component_edit block, :mode %>
   </div>
+  <div class="col-sm-6 mb-3">
+    <%= osuny_label t('.kinds') %>
+    <%= block_component_edit block, :kind_parent, label: t('admin.communication.blocks.templates.agenda.edit.kind.parent') %>
+    <%= block_component_edit block, :kind_child, label: t('admin.communication.blocks.templates.agenda.edit.kind.child') %>
+    <div v-if="data.time === 'current'">
+      <%= block_component_edit block, :kind_recurring, label: t('admin.communication.blocks.templates.agenda.edit.kind.recurring') %>
+    </div>
+  </div>
   <div class="col-sm-6 mb-3" v-show="data.mode != 'selection' && data.mode != 'categories'">
     <%= block_component_edit block, :time %>
   </div>

@@ -100,4 +100,8 @@ module Communication::Website::Agenda::Event::WithKinds
   def touch_parent
     parent.touch
   end
+
+  def same_to_day
+    self.to_day = self.from_day
+  end
 end
