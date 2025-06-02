@@ -1,7 +1,8 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Migrations::Events.migrate
+    Migrations::Cohorts.migrate_all
+    Migrations::AcademicYears.migrate_all
   end
 
   namespace :search do

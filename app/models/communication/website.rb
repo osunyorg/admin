@@ -12,6 +12,7 @@
 #  deuxfleurs_identifier        :string
 #  deuxfleurs_secret_access_key :string
 #  feature_agenda               :boolean          default(FALSE)
+#  feature_alumni               :boolean          default(FALSE)
 #  feature_jobboard             :boolean          default(FALSE)
 #  feature_portfolio            :boolean          default(FALSE)
 #  feature_posts                :boolean          default(TRUE)
@@ -65,6 +66,7 @@ class Communication::Website < ApplicationRecord
   include WithDependencies
   include WithDeuxfleurs
   include WithFeatureAgenda
+  include WithFeatureAlumni
   include WithFeatureJobboard
   include WithFeaturePosts
   include WithFeaturePortfolio
@@ -166,6 +168,7 @@ class Communication::Website < ApplicationRecord
     pages +
     page_categories +
     feature_agenda_dependencies +
+    feature_alumni_dependencies +
     feature_portfolio_dependencies +
     feature_jobboard_dependencies +
     feature_posts_dependencies +
@@ -173,6 +176,23 @@ class Communication::Website < ApplicationRecord
     [about] +
     [default_image&.blob] +
     [default_shared_image&.blob]
+  end
+
+  def indirect_objects_connected_to_website
+    return [] unless about.present?
+    [about] +
+    alumni +
+    cohorts +
+    academic_years
+  end
+
+  # Objets indirects connectés, avec toutes leurs dépendances récursives
+  # Méthode utilisée pour vérifier les connexions obsolètes
+  def indirect_objects_connected_to_website_recursive
+    (
+      indirect_objects_connected_to_website +
+      indirect_objects_connected_to_website.collect(&:recursive_dependencies).flatten
+    ).compact.uniq
   end
 
   def website
