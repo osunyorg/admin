@@ -104,16 +104,17 @@ search:
 # Federation
 #############
 if about.respond_to?(:is_federated_in?) && about.is_federated_in?(@website)
-  original_hugo = about.hugo(about.website) if about.respond_to?(:hugo)
+  canonical_website = about.website
+  canonical_hugo = about.hugo(canonical_website) if about.respond_to?(:hugo)
 %>
 federation:
   active: true
-<% if original_hugo %>
-  canonical_url: <%= "#{about.website.url}#{original_hugo.permalink}" %>
+<% if canonical_hugo.present? %>
+  canonical_url: <%= "#{canonical_website.url}#{canonical_hugo.permalink}" %>
   hugo:
-    permalink: "<%= original_hugo.permalink %>"
-    path: "<%= original_hugo.path %>"
-    file: "<%= original_hugo.file %>"
-    slug: "<%= original_hugo.slug %>"
+    permalink: "<%= canonical_hugo.permalink %>"
+    path: "<%= canonical_hugo.path %>"
+    file: "<%= canonical_hugo.file %>"
+    slug: "<%= canonical_hugo.slug %>"
 <% end %>
 <% end %>
