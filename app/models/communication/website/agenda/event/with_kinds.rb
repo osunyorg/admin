@@ -85,12 +85,14 @@ module Communication::Website::Agenda::Event::WithKinds
   end
 
   def manage_time_slots_same_day
+    return unless saved_change_to_from_day?
     time_slots.each do |time_slot|
       time_slot.set_date_to(from_day)
     end
   end
 
   def manage_time_slots_multiple_days
+    return unless saved_change_to_from_day? || saved_change_to_to_day?
     time_slots.each do |time_slot|
       outside = time_slot.datetime < from_day || time_slot.datetime > to_day
       time_slot.destroy if outside
