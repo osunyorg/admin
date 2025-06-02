@@ -147,7 +147,7 @@ class Communication::Website < ApplicationRecord
                             .where.not(id: favorites_ids)
                             .accessible_by(ability)
                             .ordered(language)
-                            .limit(limit - websites.count)
+                            .limit(remaining)
                             .collect(&:website)
     end
     websites

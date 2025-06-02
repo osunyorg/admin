@@ -12,10 +12,7 @@ class Communication::Website::Permalink::Agenda::Event::Day < Communication::Web
   protected
 
   def published?
-    about.event.allowed_in?(website) && # Good website or federated
-    about.events.any? && # With events on this day
-    about.event_l10n.present? && # Event localized in this language
-    about.event_l10n.published? # and published
+    about.published_in?(website)
   end
 
   def substitutions

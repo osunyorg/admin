@@ -97,7 +97,12 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def dependencies
     active_storage_blobs +
-    contents_dependencies
+    contents_dependencies +
+    days
+  end
+
+  def days
+    event.days.where(language: language)
   end
 
   def categories

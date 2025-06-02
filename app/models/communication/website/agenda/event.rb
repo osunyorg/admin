@@ -36,9 +36,9 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include AsTree
   include Communication::Website::Agenda::Period::InPeriod
   include Duplicable
+  include Federated
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
-  include Federated
   include GeneratesGitFiles
   include Localizable
   include Sanitizable

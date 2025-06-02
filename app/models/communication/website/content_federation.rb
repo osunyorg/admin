@@ -36,7 +36,9 @@ class Communication::Website::ContentFederation < ApplicationRecord
   belongs_to :about, polymorphic: true
 
   before_validation :set_website_and_university, on: :create
-  after_commit :connect_about_to_destination_website, on: :create
+
+  after_commit :connect, on: :create
+  before_destroy :disconnect
 
   protected
 
@@ -45,7 +47,12 @@ class Communication::Website::ContentFederation < ApplicationRecord
     self.university_id = about.university_id
   end
 
-  def connect_about_to_destination_website
+  def connect
     destination_website.connect(about, destination_website)
+  end
+
+  def disconnect
+    destination_website.disconnect(about, destination_website)
+    destination_website.clean_and_rebuild
   end
 end

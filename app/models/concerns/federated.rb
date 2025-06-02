@@ -9,7 +9,8 @@ module Federated
               as: :about
     
     has_many  :destination_websites,
-              through: :content_federations
+              through: :content_federations,
+              dependent: :destroy
     alias     :federated_websites :destination_websites
   end
 
@@ -34,4 +35,5 @@ module Federated
   def allowed_in?(website)
     direct_in?(website) || federated_in?(website)
   end
+
 end

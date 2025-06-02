@@ -44,11 +44,15 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
 
   # events/2025/01/02-arte-concert-festival.html
   def git_path(website)
-    return if event.is_allowed_in?(website) ||
-              events.none? || # Nothing this day
-              event_l10n.nil? || # Event not localized in this language
-              !event_l10n.published # Event not published
+    return unless published_in?(website)
     "#{git_path_content_prefix(website)}events/#{event.from_day.strftime "%Y"}/#{date.strftime "%m/%d"}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
+  end
+
+  def published_in?(website)
+    event.allowed_in?(website) && # Good website or federated
+    events.any? && # With events on this day
+    event_l10n.present? && # Event localized in this language
+    event_l10n.published? # and published
   end
 
   def template_static
