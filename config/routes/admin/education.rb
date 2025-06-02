@@ -1,5 +1,5 @@
 namespace :education do
-  resources :academic_years, only: [:index, :show] do
+  resources :academic_years do
     member do
       get :static
     end
