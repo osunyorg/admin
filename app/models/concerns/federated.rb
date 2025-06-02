@@ -12,6 +12,10 @@ module Federated
               through: :content_federations
   end
 
+  def federated?
+    content_federations.any?
+  end
+
   def is_federated_in?(website)
     website.in?(destination_websites)
   end

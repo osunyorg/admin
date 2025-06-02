@@ -99,3 +99,21 @@ search:
   body: >-
     <%= prepare_html_for_static simple_format(about.contents_full_text) %>
   <% end %>
+<%
+#############
+# Federation
+#############
+if about.is_federated_in?(@website)
+  original_hugo = about.hugo(about.website) if about.respond_to?(:hugo)
+%>
+federation:
+  active: true
+<% if original_hugo %>
+  canonical_url: <%= "#{about.website.url}#{original_hugo.permalink}" %>
+  hugo:
+    permalink: "<%= original_hugo.permalink %>"
+    path: "<%= original_hugo.path %>"
+    file: "<%= original_hugo.file %>"
+    slug: "<%= original_hugo.slug %>"
+<% end %>
+<% end %>

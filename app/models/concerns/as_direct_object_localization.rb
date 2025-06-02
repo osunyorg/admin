@@ -3,6 +3,8 @@ module AsDirectObjectLocalization
 
   included do
     before_validation :set_communication_website_id, on: :create
+
+    delegate :is_federated_in?, to: :about
   end
 
   protected

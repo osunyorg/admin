@@ -46,6 +46,8 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   delegate :event, to: :about
 
+  delegate :is_federated_in?, to: :event
+
   delegate :to_s, :title, :subtitle, :summary, :contents_full_text, :previous_permalinks_in_website, to: :event_l10n, allow_nil: true
   delegate :best_bodyclass, :archive?, to: :event
 
