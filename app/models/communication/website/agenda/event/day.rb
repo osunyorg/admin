@@ -45,7 +45,11 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   # events/2025/01/02-arte-concert-festival.html
   def git_path(website)
     return unless published_in?(website)
-    "#{git_path_content_prefix(website)}events/#{event.from_day.strftime "%Y"}/#{date.strftime "%m/%d"}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
+    path = git_path_content_prefix(website)
+    path += "events/"
+    path += "#{event.from_day.strftime "%Y"}/"
+    path += "#{date.strftime "%m/%d"}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
+    path
   end
 
   def published_in?(website)

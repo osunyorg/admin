@@ -85,10 +85,18 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   # events/2025/01/01-arte-concert-festival.html
   def git_path(website)
-    return unless event.allowed_in?(website) && published && published_at
-    return if event.time_slots.any? # Rendered by Communication::Website::Agenda::Event::TimeSlot
-    return if event.children.any? # Rendered by Communication::Website::Agenda::Event::Day
-    "#{git_path_content_prefix(website)}events/#{from_day.strftime "%Y/%m/%d"}-#{slug}#{event.suffix_in(website)}.html"
+    return unless published_in?(website)
+    path = git_path_content_prefix(website)
+    path += "events/"
+    path += "#{from_day.strftime "%Y/%m/%d"}-#{slug}#{event.suffix_in(website)}.html"
+    path
+  end
+
+  def published_in?(website)
+    event.allowed_in?(website) &&
+    published && published_at &&
+    event.time_slots.none? && # Rendered by Communication::Website::Agenda::Event::TimeSlot
+    event.children.none? # Rendered by Communication::Website::Agenda::Event::Day
   end
 
   def template_static

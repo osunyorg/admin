@@ -36,4 +36,8 @@ module Federated
     direct_in?(website) || federated_in?(website)
   end
 
+  def website_and_federated_websites
+    [website] + destination_websites
+  end
+
 end

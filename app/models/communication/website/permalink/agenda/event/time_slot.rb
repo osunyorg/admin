@@ -1,5 +1,8 @@
 class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication::Website::Permalink
 
+  delegate  :event, :event_l10n,
+            to: :about
+
   # Récurrent
   # /fr/agenda/YYYY/slug/
   # Récurrent enfant
@@ -13,9 +16,6 @@ class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication
   end
 
   protected
-
-  delegate  :event, :event_l10n,
-            to: :about
 
   def published?
     event.allowed_in?(website)

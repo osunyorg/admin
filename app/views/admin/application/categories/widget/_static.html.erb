@@ -1,6 +1,8 @@
 <%
-about_categories = about.categories
-taxonomies = categories.taxonomies.ordered
+# For federation, we restrict to categories in the website.
+# Content from other websites will have no category at all.
+about_categories = about.categories.where(communication_website_id: @website.id)
+taxonomies = categories.where(communication_website_id: @website.id).taxonomies.ordered
 language = l10n.language
 # Prepare categories for Hugo (native)
 flat_categories = []

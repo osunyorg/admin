@@ -1,4 +1,7 @@
 class Communication::Website::Permalink::Agenda::Event < Communication::Website::Permalink
+  delegate  :event, :parent,
+            to: :about
+
   def self.required_in_config?(website)
     website.feature_agenda
   end
@@ -29,12 +32,10 @@ class Communication::Website::Permalink::Agenda::Event < Communication::Website:
   protected
 
   def published?
-    about.event.allowed_in?(website) && about.published
+    about.published_in?(website)
   end
 
   def substitutions
-    parent = about.parent
-    event = about.event
     {
       parent_year: parent&.from_day&.strftime("%Y"),
       parent_slug: parent&.slug,
