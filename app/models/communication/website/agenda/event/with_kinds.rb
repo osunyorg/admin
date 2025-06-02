@@ -6,7 +6,7 @@ module Communication::Website::Agenda::Event::WithKinds
 
     validate :no_child_before?, if: :kind_parent?
     validate :no_child_after?, if: :kind_parent?
-    # validate :not_too_long # Uncomment when Rennes is ready
+    validate :not_too_long
 
     before_validation :set_to_day
     after_save :manage_time_slots
@@ -62,13 +62,13 @@ module Communication::Website::Agenda::Event::WithKinds
     end
   end
 
-  # def not_too_long
-  #   max_duration_in_days = MAX_DURATION / 1.day
-  #   if duration_in_days > max_duration_in_days
-  #     max_end_date = from_day + max_duration_in_days
-  #     errors.add(:to_day, :too_long, max_end_date: max_end_date)
-  #   end
-  # end
+  def not_too_long
+    max_duration_in_days = MAX_DURATION / 1.day
+    if duration_in_days > max_duration_in_days
+      max_end_date = from_day + max_duration_in_days
+      errors.add(:to_day, :too_long, max_end_date: max_end_date)
+    end
+  end
 
   def set_to_day
     if kind_child?
