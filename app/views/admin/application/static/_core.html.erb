@@ -103,7 +103,7 @@ search:
 #############
 # Federation
 #############
-if about.is_federated_in?(@website)
+if about.respond_to?(:is_federated_in?) && about.is_federated_in?(@website)
   original_hugo = about.hugo(about.website) if about.respond_to?(:hugo)
 %>
 federation:
