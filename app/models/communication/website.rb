@@ -184,7 +184,8 @@ class Communication::Website < ApplicationRecord
     [about] +
     alumni +
     cohorts +
-    academic_years
+    academic_years +
+    federated_communication_website_agenda_events
   end
 
   # Objets indirects connectés, avec toutes leurs dépendances récursives
@@ -214,6 +215,16 @@ class Communication::Website < ApplicationRecord
     recursive_dependencies_syncable_following_direct.each do |dependency|
       reconnect_dependency dependency, new_university_id
     end
+  end
+
+  def domain
+    URI.parse(url).host
+  rescue URI::InvalidURIError
+    ""
+  end
+
+  def domain_slug
+    domain.parameterize
   end
 
   protected

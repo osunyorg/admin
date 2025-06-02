@@ -53,13 +53,8 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   # /content/fr/events/YYYY/MM/DD-hh-mm-slug.html
   def git_path(website)
-    return unless website.id == communication_website_id
-    git_path_content_prefix(website) + git_path_relative
-  end
-
-  # events/YYYY/MM/DD-hh-mm-slug.html
-  def git_path_relative
-    "events/#{from_day.strftime "%Y/%m"}/#{slug}-#{event_l10n.slug}.html"
+    return unless event.is_allowed_in?(website)
+    "#{git_path_content_prefix(website)}events/#{from_day.strftime "%Y/%m"}/#{slug}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
   end
 
   def template_static

@@ -13,5 +13,15 @@ module Communication::Website::WithFederations
                             foreign_key: :source_website_id,
                             association_foreign_key: :destination_website_id,
                             class_name: 'Communication::Website'
+
+    has_many  :content_federations_as_destination,
+              class_name: "Communication::Website::ContentFederation",
+              dependent: :destroy,
+              foreign_key: :destination_website_id
+    
+    has_many  :federated_communication_website_agenda_events,
+              through: :content_federations_as_destination,
+              source: :about,
+              source_type: "Communication::Website::Agenda::Event"
   end
 end

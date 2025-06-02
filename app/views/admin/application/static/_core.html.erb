@@ -111,6 +111,10 @@ federation:
   active: true
 <% if canonical_hugo.present? %>
   canonical_url: <%= "#{canonical_website.url}#{canonical_hugo.permalink}" %>
+  website:
+    name: >-
+      <%= prepare_text_for_static canonical_website.to_s_in(about.language) if about.respond_to?(:language) %>
+    url: "<%= canonical_website.url %>"    
   hugo:
     permalink: "<%= canonical_hugo.permalink %>"
     path: "<%= canonical_hugo.path %>"

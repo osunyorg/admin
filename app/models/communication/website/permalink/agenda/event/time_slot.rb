@@ -5,7 +5,7 @@ class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication
   # Récurrent enfant
   # /fr/agenda/YYYY/parent_slug/slug/
   def self.pattern_in_website(website, language, about = nil)
-    "#{special_page_path(website, language)}/:year/:slug/"
+    "#{special_page_path(website, language)}/:year/:slug:federation_suffix/"
   end
 
   def self.special_page_type
@@ -15,7 +15,7 @@ class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication
   protected
 
   def published?
-    website.id == about.communication_website_id
+    website.id == about.communication_website_id || about.is_federated_in?(website)
   end
 
   def substitutions
@@ -26,12 +26,14 @@ class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication
       parent_event = parent_event_l10n.about
       {
         year: parent_event.from_day.strftime("%Y"),
-        slug: "#{parent_event_l10n.slug}/#{event_l10n.slug}"
+        slug: "#{parent_event_l10n.slug}/#{event_l10n.slug}",
+        federation_suffix: event.suffix_in(website)
       }
     else
       {
         year: event.from_day.strftime("%Y"),
-        slug: event_l10n.slug
+        slug: event_l10n.slug,
+        federation_suffix: event.suffix_in(website)
       }
     end
   end
