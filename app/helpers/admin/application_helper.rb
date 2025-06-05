@@ -83,11 +83,12 @@ module Admin::ApplicationHelper
     link_to t('cancel'), url, class: 'btn btn-light vue__changes__cancel'
   end
 
-  def submit(form)
+  def submit(form, **options)
     form.button :submit,
                 t('save'),
                 class: 'btn btn-success vue__changes__save',
-                form: form.options.dig(:html, :id)
+                form: form.options.dig(:html, :id),
+                **options
   end
 
   def prepare_html_for_static(text)
