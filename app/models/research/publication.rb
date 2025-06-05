@@ -95,13 +95,8 @@ class Research::Publication < ApplicationRecord
 
   # Override to handle default language
   def hugo_ancestors_for_special_page(website)
-    return [] if is_a?(Communication::Website::Page::Localization)
-    permalink = Communication::Website::Permalink.for_object(self, website)
-    return [] unless permalink
-    special_page = permalink.special_page(website)
-    return [] unless special_page
-    special_page_l10n = special_page.localization_for(website.default_language)
-    return [] unless special_page_l10n
+    special_page_l10n = find_special_page_l10n_in(website, website.default_language)
+    return [] if special_page_l10n.nil?
     special_page_l10n.ancestors_and_self
   end
 
