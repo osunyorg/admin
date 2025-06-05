@@ -1,7 +1,6 @@
 <%
 # If the about is a federated object, we don't want its categories.
 is_federated = about.try(:federated_in?, @website)
-# If the about is a direct object, we make sure
 unless is_federated
   about_categories = about.categories
   taxonomies = categories.taxonomies.ordered
