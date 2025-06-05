@@ -59,8 +59,12 @@ module Communication::Website::WithSecurity
         url = CGI.unescapeHTML(url)
         url = ActionController::Base.helpers.strip_tags(url)
         url = URI::Parser.new.escape(url)
-        host = URI.parse(url).host
-        list << host
+        begin
+          host = URI.parse(url).host
+        rescue URI::InvalidURIError
+          host = nil
+        end
+        list << host if host.present?
       end
     end
     list
