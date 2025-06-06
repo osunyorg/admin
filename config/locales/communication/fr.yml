@@ -538,7 +538,7 @@ fr:
           structure: Arborescence
         synchronize: 
           button: Synchroniser
-          running: La synchronisation va est lancée, un peu de patience...
+          running: La synchronisation est lancée, un peu de patience...
         technical:
           description: Tout ce qui est lié aux réglages techniques
           label: Technique

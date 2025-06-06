@@ -121,8 +121,7 @@ module Communication::Website::WithConnectedObjects
     agenda_events_time_slots.changed_status_today.find_each &:touch
     exhibitions.changed_status_today.find_each &:touch
     post_localizations.published_today.find_each &:touch
-    # Peut-être pas utile
-    # find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
+    find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
   end
 
   protected

@@ -118,7 +118,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @about = GlobalID::Locator.locate(@about_gid)
     @website.localize_in!(current_language)
     @about.localize_in!(current_language)
-    redirect_to [:edit, :admin, @about]
+    edit_path_method = "edit_admin_#{@about.class.base_class.to_s.parameterize.underscore}_path"
+    redirect_to public_send(edit_path_method, { id: @about.id})
   end
 
   protected
