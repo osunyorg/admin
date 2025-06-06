@@ -39,6 +39,7 @@
     <%= osuny_panel t('metadata'), small: true do %>
       <%= render 'admin/application/publication/show', about: @l10n %>
       <%= render 'admin/application/categories/widget/show', about: @exhibition %>
+      <%= render 'admin/communication/websites/federations/show', about: @exhibition %>
       <%= render 'admin/application/permalinks/redirects', about: @l10n %>
       <%= render 'admin/application/l10n/widget', about: @exhibition, l10n: @l10n, small: true %>
     <% end %>
@@ -57,5 +58,14 @@
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 
 <% content_for :server_admin_only do %>
-  <%= static_link static_admin_communication_website_agenda_exhibition_path(@exhibition) %>
+  <% @exhibition.website_and_federated_websites.each do |website| %>
+    <div class="mb-3">
+      <%= osuny_label website %><br>
+      <%= link_to 'Exposition',
+                  static_admin_communication_website_agenda_exhibition_path(
+                    @exhibition,
+                    context_website_id: website.id
+                  ) %>
+    </div>
+  <% end %>
 <% end %>

@@ -4,7 +4,7 @@
 #
 #  id                  :uuid             not null, primary key
 #  name                :string
-#  token               :string           indexed
+#  token               :string           uniquely indexed
 #  token_was_displayed :boolean          default(FALSE)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null

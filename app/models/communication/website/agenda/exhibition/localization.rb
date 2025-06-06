@@ -78,15 +78,17 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   validates :title, presence: true
 
   def git_path(website)
-    return unless website.id == communication_website_id && published && published_at
-    git_path_content_prefix(website) + git_path_relative
+    return unless published_in?(website)
+    path = git_path_content_prefix(website)
+    path += "exhibitions/"
+    path += "archives/#{from_day.year}/" if archive?
+    path += "#{from_day.strftime "%Y-%m-%d"}-#{slug}#{exhibition.suffix_in(website)}.html"
+    path
   end
 
-  def git_path_relative
-    path = "exhibitions/"
-    path += "archives/#{from_day.year}/" if archive?
-    path += "#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
-    path
+  def published_in?(website)
+    exhibition.allowed_in?(website) &&
+    published && published_at
   end
 
   def template_static

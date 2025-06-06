@@ -83,16 +83,20 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   validates :title, presence: true
   validate :slug_cant_be_numeric_only
 
+  # events/2025/01/01-arte-concert-festival.html
   def git_path(website)
-    return unless website.id == communication_website_id && published && published_at
-    return if event.time_slots.any? # Rendered by Communication::Website::Agenda::Event::TimeSlot
-    return if event.children.any? # Rendered by Communication::Website::Agenda::Event::Day
-    git_path_content_prefix(website) + git_path_relative
+    return unless published_in?(website)
+    path = git_path_content_prefix(website)
+    path += "events/"
+    path += "#{from_day.strftime "%Y/%m/%d"}-#{slug}#{event.suffix_in(website)}.html"
+    path
   end
 
-  # events/2025/01/01-arte-concert-festival.html
-  def git_path_relative
-    "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
+  def published_in?(website)
+    event.allowed_in?(website) &&
+    published && published_at &&
+    event.time_slots.none? && # Rendered by Communication::Website::Agenda::Event::TimeSlot
+    event.children.none? # Rendered by Communication::Website::Agenda::Event::Day
   end
 
   def template_static
@@ -101,7 +105,12 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def dependencies
     active_storage_blobs +
-    contents_dependencies
+    contents_dependencies +
+    days
+  end
+
+  def days
+    event.days.where(language: language)
   end
 
   def categories

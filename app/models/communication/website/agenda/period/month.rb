@@ -3,12 +3,12 @@
 # Table name: communication_website_agenda_period_months
 #
 #  id                       :uuid             not null, primary key
-#  value                    :integer          indexed => [university_id, communication_website_id, year_id]
+#  value                    :integer          uniquely indexed => [university_id, communication_website_id, year_id]
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null, indexed, indexed => [university_id, year_id, value]
-#  university_id            :uuid             not null, indexed => [communication_website_id, year_id, value]
-#  year_id                  :uuid             not null, indexed, indexed => [university_id, communication_website_id, value]
+#  communication_website_id :uuid             not null, indexed, uniquely indexed => [university_id, year_id, value]
+#  university_id            :uuid             not null, uniquely indexed => [communication_website_id, year_id, value]
+#  year_id                  :uuid             not null, indexed, uniquely indexed => [university_id, communication_website_id, value]
 #
 # Indexes
 #

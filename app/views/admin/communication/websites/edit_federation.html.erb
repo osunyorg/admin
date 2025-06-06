@@ -1,0 +1,19 @@
+<% content_for :title, t('admin.communication.website.federation.label') %>
+
+<%= simple_form_for [:admin, @website] do |f| %>
+  <%= f.simple_fields_for :localizations, @l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
+    <%= f.association :source_websites,
+                      collection: @source_websites,
+                      as: :check_boxes %>
+
+    <% content_for :action_bar_right do %>
+      <%= cancel [:admin, @website] %>
+      <%= submit f %>
+    <% end %>
+  <% end %>
+<% end %>

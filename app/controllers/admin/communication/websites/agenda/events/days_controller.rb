@@ -6,9 +6,12 @@ class Admin::Communication::Websites::Agenda::Events::DaysController < Admin::Co
   load_and_authorize_resource class: Communication::Website::Agenda::Event::Day,
                               through: :event
 
+  include Admin::HasStaticAction
+
   def static
     @l10n = @day
     @about = @day
+    @website = context_website
     partial = @about.template_static
     render  partial, 
             layout: false, 

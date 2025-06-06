@@ -1,0 +1,8 @@
+<% if @website.destination_websites.any? %>
+  <%= osuny_panel t('admin.communication.website.federation.label') do %>
+    <%= f.association  :destination_websites,
+                        collection: @website.destination_websites.ordered(current_language),
+                        as: :check_boxes, 
+                        label: '' %>
+  <% end %>
+<% end %>

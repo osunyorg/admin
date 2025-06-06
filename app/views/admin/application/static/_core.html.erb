@@ -99,3 +99,26 @@ search:
   body: >-
     <%= prepare_html_for_static simple_format(about.contents_full_text) %>
   <% end %>
+<%
+#############
+# Federation
+#############
+if about.respond_to?(:federated_in?) && about.federated_in?(@website)
+  canonical_website = about.website
+  canonical_hugo = about.hugo(canonical_website) if about.respond_to?(:hugo)
+%>
+federation:
+  active: true
+<% if canonical_hugo.present? %>
+  canonical_url: <%= "#{canonical_website.url}#{canonical_hugo.permalink}" %>
+  website:
+    name: >-
+      <%= prepare_text_for_static canonical_website.to_s_in(about.language) if about.respond_to?(:language) %>
+    url: "<%= canonical_website.url %>"    
+  hugo:
+    permalink: "<%= canonical_hugo.permalink %>"
+    path: "<%= canonical_hugo.path %>"
+    file: "<%= canonical_hugo.file %>"
+    slug: "<%= canonical_hugo.slug %>"
+<% end %>
+<% end %>

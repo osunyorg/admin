@@ -46,18 +46,23 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   delegate :event, to: :about
 
+  delegate :federated_in?, to: :event
+
   delegate :to_s, :title, :subtitle, :summary, :contents_full_text, :previous_permalinks_in_website, to: :event_l10n, allow_nil: true
   delegate :best_bodyclass, :archive?, to: :event
 
   # /content/fr/events/YYYY/MM/DD-hh-mm-slug.html
   def git_path(website)
-    return unless website.id == communication_website_id
-    git_path_content_prefix(website) + git_path_relative
+    return unless published_in?(website)
+    path = git_path_content_prefix(website)
+    path += "events/"
+    path += "#{from_day.strftime "%Y/%m"}/"
+    path += "#{slug}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
+    path
   end
 
-  # events/YYYY/MM/DD-hh-mm-slug.html
-  def git_path_relative
-    "events/#{from_day.strftime "%Y/%m"}/#{slug}-#{event_l10n.slug}.html"
+  def published_in?(website)
+    event.allowed_in?(website)
   end
 
   def template_static
