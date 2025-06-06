@@ -3,10 +3,12 @@ module HasGitFiles
 
   included do
     include GeneratesGitFiles
-    
+
     has_many  :git_files,
               class_name: "Communication::Website::GitFile",
               as: :about
+
+    after_destroy :mark_git_files_for_destruction!
   end
 
   def git_path(website)
@@ -28,6 +30,12 @@ module HasGitFiles
     path_language = respond_to?(:language_id) && language_id.present? ? language : website.default_language
     path += "#{path_language.iso_code}/"
     path
+  end
+
+  protected
+
+  def mark_git_files_for_destruction!
+    git_files.find_each(&:mark_for_destruction!)
   end
 
 end
