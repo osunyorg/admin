@@ -469,8 +469,13 @@ en:
           label: Content federation
         git_file:
           analysis:
+            destroy_all_on_git: Delete all git files
+            destroy_all_pending: All git files are marked for deletion on next sync
+            destroy_on_git: Delete git file
+            destroy_pending: The git file is marked for deletion on next sync
             launch: Launch analysis
             launched: Analysis launched
+            show_on_git: Show the file on git
             title: Git analysis
         jobboard:
           jobs:
