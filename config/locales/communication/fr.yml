@@ -466,8 +466,13 @@ fr:
           label: Éditorial
         git_file:
           analysis:
+            destroy_all_on_git: Supprimer tous les fichiers git
+            destroy_all_pending: Tous les fichiers sont marqués pour destruction à la prochaine synchronisation
+            destroy_on_git: Supprimer le fichier git
+            destroy_pending: Le fichier est marqué pour destruction à la prochaine synchronisation
             launch: Lancer une analyse
             launched: Analyse lancée
+            show_on_git: Afficher le fichier git
             title: Analyse Git
         jobboard:
           jobs:

@@ -18,6 +18,8 @@ namespace :communication do
       scope 'git-analysis' do
         get '' => 'websites/git_analysis#index', as: :git_analysis
         post '' => 'websites/git_analysis#launch'
+        delete 'orphans/:id' => 'websites/git_analysis#destroy_orphan', as: :destroy_orphan
+        delete 'orphans' => 'websites/git_analysis#destroy_all_orphans', as: :destroy_all_orphans
       end
     end
     get 'style' => 'websites/preview#style', as: :style
