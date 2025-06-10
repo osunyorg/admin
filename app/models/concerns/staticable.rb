@@ -2,17 +2,15 @@ module Staticable
   extend ActiveSupport::Concern
 
   def hugo(website)
-    @hugo ||= begin
-      if website.nil?
-        hugo_nil
-      else
-        hugo_with(
-          hugo_permalink_in_website(website),
-          hugo_path_in_website(website),
-          hugo_file_in_website(website),
-          hugo_slug_in_website(website)
-        )
-      end
+    if website.nil?
+      hugo_nil
+    else
+      hugo_with(
+        hugo_permalink_in_website(website),
+        hugo_path_in_website(website),
+        hugo_file_in_website(website),
+        hugo_slug_in_website(website)
+      )
     end
   end
 
