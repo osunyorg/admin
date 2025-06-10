@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_26_152736) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_10_162159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -796,8 +796,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_152736) do
 
   create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "previous_path"
-    t.string "about_type", null: false
-    t.uuid "about_id", null: false
+    t.string "about_type"
+    t.uuid "about_id"
     t.uuid "website_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

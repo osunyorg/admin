@@ -37,8 +37,7 @@ class Communication::Website::GitFile::Orphan < ApplicationRecord
       university: university,
       previous_path: path,
       current_path: path,
-      current_sha: 'fake',
-      about: website
+      current_sha: 'fake'
     ).first_or_create
     git_file.mark_for_destruction!
   end
