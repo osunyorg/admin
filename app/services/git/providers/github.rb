@@ -19,17 +19,24 @@ class Git::Providers::Github < Git::Providers::Abstract
   end
 
   def update_file(path, previous_path, content)
-    # Handle newly created GitFiles which update existing remote files while having blank previous_path.
-    path_to_check = previous_path.present? ? previous_path : path
-    file = tree_item_at_path(path_to_check)
+    previous_path_file = tree_item_at_path(previous_path)
+    new_path_file = tree_item_at_path(path)
     # En cas de dissonnance entre l'analyzer et le provider, on raise une erreur
-    raise "File to update does not exist on Git (repository: #{repository}, previous_path: #{previous_path}, path: #{path})" if file.nil?
-    batch << {
-      path: path_to_check,
-      mode: file[:mode],
-      type: file[:type],
-      sha: nil
-    }
+    if previous_path_file.nil? && new_path_file.nil?
+      raise "File to update does not exist on Git (repository: #{repository}, previous_path: #{previous_path}, path: #{path})"
+    end
+    if previous_path_file.present?
+      # Delete previous file
+      batch << {
+        path: previous_path,
+        mode: previous_path_file[:mode],
+        type: previous_path_file[:type],
+        sha: nil
+      }
+      file = previous_path_file
+    else
+      file = new_path_file
+    end
     batch << {
       path: path,
       mode: file[:mode],
