@@ -13,7 +13,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  about_id          :uuid             not null, indexed => [about_type]
-#  university_id     :uuid             not null, indexed
+#  university_id     :uuid             indexed
 #  website_id        :uuid             not null, indexed => [id]
 #
 # Indexes
