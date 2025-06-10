@@ -17,10 +17,6 @@ localizations.each do |l10n|
   buildFuture: true
   params:
 <%= render 'admin/application/contact_details/static', about: l10n, depth: 2 %>
-  permalinks:
-<% Communication::Website::Permalink.config_in_website(@website, language).each do |key, value| %>
-    <%= key %>: <%= value %>
-<% end %>
   taxonomies:
     administrator: administrators
     author: authors
