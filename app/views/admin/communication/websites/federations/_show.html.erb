@@ -1,0 +1,8 @@
+<% if about.destination_websites.any? %>
+  <%= osuny_label t('admin.communication.website.federation.label') %>
+  <ul class="list-unstyled">
+    <% about.destination_websites.each do |website| %>
+      <li><%= link_to website, [:admin, website] %></li>
+    <% end %>
+  </ul>
+<% end %>

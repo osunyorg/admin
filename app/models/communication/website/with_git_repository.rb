@@ -62,7 +62,7 @@ module Communication::Website::WithGitRepository
     Communication::Website::GitFile.generate self, object
   end
 
-  # Marque comme obsolete tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
+  # Marque comme obsolete tous les git_files qui ne sont pas dans les recursive_dependencies_syncable_following_direct
   def mark_obsolete_git_files
     return unless git_repository.valid?
     git_files.find_each do |git_file|

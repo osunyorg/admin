@@ -4,13 +4,13 @@
 #
 #  id                       :uuid             not null, primary key
 #  date                     :date
-#  value                    :integer          indexed => [university_id, communication_website_id, year_id, month_id]
+#  value                    :integer          uniquely indexed => [university_id, communication_website_id, year_id, month_id]
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null, indexed, indexed => [university_id, year_id, month_id, value]
-#  month_id                 :uuid             not null, indexed, indexed => [university_id, communication_website_id, year_id, value]
-#  university_id            :uuid             not null, indexed => [communication_website_id, year_id, month_id, value]
-#  year_id                  :uuid             not null, indexed, indexed => [university_id, communication_website_id, month_id, value]
+#  communication_website_id :uuid             not null, indexed, uniquely indexed => [university_id, year_id, month_id, value]
+#  month_id                 :uuid             not null, indexed, uniquely indexed => [university_id, communication_website_id, year_id, value]
+#  university_id            :uuid             not null, uniquely indexed => [communication_website_id, year_id, month_id, value]
+#  year_id                  :uuid             not null, indexed, uniquely indexed => [university_id, communication_website_id, month_id, value]
 #
 # Indexes
 #

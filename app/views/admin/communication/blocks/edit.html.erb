@@ -68,7 +68,7 @@
     </textarea>
     <% content_for :action_bar_right do %>
       <%= render 'admin/application/l10n/libre_translate_button', l10n: @block.about %>
-      <%= submit f %>
+      <%= submit f, disabled: true %>
     <% end %>
   <% end %>
 </div>
@@ -244,6 +244,7 @@
       setTimeout(this.handleCodemirrors.bind(this), 0);
       // LanguageTool
       document.initLanguageTool();
+      document.querySelector('input[type="submit"]').disabled = false;
     }
   });
 

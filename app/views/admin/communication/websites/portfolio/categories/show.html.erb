@@ -16,7 +16,7 @@
     <div class="offset-lg-4 col-lg-8">
       <p>
         <%= @projects.total_count %> 
-        <%= Communication::Website::Agenda::Event.model_name.human(count: @projects.total_count).downcase %>
+        <%= Communication::Website::Portfolio::Project.model_name.human(count: @projects.total_count).downcase %>
       </p>
       <%= render 'admin/communication/websites/portfolio/projects/list', projects: @projects, hide_category: true %>
       <%= paginate @projects %>

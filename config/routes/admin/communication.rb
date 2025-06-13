@@ -8,6 +8,7 @@ namespace :communication do
     member do
       get 'edit/language' => 'websites#edit_language', as: :edit_language
       get 'edit/technical' => 'websites#edit_technical', as: :edit_technical
+      get 'edit/federation' => 'websites#edit_federation', as: :edit_federation
       get :analytics
       get :security
       get :static
@@ -18,6 +19,8 @@ namespace :communication do
       scope 'git-analysis' do
         get '' => 'websites/git_analysis#index', as: :git_analysis
         post '' => 'websites/git_analysis#launch'
+        delete 'orphans/:id' => 'websites/git_analysis#destroy_orphan', as: :destroy_orphan
+        delete 'orphans' => 'websites/git_analysis#destroy_all_orphans', as: :destroy_all_orphans
       end
     end
     get 'style' => 'websites/preview#style', as: :style
