@@ -8,7 +8,8 @@ ContactDetails::SOCIAL_NETWORKS.each do |attribute|
   next if data.blank?
   kind = "ContactDetails::#{attribute.to_s.camelize}".constantize
   detail = kind.new data
-  if detail.present?
+  should_show = is_information_public?(about, attribute)
+  if detail.present? && should_show
     present = true
     networks << {
       attribute: attribute,

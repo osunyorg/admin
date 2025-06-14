@@ -15,9 +15,7 @@ end
 typed_phones = []
 ContactDetails::PHONES.each do |attribute|
   if about.respond_to?(attribute)
-    # If the publicity level is defined, we must respect it
-    publicity = "#{attribute}_is_public?"
-    should_show = about.respond_to?(publicity) ? about.public_send(publicity) : true
+    should_show = is_information_public?(about, attribute)
     if should_show
       data = about.public_send(attribute)
       detail = ContactDetails::Phone.new data
