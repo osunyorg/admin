@@ -1,11 +1,16 @@
-<% content_for :title, @academic_year %>
+<% content_for :title, @l10n %>
 
 <% if @academic_year.cohorts.any? %>
   <h2><%= Education::Cohort.model_name.human(count: 2) %></h2>
-  <%= render 'admin/education/cohorts/list', cohorts: @academic_year.cohorts.ordered %>
+  <%= render 'admin/education/cohorts/list', cohorts: @cohorts %>
 <% end %>
 
 <% if @academic_year.people.any? %>
   <h2 class="mt-5"><%= University::Person::Alumnus.model_name.human(count: 2) %></h2>
-  <%= render 'admin/administration/alumni/list', alumni: @academic_year.people.ordered(current_language) %>
+  <%= render 'admin/administration/alumni/list', alumni: @people %>
 <% end %>
+
+<% content_for :server_admin_only do %>
+  <%= static_link static_admin_education_academic_year_path(@academic_year) %>
+  <%= render 'admin/communication/websites/git_files/list', git_files: @l10n.git_files %>
+<% end %>  

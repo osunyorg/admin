@@ -88,7 +88,7 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
     params.require(:communication_website_agenda_exhibition)
     .permit(
       :from_day, :to_day, :time_zone, :bodyclass,
-      category_ids: [],
+      category_ids: [], destination_website_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text, :notes, :place,
         :published, :published_at, :slug,

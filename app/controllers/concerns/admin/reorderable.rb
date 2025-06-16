@@ -5,7 +5,7 @@ module Admin::Reorderable
     ids = params[:ids] || []
     ids.each.with_index do |id, index|
       object = model.find_by(id: id)
-      object.update(:position, index + 1) unless object.nil?
+      object.update(position: index + 1) unless object.nil?
     end
     # Used to add extra code
     yield first_object if block_given?
