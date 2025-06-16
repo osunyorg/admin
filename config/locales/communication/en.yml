@@ -126,10 +126,12 @@ en:
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
         feature_agenda: Agenda
+        feature_alumni: Alumni
         feature_jobboard: Job board
         feature_portfolio: Portfolio
         feature_posts: Posts
         features: Features
+        federations: Federated content sources
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
@@ -309,10 +311,14 @@ en:
               too_big: too heavy!
         communication/website/agenda/event:
           attributes:
+            from_day:
+              events_before: must be before the first event
+              time_slots_before: must be before the first time slot
             to_day:
-              too_soon: must be after "from day"
-            to_hour:
-              too_soon: must be after "from hour"
+              events_after: must be after the last event
+              time_slots_after: must be after the last time slot
+              too_soon: must be after start day
+              too_long: must be before %{max_end_date}
         communication/website/agenda/event/localization:
           attributes:
             slug:
@@ -459,10 +465,17 @@ en:
         editorial:
           description: Everything related to content
           label: Editorial
+        federation:
+          label: Content federation
         git_file:
           analysis:
+            destroy_all_on_git: Delete all git files
+            destroy_all_pending: All git files are marked for deletion on next sync
+            destroy_on_git: Delete git file
+            destroy_pending: The git file is marked for deletion on next sync
             launch: Launch analysis
             launched: Analysis launched
+            show_on_git: Show the file on git
             title: Git analysis
         jobboard:
           jobs:
@@ -618,6 +631,9 @@ en:
           communication_post:
             slug: posts
             title: Posts
+          education_academic_year:
+            slug: alumni
+            title: Alumni
           education_diploma:
             slug: diplomas
             title: Diplomas
@@ -723,9 +739,11 @@ en:
         access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website with Deuxfleurs.
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_agenda: To share events
+        feature_alumni: To display public alumni
         feature_jobboard: To share job offers
         feature_portfolio: To showcase projects
         feature_posts: To publish posts, like a media
+        federations: Choose the websites that can send content to it
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
         in_production: Tick this box once the site is deployed on a dedicated domain or sub-domain (not *.osuny.site).

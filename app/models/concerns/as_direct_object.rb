@@ -21,7 +21,8 @@ module AsDirectObject
   end
 
   def websites
-    [website]
+    respond_to?(:federated?)  ? [website] + federated_websites
+                              : [website]
   end
 
   def is_direct_object?
