@@ -5,7 +5,7 @@ l10n ||= nil
 language ||= about.language
 address_formatter = Osuny::AddressFormatter.new(about: about, l10n: l10n, language: language)
 present = address_formatter.present?
-should_show = is_information_public?(about, 'address')
+should_show = is_information_public?(about, :address)
 %>
 <% if present && should_show %>
 <%= indentation %>postal_address:
