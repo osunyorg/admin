@@ -459,6 +459,9 @@ fr:
                 url:
                   label: Site Web
                   placeholder: https://
+                role:
+                  label: Rôle
+                  placeholder: Indiquer le rôle de l'organisation
               mode:
                 label: Quelles organisations afficher ?
                 options:

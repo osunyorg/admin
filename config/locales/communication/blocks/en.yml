@@ -459,6 +459,9 @@ en:
                 url:
                   label: Website
                   placeholder: https://
+                role:
+                  label: Role
+                  placeholder: Enter organization's role
               mode:
                 label: Which organizations?
                 options:
