@@ -41,7 +41,6 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
               optional: true
 
   validates :from_day, presence: true
-  
 
   scope :ordered_desc, -> {
     order(from_day: :desc, created_at: :desc)
