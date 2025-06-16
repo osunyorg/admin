@@ -35,11 +35,11 @@
                 <div class="row mb-2">
                   <div class="col-lg-6">
                     <%= osuny_label Communication::Website::Jobboard::Job.human_attribute_name(:from_day) %>
-                    <p><%= l job.from_day %></p>
+                    <p><%= l(job.from_day) %></p>
                   </div>
                   <div class="col-lg-6">
                     <%= osuny_label Communication::Website::Jobboard::Job.human_attribute_name(:to_day) %>
-                    <p><%= l job.to_day %></p>
+                    <p><%= l(job.to_day) if job.to_day.present? %></p>
                   </div>
                 </div>
               </div>
