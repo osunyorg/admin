@@ -55,6 +55,8 @@ class Education::Cohort < ApplicationRecord
   validates_associated :school, :academic_year, :program
   validates :year, presence: true
 
+  after_create_commit :create_localizations
+
   scope :ordered, -> (language = nil) {
     includes(:academic_year).order('education_academic_years.year DESC')
   }
@@ -69,6 +71,17 @@ class Education::Cohort < ApplicationRecord
 
   def dependencies
     localizations
+  end
+
+  protected
+
+  def create_localizations
+    university.languages.each do |language|
+      localizations.where(
+        university: university,
+        language: language
+      ).first_or_create
+    end
   end
 
 end
