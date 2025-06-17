@@ -160,6 +160,12 @@ module Admin::ApplicationHelper
     }
   end
 
+  # If the publicity level is defined, we must respect it
+  def is_information_public?(about, attribute)
+    publicity = "#{attribute}_is_public?"
+    about.respond_to?(publicity) ? about.public_send(publicity) : true
+  end
+
   private
 
   def polymorphic_url_param(object_or_class, **options)

@@ -2,30 +2,48 @@
 
 <% content_for :title_right do %>
   <%= link_to t('admin.communication.website.git_file.analysis.title'), 
-            git_analysis_admin_communication_website_path(website_id: nil), 
-            class: button_classes, 
-            method: :post %>
+              git_analysis_admin_communication_website_path(website_id: nil), 
+              class: button_classes, 
+              method: :post %>
+  <%= link_to t('admin.communication.website.git_file.analysis.destroy_all_on_git'), 
+              destroy_all_orphans_admin_communication_website_path(website_id: nil), 
+              class: button_classes, 
+              method: :delete %>
 <% end %>
+
+<p>
+  <%= @orphans.count %>
+  <%= Communication::Website::GitFile::Orphan.model_name.human(count: 2).downcase %>
+</p>
 
 <div class="table-responsive mb-5">
   <table class="<%= table_classes(with_actions: false) %>">
     <thead>
       <tr>
-        <th><%= Communication::Website::GitFile::Orphan.model_name.human(count: 2) %></th>
+        <th><%= Communication::Website::GitFile::Orphan.human_attribute_name(:path) %></th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @orphans.each do |orphan| %>
         <tr>
-          <td><%= link_to orphan.path,
+          <td><%= orphan %></td>
+          <td><%= link_to t('admin.communication.website.git_file.analysis.show_on_git'),
                           orphan.git_url, 
                           target: :_blank, 
                           classes: button_classes %></td>
+          <td><%= link_to t('admin.communication.website.git_file.analysis.destroy_on_git'),
+                          destroy_orphan_admin_communication_website_path(orphan),
+                          method: :delete,
+                          classes: button_classes_danger %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<%= @layouts.count %>
 
 <div class="table-responsive">
   <table class="<%= table_classes(with_actions: false) %>">
