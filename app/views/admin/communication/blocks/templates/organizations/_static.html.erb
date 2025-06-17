@@ -22,5 +22,6 @@ if element.organization
           logo: "<%= element.logo_component.blob&.id %>"
           external: true
 <% end %>
+<%= block_component_static block, :role, template: element, depth: 5 %>
 <% end %>
       quantity: <%= quantity %>
