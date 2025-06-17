@@ -71,8 +71,10 @@ roles:
 teachings:
 <% person.involvements_as_teacher.each do |involvement|
     involvement_l10n = involvement.best_localization_for(language)
+    next if involvement_l10n.nil?
     program = involvement.target
     program_l10n = program.best_localization_for(language)
+    next if program_l10n.nil?
     hugo = program_l10n.hugo(@website)
     next if hugo.file.blank?
     %>
