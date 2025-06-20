@@ -19,14 +19,6 @@ dates:
         <%= date_range_i18n(event.from_day, event.to_day, format: :long, layout: :two_lines, locale: locale) %>
   from:
     day: "<%= event.from_day %>"
-<% if event.from_hour %>
-    hour: "<%= event.from_hour.strftime "%H:%M" %>"
-    datetime: "<%= event.from_datetime&.iso8601 %>"
-<% end %>
   to:
     day: "<%= event.to_day || event.from_day %>"
-<% if event.to_hour %>
-    hour: "<%= event.to_hour.strftime "%H:%M" %>"
-    datetime: "<%= event.to_datetime&.iso8601 %>"
-<% end %>
 <%= render 'admin/communication/websites/agenda/static_add_to_calendar', l10n: l10n %>

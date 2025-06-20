@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_10_162159) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_16_120405) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -596,9 +596,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_10_162159) do
     t.uuid "university_id", null: false
     t.uuid "communication_website_id", null: false
     t.date "from_day"
-    t.time "from_hour"
     t.date "to_day"
-    t.time "to_hour"
     t.uuid "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
