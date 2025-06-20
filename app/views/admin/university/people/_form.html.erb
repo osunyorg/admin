@@ -166,6 +166,7 @@
     </div>
     <% content_for :action_bar_right do %>
       <%= cancel [:admin, person] %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: @l10n %>
       <%= submit f %>
     <% end %>
   <% end %>
