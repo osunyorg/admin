@@ -31,6 +31,7 @@ class Communication::Media < ApplicationRecord
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Localizable
   include LocalizableOrderByNameScope
+  include WithOpenApi
   include WithUniversity
 
   attr_accessor :original_uploaded_file
@@ -75,11 +76,13 @@ class Communication::Media < ApplicationRecord
     where(collection: collection_id)
   }
 
-  def self.create_from_blob(blob, in_context:, origin: :upload, alt: nil, credit: nil)
+  def self.create_from_blob(blob, in_context: nil, origin: :upload, alt: nil, credit: nil)
     return if blob.nil?
     media = find_or_create_media_from_blob(blob, origin)
-    create_context(media, blob, in_context)
-    find_or_create_media_l10n(media, in_context, alt, credit)
+    if in_context.present?
+      create_context(media, blob, in_context)
+      find_or_create_media_l10n(media, in_context, alt, credit)
+    end
     media
   end
 
