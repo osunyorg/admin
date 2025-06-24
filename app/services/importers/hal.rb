@@ -47,6 +47,13 @@ module Importers
       publication.journal_title = doc.attributes['journalTitle_s']
       publication.file = doc.attributes['files_s']&.first
       publication.authors_list = doc.attributes['authFullName_s'].join(', ')
+      add_authors_citeproc(doc, publication)
+      add_anr_project_references(doc, publication)
+      publication.save
+      publication
+    end
+    
+    def self.add_authors_citeproc(doc, publication)
       publication.authors_citeproc = []
       doc.attributes['authLastName_s'].each_with_index do |last_name, index|
         publication.authors_citeproc << {
@@ -54,11 +61,11 @@ module Importers
           "given" => doc.attributes['authFirstName_s'][index]
         }
       end
-      if doc.attributes['anrProjectReference_s'].present?
-        publication.anr_project_references = doc.attributes['anrProjectReference_s']
-      end
-      publication.save
-      publication
+    end
+
+    def self.add_anr_project_references(doc, publication)
+      return unless doc.attributes['anrProjectReference_s'].present?
+      publication.anr_project_references = doc.attributes['anrProjectReference_s']
     end
 
   end
