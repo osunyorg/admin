@@ -4,6 +4,7 @@ module Importers
     # https://api.archives-ouvertes.fr/search/?q=03713859&fl=*
     def self.import_publications_for_author(author)
       fields = [
+        # '*',
         'docid',
         'title_s',
         'citationRef_s',
@@ -18,8 +19,8 @@ module Importers
         'authFullName_s',
         'authLastName_s',
         'authFirstName_s',
+        'anrProjectReference_s',
         'files_s'
-        # '*',
       ]
       publications = []
       response = HalOpenscience::Document.search "authIdFormPerson_s:#{author.docid}", fields: fields, limit: 1000
@@ -52,6 +53,9 @@ module Importers
           "family" => last_name, 
           "given" => doc.attributes['authFirstName_s'][index]
         }
+      end
+      if doc.attributes['anrProjectReference_s'].present?
+        publication.anr_project_references = doc.attributes['anrProjectReference_s']
       end
       publication.save
       publication

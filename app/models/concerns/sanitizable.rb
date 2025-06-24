@@ -27,7 +27,8 @@ module Sanitizable
     def should_sanitize?(attribute_name, attribute_type)
       attribute_is_textual?(attribute_type) &&
         attribute_has_value?(attribute_name) &&
-        attribute_is_not_polymorphic?(attribute_name)
+        attribute_is_not_polymorphic?(attribute_name) &&
+        attribute_is_not_array?(attribute_name)
     end
 
     def attribute_is_textual?(attribute_type)
@@ -43,6 +44,10 @@ module Sanitizable
     def attribute_is_not_polymorphic?(attribute_name)
       # We filter the attributes which end with "_type" (polymorphic attributes)
       !attribute_name.ends_with?('_type')
+    end
+
+    def attribute_is_not_array?(attribute_name)
+      !public_send(attribute_name).is_a?(Array)
     end
 
     #  {
