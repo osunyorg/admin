@@ -60,6 +60,7 @@ fr:
       research/publication:
         abstract: Résumé
         authors_list: Liste des auteur·es
+        anr_project_references: Projet(s) ANR
         docid: Identifiant
         doi: DOI
         doi_url: URL DOI

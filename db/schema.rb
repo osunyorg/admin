@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_10_162159) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_24_090328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -1922,6 +1922,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_10_162159) do
     t.text "authors_list"
     t.json "authors_citeproc"
     t.integer "source", default: 0
+    t.text "anr_project_references", default: [], array: true
     t.index ["hal_docid"], name: "index_research_publications_on_hal_docid"
     t.index ["slug"], name: "index_research_publications_on_slug"
   end
