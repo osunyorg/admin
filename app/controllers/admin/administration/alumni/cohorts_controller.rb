@@ -11,7 +11,7 @@ class Admin::Administration::Alumni::CohortsController < Admin::Administration::
   def update
     if @alumnus.update(cohorts_params)
       redirect_to admin_administration_alumnus_path(@alumnus),
-                  notice: t('admin.successfully_updated_html', model: @alumnus.to_s)
+                  notice: t('admin.successfully_updated_html', model: @alumnus.to_s_in(current_language))
     else
       render :edit
       breadcrumb
