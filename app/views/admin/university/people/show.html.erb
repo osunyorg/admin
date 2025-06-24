@@ -97,6 +97,10 @@
 
 <% content_for :server_admin_only do %>
   <%= osuny_panel t('static'), small: true do  %>
+    <%= link_to 'Person',
+                static_admin_university_person_path(@person),
+                classes: button_classes,
+                target: :_blank %><br>
     <%= link_to 'Administrator',
                 static_administrator_admin_university_person_path(@person),
                 classes: button_classes,

@@ -82,6 +82,11 @@ fr:
                 id:
                   label: ''
                   placeholder: Choisir l'événement
+              kinds: Quels types d'événements afficher ?
+              kind:
+                parent: Parents (festival)
+                child: Enfants (concert dans un festival)
+                recurring: Récurrents (événement avec plusieurs créneaux horaires)
               mode:
                 label: Quels événements afficher ?
                 options:
@@ -454,11 +459,16 @@ fr:
                 url:
                   label: Site Web
                   placeholder: https://
+                role:
+                  label: Rôle
+                  placeholder: Indiquer le rôle de l'organisation
               mode:
                 label: Quelles organisations afficher ?
                 options:
                   category: Une catégorie spécifique
                   selection: Une sélection d'organisations
+              option_address: 
+                label: Adresse postale
               option_link:
                 label: Avec des liens cliquables vers les pages des organisations?
               option_logo:

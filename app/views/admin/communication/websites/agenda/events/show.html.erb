@@ -36,6 +36,7 @@
     <%= osuny_panel t('metadata'), small: true do %>
       <%= render 'admin/application/publication/show', about: @l10n %>
       <%= render 'admin/application/categories/widget/show', about: @event %>
+      <%= render 'admin/communication/websites/federations/show', about: @event %>
       <%= render 'admin/application/permalinks/redirects', about: @l10n %>
       <%= render 'admin/application/l10n/widget', about: @event, l10n: @l10n, small: true %>
     <% end %>

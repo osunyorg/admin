@@ -17,7 +17,7 @@
           <td><%= render 'admin/communication/websites/connections/direct_source',
                           source: source, 
                           type: @direct_source_type %></td>
-          <td><%= source&.language %>
+          <td><%= source&.language if source.respond_to?(:language) %>
           <td><%= @connections.where(direct_source_type: @direct_source_type, direct_source_id: source.id).count %></td>
         </tr>
       <% end %>

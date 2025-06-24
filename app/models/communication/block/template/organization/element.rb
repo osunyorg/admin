@@ -4,6 +4,7 @@ class Communication::Block::Template::Organization::Element < Communication::Blo
   has_component :name, :string
   has_component :url, :string
   has_component :logo, :image
+  has_component :role, :string
 
   def organization
     id_component.organization

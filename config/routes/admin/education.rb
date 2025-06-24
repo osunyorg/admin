@@ -1,6 +1,14 @@
 namespace :education do
-  resources :academic_years
-  resources :cohorts, only: [:index, :show]
+  resources :academic_years do
+    member do
+      get :static
+    end
+  end
+  resources :cohorts, only: [:index, :show] do
+    member do
+      get :static
+    end
+  end
   resources :diplomas do
     collection do
       post :reorder
@@ -23,7 +31,7 @@ namespace :education do
       resources :categories, controller: 'programs/categories', as: 'program_categories' do
         collection do
           post :reorder
-        end  
+        end
         member do
           get :children
           get :static

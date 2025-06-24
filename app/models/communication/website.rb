@@ -12,6 +12,7 @@
 #  deuxfleurs_identifier        :string
 #  deuxfleurs_secret_access_key :string
 #  feature_agenda               :boolean          default(FALSE)
+#  feature_alumni               :boolean          default(FALSE)
 #  feature_jobboard             :boolean          default(FALSE)
 #  feature_portfolio            :boolean          default(FALSE)
 #  feature_posts                :boolean          default(TRUE)
@@ -65,9 +66,11 @@ class Communication::Website < ApplicationRecord
   include WithDependencies
   include WithDeuxfleurs
   include WithFeatureAgenda
+  include WithFeatureAlumni
   include WithFeatureJobboard
   include WithFeaturePosts
   include WithFeaturePortfolio
+  include WithFederations
   include WithGitRepository
   include WithLock
   include WithManagers
@@ -144,7 +147,7 @@ class Communication::Website < ApplicationRecord
                             .where.not(id: favorites_ids)
                             .accessible_by(ability)
                             .ordered(language)
-                            .limit(limit - websites.count)
+                            .limit(remaining)
                             .collect(&:website)
     end
     websites
@@ -166,13 +169,32 @@ class Communication::Website < ApplicationRecord
     pages +
     page_categories +
     feature_agenda_dependencies +
-    feature_portfolio_dependencies +
+    feature_alumni_dependencies +
     feature_jobboard_dependencies +
+    feature_portfolio_dependencies +
     feature_posts_dependencies +
     menus.in_languages(active_language_ids) +
-    [about] +
     [default_image&.blob] +
-    [default_shared_image&.blob]
+    [default_shared_image&.blob] +
+    indirect_objects_connected_to_website
+  end
+
+  def indirect_objects_connected_to_website
+    [about].compact +
+    alumni +
+    cohorts +
+    academic_years +
+    federated_objects
+  end
+
+  # Objets indirects connectés, avec toutes leurs dépendances récursives
+  # Méthode utilisée pour vérifier les connexions obsolètes
+  def indirect_objects_connected_to_website_recursive
+    objects = indirect_objects_connected_to_website
+    (
+      objects +
+      objects.collect(&:recursive_dependencies).flatten
+    ).uniq
   end
 
   def website
@@ -193,6 +215,16 @@ class Communication::Website < ApplicationRecord
     recursive_dependencies_syncable_following_direct.each do |dependency|
       reconnect_dependency dependency, new_university_id
     end
+  end
+
+  def domain
+    URI.parse(url).host
+  rescue URI::InvalidURIError
+    ""
+  end
+
+  def domain_slug
+    domain&.parameterize
   end
 
   protected

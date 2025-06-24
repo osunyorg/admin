@@ -31,4 +31,19 @@ class Communication::Website::GitFile::Orphan < ApplicationRecord
   def git_url
     "#{website.git_repository.url}/blob/main/#{path}"
   end
+
+  def mark_for_destruction!
+    git_file = website.git_files.where(
+      university: university,
+      previous_path: path,
+      current_path: path,
+      current_sha: 'fake'
+    ).first_or_create
+    git_file.mark_for_destruction!
+  end
+
+  def to_s
+    path
+  end
+  
 end

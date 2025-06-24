@@ -82,6 +82,11 @@ en:
                 id:
                   label: ''
                   placeholder: Choose event
+              kinds: What kind of events?
+              kind:
+                parent: Parents (Festival)
+                child: Children (concert during a festival)
+                recurring: Recurring (events with several time slots)
               mode:
                 label: Which events should be presented?
                 options:
@@ -454,11 +459,16 @@ en:
                 url:
                   label: Website
                   placeholder: https://
+                role:
+                  label: Role
+                  placeholder: Enter organization's role
               mode:
                 label: Which organizations?
                 options:
                   category: A specific category
                   selection: Selected organizations
+              option_address: 
+                label: Postal address
               option_link:
                 label: With clickable link to each organization's page?
               option_logo:

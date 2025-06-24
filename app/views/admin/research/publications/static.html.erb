@@ -47,4 +47,10 @@ Citations::FORMATS.each do |format|
     content: >-
       <%= prepare_html_for_static citation %>
 <% end if @about.hal? %>
+<% if @about.anr_project_references.any? %>
+anr_project_references:
+<% @about.anr_project_references.each do |ref| %>
+  - "<%= ref %>"
+<% end %>
+<% end %>  
 ---
