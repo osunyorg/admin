@@ -53,6 +53,7 @@
           </div>
           <div class="col-lg-6">
             <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+            <%= f.input :bodyclass, label: t('admin.bodyclass') if can?(:edit, @website) %>
           </div>
         </div>
       </div>
