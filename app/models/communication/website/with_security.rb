@@ -56,13 +56,22 @@ module Communication::Website::WithSecurity
       code = block.template.code
       # https://stackoverflow.com/questions/25095176/extracting-all-urls-from-a-page-using-ruby
       code.scan(/[[:lower:]]+:\/\/[^\s"]+/).each do |url|
-        url = CGI.unescapeHTML(url)
-        url = ActionController::Base.helpers.strip_tags(url)
-        url = URI::Parser.new.escape(url)
-        host = URI.parse(url).host
-        list << host
+        host = load_allowed_domain_from_url(url)
+        list << host if host.present?
       end
     end
     list
+  end
+
+  def load_allowed_domain_from_url(url)
+    url = CGI.unescapeHTML(url)
+    url = ActionController::Base.helpers.strip_tags(url)
+    url = URI::Parser.new.escape(url)
+    begin
+      host = URI.parse(url).host
+    rescue URI::InvalidURIError
+      host = nil
+    end
+    host
   end
 end

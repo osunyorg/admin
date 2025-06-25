@@ -30,6 +30,7 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
   include Duplicable
+  include Federated
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles

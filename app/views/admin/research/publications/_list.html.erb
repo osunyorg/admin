@@ -1,14 +1,16 @@
 <div class="row g-2 mb-3">
   <% publications.each do |publication| %>
     <div>
-      <div class="<%= osuny_card_classes(horizontal: true) %>">
+      <div class="<%= osuny_card_classes %>">
         <div class="card-body">
-          <%= link_to publication, [:admin, publication] %><br>
-          <small><%= sanitize publication.authors_list %></small>
+          <h3 class="card-title">
+            <%= link_to publication, [:admin, publication], class: 'stretched-link' %><br>
+          </h3>
+          <small><%= sanitize publication.authors_list.truncate(200) %></small>
         </div>
         <div class="card-footer d-flex">
           <span class="badge text-bg-light me-4"><%= publication.source_i18n %></span>
-          <%= l publication.publication_date %>
+          <span class="small"><%= l publication.publication_date %></span>
         </div>
       </div>
     </div>

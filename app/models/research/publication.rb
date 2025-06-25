@@ -2,26 +2,27 @@
 #
 # Table name: research_publications
 #
-#  id               :uuid             not null, primary key
-#  abstract         :text
-#  authors_citeproc :json
-#  authors_list     :text
-#  citation_full    :text
-#  data             :jsonb
-#  doi              :string
-#  file             :text
-#  hal_docid        :string           indexed
-#  hal_url          :string
-#  journal_title    :string
-#  open_access      :boolean
-#  publication_date :date
-#  ref              :string
-#  slug             :string           indexed
-#  source           :integer          default("osuny")
-#  title            :string
-#  url              :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id                     :uuid             not null, primary key
+#  abstract               :text
+#  anr_project_references :text             default([]), is an Array
+#  authors_citeproc       :json
+#  authors_list           :text
+#  citation_full          :text
+#  data                   :jsonb
+#  doi                    :string
+#  file                   :text
+#  hal_docid              :string           indexed
+#  hal_url                :string
+#  journal_title          :string
+#  open_access            :boolean
+#  publication_date       :date
+#  ref                    :string
+#  slug                   :string           indexed
+#  source                 :integer          default("osuny")
+#  title                  :string
+#  url                    :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #
 # Indexes
 #
@@ -95,13 +96,8 @@ class Research::Publication < ApplicationRecord
 
   # Override to handle default language
   def hugo_ancestors_for_special_page(website)
-    return [] if is_a?(Communication::Website::Page::Localization)
-    permalink = Communication::Website::Permalink.for_object(self, website)
-    return [] unless permalink
-    special_page = permalink.special_page(website)
-    return [] unless special_page
-    special_page_l10n = special_page.localization_for(website.default_language)
-    return [] unless special_page_l10n
+    special_page_l10n = find_special_page_l10n_in(website, website.default_language)
+    return [] if special_page_l10n.nil?
     special_page_l10n.ancestors_and_self
   end
 

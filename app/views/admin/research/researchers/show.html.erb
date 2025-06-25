@@ -65,12 +65,11 @@
 
 <%= osuny_panel Research::Publication.model_name.human(count: 2) do %>
   <p>
-    <%= "#{@researcher.publications.count} #{Research::Publication.model_name.human(count: @researcher.publications.count).downcase}" %>.
+    <%= "#{@publications.total_count} #{Research::Publication.model_name.human(count: @publications.total_count).downcase}" %>.
     Les publications sont mises à jour automatiquement, chaque nuit.
   </p>
-  <div class="table-responsive">
-    <%= render 'admin/research/publications/list', publications: @researcher.publications.ordered %>
-  </div>
+  <%= render 'admin/research/publications/list', publications: @publications %>
+  <%= paginate @publications, param_name: :publications_page %>
 <% end %>
 
 <% content_for :server_admin_only do %>

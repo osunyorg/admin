@@ -2,6 +2,8 @@ class Admin::Education::CohortsController < Admin::Education::ApplicationControl
   load_and_authorize_resource class: Education::Cohort,
                               through: :current_university,
                               through_association: :education_cohorts
+  include Admin::HasStaticAction
+  include Admin::Localizable
 
   def index
     breadcrumb

@@ -177,7 +177,7 @@ fr:
       hint: Un texte court, comme un chapô pour un article. Ne mettez pas tout le contenu ici, pour ça, il y a les blocs !
       label: Résumé
     translation:
-      button: Traduire avec LibreTranslate
+      button: Traduire
       done: Traduction effectuée ! Merci de relire avant d'enregistrer.
       running: Traduction en cours
       unavailable_button: Traduction automatique indisponible

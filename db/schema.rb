@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_26_152736) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_24_115043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -796,8 +796,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_152736) do
 
   create_table "communication_website_git_files", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.string "previous_path"
-    t.string "about_type", null: false
-    t.uuid "about_id", null: false
+    t.string "about_type"
+    t.uuid "about_id"
     t.uuid "website_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1922,6 +1922,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_152736) do
     t.text "authors_list"
     t.json "authors_citeproc"
     t.integer "source", default: 0
+    t.text "anr_project_references", default: [], array: true
     t.index ["hal_docid"], name: "index_research_publications_on_hal_docid"
     t.index ["slug"], name: "index_research_publications_on_slug"
   end
@@ -2108,6 +2109,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_152736) do
     t.float "longitude"
     t.string "migration_identifier"
     t.uuid "created_by_id"
+    t.string "bodyclass"
     t.index ["created_by_id"], name: "index_university_organizations_on_created_by_id"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
@@ -2143,6 +2145,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_152736) do
     t.integer "phone_personal_visibility", default: 0
     t.integer "email_visibility", default: 0
     t.uuid "created_by_id"
+    t.string "bodyclass"
     t.index ["created_by_id"], name: "index_university_people_on_created_by_id"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"

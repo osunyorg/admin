@@ -26,7 +26,13 @@
 #  fk_rails_c2d725cabd  (academic_year_id => education_academic_years.id)
 #
 class Education::Cohort < ApplicationRecord
+  include AsIndirectObject
+  include GeneratesGitFiles
+  include Localizable
+  include LocalizableOrderByNameScope
   include Sanitizable
+  include Searchable
+  include WebsitesLinkable
   include WithUniversity
 
   belongs_to  :school,
@@ -49,27 +55,33 @@ class Education::Cohort < ApplicationRecord
   validates_associated :school, :academic_year, :program
   validates :year, presence: true
 
+  after_create_commit :create_localizations
+
   scope :ordered, -> (language = nil) {
     includes(:academic_year).order('education_academic_years.year DESC')
   }
-
-  def to_s
-    "#{program.to_s_in(university.default_language)} #{academic_year}"
-  end
-
-  def subtitle_in(language)
-    subtitle_parts = []
-    subtitle_parts << program.diploma.to_s_in(language) if program.diploma.present?
-    subtitle_parts << program.to_s_in(language)
-    subtitle_parts.join(' — ')
-  end
 
   def year
     academic_year&.year
   end
 
-  def year=(val)
-    self.academic_year = Education::AcademicYear.where(university_id: university_id, year: val).first_or_create
+  def year=(value)
+    self.academic_year = Education::AcademicYear.where(university_id: university_id, year: value).first_or_create
+  end
+
+  def dependencies
+    localizations
+  end
+
+  protected
+
+  def create_localizations
+    university.languages.each do |language|
+      localizations.where(
+        university: university,
+        language: language
+      ).first_or_create
+    end
   end
 
 end

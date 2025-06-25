@@ -83,6 +83,7 @@ class ContactDetailsTest < ActiveSupport::TestCase
   test 'linkedin person' do
     batch_test :linkedin, 'arnaudlevy', 'https://www.linkedin.com/in/arnaudlevy/', [
         'https://www.linkedin.com/in/arnaudlevy/',
+        'https://www.linkedin.com/in/arnaudlevy?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BnvwyeN8STp6DUrPnQSOoDQ%3D%3D'
       ]
     detail = service_for(:linkedin).new 'https://www.linkedin.com/in/matthieu-b%C3%A9jot-4bba9950/'
     assert_equal 'matthieu-béjot-4bba9950', detail.label  

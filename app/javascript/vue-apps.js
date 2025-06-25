@@ -1,1 +1,1 @@
-import "./apps"
+import './apps';

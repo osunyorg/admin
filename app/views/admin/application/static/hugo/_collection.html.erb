@@ -12,5 +12,9 @@ collection.each do |element|
   hugo = l10n.hugo(@website)
   next if hugo.nil? || hugo.file.blank?
   %>
-<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: depth+1 %>
+<%= render 'admin/application/static/hugo/single',
+            hugo: hugo, 
+            depth: depth+1 %>
+<%= indentation %>    name: >-
+<%= indentation %>      <%= prepare_text_for_static l10n.to_s %>
 <% end %>

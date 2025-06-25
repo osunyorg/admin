@@ -1,0 +1,67 @@
+<% 
+language = l10n.language
+taxonomies = @website.university.person_categories.taxonomies.ordered
+cohorts = @website.cohorts.ordered(language)
+programs = @website.education_programs.ordered(language)
+years = @website.academic_years.ordered(language)
+decades = {}
+years.each do |year|
+  decade = year.year/10*10
+  decade_sym = decade.to_s.to_sym
+  decades[decade_sym] ||= {
+    name: decade.to_s,
+    years: []
+  } 
+  decades[decade_sym][:years] << year
+end
+%>
+alumni: 
+  total: <%= @website.alumni.count %>
+  years:
+<%= render 'admin/application/static/hugo/collection',
+            key: :list,
+            collection: years,
+            language: language,
+            depth: 2 %>
+    decades:
+<% decades.each do |key, value|
+  name = value[:name]
+  years = value[:years]
+  next if years.none?
+  %>
+      - name: >-
+          <%= name %>'
+<%= render 'admin/application/static/hugo/collection',
+            key: :years,
+            collection: years,
+            language: language,
+            depth: 4 %>
+<% end %>
+<%= render 'admin/application/static/hugo/collection',
+            key: :programs,
+            collection: programs,
+            language: language,
+            depth: 1 %>
+  taxonomies:
+<% taxonomies.each do |taxonomy| %>
+  <% 
+    taxonomy_l10n = taxonomy.localization_for(language) 
+    taxonomy_total = 0
+  %>
+    - title: >-
+        <%= prepare_text_for_static taxonomy_l10n.to_s %>
+      slug: <%= taxonomy_l10n.slug %>
+      children:
+<% @website.university.person_categories.in_taxonomy(taxonomy).ordered.each do |person_category| %>
+  <% 
+    person_category_l10n = person_category.localization_for(language) 
+    category_total = @website.alumni.for_category(person_category).count
+    taxonomy_total += category_total
+  %>
+        - title: >-
+            <%= prepare_text_for_static person_category_l10n.to_s %>
+          slug: <%= person_category_l10n.slug %>
+          total: <%= category_total %>
+<% end %>
+      total: <%= taxonomy_total %>
+<% end %>
