@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_24_090328) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_24_115043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -2109,6 +2109,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_090328) do
     t.float "longitude"
     t.string "migration_identifier"
     t.uuid "created_by_id"
+    t.string "bodyclass"
     t.index ["created_by_id"], name: "index_university_organizations_on_created_by_id"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
@@ -2144,6 +2145,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_090328) do
     t.integer "phone_personal_visibility", default: 0
     t.integer "email_visibility", default: 0
     t.uuid "created_by_id"
+    t.string "bodyclass"
     t.index ["created_by_id"], name: "index_university_people_on_created_by_id"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
