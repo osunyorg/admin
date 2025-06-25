@@ -1,0 +1,19 @@
+<% exhibitions = osuny_collection(
+              block.about.website.exhibitions,
+              localized: true,
+              label_method: :to_s_with_subtitle
+            ) %>
+<label  class="form-label <%= 'visually-hidden' if label.blank? %>"
+        :for="<%= dom_id.html_safe %>">
+  <%= label %>
+</label>
+<select :id="<%= dom_id.html_safe %>"
+        class="form-select select"
+        v-model="<%= model %>.<%= property %>">
+  <% if placeholder %>
+    <option value="" disabled><%= placeholder %></option>
+  <% end %>
+  <% exhibitions.each do |exhibition| %>
+    <option value="<%= exhibition.last %>"><%= exhibition.first %></option>
+  <% end %>
+</select>

@@ -783,7 +783,7 @@ en:
     communication:
       block:
         template_kind:
-          agenda: Agenda
+          agenda: Events
           call_to_action: Call to action
           categories: Categories
           chapter: Chapter
@@ -791,6 +791,7 @@ en:
           datatable: Table
           definitions: Definitions
           embed: HTML embed
+          exhibitions: Exhibitions
           features: Features
           files: Files
           gallery: Gallery
