@@ -53,12 +53,14 @@
           </div>
           <div class="col-lg-6">
             <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
+            <%= f.input :bodyclass, label: t('admin.bodyclass') %>
           </div>
         </div>
       </div>
     </div>
     <% content_for :action_bar_right do %>
       <%= cancel [:admin, organization] %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: @l10n %>
       <%= submit f %>
     <% end %>
   <% end %>

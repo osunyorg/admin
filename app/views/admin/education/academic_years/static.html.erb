@@ -1,7 +1,7 @@
 <%
 academic_year = @l10n.about
 language = @l10n.language
-%>
+%>---
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
@@ -12,3 +12,4 @@ language = @l10n.language
             key: :cohorts,
             collection: academic_year.cohorts.ordered(language),
             language: language %>
+---
