@@ -6,6 +6,7 @@
 #  address                       :string
 #  address_visibility            :integer          default("private")
 #  birthdate                     :date
+#  bodyclass                     :string
 #  city                          :string
 #  country                       :string
 #  email                         :string
