@@ -289,7 +289,7 @@ fr:
           exhibitions:
             description: Une liste d'expositions qui s'étendent sur de longues périodes de temps.
             edit:
-              add_event: Ajouter une exposition
+              add_exhibition: Ajouter une exposition
               category_id:
                 label: Catégorie
                 placeholder: Sélectionner une catégorie

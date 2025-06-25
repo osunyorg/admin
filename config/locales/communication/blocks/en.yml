@@ -286,6 +286,49 @@ en:
                 label: Iframe title (mandatory for accessibility)
                 placeholder: Enter the title
               warning: Beware, the code below is used as is, without any security filtering. Be extremely careful and never integrate possibly unreliable code.
+          exhibitions:
+            description: A list of exhibitions, lasting a long time.
+            edit:
+              add_exhibition: Add an exhibition
+              category_id:
+                label: Category
+                placeholder: Select a category
+              description:
+                label: Description
+              element:
+                id:
+                  label: ''
+                  placeholder: Choose exhibition
+              mode:
+                label: Which exhibitions should be presented?
+                options:
+                  all: All exhibitions, regardless of category
+                  category: A specific category of exhibitions
+                  selection: A selection of exhibitions
+              no_event_message:
+                label: Sentence to be displayed if there is no exhibition
+                placeholder: Enter the desired sentence
+              quantity:
+                label: Quantity of exhibitions to show
+                placeholder: Enter quantity
+              time:
+                label: What exhibition dates should be displayed?
+                options:
+                  archive: Past (archives)
+                  current: Running now
+                  future: In the future, not started yet
+                  future_or_current: Now and in the future
+            layouts:
+              grid:
+                description: Exhibitions are presented as a grid, from left to right and top to bottom, with constant size cropped images.
+                label: Grid
+              large:
+                description: Each exhibition is presented in majesty, across the full width available, with a large image.
+                label: Large
+                more: Show more
+              list:
+                description: A list of exhibitions with days, small images, all the same width.
+                label: List
           features:
             description: A list of features with images (often icons) and a description.
             edit:
