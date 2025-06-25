@@ -3,7 +3,7 @@
 # Table name: communication_website_git_files
 #
 #  id                :uuid             not null, primary key, indexed => [website_id]
-#  about_type        :string           not null, indexed => [about_id]
+#  about_type        :string           indexed => [about_id]
 #  current_path      :string
 #  current_sha       :string
 #  desynchronized    :boolean          default(TRUE)
@@ -12,8 +12,8 @@
 #  previous_sha      :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  about_id          :uuid             not null, indexed => [about_type]
-#  university_id     :uuid             not null, indexed
+#  about_id          :uuid             indexed => [about_type]
+#  university_id     :uuid             indexed
 #  website_id        :uuid             not null, indexed => [id]
 #
 # Indexes
@@ -35,7 +35,7 @@ class Communication::Website::GitFile < ApplicationRecord
 
   belongs_to :university
   belongs_to :website, class_name: 'Communication::Website'
-  belongs_to :about, polymorphic: true
+  belongs_to :about, polymorphic: true, optional: true
 
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }

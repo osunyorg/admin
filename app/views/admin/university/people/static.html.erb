@@ -1,6 +1,6 @@
 <%
 # this version has to be incremented every time you change something in the file, to invalidate the cache
-version = 8
+version = 9
 person = @l10n.about
 university = person.university
 language = @l10n.language
@@ -71,8 +71,10 @@ roles:
 teachings:
 <% person.involvements_as_teacher.each do |involvement|
     involvement_l10n = involvement.best_localization_for(language)
+    next if involvement_l10n.nil?
     program = involvement.target
     program_l10n = program.best_localization_for(language)
+    next if program_l10n.nil?
     hugo = program_l10n.hugo(@website)
     next if hugo.file.blank?
     %>
@@ -91,8 +93,10 @@ teachings:
 administrative_missions:
 <% person.roles_as_administrator.each do |role|
     role_l10n = role.best_localization_for(language)
+    next if role_l10n.nil?
     target = role.target
     target_l10n = target.best_localization_for(language)
+    next if target_l10n.nil?
     hugo = target_l10n.hugo(@website)
     next if hugo.file.blank?
     %>
@@ -109,8 +113,9 @@ administrative_missions:
 <% end %>
 cohorts:
 <% person.cohorts.each do |cohort|%>
-  <% 
+  <%
     cohort_l10n = cohort.best_localization_for(language)
+    next if cohort_l10n.nil?
     hugo = cohort_l10n.hugo(@website)
     next if hugo.file.blank?
   %>

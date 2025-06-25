@@ -1,4 +1,8 @@
 <% content_for :title, t('admin.communication.extranet.confirm_localization.title') %>
+<%
+cancel_path_method = "admin_#{@about.class.base_class.to_s.parameterize.underscore}_path"
+cancel_path = public_send(cancel_path_method, { id: @about.id, lang: @about.original_localization.language })
+%>
 
 <p>
   <%= t('admin.communication.extranet.confirm_localization.text_html',
@@ -8,7 +12,7 @@
 </p>
 
 <%= link_to t('cancel'),
-            [:admin, @about, lang: @about.original_localization.language],
+            cancel_path,
             class: button_classes %>
 
 <%= link_to t('confirm'),

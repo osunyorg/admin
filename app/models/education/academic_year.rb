@@ -41,6 +41,8 @@ class Education::AcademicYear < ApplicationRecord
 
   validates :year, numericality: { only_integer: true, greater_than: 0 }
 
+  after_create_commit :create_localizations
+
   scope :ordered, -> (language = nil) { order(year: :desc) }
 
   def cohorts_in_context(context)
@@ -52,13 +54,24 @@ class Education::AcademicYear < ApplicationRecord
     return University::Person.none unless context.respond_to?(:alumni)
     people.where(id: context.alumni.pluck(:id))
   end
-  
+
   def dependencies
     localizations
   end
 
   def to_s
     "#{year}"
+  end
+
+  protected
+
+  def create_localizations
+    university.languages.each do |language|
+      localizations.where(
+        university: university,
+        language: language
+      ).first_or_create
+    end
   end
 
 end

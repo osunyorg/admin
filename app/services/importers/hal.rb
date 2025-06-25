@@ -4,6 +4,7 @@ module Importers
     # https://api.archives-ouvertes.fr/search/?q=03713859&fl=*
     def self.import_publications_for_author(author)
       fields = [
+        # '*',
         'docid',
         'title_s',
         'citationRef_s',
@@ -18,8 +19,8 @@ module Importers
         'authFullName_s',
         'authLastName_s',
         'authFirstName_s',
+        'anrProjectReference_s',
         'files_s'
-        # '*',
       ]
       publications = []
       response = HalOpenscience::Document.search "authIdFormPerson_s:#{author.docid}", fields: fields, limit: 1000
@@ -46,6 +47,13 @@ module Importers
       publication.journal_title = doc.attributes['journalTitle_s']
       publication.file = doc.attributes['files_s']&.first
       publication.authors_list = doc.attributes['authFullName_s'].join(', ')
+      add_authors_citeproc(doc, publication)
+      add_anr_project_references(doc, publication)
+      publication.save
+      publication
+    end
+    
+    def self.add_authors_citeproc(doc, publication)
       publication.authors_citeproc = []
       doc.attributes['authLastName_s'].each_with_index do |last_name, index|
         publication.authors_citeproc << {
@@ -53,8 +61,11 @@ module Importers
           "given" => doc.attributes['authFirstName_s'][index]
         }
       end
-      publication.save
-      publication
+    end
+
+    def self.add_anr_project_references(doc, publication)
+      return unless doc.attributes['anrProjectReference_s'].present?
+      publication.anr_project_references = doc.attributes['anrProjectReference_s']
     end
 
   end
