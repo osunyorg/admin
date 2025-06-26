@@ -41,8 +41,7 @@ class Education::School::Localization < ApplicationRecord
   validates :logo, size: { less_than: 1.megabytes }
 
   def git_path(website)
-    return unless for_website?(website)
-    "#{git_path_content_prefix(website)}schools/#{slug}.html"
+    "data/school.yml"
   end
 
   def template_static
