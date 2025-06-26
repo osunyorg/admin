@@ -53,7 +53,10 @@ class Administration::Location < ApplicationRecord
 
   def dependencies
     localizations +
-    programs +
+    programs
+  end
+
+  def references
     schools
   end
 
