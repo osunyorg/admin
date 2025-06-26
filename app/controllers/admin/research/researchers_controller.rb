@@ -19,6 +19,9 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
     @papers =  @researcher.research_journal_papers
                           .ordered(current_language)
                           .page(params[:page])
+    @publications = @researcher.publications
+                               .ordered
+                               .page(params[:publications_page])
     @hal_authors_with_same_name = Research::Hal::Author.import_from_hal @l10n.to_s
     breadcrumb
     add_breadcrumb @l10n
