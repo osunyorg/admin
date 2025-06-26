@@ -8,13 +8,7 @@ class Api::Osuny::Communication::MediasController < Api::Osuny::ApplicationContr
   end
 
   def create
-    Communication::Media.transaction do
-      @media = Communication::Media.create_from_blob(@blob)
-      @media.localizations.where(language_id: current_university.default_language_id).first_or_create(
-        name: File.basename(@media.original_filename, ".*").humanize
-      )
-    end
-
+    @media = Communication::Media.create_from_blob(@blob)
     if @media.persisted?
       render :show, status: :created
     else
@@ -33,7 +27,7 @@ class Api::Osuny::Communication::MediasController < Api::Osuny::ApplicationContr
 
   def create_blob_from_url
     begin
-      uri = URI.parse(url)
+      uri = URI.parse(params[:url])
       @blob = ActiveStorage::Blob.create_and_upload!(
         io: URI.open(uri),
         filename: File.basename(uri.path)
