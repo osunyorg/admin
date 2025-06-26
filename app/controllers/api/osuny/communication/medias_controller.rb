@@ -27,9 +27,9 @@ class Api::Osuny::Communication::MediasController < Api::Osuny::ApplicationContr
 
   def create_blob_from_url
     begin
-      uri = URI.parse(params[:url])
+      uri = URI(params[:url])
       @blob = ActiveStorage::Blob.create_and_upload!(
-        io: URI.open(uri),
+        io: uri.open,
         filename: File.basename(uri.path)
       )
       @blob.update_column :university_id, current_university.id
