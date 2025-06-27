@@ -20,6 +20,10 @@ class Video::ProviderTest < ActiveSupport::TestCase
     provider = Video::Provider.find('https://youtu.be/sN8Cq5HEBug')
     assert_equal Video::Provider::Youtube, provider.class
     assert "www.youtube.com".in?(provider.csp_domains)
+    # Channels cannot be embedded!
+    provider = Video::Provider.find('https://www.youtube.com/@reguletapub')
+    assert_equal Video::Provider::Youtube, provider.class
+    assert_equal 'reguletapub', provider.identifier
   end
 
   def test_dailymotion

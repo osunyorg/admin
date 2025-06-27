@@ -6,6 +6,8 @@ class Ability::Author < Ability
     can :create, Communication::Website::Agenda::Event, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Agenda::Exhibition, university_id: @user.university_id, id: managed_agenda_exhibition_ids
     can :create, Communication::Website::Agenda::Exhibition, university_id: @user.university_id, communication_website_id: managed_websites_ids
+    can :manage, Communication::Website::Jobboard::Job, university_id: @user.university_id, id: managed_jobboard_job_ids
+    can :create, Communication::Website::Jobboard::Job, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Portfolio::Project, university_id: @user.university_id, id: managed_portfolio_project_ids
     can :create, Communication::Website::Portfolio::Project, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Post, university_id: @user.university_id, id: managed_post_ids
@@ -14,13 +16,7 @@ class Ability::Author < Ability
     can :create, University::Organization, university_id: @user.university_id
     can :manage, University::Person, university_id: @user.university_id, id: managed_person_ids
     can :create, University::Person, university_id: @user.university_id
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Exhibition::Localization', about_id: managed_agenda_exhibition_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Portfolio::Project::Localization', about_id: managed_portfolio_project_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post::Localization', about_id: managed_post_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Organization::Localization', about_id: managed_organization_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: managed_person_localization_ids
-    can :create, Communication::Block
+    manage_blocks
     can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, User::Favorite, user_id: @user
     can :manage, Communication::Media, university_id: @user.university_id
@@ -28,6 +24,17 @@ class Ability::Author < Ability
   end
 
   protected
+
+  def manage_blocks
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Exhibition::Localization', about_id: managed_agenda_exhibition_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Jobboard::Job::Localization', about_id: managed_jobboard_job_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Portfolio::Project::Localization', about_id: managed_portfolio_project_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post::Localization', about_id: managed_post_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Organization::Localization', about_id: managed_organization_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: managed_person_localization_ids
+    can :create, Communication::Block
+  end
 
   def managed_agenda_event_ids
     @managed_agenda_event_ids ||= Communication::Website::Agenda::Event
@@ -58,6 +65,22 @@ class Ability::Author < Ability
   def managed_agenda_exhibition_localization_ids
     @managed_agenda_exhibition_localization_ids ||= Communication::Website::Agenda::Exhibition::Localization
                                                 .where(about_id: managed_agenda_exhibition_ids)
+                                                .pluck(:id)
+  end
+
+  def managed_jobboard_job_ids
+    @managed_jobboard_job_ids ||= Communication::Website::Jobboard::Job
+                                    .where(
+                                      university_id: @user.university_id,
+                                      communication_website_id: managed_websites_ids,
+                                      created_by_id: @user.id
+                                    )
+                                    .pluck(:id)
+  end
+
+  def managed_jobboard_job_localization_ids
+    @managed_jobboard_job_localization_ids ||= Communication::Website::Jobboard::Job::Localization
+                                                .where(about_id: managed_jobboard_job_ids)
                                                 .pluck(:id)
   end
 

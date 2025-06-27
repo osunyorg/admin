@@ -538,6 +538,8 @@ fr:
                   category: Une catégorie spécifique de pages
                   children: La page principale et ses enfants
                   selection: Une sélection spécifique de pages
+              option_categories:
+                label: Afficher les catégories
               option_image:
                 label: Afficher les images des pages
               option_main_summary:
