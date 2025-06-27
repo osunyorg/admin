@@ -1,0 +1,18 @@
+<% if block.template.selected_jobs.any? %>
+  <% block.template.selected_jobs.each do |job|
+      l10n = job.localization_for(block.about.language)
+      next if l10n.nil?
+      %>
+    <div>
+      <p>
+        <%= l10n.title %>
+      </p>
+      <p class="small">
+        <%= l10n.summary %>
+      </p>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p><%= block.template.no_job_message %></p>
+<% end %>
