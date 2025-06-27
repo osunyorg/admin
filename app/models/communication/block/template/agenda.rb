@@ -54,7 +54,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def allowed_for_about?
-    website.present?
+    website.present? && website.events.any?
   end
 
   def children

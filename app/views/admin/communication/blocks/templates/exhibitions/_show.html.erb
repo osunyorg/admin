@@ -1,0 +1,99 @@
+<% heading_level = block.heading_rank_children %>
+
+<div class="<%= block_html_class(block) %>">
+  <div class="container">
+    <div class="block-content">
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
+
+      <div class="exhibitions exhibitions--<%= block.template.layout %>">
+        <% block.template.selected_exhibitions.each do |event|
+          next if event.nil?
+          event_l10n = event.localization_for(block.language)
+          event_link = event_l10n.current_permalink_url_in_website(@website) || '#'
+        %>
+          <article class="event <% if event_l10n.featured_image.attached? %>event--with-image<% end %>" itemscope itemtype="https://schema.org/Event">
+            <div class="event-content">
+              <% if event_l10n.subtitle %>
+                <hgroup>
+              <% end %>
+              <h<%= heading_level %>  itemprop='headline' class='location-title'>
+                <%= link_to event_l10n, event_link %>
+              </h<%= heading_level %>>
+              <% if event_l10n.subtitle %>
+                <p class="event-subtitle"><%= event_l10n.subtitle %></p>
+                </hgroup>
+              <% end %>
+              <%
+                computed_short_date = date_range_i18n(event.from_day, event.to_day, format: :short, locale: block.language.iso_code)
+                computed_short_two_lines_date = date_range_i18n(event.from_day, event.to_day, format: :short, layout: :two_lines, locale: block.language.iso_code)
+                from_hour = event.from_hour ? event.from_hour.strftime("%H:%M") : nil
+                to_hour = event.to_hour ? event.to_hour.strftime("%H:%M") : nil
+              %>
+              <% if computed_short_date || computed_short_two_lines_date || from_hour || to_hour %>
+                <div class="event-dates" itemprop="startDate" content="<%= "#{event.from_day}#{from_hour}" %>">
+                  <span>
+                    <% date_format = computed_short_two_lines_date %>
+                    <% if block.template.layout != "list" %>
+                      <% date_format = computed_short_date %>
+                    <% end %>
+                    <span><%= date_format %></span>
+                  </span>
+                  <% if from_hour || to_hour %>
+                    <div class="event-time">
+                      <% if from_hour %>
+                        <span><%= from_hour %></span>
+                      <% end %>
+                      <% if to_hour %>
+                        <span><%= to_hour %></span>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+              <% if event.status.present? && block.template.option_status %>
+                <p class="event-status">
+                  <% if event.status == "current" %>
+                    <%= t 'admin.communication.blocks.templates.agenda.time.options.current' %>
+                  <% elsif event.status == "future" %>
+                    <%= t 'admin.communication.blocks.templates.agenda.time.options.future' %>
+                  <% elsif event.status == "archive" %>
+                    <%= t 'admin.communication.blocks.templates.agenda.time.options.archive' %>
+                  <% end %>
+                </p>
+              <% end %>
+
+              <% if block.template.option_summary && event_l10n.summary.present? %>
+                <div class="event-description">
+                  <p itemprop="description">
+                    <%= event_l10n.summary %>
+                  </p>
+                  <% if block.template.layout == "large" %>
+                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.agenda.layouts.large.more' %></p>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <% if event.categories.present? && block.template.option_categories %>
+                <p class="event-categories">
+                  <% event.categories.each do |category| %>
+                    <%
+                      category_l10n = category.localization_for(block.language)
+                      next if category_l10n.nil?
+                      category_link = category_l10n.current_permalink_url_in_website(@website) || '#'
+                    %>
+                    <span><%= link_to category_l10n, category_link %></span>
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+            <div class="media">
+              <% if event_l10n.featured_image.attached? %>
+                <%= kamifusen_tag event_l10n.featured_image %>
+              <% end %>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
