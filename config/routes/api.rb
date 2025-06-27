@@ -6,6 +6,7 @@ namespace :api do
   # v1
   namespace :osuny, path: 'osuny/v1', defaults: { format: :json } do
     namespace :communication do
+      resources :medias, only: :create
       resources :websites, only: [:index, :show] do
         namespace :agenda do
           resources :categories, controller: '/api/osuny/communication/websites/agenda/categories', only: [:index, :show, :create, :update, :destroy] do

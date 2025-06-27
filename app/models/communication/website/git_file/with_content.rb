@@ -51,7 +51,7 @@ module Communication::Website::GitFile::WithContent
   end
 
   def path_up_to_date?
-    current_path == previous_path
+    current_path == computed_path
   end
 
   def content_up_to_date?
