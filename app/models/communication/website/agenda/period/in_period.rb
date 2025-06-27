@@ -33,6 +33,8 @@ module Communication::Website::Agenda::Period::InPeriod
     before_save :touch_periods
     after_save :create_periods
 
+    after_destroy :check_if_year_should_be_deleted
+
     validates :from_day, presence: true
     validate  :year_is_a_four_digit_number,
               :to_day_after_from_day,
@@ -132,6 +134,10 @@ module Communication::Website::Agenda::Period::InPeriod
     save_month(day_after_change)
     different_months = (day_after_change&.strftime('%Y%m') != day_before_change&.strftime('%Y%m'))
     save_month(day_before_change) if different_months
+  end
+
+  def check_if_year_should_be_deleted
+    Communication::Website::Agenda::CheckYearJob.perform_later(website, from_day)
   end
 
   def touch_day(date)
