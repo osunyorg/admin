@@ -8,18 +8,20 @@ class Video::Provider::Youtube < Video::Provider::Default
     'www.youtube-nocookie.com',
   ]
 
+  STRATEGIES = [
+    :share,
+    :live,
+    :embed,
+    :short,
+    :channel
+  ]
+
   def identifier
-    if share_url?
-      param_from_share_url
-    elsif live_url?
-      param_from_live_url
-    elsif embed_url?
-      param_from_embed_url
-    elsif short_url?
-      param_from_short_url
-    else
-      param_from_regular_url
+    STRATEGIES.each do |strategy|
+      should_use_strategy = send("#{strategy}_url?")
+      return send("param_from_#{strategy}_url") if should_use_strategy
     end
+    param_from_default_url
   end
 
   def csp_domains
@@ -67,6 +69,10 @@ class Video::Provider::Youtube < Video::Provider::Default
     video_url.include?('/shorts/')
   end
 
+  def channel_url?
+    video_url.include?('/@')
+  end
+
   # https://youtu.be/1yayRw5JEhk
   def param_from_share_url
     video_url.split('youtu.be/').last
@@ -91,8 +97,16 @@ class Video::Provider::Youtube < Video::Provider::Default
              .split('?').first
   end
 
+  # https://www.youtube.com/@reguletapub
+  # Channels cannot be embedded
+  def param_from_channel_url
+    uri = URI(video_url)
+    uri.path.remove('/@')
+            .split('?').first
+  end
+
   # youtube.com, www.youtube.com
-  def param_from_regular_url
+  def param_from_default_url
     uri = URI(video_url)
     params = CGI::parse(uri.query)
     params['v'].first
