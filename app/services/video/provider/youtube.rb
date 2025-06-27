@@ -17,6 +17,8 @@ class Video::Provider::Youtube < Video::Provider::Default
       param_from_embed_url
     elsif short_url?
       param_from_short_url
+    elsif channel_url?
+      param_from_channel_url
     else
       param_from_regular_url
     end
@@ -67,6 +69,10 @@ class Video::Provider::Youtube < Video::Provider::Default
     video_url.include?('/shorts/')
   end
 
+  def channel_url?
+    video_url.include?('/@')
+  end
+
   # https://youtu.be/1yayRw5JEhk
   def param_from_share_url
     video_url.split('youtu.be/').last
@@ -89,6 +95,14 @@ class Video::Provider::Youtube < Video::Provider::Default
   def param_from_short_url
     video_url.split('/shorts/').last
              .split('?').first
+  end
+
+  # https://www.youtube.com/@reguletapub
+  # Channels cannot be embedded
+  def param_from_channel_url
+    uri = URI(video_url)
+    uri.path.remove('/@')
+            .split('?').first
   end
 
   # youtube.com, www.youtube.com
