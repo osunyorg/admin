@@ -16,6 +16,16 @@ class Ability::Author < Ability
     can :create, University::Organization, university_id: @user.university_id
     can :manage, University::Person, university_id: @user.university_id, id: managed_person_ids
     can :create, University::Person, university_id: @user.university_id
+    manage_blocks
+    can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
+    can :manage, User::Favorite, user_id: @user
+    can :manage, Communication::Media, university_id: @user.university_id
+    cannot :destroy, Communication::Website
+  end
+
+  protected
+
+  def manage_blocks
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Exhibition::Localization', about_id: managed_agenda_exhibition_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Jobboard::Job::Localization', about_id: managed_jobboard_job_localization_ids
@@ -24,13 +34,7 @@ class Ability::Author < Ability
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Organization::Localization', about_id: managed_organization_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: managed_person_localization_ids
     can :create, Communication::Block
-    can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
-    can :manage, User::Favorite, user_id: @user
-    can :manage, Communication::Media, university_id: @user.university_id
-    cannot :destroy, Communication::Website
   end
-
-  protected
 
   def managed_agenda_event_ids
     @managed_agenda_event_ids ||= Communication::Website::Agenda::Event
