@@ -173,6 +173,8 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def create_periods
+    return unless is_a?(Communication::Website::Agenda::Event) ||
+                  is_a?(Communication::Website::Agenda::Event::TimeSlot)
     Communication::Website::Agenda::CreatePeriodsJob.perform_later(self)
   end
 end
