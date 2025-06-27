@@ -5,6 +5,8 @@ class Ability::ProgramManager < Ability
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_event_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Exhibition::Localization', about_id: managed_exhibition_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Category::Localization', about_id: managed_agenda_category_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Jobboard::Job::Localization', about_id: managed_job_localization_ids
+    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Jobboard::Category::Localization', about_id: managed_jobboard_category_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post::Localization', about_id: managed_post_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post::Category::Localization', about_id: managed_post_category_localization_ids
     can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Education::Program::Localization', about_id: managed_program_localization_ids
@@ -15,6 +17,8 @@ class Ability::ProgramManager < Ability
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Exhibition, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Category, id: managed_agenda_category_ids
+    can :manage, Communication::Website::Jobboard::Job, university_id: @user.university_id
+    can :manage, Communication::Website::Jobboard::Category, id: managed_jobboard_category_ids
     can :manage, Communication::Website::Post, university_id: @user.university_id
     can :manage, Communication::Website::Post::Category, id: managed_post_category_ids
     can :manage, Education::Program, id: managed_programs_ids
@@ -46,6 +50,14 @@ class Ability::ProgramManager < Ability
     end
   end
 
+  def managed_job_localization_ids
+    @managed_job_localization_ids ||= begin
+      Communication::Website::Jobboard::Job::Localization
+        .where(university_id: @user.university_id)
+        .pluck(:id)
+    end
+  end
+
   def managed_post_localization_ids
     @managed_post_localization_ids ||= begin
       Communication::Website::Post::Localization
@@ -60,6 +72,14 @@ class Ability::ProgramManager < Ability
 
   def managed_agenda_category_localization_ids
     @managed_agenda_category_localization_ids ||= Communication::Website::Agenda::Category::Localization.where(about_id: managed_agenda_category_ids).pluck(:id)
+  end
+
+  def managed_jobboard_category_ids
+    @managed_jobboard_category_ids ||= Communication::Website::Jobboard::Category.where(university_id: @user.university_id, program_id: managed_programs_ids).pluck(:id)
+  end
+
+  def managed_jobboard_category_localization_ids
+    @managed_jobboard_category_localization_ids ||= Communication::Website::Jobboard::Category::Localization.where(about_id: managed_jobboard_category_ids).pluck(:id)
   end
 
   def managed_post_category_ids
@@ -85,8 +105,6 @@ class Ability::ProgramManager < Ability
   def managed_program_category_localization_ids
     @managed_program_category_localization_ids ||= Education::Program::Category::Localization.where(about_id: managed_program_category_ids).pluck(:id)
   end
-
-
 
   def managed_person_localization_ids
     @managed_person_localization_ids ||= begin
