@@ -65,8 +65,6 @@ class Communication::Website::Agenda::Period::Day::Localization < ApplicationRec
     I18n.localize(date, locale: language.iso_code, format: '%A').humanize
   end
 
-  protected
-
   def denormalize_events_count
     count = events.count + time_slots.count
     self.update_column :events_count, count

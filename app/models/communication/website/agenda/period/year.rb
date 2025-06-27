@@ -74,6 +74,11 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
     )
   end
 
+  def destroy_if_empty
+    no_events = localizations.all?(&:no_events?)
+    destroy if no_events
+  end
+
   protected
 
   def create_months
