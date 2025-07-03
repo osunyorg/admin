@@ -5,9 +5,11 @@
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
 #  from_day                 :date
+#  from_hour                :time
 #  migration_identifier     :string
 #  time_zone                :string
 #  to_day                   :date
+#  to_hour                  :time
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  communication_website_id :uuid             not null, indexed
