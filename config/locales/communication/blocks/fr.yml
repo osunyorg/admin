@@ -478,6 +478,9 @@ fr:
               grid:
                 description: Une série de logos carrés, avec le nom de chaque organisation.
                 label: Grille
+              large:
+                description: Chaque organisation est présentée en majesté, sur toute la largeur disponible avec une grande image.
+                label: Grand
               map:
                 description: Une carte géographique avec un repère pour chaque organisation dont l'adresse est connue.
                 label: Carte

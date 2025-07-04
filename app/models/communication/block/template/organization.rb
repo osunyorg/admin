@@ -1,7 +1,11 @@
 class Communication::Block::Template::Organization < Communication::Block::Template::Base
 
   has_elements
-  has_layouts [:grid, :map]
+  has_layouts [
+    :grid,
+    :large,
+    :map
+  ]
   has_component :mode, :option, options: [
     :selection,
     :category

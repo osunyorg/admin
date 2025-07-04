@@ -17,7 +17,7 @@
         </div>
         <div class="flex-fill">
           <div class="row">
-            <div class="col-md-6 mb-n2">
+            <div class="col-sm-6 mb-n2">
               <%= block_component_edit block, :id, template: @element, label: '', class: 'mt-5' %>
             </div>
             <div class="col-sm-6">
@@ -25,11 +25,11 @@
             </div>
           </div>
           <div class="row" v-if="!element.id">
-            <div class="col-md-6">
+            <div class="col-sm-6">
               <%= block_component_edit block, :name, template: @element %>
               <%= block_component_edit block, :url, template: @element %>
             </div>
-            <div class="col-md-6">
+            <div class="col-sm-6">
               <%= block_component_edit block, :logo, template: @element %>
             </div>
           </div>
