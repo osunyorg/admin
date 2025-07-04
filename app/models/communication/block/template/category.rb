@@ -35,6 +35,8 @@ class Communication::Block::Template::Category < Communication::Block::Template:
     case category_kind.to_sym
     when :agenda
       website&.agenda_categories
+    when :jobs
+      website&.jobboard_categories
     when :locations
       # No category yet
     when :organizations
