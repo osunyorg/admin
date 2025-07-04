@@ -45,4 +45,8 @@ class Communication::Website::Agenda::Period::Day < ApplicationRecord
       value: value + 1
     )
   end
+
+  def denormalize_localizations_events_count
+    localizations.find_each(&:denormalize_events_count)
+  end
 end
