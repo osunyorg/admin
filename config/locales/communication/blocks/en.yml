@@ -508,6 +508,9 @@ en:
               grid:
                 description: Square logos and a simple text below.
                 label: Grid
+              large:
+                description: Each organization is presented in majesty, across the full width available, with a large image.
+                label: Grand
               map:
                 description: A geographic map, with a pin for every organization with a known location.
                 label: Map
