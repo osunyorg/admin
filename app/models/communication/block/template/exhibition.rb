@@ -111,7 +111,7 @@ class Communication::Block::Template::Exhibition < Communication::Block::Templat
 
   def selected_exhibitions_selection
     elements.map { |element|
-      element.event
+      element.exhibition
     }.compact
   end
 
