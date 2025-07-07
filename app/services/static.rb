@@ -5,6 +5,7 @@ class Static
     "\u008d", # https://github.com/osunyorg/lacriee-site/actions/runs/9242403369
     "\u009D",
     "\u0090", # https://github.com/osunyorg/marionrebier-beelearning/actions/runs/11340775264
+    "\u0093", # https://github.com/osunyorg/jjbirge-jean-jacques-birge-le-blog/actions/runs/16069805347
   ]
   def self.clean_path(path)
     path += '/' unless path.end_with? '/'
