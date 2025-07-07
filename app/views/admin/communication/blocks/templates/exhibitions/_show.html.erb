@@ -11,7 +11,7 @@
           exhibition_l10n = exhibition.localization_for(block.language)
           exhibition_link = exhibition_l10n.current_permalink_url_in_website(@website) || '#'
         %>
-          <article class="exhibition <% if exhibition_l10n.featured_image.attached? %>exhibition--with-image<% end %>" itemscope itemtype="https://schema.org/Event">
+          <article class="exhibition <% if exhibition_l10n.featured_image.attached? %>exhibition--with-image<% end %>" itemscope itemtype="https://schema.org/ExhibitionEvent">
             <div class="exhibition-content">
               <% if exhibition_l10n.subtitle %>
                 <hgroup>
@@ -41,11 +41,11 @@
               <% if exhibition.status.present? && block.template.option_status %>
                 <p class="exhibition-status">
                   <% if exhibition.status == "current" %>
-                    <%= t 'admin.communication.blocks.templates.agenda.time.options.current' %>
+                    <%= t 'admin.communication.blocks.templates.exhibitions.time.options.current' %>
                   <% elsif exhibition.status == "future" %>
-                    <%= t 'admin.communication.blocks.templates.agenda.time.options.future' %>
+                    <%= t 'admin.communication.blocks.templates.exhibitions.time.options.future' %>
                   <% elsif exhibition.status == "archive" %>
-                    <%= t 'admin.communication.blocks.templates.agenda.time.options.archive' %>
+                    <%= t 'admin.communication.blocks.templates.exhibitions.time.options.archive' %>
                   <% end %>
                 </p>
               <% end %>
@@ -56,7 +56,7 @@
                     <%= exhibition_l10n.summary %>
                   </p>
                   <% if block.template.layout == "large" %>
-                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.agenda.layouts.large.more' %></p>
+                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.exhibitions.layouts.large.more' %></p>
                   <% end %>
                 </div>
               <% end %>
