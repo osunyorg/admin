@@ -33,7 +33,7 @@ module Communication::Website::Agenda::Period::InPeriod
     before_save :touch_periods
     after_save :create_periods
 
-    after_destroy :check_if_year_should_be_deleted
+    after_destroy :mark_years_as_needing_recheck
 
     validates :from_day, presence: true
     validate  :year_is_a_four_digit_number,
@@ -79,7 +79,25 @@ module Communication::Website::Agenda::Period::InPeriod
     (Date.today - from_day).to_i.abs
   end
 
+  def from_year
+    return if from_day.nil?
+    @from_year ||= year_for(from_day.year)
+  end
+
+  def to_year
+    return if to_day.nil?
+    @to_year ||= year_for(to_day.year)
+  end
+
   protected
+
+  def year_for(value)
+    Communication::Website::Agenda::Period::Year.find_by(
+      university: university,
+      website: website,
+      value: value
+    )
+  end
 
   def set_time_zone
     self.time_zone = website.default_time_zone if respond_to?(:time_zone=) && self.time_zone.blank?
@@ -136,10 +154,6 @@ module Communication::Website::Agenda::Period::InPeriod
     save_month(day_before_change) if different_months
   end
 
-  def check_if_year_should_be_deleted
-    Communication::Website::Agenda::CheckYearJob.perform_later(website, from_day)
-  end
-
   def touch_day(date)
     return if date.nil?
     Communication::Website::Agenda::Period::Day.find_by(
@@ -150,20 +164,12 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def save_year(year_value)
-    Communication::Website::Agenda::Period::Year.find_by(
-      university: university,
-      website: website,
-      value: year_value
-    )&.save
+    year_for(year_value)&.save
   end
 
   def save_month(date)
     return if date.nil?
-    year = Communication::Website::Agenda::Period::Year.find_by(
-      university: university,
-      website: website,
-      value: date.year
-    )
+    year = year_for(date.year)
     Communication::Website::Agenda::Period::Month.find_by(
       university: university,
       website: website,
@@ -173,8 +179,17 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def create_periods
+    # Not for:
+    # Communication::Website::Agenda::Exhibition
+    # Communication::Website::Agenda::Event::Day
     return unless is_a?(Communication::Website::Agenda::Event) ||
                   is_a?(Communication::Website::Agenda::Event::TimeSlot)
     Communication::Website::Agenda::CreatePeriodsJob.perform_later(self)
+  end
+
+  def mark_years_as_needing_recheck
+    from_year&.needs_recheck!
+    # le if sert à économiser un update_column
+    to_year&.needs_recheck! if to_year != from_year
   end
 end
