@@ -73,7 +73,7 @@ related_categories:
   end
 end
 %>
-<% if @website && @website.feature_alumni %>
+<% if @website && @website.feature_alumni? %>
 <%= render 'admin/application/static/hugo/collection',
             key: :cohorts,
             collection: @website.cohorts
