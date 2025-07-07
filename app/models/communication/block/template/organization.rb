@@ -3,7 +3,7 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   has_elements
   has_layouts [
     :grid,
-    :large,
+    # :large,
     :map
   ]
   has_component :mode, :option, options: [
@@ -22,7 +22,7 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   def allowed_for_about?
     !about.respond_to?(:extranet)
   end
-  
+
   def elements
     if alphabetical
       @elements.sort_by! do |element|
