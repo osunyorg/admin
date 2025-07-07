@@ -1,13 +1,8 @@
 <%= block_component_static block, :mode %>
-      kinds:
-        parent: <%= block.template.kind_parent %>
-        child: <%= block.template.kind_child %>
-        recurring: <%= block.template.kind_recurring %>
 <%= block_options_static block %>
 <%= block_component_static block, :layout %>
 <%= block_component_static block, :description %>
-<%= block_component_static block, :no_event_message %>
-      title_link: "<%= block.template.title_link %>"
+<%= block_component_static block, :no_job_message %>
 <%
 if block.template.mode == 'category' && block.template.category
   l10n = block.template.category.localization_for(block.language)
@@ -28,6 +23,6 @@ end
 <%= render 'admin/application/static/hugo/collection',
             key: :events,
             depth: 3,
-            collection: block.template.selected_events,
+            collection: block.template.selected_jobs,
             language: block.language %>
-      quantity: <%= block.template.selected_events.to_a.count %>
+      quantity: <%= block.template.selected_jobs.to_a.count %>

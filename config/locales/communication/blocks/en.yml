@@ -525,6 +525,8 @@ en:
                   category: A specific category
                   children: Main page and children
                   selection: A specific selection of pages
+              option_categories:
+                label: Show categories
               option_image:
                 label: Show pages images
               option_main_summary:

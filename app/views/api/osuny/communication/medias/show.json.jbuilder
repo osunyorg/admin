@@ -1,0 +1,1 @@
+json.partial! "api/osuny/communication/medias/media", media: @media
