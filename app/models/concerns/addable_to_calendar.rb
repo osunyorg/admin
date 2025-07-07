@@ -50,8 +50,8 @@ module AddableToCalendar
   end
 
   def cal_from_time
-    from_hour.nil?  ? from_day.to_time
-                    : date_and_time(from_day, from_hour)
+    try(:from_hour).nil?  ? from_day.to_time
+                          : date_and_time(from_day, from_hour)
   end
 
   def cal_to_time
@@ -63,20 +63,20 @@ module AddableToCalendar
   end
 
   def cal_all_day
-    from_hour.nil? && to_hour.nil?
+    try(:from_hour).nil? && try(:to_hour).nil?
   end
 
   # Ce cas n'est plus possible depuis la résolution #1386
   def cal_to_time_with_no_end_day
-    to_hour.nil?  ? nil # Pas de fin
-                  : date_and_time(from_day, to_hour) # Heure de fin sans jour de fin, donc on se base sur le jour de début
+    try(:to_hour).nil?  ? nil # Pas de fin
+                        : date_and_time(from_day, to_hour) # Heure de fin sans jour de fin, donc on se base sur le jour de début
   end
 
   def cal_to_time_with_end_day
     # Soit on a 1 heure de fin, et tout est simple
-    cal_end_time = to_hour
+    cal_end_time = try(:to_hour)
     # Soit on n'en a pas, mais on a 1 heure de début, donc on ajoute 1 heure pour éviter les événements sans durée
-    cal_end_time ||= from_hour + 1.hour if from_hour
+    cal_end_time ||= from_hour + 1.hour if try(:from_hour).present?
     # Si rien n'a marché, on a nil
     cal_end_time.nil? ? to_day.to_time # Il n'y a ni heure de fin ni heure de début
                       : date_and_time(to_day, cal_end_time) # Il y a bien une heure de fin
