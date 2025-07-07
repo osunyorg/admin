@@ -33,6 +33,7 @@ module Communication::Website::WithConnectedObjects
     sync_with_git_safely
     mark_obsolete_git_files
     touch_planned_objects
+    check_period_years
     get_current_theme_version!
     analyse_repository!
     screenshot!
@@ -122,6 +123,12 @@ module Communication::Website::WithConnectedObjects
     exhibitions.changed_status_today.find_each &:touch
     post_localizations.published_today.find_each &:touch
     find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
+  end
+
+  def check_period_years
+    agenda_period_years.needing_recheck.find_each do |year|
+      Communication::Website::Agenda::CheckYearJob.perform_later(year)
+    end
   end
 
   protected
