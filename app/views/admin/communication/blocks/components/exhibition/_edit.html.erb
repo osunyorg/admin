@@ -1,8 +1,8 @@
-<% exhibitions = osuny_collection(
-              block.about.website.exhibitions,
-              localized: true,
-              label_method: :to_s_with_subtitle
-            ) %>
+<% exhibitions =  osuny_collection(
+                    block.about.website.exhibitions,
+                    localized: true,
+                    label_method: :to_s_with_subtitle
+                  ) %>
 <label  class="form-label <%= 'visually-hidden' if label.blank? %>"
         :for="<%= dom_id.html_safe %>">
   <%= label %>

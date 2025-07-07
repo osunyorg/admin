@@ -5,7 +5,7 @@ class Communication::Block::Template::Exhibition < Communication::Block::Templat
     'future',
     'current',
     'archive'
-  ]
+  ].freeze
 
   has_elements
   has_layouts [
