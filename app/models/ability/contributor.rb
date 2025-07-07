@@ -6,6 +6,7 @@ class Ability::Contributor < Ability::Author
     cannot :publish, Communication::Website::Agenda::Event
     cannot :publish, Communication::Website::Agenda::Exhibition
     cannot :publish, Communication::Website::Portfolio::Project
+    cannot :publish, Communication::Website::Jobboard::Job
   end
 
 end
