@@ -6,29 +6,29 @@
       <%= render 'admin/communication/blocks/partials/top', block: block %>
 
       <div class="exhibitions exhibitions--<%= block.template.layout %>">
-        <% block.template.selected_exhibitions.each do |event|
-          next if event.nil?
-          event_l10n = event.localization_for(block.language)
-          event_link = event_l10n.current_permalink_url_in_website(@website) || '#'
+        <% block.template.selected_exhibitions.each do |exhibition|
+          next if exhibition.nil?
+          exhibition_l10n = exhibition.localization_for(block.language)
+          exhibition_link = exhibition_l10n.current_permalink_url_in_website(@website) || '#'
         %>
-          <article class="event <% if event_l10n.featured_image.attached? %>event--with-image<% end %>" itemscope itemtype="https://schema.org/Event">
-            <div class="event-content">
-              <% if event_l10n.subtitle %>
+          <article class="exhibition <% if exhibition_l10n.featured_image.attached? %>exhibition--with-image<% end %>" itemscope itemtype="https://schema.org/Event">
+            <div class="exhibition-content">
+              <% if exhibition_l10n.subtitle %>
                 <hgroup>
               <% end %>
               <h<%= heading_level %>  itemprop='headline' class='location-title'>
-                <%= link_to event_l10n, event_link %>
+                <%= link_to exhibition_l10n, exhibition_link %>
               </h<%= heading_level %>>
-              <% if event_l10n.subtitle %>
-                <p class="event-subtitle"><%= event_l10n.subtitle %></p>
+              <% if exhibition_l10n.subtitle %>
+                <p class="exhibition-subtitle"><%= exhibition_l10n.subtitle %></p>
                 </hgroup>
               <% end %>
               <%
-                computed_short_date = date_range_i18n(event.from_day, event.to_day, format: :short, locale: block.language.iso_code)
-                computed_short_two_lines_date = date_range_i18n(event.from_day, event.to_day, format: :short, layout: :two_lines, locale: block.language.iso_code)
+                computed_short_date = date_range_i18n(exhibition.from_day, exhibition.to_day, format: :short, locale: block.language.iso_code)
+                computed_short_two_lines_date = date_range_i18n(exhibition.from_day, exhibition.to_day, format: :short, layout: :two_lines, locale: block.language.iso_code)
               %>
               <% if computed_short_date || computed_short_two_lines_date %>
-                <div class="event-dates" itemprop="startDate" content="<%= "#{event.from_day}" %>">
+                <div class="exhibition-dates" itemprop="startDate" content="<%= "#{exhibition.from_day}" %>">
                   <span>
                     <% date_format = computed_short_two_lines_date %>
                     <% if block.template.layout != "list" %>
@@ -38,22 +38,22 @@
                   </span>
                 </div>
               <% end %>
-              <% if event.status.present? && block.template.option_status %>
-                <p class="event-status">
-                  <% if event.status == "current" %>
+              <% if exhibition.status.present? && block.template.option_status %>
+                <p class="exhibition-status">
+                  <% if exhibition.status == "current" %>
                     <%= t 'admin.communication.blocks.templates.agenda.time.options.current' %>
-                  <% elsif event.status == "future" %>
+                  <% elsif exhibition.status == "future" %>
                     <%= t 'admin.communication.blocks.templates.agenda.time.options.future' %>
-                  <% elsif event.status == "archive" %>
+                  <% elsif exhibition.status == "archive" %>
                     <%= t 'admin.communication.blocks.templates.agenda.time.options.archive' %>
                   <% end %>
                 </p>
               <% end %>
 
-              <% if block.template.option_summary && event_l10n.summary.present? %>
-                <div class="event-description">
+              <% if block.template.option_summary && exhibition_l10n.summary.present? %>
+                <div class="exhibition-description">
                   <p itemprop="description">
-                    <%= event_l10n.summary %>
+                    <%= exhibition_l10n.summary %>
                   </p>
                   <% if block.template.layout == "large" %>
                     <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.agenda.layouts.large.more' %></p>
@@ -61,9 +61,9 @@
                 </div>
               <% end %>
 
-              <% if event.categories.present? && block.template.option_categories %>
-                <p class="event-categories">
-                  <% event.categories.each do |category| %>
+              <% if exhibition.categories.present? && block.template.option_categories %>
+                <p class="exhibition-categories">
+                  <% exhibition.categories.each do |category| %>
                     <%
                       category_l10n = category.localization_for(block.language)
                       next if category_l10n.nil?
@@ -75,8 +75,8 @@
               <% end %>
             </div>
             <div class="media">
-              <% if event_l10n.featured_image.attached? %>
-                <%= kamifusen_tag event_l10n.featured_image %>
+              <% if exhibition_l10n.featured_image.attached? %>
+                <%= kamifusen_tag exhibition_l10n.featured_image %>
               <% end %>
             </div>
           </article>
