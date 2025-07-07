@@ -2,7 +2,7 @@ class Communication::Block::Template::Exhibition::Element < Communication::Block
 
   has_component :id, :exhibition
 
-  def event
-    id_component.event
+  def exhibition
+    id_component.exhibition
   end
 end
