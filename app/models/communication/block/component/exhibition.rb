@@ -1,6 +1,6 @@
 class Communication::Block::Component::Exhibition < Communication::Block::Component::Base
 
-  def event
+  def exhibition
     return unless website
     website.exhibitions
            .published_now_in(template.block.language)
