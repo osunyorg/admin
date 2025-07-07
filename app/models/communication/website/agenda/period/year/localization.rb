@@ -66,10 +66,6 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
     about.previous&.localized_in(language)
   end
 
-  def no_events?
-    events_count == 0
-  end
-
   def events_count
     unordered_days = Communication::Website::Agenda::Period::Day::Localization.where(
       about_id: about.days.pluck(:id),
