@@ -4,9 +4,7 @@ class Communication::Website::Agenda::EventTest < ActiveSupport::TestCase
   test "valid cal file with specific dates and hours" do
     event = new_event(
       from_day: Date.tomorrow,
-      from_hour: "09:00",
-      to_day: Date.tomorrow + 1.day,
-      to_hour: "19:00"
+      to_day: Date.tomorrow + 1.day
     )
     assert(event.valid?)
     event_l10n = event.localizations.first
@@ -16,9 +14,7 @@ class Communication::Website::Agenda::EventTest < ActiveSupport::TestCase
   test "valid cal file with specific hours on the same day" do
     event = new_event(
       from_day: Date.tomorrow,
-      from_hour: "09:00",
-      to_day: Date.tomorrow,
-      to_hour: "19:00"
+      to_day: Date.tomorrow
     )
     assert(event.valid?)
     event_l10n = event.localizations.first
@@ -28,9 +24,7 @@ class Communication::Website::Agenda::EventTest < ActiveSupport::TestCase
   test "valid cal file with specific hours but no end date" do
     event = new_event(
       from_day: Date.tomorrow,
-      from_hour: "09:00",
-      to_day: nil,
-      to_hour: "19:00"
+      to_day: nil
     )
     assert(event.valid?)
     event_l10n = event.localizations.first
@@ -40,9 +34,7 @@ class Communication::Website::Agenda::EventTest < ActiveSupport::TestCase
   test "valid cal file with specific dates but no end hour" do
     event = new_event(
       from_day: Date.tomorrow,
-      from_hour: "09:00",
-      to_day: Date.tomorrow + 1.day,
-      to_hour: nil
+      to_day: Date.tomorrow + 1.day
     )
     assert(event.valid?)
     event_l10n = event.localizations.first
@@ -52,9 +44,7 @@ class Communication::Website::Agenda::EventTest < ActiveSupport::TestCase
   test "valid cal file on same day but no end hour" do
     event = new_event(
       from_day: Date.tomorrow,
-      from_hour: "09:00",
-      to_day: Date.tomorrow,
-      to_hour: nil
+      to_day: Date.tomorrow
     )
     assert(event.valid?)
     event_l10n = event.localizations.first
@@ -64,9 +54,7 @@ class Communication::Website::Agenda::EventTest < ActiveSupport::TestCase
   test "valid cal file on same day but no hours" do
     event = new_event(
       from_day: Date.tomorrow,
-      from_hour: nil,
-      to_day: Date.tomorrow,
-      to_hour: nil
+      to_day: Date.tomorrow
     )
     assert(event.valid?)
     event_l10n = event.localizations.first
@@ -76,9 +64,7 @@ class Communication::Website::Agenda::EventTest < ActiveSupport::TestCase
   test "valid cal file with specific dates but no hours" do
     event = new_event(
       from_day: Date.tomorrow,
-      from_hour: nil,
-      to_day: Date.tomorrow + 1.day,
-      to_hour: nil
+      to_day: Date.tomorrow + 1.day
     )
     assert(event.valid?)
     event_l10n = event.localizations.first
@@ -88,9 +74,7 @@ class Communication::Website::Agenda::EventTest < ActiveSupport::TestCase
   test "valid cal file but no end" do
     event = new_event(
       from_day: Date.tomorrow,
-      from_hour: "09:00",
-      to_day: nil,
-      to_hour: nil
+      to_day: nil
     )
     assert(event.valid?)
     event_l10n = event.localizations.first
