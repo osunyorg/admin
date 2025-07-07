@@ -52,12 +52,12 @@ class Administration::Location < ApplicationRecord
   validates :address, :city, :country, presence: true
 
   def dependencies
-    localizations +
-    programs
+    localizations
   end
 
   def references
-    schools
+    schools +
+    programs
   end
 
   # WebsitesLinkable

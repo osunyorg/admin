@@ -1,7 +1,5 @@
 class Api::Osuny::Communication::MediasController < Api::Osuny::ApplicationController
-  before_action :ensure_url_param,
-                :create_blob_from_url,
-                only: :create
+  before_action :create_blob, only: :create
 
   def show
     @media = current_university.communication_medias.find(params[:id])
@@ -18,26 +16,39 @@ class Api::Osuny::Communication::MediasController < Api::Osuny::ApplicationContr
 
   protected
 
-  def ensure_url_param
-    render(
-      json: { error: "URL parameter is required" },
-      status: :unprocessable_entity
-    ) if params[:url].blank?
-  end
-
-  def create_blob_from_url
-    begin
-      uri = URI(params[:url])
-      @blob = ActiveStorage::Blob.create_and_upload!(
-        io: uri.open,
-        filename: File.basename(uri.path)
-      )
-      @blob.update_column :university_id, current_university.id
-    rescue StandardError => e
+  def create_blob
+    if params[:url].present?
+      create_blob_from_url
+    elsif params[:file].present?
+      create_blob_from_file
+    else
       render(
-        json: { error: "Failed to create blob from URL: #{e.message}" },
+        json: { error: "Either URL or file parameter is required" },
         status: :unprocessable_entity
       )
     end
+  rescue StandardError => e
+    render(
+      json: { error: "Failed to create blob: #{e.message}" },
+      status: :unprocessable_entity
+    )
+  end
+
+  def create_blob_from_url
+    uri = URI(params[:url])
+    @blob = ActiveStorage::Blob.create_and_upload!(
+      io: uri.open,
+      filename: File.basename(uri.path)
+    )
+    @blob.update_column :university_id, current_university.id
+  end
+
+  def create_blob_from_file
+    file = params[:file]
+    @blob = ActiveStorage::Blob.create_and_upload!(
+      io: file.tempfile,
+      filename: file.original_filename
+    )
+    @blob.update_column :university_id, current_university.id
   end
 end
