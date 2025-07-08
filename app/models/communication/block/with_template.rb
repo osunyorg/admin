@@ -24,6 +24,7 @@ module Communication::Block::WithTemplate
       files: 55,
       gallery: 300,
       image: 51,
+      jobs: 3400,
       key_figures: 56,
       license: 4040,
       links: 4050,

@@ -399,7 +399,7 @@ en:
         one: Category
         other: Categories
       communication/website/jobboard/job:
-        one: Job offers
+        one: Job offer
         other: Job offers
       communication/website/menu:
         all: All menus

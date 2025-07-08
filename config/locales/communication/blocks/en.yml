@@ -402,6 +402,36 @@ en:
               text:
                 label: Text
                 placeholder: Enter text
+          jobs:
+            description: A list of job offers.
+            edit:
+              add_job: Add an offer
+              category_id:
+                label: Category
+                placeholder: Select a category
+              element:
+                id:
+                  label: ''
+                  placeholder: Choose the offer
+              no_job_message:
+                label: Sentence to show when there's no offer
+                placeholder: Enter sentence
+              mode:
+                label: Which offers?
+                options:
+                  all: All offers
+                  category: Offers belonging to a specific category
+                  selection: A selection of offers
+              jobs_quantity:
+                label: Quantity
+                placeholder: Enter quantity
+            layouts:
+              grid:
+                description: A grid of offers, left to right then top to bottom.
+                label: Grid
+              list:
+                description: A list of offers, one below the other.
+                label: List
           key_figures:
             description: Animated figures, with a unit and a text.
             edit:
@@ -521,6 +551,9 @@ en:
               grid:
                 description: Square logos and a simple text below.
                 label: Grid
+              large:
+                description: Each organization is presented in majesty, across the full width available, with a large image.
+                label: Grand
               map:
                 description: A geographic map, with a pin for every organization with a known location.
                 label: Map
@@ -841,6 +874,7 @@ en:
           files: Files
           gallery: Gallery
           image: Image
+          jobs: Job offers
           key_figures: Key figures
           license: License
           links: Links
