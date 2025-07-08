@@ -1,6 +1,6 @@
-<% if block.template.selected_events.any? %>
-  <% block.template.selected_events.each do |event|
-      l10n = event.localization_for(block.about.language)
+<% if block.template.selected_exhibitions.any? %>
+  <% block.template.selected_exhibitions.each do |exhibition|
+      l10n = exhibition.localization_for(block.about.language)
       next if l10n.nil?
       %>
     <div class="row mb-3">
@@ -19,11 +19,11 @@
           <% end %>
         </p>
         <p class="small">
-          <%= render 'admin/communication/websites/agenda/events/dates', event: event, l10n: l10n, detailed: false %>
+          <%= render 'admin/communication/websites/agenda/exhibitions/dates', exhibition: exhibition, l10n: l10n, detailed: false %>
         </p>
       </div>
     </div>
   <% end %>
 <% else %>
-  <p><%= block.template.no_event_message %></p>
+  <p><%= block.template.no_exhibition_message %></p>
 <% end %>
