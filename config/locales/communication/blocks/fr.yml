@@ -359,6 +359,36 @@ fr:
               text:
                 label: Texte
                 placeholder: Entrer le texte
+          jobs:
+            description: Une liste d'offres d'emploi.
+            edit:
+              add_job: Ajouter une offre
+              category_id:
+                label: Catégorie
+                placeholder: Sélectionner une catégorie
+              element:
+                id:
+                  label: ''
+                  placeholder: Choisir l'offre
+              no_job_message:
+                label: Phrase à afficher s'il n'y a aucune offre d'emploi
+                placeholder: Entrer la phrase souhaitée
+              mode:
+                label: Quelles offres afficher ?
+                options:
+                  all: Toutes les offres
+                  category: Une catégorie spécifique
+                  selection: Une sélection d'offres
+              jobs_quantity:
+                label: Quantité d'offres
+                placeholder: Entrer la quantité
+            layouts:
+              grid:
+                description: Une grille d'offres, de gauche à droite puis de haut en bas.
+                label: Grille
+              list:
+                description: Une liste d'offres les unes au-dessous des autres.
+                label: Liste
           key_figures:
             description: Des chiffres clés avec une jolie animation. Chaque chiffre peut être doté d'une unité et d'un texte.
             edit:
@@ -800,6 +830,7 @@ fr:
           files: Fichiers
           gallery: Galerie
           image: Image
+          jobs: Offres d'emploi
           key_figures: Chiffres-clés
           license: Licence
           links: Liens
