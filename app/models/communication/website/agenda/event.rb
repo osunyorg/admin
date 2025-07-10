@@ -33,6 +33,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
   include AsTree
   include Communication::Website::Agenda::Period::InPeriod
+  include Communication::Website::Agenda::WithStatus
   include Duplicable
   include Federated
   include Filterable
@@ -103,6 +104,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   def references
     menus +
     abouts_with_agenda_block
+  end
+
+  def sorting_time
+    from_day.in_time_zone.to_time
   end
 
   protected

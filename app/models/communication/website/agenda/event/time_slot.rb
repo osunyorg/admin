@@ -27,6 +27,7 @@
 class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
+  include Communication::Website::Agenda::WithStatus
   include GeneratesGitFiles
   include Localizable
   include WithOpenApi
@@ -73,6 +74,10 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   def time
     datetime&.strftime("%H:%M")
+  end
+
+  def sorting_time
+    datetime
   end
 
   def end_datetime

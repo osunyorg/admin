@@ -37,12 +37,9 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :kind_child,          :boolean, default: true
   has_component :kind_recurring,      :boolean, default: true
 
+  # Can send events or timeslots
   def selected_events
-    unless @selected_events
-      events = send "selected_events_#{mode}"
-      @selected_events = filter(events)
-    end
-    @selected_events
+    @selected_events ||= send("selected_events_#{mode}")
   end
 
   def category
@@ -79,27 +76,31 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
 
   protected
 
-  def filter(events)
-    events.lazy # Do not load everything
-          .reject { |event| event_forbidden?(event) }
-          .first(quantity)
+  def selected_events_all
+    composer.to_array
   end
 
-  def event_forbidden?(event)
-    event_kind_forbidden?(event) ||
-    recurring_event_has_no_time_slot_today?(event)
+  def selected_events_category
+    composer.to_array
   end
 
-  def event_kind_forbidden?(event)
-    (event.kind_parent? && !kind_parent) ||
-    (event.kind_child? && !kind_child) ||
-    (event.kind_recurring? && !kind_recurring)
+  def composer
+    @composer ||= Osuny::Agenda::Composer.new(
+      website: website,
+      time_scope: time,
+      category: category,
+      include_parents: kind_parent,
+      include_children: kind_child,
+      include_recurring: kind_recurring,
+      quantity: quantity
+    )
   end
 
-  def recurring_event_has_no_time_slot_today?(event)
-    time == 'current' &&
-    event.kind_recurring? &&
-    event.no_time_slot_today?
+  # Not filtered, no timeslots (yet)
+  def selected_events_selection
+    elements.map { |element|
+      element.event
+    }.compact
   end
 
   def link_to_events
@@ -121,30 +122,4 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     hugo = l10n.hugo(website)
     hugo.permalink
   end
-
-  def base_events
-    events = website.events.published_now_in(block.language)
-    if time.in?(AUTHORIZED_SCOPES)
-      events = events.public_send(time)
-      events = time == 'archive' ? events.ordered_desc : events.ordered_asc
-    end
-    events
-  end
-
-  def selected_events_all
-    base_events
-  end
-
-  def selected_events_category
-    events = base_events
-    events = events.for_category(category) if category
-    events
-  end
-
-  def selected_events_selection
-    elements.map { |element|
-      element.event
-    }.compact
-  end
-
 end

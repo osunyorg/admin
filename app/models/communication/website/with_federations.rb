@@ -18,11 +18,15 @@ module Communication::Website::WithFederations
               class_name: "Communication::Website::ContentFederation",
               dependent: :destroy,
               foreign_key: :destination_website_id
-    
+
     has_many  :federated_communication_website_agenda_events,
               through: :content_federations_as_destination,
               source: :about,
               source_type: "Communication::Website::Agenda::Event"
+
+    has_many  :federated_communication_website_agenda_event_time_slots,
+              through: :federated_communication_website_agenda_events,
+              source: :time_slots
   end
 
   def federated_objects

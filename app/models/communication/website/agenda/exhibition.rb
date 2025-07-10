@@ -29,6 +29,7 @@
 class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
+  include Communication::Website::Agenda::WithStatus
   include Duplicable
   include Federated
   include Filterable
