@@ -19,7 +19,7 @@ module Communication::Block::WithTemplate
       datatable: 54,
       definitions: 800,
       embed: 53,
-      exhibitions: 3101,
+      exhibitions: 3102,
       features: 2010,
       files: 55,
       gallery: 300,
