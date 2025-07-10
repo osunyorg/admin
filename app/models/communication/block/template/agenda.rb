@@ -85,14 +85,15 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def composer
-    @composer ||= Osuny::Agenda::Composer.new(
+    @composer ||= Communication::Website::Agenda::Planner.new(
       website: website,
       time_scope: time,
       category: category,
+      quantity: quantity,
+      language: block.language,
       include_parents: kind_parent,
       include_children: kind_child,
-      include_recurring: kind_recurring,
-      quantity: quantity
+      include_recurring: kind_recurring
     )
   end
 
