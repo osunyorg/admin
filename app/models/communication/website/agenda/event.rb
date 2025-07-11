@@ -93,24 +93,24 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :on_day, -> (day) { where(from_day: day) }
 
   scope :future, -> {
-    where("communication_website_agenda_events.from_day > :today", today: Date.today)
+    where("communication_website_agenda_events.from_day > :today", today: Date.current)
   }
   scope :current, -> {
-    where("communication_website_agenda_events.from_day <= :today AND communication_website_agenda_events.to_day >= :today", today: Date.today)
+    where("communication_website_agenda_events.from_day <= :today AND communication_website_agenda_events.to_day >= :today", today: Date.current)
   }
   scope :future_or_current, -> {
     future.or(current)
   }
   scope :archive, -> {
-    where("communication_website_agenda_events.to_day < :today", today: Date.today)
+    where("communication_website_agenda_events.to_day < :today", today: Date.current)
   }
   scope :changed_status_today, -> {
     where(
-      "communication_website_agenda_events.from_day = :today 
-      OR communication_website_agenda_events.from_day = :yesterday 
-      OR communication_website_agenda_events.to_day = :today 
+      "communication_website_agenda_events.from_day = :today
+      OR communication_website_agenda_events.from_day = :yesterday
+      OR communication_website_agenda_events.to_day = :today
       OR communication_website_agenda_events.to_day = :yesterday",
-      today: Date.today,
+      today: Date.current,
       yesterday: Date.yesterday
     )
   }

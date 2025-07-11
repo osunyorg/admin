@@ -27,7 +27,7 @@ module Communication::Website::Agenda::Period::InPeriod
   # Un événement demain aura une distance de 1, comme un événement hier
   # On utilise cette info pour classer les événements à venir dans un sens et les archives dans l'autre
   def distance_in_days
-    (Date.today - from_day).to_i.abs
+    (Date.current - from_day).to_i.abs
   end
 
   def from_year

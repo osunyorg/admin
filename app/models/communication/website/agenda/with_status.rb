@@ -12,15 +12,15 @@ module Communication::Website::Agenda::WithStatus
   end
 
   def future?
-    from_day > Date.today
+    from_day > Date.current
   end
 
   def current?
-    Date.today >= from_day && Date.today <= to_day
+    Date.current >= from_day && Date.current <= to_day
   end
 
   def archive?
-    to_day < Date.today
+    to_day < Date.current
   end
 
 end
