@@ -23,11 +23,11 @@
       <div class="col-10">
         <p class="mb-0">
           <%= event_l10n.title %>
+          <% if event.federated_in?(@website) %>
+            — <%= show_link_inline event.website %>
+          <% end %>
           <% if event_l10n.subtitle.present? %>
             <br><%= event_l10n.subtitle %>
-          <% end %>
-          <% if event.federated? %>
-            — <%= event.website %>
           <% end %>
         </p>
         <p class="small">
