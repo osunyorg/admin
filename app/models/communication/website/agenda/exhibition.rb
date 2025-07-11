@@ -29,6 +29,7 @@
 class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
+  include Communication::Website::Agenda::WithStatus
   include Duplicable
   include Federated
   include Filterable
@@ -61,6 +62,29 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
       unaccent(communication_website_agenda_exhibition_localizations.title) ILIKE unaccent(:term) OR
       unaccent(communication_website_agenda_exhibition_localizations.subtitle) ILIKE unaccent(:term)
     ", term: "%#{sanitize_sql_like(term)}%")
+  }
+
+  scope :future, -> {
+    where("communication_website_agenda_exhibitions.from_day > :today", today: Date.current)
+  }
+  scope :current, -> {
+    where("communication_website_agenda_exhibitions.from_day <= :today AND communication_website_agenda_exhibitions.to_day >= :today", today: Date.current)
+  }
+  scope :future_or_current, -> {
+    future.or(current)
+  }
+  scope :archive, -> {
+    where("communication_website_agenda_exhibitions.to_day < :today", today: Date.current)
+  }
+  scope :changed_status_today, -> {
+    where(
+      "communication_website_agenda_exhibitions.from_day = :today
+      OR communication_website_agenda_exhibitions.from_day = :yesterday
+      OR communication_website_agenda_exhibitions.to_day = :today
+      OR communication_website_agenda_exhibitions.to_day = :yesterday",
+      today: Date.current,
+      yesterday: Date.yesterday
+    )
   }
 
   def dependencies

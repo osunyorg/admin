@@ -63,11 +63,11 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
 
   def dependencies
     [website.config_default_content_security_policy] +
-    localizations.in_languages(website.active_language_ids) 
+    localizations.in_languages(website.active_language_ids)
   end
 
   def current?
-    from_day <= Date.today && (to_day.nil? || Date.today <= to_day)
+    from_day <= Date.current && (to_day.nil? || Date.current <= to_day)
   end
- 
+
 end

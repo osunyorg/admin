@@ -103,9 +103,9 @@ fr:
                 label: Quels statuts d'événements afficher ?
                 options:
                   archive: Terminés (archivés)
-                  current: En cours en ce moment
-                  future: À venir, pas encore en cours
-                  future_or_current: En cours et à venir
+                  current: Du jour
+                  future: À venir (pas encore en cours)
+                  future_or_current: Du jour et à venir
             layouts:
               grid:
                 description: Les événements sont présentés en grille, avec les images toutes de la même taille.
@@ -315,7 +315,7 @@ fr:
                 label: Quels statuts d'expositions afficher ?
                 options:
                   archive: Terminées (archivés)
-                  current: En cours en ce moment
+                  current: En cours
                   future: À venir, pas encore en cours
                   future_or_current: En cours et à venir
             layouts:

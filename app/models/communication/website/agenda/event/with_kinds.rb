@@ -14,6 +14,14 @@ module Communication::Website::Agenda::Event::WithKinds
 
     scope :with_no_time_slots, -> { where.missing(:time_slots) }
     scope :who_can_have_children, -> { root.with_no_time_slots }
+
+    scope :except_parent, -> { where.missing(:children) }
+    scope :except_children, -> { where(parent_id: nil) }
+    scope :except_recurring, -> { where("(
+      SELECT COUNT(*)
+      FROM communication_website_agenda_event_time_slots
+        WHERE communication_website_agenda_event_time_slots.communication_website_agenda_event_id = communication_website_agenda_events.id
+      ) <= 1") }
   end
 
   def kind_simple?
