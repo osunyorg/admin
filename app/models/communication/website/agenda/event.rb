@@ -88,8 +88,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
-  scope :on_year, -> (year) { where('extract(year from from_day) = ?', year) }
-  scope :on_month, -> (year, month) { where('extract(year from from_day) = ? and extract(month from from_day) = ?', year, month) }
+  scope :on_year, -> (year) { where('extract(year from communication_website_agenda_events.from_day) = ?', year) }
+  scope :on_month, -> (year, month) { where('extract(year from communication_website_agenda_events.from_day) = ? and extract(month from communication_website_agenda_events.from_day) = ?', year, month) }
   scope :on_day, -> (day) { where(from_day: day) }
 
   def dependencies

@@ -7,20 +7,20 @@ module Communication::Website::Agenda::WithStatus
 
   included do
     scope :future, -> {
-      where('from_day > :today', today: Date.today)
+      where("#{table_name}.from_day > :today", today: Date.today)
     }
     scope :current, -> {
-      where('from_day <= :today AND to_day >= :today', today: Date.today)
+      where("#{table_name}.from_day <= :today AND #{table_name}.to_day >= :today", today: Date.today)
     }
     scope :future_or_current, -> {
       future.or(current)
     }
     scope :archive, -> {
-      where('to_day < :today', today: Date.today)
+      where("#{table_name}.to_day < :today", today: Date.today)
     }
     scope :changed_status_today, -> {
       where(
-        'from_day = :today OR from_day = :yesterday OR to_day = :today OR to_day = :yesterday',
+        "#{table_name}.from_day = :today OR #{table_name}.from_day = :yesterday OR #{table_name}.to_day = :today OR #{table_name}.to_day = :yesterday",
         today: Date.today,
         yesterday: Date.yesterday
       )
