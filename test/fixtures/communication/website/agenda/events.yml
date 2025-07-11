@@ -1,10 +1,17 @@
 test_event:
   migration_identifier: test-event-fixture-1
   from_day: 2024-07-12
-  time_zone: Europe/Paris
   to_day: 2024-07-12
+  time_zone: Europe/Paris
   categories:
    - test_category
+  website: website_with_github
+  university: default_university
+
+unpublished_event:
+  from_day: 2024-07-14
+  to_day: 2024-07-14
+  time_zone: Europe/Paris
   website: website_with_github
   university: default_university
 

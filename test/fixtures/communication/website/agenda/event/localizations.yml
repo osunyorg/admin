@@ -15,6 +15,15 @@ test_event_fr:
   website: website_with_github
   university: default_university
 
+unpublished_event_fr:
+  title: Événement dépublié
+  slug: unpublished-event
+  published: false
+  about: unpublished_event
+  language: fr
+  website: website_with_github
+  university: default_university
+
 simple_fr:
   title: Simple
   slug: simple

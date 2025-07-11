@@ -6,6 +6,13 @@ test_event_time_slot:
   website: website_with_github
   university: default_university
 
+unpublished_event_time_slot:
+  datetime: 2024-07-14T09:00:00+02:00
+  duration: 120
+  communication_website_agenda_event: unpublished_event
+  website: website_with_github
+  university: default_university
+
 simple_single_slot_time_slot:
   datetime: 2025-07-15T09:00:00+02:00
   duration: 120

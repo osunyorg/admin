@@ -66,6 +66,12 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
     .where(communication_website_agenda_categories: { id: category.id })
   }
 
+  scope :published_now_in, -> (language) {
+    for_language(language)
+      .joins(:communication_website_agenda_event)
+      .merge(Communication::Website::Agenda::Event.published_now_in(language))
+  }
+
   delegate :time_zone, to: :event
 
   def dependencies

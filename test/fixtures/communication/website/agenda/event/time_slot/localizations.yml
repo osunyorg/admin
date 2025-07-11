@@ -13,6 +13,13 @@ test_event_time_slot_fr:
   website: website_with_github
   university: default_university
 
+unpublished_event_time_slot_fr:
+  slug: 14-09-00
+  about: unpublished_event_time_slot
+  language: fr
+  website: website_with_github
+  university: default_university
+
 simple_single_slot_time_slot_fr:
   slug: 15-09-00
   about: simple_single_slot_time_slot
