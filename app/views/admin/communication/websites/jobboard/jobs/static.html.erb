@@ -22,8 +22,10 @@ dates:
         <%= date_range_i18n(job.from_day, job.to_day, format: :long, layout: :two_lines, locale: language.iso_code) %>
   from:
     day: "<%= job.from_day %>"
+  <% if job.to_day.present? %>
   to:
     day: "<%= job.to_day %>"
+  <% end %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/images/shared/static', about: @l10n %>
