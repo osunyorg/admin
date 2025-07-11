@@ -114,7 +114,7 @@ federation:
   website:
     name: >-
       <%= prepare_text_for_static canonical_website.to_s_in(about.language) if about.respond_to?(:language) %>
-    url: "<%= canonical_website.url %>"    
+    url: "<%= canonical_website.url %>"
   hugo:
     permalink: "<%= canonical_hugo.permalink %>"
     path: "<%= canonical_hugo.path %>"
