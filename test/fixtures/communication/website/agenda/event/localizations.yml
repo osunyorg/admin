@@ -14,3 +14,83 @@ test_event_fr:
   language: fr
   website: website_with_github
   university: default_university
+
+simple_fr:
+  title: Simple
+  slug: simple
+  published: true
+  published_at: 2024-07-01 00:00:00
+  about: simple
+  language: fr
+  website: website_with_github
+  university: default_university
+  
+simple_single_slot_fr:
+  title: Simple single slot
+  slug: simple-single-slot
+  published: true
+  published_at: 2024-07-01 00:00:00
+  about: simple_single_slot
+  language: fr
+  website: website_with_github
+  university: default_university
+  
+recurring_fr:
+  title: Recurring
+  slug: recurring
+  published: true
+  published_at: 2024-07-01 00:00:00
+  about: recurring
+  language: fr
+  website: website_with_github
+  university: default_university
+  
+parent_fr:
+  title: Parent
+  slug: parent
+  published: true
+  published_at: 2024-07-01 00:00:00
+  about: parent
+  language: fr
+  website: website_with_github
+  university: default_university
+  
+child_1_no_slot_fr:
+  title: 1er événement enfant sans créneau
+  slug: child-1-no-slot
+  published: true
+  published_at: 2024-07-01 00:00:00
+  about: child_1_no_slot
+  language: fr
+  website: website_with_github
+  university: default_university
+  
+child_2_single_slot_fr:
+  title: 2e événement enfant avec 1 seul créneau
+  slug: child-2-single-slot
+  published: true
+  published_at: 2024-07-01 00:00:00
+  about: child_2_single_slot
+  language: fr
+  website: website_with_github
+  university: default_university
+  
+child_3_multiple_slots_on_same_day_fr:
+  title: 3e événement enfant avec créneaux sur un jour
+  slug: child-3-multiple-slots-on-same_day
+  published: true
+  published_at: 2024-07-01 00:00:00
+  about: child_3_multiple_slots_on_same_day
+  language: fr
+  website: website_with_github
+  university: default_university
+  
+child_4_multiple_slots_on_different_days_fr:
+  title: 4e événement enfant avec créneaux sur plusieurs jours
+  slug: child-4-multiple-slots-on-different-days
+  published: true
+  published_at: 2024-07-01 00:00:00
+  about: child_4_multiple_slots_on_different_days
+  language: fr
+  website: website_with_github
+  university: default_university

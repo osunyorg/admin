@@ -51,6 +51,10 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   scope :future_or_current, -> { future.or(current) }
   scope :archive, -> {  where("DATE(datetime) < :today", today: Date.today) }
 
+  scope :except_parent_events, -> { joins(:communication_website_agenda_event).merge(Communication::Website::Agenda::Event.except_parent) }
+  scope :except_children_events, -> { joins(:communication_website_agenda_event).merge(Communication::Website::Agenda::Event.except_children) }
+  scope :except_recurring_events, -> { joins(:communication_website_agenda_event).merge(Communication::Website::Agenda::Event.except_recurring) }
+
   scope :changed_status_today, -> { where(datetime: (Date.yesterday.beginning_of_day..Date.today.end_of_day)) }
 
   scope :ordered, -> { ordered_asc }
