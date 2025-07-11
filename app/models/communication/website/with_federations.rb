@@ -25,8 +25,10 @@ module Communication::Website::WithFederations
               source_type: "Communication::Website::Agenda::Event"
 
     has_many  :federated_communication_website_agenda_event_time_slots,
+              class_name: "Communication::Website::Agenda::Event::TimeSlot",
               through: :federated_communication_website_agenda_events,
               source: :time_slots
+
   end
 
   def federated_objects

@@ -1,7 +1,7 @@
-Communication::Website::Agenda::Planner::Events
+class Communication::Website::Agenda::Planner::Events
   attr_reader :planner, :events
 
-  def initialize(planner:, events:)
+  def initialize(planner, events)
     @planner = planner
     @events = events
   end
@@ -33,8 +33,8 @@ Communication::Website::Agenda::Planner::Events
   end
 
   def apply_time!
-    @events = @events.public_send(planner.time)
-    @events = archive? ? @events.ordered_desc : @events.ordered_asc
+    @events = @events.public_send(planner.time_scope)
+    @events = planner.archive? ? @events.ordered_desc : @events.ordered_asc
   end
 
   def filter_by_kinds!
@@ -46,4 +46,5 @@ Communication::Website::Agenda::Planner::Events
   def limit_quantity!
     @events = @events.limit(planner.quantity)
   end
+
 end

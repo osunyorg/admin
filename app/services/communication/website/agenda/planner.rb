@@ -26,6 +26,10 @@ class Communication::Website::Agenda::Planner
     @include_recurring = include_recurring
   end
 
+  def archive?
+    time_scope == 'archive'
+  end
+
   def to_array
     @to_array ||= sort(
       website_events,
@@ -44,35 +48,31 @@ class Communication::Website::Agenda::Planner
     list
   end
 
-  def archive?
-    time_scope == 'archive'
-  end
-
   def website_events
     Communication::Website::Agenda::Planner::Events.new(
-      planner: self,
-      events: website.events
+      self,
+      website.events
     ).to_array
   end
   
   def federated_events
     Communication::Website::Agenda::Planner::Events.new(
-      planner: self,
-      events: website.federated_communication_website_agenda_events
+      self,
+      website.federated_communication_website_agenda_events
     ).to_array
   end
 
   def website_time_slots
     Communication::Website::Agenda::Planner::TimeSlots.new(
-      planner: self,
-      time_slots: website.time_slots
+      self,
+      website.time_slots
     ).to_array
   end
 
   def federated_time_slots
     Communication::Website::Agenda::Planner::TimeSlots.new(
-      planner: self,
-      time_slots: website.federated_communication_website_agenda_event_time_slots
+      self,
+      website.federated_communication_website_agenda_event_time_slots
     ).to_array
   end
 

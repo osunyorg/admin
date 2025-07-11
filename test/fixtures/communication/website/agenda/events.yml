@@ -7,3 +7,55 @@ test_event:
    - test_category
   website: website_with_github
   university: default_university
+simple:
+  from_day: 2025-07-12
+  to_day: 2025-07-12
+  time_zone: Europe/Paris
+  website: website_with_github
+  university: default_university
+simple_single_slot:
+  from_day: 2025-07-15
+  to_day: 2025-07-15
+  time_zone: Europe/Paris
+  website: website_with_github
+  university: default_university
+recurring:
+  from_day: 2025-05-01
+  to_day: 2025-10-01
+  time_zone: Europe/Paris
+  website: website_with_github
+  university: default_university
+parent:
+  from_day: 2025-07-01
+  to_day: 2025-07-05
+  time_zone: Europe/Paris
+  website: website_with_github
+  university: default_university
+child_1_no_slot:
+  from_day: 2025-07-01
+  to_day: 2025-07-01
+  parent: parent
+  time_zone: Europe/Paris
+  website: website_with_github
+  university: default_university
+child_2_single_slot:
+  from_day: 2025-07-02
+  to_day: 2025-07-02
+  parent: parent
+  time_zone: Europe/Paris
+  website: website_with_github
+  university: default_university
+child_3_multiple_slots_on_same_day:
+  from_day: 2025-07-03
+  to_day: 2025-07-03
+  parent: parent
+  time_zone: Europe/Paris
+  website: website_with_github
+  university: default_university
+child_4_multiple_slots_on_different_days:
+  from_day: 2025-07-02
+  to_day: 2025-07-05
+  parent: parent
+  time_zone: Europe/Paris
+  website: website_with_github
+  university: default_university
