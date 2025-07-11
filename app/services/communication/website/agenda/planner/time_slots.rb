@@ -11,7 +11,9 @@ class Communication::Website::Agenda::Planner::TimeSlots
     remove_drafts!
     filter_by_category!
     apply_time!
-    filter_by_kinds!
+    filter_parent!
+    filter_children!
+    filter_recurring!
     limit_quantity!
     @time_slots
   end
@@ -32,10 +34,19 @@ class Communication::Website::Agenda::Planner::TimeSlots
     @time_slots = planner.archive? ? @time_slots.ordered_desc : @time_slots.ordered_asc
   end
 
-  def filter_by_kinds!
-    @time_slots = @time_slots.except_parent_events unless planner.include_parents
-    @time_slots = @time_slots.except_children_events unless planner.include_children
-    @time_slots = @time_slots.except_recurring_events unless planner.include_recurring
+  def filter_parent!
+    return if planner.include_parents
+    @time_slots = @time_slots.except_parent_events
+  end
+
+  def filter_children!
+    return if planner.include_children
+    @time_slots = @time_slots.except_children_events
+  end
+
+  def filter_recurring!
+    return if planner.include_recurring
+    @time_slots = @time_slots.except_recurring_events
   end
 
   def limit_quantity!

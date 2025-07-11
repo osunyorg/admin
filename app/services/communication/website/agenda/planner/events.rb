@@ -12,7 +12,9 @@ class Communication::Website::Agenda::Planner::Events
     remove_drafts!
     filter_by_category!
     apply_time!
-    filter_by_kinds!
+    filter_parent!
+    filter_children!
+    filter_recurring!
     limit_quantity!
     @events
   end
@@ -38,10 +40,19 @@ class Communication::Website::Agenda::Planner::Events
     @events = planner.archive? ? @events.ordered_desc : @events.ordered_asc
   end
 
-  def filter_by_kinds!
-    @events = @events.except_parent unless planner.include_parents
-    @events = @events.except_children unless planner.include_children
-    @events = @events.except_recurring unless planner.include_recurring
+  def filter_parent!
+    return if planner.include_parents
+    @events = @events.except_parent
+  end
+
+  def filter_children!
+    return if planner.include_children
+    @events = @events.except_children
+  end
+
+  def filter_recurring!
+    return if planner.include_recurring
+    @events = @events.except_recurring
   end
 
   def limit_quantity!
