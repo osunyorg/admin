@@ -117,3 +117,17 @@ child_4_multiple_slots_on_different_days_time_slot_4_fr:
   language: fr
   website: website_with_github
   university: default_university
+
+federated_event_with_time_slots_time_slot_1_fr:
+  slug: 20-00-00
+  about: federated_event_with_time_slots_time_slot_1
+  language: fr
+  website: website_with_gitlab
+  university: default_university
+
+federated_event_with_time_slots_time_slot_2_fr:
+  slug: 23-00-00
+  about: federated_event_with_time_slots_time_slot_2
+  language: fr
+  website: website_with_gitlab
+  university: default_university

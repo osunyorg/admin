@@ -5,6 +5,9 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
 
   # test_event_time_slot                                    2024-07-12 08:00
   # recurring_time_slot_1                                   2025-06-01 07:00
+  # federated_event_with_no_slot                            2025-06-03
+  # federated_event_with_time_slots_time_slot_1             2025-06-20 00:00
+  # federated_event_with_time_slots_time_slot_2             2025-06-23 00:00
   # child_1_no_slot                                         2025-07-01
   # recurring_time_slot_2                                   2025-07-01 07:00
   # parent                                                  2025-07-01
@@ -199,6 +202,9 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
     assert_equal [
       time_slot(:recurring_time_slot_2),
       event(:child_1_no_slot),
+      time_slot(:federated_event_with_time_slots_time_slot_2),
+      time_slot(:federated_event_with_time_slots_time_slot_1),
+      event(:federated_event_with_no_slot),
       time_slot(:recurring_time_slot_1),
       time_slot(:test_event_time_slot),
     ], planner.to_array
