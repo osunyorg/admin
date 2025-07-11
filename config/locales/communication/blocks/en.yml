@@ -103,9 +103,9 @@ en:
                 label: What event dates should be displayed?
                 options:
                   archive: Past (archives)
-                  current: Running now
+                  current: Today
                   future: In the future, not started yet
-                  future_or_current: Now and in the future
+                  future_or_current: Today and in the future
             layouts:
               grid:
                 description: Events are presented as a grid, from left to right and top to bottom, with constant size cropped images.

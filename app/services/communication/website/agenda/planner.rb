@@ -27,7 +27,7 @@ class Communication::Website::Agenda::Planner
   end
 
   def archive?
-    time_scope == 'archive'
+    time_scope == Communication::Website::Agenda::STATUS_ARCHIVE
   end
 
   def to_array
@@ -35,7 +35,7 @@ class Communication::Website::Agenda::Planner
       website_events,
       federated_events,
       website_time_slots,
-      federated_time_slots,
+      federated_time_slots
     ).first(quantity)
   end
 
@@ -49,31 +49,19 @@ class Communication::Website::Agenda::Planner
   end
 
   def website_events
-    Communication::Website::Agenda::Planner::Events.new(
-      self,
-      website.events
-    ).to_array
+    Events.new(self, website.events).to_array
   end
   
   def federated_events
-    Communication::Website::Agenda::Planner::Events.new(
-      self,
-      website.federated_communication_website_agenda_events
-    ).to_array
+    Events.new(self, website.federated_communication_website_agenda_events).to_array
   end
 
   def website_time_slots
-    Communication::Website::Agenda::Planner::TimeSlots.new(
-      self,
-      website.time_slots
-    ).to_array
+    TimeSlots.new(self, website.time_slots).to_array
   end
 
   def federated_time_slots
-    Communication::Website::Agenda::Planner::TimeSlots.new(
-      self,
-      website.federated_communication_website_agenda_event_time_slots
-    ).to_array
+    TimeSlots.new(self, website.federated_communication_website_agenda_event_time_slots).to_array
   end
 
 end
