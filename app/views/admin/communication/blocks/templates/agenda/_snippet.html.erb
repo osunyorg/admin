@@ -26,6 +26,9 @@
           <% if event_l10n.subtitle.present? %>
             <br><%= event_l10n.subtitle %>
           <% end %>
+          <% if event.federated? %>
+            — <%= event.website %>
+          <% end %>
         </p>
         <p class="small">
           <% if time_slot.present? %>
