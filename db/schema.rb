@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_07_095121) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_11_150513) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -1301,6 +1301,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_095121) do
     t.datetime "last_sync_at"
     t.boolean "feature_alumni", default: false
     t.boolean "feature_jobboard", default: false
+    t.boolean "feature_alerts", default: false
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
