@@ -1,12 +1,5 @@
 class Communication::Block::Template::Exhibition < Communication::Block::Template::Base
 
-  AUTHORIZED_SCOPES = [
-    'future_or_current',
-    'future',
-    'current',
-    'archive'
-  ].freeze
-
   has_elements
   has_layouts [
     :grid,
@@ -21,7 +14,7 @@ class Communication::Block::Template::Exhibition < Communication::Block::Templat
   has_component :category_id, :agenda_category
   has_component :description, :rich_text
   has_component :quantity, :number, default: 3
-  has_component :time, :option, options: AUTHORIZED_SCOPES
+  has_component :time, :option, options: Communication::Website::Agenda::AUTHORIZED_SCOPES
   has_component :no_exhibition_message, :string
 
   # Options d'affichage

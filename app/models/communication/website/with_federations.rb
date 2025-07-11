@@ -8,6 +8,7 @@ module Communication::Website::WithFederations
                             foreign_key: :destination_website_id,
                             association_foreign_key: :source_website_id,
                             class_name: 'Communication::Website'
+
     has_and_belongs_to_many :destination_websites,
                             join_table: :communication_website_federations,
                             foreign_key: :source_website_id,
@@ -28,7 +29,6 @@ module Communication::Website::WithFederations
               through: :federated_communication_website_agenda_events,
               class_name: "Communication::Website::Agenda::Event::TimeSlot",
               source: :time_slots
-
   end
 
   def federated_objects

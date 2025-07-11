@@ -1,12 +1,5 @@
 class Communication::Block::Template::Agenda < Communication::Block::Template::Base
 
-  AUTHORIZED_SCOPES = [
-    'future_or_current',
-    'future',
-    'current',
-    'archive'
-  ]
-
   has_elements
   has_layouts [
     :grid,
@@ -21,7 +14,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :category_id, :agenda_category
   has_component :description, :rich_text
   has_component :quantity, :number, default: 3
-  has_component :time, :option, options: AUTHORIZED_SCOPES
+  has_component :time, :option, options: Communication::Website::Agenda::AUTHORIZED_SCOPES
   has_component :no_event_message, :string
 
   # Options d'affichage
@@ -43,6 +36,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def category
+    return unless mode == 'category'
     category_id_component.category
   end
 
@@ -65,7 +59,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def title_link
-    return link_to_category if mode == 'category' && category.present?
+    return link_to_category if category.present?
     return link_to_events if mode == 'all'
     nil
   end
@@ -77,15 +71,15 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   protected
 
   def selected_events_all
-    composer.to_array
+    planner.to_array
   end
 
   def selected_events_category
-    composer.to_array
+    planner.to_array
   end
 
-  def composer
-    @composer ||= Communication::Website::Agenda::Planner.new(
+  def planner
+    @planner ||= Communication::Website::Agenda::Planner.new(
       website: website,
       time_scope: time,
       category: category,

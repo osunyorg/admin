@@ -64,6 +64,29 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
+  scope :future, -> {
+    where("communication_website_agenda_exhibitions.from_day > :today", today: Date.today)
+  }
+  scope :current, -> {
+    where("communication_website_agenda_exhibitions.from_day <= :today AND communication_website_agenda_exhibitions.to_day >= :today", today: Date.today)
+  }
+  scope :future_or_current, -> {
+    future.or(current)
+  }
+  scope :archive, -> {
+    where("communication_website_agenda_exhibitions.to_day < :today", today: Date.today)
+  }
+  scope :changed_status_today, -> {
+    where(
+      "communication_website_agenda_exhibitions.from_day = :today 
+      OR communication_website_agenda_exhibitions.from_day = :yesterday 
+      OR communication_website_agenda_exhibitions.to_day = :today 
+      OR communication_website_agenda_exhibitions.to_day = :yesterday",
+      today: Date.today,
+      yesterday: Date.yesterday
+    )
+  }
+
   def dependencies
     [website.config_default_content_security_policy] +
     localizations.in_languages(website.active_language_ids)

@@ -1,3 +1,4 @@
+# Instanciated only by Communication::Website::Agenda::Planner
 class Communication::Website::Agenda::Planner::Events
   attr_reader :planner, :events
 
@@ -8,7 +9,7 @@ class Communication::Website::Agenda::Planner::Events
 
   def to_array
     remove_time_slots!
-    remove_draft!
+    remove_drafts!
     filter_by_category!
     apply_time!
     filter_by_kinds!
@@ -23,7 +24,7 @@ class Communication::Website::Agenda::Planner::Events
     @events = @events.with_no_time_slots
   end
 
-  def remove_draft!
+  def remove_drafts!
     @events = @events.published_now_in(planner.language)
   end
   
