@@ -67,6 +67,7 @@ class Communication::Website < ApplicationRecord
   include WithDependencies
   include WithDeuxfleurs
   include WithFeatureAgenda
+  include WithFeatureAlerts
   include WithFeatureAlumni
   include WithFeatureJobboard
   include WithFeaturePosts

@@ -188,6 +188,15 @@ fr:
         subtitle: Sous-titre
         text: Informations pratiques
         title: Titre
+      communication/website/alert:
+        kind: Type d'alerte
+      communication/website/alert/localization:
+        cta: Afficher un bouton d'action
+        cta_label: Texte du bouton d'action
+        cta_url: URL du bouton d'action
+        published: Publiée
+        slug: Identifiant
+        title: Titre
       communication/website/connection:
         direct_source: Source directe
         direct_source_id: Identifiant de la source
@@ -385,6 +394,9 @@ fr:
       communication/website/agenda/period/year:
         one: Année
         other: Années
+      communication/website/alert:
+        one: Alerte
+        other: Alertes
       communication/website/connection:
         one: Connexion
         other: Connexions
@@ -459,6 +471,8 @@ fr:
           exhibitions:
             formatted_time_zone: "Fuseau horaire : %{time_zone}"
             none: Pas encore d'expositions
+        alerts:
+          none: Pas encore d'alertes.
         confirm_localization:
           text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction du site web <i>%{website}</i> en %{language}."
           title: Confirmation de traduction
@@ -698,6 +712,11 @@ fr:
           unsplash: Photothèque Unsplash
           upload: Envoi direct de fichier
       website:
+        alert:
+          kind:
+            danger: Alerte rouge
+            info: Information
+            warning: Alerte
         menu:
           item:
             kind:

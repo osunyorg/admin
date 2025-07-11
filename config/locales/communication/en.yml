@@ -187,6 +187,15 @@ en:
         subtitle: Subtitle
         text: Information
         title: Title
+      communication/website/alert:
+        kind: Alert type
+      communication/website/alert/localization:
+        cta: Display call to action
+        cta_label: Call to action label
+        cta_url: Call to action URL
+        published: Published
+        slug: Slug
+        title: Title
       communication/website/connection:
         direct_source: Direct source
         direct_source_id: Direct source identifier
@@ -458,6 +467,8 @@ en:
           exhibitions:
             formatted_time_zone: "Time zone: %{time_zone}"
             none: No exhibition yet
+        alerts:
+          none: No alert yet
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the website <i>%{website}</i> in %{language}."
           title: Localization confirmation
@@ -697,6 +708,11 @@ en:
           unsplash: Unsplash photo library
           upload: Direct file upload
       website:
+        alert:
+          kind:
+            danger: Red alert
+            info: Information
+            warning: Alert
         menu:
           item:
             kind:
