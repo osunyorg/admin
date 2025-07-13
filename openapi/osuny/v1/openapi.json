@@ -1616,7 +1616,9 @@
             "enum": [
               "company",
               "non_profit",
-              "government"
+              "government",
+              "public_org",
+              "collective"
             ]
           },
           "active": {

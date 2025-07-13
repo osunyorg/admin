@@ -180,6 +180,8 @@ en:
           company: Company
           government: Government
           non_profit: Association
+          public_org: Public Organisation
+          collective: Collective
   simple_form:
     hints:
       university:
@@ -248,7 +250,7 @@ en:
     manage_experiences: Manage experiences
     organization:
       employees: Employees
-      import_hint_html: "Possible values for <i>kind</i> are: company, non_profit, government.<br><i>Siren</i>, <i>nic</i>, <i>zipcode</i> and <i>phone</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)."
+      import_hint_html: "Possible values for <i>kind</i> are: company, non_profit, government, public_org, collective.<br><i>Siren</i>, <i>nic</i>, <i>zipcode</i> and <i>phone</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>)."
       logo: Logo
       search: Search by name
     person:
