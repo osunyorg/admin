@@ -1,3 +1,37 @@
+# == Schema Information
+#
+# Table name: communication_website_alert_localizations
+#
+#  id                       :uuid             not null, primary key
+#  cta                      :boolean          default(FALSE)
+#  cta_label                :string
+#  cta_url                  :string
+#  description              :text
+#  published                :boolean          default(FALSE)
+#  published_at             :datetime
+#  slug                     :string
+#  title                    :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  about_id                 :uuid             not null, indexed
+#  communication_website_id :uuid             not null, indexed
+#  language_id              :uuid             not null, indexed
+#  university_id            :uuid             not null, indexed
+#
+# Indexes
+#
+#  idx_on_communication_website_id_419e31417f                      (communication_website_id)
+#  idx_on_university_id_a434d41212                                 (university_id)
+#  index_communication_website_alert_localizations_on_about_id     (about_id)
+#  index_communication_website_alert_localizations_on_language_id  (language_id)
+#
+# Foreign Keys
+#
+#  fk_rails_2cf51cea51  (communication_website_id => communication_websites.id)
+#  fk_rails_3474adea32  (university_id => universities.id)
+#  fk_rails_5dcabe7842  (about_id => communication_website_alerts.id)
+#  fk_rails_ec345cee0b  (language_id => languages.id)
+#
 class Communication::Website::Alert::Localization < ApplicationRecord
   include AsLocalization
   include HasGitFiles
@@ -18,13 +52,8 @@ class Communication::Website::Alert::Localization < ApplicationRecord
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
-    return unless website.id == communication_website_id && published && published_at
-    git_path_content_prefix(website) + git_path_relative
-  end
-
-  # alerts/slug.html
-  def git_path_relative
-    "alerts/#{slug}.html"
+    return unless website.id == communication_website_id && !website.active_language_ids.include?(language_id) && published && published_at
+    "data/alerts/#{language.iso_code}/#{slug}.yml"
   end
 
   def template_static

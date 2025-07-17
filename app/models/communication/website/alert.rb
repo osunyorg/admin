@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: communication_website_alerts
+#
+#  id                       :uuid             not null, primary key
+#  kind                     :integer          default("info"), not null
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  communication_website_id :uuid             not null, indexed
+#  university_id            :uuid             not null, indexed
+#
+# Indexes
+#
+#  index_communication_website_alerts_on_communication_website_id  (communication_website_id)
+#  index_communication_website_alerts_on_university_id             (university_id)
+#
+# Foreign Keys
+#
+#  fk_rails_5ec8e3c4a2  (university_id => universities.id)
+#  fk_rails_7c40424e19  (communication_website_id => communication_websites.id)
+#
 class Communication::Website::Alert < ApplicationRecord
   include AsDirectObject
   include Filterable
