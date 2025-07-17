@@ -175,6 +175,7 @@ class Communication::Website < ApplicationRecord
     feature_jobboard_dependencies +
     feature_portfolio_dependencies +
     feature_posts_dependencies +
+    feature_alerts_dependencies +
     menus.in_languages(active_language_ids) +
     [default_image&.blob] +
     [default_shared_image&.blob] +

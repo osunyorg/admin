@@ -122,6 +122,7 @@ module Communication::Website::WithConnectedObjects
     agenda_events_time_slots.changed_status_today.find_each &:touch
     exhibitions.changed_status_today.find_each &:touch
     post_localizations.published_today.find_each &:touch
+    alerts.published_today.find_each &:touch
     find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
   end
 
@@ -194,13 +195,13 @@ module Communication::Website::WithConnectedObjects
     is_indirect_or_federated?(indirect_object)
   end
 
-  # ex: 
+  # ex:
   # - Personne (objet indirecct)
   # - Event d'un autre site (fédération)
   def is_indirect_or_federated?(object)
     # Si la méthode n'existe pas, ça transtype correctement
     # Les blobs, par exemple, ne répondent pas à is_indirect_object
-    !object.try(:is_direct_object?) || 
+    !object.try(:is_direct_object?) ||
     # L'objet est-il fédéré dans ce site ?
     (
       object.respond_to?(:federated_in?) &&
