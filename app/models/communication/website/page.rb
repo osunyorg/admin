@@ -41,13 +41,12 @@ class Communication::Website::Page < ApplicationRecord
   include GeneratesGitFiles
   include Localizable
   include Orderable
-  include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before Publishable
-  include Publishable
   include Sanitizable
   include Searchable
   include WithAutomaticMenus
   include WithMenuItemTarget
   include WithOpenApi
+  include WithSpecialPage
   include WithUniversity
 
   belongs_to :parent,
