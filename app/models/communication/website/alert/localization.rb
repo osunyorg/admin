@@ -52,7 +52,7 @@ class Communication::Website::Alert::Localization < ApplicationRecord
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
-    return unless website.id == communication_website_id && !website.active_language_ids.include?(language_id) && published && published_at
+    return unless website.id == communication_website_id && website.active_language_ids.include?(language_id) && published && published_at
     "data/alerts/#{language.iso_code}/#{slug}.yml"
   end
 
