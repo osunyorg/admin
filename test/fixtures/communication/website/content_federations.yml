@@ -1,0 +1,11 @@
+federated_event_with_no_slot_to_website_with_github:
+  about: federated_event_with_no_slot (Communication::Website::Agenda::Event)
+  website: website_with_gitlab
+  destination_website: website_with_github
+  university: default_university
+
+federated_event_with_time_slots_to_website_with_github:
+  about: federated_event_with_time_slots (Communication::Website::Agenda::Event)
+  website: website_with_gitlab
+  destination_website: website_with_github
+  university: default_university

@@ -12,3 +12,122 @@ test_event_time_slot_fr:
   language: fr
   website: website_with_github
   university: default_university
+
+unpublished_event_time_slot_fr:
+  slug: 14-09-00
+  about: unpublished_event_time_slot
+  language: fr
+  website: website_with_github
+  university: default_university
+
+simple_single_slot_time_slot_fr:
+  slug: 15-09-00
+  about: simple_single_slot_time_slot
+  language: fr
+  website: website_with_github
+  university: default_university
+
+recurring_time_slot_1_fr:
+  slug: 01-07-00
+  about: recurring_time_slot_1
+  language: fr
+  website: website_with_github
+  university: default_university
+
+recurring_time_slot_2_fr:
+  slug: 01-07-00
+  about: recurring_time_slot_2
+  language: fr
+  website: website_with_github
+  university: default_university
+
+recurring_time_slot_3_fr:
+  slug: 01-07-00
+  about: recurring_time_slot_3
+  language: fr
+  website: website_with_github
+  university: default_university
+
+recurring_time_slot_4_fr:
+  slug: 01-07-00
+  about: recurring_time_slot_4
+  language: fr
+  website: website_with_github
+  university: default_university
+
+recurring_time_slot_5_fr:
+  slug: 01-07-00
+  about: recurring_time_slot_5
+  language: fr
+  website: website_with_github
+  university: default_university
+
+child_2_single_slot_time_slot_fr:
+  slug: 02-07-00
+  about: child_2_single_slot_time_slot
+  language: fr
+  website: website_with_github
+  university: default_university
+
+child_3_multiple_slots_on_same_day_time_slot_1_fr:
+  slug: 03-08-00
+  about: child_3_multiple_slots_on_same_day_time_slot_1
+  language: fr
+  website: website_with_github
+  university: default_university
+
+child_3_multiple_slots_on_same_day_time_slot_2_fr:
+  slug: 03-12-00
+  about: child_3_multiple_slots_on_same_day_time_slot_2
+  language: fr
+  website: website_with_github
+  university: default_university
+
+child_3_multiple_slots_on_same_day_time_slot_3_fr:
+  slug: 03-16-00
+  about: child_3_multiple_slots_on_same_day_time_slot_3
+  language: fr
+  website: website_with_github
+  university: default_university
+
+child_4_multiple_slots_on_different_days_time_slot_1_fr:
+  slug: 02-08-00
+  about: child_4_multiple_slots_on_different_days_time_slot_1
+  language: fr
+  website: website_with_github
+  university: default_university
+
+child_4_multiple_slots_on_different_days_time_slot_2_fr:
+  slug: 03-08-30
+  about: child_4_multiple_slots_on_different_days_time_slot_2
+  language: fr
+  website: website_with_github
+  university: default_university
+
+child_4_multiple_slots_on_different_days_time_slot_3_fr:
+  slug: 05-08-00
+  about: child_4_multiple_slots_on_different_days_time_slot_3
+  language: fr
+  website: website_with_github
+  university: default_university
+
+child_4_multiple_slots_on_different_days_time_slot_4_fr:
+  slug: 05-20-00
+  about: child_4_multiple_slots_on_different_days_time_slot_4
+  language: fr
+  website: website_with_github
+  university: default_university
+
+federated_event_with_time_slots_time_slot_1_fr:
+  slug: 20-00-00
+  about: federated_event_with_time_slots_time_slot_1
+  language: fr
+  website: website_with_gitlab
+  university: default_university
+
+federated_event_with_time_slots_time_slot_2_fr:
+  slug: 23-00-00
+  about: federated_event_with_time_slots_time_slot_2
+  language: fr
+  website: website_with_gitlab
+  university: default_university

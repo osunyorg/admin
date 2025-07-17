@@ -5,3 +5,122 @@ test_event_time_slot:
   communication_website_agenda_event: test_event
   website: website_with_github
   university: default_university
+
+unpublished_event_time_slot:
+  datetime: 2024-07-14T09:00:00+02:00
+  duration: 120
+  communication_website_agenda_event: unpublished_event
+  website: website_with_github
+  university: default_university
+
+simple_single_slot_time_slot:
+  datetime: 2025-07-15T09:00:00+02:00
+  duration: 120
+  communication_website_agenda_event: simple_single_slot
+  website: website_with_github
+  university: default_university
+
+recurring_time_slot_1:
+  datetime: 2025-06-01T07:00:00+02:00
+  duration: 60
+  communication_website_agenda_event: recurring
+  website: website_with_github
+  university: default_university
+
+recurring_time_slot_2:
+  datetime: 2025-07-01T07:00:00+02:00
+  duration: 60
+  communication_website_agenda_event: recurring
+  website: website_with_github
+  university: default_university
+
+recurring_time_slot_3:
+  datetime: 2025-08-01T07:00:00+02:00
+  duration: 60
+  communication_website_agenda_event: recurring
+  website: website_with_github
+  university: default_university
+
+recurring_time_slot_4:
+  datetime: 2025-09-01T07:00:00+02:00
+  duration: 60
+  communication_website_agenda_event: recurring
+  website: website_with_github
+  university: default_university
+
+recurring_time_slot_5:
+  datetime: 2025-10-01T07:00:00+02:00
+  duration: 60
+  communication_website_agenda_event: recurring
+  website: website_with_github
+  university: default_university
+
+child_2_single_slot_time_slot:
+  datetime: 2025-07-02T07:00:00+02:00
+  duration: 60
+  communication_website_agenda_event: child_2_single_slot
+  website: website_with_github
+  university: default_university
+
+child_3_multiple_slots_on_same_day_time_slot_1:
+  datetime: 2025-07-03T08:00:00+02:00
+  duration: 60
+  communication_website_agenda_event: child_3_multiple_slots_on_same_day
+  website: website_with_github
+  university: default_university
+
+child_3_multiple_slots_on_same_day_time_slot_2:
+  datetime: 2025-07-03T12:00:00+02:00
+  duration: 60
+  communication_website_agenda_event: child_3_multiple_slots_on_same_day
+  website: website_with_github
+  university: default_university
+
+child_3_multiple_slots_on_same_day_time_slot_3:
+  datetime: 2025-07-03T16:00:00+02:00
+  duration: 60
+  communication_website_agenda_event: child_3_multiple_slots_on_same_day
+  website: website_with_github
+  university: default_university
+
+child_4_multiple_slots_on_different_days_time_slot_1:
+  datetime: 2025-07-02T08:00:00+02:00
+  duration: 14400
+  communication_website_agenda_event: child_4_multiple_slots_on_different_days
+  website: website_with_github
+  university: default_university
+
+child_4_multiple_slots_on_different_days_time_slot_2:
+  datetime: 2025-07-03T08:30:00+02:00
+  duration: 14400
+  communication_website_agenda_event: child_4_multiple_slots_on_different_days
+  website: website_with_github
+  university: default_university
+
+child_4_multiple_slots_on_different_days_time_slot_3:
+  datetime: 2025-07-05T08:00:00+02:00
+  duration: 14400
+  communication_website_agenda_event: child_4_multiple_slots_on_different_days
+  website: website_with_github
+  university: default_university
+
+child_4_multiple_slots_on_different_days_time_slot_4:
+  datetime: 2025-07-05T20:00:00+02:00
+  duration: 14400
+  communication_website_agenda_event: child_4_multiple_slots_on_different_days
+  website: website_with_github
+  university: default_university
+
+federated_event_with_time_slots_time_slot_1:
+  datetime: 2025-06-20T00:00:00+02:00
+  duration: 120
+  communication_website_agenda_event: federated_event_with_time_slots
+  website: website_with_gitlab
+  university: default_university
+
+federated_event_with_time_slots_time_slot_2:
+  datetime: 2025-06-23T00:00:00+02:00
+  duration: 120
+  communication_website_agenda_event: federated_event_with_time_slots
+  website: website_with_gitlab
+  university: default_university

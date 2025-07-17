@@ -18,7 +18,7 @@ module Communication::Website::Agenda::Event::WithTimeSlots
   end
 
   def no_time_slot_today?
-    time_slots.on_day(Date.today).none?
+    time_slots.on_day(Date.current).none?
   end
 
   def save_time_slots(language, params)

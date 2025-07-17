@@ -1,29 +1,6 @@
 /*global $ */
 window.summernoteManager = {
     configs: {},
-    noteButton: function (context) {
-        'use strict';
-        var ui = $.summernote.ui,
-            button = ui.button({
-                contents: '<i class="fas fa-note-sticky"/>',
-                tooltip: 'Note (beta)',
-                className: 'note-btn-note',
-                click: function () {
-                    var text = context.invoke('editor.getSelectedText'),
-                        // TODO find if it's a note or not
-                        isANote = false,
-                        note;
-                    if (isANote) {
-                        // TODO remove note
-                    } else {
-                        note = '<note>' + text + '</note>';
-                        context.invoke('editor.pasteHTML', note);
-                    }
-                }
-            });
-        // return button as jquery object
-        return button.render();
-    },
     init: function () {
         'use strict';
         this.setConfigs();
@@ -77,14 +54,13 @@ window.summernoteManager = {
         this.setConfig('mini-list-with-notes',
             {
                 toolbar: [
-                    ['font', ['bold', 'italic']],
-                    ['position', ['superscript']],
+                    ['font', ['bold', 'italic', 'superscript', 'q']],
                     ['para', ['ul', 'ol']],
                     ['insert', ['link', 'unlink', 'note']],
                     ['view', ['codeview']]
                 ]
             },
-            ['b', 'strong', 'i', 'em', 'sup', 'a', 'ul', 'ol', 'li', 'note'],
+            ['b', 'strong', 'i', 'em', 'q', 'sup', 'a', 'ul', 'ol', 'li', 'note'],
             ['href', 'target']);
 
         this.setConfig('default',

@@ -73,6 +73,14 @@ related_categories:
   end
 end
 %>
+<% if @website && @website.feature_alumni? %>
+<%= render 'admin/application/static/hugo/collection',
+            key: :cohorts,
+            collection: @website.cohorts
+                                .where(program_id: program.id)
+                                .ordered(language),
+            language: language %>
+<% end %>
 information:
 <% if program.has_administrative_information? %>
   administrative:
