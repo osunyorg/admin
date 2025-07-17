@@ -2,7 +2,11 @@ module Communication::Website::WithContentArchive
   extend ActiveSupport::Concern
 
   def max_archive_datetime
-    Time.current - years_before_archive_content.years
+    @max_archive_datetime ||= Time.current - years_before_archive_content.years
+  end
+
+  def max_archive_date
+    @max_archive_date ||= max_archive_datetime.to_date
   end
 
   protected
@@ -25,10 +29,20 @@ module Communication::Website::WithContentArchive
   end
 
   def unpublish_archivable_events
-    # Dépublier les événements (non pérennes) terminés il y a plus de X ans
+    event_localizations
+      .joins(:about)
+      .where.not(communication_website_agenda_events: { is_lasting: true })
+      .where("communication_website_agenda_events.to_day < ?", max_archive_date).each do |event_l10n|
+      event_l10n.update(published: false)
+    end
   end
 
   def unpublish_archivable_exhibitions
-    # Dépublier les expositions (non pérennes) terminées il y a plus de X ans
+    exhibition_localizations
+      .joins(:about)
+      .where.not(communication_website_agenda_exhibitions: { is_lasting: true })
+      .where("communication_website_agenda_exhibitions.to_day < ?", max_archive_date).each do |exhibition_l10n|
+      exhibition_l10n.update(published: false)
+    end
   end
 end
