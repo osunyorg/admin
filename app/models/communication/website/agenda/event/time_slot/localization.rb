@@ -56,7 +56,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
     "events/#{from_day.strftime "%Y/%m"}/#{slug}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
   end
 
-  def should_publish_to?(website)
+  def should_send_to?(website)
     event.allowed_in?(website)
   end
 

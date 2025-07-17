@@ -4,7 +4,7 @@ class University::Person::Alumnus < University::Person
   end
 
   # No alumni on websites
-  def should_publish_to?(website)
+  def should_send_to?(website)
     false
   end
 

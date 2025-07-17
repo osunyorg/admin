@@ -17,7 +17,7 @@ module HasGitFiles
     raise NotImplementedError
   end
 
-  def should_publish_to?(website)
+  def should_send_to?(website)
     for_website?(website) && syncable?
   end
 

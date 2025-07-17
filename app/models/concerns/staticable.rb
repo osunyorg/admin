@@ -2,7 +2,7 @@ module Staticable
   extend ActiveSupport::Concern
 
   def hugo(website)
-    if website.nil? || !should_publish_to?(website)
+    if website.nil? || !should_send_to?(website)
       hugo_nil
     else
       hugo_with(

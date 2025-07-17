@@ -8,7 +8,7 @@ class Communication::Website::Configs::Base < Communication::Website
     raise NotImplementedError
   end
 
-  def should_publish_to?(website)
+  def should_send_to?(website)
     true
   end
 

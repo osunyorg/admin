@@ -45,7 +45,7 @@ Rails.application.config.to_prepare do
       "data/media/#{id[0..1]}/#{id}.yml"
     end
 
-    def should_publish_to?(website)
+    def should_send_to?(website)
       true
     end
 

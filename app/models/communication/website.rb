@@ -163,7 +163,7 @@ class Communication::Website < ApplicationRecord
   end
 
   # TODO deprecated
-  def should_publish_to?(website)
+  def should_send_to?(website)
     true
   end
 

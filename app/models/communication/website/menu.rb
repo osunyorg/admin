@@ -63,7 +63,7 @@ class Communication::Website::Menu < ApplicationRecord
     "data/menus/#{language.iso_code}/#{identifier}.yml"
   end
 
-  def should_publish_to?(website)
+  def should_send_to?(website)
     website.active_language_ids.include?(language_id) && items.any?
   end
 

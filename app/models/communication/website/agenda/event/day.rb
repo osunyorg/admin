@@ -51,7 +51,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
     path
   end
 
-  def should_publish_to?(website)
+  def should_send_to?(website)
     event.allowed_in?(website) && # Good website or federated
     events.any? && # With events on this day
     event_l10n.present? && # Event localized in this language
