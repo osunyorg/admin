@@ -59,13 +59,13 @@ class Education::Program::Localization < ApplicationRecord
   include Initials
   include Pathable
   include Permalinkable
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithInheritance
-  include WithPublication
   include WithUniversity
 
   has_summernote :summary
@@ -98,8 +98,8 @@ class Education::Program::Localization < ApplicationRecord
     "programs/#{path}/_index.html"
   end
 
-  def should_publish_to?(website)
-    for_website?(website) && published?
+  def syncable?
+    published?
   end
 
   def template_static

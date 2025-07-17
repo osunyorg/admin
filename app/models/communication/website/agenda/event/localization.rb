@@ -51,13 +51,13 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include HeaderCallToAction
   include Initials
   include Permalinkable # slug_unavailable method overwrite in this file
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithOpenApi
-  include WithPublication
   include WithUniversity
 
   belongs_to :website,

@@ -61,7 +61,7 @@ class Communication::Website::GitFile < ApplicationRecord
   # - it's not there, and should be
   # - it's there, and should not be
   def analyze!
-    if about.try(:syncable?)
+    if about.try(:should_publish_to?, website)
       # If it's just initialized, it needs to be saved
       save unless persisted?
       # Anyway, we need to generate content (from WithContent)

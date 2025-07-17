@@ -52,7 +52,6 @@ Rails.application.config.to_prepare do
     def syncable?
       true
     end
-
   end
 
   ActiveStorage::Blob.include ActiveStorageGitPathStatic

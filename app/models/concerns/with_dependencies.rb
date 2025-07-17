@@ -45,17 +45,6 @@ module WithDependencies
     []
   end
 
-  # Method is often overriden
-  def syncable?
-    if respond_to? :published_now?
-      published_now?
-    elsif respond_to? :published
-      published
-    else
-      true
-    end
-  end
-
   # On ne liste pas les objets en cours de suppression
   # return array if respond_to?(:mark_for_destruction?) && mark_for_destruction
   # On renvoie l'array tel quel, non modifié, si on demande les contenus syncable_only et que le contenu ne l'est pas

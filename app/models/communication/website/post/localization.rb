@@ -47,13 +47,13 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include HeaderCallToAction
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithOpenApi
-  include WithPublication
   include WithUniversity
 
   belongs_to :website,
@@ -64,8 +64,8 @@ class Communication::Website::Post::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  def should_publish_to?(website)
-    website.id == communication_website_id && published && published_at
+  def syncable?
+    published?
   end
 
   def git_path_relative

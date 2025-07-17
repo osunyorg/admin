@@ -71,10 +71,6 @@ class University::Organization::Localization < ApplicationRecord
     "organizations/#{slug}.html"
   end
 
-  def should_publish_to?(website)
-    for_website?(website)
-  end
-
   def template_static
     "admin/university/organizations/static"
   end

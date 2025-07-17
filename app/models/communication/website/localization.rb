@@ -39,9 +39,9 @@ class Communication::Website::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
   include Initials
+  include Publishable
   include WithAccessibility
   include WithOpenApi
-  include WithPublication
   include WithUniversity
 
   alias :website :about

@@ -18,6 +18,10 @@ module HasGitFiles
   end
 
   def should_publish_to?(website)
+    for_website?(website) && syncable?
+  end
+
+  def syncable?
     true
   end
 

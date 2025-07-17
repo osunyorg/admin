@@ -35,8 +35,4 @@ class University::Person::Category::Localization < ApplicationRecord
     "persons_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
-  def should_publish_to?(website)
-    for_website?(website)
-  end
-
 end

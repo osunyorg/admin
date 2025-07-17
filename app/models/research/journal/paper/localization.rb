@@ -36,10 +36,10 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   include HasGitFiles
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include WithBlobs
   include WithCitations
-  include WithPublication
   include WithUniversity
 
   alias :paper :about
@@ -56,7 +56,7 @@ class Research::Journal::Paper::Localization < ApplicationRecord
     "papers/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 
-  def should_publish_to?(website)
+  def syncable?
     published?
   end
 

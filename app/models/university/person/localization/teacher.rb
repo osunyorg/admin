@@ -8,10 +8,6 @@ class University::Person::Localization::Teacher < University::Person::Localizati
     "teachers/#{slug}/_index.html"
   end
 
-  def should_publish_to?(website)
-    for_website?(website)
-  end
-
   def template_static
     "admin/education/teachers/static"
   end

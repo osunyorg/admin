@@ -48,10 +48,6 @@ class Education::Cohort::Localization < ApplicationRecord
     "academic_years/#{academic_year.year}/#{program_l10n.slug}.html"
   end
 
-  def should_publish_to?(website)
-    for_website?(website)
-  end
-
   def template_static
     "admin/education/cohorts/static"
   end

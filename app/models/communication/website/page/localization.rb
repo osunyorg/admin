@@ -49,13 +49,13 @@ class Communication::Website::Page::Localization < ApplicationRecord
   include HeaderCallToAction
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithOpenApi
-  include WithPublication
   include WithUniversity
 
   belongs_to  :website,
@@ -90,8 +90,8 @@ class Communication::Website::Page::Localization < ApplicationRecord
     breadcrumb_title.presence || title
   end
 
-  def should_publish_to?(website)
-    website.id == communication_website_id && published
+  def syncable?
+    published?
   end
 
   # Home        _index.html

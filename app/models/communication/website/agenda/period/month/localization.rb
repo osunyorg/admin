@@ -40,10 +40,6 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
     "events/#{year.slug}/#{slug}/_index.html"
   end
 
-  def should_publish_to?(website)
-    website.id == communication_website_id
-  end
-
   def template_static
     "admin/communication/websites/agenda/periods/months/static"
   end

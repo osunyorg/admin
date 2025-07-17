@@ -76,10 +76,6 @@ class Research::Publication < ApplicationRecord
     "publications/#{publication_date.year}/#{slug}.html"
   end
 
-  def should_publish_to?(website)
-    for_website?(website)
-  end
-
   def template_static
     "admin/research/publications/static"
   end

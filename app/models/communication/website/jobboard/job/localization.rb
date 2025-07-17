@@ -44,12 +44,12 @@ class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
   include HeaderCallToAction
   include Initials
   include Permalinkable # slug_unavailable method overwrite in this file
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithPublication
   include WithUniversity
 
   belongs_to :website,
@@ -62,10 +62,8 @@ class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
 
   before_validation :set_communication_website_id, on: :create
 
-  def should_publish_to?(website)
-    website.id == communication_website_id && 
-    published && published_at &&
-    about.current?
+  def syncable?
+    published? && job.current?
   end
 
   # jobs/2025/01/01-nom-offre.html

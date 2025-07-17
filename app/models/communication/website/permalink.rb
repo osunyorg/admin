@@ -102,8 +102,17 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   def computed_path
-    return @computed_path if defined?(@computed_path)
-    @computed_path ||= published? ? Static.clean_path(published_path) : nil
+    unless @computed_path
+      path = ""
+      path += "/#{language.iso_code}" if website.active_languages.many?
+      path += pattern
+      substitutions.each do |key, value|
+        path.gsub! ":#{key}", "#{value}"
+      end
+      path
+      @computed_path = Static.clean_path(path)
+    end
+    @computed_path
   end
 
   def save_if_needed
@@ -130,22 +139,8 @@ class Communication::Website::Permalink < ApplicationRecord
 
   protected
 
-  # Can be overwritten (Page for example)
-  def published_path
-    language = about.respond_to?(:language) ? about.language : website.default_language
-    p = ""
-    p += "/#{language.iso_code}" if website.active_languages.many?
-    p += pattern
-    substitutions.each do |key, value|
-      p.gsub! ":#{key}", "#{value}"
-    end
-    p
-  end
-
-  # Can be overwritten
-  def published?
-    # TODO probleme si pas for_website?, par exemple pour les objets directs
-    about.for_website?(website)
+  def language
+    @language ||= about.respond_to?(:language) ? about.language : website.default_language
   end
 
   # Can be overwritten

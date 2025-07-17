@@ -36,10 +36,10 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   include HasGitFiles
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage
-  include WithPublication
   include WithUniversity
 
   alias :volume :about
@@ -55,7 +55,7 @@ class Research::Journal::Volume::Localization < ApplicationRecord
     "volumes/#{published_at&.year}-#{slug}/_index.html"
   end
 
-  def should_publish_to?(website)
+  def syncable?
     published?
   end
 

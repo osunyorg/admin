@@ -7,10 +7,6 @@ class University::Person::Localization::Researcher < University::Person::Localiz
     "researchers/#{slug}/_index.html"
   end
 
-  def should_publish_to?(website)
-    for_website?(website)
-  end
-
   def template_static
     "admin/research/researchers/static"
   end

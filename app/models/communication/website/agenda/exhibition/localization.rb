@@ -49,6 +49,7 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   include HeaderCallToAction
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
@@ -56,7 +57,6 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   include WithCal
   include WithFeaturedImage
   include WithOpenApi
-  include WithPublication
   include WithUniversity
 
   belongs_to :website,
@@ -85,8 +85,7 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   end
 
   def should_publish_to?(website)
-    exhibition.allowed_in?(website) &&
-    published && published_at
+    published? && exhibition.allowed_in?(website)
   end
 
   def template_static

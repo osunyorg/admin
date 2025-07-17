@@ -40,8 +40,7 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
     "events/#{slug}/_index.html"
   end
 
-  def should_publish_to?(website)
-    website.id == communication_website_id && # Good site
+  def syncable?
     events_count > 0 # Some events
   end
 

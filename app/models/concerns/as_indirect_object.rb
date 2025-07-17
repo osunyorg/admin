@@ -100,10 +100,8 @@ module AsIndirectObject
   end
 
   def add_direct_source_to_dependencies(direct_source, website, array: [])
-    # Ne pas traiter les sources d'autres sites
-    return array unless direct_source.website.id == website.id
-    # Ne pas traiter les sources non synchronisables
-    return array unless direct_source.syncable?
+    # Ne pas traiter les sources non publiables sur le site
+    return array unless direct_source.should_publish_to?(website)
     # Ne pas traiter si la source directe est déjà dans le tableau de dépendances
     return array if array.include?(direct_source)
     array << direct_source

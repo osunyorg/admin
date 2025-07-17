@@ -37,10 +37,6 @@ class Education::AcademicYear::Localization < ApplicationRecord
     "academic_years/#{year}/_index.html"
   end
 
-  def should_publish_to?(website)
-    for_website?(website)
-  end
-
   def template_static
     "admin/education/academic_years/static"
   end
