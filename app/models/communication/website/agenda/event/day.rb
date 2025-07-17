@@ -45,10 +45,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
 
   # events/2025/01/02-arte-concert-festival.html
   def git_path_relative
-    path += "events/"
-    path += "#{event.from_day.strftime "%Y"}/"
-    path += "#{date.strftime "%m/%d"}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
-    path
+    "events/#{event.from_day.strftime "%Y"}/#{date.strftime "%m/%d"}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
   end
 
   def should_send_to?(website)
