@@ -652,6 +652,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_090103) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "bodyclass"
+    t.boolean "is_lasting", default: false
     t.index ["communication_website_id"], name: "index_agenda_exhibitions_on_communication_website_id"
     t.index ["created_by_id"], name: "idx_on_created_by_id_c3766f3a0a"
     t.index ["university_id"], name: "idx_on_university_id_46e895f493"
