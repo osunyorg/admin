@@ -33,6 +33,7 @@ module Communication::Website::WithConnectedObjects
     sync_with_git_safely
     mark_obsolete_git_files
     touch_planned_objects
+    unpublish_archivable_content
     check_period_years
     get_current_theme_version!
     analyse_repository!
@@ -194,13 +195,13 @@ module Communication::Website::WithConnectedObjects
     is_indirect_or_federated?(indirect_object)
   end
 
-  # ex: 
+  # ex:
   # - Personne (objet indirecct)
   # - Event d'un autre site (fédération)
   def is_indirect_or_federated?(object)
     # Si la méthode n'existe pas, ça transtype correctement
     # Les blobs, par exemple, ne répondent pas à is_indirect_object
-    !object.try(:is_direct_object?) || 
+    !object.try(:is_direct_object?) ||
     # L'objet est-il fédéré dans ce site ?
     (
       object.respond_to?(:federated_in?) &&
