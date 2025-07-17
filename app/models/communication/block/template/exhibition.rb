@@ -85,7 +85,7 @@ class Communication::Block::Template::Exhibition < Communication::Block::Templat
 
   def base_exhibitions
     exhibitions = website.exhibitions.published_now_in(block.language)
-    if time.in?(AUTHORIZED_SCOPES)
+    if time.in?(Communication::Website::Agenda::AUTHORIZED_SCOPES)
       exhibitions = exhibitions.public_send(time)
       exhibitions = time == 'archive' ? exhibitions.ordered_desc : exhibitions.ordered_asc
     end
