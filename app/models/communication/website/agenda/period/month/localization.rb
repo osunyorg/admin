@@ -36,13 +36,12 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
 
   delegate :value, to: :about
 
-  def git_path(website)
-    return unless website.id == communication_website_id
-    git_path_content_prefix(website) + git_path_relative
-  end
-
   def git_path_relative
     "events/#{year.slug}/#{slug}/_index.html"
+  end
+
+  def should_publish_to?(website)
+    website.id == communication_website_id
   end
 
   def template_static

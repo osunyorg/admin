@@ -42,9 +42,8 @@ class Communication::Website::Jobboard::Category::Localization < ApplicationReco
 
   before_validation :set_communication_website_id, on: :create
 
-  def git_path(website)
-    prefix = git_path_content_prefix(website)
-    "#{prefix}jobs_categories/#{slug_with_ancestors_slugs}/_index.html"
+  def git_path_relative
+    "jobs_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   protected
