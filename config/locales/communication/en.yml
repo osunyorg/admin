@@ -108,6 +108,7 @@ en:
         about_type: About
         access_token: Access token
         appearance: Appearance
+        archive_content: Archive content?
         autoupdate_theme: Automatically update Osuny theme
         config_default_content_security_policy: Security policies (CORS)
         config_default_deuxfleurs_workflow: Github action for Deuxfleurs deployment
@@ -123,6 +124,7 @@ en:
         default_shared_image: Default shared image
         default_time_zone: Default time zone
         deployment_status_badge: Deployment status badge
+        destination_websites: Websites to broadcast content to
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
         feature_agenda: Agenda
@@ -144,8 +146,10 @@ en:
         repository: Repository
         showcase_tags: Tags
         social: Social media
+        source_websites: Sources of federated content
         university: University
         url: URL
+        years_before_archive_content: Years before content archiving
       communication/website/agenda/event:
         categories: Categories
         children: Child events
@@ -460,6 +464,7 @@ en:
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the website <i>%{website}</i> in %{language}."
           title: Localization confirmation
+        content_archive: Content archiving
         default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases."
         default_shared_image: "The default sharing image, 1200 pixels wide, is a good base because the networks have different standards."
         editorial:
@@ -540,7 +545,7 @@ en:
         see_showcase: See showcase
         subnav:
           structure: Structure
-        synchronize: 
+        synchronize:
           button: Synchronize
           running: Synchronization launched, please be patient...
         technical:
@@ -737,6 +742,7 @@ en:
       communication_website:
         access_token_with_existing: Your Github or Gitlab confidential access token.<br>Leave the field blank if you don't want to change the token.
         access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website with Deuxfleurs.
+        archive_content: "If you check this box, the posts, events and exhibitions will be archived after the defined time period.<br>You can also mark a content as « lasting » to prevent it from being archived."
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_agenda: To share events
         feature_alumni: To display public alumni

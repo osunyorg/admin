@@ -131,8 +131,8 @@ fr:
     content_archive:
       is_lasting:
         hint:
-          one: Désactiver l'archivage automatique de ce contenu après %{count} an.
-          other: Désactiver l'archivage automatique de ce contenu après %{count} ans.
+          one: Si décoché, ce contenu sera automatiquement archivé après %{count} an.
+          other: Si décoché, ce contenu sera automatiquement archivé après %{count} ans.
         label: Contenu pérenne
     dashboard: Tableau de bord
     duplicate: Dupliquer
