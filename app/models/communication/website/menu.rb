@@ -59,9 +59,12 @@ class Communication::Website::Menu < ApplicationRecord
     I18n.exists?(key, locale) ? I18n.t(key, locale: locale) : ''
   end
 
-  def git_path(website)
-    return if !website.active_language_ids.include?(language_id) || items.none?
+  def git_path_relative
     "data/menus/#{language.iso_code}/#{identifier}.yml"
+  end
+
+  def should_publish_to?(website)
+    website.active_language_ids.include?(language_id) && items.any?
   end
 
   def template_static

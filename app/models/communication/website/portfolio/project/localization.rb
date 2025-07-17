@@ -65,9 +65,8 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   scope :ordered, -> (language = nil) { order(year: :desc, title: :asc) }
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }
 
-  def git_path(website)
-    return unless website.id == communication_website_id && published
-    git_path_content_prefix(website) + git_path_relative
+  def should_publish_to?(website)
+    website.id == communication_website_id && published
   end
 
   def git_path_relative

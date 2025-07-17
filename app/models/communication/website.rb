@@ -161,6 +161,10 @@ class Communication::Website < ApplicationRecord
     "data/website.yml"
   end
 
+  def should_publish_to?(website)
+    true
+  end
+
   def dependencies
     # Le website est le SEUL cas d'auto-dépendance
     [self] +

@@ -90,9 +90,8 @@ class Communication::Website::Page::Localization < ApplicationRecord
     breadcrumb_title.presence || title
   end
 
-  def git_path(website)
-    return unless website.id == communication_website_id && published
-    current_git_path
+  def should_publish_to?(website)
+    website.id == communication_website_id && published
   end
 
   # Home        _index.html
@@ -137,14 +136,6 @@ class Communication::Website::Page::Localization < ApplicationRecord
               .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
               .where.not(id: self.id)
               .exists?
-  end
-
-  def current_git_path
-    @current_git_path ||= git_path_prefix + git_path_relative
-  end
-
-  def git_path_prefix
-    @git_path_prefix ||= git_path_content_prefix(website)
   end
 
   def explicit_blob_ids

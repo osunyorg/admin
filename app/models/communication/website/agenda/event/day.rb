@@ -44,16 +44,14 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   scope :ordered, -> { order(:date) }
 
   # events/2025/01/02-arte-concert-festival.html
-  def git_path(website)
-    return unless published_in?(website)
-    path = git_path_content_prefix(website)
+  def git_path_relative
     path += "events/"
     path += "#{event.from_day.strftime "%Y"}/"
     path += "#{date.strftime "%m/%d"}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
     path
   end
 
-  def published_in?(website)
+  def should_publish_to?(website)
     event.allowed_in?(website) && # Good website or federated
     events.any? && # With events on this day
     event_l10n.present? && # Event localized in this language
