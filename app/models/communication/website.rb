@@ -5,6 +5,7 @@
 #  id                           :uuid             not null, primary key
 #  about_type                   :string           indexed => [about_id]
 #  access_token                 :string
+#  archive_content              :boolean          default(FALSE)
 #  autoupdate_theme             :boolean          default(TRUE)
 #  default_time_zone            :string
 #  deployment_status_badge      :text
@@ -31,6 +32,7 @@
 #  style_updated_at             :date
 #  theme_version                :string           default("NA")
 #  url                          :string
+#  years_before_archive_content :integer          default(3)
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
 #  about_id                     :uuid             indexed => [about_type]
