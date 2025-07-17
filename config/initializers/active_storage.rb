@@ -53,9 +53,6 @@ Rails.application.config.to_prepare do
       true
     end
 
-    def exportable_to_git?
-      true
-    end
   end
 
   ActiveStorage::Blob.include ActiveStorageGitPathStatic

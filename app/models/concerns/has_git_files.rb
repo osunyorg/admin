@@ -21,10 +21,6 @@ module HasGitFiles
     true
   end
 
-  def exportable_to_git?
-    true
-  end
-
   def git_path_content_prefix(website)
     # Handle language-less objects
     # TODO I18n: Right now, we use the language of the object, fallbacking on the language of the website. In the end, we'll only use the language of the object

@@ -47,14 +47,6 @@ class Communication::Website::GitFile < ApplicationRecord
   def self.generate(website, about)
     # Do nothing about nil...
     return if about.nil?
-    # All exportable objects must respond to this method
-    # HasGitFiles defines it
-    # AsIndirectObject does not include it, but some indirect objects have it (Person l10n, Organization l10n...)
-    # Some objects need to declare that property:
-    # - the website itself
-    # - configs (which inherit from the website)
-    # - active storage blobs
-    return unless about.try(:exportable_to_git?)
     # Permalinks must be calculated BEFORE renders
     manage_permalink about, website
     # Blobs need to be completely analyzed, which is async

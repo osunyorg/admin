@@ -83,12 +83,6 @@ module Communication::Website::WithGitRepository
     end
   end
 
-  # Le website devient data/website.yml
-  # Les configs héritent du modèle website et s'exportent en différents fichiers
-  def exportable_to_git?
-    true
-  end
-
   def should_clean_on_git?
     # Clean website if about was present and changed
     saved_change_to_about_id? && about_id_before_last_save.present?
