@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
 #  full_width               :boolean          default(FALSE)
+#  is_lasting               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
