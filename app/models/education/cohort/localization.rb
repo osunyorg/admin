@@ -44,8 +44,12 @@ class Education::Cohort::Localization < ApplicationRecord
     diploma&.best_localization_for(language)
   end
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}academic_years/#{academic_year.year}/#{program_l10n.slug}.html" if for_website?(website)
+  def git_path_relative
+    "academic_years/#{academic_year.year}/#{program_l10n.slug}.html"
+  end
+
+  def should_publish_to?(website)
+    for_website?(website)
   end
 
   def template_static

@@ -3,8 +3,12 @@ class University::Person::Localization::Administrator < University::Person::Loca
     'University::Person::Localization::Administrator'
   end
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}administrators/#{slug}/_index.html" if for_website?(website)
+  def git_path_relative
+    "administrators/#{slug}/_index.html"
+  end
+
+  def should_publish_to?(website)
+    for_website?(website)
   end
 
   def template_static
@@ -26,4 +30,5 @@ class University::Person::Localization::Administrator < University::Person::Loca
     # so we don't mess with the University::Person::Localization static_localization_key
     "#{about.class.polymorphic_name.parameterize}-administrator-#{self.about_id}"
   end
+
 end

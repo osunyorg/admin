@@ -87,8 +87,12 @@ class University::Person::Localization < ApplicationRecord
     [administrator, author, researcher, teacher]
   end
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}persons/#{slug}.html" if for_website?(website)
+  def git_path_relative
+    "persons/#{slug}.html"
+  end
+
+  def should_publish_to?(website)
+    for_website?(website)
   end
 
   def template_static

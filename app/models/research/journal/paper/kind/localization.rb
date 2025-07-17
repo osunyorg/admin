@@ -33,8 +33,8 @@ class Research::Journal::Paper::Kind::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}paper_kinds/#{slug}.html"
+  def git_path_relative
+    "paper_kinds/#{slug}.html"
   end
 
   def template_static

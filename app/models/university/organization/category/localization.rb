@@ -33,9 +33,12 @@ class University::Organization::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
   include WithOpenApi
 
-  def git_path(website)
-    return unless for_website?(website)
-    prefix = git_path_content_prefix(website)
-    "#{prefix}organizations_categories/#{slug_with_ancestors_slugs}/_index.html"
+  def git_path_relative
+    "organizations_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
+
+  def should_publish_to?(website)
+    for_website?(website)
+  end
+
 end

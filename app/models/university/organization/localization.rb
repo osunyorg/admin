@@ -67,8 +67,12 @@ class University::Organization::Localization < ApplicationRecord
     active_storage_blobs
   end
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}organizations/#{slug}.html" if for_website?(website)
+  def git_path_relative
+    "organizations/#{slug}.html"
+  end
+
+  def should_publish_to?(website)
+    for_website?(website)
   end
 
   def template_static

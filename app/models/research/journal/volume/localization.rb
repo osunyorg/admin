@@ -51,12 +51,12 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}volumes/#{relative_path}/_index.html" if published?
+  def relative_path
+    "volumes/#{published_at&.year}-#{slug}/_index.html"
   end
 
-  def relative_path
-    "#{published_at&.year}-#{slug}"
+  def should_publish_to?(website)
+    published?
   end
 
   def template_static
