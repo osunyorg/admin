@@ -128,6 +128,7 @@ fr:
         feature_agenda: Agenda
         feature_alerts: Alertes
         feature_alumni: Alumni
+        feature_hourly_publication: Programmation à l'heure
         feature_jobboard: Offres d'emploi
         feature_portfolio: Portfolio
         feature_posts: Actualités
@@ -600,6 +601,7 @@ fr:
     summary:
       none: Il n'y a pas encore de résumé
     website:
+      advanced_options: Options avancées
       analytics: Audience
       git: Git
       golive:
@@ -762,6 +764,7 @@ fr:
         feature_agenda: Pour partager des événements
         feature_alerts: Pour afficher des bandeaux d'alerte
         feature_alumni: Pour présenter les alumni publiquement
+        feature_hourly_publication: Pour programmer des actualités à l'heure
         feature_jobboard: Pour partager des offres d'emploi
         feature_portfolio: Pour présenter des projets
         feature_posts: Pour publier des actualités, comme un média
