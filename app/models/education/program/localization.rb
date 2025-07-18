@@ -59,13 +59,13 @@ class Education::Program::Localization < ApplicationRecord
   include Initials
   include Pathable
   include Permalinkable
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithInheritance
-  include WithPublication
   include WithUniversity
 
   has_summernote :summary
@@ -94,10 +94,12 @@ class Education::Program::Localization < ApplicationRecord
 
   scope :ordered, -> (language = nil) { order(:slug) }
 
-  def git_path(website)
-    return unless published? && for_website?(website)
-    clean_path = Static.clean_path "#{git_path_content_prefix(website)}programs/#{path}/"
-    "#{clean_path}_index.html"
+  def git_path_relative
+    "programs/#{path}/_index.html"
+  end
+
+  def syncable?
+    published?
   end
 
   def template_static

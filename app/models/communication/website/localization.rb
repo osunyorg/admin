@@ -39,9 +39,9 @@ class Communication::Website::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
   include Initials
+  include Publishable
   include WithAccessibility
   include WithOpenApi
-  include WithPublication
   include WithUniversity
 
   alias :website :about
@@ -52,10 +52,8 @@ class Communication::Website::Localization < ApplicationRecord
   after_create_commit :create_existing_menus_in_language
   after_save :mark_website_obsolete_git_files, if: :should_clean_website_on_git?
 
-  # Localization is not directly exportable to git
-  # Whereas the languages config in the dependencies is exportable to git
-  def exportable_to_git?
-    false
+  def git_path_relative
+    "data/website/#{language.iso_code}.yml"
   end
 
   def dependencies

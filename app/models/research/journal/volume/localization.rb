@@ -36,10 +36,10 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   include HasGitFiles
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage
-  include WithPublication
   include WithUniversity
 
   alias :volume :about
@@ -51,12 +51,12 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}volumes/#{relative_path}/_index.html" if published?
+  def relative_path
+    "volumes/#{published_at&.year}-#{slug}/_index.html"
   end
 
-  def relative_path
-    "#{published_at&.year}-#{slug}"
+  def syncable?
+    published?
   end
 
   def template_static

@@ -10,14 +10,18 @@ module HasGitFiles
   end
 
   def git_path(website)
-    raise NotImplementedError
+    git_path_content_prefix(website) + git_path_relative
   end
 
   def git_path_relative
     raise NotImplementedError
   end
 
-  def exportable_to_git?
+  def should_send_to?(website)
+    for_website?(website) && syncable?
+  end
+
+  def syncable?
     true
   end
 

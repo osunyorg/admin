@@ -42,9 +42,8 @@ class Communication::Website::Post::Category::Localization < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  def git_path(website)
-    prefix = git_path_content_prefix(website)
-    "#{prefix}posts_categories/#{slug_with_ancestors_slugs}/_index.html"
+  def git_path_relative
+    "posts_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   protected

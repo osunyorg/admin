@@ -159,8 +159,14 @@ class Communication::Website < ApplicationRecord
     original_localization.to_s
   end
 
+  # TODO deprecated
   def git_path(website)
     "data/website.yml"
+  end
+
+  # TODO deprecated
+  def should_send_to?(website)
+    true
   end
 
   def dependencies

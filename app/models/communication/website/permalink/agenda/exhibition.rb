@@ -20,10 +20,6 @@ class Communication::Website::Permalink::Agenda::Exhibition < Communication::Web
 
   protected
 
-  def published?
-    about.published_in?(website)
-  end
-
   def substitutions
     {
       year: about.from_day.strftime("%Y"),

@@ -33,6 +33,10 @@ module AsDirectObject
     false
   end
 
+  def for_website?(website)
+    website.id == communication_website_id
+  end
+
   def connect_dependencies
     dependencies.each do |dependency|
       website.connect(dependency, self)

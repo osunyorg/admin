@@ -18,10 +18,6 @@ class Communication::Website::Permalink::Post < Communication::Website::Permalin
 
   protected
 
-  def published?
-    website.id == about.communication_website_id && about.published && about.published_at
-  end
-
   def substitutions
     {
       year: about.published_at.strftime("%Y"),
