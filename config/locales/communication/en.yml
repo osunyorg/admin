@@ -128,6 +128,7 @@ en:
         deuxfleurs_hosting: Hébergement avec Deuxfleurs
         deuxfleurs_identifier: Identifiant Deuxfleurs
         feature_agenda: Agenda
+        feature_alerts: Alerts
         feature_alumni: Alumni
         feature_jobboard: Job board
         feature_portfolio: Portfolio
@@ -189,6 +190,15 @@ en:
         published: Published
         subtitle: Subtitle
         text: Information
+        title: Title
+      communication/website/alert:
+        kind: Alert type
+      communication/website/alert/localization:
+        cta: Display call to action
+        cta_label: Call to action label
+        cta_url: Call to action URL
+        published: Published
+        slug: Slug
         title: Title
       communication/website/connection:
         direct_source: Direct source
@@ -461,6 +471,8 @@ en:
           exhibitions:
             formatted_time_zone: "Time zone: %{time_zone}"
             none: No exhibition yet
+        alerts:
+          none: No alert yet
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the website <i>%{website}</i> in %{language}."
           title: Localization confirmation
@@ -701,6 +713,11 @@ en:
           unsplash: Unsplash photo library
           upload: Direct file upload
       website:
+        alert:
+          kind:
+            danger: Red alert
+            info: Information
+            warning: Alert
         menu:
           item:
             kind:
@@ -745,6 +762,7 @@ en:
         archive_content: "If you check this box, the posts, events and exhibitions will be archived after the defined time period.<br>You can also mark a content as « lasting » to prevent it from being archived."
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_agenda: To share events
+        feature_alerts: To display alert banners
         feature_alumni: To display public alumni
         feature_jobboard: To share job offers
         feature_portfolio: To showcase projects

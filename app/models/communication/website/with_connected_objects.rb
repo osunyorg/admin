@@ -123,6 +123,7 @@ module Communication::Website::WithConnectedObjects
     agenda_events_time_slots.changed_status_today.find_each &:touch
     exhibitions.changed_status_today.find_each &:touch
     post_localizations.published_today.find_each &:touch
+    alert_localizations.published_today.find_each &:touch
     find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
   end
 
