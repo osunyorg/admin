@@ -180,7 +180,7 @@ en:
           company: Company
           government: Government
           non_profit: Association
-          public_organization: Public Organisation
+          public_organization: Public organisation
           collective: Collective
   simple_form:
     hints:
