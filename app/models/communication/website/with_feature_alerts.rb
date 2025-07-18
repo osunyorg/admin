@@ -6,6 +6,10 @@ module Communication::Website::WithFeatureAlerts
                 class_name: "Communication::Website::Alert",
                 foreign_key: :communication_website_id,
                 dependent: :destroy
+    has_many    :alert_localizations,
+                class_name: "Communication::Website::Alert::Localization",
+                foreign_key: :communication_website_id,
+                dependent: :destroy
 
     scope :with_feature_alerts, -> { where(feature_alerts: true) }
   end
