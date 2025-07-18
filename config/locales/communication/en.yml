@@ -596,6 +596,7 @@ en:
     summary:
       none: No summary yet
     website:
+      advanced_options: Advanced options
       analytics: Analytics
       git: Git
       golive:
