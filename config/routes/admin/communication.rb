@@ -123,7 +123,7 @@ namespace :communication do
         end
       end
       namespace :periods, path: '' do
-        resources :years, only: [:index, :show], controller: '/admin/communication/websites/agenda/periods/years' do        
+        resources :years, only: [:index, :show], controller: '/admin/communication/websites/agenda/periods/years' do
           member do
             get :static
           end
@@ -173,6 +173,12 @@ namespace :communication do
         end
       end
       root to: '/admin/communication/websites/jobboard/jobs#index'
+    end
+    resources :alerts, controller: 'websites/alerts' do
+      member do
+        get :static
+        post :publish
+      end
     end
     resources :menus, controller: 'websites/menus' do
       member do

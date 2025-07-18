@@ -1,0 +1,34 @@
+<% if alerts.none? %>
+  <p><%= t('admin.communication.website.alerts.none') %></p>
+<% else %>
+  <div class="row g-2 mb-3">
+    <%
+    alerts.each do |alert|
+      alert_l10n = alert.best_localization_for(current_language)
+      %>
+      <div>
+        <div class="<%= osuny_card_classes(horizontal: true) %>">
+          <%= osuny_thumbnail_localized alert %>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <%= osuny_published_localized alert %>
+                <%= osuny_link_localized  alert,
+                                          admin_communication_website_alert_path(
+                                            website_id: alert.website.id,
+                                            id: alert.id
+                                          ),
+                                          classes: "stretched-link" %>
+              </div>
+              <div class="col-lg-6">
+                <span class="ms-3 badge border border-subtle bg-<%= alert.kind %>">
+                  <%= alert.kind_i18n %>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

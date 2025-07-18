@@ -12,6 +12,7 @@
 #  deuxfleurs_identifier        :string
 #  deuxfleurs_secret_access_key :string
 #  feature_agenda               :boolean          default(FALSE)
+#  feature_alerts               :boolean          default(FALSE)
 #  feature_alumni               :boolean          default(FALSE)
 #  feature_hourly_publication   :boolean          default(FALSE)
 #  feature_jobboard             :boolean          default(FALSE)
@@ -67,6 +68,7 @@ class Communication::Website < ApplicationRecord
   include WithDependencies
   include WithDeuxfleurs
   include WithFeatureAgenda
+  include WithFeatureAlerts
   include WithFeatureAlumni
   include WithFeatureJobboard
   include WithFeaturePosts
@@ -174,6 +176,7 @@ class Communication::Website < ApplicationRecord
     feature_jobboard_dependencies +
     feature_portfolio_dependencies +
     feature_posts_dependencies +
+    feature_alerts_dependencies +
     menus.in_languages(active_language_ids) +
     [default_image&.blob] +
     [default_shared_image&.blob] +
