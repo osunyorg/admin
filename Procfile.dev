@@ -1,3 +1,3 @@
 web: rails server
-worker: bundle exec good_job start --max-threads=1
+worker: bundle exec good_job start --max-threads=2
 js: yarn build --watch

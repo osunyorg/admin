@@ -70,7 +70,7 @@ fr:
         footer: Les blocs ajoutés ici apparaissent dans le pied de page (footer) du site, sur chaque page.
         templates:
           agenda:
-            description: Une liste d'événements à venir.
+            description: Une liste d'événements ponctuels, avec des horaires.
             edit:
               add_event: Ajouter un événement
               category_id:
@@ -103,12 +103,12 @@ fr:
                 label: Quels statuts d'événements afficher ?
                 options:
                   archive: Terminés (archivés)
-                  current: En cours en ce moment
-                  future: À venir, pas encore en cours
-                  future_or_current: En cours et à venir
+                  current: Du jour
+                  future: À venir (pas encore en cours)
+                  future_or_current: Du jour et à venir
             layouts:
               grid:
-                description: Les événements sont présentées en grille, avec les images toutes de la même taille.
+                description: Les événements sont présentés en grille, avec les images toutes de la même taille.
                 label: Grille
               large:
                 description: Chaque événement est présenté en majesté, sur toute la largeur disponible avec une grande image.
@@ -286,6 +286,49 @@ fr:
                 label: Titre de l'iframe (nécessaire pour l'accessibilité)
                 placeholder: Entrer le titre
               warning: Attention, le code ci-dessous est intégré tel quel, sans filtrage de sécurité. N'intégrez jamais de code externe dont la fiabilité n'est pas certaine.
+          exhibitions:
+            description: Une liste d'expositions qui s'étendent sur de longues périodes de temps.
+            edit:
+              add_exhibition: Ajouter une exposition
+              category_id:
+                label: Catégorie
+                placeholder: Sélectionner une catégorie
+              description:
+                label: Description
+              element:
+                id:
+                  label: ''
+                  placeholder: Choisir l'exposition
+              mode:
+                label: Quelles expositions afficher ?
+                options:
+                  all: Toutes les expositions, peu importe la catégorie
+                  category: Une catégorie spécifique d'expositions
+                  selection: Une sélection d'expositions
+              no_exhibition_message:
+                label: Phrase à afficher s'il n'y a aucune exposition
+                placeholder: Entrer la phrase souhaitée
+              quantity:
+                label: Quantité d'expositions à afficher
+                placeholder: Entrer la quantité
+              time:
+                label: Quels statuts d'expositions afficher ?
+                options:
+                  archive: Terminées (archivés)
+                  current: En cours
+                  future: À venir, pas encore en cours
+                  future_or_current: En cours et à venir
+            layouts:
+              grid:
+                description: Les expositions sont présentées en grille, avec les images toutes de la même taille.
+                label: Grille
+              large:
+                description: Chaque exposition est présentée en majesté, sur toute la largeur disponible avec une grande image.
+                label: Grand
+                more: En savoir plus
+              list:
+                description: Une liste d'expositions avec de petites images à la même largeur.
+                label: Liste
           features:
             description: Une liste de fonctionnalités avec des images, par exemple des icônes, et une description.
             edit:
@@ -359,6 +402,36 @@ fr:
               text:
                 label: Texte
                 placeholder: Entrer le texte
+          jobs:
+            description: Une liste d'offres d'emploi.
+            edit:
+              add_job: Ajouter une offre
+              category_id:
+                label: Catégorie
+                placeholder: Sélectionner une catégorie
+              element:
+                id:
+                  label: ''
+                  placeholder: Choisir l'offre
+              no_job_message:
+                label: Phrase à afficher s'il n'y a aucune offre d'emploi
+                placeholder: Entrer la phrase souhaitée
+              mode:
+                label: Quelles offres afficher ?
+                options:
+                  all: Toutes les offres
+                  category: Une catégorie spécifique
+                  selection: Une sélection d'offres
+              jobs_quantity:
+                label: Quantité d'offres
+                placeholder: Entrer la quantité
+            layouts:
+              grid:
+                description: Une grille d'offres, de gauche à droite puis de haut en bas.
+                label: Grille
+              list:
+                description: Une liste d'offres les unes au-dessous des autres.
+                label: Liste
           key_figures:
             description: Des chiffres clés avec une jolie animation. Chaque chiffre peut être doté d'une unité et d'un texte.
             edit:
@@ -478,6 +551,9 @@ fr:
               grid:
                 description: Une série de logos carrés, avec le nom de chaque organisation.
                 label: Grille
+              large:
+                description: Chaque organisation est présentée en majesté, sur toute la largeur disponible avec une grande image.
+                label: Grand
               map:
                 description: Une carte géographique avec un repère pour chaque organisation dont l'adresse est connue.
                 label: Carte
@@ -495,6 +571,8 @@ fr:
                   category: Une catégorie spécifique de pages
                   children: La page principale et ses enfants
                   selection: Une sélection spécifique de pages
+              option_categories:
+                label: Afficher les catégories
               option_image:
                 label: Afficher les images des pages
               option_main_summary:
@@ -783,7 +861,7 @@ fr:
     communication:
       block:
         template_kind:
-          agenda: Agenda
+          agenda: Événements
           call_to_action: Appel à actions
           categories: Catégories
           chapter: Chapitre
@@ -791,10 +869,12 @@ fr:
           datatable: Tableau
           definitions: Définitions
           embed: Intégration HTML
+          exhibitions: Expositions
           features: Fonctionnalités
           files: Fichiers
           gallery: Galerie
           image: Image
+          jobs: Offres d'emploi
           key_figures: Chiffres-clés
           license: Licence
           links: Liens

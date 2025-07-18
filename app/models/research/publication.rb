@@ -2,26 +2,27 @@
 #
 # Table name: research_publications
 #
-#  id               :uuid             not null, primary key
-#  abstract         :text
-#  authors_citeproc :json
-#  authors_list     :text
-#  citation_full    :text
-#  data             :jsonb
-#  doi              :string
-#  file             :text
-#  hal_docid        :string           indexed
-#  hal_url          :string
-#  journal_title    :string
-#  open_access      :boolean
-#  publication_date :date
-#  ref              :string
-#  slug             :string           indexed
-#  source           :integer          default("osuny")
-#  title            :string
-#  url              :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id                     :uuid             not null, primary key
+#  abstract               :text
+#  anr_project_references :text             default([]), is an Array
+#  authors_citeproc       :json
+#  authors_list           :text
+#  citation_full          :text
+#  data                   :jsonb
+#  doi                    :string
+#  file                   :text
+#  hal_docid              :string           indexed
+#  hal_url                :string
+#  journal_title          :string
+#  open_access            :boolean
+#  publication_date       :date
+#  ref                    :string
+#  slug                   :string           indexed
+#  source                 :integer          default("osuny")
+#  title                  :string
+#  url                    :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #
 # Indexes
 #

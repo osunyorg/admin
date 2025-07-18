@@ -28,6 +28,7 @@
 class Communication::Website::Agenda::Event::Day < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
+  include Communication::Website::Agenda::WithStatus
   include HasGitFiles
   include Permalinkable
   include WithUniversity
