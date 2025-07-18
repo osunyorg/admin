@@ -108,7 +108,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary,
         :header_cta, :header_cta_label, :header_cta_url,
-        :published, :published_at, :slug, :pinned,
+        :published, :published_at, :slug, :pinned, :is_lasting,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id

@@ -18,7 +18,7 @@ class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication
   protected
 
   def published?
-    event.allowed_in?(website)
+    about.published_in?(website)
   end
 
   def substitutions

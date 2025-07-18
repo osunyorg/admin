@@ -136,7 +136,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts,
       :default_time_zone,
       :deuxfleurs_hosting, :default_image, :default_image_delete, :default_image_infos, :default_shared_image, :default_shared_image_delete, :default_shared_image_infos,
-      :deployment_status_badge, :autoupdate_theme,
+      :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
       showcase_tag_ids: [], source_website_ids: [],
       localizations_attributes: [
         :id, :language_id, :name, :published,
