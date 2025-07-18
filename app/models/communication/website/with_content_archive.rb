@@ -32,6 +32,7 @@ module Communication::Website::WithContentArchive
     event_localizations
       .joins(:about)
       .where.not(communication_website_agenda_events: { is_lasting: true })
+      .published
       .where("communication_website_agenda_events.to_day < ?", max_archive_date).each do |event_l10n|
       event_l10n.update(published: false)
     end
@@ -41,6 +42,7 @@ module Communication::Website::WithContentArchive
     exhibition_localizations
       .joins(:about)
       .where.not(communication_website_agenda_exhibitions: { is_lasting: true })
+      .published
       .where("communication_website_agenda_exhibitions.to_day < ?", max_archive_date).each do |exhibition_l10n|
       exhibition_l10n.update(published: false)
     end
