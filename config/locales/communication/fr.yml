@@ -96,7 +96,8 @@ fr:
       communication/media/collection/localization:
         name: Nom
       communication/media/localization:
-        internal_description: Description interne
+        internal_description_label: Description interne
+        internal_description_hint: Description complémentaire de l'image à destination des les utilisateur·rices de la médiathèque, afin de faciliter sa recherche. Elle peut donner des informations complémentaires sur l'image et contenir des instructions spécifiques d'usage pour les utilisateur·rices de la médiathèque.
         name: Nom
       communication/website:
         about: Sujet du site

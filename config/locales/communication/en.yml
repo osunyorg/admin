@@ -96,7 +96,8 @@ en:
       communication/media/collection/localization:
         name: Name
       communication/media/localization:
-        internal_description: Internal description
+        internal_description_label: Internal description
+        internal_description_hint: Complementary description of the image for the media library users. This text can help the media library users to find an image, have complementary informations about it or have special instructions regarding the use of the image. 
         name: Name
       communication/website:
         about: About
