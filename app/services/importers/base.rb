@@ -35,7 +35,7 @@ module Importers
     end
 
     def analyze_hash(hash, index)
-      raise NotImplementedError
+      raise NoMethodError, "You must implement the `analyze_hash` method in #{self.class.name}"
     end
 
     def add_error(error, line)

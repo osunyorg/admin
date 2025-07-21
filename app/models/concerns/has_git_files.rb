@@ -3,7 +3,7 @@ module HasGitFiles
 
   included do
     include GeneratesGitFiles
-    
+
     has_many  :git_files,
               class_name: "Communication::Website::GitFile",
               as: :about
@@ -14,7 +14,7 @@ module HasGitFiles
   end
 
   def git_path_relative
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `git_path_relative` method in #{self.class.name}"
   end
 
   def should_sync_to?(website)
