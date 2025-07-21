@@ -83,6 +83,13 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   validates :title, presence: true
   validate :slug_cant_be_numeric_only
 
+  scope :archivable, -> (datetime) {
+    joins(:about)
+      .where.not(communication_website_agenda_events: { is_lasting: true })
+      .published
+      .where("communication_website_agenda_events.to_day < ?", datetime.to_date)
+  }
+
   # events/2025/01/01-arte-concert-festival.html
   def git_path(website)
     return unless published_in?(website)

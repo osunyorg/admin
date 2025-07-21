@@ -64,6 +64,13 @@ class Communication::Website::Post::Localization < ApplicationRecord
 
   validates :title, presence: true
 
+  scope :archivable, -> (datetime) {
+    joins(:about)
+      .where.not(communication_website_posts: { is_lasting: true })
+      .published
+      .where("published_at <= ?", datetime)
+  }
+
   def git_path(website)
     return unless website.id == communication_website_id && published && published_at
     git_path_content_prefix(website) + git_path_relative
