@@ -130,6 +130,7 @@ en:
         feature_agenda: Agenda
         feature_alerts: Alerts
         feature_alumni: Alumni
+        feature_hourly_publication: Hourly publication
         feature_jobboard: Job board
         feature_portfolio: Portfolio
         feature_posts: Posts
@@ -764,6 +765,7 @@ en:
         feature_agenda: To share events
         feature_alerts: To display alert banners
         feature_alumni: To display public alumni
+        feature_hourly_publication: To schedule posts by the hour
         feature_jobboard: To share job offers
         feature_portfolio: To showcase projects
         feature_posts: To publish posts, like a media
