@@ -604,6 +604,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_152546) do
     t.string "migration_identifier"
     t.uuid "created_by_id"
     t.string "bodyclass"
+    t.boolean "is_lasting", default: false
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
     t.index ["created_by_id"], name: "index_communication_website_agenda_events_on_created_by_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_events_on_parent_id"
@@ -651,6 +652,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_152546) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "bodyclass"
+    t.boolean "is_lasting", default: false
     t.index ["communication_website_id"], name: "index_agenda_exhibitions_on_communication_website_id"
     t.index ["created_by_id"], name: "idx_on_created_by_id_c3766f3a0a"
     t.index ["university_id"], name: "idx_on_university_id_46e895f493"
@@ -1273,6 +1275,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_152546) do
     t.string "migration_identifier"
     t.boolean "full_width", default: false
     t.string "bodyclass"
+    t.boolean "is_lasting", default: false
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
@@ -1335,6 +1338,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_152546) do
     t.boolean "feature_alumni", default: false
     t.boolean "feature_jobboard", default: false
     t.boolean "feature_alerts", default: false
+    t.boolean "archive_content", default: false
+    t.integer "years_before_archive_content", default: 3
     t.boolean "feature_hourly_publication", default: false
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"

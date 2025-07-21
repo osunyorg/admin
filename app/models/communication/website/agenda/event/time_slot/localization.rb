@@ -62,7 +62,9 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   end
 
   def published_in?(website)
-    event.allowed_in?(website)
+    event.allowed_in?(website) &&
+    event_l10n.present? && # Event localized in this language
+    event_l10n.published? # and published
   end
 
   def template_static
