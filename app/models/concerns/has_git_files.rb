@@ -18,10 +18,10 @@ module HasGitFiles
   end
 
   def should_sync_to?(website)
-    has_git_file?
+    can_have_git_file?
   end
 
-  def has_git_file?
+  def can_have_git_file?
     true
   end
 

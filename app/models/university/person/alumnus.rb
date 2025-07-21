@@ -4,7 +4,7 @@ class University::Person::Alumnus < University::Person
   end
 
   # No alumni on websites, we use people
-  def has_git_file?
+  def can_have_git_file?
     false
   end
 

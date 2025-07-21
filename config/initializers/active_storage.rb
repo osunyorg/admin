@@ -49,7 +49,7 @@ Rails.application.config.to_prepare do
       true
     end
 
-    def has_git_file?
+    def can_have_git_file?
       true
     end
   end
