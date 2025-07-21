@@ -6,11 +6,19 @@ module WithHourlyPublication
   included do
     belongs_to :publication_job, class_name: 'GoodJob::Job', optional: true
 
-    after_save_commit :schedule_publication_job, if: :should_schedule_publication_job?
-    after_save_commit :unschedule_publication_job, if: :should_unschedule_publication_job?
+    after_save_commit :manage_hourly_publication_job
   end
 
   protected
+
+  def manage_hourly_publication_job
+    return unless website.feature_hourly_publication?
+    if should_schedule_publication_job?
+      schedule_publication_job
+    elsif should_unschedule_publication_job?
+      unschedule_publication_job
+    end
+  end
 
   def schedule_publication_job
     # First, we remove any existing publication job for this object
@@ -27,22 +35,29 @@ module WithHourlyPublication
   end
 
   def should_schedule_publication_job?
-    # The feature must be enabled
-    website.feature_hourly_publication? &&
     # The object is published (not published?, which would do publish_now?)
     published &&
     # The publication state OR the publication date has changed
-    (saved_change_to_published? || saved_change_to_published_at?) &&
+    (
+      saved_change_to_published? || 
+      saved_change_to_published_at?
+    ) &&
     # The object was programmed to be published in the future
-    published_at.present? && published_at > Time.zone.now
+    published_at.present? && 
+    published_at > Time.zone.now
   end
 
   def should_unschedule_publication_job?
-    # The feature must be enabled
-    website.feature_hourly_publication? &&
-    # The object was just unpublished (not published?, which would do publish_now?)
-    saved_change_to_published? && !published &&
-    # The publication job ID is present
-    publication_job_id.present?
+    # The object was just unpublished
+    (
+      saved_change_to_published? && 
+      !published
+    ) ||
+    # Or the publication date was changed to the past
+    (
+      saved_change_to_published_at? && 
+      published_at.present? && 
+      published_at <= Time.zone.now
+    )
   end
 end
