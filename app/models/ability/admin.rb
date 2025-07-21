@@ -65,6 +65,7 @@ class Ability::Admin < Ability
     # Le risque de faussse manip est grand.
     cannot :destroy, Communication::Website, university_id: @user.university_id
     can :manage, Communication::Website::Localization, university_id: @user.university_id
+    can :manage, Communication::Website::Alert, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Event, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Category, university_id: @user.university_id
     can :manage, Communication::Website::Agenda::Exhibition, university_id: @user.university_id
