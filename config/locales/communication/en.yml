@@ -130,6 +130,7 @@ en:
         feature_agenda: Agenda
         feature_alerts: Alerts
         feature_alumni: Alumni
+        feature_hourly_publication: Hourly publication
         feature_jobboard: Job board
         feature_portfolio: Portfolio
         feature_posts: Posts
@@ -476,7 +477,6 @@ en:
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the website <i>%{website}</i> in %{language}."
           title: Localization confirmation
-        content_archive: Content archiving
         default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases."
         default_shared_image: "The default sharing image, 1200 pixels wide, is a good base because the networks have different standards."
         editorial:
@@ -601,6 +601,7 @@ en:
     summary:
       none: No summary yet
     website:
+      advanced_options: Advanced options
       analytics: Analytics
       git: Git
       golive:
@@ -764,6 +765,7 @@ en:
         feature_agenda: To share events
         feature_alerts: To display alert banners
         feature_alumni: To display public alumni
+        feature_hourly_publication: To schedule posts by the hour
         feature_jobboard: To share job offers
         feature_portfolio: To showcase projects
         feature_posts: To publish posts, like a media

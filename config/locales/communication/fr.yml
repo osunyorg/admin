@@ -130,6 +130,7 @@ fr:
         feature_agenda: Agenda
         feature_alerts: Alertes
         feature_alumni: Alumni
+        feature_hourly_publication: Programmation à l'heure
         feature_jobboard: Offres d'emploi
         feature_portfolio: Portfolio
         feature_posts: Actualités
@@ -478,7 +479,6 @@ fr:
         confirm_localization:
           text_html: "La création de <i>%{about}</i> en %{language} nécessite la traduction du site web <i>%{website}</i> en %{language}."
           title: Confirmation de traduction
-        content_archive: Archivage du contenu
         default_image: "L'image par défaut sera utilisée dans les pages et actualités qui n'ont pas d'image, si le thème est paramétré pour afficher des images dans tous les cas."
         default_shared_image: "Image de partage par défaut, 1200 pixels de large est une bonne base car les réseaux ont des standards différents."
         editorial:
@@ -603,6 +603,7 @@ fr:
     summary:
       none: Il n'y a pas encore de résumé
     website:
+      advanced_options: Options avancées
       analytics: Audience
       git: Git
       golive:
@@ -766,6 +767,7 @@ fr:
         feature_agenda: Pour partager des événements
         feature_alerts: Pour afficher des bandeaux d'alerte
         feature_alumni: Pour présenter les alumni publiquement
+        feature_hourly_publication: Pour programmer des actualités à l'heure
         feature_jobboard: Pour partager des offres d'emploi
         feature_portfolio: Pour présenter des projets
         feature_posts: Pour publier des actualités, comme un média
