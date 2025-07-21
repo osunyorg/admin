@@ -51,7 +51,7 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  def relative_path
+  def git_path_relative
     "volumes/#{published_at&.year}-#{slug}/_index.html"
   end
 
