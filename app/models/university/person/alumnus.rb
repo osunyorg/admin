@@ -3,8 +3,8 @@ class University::Person::Alumnus < University::Person
     'University::Person::Alumnus'
   end
 
-  # No alumni on websites
-  def should_send_to?(website)
+  # No alumni on websites, we use people
+  def syncable?
     false
   end
 
