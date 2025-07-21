@@ -29,7 +29,7 @@ module WithHourlyPublication
   def should_schedule_publication_job?
     # The feature must be enabled
     website.feature_hourly_publication? &&
-    # The object is published
+    # The object is published (not published?, which would do publish_now?)
     published &&
     # The publication state OR the publication date has changed
     (saved_change_to_published? || saved_change_to_published_at?) &&
@@ -40,7 +40,7 @@ module WithHourlyPublication
   def should_unschedule_publication_job?
     # The feature must be enabled
     website.feature_hourly_publication? &&
-    # The object was just unpublished
+    # The object was just unpublished (not published?, which would do publish_now?)
     saved_change_to_published? && !published &&
     # The publication job ID is present
     publication_job_id.present?
