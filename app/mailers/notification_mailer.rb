@@ -56,9 +56,8 @@ class NotificationMailer < ApplicationMailer
 
   def gdpr_deletion_incoming(university, user)
     merge_with_university_infos(university, {})
-    @user = user
     I18n.with_locale(user.language.iso_code) do
-      subject = t('mailers.notifications.gdpr_deletion_incoming.subject', mail: @user.email)
+      subject = t('mailers.notifications.gdpr_deletion_incoming.subject', mail: user.email)
       mail(from: university.mail_from[:full], to: user.email, subject: subject) if should_send?(user.email)
     end
   end
