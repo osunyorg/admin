@@ -17,6 +17,10 @@ class Communication::Website::Permalink::Agenda::Event::TimeSlot < Communication
 
   protected
 
+  def published?
+    about.published_in?(website)
+  end
+
   def substitutions
     if event.kind_child?
       parent_event_l10n = event_l10n.parent

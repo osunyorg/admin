@@ -58,6 +58,9 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   def should_sync_to?(website)
     event.allowed_in?(website)
+    event.allowed_in?(website) &&
+    event_l10n.present? && # Event localized in this language
+    event_l10n.published? # and published
   end
 
   def template_static

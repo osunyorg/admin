@@ -61,7 +61,7 @@ class Research::Journal::Paper < ApplicationRecord
     localization_published_at_select = <<-SQL
       COALESCE(
         MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.published_at END),
-        '1970-01-01'
+        NULL
       ) AS localization_published_at
     SQL
 

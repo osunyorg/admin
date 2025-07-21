@@ -28,6 +28,7 @@
               </div>
             </div>
             <%= lf.input :published_at, html5: true, as: :date %>
+            <%= render 'admin/application/content_archive/form', f: f %>
           <% end %>
           <%= f.association :authors,
                             collection: osuny_collection(

@@ -77,6 +77,13 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
 
   validates :title, presence: true
 
+  scope :archivable, -> (datetime) {
+    joins(:about)
+      .where.not(communication_website_agenda_exhibitions: { is_lasting: true })
+      .published
+      .where("communication_website_agenda_exhibitions.to_day < ?", datetime.to_date)
+  }
+
   def git_path_relative
     path = "exhibitions/"
     path += "archives/#{from_day.year}/" if archive?

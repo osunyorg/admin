@@ -64,6 +64,13 @@ class Communication::Website::Post::Localization < ApplicationRecord
 
   validates :title, presence: true
 
+  scope :archivable, -> (datetime) {
+    joins(:about)
+      .where.not(communication_website_posts: { is_lasting: true })
+      .published
+      .where("published_at <= ?", datetime)
+  }
+
   def should_sync_to?(website)
     published?
   end
