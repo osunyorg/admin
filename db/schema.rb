@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_17_090103) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_18_152546) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -1259,9 +1259,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_090103) do
     t.boolean "header_cta", default: false
     t.string "header_cta_label"
     t.string "header_cta_url"
+    t.uuid "publication_job_id"
     t.index ["about_id"], name: "index_communication_website_post_localizations_on_about_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_f6354f61f0"
     t.index ["language_id"], name: "index_communication_website_post_localizations_on_language_id"
+    t.index ["publication_job_id"], name: "idx_on_publication_job_id_790971fcf1"
     t.index ["university_id"], name: "idx_on_university_id_a3a3f1e954"
   end
 
@@ -1338,6 +1340,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_090103) do
     t.boolean "feature_alerts", default: false
     t.boolean "archive_content", default: false
     t.integer "years_before_archive_content", default: 3
+    t.boolean "feature_hourly_publication", default: false
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
@@ -2591,6 +2594,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_090103) do
   add_foreign_key "communication_website_post_category_localizations", "universities"
   add_foreign_key "communication_website_post_localizations", "communication_website_posts", column: "about_id"
   add_foreign_key "communication_website_post_localizations", "communication_websites"
+  add_foreign_key "communication_website_post_localizations", "good_jobs", column: "publication_job_id", on_delete: :nullify
   add_foreign_key "communication_website_post_localizations", "languages"
   add_foreign_key "communication_website_post_localizations", "universities"
   add_foreign_key "communication_website_posts", "communication_websites"
