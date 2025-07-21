@@ -128,6 +128,12 @@ en:
       read_all: See all chronicles
       read_more: Learn more
       title: Chronicles
+    content_archive:
+      is_lasting:
+        hint:
+          one: If unchecked, this content will be automatically archived after %{count} year.
+          other: If unchecked, this content will be automatically archived after %{count} years.
+        label: Lasting content
     dashboard: Dashboard
     duplicate: Duplicate
     elements:
