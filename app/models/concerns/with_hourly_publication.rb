@@ -4,6 +4,8 @@ module WithHourlyPublication
   extend ActiveSupport::Concern
 
   included do
+    belongs_to :publication_job, class_name: 'GoodJob::Job', optional: true
+
     after_save_commit :schedule_publication_job, if: :should_schedule_publication_job?
     after_save_commit :unschedule_publication_job, if: :should_unschedule_publication_job?
   end
@@ -12,7 +14,7 @@ module WithHourlyPublication
 
   def schedule_publication_job
     # First, we remove any existing publication job for this object
-    unschedule_publication_job if publication_job_id.present?
+    unschedule_publication_job if publication_job.present?
     # Then, we schedule a new publication job and keep track of its ID
     identify_job = Communication::Website::Post::Localization::PublishJob
                     .set(wait_until: published_at)
@@ -21,8 +23,7 @@ module WithHourlyPublication
   end
 
   def unschedule_publication_job
-    # First, we remove any existing publication job for this object
-    GoodJob::Job.find_by(id: publication_job_id)&.destroy
+    publication_job&.destroy
   end
 
   def should_schedule_publication_job?
