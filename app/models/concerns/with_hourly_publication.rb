@@ -23,7 +23,6 @@ module WithHourlyPublication
   def unschedule_publication_job
     # First, we remove any existing publication job for this object
     GoodJob::Job.find_by(id: publication_job_id)&.destroy
-    update_column :publication_job_id, nil
   end
 
   def should_schedule_publication_job?
