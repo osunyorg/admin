@@ -8,7 +8,7 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
     true
   end
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     website.feature_posts
   end
 

@@ -59,7 +59,7 @@ module Communication::Website::Page::WithSpecialPage
     type.blank?
   end
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     true
   end
 
