@@ -59,7 +59,7 @@ class Communication::Website::Menu < ApplicationRecord
     I18n.exists?(key, locale) ? I18n.t(key, locale: locale) : ''
   end
 
-  def git_path_relative
+  def git_path(website)
     "data/menus/#{language.iso_code}/#{identifier}.yml"
   end
 
