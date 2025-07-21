@@ -221,7 +221,7 @@ class Communication::Website < ApplicationRecord
   def move_to_university(new_university_id)
     return if self.university_id == new_university_id
     update_column :university_id, new_university_id
-    recursive_dependencies_syncable_following_direct.each do |dependency|
+    recursive_dependencies_following_direct.each do |dependency|
       reconnect_dependency dependency, new_university_id
     end
   end
