@@ -1,0 +1,47 @@
+<%= simple_form_for [:admin, alert] do |f| %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
+    <div class="row">
+      <div class="col-md-8">
+        <%= osuny_panel t('content') do %>
+          <%= lf.input :title, input_html: { data: { translatable: true } } %>
+          <%= f.input :kind, include_blank: false %>
+          <%= lf.input  :description,
+                        as: :summernote,
+                        input_html: {
+                          data: {
+                            translatable: true,
+                            'summernote-config' => 'mini'
+                          }
+                        } %>
+          <%= lf.input :cta, input_html: { data: { 'conditional': true }, id: 'cta' } %>
+          <div  class="d-none"
+                data-conditional-source="cta"
+                data-conditional-value="true">
+            <%= lf.input :cta_label %>
+            <%= lf.input :cta_url %>
+          </div>
+        <% end %>
+
+      </div>
+      <div class="col-md-4">
+        <%= osuny_panel t('metadata') do %>
+          <%= render 'admin/application/publication/form', f: lf, about: alert %>
+          <%= render 'admin/application/slug/form',
+                      f: lf,
+                      source: '#communication_website_alert_localizations_attributes_0_title' %>
+        <% end %>
+      </div>
+    </div>
+
+    <% content_for :action_bar_right do %>
+      <%= cancel [:admin, alert] %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: l10n %>
+      <%= submit f %>
+    <% end %>
+  <% end %>
+<% end %>
