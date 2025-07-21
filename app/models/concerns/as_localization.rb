@@ -37,7 +37,7 @@ module AsLocalization
     original.nil? || (self == original)
   end
 
-  def for_website?(website)
+  def should_sync_to?(website)
     website.active_language_ids.include?(language_id) &&
       website.has_connected_object?(self)
   end

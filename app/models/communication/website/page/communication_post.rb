@@ -8,6 +8,10 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
     true
   end
 
+  def is_necessary_for_website?
+    website.feature_posts
+  end
+
   def dependencies
     super +
     [website.config_default_languages] +

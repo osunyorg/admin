@@ -102,7 +102,7 @@ module WithDependencies
 
   # Si on n'est pas en syncable only on liste tout, sinon, il faut analyser
   def dependency_should_be_synced?(dependency, syncable_only)
-    !syncable_only || (dependency.respond_to?(:syncable?) && dependency.syncable?)
+    !syncable_only || dependency.try(:has_git_file?)
   end
 
   def clean_websites_if_necessary

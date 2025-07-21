@@ -62,7 +62,7 @@ class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
 
   before_validation :set_communication_website_id, on: :create
 
-  def syncable?
+  def should_sync_to?(website)
     published? && job.current?
   end
 

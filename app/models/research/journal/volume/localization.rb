@@ -55,7 +55,7 @@ class Research::Journal::Volume::Localization < ApplicationRecord
     "volumes/#{published_at&.year}-#{slug}/_index.html"
   end
 
-  def syncable?
+  def should_sync_to?(website)
     published?
   end
 

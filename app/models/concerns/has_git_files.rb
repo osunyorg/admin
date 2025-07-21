@@ -17,11 +17,11 @@ module HasGitFiles
     raise NotImplementedError
   end
 
-  def should_send_to?(website)
-    for_website?(website) && syncable?
+  def should_sync_to?(website)
+    has_git_file?
   end
 
-  def syncable?
+  def has_git_file?
     true
   end
 

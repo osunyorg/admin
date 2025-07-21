@@ -98,7 +98,7 @@ class Education::Program::Localization < ApplicationRecord
     "programs/#{path}/_index.html"
   end
 
-  def syncable?
+  def should_sync_to?(website)
     published?
   end
 

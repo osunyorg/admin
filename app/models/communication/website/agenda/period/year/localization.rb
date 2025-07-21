@@ -40,7 +40,7 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
     "events/#{slug}/_index.html"
   end
 
-  def syncable?
+  def should_sync_to?(website)
     events_count > 0 # Some events
   end
 

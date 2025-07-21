@@ -165,7 +165,7 @@ class Communication::Website < ApplicationRecord
   end
 
   # TODO deprecated
-  def should_send_to?(website)
+  def should_sync_to?(website)
     true
   end
 

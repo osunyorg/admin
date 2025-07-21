@@ -48,7 +48,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
     "events/#{event.from_day.strftime "%Y"}/#{date.strftime "%m/%d"}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
   end
 
-  def should_send_to?(website)
+  def should_sync_to?(website)
     event.allowed_in?(website) && # Good website or federated
     events.any? && # With events on this day
     event_l10n.present? && # Event localized in this language

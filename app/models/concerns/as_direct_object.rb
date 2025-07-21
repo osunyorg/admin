@@ -33,7 +33,7 @@ module AsDirectObject
     false
   end
 
-  def for_website?(website)
+  def should_sync_to?(website)
     website.id == communication_website_id
   end
 

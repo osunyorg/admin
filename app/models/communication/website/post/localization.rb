@@ -64,7 +64,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  def syncable?
+  def should_sync_to?(website)
     published?
   end
 

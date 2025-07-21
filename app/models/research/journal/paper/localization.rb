@@ -56,7 +56,7 @@ class Research::Journal::Paper::Localization < ApplicationRecord
     "papers/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 
-  def syncable?
+  def should_sync_to?(website)
     published?
   end
 

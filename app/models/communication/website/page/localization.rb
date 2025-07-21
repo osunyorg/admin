@@ -90,7 +90,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
     breadcrumb_title.presence || title
   end
 
-  def syncable?
+  def should_sync_to?(website)
     published?
   end
 

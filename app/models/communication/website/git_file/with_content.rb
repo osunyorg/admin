@@ -59,6 +59,6 @@ module Communication::Website::GitFile::WithContent
   end
 
   def needs_deletion?
-    about.nil? || !about.should_send_to?(website)
+    about.nil? || !about.should_sync_to?(website)
   end
 end

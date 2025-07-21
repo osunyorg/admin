@@ -88,7 +88,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}#{event.suffix_in(website)}.html"
   end
 
-  def should_send_to?(website)
+  def should_sync_to?(website)
     event.allowed_in?(website) &&
     published && published_at &&
     event.time_slots.none? && # Rendered by Communication::Website::Agenda::Event::TimeSlot

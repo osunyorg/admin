@@ -84,7 +84,7 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
     path
   end
 
-  def should_send_to?(website)
+  def should_sync_to?(website)
     published? && exhibition.allowed_in?(website)
   end
 

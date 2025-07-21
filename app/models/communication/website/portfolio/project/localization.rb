@@ -65,7 +65,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   scope :ordered, -> (language = nil) { order(year: :desc, title: :asc) }
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }
 
-  def syncable?
+  def should_sync_to?(website)
     published?
   end
 
