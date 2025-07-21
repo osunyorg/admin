@@ -14,9 +14,6 @@
           <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
           <%= f.input :in_production %>
         <% end %>
-        <%= osuny_panel t('communication.website.advanced_options') do %>
-          <%= f.input :feature_hourly_publication %>
-        <% end %>
       </div>
       <div class="col-lg-6 col-xxl-4">
         <%= osuny_panel t('communication.website.git') do %>

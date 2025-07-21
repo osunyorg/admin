@@ -476,7 +476,6 @@ en:
         confirm_localization:
           text_html: "The creation of <i>%{about}</i> in %{language} requires the localization of the website <i>%{website}</i> in %{language}."
           title: Localization confirmation
-        content_archive: Content archiving
         default_image: "The default image will be used on pages and posts that do not have an image, if the theme is set to display images in all cases."
         default_shared_image: "The default sharing image, 1200 pixels wide, is a good base because the networks have different standards."
         editorial:

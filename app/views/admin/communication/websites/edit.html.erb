@@ -11,13 +11,17 @@
 
     <%= osuny_separator %>
 
-    <%= osuny_panel t('admin.communication.website.content_archive') do %>
+    <%= osuny_panel t('communication.website.advanced_options') do %>
       <div class="row">
         <div class="col-lg-4 mb-4">
-          <%= f.input :archive_content %>
+          <%= f.input :feature_hourly_publication %>
         </div>
         <div class="col-lg-4 mb-4">
-          <%= f.input :years_before_archive_content %>
+          <%= f.input :archive_content, input_html: { data: { conditional: true } } %>
+          <div  data-conditional-source="communication_website_archive_content"
+                data-conditional-value="true">
+            <%= f.input :years_before_archive_content %>
+          </div>
         </div>
       </div>
     <% end %>
