@@ -1,6 +1,4 @@
 class Gdpr::UserDeletionService
-  attr_accessor :users_to_alert, :users_to_delete
-
   DAYS_BEFORE_DELETION = 1095
   WARNING_DELAY = 30
   DAYS_BEFORE_WARNING = DAYS_BEFORE_DELETION - WARNING_DELAY
