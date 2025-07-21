@@ -2,7 +2,7 @@ module User::WithRoles
   extend ActiveSupport::Concern
 
   included do
-    attr_accessor :modified_by
+    attr_accessor :modified_by, :just_autopromoted
 
     enum :role, {
       visitor: 0,
@@ -29,6 +29,7 @@ module User::WithRoles
 
     before_validation :set_default_role, on: :create
     before_validation :check_modifier_role
+    after_create :set_university_autopromote_option, if: Proc.new { |user| user.just_autopromoted? } 
 
     def self.roles_with_access_to_global_menu
       roles.keys - ['contributor', 'author', 'website_manager']
@@ -57,7 +58,12 @@ module User::WithRoles
         self.role = :server_admin
       elsif university.users.not_server_admin.empty?
         self.role = :admin
+        self.just_autopromoted = true
       end
+    end
+
+    def set_university_autopromote_option
+      university.update(admin_already_auto_promoted: true)
     end
 
   end
