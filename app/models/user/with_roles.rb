@@ -29,7 +29,7 @@ module User::WithRoles
 
     before_validation :set_default_role, on: :create
     before_validation :check_modifier_role
-    after_create :set_university_autopromote_option, if: Proc.new { |user| user.just_autopromoted } 
+    after_create :set_university_autopromote_option, if: Proc.new { |user| user.just_autopromoted == true } 
 
     def self.roles_with_access_to_global_menu
       roles.keys - ['contributor', 'author', 'website_manager']
