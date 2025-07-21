@@ -33,6 +33,7 @@ module Communication::Website::WithConnectedObjects
     sync_with_git_safely
     mark_obsolete_git_files
     touch_planned_objects
+    unpublish_archivable_content
     check_period_years
     get_current_theme_version!
     analyse_repository!
