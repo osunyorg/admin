@@ -404,6 +404,7 @@ en:
     status: "Status:"
     still_pending: "Your import has not been processed yet. You will receive an email as soon as it's ready."
   inactivity_alert: "It seems you have been away a little bit too long. Could you please retry?"
+  internal_description_hint: Complementary description of the image for the media library users. You can write this text to help the media library users to find an image, have complementary informations about it or have special instructions regarding the use of the image.
   internationalization:
     label: Internationalization
   legal: Legal

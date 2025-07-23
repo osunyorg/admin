@@ -404,6 +404,7 @@ fr:
     status: "Statut :"
     still_pending: "Votre import est toujours en cours de traitement. Vous recevrez un email dès qu'il est prêt."
   inactivity_alert: "Il semble que vous soyez resté sur la page un peu trop longtemps. Pouvez-vous ré-essayer ?"
+  internal_description_hint: Description complémentaire de l'image. Vous pouvez donner des informations complémentaires sur l'image, utiles pour la recherche et indiquer des instructions spécifiques d'usage pour les utilisateur·rices de la médiathèque.
   internationalization:
     label: Internationalisation
   legal: Légal
