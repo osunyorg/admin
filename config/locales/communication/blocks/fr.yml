@@ -540,13 +540,16 @@ fr:
                 options:
                   category: Une catégorie spécifique
                   selection: Une sélection d'organisations
-              option_address: 
+              option_address:
                 label: Adresse postale
+              option_filters:
+                label: Filtres (par catégorie)
               option_link:
                 label: Avec des liens cliquables vers les pages des organisations?
               option_logo:
                 label: Logo
               options: Options d'affichage
+              unregistered_organizations_on_map_warning: Attention, les organisations non enregistrées ne seront pas affichées sur la carte.
             layouts:
               grid:
                 description: Une série de logos carrés, avec le nom de chaque organisation.

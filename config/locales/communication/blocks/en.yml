@@ -540,13 +540,16 @@ en:
                 options:
                   category: A specific category
                   selection: Selected organizations
-              option_address: 
+              option_address:
                 label: Postal address
+              option_filters:
+                label: Filters (by category)
               option_link:
                 label: With clickable link to each organization's page?
               option_logo:
                 label: Logo
               options: Display options
+              unregistered_organizations_on_map_warning: Warning, unregistered organizations will not be displayed on the map.
             layouts:
               grid:
                 description: Square logos and a simple text below.
