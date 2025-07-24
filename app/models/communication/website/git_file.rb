@@ -62,8 +62,6 @@ class Communication::Website::GitFile < ApplicationRecord
     if should_generate_content?
       # If it's just initialized, it needs to be saved
       save unless persisted?
-      # Permalinks must be calculated BEFORE renders
-      manage_permalink about, website
       # Anyway, we need to generate content (from WithContent)
       generate_content
     elsif persisted?
@@ -100,11 +98,6 @@ class Communication::Website::GitFile < ApplicationRecord
   end
 
   protected
-
-  def self.manage_permalink(object, website)
-    return unless Communication::Website::Permalink.supported_by?(object)
-    object.manage_permalink_in_website(website)
-  end
 
   def self.analyze_if_blob(object)
     return unless object.is_a? ActiveStorage::Blob
