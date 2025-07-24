@@ -435,6 +435,10 @@ fr:
         with_user_html: Vous pouvez vous y connecter avec votre adresse email <b>%{email}</b> en cliquant <a href="%{sign_in_url}">ici</a>.
         without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en cliquant <a href="%{sign_up_url}">ici</a>.
     notifications:
+      gdpr_deletion_incoming:
+        subject: "Osuny - votre compte va bientôt être supprimé"
+        body_1_html: "Bonjour,<br><br>Cela fait un moment que vous ne vous êtes pas connecté à votre compte.<br><br>Pour respecter nos obligations légales votre compte sera supprimé dans <b>%{delay} jours</b> si vous ne vous reconnectez pas d'ici là."
+        body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour accéder à votre compte."
       import:
         subject_with_errors: Votre import a bien été traité mais comporte des erreurs
         subject_without_errors: Votre import a bien été traité
