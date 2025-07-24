@@ -17,10 +17,6 @@ module HasGitFiles
     raise NoMethodError, "You must implement the `git_path_relative` method in #{self.class.name}"
   end
 
-  def should_sync_to?(website)
-    can_have_git_file?
-  end
-
   def can_have_git_file?
     true
   end
