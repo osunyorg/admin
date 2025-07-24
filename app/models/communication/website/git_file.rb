@@ -47,8 +47,6 @@ class Communication::Website::GitFile < ApplicationRecord
   def self.generate(website, about)
     # Do nothing about nil...
     return if about.nil?
-    # Permalinks must be calculated BEFORE renders
-    manage_permalink about, website
     # Blobs need to be completely analyzed, which is async
     analyze_if_blob about
     # The git file might exist or not
@@ -64,6 +62,8 @@ class Communication::Website::GitFile < ApplicationRecord
     if should_generate_content?
       # If it's just initialized, it needs to be saved
       save unless persisted?
+      # Permalinks must be calculated BEFORE renders
+      manage_permalink about, website
       # Anyway, we need to generate content (from WithContent)
       generate_content
     elsif persisted?
