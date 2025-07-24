@@ -8,6 +8,10 @@ class Communication::Website::Configs::Base < Communication::Website
     raise NoMethodError, "You must implement the `git_path` method in #{self.class.name}"
   end
 
+  def can_have_git_file?
+    true
+  end
+
   def should_sync_to?(website)
     true
   end
