@@ -8,7 +8,7 @@
   <div><%= osuny_label University::Organization.model_name.human(count: 2) %></div>
   <%= block_component_add_element block, t('.add_organization') %>
 
-  <div class="alert bg-warning text-white mb-4" v-if="data.layout === 'map' && data.elements.filter(e => !e.id).length > 0">
+  <div class="alert bg-warning text-white mb-4" v-if="data.layout === 'map' && data.mode === 'selection' && data.elements.filter(e => !e.id).length > 0">
     <%= t('admin.communication.blocks.templates.organizations.edit.unregistered_organizations_on_map_warning') %>
   </div>
 
