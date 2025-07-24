@@ -4,7 +4,10 @@ module AsTree
   included do
     scope :root, -> { where(parent_id: nil) }
     scope :ordered_by_position_in_tree, -> { order(:position_in_tree)}
-    after_save :rebuild_position_in_tree_if_necessary
+    # FIXME better algorithm
+    # https://github.com/osunyorg/admin/issues/3044
+    # https://github.com/osunyorg/admin/issues/3046
+    # after_save :rebuild_position_in_tree_if_necessary
   end
 
   def has_children?

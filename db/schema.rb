@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_18_152546) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_21_143751) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -837,8 +837,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_152546) do
     t.string "current_path"
     t.string "current_sha"
     t.boolean "desynchronized", default: true
-    t.datetime "desynchronized_at"
-    t.uuid "university_id"
+    t.datetime "desynchronized_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.uuid "university_id", null: false
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
     t.index ["desynchronized_at"], name: "index_communication_website_git_files_on_desynchronized_at"
     t.index ["university_id"], name: "index_communication_website_git_files_on_university_id"
@@ -1335,8 +1335,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_152546) do
     t.string "deuxfleurs_access_key_id"
     t.string "deuxfleurs_secret_access_key"
     t.datetime "last_sync_at"
-    t.boolean "feature_alumni", default: false
     t.boolean "feature_jobboard", default: false
+    t.boolean "feature_alumni", default: false
     t.boolean "feature_alerts", default: false
     t.boolean "archive_content", default: false
     t.integer "years_before_archive_content", default: 3
@@ -2049,6 +2049,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_18_152546) do
     t.boolean "is_really_a_university", default: true
     t.float "contribution_amount"
     t.string "default_github_access_token"
+    t.boolean "admin_already_auto_promoted", default: false
     t.index ["default_language_id"], name: "index_universities_on_default_language_id"
     t.index ["name"], name: "index_universities_on_name", opclass: :gin_trgm_ops, using: :gin
   end

@@ -4,6 +4,7 @@
 #
 #  id                          :uuid             not null, primary key
 #  address                     :string
+#  admin_already_auto_promoted :boolean          default(FALSE)
 #  city                        :string
 #  contribution_amount         :float
 #  country                     :string
