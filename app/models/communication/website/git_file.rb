@@ -61,7 +61,7 @@ class Communication::Website::GitFile < ApplicationRecord
   # - it's not there, and should be
   # - it's there, and should not be
   def analyze!
-    if about.try(:should_sync_to?, website)
+    if should_generate_content?
       # If it's just initialized, it needs to be saved
       save unless persisted?
       # Anyway, we need to generate content (from WithContent)
@@ -122,6 +122,11 @@ class Communication::Website::GitFile < ApplicationRecord
     else
       "admin/#{about.class.name.underscore.pluralize}/static"
     end
+  end
+
+  def should_generate_content?
+    about.try(:can_have_git_file?) &&
+    about.try(:should_sync_to?, website)
   end
 
   # Real sha on the git repo
