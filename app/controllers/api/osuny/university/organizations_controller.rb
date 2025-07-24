@@ -98,7 +98,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
       :migration_identifier, :language, :name, :long_name, :meta_description,
       :address_name, :address_additional, :linkedin, :mastodon, :twitter, :url,
       :slug, :summary, :text, :_destroy,
-      featured_image: [:url, :alt, :credit, :_destroy],
+      featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
       **nested_blocks_params
     ]
   end
