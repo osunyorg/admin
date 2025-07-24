@@ -56,6 +56,7 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   end
 
   def should_sync_to?(website)
+    website.has_connected_object?(self) &&
     published?
   end
 

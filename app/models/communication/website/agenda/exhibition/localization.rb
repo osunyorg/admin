@@ -92,7 +92,8 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   end
 
   def should_sync_to?(website)
-    published? && exhibition.allowed_in?(website)
+    exhibition.allowed_in?(website) &&
+    published?
   end
 
   def template_static

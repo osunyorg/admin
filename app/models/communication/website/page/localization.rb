@@ -91,7 +91,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
   end
 
   def should_sync_to?(website)
-    published?
+    website.id == communication_website_id && published?
   end
 
   # Home        _index.html

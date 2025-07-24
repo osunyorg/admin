@@ -2,7 +2,7 @@ module Staticable
   extend ActiveSupport::Concern
 
   def hugo(website)
-    if website.nil? || !should_sync_to?(website)
+    if website.nil? || !can_have_git_file? || !should_sync_to?(website)
       hugo_nil
     else
       hugo_with(

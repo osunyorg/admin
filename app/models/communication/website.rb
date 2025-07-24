@@ -175,7 +175,7 @@ class Communication::Website < ApplicationRecord
 
   # TODO deprecated
   def should_sync_to?(website)
-    true
+    website.id == id
   end
 
   def dependencies

@@ -39,7 +39,7 @@ module AsLocalization
 
   def should_sync_to?(website)
     website.active_language_ids.include?(language_id) &&
-      website.has_connected_object?(self)
+    website.has_connected_object?(self)
   end
 
   def localize_in!(language)

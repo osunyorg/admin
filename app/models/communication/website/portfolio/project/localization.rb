@@ -66,7 +66,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }
 
   def should_sync_to?(website)
-    published?
+    website.id == communication_website_id && published?
   end
 
   def git_path_relative

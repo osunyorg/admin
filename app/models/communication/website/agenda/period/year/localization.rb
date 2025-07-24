@@ -41,6 +41,7 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   end
 
   def should_sync_to?(website)
+    website.id == communication_website_id &&
     events_count > 0 # Some events
   end
 

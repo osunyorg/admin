@@ -13,7 +13,7 @@ class Communication::Website::Configs::Base < Communication::Website
   end
 
   def should_sync_to?(website)
-    true
+    website.id == communication_website_id
   end
 
   def template_static
