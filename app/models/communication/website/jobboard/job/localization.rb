@@ -63,7 +63,10 @@ class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
   before_validation :set_communication_website_id, on: :create
 
   def should_sync_to?(website)
-    website.id == communication_website_id && published? && job.current?
+    website.id == communication_website_id &&
+    website.active_language_ids.include?(language_id) &&
+    published? &&
+    job.current?
   end
 
   # jobs/2025/01/01-nom-offre.html

@@ -58,7 +58,7 @@ class Communication::Website::Post::Category < ApplicationRecord
 
   def references
     posts +
-    post_localizations +
+    post_localizations.in_languages(website.active_language_ids) +
     [parent] +
     siblings +
     website.menus.in_languages(website.active_language_ids) +

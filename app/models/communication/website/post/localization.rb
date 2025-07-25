@@ -76,7 +76,9 @@ class Communication::Website::Post::Localization < ApplicationRecord
   }
 
   def should_sync_to?(website)
-    website.id == communication_website_id && published?
+    website.id == communication_website_id &&
+    website.active_language_ids.include?(language_id) &&
+    published?
   end
 
   def git_path_relative

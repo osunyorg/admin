@@ -97,6 +97,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def should_sync_to?(website)
     event.allowed_in?(website) &&
+    website.active_language_ids.include?(language_id) &&
     published? &&
     event.time_slots.none? && # Rendered by Communication::Website::Agenda::Event::TimeSlot
     event.children.none? # Rendered by Communication::Website::Agenda::Event::Day

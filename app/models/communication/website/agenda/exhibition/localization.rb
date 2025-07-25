@@ -93,6 +93,7 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
 
   def should_sync_to?(website)
     exhibition.allowed_in?(website) &&
+    website.active_language_ids.include?(language_id) &&
     published?
   end
 

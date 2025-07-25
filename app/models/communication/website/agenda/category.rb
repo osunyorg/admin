@@ -63,8 +63,8 @@ class Communication::Website::Agenda::Category < ApplicationRecord
 
   def references
     events +
-    event_localizations +
-    exhibition_localizations +
+    event_localizations.in_languages(website.active_language_ids) +
+    exhibition_localizations.in_languages(website.active_language_ids) +
     website.menus.in_languages(website.active_language_ids) +
     [parent]
   end

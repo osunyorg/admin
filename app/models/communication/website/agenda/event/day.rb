@@ -50,6 +50,7 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
 
   def should_sync_to?(website)
     event.allowed_in?(website) && # Good website or federated
+    website.active_language_ids.include?(language_id) && # Language is active on website
     events.any? && # With events on this day
     event_l10n.present? && # Event localized in this language
     event_l10n.published? # and published
