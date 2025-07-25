@@ -36,6 +36,12 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
 
   delegate :value, to: :about
 
+  def should_sync_to?(website)
+    website.id == communication_website_id &&
+    website.active_language_ids.include?(language_id) &&
+    events_count > 0 # Some events
+  end
+
   def git_path_relative
     "events/#{year.slug}/#{slug}/_index.html"
   end
