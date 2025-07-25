@@ -62,13 +62,13 @@ module Communication::Website::WithGitRepository
     Communication::Website::GitFile.generate self, object
   end
 
-  # Marque comme obsolete tous les git_files qui ne sont pas dans les recursive_dependencies_syncable_following_direct
+  # Marque comme obsolete tous les git_files qui ne sont pas dans les recursive_dependencies_following_direct
   def mark_obsolete_git_files
     return unless git_repository.valid?
     git_files.find_each do |git_file|
       dependency = git_file.about
       # Here, dependency can be nil (object was previously destroyed)
-      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable_following_direct)
+      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_following_direct)
       git_file.mark_for_destruction! if is_obsolete
     end
   end
@@ -81,12 +81,6 @@ module Communication::Website::WithGitRepository
     users_to_notify.each do |user|
       NotificationMailer.website_invalid_access_token(self, user).deliver_later
     end
-  end
-
-  # Le website devient data/website.yml
-  # Les configs héritent du modèle website et s'exportent en différents fichiers
-  def exportable_to_git?
-    true
   end
 
   def should_clean_on_git?

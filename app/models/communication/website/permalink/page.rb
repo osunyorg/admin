@@ -7,10 +7,6 @@ class Communication::Website::Permalink::Page < Communication::Website::Permalin
 
   protected
 
-  def published?
-    website.id == about.communication_website_id && about.published
-  end
-
   def substitutions
     {
       slug: about.slug_with_ancestors_slugs

@@ -60,8 +60,11 @@ class Communication::Website::Menu < ApplicationRecord
   end
 
   def git_path(website)
-    return if !website.active_language_ids.include?(language_id) || items.none?
     "data/menus/#{language.iso_code}/#{identifier}.yml"
+  end
+
+  def should_sync_to?(website)
+    website.id == communication_website_id && website.active_language_ids.include?(language_id) && items.any?
   end
 
   def template_static

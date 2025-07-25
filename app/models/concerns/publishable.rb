@@ -1,7 +1,7 @@
 # L'objet doit avoir 2 attributs :
 # - published:boolean
 # - published_at:datetime
-module WithPublication
+module Publishable
   extend ActiveSupport::Concern
 
   included do

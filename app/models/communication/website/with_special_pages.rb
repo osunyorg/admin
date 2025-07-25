@@ -34,7 +34,7 @@ module Communication::Website::WithSpecialPages
       university_id: university_id
     )
     # Ignore useless pages (not in this website)
-    return unless page.is_necessary_for_website?
+    return unless page.should_create_special_page?
     page.save
     page
   end

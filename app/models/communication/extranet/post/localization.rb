@@ -36,11 +36,11 @@ class Communication::Extranet::Post::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
   include Initials
+  include Publishable
   include Sanitizable
   include Sluggable
   include WithAccessibility
   include WithFeaturedImage
-  include WithPublication
   include WithUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'

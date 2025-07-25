@@ -8,7 +8,7 @@ class Communication::Website::Page::EducationAcademicYear < Communication::Websi
     true
   end
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     website.feature_alumni
   end
 

@@ -30,7 +30,7 @@
 class Communication::Extranet::Document::Localization < ApplicationRecord
   include AsLocalization
   include Initials
-  include WithPublication
+  include Publishable
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
 

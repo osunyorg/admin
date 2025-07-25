@@ -8,7 +8,7 @@ class Communication::Website::Page::CommunicationAgendaExhibition < Communicatio
     true
   end
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     website.feature_agenda
   end
 

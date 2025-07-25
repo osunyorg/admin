@@ -46,12 +46,12 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   include HeaderCallToAction
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithPublication
   include WithUniversity
 
   belongs_to :website,
@@ -65,9 +65,10 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   scope :ordered, -> (language = nil) { order(year: :desc, title: :asc) }
   scope :latest, -> { published.order(updated_at: :desc).limit(5) }
 
-  def git_path(website)
-    return unless website.id == communication_website_id && published
-    git_path_content_prefix(website) + git_path_relative
+  def should_sync_to?(website)
+    website.id == communication_website_id &&
+    website.active_language_ids.include?(language_id) &&
+    published?
   end
 
   def git_path_relative

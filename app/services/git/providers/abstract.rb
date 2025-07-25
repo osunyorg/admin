@@ -14,27 +14,27 @@ class Git::Providers::Abstract
   end
 
   def url
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `url` method in #{self.class.name}"
   end
 
   def create_file(path, content)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `create_file` method in #{self.class.name}"
   end
 
   def update_file(path, previous_path, content)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `update_file` method in #{self.class.name}"
   end
 
   def destroy_file(path)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `destroy_file` method in #{self.class.name}"
   end
 
   def update_theme
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `update_theme` method in #{self.class.name}"
   end
 
   def push(commit_message)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `push` method in #{self.class.name}"
   end
 
   def previous_sha(git_file)
@@ -42,11 +42,11 @@ class Git::Providers::Abstract
   end
 
   def computed_sha(string)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `computed_sha` method in #{self.class.name}"
   end
 
   def git_sha(path)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `git_sha` method in #{self.class.name}"
   end
 
   def files_in_the_repository

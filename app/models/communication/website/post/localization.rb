@@ -50,14 +50,14 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include HeaderCallToAction
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithOpenApi
-  include WithPublication
   include WithHourlyPublication
+  include WithOpenApi
   include WithUniversity
 
   belongs_to :website,
@@ -75,9 +75,10 @@ class Communication::Website::Post::Localization < ApplicationRecord
       .where("published_at <= ?", datetime)
   }
 
-  def git_path(website)
-    return unless website.id == communication_website_id && published && published_at
-    git_path_content_prefix(website) + git_path_relative
+  def should_sync_to?(website)
+    website.id == communication_website_id &&
+    website.active_language_ids.include?(language_id) &&
+    published?
   end
 
   def git_path_relative

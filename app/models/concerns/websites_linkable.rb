@@ -8,34 +8,34 @@ module WebsitesLinkable
   extend ActiveSupport::Concern
 
   def has_administrators?
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `has_administrators?` method in #{self.class.name}"
   end
 
   def has_researchers?
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `has_researchers?` method in #{self.class.name}"
   end
 
   def has_teachers?
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `has_teachers?` method in #{self.class.name}"
   end
 
   def has_education_programs?
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `has_education_programs?` method in #{self.class.name}"
   end
 
   def has_education_diplomas?
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `has_education_diplomas?` method in #{self.class.name}"
   end
 
   def has_research_papers?
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `has_research_papers?` method in #{self.class.name}"
   end
 
   def has_research_volumes?
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `has_research_volumes?` method in #{self.class.name}"
   end
 
   def has_administration_locations?
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `has_administration_locations?` method in #{self.class.name}"
   end
 end

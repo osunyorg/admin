@@ -65,6 +65,6 @@ module Backlinkable
   end
 
   def backlinks_blocks(website)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `backlinks_blocks` method in #{self.class.name}"
   end
 end

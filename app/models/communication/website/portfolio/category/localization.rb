@@ -40,9 +40,13 @@ class Communication::Website::Portfolio::Category::Localization < ApplicationRec
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
-  def git_path(website)
-    prefix = git_path_content_prefix(website)
-    "#{prefix}projects_categories/#{slug_with_ancestors_slugs}/_index.html"
+  def should_sync_to?(website)
+    website.id == communication_website_id &&
+    website.active_language_ids.include?(language_id)
+  end
+
+  def git_path_relative
+    "projects_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   protected

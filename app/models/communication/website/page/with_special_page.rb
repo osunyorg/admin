@@ -59,7 +59,7 @@ module Communication::Website::Page::WithSpecialPage
     type.blank?
   end
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     true
   end
 
@@ -138,7 +138,7 @@ module Communication::Website::Page::WithSpecialPage
       title: I18n.t("#{i18n_key}.title", locale: language.iso_code),
       slug: I18n.t("#{i18n_key}.slug", locale: language.iso_code),
       published: published_by_default?
-      # note: published_at will be set by WithPublication concern
+      # note: published_at will be set by Publishable concern
     )
   end
 

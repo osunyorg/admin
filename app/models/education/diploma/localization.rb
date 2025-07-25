@@ -58,8 +58,8 @@ class Education::Diploma::Localization < ApplicationRecord
     active_storage_blobs
   end
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}diplomas/#{slug}/_index.html" if for_website?(website)
+  def git_path_relative
+    "diplomas/#{slug}/_index.html"
   end
 
   def template_static

@@ -18,10 +18,6 @@ class Communication::Website::Permalink::Paper < Communication::Website::Permali
 
   protected
 
-  def published?
-    about.published && about.published_at
-  end
-
   def substitutions
     {
       year: about.published_at.strftime("%Y"),

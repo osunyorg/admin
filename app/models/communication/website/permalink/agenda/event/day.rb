@@ -11,10 +11,6 @@ class Communication::Website::Permalink::Agenda::Event::Day < Communication::Web
 
   protected
 
-  def published?
-    about.published_in?(website)
-  end
-
   def substitutions
     event = about.event
     {

@@ -57,7 +57,7 @@ class Communication::Website::Jobboard::Category < ApplicationRecord
 
   def references
     jobs +
-    job_localizations +
+    job_localizations.in_languages(website.active_language_ids) +
     website.menus.in_languages(website.active_language_ids) +
     [parent]
   end

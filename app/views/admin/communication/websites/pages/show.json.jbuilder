@@ -1,22 +1,15 @@
+json.extract! @page, :id
+json.extract! @l10n,
+              :title, :slug, :breadcrumb_title,
+              :header_text, :meta_description, :published
 json.extract! @page,
-              :id,
-              :title,
-              :slug,
-              :breadcrumb_title,
-              :full_width,
-              :header_text,
-              :bodyclass,
-              :meta_description,
-              :published,
-              :type,
-              :position
-
+              :bodyclass, :full_width, :type, :position
 json.path admin_communication_website_page_path(@page, format: :json)
 
 json.featured_image do
   json.alt @l10n.featured_image_alt
   json.credit @l10n.featured_image_credit
-  json.media @l10n.featured_image.blob.id
+  json.blob_id @l10n.featured_image.blob_id
 end if @l10n.featured_image.attached?
 
 language = @l10n.language

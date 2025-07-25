@@ -58,7 +58,7 @@ class Communication::Website::Page::Category < ApplicationRecord
 
   def references
     pages +
-    page_localizations +
+    page_localizations.in_languages(website.active_language_ids) +
     website.menus.in_languages(website.active_language_ids) +
     [parent]
   end

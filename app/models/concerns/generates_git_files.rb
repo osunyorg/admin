@@ -10,7 +10,7 @@ module GeneratesGitFiles
   def identify_git_files_safely
     websites.each do |website|
       website.generate_git_file_for_object(self)
-      website.generate_git_file_for_array(recursive_dependencies(syncable_only: true)) if respond_to?(:recursive_dependencies)
+      website.generate_git_file_for_array(recursive_dependencies) if respond_to?(:recursive_dependencies)
       website.generate_git_file_for_array(references) if respond_to?(:references)
     end
   end

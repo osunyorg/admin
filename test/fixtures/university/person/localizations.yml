@@ -1,6 +1,7 @@
 alumnus_fr:
   first_name: Alumnus
   last_name: Osuny
+  slug: alumnus-osuny
   name: Alumnus Osuny
   about: alumnus
   language: fr
@@ -9,6 +10,7 @@ alumnus_fr:
 olivia_fr:
   first_name: Olivia
   last_name: Simonet
+  slug: olivia-simonet
   name: Olivia Simonet
   about_id: 53cbac40-e430-585a-965c-a7412a92f35a
   language: fr
@@ -17,6 +19,7 @@ olivia_fr:
 pa_fr:
   first_name: Pierre-André
   last_name: Boissinot
+  slug: pierre-andre-boissinot
   name: Pierre-André Boissinot
   about: pa
   language: fr
@@ -25,6 +28,7 @@ pa_fr:
 arnaud_fr:
   first_name: Arnaud
   last_name: Levy
+  slug: arnaud-levy
   name: Arnaud Levy
   about: arnaud
   language: fr

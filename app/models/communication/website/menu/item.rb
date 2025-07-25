@@ -121,7 +121,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
     when "url"
       url
     else
-      if about_l10n.present?
+      if about_l10n&.should_sync_to?(website)
         about_l10n_permalink = about_l10n.new_permalink_in_website(website)
         about_l10n_permalink.computed_path
       else

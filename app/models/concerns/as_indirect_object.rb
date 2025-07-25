@@ -30,7 +30,7 @@ module AsIndirectObject
     true
   end
 
-  def for_website?(website)
+  def should_sync_to?(website)
     website.has_connected_object?(self)
   end
 
@@ -100,16 +100,14 @@ module AsIndirectObject
   end
 
   def add_direct_source_to_dependencies(direct_source, website, array: [])
-    # Ne pas traiter les sources d'autres sites
-    return array unless direct_source.website.id == website.id
-    # Ne pas traiter les sources non synchronisables
-    return array unless direct_source.syncable?
+    # Ne pas traiter les sources non publiables sur le site
+    return array unless direct_source.should_sync_to?(website)
     # Ne pas traiter si la source directe est déjà dans le tableau de dépendances
     return array if array.include?(direct_source)
     array << direct_source
     # On passe le tableau de dépendances à la méthode recursive_dependencies
     # pour qu'il soit capable d'early return en cas de doublon
-    array = direct_source.recursive_dependencies(array: array, syncable_only: true)
+    array = direct_source.recursive_dependencies(array: array)
     # On ne synchronise pas les références de l'objet direct, car on ne le modifie pas lui.
     array
   end

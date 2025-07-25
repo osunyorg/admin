@@ -86,16 +86,17 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     website_with_github.save
     perform_enqueued_jobs
 
-    dependencies_before_count = website_with_github.reload.recursive_dependencies(follow_direct: true).count
+    dependencies_before = website_with_github.reload.recursive_dependencies(follow_direct: true)
 
     # On modifie l'about du website en ajoutant une école
     # On vérifie que le job de destroy obsolete git files n'est pas enqueued
     website_with_github.update(about: default_school)
     perform_enqueued_jobs
 
-    delta = website_with_github.reload.recursive_dependencies(follow_direct: true).count - dependencies_before_count
+    dependencies_after = website_with_github.reload.recursive_dependencies(follow_direct: true)
+    delta = dependencies_after.count - dependencies_before.count
     # En ajoutant l'école, on rajoute en dépendances :
-    # - L'école, sa formations (default_program), son diplôme (default_diploma) et les localisations de ces objets (6)
+    # - L'école, sa formation (default_program), son diplôme (default_diploma) et les localisations de ces objets (6)
     # - Les catégories d'actus liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
     # - Les catégories d'agenda liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
     # - Les catégories de pages liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)

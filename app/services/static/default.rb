@@ -9,7 +9,7 @@ class Static::Default
   end
 
   def prepared
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `prepared` method in #{self.class.name}"
   end
 
   protected

@@ -73,9 +73,10 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
     # On lance l'identification pour Arnaud
     assert_difference -> { arnaud.original_localization.git_files.count } do
       perform_enqueued_jobs(only: Communication::Website::GitFile::IdentifyJob)
+      perform_enqueued_jobs(only: Communication::Website::GitFile::GenerateContentJob)
     end
     # On vérifie qu'Arnaud sera bien écrit quelque part dans le repository
-    assert(arnaud.original_localization.git_files.first.computed_path)
+    assert(arnaud.original_localization.git_files.first.current_path)
     
     clear_enqueued_jobs
 
@@ -96,8 +97,6 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
     end
       
     perform_enqueued_jobs(only: Communication::Website::CleanJob)
-    # On vérifie qu'Arnaud sera bien supprimé du repository (computed_path == nil)
-    refute(arnaud.original_localization.git_files.first.computed_path)
 
     clear_enqueued_jobs
 

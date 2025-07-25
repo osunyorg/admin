@@ -47,16 +47,6 @@ class Communication::Website::GitFile < ApplicationRecord
   def self.generate(website, about)
     # Do nothing about nil...
     return if about.nil?
-    # All exportable objects must respond to this method
-    # HasGitFiles defines it
-    # AsIndirectObject does not include it, but some indirect objects have it (Person l10n, Organization l10n...)
-    # Some objects need to declare that property:
-    # - the website itself
-    # - configs (which inherit from the website)
-    # - active storage blobs
-    return unless about.try(:exportable_to_git?)
-    # Permalinks must be calculated BEFORE renders
-    manage_permalink about, website
     # Blobs need to be completely analyzed, which is async
     analyze_if_blob about
     # The git file might exist or not
@@ -69,7 +59,7 @@ class Communication::Website::GitFile < ApplicationRecord
   # - it's not there, and should be
   # - it's there, and should not be
   def analyze!
-    if about.try(:syncable?)
+    if should_generate_content?
       # If it's just initialized, it needs to be saved
       save unless persisted?
       # Anyway, we need to generate content (from WithContent)
@@ -109,11 +99,6 @@ class Communication::Website::GitFile < ApplicationRecord
 
   protected
 
-  def self.manage_permalink(object, website)
-    return unless Communication::Website::Permalink.supported_by?(object)
-    object.manage_permalink_in_website(website)
-  end
-
   def self.analyze_if_blob(object)
     return unless object.is_a? ActiveStorage::Blob
     begin
@@ -130,6 +115,11 @@ class Communication::Website::GitFile < ApplicationRecord
     else
       "admin/#{about.class.name.underscore.pluralize}/static"
     end
+  end
+
+  def should_generate_content?
+    about.try(:can_have_git_file?) &&
+    about.try(:should_sync_to?, website)
   end
 
   # Real sha on the git repo

@@ -3,21 +3,21 @@ module HasGitFiles
 
   included do
     include GeneratesGitFiles
-    
+
     has_many  :git_files,
               class_name: "Communication::Website::GitFile",
               as: :about
   end
 
   def git_path(website)
-    raise NotImplementedError
+    git_path_content_prefix(website) + git_path_relative
   end
 
   def git_path_relative
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `git_path_relative` method in #{self.class.name}"
   end
 
-  def exportable_to_git?
+  def can_have_git_file?
     true
   end
 

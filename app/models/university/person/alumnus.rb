@@ -3,11 +3,13 @@ class University::Person::Alumnus < University::Person
     'University::Person::Alumnus'
   end
 
+  # No alumni on websites, we use people
+  def can_have_git_file?
+    false
+  end
+
   def template_static
     "admin/university/people/alumni/static"
   end
 
-  def git_path(website)
-    # No alumni on websites
-  end
 end

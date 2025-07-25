@@ -36,7 +36,7 @@ class Communication::Website::BaseJob < ApplicationJob
   protected
 
   def execute
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `execute` method in #{self.class.name}"
   end
 
   def website
