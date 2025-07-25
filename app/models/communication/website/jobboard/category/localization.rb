@@ -42,6 +42,11 @@ class Communication::Website::Jobboard::Category::Localization < ApplicationReco
 
   before_validation :set_communication_website_id, on: :create
 
+  def should_sync_to?(website)
+    website.id == communication_website_id &&
+    website.active_language_ids.include?(language_id)
+  end
+
   def git_path_relative
     "jobs_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
