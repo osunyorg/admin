@@ -95,7 +95,8 @@ class Education::Program::Localization < ApplicationRecord
   scope :ordered, -> (language = nil) { order(:slug) }
 
   def git_path_relative
-    "programs/#{path}/_index.html"
+    # Path has always trailing and leading slashes
+    "programs#{path}_index.html"
   end
 
   def should_sync_to?(website)
