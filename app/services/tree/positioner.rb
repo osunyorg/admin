@@ -15,7 +15,7 @@ class Tree::Positioner
 
   def root_objects
     unless @root_objects
-      @root_objects = @klass.where(university: university).root.ordered
+      @root_objects = klass.where(university: university).root.ordered
       @root_objects = @root_objects.where(website: website) if website
     end
     @root_objects
