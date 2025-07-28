@@ -50,11 +50,12 @@ module AsTree
   end
 
   def update_position_in_tree_later
+    return unless respond_to?(:position_in_tree)
     Tree::UpdatePositionJob.set(wait: 1.minute).perform_later(
       university,
       self.class,
       website: try(:website)
-    ) if respond_to?(:position_in_tree)
+    )
   end
 
   protected
