@@ -1,5 +1,6 @@
 class Tree::Positioner
   attr_reader :university, :klass, :website
+  attr_accessor :position
 
   def initialize(university, klass, website: nil)
     @university = university
@@ -8,6 +9,7 @@ class Tree::Positioner
   end
 
   def execute
+    position = 1
     update_position_in_tree(root_objects)
   end
 
@@ -21,15 +23,14 @@ class Tree::Positioner
     @root_objects
   end
 
-  def update_position_in_tree(list, current_position = 1)
+  def update_position_in_tree(list)
     list.each do |object|
-      object.update_column :position_in_tree, current_position
-      current_position += 1
+      object.update_column :position_in_tree, position
+      position += 1
       if object.children.any?
         child_objects = object.children.ordered
-        current_position = update_position_in_tree(child_objects, current_position)
+        update_position_in_tree(child_objects)
       end
     end
-    current_position
   end
 end
