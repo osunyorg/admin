@@ -5,7 +5,8 @@ module AsTree
     scope :root, -> { where(parent_id: nil) }
     scope :ordered_by_position_in_tree, -> { order(:position_in_tree)}
 
-    after_create :update_position_in_tree_later
+    after_save :update_position_in_tree_later
+    after_touch :update_position_in_tree_later
   end
 
   def has_children?
