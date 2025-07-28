@@ -1,4 +1,4 @@
-class Category::TreePositioner
+class Tree::Positioner
   attr_reader :university, :klass, :website
 
   def initialize(university, klass, website: nil)

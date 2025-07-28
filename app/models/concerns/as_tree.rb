@@ -50,13 +50,13 @@ module AsTree
   end
 
   def update_position_in_tree_later
-    Category::UpdatePositionInTreeJob.set(wait: 1.minute).perform_later(
+    Tree::UpdatePositionJob.set(wait: 1.minute).perform_later(
       university,
       self.class,
       website: try(:website)
     )
   end
-  
+
   protected
 
   def original_language
@@ -64,7 +64,7 @@ module AsTree
   end
 
   def descendants_flattened
-    children.ordered(original_language).map { |child| 
+    children.ordered(original_language).map { |child|
       [child, child.descendants]
     }.flatten
   end
