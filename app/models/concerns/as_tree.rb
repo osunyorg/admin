@@ -54,7 +54,7 @@ module AsTree
       university,
       self.class,
       website: try(:website)
-    )
+    ) if respond_to?(:position_in_tree)
   end
 
   protected
