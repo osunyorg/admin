@@ -1,0 +1,34 @@
+<%
+title = Communication::Website::Agenda::Exhibition.model_name.human(count: 2)
+action = ''
+action += link_to t('create'),
+                  new_admin_communication_website_agenda_exhibition_path(website_id: @website),
+                  class: button_classes if can?(:create, Communication::Website::Agenda::Exhibition)
+%>
+<%= osuny_panel title, action: action do %>
+  <div class="row g-2 mb-3">
+    <%
+    @exhibitions.each do |exhibition|
+      exhibition_l10n = exhibition.best_localization_for(current_language)
+      %>
+      <div>
+        <div class="<%= osuny_card_classes(horizontal: true) %>">
+          <%= osuny_thumbnail_localized exhibition %>
+          <div class="card-body">
+            <%= osuny_link_localized  exhibition,
+                                      admin_communication_website_agenda_exhibition_path(
+                                        website_id: exhibition.website.id,
+                                        id: exhibition.id
+                                      ),
+                                      classes: "stretched-link" %>
+            <% if exhibition_l10n&.subtitle.present? %>
+              <br><span class="text-muted"><%= exhibition_l10n.subtitle %></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= render 'admin/application/components/all',
+                link: admin_communication_website_agenda_exhibitions_path(website_id: @website) %>
+  </div>
+<% end %>

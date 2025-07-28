@@ -33,8 +33,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @posts = @all_posts.latest_in(current_language)
     @all_events = @website.events.root.accessible_by(current_ability)
     @events = @all_events.latest_in(current_language)
+    @all_exhibitions = @website.exhibitions.accessible_by(current_ability)
+    @exhibitions = @all_exhibitions.latest_in(current_language)
     @all_projects = @website.projects.accessible_by(current_ability)
     @projects = @all_projects.latest_in(current_language)
+    @all_jobs = @website.jobs.accessible_by(current_ability)
+    @jobs = @all_jobs.latest_in(current_language)
     @git_files_desynchronized = @website.git_files_desynchronized
     breadcrumb
   end
