@@ -28,8 +28,7 @@ class Tree::Positioner
       object.update_column :position_in_tree, position
       position += 1
       if object.children.any?
-        child_objects = object.children.ordered
-        update_position_in_tree(child_objects)
+        update_position_in_tree(object.children.ordered)
       end
     end
   end
