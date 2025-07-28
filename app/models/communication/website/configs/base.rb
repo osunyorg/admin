@@ -1,15 +1,23 @@
 class Communication::Website::Configs::Base < Communication::Website
 
   def self.polymorphic_name
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `polymorphic_name` class method in #{self.class.name}"
   end
 
   def git_path(website)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `git_path` method in #{self.class.name}"
+  end
+
+  def can_have_git_file?
+    true
+  end
+
+  def should_sync_to?(website)
+    website.id == id
   end
 
   def template_static
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `template_static` method in #{self.class.name}"
   end
 
   ######

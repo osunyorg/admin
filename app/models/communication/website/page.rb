@@ -46,7 +46,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithAutomaticMenus
   include WithMenuItemTarget
   include WithOpenApi
-  include WithSpecialPage # WithSpecialPage can set default publication status, so must be included before WithPublication
+  include WithSpecialPage
   include WithUniversity
 
   belongs_to :parent,

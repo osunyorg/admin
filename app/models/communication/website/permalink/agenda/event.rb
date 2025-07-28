@@ -31,10 +31,6 @@ class Communication::Website::Permalink::Agenda::Event < Communication::Website:
 
   protected
 
-  def published?
-    about.published_in?(website)
-  end
-
   def substitutions
     {
       parent_year: parent&.from_day&.strftime("%Y"),

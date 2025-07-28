@@ -18,10 +18,6 @@ class Communication::Website::Permalink::Page::Category < Communication::Website
 
   protected
 
-  def published?
-    website.id == about.communication_website_id
-  end
-
   def substitutions
     {
       slug: about.slug_with_ancestors_slugs

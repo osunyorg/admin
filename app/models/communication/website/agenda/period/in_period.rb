@@ -80,11 +80,11 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def day_before_change
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `day_before_change` method in #{self.class.name}"
   end
 
   def day_after_change
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `day_after_change` method in #{self.class.name}"
   end
 
   def years_concerned_by_change

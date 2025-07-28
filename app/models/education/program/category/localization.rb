@@ -30,9 +30,8 @@
 class Education::Program::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
 
-  def git_path(website)
-    return unless for_website?(website)
-    prefix = git_path_content_prefix(website)
-    "#{prefix}programs_categories/#{slug_with_ancestors_slugs}/_index.html"
+  def git_path_relative
+    "programs_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
+
 end

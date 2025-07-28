@@ -36,14 +36,14 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
 
   delegate :value, to: :about
 
-  def git_path(website)
-    return if website.id != communication_website_id || # Wrong site
-              events_count.zero? # No events
-    git_path_content_prefix(website) + git_path_relative
-  end
-
   def git_path_relative
     "events/#{slug}/_index.html"
+  end
+
+  def should_sync_to?(website)
+    website.id == communication_website_id &&
+    website.active_language_ids.include?(language_id) &&
+    events_count > 0 # Some events
   end
 
   def template_static

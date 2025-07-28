@@ -56,7 +56,7 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
 
   def references
     projects +
-    project_localizations +
+    project_localizations.in_languages(website.active_language_ids) +
     website.menus.in_languages(website.active_language_ids) +
     [parent]
   end
