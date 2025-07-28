@@ -27,6 +27,7 @@ module Admin::ActAsCategories
       end
       category = categories.find(params[:itemId])
       category.touch
+      category.update_position_in_tree_later
       head :ok
     end
   end
