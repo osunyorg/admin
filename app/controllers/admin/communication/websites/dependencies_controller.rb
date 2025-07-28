@@ -1,6 +1,6 @@
 class Admin::Communication::Websites::DependenciesController < Admin::Communication::Websites::ApplicationController
   def index
-    @dependencies = @website.recursive_dependencies(follow_direct: true)
+    @dependencies = @website.recursive_dependencies_following_direct
                             .sort_by { |dependency| dependency.class.to_s }
     breadcrumb
   end

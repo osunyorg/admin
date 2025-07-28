@@ -9,12 +9,12 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # - la localisation FR de la page
     # - la configuration CSP du site
     page = communication_website_pages(:page_with_no_dependency)
-    assert_equal 2, page.recursive_dependencies(follow_direct: true).count
+    assert_equal 2, page.recursive_dependencies(skip_direct: false).count
 
     #  On ajoute un block "Chapitre" à la l10n FR : +1 dépendance (le block)
     page_l10n = communication_website_page_localizations(:page_with_no_dependency_fr)
     page_l10n.blocks.create(position: 1, published: true, template_kind: :chapter)
-    assert_equal 3, page.recursive_dependencies(follow_direct: true).count
+    assert_equal 3, page.recursive_dependencies(skip_direct: false).count
   end
 
   def test_change_block_dependencies
@@ -24,7 +24,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # Au départ, 2 dépendances :
     # - la localisation FR de la page
     # - La content security policy
-    assert_equal 2, page.recursive_dependencies(follow_direct: true).count
+    assert_equal 2, page.recursive_dependencies(skip_direct: false).count
 
     # On ajoute un block Personnes lié à Arnaud : +3 dépendances
     # - le block Personnes
@@ -35,7 +35,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     block.save
 
     page = page.reload
-    assert_equal 5, page.recursive_dependencies(follow_direct: true).count
+    assert_equal 5, page.recursive_dependencies(skip_direct: false).count
 
     clear_enqueued_jobs
 
@@ -55,7 +55,7 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # On modifie le bloc Personnes en remplaçant Arnaud par Olivia : -2 puis +2 dépendances
     # - On retire Arnaud et sa localisation FR
     # - On ajoute Olivia et sa localisation FR
-    assert_equal 5, page.recursive_dependencies(follow_direct: true).count
+    assert_equal 5, page.recursive_dependencies(skip_direct: false).count
 
     clear_enqueued_jobs
 
@@ -79,21 +79,21 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # On a enlevé le bloc, reste les 2 dépendances d'origine
     # - la localisation FR de la page
     # - La content security policy
-    assert_equal 2, page.recursive_dependencies(follow_direct: true).count
+    assert_equal 2, page.recursive_dependencies(skip_direct: false).count
   end
 
   def test_change_website_dependencies
     website_with_github.save
     perform_enqueued_jobs
 
-    dependencies_before = website_with_github.reload.recursive_dependencies(follow_direct: true)
+    dependencies_before = website_with_github.reload.recursive_dependencies(skip_direct: false)
 
     # On modifie l'about du website en ajoutant une école
     # On vérifie que le job de destroy obsolete git files n'est pas enqueued
     website_with_github.update(about: default_school)
     perform_enqueued_jobs
 
-    dependencies_after = website_with_github.reload.recursive_dependencies(follow_direct: true)
+    dependencies_after = website_with_github.reload.recursive_dependencies(skip_direct: false)
     delta = dependencies_after.count - dependencies_before.count
     # En ajoutant l'école, on rajoute en dépendances :
     # - L'école, sa formation (default_program), son diplôme (default_diploma) et les localisations de ces objets (6)
@@ -109,12 +109,12 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
 
   def test_change_website_dependencies_with_multilingual
     website_with_github.save
-    dependencies_before_count = website_with_github.reload.recursive_dependencies(follow_direct: true).count
+    dependencies_before_count = website_with_github.reload.recursive_dependencies(skip_direct: false).count
     # On crée une localisation anglaise de la homepage
     communication_website_pages(:root_page).localize_in!(english)
 
     # Tant qu'on n'a pas activé l'anglais sur le website le nombre de dépendances ne doit pas bouger
-    assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies(follow_direct: true).count
+    assert_equal dependencies_before_count, website_with_github.reload.recursive_dependencies(skip_direct: false).count
   end
 
 end

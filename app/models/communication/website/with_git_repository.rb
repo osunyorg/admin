@@ -35,6 +35,14 @@ module Communication::Website::WithGitRepository
     git_repository.url
   end
 
+  # Override du GeneratesGitFiles
+  # Dans le cas du website, on permet de suivre les objets directs car on souhaite tout regénérer
+  def identify_git_files_safely
+    generate_git_file_for_array(
+      recursive_dependencies_following_direct + references
+    )
+  end
+
   def sync_with_git
     update_column(:last_sync_at, Time.now)
     Communication::Website::SyncWithGitJob.perform_later(id)
