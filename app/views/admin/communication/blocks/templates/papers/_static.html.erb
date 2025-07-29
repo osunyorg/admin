@@ -6,6 +6,6 @@ block.template.selected_papers.each do |paper|
   hugo = paper_l10n.hugo(@website)
   next if hugo.file.blank?
   %>
-        - "<%= paper_l10n.relative_path %>"
+        - "<%= hugo.file %>"
 <% end %>
       quantity: <%= block.template.selected_papers.to_a.count %>
