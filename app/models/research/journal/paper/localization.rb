@@ -52,7 +52,7 @@ class Research::Journal::Paper::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  def relative_path
+  def git_path_relative
     "papers/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 
