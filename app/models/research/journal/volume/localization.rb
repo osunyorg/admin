@@ -52,7 +52,7 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   validates :title, presence: true
 
   def git_path_relative
-    "volumes/#{published_at&.year}-#{slug}/_index.html"
+    "volumes/#{hugo_slug}/_index.html"
   end
 
   def should_sync_to?(website)
@@ -81,5 +81,14 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  def hugo_slug
+    "#{published_at&.year}-#{slug}"
+  end
+
+  # Hugo a besoin d'un slug spécial parce que les volumes sont des catégories
+  def hugo_slug_in_website(website)
+    hugo_slug
   end
 end
