@@ -53,12 +53,17 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   scope :ordered_desc, -> { order(from_day: :desc) }
   scope :ordered_asc, -> { order(:from_day) }
   scope :ordered, -> (language = nil) { ordered_asc }
-  scope :latest_in, -> (language) { published_now_in(language).future_or_current.order("communication_website_agenda_exhibition_localizations.updated_at").limit(5) }
+  scope :latest_in, -> (language) {
+    published_now_in(language)
+      .future_or_current
+      .order("communication_website_agenda_exhibition_localizations.updated_at")
+      .limit(5)
+  }
 
   scope :for_search_term, -> (term, language) {
     joins(:localizations)
       .where(communication_website_agenda_exhibition_localizations: { language_id: language.id })
-      . where("
+      .where("
       unaccent(communication_website_agenda_exhibition_localizations.meta_description) ILIKE unaccent(:term) OR
       unaccent(communication_website_agenda_exhibition_localizations.summary) ILIKE unaccent(:term) OR
       unaccent(communication_website_agenda_exhibition_localizations.title) ILIKE unaccent(:term) OR
