@@ -88,7 +88,7 @@ module Admin::OsunyHelper
   end
 
   def osuny_link(name, path, classes: '', alert: '', **options)
-    truncate = options[:truncate] || 45
+    truncate = options[:truncate] || 100
     link_to name.to_s.truncate(truncate), path, class: classes.strip, data: { confirm: alert }
   end
 
@@ -102,7 +102,7 @@ module Admin::OsunyHelper
       classes += 'text-muted fst-italic'
       alert = t('localization.creation_alert')
     end
-    link_to_if condition, name.truncate(45), path, class: classes.strip, data: { confirm: alert }
+    link_to_if condition, name.truncate(100), path, class: classes.strip, data: { confirm: alert }
   end
 
   def osuny_card_classes(horizontal: false)

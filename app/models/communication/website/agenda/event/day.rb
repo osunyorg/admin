@@ -28,6 +28,7 @@
 class Communication::Website::Agenda::Event::Day < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
+  include Communication::Website::Agenda::WithStatus
   include HasGitFiles
   include Permalinkable
   include WithUniversity
@@ -43,17 +44,13 @@ class Communication::Website::Agenda::Event::Day < ApplicationRecord
   scope :ordered, -> { order(:date) }
 
   # events/2025/01/02-arte-concert-festival.html
-  def git_path(website)
-    return unless published_in?(website)
-    path = git_path_content_prefix(website)
-    path += "events/"
-    path += "#{event.from_day.strftime "%Y"}/"
-    path += "#{date.strftime "%m/%d"}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
-    path
+  def git_path_relative
+    "events/#{event.from_day.strftime "%Y"}/#{date.strftime "%m/%d"}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
   end
 
-  def published_in?(website)
+  def should_sync_to?(website)
     event.allowed_in?(website) && # Good website or federated
+    website.active_language_ids.include?(language_id) && # Language is active on website
     events.any? && # With events on this day
     event_l10n.present? && # Event localized in this language
     event_l10n.published? # and published

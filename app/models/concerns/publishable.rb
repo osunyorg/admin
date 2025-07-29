@@ -1,7 +1,7 @@
 # L'objet doit avoir 2 attributs :
 # - published:boolean
 # - published_at:datetime
-module WithPublication
+module Publishable
   extend ActiveSupport::Concern
 
   included do
@@ -14,7 +14,7 @@ module WithPublication
     }
 
     scope :published_today, -> {
-      where(published_at: Date.today.all_day)
+      where(published_at: Date.current.all_day)
     }
 
     scope :published_now, -> {

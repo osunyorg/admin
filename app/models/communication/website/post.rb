@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
 #  full_width               :boolean          default(FALSE)
+#  is_lasting               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -45,7 +46,7 @@ class Communication::Website::Post < ApplicationRecord
     localization_published_at_select = <<-SQL
       COALESCE(
         MAX(CASE WHEN localizations.language_id = '#{language.id}' THEN localizations.published_at END),
-        '1970-01-01'
+        NULL
       ) AS localization_published_at
     SQL
     localization_pinned_select = <<-SQL

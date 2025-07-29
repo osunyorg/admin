@@ -33,8 +33,8 @@ class Education::AcademicYear::Localization < ApplicationRecord
 
   delegate :year, to: :about
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}academic_years/#{year}/_index.html" if for_website?(website)
+  def git_path_relative
+    "academic_years/#{year}/_index.html"
   end
 
   def template_static

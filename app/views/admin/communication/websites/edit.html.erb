@@ -8,7 +8,26 @@
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
     <%= render 'admin/communication/websites/form/features', f: f %>
+
     <%= osuny_separator %>
+
+    <%= osuny_panel t('communication.website.advanced_options') do %>
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <%= f.input :feature_hourly_publication %>
+        </div>
+        <div class="col-lg-4 mb-4">
+          <%= f.input :archive_content, input_html: { data: { conditional: true } } %>
+          <div  data-conditional-source="communication_website_archive_content"
+                data-conditional-value="true">
+            <%= f.input :years_before_archive_content %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= osuny_separator %>
+
     <div class="row">
       <div class="col-lg-4">
         <%= lf.input :name unless @website.persisted? %>

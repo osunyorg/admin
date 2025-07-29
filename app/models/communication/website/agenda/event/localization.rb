@@ -51,13 +51,13 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include HeaderCallToAction
   include Initials
   include Permalinkable # slug_unavailable method overwrite in this file
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithOpenApi
-  include WithPublication
   include WithUniversity
 
   belongs_to :website,
@@ -83,18 +83,22 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   validates :title, presence: true
   validate :slug_cant_be_numeric_only
 
+  scope :archivable, -> (datetime) {
+    joins(:about)
+      .where.not(communication_website_agenda_events: { is_lasting: true })
+      .published
+      .where("communication_website_agenda_events.to_day < ?", datetime.to_date)
+  }
+
   # events/2025/01/01-arte-concert-festival.html
-  def git_path(website)
-    return unless published_in?(website)
-    path = git_path_content_prefix(website)
-    path += "events/"
-    path += "#{from_day.strftime "%Y/%m/%d"}-#{slug}#{event.suffix_in(website)}.html"
-    path
+  def git_path_relative
+    "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}#{event.suffix_in(website)}.html"
   end
 
-  def published_in?(website)
+  def should_sync_to?(website)
     event.allowed_in?(website) &&
-    published && published_at &&
+    website.active_language_ids.include?(language_id) &&
+    published? &&
     event.time_slots.none? && # Rendered by Communication::Website::Agenda::Event::TimeSlot
     event.children.none? # Rendered by Communication::Website::Agenda::Event::Day
   end

@@ -3,6 +3,7 @@ next_months:
 <%
 @website.agenda_next_months.limit(3).each do |month|
   month_l10n = month.localization_for(language)
+  next if month_l10n.nil?
   hugo = month_l10n.hugo(@website)
   next if hugo.file.blank?
   %>

@@ -28,7 +28,10 @@
         <%= lf.input :text,
                     as: :summernote,
                     input_html: {
-                      data: { 'summernote-config' => 'mini-list' }
+                      data: {
+                        translatable: true,
+                        'summernote-config' => 'mini-list'
+                      }
                     } %>
         <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
         <%= osuny_separator %>

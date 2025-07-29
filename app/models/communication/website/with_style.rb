@@ -14,7 +14,7 @@ module Communication::Website::WithStyle
     load_style_from_example
     make_assets_relative!
     self.update_columns style: @style,
-                        style_updated_at: Date.today
+                        style_updated_at: Date.current
   end
 
   def load_style_from_website_url

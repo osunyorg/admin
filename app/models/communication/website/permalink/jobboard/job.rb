@@ -17,10 +17,6 @@ class Communication::Website::Permalink::Jobboard::Job < Communication::Website:
 
   protected
 
-  def published?
-    website.id == about.communication_website_id && about.published
-  end
-
   def substitutions
     {
       year: about.about.from_day.strftime("%Y"),

@@ -27,7 +27,9 @@
                 <%= lf.input :pinned, wrapper: :custom_boolean_switch %>
               </div>
             </div>
-            <%= lf.input :published_at, html5: true, as: :date %>
+            <% published_at_input_options = @website.feature_hourly_publication? ? { input_html: { step: 1.hour } } : { as: :date } %>
+            <%= lf.input :published_at, html5: true, **published_at_input_options %>
+            <%= render 'admin/application/content_archive/form', f: f %>
           <% end %>
           <%= f.association :authors,
                             collection: osuny_collection(

@@ -1,6 +1,7 @@
 default_program_fr:
   name: Formation de test
   published: true
+  published_at: 2010-11-28 00:00:00
   about: default_program
   language: fr
   university: default_university

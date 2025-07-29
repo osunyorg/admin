@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.4.4-node
+      - image: cimg/ruby:3.4.5-node
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -69,9 +69,9 @@ jobs:
       # Database setup
       - run: bundle exec rake db:create db:schema:load
 
-      # Code Climate setup
-      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-      - run: chmod +x ./cc-test-reporter
+      # # Code Climate setup
+      # - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      # - run: chmod +x ./cc-test-reporter
 
       # run tests!
       - run:
@@ -79,10 +79,10 @@ jobs:
           command: |
             bundle exec rake test $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
 
-      # CodeClimate coverage
-      - run: ./cc-test-reporter format-coverage --output "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
+      # # CodeClimate coverage
+      # - run: ./cc-test-reporter format-coverage --output "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
 
-      - run:
-          name: report CodeClimate coverage
-          command: |
-            ./cc-test-reporter sum-coverage --output - --parts $CIRCLE_NODE_TOTAL coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --input -
+      # - run:
+      #     name: report CodeClimate coverage
+      #     command: |
+      #       ./cc-test-reporter sum-coverage --output - --parts $CIRCLE_NODE_TOTAL coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --input -

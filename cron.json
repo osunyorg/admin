@@ -13,6 +13,10 @@
       "size": "S"
     },
     {
+      "command": "0 1 * * * rails auto:gdpr_manage_users",
+      "size": "S"
+    },
+    {
       "command": "*/10 * * * * rails auto:synchronize_websites",
       "size": "S"
     }
