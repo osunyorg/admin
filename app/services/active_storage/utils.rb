@@ -26,7 +26,7 @@ module ActiveStorage
       url_attachable = UrlAttachable.new(url, filename, content_type)
       return if url_attachable.io.nil?
       property.attach(
-        io: url_attachable.io, 
+        io: url_attachable.io,
         filename: url_attachable.filename,
         content_type: url_attachable.content_type
       )
@@ -37,7 +37,7 @@ module ActiveStorage
       return if text.blank?
       io = StringIO.new text.to_s.force_encoding('UTF-8')
       property.attach(
-        io: io, 
+        io: io,
         filename: filename,
         content_type: "text/plain; charset=utf-8"
       )
@@ -46,6 +46,18 @@ module ActiveStorage
     def self.text_from_attachment(property)
       return '' unless property.attached?
       property.download.force_encoding('UTF-8')
+    end
+
+    def self.blob_from_url(url, filename: nil, content_type: nil)
+      return if url.blank?
+      url_attachable = UrlAttachable.new(url, filename, content_type)
+      return if url_attachable.io.nil?
+      ActiveStorage::Blob.create_and_upload!(
+        io: url_attachable.io,
+        filename: url_attachable.filename,
+        content_type: url_attachable.content_type
+      )
+    rescue
     end
   end
 
