@@ -38,7 +38,7 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   end
 
   def allowed_for_about?
-    !website.nil?
+    website.present? && website.feature_posts
   end
 
   def children
