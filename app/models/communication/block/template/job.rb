@@ -33,7 +33,7 @@ class Communication::Block::Template::Job < Communication::Block::Template::Base
   end
 
   def allowed_for_about?
-    website.present? && website.events.any?
+    website.present? && website.feature_jobboard
   end
 
   def children

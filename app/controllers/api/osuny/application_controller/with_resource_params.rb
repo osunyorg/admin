@@ -43,6 +43,11 @@ module Api::Osuny::ApplicationController::WithResourceParams
     l10n_params[:featured_image_alt] = featured_image_data[:alt] if featured_image_data.has_key?(:alt)
     l10n_params[:featured_image_credit] = featured_image_data[:credit] if featured_image_data.has_key?(:credit)
     l10n_params[:featured_image_delete] = '1' if featured_image_data[:_destroy]
+    if featured_image_data[:blob_id].present?
+      # If we send a blob_id, we attach it to the localization
+      blob = current_university.active_storage_blobs.find_by(id: featured_image_data[:blob_id])
+      l10n_params[:featured_image] = blob if blob.present?
+    end
     # Set the image URL so that the object can delay the upload if needed
     l10n_params[:featured_image_new_url] = featured_image_data[:url]
   end

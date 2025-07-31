@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
 #  from_day                 :date
+#  is_lasting               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  time_zone                :string
 #  to_day                   :date
@@ -75,7 +76,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
       .order(:from_day, "least_recent_time_slot ASC")
   }
   scope :ordered, -> (language = nil) { ordered_asc }
-  scope :latest_in, -> (language) { published_now_in(language).future_or_current.order("communication_website_agenda_event_localizations.updated_at").limit(5) }
+  scope :latest_in, -> (language) {
+    published_now_in(language)
+      .future_or_current
+      .order("communication_website_agenda_event_localizations.updated_at")
+      .limit(5)
+  }
 
   scope :for_search_term, -> (term, language) {
     joins(:localizations)

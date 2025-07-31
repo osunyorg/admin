@@ -1,6 +1,6 @@
 class Communication::Website::Page::ResearchPaper < Communication::Website::Page
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     website.about && website.about&.respond_to?(:papers)
   end
 

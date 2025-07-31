@@ -5,6 +5,7 @@
 #  id                           :uuid             not null, primary key
 #  about_type                   :string           indexed => [about_id]
 #  access_token                 :string
+#  archive_content              :boolean          default(FALSE)
 #  autoupdate_theme             :boolean          default(TRUE)
 #  default_time_zone            :string
 #  deployment_status_badge      :text
@@ -14,6 +15,7 @@
 #  feature_agenda               :boolean          default(FALSE)
 #  feature_alerts               :boolean          default(FALSE)
 #  feature_alumni               :boolean          default(FALSE)
+#  feature_hourly_publication   :boolean          default(FALSE)
 #  feature_jobboard             :boolean          default(FALSE)
 #  feature_portfolio            :boolean          default(FALSE)
 #  feature_posts                :boolean          default(TRUE)
@@ -32,6 +34,7 @@
 #  style_updated_at             :date
 #  theme_version                :string           default("NA")
 #  url                          :string
+#  years_before_archive_content :integer          default(3)
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
 #  about_id                     :uuid             indexed => [about_type]
@@ -64,6 +67,7 @@ class Communication::Website < ApplicationRecord
   include WithAssociatedObjects
   include WithConfigs
   include WithConnectedObjects
+  include WithContentArchive
   include WithDependencies
   include WithDeuxfleurs
   include WithFeatureAgenda
@@ -159,8 +163,19 @@ class Communication::Website < ApplicationRecord
     original_localization.to_s
   end
 
+  # TODO deprecated
   def git_path(website)
     "data/website.yml"
+  end
+
+  # TODO deprecated
+  def can_have_git_file?
+    true
+  end
+
+  # TODO deprecated
+  def should_sync_to?(website)
+    website.id == id
   end
 
   def dependencies
@@ -215,7 +230,7 @@ class Communication::Website < ApplicationRecord
   def move_to_university(new_university_id)
     return if self.university_id == new_university_id
     update_column :university_id, new_university_id
-    recursive_dependencies_syncable_following_direct.each do |dependency|
+    recursive_dependencies_following_direct.each do |dependency|
       reconnect_dependency dependency, new_university_id
     end
   end

@@ -98,7 +98,7 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
       :migration_identifier, :language, :title, :breadcrumb_title, :meta_description,
       :published, :published_at, :slug, :summary, :text,
       :header_text, :header_cta, :header_cta_label, :header_cta_url, :_destroy,
-      featured_image: [:url, :alt, :credit, :_destroy],
+      featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
       **nested_blocks_params
     ]
   end

@@ -3,7 +3,7 @@ class Communication::Website::BaseJob < ApplicationJob
 
   include GoodJob::ActiveJobExtensions::InterruptErrors
 
-  queue_as :elephant
+  queue_as :elephants
 
   discard_on  ActiveJob::DeserializationError, # Discard if object does not exist anymore
               Octokit::InvalidRepository # Discard if repository is invalid to prevent useless API calls
@@ -36,7 +36,7 @@ class Communication::Website::BaseJob < ApplicationJob
   protected
 
   def execute
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `execute` method in #{self.class.name}"
   end
 
   def website

@@ -38,7 +38,7 @@ class Communication::Block::Template::Exhibition < Communication::Block::Templat
   end
 
   def allowed_for_about?
-    website.present? && website.exhibitions.any?
+    website.present? && website.feature_agenda
   end
 
   def children

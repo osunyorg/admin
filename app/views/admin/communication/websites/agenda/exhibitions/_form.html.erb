@@ -28,6 +28,7 @@
                           selected: f.object.time_zone || @website.default_time_zone %>
             </div>
           </div>
+          <%= render 'admin/application/content_archive/form', f: f %>
         <% end %>
         <%= lf.input :place %>
 
