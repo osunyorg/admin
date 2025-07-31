@@ -1,5 +1,5 @@
 class Communication::Website::GitFile::GenerateContentJob < ApplicationJob
-  queue_as :mice
+  queue_as :cats
 
   def perform(git_file)
     git_file.generate_content_safely
