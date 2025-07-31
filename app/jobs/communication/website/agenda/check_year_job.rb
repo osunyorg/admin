@@ -1,5 +1,5 @@
 class Communication::Website::Agenda::CheckYearJob < ApplicationJob
-  queue_as :elephant
+  queue_as :elephants
 
   def perform(year)
     year.destroy if year.empty?
