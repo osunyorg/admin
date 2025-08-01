@@ -77,6 +77,6 @@ jobs:
           command: |
             bundle exec rake test $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
 
-      # Qlty Coverage Orb
-      - qlty/coverage_publish:
-          files: coverage/coverage.json
+      # # Qlty Coverage Orb
+      # - qlty/coverage_publish:
+      #     files: coverage/coverage.json
