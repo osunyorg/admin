@@ -1,5 +1,12 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+require 'simplecov_json_formatter'
+
+SimpleCov.start 'rails' do
+  formatter SimpleCov::Formatter::MultiFormatter.new([
+    SimpleCov::Formatter::JSONFormatter,
+    SimpleCov::Formatter::HTMLFormatter
+  ])
+end
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative "../config/environment"
