@@ -16,6 +16,6 @@ module Orderable
   end
 
   def last_ordered_element
-    self.class.unscoped.where(university_id: university_id).ordered.last
+    self.class.base_class.unscoped.where(university_id: university_id).ordered.last
   end
 end
