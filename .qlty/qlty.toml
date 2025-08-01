@@ -18,3 +18,6 @@ test_patterns = [
 [[source]]
 name = "default"
 default = true
+
+[smells]
+mode = "comment"
