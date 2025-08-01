@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  qlty: qltysh/qlty-orb@0.0
 jobs:
   build:
     docker:
@@ -69,20 +71,12 @@ jobs:
       # Database setup
       - run: bundle exec rake db:create db:schema:load
 
-      # # Code Climate setup
-      # - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-      # - run: chmod +x ./cc-test-reporter
-
       # run tests!
       - run:
           name: run tests
           command: |
             bundle exec rake test $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
 
-      # # CodeClimate coverage
-      # - run: ./cc-test-reporter format-coverage --output "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
-
-      # - run:
-      #     name: report CodeClimate coverage
-      #     command: |
-      #       ./cc-test-reporter sum-coverage --output - --parts $CIRCLE_NODE_TOTAL coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --input -
+      # # Qlty Coverage Orb
+      # - qlty/coverage_publish:
+      #     files: coverage/coverage.json
