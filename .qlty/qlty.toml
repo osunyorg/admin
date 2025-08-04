@@ -18,3 +18,7 @@ test_patterns = [
 [[source]]
 name = "default"
 default = true
+
+[[plugin]]
+name = "eslint"
+version = "5.16.0"
