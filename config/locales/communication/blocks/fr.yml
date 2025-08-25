@@ -389,7 +389,7 @@ fr:
             layouts:
               carousel:
                 description: Les images sont présentées en grand, toutes de la même hauteur.
-                label: Carrousel
+                label: Carousel
               grid:
                 description: Les images sont présentées en grille, toutes de la même taille.
                 label: Grille
@@ -551,6 +551,9 @@ fr:
               options: Options d'affichage
               unregistered_organizations_on_map_warning: Attention, les organisations non enregistrées ne seront pas affichées sur la carte.
             layouts:
+              carousel:
+                description: Une liste d'organisations qui dépasse sur le côté droit de l'écran, navigable de droite à gauche.
+                label: Carousel
               grid:
                 description: Une série de logos carrés, avec le nom de chaque organisation.
                 label: Grille

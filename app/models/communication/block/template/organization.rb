@@ -4,7 +4,8 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   has_layouts [
     :grid,
     :large,
-    :map
+    :map,
+    :carousel
   ]
   has_component :mode, :option, options: [
     :selection,

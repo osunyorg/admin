@@ -13,6 +13,7 @@ module Communication::Website::WithScreenshot
       filename: 'screenshot.png',
       content_type: 'image/png'
     )
+    return if blob.nil?
     attachment_change = ActiveStorage::Attached::Changes::CreateOne.new("screenshot", self, blob)
     attachment_change.save
   end

@@ -551,6 +551,9 @@ en:
               options: Display options
               unregistered_organizations_on_map_warning: Warning, unregistered organizations will not be displayed on the map.
             layouts:
+              carousel:
+                description: A list of swipable organizations overflowing on the right side of the screen.
+                label: Carousel
               grid:
                 description: Square logos and a simple text below.
                 label: Grid
