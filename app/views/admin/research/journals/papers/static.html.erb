@@ -35,10 +35,10 @@ paper_kind: "<%= prepare_text_for_static paper.kind.to_s_in(language) %>"
 volume_l10n = @l10n.volume_l10n
 if volume_l10n.present?
   hugo = volume_l10n.hugo(@website)
-  if hugo.file.present?
+  if hugo.slug.present?
   %>
 volumes:
-  - "<%= hugo.file %>"
+  - "<%= hugo.slug %>"
 <% 
   end
 end

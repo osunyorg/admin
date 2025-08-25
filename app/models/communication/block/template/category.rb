@@ -59,7 +59,7 @@ class Communication::Block::Template::Category < Communication::Block::Template:
   end
 
   def taxonomies_for(category_kind)
-    categories_for(category_kind)&.taxonomies.ordered(language)
+    categories_for(category_kind)&.taxonomies&.ordered(language)
   end
 
   def category_kinds_allowed
