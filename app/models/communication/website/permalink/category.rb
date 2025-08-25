@@ -25,10 +25,6 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
 
   protected
 
-  def published?
-    true
-  end
-
   def substitutions
     {
       slug: about.slug_with_ancestors_slugs

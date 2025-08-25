@@ -36,10 +36,10 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   include HasGitFiles
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include WithBlobs
   include WithCitations
-  include WithPublication
   include WithUniversity
 
   alias :paper :about
@@ -52,12 +52,14 @@ class Research::Journal::Paper::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}papers/#{relative_path}.html" if published?
+  def git_path_relative
+    "papers/#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}.html"
   end
 
-  def relative_path
-    "#{published_at.year}/#{published_at.strftime "%Y-%m-%d"}-#{slug}"
+  def should_sync_to?(website)
+    website.active_language_ids.include?(language_id) &&
+    website.has_connected_object?(self) &&
+    published?
   end
 
   def template_static

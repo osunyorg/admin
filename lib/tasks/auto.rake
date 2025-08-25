@@ -26,4 +26,9 @@ namespace :auto do
     Brevo::SmsCreditsWarningJob.perform_later
   end
 
+  desc 'Delete & warn old users due to GDPR'
+  task gdpr_manage_users: :environment do
+    GdprUserDeletionJob.perform_later
+  end
+
 end

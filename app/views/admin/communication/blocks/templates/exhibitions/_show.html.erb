@@ -1,0 +1,87 @@
+<% heading_level = block.heading_rank_children %>
+
+<div class="<%= block_html_class(block) %>">
+  <div class="container">
+    <div class="block-content">
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
+
+      <div class="exhibitions exhibitions--<%= block.template.layout %>">
+        <% block.template.selected_exhibitions.each do |exhibition|
+          next if exhibition.nil?
+          exhibition_l10n = exhibition.localization_for(block.language)
+          exhibition_link = exhibition_l10n.current_permalink_url_in_website(@website) || '#'
+        %>
+          <article class="exhibition <% if exhibition_l10n.featured_image.attached? %>exhibition--with-image<% end %>" itemscope itemtype="https://schema.org/ExhibitionEvent">
+            <div class="exhibition-content">
+              <% if exhibition_l10n.subtitle %>
+                <hgroup>
+              <% end %>
+              <h<%= heading_level %>  itemprop='headline' class='location-title'>
+                <%= link_to exhibition_l10n, exhibition_link %>
+              </h<%= heading_level %>>
+              <% if exhibition_l10n.subtitle %>
+                <p class="exhibition-subtitle"><%= exhibition_l10n.subtitle %></p>
+                </hgroup>
+              <% end %>
+              <%
+                computed_short_date = date_range_i18n(exhibition.from_day, exhibition.to_day, format: :short, locale: block.language.iso_code)
+                computed_short_two_lines_date = date_range_i18n(exhibition.from_day, exhibition.to_day, format: :short, layout: :two_lines, locale: block.language.iso_code)
+              %>
+              <% if computed_short_date || computed_short_two_lines_date %>
+                <div class="exhibition-dates" itemprop="startDate" content="<%= "#{exhibition.from_day}" %>">
+                  <span>
+                    <% date_format = computed_short_two_lines_date %>
+                    <% if block.template.layout != "list" %>
+                      <% date_format = computed_short_date %>
+                    <% end %>
+                    <span><%= date_format %></span>
+                  </span>
+                </div>
+              <% end %>
+              <% if exhibition.status.present? && block.template.option_status %>
+                <p class="exhibition-status">
+                  <% if exhibition.status == "current" %>
+                    <%= t 'admin.communication.blocks.templates.exhibitions.time.options.current' %>
+                  <% elsif exhibition.status == "future" %>
+                    <%= t 'admin.communication.blocks.templates.exhibitions.time.options.future' %>
+                  <% elsif exhibition.status == "archive" %>
+                    <%= t 'admin.communication.blocks.templates.exhibitions.time.options.archive' %>
+                  <% end %>
+                </p>
+              <% end %>
+
+              <% if block.template.option_summary && exhibition_l10n.summary.present? %>
+                <div class="exhibition-description">
+                  <p itemprop="description">
+                    <%= exhibition_l10n.summary %>
+                  </p>
+                  <% if block.template.layout == "large" %>
+                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.exhibitions.layouts.large.more' %></p>
+                  <% end %>
+                </div>
+              <% end %>
+
+              <% if exhibition.categories.present? && block.template.option_categories %>
+                <p class="exhibition-categories">
+                  <% exhibition.categories.each do |category| %>
+                    <%
+                      category_l10n = category.localization_for(block.language)
+                      next if category_l10n.nil?
+                      category_link = category_l10n.current_permalink_url_in_website(@website) || '#'
+                    %>
+                    <span><%= link_to category_l10n, category_link %></span>
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+            <div class="media">
+              <% if exhibition_l10n.featured_image.attached? %>
+                <%= kamifusen_tag exhibition_l10n.featured_image %>
+              <% end %>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

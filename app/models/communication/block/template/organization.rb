@@ -1,7 +1,12 @@
 class Communication::Block::Template::Organization < Communication::Block::Template::Base
 
   has_elements
-  has_layouts [:grid, :map]
+  has_layouts [
+    :grid,
+    :large,
+    :map,
+    :carousel
+  ]
   has_component :mode, :option, options: [
     :selection,
     :category
@@ -14,11 +19,12 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   has_component :option_logo,         :boolean, default: true
   has_component :option_summary,      :boolean, default: false
   has_component :option_address,      :boolean, default: false
+  has_component :option_filters,      :boolean, default: false
 
   def allowed_for_about?
     !about.respond_to?(:extranet)
   end
-  
+
   def elements
     if alphabetical
       @elements.sort_by! do |element|
@@ -63,6 +69,10 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   def top_link
     return unless mode == 'category' && category.present?
     link_to_category
+  end
+
+  def filters_categories
+    organizations.collect(&:categories).flatten.compact.uniq
   end
 
   protected

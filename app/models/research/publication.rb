@@ -72,12 +72,12 @@ class Research::Publication < ApplicationRecord
     source == 'osuny'
   end
 
-  def template_static
-    "admin/research/publications/static"
+  def git_path_relative
+    "publications/#{publication_date.year}/#{slug}.html"
   end
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}publications/#{publication_date.year}/#{slug}.html" if for_website?(website)
+  def template_static
+    "admin/research/publications/static"
   end
 
   def doi_url

@@ -1,0 +1,4 @@
+<%= f.input :is_lasting,
+            label: t('admin.content_archive.is_lasting.label'),
+            hint: t('admin.content_archive.is_lasting.hint', count: @website.years_before_archive_content),
+            wrapper: :custom_boolean_switch if @website.archive_content? %>

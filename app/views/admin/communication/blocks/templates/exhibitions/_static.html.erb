@@ -1,0 +1,28 @@
+<%= block_component_static block, :mode %>
+<%= block_options_static block %>
+<%= block_component_static block, :layout %>
+<%= block_component_static block, :description %>
+<%= block_component_static block, :no_exhibition_message %>
+      title_link: "<%= block.template.title_link %>"
+<%
+if block.template.mode == 'category' && block.template.category
+  l10n = block.template.category.localization_for(block.language)
+  if l10n.present?
+    hugo = l10n.hugo(@website)
+    if hugo.file.present?
+  %>
+      category:
+<%= render 'admin/application/static/hugo/values',
+            hugo: hugo,
+            depth: 3 %>
+<%
+    end
+  end
+end
+%>
+<%= render 'admin/application/static/hugo/collection',
+            key: :exhibitions,
+            depth: 3,
+            collection: block.template.selected_exhibitions,
+            language: block.language %>
+      quantity: <%= block.template.selected_exhibitions.to_a.count %>

@@ -12,11 +12,11 @@ class Importers::Api::Osuny::Communication::Website::Base
   protected
 
   def import
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `import` method in #{self.class.name}"
   end
 
   def object
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `object` method in #{self.class.name}"
   end
 
   def language

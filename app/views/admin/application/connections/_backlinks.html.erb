@@ -1,31 +1,43 @@
+<%
+language = about.language
+other_websites = @website.university
+                         .websites
+                         .where.not(id: @website.id)
+                         .ordered(language)
+%>
 backlinks:
   current_website:
-    name: "<%= @website.to_s_in(about.language) %>"
-    pages:
-<% about.backlinks_pages(@website).each do |element|
+    name: "<%= @website.to_s_in(language) %>"
+<% Backlinkable::BACKLINKS.each do |identifier| %>
+    <%= identifier.to_s %>:
+<%
+about.elements_for_backlink(identifier, @website).each do |element|
     hugo = element.hugo(@website)
     next if hugo.nil? || hugo.file.blank?
-    %>
+%>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-<% end %>
-    posts:
-<% about.backlinks_posts(@website).each do |element|
-    hugo = element.hugo(@website)
+<% 
+  end
+end
+%>
+  other_websites:
+<% other_websites.each do |website| %>
+    - name: "<%= website.to_s_in(language) %>"
+      identifier: "<%= website.id %>"
+<% Backlinkable::BACKLINKS.each do |identifier| %>
+      <%= identifier.to_s %>:
+<%
+about.elements_for_backlink(identifier, website).each do |element|
+    hugo = element.hugo(website)
     next if hugo.nil? || hugo.file.blank?
-    %>
-<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-<% end %>
-    events:
-<% about.backlinks_agenda_events(@website).each do |element|
-    hugo = element.hugo(@website)
-    next if hugo.nil? || hugo.file.blank?
-    %>
-<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-<% end %>
-    projects:
-<% about.backlinks_portfolio_projects(@website).each do |element|
-    hugo = element.hugo(@website)
-    next if hugo.nil? || hugo.file.blank?
-    %>
-<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
+    url = "#{website.url}#{hugo.permalink}"
+%>
+        - name: >-
+            <%= element.to_s %>
+          url: "<%= url %>"
+<% 
+  end
+end
+%>
+
 <% end %>

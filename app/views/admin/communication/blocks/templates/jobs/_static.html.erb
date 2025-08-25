@@ -1,0 +1,28 @@
+<%= block_component_static block, :mode %>
+<%= block_options_static block %>
+<%= block_component_static block, :layout %>
+<%= block_component_static block, :description %>
+<%= block_component_static block, :no_job_message %>
+<%
+if block.template.mode == 'category' && block.template.category
+  l10n = block.template.category.localization_for(block.language)
+  if l10n.present?
+    hugo = l10n.hugo(@website)
+    if hugo.file.present?
+  %>
+      category:
+        permalink: "<%= hugo.permalink %>"
+        path: "<%= hugo.path %>"
+        slug: "<%= hugo.slug %>"
+        file: "<%= hugo.file %>"
+<%
+    end
+  end
+end
+%>
+<%= render 'admin/application/static/hugo/collection',
+            key: :jobs,
+            depth: 3,
+            collection: block.template.selected_jobs,
+            language: block.language %>
+      quantity: <%= block.template.selected_jobs.to_a.count %>

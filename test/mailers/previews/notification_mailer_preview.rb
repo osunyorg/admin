@@ -30,5 +30,10 @@ class NotificationMailerPreview < BaseMailerPreview
     NotificationMailer.new_registration(university, visitor_user)
   end
 
+  # Preview this email at http://localhost:3000/rails/mailers/notification_mailer/gdpr_deletion_incoming
+  def gdpr_deletion_incoming
+    NotificationMailer.gdpr_deletion_incoming(university, visitor_user)
+  end
+
 
 end

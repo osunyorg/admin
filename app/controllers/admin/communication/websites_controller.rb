@@ -27,14 +27,43 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def show
-    @all_pages = @website.pages.accessible_by(current_ability)
-    @pages = @all_pages.latest_in(current_language)
-    @all_posts = @website.posts.accessible_by(current_ability)
-    @posts = @all_posts.latest_in(current_language)
-    @all_events = @website.events.root.accessible_by(current_ability)
-    @events = @all_events.latest_in(current_language)
-    @all_projects = @website.projects.accessible_by(current_ability)
-    @projects = @all_projects.latest_in(current_language)
+    # Objects
+    @pages        = @website.pages
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    @posts        = @website.posts
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    @events       = @website.events
+                            .root
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    @exhibitions  = @website.exhibitions
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    @projects     = @website.projects
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    @jobs         = @website.jobs
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    # Parts
+    @show_posts       = @website.feature_posts &&
+                          @posts.any? &&
+                          can?(:read, Communication::Website::Post)
+    @show_events      = @website.feature_agenda &&
+                          @events.any? && 
+                          can?(:read, Communication::Website::Agenda::Event)
+    @show_exhibitions = @website.feature_agenda &&
+                          @exhibitions.any? &&
+                          can?(:read, Communication::Website::Agenda::Exhibition)
+    @show_projects    = @website.feature_portfolio && 
+                          @projects.any? &&
+                          can?(:read, Communication::Website::Portfolio::Project)
+    @show_jobs        = @website.feature_jobboard &&
+                          @jobs.any? &&
+                          can?(:read, Communication::Website::Jobboard::Job)
+    # Git files
     @git_files_desynchronized = @website.git_files_desynchronized
     breadcrumb
   end
@@ -133,10 +162,10 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :url, :repository, :about_type, :about_id, :in_production,
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
-      :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication,
+      :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication,
       :default_time_zone,
       :deuxfleurs_hosting, :default_image, :default_image_delete, :default_image_infos, :default_shared_image, :default_shared_image_delete, :default_shared_image_infos,
-      :deployment_status_badge, :autoupdate_theme,
+      :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
       showcase_tag_ids: [], source_website_ids: [],
       localizations_attributes: [
         :id, :language_id, :name, :published,

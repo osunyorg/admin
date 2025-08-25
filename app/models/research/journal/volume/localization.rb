@@ -36,10 +36,10 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   include HasGitFiles
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage
-  include WithPublication
   include WithUniversity
 
   alias :volume :about
@@ -51,12 +51,14 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}volumes/#{relative_path}/_index.html" if published?
+  def git_path_relative
+    "volumes/#{hugo_slug}/_index.html"
   end
 
-  def relative_path
-    "#{published_at&.year}-#{slug}"
+  def should_sync_to?(website)
+    website.active_language_ids.include?(language_id) &&
+    website.has_connected_object?(self) &&
+    published?
   end
 
   def template_static
@@ -79,5 +81,14 @@ class Research::Journal::Volume::Localization < ApplicationRecord
 
   def inherited_blob_ids
     [best_featured_image&.blob_id]
+  end
+
+  def hugo_slug
+    "#{published_at&.year}-#{slug}"
+  end
+
+  # Hugo a besoin d'un slug spécial parce que les volumes sont des catégories
+  def hugo_slug_in_website(website)
+    hugo_slug
   end
 end
