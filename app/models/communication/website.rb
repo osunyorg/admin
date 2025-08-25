@@ -64,7 +64,6 @@ class Communication::Website < ApplicationRecord
   include LocalizableOrderByNameScope
   include Searchable
   include WithAbouts
-  include WithAssociatedObjects
   include WithConfigs
   include WithConnectedObjects
   include WithContentArchive
@@ -81,9 +80,14 @@ class Communication::Website < ApplicationRecord
   include WithLock
   include WithManagers
   include WithOpenApi
-  include WithProgramCategories
-  include WithSpecialPages
+  include WithPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
+  include WithProgramCategories
+  include WithRealmAdministration
+  include WithRealmCommunication
+  include WithRealmEducation
+  include WithRealmResearch
+  include WithRealmUniversity
   include WithScreenshot
   include WithSecurity
   include WithShowcase
