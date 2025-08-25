@@ -28,7 +28,10 @@
           <%= lf.input  :biography,
                         as: :summernote,
                         input_html: {
-                          data: { 'summernote-config' => 'mini-list' }
+                          data: {
+                            translatable: true,
+                            'summernote-config' => 'mini-list'
+                          }
                         } %>
         <% end %>
 

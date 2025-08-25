@@ -14,8 +14,7 @@ module MentionableByBlocks
     @localizations_mentioning_self ||= blocks_mentioning_self.collect(&:about).compact.uniq
   end
 
-  # Needs override
   def blocks_mentioning_self
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `blocks_mentioning_self` method in #{self.class.name}"
   end
 end

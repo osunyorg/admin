@@ -41,15 +41,15 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   def update_theme
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `update_theme` method in #{self.class.name}"
   end
 
   def init_from_template(name)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `init_from_template` method in #{self.class.name}"
   end
 
   def update_secrets(secrets)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `update_secrets` method in #{self.class.name}"
   end
 
   def push(commit_message)

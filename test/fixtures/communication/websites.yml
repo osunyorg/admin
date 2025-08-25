@@ -20,4 +20,7 @@ website_with_gitlab:
   default_language: fr
   default_time_zone: Europe/Paris
   deuxfleurs_hosting: false
+  feature_agenda: true
+  destination_websites:
+    - website_with_github
   university: default_university

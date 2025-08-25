@@ -12,7 +12,10 @@ class ApplicationController < ActionController::Base
   end
 
   def background_tasks_count
-    @background_tasks_count ||= GoodJob::Job.where(finished_at: nil).count
+    @background_tasks_count ||= GoodJob::Job
+                                  .where(scheduled_at: ..Time.current)
+                                  .where(finished_at: nil)
+                                  .count
   end
   helper_method :background_tasks_count
 

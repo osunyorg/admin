@@ -97,7 +97,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
     [
       :migration_identifier, :language, :name, :meta_description,
       :path, :slug, :summary, :_destroy,
-      featured_image: [:url, :alt, :credit, :_destroy],
+      featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
       **nested_blocks_params
     ]
   end

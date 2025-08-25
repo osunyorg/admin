@@ -33,6 +33,8 @@ module Communication::Website::WithConnectedObjects
     sync_with_git_safely
     mark_obsolete_git_files
     touch_planned_objects
+    unpublish_archivable_content
+    check_period_years
     get_current_theme_version!
     analyse_repository!
     screenshot!
@@ -121,7 +123,14 @@ module Communication::Website::WithConnectedObjects
     agenda_events_time_slots.changed_status_today.find_each &:touch
     exhibitions.changed_status_today.find_each &:touch
     post_localizations.published_today.find_each &:touch
+    alert_localizations.published_today.find_each &:touch
     find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
+  end
+
+  def check_period_years
+    agenda_period_years.needing_recheck.find_each do |year|
+      Communication::Website::Agenda::CheckYearJob.perform_later(year)
+    end
   end
 
   protected
@@ -187,13 +196,13 @@ module Communication::Website::WithConnectedObjects
     is_indirect_or_federated?(indirect_object)
   end
 
-  # ex: 
+  # ex:
   # - Personne (objet indirecct)
   # - Event d'un autre site (fédération)
   def is_indirect_or_federated?(object)
     # Si la méthode n'existe pas, ça transtype correctement
     # Les blobs, par exemple, ne répondent pas à is_indirect_object
-    !object.try(:is_direct_object?) || 
+    !object.try(:is_direct_object?) ||
     # L'objet est-il fédéré dans ce site ?
     (
       object.respond_to?(:federated_in?) &&

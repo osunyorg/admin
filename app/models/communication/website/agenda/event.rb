@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
 #  from_day                 :date
+#  is_lasting               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  time_zone                :string
 #  to_day                   :date
@@ -33,6 +34,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include AsDirectObject
   include AsTree
   include Communication::Website::Agenda::Period::InPeriod
+  include Communication::Website::Agenda::WithStatus
   include Duplicable
   include Federated
   include Filterable
@@ -74,7 +76,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
       .order(:from_day, "least_recent_time_slot ASC")
   }
   scope :ordered, -> (language = nil) { ordered_asc }
-  scope :latest_in, -> (language) { published_now_in(language).future_or_current.order("communication_website_agenda_event_localizations.updated_at").limit(5) }
+  scope :latest_in, -> (language) {
+    published_now_in(language)
+      .future_or_current
+      .order("communication_website_agenda_event_localizations.updated_at")
+      .limit(5)
+  }
 
   scope :for_search_term, -> (term, language) {
     joins(:localizations)
@@ -87,9 +94,32 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     ", term: "%#{sanitize_sql_like(term)}%")
   }
 
-  scope :on_year, -> (year) { where('extract(year from from_day) = ?', year) }
-  scope :on_month, -> (year, month) { where('extract(year from from_day) = ? and extract(month from from_day) = ?', year, month) }
+  scope :on_year, -> (year) { where('extract(year from communication_website_agenda_events.from_day) = ?', year) }
+  scope :on_month, -> (year, month) { where('extract(year from communication_website_agenda_events.from_day) = ? and extract(month from communication_website_agenda_events.from_day) = ?', year, month) }
   scope :on_day, -> (day) { where(from_day: day) }
+
+  scope :future, -> {
+    where("communication_website_agenda_events.from_day > :today", today: Date.current)
+  }
+  scope :current, -> {
+    where("communication_website_agenda_events.from_day <= :today AND communication_website_agenda_events.to_day >= :today", today: Date.current)
+  }
+  scope :future_or_current, -> {
+    future.or(current)
+  }
+  scope :archive, -> {
+    where("communication_website_agenda_events.to_day < :today", today: Date.current)
+  }
+  scope :changed_status_today, -> {
+    where(
+      "communication_website_agenda_events.from_day = :today
+      OR communication_website_agenda_events.from_day = :yesterday
+      OR communication_website_agenda_events.to_day = :today
+      OR communication_website_agenda_events.to_day = :yesterday",
+      today: Date.current,
+      yesterday: Date.yesterday
+    )
+  }
 
   def dependencies
     [website.config_default_content_security_policy] +
@@ -103,6 +133,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   def references
     menus +
     abouts_with_agenda_block
+  end
+
+  def sorting_time
+    from_day.in_time_zone.to_time
   end
 
   protected

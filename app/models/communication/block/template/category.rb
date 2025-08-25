@@ -35,6 +35,8 @@ class Communication::Block::Template::Category < Communication::Block::Template:
     case category_kind.to_sym
     when :agenda
       website&.agenda_categories
+    when :jobs
+      website&.jobboard_categories
     when :locations
       # No category yet
     when :organizations
@@ -57,7 +59,7 @@ class Communication::Block::Template::Category < Communication::Block::Template:
   end
 
   def taxonomies_for(category_kind)
-    categories_for(category_kind)&.taxonomies.ordered(language)
+    categories_for(category_kind)&.taxonomies&.ordered(language)
   end
 
   def category_kinds_allowed

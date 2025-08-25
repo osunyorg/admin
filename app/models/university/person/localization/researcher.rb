@@ -3,8 +3,8 @@ class University::Person::Localization::Researcher < University::Person::Localiz
     'University::Person::Localization::Researcher'
   end
 
-  def git_path(website)
-    "#{git_path_content_prefix(website)}researchers/#{slug}/_index.html" if for_website?(website)
+  def git_path_relative
+    "researchers/#{slug}/_index.html"
   end
 
   def template_static
@@ -27,4 +27,5 @@ class University::Person::Localization::Researcher < University::Person::Localiz
     # so we don't mess with the University::Person::Localization static_localization_key
     "#{about.class.polymorphic_name.parameterize}-researcher-#{self.about_id}"
   end
+
 end

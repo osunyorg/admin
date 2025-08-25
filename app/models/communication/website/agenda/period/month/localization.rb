@@ -36,9 +36,10 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
 
   delegate :value, to: :about
 
-  def git_path(website)
-    return unless website.id == communication_website_id
-    git_path_content_prefix(website) + git_path_relative
+  def should_sync_to?(website)
+    website.id == communication_website_id &&
+    website.active_language_ids.include?(language_id) &&
+    events_count > 0 # Some events
   end
 
   def git_path_relative

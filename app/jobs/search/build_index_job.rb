@@ -1,5 +1,5 @@
 class Search::BuildIndexJob < ApplicationJob
-  queue_as :whale
+  queue_as :whales
 
   def perform
     Search.build_index

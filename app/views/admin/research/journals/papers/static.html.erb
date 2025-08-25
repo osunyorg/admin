@@ -31,10 +31,18 @@ metadata:
 <% if paper.kind %>
 paper_kind: "<%= prepare_text_for_static paper.kind.to_s_in(language) %>"
 <% end %>
-<% if @l10n.volume_l10n %>
+<%
+volume_l10n = @l10n.volume_l10n
+if volume_l10n.present?
+  hugo = volume_l10n.hugo(@website)
+  if hugo.slug.present?
+  %>
 volumes:
-  - "<%= @l10n.volume_l10n.relative_path %>"
-<% end %>
+  - "<%= hugo.slug %>"
+<% 
+  end
+end
+%>
 weight: <%= paper.position %>
 date: "<%= @l10n.published_at&.to_date&.iso8601 %>"
 dates:
