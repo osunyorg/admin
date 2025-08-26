@@ -3,14 +3,14 @@
       l10n = job.localization_for(block.about.language)
       next if l10n.nil?
       %>
-    <div>
+    <article>
       <p>
         <%= l10n.title %>
       </p>
-      <p class="small">
-        <%= l10n.summary %>
-      </p>
-    </div>
+      <div class="small">
+        <%= sanitize l10n.summary %>
+      </div>
+    </article>
   <% end %>
 <% else %>
   <p><%= block.template.no_job_message %></p>
