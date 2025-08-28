@@ -29,7 +29,7 @@ class Admin::University::People::Experiences::ImportsController < Admin::Univers
                   notice: t('admin.successfully_created_html', model: @import.to_s)
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

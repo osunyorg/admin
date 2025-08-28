@@ -38,7 +38,7 @@ class Admin::Communication::Medias::CategoriesController < Admin::Communication:
     else
       @categories = categories
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -51,7 +51,7 @@ class Admin::Communication::Medias::CategoriesController < Admin::Communication:
       @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

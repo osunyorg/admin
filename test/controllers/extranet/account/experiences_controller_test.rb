@@ -36,7 +36,7 @@ class Extranet::Account::ExperiencesControllerTest < ActionDispatch::Integration
           ]
         }
       }
-      assert_response(:unprocessable_entity)
+      assert_response(:unprocessable_content)
     end
   end
 
@@ -69,7 +69,7 @@ class Extranet::Account::ExperiencesControllerTest < ActionDispatch::Integration
         organization_id: ""
       }
     }
-    assert_response(:unprocessable_entity)
+    assert_response(:unprocessable_content)
   end
 
 end

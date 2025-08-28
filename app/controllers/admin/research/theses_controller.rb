@@ -31,7 +31,7 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
                   notice: t('admin.successfully_created_html', model: @thesis.to_s_in(current_language))
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -43,7 +43,7 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
       load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
