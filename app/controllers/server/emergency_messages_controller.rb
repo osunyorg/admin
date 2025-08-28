@@ -25,7 +25,7 @@ class Server::EmergencyMessagesController < Server::ApplicationController
       redirect_to [:server, @emergency_message], notice: t('admin.successfully_created_html', model: @emergency_message.to_s)
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -35,7 +35,7 @@ class Server::EmergencyMessagesController < Server::ApplicationController
     else
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
   
