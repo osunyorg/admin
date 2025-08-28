@@ -96,7 +96,7 @@ en:
       communication/media/collection/localization:
         name: Name
       communication/media/localization:
-        internal_description: Internal description
+        internal_description: Internal description 
         name: Name
       communication/website:
         about: About
