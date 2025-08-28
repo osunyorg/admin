@@ -36,6 +36,18 @@
         <%= osuny_label Communication::Media.human_attribute_name(:original_byte_size) %>
         <p><%= number_to_human_size @media.original_byte_size %></p>
       </div>
+      <% if @media.width.present? %>
+        <div class="col-lg-6">
+          <%= osuny_label Communication::Media.human_attribute_name(:width) %>
+          <p><%= @media.width %>px</p>
+        </div>
+      <% end %>
+      <% if @media.height.present? %>
+        <div class="col-lg-6">
+          <%= osuny_label Communication::Media.human_attribute_name(:height) %>
+          <p><%= @media.height %>px</p>
+        </div>
+      <% end %>
       <% if @l10n.alt.present? %>
         <div class="col-lg-6">
           <%= osuny_label t('featured_image.alt.label') %>
