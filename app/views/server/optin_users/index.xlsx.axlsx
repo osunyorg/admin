@@ -1,16 +1,10 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "index") do |sheet|
   options = [
-    User.human_attribute_name(:last_name),
-    User.human_attribute_name(:first_name),
     User.human_attribute_name(:email),
-    User.human_attribute_name(:university)
   ]
 
   types = [
-    :string,
-    :string,
-    :string,
     :string
   ]
 
@@ -18,10 +12,7 @@ wb.add_worksheet(name: "index") do |sheet|
 
   @users.each do |user|
     infos = [
-      user.last_name,
-      user.first_name,
-      user.email,
-      user.university
+      user.email
     ]
 
     sheet.add_row infos, types: types

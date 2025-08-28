@@ -1,9 +1,9 @@
 class Server::OptinUsersController < Server::ApplicationController
   
   def index
-    @users = User.filter_by(params[:filters], current_language)
+    @users = User.select(:email).distinct
                  .where(optin_newsletter: true)
-                 .ordered
+                 .order(:email)
 
     respond_to do |format|
       format.html {

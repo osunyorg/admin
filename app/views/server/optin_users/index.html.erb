@@ -13,26 +13,21 @@
     <%= number_with_delimiter @users.total_count %>
     <%= User.model_name.human(count: @users.total_count).downcase %>
   </p>
-  <%= render 'filters', current_path: server_optin_users_path %>
 </div>
 
 <div class="table-responsive">
   <table class="<%= table_classes %>">
     <thead>
       <tr>
-        <th><%= User.human_attribute_name(:last_name) %></th>
-        <th><%= User.human_attribute_name(:first_name) %></th>
         <th><%= User.human_attribute_name(:email) %></th>
-        <th><%= User.human_attribute_name(:university) %></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td><%= user.last_name %></td>
-          <td><%= user.first_name %></td>
           <td><%= user.email %></td>
-          <td><%= user.university %></td>
+          <td></td>
         </tr>
       <% end %>
     </tbody>
