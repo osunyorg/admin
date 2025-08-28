@@ -47,9 +47,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       respond_to do |format|
         format.html {
           breadcrumb
-          render :new, status: :unprocessable_entity
+          render :new, status: :unprocessable_content
         }
-        format.js { head :unprocessable_entity }
+        format.js { head :unprocessable_content }
       end
     end
   end
@@ -68,9 +68,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
         format.html {
           breadcrumb
           add_breadcrumb t('edit')
-          render :edit, status: :unprocessable_entity
+          render :edit, status: :unprocessable_content
         }
-        format.js { head :unprocessable_entity }
+        format.js { head :unprocessable_content }
       end
     end
   end
