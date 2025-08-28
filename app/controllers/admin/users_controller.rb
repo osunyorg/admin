@@ -41,7 +41,7 @@ class Admin::UsersController < Admin::ApplicationController
     else
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

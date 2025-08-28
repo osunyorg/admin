@@ -32,7 +32,7 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
                   notice: t('admin.successfully_created_html', model: @location.to_s_in(current_language))
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -44,7 +44,7 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
       load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

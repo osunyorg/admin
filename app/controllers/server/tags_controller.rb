@@ -28,7 +28,7 @@ class Server::TagsController < Server::ApplicationController
       redirect_to server_tag_path(@tag), notice: t('admin.successfully_created_html', model: @tag.to_s)
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -38,7 +38,7 @@ class Server::TagsController < Server::ApplicationController
     else
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

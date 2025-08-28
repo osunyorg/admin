@@ -23,7 +23,7 @@ class Extranet::AccountController < Extranet::ApplicationController
     else
       breadcrumb
       add_breadcrumb t('extranet.account.edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

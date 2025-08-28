@@ -40,7 +40,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
       redirect_to admin_research_journal_volume_path(@volume), notice: t('admin.successfully_created_html', model: @volume.to_s_in(current_language))
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -50,7 +50,7 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
     else
       load_invalid_localization
       breadcrumb
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
       add_breadcrumb t('edit')
     end
   end

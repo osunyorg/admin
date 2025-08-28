@@ -30,7 +30,7 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
                   notice: t('admin.successfully_created_html', model: @document.to_s_in(current_language))
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -42,7 +42,7 @@ class Admin::Communication::Extranets::DocumentsController < Admin::Communicatio
       load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

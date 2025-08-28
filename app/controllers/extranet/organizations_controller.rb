@@ -23,7 +23,7 @@ class Extranet::OrganizationsController < Extranet::ApplicationController
       @l10n = @organization.localizations.first
       breadcrumb
       add_breadcrumb t('create')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
