@@ -84,7 +84,7 @@ class Communication::Block::Template::Exhibition < Communication::Block::Templat
   end
 
   def base_exhibitions
-    exhibitions = website.exhibitions.published_now_in(block.language)
+    exhibitions = website_and_federated_exhibitions
     if time.in?(Communication::Website::Agenda::AUTHORIZED_SCOPES)
       exhibitions = exhibitions.public_send(time)
       exhibitions = time == 'archive' ? exhibitions.ordered_desc : exhibitions.ordered_asc
@@ -108,4 +108,12 @@ class Communication::Block::Template::Exhibition < Communication::Block::Templat
     }.compact
   end
 
+  def website_and_federated_exhibitions
+    Communication::Website::Agenda::Exhibition.where(id: exhibitions_ids)
+                                              .published_now_in(block.language)
+  end
+
+  def exhibitions_ids
+    @exhibitions_ids ||= website.exhibitions.pluck(:id) + website.federated_communication_website_agenda_exhibitions.pluck(:id)
+  end
 end
