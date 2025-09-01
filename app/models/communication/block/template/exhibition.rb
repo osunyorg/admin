@@ -114,6 +114,9 @@ class Communication::Block::Template::Exhibition < Communication::Block::Templat
   end
 
   def website_and_federated_exhibition_ids
-    @exhibitions_ids ||= website.exhibitions.pluck(:id) + website.federated_communication_website_agenda_exhibitions.pluck(:id)
+    @website_and_federated_exhibition_ids ||= (
+      website.exhibitions.pluck(:id) +
+      website.federated_communication_website_agenda_exhibitions.pluck(:id)
+    )
   end
 end
