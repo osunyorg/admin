@@ -109,11 +109,11 @@ class Communication::Block::Template::Exhibition < Communication::Block::Templat
   end
 
   def website_and_federated_exhibitions
-    Communication::Website::Agenda::Exhibition.where(id: exhibitions_ids)
+    Communication::Website::Agenda::Exhibition.where(id: website_and_federated_exhibition_ids)
                                               .published_now_in(block.language)
   end
 
-  def exhibitions_ids
+  def website_and_federated_exhibition_ids
     @exhibitions_ids ||= website.exhibitions.pluck(:id) + website.federated_communication_website_agenda_exhibitions.pluck(:id)
   end
 end
