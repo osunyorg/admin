@@ -102,7 +102,7 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   def end_datetime
     return if datetime.nil? || duration.to_i.zero?
-    datetime + duration.minutes
+    datetime + duration.seconds
   end
 
   def end_date
