@@ -11,8 +11,6 @@ current_time_slot:
     date: "<%= time_slot.date&.iso8601 %>"
     time: "<%= time_slot.time %>"
     datetime: "<%= time_slot.datetime&.iso8601 %>"
-  duration:
-    seconds: <%= time_slot.duration %>
   end:
     date: "<%= time_slot.end_date&.iso8601 %>"
     time: "<%= time_slot.end_time %>"
