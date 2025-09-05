@@ -112,6 +112,10 @@ class Education::Program < ApplicationRecord
     true
   end
 
+  def has_education_schools?
+    schools.any? || descendants.any? { |descendant| descendant.schools.any? }
+  end
+
   def has_education_diplomas?
     diploma.present? || descendants.any? { |descendant| descendant.diploma.present? }
   end
