@@ -85,6 +85,10 @@ class Research::Laboratory < ApplicationRecord
     false
   end
 
+  def has_education_schools?
+    false
+  end
+
   def has_education_diplomas?
     false
   end
