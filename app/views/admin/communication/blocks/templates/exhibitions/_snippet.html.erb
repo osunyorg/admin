@@ -14,6 +14,9 @@
       <div class="col-10">
         <p class="mb-0">
           <%= l10n.title %>
+          <% if exhibition.federated_in?(@website) %>
+            — <%= show_link_inline exhibition.website %>
+          <% end %>
           <% if l10n.subtitle.present? %>
             <br><%= l10n.subtitle %>
           <% end %>

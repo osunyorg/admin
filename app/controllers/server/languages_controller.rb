@@ -25,7 +25,7 @@ class Server::LanguagesController < Server::ApplicationController
       redirect_to [:server, @language], notice: t('admin.successfully_created_html', model: @language.to_s)
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -35,7 +35,7 @@ class Server::LanguagesController < Server::ApplicationController
     else
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
