@@ -30,4 +30,8 @@ module HasGitFiles
     path
   end
 
+  def mark_git_files_for_update!
+    git_files.each &:mark_for_update!
+  end
+
 end

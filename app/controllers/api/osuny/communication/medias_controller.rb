@@ -10,7 +10,7 @@ class Api::Osuny::Communication::MediasController < Api::Osuny::ApplicationContr
     if @media.persisted?
       render :show, status: :created
     else
-      render json: { errors: @media.errors }, status: :unprocessable_entity
+      render json: { errors: @media.errors }, status: :unprocessable_content
     end
   end
 
@@ -24,13 +24,13 @@ class Api::Osuny::Communication::MediasController < Api::Osuny::ApplicationContr
     else
       render(
         json: { error: "Either URL or file parameter is required" },
-        status: :unprocessable_entity
+        status: :unprocessable_content
       )
     end
   rescue StandardError => e
     render(
       json: { error: "Failed to create blob: #{e.message}" },
-      status: :unprocessable_entity
+      status: :unprocessable_content
     )
   end
 

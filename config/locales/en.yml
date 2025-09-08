@@ -86,6 +86,7 @@ en:
           teacher: Teacher
           visitor: Visitor
           website_manager: Website manager
+        university: University
         websites_to_manage: Websites managed
     errors:
       messages:

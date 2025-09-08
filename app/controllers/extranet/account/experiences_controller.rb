@@ -24,7 +24,7 @@ class Extranet::Account::ExperiencesController < Extranet::ApplicationController
       @l10n = @experience.localizations.first
       breadcrumb
       add_breadcrumb University::Person::Experience.human_attribute_name('new')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -35,7 +35,7 @@ class Extranet::Account::ExperiencesController < Extranet::ApplicationController
     else
       breadcrumb
       add_breadcrumb @l10n
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
