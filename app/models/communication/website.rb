@@ -163,21 +163,6 @@ class Communication::Website < ApplicationRecord
     original_localization.to_s
   end
 
-  # TODO deprecated
-  def git_path(website)
-    "data/website.yml"
-  end
-
-  # TODO deprecated
-  def can_have_git_file?
-    true
-  end
-
-  # TODO deprecated
-  def should_sync_to?(website)
-    website.id == id
-  end
-
   def dependencies
     # Le website est le SEUL cas d'auto-dépendance
     [self] +
