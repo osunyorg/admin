@@ -58,7 +58,8 @@ class Communication::Website::Localization < ApplicationRecord
   end
 
   def should_sync_to?(website)
-    website.id == about_id
+    website.id == about_id &&
+    website.active_language_ids.include?(language_id)
   end
 
   def template_static
