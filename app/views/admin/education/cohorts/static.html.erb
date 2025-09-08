@@ -1,0 +1,31 @@
+<%
+cohort = @l10n.about
+language = @l10n.language
+program = cohort.program
+program_l10n = program.localization_for(language)
+academic_year = cohort.academic_year
+academic_year_l10n = academic_year.localization_for(language)
+%>---
+<%= render 'admin/application/static/core', about: @l10n %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
+<%= render 'admin/application/static/design',
+            full_width: true,
+            toc_offcanvas: true,
+            toc_present: false %>
+<%= render 'admin/application/static/hugo/collection',
+            key: :persons,
+            collection: cohort.people.ordered(language),
+            language: language %>
+<% if program_l10n.present? %>
+program:
+<%= render 'admin/application/static/hugo/values',
+            language: language,
+            hugo: program_l10n.hugo(@website) %>
+<% end %>
+<% if academic_year_l10n.present? %>
+academic_year:
+<%= render 'admin/application/static/hugo/values',
+            language: language,
+            hugo: academic_year_l10n.hugo(@website) %>
+<% end %>
+---

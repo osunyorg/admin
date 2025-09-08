@@ -16,7 +16,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
     if @event.save
       render :show, status: :created
     else
-      render json: { errors: @event.errors }, status: :unprocessable_entity
+      render json: { errors: @event.errors }, status: :unprocessable_content
     end
   end
 
@@ -24,7 +24,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
     if @event.update(event_params)
       render :show
     else
-      render json: { errors: @event.errors }, status: :unprocessable_entity
+      render json: { errors: @event.errors }, status: :unprocessable_content
     end
   end
 
@@ -62,7 +62,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
       end
     end
 
-    status = @invalid_events_with_index.any? ? :unprocessable_entity : :ok
+    status = @invalid_events_with_index.any? ? :unprocessable_content : :ok
     render 'upsert', status: status
   end
 
@@ -89,7 +89,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
 
   def ensure_same_migration_identifier
     if @event.migration_identifier != @migration_identifier
-      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_entity
+      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
     end
   end
 
@@ -97,7 +97,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
     [
       :migration_identifier, :language, :title, :meta_description,
       :published, :published_at, :slug, :subtitle, :summary, :text, :_destroy,
-      featured_image: [:url, :alt, :credit, :_destroy],
+      featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
       **nested_blocks_params
     ]
   end

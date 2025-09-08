@@ -12,7 +12,7 @@ class Communication::Website::Page::CommunicationPortfolio < Communication::Webs
     true
   end
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     website.feature_portfolio
   end
 

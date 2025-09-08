@@ -49,6 +49,7 @@
               </div>
             </div>
           <% end %>
+          <%= render 'admin/application/content_archive/form', f: f %>
         <% end %>
 
         <%= lf.input  :text,
@@ -91,6 +92,7 @@
                             ) if event.parent.present? %>
           <%= f.input :bodyclass, label: t('admin.bodyclass') %>
         <% end %>
+        <%= render 'admin/communication/websites/federations/form', f: f %>
       </div>
     </div>
 

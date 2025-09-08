@@ -18,10 +18,6 @@ class Communication::Website::Permalink::Portfolio::Project < Communication::Web
 
   protected
 
-  def published?
-    website.id == about.communication_website_id && about.published
-  end
-
   def substitutions
     {
       year: about.about.year,

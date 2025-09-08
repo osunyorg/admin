@@ -2,7 +2,7 @@ class Communication::Website::Permalink::Agenda::Event::Day < Communication::Web
 
   # /agenda/2025/arte-concert-festival/
   def self.pattern_in_website(website, language, about = nil)
-    "#{special_page_path(website, language)}/:year/:slug/"
+    "#{special_page_path(website, language)}/:year/:slug:federation_suffix/"
   end
 
   def self.special_page_type
@@ -11,17 +11,12 @@ class Communication::Website::Permalink::Agenda::Event::Day < Communication::Web
 
   protected
 
-  def published?
-    website.id == about.communication_website_id && # Good website
-      about.events.any? && # With events on this day
-      about.event_l10n.present? && # Event localized in this language
-      about.event_l10n.published? # and published
-  end
-
   def substitutions
+    event = about.event
     {
       year: about.from_day.strftime("%Y"),
-      slug: about.event_l10n.slug
+      slug: about.event_l10n.slug,
+      federation_suffix: event.suffix_in(website)
     }
   end
 

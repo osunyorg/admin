@@ -23,7 +23,9 @@ module Communication::Website::WithConnectedObjects
       # We use find_each to avoid loading all the objects in memory
       public_send(association_name).find_each(&:connect_dependencies)
     end
-    connect(about, self) if about.present?
+    indirect_objects_connected_to_website.each do |indirect_object|
+      connect(indirect_object, self)
+    end
     delete_obsolete_connections_for_self_and_direct_sources
     # In the same job
     create_missing_special_pages
@@ -31,6 +33,8 @@ module Communication::Website::WithConnectedObjects
     sync_with_git_safely
     mark_obsolete_git_files
     touch_planned_objects
+    unpublish_archivable_content
+    check_period_years
     get_current_theme_version!
     analyse_repository!
     screenshot!
@@ -58,7 +62,7 @@ module Communication::Website::WithConnectedObjects
       # On prend l'about et ses dépendances récursives.
       # On ne prend pas toutes les dépendances parce qu'on s'intéresse
       # uniquement à la connexion via about.
-      about_dependencies
+      indirect_objects_connected_to_website_recursive
     )
   end
 
@@ -119,8 +123,14 @@ module Communication::Website::WithConnectedObjects
     agenda_events_time_slots.changed_status_today.find_each &:touch
     exhibitions.changed_status_today.find_each &:touch
     post_localizations.published_today.find_each &:touch
-    # Peut-être pas utile
-    # find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
+    alert_localizations.published_today.find_each &:touch
+    find_special_page(Communication::Website::Page::CommunicationAgenda)&.touch
+  end
+
+  def check_period_years
+    agenda_period_years.needing_recheck.find_each do |year|
+      Communication::Website::Agenda::CheckYearJob.perform_later(year)
+    end
   end
 
   protected
@@ -169,8 +179,8 @@ module Communication::Website::WithConnectedObjects
     direct_source.present? &&
     # On ne connecte pas le site à lui-même
     !indirect_object.is_a?(Communication::Website) &&
-    # On ne connecte pas les objets directs (en principe ça n'arrive pas)
-    !indirect_object.try(:is_direct_object?) &&
+    # On autorise les objets indirects et les objets fédérés
+    is_indirect_or_federated?(indirect_object) &&
     # On ne connecte pas des objets qui ne sont pas issus de modèles ActiveRecord (comme les composants des blocs)
     indirect_object.is_a?(ActiveRecord::Base) &&
     # On ne connecte pas certains types d'objets, listés dans une black list
@@ -182,8 +192,22 @@ module Communication::Website::WithConnectedObjects
     indirect_object.present? &&
     # On ne suit pas les objets qui n'ont pas de dépendances
     indirect_object.respond_to?(:recursive_dependencies) &&
-    # On ne suit pas les objets directs
-    !indirect_object.try(:is_direct_object?)
+    # On autorise les objets indirects et les objets directs fédérés
+    is_indirect_or_federated?(indirect_object)
+  end
+
+  # ex:
+  # - Personne (objet indirecct)
+  # - Event d'un autre site (fédération)
+  def is_indirect_or_federated?(object)
+    # Si la méthode n'existe pas, ça transtype correctement
+    # Les blobs, par exemple, ne répondent pas à is_indirect_object
+    !object.try(:is_direct_object?) ||
+    # L'objet est-il fédéré dans ce site ?
+    (
+      object.respond_to?(:federated_in?) &&
+      object.federated_in?(self)
+    )
   end
 
   # Le site fait son ménage de printemps.

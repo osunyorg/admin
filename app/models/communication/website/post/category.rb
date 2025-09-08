@@ -58,7 +58,7 @@ class Communication::Website::Post::Category < ApplicationRecord
 
   def references
     posts +
-    post_localizations +
+    post_localizations.in_languages(website.active_language_ids) +
     [parent] +
     siblings +
     website.menus.in_languages(website.active_language_ids) +
@@ -67,11 +67,6 @@ class Communication::Website::Post::Category < ApplicationRecord
 
   def siblings
     self.class.unscoped.where(parent: parent, university: university, website: website).where.not(id: id)
-  end
-
-  # TODO pourquoi cette catégorie est la seule à définir cela ?
-  def exportable_to_git?
-    false
   end
 
   protected

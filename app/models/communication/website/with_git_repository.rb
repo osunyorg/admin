@@ -35,6 +35,14 @@ module Communication::Website::WithGitRepository
     git_repository.url
   end
 
+  # Override du GeneratesGitFiles
+  # Dans le cas du website, on permet de suivre les objets directs car on souhaite tout regénérer
+  def identify_git_files_safely
+    generate_git_file_for_array(
+      recursive_dependencies_following_direct + references
+    )
+  end
+
   def sync_with_git
     update_column(:last_sync_at, Time.now)
     Communication::Website::SyncWithGitJob.perform_later(id)
@@ -62,13 +70,13 @@ module Communication::Website::WithGitRepository
     Communication::Website::GitFile.generate self, object
   end
 
-  # Marque comme obsolete tous les git_files qui ne sont pas dans les recursive_dependencies_syncable
+  # Marque comme obsolete tous les git_files qui ne sont pas dans les recursive_dependencies_following_direct
   def mark_obsolete_git_files
     return unless git_repository.valid?
     git_files.find_each do |git_file|
       dependency = git_file.about
       # Here, dependency can be nil (object was previously destroyed)
-      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_syncable_following_direct)
+      is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_following_direct)
       git_file.mark_for_destruction! if is_obsolete
     end
   end
@@ -81,12 +89,6 @@ module Communication::Website::WithGitRepository
     users_to_notify.each do |user|
       NotificationMailer.website_invalid_access_token(self, user).deliver_later
     end
-  end
-
-  # Le website devient data/website.yml
-  # Les configs héritent du modèle website et s'exportent en différents fichiers
-  def exportable_to_git?
-    true
   end
 
   def should_clean_on_git?

@@ -4,7 +4,7 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
     :persons
   end
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     website.about && website.about&.respond_to?(:administrators)
   end
 

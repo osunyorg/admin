@@ -43,7 +43,7 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
     else
       @categories = categories
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -56,7 +56,7 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
       @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -87,8 +87,8 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
   def exhibition_params
     params.require(:communication_website_agenda_exhibition)
     .permit(
-      :from_day, :to_day, :time_zone, :bodyclass,
-      category_ids: [],
+      :from_day, :to_day, :time_zone, :is_lasting, :bodyclass,
+      category_ids: [], destination_website_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text, :notes, :place,
         :published, :published_at, :slug,

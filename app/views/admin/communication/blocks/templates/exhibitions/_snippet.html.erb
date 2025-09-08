@@ -1,0 +1,32 @@
+<% if block.template.selected_exhibitions.any? %>
+  <% block.template.selected_exhibitions.each do |exhibition|
+      l10n = exhibition.localization_for(block.about.language)
+      next if l10n.nil?
+      %>
+    <div class="row mb-3">
+      <div class="col-2">
+        <% if l10n.featured_image.attached? %>
+          <%= kamifusen_tag l10n.featured_image, width: 200, class: 'img-fluid mb-2' %>
+        <% else %>
+          <%= image_tag 'admin/placeholder.png', class: 'img-fluid mb-2' %>
+        <% end %>
+      </div>
+      <div class="col-10">
+        <p class="mb-0">
+          <%= l10n.title %>
+          <% if exhibition.federated_in?(@website) %>
+            — <%= show_link_inline exhibition.website %>
+          <% end %>
+          <% if l10n.subtitle.present? %>
+            <br><%= l10n.subtitle %>
+          <% end %>
+        </p>
+        <p class="small">
+          <%= render 'admin/communication/websites/agenda/exhibitions/dates', exhibition: exhibition, l10n: l10n, detailed: false %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <p><%= block.template.no_exhibition_message %></p>
+<% end %>

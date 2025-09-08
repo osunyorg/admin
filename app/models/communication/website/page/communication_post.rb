@@ -16,6 +16,10 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
     :posts
   end
 
+  def should_create_special_page?
+    website.feature_posts
+  end
+
   def dependencies
     super +
     [website.config_default_languages] +

@@ -31,15 +31,11 @@ class Communication::Media < ApplicationRecord
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include Localizable
   include LocalizableOrderByNameScope
+  include WithOrigin # Must be loaded before WithOpenApi
+  include WithOpenApi
   include WithUniversity
 
   attr_accessor :original_uploaded_file
-
-  enum :origin, {
-    upload: 1,    # file uploaded (default)
-    unsplash: 11, # file imported from Unsplash
-    pexels: 12    # file imported from Pexels
-  }, prefix: :from
 
   belongs_to              :collection,
                           class_name: 'Communication::Media::Collection',
@@ -75,11 +71,16 @@ class Communication::Media < ApplicationRecord
     where(collection: collection_id)
   }
 
-  def self.create_from_blob(blob, in_context:, origin: :upload, alt: nil, credit: nil)
+  def self.create_from_blob(blob, in_context: nil, origin: :upload, alt: nil, credit: nil)
     return if blob.nil?
     media = find_or_create_media_from_blob(blob, origin)
-    create_context(media, blob, in_context)
-    find_or_create_media_l10n(media, in_context, alt, credit)
+    if in_context.present?
+      create_context(media, blob, in_context)
+      find_or_create_media_l10n(media, in_context.language, alt, credit)
+    else
+      university = University.find_by(id: blob.university_id)
+      find_or_create_media_l10n(media, university.default_language, alt, credit)
+    end
     media
   end
 
@@ -109,6 +110,14 @@ class Communication::Media < ApplicationRecord
     self.original_byte_size = value.byte_size
   end
 
+  def width
+    original_blob.metadata.dig(:width)
+  end
+
+  def height
+    original_blob.metadata.dig(:height)
+  end
+
   protected
 
   def self.find_or_create_media_from_blob(blob, origin)
@@ -130,9 +139,9 @@ class Communication::Media < ApplicationRecord
     ).first_or_create
   end
 
-  def self.find_or_create_media_l10n(media, about, alt, credit)
+  def self.find_or_create_media_l10n(media, language, alt, credit)
     l10n = media.localizations.where(
-      language: about.language
+      language: language
     ).first_or_initialize
     l10n.name = File.basename(media.original_filename, ".*").humanize
     l10n.alt = alt

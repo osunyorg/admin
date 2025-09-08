@@ -14,9 +14,7 @@ if about.respond_to?(:emails)
   end
 end
 # about.email
-# If the publicity level is defined, we must respect it
-publicity = 'email_is_public?'
-should_show = about.respond_to?(publicity) ? about.public_send(publicity) : true
+should_show = is_information_public?(about, :email)
 if should_show
   email = ContactDetails.find_social(:email, about, about)
   detail = ContactDetails::Email.new email

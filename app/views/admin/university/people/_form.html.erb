@@ -28,7 +28,10 @@
           <%= lf.input  :biography,
                         as: :summernote,
                         input_html: {
-                          data: { 'summernote-config' => 'mini-list' }
+                          data: {
+                            translatable: true,
+                            'summernote-config' => 'mini-list'
+                          }
                         } %>
         <% end %>
 
@@ -161,11 +164,13 @@
                   }
                 } %>
         <% end %>
+        <%= f.input :bodyclass, label: t('admin.bodyclass') %>
         <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
       </div>
     </div>
     <% content_for :action_bar_right do %>
       <%= cancel [:admin, person] %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: @l10n %>
       <%= submit f %>
     <% end %>
   <% end %>

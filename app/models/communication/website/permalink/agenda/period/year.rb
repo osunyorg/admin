@@ -15,10 +15,6 @@ class Communication::Website::Permalink::Agenda::Period::Year < Communication::W
 
   protected
 
-  def published?
-    website.id == about.communication_website_id
-  end
-
   def substitutions
     {
       year: about.slug

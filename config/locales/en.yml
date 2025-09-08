@@ -86,6 +86,7 @@ en:
           teacher: Teacher
           visitor: Visitor
           website_manager: Website manager
+        university: University
         websites_to_manage: Websites managed
     errors:
       messages:
@@ -128,6 +129,12 @@ en:
       read_all: See all chronicles
       read_more: Learn more
       title: Chronicles
+    content_archive:
+      is_lasting:
+        hint:
+          one: If unchecked, this content will be automatically archived after %{count} year.
+          other: If unchecked, this content will be automatically archived after %{count} years.
+        label: Lasting content
     dashboard: Dashboard
     duplicate: Duplicate
     elements:
@@ -177,7 +184,7 @@ en:
       hint: A short text, like a heading for an article. Don't write all the content here, there are blocks for that.
       label: Summary
     translation:
-      button: Translate with LibreTranslate
+      button: Translate
       done: Translation done! Please proof read before you save.
       running: Currently translating
       unavailable_button: Automatic translation unavailable
@@ -429,6 +436,10 @@ en:
         with_user_html: You can sign in with your email address <b>%{email}</b> by clicking <a href="%{sign_in_url}">here</a>.
         without_user_html: You can sign up with your email address <b>%{email}</b> by clicking <a href="%{sign_up_url}">here</a>.
     notifications:
+      gdpr_deletion_incoming:
+        subject: "Osuny - your account will soon be deleted"
+        body_1_html: "Hello,<br><br>It's been a while since you logged in to your account.<br><br>To comply with our legal obligations, your account will be deleted in <b>%{delay} days</b> if you do not log back in by then."
+        body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to access your account."
       import:
         subject_with_errors: Your import has been processed with errors
         subject_without_errors: Your import has been processed

@@ -53,7 +53,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     else
       @categories = categories
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -87,7 +87,8 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def organization_params
     params.require(:university_organization)
           .permit(
-            :active, :siren, :kind, :address, :zipcode, :city, :country, :phone, :email, category_ids: [],
+            :active, :siren, :kind, :bodyclass, 
+            :address, :zipcode, :city, :country, :phone, :email, category_ids: [],
             localizations_attributes: [
               :id, :name, :long_name, :slug, :meta_description, :summary, :text,
               :address_name, :address_additional,

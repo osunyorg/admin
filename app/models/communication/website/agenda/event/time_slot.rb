@@ -27,6 +27,7 @@
 class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
+  include Communication::Website::Agenda::WithStatus
   include GeneratesGitFiles
   include Localizable
   include WithOpenApi
@@ -45,11 +46,31 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   scope :on_month, -> (year, month) { where('extract(year from datetime) = ? and extract(month from datetime) = ?', year, month) }
   scope :on_day, -> (day) {  where('DATE(datetime) = ?', day) }
 
-  scope :changed_status_today, -> {
-    where(datetime: (Date.yesterday.beginning_of_day..Date.today.end_of_day))
+  scope :future, -> { where("DATE(datetime) > :today", today: Date.current) }
+  scope :current, -> { on_day(Date.current) }
+  scope :future_or_current, -> { future.or(current) }
+  scope :archive, -> {  where("DATE(datetime) < :today", today: Date.current) }
+
+  scope :except_parent_events, -> { joins(:communication_website_agenda_event).merge(Communication::Website::Agenda::Event.except_parent) }
+  scope :except_children_events, -> { joins(:communication_website_agenda_event).merge(Communication::Website::Agenda::Event.except_children) }
+  scope :except_recurring_events, -> { joins(:communication_website_agenda_event).merge(Communication::Website::Agenda::Event.except_recurring) }
+
+  scope :changed_status_today, -> { where(datetime: (Date.yesterday.beginning_of_day..Date.current.end_of_day)) }
+
+  scope :ordered, -> { ordered_asc }
+  scope :ordered_asc, -> { order(:datetime) }
+  scope :ordered_desc, -> { order(datetime: :desc) }
+
+  scope :for_category, -> (category) {
+    joins(communication_website_agenda_event: :categories)
+    .where(communication_website_agenda_categories: { id: category.id })
   }
 
-  scope :ordered, -> { order(:datetime) }
+  scope :published_now_in, -> (language) {
+    for_language(language)
+      .joins(:communication_website_agenda_event)
+      .merge(Communication::Website::Agenda::Event.published_now_in(language))
+  }
 
   delegate :time_zone, to: :event
 
@@ -75,6 +96,10 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
     datetime&.strftime("%H:%M")
   end
 
+  def sorting_time
+    datetime
+  end
+
   def end_datetime
     return if datetime.nil? || duration.to_i.zero?
     datetime + duration.seconds
@@ -90,6 +115,14 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   def first?
     @first ||= id == event.time_slots.ordered.first.id
+  end
+
+  def set_date_to(date)
+    self.datetime = DateTime.new(
+      date.year, date.month, date.day,
+      datetime.hour, datetime.min, datetime.sec, datetime.zone
+    )
+    save
   end
 
   protected

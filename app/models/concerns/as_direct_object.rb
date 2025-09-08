@@ -21,7 +21,8 @@ module AsDirectObject
   end
 
   def websites
-    [website]
+    respond_to?(:federated?)  ? [website] + federated_websites
+                              : [website]
   end
 
   def is_direct_object?
@@ -30,6 +31,10 @@ module AsDirectObject
 
   def is_indirect_object?
     false
+  end
+
+  def should_sync_to?(website)
+    website.id == communication_website_id
   end
 
   def connect_dependencies

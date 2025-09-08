@@ -46,18 +46,21 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
 
   delegate :event, to: :about
 
+  delegate :federated_in?, to: :event
+
   delegate :to_s, :title, :subtitle, :summary, :contents_full_text, :previous_permalinks_in_website, to: :event_l10n, allow_nil: true
   delegate :best_bodyclass, :archive?, to: :event
 
   # /content/fr/events/YYYY/MM/DD-hh-mm-slug.html
-  def git_path(website)
-    return unless website.id == communication_website_id
-    git_path_content_prefix(website) + git_path_relative
+  def git_path_relative
+    "events/#{from_day.strftime "%Y/%m"}/#{slug}-#{event_l10n.slug}#{event.suffix_in(website)}.html"
   end
 
-  # events/YYYY/MM/DD-hh-mm-slug.html
-  def git_path_relative
-    "events/#{from_day.strftime "%Y/%m"}/#{slug}-#{event_l10n.slug}.html"
+  def should_sync_to?(website)
+    event.allowed_in?(website) &&
+    website.active_language_ids.include?(language_id) && # Language is active on website
+    event_l10n.present? && # Event localized in this language
+    event_l10n.published? # and published
   end
 
   def template_static

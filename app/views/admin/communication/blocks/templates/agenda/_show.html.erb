@@ -6,8 +6,16 @@
       <%= render 'admin/communication/blocks/partials/top', block: block %>
 
       <div class="events events--<%= block.template.layout %>">
-        <% block.template.selected_events.each do |event|
-          next if event.nil?
+        <% block.template.selected_events.each do |event_or_time_slot|
+          next if event_or_time_slot.nil?
+          if event_or_time_slot.is_a?(Communication::Website::Agenda::Event::TimeSlot)
+            time_slot = event_or_time_slot
+            event = time_slot.event
+          else
+            time_slot = nil
+            event = event_or_time_slot
+          end
+          source = time_slot || event
           event_l10n = event.localization_for(block.language)
           event_link = event_l10n.current_permalink_url_in_website(@website) || '#'
         %>
@@ -24,13 +32,11 @@
                 </hgroup>
               <% end %>
               <%
-                computed_short_date = date_range_i18n(event.from_day, event.to_day, format: :short, locale: block.language.iso_code)
-                computed_short_two_lines_date = date_range_i18n(event.from_day, event.to_day, format: :short, layout: :two_lines, locale: block.language.iso_code)
-                from_hour = event.from_hour ? event.from_hour.strftime("%H:%M") : nil
-                to_hour = event.to_hour ? event.to_hour.strftime("%H:%M") : nil
+                computed_short_date = date_range_i18n(source.from_day, source.to_day, format: :short, locale: block.language.iso_code)
+                computed_short_two_lines_date = date_range_i18n(source.from_day, source.to_day, format: :short, layout: :two_lines, locale: block.language.iso_code)
               %>
-              <% if computed_short_date || computed_short_two_lines_date || from_hour || to_hour %>
-                <div class="event-dates" itemprop="startDate" content="<%= "#{event.from_day}#{from_hour}" %>">
+              <% if computed_short_date || computed_short_two_lines_date %>
+                <div class="event-dates" itemprop="startDate" content="<%= "#{source.from_day}" %>">
                   <span>
                     <% date_format = computed_short_two_lines_date %>
                     <% if block.template.layout != "list" %>
@@ -38,25 +44,15 @@
                     <% end %>
                     <span><%= date_format %></span>
                   </span>
-                  <% if from_hour || to_hour %>
-                    <div class="event-time">
-                      <% if from_hour %>
-                        <span><%= from_hour %></span>
-                      <% end %>
-                      <% if to_hour %>
-                        <span><%= to_hour %></span>
-                      <% end %>
-                    </div>
-                  <% end %>
                 </div>
               <% end %>
-              <% if event.status.present? && block.template.option_status %>
+              <% if source.status.present? && block.template.option_status %>
                 <p class="event-status">
-                  <% if event.status == "current" %>
+                  <% if source.status == "current" %>
                     <%= t 'admin.communication.blocks.templates.agenda.time.options.current' %>
-                  <% elsif event.status == "future" %>
+                  <% elsif source.status == "future" %>
                     <%= t 'admin.communication.blocks.templates.agenda.time.options.future' %>
-                  <% elsif event.status == "archive" %>
+                  <% elsif source.status == "archive" %>
                     <%= t 'admin.communication.blocks.templates.agenda.time.options.archive' %>
                   <% end %>
                 </p>

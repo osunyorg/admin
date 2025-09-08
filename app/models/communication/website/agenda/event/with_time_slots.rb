@@ -17,6 +17,10 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     Communication::Website::Agenda::Event::TimeSlot::Localization.where(about_id: time_slot_ids)
   end
 
+  def no_time_slot_today?
+    time_slots.on_day(Date.current).none?
+  end
+
   def save_time_slots(language, params)
     existing_slots_ids = []
     # Create slots

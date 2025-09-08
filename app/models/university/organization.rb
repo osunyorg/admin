@@ -5,6 +5,7 @@
 #  id                   :uuid             not null, primary key
 #  active               :boolean          default(TRUE)
 #  address              :string
+#  bodyclass            :string
 #  city                 :string
 #  country              :string
 #  email                :string

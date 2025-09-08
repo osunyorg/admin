@@ -11,6 +11,8 @@ module Communication::Website::GitFile::WithContent
   end
 
   def generate_content_safely
+    # Permalinks must be calculated BEFORE renders
+    manage_permalink
     return if up_to_date?
     @current_content = nil
     ActiveStorage::Utils.attach_from_text(current_content_file, computed_content, 'file.html')
@@ -46,19 +48,30 @@ module Communication::Website::GitFile::WithContent
     Communication::Website::GitFile::GenerateContentJob.perform_later(self)
   end
 
+  def manage_permalink
+    return unless Communication::Website::Permalink.supported_by?(about)
+    about.manage_permalink_in_website(website)
+  end
+
   def up_to_date?
     path_up_to_date? && content_up_to_date?
   end
 
   def path_up_to_date?
-    current_path == previous_path
+    current_path == computed_path
   end
 
   def content_up_to_date?
-    current_content == computed_content
+    # Not loading file from Scaleway
+    if current_sha.present?
+      current_sha == computed_sha
+    else
+      # Loading current_content from Scaleway
+      current_content == computed_content
+    end
   end
 
   def needs_deletion?
-    about.nil? || !about.try(:syncable?)
+    about.nil? || !about.should_sync_to?(website)
   end
 end

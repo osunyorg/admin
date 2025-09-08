@@ -45,40 +45,25 @@ module WithDependencies
     []
   end
 
-  # Method is often overriden
-  def syncable?
-    if respond_to? :published_now?
-      published_now?
-    elsif respond_to? :published
-      published
-    else
-      true
-    end
-  end
-
   # On ne liste pas les objets en cours de suppression
-  # return array if respond_to?(:mark_for_destruction?) && mark_for_destruction
-  # On renvoie l'array tel quel, non modifié, si on demande les contenus syncable_only et que le contenu ne l'est pas
-  def recursive_dependencies(array: [], syncable_only: false, follow_direct: false)
-    if dependency_should_be_synced?(self, syncable_only)
+  # Par défaut, on ne suit pas les objets directs, parce qu'ils se gèrent de façon autonome.
+  def recursive_dependencies(array: [], skip_direct: true)
+    if dependency_published?(self)
       dependencies.each do |dependency|
-        array = recursive_dependencies_add(array, dependency, syncable_only, follow_direct)
+        array = recursive_dependencies_add(array, dependency, skip_direct)
       end
     end
     array.compact
   end
 
-  def recursive_dependencies_syncable
-    @recursive_dependencies_syncable ||= recursive_dependencies(syncable_only: true)
-  end
-
-  def recursive_dependencies_syncable_following_direct
-    @recursive_dependencies_syncable_following_direct ||= recursive_dependencies(syncable_only: true, follow_direct: true)
+  # On garde cette méthode pour la memoization
+  def recursive_dependencies_following_direct
+    @recursive_dependencies_following_direct ||= recursive_dependencies(skip_direct: false)
   end
 
   def clean_websites_if_necessary_safely
     # Tableau de global ids des dépendances
-    current_dependencies = DependenciesFilter.filtered(recursive_dependencies_syncable)
+    current_dependencies = DependenciesFilter.filtered(recursive_dependencies)
     # La première fois, il n'y a rien en cache, alors on force le nettoyage
     previous_dependencies = Rails.cache.read(dependencies_cache_key)
     # Les dépendances obsolètes sont celles qui étaient dans les dépendances avant la sauvegarde,
@@ -94,25 +79,30 @@ module WithDependencies
 
   protected
 
-  def recursive_dependencies_add(array, dependency, syncable_only, follow_direct)
+  def recursive_dependencies_add(array, dependency, skip_direct)
     # Si l'objet ne doit pas être ajouté on n'ajoute pas non plus ses dépendances récursives
     # C'est le fait de couper ici qui évite la boucle infinie
-    return array unless dependency_should_be_added?(array, dependency, syncable_only)
+    return array unless dependency_should_be_added?(array, dependency)
     array << dependency if dependency.is_a?(ActiveRecord::Base)
-    return array if !follow_direct && dependency.try(:is_direct_object?)
+    # Si l'objet est direct, il est déjà géré ailleurs, donc on n'a pas besoin de le suivre.
+    return array if skip_direct && dependency.try(:is_direct_object?)
     return array unless dependency.respond_to?(:recursive_dependencies)
-    dependency.recursive_dependencies(array: array, syncable_only: syncable_only, follow_direct: follow_direct)
+    dependency.recursive_dependencies(array: array, skip_direct: skip_direct)
   end
 
   # Si l'objet est déjà là, on ne doit pas l'ajouter
-  # Si l'objet n'est pas syncable, on ne doit pas l'ajouter non plus
-  def dependency_should_be_added?(array, dependency, syncable_only)
-    !dependency.in?(array) && dependency_should_be_synced?(dependency, syncable_only)
+  # Si l'objet n'est pas publié, on ne doit pas l'ajouter non plus
+  def dependency_should_be_added?(array, dependency)
+    !dependency.in?(array) && dependency_published?(dependency)
   end
-
-  # Si on n'est pas en syncable only on liste tout, sinon, il faut analyser
-  def dependency_should_be_synced?(dependency, syncable_only)
-    !syncable_only || (dependency.respond_to?(:syncable?) && dependency.syncable?)
+  
+  # Les objets qui n'ont pas pas de méthode published (website, menu, blob) sont publiés par défaut
+  def dependency_published?(dependency)
+    if dependency.respond_to?(:published?)
+      dependency.published?
+    else
+      true
+    end
   end
 
   def clean_websites_if_necessary

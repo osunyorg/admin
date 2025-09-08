@@ -1,22 +1,30 @@
 <%= osuny_panel 'Static files', small: true do %>
-  <% if @event.time_slots.any? %>
-    <%
-    @event.time_slots.ordered.each do |time_slot| %>
-      <%= link_to 'Créneau du ' + l(time_slot.datetime),
-                  static_admin_communication_website_agenda_event_time_slot_path(
-                    event_id: @event.id,
-                    id: time_slot.id
-                  ) %><br>
-    <% end %>
-  <% elsif @event.kind_parent? %>
-    <% @event.days.ordered.where(language: current_language).each do |day| %>
-      <%= link_to 'Événement parent — jour ' + l(day.date),
-                  static_admin_communication_website_agenda_event_day_path(
-                    event_id: @event.id,
-                    id: day.id
-                  ) %><br>
-    <% end %>
-  <% else %>
-    <%= link_to 'Événement sans créneau ni enfant', static_admin_communication_website_agenda_event_path(@event) %>
+  <% @event.website_and_federated_websites.each do |website| %>
+    <div class="mb-3">
+      <%= osuny_label website %><br>
+      <% if @event.time_slots.any? %>
+        <%
+        @event.time_slots.ordered.each do |time_slot| %>
+          <%= link_to 'Créneau du ' + l(time_slot.datetime),
+                      static_admin_communication_website_agenda_event_time_slot_path(
+                        event_id: @event.id,
+                        id: time_slot.id,
+                        context_website_id: website.id
+                      ) %><br>
+        <% end %>
+      <% elsif @event.kind_parent? %>
+        <% @event.days.ordered.where(language: current_language).each do |day| %>
+          <%= link_to 'Événement parent — jour ' + l(day.date),
+                      static_admin_communication_website_agenda_event_day_path(
+                        event_id: @event.id,
+                        id: day.id,
+                        context_website_id: website.id
+                      ) %><br>
+        <% end %>
+      <% else %>
+        <%= link_to   'Événement sans créneau ni enfant',
+                      static_admin_communication_website_agenda_event_path(@event, context_website_id: website.id) %>
+      <% end %>
+    </div>
   <% end %>
 <% end %>

@@ -1,37 +1,14 @@
 module Communication::Website::Agenda::Period::InPeriod
   extend ActiveSupport::Concern
 
-  STATUS_FUTURE = 'future'
-  STATUS_CURRENT = 'current'
-  STATUS_ARCHIVE = 'archive'
-
   included do
-    scope :future, -> {
-      where('from_day > :today', today: Date.today)
-    }
-    scope :current, -> {
-      where('(from_day <= :today AND to_day IS NULL) OR (from_day <= :today AND to_day >= :today)', today: Date.today)
-    }
-    scope :future_or_current, -> {
-      future.or(current)
-    }
-    scope :archive, -> {
-      where('to_day < :today', today: Date.today)
-    }
-    scope :changed_status_today, -> {
-      where(
-        'from_day = :today OR from_day = :yesterday OR to_day = :today OR to_day = :yesterday',
-        today: Date.today,
-        yesterday: Date.yesterday
-      )
-    }
-    scope :past, -> { archive }
-
     before_validation :set_time_zone
     before_validation :set_to_day
 
     before_save :touch_periods
     after_save :create_periods
+
+    after_destroy :mark_years_as_needing_recheck
 
     validates :from_day, presence: true
     validate  :year_is_a_four_digit_number,
@@ -39,41 +16,39 @@ module Communication::Website::Agenda::Period::InPeriod
               :to_hour_after_from_hour_on_same_day
   end
 
-  def status
-    if future?
-      STATUS_FUTURE
-    elsif current?
-      STATUS_CURRENT
-    else
-      STATUS_ARCHIVE
-    end
-  end
-
-  def future?
-    from_day > Date.today
-  end
-
-  def current?
-    to_day.present? ? (Date.today >= from_day && Date.today <= to_day)
-                    : from_day <= Date.today # Les événements sans date de fin restent actifs
-  end
-
-  def archive?
-    to_day.present? ? to_day < Date.today
-                    : false # Les événements sans date de fin restent actifs
-  end
-
   def same_day?
     from_day == to_day
+  end
+
+  def duration_in_days
+    to_day.nil? ? 1 : (to_day - from_day).to_i
   end
 
   # Un événement demain aura une distance de 1, comme un événement hier
   # On utilise cette info pour classer les événements à venir dans un sens et les archives dans l'autre
   def distance_in_days
-    (Date.today - from_day).to_i.abs
+    (Date.current - from_day).to_i.abs
+  end
+
+  def from_year
+    return if from_day.nil?
+    @from_year ||= year_for(from_day.year)
+  end
+
+  def to_year
+    return if to_day.nil?
+    @to_year ||= year_for(to_day.year)
   end
 
   protected
+
+  def year_for(value)
+    Communication::Website::Agenda::Period::Year.find_by(
+      university: university,
+      website: website,
+      value: value
+    )
+  end
 
   def set_time_zone
     self.time_zone = website.default_time_zone if respond_to?(:time_zone=) && self.time_zone.blank?
@@ -105,11 +80,11 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def day_before_change
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `day_before_change` method in #{self.class.name}"
   end
 
   def day_after_change
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `day_after_change` method in #{self.class.name}"
   end
 
   def years_concerned_by_change
@@ -140,20 +115,12 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def save_year(year_value)
-    Communication::Website::Agenda::Period::Year.find_by(
-      university: university,
-      website: website,
-      value: year_value
-    )&.save
+    year_for(year_value)&.save
   end
 
   def save_month(date)
     return if date.nil?
-    year = Communication::Website::Agenda::Period::Year.find_by(
-      university: university,
-      website: website,
-      value: date.year
-    )
+    year = year_for(date.year)
     Communication::Website::Agenda::Period::Month.find_by(
       university: university,
       website: website,
@@ -163,6 +130,17 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def create_periods
+    # Not for:
+    # Communication::Website::Agenda::Exhibition
+    # Communication::Website::Agenda::Event::Day
+    return unless is_a?(Communication::Website::Agenda::Event) ||
+                  is_a?(Communication::Website::Agenda::Event::TimeSlot)
     Communication::Website::Agenda::CreatePeriodsJob.perform_later(self)
+  end
+
+  def mark_years_as_needing_recheck
+    from_year&.needs_recheck!
+    # le if sert à économiser un update_column
+    to_year&.needs_recheck! if to_year != from_year
   end
 end

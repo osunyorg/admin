@@ -13,7 +13,7 @@ class Admin::ProfileController < Admin::ApplicationController
       redirect_to admin_profile_path, notice: t('admin.successfully_updated_html', model: current_user.to_s)
     else
       breadcrumb
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

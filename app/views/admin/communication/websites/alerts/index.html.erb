@@ -1,0 +1,16 @@
+<% content_for :title, "#{Communication::Website::Alert.model_name.human(count: 2)} (#{@alerts.total_count})" %>
+
+<% content_for :title_right do %>
+  <%= create_link Communication::Website::Alert %>
+<% end %>
+
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @alerts.total_count %>
+    <%= t('admin.item', count: @alerts.total_count) %>
+  </p>
+  <%= render 'filters', current_path: admin_communication_website_alerts_path, website: @website %>
+</div>
+
+<%= render 'admin/communication/websites/alerts/list', alerts: @alerts %>
+<%= paginate @alerts %>

@@ -30,7 +30,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
       redirect_to [:admin, @extranet], notice: t('admin.successfully_created_html', model: @extranet.to_s_in(current_language))
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -41,7 +41,7 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
       load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -60,7 +60,8 @@ class Admin::Communication::ExtranetsController < Admin::Communication::Extranet
     @about = GlobalID::Locator.locate(@about_gid)
     @extranet.localize_in!(current_language)
     @about.localize_in!(current_language)
-    redirect_to [:edit, :admin, @about]
+    edit_path_method = "edit_admin_#{@about.class.base_class.to_s.parameterize.underscore}_path"
+    redirect_to public_send(edit_path_method, { id: @about.id})
   end
 
   protected

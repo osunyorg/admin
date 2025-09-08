@@ -60,7 +60,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
     else
       @categories = categories
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -73,7 +73,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -94,7 +94,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def person_params
     params.require(:university_person).permit(
-      :email, :email_visibility, :gender, :birthdate,
+      :email, :email_visibility, :gender, :birthdate, :bodyclass, 
       :phone_mobile, :phone_mobile_visibility, :phone_professional, :phone_professional_visibility, :phone_personal, :phone_personal_visibility,
       :address, :zipcode, :city, :country, :address_visibility,
       :picture, :picture_delete, :picture_infos,

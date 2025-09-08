@@ -1,5 +1,6 @@
 <%
 small ||= false
+link_to_all ||= false
 %>
 <div class="row g-2 mb-2">
   <% pages.each do |page| %>
@@ -7,7 +8,7 @@ small ||= false
       <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized page %>
         <div class="card-body">
-          <%= osuny_published_localized page %>
+          <%= osuny_published_localized page unless small %>
           <%= osuny_link_localized  page,
                                     admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                                     classes: "stretched-link" %>
@@ -23,4 +24,6 @@ small ||= false
       </div>
     </div>
   <% end %>
+  <%= render 'admin/application/components/all',
+              link: admin_communication_website_pages_path(website_id: @website) if link_to_all %>
 </div>

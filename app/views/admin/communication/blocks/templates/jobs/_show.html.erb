@@ -1,0 +1,52 @@
+<% heading_level = block.heading_rank_children %>
+
+<div class="<%= block_html_class(block) %>">
+  <div class="container">
+    <div class="block-content">
+      <%= render 'admin/communication/blocks/partials/top', block: block %>
+
+      <div class="jobs jobs--<%= block.template.layout %>">
+        <% block.template.selected_jobs.each do |job|
+          next if job.nil?
+          job_l10n = job.localization_for(block.language)
+          job_link = job_l10n.current_permalink_url_in_website(@website) || '#'
+        %>
+          <article class="job>
+            <div class="job-content">
+              <% if job_l10n.subtitle %>
+                <hgroup>
+              <% end %>
+              <h<%= heading_level %>  itemprop='headline' class='location-title'>
+                <%= link_to job_l10n, job_link %>
+              </h<%= heading_level %>>
+              <% if job_l10n.subtitle %>
+                <p class="job-subtitle"><%= job_l10n.subtitle %></p>
+                </hgroup>
+              <% end %>
+              <% if block.template.option_summary && job_l10n.summary.present? %>
+                <div class="job-description">
+                  <p itemprop="description">
+                    <%= job_l10n.summary %>
+                  </p>
+                </div>
+              <% end %>
+
+              <% if job.categories.present? && block.template.option_categories %>
+                <p class="job-categories">
+                  <% job.categories.each do |category| %>
+                    <%
+                      category_l10n = category.localization_for(block.language)
+                      next if category_l10n.nil?
+                      category_link = category_l10n.current_permalink_url_in_website(@website) || '#'
+                    %>
+                    <span><%= link_to category_l10n, category_link %></span>
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

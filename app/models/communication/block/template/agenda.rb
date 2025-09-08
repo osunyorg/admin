@@ -1,12 +1,5 @@
 class Communication::Block::Template::Agenda < Communication::Block::Template::Base
 
-  AUTHORIZED_SCOPES = [
-    'future_or_current',
-    'future',
-    'current',
-    'archive'
-  ]
-
   has_elements
   has_layouts [
     :grid,
@@ -21,9 +14,10 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :category_id, :agenda_category
   has_component :description, :rich_text
   has_component :quantity, :number, default: 3
-  has_component :time, :option, options: AUTHORIZED_SCOPES
+  has_component :time, :option, options: Communication::Website::Agenda::AUTHORIZED_SCOPES
   has_component :no_event_message, :string
 
+  # Options d'affichage
   has_component :option_categories,   :boolean, default: false
   has_component :option_dates,        :boolean, default: true
   has_component :option_image,        :boolean, default: true
@@ -31,11 +25,18 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   has_component :option_summary,      :boolean, default: true
   has_component :option_status,       :boolean, default: false
 
+  # Choix des types d'événements
+  has_component :kind_parent,         :boolean, default: false
+  has_component :kind_child,          :boolean, default: true
+  has_component :kind_recurring,      :boolean, default: true
+
+  # Can send events or timeslots
   def selected_events
-    @selected_events ||= send "selected_events_#{mode}"
+    @selected_events ||= send("selected_events_#{mode}")
   end
 
   def category
+    return unless mode == 'category'
     category_id_component.category
   end
 
@@ -44,7 +45,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def allowed_for_about?
-    website.present?
+    website.present? && website.feature_agenda
   end
 
   def children
@@ -58,7 +59,7 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   def title_link
-    return link_to_category if mode == 'category' && category.present?
+    return link_to_category if category.present?
     return link_to_events if mode == 'all'
     nil
   end
@@ -68,6 +69,34 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
   end
 
   protected
+
+  def selected_events_all
+    planner.to_array
+  end
+
+  def selected_events_category
+    planner.to_array
+  end
+
+  def planner
+    @planner ||= Communication::Website::Agenda::Planner.new(
+      website: website,
+      time_scope: time,
+      category: category,
+      quantity: quantity,
+      language: block.language,
+      include_parents: kind_parent,
+      include_children: kind_child,
+      include_recurring: kind_recurring
+    )
+  end
+
+  # Not filtered, no timeslots (yet)
+  def selected_events_selection
+    elements.map { |element|
+      element.event
+    }.compact
+  end
 
   def link_to_events
     special_page_l10n = events_special_page.localization_for(block.language)
@@ -88,34 +117,4 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     hugo = l10n.hugo(website)
     hugo.permalink
   end
-
-  def base_events
-    events = website.events.published_now_in(block.language)
-    if time.in?(AUTHORIZED_SCOPES)
-      events = events.public_send(time)
-      events = time == 'archive' ? events.ordered_desc : events.ordered_asc
-    end
-    events
-  end
-
-  def selected_events_all
-    events = base_events.limit(quantity)
-  end
-
-  def selected_events_category
-    events = base_events
-    events = events.for_category(category) if category
-    events = events.limit(quantity)
-  end
-
-  def selected_events_selection
-    elements.map { |element|
-      element.event
-    }.compact
-  end
-
-  def selected_events_categories
-    []
-  end
-
 end

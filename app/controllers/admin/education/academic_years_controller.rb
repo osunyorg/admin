@@ -2,12 +2,16 @@ class Admin::Education::AcademicYearsController < Admin::Education::ApplicationC
   load_and_authorize_resource class: Education::AcademicYear,
                               through: :current_university,
                               through_association: :academic_years
+  include Admin::HasStaticAction
+  include Admin::Localizable
 
   def index
     breadcrumb
   end
 
   def show
+    @cohorts = @academic_year.cohorts.ordered(current_language)
+    @people = @academic_year.people.ordered(current_language)
     breadcrumb
   end
 
@@ -25,7 +29,7 @@ class Admin::Education::AcademicYearsController < Admin::Education::ApplicationC
                   notice: t('admin.successfully_created_html', model: @academic_year.to_s)
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -34,7 +38,7 @@ class Admin::Education::AcademicYearsController < Admin::Education::ApplicationC
       redirect_to [:admin, @academic_year],
                   notice: t('admin.successfully_updated_html', model: @academic_year.to_s)
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

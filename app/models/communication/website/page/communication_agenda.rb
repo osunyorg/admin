@@ -12,7 +12,7 @@ class Communication::Website::Page::CommunicationAgenda < Communication::Website
     true
   end
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     website.feature_agenda
   end
 

@@ -7,6 +7,11 @@
 <div v-if="data.mode === 'selection'">
   <div><%= osuny_label University::Organization.model_name.human(count: 2) %></div>
   <%= block_component_add_element block, t('.add_organization') %>
+
+  <div class="alert bg-warning text-white mb-4" v-if="data.layout === 'map' && data.mode === 'selection' && data.elements.filter(e => !e.id).length > 0">
+    <%= t('admin.communication.blocks.templates.organizations.edit.unregistered_organizations_on_map_warning') %>
+  </div>
+
   <draggable :list="data.elements" class="mb-3" handle=".partnerHandle">
     <div v-for="(element, index) in data.elements" class="draggable-item">
       <div class="d-flex mb-n3">
@@ -16,13 +21,20 @@
           </a>
         </div>
         <div class="flex-fill">
-          <div class="row pure__row--small">
-            <div class="col-md-6 mb-n2">
+          <div class="row">
+            <div class="col-sm-6 mb-n2">
               <%= block_component_edit block, :id, template: @element, label: '', class: 'mt-5' %>
             </div>
-            <div class="col-md-6" v-if="!element.id">
+            <div class="col-sm-6">
+              <%= block_component_edit block, :role, template: @element, label: '' %>
+            </div>
+          </div>
+          <div class="row" v-if="!element.id">
+            <div class="col-sm-6">
               <%= block_component_edit block, :name, template: @element %>
               <%= block_component_edit block, :url, template: @element %>
+            </div>
+            <div class="col-sm-6">
               <%= block_component_edit block, :logo, template: @element %>
             </div>
           </div>
@@ -49,5 +61,8 @@
   <%= block_component_edit block, :option_link %>
   <div v-if="data.mode === 'selection'">
     <%= block_component_edit block, :alphabetical %>
+  </div>
+  <div v-if="data.layout === 'map'">
+    <%= block_component_edit block, :option_filters %>
   </div>
 <% end %>

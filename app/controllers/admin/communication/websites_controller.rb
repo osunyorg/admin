@@ -1,7 +1,7 @@
 class Admin::Communication::WebsitesController < Admin::Communication::Websites::ApplicationController
   include Admin::Localizable
 
-  before_action :set_feature_nav, only: [:edit, :edit_language, :edit_technical, :update]
+  before_action :set_feature_nav, only: [:edit, :edit_language, :edit_federation, :edit_technical, :update]
 
   def index
     @websites = @websites.filter_by(params[:filters], current_language)
@@ -27,14 +27,43 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   end
 
   def show
-    @all_pages = @website.pages.accessible_by(current_ability)
-    @pages = @all_pages.latest_in(current_language)
-    @all_posts = @website.posts.accessible_by(current_ability)
-    @posts = @all_posts.latest_in(current_language)
-    @all_events = @website.events.root.accessible_by(current_ability)
-    @events = @all_events.latest_in(current_language)
-    @all_projects = @website.projects.accessible_by(current_ability)
-    @projects = @all_projects.latest_in(current_language)
+    # Objects
+    @pages        = @website.pages
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    @posts        = @website.posts
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    @events       = @website.events
+                            .root
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    @exhibitions  = @website.exhibitions
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    @projects     = @website.projects
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    @jobs         = @website.jobs
+                            .accessible_by(current_ability)
+                            .latest_in(current_language)
+    # Parts
+    @show_posts       = @website.feature_posts &&
+                          @posts.any? &&
+                          can?(:read, Communication::Website::Post)
+    @show_events      = @website.feature_agenda &&
+                          @events.any? && 
+                          can?(:read, Communication::Website::Agenda::Event)
+    @show_exhibitions = @website.feature_agenda &&
+                          @exhibitions.any? &&
+                          can?(:read, Communication::Website::Agenda::Exhibition)
+    @show_projects    = @website.feature_portfolio && 
+                          @projects.any? &&
+                          can?(:read, Communication::Website::Portfolio::Project)
+    @show_jobs        = @website.feature_jobboard &&
+                          @jobs.any? &&
+                          can?(:read, Communication::Website::Jobboard::Job)
+    # Git files
     @git_files_desynchronized = @website.git_files_desynchronized
     breadcrumb
   end
@@ -66,6 +95,16 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     add_breadcrumb current_language
   end
 
+  def edit_federation
+    @l10n = @website.localization_for(current_language)
+    @source_websites = current_university.websites
+                                         .where.not(id: @website.id)
+                                         .ordered(current_language)
+    breadcrumb
+    add_breadcrumb t('admin.subnav.settings'), edit_admin_communication_website_path(@website, website_id: nil)
+    add_breadcrumb t('admin.communication.website.federation.label')
+  end
+
   def edit_technical
     @l10n = @website.localization_for(current_language)
     breadcrumb
@@ -78,7 +117,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s_in(current_language))
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -89,7 +128,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -108,7 +147,8 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @about = GlobalID::Locator.locate(@about_gid)
     @website.localize_in!(current_language)
     @about.localize_in!(current_language)
-    redirect_to [:edit, :admin, @about]
+    edit_path_method = "edit_admin_#{@about.class.base_class.to_s.parameterize.underscore}_path"
+    redirect_to public_send(edit_path_method, { id: @about.id})
   end
 
   protected
@@ -122,11 +162,11 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :url, :repository, :about_type, :about_id, :in_production,
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
-      :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard,
+      :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication,
       :default_time_zone,
       :deuxfleurs_hosting, :default_image, :default_image_delete, :default_image_infos, :default_shared_image, :default_shared_image_delete, :default_shared_image_infos,
-      :deployment_status_badge, :autoupdate_theme,
-      showcase_tag_ids: [],
+      :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
+      showcase_tag_ids: [], source_website_ids: [],
       localizations_attributes: [
         :id, :language_id, :name, :published,
         :social_mastodon, :social_x, :social_linkedin, :social_youtube,

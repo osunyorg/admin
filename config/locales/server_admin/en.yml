@@ -24,6 +24,8 @@ en:
         one: "%{count} user"
         other: "%{count} users"
     see_list: See the list
+    optin_users:
+      title: Users optin
     universities:
       contributing:
         one: "%{count} contributing university"

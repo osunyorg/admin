@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.2"
+ruby "3.4.5"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_hashcash", github: "BaseSecrete/active_hashcash"
@@ -61,6 +61,7 @@ gem "pg", "~> 1"
 gem "pghero"
 gem "pg_query"
 gem "puma"
+gem "rack-timeout"
 gem "rails", "~> 8.0.2"
 gem "rails-autocomplete", "~> 2"
 gem "rails-i18n"

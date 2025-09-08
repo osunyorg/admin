@@ -46,7 +46,7 @@ class Server::UniversitiesControllerTest < ActionDispatch::IntegrationTest
           sms_sender_name: "unitest2"
         }
       }
-      assert_response(:unprocessable_entity)
+      assert_response(:unprocessable_content)
     end
   end
 
@@ -61,7 +61,7 @@ class Server::UniversitiesControllerTest < ActionDispatch::IntegrationTest
   def test_update_invalid
     university = universities(:default_university)
     patch server_university_path(university), params: { university: { identifier: "" } }
-    assert_response(:unprocessable_entity)
+    assert_response(:unprocessable_content)
   end
 
   def test_destroy

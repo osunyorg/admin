@@ -19,6 +19,7 @@ class Communication::Block::Template::Page < Communication::Block::Template::Bas
 
   has_component :option_image,        :boolean, default: true
   has_component :option_main_summary, :boolean, default: true # Deprecated
+  has_component :option_categories,   :boolean, default: false
   has_component :option_summary,      :boolean, default: true
   
   def page

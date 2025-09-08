@@ -26,7 +26,7 @@ weight: <%= page.position %>
 children:
 <%
 @l10n.children.published.ordered.each do |child|
-  next unless child.about.is_listed_among_children?
+  next unless child.about&.is_listed_among_children?
 %>
   - "<%= child.git_path_relative %>"
 <% end %>

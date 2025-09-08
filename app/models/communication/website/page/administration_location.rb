@@ -4,7 +4,7 @@ class Communication::Website::Page::AdministrationLocation < Communication::Webs
     :locations
   end
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     website.about && website.about&.respond_to?(:administration_locations)
   end
 

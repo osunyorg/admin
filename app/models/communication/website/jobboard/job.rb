@@ -40,6 +40,8 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
               class_name: "User",
               optional: true
 
+  validates :from_day, presence: true
+
   scope :ordered_desc, -> {
     order(from_day: :desc, created_at: :desc)
   }
@@ -47,6 +49,11 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
     order(from_day: :asc, created_at: :asc)
   }
   scope :ordered, -> (language = nil) { ordered_asc }
+  scope :latest_in, -> (language) {
+    published_now_in(language)
+      .order("communication_website_jobboard_job_localizations.updated_at")
+      .limit(5)
+  }
 
   scope :for_search_term, -> (term, language) {
     joins(:localizations)
@@ -61,11 +68,11 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
 
   def dependencies
     [website.config_default_content_security_policy] +
-    localizations.in_languages(website.active_language_ids) 
+    localizations.in_languages(website.active_language_ids)
   end
 
   def current?
-    from_day <= Date.today && (to_day.nil? || Date.today <= to_day)
+    from_day <= Date.current && (to_day.nil? || Date.current <= to_day)
   end
- 
+
 end

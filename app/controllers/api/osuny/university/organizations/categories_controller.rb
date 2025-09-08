@@ -16,7 +16,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
     if @category.save
       render :show, status: :created
     else
-      render json: { errors: @category.errors }, status: :unprocessable_entity
+      render json: { errors: @category.errors }, status: :unprocessable_content
     end
   end
 
@@ -24,7 +24,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
     if @category.update(category_params)
       render :show
     else
-      render json: { errors: @category.errors }, status: :unprocessable_entity
+      render json: { errors: @category.errors }, status: :unprocessable_content
     end
   end
 
@@ -62,7 +62,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
       end
     end
 
-    status = @invalid_categories_with_index.any? ? :unprocessable_entity : :ok
+    status = @invalid_categories_with_index.any? ? :unprocessable_content : :ok
     render 'upsert', status: status
   end
 
@@ -89,7 +89,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
 
   def ensure_same_migration_identifier
     if @category.migration_identifier != @migration_identifier
-      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_entity
+      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
     end
   end
 
@@ -97,7 +97,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
     [
       :migration_identifier, :language, :name, :meta_description,
       :path, :slug, :summary, :_destroy,
-      featured_image: [:url, :alt, :credit, :_destroy],
+      featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
       **nested_blocks_params
     ]
   end

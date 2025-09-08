@@ -31,6 +31,6 @@ module WithCitations
   end
 
   def to_citeproc(website: nil)
-    raise NotImplementedError
+    raise NoMethodError, "You must implement the `to_citeproc` method in #{self.class.name}"
   end
 end

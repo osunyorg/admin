@@ -104,7 +104,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       @categories = categories
       breadcrumb
       add_breadcrumb(t('create'))
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -118,7 +118,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       breadcrumb
       add_breadcrumb(@page, admin_communication_website_page_path(@page))
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

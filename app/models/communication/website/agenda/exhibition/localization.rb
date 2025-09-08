@@ -49,6 +49,7 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   include HeaderCallToAction
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
@@ -56,7 +57,6 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   include WithCal
   include WithFeaturedImage
   include WithOpenApi
-  include WithPublication
   include WithUniversity
 
   belongs_to :website,
@@ -77,16 +77,24 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
 
   validates :title, presence: true
 
-  def git_path(website)
-    return unless website.id == communication_website_id && published && published_at
-    git_path_content_prefix(website) + git_path_relative
-  end
+  scope :archivable, -> (datetime) {
+    joins(:about)
+      .where.not(communication_website_agenda_exhibitions: { is_lasting: true })
+      .published
+      .where("communication_website_agenda_exhibitions.to_day < ?", datetime.to_date)
+  }
 
   def git_path_relative
     path = "exhibitions/"
     path += "archives/#{from_day.year}/" if archive?
-    path += "#{from_day.strftime "%Y-%m-%d"}-#{slug}.html"
+    path += "#{from_day.strftime "%Y-%m-%d"}-#{slug}#{exhibition.suffix_in(website)}.html"
     path
+  end
+
+  def should_sync_to?(website)
+    exhibition.allowed_in?(website) &&
+    website.active_language_ids.include?(language_id) &&
+    published?
   end
 
   def template_static

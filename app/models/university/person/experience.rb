@@ -37,7 +37,7 @@ class University::Person::Experience < ApplicationRecord
 
   after_validation :deport_error_on_organization
 
-  scope :current, -> { where('from_year <= :current_year AND (to_year IS NULL OR to_year >= :current_year)', current_year: Date.today.year) }
+  scope :current, -> { where('from_year <= :current_year AND (to_year IS NULL OR to_year >= :current_year)', current_year: Date.current.year) }
   scope :ordered, -> (language = nil) { order('university_person_experiences.to_year DESC NULLS FIRST, university_person_experiences.from_year') }
   scope :latest, -> {
     where.not(from_year: nil)

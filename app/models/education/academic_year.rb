@@ -17,6 +17,13 @@
 #  fk_rails_7d376afe35  (university_id => universities.id)
 #
 class Education::AcademicYear < ApplicationRecord
+  include AsIndirectObject
+  include GeneratesGitFiles
+  include Localizable
+  include LocalizableOrderByNameScope
+  include Sanitizable
+  include Searchable
+  include WebsitesLinkable
   include WithUniversity
 
   has_many  :education_cohorts,
@@ -34,6 +41,8 @@ class Education::AcademicYear < ApplicationRecord
 
   validates :year, numericality: { only_integer: true, greater_than: 0 }
 
+  after_create_commit :create_localizations
+
   scope :ordered, -> (language = nil) { order(year: :desc) }
 
   def cohorts_in_context(context)
@@ -46,7 +55,23 @@ class Education::AcademicYear < ApplicationRecord
     people.where(id: context.alumni.pluck(:id))
   end
 
+  def dependencies
+    localizations
+  end
+
   def to_s
     "#{year}"
   end
+
+  protected
+
+  def create_localizations
+    university.languages.each do |language|
+      localizations.where(
+        university: university,
+        language: language
+      ).first_or_create
+    end
+  end
+
 end

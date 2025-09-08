@@ -51,13 +51,13 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include HeaderCallToAction
   include Initials
   include Permalinkable # slug_unavailable method overwrite in this file
+  include Publishable
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithOpenApi
-  include WithPublication
   include WithUniversity
 
   belongs_to :website,
@@ -67,8 +67,8 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   alias :event :about
 
   delegate  :archive?,
-            :from_day, :from_hour,
-            :to_day, :to_hour,
+            :from_day,
+            :to_day,
             :time_zone,
             :kind_simple?,
             :kind_recurring?,
@@ -83,16 +83,24 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   validates :title, presence: true
   validate :slug_cant_be_numeric_only
 
-  def git_path(website)
-    return unless website.id == communication_website_id && published && published_at
-    return if event.time_slots.any? # Rendered by Communication::Website::Agenda::Event::TimeSlot
-    return if event.children.any? # Rendered by Communication::Website::Agenda::Event::Day
-    git_path_content_prefix(website) + git_path_relative
-  end
+  scope :archivable, -> (datetime) {
+    joins(:about)
+      .where.not(communication_website_agenda_events: { is_lasting: true })
+      .published
+      .where("communication_website_agenda_events.to_day < ?", datetime.to_date)
+  }
 
   # events/2025/01/01-arte-concert-festival.html
   def git_path_relative
-    "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}.html"
+    "events/#{from_day.strftime "%Y/%m/%d"}-#{slug}#{event.suffix_in(website)}.html"
+  end
+
+  def should_sync_to?(website)
+    event.allowed_in?(website) &&
+    website.active_language_ids.include?(language_id) &&
+    published? &&
+    event.time_slots.none? && # Rendered by Communication::Website::Agenda::Event::TimeSlot
+    event.children.none? # Rendered by Communication::Website::Agenda::Event::Day
   end
 
   def template_static
@@ -101,7 +109,12 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def dependencies
     active_storage_blobs +
-    contents_dependencies
+    contents_dependencies +
+    days
+  end
+
+  def days
+    event.days.where(language: language)
   end
 
   def categories
