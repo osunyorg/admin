@@ -57,6 +57,10 @@ module Communication::Website::WithAssociatedObjects
     has_research_papers? ? about.papers : Research::Journal::Paper.none
   end
 
+  def research_journals
+    has_research_journals? ? about.journals : Research::Journal.none
+  end
+
   def administrators
     has_administrators? ? about.administrators : University::Person.none
   end
@@ -103,6 +107,10 @@ module Communication::Website::WithAssociatedObjects
 
   def has_administration_locations?
     about && about.has_administration_locations?
+  end
+
+  def has_research_journals?
+    about && about.has_research_journals?
   end
 
   def has_research_papers?

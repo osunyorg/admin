@@ -85,6 +85,10 @@ class Administration::Location < ApplicationRecord
     diplomas.any?
   end
 
+  def has_research_journals?
+    false
+  end
+
   def has_research_papers?
     false
   end

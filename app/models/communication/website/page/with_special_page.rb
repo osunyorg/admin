@@ -21,6 +21,7 @@ module Communication::Website::Page::WithSpecialPage
       Communication::Website::Page::EducationProgram,
       Communication::Website::Page::EducationAcademicYear,
       # Research
+      Communication::Website::Page::ResearchJournal,
       Communication::Website::Page::ResearchVolume,
       Communication::Website::Page::ResearchPaper,
       Communication::Website::Page::ResearchPublication,

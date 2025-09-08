@@ -20,11 +20,15 @@ module WebsitesLinkable
   end
 
   def has_education_programs?
-    raise NoMethodError, "You must implement the `has_education_programs?` method in #{self.class.name}"
+    raise NoMethodError, "You must implement the `has_education_program xds?` method in #{self.class.name}"
   end
 
   def has_education_diplomas?
     raise NoMethodError, "You must implement the `has_education_diplomas?` method in #{self.class.name}"
+  end
+
+  def has_research_journals?
+    raise NoMethodError, "You must implement the `has_research_journals?` method in #{self.class.name}"
   end
 
   def has_research_papers?
