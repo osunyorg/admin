@@ -1,0 +1,20 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "index") do |sheet|
+  options = [
+    User.human_attribute_name(:email),
+  ]
+
+  types = [
+    :string
+  ]
+
+  sheet.add_row options, types: Array.new(types.length) { |_| :string }
+
+  @users.each do |user|
+    infos = [
+      user.email
+    ]
+
+    sheet.add_row infos, types: types
+  end
+end

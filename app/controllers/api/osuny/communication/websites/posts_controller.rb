@@ -16,7 +16,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
     if @post.save
       render :show, status: :created
     else
-      render json: { errors: @post.errors }, status: :unprocessable_entity
+      render json: { errors: @post.errors }, status: :unprocessable_content
     end
   end
 
@@ -24,7 +24,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
     if @post.update(post_params)
       render :show
     else
-      render json: { errors: @post.errors }, status: :unprocessable_entity
+      render json: { errors: @post.errors }, status: :unprocessable_content
     end
   end
 
@@ -62,7 +62,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
       end
     end
 
-    status = @invalid_posts_with_index.any? ? :unprocessable_entity : :ok
+    status = @invalid_posts_with_index.any? ? :unprocessable_content : :ok
     render 'upsert', status: status
   end
 
@@ -89,7 +89,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
 
   def ensure_same_migration_identifier
     if @post.migration_identifier != @migration_identifier
-      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_entity
+      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
     end
   end
 

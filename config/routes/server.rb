@@ -15,6 +15,7 @@ namespace :server do
     end
   end
   resources :blocks, only: [:index, :show]
+  resources :optin_users, only: :index
   resources :emergency_messages do
     member do
       post :deliver

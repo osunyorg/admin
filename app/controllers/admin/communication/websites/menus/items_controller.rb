@@ -63,7 +63,7 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
                   notice: t('admin.successfully_created_html', model: @item.to_s)
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -75,7 +75,7 @@ class Admin::Communication::Websites::Menus::ItemsController < Admin::Communicat
     else
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

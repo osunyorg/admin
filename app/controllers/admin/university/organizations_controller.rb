@@ -53,7 +53,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     else
       @categories = categories
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

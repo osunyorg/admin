@@ -86,6 +86,7 @@ fr:
           teacher: Enseignant·e
           visitor: Visiteur
           website_manager: Responsable de site web
+        university: Université
         websites_to_manage: Sites gérés
     errors:
       messages:

@@ -110,6 +110,14 @@ class Communication::Media < ApplicationRecord
     self.original_byte_size = value.byte_size
   end
 
+  def width
+    original_blob.metadata.dig(:width)
+  end
+
+  def height
+    original_blob.metadata.dig(:height)
+  end
+
   protected
 
   def self.find_or_create_media_from_blob(blob, origin)

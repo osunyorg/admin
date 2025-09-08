@@ -36,7 +36,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
                   notice: t('admin.successfully_created_html', model: @category.to_s_in(current_language))
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -48,7 +48,7 @@ class Admin::Communication::Websites::Posts::CategoriesController < Admin::Commu
       load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

@@ -45,7 +45,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
       load_invalid_localization
       @categories = categories
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -57,7 +57,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
       @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

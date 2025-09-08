@@ -70,6 +70,13 @@ class Communication::Website::GitFile < ApplicationRecord
     end
   end
 
+  def mark_for_update!
+    update(
+      desynchronized: true,
+      desynchronized_at: Time.zone.now
+    )
+  end
+
   def mark_for_destruction!
     return if current_path.nil? && current_sha.nil?
     update(

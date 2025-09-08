@@ -25,6 +25,6 @@ class Extranet::AccountControllerTest < ActionDispatch::IntegrationTest
 
   def test_update_password
     patch account_path(lang: french), params: { user: { password: "NewPassw0rd!" } }
-    assert_response(:unprocessable_entity)
+    assert_response(:unprocessable_content)
   end
 end

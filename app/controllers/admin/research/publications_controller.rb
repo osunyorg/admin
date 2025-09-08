@@ -32,7 +32,7 @@ class Admin::Research::PublicationsController < Admin::Research::ApplicationCont
       redirect_to [:admin, @publication], notice: t('admin.successfully_created_html', model: @publication.to_s)
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -42,7 +42,7 @@ class Admin::Research::PublicationsController < Admin::Research::ApplicationCont
     else
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
