@@ -12,12 +12,11 @@ event.time_slots.ordered.each do |time_slot|
       date: "<%= time_slot.date&.iso8601 %>"
       time: "<%= time_slot.time %>"
       datetime: "<%= time_slot.datetime&.iso8601 %>"
-    duration:
-      seconds: <%= time_slot.duration %>
     end:
       date: "<%= time_slot.end_date&.iso8601 %>"
       time: "<%= time_slot.end_time %>"
       datetime: "<%= time_slot.end_datetime&.iso8601 %>"
+    status: "<%= time_slot.status %>"
     place: >-
       <%= prepare_text_for_static l10n.place %>
 <%= render 'admin/communication/websites/agenda/static_add_to_calendar', l10n: l10n, depth: 2 %>

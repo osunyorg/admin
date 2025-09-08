@@ -13,7 +13,7 @@ class Admin::Communication::Websites::Posts::CurationsController < Admin::Commun
       breadcrumb
       @url = curation_params[:url]
       flash[:alert] = @curator.already_imported? ? t('curation.already_imported') : t('curation.error')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

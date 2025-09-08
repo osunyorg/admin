@@ -29,7 +29,7 @@ class Admin::Education::AcademicYearsController < Admin::Education::ApplicationC
                   notice: t('admin.successfully_created_html', model: @academic_year.to_s)
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -38,7 +38,7 @@ class Admin::Education::AcademicYearsController < Admin::Education::ApplicationC
       redirect_to [:admin, @academic_year],
                   notice: t('admin.successfully_updated_html', model: @academic_year.to_s)
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

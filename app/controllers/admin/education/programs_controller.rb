@@ -59,7 +59,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
     else
       @categories = categories
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -99,11 +99,11 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
       add_breadcrumb  t("education.program.parts.#{@part}.label"),
                       public_send("#{@part}_admin_education_program_path", id: @program, program_id: nil)
       add_breadcrumb  t('edit')
-      render "admin/education/programs/parts/#{@part}_edit", status: :unprocessable_entity
+      render "admin/education/programs/parts/#{@part}_edit", status: :unprocessable_content
     else
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

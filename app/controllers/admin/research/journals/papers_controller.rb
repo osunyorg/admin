@@ -34,7 +34,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
       redirect_to admin_research_journal_paper_path(@paper), notice: t('admin.successfully_created_html', model: @paper.to_s_in(current_language))
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -46,7 +46,7 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
       load_invalid_localization
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

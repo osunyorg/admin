@@ -11,7 +11,7 @@ class Admin::Communication::Websites::LocalizationsController < Admin::Communica
       redirect_to admin_communication_website_localization_path, notice: t('admin.successfully_updated_html', model: Communication::Website::Localization.model_name.human)
     else
       breadcrumb
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
   end
 
