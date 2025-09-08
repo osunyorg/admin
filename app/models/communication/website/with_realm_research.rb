@@ -5,6 +5,10 @@ module Communication::Website::WithRealmResearch
     Communication::Block.where(about: research_papers)
   end
 
+  def research_journals
+    has_research_journals? ? about.journals : Research::Journal.none
+  end
+
   def research_volumes
     has_research_volumes? ? about.volumes : Research::Journal::Volume.none
   end
@@ -19,6 +23,10 @@ module Communication::Website::WithRealmResearch
 
   def has_researchers?
     about && about.has_researchers?
+  end
+
+  def has_research_journals?
+    about && about.has_research_journals?
   end
 
   def has_research_papers?
