@@ -56,6 +56,10 @@ class Communication::Website::Localization < ApplicationRecord
     "data/website/#{language.iso_code}.yml"
   end
 
+  def template_static
+    "admin/communication/websites/static"
+  end
+
   def should_sync_to?(website)
     website.id == id
   end
