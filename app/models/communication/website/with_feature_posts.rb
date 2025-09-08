@@ -33,4 +33,9 @@ module Communication::Website::WithFeaturePosts
     posts +
     post_categories
   end
+
+  def has_authors?
+    authors.compact.any?
+  end
+
 end

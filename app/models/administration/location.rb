@@ -77,6 +77,10 @@ class Administration::Location < ApplicationRecord
     false
   end
 
+  def has_education_schools?
+    schools.any?
+  end
+
   def has_education_programs?
     programs.any?
   end
