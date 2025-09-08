@@ -53,7 +53,7 @@ class Communication::Website::Localization < ApplicationRecord
   after_create_commit :create_existing_menus_in_language
   after_save :mark_website_obsolete_git_files, if: :should_clean_website_on_git?
 
-  def git_path_relative
+  def git_path(website)
     "data/website/#{language.iso_code}.yml"
   end
 
