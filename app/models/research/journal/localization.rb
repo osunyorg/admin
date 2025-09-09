@@ -37,7 +37,7 @@ class Research::Journal::Localization < ApplicationRecord
   validates :title, presence: true
 
   def git_path(website)
-    "data/journal.yml"
+    "journals/#{slug}/_index.html"
   end
 
   def template_static

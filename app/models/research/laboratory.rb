@@ -85,12 +85,20 @@ class Research::Laboratory < ApplicationRecord
     false
   end
 
+  def has_education_schools?
+    false
+  end
+
   def has_education_diplomas?
     false
   end
 
   # TODO en fait un laboratoire peut avoir des locations mais il faut le coder
   def has_administration_locations?
+    false
+  end
+
+  def has_research_journals?
     false
   end
 

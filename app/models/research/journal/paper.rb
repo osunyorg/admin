@@ -97,6 +97,10 @@ class Research::Journal::Paper < ApplicationRecord
     Doi.url doi
   end
 
+  def journals
+    Research::Journal.where(id: journal_id)
+  end
+
   protected
 
   # TODO: Maybe removable, no use

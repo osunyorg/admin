@@ -38,6 +38,7 @@
 class Communication::Website::Localization < ApplicationRecord
   include AsLocalization
   include Contentful
+  include HasGitFiles
   include Initials
   include Publishable
   include WithAccessibility
@@ -52,13 +53,17 @@ class Communication::Website::Localization < ApplicationRecord
   after_create_commit :create_existing_menus_in_language
   after_save :mark_website_obsolete_git_files, if: :should_clean_website_on_git?
 
-  # TODO autre PR
-  # def git_path_relative
-  #   "data/website/#{language.iso_code}.yml"
-  # end
-  # TODO enlever ça
-  def can_have_git_file?
-    false
+  def git_path(website)
+    "data/website/#{language.iso_code}.yml"
+  end
+
+  def should_sync_to?(website)
+    website.id == about_id &&
+    website.active_language_ids.include?(language_id)
+  end
+
+  def template_static
+    "admin/communication/websites/static"
   end
 
   def dependencies
