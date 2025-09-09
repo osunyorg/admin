@@ -22,9 +22,9 @@ end
 
 require "bugsnag_performance"
 require "opentelemetry/instrumentation"
-
-BugsnagPerformance.configure do |configuration|
-  configuration.configure_open_telemetry do |open_telemetry_configurator|
+BugsnagPerformance.configure do |config|
+  config.api_key = ENV['BUGSNAG_RUBY_KEY']
+  config.configure_open_telemetry do |open_telemetry_configurator|
     open_telemetry_configurator.use_all
   end
 end
