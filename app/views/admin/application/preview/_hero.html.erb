@@ -8,14 +8,16 @@ hero_classes += " hero--with-image hero--image-#{format}" if format.present?
     <div class="content">
       <div class="hero-text">
         <% if @summary.present? || @subtitle.present? %>
-          <hgroup class="has-lead">
+          <hgroup<% if @summary.present? %> class="has-lead"<% end %>>
             <h1>
               <%= @title %>
               <% if @subtitle.present? %>
                 <span><%= @subtitle %></span>
               <% end %>
             </h1>
-            <%= sanitize @summary %>
+            <% if @summary.present? %>
+              <%= sanitize @summary %>
+            <% end %>
           </hgroup>
         <% else %>
           <h1><%= @title %></h1>
