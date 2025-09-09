@@ -25,6 +25,8 @@ require "opentelemetry/instrumentation"
 
 BugsnagPerformance.configure do |configuration|
   configuration.api_key = ENV['BUGSNAG_RUBY_KEY']
+  config.release_stage = ENV['APPLICATION_ENV']
+  config.notify_release_stages = ['production', 'staging']
   configuration.configure_open_telemetry do |open_telemetry_configurator|
     open_telemetry_configurator.use_all
   end
