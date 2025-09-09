@@ -1,12 +1,8 @@
 {
   "jobs": [
     {
-      "command": "0 23 * * * rails auto:update_hal",
-      "size": "L"
-    },
-    {
-      "command": "0 0 * * * rails auto:clean_and_rebuild_websites",
-      "size": "L"
+      "command": "0 21 * * * rails auto:take_care_of_good_job",
+      "size": "S"
     },
     {
       "command": "0 22 * * * rails auto:brevo_sms_credits",
@@ -15,6 +11,14 @@
     {
       "command": "0 22 * * * rails auto:gdpr_manage_users",
       "size": "S"
+    },
+    {
+      "command": "0 23 * * * rails auto:update_hal",
+      "size": "L"
+    },
+    {
+      "command": "0 0 * * * rails auto:clean_and_rebuild_websites",
+      "size": "L"
     },
     {
       "command": "*/10 * * * * rails auto:synchronize_websites",
