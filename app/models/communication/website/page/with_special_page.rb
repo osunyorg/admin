@@ -17,6 +17,7 @@ module Communication::Website::Page::WithSpecialPage
       Communication::Website::Page::Person,
       Communication::Website::Page::Organization,
       # Education
+      Communication::Website::Page::EducationSchool,
       Communication::Website::Page::EducationDiploma,
       Communication::Website::Page::EducationProgram,
       Communication::Website::Page::EducationAcademicYear,
