@@ -5,19 +5,15 @@ module ActiveStorage
     FORMAT_PORTRAIT = 'portrait'
     FORMAT_SQUARE = 'square'
 
-    def self.ratio(image)
-      # No image, no ratio
-      return unless image.present? && image.attached?
-      width, height = image.metadata.values_at('width', 'height')
+    def self.ratio(blob)
+      width, height = blob.metadata.values_at('width', 'height')
       # No width or height, default ratio
       return 1 if width.nil? || height.nil?
       width.to_f / height.to_f
     end
 
-    def self.format(image)
-      r = ratio(image)
-      # Ratio nil, format nil (probably not an image)
-      return if r.nil?
+    def self.format(blob)
+      r = ratio(blob)
       if r > 1
         return FORMAT_LANDSCAPE
       elsif r < 1
