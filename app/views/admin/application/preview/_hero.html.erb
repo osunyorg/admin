@@ -1,0 +1,24 @@
+<%
+hero_classes = "hero"
+format = ActiveStorage::Utils.format(@image)
+hero_classes += " hero--with-image hero--image-#{format}" if format.present?
+%>
+<header class="<%= hero_classes %>">
+  <div class="container">
+    <div class="content">
+      <div class="hero-text">
+        <% if @summary.present? %>
+          <hgroup class="has-lead">
+            <h1><%= @title %></h1>
+            <%= sanitize @summary %>
+          </hgroup>
+        <% else %>
+          <h1><%= @title %></h1>
+        <% end %>
+      </div>
+      <figure>
+        <%= kamifusen_tag @image if @image.present? && @image.attached? %>
+      </figure>
+    </div>
+  </div>
+</header>
