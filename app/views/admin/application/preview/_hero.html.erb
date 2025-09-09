@@ -1,7 +1,9 @@
 <%
 hero_classes = "hero"
-format = ActiveStorage::Utils.format(@image)
-hero_classes += " hero--with-image hero--image-#{format}" if format.present?
+if @image.present? && @image.attached?
+  format = ActiveStorage::Utils.format(@image)
+  hero_classes += " hero--with-image hero--image-#{format}" if format.present?
+end
 %>
 <header class="<%= hero_classes %>">
   <div class="container">
