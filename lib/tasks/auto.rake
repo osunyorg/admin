@@ -31,4 +31,10 @@ namespace :auto do
     GdprUserDeletionJob.perform_later
   end
 
+  desc 'Reindex crucial tables for GoodJob '
+  task take_care_of_good_job: :environment do
+    # https://github.com/bensheldon/good_job/issues/896
+    ActiveRecord::Base.connection.execute('REINDEX TABLE good_jobs')
+    ActiveRecord::Base.connection.execute('REINDEX TABLE good_job_executions')
+  end
 end
