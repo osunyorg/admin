@@ -19,3 +19,14 @@ Bugsnag.configure do |config|
     false
   end)
 end
+
+BugsnagPerformance.configure do |config|
+  config.api_key = ENV['BUGSNAG_RUBY_KEY']
+  config.release_stage = ENV['APPLICATION_ENV']
+  config.enabled_release_stages = ['production', 'staging']
+  config.logger = OpenTelemetry.logger
+
+  config.configure_open_telemetry do |open_telemetry_configurator|
+    open_telemetry_configurator.use_all
+  end
+end
