@@ -21,18 +21,13 @@ namespace :auto do
     end
   end
 
-  desc 'Check SMS credits on SiB'
-  task brevo_sms_credits: :environment do
+  desc 'Take care of minor tasks'
+  task daily_care: :environment do
+    # Check SMS credits on SiB
     Brevo::SmsCreditsWarningJob.perform_later
-  end
-
-  desc 'Delete & warn old users due to GDPR'
-  task gdpr_manage_users: :environment do
+    # Delete & warn old users due to GDPR
     GdprUserDeletionJob.perform_later
-  end
-
-  desc 'Reindex crucial tables for GoodJob '
-  task take_care_of_good_job: :environment do
+    # Reindex crucial tables for GoodJob
     # https://github.com/bensheldon/good_job/issues/896
     ActiveRecord::Base.connection.execute('REINDEX TABLE good_jobs')
     ActiveRecord::Base.connection.execute('REINDEX TABLE good_job_executions')
