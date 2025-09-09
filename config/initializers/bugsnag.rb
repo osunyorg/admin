@@ -19,3 +19,12 @@ Bugsnag.configure do |config|
     false
   end)
 end
+
+require "bugsnag_performance"
+require "opentelemetry/instrumentation"
+
+BugsnagPerformance.configure do |configuration|
+  configuration.configure_open_telemetry do |open_telemetry_configurator|
+    open_telemetry_configurator.use_all
+  end
+end
