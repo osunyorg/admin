@@ -1,15 +1,7 @@
 {
   "jobs": [
     {
-      "command": "0 21 * * * rails auto:take_care_of_good_job",
-      "size": "S"
-    },
-    {
-      "command": "0 22 * * * rails auto:brevo_sms_credits",
-      "size": "S"
-    },
-    {
-      "command": "0 22 * * * rails auto:gdpr_manage_users",
+      "command": "0 21 * * * rails auto:daily_care",
       "size": "S"
     },
     {
