@@ -19,3 +19,13 @@ Bugsnag.configure do |config|
     false
   end)
 end
+
+require "bugsnag_performance"
+require "opentelemetry/instrumentation/all"
+
+BugsnagPerformance.configure do |configuration|
+  configuration.api_key = ENV['BUGSNAG_RUBY_KEY']
+  configuration.configure_open_telemetry do |open_telemetry_configurator|
+    open_telemetry_configurator.use_all
+  end
+end
