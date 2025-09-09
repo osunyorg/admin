@@ -14,7 +14,7 @@ jobs:
 
       - name: Notify Bugsnag of release
         run: |
-          curl -X POST https://api.bugsnag.com/deploys \
+          curl -X POST https://build.bugsnag.com \
             -H "Content-Type: application/json" \
             -d "{
               \"apiKey\": \"${{ secrets.BUGSNAG_API_KEY }}\",
