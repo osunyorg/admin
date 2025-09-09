@@ -14,11 +14,16 @@ jobs:
 
       - name: Notify Bugsnag of release
         run: |
-          curl https://build.bugsnag.com/ \
-            -d apiKey=${{ secrets.BUGSNAG_API_KEY }} \
-            -d appVersion=${GITHUB_REF_NAME} \
-            -d releaseStage=production \
-            -d builderName=github-actions \
-            -d sourceControl.provider=github \
-            -d sourceControl.repository=https://github.com/${GITHUB_REPOSITORY} \
-            -d sourceControl.revision=${GITHUB_SHA}
+          curl -X POST https://api.bugsnag.com/deploys \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"apiKey\": \"${{ secrets.BUGSNAG_API_KEY }}\",
+              \"appVersion\": \"${GITHUB_REF_NAME}\",
+              \"releaseStage\": \"production\",
+              \"builderName\": \"github-actions\",
+              \"sourceControl\": {
+                \"provider\": \"github\",
+                \"repository\": \"https://github.com/${GITHUB_REPOSITORY}\",
+                \"revision\": \"${GITHUB_SHA}\"
+              }
+            }"
