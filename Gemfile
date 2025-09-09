@@ -14,6 +14,7 @@ gem "bootstrap5-kaminari-views"
 gem "breadcrumbs_on_rails"
 gem "brevo"
 gem "bugsnag"
+gem "bugsnag_performance"
 # Lock précis parce que @sebouchu a identifié un problème
 # (les authorize through des modèles qui faisaient des faux négatifs sur les rôles intermédiaires)
 gem "cancancan", "~> 3.3.0"
