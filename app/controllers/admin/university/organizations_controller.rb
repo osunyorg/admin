@@ -87,10 +87,11 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   def organization_params
     params.require(:university_organization)
           .permit(
-            :active, :siren, :kind, :bodyclass, 
+            :siren, :kind, :bodyclass, 
             :address, :zipcode, :city, :country, :phone, :email, category_ids: [],
             localizations_attributes: [
               :id, :name, :long_name, :slug, :meta_description, :summary, :text,
+              :published,
               :address_name, :address_additional,
               :url, :linkedin, :twitter, :mastodon,
               :logo, :logo_delete, :logo_infos,

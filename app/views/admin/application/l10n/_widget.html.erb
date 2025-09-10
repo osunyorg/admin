@@ -13,7 +13,7 @@ small ||= false
         current = language.id == l10n.language_id
         %>
         <li>
-          <%= osuny_published about.exists_in_language?(language) %>
+          <%= osuny_published about.published_in_language?(language) %>
           <%= link_to_unless current, label, [*route_args, lang: language.iso_code] %>
           <% if current %>
             <i class="fas fa-check"></i>

@@ -2,6 +2,7 @@ default_organization_fr:
   name: Organisation de test
   about: default_organization
   language: fr
+  published: true
   university: default_university
 
 noesya_fr:
@@ -15,4 +16,5 @@ noesya_fr:
   slug: noesya
   about: noesya
   language: fr
+  published: true
   university: default_university
