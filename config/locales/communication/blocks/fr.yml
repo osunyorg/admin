@@ -493,6 +493,7 @@ fr:
                 url:
                   label: URL
                   placeholder: 'https://'
+              move_links: Déplacer les liens ci-dessous pour les mettre dans l'ordre souhaité
               remove: Enlever le lien
           locations:
             description: Une sélection de sites dans des campus.
