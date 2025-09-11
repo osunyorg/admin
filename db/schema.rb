@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_10_131327) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_11_100918) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -2142,7 +2142,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_10_131327) do
     t.string "country"
     t.string "phone"
     t.string "email"
-    t.boolean "active", default: true
     t.string "siren"
     t.integer "kind", default: 10
     t.datetime "created_at", null: false
