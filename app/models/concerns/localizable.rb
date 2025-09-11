@@ -74,6 +74,7 @@ module Localizable
       l10n.present?
     end
   end
+  alias :published_in_language? :published_in?
 
   def to_s_in(language)
     best_localization_for(language).to_s
