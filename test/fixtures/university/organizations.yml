@@ -1,11 +1,9 @@
 default_organization:
-  active: true
   university: default_university
 
 noesya:
   migration_identifier: test-noesya
   kind: company
-  active: true
   email: contact@noesya.coop
   address: 15 Rue des Bouviers
   zipcode: 33800

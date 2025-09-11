@@ -20,6 +20,8 @@ module University::Organization::Localization::WithOpenApi
           }
         },
         meta_description: { type: :string, nullable: true },
+        published: { type: :boolean },
+        published_at: { type: :string, format: 'date-time', nullable: true },
         address_name: { type: :string, nullable: true },
         address_additional: { type: :string, nullable: true },
         linkedin: { type: :string, nullable: true },

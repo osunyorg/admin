@@ -27,48 +27,15 @@
     <% end %>
   </head>
   <body class="full-width">
-    <%
-    # Il faudrait tester le ratio de l'image, comme c'est pour le hero de la preview, on met de côté car cela nécessite de tester l'image avant
-    classes = 'hero'
-    classes += " hero--image-square"
-
-    # if @image.present? && @image.attached?
-    #   classes += ' hero--with-image'
-    #   # TODO réparer ça :
-    #   width, height = @image.metadata.values_at('width', 'height')
-    #   ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
-    #   format = 'square'
-    #   if ratio.present?
-    #     format = 'landscape' if ratio > 1
-    #     format = 'portrait' if ratio < 1
-    #   end
-    #   classes += " hero--image-#{format}"
-    # end
-    %>
-    <header class="<%= classes %>">
-      <div class="container">
-        <div class="content">
-          <div class="hero-text">
-            <% if @summary.present? %>
-              <hgroup>
-                <h1><%= @title %></h1>
-                <p class="lead"><%= sanitize @summary %></p>
-              </hgroup>
-            <% else %>
-              <h1><%= @title %></h1>
-            <% end %>
-          </div>
-          <figure>
-            <%= kamifusen_tag @image if @image.present? && @image.attached? %>
-          </figure>
+    <main id="main" class="page-with-blocks">
+      <%= render 'admin/application/preview/hero' %>
+      <div class="document-content">
+        <div class="blocks">
+          <%= yield %>
         </div>
       </div>
-    </header>
-    <main class="page-with-blocks" id="main" role="main" tabindex="-1">
-      <div class="blocks">
-        <%= yield %>
-      </div>
     </main>
+    <%= render 'admin/application/preview/lightbox' %>
   </body>
   <script src="https://example.osuny.org/js/preview.js"></script>
 </html>

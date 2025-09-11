@@ -143,6 +143,7 @@ en:
         git_provider: Git provider
         highlighted_in_showcase: Highlighted in showcase
         in_production: Production
+        in_production_at: Production release date
         in_showcase: List website in showcase
         languages: Languages
         locked_at: Locked for background jobs at

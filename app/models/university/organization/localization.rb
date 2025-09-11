@@ -13,6 +13,8 @@
 #  meta_description      :text
 #  migration_identifier  :string
 #  name                  :string
+#  published             :boolean          default(FALSE)
+#  published_at          :datetime
 #  slug                  :string
 #  summary               :text
 #  text                  :text
@@ -43,6 +45,7 @@ class University::Organization::Localization < ApplicationRecord
   include HasGitFiles
   include Initials
   include Permalinkable
+  include Publishable
   include Sanitizable
   include Shareable
   include WithBlobs
@@ -73,10 +76,6 @@ class University::Organization::Localization < ApplicationRecord
 
   def template_static
     "admin/university/organizations/static"
-  end
-
-  def published?
-    persisted?
   end
 
   def to_s
