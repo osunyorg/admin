@@ -78,7 +78,7 @@ gem "simple_form_bs5_file_input"#, path: "../../noesya/simple_form_bs5_file_inpu
 gem "simple_form_password_with_hints"#, path: "../simple_form_password_with_hints"
 gem "sprockets-rails", "~> 3"
 gem "summernote-rails", git: "https://github.com/noesya/summernote-rails.git"
-# gem "summernote-rails", path: "../summernote-rails"
+# gem "summernote-rails", path: "../../noesya/summernote-rails"
 gem "two_factor_authentication", git: "https://github.com/noesya/two_factor_authentication.git"
 # gem "two_factor_authentication", path: "../two_factor_authentication"
 gem "unsplash"
