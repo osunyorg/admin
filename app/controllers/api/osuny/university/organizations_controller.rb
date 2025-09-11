@@ -95,7 +95,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
 
   def l10n_permitted_keys
     [
-      :migration_identifier, :language, :name, :long_name, :meta_description,
+      :migration_identifier, :language, :name, :long_name, :meta_description, :published, :published_at,
       :address_name, :address_additional, :linkedin, :mastodon, :twitter, :url,
       :slug, :summary, :text, :_destroy,
       featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
@@ -107,7 +107,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
     @organization_params ||= begin
       permitted_params = params.require(:organization)
                           .permit(
-                            :migration_identifier, :kind, :active, :email, :phone,
+                            :migration_identifier, :kind, :email, :phone,
                             :address, :zipcode, :city, :country, :nic, :siren,
                             category_ids: [], localizations: {}
                           ).merge(university_id: current_university.id)
@@ -119,7 +119,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   def organization_params_for_upsert(organization_params)
     permitted_params = organization_params
                           .permit(
-                            :migration_identifier, :kind, :active, :email, :phone,
+                            :migration_identifier, :kind, :email, :phone,
                             :address, :zipcode, :city, :country, :nic, :siren,
                             category_ids: [], localizations: {}
                           ).merge(university_id: current_university.id)

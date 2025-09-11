@@ -9,7 +9,6 @@ module University::Organization::WithOpenApi
         id: { type: :string, format: :uuid },
         migration_identifier: { type: :string, nullable: true },
         kind: { type: :string, enum: University::Organization.kinds.keys },
-        active: { type: :boolean },
         email: { type: :string, nullable: true },
         phone: { type: :string, nullable: true },
         address: { type: :string, nullable: true },
