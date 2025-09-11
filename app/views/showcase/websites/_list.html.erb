@@ -8,8 +8,8 @@ current_year = nil
 
 <div class="row g-5">
   <% @websites.each do |website| %>
-    <% 
-    year = website.created_at.year
+    <%
+    year = website.in_production_at.year
     if current_year != year
       current_year = year
       %>
@@ -21,7 +21,7 @@ current_year = nil
     <div class="col-md-6 col-xl-4">
       <article class="position-relative">
         <% if website.screenshot.attached? %>
-          <%= kamifusen_tag website.screenshot, 
+          <%= kamifusen_tag website.screenshot,
                             class: 'img-fluid rounded mb-3' %>
         <% end %>
         <h3 class="fs-6 mt-1">
