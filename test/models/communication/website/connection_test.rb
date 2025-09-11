@@ -212,7 +212,19 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       perform_enqueued_jobs
     end
 
-    # On ajoute noesya via un block "Organisations" : +8 parce que noesya a une localisation, une catégorie (et sa localisation) et un block "Personnes" avec Olivia (et sa localisation)
+    # Avant : 
+    # gid://osuny/Communication::Website::Page::Localization/55948af8-8cf1-5fbe-ba39-18a3e5fa15f3
+    # gid://osuny/Communication::Block/dcb8dc46-a266-4a13-8d9e-90381830ca3e
+    # gid://osuny/Communication::Block/0612c211-32c3-4fdd-8abc-803d40729954
+    # gid://osuny/University::Person/9f193439-a0ea-5989-b64d-127f9269d563
+    # gid://osuny/University::Person::Localization/3f55314b-a986-5681-99ef-1ed4e9e35705
+    # 
+    # On ajoute noesya via un block "Organisations" : +8 
+    # +1 bloc
+    #   +2 noesya et l10n
+    #     +2 catégorie et l10n
+    #     +1 block personne
+    #       +2 Olivia et l10n 
     assert_difference -> { page.connections.count } => 8 do
       block = page_l10n.blocks.new(position: 3, published: true, template_kind: :organizations)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"

@@ -3,6 +3,7 @@ default_organization_fr:
   about: default_organization
   language: fr
   published: true
+  published_at: 2024-07-01 00:00:00
   university: default_university
 
 noesya_fr:
@@ -17,4 +18,5 @@ noesya_fr:
   about: noesya
   language: fr
   published: true
+  published_at: 2024-07-01 00:00:00
   university: default_university
