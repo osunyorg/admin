@@ -25,6 +25,7 @@
 #  git_provider                 :integer          default("github")
 #  highlighted_in_showcase      :boolean          default(FALSE)
 #  in_production                :boolean          default(FALSE)
+#  in_production_at             :datetime
 #  in_showcase                  :boolean          default(TRUE)
 #  last_sync_at                 :datetime
 #  locked_at                    :datetime
