@@ -15,6 +15,9 @@ years.each do |year|
   decades[decade_sym][:years] << year
 end
 %>
+ignore:
+  in_search: true
+  in_sitemap: false
 alumni: 
   total: <%= @website.alumni.count %>
   years:
