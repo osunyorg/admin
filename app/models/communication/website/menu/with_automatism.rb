@@ -5,7 +5,11 @@ module Communication::Website::Menu::WithAutomatism
     scope :automatic, -> { where(automatic: true) }
   end
 
-  def generate_automatically
+  def generate_automatically_later
+    Communication::Website::Menu::GenerateJob.perform_later(self)
+  end
+
+  def generate_automatically_safely
     transaction do
       clear_items
       create_items
