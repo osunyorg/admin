@@ -34,14 +34,14 @@ module User::WithAuthentication
       unless confirmable.try(:persisted?)
         confirmable = find_or_initialize_with_errors(confirmation_keys, attributes, :not_found)
       end
-      confirmable.registration_context = attributes[:registration_context] if attributes.has_key?(:registration_context)
+      add_registration_context(confirmable, attributes)
       confirmable.resend_confirmation_instructions if confirmable.persisted?
       confirmable
     end
 
     def self.send_unlock_instructions(attributes = {})
       lockable = find_or_initialize_with_errors(unlock_keys, attributes, :not_found)
-      lockable.registration_context = attributes[:registration_context] if attributes.has_key?(:registration_context)
+      add_registration_context(lockable, attributes)
       lockable.resend_unlock_instructions if lockable.persisted?
       lockable
     end
@@ -86,6 +86,11 @@ module User::WithAuthentication
     end
 
     private
+
+    def self.add_registration_context(object, attributes)
+      return unless object.has_key?(:registration_context)
+      object.registration_context = attributes[:registration_context]
+    end
 
     def adjust_mobile_phone
       return if self.mobile_phone.nil?
