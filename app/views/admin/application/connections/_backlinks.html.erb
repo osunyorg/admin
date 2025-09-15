@@ -1,31 +1,51 @@
+<%
+language = about.language
+other_websites = @website.university
+                         .websites
+                         .where.not(id: @website.id)
+                         .ordered(language)
+backlinks = about.backlinks_for(@website)
+%>
 backlinks:
   current_website:
-    name: "<%= @website.to_s_in(about.language) %>"
-    pages:
-<% about.backlinks_pages(@website).each do |element|
-    hugo = element.hugo(@website)
-    next if hugo.nil? || hugo.file.blank?
-    %>
+    name: "<%= @website.to_s_in(language) %>"
+<%
+backlinks.each do |identifier, list|
+  %>
+    <%= identifier.to_s %>:
+<%
+  list.each do |object|
+      hugo = object[:hugo]
+%>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-<% end %>
-    posts:
-<% about.backlinks_posts(@website).each do |element|
-    hugo = element.hugo(@website)
-    next if hugo.nil? || hugo.file.blank?
+<% 
+  end
+end
+%>
+  other_websites:
+<%
+other_websites.each do |website| 
+  backlinks = about.backlinks_for(website)
+  next if backlinks.empty?
+  %>
+    - name: >-
+        <%= prepare_text_for_static website.to_s_in(language) %>
+      identifier: "<%= website.id %>"
+<%
+  backlinks.each do |identifier, list|
     %>
-<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-<% end %>
-    events:
-<% about.backlinks_agenda_events(@website).each do |element|
-    hugo = element.hugo(@website)
-    next if hugo.nil? || hugo.file.blank?
-    %>
-<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-<% end %>
-    projects:
-<% about.backlinks_portfolio_projects(@website).each do |element|
-    hugo = element.hugo(@website)
-    next if hugo.nil? || hugo.file.blank?
-    %>
-<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-<% end %>
+      <%= identifier.to_s %>:
+<%
+    list.each do |object|
+      hugo = object[:hugo]
+      element = object[:element]
+      url = "#{website.url}#{hugo.permalink}"
+%>
+        - name: >-
+            <%= prepare_text_for_static element.to_s %>
+          url: "<%= url %>"
+<% 
+    end
+  end
+end
+%>

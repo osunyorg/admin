@@ -46,7 +46,7 @@ en:
         label: Datetime
       duration:
         label: Duration
-        custom: Custom duration (minutes)
+        custom: Custom duration (seconds)
       place:
         hint: For example “Main room” ou “Outdoor”
         label: Place

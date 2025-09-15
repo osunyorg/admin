@@ -493,6 +493,7 @@ en:
                 url:
                   label: URL
                   placeholder: 'https://'
+              move_links: Move links below to define the order
               remove: Remove the link
           locations:
             description: A selection of locations on a campus.
@@ -551,6 +552,9 @@ en:
               options: Display options
               unregistered_organizations_on_map_warning: Warning, unregistered organizations will not be displayed on the map.
             layouts:
+              carousel:
+                description: A list of swipable organizations overflowing on the right side of the screen.
+                label: Carousel
               grid:
                 description: Square logos and a simple text below.
                 label: Grid
@@ -776,7 +780,6 @@ en:
                   label: Text
                   placeholder: Enter testimonial's text
               remove_testimonial: Remove testimonial
-              title_disclaimer: The title above won't show on the website. Nevertheless, it will appear and be clickable in the table of contents if there's one on the page.
           timeline:
             description: A list of events with their description, on a timeline.
             edit:

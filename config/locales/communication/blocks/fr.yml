@@ -493,6 +493,7 @@ fr:
                 url:
                   label: URL
                   placeholder: 'https://'
+              move_links: Déplacer les liens ci-dessous pour les mettre dans l'ordre souhaité
               remove: Enlever le lien
           locations:
             description: Une sélection de sites dans des campus.
@@ -551,6 +552,9 @@ fr:
               options: Options d'affichage
               unregistered_organizations_on_map_warning: Attention, les organisations non enregistrées ne seront pas affichées sur la carte.
             layouts:
+              carousel:
+                description: Une liste d'organisations qui dépasse sur le côté droit de l'écran, navigable de droite à gauche.
+                label: Carrousel
               grid:
                 description: Une série de logos carrés, avec le nom de chaque organisation.
                 label: Grille
@@ -690,7 +694,7 @@ fr:
                 label: Alternance
               carousel:
                 description: Une liste d'actualités qui dépasse sur le côté droit de l'écran, navigable de droite à gauche.
-                label: Carousel
+                label: Carrousel
               grid:
                 description: Une grille avec toutes les images à la même taille.
                 label: Grille
@@ -776,7 +780,6 @@ fr:
                   label: Texte
                   placeholder: Entrer le texte du témoignage
               remove_testimonial: Enlever le témoignage
-              title_disclaimer: Le titre ci-dessus ne s'affichera pas dans le site Web. Il sera en revanche présent et cliquable dans la table des matières, si elle est présente.
           timeline:
             description: Une liste d'événements avec leur description, présentés en frise.
             edit:

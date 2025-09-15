@@ -1,10 +1,32 @@
 module ActiveStorage
 
-  # ActiveStorage::Utils.duplicate(
-  #   from.featured_image,
-  #   to.featured_image
-  # )
   class Utils
+    FORMAT_LANDSCAPE = 'landscape'
+    FORMAT_PORTRAIT = 'portrait'
+    FORMAT_SQUARE = 'square'
+
+    def self.ratio(blob)
+      width, height = blob.metadata.values_at('width', 'height')
+      # No width or height, default ratio
+      return 1 if width.nil? || height.nil?
+      width.to_f / height.to_f
+    end
+
+    def self.format(blob)
+      r = ratio(blob)
+      if r > 1
+        return FORMAT_LANDSCAPE
+      elsif r < 1
+        return FORMAT_PORTRAIT
+      else
+        return FORMAT_SQUARE
+      end
+    end
+
+    # ActiveStorage::Utils.duplicate(
+    #   from.featured_image,
+    #   to.featured_image
+    # )
     def self.duplicate(from, to)
       return unless from.attached?
       attach_from_url(
@@ -26,7 +48,7 @@ module ActiveStorage
       url_attachable = UrlAttachable.new(url, filename, content_type)
       return if url_attachable.io.nil?
       property.attach(
-        io: url_attachable.io, 
+        io: url_attachable.io,
         filename: url_attachable.filename,
         content_type: url_attachable.content_type
       )
@@ -37,7 +59,7 @@ module ActiveStorage
       return if text.blank?
       io = StringIO.new text.to_s.force_encoding('UTF-8')
       property.attach(
-        io: io, 
+        io: io,
         filename: filename,
         content_type: "text/plain; charset=utf-8"
       )
@@ -46,6 +68,18 @@ module ActiveStorage
     def self.text_from_attachment(property)
       return '' unless property.attached?
       property.download.force_encoding('UTF-8')
+    end
+
+    def self.blob_from_url(url, filename: nil, content_type: nil)
+      return if url.blank?
+      url_attachable = UrlAttachable.new(url, filename, content_type)
+      return if url_attachable.io.nil?
+      ActiveStorage::Blob.create_and_upload!(
+        io: url_attachable.io,
+        filename: url_attachable.filename,
+        content_type: url_attachable.content_type
+      )
+    rescue
     end
   end
 

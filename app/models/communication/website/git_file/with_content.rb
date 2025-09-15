@@ -62,7 +62,13 @@ module Communication::Website::GitFile::WithContent
   end
 
   def content_up_to_date?
-    current_content == computed_content
+    # Not loading file from Scaleway
+    if current_sha.present?
+      current_sha == computed_sha
+    else
+      # Loading current_content from Scaleway
+      current_content == computed_content
+    end
   end
 
   def needs_deletion?

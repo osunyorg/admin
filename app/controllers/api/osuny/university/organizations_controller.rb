@@ -16,7 +16,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
     if @organization.save
       render :show, status: :created
     else
-      render json: { errors: @organization.errors }, status: :unprocessable_entity
+      render json: { errors: @organization.errors }, status: :unprocessable_content
     end
   end
 
@@ -24,7 +24,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
     if @organization.update(organization_params)
       render :show
     else
-      render json: { errors: @organization.errors }, status: :unprocessable_entity
+      render json: { errors: @organization.errors }, status: :unprocessable_content
     end
   end
 
@@ -62,7 +62,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
       end
     end
 
-    status = @invalid_organizations_with_index.any? ? :unprocessable_entity : :ok
+    status = @invalid_organizations_with_index.any? ? :unprocessable_content : :ok
     render 'upsert', status: status
   end
 
@@ -89,13 +89,13 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
 
   def ensure_same_migration_identifier
     if @organization.migration_identifier != @migration_identifier
-      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_entity
+      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
     end
   end
 
   def l10n_permitted_keys
     [
-      :migration_identifier, :language, :name, :long_name, :meta_description,
+      :migration_identifier, :language, :name, :long_name, :meta_description, :published, :published_at,
       :address_name, :address_additional, :linkedin, :mastodon, :twitter, :url,
       :slug, :summary, :text, :_destroy,
       featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
@@ -107,7 +107,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
     @organization_params ||= begin
       permitted_params = params.require(:organization)
                           .permit(
-                            :migration_identifier, :kind, :active, :email, :phone,
+                            :migration_identifier, :kind, :email, :phone,
                             :address, :zipcode, :city, :country, :nic, :siren,
                             category_ids: [], localizations: {}
                           ).merge(university_id: current_university.id)
@@ -119,7 +119,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   def organization_params_for_upsert(organization_params)
     permitted_params = organization_params
                           .permit(
-                            :migration_identifier, :kind, :active, :email, :phone,
+                            :migration_identifier, :kind, :email, :phone,
                             :address, :zipcode, :city, :country, :nic, :siren,
                             category_ids: [], localizations: {}
                           ).merge(university_id: current_university.id)

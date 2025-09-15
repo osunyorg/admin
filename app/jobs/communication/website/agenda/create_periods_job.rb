@@ -1,5 +1,5 @@
 class Communication::Website::Agenda::CreatePeriodsJob < ApplicationJob
-  queue_as :elephant
+  queue_as :elephants
 
   def perform(event_or_time_slot)
     website = event_or_time_slot.website

@@ -35,7 +35,7 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
       redirect_to admin_communication_website_menu_path(@menu), notice: t('admin.successfully_created_html', model: @menu.to_s)
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -45,7 +45,7 @@ class Admin::Communication::Websites::MenusController < Admin::Communication::We
     else
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

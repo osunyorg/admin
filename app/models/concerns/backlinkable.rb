@@ -1,6 +1,43 @@
 module Backlinkable
   extend ActiveSupport::Concern
 
+  BACKLINKS = [
+    :pages,
+    :posts,
+    :events,
+    :exhibitions,
+    :projects
+  ]
+
+  def backlinks_for(website)
+    base = {}
+    BACKLINKS.each do |identifier|
+      elements = elements_with_hugo(identifier, website)
+      base[identifier] = elements if elements.any?
+    end
+    base
+  end
+
+  protected
+
+  def elements_with_hugo(identifier, website)
+    elements = []
+    elements_for_backlink(identifier, website).each do |element|
+      hugo = element.hugo(website)
+      next if hugo.nil? || hugo.file.blank?
+      elements << {
+        element: element,
+        hugo: hugo
+      }
+    end
+    elements
+  end
+
+  def elements_for_backlink(identifier, website)
+    method = "backlinks_#{identifier}"
+    send(method, website)
+  end
+
   # TODO: Optimize this method
   def backlinks_pages(website)
     special_page_ids = website.pages.where.not(type: nil).pluck(:id)
@@ -18,21 +55,26 @@ module Backlinkable
     )
   end
 
-  def backlinks_agenda_events(website)
+  def backlinks_events(website)
     backlinks(
       "Communication::Website::Agenda::Event::Localization",
       website
     )
   end
 
-  def backlinks_portfolio_projects(website)
+  def backlinks_exhibitions(website)
+    backlinks(
+      "Communication::Website::Agenda::Exhibition::Localization",
+      website
+    )
+  end
+
+  def backlinks_projects(website)
     backlinks(
       "Communication::Website::Portfolio::Project::Localization",
       website
     )
   end
-
-  protected
 
   def backlinks(kind, website)
     backlinks_object_ids = published_backlinks_blocks(website).map { |block|

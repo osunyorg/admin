@@ -1,16 +1,8 @@
-<%-
-university = University.find_by(id: @about.university_id)
-version = 2
-cache [@about, university, version] do
--%>
 <%
+university = University.find_by(id: @about.university_id)
 width, height = @about.metadata.values_at('width', 'height')
-ratio = width.present? && height.present? ? (width.to_f / height.to_f) : nil
-format = 'square'
-if ratio.present?
-  format = 'landscape' if ratio > 1
-  format = 'portrait' if ratio < 1
-end
+ratio = ActiveStorage::Utils.ratio(@about)
+format = ActiveStorage::Utils.format(@about)
 base_url = university&.url || ""
 %>
 <%= raw({
@@ -24,4 +16,3 @@ base_url = university&.url || ""
   "direct_url" => @about.url,
   "download_url" => "#{base_url}#{download_medium_path(signed_id: @about.signed_id)}"
 }.compact.to_yaml) %>
-<%- end -%>

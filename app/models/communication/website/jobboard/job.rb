@@ -49,6 +49,11 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
     order(from_day: :asc, created_at: :asc)
   }
   scope :ordered, -> (language = nil) { ordered_asc }
+  scope :latest_in, -> (language) {
+    published_now_in(language)
+      .order("communication_website_jobboard_job_localizations.updated_at")
+      .limit(5)
+  }
 
   scope :for_search_term, -> (term, language) {
     joins(:localizations)

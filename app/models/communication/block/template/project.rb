@@ -34,7 +34,7 @@ class Communication::Block::Template::Project < Communication::Block::Template::
   end
 
   def allowed_for_about?
-    website.present? && website.projects.any?
+    website.present? && website.feature_portfolio
   end
 
   def children

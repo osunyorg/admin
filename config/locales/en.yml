@@ -5,7 +5,7 @@ en:
       templates:
         embed:
           title_missing:
-            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the video is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the iframe.
+            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the content is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the iframe.
             title: No frame title
           transcription_missing:
             text_html: The HTML iframe has no text transcription for blind people, for people with low bandwidth or no javascript enabled. Please add a text transcription.
@@ -86,6 +86,7 @@ en:
           teacher: Teacher
           visitor: Visitor
           website_manager: Website manager
+        university: University
         websites_to_manage: Websites managed
     errors:
       messages:

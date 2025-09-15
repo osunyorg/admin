@@ -7,10 +7,13 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def reorder
     ids = params[:ids] || []
+    about = nil
     ids.values.each_with_index do |object, index|
       block = current_university.communication_blocks.find(object[:id])
-      block.update(position: index + 1)
+      block.update_column(:position, index + 1)
+      about ||= block.about # Always the same about, doesn't matter
     end
+    about.try(:mark_git_files_for_update!)
   end
 
   def new
@@ -47,9 +50,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       respond_to do |format|
         format.html {
           breadcrumb
-          render :new, status: :unprocessable_entity
+          render :new, status: :unprocessable_content
         }
-        format.js { head :unprocessable_entity }
+        format.js { head :unprocessable_content }
       end
     end
   end
@@ -68,9 +71,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
         format.html {
           breadcrumb
           add_breadcrumb t('edit')
-          render :edit, status: :unprocessable_entity
+          render :edit, status: :unprocessable_content
         }
-        format.js { head :unprocessable_entity }
+        format.js { head :unprocessable_content }
       end
     end
   end

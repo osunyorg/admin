@@ -21,9 +21,11 @@ fr:
       filters: Filtres
       target: Cible
       users:
-        one: "%{count} utilisateur"
-        other: "%{count} utilisateurs"
+        one: "%{count} utilisateur·rice"
+        other: "%{count} utilisateur·rice·s"
     see_list: Voir la liste
+    optin_users:
+      title: Utilisateur·rice·s optin
     universities:
       contributing:
         one: "%{count} université contributrice"

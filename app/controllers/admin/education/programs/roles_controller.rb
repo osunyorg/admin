@@ -30,7 +30,7 @@ class Admin::Education::Programs::RolesController < Admin::Education::Programs::
       redirect_to admin_education_program_role_path(@role), notice: t('admin.successfully_created_html', model: @role.to_s_in(current_language))
     else
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -40,7 +40,7 @@ class Admin::Education::Programs::RolesController < Admin::Education::Programs::
     else
       load_invalid_localization
       breadcrumb
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
       add_breadcrumb t('edit')
     end
   end

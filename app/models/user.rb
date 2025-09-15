@@ -78,6 +78,7 @@ class User < ApplicationRecord
   has_many :imports, class_name: 'Import', dependent: :nullify
 
   scope :ordered, -> (language = nil) { order("TRIM(LOWER(UNACCENT(last_name))), TRIM(LOWER(UNACCENT(first_name)))") }
+  scope :for_university, -> (university_id, language = nil) { where(university_id: university_id) }
   scope :for_language, -> (language_id, language = nil) { where(language_id: language_id) }
   scope :for_search_term, -> (term, language = nil) {
     where("

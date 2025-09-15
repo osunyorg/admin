@@ -14,6 +14,9 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :emergency_messages,
                   EmergencyMessage.model_name.human(count: 2),
                   server_emergency_messages_path
+    primary.item  :optin_users,
+                  t('server_admin.optin_users.title'),
+                  server_optin_users_path
     primary.item  :background_jobs,
                   'Jobs',
                   server_background_jobs_path

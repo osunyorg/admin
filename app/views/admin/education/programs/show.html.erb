@@ -67,7 +67,7 @@
         </table>
       </div>
       <div class="col-lg-6">
-        <%= render 'admin/application/summary/show', about: @l10n, small: true %>
+        <%= render 'admin/application/summary/show', about: @l10n %>
         <% if @l10n.short_name.present? %>
           <%= osuny_label Education::Program::Localization.human_attribute_name('short_name') %>
           <p><%= @l10n.short_name %></p>

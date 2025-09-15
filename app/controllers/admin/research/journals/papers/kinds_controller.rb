@@ -37,7 +37,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
     else
       breadcrumb
       add_breadcrumb t('create')
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -49,7 +49,7 @@ class Admin::Research::Journals::Papers::KindsController < Admin::Research::Jour
       breadcrumb
       add_breadcrumb @l10n, admin_research_journal_kind_path(@kind)
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 

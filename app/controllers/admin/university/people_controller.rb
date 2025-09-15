@@ -60,7 +60,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
     else
       @categories = categories
       breadcrumb
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -73,7 +73,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       @categories = categories
       breadcrumb
       add_breadcrumb t('edit')
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
