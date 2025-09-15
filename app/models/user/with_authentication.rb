@@ -29,6 +29,13 @@ module User::WithAuthentication
       where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
     end
 
+    def self.send_reset_password_instructions(attributes = {})
+      recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+      recoverable.registration_context = attributes[:registration_context] if attributes.has_key?(:registration_context)
+      recoverable.send_reset_password_instructions if recoverable.persisted?
+      recoverable
+    end
+
     def self.send_confirmation_instructions(attributes = {})
       confirmable = find_by_unconfirmed_email_with_errors(attributes) if reconfirmable
       unless confirmable.try(:persisted?)
