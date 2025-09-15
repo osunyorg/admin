@@ -95,7 +95,7 @@ module User::WithAuthentication
     private
 
     def self.add_registration_context(object, attributes)
-      return unless object.has_key?(:registration_context)
+      return unless attributes.has_key?(:registration_context)
       object.registration_context = attributes[:registration_context]
     end
 
