@@ -31,7 +31,7 @@ module User::WithAuthentication
 
     def self.send_reset_password_instructions(attributes = {})
       recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
-      recoverable.registration_context = attributes[:registration_context] if attributes.has_key?(:registration_context)
+      add_registration_context(recoverable, attributes)
       recoverable.send_reset_password_instructions if recoverable.persisted?
       recoverable
     end
