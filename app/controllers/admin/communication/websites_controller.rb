@@ -52,12 +52,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
                           @posts.any? &&
                           can?(:read, Communication::Website::Post)
     @show_events      = @website.feature_agenda &&
-                          @events.any? && 
+                          @events.any? &&
                           can?(:read, Communication::Website::Agenda::Event)
     @show_exhibitions = @website.feature_agenda &&
                           @exhibitions.any? &&
                           can?(:read, Communication::Website::Agenda::Exhibition)
-    @show_projects    = @website.feature_portfolio && 
+    @show_projects    = @website.feature_portfolio &&
                           @projects.any? &&
                           can?(:read, Communication::Website::Portfolio::Project)
     @show_jobs        = @website.feature_jobboard &&
@@ -159,7 +159,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def website_params
     attribute_names = [
-      :url, :repository, :about_type, :about_id, :in_production,
+      :url, :repository, :about_type, :about_id, :in_production, :in_production_at,
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication,

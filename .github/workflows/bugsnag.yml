@@ -1,0 +1,30 @@
+name: Bugsnag Release
+
+on:
+  push:
+    tags:
+      - '*'   # déclenche sur tous les tags (ex: v1.0.0)
+
+jobs:
+  notify-bugsnag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Notify Bugsnag of release
+        run: |
+          curl -X POST https://build.bugsnag.com \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"apiKey\": \"${{ secrets.BUGSNAG_API_KEY }}\",
+              \"appVersion\": \"${GITHUB_REF_NAME}\",
+              \"autoAssignRelease\": true,
+              \"releaseStage\": \"production\",
+              \"builderName\": \"github-actions\",
+              \"sourceControl\": {
+                \"provider\": \"github\",
+                \"repository\": \"https://github.com/${GITHUB_REPOSITORY}\",
+                \"revision\": \"${GITHUB_SHA}\"
+              }
+            }"

@@ -52,8 +52,8 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
 
   def selected_elements
     @selected_elements ||= send("selected_elements_#{mode}").map { |element|
-      organization_inactive = element.organization.present? && !element.organization.active
-      next if organization_inactive
+      organization = element.organization
+      next unless organization.present? && organization.published_in?(language)
       element
     }.compact
   end

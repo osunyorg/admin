@@ -4,16 +4,18 @@ other_websites = @website.university
                          .websites
                          .where.not(id: @website.id)
                          .ordered(language)
+backlinks = about.backlinks_for(@website)
 %>
 backlinks:
   current_website:
     name: "<%= @website.to_s_in(language) %>"
-<% Backlinkable::BACKLINKS.each do |identifier| %>
+<%
+backlinks.each do |identifier, list|
+  %>
     <%= identifier.to_s %>:
 <%
-about.elements_for_backlink(identifier, @website).each do |element|
-    hugo = element.hugo(@website)
-    next if hugo.nil? || hugo.file.blank?
+  list.each do |object|
+      hugo = object[:hugo]
 %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
 <% 
@@ -21,23 +23,29 @@ about.elements_for_backlink(identifier, @website).each do |element|
 end
 %>
   other_websites:
-<% other_websites.each do |website| %>
-    - name: "<%= website.to_s_in(language) %>"
+<%
+other_websites.each do |website| 
+  backlinks = about.backlinks_for(website)
+  next if backlinks.empty?
+  %>
+    - name: >-
+        <%= prepare_text_for_static website.to_s_in(language) %>
       identifier: "<%= website.id %>"
-<% Backlinkable::BACKLINKS.each do |identifier| %>
+<%
+  backlinks.each do |identifier, list|
+    %>
       <%= identifier.to_s %>:
 <%
-about.elements_for_backlink(identifier, website).each do |element|
-    hugo = element.hugo(website)
-    next if hugo.nil? || hugo.file.blank?
-    url = "#{website.url}#{hugo.permalink}"
+    list.each do |object|
+      hugo = object[:hugo]
+      element = object[:element]
+      url = "#{website.url}#{hugo.permalink}"
 %>
         - name: >-
-            <%= element.to_s %>
+            <%= prepare_text_for_static element.to_s %>
           url: "<%= url %>"
 <% 
+    end
   end
 end
 %>
-
-<% end %>

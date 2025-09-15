@@ -9,12 +9,34 @@ module Backlinkable
     :projects
   ]
 
+  def backlinks_for(website)
+    base = {}
+    BACKLINKS.each do |identifier|
+      elements = elements_with_hugo(identifier, website)
+      base[identifier] = elements if elements.any?
+    end
+    base
+  end
+
+  protected
+
+  def elements_with_hugo(identifier, website)
+    elements = []
+    elements_for_backlink(identifier, website).each do |element|
+      hugo = element.hugo(website)
+      next if hugo.nil? || hugo.file.blank?
+      elements << {
+        element: element,
+        hugo: hugo
+      }
+    end
+    elements
+  end
+
   def elements_for_backlink(identifier, website)
     method = "backlinks_#{identifier}"
     send(method, website)
   end
-
-  protected
 
   # TODO: Optimize this method
   def backlinks_pages(website)
