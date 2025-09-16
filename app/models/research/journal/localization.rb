@@ -36,7 +36,7 @@ class Research::Journal::Localization < ApplicationRecord
 
   validates :title, presence: true
 
-  def git_path(website)
+  def git_path_relative
     "journals/#{slug}/_index.html"
   end
 
