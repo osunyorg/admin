@@ -28,6 +28,7 @@ module Communication::Website::Permalink::WithMapping
       "Research::Journal::Localization" => Communication::Website::Permalink::Journal,
       "Research::Journal::Paper::Localization" => Communication::Website::Permalink::Paper,
       "Research::Journal::Volume::Localization" => Communication::Website::Permalink::Volume,
+      "Research::Laboratory::Localization" => Communication::Website::Permalink::Laboratory,
       "Research::Publication" => Communication::Website::Permalink::Publication,
       "University::Organization::Localization" => Communication::Website::Permalink::Organization,
       "University::Organization::Category::Localization" => Communication::Website::Permalink::Organization::Category,
