@@ -41,7 +41,7 @@ class Education::School::Localization < ApplicationRecord
   validates :logo, size: { less_than: 1.megabytes }
 
   def git_path_relative
-    "schools/#{slug}/_index.html"
+    "schools/#{slug}.html"
   end
 
   def template_static
