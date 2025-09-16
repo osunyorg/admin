@@ -1,7 +1,7 @@
 class Communication::Website::Page::ResearchJournal < Communication::Website::Page
 
   def should_create_special_page?
-    website.about && website.about&.respond_to?(:research_journals)
+    website.about && website.about&.respond_to?(:journals)
   end
 
   def editable_width?

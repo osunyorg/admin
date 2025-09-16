@@ -1,6 +1,6 @@
 class Communication::Website::Page::EducationSchool < Communication::Website::Page
 
-  def is_necessary_for_website?
+  def should_create_special_page?
     website.about && website.about&.respond_to?(:education_schools)
   end
 

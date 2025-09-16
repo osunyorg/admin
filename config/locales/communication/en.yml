@@ -679,6 +679,9 @@ en:
           privacy_policy:
             slug: privacy-policy
             title: Privacy policy
+          research_journal:
+            slug: journals
+            title: Journals
           research_paper:
             slug: papers
             title: Papers
