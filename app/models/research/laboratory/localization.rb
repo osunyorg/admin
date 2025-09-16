@@ -36,7 +36,7 @@ class Research::Laboratory::Localization < ApplicationRecord
   validates :name, presence: true
 
   def git_path_relative
-    "laboratories/#{slug}/_index.html"
+    "laboratories/#{slug}.html"
   end
 
   def template_static

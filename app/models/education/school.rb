@@ -84,6 +84,14 @@ class Education::School < ApplicationRecord
     true
   end
 
+  def has_research_journals?
+    false
+  end
+
+  def has_research_laboratories?
+    false
+  end
+
   def has_research_papers?
     false
   end

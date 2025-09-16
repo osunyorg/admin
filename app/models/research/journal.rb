@@ -104,6 +104,10 @@ class Research::Journal < ApplicationRecord
     true
   end
 
+  def has_research_laboratories?
+    false
+  end
+
   def has_research_papers?
     papers.any?
   end

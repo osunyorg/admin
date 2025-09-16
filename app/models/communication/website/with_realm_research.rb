@@ -9,6 +9,10 @@ module Communication::Website::WithRealmResearch
     has_research_journals? ? about.journals : Research::Journal.none
   end
 
+  def research_laboratories
+    has_research_laboratories? ? about.laboratories : Research::Laboratory.none
+  end
+
   def research_volumes
     has_research_volumes? ? about.volumes : Research::Journal::Volume.none
   end
@@ -27,6 +31,10 @@ module Communication::Website::WithRealmResearch
 
   def has_research_journals?
     about && about.has_research_journals?
+  end
+
+  def has_research_laboratories?
+    about && about.has_research_laboratories?
   end
 
   def has_research_papers?

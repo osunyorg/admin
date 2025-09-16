@@ -102,11 +102,19 @@ class Research::Laboratory < ApplicationRecord
     false
   end
 
+  def has_research_laboratories?
+    true
+  end
+
   def has_research_papers?
     false
   end
 
   def has_research_volumes?
     false
+  end
+
+  def laboratories
+    Research::Laboratory.where(id: id)
   end
 end
