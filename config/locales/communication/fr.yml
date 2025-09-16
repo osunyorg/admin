@@ -663,6 +663,9 @@ fr:
           education_program:
             slug: formations
             title: "Formations"
+          education_school:
+            slug: ecoles
+            title: "Écoles"
           home:
             slug: ''
             title: Accueil

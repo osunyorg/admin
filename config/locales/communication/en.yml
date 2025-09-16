@@ -661,6 +661,9 @@ en:
           education_program:
             slug: programs
             title: Programs
+          education_school:
+            slug: schools
+            title: Schools
           home:
             slug: ''
             title: Home
