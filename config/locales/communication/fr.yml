@@ -684,6 +684,9 @@ fr:
           research_journal:
             slug: revues-scientifiques
             title: Revues scientifiques
+          research_laboratory:
+            slug: laboratoires
+            title: Laboratoires
           research_paper:
             slug: papiers
             title: Papiers
