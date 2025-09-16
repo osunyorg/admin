@@ -5,6 +5,7 @@
 #  id               :uuid             not null, primary key
 #  issn             :string
 #  meta_description :text
+#  slug             :string
 #  summary          :text
 #  title            :string
 #  created_at       :datetime         not null
@@ -29,6 +30,7 @@ class Research::Journal::Localization < ApplicationRecord
   include AsLocalization
   include HasGitFiles
   include Initials
+  include Permalinkable
   include Sanitizable
   include WithUniversity
 

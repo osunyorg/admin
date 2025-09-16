@@ -92,4 +92,8 @@ class Education::School < ApplicationRecord
     false
   end
 
+  def schools
+    Education::School.where(id: id)
+  end
+
 end
