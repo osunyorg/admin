@@ -1,3 +1,41 @@
+# == Schema Information
+#
+# Table name: university_person_localizations
+#
+#  id                    :uuid             not null, primary key
+#  biography             :text
+#  featured_image_alt    :text
+#  featured_image_credit :text
+#  first_name            :string
+#  last_name             :string
+#  linkedin              :string
+#  mastodon              :string
+#  meta_description      :text
+#  name                  :string
+#  picture_credit        :text
+#  slug                  :string           indexed
+#  summary               :text
+#  twitter               :string
+#  url                   :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  about_id              :uuid             indexed
+#  language_id           :uuid             indexed
+#  university_id         :uuid             indexed
+#
+# Indexes
+#
+#  index_university_person_localizations_on_about_id       (about_id)
+#  index_university_person_localizations_on_language_id    (language_id)
+#  index_university_person_localizations_on_slug           (slug)
+#  index_university_person_localizations_on_university_id  (university_id)
+#
+# Foreign Keys
+#
+#  fk_rails_469b2f6a6f  (about_id => university_people.id)
+#  fk_rails_5eca3fe920  (university_id => universities.id)
+#  fk_rails_bf16824595  (language_id => languages.id)
+#
 class University::Person::Localization::Author < University::Person::Localization
   def self.polymorphic_name
     'University::Person::Localization::Author'

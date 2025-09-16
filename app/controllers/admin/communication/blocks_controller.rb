@@ -11,7 +11,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
     ids.values.each_with_index do |object, index|
       block = current_university.communication_blocks.find(object[:id])
       block.update_column(:position, index + 1)
-      about = block.about # Always the same about, doesn't matter
+      about ||= block.about # Always the same about, doesn't matter
     end
     about.try(:mark_git_files_for_update!)
   end

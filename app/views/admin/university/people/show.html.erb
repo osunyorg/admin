@@ -32,7 +32,7 @@
   </div>
   <div class="col-md-8">
 
-    <%= render 'admin/application/summary/show', about: @l10n, small: true %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
 
     <% unless @l10n.biography.blank? %>
       <%= osuny_panel University::Person::Localization.human_attribute_name('biography'), small: true do %>

@@ -15,6 +15,7 @@ class Communication::Block::Template::Job < Communication::Block::Template::Base
   has_component :description, :rich_text
   has_component :no_job_message, :string
 
+  has_component :option_image,        :boolean, default: true
   has_component :option_subtitle,     :boolean, default: true
   has_component :option_categories,   :boolean, default: false
   has_component :option_date,         :boolean, default: false

@@ -25,6 +25,7 @@
 #  git_provider                 :integer          default("github")
 #  highlighted_in_showcase      :boolean          default(FALSE)
 #  in_production                :boolean          default(FALSE)
+#  in_production_at             :datetime
 #  in_showcase                  :boolean          default(TRUE)
 #  last_sync_at                 :datetime
 #  locked_at                    :datetime
@@ -82,6 +83,7 @@ class Communication::Website < ApplicationRecord
   include WithOpenApi
   include WithPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
+  include WithProduction
   include WithProgramCategories
   include WithRealmAdministration
   include WithRealmCommunication
@@ -120,8 +122,6 @@ class Communication::Website < ApplicationRecord
                     :set_first_localization_as_published,
                     on: :create
 
-  scope :in_production, -> { where(in_production: true) }
-  scope :for_production, -> (production, language = nil) { where(in_production: production) }
   scope :for_search_term, -> (term, language) {
     joins(:university)
       .joins(:localizations)
@@ -135,10 +135,6 @@ class Communication::Website < ApplicationRecord
   scope :for_update, -> (autoupdate, language = nil) { where(autoupdate_theme: autoupdate) }
   scope :with_url, -> { where.not(url: [nil, '']) }
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
-  scope :ordered_by_production_date, -> {
-    # TODO add in_production_at and use it
-    order(created_at: :desc)
-  }
 
   def self.organized_for(user, language, limit: 6)
     university = user.university

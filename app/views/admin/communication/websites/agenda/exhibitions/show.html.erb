@@ -45,7 +45,7 @@
     <% end %>
   </div>
   <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @l10n, small: true %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
     <%= osuny_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name("text"), small: true do %>
       <div><%= sanitize @l10n.text %></div>
     <% end if @l10n.text.present? %>

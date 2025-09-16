@@ -142,6 +142,7 @@ fr:
         git_provider: Fournisseur Git
         highlighted_in_showcase: Mis en avant dans le showcase
         in_production: Site en production
+        in_production_at: Date de mise en production
         in_showcase: Présenter le site dans le showcase
         languages: Langues
         locked_at: Verrouillé pour les background jobs à
