@@ -21,13 +21,9 @@
                     data-longitude="<%= element.organization&.longitude %>">
             <div class="organization-content">
               <h<%= block.heading_rank_children %> class="organization-title" itemprop="name">
-                <% if show_link %>
-                  <a href="<%= organization_link %>" target="_blank">
-                <% end %>
+                <% if show_link %><a href="<%= organization_link %>"><% end %>
                 <%= element.best_name %>
-                <% if show_link %>
-                  </a>
-                <% end %>
+                <% if show_link %></a><% end %>
               </h<%= block.heading_rank_children %>>
             </div>
             <% if element.best_logo_blob %>
