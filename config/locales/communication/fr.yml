@@ -524,9 +524,16 @@ fr:
           in: dans
           in_full_width: en pleine largeur
           show: Voir la page
+          special_page: Page spéciale
           special_pages:
             organization:
               disconnect: Déconnecter
+              explicitly_connected: Organisations directement connectées
+              explicitly_connected_hint: Vous pouvez connecter directement des organisations au site Web en les recherchant ci-dessous. Quoi qu'il en soit, toutes les organisations mentionnées dans le site seront listées ci-dessus.
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les organisations mentionnées dans le site. Pour l'instant, il n'y a aucune organisation dans le site. 
+                one: Cette page est une page spéciale, qui présente nativement les organisations mentionnées dans le site. Pour l'instant, il y a 1 organisation dans le site. 
+                other: Cette page est une page spéciale, qui présente nativement les %{count} organisations mentionnées dans le site.
             person:
               disconnect: Déconnecter
           structure: Pages
