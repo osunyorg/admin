@@ -27,7 +27,7 @@ class Communication::Block::Template::Organization::Element < Communication::Blo
   end
 
   def direct_data?
-    name.present? || logo.attached?
+    name.present? || logo_component.blob.present?
   end
 
   def best_name
