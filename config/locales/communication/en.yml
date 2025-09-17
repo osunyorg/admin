@@ -682,6 +682,9 @@ en:
           research_journal:
             slug: journals
             title: Journals
+          research_laboratory:
+            slug: laboratories
+            title: Laboratories
           research_paper:
             slug: papers
             title: Papers

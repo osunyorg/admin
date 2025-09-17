@@ -124,6 +124,10 @@ class Education::Program < ApplicationRecord
     false
   end
 
+  def has_research_laboratories?
+    false
+  end
+
   def has_research_papers?
     false
   end

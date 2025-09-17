@@ -35,6 +35,10 @@ module WebsitesLinkable
     raise NoMethodError, "You must implement the `has_research_journals?` method in #{self.class.name}"
   end
 
+  def has_research_laboratories?
+    raise NoMethodError, "You must implement the `has_research_laboratories?` method in #{self.class.name}"
+  end
+
   def has_research_papers?
     raise NoMethodError, "You must implement the `has_research_papers?` method in #{self.class.name}"
   end
