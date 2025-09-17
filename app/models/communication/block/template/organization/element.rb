@@ -14,19 +14,33 @@ class Communication::Block::Template::Organization::Element < Communication::Blo
     id_component.data
   end
 
+  def organization_l10n
+    @organization_l10n ||= organization.best_localization_for(block.language)
+  end
+
+  def empty?
+    !organization? && !direct_data?
+  end
+
+  def organization?
+    organization.present? && organization.published_in?(block.language)
+  end
+
+  def direct_data?
+    name.present? || logo.attached?
+  end
+
   def best_name
     organization ? organization.to_s_in(block.language) : name
   end
 
   def best_url
     return url unless organization
-    organization_l10n = organization.best_localization_for(block.language)
     organization_l10n.url
   end
 
   def best_logo_blob
     return logo_component.blob unless organization
-    organization_l10n = organization.best_localization_for(block.language)
     organization_l10n.logo&.blob
   end
 
