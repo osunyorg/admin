@@ -13,24 +13,30 @@
           <%
           next if element.best_name.blank?
           organization_link = '#' unless current_extranet.present?
+          show_link = block.template.option_link && organization_link
           %>
           <article  class="organization"
+                    itemscope="" itemtype="https://schema.org/Organization"
                     data-latitude="<%= element.organization&.latitude %>"
                     data-longitude="<%= element.organization&.longitude %>">
-            <p class="organization-title">
-              <% if block.template.option_link && organization_link %>
-                <a href="<%= organization_link %>" target="_blank">
-              <% end %>
-              <%= element.best_name %>
-              <% if block.template.option_link && organization_link %>
-                </a>
-              <% end %>
-            </p>
-            <div class="media">
-              <% if element.best_logo_blob %>
-                <%= kamifusen_tag element.best_logo_blob, width: 600 %>
-              <% end %>
+            <div class="organization-content">
+              <h<%= block.heading_rank_children %> class="organization-title" itemprop="name">
+                <% if show_link %>
+                  <a href="<%= organization_link %>" target="_blank">
+                <% end %>
+                <%= element.best_name %>
+                <% if show_link %>
+                  </a>
+                <% end %>
+              </h<%= block.heading_rank_children %>>
             </div>
+            <% if element.best_logo_blob %>
+              <div class="media media--logo">
+                <figure class="organization-logo" role="figure">
+                  <%= kamifusen_tag element.best_logo_blob, width: 600 %>
+                </figure>
+              </div>
+            <% end %>
           </article>
         <% end %>
       </div>
