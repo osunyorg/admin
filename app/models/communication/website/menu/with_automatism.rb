@@ -5,7 +5,7 @@ module Communication::Website::Menu::WithAutomatism
     scope :automatic, -> { where(automatic: true) }
   end
 
-  def generate_automatically_later
+  def generate_automatically
     Communication::Website::Menu::GenerateJob.perform_later(self)
   end
 

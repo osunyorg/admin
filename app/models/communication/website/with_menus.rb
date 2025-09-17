@@ -62,13 +62,13 @@ module Communication::Website::WithMenus
 
   def generate_automatic_menus_for_identifier(identifier)
     menus.automatic.for_identifier(identifier).find_each do |menu|
-      menu.generate_automatically_later
+      menu.generate_automatically
     end
   end
 
   def generate_automatic_menus_for_language(language)
     menus.automatic.for_language(language).find_each do |menu|
-      menu.generate_automatically_later
+      menu.generate_automatically
     end
   end
 
