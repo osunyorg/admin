@@ -2,8 +2,8 @@
 laboratory = @l10n.about
 language = @l10n.language
 %>---
-name: >-
-  <%= prepare_text_for_static @l10n.name %>
+<%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
+<%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/contact_details/static',
             about: laboratory,
             l10n: @l10n,

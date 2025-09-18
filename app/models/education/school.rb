@@ -80,12 +80,28 @@ class Education::School < ApplicationRecord
   # WebsitesLinkable methods
   #####################
 
+  def has_education_schools?
+    true
+  end
+
+  def has_research_journals?
+    false
+  end
+
+  def has_research_laboratories?
+    false
+  end
+
   def has_research_papers?
     false
   end
 
   def has_research_volumes?
     false
+  end
+
+  def schools
+    Education::School.where(id: id)
   end
 
 end

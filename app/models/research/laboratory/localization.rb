@@ -6,6 +6,7 @@
 #  address_additional :string
 #  address_name       :string
 #  name               :string
+#  slug               :string
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  about_id           :uuid             indexed
@@ -28,13 +29,14 @@ class Research::Laboratory::Localization < ApplicationRecord
   include AsLocalization
   include HasGitFiles
   include Initials
+  include Permalinkable
   include Sanitizable
   include WithUniversity
 
   validates :name, presence: true
 
-  def git_path(website)
-    "data/laboratory.yml"
+  def git_path_relative
+    "laboratories/#{slug}.html"
   end
 
   def template_static

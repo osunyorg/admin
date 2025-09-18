@@ -15,9 +15,9 @@ GIT
 
 GIT
   remote: https://github.com/noesya/summernote-rails.git
-  revision: 18a17fda8c1d3b1b62f6308a00c35b8d490659a0
+  revision: 32fd182c929cdcacaa6e3bd3569871bd025fa669
   specs:
-    summernote-rails (0.9.1)
+    summernote-rails (0.8.20.1)
       nokogiri
       railties (>= 3.1)
 
@@ -124,7 +124,7 @@ GEM
       activerecord (>= 6.0.0)
       activesupport (>= 6.0.0)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1158.0)
+    aws-partitions (1.1155.0)
     aws-sdk-core (3.232.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -136,7 +136,7 @@ GEM
     aws-sdk-kms (1.112.0)
       aws-sdk-core (~> 3, >= 3.231.0)
       aws-sigv4 (~> 1.5)
-    aws-sdk-s3 (1.199.0)
+    aws-sdk-s3 (1.198.0)
       aws-sdk-core (~> 3, >= 3.231.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.5)
@@ -244,7 +244,7 @@ GEM
     erubi (1.13.1)
     et-orbi (1.3.0)
       tzinfo
-    ethon (0.15.0)
+    ethon (0.17.0)
       ffi (>= 1.15.0)
     execjs (2.10.0)
     faceted_search (3.6.4)
@@ -458,7 +458,7 @@ GEM
       version_gem (~> 1.1)
     oauth-tty (1.0.5)
       version_gem (~> 1.1, >= 1.1.1)
-    oauth2 (2.0.15)
+    oauth2 (2.0.14)
       faraday (>= 0.17.3, < 4.0)
       jwt (>= 1.0, < 4.0)
       logger (~> 1.2)
@@ -723,7 +723,7 @@ GEM
       date
       stringio
     public_suffix (6.0.2)
-    puma (7.0.2)
+    puma (7.0.1)
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
@@ -788,7 +788,7 @@ GEM
       psych (>= 4.0.0)
     redis (5.4.1)
       redis-client (>= 0.22.0)
-    redis-client (0.25.3)
+    redis-client (0.25.2)
       connection_pool
     regexp_parser (2.11.2)
     reline (0.6.2)
@@ -798,7 +798,7 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.4.4)
+    rexml (3.4.3)
     roo (2.10.1)
       nokogiri (~> 1)
       rubyzip (>= 1.3.0, < 3.0.0)
@@ -905,16 +905,16 @@ GEM
     time (0.4.1)
       date
     timeout (0.4.3)
-    typhoeus (1.5.0)
-      ethon (>= 0.9.0, < 0.16.0)
+    typhoeus (1.4.1)
+      ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     tzinfo-data (1.2025.2)
       tzinfo (>= 1.0.0)
     unaccent (0.4.0)
-    unicode-display_width (3.2.0)
-      unicode-emoji (~> 4.1)
-    unicode-emoji (4.1.0)
+    unicode-display_width (3.1.5)
+      unicode-emoji (~> 4.0, >= 4.0.4)
+    unicode-emoji (4.0.4)
     unsplash (3.1.1)
       faraday-multipart (~> 1.0.4)
       httparty (~> 0.20)

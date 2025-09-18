@@ -33,4 +33,4 @@ BugsnagPerformance.configure do |config|
   config.configure_open_telemetry do |open_telemetry_configurator|
     open_telemetry_configurator.use_all
   end
-end
+end unless Rails.env.development?
