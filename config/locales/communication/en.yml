@@ -522,9 +522,16 @@ en:
           in: in
           in_full_width: full width
           show: Show page
+          special_page: Special page
           special_pages:
             organization:
               disconnect: Disconnect
+              explicitly_connected: Directly connected organizations
+              explicitly_connected_hint: You can directly connect organizations to the website by searching for them below. Anyway, every organization mentioned in the website will be listed above.
+              native:
+                zero: This page is a special page that natively displays the organizations mentioned on the website. Currently, there's no organization on the site. 
+                one: This page is a special page that natively displays the organizations mentioned on the site. At the moment, there is only one organization on the site. 
+                other: This page is a special page that natively displays the %{count} organizations mentioned on the site.
             person:
               disconnect: Disconnect
           structure: Pages

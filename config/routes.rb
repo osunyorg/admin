@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get ':feature' => 'showcase/websites#feature',
                       as: :showcase_feature,
                       constraints: {
-                        feature: /actualites|agenda|portfolio/
+                        feature: /actualites|agenda|portfolio|jobboard/
                       }
     get ':tag' => 'showcase/websites#tag', as: :showcase_tag
     get '/' => 'showcase/websites#index'

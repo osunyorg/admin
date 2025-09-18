@@ -6,6 +6,10 @@ module Communication::Website::Menu::WithAutomatism
   end
 
   def generate_automatically
+    Communication::Website::Menu::GenerateJob.perform_later(self)
+  end
+
+  def generate_automatically_safely
     transaction do
       clear_items
       create_items
