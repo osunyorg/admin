@@ -1,8 +1,7 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Migrations::Cohorts.migrate_all
-    Migrations::AcademicYears.migrate_all
+    Migrations::WebsiteDefaultImages.migrate_all
   end
 
   namespace :search do

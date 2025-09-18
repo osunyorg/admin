@@ -47,6 +47,12 @@ class Communication::Website::Localization < ApplicationRecord
 
   alias :website :about
 
+  has_one_attached_deletable :default_image
+  has_one_attached_deletable :default_shared_image
+
+  validates :default_image, size: { less_than: 5.megabytes }
+  validates :default_shared_image, size: { less_than: 5.megabytes }
+
   validates :name, presence: true
   validate :prevent_unpublishing_default_language
 
@@ -69,7 +75,9 @@ class Communication::Website::Localization < ApplicationRecord
   def dependencies
     # 1 single file for all the languages
     [website.config_default_languages] +
-    contents_dependencies
+    contents_dependencies +
+    [default_image&.blob] +
+    [default_shared_image&.blob]
   end
 
   def to_s

@@ -121,9 +121,7 @@ fr:
         config_robots_txt: Fichier robots.txt, adressé aux moteurs de recherche
         configs: Fichiers de configuration
         created_at: Création
-        default_image: Image par défaut
         default_language: Langue par défaut
-        default_shared_image: Image de partage par défaut
         default_time_zone: Fuseau horaire par défaut
         deployment_status_badge: Badge de statut du déploiement
         destination_websites: Sites dans lesquels diffuser
@@ -222,6 +220,8 @@ fr:
         subtitle: Sous-titre
         title: Titre
       communication/website/localization:
+        default_image: Image par défaut
+        default_shared_image: Image de partage par défaut
         name: Nom
         published: Langue publiée
         social_email: "Adresse email"
@@ -531,8 +531,8 @@ fr:
               explicitly_connected: Organisations directement connectées
               explicitly_connected_hint: Vous pouvez connecter directement des organisations au site Web en les recherchant ci-dessous. Quoi qu'il en soit, toutes les organisations mentionnées dans le site seront listées ci-dessus.
               native:
-                zero: Cette page est une page spéciale, qui présente nativement les organisations mentionnées dans le site. Pour l'instant, il n'y a aucune organisation dans le site. 
-                one: Cette page est une page spéciale, qui présente nativement les organisations mentionnées dans le site. Pour l'instant, il y a 1 organisation dans le site. 
+                zero: Cette page est une page spéciale, qui présente nativement les organisations mentionnées dans le site. Pour l'instant, il n'y a aucune organisation dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les organisations mentionnées dans le site. Pour l'instant, il y a 1 organisation dans le site.
                 other: Cette page est une page spéciale, qui présente nativement les %{count} organisations mentionnées dans le site.
             person:
               disconnect: Déconnecter
