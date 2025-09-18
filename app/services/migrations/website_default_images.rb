@@ -29,7 +29,7 @@ class Migrations::WebsiteDefaultImages
     ActiveStorage::Attachment.where(
       name: website_attachment.name,
       record: website_l10n
-    ).create do |new_attachment|
+    ).first_or_create do |new_attachment|
       new_attachment.blob_id = website_attachment.blob_id
     end
   end
