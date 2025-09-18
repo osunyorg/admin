@@ -111,12 +111,6 @@ class Communication::Website < ApplicationRecord
             through: :localizations,
             source: :language
 
-  has_one_attached_deletable :default_image
-  has_one_attached_deletable :default_shared_image
-
-  validates :default_image, size: { less_than: 5.megabytes }
-  validates :default_shared_image, size: { less_than: 5.megabytes }
-
   before_validation :sanitize_fields
   before_validation :set_default_language,
                     :set_first_localization_as_published,
@@ -177,8 +171,6 @@ class Communication::Website < ApplicationRecord
     feature_posts_dependencies +
     feature_alerts_dependencies +
     menus.in_languages(active_language_ids) +
-    [default_image&.blob] +
-    [default_shared_image&.blob] +
     indirect_objects_connected_to_website
   end
 

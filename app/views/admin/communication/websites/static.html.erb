@@ -6,12 +6,12 @@ about:
   label: <%= @website.about.to_s_in(language) %>
 <% end %>
 default:
-<% if @website.default_image.attached? %>
+<% if @l10n.default_image.attached? %>
   image:
-    id: <%= @website.default_image.blob&.id %>
+    id: <%= @l10n.default_image.blob&.id %>
 <% end %>
-<% if @website.default_shared_image.attached? %>
+<% if @l10n.default_shared_image.attached? %>
   shared_image:
-    id: <%= @website.default_shared_image.blob&.id %>
+    id: <%= @l10n.default_shared_image.blob&.id %>
 <% end %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
