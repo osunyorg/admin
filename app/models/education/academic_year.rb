@@ -23,7 +23,6 @@ class Education::AcademicYear < ApplicationRecord
   include LocalizableOrderByNameScope
   include Sanitizable
   include Searchable
-  include WebsitesLinkable
   include WithUniversity
 
   has_many  :education_cohorts,

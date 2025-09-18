@@ -65,7 +65,6 @@ class Communication::Website < ApplicationRecord
   include LocalizableOrderByNameScope
   include Searchable
   include WithAbouts
-  include WithAssociatedObjects
   include WithConfigs
   include WithConnectedObjects
   include WithContentArchive
@@ -82,10 +81,15 @@ class Communication::Website < ApplicationRecord
   include WithLock
   include WithManagers
   include WithOpenApi
+  include WithPages
+  include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithProduction
   include WithProgramCategories
-  include WithSpecialPages
-  include WithMenus # Menus must be created after special pages, so we can fill legal menu
+  include WithRealmAdministration
+  include WithRealmCommunication
+  include WithRealmEducation
+  include WithRealmResearch
+  include WithRealmUniversity
   include WithScreenshot
   include WithSecurity
   include WithShowcase
@@ -157,21 +161,6 @@ class Communication::Website < ApplicationRecord
 
   def to_s
     original_localization.to_s
-  end
-
-  # TODO deprecated
-  def git_path(website)
-    "data/website.yml"
-  end
-
-  # TODO deprecated
-  def can_have_git_file?
-    true
-  end
-
-  # TODO deprecated
-  def should_sync_to?(website)
-    website.id == id
   end
 
   def dependencies

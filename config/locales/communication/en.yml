@@ -668,6 +668,9 @@ en:
           education_program:
             slug: programs
             title: Programs
+          education_school:
+            slug: schools
+            title: Schools
           home:
             slug: ''
             title: Home
@@ -683,6 +686,12 @@ en:
           privacy_policy:
             slug: privacy-policy
             title: Privacy policy
+          research_journal:
+            slug: journals
+            title: Journals
+          research_laboratory:
+            slug: laboratories
+            title: Laboratories
           research_paper:
             slug: papers
             title: Papers

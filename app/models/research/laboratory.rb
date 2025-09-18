@@ -85,6 +85,10 @@ class Research::Laboratory < ApplicationRecord
     false
   end
 
+  def has_education_schools?
+    false
+  end
+
   def has_education_diplomas?
     false
   end
@@ -94,11 +98,23 @@ class Research::Laboratory < ApplicationRecord
     false
   end
 
+  def has_research_journals?
+    false
+  end
+
+  def has_research_laboratories?
+    true
+  end
+
   def has_research_papers?
     false
   end
 
   def has_research_volumes?
     false
+  end
+
+  def laboratories
+    Research::Laboratory.where(id: id)
   end
 end

@@ -32,7 +32,6 @@ class Education::Cohort < ApplicationRecord
   include LocalizableOrderByNameScope
   include Sanitizable
   include Searchable
-  include WebsitesLinkable
   include WithUniversity
 
   belongs_to  :school,
