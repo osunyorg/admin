@@ -1,5 +1,9 @@
 class Communication::Website::Page::AdministrationLocation < Communication::Website::Page
 
+  def design_options_block_template_kind
+    :locations
+  end
+
   def should_create_special_page?
     website.about && website.about&.respond_to?(:administration_locations)
   end
