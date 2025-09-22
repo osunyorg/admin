@@ -70,6 +70,15 @@ module AsLocalization
     slugs.compact_blank.join('/')
   end
 
+  def slug_with_published_ancestors_slugs
+    slugs = about.ancestors_and_self.map do |ancestor|
+      ancestor_l10n = ancestor.best_localization_for(language)
+      # If l10n is draft, no slug, else (published or no publication state) we return the slug
+      ancestor_l10n.try(:draft?) ? nil : ancestor_l10n.slug
+    end
+    slugs.compact_blank.join('/')
+  end
+
   protected
 
   def set_university

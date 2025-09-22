@@ -52,7 +52,7 @@ class Communication::Website::Permalink::Category < Communication::Website::Perm
 
   def substitutions
     {
-      slug: about.slug_with_ancestors_slugs
+      slug: about.slug_with_published_ancestors_slugs
     }
   end
 
