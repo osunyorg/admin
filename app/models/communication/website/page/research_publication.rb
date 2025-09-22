@@ -1,5 +1,9 @@
 class Communication::Website::Page::ResearchPublication < Communication::Website::Page
 
+  def is_hugo_index?
+    true
+  end
+
   def should_create_special_page?
     website.connected_publications.any?
   end

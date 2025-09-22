@@ -1,5 +1,9 @@
 class Communication::Website::Page::Organization < Communication::Website::Page
 
+  def is_hugo_index?
+    true
+  end
+
   def dependencies
     super +
     [website.config_default_languages] +
