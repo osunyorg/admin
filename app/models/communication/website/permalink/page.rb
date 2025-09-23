@@ -34,7 +34,7 @@ class Communication::Website::Permalink::Page < Communication::Website::Permalin
 
   def substitutions
     {
-      slug: about.slug_with_published_ancestors_slugs
+      slug: about.slug_with_ancestors_slugs
     }
   end
 

@@ -63,18 +63,16 @@ module AsLocalization
 
   # standalone-category
   # parent-category/child-category
-  def slug_with_ancestors_slugs
-    slugs = about.ancestors_and_self.map do |ancestor|
-      ancestor.best_localization_for(language).slug
-    end
-    slugs.compact_blank.join('/')
-  end
-
-  def slug_with_published_ancestors_slugs
+  def slug_with_ancestors_slugs(exclude_draft: true)
     slugs = about.ancestors_and_self.map do |ancestor|
       ancestor_l10n = ancestor.best_localization_for(language)
-      # If l10n is draft, no slug, else (published or no publication state) we return the slug
-      ancestor_l10n.try(:draft?) ? nil : ancestor_l10n.slug
+      if exclude_draft && ancestor_l10n.try(:draft?)
+        # If l10n is draft, no slug
+        nil
+      else
+        # otherwise (published or no publication state) we return the slug
+        ancestor_l10n.slug
+      end
     end
     slugs.compact_blank.join('/')
   end

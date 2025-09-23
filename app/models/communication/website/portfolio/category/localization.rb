@@ -46,7 +46,7 @@ class Communication::Website::Portfolio::Category::Localization < ApplicationRec
   end
 
   def git_path_relative
-    "projects_categories/#{slug_with_ancestors_slugs}/_index.html"
+    "projects_categories/#{slug_with_ancestors_slugs(exclude_draft: false)}/_index.html"
   end
 
   protected

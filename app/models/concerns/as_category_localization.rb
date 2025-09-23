@@ -46,8 +46,6 @@ module AsCategoryLocalization
   end
 
   def hugo_slug_in_website(website)
-    # HELP: slug_with_published_ancestors_slugs
-    # seb : je sais pas les implications
     slug_with_ancestors_slugs
   end
 end

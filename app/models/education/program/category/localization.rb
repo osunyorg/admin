@@ -31,7 +31,7 @@ class Education::Program::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
 
   def git_path_relative
-    "programs_categories/#{slug_with_ancestors_slugs}/_index.html"
+    "programs_categories/#{slug_with_ancestors_slugs(exclude_draft: false)}/_index.html"
   end
 
 end

@@ -90,7 +90,7 @@ class Communication::Website::Permalink < ApplicationRecord
     return '' if special_page.nil?
     page_l10n = special_page.localization_for(language)
     return '' if page_l10n.nil?
-    '/' + page_l10n.slug_with_published_ancestors_slugs
+    '/' + page_l10n.slug_with_ancestors_slugs
   end
 
   # Doit être surchargé dans les classes par type, comme `Communication::Website::Permalink::Post`
