@@ -48,7 +48,7 @@ class Communication::Website::Page::Category::Localization < ApplicationRecord
   end
 
   def git_path_relative
-    "pages_categories/#{slug_with_ancestors_slugs(exclude_draft: false)}/_index.html"
+    "pages_categories/#{slug_with_ancestors_slugs_with_draft}/_index.html"
   end
 
   protected

@@ -32,7 +32,7 @@ class University::Person::Category::Localization < ApplicationRecord
   include AsCategoryLocalization
 
   def git_path_relative
-    "persons_categories/#{slug_with_ancestors_slugs(exclude_draft: false)}/_index.html"
+    "persons_categories/#{slug_with_ancestors_slugs_with_draft}/_index.html"
   end
 
 end
