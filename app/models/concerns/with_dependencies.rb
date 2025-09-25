@@ -100,7 +100,7 @@ module WithDependencies
   def dependency_published?(dependency)
     if dependency.respond_to?(:published?)
       # Certains objets sont des index Hugo, et sont là même s'ils ne sont pas publiés 
-      dependency.published? || dependency.try(:is_hugo_index?)
+      dependency.published? || dependency.try(:about).try(:is_hugo_index?)
     else
       true
     end
