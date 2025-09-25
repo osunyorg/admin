@@ -48,7 +48,7 @@ class Communication::Website::Jobboard::Category::Localization < ApplicationReco
   end
 
   def git_path_relative
-    "jobs_categories/#{slug_with_ancestors_slugs_with_draft}/_index.html"
+    "jobs_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   protected

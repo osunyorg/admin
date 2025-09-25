@@ -49,7 +49,7 @@ class Communication::Website::Agenda::Category::Localization < ApplicationRecord
   end
 
   def git_path_relative
-    "events_categories/#{slug_with_ancestors_slugs_with_draft}/_index.html"
+    "events_categories/#{slug_with_ancestors_slugs}/_index.html"
   end
 
   protected

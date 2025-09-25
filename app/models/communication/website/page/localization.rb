@@ -109,7 +109,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
     if about.is_special_page? && about.respond_to?(:git_path_relative)
       about.git_path_relative
     else
-      ['pages', slug_with_ancestors_slugs_with_draft, '_index.html'].compact_blank.join('/')
+      ['pages', slug_with_ancestors_slugs, '_index.html'].compact_blank.join('/')
     end
   end
 
