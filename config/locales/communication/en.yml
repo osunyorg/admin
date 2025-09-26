@@ -681,8 +681,8 @@ en:
             slug: organizations
             title: Organizations
           person:
-            slug: team
-            title: Team
+            slug: persons
+            title: Persons
           privacy_policy:
             slug: privacy-policy
             title: Privacy policy
@@ -748,11 +748,11 @@ en:
               diploma: Specific diploma
               diplomas: Diplomas index
               location: Location (campus)
-              organizations: Third parties index
+              organizations: Organizations index
               page: Specific Page
               paper: Specific research paper
               papers: Research papers index
-              persons: Staff
+              persons: Persons
               post: Specific news
               posts: News index
               program: Specific program
