@@ -1,5 +1,9 @@
 class Communication::Website::Page::EducationProgram < Communication::Website::Page
 
+  def design_options_block_template_kind
+    :programs
+  end
+
   def should_create_special_page?
     website.about && website.about&.respond_to?(:programs)
   end
