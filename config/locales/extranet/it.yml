@@ -1,0 +1,50 @@
+it:
+  extranet:
+    account:
+      edit: Modifica il mio account
+      edit_personal_data: Modifica il mio profilo
+      experiences:
+        create_new_html: L'organizzazione <b>%{name}</b> non esiste, desideri <a class='btn btn-primary' href='%{url}'>crearla</a>?
+      logout: Disconnessione
+      my: Il mio account
+      updated: Aggiornamento effettuato
+    contacts:
+      organizations:
+        people: Membri di questa organizzazione
+      persons:
+        experiences: Organizzazioni di cui la persona fa parte
+      search:
+        home: Cerca nella directory
+        placeholder: Inserisci qui la tua ricerca
+        submit: Cerca
+        title: Ricerca
+    data: Informazioni
+    errors:
+      email_not_allowed: non è autorizzato ad accedere a questo extranet.
+      email_not_allowed_with_contact: non è autorizzato ad accedere a questo extranet. Contatta %{contact} per saperne di più.
+    experiences:
+      new: Aggiungi un'esperienza
+      search_organization: Cerca per nome o SIREN
+      title: Percorso
+    features: Funzionalità
+    home:
+      recent_cohorts: Promozioni recenti
+      recent_experiences: Movimenti recenti
+      welcome: Benvenuto!
+    library:
+      download: Scarica
+      reset: Reimposta
+    menu: Menu
+    organization:
+      experiences: Alumni in questa organizzazione
+    osuny_html:
+      <a href="https://www.osuny.org" target="_blank" rel="noreferer">Sviluppato con ♥ e con Osuny</a>
+    personal_data:
+      edit: Modifica
+      title: I miei dati personali
+      updated: Aggiornamento dei dati personali effettuato!
+    posts:
+      home: Notizie recenti
+      read_post: Leggi l'articolo
+    search:
+      no_results: Nessun risultato

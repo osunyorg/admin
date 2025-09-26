@@ -1,0 +1,210 @@
+it:
+  activemodel:
+    models:
+      education: Istruzione
+  activerecord:
+    attributes:
+      education/academic_year:
+        year: Anno
+      education/cohort:
+        alumni: Alumni
+        program: Formazione
+        school: Scuola
+        year: Anno
+      education/diploma:
+        certification: Controllo statale
+        ects: Crediti ECTS
+        level: Livello
+        programs: Formazioni
+      education/diploma/localization:
+        accessibility: Accessibilità
+        contacts: Contatti
+        duration: Durata
+        evaluation: Modalità di valutazione
+        name: Nome
+        other: Altro
+        pedagogy: Metodi utilizzati
+        prerequisites: Prerequisiti
+        pricing: Costi
+        pricing_apprenticeship: Costi dell'apprendistato
+        pricing_continuing: Costi della formazione continua
+        pricing_initial: Costi della formazione iniziale
+        registration: Modalità e tempi di accesso
+        results: Indicatori di risultati
+        short_name: Nome abbreviato
+        slug: Identificativo
+      education/program:
+        apprenticeship: Apprendistato
+        capacity: Capacità
+        continuing: Formazione continua
+        diploma: Diploma
+        ects: Crediti ECTS
+        initial: Formazione iniziale
+        locations: Campus
+        qualiopi_certified: Formazione certificata Qualiopi
+        roles: Ruoli
+        schools: Scuole che offrono questa formazione
+        teachers: Insegnanti
+        team: Team
+      education/program/localization:
+        accessibility: Accessibilità
+        contacts: Contatti
+        content: Contenuti della formazione
+        downloadable_summary: Documento di sintesi scaricabile
+        duration: Durata
+        evaluation: Modalità di valutazione
+        featured_image: Immagine in evidenza
+        featured_image_alt: Testo alternativo
+        is_draft: Bozza
+        is_published: Pubblicata
+        logo: Logo della formazione
+        main_information: Informazioni essenziali
+        name: Nome
+        objectives: Obiettivi
+        opportunities: Sbocchi professionali
+        other: Altro
+        pedagogy: Metodi utilizzati
+        prerequisites: Prerequisiti
+        presentation: In breve
+        pricing: Costi
+        pricing_apprenticeship: Costi dell'apprendistato
+        pricing_continuing: Costi della formazione continua
+        pricing_initial: Costi della formazione iniziale
+        published: Pubblicata?
+        qualiopi_text: Dettagli della certificazione
+        registration: Modalità e tempi di accesso
+        registration_url: Link di iscrizione (URL)
+        results: Indicatori di risultati
+        short_name: Nome abbreviato
+        slug: Identificativo
+        url: Sito Web
+      education/school:
+        address: Indirizzo
+        administrators: Team amministrativo
+        city: Città
+        country: Paese
+        locations: Campus
+        phone: Telefono
+        programs: Formazioni erogate
+        roles: Membri del team
+        websites: Siti Web associati
+        zipcode: CAP
+      education/school/localization:
+        name: Nome
+        url: Sito Web
+    models:
+      education/academic_year:
+        one: Anno
+        other: Anni
+      education/cohort:
+        one: Promozione
+        other: Promozioni
+      education/diploma:
+        one: Diploma
+        other: Diplomi
+      education/program:
+        one: Formazione
+        other: Formazioni
+      education/program/category:
+        one: Categoria
+        other: Categorie
+      education/school:
+        one: Scuola
+        other: Scuole
+      university/person/localization/teacher:
+        one: Insegnante
+        other: Insegnanti
+  admin:
+    education:
+      diplomas:
+        certification:
+          none: Nessuna certificazione
+        fields_for_programs: I campi sottostanti servono come valore di base per le formazioni
+      programs:
+        categories:
+          root_name: Offerta formativa
+        publication: Pubblicazione
+        submenu: "Attualmente ti trovi nel riepilogo di una formazione. Per maggiore semplicità, ogni formazione è suddivisa in più pagine. Queste pagine sono accessibili tramite il menu in alto nella pagina e corrispondono alle sezioni nei siti Web. Per maggiore praticità, questa pagina di riepilogo riprende questo menu di seguito."
+        teacher:
+          no_teaching: Nessun insegnamento
+          show_person_html: Questa pagina mostra solo le missioni di insegnamento. <br>Se vuoi vedere o modificare le informazioni sulla persona, clicca sul link sottostante.
+        tree:
+          title: Albero
+        view_as_list: Visualizza come elenco
+        view_as_tree: Visualizza come albero
+      schools:
+        roles:
+          none: Nessun ruolo definito
+  education:
+    description:
+      parts:
+        diploma:
+          description: Presentazione dei diplomi e delle loro caratteristiche
+          title: Diplomi
+        program:
+          description: Presentazione esaustiva delle formazioni, dei loro contenuti, modalità pedagogiche e prospettive
+          title: Formazioni
+        school:
+          description: Presentazione delle scuole, dei loro recapiti, insegnamenti, team e informazioni amministrative
+          title: Scuole
+        teacher:
+          description: Presentazione degli insegnanti, con la loro biografia e i loro insegnamenti nelle diverse formazioni
+          title: Insegnanti
+      source: Olivier Reboul, La philosophie de l'éducation, 2018
+      text_html: L'educazione è l'insieme dei processi e dei procedimenti che permettono a ogni bambino umano di accedere progressivamente alla cultura, l'accesso alla cultura essendo ciò che distingue l'uomo dall'animale.
+      title: Educazione
+    manage_programs: Gestisci le formazioni
+    manage_roles: Gestisci i ruoli
+    manage_teachers: Gestisci gli insegnamenti
+    number_of_programs: Numero di formazioni
+    program:
+      parts:
+        admission:
+          hint: Modalità amministrative di accesso alla formazione
+          label: Ammissione
+        certification:
+          hint: Certificazione legale (Qualiopi)
+          label: Certificazione
+        pedagogy:
+          hint: Modalità di insegnamento e di valutazione, presentazione del team pedagogico, sbocchi professionali e risultati ottenuti dagli ex studenti
+          label: Pedagogia
+      registration_scheme: Regime di iscrizione
+    roles:
+      one: Ruolo
+      other: Ruoli
+    schools:
+      manage_roles: Gestisci il team
+    teachings: Insegnamenti
+  enums:
+    education:
+      diploma:
+        level:
+          doctor: Dottorato (Bac + 8)
+          first_year: Bac + 1
+          fourth_year: Bac + 4
+          high: Liceo
+          master: Master (Bac + 5)
+          not_applicable: Non applicabile
+          primary: Scuola primaria
+          second_year: Bac + 2
+          secondary: Scuola secondaria di primo grado
+          third_year: Laurea (Bac + 3)
+  simple_form:
+    hints:
+      education_diploma:
+        duration: La durata può essere espressa in ore o in giorni. Può anche essere forfettizzata o stimata.
+        ects: European Credits Transfer System
+      education_program:
+        accessibility: Condizioni di accoglienza e di accesso dei pubblici in situazione di handicap (locali, adattamento dei mezzi della prestazione).
+        capacity: Numero di posti disponibili per promozione
+        duration: La durata può essere espressa in ore o in giorni. Può anche essere forfettizzata o stimata.
+        ects: European Credits Transfer System
+        evaluation: Mezzi utilizzati per misurare con criteri oggettivi le acquisizioni del beneficiario durante e/o alla fine della prestazione.
+        objectives: "Enunciazione delle attitudini e competenze, mirate e valutabili, che saranno acquisite nel corso della prestazione. Attitudine: capacità di applicare un sapere e di utilizzare un saper fare per realizzare compiti e risolvere problemi. Competenze: capacità comprovata di mettere in atto saperi, saper fare e disposizioni personali, sociali o metodologiche in situazioni di lavoro o di studio/formazione, per lo sviluppo professionale o personale."
+        pedagogy: Modalità pedagogiche e/o mezzi e/o strumenti utilizzati per portare a termine la prestazione erogata.
+        prerequisites: Prerequisiti necessari o indispensabili per beneficiare di una prestazione determinata. L'assenza di prerequisiti deve essere menzionata.
+        pricing: Prezzo della prestazione o condizioni tariffarie.
+        registration: "Tempo di accesso: durata stimata tra la richiesta del beneficiario e l'inizio della prestazione."
+    include_blanks:
+      defaults:
+        program: "Seleziona una formazione"

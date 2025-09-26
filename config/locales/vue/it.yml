@@ -1,0 +1,52 @@
+it:
+  vue:
+    changes:
+      cancel: Annulla
+      save: Salva le modifiche
+    cropperModal:
+        cancel: Annulla
+        rotate: Ruota l'immagine
+        title: Ritaglia l'immagine
+        validate: Convalida
+    mediaPicker:
+      alt:
+        hint: Questo testo è essenziale per l'accessibilità. Se l'immagine fornisce un'informazione importante, è necessario scrivere qui questa informazione. Se l'informazione è già presente altrove nella pagina, o se l'immagine è puramente decorativa, è necessario lasciare il testo alternativo vuoto, per evitare di inquinare la navigazione vocale.
+        label: Testo alternativo
+      cloud:
+        button: Importa (Unsplash & Pexels)
+        next: Immagini successive
+        nothing: Nessun risultato per questa ricerca
+        placeholder: Digita la tua ricerca
+        previous: Immagini precedenti
+        search: Cerca
+        title: Ricerca immagine
+      credit:
+        hint: Il credito fotografico deve essere indicato, nel rispetto del diritto d'autore.
+        label: Credito
+      imageUploader:
+        button: Invia un'immagine
+        size:
+          close: Chiudi
+          text: "L'immagine inviata è troppo pesante, pesa :size Mo! Su Osuny, elaboriamo automaticamente le immagini di meno di :max Mo. Oltre questo peso, è necessario ridurre l'immagine prima di inviarla, ad esempio utilizzando uno strumento come <a href=\"https://www.iloveimg.com/fr\" target=\"_blank\" rel=\"noreferrer\">iLoveIMG</a>."
+          title: Immagine troppo pesante
+      medias:
+        button: Scegli dalla mediateca
+        collections: Collezioni
+        next: Immagini successive
+        nothing: Nessun risultato per questa ricerca
+        placeholder: Digita la tua ricerca
+        previous: Immagini precedenti
+        search: Cerca
+        title: Mediateca
+      remove: Rimuovi l'immagine
+      title: Immagine
+    timeSlots:
+      add: Aggiungi una fascia oraria
+      datetime:
+        label: Orario
+      duration:
+        label: Durata
+        custom: Durata personalizzata (in secondi)
+      place:
+        hint: Ad esempio "Aula magna" o "Fuori sede"
+        label: Luogo

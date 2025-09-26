@@ -1,0 +1,813 @@
+it:
+  accessibility:
+    transcription: Trascrizione
+  activemodel:
+    models:
+      communication: Comunicazione
+      communication/website/portfolio:
+        one: Portfolio
+        other: Portfolio
+  activerecord:
+    attributes:
+      communication/block:
+        html_class: Classe HTML
+        published: Pubblicato?
+        template: Tipo di blocco
+        title: Nome (facoltativo)
+      communication/extranet:
+        about: Argomento dell'extranet
+        about_: Extranet indipendente
+        about_Education::Program: Extranet di una formazione
+        about_Education::School: Extranet di una scuola
+        about_Research::Journal: Extranet di una rivista scientifica
+        about_Research::Laboratory: Extranet di un laboratorio
+        about_type: Tipo di extranet
+        color: Colore
+        default_language: Lingua predefinita
+        feature_alumni: Alumni
+        feature_contacts: Rubrica
+        feature_documents: Documenti
+        feature_jobs: Offerte di lavoro
+        feature_posts: Notizie
+        has_sso: Ha un SSO?
+        host: Dominio
+        sass: Stile personalizzato (in SASS)
+        sso_cert: Certificato
+        sso_inherit_from_university: SSO ereditato dall'Università
+        sso_mapping: Mapping
+        sso_name_identifier_format: Name Identifier Format
+        sso_target_url: URL di destinazione
+        upper_menu: Menu in alto (in HTML)
+      communication/extranet/connection:
+        connected: Connesso
+      communication/extranet/document:
+        category: Categoria
+        kind: Tipo
+      communication/extranet/document/category:
+        quantity: Quantità di documenti
+      communication/extranet/document/category/localization:
+        name: Nome
+      communication/extranet/document/kind:
+        quantity: Quantità di documenti
+      communication/extranet/document/kind/localization:
+        name: Nome
+      communication/extranet/document/localization:
+        file: File scaricabile
+        name: Nome
+        published: Pubblicato?
+        published_at: Data di pubblicazione
+      communication/extranet/localization:
+        cookies_policy: Politica sui cookie
+        favicon: Icona del browser (favicon)
+        home_sentence: Frase visualizzata sulla home
+        invitation_message: Messaggio di invito automatico
+        invitation_message_subject: Oggetto dell'e-mail
+        invitation_message_text: Testo dell'e-mail
+        logo: Logo
+        name: Nome
+        privacy_policy: Politica sulla privacy
+        published: Lingua pubblicata
+        registration_contact: E-mail di contatto per problemi di registrazione
+        sso_button_label: Etichetta del pulsante di connessione
+        terms: Condizioni d'uso
+      communication/extranet/post:
+        author: Autore/Autrice
+        category: Categoria
+      communication/extranet/post/category:
+        quantity: Quantità di notizie
+      communication/extranet/post/category/localization:
+        name: Nome
+      communication/extranet/post/localization:
+        featured_image: Immagine in evidenza
+        featured_image_alt: Testo alternativo
+        featured_image_credit: Credito
+        pinned: Messo in evidenza
+        published: Pubblicato?
+        published_at: Data di pubblicazione
+        slug: Identificativo
+        title: Titolo
+      communication/media:
+        collection: Collezione
+        height: Altezza
+        origin: Provenienza
+        original_byte_size: Peso
+        original_content_type: Tipo di contenuto
+        original_filename: Nome del file originale
+        original_uploaded_file: File originale
+        width: Larghezza
+      communication/media/collection/localization:
+        name: Nome
+      communication/media/localization:
+        internal_description: Descrizione interna
+        name: Nome
+      communication/website:
+        about: Argomento del sito
+        about_: Sito indipendente
+        about_Education::Program: Sito di formazione
+        about_Education::School: Sito di una scuola
+        about_Research::Journal: Sito di una rivista scientifica
+        about_Research::Laboratory: Sito di un laboratorio
+        about_type: Tipo di sito
+        access_token: Token di accesso
+        appearance: Aspetto
+        archive_content: Archiviare il contenuto?
+        autoupdate_theme: Aggiornamento automatico del tema Osuny
+        config_default_content_security_policy: Politiche di sicurezza per definire le CSP (CORS)
+        config_default_deuxfleurs_workflow: Azione di messa online Deuxfleurs
+        config_default_development_config: Configurazione di sviluppo
+        config_default_languages: Definizione delle lingue e delle configurazioni per ogni lingua
+        config_default_permalinks: Definizione dei permalink (obsoleto)
+        config_default_production_config: Configurazione di produzione, integrando le regole della cache
+        config_robots_txt: File robots.txt, indirizzato ai motori di ricerca
+        configs: File di configurazione
+        created_at: Creazione
+        default_language: Lingua predefinita
+        default_time_zone: Fuso orario predefinito
+        deployment_status_badge: Badge di stato della distribuzione
+        destination_websites: Siti in cui diffondere
+        deuxfleurs_hosting: Hosting con Deuxfleurs
+        deuxfleurs_identifier: Identificativo Deuxfleurs
+        feature_agenda: Agenda
+        feature_alerts: Avvisi
+        feature_alumni: Alumni
+        feature_hourly_publication: Programmazione all'ora
+        feature_jobboard: Offerte di lavoro
+        feature_portfolio: Portfolio
+        feature_posts: Notizie
+        features: Funzionalità
+        git_branch: Ramo
+        git_endpoint: Punto di accesso Git
+        git_provider: Fornitore Git
+        highlighted_in_showcase: Messo in evidenza nella vetrina
+        in_production: Sito in produzione
+        in_production_at: Data di messa in produzione
+        in_showcase: Presentare il sito nella vetrina
+        languages: Lingue
+        locked_at: Bloccato per i background jobs a
+        plausible_url: Pannello di controllo Plausible
+        repository: Repository
+        showcase_tags: Parole chiave
+        social: Social network
+        source_websites: Fonti di contenuti federate
+        university: Università
+        url: URL
+        years_before_archive_content: Numero di anni prima dell'archiviazione del contenuto
+      communication/website/agenda/event:
+        categories: Categorie
+        children: Eventi figli
+        dates: Date
+        day: Giorno
+        from_day: Giorno di inizio
+        parent: Evento padre
+        status: Stato
+        status_archive: Archivio
+        status_current: In corso
+        status_future: In arrivo
+        time_zone: Fuso orario
+        to_day: Giorno di fine
+      communication/website/agenda/event/localization:
+        featured_image: Immagine in evidenza
+        notes: Note
+        published: Pubblicato
+        subtitle: Sottotitolo
+        text: Informazioni pratiche
+        title: Titolo
+      communication/website/agenda/event/time_slot:
+        hour: Ora
+      communication/website/agenda/exhibition:
+        categories: Categorie
+        dates: Date
+        from_day: Giorno di inizio
+        status: Stato
+        status_archive: Archivio
+        status_current: In corso
+        status_future: In arrivo
+        time_zone: Fuso orario
+        to_day: Giorno di fine
+      communication/website/agenda/exhibition/localization:
+        featured_image: Immagine in evidenza
+        notes: Note
+        place: Luogo
+        published: Pubblicato
+        subtitle: Sottotitolo
+        text: Informazioni pratiche
+        title: Titolo
+      communication/website/alert:
+        kind: Tipo di avviso
+      communication/website/alert/localization:
+        cta: Mostra un pulsante di azione
+        cta_label: Testo del pulsante di azione
+        cta_url: URL del pulsante di azione
+        published: Pubblicato
+        slug: Identificativo
+        title: Titolo
+      communication/website/connection:
+        direct_source: Fonte diretta
+        direct_source_id: Identificativo della fonte
+        direct_source_type: Tipo della fonte
+        id: Identificativo
+        indirect_object: Oggetto indiretto
+        indirect_object_id: Identificativo dell'oggetto
+        indirect_object_type: Tipo dell'oggetto
+        updated_at: Data di aggiornamento
+      communication/website/jobboard/job:
+        categories: Categorie
+        from_day: Data di pubblicazione
+        to_day: Data di chiusura
+      communication/website/jobboard/job/localization:
+        featured_image: Immagine in evidenza
+        published: Pubblicato
+        subtitle: Sottotitolo
+        title: Titolo
+      communication/website/localization:
+        default_image: Immagine predefinita
+        default_shared_image: Immagine di condivisione predefinita
+        name: Nome
+        published: Lingua pubblicata
+        social_email: "Indirizzo email"
+        social_facebook: "Facebook (privato, appartiene a Meta)"
+        social_github: "Github (privato, appartiene a Microsoft)"
+        social_instagram: "Instagram (privato, appartiene a Meta)"
+        social_linkedin: "LinkedIn (privato, appartiene a Microsoft)"
+        social_mastodon: Mastodon (libero)
+        social_peertube: Peertube (libero)
+        social_tiktok: "TikTok (privato)"
+        social_vimeo: "Vimeo (privato)"
+        social_x: "X, ex-Twitter (privato)"
+        social_youtube: "Youtube (privato, appartiene a Google)"
+      communication/website/git_file:
+        current_content: Contenuto attuale
+        current_path: Percorso attuale
+        current_sha: SHA attuale
+        desynchronized_at: Desincronizzato da
+        path: Percorso
+        previous_path: Percorso precedente
+        previous_sha: SHA precedente
+        status: Stato
+      communication/website/menu:
+        automatic: Automatico
+        identifier: Identificativo
+        items: Elementi
+        title: Titolo
+      communication/website/menu/item:
+        about: Obiettivo
+        children: Sotto-elementi
+        kind: Tipo
+        parent: Elemento padre
+        should_open_new_tab: Apri in una nuova scheda
+        title: Titolo
+        url: URL
+      communication/website/page:
+        categories: Categorie
+        children: Pagine figlie
+        full_width: Piena larghezza
+        parent: Pagina padre
+        related_category: Categoria collegata
+        special_page: Pagina speciale
+        website: Sito web
+      communication/website/page/localization:
+        breadcrumb_title: Nome visualizzato nel breadcrumb
+        featured_image: Immagine in evidenza
+        featured_image_alt: Testo alternativo
+        header_text: Titolo visualizzato in cima alla pagina
+        path: Percorso
+        published: Pubblicato?
+        slug: Identificativo
+        text: Testo principale della pagina
+        title: Titolo
+      communication/website/permalink:
+        path: Percorso
+      communication/website/portfolio/project:
+        categories: Categorie
+        full_width: Piena larghezza
+        year: Anno
+      communication/website/portfolio/project/localization:
+        featured_image: Immagine in evidenza
+        published: Pubblicato
+        subtitle: Sottotitolo
+        title: Titolo
+      communication/website/post:
+        authors: Autori/Autrici
+        categories: Categorie
+        full_width: Piena larghezza
+        website: Sito web
+      communication/website/post/localization:
+        category: Categoria
+        date: Data
+        featured_image: Immagine in evidenza
+        featured_image_alt: Testo alternativo
+        featured_image_credit: Credito
+        pinned: Messo in evidenza
+        published: Pubblicato?
+        published_at: Data di pubblicazione
+        reading_time: Tempo di lettura
+        slug: Identificativo
+        subtitle: Sottotitolo
+        text: Testo
+        title: Titolo
+        website: Sito web
+      communication/website/showcase/tag:
+        name: Nome
+        websites: Siti web
+    errors:
+      models:
+        communication/extranet:
+          attributes:
+            feature_alumni:
+              unavailable: non è disponibile per questo tipo di extranet
+            sso_mapping:
+              missing_email: non gestisce l'indirizzo email
+        communication/extranet/localization:
+          attributes:
+            published:
+              cannot_unpublished_default: non può essere annullata la pubblicazione (lingua predefinita)
+        communication/media:
+          attributes:
+            original_uploaded_file:
+              already_imported: già importato nella mediateca
+              too_big: troppo pesante!
+        communication/website/agenda/event:
+          attributes:
+            from_day:
+              events_before: deve essere prima dell'inizio del primo evento
+              time_slots_before: deve essere prima del primo intervallo di tempo
+            to_day:
+              events_after: deve essere dopo la fine dell'ultimo evento
+              time_slots_after: deve essere dopo l'ultimo intervallo di tempo
+              too_soon: deve essere dopo il giorno di inizio
+              too_long: deve essere inferiore a %{max_end_date}
+        communication/website/agenda/event/localization:
+          attributes:
+            slug:
+              numeric_only: non deve essere costituito solo da numeri
+        communication/website/localization:
+          attributes:
+            published:
+              cannot_unpublished_default: non può essere annullata la pubblicazione (lingua predefinita)
+    models:
+      communication/block:
+        one: Blocco di contenuto
+        other: Blocchi di contenuto
+      communication/extranet:
+        one: Extranet
+        other: Extranet
+      communication/extranet/document:
+        one: Documento
+        other: Documenti
+      communication/extranet/document/category:
+        one: Categoria
+        other: Categorie
+      communication/extranet/document/kind:
+        one: Tipo
+        other: Tipi
+      communication/extranet/post:
+        all: Tutte le notizie
+        one: Notizia
+        other: Notizie
+      communication/extranet/post/category:
+        one: Categoria
+        other: Categorie
+      communication/media:
+        one: Media
+        other: Media
+      communication/media/category:
+        one: Categoria
+        other: Categorie
+      communication/media/collection:
+        one: Collezione
+        other: Collezioni
+      communication/media/context:
+        one: Contesto di utilizzo
+        other: Contesti di utilizzo
+      communication/website:
+        one: Sito web
+        other: Siti web
+      communication/website/agenda/category:
+        one: Categoria
+        other: Categorie
+      communication/website/agenda/event:
+        one: Evento
+        other: Eventi
+      communication/website/agenda/event/time_slot:
+        one: Intervallo di tempo
+        other: Intervalli di tempo
+      communication/website/agenda/exhibition:
+        one: Esposizione
+        other: Esposizioni
+      communication/website/agenda/period/month:
+        one: Mese
+        other: Mesi
+      communication/website/agenda/period/year:
+        one: Anno
+        other: Anni
+      communication/website/alert:
+        one: Avviso
+        other: Avvisi
+      communication/website/connection:
+        one: Connessione
+        other: Connessioni
+      communication/website/git_file:
+        one: File GIT
+        other: File GIT
+      communication/website/git_file/layout:
+        one: Sovrapposizione HTML
+        other: Sovrapposizioni HTML
+      communication/website/git_file/orphan:
+        one: File orfano
+        other: File orfani
+      communication/website/jobboard/category:
+        one: Categoria
+        other: Categorie
+      communication/website/jobboard/job:
+        one: Offerta di lavoro
+        other: Offerte di lavoro
+      communication/website/menu:
+        all: Tutti i menu
+        one: Menu
+        other: Menu
+      communication/website/menu/item:
+        one: Elemento
+        other: Elementi
+      communication/website/page:
+        all: Tutte le pagine
+        one: Pagina
+        other: Pagine
+      communication/website/page/category:
+        one: Categoria
+        other: Categorie
+      communication/website/portfolio/category:
+        one: Categoria
+        other: Categorie
+      communication/website/portfolio/project:
+        one: Progetto
+        other: Progetti
+      communication/website/post:
+        all: Tutte le notizie
+        one: Notizia
+        other: Notizie
+      communication/website/post/category:
+        all: Tutte le categorie
+        one: Categoria
+        other: Categorie
+      communication/website/showcase/tag:
+        one: Parola chiave
+        other: Parole chiave
+  admin:
+    communication:
+      author:
+        show_person_html: "Questa pagina mostra solo le ultime notizie scritte dalla persona, come autore o autrice. <br>Se vuoi vedere o modificare le informazioni sulla persona, clicca sul link qui sotto."
+      block:
+        copied: Il blocco è stato copiato negli appunti.
+        drag_and_drop: Trascina e rilascia
+        language_mismatch_alert: Il blocco non esiste in questa lingua.
+      extranet:
+        confirm_localization:
+          text_html: "La creazione di <i>%{about}</i> in %{language} richiede la traduzione dell'extranet <i>%{extranet}</i> in %{language}."
+          title: Conferma di traduzione
+        languages: Lingue
+      website:
+        agenda:
+          event:
+            create_child: Crea un evento figlio
+            localizations:
+              draft: Bozza
+          events:
+            formatted_time_zone: "Fuso orario: %{time_zone}"
+            none: Nessun evento ancora
+          exhibitions:
+            formatted_time_zone: "Fuso orario: %{time_zone}"
+            none: Nessuna esposizione ancora
+        alerts:
+          none: Nessun avviso ancora.
+        confirm_localization:
+          text_html: "La creazione di <i>%{about}</i> in %{language} richiede la traduzione del sito web <i>%{website}</i> in %{language}."
+          title: Conferma di traduzione
+        default_image: "L'immagine predefinita verrà utilizzata nelle pagine e nelle notizie che non hanno un'immagine, se il tema è impostato per visualizzare le immagini in tutti i casi."
+        default_shared_image: "Immagine di condivisione predefinita, 1200 pixel di larghezza è una buona base perché le reti hanno standard diversi."
+        editorial:
+          description: Tutto ciò che è legato al contenuto
+          label: Editoriale
+        federation:
+          label: Federazione di contenuti
+        git_file:
+          analysis:
+            destroy_all_on_git: Elimina tutti i file git
+            destroy_all_pending: Tutti i file sono contrassegnati per la distruzione alla prossima sincronizzazione
+            destroy_on_git: Elimina il file git
+            destroy_pending: Il file è contrassegnato per la distruzione alla prossima sincronizzazione
+            launch: Avvia un'analisi
+            launched: Analisi avviata
+            show_on_git: Mostra il file git
+            title: Analisi Git
+        jobboard:
+          jobs:
+            none: Nessuna offerta ancora
+        header:
+          cta:
+            button: Mostra un pulsante di azione nell'intestazione
+            label: Testo del pulsante di azione
+            url: URL del pulsante di azione
+        localizations:
+          fallback_hint_html: "Lasciare vuoto per utilizzare il valore predefinito: <i>%{master_value}</i>"
+          title: Internazionalizzazione
+        page:
+          localizations:
+            draft: Bozza
+            published: Pubblicata
+            published_status: Stato di pubblicazione
+        pages:
+          as_list: Visualizza come elenco
+          as_tree: Organizza l'albero
+          delete_special_page_notice: Impossibile eliminare questa pagina
+          duplicate_special_page_notice: Impossibile duplicare questa pagina
+          full_width_status: Piena larghezza
+          in: in
+          in_full_width: a piena larghezza
+          show: Visualizza la pagina
+          special_page: Pagina speciale
+          special_pages:
+            organization:
+              disconnect: Disconnetti
+              explicitly_connected: Organizzazioni direttamente connesse
+              explicitly_connected_hint: Puoi connettere direttamente le organizzazioni al sito web cercandole qui sotto. In ogni caso, tutte le organizzazioni menzionate nel sito saranno elencate qui sopra.
+              native:
+                zero: Questa pagina è una pagina speciale, che presenta nativamente le organizzazioni menzionate nel sito. Per ora, non ci sono organizzazioni nel sito.
+                one: Questa pagina è una pagina speciale, che presenta nativamente le organizzazioni menzionate nel sito. Per ora, c'è 1 organizzazione nel sito.
+                other: Questa pagina è una pagina speciale, che presenta nativamente le %{count} organizzazioni menzionate nel sito.
+            person:
+              disconnect: Disconnetti
+          structure: Pagine
+          with_children: "con come pagine figlie:"
+        permalinks:
+          creation_error: "Errore durante la creazione. Il percorso inserito è nel formato corretto?"
+        portfolio:
+          project:
+            localizations:
+              draft: Bozza
+          projects:
+            in: in %{categories}
+            none: Nessun progetto ancora
+        post:
+          localizations:
+            and_pinned: e messo in evidenza
+            draft: Bozza
+            pinned_status: Messa in evidenza
+            planned_on: Pubblicazione prevista il %{date}
+            published_on: Pubblicata il %{date}
+        posts:
+          by: da %{author}
+          in: in %{categories}
+        publish:
+          button: Pubblica
+          notice: Pubblicazione in corso, dovrebbe richiedere alcuni minuti per andare online.
+        redirects:
+          add_path: Aggiungi un reindirizzamento
+          button: Gestisci i reindirizzamenti
+          current_path: Percorso attuale
+          previous_paths: Reindirizzamenti (percorsi precedenti)
+          title: Gestisci i reindirizzamenti
+        see_showcase: Visualizza la vetrina
+        subnav:
+          structure: Albero
+        synchronize:
+          button: Sincronizza
+          running: La sincronizzazione è in corso, un po' di pazienza...
+        technical:
+          description: Tutto ciò che è legato alle impostazioni tecniche
+          label: Tecnico
+  communication:
+    authors:
+      one: Autore/Autrice
+      other: Autori/Autrici
+    description:
+      parts:
+        author:
+          description: Persone che scrivono notizie in siti web o Extranet
+          description_non_university: Persone che scrivono notizie in siti web o Extranet
+          title: Autori/Autrici
+        extranet:
+          description: Spazi di scambio sicuri dedicati agli utenti autenticati
+          description_non_university: Spazi di scambio sicuri dedicati agli utenti autenticati
+          title: Extranet
+        media:
+          description: Libreria di media che raggruppa tutti i file utilizzati nel sistema
+          description_non_university: Libreria di media che raggruppa tutti i file utilizzati nel sistema
+          title: Mediateca
+        website:
+          description: Spazi pubblici di diffusione di informazioni, sobri sul piano ecologico e accessibili alle persone con disabilità
+          description_non_university: Spazi pubblici di diffusione di informazioni, sobri sul piano ecologico e accessibili alle persone con disabilità
+          title: Siti web
+      source: Albert Jacquard, Petite philosophie à l'usage des non-philosophes, 1997
+      text_html: Comunicare è mettere in comune; e mettere in comune è l'atto che ci costituisce. Se si ritiene che questo atto sia impossibile, si rifiuta qualsiasi progetto umano.
+      title: Comunicazione
+    extranet:
+      post:
+        metadata:
+          and_pinned: e messa in evidenza
+          by: da %{author}
+          draft: Bozza
+          planned_on: Pubblicazione prevista il %{date}
+          published_on: Pubblicata il %{date}
+    manage_authors: Gestisci gli autori/autrici
+    number_of_posts: Numero di notizie
+    summary:
+      none: Non c'è ancora un riassunto
+    website:
+      advanced_options: Opzioni avanzate
+      analytics: Pubblico
+      git: Git
+      golive:
+        button: Metti in produzione
+        title: Messa in produzione
+      hosting: Hosting
+      menus:
+        automatic: Questo menu si costituisce automaticamente. <br>Ciò significa che riflette l'albero del sito. <br>Non appena desideri modificarlo, creando un elemento, l'automatismo si fermerà.
+        default_title:
+          legal: Informazioni legali
+          primary: Menu principale
+          social: Link social
+      pages:
+        defaults:
+          accessibility:
+            slug: accessibilite
+            title: Accessibilità
+          administration_location:
+            slug: campus
+            title: Campus
+          administrator:
+            slug: equipe-administrative
+            title: Squadra amministrativa
+          author:
+            slug: equipe-editoriale
+            title: Squadra editoriale
+          communication_agenda:
+            slug: agenda
+            title: Agenda
+          communication_agenda_archive:
+            slug: archives-evenements
+            title: Archivi degli eventi
+          communication_agenda_exhibition:
+            slug: expositions
+            title: Esposizioni
+          communication_agenda_exhibition_archive:
+            slug: archives-expositions
+            title: Archivi delle esposizioni
+          communication_jobboard:
+            slug: offres-d-emploi
+            title: Offerte di lavoro
+          communication_portfolio:
+            slug: projets
+            title: Progetti
+          communication_post:
+            slug: actualites
+            title: Notizie
+          education_academic_year:
+            slug: alumni
+            title: Alumni
+          education_diploma:
+            slug: diplomes
+            title: "Diplomi"
+          education_program:
+            slug: formations
+            title: "Formazioni"
+          education_school:
+            slug: ecoles
+            title: "Scuole"
+          home:
+            slug: ''
+            title: Accoglienza
+          legal_term:
+            slug: mentions-legales
+            title: Note legali
+          organization:
+            slug: organisations
+            title: Organizzazioni
+          person:
+            slug: equipe
+            title: Squadra
+          privacy_policy:
+            slug: politique-de-confidentialite
+            title: Politica sulla privacy
+          research_journal:
+            slug: revues-scientifiques
+            title: Riviste scientifiche
+          research_laboratory:
+            slug: laboratoires
+            title: Laboratori
+          research_paper:
+            slug: papiers
+            title: Carte
+          research_publication:
+            slug: publications
+            title: Pubblicazioni
+          research_volume:
+            slug: volumes
+            title: Volumi
+          researcher:
+            slug: equipe-de-recherche
+            title: Squadra di ricerca
+          sitemap:
+            slug: plan-du-site
+            title: Mappa del sito
+          teacher:
+            slug: equipe-pedagogique
+            title: Squadra pedagogica
+      post:
+        localizations:
+          published: Pubblicata
+          unpublished: Non pubblicata
+      posts:
+        new_curation: Nuova cura
+        none: Non ci sono ancora notizie.
+        successful_batch_update: Le notizie sono state aggiornate
+      security: Sicurezza
+      see_all: Visualizza l'elenco completo (%{number} elementi)
+  curation:
+    already_imported: Articolo già importato
+    error: Errore durante la cura, assicurati di utilizzare un URL valido
+    label: URL dell'articolo da importare
+    placeholder: https://...
+  enums:
+    communication:
+      media:
+        origin:
+          pexels: Fototeca Pexels
+          unsplash: Fototeca Unsplash
+          upload: Invio diretto di file
+      website:
+        alert:
+          kind:
+            danger: Allerta rossa
+            info: Informazione
+            warning: Avviso
+        menu:
+          item:
+            kind:
+              administrators: Squadra amministrativa
+              authors: Squadra editoriale
+              blank: Titolo intermedio
+              category: Categoria di notizie
+              diploma: Diploma specifico
+              diplomas: Elenco dei diplomi
+              location: Sito (campus)
+              organizations: Elenco delle terze parti
+              page: Pagina specifica
+              paper: Carta specifica
+              papers: Elenco delle carte
+              persons: Squadra
+              post: Notizia specifica
+              posts: Elenco delle notizie
+              program: Formazione specifica
+              programs: Elenco delle formazioni
+              researchers: Squadra di ricerca
+              teachers: Squadra pedagogica
+              url: URL
+              volume: Volume specifico
+              volumes: Elenco dei volumi
+  notes:
+    label: Leggi la nota %{index}
+  server:
+    overrides:
+      file: File
+      websites: Numero di siti
+  simple_form:
+    hints:
+      communication_block:
+        html_class: Questo parametro è utile per codificare il sito. I valori inseriti vengono trasformati in parametri (senza accenti né maiuscole) e le classi generate sono visibili qui sotto.
+      communication_extranet:
+        favicon: 'File .png solo'
+        host: Senza il protocollo
+        sso_button_label: "Predefinito: Connettiti con SSO"
+      communication_website:
+        access_token_with_existing: Il tuo token di accesso Github o Gitlab confidenziale.<br>Lascia il campo vuoto per non modificarlo.
+        access_token_without_existing: Il tuo token di accesso Github o Gitlab confidenziale, da lasciare vuoto durante la creazione di un sito con Deuxfleurs.
+        archive_content: "Se selezioni questa casella, le notizie, gli eventi e le esposizioni verranno archiviati dopo il periodo definito. Puoi anche definire un contenuto come « perenne » in modo che non venga archiviato."
+        deployment_status_badge: "URL del badge: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
+        feature_agenda: Per condividere eventi
+        feature_alerts: Per visualizzare banner di avviso
+        feature_alumni: Per presentare pubblicamente gli alumni
+        feature_hourly_publication: Per programmare le notizie all'ora
+        feature_jobboard: Per condividere offerte di lavoro
+        feature_portfolio: Per presentare progetti
+        feature_posts: Per pubblicare notizie, come un media
+        source_websites: Scegli i siti web che potranno inviare contenuti a questo
+        git_branch: 'Lascia vuoto per il ramo predefinito'
+        git_endpoint: 'Lascia vuoto per i valori predefiniti (https://github.com o https://gitlab.com/api/v4)'
+        in_production: Seleziona questa casella una volta che il sito è stato distribuito su un dominio o un sottodominio dedicato (non *.osuny.site).
+        languages: 'Se selezioni una sola lingua, gli URL non saranno prefissati. Se ne selezioni più di una, il sito sarà considerato multilingue e quindi tutti gli URL saranno prefissati con la lingua (/fr, /en)'
+        plausible_url: Link di condivisione generato secondo la <a href="https://plausible.io/docs/shared-links" target="_blank">documentazione ufficiale Plausible</a>.
+        repository: Nella forma organizzazione/nome, ad esempio noesya/bordeauxmontaigne-iut, da lasciare vuoto durante la creazione di un sito con Deuxfleurs.
+        university: Attenzione, il cambio di università disconnetterà le persone e le organizzazioni che vengono utilizzate in altri siti e disconnetterà le persone dagli utenti o dalle utenti.
+        url: Lascia questo campo vuoto alla creazione del sito con Deuxfleurs, verrà riempito automaticamente.
+      communication_website_page:
+        breadcrumb_title: Se questo campo è vuoto, il titolo della pagina verrà utilizzato nel breadcrumb.
+        full_width: Sugli schermi grandi, la pagina a piena larghezza utilizzerà tutto lo spazio disponibile, il che è rilevante per l'evento di una pagina. Se la pagina non è a piena larghezza, lo spazio dedicato al contenuto sarà ridotto per facilitare la lettura e lo spazio libero potrà essere utilizzato per un sommario che faciliti la navigazione.
+        header_text: Per impostazione predefinita, questo testo sostituisce il titolo. In alcuni siti, viene visualizzato in aggiunta.
+        text: Questo campo è deprecato, il contenuto non verrà visualizzato sul sito.
+      communication_website_permalink:
+        path: "Deve essere un percorso URL. Esempio: /vecchio/percorso"
+      communication_website_portfolio_project:
+        full_width: Sugli schermi grandi, il progetto a piena larghezza utilizzerà tutto lo spazio disponibile.
+      communication_website_post:
+        full_width: Sugli schermi grandi, la notizia a piena larghezza utilizzerà tutto lo spazio disponibile.
+        text: Questo campo è deprecato, il contenuto non verrà visualizzato sul sito.

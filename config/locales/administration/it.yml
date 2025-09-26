@@ -1,0 +1,65 @@
+it:
+  activemodel:
+    models:
+      administration/qualiopi: Qualiopi
+  activerecord:
+    attributes:
+      administration/location:
+        address: Indirizzo
+        city: Città
+        country: Paese
+        phone: Telefono
+        programs: Formazioni erogate
+        schools: Scuole
+        websites: Siti Web associati
+        zipcode: CAP
+      administration/location/localization:
+        address_additional: Complemento d'indirizzo
+        address_name: Nome dell'indirizzo
+        featured_image: Immagine in evidenza
+        name: Nome
+        url: Sito Web
+      administration/qualiopi/criterion:
+        description: Descrizione
+        name: Nome
+        number: Numero
+      administration/qualiopi/indicator:
+        criterion: Criterio
+        description: Descrizione
+        glossary: Glossario
+        level_expected: Livello atteso
+        name: Nome
+        non_conformity: Non conformità
+        number: Numero
+        proof: Elementi di prova
+        requirement: Obblighi specifici
+    models:
+      administration/location:
+        one: Luogo
+        other: Luoghi
+      administration/qualiopi/criterion:
+        one: Criterio
+        other: Criteri
+      administration/qualiopi/indicator:
+        one: Indicatore
+        other: Indicatori
+  admin:
+    administration:
+      alumnus:
+        no_cohort: La persona non è ancora un alumnus
+        show_person_html: Questa pagina mostra solo le vecchie promozioni della persona. <br>Se vuoi vedere o modificare le informazioni sulla persona, clicca sul link
+  administration:
+    description:
+      parts:
+        alumnus:
+          description: Presentazione degli studenti e delle studentesse che hanno studiato nelle diverse formazioni
+          title: Alumni
+        location:
+          description: Gestione dei diversi luoghi di formazione e di ricerca
+          title: Luoghi
+        qualiopi:
+          description: Aiuto alla verifica della conformità dell'offerta di formazione con la norma Qualiopi
+          title: Qualiopi
+      source: Codice delle relazioni tra il pubblico e l'amministrazione
+      text_html: L'amministrazione, nelle sue molteplici forme, si definisce principalmente per le sue attività al servizio dell'interesse generale. L'amministrazione agisce nell'interesse generale e rispetta il principio di legalità. È tenuta all'obbligo di neutralità e al rispetto del principio di laicità. Si conforma al principio di uguaglianza e garantisce a ciascuno un trattamento imparziale.
+      title: Amministrazione

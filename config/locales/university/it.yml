@@ -1,0 +1,290 @@
+it:
+  activerecord:
+    attributes:
+      university:
+        address: Indirizzo
+        city: Città
+        contribution_amount: Importo
+        country: Paese
+        default_github_access_token: Token di accesso Github predefinito
+        default_language: Lingua predefinita
+        has_sso: Ha un SSO?
+        identifier: Identificatore
+        invoice_date: Data del contributo
+        is_really_a_university: Realmente un'università
+        languages: Lingue
+        logo: Logo
+        name: Nome
+        private: Istituto privato
+        public: Pubblico
+        public_or_private: Pubblico/privato
+        sms_sender_name: Nome del mittente SMS
+        sso_button_label: Etichetta del pulsante di connessione
+        sso_cert: Certificato
+        sso_mapping: Mapping
+        sso_name_identifier_format: Formato identificatore nome
+        sso_target_url: URL di destinazione
+        url: 'URL'
+        zipcode: CAP
+      university/app:
+        name: Nome
+        token: Token segreto
+      university/organization:
+        address: Indirizzo
+        categories: Categorie
+        city: Città
+        country: Paese
+        digital: Coordinate digitali
+        email: Email
+        geolocation: Coordinate geografiche
+        kind: Tipo
+        legal: Informazioni legali
+        map: Mappa
+        phone: Telefono
+        physical: Coordinate fisiche
+        siren: Numero SIREN
+        zipcode: CAP
+      university/organization/localization:
+        address_additional: Complemento d'indirizzo
+        address_name: Nome dell'indirizzo
+        linkedin: LinkedIn
+        logo: Logo su sfondo chiaro (predefinito)
+        logo_on_dark_background: Logo su sfondo scuro (opzionale)
+        long_name: Nome completo
+        name: Nome
+        text: Testo
+        twitter: Twitter
+        url: Sito web
+      university/person:
+        abilities: Responsabilità
+        address: Indirizzo
+        address_visibility: Visibilità dell'indirizzo
+        administration: Personale amministrativo
+        alumnus: Alunno
+        author: Autore/Autrice
+        birthdate: Compleanno
+        categories: Categorie
+        city: Città
+        communication_website_posts: Notizie
+        contacts: Coordinate
+        country: Paese
+        education_programs: Formazioni
+        email: Email
+        email_visibility: Visibilità dell'email
+        essentials: Informazioni essenziali
+        gender: Genere
+        genders:
+          female: Femminile
+          male: Maschile
+          non_binary: Non binario
+        habilitation: Può dirigere la ricerca?
+        hal_doc_identifier: Identificatore doc
+        hal_form_identifier: Identificatore form
+        hal_person_identifier: Identificatore persona
+        is_administration: Personale amministrativo
+        is_alumnus: Alunno
+        is_author: Autore/Autrice
+        is_researcher: Ricercatore/Ricercatrice
+        is_teacher: Insegnante
+        linkedin_visibility: Visibilità dell'URL LinkedIn
+        mastodon_visibility: Visibilità del nome utente Mastodon
+        phone_mobile: Telefono cellulare
+        phone_mobile_visibility: Visibilità del telefono cellulare
+        phone_personal: Telefono personale
+        phone_personal_visibility: Visibilità del telefono personale
+        phone_professional: Telefono professionale
+        phone_professional_visibility: Visibilità del telefono professionale
+        picture: Foto del profilo
+        research_journal_papers: Articoli
+        research_laboratories: Laboratori di ricerca
+        researcher: Ricercatore/Ricercatrice
+        roles: Ruoli
+        socials: Social network
+        teacher: Insegnante
+        tenure: Titolare?
+        twitter_visibility: Visibilità del nome utente Twitter
+        user: Utente
+        zipcode: CAP
+      university/person/experience:
+        description: Descrizione
+        edit: Modifica l'esperienza
+        from_year: Anno di inizio
+        new: Aggiungi un'esperienza
+        organization: Organizzazione
+        organization_name: Organizzazione
+        to_year: Anno di fine
+      university/person/involvement:
+        person: Persona
+        target_id: ''
+      university/person/involvement/localization:
+        description: Missione (in questo contesto)
+      university/person/localization:
+        biography: Biografia
+        first_name: Nome
+        last_name: Cognome
+        linkedin: LinkedIn (URL)
+        mastodon: Mastodon (URL)
+        name: Nome
+        picture_credit: Credito
+        slug: Slug
+        twitter: Twitter (nome utente)
+        url: Sito web
+      university/role:
+        people: Persone
+      university/role/localization:
+        description: Descrizione del ruolo
+    errors:
+      models:
+        university:
+          attributes:
+            sso_mapping:
+              missing_email: non gestisce l'indirizzo email
+    models:
+      university:
+        one: Università
+        other: Università
+      university/app:
+        one: App
+        other: App
+      university/organization:
+        one: Organizzazione
+        other: Organizzazioni
+      university/organization/category:
+        one: Categoria
+        other: Categorie
+      university/person:
+        one: Persona
+        other: Persone
+      university/person/alumnus:
+        one: Alunno
+        other: Alunni
+      university/person/category:
+        one: Categoria
+        other: Categorie
+      university/person/experience:
+        one: Esperienza professionale
+        other: Esperienze professionali
+      university/person/involvement:
+        one: Implicazione
+        other: Implicazioni
+      university/person/localization/author:
+        one: Autore/Autrice
+        other: Autori/Autrici
+      university/role:
+        one: Ruolo
+        other: Ruoli
+  enums:
+    university:
+      organization:
+        kind:
+          company: Azienda
+          government: Struttura governativa
+          non_profit: Associazione
+          public_organization: Struttura pubblica
+          collective: Collettivo
+  simple_form:
+    hints:
+      university:
+        default_github_access_token_with_existing: Il tuo token di accesso Github confidenziale, utilizzato per impostazione predefinita per i siti creati con l'hosting Deuxfleurs.<br>Lasciare il campo vuoto per non modificarlo.
+        default_github_access_token_without_existing: Il tuo token di accesso Github confidenziale, utilizzato per impostazione predefinita per i siti creati con l'hosting Deuxfleurs.<br>Se vuoto, un token viene definito a livello di applicazione.
+        is_really_a_university: Deselezionare questa casella nasconde i 5 regni.
+        languages: "Queste lingue sono attualmente utilizzate senza i siti web: %{used_languages}"
+        sms_sender_name: "Massimo 11 caratteri. Solo caratteri alfanumerici ([A-Z][a-z][0-9])."
+        sso_button_label: "Per impostazione predefinita: Connettiti con SSO"
+      university_organization:
+        description: Se questo campo è vuoto, verrà utilizzato l'inizio del testo principale.
+        logo: Questo logo deve contrastare su uno sfondo chiaro (bianco o grigio chiaro)
+        logo_on_dark_background: Questo logo deve contrastare su uno sfondo scuro (nero o grigio scuro).
+      university_person:
+        description: Se questo campo è vuoto, verrà utilizzata la "descrizione breve". Se è anche vuoto, verrà utilizzato l'inizio del testo principale.
+        habilitation: "Possiede un'abilitazione a dirigere la ricerca (HDR)."
+        is_administration: "Svolge compiti amministrativi."
+        is_alumnus: "Studia o ha studiato presso l'istituto."
+        is_author: "Scrive articoli per i siti."
+        is_researcher: "Scrive articoli in riviste scientifiche."
+        is_teacher: "Insegna in corsi di formazione."
+        linkedin: "Esempio: https://www.linkedin.com/in/osuny"
+        mastodon: "Esempio: @osuny"
+        personal_data_visibility: "Privato: visibile solo in admin. Ristretto: visibile sugli extranet. Pubblico: visibile sui siti web."
+        tenure: "Da distinguere da una persona a contratto."
+        twitter: "Esempio: osuny"
+      university_person_experience:
+        description: "Es: Responsabile di progetto, Assistente alla comunicazione, Giornalista..."
+        from_year: "In carica dal..."
+        organization_name: "Scegli l'organizzazione se esiste, cercandola per nome o SIREN. Se non esiste ancora, creala semplicemente inserendo il suo nome."
+        to_year: "Se sei ancora in questa posizione, lascia vuoto"
+    include_blanks:
+      defaults:
+        organization: Seleziona un'organizzazione
+        school: Seleziona una scuola
+        year: Seleziona un anno
+  university:
+    alumni:
+      cohorts:
+        import_btn: Importa promozioni
+        import_hint_html: "Il campo <i>school</i> deve contenere l'id interno della scuola.<br>Il campo <i>program</i> deve contenere l'id interno del corso di formazione."
+        title: Importazioni di promozioni
+    apps:
+      regenerate_token: Rigenera il token
+      token_display_notice: Assicurati di archiviare il tuo token segreto in modo sicuro. Non potrai rivederlo!
+      token_successfully_regenerated: Il token è stato rigenerato correttamente.
+    description:
+      parts:
+        organization:
+          description: Persona giuridica legata a un'università, una componente, un laboratorio, ecc.
+          description_non_university: Persona giuridica, che si tratti di un'organizzazione pubblica, di un'organizzazione non governativa (associazione ad esempio) o di un'azienda
+          title: Organizzazioni
+        person:
+          description: Persona fisica legata a un'università, una componente, un laboratorio, ecc.
+          description_non_university: Persona fisica, non necessariamente legata a un account utente di Osuny
+          title: Persone
+        user:
+          description: Persona che utilizza Osuny, dotata di un account autenticato
+          description_non_university: Persona che utilizza Osuny, dotata di un account autenticato
+          title: Utenti
+      source: Dizionario dell'Académie Française
+      text_html: Inventario, censimento di dati e informazioni, secondo un ordine metodico che ne consente la facile reperibilità; il supporto materiale di questo inventario.
+      title: Repertorio
+    internal_key: Chiave interna
+    manage_cohorts: Gestisci le promozioni
+    manage_experiences: Gestisci le esperienze professionali
+    organization:
+      employees: Dipendenti
+      import_hint_html: "I valori possibili per <i>kind</i> sono: company, non_profit, government, public_organization, collective.<br>I campi <i>siren</i>, <i>nic</i>, <i>zipcode</i> e <i>phone</i> devono essere in formato testo, non numero.<br>Il campo <i>country</i> deve contenere il codice ISO 3166 del paese, su 2 caratteri maiuscoli (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">elenco</a>)"
+      logo: Logo
+      search: Cerca per nome dell'organizzazione
+    person:
+      administrator_roles: Ruoli amministrativi
+      experience:
+        no_organization_hint_html: "Se l'azienda non compare nell'elenco, puoi <a href=\"%{url}\">crearla</a>"
+        no_organization_hint_no_access_html: "Se l'azienda non compare nell'elenco, è necessario richiederne la creazione"
+        period: Periodo
+      experiences:
+        import_btn: Importa esperienze
+        import_hint_html: "I campi <i>company_siren</i> e <i>company_nic</i> devono essere in formato testo, non numero.<br>Il campo <i>experience_from</i> deve essere l'anno di inizio dell'esperienza.<br>Il campo <i>experience_to</i> è l'anno di fine dell'esperienza. Questo valore può essere vuoto se è un'esperienza attuale."
+        title: Importazioni di esperienze
+      facets:
+        administrator:
+          responsabilities: Responsabilità
+          responsabilities_of: Responsabilità di %{name}
+        author:
+          posts: Notizie
+          posts_of: Notizie di %{name}
+        researcher:
+          publications: Pubblicazioni
+          publications_of: Pubblicazioni di %{name}
+        teacher:
+          programs: Insegnamenti
+          programs_of: Insegnamenti di %{name}
+      import_btn: Importa persone
+      import_hint_html: "I valori per <i>gender</i> possono essere m (maschile), f (femminile) e n (non binario).<br>I campi <i>phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> e <i>zipcode</i> devono essere in formato testo, non numero.<br>Il campo <i>country</i> deve contenere il codice ISO 3166 del paese, su 2 caratteri maiuscoli (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">elenco</a>)<br>Il campo <i>social_twitter</i> non deve contenere @.<br>Il campo <i>categories</i> può contenere un elenco di categorie a cui l'utente sarà collegato. Si tratta di un elenco di nomi separati da un carattere \"|\". Se una categoria dell'elenco non esiste, verrà creata al volo."
+      personal_data_visibilities:
+        private: Privato
+        public: Pubblico
+        restricted: Ristretto
+      personal_data_warning: Attenzione! Le informazioni inserite qui potrebbero essere visibili pubblicamente sui siti web e sugli extranet che ti riguardano.
+      search: Cerca per nome della persona
+      taught_programs: Corsi di formazione insegnati
+    sso: SSO
+    sso_key: Chiave sul SSO
+    technical: Tecnico

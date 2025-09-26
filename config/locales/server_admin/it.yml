@@ -1,0 +1,82 @@
+it:
+  server_admin:
+    blocks:
+      about: Oggetto
+      blocks_saved:
+        one: "%{count} blocco ri-salvato"
+        other: "%{count} blocchi ri-salvati"
+      data: Dati
+      open: Apri
+      quantity: Quantità
+      see: Vedi
+      title: Nome
+      url: URL
+    dashboard: Amministrazione del server
+    emergency_messages:
+      all_roles: Tutti
+      all_universities: Tutte
+      content: Contenuto
+      deliver: Invia
+      delivered: Il tuo messaggio è stato inviato correttamente
+      filters: Filtri
+      target: Obiettivo
+      users:
+        one: "%{count} utente"
+        other: "%{count} utenti"
+    see_list: Vedi la lista
+    optin_users:
+      title: Utenti optin
+    universities:
+      contributing:
+        one: "%{count} università contributrice"
+        other: "%{count} università contributrici"
+      contribution_filter:
+        false: Non contribuisce
+        title: Stato di contribuzione
+        true: Contribuisce
+      contributions_total: Contributi (totale)
+      invoice_informations: Dati di fatturazione
+      university_kind_filter:
+        private: Privata
+        public: Pubblica
+        title: Tipo di università
+      users_count: Utenti (eccetto gli amministratori del server)
+    websites:
+      admin: Admin
+      autoupdate_theme:
+        false: Manuale
+        true: Automatico
+      back_office: Back office
+      buttons:
+        theme:
+          sync: Sincronizza
+          update: Aggiorna il tema
+      clean_and_rebuild_all_websites_notice: Tutti i siti verranno ricostruiti. Potrebbe volerci un po' di tempo.
+      clean_and_rebuild_website_notice: Il sito verrà ricostruito. Potrebbe volerci qualche minuto.
+      connections_count: "%{count} connessioni"
+      details: dettaglio
+      events_count: "%{count} eventi"
+      force_clean_and_rebuild: Forza il clean&rebuild di tutti i siti
+      git_repo:
+        full: Repository Git
+        short: Repository
+        status: Stato
+      in_production: "%{count} in produzione"
+      manage_versions: Gestisci le versioni
+      outdated: Questi siti non sono aggiornati
+      pages_count: "%{count} pagine"
+      posts_count: "%{count} notizie"
+      production: In produzione
+      production_status: Stato di produzione
+      recursive_dependencies_count: "%{count} dipendenze"
+      sync_theme_version_notice: La versione del tema di %{website} è stata sincronizzata
+      theme_version: Versione del tema
+      university_html: "Università: %{university}"
+      unlock_for_background_jobs_btn: Sblocca per i background jobs
+      unlock_for_background_jobs_notice: Il sito è sbloccato per i background jobs.
+      updatable_theme_filter:
+        element: Capacità di aggiornamento automatico
+        value: Aggiornamento automatico possibile
+      update_all_themes: Sincronizza tutte le versioni del tema
+      update_mode: Modalità di aggiornamento
+      update_theme_notice: Il tema di %{website} verrà aggiornato tra qualche istante

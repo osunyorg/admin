@@ -1,0 +1,548 @@
+it:
+  accessibility:
+    blocks:
+      components:
+      templates:
+        embed:
+          title_missing:
+            text_html: L'integrazione HTML non ha un titolo, il che impedirà alle persone con problemi di vista di sapere di cosa tratta il contenuto, come spiegato nel <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterio 4.7 del RGAA</a>. Si prega di aggiungere un tag <b>title</b> esplicito al vostro iframe.
+            title: Nessun titolo del frame
+          transcription_missing:
+            text_html: Il frame HTML non è accompagnato da una trascrizione testuale per le persone con problemi di vista o per le situazioni di bassa velocità che impedirebbero la lettura.
+            title: Nessuna trascrizione
+        sound:
+          title_missing:
+            text_html: Né il blocco né il file audio hanno un titolo, il che impedirà alle persone con problemi di vista di sapere di cosa tratta la registrazione, come spiegato nel <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterio 4.7 del RGAA</a>. Si prega di aggiungere un titolo alla registrazione.
+            title: Nessun titolo
+          transcription_missing:
+            text_html: La registrazione non è accompagnata da una trascrizione testuale per le persone con problemi di vista o per le situazioni di bassa velocità che impedirebbero la lettura.
+            title: Nessuna trascrizione
+        video:
+          title_missing:
+            text_html: Né il blocco né il video hanno un titolo, il che impedirà alle persone con problemi di vista di sapere di cosa tratta il video, come spiegato nel <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterio 4.7 del RGAA</a>. Si prega di aggiungere un titolo al video.
+            title: Nessun titolo
+          transcription_missing:
+            text_html: Il video non è accompagnato da una trascrizione testuale per le persone con problemi di vista o per le situazioni di bassa velocità che impedirebbero la lettura.
+            title: Nessuna trascrizione
+    commons:
+      alt:
+        empty:
+          text_html: Avete un'immagine, ma il testo alternativo è vuoto. Questo è del tutto pertinente se non ci sono informazioni significative nell'immagine. D'altra parte, se l'immagine contiene informazioni utili, è necessario indicarle in testo.
+          title: Testo alternativo vuoto
+    errors:
+      one: '1 errore'
+      other: '%{count} errori'
+      zero: Congratulazioni, nessun problema di accessibilità rilevato!
+    label: Accessibilità
+    status:
+      false: Non accessibile
+      true: Accessibile
+      warnings: Da verificare
+    warnings:
+      one: '1 informazione utile'
+      other: '%{count} informazioni utili'
+  active_hashcash:
+    error_label: La verifica hashcash è fallita. Si prega di riprovare.
+  activerecord:
+    attributes:
+      emergency_message:
+        content_en: Messaggio (en)
+        content_fr: Messaggio (fr)
+        delivered_at: Data di invio
+        name: Nome
+        role: Ruolo di destinazione
+        subject_en: Oggetto (en)
+        subject_fr: Oggetto (fr)
+        university: Università di destinazione
+      import:
+        date: Data
+        file: File
+        number_of_lines: Numero di righe
+        status: Stato
+      language:
+        iso_code: Codice Iso
+        name: Nome
+        summernote_locale: Nome della locale Summernote
+      user:
+        admin_theme: Tema dell'amministrazione
+        current_sign_in_at: Ultimo accesso
+        email: Email
+        first_name: Nome
+        language: Lingua preferita
+        last_name: Cognome
+        mobile_phone: Telefono cellulare
+        optin_newsletter: Desidero ricevere via email le notizie riguardanti gli sviluppi di Osuny (invito alle assemblee della comunità una volta al mese, sintesi una volta al trimestre).
+        person: Persona
+        picture: Foto del profilo
+        picture_url: Url della foto del profilo
+        programs_to_manage: Corso(i) gestito(i)
+        role: Ruolo
+        roles:
+          admin: Amministratore
+          author: Autore
+          contributor: Collaboratore
+          program_manager: Responsabile del corso
+          server_admin: Amministratore del server
+          teacher: Insegnante
+          visitor: Visitatore
+          website_manager: Responsabile del sito web
+        university: Università
+        websites_to_manage: Siti gestiti
+    errors:
+      messages:
+        invalid_year: L'anno deve essere un numero a 4 cifre.
+      models:
+        import:
+          attributes:
+            file:
+              incorrect_type: non è nel formato corretto
+              no_file: deve essere scelto
+        user:
+          attributes:
+            password:
+              password_strength: non soddisfa i criteri di sicurezza
+    models:
+      emergency_message:
+        one: Messaggio di emergenza
+        other: Messaggi di emergenza
+      import:
+        one: Import
+        other: Import
+      language:
+        one: Lingua
+        other: Lingue
+      user:
+        one: Utente
+        other: Utenti
+      user/favorite:
+        one: Preferito
+        other: Preferiti
+  add: Aggiungi
+  add_field: Aggiungi un campo
+  admin:
+    advanced_settings: Impostazioni avanzate
+    attachment_not_available: Impossibile accedere all'elemento
+    bodyclass: Classe CSS specifica
+    categories:
+      cant_move_taxonomy_here: Impossibile spostare una tassonomia in un'altra categoria
+    chronicles:
+      read_all: Vedi tutte le cronache
+      read_more: Scopri di più
+      title: Cronache
+    content_archive:
+      is_lasting:
+        hint:
+          one: Se deselezionato, questo contenuto verrà automaticamente archiviato dopo %{count} anno.
+          other: Se deselezionato, questo contenuto verrà automaticamente archiviato dopo %{count} anni.
+        label: Contenuto perenne
+    dashboard: Pannello di controllo
+    duplicate: Duplica
+    elements:
+      one: 1 elemento
+      other: "%{count} elementi"
+      zero: Nessun elemento
+    footer:
+      signature: Osuny, un bene comune digitale di interesse generale
+    i18n:
+      in: in %{lang}
+      switch_to: passa a %{choices}
+    infos: Informazioni
+    inheritance:
+      sentence_html: Valore ereditato da %{link}
+      sentence_without_link: Valore ereditato
+      status: Valore ereditato
+    item:
+      one: elemento
+      other: elementi
+      see_all: Vedi tutto
+    meta_description:
+      hint: Testo semplice, dedicato all'ottimizzazione per i motori di ricerca (Search Engine Optimization, SEO).
+      label: Descrizione per i motori di ricerca (meta)
+    password_hint: Lascia vuoto se non vuoi modificare la password.
+    pending_tasks:
+      tasks: Attività in corso di elaborazione
+      text_html: "Osuny ti accompagna verso la sobrietà digitale.<br><br>L'esecuzione mutualizzata di tutte le attività della piattaforma Osuny contribuisce a diminuire l'impronta di carbonio del digitale, precalcolando ciò che può esserlo.<br><br>Ciò può generare un ritardo prima che le tue modifiche siano visibili sui tuoi siti web."
+      what_is_it: Cos'è?
+    search:
+      buttons:
+        search: Cerca...
+        close: Chiudi
+      label: Cerca
+      placeholder: Digita qui
+      no_results: Nessun risultato
+    seo: SEO
+    subnav:
+      settings: Impostazioni
+      summary: Riepilogo
+    successfully_created_html: "<i>%{model}</i> è stato creato con successo."
+    successfully_destroyed_html: "<i>%{model}</i> è stato eliminato con successo."
+    successfully_duplicated_html: "<i>%{model}</i> è stato duplicato con successo."
+    successfully_quit_html: "<i>%{model}</i> ha lasciato <i>%{target}</i> con successo."
+    successfully_removed_html: "<i>%{model}</i> è stato rimosso con successo."
+    successfully_updated_html: "<i>%{model}</i> è stato aggiornato con successo."
+    summary:
+      hint: Un testo breve, come un cappello per un articolo. Non mettere tutto il contenuto qui, per questo ci sono i blocchi!
+      label: Riepilogo
+    translation:
+      button: Traduci
+      done: Traduzione completata! Si prega di rileggere prima di salvare.
+      running: Traduzione in corso
+      unavailable_button: Traduzione automatica non disponibile
+    users_alerts:
+      already_confirmed: "Il tuo account è già confermato."
+      not_locked_html: "<i>%{model}</i> non era bloccato."
+      optin_not_set:
+        button_allow_optin: Autorizza l'invio
+        button_disallow_optin: Vieta l'invio
+        text_html: "Non hai ancora definito le tue preferenze di comunicazione via email. <br>Se ci autorizzi a contattarti, riceverai inviti alle assemblee della comunità una volta al mese e una sintesi degli sviluppi di Osuny una volta al trimestre al massimo. Potrai sempre modificare questa impostazione nel tuo profilo."
+        title: Preferenze di comunicazione
+        updated: Le tue preferenze sono state salvate.
+      pending_confirmation_html: "Il tuo account non è ancora stato <b>confermato</b>. Hai ricevuto un'email contenente un link di conferma. In assenza di conferma, il tuo account smetterà di funzionare dopo <b>%{duration}</b>. Se non hai ricevuto questa email, controlla la tua cartella spam o clicca sul pulsante qui sotto."
+      successfully_unlocked_html: "<i>%{model}</i> è stato sbloccato con successo."
+    will_be_published_html: "<i>%{model}</i> sarà presto pubblicato."
+  batch_selectable:
+    title: Modifica la selezione
+  cancel: Annulla
+  category:
+    children: Sottocategorie
+    featured_image: Immagine in evidenza
+    featured_image_alt: Testo alternativo
+    free: Categorie libere (senza tassonomia)
+    is_taxonomy: È una tassonomia (una famiglia di categorie)
+    name: Nome
+    parent: Categoria padre
+    slug: Slug
+    title: Categorie
+  confirm: Conferma
+  contact_details:
+    emails:
+      email:
+        hint: ''
+        label: Email
+    phone_numbers:
+      phone:
+        hint: ''
+        label: Telefono
+      phone_mobile:
+        hint: ''
+        label: Telefono cellulare
+      phone_personal:
+        hint: ''
+        label: Telefono personale
+      phone_professional:
+        hint: ''
+        label: Telefono professionale
+    postal_address:
+      address:
+        hint: 'Questo campo viene utilizzato per la geolocalizzazione. Es: Via della Posta, 3'
+        label: Indirizzo
+      address_additional:
+        hint: 'Questo campo viene ignorato nella geolocalizzazione. Es: Ufficio 508'
+        label: Complemento di indirizzo
+      address_name:
+        hint: 'Questo campo viene ignorato nella geolocalizzazione. Es: Palazzo della Provincia'
+        label: Nome dell'indirizzo
+      city:
+        hint: ''
+        label: Città
+      country:
+        hint: ''
+        label: Paese
+      zipcode:
+        hint: ''
+        label: Codice postale
+    social_networks:
+      facebook:
+        hint: ''
+        label: Facebook (privativo, Meta)
+      github:
+        hint: ''
+        label: Github
+      instagram:
+        hint: ''
+        label: Instagram (privativo, Meta)
+      linkedin:
+        hint: ''
+        label: LinkedIn (privativo, Microsoft)
+      mastodon:
+        hint: ''
+        label: Mastodon (libero)
+      peertube:
+        hint: ''
+        label: Peertube (libero)
+      tiktok:
+        hint: ''
+        label: TikTok (privativo)
+      twitter:
+        hint: ''
+        label: X (privativo)
+      vimeo:
+        hint: ''
+        label: Vimeo (privativo)
+      x:
+        hint: ''
+        label: X (privativo)
+      youtube:
+        hint: ''
+        label: Youtube (privativo, Google)
+    websites:
+      website:
+        hint: ''
+        label: Sito Web
+  content: Contenuto
+  cookies_consent_choice: Scelta in materia di cookie
+  cookies_policy: Politica sui cookie
+  cookies_policy_url: https://www.osuny.org/politique-de-sobriete/
+  copy_of: Copia di %{title}
+  create: Crea
+  date:
+    formats:
+      birthday: "%d %B"
+      full: "%A %-d %B %Y"
+  delete: Elimina
+  devise:
+    confirmations:
+      new:
+        title: Conferma dell'account
+    failure:
+      invalid: "Email o password non corretti."
+      not_found_in_database: "Email o password non corretti."
+      unauthenticated: ''
+    mailer:
+      two_factor_authentication_code:
+        subject: "Codice di autenticazione a due fattori"
+        text_html: "Il tuo codice di autenticazione per %{context} è:<br><br><b>%{code}</b><br><br>Scadrà tra %{duration}."
+    omniauth_callbacks:
+      failure: "Autenticazione fallita."
+    passwords:
+      edit:
+        new: Cambio password
+        title: Cambio password
+      new:
+        send_me_reset_password_instructions: Reimposta la mia password
+        title: Password dimenticata
+    registrations:
+      edit:
+        title: Modifica del tuo account
+      new:
+        title: "Iscrizione su %{title}"
+      signed_up: "Benvenuto! Ti sei registrato con successo. Hai ricevuto un'email contenente un link di conferma. In assenza di conferma, il tuo account smetterà di funzionare dopo 1 giorno. Se non hai ricevuto questa email, controlla la tua cartella spam o clicca sul pulsante \"Non ho ricevuto l'email di conferma\" nella schermata di identificazione."
+    sessions:
+      new:
+        title: "Benvenuto su %{title}"
+      signed_in: ''
+    shared:
+      links:
+        sign_out: "Disconnetti"
+    two_factor_authentication:
+      admin_locked_html: Questo account utente è attualmente <i>bloccato</i>.
+      admin_locked_mfa_html: Questo account utente è attualmente <i>bloccato</i> a causa di tentativi di MFA eccessivi.
+      admin_unlock: Sbloccalo!
+      admin_unlock_in_html: Si sbloccherà automaticamente tra <i>%{distance}</i>.
+      attempt_failed: "Codice non valido"
+      code_has_been_sent: "Un codice di autenticazione ti è stato appena inviato."
+      enter_code_direct_otp_email_html: "Per garantire la sicurezza della tua connessione, ti inviamo un codice a 6 cifre, monouso, sulla tua email %{mail}. Inserisci questo codice qui sotto."
+      enter_code_direct_otp_mobile_phone_html: "Per garantire la sicurezza della tua connessione, ti inviamo un codice a 6 cifre, monouso, sul tuo cellulare %{phone}. Inserisci questo codice qui sotto."
+      enter_code_totp: "Per garantire la sicurezza della tua connessione, ci affidiamo alla tua applicazione di autenticazione. Inserisci qui sotto il codice monouso che ti indica."
+      help: "Se riscontri un problema, puoi..."
+      max_login_attempts_reached:
+        message_html: "Il tuo account è stato bloccato per motivi di sicurezza.<br />Si prega di contattare un amministratore."
+        title: Massimo numero di tentativi raggiunto
+      resend_code: "Invia di nuovo il codice"
+      send_code_instead: "Invece, inviami un codice"
+      send_email_code: 'Invia il codice via email'
+      show:
+        title: Autenticazione multi-fattore
+      success: ""
+    unlocks:
+      new:
+        title: Sblocco dell'account
+  download: Scarica
+  download_with_size: Scarica (%{size})
+  edit: Modifica
+  enums:
+    import:
+      status:
+        finished: Elaborato
+        finished_with_errors: Elaborato con errori
+        pending: In corso di elaborazione
+  export: Esporta (xlsx)
+  false: No
+  featured_image:
+    alt:
+      hint: Questo testo è essenziale per l'accessibilità. Se l'immagine fornisce un'informazione importante, è necessario scrivere qui questa informazione. Se l'informazione è già presente altrove nella pagina, o se l'immagine è puramente decorativa, è necessario lasciare il testo alternativo vuoto, per evitare di inquinare la navigazione vocale.
+      label: Testo alternativo
+    credit:
+      hint: Il credito fotografico deve essere indicato, nel rispetto del diritto d'autore.
+      label: Credito
+  file_hint_with_formats: "Solo file %{formats}. %{filesize} max."
+  file_hint_without_formats: "%{filesize} max."
+  filters:
+    attributes:
+      category: Filtra per categoria
+      date: Filtra per data
+      element: Filtra per %{element}
+      facet: Filtra per responsabilità
+      kind: Filtra per tipo
+      role: Filtra per ruolo
+    buttons:
+      close: Chiudi
+      expand: Cerca e filtra
+      reset: Reimposta la ricerca
+      submit: Cerca
+    title: Cerca e filtra
+  folder:
+    close: Chiudi la cartella
+    empty: La cartella è vuota
+    open: Apri la cartella
+  hello: "Ciao %{name}!"
+  home: Home
+  html:
+    external_link: link esterno
+  import_btn: Importa
+  imports:
+    deleted_user: Utente eliminato
+    error_msg: "Riga %{line}: %{error}"
+    errors: Errori
+    example_file_html: Scarica un <a href="%{link}" target="_blank">file di esempio</a>
+    hint_html: "I dati devono essere in formato xlsx.<br>La prima riga deve essere dedicata alle intestazioni.<br>I nomi delle intestazioni sono obbligatori e devono essere rispettati rigorosamente.<br>I caratteri devono essere codificati in UTF-8.<br>I campi contrassegnati con un asterisco sono obbligatori."
+    initiated_by: "Iniziato da:"
+    number_of_lines: "Numero di righe nel file:"
+    status: "Stato:"
+    still_pending: "Il tuo import è ancora in corso di elaborazione. Riceverai un'email non appena sarà pronto."
+  inactivity_alert: "Sembra che tu sia rimasto sulla pagina un po' troppo a lungo. Puoi riprovare?"
+  internationalization:
+    label: Internazionalizzazione
+  legal: Legale
+  loading: Caricamento...
+  localization:
+    creation_alert: Questo elemento non esiste nella tua lingua di visualizzazione attuale. Vuoi crearne una traduzione?
+    label: Localizzazione
+  login:
+    already_registered: Già iscritto?
+    already_registered_details: Accedi se hai già un account.
+    not_registered_yet: Non ancora iscritto?
+    not_registered_yet_details: Iscriviti se non hai ancora un account.
+    or: oppure
+    sign_in_with_credentials: Accedi con le tue credenziali
+    sign_in_with_sso: Accedi con SSO
+    subtitle: Devi essere autenticato per continuare
+  look_feel: Aspetto
+  mailers:
+    extranet:
+      invitation_message:
+        subject: Benvenuto nel tuo extranet
+        text: Ora hai accesso all'extranet.
+        with_user_html: Puoi accedervi con il tuo indirizzo email <b>%{email}</b> cliccando <a href="%{sign_in_url}">qui</a>.
+        without_user_html: Puoi iscriverti con il tuo indirizzo email <b>%{email}</b> cliccando <a href="%{sign_up_url}">qui</a>.
+    notifications:
+      gdpr_deletion_incoming:
+        subject: "Osuny - il tuo account verrà presto eliminato"
+        body_1_html: "Ciao,<br><br>È da un po' che non accedi al tuo account.<br><br>Per rispettare i nostri obblighi legali, il tuo account verrà eliminato tra <b>%{delay} giorni</b> se non ti riconnetti entro tale data."
+        body_2_html: "Clicca <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">qui</a> per accedere al tuo account."
+      import:
+        subject_with_errors: Il tuo import è stato elaborato con successo ma contiene errori
+        subject_without_errors: Il tuo import è stato elaborato con successo
+        text_error_msg: "Riga %{line}: %{error}"
+        text_errors_title: "Si sono verificati degli errori:"
+        text_line_1_html: Il tuo import è stato elaborato con successo.
+        text_line_2_html: "Puoi vedere i dettagli dell'import cliccando <a href=\"%{url}\">qui</a>."
+        text_line_3_html: "Numero di righe elaborate: %{number}."
+      low_sms_credits:
+        body_1_html: "Attenzione, i tuoi crediti SMS sono bassi: %{credits} crediti rimanenti!"
+        body_2_html: "Clicca <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">qui</a> per ricaricare l'account."
+        subject: "Osuny - Crediti SMS bassi (%{credits})"
+      new_registration:
+        body_1_html: "Un nuovo utente (%{username}) si è appena registrato."
+        body_2_html: "Clicca <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">qui</a> per vedere il suo account."
+        subject: "Un nuovo utente si è appena iscritto: %{mail}"
+      website_invalid_access_token:
+        subject: Token di accesso scaduto per «%{website}»
+        text_line_1_html: Il token di accesso utilizzato per il sito «%{website}» è scaduto e non consente più l'aggiornamento del sito.
+        text_line_2_html: "Per risolvere questo problema, si prega di inserire un nuovo token di accesso cliccando <a href=\"%{url}\" target=\"_blank\" style=\"color: #c72b43;\">qui</a>."
+    yours: Cordialmente.
+  manage: Gestisci
+  menu:
+    admin: Admin
+    edit_profile: Modifica il mio profilo
+    profile: Profilo
+    server_admin: Amministrazione del server
+    sign_out: Disconnessione
+  metadata: Informazioni
+  move: Sposta
+  open: Apri
+  organize: Organizza
+  please_confirm: Confermi?
+  preview:
+    button: Anteprima
+    desktop: Computer
+    mobile: Cellulare
+    tablet: Tablet
+    title: Anteprima
+  privacy_policy: Politica sulla privacy
+  privacy_policy_url: https://www.osuny.org/politique-de-confidentialite/
+  properties:
+    text:
+      missing: Testo mancante
+  publication:
+    draft: Bozza
+    published: Pubblicato
+  quit: Esci
+  remove: Rimuovi
+  reset: Reimposta
+  save: Salva
+  search: Ricerca
+  select_language: Seleziona una lingua
+  seo: SEO
+  shared_image:
+    title: Immagine di condivisione
+  show: Vedi
+  simple_form:
+    error_notification:
+      default_message: "Gli errori seguenti impediscono la convalida:"
+    hints:
+      emergency_message:
+        role: Lascia vuoto per inviare a tutti i ruoli
+        university: Lascia vuoto per inviare a tutte le università
+      import:
+        file: Solo file .xlsx
+      language:
+        iso_code: Codice ISO 639-1 (cf <a href="https://fr.wikipedia.org/wiki/Liste_des_codes_ISO_639-1" target="_blank">Wikipedia</a>)
+        name: Nome nella lingua (= "Français", "Deutsch", ...)
+        summernote_locale: 'Nome della locale di summernote (fr-FR / en-US). Verificare qui che la locale sia disponibile: <a href="https://github.com/summernote/summernote/tree/develop/src/lang" target="_blank">repo summernote</a>'
+      user:
+        mobile_phone: "Formato internazionale (+XX). Questo numero rimane privato. Inserendo questo campo, accetti di ricevere i tuoi codici di doppia autenticazione via SMS."
+    include_blanks:
+      defaults:
+        language: "Seleziona una lingua"
+        person: "Seleziona una persona"
+  simple_form_password_with_hints:
+    test_chars: "%{min_length} caratteri min."
+  slug_error: può contenere solo lettere minuscole, numeri e trattini.
+  sms_code: "%{code} è il tuo codice di autenticazione su %{context} (valido %{duration})"
+  static: File statico
+  terms_of_service: Condizioni d'uso
+  terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/
+  time:
+    formats:
+      date_only: "%d/%m/%Y"
+      date_with_explicit_month: "%d %B %Y"
+      date_with_hour: "%d %B %Y %H:%M"
+      time_only: "%H:%M"
+  today: Oggi
+  true: Sì
+  user:
+    favorites:
+      add: Aggiungi ai preferiti
+      none:
+        in_university: Non hai ancora preferiti, non esitare ad aggiungere i siti Web, gli extranet o le riviste scientifiche a cui accedi frequentemente!
+        not_in_university: Non hai ancora preferiti, non esitare ad aggiungere i siti Web o gli extranet a cui accedi frequentemente!
+      remove: Rimuovi dai preferiti
+  validate: Convalida
+  views:
+    pagination:
+      first: "Primo"
+      last: "Ultimo"
+      next: "Successivo"
+      previous: "Precedente"
+      truncate: "&hellip;"
