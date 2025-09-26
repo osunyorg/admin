@@ -10,7 +10,7 @@ class Communication::Website::Page::Organization < Communication::Website::Page
     explicitly_connected_organizations
   end
 
-  # https://developers.osuny.org/docs/admin/sites-web/git/dependencies/iteration-9/
+  # https://developers.osuny.org/docs/admin/sites-web/dependencies/iteration-9/
   def references
     website.connected_organizations
   end
