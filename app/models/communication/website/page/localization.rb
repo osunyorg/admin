@@ -93,7 +93,14 @@ class Communication::Website::Page::Localization < ApplicationRecord
   def should_sync_to?(website)
     website.id == communication_website_id &&
     website.active_language_ids.include?(language_id) &&
-    published?
+    (
+      # Whatever the page, if it's published it's published
+      published? || 
+      # If it's a Hugo index, we need to sync it with some special Frontmatter settings
+      # https://github.com/osunyorg/admin/issues/3238
+      # https://developers.osuny.org/docs/theme/hugo/publications/
+      about.is_hugo_index?
+    )
   end
 
   # Home        _index.html

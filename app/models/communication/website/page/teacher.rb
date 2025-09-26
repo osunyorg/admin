@@ -1,5 +1,9 @@
 class Communication::Website::Page::Teacher < Communication::Website::Page
 
+  def is_hugo_index?
+    true
+  end
+
   def should_create_special_page?
     website.about && website.about&.respond_to?(:teachers)
   end

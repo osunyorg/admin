@@ -13,6 +13,7 @@ localizations.each do |l10n|
   else
     title = l10n.to_s
   end
+  next if l10n.try(:draft?)
   hugo = l10n.hugo(@website)
   permalink = hugo.permalink
   last = l10n == localizations.last
