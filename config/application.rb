@@ -38,7 +38,7 @@ module Osuny
 
     config.sass.preferred_syntax = :sass
 
-    config.i18n.available_locales = [:fr, :en]
+    config.i18n.available_locales = [:fr, :en, :it]
     config.i18n.default_locale = :fr
     config.i18n.fallbacks = [::I18n.default_locale]
     config.i18n.enforce_available_locales = false

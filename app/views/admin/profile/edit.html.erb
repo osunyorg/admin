@@ -18,7 +18,9 @@
                       input_html: { autocomplete: "last_name" } %>
         </div>
         <div class="col-lg-6">
-          <%= render 'admin/application/l10n/form', f: f %>
+          <%= f.association :language, 
+                            collection: Language.available_for_interface,
+                            include_blank: false %>
           <%= f.input :mobile_phone %>
           <%= f.input :optin_newsletter %>
         </div>

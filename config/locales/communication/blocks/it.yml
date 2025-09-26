@@ -1,0 +1,900 @@
+---
+it:
+  admin:
+    communication:
+      blocks:
+        add: Aggiungi un blocco
+        advanced:
+          anchor: Ancora
+          url_with_anchor: URL con ancora
+        alerts:
+          file_is_too_big: "Il file è troppo pesante!"
+        categories:
+          basic:
+            description: Gli elementi essenziali per costituire una pagina
+            label: Blocchi di base
+          references:
+            description: Elenchi di altri oggetti, che valorizzano e creano collegamenti
+            label: Blocchi di elenchi
+          storytelling:
+            description: Strumenti più sofisticati per articolare e mettere in scena contenuti
+            label: Blocchi narrativi
+          utilities:
+            description: Funzionalità pratiche, puramente utilitarie
+            label: Blocchi tecnici
+        choose:
+          button: Scegli
+          title: Scegli il tipo di blocco da aggiungere
+        components:
+          code:
+            preview:
+              sanitized_notice: Per motivi di sicurezza, il contenuto è stato filtrato. Gli script non vengono caricati e/o eseguiti e l'aspetto potrebbe essere alterato.
+          file:
+            input:
+              label: File
+              remove: Rimuovi il file
+          image:
+            alt:
+              label: Testo alternativo
+              placeholder: Inserisci la descrizione testuale
+            credit:
+              label: Credito
+              placeholder: Inserisci il credito
+            input:
+              label: Immagine
+              remove: Rimuovi l'immagine
+          layouts:
+            button: Scegli il layout
+            label: Layout
+          link:
+            target_blank: Apri in una nuova finestra
+          text:
+            label: Testo
+            placeholder: Inserisci il testo
+          transcription:
+            label: Versione testuale del contenuto
+            placeholder: Inserisci qui il testo
+          transcription_title:
+            label: Titolo della versione testuale
+            placeholder: Trascrizione, versione testuale, testo alternativo...
+          time_slot:
+            from: Da
+            to: A
+        display_options:
+          title: Opzioni di visualizzazione
+        editor:
+          offcanvas:
+            close: Chiudi la modifica del blocco
+            title: Modifica blocco
+        empty: Questo blocco è vuoto e non apparirà
+        footer: I blocchi aggiunti qui appaiono nel piè di pagina (footer) del sito, su ogni pagina.
+        templates:
+          agenda:
+            description: Un elenco di eventi puntuali, con orari.
+            edit:
+              add_event: Aggiungi un evento
+              category_id:
+                label: Categoria
+                placeholder: Seleziona una categoria
+              description:
+                label: Descrizione
+              element:
+                id:
+                  label: ''
+                  placeholder: Scegli l'evento
+              kinds: Quali tipi di eventi visualizzare?
+              kind:
+                parent: Genitori (festival)
+                child: Figli (concerto in un festival)
+                recurring: Ricorrenti (evento con più fasce orarie)
+              mode:
+                label: Quali eventi visualizzare?
+                options:
+                  all: Tutti gli eventi, indipendentemente dalla categoria
+                  category: Una categoria specifica di eventi
+                  selection: Una selezione di eventi
+              no_event_message:
+                label: Frase da visualizzare se non ci sono eventi
+                placeholder: Inserisci la frase desiderata
+              quantity:
+                label: Quantità di eventi da visualizzare
+                placeholder: Inserisci la quantità
+              time:
+                label: Quali stati degli eventi visualizzare?
+                options:
+                  archive: Terminati (archiviati)
+                  current: Del giorno
+                  future: In arrivo (non ancora in corso)
+                  future_or_current: Del giorno e in arrivo
+            layouts:
+              grid:
+                description: Gli eventi sono presentati in griglia, con le immagini tutte della stessa dimensione.
+                label: Griglia
+              large:
+                description: Ogni evento è presentato in grande stile, su tutta la larghezza disponibile con una grande immagine.
+                label: Grande
+                more: Scopri di più
+              list:
+                description: Un elenco di eventi con piccole immagini alla stessa larghezza.
+                label: Elenco
+          call_to_action:
+            description: Un titolo, un testo, un visual e 3 pulsanti per invitare le persone ad agire.
+            edit:
+              add_button: Aggiungi un pulsante
+              buttons: Pulsanti di azione
+              credit:
+                label: Credito
+                placeholder: Inserisci qui il credito dell'immagine
+              element:
+                target_blank:
+                  label: Apri in una nuova finestra
+                title:
+                  label: Testo
+                  placeholder: Inserisci qui il testo del pulsante
+                url:
+                  label: Link
+                  placeholder: Inserisci qui il link con "https://..."
+              remove_button: Rimuovi il pulsante
+              text:
+                label: Testo
+                placeholder: Inserisci qui il testo
+            layouts:
+              accent_background:
+                description: Un blocco su uno sfondo molto forte.
+                label: Forte evidenziazione
+              no_background:
+                description: Un blocco molto più discreto.
+                label: Semplice
+          categories:
+            description: Un elenco di categorie di pagine, persone o organizzazioni...
+            edit:
+              category_kind:
+                label: Tipo di categorie
+              description:
+                label: Descrizione
+              option_count:
+                label: Visualizza il numero di elementi nella categoria
+              option_image:
+                label: Visualizza le immagini delle categorie
+              option_summary:
+                label: Visualizza le descrizioni brevi delle categorie
+              taxonomy_id:
+                label: Quale tassonomia visualizzare?
+            layouts:
+              alternate:
+                description: Un'alternanza graficamente molto leggera di categorie, ritmata tra sinistra e destra.
+                label: Alternanza
+              cards:
+                description: Carte affiancate, della stessa altezza, con un colore forte al passaggio del mouse. Questo formato è ideale per un piccolo numero di categorie.
+                label: Carte
+              grid:
+                description: Le categorie sono presentate in griglia, con le immagini tutte della stessa dimensione.
+                label: Griglia
+              large:
+                description: Ogni categoria è presentata in grande stile, su tutta la larghezza disponibile con una grande immagine.
+                label: Grande
+              list:
+                description: Un elenco di categorie con piccole immagini alla stessa larghezza.
+                label: Elenco
+          chapter:
+            description: Una sezione di documento con un titolo, un testo, note a piè di pagina e un'immagine.
+            edit:
+              image:
+                label: Immagine illustrativa
+              notes:
+                label: Note
+                placeholder: Inserisci le note
+              text:
+                label: Testo
+                placeholder: Inserisci il testo
+            layouts:
+              accent_background:
+                description: Un capitolo su uno sfondo molto forte, come una call to action.
+                label: Forte evidenziazione
+              alt_background:
+                description: Un capitolo su uno sfondo discreto, ad esempio per ritmare la pagina.
+                label: Leggera evidenziazione
+              no_background:
+                description: Un titolo e un testo, eventualmente note e un'immagine.
+                label: Semplice
+          contact:
+            description: Coordinate e orari di apertura, tutto il necessario per essere contattati.
+            edit:
+              add: Aggiungi
+              add_slot: Aggiungi una fascia oraria
+              address:
+                label: Indirizzo
+                placeholder: Numero e via
+              city:
+                label: Città
+                placeholder: Inserisci il nome della città
+              contacts: Indirizzo postale
+              country:
+                label: Paese
+                placeholder: Inserisci il nome del paese
+              description:
+                label: Descrizione
+                placeholder: Inserisci la descrizione
+              element:
+                time_slot_afternoon:
+                  label: Pomeriggio (o giorno completo)
+                time_slot_morning:
+                  label: Mattina (se necessario)
+                title:
+                  label: Giorno
+                  placeholder: Inserisci il giorno o il periodo
+              information:
+                label: Informazioni aggiuntive
+              mails:
+                label: Email
+                placeholder: Inserisci l'email
+              name:
+                label: Nome (persona, istituzione...)
+                placeholder: Inserisci il testo
+              phones:
+                label: Telefoni
+                placeholder: Inserisci il numero
+              slots: Orari
+              url:
+                label: URL
+                placeholder: https://...
+              website: Sito web
+              zipcode:
+                label: CAP
+                placeholder: Inserisci il codice postale
+            show:
+              mail:
+                one: Email
+                other: Email
+              phone:
+                one: Telefono
+                other: Telefoni
+              slots: Orari
+              socials: Social network
+              website: Sito
+          datatable:
+            description: Una tabella di dati, il più responsive e accessibile possibile.
+            edit:
+              alphabetical:
+                label: Ordine alfabetico
+              caption:
+                label: Titolo della tabella
+                placeholder: Inserisci qui il titolo della tabella
+              description:
+                label: Descrizione
+          definitions:
+            description: Un elenco di termini e la loro definizione. Una sorta di dizionario, alla fine.
+            edit:
+              add_definition: Aggiungi una definizione
+              description:
+                label: Descrizione
+              element:
+                description:
+                  label: Testo
+                  placeholder: Inserisci la descrizione della definizione
+                title:
+                  label: Titolo
+                  placeholder: Inserisci il titolo della definizione
+              remove_definition: Rimuovi la definizione
+          embed:
+            description: Codice HTML grezzo, che consente di integrare mappe o vari componenti in iframe.
+            edit:
+              code:
+                label: Codice del blocco di integrazione HTML
+                placeholder: Inserisci il codice
+              iframe_title:
+                label: Titolo dell'iframe (necessario per l'accessibilità)
+                placeholder: Inserisci il titolo
+              warning: Attenzione, il codice sottostante è integrato così com'è, senza filtraggio di sicurezza. Non integrare mai codice esterno la cui affidabilità non è certa.
+          exhibitions:
+            description: Un elenco di mostre che si estendono su lunghi periodi di tempo.
+            edit:
+              add_exhibition: Aggiungi una mostra
+              category_id:
+                label: Categoria
+                placeholder: Seleziona una categoria
+              description:
+                label: Descrizione
+              element:
+                id:
+                  label: ''
+                  placeholder: Scegli la mostra
+              mode:
+                label: Quali mostre visualizzare?
+                options:
+                  all: Tutte le mostre, indipendentemente dalla categoria
+                  category: Una categoria specifica di mostre
+                  selection: Una selezione di mostre
+              no_exhibition_message:
+                label: Frase da visualizzare se non ci sono mostre
+                placeholder: Inserisci la frase desiderata
+              quantity:
+                label: Quantità di mostre da visualizzare
+                placeholder: Inserisci la quantità
+              time:
+                label: Quali stati delle mostre visualizzare?
+                options:
+                  archive: Terminate (archiviate)
+                  current: In corso
+                  future: In arrivo, non ancora in corso
+                  future_or_current: In corso e in arrivo
+            layouts:
+              grid:
+                description: Le mostre sono presentate in griglia, con le immagini tutte della stessa dimensione.
+                label: Griglia
+              large:
+                description: Ogni mostra è presentata in grande stile, su tutta la larghezza disponibile con una grande immagine.
+                label: Grande
+                more: Scopri di più
+              list:
+                description: Un elenco di mostre con piccole immagini alla stessa larghezza.
+                label: Elenco
+          features:
+            description: Un elenco di funzionalità con immagini, ad esempio icone, e una descrizione.
+            edit:
+              add_element: Aggiungi una funzionalità
+              description:
+                label: Descrizione
+                placeholder: Inserisci la descrizione
+              element:
+                alt:
+                  label: Testo alternativo
+                  placeholder: Inserisci la descrizione testuale
+                credit:
+                  label: Credito
+                  placeholder: Inserisci qui il credito dell'immagine
+                description:
+                  label: Testo
+                  placeholder: Inserisci la descrizione della funzionalità
+                image:
+                  label: Immagine
+                  remove: Rimuovi l'immagine
+                title:
+                  label: Titolo
+                  placeholder: Inserisci il titolo della funzionalità
+              remove_element: Rimuovi la funzionalità
+          files:
+            description: Un elenco di file scaricabili, presentati con il loro peso.
+            edit:
+              add_file: Aggiungi un file
+              description:
+                label: Descrizione
+              element:
+                file:
+                  label: File
+                title:
+                  label: Titolo
+                  placeholder: Inserisci il titolo del file
+              remove_file: Rimuovi il file
+          gallery:
+            description: Una galleria di immagini, con per ogni immagine una descrizione accessibile, un testo e un credito.
+            edit:
+              add_image: Aggiungi un'immagine
+              description:
+                label: Descrizione
+              element:
+                alt:
+                  label: Testo alternativo
+                  placeholder: Inserisci la descrizione testuale
+                credit:
+                  label: Credito
+                  placeholder: Inserisci qui il credito dell'immagine
+                text:
+                  label: Testo
+                  placeholder: Inserisci il testo
+              move_images: Sposta le immagini sottostanti per metterle nell'ordine desiderato
+              remove_image: Rimuovi l'immagine
+              send_and_edit_images: Invia le immagini e inserisci i testi sottostanti
+              send_multiple_images: Invia più immagini
+            layouts:
+              carousel:
+                description: Le immagini sono presentate in grande, tutte della stessa altezza.
+                label: Carosello
+              grid:
+                description: Le immagini sono presentate in griglia, tutte della stessa dimensione.
+                label: Griglia
+              large:
+                description: Le immagini sono presentate una dopo l'altra, utilizzando tutta la larghezza per le orizzontali e una grande larghezza per le verticali.
+                label: Grande
+          image:
+            description: Un'immagine con la sua descrizione alternativa accessibile, il suo testo e il suo credito.
+            edit:
+              text:
+                label: Testo
+                placeholder: Inserisci il testo
+          jobs:
+            description: Un elenco di offerte di lavoro.
+            edit:
+              add_job: Aggiungi un'offerta
+              category_id:
+                label: Categoria
+                placeholder: Seleziona una categoria
+              element:
+                id:
+                  label: ''
+                  placeholder: Scegli l'offerta
+              no_job_message:
+                label: Frase da visualizzare se non ci sono offerte di lavoro
+                placeholder: Inserisci la frase desiderata
+              mode:
+                label: Quali offerte visualizzare?
+                options:
+                  all: Tutte le offerte
+                  category: Una categoria specifica
+                  selection: Una selezione di offerte
+              jobs_quantity:
+                label: Quantità di offerte
+                placeholder: Inserisci la quantità
+            layouts:
+              grid:
+                description: Una griglia di offerte, da sinistra a destra e poi dall'alto verso il basso.
+                label: Griglia
+              list:
+                description: Un elenco di offerte una sotto l'altra.
+                label: Elenco
+          key_figures:
+            description: Cifre chiave con una bella animazione. Ogni cifra può essere dotata di un'unità e di un testo.
+            edit:
+              add_key: Aggiungi una cifra chiave
+              description:
+                label: Descrizione
+                placeholder: Inserisci la descrizione
+              element:
+                description:
+                  label: Descrizione
+                  placeholder: Inserisci la descrizione
+                number:
+                  label: Numero
+                  placeholder: Inserisci qui la cifra
+                unit:
+                  label: Unità
+                  placeholder: Inserisci qui l'unità
+              remove_key: Rimuovi la cifra chiave
+          license:
+            creative_commons:
+              about_html: Utilizza le licenze <a href="https://creativecommons.org" target="_blank" rel="noreferrer">Creative Commons</a> per condividere il tuo lavoro. Il selettore di licenza è basato su <a href="https://chooser-beta.creativecommons.org"target="_blank" rel="noreferrer">chooser-beta.creativecommons.org.org</a>
+            description: Una licenza legale di tipo Creative Commons, con il suo riferimento.
+            edit:
+              creative_commons_attribution:
+                label: Desideri che il tuo lavoro ti venga attribuito?
+                options:
+                  'false': No. Chiunque può utilizzare il mio lavoro, anche senza attribuirmene la paternità.
+                  'true': Sì. Chiunque utilizzi la mia opera deve attribuirla in modo appropriato.
+              creative_commons_commercial_use:
+                label: Desideri autorizzare altre persone a utilizzare la tua opera per scopi commerciali?
+                options:
+                  'false': No. Nessuno può utilizzare il mio lavoro per scopi commerciali.
+                  'true': Sì. Altre persone possono utilizzare il mio lavoro, anche per scopi commerciali.
+              creative_commons_derivatives:
+                label: Desideri autorizzare altre persone a remixare, adattare o sviluppare la tua opera?
+                options:
+                  'false': No. Altre persone possono utilizzare il mio lavoro solo in una forma non adattata.
+                  'true': Sì. Altre persone possono remixare, adattare o sviluppare il mio lavoro.
+              creative_commons_sharing:
+                label: Desideri autorizzare altre persone a condividere adattamenti della tua opera, a qualsiasi condizione?
+                options:
+                  'false': No. Gli altri devono utilizzare la stessa licenza CC se adattano la mia opera.
+                  'true': Sì. Altre persone possono condividere adattamenti della mia opera a qualsiasi condizione.
+              description:
+                label: Descrizione
+          links:
+            description: Un elenco di link esterni, ad esempio a servizi, social network o risorse.
+            edit:
+              add: Aggiungi un link
+              description:
+                label: Descrizione
+              element:
+                description:
+                  label: Descrizione
+                  placeholder: Inserisci la descrizione del link
+                title:
+                  label: Titolo
+                  placeholder: Inserisci il titolo del link
+                url:
+                  label: URL
+                  placeholder: 'https://'
+              move_links: Sposta i link sottostanti per metterli nell'ordine desiderato
+              remove: Rimuovi il link
+          locations:
+            description: Una selezione di siti nei campus.
+            edit:
+              add: Aggiungi un sito
+            layouts:
+              grid:
+                description: I siti sono presentati in griglia, da sinistra a destra e poi dall'alto verso il basso.
+                label: Griglia
+              list:
+                description: I siti sono presentati in elenco, con un'immagine a sinistra e il riepilogo a destra.
+                label: Elenco
+              map:
+                description: Una mappa geografica con un indicatore per ogni sito il cui indirizzo è noto.
+                label: Mappa
+          organizations:
+            description: Un elenco di organizzazioni, con il loro logo, il loro sito e il loro nome.
+            edit:
+              add_organization: Aggiungi un'organizzazione
+              alphabetical:
+                label: Ordine alfabetico
+              category_id:
+                label: Categoria
+              description:
+                label: Descrizione
+              element:
+                id:
+                  label: Organizzazione
+                  placeholder: Scegli l'organizzazione
+                  unregistered: Organizzazione non registrata
+                logo:
+                  label: Logo
+                  remove_logo: Rimuovi il logo
+                name:
+                  label: Nome
+                  placeholder: Inserisci il nome dell'organizzazione
+                url:
+                  label: Sito web
+                  placeholder: https://
+                role:
+                  label: Ruolo
+                  placeholder: Indica il ruolo dell'organizzazione
+              mode:
+                label: Quali organizzazioni visualizzare?
+                options:
+                  category: Una categoria specifica
+                  selection: Una selezione di organizzazioni
+              option_address:
+                label: Indirizzo postale
+              option_filters:
+                label: Filtri (per categoria)
+              option_link:
+                label: Con link cliccabili alle pagine delle organizzazioni?
+              option_logo:
+                label: Logo
+              options: Opzioni di visualizzazione
+              unregistered_organizations_on_map_warning: Attenzione, le organizzazioni non registrate non verranno visualizzate sulla mappa.
+            layouts:
+              carousel:
+                description: Un elenco di organizzazioni che sporge sul lato destro dello schermo, navigabile da destra a sinistra.
+                label: Carosello
+              grid:
+                description: Una serie di loghi quadrati, con il nome di ogni organizzazione.
+                label: Griglia
+              large:
+                description: Ogni organizzazione è presentata in grande stile, su tutta la larghezza disponibile con una grande immagine.
+                label: Grande
+              map:
+                description: Una mappa geografica con un indicatore per ogni organizzazione il cui indirizzo è noto.
+                label: Mappa
+          pages:
+            description: Un'evidenziazione di una selezione di pagine, con diverse opzioni di visualizzazione.
+            edit:
+              category_id:
+                label: Categoria
+                placeholder: Seleziona una categoria
+              main_page:
+                title: Pagina principale
+              mode:
+                label: Tipo di elenco
+                options:
+                  category: Una categoria specifica di pagine
+                  children: La pagina principale e i suoi figli
+                  selection: Una selezione specifica di pagine
+              option_categories:
+                label: Visualizza le categorie
+              option_image:
+                label: Visualizza le immagini delle pagine
+              option_main_summary:
+                label: Visualizza il riepilogo della pagina principale
+              option_summary:
+                label: Visualizza le descrizioni brevi delle pagine
+              page_id:
+                hint: Questa pagina principale definirà il titolo e il link del blocco. Se scegli una pagina senza compilare il titolo sopra, verrà utilizzato il titolo della pagina. Se il titolo è compilato, sostituirà il titolo della pagina selezionata, utilizzando il link della pagina.
+                label: Seleziona una pagina principale
+                none: Nessuna pagina selezionata
+              selection:
+                add: Aggiungi una pagina
+                label: Pagina
+                none: Nessuna pagina
+                title: Pagine selezionate
+            layouts:
+              alternate:
+                description: Un'alternanza graficamente molto leggera di pagine, ritmata tra sinistra e destra.
+                label: Alternanza
+              cards:
+                description: Carte affiancate, della stessa altezza, con un colore forte al passaggio del mouse. Questo formato è ideale per un piccolo numero di pagine.
+                label: Carte
+                more: Scopri di più
+              grid:
+                description: Le pagine sono presentate in griglia, da sinistra a destra e poi dall'alto verso il basso.
+                label: Griglia
+              large:
+                description: Ogni pagina è presentata in grande stile, su tutta la larghezza disponibile con una grande immagine.
+                label: Grande
+                more: Scopri di più
+              list:
+                description: Il riepilogo della pagina principale funge da editoriale in grande e le pagine sono presentate sotto forma di elenco a destra.
+                label: Elenco
+          papers:
+            description: Una selezione di articoli di ricerca pubblicati nella rivista scientifica.
+            edit:
+              mode:
+                label: Quali articoli visualizzare?
+                options:
+                  all: Gli articoli più recenti
+                  selection: Una selezione di articoli
+              quantity:
+                label: Quantità di articoli
+                placeholder: Inserisci la quantità
+              selection:
+                add: Aggiungi un articolo
+                label: Articolo
+                none: Nessun articolo
+                title: Articoli selezionati
+          persons:
+            description: Un elenco di persone, con foto, funzione e link alla pagina della persona.
+            edit:
+              add_person: Aggiungi una persona
+              alphabetical:
+                label: Ordine alfabetico
+              category_id:
+                label: Categoria
+              description:
+                label: Descrizione
+              element:
+                id:
+                  label: Persona
+                  placeholder: Scegli la persona
+                role:
+                  label: Ruolo
+                  placeholder: Indica il ruolo della persona
+              mode:
+                label: Quali persone visualizzare?
+                options:
+                  category: Una categoria specifica
+                  selection: Una selezione di persone
+              option_contact:
+                label: "Con le informazioni di contatto di ogni persona?"
+              option_image:
+                label: "Con un ritratto di ogni persona?"
+              option_link:
+                label: Link cliccabile alla pagina della persona
+              options: Opzioni di visualizzazione
+            layouts:
+              grid:
+                description: Le persone sono presentate in griglia, da sinistra a destra e poi dall'alto verso il basso.
+                label: Griglia
+              large:
+                description: Ogni persona è presentata in grande stile, su tutta la larghezza disponibile con una grande immagine.
+                label: Grande
+              list:
+                description: Un elenco di persone, molto simile a una tabella.
+                label: Elenco
+          posts:
+            description: Un elenco di notizie messe in evidenza.
+            edit:
+              add_post: Aggiungi un articolo
+              category_id:
+                label: Categoria
+                placeholder: Seleziona una categoria
+              element:
+                id:
+                  label: ''
+                  placeholder: Scegli l'articolo
+              mode:
+                label: Quali notizie visualizzare?
+                options:
+                  all: Tutte le notizie
+                  category: Una categoria specifica
+                  selection: Una selezione di notizie
+              posts_quantity:
+                label: Quantità di articoli
+                placeholder: Inserisci la quantità
+            layouts:
+              alternate:
+                description: Un'alternanza graficamente molto leggera di articoli tra la sinistra e la destra della pagina.
+                label: Alternanza
+              carousel:
+                description: Un elenco di notizie che sporge sul lato destro dello schermo, navigabile da destra a sinistra.
+                label: Carosello
+              grid:
+                description: Una griglia con tutte le immagini della stessa dimensione.
+                label: Griglia
+              highlight:
+                description: Un primo articolo in grande con la sua immagine, poi diversi piccoli, senza immagini.
+                label: Messa in evidenza
+              large:
+                description: Ogni notizia è presentata in grande stile, su tutta la larghezza disponibile con una grande immagine.
+                label: Grande
+                more: Scopri di più
+              list:
+                description: Un elenco di articoli con piccole immagini alla stessa larghezza.
+                label: Elenco
+          programs:
+            description: Una selezione di corsi di formazione.
+            edit:
+              add: Aggiungi un corso di formazione
+            layouts:
+              grid:
+                description: I corsi di formazione sono presentati in griglia, con le immagini tutte della stessa dimensione.
+                label: Griglia
+                more: Scopri di più
+              list:
+                description: Un elenco di corsi di formazione, uno sopra l'altro.
+                label: Elenco
+          projects:
+            description: Un elenco di progetti classificati per anno.
+            edit:
+              add: Aggiungi un progetto
+              category_id:
+                label: Categoria
+                placeholder: Seleziona una categoria
+              element:
+                id:
+                  label: ''
+                  placeholder: Scegli il progetto
+              mode:
+                label: Quali progetti visualizzare?
+                options:
+                  all: Tutti i progetti
+                  category: Una categoria specifica
+                  selection: Una selezione di progetti
+              projects_quantity:
+                label: Quantità di progetti
+                placeholder: Inserisci la quantità
+            layouts:
+              alternate:
+                description: Un'alternanza graficamente molto leggera di progetti tra la sinistra e la destra della pagina.
+                label: Alternanza
+              grid:
+                description: Una griglia con tutte le immagini della stessa dimensione.
+                label: Griglia
+              large:
+                description: Ogni progetto è presentato in grande stile, su tutta la larghezza disponibile con una grande immagine.
+                label: Grande
+                more: Scopri di più
+              list:
+                description: Un elenco di progetti, uno sotto l'altro.
+                label: Elenco
+          sound:
+            description: Una registrazione audio, con la sua trascrizione per l'accessibilità.
+            edit:
+              file:
+                label: File audio per la diffusione Web (.mp3, .m4a...)
+              title:
+                label: Titolo della registrazione
+                placeholder: Inserisci il titolo
+          testimonials:
+            description: Una o più testimonianze, con il testo, l'autore, la sua funzione e la sua foto.
+            edit:
+              add_testimonial: Aggiungi una testimonianza
+              element:
+                author:
+                  label: Autore·a della testimonianza
+                  placeholder: Inserisci il nome dell'autore·a
+                job:
+                  label: Professione dell'autore·a
+                  placeholder: Inserisci la professione dell'autore·a
+                photo:
+                  label: Foto
+                  remove_photo: Rimuovi la foto
+                text:
+                  label: Testo
+                  placeholder: Inserisci il testo della testimonianza
+              remove_testimonial: Rimuovi la testimonianza
+          timeline:
+            description: Un elenco di eventi con la loro descrizione, presentati in un fregio.
+            edit:
+              add_event: Aggiungi un evento
+              description:
+                label: Descrizione
+                placeholder: Inserisci la descrizione
+              element:
+                text:
+                  label: Testo
+                  placeholder: Inserisci il testo dell'evento
+                title:
+                  label: Titolo
+                  placeholder: Inserisci il titolo dell'evento
+              remove_event: Rimuovi l'evento
+            layouts:
+              horizontal:
+                description: Gli eventi sono presentati da sinistra a destra, navigabili con le frecce.
+                label: Orizzontale
+              vertical:
+                description: Gli eventi sono presentati verticalmente, in continuità con la pagina.
+                label: Verticale
+          title:
+            description: Un titolo di livello 2, che può essere presentato ripiegato se lo si desidera.
+            layouts:
+              classic:
+                description: Il titolo, semplicemente.
+                label: Classico
+              collapsed:
+                description: Il titolo ripiegato, con tutti i blocchi che lo seguono nascosti e un pulsante per visualizzarli.
+                label: Rielogato
+          video:
+            description: Un video integrato nella pagina da varie piattaforme, con la trascrizione e senza riproduzione automatica.
+            edit:
+              description:
+                label: Descrizione
+                placeholder: Inserisci la descrizione
+              url:
+                hint: |
+                  Es: https://vimeo.com/732180675, https://www.youtube.com/watch?v=7BTsrH6ulwQ
+                label: Url del video
+                placeholder: Inserisci l'url del video
+              video_title:
+                label: Titolo del video
+                placeholder: Inserisci il titolo del video
+            layouts:
+              player:
+                description: Un lettore video integrato nella pagina, che attende un clic per caricare il lettore della piattaforma esterna.
+                label: Lettore
+              button:
+                description: Un pulsante che avvia il video visualizzandolo sopra la pagina corrente, su uno sfondo scuro.
+                label: Pulsante
+          volumes:
+            description: Una selezione di volumi pubblicati nella rivista scientifica.
+            edit:
+              mode:
+                label: Quali volumi visualizzare?
+                options:
+                  all: I volumi più recenti
+                  selection: Una selezione di volumi
+              quantity:
+                label: Quantità di volumi
+                placeholder: Inserisci la quantità
+              selection:
+                add: Aggiungi un volume
+                label: Volume
+                none: Nessun volume
+                title: Volumi selezionati
+      contents:
+        blocks:
+          copy: Copia il blocco
+          paste: Incolla il blocco
+          quantity:
+            one: 1 blocco
+            other: '%{count} blocchi'
+            zero: Nessun blocco
+        modes:
+          structure:
+            description: Nella modalità "Organizza il piano", vedi solo una piccola anteprima di ogni blocco. È la modalità ideale per organizzare documenti lunghi.
+            tab: Organizza il piano
+          write:
+            description: Nella modalità "Scrivi il contenuto", puoi spostare i blocchi dove vuoi, indipendentemente l'uno dall'altro. Quindi, puoi spostare un titolo più in alto nel documento senza che trascini i suoi blocchi.
+            tab: Scrivi il contenuto
+  enums:
+    communication:
+      block:
+        template_kind:
+          agenda: Eventi
+          call_to_action: Call to action
+          categories: Categorie
+          chapter: Capitolo
+          contact: Contatto
+          datatable: Tabella
+          definitions: Definizioni
+          embed: Integrazione HTML
+          exhibitions: Mostre
+          features: Funzionalità
+          files: File
+          gallery: Galleria
+          image: Immagine
+          jobs: Offerte di lavoro
+          key_figures: Cifre chiave
+          license: Licenza
+          links: Link
+          locations: Campus
+          organizations: Organizzazioni
+          pages: Pagine
+          papers: Articoli
+          persons: Persone
+          posts: Notizie
+          programs: Corsi di formazione
+          projects: Progetti
+          sound: Suono
+          testimonials: Testimonianze
+          timeline: Cronologia
+          title: Titolo
+          video: Video
+          volumes: Volumi

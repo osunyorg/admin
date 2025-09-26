@@ -1,0 +1,178 @@
+it:
+  activemodel:
+    models:
+      research: Ricerca
+      research/hal: HAL
+  activerecord:
+    attributes:
+      research/hal/author:
+        docid: Identificativo HAL
+        first_name: Nome
+        full_name: Nome completo
+        last_name: Cognome
+        publications: Pubblicazioni importate da HAL
+        researcher: Ricercatore/trice in Osuny
+      research/journal/localization:
+        issn: ISSN
+        language: Lingua
+        title: Titolo
+      research/journal/paper:
+        accepted_at: Accettato il
+        doi: DOI
+        kind: Tipo di articolo
+        people: Autore/i
+        received_at: Ricevuto il
+      research/journal/paper/kind/localization:
+        title: Titolo
+      research/journal/paper/localization:
+        abstract: Estratto
+        authors_list: Elenco degli autori
+        bibliography: Bibliografia
+        keywords: Parole chiave
+        pdf: PDF
+        published: Pubblicato?
+        published_at: Pubblicato il
+        text: Testo
+        title: Titolo
+      research/journal/volume:
+        number: Numero
+      research/journal/volume/localization:
+        featured_image: Copertina
+        featured_image_alt: Testo alternativo
+        keywords: Parole chiave
+        published: Pubblicato?
+        published_at: Pubblicato il
+        text: Testo
+        title: Titolo
+      research/laboratory:
+        address: Indirizzo
+        city: Città
+        country: Paese
+        zipcode: Codice postale
+      research/laboratory/axis/localization:
+        name: Nome
+        short_name: Nome abbreviato
+        text: Testo
+      research/laboratory/localization:
+        address_additional: Complemento d'indirizzo
+        address_name: Nome dell'indirizzo
+        name: Nome
+      research/publication:
+        abstract: Riassunto
+        authors_list: Elenco degli autori
+        anr_project_references: Progetto/i ANR
+        docid: Identificativo
+        doi: DOI
+        doi_url: URL DOI
+        hal_url: URL HAL
+        journal_title: In...
+        open_access: Accesso aperto (open access)
+        publication_date: Data di pubblicazione
+        slug: Identificativo
+        title: Titolo
+        url: URL
+        urls: Indirizzi Web
+      research/thesis:
+        author: Autore/trice
+        completed: Completata?
+        completed_at: Completata il
+        director: Direttore/trice
+        laboratory: Laboratorio
+        started_at: Iniziata il
+      research/thesis/localization:
+        abstract: Riassunto
+        title: Titolo
+    models:
+      research/hal/author:
+        one: Autore/trice HAL
+        other: Autori/trici HAL
+      research/journal:
+        one: Rivista scientifica
+        other: Riviste scientifiche
+      research/journal/paper:
+        one: Articolo
+        other: Articoli
+      research/journal/paper/kind:
+        one: Tipo di articolo
+        other: Tipi di articolo
+      research/journal/volume:
+        one: Volumi
+        other: Volumi
+      research/laboratory:
+        one: Laboratorio
+        other: Laboratori
+      research/laboratory/axis:
+        one: Asse
+        other: Assi
+      research/publication:
+        one: Pubblicazione
+        other: Pubblicazioni
+      research/thesis:
+        one: Tesi
+        other: Tesi
+      university/person/localization/researcher:
+        one: Ricercatore/trice
+        other: Ricercatori/trici
+  admin:
+    research:
+      researcher:
+        show_person_html: Questa pagina mostra solo le pubblicazioni scientifiche della persona. <br>Se vuoi vedere o modificare le informazioni sulla persona, clicca sul link
+  enums:
+    research:
+      publication:
+        source:
+          hal: HAL
+          osuny: Osuny
+  research:
+    citations:
+      apa:
+        label: APA
+      chicago:
+        label: Chicago
+      harvard:
+        label: Harvard
+      iso690:
+        label: ISO 690
+      mla:
+        label: MLA
+    description:
+      parts:
+        journal:
+          description: Riviste ad accesso aperto (open access) che consentono ai ricercatori di contribuire alla ricerca
+          title: Riviste scientifiche
+        laboratory:
+          description: Struttura di ricerca che ospita il lavoro dei ricercatori
+          title: Laboratori
+        publication:
+          description: Pubblicazioni scientifiche prodotte dai ricercatori
+          title: Pubblicazioni
+        researcher:
+          description: Persona fisica legata a un'università, una componente, un laboratorio, ecc.
+          title: Ricercatori/trici
+        thesis:
+          description: Produzione scientifica che consente di ottenere il titolo di Dottore/Dottoressa
+          title: Tesi
+      source: Serge Haroche, Premio Nobel per la fisica 2012
+      text_html: La ricerca scientifica è, allo stesso tempo, un approccio creativo alla conoscenza motivato dalla pura curiosità e un'attività che genera innovazioni che aumentano i mezzi di azione e di diagnosi sulla natura, l'uomo e la società. Questi due aspetti della ricerca, quello fondamentale e quello applicato, lungi dall'opporsi, sono complementari l'uno all'altro. La ricerca fondamentale crea la base di conoscenza da cui nascono le applicazioni e, viceversa, i progressi tecnologici forniscono gli strumenti di indagine sempre più perfezionati che portano ad approfondire le nostre conoscenze fondamentali.
+      title: Ricerca
+    hal:
+      description:
+        parts:
+          author:
+            description: Profili dei ricercatori nel database HAL
+            title: Ricercatori/trici
+          publication:
+            description: Pubblicazioni scientifiche importate automaticamente da HAL
+            title: Pubblicazioni
+      select_identifier_html: Scegli tutti gli autori HAL corrispondenti a questa persona. <br>Utilizza le pubblicazioni per verificare che si tratti della persona giusta.
+      sync: Sincronizza le pubblicazioni HAL
+      synchronization_done: Sincronizzazione effettuata
+  research/hal:
+    description:
+      source: HAL.science
+      text_html: "HAL significa Hyper Article en Ligne. È una piattaforma multidisciplinare nazionale per il deposito e la consultazione di scritti, lavori e risultati di ricerche scientifiche di ricercatori e insegnanti-ricercatori. HAL è un bene comune per la ricerca: i più grandi organismi di ricerca e la maggior parte delle università francesi hanno scelto e sostengono HAL, un'infrastruttura pubblica, permanente e responsabile."
+  simple_form:
+    hints:
+      research_journal_paper:
+        authors_list: Digita l'elenco degli autori se non utilizzi le caselle di controllo "Autore/i" sopra
+        doi: "Puoi inserire l'identificativo DOI senza https://, ad esempio “10.19182/perspective/31918”"
