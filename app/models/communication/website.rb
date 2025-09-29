@@ -25,6 +25,7 @@
 #  git_provider                 :integer          default("github")
 #  highlighted_in_showcase      :boolean          default(FALSE)
 #  in_production                :boolean          default(FALSE)
+#  in_production_at             :datetime
 #  in_showcase                  :boolean          default(TRUE)
 #  last_sync_at                 :datetime
 #  locked_at                    :datetime
@@ -64,7 +65,6 @@ class Communication::Website < ApplicationRecord
   include LocalizableOrderByNameScope
   include Searchable
   include WithAbouts
-  include WithAssociatedObjects
   include WithConfigs
   include WithConnectedObjects
   include WithContentArchive
@@ -81,9 +81,15 @@ class Communication::Website < ApplicationRecord
   include WithLock
   include WithManagers
   include WithOpenApi
-  include WithProgramCategories
-  include WithSpecialPages
+  include WithPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
+  include WithProduction
+  include WithProgramCategories
+  include WithRealmAdministration
+  include WithRealmCommunication
+  include WithRealmEducation
+  include WithRealmResearch
+  include WithRealmUniversity
   include WithScreenshot
   include WithSecurity
   include WithShowcase
@@ -105,19 +111,11 @@ class Communication::Website < ApplicationRecord
             through: :localizations,
             source: :language
 
-  has_one_attached_deletable :default_image
-  has_one_attached_deletable :default_shared_image
-
-  validates :default_image, size: { less_than: 5.megabytes }
-  validates :default_shared_image, size: { less_than: 5.megabytes }
-
   before_validation :sanitize_fields
   before_validation :set_default_language,
                     :set_first_localization_as_published,
                     on: :create
 
-  scope :in_production, -> { where(in_production: true) }
-  scope :for_production, -> (production, language = nil) { where(in_production: production) }
   scope :for_search_term, -> (term, language) {
     joins(:university)
       .joins(:localizations)
@@ -131,10 +129,6 @@ class Communication::Website < ApplicationRecord
   scope :for_update, -> (autoupdate, language = nil) { where(autoupdate_theme: autoupdate) }
   scope :with_url, -> { where.not(url: [nil, '']) }
   scope :with_access_token, -> { where.not(access_token: [nil, '']) }
-  scope :ordered_by_production_date, -> {
-    # TODO add in_production_at and use it
-    order(created_at: :desc)
-  }
 
   def self.organized_for(user, language, limit: 6)
     university = user.university
@@ -163,21 +157,6 @@ class Communication::Website < ApplicationRecord
     original_localization.to_s
   end
 
-  # TODO deprecated
-  def git_path(website)
-    "data/website.yml"
-  end
-
-  # TODO deprecated
-  def can_have_git_file?
-    true
-  end
-
-  # TODO deprecated
-  def should_sync_to?(website)
-    website.id == id
-  end
-
   def dependencies
     # Le website est le SEUL cas d'auto-dépendance
     [self] +
@@ -192,8 +171,6 @@ class Communication::Website < ApplicationRecord
     feature_posts_dependencies +
     feature_alerts_dependencies +
     menus.in_languages(active_language_ids) +
-    [default_image&.blob] +
-    [default_shared_image&.blob] +
     indirect_objects_connected_to_website
   end
 

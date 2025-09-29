@@ -30,7 +30,9 @@
       </div>
       <div class="card-footer">
         <% if page.is_special_page? %>
-          <span class="show-on-hover"><%= t("communication.website.pages.defaults.#{page.type_key}.title") %></span>
+          <span class="badge text-bg-secondary">
+            <%= t("communication.website.pages.defaults.#{page.type_key}.title") %>
+          </span>
         <% end %>
       </div>
     </div>

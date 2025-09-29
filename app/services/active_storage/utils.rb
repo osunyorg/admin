@@ -1,10 +1,32 @@
 module ActiveStorage
 
-  # ActiveStorage::Utils.duplicate(
-  #   from.featured_image,
-  #   to.featured_image
-  # )
   class Utils
+    FORMAT_LANDSCAPE = 'landscape'
+    FORMAT_PORTRAIT = 'portrait'
+    FORMAT_SQUARE = 'square'
+
+    def self.ratio(blob)
+      width, height = blob.metadata.values_at('width', 'height')
+      # No width or height, default ratio
+      return 1 if width.nil? || height.nil?
+      width.to_f / height.to_f
+    end
+
+    def self.format(blob)
+      r = ratio(blob)
+      if r > 1
+        return FORMAT_LANDSCAPE
+      elsif r < 1
+        return FORMAT_PORTRAIT
+      else
+        return FORMAT_SQUARE
+      end
+    end
+
+    # ActiveStorage::Utils.duplicate(
+    #   from.featured_image,
+    #   to.featured_image
+    # )
     def self.duplicate(from, to)
       return unless from.attached?
       attach_from_url(

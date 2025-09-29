@@ -58,6 +58,10 @@ class Research::Journal < ApplicationRecord
     university.people.where(id: people.pluck(:id), is_researcher: true)
   end
 
+  def journals
+    Research::Journal.where(id: id)
+  end
+
   def dependencies
     localizations +
     volumes +
@@ -84,11 +88,23 @@ class Research::Journal < ApplicationRecord
     false
   end
 
+  def has_education_schools?
+    false
+  end
+
   def has_education_diplomas?
     false
   end
 
   def has_administration_locations?
+    false
+  end
+
+  def has_research_journals?
+    true
+  end
+
+  def has_research_laboratories?
     false
   end
 

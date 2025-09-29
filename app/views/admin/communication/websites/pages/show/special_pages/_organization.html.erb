@@ -1,11 +1,22 @@
 <%
-@organizations = @page.explicitly_connected_organizations
-                      .ordered(current_language)
-                      .page(params[:page])
+# Not in controller because it's loaded depending on the page type
+@organizations = @website.connected_organizations
+                         .ordered(current_language)
+                         .page(params[:organizations_page])
+
+@explicitly_connected_organizations = @page.explicitly_connected_organizations
+                                           .ordered(current_language)
+                                           .page(params[:explicitly_connected_organizations_page])
 %>
 <div class="row">
   <div class="offset-lg-4 col-lg-8">
-    <%= osuny_panel University::Organization.model_name.human(count: 2) do %>
+    <%= osuny_panel t('admin.communication.website.pages.special_page') do %>
+      <p><%= t('admin.communication.website.pages.special_pages.organization.native', count: @organizations.total_count) %></p>
+      <%= render 'admin/university/organizations/list', organizations: @organizations %>
+      <%= paginate @organizations, param_name: :organizations_page %>
+    <% end %>
+    <%= osuny_panel t('admin.communication.website.pages.special_pages.organization.explicitly_connected') do %>
+      <p><%= t('admin.communication.website.pages.special_pages.organization.explicitly_connected_hint') %></p>
       <%= simple_form_for :association, class_name: 'association' do |f| %>
         <%= f.input :name,
                     label: false,
@@ -21,9 +32,9 @@
                     %>
       <% end %>
       <div class="row g-3">
-        <% @organizations.each do |organization| %>
-          <div class="col-6 col-lg-4 col-xxl-3">
-            <div class="<%= osuny_card_classes %>">
+        <% @explicitly_connected_organizations.each do |organization| %>
+          <div>
+            <div class="<%= osuny_card_classes(horizontal: true) %>">
               <%= render 'admin/university/organizations/thumbnail', organization: organization %>
               <div class="card-body">
                 <%= osuny_published_localized organization %>
@@ -40,7 +51,7 @@
           </div>
         <% end %>
       </div>
-      <%= paginate @organizations %>
+      <%= paginate @explicitly_connected_organizations, param_name: :explicitly_connected_organizations_page %>
     <% end %>
   </div>
 </div>

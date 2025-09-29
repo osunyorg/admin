@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_21_143751) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_16_144118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -1203,8 +1203,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_21_143751) do
     t.boolean "is_programs_root", default: false
     t.boolean "is_taxonomy", default: false
     t.string "bodyclass"
-    t.integer "position_in_tree"
     t.string "migration_identifier"
+    t.integer "position_in_tree"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_post_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_post_categories_on_program_id"
@@ -1342,6 +1342,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_21_143751) do
     t.boolean "archive_content", default: false
     t.integer "years_before_archive_content", default: 3
     t.boolean "feature_hourly_publication", default: false
+    t.datetime "in_production_at"
     t.index ["about_type", "about_id"], name: "index_communication_websites_on_about"
     t.index ["default_language_id"], name: "index_communication_websites_on_default_language_id"
     t.index ["university_id"], name: "index_communication_websites_on_university_id"
@@ -1772,6 +1773,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_21_143751) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["about_id"], name: "index_research_journal_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_journal_localizations_on_language_id"
     t.index ["university_id"], name: "index_research_journal_localizations_on_university_id"
@@ -1937,6 +1939,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_21_143751) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["about_id"], name: "index_research_laboratory_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_laboratory_localizations_on_language_id"
     t.index ["university_id"], name: "index_research_laboratory_localizations_on_university_id"
@@ -2127,6 +2130,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_21_143751) do
     t.string "featured_image_alt"
     t.text "featured_image_credit"
     t.string "migration_identifier"
+    t.boolean "published", default: false
+    t.datetime "published_at"
     t.index ["about_id"], name: "index_university_organization_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_organization_localizations_on_language_id"
     t.index ["university_id"], name: "index_university_organization_localizations_on_university_id"
@@ -2140,7 +2145,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_21_143751) do
     t.string "country"
     t.string "phone"
     t.string "email"
-    t.boolean "active", default: true
     t.string "siren"
     t.integer "kind", default: 10
     t.datetime "created_at", null: false

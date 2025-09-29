@@ -1,7 +1,16 @@
-module Communication::Website::WithSpecialPages
+module Communication::Website::WithPages
   extend ActiveSupport::Concern
 
   included do
+    has_many    :pages,
+                foreign_key: :communication_website_id,
+                dependent: :destroy
+
+    has_many    :page_categories,
+                class_name: "Communication::Website::Page::Category",
+                foreign_key: :communication_website_id,
+                dependent: :destroy
+
     after_save :create_missing_special_pages
     after_touch :create_missing_special_pages
   end

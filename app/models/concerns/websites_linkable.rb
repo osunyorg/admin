@@ -19,12 +19,24 @@ module WebsitesLinkable
     raise NoMethodError, "You must implement the `has_teachers?` method in #{self.class.name}"
   end
 
+  def has_education_schools?
+    raise NoMethodError, "You must implement the `has_education_schools?` method in #{self.class.name}"
+  end
+
   def has_education_programs?
     raise NoMethodError, "You must implement the `has_education_programs?` method in #{self.class.name}"
   end
 
   def has_education_diplomas?
     raise NoMethodError, "You must implement the `has_education_diplomas?` method in #{self.class.name}"
+  end
+
+  def has_research_journals?
+    raise NoMethodError, "You must implement the `has_research_journals?` method in #{self.class.name}"
+  end
+
+  def has_research_laboratories?
+    raise NoMethodError, "You must implement the `has_research_laboratories?` method in #{self.class.name}"
   end
 
   def has_research_papers?

@@ -11,7 +11,7 @@ link_to_all ||= false
       job_l10n = job.best_localization_for(current_language)
       %>
       <div>
-        <div class="<%= osuny_card_classes(horizontal: true) %>">
+        <div class="<%= osuny_card_classes(horizontal: true) %> <%= 'align-items-start' unless small %>">
           <%= osuny_thumbnail_localized job, large: !small %>
           <div class="card-body">
             <% if small %>

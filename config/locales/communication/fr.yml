@@ -121,9 +121,7 @@ fr:
         config_robots_txt: Fichier robots.txt, adressé aux moteurs de recherche
         configs: Fichiers de configuration
         created_at: Création
-        default_image: Image par défaut
         default_language: Langue par défaut
-        default_shared_image: Image de partage par défaut
         default_time_zone: Fuseau horaire par défaut
         deployment_status_badge: Badge de statut du déploiement
         destination_websites: Sites dans lesquels diffuser
@@ -142,6 +140,7 @@ fr:
         git_provider: Fournisseur Git
         highlighted_in_showcase: Mis en avant dans le showcase
         in_production: Site en production
+        in_production_at: Date de mise en production
         in_showcase: Présenter le site dans le showcase
         languages: Langues
         locked_at: Verrouillé pour les background jobs à
@@ -221,6 +220,8 @@ fr:
         subtitle: Sous-titre
         title: Titre
       communication/website/localization:
+        default_image: Image par défaut
+        default_shared_image: Image de partage par défaut
         name: Nom
         published: Langue publiée
         social_email: "Adresse email"
@@ -523,9 +524,16 @@ fr:
           in: dans
           in_full_width: en pleine largeur
           show: Voir la page
+          special_page: Page spéciale
           special_pages:
             organization:
               disconnect: Déconnecter
+              explicitly_connected: Organisations directement connectées
+              explicitly_connected_hint: Vous pouvez connecter directement des organisations au site Web en les recherchant ci-dessous. Quoi qu'il en soit, toutes les organisations mentionnées dans le site seront listées ci-dessus.
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les organisations mentionnées dans le site. Pour l'instant, il n'y a aucune organisation dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les organisations mentionnées dans le site. Pour l'instant, il y a 1 organisation dans le site.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} organisations mentionnées dans le site.
             person:
               disconnect: Déconnecter
           structure: Pages
@@ -662,6 +670,9 @@ fr:
           education_program:
             slug: formations
             title: "Formations"
+          education_school:
+            slug: ecoles
+            title: "Écoles"
           home:
             slug: ''
             title: Accueil
@@ -677,6 +688,12 @@ fr:
           privacy_policy:
             slug: politique-de-confidentialite
             title: Politique de confidentialité
+          research_journal:
+            slug: revues-scientifiques
+            title: Revues scientifiques
+          research_laboratory:
+            slug: laboratoires
+            title: Laboratoires
           research_paper:
             slug: papiers
             title: Papiers

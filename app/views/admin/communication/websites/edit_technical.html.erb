@@ -13,6 +13,7 @@
           <%= f.input :url %>
           <%= render 'admin/communication/abouts', f: f, i18n_key: 'activerecord.attributes.communication/website.about_' %>
           <%= f.input :in_production %>
+          <%= f.input :in_production_at, html5: true, as: :date %>
         <% end %>
       </div>
       <div class="col-lg-6 col-xxl-4">
