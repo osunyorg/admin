@@ -64,7 +64,12 @@ class Import < ApplicationRecord
   end
 
   def url_pattern
-    "admin_university_#{kind}_import_url"
+    case kind
+    when 'organizations', 'people_experiences', 'people'
+      "admin_university_#{kind}_import_url"
+    when 'alumni_cohorts'
+      "admin_administration_#{kind}_import_url"
+    end
   end
 
   private
