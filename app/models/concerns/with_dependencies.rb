@@ -99,7 +99,8 @@ module WithDependencies
   # Les objets qui n'ont pas pas de méthode published (website, menu, blob) sont publiés par défaut
   def dependency_published?(dependency)
     if dependency.respond_to?(:published?)
-      dependency.published?
+      # Certains objets sont des index Hugo, et sont là même s'ils ne sont pas publiés 
+      dependency.published? || dependency.try(:about).try(:is_hugo_index?)
     else
       true
     end
