@@ -494,7 +494,19 @@ en:
                   label: URL
                   placeholder: 'https://'
               move_links: Move links below to define the order
+              option_icons:
+                label: Show images as small icons
               remove: Remove the link
+            layouts:
+              cards:
+                description: Cards side by side, of same height, with a strong color on rollover.
+                label: Cards
+              grid:
+                description: As a grid, with all images the same height.
+                label: Grid
+              list:
+                description: A list of links with small images, all of the same width.
+                label: List
           locations:
             description: A selection of locations on a campus.
             edit:

@@ -494,7 +494,19 @@ fr:
                   label: URL
                   placeholder: 'https://'
               move_links: Déplacer les liens ci-dessous pour les mettre dans l'ordre souhaité
+              option_icons:
+                label: Afficher les images comme de petites icônes
               remove: Enlever le lien
+            layouts:
+              cards:
+                description: Des cartes côte à côte, de même hauteur, avec une couleur forte au survol.
+                label: Cartes
+              grid:
+                description: Une grille avec les éventuelles images à la même taille.
+                label: Grille
+              list:
+                description: Une liste de liens, les uns au-dessous des autres.
+                label: Liste
           locations:
             description: Une sélection de sites dans des campus.
             edit:
