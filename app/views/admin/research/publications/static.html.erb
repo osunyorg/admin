@@ -29,7 +29,7 @@ links:
   - label: "PDF"
     url: "<%= @about.file %>"
 researchers:
-<% @about.researchers.in_university(@website.university).each do |researcher| %>
+<% @about.researchers.in_university(@website.university).uniq.each do |researcher| %>
   <% 
     researcher_l10n = researcher.localization_for(@website.default_language)
     next if researcher_l10n.nil?
