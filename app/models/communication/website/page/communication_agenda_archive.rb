@@ -1,4 +1,9 @@
 class Communication::Website::Page::CommunicationAgendaArchive < Communication::Website::Page
+
+  def is_hugo_index?
+    true
+  end
+
   def editable_width?
     false
   end
