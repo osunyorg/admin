@@ -5,5 +5,11 @@ if page.is_special_page?
   # il faut envoyer un tableau vide, qui est la valeur par défaut, pour mettre le troisième argument `partial` à true
   exists = lookup_context.exists? path, [], true
   %>
-<%= render path, page: page, l10n: l10n if exists %>
+  <%= render path, page: page, l10n: l10n if exists %>
+<% if l10n.draft? %>
+build:
+  list: always
+  publishResources: true
+  render: never
+<% end %>
 <% end %>
