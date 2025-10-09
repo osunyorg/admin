@@ -3,8 +3,9 @@ class Api::AttachFeaturedImageFromUrlJob < ApplicationJob
 
   def perform(object, attachment_url)
     attachment_uri = begin
-      URI.parse(attachment_url)
-    rescue URI::InvalidURIError
+      escaped_url = URI::Parser.new.escape(attachment_url)
+      URI.parse(escaped_url)
+    rescue URI::InvalidURIError, ArgumentError
       raise ActionController::BadRequest.new("Invalid featured image URL: #{attachment_url}")
     end
 
