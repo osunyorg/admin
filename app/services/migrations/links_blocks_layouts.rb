@@ -16,9 +16,7 @@ class Migrations::LinksBlocksLayouts
       block.save
 
       # Generate git files
-      block.about.git_files.find_each do |git_file|
-        Communication::Website::GitFile::IdentifyJob.perform_later(git_file)
-      end
+      Communication::Website::GitFile::IdentifyJob.perform_later(block.about)
     end
   end
 
