@@ -38,3 +38,9 @@
 <div v-show="data.elements.length > 2">
   <%= block_component_add_element block, t('.add') %>
 </div>
+
+<%= osuny_separator %>
+<%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+  <%= block_component_edit block, :layout %>
+  <%= block_component_edit block, :option_icons %>
+<% end %>
