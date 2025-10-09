@@ -88,7 +88,7 @@ gem "unsplash"
 gem "vimeo"
 
 group :development, :test do
-  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "byebug", platforms: [:mri, :windows]
   gem "figaro"
   gem "rspec-rails"
   gem "vcr"
@@ -111,4 +111,4 @@ group :test do
   gem "simplecov", require: false
 end
 
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "tzinfo-data", platforms: [:windows, :jruby]
