@@ -223,6 +223,7 @@ fr:
       cohorts:
         import_btn: Importer des promotions
         import_hint_html: "Le champ <i>school</i> doit contenir l'id interne de l'école.<br>Le champ <i>program</i> doit contenir l'id interne de la formation."
+        import_warning_html: "Attention : Si vous avez un ou plusieurs extranets concernés par ces alumni, cet import va envoyer des emails aux personnes importées, pour leur indiquer qu'elles ont désormais accès à l'extranet.<br>Elles recevront des mails même si elles ont déjà activé leur accès.<br>Si un alumnus est ajouté plusieurs fois dans l'import, il ne recevra qu'un seul email par extranet."
         title: Imports de promotions
     apps:
       regenerate_token: Regénérer le jeton
