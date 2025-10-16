@@ -433,8 +433,8 @@ en:
       invitation_message:
         subject: Welcome to your extranet
         text: You now have access to the extranet.
-        with_user_html: You can sign in with your email address <b>%{email}</b> by clicking <a href="%{sign_in_url}">here</a>.
-        without_user_html: You can sign up with your email address <b>%{email}</b> by clicking <a href="%{sign_up_url}">here</a>.
+        with_user_html: You can sign in with your email address <b>%{email}</b> by <a href="%{sign_in_url}">clicking here</a>.
+        without_user_html: You can sign up with your email address <b>%{email}</b> by <a href="%{sign_up_url}">clicking here</a>.
     notifications:
       gdpr_deletion_incoming:
         subject: "Osuny - your account will soon be deleted"
