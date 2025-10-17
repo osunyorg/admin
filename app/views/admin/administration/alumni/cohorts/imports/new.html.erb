@@ -18,11 +18,14 @@
       <%# as file can be empty the global object can be unset. To prevent crash in controller add an (unused) hidden field %>
       <%= f.input :id, as: :hidden %>
 
-      <%= f.input :file %>
+      <%= f.input :file, required: true %>
 
       <% content_for :action_bar_right do %>
         <%= submit f %>
       <% end %>
+
+      <p><%= t('university.alumni.cohorts.import_warning_html') %></p>
+
 
       <small>
         <%= t('imports.example_file_html', link: asset_url('alumni-example.xlsx')) %>

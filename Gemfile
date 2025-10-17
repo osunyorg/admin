@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.6"
+ruby "3.4.7"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_hashcash", github: "BaseSecrete/active_hashcash"
@@ -76,7 +76,7 @@ gem "simple_form"
 gem "simple_form_bs5_file_input"#, path: "../../noesya/simple_form_bs5_file_input"
 gem "simple_form_password_with_hints"#, path: "../simple_form_password_with_hints"
 gem "sprockets-rails", "~> 3"
-gem "summernote-rails", git: "https://github.com/noesya/summernote-rails.git"
+gem "summernote-rails", git: "https://github.com/noesya/summernote-rails.git", branch: :master
 # gem "summernote-rails", path: "../../noesya/summernote-rails"
 gem "two_factor_authentication", git: "https://github.com/noesya/two_factor_authentication.git"
 # gem "two_factor_authentication", path: "../two_factor_authentication"

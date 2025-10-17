@@ -223,6 +223,7 @@ en:
       cohorts:
         import_btn: Import cohorts
         import_hint_html: "<i>School</i> field should contain the internal school id.<br><i>Program</i> field should contain the internal program id."
+        import_warning_html: "Please note: If you have one or more extranets affected by these alumni, this import will send emails to the imported people, to inform them that they now have access to the extranet.<br>They will receive emails even if they have already activated their access.<br>If an alumnus is added multiple times in the import, they will only receive one email per extranet."
         title: Cohorts imports
     apps:
       regenerate_token: Regenerate token
