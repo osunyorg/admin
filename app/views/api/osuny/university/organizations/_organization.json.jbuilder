@@ -1,5 +1,5 @@
 json.extract! organization,
-              :id, :migration_identifier, :kind, :active,
+              :id, :migration_identifier, :kind,
               :email, :phone, :address, :zipcode, :city, :country,
               :latitude, :longitude, :nic, :siren
 json.localizations do

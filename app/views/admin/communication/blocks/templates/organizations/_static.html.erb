@@ -19,16 +19,17 @@ next if hugo.file.blank?
       organizations:
 <% block.template.selected_elements.each do |element| %>
 <%
-if element.organization
-  l10n = element.organization.localization_for(block.language)
-  next if l10n.nil?
-  hugo = l10n.hugo(@website)
+if element.organization?
+  hugo = element.organization_l10n.hugo(@website)
   next if hugo.file.blank?
   quantity += 1
   %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 4 %>
-<% else %>
-<% next if element.best_name.blank? %>
+<% 
+else
+  next if element.best_name.blank?
+  quantity += 1
+%>
 <%= block_component_static block, :name, template: element, depth: 4, list: true %>
 <%= block_component_static block, :url, template: element, depth: 5 %>
           logo: "<%= element.logo_component.blob&.id %>"

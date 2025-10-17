@@ -13,12 +13,20 @@ link_to_all ||= false
                                     admin_communication_website_page_path(website_id: page.website.id, id: page.id),
                                     classes: "stretched-link" %>
         </div>
-        <div class="card-footer small text-muted">
+        <div class="card-footer">
           <% if small %>
-            <%= l page.updated_at.to_date, format: :short %>
+            <span class="small text-muted"><%= l page.updated_at.to_date, format: :short %></small>
           <% else %>
-            <%= t("communication.website.pages.defaults.#{page.type_key}.title") if page.is_special_page? %>
-            <%= Communication::Website::Page.human_attribute_name('full_width') if page.full_width %>
+            <% if page.full_width %>
+              <span class="badge text-bg-secondary">
+                <%= Communication::Website::Page.human_attribute_name('full_width') %>
+              </span>
+            <% end %>
+            <% if page.is_special_page? %>
+              <span class="badge text-bg-secondary">
+                <%= t("communication.website.pages.defaults.#{page.type_key}.title") %>
+              </span>
+            <% end %>
           <% end %>
         </div>
       </div>

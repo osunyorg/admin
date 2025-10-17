@@ -55,7 +55,7 @@ module AsIndirectObject
   end
 
   def direct_sources_from_existing_connections
-    connections.collect &:direct_source
+    connections.collect(&:direct_source).compact
   end
 
   def direct_sources_with_dependencies_for_website(website)

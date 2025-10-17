@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.5"
+ruby "3.4.7"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_hashcash", github: "BaseSecrete/active_hashcash"
@@ -14,7 +14,6 @@ gem "bootstrap5-kaminari-views"
 gem "breadcrumbs_on_rails"
 gem "brevo"
 gem "bugsnag"
-gem "bugsnag_performance"
 # Lock précis parce que @sebouchu a identifié un problème
 # (les authorize through des modèles qui faisaient des faux négatifs sur les rôles intermédiaires)
 gem "cancancan", "~> 3.3.0"
@@ -77,15 +76,15 @@ gem "simple_form"
 gem "simple_form_bs5_file_input"#, path: "../../noesya/simple_form_bs5_file_input"
 gem "simple_form_password_with_hints"#, path: "../simple_form_password_with_hints"
 gem "sprockets-rails", "~> 3"
-gem "summernote-rails", git: "https://github.com/noesya/summernote-rails.git"
-# gem "summernote-rails", path: "../summernote-rails"
+gem "summernote-rails", git: "https://github.com/noesya/summernote-rails.git", branch: :master
+# gem "summernote-rails", path: "../../noesya/summernote-rails"
 gem "two_factor_authentication", git: "https://github.com/noesya/two_factor_authentication.git"
 # gem "two_factor_authentication", path: "../two_factor_authentication"
 gem "unsplash"
 gem "vimeo"
 
 group :development, :test do
-  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "byebug", platforms: [:mri, :windows]
   gem "figaro"
   gem "rspec-rails"
   gem "vcr"
@@ -108,4 +107,4 @@ group :test do
   gem "simplecov", require: false
 end
 
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "tzinfo-data", platforms: [:windows, :jruby]

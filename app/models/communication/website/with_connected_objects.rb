@@ -71,7 +71,7 @@ module Communication::Website::WithConnectedObjects
   end
 
   def connect(indirect_object, direct_source, direct_source_type: nil)
-    # https://developers.osuny.org/docs/admin/sites-web/git/dependencies/iteration-9/
+    # https://developers.osuny.org/docs/admin/sites-web/dependencies/iteration-9/
     connect_object(
       indirect_object,
       direct_source,

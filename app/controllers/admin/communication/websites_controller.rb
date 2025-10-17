@@ -52,12 +52,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
                           @posts.any? &&
                           can?(:read, Communication::Website::Post)
     @show_events      = @website.feature_agenda &&
-                          @events.any? && 
+                          @events.any? &&
                           can?(:read, Communication::Website::Agenda::Event)
     @show_exhibitions = @website.feature_agenda &&
                           @exhibitions.any? &&
                           can?(:read, Communication::Website::Agenda::Exhibition)
-    @show_projects    = @website.feature_portfolio && 
+    @show_projects    = @website.feature_portfolio &&
                           @projects.any? &&
                           can?(:read, Communication::Website::Portfolio::Project)
     @show_jobs        = @website.feature_jobboard &&
@@ -159,19 +159,20 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def website_params
     attribute_names = [
-      :url, :repository, :about_type, :about_id, :in_production,
+      :url, :repository, :about_type, :about_id, :in_production, :in_production_at,
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication,
-      :default_time_zone,
-      :deuxfleurs_hosting, :default_image, :default_image_delete, :default_image_infos, :default_shared_image, :default_shared_image_delete, :default_shared_image_infos,
+      :default_time_zone, :deuxfleurs_hosting,
       :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
       showcase_tag_ids: [], source_website_ids: [],
       localizations_attributes: [
         :id, :language_id, :name, :published,
         :social_mastodon, :social_x, :social_linkedin, :social_youtube,
         :social_vimeo, :social_peertube, :social_instagram, :social_facebook,
-        :social_tiktok, :social_email, :social_github
+        :social_tiktok, :social_email, :social_github,
+        :default_image, :default_image_delete, :default_image_infos,
+        :default_shared_image, :default_shared_image_delete, :default_shared_image_infos
       ]
     ]
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?

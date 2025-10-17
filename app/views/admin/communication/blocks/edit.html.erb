@@ -48,7 +48,7 @@
             <%= osuny_label t('admin.communication.blocks.advanced.anchor') %>
             <pre>#<%= slug %></pre>
             <%
-            if about.try(:is_direct_object?)
+            if about.try(:is_direct_object?) && !about.is_a?(Communication::Website)
               website = about.website
               hugo = about_l10n.hugo(website)
               %>

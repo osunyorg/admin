@@ -43,21 +43,21 @@
                     selected: f.object.default_time_zone || Time.zone.name %>
       </div>
       <div class="col-lg-4">
-        <%= f.input :default_image,
-                    as: :single_deletable_file,
-                    hint: images_formats_accepted_hint,
-                    input_html: { accept: default_images_formats_accepted },
-                    preview: 300 %>
+        <%= lf.input :default_image,
+                      as: :single_deletable_file,
+                      hint: images_formats_accepted_hint,
+                      input_html: { accept: default_images_formats_accepted },
+                      preview: 300 %>
         <p class="form-text">
           <%= t('admin.communication.website.default_image') %>
         </p>
       </div>
       <div class="col-lg-4">
-        <%= f.input :default_shared_image,
-                    as: :single_deletable_file,
-                    hint: images_formats_accepted_hint,
-                    input_html: { accept: default_images_formats_accepted },
-                    preview: 300 %>
+        <%= lf.input :default_shared_image,
+                      as: :single_deletable_file,
+                      hint: images_formats_accepted_hint,
+                      input_html: { accept: default_images_formats_accepted },
+                      preview: 300 %>
       </div>
     </div>
     <% content_for :action_bar_right do %>

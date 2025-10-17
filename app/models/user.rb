@@ -65,6 +65,7 @@ class User < ApplicationRecord
   include WithAuthorship
   include WithAvatar
   include WithBrevo
+  include WithCreatedElements
   include WithFavorites
   include WithOmniauth
   include WithPerson

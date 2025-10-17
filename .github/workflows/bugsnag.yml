@@ -19,6 +19,7 @@ jobs:
             -d "{
               \"apiKey\": \"${{ secrets.BUGSNAG_API_KEY }}\",
               \"appVersion\": \"${GITHUB_REF_NAME}\",
+              \"autoAssignRelease\": true,
               \"releaseStage\": \"production\",
               \"builderName\": \"github-actions\",
               \"sourceControl\": {

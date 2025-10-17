@@ -51,6 +51,7 @@ export default {
         this.resetOrigin();
         this.current.origin.medias.id = image.id;
         this.current.image.credit = image.credit;
+        this.current.image.alt = image.alt;
         this.current.image.url = image.thumb;
       }
     },
