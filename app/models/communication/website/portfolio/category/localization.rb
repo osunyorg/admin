@@ -6,6 +6,7 @@
 #  featured_image_alt       :text
 #  featured_image_credit    :text
 #  meta_description         :text
+#  migration_identifier     :string
 #  name                     :string
 #  path                     :string
 #  slug                     :string
@@ -35,6 +36,7 @@ class Communication::Website::Portfolio::Category::Localization < ApplicationRec
   # Needs to be included before Sluggable (which is included by AsCategoryLocalization > Permalinkable)
   include AsDirectObjectLocalization
   include AsCategoryLocalization
+  include WithOpenApi
 
   belongs_to :website,
               class_name: 'Communication::Website',
