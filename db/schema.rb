@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_16_144118) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_20_075659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -1117,6 +1117,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_16_144118) do
     t.uuid "program_id"
     t.string "bodyclass"
     t.integer "position_in_tree"
+    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_8f309901d4"
     t.index ["parent_id"], name: "index_communication_website_portfolio_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_portfolio_categories_on_program_id"
@@ -1144,6 +1145,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_16_144118) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "migration_identifier"
     t.index ["about_id"], name: "idx_on_about_id_e184bfe637"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_9d28ee55e4"
     t.index ["language_id"], name: "idx_on_language_id_70b50689c4"

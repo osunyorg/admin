@@ -1,0 +1,30 @@
+test_project_fr:
+  migration_identifier: test-project-fixture-1-fr
+  title: Test
+  slug: test
+  published: true
+  published_at: 2010-11-28 00:00:00
+  about: test_project
+  language: fr
+  website: website_with_github
+  university: default_university
+
+test_project_2_fr:
+  title: Test 2
+  slug: test-2
+  published: true
+  published_at: 2010-11-28 00:00:00
+  about: test_project_2
+  language: fr
+  website: website_with_github
+  university: default_university
+
+test_project_3_fr:
+  title: Test 3
+  slug: test-3
+  published: false
+  published_at: 2010-11-28 00:00:00
+  about: test_project_3
+  language: fr
+  website: website_with_github
+  university: default_university

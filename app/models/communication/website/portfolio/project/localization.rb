@@ -52,6 +52,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
+  include WithOpenApi
   include WithUniversity
 
   belongs_to :website,
