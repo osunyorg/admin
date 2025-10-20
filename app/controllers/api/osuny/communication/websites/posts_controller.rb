@@ -6,7 +6,10 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   before_action :ensure_same_migration_identifier, only: :update
 
   def index
-    @posts = website.posts.includes(:localizations)
+    @posts = website.posts
+                    .includes(:localizations)
+                    .page(page_num_param)
+                    .per(per_page_param)
   end
 
   def show

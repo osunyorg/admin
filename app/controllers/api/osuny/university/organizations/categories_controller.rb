@@ -6,7 +6,10 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
   before_action :ensure_same_migration_identifier, only: :update
 
   def index
-    @categories = current_university.organization_categories.includes(:localizations)
+    @categories = current_university.organization_categories
+                                    .includes(:localizations)
+                                    .page(page_num_param)
+                                    .per(per_page_param)
   end
 
   def show
