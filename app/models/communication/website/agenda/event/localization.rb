@@ -198,4 +198,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     localize_attachment(localization, :shared_image) if shared_image.attached?
   end
 
+  def localize_specific_data(localization)
+    about.time_slot_localizations.where(language: language).each do |time_slot_l10n|
+      time_slot_l10n.localize_in!(localization.language)
+    end
+  end
+
 end
