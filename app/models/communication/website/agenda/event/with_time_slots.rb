@@ -79,17 +79,22 @@ module Communication::Website::Agenda::Event::WithTimeSlots
     end
     time_slot.duration = slot[:duration].to_i
     time_slot.save
-    l10n = time_slot.localization_for(language)
-    if l10n.nil?
-      l10n = time_slot.localizations.build(
-        language: language,
+    # First, we make sure the time slot has a l10n for each event l10n
+    check_time_slot_l10ns(time_slot, slot)
+    # Then we update the time slot l10n for the current language
+    time_slot_l10n = time_slot.localization_for(language)
+    time_slot_l10n.update(place: slot[:place])
+    time_slot
+  end
+
+  def check_time_slot_l10ns(time_slot, slot)
+    localizations.each do |event_l10n|
+      time_slot.localizations.where(
+        language: event_l10n.language,
         website: website,
         university: university
-      )
+      ).first_or_create(place: slot[:place])
     end
-    l10n.place = slot[:place]
-    l10n.save
-    time_slot
   end
 
   def delete_obsolete_slots(except_ids)
