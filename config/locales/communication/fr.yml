@@ -511,6 +511,11 @@ fr:
           fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
           title: Internationalisation
         page:
+          filters:
+            all: Toutes les pages
+            published: Publiées
+            draft: Brouillons
+            deleted: Supprimées
           localizations:
             draft: Brouillon
             published: Publiée

@@ -4,6 +4,8 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
+#  deleted_at               :datetime         indexed
+#  design_options           :jsonb
 #  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  position                 :integer          not null
@@ -18,6 +20,7 @@
 # Indexes
 #
 #  index_communication_website_pages_on_communication_website_id  (communication_website_id)
+#  index_communication_website_pages_on_deleted_at                (deleted_at)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
 #  index_communication_website_pages_on_university_id             (university_id)
 #
@@ -29,6 +32,8 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
+  acts_as_paranoid
+
   # FIXME: Remove legacy column from db
   # kind was replaced by type in January 2023
   self.ignored_columns = %w(path kind)

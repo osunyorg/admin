@@ -24,6 +24,18 @@ module Localizable
       for_language(language).merge(l10n_klass.published_now)
     }
 
+    scope :draft_in, -> (language) {
+      l10n_klass = _reflect_on_association(:localizations).klass
+      return for_language(language) unless l10n_klass.respond_to?(:draft)
+      for_language(language).merge(l10n_klass.draft)
+    }
+
+    scope :published_in_the_future_in, -> (language) {
+      l10n_klass = _reflect_on_association(:localizations).klass
+      return for_language(language) unless l10n_klass.respond_to?(:published_in_the_future)
+      for_language(language).merge(l10n_klass.published_in_the_future)
+    }
+
   end
 
   def localizable?

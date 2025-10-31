@@ -4,15 +4,9 @@
   <%= create_link Communication::Website::Page %>
 <% end %>
 
-<div class="d-flex justify-content-between mb-4">
-  <p>
-    <%= @pages.total_count %>
-    <%= Communication::Website::Page.model_name.human(count: @pages.total_count).downcase %>
-  </p>
-  <%= render 'filters', current_path: list_admin_communication_website_pages_path %>
-</div>
+<%= render 'filters', current_path: list_admin_communication_website_pages_path %>
 
-<ul class="nav nav-tabs justify-content-md-end small">
+<ul class="nav nav-pills justify-content-md-end small">
   <li class="nav-item">
     <a class="nav-link" href="<%= admin_communication_website_pages_path %>">
       <i class="fas fa-sitemap"></i>
@@ -20,7 +14,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" aria-current="page">
+    <a class="nav-link rounded-pill active" aria-current="page">
       <i class="fas fa-list"></i>
       <%= t('admin.communication.website.pages.as_list') %>
     </a>
