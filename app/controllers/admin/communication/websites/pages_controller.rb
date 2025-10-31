@@ -10,19 +10,19 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
                 only: [:show, :edit, :update, :static, :publish, :preview, :generate_from_template]
 
   def index
+    @filtered_pages = @pages.filter_by(params[:filters], current_language)             
     @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
-    @pages = @website.pages
     @feature_nav = 'navigation/admin/communication/website/pages'
     breadcrumb
   end
 
   def index_list
-    @pages = @pages.filter_by(params[:filters], current_language)
-                   .ordered_by_title(current_language)
-                   .page(params[:page])
+    @filtered_pages = @pages.filter_by(params[:filters], current_language)             
+    @pages = @filtered_pages.ordered_by_title(current_language).page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/pages'
     breadcrumb
+    add_breadcrumb t('admin.communication.website.pages.as_list')
   end
 
   def reorder

@@ -1,35 +1,46 @@
-<div class="d-flex justify-content-between mb-4">
+<%
+params = {}
+params[:filters] ||= request.params.dig(:filters) || {}
+current_lifecycle_status = params.dig(:filters, :for_lifecycle) || Communication::Website::Page::LIFECYCLE_ALL
+current_path = list_admin_communication_website_pages_path
+%>
+<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
+  <div class="d-flex justify-content-between mb-4">
 
-  <ul class="nav nav-pills osuny__list_filters">
-    <li class="nav-item">
-       <a class="nav-link active" aria-current="page" href="#">
-        <%= t('admin.communication.website.page.filters.all') %>
-        <span class="text-muted">(<%= @website.pages.count %>)</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <%= osuny_published true %>
-        <%= t('admin.communication.website.page.filters.published') %>
-        <span class="text-muted">(<%= @website.pages.published_now_in(current_language).count %>)</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <%= osuny_published false %>
-        <%= t('admin.communication.website.page.filters.draft') %>
-        <span class="text-muted">(<%= @website.pages.draft_in(current_language).count %>)</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
-        <%= t('admin.communication.website.page.filters.deleted') %>
-        <span class="text-muted">(<%= @website.pages.only_deleted.count %>)</span>
-      </a>
-    </li>
-  </ul>
+    <ul class="nav nav-pills osuny__lifecycle">
+      <% Communication::Website::Page::LIFECYCLE_STATUSES.each do |status| %>
+        <li class="nav-item">
+          <%
+          current = current_lifecycle_status == status
+          params[:filters][:for_lifecycle] = status
+          path = list_admin_communication_website_pages_path(params)
+          label = t("admin.communication.website.page.filters.#{status}")
+          case status
+          when Communication::Website::Page::LIFECYCLE_ALL
+            count = @filtered_pages.count
+          when Communication::Website::Page::LIFECYCLE_PUBLISHED
+            count = @filtered_pages.published_now_in(current_language).count
+          when Communication::Website::Page::LIFECYCLE_DRAFT
+            count = @filtered_pages.draft_in(current_language).count
+          when Communication::Website::Page::LIFECYCLE_DELETED
+            count = @filtered_pages.only_deleted.count
+          end
+          %>
+          <a  class="nav-link<%= ' active' if current %>"
+              <% if current %>aria-current="page"<% end %>
+              href="<%= path %>">
+            <% if status == Communication::Website::Page::LIFECYCLE_PUBLISHED %>
+              <%= osuny_published true %>
+            <% elsif status == Communication::Website::Page::LIFECYCLE_DRAFT %>
+              <%= osuny_published false, classes: 'osuny__published--bordered' %>
+            <% end %>
+            <%= label %>
+            <span class="text-muted">(<%= count %>)</span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
 
-  <%= simple_form_for :filters, url: current_path, method: :get do |f| %>
     <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
 
       <%= render_filter f,
@@ -40,18 +51,11 @@
 
       <%= render_filter f,
                         :select,
-                        :for_published,
-                        label: t('filters.attributes.element', element: t('admin.communication.website.page.localizations.published_status').downcase),
-                        collection: [{ to_s: t('true'), id: 'true' }, { to_s: t('false'), id: 'false' }]
-                        %>
-
-      <%= render_filter f,
-                        :select,
                         :for_full_width,
                         label: t('filters.attributes.element', element: t('admin.communication.website.pages.full_width_status').downcase),
                         collection: [{ to_s: I18n.t('true'), id: 'true' }, { to_s: I18n.t('false'), id: 'false' }]
                         %>
 
-      <% end %>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>

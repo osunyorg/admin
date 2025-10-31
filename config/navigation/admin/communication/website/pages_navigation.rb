@@ -8,7 +8,13 @@ SimpleNavigation::Configuration.run do |navigation|
                   t('admin.communication.website.subnav.structure'),
                   admin_communication_website_pages_path(website_id: @website.id),
                   highlights_on: lambda {
-                    controller_name == "pages" && action_name.in?(["index", "index_list"])
+                    controller_name == "pages" && action_name == "index"
+                  }
+    primary.item  :feature_nav_page_list,
+                  t('admin.communication.website.pages.as_list'),
+                  list_admin_communication_website_pages_path(website_id: @website.id),
+                  highlights_on: lambda {
+                    controller_name == "pages" && action_name == "index_list"
                   }
     primary.item  :feature_nav_categories,
                   Communication::Website::Page::Category.model_name.human(count: 2),

@@ -118,8 +118,6 @@ module Admin::FiltersHelper
             wrapper_html: { class: options[:wrapper_class] }
   end
 
-
-
   def render_grouped_select_filter(f, name, value, options)
     options[:multiple] ||= false
 

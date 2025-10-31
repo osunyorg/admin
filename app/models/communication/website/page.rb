@@ -99,6 +99,30 @@ class Communication::Website::Page < ApplicationRecord
       ", term: "%#{sanitize_sql_like(term)}%")
   }
 
+  LIFECYCLE_ALL = 'all'
+  LIFECYCLE_PUBLISHED = 'published'
+  LIFECYCLE_DRAFT = 'draft'
+  LIFECYCLE_DELETED = 'deleted'
+  LIFECYCLE_STATUSES = [
+    LIFECYCLE_ALL,
+    LIFECYCLE_PUBLISHED,
+    LIFECYCLE_DRAFT,
+    LIFECYCLE_DELETED
+  ]
+
+  scope :for_lifecycle, -> (status, language) {
+    case status
+    when LIFECYCLE_ALL
+      # No additional scope :)
+    when LIFECYCLE_PUBLISHED
+      for_published(true, language)
+    when LIFECYCLE_DRAFT
+      for_published(true, language)
+    when LIFECYCLE_DELETED
+      only_deleted
+    end
+  }
+
   scope :for_published, -> (published, language) {
     joins(:localizations)
       .where(communication_website_page_localizations: { language_id: language.id , published: published == 'true'})

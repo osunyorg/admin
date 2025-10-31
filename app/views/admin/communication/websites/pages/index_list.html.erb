@@ -4,22 +4,8 @@
   <%= create_link Communication::Website::Page %>
 <% end %>
 
-<%= render 'filters', current_path: list_admin_communication_website_pages_path %>
+<%= render 'filters' %>
 
-<ul class="nav nav-pills justify-content-md-end small">
-  <li class="nav-item">
-    <a class="nav-link" href="<%= admin_communication_website_pages_path %>">
-      <i class="fas fa-sitemap"></i>
-      <%= t('admin.communication.website.pages.as_tree') %>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link rounded-pill active" aria-current="page">
-      <i class="fas fa-list"></i>
-      <%= t('admin.communication.website.pages.as_list') %>
-    </a>
-  </li>
-</ul>
 <div class="position-relative mt-2">
   <%= render 'admin/communication/websites/pages/list', pages: @pages %>
   <%= paginate @pages %>
