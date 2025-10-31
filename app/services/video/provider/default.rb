@@ -58,7 +58,7 @@ class Video::Provider::Default
       class: platform,
       loading: 'lazy',
       src: iframe_url,
-      referrerPolicy: 'strict-origin-when-cross-origin'
+      referrerpolicy: 'strict-origin-when-cross-origin'
     }
   end
 
