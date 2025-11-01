@@ -1,25 +1,53 @@
+<%
+current_path = list_admin_communication_website_pages_path
+current_lifecycle_status = request.params.dig(:lifecycle) || Communication::Website::Page::LIFECYCLE_ALL
+current_params = {
+  filters: request.params.dig(:filters) || {}
+}
+%>
 <%= simple_form_for :filters, url: current_path, method: :get do |f| %>
-  <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
+  <div class="d-flex justify-content-between mb-4">
 
-    <%= render_filter f,
-                      :string,
-                      :for_search_term,
-                      label: t('search')
-                      %>
+    <ul class="nav nav-pills osuny__lifecycle">
+      <% Communication::Website::Page::LIFECYCLE_STATUSES.each do |status| %>
+        <li class="nav-item">
+          <%
+          is_current = current_lifecycle_status == status
+          current_params[:lifecycle] = status
+          path = list_admin_communication_website_pages_path(current_params)
+          label = t("admin.communication.website.pages.filters.#{status}")
+          count = @filtered_pages.at_lifecycle(status, current_language).count
+          %>
+          <a  class="nav-link<%= ' active' if is_current %>"
+              <% if is_current %>aria-current="page"<% end %>
+              href="<%= path %>">
+            <% if status == Communication::Website::Page::LIFECYCLE_PUBLISHED %>
+              <%= osuny_published true %>
+            <% elsif status == Communication::Website::Page::LIFECYCLE_DRAFT %>
+              <%= osuny_published false, classes: 'osuny__published--bordered' %>
+            <% end %>
+            <%= label %>
+            <span class="text-muted">(<%= count %>)</span>
+          </a>
+        </li>
+      <% end %>
+    </ul>
 
-    <%= render_filter f,
-                      :select,
-                      :for_published,
-                      label: t('filters.attributes.element', element: t('admin.communication.website.page.localizations.published_status').downcase),
-                      collection: [{ to_s: t('true'), id: 'true' }, { to_s: t('false'), id: 'false' }]
-                      %>
+    <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
 
-    <%= render_filter f,
-                      :select,
-                      :for_full_width,
-                      label: t('filters.attributes.element', element: t('admin.communication.website.pages.full_width_status').downcase),
-                      collection: [{ to_s: I18n.t('true'), id: 'true' }, { to_s: I18n.t('false'), id: 'false' }]
-                      %>
+      <%= render_filter f,
+                        :string,
+                        :for_search_term,
+                        label: t('search')
+                        %>
+
+      <%= render_filter f,
+                        :select,
+                        :for_full_width,
+                        label: t('filters.attributes.element', element: t('admin.communication.website.pages.full_width_status').downcase),
+                        collection: [{ to_s: I18n.t('true'), id: 'true' }, { to_s: I18n.t('false'), id: 'false' }]
+                        %>
 
     <% end %>
+  </div>
 <% end %>
