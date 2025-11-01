@@ -511,11 +511,6 @@ fr:
           fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
           title: Internationalisation
         page:
-          filters:
-            all: Toutes les pages
-            published: Publiées
-            draft: Brouillons
-            deleted: Supprimées
           localizations:
             draft: Brouillon
             published: Publiée
@@ -524,6 +519,11 @@ fr:
           as_list: Liste des pages
           delete_special_page_notice: Impossible de supprimer cette page
           duplicate_special_page_notice: Impossible de dupliquer cette page
+          filters:
+            all: Toutes les pages
+            published: Publiées
+            draft: Brouillons
+            deleted: Supprimées
           full_width_status: Pleine largeur
           in: dans
           in_full_width: en pleine largeur

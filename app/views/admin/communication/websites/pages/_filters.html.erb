@@ -15,7 +15,7 @@ current_params = {
           is_current = current_lifecycle_status == status
           current_params[:lifecycle] = status
           path = list_admin_communication_website_pages_path(current_params)
-          label = t("admin.communication.website.page.filters.#{status}")
+          label = t("admin.communication.website.pages.filters.#{status}")
           count = @filtered_pages.at_lifecycle(status, current_language).count
           %>
           <a  class="nav-link<%= ' active' if is_current %>"
