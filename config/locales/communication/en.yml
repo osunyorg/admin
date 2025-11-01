@@ -509,13 +509,17 @@ en:
           fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
           title: Internationalization
         page:
+          filters:
+            all: All pages
+            published: Published
+            draft: Draft
+            deleted: Deleted
           localizations:
             draft: Draft
             published: Published
             published_status: Publication status
         pages:
-          as_list: See as a list
-          as_tree: Organize structure
+          as_list: List of pages
           delete_special_page_notice: Can't delete this page
           duplicate_special_page_notice: Can't duplicate this page
           full_width_status: Full width
