@@ -1,4 +1,5 @@
 class Api::Osuny::ApplicationController < Api::ApplicationController
+  include WithPagination
   include WithResourceParams
 
   rescue_from ActionController::ParameterMissing, with: :handle_bad_request

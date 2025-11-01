@@ -6,7 +6,10 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   before_action :ensure_same_migration_identifier, only: :update
 
   def index
-    @projects = website.portfolio_projects.includes(:localizations)
+    @projects =  website.portfolio_projects
+                        .includes(:localizations)
+                        .page(page_num_param)
+                        .per(per_page_param)
   end
 
   def show
