@@ -13,6 +13,7 @@ module Admin::FiltersHelper
   def active_filters_count
     return 0 unless params[:filters]
     params[:filters].to_unsafe_hash
+                    .delete_if { |key, value| !key.start_with?('for_') }
                     .delete_if { |key, value| value.blank? || value == [''] }
                     .count(&:present?)
   end

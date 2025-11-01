@@ -1,8 +1,9 @@
 <%
-params = {}
-params[:filters] ||= request.params.dig(:filters) || {}
-current_lifecycle_status = params.dig(:filters, :for_lifecycle) || Communication::Website::Page::LIFECYCLE_ALL
 current_path = list_admin_communication_website_pages_path
+current_lifecycle_status = request.params.dig(:lifecycle) || Communication::Website::Page::LIFECYCLE_ALL
+current_params = {
+  filters: request.params.dig(:filters) || {}
+}
 %>
 <%= simple_form_for :filters, url: current_path, method: :get do |f| %>
   <div class="d-flex justify-content-between mb-4">
@@ -11,23 +12,14 @@ current_path = list_admin_communication_website_pages_path
       <% Communication::Website::Page::LIFECYCLE_STATUSES.each do |status| %>
         <li class="nav-item">
           <%
-          current = current_lifecycle_status == status
-          params[:filters][:for_lifecycle] = status
-          path = list_admin_communication_website_pages_path(params)
+          is_current = current_lifecycle_status == status
+          current_params[:lifecycle] = status
+          path = list_admin_communication_website_pages_path(current_params)
           label = t("admin.communication.website.page.filters.#{status}")
-          case status
-          when Communication::Website::Page::LIFECYCLE_ALL
-            count = @filtered_pages.count
-          when Communication::Website::Page::LIFECYCLE_PUBLISHED
-            count = @filtered_pages.published_now_in(current_language).count
-          when Communication::Website::Page::LIFECYCLE_DRAFT
-            count = @filtered_pages.draft_in(current_language).count
-          when Communication::Website::Page::LIFECYCLE_DELETED
-            count = @filtered_pages.only_deleted.count
-          end
+          count = @filtered_pages.at_lifecycle(status, current_language).count
           %>
-          <a  class="nav-link<%= ' active' if current %>"
-              <% if current %>aria-current="page"<% end %>
+          <a  class="nav-link<%= ' active' if is_current %>"
+              <% if is_current %>aria-current="page"<% end %>
               href="<%= path %>">
             <% if status == Communication::Website::Page::LIFECYCLE_PUBLISHED %>
               <%= osuny_published true %>

@@ -49,6 +49,7 @@ class Communication::Website::Page < ApplicationRecord
   include Sanitizable
   include Searchable
   include WithAutomaticMenus
+  include WithLifecycle
   include WithMenuItemTarget
   include WithOpenApi
   include WithSpecialPage
@@ -97,35 +98,6 @@ class Communication::Website::Page < ApplicationRecord
         unaccent(communication_website_page_localizations.summary) ILIKE unaccent(:term) OR
         unaccent(communication_website_page_localizations.title) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
-  }
-
-  LIFECYCLE_ALL = 'all'
-  LIFECYCLE_PUBLISHED = 'published'
-  LIFECYCLE_DRAFT = 'draft'
-  LIFECYCLE_DELETED = 'deleted'
-  LIFECYCLE_STATUSES = [
-    LIFECYCLE_ALL,
-    LIFECYCLE_PUBLISHED,
-    LIFECYCLE_DRAFT,
-    LIFECYCLE_DELETED
-  ]
-
-  scope :for_lifecycle, -> (status, language) {
-    case status
-    when LIFECYCLE_ALL
-      # No additional scope :)
-    when LIFECYCLE_PUBLISHED
-      for_published(true, language)
-    when LIFECYCLE_DRAFT
-      for_published(true, language)
-    when LIFECYCLE_DELETED
-      only_deleted
-    end
-  }
-
-  scope :for_published, -> (published, language) {
-    joins(:localizations)
-      .where(communication_website_page_localizations: { language_id: language.id , published: published == 'true'})
   }
   scope :for_full_width, -> (full_width, language = nil) { where(full_width: full_width == 'true') }
 
