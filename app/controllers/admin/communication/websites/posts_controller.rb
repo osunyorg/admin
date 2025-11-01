@@ -104,7 +104,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def post_params
     params.require(:communication_website_post)
     .permit(
-      :full_width, :bodyclass, :is_lasting, author_ids: [], category_ids: [],
+      :full_width, :bodyclass, :is_lasting,
+      author_ids: [], category_ids: [], destination_website_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary,
         :header_cta, :header_cta_label, :header_cta_url,
