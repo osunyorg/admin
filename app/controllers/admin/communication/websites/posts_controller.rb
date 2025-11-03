@@ -7,7 +7,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
 
   def index
     @filtered = @posts.filter_by(params[:filters], current_language)
-    @posts = @filtered.ordered(current_language)
+    @posts = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                      .ordered(current_language)
                       .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
