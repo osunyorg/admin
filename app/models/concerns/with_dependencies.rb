@@ -10,26 +10,11 @@ module WithDependencies
 
     if self < ActiveRecord::Base
       after_save :clean_websites_if_necessary
-    end
-  end
+      # As objects are paranoid, we can do cleaning after destroying the object, it still exists in the database with `deleted_on`
+      after_destroy :clean_object_after_destroy
 
-  def destroy
-    # On est obligés d'overwrite la méthode destroy pour éviter un problème d'œuf et de poule.
-    # On a besoin que les websites puissent recalculer leurs recursive_dependencies
-    # et on a besoin que ces recursive_dependencies n'incluent pas l'objet courant, puisqu'il est "en cours de destruction" (ni ses propres recursive_dependencies).
-    # Mais si on détruit juste l'objet et qu'on fait un `after_destroy :clean_website_connections`
-    # on ne peut plus accéder aux websites (puisque l'objet est déjà détruit et ses connexions en cascades).
-    # Egalement, quand on supprime un objet indirect, il faut synchroniser ses anciennes sources directes pour supprimer toute référence éventuelle
-    # Donc :
-    # 1. on stocke les websites (et les sources directes si nécessaire)
-    # 2. on laisse la méthode destroy normale faire son travail
-    # 3. PUIS on demande aux websites stockés de nettoyer leurs connexions et leurs git files (et on synchronise les potentielles sources directes)
-    transaction do
-      references_before_destroy = references.compact
-      website_ids_before_destroy = websites_to_clean_ids
-      super
-      references_before_destroy.each &:touch
-      clean_websites(website_ids_before_destroy)
+      # TODO paranoia: tout devrait répondre à after_restore, condition à supprimer à terme
+      after_restore :reconnect_object_after_restore if respond_to?(:after_restore)
     end
   end
 
@@ -108,6 +93,14 @@ module WithDependencies
 
   def clean_websites_if_necessary
     Dependencies::CleanWebsitesIfNecessaryJob.perform_later(self)
+  end
+
+  def clean_object_after_destroy
+    Dependencies::CleanObjectAfterDestroyJob.perform_later(self)
+  end
+
+  def reconnect_object_after_restore
+    Dependencies::ReconnectObjectAfterRestoreJob.perform_later(self)
   end
 
   # "gid://osuny/Education::Program/c537fc50-f7c5-414f-9966-3443bc9fde0e-dependencies"

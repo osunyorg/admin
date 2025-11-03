@@ -179,6 +179,7 @@ en:
     successfully_duplicated_html: "<i>%{model}</i> was successfully duplicated."
     successfully_quit_html: "<i>%{model}</i> successfully quit <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> was successfully removed."
+    successfully_restaured_html: "<i>%{model}</i> was successfully restored."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."
     summary:
       hint: A short text, like a heading for an article. Don't write all the content here, there are blocks for that.
@@ -490,6 +491,7 @@ en:
   quit: Quit
   remove: Remove
   reset: Reset
+  restore: Restaurer
   save: Save
   search: Search
   select_language: Select language

@@ -179,6 +179,7 @@ fr:
     successfully_duplicated_html: "<i>%{model}</i> a bien été dupliqué(e)."
     successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
+    successfully_restored_html: "<i>%{model}</i> a bien été restauré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
     summary:
       hint: Un texte court, comme un chapô pour un article. Ne mettez pas tout le contenu ici, pour ça, il y a les blocs !
@@ -490,6 +491,7 @@ fr:
   quit: Quitter
   remove: Retirer
   reset: Réinitialiser
+  restore: Restaurer
   save: Enregistrer
   search: Recherche
   select_language: Sélectionnez une langue

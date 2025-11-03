@@ -1,6 +1,7 @@
 class Admin::Communication::Websites::PagesController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource class: Communication::Website::Page,
-                              through: :website
+                              through: :website,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
@@ -140,6 +141,16 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       @page.destroy
       redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s_in(current_language))
     end
+  end
+
+  def restore
+    @page = @website.pages.only_deleted.find(params[:id])
+    authorize!(:restore, @page)
+    @page.restore(recursive: true)
+    redirect_back(
+      fallback_location: admin_communication_website_pages_url(@website),
+      notice: t('admin.successfully_restored_html', model: @page.to_s_in(current_language))
+    )
   end
 
   protected

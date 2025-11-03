@@ -64,7 +64,9 @@ module Localizable
   end
 
   def localization_for(language)
-    localizations.find_by(language_id: language.id)
+    # TODO paranoia: tout devrait répondre à with_deleted, à supprimer à terme
+    list = localizations.respond_to?(:with_deleted) ? localizations.with_deleted : localizations
+    list.find_by(language_id: language.id)
   end
   alias :localized_in :localization_for
 

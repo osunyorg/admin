@@ -60,6 +60,7 @@ namespace :communication do
         post :publish
         post :connect
         post :disconnect
+        post :restore
         post 'generate-from-template' => 'websites/pages#generate_from_template', as: :generate
       end
     end
