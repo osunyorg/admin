@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_03_162750) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_03_164816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1101,7 +1101,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_162750) do
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_44e0a2bf9b", unique: true
     t.index ["about_id"], name: "index_communication_website_page_localizations_on_about_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_64c4831480"
-    t.index ["deleted_at"], name: "index_communication_website_page_localizations_on_deleted_at"
     t.index ["language_id"], name: "index_communication_website_page_localizations_on_language_id"
     t.index ["university_id"], name: "idx_on_university_id_e62b2aba53"
   end
@@ -1122,7 +1121,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_162750) do
     t.integer "position_in_tree"
     t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
-    t.index ["deleted_at"], name: "index_communication_website_pages_on_deleted_at"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
   end
