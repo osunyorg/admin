@@ -801,7 +801,7 @@ DEPENDENCIES
   octokit
   omniauth-rails_csrf_protection (~> 1)
   omniauth-saml (~> 2)
-  openssl
+  openssl (~> 3.3)
   ostruct (~> 0.6.0)
   paranoia
   pexels (~> 0)

@@ -55,6 +55,7 @@ gem "mini_magick", "~> 4.0"
 gem "octokit"
 gem "omniauth-rails_csrf_protection", "~> 1"
 gem "omniauth-saml", "~> 2"
+gem "openssl", "~> 3.3"
 gem "ostruct", "~> 0.6.0"
 gem "paranoia"
 gem "pexels", "~> 0"
@@ -110,4 +111,3 @@ end
 
 gem "tzinfo-data", platforms: [:windows, :jruby]
 
-gem "openssl", "~> 3.3"
