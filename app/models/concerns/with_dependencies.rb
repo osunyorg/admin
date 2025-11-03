@@ -10,8 +10,9 @@ module WithDependencies
 
     if self < ActiveRecord::Base
       after_save :clean_websites_if_necessary
+
       # As objects are paranoid, we can do cleaning after destroying the object, it still exists in the database with `deleted_on`
-      after_destroy :clean_object_after_destroy
+      after_destroy :clean_object_after_destroy if :paranoid?
 
       # TODO paranoia: tout devrait répondre à after_restore, condition à supprimer à terme
       after_restore :reconnect_object_after_restore if respond_to?(:after_restore)

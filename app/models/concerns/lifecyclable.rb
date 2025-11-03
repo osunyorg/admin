@@ -2,6 +2,8 @@ module Lifecyclable
   extend ActiveSupport::Concern
 
   included do
+    LIFECYCLE_DAYS_BEFORE_DELETION = 30
+
     LIFECYCLE_ALL = 'all'
     LIFECYCLE_PUBLISHED = 'published'
     LIFECYCLE_DRAFT = 'draft'

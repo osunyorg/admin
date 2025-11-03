@@ -417,7 +417,7 @@ fr:
   legal: Légal
   lifecycle:
     label:
-      deleted: Les fichiers dans la corbeille seront supprimés après 30 jours.
+      deleted: Les objets dans la corbeille sont automatiquement supprimés après %{days} jours.
     status:
       all: Tout
       draft: Brouillon

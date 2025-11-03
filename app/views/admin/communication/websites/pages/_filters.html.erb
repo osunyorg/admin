@@ -1,57 +1,21 @@
-<%
-current_path = list_admin_communication_website_pages_path
-current_lifecycle_status = request.params.dig(:lifecycle) || Communication::Website::Page::LIFECYCLE_ALL
-current_params = {
-  filters: request.params.dig(:filters) || {}
-}
-%>
-<%= simple_form_for :filters, url: current_path, method: :get do |f| %>
-  <div class="d-flex justify-content-between mb-5">
-
-    <ul class="nav nav-pills osuny__lifecycle">
-      <% Communication::Website::Page::LIFECYCLE_STATUSES.each do |status| %>
-        <%
-        is_current = current_lifecycle_status == status
-        current_params[:lifecycle] = status
-        path = list_admin_communication_website_pages_path(current_params)
-        label = t("lifecycle.status.#{status}")
-        count = @filtered_pages.at_lifecycle(status, current_language).count
-        next if count.zero?
-        %>
-        <li class="nav-item">
-          <a  class="nav-link<%= ' active' if is_current %>"
-              <% if is_current %>aria-current="page"<% end %>
-              href="<%= path %>">
-            <% if status == Communication::Website::Page::LIFECYCLE_PUBLISHED %>
-              <%= osuny_published true %>
-            <% elsif status == Communication::Website::Page::LIFECYCLE_DRAFT %>
-              <%= osuny_published false, classes: 'osuny__published--bordered' %>
-            <% end %>
-            <%= label %>
-            <span class="text-muted">(<%= count %>)</span>
-          </a>
-        </li>
-      <% end %>
-    </ul>
-
-    <%= filters_panel current_path: current_path, active_filters_count: active_filters_count do |form| %>
-
+<div class="d-flex justify-content-between mb-5">
+  <%= render 'admin/application/components/lifecycle/pills',
+              path_method: :list_admin_communication_website_pages_path %>
+  <%= simple_form_for :filters, url: list_admin_communication_website_pages_path, method: :get do |f| %>
+    <%= filters_panel current_path: list_admin_communication_website_pages_path,
+                      active_filters_count: active_filters_count do |form| %>
       <%= render_filter f,
                         :string,
                         :for_search_term,
                         label: t('search')
                         %>
-
       <%= render_filter f,
                         :select,
                         :for_full_width,
                         label: t('filters.attributes.element', element: t('admin.communication.website.pages.full_width_status').downcase),
                         collection: [{ to_s: I18n.t('true'), id: 'true' }, { to_s: I18n.t('false'), id: 'false' }]
                         %>
-
     <% end %>
-  </div>
-  <% if current_lifecycle_status == Communication::Website::Page::LIFECYCLE_TRASH %>
-    <p><%= t('lifecycle.label.deleted') %></p>
   <% end %>
-<% end %>
+</div>
+<%= render 'admin/application/components/lifecycle/label' %>

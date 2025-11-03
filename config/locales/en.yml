@@ -417,7 +417,7 @@ en:
   legal: Legal
   lifecycle:
     label:
-      deleted: Les fichiers dans la corbeille seront supprimés après 30 jours 
+      deleted: Objects in the trash are automatically deleted after %{days} days.
     status:
       all: All
       draft: Draft
