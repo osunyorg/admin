@@ -12,7 +12,9 @@
 <div class="d-flex justify-content-between mb-4">
   <%= render 'admin/application/components/lifecycle/pills',
               path_method: :admin_communication_website_posts_path %>
-  <%= render 'filters', current_path: admin_communication_website_posts_path, website: @website %>
+  <%= render 'filters',
+              current_path: admin_communication_website_posts_path,
+              website: @website %>
 </div>
 <%= render 'admin/application/components/lifecycle/label' %>
 
