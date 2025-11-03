@@ -2,10 +2,6 @@
 Rails.application.config.to_prepare do
   ActiveStorage::Engine.config.active_storage.content_types_to_serve_as_binary.delete('image/svg+xml')
 
-  ActiveStorage::Blob.class_eval do
-    acts_as_paranoid
-  end
-
   # Hook ActiveStorage::Attachment to add brand_id to attachments records
   ActiveStorage::Attachment.class_eval do
     after_save :denormalize_university_id_for_blob

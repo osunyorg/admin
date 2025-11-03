@@ -109,3 +109,5 @@ group :test do
 end
 
 gem "tzinfo-data", platforms: [:windows, :jruby]
+
+gem "openssl", "~> 3.3"
