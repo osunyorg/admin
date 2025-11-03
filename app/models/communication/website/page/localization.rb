@@ -4,7 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  breadcrumb_title         :string
-#  deleted_at               :datetime         indexed
+#  deleted_at               :datetime
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean
@@ -32,7 +32,6 @@
 #  idx_on_communication_website_id_64c4831480                     (communication_website_id)
 #  idx_on_university_id_e62b2aba53                                (university_id)
 #  index_communication_website_page_localizations_on_about_id     (about_id)
-#  index_communication_website_page_localizations_on_deleted_at   (deleted_at)
 #  index_communication_website_page_localizations_on_language_id  (language_id)
 #
 # Foreign Keys
