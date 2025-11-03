@@ -19,14 +19,15 @@
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed
+#  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             indexed
-#  language_id              :uuid             indexed
+#  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
 # Indexes
 #
 #  idx_on_about_id_8bbb00c89f                  (about_id)
+#  idx_on_about_id_language_id_7944779395      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_3e7b95d239  (communication_website_id)
 #  idx_on_language_id_d4c8ef57a7               (language_id)
 #  idx_on_university_id_dfeba87c37             (university_id)
