@@ -1,20 +1,21 @@
 module Lifecyclable
   extend ActiveSupport::Concern
 
+  LIFECYCLE_DAYS_BEFORE_DELETION = 30
+
+  LIFECYCLE_ALL = 'all'
+  LIFECYCLE_PUBLISHED = 'published'
+  LIFECYCLE_DRAFT = 'draft'
+  LIFECYCLE_TRASH = 'trash'
+
+  LIFECYCLE_STATUSES = [
+    LIFECYCLE_ALL,
+    LIFECYCLE_PUBLISHED,
+    LIFECYCLE_DRAFT,
+    LIFECYCLE_TRASH
+  ]
+  
   included do
-    LIFECYCLE_DAYS_BEFORE_DELETION = 30
-
-    LIFECYCLE_ALL = 'all'
-    LIFECYCLE_PUBLISHED = 'published'
-    LIFECYCLE_DRAFT = 'draft'
-    LIFECYCLE_TRASH = 'trash'
-
-    LIFECYCLE_STATUSES = [
-      LIFECYCLE_ALL,
-      LIFECYCLE_PUBLISHED,
-      LIFECYCLE_DRAFT,
-      LIFECYCLE_TRASH
-    ]
 
     scope :at_lifecycle, -> (status, language) {
       case status
