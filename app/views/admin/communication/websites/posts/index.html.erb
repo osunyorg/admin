@@ -1,12 +1,10 @@
 <% content_for :title, "#{Communication::Website::Post.model_name.human(count: 2)}" %>
 
 <% content_for :title_right do %>
+  <%= link_to t('communication.website.posts.new_curation'),
+              new_admin_communication_website_post_curation_path(website_id: @website.id),
+              class: button_classes('btn-light') if can?(:create, Communication::Website::Post) %>
   <%= create_link Communication::Website::Post %>
-  <%= button_advanced do %>
-    <%= link_to t('communication.website.posts.new_curation'),
-                new_admin_communication_website_post_curation_path(website_id: @website.id),
-                class: button_classes('btn-light') if can?(:create, Communication::Website::Post) %>
-  <% end %>
 <% end %>
 
 <div class="d-flex justify-content-between mb-5">
