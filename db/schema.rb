@@ -839,7 +839,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_133341) do
     t.string "current_path"
     t.string "current_sha"
     t.boolean "desynchronized", default: true
-    t.datetime "desynchronized_at", default: -> { "CURRENT_TIMESTAMP" }
+    t.datetime "desynchronized_at"
     t.uuid "university_id", null: false
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
     t.index ["desynchronized_at"], name: "index_communication_website_git_files_on_desynchronized_at"
