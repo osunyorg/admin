@@ -22,12 +22,13 @@
 #  url                   :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  about_id              :uuid             indexed
-#  language_id           :uuid             indexed
+#  about_id              :uuid             uniquely indexed => [language_id], indexed
+#  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_eb921fd47b                        (about_id,language_id) UNIQUE
 #  index_university_organization_localizations_on_about_id       (about_id)
 #  index_university_organization_localizations_on_language_id    (language_id)
 #  index_university_organization_localizations_on_university_id  (university_id)
