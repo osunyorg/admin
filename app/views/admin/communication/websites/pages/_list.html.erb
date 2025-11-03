@@ -11,12 +11,14 @@ link_to_all ||= false
           <div class="card-body">
             <%= page.best_localization_for(current_language) %>
           </div>
-          <div class="card-footer">
-            <%= link_to t('restore'),
-                        restore_admin_communication_website_page_path(page),
-                        method: :post,
-                        class: button_classes %>
-          </div>
+          <% if can?(:restore, page) %>
+            <div class="card-footer mb-n2">
+              <%= link_to t('restore'),
+                          restore_admin_communication_website_page_path(page),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
         <% else %>
           <%= osuny_thumbnail_localized page %>
           <div class="card-body">

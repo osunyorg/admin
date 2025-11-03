@@ -415,6 +415,14 @@ fr:
   internationalization:
     label: Internationalisation
   legal: Légal
+  lifecycle:
+    label:
+      deleted: Les fichiers dans la corbeille seront supprimés après 30 jours.
+    status:
+      all: Tout
+      draft: Brouillon
+      published: Publié
+      trash: Corbeille
   loading: Chargement...
   localization:
     creation_alert: Cet élément n'existe pas dans votre langue d'affichage actuelle. Souhaitez-vous en créer une traduction ?

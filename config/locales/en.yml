@@ -415,6 +415,14 @@ en:
   internationalization:
     label: Internationalization
   legal: Legal
+  lifecycle:
+    label:
+      deleted: Les fichiers dans la corbeille seront supprimés après 30 jours 
+    status:
+      all: All
+      draft: Draft
+      published: Published
+      trash: Trash
   loading: Loading...
   localization:
     creation_alert: This element doesn't exist in the requested language. Do you want to create a translation?

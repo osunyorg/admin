@@ -1,17 +1,17 @@
-module Communication::Website::Page::WithLifecycle
+module WithLifecycle
   extend ActiveSupport::Concern
 
   included do
     LIFECYCLE_ALL = 'all'
     LIFECYCLE_PUBLISHED = 'published'
     LIFECYCLE_DRAFT = 'draft'
-    LIFECYCLE_DELETED = 'deleted'
+    LIFECYCLE_TRASH = 'trash'
 
     LIFECYCLE_STATUSES = [
       LIFECYCLE_ALL,
       LIFECYCLE_PUBLISHED,
       LIFECYCLE_DRAFT,
-      LIFECYCLE_DELETED
+      LIFECYCLE_TRASH
     ]
 
     scope :at_lifecycle, -> (status, language) {
@@ -20,7 +20,7 @@ module Communication::Website::Page::WithLifecycle
         published_in(language)
       when LIFECYCLE_DRAFT
         draft_in(language)
-      when LIFECYCLE_DELETED
+      when LIFECYCLE_TRASH
         only_deleted
       else
         # Status nil or all

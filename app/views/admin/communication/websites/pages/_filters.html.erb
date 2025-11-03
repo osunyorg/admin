@@ -10,14 +10,15 @@ current_params = {
 
     <ul class="nav nav-pills osuny__lifecycle">
       <% Communication::Website::Page::LIFECYCLE_STATUSES.each do |status| %>
+        <%
+        is_current = current_lifecycle_status == status
+        current_params[:lifecycle] = status
+        path = list_admin_communication_website_pages_path(current_params)
+        label = t("lifecycle.status.#{status}")
+        count = @filtered_pages.at_lifecycle(status, current_language).count
+        next if count.zero?
+        %>
         <li class="nav-item">
-          <%
-          is_current = current_lifecycle_status == status
-          current_params[:lifecycle] = status
-          path = list_admin_communication_website_pages_path(current_params)
-          label = t("admin.communication.website.pages.filters.#{status}")
-          count = @filtered_pages.at_lifecycle(status, current_language).count
-          %>
           <a  class="nav-link<%= ' active' if is_current %>"
               <% if is_current %>aria-current="page"<% end %>
               href="<%= path %>">
@@ -50,4 +51,7 @@ current_params = {
 
     <% end %>
   </div>
+  <% if current_lifecycle_status == Communication::Website::Page::LIFECYCLE_TRASH %>
+    <p><%= t('lifecycle.label.deleted') %></p>
+  <% end %>
 <% end %>

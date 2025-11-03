@@ -2,6 +2,6 @@ class Dependencies::ReconnectObjectAfterRestoreJob < ApplicationJob
   queue_as :elephant
 
   def perform(object)
-    # TODO paranoia: à écrire
+    object.references.compact.each &:touch
   end
 end
