@@ -44,12 +44,12 @@ class Communication::Website::Page < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Orderable
   include Sanitizable
   include Searchable
   include WithAutomaticMenus
-  include WithLifecycle
   include WithMenuItemTarget
   include WithOpenApi
   include WithSpecialPage

@@ -1,4 +1,4 @@
-module WithLifecycle
+module Lifecyclable
   extend ActiveSupport::Concern
 
   included do
