@@ -6,7 +6,8 @@ class Admin::Communication::Websites::Jobboard::JobsController < Admin::Communic
   include Admin::Localizable
 
   def index
-    @jobs = @jobs.filter_by(params[:filters], current_language)
+    @filtered = @jobs.filter_by(params[:filters], current_language)
+    @jobs = @filtered.at_lifecycle(params[:lifecycle], current_language)
                      .ordered_desc
                      .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/jobboard'

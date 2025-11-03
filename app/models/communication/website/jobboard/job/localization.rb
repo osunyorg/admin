@@ -3,6 +3,7 @@
 # Table name: communication_website_jobboard_job_localizations
 #
 #  id                       :uuid             not null, primary key
+#  deleted_at               :datetime
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean          default(FALSE)
@@ -38,6 +39,8 @@
 #  fk_rails_f02e8cacb5  (language_id => languages.id)
 #
 class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Contentful
   include HasGitFiles
