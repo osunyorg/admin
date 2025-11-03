@@ -10,12 +10,11 @@
 <% end %>
 
 <div class="d-flex justify-content-between mb-4">
-  <p>
-    <%= @posts.total_count %>
-    <%= t('admin.item', count: @posts.total_count) %>
-  </p>
+  <%= render 'admin/application/components/lifecycle/pills',
+              path_method: :admin_communication_website_posts_path %>
   <%= render 'filters', current_path: admin_communication_website_posts_path, website: @website %>
 </div>
+<%= render 'admin/application/components/lifecycle/label' %>
 
 <div data-batch-selectable class="mb-5">
   <%= form_tag publish_batch_admin_communication_website_posts_path do %>

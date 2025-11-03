@@ -6,9 +6,9 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   include Admin::Localizable
 
   def index
-    @posts = @posts.filter_by(params[:filters], current_language)
-                   .ordered(current_language)
-                   .page(params[:page])
+    @filtered = @posts.filter_by(params[:filters], current_language)
+    @posts = @filtered.ordered(current_language)
+                      .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end
