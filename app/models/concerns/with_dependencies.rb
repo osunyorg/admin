@@ -18,6 +18,28 @@ module WithDependencies
     end
   end
 
+  # TODO paranoia: supprimer quand tout est paranoiaque
+  def destroy
+    return super if paranoid?
+    # On est obligés d'overwrite la méthode destroy pour éviter un problème d'œuf et de poule.
+    # On a besoin que les websites puissent recalculer leurs recursive_dependencies
+    # et on a besoin que ces recursive_dependencies n'incluent pas l'objet courant, puisqu'il est "en cours de destruction" (ni ses propres recursive_dependencies).
+    # Mais si on détruit juste l'objet et qu'on fait un `after_destroy :clean_website_connections`
+    # on ne peut plus accéder aux websites (puisque l'objet est déjà détruit et ses connexions en cascades).
+    # Egalement, quand on supprime un objet indirect, il faut synchroniser ses anciennes sources directes pour supprimer toute référence éventuelle
+    # Donc :
+    # 1. on stocke les websites (et les sources directes si nécessaire)
+    # 2. on laisse la méthode destroy normale faire son travail
+    # 3. PUIS on demande aux websites stockés de nettoyer leurs connexions et leurs git files (et on synchronise les potentielles sources directes)
+    transaction do
+      references_before_destroy = references.compact
+      website_ids_before_destroy = websites_to_clean_ids
+      super
+      references_before_destroy.each &:touch
+      clean_websites(website_ids_before_destroy)
+    end
+  end
+
   # Cette méthode doit être définie dans chaque objet,
   # et renvoyer un tableau de ses références directes.
   # Jamais de référence indirecte !
