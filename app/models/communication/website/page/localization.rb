@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  breadcrumb_title         :string
+#  deleted_at               :datetime         indexed
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean
@@ -20,16 +21,18 @@
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed
+#  about_id                 :uuid             uniquely indexed => [language_id], indexed
 #  communication_website_id :uuid             indexed
-#  language_id              :uuid             indexed
+#  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_44e0a2bf9b                         (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_64c4831480                     (communication_website_id)
 #  idx_on_university_id_e62b2aba53                                (university_id)
 #  index_communication_website_page_localizations_on_about_id     (about_id)
+#  index_communication_website_page_localizations_on_deleted_at   (deleted_at)
 #  index_communication_website_page_localizations_on_language_id  (language_id)
 #
 # Foreign Keys

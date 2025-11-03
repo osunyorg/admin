@@ -13,14 +13,15 @@
 #  summary                  :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed
+#  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             not null, uniquely indexed => [about_id], indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
 #  idx_on_about_id_6e430d4efc                  (about_id)
+#  idx_on_about_id_language_id_94336f5680      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_0c06c1ae6f  (communication_website_id)
 #  idx_on_language_id_cc5f73e306               (language_id)
 #  idx_on_university_id_fb03a6e3c0             (university_id)
