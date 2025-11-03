@@ -6,10 +6,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   include Admin::Localizable
 
   def index
-    @events = @events.filter_by(params[:filters], current_language)
-                     .ordered_desc
-                     .root
-                     .page(params[:page])
+    @filtered = @events.filter_by(params[:filters], current_language)
+    @events = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                       .ordered_desc
+                       .root
+                       .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
   end

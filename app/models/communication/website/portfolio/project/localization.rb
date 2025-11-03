@@ -3,6 +3,7 @@
 # Table name: communication_website_portfolio_project_localizations
 #
 #  id                       :uuid             not null, primary key
+#  deleted_at               :datetime
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean          default(FALSE)
@@ -38,6 +39,8 @@
 #  fk_rails_fbc92c5948  (about_id => communication_website_portfolio_projects.id)
 #
 class Communication::Website::Portfolio::Project::Localization < ApplicationRecord
+  acts_as_paranoid
+
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
   include AsLocalization

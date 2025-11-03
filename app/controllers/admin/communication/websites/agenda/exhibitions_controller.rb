@@ -6,9 +6,10 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
   include Admin::Localizable
 
   def index
-    @exhibitions = @exhibitions.filter_by(params[:filters], current_language)
-                     .ordered_desc
-                     .page(params[:page])
+    @filtered = @exhibitions.filter_by(params[:filters], current_language)
+    @exhibitions = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                            .ordered_desc
+                            .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
   end

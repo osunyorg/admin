@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  add_to_calendar_urls     :jsonb
+#  deleted_at               :datetime
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean
@@ -41,6 +42,8 @@
 #  fk_rails_f684b71a8c  (university_id => universities.id)
 #
 class Communication::Website::Agenda::Exhibition::Localization < ApplicationRecord
+  acts_as_paranoid
+
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
   include AsLocalization
