@@ -6,6 +6,7 @@
 #  bodyclass                :string
 #  deleted_at               :datetime
 #  full_width               :boolean          default(TRUE)
+#  migration_identifier     :string
 #  year                     :integer
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
