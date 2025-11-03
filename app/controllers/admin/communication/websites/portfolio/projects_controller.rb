@@ -6,7 +6,8 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
   include Admin::Localizable
 
   def index
-    @projects = @projects.filter_by(params[:filters], current_language)
+    @filtered = @projects.filter_by(params[:filters], current_language)
+    @projects = @filtered.at_lifecycle(params[:lifecycle], current_language)
                          .ordered(current_language)
                          .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/portfolio'

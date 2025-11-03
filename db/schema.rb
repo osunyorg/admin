@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_03_133341) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_03_162134) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -557,6 +557,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_133341) do
     t.string "header_cta_label"
     t.string "header_cta_url"
     t.text "notes"
+    t.datetime "deleted_at"
     t.index ["about_id"], name: "idx_on_about_id_db6323806a"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_87f393a516"
     t.index ["language_id"], name: "idx_on_language_id_c00e1d0218"
@@ -607,6 +608,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_133341) do
     t.uuid "created_by_id"
     t.string "bodyclass"
     t.boolean "is_lasting", default: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
     t.index ["created_by_id"], name: "index_communication_website_agenda_events_on_created_by_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_events_on_parent_id"
@@ -637,6 +639,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_133341) do
     t.text "text"
     t.text "notes"
     t.string "place"
+    t.datetime "deleted_at"
     t.index ["about_id"], name: "idx_on_about_id_a6e772a338"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_8261badeaa"
     t.index ["language_id"], name: "idx_on_language_id_a2de6ce8d0"
@@ -655,6 +658,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_133341) do
     t.datetime "updated_at", null: false
     t.string "bodyclass"
     t.boolean "is_lasting", default: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_agenda_exhibitions_on_communication_website_id"
     t.index ["created_by_id"], name: "idx_on_created_by_id_c3766f3a0a"
     t.index ["university_id"], name: "idx_on_university_id_46e895f493"
@@ -1178,6 +1182,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_133341) do
     t.boolean "header_cta", default: false
     t.string "header_cta_label"
     t.string "header_cta_url"
+    t.datetime "deleted_at"
     t.index ["about_id"], name: "idx_on_about_id_a668ef6090"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_e653b6273a"
     t.index ["language_id"], name: "idx_on_language_id_25a0c1e472"
@@ -1194,6 +1199,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_133341) do
     t.boolean "full_width", default: true
     t.string "bodyclass"
     t.string "migration_identifier"
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_aac12e3adb"
     t.index ["created_by_id"], name: "idx_on_created_by_id_7009ee99c6"
     t.index ["university_id"], name: "idx_on_university_id_ac2f4a0bfc"

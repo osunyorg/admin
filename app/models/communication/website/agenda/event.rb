@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
+#  deleted_at               :datetime
 #  from_day                 :date
 #  is_lasting               :boolean          default(FALSE)
 #  migration_identifier     :string
@@ -31,6 +32,8 @@
 #  fk_rails_c9e737a3c1  (created_by_id => users.id)
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include AsTree
   include Communication::Website::Agenda::Period::InPeriod
@@ -40,6 +43,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Sanitizable
   include Searchable
