@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_03_114357) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_03_133341) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -1269,6 +1269,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_114357) do
     t.string "header_cta_label"
     t.string "header_cta_url"
     t.uuid "publication_job_id"
+    t.datetime "deleted_at"
     t.index ["about_id"], name: "index_communication_website_post_localizations_on_about_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_f6354f61f0"
     t.index ["language_id"], name: "index_communication_website_post_localizations_on_language_id"
@@ -1285,6 +1286,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_114357) do
     t.boolean "full_width", default: false
     t.string "bodyclass"
     t.boolean "is_lasting", default: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end

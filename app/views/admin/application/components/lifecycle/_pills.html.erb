@@ -11,7 +11,7 @@ current_params = {
     current_params[:lifecycle] = status
     path = send(path_method, current_params)
     label = t("lifecycle.status.#{status}")
-    count = @filtered_pages.at_lifecycle(status, current_language).count
+    count = @filtered.at_lifecycle(status, current_language).count
     next if count.zero?
     %>
     <li class="nav-item">
