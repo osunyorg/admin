@@ -6,7 +6,7 @@ current_params = {
 }
 %>
 <%= simple_form_for :filters, url: current_path, method: :get do |f| %>
-  <div class="d-flex justify-content-between mb-4">
+  <div class="d-flex justify-content-between mb-5">
 
     <ul class="nav nav-pills osuny__lifecycle">
       <% Communication::Website::Page::LIFECYCLE_STATUSES.each do |status| %>
