@@ -8,12 +8,13 @@
 #  name                  :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  about_id              :uuid             not null, indexed
-#  language_id           :uuid             not null, indexed
+#  about_id              :uuid             not null, uniquely indexed => [language_id], indexed
+#  language_id           :uuid             not null, uniquely indexed => [about_id], indexed
 #  university_id         :uuid             not null, indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_378eb970df                          (about_id,language_id) UNIQUE
 #  idx_on_language_id_bb72607fc6                                   (language_id)
 #  idx_on_university_id_8e25b8c926                                 (university_id)
 #  index_communication_media_collection_localizations_on_about_id  (about_id)
