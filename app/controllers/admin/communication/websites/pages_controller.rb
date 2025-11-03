@@ -147,10 +147,8 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     @page = @website.pages.only_deleted.find(params[:id])
     authorize!(:restore, @page)
     @page.restore(recursive: true)
-    redirect_back(
-      fallback_location: admin_communication_website_pages_url(@website),
-      notice: t('admin.successfully_restored_html', model: @page.to_s_in(current_language))
-    )
+    redirect_to admin_communication_website_page_path(@page),
+                notice: t('admin.successfully_restored_html', model: @page.to_s_in(current_language))
   end
 
   protected

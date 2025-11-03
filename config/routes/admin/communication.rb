@@ -86,6 +86,7 @@ namespace :communication do
         get :preview
         post :duplicate
         post :publish
+        post :restore
       end
     end
     namespace :agenda do
@@ -105,6 +106,7 @@ namespace :communication do
           post :duplicate
           post :publish
           post :save_time_slots
+          post :restore
         end
       end
       resources :exhibitions, controller: '/admin/communication/websites/agenda/exhibitions' do
@@ -112,6 +114,7 @@ namespace :communication do
           get :static
           post :duplicate
           post :publish
+          post :restore
         end
       end
       resources :categories, controller: '/admin/communication/websites/agenda/categories' do
@@ -143,6 +146,7 @@ namespace :communication do
           get :static
           post :duplicate
           post :publish
+          post :restore
         end
       end
       resources :categories, controller: '/admin/communication/websites/portfolio/categories' do
@@ -162,6 +166,7 @@ namespace :communication do
           get :static
           post :duplicate
           post :publish
+          post :restore
         end
       end
       resources :categories, controller: '/admin/communication/websites/jobboard/categories' do
