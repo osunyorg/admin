@@ -7,14 +7,11 @@ class TrulyDestroySoftDeletedRecordsJob < ApplicationJob
     Communication::Website::Page
   ].freeze
 
-  PARANOID_DELETION_DELAY = 30.days
-
   def perform
+    date = Date.today - Lifecyclable::LIFECYCLE_DAYS_BEFORE_DELETION.days
     PARANOID_MODELS.each do |model_class|
-      old_objects = model_class.only_deleted.where("deleted_at < ?", Date.today - PARANOID_DELETION_DELAY)
-      old_objects.find_each do |object|
-        object.really_destroy!
-      end
+      old_objects = model_class.only_deleted.where("deleted_at < ?", date)
+      old_objects.find_each &:really_destroy!
     end
   end
 end
