@@ -1,17 +1,17 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @event %>
+    <%= duplicate_link @event %>
+  <% end %>
   <% event_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
               event_url,
               target: :_blank,
               class: button_classes if event_url %>
-  <%= edit_link @event %>
   <%= publish_link @event %>
-  <%= button_advanced do %>
-    <%= destroy_link @event %>
-    <%= duplicate_link @event %>
-  <% end %>
+  <%= edit_link @event %>
 <% end %>
 
 <div class="row">

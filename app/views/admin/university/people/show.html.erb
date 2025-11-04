@@ -1,11 +1,11 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= edit_link @person %>
   <%= button_advanced do %>
     <%= destroy_link @person %>
     <%= static_link static_admin_university_person_path(@person) %>
   <% end %>
+  <%= edit_link @person %>
 <% end %>
 
 <div class="row g-5">

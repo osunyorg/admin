@@ -1,9 +1,11 @@
 <% content_for :title, @publication %>
 
-<% content_for :title_right do %>
-  <%= edit_link @publication if @publication.editable? %>
-  <%= button_advanced do %>
-    <%= destroy_link @publication if @publication.editable? %>
+<% if @publication.editable? %>
+  <% content_for :title_right do %>
+    <%= button_advanced do %>
+      <%= destroy_link @publication %>
+    <% end %>
+    <%= edit_link @publication %>
   <% end %>
 <% end %>
 

@@ -3,10 +3,10 @@
 
 <% content_for :title_right do %>
   <%= render 'admin/application/favorites/widget', about: @extranet %>
-  <%= link_to t('open'), @extranet.url, target: :_blank, class: button_classes unless @extranet.url.blank? %>
   <%= button_advanced do %>
     <%= destroy_link @extranet %>
   <% end %>
+  <%= link_to t('open'), @extranet.url, target: :_blank, class: button_classes unless @extranet.url.blank? %>
 <% end %>
 
 <% content_for :title_left do %>

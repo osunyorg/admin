@@ -1,17 +1,17 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @job %>
+    <%= duplicate_link @job %>
+  <% end %>
   <% job_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
               job_url,
               target: :_blank,
               class: button_classes if job_url %>
-  <%= edit_link @job %>
   <%= publish_link @job %>
-  <%= button_advanced do %>
-    <%= destroy_link @job %>
-    <%= duplicate_link @job %>
-  <% end %>
+  <%= edit_link @job %>
 <% end %>
 
 <div class="row">

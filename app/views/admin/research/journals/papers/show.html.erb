@@ -1,10 +1,10 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= edit_link @paper %>
   <%= button_advanced do %>
     <%= destroy_link @paper %>
   <% end %>
+  <%= edit_link @paper %>
 <% end %>
 
 <div class="row">

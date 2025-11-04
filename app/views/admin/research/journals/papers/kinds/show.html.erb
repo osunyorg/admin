@@ -1,15 +1,15 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= link_to t('edit'), 
-              edit_admin_research_journal_kind_path(@kind),
-              class: button_classes %>
   <%= button_advanced do %>
     <%= link_to t('delete'), 
                 admin_research_journal_kind_path(@kind),
                 data: { confirm: t('please_confirm') },
                 class: button_classes_danger %>
   <% end %>
+  <%= link_to t('edit'), 
+              edit_admin_research_journal_kind_path(@kind),
+              class: button_classes %>
 <% end %>
 
 <%= render 'admin/research/journals/papers/list', papers: @papers %>
