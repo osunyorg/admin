@@ -28,7 +28,7 @@
     <% end if @l10n.place.present? %>
   </div>
   <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n %>
   </div>
 </div>
 <hr class="mb-5">
@@ -41,7 +41,7 @@
       <%= render 'admin/application/categories/widget/show', about: @exhibition %>
       <%= render 'admin/communication/websites/federations/show', about: @exhibition %>
       <%= render 'admin/application/permalinks/redirects', about: @l10n %>
-      <%= render 'admin/application/l10n/widget', about: @exhibition, l10n: @l10n, small: true %>
+      <%= render 'admin/application/l10n/widget', about: @exhibition, l10n: @l10n %>
     <% end %>
   </div>
   <div class="col-lg-8">

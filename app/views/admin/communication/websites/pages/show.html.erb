@@ -32,7 +32,7 @@
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n %>
   </div>
 </div>
 <%= osuny_separator %>
@@ -44,7 +44,7 @@
   </div>
   <div class="col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n %>
-    <%= render 'admin/application/meta_description/show', about: @l10n, small: true %>
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
 <%= render 'admin/communication/contents/editor', about: @l10n %>
