@@ -50,6 +50,7 @@ namespace :education do
       get :children
       get :preview
       get :static
+      post :restore
     end
   end
   resources :schools do
