@@ -9,7 +9,8 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   include Admin::Localizable
 
   def index
-    @programs = @programs.filter_by(params[:filters], current_language)
+    @filtered = @programs.filter_by(params[:filters], current_language)
+    @programs = @filtered.at_lifecycle(params[:lifecycle], current_language)
                          .ordered(current_language)
                          .page(params[:page])
     @feature_nav = 'navigation/admin/education/programs'

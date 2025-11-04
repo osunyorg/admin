@@ -7,6 +7,7 @@
 #  bodyclass            :string
 #  city                 :string
 #  country              :string
+#  deleted_at           :datetime
 #  email                :string
 #  kind                 :integer          default("company")
 #  latitude             :float
@@ -32,10 +33,13 @@
 #  fk_rails_35fcd198e0  (university_id => universities.id)
 #
 class University::Organization < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include MentionableByBlocks

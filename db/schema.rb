@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_03_165621) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_04_080149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1580,6 +1580,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_165621) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_9b56b45e58", unique: true
     t.index ["about_id"], name: "index_education_program_localizations_on_about_id"
     t.index ["language_id"], name: "index_education_program_localizations_on_language_id"
@@ -1598,6 +1599,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_165621) do
     t.boolean "apprenticeship"
     t.string "bodyclass"
     t.boolean "qualiopi_certified", default: false
+    t.datetime "deleted_at"
     t.index ["diploma_id"], name: "index_education_programs_on_diploma_id"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
@@ -2190,6 +2192,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_165621) do
     t.string "migration_identifier"
     t.boolean "published", default: false
     t.datetime "published_at"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_eb921fd47b", unique: true
     t.index ["about_id"], name: "index_university_organization_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_organization_localizations_on_language_id"
@@ -2214,6 +2217,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_165621) do
     t.string "migration_identifier"
     t.uuid "created_by_id"
     t.string "bodyclass"
+    t.datetime "deleted_at"
     t.index ["created_by_id"], name: "index_university_organizations_on_created_by_id"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
@@ -2250,6 +2254,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_165621) do
     t.integer "email_visibility", default: 0
     t.uuid "created_by_id"
     t.string "bodyclass"
+    t.datetime "deleted_at"
     t.index ["created_by_id"], name: "index_university_people_on_created_by_id"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
@@ -2367,6 +2372,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_165621) do
     t.datetime "updated_at", null: false
     t.text "featured_image_alt"
     t.text "featured_image_credit"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_54757d0dad", unique: true
     t.index ["about_id"], name: "index_university_person_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_person_localizations_on_language_id"

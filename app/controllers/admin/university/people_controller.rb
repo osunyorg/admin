@@ -7,7 +7,8 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   include Admin::Localizable
 
   def index
-    @people = @people.filter_by(params[:filters], current_language)
+    @filtered = @people.filter_by(params[:filters], current_language)
+    @people = @people.at_lifecycle(params[:lifecycle], current_language)
                      .ordered(current_language)
     @feature_nav = 'navigation/admin/university/people'
     respond_to do |format|

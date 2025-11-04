@@ -7,7 +7,8 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   include Admin::Localizable
 
   def index
-    @organizations = @organizations.filter_by(params[:filters], current_language)
+    @filtered = @organizations.filter_by(params[:filters], current_language)
+    @organizations = @organizations.at_lifecycle(params[:lifecycle], current_language)
                                    .ordered(current_language)
     @feature_nav = 'navigation/admin/university/organizations'
 
