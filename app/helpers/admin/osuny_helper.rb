@@ -1,12 +1,11 @@
 module Admin::OsunyHelper
 
-  def osuny_panel(title = nil, subtitle: nil, action: nil, image: nil, small: false, classes: '', &block)
+  def osuny_panel(title = nil, subtitle: nil, action: nil, small: false, classes: '', &block)
     render  layout: "admin/application/components/panel",
             locals: {
               title: title,
               subtitle: subtitle,
               action: action,
-              image: image,
               small: small,
               classes: classes
             } do
