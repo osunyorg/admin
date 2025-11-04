@@ -10,16 +10,16 @@
 
 <div class="row">
   <div class="col-lg-4">
-    <%= osuny_panel t('metadata'), small: true do %>
+    <%= osuny_small_panel t('metadata') do %>
       <%= render 'admin/application/publication/show', about: @l10n %>
       <%= render 'admin/application/l10n/widget', about: @alert, l10n: @l10n, small: true %>
     <% end %>
   </div>
     <div class="col-lg-8">
-      <%= osuny_panel Communication::Website::Alert.human_attribute_name(:kind), small: true do %>
+      <%= osuny_small_panel Communication::Website::Alert.human_attribute_name(:kind) do %>
         <p><%= @alert.kind_i18n %></p>
       <% end %>
-      <%= osuny_panel Communication::Website::Alert::Localization.human_attribute_name(:description), small: true do %>
+      <%= osuny_small_panel Communication::Website::Alert::Localization.human_attribute_name(:description) do %>
           <div class="lead"><%= sanitize @l10n.description %></div>
       <% end if @l10n.description.present? %>
     </div>

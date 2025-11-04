@@ -3,7 +3,7 @@ horizontal ||= false
 color = about.accessible? ? 'text-success' : 'text-danger'
 action = "<i class=\"#{ Icon::A11Y } h4 float-end #{ color}\"></i>"
 %>
-<%= osuny_panel t('accessibility.label'), small: true do %>
+<%= osuny_small_panel t('accessibility.label') do %>
   <% if horizontal %>
     <div class="row"><div class="offset-lg-4 col-lg-8 mt-lg-n4">
   <% end %>

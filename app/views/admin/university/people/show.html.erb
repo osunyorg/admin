@@ -10,7 +10,7 @@
 
 <div class="row g-5">
   <div class="col-md-4">
-    <%= osuny_panel t('activerecord.attributes.university/person.picture'), small: true do %>
+    <%= osuny_small_panel t('activerecord.attributes.university/person.picture') do %>
       <%= kamifusen_tag @person.best_picture, class: 'img-fluid col-4 col-md-8' %>
       <% if @person.best_picture_inherits_from_user? %>
         <p>
@@ -35,7 +35,7 @@
     <%= render 'admin/application/summary/show', about: @l10n %>
 
     <% unless @l10n.biography.blank? %>
-      <%= osuny_panel University::Person::Localization.human_attribute_name('biography'), small: true do %>
+      <%= osuny_small_panel University::Person::Localization.human_attribute_name('biography') do %>
         <%= sanitize @l10n.biography %>
       <% end %>
     <% end %>
@@ -96,7 +96,7 @@
 </div>
 
 <% content_for :server_admin_only do %>
-  <%= osuny_panel t('static'), small: true do  %>
+  <%= osuny_small_panel t('static') do  %>
     <%= link_to 'Person',
                 static_admin_university_person_path(@person),
                 classes: button_classes,

@@ -15,11 +15,11 @@
 <% end %>
 <div class="row">
   <div class="col-lg-7">
-    <%= osuny_panel Communication::Website::Post::Localization.human_attribute_name(:title), small: true do %>
+    <%= osuny_small_panel Communication::Website::Post::Localization.human_attribute_name(:title) do %>
       <p class="lead"><%= @l10n.title %></p>
     <% end %>
     <% if @l10n.subtitle.present? %>
-      <%= osuny_panel Communication::Website::Post::Localization.human_attribute_name(:subtitle), small: true do %>
+      <%= osuny_small_panel Communication::Website::Post::Localization.human_attribute_name(:subtitle) do %>
         <p class="lead"><%= @l10n.subtitle %></p>
       <% end %>
     <% end %>
@@ -34,7 +34,7 @@
 <hr class="mb-5">
 <div class="row">
   <div class="col-lg-4">
-    <%= osuny_panel t('metadata'), small: true do %>
+    <%= osuny_small_panel t('metadata') do %>
       <p>
         <% if @l10n.published %>
           <%= t('admin.communication.website.post.localizations.published_on', date: l(@l10n.published_at.to_date)) %>

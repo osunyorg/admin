@@ -16,7 +16,7 @@
 
 <div class="row">
   <div class="col-lg-7">
-    <%= osuny_panel Communication::Website::Jobboard::Job::Localization.human_attribute_name(:title), small: true do %>
+    <%= osuny_small_panel Communication::Website::Jobboard::Job::Localization.human_attribute_name(:title) do %>
       <p class="lead"><%= @l10n.title %></p>
       <% if @l10n.subtitle.present? %>
         <p class="mt-n3 text-muted"><%= @l10n.subtitle %></p>
@@ -33,7 +33,7 @@
 <hr class="mb-5">
 <div class="row">
   <div class="col-lg-4">
-    <%= osuny_panel t('metadata'), small: true do %>
+    <%= osuny_small_panel t('metadata') do %>
       <%= render 'admin/application/publication/show', about: @l10n %>
       <%= render 'admin/application/categories/widget/show', about: @job %>
       <%= render 'admin/application/permalinks/redirects', about: @l10n %>

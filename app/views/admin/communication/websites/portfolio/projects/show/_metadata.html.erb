@@ -1,4 +1,4 @@
-<%= osuny_panel t('metadata'), small: true do %>
+<%= osuny_small_panel t('metadata') do %>
   <%= @l10n.published ? Communication::Website::Portfolio::Project::Localization.human_attribute_name(:published)
                       : t('admin.communication.website.portfolio.project.localizations.draft') %>
 
