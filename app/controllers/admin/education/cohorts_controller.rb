@@ -13,6 +13,14 @@ class Admin::Education::CohortsController < Admin::Education::ApplicationControl
     breadcrumb
   end
 
+  def destroy
+    program = @cohort.program
+    label = @cohort.to_s_in(current_language)
+    @cohort.destroy
+    redirect_to alumni_admin_education_program_path(program),
+                notice: t('admin.successfully_destroyed_html', model: label)
+  end
+
   protected
 
   def breadcrumb
