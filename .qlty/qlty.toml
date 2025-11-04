@@ -22,3 +22,7 @@ default = true
 [[plugin]]
 name = "eslint"
 version = "5.16.0"
+
+[[analyzers.duplication]]
+enabled = true
+ignore_comments = true
