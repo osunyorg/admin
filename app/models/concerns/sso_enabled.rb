@@ -1,4 +1,4 @@
-module University::WithSso
+module Communication::Extranet::SsoEnabled
   extend ActiveSupport::Concern
 
   included do
