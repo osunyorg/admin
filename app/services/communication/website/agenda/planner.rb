@@ -10,15 +10,13 @@ class Communication::Website::Agenda::Planner
 
   def initialize( website:,
                   time_scope:,
-                  category: nil,
-                  language: nil,
-                  quantity: 1,
+                  options: {},
                   including: {})
     @website = website
     @time_scope = time_scope
-    @category = category
-    @quantity = quantity
-    @language = language
+    @category = options.fetch(:category)
+    @language = options.fetch(:language)
+    @quantity = options.fetch(:quantity, 1)
     @include_parents = including.fetch(:parents, true)
     @include_children = including.fetch(:children, true)
     @include_recurring = including.fetch(:recurring, true)

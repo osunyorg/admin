@@ -82,9 +82,11 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
     @planner ||= Communication::Website::Agenda::Planner.new(
       website: website,
       time_scope: time,
-      category: category,
-      quantity: quantity,
-      language: block.language,
+      options: {
+        category: category,
+        quantity: quantity,
+        language: block.language,
+      },
       including: {
         parents: kind_parent,
         children: kind_child,

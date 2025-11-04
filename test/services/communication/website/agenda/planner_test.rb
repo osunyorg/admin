@@ -36,9 +36,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
     planner = Communication::Website::Agenda::Planner.new(
       website: website_with_github,
       time_scope: Communication::Website::Agenda::STATUS_FUTURE_OR_CURRENT,
-      category: nil,
-      language: languages(:fr),
-      quantity: 10,
+      options: {
+        category: nil,
+        language: languages(:fr),
+        quantity: 10,
+      },
       including: {
         parents: true,
         children: true,
@@ -64,9 +66,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
     planner = Communication::Website::Agenda::Planner.new(
       website: website_with_github,
       time_scope: Communication::Website::Agenda::STATUS_FUTURE_OR_CURRENT,
-      category: category(:test_category),
-      language: languages(:fr),
-      quantity: 10,
+      options: {
+        category: category(:test_category),
+        language: languages(:fr),
+        quantity: 10,
+      },
       including: {
         parents: true,
         children: true,
@@ -83,9 +87,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
     planner = Communication::Website::Agenda::Planner.new(
       website: website_with_github,
       time_scope: Communication::Website::Agenda::STATUS_FUTURE_OR_CURRENT,
-      category: nil,
-      language: languages(:fr),
-      quantity: 10,
+      options: {
+        category: nil,
+        language: languages(:fr),
+        quantity: 10,
+      },
       including: {
         parents: false,
         children: true,
@@ -111,9 +117,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
     planner = Communication::Website::Agenda::Planner.new(
       website: website_with_github,
       time_scope: Communication::Website::Agenda::STATUS_FUTURE_OR_CURRENT,
-      category: nil,
-      language: languages(:fr),
-      quantity: 10,
+      options: {
+        category: nil,
+        language: languages(:fr),
+        quantity: 10,
+      },
       including: {
         parents: true,
         children: false,
@@ -135,9 +143,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
     planner = Communication::Website::Agenda::Planner.new(
       website: website_with_github,
       time_scope: Communication::Website::Agenda::STATUS_FUTURE_OR_CURRENT,
-      category: nil,
-      language: languages(:fr),
-      quantity: 10,
+      options: {
+        category: nil,
+        language: languages(:fr),
+        quantity: 10,
+      },
       including: {
         parents: true,
         children: true,
@@ -157,9 +167,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
     planner = Communication::Website::Agenda::Planner.new(
       website: website_with_github,
       time_scope: Communication::Website::Agenda::STATUS_CURRENT,
-      category: nil,
-      language: languages(:fr),
-      quantity: 10,
+      options: {
+        category: nil,
+        language: languages(:fr),
+        quantity: 10,
+      },
       including: {
         parents: true,
         children: true,
@@ -178,9 +190,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
     planner = Communication::Website::Agenda::Planner.new(
       website: website_with_github,
       time_scope: Communication::Website::Agenda::STATUS_FUTURE,
-      category: nil,
-      language: languages(:fr),
-      quantity: 10,
+      options: {
+        category: nil,
+        language: languages(:fr),
+        quantity: 10,
+      },
       including: {
         parents: true,
         children: true,
@@ -206,9 +220,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
     planner = Communication::Website::Agenda::Planner.new(
       website: website_with_github,
       time_scope: Communication::Website::Agenda::STATUS_ARCHIVE,
-      category: nil,
-      language: languages(:fr),
-      quantity: 10,
+      options: {
+        category: nil,
+        language: languages(:fr),
+        quantity: 10,
+      },
       including: {
         parents: true,
         children: true,
