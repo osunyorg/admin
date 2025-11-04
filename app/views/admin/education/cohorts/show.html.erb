@@ -1,5 +1,11 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @cohort %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-3">
     <%= osuny_label Education::Cohort.human_attribute_name('school') %>
