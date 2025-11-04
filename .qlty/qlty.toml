@@ -26,3 +26,8 @@ version = "5.16.0"
 [[analyzers.duplication]]
 enabled = true
 ignore_comments = true
+
+[[ci.conditions]]
+on_pull_request = true
+skip_draft_pull_requests = true
+on_commit = true
