@@ -85,9 +85,11 @@ class Communication::Block::Template::Agenda < Communication::Block::Template::B
       category: category,
       quantity: quantity,
       language: block.language,
-      include_parents: kind_parent,
-      include_children: kind_child,
-      include_recurring: kind_recurring
+      including: {
+        parents: kind_parent,
+        children: kind_child,
+        recurring: kind_recurring
+      }
     )
   end
 

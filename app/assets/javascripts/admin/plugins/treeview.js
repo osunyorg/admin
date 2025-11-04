@@ -56,7 +56,7 @@ window.osuny.treeView = {
                         // undo the move in html
                         var items = from.querySelectorAll(':scope > li');
                         from.insertBefore(item, items[evt.oldIndex]);
-                        alert(data.responseText);
+                        // alert(data.responseText);
                     });
                 }
             });

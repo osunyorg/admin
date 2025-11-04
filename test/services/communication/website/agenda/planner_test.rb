@@ -39,9 +39,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
       category: nil,
       language: languages(:fr),
       quantity: 10,
-      include_parents: true,
-      include_children: true,
-      include_recurring: true
+      including: {
+        parents: true,
+        children: true,
+        recurring: true
+      }
     )
     assert_equal [
       event(:parent),
@@ -65,9 +67,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
       category: category(:test_category),
       language: languages(:fr),
       quantity: 10,
-      include_parents: true,
-      include_children: true,
-      include_recurring: true
+      including: {
+        parents: true,
+        children: true,
+        recurring: true
+      }
     )
     assert_equal [
       event(:simple)
@@ -82,9 +86,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
       category: nil,
       language: languages(:fr),
       quantity: 10,
-      include_parents: false,
-      include_children: true,
-      include_recurring: true
+      including: {
+        parents: false,
+        children: true,
+        recurring: true
+      }
     )
     assert_equal [
       time_slot(:child_2_single_slot_time_slot),
@@ -108,9 +114,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
       category: nil,
       language: languages(:fr),
       quantity: 10,
-      include_parents: true,
-      include_children: false,
-      include_recurring: true
+      including: {
+        parents: true,
+        children: false,
+        recurring: true
+      }
     )
     assert_equal [
       event(:parent),
@@ -130,9 +138,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
       category: nil,
       language: languages(:fr),
       quantity: 10,
-      include_parents: true,
-      include_children: true,
-      include_recurring: false
+      including: {
+        parents: true,
+        children: true,
+        recurring: false
+      }
     )
     assert_equal [
       event(:parent),
@@ -150,9 +160,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
       category: nil,
       language: languages(:fr),
       quantity: 10,
-      include_parents: true,
-      include_children: true,
-      include_recurring: true
+      including: {
+        parents: true,
+        children: true,
+        recurring: true
+      }
     )
     assert_equal [
       event(:parent),
@@ -169,9 +181,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
       category: nil,
       language: languages(:fr),
       quantity: 10,
-      include_parents: true,
-      include_children: true,
-      include_recurring: true
+      including: {
+        parents: true,
+        children: true,
+        recurring: true
+      }
     )
     assert_equal [
       time_slot(:child_3_multiple_slots_on_same_day_time_slot_1),
@@ -195,9 +209,11 @@ class Communication::Website::Agenda::PlannerTest < ActiveSupport::TestCase
       category: nil,
       language: languages(:fr),
       quantity: 10,
-      include_parents: true,
-      include_children: true,
-      include_recurring: true
+      including: {
+        parents: true,
+        children: true,
+        recurring: true
+      }
     )
     assert_equal [
       time_slot(:recurring_time_slot_2),

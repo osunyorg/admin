@@ -13,17 +13,15 @@ class Communication::Website::Agenda::Planner
                   category: nil,
                   language: nil,
                   quantity: 1,
-                  include_parents: true,
-                  include_children: true,
-                  include_recurring: true)
+                  including: {})
     @website = website
     @time_scope = time_scope
     @category = category
     @quantity = quantity
     @language = language
-    @include_parents = include_parents
-    @include_children = include_children
-    @include_recurring = include_recurring
+    @include_parents = including.fetch(:parents, true)
+    @include_children = including.fetch(:children, true)
+    @include_recurring = including.fetch(:recurring, true)
   end
 
   def archive?
