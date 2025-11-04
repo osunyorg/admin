@@ -1,4 +1,4 @@
-module Communication::Extranet::SsoEnabled
+module SsoEnabled
   extend ActiveSupport::Concern
 
   included do
