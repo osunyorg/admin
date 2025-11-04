@@ -3,10 +3,25 @@ class TrulyDestroySoftDeletedRecordsJob < ApplicationJob
 
   PARANOID_MODELS = [
     ActiveStorage::Attachment,
-    Communication::Website::Page::Localization,
+    Communication::Block,
+    Communication::Website::Agenda::Event,
+    Communication::Website::Agenda::Event::Localization,
+    Communication::Website::Agenda::Exhibition,
+    Communication::Website::Agenda::Exhibition::Localization,
+    Communication::Website::Jobboard::Job,
+    Communication::Website::Jobboard::Job::Localization,
     Communication::Website::Page,
+    Communication::Website::Page::Localization,
+    Communication::Website::Portfolio::Project,
+    Communication::Website::Portfolio::Project::Localization,
+    Communication::Website::Post,
     Communication::Website::Post::Localization,
-    Communication::Website::Post
+    Education::Program,
+    Education::Program::Localization,
+    University::Organization,
+    University::Organization::Localization,
+    University::Person,
+    University::Person::Localization
   ].freeze
 
   def perform
