@@ -1,4 +1,4 @@
-<%= osuny_panel t('metadata'), small: true do %>
+<%= osuny_small_panel t('metadata') do %>
   <%= @l10n.published ? Communication::Website::Portfolio::Project::Localization.human_attribute_name(:published)
                       : t('admin.communication.website.portfolio.project.localizations.draft') %>
 
@@ -11,4 +11,4 @@
   <% end %>
   <%= render 'admin/application/permalinks/redirects', about: @l10n %>
 <% end %>
-<%= render 'admin/application/l10n/widget', about: @project, l10n: @l10n, small: true %>
+<%= render 'admin/application/l10n/widget', about: @project, l10n: @l10n %>

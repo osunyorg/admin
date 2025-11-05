@@ -1,5 +1,11 @@
 <% content_for :title, @l10n %>
 
+<% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @cohort %>
+  <% end %>
+<% end %>
+
 <div class="row">
   <div class="col-lg-3">
     <%= osuny_label Education::Cohort.human_attribute_name('school') %>
@@ -14,7 +20,7 @@
     <p><%= link_to @cohort.academic_year, [:admin, @cohort.academic_year] %></p>
   </div>
   <div class="col-lg-3">
-    <%= render 'admin/application/l10n/widget', about: @cohort, l10n: @l10n, small: true %>
+    <%= render 'admin/application/l10n/widget', about: @cohort, l10n: @l10n %>
   </div>
 </div>
 

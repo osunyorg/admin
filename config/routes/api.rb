@@ -16,6 +16,14 @@ namespace :api do
             post :upsert, on: :collection
           end
         end
+        namespace :portfolio do
+          resources :categories, controller: '/api/osuny/communication/websites/portfolio/categories', only: [:index, :show, :create, :update, :destroy] do
+            post :upsert, on: :collection
+          end
+          resources :projects, controller: '/api/osuny/communication/websites/portfolio/projects', only: [:index, :show, :create, :update, :destroy] do
+            post :upsert, on: :collection
+          end
+        end
         namespace :page, path: 'pages' do
           resources :categories, controller: '/api/osuny/communication/websites/pages/categories', only: [:index, :show, :create, :update, :destroy] do
             post :upsert, on: :collection

@@ -7,17 +7,18 @@
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             indexed
+#  about_id      :uuid             indexed, uniquely indexed => [language_id]
 #  extranet_id   :uuid             indexed
-#  language_id   :uuid             indexed
+#  language_id   :uuid             uniquely indexed => [about_id], indexed
 #  university_id :uuid             indexed
 #
 # Indexes
 #
-#  idx_on_about_id_ff80179dbe       (about_id)
-#  idx_on_extranet_id_aeb5898555    (extranet_id)
-#  idx_on_language_id_87a464170d    (language_id)
-#  idx_on_university_id_1b84e09ad5  (university_id)
+#  idx_on_about_id_ff80179dbe              (about_id)
+#  idx_on_about_id_language_id_f29c05f164  (about_id,language_id) UNIQUE
+#  idx_on_extranet_id_aeb5898555           (extranet_id)
+#  idx_on_language_id_87a464170d           (language_id)
+#  idx_on_university_id_1b84e09ad5         (university_id)
 #
 # Foreign Keys
 #

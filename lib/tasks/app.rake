@@ -1,7 +1,7 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Migrations::LinksBlocksLayouts.migrate
+    Migrations::TimeSlotLocalizations.migrate
   end
 
   namespace :search do
