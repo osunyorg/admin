@@ -1,4 +1,4 @@
-/* global $, Sortable, console */
+/* global $, Sortable */
 window.osuny = window.osuny || {};
 window.osuny.treeView = {
 
