@@ -56,8 +56,8 @@ module Admin::OsunyHelper
                     classes: classes
   end
 
-  def osuny_published(state, classes: '')
-    raw "<span class=\"osuny__published osuny__published--#{ state } #{classes}\"></span>"
+  def osuny_published(state)
+    raw "<span class=\"osuny__published osuny__published--#{ state }\"></span>"
   end
 
   def osuny_published_localized(object)

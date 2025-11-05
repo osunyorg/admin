@@ -21,7 +21,7 @@ current_params = {
         <% if status == Lifecyclable::LIFECYCLE_PUBLISHED %>
           <%= osuny_published true %>
         <% elsif status == Lifecyclable::LIFECYCLE_DRAFT %>
-          <%= osuny_published false, classes: 'osuny__published--bordered' %>
+          <%= osuny_published false %>
         <% end %>
         <%= label %>
         <span class="text-muted">(<%= count %>)</span>
