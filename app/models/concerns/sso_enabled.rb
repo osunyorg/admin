@@ -1,4 +1,4 @@
-module University::WithSso
+module SsoEnabled
   extend ActiveSupport::Concern
 
   included do
