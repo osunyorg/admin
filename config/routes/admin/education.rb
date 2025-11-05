@@ -4,7 +4,7 @@ namespace :education do
       get :static
     end
   end
-  resources :cohorts, only: [:index, :show] do
+  resources :cohorts, only: [:index, :show, :destroy] do
     member do
       get :static
     end

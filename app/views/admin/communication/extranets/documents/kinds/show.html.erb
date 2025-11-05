@@ -7,6 +7,6 @@
   <%= edit_link @kind %>
 <% end %>
 
-<%= render 'admin/application/l10n/widget', about: @kind, l10n: @l10n, small: true %>
+<%= render 'admin/application/l10n/widget', about: @kind, l10n: @l10n %>
 <%= render 'admin/communication/extranets/documents/list', documents: @documents %>
 <%= paginate @documents %>
