@@ -4,13 +4,13 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.4.6-node
+      - image: cimg/ruby:3.4.7-node
         environment:
           RAILS_ENV: test
           RACK_ENV: test
           PGHOST: localhost
           PGUSER: osuny
-      - image: cimg/postgres:14.10
+      - image: cimg/postgres:16.9
         environment:
           POSTGRES_PASSWORD: ""
           POSTGRES_USER: osuny

@@ -4,6 +4,10 @@ class Communication::Website::Page::Administrator < Communication::Website::Page
     :persons
   end
 
+  def is_hugo_index?
+    true
+  end
+
   def should_create_special_page?
     website.about && website.about&.respond_to?(:administrators)
   end

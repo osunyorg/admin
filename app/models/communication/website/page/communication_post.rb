@@ -4,6 +4,10 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
     :posts
   end
 
+  def is_hugo_index?
+    true
+  end
+
   def editable_width?
     false
   end

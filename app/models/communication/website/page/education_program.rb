@@ -4,6 +4,10 @@ class Communication::Website::Page::EducationProgram < Communication::Website::P
     :programs
   end
 
+  def is_hugo_index?
+    true
+  end
+
   def should_create_special_page?
     website.about && website.about&.respond_to?(:programs)
   end

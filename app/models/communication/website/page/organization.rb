@@ -4,13 +4,17 @@ class Communication::Website::Page::Organization < Communication::Website::Page
     :organizations
   end
 
+  def is_hugo_index?
+    true
+  end
+
   def dependencies
     super +
     [website.config_default_languages] +
     explicitly_connected_organizations
   end
 
-  # https://developers.osuny.org/docs/admin/sites-web/git/dependencies/iteration-9/
+  # https://developers.osuny.org/docs/admin/sites-web/dependencies/iteration-9/
   def references
     website.connected_organizations
   end

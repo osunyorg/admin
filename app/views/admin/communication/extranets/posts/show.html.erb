@@ -14,12 +14,12 @@
 
 <div class="row">
   <div class="col-lg-7">
-    <%= osuny_panel Communication::Website::Post::Localization.human_attribute_name(:title), small: true do %>
+    <%= osuny_small_panel Communication::Website::Post::Localization.human_attribute_name(:title) do %>
       <p class="lead"><%= @l10n %></p>
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n %>
   </div>
 </div>
 <hr class="mb-5">

@@ -7,12 +7,13 @@
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             indexed
-#  language_id   :uuid             indexed
+#  about_id      :uuid             uniquely indexed => [language_id], indexed
+#  language_id   :uuid             uniquely indexed => [about_id], indexed
 #  university_id :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_f1054bd8a7                (about_id,language_id) UNIQUE
 #  index_research_thesis_localizations_on_about_id       (about_id)
 #  index_research_thesis_localizations_on_language_id    (language_id)
 #  index_research_thesis_localizations_on_university_id  (university_id)

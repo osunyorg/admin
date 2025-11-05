@@ -54,6 +54,10 @@ module Communication::Website::Page::WithSpecialPage
     type == 'Communication::Website::Page::Home'
   end
 
+  def is_hugo_index?
+    false
+  end
+
   def is_special_page?
     type.present?
   end

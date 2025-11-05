@@ -4,6 +4,10 @@ class Communication::Website::Page::Author < Communication::Website::Page
     :persons
   end
 
+  def is_hugo_index?
+    true
+  end
+
   def dependencies
     super +
     [website.config_default_languages] +

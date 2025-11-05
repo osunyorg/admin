@@ -16,19 +16,19 @@
 
 <div class="row">
   <div class="col-lg-7">
-    <%= osuny_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name(:title), small: true do %>
+    <%= osuny_small_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name(:title) do %>
       <p class="lead"><%= @l10n.title %></p>
       <% if @l10n.subtitle.present? %>
         <p class="mt-n3 text-muted"><%= @l10n.subtitle %></p>
       <% end %>
       <p><%= render 'admin/communication/websites/agenda/exhibitions/dates', exhibition: @exhibition, l10n: @l10n, detailed: true %></p>
     <% end %>
-    <%= osuny_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name(:place), small: true do %>
+    <%= osuny_small_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name(:place) do %>
       <p><%= @l10n.place %></p>
     <% end if @l10n.place.present? %>
   </div>
   <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n %>
   </div>
 </div>
 <hr class="mb-5">
@@ -36,20 +36,20 @@
 <hr class="mb-5">
 <div class="row">
   <div class="col-lg-4">
-    <%= osuny_panel t('metadata'), small: true do %>
+    <%= osuny_small_panel t('metadata') do %>
       <%= render 'admin/application/publication/show', about: @l10n %>
       <%= render 'admin/application/categories/widget/show', about: @exhibition %>
       <%= render 'admin/communication/websites/federations/show', about: @exhibition %>
       <%= render 'admin/application/permalinks/redirects', about: @l10n %>
-      <%= render 'admin/application/l10n/widget', about: @exhibition, l10n: @l10n, small: true %>
+      <%= render 'admin/application/l10n/widget', about: @exhibition, l10n: @l10n %>
     <% end %>
   </div>
   <div class="col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n %>
-    <%= osuny_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name("text"), small: true do %>
+    <%= osuny_small_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name("text") do %>
       <div><%= sanitize @l10n.text %></div>
     <% end if @l10n.text.present? %>
-    <%= osuny_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name("notes"), small: true do %>
+    <%= osuny_small_panel Communication::Website::Agenda::Exhibition::Localization.human_attribute_name("notes") do %>
       <div class="small"><%= sanitize @l10n.notes %></div>
     <% end if @l10n.notes.present? %>
     <%= render 'admin/application/meta_description/show', about: @l10n %>

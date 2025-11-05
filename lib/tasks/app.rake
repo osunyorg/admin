@@ -1,7 +1,7 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Migrations::WebsiteDefaultImages.migrate
+    Migrations::TimeSlotLocalizations.migrate
   end
 
   namespace :search do

@@ -3,7 +3,7 @@ about ||= nil
 dependencies ||= about&.dependencies
 active_storage_blobs ||= about.respond_to?(:active_storage_blobs) ? about&.active_storage_blobs : []
 %>
-<%= osuny_panel 'Dependencies', small: true do %>
+<%= osuny_small_panel 'Dependencies' do %>
   <h2 class="h5">dependencies</h2>
   <div class="table-responsive">
     <table class="<%= table_classes %>">

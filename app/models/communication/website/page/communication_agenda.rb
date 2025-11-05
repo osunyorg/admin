@@ -4,6 +4,10 @@ class Communication::Website::Page::CommunicationAgenda < Communication::Website
     :agenda
   end
 
+  def is_hugo_index?
+    true
+  end
+
   def editable_width?
     false
   end

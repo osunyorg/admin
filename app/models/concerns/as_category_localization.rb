@@ -11,10 +11,10 @@ module AsCategoryLocalization
   include WithBlobs
   include WithFeaturedImage
   include WithUniversity
-  
+
   included do
     has_summernote :summary
-  
+
     validates :name, presence: true
   end
 
