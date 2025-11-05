@@ -6,12 +6,13 @@
 #  description   :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             indexed
-#  language_id   :uuid             indexed
+#  about_id      :uuid             uniquely indexed => [language_id], indexed
+#  language_id   :uuid             uniquely indexed => [about_id], indexed
 #  university_id :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_5991ad3c2d                         (about_id,language_id) UNIQUE
 #  idx_on_language_id_75d7367448                                  (language_id)
 #  idx_on_university_id_0b815cf13a                                (university_id)
 #  index_university_person_involvement_localizations_on_about_id  (about_id)

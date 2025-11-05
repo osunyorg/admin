@@ -35,6 +35,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include Sanitizable
   include Searchable
   include WithMenuItemTarget
+  include WithOpenApi
   include WithUniversity
 
   belongs_to  :created_by,

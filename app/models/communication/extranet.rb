@@ -46,11 +46,11 @@ class Communication::Extranet < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
   include Searchable
+  include SsoEnabled
   include WithAbouts
   include WithConnectedObjects
   include WithFeatures
   include WithLegal
-  include WithSso
   include WithStyle
   include WithUniversity
 
