@@ -1,4 +1,4 @@
-/* global $, Sortable */
+/* global $, Sortable, console */
 window.osuny = window.osuny || {};
 window.osuny.treeView = {
 
@@ -56,7 +56,7 @@ window.osuny.treeView = {
                         // undo the move in html
                         var items = from.querySelectorAll(':scope > li');
                         from.insertBefore(item, items[evt.oldIndex]);
-                        // alert(data.responseText);
+                        console.log(data.responseText);
                     });
                 }
             });
