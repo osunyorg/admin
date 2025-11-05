@@ -421,6 +421,7 @@ en:
     status:
       all: All
       draft: Draft
+      planned: Planned
       published: Published
       trash: Trash
   loading: Loading...

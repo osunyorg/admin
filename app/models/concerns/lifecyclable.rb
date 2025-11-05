@@ -5,12 +5,14 @@ module Lifecyclable
 
   LIFECYCLE_ALL = 'all'
   LIFECYCLE_PUBLISHED = 'published'
+  LIFECYCLE_PLANNED = 'planned'
   LIFECYCLE_DRAFT = 'draft'
   LIFECYCLE_TRASH = 'trash'
 
   LIFECYCLE_STATUSES = [
     LIFECYCLE_ALL,
     LIFECYCLE_PUBLISHED,
+    LIFECYCLE_PLANNED,
     LIFECYCLE_DRAFT,
     LIFECYCLE_TRASH
   ]
@@ -20,7 +22,9 @@ module Lifecyclable
     scope :at_lifecycle, -> (status, language) {
       case status
       when LIFECYCLE_PUBLISHED
-        published_in(language)
+        published_now_in(language)
+      when LIFECYCLE_PLANNED
+        published_in_the_future_in(language)
       when LIFECYCLE_DRAFT
         draft_in(language)
       when LIFECYCLE_TRASH

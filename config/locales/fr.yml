@@ -421,6 +421,7 @@ fr:
     status:
       all: Tout
       draft: Brouillon
+      planned: Planifié
       published: Publié
       trash: Corbeille
   loading: Chargement...

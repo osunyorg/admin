@@ -3,6 +3,11 @@ current_lifecycle_status = request.params.dig(:lifecycle) || Lifecyclable::LIFEC
 current_params = {
   filters: request.params.dig(:filters) || {}
 }
+statuses_with_publication = [
+  Lifecyclable::LIFECYCLE_PUBLISHED,
+  Lifecyclable::LIFECYCLE_PLANNED,
+  Lifecyclable::LIFECYCLE_DRAFT
+]
 %>
 <ul class="nav nav-pills osuny__lifecycle">
   <% Lifecyclable::LIFECYCLE_STATUSES.each do |status| %>
@@ -18,11 +23,7 @@ current_params = {
       <a  class="nav-link<%= ' active' if is_current %>"
           <% if is_current %>aria-current="page"<% end %>
           href="<%= path %>">
-        <% if status == Lifecyclable::LIFECYCLE_PUBLISHED %>
-          <%= osuny_published true %>
-        <% elsif status == Lifecyclable::LIFECYCLE_DRAFT %>
-          <%= osuny_published false %>
-        <% end %>
+        <%= osuny_published status if status.in? statuses_with_publication %>
         <%= label %>
         <span class="text-muted">(<%= count %>)</span>
       </a>
