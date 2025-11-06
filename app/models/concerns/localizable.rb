@@ -40,7 +40,7 @@ module Localizable
         scope = l10n_klass.send(scope_name)
         for_language(language).merge(scope)
       else
-        for_language(language) 
+        none
       end
     }
 
