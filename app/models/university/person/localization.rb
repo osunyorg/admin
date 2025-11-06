@@ -62,23 +62,23 @@ class University::Person::Localization < ApplicationRecord
   before_validation :prepare_name
 
   def person_l10n
-    @person_l10n ||= University::Person::Localization.find(id)
+    @person_l10n ||= University::Person::Localization.with_deleted.find(id)
   end
 
   def administrator
-    @administrator ||= University::Person::Localization::Administrator.find(id)
+    @administrator ||= University::Person::Localization::Administrator.with_deleted.find(id)
   end
 
   def author
-    @author ||= University::Person::Localization::Author.find(id)
+    @author ||= University::Person::Localization::Author.with_deleted.find(id)
   end
 
   def researcher
-    @researcher ||= University::Person::Localization::Researcher.find(id)
+    @researcher ||= University::Person::Localization::Researcher.with_deleted.find(id)
   end
 
   def teacher
-    @teacher ||= University::Person::Localization::Teacher.find(id)
+    @teacher ||= University::Person::Localization::Teacher.with_deleted.find(id)
   end
 
   def dependencies
