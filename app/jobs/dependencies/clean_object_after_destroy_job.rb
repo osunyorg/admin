@@ -1,5 +1,5 @@
 class Dependencies::CleanObjectAfterDestroyJob < ApplicationJob
-  queue_as :elephant
+  queue_as :elephants
 
   def perform(object)
     object.references.compact.each &:touch
