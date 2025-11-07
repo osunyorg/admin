@@ -5,6 +5,7 @@
 #  id                     :uuid             not null, primary key
 #  accessibility          :text
 #  contacts               :text
+#  deleted_at             :datetime
 #  duration               :text
 #  evaluation             :text
 #  name                   :string
@@ -39,6 +40,8 @@
 #  fk_rails_e96c95a9cd  (university_id => universities.id)
 #
 class Education::Diploma::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Backlinkable
   include Contentful
