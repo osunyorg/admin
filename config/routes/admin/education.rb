@@ -7,6 +7,7 @@ namespace :education do
   resources :cohorts, only: [:index, :show, :destroy] do
     member do
       get :static
+      post :restore
     end
   end
   resources :diplomas do
