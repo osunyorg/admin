@@ -3,6 +3,7 @@
 # Table name: university_role_localizations
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  description   :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -24,6 +25,8 @@
 #  fk_rails_c269f41345  (language_id => languages.id)
 #
 class University::Role::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Sanitizable
   include WithUniversity
