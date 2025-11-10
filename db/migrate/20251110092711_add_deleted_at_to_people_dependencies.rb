@@ -4,5 +4,7 @@ class AddDeletedAtToPeopleDependencies < ActiveRecord::Migration[8.0]
     add_column :university_person_involvements, :deleted_at, :datetime
     add_column :university_person_experience_localizations, :deleted_at, :datetime
     add_column :university_person_involvement_localizations, :deleted_at, :datetime
+    add_column :university_roles, :deleted_at, :datetime
+    add_column :university_role_localizations, :deleted_at, :datetime
   end
 end

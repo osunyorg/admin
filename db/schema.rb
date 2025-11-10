@@ -2399,6 +2399,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_092711) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_90a71d885a", unique: true
     t.index ["about_id"], name: "index_university_role_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_role_localizations_on_language_id"
@@ -2412,6 +2413,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_092711) do
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["target_type", "target_id"], name: "index_university_roles_on_target"
     t.index ["university_id"], name: "index_university_roles_on_university_id"
   end
