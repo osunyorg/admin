@@ -1132,6 +1132,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
     t.string "type"
     t.string "migration_identifier"
     t.integer "position_in_tree"
+    t.jsonb "design_options"
     t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -1237,8 +1238,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
     t.uuid "created_by_id"
     t.boolean "full_width", default: true
     t.string "bodyclass"
-    t.datetime "deleted_at"
     t.string "migration_identifier"
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_aac12e3adb"
     t.index ["created_by_id"], name: "idx_on_created_by_id_7009ee99c6"
     t.index ["university_id"], name: "idx_on_university_id_ac2f4a0bfc"
@@ -1392,8 +1393,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
     t.string "deuxfleurs_access_key_id"
     t.string "deuxfleurs_secret_access_key"
     t.datetime "last_sync_at"
-    t.boolean "feature_jobboard", default: false
     t.boolean "feature_alumni", default: false
+    t.boolean "feature_jobboard", default: false
     t.boolean "feature_alerts", default: false
     t.boolean "archive_content", default: false
     t.integer "years_before_archive_content", default: 3

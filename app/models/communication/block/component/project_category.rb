@@ -1,10 +1,12 @@
 class Communication::Block::Component::ProjectCategory < Communication::Block::Component::BaseReference
 
+  def categories
+    @categories ||= website.portfolio_categories
+  end
+
   def category
     return unless website
-    website.portfolio_categories
-           .published_now_in(template.block.language)
-           .find_by(id: data)
+    categories.find_by(id: data)
   end
 
   def dependencies
