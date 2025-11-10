@@ -1,5 +1,5 @@
 namespace :research do
-  resources :researchers, only: [:index, :show, :update] do 
+  resources :researchers, only: [:index, :show, :update] do
     member do
       post 'sync-with-hal' => 'researchers#sync_with_hal', as: :sync_with_hal
       get :static
@@ -22,23 +22,27 @@ namespace :research do
   resources :journals do
     member do
       get :static
+      post :restore
     end
     resources :volumes, controller: 'journals/volumes' do
       member do
         get :static
+        post :restore
       end
     end
     resources :papers, controller: 'journals/papers' do
       collection do
-        resources :kinds, controller: 'journals/papers/kinds' do
+        resources :kinds, as: :paper_kinds, controller: 'journals/papers/kinds' do
           member do
             get :static
+            post :restore
           end
         end
         post :reorder
       end
       member do
         get :static
+        post :restore
       end
     end
   end

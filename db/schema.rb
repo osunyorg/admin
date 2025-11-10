@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_10_083004) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_10_092411) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1832,6 +1832,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_083004) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_c2c2f792ff", unique: true
     t.index ["about_id"], name: "index_research_journal_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_journal_localizations_on_language_id"
@@ -1846,6 +1847,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_083004) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_ab294e2ab8", unique: true
     t.index ["about_id"], name: "index_research_journal_paper_kind_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_journal_paper_kind_localizations_on_language_id"
@@ -1857,6 +1859,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_083004) do
     t.uuid "journal_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["journal_id"], name: "index_research_journal_paper_kinds_on_journal_id"
     t.index ["university_id"], name: "index_research_journal_paper_kinds_on_university_id"
   end
@@ -1876,6 +1879,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_083004) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_6a26cfcece", unique: true
     t.index ["about_id"], name: "index_research_journal_paper_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_journal_paper_localizations_on_language_id"
@@ -1896,6 +1900,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_083004) do
     t.date "received_at"
     t.date "accepted_at"
     t.string "doi"
+    t.datetime "deleted_at"
     t.index ["kind_id"], name: "index_research_journal_papers_on_kind_id"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"
@@ -1926,6 +1931,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_083004) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_adf437eb06", unique: true
     t.index ["about_id"], name: "index_research_journal_volume_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_journal_volume_localizations_on_language_id"
@@ -1938,6 +1944,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_083004) do
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
@@ -1946,6 +1953,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_083004) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["university_id"], name: "index_research_journals_on_university_id"
   end
 

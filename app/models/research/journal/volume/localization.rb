@@ -3,6 +3,7 @@
 # Table name: research_journal_volume_localizations
 #
 #  id                    :uuid             not null, primary key
+#  deleted_at            :datetime
 #  featured_image_alt    :string
 #  featured_image_credit :text
 #  keywords              :text
@@ -33,6 +34,8 @@
 #  fk_rails_f071a0b35b  (about_id => research_journal_volumes.id)
 #
 class Research::Journal::Volume::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include HasGitFiles
   include Initials
