@@ -4,28 +4,8 @@
   <%= create_link Communication::Website::Page %>
 <% end %>
 
-<div class="d-flex justify-content-between mb-4">
-  <p>
-    <%= @pages.total_count %>
-    <%= Communication::Website::Page.model_name.human(count: @pages.total_count).downcase %>
-  </p>
-  <%= render 'filters', current_path: list_admin_communication_website_pages_path %>
-</div>
+<%= render 'filters' %>
 
-<ul class="nav nav-tabs justify-content-md-end small">
-  <li class="nav-item">
-    <a class="nav-link" href="<%= admin_communication_website_pages_path %>">
-      <i class="fas fa-sitemap"></i>
-      <%= t('admin.communication.website.pages.as_tree') %>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page">
-      <i class="fas fa-list"></i>
-      <%= t('admin.communication.website.pages.as_list') %>
-    </a>
-  </li>
-</ul>
 <div class="position-relative mt-2">
   <%= render 'admin/communication/websites/pages/list', pages: @pages %>
   <%= paginate @pages %>

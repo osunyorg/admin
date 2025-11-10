@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
+#  deleted_at               :datetime
 #  full_width               :boolean          default(FALSE)
 #  is_lasting               :boolean          default(FALSE)
 #  migration_identifier     :string
@@ -23,11 +24,14 @@
 #  fk_rails_d1c1a10946  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Post < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Sanitizable
   include Searchable

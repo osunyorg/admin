@@ -1,15 +1,17 @@
 class Admin::Communication::Websites::Agenda::EventsController < Admin::Communication::Websites::Agenda::ApplicationController
   load_and_authorize_resource class: Communication::Website::Agenda::Event,
-                              through: :website
+                              through: :website,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @events = @events.filter_by(params[:filters], current_language)
-                     .ordered_desc
-                     .root
-                     .page(params[:page])
+    @filtered = @events.filter_by(params[:filters], current_language)
+    @events = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                       .ordered_desc
+                       .root
+                       .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
   end
@@ -77,6 +79,15 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     redirect_to admin_communication_website_agenda_events_url,
                 notice: t('admin.successfully_destroyed_html', model: @event.to_s_in(current_language))
   end
+
+  def restore
+    @event = @website.agenda_events.only_deleted.find(params[:id])
+    authorize!(:restore, @event)
+    @event.restore(recursive: true)
+    redirect_to admin_communication_website_agenda_event_path(@event),
+                notice: t('admin.successfully_restored_html', model: @event.to_s_in(current_language))
+  end
+
   protected
 
   def breadcrumb

@@ -1,13 +1,15 @@
 class Admin::University::PeopleController < Admin::University::ApplicationController
   load_and_authorize_resource class: University::Person,
                               through: :current_university,
-                              through_association: :people
+                              through_association: :people,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @people = @people.filter_by(params[:filters], current_language)
+    @filtered = @people.filter_by(params[:filters], current_language)
+    @people = @people.at_lifecycle(params[:lifecycle], current_language)
                      .ordered(current_language)
     @feature_nav = 'navigation/admin/university/people'
     respond_to do |format|
@@ -81,6 +83,14 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
     @person.destroy
     redirect_to admin_university_people_url,
                 notice: t('admin.successfully_destroyed_html', model: @person.to_s_in(current_language))
+  end
+
+  def restore
+    @person = current_university.people.only_deleted.find(params[:id])
+    authorize!(:restore, @person)
+    @person.restore(recursive: true)
+    redirect_to admin_university_person_path(@person),
+                notice: t('admin.successfully_restored_html', model: @person.to_s_in(current_language))
   end
 
   protected

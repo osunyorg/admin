@@ -1,7 +1,6 @@
 <% content_for :title, @app %>
 
 <% content_for :title_right do %>
-  <%= edit_link @app %>
   <%= button_advanced do %>
     <%= link_to t('university.apps.regenerate_token'),
                 [:regenerate_token, :admin, @app],
@@ -9,6 +8,7 @@
                 data: { confirm: t('please_confirm') },
                 class: 'btn btn-warning btn-xs' %>
   <% end %>
+  <%= edit_link @app %>
 <% end %>
 
 <% if @should_display_token %>

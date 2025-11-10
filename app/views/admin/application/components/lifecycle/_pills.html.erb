@@ -1,0 +1,32 @@
+<%
+current_lifecycle_status = request.params.dig(:lifecycle) || Lifecyclable::LIFECYCLE_ALL
+current_params = {
+  filters: request.params.dig(:filters) || {}
+}
+statuses_with_publication = [
+  Lifecyclable::LIFECYCLE_PUBLISHED,
+  Lifecyclable::LIFECYCLE_PLANNED,
+  Lifecyclable::LIFECYCLE_DRAFT
+]
+%>
+<ul class="nav nav-pills osuny__lifecycle">
+  <% Lifecyclable::LIFECYCLE_STATUSES.each do |status| %>
+    <%
+    is_current = current_lifecycle_status == status
+    current_params[:lifecycle] = status
+    path = send(path_method, current_params)
+    label = t("lifecycle.status.#{status}")
+    count = @filtered.at_lifecycle(status, current_language).count
+    next if status != Lifecyclable::LIFECYCLE_ALL && count.zero?
+    %>
+    <li class="nav-item">
+      <a  class="nav-link<%= ' active' if is_current %>"
+          <% if is_current %>aria-current="page"<% end %>
+          href="<%= path %>">
+        <%= osuny_published status if status.in? statuses_with_publication %>
+        <%= label %>
+        <span class="text-muted">(<%= count %>)</span>
+      </a>
+    </li>
+  <% end %>
+</ul>

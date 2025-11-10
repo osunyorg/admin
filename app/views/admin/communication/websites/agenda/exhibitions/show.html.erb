@@ -1,17 +1,17 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @exhibition %>
+    <%= duplicate_link @exhibition %>
+  <% end %>
   <% exhibition_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
               exhibition_url,
               target: :_blank,
               class: button_classes if exhibition_url %>
-  <%= edit_link @exhibition %>
   <%= publish_link @exhibition %>
-  <%= button_advanced do %>
-    <%= destroy_link @exhibition %>
-    <%= duplicate_link @exhibition %>
-  <% end %>
+  <%= edit_link @exhibition %>
 <% end %>
 
 <div class="row">

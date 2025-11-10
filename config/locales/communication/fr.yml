@@ -516,8 +516,7 @@ fr:
             published: Publiée
             published_status: État de publication
         pages:
-          as_list: Voir en liste
-          as_tree: Organiser l'arborescence
+          as_list: Liste des pages
           delete_special_page_notice: Impossible de supprimer cette page
           duplicate_special_page_notice: Impossible de dupliquer cette page
           full_width_status: Pleine largeur

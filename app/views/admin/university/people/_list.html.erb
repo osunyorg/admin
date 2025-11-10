@@ -3,12 +3,26 @@
     <div class="col-6 col-lg-3 col-xxl-2">
       <div class="<%= osuny_card_classes %>">
         <%= osuny_thumbnail_localized person, large: true %>
-        <div class="card-body">
-          <%= osuny_published_localized person %>
-          <%= osuny_link_localized  person,
-                                    admin_university_person_path(person),
-                                    classes: 'stretched-link'  %>
-        </div>
+        <% if person.deleted? %>
+          <div class="card-body">
+            <%= person.best_localization_for(current_language) %>
+          </div>
+          <% if can?(:restore, person) %>
+            <div class="card-footer mb-n2">
+              <%= link_to t('restore'),
+                          restore_admin_university_person_path(person),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card-body">
+            <%= osuny_published_localized person %>
+            <%= osuny_link_localized  person,
+                                      admin_university_person_path(person),
+                                      classes: 'stretched-link'  %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>

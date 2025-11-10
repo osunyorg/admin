@@ -34,6 +34,8 @@
 #  fk_rails_ec345cee0b  (language_id => languages.id)
 #
 class Communication::Website::Alert::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include HasGitFiles
   include Initials

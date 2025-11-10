@@ -1,0 +1,39 @@
+module Lifecyclable
+  extend ActiveSupport::Concern
+
+  LIFECYCLE_DAYS_BEFORE_DELETION = 30
+
+  LIFECYCLE_ALL = 'all'
+  LIFECYCLE_PUBLISHED = 'published'
+  LIFECYCLE_PLANNED = 'planned'
+  LIFECYCLE_DRAFT = 'draft'
+  LIFECYCLE_TRASH = 'trash'
+
+  LIFECYCLE_STATUSES = [
+    LIFECYCLE_ALL,
+    LIFECYCLE_PUBLISHED,
+    LIFECYCLE_PLANNED,
+    LIFECYCLE_DRAFT,
+    LIFECYCLE_TRASH
+  ]
+  
+  included do
+
+    scope :at_lifecycle, -> (status, language) {
+      case status
+      when LIFECYCLE_PUBLISHED
+        published_now_in(language)
+      when LIFECYCLE_PLANNED
+        published_in_the_future_in(language)
+      when LIFECYCLE_DRAFT
+        draft_in(language)
+      when LIFECYCLE_TRASH
+        only_deleted
+      else
+        # Status nil or all
+        # -> no additional scope :)
+      end
+    }
+  end
+
+end
