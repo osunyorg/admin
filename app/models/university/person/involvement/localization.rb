@@ -3,6 +3,7 @@
 # Table name: university_person_involvement_localizations
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  description   :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -24,6 +25,8 @@
 #  fk_rails_ec0c3f2630  (about_id => university_person_involvements.id)
 #
 class University::Person::Involvement::Localization < ApplicationRecord
+  acts_as_paranoid
+  
   include AsLocalization
   include Sanitizable
   include WithUniversity
