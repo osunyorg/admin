@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_10_093355) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_10_093654) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -91,6 +91,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_093355) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_cf0b216983", unique: true
     t.index ["about_id"], name: "index_administration_location_localizations_on_about_id"
     t.index ["language_id"], name: "index_administration_location_localizations_on_language_id"
@@ -108,6 +109,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_093355) do
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["university_id"], name: "index_administration_locations_on_university_id"
   end
 
