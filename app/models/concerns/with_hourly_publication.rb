@@ -7,6 +7,8 @@ module WithHourlyPublication
     belongs_to :publication_job, class_name: 'GoodJob::Job', optional: true
 
     after_save_commit :manage_hourly_publication_job
+    after_destroy :unschedule_publication_job
+    after_restore :manage_hourly_publication_job
   end
 
   protected
