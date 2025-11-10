@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  date                     :date
+#  deleted_at               :datetime
 #  value                    :integer          uniquely indexed => [university_id, communication_website_id, year_id, month_id]
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -27,6 +28,8 @@
 #  fk_rails_caaa93280f  (year_id => communication_website_agenda_period_years.id)
 #
 class Communication::Website::Agenda::Period::Day < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include Communication::Website::Agenda::Period::Base
   include GeneratesGitFiles

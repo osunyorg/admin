@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_10_093654) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_10_100211) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -693,6 +693,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_093654) do
     t.uuid "about_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_b8b9e8269f", unique: true
     t.index ["about_id"], name: "idx_on_about_id_ff7b8b96ea"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_c9cc20d97c"
@@ -709,6 +710,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_093654) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_54db819007"
     t.index ["month_id"], name: "index_communication_website_agenda_period_days_on_month_id"
     t.index ["university_id", "communication_website_id", "year_id", "month_id", "value"], name: "index_communication_website_agenda_period_days_unique", unique: true
@@ -723,6 +725,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_093654) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_e69d0eb996", unique: true
     t.index ["about_id"], name: "idx_on_about_id_e3d3e69fcb"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_2202f6cc51"
@@ -737,6 +740,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_093654) do
     t.integer "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_49eaf81807"
     t.index ["university_id", "communication_website_id", "year_id", "value"], name: "index_communication_website_agenda_period_months_unique", unique: true
     t.index ["year_id"], name: "index_communication_website_agenda_period_months_on_year_id"
@@ -750,6 +754,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_093654) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_65b759f0dd", unique: true
     t.index ["about_id"], name: "idx_on_about_id_9d0e59880a"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_ccc9a47ea5"
@@ -764,6 +769,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_093654) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "needs_checking", default: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_dd738e97d3"
     t.index ["university_id", "communication_website_id", "value"], name: "index_communication_website_agenda_period_years_unique", unique: true
   end
