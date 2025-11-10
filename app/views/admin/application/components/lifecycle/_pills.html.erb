@@ -17,7 +17,7 @@ statuses_with_publication = [
     path = send(path_method, current_params)
     label = t("lifecycle.status.#{status}")
     count = @filtered.at_lifecycle(status, current_language).count
-    next if count.zero?
+    next if status != Lifecyclable::LIFECYCLE_ALL && count.zero?
     %>
     <li class="nav-item">
       <a  class="nav-link<%= ' active' if is_current %>"
