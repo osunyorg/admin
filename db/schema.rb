@@ -1979,6 +1979,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["university_id"], name: "index_research_laboratories_on_university_id"
   end
 
@@ -1995,6 +1996,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["research_laboratory_id"], name: "index_research_laboratory_axes_on_research_laboratory_id"
     t.index ["university_id"], name: "index_research_laboratory_axes_on_university_id"
   end
@@ -2009,6 +2011,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_3895cd52f3", unique: true
     t.index ["about_id"], name: "index_research_laboratory_axis_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_laboratory_axis_localizations_on_language_id"
@@ -2025,6 +2028,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_a3deee8fec", unique: true
     t.index ["about_id"], name: "index_research_laboratory_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_laboratory_localizations_on_language_id"
@@ -2073,6 +2077,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
     t.date "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["author_id"], name: "index_research_theses_on_author_id"
     t.index ["director_id"], name: "index_research_theses_on_director_id"
     t.index ["research_laboratory_id"], name: "index_research_theses_on_research_laboratory_id"
@@ -2087,6 +2092,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_f1054bd8a7", unique: true
     t.index ["about_id"], name: "index_research_thesis_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_thesis_localizations_on_language_id"

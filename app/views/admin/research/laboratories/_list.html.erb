@@ -3,14 +3,28 @@
     <div>
       <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized laboratory %>
-        <div class="card-body">
-          <%= osuny_link_localized  laboratory,
-                                    admin_research_laboratory_path(laboratory),
-                                    classes: 'stretched-link' %>
-        </div>
-        <div class="card-footer small text-muted">
-          <%= laboratory.full_address %>
-        </div>
+        <% if laboratory.deleted? %>
+          <div class="card-body">
+            <%= laboratory.best_localization_for(current_language) %>
+          </div>
+          <% if can?(:restore, laboratory) %>
+            <div class="card-footer">
+              <%= link_to t('restore'),
+                          restore_admin_research_laboratory_path(laboratory),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card-body">
+            <%= osuny_link_localized  laboratory,
+                                      admin_research_laboratory_path(laboratory),
+                                      classes: 'stretched-link' %>
+          </div>
+          <div class="card-footer small text-muted">
+            <%= laboratory.full_address %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>
