@@ -103,6 +103,7 @@ namespace :communication do
         end
         member do
           get :static
+          get :preview
           post :duplicate
           post :publish
           post :save_time_slots

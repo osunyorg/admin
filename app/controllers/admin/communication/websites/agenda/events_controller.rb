@@ -23,6 +23,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def show
+    @preview = true
     breadcrumb
   end
 
