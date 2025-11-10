@@ -8,7 +8,7 @@ module WithHourlyPublication
 
     after_save_commit :manage_hourly_publication_job
     after_destroy :unschedule_publication_job
-    after_restore :manage_hourly_publication_job
+    after_restore :schedule_publication_job if :need_publication_job?
   end
 
   protected
@@ -36,17 +36,21 @@ module WithHourlyPublication
     publication_job&.destroy
   end
 
-  def should_schedule_publication_job?
+  def need_publication_job?
     # The object is published (not published?, which would do publish_now?)
     published &&
+    # The object was programmed to be published in the future
+    published_at.present? && 
+    published_at > Time.zone.now
+  end
+
+  def should_schedule_publication_job?
+    need_publication_job? &&
     # The publication state OR the publication date has changed
     (
       saved_change_to_published? || 
       saved_change_to_published_at?
-    ) &&
-    # The object was programmed to be published in the future
-    published_at.present? && 
-    published_at > Time.zone.now
+    )
   end
 
   def should_unschedule_publication_job?
