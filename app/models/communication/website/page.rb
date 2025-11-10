@@ -5,7 +5,6 @@
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
 #  deleted_at               :datetime
-#  design_options           :jsonb
 #  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  position                 :integer          not null
