@@ -49,13 +49,21 @@ namespace :research do
   resources :laboratories do
     member do
       get :static
+      post :restore
     end
     resources :axes, controller: 'laboratories/axes' do
       collection do
         post :reorder
       end
+      member do
+        post :restore
+      end
     end
   end
-  resources :theses
+  resources :theses do
+    member do
+      post :restore
+    end
+  end
   root to: 'dashboard#index'
 end

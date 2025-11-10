@@ -3,13 +3,27 @@
     <div>
       <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized thesis %>
-        <div class="card-body">
-          <%= osuny_link_localized thesis, [:admin, thesis] %><br>
-          <%= thesis.author.to_s_in(current_language) if thesis.author.present? %>
-        </div>
-        <div class="card-footer">
-          <%= thesis.laboratory.to_s_in(current_language) if thesis.laboratory.present? %>
-        </div>
+        <% if thesis.deleted? %>
+          <div class="card-body">
+            <%= thesis.best_localization_for(current_language) %>
+          </div>
+          <% if can?(:restore, thesis) %>
+            <div class="card-footer">
+              <%= link_to t('restore'),
+                          restore_admin_research_thesis_path(thesis),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card-body">
+            <%= osuny_link_localized thesis, [:admin, thesis] %><br>
+            <%= thesis.author.to_s_in(current_language) if thesis.author.present? %>
+          </div>
+          <div class="card-footer">
+            <%= thesis.laboratory.to_s_in(current_language) if thesis.laboratory.present? %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>

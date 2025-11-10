@@ -3,6 +3,7 @@
 # Table name: research_laboratory_axes
 #
 #  id                     :uuid             not null, primary key
+#  deleted_at             :datetime
 #  position               :integer          not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -20,6 +21,9 @@
 #  fk_rails_d334f832b4  (university_id => universities.id)
 #
 class Research::Laboratory::Axis < ApplicationRecord
+  acts_as_paranoid
+
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include Orderable

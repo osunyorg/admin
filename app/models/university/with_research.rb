@@ -22,6 +22,10 @@ module University::WithResearch
               class_name: 'Research::Laboratory',
               dependent: :destroy
 
+    has_many  :research_laboratory_axes,
+              class_name: 'Research::Laboratory::Axis',
+              dependent: :destroy
+
     has_many  :research_theses,
               class_name: 'Research::Thesis',
               dependent: :destroy
