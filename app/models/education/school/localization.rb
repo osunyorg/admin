@@ -3,6 +3,7 @@
 # Table name: education_school_localizations
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  name          :string
 #  slug          :string
 #  url           :string
@@ -26,6 +27,8 @@
 #  fk_rails_ef497f2390  (university_id => universities.id)
 #
 class Education::School::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Contentful
   include HasGitFiles

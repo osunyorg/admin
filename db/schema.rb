@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_07_154629) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_10_080307) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1636,6 +1636,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_07_154629) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_2cadc1fe79", unique: true
     t.index ["about_id"], name: "index_education_school_localizations_on_about_id"
     t.index ["language_id"], name: "index_education_school_localizations_on_language_id"
@@ -1653,6 +1654,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_07_154629) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "phone"
+    t.datetime "deleted_at"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 

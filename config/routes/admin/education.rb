@@ -65,6 +65,7 @@ namespace :education do
     end
     member do
       get :static
+      post :restore
     end
   end
   resources :teachers, only: [:index, :show, :edit, :update] do
