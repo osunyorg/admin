@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_10_102902) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -789,6 +789,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_102902) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_d42c296af1", unique: true
     t.index ["about_id"], name: "index_communication_website_alert_localizations_on_about_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_419e31417f"
@@ -802,6 +803,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_102902) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_communication_website_alerts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_alerts_on_university_id"
   end

@@ -184,6 +184,7 @@ namespace :communication do
       member do
         get :static
         post :publish
+        post :restore
       end
     end
     resources :menus, controller: 'websites/menus' do

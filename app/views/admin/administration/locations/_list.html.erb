@@ -3,17 +3,22 @@
     <div>
       <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized location %>
-        <div class="card-body">
-          <%= osuny_link_localized location, [:admin, location] %>
-        </div>
-        <% if location.deleted? && can?(:restore, location) %>
-          <div class="card-footer mb-n2">
-            <%= link_to t('restore'),
-                        restore_admin_administration_location_path(location),
-                        method: :post,
-                        class: button_classes %>
+        <% if location.deleted? %>
+          <div class="card-body">
+            <%= location.best_localization_for(current_language) %>
           </div>
+          <% if can?(:restore, location) %>
+            <div class="card-footer mb-n2">
+              <%= link_to t('restore'),
+                          restore_admin_administration_location_path(location),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
         <% else %>
+          <div class="card-body">
+            <%= osuny_link_localized location, [:admin, location] %>
+          </div>
           <div class="card-footer small text-muted">
             <%= location.full_street_address %>
           </div>
