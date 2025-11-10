@@ -9,6 +9,7 @@
               path_method: :admin_communication_website_alerts_path %>
   <%= render 'filters', current_path: admin_communication_website_alerts_path, website: @website %>
 </div>
+<%= render 'admin/application/components/lifecycle/label' %>
 
 <%= render 'admin/communication/websites/alerts/list', alerts: @alerts %>
 <%= paginate @alerts %>
