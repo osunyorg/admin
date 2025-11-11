@@ -1,8 +1,7 @@
 class Communication::Block::Component::JobCategory < Communication::Block::Component::BaseReference
 
   def categories
-    website.jobboard_categories
-           .published_now_in(template.block.language)
+    @categories ||= website.jobboard_categories
   end
 
   def category
