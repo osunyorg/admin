@@ -44,6 +44,13 @@ module Communication::Block::WithTemplate
       links: 4050
     }, prefix: :template
 
+    TEMPLATE_KINDS_WITH_NAME_OVERRIDE = {
+      posts: :feature_posts_name,
+      agenda: :feature_agenda_name,
+      projects: :feature_portfolio_name,
+      jobs: :feature_jobboard_name
+    }
+
     # Used to purge images when unattaching them
     # template_blobs would be a better name, because there are files
     has_many_attached :template_images
@@ -59,6 +66,10 @@ module Communication::Block::WithTemplate
     @template = nil
   end
 
+  def template_name
+    template_name_can_have_override? ? template_name_in_website : default_template_name
+  end
+
   def options
     options = {}
     template.components_descriptions.map do |desc|
@@ -71,6 +82,29 @@ module Communication::Block::WithTemplate
   end
 
   protected
+
+  def template_name_can_have_override?
+    return false if template_website.nil?
+    template_kind.to_sym.in?(TEMPLATE_KINDS_WITH_NAME_OVERRIDE.keys)
+  end
+
+  def template_name_in_website
+    method = TEMPLATE_KINDS_WITH_NAME_OVERRIDE[template_kind.to_sym]
+    template_website.send(method, language)
+  end
+
+  def template_website
+    unless @template_website
+      l10n = about
+      object = l10n.try(:about)
+      @template_website = object.try(:website)
+    end
+    @template_website
+  end
+
+  def default_template_name
+    I18n.t("enums.communication.block.template_kind.#{template_kind}")
+  end
 
   def template_class
     "Communication::Block::Template::#{template_kind.classify}".constantize
