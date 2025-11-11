@@ -3,6 +3,7 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
                               through: :website,
                               except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 

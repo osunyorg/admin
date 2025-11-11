@@ -3,6 +3,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
                               through: :website,
                               except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
@@ -36,12 +37,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def show
-    @preview = true
     breadcrumb
-  end
-
-  def preview
-    render layout: 'admin/layouts/preview'
   end
 
   def new
