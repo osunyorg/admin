@@ -6,7 +6,8 @@ module Admin::HasPreview
   end
 
   def preview
-    render layout: 'admin/layouts/preview'
+    render  template: 'admin/application/preview/preview',
+            layout: 'admin/layouts/preview'
   end
 
   protected
