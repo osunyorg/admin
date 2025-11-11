@@ -76,6 +76,7 @@ Rails.application.routes.draw do
   draw 'server'
 
   scope module: 'extranet' do
+    get 'users', to: redirect('/')
     get 'style' => 'style#index', as: :style, constraints: { format: 'css' }
     scope '/:lang' do
       draw 'extranet'
