@@ -5,6 +5,7 @@
     <%= destroy_link @project %>
     <%= duplicate_link @project %>
   <% end %>
+  <%= preview_link %>
   <% project_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
               project_url,

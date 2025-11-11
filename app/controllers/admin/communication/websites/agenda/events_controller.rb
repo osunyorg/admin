@@ -3,6 +3,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
                               through: :website,
                               except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
@@ -23,7 +24,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   end
 
   def show
-    @preview = true
     breadcrumb
   end
 

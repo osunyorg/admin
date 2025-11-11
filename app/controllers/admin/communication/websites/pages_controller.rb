@@ -3,6 +3,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
                               through: :website,
                               except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
@@ -50,7 +51,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def show
-    @preview = true
     breadcrumb
     add_breadcrumb(@l10n, admin_communication_website_page_path(@page))
   end
@@ -59,10 +59,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     @l10n.publish!
     redirect_back fallback_location: admin_communication_website_page_path(@page),
                   notice: t('admin.communication.website.publish.notice')
-  end
-
-  def preview
-    render layout: 'admin/layouts/preview'
   end
 
   def connect

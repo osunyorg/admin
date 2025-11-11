@@ -5,6 +5,7 @@
     <%= destroy_link @job %>
     <%= duplicate_link @job %>
   <% end %>
+  <%= preview_link %>
   <% job_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
               job_url,

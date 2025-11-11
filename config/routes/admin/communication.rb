@@ -82,8 +82,8 @@ namespace :communication do
         post :publish_batch
       end
       member do
-        get :static
         get :preview
+        get :static
         post :duplicate
         post :publish
         post :restore
@@ -102,8 +102,8 @@ namespace :communication do
           end
         end
         member do
-          get :static
           get :preview
+          get :static
           post :duplicate
           post :publish
           post :save_time_slots
@@ -112,6 +112,7 @@ namespace :communication do
       end
       resources :exhibitions, controller: '/admin/communication/websites/agenda/exhibitions' do
         member do
+          get :preview
           get :static
           post :duplicate
           post :publish
@@ -144,6 +145,7 @@ namespace :communication do
     namespace :portfolio do
       resources :projects, controller: '/admin/communication/websites/portfolio/projects' do
         member do
+          get :preview
           get :static
           post :duplicate
           post :publish
@@ -164,6 +166,7 @@ namespace :communication do
     namespace :jobboard do
       resources :jobs, controller: '/admin/communication/websites/jobboard/jobs' do
         member do
+          get :preview
           get :static
           post :duplicate
           post :publish
