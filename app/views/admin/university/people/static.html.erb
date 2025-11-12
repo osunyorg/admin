@@ -19,30 +19,27 @@ linkTitle: >-
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-person: >-
-  <%= prepare_text_for_static @l10n.to_s %>
-first_name: >-
-  <%= prepare_text_for_static @l10n.first_name %>
-last_name: >-
-  <%= prepare_text_for_static @l10n.last_name %>
+<%= osuny_static_string 'person', person_l10n.to_s %>
+<%= osuny_static_string 'first_name', person_l10n.first_name %>
+<%= osuny_static_string 'last_name', person_l10n.last_name %>
+<% 
+# Peut-on supprimer les contact details à la racine ? 
+# phone, email, twitter, linkedin, website
+# Ils devraient être déjà dans admin/application/contact_details/static
+%>
 <% if person.phone_mobile_is_public? %>
-phone: >-
-  <%= prepare_text_for_static person.phone_mobile %>
+<%= osuny_static_string 'phone', person.phone_mobile %>
 <% end %>
 <% if person.email_is_public? %>
-email: >-
-  <%= prepare_text_for_static person.email %>
+<%= osuny_static_string 'email', person.email %>
 <% end %>
 <% if person.twitter_is_public? %>
-twitter: >-
-  <%= prepare_text_for_static @l10n.twitter %>
+<%= osuny_static_string 'twitter', person.twitter %>
 <% end %>
 <% if person.linkedin_is_public? %>
-linkedin: >-
-  <%= prepare_text_for_static @l10n.linkedin %>
+<%= osuny_static_string 'linkedin', person.linkedin %>
 <% end %>
-website: >-
-  <%= prepare_text_for_static @l10n.url %>
+<%= osuny_static_string 'website', @l10n.url %>
 <%= render 'admin/application/contact_details/static',
             about: person,
             l10n: @l10n,
@@ -78,15 +75,15 @@ teachings:
     hugo = program_l10n.hugo(@website)
     next if hugo.file.blank?
     %>
-  - description: >-
-      <%= involvement_l10n.description %>
-    program:
+  - program:
       title: >-
         <%= program_l10n.to_s %>
       permalink: "<%= hugo.permalink %>"
       path: "<%= hugo.path %>"
       slug: "<%= hugo.slug %>"
       file: "<%= hugo.file %>"
+    description: >-
+      <%= involvement_l10n.description %>
 <% end %>
 <% end %>
 <% if person.roles_as_administrator.any? %>
