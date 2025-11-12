@@ -5,6 +5,7 @@
 #  id                 :uuid             not null, primary key
 #  address_additional :string
 #  address_name       :string
+#  deleted_at         :datetime
 #  name               :string
 #  slug               :string
 #  created_at         :datetime         not null
@@ -27,6 +28,8 @@
 #  fk_rails_975d06fc20  (about_id => research_laboratories.id)
 #
 class Research::Laboratory::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include HasGitFiles
   include Initials

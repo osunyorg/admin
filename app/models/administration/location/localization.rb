@@ -5,6 +5,7 @@
 #  id                    :uuid             not null, primary key
 #  address_additional    :string
 #  address_name          :string
+#  deleted_at            :datetime
 #  featured_image_alt    :string
 #  featured_image_credit :text
 #  meta_description      :string
@@ -32,6 +33,8 @@
 #  fk_rails_a4a4f31786  (about_id => administration_locations.id)
 #
 class Administration::Location::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Contentful
   include HasGitFiles

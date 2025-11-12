@@ -1,11 +1,4 @@
-<%
-title = Communication::Website::Page.model_name.human(count: 2)
-action = ''
-action += link_to t('create'),
-                  new_admin_communication_website_page_path(website_id: @website),
-                  class: button_classes if can?(:create, Communication::Website::Page)
-%>
-<%= osuny_panel title, action: action do %>
+<%= osuny_panel Communication::Website::Page.model_name.human(count: 2) do %>
   <%= render 'admin/communication/websites/pages/list', 
               pages: @pages, 
               small: true,

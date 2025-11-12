@@ -22,10 +22,10 @@ module Admin::ButtonsHelper
     content = capture(&block)
     return if content.blank?
     id = SecureRandom.hex(10)
-    html = "<button class=\"btn btn-light mb-2\" type=\"button\" data-bs-toggle=\"dropdown\" data-bs-target=\"##{id}\" aria-controls=\"menu\" aria-expanded=\"false\" aria-label=\"Toggle actions\">"
+    html = "<button class=\"btn text-muted border-0 mb-2\" type=\"button\" data-bs-toggle=\"dropdown\" data-bs-target=\"##{id}\" aria-controls=\"menu\" aria-expanded=\"false\" aria-label=\"Toggle actions\">"
     html += lucide_icon(:settings) 
     html += "</button>"
-    html += "<div class=\"dropdown-menu border-0 bg-light mt-2 p-3\" id=\"#{id}\" style=\"min-width: 120px\">"
+    html += "<div class=\"dropdown-menu shadow-lg border-0 bg-white mt-2 p-3 pb-2\" id=\"#{id}\" style=\"min-width: 120px\">"
     html += capture(&block)
     html += "</div>"
     raw html

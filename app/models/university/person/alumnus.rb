@@ -9,6 +9,7 @@
 #  bodyclass                     :string
 #  city                          :string
 #  country                       :string
+#  deleted_at                    :datetime
 #  email                         :string
 #  email_visibility              :integer          default("private")
 #  gender                        :integer

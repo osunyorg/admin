@@ -6,6 +6,7 @@
 #  cta                      :boolean          default(FALSE)
 #  cta_label                :string
 #  cta_url                  :string
+#  deleted_at               :datetime
 #  description              :text
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
@@ -34,6 +35,8 @@
 #  fk_rails_ec345cee0b  (language_id => languages.id)
 #
 class Communication::Website::Alert::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include HasGitFiles
   include Initials

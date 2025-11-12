@@ -4,13 +4,13 @@
   <%= create_link Education::Program %>
 <% end %>
 
-<div class="d-flex justify-content-between mb-4">
-  <p>
-    <%= @programs.total_count %>
-    <%= Education::Program.model_name.human(count: @programs.total_count).downcase %>
-  </p>
-  <%= render 'filters', current_path: admin_education_programs_path %>
+<div class="d-flex justify-content-between mb-5">
+  <%= render 'admin/application/components/lifecycle/pills',
+              path_method: :admin_education_programs_path %>
+  <%= render 'filters',
+              current_path: admin_education_programs_path %>
 </div>
+<%= render 'admin/application/components/lifecycle/label' %>
 
 <%= render 'admin/education/programs/list', programs: @programs %>
 <%= paginate @programs %>

@@ -3,6 +3,7 @@
 # Table name: communication_website_agenda_period_year_localizations
 #
 #  id                       :uuid             not null, primary key
+#  deleted_at               :datetime
 #  slug                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -26,6 +27,8 @@
 #  fk_rails_e8dfb6948e  (language_id => languages.id)
 #
 class Communication::Website::Agenda::Period::Year::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Permalinkable
   include HasGitFiles

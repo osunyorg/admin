@@ -1,15 +1,34 @@
-<div class="row mb-3">
+<div class="row g-2 mb-3">
   <% volumes.each do |volume| %>
-    <div class="col-lg-3 col-xxl-2">
-      <div class="card">
-        <%= osuny_thumbnail_localized volume, large: true %>
-        <div class="card-body">
-          <%= osuny_published_localized volume %>
-          <%= osuny_link_localized  volume,
-                                    admin_research_journal_volume_path(journal_id: @journal, id: volume),
-                                    classes: 'stretched-link' %>
+    <% if volume.deleted? %>
+      <div>
+        <div class="<%= osuny_card_classes(horizontal: true) %>">
+          <%= osuny_thumbnail_localized volume %>
+          <div class="card-body">
+            <%= volume.best_localization_for(current_language) %>
+          </div>
+          <% if can?(:restore, volume) %>
+            <div class="card-footer">
+              <%= link_to t('restore'),
+                          restore_admin_research_journal_volume_path(journal_id: @journal, id: volume),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
         </div>
       </div>
-    </div>
+    <% else %>
+      <div class="col-lg-3 col-xxl-2">
+        <div class="card">
+          <%= osuny_thumbnail_localized volume, large: true %>
+          <div class="card-body">
+            <%= osuny_published_localized volume %>
+            <%= osuny_link_localized  volume,
+                                      admin_research_journal_volume_path(journal_id: @journal, id: volume),
+                                      classes: 'stretched-link' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>

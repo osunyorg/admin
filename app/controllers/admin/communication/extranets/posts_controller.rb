@@ -16,8 +16,10 @@ class Admin::Communication::Extranets::PostsController < Admin::Communication::E
   end
 
   def preview
-    # TODO faire une preview dans le bon contexte
-    render layout: 'admin/layouts/preview'
+    @current_extranet = @extranet
+    @disable_container = true
+    render  template: 'extranet/posts/posts/show',
+            layout: 'extranet/layouts/application'
   end
 
   def new

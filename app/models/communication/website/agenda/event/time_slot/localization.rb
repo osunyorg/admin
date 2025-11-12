@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  add_to_calendar_urls     :jsonb
+#  deleted_at               :datetime
 #  migration_identifier     :string
 #  place                    :string
 #  slug                     :string
@@ -30,6 +31,8 @@
 #  fk_rails_ef5c90fa45  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Event::TimeSlot::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AddableToCalendar
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization

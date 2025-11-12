@@ -4,6 +4,7 @@
 #
 #  id                                    :uuid             not null, primary key
 #  date                                  :date
+#  deleted_at                            :datetime
 #  created_at                            :datetime         not null
 #  updated_at                            :datetime         not null
 #  communication_website_agenda_event_id :uuid             not null, indexed
@@ -26,6 +27,8 @@
 #  fk_rails_9a3c150837  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Event::Day < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
   include Communication::Website::Agenda::WithStatus
