@@ -84,7 +84,9 @@ search:
   <% if about.respond_to?(:about_id) %>
   about_id: "<%= about.about_id %>"
   <% end %>
+<% if hugo %>
   url: "<%= hugo.permalink %>"
+<% end %>
   kind: "<%= about.class.model_name %>"
   <% if about.respond_to?(:language) && about.language.present? %>
   lang: "<%= about.language.iso_code %>"

@@ -7,7 +7,7 @@ language = @l10n.language
 cache_key = [person, @l10n, @website&.id, version]
 cache cache_key do
 %>---
-<%= osuny_static_string 'linkTitle', @l10n.to_s_alphabetical %>
+<%= osuny_static_text 'linkTitle', @l10n.to_s_alphabetical %>
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
@@ -18,27 +18,27 @@ cache cache_key do
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= osuny_static_string 'person', @l10n.to_s %>
-<%= osuny_static_string 'first_name', @l10n.first_name %>
-<%= osuny_static_string 'last_name', @l10n.last_name %>
+<%= osuny_static_text 'person', @l10n.to_s %>
+<%= osuny_static_text 'first_name', @l10n.first_name %>
+<%= osuny_static_text 'last_name', @l10n.last_name %>
 <% 
 # Peut-on supprimer les contact details à la racine ? 
 # phone, email, twitter, linkedin, website
 # Ils devraient être déjà dans admin/application/contact_details/static
 %>
 <% if person.phone_mobile_is_public? %>
-<%= osuny_static_string 'phone', person.phone_mobile %>
+<%= osuny_static_text 'phone', person.phone_mobile %>
 <% end %>
 <% if person.email_is_public? %>
-<%= osuny_static_string 'email', person.email %>
+<%= osuny_static_text 'email', person.email %>
 <% end %>
 <% if person.twitter_is_public? %>
-<%= osuny_static_string 'twitter', person.twitter %>
+<%= osuny_static_text 'twitter', @l10n.twitter %>
 <% end %>
 <% if person.linkedin_is_public? %>
-<%= osuny_static_string 'linkedin', person.linkedin %>
+<%= osuny_static_text 'linkedin', @l10n.linkedin %>
 <% end %>
-<%= osuny_static_string 'website', @l10n.url %>
+<%= osuny_static_text 'website', @l10n.url %>
 <%= render 'admin/application/contact_details/static',
             about: person,
             l10n: @l10n,
@@ -74,14 +74,12 @@ teachings:
     next if hugo.file.blank?
     %>
   - program:
-      title: >-
-        <%= program_l10n.to_s %>
       permalink: "<%= hugo.permalink %>"
       path: "<%= hugo.path %>"
       slug: "<%= hugo.slug %>"
       file: "<%= hugo.file %>"
-    description: >-
-      <%= involvement_l10n.description %>
+<%= osuny_static_text 'title', program_l10n.to_s, depth: 4 %>
+<%= osuny_static_text 'description', involvement_l10n.description, depth: 3 %>
 <% end %>
 <% end %>
 <% if person.roles_as_administrator.any? %>
@@ -95,15 +93,13 @@ administrative_missions:
     hugo = target_l10n.hugo(@website)
     next if hugo.file.blank?
     %>
-  - description: >-
-      <%= role_l10n.to_s %>
-    target:
-      title: >-
-        <%= target_l10n.to_s %>
+  - target:
       permalink: "<%= hugo.permalink %>"
       path: "<%= hugo.path %>"
       slug: "<%= hugo.slug %>"
       file: "<%= hugo.file %>"
+<%= osuny_static_text 'title', target_l10n.to_s, depth: 4 %>
+<%= osuny_static_text 'description', role_l10n.to_s, depth: 3 %>
 <% end %>
 <% end %>
 cohorts:
@@ -114,12 +110,11 @@ cohorts:
     hugo = cohort_l10n.hugo(@website)
     next if hugo.file.blank?
   %>
-  - title: >-
-      <%= cohort_l10n.to_s %>
-    permalink: "<%= hugo.permalink %>"
+  - permalink: "<%= hugo.permalink %>"
     path: "<%= hugo.path %>"
     slug: "<%= hugo.slug %>"
     file: "<%= hugo.file %>"
+<%= osuny_static_text 'title', cohort_l10n.to_s, depth: 3 %>
 <% end %>
 <%= render 'admin/application/connections/backlinks', about: @l10n %>
 <%= render 'admin/application/categories/widget/static',
@@ -127,8 +122,7 @@ cohorts:
             l10n: @l10n,
             categories: university.person_categories,
             key: :persons_categories %>
-biography: >-
-  <%= prepare_html_for_static @l10n.biography %>
+<%= osuny_static_html 'biography', @l10n.biography %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---
 <% end %>

@@ -22,7 +22,7 @@ module Admin::OsunyStaticHelper
     ''
   end
 
-  def osuny_static_string(key, value, depth: 1)
+  def osuny_static_text(key, value, depth: 1)
     return if value.blank?
     indentation = '  ' * (depth-1)
     prepared = prepare_text_for_static(value)
