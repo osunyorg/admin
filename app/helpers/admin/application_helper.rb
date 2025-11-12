@@ -30,9 +30,11 @@ module Admin::ApplicationHelper
 
   def create_link(object_class, html_classes: button_classes_major, **options)
     return unless can?(:create, object_class)
+    html_classes += ' osuny__button__create'
     object_class_sym = object_class.name.underscore.gsub('/', '_').to_sym
-
-    link_to options.delete(:label) || t('create'),
+    label = options.delete(:label) || t('create')
+    title = "#{lucide_icon('plus')} #{label}".html_safe
+    link_to title,
             polymorphic_url_param(object_class_sym, prefix: :new, **options),
             class: html_classes
   end

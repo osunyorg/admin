@@ -7,6 +7,7 @@
 #  bodyclass          :string
 #  capacity           :integer
 #  continuing         :boolean
+#  deleted_at         :datetime
 #  initial            :boolean
 #  qualiopi_certified :boolean          default(FALSE)
 #  created_at         :datetime         not null
@@ -27,11 +28,14 @@
 #  fk_rails_ec1f16f607  (parent_id => education_programs.id)
 #
 class Education::Program < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include AsTree
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
@@ -112,8 +116,20 @@ class Education::Program < ApplicationRecord
     true
   end
 
+  def has_education_schools?
+    schools.any? || descendants.any? { |descendant| descendant.schools.any? }
+  end
+
   def has_education_diplomas?
     diploma.present? || descendants.any? { |descendant| descendant.diploma.present? }
+  end
+
+  def has_research_journals?
+    false
+  end
+
+  def has_research_laboratories?
+    false
   end
 
   def has_research_papers?

@@ -1,10 +1,10 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= edit_link @organization %>
   <%= button_advanced do %>
     <%= destroy_link @organization %>
   <% end %>
+  <%= edit_link @organization %>
 <% end %>
 
 <div class="row">
@@ -29,7 +29,7 @@
         <% end %>
       </div>
     <% end %>
-    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n %>
     <%= osuny_separator %>
     <%= render 'admin/application/publication/show', about: @l10n %>
     <%= render 'admin/application/categories/widget/show', about: @organization %>

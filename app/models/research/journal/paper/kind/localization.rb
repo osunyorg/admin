@@ -3,16 +3,18 @@
 # Table name: research_journal_paper_kind_localizations
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  slug          :string
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             indexed
-#  language_id   :uuid             indexed
+#  about_id      :uuid             uniquely indexed => [language_id], indexed
+#  language_id   :uuid             uniquely indexed => [about_id], indexed
 #  university_id :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_ab294e2ab8                          (about_id,language_id) UNIQUE
 #  idx_on_university_id_dc9f1267b7                                 (university_id)
 #  index_research_journal_paper_kind_localizations_on_about_id     (about_id)
 #  index_research_journal_paper_kind_localizations_on_language_id  (language_id)
@@ -24,6 +26,8 @@
 #  fk_rails_ec1bc36169  (language_id => languages.id)
 #
 class Research::Journal::Paper::Kind::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include HasGitFiles
   include Initials

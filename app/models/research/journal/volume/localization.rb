@@ -3,6 +3,7 @@
 # Table name: research_journal_volume_localizations
 #
 #  id                    :uuid             not null, primary key
+#  deleted_at            :datetime
 #  featured_image_alt    :string
 #  featured_image_credit :text
 #  keywords              :text
@@ -15,12 +16,13 @@
 #  title                 :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  about_id              :uuid             indexed
-#  language_id           :uuid             indexed
+#  about_id              :uuid             uniquely indexed => [language_id], indexed
+#  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_adf437eb06                        (about_id,language_id) UNIQUE
 #  index_research_journal_volume_localizations_on_about_id       (about_id)
 #  index_research_journal_volume_localizations_on_language_id    (language_id)
 #  index_research_journal_volume_localizations_on_university_id  (university_id)
@@ -32,6 +34,8 @@
 #  fk_rails_f071a0b35b  (about_id => research_journal_volumes.id)
 #
 class Research::Journal::Volume::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include HasGitFiles
   include Initials

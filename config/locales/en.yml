@@ -5,7 +5,7 @@ en:
       templates:
         embed:
           title_missing:
-            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the integrated cotnent is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the iframe.
+            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the integrated content is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the iframe.
             title: No frame title
           transcription_missing:
             text_html: The HTML iframe has no text transcription for blind people, for people with low bandwidth or no javascript enabled. Please add a text transcription.
@@ -179,6 +179,7 @@ en:
     successfully_duplicated_html: "<i>%{model}</i> was successfully duplicated."
     successfully_quit_html: "<i>%{model}</i> successfully quit <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> was successfully removed."
+    successfully_restaured_html: "<i>%{model}</i> was successfully restored."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."
     summary:
       hint: A short text, like a heading for an article. Don't write all the content here, there are blocks for that.
@@ -415,6 +416,15 @@ en:
   internationalization:
     label: Internationalization
   legal: Legal
+  lifecycle:
+    label:
+      deleted: Objects in the trash are automatically deleted after %{days} days.
+    status:
+      all: All
+      draft: Draft
+      planned: Planned
+      published: Published
+      trash: Trash
   loading: Loading...
   localization:
     creation_alert: This element doesn't exist in the requested language. Do you want to create a translation?
@@ -434,8 +444,8 @@ en:
       invitation_message:
         subject: Welcome to your extranet
         text: You now have access to the extranet.
-        with_user_html: You can sign in with your email address <b>%{email}</b> by clicking <a href="%{sign_in_url}">here</a>.
-        without_user_html: You can sign up with your email address <b>%{email}</b> by clicking <a href="%{sign_up_url}">here</a>.
+        with_user_html: You can sign in with your email address <b>%{email}</b> by <a href="%{sign_in_url}">clicking here</a>.
+        without_user_html: You can sign up with your email address <b>%{email}</b> by <a href="%{sign_up_url}">clicking here</a>.
     notifications:
       gdpr_deletion_incoming:
         subject: "Osuny - your account will soon be deleted"
@@ -491,6 +501,7 @@ en:
   quit: Quit
   remove: Remove
   reset: Reset
+  restore: Restaurer
   save: Save
   search: Search
   select_language: Select language

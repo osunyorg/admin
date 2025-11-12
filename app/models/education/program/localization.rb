@@ -6,6 +6,7 @@
 #  accessibility          :text
 #  contacts               :text
 #  content                :text
+#  deleted_at             :datetime
 #  duration               :string
 #  evaluation             :text
 #  featured_image_alt     :string
@@ -35,12 +36,13 @@
 #  url                    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  about_id               :uuid             indexed
-#  language_id            :uuid             indexed
+#  about_id               :uuid             uniquely indexed => [language_id], indexed
+#  language_id            :uuid             uniquely indexed => [about_id], indexed
 #  university_id          :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_9b56b45e58                  (about_id,language_id) UNIQUE
 #  index_education_program_localizations_on_about_id       (about_id)
 #  index_education_program_localizations_on_language_id    (language_id)
 #  index_education_program_localizations_on_university_id  (university_id)
@@ -52,6 +54,8 @@
 #  fk_rails_e375f2df91  (university_id => universities.id)
 #
 class Education::Program::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include AsLocalizedTree # ordered scope is overridden below
   include Contentful

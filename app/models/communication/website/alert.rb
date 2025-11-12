@@ -20,9 +20,12 @@
 #  fk_rails_7c40424e19  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Alert < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include Filterable
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable

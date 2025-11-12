@@ -3,18 +3,20 @@
 # Table name: communication_website_agenda_period_day_localizations
 #
 #  id                       :uuid             not null, primary key
+#  deleted_at               :datetime
 #  events_count             :integer          default(0)
 #  slug                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             not null, indexed
+#  about_id                 :uuid             not null, indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             not null, uniquely indexed => [about_id], indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
 #  idx_on_about_id_ff7b8b96ea                  (about_id)
+#  idx_on_about_id_language_id_b8b9e8269f      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_c9cc20d97c  (communication_website_id)
 #  idx_on_language_id_1d8b40b5f3               (language_id)
 #  idx_on_university_id_55f80b8bba             (university_id)
@@ -27,6 +29,8 @@
 #  fk_rails_a4f13fe1c0  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Period::Day::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include WithUniversity
 

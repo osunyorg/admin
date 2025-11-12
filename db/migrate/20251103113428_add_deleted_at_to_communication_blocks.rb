@@ -1,0 +1,5 @@
+class AddDeletedAtToCommunicationBlocks < ActiveRecord::Migration[8.0]
+  def change
+    add_column :communication_blocks, :deleted_at, :datetime
+  end
+end

@@ -1,4 +1,4 @@
-<%= osuny_panel t('metadata'), small: true do %>
+<%= osuny_small_panel t('metadata') do %>
   <p>
     <%
     # On veut mentionner la page spéciale, mais pas si elle porte le même nom que la page, ça ferait un doublon
@@ -40,4 +40,4 @@
   <%= render 'admin/application/categories/widget/show', about: @page %>
   <%= render 'admin/application/permalinks/redirects', about: @l10n %>
 <% end %>
-<%= render 'admin/application/l10n/widget', about: @page, l10n: @l10n, small: true %>
+<%= render 'admin/application/l10n/widget', about: @page, l10n: @l10n %>

@@ -1,12 +1,12 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= edit_link @category %>
   <%= button_advanced do %>
     <%= destroy_link @category %>
   <% end %>
+  <%= edit_link @category %>
 <% end %>
 
-<%= render 'admin/application/l10n/widget', about: @category, l10n: @l10n, small: true %>
+<%= render 'admin/application/l10n/widget', about: @category, l10n: @l10n %>
 <%= render 'admin/communication/extranets/posts/list', posts: @posts %>
 <%= paginate @posts %>

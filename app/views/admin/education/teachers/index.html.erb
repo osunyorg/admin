@@ -8,6 +8,26 @@
   <%= render 'filters', current_path: admin_education_teachers_path %>
 </div>
 
-<%= render 'admin/education/teachers/list', teachers: @teachers %>
-
+<div class="row g-3">
+  <% @teachers.each do |person| %>
+    <div class="col-6 col-lg-3 col-xxl-2">
+      <div class="<%= osuny_card_classes %>">
+        <%= osuny_thumbnail_localized person, large: true %>
+        <div class="card-body">
+          <p class="mb-2">
+            <%= osuny_link_localized  person,
+                                      admin_research_researcher_path(person),
+                                      classes: 'stretched-link'  %>
+          </p>
+          <% if person.education_programs_as_teacher.any? %>
+            <p class="text-muted mb-0">
+              <%= person.education_programs_as_teacher.size %>
+              <%= Education::Program.model_name.human(count: person.education_programs_as_teacher.size).downcase %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 <%= paginate @teachers %>

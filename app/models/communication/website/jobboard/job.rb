@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
+#  deleted_at               :datetime
 #  from_day                 :date
 #  migration_identifier     :string
 #  to_day                   :date
@@ -26,11 +27,14 @@
 #  fk_rails_d02e78c48b  (university_id => universities.id)
 #
 class Communication::Website::Jobboard::Job < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include Duplicable
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Sanitizable
   include Searchable

@@ -9,24 +9,38 @@
       <div>
         <div class="<%= osuny_card_classes(horizontal: true) %>">
           <%= osuny_thumbnail_localized alert %>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6">
-                <%= osuny_published_localized alert %>
-                <%= osuny_link_localized  alert,
-                                          admin_communication_website_alert_path(
-                                            website_id: alert.website.id,
-                                            id: alert.id
-                                          ),
-                                          classes: "stretched-link" %>
+          <% if alert.deleted? %>
+            <div class="card-body">
+              <%= alert.best_localization_for(current_language) %>
+            </div>
+            <% if can?(:restore, alert) %>
+              <div class="card-footer mb-n2">
+                <%= link_to t('restore'),
+                            restore_admin_communication_website_alert_path(alert),
+                            method: :post,
+                            class: button_classes %>
               </div>
-              <div class="col-lg-6">
-                <span class="ms-3 badge border border-subtle bg-<%= alert.kind %>">
-                  <%= alert.kind_i18n %>
-                </span>
+            <% end %>
+          <% else %>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <%= osuny_published_localized alert %>
+                  <%= osuny_link_localized  alert,
+                                            admin_communication_website_alert_path(
+                                              website_id: alert.website.id,
+                                              id: alert.id
+                                            ),
+                                            classes: "stretched-link" %>
+                </div>
+                <div class="col-lg-6">
+                  <span class="ms-3 badge border border-subtle bg-<%= alert.kind %>">
+                    <%= alert.kind_i18n %>
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
         </div>
       </div>
     <% end %>

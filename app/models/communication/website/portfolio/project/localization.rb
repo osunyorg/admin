@@ -3,6 +3,7 @@
 # Table name: communication_website_portfolio_project_localizations
 #
 #  id                       :uuid             not null, primary key
+#  deleted_at               :datetime
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean          default(FALSE)
@@ -18,14 +19,15 @@
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed
+#  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             indexed
-#  language_id              :uuid             indexed
+#  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
 # Indexes
 #
 #  idx_on_about_id_a668ef6090                  (about_id)
+#  idx_on_about_id_language_id_84c7b116b5      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_e653b6273a  (communication_website_id)
 #  idx_on_language_id_25a0c1e472               (language_id)
 #  idx_on_university_id_f01fc2c686             (university_id)
@@ -38,6 +40,8 @@
 #  fk_rails_fbc92c5948  (about_id => communication_website_portfolio_projects.id)
 #
 class Communication::Website::Portfolio::Project::Localization < ApplicationRecord
+  acts_as_paranoid
+
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
   include AsLocalization
@@ -52,6 +56,7 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
+  include WithOpenApi
   include WithUniversity
 
   belongs_to :website,

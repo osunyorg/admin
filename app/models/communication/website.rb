@@ -65,7 +65,6 @@ class Communication::Website < ApplicationRecord
   include LocalizableOrderByNameScope
   include Searchable
   include WithAbouts
-  include WithAssociatedObjects
   include WithConfigs
   include WithConnectedObjects
   include WithContentArchive
@@ -82,10 +81,15 @@ class Communication::Website < ApplicationRecord
   include WithLock
   include WithManagers
   include WithOpenApi
+  include WithPages
+  include WithMenus # Menus must be created after special pages, so we can fill legal menu
   include WithProduction
   include WithProgramCategories
-  include WithSpecialPages
-  include WithMenus # Menus must be created after special pages, so we can fill legal menu
+  include WithRealmAdministration
+  include WithRealmCommunication
+  include WithRealmEducation
+  include WithRealmResearch
+  include WithRealmUniversity
   include WithScreenshot
   include WithSecurity
   include WithShowcase
@@ -106,12 +110,6 @@ class Communication::Website < ApplicationRecord
             -> { where(communication_website_localizations: { published: true }) },
             through: :localizations,
             source: :language
-
-  has_one_attached_deletable :default_image
-  has_one_attached_deletable :default_shared_image
-
-  validates :default_image, size: { less_than: 5.megabytes }
-  validates :default_shared_image, size: { less_than: 5.megabytes }
 
   before_validation :sanitize_fields
   before_validation :set_default_language,
@@ -159,21 +157,6 @@ class Communication::Website < ApplicationRecord
     original_localization.to_s
   end
 
-  # TODO deprecated
-  def git_path(website)
-    "data/website.yml"
-  end
-
-  # TODO deprecated
-  def can_have_git_file?
-    true
-  end
-
-  # TODO deprecated
-  def should_sync_to?(website)
-    website.id == id
-  end
-
   def dependencies
     # Le website est le SEUL cas d'auto-dépendance
     [self] +
@@ -188,8 +171,6 @@ class Communication::Website < ApplicationRecord
     feature_posts_dependencies +
     feature_alerts_dependencies +
     menus.in_languages(active_language_ids) +
-    [default_image&.blob] +
-    [default_shared_image&.blob] +
     indirect_objects_connected_to_website
   end
 

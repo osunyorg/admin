@@ -163,15 +163,16 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication,
-      :default_time_zone,
-      :deuxfleurs_hosting, :default_image, :default_image_delete, :default_image_infos, :default_shared_image, :default_shared_image_delete, :default_shared_image_infos,
+      :default_time_zone, :deuxfleurs_hosting,
       :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
       showcase_tag_ids: [], source_website_ids: [],
       localizations_attributes: [
         :id, :language_id, :name, :published,
         :social_mastodon, :social_x, :social_linkedin, :social_youtube,
         :social_vimeo, :social_peertube, :social_instagram, :social_facebook,
-        :social_tiktok, :social_email, :social_github
+        :social_tiktok, :social_email, :social_github,
+        :default_image, :default_image_delete, :default_image_infos,
+        :default_shared_image, :default_shared_image_delete, :default_shared_image_infos
       ]
     ]
     attribute_names << :access_token unless params[:communication_website][:access_token].blank?

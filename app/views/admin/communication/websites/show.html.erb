@@ -9,7 +9,7 @@
   <%= link_to t('communication.website.golive.button'),
               production_admin_communication_website_path(@website),
               class: button_classes unless @website.in_production %>
-  <% if @git_files_desynchronized.any? %>
+  <% if can?(:synchronize, @website) && @git_files_desynchronized.any? %>
     <%= link_to synchronize_admin_communication_website_path(@website), method: :post, class: button_classes do %>
       <%= t('admin.communication.website.synchronize.button') %>
       <span class="badge rounded-pill border border-subtle text-dark"><%= @git_files_desynchronized.length %></span>
@@ -25,46 +25,38 @@
     </p>
   <% end %>
 <% end %>
-<%
-number_of_panels = 0
-%>
 <div class="row gx-5">
   <% if @show_posts %>
-    <% number_of_panels += 1 %>
     <div class="col-xl-6">
     <%= render 'admin/communication/websites/show/posts'  %>
     </div>
   <% end %>
   <% if @show_events %>
-    <% number_of_panels += 1 %>
     <div class="col-xl-6">
       <%= render 'admin/communication/websites/show/events' %>
     </div>
   <% end %>
   <% if @show_exhibitions %>
-    <% number_of_panels += 1 %>
     <div class="col-xl-6">
       <%= render 'admin/communication/websites/show/exhibitions' %>
     </div>
   <% end %>
   <% if @show_projects %>
-    <% number_of_panels += 1 %>
     <div class="col-xl-6">
       <%= render 'admin/communication/websites/show/projects' %>
     </div>
   <% end %>
   <% if @show_jobs %>
-    <% number_of_panels += 1 %>
     <div class="col-xl-6">
       <%= render 'admin/communication/websites/show/jobs' %>
     </div>
   <% end %>
-  <div class="col-xl-<%= number_of_panels.even? ? 12 : 6 %>">
-    <%= render 'admin/communication/websites/show/pages', large: number_of_panels.even? if can?(:read, Communication::Website::Page) %>
+  <div class="col-xl-6">
+    <%= render 'admin/communication/websites/show/pages' if can?(:read, Communication::Website::Page) %>
   </div>
 </div>
 
-<%= render 'admin/application/l10n/widget', about: @website, l10n: @l10n, small: true %>
+<%= render 'admin/application/l10n/widget', about: @website, l10n: @l10n %>
 <%= image_tag @website.deployment_status_badge, alt: '' if @website.deployment_status_badge.present? %>
 
 <% content_for :server_admin_only do %>

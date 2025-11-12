@@ -1,32 +1,33 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @project %>
+    <%= duplicate_link @project %>
+  <% end %>
+  <%= preview_link %>
   <% project_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
               project_url,
               target: :_blank,
               class: button_classes if project_url %>
-  <%= edit_link @project %>
   <%= publish_link @project %>
-  <%= button_advanced do %>
-    <%= destroy_link @project %>
-    <%= duplicate_link @project %>
-  <% end %>
+  <%= edit_link @project %>
 <% end %>
 
 <div class="row">
   <div class="col-lg-7">
-    <%= osuny_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:title), small: true do %>
+    <%= osuny_small_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:title) do %>
       <p class="lead"><%= @l10n.title %></p>
     <% end %>
     <% if @l10n.subtitle.present? %>
-      <%= osuny_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:subtitle), small: true do %>
+      <%= osuny_small_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:subtitle) do %>
         <p class="lead"><%= @l10n.subtitle %></p>
       <% end %>
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n %>
   </div>
 </div>
 <hr class="mb-5">

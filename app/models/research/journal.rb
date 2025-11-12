@@ -3,6 +3,7 @@
 # Table name: research_journals
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  university_id :uuid             not null, indexed
@@ -16,10 +17,13 @@
 #  fk_rails_96097d5f10  (university_id => universities.id)
 #
 class Research::Journal < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include Favoritable
   include Filterable
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable
@@ -58,6 +62,10 @@ class Research::Journal < ApplicationRecord
     university.people.where(id: people.pluck(:id), is_researcher: true)
   end
 
+  def journals
+    Research::Journal.where(id: id)
+  end
+
   def dependencies
     localizations +
     volumes +
@@ -84,11 +92,23 @@ class Research::Journal < ApplicationRecord
     false
   end
 
+  def has_education_schools?
+    false
+  end
+
   def has_education_diplomas?
     false
   end
 
   def has_administration_locations?
+    false
+  end
+
+  def has_research_journals?
+    true
+  end
+
+  def has_research_laboratories?
     false
   end
 

@@ -1,22 +1,23 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @job %>
+    <%= duplicate_link @job %>
+  <% end %>
+  <%= preview_link %>
   <% job_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
               job_url,
               target: :_blank,
               class: button_classes if job_url %>
-  <%= edit_link @job %>
   <%= publish_link @job %>
-  <%= button_advanced do %>
-    <%= destroy_link @job %>
-    <%= duplicate_link @job %>
-  <% end %>
+  <%= edit_link @job %>
 <% end %>
 
 <div class="row">
   <div class="col-lg-7">
-    <%= osuny_panel Communication::Website::Jobboard::Job::Localization.human_attribute_name(:title), small: true do %>
+    <%= osuny_small_panel Communication::Website::Jobboard::Job::Localization.human_attribute_name(:title) do %>
       <p class="lead"><%= @l10n.title %></p>
       <% if @l10n.subtitle.present? %>
         <p class="mt-n3 text-muted"><%= @l10n.subtitle %></p>
@@ -25,7 +26,7 @@
     <% end %>
   </div>
   <div class="offset-lg-1 col-lg-4">
-    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n %>
   </div>
 </div>
 <hr class="mb-5">
@@ -33,11 +34,11 @@
 <hr class="mb-5">
 <div class="row">
   <div class="col-lg-4">
-    <%= osuny_panel t('metadata'), small: true do %>
+    <%= osuny_small_panel t('metadata') do %>
       <%= render 'admin/application/publication/show', about: @l10n %>
       <%= render 'admin/application/categories/widget/show', about: @job %>
       <%= render 'admin/application/permalinks/redirects', about: @l10n %>
-      <%= render 'admin/application/l10n/widget', about: @job, l10n: @l10n, small: true %>
+      <%= render 'admin/application/l10n/widget', about: @job, l10n: @l10n %>
     <% end %>
   </div>
   <div class="col-lg-8">

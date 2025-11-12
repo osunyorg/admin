@@ -6,4 +6,10 @@ if page.is_special_page?
   exists = lookup_context.exists? path, [], true
   %>
 <%= render path, page: page, l10n: l10n if exists %>
+<% if l10n.draft? %>
+build:
+  list: always
+  publishResources: true
+  render: never
+<% end %>
 <% end %>

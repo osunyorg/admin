@@ -1,15 +1,15 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= edit_link @location %>
   <%= button_advanced do %>
     <%= destroy_link @location %>
   <% end %>
+  <%= edit_link @location %>
 <% end %>
 
 <div class="row">
   <div class="col-lg-3">
-    <%= render 'admin/application/images/featured/show', about: @l10n, small: true %>
+    <%= render 'admin/application/images/featured/show', about: @l10n %>
   </div>
   <div class="offset-lg-1 col-lg-8">
     <%= render 'admin/application/summary/show', about: @l10n %>
@@ -17,17 +17,17 @@
       <%= render 'admin/application/contact_details/show', about: @location, l10n: @l10n %>
     </div>
     <% if @schools.any? %>
-      <%= osuny_panel Administration::Location.human_attribute_name('schools'), small: true do %>
+      <%= osuny_small_panel Administration::Location.human_attribute_name('schools') do %>
         <%= render 'admin/education/schools/list', schools: @schools %>
       <% end %>
     <% end %>
     <% if @programs.any? %>
-      <%= osuny_panel Administration::Location.human_attribute_name('programs'), small: true do %>
+      <%= osuny_small_panel Administration::Location.human_attribute_name('programs') do %>
         <%= render 'admin/education/programs/list', programs: @programs %>
       <% end %>
     <% end %>
     <% if @websites.any? %>
-      <%= osuny_panel Administration::Location.human_attribute_name('websites'), small: true do %>
+      <%= osuny_small_panel Administration::Location.human_attribute_name('websites') do %>
         <%= render 'admin/communication/websites/list', websites: @websites %>
       <% end %>
     <% end %>

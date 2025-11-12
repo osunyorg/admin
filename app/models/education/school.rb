@@ -6,6 +6,7 @@
 #  address       :string
 #  city          :string
 #  country       :string
+#  deleted_at    :datetime
 #  latitude      :float
 #  longitude     :float
 #  phone         :string
@@ -23,9 +24,12 @@
 #  fk_rails_e01b37a3ad  (university_id => universities.id)
 #
 class Education::School < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include Filterable
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
@@ -80,12 +84,28 @@ class Education::School < ApplicationRecord
   # WebsitesLinkable methods
   #####################
 
+  def has_education_schools?
+    true
+  end
+
+  def has_research_journals?
+    false
+  end
+
+  def has_research_laboratories?
+    false
+  end
+
   def has_research_papers?
     false
   end
 
   def has_research_volumes?
     false
+  end
+
+  def schools
+    Education::School.where(id: id)
   end
 
 end

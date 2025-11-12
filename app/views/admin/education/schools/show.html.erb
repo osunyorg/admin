@@ -1,10 +1,10 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= edit_link @school %>
   <%= button_advanced do %>
     <%= destroy_link @school %>
   <% end %>
+  <%= edit_link @school %>
 <% end %>
 
 <div class="row">
@@ -21,7 +21,7 @@
       <%= render 'admin/application/contact_details/show', about: @school, l10n: @l10n %>
     </div>
     <% if @websites.any? %>
-      <%= osuny_panel Administration::Location.human_attribute_name('websites'), small: true do %>
+      <%= osuny_small_panel Administration::Location.human_attribute_name('websites') do %>
         <%= render 'admin/communication/websites/list', websites: @websites %>
       <% end %>
     <% end %>

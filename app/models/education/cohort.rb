@@ -3,6 +3,7 @@
 # Table name: education_cohorts
 #
 #  id               :uuid             not null, primary key
+#  deleted_at       :datetime
 #  name             :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -26,13 +27,15 @@
 #  fk_rails_c2d725cabd  (academic_year_id => education_academic_years.id)
 #
 class Education::Cohort < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable
   include Searchable
-  include WebsitesLinkable
   include WithUniversity
 
   belongs_to  :school,

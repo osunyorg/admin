@@ -3,17 +3,19 @@
 # Table name: communication_website_agenda_period_month_localizations
 #
 #  id                       :uuid             not null, primary key
+#  deleted_at               :datetime
 #  slug                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed
+#  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             indexed
-#  language_id              :uuid             indexed
+#  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
 # Indexes
 #
 #  idx_on_about_id_e3d3e69fcb                  (about_id)
+#  idx_on_about_id_language_id_e69d0eb996      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_2202f6cc51  (communication_website_id)
 #  idx_on_language_id_8b9b18a131               (language_id)
 #  idx_on_university_id_a6d1f20f5d             (university_id)
@@ -25,6 +27,8 @@
 #  fk_rails_f7d0b8f0e9  (university_id => universities.id)
 #
 class Communication::Website::Agenda::Period::Month::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Permalinkable
   include HasGitFiles

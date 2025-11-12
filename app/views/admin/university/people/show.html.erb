@@ -1,16 +1,16 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= edit_link @person %>
   <%= button_advanced do %>
     <%= destroy_link @person %>
     <%= static_link static_admin_university_person_path(@person) %>
   <% end %>
+  <%= edit_link @person %>
 <% end %>
 
-<div class="row g-5">
+<div class="row">
   <div class="col-md-4">
-    <%= osuny_panel t('activerecord.attributes.university/person.picture'), small: true do %>
+    <%= osuny_small_panel t('activerecord.attributes.university/person.picture') do %>
       <%= kamifusen_tag @person.best_picture, class: 'img-fluid col-4 col-md-8' %>
       <% if @person.best_picture_inherits_from_user? %>
         <p>
@@ -27,7 +27,7 @@
     <% end if @person.best_picture.attached? %>
 
     <%= render 'admin/application/categories/widget/show', about: @person %>
-    <%= render 'admin/application/l10n/widget', about: @person, l10n: @l10n, small: true %>
+    <%= render 'admin/application/l10n/widget', about: @person, l10n: @l10n %>
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
   <div class="col-md-8">
@@ -35,7 +35,7 @@
     <%= render 'admin/application/summary/show', about: @l10n %>
 
     <% unless @l10n.biography.blank? %>
-      <%= osuny_panel University::Person::Localization.human_attribute_name('biography'), small: true do %>
+      <%= osuny_small_panel University::Person::Localization.human_attribute_name('biography') do %>
         <%= sanitize @l10n.biography %>
       <% end %>
     <% end %>
@@ -96,7 +96,7 @@
 </div>
 
 <% content_for :server_admin_only do %>
-  <%= osuny_panel t('static'), small: true do  %>
+  <%= osuny_small_panel t('static') do  %>
     <%= link_to 'Person',
                 static_admin_university_person_path(@person),
                 classes: button_classes,

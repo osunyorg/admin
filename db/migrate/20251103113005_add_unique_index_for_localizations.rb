@@ -1,0 +1,51 @@
+class AddUniqueIndexForLocalizations < ActiveRecord::Migration[8.0]
+  def change
+    add_index :administration_location_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_extranet_document_category_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_extranet_document_kind_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_extranet_document_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_extranet_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_extranet_post_category_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_extranet_post_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_media_category_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_media_collection_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_media_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_agenda_category_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_agenda_event_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_agenda_event_time_slot_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_agenda_exhibition_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_agenda_period_day_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_agenda_period_month_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_agenda_period_year_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_alert_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_jobboard_category_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_jobboard_job_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_page_category_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_page_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_portfolio_category_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_portfolio_project_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_post_category_localizations, [:about_id, :language_id], unique: true
+    add_index :communication_website_post_localizations, [:about_id, :language_id], unique: true
+    add_index :education_academic_year_localizations, [:about_id, :language_id], unique: true
+    add_index :education_cohort_localizations, [:about_id, :language_id], unique: true
+    add_index :education_diploma_localizations, [:about_id, :language_id], unique: true
+    add_index :education_program_category_localizations, [:about_id, :language_id], unique: true
+    add_index :education_program_localizations, [:about_id, :language_id], unique: true
+    add_index :education_school_localizations, [:about_id, :language_id], unique: true
+    add_index :research_journal_localizations, [:about_id, :language_id], unique: true
+    add_index :research_journal_paper_kind_localizations, [:about_id, :language_id], unique: true
+    add_index :research_journal_paper_localizations, [:about_id, :language_id], unique: true
+    add_index :research_journal_volume_localizations, [:about_id, :language_id], unique: true
+    add_index :research_laboratory_axis_localizations, [:about_id, :language_id], unique: true
+    add_index :research_laboratory_localizations, [:about_id, :language_id], unique: true
+    add_index :research_thesis_localizations, [:about_id, :language_id], unique: true
+    add_index :university_organization_category_localizations, [:about_id, :language_id], unique: true
+    add_index :university_organization_localizations, [:about_id, :language_id], unique: true
+    add_index :university_person_category_localizations, [:about_id, :language_id], unique: true
+    add_index :university_person_experience_localizations, [:about_id, :language_id], unique: true
+    add_index :university_person_involvement_localizations, [:about_id, :language_id], unique: true
+    add_index :university_person_localizations, [:about_id, :language_id], unique: true
+    add_index :university_role_localizations, [:about_id, :language_id], unique: true
+  end
+end

@@ -6,20 +6,22 @@
 #  featured_image_alt       :text
 #  featured_image_credit    :text
 #  meta_description         :text
+#  migration_identifier     :string
 #  name                     :string
 #  path                     :string
 #  slug                     :string
 #  summary                  :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed
+#  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             indexed
-#  language_id              :uuid             indexed
+#  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
 # Indexes
 #
 #  idx_on_about_id_e184bfe637                  (about_id)
+#  idx_on_about_id_language_id_4031c42a61      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_9d28ee55e4  (communication_website_id)
 #  idx_on_language_id_70b50689c4               (language_id)
 #  idx_on_university_id_66e101bf70             (university_id)
@@ -35,6 +37,7 @@ class Communication::Website::Portfolio::Category::Localization < ApplicationRec
   # Needs to be included before Sluggable (which is included by AsCategoryLocalization > Permalinkable)
   include AsDirectObjectLocalization
   include AsCategoryLocalization
+  include WithOpenApi
 
   belongs_to :website,
               class_name: 'Communication::Website',

@@ -4,6 +4,7 @@
 #
 #  id                    :uuid             not null, primary key
 #  biography             :text
+#  deleted_at            :datetime
 #  featured_image_alt    :text
 #  featured_image_credit :text
 #  first_name            :string
@@ -19,12 +20,13 @@
 #  url                   :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  about_id              :uuid             indexed
-#  language_id           :uuid             indexed
+#  about_id              :uuid             uniquely indexed => [language_id], indexed
+#  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_54757d0dad                  (about_id,language_id) UNIQUE
 #  index_university_person_localizations_on_about_id       (about_id)
 #  index_university_person_localizations_on_language_id    (language_id)
 #  index_university_person_localizations_on_slug           (slug)
@@ -37,6 +39,8 @@
 #  fk_rails_bf16824595  (language_id => languages.id)
 #
 class University::Person::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Backlinkable
   include Contentful
@@ -47,8 +51,6 @@ class University::Person::Localization < ApplicationRecord
   include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
   include WithUniversity
 
-  alias :person :about
-
   delegate :featured_image, to: :person
 
   has_summernote :summary
@@ -57,24 +59,28 @@ class University::Person::Localization < ApplicationRecord
   validates :last_name, presence: true
   before_validation :prepare_name
 
+  def person
+    @person ||= University::Person.with_deleted.find(about_id)
+  end
+
   def person_l10n
-    @person_l10n ||= University::Person::Localization.find(id)
+    @person_l10n ||= University::Person::Localization.with_deleted.find(id)
   end
 
   def administrator
-    @administrator ||= University::Person::Localization::Administrator.find(id)
+    @administrator ||= University::Person::Localization::Administrator.with_deleted.find(id)
   end
 
   def author
-    @author ||= University::Person::Localization::Author.find(id)
+    @author ||= University::Person::Localization::Author.with_deleted.find(id)
   end
 
   def researcher
-    @researcher ||= University::Person::Localization::Researcher.find(id)
+    @researcher ||= University::Person::Localization::Researcher.with_deleted.find(id)
   end
 
   def teacher
-    @teacher ||= University::Person::Localization::Teacher.find(id)
+    @teacher ||= University::Person::Localization::Teacher.with_deleted.find(id)
   end
 
   def dependencies
