@@ -392,6 +392,7 @@ en:
       reset: Reset
       submit: Search and filter
     title: Search and filter
+    trash_warning: Elements in trash will be ignored
   folder:
     close: Close folder
     empty: Folder is empty
