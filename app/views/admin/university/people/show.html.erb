@@ -1,14 +1,14 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= edit_link @person %>
   <%= button_advanced do %>
     <%= destroy_link @person %>
     <%= static_link static_admin_university_person_path(@person) %>
   <% end %>
+  <%= edit_link @person %>
 <% end %>
 
-<div class="row g-5">
+<div class="row">
   <div class="col-md-4">
     <%= osuny_small_panel t('activerecord.attributes.university/person.picture') do %>
       <%= kamifusen_tag @person.best_picture, class: 'img-fluid col-4 col-md-8' %>

@@ -26,16 +26,8 @@
       <%= javascript_include_tag 'leaflet' %>
     <% end %>
   </head>
-  <body class="full-width">
-    <main id="main" class="page-with-blocks">
-      <%= render 'admin/application/preview/hero' %>
-      <div class="document-content">
-        <div class="blocks">
-          <%= yield %>
-        </div>
-      </div>
-    </main>
-    <%= render 'admin/application/preview/lightbox' %>
+  <body class="<%= 'full-width' if @l10n.about.try(:full_width) %>">
+    <%= yield %>
   </body>
   <script src="https://example.osuny.org/js/preview.js"></script>
 </html>

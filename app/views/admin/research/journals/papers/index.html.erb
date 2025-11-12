@@ -4,5 +4,11 @@
   <%= create_link Research::Journal::Paper %>
 <% end %>
 
+<div class="d-flex justify-content-between mb-5">
+  <%= render 'admin/application/components/lifecycle/pills',
+              path_method: :admin_research_journal_papers_path %>
+</div>
+<%= render 'admin/application/components/lifecycle/label' %>
+
 <%= render 'admin/research/journals/papers/list', papers: @papers %>
 <%= paginate @papers %>

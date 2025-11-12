@@ -1,27 +1,27 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @page if @page.is_regular_page? %>
+    <%= duplicate_link @page if @page.is_regular_page? %>
+  <% end %>
   <% page_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to  t('open'),
               page_url,
               target: :_blank,
               class: button_classes if page_url %>
   <%= preview_link %>
-  <%= link_to t('edit'),
-              edit_admin_communication_website_page_path(@page),
-              class: button_classes
-              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path
-              %>
   <%= link_to t('admin.communication.website.publish.button'),
               publish_admin_communication_website_page_path(@page),
               class: button_classes,
               method: :post if !@l10n.published && can?(:publish, @page)
               # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path
               %>
-  <%= button_advanced do %>
-    <%= destroy_link @page if @page.is_regular_page? %>
-    <%= duplicate_link @page if @page.is_regular_page? %>
-  <% end %>
+  <%= link_to t('edit'),
+              edit_admin_communication_website_page_path(@page),
+              class: button_classes
+              # This is not edit_link @page because of the polymorphism of the special pages, which would create a wrong path
+              %>
 <% end %>
 
 <div class="row">

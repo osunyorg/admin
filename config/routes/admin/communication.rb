@@ -60,6 +60,7 @@ namespace :communication do
         post :publish
         post :connect
         post :disconnect
+        post :restore
         post 'generate-from-template' => 'websites/pages#generate_from_template', as: :generate
       end
     end
@@ -81,10 +82,11 @@ namespace :communication do
         post :publish_batch
       end
       member do
-        get :static
         get :preview
+        get :static
         post :duplicate
         post :publish
+        post :restore
       end
     end
     namespace :agenda do
@@ -100,17 +102,21 @@ namespace :communication do
           end
         end
         member do
+          get :preview
           get :static
           post :duplicate
           post :publish
           post :save_time_slots
+          post :restore
         end
       end
       resources :exhibitions, controller: '/admin/communication/websites/agenda/exhibitions' do
         member do
+          get :preview
           get :static
           post :duplicate
           post :publish
+          post :restore
         end
       end
       resources :categories, controller: '/admin/communication/websites/agenda/categories' do
@@ -139,9 +145,11 @@ namespace :communication do
     namespace :portfolio do
       resources :projects, controller: '/admin/communication/websites/portfolio/projects' do
         member do
+          get :preview
           get :static
           post :duplicate
           post :publish
+          post :restore
         end
       end
       resources :categories, controller: '/admin/communication/websites/portfolio/categories' do
@@ -158,9 +166,11 @@ namespace :communication do
     namespace :jobboard do
       resources :jobs, controller: '/admin/communication/websites/jobboard/jobs' do
         member do
+          get :preview
           get :static
           post :duplicate
           post :publish
+          post :restore
         end
       end
       resources :categories, controller: '/admin/communication/websites/jobboard/categories' do
@@ -178,6 +188,7 @@ namespace :communication do
       member do
         get :static
         post :publish
+        post :restore
       end
     end
     resources :menus, controller: 'websites/menus' do

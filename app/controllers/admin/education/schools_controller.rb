@@ -1,15 +1,17 @@
 class Admin::Education::SchoolsController < Admin::Education::ApplicationController
   load_and_authorize_resource class: Education::School,
                               through: :current_university,
-                              through_association: :education_schools
+                              through_association: :education_schools,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @schools = @schools.filter_by(params[:filters], current_language)
-                       .ordered(current_language)
-                       .page(params[:page])
+    @filtered = @schools.filter_by(params[:filters], current_language)
+    @schools = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                        .ordered(current_language)
+                        .page(params[:page])
     breadcrumb
   end
 
@@ -53,6 +55,14 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
   def destroy
     @school.destroy
     redirect_to admin_education_schools_url, notice: t('admin.successfully_destroyed_html', model: @school.to_s_in(current_language))
+  end
+
+  def restore
+    @school = current_university.education_schools.only_deleted.find(params[:id])
+    authorize!(:restore, @school)
+    @school.restore(recursive: true)
+    redirect_to admin_education_school_path(@school),
+                notice: t('admin.successfully_restored_html', model: @school.to_s_in(current_language))
   end
 
   private

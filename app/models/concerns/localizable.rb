@@ -18,10 +18,30 @@ module Localizable
       joins(:localizations).where(l10n_table_name => { language_id: language_id })
     }
 
+    scope :published_in, -> (language) {
+      publication_state_in(language, :published)
+    }
+
     scope :published_now_in, -> (language) {
+      publication_state_in(language, :published_now)
+    }
+
+    scope :draft_in, -> (language) {
+      publication_state_in(language, :draft)
+    }
+
+    scope :published_in_the_future_in, -> (language) {
+      publication_state_in(language, :published_in_the_future)
+    }
+
+    scope :publication_state_in, -> (language, scope_name) {
       l10n_klass = _reflect_on_association(:localizations).klass
-      return for_language(language) unless l10n_klass.respond_to?(:published_now)
-      for_language(language).merge(l10n_klass.published_now)
+      if l10n_klass.respond_to?(scope_name)
+        scope = l10n_klass.send(scope_name)
+        for_language(language).merge(scope)
+      else
+        none
+      end
     }
 
   end
@@ -44,7 +64,9 @@ module Localizable
   end
 
   def localization_for(language)
-    localizations.find_by(language_id: language.id)
+    # TODO paranoia: tout devrait répondre à with_deleted, à supprimer à terme
+    list = localizations.respond_to?(:with_deleted) ? localizations.with_deleted : localizations
+    list.find_by(language_id: language.id)
   end
   alias :localized_in :localization_for
 

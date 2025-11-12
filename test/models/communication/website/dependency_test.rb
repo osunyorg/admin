@@ -72,9 +72,12 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     clear_enqueued_jobs
 
     # Vérifie qu'on a bien  une tâche de nettoyage (dépendances du bloc supprimé)
-    assert_enqueued_with(job: Communication::Website::CleanJob) do
+    assert_enqueued_with(job: Dependencies::CleanObjectAfterDestroyJob) do
       block.destroy
     end
+
+    # Vérifie que le bloc est bien marqué comme détruit avec paranoia
+    assert block.deleted?
 
     # On a enlevé le bloc, reste les 2 dépendances d'origine
     # - la localisation FR de la page

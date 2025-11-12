@@ -4,6 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  abstract      :text
+#  deleted_at    :datetime
 #  title         :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -25,6 +26,8 @@
 #  fk_rails_bd6b0dc62a  (language_id => languages.id)
 #
 class Research::Thesis::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Initials
   include Sanitizable

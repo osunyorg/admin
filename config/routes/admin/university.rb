@@ -31,6 +31,7 @@ namespace :university, path: :directory do
       get 'author/static' => 'people/authors#static', as: 'static_author' 
       get 'experiences' => 'people/experiences#edit'
       patch 'experiences' => 'people/experiences#update'
+      post :restore
     end
   end
 
@@ -49,6 +50,7 @@ namespace :university, path: :directory do
     end
     member do
       get :static
+      post :restore
     end
   end
   root to: 'dashboard#index'

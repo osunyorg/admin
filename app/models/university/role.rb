@@ -3,6 +3,7 @@
 # Table name: university_roles
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  position      :integer          not null
 #  target_type   :string           indexed => [target_id]
 #  created_at    :datetime         not null
@@ -20,6 +21,8 @@
 #  fk_rails_8e52293a38  (university_id => universities.id)
 #
 class University::Role < ApplicationRecord
+  acts_as_paranoid
+
   include Localizable
   include Orderable
   include WithUniversity

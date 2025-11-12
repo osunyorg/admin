@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
+#  deleted_at               :datetime
 #  from_day                 :date
 #  is_lasting               :boolean          default(FALSE)
 #  migration_identifier     :string
@@ -28,6 +29,8 @@
 #  fk_rails_4c477c4153  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Exhibition < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
   include Communication::Website::Agenda::WithStatus
@@ -36,6 +39,7 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Sanitizable
   include Searchable

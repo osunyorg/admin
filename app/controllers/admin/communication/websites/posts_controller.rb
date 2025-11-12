@@ -1,14 +1,17 @@
 class Admin::Communication::Websites::PostsController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource class: Communication::Website::Post,
-                              through: :website
+                              through: :website,
+                              except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @posts = @posts.filter_by(params[:filters], current_language)
-                   .ordered(current_language)
-                   .page(params[:page])
+    @filtered = @posts.filter_by(params[:filters], current_language)
+    @posts = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                      .ordered(current_language)
+                      .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end
@@ -34,12 +37,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def show
-    @preview = true
     breadcrumb
-  end
-
-  def preview
-    render layout: 'admin/layouts/preview'
   end
 
   def new
@@ -90,6 +88,14 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
     @post.destroy
     redirect_to admin_communication_website_posts_url,
                 notice: t('admin.successfully_destroyed_html', model: @post.to_s_in(current_language))
+  end
+
+  def restore
+    @post = @website.posts.only_deleted.find(params[:id])
+    authorize!(:restore, @post)
+    @post.restore(recursive: true)
+    redirect_to admin_communication_website_post_path(@post),
+                notice: t('admin.successfully_restored_html', model: @post.to_s_in(current_language))
   end
 
   protected

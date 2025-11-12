@@ -3,6 +3,7 @@
 # Table name: research_journal_paper_kind_localizations
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  slug          :string
 #  title         :string
 #  created_at    :datetime         not null
@@ -25,6 +26,8 @@
 #  fk_rails_ec1bc36169  (language_id => languages.id)
 #
 class Research::Journal::Paper::Kind::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include HasGitFiles
   include Initials

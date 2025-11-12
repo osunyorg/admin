@@ -3,6 +3,7 @@
 # Table name: education_cohort_localizations
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -24,6 +25,8 @@
 #  fk_rails_5dc9fc7693  (language_id => languages.id)
 #
 class Education::Cohort::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include HasGitFiles
   include Initials

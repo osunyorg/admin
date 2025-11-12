@@ -1,12 +1,15 @@
 class Admin::Administration::LocationsController < Admin::Administration::ApplicationController
   load_and_authorize_resource class: Administration::Location,
-                              through: :current_university
+                              through: :current_university,
+                              except: :restore
 
   include Admin::Localizable
   include Admin::HasStaticAction
 
   def index
-    @locations = @locations.ordered(current_language)
+    @filtered = @locations.filter_by(params[:filters], current_language)
+    @locations = @locations.at_lifecycle(params[:lifecycle], current_language)
+                           .ordered(current_language)
     breadcrumb
   end
 
@@ -50,8 +53,16 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
 
   def destroy
     @location.destroy
-    redirect_to admin_education_locations_url,
+    redirect_to admin_administration_locations_url,
                 notice: t('admin.successfully_destroyed_html', model: @location.to_s_in(current_language))
+  end
+
+  def restore
+    @location = current_university.locations.only_deleted.find(params[:id])
+    authorize!(:restore, @location)
+    @location.restore(recursive: true)
+    redirect_to [:admin, @location],
+                notice: t('admin.successfully_restored_html', model: @location.to_s_in(current_language))
   end
 
   private

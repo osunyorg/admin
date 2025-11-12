@@ -66,10 +66,11 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
 
     # On supprime le bloc qui contient PA : -3 (parce que PA et sa localisation doivent être supprimés aussi)
     assert_difference -> { Communication::Website::Connection.count } => -3 do
-      assert_enqueued_with(job: Communication::Website::CleanJob, args: [page_l10n.communication_website_id]) do
-        page_l10n.blocks.find_by(position: 2).destroy
+      block = page_l10n.blocks.find_by(position: 2)
+      assert_enqueued_with(job: Dependencies::CleanObjectAfterDestroyJob, args: [block]) do
+        block.destroy
       end
-      perform_enqueued_jobs(only: Communication::Website::CleanJob)
+      perform_enqueued_jobs(only: Dependencies::CleanObjectAfterDestroyJob)
     end
   end
 
@@ -90,10 +91,11 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # On supprime le bloc qui contient PA : -4 (le bloc, PA, sa localisation et le bloc Organisations de PA)
     # On ne supprime pas noesya, toujours connectée via le block 3)
     assert_difference -> { Communication::Website::Connection.count } => -4 do
-      assert_enqueued_with(job: Communication::Website::CleanJob, args: [page_l10n.communication_website_id]) do
-        page_l10n.blocks.find_by(position: 2).destroy
+      block = page_l10n.blocks.find_by(position: 2)
+      assert_enqueued_with(job: Dependencies::CleanObjectAfterDestroyJob, args: [block]) do
+        block.destroy
       end
-      perform_enqueued_jobs(only: Communication::Website::CleanJob)
+      perform_enqueued_jobs(only: Dependencies::CleanObjectAfterDestroyJob)
     end
   end
 

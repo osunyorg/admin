@@ -59,12 +59,12 @@
               <% end %>
 
               <% if block.template.option_summary && event_l10n.summary.present? %>
-                <div class="event-description">
-                  <p itemprop="description">
-                    <%= event_l10n.summary %>
-                  </p>
+                <div class="event-description" itemprop="description">
+                  <%= sanitize event_l10n.summary %>
                   <% if block.template.layout == "large" %>
-                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.agenda.layouts.large.more' %></p>
+                    <p class="more meta" aria-hidden="true">
+                      <%= t 'admin.communication.blocks.templates.agenda.layouts.large.more' %>
+                    </p>
                   <% end %>
                 </div>
               <% end %>
