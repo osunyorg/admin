@@ -5,9 +5,11 @@ module AsCategoryLocalization
   include AsLocalizedTree
   include Contentful
   include HasGitFiles
+  include HeaderCallToAction
   include Initials
   include Permalinkable
   include Sanitizable
+  include Shareable
   include WithBlobs
   include WithFeaturedImage
   include WithUniversity
@@ -29,6 +31,10 @@ module AsCategoryLocalization
 
   def published?
     persisted?
+  end
+
+  def best_breadcrumb_title
+    breadcrumb_title.presence || name
   end
 
   def to_s
