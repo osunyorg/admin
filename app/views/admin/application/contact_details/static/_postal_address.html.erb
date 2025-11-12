@@ -26,8 +26,7 @@ should_show = is_information_public?(about, :address)
 <%= indentation %>    latitude: <%= about.latitude %>
 <%= indentation %>    longitude: <%= about.longitude %>
 <% end %>
-<%= indentation %>  text: >-
-<%= indentation %>    <%= prepare_text_for_static address_formatter.to_s %>
+<%= osuny_static_text 'text', address_formatter.to_s, depth: depth+2 %>
 <%= indentation %>  html: >-
 <%= indentation %>    <%= address_formatter.to_html.html_safe %>
 <% end %>
