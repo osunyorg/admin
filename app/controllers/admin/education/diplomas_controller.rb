@@ -1,13 +1,16 @@
 class Admin::Education::DiplomasController < Admin::Education::ApplicationController
   load_and_authorize_resource class: Education::Diploma,
-                              through: :current_university
+                              through: :current_university,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
   include Admin::Reorderable
 
   def index
-    @diplomas = @diplomas.ordered
+    @filtered = @diplomas
+    @diplomas = @diplomas.at_lifecycle(params[:lifecycle], current_language)
+                         .ordered
     breadcrumb
   end
 
@@ -53,6 +56,14 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
     @diploma.destroy
     redirect_to admin_education_diplomas_url,
                 notice: t('admin.successfully_destroyed_html', model: @diploma.to_s_in(current_language))
+  end
+
+  def restore
+    @diploma = current_university.education_diplomas.only_deleted.find(params[:id])
+    authorize!(:restore, @diploma)
+    @diploma.restore(recursive: true)
+    redirect_to admin_education_diploma_path(@diploma),
+                notice: t('admin.successfully_restored_html', model: @diploma.to_s_in(current_language))
   end
 
   private

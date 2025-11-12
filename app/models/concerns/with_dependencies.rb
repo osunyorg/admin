@@ -10,10 +10,18 @@ module WithDependencies
 
     if self < ActiveRecord::Base
       after_save :clean_websites_if_necessary
+
+      # As objects are paranoid, we can do cleaning after destroying the object, it still exists in the database with `deleted_on`
+      after_destroy :clean_object_after_destroy if :paranoid?
+
+      # TODO paranoia: tout devrait répondre à after_restore, condition à supprimer à terme
+      after_restore :reconnect_object_after_restore if respond_to?(:after_restore)
     end
   end
 
+  # TODO paranoia: supprimer quand tout est paranoiaque
   def destroy
+    return super if paranoid?
     # On est obligés d'overwrite la méthode destroy pour éviter un problème d'œuf et de poule.
     # On a besoin que les websites puissent recalculer leurs recursive_dependencies
     # et on a besoin que ces recursive_dependencies n'incluent pas l'objet courant, puisqu'il est "en cours de destruction" (ni ses propres recursive_dependencies).
@@ -108,6 +116,14 @@ module WithDependencies
 
   def clean_websites_if_necessary
     Dependencies::CleanWebsitesIfNecessaryJob.perform_later(self)
+  end
+
+  def clean_object_after_destroy
+    Dependencies::CleanObjectAfterDestroyJob.perform_later(self)
+  end
+
+  def reconnect_object_after_restore
+    Dependencies::ReconnectObjectAfterRestoreJob.perform_later(self)
   end
 
   # "gid://osuny/Education::Program/c537fc50-f7c5-414f-9966-3443bc9fde0e-dependencies"

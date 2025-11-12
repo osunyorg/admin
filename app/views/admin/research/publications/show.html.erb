@@ -1,9 +1,11 @@
 <% content_for :title, @publication %>
 
-<% content_for :title_right do %>
-  <%= edit_link @publication if @publication.editable? %>
-  <%= button_advanced do %>
-    <%= destroy_link @publication if @publication.editable? %>
+<% if @publication.editable? %>
+  <% content_for :title_right do %>
+    <%= button_advanced do %>
+      <%= destroy_link @publication %>
+    <% end %>
+    <%= edit_link @publication %>
   <% end %>
 <% end %>
 
@@ -56,11 +58,8 @@
      <p><%= sanitize @publication.authors_list %></p>
     <% end %>
     <%= osuny_panel University::Person::Localization::Researcher.model_name.human(count: 2) do %>
-      <div class="row g-2">
-        <% @publication.researchers.in_university(current_university).each do |researcher| %>
-          <%= render 'admin/research/researchers/researcher', researcher: researcher %>
-        <% end %>
-      </div>
+      <%= render 'admin/research/researchers/list',
+                  researchers: @publication.researchers.in_university(current_university) %>
     <% end %>
     <%= osuny_panel Research::Hal::Author.model_name.human(count: 2) do %>
       <ul class="list-unstyled">

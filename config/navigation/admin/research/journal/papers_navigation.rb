@@ -12,6 +12,6 @@ SimpleNavigation::Configuration.run do |navigation|
                   }
     primary.item  :feature_nav_kinds,
                   Research::Journal::Paper::Kind.model_name.human(count: 2),
-                  admin_research_journal_kinds_path(journal_id: @journal)
+                  admin_research_journal_paper_kinds_path(journal_id: @journal)
   end
 end

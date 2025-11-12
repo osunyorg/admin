@@ -1,11 +1,4 @@
-<%
-title = @website.feature_portfolio_name(current_language)
-action = ''
-action += link_to t('create'),
-                  new_admin_communication_website_portfolio_project_path(website_id: @website),
-                  class: button_classes if can?(:create, Communication::Website::Portfolio::Project)
-%>
-<%= osuny_panel title, action: action do %>
+<%= osuny_panel @website.feature_portfolio_name(current_language) do %>
   <%= render 'admin/communication/websites/portfolio/projects/list',
               projects: @projects, 
               small: true,

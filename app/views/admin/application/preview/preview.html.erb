@@ -1,0 +1,11 @@
+<main id="main" class="page-with-blocks">
+  <%= render 'admin/application/preview/hero' %>
+  <div class="document-content">
+    <div class="blocks">
+      <%= render 'admin/communication/contents/show',
+            about: @l10n,
+            strip_javascript: true %>
+    </div>
+  </div>
+</main>
+<%= render 'admin/application/preview/lightbox' %>

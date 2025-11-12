@@ -1,7 +1,9 @@
 class Admin::Communication::Websites::PagesController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource class: Communication::Website::Page,
-                              through: :website
+                              through: :website,
+                              except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
@@ -10,19 +12,21 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
                 only: [:show, :edit, :update, :static, :publish, :preview, :generate_from_template]
 
   def index
+    @filtered = @pages.filter_by(params[:filters], current_language)
     @homepage = @website.special_page(Communication::Website::Page::Home)
     @first_level_pages = @homepage.children.ordered
-    @pages = @website.pages
     @feature_nav = 'navigation/admin/communication/website/pages'
     breadcrumb
   end
 
   def index_list
-    @pages = @pages.filter_by(params[:filters], current_language)
-                   .ordered_by_title(current_language)
-                   .page(params[:page])
+    @filtered = @pages.filter_by(params[:filters], current_language)
+    @pages = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                      .ordered_by_title(current_language)
+                      .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/pages'
     breadcrumb
+    add_breadcrumb t('admin.communication.website.pages.as_list')
   end
 
   def reorder
@@ -47,7 +51,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def show
-    @preview = true
     breadcrumb
     add_breadcrumb(@l10n, admin_communication_website_page_path(@page))
   end
@@ -56,10 +59,6 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     @l10n.publish!
     redirect_back fallback_location: admin_communication_website_page_path(@page),
                   notice: t('admin.communication.website.publish.notice')
-  end
-
-  def preview
-    render layout: 'admin/layouts/preview'
   end
 
   def connect
@@ -138,6 +137,14 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
       @page.destroy
       redirect_to admin_communication_website_pages_url(@website), notice: t('admin.successfully_destroyed_html', model: @page.to_s_in(current_language))
     end
+  end
+
+  def restore
+    @page = @website.pages.only_deleted.find(params[:id])
+    authorize!(:restore, @page)
+    @page.restore(recursive: true)
+    redirect_to admin_communication_website_page_path(@page),
+                notice: t('admin.successfully_restored_html', model: @page.to_s_in(current_language))
   end
 
   protected

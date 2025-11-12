@@ -1,17 +1,18 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @project %>
+    <%= duplicate_link @project %>
+  <% end %>
+  <%= preview_link %>
   <% project_url = @l10n.current_permalink_url_in_website(@website) %>
   <%= link_to t('open'),
               project_url,
               target: :_blank,
               class: button_classes if project_url %>
-  <%= edit_link @project %>
   <%= publish_link @project %>
-  <%= button_advanced do %>
-    <%= destroy_link @project %>
-    <%= duplicate_link @project %>
-  <% end %>
+  <%= edit_link @project %>
 <% end %>
 
 <div class="row">

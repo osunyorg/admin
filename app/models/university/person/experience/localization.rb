@@ -3,6 +3,7 @@
 # Table name: university_person_experience_localizations
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  description   :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -24,6 +25,8 @@
 #  fk_rails_eb7a946347  (university_id => universities.id)
 #
 class University::Person::Experience::Localization < ApplicationRecord
+  acts_as_paranoid
+  
   include AsLocalization
   include Sanitizable
   include WithUniversity
