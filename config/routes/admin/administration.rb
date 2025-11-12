@@ -13,6 +13,7 @@ namespace :administration do
   resources :locations do
     member do
       get :static
+      post :restore
     end
   end
   namespace :qualiopi do

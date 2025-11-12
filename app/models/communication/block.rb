@@ -5,6 +5,7 @@
 #  id                       :uuid             not null, primary key
 #  about_type               :string           indexed => [about_id]
 #  data                     :jsonb
+#  deleted_at               :datetime
 #  html_class               :string
 #  migration_identifier     :string
 #  position                 :integer          not null
@@ -29,6 +30,8 @@
 #  fk_rails_80e5625874  (communication_website_id => communication_websites.id)
 #
 class Communication::Block < ApplicationRecord
+  acts_as_paranoid
+
   BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
   CATEGORIES = {
     basic: [:title, :chapter, :image, :video, :sound, :datatable],

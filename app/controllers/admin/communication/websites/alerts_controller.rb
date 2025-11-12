@@ -1,14 +1,16 @@
 class Admin::Communication::Websites::AlertsController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource class: Communication::Website::Alert,
-                              through: :website
+                              through: :website,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @alerts = @alerts.filter_by(params[:filters], current_language)
-                     .ordered(current_language)
-                     .page(params[:page])
+    @filtered = @alerts.filter_by(params[:filters], current_language)
+    @alerts = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                       .ordered(current_language)
+                       .page(params[:page])
     breadcrumb
   end
 
@@ -58,6 +60,14 @@ class Admin::Communication::Websites::AlertsController < Admin::Communication::W
     @alert.destroy
     redirect_to admin_communication_website_alerts_url,
                 notice: t('admin.successfully_destroyed_html', model: @alert.to_s_in(current_language))
+  end
+
+  def restore
+    @alert = @website.alerts.only_deleted.find(params[:id])
+    authorize!(:restore, @alert)
+    @alert.restore(recursive: true)
+    redirect_to admin_communication_website_alert_path(@alert),
+                notice: t('admin.successfully_restored_html', model: @alert.to_s_in(current_language))
   end
 
   protected

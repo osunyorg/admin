@@ -5,6 +5,7 @@
 #  id               :uuid             not null, primary key
 #  abstract         :string
 #  authors_list     :text
+#  deleted_at       :datetime
 #  keywords         :text
 #  meta_description :text
 #  published        :boolean          default(FALSE)
@@ -32,6 +33,8 @@
 #  fk_rails_c0d88fdf40  (university_id => universities.id)
 #
 class Research::Journal::Paper::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Contentful
   include HasGitFiles

@@ -1,13 +1,15 @@
 class Admin::Research::JournalsController < Admin::Research::Journals::ApplicationController
   load_and_authorize_resource class: Research::Journal,
                               through: :current_university,
-                              through_association: :research_journals
+                              through_association: :research_journals,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @journals = @journals.filter_by(params[:filters], current_language)
+    @filtered = @journals.filter_by(params[:filters], current_language)
+    @journals = @filtered.at_lifecycle(params[:lifecycle], current_language)
                          .ordered(current_language)
                          .page(params[:page])
     breadcrumb
@@ -52,6 +54,14 @@ class Admin::Research::JournalsController < Admin::Research::Journals::Applicati
   def destroy
     @journal.destroy
     redirect_to admin_research_journals_url, notice: t('admin.successfully_destroyed_html', model: @journal.to_s_in(current_language))
+  end
+
+  def restore
+    @journal = current_university.research_journals.only_deleted.find(params[:id])
+    authorize!(:restore, @journal)
+    @journal.restore(recursive: true)
+    redirect_to admin_research_journal_path(@journal),
+                notice: t('admin.successfully_restored_html', model: @journal.to_s_in(current_language))
   end
 
   protected

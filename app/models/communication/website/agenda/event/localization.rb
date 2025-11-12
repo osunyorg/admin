@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  add_to_calendar_urls     :jsonb
+#  deleted_at               :datetime
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean          default(FALSE)
@@ -42,6 +43,8 @@
 #  fk_rails_bb85c47fb8  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AddableToCalendar
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization

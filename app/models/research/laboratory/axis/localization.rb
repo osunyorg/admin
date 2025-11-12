@@ -3,6 +3,7 @@
 # Table name: research_laboratory_axis_localizations
 #
 #  id               :uuid             not null, primary key
+#  deleted_at       :datetime
 #  meta_description :text
 #  name             :string
 #  short_name       :string
@@ -27,6 +28,8 @@
 #  fk_rails_60fd449856  (language_id => languages.id)
 #
 class Research::Laboratory::Axis::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Initials
   include Sanitizable

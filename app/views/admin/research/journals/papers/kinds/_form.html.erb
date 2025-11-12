@@ -1,8 +1,4 @@
-<%
-url = kind.new_record?  ? admin_research_journal_kinds_path
-                        : admin_research_journal_kind_path(kind)
-%>
-<%= simple_form_for kind, url: url do |f| %>
+<%= simple_form_for [:admin, kind] do |f| %>
   <%= f.simple_fields_for :localizations, l10n do |lf| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -23,7 +19,7 @@ url = kind.new_record?  ? admin_research_journal_kinds_path
       </div>
     </div>
     <% content_for :action_bar_right do %>
-      <%= cancel url %>
+      <%= cancel [:admin, kind] %>
       <%= submit f %>
     <% end %>
   <% end %>

@@ -1,14 +1,16 @@
 class Admin::Research::ThesesController < Admin::Research::ApplicationController
   load_and_authorize_resource class: Research::Thesis,
                               through: :current_university,
-                              through_association: :research_theses
+                              through_association: :research_theses,
+                              except: :restore
 
   include Admin::Localizable
 
   def index
-    @theses = @theses.filter_by(params[:filters], current_language)
-                     .ordered(current_language)
-                     .page(params[:page])
+    @filtered = @theses.filter_by(params[:filters], current_language)
+    @theses = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                       .ordered(current_language)
+                       .page(params[:page])
     breadcrumb
   end
 
@@ -27,7 +29,7 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
 
   def create
     if @thesis.save
-      redirect_to [:admin, @thesis], 
+      redirect_to [:admin, @thesis],
                   notice: t('admin.successfully_created_html', model: @thesis.to_s_in(current_language))
     else
       breadcrumb
@@ -37,7 +39,7 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
 
   def update
     if @thesis.update(thesis_params)
-      redirect_to [:admin, @thesis], 
+      redirect_to [:admin, @thesis],
                   notice: t('admin.successfully_updated_html', model: @thesis.to_s_in(current_language))
     else
       load_invalid_localization
@@ -49,8 +51,16 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
 
   def destroy
     @thesis.destroy
-    redirect_to admin_research_theses_url, 
+    redirect_to admin_research_theses_url,
                 notice: t('admin.successfully_destroyed_html', model: @thesis.to_s_in(current_language))
+  end
+
+  def restore
+    @thesis = current_university.research_theses.only_deleted.find(params[:id])
+    authorize!(:restore, @thesis)
+    @thesis.restore(recursive: true)
+    redirect_to [:admin, @thesis],
+                notice: t('admin.successfully_restored_html', model: @thesis.to_s_in(current_language))
   end
 
   protected
@@ -61,7 +71,7 @@ class Admin::Research::ThesesController < Admin::Research::ApplicationController
             :started_at, :completed, :completed_at,
             :research_laboratory_id, :author_id, :director_id,
             localizations_attributes: [
-              :id, :language_id, 
+              :id, :language_id,
               :title, :abstract
             ]
           )

@@ -7,6 +7,7 @@ namespace :education do
   resources :cohorts, only: [:index, :show, :destroy] do
     member do
       get :static
+      post :restore
     end
   end
   resources :diplomas do
@@ -15,6 +16,7 @@ namespace :education do
     end
     member do
       get :static
+      post :restore
     end
   end
   resources :programs do
@@ -50,6 +52,7 @@ namespace :education do
       get :children
       get :preview
       get :static
+      post :restore
     end
   end
   resources :schools do
@@ -63,6 +66,7 @@ namespace :education do
     end
     member do
       get :static
+      post :restore
     end
   end
   resources :teachers, only: [:index, :show, :edit, :update] do

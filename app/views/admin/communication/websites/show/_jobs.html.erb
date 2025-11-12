@@ -1,11 +1,4 @@
-<%
-title = @website.feature_jobboard_name(current_language)
-action = ''
-action += link_to t('create'),
-                  new_admin_communication_website_jobboard_job_path(website_id: @website),
-                  class: button_classes if can?(:create, Communication::Website::Jobboard::Job)
-%>
-<%= osuny_panel title, action: action do %>
+<%= osuny_panel @website.feature_jobboard_name(current_language) do %>
   <%= render 'admin/communication/websites/jobboard/jobs/list', 
               jobs: @jobs, 
               small: true,

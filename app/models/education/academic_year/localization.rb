@@ -3,6 +3,7 @@
 # Table name: education_academic_year_localizations
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  slug          :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -24,6 +25,8 @@
 #  fk_rails_9de9d01008  (university_id => universities.id)
 #
 class Education::AcademicYear::Localization < ApplicationRecord
+  acts_as_paranoid
+  
   include AsLocalization
   include HasGitFiles
   include Initials

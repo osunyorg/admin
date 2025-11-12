@@ -1,19 +1,14 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= link_to t('edit'), 
-              edit_admin_research_journal_kind_path(@kind),
-              class: button_classes %>
   <%= button_advanced do %>
-    <%= link_to t('delete'), 
-                admin_research_journal_kind_path(@kind),
-                data: { confirm: t('please_confirm') },
-                class: button_classes_danger %>
+    <%= destroy_link @kind %>
   <% end %>
+  <%= edit_link @kind %>
 <% end %>
 
 <%= render 'admin/research/journals/papers/list', papers: @papers %>
 
 <% content_for :server_admin_only do %>
-  <%= static_link static_admin_research_journal_kind_path(@kind) %>
+  <%= static_link static_admin_research_journal_paper_kind_path(@kind) %>
 <% end %>

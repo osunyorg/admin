@@ -4,6 +4,7 @@
 #
 #  id                                    :uuid             not null, primary key
 #  datetime                              :datetime
+#  deleted_at                            :datetime
 #  duration                              :integer
 #  migration_identifier                  :string
 #  created_at                            :datetime         not null
@@ -25,6 +26,8 @@
 #  fk_rails_7cb3bfe2bf  (communication_website_agenda_event_id => communication_website_agenda_events.id)
 #
 class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
   include Communication::Website::Agenda::WithStatus

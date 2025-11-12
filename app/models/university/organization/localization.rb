@@ -5,6 +5,7 @@
 #  id                    :uuid             not null, primary key
 #  address_additional    :string
 #  address_name          :string
+#  deleted_at            :datetime
 #  featured_image_alt    :string
 #  featured_image_credit :text
 #  linkedin              :string
@@ -40,6 +41,8 @@
 #  fk_rails_ba221edb00  (university_id => universities.id)
 #
 class University::Organization::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Backlinkable
   include Contentful
