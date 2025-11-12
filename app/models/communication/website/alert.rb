@@ -3,6 +3,7 @@
 # Table name: communication_website_alerts
 #
 #  id                       :uuid             not null, primary key
+#  deleted_at               :datetime
 #  kind                     :integer          default("info"), not null
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null

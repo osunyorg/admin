@@ -51,7 +51,7 @@ class University::Person::Localization < ApplicationRecord
   include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
   include WithUniversity
 
-  delegate :featured_image, to: :person
+  delegate :featured_image, to: :about
 
   has_summernote :summary
   has_summernote :biography
@@ -84,7 +84,7 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def dependencies
-    person.active_storage_blobs + 
+    about.active_storage_blobs +
     contents_dependencies
   end
 
