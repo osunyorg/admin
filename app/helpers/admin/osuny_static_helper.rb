@@ -27,4 +27,10 @@ module Admin::OsunyStaticHelper
     raw "#{key}: >-\n  #{prepare_text_for_static(value, depth: depth)}"
   end
 
+  def osuny_static_html(key, value)
+    text = strip_tags(value.to_s)
+    return if text.blank?
+    raw "#{key}: >-\n  #{prepare_html_for_static(value)}"
+  end
+
 end
