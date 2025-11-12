@@ -392,6 +392,7 @@ fr:
       reset: Réinitialiser la recherche
       submit: Chercher
     title: Rechercher et filtrer
+    tarsh_warning: Les éléments dans la corbeille seront ignorés
   folder:
     close: Fermer le dossier
     empty: Le dossier est vide
