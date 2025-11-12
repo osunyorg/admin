@@ -482,7 +482,10 @@ en:
   move: Move
   open: Open
   organize: Organize
-  please_confirm: Are you sure?
+  please_confirm:
+    deletion: Are you sure you want to delete?
+    duplication: Are you sure you want to duplicate?
+    generic: Are you sure?
   preview:
     button: Preview
     desktop: Desktop
