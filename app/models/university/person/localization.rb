@@ -51,7 +51,7 @@ class University::Person::Localization < ApplicationRecord
   include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
   include WithUniversity
 
-  delegate :featured_image, to: :about
+  delegate :featured_image, to: :person
 
   has_summernote :summary
   has_summernote :biography
@@ -59,9 +59,10 @@ class University::Person::Localization < ApplicationRecord
   validates :last_name, presence: true
   before_validation :prepare_name
 
-  def person
-    @person ||= University::Person.with_deleted.find(about_id)
+  def about
+    University::Person.unscoped { super }
   end
+  alias person about
 
   def person_l10n
     @person_l10n ||= University::Person::Localization.with_deleted.find(id)
@@ -84,7 +85,7 @@ class University::Person::Localization < ApplicationRecord
   end
 
   def dependencies
-    about.active_storage_blobs +
+    person.active_storage_blobs +
     contents_dependencies
   end
 
