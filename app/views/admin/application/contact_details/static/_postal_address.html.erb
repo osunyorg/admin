@@ -10,23 +10,17 @@ should_show = is_information_public?(about, :address)
 <% if present && should_show %>
 <%= indentation %>postal_address:
 <%= indentation %>  data:
-<%= indentation %>    address_name: >-
-<%= indentation %>      <%= prepare_text_for_static address_formatter.address_name %>
-<%= indentation %>    address: >-
-<%= indentation %>      <%= prepare_text_for_static address_formatter.address %>
-<%= indentation %>    address_additional: >-
-<%= indentation %>      <%= prepare_text_for_static address_formatter.address_additional %>
-<%= indentation %>    zipcode: >-
-<%= indentation %>      <%= prepare_text_for_static address_formatter.zipcode %>
-<%= indentation %>    city: >-
-<%= indentation %>      <%= prepare_text_for_static address_formatter.city %>
+<%= osuny_static_text 'address_name', address_formatter.address_name, depth: depth+3 %>
+<%= osuny_static_text 'address', address_formatter.address, depth: depth+3 %>
+<%= osuny_static_text 'address_additional', address_formatter.address_additional, depth: depth+3 %>
+<%= osuny_static_text 'zipcode', address_formatter.zipcode, depth: depth+3 %>
+<%= osuny_static_text 'city', address_formatter.city, depth: depth+3 %>
+<% if address_formatter.country? %>
 <%= indentation %>    country:
-<%= indentation %>      name: >-
-<%= indentation %>        <%= prepare_text_for_static address_formatter.country %>
-<%= indentation %>      alpha2: >-
-<%= indentation %>        <%= prepare_text_for_static address_formatter.country_alpha2 %>
-<%= indentation %>      alpha3: >-
-<%= indentation %>        <%= prepare_text_for_static address_formatter.country_alpha3 %>
+<%= osuny_static_text 'name', address_formatter.country, depth: depth+4 %>
+<%= osuny_static_text 'alpha2', address_formatter.country_alpha2, depth: depth+4 %>
+<%= osuny_static_text 'alpha3', address_formatter.country_alpha3, depth: depth+4 %>
+<% end %>
 <% if about.respond_to?(:latitude) %>
 <%= indentation %>  geolocation:
 <%= indentation %>    latitude: <%= about.latitude %>
