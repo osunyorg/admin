@@ -3,6 +3,7 @@
 # Table name: research_journal_paper_kinds
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  journal_id    :uuid             not null, indexed
@@ -19,8 +20,11 @@
 #  fk_rails_8e6f992b9d  (university_id => universities.id)
 #
 class Research::Journal::Paper::Kind < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable

@@ -1,15 +1,15 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @post %>
+  <% end %>
   <%= link_to t('open'),
               posts_post_url(date: @l10n.published_at.strftime('%Y-%m-%d'), slug: @l10n.slug, host: @post.extranet.url, extranet_id: nil),
               target: :_blank,
               class: button_classes if @l10n.published %>
   <%= preview_link %>
   <%= edit_link @post %>
-  <%= button_advanced do %>
-    <%= destroy_link @post %>
-  <% end %>
 <% end %>
 
 <div class="row">

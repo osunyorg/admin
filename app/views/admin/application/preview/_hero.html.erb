@@ -1,4 +1,9 @@
 <%
+@title = @l10n.title
+@subtitle = @l10n.try(:subtitle)
+@summary = @l10n.summary
+@image = @l10n.featured_image
+
 hero_classes = "hero"
 if @image.present? && @image.attached?
   format = ActiveStorage::Utils.format(@image)

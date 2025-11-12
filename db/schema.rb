@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_10_103443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "pgcrypto"
   enable_extension "unaccent"
@@ -50,6 +51,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "record_id", null: false
     t.uuid "blob_id", null: false
     t.datetime "created_at", precision: nil, null: false
+    t.datetime "deleted_at"
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -89,6 +91,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_cf0b216983", unique: true
     t.index ["about_id"], name: "index_administration_location_localizations_on_about_id"
     t.index ["language_id"], name: "index_administration_location_localizations_on_language_id"
@@ -106,6 +109,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["university_id"], name: "index_administration_locations_on_university_id"
   end
 
@@ -159,6 +163,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "communication_website_id"
     t.string "migration_identifier"
     t.string "html_class"
+    t.datetime "deleted_at"
     t.index ["about_type", "about_id"], name: "index_communication_website_blocks_on_about"
     t.index ["communication_website_id"], name: "index_communication_blocks_on_communication_website_id"
     t.index ["university_id", "template_kind"], name: "index_communication_blocks_on_university_id_and_template_kind"
@@ -537,6 +542,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["communication_website_agenda_event_id"], name: "idx_on_communication_website_agenda_event_id_4defccd002"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_38a3895ffa"
     t.index ["language_id"], name: "index_communication_website_agenda_event_days_on_language_id"
@@ -566,6 +572,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.string "header_cta_label"
     t.string "header_cta_url"
     t.text "notes"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_10e350e257", unique: true
     t.index ["about_id"], name: "idx_on_about_id_db6323806a"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_87f393a516"
@@ -584,6 +591,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.jsonb "add_to_calendar_urls"
     t.string "slug"
     t.string "migration_identifier"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_899f31df1f", unique: true
     t.index ["about_id"], name: "idx_on_about_id_e52a2e12b0"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_526f156fed"
@@ -600,6 +608,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "migration_identifier"
+    t.datetime "deleted_at"
     t.index ["communication_website_agenda_event_id"], name: "idx_on_communication_website_agenda_event_id_022d825cf7"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_c0ac516bb5"
     t.index ["university_id"], name: "idx_on_university_id_bca328e63c"
@@ -618,6 +627,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "created_by_id"
     t.string "bodyclass"
     t.boolean "is_lasting", default: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
     t.index ["created_by_id"], name: "index_communication_website_agenda_events_on_created_by_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_events_on_parent_id"
@@ -648,6 +658,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.text "text"
     t.text "notes"
     t.string "place"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_635cd53cee", unique: true
     t.index ["about_id"], name: "idx_on_about_id_a6e772a338"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_8261badeaa"
@@ -667,6 +678,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "updated_at", null: false
     t.string "bodyclass"
     t.boolean "is_lasting", default: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_agenda_exhibitions_on_communication_website_id"
     t.index ["created_by_id"], name: "idx_on_created_by_id_c3766f3a0a"
     t.index ["university_id"], name: "idx_on_university_id_46e895f493"
@@ -681,6 +693,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "about_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_b8b9e8269f", unique: true
     t.index ["about_id"], name: "idx_on_about_id_ff7b8b96ea"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_c9cc20d97c"
@@ -697,6 +710,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_54db819007"
     t.index ["month_id"], name: "index_communication_website_agenda_period_days_on_month_id"
     t.index ["university_id", "communication_website_id", "year_id", "month_id", "value"], name: "index_communication_website_agenda_period_days_unique", unique: true
@@ -711,6 +725,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_e69d0eb996", unique: true
     t.index ["about_id"], name: "idx_on_about_id_e3d3e69fcb"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_2202f6cc51"
@@ -725,6 +740,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.integer "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_49eaf81807"
     t.index ["university_id", "communication_website_id", "year_id", "value"], name: "index_communication_website_agenda_period_months_unique", unique: true
     t.index ["year_id"], name: "index_communication_website_agenda_period_months_on_year_id"
@@ -738,6 +754,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_65b759f0dd", unique: true
     t.index ["about_id"], name: "idx_on_about_id_9d0e59880a"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_ccc9a47ea5"
@@ -752,6 +769,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "needs_checking", default: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_dd738e97d3"
     t.index ["university_id", "communication_website_id", "value"], name: "index_communication_website_agenda_period_years_unique", unique: true
   end
@@ -771,6 +789,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_d42c296af1", unique: true
     t.index ["about_id"], name: "index_communication_website_alert_localizations_on_about_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_419e31417f"
@@ -784,6 +803,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_communication_website_alerts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_alerts_on_university_id"
   end
@@ -932,6 +952,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "summary"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_7944779395", unique: true
     t.index ["about_id"], name: "idx_on_about_id_8bbb00c89f"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_3e7b95d239"
@@ -949,6 +970,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "updated_at", null: false
     t.uuid "created_by_id"
     t.string "migration_identifier"
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_jobboard_jobs_on_communication_website_id"
     t.index ["created_by_id"], name: "index_communication_website_jobboard_jobs_on_created_by_id"
     t.index ["university_id"], name: "index_communication_website_jobboard_jobs_on_university_id"
@@ -1088,6 +1110,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_44e0a2bf9b", unique: true
     t.index ["about_id"], name: "index_communication_website_page_localizations_on_about_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_64c4831480"
@@ -1110,6 +1133,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.string "migration_identifier"
     t.integer "position_in_tree"
     t.jsonb "design_options"
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
     t.index ["university_id"], name: "index_communication_website_pages_on_university_id"
@@ -1197,6 +1221,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.boolean "header_cta", default: false
     t.string "header_cta_label"
     t.string "header_cta_url"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_84c7b116b5", unique: true
     t.index ["about_id"], name: "idx_on_about_id_a668ef6090"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_e653b6273a"
@@ -1213,6 +1238,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "created_by_id"
     t.boolean "full_width", default: true
     t.string "bodyclass"
+    t.datetime "deleted_at"
     t.string "migration_identifier"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_aac12e3adb"
     t.index ["created_by_id"], name: "idx_on_created_by_id_7009ee99c6"
@@ -1230,8 +1256,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.boolean "is_programs_root", default: false
     t.boolean "is_taxonomy", default: false
     t.string "bodyclass"
-    t.string "migration_identifier"
     t.integer "position_in_tree"
+    t.string "migration_identifier"
     t.index ["communication_website_id"], name: "idx_communication_website_post_cats_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_post_categories_on_parent_id"
     t.index ["program_id"], name: "index_communication_website_post_categories_on_program_id"
@@ -1289,6 +1315,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.string "header_cta_label"
     t.string "header_cta_url"
     t.uuid "publication_job_id"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_57307f7184", unique: true
     t.index ["about_id"], name: "index_communication_website_post_localizations_on_about_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_f6354f61f0"
@@ -1306,6 +1333,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.boolean "full_width", default: false
     t.string "bodyclass"
     t.boolean "is_lasting", default: false
+    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_communication_website_posts_on_communication_website_id"
     t.index ["university_id"], name: "index_communication_website_posts_on_university_id"
   end
@@ -1365,8 +1393,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.string "deuxfleurs_access_key_id"
     t.string "deuxfleurs_secret_access_key"
     t.datetime "last_sync_at"
-    t.boolean "feature_alumni", default: false
     t.boolean "feature_jobboard", default: false
+    t.boolean "feature_alumni", default: false
     t.boolean "feature_alerts", default: false
     t.boolean "archive_content", default: false
     t.integer "years_before_archive_content", default: 3
@@ -1397,6 +1425,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_eb13d82b8d", unique: true
     t.index ["about_id"], name: "index_education_academic_year_localizations_on_about_id"
     t.index ["language_id"], name: "index_education_academic_year_localizations_on_language_id"
@@ -1408,6 +1437,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["university_id"], name: "index_education_academic_years_on_university_id"
   end
 
@@ -1425,6 +1455,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_a0a453655b", unique: true
     t.index ["about_id"], name: "index_education_cohort_localizations_on_about_id"
     t.index ["language_id"], name: "index_education_cohort_localizations_on_language_id"
@@ -1439,6 +1470,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "school_id", null: false
+    t.datetime "deleted_at"
     t.index ["academic_year_id"], name: "index_education_cohorts_on_academic_year_id"
     t.index ["program_id"], name: "index_education_cohorts_on_program_id"
     t.index ["school_id"], name: "index_education_cohorts_on_school_id"
@@ -1474,6 +1506,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.text "pricing_apprenticeship"
     t.text "accessibility"
     t.text "contacts"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_4afdfc320d", unique: true
     t.index ["about_id"], name: "index_education_diploma_localizations_on_about_id"
     t.index ["language_id"], name: "index_education_diploma_localizations_on_language_id"
@@ -1488,6 +1521,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.integer "ects"
     t.string "certification"
     t.integer "position", null: false
+    t.datetime "deleted_at"
     t.index ["university_id"], name: "index_education_diplomas_on_university_id"
   end
 
@@ -1565,6 +1599,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_9b56b45e58", unique: true
     t.index ["about_id"], name: "index_education_program_localizations_on_about_id"
     t.index ["language_id"], name: "index_education_program_localizations_on_language_id"
@@ -1583,6 +1618,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.boolean "apprenticeship"
     t.string "bodyclass"
     t.boolean "qualiopi_certified", default: false
+    t.datetime "deleted_at"
     t.index ["diploma_id"], name: "index_education_programs_on_diploma_id"
     t.index ["parent_id"], name: "index_education_programs_on_parent_id"
     t.index ["university_id"], name: "index_education_programs_on_university_id"
@@ -1617,6 +1653,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_2cadc1fe79", unique: true
     t.index ["about_id"], name: "index_education_school_localizations_on_about_id"
     t.index ["language_id"], name: "index_education_school_localizations_on_language_id"
@@ -1634,6 +1671,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "phone"
+    t.datetime "deleted_at"
     t.index ["university_id"], name: "index_education_schools_on_university_id"
   end
 
@@ -1809,6 +1847,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_c2c2f792ff", unique: true
     t.index ["about_id"], name: "index_research_journal_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_journal_localizations_on_language_id"
@@ -1823,6 +1862,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_ab294e2ab8", unique: true
     t.index ["about_id"], name: "index_research_journal_paper_kind_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_journal_paper_kind_localizations_on_language_id"
@@ -1834,6 +1874,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "journal_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["journal_id"], name: "index_research_journal_paper_kinds_on_journal_id"
     t.index ["university_id"], name: "index_research_journal_paper_kinds_on_university_id"
   end
@@ -1853,6 +1894,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_6a26cfcece", unique: true
     t.index ["about_id"], name: "index_research_journal_paper_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_journal_paper_localizations_on_language_id"
@@ -1873,6 +1915,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.date "received_at"
     t.date "accepted_at"
     t.string "doi"
+    t.datetime "deleted_at"
     t.index ["kind_id"], name: "index_research_journal_papers_on_kind_id"
     t.index ["research_journal_id"], name: "index_research_journal_papers_on_research_journal_id"
     t.index ["research_journal_volume_id"], name: "index_research_journal_papers_on_research_journal_volume_id"
@@ -1903,6 +1946,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_adf437eb06", unique: true
     t.index ["about_id"], name: "index_research_journal_volume_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_journal_volume_localizations_on_language_id"
@@ -1915,6 +1959,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["research_journal_id"], name: "index_research_journal_volumes_on_research_journal_id"
     t.index ["university_id"], name: "index_research_journal_volumes_on_university_id"
   end
@@ -1923,6 +1968,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["university_id"], name: "index_research_journals_on_university_id"
   end
 
@@ -1934,6 +1980,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["university_id"], name: "index_research_laboratories_on_university_id"
   end
 
@@ -1950,6 +1997,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["research_laboratory_id"], name: "index_research_laboratory_axes_on_research_laboratory_id"
     t.index ["university_id"], name: "index_research_laboratory_axes_on_university_id"
   end
@@ -1964,6 +2012,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_3895cd52f3", unique: true
     t.index ["about_id"], name: "index_research_laboratory_axis_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_laboratory_axis_localizations_on_language_id"
@@ -1980,6 +2029,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_a3deee8fec", unique: true
     t.index ["about_id"], name: "index_research_laboratory_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_laboratory_localizations_on_language_id"
@@ -2028,6 +2078,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.date "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["author_id"], name: "index_research_theses_on_author_id"
     t.index ["director_id"], name: "index_research_theses_on_director_id"
     t.index ["research_laboratory_id"], name: "index_research_theses_on_research_laboratory_id"
@@ -2042,6 +2093,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_f1054bd8a7", unique: true
     t.index ["about_id"], name: "index_research_thesis_localizations_on_about_id"
     t.index ["language_id"], name: "index_research_thesis_localizations_on_language_id"
@@ -2175,6 +2227,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.string "migration_identifier"
     t.boolean "published", default: false
     t.datetime "published_at"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_eb921fd47b", unique: true
     t.index ["about_id"], name: "index_university_organization_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_organization_localizations_on_language_id"
@@ -2199,6 +2252,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.string "migration_identifier"
     t.uuid "created_by_id"
     t.string "bodyclass"
+    t.datetime "deleted_at"
     t.index ["created_by_id"], name: "index_university_organizations_on_created_by_id"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
@@ -2235,6 +2289,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.integer "email_visibility", default: 0
     t.uuid "created_by_id"
     t.string "bodyclass"
+    t.datetime "deleted_at"
     t.index ["created_by_id"], name: "index_university_people_on_created_by_id"
     t.index ["university_id"], name: "index_university_people_on_university_id"
     t.index ["user_id"], name: "index_university_people_on_user_id"
@@ -2286,6 +2341,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_6610a91469", unique: true
     t.index ["about_id"], name: "index_university_person_experience_localizations_on_about_id"
     t.index ["language_id"], name: "idx_on_language_id_61a5fb5403"
@@ -2300,6 +2356,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.integer "to_year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["organization_id"], name: "index_university_person_experiences_on_organization_id"
     t.index ["person_id"], name: "index_university_person_experiences_on_person_id"
     t.index ["university_id"], name: "index_university_person_experiences_on_university_id"
@@ -2312,6 +2369,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_5991ad3c2d", unique: true
     t.index ["about_id"], name: "index_university_person_involvement_localizations_on_about_id"
     t.index ["language_id"], name: "idx_on_language_id_75d7367448"
@@ -2327,6 +2385,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["person_id"], name: "index_university_person_involvements_on_person_id"
     t.index ["target_type", "target_id"], name: "index_university_person_involvements_on_target"
     t.index ["university_id"], name: "index_university_person_involvements_on_university_id"
@@ -2352,6 +2411,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.datetime "updated_at", null: false
     t.text "featured_image_alt"
     t.text "featured_image_credit"
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_54757d0dad", unique: true
     t.index ["about_id"], name: "index_university_person_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_person_localizations_on_language_id"
@@ -2366,6 +2426,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_90a71d885a", unique: true
     t.index ["about_id"], name: "index_university_role_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_role_localizations_on_language_id"
@@ -2379,6 +2440,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_03_113005) do
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["target_type", "target_id"], name: "index_university_roles_on_target"
     t.index ["university_id"], name: "index_university_roles_on_university_id"
   end

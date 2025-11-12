@@ -3,6 +3,7 @@
 # Table name: research_journal_localizations
 #
 #  id               :uuid             not null, primary key
+#  deleted_at       :datetime
 #  issn             :string
 #  meta_description :text
 #  slug             :string
@@ -28,6 +29,8 @@
 #  fk_rails_c51f4f55df  (about_id => research_journals.id)
 #
 class Research::Journal::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include HasGitFiles
   include Initials

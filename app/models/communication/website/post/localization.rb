@@ -3,6 +3,7 @@
 # Table name: communication_website_post_localizations
 #
 #  id                       :uuid             not null, primary key
+#  deleted_at               :datetime
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean          default(FALSE)
@@ -43,6 +44,8 @@
 #  fk_rails_db7d7c515c  (university_id => universities.id)
 #
 class Communication::Website::Post::Localization < ApplicationRecord
+  acts_as_paranoid
+
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
   include AsLocalization

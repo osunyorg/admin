@@ -51,12 +51,12 @@
               <% end %>
 
               <% if block.template.option_summary && exhibition_l10n.summary.present? %>
-                <div class="exhibition-description">
-                  <p itemprop="description">
-                    <%= exhibition_l10n.summary %>
-                  </p>
+                <div class="exhibition-description" itemprop="description">
+                  <%= sanitize exhibition_l10n.summary %>
                   <% if block.template.layout == "large" %>
-                    <p class="more meta" aria-hidden="true"><%= t 'admin.communication.blocks.templates.exhibitions.layouts.large.more' %></p>
+                    <p class="more meta" aria-hidden="true">
+                      <%= t 'admin.communication.blocks.templates.exhibitions.layouts.large.more' %>
+                    </p>
                   <% end %>
                 </div>
               <% end %>

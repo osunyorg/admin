@@ -6,6 +6,7 @@
 #  accessibility          :text
 #  contacts               :text
 #  content                :text
+#  deleted_at             :datetime
 #  duration               :string
 #  evaluation             :text
 #  featured_image_alt     :string
@@ -53,6 +54,8 @@
 #  fk_rails_e375f2df91  (university_id => universities.id)
 #
 class Education::Program::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include AsLocalizedTree # ordered scope is overridden below
   include Contentful

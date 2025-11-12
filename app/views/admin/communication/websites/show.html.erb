@@ -25,42 +25,34 @@
     </p>
   <% end %>
 <% end %>
-<%
-number_of_panels = 0
-%>
 <div class="row gx-5">
   <% if @show_posts %>
-    <% number_of_panels += 1 %>
     <div class="col-xl-6">
     <%= render 'admin/communication/websites/show/posts'  %>
     </div>
   <% end %>
   <% if @show_events %>
-    <% number_of_panels += 1 %>
     <div class="col-xl-6">
       <%= render 'admin/communication/websites/show/events' %>
     </div>
   <% end %>
   <% if @show_exhibitions %>
-    <% number_of_panels += 1 %>
     <div class="col-xl-6">
       <%= render 'admin/communication/websites/show/exhibitions' %>
     </div>
   <% end %>
   <% if @show_projects %>
-    <% number_of_panels += 1 %>
     <div class="col-xl-6">
       <%= render 'admin/communication/websites/show/projects' %>
     </div>
   <% end %>
   <% if @show_jobs %>
-    <% number_of_panels += 1 %>
     <div class="col-xl-6">
       <%= render 'admin/communication/websites/show/jobs' %>
     </div>
   <% end %>
-  <div class="col-xl-<%= number_of_panels.even? ? 12 : 6 %>">
-    <%= render 'admin/communication/websites/show/pages', large: number_of_panels.even? if can?(:read, Communication::Website::Page) %>
+  <div class="col-xl-6">
+    <%= render 'admin/communication/websites/show/pages' if can?(:read, Communication::Website::Page) %>
   </div>
 </div>
 

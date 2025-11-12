@@ -514,8 +514,7 @@ en:
             published: Published
             published_status: Publication status
         pages:
-          as_list: See as a list
-          as_tree: Organize structure
+          as_list: List of pages
           delete_special_page_notice: Can't delete this page
           duplicate_special_page_notice: Can't duplicate this page
           full_width_status: Full width
