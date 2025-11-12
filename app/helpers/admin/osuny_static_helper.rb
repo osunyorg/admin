@@ -24,13 +24,17 @@ module Admin::OsunyStaticHelper
 
   def osuny_static_string(key, value, depth: 1)
     return if value.blank?
-    raw "#{key}: >-\n  #{prepare_text_for_static(value, depth: depth)}"
+    indentation = '  ' * (depth-1)
+    prepared = prepare_text_for_static(value)
+    raw "#{indentation}#{key}: >-\n#{indentation}  #{prepared}"
   end
 
-  def osuny_static_html(key, value)
+  def osuny_static_html(key, value, depth: 1)
     text = strip_tags(value.to_s)
     return if text.blank?
-    raw "#{key}: >-\n  #{prepare_html_for_static(value)}"
+    indentation = '  ' * (depth-1)
+    prepared = prepare_html_for_static(value)
+    raw "#{indentation}#{key}: >-\n#{indentation}  #{prepared}"
   end
 
 end

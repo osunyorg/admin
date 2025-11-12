@@ -8,12 +8,9 @@ breadcrumb_title = t('university.person.facets.researcher.publications', locale:
 <%= render 'admin/application/static/core', about: @l10n, forced_title: title %>
 <%= render 'admin/application/static/breadcrumbs', about: person_l10n, last_item: breadcrumb_title %>
 <%= render 'admin/application/static/design', about: person, l10n: @l10n, full_width: true, toc_offcanvas: true %>
-person: >-
-  <%= person_l10n.to_s %>
-first_name: >-
-  <%= person_l10n.first_name %>
-last_name: >-
-  <%= person_l10n.last_name %>
+<%= osuny_static_string 'person', person_l10n.to_s %>
+<%= osuny_static_string 'first_name', person_l10n.first_name %>
+<%= osuny_static_string 'last_name', person_l10n.last_name %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/meta_description/static', about: person_l10n %>
 <%= render 'admin/application/summary/static', about: person_l10n %>

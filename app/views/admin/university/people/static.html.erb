@@ -7,8 +7,7 @@ language = @l10n.language
 cache_key = [person, @l10n, @website&.id, version]
 cache cache_key do
 %>---
-linkTitle: >-
-  <%= @l10n.to_s_alphabetical %>
+<%= osuny_static_string 'linkTitle', @l10n.to_s_alphabetical %>
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
 <%= render 'admin/application/static/design',
@@ -19,9 +18,9 @@ linkTitle: >-
 <%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/summary/static', about: @l10n %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= osuny_static_string 'person', person_l10n.to_s %>
-<%= osuny_static_string 'first_name', person_l10n.first_name %>
-<%= osuny_static_string 'last_name', person_l10n.last_name %>
+<%= osuny_static_string 'person', @l10n.to_s %>
+<%= osuny_static_string 'first_name', @l10n.first_name %>
+<%= osuny_static_string 'last_name', @l10n.last_name %>
 <% 
 # Peut-on supprimer les contact details à la racine ? 
 # phone, email, twitter, linkedin, website
@@ -48,8 +47,7 @@ linkTitle: >-
 image:
   id: "<%= person.best_picture.blob.id %>"
   alt: ""
-  credit: >-
-    <%= prepare_html_for_static @l10n.picture_credit %>
+<%= osuny_static_html 'credit', @l10n.picture_credit, depth: 2 %>
 <% end %>
 roles:
 <% if @l10n.author.should_sync_to?(@website) %>
