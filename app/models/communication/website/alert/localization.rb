@@ -6,6 +6,7 @@
 #  cta                      :boolean          default(FALSE)
 #  cta_label                :string
 #  cta_url                  :string
+#  deleted_at               :datetime
 #  description              :text
 #  published                :boolean          default(FALSE)
 #  published_at             :datetime
