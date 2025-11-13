@@ -9,8 +9,8 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   def index
     @filtered = @people.filter_by(params[:filters], current_language)
-    @people = @people.at_lifecycle(params[:lifecycle], current_language)
-                     .ordered(current_language)
+    @people = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                       .ordered(current_language)
     @feature_nav = 'navigation/admin/university/people'
     respond_to do |format|
       format.html {
