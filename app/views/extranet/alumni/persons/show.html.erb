@@ -17,6 +17,7 @@
       </div>
     </div>
 
+    <%= render 'extranet/persons/taxonomies', person: @person %>
     <%= render 'extranet/alumni/persons/show/experiences', experiences: @experiences if @experiences.any? %>
     <%= render 'extranet/alumni/persons/show/cohorts', cohorts: @cohorts if @cohorts.any? %>
   </div>
