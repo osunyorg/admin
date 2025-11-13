@@ -49,7 +49,7 @@ module Communication::Block::WithTemplate
       agenda: :feature_agenda_name,
       projects: :feature_portfolio_name,
       jobs: :feature_jobboard_name
-    }
+    }.freeze
 
     # Used to purge images when unattaching them
     # template_blobs would be a better name, because there are files
@@ -67,7 +67,8 @@ module Communication::Block::WithTemplate
   end
 
   def template_name
-    template_name_can_have_override? ? template_name_in_website : default_template_name
+    template_name_can_have_override?  ? template_name_in_website
+                                      : default_template_name
   end
 
   def options
@@ -90,16 +91,17 @@ module Communication::Block::WithTemplate
 
   def template_name_in_website
     method = TEMPLATE_KINDS_WITH_NAME_OVERRIDE[template_kind.to_sym]
-    template_website.send(method, language)
+    template_website.public_send(method, language)
   end
 
+  # Denormalized website_id may not be set on the block
   def template_website
-    unless @template_website
+    return @template_website if defined?(@template_website)
+    @template_website = begin
       l10n = about
       object = l10n.try(:about)
-      @template_website = object.try(:website)
+      object.try(:website)
     end
-    @template_website
   end
 
   def default_template_name
