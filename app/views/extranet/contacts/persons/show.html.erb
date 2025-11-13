@@ -14,39 +14,41 @@
             <%= sanitize @l10n&.biography %>
           </div>
         <% end %>
-        <% if @current_experiences.any? %>
-          <div class="experiences mb-5">
-            <h3 class="mb-5"><%= t('extranet.contacts.persons.experiences') %></h3>
-            <% @current_experiences.each do |experience| %>
-              <%
-              experience_l10n = experience.best_localization_for(current_language)
-              organization_l10n = experience.organization.best_localization_for(current_language)
-              %>
-              <article class="experience mb-5 mb-md-4">
-                <div class="row gx-3">
-                  <div class="col-md-3">
-                    <% if organization_l10n.logo.attached? %>
-                      <%= kamifusen_tag organization_l10n.logo, width: 400, class: 'img-fluid',
-                        sizes: {
-                            '(max-width: 576px)': '400px',
-                            '(max-width: 991px)': '200px'
-                        } %>
-                    <% end %>
-                  </div>
-                  <div class="col-md-9 mt-4 mt-md-0">
-                    <%= link_to contacts_organization_path(experience.organization), class: 'stretched-link' do %>
-                      <p>
-                        <b><%= organization_l10n %></b><br>
-                        <span class="text-muted"><%= experience_l10n.description %></span>
-                      </p>
-                    <% end %>
-                  </div>
-              </article>
-            <% end %>
-          </div>
-        <% end %>
       </div>
     </div>
+    <%= render 'extranet/persons/taxonomies', person: @person %>
+
+    <% if @current_experiences.any? %>
+      <div class="experiences mt-4 mb-5">
+        <h3 class="mb-5"><%= t('extranet.contacts.persons.experiences') %></h3>
+        <% @current_experiences.each do |experience| %>
+          <%
+          experience_l10n = experience.best_localization_for(current_language)
+          organization_l10n = experience.organization.best_localization_for(current_language)
+          %>
+          <article class="experience mb-5 mb-md-4">
+            <div class="row gx-3">
+              <div class="col-md-3">
+                <% if organization_l10n.logo.attached? %>
+                  <%= kamifusen_tag organization_l10n.logo, width: 400, class: 'img-fluid',
+                    sizes: {
+                        '(max-width: 576px)': '400px',
+                        '(max-width: 991px)': '200px'
+                    } %>
+                <% end %>
+              </div>
+              <div class="col-md-9 mt-4 mt-md-0">
+                <%= link_to contacts_organization_path(experience.organization), class: 'stretched-link' do %>
+                  <p>
+                    <b><%= organization_l10n %></b><br>
+                    <span class="text-muted"><%= experience_l10n.description %></span>
+                  </p>
+                <% end %>
+              </div>
+          </article>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="offset-md-1 col-md-3 order-1 order-md-2 pt-5">
     <%= kamifusen_tag @person.best_picture, width: 400, class: 'img-fluid person__portrait' if @person.best_picture.attached? %>
