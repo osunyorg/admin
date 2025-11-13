@@ -185,7 +185,7 @@ fr:
                 label: Notes
                 placeholder: Entrer les notes
               text:
-                label: Légende de l'image
+                label: Texte
                 placeholder: Entrer le texte
             layouts:
               accent_background:
