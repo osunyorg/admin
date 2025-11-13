@@ -185,7 +185,7 @@ en:
                 label: Notes
                 placeholder: Enter notes
               text:
-                label: Image label
+                label: Text
                 placeholder: Enter text
             layouts:
               accent_background:
