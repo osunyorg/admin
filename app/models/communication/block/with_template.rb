@@ -90,8 +90,8 @@ module Communication::Block::WithTemplate
   end
 
   def template_name_in_website
-    method = TEMPLATE_KINDS_WITH_NAME_OVERRIDE[template_kind.to_sym]
-    template_website.public_send(method, language)
+    method_name = TEMPLATE_KINDS_WITH_NAME_OVERRIDE[template_kind.to_sym]
+    template_website.public_send(method_name, language)
   end
 
   # Denormalized website_id may not be set on the block
