@@ -6,7 +6,7 @@
     <%= link_to t('server_admin.emergency_messages.deliver'), 
                 [:deliver, :server, @emergency_message], 
                 method: :post,
-                data: { confirm: t('please_confirm') },
+                data: { confirm: t('please_confirm.generic') },
                 class: button_classes %>
   <% end %>
 <% end %>
