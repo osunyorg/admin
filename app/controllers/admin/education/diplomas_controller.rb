@@ -9,7 +9,7 @@ class Admin::Education::DiplomasController < Admin::Education::ApplicationContro
 
   def index
     @filtered = @diplomas
-    @diplomas = @diplomas.at_lifecycle(params[:lifecycle], current_language)
+    @diplomas = @filtered.at_lifecycle(params[:lifecycle], current_language)
                          .ordered
     breadcrumb
   end

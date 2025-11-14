@@ -392,6 +392,7 @@ en:
       reset: Reset
       submit: Search and filter
     title: Search and filter
+    trash_warning: Elements in trash will be ignored
   folder:
     close: Close folder
     empty: Folder is empty
@@ -482,7 +483,10 @@ en:
   move: Move
   open: Open
   organize: Organize
-  please_confirm: Are you sure?
+  please_confirm:
+    deletion: Are you sure you want to delete?
+    duplication: Are you sure you want to duplicate?
+    generic: Are you sure?
   preview:
     button: Preview
     desktop: Desktop

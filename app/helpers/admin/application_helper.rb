@@ -24,7 +24,7 @@ module Admin::ApplicationHelper
     link_to options.delete(:label) || t('delete'),
             polymorphic_url_param(object, **options),
             method: :delete,
-            data: { confirm: options.delete(:confirm_message) || t('please_confirm') },
+            data: { confirm: options.delete(:confirm_message) || t('please_confirm.deletion') },
             class: html_classes
   end
 
@@ -45,7 +45,7 @@ module Admin::ApplicationHelper
     link_to t('admin.duplicate'),
             [:duplicate, :admin, object],
             method: :post,
-            data: { confirm: t('please_confirm') },
+            data: { confirm: t('please_confirm.duplication') },
             class: html_classes
   end
 
