@@ -59,16 +59,14 @@ module Importers
     end
 
     def build_person
-      if @email.present?
-        person = find_person_with_email
-      elsif @first_name.present? && @last_name.present?
-        person = find_person_with_name_in_current_language
-        person ||= find_person_with_name_in_another_language
-      else
-        # No mail, no name, nothing
-        return
-      end
+      # Last name is mandatory
+      return unless @last_name.present?
+
+      person = find_person_with_email if @email.present?
+      person ||= find_person_with_name_in_current_language
+      person ||= find_person_with_name_in_another_language
       person ||= @university.people.new
+
       localization_id = person.localizations.find_by(language_id: @language.id)&.id
       person.gender = gender
       person.birthdate = @birth
