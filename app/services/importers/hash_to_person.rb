@@ -135,14 +135,36 @@ module Importers
 
     def categories
       @category_names.map do |category_name|
-        category_localization = University::Person::Category::Localization.find_by(university_id: @university.id, language_id: @language.id, name: category_name)
-        if category_localization.present?
-          category_localization.about
-        else
-          category = @university.person_categories.create(localizations_attributes: [{ name: category_name, language_id: @language.id }])
-          category
-        end
+        category = find_category_with_name_in_current_language(category_name)
+        category ||= find_category_with_name_in_another_language(category_name)
+        category ||= @university.person_categories.create(
+          localizations_attributes: [
+            { name: category_name, language_id: @language.id }
+          ]
+        )
+        category
       end
+    end
+
+    def find_category_with_name_in_current_language(category_name)
+      @university.person_categories
+        .joins(:localizations)
+        .where(university_person_category_localizations: {
+          language_id: @language.id, name: category_name
+        })
+        .first
+    end
+
+    def find_category_with_name_in_another_language(category_name)
+      @university.person_categories
+        .joins(:localizations)
+        .where.not(university_person_category_localizations: {
+          language_id: @language.id
+        })
+        .where(university_person_category_localizations: {
+          name: category_name
+        })
+        .first
     end
 
     def add_picture_if_possible!(person)
