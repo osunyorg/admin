@@ -9,6 +9,9 @@ RSpec.describe 'Communication::Website::Agenda::Category' do
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
+      parameter name: :page_num, in: :query, schema: { type: :integer, default: 1 }, description: 'Page number', required: false
+      parameter name: :per_page, in: :query, schema: { type: :integer, default: 25, maximum: 100 }, description: 'Number of items per page', required: false
+
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
 
