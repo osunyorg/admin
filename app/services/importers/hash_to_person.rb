@@ -135,8 +135,8 @@ module Importers
 
     def categories
       @category_names.map do |category_name|
-        category = find_category_with_name_in_current_language
-        category ||= find_category_with_name_in_another_language
+        category = find_category_with_name_in_current_language(category_name)
+        category ||= find_category_with_name_in_another_language(category_name)
         category ||= @university.person_categories.create(
           localizations_attributes: [
             { name: category_name, language_id: @language.id }
@@ -146,23 +146,23 @@ module Importers
       end
     end
 
-    def find_category_with_name_in_current_language
+    def find_category_with_name_in_current_language(category_name)
       @university.person_categories
         .joins(:localizations)
         .where(university_person_category_localizations: {
-          language_id: @language.id, name: @name
+          language_id: @language.id, name: category_name
         })
         .first
     end
 
-    def find_category_with_name_in_another_language
+    def find_category_with_name_in_another_language(category_name)
       @university.person_categories
         .joins(:localizations)
         .where.not(university_person_category_localizations: {
           language_id: @language.id
         })
         .where(university_person_category_localizations: {
-          name: @name
+          name: category_name
         })
         .first
     end
