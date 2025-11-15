@@ -15,8 +15,7 @@ number: <%= volume.number %>
 <%= osuny_static_text 'issn', issn %>
 <%= osuny_static_text 'keywords', @l10n.keywords %>
 date: "<%= @l10n.published_at.iso8601 %>"
-text: >-
-  <%= prepare_html_for_static @l10n.text %>
+<%= osuny_static_html 'text', @l10n.text %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= osuny_static_text 'meta_description', @l10n.meta_description %>
 <%= osuny_static_html 'summary', @l10n.summary %>

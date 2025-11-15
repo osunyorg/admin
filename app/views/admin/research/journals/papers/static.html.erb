@@ -60,8 +60,7 @@ researchers:
 authors_list: "<%= prepare_text_for_static @l10n.authors_list %>"
 <%= osuny_static_text 'meta_description', @l10n.meta_description %>
 <%= osuny_static_html 'summary', @l10n.summary %>
-abstract: >-
-  <%= prepare_text_for_static @l10n.abstract %>
+<%= osuny_static_text 'abstract', @l10n.abstract %>
 citations:
   - label: "APA"
     content: >-
