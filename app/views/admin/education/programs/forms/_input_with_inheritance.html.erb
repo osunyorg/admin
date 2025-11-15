@@ -13,6 +13,7 @@ id = "#{property}Collapse"
   <label  class="form-label summernote optional">
     <%= Education::Program::Localization.human_attribute_name(property) %>
   </label>
+  <%= sanitize best_prop_value %>
   <p class="small text-muted mt-2">
     <%= t 'admin.inheritance.sentence_html',
           link: link_to(
@@ -21,7 +22,6 @@ id = "#{property}Collapse"
             target: :_blank
           ) %>
   </p>
-  <%= sanitize best_prop_value %>
   <div class="accordion mb-3">
     <div class="accordion-item">
       <a  href="#<%= id %>"
