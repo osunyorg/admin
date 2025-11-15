@@ -148,6 +148,7 @@ en:
       switch_to: switch to %{choices}
     infos: Informations
     inheritance:
+      override: Type another text
       sentence_html: Value inherited from %{link}
       sentence_without_link: Value inherited
       status: Inherited value
