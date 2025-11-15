@@ -10,6 +10,18 @@ id = "#{property}Collapse"
   best_prop_source_about = best_prop_source.about
   best_prop_source_language = best_prop_source.language
   %>
+  <label  class="form-label summernote optional">
+    <%= Education::Program::Localization.human_attribute_name(property) %>
+  </label>
+  <%= sanitize best_prop_value %>
+  <p class="small text-muted mt-2">
+    <%= t 'admin.inheritance.sentence_html',
+          link: link_to(
+            best_prop_source,
+            [:admin, best_prop_source_about, { lang: best_prop_source_language }],
+            target: :_blank
+          ) %>
+  </p>
   <div class="accordion mb-3">
     <div class="accordion-item">
       <a  href="#<%= id %>"
@@ -17,8 +29,7 @@ id = "#{property}Collapse"
           data-bs-toggle="collapse"
           aria-expanded="false"
           aria-controls="<%= id %>">
-        <%= Education::Program::Localization.human_attribute_name(property) %>
-        (<%= t 'admin.inheritance.status' %>)
+        <%= t 'admin.inheritance.override' %>
       </a>
     </div>
     <div class="collapse" id="<%= id %>">
@@ -29,17 +40,6 @@ id = "#{property}Collapse"
                     data: { 'summernote-config' => 'mini-list' }
                   }
                    %>
-      <div class="bg-light p-2 mt-n2">
-        <p class="small text-muted mt-2 mb-0">
-          <%= t 'admin.inheritance.sentence_html',
-                link: link_to(
-                  best_prop_source,
-                  [:admin, best_prop_source_about, { lang: best_prop_source_language }],
-                  target: :_blank
-                ) %>
-        </p>
-        <%= sanitize best_prop_value %>
-      </div>
     </div>
   </div>
 <% else %>
