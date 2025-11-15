@@ -17,10 +17,10 @@ cache cache_key do
             full_width: true,
             toc_offcanvas: true %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/images/shared/static', about: @l10n %>
-<%= render 'admin/application/summary/static', about: @l10n %>
+<%= osuny_static_text 'meta_description', @l10n.meta_description %>
+<%= osuny_static_html 'summary', @l10n.summary %>
 <%= render 'admin/application/connections/backlinks', about: @l10n %>
 <%= osuny_static_text 'long_name', @about.long_name %>
 <%= osuny_static_text 'siren', organization.siren %>

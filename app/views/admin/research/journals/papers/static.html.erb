@@ -52,15 +52,14 @@ dates:
 <% if @l10n.pdf.attached? %>
 pdf: "<%= @l10n.pdf.blob_id %>"
 <% end %>
-keywords: >-
-  <%= prepare_text_for_static @l10n.keywords %>
+<%= osuny_static_text 'keywords', @l10n.keywords %>
 researchers:
 <% @l10n.people_l10n.each do |person_l10n| %>
   - "<%= person_l10n.slug %>"
 <% end %>
 authors_list: "<%= prepare_text_for_static @l10n.authors_list %>"
-<%= render 'admin/application/meta_description/static', about: @l10n %>
-<%= render 'admin/application/summary/static', about: @l10n %>
+<%= osuny_static_text 'meta_description', @l10n.meta_description %>
+<%= osuny_static_html 'summary', @l10n.summary %>
 abstract: >-
   <%= prepare_text_for_static @l10n.abstract %>
 citations:

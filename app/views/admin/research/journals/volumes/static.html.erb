@@ -12,14 +12,13 @@ issn = volume.journal.best_localization_for(language).issn
             toc_offcanvas: false,
             toc_present: false %>
 number: <%= volume.number %>
-issn: "<%= issn %>"
-keywords: >-
-  <%= @l10n.keywords %>
+<%= osuny_static_text 'issn', issn %>
+<%= osuny_static_text 'keywords', @l10n.keywords %>
 date: "<%= @l10n.published_at.iso8601 %>"
 text: >-
   <%= prepare_html_for_static @l10n.text %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
-<%= render 'admin/application/meta_description/static', about: @l10n %>
-<%= render 'admin/application/summary/static', about: @l10n %>
+<%= osuny_static_text 'meta_description', @l10n.meta_description %>
+<%= osuny_static_html 'summary', @l10n.summary %>
 ---
 <%= prepare_html_for_static @l10n.text %>

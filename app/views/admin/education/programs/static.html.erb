@@ -24,13 +24,10 @@ administrator_involvements = program.involvements_through_roles
 <% if @l10n.downloadable_summary.attached? %>
 downloadable_summary: <%= @l10n.downloadable_summary.blob_id %>
 <% end %>
-bodyclass: <%= program.bodyclass %>
-website_url: >-
-  <%= @l10n.url %>
-registration_url: >-
-  <%= @l10n.registration_url %>
-<%= render 'admin/application/meta_description/static', about: @l10n %>
-<%= render 'admin/application/summary/static', about: @l10n %>
+<%= osuny_static_text 'website_url', @l10n.url %>
+<%= osuny_static_text 'registration_url', @l10n.registration_url %>
+<%= osuny_static_text 'meta_description', @l10n.meta_description %>
+<%= osuny_static_html 'summary', @l10n.summary %>
 <% if @l10n.parent
   hugo = @l10n.parent.hugo(@website)
   if hugo.file.present?

@@ -20,6 +20,7 @@ end
 <%= osuny_static_text 'title', title %>
 <%= osuny_static_text 'breadcrumb_title', about.try(:best_breadcrumb_title) %>
 <%= osuny_static_text 'subtitle', about.try(:subtitle) %>
+<%= osuny_static_html 'header_text', about.try(:header_text) %>
 <%
 #############
 # Body classes

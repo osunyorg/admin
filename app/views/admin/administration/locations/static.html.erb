@@ -11,7 +11,7 @@ language = @l10n.language
             toc_offcanvas: true %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
-<%= render 'admin/application/summary/static', about: @l10n %>
+<%= osuny_static_html 'summary', @l10n.summary %>
 <%= render 'admin/application/static/hugo/collection',
             key: :programs,
             collection: location.programs.ordered(language),
