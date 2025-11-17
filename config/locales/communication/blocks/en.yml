@@ -380,7 +380,7 @@ en:
                   label: Credit
                   placeholder: Enter image's credit here
                 text:
-                  label: Text
+                  label: Image label
                   placeholder: Enter text
               move_images: Move images below to define the order
               remove_image: Remove image
@@ -400,7 +400,7 @@ en:
             description: An image with its alternative description, a credit and a text.
             edit:
               text:
-                label: Text
+                label: Image label
                 placeholder: Enter text
           jobs:
             description: A list of job offers.

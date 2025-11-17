@@ -392,6 +392,7 @@ fr:
       reset: Réinitialiser la recherche
       submit: Chercher
     title: Rechercher et filtrer
+    trash_warning: Les éléments dans la corbeille seront ignorés
   folder:
     close: Fermer le dossier
     empty: Le dossier est vide
@@ -482,7 +483,10 @@ fr:
   move: Déplacer
   open: Ouvrir
   organize: Organiser
-  please_confirm: Est-ce que vous confirmez ?
+  please_confirm:
+    deletion: Est-ce que vous confirmez la suppression ?
+    duplication: Est-ce que vous confirmez la duplication ?
+    generic: Est-ce que vous confirmez ?
   preview:
     button: Prévisualiser
     desktop: Ordinateur
