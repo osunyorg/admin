@@ -6,10 +6,7 @@ class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::O
   before_action :ensure_same_migration_identifier, only: :update
 
   def index
-    @categories =  website.agenda_categories
-                          .includes(:localizations)
-                          .page(page_num_param)
-                          .per(per_page_param)
+    @categories = paginate(website.agenda_categories.includes(:localizations))
   end
 
   def show
