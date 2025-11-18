@@ -273,6 +273,7 @@ fr:
         path: Chemin
         published: Publié ?
         slug: Identifiant
+        subtitle: Sous-titre
         text: Texte principal de la page
         title: Titre
       communication/website/permalink:

@@ -13,6 +13,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
       <div class="col-md-8">
         <%= osuny_panel t('content') do %>
           <%= lf.input :title, input_html: { data: { translatable: true } } %>
+          <%= lf.input :subtitle, input_html: { data: { translatable: true } } %>
           <%= lf.input :breadcrumb_title, input_html: { data: { translatable: true } } %>
           <%= render 'admin/application/summary/form', f: lf, about: l10n %>
           <%= lf.input :header_text, as: :string, input_html: { data: { translatable: true } } %>

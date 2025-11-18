@@ -3,12 +3,18 @@
 # Table name: university_organization_category_localizations
 #
 #  id                    :uuid             not null, primary key
+#  breadcrumb_title      :string
 #  featured_image_alt    :text
 #  featured_image_credit :text
+#  header_cta            :boolean          default(FALSE)
+#  header_cta_label      :string
+#  header_cta_url        :string
+#  header_text           :text
 #  meta_description      :text
 #  migration_identifier  :string
 #  name                  :string
 #  slug                  :string           indexed
+#  subtitle              :string
 #  summary               :text
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null

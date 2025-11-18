@@ -169,7 +169,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
           .permit(
             :communication_website_id, :bodyclass, :full_width, :parent_id, category_ids: [],
             localizations_attributes: [
-              :id, :title, :breadcrumb_title, :meta_description, :summary, :header_text, :text, :slug, :published,
+              :id, :title, :subtitle, :breadcrumb_title, :meta_description, :summary, :header_text, :text, :slug, :published,
               :header_cta, :header_cta_label, :header_cta_url,
               :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
               :shared_image, :shared_image_delete, :shared_image_infos,

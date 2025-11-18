@@ -1,20 +1,38 @@
 <div class="row">
-  <div class="col-lg-4">
-    <%= lf.input :name, label: t('category.name'), input_html: { id: 'category_name' } %>
-    <%= render  'admin/application/slug/form',
-                f: lf,
-                source: '#category_name' %>
-    <%= f.association :parent,
-                      collection: osuny_collection_tree(
-                        collection,
-                        except: category,
-                        localized: true
-                      ) unless category.is_taxonomy %>
-    <%= f.input :is_taxonomy, label: t('category.is_taxonomy') if category.possible_taxonomy? %>
-  </div>
-  <div class="col-lg-8">
-    <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+  <div class="col-md-8">
+    <%= osuny_panel t('content') do %>
+      <%= lf.input  :name,
+                    label: t('category.name'),
+                    input_html: { data: { translatable: true } } %>
+      <%= lf.input  :subtitle,
+                    label: t('category.subtitle'),
+                    input_html: { data: { translatable: true } } %>
+      <%= lf.input  :breadcrumb_title,
+                    label: t('category.breadcrumb_title'),
+                    input_html: { data: { translatable: true } } %>
+      <%= render 'admin/application/summary/form', f: lf, about: l10n %>
+      <%= lf.input  :header_text,
+                    label: t('category.header_text'),
+                    as: :string,
+                    input_html: { data: { translatable: true } } %>
+      <%= render 'admin/application/header_cta/form', f: lf %>
+    <% end %>
     <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
-    <%= f.input :bodyclass, label: t('admin.bodyclass') %>
+  </div>
+  <div class="col-md-4">
+    <%= osuny_panel t('metadata') do %>
+      <%= render  'admin/application/slug/form',
+                  f: lf,
+                  source: '#category_name' %>
+      <%= f.association :parent,
+                        collection: osuny_collection_tree(
+                          collection,
+                          except: category,
+                          localized: true
+                        ) unless category.is_taxonomy %>
+      <%= f.input :is_taxonomy, label: t('category.is_taxonomy') if category.possible_taxonomy? %>
+      <%= f.input :bodyclass, label: t('admin.bodyclass') %>
+    <% end %>
+    <%= render 'admin/application/images/shared/form', f: lf, about: @l10n %>
   </div>
 </div>
