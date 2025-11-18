@@ -148,6 +148,7 @@ fr:
       switch_to: basculer en %{choices}
     infos: Informations
     inheritance:
+      override: Entrer un autre texte
       sentence_html: Valeur héritée de %{link}
       sentence_without_link: Valeur héritée
       status: Valeur héritée
