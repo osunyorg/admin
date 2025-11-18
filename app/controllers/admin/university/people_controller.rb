@@ -114,6 +114,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       research_laboratory_ids: [], category_ids: [],
       localizations_attributes: [
         :id, :slug, :first_name, :last_name,
+        :published,
         :meta_description, :summary, :biography,
         :picture_credit,
         :url, :linkedin, :twitter, :mastodon,
