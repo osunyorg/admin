@@ -26,8 +26,9 @@
       <% end %>
     <% end if @person.best_picture.attached? %>
 
-    <%= render 'admin/application/categories/widget/show', about: @person %>
+    <%= render 'admin/application/publication/show', about: @l10n %>
     <%= render 'admin/application/l10n/widget', about: @person, l10n: @l10n %>
+    <%= render 'admin/application/categories/widget/show', about: @person %>
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
   <div class="col-md-8">
