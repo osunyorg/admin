@@ -68,6 +68,8 @@ class Communication::Website::Post::Localization < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
+  alias :post :about
+
   has_summernote :summary
 
   validates :title, presence: true
@@ -80,7 +82,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   }
 
   def should_sync_to?(website)
-    website.id == communication_website_id &&
+    post.allowed_in?(website) &&
     website.active_language_ids.include?(language_id) &&
     published?
   end

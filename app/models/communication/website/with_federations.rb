@@ -34,10 +34,16 @@ module Communication::Website::WithFederations
               through: :content_federations_as_destination,
               source: :about,
               source_type: "Communication::Website::Agenda::Exhibition"
+
+    has_many  :federated_communication_website_posts,
+              through: :content_federations_as_destination,
+              source: :about,
+              source_type: "Communication::Website::Post"
   end
 
   def federated_objects
-    federated_communication_website_agenda_events + 
-    federated_communication_website_agenda_exhibitions
+    federated_communication_website_agenda_events +
+    federated_communication_website_agenda_exhibitions +
+    federated_communication_website_posts
   end
 end
