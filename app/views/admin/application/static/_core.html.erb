@@ -17,23 +17,17 @@ end
 # Title and subtitle
 #############
 %>
-title: >-
-  <%= prepare_text_for_static title %>
-<% if show_subtitle %>
-subtitle: >-
-  <%= prepare_text_for_static about.subtitle %>
-<% end %>
+<%= osuny_static_text 'title', title %>
+<%= osuny_static_text 'breadcrumb_title', about.try(:best_breadcrumb_title) %>
+<%= osuny_static_text 'subtitle', about.try(:subtitle) %>
+<%= osuny_static_html 'header_text', about.try(:header_text) %>
 <%
 #############
 # Body classes
 #############
 bodyclass_object = about.respond_to?(:about) ? about.about : about
-if bodyclass_object.respond_to?(:best_bodyclass) %>
-bodyclass: >-
-  <%= bodyclass_object.best_bodyclass %>
-<%
-end
 %>
+<%= osuny_static_text 'bodyclass', bodyclass_object.try(:best_bodyclass) %>
 <%
 #############
 # Permalinks
@@ -84,21 +78,16 @@ search:
   <% if about.respond_to?(:about_id) %>
   about_id: "<%= about.about_id %>"
   <% end %>
+<% if hugo %>
   url: "<%= hugo.permalink %>"
+<% end %>
   kind: "<%= about.class.model_name %>"
   <% if about.respond_to?(:language) && about.language.present? %>
   lang: "<%= about.language.iso_code %>"
   <% end %>
-  title: >-
-    <%= prepare_text_for_static search_title %>
-  <% if about.respond_to?(:summary) %>
-  summary: >-
-    <%= prepare_html_for_static about.summary %>
-  <% end %>
-  <% if about.respond_to?(:contents_full_text) %>
-  body: >-
-    <%= prepare_html_for_static simple_format(about.contents_full_text) %>
-  <% end %>
+<%= osuny_static_text 'title', search_title, depth: 2 %>
+<%= osuny_static_html 'summary', about.try(:summary), depth: 2 %>
+<%= osuny_static_html 'body', simple_format(about.contents_full_text), depth: 2 if about.respond_to?(:contents_full_text) %>
 <%
 #############
 # Federation
@@ -112,8 +101,7 @@ federation:
 <% if canonical_hugo.present? %>
   canonical_url: <%= "#{canonical_website.url}#{canonical_hugo.permalink}" %>
   website:
-    name: >-
-      <%= prepare_text_for_static canonical_website.to_s_in(about.language) if about.respond_to?(:language) %>
+<%= osuny_static_text 'name', canonical_website.to_s_in(about.language), depth: 3 if about.respond_to?(:language) %>
     url: "<%= canonical_website.url %>"
   hugo:
     permalink: "<%= canonical_hugo.permalink %>"
