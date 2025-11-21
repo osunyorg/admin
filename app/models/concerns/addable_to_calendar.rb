@@ -2,7 +2,8 @@ module AddableToCalendar
   extend ActiveSupport::Concern
 
   included do
-    before_save :set_add_to_calendar_urls
+    # Add condition to prevent double-setting
+    before_save :set_add_to_calendar_urls, unless: :add_to_calendar_urls_changed?
   end
 
   def cal
@@ -35,6 +36,11 @@ module AddableToCalendar
 
   def cal_ical_url
     add_to_calendar_urls['ical']
+  end
+
+  def update_add_to_calendar_urls!
+    set_add_to_calendar_urls
+    save
   end
 
   protected
