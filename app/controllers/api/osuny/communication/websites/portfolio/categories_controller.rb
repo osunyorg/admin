@@ -6,7 +6,7 @@ class Api::Osuny::Communication::Websites::Portfolio::CategoriesController < Api
   before_action :ensure_same_migration_identifier, only: :update
 
   def index
-    @categories = website.portfolio_categories.includes(:localizations)
+    @categories = paginate(website.portfolio_categories.includes(:localizations))
   end
 
   def show
