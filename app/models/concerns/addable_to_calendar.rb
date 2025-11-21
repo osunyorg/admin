@@ -46,6 +46,8 @@ module AddableToCalendar
   protected
 
   def set_add_to_calendar_urls
+    # Ensure the permalink is up to date
+    manage_permalink_in_website(website)
     self.add_to_calendar_urls = {
       'google' => cal.google_url,
       'yahoo' => cal.yahoo_url,
