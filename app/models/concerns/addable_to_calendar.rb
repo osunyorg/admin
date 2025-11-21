@@ -2,7 +2,8 @@ module AddableToCalendar
   extend ActiveSupport::Concern
 
   included do
-    before_save :set_add_to_calendar_urls
+    # Add condition to prevent double-setting
+    before_save :set_add_to_calendar_urls, unless: :add_to_calendar_urls_changed?
   end
 
   def cal
@@ -37,9 +38,16 @@ module AddableToCalendar
     add_to_calendar_urls['ical']
   end
 
+  def update_add_to_calendar_urls!
+    set_add_to_calendar_urls
+    save
+  end
+
   protected
 
   def set_add_to_calendar_urls
+    # Ensure the permalink is up to date
+    manage_permalink_in_website(website)
     self.add_to_calendar_urls = {
       'google' => cal.google_url,
       'yahoo' => cal.yahoo_url,
