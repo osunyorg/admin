@@ -2,7 +2,6 @@
 size = large ? 600 : 140
 classes ||= ''
 image_class = 'img-fluid'
-quality = 50
 content_type = ''
 if image && image.attached?
   content_type = image.blob.content_type
@@ -19,7 +18,7 @@ end
                       width: size,
                       height: size,
                       crop: cropped,
-                      quality: quality,
+                      quality: 50,
                       class: image_class %>
   <% else %>
     <span class="osuny__thumbnail__initials">
