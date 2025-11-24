@@ -61,17 +61,11 @@ class Osuny::Media::Resizer
   end
 
   def transformations
-    # Default orientation
-    transformations = { :'auto-orient' => true }
+    transformations = {}
     # Handle rotation
     transformations[:rotate] = rotation if rotation.present?
     # Handle cropping
-    transformations[:crop] = "#{width}x#{height}+#{left}+#{top}"
-    # Finalize by repaging
-    transformations.merge!({
-      repage: true,
-      :'+' => true
-    })
+    transformations[:crop] = [left, top, width, height]
     transformations
   end
 end
