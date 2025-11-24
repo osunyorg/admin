@@ -7,8 +7,10 @@ module Api::Osuny::ApplicationController::WithPagination
   protected
 
   def paginate(relation)
-    relation.page(page_num_param)
-            .per(per_page_param)
+    paginated_relation = relation.page(page_num_param).per(per_page_param)
+    response.set_header('X-Total-Count', paginated_relation.total_count.to_s)
+    response.set_header('X-Total-Pages', paginated_relation.total_pages.to_s)
+    paginated_relation
   end
 
   def page_num_param
