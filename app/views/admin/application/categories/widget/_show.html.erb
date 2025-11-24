@@ -4,15 +4,18 @@ categories_in_university = categories_class.where(university: current_university
 taxonomies = categories_in_university.taxonomies.ordered
 free_categories = categories_in_university.free
 free_categories_in_use = about.categories.merge(free_categories)
+columns ||= 1
+classes = "col-lg-#{12/columns}"
 # TODO manage child free categories
 %>
+<div class="row">
 <% 
 # First, taxonomies
 taxonomies.each do |taxonomy|
   taxons_in_use = about.categories.merge(taxonomy.children)
   next if taxons_in_use.none?
   %>
-  <div class="mb-4">
+  <div class="<%= classes %> mb-4">
     <%= osuny_label taxonomy.to_s_in(current_language) %>
     <ul class="list-unstyled">
       <% taxons_in_use.each do |category| %>
@@ -24,7 +27,7 @@ taxonomies.each do |taxonomy|
 <% 
 # Then, free categories
 if free_categories_in_use.any? %>
-  <div class="mb-4">
+  <div class="<%= classes %> mb-4">
     <%= osuny_label t('category.title') %>
     <ul class="list-unstyled">
       <% free_categories_in_use.each do |category| %>
@@ -33,3 +36,4 @@ if free_categories_in_use.any? %>
     </ul>
   </div>
 <% end %>
+</div>
