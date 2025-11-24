@@ -369,7 +369,7 @@ GEM
       bigdecimal (~> 3.1)
     jwt (3.1.2)
       base64
-    kamifusen (1.13.1)
+    kamifusen (1.13.2)
       image_processing
       rails
     kaminari (1.2.2)
