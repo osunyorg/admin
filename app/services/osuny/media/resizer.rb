@@ -18,6 +18,7 @@ class Osuny::Media::Resizer
 
   protected
 
+  # TODO ImageProcessing: Verify if compatible with Vips
   def resized_blob
     @resized_blob ||= begin
       if untouched?
@@ -53,7 +54,7 @@ class Osuny::Media::Resizer
 
   def untouched?
     rotation == 0 &&
-    left == 0 && 
+    left == 0 &&
     top == 0 &&
     width == blob.metadata.dig(:width) &&
     height == blob.metadata.dig(:height)
