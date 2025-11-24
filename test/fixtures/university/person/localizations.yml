@@ -6,6 +6,9 @@ alumnus_fr:
   about: alumnus
   language: fr
   university: default_university
+  published: true
+  published_at: 2024-07-01 00:00:00
+
 
 olivia_fr:
   first_name: Olivia
@@ -15,6 +18,9 @@ olivia_fr:
   about_id: 53cbac40-e430-585a-965c-a7412a92f35a
   language: fr
   university: default_university
+  published: true
+  published_at: 2024-07-01 00:00:00
+
 
 pa_fr:
   first_name: Pierre-André
@@ -24,6 +30,9 @@ pa_fr:
   about: pa
   language: fr
   university: default_university
+  published: true
+  published_at: 2024-07-01 00:00:00
+
 
 arnaud_fr:
   first_name: Arnaud
@@ -33,3 +42,5 @@ arnaud_fr:
   about: arnaud
   language: fr
   university: default_university
+  published: true
+  published_at: 2024-07-01 00:00:00
