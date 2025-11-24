@@ -13,7 +13,7 @@ end
             osuny__thumbnail--<%= cropped ? 'cropped' : 'uncropped' %>
             osuny__thumbnail--<%= content_type.parameterize.underscore %>
             <%= classes %>">
-  <% if image.attached? && image.variable? %>
+  <% if image && image.attached? && image.variable? %>
     <%= kamifusen_tag image,
                       width: size,
                       height: size,
