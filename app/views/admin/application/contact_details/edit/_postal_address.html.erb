@@ -24,7 +24,24 @@
                 label: t('contact_details.postal_address.country.label'),
                 hint: t('contact_details.postal_address.country.hint'),
                 input_html: { class: 'form-select' } %>
-
+    </div>
+  </div>
+  <div class="mb-3">
+    <%= osuny_label t('contact_details.postal_address.geolocation_failed.label') %>
+    <div class="form-text">
+    <%= t('contact_details.postal_address.geolocation_failed.hint') %>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= f.input :latitude,
+                    label: t('contact_details.postal_address.latitude.label'),
+                    hint: t('contact_details.postal_address.latitude.hint') %>
+      </div>
+      <div class="col-lg-6">
+        <%= f.input :longitude,
+                    label: t('contact_details.postal_address.longitude.label'),
+                    hint: t('contact_details.postal_address.longitude.hint') %>
+      </div>
     </div>
   </div>
   <%= osuny_separator %>
