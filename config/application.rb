@@ -34,7 +34,7 @@ module Osuny
     config.active_job.queue_adapter = :good_job
 
     config.active_storage.service_urls_expire_in = 1.hour
-    config.active_storage.variant_processor = :mini_magick
+    config.active_storage.variant_processor = :vips
 
     config.sass.preferred_syntax = :sass
 

@@ -51,7 +51,6 @@ gem "kaminari"
 gem "leaflet-rails"
 gem "libretranslate"#, path: "../libretranslate"
 gem "lucide-rails"
-gem "mini_magick", "~> 4.0"
 gem "octokit"
 gem "omniauth-rails_csrf_protection", "~> 1"
 gem "omniauth-saml", "~> 2"
@@ -110,4 +109,3 @@ group :test do
 end
 
 gem "tzinfo-data", platforms: [:windows, :jruby]
-

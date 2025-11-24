@@ -14,6 +14,8 @@
 #  meta_description      :text
 #  name                  :string
 #  picture_credit        :text
+#  published             :boolean          default(TRUE)
+#  published_at          :datetime
 #  slug                  :string           indexed
 #  summary               :text
 #  twitter               :string
@@ -46,6 +48,7 @@ class University::Person::Localization < ApplicationRecord
   include Contentful
   include HasGitFiles
   include Permalinkable
+  include Publishable
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
@@ -118,9 +121,6 @@ class University::Person::Localization < ApplicationRecord
     "#{first_name.to_s.first}#{last_name.to_s.first}"
   end
 
-  def published?
-    persisted?
-  end
 
   # user in statics where we don't need the cateogries not localized
   def categories
