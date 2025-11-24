@@ -1,8 +1,8 @@
 name: naos sync
 
 on:
-  - push
-  - delete
+  #- push
+  #- delete
 
 jobs:
   sync:
