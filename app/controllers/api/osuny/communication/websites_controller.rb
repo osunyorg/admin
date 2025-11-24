@@ -1,6 +1,6 @@
 class Api::Osuny::Communication::WebsitesController < Api::Osuny::ApplicationController
   def index
-    @websites = current_university.websites.includes(:localizations)
+    @websites = paginate(current_university.websites.includes(:localizations))
   end
 
   def show
