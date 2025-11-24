@@ -797,7 +797,6 @@ DEPENDENCIES
   libretranslate
   listen (~> 3.3)
   lucide-rails
-  mini_magick (~> 4.0)
   mutex_m (~> 0.3.0)
   octokit
   omniauth-rails_csrf_protection (~> 1)
