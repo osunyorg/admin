@@ -1,8 +1,8 @@
 module Api::Osuny::ApplicationController::WithPagination
   extend ActiveSupport::Concern
 
-  DEFAULT_PAGE_SIZE = 500
-  MAX_PAGE_SIZE = 1000
+  DEFAULT_PAGE_SIZE = 10000
+  MAX_PAGE_SIZE = 10000
 
   protected
 

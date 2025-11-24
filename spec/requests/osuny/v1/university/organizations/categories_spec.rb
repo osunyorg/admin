@@ -10,7 +10,7 @@ RSpec.describe 'University::Organization::Category' do
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
       parameter name: :page_num, in: :query, schema: { type: :integer, default: 1 }, description: 'Page number', required: false
-      parameter name: :per_page, in: :query, schema: { type: :integer, default: 500, maximum: 1000 }, description: 'Number of items per page', required: false
+      parameter name: :per_page, in: :query, schema: { type: :integer, default: 10000, maximum: 10000 }, description: 'Number of items per page', required: false
 
       response '200', 'Successful operation' do
         schema type: :array, items: { '$ref' => '#/components/schemas/university_organization_category' }

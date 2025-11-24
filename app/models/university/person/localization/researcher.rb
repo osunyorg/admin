@@ -14,6 +14,8 @@
 #  meta_description      :text
 #  name                  :string
 #  picture_credit        :text
+#  published             :boolean          default(TRUE)
+#  published_at          :datetime
 #  slug                  :string           indexed
 #  summary               :text
 #  twitter               :string
