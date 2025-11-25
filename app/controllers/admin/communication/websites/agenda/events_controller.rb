@@ -9,9 +9,12 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def index
     @filtered = @events.filter_by(params[:filters], current_language)
+    unless params.dig(:filters)&.keys&.any?
+      # Only root events if no filter
+      @filtered = @filtered.root
+    end
     @events = @filtered.at_lifecycle(params[:lifecycle], current_language)
                        .ordered_desc
-                       .root
                        .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb

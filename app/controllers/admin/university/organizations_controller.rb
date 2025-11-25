@@ -9,8 +9,8 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def index
     @filtered = @organizations.filter_by(params[:filters], current_language)
-    @organizations = @organizations.at_lifecycle(params[:lifecycle], current_language)
-                                   .ordered(current_language)
+    @organizations = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                              .ordered(current_language)
     @feature_nav = 'navigation/admin/university/organizations'
 
     respond_to do |format|
@@ -98,6 +98,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
     params.require(:university_organization)
           .permit(
             :siren, :kind, :bodyclass, 
+            :latitude, :longitude,
             :address, :zipcode, :city, :country, :phone, :email, category_ids: [],
             localizations_attributes: [
               :id, :name, :long_name, :slug, :meta_description, :summary, :text,

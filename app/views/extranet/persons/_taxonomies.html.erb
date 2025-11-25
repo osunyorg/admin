@@ -1,0 +1,32 @@
+<%
+categories = current_university.person_categories
+taxonomies = categories.taxonomies.ordered
+free_categories = person.categories.ordered_by_position_in_tree.reject { |category| category.in_taxonomy? }
+%>
+<div class="taxonomies-container row">
+  <% if free_categories %>
+    <div class="col-lg-4 taxonomy-container">
+      <p><strong>Catégories</strong></p>
+      <ul class="list-unstyled taxonomy-items">
+        <% free_categories.each do |category| %>
+          <li class="taxonomy-item"><%= category.to_s_in(current_language) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% taxonomies.each do |taxonomy| %>
+    <%
+    taxonomy_categories = person.categories.in_taxonomy(taxonomy).ordered
+    next if taxonomy_categories.empty?
+    %>
+    <div class="col-lg-4 taxonomy-container">
+      <p><strong><%= taxonomy.to_s_in(current_language) %></strong></p>
+      <ul class="list-unstyled taxonomy-items">
+        <% taxonomy_categories.each do |category| %>
+          <li class="taxonomy-item"><%= category.to_s_in(current_language) %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

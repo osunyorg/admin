@@ -33,7 +33,7 @@
               <%= link_to t('remove'),
                           admin_education_school_role_person_path(involvement, { school_id: @school.id, role_id: @role.id }),
                           method: :delete,
-                          data: { confirm: t('please_confirm') },
+                          data: { confirm: t('please_confirm.deletion') },
                           class: button_classes_danger if can?(:destroy, involvement) %>
             </td>
           </tr>

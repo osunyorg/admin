@@ -6,7 +6,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   before_action :ensure_same_migration_identifier, only: :update
 
   def index
-    @organizations = current_university.organizations.includes(:localizations)
+    @organizations = paginate(current_university.organizations.includes(:localizations))
   end
 
   def show
