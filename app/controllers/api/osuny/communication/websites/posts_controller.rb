@@ -6,7 +6,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   before_action :ensure_same_migration_identifier, only: :update
 
   def index
-    @posts = website.posts.includes(:localizations)
+    @posts = paginate(website.posts.includes(:localizations))
   end
 
   def show

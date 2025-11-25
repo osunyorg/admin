@@ -6,7 +6,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   before_action :ensure_same_migration_identifier, only: :update
 
   def index
-    @events = website.events.includes(:localizations)
+    @events = paginate(website.events.includes(:localizations))
   end
 
   def show
