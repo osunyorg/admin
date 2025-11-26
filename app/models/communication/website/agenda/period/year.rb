@@ -3,7 +3,6 @@
 # Table name: communication_website_agenda_period_years
 #
 #  id                       :uuid             not null, primary key
-#  deleted_at               :datetime
 #  needs_checking           :boolean          default(FALSE)
 #  value                    :integer          uniquely indexed => [university_id, communication_website_id]
 #  created_at               :datetime         not null
@@ -22,8 +21,6 @@
 #  fk_rails_67a8039d71  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Period::Year < ApplicationRecord
-  acts_as_paranoid
-
   include AsDirectObject
   include Communication::Website::Agenda::Period::Base
   include GeneratesGitFiles
