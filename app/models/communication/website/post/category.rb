@@ -38,6 +38,7 @@ class Communication::Website::Post::Category < ApplicationRecord
   include Sanitizable
   include WithMenuItemTarget
   include WithOpenApi
+  include WithReferenceBlocks
   include WithUniversity
 
   belongs_to              :program,
@@ -61,8 +62,7 @@ class Communication::Website::Post::Category < ApplicationRecord
     post_localizations.in_languages(website.active_language_ids) +
     [parent] +
     siblings +
-    website.menus.in_languages(website.active_language_ids) +
-    abouts_with_post_block
+    website.menus.in_languages(website.active_language_ids)
   end
 
   def siblings
@@ -75,14 +75,7 @@ class Communication::Website::Post::Category < ApplicationRecord
     website.post_categories.where(parent_id: parent_id).ordered.last
   end
 
-  # Same as the Post object
-  def abouts_with_post_block
-    website.blocks.template_posts.collect(&:about)
-    # Potentiel gain de performance (25%)
-    # Méthode collect : X abouts = X requêtes
-    # Méthode ci-dessous : X abouts = 6 requêtes
-    # website.post_categories.where(id: website.blocks.template_posts.where(about_type: "Communication::Website::Post::Category").distinct.pluck(:about_id)) +
-    # website.pages.where(id: website.blocks.template_posts.where(about_type: "Communication::Website::Page").distinct.pluck(:about_id)) +
-    # website.posts.where(id: website.blocks.template_posts.where(about_type: "Communication::Website::Post").distinct.pluck(:about_id))
+  def reference_block_template_kind
+    "posts"
   end
 end
