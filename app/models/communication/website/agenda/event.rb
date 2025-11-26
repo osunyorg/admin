@@ -52,7 +52,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
-  include WithReferenceBlocks
+  include HasListBlocks
   include WithUniversity
 
   belongs_to  :created_by,
@@ -168,7 +168,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
                   hour.min
   end
 
-  def reference_block_template_kind
+  def list_blocks_template_kind
     :agenda
   end
 end

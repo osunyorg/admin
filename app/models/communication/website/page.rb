@@ -50,7 +50,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithAutomaticMenus
   include WithMenuItemTarget
   include WithOpenApi
-  include WithReferenceBlocks
+  include HasListBlocks
   include WithSpecialPage
   include WithUniversity
 
@@ -134,7 +134,7 @@ class Communication::Website::Page < ApplicationRecord
     website.pages.where(parent_id: parent_id).ordered.last
   end
 
-  def reference_block_template_kind
+  def list_blocks_template_kind
     :pages
   end
 

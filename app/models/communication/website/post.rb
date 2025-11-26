@@ -37,7 +37,7 @@ class Communication::Website::Post < ApplicationRecord
   include Searchable
   include WithMenuItemTarget
   include WithOpenApi
-  include WithReferenceBlocks
+  include HasListBlocks
   include WithUniversity
 
   has_and_belongs_to_many :authors,
@@ -117,7 +117,7 @@ class Communication::Website::Post < ApplicationRecord
     end
   end
 
-  def reference_block_template_kind
+  def list_blocks_template_kind
     :posts
   end
 end

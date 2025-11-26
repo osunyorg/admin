@@ -45,7 +45,7 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include Searchable
   include WithMenuItemTarget
   include WithOpenApi
-  include WithReferenceBlocks
+  include HasListBlocks
   include WithUniversity
 
   belongs_to  :created_by,
@@ -110,7 +110,7 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
 
   protected
 
-  def reference_block_template_kind
+  def list_blocks_template_kind
     :agenda
   end
 end

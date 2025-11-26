@@ -1,4 +1,4 @@
-class Communication::Website::GenerateBlockAboutsContentJob < ApplicationJob
+class Communication::Website::SynchronizeListBlocksJob < ApplicationJob
   queue_as :whales
 
   def perform(website, template_kind)
