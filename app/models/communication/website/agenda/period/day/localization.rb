@@ -3,7 +3,6 @@
 # Table name: communication_website_agenda_period_day_localizations
 #
 #  id                       :uuid             not null, primary key
-#  deleted_at               :datetime
 #  events_count             :integer          default(0)
 #  slug                     :string
 #  created_at               :datetime         not null
