@@ -135,8 +135,9 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   end
 
   def references
-    menus +
-    abouts_with_agenda_block
+    menus
+    # menus +
+    # abouts_with_agenda_block
   end
 
   def sorting_time
