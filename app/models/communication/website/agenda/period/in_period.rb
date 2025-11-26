@@ -8,7 +8,7 @@ module Communication::Website::Agenda::Period::InPeriod
     before_save :touch_periods
     after_save :create_periods
     after_destroy :sync_periods
-    after_restore :sync_periods if respond_to?(:after_restore)
+    after_restore :sync_periods if paranoid?
 
     validates :from_day, presence: true
     validate  :year_is_a_four_digit_number,
