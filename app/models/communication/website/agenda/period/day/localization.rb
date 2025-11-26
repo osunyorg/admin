@@ -3,7 +3,6 @@
 # Table name: communication_website_agenda_period_day_localizations
 #
 #  id                       :uuid             not null, primary key
-#  deleted_at               :datetime
 #  events_count             :integer          default(0)
 #  slug                     :string
 #  created_at               :datetime         not null
@@ -29,8 +28,6 @@
 #  fk_rails_a4f13fe1c0  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Period::Day::Localization < ApplicationRecord
-  acts_as_paranoid
-
   include AsLocalization
   include WithUniversity
 
