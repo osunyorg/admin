@@ -27,8 +27,6 @@
 #  fk_rails_e8dfb6948e  (language_id => languages.id)
 #
 class Communication::Website::Agenda::Period::Year::Localization < ApplicationRecord
-  acts_as_paranoid
-
   include AsLocalization
   include Permalinkable
   include HasGitFiles
