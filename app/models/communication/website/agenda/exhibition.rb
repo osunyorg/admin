@@ -111,6 +111,6 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   protected
 
   def reference_block_template_kind
-    "agenda"
+    :agenda
   end
 end

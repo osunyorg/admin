@@ -169,6 +169,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   end
 
   def reference_block_template_kind
-    "agenda"
+    :agenda
   end
 end

@@ -135,7 +135,7 @@ class Communication::Website::Page < ApplicationRecord
   end
 
   def reference_block_template_kind
-    "pages"
+    :pages
   end
 
   def touch_elements_if_special_page_in_hierarchy

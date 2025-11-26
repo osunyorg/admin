@@ -118,6 +118,6 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def reference_block_template_kind
-    "posts"
+    :posts
   end
 end

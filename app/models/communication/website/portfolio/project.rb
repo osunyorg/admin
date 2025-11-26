@@ -94,7 +94,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   protected
 
   def reference_block_template_kind
-    "projects"
+    :projects
   end
 
 end
