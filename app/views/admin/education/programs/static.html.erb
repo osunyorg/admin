@@ -24,20 +24,16 @@ administrator_involvements = program.involvements_through_roles
 <% if @l10n.downloadable_summary.attached? %>
 downloadable_summary: <%= @l10n.downloadable_summary.blob_id %>
 <% end %>
-bodyclass: <%= program.bodyclass %>
-website_url: >-
-  <%= @l10n.url %>
-registration_url: >-
-  <%= @l10n.registration_url %>
-<%= render 'admin/application/meta_description/static', about: @l10n %>
-<%= render 'admin/application/summary/static', about: @l10n %>
+<%= osuny_static_text 'website_url', @l10n.url %>
+<%= osuny_static_text 'registration_url', @l10n.registration_url %>
+<%= osuny_static_text 'meta_description', @l10n.meta_description %>
+<%= osuny_static_html 'summary', @l10n.summary %>
 <% if @l10n.parent
   hugo = @l10n.parent.hugo(@website)
   if hugo.file.present?
   %>
 parent:
-  title: >-
-    <%= @l10n.parent.name %>
+<%= osuny_static_text 'title', @l10n.parent.name, depth: 2 %>
   permalink: "<%= hugo.permalink %>"
   path: "<%= hugo.path %>"
   slug: "<%= hugo.slug %>"
@@ -90,17 +86,12 @@ information:
     initial: <%= program.initial %>
 <% end %>
   pricing:
-    global: >-
-      <%= prepare_html_for_static @l10n.best_pricing %>
-    initial: >-
-      <%= prepare_html_for_static @l10n.pricing_initial %>
-    continuing: >-
-      <%= prepare_html_for_static @l10n.pricing_continuing %>
-    apprenticeship: >-
-      <%= prepare_html_for_static @l10n.pricing_apprenticeship %>
+<%= osuny_static_html 'global', @l10n.best_pricing, depth: 3 %>
+<%= osuny_static_html 'initial', @l10n.pricing_initial, depth: 3 %>
+<%= osuny_static_html 'continuing', @l10n.pricing_continuing, depth: 3 %>
+<%= osuny_static_html 'apprenticeship', @l10n.pricing_apprenticeship, depth: 3 %>
 diplomas: "<%= @l10n.diploma&.slug %>"
-duration: >-
-  <%= prepare_text_for_static @l10n.duration %>
+<%= osuny_static_text 'duration', @l10n.duration %>
 teachers:
 <%
 teacher_involvements.each do |involvement|
@@ -177,10 +168,8 @@ initial: <%= program.initial %>
 certifications:
   qualiopi:
     certified: <%= program.qualiopi_certified %>
-    text: >-
-      <%= prepare_html_for_static @l10n.qualiopi_text %>
-presentation: >-
-  <%= prepare_html_for_static @l10n.presentation %>
+<%= osuny_static_html 'text', @l10n.qualiopi_text, depth: 3 %>
+<%= osuny_static_html 'presentation', @l10n.presentation %>
 <%
 [
   :accessibility,
