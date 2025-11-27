@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_26_094555) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_27_141522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -2261,7 +2261,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_26_094555) do
     t.string "featured_image_alt"
     t.text "featured_image_credit"
     t.string "migration_identifier"
-    t.boolean "published", default: false
+    t.boolean "published", default: true
     t.datetime "published_at"
     t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_eb921fd47b", unique: true
