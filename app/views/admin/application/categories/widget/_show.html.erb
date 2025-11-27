@@ -12,7 +12,7 @@ classes = "col-lg-#{12/columns}"
 <% 
 # First, taxonomies
 taxonomies.each do |taxonomy|
-  taxons_in_use = about.categories.merge(taxonomy.children)
+  taxons_in_use = about.categories.merge(taxonomy.descendants_and_self)
   next if taxons_in_use.none?
   %>
   <div class="<%= classes %> mb-4">
