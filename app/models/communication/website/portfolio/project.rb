@@ -40,6 +40,7 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   include Searchable
   include WithMenuItemTarget
   include WithOpenApi
+  include HasListBlocks
   include WithUniversity
 
   belongs_to  :created_by,
@@ -87,14 +88,13 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   end
 
   def references
-    menus +
-    abouts_with_projects_block
+    menus
   end
 
   protected
 
-  def abouts_with_projects_block
-    website.blocks.template_projects.collect(&:about)
+  def list_blocks_template_kind
+    :projects
   end
 
 end
