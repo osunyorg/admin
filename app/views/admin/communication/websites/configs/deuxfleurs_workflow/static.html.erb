@@ -9,6 +9,7 @@ jobs:
     name: Compilation du site Hugo et déploiement Deux fleurs
     runs-on: ubuntu-latest
     concurrency:
+      group: deuxfleurs
       cancel-in-progress: true
     steps:
 
