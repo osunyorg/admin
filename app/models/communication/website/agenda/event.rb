@@ -52,6 +52,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
+  include HasListBlocks
   include WithUniversity
 
   belongs_to  :created_by,
@@ -136,8 +137,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def references
     menus
-    # menus +
-    # abouts_with_agenda_block
   end
 
   def sorting_time
@@ -169,7 +168,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
                   hour.min
   end
 
-  def abouts_with_agenda_block
-    website.blocks.template_agenda.collect(&:about)
+  def list_blocks_template_kind
+    :agenda
   end
 end
