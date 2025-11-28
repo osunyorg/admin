@@ -70,9 +70,15 @@ class Communication::Block::Template::Post < Communication::Block::Template::Bas
   end
 
   def base_posts
-    block.about&.website
-                .posts
-                .published_now_in(block.language)
+    Communication::Website::Post.where(id: website_and_federated_post_ids)
+                                .published_now_in(block.language)
+  end
+
+  def website_and_federated_post_ids
+    @website_and_federated_post_ids ||= (
+      website.posts.pluck(:id) +
+      website.federated_communication_website_posts.pluck(:id)
+    )
   end
 
   def selected_posts_all

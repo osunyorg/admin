@@ -28,6 +28,7 @@ class Communication::Website::Post < ApplicationRecord
 
   include AsDirectObject
   include Duplicable
+  include Federated
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
