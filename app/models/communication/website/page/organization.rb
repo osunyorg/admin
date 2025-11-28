@@ -1,5 +1,9 @@
 class Communication::Website::Page::Organization < Communication::Website::Page
 
+  def design_options_block_template_kind
+    :organizations
+  end
+
   def is_hugo_index?
     true
   end
