@@ -11,7 +11,12 @@
       <% end %>
     </div>
     <div class="col-10">
-      <p><%= l10n.to_s %></p>
+      <p>
+        <%= l10n.to_s %>
+        <% if post.federated_in?(@website) %>
+          — <%= show_link_inline post.website %>
+        <% end %>
+      </p>
     </div>
   </div>
 <% end %>
