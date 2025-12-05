@@ -57,21 +57,12 @@
 <%= osuny_separator %>
 <%= osuny_small_panel t('admin.communication.blocks.components.layouts.label') do %>
   <%= block_component_edit block, :layout %>
-  <%= osuny_label t('admin.communication.blocks.display_options.title') %>
-  <div class="row">
-    <div class="col-sm-6">
-      <%= block_component_edit block, :option_logo %>
-      <%= block_component_edit block, :option_link %>
-    </div>
-    <div class="col-sm-6">
-      <%= block_component_edit block, :option_summary, label: t('admin.summary.label') %>
-      <%= block_component_edit block, :option_address %>
-      <div v-if="data.layout === 'map'">
-        <%= block_component_edit block, :option_filters %>
-      </div>
-      <div v-if="data.mode === 'selection'">
-        <%= block_component_edit block, :alphabetical %>
-      </div>
-    </div>
+  <%= render 'admin/communication/blocks/templates/organizations/options', block: block %>
+  <%= block_component_edit block, :option_link %>
+  <div v-if="data.mode === 'selection'">
+    <%= block_component_edit block, :alphabetical %>
+  </div>
+  <div v-if="data.layout === 'map'">
+    <%= block_component_edit block, :option_filters %>
   </div>
 <% end %>
