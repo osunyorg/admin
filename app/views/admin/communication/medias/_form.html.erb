@@ -47,7 +47,8 @@
                           'summernote-config' => 'link'
                         }
                       } %>
-        <%= lf.input :internal_description %>
+        <%= lf.input :internal_description,
+                      hint: t('internal_description_hint') %>
       </div>
     </div>
     <% content_for :action_bar_right do %>
