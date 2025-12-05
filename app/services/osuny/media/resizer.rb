@@ -13,6 +13,7 @@ class Osuny::Media::Resizer
       id: resized_blob.id,
       signed_id: resized_blob.signed_id,
       checksum: resized_blob.checksum,
+      key: resized_blob.key,
     }
   end
 
