@@ -16,6 +16,7 @@
 #  published                :boolean
 #  published_at             :datetime
 #  slug                     :string
+#  subtitle                 :string
 #  summary                  :text
 #  text                     :text
 #  title                    :string
