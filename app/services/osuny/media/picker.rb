@@ -65,8 +65,8 @@ class Osuny::Media::Picker
   end
 
   def url
-    @url ||= image.attached?  ? "https://#{ENV['KEYCDN_HOST']}/#{image.blob.key}?width=800"
-                              : ''
+    return unless image.attached?
+    @url ||= (ENV['KEYCDN_HOST'].present? ? keycdn_url : medium_url)
   end
 
   def about_type
@@ -90,6 +90,14 @@ class Osuny::Media::Picker
   end
 
   protected
+
+  def keycdn_url
+    "https://#{ENV['KEYCDN_HOST']}/#{image.blob.key}?width=800"
+  end
+
+  def medium_url
+    "/media/#{image.signed_id}/preview_800x.png"
+  end
 
   def import_from_params
     about.update_column(alt_property, params.dig(:image, :alt))
