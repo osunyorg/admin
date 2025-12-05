@@ -41,9 +41,11 @@ export default {
         id: null,
         signed_id: null,
         checksum: null,
+        key: null,
         url: null
       },
       directUpload: null,
+      keycdnUrl: null,
       i18n: {},
     }
   },
@@ -85,10 +87,18 @@ export default {
     },
     setBlob(blob) {
       this.blob.id = blob.id;
+      this.blob.key = blob.key;
       this.blob.signed_id = blob.signed_id;
       this.blob.checksum = blob.checksum;
-      // png to manage transparency, even if image is a jpg (it's just a preview)
-      this.blob.url = "/media/" + this.blob.signed_id + "/preview.png";
+      this.setBlobUrl();
+    },
+    setBlobUrl() {
+      if (this.keycdnUrl) {
+        this.blob.url = this.keycdnUrl + '/' + this.blob.key;
+      } else {
+        // png to manage transparency, even if image is a jpg (it's just a preview)
+        this.blob.url = "/media/" + this.blob.signed_id + "/preview.png";
+      }
     },
     cropped(blob) {
       this.setBlob(blob);
@@ -103,6 +113,9 @@ export default {
   },
   beforeMount() {
     const dataset = document.getElementById('media-picker-app').dataset
+    if (dataset.keycdn !== '') {
+      this.keycdnUrl = "https://" + dataset.keycdn;
+    }
     this.i18n = JSON.parse(dataset.i18n).mediaPicker.imageUploader;
     this.formats = {
       accepted: dataset.formatsAccepted,

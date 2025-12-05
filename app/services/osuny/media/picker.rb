@@ -65,7 +65,8 @@ class Osuny::Media::Picker
   end
 
   def url
-    @url ||= image.attached? ? "/media/#{image.signed_id}/preview_800x.png" : ''
+    @url ||= image.attached?  ? "https://#{ENV['KEYCDN_HOST']}/#{image.blob.key}?width=800"
+                              : ''
   end
 
   def about_type
@@ -78,9 +79,9 @@ class Osuny::Media::Picker
 
   def about
     @about ||= PolymorphicObjectFinder.find(
-      { 
-        about_type: about_type, 
-        about_id: about_id 
+      {
+        about_type: about_type,
+        about_id: about_id
       },
       key: :about,
       university: university,
