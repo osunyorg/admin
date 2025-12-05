@@ -18,6 +18,7 @@ class Osuny::Media::Resizer
 
   protected
 
+  # TODO ImageProcessing: Verify if compatible with Vips
   def resized_blob
     @resized_blob ||= begin
       if untouched?
@@ -53,24 +54,18 @@ class Osuny::Media::Resizer
 
   def untouched?
     rotation == 0 &&
-    left == 0 && 
+    left == 0 &&
     top == 0 &&
     width == blob.metadata.dig(:width) &&
     height == blob.metadata.dig(:height)
   end
 
   def transformations
-    # Default orientation
-    transformations = { :'auto-orient' => true }
+    transformations = {}
     # Handle rotation
     transformations[:rotate] = rotation if rotation.present?
     # Handle cropping
-    transformations[:crop] = "#{width}x#{height}+#{left}+#{top}"
-    # Finalize by repaging
-    transformations.merge!({
-      repage: true,
-      :'+' => true
-    })
+    transformations[:crop] = [left, top, width, height]
     transformations
   end
 end

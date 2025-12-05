@@ -87,6 +87,8 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   validates :title, presence: true
   validate :slug_cant_be_numeric_only
 
+  after_save :update_time_slots_add_to_calendar_urls
+
   scope :archivable, -> (datetime) {
     joins(:about)
       .where.not(communication_website_agenda_events: { is_lasting: true })
@@ -121,6 +123,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     event.days.where(language: language)
   end
 
+  def time_slot_localizations
+    event.time_slot_localizations.where(language: language)
+  end
+
   def categories
     about.categories.ordered.map { |category| category.localization_for(language) }.compact
   end
@@ -149,6 +155,12 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   end
 
   protected
+
+  def update_time_slots_add_to_calendar_urls
+    time_slot_localizations.each do |time_slot_l10n|
+      time_slot_l10n.update_add_to_calendar_urls!
+    end
+  end
 
   def hugo_for_time_slots(website)
     time_slot = event.time_slots.ordered.first

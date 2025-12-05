@@ -3,7 +3,6 @@
 # Table name: communication_website_agenda_period_months
 #
 #  id                       :uuid             not null, primary key
-#  deleted_at               :datetime
 #  value                    :integer          uniquely indexed => [university_id, communication_website_id, year_id]
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -24,8 +23,6 @@
 #  fk_rails_d1531afc39  (year_id => communication_website_agenda_period_years.id)
 #
 class Communication::Website::Agenda::Period::Month < ApplicationRecord
-  acts_as_paranoid
-
   include AsDirectObject
   include Communication::Website::Agenda::Period::Base
   include GeneratesGitFiles

@@ -8,8 +8,8 @@ class Admin::Administration::LocationsController < Admin::Administration::Applic
 
   def index
     @filtered = @locations.filter_by(params[:filters], current_language)
-    @locations = @locations.at_lifecycle(params[:lifecycle], current_language)
-                           .ordered(current_language)
+    @locations = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                          .ordered(current_language)
     breadcrumb
   end
 

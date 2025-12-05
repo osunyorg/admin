@@ -148,6 +148,7 @@ fr:
       switch_to: basculer en %{choices}
     infos: Informations
     inheritance:
+      override: Entrer un autre texte
       sentence_html: Valeur héritée de %{link}
       sentence_without_link: Valeur héritée
       status: Valeur héritée
@@ -253,6 +254,15 @@ fr:
       country:
         hint: ''
         label: Pays
+      geolocation_failed: 
+        hint: 'Si la géolocalisation automatique ne fonctionne pas, vous pouvez saisir la latitude et la longitude directement ci-dessous, en coordonnées décimales.'
+        label: 'Pas de géolocalisation ?'
+      latitude:
+        hint: 'Exemples: 44.833328 pour 44° 49′ 59.98″ de latitude nord, -0.4389288 pour 0° 26′ 20.144″ de latitude sud'
+        label: 'Latitude'
+      longitude:
+        hint: 'Exemples: -0.56667 pour 0° 34′ 0.01″ de longitude ouest, 39.103672 pour 390° 6′ 13.219″ de longitude est'
+        label: 'Longitude'
       zipcode:
         hint: ''
         label: Code postal
@@ -396,6 +406,7 @@ fr:
       reset: Réinitialiser la recherche
       submit: Chercher
     title: Rechercher et filtrer
+    trash_warning: Les éléments dans la corbeille seront ignorés
   folder:
     close: Fermer le dossier
     empty: Le dossier est vide
@@ -486,7 +497,10 @@ fr:
   move: Déplacer
   open: Ouvrir
   organize: Organiser
-  please_confirm: Est-ce que vous confirmez ?
+  please_confirm:
+    deletion: Est-ce que vous confirmez la suppression ?
+    duplication: Est-ce que vous confirmez la duplication ?
+    generic: Est-ce que vous confirmez ?
   preview:
     button: Prévisualiser
     desktop: Ordinateur

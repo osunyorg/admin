@@ -380,7 +380,7 @@ fr:
                   label: Crédit
                   placeholder: Entrer le crédit de l'image ici
                 text:
-                  label: Texte
+                  label: Légende de l'image
                   placeholder: Entrer le texte
               move_images: Déplacer les images ci-dessous pour les mettre dans l'ordre souhaité
               remove_image: Enlever l'image
@@ -400,7 +400,7 @@ fr:
             description: Une image avec sa description alternative accessible, son texte et son crédit.
             edit:
               text:
-                label: Texte
+                label: Légende de l'image
                 placeholder: Entrer le texte
           jobs:
             description: Une liste d'offres d'emploi.

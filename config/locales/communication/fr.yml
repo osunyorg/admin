@@ -536,6 +536,12 @@ fr:
                 other: Cette page est une page spéciale, qui présente nativement les %{count} organisations mentionnées dans le site.
             person:
               disconnect: Déconnecter
+              explicitly_connected: Personnes directement connectées
+              explicitly_connected_hint: Vous pouvez connecter directement des personnes au site Web en les recherchant ci-dessous. Quoi qu'il en soit, toutes les personnes mentionnées dans le site seront listées ci-dessus.
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les personnes mentionnées dans le site. Pour l'instant, il n'y a aucune personne dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les personnes mentionnées dans le site. Pour l'instant, il y a 1 personne dans le site.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} personnes mentionnées dans le site.
           structure: Pages
           with_children: "avec comme pages enfants :"
         permalinks:

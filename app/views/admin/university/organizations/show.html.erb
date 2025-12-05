@@ -9,6 +9,14 @@
 
 <div class="row">
   <div class="col-lg-4">
+    <%= render 'admin/application/images/featured/show', about: @l10n %>
+    <div class="mt-5">
+      <%= render 'admin/application/publication/show', about: @l10n %>
+      <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
+      <%= render 'admin/application/meta_description/show', about: @l10n %>
+    </div>
+  </div>
+  <div class="col-lg-8">
     <% if @l10n.logo.attached? || @l10n.logo_on_dark_background.attached? %>
       <div class="row">
         <% if @l10n.logo.attached? %>
@@ -29,14 +37,7 @@
         <% end %>
       </div>
     <% end %>
-    <%= render 'admin/application/images/featured/show', about: @l10n %>
-    <%= osuny_separator %>
-    <%= render 'admin/application/publication/show', about: @l10n %>
-    <%= render 'admin/application/categories/widget/show', about: @organization %>
-    <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
-    <%= render 'admin/application/meta_description/show', about: @l10n %>
-  </div>
-  <div class="col-lg-8">
+
     <%= render 'admin/application/summary/show', about: @l10n %>
 
     <%= osuny_panel University::Organization::Localization.human_attribute_name('text') do %>
@@ -48,6 +49,8 @@
     <%= osuny_label University::Organization.human_attribute_name('kind') %>
     <p><%= @organization.kind_i18n %></wp>
     <%= osuny_property_show_text @organization, :siren, hide_blank: true %>
+    <%= osuny_separator %>
+    <%= render 'admin/application/categories/widget/show', about: @organization, columns: 2 %>
   </div>
 </div>
 

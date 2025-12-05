@@ -148,6 +148,7 @@ en:
       switch_to: switch to %{choices}
     infos: Informations
     inheritance:
+      override: Type another text
       sentence_html: Value inherited from %{link}
       sentence_without_link: Value inherited
       status: Inherited value
@@ -253,6 +254,15 @@ en:
       country:
         hint: 'This field is used for geolocation. Ex: France'
         label: Country
+      geolocation_failed: 
+        hint: 'If automatic geolocation does not work, you can enter the latitude and longitude directly below, in decimal coordinates.'
+        label: 'No geolocation?'
+      latitude:
+        hint: 'Examples: 44.833328 for 44° 49′ 59.98″ north latitude, -0.4389288 for 0° 26′ 20.144″ south latitude'
+        label: 'Latitude'
+      longitude:
+        hint: 'Examples: -0.56667 for 0° 34′ 0.01″ west longitude, 39.103672 for 390° 6′ 13.219″ east longitude'
+        label: 'Longitude'
       zipcode:
         hint: 'This field is used for geolocation. Ex: 33150'
         label: Zipcode
@@ -396,6 +406,7 @@ en:
       reset: Reset
       submit: Search and filter
     title: Search and filter
+    trash_warning: Elements in trash will be ignored
   folder:
     close: Close folder
     empty: Folder is empty
@@ -486,7 +497,10 @@ en:
   move: Move
   open: Open
   organize: Organize
-  please_confirm: Are you sure?
+  please_confirm:
+    deletion: Are you sure you want to delete?
+    duplication: Are you sure you want to duplicate?
+    generic: Are you sure?
   preview:
     button: Preview
     desktop: Desktop

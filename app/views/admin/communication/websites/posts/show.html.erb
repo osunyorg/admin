@@ -53,7 +53,8 @@
           </ul>
         </div>
       <% end %>
-      <%= render 'admin/application/categories/widget/show', about: @post %> 
+      <%= render 'admin/application/categories/widget/show', about: @post %>
+      <%= render 'admin/communication/websites/federations/show', about: @post %>
       <%= render 'admin/application/permalinks/redirects', about: @l10n %>
     <% end %>
     <%= render 'admin/application/l10n/widget', about: @post, l10n: @l10n %>
@@ -67,6 +68,14 @@
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 
 <% content_for :server_admin_only do %>
-  <%= static_link static_admin_communication_website_post_path(@post) %>
+  <% @post.website_and_federated_websites.each do |website| %>
+    <div class="mb-3">
+      <%= osuny_label website %><br>
+      <%= link_to Communication::Website::Post.model_name.human,
+                  static_admin_communication_website_post_path(
+                    @post,
+                    context_website_id: website.id
+                  ) %>
+    </div>
+  <% end %>
 <% end %>
-

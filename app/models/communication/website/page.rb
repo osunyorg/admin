@@ -5,7 +5,6 @@
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
 #  deleted_at               :datetime
-#  design_options           :jsonb
 #  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  position                 :integer          not null
@@ -51,6 +50,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithAutomaticMenus
   include WithMenuItemTarget
   include WithOpenApi
+  include HasListBlocks
   include WithSpecialPage
   include WithUniversity
 
@@ -108,8 +108,7 @@ class Communication::Website::Page < ApplicationRecord
   def references
     [parent] +
     siblings +
-    website.menus.in_languages(website.active_language_ids) +
-    abouts_with_page_block
+    website.menus.in_languages(website.active_language_ids)
   end
 
   # Pages do have a category, but we do not list all the existing pages categories
@@ -135,8 +134,8 @@ class Communication::Website::Page < ApplicationRecord
     website.pages.where(parent_id: parent_id).ordered.last
   end
 
-  def abouts_with_page_block
-    website.blocks.template_pages.collect(&:about)
+  def list_blocks_template_kind
+    :pages
   end
 
   def touch_elements_if_special_page_in_hierarchy

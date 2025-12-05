@@ -7,8 +7,8 @@ module Communication::Website::Agenda::Period::InPeriod
 
     before_save :touch_periods
     after_save :create_periods
-
-    after_destroy :mark_years_as_needing_recheck
+    after_destroy :sync_periods
+    after_restore :sync_periods if paranoid?
 
     validates :from_day, presence: true
     validate  :year_is_a_four_digit_number,
@@ -138,7 +138,9 @@ module Communication::Website::Agenda::Period::InPeriod
     Communication::Website::Agenda::CreatePeriodsJob.perform_later(self)
   end
 
-  def mark_years_as_needing_recheck
+  def sync_periods
+    touch_day(from_day)
+    touch_day(to_day) if from_day != to_day
     from_year&.needs_recheck!
     # le if sert à économiser un update_column
     to_year&.needs_recheck! if to_year != from_year
