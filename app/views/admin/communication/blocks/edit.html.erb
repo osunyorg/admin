@@ -141,7 +141,10 @@
           .replace(':filename', filename);
       },
       getImageUrl(data) {
-        return this.getFileUrl(data.signed_id, "image_1024x.jpg");
+        var filenameParts = data.filename.split('.'),
+            extension = filenameParts[filenameParts.length - 1],
+            previewFilename = "image_1024x." + extension;
+        return this.getFileUrl(data.signed_id, previewFilename);
       },
       handleSummernotes() {
         let $summernoteElements = $('.summernote-vue:not(.is-initialized)');
