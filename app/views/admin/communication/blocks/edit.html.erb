@@ -85,7 +85,7 @@
       return {
         directUpload: {
           url: "<%= rails_direct_uploads_url.html_safe %>",
-          blobUrlTemplate: "<%= medium_url(":signed_id", ":filename").html_safe %>"
+          blobUrlTemplate: "<%= medium_url(":signed_id", ":filename", lang: nil, keycdn: ENV["KEYCDN_HOST"].present?).html_safe %>"
         },
         data: <%= @block.data.to_json.html_safe %>,
         <% if @element %>
