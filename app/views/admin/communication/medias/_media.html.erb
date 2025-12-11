@@ -7,7 +7,7 @@ image = media.original_blob
   <div class="osuny__thumbnail
               osuny__thumbnail--large
               osuny__thumbnail--cropped">
-    <% if image.attached? && image.variable? %>
+    <% if image.variable? %>
       <%= kamifusen_tag image,
                         width: 600,
                         height: 600,

@@ -50,7 +50,7 @@
     <p><%= @organization.kind_i18n %></wp>
     <%= osuny_property_show_text @organization, :siren, hide_blank: true %>
     <%= osuny_separator %>
-    <%= render 'admin/application/categories/widget/show', about: @organization %>
+    <%= render 'admin/application/categories/widget/show', about: @organization, columns: 2 %>
   </div>
 </div>
 

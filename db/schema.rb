@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_27_141522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -526,6 +526,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "migration_identifier"
+    t.string "subtitle"
+    t.string "breadcrumb_title"
+    t.boolean "header_cta", default: false
+    t.string "header_cta_label"
+    t.string "header_cta_url"
+    t.text "header_text"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_e6b981c826", unique: true
     t.index ["about_id"], name: "idx_on_about_id_012efb471f"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_2eaea4d96e"
@@ -542,7 +548,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["communication_website_agenda_event_id"], name: "idx_on_communication_website_agenda_event_id_4defccd002"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_38a3895ffa"
     t.index ["language_id"], name: "index_communication_website_agenda_event_days_on_language_id"
@@ -693,7 +698,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.uuid "about_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_b8b9e8269f", unique: true
     t.index ["about_id"], name: "idx_on_about_id_ff7b8b96ea"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_c9cc20d97c"
@@ -710,7 +714,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date"
-    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_54db819007"
     t.index ["month_id"], name: "index_communication_website_agenda_period_days_on_month_id"
     t.index ["university_id", "communication_website_id", "year_id", "month_id", "value"], name: "index_communication_website_agenda_period_days_unique", unique: true
@@ -725,7 +728,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_e69d0eb996", unique: true
     t.index ["about_id"], name: "idx_on_about_id_e3d3e69fcb"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_2202f6cc51"
@@ -740,7 +742,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.integer "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_49eaf81807"
     t.index ["university_id", "communication_website_id", "year_id", "value"], name: "index_communication_website_agenda_period_months_unique", unique: true
     t.index ["year_id"], name: "index_communication_website_agenda_period_months_on_year_id"
@@ -754,7 +755,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.uuid "university_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_65b759f0dd", unique: true
     t.index ["about_id"], name: "idx_on_about_id_9d0e59880a"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_ccc9a47ea5"
@@ -769,7 +769,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "needs_checking", default: false
-    t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_dd738e97d3"
     t.index ["university_id", "communication_website_id", "value"], name: "index_communication_website_agenda_period_years_unique", unique: true
   end
@@ -924,6 +923,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.uuid "communication_website_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "subtitle"
+    t.string "breadcrumb_title"
+    t.boolean "header_cta", default: false
+    t.string "header_cta_label"
+    t.string "header_cta_url"
+    t.text "header_text"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_3473524a0e", unique: true
     t.index ["about_id"], name: "idx_on_about_id_973f5413e1"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_1bf1f14ca6"
@@ -1081,6 +1086,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "migration_identifier"
+    t.string "subtitle"
+    t.string "breadcrumb_title"
+    t.boolean "header_cta", default: false
+    t.string "header_cta_label"
+    t.string "header_cta_url"
+    t.text "header_text"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_c8a6e141bc", unique: true
     t.index ["about_id"], name: "idx_on_about_id_6c76163c36"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_f605face95"
@@ -1111,6 +1122,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.string "subtitle"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_44e0a2bf9b", unique: true
     t.index ["about_id"], name: "index_communication_website_page_localizations_on_about_id"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_64c4831480"
@@ -1193,6 +1205,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "migration_identifier"
+    t.string "subtitle"
+    t.string "breadcrumb_title"
+    t.boolean "header_cta", default: false
+    t.string "header_cta_label"
+    t.string "header_cta_url"
+    t.text "header_text"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_4031c42a61", unique: true
     t.index ["about_id"], name: "idx_on_about_id_e184bfe637"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_9d28ee55e4"
@@ -1285,6 +1303,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "migration_identifier"
+    t.string "subtitle"
+    t.string "breadcrumb_title"
+    t.boolean "header_cta", default: false
+    t.string "header_cta_label"
+    t.string "header_cta_url"
+    t.text "header_text"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_94336f5680", unique: true
     t.index ["about_id"], name: "idx_on_about_id_6e430d4efc"
     t.index ["communication_website_id"], name: "idx_on_communication_website_id_0c06c1ae6f"
@@ -1556,6 +1580,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.text "featured_image_credit"
     t.text "meta_description"
     t.text "summary"
+    t.string "subtitle"
+    t.string "breadcrumb_title"
+    t.boolean "header_cta", default: false
+    t.string "header_cta_label"
+    t.string "header_cta_url"
+    t.text "header_text"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_a020d83b5c", unique: true
     t.index ["about_id"], name: "index_education_program_category_localizations_on_about_id"
     t.index ["language_id"], name: "index_education_program_category_localizations_on_language_id"
@@ -2196,6 +2226,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.text "meta_description"
     t.text "summary"
     t.string "migration_identifier"
+    t.string "subtitle"
+    t.string "breadcrumb_title"
+    t.boolean "header_cta", default: false
+    t.string "header_cta_label"
+    t.string "header_cta_url"
+    t.text "header_text"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_a3c481c2fd", unique: true
     t.index ["about_id"], name: "idx_on_about_id_f5fce0a0b7"
     t.index ["language_id"], name: "idx_on_language_id_8e479f2339"
@@ -2224,7 +2260,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.string "featured_image_alt"
     t.text "featured_image_credit"
     t.string "migration_identifier"
-    t.boolean "published", default: false
+    t.boolean "published", default: true
     t.datetime "published_at"
     t.datetime "deleted_at"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_eb921fd47b", unique: true
@@ -2326,6 +2362,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_18_162505) do
     t.text "featured_image_credit"
     t.text "meta_description"
     t.text "summary"
+    t.string "subtitle"
+    t.string "breadcrumb_title"
+    t.boolean "header_cta", default: false
+    t.string "header_cta_label"
+    t.string "header_cta_url"
+    t.text "header_text"
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_6784c3101c", unique: true
     t.index ["about_id"], name: "index_university_person_category_localizations_on_about_id"
     t.index ["language_id"], name: "index_university_person_category_localizations_on_language_id"

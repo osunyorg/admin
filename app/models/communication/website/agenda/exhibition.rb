@@ -45,6 +45,7 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include Searchable
   include WithMenuItemTarget
   include WithOpenApi
+  include HasListBlocks
   include WithUniversity
 
   belongs_to  :created_by,
@@ -104,13 +105,12 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   end
 
   def references
-    menus +
-    abouts_with_agenda_block
+    menus
   end
 
   protected
 
-  def abouts_with_agenda_block
-    website.blocks.template_agenda.collect(&:about)
+  def list_blocks_template_kind
+    :agenda
   end
 end
