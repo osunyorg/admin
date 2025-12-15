@@ -32,6 +32,10 @@ class Osuny::AddressFormatter
     about.try(:city)
   end
 
+  def country?
+    country.present?
+  end
+
   def country
     country_object&.common_name || country_string
   end
