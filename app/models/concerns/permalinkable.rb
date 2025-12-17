@@ -23,7 +23,10 @@ module Permalinkable
   end
 
   def current_permalink_url_in_website(website)
-    build_url(website, current_permalink_in_website(website)&.path)
+    build_url(
+      website,
+      current_permalink_in_website(website)&.path
+    )
   end
 
   def planned_permalink_in_website(website)
@@ -31,7 +34,10 @@ module Permalinkable
   end
 
   def planned_permalink_url_in_website(website)
-    build_url(website, planned_permalink_in_website(website)&.computed_path)
+    build_url(
+      website,
+      planned_permalink_in_website(website)&.computed_path
+    )
   end
 
   # Not persisted yet
