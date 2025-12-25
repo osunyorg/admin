@@ -23,6 +23,14 @@ class VariantService
     end
   end
 
+  def self.keycdn_manage(blob, params)
+    return unless ENV["KEYCDN_HOST"].present? && blob.variable?
+    variant_service = compute(blob, params[:filename_with_transformations], params[:format])
+    keycdn_url_params = variant_service.keycdn_url_params
+    query_string = URI.encode_www_form(keycdn_url_params)
+    "https://#{ENV["KEYCDN_HOST"]}/#{blob.key}?#{query_string}"
+  end
+
   def self.compute(blob, filename, format)
     new blob, filename, format
   end
@@ -47,32 +55,61 @@ class VariantService
   def transformations
     @transformations ||= begin
       transformations = {}
-      if params[:size].present?
-        split_size = params[:size].split('x')
-        dimensions = Array.new(2) { |i| split_size[i].blank? ? nil : split_size[i].to_i }
-      else
-        dimensions = blob_size
-      end
-      dimensions.map! { |dimension| dimension * params[:scale].to_i if dimension.is_a?(Integer) } if params[:scale].present?
-      # If one of the dimensions is greater than the original one, no crop and resize to limit
-      crop_dimensions_are_valid = dimensions.size == 2 &&
-                                    dimensions.all?(&:present?) &&
-                                    dimensions[0] <= blob_size[0].to_i &&
-                                    dimensions[1] <= blob_size[1].to_i
-
       # Resize and/or crop unless original size
-      unless dimensions == blob_size
+      unless variant_dimensions == blob_size
         if params[:gravity].present? && crop_dimensions_are_valid
-          transformations[:resize_to_fill] = [*dimensions, { gravity: params[:gravity] }]
-          transformations[:crop] = "#{dimensions.join('x')}+0+0"
+          transformations[:resize_to_fill] = [*variant_dimensions, { gravity: params[:gravity] }]
+          transformations[:crop] = "#{variant_dimensions.join('x')}+0+0"
         else
-          transformations[:resize_to_limit] = dimensions
+          transformations[:resize_to_limit] = variant_dimensions
         end
       end
 
-      transformations[:format] = @format if @format.present? && @format != @blob.filename.extension_without_delimiter
+      transformations[:format] = variant_format if variant_format.present?
       transformations
     end
+  end
+
+  def keycdn_url_params
+    @keycdn_url_params ||= begin
+      params = {}
+      # Resize and/or crop unless original size
+      unless variant_dimensions == blob_size
+        if params[:gravity].present? && crop_dimensions_are_valid
+          params = { width: variant_dimensions[0], height: variant_dimensions[1] }
+          params[:position] = keycdn_position if keycdn_position.present?
+        elsif variant_dimensions[0].present?
+          params = { width: variant_dimensions[0], enlarge: 0 }
+        else
+          params = { height: variant_dimensions[1], enlarge: 0 }
+        end
+      end
+      params[:format] = variant_format if variant_format.present?
+      params
+    end
+  end
+
+  def variant_dimensions
+    @variant_dimensions ||= begin
+      dimensions = params[:size].present? ? params[:size] : blob_size
+      dimensions = dimensions.map { |dimension|
+        dimension * params[:scale].to_i if dimension.is_a?(Integer)
+      } if params[:scale].present?
+      dimensions
+    end
+  end
+
+  def variant_format
+    return if @format.blank? || @format == @blob.filename.extension_without_delimiter
+    @format
+  end
+
+  # If one of the dimensions is greater than the original one, no crop and resize to limit
+  def crop_dimensions_are_valid
+    variant_dimensions.size == 2 &&
+      variant_dimensions.all?(&:present?) &&
+      variant_dimensions[0] <= blob_size[0].to_i &&
+      variant_dimensions[1] <= blob_size[1].to_i
   end
 
   # Example params
@@ -92,11 +129,16 @@ class VariantService
     end
   end
 
-  def format
-    @format
-  end
-
   protected
+
+  def keycdn_position
+    return @keycdn_position if defined?(@keycdn_position)
+    @keycdn_position ||= begin
+      position = GRAVITY_PER_CROP.detect { |key, value| value == params[:gravity] }&.first
+      # Ignore center position as it's the default one
+      position.in?([nil, 'center']) ? nil : position
+    end
+  end
 
   def extract_scale_from_filename(filename)
     return [nil, filename] unless SCALE_REGEX.match? filename
@@ -114,7 +156,9 @@ class VariantService
 
   def extract_size_from_filename(filename)
     return [nil, filename] unless SIZE_REGEX.match? filename
-    size = SIZE_REGEX.match(filename)[1]
+    string_size = SIZE_REGEX.match(filename)[1]
+    split_size = string_size.split('x')
+    size = Array.new(2) { |i| split_size[i].blank? ? nil : split_size[i].to_i }
     clean_filename = filename.gsub(SIZE_REGEX, '')
     [size, clean_filename]
   end
