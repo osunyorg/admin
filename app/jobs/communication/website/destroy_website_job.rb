@@ -1,5 +1,8 @@
 class Communication::Website::DestroyWebsiteJob < ApplicationJob
   queue_as :whales
+
+  attr_reader :website
+
   CATEGORIES = [
       Communication::Website::Agenda::Category::Localization,
       Communication::Website::Agenda::Category,
@@ -30,22 +33,27 @@ class Communication::Website::DestroyWebsiteJob < ApplicationJob
     ]
 
   def perform(website)
-    # Search data
-    Search.where(about_object: website).destroy_all
-    Search.where(website_id: website).destroy_all
-    # Direct categories
+    @website = website
+    Search.remove_data_for_website(website)
+    destroy_categories
+    destroy_objects
+    website.deuxfleurs_destroy_bucket
+    website.destroy
+  end
+  
+  protected
+
+  def destroy_categories
     CATEGORIES.each do |klass|
       klass.where(communication_website_id: website).destroy_all
     end
-    # Direct objects
+  end
+
+  def destroy_objects
     OBJECTS.each do |klass|
       klass.with_deleted
            .where(communication_website_id: website)
            .find_each(&:really_destroy!)
     end
-    # Deuxfleurs
-    website.deuxfleurs_destroy_bucket if website.deuxfleurs_hosting
-    # Website
-    website.destroy
   end
 end
