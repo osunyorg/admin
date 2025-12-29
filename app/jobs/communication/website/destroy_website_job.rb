@@ -1,8 +1,6 @@
 class Communication::Website::DestroyWebsiteJob < ApplicationJob
   queue_as :whales
 
-  attr_reader :website
-
   CATEGORIES = [
       Communication::Website::Agenda::Category::Localization,
       Communication::Website::Agenda::Category,

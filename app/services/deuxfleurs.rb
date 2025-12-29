@@ -30,7 +30,7 @@ class Deuxfleurs
   end
 
   def delete_bucket(host)
-    response = client.delete("website/#{host}"
+    response = client.delete("website/#{host}")
     response.status == 200
   end
 
