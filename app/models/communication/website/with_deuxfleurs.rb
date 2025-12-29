@@ -38,8 +38,8 @@ module Communication::Website::WithDeuxfleurs
 
   def deuxfleurs_destroy_bucket
     return unless deuxfleurs_hosting
-    empty_bucket(deuxfleurs_default_identifier)
-    delete_bucket(deuxfleurs_default_identifier)
+    empty_bucket(deuxfleurs_identifier)
+    delete_bucket(deuxfleurs_identifier)
   end
 
   protected
