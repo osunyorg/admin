@@ -9,7 +9,6 @@ module Searchable
 
   included do
     after_save :save_search_data
-    before_destroy :clean_search_data
   end
 
   def save_search_data
@@ -54,12 +53,4 @@ module Searchable
     text
   end
 
-  def clean_search_data
-    Search.where(university: university, about_object: self).destroy_all
-    if is_a?(Communication::Website)
-      Search.where(university: university, website_id: self).destroy_all
-    elsif is_a?(Communication::Extranet)
-      Search.where(university: university, extranet_id: self).destroy_all
-    end
-  end
 end
