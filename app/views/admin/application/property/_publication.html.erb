@@ -11,4 +11,8 @@ i18n_key = "admin.#{object.class.to_s.pluralize.downcase.gsub('::', '.')}"
   <span class="badge bg-secondary text-dark">
     <%= t("#{i18n_key}.planned_on", date: l(object.published_at.to_date)) %>
   </span>
+  <div class="mt-4">
+    <%= osuny_label t("#{i18n_key}.planned_url") %>
+    <pre><%= object.planned_permalink_url_in_website(@website) %></pre>
+  </div>
 <% end %>
