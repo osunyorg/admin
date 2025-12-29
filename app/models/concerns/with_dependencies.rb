@@ -136,7 +136,6 @@ module WithDependencies
     # Les objets directs et les objets indirects (et les websites) répondent !
     return unless respond_to?(:is_direct_object?)
     websites_ids.each do |website_id|
-      next unless Communication::Website.exists?(website_id)
       Communication::Website.find(website_id).clean
     end
   end
