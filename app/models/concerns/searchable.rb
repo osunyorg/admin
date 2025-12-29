@@ -52,5 +52,4 @@ module Searchable
     text += " #{l10n.contents_full_text}" if l10n.respond_to?(:contents_full_text)
     text
   end
-
 end
