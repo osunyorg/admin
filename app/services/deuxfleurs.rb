@@ -26,7 +26,7 @@ class Deuxfleurs
             secret_access_key: data.dig('secret_access_key')
           )
     bucket = s3.bucket(host)
-    bucket.objects.each { |object| object.delete }
+    bucket.objects.batch_delete!
   end
 
   def delete_bucket(host)
