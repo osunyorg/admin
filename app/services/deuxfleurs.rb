@@ -16,6 +16,12 @@ class Deuxfleurs
     response.status == 200
   end
 
+  def empty_and_delete_bucket(host)
+    if empty_bucket(deuxfleurs_identifier)
+      delete_bucket(deuxfleurs_identifier)
+    end
+  end
+
   def empty_bucket(host)
     response = client.get("website/#{host}")
     data = JSON.parse(response.body)
