@@ -33,7 +33,6 @@ class Communication::Website::DestroyWebsiteJob < ApplicationJob
     ]
 
   def perform(website)
-    @website = website
     Search.remove_data_for_website(website)
     CATEGORIES.each do |klass|
       klass.where(communication_website_id: website).destroy_all
