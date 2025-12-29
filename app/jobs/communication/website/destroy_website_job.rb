@@ -19,7 +19,7 @@ class Communication::Website::DestroyWebsiteJob < ApplicationJob
       Communication::Website::Portfolio::Category,
       Communication::Website::Post::Category::Localization,
       Communication::Website::Post::Category,
-    ]
+    ].freeze
   OBJECTS_PARANOID = [
       Communication::Website::Agenda::Event::Localization,
       Communication::Website::Agenda::Event,
@@ -35,7 +35,7 @@ class Communication::Website::DestroyWebsiteJob < ApplicationJob
       Communication::Website::Portfolio::Project,
       Communication::Website::Post::Localization,
       Communication::Website::Post,
-    ]
+    ].freeze
 
   def perform(website)
     website.update_column :git_endpoint, ''
