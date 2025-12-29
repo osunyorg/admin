@@ -27,6 +27,8 @@ class Deuxfleurs
           )
     bucket = s3.bucket(host)
     bucket.objects.batch_delete!
+  rescue
+    false
   end
 
   def delete_bucket(host)
