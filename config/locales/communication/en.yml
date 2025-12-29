@@ -557,6 +557,7 @@ en:
             draft: Draft
             pinned_status: Pinned status
             planned_on: Publication planned on %{date}
+            planned_url: Planned URL
             published_on: Published on %{date}
         posts:
           by: by %{author}
