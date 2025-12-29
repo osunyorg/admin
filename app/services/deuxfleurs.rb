@@ -17,9 +17,7 @@ class Deuxfleurs
   end
 
   def empty_and_delete_bucket(host)
-    if empty_bucket(deuxfleurs_identifier)
-      delete_bucket(deuxfleurs_identifier)
-    end
+    delete_bucket(host) if empty_bucket(host)
   end
 
   def empty_bucket(host)
