@@ -14,307 +14,103 @@ class VariantServiceTest < ActiveSupport::TestCase
     ActiveStorage.track_variants = @was_tracking
   end
 
-  # Params tests
+  # Class
 
   test "params for dan-gold.jpeg with ActiveStorage" do
     blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = {}
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold.jpeg', format: 'jpeg' })
+    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold.jpeg' })
     assert_equal VariantService::ActiveStorage, variant_service.class
   end
+
+  test "params for dan-gold.jpeg with KeyCDN" do
+    blob = create_file_blob(filename: "dan-gold.jpeg")
+    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold.jpeg', keycdn: 'true' })
+    assert_equal VariantService::KeyCdn, variant_service.class
+  end
+
+  # Format
 
   test "params for dan-gold.jpeg" do
     blob = create_file_blob(filename: "dan-gold.jpeg")
     expected_params = {}
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold.jpeg', format: 'jpeg' })
-    assert_equal expected_params, variant_service.params
+    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold.jpeg', })
     assert_equal 'jpeg', variant_service.format
   end
 
   test "params for dan-gold.jpeg same format" do
     blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = {}
     variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold.jpeg', format: 'jpeg' })
-    assert_equal expected_params, variant_service.params
     assert_equal 'jpeg', variant_service.format
   end
 
   test "params for dan-gold.webp" do
     blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = {}
     variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold.jpeg', format: 'webp' })
-    assert_equal expected_params, variant_service.params
     assert_equal 'webp', variant_service.format
   end
 
-  test "params for dan-gold_500x500.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [500, 500] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_500x500.jpeg' })
-    assert_equal expected_params, variant_service.params
+  # Params
+
+  PARAMS = [
+    [{ filename_with_transformations: 'dan-gold.jpeg' }, {}],
+    [{ filename_with_transformations: 'dan-gold.jpeg' }, {}],
+    [{ filename_with_transformations: 'dan-gold_500x500.jpeg' }, { size: [500, 500] }],
+    [{ filename_with_transformations: 'dan-gold_500x.jpeg' }, { size: [500, nil] }],
+    [{ filename_with_transformations: 'dan-gold_x500.jpeg' }, { size: [nil, 500] }],
+    [{ filename_with_transformations: 'dan-gold_crop_left.jpeg' }, { gravity: 'West' }],
+    [{ filename_with_transformations: 'dan-gold@2x.jpeg' }, { scale: 2 }],
+    [{ filename_with_transformations: 'dan-gold_500x500_crop_left.jpeg' }, { size: [500, 500], gravity: 'West' }],
+    [{ filename_with_transformations: 'dan-gold_500x500@2x.jpeg' }, { size: [500, 500], scale: 2 }],
+    [{ filename_with_transformations: 'dan-gold_250x250@3x.jpeg' }, { size: [250, 250], scale: 3 }],
+    [{ filename_with_transformations: 'dan-gold_crop_left@2x.jpeg' }, { gravity: 'West', scale: 2 }],
+    [{ filename_with_transformations: 'dan-gold_250x250_crop_left@2x.jpeg' }, { size: [250, 250], gravity: 'West', scale: 2 }],
+    [{ filename_with_transformations: 'dan-gold_200x300_crop_top.jpeg' }, { size: [200, 300], gravity: 'North' }],
+    [{ filename_with_transformations: 'dan-gold_300x200_crop_right@2x.jpeg' }, { size: [300, 200], gravity: 'East', scale: 2 }],
+    [{ filename_with_transformations: 'dan-gold_1000x500_crop_left.jpeg' }, { size: [1000, 500], gravity: 'West' }],
+    [{ filename_with_transformations: 'dan-gold_1500x500_crop_left.jpeg' }, { size: [1500, 500], gravity: 'West' }],
+    [{ filename_with_transformations: 'dan-gold_800x840_crop_left.jpeg' }, { size: [800, 840], gravity: 'West' }],
+    [{ filename_with_transformations: 'dan-gold' }, {}],
+    [{ filename_with_transformations: 'dan-gold_500x500' }, { size: [500, 500] }],
+  ]
+
+  test "params matrix" do
+    PARAMS.each do |input, output|
+      blob = create_file_blob(filename: "dan-gold.jpeg")
+      variant_service = VariantService.manage(blob, input)
+      assert_equal output, variant_service.params
+    end
   end
 
-  test "params for dan-gold_500x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [500, nil] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_500x.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
+  # Transformations
 
-  test "params for dan-gold_x500.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [nil, 500] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_x500.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
+  TRANSFORMATIONS = [
+    [{ filename_with_transformations: 'dan-gold.jpeg' }, {}],
+    [{ filename_with_transformations: 'dan-gold.webp' }, { format: 'webp' }],
+    [{ filename_with_transformations: 'dan-gold_500x500.jpeg' }, { resize_to_limit: [500, 500] }],
+    [{ filename_with_transformations: 'dan-gold_500x.jpeg' }, { resize_to_limit: [500, nil] }],
+    [{ filename_with_transformations: 'dan-gold_x500.jpeg' }, { resize_to_limit: [nil, 500] }],
+    [{ filename_with_transformations: 'dan-gold_crop_left.jpeg' }, {}],
+    [{ filename_with_transformations: 'dan-gold@2x.jpeg' }, { resize_to_limit: [2972, 1672] }],
+    [{ filename_with_transformations: 'dan-gold_500x500_crop_left.jpeg' }, { resize_to_fill: [500, 500, { gravity: 'West' }], crop: '500x500+0+0' }],
+    [{ filename_with_transformations: 'dan-gold_500x500@2x.jpeg' }, { resize_to_limit: [1000, 1000] }],
+    [{ filename_with_transformations: 'dan-gold_250x250@3x.jpeg' }, { resize_to_limit: [750, 750] }],
+    [{ filename_with_transformations: 'dan-gold_crop_left@2x.jpeg' }, { resize_to_limit: [2972, 1672] }],
+    [{ filename_with_transformations: 'dan-gold_250x250_crop_left@2x.jpeg' }, { resize_to_fill: [500, 500, { gravity: 'West' }], crop: '500x500+0+0' }],
+    [{ filename_with_transformations: 'dan-gold_200x300_crop_top.jpeg' }, { resize_to_fill: [200, 300, { gravity: 'North' }], crop: '200x300+0+0' }],
+    [{ filename_with_transformations: 'dan-gold_300x200_crop_right@2x.jpeg' }, { resize_to_fill: [600, 400, { gravity: 'East' }], crop: '600x400+0+0' }],
+    [{ filename_with_transformations: 'dan-gold_1000x500_crop_left.jpeg' }, { resize_to_fill: [1000, 500, { gravity: 'West' }], crop: '1000x500+0+0' }],
+    [{ filename_with_transformations: 'dan-gold_1500x500_crop_left.jpeg' }, { resize_to_limit: [1500, 500] }],
+    [{ filename_with_transformations: 'dan-gold_800x840_crop_left.jpeg' }, { resize_to_limit: [800, 840] }],
+    [{ filename_with_transformations: 'dan-gold' }, { }],
+    [{ filename_with_transformations: 'dan-gold_500x500' }, { resize_to_limit: [500, 500] }],
+  ]
 
-  test "params for dan-gold_crop_left.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { gravity: 'West' }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_crop_left.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold@2x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { scale: 2 }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold@2x.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold_500x500_crop_left.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [500, 500], gravity: 'West' }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_500x500_crop_left.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold_500x500@2x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [500, 500], scale: 2 }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_500x500@2x.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold_250x250@3x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size:[250, 250], scale: 3 }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_250x250@3x.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold_crop_left@2x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { gravity: 'West', scale: 2 }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_crop_left@2x.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold_250x250_crop_left@2x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [250, 250], gravity: 'West', scale: 2 }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_250x250_crop_left@2x.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold_200x300_crop_top.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [200, 300], gravity: 'North' }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_200x300_crop_top.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold_300x200_crop_right@2x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [300, 200], gravity: 'East', scale: 2 }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_300x200_crop_right@2x.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold_1000x500_crop_left.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [1000, 500], gravity: 'West' }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_1000x500_crop_left.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold_1500x500_crop_left.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [1500, 500], gravity: 'West' }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_1500x500_crop_left.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold_800x840_crop_left.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [800, 840], gravity: 'West' }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_800x840_crop_left.jpeg' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  test "params for dan-gold" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = {}
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold' })
-    assert_equal expected_params, variant_service.params
-    assert_equal 'jpeg', variant_service.format
-  end
-
-  test "params for dan-gold_500x500" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_params = { size: [500, 500] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_500x500' })
-    assert_equal expected_params, variant_service.params
-  end
-
-  # Transformations tests
-
-  test "transformations for dan-gold.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = {}
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold.webp" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { format: 'webp' }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold.webp' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_500x500.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { resize_to_limit: [500, 500] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_500x500.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_500x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { resize_to_limit: [500, nil] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_500x.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_x500.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { resize_to_limit: [nil, 500] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_x500.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_crop_left.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = {}
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_crop_left.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold@2x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { resize_to_limit: [2972, 1672] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold@2x.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_500x500_crop_left.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = {
-      resize_to_fill: [500, 500, { gravity: 'West' }],
-      crop: '500x500+0+0'
-    }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_500x500_crop_left.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_500x500@2x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { resize_to_limit: [1000, 1000] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_500x500@2x.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_250x250@3x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { resize_to_limit: [750, 750] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_250x250@3x.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_crop_left@2x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { resize_to_limit: [2972, 1672] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_crop_left@2x.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_250x250_crop_left@2x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = {
-      resize_to_fill: [500, 500, { gravity: 'West' }],
-      crop: '500x500+0+0'
-    }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_250x250_crop_left@2x.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_200x300_crop_top.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = {
-      resize_to_fill: [200, 300, { gravity: 'North' }],
-      crop: '200x300+0+0'
-    }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_200x300_crop_top.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_300x200_crop_right@2x.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = {
-      resize_to_fill: [600, 400, { gravity: 'East' }],
-      crop: '600x400+0+0'
-    }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_300x200_crop_right@2x.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_1000x500_crop_left.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = {
-      resize_to_fill: [1000, 500, { gravity: 'West' }],
-      crop: '1000x500+0+0'
-    }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_1000x500_crop_left.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_1500x500_crop_left.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { resize_to_limit: [1500, 500] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_1500x500_crop_left.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_800x840_crop_left.jpeg" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { resize_to_limit: [800, 840] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_800x840_crop_left.jpeg' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = {}
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold' })
-    assert_equal expected_transformations, variant_service.transformations
-  end
-
-  test "transformations for dan-gold_500x500" do
-    blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = { resize_to_limit: [500, 500] }
-    variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_500x500' })
-    assert_equal expected_transformations, variant_service.transformations
+  test "transfomrations matrix" do
+    TRANSFORMATIONS.each do |input, output|
+      blob = create_file_blob(filename: "dan-gold.jpeg")
+      variant_service = VariantService.manage(blob, input)
+      assert_equal output, variant_service.transformations
+    end
   end
 
   private
