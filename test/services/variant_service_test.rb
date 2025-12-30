@@ -213,7 +213,7 @@ class VariantServiceTest < ActiveSupport::TestCase
 
   test "transformations for dan-gold@2x.jpeg" do
     blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = {}
+    expected_transformations = { resize_to_limit: [2972, 1672] }
     variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold@2x.jpeg' })
     assert_equal expected_transformations, variant_service.transformations
   end
@@ -244,7 +244,7 @@ class VariantServiceTest < ActiveSupport::TestCase
 
   test "transformations for dan-gold_crop_left@2x.jpeg" do
     blob = create_file_blob(filename: "dan-gold.jpeg")
-    expected_transformations = {}
+    expected_transformations = { resize_to_limit: [2972, 1672] }
     variant_service = VariantService.manage(blob, { filename_with_transformations: 'dan-gold_crop_left@2x.jpeg' })
     assert_equal expected_transformations, variant_service.transformations
   end
