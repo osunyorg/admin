@@ -7,8 +7,6 @@ class VariantService
     'center'
   ]
 
-  SCALE_REGEX = /.+@[23]x.[a-z]+$/
-  CROP_REGEX = /.+_crop_(#{GRAVITIES.join('|')}).*\.[a-z]+$/
   SIZE_REGEX = /.+_([0-9]+x[0-9]*|[0-9]*x[0-9]+).*(\.[a-z]+)?$/
 
   def self.manage(blob, params)
@@ -77,15 +75,18 @@ class VariantService
   end
 
   def scale
-    return nil unless SCALE_REGEX.match? filename
-    return 2 if filename.include?('@2x')
-    return 3 if filename.include?('@3x')
-    1
+    if filename.include?('@2x')
+      2
+    elsif filename.include?('@3x')
+      3
+    else
+      # 1 is nil, no scale
+      nil
+    end
   end
 
   # top, left...
   def gravity
-    return nil unless CROP_REGEX.match? filename
     GRAVITIES.detect { |key| filename.include?("_crop_#{key}") }
   end
 
