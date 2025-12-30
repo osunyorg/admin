@@ -23,10 +23,21 @@ module Permalinkable
   end
 
   def current_permalink_url_in_website(website)
-    return if website.url.blank?
-    path = current_permalink_in_website(website)&.path
-    return if path.blank?
-    "#{Static.remove_trailing_slash(website.url)}#{Static.clean_path(path)}"
+    build_url(
+      website,
+      current_permalink_in_website(website)&.path
+    )
+  end
+
+  def planned_permalink_in_website(website)
+    current_permalink_in_website(website) || new_permalink_in_website(website)
+  end
+
+  def planned_permalink_url_in_website(website)
+    build_url(
+      website,
+      planned_permalink_in_website(website)&.computed_path
+    )
   end
 
   # Not persisted yet
@@ -53,4 +64,10 @@ module Permalinkable
     permalink.destroy
   end
 
+  protected
+  
+  def build_url(website, path)
+    return if website.url.blank? || path.blank?
+    "#{Static.remove_trailing_slash(website.url)}#{Static.clean_path(path)}"
+  end
 end
