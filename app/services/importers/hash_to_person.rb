@@ -18,7 +18,7 @@ module Importers
     def valid?
       if @first_name.blank? && @last_name.blank? && @email.blank?
         @error = "An email or a name is necessary"
-      elsif country_not_found?
+      elsif @country.present? && country_not_found?
         @error = "Country #{@country} not found"
       elsif !person.valid?
         @error = "Unable to create the person: #{person.errors.full_messages}"
