@@ -7,7 +7,7 @@ class VariantService
     'center'
   ]
 
-  SIZE_REGEX = /^[^_]*_([0-9]+x[0-9]*|[0-9]*x[0-9]+)(?:[^.]*)?(?:\.[a-z]+)?$/i
+  SIZE_REGEX = /^[^_]*_([0-9]+x[0-9]*|[0-9]*x[0-9]+)(?:_(?:[a-z]+(?:_[a-z]+)*)|@[0-9]+x)*(?:\.[a-z]+)?$/i
 
   def self.manage(blob, params)
     use_keycdn = params.dig(:keycdn) == 'true'
