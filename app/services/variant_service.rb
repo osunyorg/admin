@@ -7,8 +7,6 @@ class VariantService
     'center'
   ]
 
-  SIZE_REGEX = /.+_([0-9]+x[0-9]*|[0-9]*x[0-9]+).*(\.[a-z]+)?$/
-
   def self.manage(blob, params)
     use_keycdn = params.dig(:keycdn) == 'true'
     use_keycdn  ? VariantService::KeyCdn.new(blob, params)
@@ -90,13 +88,33 @@ class VariantService
     GRAVITIES.detect { |key| filename.include?("_crop_#{key}") }
   end
 
-  # [800, nil]
-  # [800, 400]
-  # [nil, 400]
+  # dan-gold.jpeg         -> nil
+  # dan-gold_800x.jpeg    -> [800, nil]
+  # dan-gold_800x400.jpeg -> [800, 400]
+  # dan-gold_x400.jpeg    -> [nil, 400]
   def size
-    return nil unless SIZE_REGEX.match? filename
-    string_size = SIZE_REGEX.match(filename)[1]
-    split_size = string_size.split('x')
+    extension = File.extname(filename)
+    # dan-gold_250x250_crop_left@2x.jpeg
+    name = File.basename(filename, extension)
+    # dan-gold_250x250_crop_left@2x
+    [
+      '@2x', '@3x', 
+      '_crop_top', '_crop_right', '_crop_bottom', '_crop_left', '_crop_center'
+    ].each do |fragment|
+      name = name.remove(fragment)
+    end
+    # dan-gold_250x250
+    parts = name.split('_')
+    if parts.many?
+      # 250x250
+      name = parts.last
+    else
+      # dan-gold.jpeg -> dan-gold
+      name = nil
+    end
+    return nil if name.blank? || !name.include?('x')
+    split_size = name.split('x')
+    # puts filename, name, split_size
     Array.new(2) { |i| split_size[i].blank? ? nil : split_size[i].to_i }
   end
 
