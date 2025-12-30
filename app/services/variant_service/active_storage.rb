@@ -49,7 +49,7 @@ class VariantService::ActiveStorage < VariantService
         if gravity.present? && should_crop?
           transformations[:resize_to_fill] = [*variant_dimensions, { gravity: gravity_keyword }]
           transformations[:crop] = "#{variant_dimensions.join('x')}+0+0"
-        elsif variant_dimensions_smaller_than_original?
+        else
           transformations[:resize_to_limit] = variant_dimensions
         end
       end
@@ -60,6 +60,7 @@ class VariantService::ActiveStorage < VariantService
 
   protected
 
+  # North, West...
   def gravity_keyword
     return if gravity.nil?
     GRAVITY_PER_CROP[gravity]
