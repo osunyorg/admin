@@ -27,7 +27,8 @@ class VariantService::ActiveStorage < VariantService
     @params ||= {
         size: size,
         gravity: gravity_keyword,
-        scale: scale
+        scale: scale,
+        format: (format unless format_unchanged?)
       }.compact
   end
 
