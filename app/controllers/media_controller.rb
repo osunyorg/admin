@@ -4,12 +4,10 @@ class MediaController < ApplicationController
   before_action :load_blob
 
   def show
-    if params[:keycdn] == 'true'
-      redirect_to VariantService.keycdn_manage(@blob, params), allow_other_host: true
-    else
-      blob_or_variant = VariantService.manage(@blob, params)
-      redirect_to url_for(blob_or_variant)
-    end
+    service = VariantService.manage(@blob, params)
+    url = service.blob_or_variant.present? ? url_for(service.blob_or_variant) : service.url
+    render plain: url
+    # redirect_to url
   end
 
   def download
