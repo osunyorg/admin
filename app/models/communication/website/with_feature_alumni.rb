@@ -13,6 +13,16 @@ module Communication::Website::WithFeatureAlumni
     has_alumni? ? about.cohorts : Education::Cohort.none
   end
 
+  def alumni_programs
+    return Education::Program.none unless has_alumni?
+    program_ids = education_programs
+                    .joins(:education_cohorts)
+                    .where(education_cohorts: { id: cohorts.pluck(:id) })
+                    .distinct
+                    .pluck(:id)
+    education_programs.where(id: program_ids)
+  end
+
   def academic_years
     has_alumni? ? about.academic_years : Education::AcademicYear.none
   end
