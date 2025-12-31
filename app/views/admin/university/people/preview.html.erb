@@ -22,9 +22,64 @@
             <%= sanitize @l10n.biography %>
           </div>
         </div>
+        <!--
+        <div class="roles">
+        </div>
+        -->
       </div>
+      <!--
+      <div class="taxonomies-container">
+        <ul class="taxonomies-single persons-taxonomies with-label" aria-label="Catégories">
+          <li class="terms">
+            <span class="taxonomy-title">Catégories</span>
+            <ul class="taxonomy-children" aria-label="Catégories">
+              <li><a href="https://example.osuny.org/fr/equipe/categories/design/">Design</a></li>
+            </ul>
+          </li>
+          <li class="terms taxonomy-dev">
+            <span class="taxonomy-title">Développement web</span>
+            <ul class="taxonomy-children" aria-label="Catégories">
+              <li><a href="https://example.osuny.org/fr/equipe/categories/dev/back/">Back</a></li>
+            </ul>
+          </li>
+          <li class="terms taxonomy-langues">
+            <span class="taxonomy-title">Langues</span>
+            <ul class="taxonomy-children" aria-label="Catégories">
+              <li><a href="https://example.osuny.org/fr/equipe/categories/langues/anglais/">Anglais</a></li>
+              <li><a href="https://example.osuny.org/fr/equipe/categories/langues/japonais/">Japonais</a></li>
+            </ul>
+          </li>
+          <li class="terms taxonomy-nationalite">
+            <span class="taxonomy-title">Nationalité</span>
+            <ul class="taxonomy-children" aria-label="Catégories">
+              <li><a href="https://example.osuny.org/fr/equipe/categories/nationalite/uruguay/">Uruguay</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      -->
       <div class="contacts-details">
-        <% # TODO %>
+        <ul>
+          <% 
+          if @l10n.url.present?
+            detail = ContactDetails::Website.new(@l10n.url)
+            if detail.present? 
+              %>
+              <li class="website">
+                <span><%= t('contact_details.websites.website.label') %></span>
+                <a href="<%= detail.value %>" target="_blank" rel="noopener noreferrer" itemprop="url"><%= detail.label %></a>
+              </li>
+              <%
+            end
+          end
+          %>
+          <% if @person.email.present? %>
+            <li class="email">
+              <span><%= t('contact_details.websites.email.label') %></span>
+              <a href="mailto:<%= @person.email %>" itemprop="email" ><%= @person.email %></a>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </div>
     <div class="blocks">
