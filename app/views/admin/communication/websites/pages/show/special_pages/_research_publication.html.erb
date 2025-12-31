@@ -1,0 +1,11 @@
+<%
+# Not in controller because it's loaded depending on the page type
+@publications = @website.connected_publications
+                        .ordered(current_language)
+                        .page(params[:publications_page])
+%>
+<%= osuny_panel t('admin.communication.website.pages.special_page') do %>
+  <p><%= t('admin.communication.website.pages.special_pages.research_publication.native', count: @publications.total_count) %></p>
+  <%= render 'admin/research/publications/list', publications: @publications %>
+  <%= paginate @publications, param_name: :publications_page %>
+<% end %>
