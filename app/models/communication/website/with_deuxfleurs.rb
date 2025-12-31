@@ -36,6 +36,11 @@ module Communication::Website::WithDeuxfleurs
     end
   end
 
+  def deuxfleurs_destroy_bucket
+    return unless deuxfleurs_hosting
+    deuxfleurs.empty_and_delete_bucket(deuxfleurs_identifier)
+  end
+
   protected
 
   def deuxfleurs_setup_done?

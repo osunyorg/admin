@@ -33,7 +33,7 @@ class Osuny::AddressFormatter
   end
 
   def country
-    country_object&.to_s || country_string
+    country_object&.common_name || country_string
   end
 
   def country_alpha2

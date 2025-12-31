@@ -95,6 +95,8 @@ end
 
 group :development do
   gem "annotaterb"
+  gem "better_errors"
+  gem "binding_of_caller"
   gem "listen", "~> 3.3"
   gem "rack-mini-profiler", "~> 3.0"
   gem "spring"
