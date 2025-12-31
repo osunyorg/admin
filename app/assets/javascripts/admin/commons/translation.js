@@ -57,7 +57,8 @@ window.osuny.translation = {
         }
     },
 
-    warnForTextTooLong: function(field) {
+    warnForTextTooLong: function (field) {
+        'use strict';
         var element = field;
         if (this.isSummernote(field)) {
             element = field.parentNode.getElementsByClassName('note-editable')[0];
@@ -76,7 +77,8 @@ window.osuny.translation = {
         }
     },
 
-    isSummernote: function(field) {
+    isSummernote: function (field) {
+        'use strict';
         return field.dataset.provider === 'summernote' || field.classList.contains('summernote-vue');
     },
 
