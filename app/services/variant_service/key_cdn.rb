@@ -44,26 +44,6 @@ class VariantService::KeyCdn < VariantService
     params[:position] = position if position.present?
   end
 
-  def crop_ratio
-    1.0 * variant_dimensions[0] / variant_dimensions[1]
-  end
-
-  def max_crop_width
-    [blob_width, blob_width * crop_ratio].min
-  end
-
-  def max_crop_height
-    [blob_height, blob_height * crop_ratio].min
-  end
-
-  def max_width
-    [blob_width, variant_width].min
-  end
-
-  def max_height
-    [blob_height, variant_height].min
-  end
-
   def keycdn_host
     ENV["KEYCDN_HOST"]
   end

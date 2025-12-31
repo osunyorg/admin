@@ -62,11 +62,31 @@ class VariantService
     variant_dimensions.last
   end
 
+  def crop_ratio
+    1.0 * variant_width / variant_height
+  end
+
+  def max_crop_width
+    [blob_width, blob_width * crop_ratio].min
+  end
+
+  def max_crop_height
+    [blob_height, blob_height * crop_ratio].min
+  end
+
+  def max_width
+    [blob_width, variant_width].min
+  end
+
+  def max_height
+    [blob_height, variant_height].min
+  end
+
   def format_unchanged?
     format == blob.filename.extension_without_delimiter
   end
 
-  # Is there a target size set (or maybe 2!)
+  # Is there a target size set (or maybe 2!) different from blob size?
   def should_resize?
     variant_dimensions != blob_size
   end
