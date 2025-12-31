@@ -1,7 +1,7 @@
 <%
 # Not in controller because it's loaded depending on the page type
 @locations = @website.administration_locations
-                     .published_now_in(current_language)
+                    #  .published_now_in(current_language)
                      .ordered(current_language)
                      .page(params[:locations_page])
 %>
