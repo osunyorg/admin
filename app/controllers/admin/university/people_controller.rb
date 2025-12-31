@@ -40,7 +40,14 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
                                          .includes(:target)
                                          .ordered_by_date
                                          .page(params[:roles_page])
+    @preview = true
     breadcrumb
+  end
+
+  def preview
+    @website = @person.websites&.first || current_university.websites.first
+    @body_class = 'persons__page full-width'
+    render layout: 'admin/layouts/preview'
   end
 
   def new

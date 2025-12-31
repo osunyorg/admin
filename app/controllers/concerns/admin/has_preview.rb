@@ -6,6 +6,9 @@ module Admin::HasPreview
   end
 
   def preview
+    @body_class = ''
+    @full_width = @l10n.about.try(:full_width)    
+    @body_class += 'full-width' if @full_width
     render  template: 'admin/application/preview/preview',
             layout: 'admin/layouts/preview'
   end
