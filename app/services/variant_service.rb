@@ -54,22 +54,35 @@ class VariantService
     end
   end
 
+  def variant_width
+    variant_dimensions.first
+  end
+
+  def variant_height
+    variant_dimensions.last
+  end
+
   def format_unchanged?
     format == blob.filename.extension_without_delimiter
   end
 
-  # If one of the dimensions is greater than the original one, no crop and resize to limit
-  def should_crop?
-    variant_dimensions_set? && variant_dimensions_smaller_than_original?
+  # Is there a target size set (or maybe 2!)
+  def should_resize?
+    variant_dimensions != blob_size
   end
 
-  def variant_dimensions_set?
+  # If one of the dimensions is greater than the original one, no crop and resize to limit
+  def should_crop?
+    should_resize? && both_variant_dimensions_set?
+  end
+
+  def both_variant_dimensions_set?
     variant_dimensions.size == 2 && variant_dimensions.all?(&:present?)
   end
 
   def variant_dimensions_smaller_than_original?
-    variant_dimensions[0].to_i <= blob_size[0].to_i &&
-    variant_dimensions[1].to_i <= blob_size[1].to_i
+    variant_width.to_i <= blob_width.to_i &&
+    variant_height.to_i <= blob_height.to_i
   end
 
   def scale
@@ -124,5 +137,13 @@ class VariantService
       @blob.analyze unless @blob.analyzed?
       @blob.metadata.slice('width', 'height').values
     end
+  end
+
+  def blob_width
+    blob_size.first
+  end
+
+  def blob_height
+    blob_size.last
   end
 end

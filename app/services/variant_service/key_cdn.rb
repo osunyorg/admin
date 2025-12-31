@@ -7,17 +7,14 @@ class VariantService::KeyCdn < VariantService
   def params
     @params ||= begin
       params = {}
-      # Resize and/or crop unless original size
-      if variant_dimensions != blob_size
+      if should_resize?
         if should_crop?
-          params[:width] = variant_dimensions[0]
-          params[:height] = variant_dimensions[1]
-          params[:position] = position if position.present?
-        elsif variant_dimensions[0].present?
-          params[:width] = variant_dimensions[0]
+          set_params_for_crop(params)
+        elsif variant_width.present?
+          params[:width] = max_width
           params[:enlarge] = 0
-        elsif variant_dimensions[1].present?
-          params[:height] = variant_dimensions[1]
+        elsif variant_height.present?
+          params[:height] = max_height
           params[:enlarge] = 0
         end
       end
@@ -27,6 +24,45 @@ class VariantService::KeyCdn < VariantService
   end
 
   protected
+
+  def set_params_for_crop(params)
+    if variant_dimensions_smaller_than_original?
+      # Simple crop, everything is smaller
+      params[:width] = variant_width
+      params[:height] = variant_height
+    else
+      # More complicated, 1 or both dimensions are larger, so we must find the biggest possible size with the ratio
+      width = blob_width
+      height = (width / crop_ratio).to_i
+      if height > blob_height
+        height = blob_height
+        width = (height * crop_ratio).to_i
+      end
+      params[:width] = width
+      params[:height] = height
+    end
+    params[:position] = position if position.present?
+  end
+
+  def crop_ratio
+    1.0 * variant_dimensions[0] / variant_dimensions[1]
+  end
+
+  def max_crop_width
+    [blob_width, blob_width * crop_ratio].min
+  end
+
+  def max_crop_height
+    [blob_height, blob_height * crop_ratio].min
+  end
+
+  def max_width
+    [blob_width, variant_width].min
+  end
+
+  def max_height
+    [blob_height, variant_height].min
+  end
 
   def keycdn_host
     ENV["KEYCDN_HOST"]
