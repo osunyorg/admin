@@ -91,6 +91,11 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
 
   protected
 
+  def prepare_preview
+    super
+    @body_class += ' offcanvas-toc'
+  end
+
   def load_part
     part_from_params = params.dig('education_program', 'part')
     @part = part_from_params if ['admission', 'certification', 'pedagogy', 'presentation', 'results'].include?(part_from_params)
