@@ -79,4 +79,8 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
     from_day <= Date.current && (to_day.nil? || Date.current <= to_day)
   end
 
+  def hugo_body_class
+    'jobs__page'
+  end
+
 end

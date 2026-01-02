@@ -3,20 +3,23 @@ module Admin::HasPreview
 
   included do
     before_action :set_preview, only: :show
+    before_action :prepare_preview, only: :preview
   end
 
   def preview
-    @body_class = ''
-    @full_width = @l10n.about.try(:full_width)    
-    @body_class += 'full-width' if @full_width
     render  template: 'admin/application/preview/preview',
             layout: 'admin/layouts/preview'
   end
 
   protected
-  
+
   def set_preview
     @preview = true
+  end
+  
+  def prepare_preview
+    @body_class = resource.hugo_body_class    
+    @body_class += ' full-width' if resource.try(:full_width)
   end
 
 end

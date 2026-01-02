@@ -4,6 +4,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
                               through_association: :people,
                               except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
@@ -40,16 +41,13 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
                                          .includes(:target)
                                          .ordered_by_date
                                          .page(params[:roles_page])
-    @preview = true
     breadcrumb
   end
-
   def preview
     @website = @person.websites&.first || current_university.websites.first
     @body_class = 'persons__page full-width'
     render layout: 'admin/layouts/preview'
   end
-
   def new
     @categories = categories
     breadcrumb

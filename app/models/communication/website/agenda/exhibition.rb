@@ -108,6 +108,10 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
     menus
   end
 
+  def hugo_body_class
+    'exhibitions__page'
+  end
+
   protected
 
   def list_blocks_template_kind

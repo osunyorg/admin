@@ -29,4 +29,8 @@ class Communication::Website::Page::CommunicationAgendaExhibition < Communicatio
   def special_page_categories
     website.agenda_categories
   end
+
+  def hugo_body_class
+    'posts__section'
+  end
 end

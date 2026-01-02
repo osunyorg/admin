@@ -29,4 +29,8 @@ class Communication::Website::Page::EducationSchool < Communication::Website::Pa
   def git_path_relative
     'schools/_index.html'
   end
+
+  def hugo_body_class
+    'schools__section'
+  end
 end

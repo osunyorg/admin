@@ -128,6 +128,10 @@ class Communication::Website::Page < ApplicationRecord
     nil
   end
 
+  def hugo_body_class
+    'pages__section'
+  end
+
   protected
 
   def last_ordered_element
