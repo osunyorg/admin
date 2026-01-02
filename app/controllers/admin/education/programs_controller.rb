@@ -3,6 +3,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
 
   before_action :load_teacher_people, only: [:new, :edit, :create, :update]
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
@@ -36,7 +37,6 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   end
 
   def preview
-    @website = @program.websites&.first
     render layout: 'admin/layouts/preview'
   end
 
@@ -89,6 +89,11 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   end
 
   protected
+
+  def prepare_preview
+    super
+    @body_class += ' offcanvas-toc'
+  end
 
   def load_part
     part_from_params = params.dig('education_program', 'part')

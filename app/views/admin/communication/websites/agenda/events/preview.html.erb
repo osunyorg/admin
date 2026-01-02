@@ -1,0 +1,242 @@
+<%
+hero_classes = "hero"
+if @l10n.featured_image.present? && @l10n.featured_image.attached?
+  format = ActiveStorage::Utils.format(@l10n.featured_image)
+  hero_classes += " hero--with-image hero--image-#{format}" if format.present?
+end
+%>
+<main id="main" class="page-with-blocks">
+  <header class="<%= hero_classes %>">
+    <div class="container">
+      <div class="content">
+        <div class="hero-text">
+          <% if @l10n.subtitle.present? %>
+            <hgroup<% if @summary.present? %> class="has-lead"<% end %>>
+              <h1>
+                <%= @l10n.title %>
+                <% if @l10n.subtitle.present? %>
+                  <span><%= @l10n.subtitle %></span>
+                <% end %>
+              </h1>
+            </hgroup>
+          <% else %>
+            <h1><%= @l10n.title %></h1>
+          <% end %>
+          <% if @event.categories.any? %>
+            <ul class="taxonomies-single without-label events-taxonomies">
+              <% @event.categories.ordered_by_position_in_tree.each do |category| %>
+                <li><a href=""><%= category.to_s_in(current_language) %></a></li>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+        <%= render 'admin/application/preview/featured_image', l10n: @l10n %>
+      </div>
+    </div>
+  </header>
+  <div itemscope itemtype="https://schema.org/Event">
+    <div class="container event-access">
+      <% if @l10n.text.present? || @l10n.notes.present? %>
+        <div class="event-practicals" itemprop="offers" itemscope="" itemtype="https://schema.org/Offer">
+          <h2>Informations pratiques</h2>
+          <div>
+            <%= sanitize @l10n.text %>
+            <div class="event-notes">
+              <%= sanitize @l10n.notes %>
+            </div>
+          </div>
+          <% if @l10n.header_cta %>
+            <a href="<%= @l10n.header_cta_url %>" class="btn" target="_blank" rel="noopener">
+              <%= @l10n.header_cta_label %>
+            </a>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="event-slots">
+        <h2 class="events-slots-title">Dates</h2>
+        <div class="event-summary">
+          <span class="date" itemprop="startDate" content="2024-02-03">
+            <%= date_range_i18n @event.from_day,
+                                @event.to_day,
+                                format: :long,
+                                layout: :one_line,
+                                locale: @l10n.language.iso_code %>
+
+          </span>
+          <% if @event.kind_recurring? %>
+            <span class="type">Événement régulier</span>
+          <% end %>
+          <% unless @event.archive? %>
+            <div class="dropdown-calendar">
+              <button type="button" aria-expanded="false" aria-controls="event-dropdown-calendar-primary">
+                <span>Ajouter à mon agenda</span>
+              </button>
+            </div>
+          <% end %>
+        </div>
+        <% if @event.time_slots.any? %>
+          <ul id="all-dates" class="extendable-list">
+            <%
+            @event.time_slots.ordered.each do |time_slot| 
+              time_slot_l10n = time_slot.localization_for(@l10n.language)
+              %>
+              <li class="event-time-slot" itemprop="subEvent" itemscope="" itemtype="https://schema.org/Event">
+                <span class="date"><%= l time_slot_l10n.from_day, format: :long %></span>
+                <p class="hours">
+                  <time><%= l time_slot_l10n.from_hour, format: "%Hh%M" %></time>
+                  <% if time_slot_l10n.to_hour %>
+                    <time><%= l time_slot_l10n.to_hour, format: "%Hh%M" %></time>
+                  <% end %>
+                </p>
+                <% if time_slot_l10n.place %>
+                  <span class="location" itemprop="location"><%= time_slot_l10n.place %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% end%>
+      </div>
+    </div>
+    <div class="document-content">
+      <div class="section-sidebar event-sidebar">
+        <div>
+          <% if @l10n.blocks.template_title.published.many? %>
+            <div class="toc-cta">
+              <button class="toc-cta-title" aria-label="Table des matières" type="button">
+                <span data-default="Table des matières">Table des matières</span>
+              </button>
+            </div>
+            <div class="toc-container" aria-hidden="false">
+              <div class="toc-content">
+                <div id="toc-title" class="toc-title" role="heading" aria-level="2">Table des matières</div>
+                <nav class="toc toc-pages" id="nav-toc" aria-labelledby="toc-title">
+                  <ol>
+                    <% @l10n.blocks.template_title.ordered.each do |block| %>
+                      <li><a href="#<%= block.title.parameterize %>"><%= block.title %></a></li>
+                    <% end %>
+                  </ol>
+                </nav>
+                <button name="Fermer" type="button">Fermer</button>
+              </div>
+            </div>
+          <% end %>
+          <% if @event.kind_parent? %>
+            <a href="#programme" class="btn programme-btn">Accéder au programme</a>
+          <% end %>
+        </div>
+      </div>
+      <% if @l10n.summary.present? %>
+        <div class="block block-summary">
+          <div class="container">
+            <div class="block-content">
+              <div class="lead" role="heading" aria-level="2">
+                <%= sanitize @l10n.summary %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="blocks">
+        <%= render 'admin/communication/contents/show', about: @l10n, strip_javascript: true %>
+      </div>
+    </div>
+    <% if @event.kind_parent? %>
+      <div class="container" itemtype="subEvents">
+        <div class="event-programme" id="programme">
+          <ul class="events events--agenda">
+            <%
+            @event.days.ordered.each do |day|
+              events = day.events.ordered
+              next if events.none?
+              %>
+              <li class="events-date events-date--sticky">
+                <h2 class="events-date-title">
+                  <span><%= l day.date, format: :long %></span>
+                </h2>
+                <ol class="events-scheduled">
+                  <%
+                  events.each do |event|
+                    event_l10n = event.localization_for(@l10n.language)
+                    %>
+                    <li itemscope="" itemtype="https://schema.org/Event">
+                      <article class="event event--with-image event--child">
+                        <div class="event-content">
+                          <% if event_l10n.subtitle.present? %>
+                            <hgroup>
+                              <h3 class="event-title" itemprop="name">
+                                <a href="" itemprop="url"><%= event_l10n.title %></a>
+                              </h3>
+                              <p class="event-subtitle"><%= event_l10n.subtitle %></p>
+                            </hgroup>
+                          <% else %>
+                            <h3 class="event-title" itemprop="name">
+                              <a href="" itemprop="url"><%= event_l10n.title %></a>
+                            </h3>
+                          <% end %>
+                          <%
+                          if event.time_slots.one?
+                            time_slot = event.time_slots.first
+                            time_slot_l10n = time_slot.localization_for(@l10n.language)
+                            %>
+                            <p class="event-hours">
+                              <span>
+                                <time><%= l time_slot_l10n.from_hour, format: "%Hh%M" %></time>
+                                <% if time_slot_l10n.to_hour %>
+                                  <time><%= l time_slot_l10n.to_hour, format: "%Hh%M" %></time>
+                                <% end %>
+                              </span>
+                            </p>
+                          <% end %>
+                          <% if event_l10n.summary.present? %>
+                            <div class="event-description" itemprop="description">
+                              <%= sanitize event_l10n.summary %>
+                            </div>
+                          <% end %>
+                          <% if event.categories.any? %>
+                            <ul class="event-categories" aria-label="Catégories">
+                              <% event.categories.ordered_by_position_in_tree.each do |category| %>
+                                <li><a href=""><%= category.to_s_in(@l10n.language) %></a></li>
+                              <% end %>
+                            </ul>
+                          <% end %>
+                        </div>
+                        <div class="media">
+                          <%= kamifusen_tag event_l10n.featured_image, width: 1280 %>
+                        </div>
+                      </article>
+                    </li>
+                  <% end %>
+                </ol>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+    <%
+    if @event.kind_child?
+      parent = @event.parent
+      parent_l10n = parent.localization_for(@l10n.language)
+      %>
+      <div class="event-parent container">
+        <p class="event-parent__title">Cet événement fait partie de</p>
+        <article class="event event--with-image event--parent">
+          <div class="event-content">
+            <hgroup>
+              <h3 class="event-title"><a href=""><%= parent_l10n.title %></a></h3>
+              <p class="event-subtitle"><%= parent_l10n.subtitle %></p>
+            </hgroup>
+            <div class="event-description" itemprop="description"><%= sanitize parent_l10n.summary %></div>
+            <p class="more meta" aria-hidden="true">En savoir plus</p>
+          </div>
+          <% if parent_l10n.featured_image.attached? %>
+            <div class="media">
+              <%= kamifusen_tag parent_l10n.featured_image %>
+            </div>
+          <% end %>
+        </article>
+      </div>
+    <% end %>
+  </div>
+</main>
+<%= render 'admin/application/preview/lightbox' %>

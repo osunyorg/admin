@@ -174,6 +174,10 @@ class University::Person < ApplicationRecord
     [address, "#{zipcode} #{city} #{country}".strip].join(', ')
   end
 
+  def hugo_body_class
+    'persons__page'
+  end
+
   def to_s_with_mail_in(language)
     best_localization_for(language).to_s_with_mail
   end

@@ -99,6 +99,10 @@ class University::Organization < ApplicationRecord
     mentions_by_blocks
   end
 
+  def hugo_body_class
+    'organizations__page'
+  end
+
   protected
 
   def blocks_mentioning_self
