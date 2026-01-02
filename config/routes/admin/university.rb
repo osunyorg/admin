@@ -51,6 +51,7 @@ namespace :university, path: :directory do
     end
     member do
       get :static
+      get :preview
       post :restore
     end
   end
