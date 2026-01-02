@@ -75,11 +75,63 @@
           %>
           <% if @person.email.present? %>
             <li class="email">
-              <span><%= t('contact_details.websites.email.label') %></span>
+              <span><%= t('contact_details.emails.email.label') %></span>
               <a href="mailto:<%= @person.email %>" itemprop="email" ><%= @person.email %></a>
             </li>
           <% end %>
-          <!-- TODO -->
+          <%
+          ContactDetails::SOCIAL_NETWORKS.each do |attribute|
+            should_show = is_information_public?(@person, attribute)
+            if should_show
+              data = ContactDetails.find_social(attribute, @person, @l10n)
+              next if data.blank?
+              kind = "ContactDetails::#{attribute.to_s.camelize}".constantize
+              detail = kind.new data
+              if detail.present?
+          %>
+            <li class="<%= attribute %>">
+              <span><%= attribute.to_s.titleize %></span>
+              <a href="<%= detail.value %>" ><%= detail.label %></a>
+            </li>
+          <%
+              end
+            end
+          end
+          %>
+          <%
+          ContactDetails::PHONES.each do |attribute|
+            if @person.respond_to?(attribute)
+              should_show = is_information_public?(@person, attribute)
+              if should_show
+                data = @person.public_send(attribute)
+                detail = ContactDetails::Phone.new data
+                if detail.present?
+          %>
+            <li class="<%= attribute %>">
+              <span><%= University::Person.human_attribute_name(attribute) %></span>
+              <a href="<%= detail.value %>" ><%= detail.label %></a>
+            </li>
+          <%
+                end
+              end
+            end
+          end
+          %>
+          <%
+          if @person.respond_to?(:address)
+            should_show = is_information_public?(@person, :address)
+            if should_show
+              label = t('contact_details.postal_address.address.label')
+              address_formatter = Osuny::AddressFormatter.new(about: @person, l10n: @l10n, language: @l10n.language)
+          %>
+            <li class="address">
+              <span><%= label %></span>
+              <%= address_formatter.to_html.html_safe %>
+            </li>
+          <%
+            end
+          end
+          %>
         </ul>
       </div>
     </div>
