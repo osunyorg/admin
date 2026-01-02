@@ -31,6 +31,6 @@ class Communication::Website::Page::CommunicationPortfolio < Communication::Webs
   end
 
   def hugo_body_class
-    'posts__section'
+    'projects__section'
   end
 end

@@ -31,6 +31,6 @@ class Communication::Website::Page::CommunicationJobboard < Communication::Websi
   end
 
   def hugo_body_class
-    'posts__section'
+    'jobs__section'
   end
 end
