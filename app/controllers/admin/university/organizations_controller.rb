@@ -38,7 +38,6 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def preview
-    @body_class = 'organizations__page full-width'
     render layout: 'admin/layouts/preview'
   end
 
@@ -92,6 +91,11 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   protected
+
+  def prepare_preview
+    super
+    @body_class += ' full-width'
+  end
 
   def breadcrumb
     super

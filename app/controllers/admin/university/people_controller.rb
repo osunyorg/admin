@@ -45,7 +45,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def preview
-    @body_class = 'persons__page full-width'
     render layout: 'admin/layouts/preview'
   end
 
@@ -100,6 +99,11 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   protected
+
+  def prepare_preview
+    super
+    @body_class += ' full-width'
+  end
 
   def breadcrumb
     super
