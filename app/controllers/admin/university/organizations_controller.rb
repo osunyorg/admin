@@ -38,7 +38,6 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   def preview
-    @website = @organization.websites&.first || current_university.websites.first
     @body_class = 'organizations__page full-width'
     render layout: 'admin/layouts/preview'
   end

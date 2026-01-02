@@ -45,7 +45,6 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
   end
 
   def preview
-    @website = @person.websites&.first || current_university.websites.first
     @body_class = 'persons__page full-width'
     render layout: 'admin/layouts/preview'
   end
