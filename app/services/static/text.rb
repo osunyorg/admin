@@ -5,6 +5,7 @@ class Static::Text < Static::Default
   def prepared
     unless @prepared
       @prepared = @text.to_s.strip.dup
+      @prepared = @prepared.ortho
       @prepared = strip_tags @prepared
       @prepared = CGI.unescapeHTML @prepared
       @prepared = turn_linebreak_to_br @prepared
