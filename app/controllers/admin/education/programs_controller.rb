@@ -37,7 +37,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   end
 
   def preview
-    @website = @program.websites&.first
+    @website = @person.websites&.first || current_university.websites.first
     render layout: 'admin/layouts/preview'
   end
 
