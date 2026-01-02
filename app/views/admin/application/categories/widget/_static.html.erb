@@ -31,10 +31,11 @@ taxonomies:
 <%
   # First, all free categories in a "fake" taxonomy
   if free_categories_content.present? %>
-  - name: >-
-      <%= t('category.title') %>
-    slug: ""
+  - permalink: ""
     path: ""
+    slug: ""
+    file: ""
+<%= osuny_static_text 'name', t('category.title'), depth: 3 %>
     categories:
 <%= free_categories_content.html_safe %>
 <% end %>
@@ -52,10 +53,11 @@ taxonomies:
                 language: language
       }.join('')
       if taxonomy_content.present? %>
-  - name: >-
-      <%= prepare_text_for_static taxonomy_l10n.to_s %>
-    slug: "<%= hugo.slug %>"
+  - permalink: "<%= hugo.permalink %>"
     path: "<%= hugo.path %>"
+    slug: "<%= hugo.slug %>"
+    file: "<%= hugo.file %>"
+<%= osuny_static_text 'name', taxonomy_l10n.to_s, depth: 3 %>
     categories:
 <%= taxonomy_content.html_safe %>
 <%

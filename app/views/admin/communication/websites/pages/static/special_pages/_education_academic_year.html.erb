@@ -24,7 +24,8 @@ alumni:
             language: language,
             depth: 2 %>
     decades:
-<% decades.each do |key, value|
+<%
+decades.each do |key, value|
   name = value[:name]
   years = value[:years]
   next if years.none?
@@ -63,6 +64,6 @@ alumni:
             <%= prepare_text_for_static person_category_l10n.to_s %>
           slug: <%= person_category_l10n.slug %>
           total: <%= category_total %>
-<% end %>
+<%    end %>
       total: <%= taxonomy_total %>
 <% end %>
