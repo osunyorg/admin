@@ -43,18 +43,7 @@
         <div class="content">
           <h2>Présentation</h2>
           <div>
-            <% if @l10n.featured_image.attached? %>
-              <figure class="featured-image">
-                <%= kamifusen_tag @l10n.featured_image %>
-                <% if @l10n.featured_image_credit %>
-                  <figcaption>
-                    <div class="credit">
-                      <%= sanitize @l10n.featured_image_credit %>
-                    </div>
-                  </figcaption>
-                <% end %>
-              </figure>
-            <% end %>
+            <%= render 'admin/application/preview/featured_image', l10n: @l10n %>
             <% if @l10n.presentation %>
               <section class="rich-text">
                 <h3><%= Education::Program::Localization.human_attribute_name(:presentation) %></h3>
