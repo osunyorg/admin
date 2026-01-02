@@ -3,6 +3,7 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
 
   before_action :load_teacher_people, only: [:new, :edit, :create, :update]
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
