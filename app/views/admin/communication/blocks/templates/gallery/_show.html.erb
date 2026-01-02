@@ -2,27 +2,8 @@
   <div class="container">
     <div class="block-content">
       <%= render 'admin/communication/blocks/partials/top', block: block %>
-
-      <% if block.template.layout == "carousel" %>
-        <% if !block.template.elements.one? %>
-          <div class="splide" role="group" data-splide='{"arrows":true,"pagination":false,"autoWidth":true,"autoplay":false}'>
-            <div class="splide__track">
-              <div class="splide__list">
-        <% end %>
-        <% block.template.elements.each do |element| %>
-          <%= block_component_show block, :image, template: element %>
-        <% end %>
-        <% if !block.template.elements.one? %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% else %>
-        <div class="gallery" role="group">
-          <% block.template.elements.each do |element| %>
-            <%= block_component_show block, :image, template: element %>
-          <% end %>
-        </div>
+      <% if block.data %>
+        <%= render 'admin/communication/blocks/partials/layout', block: block, file: __FILE__ %>
       <% end %>
     </div>
   </div>
