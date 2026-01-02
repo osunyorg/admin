@@ -31,6 +31,6 @@ class Communication::Website::Page::CommunicationAgendaExhibition < Communicatio
   end
 
   def hugo_body_class
-    'posts__section'
+    'exhibitions__section'
   end
 end
