@@ -89,7 +89,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
   end
 
   def ensure_migration_identifier_is_available
-    if current_university.organization_categories.with_deleted.where(migration_identifier: @migration_identifier).any?
+    if current_university.organization_categories.where(migration_identifier: @migration_identifier).any?
       render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
     end
   end

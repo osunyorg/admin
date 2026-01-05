@@ -91,7 +91,7 @@ class Api::Osuny::Communication::Websites::Pages::CategoriesController < Api::Os
   end
 
   def ensure_migration_identifier_is_available
-    if website.page_categories.with_deleted.where(migration_identifier: @migration_identifier).any?
+    if website.page_categories.where(migration_identifier: @migration_identifier).any?
       render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
     end
   end
