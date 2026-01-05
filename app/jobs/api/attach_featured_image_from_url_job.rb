@@ -2,8 +2,6 @@ class Api::AttachFeaturedImageFromUrlJob < ApplicationJob
   queue_as :mice
 
   def perform(object, attachment_url)
-    # Suppression entre temps
-    return if object.nil?
     attachment_uri = begin
       escaped_url = URI::Parser.new.escape(attachment_url)
       URI.parse(escaped_url)
