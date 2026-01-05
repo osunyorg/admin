@@ -38,6 +38,9 @@ class Gdpr::UserDeletionService
 
   def delete_users
     users_to_delete.find_each do |user|
+      person_id = user.person_id
+      person = University::Person.with_deleted.find(person_id)
+      person.update_column :user_id, nil
       user.destroy
     end
   end
