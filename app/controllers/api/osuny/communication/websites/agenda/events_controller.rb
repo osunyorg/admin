@@ -22,6 +22,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
 
   def update
     if @event.update(event_params)
+      really_destroy_timeslots(@event, event_params.dig(:time_slots_attributes))
       render :show
     else
       render json: { errors: @event.errors }, status: :unprocessable_content
@@ -49,6 +50,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
       if event.present?
         if event.update(permitted_event_params)
           @successfully_updated_events << event
+          really_destroy_timeslots(event, permitted_event_params.dig(:time_slots_attributes))
         else
           @invalid_events_with_index << { event: event, index: index }
         end
@@ -67,7 +69,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   end
 
   def destroy
-    @event.destroy
+    @event.really_destroy!
     head :no_content
   end
 
@@ -85,6 +87,17 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   def load_migration_identifier
     @migration_identifier = event_params[:migration_identifier]
     render_on_missing_migration_identifier unless @migration_identifier.present?
+  end
+
+  def really_destroy_timeslots(event, time_slots_params)
+    return if time_slots_params.nil?
+    time_slots_params.each do |time_slot_params|
+      next unless time_slot_params.dig(:_destroy).present?
+      time_slot_id = time_slot_params.dig(:id)
+      time_slot = event.time_slots.only_deleted.find_by(id: time_slot_id)
+      next unless time_slot.present?
+      time_slot.really_destroy!
+    end
   end
 
   def ensure_same_migration_identifier

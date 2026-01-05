@@ -67,7 +67,7 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   end
 
   def destroy
-    @project.destroy
+    @project.really_destroy!
     head :no_content
   end
 

@@ -67,7 +67,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   end
 
   def destroy
-    @organization.destroy
+    @organization.really_destroy!
     head :no_content
   end
 

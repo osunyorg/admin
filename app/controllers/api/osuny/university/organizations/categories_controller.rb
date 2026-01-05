@@ -67,7 +67,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
   end
 
   def destroy
-    @category.destroy
+    @category.really_destroy!
     head :no_content
   end
 

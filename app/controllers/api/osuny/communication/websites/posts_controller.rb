@@ -67,7 +67,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   end
 
   def destroy
-    @post.destroy
+    @post.really_destroy!
     head :no_content
   end
 
