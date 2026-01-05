@@ -1,8 +1,8 @@
 name: naos sync
 
 on:
-  #- push
-  #- delete
+  - push
+  - delete
 
 jobs:
   sync:
@@ -13,6 +13,7 @@ jobs:
       with:
         fetch-depth: 0
     - uses: wangchucheng/git-repo-sync@v0.1.0
+      continue-on-error: true
       with:
         target-url: https://forge.naos-cluster.tech/osuny/admin.git
         target-username: ${{ secrets.GITLAB_NAOS_USERNAME }}

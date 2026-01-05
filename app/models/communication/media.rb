@@ -118,6 +118,11 @@ class Communication::Media < ApplicationRecord
     original_blob.metadata.dig(:height)
   end
 
+  def keycdn_thumb_url
+    return unless ENV['KEYCDN_HOST'].present?
+    "https://#{ENV['KEYCDN_HOST']}/#{original_blob.key}?width=600"
+  end
+
   protected
 
   def self.find_or_create_media_from_blob(blob, origin)

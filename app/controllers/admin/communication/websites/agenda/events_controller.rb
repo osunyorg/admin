@@ -30,6 +30,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb
   end
 
+  def preview
+    render layout: 'admin/layouts/preview'
+  end
+
   def new
     @event.parent = @website.events.find(params[:parent_id]) if params.has_key?(:parent_id)
     @categories = categories

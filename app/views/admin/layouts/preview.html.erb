@@ -26,7 +26,7 @@
       <%= javascript_include_tag 'leaflet' %>
     <% end %>
   </head>
-  <body class="<%= 'full-width' if @l10n.about.try(:full_width) %>">
+  <body class="<%= @body_class %>">
     <%= yield %>
   </body>
   <script src="https://example.osuny.org/js/preview.js"></script>

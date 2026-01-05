@@ -273,6 +273,7 @@ fr:
         path: Chemin
         published: Publié ?
         slug: Identifiant
+        subtitle: Sous-titre
         text: Texte principal de la page
         title: Titre
       communication/website/permalink:
@@ -525,6 +526,51 @@ fr:
           show: Voir la page
           special_page: Page spéciale
           special_pages:
+            administration_location:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les lieux du campus. Pour l'instant, il n'y a aucun lieu.
+                one: Cette page est une page spéciale, qui présente nativement les lieux du campus. Pour l'instant, il y a 1 lieu.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} lieux du campus.
+            communication_agenda:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les événements du site.
+                one: Cette page est une page spéciale, qui présente nativement les événements du site. Pour l'instant, il y a 1 événement publié.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} événements publiés.
+            communication_agenda_exhibition:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les expositions du site.
+                one: Cette page est une page spéciale, qui présente nativement les expositions du site. Pour l'instant, il y a 1 exposition publiée.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} expositions publiées.
+            communication_jobboard:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les offres d'emploi du site.
+                one: Cette page est une page spéciale, qui présente nativement les offres d'emploi du site. Pour l'instant, il y a 1 offre d'emploi publiée.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} offres d'emploi publiées.
+            communication_portfolio:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les projets du site.
+                one: Cette page est une page spéciale, qui présente nativement les projets du site. Pour l'instant, il y a 1 projet publié.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} projets publiés.
+            communication_post:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les actualités du site.
+                one: Cette page est une page spéciale, qui présente nativement les actualités du site. Pour l'instant, il y a 1 actualité publiée.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} actualités publiées.
+            education_academic_year:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les alumni du site, classés par années. Pour l'instant, il n'y a aucun alumnus dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les alumni du site, classés par années. Pour l'instant, il y a 1 alumnus.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} alumni du site, classés par années.
+            education_diploma:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les diplômes liés au site. Pour l'instant, il n'y a aucun diplôme dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les diplômes liés au site. Pour l'instant, il y a 1 diplôme.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} diplômes liés au site.
+            education_program:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les formations liées au site. Pour l'instant, il n'y a aucune formation dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les formations liées au site. Pour l'instant, il y a 1 formation.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} formations liées au site.
             organization:
               disconnect: Déconnecter
               explicitly_connected: Organisations directement connectées
@@ -541,6 +587,22 @@ fr:
                 zero: Cette page est une page spéciale, qui présente nativement les personnes mentionnées dans le site. Pour l'instant, il n'y a aucune personne dans le site.
                 one: Cette page est une page spéciale, qui présente nativement les personnes mentionnées dans le site. Pour l'instant, il y a 1 personne dans le site.
                 other: Cette page est une page spéciale, qui présente nativement les %{count} personnes mentionnées dans le site.
+            research_paper:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les papiers liés au site. Pour l'instant, il n'y a aucun papier dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les papiers liés au site. Pour l'instant, il y a 1 papier.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} papiers liés au site.
+            research_publication:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les publications scientifiques liées au site. Pour l'instant, il n'y a aucune publication dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les publications scientifiques liées au site. Pour l'instant, il y a 1 publication.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} publications scientifiques liées au site.
+            research_volume:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les volumes liés au site. Pour l'instant, il n'y a aucun volume dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les volumes liés au site. Pour l'instant, il y a 1 volume.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} volumes liés au site.
+            sitemap: Cette page est une page spéciale, qui présente nativement le plan du site.
           structure: Pages
           with_children: "avec comme pages enfants :"
         permalinks:
@@ -558,6 +620,7 @@ fr:
             draft: Brouillon
             pinned_status: Mise en avant
             planned_on: Publication prévue le %{date}
+            planned_url: URL prévue
             published_on: Publiée le %{date}
         posts:
           by: par %{author}

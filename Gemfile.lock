@@ -146,8 +146,14 @@ GEM
     base64 (0.2.0)
     bcrypt (3.1.20)
     benchmark (0.5.0)
+    better_errors (2.10.1)
+      erubi (>= 1.0.0)
+      rack (>= 0.9.0)
+      rouge (>= 1.0.0)
     bigdecimal (3.3.1)
     bindex (0.8.1)
+    binding_of_caller (1.0.1)
+      debug_inspector (>= 1.2.0)
     bootsnap (1.19.0)
       msgpack (~> 1.2)
     bootstrap (5.3.5)
@@ -222,6 +228,7 @@ GEM
       nokogiri
       rails-html-sanitizer
     date (3.5.0)
+    debug_inspector (1.2.0)
     devise (4.9.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -486,6 +493,7 @@ GEM
       uri
     openssl (3.3.2)
     orm_adapter (0.5.0)
+    orthotypo (2.0.0)
     ostruct (0.6.3)
     paranoia (3.1.0)
       activerecord (>= 7, < 8.2)
@@ -588,6 +596,7 @@ GEM
       nokogiri (~> 1)
       rubyzip (>= 1.3.0, < 3.0.0)
     rotp (6.3.0)
+    rouge (4.6.1)
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.5)
@@ -756,6 +765,8 @@ DEPENDENCIES
   add_to_calendar
   annotaterb
   aws-sdk-s3
+  better_errors
+  binding_of_caller
   bootsnap (~> 1)
   bootstrap
   bootstrap5-kaminari-views
@@ -803,6 +814,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection (~> 1)
   omniauth-saml (~> 2)
   openssl (~> 3.3)
+  orthotypo
   ostruct (~> 0.6.0)
   paranoia
   pexels (~> 0)

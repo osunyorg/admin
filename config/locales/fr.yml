@@ -206,14 +206,18 @@ fr:
     title: Modifier la sélection
   cancel: Annuler
   category:
+    breadcrumb_title: Nom affiché dans le fil d'ariane
     children: Sous-catégories
     featured_image: Image à la une
     featured_image_alt: Texte alternatif
     free: Catégories libres (sans taxonomie)
+    header_text: Titre affiché en haut de page
     is_taxonomy: Est une taxonomie (une famille de catégories)
     name: Nom
     parent: Catégorie parente
     slug: Slug
+    subtitle: Sous-titre
+    taxonomy: Taxonomie
     title: Catégories
   confirm: Confirmer
   contact_details:

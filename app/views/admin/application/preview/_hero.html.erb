@@ -2,11 +2,10 @@
 @title = @l10n.title
 @subtitle = @l10n.try(:subtitle)
 @summary = @l10n.summary
-@image = @l10n.featured_image
 
 hero_classes = "hero"
-if @image.present? && @image.attached?
-  format = ActiveStorage::Utils.format(@image)
+if @l10n.featured_image.present? && @l10n.featured_image.attached?
+  format = ActiveStorage::Utils.format(@l10n.featured_image)
   hero_classes += " hero--with-image hero--image-#{format}" if format.present?
 end
 %>
@@ -30,9 +29,7 @@ end
           <h1><%= @title %></h1>
         <% end %>
       </div>
-      <figure>
-        <%= kamifusen_tag @image if @image.present? && @image.attached? %>
-      </figure>
+      <%= render 'admin/application/preview/featured_image', l10n: @l10n %>
     </div>
   </div>
 </header>

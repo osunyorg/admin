@@ -55,6 +55,7 @@ gem "octokit"
 gem "omniauth-rails_csrf_protection", "~> 1"
 gem "omniauth-saml", "~> 2"
 gem "openssl", "~> 3.3"
+gem "orthotypo"
 gem "ostruct", "~> 0.6.0"
 gem "paranoia"
 gem "pexels", "~> 0"
@@ -95,6 +96,8 @@ end
 
 group :development do
   gem "annotaterb"
+  gem "better_errors"
+  gem "binding_of_caller"
   gem "listen", "~> 3.3"
   gem "rack-mini-profiler", "~> 3.0"
   gem "spring"

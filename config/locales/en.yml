@@ -206,14 +206,18 @@ en:
     title: Edit the selection
   cancel: Cancel
   category:
+    breadcrumb_title: Title in breadcrumbs
     children: Sub-categories
     featured_image: Featured image
     featured_image_alt: Alternative text
     free: Free categories (without taxonomy)
+    header_text: Title displayed in header
     is_taxonomy: Is a taxonomy (a family of categories)?
     name: Name
     parent: Parent category
     slug: Slug
+    subtitle: Subtitle
+    taxonomy: Taxonomy
     title: Catégories
   confirm: Confirm
   contact_details:

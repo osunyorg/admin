@@ -144,6 +144,10 @@ class Education::Program < ApplicationRecord
     Education::Program.where(id: id)
   end
 
+  def hugo_body_class
+    'programs__section'
+  end
+
   protected
 
   def check_accessibility

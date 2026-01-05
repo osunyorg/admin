@@ -56,8 +56,11 @@ module Admin::ActAsCategories
     params.require(object_key).permit(
       :is_taxonomy, :parent_id, :bodyclass,
       localizations_attributes: [
-        :id, :name, :slug, :summary, :meta_description, :language_id,
-        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit
+        :id, :name, :slug, :subtitle, :summary, :meta_description, :breadcrumb_title,
+        :header_text, :header_cta, :header_cta_label, :header_cta_url,
+        :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
+        :shared_image, :shared_image_delete, :shared_image_infos,
+        :language_id
       ]).merge(university_id: current_university.id)
   end
 

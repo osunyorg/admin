@@ -5,6 +5,7 @@ class Static::Html < Static::Default
       @prepared = @text.to_s.strip.dup
       # Sanitize before clean_code, otherwise we remove the spans!
       @prepared = sanitize @prepared
+      @prepared = @prepared.ortho
       @prepared = remove_line_breaks @prepared
       @prepared = clean_code @prepared
       @prepared = remove_useless_br @prepared

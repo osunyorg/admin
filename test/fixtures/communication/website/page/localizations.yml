@@ -21,6 +21,7 @@ test_page_fr:
 
 page_with_no_dependency_fr:
   title: Page with no dependency
+  subtitle: This page has no dependency
   slug: 'page-with-no-dependency'
   published: true
   published_at: 2010-11-28 00:00:00

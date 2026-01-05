@@ -1,33 +1,60 @@
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-7">
+    <%= osuny_small_panel t('category.name') do %>
+      <p class="lead"><%= @l10n.name %></p>
+      <% if category.is_taxonomy %>
+        <span class="badge bg-secondary text-dark">
+          <%= t('category.taxonomy') %>
+        </span>
+      <% end %>
+    <% end %>
+
+    <% if @l10n.respond_to?(:subtitle) && @l10n.subtitle.present? %>
+      <%= osuny_small_panel t('category.subtitle') do %>
+        <p class="lead"><%= @l10n.subtitle %></p>
+      <% end %>
+    <% end %>
+    <% if @l10n.respond_to?(:breadcrumb_title) && @l10n.breadcrumb_title.present? %>
+      <%= osuny_small_panel t('category.breadcrumb_title') do %>
+        <p class="lead"><%= @l10n.breadcrumb_title %></p>
+      <% end %>
+    <% end %>
+    <% if @l10n.respond_to?(:header_text) && @l10n.header_text.present? %>
+      <%= osuny_small_panel t('category.header_text') do %>
+        <p class="lead"><%= @l10n.header_text %></p>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="offset-lg-1 col-lg-4">
     <%= render 'admin/application/images/featured/show', about: l10n %>
   </div>
-  <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: l10n %>
+</div>
+<%= osuny_separator %>
+<div class="row">
+  <div class="col-lg-4">
+    <% if category.parent %>
+      <%= osuny_label t('category.parent') %>
+      <p><%= osuny_link_localized_if  can?(:read, category.parent), 
+                                      category.parent, 
+                                      [:admin, category.parent] %></p>
+    <% end %>
+    <% if @category.children.any? %>
+      <%= osuny_label t('category.children') %>
+      <ul class="list-unstyled">
+        <% category.children.ordered(current_language).each do |child| %>
+          <li>
+            <%= osuny_link_localized_if can?(:read, child),
+                                        child, 
+                                        [:admin, child] %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
     <%= render 'admin/application/l10n/widget', about: category, l10n: l10n %>
-    <div class="row mb-5">
-      <% if category.parent %>
-        <div class="col-lg-6">
-          <%= osuny_label t('category.parent') %>
-          <p>
-            <%= osuny_link_localized_if can?(:read, category.parent), category.parent, [:admin, category.parent] %>
-          </p>
-        </div>
-      <% end %>
-      <% if @category.children.any? %>
-        <div class="col-lg-6">
-          <%= osuny_label t('category.children') %>
-          <ul class="list-unstyled mb-0">
-            <% category.children.ordered(current_language).each do |child| %>
-              <li>
-                <%= osuny_link_localized_if can?(:read, child), child, [:admin, child] %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-    </div>
-    <%= render 'admin/application/meta_description/show', about: l10n %>
+  </div>
+  <div class="col-lg-8">
+    <%= render 'admin/application/summary/show', about: @l10n %>
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
 <%= render 'admin/communication/contents/editor', about: @l10n %>

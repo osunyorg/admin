@@ -9,6 +9,7 @@ module Communication::Website::Page::Category::Localization::WithOpenApi
         id: { type: :string, format: :uuid },
         migration_identifier: { type: :string, nullable: true },
         name: { type: :string },
+        breadcrumb_title: { type: :string, nullable: true },
         featured_image: {
           type: :object,
           properties: {
@@ -18,9 +19,14 @@ module Communication::Website::Page::Category::Localization::WithOpenApi
             url: { type: :string, nullable: true }
           }
         },
+        header_cta: { type: :boolean, nullable: true },
+        header_cta_label: { type: :string, nullable: true },
+        header_cta_url: { type: :string, nullable: true },
+        header_text: { type: :string, nullable: true },
         meta_description: { type: :string, nullable: true },
         path: { type: :string, nullable: true },
         slug: { type: :string },
+        subtitle: { type: :string, nullable: true },
         summary: { type: :string, nullable: true },
         blocks: {
           type: :array,
