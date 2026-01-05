@@ -2,9 +2,6 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
   before_action :build_page, only: :create
   before_action :load_page, only: [:show, :update, :destroy]
 
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
-
   def index
     @pages = paginate(website.pages.includes(:localizations))
   end
@@ -80,11 +77,6 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
 
   def load_page
     @page = website.pages.find(params[:id])
-  end
-
-  def load_migration_identifier
-    @migration_identifier = page_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
   end
 
   def ensure_same_migration_identifier

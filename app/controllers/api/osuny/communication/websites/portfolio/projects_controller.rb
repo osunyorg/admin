@@ -2,9 +2,6 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   before_action :build_project, only: :create
   before_action :load_project, only: [:show, :update, :destroy]
 
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
-
   def index
     @projects = paginate(website.portfolio_projects.includes(:localizations))
   end
@@ -80,11 +77,6 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
 
   def load_project
     @project = website.portfolio_projects.find(params[:id])
-  end
-
-  def load_migration_identifier
-    @migration_identifier = project_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
   end
 
   def ensure_same_migration_identifier

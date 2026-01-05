@@ -1,10 +1,7 @@
 class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny::Communication::Websites::ApplicationController
   before_action :build_event, only: :create
   before_action :load_event, only: [:show, :update, :destroy]
-
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
-
+  
   def index
     @events = paginate(website.events.includes(:localizations))
   end
@@ -82,11 +79,6 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
 
   def load_event
     @event = website.events.find(params[:id])
-  end
-
-  def load_migration_identifier
-    @migration_identifier = event_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
   end
 
   def really_destroy_timeslots(event, time_slots_params)

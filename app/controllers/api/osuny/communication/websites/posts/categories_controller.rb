@@ -2,9 +2,6 @@ class Api::Osuny::Communication::Websites::Posts::CategoriesController < Api::Os
   before_action :build_category, only: :create
   before_action :load_category, only: [:show, :update, :destroy]
 
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
-
   def index
     @categories = paginate(website.post_categories.includes(:localizations))
   end
@@ -80,11 +77,6 @@ class Api::Osuny::Communication::Websites::Posts::CategoriesController < Api::Os
 
   def load_category
     @category = website.post_categories.find(params[:id])
-  end
-
-  def load_migration_identifier
-    @migration_identifier = category_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
   end
 
   def ensure_same_migration_identifier

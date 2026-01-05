@@ -2,9 +2,6 @@ class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::O
   before_action :build_category, only: :create
   before_action :load_category, only: [:show, :update, :destroy]
 
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
-
   def index
     @categories = paginate(website.agenda_categories.includes(:localizations))
   end
@@ -81,12 +78,7 @@ class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::O
   def load_category
     @category = website.agenda_categories.find(params[:id])
   end
-
-  def load_migration_identifier
-    @migration_identifier = category_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
-  end
-
+ 
   def ensure_same_migration_identifier
     if @category.migration_identifier != @migration_identifier
       render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
