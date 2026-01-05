@@ -10,7 +10,7 @@ class Gdpr::UserDeletionService
 
   private
 
-  def users_to_alert 
+  def users_to_alert
     @users_to_alert ||= involved_users.where(current_sign_in_at: alert_period)
   end
 
@@ -38,9 +38,10 @@ class Gdpr::UserDeletionService
 
   def delete_users
     users_to_delete.find_each do |user|
-      person_id = user.person_id
-      person = University::Person.with_deleted.find(person_id)
-      person.update_column :user_id, nil
+      # Nullification du user des personnes, même si elles sont dans la corbeille
+      University::Person.with_deleted
+                        .where(user_id: user.id)
+                        .update_all(user_id: nil)
       user.destroy
     end
   end
