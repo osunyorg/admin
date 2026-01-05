@@ -12,9 +12,7 @@ module AsLocalization
 
     validates :language_id, uniqueness: { scope: :about_id }
 
-    before_validation :set_university
-
-    # delegate :websites, to: :about
+    before_validation :set_university, unless: :university_id
 
     scope :in_languages, -> (language_ids) {
       where(language_id: language_ids)
@@ -83,7 +81,7 @@ module AsLocalization
 
   def set_university
     return if about.nil?
-    self.university_id ||= about.university_id
+    self.university_id = about.university_id
   end
 
   def localize_contents!(localization)
