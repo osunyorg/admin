@@ -3,6 +3,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   before_action :load_organization, only: [:show, :update, :destroy]
 
   before_action :load_migration_identifier, only: [:create, :update]
+  before_action :ensure_migration_identifier_is_available, only: :create
   before_action :ensure_same_migration_identifier, only: :update
 
   def index
@@ -67,7 +68,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   end
 
   def destroy
-    @organization.destroy
+    @organization.really_destroy!
     head :no_content
   end
 
@@ -85,6 +86,12 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   def load_migration_identifier
     @migration_identifier = organization_params[:migration_identifier]
     render_on_missing_migration_identifier unless @migration_identifier.present?
+  end
+
+  def ensure_migration_identifier_is_available
+    if current_university.organizations.with_deleted.where(migration_identifier: @migration_identifier).any?
+      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
+    end
   end
 
   def ensure_same_migration_identifier

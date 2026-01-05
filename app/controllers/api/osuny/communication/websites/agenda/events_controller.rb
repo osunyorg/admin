@@ -2,9 +2,6 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   before_action :build_event, only: :create
   before_action :load_event, only: [:show, :update, :destroy]
 
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
-
   def index
     @events = paginate(website.events.includes(:localizations))
   end
@@ -90,6 +87,12 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   def ensure_same_migration_identifier
     if @event.migration_identifier != @migration_identifier
       render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
+    end
+  end
+
+  def ensure_migration_identifier_is_available
+    if website.events.with_deleted.where(migration_identifier: @migration_identifier).any?
+      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
     end
   end
 

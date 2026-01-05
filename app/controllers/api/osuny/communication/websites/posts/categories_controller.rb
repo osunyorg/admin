@@ -2,9 +2,6 @@ class Api::Osuny::Communication::Websites::Posts::CategoriesController < Api::Os
   before_action :build_category, only: :create
   before_action :load_category, only: [:show, :update, :destroy]
 
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
-
   def index
     @categories = paginate(website.post_categories.includes(:localizations))
   end
@@ -90,6 +87,12 @@ class Api::Osuny::Communication::Websites::Posts::CategoriesController < Api::Os
   def ensure_same_migration_identifier
     if @category.migration_identifier != @migration_identifier
       render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
+    end
+  end
+
+  def ensure_migration_identifier_is_available
+    if website.post_categories.where(migration_identifier: @migration_identifier).any?
+      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
     end
   end
 

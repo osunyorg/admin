@@ -2,9 +2,6 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   before_action :build_post, only: :create
   before_action :load_post, only: [:show, :update, :destroy]
 
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
-
   def index
     @posts = paginate(website.posts.includes(:localizations))
   end
@@ -67,7 +64,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   end
 
   def destroy
-    @post.destroy
+    @post.really_destroy!
     head :no_content
   end
 
@@ -90,6 +87,12 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   def ensure_same_migration_identifier
     if @post.migration_identifier != @migration_identifier
       render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
+    end
+  end
+
+  def ensure_migration_identifier_is_available
+    if website.posts.with_deleted.where(migration_identifier: @migration_identifier).any?
+      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
     end
   end
 

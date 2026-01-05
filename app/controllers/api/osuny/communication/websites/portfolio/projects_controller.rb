@@ -2,9 +2,6 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   before_action :build_project, only: :create
   before_action :load_project, only: [:show, :update, :destroy]
 
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
-
   def index
     @projects = paginate(website.portfolio_projects.includes(:localizations))
   end
@@ -67,7 +64,7 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   end
 
   def destroy
-    @project.destroy
+    @project.really_destroy!
     head :no_content
   end
 
@@ -90,6 +87,12 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   def ensure_same_migration_identifier
     if @project.migration_identifier != @migration_identifier
       render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
+    end
+  end
+
+  def ensure_migration_identifier_is_available
+    if website.portfolio_projects.with_deleted.where(migration_identifier: @migration_identifier).any?
+      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
     end
   end
 
