@@ -143,6 +143,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     from_day.in_time_zone.to_time
   end
 
+  def hugo_body_class
+    'events__page'
+  end
+
   protected
 
   # Methods for Communication::Website::Agenda::Period::InPeriod

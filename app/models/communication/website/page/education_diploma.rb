@@ -29,4 +29,8 @@ class Communication::Website::Page::EducationDiploma < Communication::Website::P
   def git_path_relative
     'diplomas/_index.html'
   end
+
+  def hugo_body_class
+    'diplomas__taxonomy'
+  end
 end

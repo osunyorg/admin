@@ -29,4 +29,8 @@ class Communication::Website::Page::AdministrationLocation < Communication::Webs
   def git_path_relative
     'locations/_index.html'
   end
+
+  def hugo_body_class
+    'locations__taxonomy'
+  end
 end

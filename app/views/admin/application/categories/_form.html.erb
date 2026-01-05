@@ -6,16 +6,16 @@
                     input_html: { data: { translatable: true } } %>
       <%= lf.input  :subtitle,
                     label: t('category.subtitle'),
-                    input_html: { data: { translatable: true } } %>
+                    input_html: { data: { translatable: true } } if l10n.respond_to?(:subtitle) %>
       <%= lf.input  :breadcrumb_title,
                     label: t('category.breadcrumb_title'),
-                    input_html: { data: { translatable: true } } %>
+                    input_html: { data: { translatable: true } } if l10n.respond_to?(:breadcrumb_title) %>
       <%= render 'admin/application/summary/form', f: lf, about: l10n %>
       <%= lf.input  :header_text,
                     label: t('category.header_text'),
                     as: :string,
-                    input_html: { data: { translatable: true } } %>
-      <%= render 'admin/application/header_cta/form', f: lf %>
+                    input_html: { data: { translatable: true } } if l10n.respond_to?(:header_text) %>
+      <%= render 'admin/application/header_cta/form', f: lf if l10n.respond_to?(:header_text) %>
     <% end %>
     <%= render 'admin/application/meta_description/form', f: lf, about: l10n %>
   </div>

@@ -33,4 +33,8 @@ class Communication::Website::Page::EducationProgram < Communication::Website::P
   def special_page_categories
     university.education_program_categories
   end
+
+  def hugo_body_class
+    'programs__section'
+  end
 end

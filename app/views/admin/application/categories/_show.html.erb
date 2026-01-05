@@ -9,17 +9,17 @@
       <% end %>
     <% end %>
 
-    <% if @l10n.subtitle.present? %>
+    <% if @l10n.respond_to?(:subtitle) && @l10n.subtitle.present? %>
       <%= osuny_small_panel t('category.subtitle') do %>
         <p class="lead"><%= @l10n.subtitle %></p>
       <% end %>
     <% end %>
-    <% if @l10n.breadcrumb_title.present? %>
+    <% if @l10n.respond_to?(:breadcrumb_title) && @l10n.breadcrumb_title.present? %>
       <%= osuny_small_panel t('category.breadcrumb_title') do %>
         <p class="lead"><%= @l10n.breadcrumb_title %></p>
       <% end %>
     <% end %>
-    <% if @l10n.header_text.present? %>
+    <% if @l10n.respond_to?(:header_text) && @l10n.header_text.present? %>
       <%= osuny_small_panel t('category.header_text') do %>
         <p class="lead"><%= @l10n.header_text %></p>
       <% end %>
