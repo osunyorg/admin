@@ -2,9 +2,6 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   before_action :build_event, only: :create
   before_action :load_event, only: [:show, :update, :destroy]
 
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
-
   def index
     @events = paginate(website.events.includes(:localizations))
   end
