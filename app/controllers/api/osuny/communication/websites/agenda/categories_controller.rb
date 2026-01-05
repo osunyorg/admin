@@ -67,7 +67,7 @@ class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::O
   end
 
   def destroy
-    @category.really_destroy!
+    @category.destroy
     head :no_content
   end
 
