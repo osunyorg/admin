@@ -79,9 +79,20 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
     @page = website.pages.find(params[:id])
   end
 
+  def load_migration_identifier
+    @migration_identifier = page_params[:migration_identifier]
+    render_on_missing_migration_identifier unless @migration_identifier.present?
+  end
+
   def ensure_same_migration_identifier
     if @page.migration_identifier != @migration_identifier
       render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
+    end
+  end
+
+  def ensure_migration_identifier_is_available
+    if website.pages.with_deleted.where(migration_identifier: @migration_identifier).any?
+      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
     end
   end
 
@@ -90,14 +101,7 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
       :migration_identifier, :language, :title, :breadcrumb_title, :meta_description,
       :published, :published_at, :slug, :summary, :text,
       :header_text, :header_cta, :header_cta_label, :header_cta_url, :_destroy,
-      featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
-     
-
-  def ensure_migration_identifier_is_available
-    if website.pages.with_deleted.where(migration_identifier: @migration_identifier).any?
-      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
-    end
-  end **nested_blocks_params
+      featured_image: [:blob_id, :url, :alt, :credit, :_destroy], **nested_blocks_params
     ]
   end
 

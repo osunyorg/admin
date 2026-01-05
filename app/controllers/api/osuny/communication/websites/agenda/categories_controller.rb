@@ -78,6 +78,11 @@ class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::O
   def load_category
     @category = website.agenda_categories.find(params[:id])
   end
+
+  def load_migration_identifier
+    @migration_identifier = category_params[:migration_identifier]
+    render_on_missing_migration_identifier unless @migration_identifier.present?
+  end
  
   def ensure_same_migration_identifier
     if @category.migration_identifier != @migration_identifier
@@ -85,19 +90,19 @@ class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::O
     end
   end
 
-  def
+  def ensure_migration_identifier_is_available
+    if website.agenda_categories.with_deleted.where(migration_identifier: @migration_identifier).any?
+      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
+    end
+  end
+
+  def l10n_permitted_keys
     [
       :migration_identifier, :language, :name, :meta_description,
       :path, :slug, :summary, :_destroy,
       featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
       **nested_blocks_params
     ]
-
-  def ensure_migration_identifier_is_available
-    if website.agenda_categories.with_deleted.where(migration_identifier: @migration_identifier).any?
-      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
-    end
-  end
   end
 
   def category_params

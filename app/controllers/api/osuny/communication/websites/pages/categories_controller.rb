@@ -80,7 +80,7 @@ class Api::Osuny::Communication::Websites::Pages::CategoriesController < Api::Os
   end
 
   def load_migration_identifier
-    @migration_identifier = categories_params[:migration_identifier]
+    @migration_identifier = category_params[:migration_identifier]
     render_on_missing_migration_identifier unless @migration_identifier.present?
   end
 
