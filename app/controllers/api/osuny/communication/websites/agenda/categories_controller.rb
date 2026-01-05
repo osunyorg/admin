@@ -83,7 +83,7 @@ class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::O
     @migration_identifier = category_params[:migration_identifier]
     render_on_missing_migration_identifier unless @migration_identifier.present?
   end
- 
+
   def ensure_same_migration_identifier
     if @category.migration_identifier != @migration_identifier
       render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
