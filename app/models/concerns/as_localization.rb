@@ -82,7 +82,8 @@ module AsLocalization
   protected
 
   def set_university
-    self.university_id = about.university_id
+    return if about.nil?
+    self.university_id ||= about.university_id
   end
 
   def localize_contents!(localization)
