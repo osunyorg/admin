@@ -14,7 +14,7 @@ class Gdpr::UserDeletionService
     @users_to_alert ||= involved_users.where(current_sign_in_at: alert_period)
   end
 
-  def users_to_delete 
+  def users_to_delete
     @users_to_delete ||= involved_users.where('current_sign_in_at <= ?', delete_point)
   end
 
@@ -38,10 +38,12 @@ class Gdpr::UserDeletionService
 
   def delete_users
     users_to_delete.find_each do |user|
-      # Nullification du user des personnes, même si elles sont dans la corbeille
-      University::Person.with_deleted
-                        .where(user_id: user.id)
-                        .update_all(user_id: nil)
+      # Nullification du user des personnes, même si elles sont dans la corbeille.
+      # Le dependent nullify ne fonctionne pas dans ce cas.
+      user.university.people
+                     .with_deleted
+                     .where(user_id: user.id)
+                     .update_all(user_id: nil)
       user.destroy
     end
   end
