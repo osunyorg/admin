@@ -11,17 +11,6 @@ class Api::Osuny::Communication::Websites::ApplicationController < Api::Osuny::A
     @website = current_university.websites.find params[:website_id]
   end
 
-  def load_migration_identifier
-    @migration_identifier = event_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
-  end
-
-  def ensure_migration_identifier_is_available
-    if website.events.with_deleted.where(migration_identifier: @migration_identifier).any?
-      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
-    end
-  end
-
   def website
     @website
   end

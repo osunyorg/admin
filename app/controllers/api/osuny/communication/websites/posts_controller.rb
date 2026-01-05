@@ -92,6 +92,12 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
       featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
       **nested_blocks_params
     ]
+
+  def ensure_migration_identifier_is_available
+    if website.posts.with_deleted.where(migration_identifier: @migration_identifier).any?
+      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
+    end
+  end
   end
 
   def post_params

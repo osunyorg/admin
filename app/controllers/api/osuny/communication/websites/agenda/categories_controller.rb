@@ -85,13 +85,19 @@ class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::O
     end
   end
 
-  def l10n_permitted_keys
+  def
     [
       :migration_identifier, :language, :name, :meta_description,
       :path, :slug, :summary, :_destroy,
       featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
       **nested_blocks_params
     ]
+
+  def ensure_migration_identifier_is_available
+    if website.agenda_categories.with_deleted.where(migration_identifier: @migration_identifier).any?
+      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
+    end
+  end
   end
 
   def category_params
