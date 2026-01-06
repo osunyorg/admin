@@ -1,11 +1,11 @@
 class Api::Osuny::Communication::MediasController < Api::Osuny::ApplicationController
+  before_action :create_blob, only: :create
 
   def show
     @media = current_university.communication_medias.find(params[:id])
   end
 
   def create
-    create_blob
     @media = Communication::Media.create_from_blob(@blob)
     if @media.persisted?
       render :show, status: :created
