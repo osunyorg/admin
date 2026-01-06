@@ -73,7 +73,7 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
   protected
 
   def integrity_checker
-    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@page, page_params, website.pages)
+    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@page, page_params, website.pages.with_deleted)
   end
 
   def load_resource

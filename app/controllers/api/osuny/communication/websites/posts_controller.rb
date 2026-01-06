@@ -73,7 +73,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   protected
 
   def integrity_checker
-    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@post, post_params, website.posts)
+    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@post, post_params, website.posts.with_deleted)
   end
 
   def load_resource

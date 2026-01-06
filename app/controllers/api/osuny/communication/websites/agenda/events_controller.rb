@@ -73,7 +73,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   protected
 
   def integrity_checker
-    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@event, event_params, website.events)
+    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@event, event_params, website.events.with_deleted)
   end
 
   def load_resource

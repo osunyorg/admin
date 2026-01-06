@@ -73,7 +73,7 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   protected
 
   def integrity_checker
-    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@project, project_params, website.portfolio_projects)
+    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@project, project_params, website.portfolio_projects.with_deleted)
   end
 
   def load_resource
