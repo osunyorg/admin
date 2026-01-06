@@ -1,5 +1,6 @@
 require 'swagger_helper'
 
+# bundle exec rspec spec/requests/osuny/v1/communication/websites/agenda/categories_spec.rb
 RSpec.describe 'Communication::Website::Agenda::Category' do
   fixtures :all
 

@@ -1,10 +1,6 @@
 class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationController
-  before_action :build_organization, only: :create
-  before_action :load_organization, only: [:show, :update, :destroy]
-
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_migration_identifier_is_available, only: :create
-  before_action :ensure_same_migration_identifier, only: :update
+  include Api::Osuny::HasResource
+  include Api::Osuny::HasMigrationIdentifier
 
   def index
     @organizations = paginate(current_university.organizations.includes(:localizations))
@@ -14,6 +10,8 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   end
 
   def create
+    @organization = current_university.organizations.build
+    @organization.assign_attributes(organization_params)
     if @organization.save
       render :show, status: :created
     else
@@ -35,7 +33,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
       organization_params[:migration_identifier].present?
     }
     unless every_organization_has_migration_identifier
-      render_on_missing_migration_identifier
+      render_missing_migration_identifier
       return
     end
 
@@ -74,30 +72,12 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
 
   protected
 
-  def build_organization
-    @organization = current_university.organizations.build
-    @organization.assign_attributes(organization_params)
+  def integrity_checker
+    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@organization, organization_params, current_university.organizations)
   end
 
-  def load_organization
+  def load_resource
     @organization = current_university.organizations.find(params[:id])
-  end
-
-  def load_migration_identifier
-    @migration_identifier = organization_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
-  end
-
-  def ensure_migration_identifier_is_available
-    if current_university.organizations.with_deleted.where(migration_identifier: @migration_identifier).any?
-      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
-    end
-  end
-
-  def ensure_same_migration_identifier
-    if @organization.migration_identifier != @migration_identifier
-      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
-    end
   end
 
   def l10n_permitted_keys
