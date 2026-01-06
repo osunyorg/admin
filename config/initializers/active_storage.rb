@@ -30,8 +30,9 @@ Rails.application.config.to_prepare do
 
     private
 
+    # Override ActiveStorage::Attachment#dependent because the attachement is now soft_destroyed the record might have been previously destroyed
+    # Base method: https://github.com/rails/rails/blob/v8.1.1/activestorage/app/models/active_storage/attachment.rb#L154
     def dependent
-      # as the attachement is now soft_destroyed the record might have been previously destroyed
       return if record.nil?
       record.attachment_reflections[name]&.options&.fetch(:dependent, nil)
     end
