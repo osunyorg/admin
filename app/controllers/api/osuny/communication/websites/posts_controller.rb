@@ -1,6 +1,6 @@
 class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communication::Websites::ApplicationController
-  before_action :build_post, only: :create
-  before_action :load_post, only: [:show, :update, :destroy]
+  before_action :load_post, only: [:show, :update, :destroy] # Before HasMigrationIdentifier
+  include Api::Osuny::HasMigrationIdentifier
 
   def index
     @posts = paginate(website.posts.includes(:localizations))
@@ -10,6 +10,8 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   end
 
   def create
+    @post = website.posts.build
+    @post.assign_attributes(post_params)
     if @post.save
       render :show, status: :created
     else
@@ -31,7 +33,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
       post_params[:migration_identifier].present?
     }
     unless every_post_has_migration_identifier
-      render_on_missing_migration_identifier
+      render_missing_migration_identifier
       return
     end
 
@@ -70,30 +72,12 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
 
   protected
 
-  def build_post
-    @post = website.posts.build
-    @post.assign_attributes(post_params)
+  def integrity_checker
+    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@post, post_params, website.posts)
   end
 
   def load_post
     @post = website.posts.find(params[:id])
-  end
-
-  def load_migration_identifier
-    @migration_identifier = post_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
-  end
-
-  def ensure_same_migration_identifier
-    if @post.migration_identifier != @migration_identifier
-      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
-    end
-  end
-
-  def ensure_migration_identifier_is_available
-    if website.posts.with_deleted.where(migration_identifier: @migration_identifier).any?
-      render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
-    end
   end
 
   def l10n_permitted_keys

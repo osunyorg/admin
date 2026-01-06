@@ -1,8 +1,5 @@
 class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::Osuny::Communication::Websites::ApplicationController
-
-  # Before HasMigrationIdentifier
-  before_action :load_category, only: [:show, :update, :destroy]
-
+  before_action :load_category, only: [:show, :update, :destroy] # Before HasMigrationIdentifier
   include Api::Osuny::HasMigrationIdentifier
 
   def index
