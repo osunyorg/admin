@@ -35,7 +35,7 @@ class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::O
       category_params[:migration_identifier].present?
     }
     unless every_category_has_migration_identifier
-      render_on_missing_migration_identifier
+      render_missing_migration_identifier
       return
     end
 
