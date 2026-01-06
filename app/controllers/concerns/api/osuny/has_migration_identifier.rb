@@ -2,8 +2,8 @@ module Api::Osuny::HasMigrationIdentifier
   extend ActiveSupport::Concern
 
   included do
-    append_before_action :ensure_migration_identifier_is_available, only: :create
-    append_before_action :ensure_same_migration_identifier, only: :update
+    before_action :ensure_migration_identifier_is_available, only: :create
+    before_action :ensure_same_migration_identifier, only: :update
   end
 
   protected
@@ -13,11 +13,11 @@ module Api::Osuny::HasMigrationIdentifier
   end
 
   def ensure_migration_identifier_set
-    render_missing_migration_identifier if integrity_checker.empty?
+    render_missing_migration_identifier if integrity_checker.no_identifier?
   end
 
   def ensure_same_migration_identifier
-    if integrity_checker.empty?
+    if integrity_checker.no_identifier?
       render_missing_migration_identifier
     elsif integrity_checker.different?
       render_migration_identifier_different
@@ -25,7 +25,7 @@ module Api::Osuny::HasMigrationIdentifier
   end
 
   def ensure_migration_identifier_is_available
-    if integrity_checker.empty?
+    if integrity_checker.no_identifier?
       render_missing_migration_identifier
     elsif integrity_checker.already_used?
       render_migration_identifier_already_used

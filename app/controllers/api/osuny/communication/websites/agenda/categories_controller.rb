@@ -1,9 +1,10 @@
 class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::Osuny::Communication::Websites::ApplicationController
 
-  include Api::Osuny::HasMigrationIdentifier
-  
+  # Before HasMigrationIdentifier
   before_action :load_category, only: [:show, :update, :destroy]
-  
+
+  include Api::Osuny::HasMigrationIdentifier
+
   def index
     @categories = paginate(website.agenda_categories.includes(:localizations))
   end
