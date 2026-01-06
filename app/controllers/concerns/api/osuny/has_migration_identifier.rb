@@ -33,18 +33,15 @@ module Api::Osuny::HasMigrationIdentifier
   end
 
   def render_missing_migration_identifier
-    render  json: { error: 'Missing migration identifier.' },
-            status: :bad_request
+    render json: { error: 'Missing migration identifier.' }, status: :bad_request
   end
 
   def render_migration_identifier_different
-    render  json: { error: 'Migration identifier does not match' },
-            status: :unprocessable_content
+    render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
   end
 
   def render_migration_identifier_already_used
-    render  json: { error: 'Migration identifier already used' },
-            status: :unprocessable_content
+    render json: { error: 'Migration identifier already used' }, status: :unprocessable_content
   end
 
 end
