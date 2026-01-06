@@ -1,5 +1,5 @@
 class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationController
-  before_action :load_organization, only: [:show, :update, :destroy] # Before HasMigrationIdentifier
+  include Api::Osuny::HasResource
   include Api::Osuny::HasMigrationIdentifier
 
   def index
@@ -76,7 +76,7 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
     @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@organization, organization_params, current_university.organizations)
   end
 
-  def load_organization
+  def load_resource
     @organization = current_university.organizations.find(params[:id])
   end
 

@@ -1,5 +1,5 @@
 class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny::Communication::Websites::ApplicationController
-  before_action :load_event, only: [:show, :update, :destroy] # Before HasMigrationIdentifier
+  include Api::Osuny::HasResource
   include Api::Osuny::HasMigrationIdentifier
 
   def index
@@ -76,7 +76,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
     @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@event, event_params, website.events)
   end
 
-  def load_event
+  def load_resource
     @event = website.events.find(params[:id])
   end
 

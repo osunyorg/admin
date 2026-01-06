@@ -1,5 +1,5 @@
 class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communication::Websites::ApplicationController
-  before_action :load_post, only: [:show, :update, :destroy] # Before HasMigrationIdentifier
+  include Api::Osuny::HasResource
   include Api::Osuny::HasMigrationIdentifier
 
   def index
@@ -76,7 +76,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
     @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@post, post_params, website.posts)
   end
 
-  def load_post
+  def load_resource
     @post = website.posts.find(params[:id])
   end
 

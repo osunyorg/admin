@@ -1,5 +1,5 @@
 class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::ApplicationController
-  before_action :load_category, only: [:show, :update, :destroy] # Before HasMigrationIdentifier
+  include Api::Osuny::HasResource
   include Api::Osuny::HasMigrationIdentifier
 
   def index
@@ -76,7 +76,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
     @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@category, category_params, current_university.organization_categories)
   end
 
-  def load_category
+  def load_resource
     @category = current_university.organization_categories.find(params[:id])
   end
 

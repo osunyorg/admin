@@ -1,5 +1,5 @@
 class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::Osuny::Communication::Websites::ApplicationController
-  before_action :load_project, only: [:show, :update, :destroy] # Before HasMigrationIdentifier
+  include Api::Osuny::HasResource
   include Api::Osuny::HasMigrationIdentifier
 
   def index
@@ -76,7 +76,7 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
     @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@project, project_params, website.portfolio_projects)
   end
 
-  def load_project
+  def load_resource
     @project = website.portfolio_projects.find(params[:id])
   end
 

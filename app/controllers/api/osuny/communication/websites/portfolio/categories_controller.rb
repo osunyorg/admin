@@ -1,5 +1,5 @@
 class Api::Osuny::Communication::Websites::Portfolio::CategoriesController < Api::Osuny::Communication::Websites::ApplicationController
-  before_action :load_category, only: [:show, :update, :destroy] # Before HasMigrationIdentifier
+  include Api::Osuny::HasResource
   include Api::Osuny::HasMigrationIdentifier
 
   def index
@@ -76,7 +76,7 @@ class Api::Osuny::Communication::Websites::Portfolio::CategoriesController < Api
     @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@category, category_params, website.portfolio_categories)
   end
 
-  def load_category
+  def load_resource
     @category = website.portfolio_categories.find(params[:id])
   end
 
