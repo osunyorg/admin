@@ -27,6 +27,14 @@ Rails.application.config.to_prepare do
 
       self.blob.update_column(:university_id, university_id)
     end
+
+    private
+
+    def dependent
+      # as the attachement is now soft_destroyed the record might have been previously destroyed
+      return if record.nil?
+      record.attachment_reflections[name]&.options&.fetch(:dependent, nil)
+    end
   end
 
   # Override ActiveStorage::Filename#sanitized to remove accents and all special chars
