@@ -2,7 +2,7 @@
 
 <% content_for :title_right do %>
   <%= button_advanced do %>
-    <%= link_to 'Créer un modèle',
+    <%= link_to t('templates.create'),
                 new_admin_communication_website_agenda_event_path(is_template: true),
                 class: button_classes %>
   <% end if can?(:create_template, @website) %>

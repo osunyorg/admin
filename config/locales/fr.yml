@@ -551,6 +551,9 @@ fr:
   slug_error: ne peut contenir que des lettres minuscules, des chiffres et des traits d'union.
   sms_code: "%{code} est votre code d'authentification sur %{context} (valide %{duration})"
   static: Fichier statique
+  templates:
+    create: Créer un modèle
+    use: Utiliser ce modèle
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/
   time:

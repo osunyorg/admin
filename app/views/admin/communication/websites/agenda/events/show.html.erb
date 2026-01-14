@@ -7,7 +7,7 @@
   <% end %>
   <% if @event.is_template %>
     <%= edit_link @event if can?(:create_template, @website) %>
-    <%= link_to 'Utiliser ce modèle',
+    <%= link_to t('templates.use'),
                 new_admin_communication_website_agenda_event_path(template_id: @event.id),
                 class: button_classes %>
   <% else %>
