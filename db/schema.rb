@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_27_141522) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_14_132529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -633,9 +633,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_27_141522) do
     t.string "bodyclass"
     t.boolean "is_lasting", default: false
     t.datetime "deleted_at"
+    t.boolean "is_template", default: false
+    t.uuid "template_id"
     t.index ["communication_website_id"], name: "index_agenda_events_on_communication_website_id"
     t.index ["created_by_id"], name: "index_communication_website_agenda_events_on_created_by_id"
     t.index ["parent_id"], name: "index_communication_website_agenda_events_on_parent_id"
+    t.index ["template_id"], name: "index_communication_website_agenda_events_on_template_id"
     t.index ["university_id"], name: "index_communication_website_agenda_events_on_university_id"
   end
 
@@ -1144,6 +1147,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_27_141522) do
     t.string "type"
     t.string "migration_identifier"
     t.integer "position_in_tree"
+    t.jsonb "design_options"
     t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
@@ -2639,6 +2643,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_27_141522) do
   add_foreign_key "communication_website_agenda_event_time_slots", "communication_websites"
   add_foreign_key "communication_website_agenda_event_time_slots", "universities"
   add_foreign_key "communication_website_agenda_events", "communication_website_agenda_events", column: "parent_id"
+  add_foreign_key "communication_website_agenda_events", "communication_website_agenda_events", column: "template_id"
   add_foreign_key "communication_website_agenda_events", "communication_websites"
   add_foreign_key "communication_website_agenda_events", "universities"
   add_foreign_key "communication_website_agenda_events", "users", column: "created_by_id"

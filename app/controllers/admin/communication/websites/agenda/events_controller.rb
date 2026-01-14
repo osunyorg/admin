@@ -36,6 +36,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def new
     @event.parent = @website.events.find(params[:parent_id]) if params.has_key?(:parent_id)
+    @event.is_template = true if params.has_key?(:is_template)
     @categories = categories
     breadcrumb
   end
@@ -111,11 +112,11 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def event_params
     params.require(:communication_website_agenda_event)
     .permit(
-      :from_day, :to_day, :time_zone, :is_lasting, :bodyclass,
+      :from_day, :to_day, :time_zone, :is_lasting, :bodyclass, :is_template,
       :parent_id, category_ids: [], destination_website_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text, :notes,
-        :published, :published_at, :slug,
+        :published, :published_at, :slug, 
         :header_cta, :header_cta_label, :header_cta_url,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,

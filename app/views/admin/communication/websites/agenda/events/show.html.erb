@@ -5,14 +5,18 @@
     <%= destroy_link @event %>
     <%= duplicate_link @event %>
   <% end %>
-  <% event_url = @l10n.current_permalink_url_in_website(@website) %>
-  <%= link_to t('open'),
-              event_url,
-              target: :_blank,
-              class: button_classes if event_url %>
-  <%= preview_link %>
-  <%= publish_link @event %>
-  <%= edit_link @event %>
+  <% if @event.is_template %>
+    <%= edit_link @event if can?(:create_template, @website) %>
+  <% else %>
+    <% event_url = @l10n.current_permalink_url_in_website(@website) %>
+    <%= link_to t('open'),
+                event_url,
+                target: :_blank,
+                class: button_classes if event_url %>
+    <%= preview_link %>
+    <%= publish_link @event %>
+    <%= edit_link @event %>
+  <% end %>
 <% end %>
 
 <div class="row">
@@ -54,8 +58,10 @@
   </div>
 </div>
 <%= render 'admin/communication/contents/editor', about: @l10n %>
-<%= render 'admin/communication/websites/agenda/events/show/children', event: @event %>
-<%= render 'admin/communication/websites/agenda/events/show/time_slots', event: @event %>
+<% unless @event.is_template? %>
+  <%= render 'admin/communication/websites/agenda/events/show/children', event: @event %>
+  <%= render 'admin/communication/websites/agenda/events/show/time_slots', event: @event %>
+<% end %>
 
 <% content_for :server_admin_only do %>
   <%= render 'admin/communication/websites/agenda/events/show/links_to_static_files', event: @event %>
