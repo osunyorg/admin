@@ -51,6 +51,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Localizable
   include Sanitizable
   include Searchable
+  include Templatable
   include WithDays
   include WithTimeSlots
   include WithKinds

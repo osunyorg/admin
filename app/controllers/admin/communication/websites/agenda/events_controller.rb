@@ -37,6 +37,10 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def new
     @event.parent = @website.events.find(params[:parent_id]) if params.has_key?(:parent_id)
     @event.is_template = true if params.has_key?(:is_template)
+    if params.has_key?(:template_id)
+      @template = @website.events.find(params[:template_id])
+      @l10n = @event.use_template(@template, current_language)
+    end
     @categories = categories
     breadcrumb
   end
