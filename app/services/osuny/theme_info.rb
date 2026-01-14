@@ -1,7 +1,7 @@
 class Osuny::ThemeInfo
 
   def self.get_current_version
-    URI("https://raw.githubusercontent.com/#{ENV["GITHUB_WEBSITE_THEME_REPOSITORY"]}/#{ENV["GITHUB_WEBSITE_THEME_BRANCH"]}/static/osuny-theme-version").read
+    URI("https://example.osuny.org/osuny-theme-version").read
   rescue
   end
 

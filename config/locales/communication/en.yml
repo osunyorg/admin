@@ -145,6 +145,7 @@ en:
         in_showcase: List website in showcase
         languages: Languages
         locked_at: Locked for background jobs at
+        name: Name
         plausible_url: Plausible dashboard URL
         repository: Repository
         showcase_tags: Tags
