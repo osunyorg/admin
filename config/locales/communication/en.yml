@@ -811,7 +811,7 @@ en:
           item:
             kind:
               administrators: Administration staff
-              authors: Editorial staff
+              authors: Authors
               blank: Title
               category: News category
               diploma: Specific diploma
@@ -826,8 +826,8 @@ en:
               posts: News index
               program: Specific program
               programs: Programs index
-              researchers: Research staff
-              teachers: Educational staff
+              researchers: Researchers
+              teachers: Teachers
               url: URL
               volume: Specific research volume
               volumes: Research volumes index

@@ -1144,6 +1144,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_27_141522) do
     t.string "type"
     t.string "migration_identifier"
     t.integer "position_in_tree"
+    t.jsonb "design_options"
     t.datetime "deleted_at"
     t.index ["communication_website_id"], name: "index_communication_website_pages_on_communication_website_id"
     t.index ["parent_id"], name: "index_communication_website_pages_on_parent_id"
