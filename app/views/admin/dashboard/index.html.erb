@@ -1,7 +1,7 @@
 <% content_for :title, t('admin.dashboard') %>
 
 <% content_for :title_right do %>
-  <div class="mt-5 mt-xl-0">
+  <div class="mt-5 mt-xl-0 mb-2">
     <% if current_university.logo.attached? %>
       <%= kamifusen_tag current_university.logo,
                         width: 120,
