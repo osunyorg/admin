@@ -2,23 +2,19 @@ module Templatable
   extend ActiveSupport::Concern
   
   included do
-    ATTRIBUTES_ALWAYS_EXCLUDED_FROM_TEMPLATE = [
-      'id', # The object created is new
-      'template_id', # The template has no template, so we should not touch that
-      'is_template' # The object created from a template is not a template itself
-    ].freeze
-
     belongs_to :template, class_name: self.name, optional: true
 
     scope :templates, -> { where(is_template: true) }
     scope :except_templates, -> { where(is_template: false) }
+
+    after_create :create_blocks_from_template_if_necessary
   end
 
   def has_template?
     template.present?
   end
 
-  def attributes_excluded_from_template
+  def template_attributes_excluded
     []
   end
 
@@ -31,24 +27,37 @@ module Templatable
       raise "Object with id #{params[:template_id]} is not a template." unless self.template.is_template?
       # Prevent stealing template from another instance
       raise "Object with id #{params[:template_id]} is from a different instance." if self.template.university != current_university
+      apply_template_to_object
+      apply_template_to_localization
     end
   end
 
-  def apply_template_in(language)
-    exclusions = ATTRIBUTES_ALWAYS_EXCLUDED_FROM_TEMPLATE + attributes_excluded_from_template
+  def apply_template_to_object
+    exclusions = [
+        'id',           # The object created is new
+        'template_id',  # The template has no template, so we should not touch that
+        'is_template'   # The object created from a template is not a template itself
+      ] + template_attributes_excluded
     self.attributes = template.attributes.except(*exclusions)
-    self.localizations = []
-    template_l10n = template.localization_for(language)
-    l10n = template_l10n.dup
-    l10n.about = self
-    l10n.slug = nil
-    self.localizations << l10n
-    l10n
   end
 
-  def create_blocks_from_template(language)
-    template_l10n = template.localization_for(language)
-    l10n = localization_for(language)
+  def apply_template_to_localization
+    l10n = localizations.first
+    template_l10n = template.localization_for(l10n.language)
+    exclusions = [
+        'id',   # The localization created is new
+        'slug'  # The slug will depend on the new title
+      ]
+    l10n.attributes = template_l10n.attributes.except(*exclusions)
+  end
+
+  def create_blocks_from_template_if_necessary
+    create_blocks_from_template if has_template?
+  end
+
+  def create_blocks_from_template
+    l10n = original_localization
+    template_l10n = template.localization_for(l10n.language)
     duplicate_blocks(template_l10n, l10n)
   end
 end

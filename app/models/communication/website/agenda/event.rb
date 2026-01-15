@@ -152,7 +152,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     'events__page'
   end
 
-  def attributes_excluded_from_template
+  def template_attributes_excluded
     ['from_day', 'to_day']
   end
 

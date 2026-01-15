@@ -36,8 +36,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def new
     @event.parent = @website.events.find(params[:parent_id]) if params.has_key?(:parent_id)
-    @event.manage_template_from_params(params, current_university)    
-    @l10n = @event.apply_template_in(current_language) if @event.has_template?
+    @event.manage_template_from_params(params, current_university)
     @categories = categories
     breadcrumb
   end
@@ -52,7 +51,6 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     @event.website = @website
     @event.created_by = current_user
     if @event.save
-      @event.create_blocks_from_template(current_language) if @event.has_template?
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_created_html', model: @event.to_s_in(current_language))
     else
