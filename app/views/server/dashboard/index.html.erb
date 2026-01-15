@@ -3,15 +3,18 @@
 <div class="row">
   <% @parts.each do |part| %>
     <div class="col-md-6 d-flex">
-      <%= osuny_panel part[:title] do %>
+      <%= osuny_small_panel part[:title] do %>
         <%= link_to t('server_admin.see_list'), part[:path], class: 'btn btn-sm btn-primary stretched-link' %>
       <% end %>
     </div>
   <% end %>
 </div>
 
-<% if @websites.any? %>
-  <%= osuny_panel t('server_admin.websites.outdated') do %>
-    <%= render 'server/websites/list', websites: @websites %>
-  <% end %>
+<%= osuny_small_panel 'Theme' do %>
+  <div class="lead mb-5"><%= Osuny::ThemeInfo.get_current_version %></div>
+  <p>
+    <%= t('server_admin.websites.outdated') %>
+    (<%= @websites.to_a.count %>)
+  </p>
+  <%= render 'server/websites/list', websites: @websites if @websites.any? %>
 <% end %>

@@ -144,6 +144,7 @@ fr:
         in_showcase: Présenter le site dans le showcase
         languages: Langues
         locked_at: Verrouillé pour les background jobs à
+        name: Nom
         plausible_url: Tableau de bord Plausible
         repository: Référentiel
         showcase_tags: Mots-clés
