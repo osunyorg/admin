@@ -14,10 +14,9 @@
 
 <div class="row">
   <div class="col-lg-8">
+    <%= render 'admin/dashboard/templates' %>
     <%= osuny_panel Communication::Website.model_name.human(count: 2) do %>
-      <%= render 'admin/communication/websites/list', 
-                  websites: Communication::Website.organized_for(current_user, current_language),
-                  large: true %>
+      <%= render 'admin/communication/websites/list', websites: @websites, large: true %>
     <% end %>
     <%= render 'admin/application/favorites/show' %>
   </div>

@@ -553,6 +553,8 @@ fr:
   static: Fichier statique
   templates:
     create: Créer un modèle
+    prompt: Vous pouvez créer un événement à partir d'un des modèles suivants.
+    show: Voir ce modèle
     use: Utiliser ce modèle
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/

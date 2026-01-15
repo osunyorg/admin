@@ -553,6 +553,7 @@ en:
   static: Static file
   templates:
     create: Create a template
+    show: Show template
     use: Use this template
   terms_of_service: Terms of service
   terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/
