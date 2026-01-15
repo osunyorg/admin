@@ -152,6 +152,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     'events__page'
   end
 
+  def attributes_excluded_from_template
+    ['from_day', 'to_day']
+  end
+
   protected
 
   # Methods for Communication::Website::Agenda::Period::InPeriod

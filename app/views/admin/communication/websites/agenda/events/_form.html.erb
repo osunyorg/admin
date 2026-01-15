@@ -4,6 +4,7 @@
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
     <%= f.hidden_field :is_template %>
+    <%= f.hidden_field :template_id %>
     <%= lf.hidden_field :language_id, value: current_language.id %>
 
     <div class="row">

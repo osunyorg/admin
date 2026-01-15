@@ -36,11 +36,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def new
     @event.parent = @website.events.find(params[:parent_id]) if params.has_key?(:parent_id)
-    @event.is_template = true if params.has_key?(:is_template)
-    if params.has_key?(:template_id)
-      @template = @website.events.find(params[:template_id])
-      @l10n = @event.use_template(@template, current_language)
-    end
+    @event.manage_template_from_params(params, current_university)    
+    @l10n = @event.apply_template_in(current_language) if @event.has_template?
     @categories = categories
     breadcrumb
   end
@@ -55,6 +52,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     @event.website = @website
     @event.created_by = current_user
     if @event.save
+      @event.create_blocks_from_template(current_language) if @event.has_template?
       redirect_to admin_communication_website_agenda_event_path(@event),
                   notice: t('admin.successfully_created_html', model: @event.to_s_in(current_language))
     else
@@ -116,7 +114,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
   def event_params
     params.require(:communication_website_agenda_event)
     .permit(
-      :from_day, :to_day, :time_zone, :is_lasting, :bodyclass, :is_template,
+      :from_day, :to_day, :time_zone, :is_lasting, :bodyclass,
+      :is_template, :template_id,
       :parent_id, category_ids: [], destination_website_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text, :notes,
