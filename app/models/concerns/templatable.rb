@@ -20,6 +20,8 @@ module Templatable
     template.present?
   end
 
+  # These attributes are used to avoid data copying from template.
+  # For example, for an event, the start and end dates should not be inherited.
   def template_attributes_excluded
     []
   end
