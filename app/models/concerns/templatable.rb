@@ -47,6 +47,9 @@ module Templatable
         'id',           # The object created is new
         'template_id',  # The template has no template, so we should not touch that
         'is_template'   # The object created from a template is not a template itself
+        'created_at',   # The creation date is not inherited
+        'updated_at',   # The update date is not inherited
+        'created_by_id',# The creator is not inherited
       ] + template_attributes_excluded
     self.attributes = template.attributes.except(*exclusions)
   end
