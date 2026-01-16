@@ -30,7 +30,10 @@ module Templatable
     if params.has_key?(:is_template)
       self.is_template = true
     elsif params.has_key?(:template_id)
-      template_record = self.class.unscoped.templates.where(university_id: current_university.id).find(params[:template_id])
+      template_record = self.class.unscoped
+                                  .templates
+                                  .where(university_id: current_university.id)
+                                  .find(params[:template_id])
       self.template_id = template_record.id
       apply_template_to_object
       apply_template_to_localization
