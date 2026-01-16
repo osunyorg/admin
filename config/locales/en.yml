@@ -553,6 +553,7 @@ en:
   static: Static file
   templates:
     create: Create a template
+    prompt: You can create an event from one of these templates.
     show: Show template
     use: Use this template
   terms_of_service: Terms of service
