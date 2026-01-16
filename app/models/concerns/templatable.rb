@@ -27,10 +27,12 @@ module Templatable
   end
 
   def manage_template_from_params(params, current_university)
-    if params.has_key?(:is_template) 
+    if params.has_key?(:is_template)
       self.is_template = true
     elsif params.has_key?(:template_id)
       self.template_id = params[:template_id]
+      # Template has to exist
+      raise "Object with id #{params[:template_id]} not found"if self.template.nil?
       # Only use templates
       raise "Object with id #{params[:template_id]} is not a template." unless self.template.is_template?
       # Prevent stealing template from another instance
