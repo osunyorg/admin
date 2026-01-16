@@ -1,8 +1,8 @@
 module Templatable
   extend ActiveSupport::Concern
-  
+
   included do
-    belongs_to  :template, 
+    belongs_to  :template,
                 class_name: self.name,
                 optional: true
     has_many    :generated_objects,
@@ -30,13 +30,8 @@ module Templatable
     if params.has_key?(:is_template)
       self.is_template = true
     elsif params.has_key?(:template_id)
-      self.template_id = params[:template_id]
-      # Template has to exist
-      raise "Object with id #{params[:template_id]} not found"if self.template.nil?
-      # Only use templates
-      raise "Object with id #{params[:template_id]} is not a template." unless self.template.is_template?
-      # Prevent stealing template from another instance
-      raise "Object with id #{params[:template_id]} is from a different instance." if self.template.university != current_university
+      template_record = self.class.unscoped.templates.where(university_id: current_university.id).find(params[:template_id])
+      self.template_id = template_record.id
       apply_template_to_object
       apply_template_to_localization
     end
