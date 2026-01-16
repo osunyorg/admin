@@ -438,6 +438,7 @@ fr:
       draft: Brouillon
       planned: Planifié
       published: Publié
+      template: Modèle
       trash: Corbeille
   loading: Chargement...
   localization:
@@ -550,6 +551,11 @@ fr:
   slug_error: ne peut contenir que des lettres minuscules, des chiffres et des traits d'union.
   sms_code: "%{code} est votre code d'authentification sur %{context} (valide %{duration})"
   static: Fichier statique
+  templates:
+    create: Créer un modèle
+    prompt: Vous pouvez créer un événement à partir d'un des modèles suivants.
+    show: Voir ce modèle
+    use: Utiliser ce modèle
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/
   time:

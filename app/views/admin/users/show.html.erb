@@ -10,46 +10,48 @@
 <%= render 'lock' %>
 
 <div class="row">
-  <div class="col-md-6">
-    <h2 class="h5"><%= t('admin.infos') %></h2>
-    <div class="table-responsive">
-      <table class="<%= table_classes %>">
-        <tr>
-          <td><%= User.human_attribute_name('email') %></td>
-          <td class="text-end"><%= link_to @user.email, "mailto:#{@user.email}" %></td>
-        </tr>
-        <% ['first_name', 'last_name', 'mobile_phone'].each do |attribute| %>
-          <tr>
-            <td><%= User.human_attribute_name(attribute) %></td>
-            <td class="text-end"><%= @user.public_send attribute %></td>
-          </tr>
+  <div class="col-lg-4">
+    <%= osuny_label User.human_attribute_name('email') %>
+    <p><%= link_to @user.email, "mailto:#{@user.email}" %></p>
+    <%= osuny_label User.human_attribute_name('first_name') %>
+    <p><%= @user.first_name %></p>
+    <%= osuny_label User.human_attribute_name('last_name') %>
+    <p><%= @user.last_name %></p>
+    <%= osuny_label User.human_attribute_name('language') %>
+    <p><%= language_name(@user.language.iso_code) %></p>
+  </div>
+  <div class="col-lg-4">
+    <%= osuny_label User.human_attribute_name('mobile_phone') %>
+    <p><%= @user.mobile_phone %></p>
+    <%= osuny_label User.human_attribute_name('role') %>
+    <p><%= t("activerecord.attributes.user.roles.#{@user.role.to_s}") %></p>
+    <% if @user.websites_to_manage.any? %>
+      <%= osuny_label User.human_attribute_name('websites_to_manage') %>
+      <ul class="list-unstyled">
+        <% @user.websites_to_manage.each do |website| %>
+          <li><%= website %></li>
         <% end %>
-        <tr>
-          <td><%= User.human_attribute_name('role') %></td>
-          <td class="text-end"><%= t("activerecord.attributes.user.roles.#{@user.role.to_s}") %></td>
-        </tr>
-        <tr>
-          <td><%= User.human_attribute_name('language') %></td>
-          <td class="text-end"><%= language_name(@user.language.iso_code) %></td>
-        </tr>
-        <% if @user.person %>
-          <tr>
-            <td><%= User.human_attribute_name('person') %></td>
-            <td class="text-end"><%= osuny_link_localized @user.person, [:admin, @user.person] %></td>
-          </tr>
+      </ul>
+    <% end %>
+    <% if @user.programs_to_manage.any? %>
+      <%= osuny_label User.human_attribute_name('programs_to_manage') %>
+      <ul class="list-unstyled">
+        <% @user.programs_to_manage.each do |program| %>
+          <li><%= program.to_s_in(current_language) %></li>
         <% end %>
-        <% if @user.current_sign_in_at.present? %>
-          <tr>
-            <td><%= User.human_attribute_name('current_sign_in_at') %></td>
-            <td class="text-end"><%= l(@user.current_sign_in_at, format: :date_with_explicit_month) %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
+      </ul>
+    <% end %>    <% if @user.person %>
+      <%= osuny_label User.human_attribute_name('person') %>
+      <p><%= osuny_link_localized @user.person, [:admin, @user.person] %></p>
+    <% end %>
+    <% if @user.current_sign_in_at.present? %>
+      <%= osuny_label User.human_attribute_name('current_sign_in_at') %>
+      <p><%= l(@user.current_sign_in_at, format: :date_with_explicit_month) %></p>
+    <% end %>
   </div>
   <% if @user.picture.attached? %>
-    <div class="col-md-3">
-      <h2 class="h5"><%= t('activerecord.attributes.user.picture') %></h2>
+    <div class="col-lg-4">
+      <%= osuny_label t('activerecord.attributes.user.picture') %>
       <%= kamifusen_tag @user.picture, class: 'img-fluid' %>
     </div>
   <% end %>

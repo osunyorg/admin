@@ -1,0 +1,5 @@
+<% if @websites.any? %>
+  <%= osuny_panel Communication::Website.model_name.human(count: 2) do %>
+    <%= render 'admin/communication/websites/list', websites: @websites, large: true %>
+  <% end %>
+<% end %>
