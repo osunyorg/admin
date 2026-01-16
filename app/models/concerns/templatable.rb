@@ -56,8 +56,10 @@ module Templatable
     l10n = localizations.first
     template_l10n = template.localization_for(l10n.language)
     exclusions = [
-        'id',   # The localization created is new
-        'slug'  # The slug will depend on the new title
+        'id',         # The localization created is new
+        'slug',       # The slug will depend on the new title
+        'created_at', # The creation date is not inherited
+        'updated_at'  # The update date is not inherited
       ]
     l10n.attributes = template_l10n.attributes.except(*exclusions)
   end
