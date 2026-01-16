@@ -2,7 +2,13 @@ module Templatable
   extend ActiveSupport::Concern
   
   included do
-    belongs_to :template, class_name: self.name, optional: true
+    belongs_to  :template, 
+                class_name: self.name,
+                optional: true
+    has_many    :generated_objects,
+                class_name: self.name,
+                foreign_key: :template_id,
+                dependent: :nullify
 
     scope :templates, -> { where(is_template: true) }
     scope :except_templates, -> { where(is_template: false) }
