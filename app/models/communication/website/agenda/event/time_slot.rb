@@ -45,6 +45,8 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   before_validation :set_website_and_university, on: :create
 
+  after_save :create_periods
+
   scope :on_year, -> (year) { where('extract(year from datetime) = ?', year) }
   scope :on_month, -> (year, month) { where('extract(year from datetime) = ? and extract(month from datetime) = ?', year, month) }
   scope :on_day, -> (day) {  where('DATE(datetime) = ?', day) }
@@ -128,8 +130,6 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
     save
   end
 
-  # Methods for Communication::Website::Agenda::Period::InPeriod
-
   def dates_concerned
     [
       datetime&.to_date,
@@ -138,6 +138,10 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   end
 
   protected
+
+  def create_periods
+    Communication::Website::Agenda::CreatePeriodsJob.perform_later(self)
+  end
 
   def set_website_and_university
     self.communication_website_id = event.communication_website_id

@@ -5,11 +5,6 @@ module Communication::Website::Agenda::Period::InPeriod
     before_validation :set_time_zone
     before_validation :set_to_day
 
-    after_save :touch_periods
-    after_save :create_periods
-    after_destroy :sync_periods
-    after_restore :sync_periods if paranoid?
-
     validates :from_day, presence: true
     validate  :year_is_a_four_digit_number,
               :to_day_after_from_day,
@@ -79,62 +74,4 @@ module Communication::Website::Agenda::Period::InPeriod
     errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
   end
 
-  # Ruby dates symbolizing first days of each month concerned
-  # [19 Nov 2025, 20 Nov 2025] => [1 Nov 2025]
-  def months_concerned
-    dates_concerned.map(&:beginning_of_month).uniq
-  end
-
-  def years_concerned
-    dates_concerned.map(&:year).uniq
-  end
-
-  def touch_periods
-    # Periods might not exist yet!
-    # If so, no problem, they will be properly initialized by create_periods
-    dates_concerned.each { |date| touch_day(date) }
-    months_concerned.each { |date| save_month(date) }
-    years_concerned.each { |year| save_year(year) }
-  end
-
-  def touch_day(date)
-    return if date.nil?
-    Communication::Website::Agenda::Period::Day.find_by(
-      university: university,
-      website: website,
-      date: date
-    )&.touch
-  end
-
-  def save_year(year_value)
-    year_for(year_value)&.save
-  end
-
-  def save_month(date)
-    return if date.nil?
-    year = year_for(date.year)
-    Communication::Website::Agenda::Period::Month.find_by(
-      university: university,
-      website: website,
-      year: year,
-      value: date.month
-    )&.save
-  end
-
-  def create_periods
-    # Not for:
-    # Communication::Website::Agenda::Exhibition
-    # Communication::Website::Agenda::Event::Day
-    return unless is_a?(Communication::Website::Agenda::Event) ||
-                  is_a?(Communication::Website::Agenda::Event::TimeSlot)
-    Communication::Website::Agenda::CreatePeriodsJob.perform_later(self)
-  end
-
-  def sync_periods
-    touch_day(from_day)
-    touch_day(to_day) if from_day != to_day
-    from_year&.needs_recheck!
-    # le if sert à économiser un update_column
-    to_year&.needs_recheck! if to_year != from_year
-  end
 end
