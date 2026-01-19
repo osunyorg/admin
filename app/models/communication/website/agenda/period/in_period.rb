@@ -40,6 +40,12 @@ module Communication::Website::Agenda::Period::InPeriod
     @to_year ||= year_for(to_day.year)
   end
 
+  # Dates before it changed, dates after it changed, all dates concerned by this (timeslot, event, exhibition)
+  # Returns a table of ruby dates
+  def dates_concerned
+    []
+  end
+
   protected
 
   def year_for(value)
@@ -71,12 +77,6 @@ module Communication::Website::Agenda::Period::InPeriod
     return if from_day != to_day
     return unless respond_to?(:from_hour) && respond_to?(:to_hour)
     errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
-  end
-
-  # Dates before it changed, dates after it changed, all dates concerned by this (timeslot, event, exhibition)
-  # Returns a table of ruby dates
-  def dates_concerned
-    []
   end
 
   # Ruby dates symbolizing first days of each month concerned

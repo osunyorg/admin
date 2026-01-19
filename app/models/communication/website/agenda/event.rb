@@ -156,16 +156,16 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     ['from_day', 'to_day']
   end
 
-  protected
-
   # Methods for Communication::Website::Agenda::Period::InPeriod
 
   def dates_concerned
     (
       dates_concerned_from_self +
       dates_concerned_from_time_slots
-    ).uniq.compact
+    ).flatten.uniq.compact
   end
+
+  protected
 
   def dates_concerned_from_self
     [

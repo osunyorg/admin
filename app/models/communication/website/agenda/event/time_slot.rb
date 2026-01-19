@@ -128,8 +128,6 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
     save
   end
 
-  protected
-
   # Methods for Communication::Website::Agenda::Period::InPeriod
 
   def dates_concerned
@@ -138,6 +136,8 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
       datetime_previous_change&.first&.to_date
     ].uniq.compact
   end
+
+  protected
 
   def set_website_and_university
     self.communication_website_id = event.communication_website_id
