@@ -35,6 +35,8 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
+  alias :month :about
+
   delegate :value, to: :about
 
   def should_sync_to?(website)
