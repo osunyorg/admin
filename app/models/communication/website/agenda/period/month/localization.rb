@@ -40,7 +40,7 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
   def should_sync_to?(website)
     website.id == communication_website_id &&
     website.active_language_ids.include?(language_id) &&
-    events_count > 0 # Some events
+    !month.year.empty? # Create month, unless all year is empty
   end
 
   def git_path_relative
