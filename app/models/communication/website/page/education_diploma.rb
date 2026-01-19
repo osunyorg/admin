@@ -5,7 +5,7 @@ class Communication::Website::Page::EducationDiploma < Communication::Website::P
   end
 
   def should_create_special_page?
-    website.about && website.about&.respond_to?(:education_diplomas)
+    website.has_education_diplomas?
   end
 
   def editable_width?

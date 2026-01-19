@@ -438,6 +438,7 @@ en:
       draft: Draft
       planned: Planned
       published: Published
+      template: Template
       trash: Trash
   loading: Loading...
   localization:
@@ -550,6 +551,11 @@ en:
   slug_error: can only contain downcase letters, numbers, and dashes.
   sms_code: "%{code} is your authentication code on %{context} (valid %{duration})"
   static: Static file
+  templates:
+    create: Create a template
+    prompt: You can create an event from one of these templates.
+    show: Show template
+    use: Use this template
   terms_of_service: Terms of service
   terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/
   time:
