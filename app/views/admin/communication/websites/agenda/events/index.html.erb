@@ -1,6 +1,11 @@
 <% content_for :title, "#{Communication::Website::Agenda::Event.model_name.human(count: 2)} (#{@events.total_count})" %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= link_to t('templates.create'),
+                new_admin_communication_website_agenda_event_path(is_template: true),
+                class: button_classes %>
+  <% end if can?(:create_template, @website) %>
   <%= create_link Communication::Website::Agenda::Event %>
 <% end %>
 
