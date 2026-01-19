@@ -36,6 +36,8 @@ class Communication::Website::Agenda::Period::Day < ApplicationRecord
   belongs_to :year
   belongs_to :month
 
+  after_touch :denormalize_localizations_events_count
+
   def next
     Communication::Website::Agenda::Period::Day.find_by(
       university: university,

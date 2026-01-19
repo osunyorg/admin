@@ -5,7 +5,7 @@ module Communication::Website::Agenda::Period::InPeriod
     before_validation :set_time_zone
     before_validation :set_to_day
 
-    before_save :touch_periods
+    after_save :touch_periods
     after_save :create_periods
     after_destroy :sync_periods
     after_restore :sync_periods if paranoid?
@@ -73,36 +73,32 @@ module Communication::Website::Agenda::Period::InPeriod
     errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
   end
 
-  # By default, no update
-  # Event and time slots will override that
-  def should_update_periods?
-    false
+  def day_before_previous_change
+    raise NoMethodError, "You must implement the `day_before_previous_change` method in #{self.class.name}"
   end
 
-  def day_before_change
-    raise NoMethodError, "You must implement the `day_before_change` method in #{self.class.name}"
+  def day_after_previous_change
+    raise NoMethodError, "You must implement the `day_after_previous_change` method in #{self.class.name}"
   end
 
-  def day_after_change
-    raise NoMethodError, "You must implement the `day_after_change` method in #{self.class.name}"
+  def years_concerned_by_previous_change
+    [day_before_previous_change&.year, day_after_previous_change&.year].uniq.compact
   end
 
-  def years_concerned_by_change
-    [day_before_change&.year, day_after_change&.year].uniq.compact
+  def month_changed_by_last_save?
+    (day_after_previous_change&.strftime('%Y%m') != day_before_previous_change&.strftime('%Y%m'))
   end
 
   def touch_periods
     # Periods might not exist yet!
     # If so, no problem, they will be properly initialized by create_periods
-    return unless should_update_periods?
-    touch_day(day_before_change)
-    touch_day(day_after_change)
-    years_concerned_by_change.each do |year|
+    touch_day(day_after_previous_change)
+    touch_day(day_before_previous_change) if day_after_previous_change != day_before_previous_change
+    years_concerned_by_previous_change.each do |year|
       save_year(year)
     end
-    save_month(day_after_change)
-    different_months = (day_after_change&.strftime('%Y%m') != day_before_change&.strftime('%Y%m'))
-    save_month(day_before_change) if different_months
+    save_month(day_after_previous_change)
+    save_month(day_before_previous_change) if month_changed_by_last_save?
   end
 
   def touch_day(date)

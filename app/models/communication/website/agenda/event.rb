@@ -160,16 +160,12 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   # Methods for Communication::Website::Agenda::Period::InPeriod
 
-  def should_update_periods?
-    from_day_changed?
+  def day_before_previous_change
+    from_day_previous_change&.first
   end
 
-  def day_before_change
-    from_day_change.first
-  end
-
-  def day_after_change
-    from_day_change.last
+  def day_after_previous_change
+    from_day
   end
 
   # TODO refactor that with service or addition to DateTime (ex: DateTime.merge(date, time))
