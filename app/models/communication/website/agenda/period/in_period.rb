@@ -85,7 +85,7 @@ module Communication::Website::Agenda::Period::InPeriod
     dates_concerned.map(&:beginning_of_month).uniq
   end
 
-  def years_concerned_by_previous_change
+  def years_concerned
     dates_concerned.map(&:year).uniq
   end
 
@@ -93,10 +93,8 @@ module Communication::Website::Agenda::Period::InPeriod
     # Periods might not exist yet!
     # If so, no problem, they will be properly initialized by create_periods
     dates_concerned.each { |date| touch_day(date) }
-    years_concerned_by_previous_change.each do |year|
-      save_year(year)
-    end
     months_concerned.each { |date| save_month(date) }
+    years_concerned.each { |year| save_year(year) }
   end
 
   def touch_day(date)
