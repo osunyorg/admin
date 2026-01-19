@@ -132,12 +132,11 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   # Methods for Communication::Website::Agenda::Period::InPeriod
 
-  def day_before_previous_change
-    datetime_previous_change&.first&.to_date
-  end
-
-  def day_after_previous_change
-    datetime&.to_date
+  def dates_concerned
+    [
+      datetime&.to_date,
+      datetime_previous_change&.first&.to_date
+    ].uniq.compact
   end
 
   def set_website_and_university

@@ -160,12 +160,22 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   # Methods for Communication::Website::Agenda::Period::InPeriod
 
-  def day_before_previous_change
-    from_day_previous_change&.first
+  def dates_concerned
+    (
+      dates_concerned_from_self +
+      dates_concerned_from_time_slots
+    ).uniq.compact
   end
 
-  def day_after_previous_change
-    from_day
+  def dates_concerned_from_self
+    [
+      from_day,
+      from_day_previous_change&.first
+    ]
+  end
+
+  def dates_concerned_from_time_slots
+    time_slots.collect(&:dates_concerned)
   end
 
   # TODO refactor that with service or addition to DateTime (ex: DateTime.merge(date, time))

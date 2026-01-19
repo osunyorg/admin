@@ -73,32 +73,30 @@ module Communication::Website::Agenda::Period::InPeriod
     errors.add(:to_hour, :too_soon) if to_hour.present? && from_hour.present? && to_hour <= from_hour
   end
 
-  def day_before_previous_change
-    raise NoMethodError, "You must implement the `day_before_previous_change` method in #{self.class.name}"
+  # Dates before it changed, dates after it changed, all dates concerned by this (timeslot, event, exhibition)
+  # Returns a table of ruby dates
+  def dates_concerned
+    []
   end
 
-  def day_after_previous_change
-    raise NoMethodError, "You must implement the `day_after_previous_change` method in #{self.class.name}"
+  # Ruby dates symbolizing first days of each month concerned
+  # [19 Nov 2025, 20 Nov 2025] => [1 Nov 2025]
+  def months_concerned
+    dates_concerned.map(&:beginning_of_month).uniq
   end
 
   def years_concerned_by_previous_change
-    [day_before_previous_change&.year, day_after_previous_change&.year].uniq.compact
-  end
-
-  def month_changed_by_last_save?
-    (day_after_previous_change&.strftime('%Y%m') != day_before_previous_change&.strftime('%Y%m'))
+    dates_concerned.map(&:year).uniq
   end
 
   def touch_periods
     # Periods might not exist yet!
     # If so, no problem, they will be properly initialized by create_periods
-    touch_day(day_after_previous_change)
-    touch_day(day_before_previous_change) if day_after_previous_change != day_before_previous_change
+    dates_concerned.each { |date| touch_day(date) }
     years_concerned_by_previous_change.each do |year|
       save_year(year)
     end
-    save_month(day_after_previous_change)
-    save_month(day_before_previous_change) if month_changed_by_last_save?
+    months_concerned.each { |date| save_month(date) }
   end
 
   def touch_day(date)
