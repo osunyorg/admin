@@ -53,6 +53,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Searchable
   include Templatable
   include WithDays
+  include WithPeriodSync
   include WithTimeSlots
   include WithKinds
   include WithMenuItemTarget
@@ -72,6 +73,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
               class_name: 'Communication::Website::Agenda::Event',
               foreign_key: :parent_id,
               dependent: :destroy
+
+  after_save :create_periods
 
   scope :ordered_desc, -> {
     select("communication_website_agenda_events.*, MIN(communication_website_agenda_event_time_slots.datetime) as least_recent_time_slot")
@@ -156,20 +159,13 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     ['from_day', 'to_day']
   end
 
-  protected
-
   # Methods for Communication::Website::Agenda::Period::InPeriod
 
-  def should_update_periods?
-    from_day_changed?
-  end
 
-  def day_before_change
-    from_day_change.first
-  end
+  protected
 
-  def day_after_change
-    from_day_change.last
+  def create_periods
+    Communication::Website::Agenda::CreatePeriodsJob.perform_later(self)
   end
 
   # TODO refactor that with service or addition to DateTime (ex: DateTime.merge(date, time))
