@@ -35,12 +35,6 @@ module Communication::Website::Agenda::Period::InPeriod
     @to_year ||= year_for(to_day.year)
   end
 
-  # Dates before it changed, dates after it changed, all dates concerned by this (timeslot, event, exhibition)
-  # Returns a table of ruby dates
-  def dates_concerned
-    []
-  end
-
   protected
 
   def year_for(value)
