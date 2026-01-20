@@ -48,6 +48,7 @@ class Communication::Website::Page < ApplicationRecord
   include Sanitizable
   include Searchable
   include WithAutomaticMenus
+  include WithDesignOptions
   include WithMenuItemTarget
   include WithOpenApi
   include HasListBlocks

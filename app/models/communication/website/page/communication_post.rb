@@ -1,5 +1,9 @@
 class Communication::Website::Page::CommunicationPost < Communication::Website::Page
 
+  def design_options_block_template_kind
+    :posts
+  end
+
   def is_hugo_index?
     true
   end
@@ -10,6 +14,10 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
 
   def full_width_by_default?
     true
+  end
+
+  def design_options_block_template_kind
+    :posts
   end
 
   def should_create_special_page?
