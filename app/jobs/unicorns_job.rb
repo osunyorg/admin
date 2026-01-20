@@ -3,6 +3,8 @@ class UnicornsJob < ApplicationJob
   queue_as :unicorns
 
   def perform
-    Communication::Website::Agenda::Period::Day::Localization.find_each { |l10n| l10n.denormalize_events_count }
+    Communication::Website::Agenda::Period::Day::Localization.find_each &:save
+    Communication::Website::Agenda::Period::Month::Localization.find_each &:save
+    Communication::Website::Agenda::Period::Year::Localization.find_each &:save
   end
 end
