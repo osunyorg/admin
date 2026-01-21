@@ -27,11 +27,9 @@
     <%= osuny_small_panel Communication::Website::Agenda::Event::Localization.human_attribute_name(:title) do %>
       <p class="lead"><%= @l10n.title %></p>
     <% end %>
-    <% if @l10n.subtitle.present? %>
-      <%= osuny_small_panel Communication::Website::Agenda::Event::Localization.human_attribute_name(:subtitle) do %>
-        <p class="lead"><%= @l10n.subtitle %></p>
-      <% end %>
-    <% end %>
+    <%= osuny_small_panel Communication::Website::Agenda::Event::Localization.human_attribute_name(:subtitle) do %>
+      <p class="lead"><%= @l10n.subtitle %></p>
+    <% end if @l10n.subtitle.present? %>
     <%= render 'admin/application/summary/show', about: @l10n %>
     <%= osuny_small_panel Communication::Website::Agenda::Event::Localization.human_attribute_name(:dates) do %>
       <p><%= render 'admin/communication/websites/agenda/events/dates', event: @event, l10n: @l10n, detailed: true %></p>
