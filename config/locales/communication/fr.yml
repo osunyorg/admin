@@ -513,6 +513,9 @@ fr:
           fallback_hint_html: "Laisser vide pour utiliser la valeur par défaut : <i>%{master_value}</i>"
           title: Internationalisation
         page:
+          children:
+            with_blocks: Comme la page a des blocs publiés, elle n'affichera pas les pages enfants ci-dessous. Si vous voulez les afficher malgré tout, il faut utiliser un bloc Pages.
+            without_blocks: Comme la page n'a pas de blocs publiés, elle affichera automatiquement les pages enfants ci-dessous.
           localizations:
             draft: Brouillon
             published: Publiée
@@ -605,7 +608,6 @@ fr:
                 other: Cette page est une page spéciale, qui présente nativement les %{count} volumes liés au site.
             sitemap: Cette page est une page spéciale, qui présente nativement le plan du site.
           structure: Pages
-          with_children: "avec comme pages enfants :"
         permalinks:
           creation_error: "Erreur lors de la création. Le chemin renseigné est-il au bon format ?"
         portfolio:

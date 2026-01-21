@@ -8,7 +8,6 @@
         </span>
       <% end %>
     <% end %>
-
     <% if @l10n.respond_to?(:subtitle) && @l10n.subtitle.present? %>
       <%= osuny_small_panel t('category.subtitle') do %>
         <p class="lead"><%= @l10n.subtitle %></p>
@@ -19,6 +18,7 @@
         <p class="lead"><%= @l10n.breadcrumb_title %></p>
       <% end %>
     <% end %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
     <% if @l10n.respond_to?(:header_text) && @l10n.header_text.present? %>
       <%= osuny_small_panel t('category.header_text') do %>
         <p class="lead"><%= @l10n.header_text %></p>
@@ -50,11 +50,12 @@
         <% end %>
       </ul>
     <% end %>
+  </div>
+  <div class="col-lg-4">
     <%= render 'admin/application/l10n/widget', about: category, l10n: l10n %>
   </div>
-  <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @l10n %>
-    <%= render 'admin/application/meta_description/show', about: @l10n %>
+  <div class="col-lg-4">
+      <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
 <%= render 'admin/communication/contents/editor', about: @l10n %>

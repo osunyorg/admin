@@ -19,9 +19,12 @@
   <div class="col-lg-7">
     <%= osuny_small_panel Communication::Website::Jobboard::Job::Localization.human_attribute_name(:title) do %>
       <p class="lead"><%= @l10n.title %></p>
-      <% if @l10n.subtitle.present? %>
-        <p class="mt-n3 text-muted"><%= @l10n.subtitle %></p>
-      <% end %>
+    <% end %>
+    <%= osuny_small_panel Communication::Website::Jobboard::Job::Localization.human_attribute_name(:subtitle) do %>
+      <p class="lead"><%= @l10n.subtitle %></p>
+    <% end if @l10n.subtitle.present?  %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
+    <%= osuny_small_panel Communication::Website::Jobboard::Job::Localization.human_attribute_name(:dates) do %>
       <p><%= render 'admin/communication/websites/jobboard/jobs/dates', job: @job, l10n: @l10n, detailed: true %></p>
     <% end %>
   </div>
@@ -36,13 +39,14 @@
   <div class="col-lg-4">
     <%= osuny_small_panel t('metadata') do %>
       <%= render 'admin/application/publication/show', about: @l10n %>
-      <%= render 'admin/application/categories/widget/show', about: @job %>
       <%= render 'admin/application/permalinks/redirects', about: @l10n %>
-      <%= render 'admin/application/l10n/widget', about: @job, l10n: @l10n %>
     <% end %>
   </div>
-  <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @l10n %>
+  <div class="col-lg-4">
+    <%= render 'admin/application/l10n/widget', about: @job, l10n: @l10n %>
+    <%= render 'admin/application/categories/widget/show', about: @job %>
+  </div>
+  <div class="col-lg-4">
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>

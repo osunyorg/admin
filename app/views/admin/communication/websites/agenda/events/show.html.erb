@@ -24,34 +24,39 @@
 
 <div class="row">
   <div class="col-lg-7">
-    <%= osuny_label Communication::Website::Agenda::Event::Localization.human_attribute_name(:title) %>
-    <p class="lead"><%= @l10n.title %></p>
-    <% if @l10n.subtitle.present? %>
-      <%= osuny_label Communication::Website::Agenda::Event::Localization.human_attribute_name(:subtitle) %>
-      <p class="lead"><%= @l10n.subtitle %></p>
+    <%= osuny_small_panel Communication::Website::Agenda::Event::Localization.human_attribute_name(:title) do %>
+      <p class="lead"><%= @l10n.title %></p>
     <% end %>
-    <%= osuny_label Communication::Website::Agenda::Event::Localization.human_attribute_name(:dates) %>
-    <p><%= render 'admin/communication/websites/agenda/events/dates', event: @event, l10n: @l10n, detailed: true %></p>
+    <% if @l10n.subtitle.present? %>
+      <%= osuny_small_panel Communication::Website::Agenda::Event::Localization.human_attribute_name(:subtitle) do %>
+        <p class="lead"><%= @l10n.subtitle %></p>
+      <% end %>
+    <% end %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
+    <%= osuny_small_panel Communication::Website::Agenda::Event::Localization.human_attribute_name(:dates) do %>
+      <p><%= render 'admin/communication/websites/agenda/events/dates', event: @event, l10n: @l10n, detailed: true %></p>
+    <% end %>
   </div>
   <div class="offset-lg-1 col-lg-4">
     <%= render 'admin/application/images/featured/show', about: @l10n %>
   </div>
 </div>
-<hr class="mb-5">
+<%= osuny_separator %>
 <%= render 'admin/application/a11y/widget', about: @l10n, horizontal: true %>
-<hr class="mb-5">
+<%= osuny_separator %>
 <div class="row">
   <div class="col-lg-4">
     <%= osuny_small_panel t('metadata') do %>
       <%= render 'admin/application/publication/show', about: @l10n %>
-      <%= render 'admin/application/categories/widget/show', about: @event %>
       <%= render 'admin/communication/websites/federations/show', about: @event %>
       <%= render 'admin/application/permalinks/redirects', about: @l10n %>
-      <%= render 'admin/application/l10n/widget', about: @event, l10n: @l10n %>
     <% end %>
   </div>
-  <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @l10n %>
+  <div class="col-lg-4">
+    <%= render 'admin/application/l10n/widget', about: @event, l10n: @l10n %>
+    <%= render 'admin/application/categories/widget/show', about: @event %>
+  </div>
+  <div class="col-lg-4">
     <%= osuny_small_panel Communication::Website::Agenda::Event::Localization.human_attribute_name("text") do %>
       <div><%= sanitize @l10n.text %></div>
     <% end if @l10n.text.present? %>
