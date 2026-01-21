@@ -20,11 +20,9 @@
     <%= osuny_small_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:title) do %>
       <p class="lead"><%= @l10n.title %></p>
     <% end %>
-    <% if @l10n.subtitle.present? %>
-      <%= osuny_small_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:subtitle) do %>
-        <p class="lead"><%= @l10n.subtitle %></p>
-      <% end %>
-    <% end %>
+    <%= osuny_small_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:subtitle) do %>
+      <p class="lead"><%= @l10n.subtitle %></p>
+    <% end if @l10n.subtitle.present? %>
     <%= render 'admin/application/summary/show', about: @l10n %>
   </div>
   <div class="offset-lg-1 col-lg-4">
