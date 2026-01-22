@@ -19,7 +19,7 @@
       <div class="col-md-4">
         <%= osuny_panel t('metadata') do %>
           <% if can? :publish, post %>
-            <div class="row pure__row--small">
+            <div class="row">
               <div class="col-6">
                 <%= render 'admin/application/publication/form', f: lf, about: post %>
               </div>
