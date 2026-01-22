@@ -123,7 +123,7 @@ class Osuny::Media::Picker::Origins
       active_storage_blob: image.blob
     ).destroy_all
     # Detach image (attachment)
-    image.detach
+    image.attachment.really_destroy! if image.attachment
   end
   
   def find_or_create_media_with_checksum(checksum, origin)
