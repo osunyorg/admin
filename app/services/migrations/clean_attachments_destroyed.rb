@@ -4,8 +4,8 @@ class Migrations::CleanAttachmentsDestroyed
     puts 'Migrations::CleanAttachmentsDestroyed.migrate'
     ActiveStorage::Attachment.only_deleted.find_each do |attachment|
       next if should_keep(attachment)
-      puts "will destroy attachment #{attachment.name} for #{attachment.record_type}/#{attachment.record_id}"
-      # attachment.really_destroy!
+      puts "Destroy attachment #{attachment.name} for #{attachment.record_type}/#{attachment.record_id}"
+      attachment.really_destroy!
     end
   end
 
