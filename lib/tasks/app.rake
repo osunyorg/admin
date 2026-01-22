@@ -1,6 +1,9 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
+    ActiveStorage::Attachment.only_deleted.find_each do |attachment|
+      # byebug
+    end
   end
 
   namespace :search do
