@@ -8,7 +8,7 @@ l10n ||= f.object.localizations.build(language_id: current_language.id)
 %>
 <%= f.simple_fields_for :localizations, l10n do |lf| %>
   <div class="nested-fields mb-2">
-    <div class="row pure__row--small align-items-center">
+    <div class="row align-items-center">
       <div class="col-1">
         <i class="<%= Icon::DRAG %> handle"></i>
       </div>

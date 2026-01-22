@@ -23,7 +23,7 @@ layouts = template.class.layouts
     %>
     <div class="mb-4 layout" v-bind:class="{ 'layout--selected': data.layout == '<%= layout %>' }">
       <label for="layout-<%= layout %>">
-        <div class="row pure__row--small">
+        <div class="row">
           <div class="col-sm-4">
             <%= image_tag "communication/blocks/templates/#{template.kind}/#{layout}.png",
                           alt: name,
