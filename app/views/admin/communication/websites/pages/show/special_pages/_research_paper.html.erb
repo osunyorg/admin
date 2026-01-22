@@ -1,0 +1,13 @@
+<%
+# Not in controller because it's loaded depending on the page type
+@papers = @website.research_papers
+                  .published_now_in(current_language)
+                  .ordered(current_language)
+                  .page(params[:papers_page])
+@journal = @papers.first&.research_journal_id
+%>
+<%= osuny_panel t('admin.communication.website.pages.special_page') do %>
+  <p><%= t('admin.communication.website.pages.special_pages.research_paper.native', count: @papers.total_count) %></p>
+  <%= render 'admin/research/journals/papers/list', papers: @papers %>
+  <%= paginate @papers, param_name: :papers_page %>
+<% end %>

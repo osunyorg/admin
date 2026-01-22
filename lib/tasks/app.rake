@@ -1,7 +1,6 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Migrations::TimeSlotLocalizations.migrate
   end
 
   namespace :search do

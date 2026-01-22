@@ -29,4 +29,8 @@ class Communication::Website::Page::CommunicationJobboard < Communication::Websi
   def special_page_categories
     website.jobboard_categories
   end
+
+  def hugo_body_class
+    'jobs__section'
+  end
 end

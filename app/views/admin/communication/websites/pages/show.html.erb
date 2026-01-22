@@ -27,9 +27,13 @@
 <div class="row">
   <div class="col-lg-7">
     <%= osuny_small_panel Communication::Website::Page::Localization.human_attribute_name(:title) do %>
-      <p class="lead mb-1"><%= @l10n.title %></p>
+      <p class="lead"><%= @l10n.title %></p>
       <%= render 'admin/application/property/publication', about: @l10n %>
     <% end %>
+    <%= osuny_small_panel Communication::Website::Page::Localization.human_attribute_name(:subtitle) do %>
+      <p class="lead"><%= @l10n.subtitle %></p>
+    <% end if @l10n.subtitle.present?  %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
   </div>
   <div class="offset-lg-1 col-lg-4">
     <%= render 'admin/application/images/featured/show', about: @l10n %>
@@ -42,13 +46,20 @@
   <div class="col-lg-4">
     <%= render 'admin/communication/websites/pages/show/metadata' %>
   </div>
-  <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @l10n %>
+  <div class="col-lg-4">
+    <%= render 'admin/application/l10n/widget', about: @page, l10n: @l10n %>
+    <%= render 'admin/application/categories/widget/show', about: @page %>
+  </div>
+  <div class="col-lg-4">
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
 <%= render 'admin/communication/contents/editor', about: @l10n %>
-<%= render 'admin/communication/websites/pages/show/special_page' %>
+<% if @page.is_special_page? %>
+  <%= render 'admin/communication/websites/pages/show/special_page' %>
+<% else %>
+  <%= render 'admin/communication/websites/pages/show/normal_page' %>
+<% end %>
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_communication_website_page_path(@page) %>

@@ -12,10 +12,10 @@ module WithDependencies
       after_save :clean_websites_if_necessary
 
       # As objects are paranoid, we can do cleaning after destroying the object, it still exists in the database with `deleted_on`
-      after_destroy :clean_object_after_destroy if :paranoid?
+      after_destroy :clean_object_after_destroy if paranoid?
 
       # TODO paranoia: tout devrait répondre à after_restore, condition à supprimer à terme
-      after_restore :reconnect_object_after_restore if respond_to?(:after_restore)
+      after_restore :reconnect_object_after_restore if paranoid?
     end
   end
 
@@ -70,6 +70,7 @@ module WithDependencies
   end
 
   def clean_websites_if_necessary_safely
+    return if paranoid? && deleted?
     # Tableau de global ids des dépendances
     current_dependencies = DependenciesFilter.filtered(recursive_dependencies)
     # La première fois, il n'y a rien en cache, alors on force le nettoyage
@@ -103,11 +104,11 @@ module WithDependencies
   def dependency_should_be_added?(array, dependency)
     !dependency.in?(array) && dependency_published?(dependency)
   end
-  
+
   # Les objets qui n'ont pas pas de méthode published (website, menu, blob) sont publiés par défaut
   def dependency_published?(dependency)
     if dependency.respond_to?(:published?)
-      # Certains objets sont des index Hugo, et sont là même s'ils ne sont pas publiés 
+      # Certains objets sont des index Hugo, et sont là même s'ils ne sont pas publiés
       dependency.published? || dependency.try(:about).try(:is_hugo_index?)
     else
       true
@@ -135,6 +136,7 @@ module WithDependencies
     # Les objets directs et les objets indirects (et les websites) répondent !
     return unless respond_to?(:is_direct_object?)
     websites_ids.each do |website_id|
+      next unless Communication::Website.exists?(website_id)
       Communication::Website.find(website_id).clean
     end
   end

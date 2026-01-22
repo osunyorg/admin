@@ -1,4 +1,5 @@
 class Api::Osuny::ApplicationController < Api::ApplicationController
+  include WithPagination
   include WithResourceParams
 
   rescue_from ActionController::ParameterMissing, with: :handle_bad_request
@@ -12,10 +13,6 @@ class Api::Osuny::ApplicationController < Api::ApplicationController
   def verify_app_token
     @app = current_university.apps.find_by(token: request.headers['X-Osuny-Token'])
     render_unauthorized unless @app
-  end
-
-  def render_on_missing_migration_identifier
-    render json: { error: 'Missing migration identifier.' }, status: :bad_request
   end
 
   # Set API messages to English

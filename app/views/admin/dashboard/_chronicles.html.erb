@@ -24,14 +24,14 @@ fetch(RSS_URL)
       let description = item.querySelector("description");
       html += `
         <article class="mb-3 position-relative">
-          <p class="mb-0"><b>${title.textContent}</b></p>
-          <p class="">${description.textContent}</p>
-          <p class="small">
-            ${date.getMonth()+1}/${date.getFullYear()}
-            — 
-            <a href="${link.textContent}" target="_blank" rel="noopener">
-              <%= t('admin.chronicles.read_more') %>
-            </a>
+          <p class="mb-0">
+            <b>${title.textContent}</b>
+          </p>
+          <p class="mb-0">
+            ${description.textContent}
+            <span class="badge bg-light text-dark">
+              ${date.getMonth()+1}/${date.getFullYear()}
+            </span>
           </p>
         </article>
         <hr>

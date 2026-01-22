@@ -60,7 +60,7 @@ link_to_all ||= false
                   <% end %>
                 <% else %>
                   <div class="card-body">
-                    <%= osuny_published l10n.publication_state unless small %>
+                    <%= osuny_published l10n&.publication_state unless small %>
                     <%= osuny_link_localized  post,
                                               admin_communication_website_post_path(
                                                 website_id: post.website.id,

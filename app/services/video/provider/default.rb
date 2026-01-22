@@ -45,8 +45,19 @@ class Video::Provider::Default
     embed
   end
 
+  def embed_for_preview
+    embed
+  end
+
   def iframe_tag(**iframe_options)
     content_tag(:iframe, nil, default_iframe_options.merge(iframe_options))
+  end
+
+  # iframe used in show and snippet
+  def iframe_preview_tag(**iframe_options)
+    options = default_iframe_options.merge(iframe_options)
+    options[:src] = embed_for_preview
+    content_tag(:iframe, nil, options)
   end
 
   def correct?

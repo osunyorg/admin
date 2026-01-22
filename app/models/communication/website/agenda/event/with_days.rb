@@ -6,6 +6,7 @@ module Communication::Website::Agenda::Event::WithDays
               foreign_key: :communication_website_agenda_event_id,
               dependent: :destroy
     after_save :generate_days, if: :kind_parent?
+    after_restore :generate_days, if: :kind_parent?
     after_save :generate_parent_days, if: :kind_child?
   end
 

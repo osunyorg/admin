@@ -26,18 +26,6 @@
                                       id: @page.parent.id
                                     ) %>”
     <% end %>
-
-    <% if @page.children.any? %>
-      <%= t('admin.communication.website.pages.with_children') %>
-      <%= raw @page.children.ordered.map { |child|
-            osuny_link_localized_if   can?(:read, child),
-                                      child,
-                                      admin_communication_website_page_path( website_id: @website.id, id: child.id),
-                                      classes: "#{'draft' unless child.published_in?(current_language)}"
-      }.join(', ') %>
-    <% end %>
   </p>
-  <%= render 'admin/application/categories/widget/show', about: @page %>
   <%= render 'admin/application/permalinks/redirects', about: @l10n %>
 <% end %>
-<%= render 'admin/application/l10n/widget', about: @page, l10n: @l10n %>

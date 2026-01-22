@@ -4,7 +4,7 @@
       <%= render 'admin/communication/blocks/partials/top', block: block %>
       <% if block.template.url.present? %>
         <div class="video">
-          <%= block.template.video_iframe %>
+          <%= block.template.video_iframe_preview %>
         </div>
       <% end %>
       <% if block.template.video_title %>

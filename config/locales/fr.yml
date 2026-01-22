@@ -148,6 +148,7 @@ fr:
       switch_to: basculer en %{choices}
     infos: Informations
     inheritance:
+      override: Entrer un autre texte
       sentence_html: Valeur héritée de %{link}
       sentence_without_link: Valeur héritée
       status: Valeur héritée
@@ -205,14 +206,18 @@ fr:
     title: Modifier la sélection
   cancel: Annuler
   category:
+    breadcrumb_title: Nom affiché dans le fil d'ariane
     children: Sous-catégories
     featured_image: Image à la une
     featured_image_alt: Texte alternatif
     free: Catégories libres (sans taxonomie)
+    header_text: Titre affiché en haut de page
     is_taxonomy: Est une taxonomie (une famille de catégories)
     name: Nom
     parent: Catégorie parente
     slug: Slug
+    subtitle: Sous-titre
+    taxonomy: Taxonomie
     title: Catégories
   confirm: Confirmer
   contact_details:
@@ -249,6 +254,15 @@ fr:
       country:
         hint: ''
         label: Pays
+      geolocation_failed: 
+        hint: 'Si la géolocalisation automatique ne fonctionne pas, vous pouvez saisir la latitude et la longitude directement ci-dessous, en coordonnées décimales.'
+        label: 'Pas de géolocalisation ?'
+      latitude:
+        hint: 'Exemples: 44.833328 pour 44° 49′ 59.98″ de latitude nord, -0.4389288 pour 0° 26′ 20.144″ de latitude sud'
+        label: 'Latitude'
+      longitude:
+        hint: 'Exemples: -0.56667 pour 0° 34′ 0.01″ de longitude ouest, 39.103672 pour 390° 6′ 13.219″ de longitude est'
+        label: 'Longitude'
       zipcode:
         hint: ''
         label: Code postal
@@ -392,6 +406,7 @@ fr:
       reset: Réinitialiser la recherche
       submit: Chercher
     title: Rechercher et filtrer
+    trash_warning: Les éléments dans la corbeille seront ignorés
   folder:
     close: Fermer le dossier
     empty: Le dossier est vide
@@ -424,6 +439,7 @@ fr:
       draft: Brouillon
       planned: Planifié
       published: Publié
+      template: Modèle
       trash: Corbeille
   loading: Chargement...
   localization:
@@ -483,7 +499,10 @@ fr:
   move: Déplacer
   open: Ouvrir
   organize: Organiser
-  please_confirm: Est-ce que vous confirmez ?
+  please_confirm:
+    deletion: Est-ce que vous confirmez la suppression ?
+    duplication: Est-ce que vous confirmez la duplication ?
+    generic: Est-ce que vous confirmez ?
   preview:
     button: Prévisualiser
     desktop: Ordinateur
@@ -533,6 +552,11 @@ fr:
   slug_error: ne peut contenir que des lettres minuscules, des chiffres et des traits d'union.
   sms_code: "%{code} est votre code d'authentification sur %{context} (valide %{duration})"
   static: Fichier statique
+  templates:
+    create: Créer un modèle
+    prompt: Vous pouvez créer un événement à partir d'un des modèles suivants.
+    show: Voir ce modèle
+    use: Utiliser ce modèle
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/
   time:

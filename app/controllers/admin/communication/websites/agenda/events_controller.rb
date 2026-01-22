@@ -9,9 +9,12 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
 
   def index
     @filtered = @events.filter_by(params[:filters], current_language)
+    unless params.dig(:filters)&.keys&.any?
+      # Only root events if no filter
+      @filtered = @filtered.root
+    end
     @events = @filtered.at_lifecycle(params[:lifecycle], current_language)
                        .ordered_desc
-                       .root
                        .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
@@ -27,8 +30,13 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb
   end
 
+  def preview
+    render layout: 'admin/layouts/preview'
+  end
+
   def new
     @event.parent = @website.events.find(params[:parent_id]) if params.has_key?(:parent_id)
+    @event.manage_template_from_params(params, current_university)
     @categories = categories
     breadcrumb
   end
@@ -105,6 +113,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     params.require(:communication_website_agenda_event)
     .permit(
       :from_day, :to_day, :time_zone, :is_lasting, :bodyclass,
+      :is_template, :template_id,
       :parent_id, category_ids: [], destination_website_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text, :notes,

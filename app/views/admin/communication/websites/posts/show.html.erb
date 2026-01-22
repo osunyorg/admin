@@ -23,15 +23,16 @@
         <p class="lead"><%= @l10n.subtitle %></p>
       <% end %>
     <% end %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
     <%= render 'admin/application/property/publication', about: @l10n %>
   </div>
   <div class="offset-lg-1 col-lg-4">
     <%= render 'admin/application/images/featured/show', about: @l10n %>
   </div>
 </div>
-<hr class="mb-5">
+<%= osuny_separator %>
 <%= render 'admin/application/a11y/widget', about: @l10n, horizontal: true %>
-<hr class="mb-5">
+<%= osuny_separator %>
 <div class="row">
   <div class="col-lg-4">
     <%= osuny_small_panel t('metadata') do %>
@@ -53,20 +54,31 @@
           </ul>
         </div>
       <% end %>
-      <%= render 'admin/application/categories/widget/show', about: @post %> 
-      <%= render 'admin/application/permalinks/redirects', about: @l10n %>
     <% end %>
-    <%= render 'admin/application/l10n/widget', about: @post, l10n: @l10n %>
+    <%= render 'admin/application/permalinks/redirects', about: @l10n %>
   </div>
-  <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @l10n %>
-    <%= render 'admin/application/meta_description/show', about: @l10n %>
+  <div class="col-lg-4">
+    <%= render 'admin/application/l10n/widget', about: @post, l10n: @l10n %>
+    <%= render 'admin/application/categories/widget/show', about: @post %>
+    <%= render 'admin/communication/websites/federations/show', about: @post %>
+  </div>
+  <div class="col-lg-4">
+      <%= render 'admin/application/meta_description/show', about: @l10n %>
+
   </div>
 </div>
 
 <%= render 'admin/communication/contents/editor', about: @l10n %>
 
 <% content_for :server_admin_only do %>
-  <%= static_link static_admin_communication_website_post_path(@post) %>
+  <% @post.website_and_federated_websites.each do |website| %>
+    <div class="mb-3">
+      <%= osuny_label website %><br>
+      <%= link_to Communication::Website::Post.model_name.human,
+                  static_admin_communication_website_post_path(
+                    @post,
+                    context_website_id: website.id
+                  ) %>
+    </div>
+  <% end %>
 <% end %>
-

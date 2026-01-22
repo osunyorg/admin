@@ -18,8 +18,8 @@
     <p class="float-end blocks__category__description"><%= t "admin.communication.blocks.categories.#{category}.description" %></p>
     <h2 class="h3 category blocks__category__title"><%= t "admin.communication.blocks.categories.#{category}.label" %></h2>
     <div class="row">
-      <% selected_kinds.each do |kind| %>
-        <%
+      <%
+      selected_kinds.each do |kind| 
         @block.template_reset!
         @block.template_kind = kind
         %>
@@ -27,7 +27,7 @@
           <div class="flex-fill position-relative js-validate-form-click">
             <%= image_tag "communication/blocks/templates/#{kind}.jpg", alt: '', class:"card-img-top block__image" %>
             <div>
-                <h3 class="h4 block__title"><%= t "enums.communication.block.template_kind.#{kind}" %></h4>
+                <h3 class="h4 block__title"><%= @block.template_name %></h4>
                 <p class="mb-0 block__description">
                   <%= t "admin.communication.blocks.templates.#{kind}.description" %>
                 </p>

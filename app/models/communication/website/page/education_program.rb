@@ -5,7 +5,7 @@ class Communication::Website::Page::EducationProgram < Communication::Website::P
   end
 
   def should_create_special_page?
-    website.about && website.about&.respond_to?(:programs)
+    website.has_education_programs?
   end
 
   def editable_width?
@@ -32,5 +32,9 @@ class Communication::Website::Page::EducationProgram < Communication::Website::P
 
   def special_page_categories
     university.education_program_categories
+  end
+
+  def hugo_body_class
+    'programs__section'
   end
 end

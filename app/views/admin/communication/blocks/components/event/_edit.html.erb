@@ -1,5 +1,5 @@
 <% events = osuny_collection(
-              block.about.website.events,
+              block.about.website.events.except_templates,
               localized: true,
               label_method: :to_s_with_subtitle
             ) %>

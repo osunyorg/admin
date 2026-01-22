@@ -70,7 +70,10 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       assert_enqueued_with(job: Dependencies::CleanObjectAfterDestroyJob, args: [block]) do
         block.destroy
       end
-      perform_enqueued_jobs(only: Dependencies::CleanObjectAfterDestroyJob)
+      assert_enqueued_with(job: Communication::Website::CleanJob, args: [block.communication_website_id]) do
+        perform_enqueued_jobs(only: Dependencies::CleanObjectAfterDestroyJob)
+      end
+      perform_enqueued_jobs(only: Communication::Website::CleanJob)
     end
   end
 
@@ -95,7 +98,10 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       assert_enqueued_with(job: Dependencies::CleanObjectAfterDestroyJob, args: [block]) do
         block.destroy
       end
-      perform_enqueued_jobs(only: Dependencies::CleanObjectAfterDestroyJob)
+      assert_enqueued_with(job: Communication::Website::CleanJob, args: [block.communication_website_id]) do
+        perform_enqueued_jobs(only: Dependencies::CleanObjectAfterDestroyJob)
+      end
+      perform_enqueued_jobs(only: Communication::Website::CleanJob)
     end
   end
 
@@ -176,7 +182,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
   def debug_connections(direct_source = nil)
     list = Communication::Website::Connection.all
     list = list.where(direct_source: direct_source) if direct_source.present?
-    list.reload.map do |connection| 
+    list.reload.map do |connection|
       gid = connection.indirect_object.to_gid.to_s
       if connection.indirect_object.respond_to?(:original_localization)
         name = connection.indirect_object.original_localization.to_s
@@ -214,19 +220,19 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       perform_enqueued_jobs
     end
 
-    # Avant : 
+    # Avant :
     # gid://osuny/Communication::Website::Page::Localization/55948af8-8cf1-5fbe-ba39-18a3e5fa15f3
     # gid://osuny/Communication::Block/dcb8dc46-a266-4a13-8d9e-90381830ca3e
     # gid://osuny/Communication::Block/0612c211-32c3-4fdd-8abc-803d40729954
     # gid://osuny/University::Person/9f193439-a0ea-5989-b64d-127f9269d563
     # gid://osuny/University::Person::Localization/3f55314b-a986-5681-99ef-1ed4e9e35705
-    # 
-    # On ajoute noesya via un block "Organisations" : +8 
+    #
+    # On ajoute noesya via un block "Organisations" : +8
     # +1 bloc
     #   +2 noesya et l10n
     #     +2 catégorie et l10n
     #     +1 block personne
-    #       +2 Olivia et l10n 
+    #       +2 Olivia et l10n
     assert_difference -> { page.connections.count } => 8 do
       block = page_l10n.blocks.new(position: 3, published: true, template_kind: :organizations)
       block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"

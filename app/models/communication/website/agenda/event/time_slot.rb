@@ -45,6 +45,8 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
 
   before_validation :set_website_and_university, on: :create
 
+  after_save :create_periods
+
   scope :on_year, -> (year) { where('extract(year from datetime) = ?', year) }
   scope :on_month, -> (year, month) { where('extract(year from datetime) = ? and extract(month from datetime) = ?', year, month) }
   scope :on_day, -> (day) {  where('DATE(datetime) = ?', day) }
@@ -128,20 +130,17 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
     save
   end
 
+  def dates_concerned
+    [
+      datetime&.to_date,
+      datetime_previous_change&.first&.to_date
+    ].uniq.compact
+  end
+
   protected
 
-  # Methods for Communication::Website::Agenda::Period::InPeriod
-
-  def should_update_periods?
-    datetime_changed?
-  end
-
-  def day_before_change
-    datetime_change.first&.to_date
-  end
-
-  def day_after_change
-    datetime_change.last&.to_date
+  def create_periods
+    Communication::Website::Agenda::CreatePeriodsJob.perform_later(self)
   end
 
   def set_website_and_university

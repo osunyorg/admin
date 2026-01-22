@@ -1,9 +1,23 @@
 <%
-@people = @page.explicitly_connected_people.ordered(current_language).page params[:page]
+# Not in controller because it's loaded depending on the page type
+@people = @website.connected_people
+                  .ordered(current_language)
+                  .page(params[:people_page])
+
+@explicitly_connected_people = @page.explicitly_connected_people
+                                    .ordered(current_language)
+                                    .page(params[:explicitly_connected_people_page])
 %>
-<div class="row">
-  <div class="offset-lg-4 col-lg-8">
-    <%= osuny_panel University::Person.model_name.human(count: 2) do %>
+<%= osuny_panel t('admin.communication.website.pages.special_page') do %>
+  <p><%= t('admin.communication.website.pages.special_pages.person.native', count: @people.total_count) %></p>
+  <%= render 'admin/university/people/list', people: @people %>
+  <%= paginate @people, param_name: :people_page %>
+<% end %>
+
+<%= osuny_panel University::Person.model_name.human(count: 2) do %>
+  <div class="row">
+    <div class="col-lg-6 col-xxl-4">
+      <p><%= t('admin.communication.website.pages.special_pages.person.explicitly_connected_hint') %></p>
       <%= simple_form_for :association, class_name: 'association' do |f| %>
         <%= f.input :name,
                     label: false,
@@ -18,33 +32,31 @@
                     }
                     %>
       <% end %>
-      <div class="row g-3">
-        <% @people.each do |person| %>
-          <div class="col-6 col-lg-4 col-xxl-3">
-            <div class="<%= osuny_card_classes %>">
-              <%= osuny_thumbnail_localized person, large: true %>
-              <div class="card-body">
-                <p class="mb-1">
-                  <%= osuny_published_localized person %>
-                  <%= osuny_link_localized  person,
-                                            admin_university_person_path(person)  %>
-                </p>
-                <p class="small text-muted mb-0">
-                  <%= sanitize person.localization_for(current_language)&.summary.to_s %>
-                </p>
-              </div>
-              <div class="card-footer text-end">
-                <%= link_to t('admin.communication.website.pages.special_pages.person.disconnect'),
-                            disconnect_admin_communication_website_page_path(@page, object_id: person.id, object_type: person.class),
-                            class: button_classes_danger,
-                            method: :post %>
+    </div>
+    <div class="col-lg-6 col-xxl-8">
+        <div class="row g-2">
+          <% @people.each do |person| %>
+            <div>
+              <div class="<%= osuny_card_classes(horizontal: true) %>">
+                <%= osuny_thumbnail_localized person %>
+                <div class="card-body">
+                  <p class="mb-1">
+                    <%= osuny_published_localized person %>
+                    <%= osuny_link_localized  person,
+                                              admin_university_person_path(person)  %>
+                  </p>
+                </div>
+                <div class="card-footer text-end">
+                  <%= link_to t('admin.communication.website.pages.special_pages.person.disconnect'),
+                              disconnect_admin_communication_website_page_path(@page, object_id: person.id, object_type: person.class),
+                              class: button_classes_danger,
+                              method: :post %>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
-        <%= paginate @people %>
-      </div>
-
-    <% end %>
+          <% end %>
+          <%= paginate @people %>
+        </div>
+    </div>
   </div>
-</div>
+<% end %>
