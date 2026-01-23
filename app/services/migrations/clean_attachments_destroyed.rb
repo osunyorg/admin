@@ -21,7 +21,7 @@ class Migrations::CleanAttachmentsDestroyed
     record = record_scope.find(attachment.record_id)
     return false if record.nil? # hard-deleted
     return false if record.deleted_at.nil? # alive
-    puts "will keep attachment #{attachment.name} for #{record.to_gid.to_s} (deleted_at: #{record.deleted_at})"
+    puts "Keep attachment #{attachment.name} for #{record.to_gid.to_s} (deleted_at: #{record.deleted_at})"
     true # soft-deleted
   end
 end
