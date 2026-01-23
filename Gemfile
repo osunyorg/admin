@@ -50,8 +50,8 @@ gem "kamifusen"#, path: "../kamifusen"
 gem "kaminari"
 gem "leaflet-rails"
 gem "libretranslate"#, path: "../libretranslate"
-gem "lucide-rails" # TODO Seb : Upgrade en Rails 8.1.2
-gem "minitest", "< 6"
+gem "lucide-rails"
+gem "minitest", "< 6" # TODO Seb : Upgrade en Rails 8.1.2
 gem "octokit"
 gem "omniauth-rails_csrf_protection", "~> 1"
 gem "omniauth-saml", "~> 2"
