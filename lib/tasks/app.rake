@@ -1,7 +1,7 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    Migrations::CleanAttachmentsDestroyed.migrate
+    UnicornsJob.perform_later
   end
 
   namespace :search do
