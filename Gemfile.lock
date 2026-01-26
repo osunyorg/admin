@@ -391,6 +391,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    languagetool-widget (8.3.4)
+      rails
     leaflet-rails (1.9.5)
       actionpack (>= 4.2.0)
       railties (>= 4.2.0)
@@ -805,10 +807,12 @@ DEPENDENCIES
   jsbundling-rails (~> 1.3)
   kamifusen
   kaminari
+  languagetool-widget
   leaflet-rails
   libretranslate
   listen (~> 3.3)
   lucide-rails
+  minitest (< 6)
   mutex_m (~> 0.3.0)
   octokit
   omniauth-rails_csrf_protection (~> 1)
