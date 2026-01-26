@@ -9,6 +9,9 @@
 #  country              :string
 #  deleted_at           :datetime
 #  email                :string
+#  is_laboratory        :boolean          default(FALSE)
+#  is_location          :boolean          default(FALSE)
+#  is_school            :boolean          default(FALSE)
 #  kind                 :integer          default("company")
 #  latitude             :float
 #  longitude            :float
@@ -46,6 +49,7 @@ class University::Organization < ApplicationRecord
   include Sanitizable
   include Searchable
   include WithCountry
+  include WithFacets
   include WithGeolocation
   include WithKind
   include WithOpenApi

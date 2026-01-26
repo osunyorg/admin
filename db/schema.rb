@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_14_132529) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_19_090426) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -2292,6 +2292,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_14_132529) do
     t.uuid "created_by_id"
     t.string "bodyclass"
     t.datetime "deleted_at"
+    t.boolean "is_school", default: false
+    t.boolean "is_location", default: false
+    t.boolean "is_laboratory", default: false
     t.index ["created_by_id"], name: "index_university_organizations_on_created_by_id"
     t.index ["university_id"], name: "index_university_organizations_on_university_id"
   end
