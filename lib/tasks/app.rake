@@ -1,7 +1,7 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
-    UnicornsJob.perform_later
+    # Nothing for now
   end
 
   namespace :search do
