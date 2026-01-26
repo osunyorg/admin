@@ -35,17 +35,18 @@ class Communication::Website::DestroyWebsiteJob < ApplicationJob
       Communication::Website::Portfolio::Project,
       Communication::Website::Post::Localization,
       Communication::Website::Post,
+      Communication::Block # We finish by blocks to avoid foreign key issues
     ].freeze
 
   def perform(website)
     website.update_column :git_endpoint, ''
     Search.remove_data_for_website(website)
     OBJECTS_NOT_PARANOID.each do |klass|
-      klass.where(communication_website_id: website).destroy_all
+      klass.where(communication_website_id: website.id).destroy_all
     end
     OBJECTS_PARANOID.each do |klass|
       klass.with_deleted
-           .where(communication_website_id: website)
+           .where(communication_website_id: website.id)
            .find_each(&:really_destroy!)
     end
     website.deuxfleurs_destroy_bucket
