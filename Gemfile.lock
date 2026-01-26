@@ -391,7 +391,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    languagetool-widget (0.0.1)
+    languagetool-widget (8.3.4)
+      rails
     leaflet-rails (1.9.5)
       actionpack (>= 4.2.0)
       railties (>= 4.2.0)
