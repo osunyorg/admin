@@ -29,14 +29,10 @@ module Permalinkable
     )
   end
 
-  def planned_permalink_in_website(website)
-    current_permalink_in_website(website) || new_permalink_in_website(website)
-  end
-
   def planned_permalink_url_in_website(website)
     build_url(
       website,
-      planned_permalink_in_website(website)&.computed_path
+      new_permalink_in_website(website)&.computed_path
     )
   end
 
@@ -65,7 +61,7 @@ module Permalinkable
   end
 
   protected
-  
+
   def build_url(website, path)
     return if website.url.blank? || path.blank?
     "#{Static.remove_trailing_slash(website.url)}#{Static.clean_path(path)}"
