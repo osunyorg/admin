@@ -67,7 +67,18 @@ class Communication::Website::Agenda::Period::Day::Localization < ApplicationRec
   end
 
   def denormalize_events_count
-    count = events.count + time_slots.count
-    self.update_column :events_count, count
+    self.update_column :events_count, published_objects_count
+  end
+
+  def published_objects_count
+    published_events.count + published_time_slots.count
+  end
+
+  def published_events
+    events.published_now_in(language)
+  end
+
+  def published_time_slots
+    time_slots.published_now_in(language)
   end
 end

@@ -96,7 +96,7 @@ export default {
           </label>
           <input  id="alt"
                   class="form-control"
-                  data-translatable="true" 
+                  data-translatable="true"
                   v-model="current.image.alt"
                   type="text">
           <div class="form-text">{{ i18n.mediaPicker.alt.hint }}</div>

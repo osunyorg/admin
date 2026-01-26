@@ -30,8 +30,13 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb
   end
 
+  def preview
+    render layout: 'admin/layouts/preview'
+  end
+
   def new
     @event.parent = @website.events.find(params[:parent_id]) if params.has_key?(:parent_id)
+    @event.manage_template_from_params(params, current_university)
     @categories = categories
     breadcrumb
   end
@@ -108,6 +113,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     params.require(:communication_website_agenda_event)
     .permit(
       :from_day, :to_day, :time_zone, :is_lasting, :bodyclass,
+      :is_template, :template_id,
       :parent_id, category_ids: [], destination_website_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text, :notes,

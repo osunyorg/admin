@@ -113,7 +113,6 @@ en:
               large:
                 description: Each event is presented in majesty, across the full width available, with a large image.
                 label: Large
-                more: Show more
               list:
                 description: A list of events with dates, small images, all the same width.
                 label: List
@@ -792,6 +791,19 @@ en:
                   label: Text
                   placeholder: Enter testimonial's text
               remove_testimonial: Remove testimonial
+            layouts:
+              carousel:
+                description: Testimonials are large, with an automatic animation.
+                label: Carousel
+              grid:
+                description: Testimonials are shown as a grid, all the same width.
+                label: Grid
+              large:
+                description: Testimonials are as large as possible, using all screen width.
+                label: Large
+              list:
+                description: Testimonials are displayed one above the other, somewhat like a table.
+                label: List
           timeline:
             description: A list of events with their description, on a timeline.
             edit:

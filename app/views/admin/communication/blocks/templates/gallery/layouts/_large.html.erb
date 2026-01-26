@@ -1,0 +1,22 @@
+<div class="gallery gallery--with-text">
+  <%
+  block.template.elements.each do |element|
+    blob = element.blob
+    next if blob.nil?
+    format = ActiveStorage::Utils.format(blob)
+    %>
+    <figure class="image-<%= format %>">
+      <%= kamifusen_tag blob, width: 600, class: 'img-fluid mb-1', alt: element.alt.presence %>
+      <% if element.text.present? || element.credit.present? %>
+        <figcaption>
+          <% if element.text.present? %>
+            <div><%= sanitize element.text %></divp>
+          <% end %>
+          <% if element.credit.present? %>
+            <div class="credit"><%= sanitize element.credit %></div>
+          <% end %>
+        </figcaption>
+      <% end %>
+    </figure>
+  <% end %>
+</div>

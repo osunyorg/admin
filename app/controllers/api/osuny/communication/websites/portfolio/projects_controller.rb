@@ -1,9 +1,6 @@
 class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::Osuny::Communication::Websites::ApplicationController
-  before_action :build_project, only: :create
-  before_action :load_project, only: [:show, :update, :destroy]
-
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
+  include Api::Osuny::HasResource
+  include Api::Osuny::HasMigrationIdentifier
 
   def index
     @projects = paginate(website.portfolio_projects.includes(:localizations))
@@ -13,6 +10,8 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   end
 
   def create
+    @project = website.portfolio_projects.build
+    @project.assign_attributes(project_params)
     if @project.save
       render :show, status: :created
     else
@@ -34,7 +33,7 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
       project_params[:migration_identifier].present?
     }
     unless every_project_has_migration_identifier
-      render_on_missing_migration_identifier
+      render_missing_migration_identifier
       return
     end
 
@@ -67,30 +66,18 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   end
 
   def destroy
-    @project.destroy
+    @project.really_destroy!
     head :no_content
   end
 
   protected
 
-  def build_project
-    @project = website.portfolio_projects.build
-    @project.assign_attributes(project_params)
+  def integrity_checker
+    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@project, project_params, website.portfolio_projects.with_deleted)
   end
 
-  def load_project
+  def load_resource
     @project = website.portfolio_projects.find(params[:id])
-  end
-
-  def load_migration_identifier
-    @migration_identifier = project_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
-  end
-
-  def ensure_same_migration_identifier
-    if @project.migration_identifier != @migration_identifier
-      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
-    end
   end
 
   def l10n_permitted_keys

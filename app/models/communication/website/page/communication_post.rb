@@ -30,4 +30,8 @@ class Communication::Website::Page::CommunicationPost < Communication::Website::
   def special_page_categories
     website.post_categories
   end
+
+  def hugo_body_class
+    'posts__section'
+  end
 end

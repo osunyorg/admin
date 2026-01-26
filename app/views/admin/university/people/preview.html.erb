@@ -1,0 +1,145 @@
+<main id="main" class="page-with-blocks">
+  <header class="hero hero--with-image hero--image-square">
+    <div class="container">
+      <div class="content">
+        <div class="hero-text">
+          <hgroup class="has-lead">
+            <h1><%= @l10n.to_s %></h1>
+            <%= sanitize @l10n.summary %>
+          </hgroup>
+        </div>
+        <figure class="image-square lightbox-figure">
+          <%= kamifusen_tag @person.featured_image if @person.featured_image.present? && @person.featured_image.attached? %>
+        </figure>
+      </div>
+    </div>
+  </header>
+  <div class="document-content">
+    <div class="container">
+      <div class="informations">
+        <div class="biography">
+          <div class="rich-text">
+            <%= sanitize @l10n.biography %>
+          </div>
+        </div>
+        <!-- TODO
+        <div class="roles">
+        </div>
+        -->
+      </div>
+      <!-- TODO
+      <div class="taxonomies-container">
+        <ul class="taxonomies-single persons-taxonomies with-label" aria-label="Catégories">
+          <li class="terms">
+            <span class="taxonomy-title">Catégories</span>
+            <ul class="taxonomy-children" aria-label="Catégories">
+              <li><a href="https://example.osuny.org/fr/equipe/categories/design/">Design</a></li>
+            </ul>
+          </li>
+          <li class="terms taxonomy-dev">
+            <span class="taxonomy-title">Développement web</span>
+            <ul class="taxonomy-children" aria-label="Catégories">
+              <li><a href="https://example.osuny.org/fr/equipe/categories/dev/back/">Back</a></li>
+            </ul>
+          </li>
+          <li class="terms taxonomy-langues">
+            <span class="taxonomy-title">Langues</span>
+            <ul class="taxonomy-children" aria-label="Catégories">
+              <li><a href="https://example.osuny.org/fr/equipe/categories/langues/anglais/">Anglais</a></li>
+              <li><a href="https://example.osuny.org/fr/equipe/categories/langues/japonais/">Japonais</a></li>
+            </ul>
+          </li>
+          <li class="terms taxonomy-nationalite">
+            <span class="taxonomy-title">Nationalité</span>
+            <ul class="taxonomy-children" aria-label="Catégories">
+              <li><a href="https://example.osuny.org/fr/equipe/categories/nationalite/uruguay/">Uruguay</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      -->
+      <div class="contacts-details">
+        <ul>
+          <% 
+          if @l10n.url.present?
+            detail = ContactDetails::Website.new(@l10n.url)
+            if detail.present? 
+              %>
+              <li class="website">
+                <span><%= t('contact_details.websites.website.label') %></span>
+                <a href="<%= detail.value %>" target="_blank" rel="noopener noreferrer" itemprop="url"><%= detail.label %></a>
+              </li>
+              <%
+            end
+          end
+          %>
+          <% if @person.email.present? %>
+            <li class="email">
+              <span><%= t('contact_details.emails.email.label') %></span>
+              <a href="mailto:<%= @person.email %>" itemprop="email" ><%= @person.email %></a>
+            </li>
+          <% end %>
+          <%
+          ContactDetails::SOCIAL_NETWORKS.each do |attribute|
+            should_show = is_information_public?(@person, attribute)
+            if should_show
+              data = ContactDetails.find_social(attribute, @person, @l10n)
+              next if data.blank?
+              kind = "ContactDetails::#{attribute.to_s.camelize}".constantize
+              detail = kind.new data
+              if detail.present?
+          %>
+            <li class="<%= attribute %>">
+              <span><%= attribute.to_s.titleize %></span>
+              <a href="<%= detail.value %>" ><%= detail.label %></a>
+            </li>
+          <%
+              end
+            end
+          end
+          %>
+          <%
+          ContactDetails::PHONES.each do |attribute|
+            if @person.respond_to?(attribute)
+              should_show = is_information_public?(@person, attribute)
+              if should_show
+                data = @person.public_send(attribute)
+                detail = ContactDetails::Phone.new data
+                if detail.present?
+          %>
+            <li class="<%= attribute %>">
+              <span><%= University::Person.human_attribute_name(attribute) %></span>
+              <a href="<%= detail.value %>" ><%= detail.label %></a>
+            </li>
+          <%
+                end
+              end
+            end
+          end
+          %>
+          <%
+          if @person.respond_to?(:address)
+            should_show = is_information_public?(@person, :address)
+            if should_show
+              label = t('contact_details.postal_address.address.label')
+              address_formatter = Osuny::AddressFormatter.new(about: @person, l10n: @l10n, language: @l10n.language)
+          %>
+            <li class="address">
+              <span><%= label %></span>
+              <%= address_formatter.to_html.html_safe %>
+            </li>
+          <%
+            end
+          end
+          %>
+        </ul>
+      </div>
+    </div>
+    <div class="blocks">
+      <%= render 'admin/communication/contents/show',
+            about: @l10n,
+            strip_javascript: true %>
+    </div>
+  </div>
+</main>
+<%= render 'admin/application/preview/lightbox' %>

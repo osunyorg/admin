@@ -91,6 +91,10 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
     menus
   end
 
+  def hugo_body_class
+    'projects__page'
+  end
+
   protected
 
   def list_blocks_template_kind

@@ -109,6 +109,10 @@ class Communication::Website::Post < ApplicationRecord
     localization_for(language).try(:published_at)
   end
 
+  def hugo_body_class
+    'posts__page'
+  end
+
   protected
 
   def update_authors_status_if_necessary!

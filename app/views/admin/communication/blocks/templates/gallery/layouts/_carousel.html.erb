@@ -1,0 +1,38 @@
+<div class="slider is-ready">
+  <div class="slider-track">
+    <div class="gallery gallery--with-text slider-list">
+      <%
+      block.template.elements.each do |element|
+        blob = element.blob
+        next if blob.nil?
+        format = ActiveStorage::Utils.format(blob)
+        %>
+        <figure class="image-<%= format %> slider-slide">
+          <%= kamifusen_tag blob, height: 800, class: 'img-fluid mb-1', alt: element.alt.presence %>
+          <% if element.text.present? || element.credit.present? %>
+            <figcaption>
+              <% if element.text.present? %>
+                <div><%= sanitize element.text %></divp>
+              <% end %>
+              <% if element.credit.present? %>
+                <div class="credit"><%= sanitize element.credit %></div>
+              <% end %>
+            </figcaption>
+          <% end %>
+        </figure>
+      <% end %>
+    </div>
+  </div>
+  <div class="slider-controls"></div>
+  <div class="slider-arrows">
+    <button class="slider-arrow slider-arrow-previous" aria-describedby="slider-title-0" disabled="" aria-hidden="true" style="display: block;">
+      <span class="sr-only">Aller à l'élément précédent</span>
+    </button>
+    <p class="slider-progression">
+      1/<%= block.template.elements.count %>
+    </p>
+    <button class="slider-arrow slider-arrow-next" aria-describedby="slider-title-0" aria-hidden="false" style="display: block;">
+      <span class="sr-only">Aller à l'élément suivant</span>
+    </button>
+  </div>
+</div>

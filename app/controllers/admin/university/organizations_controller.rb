@@ -4,6 +4,7 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
                               through_association: :organizations,
                               except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
@@ -34,6 +35,10 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
 
   def show
     breadcrumb
+  end
+
+  def preview
+    render layout: 'admin/layouts/preview'
   end
 
   def new
@@ -86,6 +91,11 @@ class Admin::University::OrganizationsController < Admin::University::Applicatio
   end
 
   protected
+
+  def prepare_preview
+    super
+    @body_class += ' full-width'
+  end
 
   def breadcrumb
     super

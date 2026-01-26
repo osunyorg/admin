@@ -103,9 +103,9 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # - Les catégories d'actus liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
     # - Les catégories d'agenda liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
     # - Les catégories de pages liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
-    # - Les pages "Teachers", "Administrators", "Researchers", "EducationDiplomas", "EducationPrograms", "AdministrationLocation" et leurs localisations (12)
-    # Donc un total de 6 + 4 + 4 + 4 + 12 = 30 dépendances
-    assert_equal 30, delta
+    # - Les pages "Teachers", "Administrators", "Researchers", "EducationDiplomas", "EducationPrograms", "EducationSchools", "AdministrationLocations" et leurs localisations (14)
+    # Donc un total de 6 + 4 + 4 + 4 + 14 = 32 dépendances
+    assert_equal 32, delta
 
     clear_enqueued_jobs
   end

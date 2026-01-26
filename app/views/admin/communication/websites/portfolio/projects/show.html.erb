@@ -20,11 +20,10 @@
     <%= osuny_small_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:title) do %>
       <p class="lead"><%= @l10n.title %></p>
     <% end %>
-    <% if @l10n.subtitle.present? %>
-      <%= osuny_small_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:subtitle) do %>
-        <p class="lead"><%= @l10n.subtitle %></p>
-      <% end %>
-    <% end %>
+    <%= osuny_small_panel Communication::Website::Portfolio::Project::Localization.human_attribute_name(:subtitle) do %>
+      <p class="lead"><%= @l10n.subtitle %></p>
+    <% end if @l10n.subtitle.present? %>
+    <%= render 'admin/application/summary/show', about: @l10n %>
   </div>
   <div class="offset-lg-1 col-lg-4">
     <%= render 'admin/application/images/featured/show', about: @l10n %>
@@ -35,10 +34,22 @@
 <hr class="mb-5">
 <div class="row">
   <div class="col-lg-4">
-    <%= render 'admin/communication/websites/portfolio/projects/show/metadata' %>
+    <%= osuny_small_panel t('metadata') do %>
+      <p>
+        <%= @l10n.published ? Communication::Website::Portfolio::Project::Localization.human_attribute_name(:published)
+                            : t('admin.communication.website.portfolio.project.localizations.draft') %>
+        <% if @project.categories.any? %>
+          <% category_names = @project.categories.map { |category| category.to_s_in(current_language) } %>
+          <%= t('admin.communication.website.portfolio.projects.in', categories: category_names.join(', ')) %>
+        <% end %>
+      </p>
+      <%= render 'admin/application/permalinks/redirects', about: @l10n %>
+    <% end %>
   </div>
-  <div class="col-lg-8">
-    <%= render 'admin/application/summary/show', about: @l10n %>
+  <div class="col-lg-4">
+    <%= render 'admin/application/l10n/widget', about: @project, l10n: @l10n %>
+  </div>
+  <div class="col-lg-4">
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
