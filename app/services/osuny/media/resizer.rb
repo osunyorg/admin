@@ -22,7 +22,7 @@ class Osuny::Media::Resizer
   # TODO ImageProcessing: Verify if compatible with Vips
   def resized_blob
     @resized_blob ||= begin
-      if untouched?
+      if untouched? || invalid_params?
         blob
       else
         blob.variant(**transformations)
@@ -51,6 +51,11 @@ class Osuny::Media::Resizer
 
   def height
     params.dig(:height)
+  end
+
+  def invalid_params?
+    [left, top, width, height].any? { |key| params[key].nil? } ||
+    width <= 0 || height <= 0
   end
 
   def untouched?

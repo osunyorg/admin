@@ -661,7 +661,7 @@ GEM
     simple_form (5.4.0)
       actionpack (>= 7.0)
       activemodel (>= 7.0)
-    simple_form_bs5_file_input (0.2.1)
+    simple_form_bs5_file_input (0.3.1)
       rails
       simple_form
     simple_form_password_with_hints (0.0.10)
