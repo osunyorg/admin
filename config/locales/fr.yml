@@ -5,7 +5,7 @@ fr:
       templates:
         embed:
           title_missing:
-            text_html: L'intégration HTML n'a pas de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle le contenu, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter une balise <b>title</b> explicite à votre iframe.
+            text_html: L'intégration HTML n'a pas de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle le contenu intégré, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter une balise <b>title</b> explicite à votre iframe.
             title: Pas de titre de cadre
           transcription_missing:
             text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
@@ -427,6 +427,7 @@ fr:
     status: "Statut :"
     still_pending: "Votre import est toujours en cours de traitement. Vous recevrez un email dès qu'il est prêt."
   inactivity_alert: "Il semble que vous soyez resté sur la page un peu trop longtemps. Pouvez-vous ré-essayer ?"
+  internal_description_hint: Description complémentaire de l'image. Vous pouvez donner des informations complémentaires sur l'image, utiles pour la recherche et indiquer des instructions spécifiques d'usage pour les utilisateur·rices de la médiathèque.
   internationalization:
     label: Internationalisation
   legal: Légal
