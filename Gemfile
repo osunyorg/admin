@@ -48,6 +48,7 @@ gem "jquery-ui-rails", git: "https://github.com/jquery-ui-rails/jquery-ui-rails.
 gem "jsbundling-rails", "~> 1.3"
 gem "kamifusen"#, path: "../kamifusen"
 gem "kaminari"
+gem "languagetool-widget"
 gem "leaflet-rails"
 gem "libretranslate"#, path: "../libretranslate"
 gem "lucide-rails"
