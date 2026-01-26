@@ -54,20 +54,20 @@ class Osuny::Media::Resizer
   end
 
   def should_resize?
-    !invalid_params? && !untouched?
+    valid_params? && params_would_cause_a_change?
   end
 
-  def invalid_params?
-    [left, top, width, height].any? { |key| params[key].nil? } ||
-    width <= 0 || height <= 0
+  def valid_params?
+    [left, top, width, height].none? { |key| params[key].nil? } &&
+    width > 0 && height > 0
   end
 
-  def untouched?
-    rotation == 0 &&
-    left == 0 &&
-    top == 0 &&
-    width == blob.metadata.dig(:width) &&
-    height == blob.metadata.dig(:height)
+  def params_would_cause_a_change?
+    rotation != 0 ||
+    left != 0 ||
+    top != 0 ||
+    width != blob.metadata.dig(:width) ||
+    height != blob.metadata.dig(:height)
   end
 
   def transformations
