@@ -12,7 +12,7 @@
             </div>
             <div class="col-lg-4 small">
               <p><%= l publication.publication_date %></p>
-              <p><%= t("hal_openscience.document.type.#{publication.doctype}.one") %></p>
+              <p><%= t("hal_openscience.document.type.#{publication.doctype}.one", locale: :fr) %></p>
               <span class="badge text-bg-light"><%= publication.source_i18n %></span><br>
             </div>
           </div>
