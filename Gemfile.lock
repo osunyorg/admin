@@ -33,14 +33,6 @@ GIT
       randexp
       rotp (>= 4.0.0)
 
-PATH
-  remote: ../../noesya/hal_openscience
-  specs:
-    hal_openscience (1.0.0)
-      json
-      net-http
-      open-uri
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -133,7 +125,7 @@ GEM
       activerecord (>= 6.0.0)
       activesupport (>= 6.0.0)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1209.0)
+    aws-partitions (1.1210.0)
     aws-sdk-core (3.241.4)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -337,6 +329,10 @@ GEM
     google-protobuf (4.33.4-x86_64-linux-gnu)
       bigdecimal
       rake (>= 13)
+    hal_openscience (0.1.0)
+      json
+      net-http
+      open-uri
     hashdiff (1.2.1)
     hashie (5.1.0)
       logger
@@ -803,7 +799,7 @@ DEPENDENCIES
   geocoder (~> 1)
   gitlab
   good_job (~> 4)
-  hal_openscience!
+  hal_openscience
   i18n_data (~> 0)
   i18n_date_range
   image_processing
