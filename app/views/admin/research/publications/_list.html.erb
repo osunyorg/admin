@@ -8,7 +8,7 @@
               <h3 class="card-title">
                 <%= link_to publication, [:admin, publication], class: 'stretched-link' %><br>
               </h3>
-              <small><%= sanitize publication.authors_list.truncate(200) %></small>
+              <p><%= sanitize publication.authors_list.truncate(200) %></p>
             </div>
             <div class="col-lg-4 small">
               <p><%= l publication.publication_date %></p>
