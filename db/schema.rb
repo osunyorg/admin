@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_14_132529) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_27_110515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -2090,6 +2090,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_14_132529) do
     t.json "authors_citeproc"
     t.integer "source", default: 0
     t.text "anr_project_references", default: [], array: true
+    t.string "doctype"
+    t.string "docsubtype"
     t.index ["hal_docid"], name: "index_research_publications_on_hal_docid"
     t.index ["slug"], name: "index_research_publications_on_slug"
   end

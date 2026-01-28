@@ -25,6 +25,10 @@
         <%= osuny_label Research::Publication.human_attribute_name('ref') %>
         <p><%= sanitize @publication.ref %></p>
       </div>
+      <div class="col-lg-6">
+        <%= osuny_label Research::Publication.human_attribute_name('doctype') %>
+        <p><%= t("hal_openscience.document.type.#{@publication.doctype}.one", locale: :fr) %></p>
+      </div>
       <% if @publication.publication_date %>
         <div class="col-lg-6">
           <%= osuny_label Research::Publication.human_attribute_name('publication_date') %>

@@ -20,6 +20,8 @@ module Importers
         'authLastName_s',
         'authFirstName_s',
         'anrProjectReference_s',
+        'docType_s',
+        'docSubType_s',
         'files_s'
       ]
       publications = []
@@ -46,6 +48,8 @@ module Importers
       publication.open_access = doc.attributes['openAccess_bool']
       publication.journal_title = doc.attributes['journalTitle_s']
       publication.file = doc.attributes['files_s']&.first
+      publication.doctype = doc.attributes['docType_s']
+      publication.docsubtype = doc.attributes['docSubType_s']
       publication.authors_list = doc.attributes['authFullName_s'].join(', ')
       add_authors_citeproc(doc, publication)
       add_anr_project_references(doc, publication)
