@@ -3,14 +3,19 @@
     <div>
       <div class="<%= osuny_card_classes %>">
         <div class="card-body">
-          <h3 class="card-title">
-            <%= link_to publication, [:admin, publication], class: 'stretched-link' %><br>
-          </h3>
-          <small><%= sanitize publication.authors_list.truncate(200) %></small>
-        </div>
-        <div class="card-footer d-flex">
-          <span class="badge text-bg-light me-4"><%= publication.source_i18n %></span>
-          <span class="small"><%= l publication.publication_date %></span>
+          <div class="row">
+            <div class="col-lg-8">
+              <h3 class="card-title">
+                <%= link_to publication, [:admin, publication], class: 'stretched-link' %><br>
+              </h3>
+              <p><%= sanitize publication.authors_list.truncate(200) %></p>
+            </div>
+            <div class="col-lg-4 small">
+              <p><%= l publication.publication_date %></p>
+              <p><%= t("hal_openscience.document.type.#{publication.doctype}.one", locale: :fr) %></p>
+              <span class="badge text-bg-light"><%= publication.source_i18n %></span><br>
+            </div>
+          </div>
         </div>
       </div>
     </div>
