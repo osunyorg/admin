@@ -29,7 +29,7 @@ HalOpenscience::Document::TYPES.each do |type|
     count: <%= publications.count %>
     publications:
 <%
-  publications.each do |publication|
+  publications.find_each do |publication|
     hugo = publication.hugo(@website)
     next if hugo.nil? || hugo.file.blank?
     %>
