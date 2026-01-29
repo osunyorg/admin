@@ -62,6 +62,7 @@ fr:
         authors_list: Liste des auteur·es
         anr_project_references: Projet(s) ANR
         docid: Identifiant
+        doctype: Type
         doi: DOI
         doi_url: URL DOI
         hal_url: URL HAL
