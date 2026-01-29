@@ -21,6 +21,7 @@ gem "caxlsx_rails", "~> 0"
 gem "citeproc", "~> 1"
 gem "citeproc-ruby", "~> 2"
 gem "cocoon", "~> 1"
+gem "connection_pool", "~> 2.0" # Waiting for Rails 8.1.2 upgrade to remove this constraint
 gem "country_select"
 gem "csl-styles", "~> 2"
 gem "curation"#, path: "../../arnaudlevy/curation"
