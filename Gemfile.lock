@@ -18,9 +18,9 @@ GIT
 
 GIT
   remote: https://github.com/jaimeiniesta/metainspector.git
-  revision: 1ca8d0c139a054cef0fde3661277ba86d1babe53
+  revision: d5b60b1d748d51a7dde3cfb8442b738610a6cd96
   specs:
-    metainspector (5.16.0)
+    metainspector (5.17.0)
       addressable (~> 2.8.4)
       faraday (~> 2.5)
       faraday-cookie_jar (~> 0.0)
@@ -210,6 +210,7 @@ GEM
     caxlsx_rails (0.6.4)
       actionpack (>= 3.1)
       caxlsx (>= 3.0)
+    cgi (0.5.1)
     citeproc (1.1.0)
       date
       forwardable
@@ -332,7 +333,7 @@ GEM
       terminal-table (>= 1.5.1)
     globalid (1.3.0)
       activesupport (>= 6.1)
-    good_job (4.13.1)
+    good_job (4.13.2)
       activejob (>= 6.1.0)
       activerecord (>= 6.1.0)
       concurrent-ruby (>= 1.3.1)
@@ -787,6 +788,7 @@ DEPENDENCIES
   cancancan (~> 3.3.0)
   capybara (>= 3.26)
   caxlsx_rails (~> 0)
+  cgi (~> 0.5.1)
   citeproc (~> 1)
   citeproc-ruby (~> 2)
   cocoon (~> 1)
