@@ -18,6 +18,7 @@ gem "bugsnag"
 # (les authorize through des modèles qui faisaient des faux négatifs sur les rôles intermédiaires)
 gem "cancancan", "~> 3.3.0"
 gem "caxlsx_rails", "~> 0"
+gem "cgi", "~> 0.5.1" # To handle CGI::parse
 gem "citeproc", "~> 1"
 gem "citeproc-ruby", "~> 2"
 gem "cocoon", "~> 1"
