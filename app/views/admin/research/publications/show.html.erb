@@ -45,7 +45,7 @@
           <p><%= @publication.hal_docid %></p>
         </div>
       <% end %>
-      <% if @publication.anr_project_references.any? %>
+      <% if @publication.anr_project_references&.any? %>
         <div class="col-lg-6">
           <%= osuny_label Research::Publication.human_attribute_name('anr_project_references') %>
           <ul class="list-unstyled">

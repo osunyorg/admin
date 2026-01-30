@@ -9,15 +9,12 @@ breadcrumb_title = t('university.person.facets.researcher.publications', locale:
 <%= render 'admin/application/static/core', about: @l10n, forced_title: title %>
 <%= render 'admin/application/static/breadcrumbs', about: person_l10n, last_item: breadcrumb_title %>
 <%= render 'admin/application/static/design', about: person, l10n: @l10n, full_width: true, toc_offcanvas: true %>
-person: >-
-  <%= person_l10n.to_s %>
-first_name: >-
-  <%= person_l10n.first_name %>
-last_name: >-
-  <%= person_l10n.last_name %>
+<%= osuny_static_text 'person', person_l10n.to_s %>
+<%= osuny_static_text 'first_name', person_l10n.first_name %>
+<%= osuny_static_text 'last_name', person_l10n.last_name %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= render 'admin/application/meta_description/static', about: person_l10n %>
-<%= render 'admin/application/summary/static', about: person_l10n %>
+<%= osuny_static_text 'meta_description', person_l10n.meta_description %>
+<%= osuny_static_html 'summary', person_l10n.summary %>
 publications:
 <%
 HalOpenscience::Document::TYPES.each do |type|
@@ -34,8 +31,8 @@ HalOpenscience::Document::TYPES.each do |type|
     next if hugo.nil? || hugo.file.blank?
     %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-<% 
-  end 
-end 
+<%
+  end
+end
 %>
 ---
