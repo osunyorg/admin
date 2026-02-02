@@ -11,6 +11,7 @@ language = @l10n.language
             l10n: event_l10n,
             full_width: false,
             toc_offcanvas: false %>
+date: "<%= day.date.to_datetime&.iso8601 %>"
 <%= render 'admin/communication/websites/agenda/events/static/dates',
             event: event,
             day: day,
