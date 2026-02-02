@@ -10,6 +10,7 @@ day = event.days.for_language(language).ordered.first
             l10n: @l10n,
             full_width: false,
             toc_offcanvas: false %>
+date: "<%= event.from_day.to_datetime&.iso8601 %>"
 <%= render 'admin/communication/websites/agenda/events/static/dates',
             event: event,
             day: day,
