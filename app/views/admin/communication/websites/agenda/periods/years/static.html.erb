@@ -42,6 +42,7 @@ bodyclass: >-
 months:
 <%
 @l10n.months.each do |month|
+  next if month.nil?
   hugo = month.hugo(@website)
   next if hugo.file.blank?
   %>
