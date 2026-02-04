@@ -21,7 +21,7 @@ bodyclass: >-
 days:
 <%
 @l10n.days.each do |day|
-  next id day.nil?
+  next if day.nil?
   %>
   - day: <%= day.iso8601 %>
     cwday: <%= day.cwday %>
