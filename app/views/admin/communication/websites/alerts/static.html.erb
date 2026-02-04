@@ -2,6 +2,7 @@
 alert = @l10n.about
 language = @l10n.language
 %>---
+id: <%= alert.id %>
 <%= osuny_static_text 'title', @l10n.to_s %>
 level: <%= alert.kind %>
 <%= osuny_static_html 'content', @l10n.description %>

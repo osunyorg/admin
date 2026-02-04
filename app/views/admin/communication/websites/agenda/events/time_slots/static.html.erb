@@ -5,6 +5,7 @@ event = time_slot.event
 event_l10n = @l10n.event_l10n
 %>---
 <%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
+date: "<%= time_slot.datetime&.iso8601 %>"
 <%= render 'admin/communication/websites/agenda/events/static/dates',
             event: event,
             time_slot: time_slot,
