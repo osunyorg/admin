@@ -63,6 +63,7 @@ module Communication::Block::WithHeadingRanks
     return if template_title?
     about.blocks
           .template_title # We are looking for title blocks
+          .published
           .where('position < ?', position) # Before this block
           .order(position: :desc)
           .limit(1)
