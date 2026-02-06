@@ -638,8 +638,6 @@ fr:
           previous_paths: Redirections (anciens chemins)
           title: Gérer les redirections
         see_showcase: Voir le showcase
-        subnav:
-          structure: Arborescence
         synchronize:
           button: Synchroniser
           running: La synchronisation est lancée, un peu de patience...
