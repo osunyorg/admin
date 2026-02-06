@@ -1,4 +1,6 @@
 <%
 blob = component.blob
 return unless blob
-%><%= indentation %><%= property %>: "<%= blob.id %>"
+%><%= indentation %><%= property %>:
+<%= indentation %>  id: "<%= blob.id %>"
+<%= indentation %>  file: "<%= blob.id %>"
