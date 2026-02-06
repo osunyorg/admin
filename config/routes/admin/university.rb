@@ -27,6 +27,7 @@ namespace :university, path: :directory do
     end
     member do
       get :static
+      get :preview
       get 'administrator/static' => 'people/administrators#static', as: 'static_administrator' 
       get 'author/static' => 'people/authors#static', as: 'static_author' 
       get 'experiences' => 'people/experiences#edit'
@@ -50,6 +51,7 @@ namespace :university, path: :directory do
     end
     member do
       get :static
+      get :preview
       post :restore
     end
   end

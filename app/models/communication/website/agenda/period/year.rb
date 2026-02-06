@@ -3,7 +3,6 @@
 # Table name: communication_website_agenda_period_years
 #
 #  id                       :uuid             not null, primary key
-#  deleted_at               :datetime
 #  needs_checking           :boolean          default(FALSE)
 #  value                    :integer          uniquely indexed => [university_id, communication_website_id]
 #  created_at               :datetime         not null
@@ -22,8 +21,6 @@
 #  fk_rails_67a8039d71  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Period::Year < ApplicationRecord
-  acts_as_paranoid
-
   include AsDirectObject
   include Communication::Website::Agenda::Period::Base
   include GeneratesGitFiles
@@ -33,8 +30,11 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
   after_create :create_months
   before_save :set_needs_checking
 
-  has_many :months, dependent: :destroy
-  has_many :days, dependent: :destroy
+  has_many  :months, dependent: :destroy
+  has_many  :month_localizations,
+            through: :months,
+            source: :localizations
+  has_many  :days, dependent: :destroy
 
   scope :ordered, -> { order(value: :desc) }
   scope :needing_recheck, -> { where(needs_checking: true) }
@@ -61,7 +61,7 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
   def dependencies
     [website.config_default_content_security_policy] +
     localizations.in_languages(website.active_language_ids) +
-    months
+    month_localizations.in_languages(website.active_language_ids)
   end
 
   def previous

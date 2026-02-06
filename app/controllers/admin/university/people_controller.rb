@@ -4,13 +4,14 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
                               through_association: :people,
                               except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
     @filtered = @people.filter_by(params[:filters], current_language)
-    @people = @people.at_lifecycle(params[:lifecycle], current_language)
-                     .ordered(current_language)
+    @people = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                       .ordered(current_language)
     @feature_nav = 'navigation/admin/university/people'
     respond_to do |format|
       format.html {
@@ -41,6 +42,10 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
                                          .ordered_by_date
                                          .page(params[:roles_page])
     breadcrumb
+  end
+
+  def preview
+    render layout: 'admin/layouts/preview'
   end
 
   def new
@@ -95,6 +100,11 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
 
   protected
 
+  def prepare_preview
+    super
+    @body_class += ' full-width'
+  end
+
   def breadcrumb
     super
     add_breadcrumb  University::Person.model_name.human(count: 2),
@@ -114,6 +124,7 @@ class Admin::University::PeopleController < Admin::University::ApplicationContro
       research_laboratory_ids: [], category_ids: [],
       localizations_attributes: [
         :id, :slug, :first_name, :last_name,
+        :published,
         :meta_description, :summary, :biography,
         :picture_credit,
         :url, :linkedin, :twitter, :mastodon,

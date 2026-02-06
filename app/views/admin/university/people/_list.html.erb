@@ -1,6 +1,6 @@
 <div class="row g-3">
   <% people.each do |person| %>
-    <div class="col-6 col-lg-3 col-xxl-2">
+    <div class="col-lg-3 col-xxl-2">
       <div class="<%= osuny_card_classes %>">
         <%= osuny_thumbnail_localized person, large: true %>
         <% if person.deleted? %>

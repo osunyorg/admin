@@ -29,4 +29,8 @@ class Communication::Website::Page::CommunicationPortfolio < Communication::Webs
   def special_page_categories
     website.portfolio_categories
   end
+
+  def hugo_body_class
+    'projects__section'
+  end
 end

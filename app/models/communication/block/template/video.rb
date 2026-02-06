@@ -11,6 +11,11 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
     video_provider.iframe_tag(title: video_iframe_title)
   end
 
+  # Utilisé dans les show et les snippets
+  def video_iframe_preview
+    video_provider.iframe_preview_tag(title: video_iframe_title)
+  end
+
   def video_iframe_title
     video_title.blank?  ? 'Video'
                         : video_title

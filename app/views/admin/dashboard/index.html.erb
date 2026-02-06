@@ -1,24 +1,13 @@
 <% content_for :title, t('admin.dashboard') %>
 
 <% content_for :title_right do %>
-  <div class="mt-5 mt-xl-0">
-    <% if current_university.logo.attached? %>
-      <%= kamifusen_tag current_university.logo,
-                        width: 120,
-                        cached: true %>
-    <% else %>
-      <%= current_university %>
-    <% end %>
-  </div>
+  <%= render 'admin/dashboard/logo' %>
 <% end %>
 
 <div class="row">
   <div class="col-lg-8">
-    <%= osuny_panel Communication::Website.model_name.human(count: 2) do %>
-      <%= render 'admin/communication/websites/list', 
-                  websites: Communication::Website.organized_for(current_user, current_language),
-                  large: true %>
-    <% end %>
+    <%= render 'admin/dashboard/templates' %>
+    <%= render 'admin/dashboard/websites' %>
     <%= render 'admin/application/favorites/show' %>
   </div>
   <div class="offset-lg-1 col-lg-3">

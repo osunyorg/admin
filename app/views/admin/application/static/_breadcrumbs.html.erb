@@ -18,8 +18,7 @@ localizations.each do |l10n|
   permalink = hugo.permalink
   last = l10n == localizations.last
 %>
-  - title: >-
-      <%= title %>
+  - title: "<%= title %>"
 <% if !last || last_item.present? %>
     path: "<%= permalink %>"
 <% end %>

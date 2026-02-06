@@ -9,7 +9,8 @@ json.partial! 'admin/application/categories/list', categories: @categories
 
 json.results @medias do |media|
   next unless media.original_blob.variable?
-  thumb_path = url_for(media.original_blob.variant(resize: "600x"))
+  thumb_path = ENV["KEYCDN_HOST"].present?  ? media.keycdn_thumb_url
+                                            : url_for(media.original_blob.variant(resize_to_fit: [600, nil]))
   l10n = media.best_localization_for(current_language)
   json.id media.id
   json.name l10n.name

@@ -3,7 +3,6 @@
 # Table name: communication_website_agenda_period_month_localizations
 #
 #  id                       :uuid             not null, primary key
-#  deleted_at               :datetime
 #  slug                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
@@ -27,8 +26,6 @@
 #  fk_rails_f7d0b8f0e9  (university_id => universities.id)
 #
 class Communication::Website::Agenda::Period::Month::Localization < ApplicationRecord
-  acts_as_paranoid
-
   include AsLocalization
   include Permalinkable
   include HasGitFiles
@@ -38,12 +35,14 @@ class Communication::Website::Agenda::Period::Month::Localization < ApplicationR
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
+  alias :month :about
+
   delegate :value, to: :about
 
   def should_sync_to?(website)
     website.id == communication_website_id &&
     website.active_language_ids.include?(language_id) &&
-    events_count > 0 # Some events
+    !month.year.empty? # Sync month, unless all year is empty (no january -> april)
   end
 
   def git_path_relative

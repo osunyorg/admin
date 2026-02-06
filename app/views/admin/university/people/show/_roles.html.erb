@@ -31,7 +31,7 @@
                 <%= link_to t('remove'),
                             [:admin, role_target, :role_person, { role_id: role.id, id: involvement.id }],
                             method: :delete,
-                            data: { confirm: t('please_confirm') },
+                            data: { confirm: t('please_confirm.deletion') },
                             class: button_classes_danger if can?(:destroy, involvement) %>
               </td>
             </tr>

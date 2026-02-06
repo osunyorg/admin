@@ -10,6 +10,7 @@ module Communication::Website::Page::Localization::WithOpenApi
         migration_identifier: { type: :string, nullable: true },
         title: { type: :string },
         breadcrumb_title: { type: :string, nullable: true },
+        subtitle: { type: :string, nullable: true },
         featured_image: {
           type: :object,
           properties: {

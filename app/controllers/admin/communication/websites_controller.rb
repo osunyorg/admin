@@ -132,11 +132,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     end
   end
 
-  def destroy
-    @website.destroy
-    redirect_to admin_communication_websites_url, notice: t('admin.successfully_destroyed_html', model: @website.to_s_in(current_language))
-  end
-
   def confirm_localization
     @about_gid = params[:about]
     @about = GlobalID::Locator.locate(@about_gid)
@@ -149,6 +144,12 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     @about.localize_in!(current_language)
     edit_path_method = "edit_admin_#{@about.class.base_class.to_s.parameterize.underscore}_path"
     redirect_to public_send(edit_path_method, { id: @about.id})
+  end
+
+  def destroy
+    Communication::Website::DestroyWebsiteJob.perform_later(@website)
+    redirect_to admin_communication_websites_url, 
+                notice: t('admin.successfully_destroyed_html', model: @website.to_s_in(current_language))
   end
 
   protected

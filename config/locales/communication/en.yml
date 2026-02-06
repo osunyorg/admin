@@ -145,6 +145,7 @@ en:
         in_showcase: List website in showcase
         languages: Languages
         locked_at: Locked for background jobs at
+        name: Name
         plausible_url: Plausible dashboard URL
         repository: Repository
         showcase_tags: Tags
@@ -274,6 +275,7 @@ en:
         path: Path
         published: Published?
         slug: Slug
+        subtitle: Subtitle
         text: Main page text
         title: Title
       communication/website/permalink:
@@ -509,6 +511,9 @@ en:
           fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
           title: Internationalization
         page:
+          children:
+            with_blocks: As the page has published blocks, it will not show its child pages, listed below. If you want to list them, you need to use a Page block.
+            without_blocks: As the page has no published blocks, it will automatically show its child pages, listed below.
           localizations:
             draft: Draft
             published: Published
@@ -523,6 +528,51 @@ en:
           show: Show page
           special_page: Special page
           special_pages:
+            administration_location:
+              native:
+                zero: This page is a special page, which natively presents the campus locations. For now, there is no location.
+                one: This page is a special page, which natively presents the campus locations. For now, there's 1 location.
+                other: This page is a special page, which natively presents the %{count} campus locations.
+            communication_agenda:
+              native:
+                zero: This page is a special page, which natively presents the site's events.
+                one: This page is a special page, which natively presents the site's events. For the moment, there's a single published event.
+                other: This page is a special page, which natively presents the %{count} published events.
+            communication_agenda_exhibition:
+              native:
+                zero: This page is a special page, which natively presents the site's exhibitions.
+                one: This page is a special page, which natively presents the site's exhibitions. For now, there's a single exhibition published.
+                other: This page is a special page, which natively presents the %{count} published exhibitions.
+            communication_jobboard:
+              native:
+                zero: This page is a special page, which natively presents the site's job offers.
+                one: This page is a special page, which natively presents the site's job offers. At the moment, there's a single job offer published.
+                other: This page is a special page, which natively presents the %{count} published job offers.
+            communication_portfolio:
+              native:
+                zero: This page is a special page that natively displays the site's projects.
+                one: This page is a special page that natively displays the site's projects. Currently, there is 1 published project.
+                other: This page is a special page that natively displays %{count} published projects.
+            communication_post:
+              native:
+                zero: This page is a special page that natively displays the site's news.
+                one: This page is a special page that natively displays the site's news . Currently, there's a single post.
+                other: This page is a special page that natively displays the %{count} published news.
+            education_academic_year:
+              native:
+                zero: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there are no alumni on the site.
+                one: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there is one alumnus.
+                other: This page is a special page that natively displays the site's %{count} alumni, sorted by year.
+            education_diploma:
+              native:
+                zero: This page is a special page that natively displays the diplomas associated with the site. Currently, there are no diplomas on the site.
+                one: This page is a special page that natively displays the diplomas linked to the site. Currently, there is one diploma.
+                other: This page is a special page that natively displays the %{count} diplomas linked to the site.
+            education_program:
+              native:
+                zero: This page is a special page that natively displays the programs related to the site. Currently, there are no training courses on the site.
+                one: This page is a special page that natively displays the programs related to the site. Currently, there is one program.
+                other: This page is a special page that natively displays the %{count} programs related to the site.
             organization:
               disconnect: Disconnect
               explicitly_connected: Directly connected organizations
@@ -533,8 +583,29 @@ en:
                 other: This page is a special page that natively displays the %{count} organizations mentioned on the site.
             person:
               disconnect: Disconnect
+              explicitly_connected: People directly connected
+              explicitly_connected_hint: You can connect people directly to the website by searching for them below. Anyway, every person mentioned on the website will be listed above.
+              native:
+                zero: This page is a special page that natively displays the people mentioned on the website. Currently, there's no person on the site.
+                one: This page is a special page that natively displays the people mentioned on the site. At the moment, there is only one person on the site.
+                other: This page is a special page that natively displays the %{count} people mentioned on the site.
+            research_paper:
+              native:
+                zero: This page is a special page that natively displays papers related to the site. Currently, there are no papers on the site.
+                one: This page is a special page that natively displays papers related to the site. Currently, there is one paper.
+                other: This page is a special page that natively displays the %{count} papers related to the site.
+            research_publication:
+              native:
+                zero: This page is a special page that natively displays scientific publications related to the site. Currently, there are no publications on the site.
+                one: This page is a special page that natively displays scientific publications related to the site. Currently, there is 1 publication.
+                other: This page is a special page that natively displays the %{count} scientific publications related to the site.
+            research_volume:
+              native:
+                zero: This page is a special page that natively displays the volumes related to the site. Currently, there are no volumes on the site.
+                one: This page is a special page that natively displays volumes related to the site. Currently, there is 1 volume.
+                other: This page is a special page that natively displays %{count} volumes related to the site.
+            sitemap: This page is a special page that natively displays the site map.
           structure: Pages
-          with_children: "with children:"
         permalinks:
           creation_error: "Error during the creation. Does the given path have the correct format?"
         portfolio:
@@ -550,6 +621,7 @@ en:
             draft: Draft
             pinned_status: Pinned status
             planned_on: Publication planned on %{date}
+            planned_url: Planned URL
             published_on: Published on %{date}
         posts:
           by: by %{author}
@@ -775,6 +847,8 @@ en:
         favicon: '.png file only'
         host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
+      communication_media_localization:
+        internal_description: Complementary description of the image for the media library users. You can write this text to help the media library users to find an image, have complementary informations about it or have special instructions regarding the use of the image.
       communication_website:
         access_token_with_existing: Your Github or Gitlab confidential access token.<br>Leave the field blank if you don't want to change the token.
         access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website with Deuxfleurs.

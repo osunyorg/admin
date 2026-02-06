@@ -5,11 +5,12 @@
     <%= destroy_link @person %>
     <%= static_link static_admin_university_person_path(@person) %>
   <% end %>
+  <%= preview_link %>
   <%= edit_link @person %>
 <% end %>
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-lg-4">
     <%= osuny_small_panel t('activerecord.attributes.university/person.picture') do %>
       <%= kamifusen_tag @person.best_picture, class: 'img-fluid col-4 col-md-8' %>
       <% if @person.best_picture_inherits_from_user? %>
@@ -26,11 +27,11 @@
       <% end %>
     <% end if @person.best_picture.attached? %>
 
-    <%= render 'admin/application/categories/widget/show', about: @person %>
+    <%= render 'admin/application/publication/show', about: @l10n %>
     <%= render 'admin/application/l10n/widget', about: @person, l10n: @l10n %>
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
-  <div class="col-md-8">
+  <div class="col-lg-8">
 
     <%= render 'admin/application/summary/show', about: @l10n %>
 
@@ -60,6 +61,10 @@
     </div>
 
     <%= render 'admin/application/contact_details/show', about: @person, l10n: @l10n %>
+
+    <%= osuny_separator %>
+
+    <%= render 'admin/application/categories/widget/show', about: @person, columns: 2 %>
   </div>
 </div>
 

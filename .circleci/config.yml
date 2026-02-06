@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.4.7-node
+      - image: cimg/ruby:4.0.1-node
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -31,7 +31,7 @@ jobs:
           name: Install binaries for Active Storage Previews
           command: |
             sudo apt-get update
-            sudo apt-get install ffmpeg poppler-utils -y
+            sudo apt-get install ffmpeg poppler-utils libvips-dev -y
 
       # Bundler configuration
       - run:

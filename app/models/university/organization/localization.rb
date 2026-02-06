@@ -14,7 +14,7 @@
 #  meta_description      :text
 #  migration_identifier  :string
 #  name                  :string
-#  published             :boolean          default(FALSE)
+#  published             :boolean          default(TRUE)
 #  published_at          :datetime
 #  slug                  :string
 #  summary               :text

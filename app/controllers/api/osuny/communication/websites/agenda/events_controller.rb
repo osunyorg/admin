@@ -1,18 +1,17 @@
 class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny::Communication::Websites::ApplicationController
-  before_action :build_event, only: :create
-  before_action :load_event, only: [:show, :update, :destroy]
-
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
+  include Api::Osuny::HasResource
+  include Api::Osuny::HasMigrationIdentifier
 
   def index
-    @events = website.events.includes(:localizations)
+    @events = paginate(website.events.includes(:localizations))
   end
 
   def show
   end
 
   def create
+    @event = website.events.build
+    @event.assign_attributes(event_params)
     if @event.save
       render :show, status: :created
     else
@@ -34,7 +33,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
       event_params[:migration_identifier].present?
     }
     unless every_event_has_migration_identifier
-      render_on_missing_migration_identifier
+      render_missing_migration_identifier
       return
     end
 
@@ -73,24 +72,12 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
 
   protected
 
-  def build_event
-    @event = website.events.build
-    @event.assign_attributes(event_params)
+  def integrity_checker
+    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@event, event_params, website.events.with_deleted)
   end
 
-  def load_event
+  def load_resource
     @event = website.events.find(params[:id])
-  end
-
-  def load_migration_identifier
-    @migration_identifier = event_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
-  end
-
-  def ensure_same_migration_identifier
-    if @event.migration_identifier != @migration_identifier
-      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
-    end
   end
 
   def l10n_permitted_keys

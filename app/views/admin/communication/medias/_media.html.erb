@@ -1,24 +1,19 @@
 <%
 l10n = media.best_localization_for(current_language)
 initials = l10n.initials
-cropped = true
-image_class = 'img-fluid'
 image = media.original_blob
-if image.variable?
-  if cropped
-    image_variant = image.variant(resize_to_fill: [600, 600, gravity: 'center'], quality: 50)
-  else
-    image_variant = image.variant(resize_to_fit: [600, 600], quality: 50)
-    image_class += ' h-100 w-100 object-fit-contain'
-  end
-end
 %>
 <div class="<%= osuny_card_classes %>">
-  <div class="osuny__thumbnail 
-              osuny__thumbnail--large %>
-              osuny__thumbnail--<%= cropped ? 'cropped' : 'uncropped' %>">
-    <% if image_variant %>
-      <%= image_tag image_variant, class: image_class, loading: 'lazy' %>
+  <div class="osuny__thumbnail
+              osuny__thumbnail--large
+              osuny__thumbnail--cropped">
+    <% if image.variable? %>
+      <%= kamifusen_tag image,
+                        width: 600,
+                        height: 600,
+                        crop: true,
+                        quality: 50,
+                        class: 'img-fluid' %>
     <% else %>
       <span class="osuny__thumbnail__initials">
         <%= initials %>
