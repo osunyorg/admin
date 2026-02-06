@@ -636,8 +636,6 @@ en:
           previous_paths: Redirects (old paths)
           title: Manage redirects
         see_showcase: See showcase
-        subnav:
-          structure: Structure
         synchronize:
           button: Synchronize
           running: Synchronization launched, please be patient...

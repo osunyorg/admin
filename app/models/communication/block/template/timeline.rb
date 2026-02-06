@@ -10,4 +10,8 @@ class Communication::Block::Template::Timeline < Communication::Block::Template:
   def children
     elements
   end
+
+  def empty?
+    elements.none?
+  end
 end
