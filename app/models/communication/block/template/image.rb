@@ -16,6 +16,10 @@ class Communication::Block::Template::Image < Communication::Block::Template::Ba
     ]
   end
 
+  def empty?
+    image_component.blob.nil?
+  end
+
   protected
 
   def check_accessibility
