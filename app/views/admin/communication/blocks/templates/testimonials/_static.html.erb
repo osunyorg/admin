@@ -1,7 +1,8 @@
 <%= block_component_static block, :layout %>
       testimonials:
 <% block.template.elements.each do |element| %>
-<%= block_component_static block, :text, template: element, depth: 4, list: true %>
+        - 
+<%= block_component_static block, :text, template: element, depth: 5 %>
 <%= block_component_static block, :author, template: element, depth: 5 %>
 <%= block_component_static block, :job, template: element, depth: 5 %>
 <%= block_component_static block, :photo, template: element, depth: 5 if element.photo %>

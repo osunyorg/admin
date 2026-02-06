@@ -1,9 +1,11 @@
 <%= block_component_static block, :description %>
 <%= block_component_static block, :layout %>
       images:
-<% block.template.elements.each do |element| %>
-<% next unless element.blob %>
-<%= block_component_static block, :image, template: element, depth: 4, list: true %>
+<%
+block.template.elements.each do |element|
+  next unless element.blob %>
+        - 
+<%= block_component_static block, :image, template: element, depth: 5 %>
 <%= block_component_static block, :alt, template: element, depth: 5 %>
 <%= block_component_static block, :credit, template: element, depth: 5 %>
 <%= block_component_static block, :text, template: element, depth: 5 %>
