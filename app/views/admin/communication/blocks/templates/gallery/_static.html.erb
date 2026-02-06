@@ -3,7 +3,7 @@
       images:
 <%
 block.template.elements.each do |element|
-  next unless element.blob %>
+  next if element.empty? %>
         - 
 <%= block_component_static block, :image, template: element, depth: 5 %>
 <%= block_component_static block, :alt, template: element, depth: 5 %>

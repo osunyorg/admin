@@ -8,8 +8,7 @@
       buttons:
 <%
 block.template.elements.each do |element|
-  next if element.title.blank?
-  %>
+  next if element.title.blank? %>
         - 
 <%= block_component_static block, :title, template: element, depth: 5 %>
 <%= block_component_static block, :url, template: element, depth: 5 %>

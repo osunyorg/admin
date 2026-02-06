@@ -1,6 +1,8 @@
 <%= block_component_static block, :layout %>
       events:
-<% block.template.elements.each do |element| %>
+<%
+block.template.elements.each do |element|
+  next if element.empty? %>
         - 
 <%= block_component_static block, :title, template: element, depth: 5 %>
 <%= block_component_static block, :text, template: element, depth: 5 %>
