@@ -1,4 +1,5 @@
 <%
+# TODO FIXME incohérence entre les depths traduits en 1 espace, et ceux traduits en 2 espaces
 depth ||= 2
 indentation = ' ' * depth
 %>
@@ -13,7 +14,7 @@ indentation = ' ' * depth
 <%= indentation %>  path: "<%= hugo.path %>"
 <%= indentation %>  slug: "<%= hugo.slug %>"
 <%= indentation %>  file: "<%= hugo.file %>"
-<%= osuny_static_text 'label', program_l10n.to_s, depth: depth-1 %>
+<%= osuny_static_text 'label', program_l10n.to_s, depth: (depth/2)+2 %>
 <%
 children = program.children.published_now_in(language).where(diploma: diploma)
 # Limit to a global list of programs, for example on a location
@@ -21,6 +22,10 @@ children = children.where(id: all_programs) if local_assigns[:all_programs]
 %>
 <% if children.any? %>
 <%= indentation %>  children:
-<%= render 'admin/education/programs/static_list', diploma: diploma, programs: children, depth: depth + 4, language: language %>
+<%= render 'admin/education/programs/static_list',
+            diploma: diploma,
+            programs: children,
+            depth: depth + 4,
+            language: language %>
 <% end %>
 <% end %>
