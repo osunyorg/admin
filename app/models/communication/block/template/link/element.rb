@@ -11,4 +11,7 @@ class Communication::Block::Template::Link::Element < Communication::Block::Temp
     !url.start_with?(website.url)
   end
 
+  def empty?
+    title.blank? && description.blank? && url.blank?
+  end
 end

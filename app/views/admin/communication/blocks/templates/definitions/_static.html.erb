@@ -2,8 +2,7 @@
       elements:
 <%
 block.template.elements.each do |element|
-  next if element.empty?
-  %>
+  next if element.empty? %>
         - 
 <%= block_component_static block, :title, template: element, depth: 5 %>
 <%= block_component_static block, :description, template: element, depth: 5 %>

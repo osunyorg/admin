@@ -3,4 +3,7 @@ class Communication::Block::Template::Timeline::Element < Communication::Block::
   has_component :title, :string
   has_component :text, :rich_text
 
+  def empty?
+   title.blank? && text.blank?
+  end
 end
