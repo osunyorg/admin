@@ -1,9 +1,6 @@
 class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::ApplicationController
-  before_action :build_category, only: :create
-  before_action :load_category, only: [:show, :update, :destroy]
-
-  before_action :load_migration_identifier, only: [:create, :update]
-  before_action :ensure_same_migration_identifier, only: :update
+  include Api::Osuny::HasResource
+  include Api::Osuny::HasMigrationIdentifier
 
   def index
     @categories = paginate(current_university.organization_categories.includes(:localizations))
@@ -13,6 +10,8 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
   end
 
   def create
+    @category = current_university.organization_categories.build
+    @category.assign_attributes(category_params)
     if @category.save
       render :show, status: :created
     else
@@ -34,7 +33,7 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
       category_params[:migration_identifier].present?
     }
     unless every_category_has_migration_identifier
-      render_on_missing_migration_identifier
+      render_missing_migration_identifier
       return
     end
 
@@ -73,24 +72,12 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
 
   protected
 
-  def build_category
-    @category = current_university.organization_categories.build
-    @category.assign_attributes(category_params)
+  def integrity_checker
+    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@category, category_params, current_university.organization_categories)
   end
 
-  def load_category
+  def load_resource
     @category = current_university.organization_categories.find(params[:id])
-  end
-
-  def load_migration_identifier
-    @migration_identifier = category_params[:migration_identifier]
-    render_on_missing_migration_identifier unless @migration_identifier.present?
-  end
-
-  def ensure_same_migration_identifier
-    if @category.migration_identifier != @migration_identifier
-      render json: { error: 'Migration identifier does not match' }, status: :unprocessable_content
-    end
   end
 
   def l10n_permitted_keys

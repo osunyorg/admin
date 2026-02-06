@@ -794,6 +794,19 @@ fr:
                   label: Texte
                   placeholder: Entrer le texte du témoignage
               remove_testimonial: Enlever le témoignage
+            layouts:
+              carousel:
+                description: Les témoignages sont présentés en grand, avec un système de défilement automatique.
+                label: Carrousel
+              grid:
+                description: Les témoignages sont présentés en grille, tous de la même largeur.
+                label: Grille
+              large:
+                description: Les témoignages sont présentés en grand, sur toute la largeur disponible.
+                label: Grand
+              list:
+                description: Les témoignages sont présentés les uns après les autres, en une sorte de tableau.
+                label: Liste
           timeline:
             description: Une liste d'événements avec leur description, présentés en frise.
             edit:

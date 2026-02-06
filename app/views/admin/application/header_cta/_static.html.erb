@@ -1,7 +1,6 @@
 header_cta:
 <% if about.header_cta %>
-  label: >-
-    <%= prepare_text_for_static about.header_cta_label %>
   target: "<%= about.header_cta_url %>"
   external: <%= about.header_cta_url_external?(@website) %>
+<%= osuny_static_text 'label', about.header_cta_label, depth: 2 %>
 <% end %>

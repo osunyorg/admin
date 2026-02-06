@@ -5,7 +5,7 @@ fr:
       templates:
         embed:
           title_missing:
-            text_html: L'intégration HTML n'a pas de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle le contenu, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter une balise <b>title</b> explicite à votre iframe.
+            text_html: L'intégration HTML n'a pas de titre, cela va empêcher les personnes malvoyantes de savoir de quoi parle le contenu intégré, comme expliqué dans le <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">critère 4.7 du RGAA</a>. Merci d'ajouter une balise <b>title</b> explicite à votre iframe.
             title: Pas de titre de cadre
           transcription_missing:
             text_html: Le cadre HTML n'est pas accompagné d'une transcription textuelle pour les personnes malvoyantes, ou pour les situations de faible débit qui empêcheraient la lecture.
@@ -438,6 +438,7 @@ fr:
       draft: Brouillon
       planned: Planifié
       published: Publié
+      template: Modèle
       trash: Corbeille
   loading: Chargement...
   localization:
@@ -550,6 +551,11 @@ fr:
   slug_error: ne peut contenir que des lettres minuscules, des chiffres et des traits d'union.
   sms_code: "%{code} est votre code d'authentification sur %{context} (valide %{duration})"
   static: Fichier statique
+  templates:
+    create: Créer un modèle
+    prompt: Vous pouvez créer un événement à partir d'un des modèles suivants.
+    show: Voir ce modèle
+    use: Utiliser ce modèle
   terms_of_service: Conditions d'utilisation
   terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/
   time:

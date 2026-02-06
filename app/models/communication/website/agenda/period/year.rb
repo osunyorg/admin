@@ -30,8 +30,11 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
   after_create :create_months
   before_save :set_needs_checking
 
-  has_many :months, dependent: :destroy
-  has_many :days, dependent: :destroy
+  has_many  :months, dependent: :destroy
+  has_many  :month_localizations,
+            through: :months,
+            source: :localizations
+  has_many  :days, dependent: :destroy
 
   scope :ordered, -> { order(value: :desc) }
   scope :needing_recheck, -> { where(needs_checking: true) }
@@ -58,7 +61,7 @@ class Communication::Website::Agenda::Period::Year < ApplicationRecord
   def dependencies
     [website.config_default_content_security_policy] +
     localizations.in_languages(website.active_language_ids) +
-    months
+    month_localizations.in_languages(website.active_language_ids)
   end
 
   def previous

@@ -5,7 +5,7 @@ en:
       templates:
         embed:
           title_missing:
-            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the content is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the iframe.
+            text_html: The HTML embedding has not title. This will prevent blind people from knowing what the integrated content is about, as mentioned in <a href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/methode-rgaa/criteres/#topic4" target="_blank">criterion 4.7 of RGAA</a>. Please add a title to the iframe.
             title: No frame title
           transcription_missing:
             text_html: The HTML iframe has no text transcription for blind people, for people with low bandwidth or no javascript enabled. Please add a text transcription.
@@ -438,6 +438,7 @@ en:
       draft: Draft
       planned: Planned
       published: Published
+      template: Template
       trash: Trash
   loading: Loading...
   localization:
@@ -550,6 +551,11 @@ en:
   slug_error: can only contain downcase letters, numbers, and dashes.
   sms_code: "%{code} is your authentication code on %{context} (valid %{duration})"
   static: Static file
+  templates:
+    create: Create a template
+    prompt: You can create an event from one of these templates.
+    show: Show template
+    use: Use this template
   terms_of_service: Terms of service
   terms_of_service_url: https://www.osuny.org/conditions-d-utilisation/
   time:
