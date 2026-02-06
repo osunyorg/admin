@@ -6,5 +6,8 @@ class Communication::Block::Template::Definition < Communication::Block::Templat
   def allowed_for_about?
     !about.respond_to?(:extranet)
   end
-  
+
+  def empty?
+    elements.none?
+  end
 end
