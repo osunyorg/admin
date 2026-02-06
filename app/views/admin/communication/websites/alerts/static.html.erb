@@ -3,17 +3,13 @@ alert = @l10n.about
 language = @l10n.language
 %>---
 id: <%= alert.id %>
-title: >-
-  <%= prepare_text_for_static @l10n.to_s %>
+<%= osuny_static_text 'title', @l10n.to_s %>
 level: <%= alert.kind %>
-content: >-
-  <%= prepare_html_for_static @l10n.description %>
+<%= osuny_static_html 'content', @l10n.description %>
 <% if @l10n.cta? %>
 button:
-  title: >-
-    <%= prepare_text_for_static @l10n.cta_label %>
-  url: >-
-    <%= @l10n.cta_url %>
+<%= osuny_static_text 'title', @l10n.cta_label, depth: 2 %>
+<%= osuny_static_text 'url', @l10n.cta_url, depth: 2 %>
   target_blank: <%= @l10n.cta_url_external?(@website) %>
 <% end %>
 ---

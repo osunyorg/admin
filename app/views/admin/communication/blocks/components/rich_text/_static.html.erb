@@ -1,7 +1,8 @@
-<% if list %>
-<%= indentation %>- <%= property %>: >-
-<%= indentation %>    <%= prepare_html_for_static value %>
-<% else %>
-<%= indentation %><%= property %>: >-
-<%= indentation %>  <%= prepare_html_for_static value %>
-<% end %>
+<% 
+if list && value.present?
+%><%= indentation %>- <%= property %>: >-
+<%= indentation %>    <%= prepare_html_for_static value %><%
+else
+%><%= osuny_static_html property, value, depth: depth+1 %><%
+end
+%>

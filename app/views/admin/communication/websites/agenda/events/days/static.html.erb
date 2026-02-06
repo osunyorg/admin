@@ -23,12 +23,10 @@ date: "<%= day.date&.iso8601 %>"
 <%= render 'admin/application/l10n/static', about: event_l10n %>
 <%= render 'admin/application/images/featured/static', about: event_l10n %>
 <%= render 'admin/application/images/shared/static', about: event_l10n %>
-<%= render 'admin/application/meta_description/static', about: event_l10n %>
-<%= render 'admin/application/summary/static', about: event_l10n %>
-text: >-
-  <%= prepare_html_for_static event_l10n.text %>
-notes: >-
-  <%= prepare_html_for_static event_l10n.notes %>
+<%= osuny_static_text 'meta_description', event_l10n.meta_description %>
+<%= osuny_static_html 'summary', event_l10n.summary %>
+<%= osuny_static_html 'text', event_l10n.text %>
+<%= osuny_static_html 'notes', event_l10n.notes %>
 <%= render 'admin/application/header_cta/static', about: event_l10n %>
 <%= render 'admin/application/categories/widget/static',
             about: event,
