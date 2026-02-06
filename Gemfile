@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.4.7"
+ruby "4.0.1"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_hashcash", github: "BaseSecrete/active_hashcash"
@@ -18,10 +18,10 @@ gem "bugsnag"
 # (les authorize through des modèles qui faisaient des faux négatifs sur les rôles intermédiaires)
 gem "cancancan", "~> 3.3.0"
 gem "caxlsx_rails", "~> 0"
+gem "cgi", "~> 0.5.1" # To handle CGI::parse
 gem "citeproc", "~> 1"
 gem "citeproc-ruby", "~> 2"
 gem "cocoon", "~> 1"
-gem "connection_pool", "~> 2.0" # Waiting for Rails 8.1.2 upgrade to remove this constraint
 gem "country_select"
 gem "csl-styles", "~> 2"
 gem "curation"#, path: "../../arnaudlevy/curation"
@@ -46,7 +46,7 @@ gem "image_processing"
 gem "invisible_captcha", "~> 2.3"
 gem "jbuilder"
 gem "jquery-rails"
-gem "jquery-ui-rails", git: "https://github.com/jquery-ui-rails/jquery-ui-rails.git", tag: "v7.0.0"
+gem "jquery-ui-rails", "~> 7.0"
 gem "jsbundling-rails", "~> 1.3"
 gem "kamifusen"#, path: "../kamifusen"
 gem "kaminari"
@@ -54,13 +54,10 @@ gem "languagetool-widget"#, path: "../../noesya/languagetool-widget"
 gem "leaflet-rails"
 gem "libretranslate"#, path: "../libretranslate"
 gem "lucide-rails"
-gem "minitest", "< 6" # TODO Seb : Upgrade en Rails 8.1.2
+gem "metainspector", git: "https://github.com/jaimeiniesta/metainspector.git"
 gem "octokit"
-gem "omniauth-rails_csrf_protection", "~> 1"
 gem "omniauth-saml", "~> 2"
-gem "openssl", "~> 3.3"
 gem "orthotypo"
-gem "ostruct", "~> 0.6.0"
 gem "paranoia"
 gem "pexels", "~> 0"
 gem "pg", "~> 1"
@@ -68,7 +65,7 @@ gem "pghero"
 gem "pg_query"
 gem "puma"
 gem "rack-timeout"
-gem "rails", "~> 8.0.2"
+gem "rails", "~> 8.1.2"
 gem "rails-autocomplete", "~> 2"
 gem "rails-i18n"
 gem "rbnacl", "~> 7.1"
@@ -86,7 +83,8 @@ gem "summernote-rails", git: "https://github.com/noesya/summernote-rails.git", b
 # gem "summernote-rails", path: "../../noesya/summernote-rails"
 gem "two_factor_authentication", git: "https://github.com/noesya/two_factor_authentication.git"
 # gem "two_factor_authentication", path: "../two_factor_authentication"
-gem "unsplash"
+# gem "unsplash", "~> 3"
+gem "unsplash", git: "https://github.com/SebouChu/unsplash_rb.git", branch: 'ruby-4-compatibility'
 gem "vimeo"
 
 group :development, :test do
@@ -101,7 +99,7 @@ end
 group :development do
   gem "annotaterb"
   gem "better_errors"
-  gem "binding_of_caller"
+  # gem "binding_of_caller" # Waiting for Ruby 4 support
   gem "listen", "~> 3.3"
   gem "rack-mini-profiler", "~> 3.0"
   gem "spring"

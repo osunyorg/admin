@@ -9,8 +9,7 @@ localizations.each do |l10n|
   language = l10n.language
 %>
 <%= language.iso_code %>:
-  title: >-
-    <%= l10n.to_s %>
+<%= osuny_static_text 'title', l10n.to_s, depth: 2 %>
   contentDir: content/<%= language.iso_code %>
   languageCode: <%= language.iso_code %>
   languageName: <%= language.name %>

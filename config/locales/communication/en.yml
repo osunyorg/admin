@@ -847,6 +847,8 @@ en:
         favicon: '.png file only'
         host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
+      communication_media_localization:
+        internal_description: Complementary description of the image for the media library users. You can write this text to help the media library users to find an image, have complementary informations about it or have special instructions regarding the use of the image.
       communication_website:
         access_token_with_existing: Your Github or Gitlab confidential access token.<br>Leave the field blank if you don't want to change the token.
         access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website with Deuxfleurs.

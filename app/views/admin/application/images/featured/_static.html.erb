@@ -5,6 +5,5 @@ if best_featured_image&.attached?
 image:
   id: "<%= best_featured_image.blob.id %>"
   alt: "<%= about.best_featured_image_alt %>"
-  credit: >-
-    <%= prepare_html_for_static about.best_featured_image_credit %>
+<%= osuny_static_html 'credit', about.best_featured_image_credit, depth: 2 %>
 <% end %>
