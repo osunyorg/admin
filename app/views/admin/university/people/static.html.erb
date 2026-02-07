@@ -1,11 +1,7 @@
 <%
-# this version has to be incremented every time you change something in the file, to invalidate the cache
-version = 9
 person = @l10n.about
 university = person.university
 language = @l10n.language
-cache_key = [person, @l10n, @website&.id, version]
-cache cache_key do
 %>---
 <%= osuny_static_text 'linkTitle', @l10n.to_s_alphabetical %>
 <%= render 'admin/application/static/core', about: @l10n %>
@@ -125,4 +121,3 @@ cohorts:
 <%= osuny_static_html 'biography', @l10n.biography %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---
-<% end %>
