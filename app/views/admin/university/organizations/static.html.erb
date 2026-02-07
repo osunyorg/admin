@@ -1,13 +1,8 @@
 <%
-# This version has to incremented every time you change something in the file, to invalidate the cache
-version = 8
 # Next lines are not in the controller because it happens in the background jobs
 organization = @l10n.about
 university = organization.university
 language = @l10n.language
-# @pabois @SebouChu do we still need this cache since iteration 11?
-cache_key = [organization, @l10n, @website.id, version]
-cache cache_key do
 %>---
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
@@ -45,4 +40,3 @@ logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
             key: :organizations_categories %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---
-<% end %>
