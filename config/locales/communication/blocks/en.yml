@@ -595,6 +595,8 @@ en:
                 label: Show pages images
               option_main_summary:
                 label: Show main page summary
+              option_subtitle:
+                label: Show pages subtitle
               option_summary:
                 label: Show pages short descriptions
               page_id:
