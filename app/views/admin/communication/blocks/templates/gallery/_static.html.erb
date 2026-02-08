@@ -5,6 +5,7 @@
 block.template.elements.each do |element|
   next if element.empty? %>
         - 
+          id: "<%= element.blob.id %>"<%# TODO legacy remove when theme ready %>
 <%= block_component_static block, :image, template: element, depth: 5 %>
 <%= block_component_static block, :alt, template: element, depth: 5 %>
 <%= block_component_static block, :credit, template: element, depth: 5 %>
