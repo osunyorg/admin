@@ -68,16 +68,19 @@ module Communication::Website::WithFeatureAgenda
     agenda_months
   end
 
+  def current_year
+    @current_year ||= agenda_period_years.find_by(value: Date.current.year)
+  end
+
+  def current_month
+    @current_month ||= current_year.months.find_by(value: Date.current.month)
+  end
+
   def agenda_next_months
-    base_months_scope = agenda_period_months.joins(:year)
-    # We need to add the current year months
-    current_year_months_scope = base_months_scope.where("communication_website_agenda_period_years.value = ?", Date.current.year)
-                                                  .where("communication_website_agenda_period_months.value >= ?", Date.current.month)
-    # Then, we add the next years' months
-    next_years_months_scope = base_months_scope.where("communication_website_agenda_period_years.value > ?", Date.current.year)
-    # Then we put them together, and order per year then month
-    current_year_months_scope.or(next_years_months_scope).order(
-      "communication_website_agenda_period_years.value, communication_website_agenda_period_months.value"
-    )
+    [
+      current_month,
+      current_month&.next,
+      current_month&.next&.next
+    ].compact
   end
 end
