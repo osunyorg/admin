@@ -73,7 +73,7 @@ module Communication::Website::WithFeatureAgenda
   end
 
   def current_month
-    @current_month ||= current_year.months.find_by(value: Date.current.month)
+    @current_month ||= current_year&.months&.find_by(value: Date.current.month)
   end
 
   def agenda_next_months
