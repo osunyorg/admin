@@ -56,11 +56,12 @@ class Communication::Website::Alert::Localization < ApplicationRecord
   before_validation :set_communication_website_id, on: :create
 
   def git_path(website)
-    "data/alerts/#{language.iso_code}/#{slug}.yml"
+    federation_suffix = alert.suffix_in(website)
+    "data/alerts/#{language.iso_code}/#{slug}#{federation_suffix}.yml"
   end
 
   def should_sync_to?(website)
-    website.id == communication_website_id &&
+    alert.allowed_in?(website) &&
     website.active_language_ids.include?(language_id) &&
     published?
   end

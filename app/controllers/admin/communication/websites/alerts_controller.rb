@@ -83,6 +83,7 @@ class Admin::Communication::Websites::AlertsController < Admin::Communication::W
     params.require(:communication_website_alert)
           .permit(
             :kind,
+            destination_website_ids: [],
             localizations_attributes: [
               :id, :title, :description, :published, :published_at, :slug,
               :cta, :cta_label, :cta_url, :language_id

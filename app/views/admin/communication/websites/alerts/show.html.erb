@@ -12,8 +12,9 @@
   <div class="col-lg-4">
     <%= osuny_small_panel t('metadata') do %>
       <%= render 'admin/application/publication/show', about: @l10n %>
-      <%= render 'admin/application/l10n/widget', about: @alert, l10n: @l10n %>
+      <%= render 'admin/communication/websites/federations/show', about: @alert %>
     <% end %>
+    <%= render 'admin/application/l10n/widget', about: @alert, l10n: @l10n %>
   </div>
     <div class="col-lg-8">
       <%= osuny_small_panel Communication::Website::Alert.human_attribute_name(:kind) do %>

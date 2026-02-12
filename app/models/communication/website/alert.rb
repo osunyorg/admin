@@ -24,6 +24,7 @@ class Communication::Website::Alert < ApplicationRecord
   acts_as_paranoid
 
   include AsDirectObject
+  include Federated
   include Filterable
   include GeneratesGitFiles
   include Lifecyclable
