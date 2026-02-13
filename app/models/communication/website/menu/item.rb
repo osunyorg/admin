@@ -181,15 +181,15 @@ class Communication::Website::Menu::Item < ApplicationRecord
   end
 
   def descendants_targets
-    children.collect(&:descendants_self_and_targets)
+    children.collect(&:descendants_and_self_targets)
             .flatten
             .compact
             .uniq
             .sort
   end
 
-  def descendants_self_and_targets
-    [static_target] + children.collect(&:descendants_self_and_targets)
+  def descendants_and_self_targets
+    [static_target] + children.collect(&:descendants_and_self_targets)
   end
 
   protected
