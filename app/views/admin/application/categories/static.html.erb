@@ -35,8 +35,7 @@ children:
 <%= render 'admin/application/images/shared/static', about: @l10n %>
 <%= osuny_static_text 'meta_description', @l10n.meta_description %>
 <%= osuny_static_html 'summary', @l10n.summary %>
-header_text: >-
-  <%= prepare_html_for_static @l10n.header_text %>
+<%= osuny_static_text 'header_text', @l10n.header_text %>
 <%= render 'admin/application/header_cta/static', about: @l10n %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---
