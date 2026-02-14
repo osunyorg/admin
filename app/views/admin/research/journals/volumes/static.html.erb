@@ -14,7 +14,6 @@ issn = volume.journal.best_localization_for(language).issn
 number: <%= volume.number %>
 <%= osuny_static_text 'issn', issn %>
 <%= osuny_static_text 'keywords', @l10n.keywords %>
-date: "<%= @l10n.published_at.iso8601 %>"
 <%= osuny_static_html 'text', @l10n.text %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= osuny_static_text 'meta_description', @l10n.meta_description %>
