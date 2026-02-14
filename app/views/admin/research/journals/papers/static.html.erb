@@ -44,7 +44,6 @@ volumes:
 end
 %>
 weight: <%= paper.position %>
-date: "<%= @l10n.published_at&.to_date&.iso8601 %>"
 dates:
   published: "<%= @l10n.published_at&.to_date&.iso8601 %>"
   accepted: "<%= paper.accepted_at&.to_date&.iso8601 %>"
