@@ -188,8 +188,7 @@ certifications:
   :registration,
   :results
 ].each do |property| %>
-<%= property.to_s %>: >-
-  <%= prepare_html_for_static @l10n.send("best_#{property}") %>
+<%= osuny_static_html property.to_s, @l10n.send("best_#{property}") %>
 <% end %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---
