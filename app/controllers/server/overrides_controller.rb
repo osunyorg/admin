@@ -13,7 +13,7 @@ class Server::OverridesController < Server::ApplicationController
   end
 
   def analyse
-    Communication::Website::AnalyseAllWebsitesJob.perform_later
+    Communication::Website::AnalyseAllJob.perform_later
     redirect_back fallback_location: server_overrides_path,
                   notice: t('admin.communication.website.git_file.analysis.launched')
   end
