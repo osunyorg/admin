@@ -24,5 +24,6 @@ namespace :server do
   get 'background-jobs' => 'background_jobs#index', as: :background_jobs
   get 'overrides' => 'overrides#index'
   get 'overrides/show' => 'overrides#show', as: :override
+  post 'overrides' => 'overrides#analyse', as: :analyse_overrides
   root to: 'dashboard#index'
 end
