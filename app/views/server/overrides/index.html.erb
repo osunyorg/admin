@@ -1,5 +1,12 @@
 <%= content_for :title, Communication::Website::GitFile::Layout.model_name.human(count: 2) %>
 
+<% content_for :title_right do %>
+  <%= link_to 'Analyser tous les sites',
+              server_analyse_overrides_path,
+              method: :post,
+              class: button_classes %>
+<% end %>
+
 <div class="table-responsive">
   <table class="<%= table_classes %>">
     <thead>
