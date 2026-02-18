@@ -125,8 +125,8 @@ en:
         default_time_zone: Default time zone
         deployment_status_badge: Deployment status badge
         destination_websites: Websites to broadcast content to
-        deuxfleurs_hosting: Hébergement avec Deuxfleurs
-        deuxfleurs_identifier: Identifiant Deuxfleurs
+        deuxfleurs_hosting: Deuxfleurs hosting
+        deuxfleurs_identifier: Deuxfleurs identifier
         feature_agenda: Agenda
         feature_alerts: Alerts
         feature_alumni: Alumni
