@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_19_050236) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_19_104309) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1039,7 +1039,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_050236) do
     t.datetime "created_at", null: false
     t.string "identifier"
     t.uuid "language_id", null: false
-    t.uuid "original_id"
     t.string "title"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
