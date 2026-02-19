@@ -25,13 +25,8 @@ module Api::Osuny::ApplicationController::WithResourceParams
       l10n_permitted_params[:id] = existing_resource_l10n.id if existing_resource_l10n.present?
 
       set_featured_image_to_l10n_params(l10n_permitted_params, l10n: existing_resource_l10n)
-
-      blocks_attributes = l10n_permitted_params.delete(:blocks)
-      l10n_permitted_params[:blocks_attributes] = blocks_attributes.map do |block_params|
-        existing_block = existing_resource_l10n.blocks.find_by(migration_identifier: block_params[:migration_identifier]) if existing_resource_l10n.present?
-        block_params[:id] = existing_block.id if existing_block.present?
-        block_params
-      end if blocks_attributes.present?
+      set_blocks_attributes_to_l10n_params(l10n_permitted_params, l10n: existing_resource_l10n)
+      set_aliases_attributes_to_l10n_params(l10n_permitted_params, l10n: existing_resource_l10n)
 
       base_params[:localizations_attributes] << l10n_permitted_params
     end
@@ -50,6 +45,36 @@ module Api::Osuny::ApplicationController::WithResourceParams
     end
     # Set the image URL so that the object can delay the upload if needed
     l10n_params[:featured_image_new_url] = featured_image_data[:url]
+  end
+
+  def set_blocks_attributes_to_l10n_params(l10n_params, l10n: nil)
+    blocks_attributes = l10n_params.delete(:blocks)
+    return unless blocks_attributes.present?
+    l10n_params[:blocks_attributes] = blocks_attributes.map do |block_params|
+      existing_block = l10n.blocks.find_by(migration_identifier: block_params[:migration_identifier]) if l10n.present?
+      block_params[:id] = existing_block.id if existing_block.present?
+      block_params
+    end
+  end
+
+  def set_aliases_attributes_to_l10n_params(l10n_params, l10n: nil)
+    return unless @website # Aliases only work for direct objects.
+
+    aliases_attributes = l10n_params.delete(:aliases)
+    return unless aliases_attributes.present?
+    l10n_params[:aliases_attributes] = aliases_attributes.map do |alias_params|
+      clean_path = Communication::Website::Permalink.clean_path(alias_params[:path])
+      existing_alias = l10n.aliases.find_by(website: @website, path: clean_path) if l10n.present?
+      alias_params[:id] = existing_alias.id if existing_alias.present?
+      alias_params[:path] = clean_path
+      alias_params[:is_current] = false
+      alias_params[:website_id] = @website.id
+      alias_params
+    end
+  end
+
+  def nested_aliases_params
+    { aliases: [:path, :_destroy] }
   end
 
   def nested_blocks_params

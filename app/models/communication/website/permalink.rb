@@ -26,6 +26,7 @@
 class Communication::Website::Permalink < ApplicationRecord
 
   include WithMapping
+  include WithOpenApi
   # We don't include Sanitizable as this model is never handled by users directly.
   include WithUniversity
 
@@ -33,7 +34,7 @@ class Communication::Website::Permalink < ApplicationRecord
   belongs_to :website, class_name: "Communication::Website"
   belongs_to :about, polymorphic: true
 
-  validates :about_id, :about_type, :path, presence: true
+  validates :about, :path, presence: true
 
   before_validation :set_university, on: :create
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
