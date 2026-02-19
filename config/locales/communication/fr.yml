@@ -253,6 +253,7 @@ fr:
       communication/website/menu/item:
         about: Cible
         children: Sous-éléments
+        html_class: Classe HTML
         kind: Type
         parent: Élément parent
         should_open_new_tab: Ouvrir dans un nouvel onglet
@@ -870,6 +871,8 @@ fr:
         repository: Sous la forme organisation/nom, par exemple noesya/bordeauxmontaigne-iut, à laisser vide lors de la création d'un site avec Deuxfleurs.
         university: Attention, le changement d'université va déconnecter les personnes et organisations qui sont utilisées dans d'autres sites, et déconnecter les personnes des utilisateurs ou utilisatrices.
         url: Laisser ce champ vide à la création du site avec Deuxfleurs, il sera rempli automatiquement.
+      communication_website_menu_item:
+        html_class: Ce paramètre est utile pour coder le site. Les valeurs entrées sont transformées en paramètres (sans accents ni capitales), et les classes générées sont visibles ci-dessous.
       communication_website_page:
         breadcrumb_title: Si ce champ est vide le titre de la page sera utilisé dans le fil d'Ariane.
         full_width: Sur de grands écrans, la page en pleine largeur utilisera tout l'espace disponible, ce qui est pertinent pour événementialiser une page. Si la page n'est pas en pleine largeur, l'espace dédié au contenu sera réduit pour faciliter la lecture, et l'espace libre pourra être utilisé pour une table des matières facilitant la navigation.

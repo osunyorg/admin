@@ -34,6 +34,7 @@ class Server::WebsitesController < Server::ApplicationController
   end
 
   def show
+    @orphans = @website.git_file_orphans.ordered
     @layouts = @website.git_file_layouts.ordered
     breadcrumb
   end

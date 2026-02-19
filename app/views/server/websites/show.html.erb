@@ -8,7 +8,10 @@
   <%= link_to 'Reconstruire (clean and rebuild)',
               clean_and_rebuild_server_website_path(@website),
               method: :post,
-              class: button_classes %>
+              class: button_classes,
+              data: {
+                confirm: t('please_confirm.generic')
+              } %>
   <%= link_to 'Changer d\'université',
               edit_server_website_path(@website),
               class: button_classes %>
@@ -67,23 +70,56 @@
 </div>
 
 <% if @website.git_files_analysed_at %>
-  <div class="table-responsive">
-    <table class="<%= table_classes(with_actions: false) %>">
-      <thead>
-        <tr>
-          <th><%= Communication::Website::GitFile::Layout.model_name.human %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @layouts.each do |layout| %>
+  <div class="mt-5">
+    <p>Analyse du <%= l @website.git_files_analysed_at %></p>
+
+    <p>
+      <%= @orphans.count %>
+      <%= Communication::Website::GitFile::Orphan.model_name.human(count: 2).downcase %>
+    </p>
+    <div class="table-responsive mb-5">
+      <table class="<%= table_classes(with_actions: false) %>">
+        <thead>
           <tr>
-            <td><%= link_to layout.path, layout.git_url, target: :_blank %></td>
+            <th><%= Communication::Website::GitFile::Orphan.human_attribute_name(:path) %></th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @orphans.each do |orphan| %>
+            <tr>
+              <td><%= orphan %></td>
+              <td><%= link_to t('admin.communication.website.git_file.analysis.show_on_git'),
+                              orphan.git_url,
+                              target: :_blank,
+                              classes: button_classes %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      <%= @layouts.count %>
+      <%= Communication::Website::GitFile::Layout.model_name.human(count: 2).downcase %>
+    </p>
+    <div class="table-responsive">
+      <table class="<%= table_classes(with_actions: false) %>">
+        <thead>
+          <tr>
+            <th><%= Communication::Website::GitFile::Layout.model_name.human %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @layouts.each do |layout| %>
+            <tr>
+              <td><%= link_to layout.path, layout.git_url, target: :_blank %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <p>Analyse le <%= l @website.git_files_analysed_at %></p>
 <% end %>
 
 <% if @website.locked_at.present? %>
@@ -92,4 +128,3 @@
     <%= link_to t('server_admin.websites.unlock_for_background_jobs_btn'), unlock_for_background_jobs_server_website_path(@website), method: :post, class: "btn btn-primary" %>
   </div>
 <% end %>
-
