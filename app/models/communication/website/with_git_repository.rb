@@ -105,9 +105,14 @@ module Communication::Website::WithGitRepository
     git_repository.update_theme_version!
   end
 
-  def analyse_repository!
+  def analyse_repository_safely
     return unless git_repository.valid?
     Git::OrphanAndLayoutAnalyzer.new(self).launch
+  end
+
+  def analyse_repository
+    return unless git_repository.valid?
+    Communication::Website::AnalyseJob.perform_later(id)
   end
 
   def git_files_desynchronized
