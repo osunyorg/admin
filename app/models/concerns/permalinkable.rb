@@ -48,7 +48,7 @@ module Permalinkable
     Communication::Website::Permalink.for_object(self, website)
   end
 
-  # Called from git_file.sync
+  # Called from git_file.sync & AddableToCalendar#set_add_to_calendar_urls
   def manage_permalink_in_website(website)
     new_permalink_in_website(website).save_if_needed
   end

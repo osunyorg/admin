@@ -3905,6 +3905,15 @@
             "description": "Data of the block. The structure depends on the template kind.",
             "additionalProperties": false,
             "properties": {
+              "layout": {
+                "type": "string",
+                "enum": [
+                  "carousel",
+                  "grid",
+                  "list",
+                  "large"
+                ]
+              },
               "elements": {
                 "type": "array",
                 "items": {
@@ -5510,7 +5519,7 @@
                 "examples": {
                   "Successful creation from URL": {
                     "value": {
-                      "id": "e5b6568f-0f1d-45dd-ab8b-653b92db23f2",
+                      "id": "15976edb-bfcb-4181-b048-7831a02063e1",
                       "origin": "upload",
                       "original_byte_size": 209695,
                       "original_checksum": "QsXsRgYKra3Cu9u5ia/TfA==",
@@ -5519,28 +5528,28 @@
                       "communication_media_collection_id": null,
                       "localizations": {
                         "fr": {
-                          "id": "b5b72535-36c7-4450-a7d5-d3b4c51a9dc0",
+                          "id": "0f45d834-7413-46ac-82af-94d804b27199",
                           "name": "Photo-1703923633616-254e78f6e9df",
                           "alt": null,
                           "credit": null,
                           "internal_description": null,
-                          "created_at": "2025-12-05T12:19:50.073+01:00",
-                          "updated_at": "2025-12-05T12:19:50.073+01:00"
+                          "created_at": "2026-02-19T10:50:53.453+01:00",
+                          "updated_at": "2026-02-19T10:50:53.453+01:00"
                         }
                       },
                       "original_blob": {
-                        "id": "7e3e4be5-601f-413b-b0dc-02ac6890b637",
-                        "signed_id": "eyJfcmFpbHMiOnsiZGF0YSI6IjdlM2U0YmU1LTYwMWYtNDEzYi1iMGRjLTAyYWM2ODkwYjYzNyIsInB1ciI6ImJsb2JfaWQifX0=--6028d364a99818013f3f427ddb9a06313197d5d5",
+                        "id": "614681ca-c5a4-40b2-af58-dad384606781",
+                        "signed_id": "eyJfcmFpbHMiOnsiZGF0YSI6IjYxNDY4MWNhLWM1YTQtNDBiMi1hZjU4LWRhZDM4NDYwNjc4MSIsInB1ciI6ImJsb2JfaWQifX0=--25e24cadc1911628bbc838f1319bdac1d726054a",
                         "filename": "photo-1703923633616-254e78f6e9df",
                         "content_type": "image/jpeg"
                       },
-                      "created_at": "2025-12-05T12:19:50.016+01:00",
-                      "updated_at": "2025-12-05T12:19:50.080+01:00"
+                      "created_at": "2026-02-19T10:50:53.444+01:00",
+                      "updated_at": "2026-02-19T10:50:53.454+01:00"
                     }
                   },
                   "Successful creation from file": {
                     "value": {
-                      "id": "dc5fcbdc-2289-44de-a50b-26ce29eae6af",
+                      "id": "8b02c3b2-8be2-41fb-a887-aa40986daedf",
                       "origin": "upload",
                       "original_byte_size": 160464,
                       "original_checksum": "oC3iR5ord7vUxOkvlCBcgA==",
@@ -5549,23 +5558,23 @@
                       "communication_media_collection_id": null,
                       "localizations": {
                         "fr": {
-                          "id": "a1e6ca31-4fa4-4cd5-b5fb-1b96195ae16b",
+                          "id": "2cfb8c71-a5a8-4f35-b6a1-85cd3695080e",
                           "name": "Dan-gold",
                           "alt": null,
                           "credit": null,
                           "internal_description": null,
-                          "created_at": "2025-12-05T12:19:50.167+01:00",
-                          "updated_at": "2025-12-05T12:19:50.167+01:00"
+                          "created_at": "2026-02-19T10:50:53.479+01:00",
+                          "updated_at": "2026-02-19T10:50:53.479+01:00"
                         }
                       },
                       "original_blob": {
-                        "id": "62c96930-29d5-488d-85de-948d5b8d6f0e",
-                        "signed_id": "eyJfcmFpbHMiOnsiZGF0YSI6IjYyYzk2OTMwLTI5ZDUtNDg4ZC04NWRlLTk0OGQ1YjhkNmYwZSIsInB1ciI6ImJsb2JfaWQifX0=--0de865841c71b6c93819b10d9bbde7bbace01a44",
+                        "id": "8900bc6f-2782-4ffb-b25e-a1984cff9bdc",
+                        "signed_id": "eyJfcmFpbHMiOnsiZGF0YSI6Ijg5MDBiYzZmLTI3ODItNGZmYi1iMjVlLWExOTg0Y2ZmOWJkYyIsInB1ciI6ImJsb2JfaWQifX0=--3cd85056fdd702d0d6eedefd3c9eed16e0884ba9",
                         "filename": "dan-gold.jpeg",
                         "content_type": "image/jpeg"
                       },
-                      "created_at": "2025-12-05T12:19:50.157+01:00",
-                      "updated_at": "2025-12-05T12:19:50.176+01:00"
+                      "created_at": "2026-02-19T10:50:53.477+01:00",
+                      "updated_at": "2026-02-19T10:50:53.480+01:00"
                     }
                   }
                 }
@@ -5685,12 +5694,12 @@
                             "slug": "categorie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.011+01:00",
-                            "updated_at": "2025-12-05T12:19:49.011+01:00"
+                            "created_at": "2026-02-19T10:50:52.938+01:00",
+                            "updated_at": "2026-02-19T10:50:52.938+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.007+01:00",
-                        "updated_at": "2025-12-05T12:19:49.007+01:00"
+                        "created_at": "2026-02-19T10:50:52.935+01:00",
+                        "updated_at": "2026-02-19T10:50:52.935+01:00"
                       },
                       {
                         "id": "106650c4-d6f6-5c43-ba44-fdd4353b369b",
@@ -5719,12 +5728,12 @@
                             "slug": "taxonomie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.011+01:00",
-                            "updated_at": "2025-12-05T12:19:49.011+01:00"
+                            "created_at": "2026-02-19T10:50:52.938+01:00",
+                            "updated_at": "2026-02-19T10:50:52.938+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.007+01:00",
-                        "updated_at": "2025-12-05T12:19:49.007+01:00"
+                        "created_at": "2026-02-19T10:50:52.935+01:00",
+                        "updated_at": "2026-02-19T10:50:52.935+01:00"
                       },
                       {
                         "id": "90b8e848-5d73-5866-a250-c1f5d33eb3d7",
@@ -5753,12 +5762,12 @@
                             "slug": "element-de-taxonomie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.011+01:00",
-                            "updated_at": "2025-12-05T12:19:49.011+01:00"
+                            "created_at": "2026-02-19T10:50:52.938+01:00",
+                            "updated_at": "2026-02-19T10:50:52.938+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.007+01:00",
-                        "updated_at": "2025-12-05T12:19:49.007+01:00"
+                        "created_at": "2026-02-19T10:50:52.935+01:00",
+                        "updated_at": "2026-02-19T10:50:52.935+01:00"
                       }
                     ]
                   }
@@ -5831,14 +5840,14 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "f320ae46-cf85-42db-9192-680cfe429e26",
+                      "id": "3db33814-f4d2-4e86-bbd1-46ef99d354d8",
                       "migration_identifier": "agenda-category-from-api-1",
                       "parent_id": null,
                       "position": 3,
                       "is_taxonomy": false,
                       "localizations": {
                         "fr": {
-                          "id": "98e5a32c-41a3-4b0d-ad2c-e67791679d9c",
+                          "id": "6e0c866f-0ad9-447d-a175-70b9b2e13f23",
                           "migration_identifier": "agenda-category-from-api-1-fr",
                           "name": "Ma nouvelle catégorie",
                           "breadcrumb_title": null,
@@ -5858,7 +5867,7 @@
                           "summary": "<p>Ceci est une nouvelle catégorie créée depuis l'API.</p>",
                           "blocks": [
                             {
-                              "id": "af9f3455-02b4-4827-ab8c-38e31ad615bf",
+                              "id": "83965d6f-c988-4484-be98-fe56757f2860",
                               "migration_identifier": "agenda-category-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -5875,16 +5884,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2025-12-05T12:19:50.414+01:00",
-                              "updated_at": "2025-12-05T12:19:50.414+01:00"
+                              "created_at": "2026-02-19T10:50:53.589+01:00",
+                              "updated_at": "2026-02-19T10:50:53.589+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:50.408+01:00",
-                          "updated_at": "2025-12-05T12:19:50.419+01:00"
+                          "created_at": "2026-02-19T10:50:53.587+01:00",
+                          "updated_at": "2026-02-19T10:50:53.590+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:50.403+01:00",
-                      "updated_at": "2025-12-05T12:19:50.427+01:00"
+                      "created_at": "2026-02-19T10:50:53.585+01:00",
+                      "updated_at": "2026-02-19T10:50:53.591+01:00"
                     }
                   }
                 }
@@ -6010,14 +6019,14 @@
                     "value": {
                       "created": [
                         {
-                          "id": "9a5d5feb-c737-4c0a-b9e3-13bf1c5fe6e3",
+                          "id": "46fe8f74-7915-48a5-b8f5-6b3998bd104c",
                           "migration_identifier": "agenda-category-from-api-1",
                           "parent_id": null,
                           "position": 3,
                           "is_taxonomy": false,
                           "localizations": {
                             "fr": {
-                              "id": "1af5a4d3-b526-4578-b090-0e2094ff7821",
+                              "id": "dd636cb8-3d05-4f56-bfe8-a3e2061e81e1",
                               "migration_identifier": "agenda-category-from-api-1-fr",
                               "name": "Ma nouvelle catégorie",
                               "breadcrumb_title": null,
@@ -6037,7 +6046,7 @@
                               "summary": "<p>Ceci est une nouvelle catégorie créée depuis l'API.</p>",
                               "blocks": [
                                 {
-                                  "id": "fa21318d-128a-4dd7-b717-34b1d5c53d29",
+                                  "id": "d7197ae3-7fa1-47c2-9d90-7504edd5e6a6",
                                   "migration_identifier": "agenda-category-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -6054,16 +6063,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2025-12-05T12:19:50.720+01:00",
-                                  "updated_at": "2025-12-05T12:19:50.720+01:00"
+                                  "created_at": "2026-02-19T10:50:53.674+01:00",
+                                  "updated_at": "2026-02-19T10:50:53.674+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:50.719+01:00",
-                              "updated_at": "2025-12-05T12:19:50.723+01:00"
+                              "created_at": "2026-02-19T10:50:53.673+01:00",
+                              "updated_at": "2026-02-19T10:50:53.675+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:50.716+01:00",
-                          "updated_at": "2025-12-05T12:19:50.725+01:00"
+                          "created_at": "2026-02-19T10:50:53.672+01:00",
+                          "updated_at": "2026-02-19T10:50:53.676+01:00"
                         }
                       ],
                       "updated": [
@@ -6094,12 +6103,12 @@
                               "slug": "categorie-de-test",
                               "summary": null,
                               "blocks": [],
-                              "created_at": "2025-12-05T12:19:49.011+01:00",
-                              "updated_at": "2025-12-05T12:19:50.817+01:00"
+                              "created_at": "2026-02-19T10:50:52.938+01:00",
+                              "updated_at": "2026-02-19T10:50:53.699+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:49.007+01:00",
-                          "updated_at": "2025-12-05T12:19:50.825+01:00"
+                          "created_at": "2026-02-19T10:50:52.935+01:00",
+                          "updated_at": "2026-02-19T10:50:53.700+01:00"
                         }
                       ],
                       "errors": []
@@ -6282,12 +6291,12 @@
                           "slug": "categorie-de-test",
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.011+01:00",
-                          "updated_at": "2025-12-05T12:19:49.011+01:00"
+                          "created_at": "2026-02-19T10:50:52.938+01:00",
+                          "updated_at": "2026-02-19T10:50:52.938+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.007+01:00",
-                      "updated_at": "2025-12-05T12:19:49.007+01:00"
+                      "created_at": "2026-02-19T10:50:52.935+01:00",
+                      "updated_at": "2026-02-19T10:50:52.935+01:00"
                     }
                   }
                 }
@@ -6393,12 +6402,12 @@
                           "slug": "categorie-de-test",
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.011+01:00",
-                          "updated_at": "2025-12-05T12:19:51.037+01:00"
+                          "created_at": "2026-02-19T10:50:52.938+01:00",
+                          "updated_at": "2026-02-19T10:50:53.772+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.007+01:00",
-                      "updated_at": "2025-12-05T12:19:51.038+01:00"
+                      "created_at": "2026-02-19T10:50:52.935+01:00",
+                      "updated_at": "2026-02-19T10:50:53.772+01:00"
                     }
                   }
                 }
@@ -6651,8 +6660,8 @@
                               "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12&enddt=2024-07-13&allday=true"
                             },
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.014+01:00",
-                            "updated_at": "2025-12-05T12:19:49.014+01:00"
+                            "created_at": "2026-02-19T10:50:52.942+01:00",
+                            "updated_at": "2026-02-19T10:50:52.942+01:00"
                           }
                         },
                         "time_slots": [
@@ -6674,19 +6683,19 @@
                                   "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T06:00:00Z&enddt=2024-07-12T10:00:00Z",
                                   "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T06:00:00Z&enddt=2024-07-12T10:00:00Z"
                                 },
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           }
                         ],
                         "category_ids": [
                           "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                         ],
-                        "created_at": "2025-12-05T12:19:49.047+01:00",
-                        "updated_at": "2025-12-05T12:19:49.047+01:00"
+                        "created_at": "2026-02-19T10:50:52.949+01:00",
+                        "updated_at": "2026-02-19T10:50:52.949+01:00"
                       },
                       {
                         "id": "3bad735a-6202-58e6-9639-de6d21a5ae1f",
@@ -6720,8 +6729,8 @@
                             "header_cta_url": null,
                             "add_to_calendar_urls": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.014+01:00",
-                            "updated_at": "2025-12-05T12:19:49.014+01:00"
+                            "created_at": "2026-02-19T10:50:52.942+01:00",
+                            "updated_at": "2026-02-19T10:50:52.942+01:00"
                           }
                         },
                         "time_slots": [
@@ -6737,17 +6746,17 @@
                                 "place": null,
                                 "slug": "14-09-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           }
                         ],
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.047+01:00",
-                        "updated_at": "2025-12-05T12:19:49.047+01:00"
+                        "created_at": "2026-02-19T10:50:52.949+01:00",
+                        "updated_at": "2026-02-19T10:50:52.949+01:00"
                       },
                       {
                         "id": "a45392dd-c842-506c-a57d-51deaaf9a800",
@@ -6781,16 +6790,16 @@
                             "header_cta_url": null,
                             "add_to_calendar_urls": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.014+01:00",
-                            "updated_at": "2025-12-05T12:19:49.014+01:00"
+                            "created_at": "2026-02-19T10:50:52.942+01:00",
+                            "updated_at": "2026-02-19T10:50:52.942+01:00"
                           }
                         },
                         "time_slots": [],
                         "category_ids": [
                           "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                         ],
-                        "created_at": "2025-12-05T12:19:49.047+01:00",
-                        "updated_at": "2025-12-05T12:19:49.047+01:00"
+                        "created_at": "2026-02-19T10:50:52.949+01:00",
+                        "updated_at": "2026-02-19T10:50:52.949+01:00"
                       },
                       {
                         "id": "b2d56bf0-65b4-5d1e-92dd-a3cd3eabc770",
@@ -6824,8 +6833,8 @@
                             "header_cta_url": null,
                             "add_to_calendar_urls": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.014+01:00",
-                            "updated_at": "2025-12-05T12:19:49.014+01:00"
+                            "created_at": "2026-02-19T10:50:52.942+01:00",
+                            "updated_at": "2026-02-19T10:50:52.942+01:00"
                           }
                         },
                         "time_slots": [
@@ -6841,17 +6850,17 @@
                                 "place": null,
                                 "slug": "15-09-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           }
                         ],
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.047+01:00",
-                        "updated_at": "2025-12-05T12:19:49.047+01:00"
+                        "created_at": "2026-02-19T10:50:52.949+01:00",
+                        "updated_at": "2026-02-19T10:50:52.949+01:00"
                       },
                       {
                         "id": "7cf4695a-862b-50cc-82ff-0a2b3b98c918",
@@ -6885,8 +6894,8 @@
                             "header_cta_url": null,
                             "add_to_calendar_urls": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.014+01:00",
-                            "updated_at": "2025-12-05T12:19:49.014+01:00"
+                            "created_at": "2026-02-19T10:50:52.942+01:00",
+                            "updated_at": "2026-02-19T10:50:52.942+01:00"
                           }
                         },
                         "time_slots": [
@@ -6902,12 +6911,12 @@
                                 "place": null,
                                 "slug": "01-07-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           },
                           {
                             "id": "94cce073-7cb5-5a28-9672-60a11b9f993d",
@@ -6921,12 +6930,12 @@
                                 "place": null,
                                 "slug": "01-07-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           },
                           {
                             "id": "647402bd-f1d5-5fda-bc44-1ef2b183cab1",
@@ -6940,12 +6949,12 @@
                                 "place": null,
                                 "slug": "01-07-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           },
                           {
                             "id": "6b1c68f9-22fa-5494-9ece-1c54c2a2b4b5",
@@ -6959,12 +6968,12 @@
                                 "place": null,
                                 "slug": "01-07-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           },
                           {
                             "id": "4df4e5dc-4c61-5029-977a-871fb400ced5",
@@ -6978,17 +6987,17 @@
                                 "place": null,
                                 "slug": "01-07-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           }
                         ],
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.047+01:00",
-                        "updated_at": "2025-12-05T12:19:49.047+01:00"
+                        "created_at": "2026-02-19T10:50:52.949+01:00",
+                        "updated_at": "2026-02-19T10:50:52.949+01:00"
                       },
                       {
                         "id": "54a2dbda-9a70-550b-b83f-47582fd33d1e",
@@ -7022,14 +7031,14 @@
                             "header_cta_url": null,
                             "add_to_calendar_urls": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.014+01:00",
-                            "updated_at": "2025-12-05T12:19:49.014+01:00"
+                            "created_at": "2026-02-19T10:50:52.942+01:00",
+                            "updated_at": "2026-02-19T10:50:52.942+01:00"
                           }
                         },
                         "time_slots": [],
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.047+01:00",
-                        "updated_at": "2025-12-05T12:19:49.047+01:00"
+                        "created_at": "2026-02-19T10:50:52.949+01:00",
+                        "updated_at": "2026-02-19T10:50:52.949+01:00"
                       },
                       {
                         "id": "53dbe65c-5cc2-5560-ad7e-0a5482554663",
@@ -7063,14 +7072,14 @@
                             "header_cta_url": null,
                             "add_to_calendar_urls": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.014+01:00",
-                            "updated_at": "2025-12-05T12:19:49.014+01:00"
+                            "created_at": "2026-02-19T10:50:52.942+01:00",
+                            "updated_at": "2026-02-19T10:50:52.942+01:00"
                           }
                         },
                         "time_slots": [],
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.047+01:00",
-                        "updated_at": "2025-12-05T12:19:49.047+01:00"
+                        "created_at": "2026-02-19T10:50:52.949+01:00",
+                        "updated_at": "2026-02-19T10:50:52.949+01:00"
                       },
                       {
                         "id": "66db0d42-a73a-5800-8205-a55310bc36f7",
@@ -7104,8 +7113,8 @@
                             "header_cta_url": null,
                             "add_to_calendar_urls": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.014+01:00",
-                            "updated_at": "2025-12-05T12:19:49.014+01:00"
+                            "created_at": "2026-02-19T10:50:52.942+01:00",
+                            "updated_at": "2026-02-19T10:50:52.942+01:00"
                           }
                         },
                         "time_slots": [
@@ -7121,17 +7130,17 @@
                                 "place": null,
                                 "slug": "02-07-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           }
                         ],
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.047+01:00",
-                        "updated_at": "2025-12-05T12:19:49.047+01:00"
+                        "created_at": "2026-02-19T10:50:52.949+01:00",
+                        "updated_at": "2026-02-19T10:50:52.949+01:00"
                       },
                       {
                         "id": "6c4f2fb8-e1f4-5b60-87e6-f02f89370f7f",
@@ -7165,8 +7174,8 @@
                             "header_cta_url": null,
                             "add_to_calendar_urls": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.014+01:00",
-                            "updated_at": "2025-12-05T12:19:49.014+01:00"
+                            "created_at": "2026-02-19T10:50:52.942+01:00",
+                            "updated_at": "2026-02-19T10:50:52.942+01:00"
                           }
                         },
                         "time_slots": [
@@ -7182,12 +7191,12 @@
                                 "place": null,
                                 "slug": "03-08-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           },
                           {
                             "id": "87e3157d-8538-5056-abbd-05c3543857cc",
@@ -7201,12 +7210,12 @@
                                 "place": null,
                                 "slug": "03-12-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           },
                           {
                             "id": "08af8e1b-f3ae-5e3f-ace6-927a447ce0f0",
@@ -7220,17 +7229,17 @@
                                 "place": null,
                                 "slug": "03-16-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           }
                         ],
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.047+01:00",
-                        "updated_at": "2025-12-05T12:19:49.047+01:00"
+                        "created_at": "2026-02-19T10:50:52.949+01:00",
+                        "updated_at": "2026-02-19T10:50:52.949+01:00"
                       },
                       {
                         "id": "ac0190ec-ace5-5072-8119-dde740e7c20e",
@@ -7264,8 +7273,8 @@
                             "header_cta_url": null,
                             "add_to_calendar_urls": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.014+01:00",
-                            "updated_at": "2025-12-05T12:19:49.014+01:00"
+                            "created_at": "2026-02-19T10:50:52.942+01:00",
+                            "updated_at": "2026-02-19T10:50:52.942+01:00"
                           }
                         },
                         "time_slots": [
@@ -7281,12 +7290,12 @@
                                 "place": null,
                                 "slug": "02-08-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           },
                           {
                             "id": "56af6691-1d6b-5477-8b85-60cf118efdae",
@@ -7300,12 +7309,12 @@
                                 "place": null,
                                 "slug": "03-08-30",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           },
                           {
                             "id": "b3a89e5a-fbe0-51c4-835c-3414bd39ffed",
@@ -7319,12 +7328,12 @@
                                 "place": null,
                                 "slug": "05-08-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           },
                           {
                             "id": "b6090267-68f9-54f5-96d8-cb2eeea24646",
@@ -7338,17 +7347,17 @@
                                 "place": null,
                                 "slug": "05-20-00",
                                 "add_to_calendar_urls": null,
-                                "created_at": "2025-12-05T12:19:49.025+01:00",
-                                "updated_at": "2025-12-05T12:19:49.025+01:00"
+                                "created_at": "2026-02-19T10:50:52.945+01:00",
+                                "updated_at": "2026-02-19T10:50:52.945+01:00"
                               }
                             },
-                            "created_at": "2025-12-05T12:19:49.043+01:00",
-                            "updated_at": "2025-12-05T12:19:49.043+01:00"
+                            "created_at": "2026-02-19T10:50:52.947+01:00",
+                            "updated_at": "2026-02-19T10:50:52.947+01:00"
                           }
                         ],
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.047+01:00",
-                        "updated_at": "2025-12-05T12:19:49.047+01:00"
+                        "created_at": "2026-02-19T10:50:52.949+01:00",
+                        "updated_at": "2026-02-19T10:50:52.949+01:00"
                       }
                     ]
                   }
@@ -7421,7 +7430,7 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "766481f0-b65c-4a82-bd1e-fbc8e2d03d5b",
+                      "id": "5eb37909-52ca-4f31-9e1f-227a47254ef7",
                       "migration_identifier": "event-from-api-1",
                       "from_day": "2024-12-24",
                       "to_day": "2024-12-24",
@@ -7430,7 +7439,7 @@
                       "parent_id": null,
                       "localizations": {
                         "fr": {
-                          "id": "6dcfc117-772e-4b7e-a693-29fe5be443f6",
+                          "id": "2feee513-adab-479f-bbfa-b93f1e2bd320",
                           "migration_identifier": "event-from-api-1-fr",
                           "title": "Noël",
                           "featured_image": {
@@ -7455,11 +7464,11 @@
                             "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&ST=20241224&ET=20241224&DUR=allday&DESC=Le%20repas%20de%20No%C3%ABl%20en%20famille.",
                             "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&startdt=2024-12-24&enddt=2024-12-25&allday=true&body=Le%20repas%20de%20No%C3%ABl%20en%20famille.",
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&startdt=2024-12-24&enddt=2024-12-25&allday=true&body=Le%20repas%20de%20No%C3%ABl%20en%20famille.",
-                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20251205T121951Z%0ADTSTART;VALUE=DATE:20241224%0ADTEND;VALUE=DATE:20241225%0ASUMMARY:No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Le%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241223T230000Z-No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
+                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20260219T105054Z%0ADTSTART;VALUE=DATE:20241224%0ADTEND;VALUE=DATE:20241225%0ASUMMARY:No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Le%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241223T230000Z-No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
                           },
                           "blocks": [
                             {
-                              "id": "067b5327-35a6-46ec-a879-aac17702cc86",
+                              "id": "20f6b054-6e5a-4cb9-9198-20f7933cf3fa",
                               "migration_identifier": "event-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -7476,46 +7485,46 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2025-12-05T12:19:51.944+01:00",
-                              "updated_at": "2025-12-05T12:19:51.944+01:00"
+                              "created_at": "2026-02-19T10:50:54.133+01:00",
+                              "updated_at": "2026-02-19T10:50:54.133+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:51.938+01:00",
-                          "updated_at": "2025-12-05T12:19:51.946+01:00"
+                          "created_at": "2026-02-19T10:50:54.132+01:00",
+                          "updated_at": "2026-02-19T10:50:54.134+01:00"
                         }
                       },
                       "time_slots": [
                         {
-                          "id": "de72b7ce-81f8-421a-a6e6-0acd4a57d9d7",
+                          "id": "ff55b931-150e-435e-99e3-5b03f9ad598c",
                           "migration_identifier": "event-from-api-1-time-slot-1",
                           "datetime": "2024-12-24T19:00:00.000+01:00",
                           "duration": 10800,
                           "localizations": {
                             "fr": {
-                              "id": "3fc253c7-05b1-4a57-9f33-8d1c3a6c55c7",
+                              "id": "cac2b41c-bc6b-4cba-b704-3ecd60fe9199",
                               "migration_identifier": "event-from-api-1-time-slot-1-fr",
                               "place": "Salle à manger",
                               "slug": "24-19-00",
                               "add_to_calendar_urls": {
-                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20251205T121951Z%0ADTSTART:20241224T180000Z%0ADTEND:20241224T210000Z%0ASUMMARY:No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0ADESCRIPTION:%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E%0AUID:-20241224T180000Z-No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR",
+                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20260219T105054Z%0ADTSTART:20241224T180000Z%0ADTEND:20241224T210000Z%0ASUMMARY:No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0ADESCRIPTION:%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E%0AUID:-20241224T180000Z-No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR",
                                 "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&ST=20241224T180000Z&DUR=0300&DESC=%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E",
                                 "google": "https://www.google.com/calendar/render?action=TEMPLATE&text=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&dates=20241224T190000/20241224T220000&ctz=Europe/Paris&details=%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E",
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-24T21:00:00Z&body=%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-24T21:00:00Z&body=%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E"
                               },
-                              "created_at": "2025-12-05T12:19:51.976+01:00",
-                              "updated_at": "2025-12-05T12:19:51.976+01:00"
+                              "created_at": "2026-02-19T10:50:54.142+01:00",
+                              "updated_at": "2026-02-19T10:50:54.142+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:51.960+01:00",
-                          "updated_at": "2025-12-05T12:19:51.978+01:00"
+                          "created_at": "2026-02-19T10:50:54.139+01:00",
+                          "updated_at": "2026-02-19T10:50:54.143+01:00"
                         }
                       ],
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:51.771+01:00",
-                      "updated_at": "2025-12-05T12:19:52.103+01:00"
+                      "created_at": "2026-02-19T10:50:54.130+01:00",
+                      "updated_at": "2026-02-19T10:50:54.215+01:00"
                     }
                   }
                 }
@@ -7642,7 +7651,7 @@
                     "value": {
                       "created": [
                         {
-                          "id": "f7178c9a-1a97-4021-8e2c-c107b29075d3",
+                          "id": "6ed9d840-b151-441f-9313-5ad64e700a9c",
                           "migration_identifier": "event-from-api-1",
                           "from_day": "2024-12-24",
                           "to_day": "2024-12-24",
@@ -7651,7 +7660,7 @@
                           "parent_id": null,
                           "localizations": {
                             "fr": {
-                              "id": "9eebf0c4-d0e2-4052-86a3-8ea102b10fec",
+                              "id": "c73f91b1-9c43-479a-b2b7-093a4e22ea77",
                               "migration_identifier": "event-from-api-1-fr",
                               "title": "Noël",
                               "featured_image": {
@@ -7676,11 +7685,11 @@
                                 "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&ST=20241224&ET=20241224&DUR=allday&DESC=Le%20repas%20de%20No%C3%ABl%20en%20famille.",
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&startdt=2024-12-24&enddt=2024-12-25&allday=true&body=Le%20repas%20de%20No%C3%ABl%20en%20famille.",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&startdt=2024-12-24&enddt=2024-12-25&allday=true&body=Le%20repas%20de%20No%C3%ABl%20en%20famille.",
-                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20251205T121952Z%0ADTSTART;VALUE=DATE:20241224%0ADTEND;VALUE=DATE:20241225%0ASUMMARY:No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Le%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241223T230000Z-No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
+                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20260219T105054Z%0ADTSTART;VALUE=DATE:20241224%0ADTEND;VALUE=DATE:20241225%0ASUMMARY:No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0ADESCRIPTION:Le%20repas%20de%20No%C3%ABl%20en%20famille.%0AUID:-20241223T230000Z-No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR"
                               },
                               "blocks": [
                                 {
-                                  "id": "c522f3f1-abaf-44ea-b01d-5808c3f324be",
+                                  "id": "b63da28e-79f9-4ef5-8a07-b366d053fb18",
                                   "migration_identifier": "event-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -7697,46 +7706,46 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2025-12-05T12:19:52.391+01:00",
-                                  "updated_at": "2025-12-05T12:19:52.391+01:00"
+                                  "created_at": "2026-02-19T10:50:54.298+01:00",
+                                  "updated_at": "2026-02-19T10:50:54.298+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:52.388+01:00",
-                              "updated_at": "2025-12-05T12:19:52.393+01:00"
+                              "created_at": "2026-02-19T10:50:54.297+01:00",
+                              "updated_at": "2026-02-19T10:50:54.299+01:00"
                             }
                           },
                           "time_slots": [
                             {
-                              "id": "bb52ac8e-60ea-4733-9072-08f22d1d530e",
+                              "id": "ce13b88f-3574-46cc-8a7f-a06dee87273b",
                               "migration_identifier": "event-from-api-1-time-slot-1",
                               "datetime": "2024-12-24T19:00:00.000+01:00",
                               "duration": 10800,
                               "localizations": {
                                 "fr": {
-                                  "id": "cf1d92c0-138e-45c3-a2fa-1836346a4a0f",
+                                  "id": "c72c2639-fd6d-482e-86cb-7ca5837d1d66",
                                   "migration_identifier": "event-from-api-1-time-slot-1-fr",
                                   "place": "Salle à manger",
                                   "slug": "24-19-00",
                                   "add_to_calendar_urls": {
-                                    "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20251205T121952Z%0ADTSTART:20241224T180000Z%0ADTEND:20241224T210000Z%0ASUMMARY:No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0ADESCRIPTION:%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E%0AUID:-20241224T180000Z-No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR",
+                                    "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20260219T105054Z%0ADTSTART:20241224T180000Z%0ADTEND:20241224T210000Z%0ASUMMARY:No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0ADESCRIPTION:%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E%0AUID:-20241224T180000Z-No%C3%ABl%20Le%20repas%20de%20No%C3%ABl%0AEND:VEVENT%0AEND:VCALENDAR",
                                     "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&ST=20241224T180000Z&DUR=0300&DESC=%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E",
                                     "google": "https://www.google.com/calendar/render?action=TEMPLATE&text=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&dates=20241224T190000/20241224T220000&ctz=Europe/Paris&details=%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E",
                                     "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-24T21:00:00Z&body=%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E",
                                     "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=No%C3%ABl%20Le%20repas%20de%20No%C3%ABl&startdt=2024-12-24T18:00:00Z&enddt=2024-12-24T21:00:00Z&body=%3Cp%3ELe%20repas%20de%20No%C3%ABl%20en%20famille.%3C%2Fp%3E"
                                   },
-                                  "created_at": "2025-12-05T12:19:52.420+01:00",
-                                  "updated_at": "2025-12-05T12:19:52.420+01:00"
+                                  "created_at": "2026-02-19T10:50:54.302+01:00",
+                                  "updated_at": "2026-02-19T10:50:54.302+01:00"
                                 }
                               },
-                              "created_at": "2025-12-05T12:19:52.398+01:00",
-                              "updated_at": "2025-12-05T12:19:52.421+01:00"
+                              "created_at": "2026-02-19T10:50:54.300+01:00",
+                              "updated_at": "2026-02-19T10:50:54.303+01:00"
                             }
                           ],
                           "category_ids": [
                             "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                           ],
-                          "created_at": "2025-12-05T12:19:52.281+01:00",
-                          "updated_at": "2025-12-05T12:19:52.540+01:00"
+                          "created_at": "2026-02-19T10:50:54.295+01:00",
+                          "updated_at": "2026-02-19T10:50:54.338+01:00"
                         }
                       ],
                       "updated": [
@@ -7775,11 +7784,11 @@
                                 "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Mon%20nouveau%20titre%20&ST=20240712&ET=20240712&DUR=allday",
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12&enddt=2024-07-13&allday=true",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12&enddt=2024-07-13&allday=true",
-                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20251205T121952Z%0ADTSTART;VALUE=DATE:20240712%0ADTEND;VALUE=DATE:20240713%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240711T220000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
+                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20260219T105054Z%0ADTSTART;VALUE=DATE:20240712%0ADTEND;VALUE=DATE:20240713%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240711T220000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
                               },
                               "blocks": [],
-                              "created_at": "2025-12-05T12:19:49.014+01:00",
-                              "updated_at": "2025-12-05T12:19:52.711+01:00"
+                              "created_at": "2026-02-19T10:50:52.942+01:00",
+                              "updated_at": "2026-02-19T10:50:54.485+01:00"
                             }
                           },
                           "time_slots": [
@@ -7795,25 +7804,25 @@
                                   "place": "Salon",
                                   "slug": "12-08-00",
                                   "add_to_calendar_urls": {
-                                    "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20251205T121952Z%0ADTSTART:20240712T060000Z%0ADTEND:20240712T080000Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T060000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR",
+                                    "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20260219T105054Z%0ADTSTART:20240712T060000Z%0ADTEND:20240712T080000Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T060000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR",
                                     "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Mon%20nouveau%20titre%20&ST=20240712T060000Z&DUR=0200",
                                     "google": "https://www.google.com/calendar/render?action=TEMPLATE&text=Mon%20nouveau%20titre%20&dates=20240712T080000/20240712T100000&ctz=Europe/Paris",
                                     "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T06:00:00Z&enddt=2024-07-12T08:00:00Z",
                                     "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T06:00:00Z&enddt=2024-07-12T08:00:00Z"
                                   },
-                                  "created_at": "2025-12-05T12:19:49.025+01:00",
-                                  "updated_at": "2025-12-05T12:19:52.728+01:00"
+                                  "created_at": "2026-02-19T10:50:52.945+01:00",
+                                  "updated_at": "2026-02-19T10:50:54.491+01:00"
                                 }
                               },
-                              "created_at": "2025-12-05T12:19:49.043+01:00",
-                              "updated_at": "2025-12-05T12:19:52.730+01:00"
+                              "created_at": "2026-02-19T10:50:52.947+01:00",
+                              "updated_at": "2026-02-19T10:50:54.492+01:00"
                             }
                           ],
                           "category_ids": [
                             "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                           ],
-                          "created_at": "2025-12-05T12:19:49.047+01:00",
-                          "updated_at": "2025-12-05T12:19:52.712+01:00"
+                          "created_at": "2026-02-19T10:50:52.949+01:00",
+                          "updated_at": "2026-02-19T10:50:54.486+01:00"
                         }
                       ],
                       "errors": []
@@ -8008,8 +8017,8 @@
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12&enddt=2024-07-13&allday=true"
                           },
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.014+01:00",
-                          "updated_at": "2025-12-05T12:19:49.014+01:00"
+                          "created_at": "2026-02-19T10:50:52.942+01:00",
+                          "updated_at": "2026-02-19T10:50:52.942+01:00"
                         }
                       },
                       "time_slots": [
@@ -8031,19 +8040,19 @@
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T06:00:00Z&enddt=2024-07-12T10:00:00Z",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Coupe%20du%20Monde%20d%27Escalade%202024%20-%20Chamonix%20&startdt=2024-07-12T06:00:00Z&enddt=2024-07-12T10:00:00Z"
                               },
-                              "created_at": "2025-12-05T12:19:49.025+01:00",
-                              "updated_at": "2025-12-05T12:19:49.025+01:00"
+                              "created_at": "2026-02-19T10:50:52.945+01:00",
+                              "updated_at": "2026-02-19T10:50:52.945+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:49.043+01:00",
-                          "updated_at": "2025-12-05T12:19:49.043+01:00"
+                          "created_at": "2026-02-19T10:50:52.947+01:00",
+                          "updated_at": "2026-02-19T10:50:52.947+01:00"
                         }
                       ],
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:49.047+01:00",
-                      "updated_at": "2025-12-05T12:19:49.047+01:00"
+                      "created_at": "2026-02-19T10:50:52.949+01:00",
+                      "updated_at": "2026-02-19T10:50:52.949+01:00"
                     }
                   }
                 }
@@ -8157,11 +8166,11 @@
                             "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Mon%20nouveau%20titre%20&ST=20240712&ET=20240712&DUR=allday",
                             "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12&enddt=2024-07-13&allday=true",
                             "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12&enddt=2024-07-13&allday=true",
-                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20251205T121952Z%0ADTSTART;VALUE=DATE:20240712%0ADTEND;VALUE=DATE:20240713%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240711T220000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
+                            "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20260219T105054Z%0ADTSTART;VALUE=DATE:20240712%0ADTEND;VALUE=DATE:20240713%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240711T220000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR"
                           },
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.014+01:00",
-                          "updated_at": "2025-12-05T12:19:53.060+01:00"
+                          "created_at": "2026-02-19T10:50:52.942+01:00",
+                          "updated_at": "2026-02-19T10:50:54.705+01:00"
                         }
                       },
                       "time_slots": [
@@ -8177,25 +8186,25 @@
                               "place": "Salon",
                               "slug": "12-08-00",
                               "add_to_calendar_urls": {
-                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20251205T121953Z%0ADTSTART:20240712T060000Z%0ADTEND:20240712T080000Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T060000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR",
+                                "ical": "data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0APRODID:-//AddToCalendar//RubyGem//EN%0ABEGIN:VEVENT%0ADTSTAMP:20260219T105054Z%0ADTSTART:20240712T060000Z%0ADTEND:20240712T080000Z%0ASUMMARY:Mon%20nouveau%20titre%20%0AUID:-20240712T060000Z-Mon%20nouveau%20titre%20%0AEND:VEVENT%0AEND:VCALENDAR",
                                 "yahoo": "https://calendar.yahoo.com/?v=60&TITLE=Mon%20nouveau%20titre%20&ST=20240712T060000Z&DUR=0200",
                                 "google": "https://www.google.com/calendar/render?action=TEMPLATE&text=Mon%20nouveau%20titre%20&dates=20240712T080000/20240712T100000&ctz=Europe/Paris",
                                 "office": "https://outlook.office.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T06:00:00Z&enddt=2024-07-12T08:00:00Z",
                                 "outlook": "https://outlook.live.com/calendar/0/action/compose?rru=addevent&subject=Mon%20nouveau%20titre%20&startdt=2024-07-12T06:00:00Z&enddt=2024-07-12T08:00:00Z"
                               },
-                              "created_at": "2025-12-05T12:19:49.025+01:00",
-                              "updated_at": "2025-12-05T12:19:53.069+01:00"
+                              "created_at": "2026-02-19T10:50:52.945+01:00",
+                              "updated_at": "2026-02-19T10:50:54.712+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:49.043+01:00",
-                          "updated_at": "2025-12-05T12:19:53.070+01:00"
+                          "created_at": "2026-02-19T10:50:52.947+01:00",
+                          "updated_at": "2026-02-19T10:50:54.712+01:00"
                         }
                       ],
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:49.047+01:00",
-                      "updated_at": "2025-12-05T12:19:53.061+01:00"
+                      "created_at": "2026-02-19T10:50:52.949+01:00",
+                      "updated_at": "2026-02-19T10:50:54.705+01:00"
                     }
                   }
                 }
@@ -8437,12 +8446,12 @@
                             "slug": "categorie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.091+01:00",
-                            "updated_at": "2025-12-05T12:19:49.091+01:00"
+                            "created_at": "2026-02-19T10:50:52.963+01:00",
+                            "updated_at": "2026-02-19T10:50:52.963+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.084+01:00",
-                        "updated_at": "2025-12-05T12:19:49.084+01:00"
+                        "created_at": "2026-02-19T10:50:52.960+01:00",
+                        "updated_at": "2026-02-19T10:50:52.960+01:00"
                       },
                       {
                         "id": "106650c4-d6f6-5c43-ba44-fdd4353b369b",
@@ -8471,12 +8480,12 @@
                             "slug": "taxonomie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.091+01:00",
-                            "updated_at": "2025-12-05T12:19:49.091+01:00"
+                            "created_at": "2026-02-19T10:50:52.963+01:00",
+                            "updated_at": "2026-02-19T10:50:52.963+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.084+01:00",
-                        "updated_at": "2025-12-05T12:19:49.084+01:00"
+                        "created_at": "2026-02-19T10:50:52.960+01:00",
+                        "updated_at": "2026-02-19T10:50:52.960+01:00"
                       },
                       {
                         "id": "90b8e848-5d73-5866-a250-c1f5d33eb3d7",
@@ -8505,12 +8514,12 @@
                             "slug": "element-de-taxonomie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.091+01:00",
-                            "updated_at": "2025-12-05T12:19:49.091+01:00"
+                            "created_at": "2026-02-19T10:50:52.963+01:00",
+                            "updated_at": "2026-02-19T10:50:52.963+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.084+01:00",
-                        "updated_at": "2025-12-05T12:19:49.084+01:00"
+                        "created_at": "2026-02-19T10:50:52.960+01:00",
+                        "updated_at": "2026-02-19T10:50:52.960+01:00"
                       }
                     ]
                   }
@@ -8583,14 +8592,14 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "48ceff2e-c690-4291-8e34-6d3cb5d4a0b8",
+                      "id": "5916d866-4dbd-450a-8702-3d729593568f",
                       "migration_identifier": "page-category-from-api-1",
                       "parent_id": null,
                       "position": 3,
                       "is_taxonomy": false,
                       "localizations": {
                         "fr": {
-                          "id": "7d85954f-fb50-42d6-978d-a8992d40d357",
+                          "id": "b5ca98d9-bfc7-4865-9af5-f43dfac34ce1",
                           "migration_identifier": "page-category-from-api-1-fr",
                           "name": "Ma nouvelle catégorie",
                           "breadcrumb_title": null,
@@ -8610,7 +8619,7 @@
                           "summary": "<p>Ceci est une nouvelle catégorie créée depuis l'API.</p>",
                           "blocks": [
                             {
-                              "id": "950bc8d6-312e-49c9-bec5-6776cbe99911",
+                              "id": "ac031938-09a9-4e2f-b1e9-f71d392f8e60",
                               "migration_identifier": "page-category-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -8627,16 +8636,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2025-12-05T12:19:53.396+01:00",
-                              "updated_at": "2025-12-05T12:19:53.396+01:00"
+                              "created_at": "2026-02-19T10:50:54.831+01:00",
+                              "updated_at": "2026-02-19T10:50:54.831+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:53.393+01:00",
-                          "updated_at": "2025-12-05T12:19:53.398+01:00"
+                          "created_at": "2026-02-19T10:50:54.830+01:00",
+                          "updated_at": "2026-02-19T10:50:54.831+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:53.389+01:00",
-                      "updated_at": "2025-12-05T12:19:53.400+01:00"
+                      "created_at": "2026-02-19T10:50:54.829+01:00",
+                      "updated_at": "2026-02-19T10:50:54.832+01:00"
                     }
                   }
                 }
@@ -8762,14 +8771,14 @@
                     "value": {
                       "created": [
                         {
-                          "id": "7d1709b2-ccc2-4565-a0bb-002162cff5e8",
+                          "id": "1e6be4f8-fe8c-4b59-b22d-3fd0c7b7d945",
                           "migration_identifier": "page-category-from-api-1",
                           "parent_id": null,
                           "position": 3,
                           "is_taxonomy": false,
                           "localizations": {
                             "fr": {
-                              "id": "13233ede-eaf9-4c90-ab20-cdadebf449b5",
+                              "id": "b3f0d938-151e-4d82-b269-44f666f5a91e",
                               "migration_identifier": "page-category-from-api-1-fr",
                               "name": "Ma nouvelle catégorie",
                               "breadcrumb_title": null,
@@ -8789,7 +8798,7 @@
                               "summary": "<p>Ceci est une nouvelle catégorie créée depuis l'API.</p>",
                               "blocks": [
                                 {
-                                  "id": "9f8a61e6-1bc5-42bf-be25-717dc22b6857",
+                                  "id": "fbaf545b-cc84-46fe-a3e2-0dd349852105",
                                   "migration_identifier": "page-category-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -8806,16 +8815,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2025-12-05T12:19:53.513+01:00",
-                                  "updated_at": "2025-12-05T12:19:53.513+01:00"
+                                  "created_at": "2026-02-19T10:50:54.892+01:00",
+                                  "updated_at": "2026-02-19T10:50:54.892+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:53.512+01:00",
-                              "updated_at": "2025-12-05T12:19:53.513+01:00"
+                              "created_at": "2026-02-19T10:50:54.892+01:00",
+                              "updated_at": "2026-02-19T10:50:54.893+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:53.511+01:00",
-                          "updated_at": "2025-12-05T12:19:53.514+01:00"
+                          "created_at": "2026-02-19T10:50:54.890+01:00",
+                          "updated_at": "2026-02-19T10:50:54.894+01:00"
                         }
                       ],
                       "updated": [
@@ -8846,12 +8855,12 @@
                               "slug": "categorie-de-test",
                               "summary": null,
                               "blocks": [],
-                              "created_at": "2025-12-05T12:19:49.091+01:00",
-                              "updated_at": "2025-12-05T12:19:53.540+01:00"
+                              "created_at": "2026-02-19T10:50:52.963+01:00",
+                              "updated_at": "2026-02-19T10:50:54.917+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:49.084+01:00",
-                          "updated_at": "2025-12-05T12:19:53.541+01:00"
+                          "created_at": "2026-02-19T10:50:52.960+01:00",
+                          "updated_at": "2026-02-19T10:50:54.918+01:00"
                         }
                       ],
                       "errors": []
@@ -9034,12 +9043,12 @@
                           "slug": "categorie-de-test",
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.091+01:00",
-                          "updated_at": "2025-12-05T12:19:49.091+01:00"
+                          "created_at": "2026-02-19T10:50:52.963+01:00",
+                          "updated_at": "2026-02-19T10:50:52.963+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.084+01:00",
-                      "updated_at": "2025-12-05T12:19:49.084+01:00"
+                      "created_at": "2026-02-19T10:50:52.960+01:00",
+                      "updated_at": "2026-02-19T10:50:52.960+01:00"
                     }
                   }
                 }
@@ -9145,12 +9154,12 @@
                           "slug": "categorie-de-test",
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.091+01:00",
-                          "updated_at": "2025-12-05T12:19:53.643+01:00"
+                          "created_at": "2026-02-19T10:50:52.963+01:00",
+                          "updated_at": "2026-02-19T10:50:54.994+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.084+01:00",
-                      "updated_at": "2025-12-05T12:19:53.643+01:00"
+                      "created_at": "2026-02-19T10:50:52.960+01:00",
+                      "updated_at": "2026-02-19T10:50:54.994+01:00"
                     }
                   }
                 }
@@ -9396,13 +9405,13 @@
                             "header_cta_label": null,
                             "header_cta_url": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.098+01:00",
-                            "updated_at": "2025-12-05T12:19:49.098+01:00"
+                            "created_at": "2026-02-19T10:50:52.965+01:00",
+                            "updated_at": "2026-02-19T10:50:52.965+01:00"
                           }
                         },
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.114+01:00",
-                        "updated_at": "2025-12-05T12:19:49.114+01:00"
+                        "created_at": "2026-02-19T10:50:52.968+01:00",
+                        "updated_at": "2026-02-19T10:50:52.968+01:00"
                       },
                       {
                         "id": "aa9402a0-16f6-5075-b5b0-5467750ed326",
@@ -9435,15 +9444,15 @@
                             "header_cta_label": null,
                             "header_cta_url": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.098+01:00",
-                            "updated_at": "2025-12-05T12:19:49.098+01:00"
+                            "created_at": "2026-02-19T10:50:52.965+01:00",
+                            "updated_at": "2026-02-19T10:50:52.965+01:00"
                           }
                         },
                         "category_ids": [
                           "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                         ],
-                        "created_at": "2025-12-05T12:19:49.114+01:00",
-                        "updated_at": "2025-12-05T12:19:49.114+01:00"
+                        "created_at": "2026-02-19T10:50:52.968+01:00",
+                        "updated_at": "2026-02-19T10:50:52.968+01:00"
                       },
                       {
                         "id": "6e49bb62-957c-53e7-a05a-195160b0abdb",
@@ -9476,13 +9485,13 @@
                             "header_cta_label": null,
                             "header_cta_url": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.098+01:00",
-                            "updated_at": "2025-12-05T12:19:49.098+01:00"
+                            "created_at": "2026-02-19T10:50:52.965+01:00",
+                            "updated_at": "2026-02-19T10:50:52.965+01:00"
                           }
                         },
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.114+01:00",
-                        "updated_at": "2025-12-05T12:19:49.114+01:00"
+                        "created_at": "2026-02-19T10:50:52.968+01:00",
+                        "updated_at": "2026-02-19T10:50:52.968+01:00"
                       }
                     ]
                   }
@@ -9555,7 +9564,7 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "0290f9d2-5ef0-46fb-8df3-2d944d7d426d",
+                      "id": "a092b597-7311-4747-8306-f60217466d51",
                       "migration_identifier": "page-from-api-1",
                       "type": null,
                       "parent_id": "aa678357-9416-5d2e-a7ec-f112e37c64e6",
@@ -9564,7 +9573,7 @@
                       "full_width": true,
                       "localizations": {
                         "fr": {
-                          "id": "3433762b-4745-4c10-97d3-93eef32e8c9c",
+                          "id": "14607a37-4902-4efa-95df-5566a63879c8",
                           "migration_identifier": "page-from-api-1-fr",
                           "title": "Ma nouvelle page",
                           "breadcrumb_title": "Nouvelle page",
@@ -9586,7 +9595,7 @@
                           "header_cta_url": "https://www.example.com",
                           "blocks": [
                             {
-                              "id": "81f6f3ea-0ad8-4859-aa9f-9bc6b2962f23",
+                              "id": "17b5fafd-d624-4460-b2d3-acdbc1dfaf9a",
                               "migration_identifier": "page-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -9603,19 +9612,19 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2025-12-05T12:19:53.913+01:00",
-                              "updated_at": "2025-12-05T12:19:53.913+01:00"
+                              "created_at": "2026-02-19T10:50:55.197+01:00",
+                              "updated_at": "2026-02-19T10:50:55.197+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:53.912+01:00",
-                          "updated_at": "2025-12-05T12:19:53.914+01:00"
+                          "created_at": "2026-02-19T10:50:55.196+01:00",
+                          "updated_at": "2026-02-19T10:50:55.198+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:53.906+01:00",
-                      "updated_at": "2025-12-05T12:19:53.915+01:00"
+                      "created_at": "2026-02-19T10:50:55.194+01:00",
+                      "updated_at": "2026-02-19T10:50:55.199+01:00"
                     }
                   }
                 }
@@ -9737,7 +9746,7 @@
                     "value": {
                       "created": [
                         {
-                          "id": "c08be77b-85c3-4551-baa2-9af5d5013729",
+                          "id": "ee8216eb-29b2-4db7-aa9a-ebc255a0860a",
                           "migration_identifier": "page-from-api-1",
                           "type": null,
                           "parent_id": "aa678357-9416-5d2e-a7ec-f112e37c64e6",
@@ -9746,7 +9755,7 @@
                           "full_width": true,
                           "localizations": {
                             "fr": {
-                              "id": "a52dac04-ab7b-4448-90bb-5514d13d271c",
+                              "id": "578b5358-af4f-42af-bf67-f8a6500f5bfd",
                               "migration_identifier": "page-from-api-1-fr",
                               "title": "Ma nouvelle page",
                               "breadcrumb_title": "Nouvelle page",
@@ -9768,7 +9777,7 @@
                               "header_cta_url": "https://www.example.com",
                               "blocks": [
                                 {
-                                  "id": "20bae9d7-86bb-401c-896b-848df433634c",
+                                  "id": "41e2bfa2-daf6-485e-a921-29c9f4c38439",
                                   "migration_identifier": "page-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -9785,19 +9794,19 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2025-12-05T12:19:54.069+01:00",
-                                  "updated_at": "2025-12-05T12:19:54.069+01:00"
+                                  "created_at": "2026-02-19T10:50:55.275+01:00",
+                                  "updated_at": "2026-02-19T10:50:55.275+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:54.068+01:00",
-                              "updated_at": "2025-12-05T12:19:54.070+01:00"
+                              "created_at": "2026-02-19T10:50:55.274+01:00",
+                              "updated_at": "2026-02-19T10:50:55.276+01:00"
                             }
                           },
                           "category_ids": [
                             "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                           ],
-                          "created_at": "2025-12-05T12:19:54.063+01:00",
-                          "updated_at": "2025-12-05T12:19:54.070+01:00"
+                          "created_at": "2026-02-19T10:50:55.273+01:00",
+                          "updated_at": "2026-02-19T10:50:55.277+01:00"
                         }
                       ],
                       "updated": [
@@ -9832,15 +9841,15 @@
                               "header_cta_label": null,
                               "header_cta_url": null,
                               "blocks": [],
-                              "created_at": "2025-12-05T12:19:49.098+01:00",
-                              "updated_at": "2025-12-05T12:19:54.113+01:00"
+                              "created_at": "2026-02-19T10:50:52.965+01:00",
+                              "updated_at": "2026-02-19T10:50:55.303+01:00"
                             }
                           },
                           "category_ids": [
                             "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                           ],
-                          "created_at": "2025-12-05T12:19:49.114+01:00",
-                          "updated_at": "2025-12-05T12:19:54.114+01:00"
+                          "created_at": "2026-02-19T10:50:52.968+01:00",
+                          "updated_at": "2026-02-19T10:50:55.304+01:00"
                         }
                       ],
                       "errors": []
@@ -10023,15 +10032,15 @@
                           "header_cta_label": null,
                           "header_cta_url": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.098+01:00",
-                          "updated_at": "2025-12-05T12:19:49.098+01:00"
+                          "created_at": "2026-02-19T10:50:52.965+01:00",
+                          "updated_at": "2026-02-19T10:50:52.965+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:49.114+01:00",
-                      "updated_at": "2025-12-05T12:19:49.114+01:00"
+                      "created_at": "2026-02-19T10:50:52.968+01:00",
+                      "updated_at": "2026-02-19T10:50:52.968+01:00"
                     }
                   }
                 }
@@ -10141,15 +10150,15 @@
                           "header_cta_label": null,
                           "header_cta_url": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.098+01:00",
-                          "updated_at": "2025-12-05T12:19:54.238+01:00"
+                          "created_at": "2026-02-19T10:50:52.965+01:00",
+                          "updated_at": "2026-02-19T10:50:55.383+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:49.114+01:00",
-                      "updated_at": "2025-12-05T12:19:54.238+01:00"
+                      "created_at": "2026-02-19T10:50:52.968+01:00",
+                      "updated_at": "2026-02-19T10:50:55.383+01:00"
                     }
                   }
                 }
@@ -10392,12 +10401,12 @@
                             "slug": "categorie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.126+01:00",
-                            "updated_at": "2025-12-05T12:19:49.126+01:00"
+                            "created_at": "2026-02-19T10:50:52.974+01:00",
+                            "updated_at": "2026-02-19T10:50:52.974+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.121+01:00",
-                        "updated_at": "2025-12-05T12:19:49.121+01:00"
+                        "created_at": "2026-02-19T10:50:52.971+01:00",
+                        "updated_at": "2026-02-19T10:50:52.971+01:00"
                       },
                       {
                         "id": "106650c4-d6f6-5c43-ba44-fdd4353b369b",
@@ -10427,12 +10436,12 @@
                             "slug": "taxonomie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.126+01:00",
-                            "updated_at": "2025-12-05T12:19:49.126+01:00"
+                            "created_at": "2026-02-19T10:50:52.974+01:00",
+                            "updated_at": "2026-02-19T10:50:52.974+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.121+01:00",
-                        "updated_at": "2025-12-05T12:19:49.121+01:00"
+                        "created_at": "2026-02-19T10:50:52.971+01:00",
+                        "updated_at": "2026-02-19T10:50:52.971+01:00"
                       },
                       {
                         "id": "90b8e848-5d73-5866-a250-c1f5d33eb3d7",
@@ -10462,12 +10471,12 @@
                             "slug": "element-de-taxonomie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.126+01:00",
-                            "updated_at": "2025-12-05T12:19:49.126+01:00"
+                            "created_at": "2026-02-19T10:50:52.974+01:00",
+                            "updated_at": "2026-02-19T10:50:52.974+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.121+01:00",
-                        "updated_at": "2025-12-05T12:19:49.121+01:00"
+                        "created_at": "2026-02-19T10:50:52.971+01:00",
+                        "updated_at": "2026-02-19T10:50:52.971+01:00"
                       }
                     ]
                   }
@@ -10540,7 +10549,7 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "44f994f4-9d4f-4256-a71d-dff3b7652e17",
+                      "id": "92f519e4-6273-49d5-a99a-6d894526134c",
                       "migration_identifier": "portfolio-category-from-api-1",
                       "parent_id": null,
                       "position": 3,
@@ -10548,7 +10557,7 @@
                       "bodyclass": null,
                       "localizations": {
                         "fr": {
-                          "id": "c03098f6-53cd-4670-be2d-1343d00a9785",
+                          "id": "230451c6-738f-4be3-99da-6d3f85be2e23",
                           "migration_identifier": "portfolio-category-from-api-1-fr",
                           "name": "Ma nouvelle catégorie",
                           "breadcrumb_title": null,
@@ -10568,7 +10577,7 @@
                           "summary": "<p>Ceci est une nouvelle catégorie créée depuis l'API.</p>",
                           "blocks": [
                             {
-                              "id": "5bb8bd96-863e-4299-9392-c4586001844b",
+                              "id": "4c01d38b-0bbf-42a9-aa2d-a1c000a5a79c",
                               "migration_identifier": "portfolio-category-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -10585,16 +10594,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2025-12-05T12:19:54.436+01:00",
-                              "updated_at": "2025-12-05T12:19:54.436+01:00"
+                              "created_at": "2026-02-19T10:50:55.516+01:00",
+                              "updated_at": "2026-02-19T10:50:55.516+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:54.432+01:00",
-                          "updated_at": "2025-12-05T12:19:54.440+01:00"
+                          "created_at": "2026-02-19T10:50:55.514+01:00",
+                          "updated_at": "2026-02-19T10:50:55.517+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:54.425+01:00",
-                      "updated_at": "2025-12-05T12:19:54.442+01:00"
+                      "created_at": "2026-02-19T10:50:55.513+01:00",
+                      "updated_at": "2026-02-19T10:50:55.518+01:00"
                     }
                   }
                 }
@@ -10720,7 +10729,7 @@
                     "value": {
                       "created": [
                         {
-                          "id": "a65e5cd9-142e-42e1-94ca-052a3e30a6f4",
+                          "id": "882f7b74-c6cf-4921-a950-f01570b68c78",
                           "migration_identifier": "portfolio-category-from-api-1",
                           "parent_id": null,
                           "position": 3,
@@ -10728,7 +10737,7 @@
                           "bodyclass": null,
                           "localizations": {
                             "fr": {
-                              "id": "8647342f-884d-44e5-9712-1502d668d5a2",
+                              "id": "5bff840d-1b6a-4b35-b025-2ff2460e9ec9",
                               "migration_identifier": "portfolio-category-from-api-1-fr",
                               "name": "Ma nouvelle catégorie",
                               "breadcrumb_title": null,
@@ -10748,7 +10757,7 @@
                               "summary": "<p>Ceci est une nouvelle catégorie créée depuis l'API.</p>",
                               "blocks": [
                                 {
-                                  "id": "b95cc9af-d1ae-4e47-ba16-b55971039a07",
+                                  "id": "664f12d8-1c06-4423-b219-72d5b791ff3b",
                                   "migration_identifier": "portfolio-category-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -10765,16 +10774,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2025-12-05T12:19:54.725+01:00",
-                                  "updated_at": "2025-12-05T12:19:54.725+01:00"
+                                  "created_at": "2026-02-19T10:50:55.572+01:00",
+                                  "updated_at": "2026-02-19T10:50:55.572+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:54.724+01:00",
-                              "updated_at": "2025-12-05T12:19:54.726+01:00"
+                              "created_at": "2026-02-19T10:50:55.571+01:00",
+                              "updated_at": "2026-02-19T10:50:55.573+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:54.719+01:00",
-                          "updated_at": "2025-12-05T12:19:54.727+01:00"
+                          "created_at": "2026-02-19T10:50:55.570+01:00",
+                          "updated_at": "2026-02-19T10:50:55.574+01:00"
                         }
                       ],
                       "updated": [
@@ -10806,12 +10815,12 @@
                               "slug": "categorie-de-test",
                               "summary": null,
                               "blocks": [],
-                              "created_at": "2025-12-05T12:19:49.126+01:00",
-                              "updated_at": "2025-12-05T12:19:54.760+01:00"
+                              "created_at": "2026-02-19T10:50:52.974+01:00",
+                              "updated_at": "2026-02-19T10:50:55.592+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:49.121+01:00",
-                          "updated_at": "2025-12-05T12:19:54.761+01:00"
+                          "created_at": "2026-02-19T10:50:52.971+01:00",
+                          "updated_at": "2026-02-19T10:50:55.593+01:00"
                         }
                       ],
                       "errors": []
@@ -10995,12 +11004,12 @@
                           "slug": "categorie-de-test",
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.126+01:00",
-                          "updated_at": "2025-12-05T12:19:49.126+01:00"
+                          "created_at": "2026-02-19T10:50:52.974+01:00",
+                          "updated_at": "2026-02-19T10:50:52.974+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.121+01:00",
-                      "updated_at": "2025-12-05T12:19:49.121+01:00"
+                      "created_at": "2026-02-19T10:50:52.971+01:00",
+                      "updated_at": "2026-02-19T10:50:52.971+01:00"
                     }
                   }
                 }
@@ -11107,12 +11116,12 @@
                           "slug": "categorie-de-test",
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.126+01:00",
-                          "updated_at": "2025-12-05T12:19:54.984+01:00"
+                          "created_at": "2026-02-19T10:50:52.974+01:00",
+                          "updated_at": "2026-02-19T10:50:55.665+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.121+01:00",
-                      "updated_at": "2025-12-05T12:19:54.984+01:00"
+                      "created_at": "2026-02-19T10:50:52.971+01:00",
+                      "updated_at": "2026-02-19T10:50:55.666+01:00"
                     }
                   }
                 }
@@ -11351,15 +11360,15 @@
                             "subtitle": null,
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.132+01:00",
-                            "updated_at": "2025-12-05T12:19:49.132+01:00"
+                            "created_at": "2026-02-19T10:50:52.976+01:00",
+                            "updated_at": "2026-02-19T10:50:52.976+01:00"
                           }
                         },
                         "category_ids": [
                           "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                         ],
-                        "created_at": "2025-12-05T12:19:49.141+01:00",
-                        "updated_at": "2025-12-05T12:19:49.141+01:00"
+                        "created_at": "2026-02-19T10:50:52.979+01:00",
+                        "updated_at": "2026-02-19T10:50:52.979+01:00"
                       },
                       {
                         "id": "6001c76a-49c9-5147-9f48-17d28f4a4ff6",
@@ -11385,13 +11394,13 @@
                             "subtitle": null,
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.132+01:00",
-                            "updated_at": "2025-12-05T12:19:49.132+01:00"
+                            "created_at": "2026-02-19T10:50:52.976+01:00",
+                            "updated_at": "2026-02-19T10:50:52.976+01:00"
                           }
                         },
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.141+01:00",
-                        "updated_at": "2025-12-05T12:19:49.141+01:00"
+                        "created_at": "2026-02-19T10:50:52.979+01:00",
+                        "updated_at": "2026-02-19T10:50:52.979+01:00"
                       },
                       {
                         "id": "c6de9fa1-7b90-516a-95ac-ac48a47d226a",
@@ -11417,13 +11426,13 @@
                             "subtitle": null,
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.132+01:00",
-                            "updated_at": "2025-12-05T12:19:49.132+01:00"
+                            "created_at": "2026-02-19T10:50:52.976+01:00",
+                            "updated_at": "2026-02-19T10:50:52.976+01:00"
                           }
                         },
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.141+01:00",
-                        "updated_at": "2025-12-05T12:19:49.141+01:00"
+                        "created_at": "2026-02-19T10:50:52.979+01:00",
+                        "updated_at": "2026-02-19T10:50:52.979+01:00"
                       }
                     ]
                   }
@@ -11496,14 +11505,14 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "da4d9414-4127-45cd-a581-d0354a099dc4",
+                      "id": "cfb86e40-5d31-4cde-87b7-7fa74cd2e4df",
                       "migration_identifier": "project-from-api-1",
                       "full_width": false,
                       "year": 2026,
                       "bodyclass": null,
                       "localizations": {
                         "fr": {
-                          "id": "043f81d6-50fd-47f1-aad2-1cfd2b80d7a5",
+                          "id": "dd936c53-a7ef-492b-b8fb-5969371a0f60",
                           "migration_identifier": "project-from-api-1-fr",
                           "title": "Mon nouveau projet",
                           "featured_image": {
@@ -11520,7 +11529,7 @@
                           "summary": "<p>Ceci est un nouveau projet créé depuis l'API.</p>",
                           "blocks": [
                             {
-                              "id": "44e332c7-2a69-45fd-875e-dcac943c52aa",
+                              "id": "b9a36f8f-26c9-4f73-8ae1-f5818d813712",
                               "migration_identifier": "project-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -11537,19 +11546,19 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2025-12-05T12:19:55.247+01:00",
-                              "updated_at": "2025-12-05T12:19:55.247+01:00"
+                              "created_at": "2026-02-19T10:50:55.828+01:00",
+                              "updated_at": "2026-02-19T10:50:55.828+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:55.246+01:00",
-                          "updated_at": "2025-12-05T12:19:55.248+01:00"
+                          "created_at": "2026-02-19T10:50:55.827+01:00",
+                          "updated_at": "2026-02-19T10:50:55.829+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:55.243+01:00",
-                      "updated_at": "2025-12-05T12:19:55.250+01:00"
+                      "created_at": "2026-02-19T10:50:55.825+01:00",
+                      "updated_at": "2026-02-19T10:50:55.830+01:00"
                     }
                   }
                 }
@@ -11678,14 +11687,14 @@
                     "value": {
                       "created": [
                         {
-                          "id": "95024d4f-cd74-414b-b719-fbbc6ecbefb3",
+                          "id": "2d0ec143-27dd-4a0f-b169-920e4fd5e1e5",
                           "migration_identifier": "project-from-api-1",
                           "full_width": false,
                           "year": 2026,
                           "bodyclass": null,
                           "localizations": {
                             "fr": {
-                              "id": "2dd68125-f609-4504-86d2-ca3487501e8c",
+                              "id": "b29e800a-efbe-46dd-b1bb-d808a4c18c92",
                               "migration_identifier": "project-from-api-1-fr",
                               "title": "Mon nouveau projet",
                               "featured_image": {
@@ -11702,7 +11711,7 @@
                               "summary": "<p>Ceci est un nouveau projet créé depuis l'API.</p>",
                               "blocks": [
                                 {
-                                  "id": "80d5203f-8744-4579-9b03-d9eda804758a",
+                                  "id": "e53652de-5979-45c8-86c3-ecee1538684e",
                                   "migration_identifier": "project-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -11719,19 +11728,19 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2025-12-05T12:19:55.359+01:00",
-                                  "updated_at": "2025-12-05T12:19:55.359+01:00"
+                                  "created_at": "2026-02-19T10:50:55.891+01:00",
+                                  "updated_at": "2026-02-19T10:50:55.891+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:55.354+01:00",
-                              "updated_at": "2025-12-05T12:19:55.360+01:00"
+                              "created_at": "2026-02-19T10:50:55.891+01:00",
+                              "updated_at": "2026-02-19T10:50:55.892+01:00"
                             }
                           },
                           "category_ids": [
                             "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                           ],
-                          "created_at": "2025-12-05T12:19:55.344+01:00",
-                          "updated_at": "2025-12-05T12:19:55.361+01:00"
+                          "created_at": "2026-02-19T10:50:55.889+01:00",
+                          "updated_at": "2026-02-19T10:50:55.893+01:00"
                         }
                       ],
                       "updated": [
@@ -11759,15 +11768,15 @@
                               "subtitle": null,
                               "summary": null,
                               "blocks": [],
-                              "created_at": "2025-12-05T12:19:49.132+01:00",
-                              "updated_at": "2025-12-05T12:19:55.402+01:00"
+                              "created_at": "2026-02-19T10:50:52.976+01:00",
+                              "updated_at": "2026-02-19T10:50:55.918+01:00"
                             }
                           },
                           "category_ids": [
                             "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                           ],
-                          "created_at": "2025-12-05T12:19:49.141+01:00",
-                          "updated_at": "2025-12-05T12:19:55.402+01:00"
+                          "created_at": "2026-02-19T10:50:52.979+01:00",
+                          "updated_at": "2026-02-19T10:50:55.919+01:00"
                         }
                       ],
                       "errors": []
@@ -11947,15 +11956,15 @@
                           "subtitle": null,
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.132+01:00",
-                          "updated_at": "2025-12-05T12:19:49.132+01:00"
+                          "created_at": "2026-02-19T10:50:52.976+01:00",
+                          "updated_at": "2026-02-19T10:50:52.976+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:49.141+01:00",
-                      "updated_at": "2025-12-05T12:19:49.141+01:00"
+                      "created_at": "2026-02-19T10:50:52.979+01:00",
+                      "updated_at": "2026-02-19T10:50:52.979+01:00"
                     }
                   }
                 }
@@ -12058,15 +12067,15 @@
                           "subtitle": null,
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.132+01:00",
-                          "updated_at": "2025-12-05T12:19:55.506+01:00"
+                          "created_at": "2026-02-19T10:50:52.976+01:00",
+                          "updated_at": "2026-02-19T10:50:56.001+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:49.141+01:00",
-                      "updated_at": "2025-12-05T12:19:55.507+01:00"
+                      "created_at": "2026-02-19T10:50:52.979+01:00",
+                      "updated_at": "2026-02-19T10:50:56.002+01:00"
                     }
                   }
                 }
@@ -12308,12 +12317,12 @@
                             "slug": "categorie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.150+01:00",
-                            "updated_at": "2025-12-05T12:19:49.150+01:00"
+                            "created_at": "2026-02-19T10:50:52.984+01:00",
+                            "updated_at": "2026-02-19T10:50:52.984+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.145+01:00",
-                        "updated_at": "2025-12-05T12:19:49.145+01:00"
+                        "created_at": "2026-02-19T10:50:52.982+01:00",
+                        "updated_at": "2026-02-19T10:50:52.982+01:00"
                       },
                       {
                         "id": "106650c4-d6f6-5c43-ba44-fdd4353b369b",
@@ -12342,12 +12351,12 @@
                             "slug": "taxonomie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.150+01:00",
-                            "updated_at": "2025-12-05T12:19:49.150+01:00"
+                            "created_at": "2026-02-19T10:50:52.984+01:00",
+                            "updated_at": "2026-02-19T10:50:52.984+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.145+01:00",
-                        "updated_at": "2025-12-05T12:19:49.145+01:00"
+                        "created_at": "2026-02-19T10:50:52.982+01:00",
+                        "updated_at": "2026-02-19T10:50:52.982+01:00"
                       },
                       {
                         "id": "90b8e848-5d73-5866-a250-c1f5d33eb3d7",
@@ -12376,12 +12385,12 @@
                             "slug": "element-de-taxonomie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.150+01:00",
-                            "updated_at": "2025-12-05T12:19:49.150+01:00"
+                            "created_at": "2026-02-19T10:50:52.984+01:00",
+                            "updated_at": "2026-02-19T10:50:52.984+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.145+01:00",
-                        "updated_at": "2025-12-05T12:19:49.145+01:00"
+                        "created_at": "2026-02-19T10:50:52.982+01:00",
+                        "updated_at": "2026-02-19T10:50:52.982+01:00"
                       }
                     ]
                   }
@@ -12454,14 +12463,14 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "15d2851b-e7df-4559-9137-971e4593ab4a",
+                      "id": "bab90b43-528d-41dd-a6f7-1f6f5a59afe1",
                       "migration_identifier": "post-category-from-api-1",
                       "parent_id": null,
                       "position": 3,
                       "is_taxonomy": false,
                       "localizations": {
                         "fr": {
-                          "id": "53e9f11d-1c1f-473a-89ce-bf441351c101",
+                          "id": "c2c112e0-e587-41d5-87c4-75a5c9fed090",
                           "migration_identifier": "post-category-from-api-1-fr",
                           "name": "Ma nouvelle catégorie",
                           "breadcrumb_title": null,
@@ -12481,7 +12490,7 @@
                           "summary": "<p>Ceci est une nouvelle catégorie créée depuis l'API.</p>",
                           "blocks": [
                             {
-                              "id": "bbb8d1cb-571a-4ade-aebb-12da64dbe447",
+                              "id": "6928147c-02bf-4b04-b529-44d0d18fde82",
                               "migration_identifier": "post-category-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -12498,16 +12507,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2025-12-05T12:19:55.687+01:00",
-                              "updated_at": "2025-12-05T12:19:55.687+01:00"
+                              "created_at": "2026-02-19T10:50:56.121+01:00",
+                              "updated_at": "2026-02-19T10:50:56.121+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:55.685+01:00",
-                          "updated_at": "2025-12-05T12:19:55.689+01:00"
+                          "created_at": "2026-02-19T10:50:56.120+01:00",
+                          "updated_at": "2026-02-19T10:50:56.122+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:55.680+01:00",
-                      "updated_at": "2025-12-05T12:19:55.689+01:00"
+                      "created_at": "2026-02-19T10:50:56.118+01:00",
+                      "updated_at": "2026-02-19T10:50:56.123+01:00"
                     }
                   }
                 }
@@ -12633,14 +12642,14 @@
                     "value": {
                       "created": [
                         {
-                          "id": "88b579e3-af53-42bf-9085-7cc01aa3e064",
+                          "id": "2f6a3e98-71de-448c-a362-fc437703f71d",
                           "migration_identifier": "post-category-from-api-1",
                           "parent_id": null,
                           "position": 3,
                           "is_taxonomy": false,
                           "localizations": {
                             "fr": {
-                              "id": "df37f0ba-0fdb-4784-9362-b51dff35b54d",
+                              "id": "135bc542-fda4-42c6-8140-edc80144f1ea",
                               "migration_identifier": "post-category-from-api-1-fr",
                               "name": "Ma nouvelle catégorie",
                               "breadcrumb_title": null,
@@ -12660,7 +12669,7 @@
                               "summary": "<p>Ceci est une nouvelle catégorie créée depuis l'API.</p>",
                               "blocks": [
                                 {
-                                  "id": "9c160642-f474-4d7d-9e1f-e3165762aaea",
+                                  "id": "2d4d1f8a-b503-46a5-966b-5988a52c9674",
                                   "migration_identifier": "post-category-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -12677,16 +12686,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2025-12-05T12:19:55.771+01:00",
-                                  "updated_at": "2025-12-05T12:19:55.771+01:00"
+                                  "created_at": "2026-02-19T10:50:56.179+01:00",
+                                  "updated_at": "2026-02-19T10:50:56.179+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:55.771+01:00",
-                              "updated_at": "2025-12-05T12:19:55.772+01:00"
+                              "created_at": "2026-02-19T10:50:56.178+01:00",
+                              "updated_at": "2026-02-19T10:50:56.180+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:55.770+01:00",
-                          "updated_at": "2025-12-05T12:19:55.772+01:00"
+                          "created_at": "2026-02-19T10:50:56.173+01:00",
+                          "updated_at": "2026-02-19T10:50:56.181+01:00"
                         }
                       ],
                       "updated": [
@@ -12717,12 +12726,12 @@
                               "slug": "categorie-de-test",
                               "summary": null,
                               "blocks": [],
-                              "created_at": "2025-12-05T12:19:49.150+01:00",
-                              "updated_at": "2025-12-05T12:19:55.806+01:00"
+                              "created_at": "2026-02-19T10:50:52.984+01:00",
+                              "updated_at": "2026-02-19T10:50:56.201+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:49.145+01:00",
-                          "updated_at": "2025-12-05T12:19:55.806+01:00"
+                          "created_at": "2026-02-19T10:50:52.982+01:00",
+                          "updated_at": "2026-02-19T10:50:56.202+01:00"
                         }
                       ],
                       "errors": []
@@ -12905,12 +12914,12 @@
                           "slug": "categorie-de-test",
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.150+01:00",
-                          "updated_at": "2025-12-05T12:19:49.150+01:00"
+                          "created_at": "2026-02-19T10:50:52.984+01:00",
+                          "updated_at": "2026-02-19T10:50:52.984+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.145+01:00",
-                      "updated_at": "2025-12-05T12:19:49.145+01:00"
+                      "created_at": "2026-02-19T10:50:52.982+01:00",
+                      "updated_at": "2026-02-19T10:50:52.982+01:00"
                     }
                   }
                 }
@@ -13016,12 +13025,12 @@
                           "slug": "categorie-de-test",
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.150+01:00",
-                          "updated_at": "2025-12-05T12:19:55.889+01:00"
+                          "created_at": "2026-02-19T10:50:52.984+01:00",
+                          "updated_at": "2026-02-19T10:50:56.272+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.145+01:00",
-                      "updated_at": "2025-12-05T12:19:55.889+01:00"
+                      "created_at": "2026-02-19T10:50:52.982+01:00",
+                      "updated_at": "2026-02-19T10:50:56.273+01:00"
                     }
                   }
                 }
@@ -13259,15 +13268,15 @@
                             "subtitle": null,
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.156+01:00",
-                            "updated_at": "2025-12-05T12:19:49.156+01:00"
+                            "created_at": "2026-02-19T10:50:52.986+01:00",
+                            "updated_at": "2026-02-19T10:50:52.986+01:00"
                           }
                         },
                         "category_ids": [
                           "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                         ],
-                        "created_at": "2025-12-05T12:19:49.164+01:00",
-                        "updated_at": "2025-12-05T12:19:49.164+01:00"
+                        "created_at": "2026-02-19T10:50:52.989+01:00",
+                        "updated_at": "2026-02-19T10:50:52.989+01:00"
                       },
                       {
                         "id": "253a800b-42fe-5586-8114-0c8d6913bbbc",
@@ -13292,13 +13301,13 @@
                             "subtitle": null,
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.156+01:00",
-                            "updated_at": "2025-12-05T12:19:49.156+01:00"
+                            "created_at": "2026-02-19T10:50:52.986+01:00",
+                            "updated_at": "2026-02-19T10:50:52.986+01:00"
                           }
                         },
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.164+01:00",
-                        "updated_at": "2025-12-05T12:19:49.164+01:00"
+                        "created_at": "2026-02-19T10:50:52.989+01:00",
+                        "updated_at": "2026-02-19T10:50:52.989+01:00"
                       },
                       {
                         "id": "f28734c1-0052-554d-a50e-b2356d8c66e4",
@@ -13323,13 +13332,13 @@
                             "subtitle": null,
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.156+01:00",
-                            "updated_at": "2025-12-05T12:19:49.156+01:00"
+                            "created_at": "2026-02-19T10:50:52.986+01:00",
+                            "updated_at": "2026-02-19T10:50:52.986+01:00"
                           }
                         },
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.164+01:00",
-                        "updated_at": "2025-12-05T12:19:49.164+01:00"
+                        "created_at": "2026-02-19T10:50:52.989+01:00",
+                        "updated_at": "2026-02-19T10:50:52.989+01:00"
                       }
                     ]
                   }
@@ -13402,12 +13411,12 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "b46c0951-5d3c-47d1-99a3-c112cef1c1ba",
+                      "id": "c863412f-8716-4120-bbff-c11c0c7a65cb",
                       "migration_identifier": "post-from-api-1",
                       "full_width": false,
                       "localizations": {
                         "fr": {
-                          "id": "7e219a5e-c21b-4b7c-8798-1f103b26fecf",
+                          "id": "fa3d4e3f-23f7-4b66-a8e1-ca63a26e89f4",
                           "migration_identifier": "post-from-api-1-fr",
                           "title": "Ma nouvelle actualité",
                           "featured_image": {
@@ -13425,7 +13434,7 @@
                           "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
                           "blocks": [
                             {
-                              "id": "41da8b90-e9c0-44a4-a0b7-2cb19b3680d6",
+                              "id": "380bd2a5-96d6-4f43-997a-f37ecb2a7638",
                               "migration_identifier": "post-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -13442,19 +13451,19 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2025-12-05T12:19:56.103+01:00",
-                              "updated_at": "2025-12-05T12:19:56.103+01:00"
+                              "created_at": "2026-02-19T10:50:56.453+01:00",
+                              "updated_at": "2026-02-19T10:50:56.453+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:56.100+01:00",
-                          "updated_at": "2025-12-05T12:19:56.104+01:00"
+                          "created_at": "2026-02-19T10:50:56.452+01:00",
+                          "updated_at": "2026-02-19T10:50:56.479+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:56.095+01:00",
-                      "updated_at": "2025-12-05T12:19:56.105+01:00"
+                      "created_at": "2026-02-19T10:50:56.450+01:00",
+                      "updated_at": "2026-02-19T10:50:56.480+01:00"
                     }
                   }
                 }
@@ -13580,12 +13589,12 @@
                     "value": {
                       "created": [
                         {
-                          "id": "18d3db1d-2f9c-440b-aae0-e923e478685a",
+                          "id": "19bf3578-af2d-40bf-ab8d-5a9c99d841d5",
                           "migration_identifier": "post-from-api-1",
                           "full_width": false,
                           "localizations": {
                             "fr": {
-                              "id": "0095c144-f5f5-4874-9a3c-c8e7d7926ce6",
+                              "id": "44276c6c-ada6-4dac-bc6e-5b340a1293b2",
                               "migration_identifier": "post-from-api-1-fr",
                               "title": "Ma nouvelle actualité",
                               "featured_image": {
@@ -13603,7 +13612,7 @@
                               "summary": "<p>Ceci est une nouvelle actualité créée depuis l'API.</p>",
                               "blocks": [
                                 {
-                                  "id": "633eaa6b-f70e-4088-b384-2bfc98b7b29b",
+                                  "id": "6f96f107-2809-46f0-a322-615ce75844dd",
                                   "migration_identifier": "post-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -13620,19 +13629,19 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2025-12-05T12:19:56.197+01:00",
-                                  "updated_at": "2025-12-05T12:19:56.197+01:00"
+                                  "created_at": "2026-02-19T10:50:56.529+01:00",
+                                  "updated_at": "2026-02-19T10:50:56.529+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:56.196+01:00",
-                              "updated_at": "2025-12-05T12:19:56.197+01:00"
+                              "created_at": "2026-02-19T10:50:56.528+01:00",
+                              "updated_at": "2026-02-19T10:50:56.530+01:00"
                             }
                           },
                           "category_ids": [
                             "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                           ],
-                          "created_at": "2025-12-05T12:19:56.191+01:00",
-                          "updated_at": "2025-12-05T12:19:56.199+01:00"
+                          "created_at": "2026-02-19T10:50:56.527+01:00",
+                          "updated_at": "2026-02-19T10:50:56.530+01:00"
                         }
                       ],
                       "updated": [
@@ -13659,15 +13668,15 @@
                               "subtitle": null,
                               "summary": null,
                               "blocks": [],
-                              "created_at": "2025-12-05T12:19:49.156+01:00",
-                              "updated_at": "2025-12-05T12:19:56.238+01:00"
+                              "created_at": "2026-02-19T10:50:52.986+01:00",
+                              "updated_at": "2026-02-19T10:50:56.556+01:00"
                             }
                           },
                           "category_ids": [
                             "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                           ],
-                          "created_at": "2025-12-05T12:19:49.164+01:00",
-                          "updated_at": "2025-12-05T12:19:56.238+01:00"
+                          "created_at": "2026-02-19T10:50:52.989+01:00",
+                          "updated_at": "2026-02-19T10:50:56.556+01:00"
                         }
                       ],
                       "errors": []
@@ -13846,15 +13855,15 @@
                           "subtitle": null,
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.156+01:00",
-                          "updated_at": "2025-12-05T12:19:49.156+01:00"
+                          "created_at": "2026-02-19T10:50:52.986+01:00",
+                          "updated_at": "2026-02-19T10:50:52.986+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:49.164+01:00",
-                      "updated_at": "2025-12-05T12:19:49.164+01:00"
+                      "created_at": "2026-02-19T10:50:52.989+01:00",
+                      "updated_at": "2026-02-19T10:50:52.989+01:00"
                     }
                   }
                 }
@@ -13956,15 +13965,15 @@
                           "subtitle": null,
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.156+01:00",
-                          "updated_at": "2025-12-05T12:19:56.330+01:00"
+                          "created_at": "2026-02-19T10:50:52.986+01:00",
+                          "updated_at": "2026-02-19T10:50:56.634+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:49.164+01:00",
-                      "updated_at": "2025-12-05T12:19:56.330+01:00"
+                      "created_at": "2026-02-19T10:50:52.989+01:00",
+                      "updated_at": "2026-02-19T10:50:56.635+01:00"
                     }
                   }
                 }
@@ -14210,12 +14219,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2025-12-05T12:19:49.072+01:00",
-                            "updated_at": "2025-12-05T12:19:49.072+01:00"
+                            "created_at": "2026-02-19T10:50:52.956+01:00",
+                            "updated_at": "2026-02-19T10:50:52.956+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.167+01:00",
-                        "updated_at": "2025-12-05T12:19:49.167+01:00"
+                        "created_at": "2026-02-19T10:50:52.991+01:00",
+                        "updated_at": "2026-02-19T10:50:52.991+01:00"
                       },
                       {
                         "id": "a3f63673-fb05-5751-8634-a2a8bccc1f3d",
@@ -14257,8 +14266,8 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2025-12-05T12:19:49.072+01:00",
-                            "updated_at": "2025-12-05T12:19:49.072+01:00"
+                            "created_at": "2026-02-19T10:50:52.956+01:00",
+                            "updated_at": "2026-02-19T10:50:52.956+01:00"
                           },
                           "en": {
                             "id": "f55e6093-cf39-525e-b83c-331d90fad1c6",
@@ -14276,12 +14285,12 @@
                             "social_vimeo": null,
                             "social_x": null,
                             "social_youtube": null,
-                            "created_at": "2025-12-05T12:19:49.072+01:00",
-                            "updated_at": "2025-12-05T12:19:49.072+01:00"
+                            "created_at": "2026-02-19T10:50:52.956+01:00",
+                            "updated_at": "2026-02-19T10:50:52.956+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.167+01:00",
-                        "updated_at": "2025-12-05T12:19:49.167+01:00"
+                        "created_at": "2026-02-19T10:50:52.991+01:00",
+                        "updated_at": "2026-02-19T10:50:52.991+01:00"
                       }
                     ]
                   }
@@ -14381,12 +14390,12 @@
                           "social_vimeo": null,
                           "social_x": null,
                           "social_youtube": null,
-                          "created_at": "2025-12-05T12:19:49.072+01:00",
-                          "updated_at": "2025-12-05T12:19:49.072+01:00"
+                          "created_at": "2026-02-19T10:50:52.956+01:00",
+                          "updated_at": "2026-02-19T10:50:52.956+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.167+01:00",
-                      "updated_at": "2025-12-05T12:19:49.167+01:00"
+                      "created_at": "2026-02-19T10:50:52.991+01:00",
+                      "updated_at": "2026-02-19T10:50:52.991+01:00"
                     }
                   }
                 },
@@ -14495,12 +14504,12 @@
                             "slug": "categorie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.274+01:00",
-                            "updated_at": "2025-12-05T12:19:49.274+01:00"
+                            "created_at": "2026-02-19T10:50:53.021+01:00",
+                            "updated_at": "2026-02-19T10:50:53.021+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.266+01:00",
-                        "updated_at": "2025-12-05T12:19:49.266+01:00"
+                        "created_at": "2026-02-19T10:50:53.020+01:00",
+                        "updated_at": "2026-02-19T10:50:53.020+01:00"
                       },
                       {
                         "id": "106650c4-d6f6-5c43-ba44-fdd4353b369b",
@@ -14528,12 +14537,12 @@
                             "slug": "taxonomie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.274+01:00",
-                            "updated_at": "2025-12-05T12:19:49.274+01:00"
+                            "created_at": "2026-02-19T10:50:53.021+01:00",
+                            "updated_at": "2026-02-19T10:50:53.021+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.266+01:00",
-                        "updated_at": "2025-12-05T12:19:49.266+01:00"
+                        "created_at": "2026-02-19T10:50:53.020+01:00",
+                        "updated_at": "2026-02-19T10:50:53.020+01:00"
                       },
                       {
                         "id": "90b8e848-5d73-5866-a250-c1f5d33eb3d7",
@@ -14561,12 +14570,12 @@
                             "slug": "element-de-taxonomie-de-test",
                             "summary": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.274+01:00",
-                            "updated_at": "2025-12-05T12:19:49.274+01:00"
+                            "created_at": "2026-02-19T10:50:53.021+01:00",
+                            "updated_at": "2026-02-19T10:50:53.021+01:00"
                           }
                         },
-                        "created_at": "2025-12-05T12:19:49.266+01:00",
-                        "updated_at": "2025-12-05T12:19:49.266+01:00"
+                        "created_at": "2026-02-19T10:50:53.020+01:00",
+                        "updated_at": "2026-02-19T10:50:53.020+01:00"
                       }
                     ]
                   }
@@ -14615,14 +14624,14 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "8462324c-fce2-4b79-a433-abf885fd9a1b",
+                      "id": "934ca66f-ef3a-4ca2-a802-f76dbff4224c",
                       "migration_identifier": "organization-category-from-api-1",
                       "parent_id": null,
                       "position": 3,
                       "is_taxonomy": false,
                       "localizations": {
                         "fr": {
-                          "id": "0f090b0d-c062-4174-94f7-ae37469ca09c",
+                          "id": "a4e26435-fe94-461e-b3e7-2e3102a589a6",
                           "migration_identifier": "organization-category-from-api-1-fr",
                           "name": "Ma nouvelle catégorie",
                           "breadcrumb_title": null,
@@ -14641,7 +14650,7 @@
                           "summary": "<p>Ceci est une nouvelle catégorie créée depuis l'API.</p>",
                           "blocks": [
                             {
-                              "id": "c19f86cb-30e3-4ae8-843e-51d3475dfc5b",
+                              "id": "27aa4182-8ea7-4277-a80c-60ded5c4d1a3",
                               "migration_identifier": "organization-category-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -14658,16 +14667,16 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2025-12-05T12:19:56.630+01:00",
-                              "updated_at": "2025-12-05T12:19:56.630+01:00"
+                              "created_at": "2026-02-19T10:50:56.790+01:00",
+                              "updated_at": "2026-02-19T10:50:56.790+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:56.628+01:00",
-                          "updated_at": "2025-12-05T12:19:56.631+01:00"
+                          "created_at": "2026-02-19T10:50:56.789+01:00",
+                          "updated_at": "2026-02-19T10:50:56.790+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:56.625+01:00",
-                      "updated_at": "2025-12-05T12:19:56.633+01:00"
+                      "created_at": "2026-02-19T10:50:56.787+01:00",
+                      "updated_at": "2026-02-19T10:50:56.791+01:00"
                     }
                   }
                 }
@@ -14769,14 +14778,14 @@
                     "value": {
                       "created": [
                         {
-                          "id": "c5685f35-c96e-44df-a477-352233ad5cfe",
+                          "id": "fa08b643-4027-44db-aaae-02a73814df77",
                           "migration_identifier": "organization-category-from-api-1",
                           "parent_id": null,
                           "position": 3,
                           "is_taxonomy": false,
                           "localizations": {
                             "fr": {
-                              "id": "085c4b94-a065-4b71-9b65-845077b3325a",
+                              "id": "711c3b8f-eff2-4792-9ab8-63eef7e905ef",
                               "migration_identifier": "organization-category-from-api-1-fr",
                               "name": "Ma nouvelle catégorie",
                               "breadcrumb_title": null,
@@ -14795,7 +14804,7 @@
                               "summary": "<p>Ceci est une nouvelle catégorie créée depuis l'API.</p>",
                               "blocks": [
                                 {
-                                  "id": "ca6bff09-f313-4040-a218-d1d9d233548b",
+                                  "id": "65021e4e-3095-416d-b8e2-b90f94edd9b1",
                                   "migration_identifier": "organization-category-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -14812,16 +14821,16 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2025-12-05T12:19:56.676+01:00",
-                                  "updated_at": "2025-12-05T12:19:56.676+01:00"
+                                  "created_at": "2026-02-19T10:50:56.835+01:00",
+                                  "updated_at": "2026-02-19T10:50:56.835+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:56.675+01:00",
-                              "updated_at": "2025-12-05T12:19:56.677+01:00"
+                              "created_at": "2026-02-19T10:50:56.834+01:00",
+                              "updated_at": "2026-02-19T10:50:56.835+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:56.672+01:00",
-                          "updated_at": "2025-12-05T12:19:56.677+01:00"
+                          "created_at": "2026-02-19T10:50:56.833+01:00",
+                          "updated_at": "2026-02-19T10:50:56.836+01:00"
                         }
                       ],
                       "updated": [
@@ -14851,12 +14860,12 @@
                               "slug": "categorie-de-test",
                               "summary": null,
                               "blocks": [],
-                              "created_at": "2025-12-05T12:19:49.274+01:00",
-                              "updated_at": "2025-12-05T12:19:56.689+01:00"
+                              "created_at": "2026-02-19T10:50:53.021+01:00",
+                              "updated_at": "2026-02-19T10:50:56.847+01:00"
                             }
                           },
-                          "created_at": "2025-12-05T12:19:49.266+01:00",
-                          "updated_at": "2025-12-05T12:19:56.691+01:00"
+                          "created_at": "2026-02-19T10:50:53.020+01:00",
+                          "updated_at": "2026-02-19T10:50:56.848+01:00"
                         }
                       ],
                       "errors": []
@@ -15015,12 +15024,12 @@
                           "slug": "categorie-de-test",
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.274+01:00",
-                          "updated_at": "2025-12-05T12:19:49.274+01:00"
+                          "created_at": "2026-02-19T10:50:53.021+01:00",
+                          "updated_at": "2026-02-19T10:50:53.021+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.266+01:00",
-                      "updated_at": "2025-12-05T12:19:49.266+01:00"
+                      "created_at": "2026-02-19T10:50:53.020+01:00",
+                      "updated_at": "2026-02-19T10:50:53.020+01:00"
                     }
                   }
                 }
@@ -15111,12 +15120,12 @@
                           "slug": "categorie-de-test",
                           "summary": null,
                           "blocks": [],
-                          "created_at": "2025-12-05T12:19:49.274+01:00",
-                          "updated_at": "2025-12-05T12:19:56.754+01:00"
+                          "created_at": "2026-02-19T10:50:53.021+01:00",
+                          "updated_at": "2026-02-19T10:50:56.901+01:00"
                         }
                       },
-                      "created_at": "2025-12-05T12:19:49.266+01:00",
-                      "updated_at": "2025-12-05T12:19:56.755+01:00"
+                      "created_at": "2026-02-19T10:50:53.020+01:00",
+                      "updated_at": "2026-02-19T10:50:56.902+01:00"
                     }
                   }
                 }
@@ -15342,13 +15351,13 @@
                             "summary": null,
                             "text": null,
                             "blocks": [],
-                            "created_at": "2025-12-05T12:19:49.282+01:00",
-                            "updated_at": "2025-12-05T12:19:49.282+01:00"
+                            "created_at": "2026-02-19T10:50:53.023+01:00",
+                            "updated_at": "2026-02-19T10:50:53.023+01:00"
                           }
                         },
                         "category_ids": [],
-                        "created_at": "2025-12-05T12:19:49.295+01:00",
-                        "updated_at": "2025-12-05T12:19:49.295+01:00"
+                        "created_at": "2026-02-19T10:50:53.026+01:00",
+                        "updated_at": "2026-02-19T10:50:53.026+01:00"
                       },
                       {
                         "id": "c71c1e3d-24c7-55a8-bf15-11296170b436",
@@ -15414,19 +15423,19 @@
                                   "option_link": true,
                                   "option_contact": false
                                 },
-                                "created_at": "2025-12-05T12:19:48.944+01:00",
-                                "updated_at": "2025-12-05T12:19:48.944+01:00"
+                                "created_at": "2026-02-19T10:50:52.896+01:00",
+                                "updated_at": "2026-02-19T10:50:52.896+01:00"
                               }
                             ],
-                            "created_at": "2025-12-05T12:19:49.282+01:00",
-                            "updated_at": "2025-12-05T12:19:49.282+01:00"
+                            "created_at": "2026-02-19T10:50:53.023+01:00",
+                            "updated_at": "2026-02-19T10:50:53.023+01:00"
                           }
                         },
                         "category_ids": [
                           "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                         ],
-                        "created_at": "2025-12-05T12:19:49.295+01:00",
-                        "updated_at": "2025-12-05T12:19:49.295+01:00"
+                        "created_at": "2026-02-19T10:50:53.026+01:00",
+                        "updated_at": "2026-02-19T10:50:53.026+01:00"
                       }
                     ]
                   }
@@ -15475,7 +15484,7 @@
                 "examples": {
                   "Successful creation": {
                     "value": {
-                      "id": "e769ae6d-3f49-4c80-a17c-cbcaca0394e2",
+                      "id": "0401c695-dc03-492f-94db-d55219dfa1a8",
                       "migration_identifier": "organization-from-api-1",
                       "kind": "company",
                       "email": "contact@example.org",
@@ -15490,12 +15499,12 @@
                       "siren": "123456789",
                       "localizations": {
                         "fr": {
-                          "id": "fde814a0-f80c-41e0-beb0-05165a215ed9",
+                          "id": "9ba37ef8-67c9-4350-8c72-8d03b9c14e30",
                           "migration_identifier": "organization-from-api-1-fr",
                           "name": "Mon organisation",
                           "long_name": "Mon organisation ESS",
                           "published": true,
-                          "published_at": "2025-12-05T12:19:56.904+01:00",
+                          "published_at": "2026-02-19T10:50:57.000+01:00",
                           "featured_image": {
                             "blob_id": null,
                             "alt": "La lumière brille sur les parois du canyon",
@@ -15514,7 +15523,7 @@
                           "text": null,
                           "blocks": [
                             {
-                              "id": "e00a1203-8023-45a9-8418-fa6b6354ba7c",
+                              "id": "131c8058-fdb2-4445-9751-170f2bb22d2b",
                               "migration_identifier": "organization-from-api-1-fr-block-1",
                               "template_kind": "chapter",
                               "title": "Mon premier chapitre",
@@ -15531,19 +15540,19 @@
                                 "alt": "",
                                 "credit": ""
                               },
-                              "created_at": "2025-12-05T12:19:56.918+01:00",
-                              "updated_at": "2025-12-05T12:19:56.918+01:00"
+                              "created_at": "2026-02-19T10:50:57.009+01:00",
+                              "updated_at": "2026-02-19T10:50:57.009+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:56.915+01:00",
-                          "updated_at": "2025-12-05T12:19:56.919+01:00"
+                          "created_at": "2026-02-19T10:50:57.008+01:00",
+                          "updated_at": "2026-02-19T10:50:57.010+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:56.910+01:00",
-                      "updated_at": "2025-12-05T12:19:56.919+01:00"
+                      "created_at": "2026-02-19T10:50:57.004+01:00",
+                      "updated_at": "2026-02-19T10:50:57.010+01:00"
                     }
                   }
                 }
@@ -15645,7 +15654,7 @@
                     "value": {
                       "created": [
                         {
-                          "id": "93efc057-9458-45c4-b626-61bfc28ee011",
+                          "id": "1e8802f8-859b-49a8-9718-4a842f8d1c99",
                           "migration_identifier": "organization-from-api-1",
                           "kind": "company",
                           "email": "contact@example.org",
@@ -15660,12 +15669,12 @@
                           "siren": "123456789",
                           "localizations": {
                             "fr": {
-                              "id": "4f1d8d82-bcc3-44e6-bb81-431e133af1c3",
+                              "id": "56dd3b12-a781-47c2-8ac8-a6869251a03e",
                               "migration_identifier": "organization-from-api-1-fr",
                               "name": "Mon organisation",
                               "long_name": "Mon organisation ESS",
                               "published": true,
-                              "published_at": "2025-12-05T12:19:57.005+01:00",
+                              "published_at": "2026-02-19T10:50:57.050+01:00",
                               "featured_image": {
                                 "blob_id": null,
                                 "alt": "La lumière brille sur les parois du canyon",
@@ -15684,7 +15693,7 @@
                               "text": null,
                               "blocks": [
                                 {
-                                  "id": "d270bcbd-857b-4138-aa3a-d17b7d50479d",
+                                  "id": "1bcde665-9f94-4e9a-97fb-a6ca76925a0d",
                                   "migration_identifier": "organization-from-api-1-fr-block-1",
                                   "template_kind": "chapter",
                                   "title": "Mon premier chapitre",
@@ -15701,19 +15710,19 @@
                                     "alt": "",
                                     "credit": ""
                                   },
-                                  "created_at": "2025-12-05T12:19:57.014+01:00",
-                                  "updated_at": "2025-12-05T12:19:57.014+01:00"
+                                  "created_at": "2026-02-19T10:50:57.056+01:00",
+                                  "updated_at": "2026-02-19T10:50:57.056+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:57.012+01:00",
-                              "updated_at": "2025-12-05T12:19:57.014+01:00"
+                              "created_at": "2026-02-19T10:50:57.055+01:00",
+                              "updated_at": "2026-02-19T10:50:57.056+01:00"
                             }
                           },
                           "category_ids": [
                             "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                           ],
-                          "created_at": "2025-12-05T12:19:57.010+01:00",
-                          "updated_at": "2025-12-05T12:19:57.016+01:00"
+                          "created_at": "2026-02-19T10:50:57.054+01:00",
+                          "updated_at": "2026-02-19T10:50:57.057+01:00"
                         }
                       ],
                       "updated": [
@@ -15781,19 +15790,19 @@
                                     "option_link": true,
                                     "option_contact": false
                                   },
-                                  "created_at": "2025-12-05T12:19:48.944+01:00",
-                                  "updated_at": "2025-12-05T12:19:48.944+01:00"
+                                  "created_at": "2026-02-19T10:50:52.896+01:00",
+                                  "updated_at": "2026-02-19T10:50:52.896+01:00"
                                 }
                               ],
-                              "created_at": "2025-12-05T12:19:49.282+01:00",
-                              "updated_at": "2025-12-05T12:19:57.044+01:00"
+                              "created_at": "2026-02-19T10:50:53.023+01:00",
+                              "updated_at": "2026-02-19T10:50:57.074+01:00"
                             }
                           },
                           "category_ids": [
                             "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                           ],
-                          "created_at": "2025-12-05T12:19:49.295+01:00",
-                          "updated_at": "2025-12-05T12:19:57.045+01:00"
+                          "created_at": "2026-02-19T10:50:53.026+01:00",
+                          "updated_at": "2026-02-19T10:50:57.075+01:00"
                         }
                       ],
                       "errors": []
@@ -15990,19 +15999,19 @@
                                 "option_link": true,
                                 "option_contact": false
                               },
-                              "created_at": "2025-12-05T12:19:48.944+01:00",
-                              "updated_at": "2025-12-05T12:19:48.944+01:00"
+                              "created_at": "2026-02-19T10:50:52.896+01:00",
+                              "updated_at": "2026-02-19T10:50:52.896+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:49.282+01:00",
-                          "updated_at": "2025-12-05T12:19:49.282+01:00"
+                          "created_at": "2026-02-19T10:50:53.023+01:00",
+                          "updated_at": "2026-02-19T10:50:53.023+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:49.295+01:00",
-                      "updated_at": "2025-12-05T12:19:49.295+01:00"
+                      "created_at": "2026-02-19T10:50:53.026+01:00",
+                      "updated_at": "2026-02-19T10:50:53.026+01:00"
                     }
                   }
                 }
@@ -16131,19 +16140,19 @@
                                 "option_link": true,
                                 "option_contact": false
                               },
-                              "created_at": "2025-12-05T12:19:48.944+01:00",
-                              "updated_at": "2025-12-05T12:19:48.944+01:00"
+                              "created_at": "2026-02-19T10:50:52.896+01:00",
+                              "updated_at": "2026-02-19T10:50:52.896+01:00"
                             }
                           ],
-                          "created_at": "2025-12-05T12:19:49.282+01:00",
-                          "updated_at": "2025-12-05T12:19:57.126+01:00"
+                          "created_at": "2026-02-19T10:50:53.023+01:00",
+                          "updated_at": "2026-02-19T10:50:57.148+01:00"
                         }
                       },
                       "category_ids": [
                         "74f6dc33-4e17-5852-8cdb-d7e23d80bf75"
                       ],
-                      "created_at": "2025-12-05T12:19:49.295+01:00",
-                      "updated_at": "2025-12-05T12:19:57.129+01:00"
+                      "created_at": "2026-02-19T10:50:53.026+01:00",
+                      "updated_at": "2026-02-19T10:50:57.149+01:00"
                     }
                   }
                 }
