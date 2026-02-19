@@ -6,6 +6,7 @@ module Communication::Website::WithDeuxfleurs
     after_save :deuxfleurs_setup, if: :deuxfleurs_hosting
 
     scope :hosted_on_deuxfleurs, -> { where(deuxfleurs_hosting: true) }
+    scope :for_deuxfleurs_hosting, -> (deuxfleurs_hosting, language = nil) { where(deuxfleurs_hosting: deuxfleurs_hosting) }
   end
 
   # 4 options:

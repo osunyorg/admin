@@ -70,7 +70,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_050236) do
     t.index ["university_id"], name: "index_active_storage_blobs_on_university_id"
   end
 
-  create_table "active_storage_variant_records", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
@@ -331,7 +331,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_050236) do
     t.index ["university_id"], name: "idx_on_university_id_28188e2217"
   end
 
-  create_table "communication_extranet_posts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_extranet_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "author_id"
     t.uuid "category_id"
     t.datetime "created_at", null: false
@@ -1045,7 +1045,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_050236) do
     t.datetime "updated_at", null: false
     t.index ["communication_website_id"], name: "idx_comm_website_menus_on_communication_website_id"
     t.index ["language_id"], name: "index_communication_website_menus_on_language_id"
-    t.index ["original_id"], name: "index_communication_website_menus_on_original_id"
     t.index ["university_id"], name: "index_communication_website_menus_on_university_id"
   end
 
@@ -2715,7 +2714,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_050236) do
   add_foreign_key "communication_website_menu_items", "communication_website_menus", column: "menu_id"
   add_foreign_key "communication_website_menu_items", "communication_websites", column: "website_id"
   add_foreign_key "communication_website_menu_items", "universities"
-  add_foreign_key "communication_website_menus", "communication_website_menus", column: "original_id"
   add_foreign_key "communication_website_menus", "communication_websites"
   add_foreign_key "communication_website_menus", "languages"
   add_foreign_key "communication_website_menus", "universities"
