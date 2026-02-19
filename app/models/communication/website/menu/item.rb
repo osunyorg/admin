@@ -4,6 +4,7 @@
 #
 #  id                  :uuid             not null, primary key
 #  about_type          :string           indexed => [about_id]
+#  html_class          :string
 #  kind                :integer          default("blank")
 #  position            :integer          not null
 #  position_in_tree    :integer
