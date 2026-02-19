@@ -9,6 +9,13 @@ module Permalinkable
               class_name: "Communication::Website::Permalink",
               as: :about,
               dependent: :destroy
+    has_many  :aliases,
+              -> { where(is_current: false) },
+              class_name: "Communication::Website::Permalink",
+              as: :about,
+              dependent: :destroy
+
+    accepts_nested_attributes_for :aliases
   end
 
   def previous_permalinks_in_website(website)
@@ -48,12 +55,7 @@ module Permalinkable
 
   def add_redirection(path)
     clean_path = Communication::Website::Permalink.clean_path(path)
-    Communication::Website::Permalink.create(
-      website: website,
-      about: self,
-      is_current: false,
-      path: clean_path
-    )
+    aliases.create(website: website, path: clean_path)
   end
 
   def remove_redirection(permalink)
