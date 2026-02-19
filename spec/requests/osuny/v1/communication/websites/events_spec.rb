@@ -72,6 +72,9 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
                 slug: 'noel',
                 subtitle: 'Le repas de Noël',
                 summary: 'Le repas de Noël en famille.',
+                aliases: [
+                  { path: "/repas-de-noel" }
+                ],
                 blocks: [
                   {
                     migration_identifier: 'event-from-api-1-fr-block-1',
@@ -109,7 +112,8 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
           assert_difference ->{ Communication::Website::Agenda::Event.count } => 1,
                             ->{ Communication::Website::Agenda::Event::Localization.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot.count } => 1,
-                            ->{ Communication::Website::Agenda::Event::TimeSlot::Localization.count } => 1 do
+                            ->{ Communication::Website::Agenda::Event::TimeSlot::Localization.count } => 1,
+                            ->{ Communication::Website::Permalink.count } => 1 do
             assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
