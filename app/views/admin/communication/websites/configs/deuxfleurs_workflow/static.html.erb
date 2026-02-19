@@ -37,7 +37,7 @@ jobs:
       run: yarn osuny build
 
     - name: Déploiement Garage
-      run: npx --yes dxfl deploy example.osuny.org public/ --yes
+      run: npx --yes dxfl deploy <%= @website.deuxfleurs_identifier %> public/ --yes
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.DEUXFLEURS_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.DEUXFLEURS_SECRET }}
