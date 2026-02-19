@@ -76,6 +76,9 @@ RSpec.describe 'Communication::Website::Page' do
                 header_cta: true,
                 header_cta_label: 'Découvrir',
                 header_cta_url: 'https://www.example.com',
+                aliases: [
+                  { path: '/mon-ancien-lien' }
+                ],
                 blocks: [
                   {
                     migration_identifier: 'page-from-api-1-fr-block-1',
