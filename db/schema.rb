@@ -70,7 +70,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_050236) do
     t.index ["university_id"], name: "index_active_storage_blobs_on_university_id"
   end
 
-  create_table "active_storage_variant_records", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "active_storage_variant_records", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
@@ -331,7 +331,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_050236) do
     t.index ["university_id"], name: "idx_on_university_id_28188e2217"
   end
 
-  create_table "communication_extranet_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "communication_extranet_posts", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "author_id"
     t.uuid "category_id"
     t.datetime "created_at", null: false
@@ -1138,6 +1138,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_050236) do
     t.uuid "communication_website_id", null: false
     t.datetime "created_at", null: false
     t.datetime "deleted_at"
+    t.jsonb "design_options"
     t.boolean "full_width", default: false
     t.integer "kind"
     t.string "migration_identifier"
@@ -2283,6 +2284,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_19_050236) do
     t.uuid "created_by_id"
     t.datetime "deleted_at"
     t.string "email"
+    t.boolean "is_laboratory", default: false
+    t.boolean "is_location", default: false
+    t.boolean "is_school", default: false
     t.integer "kind", default: 10
     t.float "latitude"
     t.float "longitude"
