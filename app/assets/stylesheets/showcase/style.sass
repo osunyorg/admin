@@ -1,0 +1,20 @@
+.screenshot-full-page
+    aspect-ratio: 3/4
+    object-fit: cover
+    object-position: top
+h1
+    margin-bottom: 6rem
+h2
+    margin-bottom: 2rem
+    margin-top: 6rem
+tr
+    .floating-thumb
+        bottom: 0
+        display: none
+        pointer-events: none
+        position: fixed
+        right: var(--bs-gutter-x)
+        z-index: 10
+    &:hover
+        .floating-thumb
+            display: block
