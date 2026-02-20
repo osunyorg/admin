@@ -1,14 +1,15 @@
+<% @websites_paginated = @websites.page(params[:page]).per(100) %>
 <h2>
   Tous les sites
   <span class="float-end">
-    <%= @websites.total_count %>
-    <%= Communication::Website.model_name.human(count: @websites.total_count).downcase %>
+    <%= @websites.count %>
+    <%= Communication::Website.model_name.human(count: @websites.count).downcase %>
   </span>
 </h2>
 <div class="table-responsive">
   <table class="table">
     <tbody>
-      <% @websites.each do |website| %>
+      <% @websites_paginated.each do |website| %>
         <tr class="position-relative">
           <td><%= link_to website.original_localization.to_s,
                           showcase_website_path(website),
@@ -21,4 +22,4 @@
     </tbody>
   </table>
 </div>
-<%= paginate @websites %>
+<%= paginate @websites_paginated %>
