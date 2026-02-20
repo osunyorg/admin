@@ -5,6 +5,7 @@
       <article class="position-relative">
         <% if website.screenshot_full_page.attached? %>
           <%= kamifusen_tag website.screenshot_full_page,
+                            width: 600,
                             class: 'img-fluid screenshot-full-page mb-3' %>
         <% end %>
         <p>
