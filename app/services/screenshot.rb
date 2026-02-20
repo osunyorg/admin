@@ -27,7 +27,7 @@ class Screenshot
         meta: false,
         waitForTimeout: 1500,
         headers: { 'accept-language': 'fr;q=0.9, en;q=0.8' },
-        device: 'Macbook Pro 15'
+        device: 'Macbook Pro 16'
       },
       headers: {
         'x-api-key' => ENV['MICROLINK_API_KEY']
