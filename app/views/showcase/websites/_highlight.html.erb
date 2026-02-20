@@ -1,0 +1,22 @@
+<h2>À découvrir</h2>
+<div class="row g-5">
+  <% @websites.highlighted_in_showcase.each do |website| %>
+    <div class="col-md-6 col-xl-4">
+      <article class="position-relative">
+        <% if website.screenshot_full_page.attached? %>
+          <%= kamifusen_tag website.screenshot_full_page,
+                            class: 'img-fluid screenshot-full-page mb-3' %>
+        <% end %>
+        <p>
+          <%= link_to website.original_localization.to_s,
+                      showcase_website_path(website),
+                      class: 'stretched-link' %>
+          <span class="float-end">
+            <%= website.in_production_at.year %>
+          </span>
+        </p>
+      </article>
+    </div>
+  <% end %>
+</div>
+<%= paginate @websites %>
