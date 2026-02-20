@@ -11,9 +11,12 @@
     <tbody>
       <% @websites_paginated.each do |website| %>
         <tr class="position-relative">
-          <td><%= link_to website.original_localization.to_s,
-                          showcase_website_path(website),
-                          class: 'stretched-link' %></td>
+          <td>
+            <%= link_to website.original_localization.to_s,
+                        showcase_website_path(website),
+                        class: 'stretched-link' %>
+            <%= kamifusen_tag website.screenshot, width: 600, class: 'floating-thumb' if website.screenshot.attached? %>
+          </td>
           <td><%= website.university %></td>
           <td><%= website.showcase_tags.to_sentence %></td>
           <td class="text-end"><%= website.in_production_at.year %></td>

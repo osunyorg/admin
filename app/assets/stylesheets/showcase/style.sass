@@ -7,3 +7,14 @@ h1
 h2
     margin-bottom: 2rem
     margin-top: 6rem
+tr
+    .floating-thumb
+        bottom: 0
+        display: none
+        pointer-events: none
+        position: fixed
+        right: var(--bs-gutter-x)
+        z-index: 10
+    &:hover
+        .floating-thumb
+            display: block
