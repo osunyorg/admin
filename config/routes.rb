@@ -1,14 +1,5 @@
 Rails.application.routes.draw do
-  constraints host: ENV['OSUNY_SHOWCASE'] do
-    get ':feature' => 'showcase/websites#feature',
-                      as: :showcase_feature,
-                      constraints: {
-                        feature: /actualites|agenda|portfolio|jobboard/
-                      }
-    get ':tag' => 'showcase/websites#tag', as: :showcase_tag
-    get '/' => 'showcase/websites#index'
-    get 'websites/:id' => 'showcase/websites#show', as: :showcase_website
-  end
+  draw 'showcase'
   constraints host: ENV['OSUNY_TRANSPARENCY'] do
     get '/' => 'transparency/home#index'
   end
