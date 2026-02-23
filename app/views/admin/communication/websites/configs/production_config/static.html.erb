@@ -7,6 +7,13 @@ osuny:
   website:
     id: <%= @website.id %>
 
+<% if @website.has_plausible? %>
+## PARAMS
+params:
+  _merge: deep
+  plausible: "<%= @website.plausible_site_domain %>"
+<% end %>
+
 ## LANGUAGE
 defaultContentLanguage: <%= @website.default_language.iso_code %>
 defaultContentLanguageInSubdir: <%= @website.active_languages.many? %>

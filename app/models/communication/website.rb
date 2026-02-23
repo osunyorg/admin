@@ -83,6 +83,7 @@ class Communication::Website < ApplicationRecord
   include WithOpenApi
   include WithPages
   include WithMenus # Menus must be created after special pages, so we can fill legal menu
+  include WithPlausible
   include WithProduction
   include WithProgramCategories
   include WithRealmAdministration
