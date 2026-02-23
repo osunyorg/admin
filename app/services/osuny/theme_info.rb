@@ -1,7 +1,7 @@
 class Osuny::ThemeInfo
 
   def self.get_current_version
-    URI("https://example.osuny.org/osuny-theme-version").read
+    URI("https://example.osuny.org/osuny-theme-version.txt").read
   rescue
   end
 
