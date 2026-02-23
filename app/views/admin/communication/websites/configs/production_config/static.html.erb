@@ -7,8 +7,8 @@ osuny:
   website:
     id: <%= @website.id %>
 
-## PARAMS
 <% if @website.has_plausible? %>
+## PARAMS
 params:
   _merge: deep
   plausible: "<%= @website.plausible_site_domain %>"
