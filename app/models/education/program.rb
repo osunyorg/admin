@@ -98,7 +98,6 @@ class Education::Program < ApplicationRecord
     locations +
     siblings +
     descendants +
-    [diploma] +
     [parent]
   end
 
