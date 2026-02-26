@@ -7,14 +7,19 @@ h1
 h2
     margin-bottom: 2rem
     margin-top: 6rem
-tr
-    .floating-thumb
-        bottom: 0
-        display: none
-        pointer-events: none
-        position: fixed
-        right: var(--bs-gutter-x)
-        z-index: 10
-    &:hover
+.websites--list
+    article
+        border-bottom: 1px solid #6F6E69
+        padding-bottom: 5px
+        padding-top: 5px
         .floating-thumb
-            display: block
+            display: none
+            pointer-events: none
+            position: absolute
+            right: 10px
+            top: -150px
+            width: 500px
+            z-index: 10
+        &:hover
+            .floating-thumb
+                display: block
