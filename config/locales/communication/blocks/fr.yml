@@ -596,6 +596,8 @@ fr:
                 label: Afficher les images des pages
               option_main_summary:
                 label: Afficher le résumé de la page principale
+              option_subtitle:
+                label: Afficher les sous-titres des pages
               option_summary:
                 label: Afficher les descriptions courtes des pages
               page_id:
