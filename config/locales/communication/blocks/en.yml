@@ -351,6 +351,8 @@ en:
                 title:
                   label: Title
                   placeholder: Enter title here
+              option_icons:
+                label: Show images as small icons
               remove_element: Remove feature
           files:
             description: A list of downloadable files, mentioning their file size.
