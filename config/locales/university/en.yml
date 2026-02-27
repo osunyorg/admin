@@ -278,7 +278,7 @@ en:
           programs: Teachings
           programs_of: Teachings of %{name}
       import_btn: Import people
-      import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @.<br><i>Categories</i> field can contain a list of categories to connect ot the person. It is a list of names separated by a \"|\" character. If a category provided does not exist on the platform it will be created."
+      import_hint_html: "Possible values for <i>gender</i> are: m (male), f (female) and n (non binary).<br>The <i>photo</i> field must be a valid URL of an image somewhere online. It must end with an accepted extension (%{formats}).<br><i>Phone_professional</i>, <i>phone_personal</i>, <i>mobile</i> and <i>zipcode</i> fields must have a text format, not numbers.<br><i>Country</i> field must contain the ISO 3166 code of the country, so 2 upcase characters (<a href=\"https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes\" target=\_blank\">list</a>).<br><i>Social_twitter</i> field should have no @.<br><i>Categories</i> field can contain a list of categories to connect ot the person. It is a list of names separated by a \"|\" character. If a category provided does not exist on the platform it will be created."
       personal_data_visibilities:
         private: Private
         public: Public
