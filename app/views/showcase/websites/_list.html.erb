@@ -19,8 +19,8 @@
                           class: 'floating-thumb' if website.screenshot.attached? %>
       </div>
       <div class="col-lg-3 text-end text-lg-start"><%= website.university %></div>
-      <div class="col-lg-3 text-end text-lg-start"><%= website.showcase_tags.to_sentence %></div>
-      <div class="col-lg-2 text-end"><%= website.in_production_at.year %></div>
+      <div class="col-lg-4 text-end text-lg-start"><%= website.showcase_tags.to_sentence %></div>
+      <div class="col-lg-1 text-end"><%= website.in_production_at.year %></div>
     </div>
   </article>
 <% end %>
