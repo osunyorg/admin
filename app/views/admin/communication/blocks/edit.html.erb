@@ -135,6 +135,14 @@
           };
         });
       },
+      deleteElement(element) {
+          let index = this.data.elements.indexOf(element);
+          this.data.elements.splice(index, 1);
+          let scope = this;
+          setTimeout(function () {
+            scope.refreshSummernotes();
+          }, 500)
+      },
       getFileUrl(signed_id, filename) {
         return this.directUpload.blobUrlTemplate
           .replace(':signed_id', signed_id)
