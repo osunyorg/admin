@@ -4,6 +4,7 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     @features = Communication::Website::Showcase.features
     @websites = Communication::Website.in_showcase
                                       .ordered_by_production_date
+    @title = "#{@websites.count } sites créés"
   end
 
   def show
