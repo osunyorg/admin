@@ -32,13 +32,12 @@ jobs:
       with:
         hugo-version: '0.154.5'
         extended: true
-        withdeploy: true
 
     - name: Compilation du site
       run: yarn osuny build
 
     - name: Déploiement Garage
-      run: hugo deploy --force --maxDeletes -1
+      run: npx --yes dxfl deploy <%= @website.deuxfleurs_identifier %> public/ --yes
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.DEUXFLEURS_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.DEUXFLEURS_SECRET }}
