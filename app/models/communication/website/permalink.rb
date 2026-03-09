@@ -136,6 +136,13 @@ class Communication::Website::Permalink < ApplicationRecord
     self.class.special_page(website)
   end
 
+  # Starting from Hugo 0.155, aliases are site-relative,
+  # so we need to go one level up on multilingual sites to get the correct path.
+  # More info: https://developers.osuny.org/docs/theme/architecture/aliases/
+  def alias_path
+    "/..#{path}"
+  end
+
   def to_s
     "#{path}"
   end
