@@ -12,12 +12,4 @@ module Communication::Website::WithRealmCommunication
     alias       :blocks :communication_blocks
   end
 
-  # Starting from Hugo 0.155, aliases are site-relative,
-  # so we need to go one level up on multilingual sites to get the correct path.
-  # More info: https://developers.osuny.org/docs/theme/architecture/aliases/
-  def permalink_prefix
-    return @permalink_prefix if defined?(@permalink_prefix)
-    @permalink_prefix = active_languages.many? ? "/.." : ""
-  end
-
 end

@@ -39,7 +39,7 @@ slug: "<%= hugo.slug %>"
 <%    if previous_permalinks.any? %>
 aliases:
 <%      previous_permalinks.each do |permalink| %>
-  - /..<%= permalink.path %>
+  - <%= permalink.alias_path %>
 <%      end %>
 <%    end %>
 <% end %>
