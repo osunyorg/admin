@@ -1,6 +1,6 @@
-<% content_for :title, 'Sites créés avec Osuny' %>
+<% content_for :title, @title %>
 
-<h1>Sites créés avec Osuny</h1>
+<h1><%= @title %></h1>
 
 <% unless params.has_key?(:page) %>
   <%= render 'highlight' %>
