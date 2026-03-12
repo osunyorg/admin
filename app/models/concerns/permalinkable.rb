@@ -58,10 +58,6 @@ module Permalinkable
     aliases.create(website: website, path: clean_path)
   end
 
-  def remove_redirection(permalink)
-    permalink.destroy
-  end
-
   protected
 
   def build_url(website, path)

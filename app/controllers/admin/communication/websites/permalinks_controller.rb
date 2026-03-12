@@ -13,6 +13,13 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
   end
 
   def destroy
-    @permalink.about.remove_redirection(@permalink)
+    @permalink.destroy
+    respond_to do |format|
+      format.js { }
+      format.html {
+        redirect_to redirects_admin_communication_website_path(id: params[:website_id], website_id: nil),
+                    notice: t('admin.successfully_duplicated_html', model: @permalink.to_s)
+      }
+    end
   end
 end

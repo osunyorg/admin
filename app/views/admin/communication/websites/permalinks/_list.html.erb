@@ -10,9 +10,14 @@
             </div>
             <div class="col-lg-4">
               <%= osuny_label Communication::Website::Permalink.human_attribute_name(:about) %>
-              <p><%= permalink.about %></p>
+              <p>
+                <%= permalink.about %>
+              </p>
             </div>
           </div>
+        </div>
+        <div class="card-footer">
+          <%= destroy_link permalink %>
         </div>
       </div>
     </div>
