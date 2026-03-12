@@ -1,4 +1,12 @@
 class Admin::Communication::Websites::SettingsController < Admin::Communication::Websites::ApplicationController
+  # Ce n'est pas une ressource nested comme dependencies,
+  # donc on doit charger explicitement pour utiliser id et pas website_id
+  load_and_authorize_resource :website,
+                              id_param: :id,
+                              class: Communication::Website,
+                              through: :current_university,
+                              through_association: :communication_websites
+
   before_action :set_feature_nav
 
   def federation
@@ -13,7 +21,7 @@ class Admin::Communication::Websites::SettingsController < Admin::Communication:
     breadcrumb
     add_breadcrumb current_language
   end
-  
+
   def redirects
     @permalinks = @website.permalinks
                           .not_current
@@ -27,7 +35,7 @@ class Admin::Communication::Websites::SettingsController < Admin::Communication:
     breadcrumb
     add_breadcrumb t('admin.communication.website.technical.label')
   end
-  
+
   protected
 
   def breadcrumb
@@ -36,8 +44,6 @@ class Admin::Communication::Websites::SettingsController < Admin::Communication:
   end
 
   def set_feature_nav
-    # FIXME @SebouChu je capte pas
-    @website = current_university.websites.find(params[:id])
     @l10n = @website.localization_for(current_language)
     @feature_nav = 'navigation/admin/communication/website/settings'
   end
