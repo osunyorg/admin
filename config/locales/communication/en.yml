@@ -280,7 +280,11 @@ en:
         text: Main page text
         title: Title
       communication/website/permalink:
+        about: About
+        internal: Internal
+        external: External
         path: Path
+        target_url: Target URL
       communication/website/portfolio/project:
         categories: Categories
         full_width: Full width
@@ -392,6 +396,9 @@ en:
       communication/website/agenda/event:
         one: Event
         other: Events
+      communication/website/agenda/event/day:
+        one: Day
+        other: Days
       communication/website/agenda/event/time_slot:
         one: Time slot
         other: Time slots
@@ -880,6 +887,7 @@ en:
         text: This field is deprecated, content will not be displayed on the website.
       communication_website_permalink:
         path: "Must be an URL path. Example: /old/path"
+        target_url: "Must be a fully qualified URL, with protocol. Example: https://www.osuny.org"
       communication_website_portfolio_project:
         full_width: On large screens, a full width project uses all available space for the content.
       communication_website_post:

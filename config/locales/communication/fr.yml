@@ -279,8 +279,11 @@ fr:
         text: Texte principal de la page
         title: Titre
       communication/website/permalink:
-        path: Chemin
         about: Cible
+        internal: Interne
+        external: Externe
+        path: Chemin
+        target_url: URL cible
       communication/website/portfolio/project:
         categories: Catégories
         full_width: Pleine largeur
@@ -392,6 +395,9 @@ fr:
       communication/website/agenda/event:
         one: Événement
         other: Événements
+      communication/website/agenda/event/day:
+        one: Jour
+        other: Jours
       communication/website/agenda/event/time_slot:
         one: Créneau horaire
         other: Créneaux horaires
@@ -883,6 +889,7 @@ fr:
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
       communication_website_permalink:
         path: "Doit être un chemin d'URL. Exemple : /ancien/chemin"
+        target_url: "Doit être une URL complète, avec le protocole. Exemple: https://www.osuny.org"
       communication_website_portfolio_project:
         full_width: Sur de grands écrans, le projet en pleine largeur utilisera tout l'espace disponible.
       communication_website_post:
