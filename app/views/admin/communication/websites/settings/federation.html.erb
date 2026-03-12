@@ -1,5 +1,7 @@
 <% content_for :title, t('admin.communication.website.federation.label') %>
 
+<p><%= t('admin.communication.website.federation.description') %></p>
+
 <%= simple_form_for [:admin, @website] do |f| %>
   <%= f.simple_fields_for :localizations, @l10n do |lf| %>
     <%= f.error_notification %>

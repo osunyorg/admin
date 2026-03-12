@@ -6,9 +6,9 @@ namespace :communication do
   end
   resources :websites do
     member do
-      get 'edit/language' => 'websites#edit_language', as: :edit_language
-      get 'edit/technical' => 'websites#edit_technical', as: :edit_technical
-      get 'edit/federation' => 'websites#edit_federation', as: :edit_federation
+      get 'settings/language' => 'websites/settings#language', as: :edit_language
+      get 'settings/technical' => 'websites/settings#technical', as: :edit_technical
+      get 'settings/federation' => 'websites/settings#federation', as: :edit_federation
       get :analytics
       get :security
       get :static

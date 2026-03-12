@@ -491,7 +491,8 @@ fr:
           description: Tout ce qui est lié au contenu
           label: Éditorial
         federation:
-          label: Fédération de contenu
+          label: Fédération
+          description: La fédération permet de partager des contenus entre les sites. Cela se passe en 2 étapes. D'abord, il faut définir les sources autorisées à envoyer du contenu vers ce site. Puis il faut choisir au cas par cas les contenus qui doivent être diffusés.
         git_file:
           analysis:
             destroy_all_on_git: Supprimer tous les fichiers git

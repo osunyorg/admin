@@ -1,7 +1,7 @@
 class Admin::Communication::WebsitesController < Admin::Communication::Websites::ApplicationController
   include Admin::Localizable
 
-  before_action :set_feature_nav, only: [:edit, :edit_language, :edit_federation, :edit_technical, :update]
+  before_action :set_feature_nav, only: [:edit, :update]
 
   def index
     @websites = @websites.filter_by(params[:filters], current_language)
@@ -86,30 +86,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
   def edit
     breadcrumb
     add_breadcrumb t('admin.subnav.settings')
-  end
-
-  def edit_language
-    @l10n = @website.localization_for(current_language)
-    breadcrumb
-    add_breadcrumb t('admin.subnav.settings'), edit_admin_communication_website_path(@website, website_id: nil)
-    add_breadcrumb current_language
-  end
-
-  def edit_federation
-    @l10n = @website.localization_for(current_language)
-    @source_websites = current_university.websites
-                                         .where.not(id: @website.id)
-                                         .ordered(current_language)
-    breadcrumb
-    add_breadcrumb t('admin.subnav.settings'), edit_admin_communication_website_path(@website, website_id: nil)
-    add_breadcrumb t('admin.communication.website.federation.label')
-  end
-
-  def edit_technical
-    @l10n = @website.localization_for(current_language)
-    breadcrumb
-    add_breadcrumb t('admin.subnav.settings'), edit_admin_communication_website_path(@website, website_id: nil)
-    add_breadcrumb t('admin.communication.website.technical.label')
   end
 
   def create

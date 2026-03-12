@@ -489,7 +489,8 @@ en:
           description: Everything related to content
           label: Editorial
         federation:
-          label: Content federation
+          label: Federation
+          description: The federation allows content to be shared between sites. This is done in two steps. First, you must define the sources authorised to send content to this site. Then you must choose the content to be distributed on a case-by-case basis.
         git_file:
           analysis:
             destroy_all_on_git: Delete all git files
