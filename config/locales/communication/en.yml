@@ -635,6 +635,7 @@ en:
           add_path: Add a redirect
           button: Manage redirects
           current_path: Current path
+          label: Redirections
           previous_paths: Redirects (old paths)
           title: Manage redirects
         see_showcase: See showcase

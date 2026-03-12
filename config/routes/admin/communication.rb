@@ -6,9 +6,12 @@ namespace :communication do
   end
   resources :websites do
     member do
-      get 'settings/language' => 'websites/settings#language', as: :edit_language
-      get 'settings/technical' => 'websites/settings#technical', as: :edit_technical
-      get 'settings/federation' => 'websites/settings#federation', as: :edit_federation
+      scope 'settings' do
+        get 'federation' => 'websites/settings#federation'
+        get 'language' => 'websites/settings#language'
+        get 'redirects' => 'websites/settings#redirects'
+        get 'technical' => 'websites/settings#technical'
+      end
       get :analytics
       get :security
       get :static
@@ -33,7 +36,7 @@ namespace :communication do
         get 'direct_source/:type' => 'websites/connections#direct_source', as: :direct_source
       end
     end
-    resources :permalinks, controller: 'websites/permalinks', only: [:create, :destroy]
+    resources :permalinks, controller: 'websites/permalinks'
     resources :git_files, controller: 'websites/git_files', only: [:index, :show]
     namespace :page, path: 'pages' do
       resources :categories, controller: '/admin/communication/websites/pages/categories' do

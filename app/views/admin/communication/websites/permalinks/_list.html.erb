@@ -1,0 +1,20 @@
+<div class="row g-2 mb-2">
+  <% permalinks.each do |permalink| %>
+    <div>
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-8">
+              <%= osuny_label Communication::Website::Permalink.human_attribute_name(:path) %>
+              <pre><%= permalink.path %></pre>
+            </div>
+            <div class="col-lg-4">
+              <%= osuny_label Communication::Website::Permalink.human_attribute_name(:about) %>
+              <p><%= permalink.about %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

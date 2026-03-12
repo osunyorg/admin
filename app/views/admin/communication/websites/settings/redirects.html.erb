@@ -1,0 +1,19 @@
+<% content_for :title, t('admin.communication.website.redirects.label') %>
+
+<% content_for :title_right do %>
+  <%= create_link Communication::Website::Permalink %>
+<% end %>
+
+<div class="d-flex justify-content-between mb-5">
+  <ul class="nav nav-pills osuny__lifecycle">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page">
+        <%= t('lifecycle.status.all') %>
+        <span class="text-muted">(<%= @permalinks.total_count %>)</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<%= render 'admin/communication/websites/permalinks/list', permalinks: @permalinks %> 
+<%= paginate @permalinks %>

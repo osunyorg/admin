@@ -280,6 +280,7 @@ fr:
         title: Titre
       communication/website/permalink:
         path: Chemin
+        about: Cible
       communication/website/portfolio/project:
         categories: Catégories
         full_width: Pleine largeur
@@ -637,6 +638,7 @@ fr:
           add_path: Ajouter une redirection
           button: Gérer les redirections
           current_path: Chemin actuel
+          label: Redirections
           previous_paths: Redirections (anciens chemins)
           title: Gérer les redirections
         see_showcase: Voir le showcase
