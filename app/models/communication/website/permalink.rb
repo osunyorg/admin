@@ -3,12 +3,13 @@
 # Table name: communication_website_permalinks
 #
 #  id            :uuid             not null, primary key
-#  about_type    :string           not null, indexed => [about_id]
+#  about_type    :string           indexed => [about_id]
 #  is_current    :boolean          default(TRUE)
 #  path          :string
+#  target_url    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             not null, indexed => [about_type]
+#  about_id      :uuid             indexed => [about_type]
 #  university_id :uuid             not null, indexed
 #  website_id    :uuid             not null, indexed
 #
@@ -32,9 +33,9 @@ class Communication::Website::Permalink < ApplicationRecord
 
   belongs_to :university
   belongs_to :website, class_name: "Communication::Website"
-  belongs_to :about, polymorphic: true
+  belongs_to :about, polymorphic: true, optional: true
 
-  validates :about, :path, presence: true
+  validates :path, presence: true
 
   before_validation :set_university, on: :create
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
@@ -45,6 +46,8 @@ class Communication::Website::Permalink < ApplicationRecord
   scope :current, -> { where(is_current: true) }
   scope :not_current, -> { where(is_current: false) }
   scope :not_root, -> { where.not(path: '/') }
+  scope :internal, -> { where.not(about_id: nil) }
+  scope :external, -> { where(about_id: nil) }
   scope :ordered, -> { order(:path) }
 
   def self.config_in_website(website, language)
@@ -144,6 +147,14 @@ class Communication::Website::Permalink < ApplicationRecord
     "/..#{path}"
   end
 
+  def external?
+    about.nil?
+  end
+
+  def internal?
+    about.present?
+  end
+
   def to_s
     "#{path}"
   end
@@ -166,7 +177,7 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   def touch_about
-    return unless about.persisted?
+    return unless about.present? && about.persisted?
     about.touch
   end
 end

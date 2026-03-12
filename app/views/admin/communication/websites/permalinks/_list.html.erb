@@ -1,25 +1,38 @@
-<div class="row g-2 mb-2">
-  <% permalinks.each do |permalink| %>
-    <div>
-      <div class="<%= osuny_card_classes(horizontal: true) %>">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-8">
-              <%= osuny_label Communication::Website::Permalink.human_attribute_name(:path) %>
-              <pre><%= permalink.path %></pre>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><%= osuny_label Communication::Website::Permalink.human_attribute_name(:path) %></th>
+        <th><%= osuny_label Communication::Website::Permalink.human_attribute_name(:type) %></th>
+        <th><%= osuny_label Communication::Website::Permalink.human_attribute_name(:about) %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% permalinks.each do |permalink| %>
+        <tr>
+          <td><pre class="mb-0"><%= permalink.path %></pre></td>
+          <td>
+            <% property = permalink.internal? ? :internal : :external %>
+            <span class="badge bg-light text-black">
+              <%= Communication::Website::Permalink.human_attribute_name(property) %>
+            </span>
+          </td> 
+          <td>
+            <% if permalink.internal? %>
+              <%= render 'admin/communication/websites/permalinks/about', permalink: permalink %>
+            <% else %>
+              <%= permalink.target_url %>
+            <% end %>
+          </td>
+          <td class="text-end">
+            <div class="btn-group mb-n2">
+              <%= edit_link permalink %>
+              <%= destroy_link permalink %>
             </div>
-            <div class="col-lg-4">
-              <%= osuny_label Communication::Website::Permalink.human_attribute_name(:about) %>
-              <p>
-                <%= permalink.about %>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <%= destroy_link permalink %>
-        </div>
-      </div>
-    </div>
-  <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tr>
+  </table>
 </div>
