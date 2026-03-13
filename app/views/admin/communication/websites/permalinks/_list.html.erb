@@ -14,9 +14,7 @@
           <td><pre class="mb-0"><%= permalink.path %></pre></td>
           <td>
             <% property = permalink.internal? ? :internal : :external %>
-            <span class="badge bg-light text-black">
-              <%= Communication::Website::Permalink.human_attribute_name(property) %>
-            </span>
+            <%= Communication::Website::Permalink.human_attribute_name(property) %>
           </td> 
           <td>
             <% if permalink.internal? %>

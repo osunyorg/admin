@@ -351,6 +351,11 @@ fr:
           attributes:
             published:
               cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
+        communication/website/permalink:
+          attributes:
+            path:
+              blank: doit être un chemin correct, comme défini par la RFC2396
+              not_unique: déjà utilisé par un autre alias
     models:
       communication/block:
         one: Bloc de contenu
@@ -617,8 +622,6 @@ fr:
                 other: Cette page est une page spéciale, qui présente nativement les %{count} volumes liés au site.
             sitemap: Cette page est une page spéciale, qui présente nativement le plan du site.
           structure: Pages
-        permalinks:
-          creation_error: "Erreur lors de la création. Le chemin renseigné est-il au bon format ?"
         portfolio:
           project:
             localizations:

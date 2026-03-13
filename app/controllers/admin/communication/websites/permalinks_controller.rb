@@ -33,7 +33,7 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
       format.js { }
       format.html {
         redirect_to redirects_admin_communication_website_path(id: params[:website_id], website_id: nil),
-                    notice: t('admin.successfully_duplicated_html', model: @permalink.to_s)
+                    notice: t('admin.successfully_destroyed_html', model: @permalink.to_s)
       }
     end
   end

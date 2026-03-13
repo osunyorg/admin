@@ -352,6 +352,11 @@ en:
           attributes:
             published:
               cannot_unpublished_default: cannot be unpublished (default language)
+        communication/website/permalink:
+          attributes:
+            path:
+              blank: must be correct, as defined by RFC2396
+              not_unique: already used by another alias
     models:
       communication/block:
         one: Content block
@@ -615,8 +620,6 @@ en:
                 other: This page is a special page that natively displays %{count} volumes related to the site.
             sitemap: This page is a special page that natively displays the site map.
           structure: Pages
-        permalinks:
-          creation_error: "Error during the creation. Does the given path have the correct format?"
         portfolio:
           project:
             localizations:
