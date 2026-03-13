@@ -23,10 +23,11 @@ class Admin::Communication::Websites::SettingsController < Admin::Communication:
   end
 
   def redirects
-    @permalinks = @website.permalinks
-                          .not_current
-                          .ordered
-                          .page(params[:page])
+    @filtered = @website.permalinks
+                        .not_current
+                        .filter_by(params[:filters], current_language)
+    @permalinks =  @filtered.ordered
+                            .page(params[:page])
     breadcrumb
     add_breadcrumb t('admin.communication.website.redirects.label')
   end

@@ -13,6 +13,10 @@
       </a>
     </li>
   </ul>
+  <%= render 'admin/communication/websites/permalinks/filters',
+              current_path: redirects_admin_communication_website_path(id: @website.id, website_id: nil),
+              website: @website %>
+
 </div>
 
 <%= render 'admin/communication/websites/permalinks/list', permalinks: @permalinks %> 

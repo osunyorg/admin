@@ -26,6 +26,7 @@
 #
 class Communication::Website::Permalink < ApplicationRecord
 
+  include Filterable
   include WithMapping
   include WithOpenApi
   # We don't include Sanitizable as this model is never handled by users directly.
@@ -50,6 +51,15 @@ class Communication::Website::Permalink < ApplicationRecord
   scope :internal, -> { where.not(about_id: nil) }
   scope :external, -> { where(about_id: nil) }
   scope :ordered, -> { order(:path) }
+
+  # Filters
+  scope :for_search_term, -> (term, language) {
+    where("communication_website_permalinks.path LIKE :term", term: "%#{sanitize_sql_like(term)}%")
+  }
+  scope :for_type, -> (type, language) {
+    type == 'internal' ? internal : external
+  }
+
 
   def self.config_in_website(website, language)
     required_kinds_in_website(website).map { |permalink_class|
