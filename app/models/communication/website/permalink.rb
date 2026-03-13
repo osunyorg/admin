@@ -60,7 +60,6 @@ class Communication::Website::Permalink < ApplicationRecord
     type == 'internal' ? internal : external
   }
 
-
   def self.config_in_website(website, language)
     required_kinds_in_website(website).map { |permalink_class|
       [
@@ -166,6 +165,17 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def internal?
     about.present?
+  end
+
+  def target
+    internal? ? about.current_permalink_in_website(website) : target_url
+  end
+
+  def currently_in_use?
+    website.permalinks
+           .current
+           .where(path: path)
+           .exists?
   end
 
   def to_s

@@ -1,0 +1,10 @@
+<%
+@website.permalinks.not_current.ordered.find_each do |permalink|
+  next if permalink.currently_in_use?
+  %>
+[[redirects]]
+from = "<%= permalink.path %>"
+to = "<%= permalink.target %>"
+status = 301
+
+<% end %>
