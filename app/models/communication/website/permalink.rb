@@ -81,6 +81,8 @@ class Communication::Website::Permalink < ApplicationRecord
     raise NoMethodError
   end
 
+  # FIXME j'aime pas ça, il y a une confusion entre un service et une validation @SebouChu
+  # Je n'arrive pas à le remettre tout bien
   def self.clean_path(path)
     clean_path = path.dup
     # Remove eventual host

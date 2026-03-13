@@ -1,36 +1,36 @@
-<div class="table-responsive">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th><%= osuny_label Communication::Website::Permalink.human_attribute_name(:path) %></th>
-        <th><%= osuny_label Communication::Website::Permalink.human_attribute_name(:type) %></th>
-        <th><%= osuny_label Communication::Website::Permalink.human_attribute_name(:about) %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% permalinks.each do |permalink| %>
-        <tr>
-          <td><pre class="mb-0"><%= permalink.path %></pre></td>
-          <td>
-            <% property = permalink.internal? ? :internal : :external %>
-            <%= Communication::Website::Permalink.human_attribute_name(property) %>
-          </td> 
-          <td>
-            <% if permalink.internal? %>
-              <%= render 'admin/communication/websites/permalinks/about', permalink: permalink %>
-            <% else %>
-              <%= permalink.target_url %>
-            <% end %>
-          </td>
-          <td class="text-end">
-            <div class="btn-group mb-n2">
-              <%= edit_link permalink %>
-              <%= destroy_link permalink %>
+<div class="row g-2 mb-3">
+  <% permalinks.each do |permalink| %>
+    <div>
+      <div class="<%= osuny_card_classes(horizontal: true) %> align-items-end">
+        <div class="card-body">
+          <pre><%= permalink.path %></pre>
+          <div class="row">
+            <div class="col-lg-3">
+              <%= osuny_label Communication::Website::Permalink.human_attribute_name(:type) %>
+              <p class="mb-0">
+                <% property = permalink.internal? ? :internal : :external %>
+                <%= Communication::Website::Permalink.human_attribute_name(property) %>
+              </p>
             </div>
-          </td>
-        </tr>
-      <% end %>
-    </tr>
-  </table>
+            <div class="col-lg-9">
+              <%= osuny_label Communication::Website::Permalink.human_attribute_name(:about) %>
+              <p class="mb-0">
+                <% if permalink.internal? %>
+                  <%= render 'admin/communication/websites/permalinks/about', permalink: permalink %>
+                <% else %>
+                  <%= link_to permalink.target_url, permalink.target_url, target: :_blank %>
+                <% end %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group mb-n1">
+            <%= edit_link permalink %>
+            <%= destroy_link permalink %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
