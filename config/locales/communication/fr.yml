@@ -113,6 +113,7 @@ fr:
         archive_content: Archiver le contenu ?
         autoupdate_theme: Mise à jour automatique du thème Osuny
         config_default_content_security_policy: Politiques de sécurités pour définir les CSP (CORS)
+        config_default_deuxfleurs_redirects: Fichier de redirections Deuxfleurs
         config_default_deuxfleurs_workflow: Action de mise en ligne Deuxfleurs
         config_default_development_config: Configuration de développement
         config_default_languages: Définition des langues et des configurations pour chaque langue
@@ -279,7 +280,11 @@ fr:
         text: Texte principal de la page
         title: Titre
       communication/website/permalink:
+        about: Cible
+        internal: Interne
+        external: Externe
         path: Chemin
+        target_url: URL cible
       communication/website/portfolio/project:
         categories: Catégories
         full_width: Pleine largeur
@@ -347,6 +352,11 @@ fr:
           attributes:
             published:
               cannot_unpublished_default: ne peut pas être dépubliée (langue par défaut)
+        communication/website/permalink:
+          attributes:
+            path:
+              blank: doit être un chemin correct, comme défini par la RFC2396
+              not_unique: déjà utilisé par un autre alias
     models:
       communication/block:
         one: Bloc de contenu
@@ -391,6 +401,9 @@ fr:
       communication/website/agenda/event:
         one: Événement
         other: Événements
+      communication/website/agenda/event/day:
+        one: Jour
+        other: Jours
       communication/website/agenda/event/time_slot:
         one: Créneau horaire
         other: Créneaux horaires
@@ -491,7 +504,8 @@ fr:
           description: Tout ce qui est lié au contenu
           label: Éditorial
         federation:
-          label: Fédération de contenu
+          label: Fédération
+          description: La fédération permet de partager des contenus entre les sites. Cela se passe en 2 étapes. D'abord, il faut définir les sources autorisées à envoyer du contenu vers ce site. Puis il faut choisir au cas par cas les contenus qui doivent être diffusés.
         git_file:
           analysis:
             destroy_all_on_git: Supprimer tous les fichiers git
@@ -609,8 +623,6 @@ fr:
                 other: Cette page est une page spéciale, qui présente nativement les %{count} volumes liés au site.
             sitemap: Cette page est une page spéciale, qui présente nativement le plan du site.
           structure: Pages
-        permalinks:
-          creation_error: "Erreur lors de la création. Le chemin renseigné est-il au bon format ?"
         portfolio:
           project:
             localizations:
@@ -636,6 +648,7 @@ fr:
           add_path: Ajouter une redirection
           button: Gérer les redirections
           current_path: Chemin actuel
+          label: Redirections
           previous_paths: Redirections (anciens chemins)
           title: Gérer les redirections
         see_showcase: Voir le showcase
@@ -880,6 +893,7 @@ fr:
         text: Ce champ est déprécié, le contenu ne s'affichera pas sur le site.
       communication_website_permalink:
         path: "Doit être un chemin d'URL. Exemple : /ancien/chemin"
+        target_url: "Doit être une URL complète, avec le protocole. Exemple: https://www.osuny.org"
       communication_website_portfolio_project:
         full_width: Sur de grands écrans, le projet en pleine largeur utilisera tout l'espace disponible.
       communication_website_post:

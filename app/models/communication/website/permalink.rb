@@ -3,12 +3,13 @@
 # Table name: communication_website_permalinks
 #
 #  id            :uuid             not null, primary key
-#  about_type    :string           not null, indexed => [about_id]
+#  about_type    :string           indexed => [about_id]
 #  is_current    :boolean          default(TRUE)
 #  path          :string
+#  target_url    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             not null, indexed => [about_type]
+#  about_id      :uuid             indexed => [about_type]
 #  university_id :uuid             not null, indexed
 #  website_id    :uuid             not null, indexed
 #
@@ -25,6 +26,7 @@
 #
 class Communication::Website::Permalink < ApplicationRecord
 
+  include Filterable
   include WithMapping
   include WithOpenApi
   # We don't include Sanitizable as this model is never handled by users directly.
@@ -32,9 +34,10 @@ class Communication::Website::Permalink < ApplicationRecord
 
   belongs_to :university
   belongs_to :website, class_name: "Communication::Website"
-  belongs_to :about, polymorphic: true
+  belongs_to :about, polymorphic: true, optional: true
 
-  validates :about, :path, presence: true
+  validates :path, presence: true
+  validate :unique_redirect_path
 
   before_validation :set_university, on: :create
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
@@ -45,6 +48,17 @@ class Communication::Website::Permalink < ApplicationRecord
   scope :current, -> { where(is_current: true) }
   scope :not_current, -> { where(is_current: false) }
   scope :not_root, -> { where.not(path: '/') }
+  scope :internal, -> { where.not(about_id: nil) }
+  scope :external, -> { where(about_id: nil) }
+  scope :ordered, -> { order(:path) }
+
+  # Filters
+  scope :for_search_term, -> (term, language) {
+    where("communication_website_permalinks.path LIKE :term", term: "%#{sanitize_sql_like(term)}%")
+  }
+  scope :for_type, -> (type, language) {
+    type == 'internal' ? internal : external
+  }
 
   def self.config_in_website(website, language)
     required_kinds_in_website(website).map { |permalink_class|
@@ -66,13 +80,15 @@ class Communication::Website::Permalink < ApplicationRecord
     raise NoMethodError
   end
 
+  # FIXME j'aime pas ça, il y a une confusion entre un service et une validation @SebouChu
+  # Je n'arrive pas à le remettre tout bien
   def self.clean_path(path)
     clean_path = path.dup
     # Remove eventual host
     clean_path = URI(clean_path).path
     # Leading slash for absolute path
     clean_path = "/#{clean_path}" unless clean_path.start_with?('/')
-    # Trailing slash for coherence
+    # Trailing slash for consistency
     clean_path = "#{clean_path}/" unless clean_path.end_with?('/')
     clean_path
   rescue URI::InvalidURIError
@@ -143,6 +159,25 @@ class Communication::Website::Permalink < ApplicationRecord
     "/..#{path}"
   end
 
+  def external?
+    about.nil?
+  end
+
+  def internal?
+    about.present?
+  end
+
+  def target
+    internal? ? about.current_permalink_in_website(website) : target_url
+  end
+
+  def currently_in_use?
+    website.permalinks
+           .current
+           .where(path: path)
+           .exists?
+  end
+
   def to_s
     "#{path}"
   end
@@ -151,6 +186,16 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def language
     @language ||= about.respond_to?(:language) ? about.language : website.default_language
+  end
+
+  def unique_redirect_path
+    # Only aliases have this limit, current permalink are already checked, and can override previous alias
+    return if is_current
+    alias_is_unique =  website.permalinks
+                              .where.not(id: id)
+                              .where(path: path)
+                              .none?
+    errors.add(:path, :not_unique) unless alias_is_unique
   end
 
   # Can be overwritten
@@ -165,7 +210,7 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   def touch_about
-    return unless about.persisted?
+    return unless about.present? && about.persisted?
     about.touch
   end
 end
