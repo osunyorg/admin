@@ -80,21 +80,6 @@ class Communication::Website::Permalink < ApplicationRecord
     raise NoMethodError
   end
 
-  # FIXME j'aime pas ça, il y a une confusion entre un service et une validation @SebouChu
-  # Je n'arrive pas à le remettre tout bien
-  def self.clean_path(path)
-    clean_path = path.dup
-    # Remove eventual host
-    clean_path = URI(clean_path).path
-    # Leading slash for absolute path
-    clean_path = "/#{clean_path}" unless clean_path.start_with?('/')
-    # Trailing slash for consistency
-    clean_path = "#{clean_path}/" unless clean_path.end_with?('/')
-    clean_path
-  rescue URI::InvalidURIError
-    nil
-  end
-
   # Méthode pour accéder facilement à la page spéciale,
   # qui s'appuie sur le `special_page_type` de chaque Permalink
   def self.special_page(website)

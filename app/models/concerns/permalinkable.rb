@@ -54,7 +54,7 @@ module Permalinkable
   end
 
   def add_redirection(path)
-    clean_path = Communication::Website::Permalink.clean_path(path)
+    clean_path = Static.clean_path(path)
     aliases.create(website: website, path: clean_path)
   end
 
