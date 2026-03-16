@@ -37,7 +37,7 @@ class Communication::Website::Permalink < ApplicationRecord
   belongs_to :about, polymorphic: true, optional: true
 
   validates :path, presence: true
-  validate :unique_redirect_path
+  validates :path, uniqueness: { scope: :website_id }, unless: :is_current
 
   before_validation :set_university, on: :create
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
@@ -171,16 +171,6 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def language
     @language ||= about.respond_to?(:language) ? about.language : website.default_language
-  end
-
-  def unique_redirect_path
-    # Only aliases have this limit, current permalink are already checked, and can override previous alias
-    return if is_current
-    alias_is_unique =  website.permalinks
-                              .where.not(id: id)
-                              .where(path: path)
-                              .none?
-    errors.add(:path, :not_unique) unless alias_is_unique
   end
 
   # Can be overwritten
