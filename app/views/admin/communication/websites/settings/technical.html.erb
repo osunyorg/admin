@@ -43,7 +43,8 @@
       </div>
       <div class="col-lg-6 col-xxl-4">
         <%= osuny_panel t('communication.website.hosting') do %>
-          <%= f.input :deuxfleurs_hosting, hint: @website.deuxfleurs_identifier %>
+          <% hosting_hint = @website.deuxfleurs_identifier if @website.hosted_with_deuxfleurs? %>
+          <%= f.input :hosting, hint: hosting_hint, include_blank: false %>
           <%= f.input :autoupdate_theme %>
           <%= f.input :plausible_url %>
         <% end %>

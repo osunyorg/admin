@@ -141,6 +141,7 @@ en:
         git_endpoint: Git endpoint
         git_provider: Git provider
         highlighted_in_showcase: Highlighted in showcase
+        hosting: Hosting
         in_production: Production
         in_production_at: Production release date
         in_showcase: List website in showcase
@@ -821,6 +822,12 @@ en:
             danger: Red alert
             info: Information
             warning: Alert
+        hosting:
+          apache: Apache
+          deuxfleurs: Deuxfleurs
+          netlify: Netlify
+          nginx: Nginx
+          undefined: Undefined
         menu:
           item:
             kind:

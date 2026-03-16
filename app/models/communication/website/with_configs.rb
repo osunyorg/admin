@@ -50,12 +50,12 @@ module Communication::Website::WithConfigs
   end
 
   def config_deuxfleurs_workflow
-    return unless deuxfleurs_hosting
+    return unless hosted_with_deuxfleurs?
     @config_deuxfleurs_workflow ||= Communication::Website::Configs::DeuxfleursWorkflow.find(id)
   end
 
   def config_deuxfleurs_config
-    return unless deuxfleurs_hosting
+    return unless hosted_with_deuxfleurs?
     @config_deuxfleurs_config ||= Communication::Website::Configs::DeuxfleursConfig.find(id)
   end
 

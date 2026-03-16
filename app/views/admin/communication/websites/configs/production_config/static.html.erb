@@ -27,7 +27,7 @@ deployment:
     - pattern: "^.+\\.(png|jpg|jpeg|gif|webp)$"
       cacheControl: "max-age=31536000, no-transform, public"
       gzip: false
-<% if @website.deuxfleurs_hosting %>
+<% if @website.hosted_with_deuxfleurs? %>
   ## DEUXFLEURS
   workers: 4
   targets:

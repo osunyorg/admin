@@ -24,6 +24,7 @@
 #  git_files_analysed_at        :datetime
 #  git_provider                 :integer          default("github")
 #  highlighted_in_showcase      :boolean          default(FALSE)
+#  hosting                      :integer          default("deuxfleurs"), not null
 #  in_production                :boolean          default(FALSE)
 #  in_production_at             :datetime
 #  in_showcase                  :boolean          default(TRUE)
@@ -78,6 +79,7 @@ class Communication::Website < ApplicationRecord
   include WithFeaturePortfolio
   include WithFederations
   include WithGitRepository
+  include WithHosting
   include WithLock
   include WithManagers
   include WithOpenApi

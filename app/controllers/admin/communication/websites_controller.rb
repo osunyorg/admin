@@ -124,7 +124,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def destroy
     Communication::Website::DestroyWebsiteJob.perform_later(@website)
-    redirect_to admin_communication_websites_url, 
+    redirect_to admin_communication_websites_url,
                 notice: t('admin.successfully_destroyed_html', model: @website.to_s_in(current_language))
   end
 
@@ -140,7 +140,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication,
-      :default_time_zone, :deuxfleurs_hosting,
+      :default_time_zone, :hosting,
       :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
       showcase_tag_ids: [], source_website_ids: [],
       localizations_attributes: [
