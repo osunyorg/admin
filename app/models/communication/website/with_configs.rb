@@ -33,6 +33,15 @@ module Communication::Website::WithConfigs
     ].compact
   end
 
+  def hosting_config
+    config_file_method = "config_#{hosting}_config"
+    public_send(config_file_method) if respond_to?(config_file_method)
+  end
+
+  def regenerate_hosting_config!
+    generate_git_file_for_object(hosting_config)
+  end
+
   def config_apache_config
     return unless hosted_with_apache?
     @config_apache_config ||= Communication::Website::Configs::ApacheConfig.find(id)

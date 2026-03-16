@@ -43,6 +43,7 @@ class Communication::Website::Permalink < ApplicationRecord
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
   # so we have an attribute accessor to force-sync the about, for example in the Permalinkable concern
   after_commit :touch_about, on: [:create, :destroy]
+  after_commit :regenerate_website_hosting_config
 
   scope :for_website, -> (website) { where(website_id: website.id) }
   scope :current, -> { where(is_current: true) }
@@ -180,5 +181,10 @@ class Communication::Website::Permalink < ApplicationRecord
   def touch_about
     return unless about.present? && about.persisted?
     about.touch
+  end
+
+  def regenerate_website_hosting_config
+    return unless website.persisted?
+    website.regenerate_hosting_config!
   end
 end
