@@ -4,12 +4,12 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
 
   def new
     breadcrumb
-    add_breadcrumb(t('create'))
+    add_breadcrumb t('create')
   end
 
   def edit
     breadcrumb
-    add_breadcrumb(t('edit'))
+    add_breadcrumb t('edit')
   end
 
   def create
@@ -18,7 +18,7 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
 
   def update
     if @permalink.update(permalink_params)
-      redirect_to redirects_admin_communication_website_path(id: params[:website_id]),
+      redirect_to redirects_admin_communication_website_path(id: params[:website_id], website_id: nil),
                   notice: t('admin.successfully_updated_html', model: @permalink.to_s)
     else
       breadcrumb
@@ -30,11 +30,11 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
   def destroy
     @permalink.destroy
     respond_to do |format|
-      format.js { }
       format.html {
         redirect_to redirects_admin_communication_website_path(id: params[:website_id], website_id: nil),
                     notice: t('admin.successfully_destroyed_html', model: @permalink.to_s)
       }
+      format.js
     end
   end
 
@@ -52,7 +52,7 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
       university: current_university,
       mandatory_module: Permalinkable
     )
-    @path = params['communication_website_permalink']['path']
+    @path = params.dig('communication_website_permalink', 'path')
     @permalink = @about.add_redirection(@path)
   end
 
@@ -60,7 +60,7 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
     @permalink.is_current = false
     if @permalink.save
       redirect_to redirects_admin_communication_website_path(id: params[:website_id]),
-            notice: t('admin.successfully_created_html', model: @permalink.to_s)
+                  notice: t('admin.successfully_created_html', model: @permalink.to_s)
     else
       breadcrumb
       add_breadcrumb t('edit')
@@ -76,10 +76,7 @@ class Admin::Communication::Websites::PermalinksController < Admin::Communicatio
 
   def permalink_params
     params.require(:communication_website_permalink)
-          .permit(
-            :path,
-            :target_url
-          )
+          .permit(:path, :target_url)
           .merge(
             university_id: current_university.id,
             website_id: @website.id
