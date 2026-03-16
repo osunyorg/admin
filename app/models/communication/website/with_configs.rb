@@ -20,11 +20,11 @@ module Communication::Website::WithConfigs
     [
       config_default_content_security_policy,
       config_default_languages,
-      config_default_permalinks,
       config_development_config,
       config_production_config,
       config_deuxfleurs_workflow,
       config_deuxfleurs_config,
+      config_netlify_config,
       config_robots_txt,
     ].compact
   end
@@ -35,10 +35,6 @@ module Communication::Website::WithConfigs
 
   def config_default_languages
     @config_default_languages ||= Communication::Website::Configs::DefaultLanguages.find(id)
-  end
-
-  def config_default_permalinks
-    @config_default_permalinks ||= Communication::Website::Configs::DefaultPermalinks.find(id)
   end
 
   def config_development_config
@@ -57,6 +53,11 @@ module Communication::Website::WithConfigs
   def config_deuxfleurs_config
     return unless hosted_with_deuxfleurs?
     @config_deuxfleurs_config ||= Communication::Website::Configs::DeuxfleursConfig.find(id)
+  end
+
+  def config_netlify_config
+    return unless hosted_with_netlify?
+    @config_netlify_config ||= Communication::Website::Configs::NetlifyConfig.find(id)
   end
 
   def config_robots_txt
