@@ -24,7 +24,7 @@ module Communication::Website::WithConfigs
       config_development_config,
       config_production_config,
       config_deuxfleurs_workflow,
-      config_deuxfleurs_redirects,
+      config_deuxfleurs_config,
       config_robots_txt,
     ].compact
   end
@@ -54,9 +54,9 @@ module Communication::Website::WithConfigs
     @config_deuxfleurs_workflow ||= Communication::Website::Configs::DeuxfleursWorkflow.find(id)
   end
 
-  def config_deuxfleurs_workflow
+  def config_deuxfleurs_config
     return unless deuxfleurs_hosting
-    @config_deuxfleurs_redirects ||= Communication::Website::Configs::DeuxfleursRedirects.find(id)
+    @config_deuxfleurs_config ||= Communication::Website::Configs::DeuxfleursConfig.find(id)
   end
 
   def config_robots_txt

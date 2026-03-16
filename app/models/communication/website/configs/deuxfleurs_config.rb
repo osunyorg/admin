@@ -55,10 +55,10 @@
 #  fk_rails_2b6d929310  (default_language_id => languages.id)
 #  fk_rails_bb6a496c08  (university_id => universities.id)
 #
-class Communication::Website::Configs::DeuxfleursRedirects < Communication::Website::Configs::Base
+class Communication::Website::Configs::DeuxfleursConfig < Communication::Website::Configs::Base
 
   def self.polymorphic_name
-    'Communication::Website::Configs::DeuxfleursRedirects'
+    'Communication::Website::Configs::DeuxfleursConfig'
   end
 
   def git_path(website)
@@ -66,7 +66,7 @@ class Communication::Website::Configs::DeuxfleursRedirects < Communication::Webs
   end
 
   def template_static
-    "admin/communication/websites/configs/deuxfleurs_redirects/static"
+    "admin/communication/websites/configs/deuxfleurs_config/static"
   end
 
 end
