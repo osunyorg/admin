@@ -156,13 +156,6 @@ class Communication::Website::Permalink < ApplicationRecord
     internal? ? about.current_permalink_in_website(website) : target_url
   end
 
-  def currently_in_use?
-    website.permalinks
-           .current
-           .where(path: path)
-           .exists?
-  end
-
   def to_s
     "#{path}"
   end
