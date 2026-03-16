@@ -649,6 +649,10 @@ en:
           button: Manage redirects
           current_path: Current path
           label: Redirections
+          nginx_alert_html: |
+            Your hosting does not allow us to handle external redirects automatically.<br>
+            For this, please ask your IT administrator to include the configuration available below.<br>
+            Last updated at: %{last_updated_at}
           previous_paths: Redirects (old paths)
           title: Manage redirects
         see_showcase: See showcase

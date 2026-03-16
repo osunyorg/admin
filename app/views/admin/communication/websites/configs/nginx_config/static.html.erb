@@ -1,4 +1,4 @@
-<% @website.permalinks.not_current.ordered.find_each do |permalink| %>
+<% @website.permalinks.external.not_current.ordered.find_each do |permalink| %>
 location = <%= permalink.path %> {
   return 301 <%= permalink.target %>;
 }
