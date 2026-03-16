@@ -4,6 +4,16 @@
   <%= create_link Communication::Website::Permalink %>
 <% end %>
 
+<% if @website.hosted_with_nginx? %>
+  <div class="alert alert-warning mb-4">
+    <p>
+      Votre hébergement ne permet pas de gérer les redirections automatiquement.<br>
+      Pour cela, demandez à votre administrateur réseau d'y inclure la configuration disponible ci-dessous.
+    </p>
+    <%= link_to "Configuration Nginx", admin_communication_website_config_path("nginx_config"), class: "btn btn-primary", target: :_blank %>
+  </div>
+<% end %>
+
 <div class="d-flex justify-content-between mb-5">
   <ul class="nav nav-pills osuny__lifecycle">
     <li class="nav-item">
@@ -19,5 +29,5 @@
 
 </div>
 
-<%= render 'admin/communication/websites/permalinks/list', permalinks: @permalinks %> 
+<%= render 'admin/communication/websites/permalinks/list', permalinks: @permalinks %>
 <%= paginate @permalinks %>

@@ -1,0 +1,3 @@
+<% @website.permalinks.not_current.ordered.find_each do |permalink| %>
+RedirectPermanent <%= permalink.path %> <%= permalink.target %>
+<% end %>
