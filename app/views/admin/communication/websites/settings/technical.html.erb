@@ -44,9 +44,21 @@
       <div class="col-lg-6 col-xxl-4">
         <%= osuny_panel t('communication.website.hosting') do %>
           <% hosting_hint = @website.deuxfleurs_identifier if @website.hosted_with_deuxfleurs? %>
-          <%= f.input :hosting, hint: hosting_hint, include_blank: false %>
+          <%= f.input :hosting,
+                      hint: hosting_hint,
+                      include_blank: false,
+                      input_html: { data: { 'conditional': true }, id: 'hosting' } %>
           <%= f.input :autoupdate_theme %>
           <%= f.input :plausible_url %>
+          <div  class="d-none"
+                data-conditional-source="hosting"
+                data-conditional-value="apache">
+            <%= f.input :apache_config_custom_content,
+                        input_html: {
+                          rows: 10,
+                          class: "font-monospace fs-5 pt-1"
+                        } %>
+          </div>
         <% end %>
         <%= osuny_panel t('communication.website.showcase') do %>
           <%= f.input :in_showcase, hint: link_to(t('admin.communication.website.see_showcase'), "https://#{ENV['OSUNY_SHOWCASE']}", target: :_blank) %>

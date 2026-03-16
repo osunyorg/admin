@@ -5,6 +5,7 @@
 #  id                           :uuid             not null, primary key
 #  about_type                   :string           indexed => [about_id]
 #  access_token                 :string
+#  apache_config_custom_content :text
 #  archive_content              :boolean          default(FALSE)
 #  autoupdate_theme             :boolean          default(TRUE)
 #  default_time_zone            :string

@@ -140,7 +140,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication,
-      :default_time_zone, :hosting,
+      :default_time_zone, :hosting, :apache_config_custom_content,
       :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
       showcase_tag_ids: [], source_website_ids: [],
       localizations_attributes: [
