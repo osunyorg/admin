@@ -7,8 +7,8 @@ module Communication::Website::WithConfigs
         :default_content_security_policy,
         :default_languages,
         :default_permalinks,
+        :deuxfleurs_config,
         :deuxfleurs_workflow,
-        :deuxfleurs_toml,
         :development_config,
         :production_config,
         :robots_txt
@@ -24,7 +24,7 @@ module Communication::Website::WithConfigs
       config_development_config,
       config_production_config,
       config_deuxfleurs_workflow,
-      config_deuxfleurs_toml,
+      config_deuxfleurs_config,
       config_robots_txt,
     ].compact
   end
@@ -54,9 +54,9 @@ module Communication::Website::WithConfigs
     @config_deuxfleurs_workflow ||= Communication::Website::Configs::DeuxfleursWorkflow.find(id)
   end
 
-  def config_deuxfleurs_toml
+  def config_deuxfleurs_config
     return unless deuxfleurs_hosting
-    @config_deuxfleurs_toml ||= Communication::Website::Configs::DeuxfleursToml.find(id)
+    @config_deuxfleurs_config ||= Communication::Website::Configs::DeuxfleursConfig.find(id)
   end
 
   def config_robots_txt
