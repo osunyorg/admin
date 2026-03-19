@@ -3,12 +3,13 @@ allowed_origins = "*"
 allowed_method = ["GET", "POST"]
 allowed_header = "*"
 
-[[deployment.matchers]]
-pattern = "^.+\\.(woff2|woff|svg|ttf|otf|eot|js|css)$"
-cacheControl = "max-age=31536000, no-transform, public"
-gzip = true
+[[headers]]
+for = "**/*.{woff2|woff|svg|ttf|otf|eot|js|css}"
+compress = "gzip"
+[headers.values]
+Cache-Control = "max-age=31536000, no-transform, public"
 
-[[deployment.matchers]]
-pattern = "^.+\\.(png|jpg|jpeg|gif|webp)$"
-cacheControl = "max-age=31536000, no-transform, public"
-gzip = false
+[[headers]]
+for = "**/*.{png|jpg|jpeg|gif|webp}"
+[headers.values]
+Cache-Control = "max-age=31536000, no-transform, public"
