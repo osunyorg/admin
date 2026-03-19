@@ -26,6 +26,7 @@
 class Communication::Website::Permalink < ApplicationRecord
 
   include WithMapping
+  include WithOpenApi
   # We don't include Sanitizable as this model is never handled by users directly.
   include WithUniversity
 
@@ -33,7 +34,7 @@ class Communication::Website::Permalink < ApplicationRecord
   belongs_to :website, class_name: "Communication::Website"
   belongs_to :about, polymorphic: true
 
-  validates :about_id, :about_type, :path, presence: true
+  validates :about, :path, presence: true
 
   before_validation :set_university, on: :create
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
@@ -133,6 +134,13 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def special_page(website)
     self.class.special_page(website)
+  end
+
+  # Starting from Hugo 0.155, aliases are site-relative,
+  # so we need to go one level up on multilingual sites to get the correct path.
+  # More info: https://developers.osuny.org/docs/theme/architecture/aliases/
+  def alias_path
+    "/..#{path}"
   end
 
   def to_s

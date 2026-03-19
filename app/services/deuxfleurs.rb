@@ -45,7 +45,7 @@ class Deuxfleurs
 
   def client
     unless @client
-      @client = Faraday.new url: 'https://guichet.deuxfleurs.fr/api/unstable/'
+      @client = Faraday.new url: 'https://guichet.deuxfleurs.fr/api/v1/'
       @client.request :authorization,
                       :basic,
                       ENV['DEUXFLEURS_USER'],

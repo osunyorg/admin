@@ -17,7 +17,8 @@ class Ability::Author < Ability
     can :create, University::Organization, university_id: @user.university_id
     can :manage, University::Person, university_id: @user.university_id, id: managed_person_ids
     can :create, University::Person, university_id: @user.university_id
-    manage_blocks
+    manage_records_based_on_abouts(Communication::Website::Permalink)
+    manage_records_based_on_abouts(Communication::Block)
     can :read, Communication::Website, university_id: @user.university_id, id: managed_websites_ids
     can :manage, User::Favorite, user_id: @user
     can :manage, Communication::Media, university_id: @user.university_id
@@ -26,15 +27,15 @@ class Ability::Author < Ability
 
   protected
 
-  def manage_blocks
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Exhibition::Localization', about_id: managed_agenda_exhibition_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Jobboard::Job::Localization', about_id: managed_jobboard_job_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Portfolio::Project::Localization', about_id: managed_portfolio_project_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'Communication::Website::Post::Localization', about_id: managed_post_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Organization::Localization', about_id: managed_organization_localization_ids
-    can :manage, Communication::Block, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: managed_person_localization_ids
-    can :create, Communication::Block
+  def manage_records_based_on_abouts(record_class)
+    can :manage, record_class, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Event::Localization', about_id: managed_agenda_event_localization_ids
+    can :manage, record_class, university_id: @user.university_id, about_type: 'Communication::Website::Agenda::Exhibition::Localization', about_id: managed_agenda_exhibition_localization_ids
+    can :manage, record_class, university_id: @user.university_id, about_type: 'Communication::Website::Jobboard::Job::Localization', about_id: managed_jobboard_job_localization_ids
+    can :manage, record_class, university_id: @user.university_id, about_type: 'Communication::Website::Portfolio::Project::Localization', about_id: managed_portfolio_project_localization_ids
+    can :manage, record_class, university_id: @user.university_id, about_type: 'Communication::Website::Post::Localization', about_id: managed_post_localization_ids
+    can :manage, record_class, university_id: @user.university_id, about_type: 'University::Organization::Localization', about_id: managed_organization_localization_ids
+    can :manage, record_class, university_id: @user.university_id, about_type: 'University::Person::Localization', about_id: managed_person_localization_ids
+    can :create, record_class
   end
 
   def managed_agenda_event_ids

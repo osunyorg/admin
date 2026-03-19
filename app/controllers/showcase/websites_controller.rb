@@ -4,7 +4,7 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     @features = Communication::Website::Showcase.features
     @websites = Communication::Website.in_showcase
                                       .ordered_by_production_date
-                                      .page(params[:page])
+    @title = "#{@websites.count } sites créés"
   end
 
   def show
@@ -17,6 +17,7 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     @websites = @tag.websites.in_showcase
                              .ordered_by_production_date
                              .page(params[:page])
+                             .per(100)
   end
 
   def feature

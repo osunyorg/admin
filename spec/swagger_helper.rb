@@ -29,6 +29,7 @@ RSpec.configure do |config|
     communication_website_page_localization: Communication::Website::Page::Localization::OPENAPI_SCHEMA,
     communication_website_page_category: Communication::Website::Page::Category::OPENAPI_SCHEMA,
     communication_website_page_category_localization: Communication::Website::Page::Category::Localization::OPENAPI_SCHEMA,
+    communication_website_permalink: Communication::Website::Permalink::OPENAPI_SCHEMA,
     communication_website_portfolio_category: Communication::Website::Portfolio::Category::OPENAPI_SCHEMA,
     communication_website_portfolio_category_localization: Communication::Website::Portfolio::Category::Localization::OPENAPI_SCHEMA,
     communication_website_portfolio_project: Communication::Website::Portfolio::Project::OPENAPI_SCHEMA,

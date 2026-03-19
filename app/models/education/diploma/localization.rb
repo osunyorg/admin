@@ -78,10 +78,6 @@ class Education::Diploma::Localization < ApplicationRecord
     blocks
   end
 
-  def references
-    programs
-  end
-
   def programs
     @programs ||=  about.programs
                         .ordered(language)

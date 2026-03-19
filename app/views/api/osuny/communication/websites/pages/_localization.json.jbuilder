@@ -8,6 +8,11 @@ end
 json.extract! l10n,
               :meta_description, :published, :published_at, :slug, :summary, :text,
               :header_cta, :header_cta_label, :header_cta_url
+json.aliases do
+  json.partial! "api/osuny/communication/websites/permalinks/permalink",
+                collection: l10n.aliases.for_website(l10n.website),
+                as: :permalink
+end
 json.blocks do
   json.partial! "api/osuny/communication/blocks/block", collection: l10n.blocks.ordered, as: :block
 end

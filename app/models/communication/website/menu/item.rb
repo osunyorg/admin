@@ -151,6 +151,9 @@ class Communication::Website::Menu::Item < ApplicationRecord
       'children' => children.ordered.map(&:to_static_hash).compact,
       'descendants_targets' => descendants_targets,
     }
+    if html_class.present?
+      hash['html_class'] = html_class_prepared
+    end
     if hugo.present?
       hash['path'] = hugo.path
       hash['file'] = hugo.file
@@ -191,6 +194,13 @@ class Communication::Website::Menu::Item < ApplicationRecord
 
   def descendants_and_self_targets
     [static_target] + children.collect(&:descendants_and_self_targets)
+  end
+
+  def html_class_prepared
+    return if html_class.blank?
+    html_class.split(' ')
+              .map { |klass| "menu-class-#{klass.parameterize}" }
+              .join(' ')
   end
 
   protected
