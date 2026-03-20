@@ -29,6 +29,7 @@ module Communication::Website::Agenda::Event::WithKinds
   end
 
   def kind
+    # Le kind child peut être simple ou recurring, c'est une modélisation étrange
     if kind_simple?
       KIND_SIMPLE
     elsif kind_recurring?
