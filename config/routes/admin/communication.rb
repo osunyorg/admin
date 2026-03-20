@@ -209,6 +209,7 @@ namespace :communication do
   scope "/contents/:about_type/:about_id", as: :contents, controller: 'contents' do
     get :write
     get :structure
+    post :reset
   end
   resources :blocks, controller: 'blocks', except: [:index] do
     collection do

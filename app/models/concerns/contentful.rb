@@ -39,6 +39,11 @@ module Contentful
     template_blocks.each { |hash| generate_block(hash.dup) }
   end
 
+  def duplicate_blocks_from_original
+    return if original?
+    about.duplicate_blocks(original, self)
+  end
+
   protected
 
   def generate_block(hash)

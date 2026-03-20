@@ -8,6 +8,13 @@ module Duplicable
     instance
   end
 
+  def duplicate_blocks(from, to)
+    return unless from.respond_to?(:contents)
+    from.blocks.ordered.each do |block|
+      duplicate_block(to, block)
+    end
+  end
+
   protected
 
   def duplicate_instance
@@ -38,13 +45,6 @@ module Duplicable
   def duplicate_featured_image(from, to)
     return unless from.respond_to?(:featured_image) && from.featured_image.attached?
     ActiveStorage::Utils.duplicate(from.featured_image, to.featured_image)
-  end
-
-  def duplicate_blocks(from, to)
-    return unless from.respond_to?(:contents)
-    from.blocks.ordered.each do |block|
-      duplicate_block(to, block)
-    end
   end
 
   def duplicate_block(instance, block)
