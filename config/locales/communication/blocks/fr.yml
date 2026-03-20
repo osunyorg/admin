@@ -881,6 +881,7 @@ fr:
             one: 1 bloc
             other: '%{count} blocs'
             zero: Aucun bloc
+          reset: Réinitialiser (à partir de la version en %{language})
         modes:
           structure:
             description: Dans le mode “Organiser le plan”, vous ne voyez qu'un petit aperçu de chaque bloc. C'est le mode idéal pour ranger les documents longs.
