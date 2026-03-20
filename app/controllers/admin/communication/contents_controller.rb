@@ -11,8 +11,7 @@ class Admin::Communication::ContentsController < Admin::Communication::Applicati
   end
 
   def reset
-    @about.blocks.destroy_all
-    @about.duplicate_blocks_from_original
+    @about.reset_blocks
     redirect_back(
         fallback_location: [:admin, @about],
         notice: t('admin.successfully_updated_html', model: @about.to_s)
