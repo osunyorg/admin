@@ -119,6 +119,10 @@ class Communication::Block < ApplicationRecord
     template.empty?
   end
 
+  def draft?
+    !published
+  end
+
   def full_text
     "#{title} #{template.full_text}"
   end

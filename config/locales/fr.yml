@@ -180,6 +180,7 @@ fr:
     successfully_duplicated_html: "<i>%{model}</i> a bien été dupliqué(e)."
     successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
+    successfully_reset_html: "<i>%{model}</i> a bien été réinitialisé(e)."
     successfully_restored_html: "<i>%{model}</i> a bien été restauré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
     summary:
@@ -502,6 +503,7 @@ fr:
     deletion: Est-ce que vous confirmez la suppression ?
     duplication: Est-ce que vous confirmez la duplication ?
     generic: Est-ce que vous confirmez ?
+    reset: La réinitialisation va supprimer tous les blocs dans cette langue. Est-ce que vous confirmez ?
   preview:
     button: Prévisualiser
     desktop: Ordinateur
