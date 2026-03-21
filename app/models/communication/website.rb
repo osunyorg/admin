@@ -5,6 +5,7 @@
 #  id                           :uuid             not null, primary key
 #  about_type                   :string           indexed => [about_id]
 #  access_token                 :string
+#  apache_config_custom_content :text
 #  archive_content              :boolean          default(FALSE)
 #  autoupdate_theme             :boolean          default(TRUE)
 #  default_time_zone            :string
@@ -24,6 +25,7 @@
 #  git_files_analysed_at        :datetime
 #  git_provider                 :integer          default("github")
 #  highlighted_in_showcase      :boolean          default(FALSE)
+#  hosting                      :integer          default("deuxfleurs"), not null
 #  in_production                :boolean          default(FALSE)
 #  in_production_at             :datetime
 #  in_showcase                  :boolean          default(TRUE)
@@ -78,6 +80,7 @@ class Communication::Website < ApplicationRecord
   include WithFeaturePortfolio
   include WithFederations
   include WithGitRepository
+  include WithHosting
   include WithLock
   include WithManagers
   include WithOpenApi
