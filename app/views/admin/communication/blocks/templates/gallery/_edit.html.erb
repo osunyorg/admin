@@ -14,7 +14,9 @@
 <%= osuny_separator %>
 
 <p><%= t('.move_images') %></p>
-<draggable :list="data.elements" class="row">
+<draggable  :list="data.elements"
+            class="row"
+            @end="refreshSummernotes()">
   <div v-for="(element, index) in data.elements" class="col-2 mb-4">
     <div class="card">
       <div class="card-header p-1 text-center">
@@ -35,7 +37,7 @@
   <%= osuny_panel 'Image' do %>
     <div class="text-end">
       <a  class="btn btn-sm text-danger mt-n4"
-          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+          v-on:click="deleteElement(element)"
           title="<%= t 'admin.communication.blocks.templates.gallery.edit.remove_image' %>">
           <i class="<%= Icon::DELETE %>"></i>
       </a>

@@ -4,6 +4,10 @@ module Communication::Website::Agenda::Event::WithKinds
   included do
     MAX_DURATION = 1.year
 
+    KIND_SIMPLE = 'simple'
+    KIND_RECURRING = 'recurring'
+    KIND_PARENT = 'parent'
+
     validate :no_child_before?, if: :kind_parent?
     validate :no_child_after?, if: :kind_parent?
     # validate :not_too_long # Uncomment when Rennes is ready
@@ -23,6 +27,18 @@ module Communication::Website::Agenda::Event::WithKinds
         WHERE communication_website_agenda_event_time_slots.communication_website_agenda_event_id = communication_website_agenda_events.id
       ) <= 1") }
   end
+
+  def kind
+    # Le kind child peut être simple ou recurring, c'est une modélisation étrange
+    if kind_simple?
+      KIND_SIMPLE
+    elsif kind_recurring?
+      KIND_RECURRING
+    else
+      KIND_PARENT
+    end
+  end
+
 
   def kind_simple?
     children.none? && !multiple_time_slots?

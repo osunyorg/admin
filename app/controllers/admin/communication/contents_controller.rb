@@ -2,12 +2,20 @@ class Admin::Communication::ContentsController < Admin::Communication::Applicati
   before_action :load_about
   layout false
 
-  # /admin/communication/contents/Communication::Website::Page/a788f3ab-a3a8-4d26-9440-6cb12fbf442c/write
+  # /admin/fr/communication/contents/Communication::Website::Post::Localization/eb500b67-f14e-4085-b449-8a9e68150656/write
   def write
   end
 
-  # /admin/communication/contents/Communication::Website::Page/a788f3ab-a3a8-4d26-9440-6cb12fbf442c/structure
+  # /admin/fr/communication/contents/Communication::Website::Post::Localization/eb500b67-f14e-4085-b449-8a9e68150656/structure
   def structure
+  end
+
+  def reset
+    @about.reset_blocks
+    redirect_back(
+        fallback_location: [:admin, @about],
+        notice: t('admin.successfully_updated_html', model: @about.to_s)
+      )
   end
 
   protected

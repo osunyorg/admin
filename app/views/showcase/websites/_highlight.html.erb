@@ -1,12 +1,14 @@
 <h2>À découvrir</h2>
-<div class="row g-5">
+<div class="row websites--grid">
   <% @websites.highlighted_in_showcase.each do |website| %>
     <div class="col-md-6 col-xl-4">
       <article class="position-relative">
         <% if website.screenshot_full_page.attached? %>
-          <%= kamifusen_tag website.screenshot_full_page,
-                            width: 600,
-                            class: 'img-fluid screenshot-full-page mb-3' %>
+          <div class="media">
+            <%= kamifusen_tag website.screenshot_full_page,
+                              width: 600,
+                              class: 'img-fluid screenshot-full-page mb-3' %>
+          </div>
         <% end %>
         <p>
           <%= link_to website.original_localization.to_s,

@@ -1,0 +1,17 @@
+<%
+unless about.original?
+  original_language = about.original.language.to_s.downcase
+  %>
+  <div class="content-editor__actions row mt-5 mb-4">
+    <div class="offset-lg-4 col-lg-8 col-xxl-6">
+      <%= link_to t('admin.communication.contents.blocks.reset', language: original_language),
+                  admin_communication_contents_reset_path(
+                    about_id: about.id, 
+                    about_type: about.class.polymorphic_name
+                  ),
+                  method: :post,
+                  data: { confirm: t('please_confirm.reset') },
+                  class: 'action text-danger' %>
+    </div>
+  </div>
+<% end %>

@@ -14,12 +14,12 @@ jobs:
     steps:
 
     - name: Récupération des données
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       with:
         submodules: true
 
     - name: Installation de Node
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v6
       with:
         node-version: 'lts/*'
         cache: 'yarn'
@@ -30,25 +30,22 @@ jobs:
     - name: Installation de Hugo
       uses: noesya/actions-hugo@release
       with:
-        hugo-version: '0.148.2'
+        hugo-version: '0.154.5'
         extended: true
-        withdeploy: true
 
     - name: Compilation du site
       run: yarn osuny build
 
     - name: Déploiement Garage
-      run: hugo deploy --force --maxDeletes -1
+      run: npx --yes dxfl deploy <%= @website.deuxfleurs_identifier %> public/ --yes
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.DEUXFLEURS_ACCESS_KEY }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.DEUXFLEURS_SECRET }}
 
     - name: Notification Slack en cas d'échecs
-      uses: ravsamhq/notify-slack-action@2.3.0
-      if: always()
-      with:
-        status: ${{ job.status }}
-        notify_when: "failure"
-        notification_title: ""
+      uses: rtCamp/action-slack-notify@v2
+      if: failure()
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_TITLE: 'Problem on repo ${{ github.event.repository.name }}'
+        SLACK_COLOR: '#FF0000'
