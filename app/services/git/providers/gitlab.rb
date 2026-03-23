@@ -26,25 +26,17 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
       raise "File to update does not exist on Git (repository: #{repository}, previous_path: #{previous_path}, path: #{path})"
     end
 
-    if previous_path_file.present?
-      if new_path_file.present?
-        # We will remove file at previous path and update the one at new path
-        batch << {
-          action: 'delete',
-          file_path: previous_path
-        }
-      else
-        # We will move file at previous path and update it at new path
-        batch << {
-          action: 'move',
-          file_path: path,
-          previous_path: previous_path
-        }
-      end
+    # We will remove file at previous path and create or update it at new path
+    if previous_path != path && previous_path_file.present?
+      batch << {
+        action: 'delete',
+        file_path: previous_path
+      }
     end
 
+    action = new_path_file.present? ? 'update' : 'create'
     batch << {
-      action: 'update',
+      action: action,
       file_path: path,
       content: content
     }
