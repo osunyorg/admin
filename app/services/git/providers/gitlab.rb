@@ -72,7 +72,6 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   def push(commit_message)
-    byebug
     return if !valid? || batch.empty?
     client.create_commit  repository,
                           branch,
