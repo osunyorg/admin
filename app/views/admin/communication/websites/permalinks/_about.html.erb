@@ -1,8 +1,12 @@
 <span class="badge bg-light text-black">
+  <% begin %>
   <%=  permalink.about_type
                 .remove('::Localization')
                 .constantize
                 .model_name
                 .human %>
+  <% rescue %>
+    <%=  permalink.about_type %>
+  <% end %>
 </span>
 <%= permalink.about %>
