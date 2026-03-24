@@ -15,8 +15,6 @@ class Static
     # Trailing slash for consistency
     clean_path += '/' unless clean_path.end_with?('/')
     clean_path.gsub('//', '/')
-  rescue URI::InvalidURIError
-    nil
   end
 
   def self.remove_trailing_slash(string)
