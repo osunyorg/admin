@@ -12,12 +12,15 @@ SimpleNavigation::Configuration.run do |navigation|
                   } if can?(:edit, @website)
     primary.item  :subnav_language,
                   current_language,
-                  edit_language_admin_communication_website_path(id: @website.id, website_id: nil) if can?(:edit, @website)
+                  language_admin_communication_website_path(id: @website.id, website_id: nil) if can?(:edit, @website)
+    primary.item  :subnav_redirection,
+                  t('admin.communication.website.redirects.label'),
+                  redirects_admin_communication_website_path(id: @website.id, website_id: nil) if can?(:edit, @website)
     primary.item  :subnav_federation,
                   t('admin.communication.website.federation.label'),
-                  edit_federation_admin_communication_website_path(id: @website.id, website_id: nil) if can?(:edit, @website) && current_university.websites.many?
+                  federation_admin_communication_website_path(id: @website.id, website_id: nil) if can?(:edit, @website) && current_university.websites.many?
     primary.item  :subnav_technical,
                   t('admin.communication.website.technical.label'),
-                  edit_technical_admin_communication_website_path(id: @website.id, website_id: nil) if can?(:edit, @website)
+                  technical_admin_communication_website_path(id: @website.id, website_id: nil) if can?(:edit, @website)
   end
 end

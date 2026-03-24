@@ -3,12 +3,13 @@
 # Table name: communication_website_permalinks
 #
 #  id            :uuid             not null, primary key
-#  about_type    :string           not null, indexed => [about_id]
+#  about_type    :string           indexed => [about_id]
 #  is_current    :boolean          default(TRUE)
 #  path          :string
+#  target_url    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             not null, indexed => [about_type]
+#  about_id      :uuid             indexed => [about_type]
 #  university_id :uuid             not null, indexed
 #  website_id    :uuid             not null, indexed
 #

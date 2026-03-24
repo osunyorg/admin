@@ -45,12 +45,9 @@
 
     <%= render_filter f,
                       :select,
-                      :for_deuxfleurs_hosting,
-                      label: t('filters.attributes.element', element: Communication::Website.human_attribute_name(:deuxfleurs_hosting).downcase_first),
-                      collection: [
-                        { to_s: t('true'), id: 'true' },
-                        { to_s:  t('false'), id: 'false' }
-                      ]
+                      :for_hosting,
+                      label: t('filters.attributes.element', element: Communication::Website.human_attribute_name(:hosting).downcase),
+                      collection: Communication::Website.hostings.keys.map { |r| { to_s: t("enums.communication.website.hosting.#{r}"), id: r } }
                       %>
 
     <% end %>
