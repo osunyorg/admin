@@ -10,8 +10,6 @@ class Static
 
   def self.clean_path(path)
     clean_path = path.dup
-    # Remove eventual host
-    clean_path = URI(clean_path).path
     # Leading slash for absolute path
     clean_path = "/#{clean_path}" unless clean_path.start_with?('/')
     # Trailing slash for consistency
