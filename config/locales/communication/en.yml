@@ -591,6 +591,11 @@ en:
                 zero: This page is a special page that natively displays the programs related to the site. Currently, there are no training courses on the site.
                 one: This page is a special page that natively displays the programs related to the site. Currently, there is one program.
                 other: This page is a special page that natively displays the %{count} programs related to the site.
+            education_school:
+              native:
+                zero: This page is a special page that natively displays the schools related to the site. Currently, there is no school on the site.
+                one: This page is a special page that natively displays the schools related to the site. Currently, there is one school.
+                other: This page is a special page that natively displays the %{count} schools related to the site.
             organization:
               disconnect: Disconnect
               explicitly_connected: Directly connected organizations

@@ -588,6 +588,11 @@ fr:
                 zero: Cette page est une page spéciale, qui présente nativement les diplômes liés au site. Pour l'instant, il n'y a aucun diplôme dans le site.
                 one: Cette page est une page spéciale, qui présente nativement les diplômes liés au site. Pour l'instant, il y a 1 diplôme.
                 other: Cette page est une page spéciale, qui présente nativement les %{count} diplômes liés au site.
+            education_school:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les écoles liées au site. Pour l'instant, il n'y a aucune école dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les écoles liées au site. Pour l'instant, il y a 1 école.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} écoles liées au site.
             education_program:
               native:
                 zero: Cette page est une page spéciale, qui présente nativement les formations liées au site. Pour l'instant, il n'y a aucune formation dans le site.
