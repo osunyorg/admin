@@ -11,15 +11,20 @@ class Git::Repository
     provider.url
   end
 
-  def batch_size
-    provider.class::COMMIT_BATCH_SIZE
+  def batch_slice_size=(value)
+    @batch_slice_size = [value.to_i, provider.class::DEFAULT_BATCH_SLICE_SIZE].min if value
+    batch_slice_size
+  end
+
+  def batch_slice_size
+    @batch_slice_size ||= provider.class::DEFAULT_BATCH_SLICE_SIZE
   end
 
   def sync!
     return if git_files.empty?
     puts "Start sync"
     synchronize_git_files
-    provider.push('Sync from Osuny')
+    provider.push('Sync from Osuny', batch_slice_size: batch_slice_size)
     refresh_git_files
   end
 

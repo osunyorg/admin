@@ -1,6 +1,5 @@
 class Git::Providers::Github < Git::Providers::Abstract
   BASE_URL = "https://github.com".freeze
-  COMMIT_BATCH_SIZE = 100
 
   include WithSecrets
   include WithTheme
@@ -67,9 +66,9 @@ class Git::Providers::Github < Git::Providers::Abstract
     )
   end
 
-  def push(commit_message)
+  def push(commit_message, batch_slice_size: DEFAULT_BATCH_SLICE_SIZE)
     return if !valid? || batch.empty?
-    commit = create_commit_from_batch(batch, commit_message)
+    commit = create_commit_from_batch(batch, commit_message, batch_slice_size)
     client.update_branch repository, default_branch, commit[:sha]
     # The repo changed, invalidate the tree
     @tree = nil
@@ -78,12 +77,12 @@ class Git::Providers::Github < Git::Providers::Abstract
     true
   end
 
-  def create_commit_from_batch(batch, commit_message)
+  def create_commit_from_batch(batch, commit_message, batch_slice_size)
     base_tree_sha = tree[:sha]
     base_commit_sha = branch_sha
     commit = nil
-    commits_count = (batch.size / COMMIT_BATCH_SIZE.to_f).ceil
-    batch.each_slice(COMMIT_BATCH_SIZE).with_index do |sub_batch, i|
+    commits_count = (batch.size / batch_slice_size.to_f).ceil
+    batch.each_slice(batch_slice_size).with_index do |sub_batch, i|
       sub_commit_message = commit_message
       sub_commit_message += " (#{i+1}/#{commits_count})" if commits_count > 1
       commit = create_sub_commit(sub_batch, sub_commit_message, base_tree_sha, base_commit_sha)

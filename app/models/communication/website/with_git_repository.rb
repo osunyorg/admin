@@ -43,20 +43,22 @@ module Communication::Website::WithGitRepository
     )
   end
 
-  def sync_with_git
+  def sync_with_git(batch_slice_size: nil)
     update_column(:last_sync_at, Time.now)
-    Communication::Website::SyncWithGitJob.perform_later(id)
+    Communication::Website::SyncWithGitJob.perform_later(id, batch_slice_size: batch_slice_size)
   end
 
-  def sync_with_git_safely
+  def sync_with_git_safely(batch_slice_size: nil)
     return unless git_repository.valid?
+
+    git_repository.batch_slice_size = batch_slice_size
     git_repository.git_files = git_files.desynchronized_until(last_sync_at)
                                         .order(:desynchronized_at)
-                                        .limit(git_repository.batch_size)
+                                        .limit(git_repository.batch_slice_size)
     git_repository.sync!
     if git_files.desynchronized_until(last_sync_at).any?
-      # More than one batch, we need to requeue the job
-      Communication::Website::SyncWithGitJob.perform_later(id)
+      # More than one batch, we need to requeue the job with the same limit to make sure we don't bring back the error.
+      Communication::Website::SyncWithGitJob.perform_later(id, batch_slice_size: batch_slice_size)
     end
   end
 

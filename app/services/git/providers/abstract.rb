@@ -1,4 +1,6 @@
 class Git::Providers::Abstract
+  DEFAULT_BATCH_SLICE_SIZE = 100
+
   attr_reader :git_repository, :endpoint, :branch, :access_token, :repository
 
   def initialize(git_repository)
@@ -33,7 +35,7 @@ class Git::Providers::Abstract
     raise NoMethodError, "You must implement the `update_theme` method in #{self.class.name}"
   end
 
-  def push(commit_message)
+  def push(commit_message, batch_slice_size: DEFAULT_BATCH_SLICE_SIZE)
     raise NoMethodError, "You must implement the `push` method in #{self.class.name}"
   end
 

@@ -1,6 +1,5 @@
 class Git::Providers::Gitlab < Git::Providers::Abstract
   DEFAULT_ENDPOINT = 'https://gitlab.com/api/v4'.freeze
-  COMMIT_BATCH_SIZE = 100
 
   def url
     base_url = endpoint.gsub("/api/v4", "")
@@ -52,7 +51,7 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
     raise NoMethodError, "You must implement the `update_secrets` method in #{self.class.name}"
   end
 
-  def push(commit_message)
+  def push(commit_message, batch_slice_size: DEFAULT_BATCH_SLICE_SIZE)
     return if !valid? || batch.empty?
     client.create_commit  repository,
                           branch,
