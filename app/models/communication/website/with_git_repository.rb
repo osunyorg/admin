@@ -60,6 +60,10 @@ module Communication::Website::WithGitRepository
       # More than one batch, we need to requeue the job with the same limit to make sure we don't bring back the error.
       Communication::Website::SyncWithGitJob.perform_later(id, batch_slice_size: batch_slice_size)
     end
+  rescue Octokit::UnprocessableEntity => e
+    raise e unless e.message.include?("GitRPC::BadObjectState") && git_repository.batch_slice_size > 20
+    # If we have a BadObjectState error, it means that the batch is too big and that we need to reduce it to avoid the error. We reduce it 20 by 20.
+    Communication::Website::SyncWithGitJob.perform_later(id, batch_slice_size: git_repository.batch_slice_size - 20)
   end
 
   def generate_git_file_for_array(array)
