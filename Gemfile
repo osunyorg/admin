@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "4.0.2"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
-gem "active_hashcash", github: "BaseSecrete/active_hashcash"
+gem "active_hashcash", "0.4.0" # Lock as next version could conflict with Content-Security-Policy (worker-src)
 gem "active_storage_validations", "~> 1"
 gem "add_to_calendar"
 gem "aws-sdk-s3"
