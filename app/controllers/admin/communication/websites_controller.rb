@@ -138,7 +138,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     attribute_names = [
       :url, :repository, :about_type, :about_id, :in_production, :in_production_at,
       :in_showcase,
-      :git_provider, :git_endpoint, :git_branch, :plausible_url,
+      :git_provider, :git_endpoint, :git_branch, :plausible_url, :should_setup_plausible,
       :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication,
       :default_time_zone, :hosting, :apache_config_custom_content,
       :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
