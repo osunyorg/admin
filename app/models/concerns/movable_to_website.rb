@@ -1,10 +1,12 @@
 module MovableToWebsite
   extend ActiveSupport::Concern
 
+  # NOTE: this method does not handle move across universities, as we currently don't have any use case for it. 
+  # If we need to support it in the future, we will need to update the method to also update the university_id of the object and its associations, and handle potential conflicts (e.g. slug) that may arise from the move.
   def move_to!(website)
     source_website = self.website
     transaction do
-      update(communication_website_id: website.id, university_id: website.university_id)
+      update(communication_website_id: website.id)
       clean_categories_after_move
       clean_content_federations_after_move
       move_localizations_to(website)
@@ -28,29 +30,15 @@ module MovableToWebsite
 
   def move_localizations_to(website)
     localizations.each do |l10n|
-      l10n.update(communication_website_id: website.id, university_id: website.university_id)
-      move_featured_image(l10n, website)
+      l10n.update(communication_website_id: website.id)
       move_blocks(l10n, website)
-    end
-  end
-
-  def move_featured_image(l10n, website)
-    return unless l10n.respond_to?(:featured_image) && l10n.featured_image.attached?
-    return if l10n.featured_image.blob.university_id == website.university_id
-    blob = l10n.featured_image.blob
-    if blob.attachments.count > 1
-      # duplicate blob
-      ActiveStorage::Utils.duplicate(l10n.featured_image, l10n.featured_image)
-    else
-      blob.update(university_id: website.university_id)
     end
   end
 
   def move_blocks(l10n, website)
     return unless l10n.respond_to?(:blocks)
     l10n.blocks.ordered.each do |block|
-      block.update(communication_website_id: website.id, university_id: website.university_id)
-      # TODO: il faut aussi vérifier les attachments des blocks et les dupliquer si besoin, comme pour les featured_image.
+      block.update(communication_website_id: website.id)
     end
   end
 

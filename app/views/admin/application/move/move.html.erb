@@ -9,12 +9,8 @@ do_move_path = "do_move_admin_#{class_path}_path"
 
 <p><%= t('admin.move.description') %></p>
 
-<% unless current_user.server_admin?%>
-  <%= render 'admin/application/move/list_sites', websites: current_user.managed_websites, do_move_path: do_move_path %>
-<% else %>
-  <% University.ordered.each do |university| %>
-    <% next if university.websites.empty? %>
-    <h2><%= university %></h2>
-    <%= render 'admin/application/move/list_sites', websites: university.websites, do_move_path: do_move_path %>
-  <% end %>
-<% end %>
+<ul>
+  <% @target_websites.ordered(current_language).each do |website| %>
+      <li><%= link_to website.to_s_in(current_language), send(do_move_path, @object, new_website_id: website.id), method: :post %></li>
+  <% end %>   
+</ul>

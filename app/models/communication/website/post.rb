@@ -126,8 +126,5 @@ class Communication::Website::Post < ApplicationRecord
   def list_blocks_template_kind
     :posts
   end
-
-  def after_moved_to_website(source_website, target_website)
-    authors.clear if source_website.university_id != target_website.university_id
-  end
+  
 end
