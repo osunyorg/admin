@@ -4,6 +4,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
                               except: :restore
 
   include Admin::HasPreview
+  include Admin::HasMoveAction
   include Admin::HasStaticAction
   include Admin::Localizable
 
