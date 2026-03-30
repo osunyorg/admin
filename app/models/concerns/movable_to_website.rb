@@ -37,13 +37,20 @@ module MovableToWebsite
   def move_featured_image(l10n, website)
     return unless l10n.respond_to?(:featured_image) && l10n.featured_image.attached?
     return if l10n.featured_image.blob.university_id == website.university_id
-    l10n.featured_image.blob.update(university_id: website.university_id)
+    blob = l10n.featured_image.blob
+    if blob.attachments.count > 1
+      # duplicate blob
+      ActiveStorage::Utils.duplicate(l10n.featured_image, l10n.featured_image)
+    else
+      blob.update(university_id: website.university_id)
+    end
   end
 
   def move_blocks(l10n, website)
     return unless l10n.respond_to?(:blocks)
     l10n.blocks.ordered.each do |block|
       block.update(communication_website_id: website.id, university_id: website.university_id)
+      # TODO: il faut aussi vérifier les attachments des blocks et les dupliquer si besoin, comme pour les featured_image.
     end
   end
 
