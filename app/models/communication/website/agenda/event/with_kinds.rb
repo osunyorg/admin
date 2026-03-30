@@ -21,11 +21,13 @@ module Communication::Website::Agenda::Event::WithKinds
 
     scope :except_parent, -> { where.missing(:children) }
     scope :except_children, -> { where(parent_id: nil) }
-    scope :except_recurring, -> { where("(
-      SELECT COUNT(*)
-      FROM communication_website_agenda_event_time_slots
-        WHERE communication_website_agenda_event_time_slots.communication_website_agenda_event_id = communication_website_agenda_events.id
-      ) <= 1") }
+    scope :except_recurring, -> { where(
+                                    "(?) <= 1",
+                                    Communication::Website::Agenda::Event::TimeSlot
+                                      .select("COUNT(*)")
+                                      .where("communication_website_agenda_event_time_slots.communication_website_agenda_event_id = communication_website_agenda_events.id")
+                                  )
+                                }
   end
 
   def kind
