@@ -1,0 +1,6 @@
+<ul>
+<% websites.ordered(current_language).each do |website| %>
+    <% next if website == @website %>
+    <li><%= link_to website.to_s_in(current_language), send(do_move_path, @object, new_website_id: website.id), method: :post %></li>
+<% end %>   
+</ul>

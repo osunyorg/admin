@@ -1,0 +1,20 @@
+<%
+# communication_website_post
+class_path = @object.model_name.singular_route_key
+# do_move_admin_communication_website_post_path
+do_move_path = "do_move_admin_#{class_path}_path"
+%>
+
+<% content_for :title, t('admin.move.cta') %>
+
+<p><%= t('admin.move.description') %></p>
+
+<% unless current_user.server_admin?%>
+  <%= render 'admin/application/move/list_sites', websites: current_user.managed_websites, do_move_path: do_move_path %>
+<% else %>
+  <% University.ordered.each do |university| %>
+    <% next if university.websites.empty? %>
+    <h2><%= university %></h2>
+    <%= render 'admin/application/move/list_sites', websites: university.websites, do_move_path: do_move_path %>
+  <% end %>
+<% end %>
