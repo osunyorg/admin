@@ -26,8 +26,10 @@ children:
 <%
 @l10n.children.published.ordered.each do |child|
   next unless child.about&.is_listed_among_children?
+  hugo = child.hugo(@website)
+  next if hugo.file.blank?
 %>
-  - "<%= child.git_path_relative %>"
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
 <% end %>
 <% end %>
 <%= osuny_static_text 'meta_description', @l10n.meta_description %>
