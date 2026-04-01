@@ -5,6 +5,17 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     @websites = Communication::Website.in_showcase
                                       .ordered_by_production_date
     @title = "#{@websites.count } sites créés"
+    respond_to do |format|
+      format.html {
+        @highlighted_websites = @websites.highlighted_in_showcase
+        @websites = @websites.page(params[:page]).per(100)
+      }
+      format.json {
+        @websites = @websites.page(params[:page])
+        response.set_header('X-Total-Count', @websites.total_count.to_s)
+        response.set_header('X-Total-Pages', @websites.total_pages.to_s)
+      }
+    end
   end
 
   def show
@@ -16,16 +27,16 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     @tag = Communication::Website::Showcase::Tag.find_by!(slug: params[:tag])
     @websites = @tag.websites.in_showcase
                              .ordered_by_production_date
-                             .page(params[:page])
-                             .per(100)
+    @highlighted_websites = @websites.highlighted_in_showcase
+    @websites = @websites.page(params[:page]).per(100)
   end
 
   def feature
     feature = params[:feature].to_sym
     @title = Communication::Website::Showcase.title_for_feature(feature)
     @websites = Communication::Website::Showcase.websites_for_feature(feature)
-                                                .in_showcase
                                                 .ordered_by_production_date
-                                                .page(params[:page])
+    @highlighted_websites = @websites.highlighted_in_showcase
+    @websites = @websites.page(params[:page]).per(100)
   end
 end
