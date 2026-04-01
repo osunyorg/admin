@@ -2,7 +2,8 @@ class Showcase::WebsitesController < Showcase::ApplicationController
   def index
     @tags = Communication::Website::Showcase::Tag.all.ordered
     @features = Communication::Website::Showcase.features
-    @websites = Communication::Website.in_showcase.ordered_by_production_date
+    @websites = Communication::Website.in_showcase
+                                      .ordered_by_production_date
     @title = "#{@websites.count } sites créés"
     respond_to do |format|
       format.html {
@@ -24,7 +25,8 @@ class Showcase::WebsitesController < Showcase::ApplicationController
 
   def tag
     @tag = Communication::Website::Showcase::Tag.find_by!(slug: params[:tag])
-    @websites = @tag.websites.in_showcase.ordered_by_production_date
+    @websites = @tag.websites.in_showcase
+                             .ordered_by_production_date
     @highlighted_websites = @websites.highlighted_in_showcase
     @websites = @websites.page(params[:page]).per(100)
   end
