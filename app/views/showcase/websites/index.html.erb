@@ -3,7 +3,7 @@
 <h1><%= @title %></h1>
 
 <% unless params.has_key?(:page) %>
-  <%= render 'highlight' %>
+  <%= render 'highlight' if @highlighted_websites.any? %>
   <%= render 'filters' %>
 <% end %>
 
