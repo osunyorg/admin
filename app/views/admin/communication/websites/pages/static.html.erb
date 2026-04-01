@@ -24,6 +24,14 @@ weight: <%= page.position %>
 <% if @l10n.children.published.any? %>
 children:
 <%
+# children is deprecated, remove when theme 9.2.0 is deployed
+@l10n.children.published.ordered.each do |child|
+  next unless child.about&.is_listed_among_children?
+%>
+  - "<%= child.git_path_relative %>"
+<% end %>
+child_pages:
+<%
 @l10n.children.published.ordered.each do |child|
   next unless child.about&.is_listed_among_children?
   hugo = child.hugo(@website)
