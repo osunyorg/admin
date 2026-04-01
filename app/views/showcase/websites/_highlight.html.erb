@@ -3,7 +3,7 @@
   <% @highlighted_websites.each do |website| %>
     <% cache website do %>
       <div class="col-md-6 col-xl-4">
-        <article class="position-relative">
+        <article class="position-relative mb-4">
           <% if website.screenshot_full_page.attached? %>
             <div class="media">
               <%= kamifusen_tag website.screenshot_full_page,
