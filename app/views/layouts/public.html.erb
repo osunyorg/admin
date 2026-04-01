@@ -11,15 +11,19 @@
     <nav class="navbar navbar-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">
-          <%= image_tag 'logo.svg',
-                        class: 'logo',
-                        alt: 'Osuny',
-                        width: 100 %>
+          <%= image_tag 'logo.svg', class: 'logo', alt: 'Osuny', height: 32 %>
         </a>
       </div>
     </nav>
     <main class="container-fluid">
       <%= yield %>
     </main>
+    <footer class="border-top mt-5">
+      <div class="container-fluid my-5">
+        <a href="https://www.osuny.org">
+          <%= image_tag 'logo.svg', class: 'logo', alt: 'Osuny', height: 48 %>
+        </a>
+      </div>
+    </footer>
   </body>
 </html>
