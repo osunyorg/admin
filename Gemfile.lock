@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/BaseSecrete/active_hashcash.git
-  revision: ac77ae03162dc9062f5b15050b379e27d470683e
-  specs:
-    active_hashcash (0.4.0)
-      rails (>= 5.2.0)
-
-GIT
   remote: https://github.com/SebouChu/unsplash_rb.git
   revision: 89cd31efed1955430172a4c51d6b8f0b70015404
   branch: ruby-4-compatibility
@@ -102,6 +95,8 @@ GEM
       erubi (~> 1.11)
       rails-dom-testing (~> 2.2)
       rails-html-sanitizer (~> 1.6)
+    active_hashcash (0.4.0)
+      rails (>= 5.2.0)
     active_storage_validations (1.4.0)
       activejob (>= 6.1.4)
       activemodel (>= 6.1.4)
@@ -821,7 +816,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  active_hashcash!
+  active_hashcash
   active_storage_validations (~> 1)
   activestorage-scaleway-service
   add_to_calendar
