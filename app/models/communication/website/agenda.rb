@@ -8,8 +8,8 @@ module Communication::Website::Agenda
   STATUS_ARCHIVE = 'archive'
 
   AUTHORIZED_SCOPES = [
-    STATUS_CURRENT,
     STATUS_FUTURE_OR_CURRENT,
+    STATUS_CURRENT,
     STATUS_FUTURE,
     STATUS_ARCHIVE,
   ].freeze

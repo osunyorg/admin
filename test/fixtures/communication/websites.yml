@@ -6,6 +6,7 @@ website_with_github:
   repository: <%= ENV['TEST_GITHUB_REPOSITORY'] %>
   default_language: fr
   default_time_zone: Europe/Paris
+  hosting: undefined
   deuxfleurs_hosting: false
   feature_posts: true
   feature_agenda: true
@@ -19,6 +20,7 @@ website_with_gitlab:
   repository: <%= ENV['TEST_GITLAB_REPOSITORY'] %>
   default_language: fr
   default_time_zone: Europe/Paris
+  hosting: undefined
   deuxfleurs_hosting: false
   feature_agenda: true
   destination_websites:

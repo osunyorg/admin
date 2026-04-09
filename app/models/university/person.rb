@@ -9,6 +9,7 @@
 #  bodyclass                     :string
 #  city                          :string
 #  country                       :string
+#  deleted_at                    :datetime
 #  email                         :string
 #  email_visibility              :integer          default("private")
 #  gender                        :integer
@@ -48,10 +49,13 @@
 #  fk_rails_da35e70d61  (university_id => universities.id)
 #
 class University::Person < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include MentionableByBlocks
   include Sanitizable
@@ -151,6 +155,9 @@ class University::Person < ApplicationRecord
       ", term: "%#{sanitize_sql_like(term)}%")
   }
 
+  # Suppression des brouillons tant qu'il n'y a pas d'état de publication sur les locas des personnes
+  scope :draft_in, -> (language) { where(id: false) }
+
   def dependencies
     localizations +
     categories +
@@ -165,6 +172,10 @@ class University::Person < ApplicationRecord
   def full_street_address
     return nil if [address, zipcode, city].all?(&:blank?)
     [address, "#{zipcode} #{city} #{country}".strip].join(', ')
+  end
+
+  def hugo_body_class
+    'persons__page'
   end
 
   def to_s_with_mail_in(language)

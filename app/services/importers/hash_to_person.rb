@@ -18,7 +18,7 @@ module Importers
     def valid?
       if @first_name.blank? && @last_name.blank? && @email.blank?
         @error = "An email or a name is necessary"
-      elsif country_not_found?
+      elsif @country.present? && country_not_found?
         @error = "Country #{@country} not found"
       elsif !person.valid?
         @error = "Unable to create the person: #{person.errors.full_messages}"
@@ -59,16 +59,14 @@ module Importers
     end
 
     def build_person
-      if @email.present?
-        person = find_person_with_email
-      elsif @first_name.present? && @last_name.present?
-        person = find_person_with_name_in_current_language
-        person ||= find_person_with_name_in_another_language
-      else
-        # No mail, no name, nothing
-        return
-      end
+      # Last name is mandatory
+      return unless @last_name.present?
+
+      person = find_person_with_email if @email.present?
+      person ||= find_person_with_name_in_current_language
+      person ||= find_person_with_name_in_another_language
       person ||= @university.people.new
+
       localization_id = person.localizations.find_by(language_id: @language.id)&.id
       person.gender = gender
       person.birthdate = @birth
@@ -137,14 +135,36 @@ module Importers
 
     def categories
       @category_names.map do |category_name|
-        category_localization = University::Person::Category::Localization.find_by(university_id: @university.id, language_id: @language.id, name: category_name)
-        if category_localization.present?
-          category_localization.about
-        else
-          category = @university.person_categories.create(localizations_attributes: [{ name: category_name, language_id: @language.id }])
-          category
-        end
+        category = find_category_with_name_in_current_language(category_name)
+        category ||= find_category_with_name_in_another_language(category_name)
+        category ||= @university.person_categories.create(
+          localizations_attributes: [
+            { name: category_name, language_id: @language.id }
+          ]
+        )
+        category
       end
+    end
+
+    def find_category_with_name_in_current_language(category_name)
+      @university.person_categories
+        .joins(:localizations)
+        .where(university_person_category_localizations: {
+          language_id: @language.id, name: category_name
+        })
+        .first
+    end
+
+    def find_category_with_name_in_another_language(category_name)
+      @university.person_categories
+        .joins(:localizations)
+        .where.not(university_person_category_localizations: {
+          language_id: @language.id
+        })
+        .where(university_person_category_localizations: {
+          name: category_name
+        })
+        .first
     end
 
     def add_picture_if_possible!(person)

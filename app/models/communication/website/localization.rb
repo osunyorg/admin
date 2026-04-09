@@ -19,12 +19,13 @@
 #  social_youtube   :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  about_id         :uuid             not null, indexed
-#  language_id      :uuid             not null, indexed
+#  about_id         :uuid             not null, uniquely indexed => [language_id], indexed
+#  language_id      :uuid             not null, uniquely indexed => [about_id], indexed
 #  university_id    :uuid             not null, indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_3a4954d1d9                      (about_id,language_id) UNIQUE
 #  index_communication_website_localizations_on_about_id       (about_id)
 #  index_communication_website_localizations_on_language_id    (language_id)
 #  index_communication_website_localizations_on_university_id  (university_id)

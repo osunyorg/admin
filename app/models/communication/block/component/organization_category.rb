@@ -1,7 +1,7 @@
 class Communication::Block::Component::OrganizationCategory < Communication::Block::Component::BaseReference
 
   def categories
-    university.organization_categories
+    @categories ||= university.organization_categories
   end
 
   def category

@@ -6,6 +6,7 @@
 #  address       :string
 #  city          :string
 #  country       :string
+#  deleted_at    :datetime
 #  latitude      :float
 #  longitude     :float
 #  phone         :string
@@ -23,7 +24,11 @@
 #  fk_rails_bfeca0e4b1  (university_id => universities.id)
 #
 class Administration::Location < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
+  include Filterable
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include GeneratesGitFiles

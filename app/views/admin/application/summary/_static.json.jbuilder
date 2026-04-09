@@ -1,1 +1,0 @@
-json.summary @about.summary

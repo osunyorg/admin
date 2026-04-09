@@ -3,6 +3,7 @@
 # Table name: university_person_experiences
 #
 #  id              :uuid             not null, primary key
+#  deleted_at      :datetime
 #  from_year       :integer
 #  to_year         :integer
 #  created_at      :datetime         not null
@@ -24,6 +25,8 @@
 #  fk_rails_923d0b71fd  (university_id => universities.id)
 #
 class University::Person::Experience < ApplicationRecord
+  acts_as_paranoid
+
   include Localizable
   include WithUniversity
 

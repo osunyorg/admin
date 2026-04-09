@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
+#  deleted_at               :datetime
 #  full_width               :boolean          default(FALSE)
 #  is_lasting               :boolean          default(FALSE)
 #  migration_identifier     :string
@@ -23,16 +24,21 @@
 #  fk_rails_d1c1a10946  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Post < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include Duplicable
+  include Federated
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Sanitizable
   include Searchable
   include WithMenuItemTarget
   include WithOpenApi
+  include HasListBlocks
   include WithUniversity
 
   has_and_belongs_to_many :authors,
@@ -92,8 +98,7 @@ class Communication::Website::Post < ApplicationRecord
   end
 
   def references
-    menus +
-    abouts_with_post_block
+    menus
   end
 
   def pinned_in?(language)
@@ -102,6 +107,10 @@ class Communication::Website::Post < ApplicationRecord
 
   def published_at_in(language)
     localization_for(language).try(:published_at)
+  end
+
+  def hugo_body_class
+    'posts__page'
   end
 
   protected
@@ -113,13 +122,7 @@ class Communication::Website::Post < ApplicationRecord
     end
   end
 
-  def abouts_with_post_block
-    website.blocks.template_posts.collect(&:about)
-    # Potentiel gain de performance (25%)
-    # Méthode collect : X abouts = X requêtes
-    # Méthode ci-dessous : X abouts = 6 requêtes
-    # website.post_categories.where(id: website.blocks.template_posts.where(about_type: "Communication::Website::Post::Category").distinct.pluck(:about_id)) +
-    # website.pages.where(id: website.blocks.template_posts.where(about_type: "Communication::Website::Page").distinct.pluck(:about_id)) +
-    # website.posts.where(id: website.blocks.template_posts.where(about_type: "Communication::Website::Post").distinct.pluck(:about_id))
+  def list_blocks_template_kind
+    :posts
   end
 end

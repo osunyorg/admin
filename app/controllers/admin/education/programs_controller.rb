@@ -1,15 +1,15 @@
 class Admin::Education::ProgramsController < Admin::Education::Programs::ApplicationController
-  load_and_authorize_resource class: Education::Program,
-                              through: :current_university,
-                              through_association: :education_programs
+  # load_and_authorize_resource done by Admin::Education::Programs::ApplicationController
 
   before_action :load_teacher_people, only: [:new, :edit, :create, :update]
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @programs = @programs.filter_by(params[:filters], current_language)
+    @filtered = @programs.filter_by(params[:filters], current_language)
+    @programs = @filtered.at_lifecycle(params[:lifecycle], current_language)
                          .ordered(current_language)
                          .page(params[:page])
     @feature_nav = 'navigation/admin/education/programs'
@@ -37,7 +37,6 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
   end
 
   def preview
-    @website = @program.websites&.first
     render layout: 'admin/layouts/preview'
   end
 
@@ -81,7 +80,20 @@ class Admin::Education::ProgramsController < Admin::Education::Programs::Applica
                 notice: t('admin.successfully_destroyed_html', model: @program.to_s_in(current_language))
   end
 
+  def restore
+    @program = current_university.education_programs.only_deleted.find(params[:id])
+    authorize!(:restore, @program)
+    @program.restore(recursive: true)
+    redirect_to admin_education_program_path(@program),
+                notice: t('admin.successfully_restored_html', model: @program.to_s_in(current_language))
+  end
+
   protected
+
+  def prepare_preview
+    super
+    @body_class += ' offcanvas-toc'
+  end
 
   def load_part
     part_from_params = params.dig('education_program', 'part')

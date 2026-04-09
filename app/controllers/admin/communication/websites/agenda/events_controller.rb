@@ -1,15 +1,21 @@
 class Admin::Communication::Websites::Agenda::EventsController < Admin::Communication::Websites::Agenda::ApplicationController
   load_and_authorize_resource class: Communication::Website::Agenda::Event,
-                              through: :website
+                              through: :website,
+                              except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @events = @events.filter_by(params[:filters], current_language)
-                     .ordered_desc
-                     .root
-                     .page(params[:page])
+    @filtered = @events.filter_by(params[:filters], current_language)
+    unless params.dig(:filters)&.keys&.any?
+      # Only root events if no filter
+      @filtered = @filtered.root
+    end
+    @events = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                       .ordered_desc
+                       .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
   end
@@ -24,8 +30,13 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb
   end
 
+  def preview
+    render layout: 'admin/layouts/preview'
+  end
+
   def new
     @event.parent = @website.events.find(params[:parent_id]) if params.has_key?(:parent_id)
+    @event.manage_template_from_params(params, current_university)
     @categories = categories
     breadcrumb
   end
@@ -77,6 +88,15 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     redirect_to admin_communication_website_agenda_events_url,
                 notice: t('admin.successfully_destroyed_html', model: @event.to_s_in(current_language))
   end
+
+  def restore
+    @event = @website.agenda_events.only_deleted.find(params[:id])
+    authorize!(:restore, @event)
+    @event.restore(recursive: true)
+    redirect_to admin_communication_website_agenda_event_path(@event),
+                notice: t('admin.successfully_restored_html', model: @event.to_s_in(current_language))
+  end
+
   protected
 
   def breadcrumb
@@ -93,6 +113,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     params.require(:communication_website_agenda_event)
     .permit(
       :from_day, :to_day, :time_zone, :is_lasting, :bodyclass,
+      :is_template, :template_id,
       :parent_id, category_ids: [], destination_website_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary, :text, :notes,

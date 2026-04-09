@@ -1,7 +1,6 @@
 <% content_for :title, University::Person.model_name.human(count: 2) %>
 
 <% content_for :title_right do %>
-  <%= create_link University::Person %>
   <%= button_advanced do %>
     <%= link_to t('university.person.import_btn'),
                 new_admin_university_people_import_path,
@@ -13,15 +12,16 @@
                 request.params.merge(format: "xlsx"),
                 class: button_classes %>
   <% end %>
+  <%= create_link University::Person %>
 <% end %>
 
-<div class="d-flex justify-content-between mb-4">
-  <p>
-    <%= @people.total_count %>
-    <%= University::Person.model_name.human(count: @people.total_count).downcase %>
-  </p>
-  <%= render 'filters', current_path: admin_university_people_path %>
+<div class="d-flex justify-content-between mb-5">
+  <%= render 'admin/application/components/lifecycle/pills',
+              path_method: :admin_university_people_path %>
+  <%= render 'filters',
+              current_path: admin_university_people_path %>
 </div>
+<%= render 'admin/application/components/lifecycle/label' %>
 
 <%= render 'admin/university/people/list', people: @people %>
 <%= paginate @people %>

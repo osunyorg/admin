@@ -11,6 +11,20 @@ module User::WithPerson
     after_create :find_or_create_person, unless: :server_admin?
   end
 
+  def sync_person_safely
+    person_l10n = person.original_localization
+    person_l10n.first_name = first_name
+    person_l10n.last_name = last_name
+    person_l10n.slug = person_l10n.to_s.parameterize
+    person_l10n.save
+    if picture.attached?
+      ActiveStorage::Utils.duplicate(picture, person.picture)
+    elsif person.picture.attached?
+      ActiveStorage::Utils.duplicate(person.picture, picture)
+    end
+    person.save
+  end
+
   protected
 
   def find_or_create_person
@@ -27,16 +41,6 @@ module User::WithPerson
   end
 
   def sync_person
-    person_l10n = person.original_localization
-    person_l10n.first_name = first_name
-    person_l10n.last_name = last_name
-    person_l10n.slug = person_l10n.to_s.parameterize
-    person_l10n.save
-    if picture.attached?
-      ActiveStorage::Utils.duplicate(picture, person.picture)
-    elsif person.picture.attached?
-      ActiveStorage::Utils.duplicate(person.picture, picture)
-    end
-    person.save
+    User::SyncPersonJob.perform_later(self)
   end
 end

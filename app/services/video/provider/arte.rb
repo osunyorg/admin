@@ -33,6 +33,10 @@ class Video::Provider::Arte < Video::Provider::Default
     "#{iframe_url}?autoplay=true&mute=0"
   end
 
+  def embed_for_preview
+    "#{iframe_url}?autoplay=false"
+  end
+
   def title
     data_from_api['data']['attributes']['metadata']['title']
   rescue

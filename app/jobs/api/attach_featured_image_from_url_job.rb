@@ -2,6 +2,9 @@ class Api::AttachFeaturedImageFromUrlJob < ApplicationJob
   queue_as :mice
 
   def perform(object, attachment_url)
+    # Do not attempt to attach image to soft-deleted records
+    return if object.paranoid? && object.deleted?
+
     attachment_uri = begin
       escaped_url = URI::Parser.new.escape(attachment_url)
       URI.parse(escaped_url)

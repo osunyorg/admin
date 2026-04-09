@@ -5,6 +5,7 @@
 #  id                     :uuid             not null, primary key
 #  completed              :boolean          default(FALSE)
 #  completed_at           :date
+#  deleted_at             :datetime
 #  started_at             :date
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -28,17 +29,20 @@
 #  fk_rails_b3380066dc  (research_laboratory_id => research_laboratories.id)
 #
 class Research::Thesis < ApplicationRecord
+  acts_as_paranoid
+
   include Filterable
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable
   include WithUniversity
 
-  belongs_to  :laboratory, 
+  belongs_to  :laboratory,
               foreign_key: :research_laboratory_id
-  belongs_to  :author, 
+  belongs_to  :author,
               class_name: 'University::Person'
-  belongs_to  :director, 
+  belongs_to  :director,
               class_name: 'University::Person'
 
   validates :laboratory, :author, :director, presence: true
@@ -48,7 +52,7 @@ class Research::Thesis < ApplicationRecord
       .where(research_thesis_localizations: { language_id: language.id })
       .where("
         unaccent(research_thesis_localizations.abstract) ILIKE unaccent(:term) OR
-        unaccent(research_thesis_localizations.title) ILIKE unaccent(:term) 
+        unaccent(research_thesis_localizations.title) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
 end

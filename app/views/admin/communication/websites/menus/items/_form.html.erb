@@ -34,7 +34,7 @@ url = item.persisted? ? [:admin, item, { menu_id: @menu.id }]
       <% end %>
     </div>
   </div>
-  <div class="row pure__row--small">
+  <div class="row">
     <div class="col-lg-6">
       <%= f.input :title %>
       <%= f.association :parent,
@@ -65,6 +65,23 @@ url = item.persisted? ? [:admin, item, { menu_id: @menu.id }]
                           input_html: { class: 'js-about-id' } %>
         <%= f.input :about_type, as: :hidden, input_html: { class: 'js-about-type' } %>
       </div>
+    </div>
+  </div>
+  <div class="mt-5">
+    <a  class="text-muted small"
+        data-bs-toggle="collapse"
+        href="#advanced"
+        role="button"
+        aria-expanded="false"
+        aria-controls="advanced">
+      <i class="bi bi-gear-fill"></i>
+      <%= t('admin.advanced_settings') %>
+    </a>
+    <div class="collapse mt-3" id="advanced">
+      <%= f.input :html_class %>
+      <% if item.html_class.present? %>
+        <pre><%= item.html_class_prepared %></pre>
+      <% end %>
     </div>
   </div>
   <% content_for :action_bar_right do %>

@@ -2,7 +2,8 @@ class Admin::Education::Programs::ApplicationController < Admin::Education::Appl
   load_and_authorize_resource :program,
                               class: Education::Program,
                               through: :current_university,
-                              through_association: :education_programs
+                              through_association: :education_programs,
+                              except: :restore
 
   protected
 

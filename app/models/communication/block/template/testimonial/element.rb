@@ -5,4 +5,7 @@ class Communication::Block::Template::Testimonial::Element < Communication::Bloc
   has_component :job, :string
   has_component :photo, :image
 
+  def empty?
+    text.blank?
+  end
 end

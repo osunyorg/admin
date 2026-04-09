@@ -18,4 +18,10 @@ Bugsnag.configure do |config|
     next unless ignored_error_classes.include?(error_class)
     false
   end)
+
+  config.add_on_error(proc do |event|
+    user_agent = event.metadata.dig(:request, :headers, 'User-Agent').to_s
+    next unless user_agent.include?('ChatGPT-User')
+    false
+  end)
 end

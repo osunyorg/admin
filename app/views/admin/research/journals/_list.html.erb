@@ -1,0 +1,36 @@
+<div class="row g-2 mb-3">
+  <% journals.each do |journal| %>
+    <div>
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
+        <%= osuny_thumbnail_localized journal %>
+        <% if journal.deleted? %>
+          <div class="card-body">
+            <%= journal.best_localization_for(current_language) %>
+          </div>
+          <% if can?(:restore, journal) %>
+            <div class="card-footer">
+              <%= link_to t('restore'),
+                          restore_admin_research_journal_path(journal),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card-body">
+            <%= osuny_link_localized journal, [:admin, journal], classes: 'stretched-link' %>
+          </div>
+          <div class="card-footer small text-muted">
+            <span>
+              <%= journal.volumes.count %>
+              <%= Research::Journal::Volume.model_name.human(count: journal.volumes.count).downcase %>
+            </span>
+            <span class="ms-4">
+              <%= journal.papers.count %>
+              <%= Research::Journal::Paper.model_name.human(count: journal.papers.count).downcase %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

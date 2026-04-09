@@ -4,7 +4,16 @@ Rails.application.config.to_prepare do
 
   # Hook ActiveStorage::Attachment to add brand_id to attachments records
   ActiveStorage::Attachment.class_eval do
+    acts_as_paranoid
+
     after_save :denormalize_university_id_for_blob
+
+    # As we use paranoid on records, we may need to access the record even if it soft deleted
+    def record
+      return if record_type.nil?
+      record_class = record_type.constantize
+      record_class.unscoped { super }
+    end
 
     def denormalize_university_id_for_blob
       university_id = case self.record.class.name
@@ -17,6 +26,15 @@ Rails.application.config.to_prepare do
       end
 
       self.blob.update_column(:university_id, university_id)
+    end
+
+    private
+
+    # Override ActiveStorage::Attachment#dependent because the attachement is now soft_destroyed the record might have been previously destroyed
+    # Base method: https://github.com/rails/rails/blob/v8.1.1/activestorage/app/models/active_storage/attachment.rb#L154
+    def dependent
+      return if record.nil?
+      record.attachment_reflections[name]&.options&.fetch(:dependent, nil)
     end
   end
 

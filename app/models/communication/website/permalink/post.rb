@@ -3,12 +3,13 @@
 # Table name: communication_website_permalinks
 #
 #  id            :uuid             not null, primary key
-#  about_type    :string           not null, indexed => [about_id]
+#  about_type    :string           indexed => [about_id]
 #  is_current    :boolean          default(TRUE)
 #  path          :string
+#  target_url    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             not null, indexed => [about_type]
+#  about_id      :uuid             indexed => [about_type]
 #  university_id :uuid             not null, indexed
 #  website_id    :uuid             not null, indexed
 #
@@ -24,6 +25,8 @@
 #  fk_rails_f389ba7d45  (website_id => communication_websites.id)
 #
 class Communication::Website::Permalink::Post < Communication::Website::Permalink
+  delegate :post, to: :about
+
   def self.required_in_config?(website)
     website.feature_posts
   end
@@ -34,7 +37,7 @@ class Communication::Website::Permalink::Post < Communication::Website::Permalin
 
   # /actualites/2022-10-21-un-article/
   def self.pattern_in_website(website, language, about = nil)
-    special_page_path(website, language) + "/:year-:month-:day-:slug/"
+    special_page_path(website, language) + "/:year-:month-:day-:slug:federation_suffix/"
   end
 
   def self.special_page_type
@@ -48,7 +51,8 @@ class Communication::Website::Permalink::Post < Communication::Website::Permalin
       year: about.published_at.strftime("%Y"),
       month: about.published_at.strftime("%m"),
       day: about.published_at.strftime("%d"),
-      slug: about.slug
+      slug: about.slug,
+      federation_suffix: post.suffix_in(website)
     }
   end
 end

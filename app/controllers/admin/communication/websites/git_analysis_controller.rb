@@ -15,7 +15,7 @@ class Admin::Communication::Websites::GitAnalysisController < Admin::Communicati
   end
 
   def launch
-    @website.analyse_repository!
+    @website.analyse_repository
     redirect_back fallback_location: admin_communication_website_path(@website),
                   notice: t('admin.communication.website.git_file.analysis.launched')
   end

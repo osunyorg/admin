@@ -9,12 +9,12 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <%= osuny_panel t('admin.communication.website.redirects.current_path'), small: true do %>
+    <%= osuny_small_panel t('admin.communication.website.redirects.current_path') do %>
       <p class="lead">
       <%= about.current_permalink_in_website(@website) %>
       </p>
     <% end %>
-    <%= osuny_panel t('admin.communication.website.redirects.previous_paths'), small: true do %>
+    <%= osuny_small_panel t('admin.communication.website.redirects.previous_paths') do %>
       <table id="previous-permalinks" class="table border-top">
         <tbody>
           <% about.previous_permalinks_in_website(@website).each do |permalink| %>

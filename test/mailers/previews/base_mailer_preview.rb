@@ -73,12 +73,12 @@ class BaseMailerPreview < ActionMailer::Preview
         repository: ENV['TEST_GITHUB_REPOSITORY'],
         default_language: Language.find_by(iso_code: 'fr'),
         default_time_zone: 'Europe/Paris',
-        deuxfleurs_hosting: false,
+        hosting: :undefined,
         feature_posts: true,
         feature_agenda: true
       )
       website.localizations.build(
-        { 
+        {
           language: Language.find_by(iso_code: 'fr'),
           name:' Site with github french',
           published: true,
@@ -100,7 +100,7 @@ class BaseMailerPreview < ActionMailer::Preview
         default_language: Language.find_by(iso_code: 'fr')
       )
       extranet.localizations.build(
-        { 
+        {
           language: Language.find_by(iso_code: 'fr'),
           name: 'Extranet de test',
           published: true,

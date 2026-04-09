@@ -1,10 +1,14 @@
 class Admin::Research::Laboratories::AxesController < Admin::Research::Laboratories::ApplicationController
-  load_and_authorize_resource class: Research::Laboratory::Axis, through: :laboratory
+  load_and_authorize_resource class: Research::Laboratory::Axis,
+                              through: :laboratory,
+                              except: :restore
 
   include Admin::Reorderable
   include Admin::Localizable
 
   def index
+    @filtered = @axes
+    @axes = @filtered.at_lifecycle(params[:lifecycle], current_language)
     breadcrumb
   end
 
@@ -24,7 +28,7 @@ class Admin::Research::Laboratories::AxesController < Admin::Research::Laborator
   def create
     @axis.laboratory = @laboratory
     if @axis.save
-      redirect_to admin_research_laboratory_axis_path(@axis), 
+      redirect_to admin_research_laboratory_axis_path(@axis),
                   notice: t('admin.successfully_created_html', model: @axis.to_s_in(current_language))
     else
       breadcrumb
@@ -34,7 +38,7 @@ class Admin::Research::Laboratories::AxesController < Admin::Research::Laborator
 
   def update
     if @axis.update(axis_params)
-      redirect_to admin_research_laboratory_axis_path(@axis), 
+      redirect_to admin_research_laboratory_axis_path(@axis),
                   notice: t('admin.successfully_updated_html', model: @axis.to_s_in(current_language))
     else
       load_invalid_localization
@@ -46,8 +50,16 @@ class Admin::Research::Laboratories::AxesController < Admin::Research::Laborator
 
   def destroy
     @axis.destroy
-    redirect_to admin_research_laboratory_path(@laboratory), 
+    redirect_to admin_research_laboratory_path(@laboratory),
                 notice: t('admin.successfully_destroyed_html', model: @axis.to_s_in(current_language))
+  end
+
+  def restore
+    @axis = current_university.research_laboratory_axes.only_deleted.find(params[:id])
+    authorize!(:restore, @axis)
+    @axis.restore(recursive: true)
+    redirect_to [:admin, @axis],
+                notice: t('admin.successfully_restored_html', model: @axis.to_s_in(current_language))
   end
 
   private

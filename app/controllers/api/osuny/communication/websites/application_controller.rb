@@ -10,4 +10,5 @@ class Api::Osuny::Communication::Websites::ApplicationController < Api::Osuny::A
   def website
     @website
   end
+
 end

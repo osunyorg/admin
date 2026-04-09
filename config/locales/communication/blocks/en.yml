@@ -113,7 +113,6 @@ en:
               large:
                 description: Each event is presented in majesty, across the full width available, with a large image.
                 label: Large
-                more: Show more
               list:
                 description: A list of events with dates, small images, all the same width.
                 label: List
@@ -325,7 +324,6 @@ en:
               large:
                 description: Each exhibition is presented in majesty, across the full width available, with a large image.
                 label: Large
-                more: Show more
               list:
                 description: A list of exhibitions with days, small images, all the same width.
                 label: List
@@ -355,6 +353,13 @@ en:
               option_icons:
                 label: Show images as small icons
               remove_element: Remove feature
+            layouts:
+              grid:
+                description: Features are presented as a grid, from left to right and top to bottom, with constant size cropped images.
+                label: Grid
+              list:
+                description: A list of features with days, small images, all the same width.
+                label: List
           files:
             description: A list of downloadable files, mentioning their file size.
             edit:
@@ -382,7 +387,7 @@ en:
                   label: Credit
                   placeholder: Enter image's credit here
                 text:
-                  label: Text
+                  label: Image label
                   placeholder: Enter text
               move_images: Move images below to define the order
               remove_image: Remove image
@@ -402,7 +407,7 @@ en:
             description: An image with its alternative description, a credit and a text.
             edit:
               text:
-                label: Text
+                label: Image label
                 placeholder: Enter text
           jobs:
             description: A list of job offers.
@@ -794,6 +799,19 @@ en:
                   label: Text
                   placeholder: Enter testimonial's text
               remove_testimonial: Remove testimonial
+            layouts:
+              carousel:
+                description: Testimonials are large, with an automatic animation.
+                label: Carousel
+              grid:
+                description: Testimonials are shown as a grid, all the same width.
+                label: Grid
+              large:
+                description: Testimonials are as large as possible, using all screen width.
+                label: Large
+              list:
+                description: Testimonials are displayed one above the other, somewhat like a table.
+                label: List
           timeline:
             description: A list of events with their description, on a timeline.
             edit:
@@ -870,6 +888,7 @@ en:
             one: 1 block
             other: '%{count} blocks'
             zero: No block
+          reset: Reset (based on %{language} version)
         modes:
           structure:
             description: In “Organize structure” mode, you see only a small preview of each block. This is the ideal mode to organize long documents.

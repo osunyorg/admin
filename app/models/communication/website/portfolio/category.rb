@@ -6,6 +6,7 @@
 #  bodyclass                :string
 #  is_programs_root         :boolean          default(FALSE)
 #  is_taxonomy              :boolean          default(FALSE)
+#  migration_identifier     :string
 #  position                 :integer          not null
 #  position_in_tree         :integer
 #  created_at               :datetime         not null
@@ -36,6 +37,7 @@ class Communication::Website::Portfolio::Category < ApplicationRecord
   include Localizable
   include Sanitizable
   include WithMenuItemTarget
+  include WithOpenApi
   include WithUniversity
 
   belongs_to              :program,

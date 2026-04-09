@@ -1,12 +1,8 @@
 <%
-# this version has to incremented every time you change something in the file, to invalidate the cache
-version = 7
-# Pas dans le controller parce que ça se fait dans les background jobs, à partir du @about
+# Next lines are not in the controller because it happens in the background jobs
 organization = @l10n.about
 university = organization.university
 language = @l10n.language
-cache_key = [organization, @l10n, @website.id, version]
-cache cache_key do
 %>---
 <%= render 'admin/application/static/core', about: @l10n %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
@@ -16,18 +12,18 @@ cache cache_key do
             full_width: true,
             toc_offcanvas: true %>
 <%= render 'admin/application/l10n/static', about: @l10n %>
-<%= render 'admin/application/meta_description/static', about: @l10n %>
 <%= render 'admin/application/images/featured/static', about: @l10n %>
 <%= render 'admin/application/images/shared/static', about: @l10n %>
-<%= render 'admin/application/summary/static', about: @l10n %>
+<%= osuny_static_text 'meta_description', @l10n.meta_description %>
+<%= osuny_static_html 'summary', @l10n.summary %>
 <%= render 'admin/application/connections/backlinks', about: @l10n %>
-<%= render 'admin/application/static/attribute/text', about: @about, key: :long_name %>
-<%= render 'admin/application/static/attribute/text', about: organization, key: :siren %>
-text: >-
-  <%= prepare_html_for_static @l10n.text %>
-kind:
-  code: "<%= organization.kind %>"
-  label: "<%= organization.kind_i18n %>"
+<%= osuny_static_text 'long_name', @about.long_name %>
+<%= osuny_static_text 'siren', organization.siren %>
+<%= osuny_static_html 'text', @l10n.text %>
+organization:
+  kind:
+    code: "<%= organization.kind %>"
+    label: "<%= organization.kind_i18n %>"
 <%= render 'admin/application/contact_details/static',
             about: organization,
             l10n: @l10n,
@@ -45,5 +41,3 @@ logo_on_dark_background: "<%= @about.logo_on_dark_background.blob.id %>"
             key: :organizations_categories %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---
-<%= prepare_html_for_static @about.text %>
-<% end %>

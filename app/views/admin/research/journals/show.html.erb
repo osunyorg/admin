@@ -2,10 +2,10 @@
 
 <% content_for :title_right do %>
   <%= render 'admin/application/favorites/widget', about: @journal %>
-  <%= edit_link @journal %>
   <%= button_advanced do %>
     <%= destroy_link @journal %>
   <% end %>
+  <%= edit_link @journal %>
 <% end %>
 
 <% content_for :title_left do %>

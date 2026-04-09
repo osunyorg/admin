@@ -4,6 +4,7 @@
 #
 #  id                    :uuid             not null, primary key
 #  biography             :text
+#  deleted_at            :datetime
 #  featured_image_alt    :text
 #  featured_image_credit :text
 #  first_name            :string
@@ -13,18 +14,21 @@
 #  meta_description      :text
 #  name                  :string
 #  picture_credit        :text
+#  published             :boolean          default(TRUE)
+#  published_at          :datetime
 #  slug                  :string           indexed
 #  summary               :text
 #  twitter               :string
 #  url                   :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  about_id              :uuid             indexed
-#  language_id           :uuid             indexed
+#  about_id              :uuid             uniquely indexed => [language_id], indexed
+#  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_54757d0dad                  (about_id,language_id) UNIQUE
 #  index_university_person_localizations_on_about_id       (about_id)
 #  index_university_person_localizations_on_language_id    (language_id)
 #  index_university_person_localizations_on_slug           (slug)
@@ -37,17 +41,18 @@
 #  fk_rails_bf16824595  (language_id => languages.id)
 #
 class University::Person::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AsLocalization
   include Backlinkable
   include Contentful
   include HasGitFiles
   include Permalinkable
+  include Publishable
   include Sanitizable
   include WithBlobs
   include WithFeaturedImage # TODO Arnaud: Future feature of person's cover image
   include WithUniversity
-
-  alias :person :about
 
   delegate :featured_image, to: :person
 
@@ -57,28 +62,33 @@ class University::Person::Localization < ApplicationRecord
   validates :last_name, presence: true
   before_validation :prepare_name
 
+  def about
+    University::Person.unscoped { super }
+  end
+  alias person about
+
   def person_l10n
-    @person_l10n ||= University::Person::Localization.find(id)
+    @person_l10n ||= University::Person::Localization.with_deleted.find(id)
   end
 
   def administrator
-    @administrator ||= University::Person::Localization::Administrator.find(id)
+    @administrator ||= University::Person::Localization::Administrator.with_deleted.find(id)
   end
 
   def author
-    @author ||= University::Person::Localization::Author.find(id)
+    @author ||= University::Person::Localization::Author.with_deleted.find(id)
   end
 
   def researcher
-    @researcher ||= University::Person::Localization::Researcher.find(id)
+    @researcher ||= University::Person::Localization::Researcher.with_deleted.find(id)
   end
 
   def teacher
-    @teacher ||= University::Person::Localization::Teacher.find(id)
+    @teacher ||= University::Person::Localization::Teacher.with_deleted.find(id)
   end
 
   def dependencies
-    person.active_storage_blobs + 
+    person.active_storage_blobs +
     contents_dependencies
   end
 
@@ -111,9 +121,6 @@ class University::Person::Localization < ApplicationRecord
     "#{first_name.to_s.first}#{last_name.to_s.first}"
   end
 
-  def published?
-    persisted?
-  end
 
   # user in statics where we don't need the cateogries not localized
   def categories

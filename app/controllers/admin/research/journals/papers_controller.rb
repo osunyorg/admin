@@ -1,13 +1,17 @@
 class Admin::Research::Journals::PapersController < Admin::Research::Journals::ApplicationController
-  load_and_authorize_resource class: Research::Journal::Paper, through: :journal
+  load_and_authorize_resource class: Research::Journal::Paper,
+                              through: :journal,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
   include Admin::Reorderable
 
   def index
-    @papers = @papers.ordered(current_language)
-                     .page(params[:page])
+    @filtered = @papers
+    @papers =  @filtered.at_lifecycle(params[:lifecycle], current_language)
+                        .ordered(current_language)
+                        .page(params[:page])
     @feature_nav = 'navigation/admin/research/journal/papers'
     breadcrumb
   end
@@ -52,7 +56,15 @@ class Admin::Research::Journals::PapersController < Admin::Research::Journals::A
 
   def destroy
     @paper.destroy
-    redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @paper.to_s_in(current_language))
+    redirect_to admin_research_journal_papers_path(@journal), notice: t('admin.successfully_destroyed_html', model: @paper.to_s_in(current_language))
+  end
+
+  def restore
+    @paper = current_university.research_journal_papers.only_deleted.find(params[:id])
+    authorize!(:restore, @paper)
+    @paper.restore(recursive: true)
+    redirect_to admin_research_journal_paper_path(@paper),
+                notice: t('admin.successfully_restored_html', model: @paper.to_s_in(current_language))
   end
 
   private

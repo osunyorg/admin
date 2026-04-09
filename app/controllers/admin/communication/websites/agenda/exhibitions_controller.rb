@@ -1,14 +1,17 @@
 class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Communication::Websites::Agenda::ApplicationController
   load_and_authorize_resource class: Communication::Website::Agenda::Exhibition,
-                              through: :website
+                              through: :website,
+                              except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @exhibitions = @exhibitions.filter_by(params[:filters], current_language)
-                     .ordered_desc
-                     .page(params[:page])
+    @filtered = @exhibitions.filter_by(params[:filters], current_language)
+    @exhibitions = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                            .ordered_desc
+                            .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
   end
@@ -69,6 +72,14 @@ class Admin::Communication::Websites::Agenda::ExhibitionsController < Admin::Com
     @exhibition.destroy
     redirect_to admin_communication_website_agenda_exhibitions_url,
                 notice: t('admin.successfully_destroyed_html', model: @exhibition.to_s_in(current_language))
+  end
+
+  def restore
+    @exhibition = @website.agenda_exhibitions.only_deleted.find(params[:id])
+    authorize!(:restore, @exhibition)
+    @exhibition.restore(recursive: true)
+    redirect_to admin_communication_website_agenda_exhibition_path(@exhibition),
+                notice: t('admin.successfully_restored_html', model: @exhibition.to_s_in(current_language))
   end
 
   protected

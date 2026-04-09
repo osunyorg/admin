@@ -1,6 +1,13 @@
 <% content_for :title, Administration::Location.model_name.human(count: 2) %>
 
-<%= render 'admin/administration/locations/list', locations: @locations %>
 <% content_for :title_right do %>
   <%= create_link Administration::Location %>
 <% end %>
+
+<div class="d-flex justify-content-between mb-5">
+  <%= render 'admin/application/components/lifecycle/pills',
+              path_method: :admin_administration_locations_path %>
+</div>
+<%= render 'admin/application/components/lifecycle/label' %>
+
+<%= render 'admin/administration/locations/list', locations: @locations %>

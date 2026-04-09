@@ -1,21 +1,38 @@
+<%
+displaying_trash = params[:lifecycle] == Lifecyclable::LIFECYCLE_TRASH
+can_reorder = !displaying_trash && can?(:reorder, axes.first)
+%>
 <div  class="row g-2 mb-3"
-      <% if can?(:reorder, axes.first) %>
+      <% if can_reorder %>
         data-sortable
         data-sort-url="<%= reorder_admin_research_laboratory_axes_path(laboratory_id: @laboratory.id) %>"
-      <% end %>
-      >
+      <% end %>>
   <% axes.each do |axis| %>
-    <% axis_l10n = axis.localization_for(current_language) %>
-    <div data-id="<%= axis.id %>">
+    <div data-id="<%= axis.id %>" <% if can_reorder %>class="handle"<% end %>>
       <div class="<%= osuny_card_classes(horizontal: true) %>">
-        <%= osuny_thumbnail_localized axis, classes: 'handle m-0' %>
-        <div class="card-body">
-          <%= osuny_link_localized  axis,
-                                    admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis) %>
-        </div>
-        <div class="card-footer">
-          <%= axis_l10n&.short_name %>
-        </div>
+        <%= osuny_thumbnail_localized axis %>
+        <% if axis.deleted? %>
+          <div class="card-body">
+            <%= axis.best_localization_for(current_language) %>
+          </div>
+          <% if can?(:restore, axis) %>
+            <div class="card-footer">
+              <%= link_to t('restore'),
+                          restore_admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
+        <% else %>
+          <% axis_l10n = axis.localization_for(current_language) %>
+          <div class="card-body">
+            <%= osuny_link_localized  axis,
+                                      admin_research_laboratory_axis_path(laboratory_id: axis.laboratory, id: axis) %>
+          </div>
+          <div class="card-footer">
+            <%= axis_l10n&.short_name %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>

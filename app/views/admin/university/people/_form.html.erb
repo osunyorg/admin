@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-lg-8">
         <%= osuny_panel University::Person.human_attribute_name('essentials') do %>
-          <div class="row pure__row--small">
+          <div class="row">
             <div class="col-xl-6">
               <%= lf.input :first_name %>
             </div>
@@ -16,7 +16,7 @@
               <%= lf.input :last_name %>
             </div>
           </div>
-          <div class="row pure__row--small">
+          <div class="row">
             <div class="col-xl-6">
               <%= f.input :gender, label_method: lambda { |g| t("activerecord.attributes.university/person.genders.#{g[1]}") } %>
             </div>
@@ -36,7 +36,7 @@
         <% end %>
 
         <%= osuny_panel University::Person.human_attribute_name('abilities') do %>
-          <div class="row pure__row--small">
+          <div class="row">
             <div class="col-xl-6">
               <% if current_university.is_really_a_university? %>
                 <%= f.input :is_teacher %>
@@ -59,7 +59,7 @@
 
         <%= osuny_panel University::Person.human_attribute_name('contacts') do %>
           <p><em><%= t("university.person.personal_data_warning") %></em></p>
-          <div class="row pure__row--small mb-4">
+          <div class="row mb-4">
             <div class="col-xl-6">
             <%= f.input :email %>
             </div>
@@ -67,7 +67,7 @@
               <%= f.input :email_visibility, **personal_data_visibility_input_options %>
             </div>
           </div>
-          <div class="row pure__row--small mb-4">
+          <div class="row mb-4">
             <div class="col-xl-6">
               <%= f.input :phone_mobile %>
             </div>
@@ -75,7 +75,7 @@
                 <%= f.input :phone_mobile_visibility, **personal_data_visibility_input_options %>
             </div>
           </div>
-          <div class="row pure__row--small mb-4">
+          <div class="row mb-4">
             <div class="col-xl-6">
               <%= f.input :phone_professional %>
             </div>
@@ -83,7 +83,7 @@
               <%= f.input :phone_professional_visibility, **personal_data_visibility_input_options %>
             </div>
           </div>
-          <div class="row pure__row--small mb-4">
+          <div class="row mb-4">
             <div class="col-xl-6">
               <%= f.input :phone_personal %>
             </div>
@@ -91,7 +91,7 @@
                 <%= f.input :phone_personal_visibility, **personal_data_visibility_input_options %>
             </div>
           </div>
-          <div class="row pure__row--small mb-4">
+          <div class="row mb-4">
             <div class="col-xl-6">
               <%= f.input :address %>
               <%= f.input :zipcode %>
@@ -105,12 +105,12 @@
         <% end %>
         <%= osuny_panel University::Person.human_attribute_name('socials') do %>
           <p><em><%= t("university.person.personal_data_warning") %></em></p>
-          <div class="row pure__row--small mb-4">
+          <div class="row mb-4">
             <div class="col-xl-6">
             <%= lf.input :url %>
             </div>
           </div>
-          <div class="row pure__row--small mb-4">
+          <div class="row mb-4">
             <div class="col-xl-6">
               <%= lf.input :linkedin %>
             </div>
@@ -118,7 +118,7 @@
               <%= f.input :linkedin_visibility, **personal_data_visibility_input_options %>
             </div>
           </div>
-          <div class="row pure__row--small mb-4">
+          <div class="row mb-4">
             <div class="col-xl-6">
               <%= lf.input :twitter %>
             </div>
@@ -126,7 +126,7 @@
               <%= f.input :twitter_visibility, **personal_data_visibility_input_options %>
             </div>
           </div>
-          <div class="row pure__row--small mb-4">
+          <div class="row mb-4">
             <div class="col-xl-6">
               <%= lf.input :mastodon %>
             </div>
@@ -142,6 +142,7 @@
       </div>
       <div class="col-lg-4">
         <%= osuny_panel t('metadata') do %>
+          <%= render 'admin/application/publication/form', f: lf, about: person %>
           <%= render  'admin/application/slug/form',
                     f: lf,
                     source: '#university_person_localizations_attributes_0_first_name, #university_person_localizations_attributes_0_last_name' %>

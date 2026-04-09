@@ -1,11 +1,4 @@
-<%
-title = Communication::Website::Agenda::Exhibition.model_name.human(count: 2)
-action = ''
-action += link_to t('create'),
-                  new_admin_communication_website_agenda_exhibition_path(website_id: @website),
-                  class: button_classes if can?(:create, Communication::Website::Agenda::Exhibition)
-%>
-<%= osuny_panel title, action: action do %>
+<%= osuny_panel Communication::Website::Agenda::Exhibition.model_name.human(count: 2) do %>
   <%= render 'admin/communication/websites/agenda/exhibitions/list', 
               exhibitions: @exhibitions, 
               small: true,

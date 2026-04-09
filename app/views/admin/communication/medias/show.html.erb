@@ -1,10 +1,10 @@
 <% content_for :title, @l10n %>
 
 <% content_for :title_right do %>
-  <%= edit_link @media %>
   <%= button_advanced do %>
     <%= destroy_link @media if @media.contexts.none? %>
   <% end %>
+  <%= edit_link @media %>
 <% end %>
 
 <div class="row">

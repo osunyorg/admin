@@ -44,6 +44,7 @@ class University < ApplicationRecord
 
   # We don't include Sanitizable because too many complex attributes. We handle it below.
   include Filterable
+  include SsoEnabled
   include WithAdministration
   include WithCommunication
   include WithCountry
@@ -54,7 +55,6 @@ class University < ApplicationRecord
   include WithLanguages
   include WithPeopleAndOrganizations
   include WithResearch
-  include WithSso
   include WithUsers
 
   has_one_attached_deletable :logo

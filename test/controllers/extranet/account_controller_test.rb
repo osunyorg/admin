@@ -1,5 +1,6 @@
 require "test_helper"
 
+# rails test test/controllers/extranet/account_controller_test.rb
 class Extranet::AccountControllerTest < ActionDispatch::IntegrationTest
   include ExtranetSetup
 
@@ -17,8 +18,11 @@ class Extranet::AccountControllerTest < ActionDispatch::IntegrationTest
     alumnus_person_l10n = alumnus_person.original_localization
     assert_equal("Alumnus", alumnus.first_name)
     assert_equal("Alumnus", alumnus_person_l10n.first_name)
-    patch account_path(lang: french), params: { user: { first_name: "New Alumnus" } }
+    assert_enqueued_with(job: User::SyncPersonJob) do
+      patch account_path(lang: french), params: { user: { first_name: "New Alumnus" } }
+    end
     assert_redirected_to(account_path)
+    perform_enqueued_jobs
     assert_equal("New Alumnus", alumnus.first_name)
     assert_equal("New Alumnus", alumnus_person_l10n.reload.first_name)
   end

@@ -1,161 +1,258 @@
-<%
-@title = @l10n.name
-@image = @l10n.best_featured_image
-%>
-<div class="container">
-  <div class="lead" itemprop="abstract">
-    <%= sanitize @l10n.presentation %>
-  </div>
-</div>
-<section id="presentation">
-  <div class="container">
-    <div class="content">
-      <div>
-        <h2><%= Education::Program::Localization.human_attribute_name('presentation') %></h2>
-      </div>
-      <div>
-        <div class="subpart">
-          <%= sanitize @l10n.objectives %>
+<main id="main" class="page-with-blocks">
+  <header class="hero">
+    <div class="container">
+      <div class="content">
+        <div class="hero-text">
+          <hgroup class="has-lead">
+            <h1><%= @l10n.name %></h1>
+            <%= sanitize @l10n.summary %>
+          </hgroup>
         </div>
-        <div class="subpart">
-          <h3>Informations administratives</h3>
-          <div class="table-responsive">
-            <table class="<%= table_classes %> table-infos">
-              <caption>Informations administratives</caption>
-              <tbody>
-                <% if @program.diploma %>
-                  <tr>
-                    <th>Crédits ECTS</th>
-                    <td><%= @program.diploma.ects %></td>
-                  </tr>
-                <% end %>
-                <tr>
-                  <th><%= Education::Program::Localization.human_attribute_name('initial') %></th>
-                  <td><%= t @program.initial %></td>
-                </tr>
-                <tr>
-                  <th><%= Education::Program::Localization.human_attribute_name('continuing') %></th>
-                  <td><%= t @program.continuing %></td>
-                </tr>
-                <tr>
-                  <th><%= Education::Program::Localization.human_attribute_name('apprenticeship') %></th>
-                  <td><%= t @program.apprenticeship %></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <div class="hero-logos"></div>
       </div>
     </div>
-  </div>
-</section>
-
-<div class="blocks">
-  <%= render 'admin/communication/contents/show', about: @l10n, strip_javascript: true %>
-</div>
-
-<section id="pedagogy">
-  <div class="container">
-    <div class="content">
-      <div>
-        <h2>Pédagogie</h2>
-      </div>
-      <div>
-        <div class="subpart">
-          <h3><%= Education::Program::Localization.human_attribute_name('content') %></h3>
-          <%= sanitize @l10n.content %>
-        </div>
-        <div class="subpart">
-          <h3><%= Education::Program::Localization.human_attribute_name('pedagogy') %></h3>
-          <%= sanitize @l10n.pedagogy %>
-        </div>
-        <div class="subpart">
-          <h3><%= Education::Program::Localization.human_attribute_name('evaluation') %></h3>
-          <%= sanitize @l10n.evaluation %>
-        </div>
-        <div class="subpart">
-          <h3>Enseignants·es</h3>
-          <div class="table-responsive">
-            <table class="table-persons">
-              <caption>Enseignants·es</caption>
-              <tbody>
-                <% @program.university_person_involvements.each do |involvement| %>
-                  <% involvement_l10n = involvement.best_localization_for(@l10n.language) %>
-                  <tr>
-                    <th scope="row"><a><%= involvement.to_s_in(@l10n.language) %></a></th>
-                    <td><%= involvement_l10n.description %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="results">
-  <div class="container">
-    <div class="content">
-      <div>
-        <h2>Après la formation</h2>
-      </div>
-    <div>
-    <div class="subpart">
-      <h3><%= Education::Program::Localization.human_attribute_name('opportunities') %></h3>
-      <%= sanitize @l10n.opportunities %>
-      <h3><%= Education::Program::Localization.human_attribute_name('results') %></h3>
-      <%= sanitize @l10n.results %>
-    </div>
-  </div>
-</section>
-
-<section id="admission">
-  <div class="container">
-    <div class="content">
-      <div>
-        <h2>Admission</h2>
-      </div>
-      <div>
-        <div class="subpart">
-          <h3><%= Education::Program::Localization.human_attribute_name('prerequisites') %></h3>
-          <%= sanitize @l10n.prerequisites %>
-        </div>
-        <div class="subpart">
-          <h3><%= Education::Program::Localization.human_attribute_name('pricing') %></h3>
-          <%= sanitize @l10n.pricing %>
-        </div>
-        <div class="subpart">
-          <h3><%= Education::Program::Localization.human_attribute_name('registration') %></h3>
-          <%= sanitize @l10n.registration %>
-        </div>
-        <div class="subpart">
-          <h3><%= Education::Program::Localization.human_attribute_name('accessibility') %></h3>
-          <%= sanitize @l10n.accessibility %>
-        </div>
-        <div class="subpart">
-          <h3><%= Education::Program::Localization.human_attribute_name('other') %></h3>
-          <%= sanitize @l10n.other %>
-        </div>
-        <div class="subpart">
-          <h3>Rôles</h3>
-          <% @program.university_roles.each do |role| %>
-            <% role_l10n = role.best_localization_for(@l10n.language) %>
-            <p>
-              <b><%= role_l10n.description %></b><br>
-              <% role.people.each do |person| %>
-                <a><%= person.to_s_in(@l10n.language) %></a><br>
-                <a rel="noreferrer" target="_blank"><%= person.email %></a><br>
-              <% end %>
-            </p>
+    <div class="essential-container" id="essentiel">
+      <div class="container">
+        <dl class="essential">
+          <% if @program.diploma %>
+            <dt><%= Education::Program.human_attribute_name(:diploma) %></dt>
+            <dd><a href=""><%= @program.diploma.to_s_in(current_language) %></a></dd>
+            <dt><%= Education::Diploma.human_attribute_name(:level) %></dt>
+            <dd><%= @program.diploma.level_i18n %></dd>
           <% end %>
-        </div>
-        <div class="subpart">
-          <h3><%= Education::Program::Localization.human_attribute_name('contacts') %></h3>
-          <%= sanitize @l10n.contacts %>
-        </div>
+          <% if @l10n.duration %>
+            <dt><%= Education::Program::Localization.human_attribute_name(:duration) %></dt>
+            <dd><%= @l10n.duration %></a></dd>
+          <% end %>
+        <% if @program.locations.any? %>
+          <dt><%= Education::Program.human_attribute_name('locations') %></dt>
+          <dd>
+            <% @program.locations.ordered(current_language).each do |location| %>
+              <a href=""><%= location.to_s_in(current_language) %></a>
+            <% end %>
+          </dd>
+        <% end %>
+        </dl>
       </div>
     </div>
+  </header>
+  <div class="document-content">
+    <div class="toc-cta"></div>
+    <section id="présentation">
+      <div class="container">
+        <div class="content">
+          <h2>Présentation</h2>
+          <div>
+            <%= render 'admin/application/preview/featured_image', l10n: @l10n %>
+            <% if @l10n.presentation %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name(:presentation) %></h3>
+                <%= sanitize @l10n.presentation %>
+              </section>
+            <% end %>
+            <% if @l10n.best_objectives %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name(:objectives) %></h3>
+                <%= sanitize @l10n.best_objectives %>
+              </section>
+            <% end %>
+          </div>
+          <% if @l10n.blocks.published.any? %>
+            <div class="blocks">
+              <%= render 'admin/communication/contents/show', about: @l10n, strip_javascript: true %>
+            </div>
+          <% end %>
+          <div>
+            <section id="objectifs">
+              <h3>Informations administratives</h3>
+              <table class="program-table">
+                <caption>Informations administratives</caption>
+                <tbody>
+                  <% if @program.diploma %>
+                    <tr>
+                      <th scope="row"><%= Education::Diploma.human_attribute_name('ects') %></th>
+                      <td><%= @program.diploma.ects %></td>
+                    </tr>
+                  <% end %>
+                  <tr>
+                    <th scope="row"><%= Education::Program.human_attribute_name('initial') %></th>
+                    <td><%= t @program.initial %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><%= Education::Program.human_attribute_name('continuing') %></th>
+                    <td><%= t @program.continuing %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><%= Education::Program.human_attribute_name('apprenticeship') %></th>
+                    <td><%= t @program.apprenticeship %></td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><%= Education::Program.human_attribute_name('capacity') %></th>
+                    <td><%= @program.capacity %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pédagogie">
+      <div class="container">
+        <div class="content">
+          <h2>Pédagogie</h2>
+          <div>
+            <% if @l10n.best_content %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('content') %></h3>
+                <%= sanitize @l10n.best_content %>
+              </section>
+            <% end %>
+            <% if @l10n.best_pedagogy %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('pedagogy') %></h3>
+                <%= sanitize @l10n.best_pedagogy %>
+              </section>
+            <% end %>
+            <% if @l10n.best_evaluation %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('evaluation') %></h3>
+                <%= sanitize @l10n.best_evaluation %>
+              </section>
+            <% end %>
+            <% if @program.university_person_involvements.any? %>
+              <section>
+                <h3>Enseignants·es</h3>
+                <ul class="list-persons">
+                  <% @program.university_person_involvements.each do |involvement| %>
+                    <% involvement_l10n = involvement.best_localization_for(@l10n.language) %>
+                    <li>
+                      <a><%= involvement.to_s_in(@l10n.language) %></a>
+                      <p><%= involvement_l10n.description %></p>
+                    </li>
+                  <% end %>
+                </ul>
+              </section>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="après-la-formation">
+      <div class="container">
+        <div class="content">
+          <h2>Après la formation</h2>
+          <div>
+            <% if @l10n.best_opportunities %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('opportunities') %></h3>
+                <%= sanitize @l10n.best_opportunities %>
+              </section>
+            <% end %>
+            <% if @l10n.best_results %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('results') %></h3>
+                <%= sanitize @l10n.best_results %>
+              </section>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="admission">
+      <div class="container">
+        <div class="content">
+          <h2>Admission</h2>
+          <div>
+            <% if @l10n.best_prerequisites %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('prerequisites') %></h3>
+                <%= sanitize @l10n.best_prerequisites %>
+              </section>
+            <% end %>
+            <% if @l10n.best_pricing %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('pricing') %></h3>
+                <%= sanitize @l10n.best_pricing %>
+              </section>
+            <% end %>
+            <% if @l10n.pricing_initial %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('pricing_initial') %></h3>
+                <%= sanitize @l10n.pricing_initial %>
+              </section>
+            <% end %>
+            <% if @l10n.pricing_continuing %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('pricing_continuing') %></h3>
+                <%= sanitize @l10n.pricing_continuing %>
+              </section>
+            <% end %>
+            <% if @l10n.pricing_apprenticeship %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('pricing_apprenticeship') %></h3>
+                <%= sanitize @l10n.pricing_apprenticeship %>
+              </section>
+            <% end %>
+            <% if @l10n.best_registration %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('registration') %></h3>
+                <%= sanitize @l10n.best_registration %>
+              </section>
+            <% end %>
+            <% if @l10n.best_accessibility %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('accessibility') %></h3>
+                <%= sanitize @l10n.best_accessibility %>
+              </section>
+            <% end %>
+            <% if @l10n.best_other %>
+              <section class="rich-text">
+                <h3><%= Education::Program::Localization.human_attribute_name('other') %></h3>
+                <%= sanitize @l10n.best_other %>
+              </section>
+            <% end %>
+            <% if @program.university_roles.any? %>
+              <section>
+                <h3>Rôles</h3>
+                <% @program.university_roles.each do |role| %>
+                  <% role_l10n = role.best_localization_for(@l10n.language) %>
+                  <p>
+                    <b><%= role_l10n.description %></b><br>
+                    <% role.people.each do |person| %>
+                      <a><%= person.to_s_in(@l10n.language) %></a><br>
+                      <a rel="noreferrer" target="_blank"><%= person.email %></a><br>
+                    <% end %>
+                  </p>
+                <% end %>
+              </section>
+            <% end %>
+            <section class="rich-text">
+              <h3><%= Education::Program::Localization.human_attribute_name('contacts') %></h3>
+              <%= sanitize @l10n.contacts %>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <% if @program.qualiopi_certified %>
+      <section id="certification">
+        <div class="container">
+          <div class="content">
+            <h2>Certification</h2>
+            <div>
+              <section class="rich-text">
+                <img src="https://example.osuny.org/assets/images/certifications/qualiopi.svg" alt="Qualiopi, processus certifié, République Française" class="logo-qualiopi">
+                <%= sanitize @l10n.qualiopi_text %>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+    <% end %>
   </div>
-</section>
+</main>

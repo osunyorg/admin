@@ -42,13 +42,17 @@ bodyclass: >-
 months:
 <%
 @l10n.months.each do |month|
+  next if month.nil?
   hugo = month.hugo(@website)
   next if hugo.file.blank?
   %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
     name: "<%= month.to_month_name %>"
     days:
-<% month.days.each do |day| %>
+<% 
+  month.days.each do |day| 
+    next if day.nil?
+    %>
       - day: <%= day.iso8601 %>
         cwday: <%= day.cwday %>
         events: <%= day.events_count %>

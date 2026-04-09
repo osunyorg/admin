@@ -23,7 +23,7 @@
 </div>
 
 <%= osuny_separator %>
-<%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+<%= osuny_small_panel t('admin.communication.blocks.components.layouts.label') do %>
   <%= block_component_edit block, :layout %>
   <%= osuny_label t('admin.communication.blocks.display_options.title') %>
   <%= block_component_edit block, :option_image, label: Education::Program::Localization.human_attribute_name(:featured_image) %>

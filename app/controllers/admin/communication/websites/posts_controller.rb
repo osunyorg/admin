@@ -1,14 +1,17 @@
 class Admin::Communication::Websites::PostsController < Admin::Communication::Websites::ApplicationController
   load_and_authorize_resource class: Communication::Website::Post,
-                              through: :website
+                              through: :website,
+                              except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @posts = @posts.filter_by(params[:filters], current_language)
-                   .ordered(current_language)
-                   .page(params[:page])
+    @filtered = @posts.filter_by(params[:filters], current_language)
+    @posts = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                      .ordered(current_language)
+                      .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/posts'
     breadcrumb
   end
@@ -34,12 +37,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   end
 
   def show
-    @preview = true
     breadcrumb
-  end
-
-  def preview
-    render layout: 'admin/layouts/preview'
   end
 
   def new
@@ -92,6 +90,14 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
                 notice: t('admin.successfully_destroyed_html', model: @post.to_s_in(current_language))
   end
 
+  def restore
+    @post = @website.posts.only_deleted.find(params[:id])
+    authorize!(:restore, @post)
+    @post.restore(recursive: true)
+    redirect_to admin_communication_website_post_path(@post),
+                notice: t('admin.successfully_restored_html', model: @post.to_s_in(current_language))
+  end
+
   protected
 
   def breadcrumb
@@ -104,7 +110,8 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
   def post_params
     params.require(:communication_website_post)
     .permit(
-      :full_width, :bodyclass, :is_lasting, author_ids: [], category_ids: [],
+      :full_width, :bodyclass, :is_lasting,
+      author_ids: [], category_ids: [], destination_website_ids: [],
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary,
         :header_cta, :header_cta_label, :header_cta_url,

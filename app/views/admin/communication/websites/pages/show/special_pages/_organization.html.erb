@@ -8,14 +8,15 @@
                                            .ordered(current_language)
                                            .page(params[:explicitly_connected_organizations_page])
 %>
-<div class="row">
-  <div class="offset-lg-4 col-lg-8">
-    <%= osuny_panel t('admin.communication.website.pages.special_page') do %>
-      <p><%= t('admin.communication.website.pages.special_pages.organization.native', count: @organizations.total_count) %></p>
-      <%= render 'admin/university/organizations/list', organizations: @organizations %>
-      <%= paginate @organizations, param_name: :organizations_page %>
-    <% end %>
-    <%= osuny_panel t('admin.communication.website.pages.special_pages.organization.explicitly_connected') do %>
+<%= osuny_panel t('admin.communication.website.pages.special_page') do %>
+  <p><%= t('admin.communication.website.pages.special_pages.organization.native', count: @organizations.total_count) %></p>
+  <%= render 'admin/university/organizations/list', organizations: @organizations %>
+  <%= paginate @organizations, param_name: :organizations_page %>
+<% end %>
+
+<%= osuny_panel t('admin.communication.website.pages.special_pages.organization.explicitly_connected') do %>
+  <div class="row">
+    <div class="col-lg-6 col-xxl-4">
       <p><%= t('admin.communication.website.pages.special_pages.organization.explicitly_connected_hint') %></p>
       <%= simple_form_for :association, class_name: 'association' do |f| %>
         <%= f.input :name,
@@ -31,7 +32,9 @@
                     }
                     %>
       <% end %>
-      <div class="row g-3">
+    </div>
+    <div class="col-lg-6 col-xxl-8">
+      <div class="row g-2">
         <% @explicitly_connected_organizations.each do |organization| %>
           <div>
             <div class="<%= osuny_card_classes(horizontal: true) %>">
@@ -52,6 +55,6 @@
         <% end %>
       </div>
       <%= paginate @explicitly_connected_organizations, param_name: :explicitly_connected_organizations_page %>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>

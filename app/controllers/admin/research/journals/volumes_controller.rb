@@ -1,12 +1,16 @@
 class Admin::Research::Journals::VolumesController < Admin::Research::Journals::ApplicationController
-  load_and_authorize_resource class: Research::Journal::Volume, through: :journal
+  load_and_authorize_resource class: Research::Journal::Volume,
+                              through: :journal,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @volumes = @volumes.ordered(current_language)
-                       .page(params[:page])
+    @filtered = @volumes
+    @volumes = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                        .ordered(current_language)
+                        .page(params[:page])
     breadcrumb
   end
 
@@ -57,7 +61,15 @@ class Admin::Research::Journals::VolumesController < Admin::Research::Journals::
 
   def destroy
     @volume.destroy
-    redirect_to admin_research_journal_path(@journal), notice: t('admin.successfully_destroyed_html', model: @volume.to_s_in(current_language))
+    redirect_to admin_research_journal_volumes_path(@journal), notice: t('admin.successfully_destroyed_html', model: @volume.to_s_in(current_language))
+  end
+
+  def restore
+    @volume = current_university.research_journal_volumes.only_deleted.find(params[:id])
+    authorize!(:restore, @volume)
+    @volume.restore(recursive: true)
+    redirect_to admin_research_journal_volume_path(@volume),
+                notice: t('admin.successfully_restored_html', model: @volume.to_s_in(current_language))
   end
 
   private

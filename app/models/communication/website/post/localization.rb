@@ -3,6 +3,7 @@
 # Table name: communication_website_post_localizations
 #
 #  id                       :uuid             not null, primary key
+#  deleted_at               :datetime
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean          default(FALSE)
@@ -19,14 +20,15 @@
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed
+#  about_id                 :uuid             uniquely indexed => [language_id], indexed
 #  communication_website_id :uuid             indexed
-#  language_id              :uuid             indexed
+#  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  publication_job_id       :uuid             indexed
 #  university_id            :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_57307f7184                         (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_f6354f61f0                     (communication_website_id)
 #  idx_on_publication_job_id_790971fcf1                           (publication_job_id)
 #  idx_on_university_id_a3a3f1e954                                (university_id)
@@ -42,6 +44,8 @@
 #  fk_rails_db7d7c515c  (university_id => universities.id)
 #
 class Communication::Website::Post::Localization < ApplicationRecord
+  acts_as_paranoid
+
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
   include AsLocalization
@@ -64,6 +68,8 @@ class Communication::Website::Post::Localization < ApplicationRecord
               class_name: 'Communication::Website',
               foreign_key: :communication_website_id
 
+  alias :post :about
+
   has_summernote :summary
 
   validates :title, presence: true
@@ -76,7 +82,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   }
 
   def should_sync_to?(website)
-    website.id == communication_website_id &&
+    post.allowed_in?(website) &&
     website.active_language_ids.include?(language_id) &&
     published?
   end

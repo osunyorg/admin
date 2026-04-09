@@ -36,7 +36,7 @@ module Communication::Website::WithConnectedObjects
     unpublish_archivable_content
     check_period_years
     get_current_theme_version!
-    analyse_repository!
+    analyse_repository_safely
     screenshot!
   end
 

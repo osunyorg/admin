@@ -24,15 +24,17 @@ module Admin::ApplicationHelper
     link_to options.delete(:label) || t('delete'),
             polymorphic_url_param(object, **options),
             method: :delete,
-            data: { confirm: options.delete(:confirm_message) || t('please_confirm') },
+            data: { confirm: options.delete(:confirm_message) || t('please_confirm.deletion') },
             class: html_classes
   end
 
   def create_link(object_class, html_classes: button_classes_major, **options)
     return unless can?(:create, object_class)
+    html_classes += ' osuny__button__create'
     object_class_sym = object_class.name.underscore.gsub('/', '_').to_sym
-
-    link_to options.delete(:label) || t('create'),
+    label = options.delete(:label) || t('create')
+    title = "#{lucide_icon('plus')} #{label}".html_safe
+    link_to title,
             polymorphic_url_param(object_class_sym, prefix: :new, **options),
             class: html_classes
   end
@@ -43,7 +45,7 @@ module Admin::ApplicationHelper
     link_to t('admin.duplicate'),
             [:duplicate, :admin, object],
             method: :post,
-            data: { confirm: t('please_confirm') },
+            data: { confirm: t('please_confirm.duplication') },
             class: html_classes
   end
 
@@ -91,22 +93,6 @@ module Admin::ApplicationHelper
                 **options
   end
 
-  def prepare_html_for_static(text)
-    university = current_university || @website&.university || @about&.university
-    html = Static::Html.new(text, about: @about, university: university).prepared
-    # Les notes vont de 1 à n sur la page, il faut donc que l'index soit pour toute la page (tout le fichier static).
-    # C'est pour cela qu'on passe par le helper, ce qui garde @index.
-    prepare_notes html
-  end
-
-  def prepare_text_for_static(text, depth: 1)
-    Static::Text.new(text, depth: depth, about: @about).prepared
-  end
-
-  def prepare_code_for_static(text, depth: 1)
-    Static::Code.new(text, depth: depth, about: @about).prepared
-  end
-
   def has_content?(html)
     strip_tags(html.to_s).present?
   end
@@ -121,12 +107,6 @@ module Admin::ApplicationHelper
     text.gsub! "\n", "\n#{indentation}\n#{indentation}"
     text.chomp!
     text
-  end
-
-  def prepare_media_for_static(object, key)
-    media = object[key]['id']
-  rescue
-    ''
   end
 
   def collection(list)

@@ -2,10 +2,10 @@
 
 <% if @category.editable? %>
   <% content_for :title_right do %>
-    <%= edit_link @category %>
     <%= button_advanced do %>
       <%= destroy_link @category %>
     <% end %>
+    <%= edit_link @category %>
   <% end %>
 <% end %>
 

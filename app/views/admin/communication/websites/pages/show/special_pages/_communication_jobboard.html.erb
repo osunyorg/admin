@@ -1,0 +1,13 @@
+<%
+# Not in controller because it's loaded depending on the page type
+@jobs = @website.jobs
+                .published_now_in(current_language)
+                .ordered(current_language)
+                .page(params[:jobs_page])
+%>
+<%= osuny_panel t('admin.communication.website.pages.special_page') do %>
+  <p><%= t('admin.communication.website.pages.special_pages.communication_jobboard.native', count: @jobs.total_count) %></p>
+  <%= create_link Communication::Website::Jobboard::Job %>
+  <%= render 'admin/communication/websites/jobboard/jobs/list', jobs: @jobs %>
+  <%= paginate @jobs, param_name: :jobs_page %>
+<% end %>

@@ -1,4 +1,4 @@
-json.extract! l10n, :id, :migration_identifier, :title, :breadcrumb_title
+json.extract! l10n, :id, :migration_identifier, :title, :breadcrumb_title, :subtitle
 json.featured_image do
   json.blob_id l10n.featured_image.blob_id
   json.alt l10n.featured_image_alt
@@ -8,6 +8,11 @@ end
 json.extract! l10n,
               :meta_description, :published, :published_at, :slug, :summary, :text,
               :header_cta, :header_cta_label, :header_cta_url
+json.aliases do
+  json.partial! "api/osuny/communication/websites/permalinks/permalink",
+                collection: l10n.aliases.for_website(l10n.website),
+                as: :permalink
+end
 json.blocks do
   json.partial! "api/osuny/communication/blocks/block", collection: l10n.blocks.ordered, as: :block
 end

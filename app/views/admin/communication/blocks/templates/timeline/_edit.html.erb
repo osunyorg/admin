@@ -13,7 +13,7 @@
           {{ element.title }}
         </a>
         <a  class="btn btn-sm text-danger ms-auto"
-            v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+            v-on:click="deleteElement(element)"
             title="<%= t '.remove_event' %>">
             <i class="<%= Icon::DELETE %>"></i>
         </a>
@@ -23,7 +23,7 @@
 </draggable>
 
 <%= osuny_separator %>
-<div v-for="(element, index) in data.elements" class="mb-5">
+<div v-for="element in data.elements" class="mb-5">
   <%= block_component_edit block, :title, template: @element %>
   <%= block_component_edit block, :text, template: @element, summernote_config: 'mini' %>
 </div>
@@ -32,6 +32,6 @@
 </div>
 
 <%= osuny_separator %>
-<%= osuny_panel t('admin.communication.blocks.components.layouts.label'), small: true do %>
+<%= osuny_small_panel t('admin.communication.blocks.components.layouts.label') do %>
   <%= block_component_edit block, :layout %>
 <% end %>

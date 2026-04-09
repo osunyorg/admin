@@ -9,6 +9,7 @@ window.osuny.translation = {
         this.csrfToken = document.querySelector('[name="csrf-token"]').content;
         this.url = this.component.dataset.translationUrl;
         this.start.addEventListener('click', this.run.bind(this));
+        this.maxLength = 5000;
     },
 
     run: function () {
@@ -34,33 +35,51 @@ window.osuny.translation = {
     translate: function (field) {
         'use strict';
         var text = field.value,
+            length = text.length,
             xhr = new XMLHttpRequest(),
             that = this,
             data,
             translatedText;
-        xhr.open('POST', this.url, false);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('X-CSRF-Token', this.csrfToken);
-        xhr.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200 && this.responseText !== '') {
-                data = JSON.parse(this.responseText);
-                translatedText = data.translatedText;
-                that.translateField(field, translatedText);
-            }
-        };
-        xhr.send(JSON.stringify({ text: text }));
+        if (length > this.maxLength) {
+            this.warnForTextTooLong(field);
+        } else {
+            xhr.open('POST', this.url, false);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-CSRF-Token', this.csrfToken);
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200 && this.responseText !== '') {
+                    data = JSON.parse(this.responseText);
+                    translatedText = data.translatedText;
+                    that.translateField(field, translatedText);
+                }
+            };
+            xhr.send(JSON.stringify({ text: text }));
+        }
+    },
+
+    warnForTextTooLong: function (field) {
+        'use strict';
+        var element = field;
+        if (this.isSummernote(field)) {
+            element = field.parentNode.getElementsByClassName('note-editable')[0];
+        }
+        element.classList.add('border-danger');
     },
 
     translateField: function (field, text) {
         'use strict';
-        var isSummernote = field.dataset.provider === 'summernote' || field.classList.contains('summernote-vue');
-        if (isSummernote) {
+        if (this.isSummernote(field)) {
             $(field).summernote('code', text);
         } else {
             field.value = text;
             // https://stackoverflow.com/questions/56348513/how-to-change-v-model-value-from-js
             field.dispatchEvent(new Event('input'));
         }
+    },
+
+    isSummernote: function (field) {
+        'use strict';
+        return field.dataset.provider === 'summernote' || field.classList.contains('summernote-vue');
     },
 
     invoke: function () {

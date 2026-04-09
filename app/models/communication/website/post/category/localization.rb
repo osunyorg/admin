@@ -3,24 +3,31 @@
 # Table name: communication_website_post_category_localizations
 #
 #  id                       :uuid             not null, primary key
+#  breadcrumb_title         :string
 #  featured_image_alt       :string
 #  featured_image_credit    :text
+#  header_cta               :boolean          default(FALSE)
+#  header_cta_label         :string
+#  header_cta_url           :string
+#  header_text              :text
 #  meta_description         :text
 #  migration_identifier     :string
 #  name                     :string
 #  path                     :string
 #  slug                     :string
+#  subtitle                 :string
 #  summary                  :text
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed
+#  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             not null, uniquely indexed => [about_id], indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
 #  idx_on_about_id_6e430d4efc                  (about_id)
+#  idx_on_about_id_language_id_94336f5680      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_0c06c1ae6f  (communication_website_id)
 #  idx_on_language_id_cc5f73e306               (language_id)
 #  idx_on_university_id_fb03a6e3c0             (university_id)

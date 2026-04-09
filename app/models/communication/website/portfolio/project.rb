@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
+#  deleted_at               :datetime
 #  full_width               :boolean          default(TRUE)
 #  migration_identifier     :string
 #  year                     :integer
@@ -26,15 +27,20 @@
 #  fk_rails_a2d39c0893  (university_id => universities.id)
 #
 class Communication::Website::Portfolio::Project < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include Duplicable
   include Filterable
   include GeneratesGitFiles
   include Categorizable # Must be loaded after Filterable to be filtered by categories
+  include Lifecyclable
   include Localizable
   include Sanitizable
   include Searchable
   include WithMenuItemTarget
+  include WithOpenApi
+  include HasListBlocks
   include WithUniversity
 
   belongs_to  :created_by,
@@ -82,14 +88,17 @@ class Communication::Website::Portfolio::Project < ApplicationRecord
   end
 
   def references
-    menus +
-    abouts_with_projects_block
+    menus
+  end
+
+  def hugo_body_class
+    'projects__page'
   end
 
   protected
 
-  def abouts_with_projects_block
-    website.blocks.template_projects.collect(&:about)
+  def list_blocks_template_kind
+    :projects
   end
 
 end

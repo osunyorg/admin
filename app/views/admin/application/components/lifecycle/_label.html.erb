@@ -1,0 +1,3 @@
+<% if params[:lifecycle] == Lifecyclable::LIFECYCLE_TRASH %>
+  <p><%= t('lifecycle.label.deleted', days: Lifecyclable::LIFECYCLE_DAYS_BEFORE_DELETION) %></p>
+<% end %>

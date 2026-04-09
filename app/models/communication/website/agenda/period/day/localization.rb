@@ -7,14 +7,15 @@
 #  slug                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             not null, indexed
+#  about_id                 :uuid             not null, indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             not null, uniquely indexed => [about_id], indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
 #  idx_on_about_id_ff7b8b96ea                  (about_id)
+#  idx_on_about_id_language_id_b8b9e8269f      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_c9cc20d97c  (communication_website_id)
 #  idx_on_language_id_1d8b40b5f3               (language_id)
 #  idx_on_university_id_55f80b8bba             (university_id)
@@ -66,7 +67,18 @@ class Communication::Website::Agenda::Period::Day::Localization < ApplicationRec
   end
 
   def denormalize_events_count
-    count = events.count + time_slots.count
-    self.update_column :events_count, count
+    self.update_column :events_count, published_objects_count
+  end
+
+  def published_objects_count
+    published_events.count + published_time_slots.count
+  end
+
+  def published_events
+    events.published_now_in(language)
+  end
+
+  def published_time_slots
+    time_slots.published_now_in(language)
   end
 end

@@ -55,6 +55,11 @@
                 font-kerning: none
             dt
                 font-weight: bold
+            &--contact
+                .time_slot--from + .time_slot--to
+                    &::before
+                        content: "→ "
+                        font-family: sans-serif
             &--datatable
                 table
                     td,

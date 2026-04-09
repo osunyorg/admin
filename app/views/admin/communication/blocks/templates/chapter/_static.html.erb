@@ -2,5 +2,9 @@
 <%= block_component_static block, :text %>
 <%= block_component_static block, :notes %>
 <%= block_component_static block, :image %>
+<% if block.template.image_component.blob %>
+<%= block_component_static block, :alt, depth: 4 %>
+<%= block_component_static block, :credit, depth: 4 %>
+<% end %>
 <%= block_component_static block, :alt %>
 <%= block_component_static block, :credit %>

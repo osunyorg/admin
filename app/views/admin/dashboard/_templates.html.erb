@@ -1,0 +1,44 @@
+<%
+@websites.each do |website|
+  events_templates = website.events.templates
+  %>
+  <% if events_templates.any? %>
+    <%= osuny_panel website do %>
+      <p><%= t('templates.prompt') %></p>
+      <div class="row g-2 mb-3">
+        <%
+        events_templates.each do |template|
+          l10n = template.best_localization_for(current_language)
+          %>
+          <div>
+            <div class="<%= osuny_card_classes(horizontal: true) %>">
+              <%= osuny_thumbnail_localized template %>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <p class="mb-0">
+                      <%= osuny_link_localized  template,
+                                                admin_communication_website_agenda_event_path(website_id: template.website, id: template),
+                                                classes: "stretched-link" %>
+                    </p>
+                    <% if l10n.subtitle.present? %>
+                      <p class="text-muted mb-0"><%= l10n.subtitle %></p>
+                    <% end %>
+                  </div>
+                  <div class="col-lg-4 text-end mb-n2" style="z-index: 10">
+                    <%= link_to t('templates.show'),
+                                admin_communication_website_agenda_event_path(website_id: template.website, id: template),
+                                class: button_classes %>
+                    <%= link_to t('templates.use'),
+                                new_admin_communication_website_agenda_event_path(website_id: template.website, template_id: template),
+                                class: button_classes_major %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

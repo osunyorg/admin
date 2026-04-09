@@ -41,7 +41,7 @@ class Import < ApplicationRecord
 
   before_validation :fallback_language_to_university_default, on: :create, unless: :language_id
 
-  after_create :queue_for_processing
+  after_create_commit :queue_for_processing
   after_commit :send_mail_to_creator, on: :update, if: :status_changed_from_pending?
 
   scope :for_status, -> (status, language = nil) { where(status: status) }

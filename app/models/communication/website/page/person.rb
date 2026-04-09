@@ -37,4 +37,8 @@ class Communication::Website::Page::Person < Communication::Website::Page
   def special_page_categories
     university.person_categories
   end
+
+  def hugo_body_class
+    'persons__section'
+  end
 end

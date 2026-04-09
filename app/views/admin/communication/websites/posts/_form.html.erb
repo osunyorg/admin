@@ -19,7 +19,7 @@
       <div class="col-md-4">
         <%= osuny_panel t('metadata') do %>
           <% if can? :publish, post %>
-            <div class="row pure__row--small">
+            <div class="row">
               <div class="col-6">
                 <%= render 'admin/application/publication/form', f: lf, about: post %>
               </div>
@@ -48,6 +48,7 @@
           <%= f.input :bodyclass, label: t('admin.bodyclass') %>
         <% end %>
         <%= render 'admin/application/images/shared/form', f: lf, about: @l10n %>
+        <%= render 'admin/communication/websites/federations/form', f: f %>
       </div>
     </div>
 

@@ -5,8 +5,7 @@ administrator_involvements = school.involvements_through_roles.includes(:person)
 %>---
 <%= render 'admin/application/static/core', about: @l10n, skip_date: true %>
 <%= render 'admin/application/static/breadcrumbs', about: @l10n %>
-address: >-
-  <%= prepare_text_for_static school.address %>
+<%= osuny_static_text 'address', school.address %>
 zipcode: "<%= prepare_text_for_static school.zipcode %>"
 city: "<%= prepare_text_for_static school.city %>"
 country: "<%= prepare_text_for_static school.country_common_name %>"

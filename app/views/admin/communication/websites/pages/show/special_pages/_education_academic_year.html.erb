@@ -1,0 +1,11 @@
+<%
+# Not in controller because it's loaded depending on the page type
+@alumni = @website.alumni
+                  .ordered(current_language)
+                  .page(params[:alumni_page])
+%>
+<%= osuny_panel t('admin.communication.website.pages.special_page') do %>
+  <p><%= t('admin.communication.website.pages.special_pages.education_academic_year.native', count: @alumni.total_count) %></p>
+  <%= render 'admin/administration/alumni/list', alumni: @alumni %>
+  <%= paginate @alumni, param_name: :alumni_page %>
+<% end %>

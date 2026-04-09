@@ -9,6 +9,9 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
+      parameter name: :page_num, in: :query, schema: { type: :integer, default: 1 }, description: 'Page number', required: false
+      parameter name: :per_page, in: :query, schema: { type: :integer, default: 10000, maximum: 10000 }, description: 'Number of items per page', required: false
+
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
 
@@ -69,6 +72,9 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
                 slug: 'noel',
                 subtitle: 'Le repas de Noël',
                 summary: 'Le repas de Noël en famille.',
+                aliases: [
+                  { path: "/repas-de-noel" }
+                ],
                 blocks: [
                   {
                     migration_identifier: 'event-from-api-1-fr-block-1',
@@ -106,7 +112,8 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
           assert_difference ->{ Communication::Website::Agenda::Event.count } => 1,
                             ->{ Communication::Website::Agenda::Event::Localization.count } => 1,
                             ->{ Communication::Website::Agenda::Event::TimeSlot.count } => 1,
-                            ->{ Communication::Website::Agenda::Event::TimeSlot::Localization.count } => 1 do
+                            ->{ Communication::Website::Agenda::Event::TimeSlot::Localization.count } => 1,
+                            ->{ Communication::Website::Permalink.count } => 1 do
             assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)

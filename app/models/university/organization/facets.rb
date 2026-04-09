@@ -18,10 +18,10 @@ class University::Organization::Facets < FacetedSearch::Facets
       title: University::Organization::Localization.human_attribute_name('name')
     }
   end
-  
+
   def add_taxonomies
     categories.taxonomies.each do |taxonomy|
-      taxonomy_l10n = taxonomy.localization_for(language)
+      taxonomy_l10n = taxonomy.best_localization_for(language)
       next if taxonomy_l10n.nil?
       add_facet FacetedSearch::Facets::Taxonomy, taxonomy_l10n.slug, {
         l10n: taxonomy_l10n

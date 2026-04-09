@@ -16,6 +16,7 @@ class Ability::WebsiteManager < Ability
     can :create, Communication::Website::Menu::Item, university_id: @user.university_id
     can :manage, Communication::Website::Page, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Page::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids
+    can :manage, Communication::Website::Permalink, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Portfolio::Project, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Portfolio::Category, university_id: @user.university_id, communication_website_id: managed_websites_ids
     can :manage, Communication::Website::Post, university_id: @user.university_id, communication_website_id: managed_websites_ids

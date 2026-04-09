@@ -1,0 +1,13 @@
+<%
+# Not in controller because it's loaded depending on the page type
+@diplomas = @website.education_diplomas
+                    .published_now_in(current_language)
+                    .ordered(current_language)
+                    .page(params[:diplomas_page])
+%>
+<%= osuny_panel t('admin.communication.website.pages.special_page') do %>
+  <p><%= t('admin.communication.website.pages.special_pages.education_diploma.native', count: @diplomas.total_count) %></p>
+  <%= create_link Education::Diploma %>
+  <%= render 'admin/education/diplomas/list', diplomas: @diplomas %>
+  <%= paginate @diplomas, param_name: :diplomas_page %>
+<% end %>

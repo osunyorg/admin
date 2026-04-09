@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
+#  deleted_at               :datetime
 #  from_day                 :date
 #  is_lasting               :boolean          default(FALSE)
 #  migration_identifier     :string
@@ -28,6 +29,8 @@
 #  fk_rails_4c477c4153  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Exhibition < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include Communication::Website::Agenda::Period::InPeriod
   include Communication::Website::Agenda::WithStatus
@@ -36,11 +39,13 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Sanitizable
   include Searchable
   include WithMenuItemTarget
   include WithOpenApi
+  include HasListBlocks
   include WithUniversity
 
   belongs_to  :created_by,
@@ -100,13 +105,16 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   end
 
   def references
-    menus +
-    abouts_with_agenda_block
+    menus
+  end
+
+  def hugo_body_class
+    'exhibitions__page'
   end
 
   protected
 
-  def abouts_with_agenda_block
-    website.blocks.template_agenda.collect(&:about)
+  def list_blocks_template_kind
+    :agenda
   end
 end

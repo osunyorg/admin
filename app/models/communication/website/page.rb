@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
+#  deleted_at               :datetime
 #  full_width               :boolean          default(FALSE)
 #  migration_identifier     :string
 #  position                 :integer          not null
@@ -29,6 +30,8 @@
 #
 
 class Communication::Website::Page < ApplicationRecord
+  acts_as_paranoid
+
   # FIXME: Remove legacy column from db
   # kind was replaced by type in January 2023
   self.ignored_columns = %w(path kind)
@@ -39,6 +42,7 @@ class Communication::Website::Page < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Orderable
   include Sanitizable
@@ -46,6 +50,7 @@ class Communication::Website::Page < ApplicationRecord
   include WithAutomaticMenus
   include WithMenuItemTarget
   include WithOpenApi
+  include HasListBlocks
   include WithSpecialPage
   include WithUniversity
 
@@ -93,11 +98,6 @@ class Communication::Website::Page < ApplicationRecord
         unaccent(communication_website_page_localizations.title) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
-
-  scope :for_published, -> (published, language) {
-    joins(:localizations)
-      .where(communication_website_page_localizations: { language_id: language.id , published: published == 'true'})
-  }
   scope :for_full_width, -> (full_width, language = nil) { where(full_width: full_width == 'true') }
 
   def dependencies
@@ -108,8 +108,7 @@ class Communication::Website::Page < ApplicationRecord
   def references
     [parent] +
     siblings +
-    website.menus.in_languages(website.active_language_ids) +
-    abouts_with_page_block
+    website.menus.in_languages(website.active_language_ids)
   end
 
   # Pages do have a category, but we do not list all the existing pages categories
@@ -129,14 +128,18 @@ class Communication::Website::Page < ApplicationRecord
     nil
   end
 
+  def hugo_body_class
+    'pages__section'
+  end
+
   protected
 
   def last_ordered_element
     website.pages.where(parent_id: parent_id).ordered.last
   end
 
-  def abouts_with_page_block
-    website.blocks.template_pages.collect(&:about)
+  def list_blocks_template_kind
+    :pages
   end
 
   def touch_elements_if_special_page_in_hierarchy

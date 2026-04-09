@@ -1,0 +1,15 @@
+<%
+if l10n.featured_image.present? && l10n.featured_image.attached? 
+  format = ActiveStorage::Utils.format(l10n.featured_image)
+%>
+  <figure class="featured-image image-<%= format %>">
+    <%= kamifusen_tag l10n.featured_image, alt: l10n.featured_image_alt %>
+    <% if l10n.featured_image_credit.present? %>
+      <figcaption>
+        <div class="credit">
+          <%= sanitize l10n.featured_image_credit %>
+        </div>
+      </figcaption>
+    <% end %>
+  </figure>
+<% end %>

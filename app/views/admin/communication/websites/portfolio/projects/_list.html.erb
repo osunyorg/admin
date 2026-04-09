@@ -10,18 +10,32 @@ link_to_all ||= false
       <div>
         <div class="<%= osuny_card_classes(horizontal: true) %>">
           <%= osuny_thumbnail_localized project %>
-          <div class="card-body">
-            <%= osuny_published_localized project unless small %>
-            <%= osuny_link_localized  project,
-                                      admin_communication_website_portfolio_project_path(
-                                        website_id: project.website.id,
-                                        id: project.id
-                                      ),
-                                      classes: "stretched-link" %>
-          </div>
-          <div class="card-footer small text-muted">
-            <%= project.year %>
-          </div>
+          <% if project.deleted? %>
+            <div class="card-body">
+              <%= project.best_localization_for(current_language) %>
+            </div>
+            <% if can?(:restore, project) %>
+              <div class="card-footer mb-n2">
+                <%= link_to t('restore'),
+                            restore_admin_communication_website_portfolio_project_path(project),
+                            method: :post,
+                            class: button_classes %>
+              </div>
+            <% end %>
+          <% else %>
+            <div class="card-body">
+              <%= osuny_published_localized project unless small %>
+              <%= osuny_link_localized  project,
+                                        admin_communication_website_portfolio_project_path(
+                                          website_id: project.website.id,
+                                          id: project.id
+                                        ),
+                                        classes: "stretched-link" %>
+            </div>
+            <div class="card-footer small text-muted">
+              <%= project.year %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>

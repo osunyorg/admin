@@ -1,14 +1,16 @@
 <%= block_component_static block, :layout %>
 <%= block_component_static block, :text %>
 <%= block_component_static block, :image %>
-<%= block_component_static block, :alt %>
-<%= block_component_static block, :credit %>
+<% if block.template.image_component.blob %>
+<%= block_component_static block, :alt, depth: 4 %>
+<%= block_component_static block, :credit, depth: 4 %>
+<% end %>
       buttons:
 <%
 block.template.elements.each do |element|
-  next if element.title.blank?
-  %>
-<%= block_component_static block, :title, template: element, list: true, depth: 4 %>
+  next if element.title.blank? %>
+        - 
+<%= block_component_static block, :title, template: element, depth: 5 %>
 <%= block_component_static block, :url, template: element, depth: 5 %>
 <%= block_component_static block, :target_blank, template: element, depth: 5 %>
 <% end %>

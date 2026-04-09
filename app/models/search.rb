@@ -87,4 +87,10 @@ class Search < ApplicationRecord
       end
     end
   end
+
+  def self.remove_data_for_website(website)
+    Search.where(about_object: website).destroy_all
+    Search.where(website_id: website).destroy_all
+  end
+
 end

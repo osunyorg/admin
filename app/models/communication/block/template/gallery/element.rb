@@ -22,4 +22,7 @@ class Communication::Block::Template::Gallery::Element < Communication::Block::T
     accessibility_warning 'accessibility.commons.alt.empty' if image_component.blob && alt.blank?
   end
 
+  def empty?
+    blob.blank?
+  end
 end

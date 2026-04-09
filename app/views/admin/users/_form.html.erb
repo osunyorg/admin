@@ -3,13 +3,13 @@
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <%= f.input :email %>
       <%= f.input :first_name %>
       <%= f.input :last_name %>
       <%= render 'admin/application/l10n/form', f: f %>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <%= f.input :mobile_phone %>
       <%= f.input :role, include_blank: false, collection: current_user.managed_roles, label_method: lambda { |k| t("activerecord.attributes.user.roles.#{k[1]}")} %>
       <div data-show-for-roles="program_manager">
@@ -23,7 +23,7 @@
                           collection: osuny_collection(current_university.communication_websites, localized: true) %>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-4">
       <%= f.input :picture,
               as: :single_deletable_file,
               input_html: { accept: default_images_formats_accepted },

@@ -2,10 +2,8 @@ module Communication::Website::WithDeuxfleurs
   extend ActiveSupport::Concern
 
   included do
-    before_save :deuxfleurs_golive, if: :deuxfleurs_hosting
-    after_save :deuxfleurs_setup, if: :deuxfleurs_hosting
-
-    scope :hosted_on_deuxfleurs, -> { where(deuxfleurs_hosting: true) }
+    before_save :deuxfleurs_golive, if: :hosted_with_deuxfleurs?
+    after_save :deuxfleurs_setup, if: :hosted_with_deuxfleurs?
   end
 
   # 4 options:
@@ -14,14 +12,14 @@ module Communication::Website::WithDeuxfleurs
   # 3. repo exists, deuxfleurs hosting : only create deuxfleurs hosting
   # 4. both exists, deuxfleurs hosting needs to change identifier (Waiting for API possibility)
   def deuxfleurs_setup
-    return unless deuxfleurs_hosting?
+    return unless hosted_with_deuxfleurs?
     return if deuxfleurs_setup_done?
     Communication::Website::Deuxfleurs::SetupJob.perform_later(id)
   end
 
   # Appelé par Communication::Website::Deuxfleurs::SetupJob
   def deuxfleurs_setup_safely
-    return unless deuxfleurs_hosting?
+    return unless hosted_with_deuxfleurs?
     if repository.blank?
       deuxfleurs_create_github_repository
       sleep 10
@@ -36,10 +34,15 @@ module Communication::Website::WithDeuxfleurs
     end
   end
 
+  def deuxfleurs_destroy_bucket
+    return unless hosted_with_deuxfleurs?
+    deuxfleurs.empty_and_delete_bucket(deuxfleurs_identifier)
+  end
+
   protected
 
   def deuxfleurs_setup_done?
-    deuxfleurs_hosting? && repository.present? && deuxfleurs_identifier.present?
+    hosted_with_deuxfleurs? && repository.present? && deuxfleurs_identifier.present?
   end
 
   def deuxfleurs_golive

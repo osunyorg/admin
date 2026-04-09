@@ -25,8 +25,15 @@ module Importers
       @error
     end
 
-    protected
+    def extranet_ids
+      @extranet_ids ||= begin
+        program_extranet_ids = @university.communication_extranets.where(about: program).pluck(:id)
+        school_extranet_ids = @university.communication_extranets.where(about: school).pluck(:id)
+        program_extranet_ids + school_extranet_ids
+      end
+    end
 
+    protected
 
     def add_to_cohort(person, cohort)
       add_object_if_necessary cohort, person.cohorts

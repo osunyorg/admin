@@ -27,6 +27,9 @@ namespace :auto do
     Brevo::SmsCreditsWarningJob.perform_later
     # Delete & warn old users due to GDPR
     GdprUserDeletionJob.perform_later
+    # Truly destroy soft-deleted records
+    TrulyDestroySoftDeletedRecordsJob.perform_later
+    GdprUserDeletionJob.perform_later
     # Reindex crucial tables for GoodJob
     # https://github.com/bensheldon/good_job/issues/896
     ActiveRecord::Base.connection.execute('REINDEX TABLE good_jobs')

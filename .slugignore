@@ -2,7 +2,6 @@
 /.cache
 /.github
 /.scalingo/node
-/.scalingo/yarn
 /node_modules
 /vendor/assets
 /lib/templates

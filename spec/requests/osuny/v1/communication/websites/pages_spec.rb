@@ -9,6 +9,9 @@ RSpec.describe 'Communication::Website::Page' do
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
+      parameter name: :page_num, in: :query, schema: { type: :integer, default: 1 }, description: 'Page number', required: false
+      parameter name: :per_page, in: :query, schema: { type: :integer, default: 10000, maximum: 10000 }, description: 'Number of items per page', required: false
+
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
 
@@ -67,11 +70,15 @@ RSpec.describe 'Communication::Website::Page' do
                 published: true,
                 published_at: '2024-11-29T16:49:00Z',
                 slug: 'ma-nouvelle-page',
+                subtitle: 'Un sous-titre',
                 summary: 'Ceci est une nouvelle page créée depuis l\'API.',
                 header_text: 'Bienvenue sur ma nouvelle page',
                 header_cta: true,
                 header_cta_label: 'Découvrir',
                 header_cta_url: 'https://www.example.com',
+                aliases: [
+                  { path: '/mon-ancien-lien' }
+                ],
                 blocks: [
                   {
                     migration_identifier: 'page-from-api-1-fr-block-1',
@@ -93,7 +100,9 @@ RSpec.describe 'Communication::Website::Page' do
 
       response '201', 'Successful creation' do
         it 'creates a page and its localization', rswag: true do |example|
-          assert_difference ->{ Communication::Website::Page.count } => 1, ->{ Communication::Website::Page::Localization.count } => 1 do
+          assert_difference ->{ Communication::Website::Page.count } => 1,
+                            ->{ Communication::Website::Page::Localization.count } => 1,
+                            ->{ Communication::Website::Permalink.count } => 1 do
             assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
@@ -117,6 +126,7 @@ RSpec.describe 'Communication::Website::Page' do
                   published: true,
                   published_at: '2024-11-29T16:49:00Z',
                   slug: 'ma-nouvelle-page',
+                  subtitle: 'Un sous-titre',
                   summary: 'Ceci est une nouvelle page créée depuis l\'API.',
                   header_text: 'Bienvenue sur ma nouvelle page',
                   header_cta: true,
@@ -210,6 +220,7 @@ RSpec.describe 'Communication::Website::Page' do
                   published: true,
                   published_at: '2024-11-29T16:49:00Z',
                   slug: 'ma-nouvelle-page',
+                  subtitle: 'Un sous-titre',
                   summary: 'Ceci est une nouvelle page créée depuis l\'API.',
                   header_text: 'Bienvenue sur ma nouvelle page',
                   header_cta: true,
@@ -246,6 +257,7 @@ RSpec.describe 'Communication::Website::Page' do
                   published_at: test_page_l10n.published_at,
                   slug: test_page_l10n.slug,
                   summary: test_page_l10n.summary,
+                  subtitle: test_page_l10n.subtitle,
                   header_text: test_page_l10n.header_text,
                   header_cta: test_page_l10n.header_cta,
                   header_cta_label: test_page_l10n.header_cta_label,
@@ -292,6 +304,7 @@ RSpec.describe 'Communication::Website::Page' do
                     published: true,
                     published_at: '2024-11-29T16:49:00Z',
                     slug: 'ma-nouvelle-page',
+                    subtitle: 'Un sous-titre',
                     summary: 'Ceci est une nouvelle page créée depuis l\'API.',
                     header_text: 'Bienvenue sur ma nouvelle page',
                     header_cta: true,
@@ -325,6 +338,7 @@ RSpec.describe 'Communication::Website::Page' do
                     published: test_page_l10n.published,
                     published_at: test_page_l10n.published_at,
                     slug: test_page_l10n.slug,
+                    subtitle: test_page_l10n.subtitle,
                     summary: test_page_l10n.summary,
                     header_text: test_page_l10n.header_text,
                     header_cta: test_page_l10n.header_cta,
@@ -451,6 +465,7 @@ RSpec.describe 'Communication::Website::Page' do
                 published: test_page_l10n.published,
                 published_at: test_page_l10n.published_at,
                 slug: test_page_l10n.slug,
+                subtitle: test_page_l10n.subtitle,
                 summary: test_page_l10n.summary,
                 header_text: test_page_l10n.header_text,
                 header_cta: test_page_l10n.header_cta,
@@ -486,6 +501,7 @@ RSpec.describe 'Communication::Website::Page' do
                   published: test_page_l10n.published,
                   published_at: test_page_l10n.published_at,
                   slug: test_page_l10n.slug,
+                  subtitle: test_page_l10n.subtitle,
                   summary: test_page_l10n.summary,
                   header_text: test_page_l10n.header_text,
                   header_cta: test_page_l10n.header_cta,
@@ -535,6 +551,7 @@ RSpec.describe 'Communication::Website::Page' do
                   published: test_page_l10n.published,
                   published_at: test_page_l10n.published_at,
                   slug: test_page_l10n.slug,
+                  subtitle: test_page_l10n.subtitle,
                   summary: test_page_l10n.summary,
                   header_text: test_page_l10n.header_text,
                   header_cta: test_page_l10n.header_cta,

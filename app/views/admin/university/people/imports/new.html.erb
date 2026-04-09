@@ -5,7 +5,7 @@
     <p>
       <%= t('imports.hint_html') %>
       <br>
-      <%= t('university.person.import_hint_html') %>
+      <%= t('university.person.import_hint_html', formats: default_images_formats_accepted) %>
     </p>
     <%= simple_form_for @import,
                         url: admin_university_people_imports_path do |f| %>
@@ -16,7 +16,7 @@
       <%# as file can be empty the global object can be unset. To prevent crash in controller add an (unused) hidden field %>
       <%= f.input :id, as: :hidden %>
 
-      <%= f.input :file %>
+      <%= f.input :file, required: true %>
 
       <% content_for :action_bar_right do %>
         <%= cancel admin_university_people_path %>

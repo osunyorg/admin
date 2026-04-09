@@ -1,5 +1,14 @@
 <div class="row g-2 mb-3">
   <% researchers.each do |researcher| %>
-    <%= render 'admin/research/researchers/researcher', researcher: researcher %>
+    <div>
+      <div class="<%= osuny_card_classes(horizontal: true) %>">
+        <%= osuny_thumbnail_localized researcher %>
+        <div class="card-body">
+          <%= osuny_link_localized  researcher, 
+                                    admin_research_researcher_path(researcher), 
+                                    classes: 'stretched-link' %>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>

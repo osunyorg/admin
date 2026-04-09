@@ -72,9 +72,12 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     clear_enqueued_jobs
 
     # Vérifie qu'on a bien  une tâche de nettoyage (dépendances du bloc supprimé)
-    assert_enqueued_with(job: Communication::Website::CleanJob) do
+    assert_enqueued_with(job: Dependencies::CleanObjectAfterDestroyJob) do
       block.destroy
     end
+
+    # Vérifie que le bloc est bien marqué comme détruit avec paranoia
+    assert block.deleted?
 
     # On a enlevé le bloc, reste les 2 dépendances d'origine
     # - la localisation FR de la page
@@ -100,9 +103,9 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     # - Les catégories d'actus liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
     # - Les catégories d'agenda liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
     # - Les catégories de pages liés aux formations, soit la catégorie racine et la catégorie de default_program, ainsi que leurs localisations (4)
-    # - Les pages "Teachers", "Administrators", "Researchers", "EducationDiplomas", "EducationPrograms", "AdministrationLocation" et leurs localisations (12)
-    # Donc un total de 6 + 4 + 4 + 4 + 12 = 30 dépendances
-    assert_equal 30, delta
+    # - Les pages "Teachers", "Administrators", "Researchers", "EducationDiplomas", "EducationPrograms", "EducationSchools", "AdministrationLocations" et leurs localisations (14)
+    # Donc un total de 6 + 4 + 4 + 4 + 14 = 32 dépendances
+    assert_equal 32, delta
 
     clear_enqueued_jobs
   end

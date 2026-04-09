@@ -4,6 +4,10 @@
 module Publishable
   extend ActiveSupport::Concern
 
+  PUBLICATION_STATE_PUBLISHED = 'published'
+  PUBLICATION_STATE_PLANNED = 'planned'
+  PUBLICATION_STATE_DRAFT = 'draft'
+
   included do
     scope :draft, -> {
       where(published: false)
@@ -55,9 +59,18 @@ module Publishable
     published && published_at.present? && published_at <= Time.zone.now
   end
 
-
   def published_in_the_future?
     published && published_at.present? && published_at > Time.zone.now
+  end
+
+  def publication_state
+    if published_in_the_future?
+      PUBLICATION_STATE_PLANNED
+    elsif published_now?
+      PUBLICATION_STATE_PUBLISHED
+    else
+      PUBLICATION_STATE_DRAFT
+    end
   end
 
   protected

@@ -1,13 +1,13 @@
 <% content_for :title, @menu %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= destroy_link @menu %>
+  <% end %>
   <%= edit_link @menu %>
   <%= link_to t('create'),
               new_admin_communication_website_menu_item_path(website_id: @website, menu_id: @menu.id),
               class: button_classes if can?(:create, Communication::Website::Menu::Item) %>
-  <%= button_advanced do %>
-    <%= destroy_link @menu %>
-  <% end %>
 <% end %>
 
 <% if @menu.automatic %>

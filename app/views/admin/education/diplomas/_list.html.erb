@@ -1,17 +1,34 @@
+<% displaying_trash = params[:lifecycle] == Lifecyclable::LIFECYCLE_TRASH %>
 <div  class="row g-2"
-      data-sortable 
-      data-sort-url="<%= reorder_admin_education_diplomas_path %>">
+      <% unless displaying_trash %>
+      data-sortable
+      data-sort-url="<%= reorder_admin_education_diplomas_path %>"
+      <% end %>>
   <% diplomas.ordered.each do |diploma| %>
-    <div data-id="<%= diploma.id %>" class="handle">
+    <div data-id="<%= diploma.id %>" <% unless displaying_trash %>class="handle"<% end %>>
       <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized diploma %>
-        <div class="card-body">
-          <%= osuny_published_localized diploma %>
-          <%= osuny_link_localized diploma, [:admin, diploma], classes: 'stretched-link' %>
-        </div>
-        <div class="card-footer text-end text-muted">
-          <%= diploma.level_i18n %>
-        </div>
+        <% if diploma.deleted? %>
+          <div class="card-body">
+            <%= diploma.best_localization_for(current_language) %>
+          </div>
+          <% if can?(:restore, diploma) %>
+            <div class="card-footer">
+              <%= link_to t('restore'),
+                          restore_admin_education_diploma_path(diploma),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card-body">
+            <%= osuny_published_localized diploma %>
+            <%= osuny_link_localized diploma, [:admin, diploma], classes: 'stretched-link' %>
+          </div>
+          <div class="card-footer text-end text-muted">
+            <%= diploma.level_i18n %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>

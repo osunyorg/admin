@@ -22,16 +22,11 @@ programs:
             programs: @programs,
             language: language %>
 <% end %>
-short_name: >-
-  <%= prepare_text_for_static @l10n.short_name %>
-<%= render 'admin/application/summary/static', about: @l10n %>
-<% unless diploma.level_not_applicable? %>
-level: >-
-  <%= diploma.level_i18n %>
-<% end %>
+<%= osuny_static_html 'short_name', @l10n.short_name %>
+<%= osuny_static_html 'summary', @l10n.summary %>
+<%= osuny_static_html 'level', diploma.level_i18n unless diploma.level_not_applicable? %>
 ects: <%= diploma.ects %>
 certification: <%= diploma.certification %>
-duration: >-
-  <%= prepare_text_for_static @l10n.duration %>
+<%= osuny_static_html 'duration', @l10n.duration %>
 <%= render 'admin/communication/contents/static', about: @l10n %>
 ---

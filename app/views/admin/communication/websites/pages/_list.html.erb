@@ -6,29 +6,44 @@ link_to_all ||= false
   <% pages.each do |page| %>
     <div>
       <div class="<%= osuny_card_classes(horizontal: true) %>">
-        <%= osuny_thumbnail_localized page %>
-        <div class="card-body">
-          <%= osuny_published_localized page unless small %>
-          <%= osuny_link_localized  page,
-                                    admin_communication_website_page_path(website_id: page.website.id, id: page.id),
-                                    classes: "stretched-link" %>
-        </div>
-        <div class="card-footer">
-          <% if small %>
-            <span class="small text-muted"><%= l page.updated_at.to_date, format: :short %></small>
-          <% else %>
-            <% if page.full_width %>
-              <span class="badge text-bg-secondary">
-                <%= Communication::Website::Page.human_attribute_name('full_width') %>
-              </span>
-            <% end %>
-            <% if page.is_special_page? %>
-              <span class="badge text-bg-secondary">
-                <%= t("communication.website.pages.defaults.#{page.type_key}.title") %>
-              </span>
-            <% end %>
+        <% if page.deleted? %>
+          <%= osuny_thumbnail_localized page %>
+          <div class="card-body">
+            <%= page.best_localization_for(current_language) %>
+          </div>
+          <% if can?(:restore, page) %>
+            <div class="card-footer mb-n2">
+              <%= link_to t('restore'),
+                          restore_admin_communication_website_page_path(page),
+                          method: :post,
+                          class: button_classes %>
+            </div>
           <% end %>
-        </div>
+        <% else %>
+          <%= osuny_thumbnail_localized page %>
+          <div class="card-body">
+            <%= osuny_published_localized page unless small %>
+            <%= osuny_link_localized  page,
+                                      admin_communication_website_page_path(website_id: page.website.id, id: page.id),
+                                      classes: "stretched-link" %>
+          </div>
+          <div class="card-footer">
+            <% if small %>
+              <span class="small text-muted"><%= l page.updated_at.to_date, format: :short %></small>
+            <% else %>
+              <% if page.full_width %>
+                <span class="badge text-bg-secondary">
+                  <%= Communication::Website::Page.human_attribute_name('full_width') %>
+                </span>
+              <% end %>
+              <% if page.is_special_page? %>
+                <span class="badge text-bg-secondary">
+                  <%= t("communication.website.pages.defaults.#{page.type_key}.title") %>
+                </span>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>

@@ -4,6 +4,7 @@
 #
 #  id                    :uuid             not null, primary key
 #  biography             :text
+#  deleted_at            :datetime
 #  featured_image_alt    :text
 #  featured_image_credit :text
 #  first_name            :string
@@ -13,18 +14,21 @@
 #  meta_description      :text
 #  name                  :string
 #  picture_credit        :text
+#  published             :boolean          default(TRUE)
+#  published_at          :datetime
 #  slug                  :string           indexed
 #  summary               :text
 #  twitter               :string
 #  url                   :string
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  about_id              :uuid             indexed
-#  language_id           :uuid             indexed
+#  about_id              :uuid             uniquely indexed => [language_id], indexed
+#  language_id           :uuid             uniquely indexed => [about_id], indexed
 #  university_id         :uuid             indexed
 #
 # Indexes
 #
+#  idx_on_about_id_language_id_54757d0dad                  (about_id,language_id) UNIQUE
 #  index_university_person_localizations_on_about_id       (about_id)
 #  index_university_person_localizations_on_language_id    (language_id)
 #  index_university_person_localizations_on_slug           (slug)

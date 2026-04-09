@@ -14,10 +14,8 @@
                 <%= link_to_if path, location_l10n, path %>
               </h<%= block.heading_rank_children %>>
               <% if location_l10n.summary.present? %>
-                <div class="location-description">
-                  <p itemprop="description">
-                    <%= location_l10n.summary %>
-                  </p>
+                <div class="location-description" itemprop="description>
+                  <%= sanitize location_l10n.summary %>
                 </div>
               <% end %>
             </div>

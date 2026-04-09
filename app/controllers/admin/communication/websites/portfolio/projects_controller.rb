@@ -1,12 +1,15 @@
 class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Communication::Websites::Portfolio::ApplicationController
   load_and_authorize_resource class: Communication::Website::Portfolio::Project,
-                              through: :website
+                              through: :website,
+                              except: :restore
 
+  include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @projects = @projects.filter_by(params[:filters], current_language)
+    @filtered = @projects.filter_by(params[:filters], current_language)
+    @projects = @filtered.at_lifecycle(params[:lifecycle], current_language)
                          .ordered(current_language)
                          .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/portfolio'
@@ -70,6 +73,15 @@ class Admin::Communication::Websites::Portfolio::ProjectsController < Admin::Com
     redirect_to admin_communication_website_portfolio_projects_url,
                 notice: t('admin.successfully_destroyed_html', model: @project.to_s_in(current_language))
   end
+
+  def restore
+    @project = @website.projects.only_deleted.find(params[:id])
+    authorize!(:restore, @project)
+    @project.restore(recursive: true)
+    redirect_to admin_communication_website_portfolio_project_path(@project),
+                notice: t('admin.successfully_restored_html', model: @project.to_s_in(current_language))
+  end
+
   protected
 
   def breadcrumb

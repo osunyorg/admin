@@ -4,6 +4,7 @@
 #
 #  id            :uuid             not null, primary key
 #  certification :string
+#  deleted_at    :datetime
 #  ects          :integer
 #  level         :integer          default("not_applicable")
 #  position      :integer          not null
@@ -22,8 +23,11 @@
 class Education::Diploma < ApplicationRecord
   CERTIFICATIONS_DIRECTORY = "app/assets/images/education/diplomas/certifications"
 
+  acts_as_paranoid
+
   include AsIndirectObject
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Orderable
   include Sanitizable

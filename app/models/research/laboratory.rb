@@ -6,6 +6,7 @@
 #  address       :string
 #  city          :string
 #  country       :string
+#  deleted_at    :datetime
 #  zipcode       :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
@@ -20,9 +21,12 @@
 #  fk_rails_f61d27545f  (university_id => universities.id)
 #
 class Research::Laboratory < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include Filterable
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include LocalizableOrderByNameScope
   include Sanitizable

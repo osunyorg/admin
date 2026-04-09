@@ -3,6 +3,7 @@
 # Table name: research_journal_volumes
 #
 #  id                  :uuid             not null, primary key
+#  deleted_at          :datetime
 #  number              :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
@@ -20,8 +21,11 @@
 #  fk_rails_c83d5e9068  (university_id => universities.id)
 #
 class Research::Journal::Volume < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Sanitizable
   include Searchable

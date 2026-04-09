@@ -1,0 +1,10 @@
+<% if @page.children.any? %>
+  <div class="row">
+    <div class="offset-lg-4 col-lg-8 col-xxl-6">
+      <h2><%= Communication::Website::Page.human_attribute_name(:children) %></h2>
+      <p><%= @l10n.blocks.published.any?  ? t('admin.communication.website.page.children.with_blocks')
+                                          : t('admin.communication.website.page.children.without_blocks') %></p>
+      <%= render 'admin/communication/websites/pages/list', pages: @page.children.ordered(current_language) %>
+    </div>
+  </div>
+<% end %>

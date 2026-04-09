@@ -1,0 +1,22 @@
+<main id="main" class="page-with-blocks">
+  <header class="hero hero--with-image hero--image-square">
+    <div class="container">
+      <div class="content">
+        <div class="hero-text">
+          <hgroup class="has-lead">
+            <h1><%= @l10n.to_s %></h1>
+            <%= sanitize @l10n.summary %>
+          </hgroup>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="document-content">
+    <div class="blocks">
+      <%= render 'admin/communication/contents/show',
+            about: @l10n,
+            strip_javascript: true %>
+    </div>
+  </div>
+</main>
+<%= render 'admin/application/preview/lightbox' %>

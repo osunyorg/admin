@@ -3,17 +3,31 @@
     <div>
       <div class="<%= osuny_card_classes(horizontal: true) %>">
         <%= osuny_thumbnail_localized paper %>
-        <div class="card-body">
-          <%= osuny_published_localized paper %>
-          <%= osuny_link_localized  paper,
-                                    admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
-                                    classes: 'stretched-link',
-                                    truncate: 100 %>
+        <% if paper.deleted? %>
+          <div class="card-body">
+            <%= paper.best_localization_for(current_language) %>
+          </div>
+          <% if can?(:restore, paper) %>
+            <div class="card-footer">
+              <%= link_to t('restore'),
+                          restore_admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
+                          method: :post,
+                          class: button_classes %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="card-body">
+            <%= osuny_published_localized paper %>
+            <%= osuny_link_localized  paper,
+                                      admin_research_journal_paper_path(journal_id: paper.journal, id: paper),
+                                      classes: 'stretched-link',
+                                      truncate: 100 %>
 
-        </div>
-        <div class="card-footer small text-muted">
-          <%= paper.volume.to_s_in(current_language) if paper.volume %>
-        </div>
+          </div>
+          <div class="card-footer small text-muted">
+            <%= paper.volume.to_s_in(current_language) if paper.volume %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>

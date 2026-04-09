@@ -5,6 +5,7 @@
 #  id                         :uuid             not null, primary key
 #  accepted_at                :date
 #  bibliography               :text
+#  deleted_at                 :datetime
 #  doi                        :string
 #  position                   :integer          not null
 #  received_at                :date
@@ -34,8 +35,11 @@
 #  fk_rails_db4e38788c  (kind_id => research_journal_paper_kinds.id)
 #
 class Research::Journal::Paper < ApplicationRecord
+  acts_as_paranoid
+
   include AsIndirectObject
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Orderable
   include Sanitizable

@@ -4,6 +4,7 @@
 #
 #  id                       :uuid             not null, primary key
 #  add_to_calendar_urls     :jsonb
+#  deleted_at               :datetime
 #  featured_image_alt       :string
 #  featured_image_credit    :text
 #  header_cta               :boolean          default(FALSE)
@@ -21,14 +22,15 @@
 #  title                    :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             indexed
+#  about_id                 :uuid             indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             indexed
-#  language_id              :uuid             indexed
+#  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  university_id            :uuid             indexed
 #
 # Indexes
 #
 #  idx_on_about_id_db6323806a                  (about_id)
+#  idx_on_about_id_language_id_10e350e257      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_87f393a516  (communication_website_id)
 #  idx_on_language_id_c00e1d0218               (language_id)
 #  idx_on_university_id_eaf79b0514             (university_id)
@@ -41,6 +43,8 @@
 #  fk_rails_bb85c47fb8  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AddableToCalendar
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
@@ -72,7 +76,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
             :time_zone,
             :kind_simple?,
             :kind_recurring?,
-            :kind_parent?,
             :kind_child?,
             to: :event
 
@@ -82,6 +85,8 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   validates :title, presence: true
   validate :slug_cant_be_numeric_only
+
+  after_save :update_time_slots_add_to_calendar_urls
 
   scope :archivable, -> (datetime) {
     joins(:about)
@@ -100,7 +105,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     website.active_language_ids.include?(language_id) &&
     published? &&
     event.time_slots.none? && # Rendered by Communication::Website::Agenda::Event::TimeSlot
-    event.children.none? # Rendered by Communication::Website::Agenda::Event::Day
+    children.published.none? # Rendered by Communication::Website::Agenda::Event::Day
   end
 
   def template_static
@@ -117,6 +122,10 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     event.days.where(language: language)
   end
 
+  def time_slot_localizations
+    event.time_slot_localizations.where(language: language)
+  end
+
   def categories
     about.categories.ordered.map { |category| category.localization_for(language) }.compact
   end
@@ -126,10 +135,16 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     event.parent&.localization_for(language)
   end
 
+  # If there's no published children, it's a simple event
+  # https://github.com/osunyorg/gaitelyrique-www/issues/139
+  def kind_parent?
+    children.published.any?
+  end
+
   def hugo(website)
     if event.time_slots.any?
       hugo_for_time_slots(website)
-    elsif event.kind_parent?
+    elsif kind_parent?
       hugo_for_parent(website)
     else
       super(website)
@@ -145,6 +160,12 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   end
 
   protected
+
+  def update_time_slots_add_to_calendar_urls
+    time_slot_localizations.each do |time_slot_l10n|
+      time_slot_l10n.update_add_to_calendar_urls!
+    end
+  end
 
   def hugo_for_time_slots(website)
     time_slot = event.time_slots.ordered.first
@@ -196,6 +217,12 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
 
   def localize_other_attachments(localization)
     localize_attachment(localization, :shared_image) if shared_image.attached?
+  end
+
+  def localize_specific_data(localization)
+    about.time_slot_localizations.where(language: language).each do |time_slot_l10n|
+      time_slot_l10n.localize_in!(localization.language)
+    end
   end
 
 end

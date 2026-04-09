@@ -1,9 +1,12 @@
 class Communication::Block::Component::PageCategory < Communication::Block::Component::Base
 
+  def categories
+    @categories ||= website.page_categories
+  end
+
   def category
     return unless website
-    website.page_categories
-           .find_by(id: data)
+    categories.find_by(id: data)
   end
 
   def dependencies

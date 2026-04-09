@@ -1,15 +1,17 @@
 class Admin::Research::LaboratoriesController < Admin::Research::ApplicationController
   load_and_authorize_resource class: Research::Laboratory,
                               through: :current_university,
-                              through_association: :research_laboratories
+                              through_association: :research_laboratories,
+                              except: :restore
 
   include Admin::HasStaticAction
   include Admin::Localizable
 
   def index
-    @laboratories = @laboratories.filter_by(params[:filters], current_language)
-                                 .ordered(current_language)
-                                 .page(params[:page])
+    @filtered = @laboratories.filter_by(params[:filters], current_language)
+    @laboratories = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                             .ordered(current_language)
+                             .page(params[:page])
     breadcrumb
   end
 
@@ -55,6 +57,14 @@ class Admin::Research::LaboratoriesController < Admin::Research::ApplicationCont
   def destroy
     @laboratory.destroy
     redirect_to admin_research_laboratories_url, notice: t('admin.successfully_destroyed_html', model: @laboratory.to_s_in(current_language))
+  end
+
+  def restore
+    @laboratory = current_university.research_laboratories.only_deleted.find(params[:id])
+    authorize!(:restore, @laboratory)
+    @laboratory.restore(recursive: true)
+    redirect_to [:admin, @laboratory],
+                notice: t('admin.successfully_restored_html', model: @laboratory.to_s_in(current_language))
   end
 
   protected

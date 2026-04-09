@@ -4,7 +4,7 @@
       <tr>
         <th><%= Education::Program.model_name.human %></th>
         <% checks.each do |check| %>
-          <th><%= Education::Program.human_attribute_name(check) %></th>
+          <th><%= Education::Program::Localization.human_attribute_name(check) %></th>
         <% end %>
       </tr>
     </thead>

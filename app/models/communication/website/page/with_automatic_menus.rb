@@ -3,6 +3,7 @@ module Communication::Website::Page::WithAutomaticMenus
 
   included do
     after_save :generate_automatic_menus
+    after_restore :generate_automatic_menus
   end
 
   protected

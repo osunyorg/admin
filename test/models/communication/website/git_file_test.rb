@@ -112,10 +112,15 @@ class Communication::Website::GitFileTest < ActiveSupport::TestCase
 
     clear_enqueued_jobs
 
+    block.destroy
+
     # Vérifie qu'on a bien une tâche de nettoyage (dépendances du bloc supprimé)
-    assert_enqueued_with(job: Communication::Website::CleanJob) do
+    assert_enqueued_with(job: Dependencies::CleanObjectAfterDestroyJob) do
       block.destroy
     end
+
+    # Vérifie que le bloc est bien marqué comme détruit avec paranoia
+    assert block.deleted?
   end
 
 end

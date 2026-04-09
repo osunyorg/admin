@@ -1,11 +1,11 @@
-json.extract! l10n, :id, :migration_identifier, :name
+json.extract! l10n, :id, :migration_identifier, :name, :breadcrumb_title
 json.featured_image do
   json.blob_id l10n.featured_image.blob_id
   json.alt l10n.featured_image_alt
   json.credit l10n.featured_image_credit
   json.url l10n.featured_image.url
 end
-json.extract! l10n, :meta_description, :slug, :summary
+json.extract! l10n, :header_cta, :header_cta_label, :header_cta_url, :header_text, :meta_description, :slug, :summary
 json.blocks do
   json.partial! "api/osuny/communication/blocks/block", collection: l10n.blocks.ordered, as: :block
 end

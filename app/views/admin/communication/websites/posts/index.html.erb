@@ -1,25 +1,26 @@
 <% content_for :title, "#{Communication::Website::Post.model_name.human(count: 2)}" %>
 
 <% content_for :title_right do %>
+  <%= link_to t('communication.website.posts.new_curation'),
+              new_admin_communication_website_post_curation_path(website_id: @website.id),
+              class: button_classes('btn-light') if can?(:create, Communication::Website::Post) %>
   <%= create_link Communication::Website::Post %>
-  <%= button_advanced do %>
-    <%= link_to t('communication.website.posts.new_curation'),
-                new_admin_communication_website_post_curation_path(website_id: @website.id),
-                class: button_classes('btn-light') if can?(:create, Communication::Website::Post) %>
-  <% end %>
 <% end %>
 
-<div class="d-flex justify-content-between mb-4">
-  <p>
-    <%= @posts.total_count %>
-    <%= t('admin.item', count: @posts.total_count) %>
-  </p>
-  <%= render 'filters', current_path: admin_communication_website_posts_path, website: @website %>
+<div class="d-flex justify-content-between mb-5">
+  <%= render 'admin/application/components/lifecycle/pills',
+              path_method: :admin_communication_website_posts_path %>
+  <%= render 'filters',
+              current_path: admin_communication_website_posts_path,
+              website: @website %>
 </div>
+<%= render 'admin/application/components/lifecycle/label' %>
 
 <div data-batch-selectable class="mb-5">
   <%= form_tag publish_batch_admin_communication_website_posts_path do %>
-    <%= render 'admin/communication/websites/posts/list', posts: @posts, selectable: true %>
+    <%= render 'admin/communication/websites/posts/list',
+                posts: @posts,
+                selectable: (params.dig(:lifecycle) != 'trash') %>
     <%= paginate @posts %>
     <div>
       <div data-batch-selectable-role="actions-container">

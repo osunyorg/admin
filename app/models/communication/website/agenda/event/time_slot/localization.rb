@@ -4,19 +4,21 @@
 #
 #  id                       :uuid             not null, primary key
 #  add_to_calendar_urls     :jsonb
+#  deleted_at               :datetime
 #  migration_identifier     :string
 #  place                    :string
 #  slug                     :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  about_id                 :uuid             not null, indexed
+#  about_id                 :uuid             not null, indexed, uniquely indexed => [language_id]
 #  communication_website_id :uuid             not null, indexed
-#  language_id              :uuid             not null, indexed
+#  language_id              :uuid             not null, uniquely indexed => [about_id], indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
 #  idx_on_about_id_e52a2e12b0                  (about_id)
+#  idx_on_about_id_language_id_899f31df1f      (about_id,language_id) UNIQUE
 #  idx_on_communication_website_id_526f156fed  (communication_website_id)
 #  idx_on_language_id_f50f565794               (language_id)
 #  idx_on_university_id_4dee92bcc5             (university_id)
@@ -29,6 +31,8 @@
 #  fk_rails_ef5c90fa45  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::Agenda::Event::TimeSlot::Localization < ApplicationRecord
+  acts_as_paranoid
+
   include AddableToCalendar
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization

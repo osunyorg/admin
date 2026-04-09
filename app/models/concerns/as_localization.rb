@@ -12,9 +12,7 @@ module AsLocalization
 
     validates :language_id, uniqueness: { scope: :about_id }
 
-    before_validation :set_university
-
-    # delegate :websites, to: :about
+    before_validation :set_university, unless: :university_id
 
     scope :in_languages, -> (language_ids) {
       where(language_id: language_ids)
@@ -58,13 +56,16 @@ module AsLocalization
 
     # Handle blocks if object has any
     localize_contents!(l10n) if respond_to?(:contents)
+
+    # Overridable method for specific data
+    localize_specific_data(l10n)
     l10n
   end
 
   # standalone-category
   # parent-category/child-category
   def slug_with_ancestors_slugs
-    about.ancestors_and_self.map { |ancestor| 
+    about.ancestors_and_self.map { |ancestor|
       l10n = ancestor.localization_for(language)
       if l10n.nil? || l10n.try(:draft?)
         # If l10n is nil or draft, no slug
@@ -79,6 +80,7 @@ module AsLocalization
   protected
 
   def set_university
+    return if about.nil?
     self.university_id = about.university_id
   end
 
@@ -97,5 +99,9 @@ module AsLocalization
 
   # can be overwritten in model
   def localize_other_attachments(localization)
+  end
+
+  # can be overwritten in model
+  def localize_specific_data(localization)
   end
 end

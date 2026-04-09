@@ -3,6 +3,7 @@
 # Table name: university_person_involvements
 #
 #  id            :uuid             not null, primary key
+#  deleted_at    :datetime
 #  kind          :integer
 #  position      :integer          not null
 #  target_type   :string           not null, indexed => [target_id]
@@ -24,6 +25,8 @@
 #  fk_rails_5c704f6338  (university_id => universities.id)
 #
 class University::Person::Involvement < ApplicationRecord
+  acts_as_paranoid
+  
   include Localizable
   include Orderable
   include WithUniversity

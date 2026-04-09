@@ -109,15 +109,18 @@ en:
         about_Research::Laboratory: Laboratory website
         about_type: About
         access_token: Access token
+        apache_config_custom_content: Custom Apache configuration (.htaccess file)
         appearance: Appearance
         archive_content: Archive content?
         autoupdate_theme: Automatically update Osuny theme
+        config_apache_config: Apache specific configuration (.htaccess)
         config_default_content_security_policy: Security policies (CORS)
-        config_default_deuxfleurs_workflow: Github action for Deuxfleurs deployment
-        config_default_development_config: Development configuration
         config_default_languages: Language definitions
-        config_default_permalinks: Permalinks (obsolete)
-        config_default_production_config: Production configuration, with cache rules
+        config_deuxfleurs_config: Deuxfleurs specific configuration (deuxfleurs.toml)
+        config_deuxfleurs_workflow: Github action for Deuxfleurs deployment
+        config_development_config: Development configuration
+        config_netlify_config: Netlify specific configuration (netlify.toml)
+        config_production_config: Production configuration, with cache rules
         config_robots_txt: Search engine dedicated robots.txt file
         configs: Configuration files
         created_at: Creation
@@ -125,8 +128,8 @@ en:
         default_time_zone: Default time zone
         deployment_status_badge: Deployment status badge
         destination_websites: Websites to broadcast content to
-        deuxfleurs_hosting: Hébergement avec Deuxfleurs
-        deuxfleurs_identifier: Identifiant Deuxfleurs
+        deuxfleurs_hosting: Deuxfleurs hosting
+        deuxfleurs_identifier: Deuxfleurs identifier
         feature_agenda: Agenda
         feature_alerts: Alerts
         feature_alumni: Alumni
@@ -140,11 +143,13 @@ en:
         git_endpoint: Git endpoint
         git_provider: Git provider
         highlighted_in_showcase: Highlighted in showcase
+        hosting: Hosting
         in_production: Production
         in_production_at: Production release date
         in_showcase: List website in showcase
         languages: Languages
         locked_at: Locked for background jobs at
+        name: Name
         plausible_url: Plausible dashboard URL
         repository: Repository
         showcase_tags: Tags
@@ -253,6 +258,7 @@ en:
       communication/website/menu/item:
         about: Target
         children: Children items
+        html_class: HTML class
         kind: Kind
         parent: Parent item
         should_open_new_tab: Open in a new tab
@@ -274,10 +280,15 @@ en:
         path: Path
         published: Published?
         slug: Slug
+        subtitle: Subtitle
         text: Main page text
         title: Title
       communication/website/permalink:
+        about: About
+        internal: Internal
+        external: External
         path: Path
+        target_url: Target URL
       communication/website/portfolio/project:
         categories: Categories
         full_width: Full width
@@ -345,6 +356,11 @@ en:
           attributes:
             published:
               cannot_unpublished_default: cannot be unpublished (default language)
+        communication/website/permalink:
+          attributes:
+            path:
+              blank: must be correct, as defined by RFC2396
+              not_unique: already used by another alias
     models:
       communication/block:
         one: Content block
@@ -389,6 +405,9 @@ en:
       communication/website/agenda/event:
         one: Event
         other: Events
+      communication/website/agenda/event/day:
+        one: Day
+        other: Days
       communication/website/agenda/event/time_slot:
         one: Time slot
         other: Time slots
@@ -486,7 +505,8 @@ en:
           description: Everything related to content
           label: Editorial
         federation:
-          label: Content federation
+          label: Federation
+          description: The federation allows content to be shared between sites. This is done in two steps. First, you must define the sources authorised to send content to this site. Then you must choose the content to be distributed on a case-by-case basis.
         git_file:
           analysis:
             destroy_all_on_git: Delete all git files
@@ -509,13 +529,15 @@ en:
           fallback_hint_html: "Leave blank to use the default value: <i>%{master_value}</i>"
           title: Internationalization
         page:
+          children:
+            with_blocks: As the page has published blocks, it will not show its child pages, listed below. If you want to list them, you need to use a Page block.
+            without_blocks: As the page has no published blocks, it will automatically show its child pages, listed below.
           localizations:
             draft: Draft
             published: Published
             published_status: Publication status
         pages:
-          as_list: See as a list
-          as_tree: Organize structure
+          as_list: List of pages
           delete_special_page_notice: Can't delete this page
           duplicate_special_page_notice: Can't duplicate this page
           full_width_status: Full width
@@ -524,6 +546,56 @@ en:
           show: Show page
           special_page: Special page
           special_pages:
+            administration_location:
+              native:
+                zero: This page is a special page, which natively presents the campus locations. For now, there is no location.
+                one: This page is a special page, which natively presents the campus locations. For now, there's 1 location.
+                other: This page is a special page, which natively presents the %{count} campus locations.
+            communication_agenda:
+              native:
+                zero: This page is a special page, which natively presents the site's events.
+                one: This page is a special page, which natively presents the site's events. For the moment, there's a single published event.
+                other: This page is a special page, which natively presents the %{count} published events.
+            communication_agenda_exhibition:
+              native:
+                zero: This page is a special page, which natively presents the site's exhibitions.
+                one: This page is a special page, which natively presents the site's exhibitions. For now, there's a single exhibition published.
+                other: This page is a special page, which natively presents the %{count} published exhibitions.
+            communication_jobboard:
+              native:
+                zero: This page is a special page, which natively presents the site's job offers.
+                one: This page is a special page, which natively presents the site's job offers. At the moment, there's a single job offer published.
+                other: This page is a special page, which natively presents the %{count} published job offers.
+            communication_portfolio:
+              native:
+                zero: This page is a special page that natively displays the site's projects.
+                one: This page is a special page that natively displays the site's projects. Currently, there is 1 published project.
+                other: This page is a special page that natively displays %{count} published projects.
+            communication_post:
+              native:
+                zero: This page is a special page that natively displays the site's news.
+                one: This page is a special page that natively displays the site's news . Currently, there's a single post.
+                other: This page is a special page that natively displays the %{count} published news.
+            education_academic_year:
+              native:
+                zero: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there are no alumni on the site.
+                one: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there is one alumnus.
+                other: This page is a special page that natively displays the site's %{count} alumni, sorted by year.
+            education_diploma:
+              native:
+                zero: This page is a special page that natively displays the diplomas associated with the site. Currently, there are no diplomas on the site.
+                one: This page is a special page that natively displays the diplomas linked to the site. Currently, there is one diploma.
+                other: This page is a special page that natively displays the %{count} diplomas linked to the site.
+            education_program:
+              native:
+                zero: This page is a special page that natively displays the programs related to the site. Currently, there are no training courses on the site.
+                one: This page is a special page that natively displays the programs related to the site. Currently, there is one program.
+                other: This page is a special page that natively displays the %{count} programs related to the site.
+            education_school:
+              native:
+                zero: This page is a special page that natively displays the schools related to the site. Currently, there is no school on the site.
+                one: This page is a special page that natively displays the schools related to the site. Currently, there is one school.
+                other: This page is a special page that natively displays the %{count} schools related to the site.
             organization:
               disconnect: Disconnect
               explicitly_connected: Directly connected organizations
@@ -534,10 +606,29 @@ en:
                 other: This page is a special page that natively displays the %{count} organizations mentioned on the site.
             person:
               disconnect: Disconnect
+              explicitly_connected: People directly connected
+              explicitly_connected_hint: You can connect people directly to the website by searching for them below. Anyway, every person mentioned on the website will be listed above.
+              native:
+                zero: This page is a special page that natively displays the people mentioned on the website. Currently, there's no person on the site.
+                one: This page is a special page that natively displays the people mentioned on the site. At the moment, there is only one person on the site.
+                other: This page is a special page that natively displays the %{count} people mentioned on the site.
+            research_paper:
+              native:
+                zero: This page is a special page that natively displays papers related to the site. Currently, there are no papers on the site.
+                one: This page is a special page that natively displays papers related to the site. Currently, there is one paper.
+                other: This page is a special page that natively displays the %{count} papers related to the site.
+            research_publication:
+              native:
+                zero: This page is a special page that natively displays scientific publications related to the site. Currently, there are no publications on the site.
+                one: This page is a special page that natively displays scientific publications related to the site. Currently, there is 1 publication.
+                other: This page is a special page that natively displays the %{count} scientific publications related to the site.
+            research_volume:
+              native:
+                zero: This page is a special page that natively displays the volumes related to the site. Currently, there are no volumes on the site.
+                one: This page is a special page that natively displays volumes related to the site. Currently, there is 1 volume.
+                other: This page is a special page that natively displays %{count} volumes related to the site.
+            sitemap: This page is a special page that natively displays the site map.
           structure: Pages
-          with_children: "with children:"
-        permalinks:
-          creation_error: "Error during the creation. Does the given path have the correct format?"
         portfolio:
           project:
             localizations:
@@ -551,6 +642,7 @@ en:
             draft: Draft
             pinned_status: Pinned status
             planned_on: Publication planned on %{date}
+            planned_url: Planned URL
             published_on: Published on %{date}
         posts:
           by: by %{author}
@@ -562,11 +654,14 @@ en:
           add_path: Add a redirect
           button: Manage redirects
           current_path: Current path
+          label: Redirections
+          nginx_alert_html: |
+            Your hosting does not allow us to handle external redirects automatically.<br>
+            For this, please ask your IT administrator to include the configuration available below.<br>
+            Last updated at: %{last_updated_at}
           previous_paths: Redirects (old paths)
           title: Manage redirects
         see_showcase: See showcase
-        subnav:
-          structure: Structure
         synchronize:
           button: Synchronize
           running: Synchronization launched, please be patient...
@@ -738,6 +833,12 @@ en:
             danger: Red alert
             info: Information
             warning: Alert
+        hosting:
+          apache: Apache
+          deuxfleurs: Deuxfleurs
+          netlify: Netlify
+          nginx: Nginx
+          undefined: Undefined
         menu:
           item:
             kind:
@@ -776,9 +877,12 @@ en:
         favicon: '.png file only'
         host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
+      communication_media_localization:
+        internal_description: Complementary description of the image for the media library users. You can write this text to help the media library users to find an image, have complementary informations about it or have special instructions regarding the use of the image.
       communication_website:
         access_token_with_existing: Your Github or Gitlab confidential access token.<br>Leave the field blank if you don't want to change the token.
         access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website with Deuxfleurs.
+        apache_config_custom_content: The redirects will be added after this content.
         archive_content: "If you check this box, the posts, events and exhibitions will be archived after the defined time period. You can also mark a content as « lasting » to prevent it from being archived."
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_agenda: To share events
@@ -788,15 +892,17 @@ en:
         feature_jobboard: To share job offers
         feature_portfolio: To showcase projects
         feature_posts: To publish posts, like a media
-        federations: Choose the websites that can send content to it
         git_branch: 'If blank, default branch will be used'
         git_endpoint: 'If blank, default will be used (https://github.com or https://gitlab.com/api/v4)'
         in_production: Tick this box once the site is deployed on a dedicated domain or sub-domain (not *.osuny.site).
         languages: 'If you select one language the website urls will not be prefixed. If you select more than one language the website will then be considered as multilingual, and therefore all urls will be prefixed with the language (/fr, /en)'
         plausible_url: Dashboard link generated following the <a href="https://plausible.io/docs/shared-links" target="_blank">official Plausible documentation</a>.
         repository: As organization/name, for example noesya/bordeauxmontaigne-iut. Leave it empty when creating a website with Deuxfleurs.
+        source_websites: Choose the websites that can send content to it
         university: Please note that changing university will disconnect people and organisations that are used on other sites, and will disconnect people from users.
         url: Leave this field empty when you create your website with Deuxfleurs, it will be filled in automatically.
+      communication_website_menu_item:
+        html_class: This parameter is useful to code the website. The values entered are transformed into parameters (without accents or capitals), and the classes generated can be seen below.
       communication_website_page:
         breadcrumb_title: If the field is empty, page title will be used in breadcrumbs.
         full_width: On large screens, a full width page uses all available space for the content. This is good for landing pages, or to make them spectacular. If the page is not full width, the content column will be smaller to make reading easier. The unused space might be used for a table of contents.
@@ -804,6 +910,7 @@ en:
         text: This field is deprecated, content will not be displayed on the website.
       communication_website_permalink:
         path: "Must be an URL path. Example: /old/path"
+        target_url: "Must be a fully qualified URL, with protocol. Example: https://www.osuny.org"
       communication_website_portfolio_project:
         full_width: On large screens, a full width project uses all available space for the content.
       communication_website_post:

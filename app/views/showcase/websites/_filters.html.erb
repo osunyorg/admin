@@ -1,0 +1,20 @@
+<div class="my-5">
+  <p class="small text-uppercase">Thèmes</p>
+  <% @tags.each do |tag| %>
+    <% tag_websites_count = tag.websites.in_showcase.count %>
+    <% next if tag_websites_count.zero? %>
+    <%= link_to "#{tag} <span class=\"badge bg-light text-dark rounded-pill\">#{tag_websites_count}</span>".html_safe,
+                showcase_tag_path(tag.slug),
+                class: 'btn btn-light rounded-pill text-decoration-none mb-2 me-1 px-lg-3 py-lg-2' %>
+  <% end %>
+</div>
+<div class="my-5">
+  <p class="small text-uppercase">Fonctionnalités</p>
+  <% @features.each do |feature| %>
+    <% feature_websites_count = feature[:websites].count %>
+    <% next if feature_websites_count.zero? %>
+    <%= link_to "#{feature[:name]} <span class=\"badge bg-light text-dark rounded-pill\">#{feature_websites_count}</span>".html_safe,
+                feature[:path],
+                class: 'btn btn-light rounded-pill text-decoration-none mb-2 me-1 px-lg-3 py-lg-2' %>
+  <% end %>
+</div>

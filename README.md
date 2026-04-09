@@ -2,7 +2,7 @@
 
 [osuny.org](https://www.osuny.org)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/32cf5551caac199ffad5/maintainability)](https://codeclimate.com/github/osunyorg/admin/maintainability)
+[![Maintainability](https://qlty.sh/gh/osunyorg/projects/admin/maintainability.svg)](https://qlty.sh/gh/osunyorg/projects/admin)
 
 <a href="https://www.numeriqueinteretgeneral.org/declarations/2023-osuny/">
   <img src="https://www.numeriqueinteretgeneral.org/badges/nig-16-5-0.svg" alt="NIG" width="200" />

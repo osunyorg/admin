@@ -5,10 +5,16 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
     primary.item  :feature_nav_pages,
-                  t('admin.communication.website.subnav.structure'),
+                  Communication::Website::Page.model_name.human(count: 2),
                   admin_communication_website_pages_path(website_id: @website.id),
                   highlights_on: lambda {
-                    controller_name == "pages" && action_name.in?(["index", "index_list"])
+                    controller_name == "pages" && action_name == "index"
+                  }
+    primary.item  :feature_nav_page_list,
+                  t('admin.communication.website.pages.as_list'),
+                  list_admin_communication_website_pages_path(website_id: @website.id),
+                  highlights_on: lambda {
+                    controller_name == "pages" && action_name == "index_list"
                   }
     primary.item  :feature_nav_categories,
                   Communication::Website::Page::Category.model_name.human(count: 2),

@@ -1,0 +1,17 @@
+test_project:
+  migration_identifier: test-project-fixture-1
+  year: 2025
+  categories:
+   - test_category
+  website: website_with_github
+  university: default_university
+
+test_project_2:
+  year: 2024
+  website: website_with_github
+  university: default_university
+
+test_project_3:
+  year: 2023
+  website: website_with_github
+  university: default_university

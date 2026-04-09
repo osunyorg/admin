@@ -24,10 +24,8 @@
                 </hgroup>
               <% end %>
               <% if block.template.option_summary && job_l10n.summary.present? %>
-                <div class="job-description">
-                  <p itemprop="description">
-                    <%= job_l10n.summary %>
-                  </p>
+                <div class="job-description" itemprop="description">
+                  <%= sanitize job_l10n.summary %>
                 </div>
               <% end %>
 

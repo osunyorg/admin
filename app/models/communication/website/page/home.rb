@@ -15,4 +15,8 @@ class Communication::Website::Page::Home < Communication::Website::Page
   def default_parent
     nil
   end
+
+  def hugo_body_class
+    'page__home'
+  end
 end

@@ -4,8 +4,10 @@
 #
 #  id                       :uuid             not null, primary key
 #  bodyclass                :string
+#  deleted_at               :datetime
 #  from_day                 :date
 #  is_lasting               :boolean          default(FALSE)
+#  is_template              :boolean          default(FALSE)
 #  migration_identifier     :string
 #  time_zone                :string
 #  to_day                   :date
@@ -14,6 +16,7 @@
 #  communication_website_id :uuid             not null, indexed
 #  created_by_id            :uuid             indexed
 #  parent_id                :uuid             indexed
+#  template_id              :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
@@ -21,16 +24,20 @@
 #  index_agenda_events_on_communication_website_id             (communication_website_id)
 #  index_communication_website_agenda_events_on_created_by_id  (created_by_id)
 #  index_communication_website_agenda_events_on_parent_id      (parent_id)
+#  index_communication_website_agenda_events_on_template_id    (template_id)
 #  index_communication_website_agenda_events_on_university_id  (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_00ca585c35  (university_id => universities.id)
 #  fk_rails_5fa53206f2  (communication_website_id => communication_websites.id)
+#  fk_rails_60bc98cfb0  (template_id => communication_website_agenda_events.id)
 #  fk_rails_917095d5ca  (parent_id => communication_website_agenda_events.id)
 #  fk_rails_c9e737a3c1  (created_by_id => users.id)
 #
 class Communication::Website::Agenda::Event < ApplicationRecord
+  acts_as_paranoid
+
   include AsDirectObject
   include AsTree
   include Communication::Website::Agenda::Period::InPeriod
@@ -40,14 +47,18 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include Filterable
   include Categorizable # Must be loaded after Filterable to be filtered by categories
   include GeneratesGitFiles
+  include Lifecyclable
   include Localizable
   include Sanitizable
   include Searchable
+  include Templatable
   include WithDays
+  include WithPeriodSync
   include WithTimeSlots
   include WithKinds
   include WithMenuItemTarget
   include WithOpenApi
+  include HasListBlocks
   include WithUniversity
 
   belongs_to  :created_by,
@@ -62,6 +73,8 @@ class Communication::Website::Agenda::Event < ApplicationRecord
               class_name: 'Communication::Website::Agenda::Event',
               foreign_key: :parent_id,
               dependent: :destroy
+
+  after_save :create_periods
 
   scope :ordered_desc, -> {
     select("communication_website_agenda_events.*, MIN(communication_website_agenda_event_time_slots.datetime) as least_recent_time_slot")
@@ -131,28 +144,28 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   end
 
   def references
-    menus +
-    abouts_with_agenda_block
+    menus
   end
 
   def sorting_time
     from_day.in_time_zone.to_time
   end
 
-  protected
+  def hugo_body_class
+    'events__page'
+  end
+
+  def template_attributes_excluded
+    ['from_day', 'to_day']
+  end
 
   # Methods for Communication::Website::Agenda::Period::InPeriod
 
-  def should_update_periods?
-    from_day_changed?
-  end
 
-  def day_before_change
-    from_day_change.first
-  end
+  protected
 
-  def day_after_change
-    from_day_change.last
+  def create_periods
+    Communication::Website::Agenda::CreatePeriodsJob.perform_later(self)
   end
 
   # TODO refactor that with service or addition to DateTime (ex: DateTime.merge(date, time))
@@ -164,7 +177,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
                   hour.min
   end
 
-  def abouts_with_agenda_block
-    website.blocks.template_agenda.collect(&:about)
+  def list_blocks_template_kind
+    :agenda
   end
 end

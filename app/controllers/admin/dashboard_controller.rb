@@ -1,5 +1,6 @@
 class Admin::DashboardController < Admin::ApplicationController
   def index
+    @websites = Communication::Website.organized_for(current_user, current_language)
     @namespaces = []
     @namespaces << Education if feature_education?
     @namespaces << Research if feature_research?

@@ -1,23 +1,7 @@
 class Deuxfleurs
 
-  def get_bucket(host)
-    call_bucket_endpoint(host, method: :get)
-  end
-
   def create_bucket(host)
-    call_bucket_endpoint(host, method: :post)
-  end
-
-  def rename_bucket(host, new_identifier)
-    params = "{ \"vhost\": \"#{new_identifier}\" }"
-    response = client.patch("website/#{host}", params)
-    response.status == 200
-  end
-
-  protected
-
-  def call_bucket_endpoint(host, method:)
-    response = client.public_send(method, "website/#{host}")
+    response = client.post("website/#{host}")
     data = JSON.parse response.body
     {
       identifier: data.dig('vhost', 'name'),
@@ -26,9 +10,42 @@ class Deuxfleurs
     }
   end
 
+  def rename_bucket(host, new_identifier)
+    params = "{ \"vhost\": \"#{new_identifier}\" }"
+    response = client.patch("website/#{host}", params)
+    response.status == 200
+  end
+
+  def empty_and_delete_bucket(host)
+    delete_bucket(host) if empty_bucket(host)
+  end
+
+  def empty_bucket(host)
+    response = client.get("website/#{host}")
+    data = JSON.parse(response.body)
+    s3 = Aws::S3::Resource.new(
+            endpoint: 'https://garage.deuxfleurs.fr',
+            region: 'garage', 
+            access_key_id: data.dig('access_key_id'), 
+            secret_access_key: data.dig('secret_access_key')
+          )
+    bucket = s3.bucket(host)
+    bucket.objects.batch_delete!
+    true
+  rescue
+    false
+  end
+
+  def delete_bucket(host)
+    response = client.delete("website/#{host}")
+    response.status == 200
+  end
+
+  protected
+
   def client
     unless @client
-      @client = Faraday.new url: 'https://guichet.deuxfleurs.fr/api/unstable/'
+      @client = Faraday.new url: 'https://guichet.deuxfleurs.fr/api/v1/'
       @client.request :authorization,
                       :basic,
                       ENV['DEUXFLEURS_USER'],
