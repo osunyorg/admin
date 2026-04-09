@@ -361,6 +361,7 @@ en:
             path:
               blank: must be correct, as defined by RFC2396
               not_unique: already used by another alias
+              reserved_for_home: is reserved for the home page
     models:
       communication/block:
         one: Content block
