@@ -159,6 +159,11 @@ fr:
     meta_description:
       hint: Texte simple, dédié au à l'optimisation pour les moteurs de recherche (Search Engine Optimization, SEO).
       label: Description pour les moteurs de recherche (meta)
+    move: 
+      cta: Déplacer
+      description: "Déplacez cet élément vers un autre site web que vous gérez :"
+      permission_denied: Vous ne pouvez pas déplacer cet élément.
+      successfully_moved: "<i>%{model}</i> a bien été déplacé(e)."
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     pending_tasks:
       tasks: Tâches en cours de traitement

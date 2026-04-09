@@ -90,6 +90,8 @@ namespace :communication do
         post :duplicate
         post :publish
         post :restore
+        get :move
+        post :do_move
       end
     end
     namespace :agenda do

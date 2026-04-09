@@ -159,6 +159,11 @@ en:
     meta_description:
       hint: Plain text without HTML, dedicated to Search Engine Optimization (SEO).
       label: Meta description
+    move: 
+      cta: Move
+      description: "Move this item to another website you manage:"
+      permission_denied: You cannot move this item.
+      successfully_moved: "<i>%{model}</i> was successfully moved."
     password_hint: Leave blank if you do not wish to change the password.
     pending_tasks:
       tasks: Background tasks pending
