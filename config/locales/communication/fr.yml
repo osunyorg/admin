@@ -360,6 +360,7 @@ fr:
             path:
               blank: doit être un chemin correct, comme défini par la RFC2396
               not_unique: déjà utilisé par un autre alias
+              reserved_for_home: est réservé pour la page d'accueil
     models:
       communication/block:
         one: Bloc de contenu
