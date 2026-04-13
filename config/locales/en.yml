@@ -208,8 +208,13 @@ en:
         updated: Your settings have been updated.
       successfully_unlocked_html: "<i>%{model}</i> was successfully unlocked."
     will_be_published_html: "<i>%{model}</i> will soon be published."
-  batch_selectable:
-    title: Edit the selection
+  batch:
+    movable:
+      confirm: Are you sure you want to move the selected items?
+      successfully_moved: Items were successfully moved.
+      title: Move the selection
+    selectable:
+      title: Edit the selection
   cancel: Cancel
   category:
     breadcrumb_title: Title in breadcrumbs

@@ -83,6 +83,8 @@ namespace :communication do
       collection do
         resources :curations, as: :post_curations, controller: 'websites/posts/curations', only: [:new, :create]
         post :publish_batch
+        get :move_batch
+        post :do_move_batch
       end
       member do
         get :preview
