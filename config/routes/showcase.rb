@@ -1,6 +1,6 @@
 constraints host: ENV['OSUNY_SHOWCASE'] do
   get '/index' => 'showcase/websites#index'
-  get '/parties-prenantes' => 'showcase/websites#instances'
+  get '/instances' => 'showcase/websites#instances'
   get ':feature' => 'showcase/websites#feature',
                     as: :showcase_feature,
                     constraints: {
