@@ -1,6 +1,7 @@
 class Video::Provider
   PROVIDERS = [
     Arte,
+    Canalu,
     Vimeo,
     Youtube,
     Dailymotion,
