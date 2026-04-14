@@ -7,7 +7,7 @@
     <li>
     <article>
       <% if instance.logo.attached? %>
-        <picture><%= kamifusen_tag instance.logo, alt: instance %></picture>
+        <%= kamifusen_tag instance.logo, alt: instance %>
       <% else %>
         <%= instance %>
       <% end %>
