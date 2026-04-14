@@ -38,6 +38,10 @@ class Video::Provider::Canalu < Video::Provider::Default
     @oembed
   end
 
+  def title
+    oembed['title']
+  end
+
   protected
 
   def oembed_url
