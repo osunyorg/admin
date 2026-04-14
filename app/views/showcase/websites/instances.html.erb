@@ -9,7 +9,7 @@
       <% if instance.logo.attached? %>
         <%= kamifusen_tag instance.logo, alt: instance %>
       <% else %>
-        <%= instance %>
+        <span><%= instance %></span>
       <% end %>
     </article>
     </li>
