@@ -5,11 +5,13 @@
 <ul class="instances">
   <% @instances.each do |instance| %>
     <li>
+    <article>
       <% if instance.logo.attached? %>
-        <%= kamifusen_tag instance.logo, class: 'img-fluid' %>
+        <picture><%= kamifusen_tag instance.logo, alt: instance %></picture>
       <% else %>
         <%= instance %>
       <% end %>
+    </article>
     </li>
   <% end %>
 </ul>

@@ -33,18 +33,25 @@
     grid-template-columns: repeat(2, 1fr)
     @include media-breakpoint-up(md)
         grid-template-columns: repeat(4, 1fr)
-    @include media-breakpoint-up(lg)
+    @include media-breakpoint-up(xl)
         grid-template-columns: repeat(6, 1fr)
+    @include media-breakpoint-up(xxl)
+        grid-template-columns: repeat(8, 1fr)
     li
-        align-items: center
-        aspect-ratio: 1
-        display: flex
-        justify-content: center
-        outline-offset: -0.5px
         outline: 1px solid #E6E4D9
-        padding: 2rem
-        position: relative
-        img
+        outline-offset: -0.5px
+        article
+            align-items: center
+            display: flex
+            height: 100%
+            justify-content: center
+            padding: 2rem
+        picture
             aspect-ratio: 1
+            width: 100%
+        img
+            display: block
+            height: 100%
+            object-position: center
             object-fit: contain
             width: 100%
