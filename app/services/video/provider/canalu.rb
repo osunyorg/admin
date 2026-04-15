@@ -4,12 +4,7 @@ class Video::Provider::Canalu < Video::Provider::Default
   ]
 
   def identifier
-    unless @identifier
-      if oembed['html']
-        @identifier = oembed['html'].split('embed/').last.split('?').first
-      end
-    end
-    @identifier
+    @identifier ||= find_identifier_in_oembed
   end
 
   def csp_domains
@@ -35,6 +30,12 @@ class Video::Provider::Canalu < Video::Provider::Default
   end
 
   protected
+
+  def find_identifier_in_oembed
+    oembed['html'].split('embed/').last.split('?').first
+  rescue
+    ''
+  end
 
   def oembed_load_and_cache!
     begin
