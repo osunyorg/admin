@@ -62,6 +62,7 @@ class Video::Provider::Canalu < Video::Provider::Default
   end
 
   def oembed_write_to_cache!(embed)
+    return if block.blank?
     metadata = {
       video_url: video_url,
       oembed: oembed
