@@ -1,6 +1,8 @@
 class Video::Provider::Canalu < Video::Provider::Default
   DOMAINS = [
-    'canal-u.tv'
+    'canal-u.tv',
+    'www.canal-u.tv',
+    'vod.canal-u.tv'
   ]
 
   def identifier
