@@ -53,8 +53,6 @@ class Video::Provider::Canalu < Video::Provider::Default
     block.present? &&
     # Cache set
     block.metadata.present? && 
-    # With oembed data
-    block.metadata.has_key?('oembed') &&
     # With video url
     block.metadata.has_key?('video_url') &&
     # Same url
@@ -62,7 +60,7 @@ class Video::Provider::Canalu < Video::Provider::Default
   end
 
   def oembed_write_to_cache!(embed)
-    return if block.blank?
+    return unless block
     metadata = {
       video_url: video_url,
       oembed: oembed
