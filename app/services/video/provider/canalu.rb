@@ -27,15 +27,7 @@ class Video::Provider::Canalu < Video::Provider::Default
   end
 
   def oembed
-    unless @oembed
-      begin
-        io = URI.parse(oembed_url).open
-        @oembed = JSON.load(io)
-      rescue
-        @oembed = {}
-      end
-    end
-    @oembed
+    @oembed ||= oembed_cached? ? oembed_read_from_cache : oembed_load_and_cache!
   end
 
   def title
@@ -43,6 +35,40 @@ class Video::Provider::Canalu < Video::Provider::Default
   end
 
   protected
+
+  def oembed_load_and_cache!
+    begin
+      io = URI.parse(oembed_url).open
+      oembed = JSON.load(io)
+      oembed_write_to_cache!(oembed)
+      oembed
+    rescue
+      {}
+    end
+  end
+
+  def oembed_cached?
+    # Cache set
+    block.metadata.present? && 
+    # With oembed data
+    block.metadata.has_key?('oembed') &&
+    # With video url
+    block.metadata.has_key?('video_url') &&
+    # Same url
+    block.metadata['video_url'] == video_url
+  end
+
+  def oembed_write_to_cache!(embed)
+    metadata = {
+      video_url: video_url,
+      oembed: oembed
+    }
+    block.update_column :metadata, metadata
+  end
+
+  def oembed_read_from_cache
+    block.metadata['oembed']
+  end
 
   def oembed_url
     "https://www.canal-u.tv/oembed?format=json&url=#{video_url}"
