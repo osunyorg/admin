@@ -2,8 +2,8 @@
 
 <%= osuny_separator %>
 
-<draggable  class="row g-3 mb-3" 
-            :list="data.elements" 
+<draggable  class="row g-3 mb-3"
+            :list="data.elements"
             handle=".dragHandle">
   <div v-for="(element, index) in data.elements" class=" col-6 col-md-4">
     <div class="card draggable-item dragHandle m-0">
@@ -44,6 +44,8 @@
 </div>
 
 <%= osuny_separator %>
-<%= osuny_small_panel t('admin.communication.blocks.components.layouts.label') do %>
-  <%= block_component_edit block, :layout %>
-<% end %>
+
+<%#= osuny_small_panel t('admin.communication.blocks.components.layouts.label') do %>
+  <%#= block_component_edit block, :layout %>
+  <%#= block_component_edit block, :option_icons %>
+<%# end %>
