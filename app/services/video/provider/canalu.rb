@@ -48,6 +48,8 @@ class Video::Provider::Canalu < Video::Provider::Default
   end
 
   def oembed_cached?
+    # Block provided
+    block.present? &&
     # Cache set
     block.metadata.present? && 
     # With oembed data
