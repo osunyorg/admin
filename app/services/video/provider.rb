@@ -9,7 +9,7 @@ class Video::Provider
   ]
 
   # Block is sent to cache metadata 
-  def self.find(video_url, block)
+  def self.find(video_url, block = nil)
     PROVIDERS.each do |provider_class|
       provider = provider_class.new(video_url, block)
       return provider if provider.correct?

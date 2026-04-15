@@ -5,7 +5,7 @@ class Video::Provider::Default
 
   include ActionView::Helpers::TagHelper
 
-  def initialize(video_url, block)
+  def initialize(video_url, block = nil)
     @video_url = video_url
     @block = block
   end
