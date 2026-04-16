@@ -4,9 +4,9 @@
 
 <div class="row g-5 mt-5">
   <div class="col-lg-6">
-    <% if @website.screenshot.attached? %>
-      <%= kamifusen_tag @website.screenshot,
-                        class: 'img-fluid rounded mb-3' %>
+    <% if @website.screenshot_full_page.attached? %>
+      <%= kamifusen_tag @website.screenshot_full_page,
+                        class: 'img-fluid mb-3' %>
     <% end %>
   </div>
   <div class="col-lg-6">

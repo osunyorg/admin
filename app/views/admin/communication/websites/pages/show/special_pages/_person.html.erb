@@ -35,7 +35,7 @@
     </div>
     <div class="col-lg-6 col-xxl-8">
         <div class="row g-2">
-          <% @people.each do |person| %>
+          <% @explicitly_connected_people.each do |person| %>
             <div>
               <div class="<%= osuny_card_classes(horizontal: true) %>">
                 <%= osuny_thumbnail_localized person %>
@@ -55,7 +55,7 @@
               </div>
             </div>
           <% end %>
-          <%= paginate @people %>
+          <%= paginate @explicitly_connected_people, param_name: :explicitly_connected_people_page %>
         </div>
     </div>
   </div>

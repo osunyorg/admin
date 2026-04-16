@@ -76,7 +76,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
             :time_zone,
             :kind_simple?,
             :kind_recurring?,
-            :kind_parent?,
             :kind_child?,
             to: :event
 
@@ -106,7 +105,7 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     website.active_language_ids.include?(language_id) &&
     published? &&
     event.time_slots.none? && # Rendered by Communication::Website::Agenda::Event::TimeSlot
-    event.children.none? # Rendered by Communication::Website::Agenda::Event::Day
+    children.published.none? # Rendered by Communication::Website::Agenda::Event::Day
   end
 
   def template_static
@@ -136,10 +135,16 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
     event.parent&.localization_for(language)
   end
 
+  # If there's no published children, it's a simple event
+  # https://github.com/osunyorg/gaitelyrique-www/issues/139
+  def kind_parent?
+    children.published.any?
+  end
+
   def hugo(website)
     if event.time_slots.any?
       hugo_for_time_slots(website)
-    elsif event.kind_parent?
+    elsif kind_parent?
       hugo_for_parent(website)
     else
       super(website)

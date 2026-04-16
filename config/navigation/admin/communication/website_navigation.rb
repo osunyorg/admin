@@ -38,7 +38,7 @@ SimpleNavigation::Configuration.run do |navigation|
                     admin_communication_website_jobboard_root_path(website_id: @website.id).in?(request.path)
                   } if @website.feature_jobboard
                   primary.item  :subnav_pages,
-                  t('admin.communication.website.subnav.structure'),
+                  Communication::Website::Page.model_name.human(count: 2),
                   admin_communication_website_pages_path(website_id: @website.id) if can?(:read, Communication::Website::Page)
                   primary.item  :subnav_menus,
                   Communication::Website::Menu.model_name.human(count: 2),

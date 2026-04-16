@@ -23,7 +23,7 @@ module Communication::Website::WithTheme
 
   def theme_version_url
     return if url.blank?
-    "#{url}/osuny-theme-version"
+    "#{url}/osuny-theme-version.txt"
   end
 
   def theme_updatable?

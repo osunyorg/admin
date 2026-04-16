@@ -14,7 +14,10 @@
   <div class="lead mb-5"><%= Osuny::ThemeInfo.get_current_version %></div>
   <p>
     <%= t('server_admin.websites.outdated') %>
-    (<%= @websites.to_a.count %>)
+    (<%= @websites.total_count %>)
   </p>
-  <%= render 'server/websites/list', websites: @websites if @websites.any? %>
+  <% if @websites.any? %>
+    <%= render 'server/websites/list', websites: @websites %>
+    <%= paginate @websites %>
+  <% end %>
 <% end %>

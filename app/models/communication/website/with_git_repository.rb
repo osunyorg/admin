@@ -74,7 +74,11 @@ module Communication::Website::WithGitRepository
   def mark_obsolete_git_files
     return unless git_repository.valid?
     git_files.find_each do |git_file|
-      dependency = git_file.about
+      begin
+        dependency = git_file.about
+      rescue NameError
+        depdendency = nil
+      end
       # Here, dependency can be nil (object was previously destroyed)
       is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_following_direct)
       git_file.mark_for_destruction! if is_obsolete
@@ -105,9 +109,14 @@ module Communication::Website::WithGitRepository
     git_repository.update_theme_version!
   end
 
-  def analyse_repository!
+  def analyse_repository_safely
     return unless git_repository.valid?
     Git::OrphanAndLayoutAnalyzer.new(self).launch
+  end
+
+  def analyse_repository
+    return unless git_repository.valid?
+    Communication::Website::AnalyseJob.perform_later(id)
   end
 
   def git_files_desynchronized

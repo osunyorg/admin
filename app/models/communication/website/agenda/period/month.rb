@@ -43,6 +43,11 @@ class Communication::Website::Agenda::Period::Month < ApplicationRecord
     localizations.in_languages(website.active_language_ids)
   end
 
+  def next
+    @next ||= value < 12  ? website.agenda_period_months.find_by(year: year, value: value + 1)
+                          : website.agenda_period_months.find_by(year: year.next, value: 1)
+  end
+
   protected
 
   def create_days

@@ -30,7 +30,8 @@ else
   next if element.best_name.blank?
   quantity += 1
 %>
-<%= block_component_static block, :name, template: element, depth: 4, list: true %>
+        - 
+<%= block_component_static block, :name, template: element, depth: 5 %>
 <%= block_component_static block, :url, template: element, depth: 5 %>
           logo: "<%= element.logo_component.blob&.id %>"
           external: true

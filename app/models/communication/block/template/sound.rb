@@ -7,6 +7,10 @@ class Communication::Block::Template::Sound < Communication::Block::Template::Ba
   def allowed_for_about?
     !about.respond_to?(:extranet)
   end
+
+  def empty?
+    file_component.blob.nil?
+  end
   
   protected
 

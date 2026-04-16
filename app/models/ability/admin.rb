@@ -71,6 +71,7 @@ class Ability::Admin < Ability
     can :manage, Communication::Website::Agenda::Exhibition, university_id: @user.university_id
     can :manage, Communication::Website::Jobboard::Job, university_id: @user.university_id
     can :manage, Communication::Website::Jobboard::Category, university_id: @user.university_id
+    can :manage, Communication::Website::Permalink, university_id: @user.university_id
     can :manage, Communication::Website::Portfolio::Category, university_id: @user.university_id
     can :manage, Communication::Website::Portfolio::Project, university_id: @user.university_id
     can :manage, Communication::Website::Post::Category, university_id: @user.university_id

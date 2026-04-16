@@ -34,12 +34,13 @@ class Server::WebsitesController < Server::ApplicationController
   end
 
   def show
+    @orphans = @website.git_file_orphans.ordered
     @layouts = @website.git_file_layouts.ordered
     breadcrumb
   end
 
   def analyse
-    @website.analyse_repository!
+    @website.analyse_repository
     redirect_back fallback_location: server_website_path(@website),
                   notice: t('admin.communication.website.git_file.analysis.launched')
   end

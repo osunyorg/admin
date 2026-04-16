@@ -1,0 +1,20 @@
+[build]
+  publish = "public"
+  command = "yarn osuny build"
+
+[build.environment]
+  HUGO_VERSION = "0.157.0"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "0"
+    X-Content-Type-Options = "nosniff"
+
+<% @website.permalinks.not_current.ordered.find_each do |permalink| %>
+[[redirects]]
+  from = "<%= permalink.path %>"
+  to = "<%= permalink.target %>"
+
+<% end %>

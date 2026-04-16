@@ -325,7 +325,6 @@ fr:
               large:
                 description: Chaque exposition est présentée en majesté, sur toute la largeur disponible avec une grande image.
                 label: Grand
-                more: En savoir plus
               list:
                 description: Une liste d'expositions avec de petites images à la même largeur.
                 label: Liste
@@ -352,7 +351,16 @@ fr:
                 title:
                   label: Titre
                   placeholder: Entrer le titre de la fonctionnalité
+              option_icons:
+                label: Afficher les images comme de petites icônes
               remove_element: Supprimer la fonctionnalité
+            layouts:
+              grid:
+                description: Les fonctionnalités sont présentés en grille, avec les images toutes de la même taille.
+                label: Grille
+              list:
+                description: Une liste de fonctionnalités avec de petites images de même largeur.
+                label: Liste
           files:
             description: Une liste de fichiers téléchargeables, présentés avec leur poids.
             edit:
@@ -883,6 +891,7 @@ fr:
             one: 1 bloc
             other: '%{count} blocs'
             zero: Aucun bloc
+          reset: Réinitialiser (à partir de la version en %{language})
         modes:
           structure:
             description: Dans le mode “Organiser le plan”, vous ne voyez qu'un petit aperçu de chaque bloc. C'est le mode idéal pour ranger les documents longs.

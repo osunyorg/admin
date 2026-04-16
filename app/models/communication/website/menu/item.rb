@@ -4,6 +4,7 @@
 #
 #  id                  :uuid             not null, primary key
 #  about_type          :string           indexed => [about_id]
+#  html_class          :string
 #  kind                :integer          default("blank")
 #  position            :integer          not null
 #  position_in_tree    :integer
@@ -143,11 +144,16 @@ class Communication::Website::Menu::Item < ApplicationRecord
     return nil if static_target.nil?
     hash = {
       'title' => title,
+      'slug' => title.parameterize,
       'target' => static_target,
       'kind' => kind,
       'new_tab' => should_open_new_tab,
-      'children' => children.ordered.map(&:to_static_hash).compact
+      'children' => children.ordered.map(&:to_static_hash).compact,
+      'descendants_targets' => descendants_targets,
     }
+    if html_class.present?
+      hash['html_class'] = html_class_prepared
+    end
     if hugo.present?
       hash['path'] = hugo.path
       hash['file'] = hugo.file
@@ -176,6 +182,25 @@ class Communication::Website::Menu::Item < ApplicationRecord
         .unscoped
         .where(parent: parent, university: university, website: website)
         .where.not(id: id)
+  end
+
+  def descendants_targets
+    children.collect(&:descendants_and_self_targets)
+            .flatten
+            .compact
+            .uniq
+            .sort
+  end
+
+  def descendants_and_self_targets
+    [static_target] + children.collect(&:descendants_and_self_targets)
+  end
+
+  def html_class_prepared
+    return if html_class.blank?
+    html_class.split(' ')
+              .map { |klass| "menu-class-#{klass.parameterize}" }
+              .join(' ')
   end
 
   protected

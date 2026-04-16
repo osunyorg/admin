@@ -71,6 +71,9 @@ RSpec.describe 'Communication::Website::Portfolio::Project' do
                 slug: 'mon-nouveau-projet',
                 subtitle: 'Un nouveau projet',
                 summary: 'Ceci est un nouveau projet créé depuis l\'API.',
+                aliases: [
+                  { path: "/nouveau-projet" }
+                ],
                 blocks: [
                   {
                     migration_identifier: 'project-from-api-1-fr-block-1',
@@ -92,7 +95,9 @@ RSpec.describe 'Communication::Website::Portfolio::Project' do
 
       response '201', 'Successful creation' do
         it 'creates a project and its localization', rswag: true do |example|
-          assert_difference ->{ Communication::Website::Portfolio::Project.count } => 1, ->{ Communication::Website::Portfolio::Project::Localization.count } => 1 do
+          assert_difference ->{ Communication::Website::Portfolio::Project.count } => 1,
+                            ->{ Communication::Website::Portfolio::Project::Localization.count } => 1,
+                            ->{ Communication::Website::Permalink.count } => 1 do
             assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
