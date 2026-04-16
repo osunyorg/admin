@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/ruby:4.0.2-node
+      - image: noesya/cimg-ruby-activestorage-preview:4.0.2
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -25,13 +25,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-      # Install binaries for Active Storage Previews
-      - run:
-          name: Install binaries for Active Storage Previews
-          command: |
-            sudo apt-get update
-            sudo apt-get install ffmpeg poppler-utils libvips-dev -y
 
       # Bundler configuration
       - run:
