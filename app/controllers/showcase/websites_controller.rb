@@ -18,11 +18,6 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     end
   end
 
-  def show
-    @website = Communication::Website.find(params[:id])
-    raise_404_unless(@website.in_showcase && @website.in_production)
-  end
-
   def tag
     @tag = Communication::Website::Showcase::Tag.find_by!(slug: params[:tag])
     @websites = @tag.websites.in_showcase
@@ -40,9 +35,8 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     @websites = @websites.page(params[:page]).per(100)
   end
 
-  def instances
-    @instances = University.with_websites_in_production
-                           .with_attached_logo
-                           .ordered
+  def show
+    @website = Communication::Website.find(params[:id])
+    raise_404_unless(@website.in_showcase && @website.in_production)
   end
 end
