@@ -38,6 +38,7 @@ class Communication::Website::Permalink < ApplicationRecord
 
   validates :path, presence: true
   validates :path, uniqueness: { scope: :website_id }, unless: :is_current
+  validate :root_path_is_reserved_for_home
 
   before_validation :set_university, on: :create
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
@@ -186,5 +187,10 @@ class Communication::Website::Permalink < ApplicationRecord
   def regenerate_website_hosting_config
     return unless website.persisted?
     website.regenerate_hosting_config!
+  end
+
+  def root_path_is_reserved_for_home
+    return unless path == "/"
+    errors.add(:path, :reserved_for_home) unless about.about.is_a?(Communication::Website::Page::Home)
   end
 end

@@ -1,12 +1,17 @@
 constraints host: ENV['OSUNY_SHOWCASE'] do
-  get '/index' => 'showcase/websites#index'
-  get '/instances' => 'showcase/websites#instances'
-  get ':feature' => 'showcase/websites#feature',
-                    as: :showcase_feature,
+
+  namespace :showcase, path: '' do
+    resources :instances, only: :index
+    resources :websites, only: [:index, :show]
+
+    get ':feature' => 'websites#feature',
+                    as: :feature,
                     constraints: {
                       feature: /actualites|agenda|portfolio|jobboard/
                     }
-  get ':tag' => 'showcase/websites#tag', as: :showcase_tag
-  get '/' => 'showcase/websites#index'
-  get 'websites/:id' => 'showcase/websites#show', as: :showcase_website
+    get ':tag' => 'websites#tag', as: :tag
+
+    root to: 'websites#index'
+  end
+
 end

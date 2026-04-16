@@ -26,25 +26,24 @@
                     display: block
 
 .instances
-    @extend .list-unstyled
-    display: grid
-    gap: 0
-    padding: 0.5px
-    grid-template-columns: repeat(2, 1fr)
-    @include media-breakpoint-up(md)
-        grid-template-columns: repeat(4, 1fr)
-    @include media-breakpoint-up(lg)
-        grid-template-columns: repeat(6, 1fr)
+    margin: 0
     li
-        align-items: center
         aspect-ratio: 1
-        display: flex
-        justify-content: center
-        outline-offset: -0.5px
-        outline: 1px solid #E6E4D9
+        border: 1px solid #E6E4D9
+        margin: -0.5px
         padding: 2rem
-        position: relative
-        img
-            aspect-ratio: 1
-            object-fit: contain
-            width: 100%
+        article
+            align-items: center
+            display: flex
+            height: 100%
+            justify-content: center
+            text-align: center
+            picture
+                height: 100%
+                img
+                    aspect-ratio: 1
+                    height: 100%
+                    max-width: 100%
+                    object-fit: contain
+                    object-position: center
+                    width: 100%
