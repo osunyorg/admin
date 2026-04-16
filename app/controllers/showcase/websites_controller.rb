@@ -41,6 +41,8 @@ class Showcase::WebsitesController < Showcase::ApplicationController
   end
 
   def instances
-    @instances = University.with_websites_in_production.ordered
+    @instances = University.with_websites_in_production
+                           .with_attached_logo
+                           .ordered
   end
 end
