@@ -38,7 +38,7 @@ class Communication::Website::Permalink < ApplicationRecord
 
   validates :path, presence: true
   validates :path, uniqueness: { scope: :website_id }, unless: :is_current
-  # TODO: validate :root_path_is_reserved_for_home
+  validate :root_path_is_reserved_for_home
 
   before_validation :set_university, on: :create
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
