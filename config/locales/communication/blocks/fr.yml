@@ -351,6 +351,8 @@ fr:
                 title:
                   label: Titre
                   placeholder: Entrer le titre de la fonctionnalité
+              option_icons:
+                label: Afficher les images comme de petites icônes
               remove_element: Supprimer la fonctionnalité
             layouts:
               grid:

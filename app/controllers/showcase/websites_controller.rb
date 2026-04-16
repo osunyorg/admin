@@ -39,4 +39,8 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     @highlighted_websites = @websites.highlighted_in_showcase
     @websites = @websites.page(params[:page]).per(100)
   end
+
+  def instances
+    @instances = University.with_websites_in_production.ordered
+  end
 end

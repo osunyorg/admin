@@ -1,0 +1,60 @@
+.websites
+    &--grid
+        article
+            .media
+                padding: 4rem
+                background: #F1EFE9
+                margin-bottom: 0.5rem
+    &--list
+        article
+            border-bottom: 1px solid #E6E4D9
+            padding-bottom: 8px
+            padding-top: 8px
+            &:hover
+                a
+                    text-decoration-style: underline
+            .floating-thumb
+                display: none
+                pointer-events: none
+                position: absolute
+                right: 10px
+                top: -150px
+                width: 500px
+                z-index: 10
+            &:hover
+                .floating-thumb
+                    display: block
+
+.instances
+    @extend .list-unstyled
+    display: grid
+    gap: 0
+    padding: 0.5px
+    grid-template-columns: repeat(2, 1fr)
+    @include media-breakpoint-up(md)
+        grid-template-columns: repeat(4, 1fr)
+    @include media-breakpoint-up(xl)
+        grid-template-columns: repeat(6, 1fr)
+    @include media-breakpoint-up(xxl)
+        grid-template-columns: repeat(8, 1fr)
+    li
+        outline: 1px solid #E6E4D9
+        outline-offset: -0.5px
+        margin: -0.5px
+        article
+            align-items: center
+            display: flex
+            height: 100%
+            justify-content: center
+            padding: 2rem
+            picture
+                aspect-ratio: 1
+                width: 100%
+                img
+                    display: block
+                    height: 100%
+                    object-position: center
+                    object-fit: contain
+                    width: 100%
+            span
+                text-align: center

@@ -78,6 +78,7 @@ class University < ApplicationRecord
   scope :for_real_university, -> (status, language = nil) { where(is_really_a_university: status) }
   scope :for_contribution, -> (status, language = nil) { status == 'true' ? contributing : not_contributing }
   scope :for_university_kind, -> (status, language = nil) { where(private: status == 'private') }
+  scope :with_websites_in_production, -> { joins(:communication_websites).where(communication_websites: { in_production: true }).distinct }
 
   def self.parts
     [

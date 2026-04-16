@@ -1,0 +1,17 @@
+<% content_for :title, 'Instances' %>
+
+<h1>Instances</h1>
+
+<ul class="instances">
+  <% @instances.each do |instance| %>
+    <li>
+    <article>
+      <% if instance.logo.attached? %>
+        <%= kamifusen_tag instance.logo, alt: instance %>
+      <% else %>
+        <span><%= instance %></span>
+      <% end %>
+    </article>
+    </li>
+  <% end %>
+</ul>
