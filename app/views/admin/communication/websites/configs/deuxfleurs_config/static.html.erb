@@ -13,3 +13,10 @@ Cache-Control = "max-age=31536000, no-transform, public"
 for = ["**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.gif", "**/*.webp"]
 [headers.values]
 Cache-Control = "max-age=31536000, no-transform, public"
+
+<% @website.permalinks.not_current.ordered.find_each do |permalink| %>
+[[redirects]]
+from = "<%= permalink.path %>"
+to = "<%= permalink.target %>"
+
+<% end %>
