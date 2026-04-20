@@ -5,9 +5,11 @@ export default {
       close: { type: String, required: true },
       url: { type: String },
     },
+    emits: ['close'],
     methods: {
-      closeOffCanvas() {
-        this.$emit("closeOffCanvas");
+      onClose(event) {
+        event.preventDefault();
+        this.$emit('close');
       },
     }
 };
@@ -24,7 +26,7 @@ export default {
         <button
           type="button"
           class="btn-close"
-          @click="closeOffCanvas"
+          @click="onClose"
           aria-label="{{ close }}"></button>
       </div>
       <iframe
@@ -34,7 +36,8 @@ export default {
     </div>
     <div
       v-show="url"
-      @click="closeOffCanvas"
-      class="offcanvas-backdrop fade show"></div>
+      @click="onClose"
+      class="offcanvas-backdrop"
+      :class="{'show': url}"></div>
   </section>
 </template>

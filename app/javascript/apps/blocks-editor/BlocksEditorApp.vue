@@ -37,6 +37,9 @@ export default {
       selectBlock(event) {
         event.preventDefault();
         this.currentUrl = this.newUrl;
+        this.openOffCanvas();
+      },
+      openOffCanvas() {
         document.body.classList.add("modal-open");
       },
       closeOffCanvas() {
@@ -57,7 +60,7 @@ export default {
       :title="i18n.blocksEditor.offcanvas.title"
       :close="i18n.blocksEditor.offcanvas.close"
       :url="currentUrl"
-      @closeOffCanvas="closeOffCanvas"
+      @close="closeOffCanvas"
       />
   </section>
 </template>
