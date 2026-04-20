@@ -4,7 +4,7 @@ class Showcase::WebsitesController < Showcase::ApplicationController
     @features = Communication::Website::Showcase.features
     @websites = Communication::Website.in_showcase
                                       .ordered_by_production_date
-    @title = "#{@websites.count } sites créés"
+    @title = "#{@websites.count } sites créés par #{University.with_websites_in_production.count} organisations"
     respond_to do |format|
       format.html {
         @highlighted_websites = @websites.highlighted_in_showcase
