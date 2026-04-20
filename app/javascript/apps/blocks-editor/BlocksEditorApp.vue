@@ -33,8 +33,10 @@ export default {
 
 <template>
   <section class="vue__blocks-editor">
-    Blocks editor
-    {{ i18n }}
-    <AddBlockButton />
+    Blocks editor v2
+    <AddBlockButton 
+      :url="ok"
+      :label="i18n.blocksEditor.actions.addBlock"
+      />
   </section>
 </template>
