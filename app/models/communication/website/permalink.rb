@@ -31,16 +31,14 @@ class Communication::Website::Permalink < ApplicationRecord
   include WithOpenApi
   # We don't include Sanitizable as this model is never handled by users directly.
   include WithUniversity
+  include WithValidations
 
   belongs_to :university
   belongs_to :website, class_name: "Communication::Website"
   belongs_to :about, polymorphic: true, optional: true
 
-  validates :path, presence: true
-  validates :path, uniqueness: { scope: :website_id }, unless: :is_current
-  validate :root_path_is_reserved_for_home
 
-  before_validation :set_university, on: :create
+
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
   # so we have an attribute accessor to force-sync the about, for example in the Permalinkable concern
   after_commit :touch_about, on: [:create, :destroy]
@@ -123,15 +121,12 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def save_if_needed
     current_permalink = about.current_permalink_in_website(website)
-
-    return unless computed_path.present? && (current_permalink.nil? || current_permalink.path != computed_path)
-
-    # If the object had no permalink or if its path changed, we create a new permalink and delete website redirections with the same path
-    existing_permalinks_for_path = self.class.unscoped.where(website_id: website_id, path: computed_path, is_current: false)
+    return unless should_save?(current_permalink)
     self.path = computed_path
-    if save
-      existing_permalinks_for_path.find_each(&:destroy)
-      current_permalink&.update(is_current: false)
+    transaction do
+      save!
+      destroy_conflicting_aliases!
+      current_permalink&.update!(is_current: false)
     end
   end
 
@@ -164,6 +159,25 @@ class Communication::Website::Permalink < ApplicationRecord
 
   protected
 
+  def should_save?(current_permalink)
+    # No computed path if not published
+    computed_path.present? &&
+    (
+      # First time
+      current_permalink.nil? ||
+      # Path changed
+      current_permalink.path != computed_path
+    )
+  end
+
+  def destroy_conflicting_aliases!
+    conflicting_aliases.find_each(&:destroy)
+  end
+
+  def conflicting_aliases
+    self.class.unscoped.where(website_id: website_id, path: computed_path, is_current: false)
+  end
+
   def language
     @language ||= about.respond_to?(:language) ? about.language : website.default_language
   end
@@ -175,10 +189,6 @@ class Communication::Website::Permalink < ApplicationRecord
     }
   end
 
-  def set_university
-    self.university_id = website.university_id
-  end
-
   def touch_about
     return unless about.present? && about.persisted?
     about.touch
@@ -187,10 +197,5 @@ class Communication::Website::Permalink < ApplicationRecord
   def regenerate_website_hosting_config
     return unless website.persisted?
     website.regenerate_hosting_config!
-  end
-
-  def root_path_is_reserved_for_home
-    return unless path == "/"
-    errors.add(:path, :reserved_for_home) unless about.about.is_a?(Communication::Website::Page::Home)
   end
 end
