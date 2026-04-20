@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       post 'profile/optin_newsletter' => 'profile#optin_newsletter', as: :optin_newsletter
       # libre_translate route
       post 'translate/:target' => 'translation#translate', as: :translate
+      get 'vue-i18n' => 'vue_i18n#index', as: :vue_locales, defaults: { format: :json }
       put 'favorite' => 'users#favorite', as: :favorite
       get 'search(/website/:website_id)(/extranet/:extranet_id)' => 'search#index', as: :search
       draw 'admin/administration'
