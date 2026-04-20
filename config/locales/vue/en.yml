@@ -1,5 +1,27 @@
 en:
   vue:
+    blocksEditor:
+      actions:
+        addBlock: Add a block
+        copy: Copy block
+        delete: Delete
+        duplicate: Duplicate
+        edit: Edit
+        move: Move
+        paste: Paste block
+      confirm:
+        deletion: Are you sure you want to delete?
+        duplication: Are you sure you want to duplicate?
+        reset: Reset will remove all blocks in this language. Are you sure?
+      empty: This block is empty and will not appear
+      offcanvas:
+        close: Close block edition
+        title: Block edition
+      structure:
+        description: In "Organize outline" mode, you only see a small preview of each block. This is the ideal mode for organizing long documents.
+      tabs:
+        structure: Organize outline
+        write: Write content
     changes:
       cancel: Cancel
       save: Save changes
