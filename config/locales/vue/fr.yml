@@ -1,5 +1,27 @@
 fr:
   vue:
+    blocksEditor:
+      actions:
+        addBlock: Ajouter un bloc
+        copy: Copier le bloc
+        delete: Supprimer
+        duplicate: Dupliquer
+        edit: Modifier
+        move: Déplacer
+        paste: Coller le bloc
+      confirm:
+        deletion: Est-ce que vous confirmez la suppression ?
+        duplication: Est-ce que vous confirmez la duplication ?
+        reset: La réinitialisation va supprimer tous les blocs dans cette langue. Est-ce que vous confirmez ?
+      empty: Ce bloc est vide et n'apparaitra pas
+      offcanvas:
+        close: Fermer l'édition du bloc
+        title: Édition du bloc
+      structure:
+        description: Dans le mode “Organiser le plan”, vous ne voyez qu'un petit aperçu de chaque bloc. C'est le mode idéal pour ranger les documents longs.
+      tabs:
+        structure: Organiser le plan
+        write: Écrire le contenu
     changes:
       cancel: Annuler
       save: Enregistrer les modifications
