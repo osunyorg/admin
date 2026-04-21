@@ -37,10 +37,7 @@ export default {
       },
       onDelete(event, block) {
         event.preventDefault();
-        this.$emit('delete', block);
-      },
-      // TODO
-      onDeleteConfirm(block) {
+        if (!confirm(this.i18n.blocksEditor.confirm.deletion)) return;
         this.$emit('delete', block);
       },
       onCopy(event, block) {
@@ -49,12 +46,9 @@ export default {
       },
       onDuplicate(event, block) {
         event.preventDefault();
+        if (!confirm(this.i18n.blocksEditor.confirm.duplication)) return;
         this.$emit('duplicate', block);
       },
-      // TODO
-      onDuplicateConfirm(block) {
-        this.$emit('duplicate', block);
-      }
     }
 };
 </script>
