@@ -1,5 +1,9 @@
 namespace :server do
-  resources :universities
+  resources :universities do
+    collection do
+      get :potential
+    end
+  end
   resources :languages
   resources :tags
   resources :websites do
