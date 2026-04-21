@@ -12,6 +12,9 @@ export default {
     emits: [
       'update:modelValue',
       'edit',
+      'delete',
+      'copy',
+      'duplicate',
       'reorder'
     ],
     computed: {
@@ -31,6 +34,26 @@ export default {
       },
       onReorder() {
         this.$emit('reorder');
+      },
+      onDelete(event, block) {
+        event.preventDefault();
+        this.$emit('delete', block);
+      },
+      // TODO
+      onDeleteConfirm(block) {
+        this.$emit('delete', block);
+      },
+      onCopy(event, block) {
+        event.preventDefault();
+        this.$emit('copy', block);
+      },
+      onDuplicate(event, block) {
+        event.preventDefault();
+        this.$emit('duplicate', block);
+      },
+      // TODO
+      onDuplicateConfirm(block) {
+        this.$emit('duplicate', block);
       }
     }
 };
@@ -53,20 +76,33 @@ export default {
             <article class="card card-body px-3 px-sm-5 border-bottom border-light">
               <div class="text-end mb-2">
                 <span class="content-editor__elements__element--hover">
-                    <span class="content-editor__elements__handle">
-                      <span class="handle">
-                        <i class="fas fa-sort"></i>
-                        <span class="small"> Déplacer</span>
-                      </span>
+                  <span class="content-editor__elements__handle">
+                    <span class="handle">
+                      <i class="fas fa-sort"></i>
+                      <span class="small"> Déplacer</span>
                     </span>
-                  <a data-confirm="Est-ce que vous confirmez la suppression&nbsp;?" class="action text-danger ms-2" rel="nofollow" data-method="delete" href="/admin/fr/communication/blocks/a46eb74a-178f-40a4-b96e-e4b79766193c?website_id=27ccefe4-753c-49b3-ae4d-31675fc53ce5">Supprimer</a>
-                  <a class="action ms-2" data-remote="true" href="/admin/fr/communication/blocks/a46eb74a-178f-40a4-b96e-e4b79766193c/copy?website_id=27ccefe4-753c-49b3-ae4d-31675fc53ce5">Copier le bloc</a>
-                  <a data-confirm="Est-ce que vous confirmez la duplication&nbsp;?" class="action ms-2" rel="nofollow" data-method="post" href="/admin/fr/communication/blocks/a46eb74a-178f-40a4-b96e-e4b79766193c/duplicate?website_id=27ccefe4-753c-49b3-ae4d-31675fc53ce5">Dupliquer</a>
-                </span>
-                <a  href="#"
+                  </span>
+                  <a
+                    href="#"
+                    class="action text-danger ms-2"
+                    @click="onDelete($event, block)">
+                    {{ i18n.blocksEditor.actions.delete }}</a>
+                  <a
+                    href="#"
                     class="action ms-2"
-                    @click="onEdit($event, block)">
-                    {{ i18n.blocksEditor.actions.edit }}</a>
+                    @click="onCopy($event, block)">
+                    {{ i18n.blocksEditor.actions.copy }}</a>
+                  <a
+                    href="#"
+                    class="action ms-2"
+                    @click="onDuplicate($event, block)">
+                    {{ i18n.blocksEditor.actions.duplicate }}</a>
+                </span>
+                <a 
+                  href="#"
+                  class="action ms-2"
+                  @click="onEdit($event, block)">
+                  {{ i18n.blocksEditor.actions.edit }}</a>
               </div>
               <div
                 class="content-editor__elements__preview"

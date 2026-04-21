@@ -66,6 +66,24 @@ export default {
         this.url.current = block.url.edit;
         this.openOffCanvas();
       },
+      onDuplicate(block) {
+        console.log('onDuplicate', block);
+      },
+      onCopy(block) {
+        console.log('onCopy', block);
+      },
+      onDelete(block) {
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            this.refresh();
+          }
+        }.bind(this);
+        xhr.open("DELETE", block.url.delete, false);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
+        xhr.send();
+      },
       onSave() {
         this.closeOffCanvas();
         this.refresh();
@@ -95,8 +113,9 @@ export default {
       },
       closeOffCanvas() {
         this.url.current = "";
+        this.refresh();
         document.body.classList.remove("modal-open");
-      }
+      },
     }
 };
 </script>
@@ -110,6 +129,9 @@ export default {
       v-model="blocks"
       :i18n="i18n"
       @edit="onEdit"
+      @delete="onDelete"
+      @copy="onCopy"
+      @duplicate="onDuplicate"
       @reorder="onReorder" />
     <AddBlockButton
       v-show="blocks.blocks.length > 5"
