@@ -8,8 +8,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def reorder
     ids = params[:ids] || []
     about = nil
-    ids.values.each_with_index do |object, index|
-      block = current_university.communication_blocks.find(object[:id])
+    ids.each_with_index do |id, index|
+      block = current_university.communication_blocks.find(id)
       block.update_column(:position, index + 1)
       about ||= block.about # Always the same about, doesn't matter
     end

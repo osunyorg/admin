@@ -11,10 +11,11 @@ export default {
     },
     data () {
       return {
+        csrfToken: "",
         url: {
           i18n: "",
           new: "",
-          sort: "",
+          reorder: "",
           blocks: "",
           current: ""
         },
@@ -24,12 +25,14 @@ export default {
       }
     },
     beforeMount() {
+      // CSRF
+      this.csrfToken = document.querySelector('[name="csrf-token"]').content;
       // Récupération des paramètres de l'application
       const dataset = document.getElementById('blocks-editor-app').dataset;
       this.url.i18n = dataset.i18nUrl;
       this.url.blocks = dataset.blocksUrl;
       this.url.new = dataset.newUrl;
-      this.url.sort = dataset.sortUrl;
+      this.url.reorder = dataset.reorderUrl;
       // Chargement
       this.loadJson(this.url.i18n, "i18n");
       this.refresh();
@@ -70,6 +73,23 @@ export default {
       onClose() {
         this.closeOffCanvas();
       },
+      onReorder() {
+        let ids = [];
+        for (let index in this.blocks.blocks) {
+          let block = this.blocks.blocks[index];
+          ids.push(block.id);
+        }
+        let xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            this.refresh();
+          }
+        }.bind(this);
+        xhr.open("POST", this.url.reorder, false);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
+        xhr.send(JSON.stringify({ ids: ids }));
+      },
       openOffCanvas() {
         document.body.classList.add("modal-open");
       },
@@ -89,7 +109,8 @@ export default {
     <Blocks
       v-model="blocks"
       :i18n="i18n"
-      @edit="onEdit" />
+      @edit="onEdit"
+      @reorder="onReorder" />
     <OffCanvas
       :i18n="i18n"
       :url="url.current"
