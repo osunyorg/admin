@@ -1,8 +1,8 @@
 <script>
 export default {
-    props: {
-      label: { type: String, required: true },
-    },
+    props: [
+      'i18n'
+    ],
     emits: ['add'],
     methods: {
       onClick(event) {
@@ -19,7 +19,7 @@ export default {
       <a
         class="btn btn-lg btn-dark"
         @click="onClick">
-        {{ label }}</a>
+        {{ i18n.blocksEditor.actions.addBlock }}</a>
     </div>
   </div>
 </template>

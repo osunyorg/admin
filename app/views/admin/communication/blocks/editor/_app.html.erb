@@ -2,7 +2,7 @@
 # L'url contenant les locales (TODO doit être mise en cache)
 i18n_url    = admin_vue_i18n_path
 # La liste des blocs
-source_url  = root_admin_communication_editor_blocks_path(
+blocks_url  = root_admin_communication_editor_blocks_path(
                 about_type: about.class.polymorphic_name,
                 about_id: about.id,
                 website_id: nil,
@@ -21,7 +21,7 @@ sort_url    = reorder_admin_communication_blocks_path(
 <div 
   id="blocks-editor-app"
   data-i18n-url="<%= i18n_url %>"
-  data-source-url="<%= source_url %>"
+  data-blocks-url="<%= blocks_url %>"
   data-new-url="<%= new_url %>"
   data-sort-url="<%= sort_url %>"
   v-cloak>
