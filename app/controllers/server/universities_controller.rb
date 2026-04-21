@@ -7,6 +7,12 @@ class Server::UniversitiesController < Server::ApplicationController
     breadcrumb
   end
 
+  def potential
+    @universities = @universities.with_websites_in_production.ordered
+    breadcrumb
+    add_breadcrumb 'Potentiel de contribution'
+  end
+
   def show
     @websites = @university.websites.ordered(current_language).page(params[:page])
     breadcrumb
