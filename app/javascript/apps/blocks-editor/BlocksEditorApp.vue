@@ -47,12 +47,12 @@ export default {
     methods: {
       loadJson(url, target) {
         let xhr = new XMLHttpRequest();
+        xhr.open("GET", url, false);
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
             this[target] = JSON.parse(xhr.responseText);
           }
         }.bind(this);
-        xhr.open("GET", url, false);
         xhr.send();
       },
       refresh() {
@@ -67,22 +67,13 @@ export default {
         this.openOffCanvas();
       },
       onDuplicate(block) {
-        console.log('onDuplicate', block);
+        this.loadAndRefresh(block.url.duplicate, "POST");
       },
       onCopy(block) {
-        console.log('onCopy', block);
+        this.loadAndRefresh(block.url.copy, "POST");
       },
       onDelete(block) {
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            this.refresh();
-          }
-        }.bind(this);
-        xhr.open("DELETE", block.url.delete, false);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
-        xhr.send();
+        this.loadAndRefresh(block.url.delete, "DELETE");
       },
       onSave() {
         this.closeOffCanvas();
@@ -98,12 +89,12 @@ export default {
           ids.push(block.id);
         }
         let xhr = new XMLHttpRequest();
+        xhr.open("POST", this.url.reorder, false);
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
             this.refresh();
           }
         }.bind(this);
-        xhr.open("POST", this.url.reorder, false);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
         xhr.send(JSON.stringify({ ids: ids }));
@@ -116,6 +107,18 @@ export default {
         this.refresh();
         document.body.classList.remove("modal-open");
       },
+      loadAndRefresh(url, method) {
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url, false);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            this.refresh();
+          }
+        }.bind(this);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
+        xhr.send();
+      }
     }
 };
 </script>

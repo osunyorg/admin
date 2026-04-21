@@ -81,12 +81,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def duplicate
     # On réattribue à @block pour bénéficier du calcul dans about_path
     @block = @block.duplicate
-    redirect_to about_path + "#block-#{@block.id}",
-                notice: t('admin.successfully_duplicated_html', model: @block.to_s)
   end
 
   def copy
-    return unless request.xhr?
     cookies.signed[Communication::Block::BLOCK_COPY_COOKIE] = {
       value: params[:id],
       path: '/admin'
@@ -108,10 +105,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def destroy
-    path = about_path
     @block.destroy
-    redirect_to path,
-                notice: t('admin.successfully_destroyed_html', model: @block.to_s)
   end
 
   protected

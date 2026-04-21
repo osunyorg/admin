@@ -26,7 +26,7 @@
         <p><%= t('admin.communication.blocks.footer') %></p>
       </div>
     </div>
-    <%= render 'admin/communication/contents/editor', about: @l10n %>
+    <%= render 'admin/communication/blocks/editor/app', about: @l10n %>
 
     <% content_for :action_bar_right do %>
       <%= cancel [:admin, @website] %>

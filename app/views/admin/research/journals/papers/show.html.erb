@@ -82,7 +82,7 @@
   </div>
 </div>
 <%= osuny_separator %>
-<%= render 'admin/communication/contents/editor', about: @l10n %>
+<%= render 'admin/communication/blocks/editor/app', about: @l10n %>
 
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_research_journal_paper_path(@paper) %>

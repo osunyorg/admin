@@ -223,7 +223,7 @@ namespace :communication do
       end
     end
     member do
-      get :copy
+      post :copy
       post :duplicate
       post :paste
     end
