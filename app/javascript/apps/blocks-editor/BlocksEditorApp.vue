@@ -111,6 +111,10 @@ export default {
       :i18n="i18n"
       @edit="onEdit"
       @reorder="onReorder" />
+    <AddBlockButton
+      v-show="blocks.blocks.length > 5"
+      :i18n="i18n"
+      @add="onAdd" />
     <OffCanvas
       :i18n="i18n"
       :url="url.current"
