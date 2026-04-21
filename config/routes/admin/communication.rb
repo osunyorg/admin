@@ -217,6 +217,10 @@ namespace :communication do
   resources :blocks, controller: 'blocks', except: [:index] do
     collection do
       post :reorder
+      scope "/editor/:about_type/:about_id", as: :editor do
+        post :reset
+        root to: "blocks/editor#index", defaults: { format: :json }
+      end
     end
     member do
       get :copy

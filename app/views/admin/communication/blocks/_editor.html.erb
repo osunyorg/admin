@@ -1,9 +1,0 @@
-<div 
-  id="blocks-editor-app"
-  data-i18n-url="<%= admin_vue_i18n_path %>"
-  data-new-url="<%= new_admin_communication_block_path(about_id: about.id, about_type: about.class.name) if can? :create, Communication::Block %>"
-  data-sort-url="<%= reorder_admin_communication_blocks_path(website_id: nil, extranet_id: nil) %>"
-  data-source-url="<%= admin_communication_contents_write_path(about_type: about.class.polymorphic_name, about_id: about.id) %>"
-  v-cloak>
-</div>
-<%= render 'admin/communication/blocks/offcanvas_editor' %>

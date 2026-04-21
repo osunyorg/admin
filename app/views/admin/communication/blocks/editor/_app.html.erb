@@ -1,0 +1,28 @@
+<%
+# L'url contenant les locales (TODO doit être mise en cache)
+i18n_url    = admin_vue_i18n_path
+# La liste des blocs
+source_url  = root_admin_communication_editor_blocks_path(
+                about_type: about.class.polymorphic_name,
+                about_id: about.id,
+                website_id: nil,
+                extranet_id: nil)
+# L'URL pour choisir un nouveau bloc
+new_url     = new_admin_communication_block_path(
+                about_id: about.id, 
+                about_type: about.class.name,
+                website_id: nil,
+                extranet_id: nil) if can? :create, Communication::Block
+# L'URL pour ordonner les blocs
+sort_url    = reorder_admin_communication_blocks_path(
+                website_id: nil,
+                extranet_id: nil)
+%>
+<div 
+  id="blocks-editor-app"
+  data-i18n-url="<%= i18n_url %>"
+  data-source-url="<%= source_url %>"
+  data-new-url="<%= new_url %>"
+  data-sort-url="<%= sort_url %>"
+  v-cloak>
+</div>
