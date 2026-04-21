@@ -79,8 +79,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def duplicate
-    # On réattribue à @block pour bénéficier du calcul dans about_path
     @block = @block.duplicate
+    head :ok
   end
 
   def copy
@@ -88,6 +88,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       value: params[:id],
       path: '/admin'
     }
+    head :ok
   end
 
   def paste
@@ -106,6 +107,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def destroy
     @block.destroy
+    head :ok
   end
 
   protected

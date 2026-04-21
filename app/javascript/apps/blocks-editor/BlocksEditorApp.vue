@@ -11,6 +11,7 @@ export default {
     },
     data () {
       return {
+        loading: true,
         csrfToken: "",
         url: {
           i18n: "",
@@ -21,7 +22,6 @@ export default {
         },
         i18n: {},
         blocks: {},
-        loading: true,
         currentUrl: ""
       }
     },
@@ -39,7 +39,6 @@ export default {
       this.refresh();
     },
     async mounted() {
-      this.loading = false;
       window.osuny.blocks = {
         editor: {
           onSave: this.onSave.bind(this)
@@ -127,10 +126,6 @@ export default {
 
 <template>
   <section class="vue__blocks-editor mb-5">
-    <div v-if="loading" class="text-center text-muted py-5">
-      <i class="lead fas fa-spinner fa-spin"></i>
-    </div>
-
     <AddBlockButton
       :i18n="i18n"
       @add="onAdd" />
