@@ -3,18 +3,24 @@ class Server::UniversitiesController < Server::ApplicationController
   load_and_authorize_resource
 
   def index
-    @universities = @universities.filter_by(params[:filters], current_language).ordered.page(params[:page])
+    @universities =  @universities.filter_by(params[:filters], current_language)
+                                  .ordered
+                                  .page(params[:page])
     breadcrumb
   end
 
   def potential
-    @universities = @universities.with_websites_in_production.ordered
+    @universities =  @universities.with_websites_in_production
+                                  .not_contributing
+                                  .ordered
     breadcrumb
     add_breadcrumb 'Potentiel de contribution'
   end
 
   def show
-    @websites = @university.websites.ordered(current_language).page(params[:page])
+    @websites =  @university.websites
+                            .ordered(current_language)
+                            .page(params[:page])
     breadcrumb
   end
 
