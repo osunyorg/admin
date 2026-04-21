@@ -3,7 +3,7 @@
 <div class="row">
   <% @universities.each do |university| %>
     <div class="col-lg-3">
-      <article class="card">
+      <article class="card mb-4">
         <div class="card-body">
           <%= link_to university, [:server, university], class: 'stretched-link' %>
         </div>
