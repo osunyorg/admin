@@ -285,6 +285,7 @@
         let blockIdentifier = "<%= @block.id %>",
             blockPath = "<%= admin_communication_block_path(@block) %>";
         parent.window.osuny.contentEditor.offcanvas.onBlockSave(blockIdentifier, blockPath);
+        parent.window.osuny.blocks.editor.onSave(blockIdentifier, blockPath);
       });
     }, 1000);
   });

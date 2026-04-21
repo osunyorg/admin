@@ -32,7 +32,14 @@ export default {
       this.url.sort = dataset.sortUrl;
       // Chargement
       this.loadJson(this.url.i18n, "i18n");
-      this.loadJson(this.url.blocks, "blocks");
+      this.refresh();
+    },
+    async mounted() {
+      window.osuny.blocks = {
+        editor: {
+          onSave: this.onSave.bind(this)
+        }
+      }
     },
     methods: {
       loadJson(url, target) {
@@ -45,20 +52,29 @@ export default {
         xhr.open("GET", url, false);
         xhr.send();
       },
-      selectBlock(event) {
-        event.preventDefault();
-        this.currentUrl = this.newUrl;
+      refresh() {
+        this.loadJson(this.url.blocks, "blocks");
+      },
+      onAdd() {
+        this.url.current = this.url.new;
         this.openOffCanvas();
       },
-      editBlock(block) {
-        this.currentUrl = block.url.edit;
+      onEdit(block) {
+        this.url.current = block.url.edit;
         this.openOffCanvas();
+      },
+      onSave() {
+        this.closeOffCanvas();
+        this.refresh();
+      },
+      onClose() {
+        this.closeOffCanvas();
       },
       openOffCanvas() {
         document.body.classList.add("modal-open");
       },
       closeOffCanvas() {
-        this.currentUrl = "";
+        this.url.current = "";
         document.body.classList.remove("modal-open");
       }
     }
@@ -67,16 +83,17 @@ export default {
 
 <template>
   <section class="vue__blocks-editor mb-5">
-    <AddBlockButton :i18n="i18n" @click="selectBlock" />
+    <AddBlockButton
+      :i18n="i18n"
+      @add="onAdd" />
     <Blocks
       v-model="blocks"
       :i18n="i18n"
-      @edit="editBlock" />
+      @edit="onEdit" />
     <OffCanvas
-      :title="i18n.blocksEditor.offcanvas.title"
-      :close="i18n.blocksEditor.offcanvas.close"
-      :url="currentUrl"
-      @close="closeOffCanvas"
+      :i18n="i18n"
+      :url="url.current"
+      @close="onClose"
       />
   </section>
 </template>

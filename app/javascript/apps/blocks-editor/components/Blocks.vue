@@ -4,7 +4,10 @@ export default {
       'modelValue',
       'i18n',
     ],
-    emits: ['update:modelValue'],
+    emits: [
+      'update:modelValue',
+      'edit'
+    ],
     computed: {
       value: {
         get() {

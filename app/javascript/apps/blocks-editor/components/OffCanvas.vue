@@ -1,10 +1,9 @@
 <script>
 export default {
-    props: {
-      title: { type: String, required: true },
-      close: { type: String, required: true },
-      url: { type: String },
-    },
+    props: [
+      'i18n',
+      'url',
+    ],
     emits: ['close'],
     methods: {
       onClose(event) {
@@ -22,12 +21,12 @@ export default {
       :class="{'show': url}"
       tabindex="-1">
       <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title">{{ title }}</h5>
+        <h5 class="offcanvas-title">{{ i18n.blocksEditor.offcanvas.title }}</h5>
         <button
           type="button"
           class="btn-close"
           @click="onClose"
-          aria-label="{{ close }}"></button>
+          aria-label="{{ i18n.blocksEditor.offcanvas.close }}"></button>
       </div>
       <iframe
         class="content-editor__offcanvas__iframe"
