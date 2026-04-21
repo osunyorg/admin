@@ -125,6 +125,10 @@ export default {
 
 <template>
   <section class="vue__blocks-editor mb-5">
+    <div v-if="loading" class="text-center text-muted py-5">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
+
     <AddBlockButton
       :i18n="i18n"
       @add="onAdd" />
