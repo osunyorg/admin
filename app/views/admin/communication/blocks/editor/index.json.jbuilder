@@ -1,6 +1,9 @@
 json.blocks @blocks do |block|
   json.id block.id
-  json.template block.template_name.to_s
+  json.template do 
+    json.kind block.template_kind
+    json.name block.template_name.to_s
+  end
   json.published block.published
   json.url do 
     json.edit edit_admin_communication_block_path(block, website_id: nil, extranet_id: nil)
@@ -13,4 +16,11 @@ json.blocks @blocks do |block|
                   locals: { block: block },
                   formats: [:html]
                 )
+ json.a11y do
+    json.status render(
+                  partial: 'admin/application/a11y/status',
+                  locals: { about: block },
+                  formats: [:html]
+                )
+ end
 end
