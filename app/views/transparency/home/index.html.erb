@@ -4,9 +4,9 @@
 
 <h2 class="mt-5 h4 mb-4">Contributions annuelles</h2>
 <article class="border-bottom py-2">
-  <div class="row">
+  <div class="row fw-bold">
     <div class="col-md-10">
-      Organisation ou personne contributrice
+      <%= @universities.count %> organisations ou personnes contributrices
     </div>
     <div class="col-md-2">
       Contribution annuelle
@@ -38,7 +38,7 @@
 <p>Les coût sont remis à jour à la main, ils ne sont pas très précis.</p>
 
 <article class="border-bottom py-2">
-  <div class="row">
+  <div class="row fw-bold">
     <div class="col-md-4">
       Organisation
     </div>
@@ -79,7 +79,6 @@
 <p class="display-1">
   <%= number_to_currency @balance, precision: 0, locale: :fr  %>
 </p>
-
 
 <div class="my-5">
   <p>Ces données sont disponibles de façon ouverte au format JSON.</p>
