@@ -10,6 +10,7 @@ en:
         move: Move
         paste: Paste block
       confirm:
+        copy: The block has been copied to clipboard.
         deletion: Are you sure you want to delete?
         duplication: Are you sure you want to duplicate?
         reset: Reset will remove all blocks in this language. Are you sure?

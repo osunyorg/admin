@@ -10,6 +10,7 @@ fr:
         move: Déplacer
         paste: Coller le bloc
       confirm:
+        copy: Le bloc a bien été copié dans le presse-papier.
         deletion: Est-ce que vous confirmez la suppression ?
         duplication: Est-ce que vous confirmez la duplication ?
         reset: La réinitialisation va supprimer tous les blocs dans cette langue. Est-ce que vous confirmez ?

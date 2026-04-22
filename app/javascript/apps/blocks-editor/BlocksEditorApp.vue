@@ -70,7 +70,30 @@ export default {
         this.loadAndRefresh(block.url.duplicate, "POST");
       },
       onCopy(block) {
-        this.loadAndRefresh(block.url.copy, "POST");
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", block.url.copy, false);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            this.onCopyDone();
+          }
+        }.bind(this);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
+        xhr.send();
+      },
+      onCopyDone() {
+        let notyf = new Notyf();
+        notyf.open({
+            type: 'success',
+            position: {
+                x: 'center',
+                y: 'bottom'
+            },
+            message: this.i18n.blocksEditor.confirm.copy,
+            duration: 9000,
+            ripple: true,
+            dismissible: true
+        });
       },
       onDelete(block) {
         this.loadAndRefresh(block.url.delete, "DELETE");
