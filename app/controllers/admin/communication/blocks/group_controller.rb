@@ -8,7 +8,10 @@ class Admin::Communication::Blocks::GroupController < Admin::Communication::Appl
 
   def reset
     @about.reset_blocks
-    head :ok
+    redirect_back(
+        fallback_location: [:admin, @about],
+        notice: t('admin.successfully_updated_html', model: @about.to_s)
+      )
   end
 
   protected

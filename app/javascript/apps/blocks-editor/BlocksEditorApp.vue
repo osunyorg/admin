@@ -118,8 +118,8 @@ export default {
       },
       onReorder() {
         let ids = [];
-        for (let index in this.blocks.blocks) {
-          let block = this.blocks.blocks[index];
+        for (let index in this.data.blocks) {
+          let block = this.data.blocks[index];
           ids.push(block.id);
         }
         let xhr = new XMLHttpRequest();
