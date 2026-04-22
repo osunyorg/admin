@@ -73,7 +73,7 @@ export default {
       },
       onCopy(block) {
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", block.url.copy, false);
+        xhr.open("POST", block.url.copy);
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
             this.onCopyDone();
@@ -123,7 +123,7 @@ export default {
           ids.push(block.id);
         }
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", this.url.reorder, false);
+        xhr.open("POST", this.url.reorder);
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
             this.refresh();
@@ -135,7 +135,7 @@ export default {
       },
       loadAndRefresh(url, method) {
         let xhr = new XMLHttpRequest();
-        xhr.open(method, url, false);
+        xhr.open(method, url);
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
             this.refresh();
