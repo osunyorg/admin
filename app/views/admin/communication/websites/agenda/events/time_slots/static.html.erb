@@ -33,5 +33,5 @@ date: "<%= time_slot.datetime&.iso8601 %>"
 <%= osuny_static_html 'text', event_l10n.text %>
 <%= osuny_static_html 'notes', event_l10n.notes %>
 <%= render 'admin/application/header_cta/static', about: event_l10n %>
-<%= render 'admin/communication/contents/static', about: event_l10n %>
+<%= render 'admin/communication/blocks/group/static', about: event_l10n %>
 ---

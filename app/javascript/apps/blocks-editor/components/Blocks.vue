@@ -69,7 +69,7 @@ export default {
             <label class="form-label">{{ block.template.name }}</label>
           </div>
           <div class="col-lg-8 col-xxl-6">
-            <div class="card card-body border-bottom py-1 border-light plan-mode--true">
+            <div class="card card-body border-bottom py-1 px-2 border-light plan-mode--true">
               <p class="handle small mb-0 text-truncate">
                 <i class="fas fa-sort me-2"></i>
                 {{ block.text }}
