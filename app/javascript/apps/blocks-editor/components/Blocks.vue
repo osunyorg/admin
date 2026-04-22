@@ -61,6 +61,7 @@ export default {
       handle=".handle">
       <div
         v-for="block in value"
+        :id="`block-${block.id}`"
         class="vue__blocks-editor__elements__element">
         <div
           class="row"

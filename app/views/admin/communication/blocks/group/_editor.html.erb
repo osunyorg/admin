@@ -11,7 +11,7 @@ data_url    = root_admin_communication_group_blocks_path(
 # L'URL pour choisir un nouveau bloc
 new_url     = new_admin_communication_block_path(
                 about_id: about.id, 
-                about_type: about.class.name,
+                about_type: about.class.polymorphic_name,
                 website_id: nil,
                 extranet_id: nil,
                 journal_id: nil) if can? :create, Communication::Block
@@ -28,3 +28,5 @@ reorder_url = reorder_admin_communication_blocks_path(
   data-new-url="<%= new_url %>"
   data-reorder-url="<%= reorder_url %>">
 </div>
+<%= render 'admin/communication/blocks/group/editor/paste', about: about  %>
+<%= render 'admin/communication/blocks/group/editor/reset', about: about  %>
