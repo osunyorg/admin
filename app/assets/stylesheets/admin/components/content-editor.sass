@@ -11,7 +11,16 @@
                     color: white
                 .layout__image
                     border: $color-accent 1px solid !important
-
+.vue__blocks-editor
+    .plan-mode--true
+        display: none
+    .plan-mode--false
+        display: block
+    &--plan-mode
+        .plan-mode--true
+            display: block
+        .plan-mode--false
+            display: none
 .content-editor
     &__offcanvas
         width: 95vw !important

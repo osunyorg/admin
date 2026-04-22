@@ -1,11 +1,9 @@
 <script>
-import AddBlockButton from './components/AddBlockButton.vue';
 import Blocks from './components/Blocks.vue';
 import OffCanvas from './components/OffCanvas.vue';
 
 export default {
     components: {
-      AddBlockButton,
       Blocks,
       OffCanvas
     },
@@ -22,7 +20,8 @@ export default {
         },
         i18n: {},
         data: {},
-        currentUrl: ""
+        currentUrl: "",
+        planMode: false
       }
     },
     beforeMount() {
@@ -125,10 +124,24 @@ export default {
 </script>
 
 <template>
-  <section class="vue__blocks-editor mb-5">
-    <AddBlockButton
-      :i18n="i18n"
-      @add="onAdd" />
+  <section
+    class="vue__blocks-editor mb-5"
+    :class="{'vue__blocks-editor--plan-mode': planMode }">
+    <div class="row my-4">
+      <div class="offset-lg-4 col-lg-8 col-xxl-6">
+        <a
+          class="btn btn-lg btn-dark me-2 mb-2"
+          @click="onAdd">
+          {{ i18n.blocksEditor.actions.addBlock }}</a>
+        <a
+          class="btn btn-sm float-md-end"
+          :class="{'btn-success': planMode, 'btn-light': !planMode}"
+          @click="planMode = !planMode"
+          v-show="data.blocks.length > 2">
+          <i class="fas fa-list"></i>
+          {{ i18n.blocksEditor.planMode.button }}</a>
+      </div>
+    </div>
     <Blocks
       v-model="data.blocks"
       :i18n="i18n"
@@ -137,10 +150,16 @@ export default {
       @copy="onCopy"
       @duplicate="onDuplicate"
       @reorder="onReorder" />
-    <AddBlockButton
-      v-show="data.blocks.length > 5"
-      :i18n="i18n"
-      @add="onAdd" />
+    <div
+      class="row my-4"
+      v-show="data.blocks.length > 4">
+      <div class="offset-lg-4 col-lg-8 col-xxl-6">
+        <a
+          class="btn btn-lg btn-dark"
+          @click="onClick">
+          {{ i18n.blocksEditor.actions.addBlock }}</a>
+      </div>
+    </div>
     <OffCanvas
       :i18n="i18n"
       :url="url.current"

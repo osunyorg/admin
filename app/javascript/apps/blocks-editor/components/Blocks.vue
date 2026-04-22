@@ -62,18 +62,28 @@ export default {
       <div
         v-for="block in value"
         class="content-editor__elements__element">
-        <div class="row">
+        <div
+          class="row"
+          :class="{'draft': !block.published}">
           <div class="col-lg-4 text-lg-end pt-2">
             <label class="form-label">{{ block.template.name }}</label>
           </div>
           <div class="col-lg-8 col-xxl-6">
-            <article class="card card-body px-3 px-sm-5 border-bottom border-light">
+            <div class="card card-body border-bottom py-1 border-light plan-mode--true">
+              <p class="handle small mb-0 text-truncate">
+                <i class="fas fa-sort me-2"></i>
+                {{ block.text }}
+              </p>
+            </div>
+            <div class="card card-body border-bottom border-light px-3 px-sm-5 plan-mode--false">
               <div class="text-end mb-2">
                 <span class="content-editor__elements__element--hover">
                   <span class="content-editor__elements__handle">
                     <span class="handle">
                       <i class="fas fa-sort"></i>
-                      <span class="small"> Déplacer</span>
+                      <span class="small">
+                         {{ i18n.blocksEditor.actions.move }}
+                      </span>
                     </span>
                   </span>
                   <a
@@ -104,7 +114,7 @@ export default {
                 <div v-html="block.snippet"></div>
               </div>
               <span v-html="block.a11y.status"></span>
-            </article>
+            </div>
           </div>
         </div>
       </div>

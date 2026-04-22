@@ -17,11 +17,9 @@ en:
       offcanvas:
         close: Close block edition
         title: Block edition
-      structure:
-        description: In "Organize outline" mode, you only see a small preview of each block. This is the ideal mode for organizing long documents.
-      tabs:
-        structure: Organize outline
-        write: Write content
+      planMode:
+        button: Plan mode
+        description: In "Plan mode" mode, you only see a small preview of each block. This is the ideal mode for organizing long documents.
     changes:
       cancel: Cancel
       save: Save changes

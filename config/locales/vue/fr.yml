@@ -17,11 +17,9 @@ fr:
       offcanvas:
         close: Fermer l'édition du bloc
         title: Édition du bloc
-      structure:
+      planMode:
+        button: Organiser le plan
         description: Dans le mode “Organiser le plan”, vous ne voyez qu'un petit aperçu de chaque bloc. C'est le mode idéal pour ranger les documents longs.
-      tabs:
-        structure: Organiser le plan
-        write: Écrire le contenu
     changes:
       cancel: Annuler
       save: Enregistrer les modifications
