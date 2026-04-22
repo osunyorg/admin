@@ -56,11 +56,11 @@ export default {
 <template>
   <section>
     <draggable
-      :list="value.blocks"
+      :list="value"
       @change="onReorder"
       handle=".handle">
       <div
-        v-for="block in value.blocks"
+        v-for="block in value"
         class="content-editor__elements__element">
         <div class="row">
           <div class="col-lg-4 text-lg-end pt-2">

@@ -1,3 +1,7 @@
+json.about do
+  json.type params[:about_type]
+  json.id params[:about_id]
+end
 json.blocks @blocks do |block|
   json.id block.id
   json.template do 

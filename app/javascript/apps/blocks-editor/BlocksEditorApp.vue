@@ -17,11 +17,11 @@ export default {
           i18n: "",
           new: "",
           reorder: "",
-          blocks: "",
+          data: "",
           current: ""
         },
         i18n: {},
-        blocks: {},
+        data: {},
         currentUrl: ""
       }
     },
@@ -31,7 +31,7 @@ export default {
       // Récupération des paramètres de l'application
       const dataset = document.getElementById('blocks-editor-app').dataset;
       this.url.i18n = dataset.i18nUrl;
-      this.url.blocks = dataset.blocksUrl;
+      this.url.data = dataset.dataUrl;
       this.url.new = dataset.newUrl;
       this.url.reorder = dataset.reorderUrl;
       // Chargement
@@ -57,7 +57,7 @@ export default {
         xhr.send();
       },
       refresh() {
-        this.loadJson(this.url.blocks, "blocks");
+        this.loadJson(this.url.data, "data");
       },
       onAdd() {
         this.url.current = this.url.new;
@@ -83,6 +83,14 @@ export default {
       onClose() {
         this.closeOffCanvas();
       },
+      openOffCanvas() {
+        document.body.classList.add("modal-open");
+      },
+      closeOffCanvas() {
+        this.url.current = "";
+        this.refresh();
+        document.body.classList.remove("modal-open");
+      },
       onReorder() {
         let ids = [];
         for (let index in this.blocks.blocks) {
@@ -99,14 +107,6 @@ export default {
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
         xhr.send(JSON.stringify({ ids: ids }));
-      },
-      openOffCanvas() {
-        document.body.classList.add("modal-open");
-      },
-      closeOffCanvas() {
-        this.url.current = "";
-        this.refresh();
-        document.body.classList.remove("modal-open");
       },
       loadAndRefresh(url, method) {
         let xhr = new XMLHttpRequest();
@@ -130,7 +130,7 @@ export default {
       :i18n="i18n"
       @add="onAdd" />
     <Blocks
-      v-model="blocks"
+      v-model="data.blocks"
       :i18n="i18n"
       @edit="onEdit"
       @delete="onDelete"
@@ -138,7 +138,7 @@ export default {
       @duplicate="onDuplicate"
       @reorder="onReorder" />
     <AddBlockButton
-      v-show="blocks.blocks.length > 5"
+      v-show="data.blocks.length > 5"
       :i18n="i18n"
       @add="onAdd" />
     <OffCanvas

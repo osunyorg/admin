@@ -1,4 +1,4 @@
-class Admin::Communication::Blocks::EditorController < Admin::Communication::ApplicationController
+class Admin::Communication::Blocks::GroupController < Admin::Communication::ApplicationController
   before_action :load_about
   layout false
 
@@ -8,10 +8,7 @@ class Admin::Communication::Blocks::EditorController < Admin::Communication::App
 
   def reset
     @about.reset_blocks
-    redirect_back(
-        fallback_location: [:admin, @about],
-        notice: t('admin.successfully_updated_html', model: @about.to_s)
-      )
+    head :ok
   end
 
   protected

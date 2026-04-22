@@ -217,9 +217,9 @@ namespace :communication do
   resources :blocks, controller: 'blocks', except: [:index] do
     collection do
       post :reorder
-      scope "/editor/:about_type/:about_id", as: :editor do
+      scope "/groups/:about_type/:about_id", as: :group do
         post :reset
-        root to: "blocks/editor#index", defaults: { format: :json }
+        root to: "blocks/group#index", defaults: { format: :json }
       end
     end
     member do
