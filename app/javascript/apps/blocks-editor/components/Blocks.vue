@@ -61,7 +61,7 @@ export default {
       handle=".handle">
       <div
         v-for="block in value"
-        class="content-editor__elements__element">
+        class="vue__blocks-editor__elements__element">
         <div
           class="row"
           :class="{'draft': !block.published}">
@@ -77,8 +77,8 @@ export default {
             </div>
             <div class="card card-body border-bottom border-light px-3 px-sm-5 plan-mode--false">
               <div class="text-end mb-2">
-                <span class="content-editor__elements__element--hover">
-                  <span class="content-editor__elements__handle">
+                <span class="vue__blocks-editor__elements__element--hover">
+                  <span class="vue__blocks-editor__elements__handle">
                     <span class="handle">
                       <i class="fas fa-sort"></i>
                       <span class="small">
@@ -109,8 +109,8 @@ export default {
                   {{ i18n.blocksEditor.actions.edit }}</a>
               </div>
               <div
-                class="content-editor__elements__preview"
-                :class="`content-editor__elements__preview--${block.template.kind}`">
+                class="vue__blocks-editor__elements__preview"
+                :class="`vue__blocks-editor__elements__preview--${block.template.kind}`">
                 <div v-html="block.snippet"></div>
               </div>
               <span v-html="block.a11y.status"></span>

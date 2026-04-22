@@ -17,7 +17,7 @@ export default {
 <template>
   <section>
     <div
-      class="offcanvas offcanvas-end content-editor__offcanvas"
+      class="offcanvas offcanvas-end vue__blocks-editor__offcanvas"
       :class="{'show': url}"
       tabindex="-1">
       <div class="offcanvas-header border-bottom">
@@ -29,7 +29,7 @@ export default {
           aria-label="{{ i18n.blocksEditor.offcanvas.close }}"></button>
       </div>
       <iframe
-        class="content-editor__offcanvas__iframe"
+        class="vue__blocks-editor__offcanvas__iframe"
         name="editor"
         :src="url"></iframe>
     </div>

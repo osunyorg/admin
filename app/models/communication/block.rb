@@ -33,7 +33,7 @@
 class Communication::Block < ApplicationRecord
   acts_as_paranoid
 
-  BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
+  BLOCK_COPY_COOKIE = 'osuny-blocks-editor-copy'
   CATEGORIES = {
     basic: [:title, :chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
