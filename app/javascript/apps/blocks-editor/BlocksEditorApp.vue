@@ -33,8 +33,6 @@ export default {
       this.url.data = dataset.dataUrl;
       this.url.new = dataset.newUrl;
       this.url.reorder = dataset.reorderUrl;
-      // Events
-      // .modal('hide')
       // Chargement
       this.loadJson(this.url.i18n, "i18n");
       this.refresh();
@@ -49,7 +47,7 @@ export default {
     methods: {
       loadJson(url, target) {
         let xhr = new XMLHttpRequest();
-        xhr.open("GET", url, false);
+        xhr.open("GET", url);
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
             this[target] = JSON.parse(xhr.responseText);
@@ -102,11 +100,9 @@ export default {
       },
       onSave() {
         this.closeOffCanvas();
-        this.refresh();
       },
       onClose() {
         this.closeOffCanvas();
-        this.refresh();
       },
       openOffCanvas() {
         document.body.classList.add("modal-open");
