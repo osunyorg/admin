@@ -21,6 +21,10 @@ class Server::UniversitiesController < Server::ApplicationController
     @websites =  @university.websites
                             .ordered(current_language)
                             .page(params[:page])
+    @admin_users = @university.users
+                              .admin
+                              .ordered(current_language)
+                              .page(params[:users_page])
     breadcrumb
   end
 
