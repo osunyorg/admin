@@ -255,7 +255,7 @@ en:
       country:
         hint: 'This field is used for geolocation. Ex: France'
         label: Country
-      geolocation_failed: 
+      geolocation_failed:
         hint: 'If automatic geolocation does not work, you can enter the latitude and longitude directly below, in decimal coordinates.'
         label: 'No geolocation?'
       latitude:
@@ -569,6 +569,9 @@ en:
   today: Today
   true: Yes
   user:
+    admins:
+      one: Administrator
+      other: Administrators
     favorites:
       add: Add to favorites
       none:

@@ -255,7 +255,7 @@ fr:
       country:
         hint: ''
         label: Pays
-      geolocation_failed: 
+      geolocation_failed:
         hint: 'Si la géolocalisation automatique ne fonctionne pas, vous pouvez saisir la latitude et la longitude directement ci-dessous, en coordonnées décimales.'
         label: 'Pas de géolocalisation ?'
       latitude:
@@ -569,6 +569,9 @@ fr:
   today: Aujourd'hui
   true: Oui
   user:
+    admins:
+      one: Administrateur·rice
+      other: Administrateur·rice·s
     favorites:
       add: Ajouter aux favoris
       none:

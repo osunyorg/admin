@@ -54,3 +54,31 @@
 <h2 class="mt-5 h3"><%= Communication::Website.model_name.human(count: @websites.total_count) %></h2>
 <%= render 'server/websites/list', websites: @websites %>
 <%= paginate @websites %>
+
+<h2 class="mt-5 h3"><%= t('user.admins', count: @admin_users.total_count) %></h2>
+<div class="table-responsive">
+  <table class="<%= table_classes %> table-hover">
+    <thead>
+      <tr>
+        <th><%= User.model_name.human %></th>
+        <th><%= User.human_attribute_name(:email) %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @admin_users.each do |user| %>
+        <tr id="user-<%= user.id %>">
+          <td><%= user %></td>
+          <td><%= mail_to user.email, target: :_blank, class: "action" %></td>
+          <td>
+            <%= link_to t('server_admin.websites.admin'),
+                        admin_user_url(user, host: @university.url, lang: @university.default_language),
+                        target: :_blank,
+                        class: button_classes %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= paginate @admin_users, param_name: :users_page %>
