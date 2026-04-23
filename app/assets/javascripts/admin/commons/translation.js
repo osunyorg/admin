@@ -1,11 +1,15 @@
 /* global $ */
 window.osuny.translation = {
-    init: function () {
+    init: function (scope) {
         'use strict';
-        this.component = document.querySelector('#translation-button');
-        this.start = document.querySelector('.js-translation-start');
-        this.loader = document.querySelector('.js-translation-loader');
-        this.done = document.querySelector('.js-translation-done');
+        // scope defaults to document but can be narrowed when multiple
+        // translation widgets coexist in the page (e.g. an about form +
+        // a block edit offcanvas), since '#translation-button' is not unique.
+        this.scope = scope || document;
+        this.component = this.scope.querySelector('#translation-button');
+        this.start = this.scope.querySelector('.js-translation-start');
+        this.loader = this.scope.querySelector('.js-translation-loader');
+        this.done = this.scope.querySelector('.js-translation-done');
         this.csrfToken = document.querySelector('[name="csrf-token"]').content;
         this.url = this.component.dataset.translationUrl;
         this.start.addEventListener('click', this.run.bind(this));
@@ -23,13 +27,24 @@ window.osuny.translation = {
         'use strict';
         var i,
             field;
-        this.translatableFields = document.querySelectorAll('[data-translatable]');
+        this.translatableFields = this.scope.querySelectorAll('[data-translatable]');
         for (i = 0; i < this.translatableFields.length; i += 1) {
             field = this.translatableFields[i];
             this.translate(field);
         }
         this.loader.hidden = true;
-        this.done.hidden = false;
+        let notyf = new Notyf();
+        notyf.open({
+            type: 'success',
+            position: {
+                x: 'left',
+                y: 'bottom'
+            },
+            message: this.done.innerHTML,
+            duration: 9000,
+            ripple: true,
+            dismissible: true
+        });
     },
 
     translate: function (field) {
@@ -70,6 +85,12 @@ window.osuny.translation = {
         'use strict';
         if (this.isSummernote(field)) {
             $(field).summernote('code', text);
+            // summernote.code() updates the editor + underlying textarea HTML
+            // but does NOT fire the onChange callback, so any v-model wired
+            // to the textarea stays out of sync. Set the value and dispatch
+            // an input event so Vue's v-model picks up the translation.
+            field.value = text;
+            field.dispatchEvent(new Event('input'));
         } else {
             field.value = text;
             // https://stackoverflow.com/questions/56348513/how-to-change-v-model-value-from-js

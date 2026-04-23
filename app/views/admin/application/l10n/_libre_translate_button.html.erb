@@ -1,18 +1,21 @@
-<% if l10n.libre_translatable? %>
+<%
+if l10n.libre_translatable?
+  path = admin_translate_path(
+           source: l10n.original.language.iso_code,
+           target: l10n.language.iso_code
+         )
+%>
   <span id="translation-button"
-        data-translation-url="<%= admin_translate_path target: l10n.language.iso_code %>">
+        data-translation-url="<%= path %>">
     <a class="btn btn-light js-translation-start">
       <%= t('admin.translation.button') %>
     </a>
-    <span class="spinner-border spinner-border-sm js-translation-loader"
-          role="status"
-          hidden>
+    <span class="spinner-border spinner-border-sm js-translation-loader" role="status" hidden>
       <span class="sr-only">
         <%= t('admin.translation.running') %>
       </span>
     </span>
-    <span class="js-translation-done small"
-          hidden>
+    <span class="js-translation-done" hidden>
       <%= t('admin.translation.done') %>
     </span>
   </span>
