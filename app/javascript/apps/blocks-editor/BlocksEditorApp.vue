@@ -1,11 +1,11 @@
 <script>
 import Blocks from './components/Blocks.vue';
-import OffCanvas from './components/OffCanvas.vue';
+import Editor from './components/Editor.vue';
 
 export default {
     components: {
       Blocks,
-      OffCanvas
+      Editor
     },
     data () {
       return {
@@ -37,13 +37,6 @@ export default {
       this.loadJson(this.url.i18n, "i18n");
       this.refresh();
     },
-    async mounted() {
-      window.osuny.blocks = {
-        editor: {
-          onSave: this.onSave.bind(this)
-        }
-      }
-    },
     methods: {
       loadJson(url, target) {
         let xhr = new XMLHttpRequest();
@@ -51,6 +44,9 @@ export default {
         xhr.onreadystatechange = function() {
           if (xhr.readyState == 4 && xhr.status == 200) {
             this[target] = JSON.parse(xhr.responseText);
+            if (this.i18n.blocksEditor && this.data.blocks) {
+              this.loading = false;
+            }
           }
         }.bind(this);
         xhr.send();
@@ -60,11 +56,11 @@ export default {
       },
       onAdd() {
         this.url.current = this.url.new;
-        this.openOffCanvas();
+        this.openEditor();
       },
       onEdit(block) {
         this.url.current = block.url.edit;
-        this.openOffCanvas();
+        this.openEditor();
       },
       onDuplicate(block) {
         this.loadAndRefresh(block.url.duplicate, "POST");
@@ -86,7 +82,7 @@ export default {
         notyf.open({
             type: 'success',
             position: {
-                x: 'center',
+                x: 'left',
                 y: 'bottom'
             },
             message: this.i18n.blocksEditor.confirm.copy,
@@ -99,15 +95,15 @@ export default {
         this.loadAndRefresh(block.url.delete, "DELETE");
       },
       onSave() {
-        this.closeOffCanvas();
+        this.closeEditor();
       },
       onClose() {
-        this.closeOffCanvas();
+        this.closeEditor();
       },
-      openOffCanvas() {
+      openEditor() {
         document.body.classList.add("modal-open");
       },
-      closeOffCanvas() {
+      closeEditor() {
         this.url.current = "";
         this.refresh();
         document.body.classList.remove("modal-open");
@@ -147,6 +143,7 @@ export default {
 
 <template>
   <section
+    v-if="!loading"
     class="vue__blocks-editor mb-5"
     :class="{'vue__blocks-editor--plan-mode': planMode }">
     <div class="row my-4">
@@ -182,9 +179,10 @@ export default {
           {{ i18n.blocksEditor.actions.addBlock }}</a>
       </div>
     </div>
-    <OffCanvas
+    <Editor
       :i18n="i18n"
       :url="url.current"
+      @save="onSave"
       @close="onClose"
       />
   </section>
