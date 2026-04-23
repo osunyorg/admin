@@ -7,6 +7,10 @@
     position: fixed
     transition: bottom 0.5s ease-in-out
     z-index: 9999
+    > *
+        margin-right: 10px
+        &:last-child
+            margin-right: 0
     @include media-breakpoint-down(sm)
         left: 0
         right: 0

@@ -12,12 +12,7 @@ keysPropValue = mapping_keys.map { |key| [key, User.human_attribute_name(key)] }
 
 <div  id="sso-mapping-app"
       data-fields="<%= fieldsPropValue.to_json %>"
-      data-keys="<%= keysPropValue.to_json %>"
-      v-cloak>
-  <div class="spinner-border text-primary" role="status">
-    <span class="sr-only"><%= t('loading') %></span>
-  </div>
-
+      data-keys="<%= keysPropValue.to_json %>">
   <div class="app-form">
     <draggable :list="fields" handle=".dragHandle" >
       <div v-for="(field, index) in fields">
