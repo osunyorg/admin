@@ -1,0 +1,14 @@
+<% content_for :title, 'Potentiel de contribution' %>
+
+<p><%= @universities.count %> instances</p>
+<div class="row">
+  <% @universities.each do |university| %>
+    <div class="col-lg-3">
+      <article class="card mb-4">
+        <div class="card-body">
+          <%= link_to university, [:server, university], class: 'stretched-link' %>
+        </div>
+      </article>
+    </div>
+  <% end %>
+</div>
