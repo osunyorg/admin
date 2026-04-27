@@ -66,7 +66,7 @@ class Communication::Website::GitFile < ApplicationRecord
       # If it's just initialized, it needs to be saved
       save unless persisted?
       # Anyway, we need to generate content (from WithContent)
-      generate_content
+      generate_content if valid?
     elsif persisted?
       # There, but not syncable, so bye bye
       mark_for_destruction!
