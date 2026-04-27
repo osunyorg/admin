@@ -15,8 +15,7 @@ module Communication::Website::WithHosting
   end
 
   def should_use_hugo_aliases?
-    # TODO: remove hosted_with_deuxfleurs?
-    hosted_with_undefined? || hosted_with_nginx? || hosted_with_deuxfleurs?
+    hosted_with_undefined? || hosted_with_nginx? || (hosted_with_deuxfleurs? && !deuxfleurs_use_dxfl_redirects?)
   end
 
 end

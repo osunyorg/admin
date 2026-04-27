@@ -130,6 +130,7 @@ en:
         destination_websites: Websites to broadcast content to
         deuxfleurs_hosting: Deuxfleurs hosting
         deuxfleurs_identifier: Deuxfleurs identifier
+        deuxfleurs_use_dxfl_redirects: Use Deuxfleurs redirects
         feature_agenda: Agenda
         feature_alerts: Alerts
         feature_alumni: Alumni
