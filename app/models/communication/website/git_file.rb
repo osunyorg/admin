@@ -37,6 +37,9 @@ class Communication::Website::GitFile < ApplicationRecord
   belongs_to :website, class_name: 'Communication::Website'
   belongs_to :about, polymorphic: true, optional: true
 
+  # One Git File per about and website, unless about is nil (destroy orphans)
+  validates :about_id, uniqueness: { scope: [:about_type, :website_id] }, allow_nil: true
+
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
   scope :desynchronized_until, -> (time) { desynchronized.where('desynchronized_at <= ?', time) }
@@ -63,7 +66,7 @@ class Communication::Website::GitFile < ApplicationRecord
       # If it's just initialized, it needs to be saved
       save unless persisted?
       # Anyway, we need to generate content (from WithContent)
-      generate_content
+      generate_content if valid?
     elsif persisted?
       # There, but not syncable, so bye bye
       mark_for_destruction!
