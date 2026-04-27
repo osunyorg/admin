@@ -22,7 +22,7 @@ permalinks.find_each do |permalink|
                                               : permalink.path
 %>
 [[redirects]]
-from = "<%= permalink.path %>"
+from = "<%= from_path %>"
 to = "<%= permalink.target %>"
 
 <% end %>
