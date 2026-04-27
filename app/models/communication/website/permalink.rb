@@ -126,7 +126,7 @@ class Communication::Website::Permalink < ApplicationRecord
     transaction do
       save!
       destroy_conflicting_aliases!
-      current_permalink&.update!(is_current: false)
+      destroy_or_make_alias_for_current_permalink(current_permalink)
     end
   end
 
@@ -197,5 +197,17 @@ class Communication::Website::Permalink < ApplicationRecord
   def regenerate_website_hosting_config
     return unless website.persisted?
     website.regenerate_hosting_config!
+  end
+
+  def destroy_or_make_alias_for_current_permalink(current_permalink)
+    return unless current_permalink.present?
+    existing_permalink_with_same_path = website.permalinks.where(path: current_permalink.path)
+                                                          .where.not(id: current_permalink.id)
+                                                          .first
+    if existing_permalink_with_same_path
+      current_permalink.destroy
+    else
+      current_permalink.update(is_current: false)
+    end
   end
 end

@@ -99,4 +99,105 @@ class Communication::Website::PermalinkTest < ActiveSupport::TestCase
       permalink2.save
     end
   end
+
+  def test_agenda_permalink
+    event = website_with_github.events.create!(
+      university_id: default_university.id,
+      from_day: Date.current,
+      to_day: Date.current + 1.day,
+      localizations_attributes: [
+        { language_id: french.id, title: "Festival", slug: "festival", published: true, published_at: Time.current }
+      ]
+    )
+    event_l10n = event.localizations.first
+
+    permalink = event_l10n.new_permalink_in_website(website_with_github)
+    permalink.path = permalink.computed_path
+    assert_difference "Communication::Website::Permalink.count" do
+      permalink.save
+    end
+    # /agenda/2026/festival/
+    assert_equal "/agenda/#{Date.current.year}/festival/", permalink.path
+
+    first_child_event = website_with_github.events.create!(
+      university_id: default_university.id,
+      parent_id: event.id,
+      from_day: Date.current,
+      localizations_attributes: [
+        { language_id: french.id, title: "Concert", slug: "concert", published: true, published_at: Time.current }
+      ]
+    )
+    first_child_event_l10n = first_child_event.localizations.first
+
+    first_child_event_permalink = first_child_event_l10n.new_permalink_in_website(website_with_github)
+    first_child_event_permalink.path = first_child_event_permalink.computed_path
+    assert_difference "Communication::Website::Permalink.count" do
+      first_child_event_permalink.save
+    end
+    # /agenda/2026/festival/concert/
+    assert_equal "/agenda/#{Date.current.year}/festival/concert/", first_child_event_permalink.path
+
+    second_child_event = website_with_github.events.create!(
+      university_id: default_university.id,
+      parent_id: event.id,
+      from_day: Date.current,
+      localizations_attributes: [
+        { language_id: french.id, title: "Conférence", slug: "conference", published: true, published_at: Time.current }
+      ]
+    )
+    second_child_event_l10n = second_child_event.localizations.first
+
+    second_child_event_permalink = second_child_event_l10n.new_permalink_in_website(website_with_github)
+    second_child_event_permalink.path = second_child_event_permalink.computed_path
+    assert_difference "Communication::Website::Permalink.count" do
+      second_child_event_permalink.save
+    end
+    # /agenda/2026/festival/conference/
+    assert_equal "/agenda/#{Date.current.year}/festival/conference/", second_child_event_permalink.path
+
+    assert_equal 2, event.days.reload.count
+    assert_difference "Communication::Website::Permalink.count", 2 do
+      event.days.first.manage_permalink_in_website(website_with_github)
+      event.days.second.manage_permalink_in_website(website_with_github)
+    end
+    # /agenda/2026/festival/ (days take the same path as the event)
+    assert_equal  "/agenda/#{Date.current.year}/festival/",
+                  event.days.first.current_permalink_in_website(website_with_github).path
+
+    # As the days have the same path, we can't turn the previous permalink into an alias. So +1-1=0, no delta
+    assert_no_difference "Communication::Website::Permalink.count" do
+      event_l10n.update!(title: "Festival modifié", slug: "festival-modifie")
+    end
+    event_l10n_permalink = event_l10n.current_permalink_in_website(website_with_github)
+    # /agenda/2026/festival-modifie/
+    assert_equal "/agenda/#{Date.current.year}/festival-modifie/", event_l10n_permalink.path
+
+    # Create a new permalink, and update the old one to an alias
+    assert_difference "Communication::Website::Permalink.count" do
+      first_child_event_l10n.reload.manage_permalink_in_website(website_with_github)
+    end
+    # /agenda/2026/festival-modifie/concert/
+    assert_equal  "/agenda/#{Date.current.year}/festival-modifie/concert/",
+                  first_child_event_l10n.current_permalink_in_website(website_with_github).path
+
+    # Create a new permalink, and update the old one to an alias
+    assert_difference "Communication::Website::Permalink.count" do
+      second_child_event_l10n.reload.manage_permalink_in_website(website_with_github)
+    end
+    # /agenda/2026/festival-modifie/conference/
+    assert_equal  "/agenda/#{Date.current.year}/festival-modifie/conference/",
+                  second_child_event_l10n.current_permalink_in_website(website_with_github).path
+
+    event.reload
+
+    # As the second day has the same path, we can't create an alias yet. No delta again
+    assert_no_difference "Communication::Website::Permalink.count" do
+      event.days.first.manage_permalink_in_website(website_with_github)
+    end
+
+    # No more objects use the previous path, we can create an alias for this day
+    assert_difference "Communication::Website::Permalink.count" do
+      event.days.second.reload.manage_permalink_in_website(website_with_github)
+    end
+  end
 end
