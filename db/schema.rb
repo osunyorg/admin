@@ -1138,6 +1138,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_27_105801) do
     t.uuid "communication_website_id", null: false
     t.datetime "created_at", null: false
     t.datetime "deleted_at"
+    t.jsonb "design_options"
     t.boolean "full_width", default: false
     t.integer "kind"
     t.string "migration_identifier"
@@ -2287,6 +2288,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_27_105801) do
     t.uuid "created_by_id"
     t.datetime "deleted_at"
     t.string "email"
+    t.boolean "is_laboratory", default: false
+    t.boolean "is_location", default: false
+    t.boolean "is_school", default: false
     t.integer "kind", default: 10
     t.float "latitude"
     t.float "longitude"
