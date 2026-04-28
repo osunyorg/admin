@@ -14,7 +14,6 @@ for = ["**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.gif", "**/*.webp"]
 [headers.values]
 Cache-Control = "max-age=31536000, no-transform, public"
 
-<% if @website.deuxfleurs_use_dxfl_redirects? %>
 <%
 permalinks = @website.permalinks.not_current.not_root.ordered
 permalinks.find_each do |permalink|
@@ -25,5 +24,4 @@ permalinks.find_each do |permalink|
 from = "<%= from_path %>"
 to = "<%= permalink.target %>"
 
-<% end %>
 <% end %>
