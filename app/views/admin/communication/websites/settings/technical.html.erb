@@ -48,13 +48,6 @@
                       hint: hosting_hint,
                       include_blank: false,
                       input_html: { data: { 'conditional': true }, id: 'hosting' } %>
-          <% if current_user.server_admin? %>
-            <div  class="d-none"
-                  data-conditional-source="hosting"
-                  data-conditional-value="deuxfleurs">
-              <%= f.input :deuxfleurs_use_dxfl_redirects %>
-            </div>
-          <% end %>
           <div  class="d-none"
                 data-conditional-source="hosting"
                 data-conditional-value="apache">
