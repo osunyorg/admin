@@ -1,4 +1,4 @@
-<%= @website.apache_config_custom_content %>
+<%= raw @website.apache_config_custom_content %>
 
 <% @website.permalinks.not_current.ordered.find_each do |permalink| %>
 RedirectPermanent <%= permalink.path %> <%= permalink.target %>
