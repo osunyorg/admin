@@ -41,7 +41,6 @@ module Communication::Website::Agenda::Event::WithKinds
     end
   end
 
-
   def kind_simple?
     children.none? && !multiple_time_slots?
   end

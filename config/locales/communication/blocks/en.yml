@@ -324,7 +324,6 @@ en:
               large:
                 description: Each exhibition is presented in majesty, across the full width available, with a large image.
                 label: Large
-                more: Show more
               list:
                 description: A list of exhibitions with days, small images, all the same width.
                 label: List
@@ -351,7 +350,16 @@ en:
                 title:
                   label: Title
                   placeholder: Enter title here
+              option_icons:
+                label: Show images as small icons
               remove_element: Remove feature
+            layouts:
+              grid:
+                description: Features are presented as a grid, from left to right and top to bottom, with constant size cropped images.
+                label: Grid
+              list:
+                description: A list of features with days, small images, all the same width.
+                label: List
           files:
             description: A list of downloadable files, mentioning their file size.
             edit:
@@ -595,6 +603,8 @@ en:
                 label: Show pages images
               option_main_summary:
                 label: Show main page summary
+              option_subtitle:
+                label: Show pages subtitle
               option_summary:
                 label: Show pages short descriptions
               page_id:

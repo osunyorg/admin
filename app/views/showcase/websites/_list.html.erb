@@ -1,28 +1,29 @@
-<% @websites_paginated = @websites.page(params[:page]).per(100) %>
 <h2>
   Tous les sites
   <span class="float-end">
-    <%= @websites.count %>
-    <%= Communication::Website.model_name.human(count: @websites.count).downcase %>
+    <%= @websites.total_count %>
+    <%= Communication::Website.model_name.human(count: @websites.total_count).downcase %>
   </span>
 </h2>
 <section class="websites--list">
-<% @websites_paginated.each do |website| %>
-  <article>
-    <div class="row position-relative ">
-      <div class="col-lg-4">
-        <%= link_to website.original_localization.to_s,
-                    showcase_website_path(website),
-                    class: 'stretched-link' %>
-        <%= kamifusen_tag website.screenshot,
-                          width: 500,
-                          class: 'floating-thumb' if website.screenshot.attached? %>
+<% @websites.each do |website| %>
+  <% cache website do %>
+    <article>
+      <div class="row position-relative ">
+        <div class="col-lg-4">
+          <%= link_to website.original_localization.to_s,
+                      showcase_website_path(website),
+                      class: 'stretched-link' %>
+          <%= kamifusen_tag website.screenshot,
+                            width: 500,
+                            class: 'floating-thumb' if website.screenshot.attached? %>
+        </div>
+        <div class="col-lg-3 text-end text-lg-start"><%= website.university %></div>
+        <div class="col-lg-4 text-end text-lg-start"><%= website.showcase_tags.to_sentence %></div>
+        <div class="col-lg-1 text-end"><%= website.in_production_at.year %></div>
       </div>
-      <div class="col-lg-3 text-end text-lg-start"><%= website.university %></div>
-      <div class="col-lg-4 text-end text-lg-start"><%= website.showcase_tags.to_sentence %></div>
-      <div class="col-lg-1 text-end"><%= website.in_production_at.year %></div>
-    </div>
-  </article>
+    </article>
+  <% end %>
 <% end %>
 </section>
-<%= paginate @websites_paginated, theme: 'bootstrap-5' %>
+<%= paginate @websites, theme: 'bootstrap-5' %>
