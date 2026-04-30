@@ -29,6 +29,18 @@ ErrorDocument 404 /error.html
 
 <%= raw @website.apache_config_custom_content %>
 
-<% @website.permalinks.not_current.not_root.ordered.find_each do |permalink| %>
-RedirectMatch permanent "^<%= Regexp.escape(permalink.path) %>$" "<%= permalink.target %>"
+<%
+@website.permalinks.not_current.not_root.ordered.find_each do |permalink|
+  old_path = permalink.path
+  if old_path.ends_with?('/')
+    # Handle redirection with or without the trailing slash
+    old_path = old_path.remove_suffix('/')
+    old_path = Regexp.escape(old_path)
+    old_path += "(\/?)"
+  else
+    # Keep the path as it is
+    old_path = Regexp.escape(old_path)
+  end
+%>
+RedirectMatch permanent "^<%= old_path %>$" "<%= permalink.target %>"
 <% end %>
