@@ -29,6 +29,6 @@ ErrorDocument 404 /error.html
 
 <%= raw @website.apache_config_custom_content %>
 
-<% @website.permalinks.not_current.ordered.find_each do |permalink| %>
+<% @website.permalinks.not_current.not_root.ordered.find_each do |permalink| %>
 RedirectMatch permanent "^<%= Regexp.escape(permalink.path) %>$" "<%= permalink.target %>"
 <% end %>
