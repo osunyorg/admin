@@ -237,11 +237,11 @@ fr:
           title: Organisations
         person:
           description: Personne physique liée à une université, une composante, un laboratoire, etc.
-          description_non_university: Personne physique, pas nécessairement liée à un compte utilisateur d'Osuny
+          description_non_university: Personne physique, pas nécessairement liée à un compte utilisateur d'osuny
           title: Personnes
         user:
-          description: Personne utilisant Osuny, dotée d'un compte authentifié
-          description_non_university: Personne utilisant Osuny, dotée d'un compte authentifié
+          description: Personne utilisant osuny, dotée d'un compte authentifié
+          description_non_university: Personne utilisant osuny, dotée d'un compte authentifié
           title: Utilisateur·rices
       source: Dictionnaire de l'Académie Française
       text_html: Inventaire, recensement de données et d’informations, selon un ordre méthodique qui permet de les retrouver facilement ; le support matériel de cet inventaire.

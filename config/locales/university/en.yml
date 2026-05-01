@@ -237,11 +237,11 @@ en:
           title: Organizations
         person:
           description: Physical person linked to a university, component, laboratory, etc.
-          description_non_university: Person, not necessarily linked to an Osuny user account
+          description_non_university: Person, not necessarily linked to an osuny user account
           title: People
         user:
-          description: Person using Osuny, with an authenticated account
-          description_non_university: Person using Osuny, with an authenticated account
+          description: Person using osuny, with an authenticated account
+          description_non_university: Person using osuny, with an authenticated account
           title: Users
       source: Dictionnaire de l'Académie Française
       text_html: Inventory, listing of data and information in a methodical order so that they can be easily found; the material support for this inventory.

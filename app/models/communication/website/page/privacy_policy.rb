@@ -26,9 +26,9 @@ class Communication::Website::Page::PrivacyPolicy < Communication::Website::Page
     {
       template_kind: :chapter,
       data: {
-        text: '<p>Le site s\'appuie sur le système de gestion de contenu <a href="https://www.osuny.org" target="_blank" rel="noreferrer">Osuny</a>, qui n\'utilise aucun cookie. Des cookies peuvent toutefois être utilisés par des services tiers. Parmi ces services, certaines plateformes vidéos peuvent imposer des cookies malgré la demande explicite de ne pas le faire. D\'autres services, notamment intégrés avec des iframes, ont leur propre politique de cookies.</p>'
+        text: '<p>Le site s\'appuie sur le système de gestion de contenu <a href="https://www.osuny.org" target="_blank" rel="noreferrer">osuny</a>, qui n\'utilise aucun cookie. Des cookies peuvent toutefois être utilisés par des services tiers. Parmi ces services, certaines plateformes vidéos peuvent imposer des cookies malgré la demande explicite de ne pas le faire. D\'autres services, notamment intégrés avec des iframes, ont leur propre politique de cookies.</p>'
       }
     },
   ]
-  
+
 end

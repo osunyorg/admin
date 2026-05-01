@@ -11,7 +11,7 @@ fr:
         full_name: Nom complet
         last_name: Nom
         publications: Publications importées de HAL
-        researcher: Chercheur·e dans Osuny
+        researcher: Chercheur·e dans osuny
       research/journal/localization:
         issn: ISSN
         language: Langue
@@ -123,7 +123,7 @@ fr:
       publication:
         source:
           hal: HAL
-          osuny: Osuny
+          osuny: osuny
   research:
     citations:
       apa:

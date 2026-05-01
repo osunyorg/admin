@@ -1,8 +1,8 @@
-<%= content_for :title, t('.title', title: current_extranet.present? ? current_extranet.to_s_in(current_language) : 'Osuny') %>
+<%= content_for :title, t('.title', title: current_extranet.present? ? current_extranet.to_s_in(current_language) : 'osuny') %>
 <% user_email = resource.email.presence || params[:email] %>
 
 <h1 class="h4 d-none">
-  <%= t('.title', title: current_extranet.present? ? current_extranet.to_s_in(current_language) : 'Osuny') %>
+  <%= t('.title', title: current_extranet.present? ? current_extranet.to_s_in(current_language) : 'osuny') %>
 </h1>
 <div class="row">
   <div class="col-lg-6 mb-5">
