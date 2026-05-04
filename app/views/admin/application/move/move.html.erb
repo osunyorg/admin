@@ -1,8 +1,8 @@
 <%
 # communication_website_post
-class_path = @object.model_name.singular_route_key
+resource_route_key = @object.model_name.singular_route_key
 # do_move_admin_communication_website_post_path
-do_move_path = "do_move_admin_#{class_path}_path"
+do_move_path_helper = "do_move_admin_#{resource_route_key}_path"
 %>
 
 <% content_for :title, t('admin.move.cta') %>
@@ -11,6 +11,10 @@ do_move_path = "do_move_admin_#{class_path}_path"
 
 <ul>
   <% @target_websites.ordered(current_language).each do |website| %>
-      <li><%= link_to website.to_s_in(current_language), send(do_move_path, @object, new_website_id: website.id), method: :post %></li>
-  <% end %>   
+      <li>
+        <%= link_to website.to_s_in(current_language),
+                    public_send(do_move_path_helper, @object, new_website_id: website.id),
+                    method: :post %>
+      </li>
+  <% end %>
 </ul>

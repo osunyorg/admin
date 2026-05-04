@@ -1,17 +1,17 @@
 <%
   # => :move_batch_admin_communication_website_posts_path
-  path_method = :"move_batch_admin_communication_website_#{@resource_name}_path"
+  current_path_helper = "move_batch_admin_communication_website_#{@resource_plural_name}_path"
   # => move_batch_admin_communication_website_posts_path
-  current_path = public_send("move_batch_admin_communication_website_#{@resource_name}_path", website_id: @website.id)
+  current_path = public_send(current_path_helper)
   # => do_move_batch_admin_communication_website_posts_path
-  post_path = public_send("do_move_batch_admin_communication_website_#{@resource_name}_path", website_id: @website.id)
+  form_action_path = public_send("do_move_batch_admin_communication_website_#{@resource_plural_name}_path")
 %>
 
 <% content_for :title, t('admin.move.cta') %>
 
 <div class="d-flex justify-content-between mb-5">
   <%= render 'admin/application/components/lifecycle/pills',
-              path_method: path_method %>
+              path_method: current_path_helper %>
   <%= render 'filters',
               current_path: current_path,
               website: @website %>
@@ -19,9 +19,9 @@
 <%= render 'admin/application/components/lifecycle/label' %>
 
 <div data-batch-selectable class="mb-5">
-  <%= form_tag post_path do %>
-    <%= render "admin/communication/websites/#{@resource_name}/list",
-                "#{@resource_name}": @objects,
+  <%= form_tag form_action_path do %>
+    <%= render "admin/communication/websites/#{@resource_plural_name}/list",
+                "#{@resource_plural_name}": @objects,
                 selectable: (params.dig(:lifecycle) != 'trash') %>
     <%= paginate @objects %>
     <div>
@@ -31,7 +31,7 @@
             <%= t('batch.movable.title') %>
           </div>
           <div class="col-auto me-3">
-            <select name="target" class="form-select">
+            <select name="new_website_id" class="form-select">
               <%= options_for_select(@target_websites.map { |w| [w.to_s_in(current_language), w.id] }) %>
             </select>
           </div>
