@@ -34,6 +34,7 @@ class Communication::Website::Post < ApplicationRecord
   include GeneratesGitFiles
   include Lifecyclable
   include Localizable
+  include MovableToWebsite
   include Sanitizable
   include Searchable
   include WithMenuItemTarget
@@ -125,4 +126,5 @@ class Communication::Website::Post < ApplicationRecord
   def list_blocks_template_kind
     :posts
   end
+  
 end
