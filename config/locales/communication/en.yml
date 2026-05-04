@@ -112,7 +112,7 @@ en:
         apache_config_custom_content: Custom Apache configuration (.htaccess file)
         appearance: Appearance
         archive_content: Archive content?
-        autoupdate_theme: Automatically update Osuny theme
+        autoupdate_theme: Automatically update osuny theme
         config_apache_config: Apache specific configuration (.htaccess)
         config_default_content_security_policy: Security policies (CORS)
         config_default_languages: Language definitions
@@ -684,8 +684,8 @@ en:
           description_non_university: Secure exchange areas dedicated to authenticated users
           title: Extranets
         media:
-          description: Library of all the photos used in this Osuny instance
-          description_non_university: Library of all the photos used in this Osuny instance
+          description: Library of all the photos used in this osuny instance
+          description_non_university: Library of all the photos used in this osuny instance
           title: Media library
         website:
           description: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities

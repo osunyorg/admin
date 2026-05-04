@@ -71,7 +71,7 @@ en:
         language: Favourite language
         last_name: Last name
         mobile_phone: Mobile phone
-        optin_newsletter: I would like to receive updates by email regarding developments on Osuny (invitation to community assemblies once a month, summary once a quarter).
+        optin_newsletter: I would like to receive updates by email regarding developments on osuny (invitation to community assemblies once a month, summary once a quarter).
         person: Person
         picture: Profile picture
         picture_url: Profile picture Url
@@ -142,7 +142,7 @@ en:
       other: "%{count} elements"
       zero: No element
     footer:
-      signature: Osuny, a public interest digital common
+      signature: osuny, a public interest digital common
     i18n:
       in: in %{lang}
       switch_to: switch to %{choices}
@@ -167,7 +167,7 @@ en:
     password_hint: Leave blank if you do not wish to change the password.
     pending_tasks:
       tasks: Background tasks pending
-      text_html: "Osuny guides you towards digital sufficiency.<br><br>The mutualized background execution of most tasks on the Osuny platform helps reducing the carbon footprint of digital technology, by pre-computing what can be.<br><br>This can cause a delay before your changes are visible on your websites."
+      text_html: "osuny guides you towards digital sufficiency.<br><br>The mutualized background execution of most tasks on the osuny platform helps reducing the carbon footprint of digital technology, by pre-computing what can be.<br><br>This can cause a delay before your changes are visible on your websites."
       what_is_it: What is it?
     search:
       buttons:
@@ -203,7 +203,7 @@ en:
       optin_not_set:
         button_allow_optin: Allow sending
         button_disallow_optin: Deny sending
-        text_html: "You have not defined your choice about communications by email yet.<br>If you allow it, you will receive the invitations to the Osuny community assemblies once per month, and summaries about Osuny updates once per quarter max. You will always be able to change this setting in your profile."
+        text_html: "You have not defined your choice about communications by email yet.<br>If you allow it, you will receive the invitations to the osuny community assemblies once per month, and summaries about osuny updates once per quarter max. You will always be able to change this setting in your profile."
         title: Communication settings
         updated: Your settings have been updated.
       successfully_unlocked_html: "<i>%{model}</i> was successfully unlocked."
@@ -474,7 +474,7 @@ en:
         without_user_html: You can sign up with your email address <b>%{email}</b> by <a href="%{sign_up_url}">clicking here</a>.
     notifications:
       gdpr_deletion_incoming:
-        subject: "Osuny - your account will soon be deleted"
+        subject: "osuny - your account will soon be deleted"
         body_1_html: "Hello,<br><br>It's been a while since you logged in to your account.<br><br>To comply with our legal obligations, your account will be deleted in <b>%{delay} days</b> if you do not log back in by then."
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to access your account."
       import:
@@ -488,7 +488,7 @@ en:
       low_sms_credits:
         body_1_html: "Warning, your SMS credits are low: %{credits} credits remaining!"
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to refull."
-        subject: "Osuny - Low SMS Credits (%{credits})"
+        subject: "osuny - Low SMS Credits (%{credits})"
       new_registration:
         body_1_html: "A new user (%{username}) just registered."
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to see the account."

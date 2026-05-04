@@ -52,7 +52,7 @@ RSpec.configure do |config|
     'osuny/v1/openapi.json' => {
       openapi: '3.0.1',
       info: {
-        title: 'Osuny',
+        title: 'osuny',
         version: 'v1'
       },
       servers: [

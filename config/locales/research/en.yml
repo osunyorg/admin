@@ -11,7 +11,7 @@ en:
         full_name: Full name
         last_name: Last name
         publications: Publications imported from HAL
-        researcher: Researchers in Osuny
+        researcher: Researchers in osuny
       research/journal/localization:
         issn: ISSN
         language: Language
@@ -123,7 +123,7 @@ en:
       publication:
         source:
           hal: HAL
-          osuny: Osuny
+          osuny: osuny
   research:
     citations:
       apa:
