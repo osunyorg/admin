@@ -48,7 +48,7 @@ module User::WithRoles
       elsif admin?
         Communication::Website.where(university_id: university_id)
       elsif website_manager?
-        Communication::Website.where(id: managed_websites_ids)
+        Communication::Website.where(id: websites_to_manage_ids)
       else
         Communication::Website.none
       end
