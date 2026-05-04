@@ -1,11 +1,11 @@
 <% content_for :title, "#{Communication::Website::Post.model_name.human(count: 2)}" %>
 
 <% content_for :title_right do %>
-  <% if can?(:move, Communication::Website::Post) %>
+  <% if can?(:move, Communication::Website::Post) && current_user.managed_websites.count > 1 %>
     <%= button_advanced do %>
         <%= link_to t('admin.move.cta'),
                     move_batch_admin_communication_website_posts_path(website_id: @website.id),
-                    class: button_classes %>  
+                    class: button_classes %>
     <% end %>
   <% end %>
   <%= link_to t('communication.website.posts.new_curation'),
