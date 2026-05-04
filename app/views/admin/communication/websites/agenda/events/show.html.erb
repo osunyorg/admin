@@ -3,6 +3,7 @@
 <% content_for :title_right do %>
   <%= button_advanced do %>
     <%= destroy_link @event %>
+    <%= move_link @event %>
     <%= duplicate_link @event %>
   <% end %>
   <% if @event.is_template %>

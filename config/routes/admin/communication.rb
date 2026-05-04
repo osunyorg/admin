@@ -82,18 +82,18 @@ namespace :communication do
     resources :posts, controller: 'websites/posts' do
       collection do
         resources :curations, as: :post_curations, controller: 'websites/posts/curations', only: [:new, :create]
-        post :publish_batch
         get :move_batch
         post :do_move_batch
+        post :publish_batch
       end
       member do
+        get :move
         get :preview
         get :static
+        post :do_move
         post :duplicate
         post :publish
         post :restore
-        get :move
-        post :do_move
       end
     end
     namespace :agenda do
@@ -108,9 +108,15 @@ namespace :communication do
             get :static
           end
         end
+        collection do
+          get :move_batch
+          post :do_move_batch
+        end
         member do
+          get :move
           get :preview
           get :static
+          post :do_move
           post :duplicate
           post :publish
           post :save_time_slots

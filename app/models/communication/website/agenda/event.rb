@@ -49,6 +49,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include GeneratesGitFiles
   include Lifecyclable
   include Localizable
+  include MovableToWebsite
   include Sanitizable
   include Searchable
   include Templatable

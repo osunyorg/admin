@@ -4,7 +4,7 @@
   <% if can?(:move, Communication::Website::Post) && current_user.managed_websites.count > 1 %>
     <%= button_advanced do %>
         <%= link_to t('admin.move.cta'),
-                    move_batch_admin_communication_website_posts_path(website_id: @website.id),
+                    move_batch_admin_communication_website_posts_path,
                     class: button_classes %>
     <% end %>
   <% end %>
