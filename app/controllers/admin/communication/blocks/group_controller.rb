@@ -1,13 +1,9 @@
-class Admin::Communication::ContentsController < Admin::Communication::ApplicationController
+class Admin::Communication::Blocks::GroupController < Admin::Communication::ApplicationController
   before_action :load_about
   layout false
 
-  # /admin/fr/communication/contents/Communication::Website::Post::Localization/eb500b67-f14e-4085-b449-8a9e68150656/write
-  def write
-  end
-
-  # /admin/fr/communication/contents/Communication::Website::Post::Localization/eb500b67-f14e-4085-b449-8a9e68150656/structure
-  def structure
+  def index
+    @blocks = @about.blocks.ordered
   end
 
   def reset

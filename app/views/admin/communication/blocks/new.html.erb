@@ -25,17 +25,20 @@
         %>
         <div class="col-xxl-2 col-lg-3 col-sm-4 col-6 d-flex mb-5">
           <div class="flex-fill position-relative js-validate-form-click">
-            <%= image_tag "communication/blocks/templates/#{kind}.jpg", alt: '', class:"card-img-top block__image" %>
+            <%= image_tag "communication/blocks/templates/#{kind}.jpg",
+                          alt: '',
+                          class:"card-img-top block__image" %>
             <div>
                 <h3 class="h4 block__title"><%= @block.template_name %></h4>
                 <p class="mb-0 block__description">
                   <%= t "admin.communication.blocks.templates.#{kind}.description" %>
                 </p>
-                <%= simple_form_for [:admin, @block], remote: true, html: { class: 'mt-auto new-block-form', id: "new-block-#{kind}" } do |f| %>
+                <%= simple_form_for [:admin, @block], html: { class: 'mt-auto' } do |f| %>
                   <%= f.input :about_type, as: :hidden %>
                   <%= f.input :about_id, as: :hidden %>
                   <%= f.input :template_kind, as: :hidden %>
-                  <%= f.submit t('admin.communication.blocks.choose.button'), class: button_classes('stretched-link') %>
+                  <%= f.submit  t('admin.communication.blocks.choose.button'),
+                                class: button_classes('stretched-link') %>
                 <% end %>
             </div>
           </div>
@@ -44,14 +47,3 @@
     </div>
   </section>
 <% end %>
-
-<script nonce="<%= request.content_security_policy_nonce %>">
-  window.addEventListener('load', function(){
-    setTimeout(function() {
-      $(".new-block-form").on("ajax:success", function(e, data, status, xhr) {
-        parent.window.osuny.contentEditor.offcanvas.onBlockSave(null, null);
-        window.location.replace(xhr.getResponseHeader('Location'));
-      });
-    }, 100);
-  });
-</script>

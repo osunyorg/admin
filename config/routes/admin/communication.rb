@@ -209,17 +209,16 @@ namespace :communication do
       end
     end
   end
-  scope "/contents/:about_type/:about_id", as: :contents, controller: 'contents' do
-    get :write
-    get :structure
-    post :reset
-  end
   resources :blocks, controller: 'blocks', except: [:index] do
     collection do
       post :reorder
+      scope '/groups/:about_type/:about_id', as: :group do
+        post 'reset' => 'blocks/group#reset'
+        root to: 'blocks/group#index', defaults: { format: :json }
+      end
     end
     member do
-      get :copy
+      post :copy
       post :duplicate
       post :paste
     end

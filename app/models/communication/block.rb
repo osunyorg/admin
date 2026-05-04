@@ -33,7 +33,7 @@
 class Communication::Block < ApplicationRecord
   acts_as_paranoid
 
-  BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
+  BLOCK_COPY_COOKIE = 'osuny-blocks-editor-copy'
   CATEGORIES = {
     basic: [:title, :chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
@@ -104,8 +104,10 @@ class Communication::Block < ApplicationRecord
   end
 
   def paste(about)
+    position = about.blocks.ordered.last&.position || 0
     block = self.dup
     block.about = about
+    block.position = position + 1
     block.save
     block
   end

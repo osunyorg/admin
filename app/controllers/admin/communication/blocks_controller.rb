@@ -8,8 +8,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   def reorder
     ids = params[:ids] || []
     about = nil
-    ids.values.each_with_index do |object, index|
-      block = current_university.communication_blocks.find(object[:id])
+    ids.each_with_index do |id, index|
+      block = current_university.communication_blocks.find(id)
       block.update_column(:position, index + 1)
       about ||= block.about # Always the same about, doesn't matter
     end
@@ -79,18 +79,16 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def duplicate
-    # On réattribue à @block pour bénéficier du calcul dans about_path
     @block = @block.duplicate
-    redirect_to about_path + "#block-#{@block.id}",
-                notice: t('admin.successfully_duplicated_html', model: @block.to_s)
+    head :ok
   end
 
   def copy
-    return unless request.xhr?
     cookies.signed[Communication::Block::BLOCK_COPY_COOKIE] = {
       value: params[:id],
       path: '/admin'
     }
+    head :ok
   end
 
   def paste
@@ -108,10 +106,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
   end
 
   def destroy
-    path = about_path
     @block.destroy
-    redirect_to path,
-                notice: t('admin.successfully_destroyed_html', model: @block.to_s)
+    head :ok
   end
 
   protected
