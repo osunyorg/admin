@@ -42,6 +42,18 @@ module User::WithRoles
       end.compact
     end
 
+    def managed_websites
+      if server_admin?
+        Communication::Website.all
+      elsif admin?
+        Communication::Website.where(university_id: university_id)
+      elsif website_manager?
+        Communication::Website.where(id: websites_to_manage_ids)
+      else
+        Communication::Website.none
+      end
+    end
+
     def can_display_global_menu?
       User.roles_with_access_to_global_menu.include?(role)
     end

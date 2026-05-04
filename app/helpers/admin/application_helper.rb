@@ -49,6 +49,13 @@ module Admin::ApplicationHelper
             class: html_classes
   end
 
+  def move_link(object, html_classes: button_classes_danger)
+    return unless can?(:move, object) && current_user.managed_websites.count > 1
+    link_to t('admin.move.cta'),
+            [:move, :admin, object],
+            class: html_classes
+  end
+
   def preview_link
     raw "<button  class=\"btn btn-light mb-2\"
                   type=\"button\"

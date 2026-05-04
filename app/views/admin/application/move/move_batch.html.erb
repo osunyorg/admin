@@ -1,0 +1,45 @@
+<%
+  # => :move_batch_admin_communication_website_posts_path
+  current_path_helper = "move_batch_admin_communication_website_#{@resource_plural_name}_path"
+  # => move_batch_admin_communication_website_posts_path
+  current_path = public_send(current_path_helper)
+  # => do_move_batch_admin_communication_website_posts_path
+  form_action_path = public_send("do_move_batch_admin_communication_website_#{@resource_plural_name}_path")
+%>
+
+<% content_for :title, t('admin.move.cta') %>
+
+<div class="d-flex justify-content-between mb-5">
+  <%= render 'admin/application/components/lifecycle/pills',
+              path_method: current_path_helper %>
+  <%= render 'filters',
+              current_path: current_path,
+              website: @website %>
+</div>
+<%= render 'admin/application/components/lifecycle/label' %>
+
+<div data-batch-selectable class="mb-5">
+  <%= form_tag form_action_path do %>
+    <%= render "admin/communication/websites/#{@resource_plural_name}/list",
+                "#{@resource_plural_name}": @objects,
+                selectable: (params.dig(:lifecycle) != 'trash') %>
+    <%= paginate @objects %>
+    <div>
+      <div data-batch-selectable-role="actions-container">
+        <div class="d-flex align-items-center">
+          <div class="col-auto me-3">
+            <%= t('batch.movable.title') %>
+          </div>
+          <div class="col-auto me-3">
+            <select name="new_website_id" class="form-select">
+              <%= options_for_select(@target_websites.map { |w| [w.to_s_in(current_language), w.id] }) %>
+            </select>
+          </div>
+          <div class="col-auto me-3">
+            <%= submit_tag t("move"), class: "btn btn-primary", data: { confirm: t('batch.movable.confirm') } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
