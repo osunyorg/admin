@@ -33,6 +33,7 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include Communication::Website::Agenda::WithStatus
   include GeneratesGitFiles
   include Localizable
+  include MovableToWebsite
   include WithOpenApi
   include WithUniversity
 

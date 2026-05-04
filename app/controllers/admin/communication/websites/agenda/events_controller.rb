@@ -21,6 +21,18 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     breadcrumb
   end
 
+  def move_batch
+    # Override to only display parent events
+    @filtered = @website.public_send(resource_plural_name)
+                        .filter_by(params[:filters], current_language)
+    @objects = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                        .root
+                        .ordered(current_language)
+                        .page(params[:page])
+    breadcrumb
+    add_breadcrumb t('admin.move.cta')
+  end
+
   def publish
     @l10n.publish!
     redirect_back fallback_location: admin_communication_website_agenda_event_path(@event),

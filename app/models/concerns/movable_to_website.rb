@@ -48,8 +48,12 @@ module MovableToWebsite
     return if current_permalink.nil? # Unpublished objects, we skip.
     target_path = l10n.new_permalink_in_website(target_website).computed_path
     return if target_path.blank? || target_website.url.blank? # Website has no host or permalink cannot be computed, we also skip.
+
     target_url = "#{target_website.url}#{target_path}"
-    current_permalink.update(is_current: false, about: nil, target_url: target_url)
+    current_permalink.set_as_alias_or_destroy!
+    unless current_permalink.destroyed?
+      current_permalink.update(about: nil, target_url: target_url)
+    end
   end
 
   def after_moved_to_website(source_website, target_website)

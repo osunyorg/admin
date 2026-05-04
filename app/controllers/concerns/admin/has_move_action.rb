@@ -10,7 +10,6 @@ module Admin::HasMoveAction
   def move
     breadcrumb
     add_breadcrumb t('admin.move.cta')
-    render 'admin/application/move/move'
   end
 
   def do_move
@@ -26,10 +25,8 @@ module Admin::HasMoveAction
     @objects = @filtered.at_lifecycle(params[:lifecycle], current_language)
                         .ordered(current_language)
                         .page(params[:page])
-    @resource_plural_name = resource_plural_name
     breadcrumb
     add_breadcrumb t('admin.move.cta')
-    render 'admin/application/move/move_batch'
   end
 
   def do_move_batch

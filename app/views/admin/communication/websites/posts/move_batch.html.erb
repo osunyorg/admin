@@ -1,0 +1,38 @@
+<% content_for :title, t('admin.move.cta') %>
+
+<div class="d-flex justify-content-between mb-5">
+  <%= render 'admin/application/components/lifecycle/pills',
+              path_method: :move_batch_admin_communication_website_posts_path %>
+  <%= render 'filters',
+              current_path: move_batch_admin_communication_website_posts_path,
+              website: @website %>
+</div>
+<%= render 'admin/application/components/lifecycle/label' %>
+
+<div data-batch-selectable class="mb-5">
+  <%= form_tag do_move_batch_admin_communication_website_posts_path do %>
+    <%= render "admin/communication/websites/posts/list",
+                posts: @objects,
+                selectable: (params.dig(:lifecycle) != 'trash') %>
+    <%= paginate @objects %>
+    <div>
+      <div data-batch-selectable-role="actions-container">
+        <div class="d-flex align-items-center">
+          <div class="col-auto me-3">
+            <%= t('batch.movable.title') %>
+          </div>
+          <div class="col-auto me-3">
+            <%= select_tag  :new_website_id,
+                            options_for_select(@target_websites.map { |website| [website.to_s_in(current_language), website.id] }),
+                            class: "form-select" %>
+          </div>
+          <div class="col-auto me-3">
+            <%= submit_tag  t("move"),
+                            class: "btn btn-primary",
+                            data: { confirm: t('batch.movable.confirm') } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
