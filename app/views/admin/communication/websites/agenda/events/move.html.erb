@@ -1,8 +1,7 @@
 <% content_for :title, t('admin.move.cta') %>
 
+<p><%= t('admin.communication.website.agenda.event.move_message') %></p>
 <p><%= t('admin.move.description') %></p>
-
-<p>TODO : event will be moved with its time slots & child events</p>
 
 <ul>
   <% @target_websites.ordered(current_language).each do |website| %>
