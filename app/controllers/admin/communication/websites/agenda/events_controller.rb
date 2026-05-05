@@ -25,8 +25,8 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
     # Override to only display parent events
     @filtered = @website.public_send(resource_plural_name)
                         .filter_by(params[:filters], current_language)
-    @objects = @filtered.at_lifecycle(params[:lifecycle], current_language)
                         .root
+    @objects = @filtered.at_lifecycle(params[:lifecycle], current_language)
                         .ordered(current_language)
                         .page(params[:page])
     breadcrumb
