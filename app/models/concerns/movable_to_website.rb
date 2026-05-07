@@ -50,10 +50,7 @@ module MovableToWebsite
     return if target_path.blank? || target_website.url.blank? # Website has no host or permalink cannot be computed, we also skip.
 
     target_url = "#{target_website.url}#{target_path}"
-    current_permalink.set_as_alias_or_destroy!
-    unless current_permalink.destroyed?
-      current_permalink.update(about: nil, target_url: target_url)
-    end
+    current_permalink.turn_to_external!(target_url)
   end
 
   def after_moved_to_website(source_website, target_website)

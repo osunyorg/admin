@@ -131,11 +131,16 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   def set_as_alias_or_destroy!
-    if website.permalinks.where(path: path).where.not(id: id).any?
+    if already_exists?
       destroy
     else
       update(is_current: false)
     end
+  end
+
+  def turn_to_external!(target_url)
+    set_as_alias_or_destroy!
+    update(about: nil, target_url: target_url) unless destroyed?
   end
 
   def special_page(website)
@@ -176,6 +181,10 @@ class Communication::Website::Permalink < ApplicationRecord
       # Path changed
       current_permalink.path != computed_path
     )
+  end
+
+  def already_exists?
+    website.permalinks.where(path: path).where.not(id: id).any?
   end
 
   def destroy_conflicting_aliases!
