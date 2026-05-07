@@ -1,0 +1,14 @@
+<% content_for :title, t('admin.move.cta') %>
+
+<p><%= t('admin.communication.website.agenda.event.move_message') %></p>
+<p><%= t('admin.move.description') %></p>
+
+<ul>
+  <% @target_websites.ordered(current_language).each do |website| %>
+      <li>
+        <%= link_to website.to_s_in(current_language),
+                    [:do_move, :admin, @object, new_website_id: website.id],
+                    method: :post %>
+      </li>
+  <% end %>
+</ul>

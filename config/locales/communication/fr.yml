@@ -491,6 +491,7 @@ fr:
             create_child: Créer un événement enfant
             localizations:
               draft: Brouillon
+            move_message: Les créneaux horaires ainsi que les événements enfants seront également déplacés vers le site cible.
           events:
             formatted_time_zone: "Fuseau horaire : %{time_zone}"
             none: Pas encore d'événements

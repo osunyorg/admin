@@ -489,6 +489,7 @@ en:
             create_child: Create a child event
             localizations:
               draft: Draft
+            move_message: The time slots and the child events will also be moved to the target website.
           events:
             formatted_time_zone: "Time zone: %{time_zone}"
             none: No event yet
