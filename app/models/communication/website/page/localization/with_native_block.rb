@@ -8,6 +8,8 @@ module Communication::Website::Page::Localization::WithNativeBlock
 
   def create_native_block
     return if native_block_exists?
+    # FIXME
+    return if page.native_block_template_kind != :projects
     Communication::Block.create(
       about: self,
       native: true,
