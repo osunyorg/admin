@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_28_093136) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_09_065639) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -159,6 +159,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_093136) do
     t.string "html_class"
     t.jsonb "metadata"
     t.string "migration_identifier"
+    t.boolean "native", default: false
     t.integer "position", null: false
     t.boolean "published", default: true
     t.integer "template_kind", default: 0, null: false
@@ -877,7 +878,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_28_093136) do
     t.datetime "desynchronized_at"
     t.string "previous_path"
     t.string "previous_sha"
-    t.uuid "university_id", null: false
+    t.uuid "university_id"
     t.datetime "updated_at", null: false
     t.uuid "website_id", null: false
     t.index ["about_type", "about_id"], name: "index_communication_website_github_files_on_about"
