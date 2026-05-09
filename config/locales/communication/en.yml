@@ -570,9 +570,9 @@ en:
                 other: This page is a special page, which natively presents the %{count} published job offers.
             communication_portfolio:
               native:
-                zero: This page is a special page that natively displays the site's projects.
-                one: This page is a special page that natively displays the site's projects. Currently, there is 1 published project.
-                other: This page is a special page that natively displays %{count} published projects.
+                zero: This page is a special page that natively displays the site's projects. You can create a new project with the button below.
+                one: This page is a special page that natively displays the site's projects. Currently, there is 1 published project. You can create a new project with the button below.
+                other: This page is a special page that natively displays %{count} published projects. You can create a new project with the button below.
             communication_post:
               native:
                 zero: This page is a special page that natively displays the site's news.

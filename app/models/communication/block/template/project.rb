@@ -30,7 +30,7 @@ class Communication::Block::Template::Project < Communication::Block::Template::
   end
 
   def selected_projects
-    @selected_projects ||= send "selected_projects_#{mode}"
+    @selected_projects ||= block.native ? selected_projects_native : send("selected_projects_#{mode}")
   end
 
   def allowed_for_about?
@@ -69,11 +69,15 @@ class Communication::Block::Template::Project < Communication::Block::Template::
     block.about&.website
                 .projects
                 .published_now_in(block.language)
+                .ordered(block.language)
+  end
+
+  def selected_projects_native
+    base_projects
   end
 
   def selected_projects_all
-    base_projects.ordered(block.language)
-                 .limit(projects_quantity)
+    base_projects.limit(projects_quantity)
   end
 
   def selected_projects_category
@@ -81,7 +85,6 @@ class Communication::Block::Template::Project < Communication::Block::Template::
     category_ids = [category.id, category.descendants.map(&:id)].flatten
 
     base_projects.for_category(category_ids)
-                 .ordered(block.language)
                  .limit(projects_quantity)
   end
 

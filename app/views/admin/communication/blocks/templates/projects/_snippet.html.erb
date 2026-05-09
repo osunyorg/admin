@@ -1,4 +1,11 @@
-<% block.template.selected_projects.each do |project|
+<%
+pagination_identifier = "pagination_#{block.id.underscore}"
+projects = block.template
+                .selected_projects
+                .page(params[pagination_identifier])
+%>
+<section>
+<% projects.each do |project|
     l10n = project.localization_for(block.language)
     next if l10n.nil?
     %>
@@ -15,3 +22,5 @@
     </div>
   </article>
 <% end %>
+  <%= paginate projects, param_name: pagination_identifier %>
+</section>
