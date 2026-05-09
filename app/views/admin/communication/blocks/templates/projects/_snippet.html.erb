@@ -2,7 +2,7 @@
     l10n = project.localization_for(block.language)
     next if l10n.nil?
     %>
-  <div class="row mb-3">
+  <article class="row mb-3 position-relative">
     <div class="col-2">
       <% if l10n.featured_image.attached? %>
         <%= kamifusen_tag l10n.featured_image, width: 200, class: 'img-fluid mb-2' %>
@@ -11,7 +11,7 @@
       <% end %>
     </div>
     <div class="col-10">
-      <p><%= l10n.to_s %></p>
+      <p><%= link_to l10n.to_s, [:admin, project], class: 'stretched-link' %></p>
     </div>
-  </div>
+  </article>
 <% end %>

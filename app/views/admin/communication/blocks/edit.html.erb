@@ -23,7 +23,7 @@
                 label: t('publication.published'),
                 wrapper: :custom_boolean_switch %>
     <%= f.input :title,
-                input_html: { data: { translatable: true } } %>
+                input_html: { data: { translatable: true } } unless @block.native %>
 
     <%= render "admin/communication/blocks/templates/#{@block.template_kind}/edit", f: f, block: @block %>
 

@@ -128,6 +128,10 @@ class Communication::Website::Page < ApplicationRecord
     nil
   end
 
+  def native_block_template_kind
+    :pages
+  end
+
   def hugo_body_class
     'pages__section'
   end
