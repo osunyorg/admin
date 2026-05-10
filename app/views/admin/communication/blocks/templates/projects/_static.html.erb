@@ -14,10 +14,10 @@
 end
 %>
       layout: <%= block.template.layout %>
-<%= block_options_static block %>
+<%= block_options_static block -%>
 <%= render 'admin/application/static/hugo/collection',
             key: :projects,
             depth: 3,
             collection: block.template.selected_projects,
-            language: block.language %>
+            language: block.language -%>
       quantity: <%= block.template.selected_projects.to_a.count %>
