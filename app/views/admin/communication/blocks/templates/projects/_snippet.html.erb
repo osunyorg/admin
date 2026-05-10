@@ -4,6 +4,13 @@ projects = block.template
                 .selected_projects
                 .page(params[pagination_identifier])
 %>
+<% if block.native %>
+  <div class="mb-4">
+    <p><%= t( 'admin.communication.website.pages.special_pages.communication_portfolio.native',
+              count: projects.total_count) %></p>
+    <%= create_link Communication::Website::Portfolio::Project %>
+  </div>
+<% end %>
 <section>
 <% projects.each do |project|
     l10n = project.localization_for(block.language)
