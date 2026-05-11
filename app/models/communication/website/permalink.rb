@@ -37,8 +37,6 @@ class Communication::Website::Permalink < ApplicationRecord
   belongs_to :website, class_name: "Communication::Website"
   belongs_to :about, polymorphic: true, optional: true
 
-
-
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
   # so we have an attribute accessor to force-sync the about, for example in the Permalinkable concern
   after_commit :touch_about, on: [:create, :destroy]

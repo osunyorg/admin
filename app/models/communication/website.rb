@@ -215,6 +215,7 @@ class Communication::Website < ApplicationRecord
       reconnect_dependency dependency, new_university_id
     end
     git_files.update_all(university_id: new_university_id)
+    permalinks.update_all(university_id: new_university_id)
   end
 
   def domain
