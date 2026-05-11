@@ -44,9 +44,9 @@ module MovableToWebsite
   end
 
   def set_external_redirect(l10n, source_website, target_website)
+    return unless l10n.should_sync_to?(target_website) # Make sure that l10n can be synced
     current_permalink = l10n.current_permalink_in_website(source_website)
     return if current_permalink.nil? # Unpublished objects, we skip.
-    return unless l10n.should_sync_to?(target_website) # Make sure that l10n can be synced
     target_path = l10n.new_permalink_in_website(target_website).computed_path
     return if target_path.blank? || target_website.url.blank? # Website has no host or permalink cannot be computed, we also skip.
 
