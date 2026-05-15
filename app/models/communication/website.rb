@@ -214,6 +214,8 @@ class Communication::Website < ApplicationRecord
     recursive_dependencies_following_direct.each do |dependency|
       reconnect_dependency dependency, new_university_id
     end
+    git_files.update_all(university_id: new_university_id)
+    permalinks.update_all(university_id: new_university_id)
   end
 
   def domain
