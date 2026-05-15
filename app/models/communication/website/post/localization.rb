@@ -60,7 +60,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include WithHourlyPublication
+  include PublishableByTheHour
   include WithOpenApi
   include WithUniversity
 
