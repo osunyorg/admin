@@ -14,7 +14,7 @@ unless is_federated
     next if hugo.file.blank?
     flat_categories << hugo.slug
   end
-  # Prepare categories for Osuny
+  # Prepare categories for osuny
   free_categories_content = about_categories.ordered_by_position_in_tree.map { |category|
     next if category.in_taxonomy?
     render 'admin/application/categories/static/category',

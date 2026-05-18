@@ -1,6 +1,6 @@
 # Orphans
 # Les orphelins sont les fichiers du référentiel Git, dans content,
-# qui ne proviennent pas d'un git_file d'Osuny.
+# qui ne proviennent pas d'un git_file d'osuny.
 # Cela peut être normal, mais cela peut être aussi des fichiers mal supprimés.
 #
 # Layouts

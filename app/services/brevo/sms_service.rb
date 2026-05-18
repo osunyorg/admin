@@ -1,6 +1,6 @@
 module Brevo
   class SmsService
-    DEFAULT_SENDER_NAME = 'Osuny'.freeze
+    DEFAULT_SENDER_NAME = 'osuny'.freeze
     SMS_CREDITS_LIMIT = 500
 
     def self.send_mfa_code(user, code)

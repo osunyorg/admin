@@ -48,8 +48,6 @@
                       hint: hosting_hint,
                       include_blank: false,
                       input_html: { data: { 'conditional': true }, id: 'hosting' } %>
-          <%= f.input :autoupdate_theme %>
-          <%= f.input :plausible_url %>
           <div  class="d-none"
                 data-conditional-source="hosting"
                 data-conditional-value="apache">
@@ -59,6 +57,8 @@
                           class: "font-monospace fs-5 pt-1"
                         } %>
           </div>
+          <%= f.input :autoupdate_theme %>
+          <%= f.input :plausible_url %>
         <% end %>
         <%= osuny_panel t('communication.website.showcase') do %>
           <%= f.input :in_showcase, hint: link_to(t('admin.communication.website.see_showcase'), "https://#{ENV['OSUNY_SHOWCASE']}", target: :_blank) %>

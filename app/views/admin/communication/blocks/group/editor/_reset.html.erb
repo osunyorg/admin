@@ -1,5 +1,5 @@
 <%
-unless about.original?
+if about.resetable_blocks?
   original_language = about.original.language.to_s.downcase
   %>
   <div class="vue__blocks-editor row mt-5 mb-4">

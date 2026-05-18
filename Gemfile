@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "4.0.2"
+ruby "4.0.3"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
 gem "active_hashcash"
@@ -101,7 +101,7 @@ end
 group :development do
   gem "annotaterb"
   gem "better_errors"
-  # gem "binding_of_caller" # Waiting for Ruby 4 support
+  gem "binding_of_caller"
   gem "listen", "~> 3.3"
   gem "rack-mini-profiler", "~> 3.0"
   gem "spring"

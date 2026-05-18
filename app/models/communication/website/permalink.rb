@@ -37,8 +37,6 @@ class Communication::Website::Permalink < ApplicationRecord
   belongs_to :website, class_name: "Communication::Website"
   belongs_to :about, polymorphic: true, optional: true
 
-
-
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
   # so we have an attribute accessor to force-sync the about, for example in the Permalinkable concern
   after_commit :touch_about, on: [:create, :destroy]
@@ -121,13 +119,26 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def save_if_needed
     current_permalink = about.current_permalink_in_website(website)
-    return unless should_save?(current_permalink)
+    return unless should_overwrite?(current_permalink)
     self.path = computed_path
     transaction do
       save!
       destroy_conflicting_aliases!
-      current_permalink&.update!(is_current: false)
+      current_permalink.set_as_alias_or_destroy! if current_permalink
     end
+  end
+
+  def set_as_alias_or_destroy!
+    if already_exists?
+      destroy
+    else
+      update(is_current: false)
+    end
+  end
+
+  def turn_to_external!(target_url)
+    set_as_alias_or_destroy!
+    update(about: nil, target_url: target_url) unless destroyed?
   end
 
   def special_page(website)
@@ -159,7 +170,7 @@ class Communication::Website::Permalink < ApplicationRecord
 
   protected
 
-  def should_save?(current_permalink)
+  def should_overwrite?(current_permalink)
     # No computed path if not published
     computed_path.present? &&
     (
@@ -168,6 +179,10 @@ class Communication::Website::Permalink < ApplicationRecord
       # Path changed
       current_permalink.path != computed_path
     )
+  end
+
+  def already_exists?
+    website.permalinks.where(path: path).where.not(id: id).any?
   end
 
   def destroy_conflicting_aliases!

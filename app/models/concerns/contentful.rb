@@ -39,8 +39,13 @@ module Contentful
     template_blocks.each { |hash| generate_block(hash.dup) }
   end
 
+  def resetable_blocks?
+    !original? &&
+    about.respond_to?(:duplicate_blocks)
+  end
+
   def reset_blocks
-    return if original?
+    return unless resetable_blocks?
     blocks.destroy_all
     about.duplicate_blocks(original, self)
   end

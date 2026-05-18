@@ -12,7 +12,7 @@
     X-XSS-Protection = "0"
     X-Content-Type-Options = "nosniff"
 
-<% @website.permalinks.not_current.ordered.find_each do |permalink| %>
+<% @website.permalinks.not_current.not_root.ordered.find_each do |permalink| %>
 [[redirects]]
   from = "<%= permalink.path %>"
   to = "<%= permalink.target %>"
