@@ -67,6 +67,23 @@ url = item.persisted? ? [:admin, item, { menu_id: @menu.id }]
       </div>
     </div>
   </div>
+  <div class="mt-5">
+    <a  class="text-muted small"
+        data-bs-toggle="collapse"
+        href="#advanced"
+        role="button"
+        aria-expanded="false"
+        aria-controls="advanced">
+      <i class="bi bi-gear-fill"></i>
+      <%= t('admin.advanced_settings') %>
+    </a>
+    <div class="collapse mt-3" id="advanced">
+      <%= f.input :html_class %>
+      <% if item.html_class.present? %>
+        <pre><%= item.html_class_prepared %></pre>
+      <% end %>
+    </div>
+  </div>
   <% content_for :action_bar_right do %>
     <%= cancel url %>
     <%= submit f %>

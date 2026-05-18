@@ -3,12 +3,13 @@
 # Table name: communication_website_permalinks
 #
 #  id            :uuid             not null, primary key
-#  about_type    :string           not null, indexed => [about_id]
+#  about_type    :string           indexed => [about_id]
 #  is_current    :boolean          default(TRUE)
 #  path          :string
+#  target_url    :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  about_id      :uuid             not null, indexed => [about_type]
+#  about_id      :uuid             indexed => [about_type]
 #  university_id :uuid             not null, indexed
 #  website_id    :uuid             not null, indexed
 #
@@ -25,25 +26,37 @@
 #
 class Communication::Website::Permalink < ApplicationRecord
 
+  include Filterable
   include WithMapping
+  include WithOpenApi
   # We don't include Sanitizable as this model is never handled by users directly.
   include WithUniversity
+  include WithValidations
 
   belongs_to :university
   belongs_to :website, class_name: "Communication::Website"
-  belongs_to :about, polymorphic: true
+  belongs_to :about, polymorphic: true, optional: true
 
-  validates :about_id, :about_type, :path, presence: true
-
-  before_validation :set_university, on: :create
   # We should not sync the about object whenever we do something with the permalink, as they can be changed during a sync.
   # so we have an attribute accessor to force-sync the about, for example in the Permalinkable concern
   after_commit :touch_about, on: [:create, :destroy]
+  after_commit :regenerate_website_hosting_config
 
   scope :for_website, -> (website) { where(website_id: website.id) }
   scope :current, -> { where(is_current: true) }
   scope :not_current, -> { where(is_current: false) }
   scope :not_root, -> { where.not(path: '/') }
+  scope :internal, -> { where.not(about_id: nil) }
+  scope :external, -> { where(about_id: nil) }
+  scope :ordered, -> { order(:path) }
+
+  # Filters
+  scope :for_search_term, -> (term, language) {
+    where("communication_website_permalinks.path LIKE :term", term: "%#{sanitize_sql_like(term)}%")
+  }
+  scope :for_type, -> (type, language) {
+    type == 'internal' ? internal : external
+  }
 
   def self.config_in_website(website, language)
     required_kinds_in_website(website).map { |permalink_class|
@@ -63,19 +76,6 @@ class Communication::Website::Permalink < ApplicationRecord
   # Not protected because it is used in the website config "DefaultLanguages"
   def self.pattern_in_website(website, language, about = nil)
     raise NoMethodError
-  end
-
-  def self.clean_path(path)
-    clean_path = path.dup
-    # Remove eventual host
-    clean_path = URI(clean_path).path
-    # Leading slash for absolute path
-    clean_path = "/#{clean_path}" unless clean_path.start_with?('/')
-    # Trailing slash for coherence
-    clean_path = "#{clean_path}/" unless clean_path.end_with?('/')
-    clean_path
-  rescue URI::InvalidURIError
-    nil
   end
 
   # Méthode pour accéder facilement à la page spéciale,
@@ -119,20 +119,49 @@ class Communication::Website::Permalink < ApplicationRecord
 
   def save_if_needed
     current_permalink = about.current_permalink_in_website(website)
-
-    return unless computed_path.present? && (current_permalink.nil? || current_permalink.path != computed_path)
-
-    # If the object had no permalink or if its path changed, we create a new permalink and delete old with same path
-    existing_permalinks_for_path = self.class.unscoped.where(website_id: website_id, about_id: about_id, about_type: about_type, path: computed_path, is_current: false)
+    return unless should_overwrite?(current_permalink)
     self.path = computed_path
-    if save
-      existing_permalinks_for_path.find_each(&:destroy)
-      current_permalink&.update(is_current: false)
+    transaction do
+      save!
+      destroy_conflicting_aliases!
+      current_permalink.set_as_alias_or_destroy! if current_permalink
     end
+  end
+
+  def set_as_alias_or_destroy!
+    if already_exists?
+      destroy
+    else
+      update(is_current: false)
+    end
+  end
+
+  def turn_to_external!(target_url)
+    set_as_alias_or_destroy!
+    update(about: nil, target_url: target_url) unless destroyed?
   end
 
   def special_page(website)
     self.class.special_page(website)
+  end
+
+  # Starting from Hugo 0.155, aliases are site-relative,
+  # so we need to go one level up on multilingual sites to get the correct path.
+  # More info: https://developers.osuny.org/docs/theme/architecture/aliases/
+  def alias_path
+    "/..#{path}"
+  end
+
+  def external?
+    about.nil?
+  end
+
+  def internal?
+    about.present?
+  end
+
+  def target
+    internal? ? about.current_permalink_in_website(website) : target_url
   end
 
   def to_s
@@ -140,6 +169,29 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   protected
+
+  def should_overwrite?(current_permalink)
+    # No computed path if not published
+    computed_path.present? &&
+    (
+      # First time
+      current_permalink.nil? ||
+      # Path changed
+      current_permalink.path != computed_path
+    )
+  end
+
+  def already_exists?
+    website.permalinks.where(path: path).where.not(id: id).any?
+  end
+
+  def destroy_conflicting_aliases!
+    conflicting_aliases.find_each(&:destroy)
+  end
+
+  def conflicting_aliases
+    self.class.unscoped.where(website_id: website_id, path: computed_path, is_current: false)
+  end
 
   def language
     @language ||= about.respond_to?(:language) ? about.language : website.default_language
@@ -152,12 +204,13 @@ class Communication::Website::Permalink < ApplicationRecord
     }
   end
 
-  def set_university
-    self.university_id = website.university_id
+  def touch_about
+    return unless about.present? && about.persisted?
+    about.touch
   end
 
-  def touch_about
-    return unless about.persisted?
-    about.touch
+  def regenerate_website_hosting_config
+    return unless website.persisted?
+    website.regenerate_hosting_config!
   end
 end

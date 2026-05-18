@@ -34,6 +34,7 @@ class Communication::Website::Post < ApplicationRecord
   include GeneratesGitFiles
   include Lifecyclable
   include Localizable
+  include MovableToWebsite
   include Sanitizable
   include Searchable
   include WithMenuItemTarget
@@ -88,6 +89,9 @@ class Communication::Website::Post < ApplicationRecord
         unaccent(communication_website_post_localizations.title) ILIKE unaccent(:term)
       ", term: "%#{sanitize_sql_like(term)}%")
   }
+  scope :for_lasting, -> (value, language = nil) {
+    where(is_lasting: value)
+  }
 
   def dependencies
     [website.config_default_content_security_policy] +
@@ -125,4 +129,5 @@ class Communication::Website::Post < ApplicationRecord
   def list_blocks_template_kind
     :posts
   end
+  
 end

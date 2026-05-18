@@ -85,6 +85,7 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
       :migration_identifier, :language, :title, :meta_description,
       :pinned, :published, :published_at, :slug, :subtitle, :summary, :_destroy,
       featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
+      **nested_aliases_params,
       **nested_blocks_params
     ]
   end

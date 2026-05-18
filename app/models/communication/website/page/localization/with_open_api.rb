@@ -30,6 +30,12 @@ module Communication::Website::Page::Localization::WithOpenApi
         header_cta: { type: :boolean, nullable: true },
         header_cta_label: { type: :string, nullable: true },
         header_cta_url: { type: :string, nullable: true },
+        aliases: {
+          type: :array,
+          items: {
+            "$ref": "#/components/schemas/communication_website_permalink"
+          }
+        },
         blocks: {
           type: :array,
           items: {

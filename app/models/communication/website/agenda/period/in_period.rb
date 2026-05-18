@@ -59,7 +59,7 @@ module Communication::Website::Agenda::Period::InPeriod
   end
 
   def to_day_after_from_day
-    errors.add(:to_day, :too_soon) if to_day.present? && to_day < from_day
+    errors.add(:to_day, :too_soon) if from_day.present? && to_day.present? && to_day < from_day
   end
 
   def to_hour_after_from_hour_on_same_day

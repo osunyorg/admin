@@ -8,7 +8,7 @@ Rswag::Ui.configure do |c|
   # (under openapi_root) as JSON or YAML endpoints, then the list below should
   # correspond to the relative paths for those endpoints.
 
-  c.openapi_endpoint 'osuny/v1/openapi.json', 'Osuny API V1 Docs'
+  c.openapi_endpoint 'osuny/v1/openapi.json', 'osuny API V1 Docs'
 
   c.config_object[:deepLinking] = true
   c.config_object[:persistAuthorization] = true

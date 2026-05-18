@@ -2,6 +2,7 @@
 <% content_for :title_right do %>
   <%= button_advanced do %>
     <%= destroy_link @post %>
+    <%= move_link @post %>  
     <%= duplicate_link @post %>  
   <% end %>
   <% post_url = @l10n.current_permalink_url_in_website(@website) %>

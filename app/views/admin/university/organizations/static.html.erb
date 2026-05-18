@@ -20,9 +20,10 @@ language = @l10n.language
 <%= osuny_static_text 'long_name', @about.long_name %>
 <%= osuny_static_text 'siren', organization.siren %>
 <%= osuny_static_html 'text', @l10n.text %>
-kind:
-  code: "<%= organization.kind %>"
-  label: "<%= organization.kind_i18n %>"
+organization:
+  kind:
+    code: "<%= organization.kind %>"
+    label: "<%= organization.kind_i18n %>"
 <%= render 'admin/application/contact_details/static',
             about: organization,
             l10n: @l10n,

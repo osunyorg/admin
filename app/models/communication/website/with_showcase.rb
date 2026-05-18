@@ -9,5 +9,6 @@ module Communication::Website::WithShowcase
                             association_foreign_key: :communication_website_showcase_tag_id
 
     scope :in_showcase, -> { in_production.where(in_showcase: true) }
+    scope :highlighted_in_showcase, -> { in_production.where(highlighted_in_showcase: true) }
   end
 end

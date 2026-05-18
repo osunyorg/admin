@@ -1,1 +1,6 @@
-<%= component.from %> → <%= component.to %>
+<% if component.from.present? %>
+  <time datetime="<%= component.from %>" class="time_slot--from"><%= component.from %></time>
+<% end %>
+<% if component.to.present? %>
+  <time datetime="<%= component.to %>" class="time_slot--to"><%= component.to %></time>
+<% end %>

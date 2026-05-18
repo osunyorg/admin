@@ -11,7 +11,11 @@ class Server::DashboardController < Server::ApplicationController
         path: server_websites_path
       }
     ]
-    @websites = Communication::Website.with_url.for_older_theme_version(Osuny::ThemeInfo.get_current_version).ordered(current_language)
+    @websites = Communication::Website
+                  .with_url
+                  .for_older_theme_version(Osuny::ThemeInfo.get_current_version)
+                  .ordered(current_language)
+                  .page(params[:page])
     breadcrumb
   end
 

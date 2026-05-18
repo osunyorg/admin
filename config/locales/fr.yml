@@ -71,7 +71,7 @@ fr:
         language: Langue préférée
         last_name: Nom
         mobile_phone: Téléphone portable
-        optin_newsletter: Je souhaite recevoir par mail les actualités concernant les évolutions d'Osuny (invitation aux assemblées de la communauté une fois par mois, synthèse une fois par trimestre).
+        optin_newsletter: Je souhaite recevoir par mail les actualités concernant les évolutions d'osuny (invitation aux assemblées de la communauté une fois par mois, synthèse une fois par trimestre).
         person: Personne
         picture: Photo de profil
         picture_url: Url de la photo de profil
@@ -130,6 +130,10 @@ fr:
       read_more: En savoir plus
       title: Chroniques
     content_archive:
+      filter:
+        label: pérennité
+        lasting: Contenu pérenne
+        not_lasting: Contenu archivable
       is_lasting:
         hint:
           one: Si décoché, ce contenu sera automatiquement archivé après %{count} an.
@@ -142,7 +146,7 @@ fr:
       other: "%{count} éléments"
       zero: Aucun élément
     footer:
-      signature: Osuny, un commun numérique d’intérêt général
+      signature: osuny, un commun numérique d’intérêt général
     i18n:
       in: en %{lang}
       switch_to: basculer en %{choices}
@@ -159,10 +163,15 @@ fr:
     meta_description:
       hint: Texte simple, dédié au à l'optimisation pour les moteurs de recherche (Search Engine Optimization, SEO).
       label: Description pour les moteurs de recherche (meta)
+    move: 
+      cta: Déplacer
+      description: "Déplacez cet élément vers un autre site web que vous gérez :"
+      permission_denied: Vous ne pouvez pas déplacer cet élément.
+      successfully_moved: "<i>%{model}</i> a bien été déplacé(e)."
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     pending_tasks:
       tasks: Tâches en cours de traitement
-      text_html: "Osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme Osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."
+      text_html: "osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."
       what_is_it: Qu'est-ce que c'est ?
     search:
       buttons:
@@ -180,6 +189,7 @@ fr:
     successfully_duplicated_html: "<i>%{model}</i> a bien été dupliqué(e)."
     successfully_quit_html: "<i>%{model}</i> a bien quitté <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> a bien été retiré(e)."
+    successfully_reset_html: "<i>%{model}</i> a bien été réinitialisé(e)."
     successfully_restored_html: "<i>%{model}</i> a bien été restauré(e)."
     successfully_updated_html: "<i>%{model}</i> a bien été mis(e) à jour."
     summary:
@@ -196,14 +206,20 @@ fr:
       optin_not_set:
         button_allow_optin: Autoriser l'envoi
         button_disallow_optin: Interdire l'envoi
-        text_html: "Vous n'avez pas encore défini vos préférences de communication par email. <br>Si vous nous autorisez à vous contacter, vous recevrez des invitations aux assemblées de la communauté une fois par mois, et une synthèse des évolutions d'Osuny une fois par trimestre maximum. Vous pourrez toujours par la suite changer ce paramètre dans votre profil."
+        text_html: "Vous n'avez pas encore défini vos préférences de communication par email. <br>Si vous nous autorisez à vous contacter, vous recevrez des invitations aux assemblées de la communauté une fois par mois, et une synthèse des évolutions d'osuny une fois par trimestre maximum. Vous pourrez toujours par la suite changer ce paramètre dans votre profil."
         title: Préférences de communication
         updated: Vos préférences ont bien été enregistrées.
       pending_confirmation_html: "Votre compte n'a pas encore été <b>confirmé</b>. Vous avez reçu un e-mail contenant un lien de confirmation. En l'absence de confirmation, votre compte cessera de fonctionner après <b>%{duration}</b>. Si vous n'avez pas reçu cet email pensez à vérifier votre dossier spam ou cliquez sur le bouton ci-dessous."
       successfully_unlocked_html: "<i>%{model}</i> a bien été déverrouillé(e)."
     will_be_published_html: "<i>%{model}</i> va bientôt être publié(e)."
-  batch_selectable:
     title: Modifier la sélection
+  batch:
+    movable:
+      confirm: Êtes-vous sûr de vouloir déplacer les éléments sélectionnés ?
+      successfully_moved: Les éléments ont bien été déplacés.
+      title: Déplacer la sélection
+    selectable:
+      title: Modifier la sélection
   cancel: Annuler
   category:
     breadcrumb_title: Nom affiché dans le fil d'ariane
@@ -254,7 +270,7 @@ fr:
       country:
         hint: ''
         label: Pays
-      geolocation_failed: 
+      geolocation_failed:
         hint: 'Si la géolocalisation automatique ne fonctionne pas, vous pouvez saisir la latitude et la longitude directement ci-dessous, en coordonnées décimales.'
         label: 'Pas de géolocalisation ?'
       latitude:
@@ -463,7 +479,7 @@ fr:
         without_user_html: Vous pouvez vous y inscrire avec votre adresse email <b>%{email}</b> en <a href="%{sign_up_url}">cliquant ici</a>.
     notifications:
       gdpr_deletion_incoming:
-        subject: "Osuny - votre compte va bientôt être supprimé"
+        subject: "osuny - votre compte va bientôt être supprimé"
         body_1_html: "Bonjour,<br><br>Cela fait un moment que vous ne vous êtes pas connecté à votre compte.<br><br>Pour respecter nos obligations légales votre compte sera supprimé dans <b>%{delay} jours</b> si vous ne vous reconnectez pas d'ici là."
         body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour accéder à votre compte."
       import:
@@ -477,7 +493,7 @@ fr:
       low_sms_credits:
         body_1_html: "Attention, vos crédits SMS sont bas : %{credits} crédits restants !"
         body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour recharger le compte."
-        subject: "Osuny - Credits SMS bas (%{credits})"
+        subject: "osuny - Credits SMS bas (%{credits})"
       new_registration:
         body_1_html: "Un nouvel utilisateur (%{username}) vient de s'enregistrer."
         body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour voir son compte."
@@ -502,6 +518,7 @@ fr:
     deletion: Est-ce que vous confirmez la suppression ?
     duplication: Est-ce que vous confirmez la duplication ?
     generic: Est-ce que vous confirmez ?
+    reset: La réinitialisation va supprimer tous les blocs dans cette langue. Est-ce que vous confirmez ?
   preview:
     button: Prévisualiser
     desktop: Ordinateur
@@ -567,6 +584,9 @@ fr:
   today: Aujourd'hui
   true: Oui
   user:
+    admins:
+      one: Administrateur·rice
+      other: Administrateur·rice·s
     favorites:
       add: Ajouter aux favoris
       none:

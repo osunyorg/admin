@@ -1,5 +1,9 @@
 <% content_for :title, t('server_admin.dashboard') %>
 
+<div class="mb-5">
+  <%= link_to 'Potentiel de contribution', potential_server_universities_path, class: 'btn btn-sm btn-primary' %>
+</div>
+
 <div class="row">
   <% @parts.each do |part| %>
     <div class="col-md-6 d-flex">
@@ -14,7 +18,10 @@
   <div class="lead mb-5"><%= Osuny::ThemeInfo.get_current_version %></div>
   <p>
     <%= t('server_admin.websites.outdated') %>
-    (<%= @websites.to_a.count %>)
+    (<%= @websites.total_count %>)
   </p>
-  <%= render 'server/websites/list', websites: @websites if @websites.any? %>
+  <% if @websites.any? %>
+    <%= render 'server/websites/list', websites: @websites %>
+    <%= paginate @websites %>
+  <% end %>
 <% end %>

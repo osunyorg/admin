@@ -71,7 +71,7 @@ en:
         language: Favourite language
         last_name: Last name
         mobile_phone: Mobile phone
-        optin_newsletter: I would like to receive updates by email regarding developments on Osuny (invitation to community assemblies once a month, summary once a quarter).
+        optin_newsletter: I would like to receive updates by email regarding developments on osuny (invitation to community assemblies once a month, summary once a quarter).
         person: Person
         picture: Profile picture
         picture_url: Profile picture Url
@@ -130,6 +130,10 @@ en:
       read_more: Learn more
       title: Chronicles
     content_archive:
+      filter:
+        label: lasting
+        lasting: Long lasting
+        not_lasting: Archive content
       is_lasting:
         hint:
           one: If unchecked, this content will be automatically archived after %{count} year.
@@ -142,7 +146,7 @@ en:
       other: "%{count} elements"
       zero: No element
     footer:
-      signature: Osuny, a public interest digital common
+      signature: osuny, a public interest digital common
     i18n:
       in: in %{lang}
       switch_to: switch to %{choices}
@@ -159,10 +163,15 @@ en:
     meta_description:
       hint: Plain text without HTML, dedicated to Search Engine Optimization (SEO).
       label: Meta description
+    move: 
+      cta: Move
+      description: "Move this item to another website you manage:"
+      permission_denied: You cannot move this item.
+      successfully_moved: "<i>%{model}</i> was successfully moved."
     password_hint: Leave blank if you do not wish to change the password.
     pending_tasks:
       tasks: Background tasks pending
-      text_html: "Osuny guides you towards digital sufficiency.<br><br>The mutualized background execution of most tasks on the Osuny platform helps reducing the carbon footprint of digital technology, by pre-computing what can be.<br><br>This can cause a delay before your changes are visible on your websites."
+      text_html: "osuny guides you towards digital sufficiency.<br><br>The mutualized background execution of most tasks on the osuny platform helps reducing the carbon footprint of digital technology, by pre-computing what can be.<br><br>This can cause a delay before your changes are visible on your websites."
       what_is_it: What is it?
     search:
       buttons:
@@ -180,6 +189,7 @@ en:
     successfully_duplicated_html: "<i>%{model}</i> was successfully duplicated."
     successfully_quit_html: "<i>%{model}</i> successfully quit <i>%{target}</i>."
     successfully_removed_html: "<i>%{model}</i> was successfully removed."
+    successfully_reset_html: "<i>%{model}</i> was successfully reset."
     successfully_restaured_html: "<i>%{model}</i> was successfully restored."
     successfully_updated_html: "<i>%{model}</i> was successfully updated."
     summary:
@@ -197,13 +207,18 @@ en:
       optin_not_set:
         button_allow_optin: Allow sending
         button_disallow_optin: Deny sending
-        text_html: "You have not defined your choice about communications by email yet.<br>If you allow it, you will receive the invitations to the Osuny community assemblies once per month, and summaries about Osuny updates once per quarter max. You will always be able to change this setting in your profile."
+        text_html: "You have not defined your choice about communications by email yet.<br>If you allow it, you will receive the invitations to the osuny community assemblies once per month, and summaries about osuny updates once per quarter max. You will always be able to change this setting in your profile."
         title: Communication settings
         updated: Your settings have been updated.
       successfully_unlocked_html: "<i>%{model}</i> was successfully unlocked."
     will_be_published_html: "<i>%{model}</i> will soon be published."
-  batch_selectable:
-    title: Edit the selection
+  batch:
+    movable:
+      confirm: Are you sure you want to move the selected items?
+      successfully_moved: Items were successfully moved.
+      title: Move the selection
+    selectable:
+      title: Edit the selection
   cancel: Cancel
   category:
     breadcrumb_title: Title in breadcrumbs
@@ -254,7 +269,7 @@ en:
       country:
         hint: 'This field is used for geolocation. Ex: France'
         label: Country
-      geolocation_failed: 
+      geolocation_failed:
         hint: 'If automatic geolocation does not work, you can enter the latitude and longitude directly below, in decimal coordinates.'
         label: 'No geolocation?'
       latitude:
@@ -463,7 +478,7 @@ en:
         without_user_html: You can sign up with your email address <b>%{email}</b> by <a href="%{sign_up_url}">clicking here</a>.
     notifications:
       gdpr_deletion_incoming:
-        subject: "Osuny - your account will soon be deleted"
+        subject: "osuny - your account will soon be deleted"
         body_1_html: "Hello,<br><br>It's been a while since you logged in to your account.<br><br>To comply with our legal obligations, your account will be deleted in <b>%{delay} days</b> if you do not log back in by then."
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to access your account."
       import:
@@ -477,7 +492,7 @@ en:
       low_sms_credits:
         body_1_html: "Warning, your SMS credits are low: %{credits} credits remaining!"
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to refull."
-        subject: "Osuny - Low SMS Credits (%{credits})"
+        subject: "osuny - Low SMS Credits (%{credits})"
       new_registration:
         body_1_html: "A new user (%{username}) just registered."
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to see the account."
@@ -502,6 +517,7 @@ en:
     deletion: Are you sure you want to delete?
     duplication: Are you sure you want to duplicate?
     generic: Are you sure?
+    reset: Reset will remove all blocks in this language. Are you sure?
   preview:
     button: Preview
     desktop: Desktop
@@ -567,6 +583,9 @@ en:
   today: Today
   true: Yes
   user:
+    admins:
+      one: Administrator
+      other: Administrators
     favorites:
       add: Add to favorites
       none:

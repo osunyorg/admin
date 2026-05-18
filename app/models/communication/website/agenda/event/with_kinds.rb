@@ -4,6 +4,10 @@ module Communication::Website::Agenda::Event::WithKinds
   included do
     MAX_DURATION = 1.year
 
+    KIND_SIMPLE = 'simple'
+    KIND_RECURRING = 'recurring'
+    KIND_PARENT = 'parent'
+
     validate :no_child_before?, if: :kind_parent?
     validate :no_child_after?, if: :kind_parent?
     # validate :not_too_long # Uncomment when Rennes is ready
@@ -17,11 +21,24 @@ module Communication::Website::Agenda::Event::WithKinds
 
     scope :except_parent, -> { where.missing(:children) }
     scope :except_children, -> { where(parent_id: nil) }
-    scope :except_recurring, -> { where("(
-      SELECT COUNT(*)
-      FROM communication_website_agenda_event_time_slots
-        WHERE communication_website_agenda_event_time_slots.communication_website_agenda_event_id = communication_website_agenda_events.id
-      ) <= 1") }
+    scope :except_recurring, -> { where(
+                                    "(?) <= 1",
+                                    Communication::Website::Agenda::Event::TimeSlot
+                                      .select("COUNT(*)")
+                                      .where("communication_website_agenda_event_time_slots.communication_website_agenda_event_id = communication_website_agenda_events.id")
+                                  )
+                                }
+  end
+
+  def kind
+    # Le kind child peut être simple ou recurring, c'est une modélisation étrange
+    if kind_simple?
+      KIND_SIMPLE
+    elsif kind_recurring?
+      KIND_RECURRING
+    else
+      KIND_PARENT
+    end
   end
 
   def kind_simple?

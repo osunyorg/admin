@@ -14,7 +14,8 @@ class Transparency::HomeController < Transparency::ApplicationController
       ['noesya', 'Tierce maintenance applicative (pro bono, estimée à 60k€)', 0],
       ['Plausible', 'Mesure d\'audience', 948],
       ['Scalingo', 'Hébergement de l\'admin', 6700],
-      ['Scaleway', 'Stockage des fichiers', 20]
+      ['Scaleway', 'Stockage des fichiers', 20],
+      ['Violenn Simon', 'Droits photographiques', 1000]
     ]
     @costs_total = @costs.sum { |cost| cost.last }
     @balance = @contributions_total - @costs_total

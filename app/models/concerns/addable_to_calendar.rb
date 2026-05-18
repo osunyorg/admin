@@ -47,7 +47,8 @@ module AddableToCalendar
 
   def set_add_to_calendar_urls
     # Ensure the permalink is up to date
-    manage_permalink_in_website(website)
+    # Besides, the object must be persisted to handle permalinks
+    manage_permalink_in_website(website) if persisted?
     self.add_to_calendar_urls = {
       'google' => cal.google_url,
       'yahoo' => cal.yahoo_url,
