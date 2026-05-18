@@ -13,11 +13,12 @@
               autofocus: true,
               allow_password_uncloaking: true,
               validators: {
-                length: Devise.password_length.first,
+                minlength: Devise.password_length.first,
+                maxlength: Devise.password_length.last,
                 uppercase_char: true,
                 lowercase_char: true,
                 numeric_char: true,
-                special_char: Rails.application.config.allowed_special_chars
+                special_char: true
               },
               input_html: { autocomplete: "new-password" } %>
   <%= f.input :password_confirmation,
