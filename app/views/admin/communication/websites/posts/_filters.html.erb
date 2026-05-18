@@ -23,5 +23,18 @@
                       multiple: true
                       %>
 
+    <% if @website.archive_content %>
+      <%= render_filter f,
+                        :select,
+                        :for_lasting,
+                        label: t('filters.attributes.element', element: t('admin.content_archive.filter.label')),
+                        collection: [
+                          { to_s: t('admin.content_archive.filter.lasting'), id: 'true' },
+                          { to_s: t('admin.content_archive.filter.not_lasting'), id: 'false' }
+                        ]
+                        %>
+
     <% end %>
+
+  <% end %>
 <% end %>

@@ -69,10 +69,17 @@ link_to_all ||= false
                                               classes: 'stretched-link' %>
                   </div>
                   <div class="card-footer small text-muted d-none d-lg-block">
-                    <% if !hide_buttons && post.pinned_in?(current_language) %>
-                      <span class="badge border border-subtle text-dark">
-                      <%= Communication::Website::Post::Localization.human_attribute_name('pinned') %>
-                      </span>
+                    <% unless hide_buttons %>
+                      <% if post.pinned_in?(current_language) %>
+                        <span class="badge border border-subtle text-dark">
+                          <%= Communication::Website::Post::Localization.human_attribute_name('pinned') %>
+                        </span>
+                      <% end %>
+                      <% if @website.archive_content && post.is_lasting %>
+                        <span class="badge border border-subtle text-dark">
+                          <%= t('admin.content_archive.is_lasting.label') %>
+                        </span>
+                      <% end %>
                     <% end %>
                     <% if published_at = post.published_at_in(current_language) %>
                       <span class="ms-3">

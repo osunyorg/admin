@@ -130,6 +130,10 @@ fr:
       read_more: En savoir plus
       title: Chroniques
     content_archive:
+      filter:
+        label: pérennité
+        lasting: Contenu pérenne
+        not_lasting: Contenu archivable
       is_lasting:
         hint:
           one: Si décoché, ce contenu sera automatiquement archivé après %{count} an.

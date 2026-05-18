@@ -130,6 +130,10 @@ en:
       read_more: Learn more
       title: Chronicles
     content_archive:
+      filter:
+        label: lasting
+        lasting: Long lasting
+        not_lasting: Archive content
       is_lasting:
         hint:
           one: If unchecked, this content will be automatically archived after %{count} year.
