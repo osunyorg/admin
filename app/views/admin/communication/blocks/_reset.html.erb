@@ -1,5 +1,5 @@
 <%
-unless about.original?
+if about.resetable_blocks?
   original_language = about.original.language.to_s.downcase
   %>
   <div class="content-editor__actions row mt-5 mb-4">
