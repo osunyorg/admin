@@ -55,12 +55,12 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include Initials
   include Permalinkable
   include Publishable
+  include PublishableByTheHour
   include Sanitizable
   include Shareable
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
-  include PublishableByTheHour
   include WithOpenApi
   include WithUniversity
 
