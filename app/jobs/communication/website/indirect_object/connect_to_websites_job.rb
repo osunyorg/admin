@@ -4,7 +4,9 @@ class Communication::Website::IndirectObject::ConnectToWebsitesJob < Application
   queue_as :cats
 
   def perform(indirect_object)
+    # Do not attempt to connect with soft-deleted records
     return if indirect_object.paranoid? && indirect_object.deleted?
+
     indirect_object.connect_to_websites_safely
   end
 end
