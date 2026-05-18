@@ -62,6 +62,6 @@ module AsCategoryLocalization
   def category_objects_localizations
     category_objects_ids = about.category_objects.pluck(:id)
     localization_class_name = "#{about.category_objects.klass.name}::Localization"
-    localization_class_name.constantize.unscoped.where(about_id: category_objects_ids)
+    localization_class_name.constantize.where(university_id: university_id, about_id: category_objects_ids)
   end
 end
