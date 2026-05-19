@@ -12,7 +12,6 @@ export default {
   props: {
     modelValue: { type: String, default: '' },
     mode: { type: String, default: 'htmlmixed' },
-    rows: { type: [String, Number], default: 3 },
     placeholder: { type: String, default: '' },
     label: { type: String, default: '' },
   },
@@ -56,7 +55,6 @@ export default {
       ref="textarea"
       :id="fieldId"
       class="form-control mb-3 codemirror-vue"
-      :rows="rows"
       :placeholder="placeholder"></textarea>
   </div>
 </template>
