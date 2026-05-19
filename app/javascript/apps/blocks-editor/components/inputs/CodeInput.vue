@@ -11,7 +11,6 @@ export default {
   name: 'CodeInput',
   props: {
     modelValue: { type: String, default: '' },
-    mode: { type: String, default: 'htmlmixed' },
     placeholder: { type: String, default: '' },
     label: { type: String, default: '' },
   },
@@ -32,7 +31,7 @@ export default {
   },
   mounted() {
     const config = window.codemirrorManager.defaultConfig();
-    config.mode = this.mode;
+    config.mode = 'htmlmixed';
     this.editor = window.CodeMirror.fromTextArea(this.$refs.textarea, config);
     this.editor.setValue(this.modelValue || '');
     this.editor.on('change', (instance) => {
