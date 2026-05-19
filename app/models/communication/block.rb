@@ -104,10 +104,9 @@ class Communication::Block < ApplicationRecord
   end
 
   def paste(about)
-    position = about.blocks.ordered.last&.position || 0
     block = self.dup
     block.about = about
-    block.position = position + 1
+    block.position = nil # Will be computed on save
     block.save
     block
   end

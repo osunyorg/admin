@@ -112,7 +112,7 @@ fr:
         apache_config_custom_content: Configuration Apache personnalisée (fichier .htaccess)
         appearance: Apparence
         archive_content: Archiver le contenu ?
-        autoupdate_theme: Mise à jour automatique du thème Osuny
+        autoupdate_theme: Mise à jour automatique du thème osuny
         config_apache_config: Fichier de configuration Apache (.htaccess)
         config_default_content_security_policy: Politiques de sécurités pour définir les CSP (CORS)
         config_default_languages: Définition des langues et des configurations pour chaque langue
@@ -490,6 +490,7 @@ fr:
             create_child: Créer un événement enfant
             localizations:
               draft: Brouillon
+            move_message: Les créneaux horaires ainsi que les événements enfants seront également déplacés vers le site cible.
           events:
             formatted_time_zone: "Fuseau horaire : %{time_zone}"
             none: Pas encore d'événements
