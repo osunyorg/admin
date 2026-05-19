@@ -25,7 +25,7 @@
   <div class="col-sm-4">
     <%= block_component_edit block, :image, template: @element %>
     <a  class="btn btn-sm text-danger"
-        v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+        @click="data.elements.splice(data.elements.indexOf(element), 1)"
         title="<%= t '.remove_key' %>">
         <i class="<%= Icon::DELETE %>"></i>
         <%= t '.remove_key' %>

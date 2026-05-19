@@ -32,7 +32,7 @@
       <%= block_component_edit block, :credit, template: @element, summernote_config: 'mini' %>
     </div>
     <a  class="btn btn-sm text-danger"
-        v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+        @click="data.elements.splice(data.elements.indexOf(element), 1)"
         title="<%= t '.remove_element' %>">
         <i class="<%= Icon::DELETE %>"></i>
         <%= t '.remove_element' %>

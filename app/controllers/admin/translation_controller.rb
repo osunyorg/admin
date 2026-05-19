@@ -2,12 +2,11 @@ class Admin::TranslationController < Admin::ApplicationController
   def translate
     @text = translation_params[:text].to_s.strip
     head :ok and return if @text.blank?
-    @target = translation_params[:target]
     @response = LibreTranslate.translate(
-                  @text, 
-                  source: 'auto', 
-                  format: 'html',
-                  target: @target
+                  @text,
+                  source: translation_params[:source],
+                  target: translation_params[:target],
+                  format: 'html'
                 )
     render json: @response
   end
@@ -15,6 +14,6 @@ class Admin::TranslationController < Admin::ApplicationController
   protected
 
   def translation_params
-    params.permit(:text, :target)
+    params.permit(:text, :source, :target)
   end
 end

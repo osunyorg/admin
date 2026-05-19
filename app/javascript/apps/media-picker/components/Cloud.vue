@@ -121,7 +121,7 @@ export default {
                         class="form-control ms-auto"
                         :placeholder="i18n.placeholder"
                         v-model="query"
-                        v-on:keyup.enter="search">
+                        @keyup.enter="search">
                 <button type="button"
                         class="btn btn-primary me-auto"
                         @click="search"

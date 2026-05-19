@@ -45,7 +45,7 @@ Rails.application.routes.draw do
       delete 'profile' => 'profile#destroy'
       post 'profile/optin_newsletter' => 'profile#optin_newsletter', as: :optin_newsletter
       # libre_translate route
-      post 'translate/:target' => 'translation#translate', as: :translate
+      post 'translate/from/:source/to/:target' => 'translation#translate', as: :translate
       get 'vue-i18n' => 'vue_i18n#index', as: :vue_i18n, defaults: { format: :json }
       put 'favorite' => 'users#favorite', as: :favorite
       get 'search(/website/:website_id)(/extranet/:extranet_id)' => 'search#index', as: :search

@@ -85,7 +85,7 @@ export default {
         <img :src="current.image.url" class="img-fluid" />
         <div class="text-end">
           <a  class="btn btn-sm text-danger pe-0"
-              v-on:click="removeImage()">
+              @click="removeImage()">
             <i class="<%= Icon::DELETE %>"></i>
             {{ i18n.mediaPicker.remove }}
           </a>

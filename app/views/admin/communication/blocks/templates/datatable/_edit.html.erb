@@ -9,14 +9,14 @@
                     class="form-control"
                     v-model="data.columns[index]">
             <a  class="btn text-danger"
-                v-on:click="data.columns.splice(index, 1); data.elements.forEach(row => row.cells.splice(index, 1));">
+                @click="data.columns.splice(index, 1); data.elements.forEach(row => row.cells.splice(index, 1));">
                 <i class="<%= Icon::DELETE %>"></i>
             </a>
           </div>
         </div>
         <div class="td">
           <a  class="btn btn-primary mt-n1"
-              v-on:click="data.columns.push('')">
+              @click="data.columns.push('')">
               <i class="<%= Icon::ADD %>"></i> colonne
           </a>
         </div>
@@ -32,7 +32,7 @@
         <div class="td" class="text-end">
           <div class="d-flex">
             <a  class="btn text-danger"
-                v-on:click="data.elements.splice(index, 1)">
+                @click="data.elements.splice(index, 1)">
                 <i class="<%= Icon::DELETE %>"></i>
             </a>
             <a class="btn dragHandle">
@@ -44,7 +44,7 @@
     </draggable>
   </div>
   <a  class="btn btn-primary"
-      v-on:click="data.elements.push({cells: []})">
+      @click="data.elements.push({cells: []})">
       <i class="<%= Icon::ADD %>"></i> ligne
   </a>
 </div>
