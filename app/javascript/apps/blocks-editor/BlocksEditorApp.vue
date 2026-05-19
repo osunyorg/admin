@@ -127,9 +127,7 @@ export default {
 </script>
 
 <template>
-  <section
-    v-if="!loading"
-    class="vue__blocks-editor mb-5">
+  <section class="vue__blocks-editor mb-5">
     <div v-if="loading">
       <div class="row my-4">
         <div class="offset-lg-4 col-lg-8 col-xxl-6">
@@ -173,27 +171,22 @@ export default {
             {{ i18n.blocksEditor.actions.addBlock }}</a>
         </div>
       </div>
-      <OffCanvas
-        :i18n="i18n"
-        :url="url.current"
-        @close="onClose"
-        />
+      <OffcanvasShell
+        :open="offcanvasState !== 'closed'"
+        :title="i18n.blocksEditor.offcanvas.title"
+        :close-label="i18n.blocksEditor.offcanvas.close"
+        @close="onClose">
+        <TemplatePicker
+          v-if="offcanvasState === 'picking'"
+          :url="url.new"
+          :csrf-token="csrfToken"
+          @created="onPick" />
+        <Editor
+          v-else-if="offcanvasState === 'editing'"
+          :url="editorUrl"
+          @save="onSave"
+          @close="onClose" />
+      </OffcanvasShell>
     </div>
-    <OffcanvasShell
-      :open="offcanvasState !== 'closed'"
-      :title="i18n.blocksEditor.offcanvas.title"
-      :close-label="i18n.blocksEditor.offcanvas.close"
-      @close="onClose">
-      <TemplatePicker
-        v-if="offcanvasState === 'picking'"
-        :url="url.new"
-        :csrf-token="csrfToken"
-        @created="onPick" />
-      <Editor
-        v-else-if="offcanvasState === 'editing'"
-        :url="editorUrl"
-        @save="onSave"
-        @close="onClose" />
-    </OffcanvasShell>
   </section>
 </template>
