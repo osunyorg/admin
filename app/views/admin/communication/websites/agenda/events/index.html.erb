@@ -4,8 +4,11 @@
   <%= button_advanced do %>
     <%= link_to t('templates.create'),
                 new_admin_communication_website_agenda_event_path(is_template: true),
-                class: button_classes %>
-  <% end if can?(:create_template, @website) %>
+                class: button_classes if can?(:create_template, @website) %>
+    <%= link_to t('admin.move.cta'),
+                move_batch_admin_communication_website_agenda_events_path,
+                class: button_classes if can?(:move, Communication::Website::Post) && current_user.managed_websites.count > 1 %>
+  <% end if can?(:create_template, @website) || (can?(:move, Communication::Website::Post) && current_user.managed_websites.count > 1) %>
   <%= create_link Communication::Website::Agenda::Event %>
 <% end %>
 

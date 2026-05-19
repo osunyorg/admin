@@ -3,6 +3,6 @@ class UnicornsJob < ApplicationJob
   queue_as :unicorns
 
   def perform
-    Migrations::CleanPermalinks.migrate
+    Migrations::CleanGitFiles.migrate
   end
 end

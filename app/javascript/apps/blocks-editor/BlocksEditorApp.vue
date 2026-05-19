@@ -146,38 +146,52 @@ export default {
     v-if="!loading"
     class="vue__blocks-editor mb-5"
     :class="{'vue__blocks-editor--plan-mode': planMode }">
-    <div class="row my-4">
-      <div class="offset-lg-4 col-lg-8 col-xxl-6">
-        <a
-          class="btn btn-lg btn-dark me-2 mb-2"
-          @click="onAdd">
-          {{ i18n.blocksEditor.actions.addBlock }}</a>
-        <a
-          class="btn btn-sm float-md-end"
-          :class="{'btn-success': planMode, 'btn-light': !planMode}"
-          @click="planMode = !planMode"
-          v-show="data.blocks.length > 2">
-          <i class="fas fa-list"></i>
-          {{ i18n.blocksEditor.planMode.button }}</a>
+    <div v-if="loading">
+      <div class="row my-4">
+        <div class="offset-lg-4 col-lg-8 col-xxl-6">
+          <span class="spinner-border spinner-border-sm" role="status"></span>
+        </div>
       </div>
     </div>
-    <Blocks
-      v-model="data.blocks"
-      :i18n="i18n"
-      @edit="onEdit"
-      @delete="onDelete"
-      @copy="onCopy"
-      @duplicate="onDuplicate"
-      @reorder="onReorder" />
-    <div
-      class="row my-4"
-      v-show="data.blocks.length > 4">
-      <div class="offset-lg-4 col-lg-8 col-xxl-6">
-        <a
-          class="btn btn-lg btn-dark"
-          @click="onAdd">
-          {{ i18n.blocksEditor.actions.addBlock }}</a>
+    <div v-if="!loading">
+      <div class="row my-4">
+        <div class="offset-lg-4 col-lg-8 col-xxl-6">
+          <a
+            class="btn btn-lg btn-dark me-2 mb-2"
+            @click="onAdd">
+            {{ i18n.blocksEditor.actions.addBlock }}</a>
+          <a
+            class="btn btn-sm float-md-end"
+            :class="{'btn-success': planMode, 'btn-light': !planMode}"
+            @click="planMode = !planMode"
+            v-show="data.blocks.length > 2">
+            <i class="fas fa-list"></i>
+            {{ i18n.blocksEditor.planMode.button }}</a>
+        </div>
       </div>
+      <Blocks
+        v-model="data.blocks"
+        :i18n="i18n"
+        @edit="onEdit"
+        @delete="onDelete"
+        @copy="onCopy"
+        @duplicate="onDuplicate"
+        @reorder="onReorder" />
+      <div
+        class="row my-4"
+        v-show="data.blocks.length > 4">
+        <div class="offset-lg-4 col-lg-8 col-xxl-6">
+          <a
+            class="btn btn-lg btn-dark"
+            @click="onAdd">
+            {{ i18n.blocksEditor.actions.addBlock }}</a>
+        </div>
+      </div>
+      <OffCanvas
+        :i18n="i18n"
+        :url="url.current"
+        @close="onClose"
+        />
     </div>
     <Editor
       :i18n="i18n"

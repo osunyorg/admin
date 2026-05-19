@@ -4,7 +4,7 @@ class Server::WebsitesController < Server::ApplicationController
   before_action :load_website, except: [:index, :clean_and_rebuild_all_websites]
 
   def index
-    @websites = @websites.ordered(current_language).page(params[:page]).per(500)
+    @websites = @websites.ordered(current_language).page(params[:page])
     breadcrumb
   end
 
