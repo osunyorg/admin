@@ -8,17 +8,17 @@ payload = {
   defaultElement: @element&.default_data,
   directUploadUrl: rails_direct_uploads_url,
   blobUrlTemplate: medium_url(':signed_id', ':filename', lang: nil, keycdn: ENV['KEYCDN_HOST'].present?),
-  summernoteLocale: current_interface_language.summernote_locale.presence
+  summernoteLocale: current_interface_language.summernote_locale.presence,
+  languageTool: {
+    locale: I18n.locale,
+    email: ENV['LANGUAGE_TOOL_USERNAME'],
+    token: ENV['LANGUAGE_TOOL_ADD_ON_TOKEN']
+  }
 }
 %>
 <div
-  id="app"
   data-editor-form-root
-  data-payload="<%= payload.to_json %>"
-  data-languagetool-locale="<%= I18n.locale %>"
-  data-languagetool-email="<%= ENV['LANGUAGE_TOOL_USERNAME'] %>"
-  data-languagetool-token="<%= ENV['LANGUAGE_TOOL_ADD_ON_TOKEN'] %>"
-  class="pb-5">
+  data-payload="<%= payload.to_json %>">
   <%= simple_form_for [:admin, @block], html: { id: 'block-form' } do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>

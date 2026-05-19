@@ -34,18 +34,13 @@ export default {
     this.refresh();
   },
   methods: {
-    loadJson(url, target) {
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', url);
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          this[target] = JSON.parse(xhr.responseText);
-          if (this.i18n.blocksEditor && this.data.blocks) {
-            this.loading = false;
-          }
-        }
-      };
-      xhr.send();
+    async loadJson(url, target) {
+      const res = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (!res.ok) return;
+      this[target] = await res.json();
+      if (this.i18n.blocksEditor && this.data.blocks) {
+        this.loading = false;
+      }
     },
     refresh() {
       this.loadJson(this.url.data, 'data');
@@ -57,7 +52,9 @@ export default {
       this.editorUrl = block.url.edit;
       this.offcanvasState = 'editing';
     },
-    onPick(editUrl) {
+    onPickerCreated(editUrl) {
+      // A template was picked and the block was created — swap the picker
+      // for the editor on the new block, keeping the offcanvas open.
       this.editorUrl = editUrl;
       this.offcanvasState = 'editing';
       this.refresh();
@@ -65,15 +62,15 @@ export default {
     onDuplicate(block) {
       this.loadAndRefresh(block.url.duplicate, 'POST');
     },
-    onCopy(block) {
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', block.url.copy);
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) this.onCopyDone();
-      };
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.setRequestHeader('X-CSRF-Token', this.csrfToken);
-      xhr.send();
+    async onCopy(block) {
+      const res = await fetch(block.url.copy, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': this.csrfToken,
+        },
+      });
+      if (res.ok) this.onCopyDone();
     },
     onCopyDone() {
       const notyf = new Notyf();
@@ -89,38 +86,35 @@ export default {
     onDelete(block) {
       this.loadAndRefresh(block.url.delete, 'DELETE');
     },
-    onSave() {
-      this.closeOffcanvas();
-      this.refresh();
-    },
-    onClose() {
-      this.closeOffcanvas();
-      this.refresh();
-    },
     closeOffcanvas() {
+      // Single handler for the editor's save+close events and the shell's
+      // backdrop click — all three converge on the same outcome: tear down
+      // the offcanvas and resync the block list from the server.
       this.offcanvasState = 'closed';
       this.editorUrl = '';
+      this.refresh();
     },
-    onReorder() {
+    async onReorder() {
       const ids = this.data.blocks.map((b) => b.id);
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', this.url.reorder);
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) this.refresh();
-      };
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.setRequestHeader('X-CSRF-Token', this.csrfToken);
-      xhr.send(JSON.stringify({ ids }));
+      const res = await fetch(this.url.reorder, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': this.csrfToken,
+        },
+        body: JSON.stringify({ ids }),
+      });
+      if (res.ok) this.refresh();
     },
-    loadAndRefresh(url, method) {
-      const xhr = new XMLHttpRequest();
-      xhr.open(method, url);
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4 && xhr.status === 200) this.refresh();
-      };
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.setRequestHeader('X-CSRF-Token', this.csrfToken);
-      xhr.send();
+    async loadAndRefresh(url, method) {
+      const res = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': this.csrfToken,
+        },
+      });
+      if (res.ok) this.refresh();
     },
   },
 };
@@ -175,17 +169,17 @@ export default {
         :open="offcanvasState !== 'closed'"
         :title="i18n.blocksEditor.offcanvas.title"
         :close-label="i18n.blocksEditor.offcanvas.close"
-        @close="onClose">
+        @close="closeOffcanvas">
         <TemplatePicker
           v-if="offcanvasState === 'picking'"
           :url="url.new"
           :csrf-token="csrfToken"
-          @created="onPick" />
+          @created="onPickerCreated" />
         <Editor
           v-else-if="offcanvasState === 'editing'"
           :url="editorUrl"
-          @save="onSave"
-          @close="onClose" />
+          @save="closeOffcanvas"
+          @close="closeOffcanvas" />
       </OffcanvasShell>
     </div>
   </section>

@@ -7,9 +7,7 @@ import UploadInput from './inputs/UploadInput.vue';
 import MultiImageInput from './inputs/MultiImageInput.vue';
 
 // Renders the block-edit form fetched from the server, mounts a fresh inner
-// Vue app on it for reactive v-model bindings, and unmounts on close. The
-// outer offcanvas chrome lives in OffcanvasShell.vue; we only render the
-// form content here.
+// Vue app on it for reactive v-model bindings, and unmounts on close.
 //
 // The inner app exposes a small reactive surface (data, addElement,
 // deleteElement, getImageUrl) for the ERB-rendered templates, and registers
@@ -48,8 +46,8 @@ export default {
       try {
         const res = await fetch(url, { headers: { Accept: 'text/html' } });
         const text = await res.text();
-        // Server returns the `raw` layout (full <html> doc). Extract just the
-        // [data-editor-form-root] subtree so we don't inject a second
+        // Server returns the `raw` layout (full <html> doc). Extract just
+        // the [data-editor-form-root] subtree so we don't inject a second
         // <html>/<head> into the current document.
         const doc = new DOMParser().parseFromString(text, 'text/html');
         const root = doc.querySelector('[data-editor-form-root]');
@@ -72,7 +70,7 @@ export default {
       // replaces the element's children with the rendered output — any
       // listener attached beforehand would be discarded with the old DOM.
       this.mountVueApp(root);
-      this.wireForms(root);
+      this.wireForm(root);
       this.wireCancelButtons(root);
     },
 
@@ -81,7 +79,7 @@ export default {
       this.innerApp = createApp({
         setup() {
           // Reactive state + helpers exposed to the server-rendered Vue
-          // templates inside this block's edit form. The templates reference
+          // templates inside the block's edit form. The templates reference
           // `data.title`, `data.elements`, `addElement()`, `deleteElement()`,
           // `getImageUrl()`, `defaultElement` at top-level scope.
           const data = reactive(payload.data);
@@ -118,16 +116,26 @@ export default {
           return { data, defaultElement, deleteElement, addElement, getImageUrl };
         },
         mounted() {
-          // LanguageTool is a singleton initialised on DOMContentLoaded that
-          // exposes `document.initLanguageTool` for re-binding after AJAX
-          // updates — we call it here so the freshly-injected form picks up
-          // grammar checking.
-          document.initLanguageTool?.();
-          // Same pattern for the translation singleton: it hooks into
-          // '#translation-button' on DOMContentLoaded and we need to re-init
-          // it against the button inside the offcanvas. Scope it to this
-          // form's root so we don't bind to the outer page's own libre
-          // translate button (posts/pages/people forms also render one).
+          // LanguageTool grammar checker — LTAssistant is a global from a
+          // CDN script loaded by the admin layout. Skip silently if not
+          // present (e.g. dev without the API key).
+          if (window.LTAssistant && payload.languageTool) {
+            new window.LTAssistant({
+              localeCode: payload.languageTool.locale,
+              disableRuleIgnore: true,
+              disableDictionaryAdd: true,
+              user: {
+                email: payload.languageTool.email,
+                token: payload.languageTool.token,
+                premium: true,
+              },
+              apiServerUrl: 'https://api.languagetoolplus.com/v2',
+            });
+          }
+          // The translation singleton hooks into '#translation-button' on
+          // DOMContentLoaded; re-init scoped to this form so we don't bind
+          // to the outer page's libre translate button (posts/pages/people
+          // forms also render one).
           if (this.$el.querySelector('#translation-button')) {
             window.osuny?.translation?.init?.(this.$el);
           }
@@ -143,10 +151,9 @@ export default {
       this.innerApp.mount(root);
     },
 
-    wireForms(root) {
-      root.querySelectorAll('form').forEach((form) => {
-        form.addEventListener('submit', (event) => this.onSubmit(event));
-      });
+    wireForm(root) {
+      const form = root.querySelector('form');
+      if (form) form.addEventListener('submit', (event) => this.onSubmit(event));
     },
 
     wireCancelButtons(root) {
@@ -204,7 +211,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="pb-5">
     <div v-if="loading && !html" class="text-center py-5">
       <div class="spinner-border text-primary" role="status" />
     </div>
