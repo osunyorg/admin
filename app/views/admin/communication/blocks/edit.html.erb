@@ -14,9 +14,6 @@ payload = {
 <div
   id="app"
   data-editor-form-root
-  data-mode="edit"
-  data-block-id="<%= @block.id %>"
-  data-block-path="<%= admin_communication_block_path(@block) %>"
   data-payload="<%= payload.to_json %>"
   data-languagetool-locale="<%= I18n.locale %>"
   data-languagetool-email="<%= ENV['LANGUAGE_TOOL_USERNAME'] %>"

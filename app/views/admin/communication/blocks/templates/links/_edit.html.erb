@@ -13,7 +13,7 @@
         {{ element.title }}
         <div class="float-end">
           <a  class="btn btn-sm text-danger"
-              v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+              @click="data.elements.splice(data.elements.indexOf(element), 1)"
               title="<%= t '.remove' %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>

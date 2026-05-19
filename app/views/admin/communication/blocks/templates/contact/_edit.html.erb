@@ -25,7 +25,7 @@
       <%= block_component_edit block, :url %>
     <% end %>
     <% 
-    action = "<a class=\"#{ button_classes }\" v-on:click=\"data.phone_numbers.push('')\">#{ t('.add') }</a>"
+    action = "<a class=\"#{ button_classes }\" @click=\"data.phone_numbers.push('')\">#{ t('.add') }</a>"
     placeholder = t '.phones.placeholder'
     %>
     <%= osuny_panel t('.phones.label'), action: action do %>
@@ -35,14 +35,14 @@
                   class="form-control"
                   placeholder="<%= placeholder %>"
                   v-model="data.phone_numbers[index]">
-          <a class="btn text-danger" v-on:click="data.phone_numbers.splice(index, 1)">
+          <a class="btn text-danger" @click="data.phone_numbers.splice(index, 1)">
             <i class="<%= Icon::DELETE %>"></i>
           </a>
         </div>
       </div>
     <% end %>
     <% 
-    action = "<a class=\"#{ button_classes }\" v-on:click=\"data.emails.push('')\">#{ t('.add') }</a>"
+    action = "<a class=\"#{ button_classes }\" @click=\"data.emails.push('')\">#{ t('.add') }</a>"
     placeholder = t '.mails.placeholder'
     %>
     <%= osuny_panel t('.mails.label'), action: action do %>
@@ -52,7 +52,7 @@
                   class="form-control" 
                   placeholder="<%= placeholder %>"
                   v-model="data.emails[index]">
-          <a class="btn text-danger" v-on:click="data.emails.splice(index, 1)">
+          <a class="btn text-danger" @click="data.emails.splice(index, 1)">
             <i class="<%= Icon::DELETE %>"></i>
           </a>
         </div>
@@ -107,7 +107,7 @@
     </div>
     <div>
       <a  class="btn text-danger position-absolute top-0 end-0"
-          v-on:click="data.elements.splice(index, 1)">
+          @click="data.elements.splice(index, 1)">
           <i class="<%= Icon::DELETE %>"></i>
       </a>
     </div>

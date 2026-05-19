@@ -44,7 +44,7 @@
     </div>
     <div class="text-end">
       <a  class="btn btn-sm text-danger"
-          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
+          @click="data.elements.splice(data.elements.indexOf(element), 1)">
         <i class="<%= Icon::DELETE %>"></i>
       </a>
     </div>

@@ -26,7 +26,7 @@ keysPropValue = mapping_keys.map { |key| [key, User.human_attribute_name(key)] }
               </a>
             </div>
             <a
-              v-on:click="fields.splice(fields.indexOf(field), 1)"
+              @click="fields.splice(fields.indexOf(field), 1)"
               title="Remove field">
               <i class="<%= Icon::DELETE %>"></i>
             </a>

@@ -84,18 +84,17 @@ window.osuny.translation = {
     translateField: function (field, text) {
         'use strict';
         if (this.isSummernote(field)) {
+            // summernote('code', text) writes through to the textarea value
+            // but doesn't fire onChange — Summernote's quirk.
             $(field).summernote('code', text);
-            // summernote.code() updates the editor + underlying textarea HTML
-            // but does NOT fire the onChange callback, so any v-model wired
-            // to the textarea stays out of sync. Set the value and dispatch
-            // an input event so Vue's v-model picks up the translation.
-            field.value = text;
-            field.dispatchEvent(new Event('input'));
         } else {
             field.value = text;
-            // https://stackoverflow.com/questions/56348513/how-to-change-v-model-value-from-js
-            field.dispatchEvent(new Event('input'));
         }
+        // Wake up whatever is listening on the textarea: Vue's v-model
+        // directive, a wrapper component's input listener, or nothing at
+        // all in plain Rails forms (where the textarea value alone is
+        // enough since the form submit reads it directly).
+        field.dispatchEvent(new Event('input'));
     },
 
     isSummernote: function (field) {

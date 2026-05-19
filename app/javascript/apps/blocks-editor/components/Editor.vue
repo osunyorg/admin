@@ -1,13 +1,26 @@
 <script>
-import { createApp } from 'vue';
+import { createApp, provide, reactive } from 'vue';
 import { VueDraggableNext } from 'vue-draggable-next';
-import { editorFormData, editorFormMethods, ensureDirectUploadProgressListeners } from '../editor-form-runtime';
+import RichTextInput from './inputs/RichTextInput.vue';
+import CodeInput from './inputs/CodeInput.vue';
+import UploadInput from './inputs/UploadInput.vue';
+import MultiImageInput from './inputs/MultiImageInput.vue';
 
-// Renders the block-edit (or block-new) form fetched from the server inside
-// the offcanvas, mounts a fresh Vue app on it for reactive v-model bindings,
-// and unmounts on close. Replaces the old iframe-based OffCanvas.vue.
+// Renders the block-edit form fetched from the server, mounts a fresh inner
+// Vue app on it for reactive v-model bindings, and unmounts on close. The
+// outer offcanvas chrome lives in OffcanvasShell.vue; we only render the
+// form content here.
+//
+// The inner app exposes a small reactive surface (data, addElement,
+// deleteElement, getImageUrl) for the ERB-rendered templates, and registers
+// 4 wrapper components (RichTextInput, CodeInput, UploadInput,
+// MultiImageInput) that each own their own DOM lifecycle.
+
 export default {
-  props: ['url', 'i18n'],
+  name: 'Editor',
+  props: {
+    url: { type: String, required: true },
+  },
   emits: ['save', 'close'],
   data() {
     return {
@@ -36,11 +49,11 @@ export default {
         const res = await fetch(url, { headers: { Accept: 'text/html' } });
         const text = await res.text();
         // Server returns the `raw` layout (full <html> doc). Extract just the
-        // edit form root so we don't inject a second <html>/<head> into the
-        // current document.
+        // [data-editor-form-root] subtree so we don't inject a second
+        // <html>/<head> into the current document.
         const doc = new DOMParser().parseFromString(text, 'text/html');
         const root = doc.querySelector('[data-editor-form-root]');
-        this.html = root ? root.outerHTML : text;
+        this.html = root ? root.outerHTML : '';
         await this.$nextTick();
         this.mountInner();
       } finally {
@@ -49,74 +62,95 @@ export default {
     },
 
     mountInner() {
-      const root = this.$refs.container?.querySelector('[data-editor-form-root]');
+      const container = this.$refs.container;
+      if (!container) return;
+      const root = container.querySelector('[data-editor-form-root]');
       if (!root) return;
 
-      ensureDirectUploadProgressListeners();
-
-      const mode = root.dataset.mode; // 'edit' or 'new'
-      const payload = root.dataset.payload ? JSON.parse(root.dataset.payload) : null;
-
-      if (mode === 'edit' && payload) {
-        this.innerApp = createApp({
-          components: { draggable: VueDraggableNext },
-          data() { return editorFormData(payload); },
-          methods: editorFormMethods,
-          mounted() {
-            this.handleSummernotes();
-            setTimeout(() => this.handleCodemirrors(), 0);
-            document.initLanguageTool?.();
-            // The translation singleton hooks into '#translation-button' on
-            // DOMContentLoaded, which has long fired by now — re-init it
-            // against the freshly-injected libre translate button. Scope it
-            // to the form root so we don't bind to the outer page's own
-            // translation button (posts/pages/people forms also render one).
-            if (this.$el.querySelector('#translation-button')) {
-              window.osuny?.translation?.init?.(this.$el);
-            }
-          },
-          updated() {
-            this.handleSummernotes();
-          },
-        });
-        this.innerApp.mount(root);
-      }
-
-      this.wireForms(root, mode);
+      // Vue mount has to happen BEFORE wiring DOM listeners: createApp.mount()
+      // takes the element's innerHTML as its template, compiles it, then
+      // replaces the element's children with the rendered output — any
+      // listener attached beforehand would be discarded with the old DOM.
+      this.mountVueApp(root);
+      this.wireForms(root);
       this.wireCancelButtons(root);
-      this.wireNewBlockCards(root);
     },
 
-    wireNewBlockCards(root) {
-      // In `new` mode, each template card wraps a mini-form. Clicking anywhere
-      // on the card (image, title, description) should submit that form. The
-      // old approach relied on `js-validate-form-click` initialised on
-      // DOMContentLoaded + Bootstrap's `.stretched-link` on the submit button,
-      // but DOMContentLoaded has already fired by the time we inject this HTML
-      // into the offcanvas, so neither was picking up. We bind imperatively
-      // here instead; `requestSubmit()` goes through our existing submit
-      // listener wired by `wireForms`.
-      root.querySelectorAll('[data-block-card]').forEach((card) => {
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', (event) => {
-          // Let direct clicks on the submit button behave natively.
-          if (event.target.closest('[type=submit]')) return;
-          const form = card.querySelector('form');
-          if (form) form.requestSubmit();
-        });
+    mountVueApp(root) {
+      const payload = JSON.parse(root.dataset.payload);
+      this.innerApp = createApp({
+        setup() {
+          // Reactive state + helpers exposed to the server-rendered Vue
+          // templates inside this block's edit form. The templates reference
+          // `data.title`, `data.elements`, `addElement()`, `deleteElement()`,
+          // `getImageUrl()`, `defaultElement` at top-level scope.
+          const data = reactive(payload.data);
+          const defaultElement = payload.defaultElement;
+          const directUpload = {
+            url: payload.directUploadUrl,
+            blobUrlTemplate: payload.blobUrlTemplate,
+          };
+
+          function deleteElement(element) {
+            const index = data.elements.indexOf(element);
+            if (index >= 0) data.elements.splice(index, 1);
+          }
+          function addElement() {
+            data.elements.push(JSON.parse(JSON.stringify(defaultElement)));
+          }
+          function getImageUrl(image) {
+            if (!image?.signed_id) return '';
+            const parts = image.filename.split('.');
+            const extension = parts[parts.length - 1];
+            // Substitute :signed_id and :filename in the blob URL template
+            // we got from the server (medium_url helper, see edit.html.erb).
+            return directUpload.blobUrlTemplate
+              .replace(':signed_id', image.signed_id)
+              .replace(':filename', `image_1024x.${extension}`);
+          }
+
+          // The input wrappers reach for these via inject() instead of
+          // prop-drilling them through every server-rendered partial.
+          provide('directUpload', directUpload);
+          provide('getImageUrl', getImageUrl);
+          provide('summernoteLocale', payload.summernoteLocale);
+
+          return { data, defaultElement, deleteElement, addElement, getImageUrl };
+        },
+        mounted() {
+          // LanguageTool is a singleton initialised on DOMContentLoaded that
+          // exposes `document.initLanguageTool` for re-binding after AJAX
+          // updates — we call it here so the freshly-injected form picks up
+          // grammar checking.
+          document.initLanguageTool?.();
+          // Same pattern for the translation singleton: it hooks into
+          // '#translation-button' on DOMContentLoaded and we need to re-init
+          // it against the button inside the offcanvas. Scope it to this
+          // form's root so we don't bind to the outer page's own libre
+          // translate button (posts/pages/people forms also render one).
+          if (this.$el.querySelector('#translation-button')) {
+            window.osuny?.translation?.init?.(this.$el);
+          }
+        },
       });
+
+      this.innerApp.component('draggable', VueDraggableNext);
+      this.innerApp.component('RichTextInput', RichTextInput);
+      this.innerApp.component('CodeInput', CodeInput);
+      this.innerApp.component('UploadInput', UploadInput);
+      this.innerApp.component('MultiImageInput', MultiImageInput);
+
+      this.innerApp.mount(root);
     },
 
-    wireForms(root, mode) {
-      // The edit form posts block params; the new page has one form per
-      // template kind — both are intercepted to keep the offcanvas alive.
+    wireForms(root) {
       root.querySelectorAll('form').forEach((form) => {
-        form.addEventListener('submit', (event) => this.onSubmit(event, mode));
+        form.addEventListener('submit', (event) => this.onSubmit(event));
       });
     },
 
     wireCancelButtons(root) {
-      // Any `.vue__changes__cancel` button inside the form closes the offcanvas.
+      // The `.vue__changes__cancel` button closes the offcanvas.
       root.querySelectorAll('.vue__changes__cancel').forEach((button) => {
         button.addEventListener('click', (event) => {
           event.preventDefault();
@@ -125,7 +159,7 @@ export default {
       });
     },
 
-    async onSubmit(event, mode) {
+    async onSubmit(event) {
       event.preventDefault();
       const form = event.target;
       const submit = form.querySelector('[type=submit]');
@@ -137,16 +171,6 @@ export default {
         headers: { Accept: 'text/javascript' },
       });
 
-      if (res.status === 201 && mode === 'new') {
-        // Block was just created — navigate the offcanvas to its edit URL.
-        const location = res.headers.get('Location');
-        if (location) {
-          this.$emit('navigate', location);
-          await this.load(location);
-        }
-        return;
-      }
-
       if (res.ok) {
         this.$emit('save');
         return;
@@ -155,7 +179,7 @@ export default {
       // Re-enable submit on error so the user can retry.
       if (submit) submit.disabled = false;
       if (res.status === 422) {
-        // Reload the form (server re-rendered with errors).
+        // Server re-rendered the form with errors — swap it in and re-mount.
         const text = await res.text();
         const doc = new DOMParser().parseFromString(text, 'text/html');
         const fresh = doc.querySelector('[data-editor-form-root]');
@@ -180,30 +204,10 @@ export default {
 </script>
 
 <template>
-  <section>
-    <div
-      class="offcanvas offcanvas-end vue__blocks-editor__offcanvas"
-      :class="{ show: url }"
-      tabindex="-1">
-      <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title">{{ i18n.blocksEditor.offcanvas.title }}</h5>
-        <button
-          type="button"
-          class="btn-close"
-          @click="$emit('close')"
-          :aria-label="i18n.blocksEditor.offcanvas.close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <div v-if="loading && !html" class="text-center py-5">
-          <div class="spinner-border text-primary" role="status" />
-        </div>
-        <div ref="container" v-html="html" />
-      </div>
+  <div>
+    <div v-if="loading && !html" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status" />
     </div>
-    <div
-      v-show="url"
-      @click="$emit('close')"
-      class="offcanvas-backdrop"
-      :class="{ show: url }"></div>
-  </section>
+    <div ref="container" v-html="html" />
+  </div>
 </template>

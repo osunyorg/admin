@@ -23,8 +23,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       university: current_university,
       mandatory_module: Contentful
     )
-    breadcrumb
-    render layout: 'admin/layouts/raw'
+    respond_to do |format|
+      format.json
+    end
   end
 
   def show
@@ -39,21 +40,9 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def create
     if @block.save
-      respond_to do |format|
-        format.html {
-          redirect_to [:edit, :admin, @block],
-                      notice: t('admin.successfully_created_html', model: @block.to_s)
-        }
-        format.js { render json: {}, status: :created, location: [:edit, :admin, @block] }
-      end
+      render json: {}, status: :created, location: [:edit, :admin, @block]
     else
-      respond_to do |format|
-        format.html {
-          breadcrumb
-          render :new, status: :unprocessable_content
-        }
-        format.js { head :unprocessable_content }
-      end
+      head :unprocessable_content
     end
   end
 

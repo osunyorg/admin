@@ -3,7 +3,6 @@
 <%= osuny_separator %>
 <draggable  class="mb-3"
             :list="data.elements"
-            @end="refreshSummernotes()"
             handle=".dragHandle">
   <div v-for="(element, index) in data.elements" class="mb-2">
     <div class="card draggable-item dragHandle m-0">
@@ -13,7 +12,7 @@
           {{ element.title }}
         </a>
         <a  class="btn btn-sm text-danger ms-auto"
-            v-on:click="deleteElement(element)"
+            @click="deleteElement(element)"
             title="<%= t '.remove_event' %>">
             <i class="<%= Icon::DELETE %>"></i>
         </a>

@@ -1,143 +1,128 @@
 <script>
 import Blocks from './components/Blocks.vue';
 import Editor from './components/Editor.vue';
+import OffcanvasShell from './components/OffcanvasShell.vue';
+import TemplatePicker from './components/TemplatePicker.vue';
 
 export default {
-    components: {
-      Blocks,
-      Editor
+  components: { Blocks, Editor, OffcanvasShell, TemplatePicker },
+  data() {
+    return {
+      loading: true,
+      csrfToken: '',
+      url: {
+        i18n: '',
+        new: '',
+        reorder: '',
+        data: '',
+      },
+      i18n: {},
+      data: {},
+      planMode: false,
+      offcanvasState: 'closed', // closed, picking, editing
+      editorUrl: '',
+    };
+  },
+  beforeMount() {
+    this.csrfToken = document.querySelector('[name="csrf-token"]').content;
+    const dataset = document.getElementById('blocks-editor-app').dataset;
+    this.url.i18n = dataset.i18nUrl;
+    this.url.data = dataset.dataUrl;
+    this.url.new = dataset.newUrl;
+    this.url.reorder = dataset.reorderUrl;
+    this.loadJson(this.url.i18n, 'i18n');
+    this.refresh();
+  },
+  methods: {
+    loadJson(url, target) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          this[target] = JSON.parse(xhr.responseText);
+          if (this.i18n.blocksEditor && this.data.blocks) {
+            this.loading = false;
+          }
+        }
+      };
+      xhr.send();
     },
-    data () {
-      return {
-        loading: true,
-        csrfToken: "",
-        url: {
-          i18n: "",
-          new: "",
-          reorder: "",
-          data: "",
-          current: ""
-        },
-        i18n: {},
-        data: {},
-        currentUrl: "",
-        planMode: false
-      }
+    refresh() {
+      this.loadJson(this.url.data, 'data');
     },
-    beforeMount() {
-      // CSRF
-      this.csrfToken = document.querySelector('[name="csrf-token"]').content;
-      // Récupération des paramètres de l'application
-      const dataset = document.getElementById('blocks-editor-app').dataset;
-      this.url.i18n = dataset.i18nUrl;
-      this.url.data = dataset.dataUrl;
-      this.url.new = dataset.newUrl;
-      this.url.reorder = dataset.reorderUrl;
-      // Chargement
-      this.loadJson(this.url.i18n, "i18n");
+    onAdd() {
+      this.offcanvasState = 'picking';
+    },
+    onEdit(block) {
+      this.editorUrl = block.url.edit;
+      this.offcanvasState = 'editing';
+    },
+    onPick(editUrl) {
+      this.editorUrl = editUrl;
+      this.offcanvasState = 'editing';
       this.refresh();
     },
-    methods: {
-      loadJson(url, target) {
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", url);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            this[target] = JSON.parse(xhr.responseText);
-            if (this.i18n.blocksEditor && this.data.blocks) {
-              this.loading = false;
-            }
-          }
-        }.bind(this);
-        xhr.send();
-      },
-      refresh() {
-        this.loadJson(this.url.data, "data");
-      },
-      onAdd() {
-        this.url.current = this.url.new;
-        this.openEditor();
-      },
-      onEdit(block) {
-        this.url.current = block.url.edit;
-        this.openEditor();
-      },
-      onDuplicate(block) {
-        this.loadAndRefresh(block.url.duplicate, "POST");
-      },
-      onCopy(block) {
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", block.url.copy);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            this.onCopyDone();
-          }
-        }.bind(this);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
-        xhr.send();
-      },
-      onCopyDone() {
-        let notyf = new Notyf();
-        notyf.open({
-            type: 'success',
-            position: {
-                x: 'left',
-                y: 'bottom'
-            },
-            message: this.i18n.blocksEditor.confirm.copy,
-            duration: 9000,
-            ripple: true,
-            dismissible: true
-        });
-      },
-      onDelete(block) {
-        this.loadAndRefresh(block.url.delete, "DELETE");
-      },
-      onSave() {
-        this.closeEditor();
-      },
-      onClose() {
-        this.closeEditor();
-      },
-      openEditor() {
-        document.body.classList.add("modal-open");
-      },
-      closeEditor() {
-        this.url.current = "";
-        this.refresh();
-        document.body.classList.remove("modal-open");
-      },
-      onReorder() {
-        let ids = [];
-        for (let index in this.data.blocks) {
-          let block = this.data.blocks[index];
-          ids.push(block.id);
-        }
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", this.url.reorder);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            this.refresh();
-          }
-        }.bind(this);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
-        xhr.send(JSON.stringify({ ids: ids }));
-      },
-      loadAndRefresh(url, method) {
-        let xhr = new XMLHttpRequest();
-        xhr.open(method, url);
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            this.refresh();
-          }
-        }.bind(this);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("X-CSRF-Token", this.csrfToken);
-        xhr.send();
-      }
-    }
+    onDuplicate(block) {
+      this.loadAndRefresh(block.url.duplicate, 'POST');
+    },
+    onCopy(block) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', block.url.copy);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) this.onCopyDone();
+      };
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('X-CSRF-Token', this.csrfToken);
+      xhr.send();
+    },
+    onCopyDone() {
+      const notyf = new Notyf();
+      notyf.open({
+        type: 'success',
+        position: { x: 'left', y: 'bottom' },
+        message: this.i18n.blocksEditor.confirm.copy,
+        duration: 9000,
+        ripple: true,
+        dismissible: true,
+      });
+    },
+    onDelete(block) {
+      this.loadAndRefresh(block.url.delete, 'DELETE');
+    },
+    onSave() {
+      this.closeOffcanvas();
+      this.refresh();
+    },
+    onClose() {
+      this.closeOffcanvas();
+      this.refresh();
+    },
+    closeOffcanvas() {
+      this.offcanvasState = 'closed';
+      this.editorUrl = '';
+    },
+    onReorder() {
+      const ids = this.data.blocks.map((b) => b.id);
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', this.url.reorder);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) this.refresh();
+      };
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('X-CSRF-Token', this.csrfToken);
+      xhr.send(JSON.stringify({ ids }));
+    },
+    loadAndRefresh(url, method) {
+      const xhr = new XMLHttpRequest();
+      xhr.open(method, url);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) this.refresh();
+      };
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.setRequestHeader('X-CSRF-Token', this.csrfToken);
+      xhr.send();
+    },
+  },
 };
 </script>
 
@@ -145,7 +130,7 @@ export default {
   <section
     v-if="!loading"
     class="vue__blocks-editor mb-5"
-    :class="{'vue__blocks-editor--plan-mode': planMode }">
+    :class="{ 'vue__blocks-editor--plan-mode': planMode }">
     <div class="row my-4">
       <div class="offset-lg-4 col-lg-8 col-xxl-6">
         <a
@@ -154,7 +139,7 @@ export default {
           {{ i18n.blocksEditor.actions.addBlock }}</a>
         <a
           class="btn btn-sm float-md-end"
-          :class="{'btn-success': planMode, 'btn-light': !planMode}"
+          :class="{ 'btn-success': planMode, 'btn-light': !planMode }"
           @click="planMode = !planMode"
           v-show="data.blocks.length > 2">
           <i class="fas fa-list"></i>
@@ -179,11 +164,21 @@ export default {
           {{ i18n.blocksEditor.actions.addBlock }}</a>
       </div>
     </div>
-    <Editor
-      :i18n="i18n"
-      :url="url.current"
-      @save="onSave"
-      @close="onClose"
-      />
+    <OffcanvasShell
+      :open="offcanvasState !== 'closed'"
+      :title="i18n.blocksEditor.offcanvas.title"
+      :close-label="i18n.blocksEditor.offcanvas.close"
+      @close="onClose">
+      <TemplatePicker
+        v-if="offcanvasState === 'picking'"
+        :url="url.new"
+        :csrf-token="csrfToken"
+        @created="onPick" />
+      <Editor
+        v-else-if="offcanvasState === 'editing'"
+        :url="editorUrl"
+        @save="onSave"
+        @close="onClose" />
+    </OffcanvasShell>
   </section>
 </template>
