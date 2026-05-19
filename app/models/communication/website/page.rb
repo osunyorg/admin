@@ -44,7 +44,6 @@ class Communication::Website::Page < ApplicationRecord
   include GeneratesGitFiles
   include Lifecyclable
   include Localizable
-  include Orderable
   include Sanitizable
   include Searchable
   include WithAutomaticMenus
@@ -53,6 +52,7 @@ class Communication::Website::Page < ApplicationRecord
   include HasListBlocks
   include WithSpecialPage
   include WithUniversity
+  include Orderable # Must be loaded after WithSpecialPage to use the correct last_ordered_element method
 
   belongs_to :parent,
              class_name: 'Communication::Website::Page',
