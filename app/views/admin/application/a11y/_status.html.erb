@@ -1,11 +1,9 @@
-<% cache [about, I18n.locale] do %>
-  <span class="small a11y__status">
-    <% if about.accessibility_errors.any? %>
-      <i class="fas fa-universal-access text-danger"></i>
-      <%= t "accessibility.status.false" %>
-    <% elsif about.accessibility_warnings.any? %>
-      <i class="fas fa-universal-access text-muted"></i>
-      <%= t "accessibility.status.warnings" %>
-    <% end %>
-  </span>
-<% end %>
+<span class="small a11y__status">
+  <% if about.accessibility_errors.any? %>
+    <i class="fas fa-universal-access text-danger"></i>
+    <%= t "accessibility.status.false" %>
+  <% elsif about.accessibility_warnings.any? %>
+    <i class="fas fa-universal-access text-muted"></i>
+    <%= t "accessibility.status.warnings" %>
+  <% end %>
+</span>
