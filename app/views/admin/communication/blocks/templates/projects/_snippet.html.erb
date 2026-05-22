@@ -1,8 +1,22 @@
-<% block.template.selected_projects.each do |project|
+<%
+pagination_identifier = "pagination_#{block.id.underscore}"
+projects = block.template
+                .selected_projects
+                .page(params[pagination_identifier])
+%>
+<% if block.native %>
+  <div class="mb-4">
+    <p><%= t( 'admin.communication.website.pages.special_pages.communication_portfolio.native',
+              count: projects.total_count) %></p>
+    <%= create_link Communication::Website::Portfolio::Project %>
+  </div>
+<% end %>
+<section>
+<% projects.each do |project|
     l10n = project.localization_for(block.language)
     next if l10n.nil?
     %>
-  <div class="row mb-3">
+  <article class="row mb-3 position-relative">
     <div class="col-2">
       <% if l10n.featured_image.attached? %>
         <%= kamifusen_tag l10n.featured_image, width: 200, class: 'img-fluid mb-2' %>
@@ -11,7 +25,9 @@
       <% end %>
     </div>
     <div class="col-10">
-      <p><%= l10n.to_s %></p>
+      <p><%= link_to l10n.to_s, [:admin, project], class: 'stretched-link' %></p>
     </div>
-  </div>
+  </article>
 <% end %>
+  <%= paginate projects, param_name: pagination_identifier %>
+</section>

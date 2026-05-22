@@ -572,9 +572,9 @@ fr:
                 other: Cette page est une page spéciale, qui présente nativement les %{count} offres d'emploi publiées.
             communication_portfolio:
               native:
-                zero: Cette page est une page spéciale, qui présente nativement les projets du site.
-                one: Cette page est une page spéciale, qui présente nativement les projets du site. Pour l'instant, il y a 1 projet publié.
-                other: Cette page est une page spéciale, qui présente nativement les %{count} projets publiés.
+                zero: Cette page est une page spéciale, qui présente nativement les projets du site, dans ce bloc. Vous pouvez créer un nouveau projet avec le bouton ci-dessous.
+                one: Cette page est une page spéciale, qui présente nativement les projets du site, dans ce bloc. Pour l'instant, il y a 1 projet publié. Vous pouvez créer un nouveau projet avec le bouton ci-dessous.
+                other: Cette page est une page spéciale, qui présente nativement, dans ce bloc, les %{count} projets publiés. Vous pouvez créer un nouveau projet avec le bouton ci-dessous.
             communication_post:
               native:
                 zero: Cette page est une page spéciale, qui présente nativement les actualités du site.

@@ -1,3 +1,6 @@
+      layout: <%= block.template.layout %>
+<%= block_options_static block -%>
+<%  unless block.native %>
 <%= block_component_static block, :mode %>
 <% if block.template.mode == 'all' %>
       all: true
@@ -13,11 +16,10 @@
   end
 end
 %>
-      layout: <%= block.template.layout %>
-<%= block_options_static block %>
 <%= render 'admin/application/static/hugo/collection',
             key: :projects,
             depth: 3,
             collection: block.template.selected_projects,
-            language: block.language %>
+            language: block.language -%>
       quantity: <%= block.template.selected_projects.to_a.count %>
+<% end %>

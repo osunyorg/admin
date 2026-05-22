@@ -2,10 +2,10 @@
 template_path = "admin/communication/blocks/templates/#{block.template_kind}/static"
 should_render_data = block.data && block.data.present?
 %>
-  - kind: block
-    template: <%= block.template_kind %>
-<%= osuny_static_text 'title', block.title, depth: 3 %>
-<%= osuny_static_text 'slug', block.slug, depth: 3 %>
+  - template: <%= block.template_kind %>
+    native: <%= block.native %>
+<%= osuny_static_text 'title', block.title, depth: 3 -%>
+<%= osuny_static_text 'slug', block.slug, depth: 3 -%>
     ranks:
       base: <%= block.heading_rank_base %>
 <% if block.heading_self? %>
@@ -18,7 +18,7 @@ should_render_data = block.data && block.data.present?
     html_class: "<%= block.html_class_prepared %>"
 <% end %>
     top:
-      active: <%= block.template.top_active %>
+      active: <%= block.template.top_active -%>
 <% if block.template.top_title.present? %>
       title: 
 <%= osuny_static_text 'value', block.template.top_title, depth: 5 %>

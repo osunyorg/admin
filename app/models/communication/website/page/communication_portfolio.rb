@@ -4,6 +4,10 @@ class Communication::Website::Page::CommunicationPortfolio < Communication::Webs
     true
   end
 
+  def native_block_template_kind
+    :projects
+  end
+
   def editable_width?
     false
   end

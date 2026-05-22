@@ -60,6 +60,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
   include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
+  include WithNativeBlock
   include WithOpenApi
   include WithUniversity
 
@@ -68,6 +69,7 @@ class Communication::Website::Page::Localization < ApplicationRecord
               foreign_key: :communication_website_id
 
   delegate :is_home?, to: :about
+  alias :page :about
 
   has_summernote :summary
 
