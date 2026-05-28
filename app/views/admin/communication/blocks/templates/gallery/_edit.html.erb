@@ -14,9 +14,7 @@
 <%= osuny_separator %>
 
 <p><%= t('.move_images') %></p>
-<draggable  :list="data.elements"
-            class="row"
-            @end="refreshSummernotes()">
+<draggable :list="data.elements" @end="refreshSummernotes()" class="row">
   <div v-for="(element, index) in data.elements" class="col-2 mb-4">
     <div class="card">
       <div class="card-header p-1 text-center">
