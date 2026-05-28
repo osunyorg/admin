@@ -72,6 +72,7 @@ gem "rbnacl", "~> 7.1"
 gem "redis", "~> 5.1"
 gem "roo", "~> 2"
 gem "rswag", "~> 2"
+gem "ruby-vips", "~> 2.3"
 gem "sanitize"
 gem "sassc-rails"
 gem "simple-navigation"
@@ -114,3 +115,4 @@ group :test do
 end
 
 gem "tzinfo-data", platforms: [:windows, :jruby]
+
