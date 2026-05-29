@@ -9,15 +9,16 @@
 #  migration_identifier     :string
 #  position                 :integer          not null
 #  position_in_tree         :integer
-#  type                     :string
+#  type                     :string           uniquely indexed => [communication_website_id]
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null, indexed
+#  communication_website_id :uuid             not null, uniquely indexed => [type], indexed
 #  parent_id                :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
+#  idx_on_communication_website_id_type_66132928af                (communication_website_id,type) UNIQUE WHERE (type IS NOT NULL)
 #  index_communication_website_pages_on_communication_website_id  (communication_website_id)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
 #  index_communication_website_pages_on_university_id             (university_id)
