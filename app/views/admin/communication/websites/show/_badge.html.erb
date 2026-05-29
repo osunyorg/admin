@@ -1,0 +1,5 @@
+<% if @website.deployment_status_badge.present? && @website.git_repository.present? %>
+  <%= link_to @website.repository_url, target: :_blank do %>
+    <%= image_tag @website.deployment_status_badge, alt: '' %>
+  <% end %>
+<% end %>
