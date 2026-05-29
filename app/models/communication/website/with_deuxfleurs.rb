@@ -37,7 +37,7 @@ module Communication::Website::WithDeuxfleurs
   end
 
   def deuxfleurs_golive_safely
-    return unless hosted_with_deuxfleurs?
+    return unless hosted_with_deuxfleurs? && in_production?
     # https://www.test.com -> www.test.com
     new_identifier = URI(url).host
     should_rename = self.deuxfleurs_identifier != new_identifier
