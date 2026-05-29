@@ -42,7 +42,7 @@ module Communication::Website::WithDeuxfleurs
     new_identifier = URI(url).host
     should_rename = self.deuxfleurs_identifier != new_identifier
 
-    if should_rename && deuxfleurs.rename_bucket(self.deuxfleurs_identifier, new_identifier)
+    if should_rename && !deuxfleurs.rename_bucket(self.deuxfleurs_identifier, new_identifier)
       raise "Failed to rename bucket from #{self.deuxfleurs_identifier} to #{new_identifier}"
     end
     update(deuxfleurs_identifier: new_identifier)
