@@ -29,6 +29,10 @@ module AsCategoryLocalization
     contents_dependencies
   end
 
+  def references
+    category_objects_localizations
+  end
+
   def published?
     persisted?
   end
@@ -53,5 +57,11 @@ module AsCategoryLocalization
 
   def hugo_slug_in_website(website)
     slug_with_ancestors_slugs
+  end
+
+  def category_objects_localizations
+    category_objects_ids = about.category_objects.pluck(:id)
+    localization_class_name = "#{about.category_objects.klass.name}::Localization"
+    localization_class_name.constantize.where(university_id: university_id, about_id: category_objects_ids)
   end
 end
