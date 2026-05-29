@@ -190,5 +190,5 @@ certifications:
 ].each do |property| %>
 <%= osuny_static_html property.to_s, @l10n.send("best_#{property}") %>
 <% end %>
-<%= render 'admin/communication/contents/static', about: @l10n %>
+<%= render 'admin/communication/blocks/group/static', about: @l10n %>
 ---

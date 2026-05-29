@@ -11,8 +11,16 @@
                     color: white
                 .layout__image
                     border: $color-accent 1px solid !important
-
-.content-editor
+.vue__blocks-editor
+    .plan-mode--true
+        display: none
+    .plan-mode--false
+        display: block
+    &--plan-mode
+        .plan-mode--true
+            display: block
+        .plan-mode--false
+            display: none
     &__offcanvas
         width: 95vw !important
         @include media-breakpoint-up(md)
@@ -33,13 +41,13 @@
                 transition: opacity 0.5s ease
                 &:hover
                     opacity: 1
-            .content-editor__elements__handle
+            .vue__blocks-editor__elements__handle
                 cursor: move
             &--hover
                 opacity: 0
                 transition: opacity 0.25s ease
             &:hover
-                .content-editor__elements__element--hover
+                .vue__blocks-editor__elements__element--hover
                     opacity: 1
         &__handle
             margin-left: 10px

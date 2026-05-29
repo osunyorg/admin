@@ -1,13 +1,34 @@
 fr:
   vue:
+    blocksEditor:
+      actions:
+        addBlock: Ajouter un bloc
+        copy: Copier le bloc
+        delete: Supprimer
+        duplicate: Dupliquer
+        edit: Modifier
+        move: Déplacer
+        paste: Coller le bloc
+      confirm:
+        copy: Le bloc a bien été copié dans le presse-papier, vous pourrez le coller ailleurs.
+        deletion: Est-ce que vous confirmez la suppression ?
+        duplication: Est-ce que vous confirmez la duplication ?
+        reset: La réinitialisation va supprimer tous les blocs dans cette langue. Est-ce que vous confirmez ?
+      empty: Ce bloc est vide et n'apparaitra pas
+      offcanvas:
+        close: Fermer l'édition du bloc
+        title: Édition du bloc
+      planMode:
+        button: Organiser le plan
+        description: Dans le mode “Organiser le plan”, vous ne voyez qu'un petit aperçu de chaque bloc. C'est le mode idéal pour ranger les documents longs.
     changes:
       cancel: Annuler
       save: Enregistrer les modifications
     cropperModal:
-        cancel: Annuler
-        rotate: Tourner l'image
-        title: Cadrer l'image
-        validate: Valider
+      cancel: Annuler
+      rotate: Tourner l'image
+      title: Cadrer l'image
+      validate: Valider
     mediaPicker:
       alt:
         hint: Ce texte est essentiel pour l'accessibilité. Si l'image donne une information importante, il faut écrire ici cette information. Si l'information est déjà présente ailleurs dans la page, ou si l'image est purement décorative, il faut laisser le texte alternatif vide, pour éviter de polluer la navigation vocale.
