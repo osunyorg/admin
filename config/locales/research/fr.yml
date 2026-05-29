@@ -167,7 +167,7 @@ fr:
             title: Publications
       select_identifier_html: Choisissez tou·tes les auteur·es HAL correspondant à cette personne. <br>Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
       sync: Synchroniser les publications HAL
-      synchronization_done: Synchronisation effectuée
+      synchronization_done: Synchronisation en cours
   research/hal:
     description:
       source: HAL.science

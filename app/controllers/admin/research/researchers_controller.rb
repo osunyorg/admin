@@ -33,7 +33,7 @@ class Admin::Research::ResearchersController < Admin::Research::ApplicationContr
   end
 
   def sync_with_hal
-    @researcher.import_research_hal_publications!
+    @researcher.import_research_hal_publications
     redirect_to admin_research_researcher_path(@researcher), notice: t('research.hal.synchronization_done')
   end
 
