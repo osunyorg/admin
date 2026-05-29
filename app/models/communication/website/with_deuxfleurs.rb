@@ -36,15 +36,17 @@ module Communication::Website::WithDeuxfleurs
     end
   end
 
-    def deuxfleurs_golive_safely
-      return unless hosted_with_deuxfleurs?
-      # https://www.test.com -> www.test.com
-      new_identifier = URI(url).host
-      unless deuxfleurs.rename_bucket(self.deuxfleurs_identifier, new_identifier)
-        raise "Failed to rename bucket from #{self.deuxfleurs_identifier} to #{new_identifier}"
-      end
-      update(deuxfleurs_identifier: new_identifier)
+  def deuxfleurs_golive_safely
+    return unless hosted_with_deuxfleurs?
+    # https://www.test.com -> www.test.com
+    new_identifier = URI(url).host
+    should_rename = self.deuxfleurs_identifier != new_identifier
+
+    if should_rename && deuxfleurs.rename_bucket(self.deuxfleurs_identifier, new_identifier)
+      raise "Failed to rename bucket from #{self.deuxfleurs_identifier} to #{new_identifier}"
     end
+    update(deuxfleurs_identifier: new_identifier)
+  end
 
   def deuxfleurs_destroy_bucket
     return unless hosted_with_deuxfleurs?
