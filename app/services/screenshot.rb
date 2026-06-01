@@ -21,13 +21,12 @@ class Screenshot
   def self.capture(url, full_page:)
     response = HTTParty.get(PRO_API, {
       query: {
-        url: url,
-        screenshot: true,
-        fullPage: full_page,
-        meta: false,
-        waitForTimeout: 1500,
-        headers: { 'accept-language': 'fr;q=0.9, en;q=0.8' },
-        device: 'Macbook Pro 16'
+        'url': url,
+        'screenshot.fullPage': full_page,
+        'meta': false,
+        'waitForTimeout': 1500,
+        'headers': { 'accept-language': 'fr;q=0.9, en;q=0.8' },
+        'device': 'Macbook Pro 16'
       },
       headers: {
         'x-api-key' => ENV['MICROLINK_API_KEY']

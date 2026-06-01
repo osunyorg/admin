@@ -1,5 +1,9 @@
 <% content_for :title, t('server_admin.dashboard') %>
 
+<div class="mb-5">
+  <%= link_to 'Potentiel de contribution', potential_server_universities_path, class: 'btn btn-sm btn-primary' %>
+</div>
+
 <div class="row">
   <% @parts.each do |part| %>
     <div class="col-md-6 d-flex">

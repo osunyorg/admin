@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "4.0.1"
+ruby "4.0.3"
 
 gem "activestorage-scaleway-service"#, path: "../activestorage-scaleway-service"
-gem "active_hashcash", github: "BaseSecrete/active_hashcash"
+gem "active_hashcash"
 gem "active_storage_validations", "~> 1"
 gem "add_to_calendar"
 gem "aws-sdk-s3"
@@ -46,7 +46,7 @@ gem "image_processing"
 gem "invisible_captcha", "~> 2.3"
 gem "jbuilder"
 gem "jquery-rails"
-gem "jquery-ui-rails", "~> 7.0"
+gem "jquery-ui-rails", "~> 8.0"
 gem "jsbundling-rails", "~> 1.3"
 gem "kamifusen"#, path: "../kamifusen"
 gem "kaminari"
@@ -72,6 +72,7 @@ gem "rbnacl", "~> 7.1"
 gem "redis", "~> 5.1"
 gem "roo", "~> 2"
 gem "rswag", "~> 2"
+gem "ruby-vips", "~> 2.3"
 gem "sanitize"
 gem "sassc-rails"
 gem "simple-navigation"
@@ -99,7 +100,7 @@ end
 group :development do
   gem "annotaterb"
   gem "better_errors"
-  # gem "binding_of_caller" # Waiting for Ruby 4 support
+  gem "binding_of_caller"
   gem "listen", "~> 3.3"
   gem "rack-mini-profiler", "~> 3.0"
   gem "spring"
@@ -114,3 +115,4 @@ group :test do
 end
 
 gem "tzinfo-data", platforms: [:windows, :jruby]
+

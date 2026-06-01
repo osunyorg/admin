@@ -25,7 +25,7 @@
         </div>
         <div>
           <a  class="btn btn-sm text-danger ms-3"
-              v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+              v-on:click="deleteElement(element)"
               title="<%= t('delete') %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>
@@ -44,6 +44,7 @@
   <%= osuny_label t('admin.communication.blocks.display_options.title') %>
   <%= block_component_edit block, :option_main_summary %>
   <%= block_component_edit block, :option_image %>
+  <%= block_component_edit block, :option_subtitle %>
   <%= block_component_edit block, :option_summary %>
   <%= block_component_edit block, :option_categories %>
 <% end %>

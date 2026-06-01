@@ -2,5 +2,5 @@
 
 <h1><%= @tag %></h1>
 
-<%= render 'highlight' %>
+<%= render 'highlight' if @highlighted_websites.any? %>
 <%= render 'list' %>

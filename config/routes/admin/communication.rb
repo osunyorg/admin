@@ -6,9 +6,12 @@ namespace :communication do
   end
   resources :websites do
     member do
-      get 'edit/language' => 'websites#edit_language', as: :edit_language
-      get 'edit/technical' => 'websites#edit_technical', as: :edit_technical
-      get 'edit/federation' => 'websites#edit_federation', as: :edit_federation
+      scope 'settings' do
+        get 'federation' => 'websites/settings#federation'
+        get 'language' => 'websites/settings#language'
+        get 'redirects' => 'websites/settings#redirects'
+        get 'technical' => 'websites/settings#technical'
+      end
       get :analytics
       get :security
       get :static
@@ -33,7 +36,7 @@ namespace :communication do
         get 'direct_source/:type' => 'websites/connections#direct_source', as: :direct_source
       end
     end
-    resources :permalinks, controller: 'websites/permalinks', only: [:create, :destroy]
+    resources :permalinks, controller: 'websites/permalinks'
     resources :git_files, controller: 'websites/git_files', only: [:index, :show]
     namespace :page, path: 'pages' do
       resources :categories, controller: '/admin/communication/websites/pages/categories' do
@@ -79,11 +82,15 @@ namespace :communication do
     resources :posts, controller: 'websites/posts' do
       collection do
         resources :curations, as: :post_curations, controller: 'websites/posts/curations', only: [:new, :create]
+        get :move_batch
+        post :do_move_batch
         post :publish_batch
       end
       member do
+        get :move
         get :preview
         get :static
+        post :do_move
         post :duplicate
         post :publish
         post :restore
@@ -101,9 +108,15 @@ namespace :communication do
             get :static
           end
         end
+        collection do
+          get :move_batch
+          post :do_move_batch
+        end
         member do
+          get :move
           get :preview
           get :static
+          post :do_move
           post :duplicate
           post :publish
           post :save_time_slots

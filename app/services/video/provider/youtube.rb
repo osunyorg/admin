@@ -111,5 +111,7 @@ class Video::Provider::Youtube < Video::Provider::Default
     uri = URI(video_url)
     params = CGI::parse(uri.query)
     params['v'].first
+  rescue
+    nil
   end
 end

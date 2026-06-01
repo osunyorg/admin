@@ -1,7 +1,7 @@
 class Admin::Communication::WebsitesController < Admin::Communication::Websites::ApplicationController
   include Admin::Localizable
 
-  before_action :set_feature_nav, only: [:edit, :edit_language, :edit_federation, :edit_technical, :update]
+  before_action :set_feature_nav, only: [:edit, :update]
 
   def index
     @websites = @websites.filter_by(params[:filters], current_language)
@@ -88,30 +88,6 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
     add_breadcrumb t('admin.subnav.settings')
   end
 
-  def edit_language
-    @l10n = @website.localization_for(current_language)
-    breadcrumb
-    add_breadcrumb t('admin.subnav.settings'), edit_admin_communication_website_path(@website, website_id: nil)
-    add_breadcrumb current_language
-  end
-
-  def edit_federation
-    @l10n = @website.localization_for(current_language)
-    @source_websites = current_university.websites
-                                         .where.not(id: @website.id)
-                                         .ordered(current_language)
-    breadcrumb
-    add_breadcrumb t('admin.subnav.settings'), edit_admin_communication_website_path(@website, website_id: nil)
-    add_breadcrumb t('admin.communication.website.federation.label')
-  end
-
-  def edit_technical
-    @l10n = @website.localization_for(current_language)
-    breadcrumb
-    add_breadcrumb t('admin.subnav.settings'), edit_admin_communication_website_path(@website, website_id: nil)
-    add_breadcrumb t('admin.communication.website.technical.label')
-  end
-
   def create
     if @website.save
       redirect_to [:admin, @website], notice: t('admin.successfully_created_html', model: @website.to_s_in(current_language))
@@ -148,7 +124,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
 
   def destroy
     Communication::Website::DestroyWebsiteJob.perform_later(@website)
-    redirect_to admin_communication_websites_url, 
+    redirect_to admin_communication_websites_url,
                 notice: t('admin.successfully_destroyed_html', model: @website.to_s_in(current_language))
   end
 
@@ -164,7 +140,7 @@ class Admin::Communication::WebsitesController < Admin::Communication::Websites:
       :in_showcase,
       :git_provider, :git_endpoint, :git_branch, :plausible_url,
       :feature_posts, :feature_agenda, :feature_portfolio, :feature_jobboard, :feature_alumni, :feature_syndication, :feature_alerts, :feature_hourly_publication,
-      :default_time_zone, :deuxfleurs_hosting,
+      :default_time_zone, :hosting, :apache_config_custom_content,
       :deployment_status_badge, :autoupdate_theme, :archive_content, :years_before_archive_content,
       showcase_tag_ids: [], source_website_ids: [],
       localizations_attributes: [

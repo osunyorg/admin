@@ -19,7 +19,7 @@ class Git::Repository
     return if git_files.empty?
     puts "Start sync"
     synchronize_git_files
-    provider.push('Sync from Osuny')
+    provider.push('Sync from osuny')
     refresh_git_files
   end
 

@@ -3,6 +3,7 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
                               through: :website,
                               except: :restore
 
+  include Admin::HasMoveAction
   include Admin::HasPreview
   include Admin::HasStaticAction
   include Admin::Localizable
@@ -18,6 +19,18 @@ class Admin::Communication::Websites::Agenda::EventsController < Admin::Communic
                        .page(params[:page])
     @feature_nav = 'navigation/admin/communication/website/agenda'
     breadcrumb
+  end
+
+  def move_batch
+    # Override to only display parent events
+    @filtered = @website.public_send(resource_plural_name)
+                        .filter_by(params[:filters], current_language)
+                        .root
+    @objects = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                        .ordered(current_language)
+                        .page(params[:page])
+    breadcrumb
+    add_breadcrumb t('admin.move.cta')
   end
 
   def publish

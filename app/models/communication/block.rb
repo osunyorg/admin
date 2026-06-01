@@ -7,6 +7,7 @@
 #  data                     :jsonb
 #  deleted_at               :datetime
 #  html_class               :string
+#  metadata                 :jsonb
 #  migration_identifier     :string
 #  position                 :integer          not null
 #  published                :boolean          default(TRUE)

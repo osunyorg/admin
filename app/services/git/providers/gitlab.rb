@@ -1,6 +1,6 @@
 class Git::Providers::Gitlab < Git::Providers::Abstract
   DEFAULT_ENDPOINT = 'https://gitlab.com/api/v4'.freeze
-  COMMIT_BATCH_SIZE = 100
+  COMMIT_BATCH_SIZE = 75
 
   def url
     base_url = endpoint.gsub("/api/v4", "")

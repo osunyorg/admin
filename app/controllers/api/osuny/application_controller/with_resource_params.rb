@@ -63,7 +63,7 @@ module Api::Osuny::ApplicationController::WithResourceParams
     aliases_attributes = l10n_params.delete(:aliases)
     return unless aliases_attributes.present?
     l10n_params[:aliases_attributes] = aliases_attributes.map do |alias_params|
-      clean_path = Communication::Website::Permalink.clean_path(alias_params[:path])
+      clean_path = Static.clean_path(alias_params[:path])
       existing_alias = l10n.aliases.find_by(website: @website, path: clean_path) if l10n.present?
       alias_params[:id] = existing_alias.id if existing_alias.present?
       alias_params[:path] = clean_path

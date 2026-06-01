@@ -41,7 +41,7 @@
 
     <%= render 'admin/application/summary/show', about: @l10n %>
 
-    <%= osuny_panel University::Organization::Localization.human_attribute_name('text') do %>
+    <%= osuny_small_panel University::Organization::Localization.human_attribute_name('text') do %>
       <%= @l10n.text.to_s.html_safe %>
     <% end if strip_tags(@l10n.text.to_s).present? %>
 

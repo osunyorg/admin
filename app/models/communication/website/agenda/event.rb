@@ -49,6 +49,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include GeneratesGitFiles
   include Lifecyclable
   include Localizable
+  include MovableToWebsite
   include Sanitizable
   include Searchable
   include Templatable
@@ -159,9 +160,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     ['from_day', 'to_day']
   end
 
-  # Methods for Communication::Website::Agenda::Period::InPeriod
-
-
   protected
 
   def create_periods
@@ -179,5 +177,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def list_blocks_template_kind
     :agenda
+  end
+
+  def after_moved_to_website(source_website, target_website)
+    time_slots.each do |time_slot|
+      time_slot.move_to!(target_website)
+    end
+    children.each do |child|
+      child.move_to!(target_website)
+    end
   end
 end

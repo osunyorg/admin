@@ -11,7 +11,7 @@ en:
         full_name: Full name
         last_name: Last name
         publications: Publications imported from HAL
-        researcher: Researchers in Osuny
+        researcher: Researchers in osuny
       research/journal/localization:
         issn: ISSN
         language: Language
@@ -123,7 +123,7 @@ en:
       publication:
         source:
           hal: HAL
-          osuny: Osuny
+          osuny: osuny
   research:
     citations:
       apa:
@@ -167,7 +167,7 @@ en:
             title: Publications
       select_identifier_html: Select all the HAL authors that correspond to this researcher. <br>Use the publications to be sure it's the same person.
       sync: Synchronize HAL publications
-      synchronization_done: Synchronization done
+      synchronization_done: Synchronization running
       title: HAL
   research/hal:
     description:

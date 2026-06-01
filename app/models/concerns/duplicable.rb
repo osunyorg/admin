@@ -9,7 +9,7 @@ module Duplicable
   end
 
   def duplicate_blocks(from, to)
-    return unless from.respond_to?(:contents)
+    return unless from.respond_to?(:blocks)
     from.blocks.ordered.each do |block|
       duplicate_block(to, block)
     end

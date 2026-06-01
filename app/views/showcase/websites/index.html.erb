@@ -3,8 +3,13 @@
 <h1><%= @title %></h1>
 
 <% unless params.has_key?(:page) %>
-  <%= render 'highlight' %>
+  <%= render 'highlight' if @highlighted_websites.any? %>
   <%= render 'filters' %>
 <% end %>
 
 <%= render 'list' %>
+
+<div class="my-5">
+  <p>Ces données sont disponibles de façon ouverte au format JSON.</p>
+  <%= link_to 'Open data', showcase_root_path(format: :json), class: 'btn btn-primary' %>
+</div>

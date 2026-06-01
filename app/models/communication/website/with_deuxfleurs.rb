@@ -2,11 +2,8 @@ module Communication::Website::WithDeuxfleurs
   extend ActiveSupport::Concern
 
   included do
-    before_save :deuxfleurs_golive, if: :deuxfleurs_hosting
-    after_save :deuxfleurs_setup, if: :deuxfleurs_hosting
-
-    scope :hosted_on_deuxfleurs, -> { where(deuxfleurs_hosting: true) }
-    scope :for_deuxfleurs_hosting, -> (deuxfleurs_hosting, language = nil) { where(deuxfleurs_hosting: deuxfleurs_hosting) }
+    after_save :deuxfleurs_setup, if: -> { hosted_with_deuxfleurs? && !deuxfleurs_setup_done? }
+    after_save :deuxfleurs_golive, if: -> { hosted_with_deuxfleurs? && saved_change_to_in_production? && in_production }
   end
 
   # 4 options:
@@ -15,14 +12,16 @@ module Communication::Website::WithDeuxfleurs
   # 3. repo exists, deuxfleurs hosting : only create deuxfleurs hosting
   # 4. both exists, deuxfleurs hosting needs to change identifier (Waiting for API possibility)
   def deuxfleurs_setup
-    return unless deuxfleurs_hosting?
-    return if deuxfleurs_setup_done?
     Communication::Website::Deuxfleurs::SetupJob.perform_later(id)
+  end
+
+  def deuxfleurs_golive
+    Communication::Website::Deuxfleurs::GoliveJob.perform_later(id)
   end
 
   # Appelé par Communication::Website::Deuxfleurs::SetupJob
   def deuxfleurs_setup_safely
-    return unless deuxfleurs_hosting?
+    return unless hosted_with_deuxfleurs?
     if repository.blank?
       deuxfleurs_create_github_repository
       sleep 10
@@ -37,26 +36,27 @@ module Communication::Website::WithDeuxfleurs
     end
   end
 
+  def deuxfleurs_golive_safely
+    return unless hosted_with_deuxfleurs? && in_production?
+    # https://www.test.com -> www.test.com
+    new_identifier = URI(url).host
+    should_rename = self.deuxfleurs_identifier != new_identifier
+
+    if should_rename && !deuxfleurs.rename_bucket(self.deuxfleurs_identifier, new_identifier)
+      raise "Failed to rename bucket from #{self.deuxfleurs_identifier} to #{new_identifier}"
+    end
+    update(deuxfleurs_identifier: new_identifier)
+  end
+
   def deuxfleurs_destroy_bucket
-    return unless deuxfleurs_hosting
+    return unless hosted_with_deuxfleurs?
     deuxfleurs.empty_and_delete_bucket(deuxfleurs_identifier)
   end
 
   protected
 
   def deuxfleurs_setup_done?
-    deuxfleurs_hosting? && repository.present? && deuxfleurs_identifier.present?
-  end
-
-  def deuxfleurs_golive
-    return unless in_production_changed? && in_production
-    # https://www.test.com -> www.test.com
-    new_identifier = URI(url).host
-    if deuxfleurs.rename_bucket(self.deuxfleurs_identifier, new_identifier)
-      self.deuxfleurs_identifier = new_identifier
-    else
-      errors.add :url
-    end
+    hosted_with_deuxfleurs? && repository.present? && deuxfleurs_identifier.present?
   end
 
   def deuxfleurs_create_bucket

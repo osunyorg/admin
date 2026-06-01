@@ -1,12 +1,13 @@
 class Video::Provider::Default
   DOMAINS = []
 
-  attr_reader :video_url
+  attr_reader :video_url, :block
 
   include ActionView::Helpers::TagHelper
 
-  def initialize(video_url)
+  def initialize(video_url, block = nil)
     @video_url = video_url
+    @block = block
   end
 
   def platform

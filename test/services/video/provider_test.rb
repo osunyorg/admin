@@ -13,6 +13,18 @@ class Video::ProviderTest < ActiveSupport::TestCase
     assert "player.vimeo.com".in?(provider.csp_domains)
   end
 
+  def test_arte
+    provider = Video::Provider.find('https://www.arte.tv/fr/videos/121417-001-A/lala-ce/')
+    assert_equal Video::Provider::Arte, provider.class
+    assert "arte.tv".in?(provider.csp_domains)
+  end
+
+  def test_canalu
+    provider = Video::Provider.find('https://www.canal-u.tv/chaines/ehess/l-iran-entre-deux-feux-l-actualite-guerriere-en-iran-et-au-moyen-orient-0')
+    assert_equal Video::Provider::Canalu, provider.class
+    assert "canal-u.tv".in?(provider.csp_domains)
+  end
+
   def test_youtube
     provider = Video::Provider.find('https://www.youtube.com/watch?v=sN8Cq5HEBug')
     assert_equal Video::Provider::Youtube, provider.class
