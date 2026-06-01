@@ -1,6 +1,9 @@
 <%
 # L'url contenant les locales (TODO doit être mise en cache)
-i18n_url    = admin_vue_i18n_path
+i18n_url    = admin_vue_i18n_path(
+                website_id: nil,
+                extranet_id: nil,
+                journal_id: nil)
 # La liste des blocs
 data_url    = root_admin_communication_group_blocks_path(
                 about_type: about.class.polymorphic_name,
