@@ -28,6 +28,30 @@ module Communication::Website::WithPages
     end
   end
 
+  def reorder_pages(previous_parent_id:, parent_id:, ids: [], language:)
+    Osuny::BulkOperation.silently do
+      pages_by_id = pages.where(id: ids).index_by(&:id)
+      ids.each.with_index do |id, index|
+        page = pages_by_id[id]
+        next if page.nil?
+        page.update(parent_id: parent_id, position: index + 1)
+      end
+    end
+    Communication::Website::Page::CleanAfterReorderJob.perform_later(id, {
+      previous_parent_id: previous_parent_id,
+      parent_id: parent_id,
+      language: language
+    })
+  end
+
+  def clean_after_reorder_safely(previous_parent_id, parent_id, language)
+    previous_parent = pages.find(previous_parent_id)
+    parent = pages.find(parent_id)
+    pages = (previous_parent.descendants_and_self + parent.descendants_and_self).uniq
+    pages.each(&:touch)
+    generate_automatic_menus_for_language(language)
+  end
+
   protected
 
   def find_special_page(type)
