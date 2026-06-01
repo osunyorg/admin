@@ -37,14 +37,14 @@ module Communication::Website::WithPages
         page.update(parent_id: parent_id, position: index + 1)
       end
     end
-    Communication::Website::Page::CleanAfterReorderJob.perform_later(id, {
+    Communication::Website::Page::CleanAfterPagesReorderJob.perform_later(id, {
       previous_parent_id: previous_parent_id,
       parent_id: parent_id,
       language: language
     })
   end
 
-  def clean_after_reorder_safely(previous_parent_id, parent_id, language)
+  def clean_after_pages_reorder_safely(previous_parent_id, parent_id, language)
     previous_parent = pages.find(previous_parent_id)
     parent = pages.find(parent_id)
     pages = (previous_parent.descendants_and_self + parent.descendants_and_self).uniq
