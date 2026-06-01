@@ -38,6 +38,11 @@ module AsDirectObject
   end
 
   def connect_dependencies
+    return if Osuny::BulkOperation.in_progress?
+    Communication::Website::DirectObject::ConnectDependenciesJob.perform_later(self)
+  end
+
+  def connect_dependencies_safely
     dependencies.each do |dependency|
       website.connect(dependency, self)
     end

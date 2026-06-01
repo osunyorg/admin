@@ -96,6 +96,7 @@ module AsIndirectObject
   end
 
   def connect_to_websites
+    return if Osuny::BulkOperation.in_progress?
     Communication::Website::IndirectObject::ConnectToWebsitesJob.perform_later self
   end
 

@@ -36,7 +36,10 @@ module Contentful
   end
 
   def generate_blocks(template_blocks)
-    template_blocks.each { |hash| generate_block(hash.dup) }
+    Osuny::BulkOperation.silently do
+      template_blocks.each { |hash| generate_block(hash.dup) }
+    end
+    about.touch
   end
 
   def resetable_blocks?
@@ -46,8 +49,11 @@ module Contentful
 
   def reset_blocks
     return unless resetable_blocks?
-    blocks.destroy_all
-    about.duplicate_blocks(original, self)
+    Osuny::BulkOperation.silently do
+      blocks.destroy_all
+      about.duplicate_blocks(original, self)
+    end
+    about.touch
   end
 
   protected

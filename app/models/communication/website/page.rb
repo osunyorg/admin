@@ -63,8 +63,6 @@ class Communication::Website::Page < ApplicationRecord
              foreign_key: :parent_id,
              dependent: :destroy
 
-  after_save :touch_elements_if_special_page_in_hierarchy
-
   scope :latest_in, -> (language) { published_now_in(language).order("communication_website_page_localizations.updated_at DESC").limit(5) }
 
   scope :ordered_by_title, -> (language) {
@@ -141,16 +139,5 @@ class Communication::Website::Page < ApplicationRecord
 
   def list_blocks_template_kind
     :pages
-  end
-
-  def touch_elements_if_special_page_in_hierarchy
-    # We do not call touch as we don't want to trigger the sync on the connected objects
-    descendants_and_self.each do |page|
-      if page.type == 'Communication::Website::Page::Person'
-        website.connected_people.update_all(updated_at: Time.zone.now)
-      elsif page.type == 'Communication::Website::Page::Organization'
-        website.connected_organizations.update_all(updated_at: Time.zone.now)
-      end
-    end
   end
 end
