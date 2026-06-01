@@ -158,7 +158,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def touch_about
-    return if Duplicable.in_progress?
+    return if BulkOperation.in_progress?
     about.touch
   end
 

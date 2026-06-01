@@ -96,7 +96,7 @@ module AsIndirectObject
   end
 
   def connect_to_websites
-    return if Duplicable.in_progress?
+    return if BulkOperation.in_progress?
     Communication::Website::IndirectObject::ConnectToWebsitesJob.perform_later self
   end
 

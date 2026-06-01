@@ -34,9 +34,13 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     parent_page = @website.pages.find(params[:parentId])
     old_parent_page = @website.pages.find(params[:oldParentId])
     ids = params[:ids] || []
-    ids.each.with_index do |id, index|
-      page = @website.pages.find(id)
-      page.update(parent_id: parent_page.id, position: index + 1)
+    BulkOperation.silently do
+      pages_by_id = @website.pages.where(id: ids).index_by(&:id)
+      ids.each.with_index do |id, index|
+        page = pages_by_id[id]
+        next if page.nil?
+        page.update(parent_id: parent_page.id, position: index + 1)
+      end
     end
     old_parent_page.touch
     parent_page.touch if parent_page != old_parent_page
@@ -144,7 +148,8 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def restore
     @page = @website.pages.only_deleted.find(params[:id])
     authorize!(:restore, @page)
-    @page.restore(recursive: true)
+    BulkOperation.silently { @page.restore(recursive: true) }
+    @page.touch
     redirect_to admin_communication_website_page_path(@page),
                 notice: t('admin.successfully_restored_html', model: @page.to_s_in(current_language))
   end

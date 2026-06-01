@@ -51,7 +51,7 @@ module AsTree
   end
 
   def update_position_in_tree_later
-    return if Duplicable.in_progress?
+    return if BulkOperation.in_progress?
     return unless respond_to?(:position_in_tree)
     Tree::UpdatePositionJob.set(wait: 1.minute).perform_later(
       university,
