@@ -134,6 +134,7 @@ fr:
         feature_alerts: Alertes
         feature_alumni: Alumni
         feature_hourly_publication: Programmation à l'heure
+        feature_unpublication_date: Dépublication planifiée
         feature_jobboard: Offres d'emploi
         feature_portfolio: Portfolio
         feature_posts: Actualités
@@ -316,6 +317,7 @@ fr:
         subtitle: Sous-titre
         text: Texte
         title: Titre
+        unpublished_at: Date de dépublication
         website: Site Web
       communication/website/showcase/tag:
         name: Nom
@@ -892,6 +894,7 @@ fr:
         feature_alerts: Pour afficher des bandeaux d'alerte
         feature_alumni: Pour présenter les alumni publiquement
         feature_hourly_publication: Pour programmer des actualités à l'heure
+        feature_unpublication_date: Pour programmer la dépublication des actualités
         feature_jobboard: Pour partager des offres d'emploi
         feature_portfolio: Pour présenter des projets
         feature_posts: Pour publier des actualités, comme un média

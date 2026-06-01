@@ -134,6 +134,7 @@ en:
         feature_alerts: Alerts
         feature_alumni: Alumni
         feature_hourly_publication: Hourly publication
+        feature_unpublication_date: Unpublication date
         feature_jobboard: Job board
         feature_portfolio: Portfolio
         feature_posts: Posts
@@ -317,6 +318,7 @@ en:
         subtitle: Subtitle
         text: Text
         title: Title
+        unpublished_at: Unpublication date
         website: Website
       communication/website/showcase/tag:
         name: Name
@@ -890,6 +892,7 @@ en:
         feature_alerts: To display alert banners
         feature_alumni: To display public alumni
         feature_hourly_publication: To schedule posts by the hour
+        feature_unpublication_date: To schedule posts unpublication
         feature_jobboard: To share job offers
         feature_portfolio: To showcase projects
         feature_posts: To publish posts, like a media
