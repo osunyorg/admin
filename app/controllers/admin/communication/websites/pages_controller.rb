@@ -148,8 +148,11 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def restore
     @page = @website.pages.only_deleted.find(params[:id])
     authorize!(:restore, @page)
-    BulkOperation.silently { @page.restore(recursive: true) }
+    BulkOperation.silently do
+      @page.restore(recursive: true)
+    end
     @page.touch
+    @website.generate_automatic_menus_for_language(current_language)
     redirect_to admin_communication_website_page_path(@page),
                 notice: t('admin.successfully_restored_html', model: @page.to_s_in(current_language))
   end

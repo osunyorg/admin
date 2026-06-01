@@ -39,6 +39,7 @@ module Contentful
     BulkOperation.silently do
       template_blocks.each { |hash| generate_block(hash.dup) }
     end
+    about.touch
   end
 
   def resetable_blocks?
