@@ -2,7 +2,7 @@
 if about.resetable_blocks?
   original_language = about.original.language.to_s.downcase
   %>
-  <div class="vue__blocks-editor row mt-5 mb-4">
+  <div class="vue__blocks-editor__actions row mt-5 mb-4">
     <div class="offset-lg-4 col-lg-8 col-xxl-6">
       <%= link_to t('admin.communication.contents.blocks.reset', language: original_language),
                   reset_admin_communication_group_blocks_path(
