@@ -23,6 +23,7 @@ module Duplicable
 
   def duplicate_instance
     instance = self.dup
+    instance.position = nil if instance.respond_to?(:position)
     instance.save
     instance
   end
