@@ -1,4 +1,4 @@
-class Communication::Website::Page::CleanAfterPagesReorderJob < Communication::Website::BaseJob
+class Communication::Website::CleanAfterPagesReorderJob < Communication::Website::BaseJob
   queue_as :cats
 
   def execute
