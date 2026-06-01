@@ -46,10 +46,10 @@ module Communication::Website::WithPages
 
   def clean_after_pages_reorder_safely(previous_parent_id, parent_id, language)
     parent = pages.find(parent_id)
-    pages_to_touch = previous_parent.descendants_and_self
+    pages_to_touch = parent.descendants_and_self
     if previous_parent_id != parent_id
       previous_parent = pages.find(previous_parent_id)
-      pages_to_touch += parent.descendants_and_self 
+      pages_to_touch += previous_parent.descendants_and_self 
     end
     pages_to_touch.uniq.each(&:touch)
     generate_automatic_menus_for_language(language)
