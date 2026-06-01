@@ -580,6 +580,9 @@ en:
               large:
                 description: Each organization is presented in majesty, across the full width available, with a large image.
                 label: Grand
+              list:
+                description: Organizations are displayed as a list, one below the other. Each organization uses all available page width.
+                label: List
               map:
                 description: A geographic map, with a pin for every organization with a known location.
                 label: Map

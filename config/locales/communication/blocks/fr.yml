@@ -581,6 +581,9 @@ fr:
               large:
                 description: Chaque organisation est présentée en majesté, sur toute la largeur disponible avec une grande image.
                 label: Grand
+              list:
+                description: Un affichage sous forme de liste, avec les organisations les unes au dessous des autres. Chaque organisation occupe la largeur totale de la page.
+                label: Liste
               map:
                 description: Une carte géographique avec un repère pour chaque organisation dont l'adresse est connue.
                 label: Carte

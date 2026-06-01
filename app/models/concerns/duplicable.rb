@@ -2,9 +2,13 @@ module Duplicable
   extend ActiveSupport::Concern
 
   def duplicate
-    instance = duplicate_instance
-    duplicate_categories_for(instance)
-    duplicate_localizations_for(instance)
+    instance = nil
+    Osuny::BulkOperation.silently do
+      instance = duplicate_instance
+      duplicate_categories_for(instance)
+      duplicate_localizations_for(instance)
+    end
+    instance.touch
     instance
   end
 
@@ -19,6 +23,7 @@ module Duplicable
 
   def duplicate_instance
     instance = self.dup
+    instance.position = nil if instance.respond_to?(:position)
     instance.save
     instance
   end
@@ -48,7 +53,7 @@ module Duplicable
   end
 
   def duplicate_block(instance, block)
-    duplicated_block = block.duplicate
+    duplicated_block = block.dup
     duplicated_block.about = instance
     duplicated_block.position = block.position
     duplicated_block.save

@@ -3,6 +3,7 @@ class Communication::Block::Template::Organization < Communication::Block::Templ
   has_elements
   has_layouts [
     :grid,
+    :list,
     :large,
     :map,
     :carousel
