@@ -158,6 +158,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def touch_about
+    return if Osuny::BulkOperation.in_progress?
     about.touch
   end
 

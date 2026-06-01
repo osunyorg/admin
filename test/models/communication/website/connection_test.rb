@@ -47,6 +47,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # On dépublie la page ayant un bloc chapitre : +0
     assert_no_difference("Communication::Website::Connection.count") do
       page_l10n.update(published: false)
+      perform_enqueued_jobs
     end
   end
 
@@ -114,6 +115,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     block = second_page_l10n.blocks.new(position: 1, published: true, template_kind: :organizations)
     block.data = "{ \"mode\": \"selection\", \"elements\": [ { \"id\": \"#{noesya.id}\" } ] }"
     block.save
+    perform_enqueued_jobs
 
     # noesya est connectée via les 2 pages, donc 2 connexions
     assert_equal 2, page_l10n.website.connections.where(indirect_object: noesya).count
@@ -204,6 +206,7 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
     # On connecte la localisation à la page : +1
     assert_difference -> { page.connections.count } => 1 do
       page_l10n.about.save
+      perform_enqueued_jobs
     end
 
     # On ajoute un block "Chapitre" : +1
@@ -257,6 +260,8 @@ class Communication::Website::ConnectionTest < ActiveSupport::TestCase
       block.save
       perform_enqueued_jobs
     end
+
+    perform_enqueued_jobs
 
     # La page est donc comme ceci
     # Page
