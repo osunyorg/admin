@@ -316,6 +316,7 @@ fr:
         subtitle: Sous-titre
         text: Texte
         title: Titre
+        unpublished_at: Date de dépublication
         website: Site Web
       communication/website/showcase/tag:
         name: Nom

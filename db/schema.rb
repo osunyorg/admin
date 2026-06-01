@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_29_112136) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_01_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -1343,6 +1343,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_29_112136) do
     t.text "summary"
     t.string "title"
     t.uuid "university_id"
+    t.uuid "unpublication_job_id"
+    t.datetime "unpublished_at"
     t.datetime "updated_at", null: false
     t.index ["about_id", "language_id"], name: "idx_on_about_id_language_id_57307f7184", unique: true
     t.index ["about_id"], name: "index_communication_website_post_localizations_on_about_id"
@@ -1350,6 +1352,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_29_112136) do
     t.index ["language_id"], name: "index_communication_website_post_localizations_on_language_id"
     t.index ["publication_job_id"], name: "idx_on_publication_job_id_790971fcf1"
     t.index ["university_id"], name: "idx_on_university_id_a3a3f1e954"
+    t.index ["unpublication_job_id"], name: "idx_on_unpublication_job_id"
   end
 
   create_table "communication_website_posts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -2764,6 +2767,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_29_112136) do
   add_foreign_key "communication_website_post_localizations", "communication_website_posts", column: "about_id"
   add_foreign_key "communication_website_post_localizations", "communication_websites"
   add_foreign_key "communication_website_post_localizations", "good_jobs", column: "publication_job_id", on_delete: :nullify
+  add_foreign_key "communication_website_post_localizations", "good_jobs", column: "unpublication_job_id", name: "fk_rails_unpublication_job_id", on_delete: :nullify
   add_foreign_key "communication_website_post_localizations", "languages"
   add_foreign_key "communication_website_post_localizations", "universities"
   add_foreign_key "communication_website_posts", "communication_websites"
