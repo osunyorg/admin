@@ -893,7 +893,7 @@ en:
         feature_alerts: To display alert banners
         feature_alumni: To display public alumni
         feature_hourly_publication: To schedule posts by the hour
-        feature_unpublication_date: To schedule posts depublication
+        feature_unpublication_date: To schedule posts unpublication
         feature_jobboard: To share job offers
         feature_portfolio: To showcase projects
         feature_posts: To publish posts, like a media

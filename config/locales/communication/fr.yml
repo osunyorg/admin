@@ -895,7 +895,7 @@ fr:
         feature_alerts: Pour afficher des bandeaux d'alerte
         feature_alumni: Pour présenter les alumni publiquement
         feature_hourly_publication: Pour programmer des actualités à l'heure
-        feature_unpublication_date: Pour programmer la déplanification des actualités 
+        feature_unpublication_date: Pour programmer la dépublication des actualités
         feature_jobboard: Pour partager des offres d'emploi
         feature_portfolio: Pour présenter des projets
         feature_posts: Pour publier des actualités, comme un média
