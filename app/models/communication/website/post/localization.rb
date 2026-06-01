@@ -18,6 +18,7 @@
 #  subtitle                 :string
 #  summary                  :text
 #  title                    :string
+#  unpublished_at           :datetime
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  about_id                 :uuid             uniquely indexed => [language_id], indexed
@@ -25,6 +26,7 @@
 #  language_id              :uuid             uniquely indexed => [about_id], indexed
 #  publication_job_id       :uuid             indexed
 #  university_id            :uuid             indexed
+#  unpublication_job_id     :uuid             indexed
 #
 # Indexes
 #
@@ -32,16 +34,18 @@
 #  idx_on_communication_website_id_f6354f61f0                     (communication_website_id)
 #  idx_on_publication_job_id_790971fcf1                           (publication_job_id)
 #  idx_on_university_id_a3a3f1e954                                (university_id)
+#  idx_on_unpublication_job_id                                    (unpublication_job_id)
 #  index_communication_website_post_localizations_on_about_id     (about_id)
 #  index_communication_website_post_localizations_on_language_id  (language_id)
 #
 # Foreign Keys
 #
-#  fk_rails_20680ef99a  (language_id => languages.id)
-#  fk_rails_4a9d8c6ad1  (communication_website_id => communication_websites.id)
-#  fk_rails_6869f5c4a8  (publication_job_id => good_jobs.id) ON DELETE => nullify
-#  fk_rails_b4db91ebe4  (about_id => communication_website_posts.id)
-#  fk_rails_db7d7c515c  (university_id => universities.id)
+#  fk_rails_20680ef99a            (language_id => languages.id)
+#  fk_rails_4a9d8c6ad1            (communication_website_id => communication_websites.id)
+#  fk_rails_6869f5c4a8            (publication_job_id => good_jobs.id) ON DELETE => nullify
+#  fk_rails_b4db91ebe4            (about_id => communication_website_posts.id)
+#  fk_rails_db7d7c515c            (university_id => universities.id)
+#  fk_rails_unpublication_job_id  (unpublication_job_id => good_jobs.id) ON DELETE => nullify
 #
 class Communication::Website::Post::Localization < ApplicationRecord
   acts_as_paranoid
@@ -56,6 +60,7 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include Permalinkable
   include Publishable
   include PublishableByTheHour
+  include Unpublishable
   include Sanitizable
   include Shareable
   include WithAccessibility

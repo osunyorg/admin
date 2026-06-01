@@ -20,6 +20,7 @@
 #  feature_jobboard             :boolean          default(FALSE)
 #  feature_portfolio            :boolean          default(FALSE)
 #  feature_posts                :boolean          default(TRUE)
+#  feature_unpublication_date   :boolean          default(FALSE)
 #  git_branch                   :string
 #  git_endpoint                 :string
 #  git_files_analysed_at        :datetime
