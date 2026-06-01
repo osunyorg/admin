@@ -33,11 +33,10 @@ class Communication::Website::DependencyTest < ActiveSupport::TestCase
     block = page_l10n.blocks.create(position: 1, published: true, template_kind: :persons)
     block.data = "{ \"elements\": [ { \"id\": \"#{arnaud.id}\" } ] }"
     block.save
+    perform_enqueued_jobs
 
     page = page.reload
     assert_equal 5, page.recursive_dependencies(skip_direct: false).count
-
-    clear_enqueued_jobs
 
     # On modifie le target du block
     block.data = "{ \"elements\": [ { \"id\": \"#{olivia.id}\" } ] }"

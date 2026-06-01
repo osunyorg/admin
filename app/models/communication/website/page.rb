@@ -9,15 +9,16 @@
 #  migration_identifier     :string
 #  position                 :integer          not null
 #  position_in_tree         :integer
-#  type                     :string
+#  type                     :string           uniquely indexed => [communication_website_id]
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
-#  communication_website_id :uuid             not null, indexed
+#  communication_website_id :uuid             not null, uniquely indexed => [type], indexed
 #  parent_id                :uuid             indexed
 #  university_id            :uuid             not null, indexed
 #
 # Indexes
 #
+#  idx_on_communication_website_id_type_66132928af                (communication_website_id,type) UNIQUE WHERE (type IS NOT NULL)
 #  index_communication_website_pages_on_communication_website_id  (communication_website_id)
 #  index_communication_website_pages_on_parent_id                 (parent_id)
 #  index_communication_website_pages_on_university_id             (university_id)
@@ -44,7 +45,6 @@ class Communication::Website::Page < ApplicationRecord
   include GeneratesGitFiles
   include Lifecyclable
   include Localizable
-  include Orderable
   include Sanitizable
   include Searchable
   include WithAutomaticMenus
@@ -53,6 +53,7 @@ class Communication::Website::Page < ApplicationRecord
   include HasListBlocks
   include WithSpecialPage
   include WithUniversity
+  include Orderable # Must be loaded after WithSpecialPage to use the correct last_ordered_element method
 
   belongs_to :parent,
              class_name: 'Communication::Website::Page',
@@ -61,8 +62,6 @@ class Communication::Website::Page < ApplicationRecord
              class_name: 'Communication::Website::Page',
              foreign_key: :parent_id,
              dependent: :destroy
-
-  after_save :touch_elements_if_special_page_in_hierarchy
 
   scope :latest_in, -> (language) { published_now_in(language).order("communication_website_page_localizations.updated_at DESC").limit(5) }
 
@@ -140,16 +139,5 @@ class Communication::Website::Page < ApplicationRecord
 
   def list_blocks_template_kind
     :pages
-  end
-
-  def touch_elements_if_special_page_in_hierarchy
-    # We do not call touch as we don't want to trigger the sync on the connected objects
-    descendants_and_self.each do |page|
-      if page.type == 'Communication::Website::Page::Person'
-        website.connected_people.update_all(updated_at: Time.zone.now)
-      elsif page.type == 'Communication::Website::Page::Organization'
-        website.connected_organizations.update_all(updated_at: Time.zone.now)
-      end
-    end
   end
 end
