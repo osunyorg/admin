@@ -44,7 +44,12 @@ module University::Person::WithRealmResearch
   end
 
   # Import HAL publications by retrieving them from API
-  def import_research_hal_publications!
+  def import_research_hal_publications
+    Research::Hal::ImportPersonPublicationsJob.perform_later(self)
+  end
+
+  # Import HAL publications by retrieving them from API
+  def import_research_hal_publications_safely
     publications.delete(publications.hal)
     hal_authors.each do |author|
       # TODO manage same researcher in different universities

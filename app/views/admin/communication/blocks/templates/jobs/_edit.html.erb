@@ -25,7 +25,7 @@
         </div>
         <div>
           <a  class="btn btn-sm text-danger ms-3"
-              @click="data.elements.splice(data.elements.indexOf(element), 1)"
+              @click="deleteElement(element)"
               title="<%= t('delete') %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>

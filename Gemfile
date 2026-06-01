@@ -72,10 +72,9 @@ gem "rbnacl", "~> 7.1"
 gem "redis", "~> 5.1"
 gem "roo", "~> 2"
 gem "rswag", "~> 2"
+gem "ruby-vips", "~> 2.3"
 gem "sanitize"
 gem "sassc-rails"
-gem "scout_apm", "~> 6.1"
-gem "scout_apm_logging", "~> 2.1"
 gem "simple-navigation"
 gem "simple_form"
 gem "simple_form_bs5_file_input"#, path: "../../noesya/simple_form_bs5_file_input"
@@ -116,3 +115,4 @@ group :test do
 end
 
 gem "tzinfo-data", platforms: [:windows, :jruby]
+

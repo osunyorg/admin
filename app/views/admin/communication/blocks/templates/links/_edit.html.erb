@@ -1,9 +1,9 @@
 <%= block_component_edit block, :description, summernote_config: 'mini' %>
 
-<%= osuny_separator %>
+<%= block_component_add_element block, t('.add') %>
 
 <p><%= t('.move_links') %></p>
-<draggable :list="data.elements" handle=".dragHandle" class="row g-2">
+<draggable :list="data.elements" handle=".dragHandle" @end="refreshSummernotes()" class="row g-2">
   <div v-for="(element, index) in data.elements" class="col-12">
     <div class="card">
       <div class="card-header pt-2 pb-1">
@@ -13,8 +13,8 @@
         {{ element.title }}
         <div class="float-end">
           <a  class="btn btn-sm text-danger"
-              @click="data.elements.splice(data.elements.indexOf(element), 1)"
-              title="<%= t '.remove' %>">
+              @click="deleteElement(element)"
+              title="<%= t 'delete' %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>
         </div>
@@ -24,8 +24,6 @@
 </draggable>
 
 <%= osuny_separator %>
-
-<%= block_component_add_element block, t('.add') %>
 
 <div v-for="(element, index) in data.elements" class="mb-4">
   <%= block_component_edit block, :title, template: @element %>

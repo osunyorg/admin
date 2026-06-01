@@ -2,8 +2,7 @@
 
 <div v-show="data.elements.length > 0">
   <%= osuny_separator %>
-  <draggable  :list="data.elements"
-              handle=".dragHandle">
+  <draggable :list="data.elements" handle=".dragHandle" @end="refreshSummernotes()">
     <div v-for="(element, index) in data.elements" class="mb-2">
       <div class="card draggable-item dragHandle m-0">
         <div class="card-body d-flex">
@@ -16,7 +15,7 @@
             </p>
           </div>
           <a  class="btn btn-sm text-danger ms-auto"
-              @click="data.elements.splice(data.elements.indexOf(element), 1)"
+              @click="deleteElement(element)"
               title="<%= t '.remove_testimonial' %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>

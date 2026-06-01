@@ -39,11 +39,17 @@ module Communication::Website::WithFederations
               through: :content_federations_as_destination,
               source: :about,
               source_type: "Communication::Website::Post"
+
+    has_many  :federated_communication_website_alerts,
+              through: :content_federations_as_destination,
+              source: :about,
+              source_type: "Communication::Website::Alert"
   end
 
   def federated_objects
     federated_communication_website_agenda_events +
     federated_communication_website_agenda_exhibitions +
-    federated_communication_website_posts
+    federated_communication_website_posts +
+    federated_communication_website_alerts
   end
 end

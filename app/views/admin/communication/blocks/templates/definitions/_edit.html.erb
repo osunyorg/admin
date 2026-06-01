@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<draggable :list="data.elements" handle=".dragHandle" class="mb-3">
+<draggable :list="data.elements" handle=".dragHandle" @end="refreshSummernotes()" class="mb-3">
   <div v-for="(element, index) in data.elements" class="d-flex draggable-item">
     <div>
       <a class="btn ps-0 pt-0 dragHandle">
@@ -23,7 +23,7 @@
     </div>
     <div>
       <a  class="btn btn-sm text-danger ms-3"
-          @click="data.elements.splice(data.elements.indexOf(element), 1)"
+          @click="deleteElement(element)"
           title="<%= t '.remove_definition' %>">
           <i class="<%= Icon::DELETE %>"></i>
       </a>
