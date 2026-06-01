@@ -31,20 +31,12 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def reorder
-    parent_page = @website.pages.find(params[:parentId])
-    old_parent_page = @website.pages.find(params[:oldParentId])
-    ids = params[:ids] || []
-    Osuny::BulkOperation.silently do
-      pages_by_id = @website.pages.where(id: ids).index_by(&:id)
-      ids.each.with_index do |id, index|
-        page = pages_by_id[id]
-        next if page.nil?
-        page.update(parent_id: parent_page.id, position: index + 1)
-      end
-    end
-    old_parent_page.touch
-    parent_page.touch if parent_page != old_parent_page
-    @website.generate_automatic_menus_for_language(current_language)
+    @website.reorder_pages(
+      previous_parent_id: params[:oldParentId], 
+      parent_id: params[:parentId], 
+      ids: params[:ids],
+      language: current_language
+    )
   end
 
   def children
