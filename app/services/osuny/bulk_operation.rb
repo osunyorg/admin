@@ -1,4 +1,4 @@
-module BulkOperation
+class Osuny::BulkOperation
   IN_PROGRESS_KEY = :osuny_bulk_operation_in_progress
 
   def self.in_progress?

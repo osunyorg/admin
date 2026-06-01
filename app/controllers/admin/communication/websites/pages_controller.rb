@@ -34,7 +34,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
     parent_page = @website.pages.find(params[:parentId])
     old_parent_page = @website.pages.find(params[:oldParentId])
     ids = params[:ids] || []
-    BulkOperation.silently do
+    Osuny::BulkOperation.silently do
       pages_by_id = @website.pages.where(id: ids).index_by(&:id)
       ids.each.with_index do |id, index|
         page = pages_by_id[id]
@@ -148,7 +148,7 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   def restore
     @page = @website.pages.only_deleted.find(params[:id])
     authorize!(:restore, @page)
-    BulkOperation.silently do
+    Osuny::BulkOperation.silently do
       @page.restore(recursive: true)
     end
     @page.touch

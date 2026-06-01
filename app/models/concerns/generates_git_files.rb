@@ -18,7 +18,7 @@ module GeneratesGitFiles
   protected
 
   def identify_git_files
-    return if BulkOperation.in_progress?
+    return if Osuny::BulkOperation.in_progress?
     Communication::Website::GitFile::IdentifyJob.perform_later(self)
   end
 end

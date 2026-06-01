@@ -38,7 +38,7 @@ module AsDirectObject
   end
 
   def connect_dependencies
-    return if BulkOperation.in_progress?
+    return if Osuny::BulkOperation.in_progress?
     Communication::Website::DirectObject::ConnectDependenciesJob.perform_later(self)
   end
 

@@ -3,7 +3,7 @@ module Duplicable
 
   def duplicate
     instance = nil
-    BulkOperation.silently do
+    Osuny::BulkOperation.silently do
       instance = duplicate_instance
       duplicate_categories_for(instance)
       duplicate_localizations_for(instance)

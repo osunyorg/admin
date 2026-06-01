@@ -11,7 +11,7 @@ module HasListBlocks
   protected
 
   def synchronize_list_blocks
-    return if BulkOperation.in_progress?
+    return if Osuny::BulkOperation.in_progress?
     websites.each do |website|
       Communication::Website::SynchronizeListBlocksJob.perform_later(website, list_blocks_template_kind)
     end

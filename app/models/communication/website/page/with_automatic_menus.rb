@@ -9,7 +9,7 @@ module Communication::Website::Page::WithAutomaticMenus
   protected
 
   def generate_automatic_menus
-    return if BulkOperation.in_progress?
+    return if Osuny::BulkOperation.in_progress?
     website.generate_automatic_menus_for_identifier(default_menu_identifier)
   end
 end

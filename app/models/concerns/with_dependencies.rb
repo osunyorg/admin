@@ -116,7 +116,7 @@ module WithDependencies
   end
 
   def clean_websites_if_necessary
-    return if BulkOperation.in_progress?
+    return if Osuny::BulkOperation.in_progress?
     Dependencies::CleanWebsitesIfNecessaryJob.perform_later(self)
   end
 

@@ -54,7 +54,7 @@ module Communication::Website::WithMenus
   end
 
   def initialize_menus
-    BulkOperation.silently do
+    Osuny::BulkOperation.silently do
       languages.each do |language|
         create_default_menus(language)
         generate_automatic_menus_for_language(language)
