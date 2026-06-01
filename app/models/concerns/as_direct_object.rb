@@ -37,9 +37,6 @@ module AsDirectObject
     website.id == communication_website_id
   end
 
-  # Enqueued from after_save / after_touch callbacks. The synchronous
-  # implementation lives in connect_dependencies_safely and is invoked
-  # by Communication::Website::DirectObject::ConnectDependenciesJob.
   def connect_dependencies
     return if BulkOperation.in_progress?
     Communication::Website::DirectObject::ConnectDependenciesJob.perform_later(self)
