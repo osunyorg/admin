@@ -18,6 +18,7 @@ module GeneratesGitFiles
   protected
 
   def identify_git_files
+    return if Duplicable.in_progress?
     Communication::Website::GitFile::IdentifyJob.perform_later(self)
   end
 end

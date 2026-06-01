@@ -38,6 +38,7 @@ module AsDirectObject
   end
 
   def connect_dependencies
+    return if Duplicable.in_progress?
     dependencies.each do |dependency|
       website.connect(dependency, self)
     end

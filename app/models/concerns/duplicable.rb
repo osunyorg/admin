@@ -1,10 +1,35 @@
 module Duplicable
   extend ActiveSupport::Concern
 
+  # Thread-local flag read by side-effect callbacks (clean websites,
+  # connect to websites, identify git files, synchronize list blocks,
+  # update tree position, connect dependencies, automatic menus, touch about)
+  # to skip themselves while a duplication is in progress.
+  # The work is performed once at the end of the duplication, in finalize_duplication.
+  IN_PROGRESS_KEY = :duplicable_in_progress
+
+  def self.in_progress?
+    Thread.current[IN_PROGRESS_KEY] == true
+  end
+
+  def self.in_progress
+    previous = Thread.current[IN_PROGRESS_KEY]
+    Thread.current[IN_PROGRESS_KEY] = true
+    yield
+  ensure
+    Thread.current[IN_PROGRESS_KEY] = previous
+  end
+
   def duplicate
-    instance = duplicate_instance
-    duplicate_categories_for(instance)
-    duplicate_localizations_for(instance)
+    instance = nil
+    ActiveRecord::Base.transaction do
+      Duplicable.in_progress do
+        instance = duplicate_instance
+        duplicate_categories_for(instance)
+        duplicate_localizations_for(instance)
+      end
+    end
+    finalize_duplication(instance)
     instance
   end
 
@@ -48,9 +73,26 @@ module Duplicable
   end
 
   def duplicate_block(instance, block)
-    duplicated_block = block.duplicate
+    duplicated_block = block.dup
     duplicated_block.about = instance
     duplicated_block.position = block.position
     duplicated_block.save
+  end
+
+  # Once the duplication has been fully committed, trigger the side-effect
+  # callbacks exactly once for the new instance. This replaces the per-save
+  # cascade that was firing N times (one per localization, one per block).
+  def finalize_duplication(instance)
+    return if instance.nil?
+    # touch fires after_touch callbacks: connect_dependencies (sync),
+    # identify_git_files, synchronize_list_blocks, update_position_in_tree_later,
+    # connect_to_websites (for indirect objects). All have been skipped during
+    # the duplication via Duplicable.in_progress?, so they run here only once.
+    instance.touch
+    # after_save-only callbacks need explicit re-firing:
+    Dependencies::CleanWebsitesIfNecessaryJob.perform_later(instance)
+    if instance.respond_to?(:generate_automatic_menus_after_duplication, true)
+      instance.send(:generate_automatic_menus_after_duplication)
+    end
   end
 end
