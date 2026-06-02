@@ -158,7 +158,7 @@ export default {
 
     wireCancelButtons(root) {
       // The `.vue__changes__cancel` button closes the offcanvas.
-      root.querySelectorAll('.vue__changes__cancel').forEach((button) => {
+      root.querySelectorAll('.vue__editor__actions__cancel').forEach((button) => {
         button.addEventListener('click', (event) => {
           event.preventDefault();
           this.$emit('close');
@@ -211,10 +211,8 @@ export default {
 </script>
 
 <template>
-  <div class="pb-5">
-    <div v-if="loading && !html" class="text-center py-5">
-      <div class="spinner-border text-primary" role="status" />
-    </div>
-    <div ref="container" v-html="html" />
+  <div v-if="loading && !html" class="container-fluid pt-3">
+    <div class="spinner-border spinner-border-sm text-primary" role="status" />
   </div>
+  <div ref="container" v-html="html" />
 </template>

@@ -34,7 +34,7 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def edit
     @element = @block.template.default_element
-    render layout: 'admin/layouts/raw'
+    render layout: false
   end
 
   def create

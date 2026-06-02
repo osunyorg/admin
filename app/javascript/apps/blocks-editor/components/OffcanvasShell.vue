@@ -39,7 +39,7 @@ export default {
           @click="$emit('close')"
           :aria-label="closeLabel"></button>
       </div>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body p-0">
         <slot />
       </div>
     </div>

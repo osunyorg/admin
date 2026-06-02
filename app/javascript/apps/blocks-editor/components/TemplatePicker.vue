@@ -78,40 +78,42 @@ export default {
 </script>
 
 <template>
-  <div v-if="loading" class="text-center py-5">
-    <div class="spinner-border text-primary" role="status" />
-  </div>
-  <template v-else>
-    <section
-      v-for="category in categories"
-      :key="category.key"
-      class="blocks">
-      <p class="float-end blocks__category__description">{{ category.description }}</p>
-      <h2 class="h3 category blocks__category__title">{{ category.label }}</h2>
-      <div class="row">
-        <div
-          v-for="template in category.templates"
-          :key="template.kind"
-          class="col-md-4 col-6 d-flex mb-5">
-          <div class="flex-fill position-relative">
-            <img
-              :src="template.thumbnail_url"
-              alt=""
-              class="card-img-top block__image" />
-            <div>
-              <h3 class="h4 block__title">{{ template.name }}</h3>
-              <p class="mb-0 block__description">{{ template.description }}</p>
-              <button
-                type="button"
-                class="btn btn-light mb-2 stretched-link mt-2"
-                :disabled="submitting"
-                @click="pick(template)">
-                {{ buttonLabel }}
-              </button>
+  <div class="p-3">
+    <div v-if="loading">
+      <div class="spinner-border spinner-border-sm text-primary" role="status" />
+    </div>
+    <template v-else>
+      <section
+        v-for="category in categories"
+        :key="category.key"
+        class="blocks">
+        <p class="float-end blocks__category__description">{{ category.description }}</p>
+        <h2 class="h3 category blocks__category__title">{{ category.label }}</h2>
+        <div class="row">
+          <div
+            v-for="template in category.templates"
+            :key="template.kind"
+            class="col-md-4 col-6 d-flex mb-5">
+            <div class="flex-fill position-relative">
+              <img
+                :src="template.thumbnail_url"
+                alt=""
+                class="card-img-top block__image" />
+              <div>
+                <h3 class="h4 block__title">{{ template.name }}</h3>
+                <p class="mb-0 block__description">{{ template.description }}</p>
+                <button
+                  type="button"
+                  class="btn btn-light mb-2 stretched-link mt-2"
+                  :disabled="submitting"
+                  @click="pick(template)">
+                  {{ buttonLabel }}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  </template>
+      </section>
+    </template>
+  </div>
 </template>
