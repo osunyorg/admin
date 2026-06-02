@@ -17,7 +17,7 @@ payload = {
   data-payload="<%= payload.to_json %>"
   class="vue__editor">
   <%= simple_form_for [:admin, @block], html: { id: 'block-form' } do |f| %>
-    <div class="container-fluid">
+    <div class="container-fluid vue__editor__fields">
       <%= f.error_notification %>
       <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
