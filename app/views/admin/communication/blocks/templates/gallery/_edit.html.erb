@@ -1,15 +1,12 @@
 <%= block_component_edit block, :description, summernote_config: 'mini' %>
 
 <p><%= t('.send_multiple_images') %></p>
-<input  class="form-control mb-3"
-        type="file"
-        accept="<%= default_images_formats_accepted %>"
-        @change="onMultipleFileImageChange( $event, 'image' )"
-        data-size-limit="<%= Rails.application.config.default_image_max_size %>"
-        multiple>
-<div class="form-text mb-2">
-  <%= images_formats_accepted_hint %>
-</div>
+<multi-image-input :elements="data.elements"
+                   :default-element="defaultElement"
+                   target-key="image"
+                   accept="<%= default_images_formats_accepted %>"
+                   :size-limit="<%= Rails.application.config.default_image_max_size %>"
+                   hint="<%= j images_formats_accepted_hint %>"></multi-image-input>
 
 <%= osuny_separator %>
 
@@ -35,7 +32,7 @@
   <%= osuny_panel 'Image' do %>
     <div class="text-end">
       <a  class="btn btn-sm text-danger mt-n4"
-          v-on:click="deleteElement(element)"
+          @click="deleteElement(element)"
           title="<%= t 'admin.communication.blocks.templates.gallery.edit.remove_image' %>">
           <i class="<%= Icon::DELETE %>"></i>
       </a>
