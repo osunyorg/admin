@@ -23,7 +23,7 @@
   <div class="col-sm-4">
     <%= block_component_edit block, :image, template: @element %>
     <a  class="btn btn-sm text-danger"
-        @click="deleteElement(element)"
+        v-on:click="deleteElement(element)"
         title="<%= t '.remove_key' %>">
         <i class="<%= Icon::DELETE %>"></i>
         <%= t '.remove_key' %>

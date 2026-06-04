@@ -13,7 +13,7 @@
         {{ element.title }}
         <div class="float-end">
           <a  class="btn btn-sm text-danger"
-              @click="deleteElement(element)"
+              v-on:click="deleteElement(element)"
               title="<%= t 'delete' %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>

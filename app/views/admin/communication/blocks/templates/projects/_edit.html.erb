@@ -18,7 +18,7 @@
         <%= block_component_edit block, :id, template: @element %>
       </div>
       <a  class="btn text-danger ms-3"
-          @click="deleteElement(element)"
+          v-on:click="deleteElement(element)"
           title="<%= t('delete') %>">
           <i class="<%= Icon::DELETE %>"></i>
       </a>

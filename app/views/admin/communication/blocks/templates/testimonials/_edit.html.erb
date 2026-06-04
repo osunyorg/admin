@@ -15,7 +15,7 @@
             </p>
           </div>
           <a  class="btn btn-sm text-danger ms-auto"
-              @click="deleteElement(element)"
+              v-on:click="deleteElement(element)"
               title="<%= t '.remove_testimonial' %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>

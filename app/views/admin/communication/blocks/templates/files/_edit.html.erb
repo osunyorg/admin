@@ -1,4 +1,8 @@
-<%= block_component_edit block, :description, summernote_config: 'mini' %>
+<div class="row">
+  <div class="col-xl-6">
+    <%= block_component_edit block, :description, summernote_config: 'mini' %>
+  </div>
+</div>
 
 <%= block_component_add_element block, t('.add_file') %>
 
@@ -10,7 +14,7 @@
           <i class="<%= Icon::MOVE %> handle m-2"></i>
           <p class="mb-0">{{ element.title }}</p>
           <a  class="btn btn-sm text-danger ms-auto"
-              @click="deleteElement(element)"
+              v-on:click="deleteElement(element)"
               title="<%= t '.remove_file' %>">
               <i class="<%= Icon::DELETE %>"></i>
           </a>

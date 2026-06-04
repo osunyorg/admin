@@ -23,9 +23,8 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       university: current_university,
       mandatory_module: Contentful
     )
-    respond_to do |format|
-      format.json
-    end
+    breadcrumb
+    render layout: 'admin/layouts/raw'
   end
 
   def show
@@ -34,14 +33,27 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
 
   def edit
     @element = @block.template.default_element
-    render layout: false
+    breadcrumb
+    render layout: 'admin/layouts/raw'
   end
 
   def create
     if @block.save
-      render json: {}, status: :created, location: [:edit, :admin, @block]
+      respond_to do |format|
+        format.html {
+          redirect_to [:edit, :admin, @block],
+                      notice: t('admin.successfully_created_html', model: @block.to_s)
+        }
+        format.js { render json: {}, status: :created, location: [:edit, :admin, @block] }
+      end
     else
-      head :unprocessable_content
+      respond_to do |format|
+        format.html {
+          breadcrumb
+          render :new, status: :unprocessable_content
+        }
+        format.js { head :unprocessable_content }
+      end
     end
   end
 
@@ -56,7 +68,11 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       end
     else
       respond_to do |format|
-        format.html { render :edit, status: :unprocessable_content }
+        format.html {
+          breadcrumb
+          add_breadcrumb t('edit')
+          render :edit, status: :unprocessable_content
+        }
         format.js { head :unprocessable_content }
       end
     end
@@ -131,6 +147,16 @@ class Admin::Communication::BlocksController < Admin::Communication::Application
       journal_id: journal_id
     }
     public_send path_method, **path_method_options
+  end
+
+  def breadcrumb
+    short_breadcrumb
+    add_breadcrumb @block.about, about_path
+    if @block.new_record?
+      add_breadcrumb t('admin.communication.blocks.choose.title')
+    else
+      add_breadcrumb @block
+    end
   end
 
   def block_params

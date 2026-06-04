@@ -1,3 +1,11 @@
-<code-input v-model="<%= model %>.<%= property %>"
-            placeholder="<%= placeholder %>"
-            label="<%= label %>"></code-input>
+<% rows ||= 3 %>
+
+<label class="form-label" aria-label="<%= label %>" :for="<%= dom_id.html_safe %>">
+  <%= label %>
+</label>
+<textarea :id="<%= dom_id.html_safe %>"
+          class="form-control mb-3 codemirror-vue"
+          data-codemirror-mode="<%= codemirror_mode %>"
+          rows="<%= rows %>"
+          v-model="<%= model %>.<%= property %>"
+          placeholder="<%= placeholder %>"></textarea>
