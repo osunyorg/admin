@@ -71,6 +71,7 @@ export default {
       toolbar: cfg.toolbar,
       followingToolbar: true,
       disableDragAndDrop: true,
+      dialogsInBody: true,
       codemirror: window.codemirrorManager.defaultConfig(),
       buttons: {
         q: window.summernoteManager.qButton,
