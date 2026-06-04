@@ -8,4 +8,8 @@ class Communication::Block::Component::Number < Communication::Block::Component:
     @default || 0
   end
 
+  def data=(value)
+    @data = value.blank? ? nil : value.to_i
+  end
+
 end
