@@ -12,6 +12,8 @@ Bugsnag.configure do |config|
       "ActiveStorage::FileNotFoundError",
       "Aws::S3::Errors::NoSuchKey",
       "Aws::S3::Errors::NotFound",
+      "Communication::Website::LockError",
+      "GoodJob::ActiveJobExtensions::Concurrency::ConcurrencyExceededError",
       "MiniMagick::Error"
     ]
     error_class = event.exceptions.first[:errorClass]
@@ -22,17 +24,6 @@ Bugsnag.configure do |config|
   config.add_on_error(proc do |event|
     user_agent = event.metadata.dig(:request, :headers, 'User-Agent').to_s
     next unless user_agent.include?('ChatGPT-User')
-    false
-  end)
-
-  config.add_on_error(proc do |event|
-    next unless event.metadata.key?(:active_job)
-    ignored_error_classes = [
-      "GoodJob::ActiveJobExtensions::Concurrency::ConcurrencyExceededError",
-      "Communication::Website::LockError"
-    ]
-    error_class = event.exceptions.first[:errorClass]
-    next unless ignored_error_classes.include?(error_class)
     false
   end)
 end
