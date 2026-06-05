@@ -61,9 +61,7 @@
                       preview: 300 %>
       </div>
     </div>
-    <% content_for :action_bar_right do %>
-      <%= cancel [:admin, @website] %>
-      <%= submit f %>
-    <% end %>
+    <%= osuny_separator %>
+    <%= submit f %>
   <% end %>
 <% end %>
