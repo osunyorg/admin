@@ -205,8 +205,15 @@ class Communication::Website::Permalink < ApplicationRecord
   end
 
   def touch_about
-    return unless about.present? && about.persisted?
-    about.touch
+    about.touch if should_touch_about?
+  end
+
+  def should_touch_about?
+    about.present? && 
+    about.persisted? &&
+    # Les liens actuels ne nécessitent pas de mettre à jour quoi que ce soit
+    # car ils sont créés dans les Communication::Website::GitFile::GenerateContentJob
+    !is_current
   end
 
   def regenerate_website_hosting_config
