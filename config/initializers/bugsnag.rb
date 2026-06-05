@@ -12,6 +12,8 @@ Bugsnag.configure do |config|
       "ActiveStorage::FileNotFoundError",
       "Aws::S3::Errors::NoSuchKey",
       "Aws::S3::Errors::NotFound",
+      "Communication::Website::LockError",
+      "GoodJob::ActiveJobExtensions::Concurrency::ConcurrencyExceededError",
       "MiniMagick::Error"
     ]
     error_class = event.exceptions.first[:errorClass]
