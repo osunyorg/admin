@@ -77,7 +77,10 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   end
 
   def load_resource
-    @organization = current_university.organizations.find(params[:id])
+    return @organization if @organization.present?
+    @organization = current_university.organizations.find_by(id: params[:id])
+    @organization ||= current_university.organizations.find_by!(migration_identifier: params[:id])
+    @organization
   end
 
   def l10n_permitted_keys

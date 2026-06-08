@@ -77,7 +77,10 @@ class Api::Osuny::Communication::Websites::Portfolio::CategoriesController < Api
   end
 
   def load_resource
-    @category = website.portfolio_categories.find(params[:id])
+    return @category if @category.present?
+    @category = website.portfolio_categories.find_by(id: params[:id])
+    @category ||= website.portfolio_categories.find_by!(migration_identifier: params[:id])
+    @category
   end
 
   def l10n_permitted_keys

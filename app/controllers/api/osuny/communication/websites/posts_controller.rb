@@ -77,7 +77,10 @@ class Api::Osuny::Communication::Websites::PostsController < Api::Osuny::Communi
   end
 
   def load_resource
-    @post = website.posts.find(params[:id])
+    return @post if @post.present?
+    @post = website.posts.find_by(id: params[:id])
+    @post ||= website.posts.find_by!(migration_identifier: params[:id])
+    @post
   end
 
   def l10n_permitted_keys

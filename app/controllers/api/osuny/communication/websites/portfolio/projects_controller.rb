@@ -77,7 +77,10 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   end
 
   def load_resource
-    @project = website.portfolio_projects.find(params[:id])
+    return @project if @project.present?
+    @project = website.portfolio_projects.find_by(id: params[:id])
+    @project ||= website.portfolio_projects.find_by!(migration_identifier: params[:id])
+    @project
   end
 
   def l10n_permitted_keys

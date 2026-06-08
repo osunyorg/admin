@@ -77,7 +77,10 @@ class Api::Osuny::Communication::Websites::Pages::CategoriesController < Api::Os
   end
 
   def load_resource
-    @category = website.page_categories.find(params[:id])
+    return @category if @category.present?
+    @category = website.page_categories.find_by(id: params[:id])
+    @category ||= website.page_categories.find_by!(migration_identifier: params[:id])
+    @category
   end
 
   def l10n_permitted_keys

@@ -77,7 +77,10 @@ class Api::Osuny::Communication::Websites::Agenda::CategoriesController < Api::O
   end
 
   def load_resource
-    @category = website.agenda_categories.find(params[:id])
+    return @category if @category.present?
+    @category = website.agenda_categories.find_by(id: params[:id])
+    @category ||= website.agenda_categories.find_by!(migration_identifier: params[:id])
+    @category
   end
 
   def l10n_permitted_keys

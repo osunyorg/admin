@@ -77,7 +77,10 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   end
 
   def load_resource
-    @event = website.events.find(params[:id])
+    return @event if @event.present?
+    @event = website.events.find_by(id: params[:id])
+    @event ||= website.events.find_by!(migration_identifier: params[:id])
+    @event
   end
 
   def l10n_permitted_keys

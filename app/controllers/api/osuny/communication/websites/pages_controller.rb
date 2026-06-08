@@ -77,7 +77,10 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
   end
 
   def load_resource
-    @page = website.pages.find(params[:id])
+    return @page if @page.present?
+    @page = website.pages.find_by(id: params[:id])
+    @page ||= website.pages.find_by!(migration_identifier: params[:id])
+    @page
   end
 
   def l10n_permitted_keys
