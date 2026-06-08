@@ -1,9 +1,7 @@
 class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::ApplicationController
   include Api::Osuny::HasResource
-  include Api::Osuny::HasMigrationIdentifier
 
   def index
-    @categories = paginate(current_university.organization_categories.includes(:localizations))
   end
 
   def show
@@ -72,15 +70,16 @@ class Api::Osuny::University::Organizations::CategoriesController < Api::Osuny::
 
   protected
 
-  def integrity_checker
-    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@category, category_params, current_university.organization_categories)
+  def resources_name
+    :categories
   end
 
-  def load_resource
-    return @category if @category.present?
-    @category = current_university.organization_categories.find_by(id: params[:id])
-    @category ||= current_university.organization_categories.find_by!(migration_identifier: params[:id])
-    @category
+  def resource_name
+    :category
+  end
+
+  def resource_list
+    current_university.organization_categories
   end
 
   def l10n_permitted_keys
