@@ -28,7 +28,8 @@ module User::WithAuthentication
     def self.find_for_authentication(warden_conditions)
       host = warden_conditions.delete(:host)
       user = where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
-      user.set_registration_context_from_host(host) if user && host
+      return nil unless user
+      user.set_registration_context_from_host(host)
       user
     end
 

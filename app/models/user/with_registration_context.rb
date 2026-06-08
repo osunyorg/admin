@@ -9,7 +9,13 @@ module User::WithRegistrationContext
     after_create :send_notification_to_admins, unless: -> { registration_context.is_a?(Communication::Extranet) }
 
     def set_registration_context_from_host(host)
-      self.registration_context = Communication::Extranet.with_host(host) || University.with_host(host) || university
+      if host.present?
+        self.registration_context = Communication::Extranet.with_host(host) || 
+                                    University.with_host(host) || 
+                                    university
+      else
+        self.registration_context = university
+      end
     end
 
     private
