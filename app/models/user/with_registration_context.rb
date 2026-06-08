@@ -8,6 +8,10 @@ module User::WithRegistrationContext
 
     after_create :send_notification_to_admins, unless: -> { registration_context.is_a?(Communication::Extranet) }
 
+    def best_context(host)
+      Communication::Extranet.with_host(host) || University.with_host(host)
+    end
+
     private
 
     def extranet_access

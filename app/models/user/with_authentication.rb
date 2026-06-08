@@ -29,9 +29,7 @@ module User::WithAuthentication
       host = warden_conditions.delete(:host)
       user = where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
       if user && host
-        user.registration_context = Communication::Extranet.with_host(host) ||
-                                    University.with_host(host) ||
-                                    user.university
+        user.registration_context = user.best_context(host) || user.university
       end
       user
     end
@@ -75,10 +73,7 @@ module User::WithAuthentication
     end
 
     def send_new_otp(request, options = {})
-      current_extranet = Communication::Extranet.with_host(request.host)
-      current_university = University.with_host(request.host)
-      current_university ||= university
-      self.registration_context = current_extranet || current_university
+      self.registration_context = best_context(request.host) || university
       super
     end
 
