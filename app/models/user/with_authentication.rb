@@ -28,9 +28,7 @@ module User::WithAuthentication
     def self.find_for_authentication(warden_conditions)
       host = warden_conditions.delete(:host)
       user = where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
-      if user && host
-        user.registration_context = user.best_context(host) || user.university
-      end
+      user.set_registration_context_from_host(host) if user && host
       user
     end
 
@@ -73,7 +71,7 @@ module User::WithAuthentication
     end
 
     def send_new_otp(request, options = {})
-      self.registration_context = best_context(request.host) || university
+      set_registration_context_from_host(request.host)
       super
     end
 
