@@ -2,7 +2,6 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   include Api::Osuny::HasResource
 
   def index
-    @projects = paginate(website.portfolio_projects.includes(:localizations))
   end
 
   def show
@@ -70,6 +69,10 @@ class Api::Osuny::Communication::Websites::Portfolio::ProjectsController < Api::
   end
 
   protected
+
+  def resources_name
+    :projects
+  end
 
   def resource_name
     :project

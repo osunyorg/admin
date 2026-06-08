@@ -2,7 +2,6 @@ class Api::Osuny::Communication::Websites::Pages::CategoriesController < Api::Os
   include Api::Osuny::HasResource
 
   def index
-    @categories = paginate(website.page_categories.includes(:localizations))
   end
 
   def show
@@ -70,6 +69,10 @@ class Api::Osuny::Communication::Websites::Pages::CategoriesController < Api::Os
   end
 
   protected
+
+  def resources_name
+    :categories
+  end
 
   def resource_name
     :category

@@ -2,7 +2,6 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   include Api::Osuny::HasResource
 
   def index
-    @events = paginate(website.events.includes(:localizations))
   end
 
   def show
@@ -70,6 +69,10 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
   end
 
   protected
+
+  def resources_name
+    :events
+  end
 
   def resource_name
     :event

@@ -2,7 +2,6 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
   include Api::Osuny::HasResource
 
   def index
-    @pages = paginate(website.pages.includes(:localizations))
   end
 
   def show
@@ -70,6 +69,10 @@ class Api::Osuny::Communication::Websites::PagesController < Api::Osuny::Communi
   end
 
   protected
+
+  def resources_name
+    :pages
+  end
 
   def resource_name
     :page

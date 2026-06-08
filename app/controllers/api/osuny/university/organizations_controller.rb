@@ -2,7 +2,6 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   include Api::Osuny::HasResource
 
   def index
-    @organizations = paginate(current_university.organizations.includes(:localizations))
   end
 
   def show
@@ -70,6 +69,10 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
   end
 
   protected
+
+  def resources_name
+    :organizations
+  end
 
   def resource_name
     :organization
