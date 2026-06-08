@@ -44,7 +44,7 @@ url = page.new_record?  ? admin_communication_website_pages_path
                               except: page,
                               localized: true
                             ),
-                            include_blank: false unless page.is_home? %>
+                            include_blank: false unless page.is_special_page? %>
           <%= f.input :bodyclass, label: t('admin.bodyclass') if can?(:edit, @website) %>
           <%= f.input :full_width if page.editable_width? %>
         <% end %>
