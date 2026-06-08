@@ -1,6 +1,5 @@
 class Api::Osuny::Communication::Websites::Posts::CategoriesController < Api::Osuny::Communication::Websites::ApplicationController
   include Api::Osuny::HasResource
-  include Api::Osuny::HasMigrationIdentifier
 
   def index
     @categories = paginate(website.post_categories.includes(:localizations))
@@ -72,15 +71,12 @@ class Api::Osuny::Communication::Websites::Posts::CategoriesController < Api::Os
 
   protected
 
-  def integrity_checker
-    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@category, category_params, website.post_categories)
+  def resource_name
+    :category
   end
 
-  def load_resource
-    return @category if @category.present?
-    @category = website.post_categories.find_by(id: params[:id])
-    @category ||= website.post_categories.find_by!(migration_identifier: params[:id])
-    @category
+  def resource_list
+    website.post_categories
   end
 
   def l10n_permitted_keys
