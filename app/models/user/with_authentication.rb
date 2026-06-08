@@ -26,7 +26,14 @@ module User::WithAuthentication
     before_validation :adjust_mobile_phone, :sanitize_fields
 
     def self.find_for_authentication(warden_conditions)
-      where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
+      host = warden_conditions.delete(:host)
+      user = where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
+      if user && host
+        user.registration_context = Communication::Extranet.with_host(host) ||
+                                    University.with_host(host) ||
+                                    user.university
+      end
+      user
     end
 
     def self.send_reset_password_instructions(attributes = {})
