@@ -88,6 +88,16 @@ module User::WithAuthentication
       end
     end
 
+    def send_devise_notification(notification, *args)
+      if notification == :unlock_instructions
+        host = Thread.current[:osuny_registration_context_host]
+        if registration_context.blank? && host.present?
+          self.registration_context = Communication::Extranet.with_host(host) || University.with_host(host) || university
+        end
+      end
+      super(notification, *args)
+    end
+
     def unlock_mfa!
       self.update_column(:second_factor_attempts_count, 0)
     end
