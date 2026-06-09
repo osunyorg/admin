@@ -9,4 +9,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.paths << Rails.root.join('app/assets/examples')
 
 Rails.application.config.assets.export_concurrent = false
+Rails.application.config.assets.generate_sourcemaps = true
 Rails.application.config.assets.js_compressor = :terser_with_source_maps
