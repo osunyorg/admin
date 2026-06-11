@@ -20,7 +20,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-8">
-                <%= link_to [:admin, cohort] do %>
+                <%= link_to [:admin, cohort, { school_id: nil, program_id: nil }] do %>
                   <%= cohort.program.to_s_in(current_language) %>
                   <%= cohort.year %>
                 <% end %>

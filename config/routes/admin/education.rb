@@ -29,6 +29,7 @@ namespace :education do
       end
     end
     resources :teachers, controller: 'programs/teachers', only: :destroy
+    resources :cohorts, controller: 'programs/cohorts', only: :index
     collection do
       resources :categories, controller: 'programs/categories', as: 'program_categories' do
         collection do
@@ -48,7 +49,6 @@ namespace :education do
       get 'admission/edit'      => 'programs/parts#admission_edit', as: :edit_admission
       get 'certification'       => 'programs/parts#certification', as: :certification
       get 'certification/edit'  => 'programs/parts#certification_edit', as: :edit_certification
-      get 'alumni'              => 'programs/parts#alumni', as: :alumni
       get :children
       get :preview
       get :static

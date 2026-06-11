@@ -6,22 +6,25 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
     primary.item  :subnav_summary,
-                  t('admin.subnav.summary'), 
+                  t('admin.subnav.summary'),
                   admin_education_program_path(id: @program, program_id: nil),
-                  highlights_on: lambda { 
-                    controller_name == "programs" && action_name == "show" 
+                  highlights_on: lambda {
+                    controller_name == "programs" && action_name == "show"
                   } if can?(:read, @program)
     primary.item  :subnav_pedagogy,
-                  t('education.program.parts.pedagogy.label'), 
+                  t('education.program.parts.pedagogy.label'),
                   pedagogy_admin_education_program_path(id: @program, program_id: nil)
     primary.item  :subnav_admission,
-                  t('education.program.parts.admission.label'), 
+                  t('education.program.parts.admission.label'),
                   admission_admin_education_program_path(id: @program, program_id: nil)
     primary.item  :subnav_certification,
-                  t('education.program.parts.certification.label'), 
+                  t('education.program.parts.certification.label'),
                   certification_admin_education_program_path(id: @program, program_id: nil)
-    primary.item  :subnav_alumni,
-                  University::Person::Alumnus.model_name.human(count: 2), 
-                  alumni_admin_education_program_path(id: @program, program_id: nil) if @program.cohorts.any?
+    primary.item  :subnav_cohorts,
+                  Education::Cohort.model_name.human(count: 2),
+                  admin_education_program_cohorts_path(@program),
+                  highlights_on: lambda {
+                    controller_name == "cohorts" && action_name == "index"
+                  } if @program.cohorts.any?
   end
 end
