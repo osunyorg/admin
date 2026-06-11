@@ -7,6 +7,11 @@ module Communication::Website::WithMenus
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
+    has_many    :menu_items,
+                class_name: 'Communication::Website::Menu::Item',
+                foreign_key: :website_id,
+                dependent: :destroy
+
     after_save :initialize_menus
   end
 

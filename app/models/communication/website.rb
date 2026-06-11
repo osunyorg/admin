@@ -217,6 +217,7 @@ class Communication::Website < ApplicationRecord
     end
     git_files.update_all(university_id: new_university_id)
     permalinks.update_all(university_id: new_university_id)
+    menu_items.update_all(university_id: new_university_id)
   end
 
   def domain
