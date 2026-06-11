@@ -41,6 +41,7 @@ class Communication::Website::GitFile < ApplicationRecord
   # One Git File per about and website, unless about is nil (destroy orphans)
   validates :about_id, uniqueness: { scope: [:about_type, :website_id] }, allow_nil: true
 
+  scope :generated, -> { where.not(generated_at: nil) }
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
   scope :desynchronized_until, -> (time) { desynchronized.where('desynchronized_at <= ?', time) }

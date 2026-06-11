@@ -50,7 +50,8 @@ module Communication::Website::WithGitRepository
 
   def sync_with_git_safely
     return unless git_repository.valid?
-    git_repository.git_files = git_files.desynchronized_until(last_sync_at)
+    git_repository.git_files = git_files.generated
+                                        .desynchronized_until(last_sync_at)
                                         .order(:desynchronized_at)
                                         .limit(git_repository.batch_size)
     git_repository.sync!
@@ -119,7 +120,9 @@ module Communication::Website::WithGitRepository
     Communication::Website::AnalyseJob.perform_later(id)
   end
 
-  def git_files_desynchronized
-    last_sync_at.nil? ? git_files.desynchronized : git_files.desynchronized_since(last_sync_at)
+  def desynchronized_generated_git_files
+    git_files_list = git_files.generated
+    last_sync_at.nil? ? git_files_list.desynchronized
+                      : git_files_list.desynchronized_since(last_sync_at)
   end
 end
