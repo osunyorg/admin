@@ -31,9 +31,8 @@ module AsCategory
     # Not named "reorder" to avoid confusion with ActiveRecord reorder method
     def self.reorder_categories(categories:, item_id:, previous_parent_id:, parent_id:, ids: [])
       item = categories.find(item_id)
-      is_moving_to_another_parent = previous_parent_id != parent_id
-
       if item.is_taxonomy? && parent_id.present?
+        # Moving taxonomy is ok, but not inside a category or taxonomy
         return false
       else
         ids.each.with_index do |id, index|
@@ -41,14 +40,28 @@ module AsCategory
           category.update_columns parent_id: parent_id,
                                   position: index + 1
         end
-        categories_to_touch = []
-        categories_to_touch << categories.find(previous_parent_id) if previous_parent_id.present?
-        categories_to_touch << categories.find(parent_id) if parent_id.present?
-        categories_to_touch << item
-        categories_to_touch.concat(item.descendants) if is_moving_to_another_parent
-        categories_to_touch.uniq.each(&:touch)
+        touch_categories!(
+          categories: categories,
+          item: item,
+          previous_parent_id: previous_parent_id,
+          parent_id: parent_id
+        )
         true
       end
+    end
+
+    protected
+
+    def self.touch_categories!(categories:, item:, previous_parent_id:, parent_id:)
+      list = []
+      list << item
+      list << categories.find(previous_parent_id) if previous_parent_id.present?
+      list << categories.find(parent_id) if parent_id.present?
+      if previous_parent_id != parent_id
+        # The parent did change, so we need to touch the whole subtree of the item
+        list.concat(item.descendants)
+      end
+      list.compact.uniq.each(&:touch)
     end
 
   end
