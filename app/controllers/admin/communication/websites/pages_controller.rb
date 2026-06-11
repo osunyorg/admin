@@ -31,19 +31,14 @@ class Admin::Communication::Websites::PagesController < Admin::Communication::We
   end
 
   def reorder
-    item = @website.pages.find(params[:itemId])
-    # Bug prevention: prevent moving special pages into children
-    if item.is_special_page? && params[:parentId] != item.default_parent.id
-      head :unprocessable_entity
-      return 
-    end
-
-    @website.reorder_pages(
+    result = @website.reorder_pages(
+      item_id: params[:itemId],
       previous_parent_id: params[:oldParentId], 
       parent_id: params[:parentId], 
       ids: params[:ids],
       language: current_language
     )
+    head result ? :ok : :unprocessable_entity
   end
 
   def children

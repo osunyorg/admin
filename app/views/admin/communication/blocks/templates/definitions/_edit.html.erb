@@ -1,6 +1,6 @@
 <%= block_component_edit block, :description, summernote_config: 'mini-list' %>
 
-<draggable :list="data.elements" handle=".dragHandle" @end="refreshSummernotes()" class="mb-3">
+<draggable :list="data.elements" handle=".dragHandle" class="mb-3">
   <div v-for="(element, index) in data.elements" class="d-flex draggable-item">
     <div>
       <a class="btn ps-0 pt-0 dragHandle">

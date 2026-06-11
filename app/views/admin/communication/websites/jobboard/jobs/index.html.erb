@@ -1,4 +1,4 @@
-<% content_for :title, "#{Communication::Website::Jobboard::Job.model_name.human(count: 2)} (#{@jobs.total_count})" %>
+<% content_for :title, @website.feature_jobboard_name(current_language) %>
 
 <% content_for :title_right do %>
   <%= create_link Communication::Website::Jobboard::Job %>

@@ -1,4 +1,4 @@
-<% content_for :title, "#{Communication::Website::Agenda::Event.model_name.human(count: 2)} (#{@events.total_count})" %>
+<% content_for :title, @website.feature_agenda_name(current_language) %>
 
 <% content_for :title_right do %>
   <%= button_advanced do %>

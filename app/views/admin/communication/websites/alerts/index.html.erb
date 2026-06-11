@@ -1,4 +1,4 @@
-<% content_for :title, "#{Communication::Website::Alert.model_name.human(count: 2)} (#{@alerts.total_count})" %>
+<% content_for :title, Communication::Website::Alert.model_name.human(count: 2) %>
 
 <% content_for :title_right do %>
   <%= create_link Communication::Website::Alert %>

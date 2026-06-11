@@ -28,7 +28,13 @@ module Communication::Website::WithPages
     end
   end
 
-  def reorder_pages(previous_parent_id:, parent_id:, ids: [], language:)
+  def reorder_pages(item_id:, previous_parent_id:, parent_id:, ids: [], language:)
+    item = pages.find(item_id)
+    # Bug prevention: prevent moving special pages into children
+    if item.is_special_page? && parent_id != item.default_parent.id
+      return false
+    end
+
     Osuny::BulkOperation.silently do
       pages_by_id = pages.where(id: ids).index_by(&:id)
       ids.each.with_index do |id, index|
@@ -42,6 +48,7 @@ module Communication::Website::WithPages
       parent_id: parent_id,
       language: language
     })
+    true
   end
 
   def clean_after_pages_reorder_safely(previous_parent_id, parent_id, language)

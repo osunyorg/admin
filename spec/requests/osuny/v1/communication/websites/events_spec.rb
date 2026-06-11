@@ -516,7 +516,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Event identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Event identifier or migration identifier'
       let(:id) { communication_website_agenda_events(:test_event).id }
 
       response '200', 'Successful operation' do
@@ -546,7 +546,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Event identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Event identifier or migration identifier'
       let(:id) { communication_website_agenda_events(:test_event).id }
 
       parameter name: :communication_website_agenda_event, in: :body, type: :object, schema: {
@@ -685,7 +685,7 @@ RSpec.describe 'Communication::Website::Agenda::Event' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Event identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Event identifier or migration identifier'
       let(:id) { communication_website_agenda_events(:test_event).id }
 
       response '204', 'Successful deletion' do
