@@ -28,7 +28,7 @@ module AsCategory
                       .compact
       where.not(id: ids) }
 
-    def self.do_reorder(categories:, item_id:, previous_parent_id:, parent_id:, ids: [])
+    def self.reorder_categories(categories:, item_id:, previous_parent_id:, parent_id:, ids: [])
       moved_category_id = item_id
       moved_category = categories.find(moved_category_id)
       moved_to_another_parent = previous_parent_id != parent_id

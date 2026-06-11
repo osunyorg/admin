@@ -7,7 +7,7 @@ module Admin::ActAsCategories
   end
 
   def reorder
-    result = categories_class.do_reorder(
+    result = categories_class.reorder_categories(
       categories: categories,
       item_id: params[:itemId],
       previous_parent_id: params[:oldParentId], 
