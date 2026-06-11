@@ -41,7 +41,13 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
   end
 
   def update_theme
-    raise NoMethodError, "You must implement the `update_theme` method in #{self.class.name}"
+    return unless should_update_theme?
+    batch << {
+      action: 'update',
+      file_path: ENV["GITHUB_WEBSITE_THEME_PATH"],
+      type: 'commit',
+      sha: current_theme_sha
+    }
   end
 
   def init_from_template(name)

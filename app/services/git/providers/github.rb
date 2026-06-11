@@ -3,7 +3,6 @@ class Git::Providers::Github < Git::Providers::Abstract
   COMMIT_BATCH_SIZE = 30
 
   include WithSecrets
-  include WithTheme
 
   def url
     "#{BASE_URL}/#{repository}"
@@ -53,6 +52,16 @@ class Git::Providers::Github < Git::Providers::Abstract
       mode: file[:mode],
       type: file[:type],
       sha: nil
+    }
+  end
+
+  def update_theme
+    return unless should_update_theme?
+    batch << {
+      path: ENV["GITHUB_WEBSITE_THEME_PATH"],
+      mode: '160000',
+      type: 'commit',
+      sha: current_theme_sha
     }
   end
 
