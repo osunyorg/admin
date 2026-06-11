@@ -12,3 +12,4 @@ git_file_2:
   university: default_university
   desynchronized: true
   desynchronized_at: Time.now - 1.hour
+  generated_at: Time.now - 1.hour
