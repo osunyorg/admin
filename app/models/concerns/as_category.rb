@@ -28,12 +28,12 @@ module AsCategory
                       .compact
       where.not(id: ids) }
 
+    # Not named "reorder" to avoid confusion with ActiveRecord reorder method
     def self.reorder_categories(categories:, item_id:, previous_parent_id:, parent_id:, ids: [])
-      moved_category_id = item_id
-      moved_category = categories.find(moved_category_id)
-      moved_to_another_parent = previous_parent_id != parent_id
+      item = categories.find(item_id)
+      is_moving_to_another_parent = previous_parent_id != parent_id
 
-      if moved_category.is_taxonomy? && parent_id.present?
+      if item.is_taxonomy? && parent_id.present?
         return false
       else
         ids.each.with_index do |id, index|
@@ -44,8 +44,8 @@ module AsCategory
         categories_to_touch = []
         categories_to_touch << categories.find(previous_parent_id) if previous_parent_id.present?
         categories_to_touch << categories.find(parent_id) if parent_id.present?
-        categories_to_touch << moved_category
-        categories_to_touch.concat(moved_category.descendants) if moved_to_another_parent
+        categories_to_touch << item
+        categories_to_touch.concat(item.descendants) if is_moving_to_another_parent
         categories_to_touch.uniq.each(&:touch)
         true
       end
