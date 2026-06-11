@@ -159,7 +159,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_153511) do
     t.string "html_class"
     t.jsonb "metadata"
     t.string "migration_identifier"
-    t.boolean "native", default: false
     t.integer "position", null: false
     t.boolean "published", default: true
     t.integer "template_kind", default: 0, null: false
@@ -2293,9 +2292,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_11_153511) do
     t.uuid "created_by_id"
     t.datetime "deleted_at"
     t.string "email"
-    t.boolean "is_laboratory", default: false
-    t.boolean "is_location", default: false
-    t.boolean "is_school", default: false
     t.integer "kind", default: 10
     t.float "latitude"
     t.float "longitude"
