@@ -90,7 +90,12 @@ information:
 <%= osuny_static_html 'initial', @l10n.pricing_initial, depth: 3 %>
 <%= osuny_static_html 'continuing', @l10n.pricing_continuing, depth: 3 %>
 <%= osuny_static_html 'apprenticeship', @l10n.pricing_apprenticeship, depth: 3 %>
-diplomas: "<%= @l10n.diploma&.slug %>"
+diplomas:
+<% if @l10n.diploma %>
+  <% hugo = @l10n.diploma.hugo(@website) %>
+  url: "<%= hugo.permalink %>"
+  slug: "<%= hugo.slug %>"
+<% end %>
 <%= osuny_static_text 'duration', @l10n.duration %>
 teachers:
 <%
