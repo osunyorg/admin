@@ -16,7 +16,7 @@ class Git::Analyzer
   end
 
   def should_destroy?
-    git_file.current_path.nil?
+    git_file.generated? && git_file.current_path.nil?
   end
 
   protected

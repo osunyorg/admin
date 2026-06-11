@@ -82,11 +82,13 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def mark_for_destruction!
     return if current_path.nil? && current_sha.nil?
+    now = Time.zone.now
     update(
       current_path: nil,
       current_sha: nil,
       desynchronized: true,
-      desynchronized_at: Time.zone.now
+      desynchronized_at: now,
+      generated_at: now
     )
   end
 
@@ -101,6 +103,10 @@ class Communication::Website::GitFile < ApplicationRecord
       desynchronized: false,
       desynchronized_at: nil
     )
+  end
+
+  def generated?
+    generated_at.present?
   end
 
   def to_s
