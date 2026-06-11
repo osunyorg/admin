@@ -9,8 +9,9 @@ class Admin::Education::CohortsController < Admin::Education::ApplicationControl
 
   def index
     @filtered = @cohorts
-    @cohorts =  @filtered.at_lifecycle(params[:lifecycle], current_language)
-                         .ordered
+    @cohorts = @filtered.at_lifecycle(params[:lifecycle], current_language)
+                        .ordered
+                        .page(params[:page])
     breadcrumb
   end
 

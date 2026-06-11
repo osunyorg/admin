@@ -47,11 +47,23 @@
     <% if @programs.any? %>
       <%= osuny_panel Education::School.human_attribute_name('programs') do %>
         <%= render 'admin/education/programs/list', programs: @programs %>
+      <% end %>
+
+      <%
+      cohort_action = ''
+      cohort_action += link_to "#{t('admin.item.see_all')} (#{@cohorts.total_count})",
+                              admin_education_school_cohorts_path(school_id: @school.id),
+                              class: button_classes unless @cohorts.last_page?
+      %>
+
+      <%= osuny_panel Education::Cohort.model_name.human(count: 2), action: cohort_action do %>
+        <%= render 'admin/education/cohorts/list', cohorts: @cohorts %>
         <div>
           <%= @school.alumni.count %>
           <%= University::Person::Alumnus.model_name.human(count: 2).downcase %>
         </div>
-      <% end %>
+      <% end if @cohorts.any? %>
+
     <% end %>
   </div>
 </div>
@@ -59,4 +71,4 @@
 <% content_for :server_admin_only do %>
   <%= static_link static_admin_education_school_path(@school) %>
   <%= render 'admin/communication/websites/git_files/list', git_files: @l10n.git_files %>
-<% end %>  
+<% end %>

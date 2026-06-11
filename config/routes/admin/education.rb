@@ -64,6 +64,7 @@ namespace :education do
         post :reorder
       end
     end
+    resources :cohorts, controller: 'schools/cohorts', only: :index
     member do
       get :static
       post :restore
