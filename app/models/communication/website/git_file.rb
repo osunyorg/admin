@@ -8,6 +8,7 @@
 #  current_sha       :string
 #  desynchronized    :boolean          default(TRUE)
 #  desynchronized_at :datetime         indexed
+#  generated_at      :datetime
 #  previous_path     :string
 #  previous_sha      :string
 #  created_at        :datetime         not null
