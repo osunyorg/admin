@@ -6,6 +6,7 @@ module AsCategory
   include Orderable
 
   included do
+
     belongs_to  :parent,
                 class_name: self.name,
                 optional: true
@@ -26,6 +27,30 @@ module AsCategory
                       .flatten
                       .compact
       where.not(id: ids) }
+
+    def self.do_reorder(categories:, item_id:, previous_parent_id:, parent_id:, ids: [])
+      moved_category_id = item_id
+      moved_category = categories.find(moved_category_id)
+      moved_to_another_parent = previous_parent_id != parent_id
+
+      if moved_category.is_taxonomy? && parent_id.present?
+        return false
+      else
+        ids.each.with_index do |id, index|
+          category = categories.find(id)
+          category.update_columns parent_id: parent_id,
+                                  position: index + 1
+        end
+        categories_to_touch = []
+        categories_to_touch << categories.find(previous_parent_id) if previous_parent_id.present?
+        categories_to_touch << categories.find(parent_id) if parent_id.present?
+        categories_to_touch << moved_category
+        categories_to_touch.concat(moved_category.descendants) if moved_to_another_parent
+        categories_to_touch.uniq.each(&:touch)
+        true
+      end
+    end
+
   end
 
   def dependencies
