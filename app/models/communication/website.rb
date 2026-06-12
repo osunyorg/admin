@@ -73,6 +73,7 @@ class Communication::Website < ApplicationRecord
   include WithContentArchive
   include WithDependencies
   include WithDeuxfleurs
+  include WithDomCount
   include WithFeatureAgenda
   include WithFeatureAlerts
   include WithFeatureAlumni

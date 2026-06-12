@@ -93,6 +93,10 @@ class Communication::Block::Template::Base
     []
   end
 
+  def dom_count
+    1
+  end
+
   def to_s
     self.class.to_s.demodulize
   end
