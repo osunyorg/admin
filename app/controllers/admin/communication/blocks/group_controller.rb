@@ -3,6 +3,11 @@ class Admin::Communication::Blocks::GroupController < Admin::Communication::Appl
   layout false
 
   def index
+    @about = PolymorphicObjectFinder.find(
+      params,
+      key: :about,
+      university: current_university
+    )
     @blocks = @about.blocks.ordered
   end
 
