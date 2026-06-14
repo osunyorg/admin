@@ -99,15 +99,20 @@
                             margin: 0
                             text-align: center
     .vue__dom-count
-        background: $color-flexoki-black
-        border-radius: 5px
-        padding: 20px
+        background: $color-flexoki-100
+        outline-offset: -10px
+        outline-color: $color-flexoki-300
+        outline-style: solid
+        outline-width: 1px
+        padding: 40px
         &__image
-            border-radius: 5px
-            background: $color-flexoki-150
-            img
-                mix-blend-mode: multiply
-        *
-            color: $color-flexoki-paper
+            mix-blend-mode: multiply
+        &__title
+            font-family: $font-family-serif
+            font-size: pxToRem(30)
+        &__count
+            font-size: pxToRem(12)
+            text-transform: uppercase
+            color: $color-flexoki-700
 .sortable-ghost
     opacity: 0.3
