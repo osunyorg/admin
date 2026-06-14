@@ -93,11 +93,19 @@ class Communication::Block::Template::Base
     []
   end
 
+  def dom_count
+    1
+  end
+
   def to_s
     self.class.to_s.demodulize
   end
 
   protected
+
+  def count_dom_elements_in_html(html)
+    Nokogiri::HTML.fragment(html).css('*').count
+  end
 
   def build_component(property)
     hash = self.class.components_descriptions.detect do |hash|

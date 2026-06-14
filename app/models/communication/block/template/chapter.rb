@@ -19,6 +19,13 @@ class Communication::Block::Template::Chapter < Communication::Block::Template::
     ]
   end
 
+  # TODO count in components
+  def dom_count
+    super +
+    count_dom_elements_in_html(text_component.data) +
+    count_dom_elements_in_html(notes_component.data)
+  end
+
   protected
 
   def check_accessibility
