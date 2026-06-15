@@ -91,6 +91,7 @@ class University::Person < ApplicationRecord
             if: :will_save_change_to_email?
 
   before_validation :sanitize_email
+  after_destroy :unlink_user, if: [:persisted?, :user_id]
 
   scope :ordered, -> (language) {
     localization_first_name_select = <<-SQL
@@ -205,6 +206,10 @@ class University::Person < ApplicationRecord
 
   def sanitize_email
     self.email = self.email.to_s.downcase.strip
+  end
+
+  def unlink_user
+    update_column :user_id, nil
   end
 
 end
