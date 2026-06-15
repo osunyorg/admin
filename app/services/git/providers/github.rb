@@ -55,7 +55,7 @@ class Git::Providers::Github < Git::Providers::Abstract
     }
   end
 
-  def update_theme
+  def update_theme!
     return unless should_update_theme?
     batch << {
       path: ENV["GITHUB_WEBSITE_THEME_PATH"],
@@ -63,7 +63,7 @@ class Git::Providers::Github < Git::Providers::Abstract
       type: 'commit',
       sha: current_theme_sha
     }
-    push(update_theme_message)
+    push(theme_update_commit_message)
   end
 
   def init_from_template(name)

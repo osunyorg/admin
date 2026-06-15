@@ -40,14 +40,14 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
     }
   end
 
-  def update_theme
+  def update_theme!
     return unless should_update_theme?
     client.edit_submodule repository,
                           ENV["GITHUB_WEBSITE_THEME_PATH"],
                           {
                             branch: branch,
                             commit_sha: current_theme_sha,
-                            commit_message: update_theme_message
+                            commit_message: theme_update_commit_message
                           }
   end
 

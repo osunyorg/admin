@@ -29,8 +29,8 @@ class Git::Providers::Abstract
     raise NoMethodError, "You must implement the `destroy_file` method in #{self.class.name}"
   end
 
-  def update_theme
-    raise NoMethodError, "You must implement the `update_theme` method in #{self.class.name}"
+  def update_theme!
+    raise NoMethodError, "You must implement the `update_theme!` method in #{self.class.name}"
   end
 
   def push(commit_message)
@@ -71,7 +71,7 @@ class Git::Providers::Abstract
     previous_theme_sha != current_theme_sha
   end
 
-  def update_theme_message
+  def theme_update_commit_message
     theme_name = ENV["GITHUB_WEBSITE_THEME_REPOSITORY"].to_s.split("/").last
     "Updated #{theme_name} version"
   end
