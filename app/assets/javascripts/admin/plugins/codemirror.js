@@ -3,6 +3,7 @@
 //= require codemirror/mode/css/css
 //= require codemirror/mode/htmlmixed/htmlmixed
 //= require codemirror/mode/sass/sass
+//= require codemirror/addon/display/autorefresh
 
 /*global CodeMirror */
 
