@@ -90,7 +90,7 @@ information:
 <%= osuny_static_html 'initial', @l10n.pricing_initial, depth: 3 %>
 <%= osuny_static_html 'continuing', @l10n.pricing_continuing, depth: 3 %>
 <%= osuny_static_html 'apprenticeship', @l10n.pricing_apprenticeship, depth: 3 %>
-diplomas:
+diploma:
 <% if @l10n.diploma %>
 <% hugo = @l10n.diploma.hugo(@website) %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
