@@ -103,10 +103,6 @@ class Communication::Block::Template::Base
 
   protected
 
-  def count_dom_elements_in_html(html)
-    Nokogiri::HTML.fragment(html).css('*').count
-  end
-
   def build_component(property)
     hash = self.class.components_descriptions.detect do |hash|
       hash[:property] == property
