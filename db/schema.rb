@@ -875,6 +875,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_15_120000) do
     t.string "current_sha"
     t.boolean "desynchronized", default: true
     t.datetime "desynchronized_at"
+    t.datetime "generated_at"
     t.string "previous_path"
     t.string "previous_sha"
     t.uuid "university_id"

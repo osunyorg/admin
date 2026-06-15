@@ -8,6 +8,7 @@
 #  current_sha       :string
 #  desynchronized    :boolean          default(TRUE)
 #  desynchronized_at :datetime         indexed
+#  generated_at      :datetime
 #  previous_path     :string
 #  previous_sha      :string
 #  created_at        :datetime         not null
@@ -41,6 +42,7 @@ class Communication::Website::GitFile < ApplicationRecord
   # One Git File per about and website, unless about is nil (destroy orphans)
   validates :about_id, uniqueness: { scope: [:about_type, :website_id] }, allow_nil: true
 
+  scope :generated, -> { where.not(generated_at: nil) }
   scope :desynchronized, -> { where(desynchronized: true) }
   scope :desynchronized_since, -> (time) { desynchronized.where('desynchronized_at > ?', time) }
   scope :desynchronized_until, -> (time) { desynchronized.where('desynchronized_at <= ?', time) }
@@ -87,11 +89,13 @@ class Communication::Website::GitFile < ApplicationRecord
 
   def mark_for_destruction!
     return if current_path.nil? && current_sha.nil?
+    now = Time.zone.now
     update(
       current_path: nil,
       current_sha: nil,
       desynchronized: true,
-      desynchronized_at: Time.zone.now
+      desynchronized_at: now,
+      generated_at: now
     )
   end
 
@@ -106,6 +110,10 @@ class Communication::Website::GitFile < ApplicationRecord
       desynchronized: false,
       desynchronized_at: nil
     )
+  end
+
+  def generated?
+    generated_at.present?
   end
 
   def to_s

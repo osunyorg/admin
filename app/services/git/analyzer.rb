@@ -8,15 +8,15 @@ class Git::Analyzer
   end
 
   def should_create?
-    !should_destroy? && !exists?(git_file.current_path) && !moved?
+    git_file.generated? && !should_destroy? && !exists?(git_file.current_path) && !moved?
   end
 
   def should_update?
-    !should_destroy? && (moved? || different?)
+    git_file.generated? && !should_destroy? && (moved? || different?)
   end
 
   def should_destroy?
-    git_file.current_path.nil?
+    git_file.generated? && git_file.current_path.nil?
   end
 
   protected

@@ -10,5 +10,6 @@ git_file_2:
   about: test_post_2_fr (Communication::Website::Post::Localization)
   website: website_with_github
   university: default_university
+  generated_at: <%= Time.now - 1.hour %>
   desynchronized: true
-  desynchronized_at: Time.now - 1.hour
+  desynchronized_at: <%= Time.now - 1.hour %>
