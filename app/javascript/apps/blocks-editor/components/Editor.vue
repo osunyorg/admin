@@ -157,7 +157,6 @@ export default {
     },
 
     wireCancelButtons(root) {
-      // The `.vue__changes__cancel` button closes the offcanvas.
       root.querySelectorAll('.vue__editor__actions__cancel').forEach((button) => {
         button.addEventListener('click', (event) => {
           event.preventDefault();

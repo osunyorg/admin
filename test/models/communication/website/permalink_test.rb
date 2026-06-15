@@ -2,6 +2,7 @@ require "test_helper"
 
 # rails test test/models/communication/website/permalink_test.rb
 class Communication::Website::PermalinkTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
 
   def test_page_permalink
     # Créer une page et sa localisation FR
@@ -199,5 +200,54 @@ class Communication::Website::PermalinkTest < ActiveSupport::TestCase
     assert_difference "Communication::Website::Permalink.count" do
       event.days.second.reload.manage_permalink_in_website(website_with_github)
     end
+  end
+
+  def test_page_category_permalink_updates_for_descendants_after_move
+    website = website_with_github
+
+    old_parent = website.page_categories.create!(
+      university_id: default_university.id,
+      localizations_attributes: [
+        { language_id: french.id, name: "Old parent", slug: "old-parent" }
+      ]
+    )
+    new_parent = website.page_categories.create!(
+      university_id: default_university.id,
+      localizations_attributes: [
+        { language_id: french.id, name: "New parent", slug: "new-parent" }
+      ]
+    )
+    moved = website.page_categories.create!(
+      university_id: default_university.id,
+      parent: old_parent,
+      localizations_attributes: [
+        { language_id: french.id, name: "Moved", slug: "moved" }
+      ]
+    )
+    child = website.page_categories.create!(
+      university_id: default_university.id,
+      parent: moved,
+      localizations_attributes: [
+        { language_id: french.id, name: "Child", slug: "child" }
+      ]
+    )
+
+    moved_l10n = moved.localization_for(french)
+    child_l10n = child.localization_for(french)
+
+    moved_l10n.manage_permalink_in_website(website)
+    child_l10n.manage_permalink_in_website(website)
+
+    assert_equal "/old-parent/moved/", moved_l10n.current_permalink_in_website(website).path
+    assert_equal "/old-parent/moved/child/", child_l10n.current_permalink_in_website(website).path
+
+    moved.update_columns(parent_id: new_parent.id, position: moved.position)
+
+    perform_enqueued_jobs do
+      [moved, *moved.descendants].each(&:touch)
+    end
+
+    assert_equal "/new-parent/moved/", moved_l10n.reload.current_permalink_in_website(website).path
+    assert_equal "/new-parent/moved/child/", child_l10n.reload.current_permalink_in_website(website).path
   end
 end

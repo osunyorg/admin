@@ -302,7 +302,7 @@ RSpec.describe 'University::Organization::Category' do
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
-      parameter name: :id, in: :path, type: :string, description: 'Category identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Category identifier or migration identifier'
       let(:id) { university_organization_categories(:test_category).id }
 
       response '200', 'Successful operation' do
@@ -325,7 +325,7 @@ RSpec.describe 'University::Organization::Category' do
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
-      parameter name: :id, in: :path, type: :string, description: 'Category identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Category identifier or migration identifier'
       let(:id) { university_organization_categories(:test_category).id }
 
       parameter name: :university_organization_category, in: :body, type: :object, schema: {
@@ -432,7 +432,7 @@ RSpec.describe 'University::Organization::Category' do
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
-      parameter name: :id, in: :path, type: :string, description: 'Category identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Category identifier or migration identifier'
       let(:id) { university_organization_categories(:test_category).id }
 
       response '204', 'Successful deletion' do
