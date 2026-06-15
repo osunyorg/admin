@@ -63,6 +63,7 @@ class Git::Providers::Github < Git::Providers::Abstract
       type: 'commit',
       sha: current_theme_sha
     }
+    push(update_theme_message)
   end
 
   def init_from_template(name)

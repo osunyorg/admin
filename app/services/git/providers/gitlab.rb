@@ -42,12 +42,13 @@ class Git::Providers::Gitlab < Git::Providers::Abstract
 
   def update_theme
     return unless should_update_theme?
-    batch << {
-      action: 'update',
-      file_path: ENV["GITHUB_WEBSITE_THEME_PATH"],
-      type: 'commit',
-      sha: current_theme_sha
-    }
+    client.edit_submodule repository,
+                          ENV["GITHUB_WEBSITE_THEME_PATH"],
+                          {
+                            branch: branch,
+                            commit_sha: current_theme_sha,
+                            commit_message: update_theme_message
+                          }
   end
 
   def init_from_template(name)

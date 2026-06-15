@@ -70,4 +70,9 @@ class Git::Providers::Abstract
   def should_update_theme?
     previous_theme_sha != current_theme_sha
   end
+
+  def update_theme_message
+    theme_name = ENV["GITHUB_WEBSITE_THEME_REPOSITORY"].to_s.split("/").last
+    "Updated #{theme_name} version"
+  end
 end
