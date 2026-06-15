@@ -31,8 +31,7 @@ class DestroyUniversityJob < ApplicationJob
       University::Person::Category,
       University::App,
       EmergencyMessage,
-      Import,
-      User
+      Import
     ].freeze
   OBJECTS_PARANOID = [
       Administration::Location::Localization,
@@ -82,6 +81,13 @@ class DestroyUniversityJob < ApplicationJob
     OBJECTS_NOT_PARANOID.each do |klass|
       klass.where(university_id: university.id).destroy_all
     end
+
+    # Custom logic for users as we need to prevent server admin from being destroyed of all universities
+    User.where(university_id: university.id).find_each do |user|
+      user.skip_server_admin_sync = true if user.server_admin?
+      user.destroy
+    end
+
     OBJECTS_PARANOID.each do |klass|
       klass.with_deleted
            .where(university: university.id)
