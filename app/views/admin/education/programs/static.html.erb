@@ -92,9 +92,8 @@ information:
 <%= osuny_static_html 'apprenticeship', @l10n.pricing_apprenticeship, depth: 3 %>
 diplomas:
 <% if @l10n.diploma %>
-  <% hugo = @l10n.diploma.hugo(@website) %>
-  url: "<%= hugo.permalink %>"
-  slug: "<%= hugo.slug %>"
+<% hugo = @l10n.diploma.hugo(@website) %>
+<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
 <% end %>
 <%= osuny_static_text 'duration', @l10n.duration %>
 teachers:
