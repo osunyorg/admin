@@ -30,10 +30,12 @@ export default {
     },
   },
   mounted() {
+    this.$refs.textarea.value = this.modelValue || '';
+
     const config = window.codemirrorManager.defaultConfig();
     config.mode = 'htmlmixed';
+    config.autoRefresh = true;
     this.editor = window.CodeMirror.fromTextArea(this.$refs.textarea, config);
-    this.editor.setValue(this.modelValue || '');
     this.editor.on('change', (instance) => {
       this.$emit('update:modelValue', instance.getValue());
     });
