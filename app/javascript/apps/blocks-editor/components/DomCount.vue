@@ -34,7 +34,7 @@ export default {
           <div class="col-md-8">
             <p class="vue__dom-count__title">Coquelicot</p>
             <p class="vue__dom-count__count">Environ {{ roundedCount }} éléments dans le DOM</p>
-            <p class="vue__dom-count__text">Cette page web est extrêmement légère ! C'est probablement une très bonne chose, si ça correspond bien à l'usage des internautes. Mais il faut aussi se demander si cela ne les oblige pas à charger plusieurs pages pour trouver l'information souhaitée. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.</p>
+            <p class="vue__dom-count__text">Cette page web est extrêmement simple ! C'est probablement une très bonne chose, si ça correspond bien à l'usage des internautes. Mais il faut aussi se demander si cela ne les oblige pas à charger plusieurs pages pour trouver l'information souhaitée. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.</p>
             <p class="vue__dom-count__credit">
               Illustration :<br>
               Botanique élémentaire : organographie et classification<br>
