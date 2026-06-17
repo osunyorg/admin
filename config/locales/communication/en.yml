@@ -344,6 +344,8 @@ en:
             from_day:
               events_before: must be before the first event
               time_slots_before: must be before the first time slot
+            parent_id:
+              outside_parent_dates: must happen at compatible dates
             to_day:
               events_after: must be after the last event
               time_slots_after: must be after the last time slot

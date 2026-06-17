@@ -10,6 +10,8 @@ module Communication::Website::Agenda::Event::WithKinds
 
     validate :no_child_before?, if: :kind_parent?
     validate :no_child_after?, if: :kind_parent?
+    validate :in_parent_dates?, if: :kind_child?
+
     # validate :not_too_long # Uncomment when Rennes is ready
 
     before_validation :set_to_day
@@ -17,6 +19,7 @@ module Communication::Website::Agenda::Event::WithKinds
     after_commit :touch_parent, if: :kind_child?
 
     scope :with_no_time_slots, -> { where.missing(:time_slots) }
+    scope :around, -> (date) { where('from_day <= ? AND ? <= to_day', date, date) }
     scope :who_can_have_children, -> { root.with_no_time_slots }
 
     scope :except_parent, -> { where.missing(:children) }
@@ -73,6 +76,26 @@ module Communication::Website::Agenda::Event::WithKinds
     time_slots.count > 1
   end
 
+  def can_set_parent?
+    parent.present? ||
+    (
+      # because events can become children
+      parent.nil? &&
+      # but only single day events, as program splits children by days
+      same_to_day && 
+      # and never children of children
+      !kind_parent? && 
+      # parent can be set only if there's at least a good candidate
+      possible_parents.any?
+    )
+  end
+
+  def possible_parents
+    website.events
+           .who_can_have_children
+           .around(from_day)
+  end
+
   protected
 
   def no_child_before?
@@ -84,6 +107,12 @@ module Communication::Website::Agenda::Event::WithKinds
   def no_child_after?
     if children.where('to_day > ?', self.to_day).any?
       errors.add(:to_day, :events_after)
+    end
+  end
+
+  def in_parent_dates?
+    if from_day < parent.from_day || to_day > parent.to_day
+      errors.add(:parent_id, :outside_parent_dates)
     end
   end
 
