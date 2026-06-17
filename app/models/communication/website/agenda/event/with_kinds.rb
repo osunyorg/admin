@@ -77,26 +77,35 @@ module Communication::Website::Agenda::Event::WithKinds
   end
 
   def can_set_parent?
-    parent.present? ||
+    # parent can be set only if there's at least a good candidate
+    possible_parents.any? &&
     (
-      # because events can become children
-      parent.nil? &&
-      # but only single day events, as program splits children by days
-      same_to_day && 
-      # and never children of children
-      !kind_parent? && 
-      # parent can be set only if there's at least a good candidate
-      possible_parents.any?
+      can_change_parent? || 
+      can_become_child?
     )
   end
 
   def possible_parents
-    website.events
-           .who_can_have_children
-           .around(from_day)
+    @possible_parents ||= website.events
+                                 .who_can_have_children
+                                 .around(from_day)
+                                 .where.not(id: id)
   end
 
   protected
+
+  def can_change_parent?
+    parent.present?
+  end
+
+  def can_become_child?
+    # because events can become children
+    parent.nil? &&
+    # but only single day events, as program splits children by days
+    same_to_day && 
+    # and never children of children
+    !kind_parent?
+  end
 
   def no_child_before?
     if children.where('from_day < ?', self.from_day).any?
