@@ -19,7 +19,6 @@ module Communication::Website::Agenda::Event::WithKinds
     after_commit :touch_parent, if: :kind_child?
 
     scope :with_no_time_slots, -> { where.missing(:time_slots) }
-    scope :around, -> (date) { where('from_day <= ? AND ? <= to_day', date, date) }
     scope :who_can_have_children, -> { root.with_no_time_slots }
 
     scope :except_parent, -> { where.missing(:children) }
@@ -88,7 +87,7 @@ module Communication::Website::Agenda::Event::WithKinds
   def possible_parents
     @possible_parents ||= website.events
                                  .who_can_have_children
-                                 .around(from_day)
+                                 .current_on(from_day)
                                  .where.not(id: id)
   end
 
@@ -101,8 +100,8 @@ module Communication::Website::Agenda::Event::WithKinds
   def can_become_child?
     # because events can become children
     parent.nil? &&
-    # but only single day events, as program splits children by days
-    same_to_day && 
+    # but only single day events, as multi-days events splits children by day
+    single_day? && 
     # and never children of children
     !kind_parent?
   end
@@ -166,7 +165,7 @@ module Communication::Website::Agenda::Event::WithKinds
     parent.touch
   end
 
-  def same_to_day
-    self.to_day = self.from_day
+  def single_day?
+    self.to_day == self.from_day
   end
 end
