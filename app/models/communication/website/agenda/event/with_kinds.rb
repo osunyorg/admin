@@ -100,7 +100,7 @@ module Communication::Website::Agenda::Event::WithKinds
   def can_become_child?
     # because events can become children
     parent.nil? &&
-    # but only single day events, as multi-days events splits children by day
+    # but only same day events, as multi-days events splits children by day
     single_day? && 
     # and never children of children
     !kind_parent?
@@ -143,7 +143,7 @@ module Communication::Website::Agenda::Event::WithKinds
   end
 
   def manage_time_slots
-    same_day? ? manage_time_slots_same_day : manage_time_slots_multiple_days
+    single_day? ? manage_time_slots_same_day : manage_time_slots_multiple_days
   end
 
   def manage_time_slots_same_day
@@ -163,9 +163,5 @@ module Communication::Website::Agenda::Event::WithKinds
 
   def touch_parent
     parent.touch
-  end
-
-  def single_day?
-    self.to_day == self.from_day
   end
 end
