@@ -35,4 +35,13 @@ namespace :auto do
     ActiveRecord::Base.connection.execute('REINDEX TABLE good_jobs')
     ActiveRecord::Base.connection.execute('REINDEX TABLE good_job_executions')
   end
+
+  desc 'Log pending tasks count'
+  task log_tasks_count: :environment do
+    count = GoodJob::Job.where(scheduled_at: ..Time.current)
+                        .where(finished_at: nil)
+                        .count
+    TasksCount.create!(tasks_pending: count)
+    TasksCount.where('created_at < ?', 3.months.ago).delete_all
+  end
 end
