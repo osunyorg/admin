@@ -13,31 +13,30 @@
     <%= render 'admin/application/summary/show', about: @l10n %>
     <div class="row mt-5">
       <div class="col-lg-6">
-        <%= render 'admin/application/property/text', object: @l10n, property: :presentation %>
-      </div>
-      <div class="col-lg-6">
-        <%= render 'admin/application/property/text', object: @l10n, property: :objectives %>
-      </div>
-    </div>
-    <div class="row mt-5">
-      <div class="col-lg-6">
-        <%= render 'admin/education/programs/show/published', published: @l10n.published %>
         <%= render 'admin/education/programs/show/short_name', short_name: @l10n.short_name %>
         <%= render 'admin/education/programs/show/diploma', diploma: @program.diploma %>
         <%= render 'admin/education/programs/show/parent', parent: @program.parent %>
+        <%= render 'admin/education/programs/show/children', children: @program.children %>
         <%= render 'admin/education/programs/show/schools', schools: @program.schools %>
         <%= render 'admin/education/programs/show/locations', locations: @program.locations %>
       </div>
       <div class="col-lg-6">
+        <%= render 'admin/education/programs/show/duration', duration: @l10n.duration %>
         <%= render 'admin/education/programs/show/registration_scheme', program: @program %>
         <%= render 'admin/education/programs/show/downloadable_summary', downloadable_summary: @l10n.downloadable_summary %>
-        <%= render 'admin/education/programs/show/duration', duration: @l10n.duration %>
-        <%= render 'admin/education/programs/show/children', children: @program.children %>
-        <%= render 'admin/application/meta_description/show', about: @l10n %>
+        <%= render 'admin/application/categories/widget/show', about: @program %>
       </div>
     </div>
-    <%= render 'admin/application/categories/widget/show', about: @program, columns: 2 %>
-    <%= render 'admin/application/permalinks/redirects', about: @l10n %>
+    <%= osuny_separator %>
+    <div class="row mt-5">
+      <div class="col-lg-6">
+        <%= render 'admin/application/permalinks/redirects', about: @l10n %>
+      </div>
+      <div class="col-lg-6">
+        <%= render 'admin/application/property/text', object: @l10n, property: :presentation %>
+        <%= render 'admin/application/property/text', object: @l10n, property: :objectives %>
+      </div>
+    </div>
   </div>
   <div class="col-lg-4">
     <% if @l10n.logo.attached? %>
@@ -47,6 +46,8 @@
       </div>
     <% end %>
     <%= render 'admin/application/images/featured/show', about: @l10n %>
+    <%= render 'admin/education/programs/show/published', published: @l10n.published %>
+    <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
 
