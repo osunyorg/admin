@@ -17,7 +17,7 @@
       "size": "S"
     },
     {
-      "command": "*/2 * * * * rails auto:log_tasks_count",
+      "command": "*/10 * * * * rails auto:log_tasks_count",
       "size": "S"
     }
   ]
