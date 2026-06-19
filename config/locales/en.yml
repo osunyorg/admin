@@ -519,7 +519,7 @@ en:
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to refull."
         subject: "osuny - Low SMS Credits (%{credits})"
       new_registration:
-        body_1_html: "A new user (%{username}) just registered."
+        body_1_html: "A new user (%{username}) just registered on instance %{instance}."
         body_2_html: "Click <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">here</a> to see the account."
         subject: "A new user just registered: %{mail}"
       website_invalid_access_token:
