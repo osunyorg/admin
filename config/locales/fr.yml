@@ -495,7 +495,7 @@ fr:
         body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour recharger le compte."
         subject: "osuny - Credits SMS bas (%{credits})"
       new_registration:
-        body_1_html: "Un nouvel utilisateur (%{username}) vient de s'enregistrer."
+        body_1_html: "Un nouvel utilisateur (%{username}) vient de s'enregistrer sur l'instance %{instance}."
         body_2_html: "Cliquez <a href=\"%{link}\" target=\"_blank\" style=\"color: #c72b43;\">ici</a> pour voir son compte."
         subject: "Un nouvel utilisateur vient de s'inscrire : %{mail}"
       website_invalid_access_token:
