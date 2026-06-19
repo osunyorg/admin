@@ -111,6 +111,9 @@ en:
       language:
         one: Language
         other: Languages
+      tasks_count:
+        one: Pending task
+        other: Pending tasks
       user:
         one: User
         other: Users
@@ -170,6 +173,28 @@ en:
       successfully_moved: "<i>%{model}</i> was successfully moved."
     password_hint: Leave blank if you do not wish to change the password.
     pending_tasks:
+      chart:
+        # X-axis date format patterns (date-fns tokens, formatted client-side)
+        display_formats:
+          minute: "MM/dd h:mma"
+          hour: "MM/dd ha"
+          day: MM/dd
+          week: MM/dd
+          month: MM/yyyy
+        tooltip_format: "MM/dd/yyyy h:mma"
+        xtitle: Date
+        ytitle: Pending tasks
+      empty: No history data available yet.
+      ranges:
+        label: Time range
+        '1h': 1h
+        '3h': 3h
+        '12h': 12h
+        '1d': 1d
+        '3d': 3d
+        '15d': 15d
+        '30d': 30d
+        '90d': 90d
       tasks: Background tasks pending
       text_html: "osuny guides you towards digital sufficiency.<br><br>The mutualized background execution of most tasks on the osuny platform helps reducing the carbon footprint of digital technology, by pre-computing what can be.<br><br>This can cause a delay before your changes are visible on your websites."
       what_is_it: What is it?

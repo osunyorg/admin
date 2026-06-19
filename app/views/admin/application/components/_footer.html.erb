@@ -3,7 +3,7 @@
     <div class="row my-5 pb-5">
       <div class="offset-lg-1 col-lg-5 pb-4 backgroundTasks__count">
         <p class="text-white"><%= t('admin.pending_tasks.tasks') %></p>
-        <div class="display-5 text-serif"><%= background_tasks_count %></div>
+        <div class="display-5 text-serif"><%= link_to background_tasks_count, admin_tasks_count_path %></div>
       </div>
       <div class="col-lg-5 pb-4">
         <p class="text-white-50 text-uppercase"><%= t('admin.pending_tasks.what_is_it') %></p>

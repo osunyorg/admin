@@ -111,6 +111,9 @@ fr:
       language:
         one: Langue
         other: Langues
+      tasks_count:
+        one: Tâche en cours
+        other: Tâches en cours
       user:
         one: Utilisateur·rice
         other: Utilisateur·rices
@@ -170,6 +173,28 @@ fr:
       successfully_moved: "<i>%{model}</i> a bien été déplacé(e)."
     password_hint: Laissez vide si vous ne souhaitez pas modifier le mot de passe.
     pending_tasks:
+      chart:
+        # Motifs de formatage des dates de l'axe X (tokens date-fns, formatage côté client)
+        display_formats:
+          minute: "dd/MM HH:mm"
+          hour: "dd/MM HH'h'"
+          day: dd/MM
+          week: dd/MM
+          month: MM/yyyy
+        tooltip_format: "dd/MM/yyyy à HH'h'mm"
+        xtitle: Date
+        ytitle: Tâches en attente
+      empty: Aucune donnée d'historique disponible pour le moment.
+      ranges:
+        label: Plage de temps
+        '1h': 1 h
+        '3h': 3 h
+        '12h': 12 h
+        '1d': 1 j
+        '3d': 3 j
+        '15d': 15 j
+        '30d': 30 j
+        '90d': 90 j
       tasks: Tâches en cours de traitement
       text_html: "osuny vous accompagne vers la sobriété numérique.<br><br>L'exécution mutualisée de toutes les tâches de la plateforme osuny contribue à diminuer l'empreinte carbone du numérique, en précalculant ce qui peut l'être.<br><br>Cela peut générer un délai avant que vos modifications ne soient visibles sur vos sites web."
       what_is_it: Qu'est-ce que c'est ?
