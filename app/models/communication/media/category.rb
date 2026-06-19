@@ -28,4 +28,5 @@ class Communication::Media::Category < ApplicationRecord
   include WithUniversity
 
   has_and_belongs_to_many :medias
+  alias                   :category_objects :medias
 end
