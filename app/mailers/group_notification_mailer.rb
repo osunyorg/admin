@@ -31,7 +31,13 @@ class GroupNotificationMailer < ApplicationMailer
   protected
 
   def whitelisted_mails
-    @whitelisted_mails ||= university.users_emails.select { |mail| should_send?(mail) }
+    @whitelisted_mails ||= users_emails.select { |mail| should_send?(mail) }
+  end
+
+  def users_emails
+    admin_users = @university.users.where(role: [:server_admin, :admin])
+    admin_users = admin_users.where.not(id: @user.id) if @user
+    admin_users.pluck(:email)
   end
 
 end

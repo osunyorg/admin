@@ -15,10 +15,4 @@ module University::WithUsers
       SyncServerAdminUsersJob.perform_later(source_university_id, id)
     end
   end
-
-  def users_emails
-    users.where.not(id: @user.id)
-         .where(role: [:server_admin, :admin])
-         .pluck(:email)
-  end
 end
