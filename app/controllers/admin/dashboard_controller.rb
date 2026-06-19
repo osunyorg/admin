@@ -15,4 +15,10 @@ class Admin::DashboardController < Admin::ApplicationController
     redirect_to admin_root_path(lang: current_university.default_language)
   end
 
+  def tasks_count
+    @chart = TasksCountChart.new(params[:range])
+    breadcrumb
+    add_breadcrumb TasksCount.model_name.human(count: 2)
+  end
+
 end
