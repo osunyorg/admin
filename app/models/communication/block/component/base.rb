@@ -52,7 +52,7 @@ class Communication::Block::Component::Base
   end
 
   def dom_count
-    0
+    1
   end
 
   def to_s

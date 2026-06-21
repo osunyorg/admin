@@ -62,6 +62,11 @@ class Communication::Block::Template::Person < Communication::Block::Template::B
     link_to_category
   end
 
+  def dom_count
+    5 +
+    children.length * 25
+  end
+
   protected
 
   def link_to_category
