@@ -14,6 +14,27 @@ fr:
         deletion: Est-ce que vous confirmez la suppression ?
         duplication: Est-ce que vous confirmez la duplication ?
         reset: La réinitialisation va supprimer tous les blocs dans cette langue. Est-ce que vous confirmez ?
+      dom_count:
+        count: Environ {count} éléments dans le DOM
+        credit: "Illustration tirée de l'ouvrage<br>Botanique élémentaire : organographie et classification<br>Ferdinand Faideau (1862-193.)<br>Source gallica.bnf.fr / Bibliothèque nationale de France"
+        more:
+          button: En savoir plus
+        level:
+          one:
+            title: Coquelicot
+            text: Cette page web est extrêmement simple ! C'est probablement une très bonne chose, si ça correspond bien à l'usage des internautes. Mais il faut aussi se demander si cela ne les oblige pas à charger plusieurs pages pour trouver l'information souhaitée. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
+          two:
+            title: Rose trémière
+            text: Cette page est simple, c'est bon signe ! Toutefois, il faut vérifier si elle répond bien à l'usage des internautes. Si elle est simple mais qu'elle contraint les internautes à en charger 3 autres, ce n'est probablement pas le meilleur équilibre. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
+          three:
+            title: Olivier
+            text: Cette page est de taille intermédiaire. C'est peut-être un peu gros, tout dépend de l'usage. Est-ce que tous les éléments sont utiles aux personnes utilisatrices ? S'il en manque, il faut envisager de les ajouter. Si certains sont presque toujours superflus, il vaut mieux les enlever ou les regrouper dans une page dédiée. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
+          four:
+            title: Chêne
+            text: Cette page est grande, il faut s'arrêter pour y réfléchir. Si les internautes passent plusieurs minutes à la parcourir, et que c'est vraiment pratique, c'est très bien. Mais les personnes se perdent dans la page, il serait préférable de la couper en plusieurs pages, répondant mieux à chaque usage. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
+          five:
+            title: Séquoia géant
+            text: Cette page est absolument énorme. Si vos statistiques de visite vous indiquent que le temps moyen passé sur la page est de 30 minutes, c'est très bien. Mais dans les autres cas, il faut certainement ranger et découper le contenus en morceaux plus simples, afin de bien répondre aux besoins réels des internautes. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.
       empty: Ce bloc est vide et n'apparaitra pas
       offcanvas:
         close: Fermer l'édition du bloc

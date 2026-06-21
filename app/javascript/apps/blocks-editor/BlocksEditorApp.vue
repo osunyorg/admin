@@ -166,7 +166,9 @@ export default {
             {{ i18n.blocksEditor.actions.addBlock }}</a>
         </div>
       </div>
-      <DomCount :count="data.about.dom_count" />
+      <DomCount
+        :count="data.about.dom_count"
+        :i18n="i18n" />
       <OffcanvasShell
         :open="offcanvasState !== 'closed'"
         :title="i18n.blocksEditor.offcanvas.title"

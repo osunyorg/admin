@@ -1,7 +1,10 @@
 <script>
 export default {
   name: 'DomCount',
-  props: ['count'],
+  props: [
+    'count',
+    'i18n'
+  ],
   computed: {
     level() {
       if (this.$props.count < 300) {
@@ -19,6 +22,9 @@ export default {
     roundedCount() {
       return Math.round(this.$props.count/50)*50;
     },
+    countSentence() {
+      return this.$props.i18n.blocksEditor.dom_count.count.replace('{count}', this.roundedCount);
+    }
   },
 };
 </script>
@@ -32,15 +38,16 @@ export default {
             <img class="vue__dom-count__image img-fluid" :src="`/dom_count/${level}.png`" alt="" />
           </div>
           <div class="col-md-8">
-            <p class="vue__dom-count__title">Coquelicot</p>
-            <p class="vue__dom-count__count">Environ {{ roundedCount }} éléments dans le DOM</p>
-            <p class="vue__dom-count__text">Cette page web est extrêmement simple ! C'est probablement une très bonne chose, si ça correspond bien à l'usage des internautes. Mais il faut aussi se demander si cela ne les oblige pas à charger plusieurs pages pour trouver l'information souhaitée. Une page bien écoconçue, c'est une page qui répond aux besoins des personnes, ni plus ni moins.</p>
-            <p class="vue__dom-count__credit">
-              Illustration :<br>
-              Botanique élémentaire : organographie et classification<br>
-              Ferdinand Faideau (1862-193.)<br>
-              Source gallica.bnf.fr / Bibliothèque nationale de France
+            <p class="vue__dom-count__title">
+              {{ i18n.blocksEditor.dom_count.level[level].title }}
             </p>
+            <p class="vue__dom-count__count">
+              {{ countSentence }}
+            </p>
+            <p class="vue__dom-count__text">
+              {{ i18n.blocksEditor.dom_count.level[level].text }}
+            </p>
+            <p class="vue__dom-count__credit" v-html="i18n.blocksEditor.dom_count.credit"></p>
           </div>
         </div>
       </div>
