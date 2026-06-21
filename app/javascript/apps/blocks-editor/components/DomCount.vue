@@ -1,10 +1,14 @@
 <script>
+import { CircleQuestionMark } from '@lucide/vue';
 export default {
   name: 'DomCount',
   props: [
     'count',
     'i18n'
   ],
+  components: {
+    CircleQuestionMark,
+  },
   computed: {
     level() {
       if (this.$props.count < 300) {
@@ -33,6 +37,12 @@ export default {
   <div class="row mt-5">
     <div class="offset-lg-4 col-lg-8 col-xxl-6">
       <div class="vue__dom-count">
+        <div class="vue__dom-count__information">
+          <button>
+            {{ i18n.blocksEditor.dom_count.more.button }}
+            <CircleQuestionMark />
+          </button>
+        </div>
         <div class="row">
           <div class="col-md-4">
             <img class="vue__dom-count__image img-fluid" :src="`/dom_count/${level}.png`" alt="" />

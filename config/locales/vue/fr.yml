@@ -18,7 +18,7 @@ fr:
         count: Environ {count} éléments dans le DOM
         credit: "Illustration tirée de l'ouvrage<br>Botanique élémentaire : organographie et classification<br>Ferdinand Faideau (1862-193.)<br>Source gallica.bnf.fr / Bibliothèque nationale de France"
         more:
-          button: En savoir plus
+          button: Comment ça marche ?
         level:
           one:
             title: Coquelicot

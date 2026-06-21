@@ -1,5 +1,5 @@
 <script>
-import { Upload } from 'lucide-vue-next';
+import { Upload } from '@lucide/vue';
 import CropperModal from '../../components/CropperModal.vue';
 
 export default {
