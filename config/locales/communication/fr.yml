@@ -344,6 +344,8 @@ fr:
             from_day:
               events_before: doit être avant le début du premier événement
               time_slots_before: doit être avant le premier créneau horaire
+            parent_id:
+              outside_parent_dates: doit se dérouler à des dates compatibles
             to_day:
               events_after: doit être après la fin du dernier événement
               time_slots_after: doit être après le dernier créneau horaire

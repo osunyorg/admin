@@ -1,0 +1,8 @@
+<% if children.any? %>
+  <%= osuny_label Education::Program.model_name.human(count: 2) %>
+  <ul class="list-unstyled">
+    <% children.each do |child| %>
+      <li><%= osuny_link_localized child, [:admin, child] %></li>
+    <% end %>
+  </ul>
+<% end %>

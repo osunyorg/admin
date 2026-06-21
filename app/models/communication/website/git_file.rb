@@ -3,7 +3,7 @@
 # Table name: communication_website_git_files
 #
 #  id                :uuid             not null, primary key, indexed => [website_id]
-#  about_type        :string           indexed => [about_id]
+#  about_type        :string           indexed => [about_id], uniquely indexed => [website_id, about_id]
 #  current_path      :string
 #  current_sha       :string
 #  desynchronized    :boolean          default(TRUE)
@@ -13,9 +13,9 @@
 #  previous_sha      :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  about_id          :uuid             indexed => [about_type]
+#  about_id          :uuid             indexed => [about_type], uniquely indexed => [website_id, about_type]
 #  university_id     :uuid             indexed
-#  website_id        :uuid             not null, indexed => [id]
+#  website_id        :uuid             not null, indexed => [id], uniquely indexed => [about_type, about_id]
 #
 # Indexes
 #
@@ -23,6 +23,7 @@
 #  index_communication_website_git_files_on_university_id      (university_id)
 #  index_communication_website_git_files_on_website_id_and_id  (website_id,id)
 #  index_communication_website_github_files_on_about           (about_type,about_id)
+#  index_git_files_unique_about_per_website                    (website_id,about_type,about_id) UNIQUE WHERE (about_id IS NOT NULL)
 #
 # Foreign Keys
 #
@@ -55,8 +56,12 @@ class Communication::Website::GitFile < ApplicationRecord
     # Blobs need to be completely analyzed, which is async
     analyze_if_blob about
     # The git file might exist or not
-    git_file = where(university: website.university, website: website, about: about).first_or_initialize
-    git_file.analyze!
+    scope = where(university: website.university, website: website, about: about)
+    scope.first_or_initialize.analyze!
+  rescue ActiveRecord::RecordNotUnique
+    # A concurrent job created the row between our validation and our INSERT:
+    # the unique index rejected it, so we fetch the existing one and analyze it.
+    scope.first&.analyze!
   end
 
   # 3 cases:
