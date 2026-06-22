@@ -79,6 +79,7 @@ en:
         role: Role
         roles:
           admin: Administrator
+          alumni_manager: Alumni Manager
           author: Author
           contributor: Contributor
           program_manager: Program manager

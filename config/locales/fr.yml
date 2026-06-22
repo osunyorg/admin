@@ -79,6 +79,7 @@ fr:
         role: Rôle
         roles:
           admin: Administrateur
+          alumni_manager: Responsable des alumni
           author: Auteur
           contributor: Contributeur
           program_manager: Responsable de formation
