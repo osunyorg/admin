@@ -32,6 +32,8 @@ class Ability::WebsiteManager < Ability
     can :manage, Communication::Media::Category, university_id: @user.university_id
     can :manage, Communication::Media::Collection, university_id: @user.university_id
     cannot :destroy, Communication::Website
+    can :read, Communication::Website::GitFile, university_id: @user.university_id, website_id: managed_websites_ids
+
   end
 
   protected
