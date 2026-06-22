@@ -167,7 +167,7 @@ en:
     meta_description:
       hint: Plain text without HTML, dedicated to Search Engine Optimization (SEO).
       label: Meta description
-    move: 
+    move:
       cta: Move
       description: "Move this item to another website you manage:"
       permission_denied: You cannot move this item.
@@ -423,6 +423,7 @@ en:
         finished_with_errors: Finished with errors
         pending: Pending
   export: Export (xlsx)
+  export_csv: Exporter (csv)
   false: No
   featured_image:
     alt:

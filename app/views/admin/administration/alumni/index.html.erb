@@ -12,6 +12,11 @@
 <%= paginate @alumni %>
 
 <% content_for :title_right do %>
+  <%= button_advanced do %>
+    <%= link_to t('export'),
+                request.params.merge(format: "xlsx"),
+                class: button_classes %>
+  <% end %>
   <%= link_to t('university.alumni.cohorts.import_btn'),
               new_admin_administration_alumni_cohorts_import_path,
               class: button_classes if can? :create, University::Person::Alumnus %>
