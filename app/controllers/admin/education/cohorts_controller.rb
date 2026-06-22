@@ -8,7 +8,7 @@ class Admin::Education::CohortsController < Admin::Education::ApplicationControl
   include Admin::Localizable
 
   def index
-    @filtered = @cohorts
+    @filtered = @cohorts.filter_by(params[:filters], current_language)
     @cohorts = @filtered.at_lifecycle(params[:lifecycle], current_language)
                         .ordered
                         .page(params[:page])

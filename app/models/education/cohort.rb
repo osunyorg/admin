@@ -30,6 +30,7 @@ class Education::Cohort < ApplicationRecord
   acts_as_paranoid
 
   include AsIndirectObject
+  include Filterable
   include GeneratesGitFiles
   include Lifecyclable
   include Localizable
@@ -60,6 +61,8 @@ class Education::Cohort < ApplicationRecord
 
   after_create_commit :create_localizations
 
+  scope :for_school, -> (school_id, language = nil) { where(school_id: school_id) }
+  scope :for_program, -> (program_id, language = nil) { where(program_id: program_id) }
   scope :ordered, -> (language = nil) {
     includes(:academic_year).order('education_academic_years.year DESC')
   }
