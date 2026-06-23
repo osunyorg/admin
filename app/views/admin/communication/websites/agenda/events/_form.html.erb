@@ -91,7 +91,7 @@
                             collection: osuny_collection(
                               @event.possible_parents,
                               localized: true
-                            ) if event.can_set_parent?  %>
+                            ) if event.can_set_parent? %>
           <%= f.input :bodyclass, label: t('admin.bodyclass') %>
         <% end %>
         <%= render 'admin/communication/websites/federations/form', f: f %>
