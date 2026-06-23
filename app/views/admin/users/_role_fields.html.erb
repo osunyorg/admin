@@ -1,0 +1,41 @@
+<%
+# Chaque <option> porte son type de cible via data-scope-type. C'est l'unique
+# source pour le JS : une option de rôle annonce le type qu'elle attend (rien si
+# rôle global), une option de cible annonce son type ; le JS n'affiche que les
+# cibles du même type. (Côté soumission, seul l'uuid part : le type est redéduit
+# du rôle dans User::Role.)
+role_options = safe_join(
+  (current_user.managed_roles - ['visitor']).map { |role|
+    content_tag(:option, t("activerecord.attributes.user.roles.#{role}"),
+                value: role, selected: role == f.object.role,
+                data: { 'scope-type': User::WithRoles::SCOPED_ROLES[role] })
+  }
+)
+scope_options = safe_join(
+  osuny_collection(current_university.communication_websites, localized: true).map { |label, id|
+    content_tag(:option, label, value: id, selected: id == f.object.scope_id,
+                data: { 'scope-type': 'Communication::Website' })
+  } +
+  osuny_collection_tree(current_university.education_programs.root, localized: true).map { |label, id|
+    content_tag(:option, label, value: id, selected: id == f.object.scope_id,
+                data: { 'scope-type': 'Education::Program' })
+  }
+)
+%>
+<%# .nested-fields ne doit PAS porter d-flex : cocoon le masque en display:none %>
+<%# (inline), que `.d-flex { display:flex !important }` écraserait. Le flex est %>
+<%# donc sur un wrapper interne. %>
+<div class="nested-fields user-role-fields mb-2" data-user-role>
+  <div class="row g-2 align-items-start">
+    <div class="col">
+      <%= f.select :role, role_options, {}, class: 'form-select', data: { 'user-role-role': '' } %>
+    </div>
+    <div class="col" data-user-role-scope-container>
+      <%= f.select :scope_choice, scope_options, {},
+                   class: 'form-select', data: { 'user-role-scope': '' } %>
+    </div>
+    <div class="col-auto">
+      <%= link_to_remove_association "<i class=\"#{Icon::DELETE}\"></i>".html_safe, f, class: 'btn btn-sm text-danger' %>
+    </div>
+  </div>
+</div>

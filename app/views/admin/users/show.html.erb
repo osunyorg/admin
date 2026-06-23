@@ -10,37 +10,33 @@
 <%= render 'lock' %>
 
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-3">
     <%= osuny_label User.human_attribute_name('email') %>
     <p><%= link_to @user.email, "mailto:#{@user.email}" %></p>
     <%= osuny_label User.human_attribute_name('first_name') %>
     <p><%= @user.first_name %></p>
     <%= osuny_label User.human_attribute_name('last_name') %>
     <p><%= @user.last_name %></p>
+    <%= osuny_label User.human_attribute_name('mobile_phone') %>
+    <p><%= @user.mobile_phone %></p>
     <%= osuny_label User.human_attribute_name('language') %>
     <p><%= language_name(@user.language.iso_code) %></p>
   </div>
-  <div class="col-lg-4">
-    <%= osuny_label User.human_attribute_name('mobile_phone') %>
-    <p><%= @user.mobile_phone %></p>
+  <div class="col-lg-6">
     <%= osuny_label User.human_attribute_name('role') %>
-    <p><%= t("activerecord.attributes.user.roles.#{@user.role.to_s}") %></p>
-    <% if @user.websites_to_manage.any? %>
-      <%= osuny_label User.human_attribute_name('websites_to_manage') %>
+    <% if @user.roles.any? %>
       <ul class="list-unstyled">
-        <% @user.websites_to_manage.each do |website| %>
-          <li><%= website %></li>
+        <% @user.roles.includes(:scope).each do |user_role| %>
+          <li>
+            <%= t("activerecord.attributes.user.roles.#{user_role.role}") %><%
+              if user_role.scope %> — <%= user_role.scope.try(:to_s_in, current_language) || user_role.scope %><% end %>
+          </li>
         <% end %>
       </ul>
+    <% else %>
+      <p><%= t("activerecord.attributes.user.roles.#{@user.role}") %></p>
     <% end %>
-    <% if @user.programs_to_manage.any? %>
-      <%= osuny_label User.human_attribute_name('programs_to_manage') %>
-      <ul class="list-unstyled">
-        <% @user.programs_to_manage.each do |program| %>
-          <li><%= program.to_s_in(current_language) %></li>
-        <% end %>
-      </ul>
-    <% end %>    <% if @user.person %>
+    <% if @user.person %>
       <%= osuny_label User.human_attribute_name('person') %>
       <p><%= osuny_link_localized @user.person, [:admin, @user.person] %></p>
     <% end %>
@@ -50,7 +46,7 @@
     <% end %>
   </div>
   <% if @user.picture.attached? %>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
       <%= osuny_label t('activerecord.attributes.user.picture') %>
       <%= kamifusen_tag @user.picture, class: 'img-fluid' %>
     </div>

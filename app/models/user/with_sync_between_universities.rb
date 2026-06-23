@@ -4,6 +4,9 @@ module User::WithSyncBetweenUniversities
   included do
     attr_accessor :skip_server_admin_sync
 
+    # TODO(roles-cache): server_admin? et le scope .server_admin reposent sur la
+    # colonne cache `role`. Sans cache -> has_role?('server_admin') et une
+    # jointure sur `roles`. (cf. arbitrage dans User::WithRoles)
     after_save :sync_between_universities, if: Proc.new { |user| user.server_admin? && !user.skip_server_admin_sync }
     after_destroy :remove_from_all_universities, if: Proc.new { |user| user.server_admin? && !user.skip_server_admin_sync }
 
@@ -24,13 +27,16 @@ module User::WithSyncBetweenUniversities
     unless User.where(email: email, university_id: target_university.id).any?
       duplicate_user_for_university(target_university)
     else
-      User.find_by(email: email, university_id: target_university.id)&.update_columns(
+      existing = User.find_by(email: email, university_id: target_university.id)
+      existing&.update_columns(
         encrypted_password: self.encrypted_password,
         first_name: self.first_name,
         last_name: self.last_name,
         mobile_phone: self.mobile_phone,
         role: :server_admin
       )
+      # `role` est un cache ; la source de vérité est roles.
+      existing&.grant_role!(:server_admin)
     end
   end
 
