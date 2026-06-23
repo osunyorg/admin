@@ -11,33 +11,25 @@ export default {
   },
   computed: {
     level() {
-      if (this.$props.count < this.level_one) {
-        return 'one';
-      } else if (this.$props.count < this.level_two) {
-        return 'two';
-      } else if (this.$props.count < this.level_three) {
-        return 'three';
-      } else if (this.$props.count < this.level_four) {
-        return 'four';
-      } else {
-        return 'five';
-      }
+      return this.levels.find(l => this.count < l.threshold).name;
     },
     roundedCount() {
-      return Math.round(this.$props.count / this.rounding_step) * this.rounding_step;
+      return Math.round(this.count / this.rounding_step) * this.rounding_step;
     },
     countSentence() {
-      return this.$props.i18n.blocksEditor.dom_count.count.replace('{count}', this.roundedCount);
+      return this.i18n.blocksEditor.dom_count.count.replace('{count}', this.roundedCount);
     },
   },
   data () {
     return {
       // Beware if you change levels, there are texts in the i18n files!
-      level_one: 300,
-      level_two: 600,
-      level_three: 1000,
-      level_four: 2000,
-      levels: ['one', 'two', 'three', 'four', 'five'],
+      levels: [
+        { name: 'one',   threshold: 300 },
+        { name: 'two',   threshold: 600 },
+        { name: 'three', threshold: 1000 },
+        { name: 'four',  threshold: 2000 },
+        { name: 'five',  threshold: Infinity },
+      ],
       // Affichage arrondi pour ne pas donner un faux sentiment de précision
       rounding_step: 50,
     }
@@ -60,14 +52,14 @@ export default {
             <h2>{{ i18n.blocksEditor.dom_count.more.title }}</h2>
             <div v-html="i18n.blocksEditor.dom_count.more.explanation"></div>
             <ol>
-              <li v-for="level in levels">
-                <img :src="`/dom_count/${level}.png`" class="vue__dom-count__image img-fluid" alt="" />
+              <li v-for="level in levels" :key="level.name">
+                <img :src="`/dom_count/${level.name}.png`" class="vue__dom-count__image img-fluid" alt="" />
                 <div>
                   <p class="vue__dom-count__information__content__title">
-                    {{ i18n.blocksEditor.dom_count.level[level].title }}
+                    {{ i18n.blocksEditor.dom_count.level[level.name].title }}
                   </p>
                   <p class="vue__dom-count__information__content__text">
-                    {{ i18n.blocksEditor.dom_count.level[level].dom }}
+                    {{ i18n.blocksEditor.dom_count.level[level.name].dom }}
                   </p>
                 </div>
               </li>
