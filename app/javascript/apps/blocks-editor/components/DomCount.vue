@@ -24,7 +24,7 @@ export default {
       }
     },
     roundedCount() {
-      return Math.round(this.$props.count/50)*50;
+      return Math.round(this.$props.count / this.rounding_step) * this.rounding_step;
     },
     countSentence() {
       return this.$props.i18n.blocksEditor.dom_count.count.replace('{count}', this.roundedCount);
@@ -38,6 +38,8 @@ export default {
       level_three: 1000,
       level_four: 2000,
       levels: ['one', 'two', 'three', 'four', 'five'],
+      // Affichage arrondi pour ne pas donner un faux sentiment de précision
+      rounding_step: 50,
     }
   },
 };
@@ -59,9 +61,7 @@ export default {
             <div v-html="i18n.blocksEditor.dom_count.more.explanation"></div>
             <ol>
               <li v-for="level in levels">
-                <img  :src="`/dom_count/${level}.png`"
-                      class="vue__dom-count__image img-fluid"
-                      alt="" />
+                <img :src="`/dom_count/${level}.png`" class="vue__dom-count__image img-fluid" alt="" />
                 <div>
                   <p class="vue__dom-count__information__content__title">
                     {{ i18n.blocksEditor.dom_count.level[level].title }}
@@ -77,7 +77,7 @@ export default {
         </div>
         <div class="row">
           <div class="col-md-5">
-            <img class="vue__dom-count__image img-fluid" :src="`/dom_count/${level}.png`" alt="" />
+            <img :src="`/dom_count/${level}.png`" class="vue__dom-count__image img-fluid" alt="" />
           </div>
           <div class="col-md-7">
             <p class="vue__dom-count__title">

@@ -19,11 +19,13 @@ class Communication::Block::Template::Chapter < Communication::Block::Template::
     ]
   end
 
-  # TODO count in components
   def dom_count
-    super +
+    5 +
     text_component.dom_count +
-    notes_component.dom_count
+    notes_component.dom_count +
+    image_component.dom_count +
+    alt_component.dom_count +
+    credit_component.dom_count
   end
 
   protected

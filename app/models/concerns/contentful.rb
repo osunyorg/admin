@@ -72,8 +72,7 @@ module Contentful
   end
 
   def website_dom_count
-    websites.first.present? ? websites.first.dom_count
-                            : Communication::Website::DEFAULT_DOM_COUNT
+    websites.first&.dom_count || Communication::Website::DEFAULT_DOM_COUNT
   end
 
   def generate_block(hash)
