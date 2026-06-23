@@ -79,7 +79,7 @@ module Communication::Website::Agenda::Event::WithKinds
     # parent can be set only if there's at least a good candidate
     possible_parents.any? &&
     (
-      can_change_parent? || 
+      can_change_parent? ||
       can_become_child?
     )
   end
@@ -89,6 +89,7 @@ module Communication::Website::Agenda::Event::WithKinds
                                  .who_can_have_children
                                  .current_on(from_day)
                                  .where.not(id: id)
+                                 .or(website.events.where(id: parent_id))
   end
 
   protected
@@ -101,7 +102,7 @@ module Communication::Website::Agenda::Event::WithKinds
     # because events can become children
     parent.nil? &&
     # but only same day events, as multi-days events splits children by day
-    single_day? && 
+    single_day? &&
     # and never children of children
     !kind_parent?
   end
