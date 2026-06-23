@@ -10,6 +10,7 @@ class Server::ApplicationController < ApplicationController
   end
 
   def ensure_user_if_server_admin
+    # TODO(roles-cache): prédicat sur le cache `role` -> has_role?('server_admin') si cache supprimé.
     raise CanCan::AccessDenied unless current_user.server_admin?
   end
 

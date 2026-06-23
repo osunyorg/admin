@@ -36,6 +36,7 @@
 
 <%
 action = ''
+# TODO(roles-cache): program_manager? est un prédicat sur le cache `role` -> has_role?('program_manager') si cache supprimé.
 if !current_user.program_manager? || current_user.scopes_for('program_manager').map(&:id).include?(@program.id)
 action += link_to t('education.manage_roles'),
                   admin_education_program_roles_path(program_id: @program.id),
