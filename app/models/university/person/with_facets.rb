@@ -41,5 +41,4 @@ module University::Person::WithFacets
   def teacher_facets
     @teacher_facets ||= University::Person::Localization::Teacher.where(id: localization_ids)
   end
-
 end
