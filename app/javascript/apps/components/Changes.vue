@@ -67,13 +67,13 @@ export default {
   <div class="vue__changes" :class="{'vue__changes--changed': needsSaving}">
     <button type="button"
             class="btn btn-light vue__changes__cancel"
-            v-on:click="cancel()"
+            @click="cancel()"
             :disabled="savingInProgress">
       {{ i18n.cancel }}
     </button>
     <button type="button"
             class="btn btn-success vue__changes__save"
-            v-on:click="save()"
+            @click="save()"
             :disabled="savingInProgress">
       {{ i18n.save }}
     </button>

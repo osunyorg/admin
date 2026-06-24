@@ -29,8 +29,8 @@ class Git::Providers::Abstract
     raise NoMethodError, "You must implement the `destroy_file` method in #{self.class.name}"
   end
 
-  def update_theme
-    raise NoMethodError, "You must implement the `update_theme` method in #{self.class.name}"
+  def update_theme!
+    raise NoMethodError, "You must implement the `update_theme!` method in #{self.class.name}"
   end
 
   def push(commit_message)
@@ -57,5 +57,22 @@ class Git::Providers::Abstract
 
   def batch
     @batch ||= []
+  end
+
+  def current_theme_sha
+    @current_theme_sha ||= Osuny::ThemeInfo.get_current_sha
+  end
+
+  def previous_theme_sha
+    @previous_theme_sha ||= git_sha(ENV["GITHUB_WEBSITE_THEME_PATH"])
+  end
+
+  def should_update_theme?
+    previous_theme_sha != current_theme_sha
+  end
+
+  def theme_update_commit_message
+    theme_name = ENV["GITHUB_WEBSITE_THEME_REPOSITORY"].to_s.split("/").last
+    "Updated #{theme_name} version"
   end
 end

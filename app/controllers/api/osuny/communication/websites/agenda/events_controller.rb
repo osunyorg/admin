@@ -1,9 +1,7 @@
 class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny::Communication::Websites::ApplicationController
   include Api::Osuny::HasResource
-  include Api::Osuny::HasMigrationIdentifier
 
   def index
-    @events = paginate(website.events.includes(:localizations))
   end
 
   def show
@@ -72,12 +70,16 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
 
   protected
 
-  def integrity_checker
-    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@event, event_params, website.events.with_deleted)
+  def resources_name
+    :events
   end
 
-  def load_resource
-    @event = website.events.find(params[:id])
+  def resource_name
+    :event
+  end
+
+  def resource_list
+    website.events
   end
 
   def l10n_permitted_keys
@@ -85,6 +87,7 @@ class Api::Osuny::Communication::Websites::Agenda::EventsController < Api::Osuny
       :migration_identifier, :language, :title, :meta_description,
       :published, :published_at, :slug, :subtitle, :summary, :text, :_destroy,
       featured_image: [:blob_id, :url, :alt, :credit, :_destroy],
+      **nested_aliases_params,
       **nested_blocks_params
     ]
   end

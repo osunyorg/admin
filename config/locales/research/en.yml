@@ -11,7 +11,7 @@ en:
         full_name: Full name
         last_name: Last name
         publications: Publications imported from HAL
-        researcher: Researchers in Osuny
+        researcher: Researchers in osuny
       research/journal/localization:
         issn: ISSN
         language: Language
@@ -62,6 +62,7 @@ en:
         authors_list: Authors list
         anr_project_references: ANR project(s)
         docid: Identifier
+        doctype: Type
         doi: DOI
         doi_url: URL DOI
         hal_url: URL HAL
@@ -122,7 +123,7 @@ en:
       publication:
         source:
           hal: HAL
-          osuny: Osuny
+          osuny: osuny
   research:
     citations:
       apa:
@@ -153,7 +154,7 @@ en:
           description: Scientific production leading to the title of Doctor
           title: Theses
       source: Serge Haroche, Prix Nobel de physique 2012
-      text: Scientific research is both an approach that creates knowledge motivated by pure curiosity and an activity that generates innovations that increase the means of action and diagnosis on nature, man and society. These two aspects of research, fundamental and applied, far from opposing each other, complement each other. Fundamental research creates the knowledge base from which applications are born and, conversely, technological advances provide the increasingly sophisticated investigative tools that lead to a deepening of our fundamental knowledge.
+      text: Scientific research is both an approach that creates knowledge motivated by pure curiosity and an activity that generates innovations that increase the means of action and diagnosis on nature, man and society. These two aspects of research, fundamental and applied, far from opposing each other, complement each other. 
       title: Research
     hal:
       description:
@@ -166,7 +167,7 @@ en:
             title: Publications
       select_identifier_html: Select all the HAL authors that correspond to this researcher. <br>Use the publications to be sure it's the same person.
       sync: Synchronize HAL publications
-      synchronization_done: Synchronization done
+      synchronization_done: Synchronization running
       title: HAL
   research/hal:
     description:

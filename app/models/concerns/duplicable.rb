@@ -2,16 +2,28 @@ module Duplicable
   extend ActiveSupport::Concern
 
   def duplicate
-    instance = duplicate_instance
-    duplicate_categories_for(instance)
-    duplicate_localizations_for(instance)
+    instance = nil
+    Osuny::BulkOperation.silently do
+      instance = duplicate_instance
+      duplicate_categories_for(instance)
+      duplicate_localizations_for(instance)
+    end
+    instance.touch
     instance
+  end
+
+  def duplicate_blocks(from, to)
+    return unless from.respond_to?(:blocks)
+    from.blocks.ordered.each do |block|
+      duplicate_block(to, block)
+    end
   end
 
   protected
 
   def duplicate_instance
     instance = self.dup
+    instance.position = nil if instance.respond_to?(:position)
     instance.save
     instance
   end
@@ -40,15 +52,8 @@ module Duplicable
     ActiveStorage::Utils.duplicate(from.featured_image, to.featured_image)
   end
 
-  def duplicate_blocks(from, to)
-    return unless from.respond_to?(:contents)
-    from.blocks.ordered.each do |block|
-      duplicate_block(to, block)
-    end
-  end
-
   def duplicate_block(instance, block)
-    duplicated_block = block.duplicate
+    duplicated_block = block.dup
     duplicated_block.about = instance
     duplicated_block.position = block.position
     duplicated_block.save

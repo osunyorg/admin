@@ -5,8 +5,7 @@ if category_l10n.present?
   if hugo.file.present?
 %>
 <%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 3 %>
-        name: >-
-          <%= prepare_text_for_static category_l10n.to_s %>
+<%= osuny_static_text 'name', category_l10n.to_s, depth: 5 %>
 <%
   end
 end

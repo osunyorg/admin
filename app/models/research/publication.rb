@@ -9,6 +9,8 @@
 #  authors_list           :text
 #  citation_full          :text
 #  data                   :jsonb
+#  docsubtype             :string
+#  doctype                :string
 #  doi                    :string
 #  file                   :text
 #  hal_docid              :string           indexed

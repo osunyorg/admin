@@ -53,7 +53,7 @@ class Communication::Block::Template::Video < Communication::Block::Template::Ba
   protected
 
   def video_provider
-    @video_provider ||= Video::Provider.find(url.to_s.strip)
+    @video_provider ||= Video::Provider.find(url.to_s.strip, block)
   end
 
   def check_accessibility

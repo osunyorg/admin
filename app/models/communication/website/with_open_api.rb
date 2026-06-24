@@ -8,6 +8,7 @@ module Communication::Website::WithOpenApi
       properties: {
         id: { type: :string, format: :uuid },
         url: { type: :string, nullable: true },
+        hosting: { type: :string, nullable: true, enum: self.hostings.keys },
         deuxfleurs: {
           type: :object,
           properties: {

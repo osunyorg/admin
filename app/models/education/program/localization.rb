@@ -119,13 +119,6 @@ class Education::Program::Localization < ApplicationRecord
     [diploma]
   end
 
-  def references
-    schools +
-    siblings +
-    descendants +
-    [parent]
-  end
-
   def blocks_heading_rank_base
     3
   end

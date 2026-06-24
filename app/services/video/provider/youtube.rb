@@ -53,8 +53,9 @@ class Video::Provider::Youtube < Video::Provider::Default
 
   protected
 
+  # We need to be careful not to match some YouTube URLs like "https://www.youtube.com/?watch=abc&feature=youtu.be"
   def share_url?
-    video_url.include?('youtu.be')
+    video_url.include?('//youtu.be')
   end
 
   def live_url?
@@ -110,5 +111,7 @@ class Video::Provider::Youtube < Video::Provider::Default
     uri = URI(video_url)
     params = CGI::parse(uri.query)
     params['v'].first
+  rescue
+    nil
   end
 end

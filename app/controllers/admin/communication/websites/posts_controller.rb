@@ -4,6 +4,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
                               except: :restore
 
   include Admin::HasPreview
+  include Admin::HasMoveAction
   include Admin::HasStaticAction
   include Admin::Localizable
 
@@ -115,7 +116,7 @@ class Admin::Communication::Websites::PostsController < Admin::Communication::We
       localizations_attributes: [
         :id, :title, :subtitle, :meta_description, :summary,
         :header_cta, :header_cta_label, :header_cta_url,
-        :published, :published_at, :slug, :pinned,
+        :published, :published_at, :unpublished_at, :slug, :pinned,
         :featured_image, :featured_image_delete, :featured_image_infos, :featured_image_alt, :featured_image_credit,
         :shared_image, :shared_image_delete, :shared_image_infos,
         :language_id

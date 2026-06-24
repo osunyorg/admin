@@ -7,6 +7,11 @@ module Communication::Website::WithMenus
                 foreign_key: :communication_website_id,
                 dependent: :destroy
 
+    has_many    :menu_items,
+                class_name: 'Communication::Website::Menu::Item',
+                foreign_key: :website_id,
+                dependent: :destroy
+
     after_save :initialize_menus
   end
 
@@ -54,9 +59,11 @@ module Communication::Website::WithMenus
   end
 
   def initialize_menus
-    languages.each do |language|
-      create_default_menus(language)
-      generate_automatic_menus_for_language(language)
+    Osuny::BulkOperation.silently do
+      languages.each do |language|
+        create_default_menus(language)
+        generate_automatic_menus_for_language(language)
+      end
     end
   end
 

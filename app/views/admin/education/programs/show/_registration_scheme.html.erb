@@ -1,0 +1,21 @@
+<%= osuny_label t('education.program.registration_scheme') %>
+<table class="table">
+  <tbody>
+    <tr>
+      <th><%= Education::Program.human_attribute_name('initial') %></th>
+      <td class="text-end"><%= t program.initial %></td>
+    </tr>
+    <tr>
+      <th><%= Education::Program.human_attribute_name('continuing') %></th>
+      <td class="text-end"><%= t program.continuing %></td>
+    </tr>
+    <tr>
+      <th><%= Education::Program.human_attribute_name('apprenticeship') %></th>
+      <td class="text-end"><%= t program.apprenticeship %></td>
+    </tr>
+    <tr>
+      <th><%= Education::Program.human_attribute_name('capacity') %></th>
+      <td class="text-end"><%= program.capacity %></td>
+    </tr>
+  </tbody>
+</table>

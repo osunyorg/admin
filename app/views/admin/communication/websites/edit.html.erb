@@ -15,6 +15,7 @@
       <div class="row">
         <div class="col-lg-4 mb-4">
           <%= f.input :feature_hourly_publication %>
+          <%= f.input :feature_unpublication_date %>
         </div>
         <div class="col-lg-4 mb-4">
           <%= f.input :archive_content, input_html: { data: { conditional: true } } %>
@@ -60,9 +61,7 @@
                       preview: 300 %>
       </div>
     </div>
-    <% content_for :action_bar_right do %>
-      <%= cancel [:admin, @website] %>
-      <%= submit f %>
-    <% end %>
+    <%= osuny_separator %>
+    <%= submit f %>
   <% end %>
 <% end %>

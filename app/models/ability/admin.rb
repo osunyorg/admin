@@ -71,6 +71,7 @@ class Ability::Admin < Ability
     can :manage, Communication::Website::Agenda::Exhibition, university_id: @user.university_id
     can :manage, Communication::Website::Jobboard::Job, university_id: @user.university_id
     can :manage, Communication::Website::Jobboard::Category, university_id: @user.university_id
+    can :manage, Communication::Website::Permalink, university_id: @user.university_id
     can :manage, Communication::Website::Portfolio::Category, university_id: @user.university_id
     can :manage, Communication::Website::Portfolio::Project, university_id: @user.university_id
     can :manage, Communication::Website::Post::Category, university_id: @user.university_id
@@ -82,6 +83,7 @@ class Ability::Admin < Ability
     can :manage, Communication::Media, university_id: @user.university_id
     can :manage, Communication::Media::Category, university_id: @user.university_id
     can :manage, Communication::Media::Collection, university_id: @user.university_id
+    can :read, Communication::Website::GitFile, university_id: @user.university_id
   end
 
   def admin_communication_extranet

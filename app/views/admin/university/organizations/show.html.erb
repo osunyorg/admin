@@ -15,6 +15,7 @@
       <%= render 'admin/application/publication/show', about: @l10n %>
       <%= render 'admin/application/l10n/widget', about: @organization, l10n: @l10n %>
       <%= render 'admin/application/meta_description/show', about: @l10n %>
+      <%= render 'admin/application/permalinks/redirects', about: @l10n %>
     </div>
   </div>
   <div class="col-lg-8">
@@ -41,7 +42,7 @@
 
     <%= render 'admin/application/summary/show', about: @l10n %>
 
-    <%= osuny_panel University::Organization::Localization.human_attribute_name('text') do %>
+    <%= osuny_small_panel University::Organization::Localization.human_attribute_name('text') do %>
       <%= @l10n.text.to_s.html_safe %>
     <% end if strip_tags(@l10n.text.to_s).present? %>
 
@@ -55,7 +56,7 @@
   </div>
 </div>
 
-<%= render 'admin/communication/contents/editor', about: @l10n %>
+<%= render 'admin/communication/blocks/group/editor', about: @l10n %>
 
 <div class="row">
   <div class="offset-lg-4 col-lg-8">

@@ -1,14 +1,5 @@
 Rails.application.routes.draw do
-  constraints host: ENV['OSUNY_SHOWCASE'] do
-    get ':feature' => 'showcase/websites#feature',
-                      as: :showcase_feature,
-                      constraints: {
-                        feature: /actualites|agenda|portfolio|jobboard/
-                      }
-    get ':tag' => 'showcase/websites#tag', as: :showcase_tag
-    get '/' => 'showcase/websites#index'
-    get 'websites/:id' => 'showcase/websites#show', as: :showcase_website
-  end
+  draw 'showcase'
   constraints host: ENV['OSUNY_TRANSPARENCY'] do
     get '/' => 'transparency/home#index'
   end
@@ -49,12 +40,14 @@ Rails.application.routes.draw do
         post 'resend_confirmation_email' => 'users#resend_confirmation_email', on: :member
         patch 'unlock' => 'users#unlock', on: :member
       end
+      get 'tasks_count' => 'dashboard#tasks_count', as: :tasks_count
       get 'profile' => 'profile#edit'
       patch 'profile' => 'profile#update'
       delete 'profile' => 'profile#destroy'
       post 'profile/optin_newsletter' => 'profile#optin_newsletter', as: :optin_newsletter
       # libre_translate route
-      post 'translate/:target' => 'translation#translate', as: :translate
+      post 'translate/from/:source/to/:target' => 'translation#translate', as: :translate
+      get 'vue_i18n' => 'vue_i18n#index', as: :vue_i18n, defaults: { format: :json }
       put 'favorite' => 'users#favorite', as: :favorite
       get 'search(/website/:website_id)(/extranet/:extranet_id)' => 'search#index', as: :search
       draw 'admin/administration'

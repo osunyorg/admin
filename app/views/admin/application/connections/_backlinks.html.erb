@@ -8,7 +8,7 @@ backlinks = about.backlinks_for(@website)
 %>
 backlinks:
   current_website:
-    name: "<%= @website.to_s_in(language) %>"
+<%= osuny_static_text 'name', @website.to_s_in(language), depth: 3 %>
 <%
 backlinks.each do |identifier, list|
   %>
@@ -28,9 +28,8 @@ other_websites.each do |website|
   backlinks = about.backlinks_for(website)
   next if backlinks.empty?
   %>
-    - name: >-
-        <%= prepare_text_for_static website.to_s_in(language) %>
-      identifier: "<%= website.id %>"
+    - identifier: "<%= website.id %>"
+<%= osuny_static_text 'name', website.to_s_in(language), depth: 4 %>
 <%
   backlinks.each do |identifier, list|
     %>
@@ -41,9 +40,8 @@ other_websites.each do |website|
       element = object[:element]
       url = "#{website.url}#{hugo.permalink}"
 %>
-        - name: >-
-            <%= prepare_text_for_static element.to_s %>
-          url: "<%= url %>"
+        - url: "<%= url %>"
+<%= osuny_static_text 'name', element.to_s, depth: 6 %>
 <% 
     end
   end

@@ -29,22 +29,13 @@
       </a>
     </div>
     <div class="flex-fill">
-      <div class="row mb-n3">
-        <div class="col-lg-4">
-          <%= block_component_edit block,  :title, template: @element %>
-        </div>
-        <div class="col-lg-4">
-          <%= block_component_edit block, :url, template: @element %>
-        </div>
-        <div class="col-lg-4">
-          <label class="form-label d-none d-xl-block">&nbsp;</label>
-          <%= block_component_edit block, :target_blank, template: @element %>
-        </div>
-      </div>
+      <%= block_component_edit block,  :title, template: @element %>
+      <%= block_component_edit block, :url, template: @element %>
+      <%= block_component_edit block, :target_blank, template: @element %>
     </div>
     <div class="text-end">
       <a  class="btn btn-sm text-danger"
-          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)">
+          @click="deleteElement(element)">
         <i class="<%= Icon::DELETE %>"></i>
       </a>
     </div>

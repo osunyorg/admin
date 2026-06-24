@@ -1,10 +1,13 @@
 <%= render 'admin/application/contact_details/show', about: block.template %>
-<ul class="list-unstyled">
-  <% block.template.elements.each do |element| %>
-    <li>
-      <span><%= block_component_snippet block, :title, template: element %></span>
-      <span><time datetime="<%= block_component_snippet block, :time_slot_morning, template: element %>"><%= block_component_snippet block, :time_slot_morning, template: element %></time></span>
-      <span><time datetime="<%= block_component_snippet block, :time_slot_afternoon, template: element %>"><%= block_component_snippet block, :time_slot_afternoon, template: element %></time></span>
-    </li>
-  <% end %>
-</ul>
+<% if block.template.elements.any? %>
+  <%= osuny_label t('admin.communication.blocks.templates.contact.show.slots') %>
+  <ul class="list-unstyled">
+    <% block.template.elements.each do |element| %>
+      <li class="row">
+        <span class="col-lg-4"><%= block_component_snippet block, :title, template: element %></span>
+        <span class="col-lg-4 text-end"><%= block_component_snippet block, :time_slot_morning, template: element %></span>
+        <span class="col-lg-4 text-end"><%= block_component_snippet block, :time_slot_afternoon, template: element %></span>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

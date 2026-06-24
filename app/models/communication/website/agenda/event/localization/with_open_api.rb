@@ -40,6 +40,12 @@ module Communication::Website::Agenda::Event::Localization::WithOpenApi
           },
           nullable: true
         },
+        aliases: {
+          type: :array,
+          items: {
+            "$ref": "#/components/schemas/communication_website_permalink"
+          }
+        },
         blocks: {
           type: :array,
           items: {

@@ -2,9 +2,7 @@
 
 <%= osuny_separator %>
 
-<draggable  class="row g-3 mb-3" 
-            :list="data.elements" 
-            handle=".dragHandle">
+<draggable :list="data.elements" handle=".dragHandle" class="row g-3 mb-3">
   <div v-for="(element, index) in data.elements" class=" col-6 col-md-4">
     <div class="card draggable-item dragHandle m-0">
       <div class="card-body">
@@ -25,7 +23,7 @@
   <div class="col-sm-4">
     <%= block_component_edit block, :image, template: @element %>
     <a  class="btn btn-sm text-danger"
-        v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+        @click="deleteElement(element)"
         title="<%= t '.remove_key' %>">
         <i class="<%= Icon::DELETE %>"></i>
         <%= t '.remove_key' %>

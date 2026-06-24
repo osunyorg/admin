@@ -1,0 +1,12 @@
+<%
+# Not in controller because it's loaded depending on the page type
+@schools = @website.education_schools
+                    .ordered(current_language)
+                    .page(params[:programs_page])
+%>
+<%= osuny_panel t('admin.communication.website.pages.special_page') do %>
+  <p><%= t('admin.communication.website.pages.special_pages.education_school.native', count: @schools.total_count) %></p>
+  <%= create_link Education::School %>
+  <%= render 'admin/education/schools/list', schools: @schools %>
+  <%= paginate @schools, param_name: :schools_page %>
+<% end %>

@@ -1,10 +1,10 @@
 version: 2.1
-# orbs:
-#   qlty: qltysh/qlty-orb@0.0
+orbs:
+  qlty-orb: qltysh/qlty-orb@0.1.1
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.4.7-node
+      - image: cimg/ruby:4.0.3-node
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -25,13 +25,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-      # Install binaries for Active Storage Previews
-      - run:
-          name: Install binaries for Active Storage Previews
-          command: |
-            sudo apt-get update
-            sudo apt-get install ffmpeg poppler-utils libvips-dev -y
 
       # Bundler configuration
       - run:
@@ -77,6 +70,6 @@ jobs:
           command: |
             bundle exec rake test $(circleci tests glob "test/**/*_test.rb" | circleci tests split --split-by=timings)
 
-      # # Qlty Coverage Orb
-      # - qlty/coverage_publish:
-      #     files: coverage/coverage.json
+      # Qlty Coverage Orb
+      - qlty-orb/coverage_publish:
+          files: coverage/coverage.json

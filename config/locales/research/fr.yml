@@ -11,7 +11,7 @@ fr:
         full_name: Nom complet
         last_name: Nom
         publications: Publications importées de HAL
-        researcher: Chercheur·e dans Osuny
+        researcher: Chercheur·e dans osuny
       research/journal/localization:
         issn: ISSN
         language: Langue
@@ -62,6 +62,7 @@ fr:
         authors_list: Liste des auteur·es
         anr_project_references: Projet(s) ANR
         docid: Identifiant
+        doctype: Type
         doi: DOI
         doi_url: URL DOI
         hal_url: URL HAL
@@ -122,7 +123,7 @@ fr:
       publication:
         source:
           hal: HAL
-          osuny: Osuny
+          osuny: osuny
   research:
     citations:
       apa:
@@ -153,7 +154,7 @@ fr:
           description: Production scientifique permettant d'obtenir le titre de Docteur·e
           title: Thèses
       source: Serge Haroche, Prix Nobel de physique 2012
-      text_html: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. La recherche fondamentale crée le socle de connaissances à partir duquel naissent les applications et, inversement, les avancées technologiques procurent les outils d’investigation de plus en plus perfectionnés qui conduisent à approfondir nos connaissances fondamentales.
+      text_html: La recherche scientifique est, à la fois, une démarche créatrice de connaissances motivée par la curiosité pure et une activité génératrice d’innovations qui augmentent les moyens d’action et de diagnostic sur la nature, l’homme et la société. Ces deux aspects de la recherche, le fondamental et l’appliqué, loin de s’opposer, sont complémentaires l’un de l’autre. 
       title: Recherche
     hal:
       description:
@@ -166,7 +167,7 @@ fr:
             title: Publications
       select_identifier_html: Choisissez tou·tes les auteur·es HAL correspondant à cette personne. <br>Appuyez-vous sur les publications pour vérifier qu'il s'agit de la bonne personne.
       sync: Synchroniser les publications HAL
-      synchronization_done: Synchronisation effectuée
+      synchronization_done: Synchronisation en cours
   research/hal:
     description:
       source: HAL.science

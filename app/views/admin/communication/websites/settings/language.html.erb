@@ -1,0 +1,32 @@
+<% content_for :title, current_language %>
+
+<%= simple_form_for [:admin, @website] do |f| %>
+  <%= f.simple_fields_for :localizations, @l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <%= lf.input :name %>
+        <% if @website.localizations.many? %>
+          <%= lf.input  :published,
+                        wrapper: :custom_boolean_switch,
+                        disabled: @l10n.published? && @website.active_languages.one? %>
+        <% end %>
+      </div>
+      <div class="col-lg-8">
+        <%= render 'admin/application/contact_details/edit', f: f, lf: lf, about: @website, l10n: @l10n %>
+        <%= submit f %>
+        <%= osuny_separator %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<div class="row">
+  <div class="offset-lg-4 col-lg-8 col-xxl-6">
+    <p><%= t('admin.communication.blocks.footer') %></p>
+  </div>
+</div>
+<%= render 'admin/communication/blocks/group/editor', about: @l10n %>

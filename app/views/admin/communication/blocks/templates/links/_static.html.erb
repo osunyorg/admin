@@ -2,8 +2,11 @@
       layout: <%= block.template.layout %>
 <%= block_options_static block %>
       links:
-<% block.template.elements.each do |element| %>
-<%= block_component_static block, :title, template: element, depth: 4, list: true %>
+<%
+block.template.elements.each do |element|
+  next if element.empty? %>
+        - 
+<%= block_component_static block, :title, template: element, depth: 5 %>
 <%= block_component_static block, :description, template: element, depth: 5 %>
 <%= block_component_static block, :url, template: element, depth: 5 %>
           external: <%= element.url_external?(@website) %>

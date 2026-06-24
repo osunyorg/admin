@@ -76,6 +76,9 @@ RSpec.describe 'Communication::Website::Page' do
                 header_cta: true,
                 header_cta_label: 'Découvrir',
                 header_cta_url: 'https://www.example.com',
+                aliases: [
+                  { path: '/mon-ancien-lien' }
+                ],
                 blocks: [
                   {
                     migration_identifier: 'page-from-api-1-fr-block-1',
@@ -97,7 +100,9 @@ RSpec.describe 'Communication::Website::Page' do
 
       response '201', 'Successful creation' do
         it 'creates a page and its localization', rswag: true do |example|
-          assert_difference ->{ Communication::Website::Page.count } => 1, ->{ Communication::Website::Page::Localization.count } => 1 do
+          assert_difference ->{ Communication::Website::Page.count } => 1,
+                            ->{ Communication::Website::Page::Localization.count } => 1,
+                            ->{ Communication::Website::Permalink.count } => 1 do
             assert_enqueued_jobs 1, only: Api::AttachFeaturedImageFromUrlJob do
               submit_request(example.metadata)
               assert_response_matches_metadata(example.metadata)
@@ -400,7 +405,7 @@ RSpec.describe 'Communication::Website::Page' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Page identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Page identifier or migration identifier'
       let(:id) { communication_website_pages(:test_page).id }
 
       response '200', 'Successful operation' do
@@ -430,7 +435,7 @@ RSpec.describe 'Communication::Website::Page' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Page identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Page identifier or migration identifier'
       let(:id) { communication_website_pages(:test_page).id }
 
       parameter name: :communication_website_page, in: :body, type: :object, schema: {
@@ -568,7 +573,7 @@ RSpec.describe 'Communication::Website::Page' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Page identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Page identifier or migration identifier'
       let(:id) { communication_website_pages(:test_page).id }
 
       response '204', 'Successful deletion' do

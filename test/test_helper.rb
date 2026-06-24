@@ -25,6 +25,11 @@ class ActiveSupport::TestCase
     try(:host!, default_university.host)
   end
 
+  # Temporary fix to handle `location` method used by VCR after removal from Minitest 6
+  def class_name
+    self.class.name
+  end
+
   def default_university
     @default_university ||= universities(:default_university)
   end

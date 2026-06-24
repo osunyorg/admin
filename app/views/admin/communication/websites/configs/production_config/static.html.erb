@@ -7,23 +7,13 @@ osuny:
   website:
     id: <%= @website.id %>
 
+<% if @website.has_plausible? %>
+## PARAMS
+params:
+  _merge: deep
+  plausible: "<%= @website.plausible_site_domain %>"
+<% end %>
+
 ## LANGUAGE
 defaultContentLanguage: <%= @website.default_language.iso_code %>
 defaultContentLanguageInSubdir: <%= @website.active_languages.many? %>
-
-## CACHE
-deployment:
-  matchers:
-    - pattern: "^.+\\.(woff2|woff|svg|ttf|otf|eot|js|css)$"
-      cacheControl: "max-age=31536000, no-transform, public"
-      gzip: true
-    - pattern: "^.+\\.(png|jpg|jpeg|gif|webp)$"
-      cacheControl: "max-age=31536000, no-transform, public"
-      gzip: false
-<% if @website.deuxfleurs_hosting %>
-  ## DEUXFLEURS
-  workers: 4
-  targets:
-    - name: "production"
-      URL: "s3://<%= @website.deuxfleurs_identifier %>?endpoint=garage.deuxfleurs.fr&s3ForcePathStyle=true&region=garage&awssdk=v1"
-<% end %>

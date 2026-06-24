@@ -7,9 +7,14 @@ class Static
     "\u0090", # https://github.com/osunyorg/marionrebier-beelearning/actions/runs/11340775264
     "\u0093", # https://github.com/osunyorg/jjbirge-jean-jacques-birge-le-blog/actions/runs/16069805347
   ]
+
   def self.clean_path(path)
-    path += '/' unless path.end_with? '/'
-    path.gsub("//", '/')
+    clean_path = path.dup
+    # Leading slash for absolute path
+    clean_path = "/#{clean_path}" unless clean_path.start_with?('/')
+    # Trailing slash for consistency
+    clean_path += '/' unless clean_path.end_with?('/')
+    clean_path.gsub('//', '/')
   end
 
   def self.remove_trailing_slash(string)

@@ -4,10 +4,8 @@ should_render_data = block.data && block.data.present?
 %>
   - kind: block
     template: <%= block.template_kind %>
-    title: >-
-      <%= prepare_text_for_static block.title %>
-    slug: >-
-      <%= block.slug %>
+<%= osuny_static_text 'title', block.title, depth: 3 %>
+<%= osuny_static_text 'slug', block.slug, depth: 3 %>
     ranks:
       base: <%= block.heading_rank_base %>
 <% if block.heading_self? %>
@@ -23,8 +21,7 @@ should_render_data = block.data && block.data.present?
       active: <%= block.template.top_active %>
 <% if block.template.top_title.present? %>
       title: 
-        value: >-
-          <%= prepare_text_for_static block.template.top_title %>
+<%= osuny_static_text 'value', block.template.top_title, depth: 5 %>
         heading: <%= block.template.top_heading %>
 <% if block.template.top_link.present? %>
         link: "<%= block.template.top_link %>"
@@ -33,10 +30,7 @@ should_render_data = block.data && block.data.present?
         screen_reader_only: <%= block.template.top_screen_reader_only %>
 <% end %>
 <% end %>
-<% if block.template.top_description.present? %>
-      description: >-
-        <%= prepare_html_for_static block.template.top_description %>
-<% end %>
+<%= osuny_static_html 'description', block.template.top_description, depth: 4 %>
     data:
 <%= render  template_path, 
             block: block, 

@@ -23,6 +23,10 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
     'researchers/_index.html'
   end
 
+  def default_parent
+    website.special_page(Communication::Website::Page::Person)
+  end
+  
   protected
 
   def dependencies_researchers
@@ -32,7 +36,4 @@ class Communication::Website::Page::Researcher < Communication::Website::Page
     )
   end
 
-  def default_parent
-    website.special_page(Communication::Website::Page::Person)
-  end
 end

@@ -9,6 +9,13 @@ module Permalinkable
               class_name: "Communication::Website::Permalink",
               as: :about,
               dependent: :destroy
+    has_many  :aliases,
+              -> { where(is_current: false) },
+              class_name: "Communication::Website::Permalink",
+              as: :about,
+              dependent: :destroy
+
+    accepts_nested_attributes_for :aliases
   end
 
   def previous_permalinks_in_website(website)
@@ -29,14 +36,10 @@ module Permalinkable
     )
   end
 
-  def planned_permalink_in_website(website)
-    current_permalink_in_website(website) || new_permalink_in_website(website)
-  end
-
   def planned_permalink_url_in_website(website)
     build_url(
       website,
-      planned_permalink_in_website(website)&.computed_path
+      new_permalink_in_website(website)&.computed_path
     )
   end
 
@@ -45,27 +48,18 @@ module Permalinkable
     Communication::Website::Permalink.for_object(self, website)
   end
 
-  # Called from git_file.sync
+  # Called from git_file.sync & AddableToCalendar#set_add_to_calendar_urls
   def manage_permalink_in_website(website)
     new_permalink_in_website(website).save_if_needed
   end
 
-  def add_redirection(path)
-    clean_path = Communication::Website::Permalink.clean_path(path)
-    Communication::Website::Permalink.create(
-      website: website,
-      about: self,
-      is_current: false,
-      path: clean_path
-    )
-  end
-
-  def remove_redirection(permalink)
-    permalink.destroy
+  def add_redirection(path, website)
+    clean_path = Static.clean_path(path)
+    aliases.create(website: website, path: clean_path)
   end
 
   protected
-  
+
   def build_url(website, path)
     return if website.url.blank? || path.blank?
     "#{Static.remove_trailing_slash(website.url)}#{Static.clean_path(path)}"

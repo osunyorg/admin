@@ -1,8 +1,4 @@
-<div class="row">
-  <div class="col-xl-6">
-    <%= block_component_edit block, :description, summernote_config: 'mini-list' %>
-  </div>
-</div>
+<%= block_component_edit block, :description, summernote_config: 'mini-list' %>
 
 <draggable :list="data.elements" handle=".dragHandle" class="mb-3">
   <div v-for="(element, index) in data.elements" class="d-flex draggable-item">
@@ -12,18 +8,12 @@
       </a>
     </div>
     <div class="flex-fill">
-      <div class="row mb-n3">
-        <div class="col-lg-5">
-          <%= block_component_edit block, :title, template: @element %>
-        </div>
-        <div class="col-lg-7">
-          <%= block_component_edit block, :description, template: @element, summernote_config: 'mini-list' %>
-        </div>
-      </div>
+      <%= block_component_edit block, :title, template: @element %>
+      <%= block_component_edit block, :description, template: @element, summernote_config: 'mini-list' %>
     </div>
     <div>
       <a  class="btn btn-sm text-danger ms-3"
-          v-on:click="data.elements.splice(data.elements.indexOf(element), 1)"
+          @click="deleteElement(element)"
           title="<%= t '.remove_definition' %>">
           <i class="<%= Icon::DELETE %>"></i>
       </a>

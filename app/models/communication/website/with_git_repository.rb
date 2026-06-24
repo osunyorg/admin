@@ -50,7 +50,8 @@ module Communication::Website::WithGitRepository
 
   def sync_with_git_safely
     return unless git_repository.valid?
-    git_repository.git_files = git_files.desynchronized_until(last_sync_at)
+    git_repository.git_files = git_files.generated
+                                        .desynchronized_until(last_sync_at)
                                         .order(:desynchronized_at)
                                         .limit(git_repository.batch_size)
     git_repository.sync!
@@ -74,7 +75,11 @@ module Communication::Website::WithGitRepository
   def mark_obsolete_git_files
     return unless git_repository.valid?
     git_files.find_each do |git_file|
-      dependency = git_file.about
+      begin
+        dependency = git_file.about
+      rescue NameError
+        depdendency = nil
+      end
       # Here, dependency can be nil (object was previously destroyed)
       is_obsolete = dependency.nil? || !dependency.in?(recursive_dependencies_following_direct)
       git_file.mark_for_destruction! if is_obsolete
@@ -105,12 +110,19 @@ module Communication::Website::WithGitRepository
     git_repository.update_theme_version!
   end
 
-  def analyse_repository!
+  def analyse_repository_safely
     return unless git_repository.valid?
     Git::OrphanAndLayoutAnalyzer.new(self).launch
   end
 
-  def git_files_desynchronized
-    last_sync_at.nil? ? git_files.desynchronized : git_files.desynchronized_since(last_sync_at)
+  def analyse_repository
+    return unless git_repository.valid?
+    Communication::Website::AnalyseJob.perform_later(id)
+  end
+
+  def desynchronized_generated_git_files
+    git_files_list = git_files.generated
+    last_sync_at.nil? ? git_files_list.desynchronized
+                      : git_files_list.desynchronized_since(last_sync_at)
   end
 end

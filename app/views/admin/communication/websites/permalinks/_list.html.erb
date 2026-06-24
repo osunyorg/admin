@@ -1,0 +1,36 @@
+<div class="row g-2 mb-3">
+  <% permalinks.each do |permalink| %>
+    <div>
+      <div class="<%= osuny_card_classes(horizontal: true) %> align-items-end">
+        <div class="card-body">
+          <pre><%= permalink.path %></pre>
+          <div class="row">
+            <div class="col-lg-3">
+              <%= osuny_label Communication::Website::Permalink.human_attribute_name(:type) %>
+              <p class="mb-0">
+                <% property = permalink.internal? ? :internal : :external %>
+                <%= Communication::Website::Permalink.human_attribute_name(property) %>
+              </p>
+            </div>
+            <div class="col-lg-9">
+              <%= osuny_label Communication::Website::Permalink.human_attribute_name(:about) %>
+              <p class="mb-0">
+                <% if permalink.internal? %>
+                  <%= render 'admin/communication/websites/permalinks/about', permalink: permalink %>
+                <% else %>
+                  <%= link_to permalink.target_url, permalink.target_url, target: :_blank %>
+                <% end %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="btn-group mb-n1">
+            <%= edit_link permalink %>
+            <%= destroy_link permalink %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

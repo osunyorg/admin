@@ -1,6 +1,7 @@
 namespace :app do
   desc 'Fix things'
   task fix: :environment do
+    # Nothing for now
   end
 
   namespace :search do

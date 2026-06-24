@@ -9,16 +9,11 @@
 hal:
   docid: "<%= @about.hal_docid %>"
   url: "<%= @about.hal_url %>"
-abstract: >-
-  <%= prepare_html_for_static @about.abstract %>
-journal_title: >-
-  <%= prepare_text_for_static @about.journal_title %>
-citation_full: >-
-  <%= prepare_html_for_static @about.citation_full %>
-authors_list: >-
-  <%= prepare_html_for_static @about.authors_list %>
-ref: >-
-  <%= sanitize @about.ref %>
+<%= osuny_static_html 'abstract', @about.abstract %>
+<%= osuny_static_text 'journal_title', @about.journal_title %>
+<%= osuny_static_html 'citation_full', @about.citation_full %>
+<%= osuny_static_html 'authors_list', @about.authors_list %>
+<%= osuny_static_html 'ref', sanitize(@about.ref) %>
 links:
   - label: "HAL"
     url: "<%= @about.hal_url %>"

@@ -22,13 +22,18 @@ Bundler.require(*Rails.groups)
 module Osuny
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 8.0
+    config.load_defaults 8.1
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks templates])
 
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
     config.time_zone = 'Europe/Paris'
 
     config.active_job.queue_adapter = :good_job
@@ -44,7 +49,7 @@ module Osuny
     config.i18n.enforce_available_locales = false
     config.i18n.load_path += Dir["#{Rails.root.to_s}/config/locales/**/*.yml"]
 
-    config.internal_domains = ['@noesya.coop'].freeze
+    config.internal_domains = ['@noesya.coop', '@osuny.org'].freeze
 
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
@@ -57,8 +62,6 @@ module Osuny
 
     # Need for +repage, because of https://github.com/rails/rails/commit/b2ab8dd3a4a184f3115e72b55c237c7b66405bd9
     config.active_storage.supported_image_processing_methods = ["+"]
-
-    config.allowed_special_chars = '#?!,_@$%^&*+:;£µ-'
 
     # FILES
     config.default_file_max_size = 100.megabytes

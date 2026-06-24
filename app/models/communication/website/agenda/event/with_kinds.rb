@@ -4,8 +4,14 @@ module Communication::Website::Agenda::Event::WithKinds
   included do
     MAX_DURATION = 1.year
 
+    KIND_SIMPLE = 'simple'
+    KIND_RECURRING = 'recurring'
+    KIND_PARENT = 'parent'
+
     validate :no_child_before?, if: :kind_parent?
     validate :no_child_after?, if: :kind_parent?
+    validate :in_parent_dates?, if: :kind_child?
+
     # validate :not_too_long # Uncomment when Rennes is ready
 
     before_validation :set_to_day
@@ -17,11 +23,24 @@ module Communication::Website::Agenda::Event::WithKinds
 
     scope :except_parent, -> { where.missing(:children) }
     scope :except_children, -> { where(parent_id: nil) }
-    scope :except_recurring, -> { where("(
-      SELECT COUNT(*)
-      FROM communication_website_agenda_event_time_slots
-        WHERE communication_website_agenda_event_time_slots.communication_website_agenda_event_id = communication_website_agenda_events.id
-      ) <= 1") }
+    scope :except_recurring, -> { where(
+                                    "(?) <= 1",
+                                    Communication::Website::Agenda::Event::TimeSlot
+                                      .select("COUNT(*)")
+                                      .where("communication_website_agenda_event_time_slots.communication_website_agenda_event_id = communication_website_agenda_events.id")
+                                  )
+                                }
+  end
+
+  def kind
+    # Le kind child peut être simple ou recurring, c'est une modélisation étrange
+    if kind_simple?
+      KIND_SIMPLE
+    elsif kind_recurring?
+      KIND_RECURRING
+    else
+      KIND_PARENT
+    end
   end
 
   def kind_simple?
@@ -56,7 +75,37 @@ module Communication::Website::Agenda::Event::WithKinds
     time_slots.count > 1
   end
 
+  def can_set_parent?
+    # parent can be set only if there's at least a good candidate
+    possible_parents.any? &&
+    (
+      can_change_parent? ||
+      can_become_child?
+    )
+  end
+
+  def possible_parents
+    @possible_parents ||= website.events
+                                 .who_can_have_children
+                                 .current_on(from_day)
+                                 .where.not(id: id)
+                                 .or(website.events.where(id: parent_id))
+  end
+
   protected
+
+  def can_change_parent?
+    parent.present?
+  end
+
+  def can_become_child?
+    # because events can become children
+    parent.nil? &&
+    # but only same day events, as multi-days events splits children by day
+    single_day? &&
+    # and never children of children
+    !kind_parent?
+  end
 
   def no_child_before?
     if children.where('from_day < ?', self.from_day).any?
@@ -67,6 +116,12 @@ module Communication::Website::Agenda::Event::WithKinds
   def no_child_after?
     if children.where('to_day > ?', self.to_day).any?
       errors.add(:to_day, :events_after)
+    end
+  end
+
+  def in_parent_dates?
+    if from_day < parent.from_day || to_day > parent.to_day
+      errors.add(:parent_id, :outside_parent_dates)
     end
   end
 
@@ -89,7 +144,7 @@ module Communication::Website::Agenda::Event::WithKinds
   end
 
   def manage_time_slots
-    same_day? ? manage_time_slots_same_day : manage_time_slots_multiple_days
+    single_day? ? manage_time_slots_same_day : manage_time_slots_multiple_days
   end
 
   def manage_time_slots_same_day
@@ -109,9 +164,5 @@ module Communication::Website::Agenda::Event::WithKinds
 
   def touch_parent
     parent.touch
-  end
-
-  def same_to_day
-    self.to_day = self.from_day
   end
 end

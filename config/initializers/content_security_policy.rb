@@ -16,7 +16,7 @@ Rails.application.configure do
     https://d2wy8f7a9ursnm.cloudfront.net/v7/
   )
   script_urls << "https://cdn.jsdelivr.net/npm/summernote@#{SummernoteRails::Rails::VERSION.split('.').take(3).join('.')}/dist/lang/"
-  
+
   font_urls = %w()
   media_urls = %w()
   frame_urls = %w()
@@ -35,10 +35,12 @@ Rails.application.configure do
     policy.frame_src   *defaults, *frame_urls
     policy.child_src   *defaults, *child_urls
     policy.object_src  :none
+
     # We specify :unsafe_inline for browsers which not support nonce.
     # Unsafe eval is required for Vue scripts
     policy.script_src  :self, :unsafe_eval, *script_urls
     policy.style_src   :self, :unsafe_inline, *style_urls
+
     # If you are using webpack-dev-server then specify webpack-dev-server host
     # policy.connect_src :self, :https, "http://localhost:3035", "ws://localhost:3035" if Rails.env.development?
     policy.connect_src *defaults, *connect_urls
@@ -48,10 +50,13 @@ Rails.application.configure do
     # policy.report_uri "/csp-violation-report-endpoint"
   end
 
-
   # Generate session nonces for permitted importmap, inline scripts, and inline styles.
   config.content_security_policy_nonce_generator = ->(request) { request.session.id.to_s }
   config.content_security_policy_nonce_directives = %w(script-src)
+
+  # Automatically add `nonce` to `javascript_tag`, `javascript_include_tag`, and `stylesheet_link_tag`
+  # if the corresponding directives are specified in `content_security_policy_nonce_directives`.
+  # config.content_security_policy_nonce_auto = true
 
   # Report violations without enforcing the policy.
   # config.content_security_policy_report_only = true

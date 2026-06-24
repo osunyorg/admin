@@ -19,14 +19,12 @@ class Git::Repository
     return if git_files.empty?
     puts "Start sync"
     synchronize_git_files
-    provider.push('Sync from Osuny')
+    provider.push('Sync from osuny')
     refresh_git_files
   end
 
   def update_theme_version!
-    provider.update_theme
-    theme_name = ENV["GITHUB_WEBSITE_THEME_REPOSITORY"].to_s.split("/").last
-    provider.push("Updated #{theme_name} version")
+    provider.update_theme!
   end
 
   # Based on content, with the provider's algorithm (sha1 or sha256)

@@ -40,8 +40,9 @@
                 div
                     font-size: $font-size-base
                     line-height: 180%
-                    @include media-breakpoint-up(md)
+                    @include media-breakpoint-up(xl)
                         font-size: $font-size-lg
+                        line-height: 170%
                 p
                     &:last-of-type
                         margin-bottom: 0
@@ -75,6 +76,9 @@
     b
         color: black
         font-weight: bold
+    ul,
+    ol
+        padding-left: 0
     .sn-checkbox-open-in-new-window
         label
             padding: 0

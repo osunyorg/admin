@@ -123,11 +123,12 @@ module Communication::Website::Page::WithSpecialPage
     save if l10n_created
   end
 
-  protected
-
   def default_parent
     website.special_page(Communication::Website::Page::Home)
   end
+  
+  protected
+
 
   def initialize_special_page
     # Set default attributes for special page

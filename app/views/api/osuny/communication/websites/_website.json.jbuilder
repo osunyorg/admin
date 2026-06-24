@@ -1,5 +1,6 @@
 json.id website.id
 json.url website.url
+json.hosting website.hosting
 json.deuxfleurs do
   json.hosting website.deuxfleurs_hosting
   json.identifier website.deuxfleurs_identifier

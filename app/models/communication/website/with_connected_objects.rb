@@ -21,7 +21,7 @@ module Communication::Website::WithConnectedObjects
   def clean_and_rebuild_safely
     direct_objects_association_names.each do |association_name|
       # We use find_each to avoid loading all the objects in memory
-      public_send(association_name).find_each(&:connect_dependencies)
+      public_send(association_name).find_each(&:connect_dependencies_safely)
     end
     indirect_objects_connected_to_website.each do |indirect_object|
       connect(indirect_object, self)
@@ -36,7 +36,7 @@ module Communication::Website::WithConnectedObjects
     unpublish_archivable_content
     check_period_years
     get_current_theme_version!
-    analyse_repository!
+    analyse_repository_safely
     screenshot!
   end
 
@@ -90,7 +90,7 @@ module Communication::Website::WithConnectedObjects
                       direct_source_id: direct_source.id,
                       direct_source_type: direct_source_type)
                 .delete_all
-    mark_obsolete_git_files
+    clean
   end
 
   # TODO factoriser avec les extranets

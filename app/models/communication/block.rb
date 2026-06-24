@@ -7,6 +7,7 @@
 #  data                     :jsonb
 #  deleted_at               :datetime
 #  html_class               :string
+#  metadata                 :jsonb
 #  migration_identifier     :string
 #  position                 :integer          not null
 #  published                :boolean          default(TRUE)
@@ -32,7 +33,7 @@
 class Communication::Block < ApplicationRecord
   acts_as_paranoid
 
-  BLOCK_COPY_COOKIE = 'osuny-content-editor-block-copy'
+  BLOCK_COPY_COOKIE = 'osuny-blocks-editor-copy'
   CATEGORIES = {
     basic: [:title, :chapter, :image, :video, :sound, :datatable],
     storytelling: [:key_figures, :features, :gallery, :call_to_action, :testimonials, :timeline],
@@ -105,6 +106,7 @@ class Communication::Block < ApplicationRecord
   def paste(about)
     block = self.dup
     block.about = about
+    block.position = nil # Will be computed on save
     block.save
     block
   end
@@ -117,6 +119,10 @@ class Communication::Block < ApplicationRecord
 
   def empty?
     template.empty?
+  end
+
+  def draft?
+    !published
   end
 
   def full_text
@@ -153,6 +159,7 @@ class Communication::Block < ApplicationRecord
   end
 
   def touch_about
+    return if Osuny::BulkOperation.in_progress?
     about.touch
   end
 

@@ -5,11 +5,11 @@ class Communication::Block::Template::Gallery < Communication::Block::Template::
   has_component :description, :rich_text
 
   def empty?
-    elements.none?
+    media_blobs.none?
   end
 
   def media_blobs
-    return [] if empty?
+    return [] if elements.none?
     elements.map(&:media_blob).compact
   end
 end

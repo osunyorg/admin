@@ -15,7 +15,7 @@
 //= require cocoon
 //= require autocomplete-rails
 //= require codemirror/lib/codemirror
-//= require languagetool/languagetool
+//= require languagetool
 //= require select2/dist/js/select2
 //= require_self
 //= require_tree ./admin/commons

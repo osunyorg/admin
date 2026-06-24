@@ -15,9 +15,19 @@ class MediaController < ApplicationController
   end
 
   def download
-    send_data URI.parse(@blob.url).read,
-              type: "#{@blob.content_type}",
-              disposition: "attachment; filename=#{@blob.filename.to_s}"
+    object = ActiveStorage::Blob.service.bucket.object(@blob.key)
+    content_disposition = ActionDispatch::Http::ContentDisposition.format(
+      disposition: "attachment",
+      filename: @blob.filename.sanitized
+    )
+    presigned_url = object.presigned_url(
+      :get,
+      expires_in: ActiveStorage.service_urls_expire_in.to_i,
+      response_content_disposition: content_disposition
+    )
+
+    expires_in ActiveStorage.service_urls_expire_in
+    redirect_to presigned_url, allow_other_host: true
   end
 
   def static

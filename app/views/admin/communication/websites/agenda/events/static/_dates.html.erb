@@ -3,10 +3,12 @@ day ||= nil
 time_slot ||= nil
 source = time_slot || day || event
 %>
-date: "<%= source.from_day&.iso8601 %>"
 dates:
   status: "<%= source.status %>"
   archive: <%= source.archive? %>
+  event:
+    kind: <%= event.kind %>
+    is_child: <%= event.kind_child? %>
   computed:
     short: >-
       <%= date_range_i18n(event.from_day, event.to_day, format: :short, locale: locale) %>

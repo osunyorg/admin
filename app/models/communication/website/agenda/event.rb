@@ -49,6 +49,7 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include GeneratesGitFiles
   include Lifecyclable
   include Localizable
+  include MovableToWebsite
   include Sanitizable
   include Searchable
   include Templatable
@@ -114,8 +115,11 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   scope :future, -> {
     where("communication_website_agenda_events.from_day > :today", today: Date.current)
   }
+  scope :current_on, -> (date) {
+    where("communication_website_agenda_events.from_day <= :date AND communication_website_agenda_events.to_day >= :date", date: date)
+  }
   scope :current, -> {
-    where("communication_website_agenda_events.from_day <= :today AND communication_website_agenda_events.to_day >= :today", today: Date.current)
+    current_on(Date.current)
   }
   scope :future_or_current, -> {
     future.or(current)
@@ -159,9 +163,6 @@ class Communication::Website::Agenda::Event < ApplicationRecord
     ['from_day', 'to_day']
   end
 
-  # Methods for Communication::Website::Agenda::Period::InPeriod
-
-
   protected
 
   def create_periods
@@ -179,5 +180,14 @@ class Communication::Website::Agenda::Event < ApplicationRecord
 
   def list_blocks_template_kind
     :agenda
+  end
+
+  def after_moved_to_website(source_website, target_website)
+    time_slots.each do |time_slot|
+      time_slot.move_to!(target_website)
+    end
+    children.each do |child|
+      child.move_to!(target_website)
+    end
   end
 end

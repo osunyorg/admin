@@ -26,7 +26,11 @@ module User::WithAuthentication
     before_validation :adjust_mobile_phone, :sanitize_fields
 
     def self.find_for_authentication(warden_conditions)
-      where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
+      host = warden_conditions.delete(:host)
+      user = where(email: warden_conditions[:email].downcase, university_id: warden_conditions[:university_id]).first
+      return unless user
+      user.set_registration_context_from_host(host)
+      user
     end
 
     def self.send_reset_password_instructions(attributes = {})
@@ -68,10 +72,7 @@ module User::WithAuthentication
     end
 
     def send_new_otp(request, options = {})
-      current_extranet = Communication::Extranet.with_host(request.host)
-      current_university = University.with_host(request.host)
-      current_university ||= university
-      self.registration_context = current_extranet || current_university
+      set_registration_context_from_host(request.host)
       super
     end
 
@@ -123,8 +124,20 @@ module User::WithAuthentication
     end
 
     def password_complexity
-      # Regexp extracted from https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
-      return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#{Rails.application.config.allowed_special_chars}]).{#{Devise.password_length.first},#{Devise.password_length.last}}$/
+      return if password.blank?
+
+      has_uppercase = password =~ /[A-Z]/
+      has_lowercase = password =~ /[a-z]/
+      has_number = password =~ /[0-9]/
+      has_special_char = password =~ /[^A-z0-9]/
+      is_right_length = Devise.password_length.include?(password.length)
+
+      return if has_uppercase &&
+                has_lowercase &&
+                has_number &&
+                has_special_char &&
+                is_right_length
+
       errors.add :password, :password_strength
     end
   end

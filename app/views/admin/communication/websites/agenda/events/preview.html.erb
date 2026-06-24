@@ -112,6 +112,7 @@ end
                 <nav class="toc toc-pages" id="nav-toc" aria-labelledby="toc-title">
                   <ol>
                     <% @l10n.blocks.template_title.ordered.each do |block| %>
+                      <% next if block.empty? %>
                       <li><a href="#<%= block.title.parameterize %>"><%= block.title %></a></li>
                     <% end %>
                   </ol>
@@ -137,7 +138,7 @@ end
         </div>
       <% end %>
       <div class="blocks">
-        <%= render 'admin/communication/contents/show', about: @l10n, strip_javascript: true %>
+        <%= render 'admin/communication/blocks/group/show', about: @l10n, strip_javascript: true %>
       </div>
     </div>
     <% if @event.kind_parent? %>

@@ -1,17 +1,35 @@
 <%
 small ||= false
 link_to_all ||= false
+selectable ||= false
 %>
 <% if events.none? %>
   <p><%= t('admin.communication.website.agenda.events.none') %></p>
 <% else %>
+  <% if selectable %>
+    <input type="hidden" name="ids[]" value="">
+    <%= check_box_tag nil,
+                      nil,
+                      false,
+                      class: 'form-check-input',
+                      data: { batch_selectable_role: "select-all" } %>
+  <% end %>
   <div class="row g-2 mb-3">
     <%
     events.each do |event|
       event_l10n = event.best_localization_for(current_language)
       %>
-      <div>
-        <div class="<%= osuny_card_classes(horizontal: true) %> <%= 'align-items-start' unless small %>">
+      <div class="d-flex">
+        <% if selectable %>
+          <div class="pe-2">
+            <%= check_box_tag "ids[]",
+                              event.id,
+                              false,
+                              class: 'form-check-input',
+                              data: { batch_selectable_role: "select-single" } %>
+          </div>
+        <% end %>
+        <div class="<%= osuny_card_classes(horizontal: true) %> <%= 'align-items-start' unless small %> flex-grow-1">
           <%= osuny_thumbnail_localized event, large: !small %>
           <% if event.deleted? %>
             <div class="card-body">
@@ -63,7 +81,7 @@ link_to_all ||= false
                   <div class="col-lg-4">
                     <% unless event.is_template? %>
                       <div class="row mb-2">
-                        <% if event.same_day? %>
+                        <% if event.single_day? %>
                           <div>
                             <%= osuny_label Communication::Website::Agenda::Event.human_attribute_name(:day) %>
                             <p><%= l event.from_day %></p>

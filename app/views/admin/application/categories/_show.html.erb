@@ -50,6 +50,7 @@
         <% end %>
       </ul>
     <% end %>
+    <%= render 'admin/application/permalinks/redirects', about: @l10n %>
   </div>
   <div class="col-lg-4">
     <%= render 'admin/application/l10n/widget', about: category, l10n: l10n %>
@@ -58,4 +59,4 @@
       <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
-<%= render 'admin/communication/contents/editor', about: @l10n %>
+<%= render 'admin/communication/blocks/group/editor', about: @l10n %>

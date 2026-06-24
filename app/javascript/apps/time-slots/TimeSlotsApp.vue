@@ -60,7 +60,7 @@ export default {
       <div class="col-xxl-8">
         <article v-for="slot in current.slots" class="mb-4">
           <div class="row g-2">
-            <div class="col-lg-7">
+            <div class="col-lg-5">
               <div class="input-group">
                 <input  class="form-select"
                         type="date"
@@ -73,11 +73,13 @@ export default {
                         type="time"
                         v-model="slot.time"
                         />
-                <Duration
-                        v-model="slot.duration"
-                        :i18n="i18n.timeSlots.duration"
-                        />
               </div>
+            </div>
+            <div class="col-lg-2">
+              <Duration
+                      v-model="slot.duration"
+                      :i18n="i18n.timeSlots.duration"
+                      />
             </div>
             <div class="col-lg-4">
               <input  id="place"

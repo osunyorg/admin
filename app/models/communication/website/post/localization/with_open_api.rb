@@ -25,6 +25,12 @@ module Communication::Website::Post::Localization::WithOpenApi
         slug: { type: :string },
         subtitle: { type: :string, nullable: true },
         summary: { type: :string, nullable: true },
+        aliases: {
+          type: :array,
+          items: {
+            "$ref": "#/components/schemas/communication_website_permalink"
+          }
+        },
         blocks: {
           type: :array,
           items: {

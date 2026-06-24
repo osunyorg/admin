@@ -3,6 +3,7 @@
 <% content_for :title_right do %>
   <%= button_advanced do %>
     <%= destroy_link @event %>
+    <%= move_link @event unless @event.kind_child? %>
     <%= duplicate_link @event %>
   <% end %>
   <% if @event.is_template %>
@@ -64,7 +65,7 @@
     <%= render 'admin/application/meta_description/show', about: @l10n %>
   </div>
 </div>
-<%= render 'admin/communication/contents/editor', about: @l10n %>
+<%= render 'admin/communication/blocks/group/editor', about: @l10n %>
 <% unless @event.is_template? %>
   <%= render 'admin/communication/websites/agenda/events/show/children', event: @event %>
   <%= render 'admin/communication/websites/agenda/events/show/time_slots', event: @event %>
