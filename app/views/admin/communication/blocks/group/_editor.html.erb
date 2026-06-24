@@ -1,9 +1,6 @@
 <%
-# L'url contenant les locales (TODO doit être mise en cache)
-i18n_url    = admin_vue_i18n_path(
-                website_id: nil,
-                extranet_id: nil,
-                journal_id: nil)
+# Fichier statique de traductions, généré à la compilation (cf. esbuild.config.mjs)
+i18n_url    = "/vue/#{I18n.locale}.json"
 # La liste des blocs
 data_url    = root_admin_communication_group_blocks_path(
                 about_type: about.class.polymorphic_name,

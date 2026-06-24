@@ -31,6 +31,9 @@
 /public/packs
 /public/packs-test
 
+# Vue i18n files generated at build time (cf. esbuild.config.mjs)
+/public/vue/*.json
+
 # Ignore some JS stuff
 /node_modules
 /yarn-error.log
