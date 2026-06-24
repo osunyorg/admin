@@ -372,7 +372,7 @@ RSpec.describe 'Communication::Website::Portfolio::Project' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Project identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Project identifier or migration identifier'
       let(:id) { communication_website_portfolio_projects(:test_project).id }
 
       response '200', 'Successful operation' do
@@ -402,7 +402,7 @@ RSpec.describe 'Communication::Website::Portfolio::Project' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Project identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Project identifier or migration identifier'
       let(:id) { communication_website_portfolio_projects(:test_project).id }
 
       parameter name: :communication_website_portfolio_project, in: :body, type: :object, schema: {
@@ -525,7 +525,7 @@ RSpec.describe 'Communication::Website::Portfolio::Project' do
 
       parameter name: :website_id, in: :path, type: :string, description: 'Website identifier'
       let(:website_id) { communication_websites(:website_with_github).id }
-      parameter name: :id, in: :path, type: :string, description: 'Project identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Project identifier or migration identifier'
       let(:id) { communication_website_portfolio_projects(:test_project).id }
 
       response '204', 'Successful deletion' do

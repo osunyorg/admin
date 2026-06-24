@@ -139,7 +139,6 @@ en:
         feature_portfolio: Portfolio
         feature_posts: Posts
         features: Features
-        federations: Federated content sources
         git_branch: Git branch
         git_endpoint: Git endpoint
         git_provider: Git provider
@@ -345,6 +344,8 @@ en:
             from_day:
               events_before: must be before the first event
               time_slots_before: must be before the first time slot
+            parent_id:
+              outside_parent_dates: must happen at compatible dates
             to_day:
               events_after: must be after the last event
               time_slots_after: must be after the last time slot
@@ -423,6 +424,9 @@ en:
       communication/website/agenda/period/year:
         one: Year
         other: Years
+      communication/website/alert:
+        one: Alert
+        other: Alerts
       communication/website/connection:
         one: Connection
         other: Connections
@@ -886,7 +890,7 @@ en:
         access_token_with_existing: Your Github or Gitlab confidential access token.<br>Leave the field blank if you don't want to change the token.
         access_token_without_existing: Your Github or Gitlab confidential access token. Leave it empty when creating a new website with Deuxfleurs.
         apache_config_custom_content: The redirects will be added after this content.
-        archive_content: "If you check this box, the posts, events and exhibitions will be archived after the defined time period. You can also mark a content as « lasting » to prevent it from being archived."
+        archive_content: "If you check this box, the posts, events and exhibitions will be automatically unpublished after the defined time period, and therefore removed from the site. You can also mark a content as « lasting » to prevent it from being unpublished automatically."
         deployment_status_badge: "Badge URL: <a href=\"https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/adding-a-workflow-status-badge\" target=\"_blank\">Github</a>, <a href=\"https://docs.gitlab.com/ee/user/project/badges.html\" target=\"_blank\">Gitlab</a>"
         feature_agenda: To share events
         feature_alerts: To display alert banners

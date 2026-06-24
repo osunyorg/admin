@@ -1,0 +1,6 @@
+<% if downloadable_summary.attached? %>
+  <%= osuny_label Education::Program::Localization.human_attribute_name('downloadable_summary') %>
+  <p><%= link_to "#{downloadable_summary.filename} (#{ number_to_human_size downloadable_summary.blob.byte_size })",
+                  url_for(downloadable_summary),
+                  target: :_blank %></p>
+<% end %>

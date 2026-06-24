@@ -401,7 +401,7 @@ RSpec.describe 'University::Organization' do
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
-      parameter name: :id, in: :path, type: :string, description: 'Organization identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Organization identifier or migration identifier'
       let(:id) { university_organizations(:noesya).id }
 
       response '200', 'Successful operation' do
@@ -424,7 +424,7 @@ RSpec.describe 'University::Organization' do
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
-      parameter name: :id, in: :path, type: :string, description: 'Organization identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Organization identifier or migration identifier'
       let(:id) { university_organizations(:noesya).id }
 
       parameter name: :university_organization, in: :body, type: :object, schema: {
@@ -561,7 +561,7 @@ RSpec.describe 'University::Organization' do
       security [{ api_key: [] }]
       let("X-Osuny-Token") { university_apps(:default_app).token }
 
-      parameter name: :id, in: :path, type: :string, description: 'Organization identifier'
+      parameter name: :id, in: :path, type: :string, description: 'Organization identifier or migration identifier'
       let(:id) { university_organizations(:noesya).id }
 
       response '204', 'Successful deletion' do

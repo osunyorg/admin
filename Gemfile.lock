@@ -210,6 +210,7 @@ GEM
       actionpack (>= 6.1)
       caxlsx (>= 4.0)
     cgi (0.5.1)
+    chartkick (5.2.1)
     citeproc (1.1.0)
       date
       forwardable
@@ -798,6 +799,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   caxlsx_rails (~> 0)
   cgi (~> 0.5.1)
+  chartkick (~> 5.0)
   citeproc (~> 1)
   citeproc-ruby (~> 2)
   cocoon (~> 1)

@@ -1,9 +1,7 @@
 class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationController
   include Api::Osuny::HasResource
-  include Api::Osuny::HasMigrationIdentifier
 
   def index
-    @organizations = paginate(current_university.organizations.includes(:localizations))
   end
 
   def show
@@ -72,12 +70,16 @@ class Api::Osuny::University::OrganizationsController < Api::Osuny::ApplicationC
 
   protected
 
-  def integrity_checker
-    @integrity_checker ||= Osuny::Api::MigrationIdentifierIntegrityChecker.new(@organization, organization_params, current_university.organizations)
+  def resources_name
+    :organizations
   end
 
-  def load_resource
-    @organization = current_university.organizations.find(params[:id])
+  def resource_name
+    :organization
+  end
+
+  def resource_list
+    current_university.organizations
   end
 
   def l10n_permitted_keys
