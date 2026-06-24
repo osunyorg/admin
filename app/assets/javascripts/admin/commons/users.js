@@ -6,7 +6,7 @@ $(function () {
     // Le type attendu est porté par l'option de rôle sélectionnée
     // (data-scope-type, vide = rôle global) ; chaque option de cible porte aussi
     // son type. Aucun mapping en dur : tout vient du HTML rendu.
-    function refreshRow(row) {
+    function refreshRow (row) {
         var $row = $(row),
             roleOption = $row.find('[data-user-role-role] option:selected')[0],
             type = roleOption && roleOption.getAttribute('data-scope-type'),
