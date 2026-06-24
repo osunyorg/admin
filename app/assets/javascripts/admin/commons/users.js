@@ -11,7 +11,9 @@ $(function () {
             roleOption = $row.find('[data-user-role-role] option:selected')[0],
             type = roleOption && roleOption.getAttribute('data-scope-type'),
             $container = $row.find('[data-user-role-scope-container]'),
-            $scope = $row.find('[data-user-role-scope]');
+            $scope = $row.find('[data-user-role-scope]'),
+            firstMatch = null,
+            selected;
 
         if (!type) {
             $container.hide();
@@ -19,26 +21,30 @@ $(function () {
         }
         $container.show();
 
-        var firstMatch = null;
         $scope.find('option').each(function () {
             var matches = this.getAttribute('data-scope-type') === type;
-            this.hidden = this.disabled = !matches;
+            this.hidden = !matches;
+            this.disabled = !matches;
             if (matches && firstMatch === null) {
                 firstMatch = this.value;
             }
         });
         // Si la cible courante n'est pas du bon type, prend la première valide.
-        var selected = $scope.find('option:selected')[0];
+        selected = $scope.find('option:selected')[0];
         if (!selected || selected.getAttribute('data-scope-type') !== type) {
             $scope.val(firstMatch);
         }
     }
 
     if ($('body').is('.users-edit, .users-new, .users-update, .users-create')) {
-        $('[data-user-role]').each(function () { refreshRow(this); });
+        $('[data-user-role]').each(function () {
+            refreshRow(this);
+        });
         $(document).on('change', '[data-user-role-role]', function () {
             refreshRow($(this).closest('[data-user-role]'));
         });
-        $('#user_roles').on('cocoon:after-insert', function (e, row) { refreshRow(row); });
+        $('#user_roles').on('cocoon:after-insert', function (e, row) {
+            refreshRow(row);
+        });
     }
 });
