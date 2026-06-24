@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_18_144210) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_23_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -2519,6 +2519,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_18_144210) do
     t.index ["user_id"], name: "index_user_favorites_on_user_id"
   end
 
+  create_table "user_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "role", null: false
+    t.uuid "scope_id"
+    t.string "scope_type"
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "user_id", null: false
+    t.index ["scope_type", "scope_id"], name: "index_user_roles_on_scope"
+    t.index ["university_id"], name: "index_user_roles_on_university_id"
+    t.index ["user_id", "role", "scope_type", "scope_id"], name: "index_user_roles_uniqueness", unique: true
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "public.gen_random_uuid()" }, force: :cascade do |t|
     t.integer "brevo_contact_id"
     t.datetime "confirmation_sent_at", precision: nil
@@ -2902,6 +2916,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_18_144210) do
   add_foreign_key "university_role_localizations", "university_roles", column: "about_id"
   add_foreign_key "university_roles", "universities"
   add_foreign_key "user_favorites", "users"
+  add_foreign_key "user_roles", "universities"
+  add_foreign_key "user_roles", "users"
   add_foreign_key "users", "languages"
   add_foreign_key "users", "universities"
 end

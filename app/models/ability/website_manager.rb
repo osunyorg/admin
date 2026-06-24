@@ -38,6 +38,11 @@ class Ability::WebsiteManager < Ability
 
   protected
 
+  # Sites dont l'utilisateur est responsable (rôle website_manager).
+  def managed_websites_ids
+    @managed_websites_ids ||= scoped_ids(:website_manager)
+  end
+
   def managed_agenda_category_localization_ids
     @managed_agenda_category_localization_ids ||= begin
       Communication::Website::Agenda::Category::Localization

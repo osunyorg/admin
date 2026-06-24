@@ -96,7 +96,7 @@ class Ability::ProgramManager < Ability
   end
 
   def managed_programs_ids
-    @managed_programs_ids ||= @user.programs_to_manage.pluck(:id)
+    @managed_programs_ids ||= scoped_ids(:program_manager)
   end
 
   def managed_program_localization_ids

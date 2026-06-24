@@ -28,6 +28,7 @@ class Extranet::ApplicationController < ApplicationController
   end
 
   def user_is_more_than_visitor
+    # TODO(roles-cache): visitor? = aucun rôle effectif. Sans cache -> roles.none?.
     !current_user.visitor?
   end
 
