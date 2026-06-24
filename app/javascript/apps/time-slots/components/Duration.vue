@@ -1,8 +1,7 @@
 <script>
 export default {
   props: [
-    'modelValue',
-    'i18n'
+    'modelValue'
   ],
   emits: ['update:modelValue'],
   data() {
@@ -70,11 +69,11 @@ export default {
 <template>
   <div>
     <select class="form-select" v-model="preset">
-      <option value="0">{{ i18n.label }}</option>
+      <option value="0">{{ $t('timeSlots.duration.label') }}</option>
       <option v-for="value in presetValues" :key="value[0]" :value="value[0]">
         {{ value[1] }}
       </option>
-      <option value="custom">{{ i18n.custom }}</option>
+      <option value="custom">{{ $t('timeSlots.duration.custom') }}</option>
     </select>
     <div>
       <input type="number" class="form-control" v-model.number="custom" v-if="preset === 'custom'">

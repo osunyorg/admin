@@ -13,7 +13,6 @@ export default {
     data () {
       return {
         current: {},
-        i18n: {},
       }
     },
     methods: {
@@ -40,7 +39,6 @@ export default {
     beforeMount() {
       this.dataset = document.getElementById('time-slots-app').dataset
       this.current = JSON.parse(this.dataset.current);
-      this.i18n = JSON.parse(this.dataset.i18n);
     },
 };
 </script>
@@ -54,7 +52,7 @@ export default {
           v-show="current.slots.length < 30"
           @click="addSlot()">
           <Plus width="20" stroke-width="1.5" />
-          {{ i18n.timeSlots.add }}
+          {{ $t('timeSlots.add') }}
         </button>
       </div>
       <div class="col-xxl-8">
@@ -78,7 +76,6 @@ export default {
             <div class="col-lg-2">
               <Duration
                       v-model="slot.duration"
-                      :i18n="i18n.timeSlots.duration"
                       />
             </div>
             <div class="col-lg-4">
@@ -87,7 +84,7 @@ export default {
                       data-translatable="true" 
                       v-model="slot.place"
                       type="text"
-                      :placeholder="i18n.timeSlots.place.label"
+                      :placeholder="$t('timeSlots.place.label')"
                       />
             </div>
             <div class="col-lg-1">
@@ -102,6 +99,5 @@ export default {
     </div>
   </section>
   <Changes  v-model="current"
-            :i18n="i18n.changes"
             :endpoint="dataset.changesEndpoint" />
 </template>
