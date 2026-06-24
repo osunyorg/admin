@@ -53,7 +53,7 @@ export default {
             <div v-html="i18n.blocksEditor.dom_count.more.explanation"></div>
             <ol>
               <li v-for="level in levels" :key="level.name">
-                <img :src="`/dom_count/${level.name}.png`" class="vue__dom-count__image img-fluid" alt="" />
+                <img :src="`/vue/dom_count/${level.name}.png`" class="vue__dom-count__image img-fluid" alt="" />
                 <div>
                   <p class="vue__dom-count__information__content__title">
                     {{ i18n.blocksEditor.dom_count.level[level.name].title }}
@@ -69,7 +69,7 @@ export default {
         </div>
         <div class="row">
           <div class="col-md-5">
-            <img :src="`/dom_count/${level}.png`" class="vue__dom-count__image img-fluid" alt="" />
+            <img :src="`/vue/dom_count/${level}.png`" class="vue__dom-count__image img-fluid" alt="" />
           </div>
           <div class="col-md-7">
             <p class="vue__dom-count__title">
