@@ -1,10 +1,11 @@
 # Génère les fichiers de traduction statiques des apps Vue dans
-# public/vue/<locale>.json, afin qu'ils soient chargés sans aucun traitement
-# côté serveur (cf. data-i18n-url dans l'éditeur de blocs).
+# public/vue/<locale>.json. Ils servent de messages à vue-i18n (cf.
+# app/javascript/apps/index.js) et sont chargés une seule fois, en statique
+# cacheable, plutôt que sérialisés dans chaque page.
 #
-# after_initialize garantit que tous les fichiers config/locales/**/*.yml sont
-# bien ajoutés à I18n.load_path. En dev, redémarrer le serveur régénère les
-# fichiers après modification d'une traduction.
+# after_initialize garantit que tous les config/locales/**/*.yml sont bien
+# ajoutés à I18n.load_path. En dev, redémarrer le serveur régénère les fichiers
+# après modification d'une traduction.
 Rails.application.config.after_initialize do
   output_dir = Rails.root.join('public', 'vue')
   FileUtils.mkdir_p(output_dir)

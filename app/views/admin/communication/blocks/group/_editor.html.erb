@@ -1,6 +1,4 @@
 <%
-# Fichier statique de traductions, généré à la compilation (cf. esbuild.config.mjs)
-i18n_url    = "/vue/#{I18n.locale}.json"
 # La liste des blocs
 data_url    = root_admin_communication_group_blocks_path(
                 about_type: about.class.polymorphic_name,
@@ -23,7 +21,6 @@ reorder_url = reorder_admin_communication_blocks_path(
 %>
 <div 
   id="blocks-editor-app"
-  data-i18n-url="<%= i18n_url %>"
   data-data-url="<%= data_url %>"
   data-new-url="<%= new_url %>"
   data-reorder-url="<%= reorder_url %>">
