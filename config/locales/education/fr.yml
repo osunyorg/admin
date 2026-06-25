@@ -138,6 +138,9 @@ fr:
   education:
     description:
       parts:
+        cohort: 
+          description: Présentation des promotions d'alumni
+          title: Promotions
         diploma:
           description: Présentation des diplômes et de leurs caractéristiques
           title: Diplômes

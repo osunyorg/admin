@@ -23,5 +23,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :subnav_programs,
                   t('education.description.parts.program.title'),
                   admin_education_programs_path
+    primary.item  :subnav_cohorts,
+                  t('education.description.parts.cohort.title'),
+                  admin_education_cohorts_path
   end
 end

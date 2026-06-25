@@ -138,6 +138,9 @@ en:
   education:
     description:
       parts:
+        cohort: 
+          description: Presentation of the cohorts of alumni
+          title: Cohorts
         diploma:
           description: Presentation of diplomas and their characteristics
           title: Diplomas
