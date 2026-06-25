@@ -13,15 +13,15 @@ SimpleNavigation::Configuration.run do |navigation|
                   }
     primary.item  :subnav_alumni,
                   t('administration.description.parts.alumnus.title'),
-                  admin_administration_alumni_path
+                  admin_administration_alumni_path if can?(:read, University::Person::Alumnus)
     primary.item  :subnav_locations,
                   t('administration.description.parts.location.title'),
-                  admin_administration_locations_path
+                  admin_administration_locations_path if can?(:read, Administration::Location)
     primary.item  :subnav_qualiopi,
                   t('administration.description.parts.qualiopi.title'),
                   admin_administration_qualiopi_criterions_path,
                   highlights_on: lambda { 
                     controller_name.in?(["indicators", "criterions"])
-                  }
+                  } if can?(:read, Administration::Qualiopi)
   end
 end

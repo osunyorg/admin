@@ -14,6 +14,6 @@ SimpleNavigation::Configuration.run do |navigation|
       secondary.item :directory_persons, University::Person.model_name.human(count: 2), admin_university_people_path
       secondary.item :directory_organizations, University::Organization.model_name.human(count: 2), admin_university_organizations_path
       secondary.item :directory_users, User.model_name.human(count: 2), admin_users_path
-    end if can?(:read, User)
+    end if can?(:read, University::Person) || can?(:read, University::Organization) || can?(:read, User)
   end
 end
