@@ -64,6 +64,9 @@ fr:
   administration:
     description:
       parts:
+        academic_year:
+          description: Présentation des années universitaires
+          title: Années
         alumnus:
           description: Présentation des étudiants et étudiantes ayant étudié dans les différentes formations
           title: Alumni

@@ -20,6 +20,9 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :subnav_locations,
                   t('administration.description.parts.location.title'),
                   admin_administration_locations_path if can?(:read, Administration::Location)
+    primary.item  :subnav_academic_years,
+                  t('administration.description.parts.academic_year.title'),
+                  admin_administration_academic_years_path if can?(:read, Administration::AcademicYear)
     primary.item  :subnav_qualiopi,
                   t('administration.description.parts.qualiopi.title'),
                   admin_administration_qualiopi_criterions_path,

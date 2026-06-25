@@ -64,8 +64,11 @@ en:
   administration:
     description:
       parts:
+        academic_year:
+          description: Presentation of the academic years
+          title: Years
         alumnus:
-          description: Presentation of the students who have studied in the various courses.
+          description: Presentation of the students who have studied in the various courses
           title: Alumni
         cohort:
           description: Presentation of the cohorts of alumni
