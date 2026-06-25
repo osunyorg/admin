@@ -7,7 +7,7 @@ SimpleNavigation::Configuration.run do |navigation|
     realm.parts.each do |part|
       name = part.first
       identifier = name.to_s.to_sym
-      key = "#{realm.to_s.downcase}.description.parts.#{name.to_s.demodulize.downcase}.title"
+      key = "#{realm.to_s.downcase}.description.parts.#{name.to_s.demodulize.underscore}.title"
       label = I18n.t(key)
       path = send part.last, lang: current_language.iso_code
       menu.item identifier, label, path if can?(:read, name)
