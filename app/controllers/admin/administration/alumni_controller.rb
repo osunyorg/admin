@@ -19,7 +19,6 @@ class Admin::Administration::AlumniController < Admin::Administration::Applicati
         filename = "alumni-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
         response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
       }
-      format.csv
     end
   end
 
