@@ -1,4 +1,4 @@
-class Admin::Administration::AcademicYearsController < Admin::Education::ApplicationController
+class Admin::Administration::AcademicYearsController < Admin::Administration::ApplicationController
   load_and_authorize_resource class: Administration::AcademicYear,
                               through: :current_university,
                               through_association: :academic_years
