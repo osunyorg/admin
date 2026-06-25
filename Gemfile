@@ -55,6 +55,7 @@ gem "languagetool-widget"#, path: "../../noesya/languagetool-widget"
 gem "leaflet-rails"
 gem "libretranslate"#, path: "../libretranslate"
 gem "lucide-rails"
+gem "minitest", "< 6" # TODO Seb : Upgrade en Rails 8.1.2
 gem "metainspector", git: "https://github.com/jaimeiniesta/metainspector.git"
 gem "octokit"
 gem "omniauth-saml", "~> 2"

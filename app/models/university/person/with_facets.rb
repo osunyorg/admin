@@ -15,7 +15,8 @@ module University::Person::WithFacets
     scope :teachers,          -> { where(is_teacher: true) }
     scope :researchers,       -> { where(is_researcher: true) }
     scope :alumni,            -> { where(is_alumnus: true) }
-    scope :with_habilitation, -> { where(habilitation: true) }
+
+    # Filters
     scope :for_facet, -> (facet, language = nil) { where("is_#{facet}": true) }  
   end
 

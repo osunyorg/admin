@@ -40,6 +40,7 @@ module University::Person::WithRealmResearch
                             through: :research_journal_papers,
                             source: :websites
 
+    scope :with_habilitation, -> { where(habilitation: true) }
     scope :with_hal_identifier, -> { where.not(hal_form_identifier: [nil,'']) }
   end
 
