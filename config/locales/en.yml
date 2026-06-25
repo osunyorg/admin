@@ -423,7 +423,6 @@ en:
         finished_with_errors: Finished with errors
         pending: Pending
   export: Export (xlsx)
-  export_csv: Exporter (csv)
   false: No
   featured_image:
     alt:

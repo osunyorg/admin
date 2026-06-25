@@ -424,7 +424,6 @@ fr:
         finished_with_errors: Traité avec des erreurs
         pending: En cours de traitement
   export: Exporter (xlsx)
-  export_csv: Exporter (csv)
   false: Non
   featured_image:
     alt:
