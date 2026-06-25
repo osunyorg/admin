@@ -11,8 +11,17 @@ class Admin::Education::CohortsController < Admin::Education::ApplicationControl
     @filtered = @cohorts.filter_by(params[:filters], current_language)
     @cohorts = @filtered.at_lifecycle(params[:lifecycle], current_language)
                         .ordered
-                        .page(params[:page])
-    breadcrumb
+
+    respond_to do |format|
+      format.html {
+        @cohorts = @cohorts.page(params[:page])
+        breadcrumb
+      }
+      format.xlsx {
+        filename = "cohorts-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+      }
+    end
   end
 
   def show
