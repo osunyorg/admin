@@ -21,7 +21,7 @@ SimpleNavigation::Configuration.run do |navigation|
                   t('education.program.parts.certification.label'),
                   certification_admin_education_program_path(id: @program, program_id: nil)
     primary.item  :subnav_cohorts,
-                  Education::Cohort.model_name.human(count: 2),
+                  Administration::Cohort.model_name.human(count: 2),
                   admin_education_program_cohorts_path(@program),
                   highlights_on: lambda {
                     controller_name == "cohorts" && action_name == "index"

@@ -12,14 +12,14 @@ end
 
 # Feature Alumni
 namespace :alumni do
-  get 'cohorts' => 'cohorts#index', as: :education_cohorts
-  get 'cohorts/:id' => 'cohorts#show', as: :education_cohort
+  get 'cohorts' => 'cohorts#index', as: :administration_cohorts
+  get 'cohorts/:id' => 'cohorts#show', as: :administration_cohort
   get 'organizations' => 'organizations#index', as: :university_organizations
   get 'organization/:id' => 'organizations#show', as: :university_organization
   get 'persons' => 'persons#index', as: :university_persons
   get 'persons/:id' => 'persons#show', as: :university_person
-  get 'years' => 'academic_years#index', as: :education_academic_years
-  get 'years/:id' => 'academic_years#show', as: :education_academic_year
+  get 'years' => 'academic_years#index', as: :administration_academic_years
+  get 'years/:id' => 'academic_years#show', as: :administration_academic_year
   root to: 'persons#index'
 end
 

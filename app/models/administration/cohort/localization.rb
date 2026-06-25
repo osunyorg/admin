@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: education_cohort_localizations
+# Table name: administration_cohort_localizations
 #
 #  id            :uuid             not null, primary key
 #  deleted_at    :datetime
@@ -13,18 +13,18 @@
 #
 # Indexes
 #
-#  idx_on_about_id_language_id_a0a453655b                 (about_id,language_id) UNIQUE
-#  index_education_cohort_localizations_on_about_id       (about_id)
-#  index_education_cohort_localizations_on_language_id    (language_id)
-#  index_education_cohort_localizations_on_university_id  (university_id)
+#  idx_on_about_id_language_id_ae60ea28b0                      (about_id,language_id) UNIQUE
+#  index_administration_cohort_localizations_on_about_id       (about_id)
+#  index_administration_cohort_localizations_on_language_id    (language_id)
+#  index_administration_cohort_localizations_on_university_id  (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_2e862cbf91  (university_id => universities.id)
-#  fk_rails_57e968eb32  (about_id => education_cohorts.id)
+#  fk_rails_57e968eb32  (about_id => administration_cohorts.id)
 #  fk_rails_5dc9fc7693  (language_id => languages.id)
 #
-class Education::Cohort::Localization < ApplicationRecord
+class Administration::Cohort::Localization < ApplicationRecord
   acts_as_paranoid
 
   include AsLocalization
@@ -53,7 +53,7 @@ class Education::Cohort::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/education/cohorts/static"
+    "admin/administration/cohorts/static"
   end
 
   # Example: IUT de Bordeaux > Formations > BUT > Génie biologique > Agronomie > 2024

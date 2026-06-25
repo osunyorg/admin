@@ -56,8 +56,8 @@
                               class: button_classes unless @cohorts.last_page?
       %>
 
-      <%= osuny_panel Education::Cohort.model_name.human(count: 2), action: cohort_action do %>
-        <%= render 'admin/education/cohorts/list', cohorts: @cohorts %>
+      <%= osuny_panel Administration::Cohort.model_name.human(count: 2), action: cohort_action do %>
+        <%= render 'admin/administration/cohorts/list', cohorts: @cohorts %>
         <div>
           <%= @school.alumni.count %>
           <%= University::Person::Alumnus.model_name.human(count: 2).downcase %>

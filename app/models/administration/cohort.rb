@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: education_cohorts
+# Table name: administration_cohorts
 #
 #  id               :uuid             not null, primary key
 #  deleted_at       :datetime
@@ -14,19 +14,19 @@
 #
 # Indexes
 #
-#  index_education_cohorts_on_academic_year_id  (academic_year_id)
-#  index_education_cohorts_on_program_id        (program_id)
-#  index_education_cohorts_on_school_id         (school_id)
-#  index_education_cohorts_on_university_id     (university_id)
+#  index_administration_cohorts_on_academic_year_id  (academic_year_id)
+#  index_administration_cohorts_on_program_id        (program_id)
+#  index_administration_cohorts_on_school_id         (school_id)
+#  index_administration_cohorts_on_university_id     (university_id)
 #
 # Foreign Keys
 #
 #  fk_rails_0f4a4f43d9  (university_id => universities.id)
 #  fk_rails_72528c3d76  (program_id => education_programs.id)
 #  fk_rails_8545767e2d  (school_id => education_schools.id)
-#  fk_rails_c2d725cabd  (academic_year_id => education_academic_years.id)
+#  fk_rails_c2d725cabd  (academic_year_id => administration_academic_years.id)
 #
-class Education::Cohort < ApplicationRecord
+class Administration::Cohort < ApplicationRecord
   acts_as_paranoid
 
   include AsIndirectObject
@@ -48,12 +48,12 @@ class Education::Cohort < ApplicationRecord
   alias_method :education_program, :program
 
   belongs_to  :academic_year,
-              class_name: 'Education::AcademicYear'
-  alias_method :education_academic_year, :academic_year
+              class_name: 'Administration::AcademicYear'
+  alias_method :administration_academic_year, :academic_year
 
   has_and_belongs_to_many :people,
                           class_name: 'University::Person',
-                          foreign_key: :education_cohort_id,
+                          foreign_key: :administration_cohort_id,
                           association_foreign_key: :university_person_id
 
   validates_associated :school, :academic_year, :program
@@ -64,7 +64,7 @@ class Education::Cohort < ApplicationRecord
   scope :for_school, -> (school_id, language = nil) { where(school_id: school_id) }
   scope :for_program, -> (program_id, language = nil) { where(program_id: program_id) }
   scope :ordered, -> (language = nil) {
-    includes(:academic_year).order('education_academic_years.year DESC')
+    includes(:academic_year).order('administration_academic_years.year DESC')
   }
 
   def year
@@ -72,7 +72,7 @@ class Education::Cohort < ApplicationRecord
   end
 
   def year=(value)
-    self.academic_year = Education::AcademicYear.where(university_id: university_id, year: value).first_or_create
+    self.academic_year = Administration::AcademicYear.where(university_id: university_id, year: value).first_or_create
   end
 
   def dependencies

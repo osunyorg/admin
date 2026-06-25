@@ -4,13 +4,6 @@ fr:
       education: Enseignement
   activerecord:
     attributes:
-      education/academic_year:
-        year: Année
-      education/cohort:
-        alumni: Alumni
-        program: Formation
-        school: École
-        year: Année
       education/diploma:
         certification: Contrôle par l'État
         ects: Crédits ECTS
@@ -93,12 +86,6 @@ fr:
         name: Nom
         url: Site Web
     models:
-      education/academic_year:
-        one: Année
-        other: Années
-      education/cohort:
-        one: Promotion
-        other: Promotions
       education/diploma:
         one: Diplôme
         other: Diplômes
@@ -138,9 +125,6 @@ fr:
   education:
     description:
       parts:
-        cohort: 
-          description: Présentation des promotions d'alumni
-          title: Promotions
         diploma:
           description: Présentation des diplômes et de leurs caractéristiques
           title: Diplômes

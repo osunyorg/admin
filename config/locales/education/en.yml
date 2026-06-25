@@ -4,13 +4,6 @@ en:
       education: Education
   activerecord:
     attributes:
-      education/academic_year:
-        year: Year
-      education/cohort:
-        alumni: Alumni
-        program: Program
-        school: School
-        year: Year
       education/diploma:
         certification: Certification
         ects: ECTS
@@ -93,12 +86,6 @@ en:
         name: Name
         websites: Linked websites
     models:
-      education/academic_year:
-        one: Year
-        other: Years
-      education/cohort:
-        one: Cohort
-        other: Cohorts
       education/diploma:
         one: Diploma
         other: Diplomas
@@ -138,9 +125,6 @@ en:
   education:
     description:
       parts:
-        cohort: 
-          description: Presentation of the cohorts of alumni
-          title: Cohorts
         diploma:
           description: Presentation of diplomas and their characteristics
           title: Diplomas

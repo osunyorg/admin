@@ -28,11 +28,11 @@ SimpleNavigation::Configuration.run do |navigation|
                       University::Person.model_name.human(count: 2),
                       alumni_university_persons_path
       secondary.item  :years,
-                      Education::AcademicYear.model_name.human(count: 2),
-                      alumni_education_academic_years_path if current_extranet.should_show_academic_years?
+                      Administration::AcademicYear.model_name.human(count: 2),
+                      alumni_administration_academic_years_path if current_extranet.should_show_academic_years?
       secondary.item  :cohorts,
-                      Education::Cohort.model_name.human(count: 2),
-                      alumni_education_cohorts_path
+                      Administration::Cohort.model_name.human(count: 2),
+                      alumni_administration_cohorts_path
       secondary.item  :organizations,
                       University::Organization.model_name.human(count: 2),
                       alumni_university_organizations_path

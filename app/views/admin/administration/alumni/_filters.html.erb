@@ -26,7 +26,7 @@
     <%= render_filter f,
                       :select,
                       :for_alumni_year,
-                      label: t('filters.attributes.element', element: Education::AcademicYear.model_name.human.downcase),
+                      label: t('filters.attributes.element', element: Administration::AcademicYear.model_name.human.downcase),
                       collection: current_university.academic_years.ordered(current_language),
                       multiple: true
                       %>

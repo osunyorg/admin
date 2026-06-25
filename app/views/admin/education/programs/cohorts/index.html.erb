@@ -1,4 +1,4 @@
-<% content_for :title, Education::Cohort.model_name.human(count: 2) %>
+<% content_for :title, Administration::Cohort.model_name.human(count: 2) %>
 
 <% content_for :title_right do %>
   <%= button_advanced do %>
@@ -15,4 +15,4 @@
 </div>
 <%= render 'admin/application/components/lifecycle/label' %>
 
-<%= render 'admin/education/cohorts/list', cohorts: @cohorts %>
+<%= render 'admin/administration/cohorts/list', cohorts: @cohorts %>

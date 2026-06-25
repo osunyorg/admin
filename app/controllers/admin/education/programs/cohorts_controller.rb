@@ -1,5 +1,5 @@
 class Admin::Education::Programs::CohortsController < Admin::Education::Programs::ApplicationController
-  load_and_authorize_resource class: Education::Cohort, through: :program, through_association: :education_cohorts
+  load_and_authorize_resource class: Administration::Cohort, through: :program, through_association: :administration_cohorts
 
   include Admin::Localizable
 
@@ -16,7 +16,7 @@ class Admin::Education::Programs::CohortsController < Admin::Education::Programs
       format.xlsx {
         filename = "cohorts-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
         response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
-        render "admin/education/cohorts/index"
+        render "admin/administration/cohorts/index"
       }
     end
   end
@@ -25,7 +25,7 @@ class Admin::Education::Programs::CohortsController < Admin::Education::Programs
 
   def breadcrumb
     super
-    add_breadcrumb Education::Cohort.model_name.human(count: 2)
+    add_breadcrumb Administration::Cohort.model_name.human(count: 2)
   end
 
 end

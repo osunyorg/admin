@@ -29,7 +29,7 @@ wb.add_worksheet(name: "index") do |sheet|
 
     Education::School.model_name.human,
     Education::Program.model_name.human,
-    Education::AcademicYear.model_name.human
+    Administration::AcademicYear.model_name.human
   ]
 
   types = [

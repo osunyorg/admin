@@ -1,15 +1,4 @@
 namespace :education do
-  resources :academic_years do
-    member do
-      get :static
-    end
-  end
-  resources :cohorts, only: [:index, :show, :destroy] do
-    member do
-      get :static
-      post :restore
-    end
-  end
   resources :diplomas do
     collection do
       post :reorder

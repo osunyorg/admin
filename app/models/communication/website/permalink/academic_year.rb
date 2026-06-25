@@ -39,7 +39,7 @@ class Communication::Website::Permalink::AcademicYear < Communication::Website::
   end
 
   def self.special_page_type
-    Communication::Website::Page::EducationAcademicYear
+    Communication::Website::Page::AdministrationAcademicYear
   end
 
   protected

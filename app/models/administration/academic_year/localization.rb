@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: education_academic_year_localizations
+# Table name: administration_academic_year_localizations
 #
 #  id            :uuid             not null, primary key
 #  deleted_at    :datetime
@@ -13,20 +13,20 @@
 #
 # Indexes
 #
-#  idx_on_about_id_language_id_eb13d82b8d                        (about_id,language_id) UNIQUE
-#  index_education_academic_year_localizations_on_about_id       (about_id)
-#  index_education_academic_year_localizations_on_language_id    (language_id)
-#  index_education_academic_year_localizations_on_university_id  (university_id)
+#  idx_on_about_id_language_id_7962406d05                        (about_id,language_id) UNIQUE
+#  idx_on_language_id_a52fb1a1c1                                 (language_id)
+#  idx_on_university_id_31eabbc7a7                               (university_id)
+#  index_administration_academic_year_localizations_on_about_id  (about_id)
 #
 # Foreign Keys
 #
-#  fk_rails_7f53226466  (about_id => education_academic_years.id)
+#  fk_rails_7f53226466  (about_id => administration_academic_years.id)
 #  fk_rails_8eb490c1ee  (language_id => languages.id)
 #  fk_rails_9de9d01008  (university_id => universities.id)
 #
-class Education::AcademicYear::Localization < ApplicationRecord
+class Administration::AcademicYear::Localization < ApplicationRecord
   acts_as_paranoid
-  
+
   include AsLocalization
   include HasGitFiles
   include Initials
@@ -42,7 +42,7 @@ class Education::AcademicYear::Localization < ApplicationRecord
   end
 
   def template_static
-    "admin/education/academic_years/static"
+    "admin/administration/academic_years/static"
   end
 
   def to_s
