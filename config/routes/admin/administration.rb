@@ -10,6 +10,17 @@ namespace :administration do
       patch 'cohorts' => 'alumni/cohorts#update'
     end
   end
+  resources :academic_years do
+    member do
+      get :static
+    end
+  end
+  resources :cohorts, only: [:index, :show, :destroy] do
+    member do
+      get :static
+      post :restore
+    end
+  end
   resources :locations do
     member do
       get :static

@@ -12,8 +12,8 @@ class Ability::AlumniManager < Ability
     can :manage, Education::Program, university_id: @user.university_id
     can :manage, Education::Program::Category, university_id: @user.university_id
     can :manage, Education::School, university_id: @user.university_id
-    can :manage, Education::AcademicYear, university_id: @user.university_id
-    can :manage, Education::Cohort, university_id: @user.university_id
+    can :manage, Administration::AcademicYear, university_id: @user.university_id
+    can :manage, Administration::Cohort, university_id: @user.university_id
   end
 
   protected

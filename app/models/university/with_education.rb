@@ -2,11 +2,6 @@ module University::WithEducation
   extend ActiveSupport::Concern
 
   included do
-    has_many  :education_cohorts,
-              class_name: 'Education::Cohort',
-              dependent: :destroy
-    alias_method :cohorts, :education_cohorts
-
     has_many  :education_diplomas,
               class_name: 'Education::Diploma',
               dependent: :destroy
@@ -26,10 +21,5 @@ module University::WithEducation
               class_name: 'Education::School',
               dependent: :destroy
     alias_method :schools, :education_schools
-
-    has_many  :education_academic_years,
-              class_name: 'Education::AcademicYear',
-              dependent: :destroy
-    alias_method :academic_years, :education_academic_years
   end
 end

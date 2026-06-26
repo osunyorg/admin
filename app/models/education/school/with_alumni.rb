@@ -3,13 +3,13 @@ module Education::School::WithAlumni
 
   included do
 
-      has_many    :education_cohorts,
-                  class_name: 'Education::Cohort',
+      has_many    :administration_cohorts,
+                  class_name: 'Administration::Cohort',
                   dependent: :destroy
-                  alias_method :cohorts, :education_cohorts
+                  alias_method :cohorts, :administration_cohorts
 
       has_many    :alumni, -> { distinct },
-                  through: :education_cohorts,
+                  through: :administration_cohorts,
                   source: :people
                   alias_method :university_person_alumni, :alumni
 
@@ -26,10 +26,10 @@ module Education::School::WithAlumni
                   alias_method :university_person_alumni_organizations, :alumni_organizations
 
       has_many    :academic_years, -> { distinct },
-                  class_name: 'Education::AcademicYear',
-                  through: :education_cohorts,
+                  class_name: 'Administration::AcademicYear',
+                  through: :administration_cohorts,
                   source: :academic_year
-                  alias_method :education_academic_years, :academic_years
+                  alias_method :administration_academic_years, :academic_years
 
   end
 end

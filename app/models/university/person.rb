@@ -188,6 +188,19 @@ class University::Person < ApplicationRecord
     best_localization_for(language).to_s_alphabetical
   end
 
+  def xlsx_gender
+    case gender
+    when 'male'
+      'm'
+    when 'female'
+      'f'
+    when 'non_binary'
+      'n'
+    else
+      nil
+    end
+  end
+
   protected
 
   def blocks_mentioning_self
