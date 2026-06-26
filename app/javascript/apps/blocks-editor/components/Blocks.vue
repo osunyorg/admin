@@ -7,7 +7,6 @@ export default {
     },
     props: [
       'modelValue',
-      'i18n',
     ],
     emits: [
       'update:modelValue',
@@ -37,7 +36,7 @@ export default {
       },
       onDelete(event, block) {
         event.preventDefault();
-        if (!confirm(this.i18n.blocksEditor.confirm.deletion)) return;
+        if (!confirm(this.$t('blocksEditor.confirm.deletion'))) return;
         this.$emit('delete', block);
       },
       onCopy(event, block) {
@@ -46,7 +45,7 @@ export default {
       },
       onDuplicate(event, block) {
         event.preventDefault();
-        if (!confirm(this.i18n.blocksEditor.confirm.duplication)) return;
+        if (!confirm(this.$t('blocksEditor.confirm.duplication'))) return;
         this.$emit('duplicate', block);
       },
     }
@@ -83,7 +82,7 @@ export default {
                     <span class="handle">
                       <i class="fas fa-sort"></i>
                       <span class="small">
-                         {{ i18n.blocksEditor.actions.move }}
+                         {{ $t('blocksEditor.actions.move') }}
                       </span>
                     </span>
                   </span>
@@ -91,23 +90,23 @@ export default {
                     href="#"
                     class="action text-danger ms-2"
                     @click="onDelete($event, block)">
-                    {{ i18n.blocksEditor.actions.delete }}</a>
+                    {{ $t('blocksEditor.actions.delete') }}</a>
                   <a
                     href="#"
                     class="action ms-2"
                     @click="onCopy($event, block)">
-                    {{ i18n.blocksEditor.actions.copy }}</a>
+                    {{ $t('blocksEditor.actions.copy') }}</a>
                   <a
                     href="#"
                     class="action ms-2"
                     @click="onDuplicate($event, block)">
-                    {{ i18n.blocksEditor.actions.duplicate }}</a>
+                    {{ $t('blocksEditor.actions.duplicate') }}</a>
                 </span>
                 <a 
                   href="#"
                   class="action ms-2"
                   @click="onEdit($event, block)">
-                  {{ i18n.blocksEditor.actions.edit }}</a>
+                  {{ $t('blocksEditor.actions.edit') }}</a>
               </div>
               <div
                 class="vue__blocks-editor__elements__preview"

@@ -1,0 +1,38 @@
+<% content_for :title, TasksCount.model_name.human(count: 2) %>
+
+<% content_for :title_right do %>
+    <div class="btn-group btn-group-sm" role="group" aria-label="<%= t('admin.pending_tasks.ranges.label') %>">
+    <% @chart.ranges.each do |key| %>
+        <%= link_to t("admin.pending_tasks.ranges.#{key}"),
+                    admin_tasks_count_path(range: key),
+                    class: "btn btn-outline-secondary#{' active' if key == @chart.range}" %>
+    <% end %>
+    </div>
+<% end %>
+
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'charts' %>
+<% end %>
+
+<% if @chart.data.any? %>
+  <%= line_chart @chart.data,
+                 nonce: content_security_policy_nonce,
+                 xtitle: t('admin.pending_tasks.chart.xtitle'),
+                 ytitle: t('admin.pending_tasks.chart.ytitle'),
+                 colors: ['#0d6efd'],
+                 curve: false,
+                 points: false,
+                 library: {
+                   scales: {
+                     x: {
+                       time: {
+                         unit: @chart.time_unit,
+                         displayFormats: t('admin.pending_tasks.chart.display_formats'),
+                         tooltipFormat: t('admin.pending_tasks.chart.tooltip_format')
+                       }
+                     }
+                   }
+                 } %>
+<% else %>
+  <p class="text-muted"><%= t('admin.pending_tasks.empty') %></p>
+<% end %>

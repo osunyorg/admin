@@ -24,7 +24,7 @@ class University::Person::Alumnus::Facets < FacetedSearch::Facets
   def add_years
     filter_with_list :diploma_years, {
       source: @about.academic_years.ordered,
-      title: Education::AcademicYear.model_name.human(count: 2),
+      title: Administration::AcademicYear.model_name.human(count: 2),
       habtm: true
     }
   end

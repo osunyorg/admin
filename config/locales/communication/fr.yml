@@ -344,6 +344,8 @@ fr:
             from_day:
               events_before: doit être avant le début du premier événement
               time_slots_before: doit être avant le premier créneau horaire
+            parent_id:
+              outside_parent_dates: doit se dérouler à des dates compatibles
             to_day:
               events_after: doit être après la fin du dernier événement
               time_slots_after: doit être après le dernier créneau horaire
@@ -551,6 +553,11 @@ fr:
           show: Voir la page
           special_page: Page spéciale
           special_pages:
+            administration_academic_year:
+              native:
+                zero: Cette page est une page spéciale, qui présente nativement les alumni du site, classés par années. Pour l'instant, il n'y a aucun alumnus dans le site.
+                one: Cette page est une page spéciale, qui présente nativement les alumni du site, classés par années. Pour l'instant, il y a 1 alumnus.
+                other: Cette page est une page spéciale, qui présente nativement les %{count} alumni du site, classés par années.
             administration_location:
               native:
                 zero: Cette page est une page spéciale, qui présente nativement les lieux du campus. Pour l'instant, il n'y a aucun lieu.
@@ -581,11 +588,6 @@ fr:
                 zero: Cette page est une page spéciale, qui présente nativement les actualités du site.
                 one: Cette page est une page spéciale, qui présente nativement les actualités du site. Pour l'instant, il y a 1 actualité publiée.
                 other: Cette page est une page spéciale, qui présente nativement les %{count} actualités publiées.
-            education_academic_year:
-              native:
-                zero: Cette page est une page spéciale, qui présente nativement les alumni du site, classés par années. Pour l'instant, il n'y a aucun alumnus dans le site.
-                one: Cette page est une page spéciale, qui présente nativement les alumni du site, classés par années. Pour l'instant, il y a 1 alumnus.
-                other: Cette page est une page spéciale, qui présente nativement les %{count} alumni du site, classés par années.
             education_diploma:
               native:
                 zero: Cette page est une page spéciale, qui présente nativement les diplômes liés au site. Pour l'instant, il n'y a aucun diplôme dans le site.
@@ -729,6 +731,9 @@ fr:
           accessibility:
             slug: accessibilite
             title: Accessibilité
+          administration_academic_year:
+            slug: alumni
+            title: Alumni
           administration_location:
             slug: campus
             title: Campus
@@ -759,9 +764,6 @@ fr:
           communication_post:
             slug: actualites
             title: Actualités
-          education_academic_year:
-            slug: alumni
-            title: Alumni
           education_diploma:
             slug: diplomes
             title: "Diplômes"

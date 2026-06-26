@@ -1,7 +1,7 @@
 class Extranet::Alumni::CohortsController < Extranet::Alumni::ApplicationController
   def index
-    @facets = Education::Cohort::Facets.new params[:facets], {
-      model: current_extranet.about.education_cohorts,
+    @facets = Administration::Cohort::Facets.new params[:facets], {
+      model: current_extranet.about.administration_cohorts,
       about: current_extranet.about,
       language: current_language
     }
@@ -14,7 +14,7 @@ class Extranet::Alumni::CohortsController < Extranet::Alumni::ApplicationControl
   end
 
   def show
-    @cohort = current_extranet.about.education_cohorts
+    @cohort = current_extranet.about.administration_cohorts
                                     .find(params[:id])
     @l10n = @cohort.best_localization_for(current_language)
     @people =  @cohort.people
@@ -29,6 +29,6 @@ class Extranet::Alumni::CohortsController < Extranet::Alumni::ApplicationControl
 
   def breadcrumb
     super
-    add_breadcrumb Education::Cohort.model_name.human(count: 2), alumni_education_cohorts_path
+    add_breadcrumb Administration::Cohort.model_name.human(count: 2), alumni_administration_cohorts_path
   end
 end

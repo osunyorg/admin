@@ -344,6 +344,8 @@ en:
             from_day:
               events_before: must be before the first event
               time_slots_before: must be before the first time slot
+            parent_id:
+              outside_parent_dates: must happen at compatible dates
             to_day:
               events_after: must be after the last event
               time_slots_after: must be after the last time slot
@@ -551,6 +553,11 @@ en:
           show: Show page
           special_page: Special page
           special_pages:
+            administration_academic_year:
+              native:
+                zero: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there are no alumni on the site.
+                one: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there is one alumnus.
+                other: This page is a special page that natively displays the site's %{count} alumni, sorted by year.
             administration_location:
               native:
                 zero: This page is a special page, which natively presents the campus locations. For now, there is no location.
@@ -581,11 +588,6 @@ en:
                 zero: This page is a special page that natively displays the site's news.
                 one: This page is a special page that natively displays the site's news . Currently, there's a single post.
                 other: This page is a special page that natively displays the %{count} published news.
-            education_academic_year:
-              native:
-                zero: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there are no alumni on the site.
-                one: This page is a special page that natively displays the site's alumni, sorted by year. Currently, there is one alumnus.
-                other: This page is a special page that natively displays the site's %{count} alumni, sorted by year.
             education_diploma:
               native:
                 zero: This page is a special page that natively displays the diplomas associated with the site. Currently, there are no diplomas on the site.
@@ -729,6 +731,9 @@ en:
           accessibility:
             slug: accessibility
             title: Accessibility
+          administration_academic_year:
+            slug: alumni
+            title: Alumni
           administration_location:
             slug: campus
             title: Campus
@@ -759,9 +764,6 @@ en:
           communication_post:
             slug: posts
             title: Posts
-          education_academic_year:
-            slug: alumni
-            title: Alumni
           education_diploma:
             slug: diplomas
             title: Diplomas

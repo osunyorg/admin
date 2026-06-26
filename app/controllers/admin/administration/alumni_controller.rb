@@ -9,8 +9,17 @@ class Admin::Administration::AlumniController < Admin::Administration::Applicati
     @alumni = @alumni.filter_by(params[:filters], current_language)
                      .alumni
                      .ordered(current_language)
-                     .page(params[:page])
-    breadcrumb
+    respond_to do |format|
+      format.html {
+        @alumni = @alumni.page(params[:page])
+        breadcrumb
+      }
+      format.xlsx {
+        @alumni = @alumni.includes(:cohorts)
+        filename = "alumni-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+      }
+    end
   end
 
   def show

@@ -2,8 +2,7 @@
 export default {
     props: [
       'modelValue',
-      'endpoint',
-      'i18n'
+      'endpoint'
     ],
     emits: ['update:modelValue'],
     computed: {
@@ -69,13 +68,13 @@ export default {
             class="btn btn-light vue__changes__cancel"
             @click="cancel()"
             :disabled="savingInProgress">
-      {{ i18n.cancel }}
+      {{ $t('changes.cancel') }}
     </button>
     <button type="button"
             class="btn btn-success vue__changes__save"
             @click="save()"
             :disabled="savingInProgress">
-      {{ i18n.save }}
+      {{ $t('changes.save') }}
     </button>
   </div>
 </template>

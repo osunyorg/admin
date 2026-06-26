@@ -53,6 +53,5 @@ class Communication::Website::ContentFederation < ApplicationRecord
 
   def disconnect
     destination_website.disconnect(about, destination_website)
-    destination_website.clean_and_rebuild
   end
 end

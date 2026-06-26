@@ -20,6 +20,8 @@ class Admin::Education::SchoolsController < Admin::Education::ApplicationControl
     @roles = @school.university_roles.ordered(current_language)
     @websites = @school.websites.ordered(current_language)
     @locations = @school.locations.ordered(current_language)
+    @cohorts = @school.cohorts.ordered(current_language)
+                              .page(params[:cohorts_page]).per(5)
     breadcrumb
   end
 

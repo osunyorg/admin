@@ -11,12 +11,10 @@ export default {
       loading: true,
       csrfToken: '',
       url: {
-        i18n: '',
         new: '',
         reorder: '',
         data: '',
       },
-      i18n: {},
       data: {},
       planMode: false,
       offcanvasState: 'closed', // closed, picking, editing
@@ -26,11 +24,9 @@ export default {
   beforeMount() {
     this.csrfToken = document.querySelector('[name="csrf-token"]').content;
     const dataset = document.getElementById('blocks-editor-app').dataset;
-    this.url.i18n = dataset.i18nUrl;
     this.url.data = dataset.dataUrl;
     this.url.new = dataset.newUrl;
     this.url.reorder = dataset.reorderUrl;
-    this.loadJson(this.url.i18n, 'i18n');
     this.refresh();
   },
   methods: {
@@ -38,7 +34,7 @@ export default {
       const res = await fetch(url, { headers: { Accept: 'application/json' } });
       if (!res.ok) return;
       this[target] = await res.json();
-      if (this.i18n.blocksEditor && this.data.blocks) {
+      if (this.data.blocks) {
         this.loading = false;
       }
     },
@@ -77,7 +73,7 @@ export default {
       notyf.open({
         type: 'success',
         position: { x: 'left', y: 'bottom' },
-        message: this.i18n.blocksEditor.confirm.copy,
+        message: this.$t('blocksEditor.confirm.copy'),
         duration: 9000,
         ripple: true,
         dismissible: true,
@@ -137,19 +133,18 @@ export default {
           <a
             class="btn btn-lg btn-dark me-2 mb-2"
             @click="onAdd">
-            {{ i18n.blocksEditor.actions.addBlock }}</a>
+            {{ $t('blocksEditor.actions.addBlock') }}</a>
           <a
             class="btn btn-sm float-md-end"
             :class="{'btn-success': planMode, 'btn-light': !planMode}"
             @click="planMode = !planMode"
             v-show="data.blocks.length > 2">
             <i class="fas fa-list"></i>
-            {{ i18n.blocksEditor.planMode.button }}</a>
+            {{ $t('blocksEditor.planMode.button') }}</a>
         </div>
       </div>
       <Blocks
         v-model="data.blocks"
-        :i18n="i18n"
         @edit="onEdit"
         @delete="onDelete"
         @copy="onCopy"
@@ -162,13 +157,13 @@ export default {
           <a
             class="btn btn-lg btn-dark"
             @click="onAdd">
-            {{ i18n.blocksEditor.actions.addBlock }}</a>
+            {{ $t('blocksEditor.actions.addBlock') }}</a>
         </div>
       </div>
       <OffcanvasShell
         :open="offcanvasState !== 'closed'"
-        :title="i18n.blocksEditor.offcanvas.title"
-        :close-label="i18n.blocksEditor.offcanvas.close"
+        :title="$t('blocksEditor.offcanvas.title')"
+        :close-label="$t('blocksEditor.offcanvas.close')"
         @close="closeOffcanvas">
         <TemplatePicker
           v-if="offcanvasState === 'picking'"
