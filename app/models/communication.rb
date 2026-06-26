@@ -12,6 +12,7 @@ module Communication
       [Communication::Website, :admin_communication_websites_path],
       [Communication::Extranet, :admin_communication_extranets_path],
       [Communication::Media, :admin_communication_medias_path],
+      [Communication::File, :admin_communication_files_path],
     ]
   end
 end

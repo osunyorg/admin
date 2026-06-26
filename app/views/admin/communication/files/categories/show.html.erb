@@ -1,0 +1,21 @@
+<% content_for :title, @l10n %>
+
+<% if @category.editable? %>
+  <% content_for :title_right do %>
+    <%= button_advanced do %>
+      <%= destroy_link @category %>
+    <% end %>
+    <%= edit_link @category %>
+  <% end %>
+<% end %>
+
+<%= render 'admin/application/categories/show', category: @category, l10n: @l10n %>
+
+<% if @files.total_count > 0 %>
+  <p>
+    <%= @files.total_count %>
+    <%= Communication::File.model_name.human(count: @files.total_count).downcase %>
+  </p>
+  <%= render 'admin/communication/files/list', files: @files %>
+  <%= paginate @files %>
+<% end %>

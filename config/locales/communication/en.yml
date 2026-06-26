@@ -86,6 +86,13 @@ en:
         published_at: Publication date
         slug: Slug
         title: Title
+      communication/file/localization:
+        internal_description: Internal description
+        name: Name
+        original_byte_size: Size
+        original_content_type: Content type
+        original_filename: Original filename
+        original_uploaded_file: Original file
       communication/media:
         collection: Collection
         height: Height
@@ -334,6 +341,11 @@ en:
           attributes:
             published:
               cannot_unpublished_default: cannot be unpublished (default language)
+        communication/file/localization:
+          attributes:
+            original_uploaded_file:
+              already_imported: already imported in file library
+              too_big: too heavy!
         communication/media:
           attributes:
             original_uploaded_file:
@@ -388,6 +400,15 @@ en:
       communication/extranet/post/category:
         one: Category
         other: Categories
+      communication/file:
+        one: File
+        other: Files
+      communication/file/category:
+        one: Category
+        other: Categories
+      communication/file/context:
+        one: Usage context
+        other: Usage contexts
       communication/media:
         one: Media
         other: Medias
@@ -689,10 +710,14 @@ en:
           description: Secure exchange areas dedicated to authenticated users
           description_non_university: Secure exchange areas dedicated to authenticated users
           title: Extranets
+        file:
+          description: Library of all downloadable files used in this osuny instance
+          description_non_university: Library of all downloadable files used in this osuny instance
+          title: Files
         media:
           description: Library of all the photos used in this osuny instance
           description_non_university: Library of all the photos used in this osuny instance
-          title: Media library
+          title: Photos
         website:
           description: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
           description_non_university: Public spaces for the dissemination of information, ecologically sober and accessible to people with disabilities
@@ -884,6 +909,8 @@ en:
         favicon: '.png file only'
         host: Sans le protocole
         sso_button_label: "Default: Sign in via SSO"
+      communication_file_localization:
+        internal_description: Complementary complémentaire of the file. You can write this text to help the users to find a specific file, or learn how it should be used (rights, dates, contexts...).
       communication_media_localization:
         internal_description: Complementary description of the image for the media library users. You can write this text to help the media library users to find an image, have complementary informations about it or have special instructions regarding the use of the image.
       communication_website:

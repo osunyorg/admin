@@ -1,0 +1,26 @@
+<%= simple_form_for [:admin, file] do |f| %>
+  <%= f.simple_fields_for :localizations, l10n do |lf| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    <%= lf.hidden_field :language_id, value: current_language.id %>
+
+    <div class="row">
+      <div class="col-lg-4">
+        <% if l10n.new_record? %>
+          <%= lf.input :original_uploaded_file,
+                      as: :file %>
+        <% end %>
+      </div>
+      <div class="col-lg-8">
+        <%= lf.input :name %>
+        <%= render 'admin/application/categories/widget/form', f: f, categories: @categories %>
+        <%= lf.input :internal_description, hint: t('simple_form.hints.communication_file_localization.internal_description') %>
+      </div>
+    </div>
+    <% content_for :action_bar_right do %>
+      <%= cancel [:admin, file] %>
+      <%= render 'admin/application/l10n/libre_translate_button', l10n: l10n %>
+      <%= submit f %>
+    <% end %>
+  <% end %>
+<% end %>
