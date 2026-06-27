@@ -9,6 +9,9 @@
 
 <div class="row">
   <div class="col-lg-4">
+    <div class="osuny__file__icon">
+      <i class="<%= @l10n.icon %>" title="<%= @l10n.original_content_type %>"></i>
+    </div>
     <%= link_to t('download'),
               download_medium_path(signed_id: @l10n.original_blob.signed_id),
               class: button_classes %>
@@ -28,7 +31,12 @@
         <p><%= number_to_human_size @l10n.original_byte_size %></p>
       </div>
     </div>
-  
+
+    <% if @l10n.internal_description.present? %>
+      <%= osuny_label Communication::File::Localization.human_attribute_name(:internal_description) %>
+      <p><%= number_to_human_size @l10n.internal_description %></p>
+    <% end %>
+
     <%= render 'admin/application/categories/widget/show', about: @file %>
     <%#= render 'admin/communication/files/contexts/list', file: @file %>
   </div>

@@ -33,7 +33,7 @@
 #
 class Communication::File::Localization < ApplicationRecord
   include AsLocalization
-  include Initials
+  include WithIcon
   include WithOpenApi
   include WithUniversity
 
@@ -45,6 +45,15 @@ class Communication::File::Localization < ApplicationRecord
   before_validation :create_original_blob_from_upload, on: :create, if: :original_uploaded_file
 
   validates :original_uploaded_file, presence: true, on: :create, unless: :original_blob
+
+  def original_blob=(value)
+    super(value)
+    return if value.blank?
+    self.original_checksum = value.checksum
+    self.original_filename = value.filename.to_s
+    self.original_content_type = value.content_type
+    self.original_byte_size = value.byte_size
+  end
 
   def to_s
     "#{name}"
