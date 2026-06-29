@@ -47,12 +47,6 @@ class Admin::Education::Programs::PartsController < Admin::Education::Programs::
     add_breadcrumb t('edit')
   end
 
-  def alumni
-    @cohorts = @program.cohorts.ordered
-    breadcrumb
-    add_breadcrumb University::Person::Alumnus.model_name.human(count: 2)
-  end
-
   protected
 
   def authorize_resource

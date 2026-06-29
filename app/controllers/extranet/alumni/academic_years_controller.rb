@@ -1,6 +1,6 @@
 class Extranet::Alumni::AcademicYearsController < Extranet::Alumni::ApplicationController
   def index
-    @academic_years = current_extranet.about.education_academic_years
+    @academic_years = current_extranet.about.administration_academic_years
                                             .ordered(current_language)
                                             .page(params[:page])
     @count = @academic_years.total_count
@@ -8,7 +8,7 @@ class Extranet::Alumni::AcademicYearsController < Extranet::Alumni::ApplicationC
   end
 
   def show
-    @academic_year =  current_extranet.about.education_academic_years
+    @academic_year =  current_extranet.about.administration_academic_years
                                             .find(params[:id])
     @cohorts =  @academic_year.cohorts_in_context(current_extranet.about)
                               .ordered(current_language)
@@ -24,6 +24,6 @@ class Extranet::Alumni::AcademicYearsController < Extranet::Alumni::ApplicationC
 
   def breadcrumb
     super
-    add_breadcrumb Education::AcademicYear.model_name.human(count: 2), alumni_education_academic_years_path
+    add_breadcrumb Administration::AcademicYear.model_name.human(count: 2), alumni_administration_academic_years_path
   end
 end

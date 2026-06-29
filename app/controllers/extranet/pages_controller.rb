@@ -22,8 +22,8 @@ class Extranet::PagesController < Extranet::ApplicationController
     if current_extranet.has_feature?(:alumni)
       @metrics.concat [
         { value: current_extranet.alumni.count, name: University::Person::Alumnus.model_name.human(count: 2) },
-        { value: current_extranet.academic_years.count, name: Education::AcademicYear.model_name.human(count: 2) },
-        { value: current_extranet.cohorts.count, name: Education::Cohort.model_name.human(count: 2) },
+        { value: current_extranet.academic_years.count, name: Administration::AcademicYear.model_name.human(count: 2) },
+        { value: current_extranet.cohorts.count, name: Administration::Cohort.model_name.human(count: 2) },
         { value: current_extranet.about.university_person_alumni_organizations.count, name: University::Organization.model_name.human(count: 2) }
       ]
     end

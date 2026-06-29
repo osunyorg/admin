@@ -64,7 +64,7 @@ module Importers
     end
 
     def cohort
-      @cohort ||= @university.education_cohorts
+      @cohort ||= @university.administration_cohorts
                        .where(school: school, program: program, academic_year: academic_year)
                        .first_or_create
     end

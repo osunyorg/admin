@@ -1,8 +1,8 @@
-<% content_for :title, Education::Cohort.model_name.human(count: 2) %>
+<% content_for :title, Administration::Cohort.model_name.human(count: 2) %>
 <% content_for :header_right do %>
   <p>
     <%= @count %>
-    <%= Education::Cohort.model_name.human(count: @count).downcase %>
+    <%= Administration::Cohort.model_name.human(count: @count).downcase %>
   </p>
 <% end %>
 

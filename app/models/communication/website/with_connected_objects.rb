@@ -90,7 +90,7 @@ module Communication::Website::WithConnectedObjects
                       direct_source_id: direct_source.id,
                       direct_source_type: direct_source_type)
                 .delete_all
-    mark_obsolete_git_files
+    clean
   end
 
   # TODO factoriser avec les extranets

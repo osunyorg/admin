@@ -9,13 +9,13 @@
 <% if @cohorts %>
   <p>
     <%= @cohorts.count %>
-    <%= Education::Cohort.model_name.human(count: @cohorts.count).downcase %>
+    <%= Administration::Cohort.model_name.human(count: @cohorts.count).downcase %>
   </p>
 <% end %>
 <% if @years %>
   <p>
     <%= @years.count %>
-    <%= Education::AcademicYear.model_name.human(count: @years.count).downcase %>
+    <%= Administration::AcademicYear.model_name.human(count: @years.count).downcase %>
   </p>
 <% end %>
 <% if @organizations %>

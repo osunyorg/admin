@@ -11,7 +11,7 @@ module Communication::Website::Agenda::Period::InPeriod
               :to_hour_after_from_hour_on_same_day
   end
 
-  def same_day?
+  def single_day?
     from_day == to_day
   end
 

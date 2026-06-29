@@ -16,7 +16,6 @@ export default {
     data () {
       return {
         current: {},
-        i18n: {},
       }
     },
     methods: {
@@ -57,7 +56,6 @@ export default {
     },
     beforeMount() {
       this.dataset = document.getElementById('media-picker-app').dataset
-      this.i18n = JSON.parse(this.dataset.i18n);
       this.summernoteLang = this.dataset.summernoteLang;
       this.current = JSON.parse(this.dataset.current);
     },
@@ -70,7 +68,7 @@ export default {
 <template>
   <section class="vue__media-picker">
     <div class="d-lg-flex me-4 mb-0">
-      <label class="form-label">{{ i18n.mediaPicker.title }}</label>
+      <label class="form-label">{{ $t('mediaPicker.title') }}</label>
     </div>
     <div class="app-content">
       <div v-if="!current.image.url" class="vue__media-picker__selector">
@@ -87,33 +85,32 @@ export default {
           <a  class="btn btn-sm text-danger pe-0"
               @click="removeImage()">
             <i class="<%= Icon::DELETE %>"></i>
-            {{ i18n.mediaPicker.remove }}
+            {{ $t('mediaPicker.remove') }}
           </a>
         </div>
         <div class="mb-3">
-          <label class="form-label" aria-label="{{ i18n.mediaPicker.alt.label }}" for="alt">
-            {{ i18n.mediaPicker.alt.label }}
+          <label class="form-label" :aria-label="$t('mediaPicker.alt.label')" for="alt">
+            {{ $t('mediaPicker.alt.label') }}
           </label>
           <input  id="alt"
                   class="form-control"
                   data-translatable="true"
                   v-model="current.image.alt"
                   type="text">
-          <div class="form-text">{{ i18n.mediaPicker.alt.hint }}</div>
+          <div class="form-text">{{ $t('mediaPicker.alt.hint') }}</div>
         </div>
         <div class="mb-3 summernote">
-          <label class="form-label" :aria-label="i18n.mediaPicker.credit.label" for="credit">
-            {{ i18n.mediaPicker.credit.label }}
+          <label class="form-label" :aria-label="$t('mediaPicker.credit.label')" for="credit">
+            {{ $t('mediaPicker.credit.label') }}
           </label>
           <Summernote id="credit"
                       :lang="summernoteLang"
                       v-model="current.image.credit" />
-          <div class="form-text">{{ i18n.mediaPicker.credit.hint }}</div>
+          <div class="form-text">{{ $t('mediaPicker.credit.hint') }}</div>
         </div>
       </div>
     </div>
   </section>
   <Changes  v-model="current"
-            :i18n="i18n.changes"
             :endpoint="dataset.changesEndpoint" />
 </template>

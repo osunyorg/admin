@@ -30,8 +30,6 @@ class Ability::Admin < Ability
     # Necessaire pour l'affichage des tableaux de bord
     # https://github.com/osunyorg/admin/pull/2491
     can :manage, University::Person::Localization::Teacher
-    can :manage, Education::AcademicYear, university_id: @user.university_id
-    can :manage, Education::Cohort, university_id: @user.university_id
     can :manage, Education::Diploma, university_id: @user.university_id
     can :manage, Education::Program, university_id: @user.university_id
     can :manage, Education::Program::Category, university_id: @user.university_id
@@ -83,6 +81,7 @@ class Ability::Admin < Ability
     can :manage, Communication::Media, university_id: @user.university_id
     can :manage, Communication::Media::Category, university_id: @user.university_id
     can :manage, Communication::Media::Collection, university_id: @user.university_id
+    can :read, Communication::Website::GitFile, university_id: @user.university_id
   end
 
   def admin_communication_extranet
@@ -98,8 +97,10 @@ class Ability::Admin < Ability
   def admin_administration
     # Necessaire pour l'affichage des tableaux de bord
     # https://github.com/osunyorg/admin/pull/2491
-    can :manage, University::Person::Alumnus
-    can :manage, Administration::Location
+    can :manage, University::Person::Alumnus, university_id: @user.university_id
+    can :manage, Administration::Location, university_id: @user.university_id
+    can :manage, Administration::AcademicYear, university_id: @user.university_id
+    can :manage, Administration::Cohort, university_id: @user.university_id
     can :read, Administration::Qualiopi
     can :read, Administration::Qualiopi::Criterion
     can :read, Administration::Qualiopi::Indicator
