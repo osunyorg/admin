@@ -28,7 +28,7 @@
 #
 #  fk_rails_2caf77cf04  (original_blob_id => active_storage_blobs.id)
 #  fk_rails_38de4b5d8a  (language_id => languages.id)
-#  fk_rails_6f750651f5  
+#  fk_rails_6f750651f5  (about_id => communication_files.id)
 #  fk_rails_fcfa27eb47  (university_id => universities.id)
 #
 class Communication::File::Localization < ApplicationRecord

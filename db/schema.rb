@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_26_145132) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_29_070648) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -501,8 +501,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_145132) do
 
   create_table "communication_files", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.uuid "created_by_id"
     t.uuid "university_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_by_id"], name: "index_communication_files_on_created_by_id"
     t.index ["university_id"], name: "index_communication_files_on_university_id"
   end
 
@@ -2723,6 +2725,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_26_145132) do
   add_foreign_key "communication_file_localizations", "languages"
   add_foreign_key "communication_file_localizations", "universities"
   add_foreign_key "communication_files", "universities"
+  add_foreign_key "communication_files", "users", column: "created_by_id"
   add_foreign_key "communication_media_categories", "communication_media_categories", column: "parent_id"
   add_foreign_key "communication_media_categories", "universities"
   add_foreign_key "communication_media_category_localizations", "communication_media_categories", column: "about_id"
