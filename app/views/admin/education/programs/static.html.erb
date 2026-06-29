@@ -93,7 +93,7 @@ information:
 diploma:
 <% if @l10n.diploma %>
 <% hugo = @l10n.diploma.hugo(@website) %>
-<%= render 'admin/application/static/hugo/single', hugo: hugo, depth: 1 %>
+<%= render 'admin/application/static/hugo/values', hugo: hugo %>
 <% end %>
 <%= osuny_static_text 'duration', @l10n.duration %>
 teachers:
