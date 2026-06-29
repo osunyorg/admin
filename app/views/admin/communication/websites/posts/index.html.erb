@@ -27,6 +27,7 @@
   <%= form_tag publish_batch_admin_communication_website_posts_path do %>
     <%= render 'admin/communication/websites/posts/list',
                 posts: @posts,
+                website: @website,
                 selectable: (params.dig(:lifecycle) != 'trash') %>
     <%= paginate @posts %>
     <div>
