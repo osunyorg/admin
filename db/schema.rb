@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_29_070648) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_29_093935) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -477,6 +477,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_29_070648) do
     t.index ["about_id"], name: "index_communication_file_category_localizations_on_about_id"
     t.index ["language_id"], name: "index_communication_file_category_localizations_on_language_id"
     t.index ["university_id"], name: "idx_on_university_id_7bebff08b4"
+  end
+
+  create_table "communication_file_contexts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "about_id"
+    t.string "about_type"
+    t.uuid "communication_file_localization_id", null: false
+    t.datetime "created_at", null: false
+    t.uuid "university_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["about_type", "about_id"], name: "index_communication_file_contexts_on_about"
+    t.index ["communication_file_localization_id"], name: "idx_on_communication_file_localization_id_a9a8fdc48e"
+    t.index ["university_id"], name: "index_communication_file_contexts_on_university_id"
   end
 
   create_table "communication_file_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -2720,6 +2732,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_29_070648) do
   add_foreign_key "communication_file_category_localizations", "communication_file_categories", column: "about_id"
   add_foreign_key "communication_file_category_localizations", "languages"
   add_foreign_key "communication_file_category_localizations", "universities"
+  add_foreign_key "communication_file_contexts", "communication_file_localizations"
+  add_foreign_key "communication_file_contexts", "universities"
   add_foreign_key "communication_file_localizations", "active_storage_blobs", column: "original_blob_id"
   add_foreign_key "communication_file_localizations", "communication_files", column: "about_id"
   add_foreign_key "communication_file_localizations", "languages"

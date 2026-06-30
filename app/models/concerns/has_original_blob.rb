@@ -12,6 +12,19 @@ module HasOriginalBlob
     validates :original_uploaded_file, presence: true, on: :create, unless: :original_blob
   end
 
+  class_methods do
+
+    protected
+
+    def create_context(object, blob, about)
+      object.contexts.where(
+        about: about,
+        active_storage_blob: blob,
+        university_id: blob.university_id
+      ).first_or_create
+    end
+  end
+
   # TODO Quand on voudra généraliser l'usage (pas seulement les featured_images)
   # il faudra ajouter la clé au contexte (le même média peut être utilisé pour 2 clés différentes).
   def attach(about, key)
@@ -39,14 +52,6 @@ module HasOriginalBlob
   end
 
   protected
-
-  def self.create_context(object, blob, about)
-    object.contexts.where(
-      about: about,
-      active_storage_blob: blob,
-      university_id: blob.university_id
-    ).first_or_create
-  end
 
   def create_original_blob_from_upload
     return if wrong_uploaded_file? || file_size_too_big?
@@ -80,7 +85,7 @@ module HasOriginalBlob
   end
 
   def exists_for_blob_checksum?(blob)
-    objects = class.where(university_id: university.id)
+    objects = self.class.where(university_id: university.id)
     if objects.where(original_checksum: blob.checksum).any?
       errors.add :original_uploaded_file, :already_imported
       true
