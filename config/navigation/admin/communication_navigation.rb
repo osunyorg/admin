@@ -23,5 +23,8 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item  :subnav_medias,
                   t('communication.description.parts.media.title'),
                   admin_communication_medias_path
+    primary.item  :subnav_file,
+                  t('communication.description.parts.file.title'),
+                  admin_communication_files_path
   end
 end

@@ -1,0 +1,16 @@
+<% content_for :title, t('communication.description.parts.file.title') %>
+
+<% content_for :title_right do %>
+  <%= create_link Communication::File %>
+<% end %>
+
+<div class="d-flex justify-content-between mb-4">
+  <p>
+    <%= @files.total_count %>
+    <%= Communication::File.model_name.human(count: @files.total_count).downcase %>
+  </p>
+  <%= render 'filters', current_path: admin_communication_files_path %>
+</div>
+
+<%= render 'admin/communication/files/list', files: @files %>
+<%= paginate @files %>

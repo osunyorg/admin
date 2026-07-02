@@ -3,7 +3,7 @@
     <%= osuny_panel t('content') do %>
       <%= lf.input  :name,
                     label: t('category.name'),
-                    input_html: { data: { translatable: true } } %>
+                    input_html: { data: { translatable: true }, id: "category_name" } %>
       <%= lf.input  :subtitle,
                     label: t('category.subtitle'),
                     input_html: { data: { translatable: true } } if l10n.respond_to?(:subtitle) %>

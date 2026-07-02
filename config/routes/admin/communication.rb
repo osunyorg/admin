@@ -284,5 +284,18 @@ namespace :communication do
       resources :collections, controller: '/admin/communication/medias/collections', as: 'media_collections'
     end
   end
+  resources :files do
+    collection do
+      post 'pick' => 'files#pick', as: :pick
+      resources :categories, controller: '/admin/communication/files/categories', as: 'file_categories' do
+        collection do
+          post :reorder
+        end
+        member do
+          get :children
+        end
+      end
+    end
+  end
   root to: 'dashboard#index'
 end
