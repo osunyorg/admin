@@ -41,7 +41,7 @@ class Communication::File::Localization < ApplicationRecord
   has_many    :contexts,
               foreign_key: :communication_file_id,
               dependent: :destroy
-  has_many.   :blobs,
+  has_many    :blobs,
               through: :contexts,
               source: :active_storage_blob
 
