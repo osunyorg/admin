@@ -1,11 +1,12 @@
 <script>
 import Blocks from './components/Blocks.vue';
+import DomCount from './components/DomCount.vue';
 import Editor from './components/Editor.vue';
 import OffcanvasShell from './components/OffcanvasShell.vue';
 import TemplatePicker from './components/TemplatePicker.vue';
 
 export default {
-  components: { Blocks, Editor, OffcanvasShell, TemplatePicker },
+  components: { Blocks, DomCount, Editor, OffcanvasShell, TemplatePicker },
   data() {
     return {
       loading: true,
@@ -160,6 +161,9 @@ export default {
             {{ $t('blocksEditor.actions.addBlock') }}</a>
         </div>
       </div>
+      <DomCount
+        :count="data.about.dom_count"
+        :i18n="i18n" />
       <OffcanvasShell
         :open="offcanvasState !== 'closed'"
         :title="$t('blocksEditor.offcanvas.title')"
