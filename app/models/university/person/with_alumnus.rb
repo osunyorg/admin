@@ -39,7 +39,6 @@ module University::Person::WithAlumnus
         .select("university_people.*")
         .distinct
     }
-
     scope :for_alumni_program, -> (program_ids, language = nil) {
       left_joins(:cohorts)
         .where(administration_cohorts: { program_id: program_ids })
