@@ -8,30 +8,29 @@ class Communication::Block::Component::File < Communication::Block::Component::B
     {
       properties: {
         id: { type: :string, format: :uuid, nullable: true },
-        filename: { type: :string, nullable: true },
-        signed_id: { type: :string, nullable: true }
+        filename: { type: :string, nullable: true }
       }
     }
   end
 
   def blob
-    return if data.nil? || data['id'].blank?
-    @blob ||= university.active_storage_blobs.find_by(id: data['id'])
+    return if data_empty?
+    @blob ||= communication_file_localisation&.original_blob
   end
 
   def communication_file
-    return if data.nil? || data['communication_file_id'].blank?
-    @communication_file ||= university.communication_file.find_by(id: data['communication_file_id'])
+    return if data_empty?
+    @communication_file ||= university.communication_files.find_by(id: data['id'])
   end
 
   def communication_file_localisation
+    return if data_empty?
     @communication_file_localisation ||= communication_file.localization_for(language)
   end
 
   def default_data
     {
-      'id' => '',
-      'communication_file_id' => ''
+      'id' => ''
     }
   end
 
@@ -44,11 +43,15 @@ class Communication::Block::Component::File < Communication::Block::Component::B
 
   protected
 
+  def data_empty?
+    data.nil? || data['id'].blank?
+  end
+
   def university
     @university ||= template.block.university
   end
 
   def language
-    @lanuage ||= block.language
+    @language ||= template.block.language
   end
 end

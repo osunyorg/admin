@@ -58,7 +58,7 @@ export default {
       };
 
       new window.ActiveStorage.DirectUpload(file, this.uploadUrl, delegate).create(
-        (error, blob) => {
+        (error, data) => {
           this.uploading = false;
           if (error) {
             // eslint-disable-next-line no-console
@@ -66,9 +66,9 @@ export default {
             return;
           }
           this.$emit('update:modelValue', {
-            id: blob.id,
-            signed_id: blob.signed_id,
-            filename: blob.filename,
+            id: data.file.id,
+            name: data.file.name,
+            filename: data.file.filename,
           });
         },
       );
