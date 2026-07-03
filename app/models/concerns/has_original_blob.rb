@@ -19,7 +19,7 @@ module HasOriginalBlob
     def create_context(object, blob, about)
       object.contexts.where(
         about: about,
-        active_storage_blob: blob,
+        active_storage_blob: blob, # absent dans les files
         university_id: blob.university_id
       ).first_or_create
     end

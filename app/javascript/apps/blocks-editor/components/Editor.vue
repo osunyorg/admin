@@ -4,6 +4,7 @@ import { VueDraggableNext } from 'vue-draggable-next';
 import RichTextInput from './inputs/RichTextInput.vue';
 import CodeInput from './inputs/CodeInput.vue';
 import UploadInput from './inputs/UploadInput.vue';
+import FileUploadInput from './inputs/FileUploadInput.vue';
 import MultiImageInput from './inputs/MultiImageInput.vue';
 
 // Renders the block-edit form fetched from the server, mounts a fresh inner
@@ -146,6 +147,7 @@ export default {
       this.innerApp.component('RichTextInput', RichTextInput);
       this.innerApp.component('CodeInput', CodeInput);
       this.innerApp.component('UploadInput', UploadInput);
+      this.innerApp.component('FileUploadInput', FileUploadInput);
       this.innerApp.component('MultiImageInput', MultiImageInput);
 
       this.innerApp.mount(root);
