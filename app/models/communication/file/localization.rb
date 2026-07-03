@@ -44,6 +44,27 @@ class Communication::File::Localization < ApplicationRecord
   has_many    :blobs,
               through: :contexts,
               source: :active_storage_blob
+  alias :file :about
+
+  def self.create_from_blob(blob, language)
+    localization = where(
+      university_id: blob.university_id,
+      language_id: language.id,
+      original_checksum: blob.checksum
+    ).first_or_initialize do |localization|
+      # La localisation n'existe pas, on crée le fichier
+      file = Communication::File.create!(university_id: blob.university_id)
+      # On attribue le blob
+      localization.original_blob = blob
+      # On connecte au fichier
+      localization.about_id = file.id
+      # On prend le nom du fichier comme nom par défaut (c'est mieux que rien)
+      localization.name = blob.filename.to_s
+      # On enregistre
+      localization.save
+    end
+    localization
+  end
 
   def to_s
     "#{name}"

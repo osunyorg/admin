@@ -25,13 +25,12 @@ class Admin::Communication::FilesController < Admin::Communication::Files::Appli
   def direct_upload
     # TODO factorize this with ActiveStorage::DirectUploadsController#create
     blob_args = params.require(:blob).permit(:filename, :byte_size, :checksum, :content_type, metadata: {}).to_h.symbolize_keys
-    blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
-    blob.update_column(:university_id, current_university&.id)
-    json = blob.as_json(root: false, methods: :signed_id).merge(direct_upload: {
-        url: blob.service_url_for_direct_upload,
-        headers: blob.service_headers_for_direct_upload
-      })
-    render json: json
+    @blob = ActiveStorage::Blob.create_before_direct_upload!(**blob_args)
+    @blob.update_column(:university_id, current_university&.id)
+    # TODO faut-il l'id ou l'iso ?
+    @language = Language.find(params[:language])
+    @localization = Communication::File::Localization.create_from_blob(@blob, @language)
+    @file = @localization.file
   end
 
   def pick

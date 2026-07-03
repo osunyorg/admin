@@ -6,7 +6,7 @@ accept ||= '*'
 %>
 <file-upload-input
   v-model="<%= model %>.<%= property %>"
-  upload-url="<%= direct_upload_admin_communication_files_path %>"
+  upload-url="<%= direct_upload_admin_communication_files_path(language: language.id) %>"
   label="<%= label %>"
   remove="<%= remove %>"
   hint="<%= j hint %>"

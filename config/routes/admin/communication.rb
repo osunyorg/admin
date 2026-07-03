@@ -286,7 +286,7 @@ namespace :communication do
   end
   resources :files do
     collection do
-      post 'direct-upload' => 'files#direct_upload', as: :direct_upload
+      post 'direct-upload/language/:language' => 'files#direct_upload', as: :direct_upload
       post 'pick' => 'files#pick', as: :pick
       resources :categories, controller: '/admin/communication/files/categories', as: 'file_categories' do
         collection do

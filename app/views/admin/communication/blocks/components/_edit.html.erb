@@ -22,6 +22,7 @@ summernote_config ||= "mini-list-with-notes"
 partial = "admin/communication/blocks/components/#{component.kind}/edit"
 
 local_assigns[:template] = template
+local_assigns[:language] = block.about.language
 local_assigns[:component] = component
 local_assigns[:model] = model
 local_assigns[:dom_id] = dom_id
