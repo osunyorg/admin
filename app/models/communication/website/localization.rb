@@ -37,12 +37,12 @@
 #  fk_rails_fc42676b8b  (university_id => universities.id)
 #
 class Communication::Website::Localization < ApplicationRecord
+  include Accessible
   include AsLocalization
   include Contentful
   include HasGitFiles
   include Initials
   include Publishable
-  include WithAccessibility
   include WithOpenApi
   include WithUniversity
 

@@ -44,7 +44,8 @@
 #
 class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   acts_as_paranoid
-
+  
+  include Accessible
   include AddableToCalendar
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
@@ -58,7 +59,6 @@ class Communication::Website::Agenda::Event::Localization < ApplicationRecord
   include Publishable
   include Sanitizable
   include Shareable
-  include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithOpenApi

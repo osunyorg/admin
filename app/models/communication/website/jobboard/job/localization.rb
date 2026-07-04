@@ -42,6 +42,7 @@
 class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
   acts_as_paranoid
 
+  include Accessible
   include AsLocalization
   include Contentful
   include HasGitFiles
@@ -51,7 +52,6 @@ class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
   include Publishable
   include Sanitizable
   include Shareable
-  include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithUniversity

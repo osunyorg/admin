@@ -45,7 +45,7 @@ class Communication::Block < ApplicationRecord
   include AsIndirectObject
   include Filterable
   include Orderable
-  include WithAccessibility
+  include Accessible
   include WithHeadingRanks
   include WithHtmlClass
   include WithMediaLibrary

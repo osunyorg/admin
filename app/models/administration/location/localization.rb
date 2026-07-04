@@ -41,7 +41,7 @@ class Administration::Location::Localization < ApplicationRecord
   include Initials
   include Permalinkable
   include Sanitizable
-  include WithAccessibility
+  include Accessible
   include WithBlobs
   include WithFeaturedImage
   include WithUniversity

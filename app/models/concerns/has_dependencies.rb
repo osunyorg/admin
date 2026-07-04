@@ -1,8 +1,8 @@
-# Les objets ont souvent besoin de WithDependencies, mais pas toujours :
+# Les objets ont souvent besoin de HasDependencies, mais pas toujours :
 # - les blocks ont des dépendances, mais ne sont pas envoyés sur Git en tant qu'objets, ils passent par leur 'about'
 # - les menu items passent par le menu
 # - les templates et les components de blocks passent par les blocks qui passent par les 'about'
-module WithDependencies
+module HasDependencies
   extend ActiveSupport::Concern
 
   included do

@@ -42,6 +42,7 @@
 class Communication::Website::Portfolio::Project::Localization < ApplicationRecord
   acts_as_paranoid
 
+  include Accessible
   # Needs to be included before Sluggable (which is included by Permalinkable)
   include AsDirectObjectLocalization
   include AsLocalization
@@ -53,7 +54,6 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
   include Publishable
   include Sanitizable
   include Shareable
-  include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithOpenApi

@@ -56,6 +56,7 @@
 class Education::Program::Localization < ApplicationRecord
   acts_as_paranoid
 
+  include Accessible
   include AsLocalization
   include AsLocalizedTree # ordered scope is overridden below
   include Contentful
@@ -66,7 +67,6 @@ class Education::Program::Localization < ApplicationRecord
   include Publishable
   include Sanitizable
   include Shareable
-  include WithAccessibility
   include WithBlobs
   include WithFeaturedImage
   include WithInheritance

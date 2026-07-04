@@ -71,7 +71,7 @@ class Communication::Website < ApplicationRecord
   include WithConfigs
   include WithConnectedObjects
   include WithContentArchive
-  include WithDependencies
+  include HasDependencies
   include WithDeuxfleurs
   include WithFeatureAgenda
   include WithFeatureAlerts
