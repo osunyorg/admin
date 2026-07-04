@@ -270,30 +270,32 @@ namespace :communication do
     end
     resources :jobs, controller: 'extranets/jobs'
   end
-  resources :medias do
-    collection do
-      post 'pick' => 'medias#pick', as: :pick
-      resources :categories, controller: '/admin/communication/medias/categories', as: 'media_categories' do
-        collection do
-          post :reorder
+  scope module: 'library' do 
+    resources :medias do
+      collection do
+        post 'pick' => 'medias#pick', as: :pick
+        resources :categories, controller: '/admin/communication/library/medias/categories', as: 'media_categories' do
+          collection do
+            post :reorder
+          end
+          member do
+            get :children
+          end
         end
-        member do
-          get :children
-        end
+        resources :collections, controller: '/admin/communication/library/medias/collections', as: 'media_collections'
       end
-      resources :collections, controller: '/admin/communication/medias/collections', as: 'media_collections'
     end
-  end
-  resources :files do
-    collection do
-      post 'direct-upload/language/:language' => 'files#direct_upload', as: :direct_upload
-      post 'pick' => 'files#pick', as: :pick
-      resources :categories, controller: '/admin/communication/files/categories', as: 'file_categories' do
-        collection do
-          post :reorder
-        end
-        member do
-          get :children
+    resources :files do
+      collection do
+        post 'direct-upload/language/:language' => 'files#direct_upload', as: :direct_upload
+        post 'pick' => 'files#pick', as: :pick
+        resources :categories, controller: '/admin/communication/library/files/categories', as: 'file_categories' do
+          collection do
+            post :reorder
+          end
+          member do
+            get :children
+          end
         end
       end
     end

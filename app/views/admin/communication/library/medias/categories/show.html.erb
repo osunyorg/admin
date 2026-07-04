@@ -1,0 +1,21 @@
+<% content_for :title, @l10n %>
+
+<% if @category.editable? %>
+  <% content_for :title_right do %>
+    <%= button_advanced do %>
+      <%= destroy_link @category %>
+    <% end %>
+    <%= edit_link @category %>
+  <% end %>
+<% end %>
+
+<%= render 'admin/application/categories/show', category: @category, l10n: @l10n %>
+
+<% if @medias.total_count > 0 %>
+  <p>
+    <%= @medias.total_count %>
+    <%= Communication::Media.model_name.human(count: @medias.total_count).downcase %>
+  </p>
+  <%= render 'admin/communication/library/medias/list', medias: @medias %>
+  <%= paginate @medias %>
+<% end %>
