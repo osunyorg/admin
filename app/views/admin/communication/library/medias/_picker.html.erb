@@ -5,11 +5,11 @@ summernote_lang = current_interface_language.summernote_locale.presence() || 'en
 cloud = {
   unsplash: {
     logo: asset_path('communication/photo_imports/unsplash.svg'),
-    endpoint: admin_communication_unsplash_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+    endpoint: unsplash_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
   },
   pexels: {
     logo: asset_path('communication/photo_imports/pexels.png'),
-    endpoint: admin_communication_pexels_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
+    endpoint: pexels_admin_communication_medias_path(website_id: nil, extranet_id: nil, journal_id: nil, format: :json),
   },
 }
 %>

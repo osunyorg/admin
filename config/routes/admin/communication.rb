@@ -1,9 +1,5 @@
 namespace :communication do
   resources :authors, only: [:index, :show]
-  scope 'photo-imports' do
-    get 'unsplash' => 'photo_imports#unsplash'
-    get 'pexels' => 'photo_imports#pexels'
-  end
   resources :websites do
     member do
       scope 'settings' do
@@ -274,6 +270,10 @@ namespace :communication do
     resources :medias do
       collection do
         post 'pick' => 'medias#pick', as: :pick
+        scope 'photo-imports' do
+          get 'unsplash' => 'medias/photo_imports#unsplash'
+          get 'pexels' => 'medias/photo_imports#pexels'
+        end
         resources :categories, controller: '/admin/communication/library/medias/categories', as: 'media_categories' do
           collection do
             post :reorder

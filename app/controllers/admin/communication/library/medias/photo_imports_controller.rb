@@ -1,4 +1,4 @@
-class Admin::Communication::PhotoImportsController < Admin::Communication::ApplicationController
+class Admin::Communication::Library::Medias::PhotoImportsController < Admin::Communication::ApplicationController
   layout false
   before_action :prepare
 
