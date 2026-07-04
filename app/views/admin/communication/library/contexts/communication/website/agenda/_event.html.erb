@@ -7,7 +7,7 @@ path = admin_communication_website_agenda_event_path(website_id: website.id, id:
 target ||= ''
 link = "#{path}#{target}"
 %>
-<%= render 'admin/communication/library/medias/contexts/default',
+<%= render 'admin/communication/library/contexts/default',
             localization: localization,
             link: link,
             type: Communication::Website::Agenda::Event.model_name.human %>

@@ -2,7 +2,7 @@
 block = about
 # communication/website/post
 key = block.about_type.underscore.remove('/localization')
-# admin/communication/library/medias/contexts/communication/website/post
-partial = "admin/communication/library/medias/contexts/#{key}"
+# admin/communication/library/contexts/communication/website/post
+partial = "admin/communication/library/contexts/#{key}"
 %>
 <%= render partial, about: block.about, target: "#block-#{block.id}" %>

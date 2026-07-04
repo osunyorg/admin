@@ -2,7 +2,7 @@
   <%= osuny_label Communication::Media::Context.model_name.human(count: 2) %>
   <div class="row g-2">
     <% contexts.each do |context| %>
-      <%= render 'admin/communication/library/medias/contexts/context', context: context %>
+      <%= render 'admin/communication/library/contexts/context', context: context %>
     <% end %>
   </div>
 <% end %>

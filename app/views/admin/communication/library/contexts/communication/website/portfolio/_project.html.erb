@@ -7,7 +7,7 @@ path = admin_communication_website_portfolio_project_path(website_id: website.id
 target ||= ''
 link = "#{path}#{target}"
 %>
-<%= render 'admin/communication/library/medias/contexts/default',
+<%= render 'admin/communication/library/contexts/default',
             localization: localization,
             link: link,
             type: Communication::Website::Portfolio::Project.model_name.human %>
