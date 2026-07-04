@@ -7,4 +7,8 @@ class Communication::Block::Template::File::Element < Communication::Block::Temp
   def blob
     file_component.blob
   end
+
+  def communication_file
+    file_component.communication_file
+  end
 end

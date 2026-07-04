@@ -21,9 +21,10 @@
 #  fk_rails_6a6962a587  (university_id => universities.id)
 #  fk_rails_fe2e82d401  (communication_file_localization_id => communication_file_localizations.id)
 #
-class Communication::File::Localization::Context < ApplicationRecord
+class Communication::File::Context < ApplicationRecord
   include WithUniversity
 
+  # Attention, les contextes des fichiers sont liés aux localisations !
   belongs_to  :communication_file_localization,
               class_name: 'Communication::File::Localization'
   alias       :file_localization :communication_file_localization

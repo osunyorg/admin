@@ -46,6 +46,7 @@ class Communication::Block < ApplicationRecord
   include Filterable
   include Orderable
   include Accessible
+  include WithCommunicationFiles
   include WithHeadingRanks
   include WithHtmlClass
   include WithMediaLibrary

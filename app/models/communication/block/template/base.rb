@@ -93,6 +93,10 @@ class Communication::Block::Template::Base
     []
   end
 
+  def communication_files
+    Communication::File.none
+  end
+
   def to_s
     self.class.to_s.demodulize
   end

@@ -14,6 +14,7 @@ class Admin::Communication::FilesController < Admin::Communication::Files::Appli
   end
 
   def show
+    @contexts = @l10n.contexts
     breadcrumb
   end
 

@@ -39,7 +39,7 @@ class Communication::File::Localization < ApplicationRecord
   include WithUniversity
 
   has_many    :contexts,
-              foreign_key: :communication_file_id,
+              foreign_key: :communication_file_localization_id,
               dependent: :destroy
   has_many    :blobs,
               through: :contexts,

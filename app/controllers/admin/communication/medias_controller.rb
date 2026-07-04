@@ -16,6 +16,7 @@ class Admin::Communication::MediasController < Admin::Communication::Medias::App
   end
 
   def show
+    @contexts = @media.contexts
     breadcrumb
   end
 
