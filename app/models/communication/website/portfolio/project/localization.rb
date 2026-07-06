@@ -99,6 +99,13 @@ class Communication::Website::Portfolio::Project::Localization < ApplicationReco
     accessibility_merge_array blocks
   end
 
+  def slug_unavailable?(slug)
+    self.class.unscoped
+              .where(communication_website_id: self.communication_website_id, language_id: language_id, slug: slug)
+              .where.not(id: self.id)
+              .exists?
+  end
+
   def explicit_blob_ids
     super.concat [
       featured_image&.blob_id,
