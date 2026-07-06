@@ -1,6 +1,8 @@
 module University::Person::WithAlumnus
   extend ActiveSupport::Concern
 
+  DELAY_FOR_INVITATION = 5.minutes.freeze
+
   included do
     has_and_belongs_to_many       :cohorts,
                                   class_name: '::Administration::Cohort',

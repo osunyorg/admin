@@ -15,7 +15,7 @@
             <p class="small text-muted mb-0">
               <%= t('admin.communication.extranet.alumni.account_active') %>
             </p>
-          <% elsif person.invitation_sent_at.nil? || person.invitation_sent_at < 5.minutes.ago %>
+          <% elsif person.invitation_sent_at.nil? || person.invitation_sent_at < University::Person::WithAlumnus::DELAY_FOR_INVITATION.ago %>
               <%= link_to t('admin.communication.extranet.alumni.send_invitation.cta'), 
                           send_invitation_admin_communication_extranet_alumnus_path(extranet_id: @extranet.id, id: person.id), 
                           method: :post,

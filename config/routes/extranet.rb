@@ -18,6 +18,8 @@ namespace :alumni do
   get 'organization/:id' => 'organizations#show', as: :university_organization
   get 'persons' => 'persons#index', as: :university_persons
   get 'persons/:id' => 'persons#show', as: :university_person
+  get 'persons/:id/invite' => 'persons/invitations#new', as: :new_invitation
+  post 'persons/:id/invite' => 'persons/invitations#create'
   get 'years' => 'academic_years#index', as: :administration_academic_years
   get 'years/:id' => 'academic_years#show', as: :administration_academic_year
   root to: 'persons#index'

@@ -1,0 +1,22 @@
+<% content_for :title, t('extranet.alumni.invitations.title') %>
+
+<%= simple_form_for @invitation, url: alumni_new_invitation_path(@person) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <%= f.input :from_name %>
+      <%= f.input :from_email %>
+      <%= f.input :to_name %>
+      <%= f.input :to_email %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.input :message %>
+    </div>
+  </div>
+
+  <%= submit f %>
+
+<% end %>
+

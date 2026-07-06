@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_02_133651) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_06_155316) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_stat_statements"
@@ -326,6 +326,24 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_02_133651) do
     t.index ["extranet_id"], name: "index_communication_extranet_documents_on_extranet_id"
     t.index ["kind_id"], name: "index_extranet_document_kinds"
     t.index ["university_id"], name: "index_communication_extranet_documents_on_university_id"
+  end
+
+  create_table "communication_extranet_invitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.uuid "extranet_id"
+    t.string "from_email"
+    t.string "from_name"
+    t.text "message"
+    t.uuid "person_id"
+    t.string "to_email"
+    t.string "to_name"
+    t.uuid "university_id"
+    t.datetime "updated_at", null: false
+    t.uuid "user_id"
+    t.index ["extranet_id"], name: "index_communication_extranet_invitations_on_extranet_id"
+    t.index ["person_id"], name: "index_communication_extranet_invitations_on_person_id"
+    t.index ["university_id"], name: "index_communication_extranet_invitations_on_university_id"
+    t.index ["user_id"], name: "index_communication_extranet_invitations_on_user_id"
   end
 
   create_table "communication_extranet_localizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -2609,6 +2627,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_02_133651) do
   add_foreign_key "communication_extranet_documents", "communication_extranet_document_kinds", column: "kind_id"
   add_foreign_key "communication_extranet_documents", "communication_extranets", column: "extranet_id"
   add_foreign_key "communication_extranet_documents", "universities"
+  add_foreign_key "communication_extranet_invitations", "communication_extranets", column: "extranet_id"
+  add_foreign_key "communication_extranet_invitations", "universities"
+  add_foreign_key "communication_extranet_invitations", "university_people", column: "person_id"
+  add_foreign_key "communication_extranet_invitations", "users"
   add_foreign_key "communication_extranet_localizations", "communication_extranets", column: "about_id"
   add_foreign_key "communication_extranet_localizations", "languages"
   add_foreign_key "communication_extranet_localizations", "universities"

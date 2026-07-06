@@ -56,6 +56,12 @@ en:
         name: Name
         published: Published?
         published_at: Publication date
+      communication/extranet/invitation:
+        from_email: Your email
+        from_name: From
+        message: Message
+        to_email: Alumnus' email
+        to_name: To
       communication/extranet/localization:
         cookies_policy: Cookies policy
         favicon: Browser icon (favicon)
@@ -330,6 +336,10 @@ en:
               unavailable: is not available for this kind of extranet
             sso_mapping:
               missing_email: doesn't handle the email
+        communication/extranet/invitation:
+          attributes:
+            to_email:
+              too_soon: has already received an invitation recently. You can try again later.
         communication/extranet/localization:
           attributes:
             published:

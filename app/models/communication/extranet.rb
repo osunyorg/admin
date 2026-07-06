@@ -67,6 +67,7 @@ class Communication::Extranet < ApplicationRecord
   has_many :documents
   has_many :document_categories, class_name: 'Communication::Extranet::Document::Category'
   has_many :document_kinds, class_name: 'Communication::Extranet::Document::Kind'
+  has_many :invitations, class_name: 'Communication::Extranet::Invitation', dependent: :destroy
 
   validates :host, presence: true
 

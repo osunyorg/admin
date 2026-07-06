@@ -56,6 +56,12 @@ fr:
         name: Nom
         published: Publié ?
         published_at: Date de publication
+      communication/extranet/invitation:
+        from_email: Votre email
+        from_name: De la part de
+        message: Message
+        to_email: Email de la personne invitée
+        to_name: Pour
       communication/extranet/localization:
         cookies_policy: Politique de cookies
         favicon: Icône de navigateur (favicon)
@@ -330,6 +336,10 @@ fr:
               unavailable: n'est pas disponible pour ce type d'extranet
             sso_mapping:
               missing_email: ne gère pas l'adresse email
+        communication/extranet/invitation:
+          attributes:
+            to_email:
+              too_soon: a déjà reçu une invitation récemment. Vous pouvez réessayer plus tard.
         communication/extranet/localization:
           attributes:
             published:

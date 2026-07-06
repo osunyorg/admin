@@ -8,6 +8,14 @@ en:
       logout: Log out
       my: My account
       updated: Updated
+    alumni:
+      invitations:
+        created: Invitation sent successfully
+        send:
+          cta: Invite %{name} to join the alumni
+          label: Do you know his/her email? You can invite him/her.
+          too_soon: An invitation has already been sent to this person recently. You can try again later.
+        title: Invite
     contacts:
       organizations:
         people: Members of this organization
