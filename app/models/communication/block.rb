@@ -9,7 +9,6 @@
 #  html_class               :string
 #  metadata                 :jsonb
 #  migration_identifier     :string
-#  native                   :boolean          default(FALSE)
 #  position                 :integer          not null
 #  published                :boolean          default(TRUE)
 #  template_kind            :integer          default(NULL), not null, indexed => [university_id]

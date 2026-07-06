@@ -77,6 +77,14 @@ class Communication::Media < ApplicationRecord
     media
   end
 
+  def self.create_context(object, blob, about)
+    object.contexts.where(
+      about: about,
+      active_storage_blob: blob, # absent dans les files
+      university_id: blob.university_id
+    ).first_or_create
+  end
+
   def width
     original_blob.metadata.dig(:width)
   end
