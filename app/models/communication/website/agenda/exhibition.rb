@@ -43,10 +43,10 @@ class Communication::Website::Agenda::Exhibition < ApplicationRecord
   include Localizable
   include Sanitizable
   include Searchable
-  include WithMenuItemTarget
+  include MenuItemTargetable
   include WithOpenApi
   include HasListBlocks
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :created_by,
               class_name: "User",

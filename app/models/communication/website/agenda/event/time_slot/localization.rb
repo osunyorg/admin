@@ -40,7 +40,7 @@ class Communication::Website::Agenda::Event::TimeSlot::Localization < Applicatio
   include HasGitFiles
   include Permalinkable
   include WithOpenApi
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :website,
               class_name: 'Communication::Website',

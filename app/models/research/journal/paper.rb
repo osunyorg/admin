@@ -44,7 +44,7 @@ class Research::Journal::Paper < ApplicationRecord
   include Orderable
   include Sanitizable
   include Searchable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :journal,
               foreign_key: :research_journal_id

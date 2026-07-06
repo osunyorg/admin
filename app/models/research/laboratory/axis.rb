@@ -28,7 +28,7 @@ class Research::Laboratory::Axis < ApplicationRecord
   include LocalizableOrderByNameScope
   include Orderable
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :laboratory,
               foreign_key: :research_laboratory_id

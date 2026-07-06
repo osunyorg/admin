@@ -31,7 +31,7 @@ class Research::Thesis::Localization < ApplicationRecord
   include AsLocalization
   include Initials
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   validates :title, presence: true
 

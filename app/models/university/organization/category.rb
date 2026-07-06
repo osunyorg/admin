@@ -29,7 +29,7 @@ class University::Organization::Category < ApplicationRecord
   include GeneratesGitFiles
   include Localizable
   include WithOpenApi
-  include WithUniversity
+  include HasUniversity
 
   has_and_belongs_to_many :organizations
   alias                   :category_objects :organizations

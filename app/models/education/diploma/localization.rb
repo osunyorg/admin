@@ -50,7 +50,7 @@ class Education::Diploma::Localization < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Shareable
-  include WithUniversity
+  include HasUniversity
 
   has_summernote :summary
 

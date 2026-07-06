@@ -57,11 +57,11 @@ class Communication::Website::Agenda::Exhibition::Localization < ApplicationReco
   include Publishable
   include Sanitizable
   include Shareable
-  include WithBlobs
+  include HasBlobs
   include WithCal
-  include WithFeaturedImage
+  include HasFeaturedImage
   include WithOpenApi
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :website,
               class_name: 'Communication::Website',

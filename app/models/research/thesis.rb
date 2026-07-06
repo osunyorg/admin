@@ -36,7 +36,7 @@ class Research::Thesis < ApplicationRecord
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :laboratory,
               foreign_key: :research_laboratory_id

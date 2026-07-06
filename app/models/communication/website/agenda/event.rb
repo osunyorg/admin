@@ -57,10 +57,10 @@ class Communication::Website::Agenda::Event < ApplicationRecord
   include WithPeriodSync
   include WithTimeSlots
   include WithKinds
-  include WithMenuItemTarget
+  include MenuItemTargetable
   include WithOpenApi
   include HasListBlocks
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :created_by,
               class_name: "User",

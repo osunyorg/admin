@@ -35,7 +35,7 @@ class Research::Laboratory::Localization < ApplicationRecord
   include Initials
   include Permalinkable
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   validates :name, presence: true
 

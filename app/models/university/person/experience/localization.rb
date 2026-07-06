@@ -29,7 +29,7 @@ class University::Person::Experience::Localization < ApplicationRecord
   
   include AsLocalization
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   def to_s
     description

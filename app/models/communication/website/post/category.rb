@@ -36,10 +36,10 @@ class Communication::Website::Post::Category < ApplicationRecord
   include GeneratesGitFiles
   include Localizable
   include Sanitizable
-  include WithMenuItemTarget
+  include MenuItemTargetable
   include WithOpenApi
   include HasListBlocks
-  include WithUniversity
+  include HasUniversity
 
   belongs_to              :program,
                           class_name: 'Education::Program',

@@ -31,7 +31,7 @@ class Administration::Cohort::Localization < ApplicationRecord
   include HasGitFiles
   include Initials
   include Permalinkable
-  include WithUniversity
+  include HasUniversity
 
   delegate  :program, :academic_year,
             to: :about

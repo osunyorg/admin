@@ -32,7 +32,7 @@ class Education::Diploma < ApplicationRecord
   include Orderable
   include Sanitizable
   include Searchable
-  include WithUniversity
+  include HasUniversity
 
   enum :level, {
     not_applicable: 0,

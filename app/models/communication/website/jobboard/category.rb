@@ -36,8 +36,8 @@ class Communication::Website::Jobboard::Category < ApplicationRecord
   include GeneratesGitFiles
   include Localizable
   include Sanitizable
-  include WithMenuItemTarget
-  include WithUniversity
+  include MenuItemTargetable
+  include HasUniversity
 
   belongs_to              :program,
                           class_name: 'Education::Program',

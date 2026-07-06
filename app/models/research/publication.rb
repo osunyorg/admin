@@ -37,7 +37,7 @@ class Research::Publication < ApplicationRecord
   include HasGitFiles
   include Permalinkable
   include Sanitizable
-  include WithCitations
+  include Citable
 
   enum :source, {
     osuny: 0,

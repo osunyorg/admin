@@ -18,7 +18,7 @@
 class Communication::Media::Collection < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
-  include WithUniversity
+  include HasUniversity
 
   has_many  :medias,
             class_name: 'Communication::Media',

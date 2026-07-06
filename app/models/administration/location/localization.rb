@@ -42,9 +42,9 @@ class Administration::Location::Localization < ApplicationRecord
   include Permalinkable
   include Sanitizable
   include Accessible
-  include WithBlobs
-  include WithFeaturedImage
-  include WithUniversity
+  include HasBlobs
+  include HasFeaturedImage
+  include HasUniversity
 
   has_summernote :summary
 

@@ -32,7 +32,7 @@ class Research::Laboratory < ApplicationRecord
   include Sanitizable
   include Searchable
   include WebsitesLinkable
-  include WithCountry
+  include HasCountry
 
   belongs_to  :university
   has_many    :communication_websites,

@@ -37,7 +37,7 @@ class Administration::Cohort < ApplicationRecord
   include LocalizableOrderByNameScope
   include Sanitizable
   include Searchable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :school,
               class_name: 'Education::School'

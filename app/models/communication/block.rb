@@ -52,7 +52,7 @@ class Communication::Block < ApplicationRecord
   include WithMediaLibrary
   include WithTemplate
   include WithOpenApi # Must be included after WithTemplate to load template_kinds
-  include WithUniversity
+  include HasUniversity
   include Sanitizable
 
   belongs_to  :about, polymorphic: true

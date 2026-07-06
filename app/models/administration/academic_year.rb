@@ -26,7 +26,7 @@ class Administration::AcademicYear < ApplicationRecord
   include LocalizableOrderByNameScope
   include Sanitizable
   include Searchable
-  include WithUniversity
+  include HasUniversity
 
   has_many  :administration_cohorts,
             class_name: 'Administration::Cohort'

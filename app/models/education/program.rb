@@ -44,10 +44,10 @@ class Education::Program < ApplicationRecord
   include WithAlumni
   include WithDiploma
   include WithLocations
-  include WithMenuItemTarget
+  include MenuItemTargetable
   include WithSchools
   include WithTeam
-  include WithUniversity
+  include HasUniversity
   include WithWebsitesCategories
 
   belongs_to :parent,

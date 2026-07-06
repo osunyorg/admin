@@ -1,4 +1,4 @@
-module WithCitations
+module Citable
   extend ActiveSupport::Concern
 
   def citation_apa(website: nil, locale: nil)

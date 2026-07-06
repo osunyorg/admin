@@ -36,8 +36,8 @@ class Education::School::Localization < ApplicationRecord
   include Initials
   include Permalinkable
   include Sanitizable
-  include WithBlobs
-  include WithUniversity
+  include HasBlobs
+  include HasUniversity
 
   has_one_attached_deletable :logo
 

@@ -34,7 +34,7 @@ class Communication::Media < ApplicationRecord
   include LocalizableOrderByNameScope
   include WithOrigin # Must be loaded before WithOpenApi
   include WithOpenApi
-  include WithUniversity
+  include HasUniversity
 
   belongs_to              :collection,
                           class_name: 'Communication::Media::Collection',

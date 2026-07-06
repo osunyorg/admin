@@ -25,7 +25,7 @@
 class Communication::File::Category < ApplicationRecord
   include AsCategory
   include Localizable
-  include WithUniversity
+  include HasUniversity
 
   has_and_belongs_to_many :files
   alias                   :category_objects :files

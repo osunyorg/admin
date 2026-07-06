@@ -47,12 +47,12 @@ class Communication::Extranet < ApplicationRecord
   include LocalizableOrderByNameScope
   include Searchable
   include SsoEnabled
-  include WithAbouts
+  include HasAbouts
   include WithConnectedObjects
   include WithFeatures
   include WithLegal
   include WithStyle
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :default_language, class_name: "Language"
   has_many :languages, through: :localizations

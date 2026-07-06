@@ -52,10 +52,10 @@ class University::Organization::Localization < ApplicationRecord
   include Publishable
   include Sanitizable
   include Shareable
-  include WithBlobs
-  include WithFeaturedImage
+  include HasBlobs
+  include HasFeaturedImage
   include WithOpenApi
-  include WithUniversity
+  include HasUniversity
 
   has_summernote :summary
   has_summernote :text

@@ -37,7 +37,7 @@ class Communication::Extranet::Localization < ApplicationRecord
   include AsLocalization
   include Initials
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   has_summernote :home_sentence
   has_summernote :terms

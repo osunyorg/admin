@@ -67,7 +67,7 @@ class Communication::Website < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
   include Searchable
-  include WithAbouts
+  include HasAbouts
   include WithConfigs
   include WithConnectedObjects
   include WithContentArchive
@@ -101,7 +101,7 @@ class Communication::Website < ApplicationRecord
   include WithStyle
   include WithTheme
   include WithTimeZone
-  include WithUniversity
+  include HasUniversity
 
   enum :git_provider, {
     github: 0,

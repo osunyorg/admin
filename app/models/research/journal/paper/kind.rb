@@ -28,7 +28,7 @@ class Research::Journal::Paper::Kind < ApplicationRecord
   include Localizable
   include LocalizableOrderByTitleScope
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :journal, class_name: 'Research::Journal'
   has_many :papers, dependent: :nullify

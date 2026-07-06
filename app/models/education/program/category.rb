@@ -27,7 +27,7 @@ class Education::Program::Category < ApplicationRecord
   include AsIndirectObject
   include GeneratesGitFiles
   include Localizable
-  include WithUniversity
+  include HasUniversity
 
   has_and_belongs_to_many :programs
   alias                   :category_objects :programs

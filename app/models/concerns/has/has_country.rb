@@ -1,4 +1,4 @@
-module WithCountry
+module HasCountry
   extend ActiveSupport::Concern
 
   def country_name

@@ -29,5 +29,5 @@ class University::Person::Involvement::Localization < ApplicationRecord
   
   include AsLocalization
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 end

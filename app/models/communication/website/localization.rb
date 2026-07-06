@@ -44,7 +44,7 @@ class Communication::Website::Localization < ApplicationRecord
   include Initials
   include Publishable
   include WithOpenApi
-  include WithUniversity
+  include HasUniversity
 
   alias :website :about
 

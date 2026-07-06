@@ -29,7 +29,7 @@ class Communication::Website::Agenda::Period::Year::Localization < ApplicationRe
   include AsLocalization
   include Permalinkable
   include HasGitFiles
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :website,
               class_name: 'Communication::Website',

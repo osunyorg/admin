@@ -41,8 +41,8 @@ class Communication::Extranet::Post::Localization < ApplicationRecord
   include Publishable
   include Sanitizable
   include Sluggable
-  include WithFeaturedImage
-  include WithUniversity
+  include HasFeaturedImage
+  include HasUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
 

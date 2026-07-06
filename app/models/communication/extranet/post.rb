@@ -27,7 +27,7 @@
 class Communication::Extranet::Post < ApplicationRecord
   include Localizable
   include Searchable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :author, class_name: 'University::Person', optional: true
   belongs_to :category, class_name: 'Communication::Extranet::Post::Category', optional: true

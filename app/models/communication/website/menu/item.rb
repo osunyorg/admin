@@ -39,7 +39,7 @@ class Communication::Website::Menu::Item < ApplicationRecord
   include Initials
   include Orderable
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   attr_accessor :skip_publication_callback
 

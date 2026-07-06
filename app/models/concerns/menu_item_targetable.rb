@@ -1,4 +1,4 @@
-module WithMenuItemTarget
+module MenuItemTargetable
   extend ActiveSupport::Concern
 
   included do

@@ -30,7 +30,7 @@ class Communication::Website::Permalink < ApplicationRecord
   include WithMapping
   include WithOpenApi
   # We don't include Sanitizable as this model is never handled by users directly.
-  include WithUniversity
+  include HasUniversity
   include WithValidations
 
   belongs_to :university

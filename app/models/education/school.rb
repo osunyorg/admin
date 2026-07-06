@@ -35,12 +35,12 @@ class Education::School < ApplicationRecord
   include Sanitizable
   include Searchable
   include WebsitesLinkable
-  include WithCountry
+  include HasCountry
   include WithLocations
   include WithPrograms # must come before WithAlumni and WithTeam
   include WithAlumni
   include WithTeam
-  include WithUniversity
+  include HasUniversity
 
   # 'websites' might override the same method defined in WithWebsites, so we use the full name
   has_many    :communication_websites,

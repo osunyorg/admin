@@ -25,7 +25,7 @@ class University::Role < ApplicationRecord
 
   include Localizable
   include Orderable
-  include WithUniversity
+  include HasUniversity
 
   # Can be an Education::School or an Education::Program
   belongs_to :target, polymorphic: true, optional: true

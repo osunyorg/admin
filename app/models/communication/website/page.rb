@@ -48,11 +48,11 @@ class Communication::Website::Page < ApplicationRecord
   include Sanitizable
   include Searchable
   include WithAutomaticMenus
-  include WithMenuItemTarget
+  include MenuItemTargetable
   include WithOpenApi
   include HasListBlocks
   include WithSpecialPage
-  include WithUniversity
+  include HasUniversity
   include Orderable # Must be loaded after WithSpecialPage to use the correct last_ordered_element method
 
   belongs_to :parent,

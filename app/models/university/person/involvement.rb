@@ -29,7 +29,7 @@ class University::Person::Involvement < ApplicationRecord
   
   include Localizable
   include Orderable
-  include WithUniversity
+  include HasUniversity
 
   enum :kind, {
     administrator: 10,

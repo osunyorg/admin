@@ -52,9 +52,9 @@ class Communication::Website::Jobboard::Job::Localization < ApplicationRecord
   include Publishable
   include Sanitizable
   include Shareable
-  include WithBlobs
-  include WithFeaturedImage
-  include WithUniversity
+  include HasBlobs
+  include HasFeaturedImage
+  include HasUniversity
 
   belongs_to :website,
               class_name: 'Communication::Website',

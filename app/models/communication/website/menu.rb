@@ -33,7 +33,7 @@ class Communication::Website::Menu < ApplicationRecord
   include Initials
   include Sanitizable
   include WithAutomatism
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :language
   has_many :items, class_name: 'Communication::Website::Menu::Item', dependent: :destroy

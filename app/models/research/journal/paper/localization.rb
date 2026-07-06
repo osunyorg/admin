@@ -42,9 +42,9 @@ class Research::Journal::Paper::Localization < ApplicationRecord
   include Permalinkable
   include Publishable
   include Sanitizable
-  include WithBlobs
-  include WithCitations
-  include WithUniversity
+  include HasBlobs
+  include Citable
+  include HasUniversity
 
   alias :paper :about
 

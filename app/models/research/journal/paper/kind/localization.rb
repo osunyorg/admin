@@ -33,7 +33,7 @@ class Research::Journal::Paper::Kind::Localization < ApplicationRecord
   include Initials
   include Permalinkable
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   validates :title, presence: true
 

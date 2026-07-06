@@ -24,7 +24,7 @@ class Communication::File < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
   include WithOpenApi
-  include WithUniversity
+  include HasUniversity
 
   scope :for_search_term, -> (term, language = nil) {
     joins(:localizations)

@@ -27,7 +27,7 @@ class University::Person::Category < ApplicationRecord
   include AsIndirectObject
   include GeneratesGitFiles
   include Localizable
-  include WithUniversity
+  include HasUniversity
 
   has_and_belongs_to_many :people
   alias                   :university_people :people

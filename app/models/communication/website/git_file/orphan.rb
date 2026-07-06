@@ -20,7 +20,7 @@
 #  fk_rails_e6c7b67766  (communication_website_id => communication_websites.id)
 #
 class Communication::Website::GitFile::Orphan < ApplicationRecord
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :website, 
               class_name: 'Communication::Website',

@@ -29,7 +29,7 @@ class Communication::Extranet::Document < ApplicationRecord
   include LocalizableOrderByNameScope
   include Sanitizable
   include Searchable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   belongs_to :category

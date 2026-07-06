@@ -31,7 +31,7 @@ class Administration::AcademicYear::Localization < ApplicationRecord
   include HasGitFiles
   include Initials
   include Permalinkable
-  include WithUniversity
+  include HasUniversity
 
   alias :academic_year :about
 

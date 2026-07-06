@@ -34,9 +34,9 @@ class Administration::Location < ApplicationRecord
   include GeneratesGitFiles
   include Sanitizable
   include WebsitesLinkable
-  include WithCountry
-  include WithGeolocation
-  include WithUniversity
+  include HasCountry
+  include Geolocated
+  include HasUniversity
 
   has_and_belongs_to_many :schools,
                           class_name: 'Education::School',

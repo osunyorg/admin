@@ -67,10 +67,10 @@ class Education::Program::Localization < ApplicationRecord
   include Publishable
   include Sanitizable
   include Shareable
-  include WithBlobs
-  include WithFeaturedImage
+  include HasBlobs
+  include HasFeaturedImage
   include WithInheritance
-  include WithUniversity
+  include HasUniversity
 
   has_summernote :summary
   has_summernote :presentation

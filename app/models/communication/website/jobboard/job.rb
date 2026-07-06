@@ -38,7 +38,7 @@ class Communication::Website::Jobboard::Job < ApplicationRecord
   include Localizable
   include Sanitizable
   include Searchable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :created_by,
               class_name: "User",

@@ -33,7 +33,7 @@ class Research::Laboratory::Axis::Localization < ApplicationRecord
   include AsLocalization
   include Initials
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   has_summernote :summary
 

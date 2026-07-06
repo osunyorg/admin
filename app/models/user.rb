@@ -72,7 +72,7 @@ class User < ApplicationRecord
   include WithRegistrationContext
   include WithRoles
   include WithSyncBetweenUniversities
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :language
   has_many :university_people, class_name: 'University::Person', dependent: :nullify

@@ -35,7 +35,7 @@ class Communication::Website::Agenda::Event::TimeSlot < ApplicationRecord
   include Localizable
   include MovableToWebsite
   include WithOpenApi
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :communication_website_agenda_event,
               class_name: 'Communication::Website::Agenda::Event',

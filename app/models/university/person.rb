@@ -62,8 +62,8 @@ class University::Person < ApplicationRecord
   include Sanitizable
   include Searchable
   include WithAlumnus
-  include WithBlobs
-  include WithCountry
+  include HasBlobs
+  include HasCountry
   include WithFacets
   include WithInvolvements
   include WithPersonalData
@@ -72,7 +72,7 @@ class University::Person < ApplicationRecord
   include WithRealmCommunication
   include WithRealmEducation
   include WithRealmResearch
-  include WithUniversity
+  include HasUniversity
 
   enum :gender, { male: 0, female: 1, non_binary: 2 }
 

@@ -28,8 +28,8 @@
 class Communication::Media::Collection::Localization < ApplicationRecord
   include AsLocalization
   include Initials
-  include WithFeaturedImage
-  include WithUniversity
+  include HasFeaturedImage
+  include HasUniversity
 
   def to_s
     "#{name}"

@@ -37,10 +37,10 @@ class Communication::Website::Post < ApplicationRecord
   include MovableToWebsite
   include Sanitizable
   include Searchable
-  include WithMenuItemTarget
+  include MenuItemTargetable
   include WithOpenApi
   include HasListBlocks
-  include WithUniversity
+  include HasUniversity
 
   has_and_belongs_to_many :authors,
                           class_name: 'University::Person',

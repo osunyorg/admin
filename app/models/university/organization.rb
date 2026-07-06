@@ -49,11 +49,11 @@ class University::Organization < ApplicationRecord
   include MentionableByBlocks
   include Sanitizable
   include Searchable
-  include WithCountry
-  include WithGeolocation
+  include HasCountry
+  include Geolocated
   include WithKind
   include WithOpenApi
-  include WithUniversity
+  include HasUniversity
 
   attr_accessor :created_from_extranet
 

@@ -21,7 +21,7 @@
 class Communication::Extranet::Post::Category < ApplicationRecord
   include Localizable
   include LocalizableOrderByNameScope
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :extranet, class_name: 'Communication::Extranet'
   has_many :posts

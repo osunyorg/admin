@@ -42,9 +42,9 @@ class Research::Journal::Volume::Localization < ApplicationRecord
   include Permalinkable
   include Publishable
   include Sanitizable
-  include WithBlobs
-  include WithFeaturedImage
-  include WithUniversity
+  include HasBlobs
+  include HasFeaturedImage
+  include HasUniversity
 
   alias :volume :about
 

@@ -31,7 +31,7 @@ class Communication::Website::Agenda::Period::Day < ApplicationRecord
   include Communication::Website::Agenda::Period::Base
   include GeneratesGitFiles
   include Localizable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :year
   belongs_to :month

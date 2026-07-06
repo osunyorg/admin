@@ -29,7 +29,7 @@ class Research::Journal::Volume < ApplicationRecord
   include Localizable
   include Sanitizable
   include Searchable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :journal,
               foreign_key: :research_journal_id

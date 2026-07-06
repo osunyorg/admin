@@ -36,7 +36,7 @@ class Research::Journal::Localization < ApplicationRecord
   include Initials
   include Permalinkable
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   has_summernote :summary
 

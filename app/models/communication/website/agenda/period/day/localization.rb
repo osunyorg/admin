@@ -29,7 +29,7 @@
 #
 class Communication::Website::Agenda::Period::Day::Localization < ApplicationRecord
   include AsLocalization
-  include WithUniversity
+  include HasUniversity
 
   belongs_to  :website,
               class_name: 'Communication::Website',

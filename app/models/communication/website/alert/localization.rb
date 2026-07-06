@@ -43,7 +43,7 @@ class Communication::Website::Alert::Localization < ApplicationRecord
   include Permalinkable # slug_unavailable method overwrite in this file
   include Publishable
   include Sanitizable
-  include WithUniversity
+  include HasUniversity
 
   belongs_to :website,
               class_name: 'Communication::Website',

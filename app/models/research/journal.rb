@@ -29,7 +29,7 @@ class Research::Journal < ApplicationRecord
   include Sanitizable
   include Searchable
   include WebsitesLinkable
-  include WithUniversity
+  include HasUniversity
 
   has_many  :communication_websites,
             class_name: 'Communication::Website',
