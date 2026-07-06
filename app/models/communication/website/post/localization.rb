@@ -64,9 +64,9 @@ class Communication::Website::Post::Localization < ApplicationRecord
   include Permalinkable
   include Publishable
   include PublishableByTheHour
-  include PublishableUnpublishable
   include Sanitizable
   include Shareable
+  include Unpublishable
   include WithOpenApi
 
   belongs_to :website,
