@@ -6,17 +6,27 @@ class Admin::Communication::Extranets::AlumniController < Admin::Communication::
     @alumni = filter_by_account(@alumni)
     @alumni = @alumni.alumni
                      .ordered(current_language)
-                     .page(params[:page])
-    @cohorts_count = @extranet.cohorts.count
-    @years_count = @extranet.years.count
-    @organizations_count = @extranet.organizations.count
-    breadcrumb
-    add_breadcrumb Communication::Extranet.human_attribute_name(:feature_alumni)
+
+    respond_to do |format|
+      format.html {
+        @alumni = @alumni.page(params[:page])
+        @cohorts_count = @extranet.cohorts.count
+        @years_count = @extranet.years.count
+        @organizations_count = @extranet.organizations.count
+        breadcrumb
+        add_breadcrumb Communication::Extranet.human_attribute_name(:feature_alumni)
+      }
+      format.xlsx {
+        @alumni = @alumni.includes(:cohorts)
+        filename = "alumni-#{Time.now.strftime("%Y%m%d%H%M%S")}.xlsx"
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}"
+      }
+    end
   end
 
   def send_invitation
     person = @extranet.alumni.find(params[:id])
-    if person && !person.user_id
+    unless person.user_id
       ExtranetMailer.invitation_message(@extranet, person).deliver_later
       person.update_column(:invitation_sent_at, Time.current)
       redirect_to admin_communication_extranet_alumni_path(@extranet), 
